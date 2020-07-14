@@ -1,0 +1,95 @@
+:root {
+  // MAIN COLORS
+  --main-primary-color: #fff;
+  --main-primary-accent-color: #171A2A;
+  --main-ouline-color: #EAEAEA;
+
+  --main-secondary-color: #000;
+  --main-secondary-accent-color: #FFE69C;
+
+  --main-accent-color: #FFC107;
+  --main-page-bg-color: #F1F4F6;
+
+  // SEMANTIC COLORS
+  --true-color: #4CAF50;
+  --true--hover-color: #43A146;
+
+  --false-color: #FF4444;
+  --false--hover-color: #F03D3D;
+
+  --hold-color: #FFC107;
+  --hold--hover-color: #E9B10A;
+
+  --transfer-color: #708FFF;
+  --transfer--hover-color: #6582EB;
+
+  // SUBORDINATE COLORS
+  // table colors
+  --table-primary-color: var(--main-primary-color);
+  --table--hover-color: var(--main-secondary-accent-color);
+  --table-secondary-color: #F9F9F9; // zebra
+
+  // other colors
+  --tooltip-darken-color: #464858;
+  --tag-color: var(--main-secondary-accent-color);
+
+  // ICON COLORS
+  --icon-primary-color: #808080;
+  --icon--hover-color: #000;
+  --icon-outline-color: var(--main-ouline-color);
+  --icon-outline--hover-color: #808080;
+  --icon---disabled-color: #F3F4F4;
+
+  --icon-hold-color: var(--hold-color);
+  --icon-hold--hover-color: var(--hold--hover-color);
+
+  --icon-true-color: var(--true-color);
+  --icon-true--hover-color: var(--true--hover-color);
+
+  --icon-false-color: var(--false-color);
+  --icon-false--hover-color: var(--false--hover-color);
+
+  --icon-transfer-color: var(--transfer-color);
+  --icon-transfer--hover-color: var(--transfer--hover-color);
+
+  // FORM COLORS
+  --form-input-color: #000; // user input color
+
+  --form-border-color: #ACACAC;
+  --form-border---hover-color: #000;
+
+  --form-placeholder-color: #ACACAC;
+  --form-placeholder---hover-color: #000;
+
+  // outline
+  --form-outline-border-color: #EAEAEA;
+  --form-outline-border---hover-color: #ACACAC;
+
+  --form-outline-placeholder-color: #EAEAEA;
+  --form-outline-placeholder---hover-color: #ACACAC;
+
+  // TEXT COLORS
+  --text-primary-color: #000;
+  --text-outline-color: #ACACAC;
+  --text-contrast-color: #fff;
+  --text--disabled-color: #F3F4F4;
+
+  // BUTTON COLORS
+  --btn-primary-color: var(--main-accent-color);
+  --btn-primary--hover-color: #E9B10A;
+
+  --btn-secondary-color: #808080;
+  --btn-secondary--hover-color: #ACACAC;
+
+  --btn-true-color: var(--true-color);
+  --btn-true--hover-color: var(--true--hover-color);
+
+  --btn-false-color: var(--false-color);
+  --btn-false--hover-color: var(--false--hover-color);
+
+  --btn-hold-color: var(--hold-color);
+  --btn-hold--hover-color: var(--hold--hover-color);
+
+  --btn-transfer-color: var(--transfer-color);
+  --btn-transfer--hover-color: var(--transfer--hover-color);
+}
