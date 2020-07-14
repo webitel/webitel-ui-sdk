@@ -32,8 +32,12 @@
   --table-secondary-color: #F9F9F9; // zebra
 
   // other colors
-  --tooltip-darken-color: #464858;
-  --tag-color: var(--main-secondary-accent-color);
+  --tooltip-light-text-color: #000;
+  --tooltip-light-bg-color: #fff;
+  --tooltip-dark-text-color: #fff;
+  --tooltip-dark-bg-color: #464858;
+  --badge-bg-color: var(--main-secondary-accent-color);
+  --tag-bg-color: var(--main-secondary-accent-color);
 
   // ICON COLORS
   --icon-primary-color: #808080;
