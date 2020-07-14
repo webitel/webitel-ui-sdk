@@ -11,6 +11,8 @@
   --main-page-bg-color: #F1F4F6;
 
   // SEMANTIC COLORS
+  --disabled-color: #F3F4F4;
+
   --true-color: #4CAF50;
   --true--hover-color: #43A146;
 
@@ -18,7 +20,7 @@
   --false--hover-color: #F03D3D;
 
   --hold-color: #FFC107;
-  --hold--hover-color: #E9B10A;
+  --hold--hover-color: #EFB917;
 
   --transfer-color: #708FFF;
   --transfer--hover-color: #6582EB;
@@ -38,7 +40,7 @@
   --icon--hover-color: #000;
   --icon-outline-color: var(--main-ouline-color);
   --icon-outline--hover-color: #808080;
-  --icon---disabled-color: #F3F4F4;
+  --icon---disabled-color: var(--disabled-color);
 
   --icon-hold-color: var(--hold-color);
   --icon-hold--hover-color: var(--hold--hover-color);
@@ -72,14 +74,21 @@
   --text-primary-color: #000;
   --text-outline-color: #ACACAC;
   --text-contrast-color: #fff;
-  --text--disabled-color: #F3F4F4;
+  --text--disabled-color: var(--disabled-color);
 
   // BUTTON COLORS
+  --btn-dark-font-color: #000;
+  --btn-light-font-color: #fff;
+
   --btn-primary-color: var(--main-accent-color);
-  --btn-primary--hover-color: #E9B10A;
+  --btn-primary--hover-color: #EFB917;
 
   --btn-secondary-color: #808080;
-  --btn-secondary--hover-color: #ACACAC;
+  --btn-secondary-bg-color: transparent;
+  --btn-secondary--hover-color: #000;
+
+  --btn-disabled-color: var(--disabled-color);
+  --btn-disabled-bg-color: transparent;
 
   --btn-true-color: var(--true-color);
   --btn-true--hover-color: var(--true--hover-color);
