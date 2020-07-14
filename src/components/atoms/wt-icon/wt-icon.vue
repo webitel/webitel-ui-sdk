@@ -373,7 +373,7 @@
     <svg
       class="wt-icon__icon"
       :class="size"
-      :style="iconCustomStyle"
+      :style="iconStyle"
     >
       <use :xlink:href="`#icon-${icon}--${size}`"></use>
     </svg>
@@ -394,14 +394,13 @@
       },
       color: {
         type: String,
-        default: '#808080',
+        default: 'primary',
       },
     },
     computed: {
-      iconCustomStyle() {
+      iconStyle() {
         return {
-          // "--icon-color": !this.isSFColors ? this.color : "",
-          '--icon-color': this.color,
+          '--icon-color': `var(--icon-${this.color}-color)`,
         };
       },
     },
