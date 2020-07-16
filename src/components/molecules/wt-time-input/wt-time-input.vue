@@ -78,21 +78,6 @@
         default: false,
       },
     },
-
-    data: () => ({
-    }),
-
-    watch: {
-    },
-
-    mounted() {
-    },
-
-    computed: {
-    },
-
-    methods: {
-    },
   };
 </script>
 
@@ -111,6 +96,7 @@
   }
 
   .wt-label {
+    text-align: center;
     margin-bottom: var(--label-margin);
     cursor: text;
 
