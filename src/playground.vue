@@ -142,6 +142,57 @@
         disabled
       ></wt-time-input>
     </div>
+    <div>
+      <h2>Radio</h2>
+      <wt-radio
+        v-model="radio.selected"
+        :value="radio.value1"
+        label="Radio 1"
+        name="radio-opt1"
+      ></wt-radio>
+      <wt-radio
+        v-model="radio.selected"
+        :value="radio.value2"
+        label="Radio 2"
+        name="radio-opt-outline"
+        outline
+      ></wt-radio>
+      <wt-radio
+        v-model="radio.selected"
+        :value="radio.value3"
+        label="Radio 3"
+        name="radio-opt-disabled"
+        disabled
+      ></wt-radio>
+      <wt-radio
+      ></wt-radio>
+    </div>
+    <div>
+      <h2>Checkbox</h2>
+      <wt-checkbox
+        v-model="checkbox.selected1"
+        label="Checkbox selected"
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected2"
+        label="Disabled checkbox"
+        disabled
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected2"
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected3"
+        :value="checkbox.opt1"
+        label="Multiple checkbox 1"
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected3"
+        :value="checkbox.opt2"
+        label="Multiple checkbox 2 [outlined]"
+        outline
+      ></wt-checkbox>
+    </div>
   </div>
 </template>
 
@@ -149,7 +200,7 @@
   export default {
     name: 'playground',
     data: () => ({
-      bg: '#eee',
+      bg: '#fff',
       inputs: {
         labelInput: '',
         outlineInput: '',
@@ -159,6 +210,7 @@
         defaultSearch: '',
         outlineSearch: '',
         search(value) {
+          // eslint-disable-next-line
           alert(`search debounce: ${value}`);
         },
       },
@@ -167,6 +219,19 @@
         hour: 0,
         min: 2,
         sec: 22,
+      },
+      radio: {
+        value1: 'value1',
+        value2: 'value2',
+        value3: 'value3',
+        selected: 'value3',
+      },
+      checkbox: {
+        selected1: true,
+        selected2: false,
+        selected3: ['Option 1'],
+        opt1: 'Option 1',
+        opt2: 'Option 2',
       },
     }),
   };
