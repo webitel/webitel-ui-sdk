@@ -15,8 +15,8 @@
     @extend %typo-body-md;
 
     display: inline-block;
-    padding: 5px 10px;
+    padding: var(--badge-padding);
     background: var(--badge-bg-color);
-    border-radius: 20px;
+    border-radius: var(--badge-border-radius);
   }
 </style>

@@ -1,0 +1,47 @@
+%typo-btn {
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 12px;
+  }
+  line-height: 14px;
+}
+
+%typo-btn-lg {
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 20px;
+  }
+  line-height: 24px;
+}
+
+:root {
+  --btn-padding: 11px 19px;
+  --btn-lg-padding: 10px 29px;
+  --btn-border: 1px solid;
+
+  // BUTTON COLORS
+  --btn-dark-font-color: #000;
+  --btn-light-font-color: #fff;
+
+  --btn-primary-color: var(--main-accent-color);
+  --btn-primary--hover-color: #EFB917;
+
+  --btn-secondary-color: #808080;
+  --btn-secondary-bg-color: transparent;
+  --btn-secondary--hover-color: #000;
+
+  --btn-disabled-color: var(--disabled-color);
+  --btn-disabled-bg-color: transparent;
+
+  --btn-true-color: var(--true-color);
+  --btn-true--hover-color: var(--true--hover-color);
+
+  --btn-false-color: var(--false-color);
+  --btn-false--hover-color: var(--false--hover-color);
+
+  --btn-hold-color: var(--hold-color);
+  --btn-hold--hover-color: var(--hold--hover-color);
+
+  --btn-transfer-color: var(--transfer-color);
+  --btn-transfer--hover-color: var(--transfer--hover-color);
+}

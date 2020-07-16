@@ -31,7 +31,7 @@
     @extend %typo-body-lg;
     display: inline-block;
     min-width: 0;
-    padding: 10px 20px;
+    padding: var(--tooltip-padding);
     color: var(--tooltip-light-text-color);
     background: var(--tooltip-light-bg-color);
     border-radius: var(--border-radius);
@@ -39,7 +39,7 @@
     transition: var(--transition);
     opacity: 0;
     pointer-events: none;
-    z-index: 100;
+    z-index: var(--tooltip-z-index);
 
     &--contrast {
       color: var(--tooltip-dark-text-color);

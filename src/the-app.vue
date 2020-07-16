@@ -16,4 +16,5 @@
 </script>
 
 <style lang="scss">
+  @import './css/main';
 </style>
