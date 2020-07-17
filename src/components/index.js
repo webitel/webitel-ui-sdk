@@ -10,6 +10,7 @@ import WtInput from './molecules/wt-input/wt-input.vue';
 import WtNotification from './molecules/wt-notification/wt-notification.vue';
 import WtRadio from './molecules/wt-radio/wt-radio.vue';
 import WtSearchBar from './molecules/wt-search-bar/wt-search-bar.vue';
+import WtSwitcher from './molecules/wt-switcher/wt-switcher.vue';
 import WtTimeInput from './molecules/wt-time-input/wt-time-input.vue';
 import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 
@@ -25,6 +26,7 @@ const Components = {
   WtNotification,
   WtRadio,
   WtSearchBar,
+  WtSwitcher,
   WtTimeInput,
   WtTextarea,
 };

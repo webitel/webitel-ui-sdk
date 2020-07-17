@@ -193,6 +193,27 @@
         outline
       ></wt-checkbox>
     </div>
+
+    <div>
+      <h2>switcher</h2>
+      <wt-switcher
+        v-model="switcher.label"
+        label="Switcher with label"
+      ></wt-switcher>
+      <wt-switcher
+        v-model="switcher.labelLeft"
+        label="Switcher with label left"
+        label-left
+      ></wt-switcher>
+      <wt-switcher
+        v-model="switcher.disabled"
+        label="Disabled switcher"
+        disabled
+      ></wt-switcher>
+      <wt-switcher
+        v-model="switcher.disabled"
+      ></wt-switcher>
+    </div>
   </div>
 </template>
 
@@ -232,6 +253,12 @@
         selected3: ['Option 1'],
         opt1: 'Option 1',
         opt2: 'Option 2',
+      },
+      switcher: {
+        label: true,
+        outline: false,
+        labelLeft: false,
+        disabled: true,
       },
     }),
   };

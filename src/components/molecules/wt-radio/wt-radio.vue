@@ -16,7 +16,9 @@
         :disabled="disabled"
         @input="inputHandler"
       >
-      <span class="wt-radio__checkmark"></span>
+      <span class="wt-radio__checkmark">
+      <wt-icon :icon="radioIcon"></wt-icon>
+    </span>
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label, isChecked, disabled }">
         <div v-if="label" class="wt-radio__label">{{ label }}</div>
@@ -64,6 +66,9 @@
       isChecked() {
         return this.value === this.selected;
       },
+      radioIcon() {
+        return this.isChecked ? 'radio--checked' : 'radio';
+      },
     },
     methods: {
       inputHandler() {
@@ -89,7 +94,7 @@
   }
 
   .wt-radio__label {
-    padding-left: var(--radio-icon-margin);
+    margin-left: var(--radio-icon-margin);
     transition: var(--transition);
   }
 
@@ -102,45 +107,13 @@
     pointer-events: none;
   }
 
-  /* Create a custom radio button */
-  .wt-radio__checkmark {
-    display: block;
-    position: relative;
-    box-sizing: border-box;
-    height: var(--radio-checkmark-size);
-    width: var(--radio-checkmark-size);
-    border: 2px solid;
-    border-color: var(--icon-primary-color);
-    background-color: transparent;
-    border-radius: 50%;
-    transition: var(--transition);
-
-    /* Create the indicator (the dot/circle - hidden when not checked) */
-    /* Style the indicator (dot/circle) */
-    &:after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: var(--radio-bullet-size);
-      height: var(--radio-bullet-size);
-      transform: translate(-52%, -48%);
-     // transform: translate(-50%, -50%);
-      background: var(--icon--active-color);
-      box-sizing: border-box;
-      border-radius: 50%;
-      transition: var(--transition);
-      opacity: 0;
-    }
-  }
-
   .wt-radio:hover {
     .wt-radio__label {
       color: var(--form-label--hover-color);
     }
 
-    .wt-radio__checkmark {
-      border-color: var(--icon--hover-color);
+    ::v-deep .wt-icon__icon {
+      fill: var(--icon--hover-color);
     }
   }
 
@@ -149,13 +122,8 @@
       color: var(--form-label--active-color);
     }
 
-    .wt-radio__checkmark {
-      border-color: var(--icon--active-color);
-
-      /* Show the indicator (dot/circle) when checked */
-      &:after {
-        opacity: 1;
-      }
+    ::v-deep .wt-icon__icon {
+      fill: var(--icon--active-color);
     }
   }
 
@@ -164,17 +132,25 @@
       color: var(--form-outline-label-color);
     }
 
-    .wt-radio__checkmark {
-      border-color: var(--icon-outline-color);
+    ::v-deep .wt-icon__icon {
+      fill: var(--icon-outline-color);
+    }
 
-      /* Show the indicator (dot/circle) when checked */
-      &:after {
-        background: var(--icon-outline-color);
+    &.wt-radio--active {
+      .wt-radio__label {
+        color: var(--form-label--active-color);
+      }
+
+      ::v-deep .wt-icon__icon {
+        fill: var(--icon-outline--active-color);
       }
     }
 
-    &:hover .wt-radio__checkmark:after {
-      background: var(--icon--active-color);
+    &:hover {
+
+      ::v-deep .wt-icon__icon {
+        fill: var(--icon-outline--hover-color);
+      }
     }
   }
 
@@ -185,13 +161,8 @@
       color: var(--form-label--disabled-color);
     }
 
-    .wt-radio__checkmark {
-      border-color: var(--icon--disabled-color);
-
-      /* Show the indicator (dot/circle) when checked */
-      &:after {
-        background: var(--icon--disabled-color);
-      }
+    ::v-deep .wt-icon__icon {
+      fill: var(--icon--disabled-color);
     }
   }
 </style>

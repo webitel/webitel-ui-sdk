@@ -100,7 +100,7 @@
   }
 
   .wt-checkbox__label {
-    padding-left: var(--checkbox-icon-margin);
+    margin-left: var(--checkbox-icon-margin);
     transition: var(--transition);
   }
 
@@ -140,6 +140,16 @@
 
     ::v-deep .wt-icon__icon {
       fill: var(--icon-outline-color);
+    }
+
+    &.wt-checkbox--active {
+      .wt-checkbox__label {
+        color: var(--form-label--active-color);
+      }
+
+      ::v-deep .wt-icon__icon {
+        fill: var(--icon-outline--active-color);
+      }
     }
   }
 
