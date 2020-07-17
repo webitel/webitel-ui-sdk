@@ -1,54 +1,72 @@
 
 %typo-heading-lg {
-  font-family: 'Montserrat Semi', monospace;
-  font-size: 24px;
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 24px;
+  }
   line-height: 24px;
 }
 
 %typo-heading-md {
-  font-family: 'Montserrat Semi', monospace;
-  font-size: 20px;
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 20px;
+  }
   line-height: 20px;
 }
 
 %typo-heading-sm {
-  font-family: 'Montserrat Semi', monospace;
-  font-size: 18px;
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 18px;
+  }
   line-height: 18px;
 }
 
 %typo-strong-lg {
-  font-family: 'Montserrat Semi', monospace;
-  font-size: 14px;
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 14px;
+  }
   line-height: 14px;
 }
 
 %typo-strong-md {
-  font-family: 'Montserrat Semi', monospace;
-  font-size: 12px;
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 12px;
+  }
   line-height: 12px;
 }
 
 %typo-strong-sm {
-  font-family: 'Montserrat Semi', monospace;
-  font-size: 10px;
+  font: {
+    family: 'Montserrat Semi', monospace;
+    size: 10px;
+  }
   line-height: 10px;
 }
 
 %typo-body-lg {
-  font-family: 'Montserrat Regular', monospace;
-  font-size: 14px;
+  font: {
+    family: 'Montserrat Regular', monospace;
+    size: 14px;
+  }
   line-height: 14px;
 }
 
 %typo-body-md {
-  font-family: 'Montserrat Regular', monospace;
-  font-size: 12px;
+  font: {
+    family: 'Montserrat Regular', monospace;
+    size: 12px;
+  }
   line-height: 12px;
 }
 
 %typo-body-sm {
-  font-family: 'Montserrat Regular', monospace;
-  font-size: 10px;
+  font: {
+    family: 'Montserrat Regular', monospace;
+    size: 10px;
+  }
   line-height: 10px;
 }

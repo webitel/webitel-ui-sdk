@@ -1,0 +1,113 @@
+:root {
+  // MAIN COLORS
+  --main-primary-color: #fff;
+  --main-primary-accent-color: #171A2A;
+  --main-ouline-color: #EAEAEA;
+
+  --main-secondary-color: #000;
+  --main-secondary-accent-color: #FFE69C;
+
+  --main-accent-color: #FFC107;
+  --main-page-bg-color: #F1F4F6;
+
+  // SEMANTIC COLORS
+  --disabled-color: #F3F4F4;
+
+  --true-color: #4CAF50;
+  --true--hover-color: #43A146;
+
+  --false-color: #FF4444;
+  --false--hover-color: #F03D3D;
+
+  --hold-color: #FFC107;
+  --hold--hover-color: #EFB917;
+
+  --transfer-color: #708FFF;
+  --transfer--hover-color: #6582EB;
+
+  // SUBORDINATE COLORS
+  // table colors
+  --table-primary-color: var(--main-primary-color);
+  --table--hover-color: var(--main-secondary-accent-color);
+  --table-secondary-color: #F9F9F9; // zebra
+
+  // other colors
+  --tooltip-light-text-color: #000;
+  --tooltip-light-bg-color: #fff;
+  --tooltip-dark-text-color: #fff;
+  --tooltip-dark-bg-color: #464858;
+
+  --badge-bg-color: var(--main-secondary-accent-color);
+
+  --tag-bg-color: var(--main-secondary-accent-color);
+
+  --notification-text-color: #000;
+  --notification-bg-color: #fff;
+
+  // ICON COLORS
+  --icon-primary-color: #808080;
+  --icon--hover-color: #000;
+  --icon-outline-color: var(--main-ouline-color);
+  --icon-outline--hover-color: #808080;
+  --icon---disabled-color: var(--disabled-color);
+
+  --icon-hold-color: var(--hold-color);
+  --icon-hold--hover-color: var(--hold--hover-color);
+
+  --icon-true-color: var(--true-color);
+  --icon-true--hover-color: var(--true--hover-color);
+
+  --icon-false-color: var(--false-color);
+  --icon-false--hover-color: var(--false--hover-color);
+
+  --icon-transfer-color: var(--transfer-color);
+  --icon-transfer--hover-color: var(--transfer--hover-color);
+
+  // FORM COLORS
+  --form-input-color: #000; // user input color
+
+  --form-border-color: #ACACAC;
+  --form-border---hover-color: #000;
+
+  --form-placeholder-color: #ACACAC;
+  --form-placeholder---hover-color: #000;
+
+  // outline
+  --form-outline-border-color: #EAEAEA;
+  --form-outline-border---hover-color: #ACACAC;
+
+  --form-outline-placeholder-color: #EAEAEA;
+  --form-outline-placeholder---hover-color: #ACACAC;
+
+  // TEXT COLORS
+  --text-primary-color: #000;
+  --text-outline-color: #ACACAC;
+  --text-contrast-color: #fff;
+  --text--disabled-color: var(--disabled-color);
+
+  // BUTTON COLORS
+  --btn-dark-font-color: #000;
+  --btn-light-font-color: #fff;
+
+  --btn-primary-color: var(--main-accent-color);
+  --btn-primary--hover-color: #EFB917;
+
+  --btn-secondary-color: #808080;
+  --btn-secondary-bg-color: transparent;
+  --btn-secondary--hover-color: #000;
+
+  --btn-disabled-color: var(--disabled-color);
+  --btn-disabled-bg-color: transparent;
+
+  --btn-true-color: var(--true-color);
+  --btn-true--hover-color: var(--true--hover-color);
+
+  --btn-false-color: var(--false-color);
+  --btn-false--hover-color: var(--false--hover-color);
+
+  --btn-hold-color: var(--hold-color);
+  --btn-hold--hover-color: var(--hold--hover-color);
+
+  --btn-transfer-color: var(--transfer-color);
+  --btn-transfer--hover-color: var(--transfer--hover-color);
+}
