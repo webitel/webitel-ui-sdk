@@ -12,7 +12,8 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "css-loader": "^3.4.2",
-    "file-loader": "^5.0.2"
+    "file-loader": "^5.0.2",
+    "vue-multiselect": "^2.1.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",

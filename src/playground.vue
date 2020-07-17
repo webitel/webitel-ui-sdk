@@ -214,6 +214,30 @@
         v-model="switcher.disabled"
       ></wt-switcher>
     </div>
+
+    <div>
+      <h2>Select</h2>
+      <wt-select
+        v-model="select.value"
+        :options="select.options"
+        label="Select"
+        track-by="name"
+      ></wt-select>
+      <wt-select
+        v-model="select.multipleValue"
+        :options="select.options"
+        :close-on-select="false"
+        label="Multiple Select"
+        track-by="name"
+        multiple
+      ></wt-select>
+      <wt-select
+        v-model="select.value"
+        label="Disabled Select"
+        track-by="name"
+        disabled
+      ></wt-select>
+    </div>
   </div>
 </template>
 
@@ -259,6 +283,24 @@
         outline: false,
         labelLeft: false,
         disabled: true,
+      },
+      select: {
+        value: '',
+        multipleValue: [],
+        options: [
+          { name: 'Vue.js1', language: 'JavaScript' },
+          { name: 'Adonis2', language: 'JavaScript' },
+          { name: 'Rails3', language: 'Ruby' },
+          { name: 'Sinatra4', language: 'Ruby' },
+          { name: 'Laravel5', language: 'PHP' },
+          { name: 'Phoenix6', language: 'Elixir' },
+          { name: 'Vue.js7', language: 'JavaScript' },
+          { name: 'Adonis8', language: 'JavaScript' },
+          { name: 'Rails9', language: 'Ruby' },
+          { name: 'Sinatra10', language: 'Ruby' },
+          { name: 'Laravel11', language: 'PHP' },
+          { name: 'Phoenix12', language: 'Elixir' },
+        ],
       },
     }),
   };

@@ -215,7 +215,7 @@
     transition: var(--transition);
 
     &::placeholder {
-      color: var(--form-placeholder-color)
+      color: var(--form-placeholder-color);
     }
 
     .wt-input:hover &,
