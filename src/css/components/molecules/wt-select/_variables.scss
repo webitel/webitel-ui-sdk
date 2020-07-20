@@ -1,15 +1,19 @@
 
 :root {
   --select-caret-top-pos: 7px;
-  --select-caret-right-pos: 7px;
+  --select-caret-right-pos: 10px;
   --select-caret-z-index: 1;
 
+  --select-clear-top-pos: 11px;
+  --select-clear-right-pos: calc(10px + (24px + 10px)); // 7px + arrow icon
+  --select-clear-z-index: var(--select-caret-z-index);
+
   --select-tags-min-height: 38px;
-  --select-tags-padding: 9px 43px 9px 9px;;
+  --select-tags-padding: 9px 70px 9px 9px; // 66px = 10 + 24 + 10 + 16 + 10
   --select-tags-border: var(--input-border);
 
   --select-input-min-height: 18px;
-  --select-badge-right-pos: 44px;
+  --select-badge-right-pos: 70px;
   --select-badge-z-index: 1;
 
   --select-options-padding: var(--input-padding);
