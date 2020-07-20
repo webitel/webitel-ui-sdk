@@ -238,6 +238,28 @@
         disabled
       ></wt-select>
     </div>
+    <div>
+      <h2>Datepicker</h2>
+      <wt-datepicker
+        v-model="datepicker.value"
+        label="Datepicker"
+        inline-label="Dtpckr"
+      ></wt-datepicker>
+      <wt-datepicker
+        v-model="datepicker.value"
+        label="Disabled datepicker"
+        disabled
+      ></wt-datepicker>
+    </div>
+    <div>
+      <h2>Timepicker</h2>
+      <wt-timepicker v-model="timepicker.value"></wt-timepicker>
+      <wt-timepicker
+        v-model="timepicker.value"
+        format="mm:ss"
+        disabled
+      ></wt-timepicker>
+    </div>
   </div>
 </template>
 
@@ -301,6 +323,12 @@
           { name: 'Laravel11', language: 'PHP' },
           { name: 'Phoenix12', language: 'Elixir' },
         ],
+      },
+      datepicker: {
+        value: Date.now(),
+      },
+      timepicker: {
+        value: Date.now(),
       },
     }),
   };
