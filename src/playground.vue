@@ -1,13 +1,189 @@
 <template>
+  <div class="playground" :style="{'background': bg}">
+    <div>
+      <label>Make page white:
+        <input
+          :value="bg === '#fff'"
+          type="checkbox"
+          @input="bg = bg === '#fff' ? '#eee' : '#fff'"
+        >
+      </label>
+    </div>
+    <div>
+      <h2>wt-icon</h2>
+      <wt-icon icon="bucket" color="hold"></wt-icon>
+    </div>
+    <div>
+      <h2>wt-icon-btn</h2>
+      <wt-icon-btn
+        icon="close"
+        tooltip="hello there!"
+      ></wt-icon-btn>
+    </div>
+    <div>
+      <h2>wt-button</h2>
+      <wt-button>Primary</wt-button>
+      <wt-button color="secondary">Secondary</wt-button>
+      <wt-button disabled>Disabled</wt-button>
+      <wt-button color="success">Success</wt-button>
+      <wt-button color="danger">Danger</wt-button>
+      <wt-button color="transfer">Transfer</wt-button>
+      <wt-button wide>Primary</wt-button>
+    </div>
 
+    <div>
+      <h2>wt-button--outline</h2>
+      <wt-button outline>Primary</wt-button>
+      <wt-button outline color="secondary">Secondary</wt-button>
+      <wt-button outline disabled>Disabled</wt-button>
+      <wt-button outline color="success">Success</wt-button>
+      <wt-button outline color="danger">Danger</wt-button>
+      <wt-button outline color="transfer">Transfer</wt-button>
+    </div>
+
+    <div>
+      <h2>wt-badge</h2>
+      <wt-badge>+10</wt-badge>
+      <wt-badge>hello there!</wt-badge>
+    </div>
+
+    <div>
+      <h2>wt-tooltip</h2>
+      <wt-tooltip visible>default</wt-tooltip>
+      <wt-tooltip visible contrast>contrast</wt-tooltip>
+    </div>
+    <div>
+      <h2>wt-notification</h2>
+      <wt-notification :notification="{type: 'info', text: 'lorem ipsum'}"></wt-notification>
+      <wt-notification
+        :notification="{
+          type: 'error',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque consectetur, debitis '
+        }"
+      ></wt-notification>
+
+      <wt-notification
+        :notification="{
+          type: 'error',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aut deserunt et eum exercitationem hic labore libero minus nam optio, praesentium, quas quasi quia rem repellendus sunt tempora tempore voluptas?'
+        }"
+      ></wt-notification>
+    </div>
+
+    <div>
+      <h2>wt-input</h2>
+        <wt-input
+          v-model="inputs.labelInput"
+          label="Label"
+          name="label-input"
+        ></wt-input>
+        <wt-input
+          label="Disabled"
+          name="disabled-input"
+          type="password"
+          has-show-password
+          disabled
+        ></wt-input>
+        <wt-input
+          v-model="inputs.outlineInput"
+          label="Outline"
+          name="outline-input"
+          outline
+        ></wt-input>
+        <wt-input
+          v-model="inputs.passwordInput"
+          label="Password"
+          name="password-input"
+          type="password"
+          has-show-password
+        ></wt-input>
+    </div>
+    <div>
+      <h2>Search bar</h2>
+      <wt-search-bar
+        v-model="searchBar.defaultSearch"
+        placeholder="debounced search"
+        debounce
+        @search="searchBar.search"
+      ></wt-search-bar>
+      <wt-search-bar
+        v-model="searchBar.outlineSearch"
+        outline
+      ></wt-search-bar>
+    </div>
+    <div>
+      <h2>Textarea</h2>
+      <wt-textarea
+        v-model="textarea"
+        name="textarea-input"
+        label="Textarea"
+      ></wt-textarea>
+    </div>
+    <div>
+      <h2>Time inputs</h2>
+      <wt-time-input
+        v-model="timeInput.hour"
+        label="hour"
+        name="time-input-hour"
+        :max-value="23"
+      ></wt-time-input>
+      <wt-time-input
+        v-model="timeInput.min"
+        label="min"
+        name="time-input-min"
+        :max-value="59"
+        outline
+      ></wt-time-input>
+      <wt-time-input
+        v-model="timeInput.sec"
+        label="sec"
+        name="time-input-sec"
+        :max-value="59"
+        disabled
+      ></wt-time-input>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "playground",
-    };
+  export default {
+    name: 'playground',
+    data: () => ({
+      bg: '#eee',
+      inputs: {
+        labelInput: '',
+        outlineInput: '',
+        passwordInput: '12345',
+      },
+      searchBar: {
+        defaultSearch: '',
+        outlineSearch: '',
+        search(value) {
+          alert(`search debounce: ${value}`);
+        },
+      },
+      textarea: '',
+      timeInput: {
+        hour: 0,
+        min: 2,
+        sec: 22,
+      },
+    }),
+  };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .playground {
+    min-height: 100vh;
+    padding: 90px;
+    box-sizing: border-box;
 
+    & > div {
+      margin-bottom: 30px;
+      border-bottom: 2px solid lightskyblue;
+      & > * {
+        margin: 10px;
+      }
+    }
+  }
 </style>

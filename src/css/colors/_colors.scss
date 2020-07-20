@@ -32,82 +32,35 @@
   --table-secondary-color: #F9F9F9; // zebra
 
   // other colors
-  --tooltip-light-text-color: #000;
-  --tooltip-light-bg-color: #fff;
-  --tooltip-dark-text-color: #fff;
-  --tooltip-dark-bg-color: #464858;
-
-  --badge-bg-color: var(--main-secondary-accent-color);
-
   --tag-bg-color: var(--main-secondary-accent-color);
-
-  --notification-text-color: #000;
-  --notification-bg-color: #fff;
-
-  // ICON COLORS
-  --icon-primary-color: #808080;
-  --icon--hover-color: #000;
-  --icon-outline-color: var(--main-ouline-color);
-  --icon-outline--hover-color: #808080;
-  --icon---disabled-color: var(--disabled-color);
-
-  --icon-hold-color: var(--hold-color);
-  --icon-hold--hover-color: var(--hold--hover-color);
-
-  --icon-true-color: var(--true-color);
-  --icon-true--hover-color: var(--true--hover-color);
-
-  --icon-false-color: var(--false-color);
-  --icon-false--hover-color: var(--false--hover-color);
-
-  --icon-transfer-color: var(--transfer-color);
-  --icon-transfer--hover-color: var(--transfer--hover-color);
 
   // FORM COLORS
   --form-input-color: #000; // user input color
 
+  --form-label-color: #ACACAC;
+  --form-label--hover-color: #000;
+  --form-label--disabled-color: #EAEAEA;
+
   --form-border-color: #ACACAC;
-  --form-border---hover-color: #000;
+  --form-border--hover-color: #000;
+  --form-border--disabled-color: #f5f5f5;
 
   --form-placeholder-color: #ACACAC;
-  --form-placeholder---hover-color: #000;
+  --form-placeholder--hover-color: #000;
+  --form-placeholder--disabled-color: #E3E3E3;
 
   // outline
+  --form-outline-label-color: #EAEAEA;
+
   --form-outline-border-color: #EAEAEA;
-  --form-outline-border---hover-color: #ACACAC;
+  --form-outline-border--hover-color: #ACACAC;
 
   --form-outline-placeholder-color: #EAEAEA;
-  --form-outline-placeholder---hover-color: #ACACAC;
+  --form-outline-placeholder--hover-color: #ACACAC;
 
   // TEXT COLORS
   --text-primary-color: #000;
   --text-outline-color: #ACACAC;
   --text-contrast-color: #fff;
   --text--disabled-color: var(--disabled-color);
-
-  // BUTTON COLORS
-  --btn-dark-font-color: #000;
-  --btn-light-font-color: #fff;
-
-  --btn-primary-color: var(--main-accent-color);
-  --btn-primary--hover-color: #EFB917;
-
-  --btn-secondary-color: #808080;
-  --btn-secondary-bg-color: transparent;
-  --btn-secondary--hover-color: #000;
-
-  --btn-disabled-color: var(--disabled-color);
-  --btn-disabled-bg-color: transparent;
-
-  --btn-true-color: var(--true-color);
-  --btn-true--hover-color: var(--true--hover-color);
-
-  --btn-false-color: var(--false-color);
-  --btn-false--hover-color: var(--false--hover-color);
-
-  --btn-hold-color: var(--hold-color);
-  --btn-hold--hover-color: var(--hold--hover-color);
-
-  --btn-transfer-color: var(--transfer-color);
-  --btn-transfer--hover-color: var(--transfer--hover-color);
 }

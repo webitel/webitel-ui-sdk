@@ -52,28 +52,13 @@
 </script>
 
 <style lang="scss" scoped>
-  %typo-btn {
-    font: {
-      family: 'Montserrat Semi', monospace;
-      size: 12px;
-    }
-    line-height: 12px;
-  }
-
-  %typo-lg-btn {
-    font: {
-      family: 'Montserrat Semi', monospace;
-      size: 20px;
-    }
-    line-height: 20px;
-  }
 
   .wt-button {
     @extend %typo-btn;
     position: relative;
     display: inline-block;
-    padding: 12px 19px; // 13px 20px - border
-    border: 1px solid;
+    padding: var(--btn-padding);
+    border: var(--btn-border);
     color: var(--btn-dark-font-color);
     background: var(--btn-primary-color);
     border-color: var(--btn-primary-color);
@@ -86,8 +71,8 @@
     }
 
     &--large {
-      @extend %typo-lg-btn;
-      padding: 15px 29px; // 16px 30px - border
+      @extend %typo-btn-lg;
+      padding: var(--btn-lg-padding); // 16px 30px - border
     }
 
     &--disabled {

@@ -52,9 +52,9 @@
     position: relative;
     display: flex;
     align-items: flex-start;
-    min-width: 30vw;
-    max-width: 40vw;
-    padding: 10px;
+    min-width: var(--notification-min-width);
+    max-width: var(--notification-max-width);
+    padding: var(--notification-padding);
     color: var(--notification-text-color);
     background: var(--notification-bg-color);
     border-radius: var(--border-radius);
@@ -63,7 +63,7 @@
   }
 
   .wt-notification__icon {
-    margin-right: 10px;
+    margin-right: var(--notification-icon-margin);
   }
 
   .wt-notification__text {
