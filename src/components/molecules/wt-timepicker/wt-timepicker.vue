@@ -102,5 +102,9 @@
 
   .wt-time-input {
     margin-right: var(--timepicker-input-margin);
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 </style>

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import WtIcon from './atoms/wt-icon/wt-icon.vue';
 import WtButton from './atoms/wt-button/wt-button.vue';
 import WtBadge from './atoms/wt-badge/wt-badge.vue';
+import WtDivider from './atoms/wt-divider/wt-divider.vue';
 import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
 import WtLabel from './atoms/wt-label/wt-label.vue';
 import WtLoader from './atoms/wt-loader/wt-loader.vue';
@@ -23,6 +24,7 @@ const Components = {
   WtIcon,
   WtButton,
   WtBadge,
+  WtDivider,
   WtTooltip,
   WtLabel,
   WtLoader,

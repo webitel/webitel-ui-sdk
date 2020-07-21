@@ -276,6 +276,10 @@
       <h2>Loader</h2>
       <wt-loader />
     </div>
+    <div>
+      <h2>Divider</h2>
+      <wt-divider />
+    </div>
   </div>
 </template>
 
