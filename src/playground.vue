@@ -272,6 +272,10 @@
         disabled
       ></wt-datetimepicker>
     </div>
+    <div>
+      <h2>Loader</h2>
+      <wt-loader />
+    </div>
   </div>
 </template>
 

@@ -4,6 +4,7 @@ import WtButton from './atoms/wt-button/wt-button.vue';
 import WtBadge from './atoms/wt-badge/wt-badge.vue';
 import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
 import WtLabel from './atoms/wt-label/wt-label.vue';
+import WtLoader from './atoms/wt-loader/wt-loader.vue';
 import WtCheckbox from './molecules/wt-checkbox/wt-checkbox.vue';
 import WtDatepicker from './molecules/wt-datepicker/wt-datepicker.vue';
 import WtDatetimepicker from './molecules/wt-datetimepicker/wt-datetimepicker.vue';
@@ -24,6 +25,7 @@ const Components = {
   WtBadge,
   WtTooltip,
   WtLabel,
+  WtLoader,
   WtCheckbox,
   WtDatepicker,
   WtDatetimepicker,
