@@ -1,0 +1,14 @@
+
+:root {
+  --switcher-icon-margin: 10px;
+  --switcher-width: 40px;
+  --switcher-height: 22px;
+  --switcher-checkmark-size: 14px;
+  --switcher-checkmark-margin: 4px;
+  --switcher-checkmark-translateX: 17px;
+  --switcher-bg-color: var(--icon-outline-color);
+  --switcher-checkmark-color: var(--main-primary-color);
+  --switcher-checkmark--hover-color: var(--icon-outline--hover-color);
+  --switcher-checkmark--active-color: var(--main-accent-color);
+  --switcher-border-radius: 24px;
+}

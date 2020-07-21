@@ -1,8 +1,10 @@
 <template>
-  <button class="wt-icon-btn" :class="{ 'wt-icon-btn--disabled': disabled }">
-    <wt-icon :icon="icon" :size="size"></wt-icon>
+  <div class="wt-icon-btn" :class="{ 'wt-icon-btn--disabled': disabled }">
+    <button class="wt-icon-btn__button">
+      <wt-icon :icon="icon" :size="size"></wt-icon>
+    </button>
     <wt-tooltip v-if="tooltip">{{tooltip}}</wt-tooltip>
-  </button>
+  </div>
 </template>
 
 <script>
@@ -30,6 +32,7 @@
 <style lang="scss" scoped>
   .wt-icon-btn {
     position: relative;
+    display: inline-block;
 
     &:hover ::v-deep .wt-icon__icon {
       fill: var(--icon--hover-color);

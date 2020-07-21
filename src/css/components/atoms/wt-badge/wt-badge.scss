@@ -1,0 +1,8 @@
+.wt-badge {
+  @extend %typo-body-md;
+
+  display: inline-block;
+  padding: var(--badge-padding);
+  background: var(--badge-bg-color);
+  border-radius: var(--badge-border-radius);
+}

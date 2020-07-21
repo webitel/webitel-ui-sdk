@@ -11,12 +11,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .wt-badge {
-    @extend %typo-body-md;
-
-    display: inline-block;
-    padding: var(--badge-padding);
-    background: var(--badge-bg-color);
-    border-radius: var(--badge-border-radius);
-  }
+  @import '../../../css/components/atoms/wt-badge/wt-badge';
 </style>

@@ -142,6 +142,124 @@
         disabled
       ></wt-time-input>
     </div>
+    <div>
+      <h2>Radio</h2>
+      <wt-radio
+        v-model="radio.selected"
+        :value="radio.value1"
+        label="Radio 1"
+        name="radio-opt1"
+      ></wt-radio>
+      <wt-radio
+        v-model="radio.selected"
+        :value="radio.value2"
+        label="Radio 2"
+        name="radio-opt-outline"
+        outline
+      ></wt-radio>
+      <wt-radio
+        v-model="radio.selected"
+        :value="radio.value3"
+        label="Radio 3"
+        name="radio-opt-disabled"
+        disabled
+      ></wt-radio>
+      <wt-radio
+      ></wt-radio>
+    </div>
+    <div>
+      <h2>Checkbox</h2>
+      <wt-checkbox
+        v-model="checkbox.selected1"
+        label="Checkbox selected"
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected2"
+        label="Disabled checkbox"
+        disabled
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected2"
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected3"
+        :value="checkbox.opt1"
+        label="Multiple checkbox 1"
+      ></wt-checkbox>
+      <wt-checkbox
+        v-model="checkbox.selected3"
+        :value="checkbox.opt2"
+        label="Multiple checkbox 2 [outlined]"
+        outline
+      ></wt-checkbox>
+    </div>
+
+    <div>
+      <h2>switcher</h2>
+      <wt-switcher
+        v-model="switcher.label"
+        label="Switcher with label"
+      ></wt-switcher>
+      <wt-switcher
+        v-model="switcher.labelLeft"
+        label="Switcher with label left"
+        label-left
+      ></wt-switcher>
+      <wt-switcher
+        v-model="switcher.disabled"
+        label="Disabled switcher"
+        disabled
+      ></wt-switcher>
+      <wt-switcher
+        v-model="switcher.disabled"
+      ></wt-switcher>
+    </div>
+
+    <div>
+      <h2>Select</h2>
+      <wt-select
+        v-model="select.value"
+        :options="select.options"
+        label="Select"
+        track-by="name"
+      ></wt-select>
+      <wt-select
+        v-model="select.multipleValue"
+        :options="select.options"
+        :close-on-select="false"
+        label="Multiple Select"
+        track-by="name"
+        multiple
+      ></wt-select>
+      <wt-select
+        v-model="select.value"
+        label="Disabled Select"
+        track-by="name"
+        disabled
+      ></wt-select>
+    </div>
+    <div>
+      <h2>Datepicker</h2>
+      <wt-datepicker
+        v-model="datepicker.value"
+        label="Datepicker"
+        inline-label="Dtpckr"
+      ></wt-datepicker>
+      <wt-datepicker
+        v-model="datepicker.value"
+        label="Disabled datepicker"
+        disabled
+      ></wt-datepicker>
+    </div>
+    <div>
+      <h2>Timepicker</h2>
+      <wt-timepicker v-model="timepicker.value"></wt-timepicker>
+      <wt-timepicker
+        v-model="timepicker.value"
+        format="mm:ss"
+        disabled
+      ></wt-timepicker>
+    </div>
   </div>
 </template>
 
@@ -149,7 +267,7 @@
   export default {
     name: 'playground',
     data: () => ({
-      bg: '#eee',
+      bg: '#fff',
       inputs: {
         labelInput: '',
         outlineInput: '',
@@ -159,6 +277,7 @@
         defaultSearch: '',
         outlineSearch: '',
         search(value) {
+          // eslint-disable-next-line
           alert(`search debounce: ${value}`);
         },
       },
@@ -167,6 +286,49 @@
         hour: 0,
         min: 2,
         sec: 22,
+      },
+      radio: {
+        value1: 'value1',
+        value2: 'value2',
+        value3: 'value3',
+        selected: 'value3',
+      },
+      checkbox: {
+        selected1: true,
+        selected2: false,
+        selected3: ['Option 1'],
+        opt1: 'Option 1',
+        opt2: 'Option 2',
+      },
+      switcher: {
+        label: true,
+        outline: false,
+        labelLeft: false,
+        disabled: true,
+      },
+      select: {
+        value: '',
+        multipleValue: [],
+        options: [
+          { name: 'Vue.js1', language: 'JavaScript' },
+          { name: 'Adonis2', language: 'JavaScript' },
+          { name: 'Rails3', language: 'Ruby' },
+          { name: 'Sinatra4', language: 'Ruby' },
+          { name: 'Laravel5', language: 'PHP' },
+          { name: 'Phoenix6', language: 'Elixir' },
+          { name: 'Vue.js7', language: 'JavaScript' },
+          { name: 'Adonis8', language: 'JavaScript' },
+          { name: 'Rails9', language: 'Ruby' },
+          { name: 'Sinatra10', language: 'Ruby' },
+          { name: 'Laravel11', language: 'PHP' },
+          { name: 'Phoenix12', language: 'Elixir' },
+        ],
+      },
+      datepicker: {
+        value: Date.now(),
+      },
+      timepicker: {
+        value: Date.now(),
       },
     }),
   };
