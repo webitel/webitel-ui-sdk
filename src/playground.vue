@@ -72,31 +72,38 @@
 
     <div>
       <h2>wt-input</h2>
-        <wt-input
-          v-model="inputs.labelInput"
-          label="Label"
-          name="label-input"
-        ></wt-input>
-        <wt-input
-          label="Disabled"
-          name="disabled-input"
-          type="password"
-          has-show-password
-          disabled
-        ></wt-input>
-        <wt-input
-          v-model="inputs.outlineInput"
-          label="Outline"
-          name="outline-input"
-          outline
-        ></wt-input>
-        <wt-input
-          v-model="inputs.passwordInput"
-          label="Password"
-          name="password-input"
-          type="password"
-          has-show-password
-        ></wt-input>
+      <wt-input
+        v-model="inputs.labelInput"
+        label="Label"
+        name="label-input"
+      ></wt-input>
+      <wt-input
+        label="Disabled"
+        name="disabled-input"
+        type="password"
+        has-show-password
+        disabled
+      ></wt-input>
+      <wt-input
+        v-model="inputs.outlineInput"
+        label="Outline"
+        name="outline-input"
+        outline
+      ></wt-input>
+      <wt-input
+        v-model="inputs.passwordInput"
+        label="Password"
+        name="password-input"
+        type="password"
+        :v="vValid"
+        has-show-password
+      ></wt-input>
+      <wt-input
+        v-model="inputs.labelInput"
+        label="Invalid input"
+        name="invalid-input"
+        :v="vInvalid"
+      ></wt-input>
     </div>
     <div>
       <h2>Search bar</h2>
@@ -274,11 +281,11 @@
     </div>
     <div>
       <h2>Loader</h2>
-      <wt-loader />
+      <wt-loader/>
     </div>
     <div>
       <h2>Divider</h2>
-      <wt-divider />
+      <wt-divider/>
     </div>
   </div>
 </template>
@@ -288,6 +295,15 @@
     name: 'playground',
     data: () => ({
       bg: '#fff',
+      vValid: {
+        $error: false,
+        $dirty: true,
+      },
+      vInvalid: {
+        $error: true,
+        $dirty: true,
+        required: false,
+      },
       inputs: {
         labelInput: '',
         outlineInput: '',
@@ -366,6 +382,7 @@
     & > div {
       margin-bottom: 30px;
       border-bottom: 2px solid lightskyblue;
+
       & > * {
         margin: 10px;
       }

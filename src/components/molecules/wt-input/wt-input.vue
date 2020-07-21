@@ -4,9 +4,15 @@
     :class="{
       'wt-input--outline': outline,
       'wt-input--disabled': disabled,
+      'wt-input--invalid': invalid,
     }"
   >
-    <wt-label :for="name" :outline="outline" :disabled="disabled">
+    <wt-label
+      :for="name"
+      :outline="outline"
+      :disabled="disabled"
+      :invalid="invalid"
+    >
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
@@ -14,20 +20,22 @@
       <input
         :id="name"
         class="wt-input__input"
-        :class="{'wt-input--is-password': isPassword}"
+        :class="{
+          'wt-input--is-password': isPassword,
+        }"
         :value="value"
         :type="inputType"
         :placeholder="placeholder || label"
         :disabled="disabled"
-        @input="$emit('input', $event.target.value)"
+        @input="inputHandler"
       >
       <slot
         v-if="isPassword"
         name="show-password"
         v-bind="{
-        isPasswordVisible,
-        switchVisibilityPassword,
-      }"
+          isPasswordVisible,
+          switchVisibilityPassword,
+        }"
       >
         <wt-icon-btn
           class="wt-input__password-button"
@@ -36,24 +44,21 @@
         ></wt-icon-btn>
       </slot>
     </div>
+    <wt-input-info
+      v-if="isValidation"
+      :invalid="invalid"
+    >{{validationText}}
+    </wt-input-info>
   </div>
-
-  <!--    <validation-message-->
-  <!--      class="cc-err-message"-->
-  <!--      v-if="!hideDetails"-->
-  <!--      :v="v"-->
-  <!--    />-->
-  <!--  </label>-->
 </template>
 
 <script>
-  // import ValidationMessage from '../../validation-message.vue';
+
+  import validationMixin from '../../../mixins/validationMixin/validationMixin';
 
   export default {
     name: 'wt-input',
-    components: {
-      // ValidationMessage,
-    },
+    mixins: [validationMixin],
     props: {
       /**
        * Current input value (`v-model`)
@@ -117,8 +122,6 @@
         type: Boolean,
         default: false,
       },
-      // validation rules
-      // v: {},
     },
 
     data: () => ({
@@ -148,8 +151,6 @@
       },
     },
 
-    mounted() {
-    },
     computed: {
       validation: {
         get() {
@@ -170,6 +171,11 @@
       },
     },
     methods: {
+      inputHandler(event) {
+        if (this.invalid) this.v.$touch(); // if value is wrong, always check it
+        this.$emit('input', event.target.value);
+      },
+
       switchVisibilityPassword() {
         this.isPasswordVisible = !this.isPasswordVisible;
         this.inputType = this.isPasswordVisible ? 'text' : 'password';
@@ -198,6 +204,11 @@
     .wt-input:hover &,
     .wt-input:focus-within & {
       color: var(--form-label--hover-color);
+    }
+
+    .wt-input--invalid:hover &,
+    .wt-input--invalid:focus-within & {
+      color: var(--label--invalid-color);
     }
   }
 
@@ -234,6 +245,7 @@
         color: var(--form-outline-placeholder-color);
       }
     }
+
     .wt-input--outline:hover &,
     .wt-input--outline &:focus {
       border-color: var(--form-outline-border--hover-color);
@@ -241,6 +253,12 @@
       &::placeholder {
         color: var(--form-outline-placeholder--hover-color)
       }
+    }
+
+    .wt-input--invalid &,
+    .wt-input--invalid:hover & {
+      border-color: var(--false-color);
+      outline: none; // prevent outline overlapping false color
     }
 
     .wt-input--disabled & {

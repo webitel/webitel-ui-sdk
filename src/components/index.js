@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import WtIcon from './atoms/wt-icon/wt-icon.vue';
+import WtInputInfo from './atoms/wt-input-info/wt-input-info.vue';
 import WtButton from './atoms/wt-button/wt-button.vue';
 import WtBadge from './atoms/wt-badge/wt-badge.vue';
 import WtDivider from './atoms/wt-divider/wt-divider.vue';
@@ -22,6 +23,7 @@ import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
 
 const Components = {
   WtIcon,
+  WtInputInfo,
   WtButton,
   WtBadge,
   WtDivider,
