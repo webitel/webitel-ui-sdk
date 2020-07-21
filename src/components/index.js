@@ -6,6 +6,7 @@ import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
 import WtLabel from './atoms/wt-label/wt-label.vue';
 import WtCheckbox from './molecules/wt-checkbox/wt-checkbox.vue';
 import WtDatepicker from './molecules/wt-datepicker/wt-datepicker.vue';
+import WtDatetimepicker from './molecules/wt-datetimepicker/wt-datetimepicker.vue';
 import WtIconBtn from './molecules/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from './molecules/wt-input/wt-input.vue';
 import WtNotification from './molecules/wt-notification/wt-notification.vue';
@@ -25,6 +26,7 @@ const Components = {
   WtLabel,
   WtCheckbox,
   WtDatepicker,
+  WtDatetimepicker,
   WtIconBtn,
   WtInput,
   WtNotification,

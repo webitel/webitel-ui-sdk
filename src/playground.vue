@@ -260,6 +260,18 @@
         disabled
       ></wt-timepicker>
     </div>
+    <div>
+      <h2>Datetimepicker</h2>
+      <wt-datetimepicker
+        v-model="datetimepicker.value"
+        label="Datetimepicker"
+      ></wt-datetimepicker>
+      <wt-datetimepicker
+        v-model="datetimepicker.value"
+        label="Disabled datetimepicker"
+        disabled
+      ></wt-datetimepicker>
+    </div>
   </div>
 </template>
 
@@ -328,6 +340,9 @@
         value: Date.now(),
       },
       timepicker: {
+        value: Date.now(),
+      },
+      datetimepicker: {
         value: Date.now(),
       },
     }),
