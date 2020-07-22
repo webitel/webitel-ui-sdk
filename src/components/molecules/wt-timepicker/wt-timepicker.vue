@@ -3,21 +3,21 @@
     <wt-time-input
       v-if="isHour"
       v-model="hour"
-      label="Hour:"
+      :label="$t('webitelUI.timepicker.hour')"
       :maxValue="23"
       :disabled="disabled"
     ></wt-time-input>
     <wt-time-input
       v-if="isMin"
       v-model="min"
-      label="Min:"
+      :label="$t('webitelUI.timepicker.min')"
       :maxValue="59"
       :disabled="disabled"
     ></wt-time-input>
     <wt-time-input
       v-if="isSec"
       v-model="sec"
-      label="Sec:"
+      :label="$t('webitelUI.timepicker.sec')"
       :maxValue="59"
       :disabled="disabled"
     ></wt-time-input>

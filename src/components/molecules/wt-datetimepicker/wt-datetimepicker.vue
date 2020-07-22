@@ -35,10 +35,10 @@
     >
       <div class="wt-datetimepicker__quick-filters-wrapper">
         <span class="wt-datetimepicker__quick-filter" @click="setLastHour">
-          {{'Last hour'}}
+          {{$t('webitelUI.datetimepicker.lastHour')}}
         </span>
         <span class="wt-datetimepicker__quick-filter" @click="setLastDay">
-          {{'Last day'}}
+                {{$t('webitelUI.datetimepicker.lastDay')}}
         </span>
       </div>
       <div class="wt-datetimepicker__form-wrapper">
@@ -57,8 +57,12 @@
         ></wt-timepicker>
       </div>
       <div class="wt-datetimepicker__actions">
-        <wt-button color="primary" @click.native="input">Add</wt-button>
-        <wt-button color="secondary" @click.native="close">Cancel</wt-button>
+        <wt-button color="primary" @click.native="input">
+          {{$t('reusable.add')}}
+        </wt-button>
+        <wt-button color="secondary" @click.native="close">
+          {{$t('reusable.cancel')}}
+        </wt-button>
       </div>
     </div>
   </div>

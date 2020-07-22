@@ -15,13 +15,13 @@ export default {
     validationText() {
       if (this.isValidation && this.invalid) {
         if (this.v.required === false) {
-          return "this.$t('validation.required')";
+          return this.$t('validation.required');
         }
         if (this.v.numeric === false) {
-          return "this.$t('validation.numeric')";
+          return this.$t('validation.numeric');
         }
         if (this.v.email === false) {
-          return "this.$t('validation.email')";
+          return this.$t('validation.email');
         }
       }
       return '';
