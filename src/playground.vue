@@ -236,6 +236,7 @@
         :close-on-select="false"
         label="Multiple Select"
         track-by="name"
+        :v="vValid"
         multiple
       ></wt-select>
       <wt-select
@@ -243,6 +244,12 @@
         label="Disabled Select"
         track-by="name"
         disabled
+      ></wt-select>
+      <wt-select
+        v-model="select.value"
+        label="Invalid Select"
+        track-by="name"
+        :v="vInvalid"
       ></wt-select>
     </div>
     <div>

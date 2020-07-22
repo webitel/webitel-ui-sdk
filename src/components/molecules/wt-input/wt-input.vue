@@ -53,7 +53,6 @@
 </template>
 
 <script>
-
   import validationMixin from '../../../mixins/validationMixin/validationMixin';
 
   export default {

@@ -289,10 +289,6 @@
   .wt-datetimepicker--disabled {
     pointer-events: none;
 
-    .wt-label {
-      color: var(--form-label--disabled-color);
-    }
-
     .wt-datetimepicker__preview__input {
       border-color: var(--form-border--disabled-color);
       background: var(--form-border--disabled-color);
