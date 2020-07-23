@@ -304,6 +304,20 @@
     </div>
     <div>
       <h2>Popup</h2>
+      <div class="popup-wrapper" style="position: relative; width: 600px; height: 500px;">
+        <wt-popup style="position:absolute;">
+          <template slot="header">
+            <h2 style="text-align: center;">Popup header</h2>
+          </template>
+          <template slot="main">
+            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus autem consequatur consequuntur earum, eius, exercitationem, expedita fugiat mollitia nam nesciunt omnis placeat provident quos sed tempore ullam voluptate. Est, molestias.</p>
+          </template>
+          <template slot="actions">
+            <wt-button color="primary">Ok</wt-button>
+            <wt-button color="secondary" style="margin-left: 20px;">Not Ok</wt-button>
+          </template>
+        </wt-popup>
+      </div>
     </div>
   </div>
 </template>

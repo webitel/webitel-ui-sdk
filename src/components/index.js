@@ -13,6 +13,7 @@ import WtDatetimepicker from './molecules/wt-datetimepicker/wt-datetimepicker.vu
 import WtIconBtn from './molecules/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from './molecules/wt-input/wt-input.vue';
 import WtNotification from './molecules/wt-notification/wt-notification.vue';
+import WtPopup from './molecules/wt-popup/wt-popup.vue';
 import WtRadio from './molecules/wt-radio/wt-radio.vue';
 import WtSearchBar from './molecules/wt-search-bar/wt-search-bar.vue';
 import WtSelect from './molecules/wt-select/wt-select.vue';
@@ -37,6 +38,7 @@ const Components = {
   WtIconBtn,
   WtInput,
   WtNotification,
+  WtPopup,
   WtRadio,
   WtSearchBar,
   WtSelect,
