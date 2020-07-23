@@ -294,6 +294,17 @@
       <h2>Divider</h2>
       <wt-divider/>
     </div>
+
+    <div>
+      <h2>Tabs</h2>
+      <wt-tabs
+        v-model="tabs.current"
+        :tabs="tabs.tabs"
+      ></wt-tabs>
+    </div>
+    <div>
+      <h2>Popup</h2>
+    </div>
   </div>
 </template>
 
@@ -375,6 +386,23 @@
       },
       datetimepicker: {
         value: Date.now(),
+      },
+      tabs: {
+        current: { value: '1' },
+        tabs: [
+          {
+            text: 'Tab 1',
+            value: '1',
+          },
+          {
+            text: 'Tab 2',
+            value: '2',
+          },
+          {
+            text: 'Tab 3',
+            value: '3',
+          },
+        ],
       },
     }),
   };
