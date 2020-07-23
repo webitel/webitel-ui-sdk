@@ -1,9 +1,18 @@
 <template>
   <div
     class="wt-select"
-    :class="{'wt-select--disabled': disabled}"
+    :class="{
+      'wt-select--disabled': disabled,
+      'wt-select--invalid': invalid,
+    }"
   >
-    <wt-label class="wt-select__label">{{label}}</wt-label>
+    <wt-label
+      class="wt-select__label"
+      :disabled="disabled"
+      :invalid="invalid"
+    >
+      {{label}}
+    </wt-label>
     <vue-multiselect
       class="wt-select__select"
       :value="value"
@@ -42,25 +51,25 @@
         ></wt-icon-btn>
       </template>
     </vue-multiselect>
-    <!--    <validation-message-->
-    <!--      class="cc-err-message"-->
-    <!--      v-if="!hideDetails"-->
-    <!--      :v="v"-->
-    <!--    />-->
+    <wt-input-info
+      v-if="isValidation"
+      :invalid="invalid"
+    >{{validationText}}
+    </wt-input-info>
   </div>
 </template>
 
 <script>
   import VueMultiselect from 'vue-multiselect';
-  // import ValidationMessage from '../../bucket/validation-message.vue';
   import debounce from '../../../scripts/debounce';
+  import validationMixin from '../../../mixins/validationMixin/validationMixin';
 
   export default {
     name: 'wt-select',
     components: {
       VueMultiselect,
-      // ValidationMessage,
     },
+    mixins: [validationMixin],
     props: {
       value: {},
 
@@ -125,10 +134,6 @@
         type: Boolean,
         default: false,
       },
-
-      // v: {
-      //   type: Object,
-      // },
     },
 
     data: () => ({
@@ -154,16 +159,6 @@
         if (typeof this.value === 'object') return !!Object.keys(this.value).length;
         return !!this.value;
       },
-
-      // validation: {
-      //   get() {
-      //     return this.value;
-      //   },
-      //   set(value) {
-      //     if (this.v) this.v.$touch();
-      //     this.$emit('input', value);
-      //   },
-      // },
     },
 
     methods: {
@@ -354,6 +349,22 @@
     }
   }
 
+  .wt-select--invalid,
+  .wt-select--invalid:hover {
+    .wt-label {
+      color: var(--false-color);
+    }
+
+    .multiselect {
+      ::v-deep {
+        .multiselect__tags {
+          border-color: var(--false-color);
+          outline: none; // prevent outline overlapping false color
+        }
+      }
+    }
+  }
+
   .wt-select--disabled {
     pointer-events: none;
 
@@ -365,10 +376,6 @@
     .wt-select__arrow-caret ::v-deep .wt-icon__icon,
     .wt-select__clear ::v-deep .wt-icon__icon {
       fill: var(--icon--disabled-color);
-    }
-
-    .wt-label {
-      color: var(--form-label--disabled-color);
     }
 
     .multiselect {

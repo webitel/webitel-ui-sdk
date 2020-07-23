@@ -3,6 +3,7 @@
     class="wt-label"
     :class="{
       'wt-label--outline': outline,
+      'wt-label--invalid': invalid,
       'wt-label--disabled': disabled,
     }"
     :for="this.for"
@@ -26,6 +27,10 @@
         type: Boolean,
         default: false,
       },
+      invalid: {
+        type: Boolean,
+        default: false,
+      },
     },
   };
 </script>
@@ -40,6 +45,10 @@
 
     &--outline {
       color: var(--form-outline-label-color);
+    }
+
+    &--invalid {
+      color: var(--label--invalid-color);
     }
 
     &--disabled {

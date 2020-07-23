@@ -72,31 +72,38 @@
 
     <div>
       <h2>wt-input</h2>
-        <wt-input
-          v-model="inputs.labelInput"
-          label="Label"
-          name="label-input"
-        ></wt-input>
-        <wt-input
-          label="Disabled"
-          name="disabled-input"
-          type="password"
-          has-show-password
-          disabled
-        ></wt-input>
-        <wt-input
-          v-model="inputs.outlineInput"
-          label="Outline"
-          name="outline-input"
-          outline
-        ></wt-input>
-        <wt-input
-          v-model="inputs.passwordInput"
-          label="Password"
-          name="password-input"
-          type="password"
-          has-show-password
-        ></wt-input>
+      <wt-input
+        v-model="inputs.labelInput"
+        label="Label"
+        name="label-input"
+      ></wt-input>
+      <wt-input
+        label="Disabled"
+        name="disabled-input"
+        type="password"
+        has-show-password
+        disabled
+      ></wt-input>
+      <wt-input
+        v-model="inputs.outlineInput"
+        label="Outline"
+        name="outline-input"
+        outline
+      ></wt-input>
+      <wt-input
+        v-model="inputs.passwordInput"
+        label="Password"
+        name="password-input"
+        type="password"
+        :v="vValid"
+        has-show-password
+      ></wt-input>
+      <wt-input
+        v-model="inputs.labelInput"
+        label="Invalid input"
+        name="invalid-input"
+        :v="vInvalid"
+      ></wt-input>
     </div>
     <div>
       <h2>Search bar</h2>
@@ -229,6 +236,7 @@
         :close-on-select="false"
         label="Multiple Select"
         track-by="name"
+        :v="vValid"
         multiple
       ></wt-select>
       <wt-select
@@ -236,6 +244,12 @@
         label="Disabled Select"
         track-by="name"
         disabled
+      ></wt-select>
+      <wt-select
+        v-model="select.value"
+        label="Invalid Select"
+        track-by="name"
+        :v="vInvalid"
       ></wt-select>
     </div>
     <div>
@@ -260,6 +274,59 @@
         disabled
       ></wt-timepicker>
     </div>
+    <div>
+      <h2>Datetimepicker</h2>
+      <wt-datetimepicker
+        v-model="datetimepicker.value"
+        label="Datetimepicker"
+      ></wt-datetimepicker>
+      <wt-datetimepicker
+        v-model="datetimepicker.value"
+        label="Disabled datetimepicker"
+        disabled
+      ></wt-datetimepicker>
+    </div>
+    <div>
+      <h2>Loader</h2>
+      <wt-loader/>
+    </div>
+    <div>
+      <h2>Divider</h2>
+      <wt-divider/>
+    </div>
+
+    <div>
+      <h2>Tabs</h2>
+      <wt-tabs
+        v-model="tabs.current"
+        :tabs="tabs.tabs"
+      ></wt-tabs>
+    </div>
+    <div>
+      <h2>Popup</h2>
+      <div class="popup-wrapper" style="position: relative; width: 600px; height: 500px;">
+        <wt-popup style="position:absolute;">
+          <template slot="header">
+            <h2 style="text-align: center;">Popup header</h2>
+          </template>
+          <template slot="main">
+            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus autem consequatur consequuntur earum, eius, exercitationem, expedita fugiat mollitia nam nesciunt omnis placeat provident quos sed tempore ullam voluptate. Est, molestias.</p>
+          </template>
+          <template slot="actions">
+            <wt-button color="primary">Ok</wt-button>
+            <wt-button color="secondary" style="margin-left: 20px;">Not Ok</wt-button>
+          </template>
+        </wt-popup>
+      </div>
+    </div>
+    <div>
+      <h2>Pagination</h2>
+      <wt-pagination
+      v-model="pagination.size"
+      :next="true"
+      :prev="true"
+      ></wt-pagination>
+    </div>
   </div>
 </template>
 
@@ -268,6 +335,15 @@
     name: 'playground',
     data: () => ({
       bg: '#fff',
+      vValid: {
+        $error: false,
+        $dirty: true,
+      },
+      vInvalid: {
+        $error: true,
+        $dirty: true,
+        required: false,
+      },
       inputs: {
         labelInput: '',
         outlineInput: '',
@@ -330,6 +406,29 @@
       timepicker: {
         value: Date.now(),
       },
+      datetimepicker: {
+        value: Date.now(),
+      },
+      tabs: {
+        current: { value: '1' },
+        tabs: [
+          {
+            text: 'Tab 1',
+            value: '1',
+          },
+          {
+            text: 'Tab 2',
+            value: '2',
+          },
+          {
+            text: 'Tab 3',
+            value: '3',
+          },
+        ],
+      },
+      pagination: {
+        size: 10,
+      },
     }),
   };
 </script>
@@ -343,6 +442,7 @@
     & > div {
       margin-bottom: 30px;
       border-bottom: 2px solid lightskyblue;
+
       & > * {
         margin: 10px;
       }
