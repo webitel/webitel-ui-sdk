@@ -1,0 +1,67 @@
+:root {
+  // MAIN COLORS
+  --main-primary-color: #fff;
+  --main-primary-accent-color: #171A2A;
+  --main-ouline-color: #EAEAEA;
+
+  --main-secondary-color: #000;
+  --main-secondary-accent-color: #FFE69C;
+
+  --main-accent-color: #FFC107;
+  --main-page-bg-color: #F1F4F6;
+
+  // SEMANTIC COLORS
+  --disabled-color: #F3F4F4;
+
+  --true-color: #4CAF50;
+  --true--hover-color: #43A146;
+
+  --false-color: #FF4444;
+  --false--hover-color: #F03D3D;
+
+  --hold-color: #FFC107;
+  --hold--hover-color: #EFB917;
+
+  --transfer-color: #708FFF;
+  --transfer--hover-color: #6582EB;
+
+  // SUBORDINATE COLORS
+  // table colors
+  --table-primary-color: var(--main-primary-color);
+  --table--hover-color: var(--main-secondary-accent-color);
+  --table-secondary-color: #F9F9F9; // zebra
+
+  // other colors
+  --tag-bg-color: var(--main-secondary-accent-color);
+
+  // FORM COLORS
+  --form-input-color: #000; // user input color
+
+  --form-label-color: #ACACAC;
+  --form-label--active-color: #000;
+  --form-label--hover-color: #000;
+  --form-label--disabled-color: #EAEAEA;
+
+  --form-border-color: #ACACAC;
+  --form-border--hover-color: #000;
+  --form-border--disabled-color: #f5f5f5;
+
+  --form-placeholder-color: #ACACAC;
+  --form-placeholder--hover-color: #000;
+  --form-placeholder--disabled-color: #E3E3E3;
+
+  // outline
+  --form-outline-label-color: #EAEAEA;
+
+  --form-outline-border-color: #EAEAEA;
+  --form-outline-border--hover-color: #ACACAC;
+
+  --form-outline-placeholder-color: #EAEAEA;
+  --form-outline-placeholder--hover-color: #ACACAC;
+
+  // TEXT COLORS
+  --text-primary-color: #000;
+  --text-outline-color: #ACACAC;
+  --text-contrast-color: #fff;
+  --text--disabled-color: var(--disabled-color);
+}

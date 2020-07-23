@@ -1,0 +1,20 @@
+
+:root {
+  --datepicker-padding: 9px 44px;
+  --datepicker-icon-margin: 10px;
+  --datepicker-border: 1px solid;
+
+  --datepicker-cell-size: 38px;
+  --datepicker-cell-margin: 1px;
+  --datepicker-calendar-padding: 10px;
+  --datepicker-calendar-header-margin: 20px;
+  --datepicker-width: calc(
+          7 * var(--datepicker-cell-size)
+          + 2 * var(--datepicker-calendar-padding)
+          + 2px
+          + 7 * 2 * var(--datepicker-cell-margin)); // 7 cells * 2 sides
+
+  --datepicker-selected-cell-text-color: var(--main-primary-color);
+  --datepicker-selected-cell-bg-color: var(--main-accent-color);
+  --datepicker-cell--hover-color: #F9F9F9;
+}

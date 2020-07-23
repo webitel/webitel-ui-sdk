@@ -1,0 +1,29 @@
+
+:root {
+  --icon-xl-size: 50px;
+  --icon-lg-size: 32px;
+  --icon-md-size: 24px;
+  --icon-sm-size: 16px;
+  --icon-xs-size: 8px;
+
+  // ICON COLORS
+  --icon-primary-color: #808080;
+  --icon--active-color: #000;
+  --icon--hover-color: #000;
+  --icon-outline-color: var(--main-ouline-color);
+  --icon-outline--active-color: #808080;
+  --icon-outline--hover-color: #808080;
+  --icon--disabled-color: #EAEAEA;
+
+  --icon-hold-color: var(--hold-color);
+  --icon-hold--hover-color: var(--hold--hover-color);
+
+  --icon-true-color: var(--true-color);
+  --icon-true--hover-color: var(--true--hover-color);
+
+  --icon-false-color: var(--false-color);
+  --icon-false--hover-color: var(--false--hover-color);
+
+  --icon-transfer-color: var(--transfer-color);
+  --icon-transfer--hover-color: var(--transfer--hover-color);
+}
