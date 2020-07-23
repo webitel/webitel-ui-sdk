@@ -18,5 +18,10 @@ export default {
       lastHour: 'Последний час',
       lastDay: 'Последний день',
     },
+    pagination: {
+      sizeText: 'Записей на странице:',
+      prev: 'Назад',
+      next: 'Вперед',
+    },
   },
 };

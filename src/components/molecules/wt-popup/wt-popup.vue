@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="wt-popup"
-    :class="popupSize"
-  >
+  <div class="wt-popup">
     <div class="wt-popup__shadow"></div>
     <aside class="wt-popup__popup">
       <header class="wt-popup__header">
@@ -11,6 +8,7 @@
           class="wt-popup__close-btn"
           icon="remove-rounded"
           size="sm"
+          color="outline"
           @click.native="$emit('close')"
         ></wt-icon-btn>
       </header>
@@ -27,26 +25,6 @@
 <script>
   export default {
     name: 'wt-popup',
-    props: {
-      type: {
-        size: {
-          type: String,
-          default: '',
-        },
-      },
-    },
-    computed: {
-      popupSize() {
-        switch (this.size) {
-          case 'sm':
-            return 'wt-popup--sm';
-          case 'lg':
-            return 'wt-popup--lg';
-          default:
-            return '';
-        }
-      },
-    },
   };
 </script>
 
@@ -89,6 +67,7 @@
 
   .wt-popup__header {
     position: relative;
+    padding: var(--popup-header-padding);
 
     .wt-popup__close-btn {
       position: absolute;
@@ -98,7 +77,7 @@
   }
 
   .wt-popup__main {
-    margin: var(--popup-main-margin);
+    padding: var(--popup-main-padding);
   }
 
   .wt-popup__actions {

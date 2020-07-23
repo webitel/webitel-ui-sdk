@@ -1,7 +1,7 @@
 <template>
   <div class="wt-icon-btn" :class="{ 'wt-icon-btn--disabled': disabled }">
     <button class="wt-icon-btn__button">
-      <wt-icon :icon="icon" :size="size"></wt-icon>
+      <wt-icon :icon="icon" :size="size" :color="color"></wt-icon>
     </button>
     <wt-tooltip v-if="tooltip">{{tooltip}}</wt-tooltip>
   </div>
@@ -24,6 +24,9 @@
       disabled: {
         type: Boolean,
         default: false,
+      },
+      color: {
+        type: String,
       },
     },
   };

@@ -319,6 +319,14 @@
         </wt-popup>
       </div>
     </div>
+    <div>
+      <h2>Pagination</h2>
+      <wt-pagination
+      v-model="pagination.size"
+      :next="true"
+      :prev="true"
+      ></wt-pagination>
+    </div>
   </div>
 </template>
 
@@ -417,6 +425,9 @@
             value: '3',
           },
         ],
+      },
+      pagination: {
+        size: 10,
       },
     }),
   };

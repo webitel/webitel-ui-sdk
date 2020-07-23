@@ -18,5 +18,10 @@ export default {
       lastHour: 'Last hour',
       lastDay: 'Last day',
     },
+    pagination: {
+      sizeText: 'Rows per page:',
+      prev: 'Previous',
+      next: 'Next',
+    },
   },
 };

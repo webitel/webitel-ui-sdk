@@ -8,6 +8,7 @@
     }"
   >
     <wt-label
+      v-if="hasLabel"
       :for="name"
       :outline="outline"
       :disabled="disabled"
@@ -27,6 +28,8 @@
         :type="inputType"
         :placeholder="placeholder || label"
         :disabled="disabled"
+        :min="numberMin"
+        :max="numberMax"
         @input="inputHandler"
       >
       <slot
@@ -117,6 +120,21 @@
         default: false,
       },
 
+      /**
+       * Native number input restrictions
+       */
+      numberMin: {
+        type: Number,
+        default: 0,
+      },
+
+      /**
+       * Native number input restrictions
+       */
+      numberMax: {
+        type: Number,
+      },
+
       outline: {
         type: Boolean,
         default: false,
@@ -151,14 +169,8 @@
     },
 
     computed: {
-      validation: {
-        get() {
-          return this.value;
-        },
-        set(value) {
-          if (this.v) this.v.$touch();
-          this.$emit('input', value);
-        },
+      hasLabel() {
+        return !!(this.label || this.$slots.label);
       },
 
       isPassword() {
