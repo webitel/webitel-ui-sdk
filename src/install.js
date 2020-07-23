@@ -9,7 +9,7 @@ export default {
       Vue.component(name, Components[name]);
     });
     Object.keys(Components).forEach((name) => {
-      Vue.directives(name, Directives[name]);
+      Vue.directive(name, Directives[name]);
     });
   },
 };
