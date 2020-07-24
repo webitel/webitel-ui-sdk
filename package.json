@@ -1,10 +1,11 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": false,
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/locale/*"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
