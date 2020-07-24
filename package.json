@@ -1,11 +1,10 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [
     "dist/*",
-    "src/*",
     "public/*",
     "*.json",
     "*.js"
@@ -13,7 +12,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name @webitel/ui-sdk ./src/install.js",
+    "build-lib": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix"
   },

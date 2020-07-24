@@ -31,6 +31,7 @@ module.exports = {
       .loader('url-loader')
       .options({
         limit: false,
+        name: '/img/[name].[hash].[ext]',
       })
       .end();
   }
