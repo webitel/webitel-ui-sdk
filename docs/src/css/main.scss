@@ -1,0 +1,10 @@
+@import "~@webitel/ui-sdk/src/css/main.scss";
+
+body {
+  @extend %typo-body-lg;
+}
+
+h3 {
+  @extend %typo-heading-md;
+  margin: 20px 10px;
+}
