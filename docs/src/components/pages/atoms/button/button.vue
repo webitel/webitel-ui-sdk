@@ -7,10 +7,26 @@
         <pre><code class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
       </div>
       <div class="example-wrapper">
-        <wt-button color="transfer" outline large>Large transfer button</wt-button>
+        <wt-button large>Large button</wt-button>
       </div>
       <div class="example-wrapper">
-        <wt-button color="secondary" wide>Wide secondary button</wt-button>
+        <wt-button wide>Wide button</wt-button>
+      </div>
+      <div class="example-wrapper">
+        <wt-button>Primary</wt-button>
+        <wt-button color="secondary">Secondary</wt-button>
+        <wt-button disabled>Disabled</wt-button>
+        <wt-button color="success">Success</wt-button>
+        <wt-button color="danger">Danger</wt-button>
+        <wt-button color="transfer">Transfer</wt-button>
+      </div>
+      <div class="example-wrapper">
+        <wt-button outline>Primary</wt-button>
+        <wt-button outline color="secondary">Secondary</wt-button>
+        <wt-button outline disabled>Disabled</wt-button>
+        <wt-button outline color="success">Success</wt-button>
+        <wt-button outline color="danger">Danger</wt-button>
+        <wt-button outline color="transfer">Transfer</wt-button>
       </div>
     </article>
     <component-props

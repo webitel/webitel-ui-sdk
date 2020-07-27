@@ -26,7 +26,6 @@
       <h3>Tooltip positioning</h3>
       <p>By default, tooltip positioning is static. If you want make it absolute, you should do it
         explicitly in CSS</p>
-      <div class="my-div">1010</div>
       <pre><code class="language-html">
           &lt;wt-tooltip&gt;1010&lt;/wt-tooltip&gt;
         </code><code class="language-css">

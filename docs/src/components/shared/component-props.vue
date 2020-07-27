@@ -1,5 +1,5 @@
 <template>
-  <section class="props">
+  <article class="props">
     <h3>Props: </h3>
     <article
       class="props-wrapper"
@@ -28,7 +28,7 @@
         <p>{{prop.description}}</p>
       </div>
     </article>
-  </section>
+  </article>
 </template>
 
 <script>

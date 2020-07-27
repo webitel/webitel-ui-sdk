@@ -20,6 +20,7 @@
   import InputLabel from './pages/atoms/label/label.vue';
   import Loader from './pages/atoms/loader/loader.vue';
   import Tooltip from './pages/atoms/tooltip/tooltip.vue';
+  import Notification from './pages/molecules/notification/notification.vue';
 
   export default {
     name: 'the-docs',
@@ -35,6 +36,7 @@
       InputLabel,
       Loader,
       Tooltip,
+      Notification,
     },
     data: () => ({
       currentTab: {
@@ -86,6 +88,10 @@
         {
           text: 'Tooltip',
           value: 'tooltip',
+        },
+        {
+          text: 'Notification',
+          value: 'notification',
         },
       ],
     }),
