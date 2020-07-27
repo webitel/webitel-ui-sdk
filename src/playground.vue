@@ -54,20 +54,14 @@
     </div>
     <div>
       <h2>wt-notification</h2>
-      <wt-notification :notification="{type: 'info', text: 'lorem ipsum'}"></wt-notification>
-      <wt-notification
-        :notification="{
-          type: 'error',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque consectetur, debitis '
-        }"
-      ></wt-notification>
+      <wt-notification type="info">lorem ipsum</wt-notification>
+      <wt-notification type="error">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque consectetur, debitis
+      </wt-notification>
 
-      <wt-notification
-        :notification="{
-          type: 'error',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aut deserunt et eum exercitationem hic labore libero minus nam optio, praesentium, quas quasi quia rem repellendus sunt tempora tempore voluptas?'
-        }"
-      ></wt-notification>
+      <wt-notification type="error">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aut deserunt et eum exercitationem hic labore libero minus nam optio, praesentium, quas quasi quia rem repellendus sunt tempora tempore voluptas?'
+      </wt-notification>
     </div>
 
     <div>
@@ -310,7 +304,10 @@
             <h2 style="text-align: center;">Popup header</h2>
           </template>
           <template slot="main">
-            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus autem consequatur consequuntur earum, eius, exercitationem, expedita fugiat mollitia nam nesciunt omnis placeat provident quos sed tempore ullam voluptate. Est, molestias.</p>
+            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit. Accusamus autem consequatur consequuntur earum, eius, exercitationem, expedita
+              fugiat mollitia nam nesciunt omnis placeat provident quos sed tempore ullam voluptate.
+              Est, molestias.</p>
           </template>
           <template slot="actions">
             <wt-button color="primary">Ok</wt-button>
@@ -322,9 +319,9 @@
     <div>
       <h2>Pagination</h2>
       <wt-pagination
-      v-model="pagination.size"
-      :next="true"
-      :prev="true"
+        v-model="pagination.size"
+        :next="true"
+        :prev="true"
       ></wt-pagination>
     </div>
   </div>
