@@ -17,7 +17,7 @@ export default {
       Vue.component(name, Components[name]);
     });
     Vue.prototype.$webitelUI = {
-      locale: this.$i18n.locale,
+      // locale: this.$i18n.locale,
     };
   },
 };
