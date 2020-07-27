@@ -12,7 +12,8 @@
   import QuickStart from './pages/quick-start/quick-start.vue';
   import Typography from './pages/typography/typography.vue';
   import Colors from './pages/colors/colors.vue';
-  import Buttons from './pages/buttons/buttons.vue';
+  import Badge from './pages/atoms/badge/badge.vue';
+  import Btn from './pages/atoms/button/button.vue';
 
   export default {
     name: 'the-docs',
@@ -20,7 +21,8 @@
       QuickStart,
       Typography,
       Colors,
-      Buttons,
+      Badge,
+      Btn, // Button name conflicts with default <button> tag
     },
     data: () => ({
       currentTab: {
@@ -42,8 +44,12 @@
           value: 'colors',
         },
         {
-          text: 'Buttons',
-          value: 'buttons',
+          text: 'Badge',
+          value: 'badge',
+        },
+        {
+          text: 'Button',
+          value: 'btn',
         },
       ],
     }),

@@ -69,7 +69,4 @@
 </script>
 
 <style lang="scss" scoped>
-  .example-wrapper {
-    margin: 10px 0;
-  }
 </style>

@@ -8,3 +8,8 @@ h3 {
   @extend %typo-heading-md;
   margin: 20px 10px;
 }
+
+// for wrapping component example usage
+.example-wrapper {
+  margin: 10px 0;
+}
