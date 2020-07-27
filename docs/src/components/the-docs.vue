@@ -22,6 +22,7 @@
   import Tooltip from './pages/atoms/tooltip/tooltip.vue';
   import Checkbox from './pages/molecules/checkbox/checkbox.vue';
   import Notification from './pages/molecules/notification/notification.vue';
+  import Radio from './pages/molecules/radio/radio.vue';
 
   export default {
     name: 'the-docs',
@@ -39,6 +40,7 @@
       Tooltip,
       Checkbox,
       Notification,
+      Radio,
     },
     data: () => ({
       currentTab: {
@@ -98,6 +100,10 @@
         {
           text: 'Notification',
           value: 'notification',
+        },
+        {
+          text: 'Radio',
+          value: 'radio',
         },
       ],
     }),
