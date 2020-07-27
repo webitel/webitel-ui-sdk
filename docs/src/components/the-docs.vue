@@ -25,6 +25,7 @@
   import Notification from './pages/molecules/notification/notification.vue';
   import Radio from './pages/molecules/radio/radio.vue';
   import SearchBar from './pages/molecules/search-bar/search-bar.vue';
+  import SelectPage from './pages/molecules/select/select.vue';
   import Switcher from './pages/molecules/switcher/switcher.vue';
   import TextareaPage from './pages/molecules/textarea/textarea.vue';
   import TimeInput from './pages/molecules/time-input/time-input.vue';
@@ -51,6 +52,7 @@
       Switcher,
       TextareaPage,
       TimeInput,
+      SelectPage,
     },
     data: () => ({
       currentTab: {
@@ -122,6 +124,10 @@
         {
           text: 'Search bar',
           value: 'search-bar',
+        },
+        {
+          text: 'Select',
+          value: 'select-page',
         },
         {
           text: 'Switcher',

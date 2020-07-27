@@ -80,10 +80,12 @@
 
       label: {
         type: String,
+        default: '',
       },
 
       placeholder: {
         type: String,
+        default: '',
       },
 
       trackBy: {
@@ -128,11 +130,6 @@
       allowEmpty: {
         type: Boolean,
         default: true,
-      },
-
-      hideDetails: {
-        type: Boolean,
-        default: false,
       },
     },
 
