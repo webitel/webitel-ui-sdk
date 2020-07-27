@@ -4,6 +4,7 @@
     <article>
       <div class="example-wrapper">
         <wt-button>Primary button</wt-button>
+        <pre><code class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
       </div>
       <div class="example-wrapper">
         <wt-button color="transfer" outline large>Large transfer button</wt-button>
@@ -11,7 +12,6 @@
       <div class="example-wrapper">
         <wt-button color="secondary" wide>Wide secondary button</wt-button>
       </div>
-      <pre><code class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
     </article>
     <component-props
       :properties="properties"

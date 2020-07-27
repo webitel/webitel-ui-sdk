@@ -4,7 +4,6 @@
     <article>
       <div class="example-wrapper">
         <wt-badge>+1</wt-badge>
-        <pre><code class="language-html">&lt;wt-badge&gt;+1&lt;/wt-badge&gt;</code></pre>
       </div>
     </article>
     <article>

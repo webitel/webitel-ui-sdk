@@ -14,6 +14,9 @@
   import Colors from './pages/colors/colors.vue';
   import Badge from './pages/atoms/badge/badge.vue';
   import Btn from './pages/atoms/button/button.vue';
+  import Divider from './pages/atoms/divider/divider.vue';
+  import Loader from './pages/atoms/loader/loader.vue';
+  import Tooltip from './pages/atoms/tooltip/tooltip.vue';
 
   export default {
     name: 'the-docs',
@@ -23,6 +26,9 @@
       Colors,
       Badge,
       Btn, // Button name conflicts with default <button> tag
+      Divider,
+      Loader,
+      Tooltip,
     },
     data: () => ({
       currentTab: {
@@ -50,6 +56,18 @@
         {
           text: 'Button',
           value: 'btn',
+        },
+        {
+          text: 'Divider',
+          value: 'divider',
+        },
+        {
+          text: 'Loader',
+          value: 'loader',
+        },
+        {
+          text: 'Tooltip',
+          value: 'tooltip',
         },
       ],
     }),
