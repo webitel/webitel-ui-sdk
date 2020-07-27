@@ -21,6 +21,7 @@
   import Loader from './pages/atoms/loader/loader.vue';
   import Tooltip from './pages/atoms/tooltip/tooltip.vue';
   import Checkbox from './pages/molecules/checkbox/checkbox.vue';
+  import InputPage from './pages/molecules/input/input.vue';
   import Notification from './pages/molecules/notification/notification.vue';
   import Radio from './pages/molecules/radio/radio.vue';
   import Switcher from './pages/molecules/switcher/switcher.vue';
@@ -40,6 +41,7 @@
       Loader,
       Tooltip,
       Checkbox,
+      InputPage,
       Notification,
       Radio,
       Switcher,
@@ -100,12 +102,20 @@
           value: 'checkbox',
         },
         {
+          text: 'Input',
+          value: 'input-page',
+        },
+        {
           text: 'Notification',
           value: 'notification',
         },
         {
           text: 'Radio',
           value: 'radio',
+        },
+        {
+          text: 'Switcher',
+          value: 'switcher',
         },
       ],
     }),
