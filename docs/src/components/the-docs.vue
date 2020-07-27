@@ -26,6 +26,8 @@
   import Radio from './pages/molecules/radio/radio.vue';
   import SearchBar from './pages/molecules/search-bar/search-bar.vue';
   import Switcher from './pages/molecules/switcher/switcher.vue';
+  import TextareaPage from './pages/molecules/textarea/textarea.vue';
+  import TimeInput from './pages/molecules/time-input/time-input.vue';
 
   export default {
     name: 'the-docs',
@@ -47,6 +49,8 @@
       Radio,
       SearchBar,
       Switcher,
+      TextareaPage,
+      TimeInput,
     },
     data: () => ({
       currentTab: {
@@ -122,6 +126,14 @@
         {
           text: 'Switcher',
           value: 'switcher',
+        },
+        {
+          text: 'Textarea',
+          value: 'textarea-page',
+        },
+        {
+          text: 'Time input',
+          value: 'time-input',
         },
       ],
     }),
