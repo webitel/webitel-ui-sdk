@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Components from './components'; // init all components
 import Directives from './directives'; // init all directives
 import Filters from './filters'; // init all directives
