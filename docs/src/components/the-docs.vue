@@ -23,6 +23,7 @@
   import Checkbox from './pages/molecules/checkbox/checkbox.vue';
   import Notification from './pages/molecules/notification/notification.vue';
   import Radio from './pages/molecules/radio/radio.vue';
+  import Switcher from './pages/molecules/switcher/switcher.vue';
 
   export default {
     name: 'the-docs',
@@ -41,6 +42,7 @@
       Checkbox,
       Notification,
       Radio,
+      Switcher,
     },
     data: () => ({
       currentTab: {
