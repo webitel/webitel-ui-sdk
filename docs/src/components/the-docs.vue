@@ -20,6 +20,7 @@
   import InputLabel from './pages/atoms/label/label.vue';
   import Loader from './pages/atoms/loader/loader.vue';
   import Tooltip from './pages/atoms/tooltip/tooltip.vue';
+  import Checkbox from './pages/molecules/checkbox/checkbox.vue';
   import Notification from './pages/molecules/notification/notification.vue';
 
   export default {
@@ -36,6 +37,7 @@
       InputLabel,
       Loader,
       Tooltip,
+      Checkbox,
       Notification,
     },
     data: () => ({
@@ -88,6 +90,10 @@
         {
           text: 'Tooltip',
           value: 'tooltip',
+        },
+        {
+          text: 'Checkbox',
+          value: 'checkbox',
         },
         {
           text: 'Notification',
