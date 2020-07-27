@@ -8,22 +8,22 @@ module.exports = {
       },
     },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module
       .rule('fonts')
       .use('url-loader')
       .loader('url-loader')
-      .tap(options => {
+      .tap((options) => {
         options.limit = false;
         // изменение настроек...
-        return options
+        return options;
       });
 
-    const svgRule = config.module.rule('svg')
+    const svgRule = config.module.rule('svg');
     // очищаем все существующие загрузчики.
     // если вы этого не сделаете, загрузчик ниже будет добавлен
     // к уже существующим загрузчикам для этого правила.
-    svgRule.uses.clear()
+    svgRule.uses.clear();
 
     // добавляем загрузчик для замены
     svgRule
@@ -34,5 +34,5 @@ module.exports = {
         name: '/img/[name].[hash].[ext]',
       })
       .end();
-  }
+  },
 };

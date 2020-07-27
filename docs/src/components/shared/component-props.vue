@@ -7,6 +7,7 @@
       :key="key"
     >
       <strong class="props__prop">{{prop.value}}</strong>
+      <div class="prop__required" v-if="prop.required"><strong>Required</strong> {{prop.default}}</div>
       <div class="prop__code" v-if="prop.code">
         <pre><code class="language-html">{{prop.code}}</code></pre>
       </div>

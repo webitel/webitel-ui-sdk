@@ -15,6 +15,7 @@
   import Badge from './pages/atoms/badge/badge.vue';
   import Btn from './pages/atoms/button/button.vue';
   import Divider from './pages/atoms/divider/divider.vue';
+  import Icon from './pages/atoms/icon/icon.vue';
   import InputInfo from './pages/atoms/input-info/input-info.vue';
   import InputLabel from './pages/atoms/label/label.vue';
   import Loader from './pages/atoms/loader/loader.vue';
@@ -29,6 +30,7 @@
       Badge,
       Btn, // Button name conflicts with default <button> tag
       Divider,
+      Icon,
       InputInfo,
       InputLabel,
       Loader,
@@ -64,6 +66,10 @@
         {
           text: 'Divider',
           value: 'divider',
+        },
+        {
+          text: 'Icons',
+          value: 'icon',
         },
         {
           text: 'Input Info',

@@ -457,9 +457,7 @@
 
 <style lang="scss" scoped>
   .wt-icon {
-    @include width-fit-content;
-
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     transition: var(--transition);
