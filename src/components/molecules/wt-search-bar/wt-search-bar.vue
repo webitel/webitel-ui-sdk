@@ -40,7 +40,7 @@
        * Current search-bar value (`v-model`)
        */
       value: {
-        type: [String, Number],
+        type: String,
         default: '',
       },
       /**

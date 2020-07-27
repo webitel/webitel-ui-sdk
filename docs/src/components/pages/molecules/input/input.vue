@@ -9,6 +9,8 @@
           name="label-input"
         ></wt-input>
         <pre><code class="language-html">&lt;wt-input v-model="value" label="Input" name="label-input"&gt;&lt;/wt-input&gt;</code></pre>
+      </div>
+        <div class="example-wrapper">
         <wt-input
           v-model="value"
           label="Disabled"
@@ -17,7 +19,9 @@
           has-show-password
           disabled
         ></wt-input>
-        <wt-input
+        </div>
+      <div class="example-wrapper">
+      <wt-input
           v-model="value"
           label="Password"
           name="password-input"
@@ -25,7 +29,9 @@
           :v="vValid"
           has-show-password
         ></wt-input>
-        <wt-input
+      </div>
+      <div class="example-wrapper">
+      <wt-input
           v-model="value"
           label="Invalid input"
           name="invalid-input"

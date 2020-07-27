@@ -24,6 +24,7 @@
   import InputPage from './pages/molecules/input/input.vue';
   import Notification from './pages/molecules/notification/notification.vue';
   import Radio from './pages/molecules/radio/radio.vue';
+  import SearchBar from './pages/molecules/search-bar/search-bar.vue';
   import Switcher from './pages/molecules/switcher/switcher.vue';
 
   export default {
@@ -44,6 +45,7 @@
       InputPage,
       Notification,
       Radio,
+      SearchBar,
       Switcher,
     },
     data: () => ({
@@ -112,6 +114,10 @@
         {
           text: 'Radio',
           value: 'radio',
+        },
+        {
+          text: 'Search bar',
+          value: 'search-bar',
         },
         {
           text: 'Switcher',
