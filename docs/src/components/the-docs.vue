@@ -29,6 +29,7 @@
   import SearchBar from './pages/molecules/search-bar/search-bar.vue';
   import SelectPage from './pages/molecules/select/select.vue';
   import Switcher from './pages/molecules/switcher/switcher.vue';
+  import Tabs from './pages/molecules/tabs/tabs.vue';
   import TextareaPage from './pages/molecules/textarea/textarea.vue';
   import TimeInput from './pages/molecules/time-input/time-input.vue';
   import Timepicker from './pages/molecules/timepicker/timepicker.vue';
@@ -56,6 +57,7 @@
       SearchBar,
       SelectPage,
       Switcher,
+      Tabs,
       TextareaPage,
       TimeInput,
       Timepicker,
@@ -146,6 +148,10 @@
         {
           text: 'Switcher',
           value: 'switcher',
+        },
+        {
+          text: 'Tabs',
+          value: 'tabs',
         },
         {
           text: 'Textarea',

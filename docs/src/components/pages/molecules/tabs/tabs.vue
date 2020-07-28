@@ -1,0 +1,63 @@
+<template>
+  <section>
+    <h2>Tabs</h2>
+    <article>
+      <div class="example-wrapper">
+        <wt-tabs
+          v-model="current"
+          :tabs="tabs"
+        ></wt-tabs>
+        <pre><code class="language-html">&lt;wt-tabs v-model="current" :tabs="tabs"&gt;&lt;/wt-tabs&gt;</code></pre>
+      </div>
+    </article>
+    <component-props
+      :properties="properties"
+    ></component-props>
+  </section>
+</template>
+
+<script>
+  import Prism from 'prismjs';
+
+  export default {
+    name: 'tabs',
+    data: () => ({
+
+      current: { value: '1' },
+      tabs: [
+        {
+          text: 'Tab 1',
+          value: '1',
+        },
+        {
+          text: 'Tab 2',
+          value: '2',
+        },
+        {
+          text: 'Tab 3',
+          value: '3',
+        },
+      ],
+      properties: [
+        {
+          value: 'current',
+          code: '<wt-datepicker :current="{text: `TAB_TEXT`, value: `tab1`}"></wt-datepicker>',
+          type: 'Object',
+          default: '{}',
+        },
+        {
+          value: 'tabs',
+          code: '<wt-datepicker :tabs="[{text: `TAB_TEXT`, value: `tab1`}, {text: `TAB_TEXT2`, value: `tab2`}]"></wt-datepicker>',
+          type: 'Array',
+          default: '[]',
+        },
+      ],
+    }),
+    mounted() {
+      Prism.highlightAll();
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+</style>
