@@ -41,13 +41,13 @@
       properties: [
         {
           value: 'current',
-          code: '<wt-datepicker :current="{text: `TAB_TEXT`, value: `tab1`}"></wt-datepicker>',
+          code: '<wt-tabs :current="{text: `TAB_TEXT`, value: `tab1`}"></wt-tabs>',
           type: 'Object',
           default: '{}',
         },
         {
           value: 'tabs',
-          code: '<wt-datepicker :tabs="[{text: `TAB_TEXT`, value: `tab1`}, {text: `TAB_TEXT2`, value: `tab2`}]"></wt-datepicker>',
+          code: '<wt-tabs :tabs="[{text: `TAB_TEXT`, value: `tab1`}, {text: `TAB_TEXT2`, value: `tab2`}]"></wt-tabs>',
           type: 'Array',
           default: '[]',
         },

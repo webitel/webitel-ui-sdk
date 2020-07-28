@@ -34,6 +34,7 @@
   import TextareaPage from './pages/molecules/textarea/textarea.vue';
   import TimeInput from './pages/molecules/time-input/time-input.vue';
   import Timepicker from './pages/molecules/timepicker/timepicker.vue';
+  import Pagination from './pages/organisms/pagination/pagination.vue';
 
   export default {
     name: 'the-docs',
@@ -63,6 +64,7 @@
       TextareaPage,
       TimeInput,
       Timepicker,
+      Pagination,
     },
     data: () => ({
       currentTab: {
@@ -170,6 +172,10 @@
         {
           text: 'Timepicker',
           value: 'timepicker',
+        },
+        {
+          text: 'Pagination',
+          value: 'pagination',
         },
       ],
     }),
