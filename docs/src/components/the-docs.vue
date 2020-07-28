@@ -25,6 +25,7 @@
   import Datetimepicker from './pages/molecules/datetimepicker/datetimepicker.vue';
   import InputPage from './pages/molecules/input/input.vue';
   import Notification from './pages/molecules/notification/notification.vue';
+  import Popup from './pages/molecules/popup/popup.vue';
   import Radio from './pages/molecules/radio/radio.vue';
   import SearchBar from './pages/molecules/search-bar/search-bar.vue';
   import SelectPage from './pages/molecules/select/select.vue';
@@ -53,6 +54,7 @@
       Datetimepicker,
       InputPage,
       Notification,
+      Popup,
       Radio,
       SearchBar,
       SelectPage,
@@ -132,6 +134,10 @@
         {
           text: 'Notification',
           value: 'notification',
+        },
+        {
+          text: 'Popup',
+          value: 'popup',
         },
         {
           text: 'Radio',
