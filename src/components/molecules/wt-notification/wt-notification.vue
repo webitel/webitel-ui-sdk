@@ -10,7 +10,7 @@
     ></wt-icon>
 
     <p class="wt-notification__text">
-      {{notification.text}}
+      <slot></slot>
     </p>
   </article>
 </template>
@@ -20,21 +20,21 @@
   export default {
     name: 'wt-notification',
     props: {
-      notification: {
-        type: Object,
-        required: true,
+      type: {
+        type: String,
+        default: 'info',
       },
     },
     computed: {
       notificationIcon() {
-        switch (this.notification.type) {
+        switch (this.type) {
           case 'info': return 'rounded_tick';
           case 'error': return 'attention';
           default: return '';
         }
       },
       notificationIconColor() {
-        switch (this.notification.type) {
+        switch (this.type) {
           case 'info': return 'true';
           case 'error': return 'false';
           default: return '';
