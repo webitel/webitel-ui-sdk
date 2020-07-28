@@ -19,6 +19,10 @@
   <code class="language-html">&lt;wt-radio v-model="selected" :value="value2" label="Radio 2"&gt;&lt;/wt-radio&gt;</code></pre>
       </div>
     </article>
+    <component-model
+      prop="selected"
+      event="input"
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

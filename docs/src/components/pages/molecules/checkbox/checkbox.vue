@@ -35,6 +35,11 @@
         ></wt-checkbox>
       </div>
     </article>
+
+    <component-model
+      prop="selected"
+      event="change"
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

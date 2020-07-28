@@ -39,6 +39,8 @@
         ></wt-input>
       </div>
     </article>
+    <component-model
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

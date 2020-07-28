@@ -47,7 +47,7 @@
     },
     model: {
       prop: 'value',
-      event: 'change',
+      event: 'input',
     },
 
     created() {
@@ -69,7 +69,7 @@
         },
         set(value) {
           const newValue = new Date(this.value).setHours(value);
-          this.$emit('change', newValue);
+          this.$emit('input', newValue);
         },
       },
       min: {
@@ -78,7 +78,7 @@
         },
         set(value) {
           const newValue = new Date(this.value).setMinutes(value);
-          this.$emit('change', newValue);
+          this.$emit('input', newValue);
         },
       },
       sec: {
@@ -87,7 +87,7 @@
         },
         set(value) {
           const newValue = new Date(this.value).setSeconds(value);
-          this.$emit('change', newValue);
+          this.$emit('input', newValue);
         },
       },
     },

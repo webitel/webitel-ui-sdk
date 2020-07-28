@@ -11,6 +11,8 @@
         <pre><code class="language-html">&lt;wt-textarea v-model="value" label="Textarea" name="textarea-textarea"&gt;&lt;/wt-textarea&gt;</code></pre>
       </div>
     </article>
+    <component-model
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

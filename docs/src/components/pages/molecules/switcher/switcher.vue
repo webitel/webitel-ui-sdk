@@ -20,6 +20,9 @@
         <pre><code class="language-html">&lt;wt-switcher v-model="value" label="Switcher"&gt;&lt;/wt-switcher&gt;</code></pre>
       </div>
     </article>
+    <component-model
+      event="change"
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

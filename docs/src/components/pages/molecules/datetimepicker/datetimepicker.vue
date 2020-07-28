@@ -11,6 +11,9 @@
         <span>value: {{value}}</span>
       </div>
     </article>
+    <component-model
+      event="change"
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

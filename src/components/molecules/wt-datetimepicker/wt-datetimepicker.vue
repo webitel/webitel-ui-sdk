@@ -48,7 +48,7 @@
           :maximum-view="'day'"
           monday-first
           inline
-          @input="setDraft($event.getTime())"
+          @change="setDraft($event.getTime())"
         ></datepicker>
         <wt-timepicker
           class="wt-datetimepicker__timepicker"

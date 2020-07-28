@@ -57,6 +57,8 @@
         ></wt-select>
       </div>
     </article>
+    <component-model
+    ></component-model>
     <h3>Full docs: <a class="full-docs-link" href="https://vue-multiselect.js.org/">Vue Multiselect</a></h3>
     <component-props
       :properties="properties"

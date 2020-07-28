@@ -25,6 +25,8 @@
         </code></pre>
       </div>
     </article>
+    <component-model
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

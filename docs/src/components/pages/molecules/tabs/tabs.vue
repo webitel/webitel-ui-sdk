@@ -10,6 +10,10 @@
         <pre><code class="language-html">&lt;wt-tabs v-model="current" :tabs="tabs"&gt;&lt;/wt-tabs&gt;</code></pre>
       </div>
     </article>
+    <component-model
+      prop="current"
+      event="change"
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>

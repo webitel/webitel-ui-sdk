@@ -19,7 +19,7 @@
       :lang="lang"
       calendar-button
       monday-first
-      @input="$emit('input', $event.getTime())"
+      @input="$emit('change', $event.getTime())"
     >
     </vue-datepicker>
   </div>
@@ -63,6 +63,10 @@
         type: String,
         default: 'en',
       },
+    },
+    model: {
+      prop: 'value',
+      event: 'change',
     },
   };
 </script>

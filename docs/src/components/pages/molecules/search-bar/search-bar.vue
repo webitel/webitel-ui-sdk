@@ -10,6 +10,8 @@
         <pre><code class="language-html">&lt;wt-search-bar v-model="value" label="Search"&gt;&lt;/wt-search-bar&gt;</code></pre>
       </div>
     </article>
+    <component-model
+    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>
