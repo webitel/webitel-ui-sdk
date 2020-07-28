@@ -34,6 +34,7 @@
       },
       label: {
         type: String,
+        default: '',
       },
       format: {
         type: String,

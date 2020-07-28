@@ -80,9 +80,11 @@
     props: {
       value: {
         type: [String, Number],
+        default: 'Date.now()',
       },
       label: {
         type: String,
+        default: '',
       },
       disabled: {
         type: Boolean,

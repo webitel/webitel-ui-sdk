@@ -36,16 +36,17 @@
     props: {
       value: {
         type: [String, Number],
-        default: Date.now(),
+        default: 'Date.now()',
       },
       /**
        * label above calendar input
        */
       label: {
         type: String,
+        default: '',
       },
       format: {
-        type: String,
+        type: [String, Function],
       },
       maximumView: {
         type: String,

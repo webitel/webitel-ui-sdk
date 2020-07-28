@@ -188,8 +188,4 @@
 </script>
 
 <style lang="scss" scoped>
-  .full-docs-link {
-    color: revert;
-    text-decoration: underline;
-  }
 </style>

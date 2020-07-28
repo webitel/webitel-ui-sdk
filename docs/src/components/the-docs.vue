@@ -21,6 +21,8 @@
   import Loader from './pages/atoms/loader/loader.vue';
   import Tooltip from './pages/atoms/tooltip/tooltip.vue';
   import Checkbox from './pages/molecules/checkbox/checkbox.vue';
+  import Datepicker from './pages/molecules/datepicker/datepicker.vue';
+  import Datetimepicker from './pages/molecules/datetimepicker/datetimepicker.vue';
   import InputPage from './pages/molecules/input/input.vue';
   import Notification from './pages/molecules/notification/notification.vue';
   import Radio from './pages/molecules/radio/radio.vue';
@@ -29,6 +31,7 @@
   import Switcher from './pages/molecules/switcher/switcher.vue';
   import TextareaPage from './pages/molecules/textarea/textarea.vue';
   import TimeInput from './pages/molecules/time-input/time-input.vue';
+  import Timepicker from './pages/molecules/timepicker/timepicker.vue';
 
   export default {
     name: 'the-docs',
@@ -45,14 +48,17 @@
       Loader,
       Tooltip,
       Checkbox,
+      Datepicker,
+      Datetimepicker,
       InputPage,
       Notification,
       Radio,
       SearchBar,
+      SelectPage,
       Switcher,
       TextareaPage,
       TimeInput,
-      SelectPage,
+      Timepicker,
     },
     data: () => ({
       currentTab: {
@@ -110,6 +116,14 @@
           value: 'checkbox',
         },
         {
+          text: 'Datepicker',
+          value: 'datepicker',
+        },
+        {
+          text: 'Datetimepicker',
+          value: 'datetimepicker',
+        },
+        {
           text: 'Input',
           value: 'input-page',
         },
@@ -140,6 +154,10 @@
         {
           text: 'Time input',
           value: 'time-input',
+        },
+        {
+          text: 'Timepicker',
+          value: 'timepicker',
         },
       ],
     }),
