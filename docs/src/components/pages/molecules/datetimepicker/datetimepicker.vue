@@ -17,6 +17,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -45,6 +48,14 @@
           code: '<wt-datetimepicker disabled></wt-datetimepicker>',
           type: 'Boolean',
           default: 'false',
+        },
+      ],
+      events: [
+        {
+          value: 'change',
+          params: [
+            { name: 'timestamp value', type: 'Number' },
+          ],
         },
       ],
     }),

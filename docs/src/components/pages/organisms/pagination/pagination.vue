@@ -25,6 +25,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -51,6 +54,30 @@
           type: Boolean,
           default: true,
           description: 'Is false, disables paging arrow',
+        },
+      ],
+      events: [
+        {
+          value: 'change',
+          params: [
+            {
+              name: 'changed size value',
+              type: 'String',
+              description: 'If "debounced" is true,event is debounced.',
+            },
+          ],
+        },
+        {
+          value: 'next',
+          params: [
+            { description: 'Event is triggered on "next" arrow click' },
+          ],
+        },
+        {
+          value: 'prev',
+          params: [
+            { description: 'Event is triggered on "prev" arrow click' },
+          ],
         },
       ],
     }),

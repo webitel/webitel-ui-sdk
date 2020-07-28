@@ -15,6 +15,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -56,6 +59,34 @@
           code: '<wt-search-bar outline></wt-search-bar>',
           type: 'Boolean',
           default: 'false',
+        },
+      ],
+      events: [
+        {
+          value: 'input',
+          params: [
+            { name: 'value', type: 'String', description: 'immediately sends changed value' },
+          ],
+        },
+        {
+          value: 'enter',
+          params: [
+            {
+              name: 'value',
+              type: 'String',
+              description: 'immediately sends immediate changed value on Enter key press',
+            },
+          ],
+        },
+        {
+          value: 'search',
+          params: [
+            {
+              name: 'value',
+              type: 'String',
+              description: 'Sends changed value, immediately, or, if "debounced" is on, debounced. Recommended for api search requests',
+            },
+          ],
         },
       ],
     }),

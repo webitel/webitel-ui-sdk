@@ -17,6 +17,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -54,6 +57,14 @@
           code: '<wt-tabs :tabs="[{text: `TAB_TEXT`, value: `tab1`}, {text: `TAB_TEXT2`, value: `tab2`}]"></wt-tabs>',
           type: 'Array',
           default: '[]',
+        },
+      ],
+      events: [
+        {
+          value: 'change',
+          params: [
+            { name: 'tab', type: 'Object', description: 'Returns tab object from list of tabs' },
+          ],
         },
       ],
     }),

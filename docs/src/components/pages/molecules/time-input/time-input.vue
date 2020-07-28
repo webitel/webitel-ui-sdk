@@ -34,6 +34,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -89,6 +92,14 @@
           code: '<wt-time-input outline></wt-time-input>',
           type: 'Boolean',
           default: 'false',
+        },
+      ],
+      events: [
+        {
+          value: 'input',
+          params: [
+            { name: 'value', type: 'Number' },
+          ],
         },
       ],
     }),

@@ -18,6 +18,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -74,6 +77,14 @@
           type: 'String',
           default: 'en',
           description: 'FEATURE REQUEST: bind datepicker lang to i18n locale',
+        },
+      ],
+      events: [
+        {
+          value: 'change',
+          params: [
+            { name: 'timestamp value', type: 'Number' },
+          ],
         },
       ],
     }),

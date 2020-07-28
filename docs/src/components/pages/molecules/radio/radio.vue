@@ -26,6 +26,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -77,6 +80,14 @@
           type: 'Boolean',
           default: 'false',
           description: 'Changes visual style to outlined',
+        },
+      ],
+      events: [
+        {
+          value: 'input',
+          params: [
+            { name: '"value" prop', type: 'String' },
+          ],
         },
       ],
     }),

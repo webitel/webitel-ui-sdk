@@ -4,7 +4,8 @@
     <article>
       <div class="example-wrapper">
         <wt-button>Primary button</wt-button>
-        <pre><code class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
+        <pre><code
+          class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
       </div>
       <div class="example-wrapper">
         <wt-button large>Large button</wt-button>
@@ -32,6 +33,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -75,6 +79,14 @@
           type: 'Boolean',
           default: 'false',
           description: 'Stretches button to all available width',
+        },
+      ],
+      events: [
+        {
+          value: 'click',
+          params: [
+            { name: 'event', type: 'Event' },
+          ],
         },
       ],
     }),

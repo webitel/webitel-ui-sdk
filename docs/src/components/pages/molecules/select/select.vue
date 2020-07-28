@@ -63,6 +63,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -180,6 +183,17 @@
           type: 'Boolean',
           default: 'false',
           description: 'Allows to remove all selected values. Otherwise one must be left selected.',
+        },
+      ],
+      events: [
+        {
+          value: 'input',
+          params: [
+            { name: 'value', type: ['String', 'Array'] },
+          ],
+        },
+        {
+          value: 'closed',
         },
       ],
     }),

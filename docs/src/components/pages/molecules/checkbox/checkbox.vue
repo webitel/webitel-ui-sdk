@@ -43,6 +43,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -88,6 +91,14 @@
           type: 'Boolean',
           default: 'false',
           description: 'Changes visual style to outlined',
+        },
+      ],
+      events: [
+        {
+          value: 'change',
+          params: [
+            { name: 'selected value', type: ['Boolean', 'Array'] },
+          ],
         },
       ],
     }),

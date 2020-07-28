@@ -41,6 +41,9 @@
           </code></pre>
       </div>
     </article>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -49,7 +52,13 @@
 
   export default {
     name: 'popup',
-    data: () => ({}),
+    data: () => ({
+      events: [
+        {
+          value: 'close',
+        },
+      ],
+    }),
     mounted() {
       Prism.highlightAll();
     },

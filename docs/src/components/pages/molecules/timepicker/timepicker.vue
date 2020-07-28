@@ -30,6 +30,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -65,6 +68,14 @@
           code: '<wt-timepicker disabled></wt-timepicker>',
           type: 'Boolean',
           default: 'false',
+        },
+      ],
+      events: [
+        {
+          value: 'input',
+          params: [
+            { name: 'value', type: 'Number timestamp', description: 'Event is triggered immediately after value change.' },
+          ],
         },
       ],
     }),

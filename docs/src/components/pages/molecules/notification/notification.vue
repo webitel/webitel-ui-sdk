@@ -23,6 +23,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
     <article>
       <h3>Notification positioning</h3>
       <p>By default, notification positioning is static. If you want make it absolute, you should do it
@@ -47,6 +50,11 @@
           type: 'String',
           options: ['"info"', '"error"'],
           default: 'info',
+        },
+      ],
+      events: [
+        {
+          value: 'close',
         },
       ],
     }),

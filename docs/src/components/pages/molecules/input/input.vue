@@ -44,6 +44,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -132,6 +135,14 @@
           code: '<wt-input outline></wt-input>',
           type: 'Boolean',
           default: 'false',
+        },
+      ],
+      events: [
+        {
+          value: 'input',
+          params: [
+            { name: 'input value', type: "['String', 'Number'], depends on input type" },
+          ],
         },
       ],
     }),
