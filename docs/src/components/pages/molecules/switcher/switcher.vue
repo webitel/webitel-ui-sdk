@@ -29,6 +29,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -71,6 +74,13 @@
           params: [
             { name: 'value', type: 'Boolean', description: 'Returns inverted value' },
           ],
+        },
+      ],
+      slots: [
+        {
+          name: 'label',
+          scope: [{ name: 'label' }],
+          description: 'Custom label slot',
         },
       ],
     }),

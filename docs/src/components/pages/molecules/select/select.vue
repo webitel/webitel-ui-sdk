@@ -59,13 +59,17 @@
     </article>
     <component-model
     ></component-model>
-    <h3>Full docs: <a class="full-docs-link" href="https://vue-multiselect.js.org/">Vue Multiselect</a></h3>
+    <h3>Full docs: <a class="full-docs-link" href="https://vue-multiselect.js.org/">Vue
+      Multiselect</a></h3>
     <component-props
       :properties="properties"
     ></component-props>
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -194,6 +198,13 @@
         },
         {
           value: 'closed',
+        },
+      ],
+      slots: [
+        {
+          name: 'label',
+          scope: [{ name: 'label' }],
+          description: 'Custom label slot',
         },
       ],
     }),

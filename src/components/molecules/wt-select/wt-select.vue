@@ -11,7 +11,8 @@
       :disabled="disabled"
       :invalid="invalid"
     >
-      {{label}}
+      <!-- @slot Custom input label -->
+      <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
     <vue-multiselect
       class="wt-select__select"

@@ -46,6 +46,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -99,6 +102,13 @@
           params: [
             { name: 'selected value', type: ['Boolean', 'Array'] },
           ],
+        },
+      ],
+      slots: [
+        {
+          name: 'label',
+          scope: [{ name: 'label' }],
+          description: 'Custom label slot',
         },
       ],
     }),

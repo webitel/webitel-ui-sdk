@@ -19,6 +19,8 @@
           .my-div { @extend .wt-badge; }
         </code></pre>
     </article>
+    <component-slots
+    ></component-slots>
   </section>
 </template>
 

@@ -10,6 +10,8 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-slots
+    ></component-slots>
   </section>
 </template>
 
@@ -17,7 +19,7 @@
   import Prism from 'prismjs';
 
   export default {
-    name: 'label',
+    name: 'label-page',
     data: () => ({
       properties: [
         {

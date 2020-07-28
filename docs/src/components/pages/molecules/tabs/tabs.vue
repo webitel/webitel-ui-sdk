@@ -20,6 +20,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -29,7 +32,6 @@
   export default {
     name: 'tabs',
     data: () => ({
-
       current: { value: '1' },
       tabs: [
         {
@@ -65,6 +67,13 @@
           params: [
             { name: 'tab', type: 'Object', description: 'Returns tab object from list of tabs' },
           ],
+        },
+      ],
+      slots: [
+        {
+          name: ':tab-value',
+          scope: [{ name: 'tab' }, { name: 'current' }],
+          description: 'Custom tab contents slot',
         },
       ],
     }),

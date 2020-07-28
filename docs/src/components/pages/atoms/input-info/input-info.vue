@@ -10,6 +10,8 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-slots
+    ></component-slots>
   </section>
 </template>
 

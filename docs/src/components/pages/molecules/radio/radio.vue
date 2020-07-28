@@ -29,6 +29,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -88,6 +91,13 @@
           params: [
             { name: '"value" prop', type: 'String' },
           ],
+        },
+      ],
+      slots: [
+        {
+          name: 'label',
+          scope: [{ name: 'label' }],
+          description: 'Custom label slot',
         },
       ],
     }),

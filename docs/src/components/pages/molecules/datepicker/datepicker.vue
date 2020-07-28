@@ -11,7 +11,8 @@
         <span>value: {{value}}</span>
       </div>
     </article>
-    <h3>Full docs: <a class="full-docs-link" href="https://www.npmjs.com/package/vuejs-datepicker">Vuejs Datepicker</a></h3>
+    <h3>Full docs: <a class="full-docs-link" href="https://www.npmjs.com/package/vuejs-datepicker">Vuejs
+      Datepicker</a></h3>
     <component-model
       prop="change"
     ></component-model>
@@ -21,6 +22,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -85,6 +89,13 @@
           params: [
             { name: 'timestamp value', type: 'Number' },
           ],
+        },
+      ],
+      slots: [
+        {
+          name: 'label',
+          scope: [{ name: 'label' }],
+          description: 'Custom label slot',
         },
       ],
     }),

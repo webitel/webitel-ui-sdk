@@ -32,6 +32,8 @@
           .wt-tooltip { position: absolute; }
         </code></pre>
     </article>
+    <component-slots
+    ></component-slots>
   </section>
 </template>
 

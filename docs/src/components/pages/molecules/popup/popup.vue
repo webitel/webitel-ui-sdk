@@ -44,6 +44,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -56,6 +59,20 @@
       events: [
         {
           value: 'close',
+        },
+      ],
+      slots: [
+        {
+          name: 'header',
+          description: 'popup header slot',
+        },
+        {
+          name: 'main',
+          description: 'popup main content slot',
+        },
+        {
+          name: 'actions',
+          description: 'popup actions slot',
         },
       ],
     }),

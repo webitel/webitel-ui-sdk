@@ -10,7 +10,7 @@
         ></wt-input>
         <pre><code class="language-html">&lt;wt-input v-model="value" label="Input" name="label-input"&gt;&lt;/wt-input&gt;</code></pre>
       </div>
-        <div class="example-wrapper">
+      <div class="example-wrapper">
         <wt-input
           v-model="value"
           label="Disabled"
@@ -19,9 +19,9 @@
           has-show-password
           disabled
         ></wt-input>
-        </div>
+      </div>
       <div class="example-wrapper">
-      <wt-input
+        <wt-input
           v-model="value"
           label="Password"
           name="password-input"
@@ -31,7 +31,7 @@
         ></wt-input>
       </div>
       <div class="example-wrapper">
-      <wt-input
+        <wt-input
           v-model="value"
           label="Invalid input"
           name="invalid-input"
@@ -47,6 +47,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -143,6 +146,21 @@
           params: [
             { name: 'input value', type: "['String', 'Number'], depends on input type" },
           ],
+        },
+      ],
+      slots: [
+        {
+          name: 'label',
+          scope: [{ name: 'label' }],
+          description: 'Custom label slot',
+        },
+        {
+          name: 'show-password',
+          scope: [{ name: 'isPasswordVisible' }, {
+            name: 'switchVisibilityPassword',
+            description: 'change icon method',
+          }],
+          description: 'Replace show password icon',
         },
       ],
     }),
