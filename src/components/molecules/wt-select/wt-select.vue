@@ -11,7 +11,8 @@
       :disabled="disabled"
       :invalid="invalid"
     >
-      {{label}}
+      <!-- @slot Custom input label -->
+      <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
     <vue-multiselect
       class="wt-select__select"
@@ -80,10 +81,12 @@
 
       label: {
         type: String,
+        default: '',
       },
 
       placeholder: {
         type: String,
+        default: '',
       },
 
       trackBy: {
@@ -128,11 +131,6 @@
       allowEmpty: {
         type: Boolean,
         default: true,
-      },
-
-      hideDetails: {
-        type: Boolean,
-        default: false,
       },
     },
 

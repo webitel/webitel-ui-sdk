@@ -19,7 +19,7 @@
       :lang="lang"
       calendar-button
       monday-first
-      @input="$emit('input', $event.getTime())"
+      @input="$emit('change', $event.getTime())"
     >
     </vue-datepicker>
   </div>
@@ -36,16 +36,17 @@
     props: {
       value: {
         type: [String, Number],
-        default: Date.now(),
+        default: 'Date.now()',
       },
       /**
        * label above calendar input
        */
       label: {
         type: String,
+        default: '',
       },
       format: {
-        type: String,
+        type: [String, Function],
       },
       maximumView: {
         type: String,
@@ -62,6 +63,10 @@
         type: String,
         default: 'en',
       },
+    },
+    model: {
+      prop: 'value',
+      event: 'change',
     },
   };
 </script>

@@ -33,7 +33,7 @@
        * Current input value (`v-model`)
        */
       value: {
-        type: [String, Number],
+        type: Number,
         default: 0,
       },
       /**
