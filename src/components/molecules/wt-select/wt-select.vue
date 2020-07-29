@@ -8,6 +8,7 @@
   >
     <wt-label
       class="wt-select__label"
+      v-if="hasLabel"
       :disabled="disabled"
       :invalid="invalid"
     >
@@ -145,6 +146,10 @@
     },
 
     computed: {
+        hasLabel() {
+            return !!(this.label || this.$slots.label);
+        },
+
       selectOptions() {
         if (!this.internalSearch) {
           return this.fetchedOptions;
@@ -187,6 +192,10 @@
 <style lang="scss" scoped>
   @import '~vue-multiselect/dist/vue-multiselect.min.css';
   @import '../../../css/components/atoms/wt-badge/wt-badge';
+
+  .wt-select {
+      width: 100%;
+  }
 
   .wt-label {
     margin-bottom: var(--label-margin);

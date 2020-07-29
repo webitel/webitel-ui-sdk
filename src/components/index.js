@@ -25,6 +25,7 @@ import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
 
 import WtPagination from './organisms/wt-pagination/wt-pagination.vue';
+import WtTable from './organisms/wt-table/wt-table.vue';
 
 const Components = {
   WtIcon,
@@ -51,6 +52,7 @@ const Components = {
   WtTimepicker,
   WtTextarea,
   WtPagination,
+  WtTable,
 };
 
 Object.keys(Components).forEach((name) => {

@@ -1,0 +1,15 @@
+
+:root {
+  --table-col-min-width: 150px;
+
+  --table-head-sort-arrow-margin: 10px;
+  --table-head-borer-bottom: 1px solid;
+  --table-head-borer-color: var(--main-ouline-color);
+
+  --table-column-gap: 20px;
+  --table-row-padding: 10px;
+
+  --table-primary-color: var(--main-primary-color);
+  --table--hover-color: var(--main-secondary-accent-color);
+  --table-secondary-color: #F9F9F9; // zebra
+}
