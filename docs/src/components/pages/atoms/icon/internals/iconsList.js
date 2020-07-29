@@ -36,11 +36,13 @@ export default [
   'icon-hold--md',
   'icon-contacts--md',
   'icon-attention--md',
+
   'icon-widget-missed--sm',
   'icon-widget-handles--sm',
   'icon-widget-inbound--sm',
   'icon-widget-avg_hold--sm',
   'icon-widget-avg_talk--sm',
+
   'icon-call--lg',
   'icon-call-end--lg',
   'icon-call-transfer--lg',
@@ -53,8 +55,12 @@ export default [
   'icon-call-add_to--md',
   'icon-call-incoming--md',
   'icon-call--sm',
+
   'icon-chat-transfer--md',
   'icon-chat-end--md',
+
+  'icon-sort-arrow-up--md',
+  'icon-sort-arrow-down--md',
   'icon-arrow-down--md',
   'icon-arrow-left--md',
   'icon-arrow-right--md',
