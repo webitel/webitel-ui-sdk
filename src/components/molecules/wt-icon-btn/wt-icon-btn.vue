@@ -1,7 +1,12 @@
 <template>
   <div class="wt-icon-btn" :class="{ 'wt-icon-btn--disabled': disabled }">
     <button class="wt-icon-btn__button">
-      <wt-icon :icon="icon" :size="size" :color="color"></wt-icon>
+      <wt-icon
+        :icon="icon"
+        :size="size"
+        :color="color"
+        @click="$emit('click', $event)"
+      ></wt-icon>
     </button>
     <wt-tooltip v-if="tooltip">{{tooltip}}</wt-tooltip>
   </div>

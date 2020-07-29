@@ -4,6 +4,10 @@ package-lock.json
 /dist
 demo.html
 
+docs/node_modules
+docs/dist
+docs/package-lock.json
+
 # local env files
 .env.local
 .env.*.local

@@ -56,11 +56,14 @@
       <h2>wt-notification</h2>
       <wt-notification type="info">lorem ipsum</wt-notification>
       <wt-notification type="error">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque consectetur, debitis
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque consectetur,
+        debitis
       </wt-notification>
 
       <wt-notification type="error">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aut deserunt et eum exercitationem hic labore libero minus nam optio, praesentium, quas quasi quia rem repellendus sunt tempora tempore voluptas?'
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aut deserunt et eum
+        exercitationem hic labore libero minus nam optio, praesentium, quas quasi quia rem
+        repellendus sunt tempora tempore voluptas?'
       </wt-notification>
     </div>
 
@@ -324,6 +327,25 @@
         :prev="true"
       ></wt-pagination>
     </div>
+    <div>
+      <h2>Table</h2>
+      <wt-table
+        :headers="table.headers"
+        :data="table.data"
+        sortable
+      >
+        <template slot="h2">
+          <wt-select
+            v-model="select.multipleValue"
+            :options="select.options"
+            :close-on-select="false"
+            track-by="name"
+            placeholder="placeholder"
+            multiple
+          ></wt-select>
+        </template>
+      </wt-table>
+    </div>
   </div>
 </template>
 
@@ -425,6 +447,95 @@
       },
       pagination: {
         size: 10,
+      },
+      table: {
+        headers: [
+          {
+            text: 'heading 1',
+            value: 'h1',
+            sort: 'desc',
+          },
+          {
+            text: 'heading2',
+            value: 'h2',
+            sort: 'asc',
+          },
+          {
+            text: 'heading 3',
+            value: 'h3',
+          },
+          {
+            text: 'heading 1',
+            value: 'h1',
+            sort: 'desc',
+          },
+          {
+            text: 'heading 2',
+            value: 'h2',
+            sort: 'asc',
+          },
+          {
+            text: 'heading 3',
+            value: 'h3',
+          },
+          {
+            text: 'heading 1',
+            value: 'h1',
+            sort: 'desc',
+          },
+          {
+            text: 'heading 2',
+            value: 'h2',
+            sort: 'asc',
+          },
+          {
+            text: 'heading 3',
+            value: 'h3',
+          },
+        ],
+        data: [
+          {
+            h1: 'heading    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequatur cum cupiditate dignissimos facilis hic impedit incidunt itaque labore maxime, numquam perspiciatis saepe sapiente ullam ut. Deleniti iure odio quibusdam!\n1',
+            h2: 'heading 2',
+            h3: 'heading 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'heading    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequatur cum cupiditate dignissimos facilis hic impedit incidunt itaque labore maxime, numquam perspiciatis saepe sapiente ullam ut. Deleniti iure odio quibusdam!\n1',
+            h2: 'heading 2',
+            h3: 'heading 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'heading    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequatur cum cupiditate dignissimos facilis hic impedit incidunt itaque labore maxime, numquam perspiciatis saepe sapiente ullam ut. Deleniti iure odio quibusdam!\n1',
+            h2: 'heading 2',
+            h3: 'heading 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'heading 1',
+            h2: 'heading 2',
+            h3: 'heading 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'heading 1',
+            h2: 'heading 2',
+            h3: 'heading 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'heading 1',
+            h2: 'heading 2',
+            h3: 'heading 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'heading 1',
+            h2: 'heading 2',
+            h3: 'heading 3',
+            _isSelected: false,
+          }],
       },
     }),
   };
