@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.1.14",
+  "version": "0.2.0",
   "private": false,
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [
