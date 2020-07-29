@@ -88,8 +88,10 @@
     transition: var(--transition);
     cursor: pointer;
     z-index: var(--tab-z-index);
+    outline: none;
 
-    &:hover {
+    &:hover,
+    &:focus, {
       @extend %typo-strong-lg;
       color: var(--tab--hover-color);
     }
