@@ -51,8 +51,8 @@
         {
           value: 'next',
           code: '<wt-pagination :next="isNext"></wt-pagination>',
-          type: Boolean,
-          default: true,
+          type: 'Boolean',
+          default: 'true',
           description: 'Is false, disables paging arrow',
         },
       ],
