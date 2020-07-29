@@ -35,6 +35,7 @@
   import TimeInput from './pages/molecules/time-input/time-input.vue';
   import Timepicker from './pages/molecules/timepicker/timepicker.vue';
   import Pagination from './pages/organisms/pagination/pagination.vue';
+  import TablePage from './pages/organisms/table/table.vue';
 
   export default {
     name: 'the-docs',
@@ -65,6 +66,7 @@
       TimeInput,
       Timepicker,
       Pagination,
+      TablePage,
     },
     data: () => ({
       currentTab: {
@@ -176,6 +178,10 @@
         {
           text: 'Pagination',
           value: 'pagination',
+        },
+        {
+          text: 'Table',
+          value: 'table-page',
         },
       ],
     }),
