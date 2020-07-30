@@ -5,7 +5,7 @@
         :icon="icon"
         :size="size"
         :color="color"
-        @click="$emit('click', $event)"
+        @click.native="$emit('click', $event)"
       ></wt-icon>
     </button>
     <wt-tooltip v-if="tooltip">{{tooltip}}</wt-tooltip>
@@ -70,5 +70,10 @@
       opacity: 1;
       pointer-events: auto;
     }
+  }
+
+  .wt-icon-btn,
+  .wt-icon-btn__button {
+    line-height: 0;
   }
 </style>

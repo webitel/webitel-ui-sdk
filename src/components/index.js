@@ -24,6 +24,10 @@ import WtTimeInput from './molecules/wt-time-input/wt-time-input.vue';
 import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
 
+import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
+import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
+import WtHeaderActions from './organisms/wt-app-header/wt-header-actions.vue';
+import WtNotificationsBar from './organisms/wt-notifications-bar/wt-notifications-bar.vue';
 import WtPagination from './organisms/wt-pagination/wt-pagination.vue';
 import WtTable from './organisms/wt-table/wt-table.vue';
 
@@ -51,6 +55,10 @@ const Components = {
   WtTimeInput,
   WtTimepicker,
   WtTextarea,
+  WtAppHeader,
+  WtAppNavigator,
+  WtHeaderActions,
+  WtNotificationsBar,
   WtPagination,
   WtTable,
 };
