@@ -1,6 +1,7 @@
 :root {
-  --scrollbar-width: 4px;
-  --scrollbar-thumb-width: 4px;
+  --scrollbar-width: 8px;
+  --scrollbar-height: 8px;
+  --scrollbar-thumb-width: 8px;
   --scrollbar-bg-color: var(--main-ouline-color);
   --scrollbar-thumb-color: var(--main-accent-color);
   --scrollbar-border-radius: 7px;
@@ -10,7 +11,7 @@
   // scrollbar itself
   &::-webkit-scrollbar {
     width: var(--scrollbar-width);
-    height: var(--scrollbar-width);
+    height: var(--scrollbar-height);
     background-color: var(--scrollbar-bg-color);
     cursor: pointer;
   }
@@ -18,7 +19,7 @@
   // scrollable element
   &::-webkit-scrollbar-thumb {
     width: var(--scrollbar-thumb-width);
-    height: var(--scrollbar-thumb-width);
+    height: var(--scrollbar-thumb-height);
     background-color: var(--scrollbar-thumb-color);
     border-radius: var(--scrollbar-border-radius);
   }

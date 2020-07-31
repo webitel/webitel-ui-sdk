@@ -8,6 +8,7 @@
       @click="isOpened = !isOpened"
       v-clickaway="close"
     ></wt-icon-btn>
+    <transition name="fade">
     <section class="wt-header-actions__panel-wrapper" v-show="isOpened">
       <header class="wt-header-actions__header" v-if="isHeader">
         <h3
@@ -47,6 +48,7 @@
         </li>
       </ul>
     </section>
+    </transition>
   </div>
 </template>
 

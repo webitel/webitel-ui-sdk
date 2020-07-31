@@ -7,35 +7,37 @@
       icon="app_navigator"
       @click="isOpened = !isOpened"
     ></wt-icon-btn>
-    <nav
-      class="wt-app-navigator__nav-wrapper"
-      v-show="isOpened"
-    >
-      <h3 class="wt-app-navigator__nav-title">
-        {{$t('webitelUI.appNavigator.title')}}
-      </h3>
-      <ul class="wt-app-navigator__nav">
-        <li
-          class="wt-app-navigator__card"
-          :class="{'active': activeApp === app.name}"
-          v-for="(app, key) of navApps"
-          :key="key"
-        >
-          <a
-            class="wt-app-navigator__card__link"
-            :href="app.href"
-            :title="app.title"
-            target="_blank"
+    <transition name="fade">
+      <nav
+        class="wt-app-navigator__nav-wrapper"
+        v-show="isOpened"
+      >
+        <h3 class="wt-app-navigator__nav-title">
+          {{$t('webitelUI.appNavigator.title')}}
+        </h3>
+        <ul class="wt-app-navigator__nav">
+          <li
+            class="wt-app-navigator__card"
+            :class="{'active': activeApp === app.name}"
+            v-for="(app, key) of navApps"
+            :key="key"
           >
-            <img
-              class="wt-app-navigator__card__img"
-              :src="app.img"
-              :alt="`${app.name}-pic`"
+            <a
+              class="wt-app-navigator__card__link"
+              :href="app.href"
+              :title="app.title"
+              target="_blank"
             >
-          </a>
-        </li>
-      </ul>
-    </nav>
+              <img
+                class="wt-app-navigator__card__img"
+                :src="app.img"
+                :alt="`${app.name}-pic`"
+              >
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </transition>
   </div>
 </template>
 
@@ -103,7 +105,7 @@
         const navApps = [agentApp, supervisorApp, historyApp, auditApp, adminApp];
         if (this.$config?.ON_SITE) navApps.push(grafanaApp);
 
-        const apps = navApps
+        return navApps
           // filter apps, passed in prop
           .filter((navApp) => this.apps.some((app) => navApp.name === app.name))
           // and merge with props apps properties
@@ -114,7 +116,6 @@
               ...app,
             };
           });
-        return apps;
       },
     },
 
@@ -127,7 +128,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .wt-app-navigator {
+  .wt-app-navigator {
     position: relative;
     display: flex;
     align-items: center;

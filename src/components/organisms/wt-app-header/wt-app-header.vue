@@ -6,9 +6,7 @@
 
 <script>
   export default {
-    name: 'cc-header',
-    data: () => ({
-    }),
+    name: 'wt-app-header',
   };
 </script>
 

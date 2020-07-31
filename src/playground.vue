@@ -43,6 +43,27 @@
         <wt-header-actions :user="{name: 'Name', account: 'name@example.com'}"></wt-header-actions>
       </wt-app-header>
     </div>
+    <div>
+      <h2>Scrollbar</h2>
+      <div class="scrollbar-outer" style="width: 300px; height: 300px; overflow: scroll;">
+        <div style="width: 1000px; height: 1000px;"></div>
+      </div>
+    </div>
+    <div style="padding: 30px; background: #EAEAEA;">
+      <h2>Headline</h2>
+      <wt-headline>
+        <template slot="title">
+          Headline
+        </template>
+        <template slot="search">
+          <wt-search-bar></wt-search-bar>
+        </template>
+        <template slot="actions">
+          <wt-button style="margin-left: 20px;">Hello</wt-button>
+          <wt-button style="margin-left: 20px;" color="secondary">there!</wt-button>
+        </template>
+      </wt-headline>
+    </div>
   </div>
 </template>
 
@@ -123,5 +144,9 @@
         margin: 10px;
       }
     }
+  }
+
+  .scrollbar-outer {
+    @extend %wt-scrollbar;
   }
 </style>
