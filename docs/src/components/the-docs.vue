@@ -34,6 +34,7 @@
   import TextareaPage from './pages/molecules/textarea/textarea.vue';
   import TimeInput from './pages/molecules/time-input/time-input.vue';
   import Timepicker from './pages/molecules/timepicker/timepicker.vue';
+  import NotificationsBar from './pages/organisms/notifications-bar/notifications-bar.vue';
   import Pagination from './pages/organisms/pagination/pagination.vue';
   import TablePage from './pages/organisms/table/table.vue';
 
@@ -65,6 +66,7 @@
       TextareaPage,
       TimeInput,
       Timepicker,
+      NotificationsBar,
       Pagination,
       TablePage,
     },
@@ -174,6 +176,10 @@
         {
           text: 'Timepicker',
           value: 'timepicker',
+        },
+        {
+          text: 'Notifications bar',
+          value: 'notifications-bar',
         },
         {
           text: 'Pagination',

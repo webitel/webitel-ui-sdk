@@ -1,4 +1,6 @@
-@import "~@webitel/ui-sdk/src/css/main.scss";
+//@import "~@webitel/ui-sdk/src/css/main.scss";
+@import "../../../src/css/main.scss";
+@import "../../../src/css/components/organisms/wt-notifications-bar/variables";
 
 body {
   @extend %typo-body-lg;
