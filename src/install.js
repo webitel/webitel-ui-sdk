@@ -1,12 +1,12 @@
 /* eslint-disable */
+import LibVue from 'vue';
 import Components from './components'; // init all components
 import Directives from './directives'; // init all directives
 import Filters from './filters'; // init all directives
 import './css/fonts.scss';
 
 export default {
-  install(Vue, options) {
-    console.info('webitel-sdk-options', options);
+  install(Vue, { eventBus }) {
     Object.keys(Directives).forEach((name) => {
       Vue.directive(name, Directives[name]);
     });
@@ -19,5 +19,6 @@ export default {
     Vue.prototype.$webitelUI = {
       // locale: this.$i18n.locale,
     };
+    LibVue.prototype.$eventBus = eventBus;
   },
 };
