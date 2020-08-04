@@ -23,5 +23,20 @@ export default {
       prev: 'Назад',
       next: 'Вперед',
     },
+    appNavigator: {
+      title: 'Приложения Webitel',
+      admin: 'Admin',
+      agent: 'Agent Workspace',
+      supervisor: 'Supervisor Workspace',
+      audit: 'Audit',
+      history: 'Call History',
+      grafana: 'Grafana',
+    },
+    headerActions: {
+      account: 'Аккаунт',
+      docs: 'Документация',
+      settings: 'Настройки',
+      logout: 'Выйти',
+    },
   },
 };
