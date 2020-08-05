@@ -198,7 +198,8 @@
         },
         {
           value: 'reset',
-          description: 'Emitted on "reset" icon click, along with "input" event with empty value',
+          description: 'Emitted on "reset" icon click, along with "input" (input is emitted first) ' +
+            'event with empty value',
         },
         {
           value: 'closed',

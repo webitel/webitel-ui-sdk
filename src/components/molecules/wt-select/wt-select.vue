@@ -174,8 +174,8 @@
       },
 
       clearValue() {
-        this.$emit('reset', '');
         this.input('');
+        this.$emit('reset', '');
       },
 
       input(value) {
