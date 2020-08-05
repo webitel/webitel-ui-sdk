@@ -22,15 +22,16 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    min-height: 64px;
-    padding: 12px 30px;
-    background: var(--main-primary-color);
+    min-height: var(--headline-min-height);
+    padding: var(--headline-padding);
+    box-sizing: border-box;
+    background: var(--headline-background);
     border-radius: var(--border-radius);
   }
 
   .wt-headline__title {
     @extend %typo-heading-md;
-    margin-right: 20px;
+    margin-right: var(--headline-title-margin);
   }
 
   .wt-headline__actions-wrapper {
