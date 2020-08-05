@@ -197,6 +197,10 @@
           ],
         },
         {
+          value: 'reset',
+          description: 'Emitted on "reset" icon click, along with "input" event with empty value',
+        },
+        {
           value: 'closed',
         },
       ],

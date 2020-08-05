@@ -108,7 +108,7 @@
       slots: [
         {
           name: 'label',
-          scope: [{name: 'label'}],
+          scope: [{ name: 'label' }],
           description: 'Custom label slot',
         },
       ],

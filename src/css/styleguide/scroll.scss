@@ -2,7 +2,7 @@
   --scrollbar-width: 8px;
   --scrollbar-height: 8px;
   --scrollbar-thumb-width: 8px;
-  --scrollbar-bg-color: var(--main-ouline-color);
+  --scrollbar-bg-color: var(--main-primary-color);
   --scrollbar-thumb-color: var(--main-accent-color);
   --scrollbar-border-radius: 7px;
 }
@@ -29,6 +29,7 @@
   &::-webkit-scrollbar {
     width: 14px;
     height: 18px;
+    background-color: var(--scrollbar-bg-color);
   }
   &::-webkit-scrollbar-thumb {
     height: 2px;

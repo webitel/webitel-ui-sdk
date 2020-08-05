@@ -84,7 +84,7 @@
         value: '',
         multipleValue: [],
         options: [
-          { name: 'Vue.js1', language: 'JavaScript' },
+          { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
           { name: 'Adonis2', language: 'JavaScript' },
           { name: 'Rails3', language: 'Ruby' },
           { name: 'Sinatra4', language: 'Ruby' },

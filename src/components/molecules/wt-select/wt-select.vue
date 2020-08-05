@@ -169,12 +169,12 @@
 
       async fetch(search) {
         if (!this.internalSearch) {
-          const response = await this.search(search);
-          this.fetchedOptions = response.items;
+          this.fetchedOptions = await this.search(search);
         }
       },
 
       clearValue() {
+        this.$emit('reset', '');
         this.input('');
       },
 
@@ -264,15 +264,30 @@
           }
         }
 
+        .multiselect__tags-wrap {
+          width: 100%;
+        }
+
         .multiselect__custom-tag {
           @extend %typo-body-lg;
           color: var(--form-input-color);
+
+          // text overflow 3 dots
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .multiselect__placeholder {
-          color: var(--form-placeholder-color);
           padding: 0;
           margin: 0;
+          color: var(--form-placeholder-color);
+
+          // text overflow 3 dots
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
 
