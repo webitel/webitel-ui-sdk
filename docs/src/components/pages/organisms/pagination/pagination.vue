@@ -20,7 +20,7 @@
     </article>
     <component-model
       prop="size"
-      event="change"
+      event="input"
     ></component-model>
     <component-props
       :properties="properties"
@@ -55,15 +55,37 @@
           default: 'true',
           description: 'Is false, disables paging arrow',
         },
+        {
+          value: 'debounce',
+          code: '<wt-pagination ebounce></wt-pagination>',
+          type: 'Boolean',
+          default: 'false',
+          description: 'If true, @change event is delayed for debounceDelay from last change',
+        },
+        {
+          value: 'debounceDelay',
+          code: '<wt-pagination debounce-delay="2000" debounce></wt-pagination>',
+          type: 'Number',
+          default: '1000',
+        },
       ],
       events: [
+        {
+          value: 'input',
+          params: [
+            {
+              name: 'changed size value',
+              type: 'String',
+            },
+          ],
+        },
         {
           value: 'change',
           params: [
             {
               name: 'changed size value',
               type: 'String',
-              description: 'If "debounced" is true,event is debounced.',
+              description: 'The same as input, but if "debounce" is true,event is debounced.',
             },
           ],
         },

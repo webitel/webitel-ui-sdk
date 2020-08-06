@@ -18,10 +18,6 @@
         </code></pre>
       </div>
     </article>
-    <component-model
-      prop="size"
-      event="change"
-    ></component-model>
     <component-props
       :properties="properties"
     ></component-props>
