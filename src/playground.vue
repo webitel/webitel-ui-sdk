@@ -64,6 +64,12 @@
         </template>
       </wt-headline>
     </div>
+    <div>
+      <h2>Table Actions</h2>
+      <wt-table-actions
+        :icons="['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings']"
+      ></wt-table-actions>
+    </div>
   </div>
 </template>
 

@@ -2,6 +2,8 @@ export default {
   reusable: {
     add: 'Add',
     cancel: 'Cancel',
+    import: 'Import',
+    export: 'Export',
   },
   validation: {
     required: 'Field is required',
@@ -37,6 +39,12 @@ export default {
       docs: 'Docs',
       settings: 'Settings',
       logout: 'Logout',
+    },
+    tableActions: {
+      filterReset: 'Reset filters',
+      columnSelect: 'Select columns',
+      refreshTable: 'Refresh table',
+      expandFilters: 'Expand filters',
     },
   },
 };

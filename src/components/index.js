@@ -31,6 +31,7 @@ import WtHeadline from './organisms/wt-headline/wt-headline.vue';
 import WtNotificationsBar from './organisms/wt-notifications-bar/wt-notifications-bar.vue';
 import WtPagination from './organisms/wt-pagination/wt-pagination.vue';
 import WtTable from './organisms/wt-table/wt-table.vue';
+import WtTableActions from './organisms/wt-table-actions/wt-table-actions.vue';
 
 const Components = {
   WtIcon,
@@ -63,6 +64,7 @@ const Components = {
   WtNotificationsBar,
   WtPagination,
   WtTable,
+  WtTableActions,
 };
 
 Object.keys(Components).forEach((name) => {

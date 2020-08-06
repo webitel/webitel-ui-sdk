@@ -38,6 +38,7 @@
   import NotificationsBar from './pages/organisms/notifications-bar/notifications-bar.vue';
   import Pagination from './pages/organisms/pagination/pagination.vue';
   import TablePage from './pages/organisms/table/table.vue';
+  import TableActions from './pages/organisms/table-actions/table-actions.vue';
 
   export default {
     name: 'the-docs',
@@ -71,6 +72,7 @@
       NotificationsBar,
       Pagination,
       TablePage,
+      TableActions,
     },
     data: () => ({
       currentTab: {
@@ -194,6 +196,10 @@
         {
           text: 'Table',
           value: 'table-page',
+        },
+        {
+          text: 'Table actions',
+          value: 'table-actions',
         },
       ],
     }),

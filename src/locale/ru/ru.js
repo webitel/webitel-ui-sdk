@@ -2,6 +2,8 @@ export default {
   reusable: {
     add: 'Добавить',
     cancel: 'Отменить',
+    import: 'Импорт',
+    export: 'Экспорт',
   },
   validation: {
     required: 'Обязательное поле',
@@ -37,6 +39,12 @@ export default {
       docs: 'Документация',
       settings: 'Настройки',
       logout: 'Выйти',
+    },
+    tableActions: {
+      filterReset: 'Сбросить фильтры',
+      columnSelect: 'Добавить колонки',
+      refreshTable: 'Обновить',
+      expandFilters: 'Раскрыть фильтры',
     },
   },
 };
