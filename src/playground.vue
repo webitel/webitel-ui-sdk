@@ -1,6 +1,14 @@
 <template>
   <div class="playground">
     <div>
+      <h2>Table</h2>
+      <wt-table
+        :headers="table.headers"
+        :data="table.data"
+        sortable
+      ></wt-table>
+    </div>
+    <div>
       <h2>Select</h2>
       <wt-select
         v-model="select.value"
@@ -85,6 +93,53 @@
         $error: true,
         $dirty: true,
         required: false,
+      },
+      table: {
+        headers: [
+          {
+            text: 'heading 3',
+            value: 'h3',
+          },
+          {
+            text: 'heading 1',
+            value: 'h1',
+            sort: 'desc',
+          },
+          {
+            text: 'heading2',
+            value: 'h2',
+            sort: 'asc',
+          },
+          {
+            text: 'heading 3',
+            value: 'h3',
+          },
+        ],
+        data: [
+          {
+            h1: 'value 1',
+            h2: 'value 2',
+            h3: 'value 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'value 1',
+            h2: 'value 2',
+            h3: 'value 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'value 1',
+            h2: 'value 2',
+            h3: 'value 3',
+            _isSelected: false,
+          },
+          {
+            h1: 'value 1',
+            h2: 'value 2',
+            h3: 'value 3',
+            _isSelected: false,
+          }],
       },
       select: {
         value: '',
