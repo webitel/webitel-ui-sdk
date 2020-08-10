@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import AgentStatus from './_internal/AgentStatus.enum';
+import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum';
 
 export default {
   name: 'wt-status-select',
