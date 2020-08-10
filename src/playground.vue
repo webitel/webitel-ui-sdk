@@ -9,6 +9,10 @@
       ></wt-table>
     </div>
     <div>
+      <h2>Status Select</h2>
+      <wt-status-select/>
+    </div>
+    <div>
       <h2>Select</h2>
       <wt-select
         v-model="select.value"

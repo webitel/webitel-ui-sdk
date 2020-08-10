@@ -43,8 +43,19 @@
         <span class="multiselect__custom-tag">{{ option[optionLabel] }}</span>
       </template>
 
+      <template slot="singleLabel" slot-scope="{ option }">
+        <slot name="singleLabel" v-bind="{ option }">
+        </slot>
+      </template>
+
+      <template slot="option" slot-scope="{ option }">
+        <slot name="option" v-bind="{ option }">
+        </slot>
+      </template>
+
       <template slot="clear" slot-scope="{}">
         <wt-icon-btn
+          v-if="clearable"
           class="wt-select__clear"
           :class="{ 'hidden': !isValue }"
           icon="remove-rounded"
@@ -125,6 +136,11 @@ export default {
     },
 
     searchable: {
+      type: Boolean,
+      default: true,
+    },
+
+    clearable: {
       type: Boolean,
       default: true,
     },

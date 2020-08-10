@@ -46,5 +46,10 @@ export default {
       refreshTable: 'Обновить',
       expandFilters: 'Раскрыть фильтры',
     },
+    statusSelect: {
+      online: 'Онлайн',
+      pause: 'Пауза',
+      offline: 'Оффлайн',
+    },
   },
 };

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import WtIcon from './atoms/wt-icon/wt-icon.vue';
+import WtIndicator from './atoms/wt-indicator/wt-indicator.vue';
 import WtInputInfo from './atoms/wt-input-info/wt-input-info.vue';
 import WtButton from './atoms/wt-button/wt-button.vue';
 import WtBadge from './atoms/wt-badge/wt-badge.vue';
@@ -30,11 +31,13 @@ import WtHeaderActions from './organisms/wt-app-header/wt-header-actions.vue';
 import WtHeadline from './organisms/wt-headline/wt-headline.vue';
 import WtNotificationsBar from './organisms/wt-notifications-bar/wt-notifications-bar.vue';
 import WtPagination from './organisms/wt-pagination/wt-pagination.vue';
+import WtStatusSelect from './organisms/wt-status-select/wt-status-select.vue';
 import WtTable from './organisms/wt-table/wt-table.vue';
 import WtTableActions from './organisms/wt-table-actions/wt-table-actions.vue';
 
 const Components = {
   WtIcon,
+  WtIndicator,
   WtInputInfo,
   WtButton,
   WtBadge,
@@ -63,6 +66,7 @@ const Components = {
   WtHeaderActions,
   WtNotificationsBar,
   WtPagination,
+  WtStatusSelect,
   WtTable,
   WtTableActions,
 };
