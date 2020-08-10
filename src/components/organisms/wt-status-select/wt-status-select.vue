@@ -29,8 +29,8 @@ export default {
   name: 'wt-status-select',
   props: {
     status: {
-      type: Object,
-      default: () => ({ value: AgentStatus.ONLINE }),
+      type: String,
+      default: AgentStatus.ONLINE,
     },
   },
   model: {
@@ -39,9 +39,7 @@ export default {
   },
   computed: {
     selectedOption() {
-      return this.status.text
-        ? this.status
-        : this.options.find((option) => option.value === this.status.value);
+      return this.options.find((option) => option.value === this.status);
     },
     options() {
       return [
@@ -63,7 +61,7 @@ export default {
       ];
     },
     availableOptions() {
-      return this.options.filter((option) => option.value !== this.status.value);
+      return this.options.filter((option) => option.value !== this.status);
     },
   },
   methods: {
