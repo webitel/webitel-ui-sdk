@@ -1,5 +1,6 @@
 <template>
   <wt-select
+    class="wt-status-select"
     :value="selectedOption"
     :options="availableOptions"
     track-by="value"
