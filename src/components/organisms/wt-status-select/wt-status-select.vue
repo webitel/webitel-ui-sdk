@@ -89,6 +89,7 @@ export default {
   box-shadow: var(--box-shadow);
 
   .multiselect__tags {
+    padding: var(--status-select-select-tags-padding);
     border: none;
   }
 
