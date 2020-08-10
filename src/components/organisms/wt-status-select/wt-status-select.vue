@@ -10,7 +10,7 @@
     <template slot="singleLabel" slot-scope="{ option }">
       <wt-indicator
         :color="option.color"
-        :text="option.text"
+        :text="duration"
       ></wt-indicator>
     </template>
     <template slot="option" slot-scope="{ option }">
@@ -31,6 +31,10 @@ export default {
     status: {
       type: String,
       default: AgentStatus.ONLINE,
+    },
+    statusDuration: {
+      type: String,
+      default: '00:00:00',
     },
   },
   model: {
@@ -62,6 +66,13 @@ export default {
     },
     availableOptions() {
       return this.options.filter((option) => option.value !== this.status);
+    },
+    duration() {
+      if (typeof this.statusDuration === 'string') return this.statusDuration;
+      if (typeof this.statusDuration === 'number') {
+        return new Date(this.statusDuration * 1000).toISOString().substr(11, 8);
+      }
+      return this.selectedOption.text;
     },
   },
   methods: {

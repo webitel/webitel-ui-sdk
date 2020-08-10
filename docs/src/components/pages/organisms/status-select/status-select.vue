@@ -48,6 +48,13 @@ export default {
         default: 'AgentStatus.ONLINE',
         description: 'Component is looking for value from AgentStatus enum',
       },
+      {
+        value: 'statusDuration',
+        code: '<wt-status-select :status-duraton="00:00:01"></wt-status-select>',
+        type: ['String', 'Number'],
+        default: '00:00:00',
+        description: 'If seconds number, converts to hh:mm:ss format',
+      },
     ],
     events: [
       {
