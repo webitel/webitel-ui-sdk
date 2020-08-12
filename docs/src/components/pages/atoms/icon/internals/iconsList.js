@@ -1,4 +1,6 @@
 export default [
+  'icon-play--md',
+  'icon-pause--md',
   'icon-calendar--md',
   'icon-radio--md',
   'icon-radio--checked--md',
