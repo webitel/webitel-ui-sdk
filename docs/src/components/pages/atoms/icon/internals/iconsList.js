@@ -53,7 +53,9 @@ export default [
   'icon-call-history--md',
   'icon-call-transfer--md',
   'icon-call-add_to--md',
-  'icon-call-incoming--md',
+  'icon-call-disconnect--md',
+  'icon-call-outbound--md',
+  'icon-call-inbound--md',
   'icon-call--sm',
 
   'icon-chat-transfer--md',
