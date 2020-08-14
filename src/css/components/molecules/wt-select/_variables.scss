@@ -9,11 +9,13 @@
   --select-clear-z-index: var(--select-caret-z-index);
 
   --select-tags-min-height: 38px;
-  --select-tags-padding: 9px 70px 9px 9px; // 66px = 10 + 24 + 10 + 16 + 10
+  --select-tags-padding: 9px 44px 9px 9px; // 66px = 10 + 24 + 10 + 16 + 10
+  --select-tags-padding--clearable: 9px 70px 9px 9px; // 66px = 10 + 24 + 10 + 16 + 10
   --select-tags-border: var(--input-border);
 
   --select-input-min-height: 18px;
-  --select-badge-right-pos: 70px;
+  --select-badge-right-pos: 44px;
+  --select-badge-right-pos--clearable: 70px;
   --select-badge-z-index: 1;
 
   --select-options-padding: var(--input-padding);

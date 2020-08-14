@@ -52,6 +52,7 @@
     max-height: var(--notifications-bar-max-height);
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: var(--notifications-bar-z-index);
 
     .wt-notification {
       margin: var(--notifications-bar-notifications-margin);

@@ -4,6 +4,7 @@
     :class="{
       'wt-select--disabled': disabled,
       'wt-select--invalid': invalid,
+      'wt-select--clearable': clearable,
     }"
   >
     <wt-label
@@ -430,6 +431,18 @@ export default {
           color: var(--form-placeholder--disabled-color);
         }
       }
+    }
+  }
+}
+
+.wt-select--clearable {
+  .multiselect::v-deep {
+    .multiselect__tags {
+      padding: var(--select-tags-padding--clearable);
+    }
+
+    .multiselect__strong {
+      right: var(--select-badge-right-pos--clearable);
     }
   }
 }
