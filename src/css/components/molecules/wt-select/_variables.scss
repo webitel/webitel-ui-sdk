@@ -21,5 +21,5 @@
   --select-options-padding: var(--input-padding);
 
   --select-option--hover-color: var(--main-secondary-accent-color);
-  --select-option--active-color: #FFF9E6;
+  --select-option--active-color: var(--main-option-hover-color);
 }
