@@ -1,4 +1,4 @@
-const truncateFromEnd = (value, length) => {
+const truncateFromEnd = (value, length = 18) => {
   if (value) {
     if (value.length < length) return value;
     return `${value.slice(value.length - (length - 3))}...`;
