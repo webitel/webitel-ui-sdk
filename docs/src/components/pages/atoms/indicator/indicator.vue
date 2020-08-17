@@ -23,7 +23,7 @@
         {
           value: 'color',
           code: '<wt-icon color="danger"></wt-icon>',
-          type: 'String',
+          type: ['String', 'Number'],
           options: ['primary', 'secondary', 'success', 'danger', 'transfer'],
           default: 'secondary',
         },
