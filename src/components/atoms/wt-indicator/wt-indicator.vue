@@ -4,7 +4,7 @@
       class="wt-indicator__indicator"
       :class="`wt-indicator__indicator--${color}`"
     ></span>
-    <div v-if="text" class="wt-indicator__text">
+    <div v-if="isText" class="wt-indicator__text">
       {{ text }}
     </div>
   </div>
@@ -21,6 +21,14 @@ export default {
 
     text: {
       type: [String, Number],
+    },
+  },
+
+  computed: {
+    isText() {
+      return this.text !== undefined
+        || this.text !== null
+        || this.text !== '';
     },
   },
 };
