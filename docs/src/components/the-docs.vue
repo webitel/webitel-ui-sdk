@@ -1,7 +1,7 @@
 <template>
   <main class="docs">
     <header>
-      <h1>Webitel UI SDK v. 0.3.24</h1>
+      <h1>Webitel UI SDK v. 0.4.3</h1>
     </header>
     <wt-tabs v-model="currentTab" :tabs="tabs"></wt-tabs>
     <component :is="currentTab.value"></component>

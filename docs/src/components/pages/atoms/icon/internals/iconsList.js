@@ -48,7 +48,6 @@ export default [
   'icon-settings--md',
   'icon-close--md',
   'icon-search--md',
-  'icon-rounded-tick--md',
   'icon-rec-stop--md',
   'icon-rec--md',
   'icon-note--md',
@@ -59,6 +58,7 @@ export default [
   'icon-hold--sm',
   'icon-hold--md',
   'icon-contacts--md',
+  'icon-rounded-tick--md',
   'icon-attention--md',
 
   'icon-widget-missed--sm',
