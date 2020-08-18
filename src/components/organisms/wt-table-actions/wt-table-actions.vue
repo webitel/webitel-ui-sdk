@@ -14,13 +14,13 @@
     ></wt-icon-btn>
     <wt-icon-btn
       v-if="isFilterReset"
-      icon="reset_filters"
+      icon="reset-filters"
       :tooltip="$t('webitelUI.tableActions.filterReset')"
       @click="$emit('input', 'filterReset')"
     ></wt-icon-btn>
     <wt-icon-btn
       v-if="isColumnSelect"
-      icon="column_select"
+      icon="column-select"
       :tooltip="$t('webitelUI.tableActions.columnSelect')"
       @click="$emit('input', 'columnSelect')"
     ></wt-icon-btn>
