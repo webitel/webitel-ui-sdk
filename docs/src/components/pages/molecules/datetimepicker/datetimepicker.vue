@@ -38,7 +38,7 @@
           value: 'value',
           code: '<wt-datetimepicker :value="value"></wt-datetimepicker>',
           type: "['String', 'Number'] -- timestamp",
-          default: 'Date.now()',
+          default: 0,
         },
         {
           value: 'label',

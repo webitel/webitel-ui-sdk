@@ -48,7 +48,7 @@
           :maximum-view="'day'"
           monday-first
           inline
-          @change="setDraft($event.getTime())"
+          @input="setDraft($event.getTime())"
         ></datepicker>
         <wt-timepicker
           class="wt-datetimepicker__timepicker"
@@ -80,7 +80,7 @@
     props: {
       value: {
         type: [String, Number],
-        default: 'Date.now()',
+        default: 0,
       },
       label: {
         type: String,
