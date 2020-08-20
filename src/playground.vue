@@ -14,7 +14,6 @@
     </div>
     <div>
       <h2>Select</h2>
-      <wt-datetimepicker></wt-datetimepicker>
       <wt-select
         v-model="select.value"
         :options="select.options"

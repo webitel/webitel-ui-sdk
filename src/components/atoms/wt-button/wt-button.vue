@@ -14,13 +14,19 @@
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
-    <slot></slot>
+    <spinner v-if="loading" :color="color"/>
+    <slot v-else></slot>
   </button>
 </template>
 
 <script>
+  import Spinner from './_internals/spinner.vue';
+
   export default {
     name: 'wt-button',
+    components: {
+      Spinner,
+    },
     props: {
       color: {
         type: String,
@@ -39,6 +45,10 @@
         default: false,
       },
       wide: {
+        type: Boolean,
+        default: false,
+      },
+      loading: {
         type: Boolean,
         default: false,
       },

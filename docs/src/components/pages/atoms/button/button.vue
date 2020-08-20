@@ -82,6 +82,13 @@
           default: 'false',
           description: 'Stretches button to all available width',
         },
+        {
+          value: 'loading',
+          code: '<wt-button loading></wt-button>',
+          type: 'Boolean',
+          default: 'false',
+          description: 'Displays loader instead of text',
+        },
       ],
       events: [
         {
