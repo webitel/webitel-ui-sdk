@@ -14,7 +14,8 @@
     <h3>Full docs: <a class="full-docs-link" href="https://www.npmjs.com/package/vuejs-datepicker">Vuejs
       Datepicker</a></h3>
     <component-model
-      prop="change"
+      prop="value"
+      event="change"
     ></component-model>
     <component-props
       :properties="properties"
