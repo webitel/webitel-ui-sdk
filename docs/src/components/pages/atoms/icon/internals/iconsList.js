@@ -17,7 +17,7 @@ export default [
   'icon-stop--md',
   'icon-download--md',
   'icon-upload--md',
-  'icon-reset-filters--md',
+  'icon-filter-md',
   'icon-column-select--md',
   'icon-refresh--md',
   'icon-filter--md',

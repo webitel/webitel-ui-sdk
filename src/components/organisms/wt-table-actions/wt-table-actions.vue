@@ -14,7 +14,7 @@
     ></wt-icon-btn>
     <wt-icon-btn
       v-if="isFilterReset"
-      icon="reset-filters"
+      icon="clear"
       :tooltip="$t('webitelUI.tableActions.filterReset')"
       @click="$emit('input', 'filterReset')"
     ></wt-icon-btn>
