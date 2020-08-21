@@ -1,4 +1,5 @@
 export default [
+  'icon-lg-a-marker--sm',
   'icon-forks--md',
   'icon-clear--md',
   'icon-video-on--md',

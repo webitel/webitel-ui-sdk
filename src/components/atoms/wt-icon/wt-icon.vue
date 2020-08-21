@@ -5,7 +5,10 @@
          version="1.1"
          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <defs>
-
+        <symbol id="icon-leg-a-marker--sm" viewBox="0 0 32 32">
+          <path
+            d="M18.743 19.223h-5.534l-1.091 2.777h-2.119l4.98-12h2.024l4.996 12h-2.15l-1.107-2.777zM18.063 17.474l-2.087-5.246-2.071 5.246h4.158z"></path>
+        </symbol>
         <symbol id="icon-forks--md" viewBox="0 0 32 32">
           <path
             d="M21.333 15.667c0 0.552-0.448 1-1 1h-11.267c-0.552 0-1-0.448-1-1s0.448-1 1-1h11.267c0.552 0 1 0.448 1 1z"></path>
