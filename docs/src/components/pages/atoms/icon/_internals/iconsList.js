@@ -1,4 +1,5 @@
 export default [
+  'icon-forks--md',
   'icon-clear--md',
   'icon-video-on--md',
   'icon-video-off--md',

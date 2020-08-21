@@ -16,7 +16,7 @@
 
 <script>
   import Prism from 'prismjs';
-  import IconGrid from './internals/icon-grid.vue';
+  import IconGrid from './_internals/icon-grid.vue';
 
   export default {
     name: 'icon',
