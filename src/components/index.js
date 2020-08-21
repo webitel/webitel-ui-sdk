@@ -30,6 +30,7 @@ import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
 import WtHeaderActions from './organisms/wt-app-header/wt-header-actions.vue';
 import WtHeadline from './organisms/wt-headline/wt-headline.vue';
 import WtNotificationsBar from './organisms/wt-notifications-bar/wt-notifications-bar.vue';
+import WtPageWrapper from './organisms/wt-page-wrapper/wt-page-wrapper.vue';
 import WtPagination from './organisms/wt-pagination/wt-pagination.vue';
 import WtStatusSelect from './organisms/wt-status-select/wt-status-select.vue';
 import WtTable from './organisms/wt-table/wt-table.vue';
@@ -65,6 +66,7 @@ const Components = {
   WtAppNavigator,
   WtHeaderActions,
   WtNotificationsBar,
+  WtPageWrapper,
   WtPagination,
   WtStatusSelect,
   WtTable,
