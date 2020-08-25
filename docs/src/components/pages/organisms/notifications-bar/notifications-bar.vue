@@ -4,7 +4,7 @@
     <article>
       <div class="example-wrapper">
         <div
-          style="position:relative; : 500px; height: 500px; background: var(--main-ouline-color);">
+          style="position:relative; : 500px; height: 500px; background: var(--main-outline-color);">
           <wt-notifications-bar style="position:absolute;"/>
         </div>
         <pre><code

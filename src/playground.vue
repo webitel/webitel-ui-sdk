@@ -44,7 +44,7 @@
     </div>
     <div>
       <h2>Notifications bar</h2>
-      <div style="position:relative; : 800px; height: 800px; background: var(--main-ouline-color);">
+      <div style="position:relative; : 800px; height: 800px; background: var(--main-outline-color);">
         <wt-notifications-bar style="position: absolute;"/>
       </div>
     </div>
