@@ -1,7 +1,7 @@
 <template>
   <main class="docs">
     <header>
-      <h1>Webitel UI SDK v. 0.4.13</h1>
+      <h1>Webitel UI SDK v. 0.4.14</h1>
     </header>
     <wt-tabs v-model="currentTab" :tabs="tabs"></wt-tabs>
     <component :is="currentTab.value"></component>
@@ -43,6 +43,10 @@ import StatusSelect from './pages/organisms/status-select/status-select.vue';
 import TablePage from './pages/organisms/table/table.vue';
 import TableActions from './pages/organisms/table-actions/table-actions.vue';
 
+import Filters from './pages/filters/filters.vue';
+import Directives from './pages/directives/directives.vue';
+import Scripts from './pages/scripts/scripts.vue';
+
 export default {
   name: 'the-docs',
   components: {
@@ -79,6 +83,10 @@ export default {
     StatusSelect,
     TablePage,
     TableActions,
+
+    Filters,
+    Directives,
+    Scripts,
   },
   data: () => ({
     currentTab: {
@@ -218,6 +226,19 @@ export default {
       {
         text: 'Table actions',
         value: 'table-actions',
+      },
+
+      {
+        text: 'Filters',
+        value: 'filters',
+      },
+      {
+        text: 'Directives',
+        value: 'directives',
+      },
+      {
+        text: 'Scripts',
+        value: 'scripts',
       },
     ],
   }),
