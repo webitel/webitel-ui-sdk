@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    <wt-datepicker></wt-datepicker>
+    <div style="margin-top: 250px;">
+      <h2>Player</h2>
+      <wt-player></wt-player>
+    </div>
     <div>
       <h2>Table</h2>
       <wt-table
