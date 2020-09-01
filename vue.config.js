@@ -1,4 +1,6 @@
 /* eslint-disable */
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -10,6 +12,7 @@ module.exports = {
     },
   },
   chainWebpack: (config) => {
+
     config.module
       .rule('fonts')
       .use('url-loader')
@@ -20,22 +23,38 @@ module.exports = {
         return options;
       });
 
-    if (process.env.NODE_ENV === 'production') {
-      const svgRule = config.module.rule('svg');
-      // очищаем все существующие загрузчики.
-      // если вы этого не сделаете, загрузчик ниже будет добавлен
-      // к уже существующим загрузчикам для этого правила.
-      svgRule.uses.clear();
+    config
+      .plugin('copy-webpack-plugin')
+      .use(CopyWebpackPlugin, [
+        [{
+          from: 'src/assets/icons/plyr.svg',
+          to: 'img',
+        }],
+      ]);
 
-      // добавляем загрузчик для замены
-      svgRule
-        .use('url-loader')
-        .loader('url-loader')
-        .options({
-          limit: false,
-          name: '/img/[name].[hash].[ext]',
-        })
-        .end();
-    }
+    // if (process.env.NODE_ENV === 'production') {
+    // const svgRule = config.module.rule('svg');
+    // очищаем все существующие загрузчики.
+    // если вы этого не сделаете, загрузчик ниже будет добавлен
+    // к уже существующим загрузчикам для этого правила.
+    // svgRule.uses.clear();
+
+    // добавляем загрузчик для замены
+    // svgRule
+    //   .use('url-loader')
+    //   .loader('url-loader')
+    //   .options({
+    //     limit: false,
+    //     name: 'img/[name].[ext]',
+    //   })
+    //   .end();
+    // }
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.clear()
+
+    svgRule
+      .test(/\.svg$/)
+      .use('svg-url-loader')
+      .loader('svg-url-loader');
   },
 };

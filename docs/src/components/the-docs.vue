@@ -1,7 +1,7 @@
 <template>
   <main class="docs">
     <header>
-      <h1>Webitel UI SDK v. 0.4.14</h1>
+      <h1>Webitel UI SDK v. 0.4.27</h1>
     </header>
     <wt-tabs v-model="currentTab" :tabs="tabs"></wt-tabs>
     <component :is="currentTab.value"></component>
@@ -39,6 +39,7 @@ import Headline from './pages/organisms/headline/headline.vue';
 import NotificationsBar from './pages/organisms/notifications-bar/notifications-bar.vue';
 import PageWrapper from './pages/organisms/page-wrapper/page-wrapper.vue';
 import Pagination from './pages/organisms/pagination/pagination.vue';
+import Player from './pages/organisms/player/player.vue';
 import StatusSelect from './pages/organisms/status-select/status-select.vue';
 import TablePage from './pages/organisms/table/table.vue';
 import TableActions from './pages/organisms/table-actions/table-actions.vue';
@@ -46,6 +47,7 @@ import TableActions from './pages/organisms/table-actions/table-actions.vue';
 import Filters from './pages/filters/filters.vue';
 import Directives from './pages/directives/directives.vue';
 import Scripts from './pages/scripts/scripts.vue';
+import Modules from './pages/modules/modules.vue';
 
 export default {
   name: 'the-docs',
@@ -80,6 +82,7 @@ export default {
     NotificationsBar,
     PageWrapper,
     Pagination,
+    Player,
     StatusSelect,
     TablePage,
     TableActions,
@@ -87,6 +90,7 @@ export default {
     Filters,
     Directives,
     Scripts,
+    Modules,
   },
   data: () => ({
     currentTab: {
@@ -212,6 +216,10 @@ export default {
         value: 'pagination',
       },
       {
+        text: 'Player',
+        value: 'player',
+      },
+      {
         text: 'Page Wrapper',
         value: 'page-wrapper',
       },
@@ -239,6 +247,10 @@ export default {
       {
         text: 'Scripts',
         value: 'scripts',
+      },
+      {
+        text: 'Modules',
+        value: 'modules',
       },
     ],
   }),

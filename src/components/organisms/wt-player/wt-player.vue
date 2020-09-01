@@ -41,13 +41,13 @@ export default {
   methods: {
     setupPlayer() {
       if (this.player) this.player.destroy();
-      const baseUrl = process.env.BASE_URL;
       const controls = ['play-large', 'play', 'progress', 'current-time',
         'mute', 'volume', 'captions', 'settings', 'pip',
         'airplay', 'fullscreen'];
       if (this.download) controls.push('download');
       this.player = new Plyr('#wt-player__player', {
-        iconUrl: `${baseUrl}plyr.svg`,
+        loadSprite: false,
+        iconUrl: 'img/plyr.svg',
         controls,
         loop: {
           active: this.loop,
