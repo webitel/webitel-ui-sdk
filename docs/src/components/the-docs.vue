@@ -1,7 +1,7 @@
 <template>
   <main class="docs">
     <header>
-      <h1>Webitel UI SDK v. 0.4.27</h1>
+      <h1>Webitel UI SDK v. 0.4.28</h1>
     </header>
     <wt-tabs v-model="currentTab" :tabs="tabs"></wt-tabs>
     <component :is="currentTab.value"></component>
@@ -35,6 +35,7 @@ import Tabs from './pages/molecules/tabs/tabs.vue';
 import TextareaPage from './pages/molecules/textarea/textarea.vue';
 import TimeInput from './pages/molecules/time-input/time-input.vue';
 import Timepicker from './pages/molecules/timepicker/timepicker.vue';
+import WtAppHeaderDocs from './pages/organisms/wt-app-header/wt-app-header-docs.vue';
 import Headline from './pages/organisms/headline/headline.vue';
 import NotificationsBar from './pages/organisms/notifications-bar/notifications-bar.vue';
 import PageWrapper from './pages/organisms/page-wrapper/page-wrapper.vue';
@@ -78,6 +79,7 @@ export default {
     TextareaPage,
     TimeInput,
     Timepicker,
+    WtAppHeaderDocs,
     Headline,
     NotificationsBar,
     PageWrapper,
@@ -202,6 +204,10 @@ export default {
       {
         text: 'Timepicker',
         value: 'timepicker',
+      },
+      {
+        text: 'App Header',
+        value: 'wt-app-header-docs',
       },
       {
         text: 'Headline',

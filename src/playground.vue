@@ -170,32 +170,14 @@ export default {
       ],
     },
     appHeader: {
-      apps: [
-        {
-          name: 'admin',
-          href: 'https://example.com',
-        },
-        {
-          name: 'audit',
-          href: 'https://example.com',
-        },
-        {
-          name: 'history',
-          href: 'https://example.com',
-        },
-        {
-          name: 'supervisor',
-          href: 'https://example.com',
-        },
-        {
-          name: 'agent',
-          href: 'https://example.com',
-        },
-        {
-          name: 'grafana',
-          href: 'https://example.com',
-        },
-      ],
+      apps: {
+        agent: { href: 'https://example.com' },
+        supervisor: { href: 'https://example.com' },
+        history: { href: 'https://example.com' },
+        audit: { href: 'https://example.com' },
+        admin: { href: 'https://example.com' },
+        grafana: { href: 'https://example.com' },
+      },
     },
   }),
 };
