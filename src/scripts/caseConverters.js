@@ -31,7 +31,7 @@ export const objSnakeToCamel = (obj) => {
       if (typeof value === 'object') {
         return objSnakeToCamel(value);
       }
-      return value;
+      return snakeToCamel(value);
     });
   }
   Object.keys(obj)
@@ -58,7 +58,7 @@ export const objCamelToSnake = (obj) => {
       if (typeof value === 'object') {
         return objCamelToSnake(value);
       }
-      return value;
+      return camelToSnake(value);
     });
   }
   Object.keys(obj)
