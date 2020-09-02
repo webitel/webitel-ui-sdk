@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver';
 import stringify from 'csv-stringify/lib/sync';
-import { snakeToCamel } from '../../scripts/caseConverters';
+import { objSnakeToCamel } from '../../scripts/caseConverters';
 
 const cast = {
   object: (separator) => {
@@ -44,7 +44,7 @@ export default class CSVExport {
   async stringify(params) {
     let csv = 'data:text/csv;charset=utf-8,';
     let isNext = false;
-    let columns = snakeToCamel(params?.fields) || [];
+    let columns = objSnakeToCamel(params?.fields) || [];
     let page = 1;
 
     do {
