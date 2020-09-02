@@ -3,12 +3,9 @@
     <h2>Player</h2>
     <article>
       <div class="example-wrapper">
-        <wt-player src="https://cdn6.sefon.pro/files/prev/1/The%20Eagles%20-%20Hotel%20California%20%28192kbps%29.mp3" :download="false"></wt-player>
-        <pre><code class="language-html">
-          &lt;wt-player
-            :src="src" :download="false"
-          &gt;&lt;/wt-player&gt;
-        </code></pre>
+        <wt-button @click="src = 'https://cdn6.sefon.pro/files/prev/1/The%20Eagles%20-%20Hotel%20California%20%28192kbps%29.mp3'"></wt-button>
+        <wt-player :src="src"></wt-player>
+        <pre><code class="language-html">&lt;wt-player :src="src"&gt;&lt;/wt-player&gt;</code></pre>
       </div>
     </article>
     <article>
@@ -26,18 +23,21 @@ import Prism from 'prismjs';
 export default {
   name: 'table-actions',
   data: () => ({
-    size: 10,
-    isNext: true,
-    isPrev: false,
+    src: '',
     properties: [
       {
         value: 'src',
         code: '<wt-player :src="src"></wt-player>',
       },
       {
-        value: 'loop',
+        value: 'autoplay',
         code: '<wt-player :loop="false"></wt-player>',
         default: 'true',
+      },
+      {
+        value: 'loop',
+        code: '<wt-player :loop="false"></wt-player>',
+        default: 'false',
       },
       {
         value: 'download',

@@ -28,9 +28,6 @@ import Prism from 'prismjs';
 export default {
   name: 'table-actions',
   data: () => ({
-    size: 10,
-    isNext: true,
-    isPrev: false,
     properties: [
       {
         value: 'icons',

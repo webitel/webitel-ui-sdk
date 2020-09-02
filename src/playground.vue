@@ -3,7 +3,8 @@
     <wt-datepicker></wt-datepicker>
     <div style="margin-top: 250px;">
       <h2>Player</h2>
-      <wt-player></wt-player>
+      <wt-button @click="player.src = 'https://cdn6.sefon.pro/files/prev/1/The%20Eagles%20-%20Hotel%20California%20%28192kbps%29.mp3'"></wt-button>
+      <wt-player :src="player.src || 'example.com'"></wt-player>
     </div>
     <div>
       <h2>Table</h2>
@@ -103,6 +104,9 @@ export default {
       $error: true,
       $dirty: true,
       required: false,
+    },
+    player: {
+      src: '',
     },
     table: {
       headers: [

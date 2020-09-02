@@ -3,8 +3,10 @@
     <audio
       id="wt-player__player"
       :src="src"
+      :autoplay="autoplay"
       controls
-    ></audio>
+    >
+    </audio>
   </aside>
 </template>
 
@@ -15,9 +17,13 @@ export default {
   name: 'wt-player',
   props: {
     src: {},
-    loop: {
+    autoplay: {
       type: Boolean,
       default: true,
+    },
+    loop: {
+      type: Boolean,
+      default: false,
     },
     download: {
       type: [String, Function, Boolean],
@@ -40,12 +46,13 @@ export default {
   },
   methods: {
     setupPlayer() {
-      if (this.player) this.player.destroy();
+      if (this.player) this.player.restart();
       const controls = ['play-large', 'play', 'progress', 'current-time',
         'mute', 'volume', 'captions', 'settings', 'pip',
         'airplay', 'fullscreen'];
       if (this.download) controls.push('download');
       this.player = new Plyr('#wt-player__player', {
+        autoplay: this.autoplay,
         loadSprite: false,
         iconUrl: 'img/plyr.svg',
         controls,
@@ -59,7 +66,7 @@ export default {
       else if (typeof this.download === 'string') {
         this.player.download = this.download;
       } else if (typeof this.download === 'function') {
-        this.player.download = this.download(this.player.download);
+        this.player.download = this.download(this.src);
       }
     },
   },
@@ -77,6 +84,8 @@ export default {
 
 .wt-player {
   @extend %typo-body-md;
+  position: sticky;
+  bottom: 60px;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
 
