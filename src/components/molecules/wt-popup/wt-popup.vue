@@ -8,7 +8,7 @@
           class="wt-popup__close-btn"
           icon="remove-rounded"
           size="sm"
-          color="outline"
+          color="active"
           @click.native="$emit('close')"
         ></wt-icon-btn>
       </header>
