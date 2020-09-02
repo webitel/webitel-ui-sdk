@@ -262,10 +262,6 @@
       border-color: var(--form-border--hover-color);
     }
 
-    .wt-datetimepicker__arrow-icon {
-      transform: translateY(-50%) rotate(180deg);
-    }
-
     .wt-datetimepicker__calendar-icon ::v-deep .wt-icon__icon,
     .wt-datetimepicker__arrow-icon ::v-deep .wt-icon__icon {
       fill: var(--icon--hover-color);
