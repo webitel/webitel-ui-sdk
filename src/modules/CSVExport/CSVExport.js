@@ -1,12 +1,13 @@
 import { saveAs } from 'file-saver';
 import stringify from 'csv-stringify/lib/sync';
+import { snakeToCamel } from '../../scripts/caseConverters';
 
 const cast = {
   object: (separator) => {
     const cast = (object) => {
       if (Array.isArray(object)) {
         return object.map((item) => cast(item))
-        .join(separator);
+          .join(separator);
       }
       return object.name || JSON.stringify(object);
     };
@@ -43,7 +44,7 @@ export default class CSVExport {
   async stringify(params) {
     let csv = 'data:text/csv;charset=utf-8,';
     let isNext = false;
-    let columns = [];
+    let columns = snakeToCamel(params?.fields) || [];
     let page = 1;
 
     do {
@@ -52,10 +53,8 @@ export default class CSVExport {
         ...params,
         page,
       });
-      if (!columns.length) {
-        columns = Object.keys(items[0])
-        .filter((col) => col !== 'files');
-      }
+      if (!columns.length) columns = Object.keys(items[0]);
+
       const options = {
         ...CSVExport._getStringifyOptions(),
         columns,
