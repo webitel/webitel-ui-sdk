@@ -37,9 +37,9 @@ export default {
 }
 
 .spinner {
-  width: (18px);
-  height: (18px);
-  display: inline-block;
+  width: 14px;
+  height: 14px;
+  display: block;
   position: relative;
   text-align: initial;
   color: var(--btn-dark-font-color);
