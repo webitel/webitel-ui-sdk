@@ -6,7 +6,7 @@ import Filters from './filters'; // init all directives
 import './css/fonts.scss';
 
 export default {
-  install(Vue, { eventBus }) {
+  install(Vue, { eventBus, router }) {
     Object.keys(Directives).forEach((name) => {
       Vue.directive(name, Directives[name]);
     });
@@ -20,5 +20,6 @@ export default {
       // locale: this.$i18n.locale,
     };
     LibVue.prototype.$eventBus = eventBus;
+    LibVue.prototype.$router = router;
   },
 };

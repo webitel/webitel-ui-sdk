@@ -42,6 +42,10 @@
     position: relative;
     display: inline-block;
 
+    .wt-icon {
+      display: flex;
+    }
+
     &:hover ::v-deep .wt-icon__icon {
       fill: var(--icon--hover-color);
     }

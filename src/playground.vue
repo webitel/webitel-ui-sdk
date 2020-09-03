@@ -1,6 +1,8 @@
 <template>
   <div class="playground">
-    <wt-datepicker></wt-datepicker>
+    <div style="width: 800px; height: 800px; background: lightblue;">
+      <wt-navigation-bar/>
+    </div>
     <div style="margin-top: 250px;">
       <h2>Player</h2>
       <wt-button @click="player.src = 'https://cdn6.sefon.pro/files/prev/1/The%20Eagles%20-%20Hotel%20California%20%28192kbps%29.mp3'"></wt-button>

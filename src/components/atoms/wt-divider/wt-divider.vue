@@ -9,8 +9,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .divider {
+  .wt-divider {
     display: block;
+    box-sizing: border-box;
     width: 100%;
     max-width: 100%;
     height: 0;

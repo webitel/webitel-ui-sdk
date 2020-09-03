@@ -29,6 +29,7 @@ import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
 import WtHeaderActions from './organisms/wt-app-header/wt-header-actions.vue';
 import WtHeadline from './organisms/wt-headline/wt-headline.vue';
+import WtNavigationBar from './organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtNotificationsBar from './organisms/wt-notifications-bar/wt-notifications-bar.vue';
 import WtPageWrapper from './organisms/wt-page-wrapper/wt-page-wrapper.vue';
 import WtPagination from './organisms/wt-pagination/wt-pagination.vue';
@@ -64,6 +65,7 @@ const Components = {
   WtTextarea,
   WtAppHeader,
   WtHeadline,
+  WtNavigationBar,
   WtAppNavigator,
   WtHeaderActions,
   WtNotificationsBar,

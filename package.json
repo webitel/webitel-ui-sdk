@@ -2,6 +2,14 @@
   "name": "@webitel/ui-sdk",
   "version": "0.4.39",
   "private": false,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint --fix",
+    "build-lib": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
+    "build-publish-lib": "npm run build-lib && npm publish --access public"
+  },
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [
     "dist/*",
@@ -11,25 +19,19 @@
     "src/scripts/*",
     "src/modules/*"
   ],
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint --fix",
-    "build-publish-lib": "npm run build-lib && npm publish --access public"
-  },
   "dependencies": {
     "core-js": "^3.6.5",
+    "plyr": "3.6.2",
     "vue": "^2.6.11",
     "vue-i18n": "^8.18.2",
     "vue-multiselect": "^2.1.6",
-    "vuejs-datepicker": "^1.6.2",
-    "plyr": "3.6.2"
+    "vue-router": "^3.2.0",
+    "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-router": "^4.5.4",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-airbnb": "^5.0.2",

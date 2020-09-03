@@ -7,11 +7,13 @@ import i18n from './locale/i18n';
 import eventBus from './scripts/eventBus';
 
 import './css/fonts.scss';
+import router from './router';
 
 Vue.config.productionTip = false;
 Vue.prototype.$eventBus = eventBus;
 
 new Vue({
   i18n,
+  router,
   render: (h) => h(App),
 }).$mount('#app');
