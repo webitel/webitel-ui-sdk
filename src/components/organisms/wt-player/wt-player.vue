@@ -54,7 +54,7 @@ export default {
       this.player = new Plyr('#wt-player__player', {
         autoplay: this.autoplay,
         loadSprite: false,
-        iconUrl: 'img/plyr.svg',
+        iconUrl: '/img/plyr.svg',
         controls,
         loop: {
           active: this.loop,
