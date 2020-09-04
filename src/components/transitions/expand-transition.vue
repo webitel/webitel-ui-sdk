@@ -53,7 +53,7 @@ export default {
 <style lang="scss">
 .expand-enter-active,
 .expand-leave-active {
-  transition: height 0.2s;
+  transition: height var(--transition);
   overflow: hidden;
 }
 

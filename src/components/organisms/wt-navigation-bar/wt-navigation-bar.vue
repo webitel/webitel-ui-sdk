@@ -142,12 +142,12 @@ export default {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 350px;
+  width: var(--navigation-bar-width);
   overflow: auto;
-  z-index: 10;
+  z-index: var(--navigation-bar-z-index);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  background: var(--main-primary-color);
+  background: var(--navigation-bar-bg-color);
 
   // expand animation optimization
   * {
@@ -162,17 +162,17 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: var(--navigation-bar-header-padding);
 }
 
 .wt-navigation-bar__nav-list {
-  padding: 15px 10px;
+  padding: var(--navigation-bar-list-padding);
 }
 
 .wt-navigation-bar__nav-item-link {
   @extend %typo-body-lg;
   display: block;
-  padding: 15px;
+  padding: var(--navigation-bar-link-padding);
   transition: var(--transition);
   word-wrap: break-word;
 
@@ -192,7 +192,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 15px;
+  padding: var(--navigation-bar-link-padding);
   outline: none;
 
   &:before {
@@ -201,8 +201,8 @@ export default {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: -10px;
-    width: 5px;
+    left: calc(var(--navigation-bar-horizontal-padding) * -1);
+    width: var(--navigation-bar-active-expansion-flag-width);
     border-radius: var(--border-radius);
     background: var(--main-accent-color);
     transition: var(--transition);
@@ -224,11 +224,11 @@ export default {
 
 .wt-navigation-bar__nav-expansion-name {
   display: block;
-  width: calc(100% - 24px - 10px);
+  max-width: var(--navigation-bar-active-expansion-name-max-width);
   word-wrap: break-word;
 }
 
 .wt-navigation-bar__nav-item-link--subnav {
-  padding-left: 40px;
+  padding-left: var(--navigation-bar-subnav-padding-left);
 }
 </style>
