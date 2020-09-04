@@ -59,24 +59,24 @@
                   color="active"
                 ></wt-icon>
               </button>
-              <!--                          <transition name="expand">-->
-              <ul class="inner-ul" v-if="isExpanded(navItem)">
-                <li
-                  v-for="(subNavItem, subNavKey) of navItem.subNav"
-                  class="wt-navigation-bar__nav-item"
-                  :key="subNavKey"
-                >
-                  <div class="wt-navigation-bar__nav-item-wrapper">
-                    <router-link
-                      class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
-                      :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
-                      :to="subNavItem.route"
-                    >{{ subNavItem.name }}
-                    </router-link>
-                  </div>
-                </li>
-              </ul>
-              <!--                          </transition>-->
+              <expand-transition>
+                <ul v-if="isExpanded(navItem)">
+                  <li
+                    v-for="(subNavItem, subNavKey) of navItem.subNav"
+                    class="wt-navigation-bar__nav-item"
+                    :key="subNavKey"
+                  >
+                    <div class="wt-navigation-bar__nav-item-wrapper">
+                      <router-link
+                        class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
+                        :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
+                        :to="subNavItem.route"
+                      >{{ subNavItem.name }}
+                      </router-link>
+                    </div>
+                  </li>
+                </ul>
+              </expand-transition>
             </div>
           </li>
         </ul>
@@ -86,8 +86,11 @@
 </template>
 
 <script>
+import ExpandTransition from '../../transitions/expand-transition.vue';
+
 export default {
   name: 'wt-navigation-bar',
+  components: { ExpandTransition },
   props: {
     currentApp: {
       type: String,
@@ -95,25 +98,7 @@ export default {
     },
     nav: {
       type: Array,
-      default: () => [
-        { value: 'supervisor1', name: 'Supervisor', route: '/1' },
-        {
-          value: 'admin1',
-          name: 'Admin 1',
-          subNav: [
-            { value: 'supervisor2', name: 'Supervisor 2', route: '/2' },
-            { value: 'supervisor3', name: 'Supervisor 3', route: '/3' },
-          ],
-        },
-        {
-          value: 'admin2',
-          name: 'Admin 2',
-          subNav: [
-            { value: 'supervisor4', name: 'Supervisor 4', route: '/4' },
-            { value: 'supervisor5', name: 'Supervisor 5', route: '/5' },
-          ],
-        },
-      ],
+      default: () => [],
     },
   },
   data: () => ({
@@ -152,15 +137,25 @@ export default {
 
 <style lang="scss" scoped>
 .wt-navigation-bar__nav {
+  @extend %wt-scrollbar;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  //height: 600px;
   width: 350px;
+  overflow: auto;
+  z-index: 10;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background: var(--main-primary-color);
+
+  // expand animation optimization
+  * {
+    will-change: height;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
 }
 
 .wt-navigation-bar__nav-header {
@@ -179,6 +174,7 @@ export default {
   display: block;
   padding: 15px;
   transition: var(--transition);
+  word-wrap: break-word;
 
   &:hover {
     background: var(--main-option-hover-color);
@@ -198,7 +194,7 @@ export default {
   width: 100%;
   padding: 15px;
   outline: none;
-  //border: 1px dashed red;
+
   &:before {
     opacity: 0;
     content: "";
@@ -226,49 +222,13 @@ export default {
   }
 }
 
+.wt-navigation-bar__nav-expansion-name {
+  display: block;
+  width: calc(100% - 24px - 10px);
+  word-wrap: break-word;
+}
+
 .wt-navigation-bar__nav-item-link--subnav {
   padding-left: 40px;
 }
-
-//----
-
-//.inner-ul {
-//  height: 0;
-//  opacity: 0;
-//}
-
-.inner-ul.expand-enter-active,
-.expand-enter-active {
-  transition: all 2s ease;
-}
-
-.expand-enter-to {
-  //height: 300px;
-}
-
-.inner-ul.expand-enter-to {
-  height: 250px;
-  opacity: 1;
-}
-
-//
-//.inner-ul {
-//  height: 250px;
-//}
-//
-//.expand-leave-active {
-//  transition: all 2s ease;
-//}
-//
-//.expand-leave-to {
-//  height: 300px;
-//}
-//.inner-ul.expand-leave-to {
-//  height: 20px;
-//  opacity: 0
-//}
-//.inner-ul.expand-leave-active {
-//  transition: all 2s ease;
-//}
-
 </style>
