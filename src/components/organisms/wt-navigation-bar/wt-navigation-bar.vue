@@ -39,7 +39,7 @@
                   class="wt-navigation-bar__nav-item-link"
                   :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === navItem.value}"
                   :to="navItem.route"
-                > {{ navItem.name }}
+                > {{ navItem.name || navItem.value }}
                 </router-link>
               </div>
             </div>
@@ -53,7 +53,7 @@
                 type="button"
                 @click="expand(navItem)"
               >
-                <span class="wt-navigation-bar__nav-expansion-name">{{ navItem.name }}</span>
+                <span class="wt-navigation-bar__nav-expansion-name">{{ navItem.name || navItem.value }}</span>
                 <wt-icon
                   class="wt-navigation-bar__expansion-arrow"
                   icon="arrow-right"
@@ -72,7 +72,7 @@
                         class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
                         :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
                         :to="subNavItem.route"
-                      >{{ subNavItem.name }}
+                      >{{ subNavItem.name || subNavItem.value }}
                       </router-link>
                     </div>
                   </li>

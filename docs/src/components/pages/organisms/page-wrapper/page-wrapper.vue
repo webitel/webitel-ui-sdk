@@ -5,7 +5,9 @@
       <div class="example-wrapper" style="padding: 30px; background: #EAEAEA;">
         <wt-page-wrapper>
           <template slot="header">
-            <wt-headline><template slot="title">Wt Headline</template></wt-headline>
+            <wt-headline>
+              <template slot="title">Wt Headline</template>
+            </wt-headline>
           </template>
           <template slot="actions-panel">
             <div style="height: 150px; background: lightblue;"></div>
@@ -30,6 +32,9 @@
         </code></pre>
       </div>
     </article>
+    <component-props
+      :properties="properties"
+    ></component-props>
     <component-slots
       :slots="slots"
     ></component-slots>
@@ -37,30 +42,39 @@
 </template>
 
 <script>
-  import Prism from 'prismjs';
+import Prism from 'prismjs';
 
-  export default {
-    name: 'headline',
-    data: () => ({
-      slots: [
-        {
-          name: 'header',
-          description: 'Header (WT-HEADLINE component is highly recommended) slot',
-        },
-        {
-          name: 'actions-panel',
-          description: 'Actions or filters slot',
-        },
-        {
-          name: 'main',
-          description: 'Main content slot',
-        },
-      ],
-    }),
-    mounted() {
-      Prism.highlightAll();
-    },
-  };
+export default {
+  name: 'headline',
+  data: () => ({
+    properties: [
+      {
+        value: 'actionsPanel',
+        code: '<wt-page-wrapper :actions-panel="false"></wt-page-wrapper>',
+        type: 'Boolean',
+        default: 'true',
+        description: 'Controls actions panel visibility',
+      },
+    ],
+    slots: [
+      {
+        name: 'header',
+        description: 'Header (WT-HEADLINE component is highly recommended) slot',
+      },
+      {
+        name: 'actions-panel',
+        description: 'Actions or filters slot',
+      },
+      {
+        name: 'main',
+        description: 'Main content slot',
+      },
+    ],
+  }),
+  mounted() {
+    Prism.highlightAll();
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,5 @@
 export default [
+  'icon-menu--md',
   'icon-lg-a-marker--sm',
   'icon-forks--md',
   'icon-clear--md',
