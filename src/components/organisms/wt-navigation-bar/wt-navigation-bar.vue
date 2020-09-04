@@ -1,6 +1,7 @@
 <template>
   <aside class="wt-navigation-bar">
     <wt-icon-btn
+      class="wt-navigation-bar__menu-btn"
       icon="menu"
       :class="{'active': isOpened}"
       @click="isOpened = !isOpened"
@@ -102,7 +103,7 @@ export default {
     },
   },
   data: () => ({
-    isOpened: true,
+    isOpened: false,
     expandedName: '',
   }),
 
@@ -136,6 +137,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wt-navigation-bar__menu-btn {
+  display: block;
+  width: fit-content;
+  width: -moz-fit-content;
+}
+
 .wt-navigation-bar__nav {
   @extend %wt-scrollbar;
   position: fixed;

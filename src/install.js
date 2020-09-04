@@ -20,6 +20,6 @@ export default {
       // locale: this.$i18n.locale,
     };
     LibVue.prototype.$eventBus = eventBus;
-    LibVue.prototype.$router = router;
+    if (router) LibVue.use(router);
   },
 };

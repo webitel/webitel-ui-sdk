@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './the-app.vue';
-// import router from './router';
+import router from './router';
 // import store from './store';
 import './plugins/webitel-ui';
 import i18n from './locale/i18n';
@@ -12,7 +12,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$eventBus = eventBus;
 
 new Vue({
-  // router,
+  router,
   // store,
   i18n,
   render: (h) => h(App),
