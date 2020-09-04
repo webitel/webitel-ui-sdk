@@ -1,6 +1,6 @@
 <template>
   <div class="wt-icon-btn" :class="{ 'wt-icon-btn--disabled': disabled }">
-    <button class="wt-icon-btn__button">
+    <button class="wt-icon-btn__button" type="button">
       <wt-icon
         :icon="icon"
         :size="size"

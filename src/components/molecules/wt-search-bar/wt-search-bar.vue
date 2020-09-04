@@ -24,7 +24,7 @@
         :class="{ 'hidden': !value }"
         icon="remove-rounded"
         size="sm"
-        @click.native="$emit('input', '')"
+        @click="$emit('input', '')"
       ></wt-icon-btn>
     </div>
   </div>

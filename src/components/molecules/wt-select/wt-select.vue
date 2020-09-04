@@ -61,7 +61,7 @@
           :class="{ 'hidden': !isValue }"
           icon="remove-rounded"
           size="sm"
-          @click.native="clearValue"
+          @click="clearValue"
         ></wt-icon-btn>
       </template>
     </vue-multiselect>
