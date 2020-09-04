@@ -3,7 +3,7 @@
     <div class="wt-page-wrapper__header">
       <slot name="header"></slot>
     </div>
-    <div class="wt-page-wrapper__actions-panel">
+    <div class="wt-page-wrapper__actions-panel" v-if="actionsPanel">
       <slot name="actions-panel"></slot>
     </div>
     <div class="wt-page-wrapper__main">
@@ -15,6 +15,12 @@
 <script>
 export default {
   name: 'wt-page-wrapper',
+  props: {
+    actionsPanel: {
+      type: Boolean,
+      default: true,
+    },
+  },
 };
 </script>
 
