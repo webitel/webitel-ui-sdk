@@ -1,74 +1,87 @@
 <template>
   <aside class="wt-navigation-bar">
-    <wt-icon-btn icon="menu"></wt-icon-btn>
-    <nav class="wt-navigation-bar__nav">
-      <header class="wt-navigation-bar__nav-header">
-        <!--        vue cli build target lib cant handle dynamic require :( -->
-        <img v-if="currentApp === 'admin'"
-             src="../../../assets/components/organisms/wt-navigation-bar/logo-admin-app.svg" alt="admin">
-        <img v-if="currentApp === 'agent'"
-             src="../../../assets/components/organisms/wt-navigation-bar/logo-agent-app.svg" alt="agent">
-        <img v-if="currentApp === 'audit'"
-             src="../../../assets/components/organisms/wt-navigation-bar/logo-audit-app.svg" alt="audit">
-        <img v-if="currentApp === 'history'"
-             src="../../../assets/components/organisms/wt-navigation-bar/logo-history-app.svg" alt="history">
-        <img v-if="currentApp === 'supervisor'"
-             src="../../../assets/components/organisms/wt-navigation-bar/logo-supervisor-app.svg" alt="supervisor">
-        <wt-icon-btn class="wt-navigation-bar__nav-close" icon="close"></wt-icon-btn>
-      </header>
-      <wt-divider/>
-      <ul class="wt-navigation-bar__nav-list">
-        <li
-          v-for="(navItem, key) of nav"
-          class="wt-navigation-bar__nav-item"
-          :key="key"
-        >
-          <div v-if="!navItem.subNav">
-            <div class="wt-navigation-bar__nav-item-wrapper">
-              <router-link
-                class="wt-navigation-bar__nav-item-link"
-                :class="{'wt-navigation-bar__nav-item-link--active': currentNav === navItem.name}"
-                :to="navItem.route"
-              > {{ navItem.name }}
-              </router-link>
+    <wt-icon-btn
+      icon="menu"
+      :class="{'active': isOpened}"
+      @click="isOpened = !isOpened"
+    ></wt-icon-btn>
+    <transition name="fade">
+      <nav class="wt-navigation-bar__nav" v-show="isOpened">
+        <header class="wt-navigation-bar__nav-header">
+          <!--        vue cli build target lib cant handle dynamic require :( -->
+          <img v-if="currentApp === 'admin'"
+               src="../../../assets/components/organisms/wt-navigation-bar/logo-admin-app.svg" alt="admin">
+          <img v-if="currentApp === 'agent'"
+               src="../../../assets/components/organisms/wt-navigation-bar/logo-agent-app.svg" alt="agent">
+          <img v-if="currentApp === 'audit'"
+               src="../../../assets/components/organisms/wt-navigation-bar/logo-audit-app.svg" alt="audit">
+          <img v-if="currentApp === 'history'"
+               src="../../../assets/components/organisms/wt-navigation-bar/logo-history-app.svg" alt="history">
+          <img v-if="currentApp === 'supervisor'"
+               src="../../../assets/components/organisms/wt-navigation-bar/logo-supervisor-app.svg" alt="supervisor">
+          <wt-icon-btn
+            class="wt-navigation-bar__nav-close"
+            icon="close"
+            @click="isOpened = false"
+          ></wt-icon-btn>
+        </header>
+        <wt-divider/>
+        <ul class="wt-navigation-bar__nav-list">
+          <li
+            v-for="(navItem, key) of nav"
+            class="wt-navigation-bar__nav-item"
+            :key="key"
+          >
+            <div v-if="!navItem.subNav">
+              <div class="wt-navigation-bar__nav-item-wrapper">
+                <router-link
+                  class="wt-navigation-bar__nav-item-link"
+                  :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === navItem.value}"
+                  :to="navItem.route"
+                > {{ navItem.name }}
+                </router-link>
+              </div>
             </div>
-          </div>
-          <div v-else>
-            <button
-              class="wt-navigation-bar__nav-expansion"
-              :class="{'wt-navigation-bar__nav-expansion--expanded': isExpanded(navItem)}"
-              type="button"
-              @click="expand(navItem)"
-            >
-              <span class="wt-navigation-bar__nav-expansion-name">{{ navItem.name }}</span>
-              <wt-icon
-                class="wt-navigation-bar__expansion-arrow"
-                icon="arrow-right"
-                color="active"
-              ></wt-icon>
-            </button>
-            <!--            <transition name="fade">-->
-            <ul v-if="isExpanded(navItem)">
-              <li
-                v-for="(subNavItem, subNavKey) of navItem.subNav"
-                class="wt-navigation-bar__nav-item"
-                :key="subNavKey"
+            <div v-else>
+              <button
+                class="wt-navigation-bar__nav-expansion"
+                :class="{
+                  'wt-navigation-bar__nav-expansion--expanded': isExpanded(navItem),
+                  'wt-navigation-bar__nav-expansion--active': currentNav.expansion === navItem.value,
+                }"
+                type="button"
+                @click="expand(navItem)"
               >
-                <div class="wt-navigation-bar__nav-item-wrapper">
-                  <router-link
-                    class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
-                    :class="{'wt-navigation-bar__nav-item-link--active': currentNav === subNavItem.name}"
-                    :to="subNavItem.route"
-                  >{{ subNavItem.name }}
-                  </router-link>
-                </div>
-              </li>
-            </ul>
-            <!--            </transition>-->
-          </div>
-        </li>
-      </ul>
-    </nav>
+                <span class="wt-navigation-bar__nav-expansion-name">{{ navItem.name }}</span>
+                <wt-icon
+                  class="wt-navigation-bar__expansion-arrow"
+                  icon="arrow-right"
+                  color="active"
+                ></wt-icon>
+              </button>
+              <!--                          <transition name="expand">-->
+              <ul class="inner-ul" v-if="isExpanded(navItem)">
+                <li
+                  v-for="(subNavItem, subNavKey) of navItem.subNav"
+                  class="wt-navigation-bar__nav-item"
+                  :key="subNavKey"
+                >
+                  <div class="wt-navigation-bar__nav-item-wrapper">
+                    <router-link
+                      class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
+                      :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
+                      :to="subNavItem.route"
+                    >{{ subNavItem.name }}
+                    </router-link>
+                  </div>
+                </li>
+              </ul>
+              <!--                          </transition>-->
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </transition>
   </aside>
 </template>
 
@@ -83,48 +96,55 @@ export default {
     nav: {
       type: Array,
       default: () => [
-        { name: 'Supervisor', route: '/1' },
+        { value: 'supervisor1', name: 'Supervisor', route: '/1' },
         {
-          name: 'Admin1',
+          value: 'admin1',
+          name: 'Admin 1',
           subNav: [
-            { name: 'Supervisor2', route: '/2' },
-            { name: 'Supervisor3', route: '/3' },
+            { value: 'supervisor2', name: 'Supervisor 2', route: '/2' },
+            { value: 'supervisor3', name: 'Supervisor 3', route: '/3' },
           ],
         },
         {
-          name: 'Admin2',
+          value: 'admin2',
+          name: 'Admin 2',
           subNav: [
-            { name: 'Supervisor4', route: '/4' },
-            { name: 'Supervisor5', route: '/5' },
+            { value: 'supervisor4', name: 'Supervisor 4', route: '/4' },
+            { value: 'supervisor5', name: 'Supervisor 5', route: '/5' },
           ],
         },
       ],
     },
   },
   data: () => ({
+    isOpened: true,
     expandedName: '',
   }),
+
   computed: {
     currentNav() {
-      const path = this.$router.currentRoute.fullPath;
-      const navItem = this.nav
-        .flat()
+      const path = this.$route.fullPath;
+      const currentNav = this.nav
+        .reduce((flatNav, currentNavItem) => {
+          if (currentNavItem.subNav) return flatNav.concat(currentNavItem.subNav);
+          return [...flatNav, currentNavItem];
+        }, [])
         .find((navItem) => path.includes(navItem.route));
-      return navItem?.name || null;
-    },
-
-    currentExpansion() {
-      if (this.currentNav) {
-      }
-      return null;
+      const currentExpansion = this.nav
+        .filter((nav) => nav.subNav)
+        .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
+      return {
+        nav: currentNav?.value,
+        expansion: currentExpansion?.value,
+      };
     },
   },
   methods: {
     expand(navItem) {
-      this.expandedName = this.expandedName !== navItem.name ? navItem.name : '';
+      this.expandedName = this.expandedName !== navItem.value ? navItem.value : '';
     },
     isExpanded(navItem) {
-      return this.expandedName === navItem.name;
+      return this.expandedName === navItem.value;
     },
   },
 };
@@ -132,11 +152,15 @@ export default {
 
 <style lang="scss" scoped>
 .wt-navigation-bar__nav {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  //height: 600px;
   width: 350px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background: var(--main-primary-color);
-  height: 600px;
 }
 
 .wt-navigation-bar__nav-header {
@@ -154,6 +178,7 @@ export default {
   @extend %typo-body-lg;
   display: block;
   padding: 15px;
+  transition: var(--transition);
 
   &:hover {
     background: var(--main-option-hover-color);
@@ -166,15 +191,34 @@ export default {
 
 .wt-navigation-bar__nav-expansion {
   @extend %typo-heading-sm;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 15px;
-  border: 1px dashed red;
+  outline: none;
+  //border: 1px dashed red;
+  &:before {
+    opacity: 0;
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -10px;
+    width: 5px;
+    border-radius: var(--border-radius);
+    background: var(--main-accent-color);
+    transition: var(--transition);
+  }
 
   .wt-navigation-bar__expansion-arrow {
     transition: var(--transition);
+  }
+
+  &--expanded:before,
+  &--active:before {
+    opacity: 1;
   }
 
   &--expanded .wt-navigation-bar__expansion-arrow {
@@ -186,32 +230,45 @@ export default {
   padding-left: 40px;
 }
 
-/* Анимации появления и исчезновения могут иметь */
-/* различные продолжительности и динамику.       */
-//.slide-fade-enter-active {
-//transition: all .3s ease;
+//----
+
+//.inner-ul {
+//  height: 0;
+//  opacity: 0;
 //}
 
-.bigger {
-  //height: 0;
+.inner-ul.expand-enter-active,
+.expand-enter-active {
+  transition: all 2s ease;
 }
 
-.fade-enter-active {
-  transition: all 5s ease;
-}
-
-.fade-leave-to {
+.expand-enter-to {
   //height: 300px;
 }
 
-.bigger.fade-enter-to {
-  height: 200px;
-  //opacity: 0;
+.inner-ul.expand-enter-to {
+  height: 250px;
+  opacity: 1;
 }
 
-.bigger.fade-enter-active {
-  //transition: opacity 0s ease;
-  transition: height 5s ease;
-}
+//
+//.inner-ul {
+//  height: 250px;
+//}
+//
+//.expand-leave-active {
+//  transition: all 2s ease;
+//}
+//
+//.expand-leave-to {
+//  height: 300px;
+//}
+//.inner-ul.expand-leave-to {
+//  height: 20px;
+//  opacity: 0
+//}
+//.inner-ul.expand-leave-active {
+//  transition: all 2s ease;
+//}
 
 </style>
