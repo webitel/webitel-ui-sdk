@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-navigation-bar :nav="[{name: 'name1', route: '/1'}]"></wt-navigation-bar>
     <div style="margin-top: 250px;">
       <h2>Player</h2>
       <wt-button @click="player.src = 'https://cdn6.sefon.pro/files/prev/1/The%20Eagles%20-%20Hotel%20California%20%28192kbps%29.mp3'"></wt-button>

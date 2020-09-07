@@ -39,6 +39,7 @@
                   class="wt-navigation-bar__nav-item-link"
                   :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === navItem.value}"
                   :to="navItem.route"
+                  @click.native="close"
                 > {{ navItem.name || navItem.value }}
                 </router-link>
               </div>
@@ -71,7 +72,8 @@
                       <router-link
                         class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
                         :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
-                        :to="subNavItem.route"
+                        :to="nestedRoute(subNavItem, navItem)"
+                        @click.native="close"
                       >{{ subNavItem.name || subNavItem.value }}
                       </router-link>
                     </div>
@@ -126,11 +128,17 @@ export default {
     },
   },
   methods: {
+    nestedRoute(subNavItem, navItem) {
+      return navItem.route ? `${navItem.route}/${subNavItem.route}` : subNavItem.route;
+    },
     expand(navItem) {
       this.expandedName = this.expandedName !== navItem.value ? navItem.value : '';
     },
     isExpanded(navItem) {
       return this.expandedName === navItem.value;
+    },
+    close() {
+      this.isOpened = false;
     },
   },
 };
