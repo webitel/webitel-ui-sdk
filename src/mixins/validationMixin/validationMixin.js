@@ -15,6 +15,7 @@ export default {
     validationText() {
       if (this.isValidation && this.invalid) {
         if (this.v.required === false) {
+          console.info(this.$t('validation.required'));
           return this.$t('validation.required');
         }
         if (this.v.numeric === false) {

@@ -57,10 +57,10 @@
         ></wt-timepicker>
       </div>
       <div class="wt-datetimepicker__actions">
-        <wt-button color="primary" @click.native="input">
+        <wt-button @click="input">
           {{$t('reusable.add')}}
         </wt-button>
-        <wt-button color="secondary" @click.native="close">
+        <wt-button color="secondary" @click="close">
           {{$t('reusable.cancel')}}
         </wt-button>
       </div>
