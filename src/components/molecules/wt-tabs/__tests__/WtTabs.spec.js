@@ -8,6 +8,14 @@ describe('WtTabs', () => {
     expect(wrapper.classes('wt-tabs')).toBe(true);
   });
 
+  it('component emits change at tab click', () => {
+    const wrapper = shallowMount(WtTabs, {
+      propsData: { tabs },
+    });
+    wrapper.find('.wt-tab').trigger('click');
+    expect(wrapper.emitted().change.pop()).toEqual([tabs[0]]);
+  });
+
   it('renders tab default content', () => {
     const wrapper = shallowMount(WtTabs, {
       propsData: { tabs },

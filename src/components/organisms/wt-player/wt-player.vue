@@ -5,8 +5,7 @@
       :src="src"
       :autoplay="autoplay"
       controls
-    >
-    </audio>
+    ></audio>
   </aside>
 </template>
 

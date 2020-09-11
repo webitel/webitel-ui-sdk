@@ -31,7 +31,7 @@
             icon="sort-arrow-down"
           ></wt-icon>
         </th>
-        <th class="wt-table__th__actions">
+        <th class="wt-table__th__actions"  v-if="gridActions">
           <slot name="actions-header"></slot>
         </th>
       </tr>

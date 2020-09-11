@@ -14,17 +14,17 @@
     <div class="wt-pagination__page-controls">
       <wt-icon-btn
         class="wt-pagination__page-control"
-        :icon="'arrow-left'"
+        icon="arrow-left"
         :tooltip="$t('webitelUI.pagination.prev')"
         :disabled="!prev"
-        @click.native="goPrev"
+        @click="goPrev"
       ></wt-icon-btn>
       <wt-icon-btn
         class="wt-pagination__page-control"
-        :icon="'arrow-right'"
+        icon="arrow-right"
         :tooltip="$t('webitelUI.pagination.next')"
         :disabled="!next"
-        @click.native="goNext"
+        @click="goNext"
       ></wt-icon-btn>
     </div>
   </footer>
@@ -38,7 +38,6 @@ export default {
   props: {
     size: {
       type: [String, Number],
-      required: true,
     },
     next: {
       type: Boolean,
@@ -63,7 +62,7 @@ export default {
   },
 
   watch: {
-    value() {
+    size() {
       this.inputHandler.call(this);
     },
   },

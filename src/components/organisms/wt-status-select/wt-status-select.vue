@@ -25,6 +25,7 @@
 
 <script>
 import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum';
+import convertDuration from '../../../scripts/convertDuration';
 
 export default {
   name: 'wt-status-select',
@@ -69,9 +70,9 @@ export default {
       return this.options.filter((option) => option.value !== this.status);
     },
     duration() {
-      if (typeof this.statusDuration === 'string') return this.statusDuration;
-      if (typeof this.statusDuration === 'number') {
-        return new Date(this.statusDuration * 1000).toISOString().substr(11, 8);
+      if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
+      if (this.statusDuration !== undefined) {
+        return convertDuration(this.statusDuration);
       }
       return this.selectedOption.text;
     },

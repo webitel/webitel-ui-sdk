@@ -22,7 +22,7 @@ describe('WtTimepicker', () => {
     expect(wrapper.findAllComponents(WtTimeInput).length).toBe(1);
   });
 
-  it('', async () => {
+  it('Correctly converts value from one time-input to output', async () => {
     const value = 0;
     const wrapper = shallowMount(WtTimepicker, {
       stubs: {

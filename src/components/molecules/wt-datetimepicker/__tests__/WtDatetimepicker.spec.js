@@ -13,9 +13,6 @@ describe('WtDatetimepicker', () => {
         WtButton,
         WtTimepicker: true,
       },
-      directives: {
-        clickaway: true,
-      },
     });
     expect(wrapper.classes('wt-datetimepicker')).toBe(true);
   });
@@ -29,7 +26,6 @@ describe('WtDatetimepicker', () => {
         WtButton,
         WtTimepicker: true,
       },
-      directives: { clickaway: true },
       propsData: { label },
     });
     expect(wrapper.find('.wt-label').text()).toBe(label);
@@ -43,7 +39,6 @@ describe('WtDatetimepicker', () => {
         WtButton,
         WtTimepicker: true,
       },
-      directives: { clickaway: true },
     });
     expect(wrapper.find('.wt-datetimepicker__form').element).not.toBeVisible();
     wrapper.find('.wt-datetimepicker__preview').trigger('click');
@@ -60,7 +55,6 @@ describe('WtDatetimepicker', () => {
         WtButton,
         WtTimepicker: true,
       },
-      directives: { clickaway: true },
       propsData: {
         value: now,
       },

@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-status-select></wt-status-select>
     <wt-navigation-bar :nav="[{name: 'name1', route: '/1'}]"></wt-navigation-bar>
     <div style="margin-top: 250px;">
       <h2>Player</h2>

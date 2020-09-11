@@ -20,7 +20,7 @@
           <li
             v-if="apps.agent"
             class="wt-app-navigator__card"
-            :class="{'active': apps.agent === activeApp}"
+            :class="{'active': activeApp === 'agent'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -39,7 +39,7 @@
           <li
             v-if="apps.supervisor"
             class="wt-app-navigator__card"
-            :class="{'active': apps.supervisor === activeApp}"
+            :class="{'active': activeApp === 'supervisor'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -58,7 +58,7 @@
           <li
             v-if="apps.history"
             class="wt-app-navigator__card"
-            :class="{'active': apps.history === activeApp}"
+            :class="{'active': activeApp === 'history'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -77,7 +77,7 @@
           <li
             v-if="apps.audit"
             class="wt-app-navigator__card"
-            :class="{'active': apps.audit === activeApp}"
+            :class="{'active': activeApp === 'audit'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -96,7 +96,7 @@
           <li
             v-if="apps.admin"
             class="wt-app-navigator__card"
-            :class="{'active': apps.admin === activeApp}"
+            :class="{'active': activeApp === 'admin'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -151,7 +151,7 @@ export default {
     },
     apps: {
       type: Object,
-      default: () => {},
+      default: () => ({}),
     },
   },
 
