@@ -13,7 +13,7 @@ export default {
         .map((item) => item.id);
     },
     isAnySelected() {
-      return this.selectedIds.length;
+      return !!this.selectedIds.length;
     },
   },
 
@@ -33,7 +33,8 @@ export default {
 
       try {
         await this.CSVExport.export(params);
-      } catch {
+      } catch (err) {
+        throw err;
       } finally {
         this.isCSVLoading = false;
       }
