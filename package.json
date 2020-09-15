@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -16,6 +16,7 @@
     "src/locale/*",
     "src/css/*",
     "src/enums/*",
+    "src/mixins/*",
     "src/scripts/*",
     "src/modules/*"
   ],
