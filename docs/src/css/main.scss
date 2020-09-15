@@ -6,9 +6,15 @@ body {
   @extend %typo-body-lg;
 }
 
-h3 {
-  @extend %typo-heading-md;
-  margin: 20px 10px;
+.docs {
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    @extend %typo-heading-md;
+    margin: 20px 10px;
+  }
 }
 
 // for wrapping component example usage

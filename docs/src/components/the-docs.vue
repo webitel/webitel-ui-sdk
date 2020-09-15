@@ -30,6 +30,7 @@ export default {
         this.componentsNav,
         this.filtersNav,
         this.directivesNav,
+        this.mixinsNav,
         this.modulesNav,
         this.scriptsNav,
       ];
@@ -251,6 +252,25 @@ export default {
             name: 'Clickaway',
             value: 'clickaway',
             route: 'clickaway',
+          },
+        ],
+      };
+    },
+    mixinsNav() {
+      return {
+        name: 'Mixins',
+        value: 'mixins',
+        route: '/mixins',
+        subNav: [
+          {
+            name: 'Validation',
+            value: 'validation',
+            route: 'validation',
+          },
+          {
+            name: 'Data filters',
+            value: 'data-filter',
+            route: 'data-filter',
           },
         ],
       };

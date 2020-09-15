@@ -67,6 +67,10 @@ import TruncateFilterDocs from '../components/pages/filters/truncate-filter/trun
 import DirectivesDocs from '../components/pages/directives/directives-docs.vue';
 import ClickawayDirectiveDocs from '../components/pages/directives/clickaway-directive/clickaway-directive-docs.vue';
 
+import MixinsDocs from '../components/pages/mixins/mixins-docs.vue';
+import ValidationMixinDocs from '../components/pages/mixins/validation-mixin/validation-mixin-docs.vue';
+import DataFilterMixinDocs from '../components/pages/mixins/data-filter-mixin/data-filter-mixin-docs.vue';
+
 import ModulesDocs from '../components/pages/modules/modules-docs.vue';
 import ExportCSVModuleDocs from '../components/pages/modules/export-csv-module/export-csv-module-docs.vue';
 
@@ -304,6 +308,23 @@ const routes = [
         path: 'clickaway',
         name: 'clickaway',
         component: ClickawayDirectiveDocs,
+      },
+    ],
+  },
+  {
+    path: '/mixins',
+    name: 'mixins',
+    component: MixinsDocs,
+    children: [
+      {
+        path: 'validation',
+        name: 'validation',
+        component: ValidationMixinDocs,
+      },
+      {
+        path: 'data-filter',
+        name: 'data-filter',
+        component: DataFilterMixinDocs,
       },
     ],
   },
