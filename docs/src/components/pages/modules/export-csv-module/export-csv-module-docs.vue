@@ -14,7 +14,7 @@
         </code></pre>
         and then:
         <pre><code class="language-html">@click="exportCSV(params)"</code></pre>
-        params is usually a filters query params (this.filterParams);
+        params is usually a filters query params ( default: $route.query);
       </div>
       <br>
       <p>In data, has <b>isCSVLoading</b> boolean indicator to track loading progress and <b>CSVExport</b>

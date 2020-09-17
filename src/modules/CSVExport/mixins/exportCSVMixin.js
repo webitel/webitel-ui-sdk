@@ -22,11 +22,11 @@ export default {
       this.CSVExport = new CSVExport(fetchMethod, options);
     },
 
-    async exportCSV(filterParams = this.filterParams) {
+    async exportCSV(exportParams) {
       this.isCSVLoading = true;
-
+      const routeQuery = this.$route?.query;
       const params = {
-        ...filterParams,
+        ...exportParams || routeQuery,
         size: 5000,
       };
       if (this.isAnySelected) params.ids = this.selectedIds;
