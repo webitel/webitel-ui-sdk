@@ -84,6 +84,26 @@
      </pre>
     </article>
     <article class="mixin">
+      <h3>Pagination Filter Mixin</h3>
+      <p><b>Extends Base Filter Mixin</b>, plus implements value setting and restoring logic.</p>
+      <pre>
+        <code class="language-javascript">
+          props: {
+            isNext: Boolean
+          },
+          data: () => ({
+            page: '1',
+            size: '10',
+          }),
+          methods: {
+            next() {} // changes page and emits "input" event
+            prev() {} // changes page and emits "input" event
+            sizeChange(value) {} /* changes size to value and emits "input" event */
+          },
+        </code>
+     </pre>
+    </article>
+    <article class="mixin">
       <h3>Simple usage example</h3>
       <p>Enum filter mixin</p>
       <pre>
