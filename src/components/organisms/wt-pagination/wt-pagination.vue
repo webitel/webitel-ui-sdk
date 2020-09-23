@@ -62,8 +62,8 @@ export default {
   },
 
   watch: {
-    size() {
-      this.inputHandler.call(this);
+    size(value) {
+      this.changeSize(value);
     },
   },
 
