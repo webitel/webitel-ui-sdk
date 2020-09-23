@@ -21,6 +21,7 @@
     "src/modules/*"
   ],
   "dependencies": {
+    "bamboo-jest-reporter": "^1.0.3",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
     "deep-equal": "^2.0.3",

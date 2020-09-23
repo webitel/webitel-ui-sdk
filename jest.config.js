@@ -1,5 +1,6 @@
 module.exports = {
   preset: '@vue/cli-plugin-unit-jest',
+  reporters: ['default', 'bamboo-jest-reporter'],
   collectCoverage: true,
   collectCoverageFrom: [
     'src/components/**/*.{js,vue}',
