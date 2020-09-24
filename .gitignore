@@ -4,6 +4,7 @@ package-lock.json
 /dist
 /coverage
 demo.html
+jest.json
 
 docs/node_modules
 docs/dist

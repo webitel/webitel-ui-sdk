@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -26,6 +26,8 @@
     "csv-stringify": "^5.5.1",
     "deep-equal": "^2.0.3",
     "file-saver": "^2.0.2",
+    "jszip": "^3.5.0",
+    "jszip-utils": "^0.1.0",
     "plyr": "3.6.2",
     "vue": "^2.6.11",
     "vue-i18n": "^8.18.2",
