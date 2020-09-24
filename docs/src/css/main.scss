@@ -15,6 +15,10 @@ body {
     @extend %typo-heading-md;
     margin: 20px 10px;
   }
+
+  p {
+    margin-bottom: 10px;
+  }
 }
 
 // for wrapping component example usage

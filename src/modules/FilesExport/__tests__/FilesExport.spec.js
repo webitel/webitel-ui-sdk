@@ -63,15 +63,4 @@ describe('File Export', () => {
       expect(wrapper.vm.isFilesLoading).toBe(false);
     }
   });
-
-  it('resets progress after export complete', async () => {
-    wrapper = shallowMount(Component);
-    wrapper.vm.FilesExport = null; // like FilesExport wasn't initialized
-    try {
-      await wrapper.vm.exportFiles();
-    } catch (err) {
-      expect(err).toBeTruthy();
-      expect(wrapper.vm.isFilesLoading).toBe(false);
-    }
-  });
 });

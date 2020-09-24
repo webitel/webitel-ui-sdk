@@ -2,11 +2,14 @@ import FilesExport from '../FilesExport';
 
 export default {
   data: () => ({
-    isFilesLoading: false,
     FilesExport: null,
   }),
 
   computed: {
+    isFilesLoading() {
+      return !!(this.downloadProgress || this.zippingProgress);
+    },
+
     downloadProgress() {
       return this.FilesExport ? this.FilesExport.downloadProgress.count : 0;
     },
@@ -30,17 +33,13 @@ export default {
       return files;
     },
 
-    async exportFiles(files) {
+    async exportFiles(files, reqParams = {}) {
       if (!this.FilesExport) throw new Error('FilesExport is not initialized');
-      this.isFilesLoading = true;
       const exportFiles = files || this.getSelectedFiles();
-      const reqParams = { existsFile: true };
       try {
         await this.FilesExport.exportFiles(exportFiles, { reqParams });
       } catch (err) {
         throw err;
-      } finally {
-        this.isFilesLoading = false;
       }
     },
   },

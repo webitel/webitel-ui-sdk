@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.5.9</h1>
+          <h1>Webitel UI SDK v. 0.5.11</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -285,6 +285,11 @@ export default {
             name: 'Export CSV',
             value: 'export-csv',
             route: 'export-csv',
+          },
+          {
+            name: 'Export Files',
+            value: 'export-files',
+            route: 'export-files',
           },
         ],
       };

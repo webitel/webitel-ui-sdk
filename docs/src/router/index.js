@@ -73,6 +73,7 @@ import DataFilterMixinDocs from '../components/pages/mixins/data-filter-mixin/da
 
 import ModulesDocs from '../components/pages/modules/modules-docs.vue';
 import ExportCSVModuleDocs from '../components/pages/modules/export-csv-module/export-csv-module-docs.vue';
+import ExportFilesModuleDocs from '../components/pages/modules/export-files-module/export-files-module-docs.vue';
 
 import ScriptsDocs from '../components/pages/scripts/scripts-docs.vue';
 import CaseConverterScriptsDocs from '../components/pages/scripts/case-converter-scripts/case-converter-scripts-docs.vue';
@@ -337,6 +338,11 @@ const routes = [
         path: 'export-csv',
         name: 'export-csv',
         component: ExportCSVModuleDocs,
+      },
+      {
+        path: 'export-files',
+        name: 'export-files',
+        component: ExportFilesModuleDocs,
       },
     ],
   },
