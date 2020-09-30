@@ -40,7 +40,7 @@ describe('File Export', () => {
   it('mixin correctly computes empty export progress from class data', () => {
     wrapper = shallowMount(Component);
     expect(wrapper.vm.downloadProgress).toBe(0);
-    expect(wrapper.vm.zippingProgress).toBe('0%');
+    expect(wrapper.vm.zippingProgress).toBe(0);
   });
 
   it('mixin correctly computes selectedFiles()', () => {

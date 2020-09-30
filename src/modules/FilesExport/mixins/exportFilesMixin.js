@@ -15,7 +15,7 @@ export default {
     },
 
     zippingProgress() {
-      return this.FilesExport ? `${Math.floor(this.FilesExport.zippingProgress.percent)}%` : 0;
+      return this.FilesExport ? Math.floor(this.FilesExport.zippingProgress.percent) : 0;
     },
   },
 

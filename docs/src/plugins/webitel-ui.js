@@ -5,6 +5,7 @@ import WebitelUIEn from '@webitel/ui-sdk/src/locale/en/en';
 import WebitelUIRu from '@webitel/ui-sdk/src/locale/ru/ru';
 import '@webitel/ui-sdk/dist/ui-sdk.css';
 import '@webitel/ui-sdk/src/css/main.scss';
+import '@webitel/ui-sdk/dist/img/svg-sprites/wt-icon.svg';
 
 // import WebitelUI from '../../../dist/ui-sdk.common';
 // import WebitelUIEn from '../../../src/locale/en/en';

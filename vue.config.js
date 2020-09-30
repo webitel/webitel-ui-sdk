@@ -30,6 +30,9 @@ module.exports = {
         [{
           from: 'src/assets/icons/plyr.svg',
           to: 'img',
+        }, {
+          from: 'src/assets/icons/svg-sprites/wt-icon.svg',
+          to: 'img/svg-sprites',
         }],
       ]);
 

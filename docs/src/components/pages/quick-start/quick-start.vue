@@ -34,6 +34,31 @@
         <pre><code class="language-javascript">import './plugins/webitel-ui';</code></pre>
       </li>
     </ol>
+    <article>
+      <h3>Wt-icon installation:</h3>
+      <p>To use icons you need to install svg-sprite-loader and configure webpack build and import the sprite itself.</p>
+      <ol>
+        <li>
+          Install sprite loader with <strong>npm</strong>:
+          <pre><code class="language-bash">npm i svg-sprite-loader</code></pre>
+        </li>
+        <li>
+          In plugins/webitel-ui.js
+        <pre><code class="language-javascript">import '@webitel/ui-sdk/dist/img/svg-sprites/wt-icon.svg';</code></pre>
+        </li>
+        <li>
+          in vue.config.js
+          <pre><code class="language-javascript">
+            // exclude sprites default building
+            config.module.rule('svg').exclude.add(/^(.*sprites).*\.svg/);
+
+            // use svg-sprite-loader to process icons sprite
+          config.module.rule('svg-sprite').test(/^(.*sprites).*\.svg/)
+            .use('svg-sprite-loader').loader('svg-sprite-loader').options({ symbolId: () => '' });
+          </code></pre>
+        </li>
+      </ol>
+    </article>
   </section>
 </template>
 
