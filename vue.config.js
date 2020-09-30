@@ -1,4 +1,5 @@
 /* eslint-disable */
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -53,8 +54,18 @@ module.exports = {
     svgRule.uses.clear()
 
     svgRule
-      .test(/\.svg$/)
+      .test(/\.svg/)
+      .exclude.add(path.resolve(__dirname, 'src/assets/icons/svg-sprites/wt-icon.svg'))
+      .end()
       .use('svg-url-loader')
-      .loader('svg-url-loader');
+      .loader('svg-url-loader')
+
+    config.module
+      .rule('svg-sprite')
+      .test(/^(.*sprites).*\.svg/)
+      // .test(/\.svg/)
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({ symbolId: () => '', });
   },
 };

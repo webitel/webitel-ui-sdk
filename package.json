@@ -1,9 +1,9 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.5.11",
+  "version": "0.5.12",
   "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve-lib": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix",
@@ -29,6 +29,7 @@
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "plyr": "3.6.2",
+    "svg-sprite-loader": "^5.0.0",
     "vue": "^2.6.11",
     "vue-i18n": "^8.18.2",
     "vue-multiselect": "^2.1.6",
