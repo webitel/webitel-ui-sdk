@@ -19,6 +19,8 @@
       <br>
       <p>In data, has <b>isCSVLoading</b> boolean indicator to track loading progress and <b>CSVExport</b>
       property to control CSVExport class instance.</p>
+      <p>In computed, mixin has <b>CSVDownloadProgress</b> for files fetch
+        and archive generation and <b>isCSVLoading</b> computed boolean indicator to track loading progress</p>
       <p>Exporting of <b>selected rows</b> only relies on <b>selectedIds</b> and
         <b>isAnySelected</b> computed properties.
       By default, they are computed like</p>

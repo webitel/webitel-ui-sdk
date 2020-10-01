@@ -23,9 +23,9 @@
         </code></pre></div>
       <br>
       <p>In data, mixin has <b>FilesExport</b> property to control FilesExport class instance.</p>
-      <p>In computed, mixin has <b>downloadProgress</b> and <b>zippingProgress</b> for files fetch
+      <p>In computed, mixin has <b>filesDownloadProgress</b> and <b>filesZippingProgress</b> for files fetch
         and archive generation. <b>isFilesLoading</b> computed boolean indicator tracks loading progress
-        like <code class="language-javascript">downloadProgress || zippingProgress</code></p>
+        like <code class="language-javascript">filesDownloadProgress || filesZippingProgress</code></p>
       <p><code class="language-javascript">this.FilesExport</code> has progress tracking properties:
       <code class="language-javascript">downloadProgress = { count: 0 }; zippingProgress = { percent: 0 };</code>
       and <code class="language-javascript">filesURL</code> method property that could be overridden.
