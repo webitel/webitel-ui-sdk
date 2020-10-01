@@ -21,9 +21,9 @@ export default class FilesExport {
     if (filesURL) this.generateURL = filesURL;
   }
 
-   _fetchFileBinary(fileId) {
-     const url = this.filesURL(fileId);
-     return new Promise((resolve, reject) => (
+  _fetchFileBinary(fileId) {
+    const url = this.filesURL(fileId);
+    return new Promise((resolve, reject) => (
       jszipUtils.getBinaryContent(url, (err, data) => {
         if (err) {
           reject(err);

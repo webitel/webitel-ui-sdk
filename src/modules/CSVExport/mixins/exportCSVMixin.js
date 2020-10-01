@@ -2,11 +2,17 @@ import CSVExport from '../CSVExport';
 
 export default {
   data: () => ({
-    isCSVLoading: false,
     CSVExport: null,
   }),
 
   computed: {
+    isCSVLoading() {
+      return !!this.CSVDownloadProgress;
+    },
+
+    CSVDownloadProgress() {
+      return this.CSVExport ? this.CSVExport.downloadProgress.count : 0;
+    },
     selectedIds() {
       return this.dataList
         .filter((item) => item._isSelected)
@@ -23,7 +29,6 @@ export default {
     },
 
     async exportCSV(exportParams) {
-      this.isCSVLoading = true;
       const routeQuery = this.$route?.query;
       const params = {
         ...exportParams || routeQuery,
@@ -35,9 +40,7 @@ export default {
         await this.CSVExport.export(params);
       } catch (err) {
         throw err;
-      } finally {
-        this.isCSVLoading = false;
-      }
+      };
     },
   },
 };

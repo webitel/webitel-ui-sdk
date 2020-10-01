@@ -20,6 +20,8 @@ export default class CSVExport {
 
   fetchMethod = null;
 
+  downloadProgress = { count: 0 };
+
   constructor(fetchMethod, { filename }) {
     if (!fetchMethod) throw new Error('fetch method should be specified!');
     this.fetchMethod = fetchMethod;
@@ -39,6 +41,11 @@ export default class CSVExport {
         object: cast.object(localStorageOptions.valueDelimiter || ' | '),
       },
     };
+  }
+
+  resetProgress() {
+    this.downloadProgress = { count: 0 };
+    this.zippingProgress = { percent: 0 };
   }
 
   save(csv) {
@@ -65,6 +72,7 @@ export default class CSVExport {
       };
 
       csv += stringify(items, options);
+      this.downloadProgress.count += items.length;
 
       isNext = next;
       page += 1;
@@ -74,6 +82,7 @@ export default class CSVExport {
 
   async export(params) {
     const csv = await this.stringify(params);
-    return this.save(csv);
+    this.save(csv);
+    this.resetProgress();
   }
 }

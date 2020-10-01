@@ -7,14 +7,14 @@ export default {
 
   computed: {
     isFilesLoading() {
-      return !!(this.downloadProgress || this.zippingProgress);
+      return !!(this.filesDownloadProgress || this.filesZippingProgress);
     },
 
-    downloadProgress() {
+    filesDownloadProgress() {
       return this.FilesExport ? this.FilesExport.downloadProgress.count : 0;
     },
 
-    zippingProgress() {
+    filesZippingProgress() {
       return this.FilesExport ? Math.floor(this.FilesExport.zippingProgress.percent) : 0;
     },
   },
