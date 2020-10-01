@@ -31,6 +31,11 @@ describe('CSV Export', () => {
     expect(fileSaver.saveAs).toHaveBeenCalled();
   });
 
+  it('mixin correctly computes empty export progress from class data', () => {
+    wrapper = shallowMount(Component);
+    expect(wrapper.vm.CSVDownloadProgress).toBe(0);
+  });
+
   it('computes selected ids and isAnySelected', async () => {
     wrapper = shallowMount(Component);
     const selectedIds = [1, 2, 3];
