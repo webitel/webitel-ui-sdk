@@ -16,10 +16,10 @@
           @click.native="$emit('close')"
         ></wt-icon-btn>
       </header>
-      <section class="wt-popup__main">
+      <section class="wt-popup__main" v-if="$slots.main">
         <slot name="main"></slot>
       </section>
-      <footer class="wt-popup__actions">
+      <footer class="wt-popup__actions" v-if="$slots.actions">
         <slot name="actions"></slot>
       </footer>
     </aside>
@@ -76,6 +76,7 @@ export default {
   .wt-popup__header__title {
     @extend %typo-strong-lg;
     text-align: center;
+    padding: var(--popup-header-title-padding);
   }
 
   .wt-popup__close-btn {
