@@ -18,6 +18,15 @@ describe('WtPopup', () => {
     expect(wrapper.find('.wt-popup__header').text()).toBe(content);
   });
 
+  it('renders popup header via title slot', () => {
+    const content = 'Popup title';
+    const wrapper = shallowMount(WtPopup, {
+      stubs: { WtIconBtn: true },
+      slots: { title: content },
+    });
+    expect(wrapper.find('.wt-popup__header__title').text()).toBe(content);
+  });
+
   it('renders popup main via main slot', () => {
     const content = 'Popup main content';
     const wrapper = shallowMount(WtPopup, {

@@ -3,7 +3,11 @@
     <div class="wt-popup__shadow"></div>
     <aside class="wt-popup__popup">
       <header class="wt-popup__header">
-        <slot name="header"></slot>
+        <slot name="header">
+          <h3 class="wt-popup__header__title">
+            <slot name="title"></slot>
+          </h3>
+        </slot>
         <wt-icon-btn
           class="wt-popup__close-btn"
           icon="remove-rounded"
@@ -68,6 +72,11 @@ export default {
 .wt-popup__header {
   position: relative;
   padding: var(--popup-header-padding);
+
+  .wt-popup__header__title {
+    @extend %typo-strong-lg;
+    text-align: center;
+  }
 
   .wt-popup__close-btn {
     position: absolute;
