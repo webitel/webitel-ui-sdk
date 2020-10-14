@@ -67,6 +67,10 @@
           description: 'popup header slot',
         },
         {
+          name: 'title',
+          description: "title text slot inside h3 in header, if header slot wasn't passed)",
+        },
+        {
           name: 'main',
           description: 'popup main content slot',
         },

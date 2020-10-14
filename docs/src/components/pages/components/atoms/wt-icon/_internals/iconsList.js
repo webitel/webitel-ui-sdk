@@ -1,4 +1,7 @@
 export default [
+  'icon-dashboard-grid-1--md',
+  'icon-dashboard-grid-2--md',
+  'icon-dashboard-grid-3--md',
   'icon-menu--md',
   'icon-lg-a-marker--sm',
   'icon-forks--md',
