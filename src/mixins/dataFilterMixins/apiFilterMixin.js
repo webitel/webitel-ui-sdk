@@ -3,21 +3,20 @@ import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
 export default {
   mixins: [baseFilterMixin],
 
-  data: () => ({
-    value: [],
-    defaultValue: [],
-    trackBy: 'id',
-    storedProp: 'id',
-  }),
-
   methods: {
-    async restoreValue(idList) {
-      this.value = idList && idList.length
-        ? await this.fetchSelected(idList) : this.defaultValue;
-    },
-
-    async fetchSelected(idList) {
-      return idList;
+    async restoreValue(id) {
+      if (id && id.length) {
+        let newValue;
+        if (this.multiple) {
+          const idsArr = Array.isArray(id) ? id : [id];
+          this.setValue({ filter: this.filterQuery, value: idsArr.map((id) => ({ id })) });
+          newValue = await this.fetchSelected(idsArr);
+        } else {
+          this.setValue({ filter: this.filterQuery, value: { id } });
+          newValue = await this.fetchSelected(id);
+        }
+        this.setValue({ filter: this.filterQuery, value: newValue });
+      }
     },
   },
 };

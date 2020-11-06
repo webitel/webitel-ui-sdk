@@ -2,19 +2,6 @@ import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
 
 export default {
   mixins: [_urlControllerMixin],
-  data: () => ({
-    defaultValue: '',
-  }),
-
-  watch: {
-    '$route.query': {
-      handler(newValue, oldValue) {
-        if (newValue[this.filterQuery] !== oldValue[this.filterQuery]) {
-          this.restore({ filterQuery: this.filterQuery });
-        }
-      },
-    },
-  },
 
   created() {
     this.restore({ filterQuery: this.filterQuery });
@@ -22,8 +9,8 @@ export default {
 
   methods: {
     restore({ filterQuery }) {
-      const value = this.getValueFromQuery({ filterQuery }) || this.defaultValue;
-      this.restoreValue(value);
+      const value = this.getValueFromQuery({ filterQuery });
+      if (value) this.restoreValue(value);
     },
   },
 };

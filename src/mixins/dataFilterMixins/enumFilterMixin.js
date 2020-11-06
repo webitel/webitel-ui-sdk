@@ -4,22 +4,21 @@ export default {
   mixins: [baseFilterMixin],
 
   data: () => ({
-    value: [],
     options: [],
-    defaultValue: [],
-    trackBy: 'value',
-    storedProp: 'value',
   }),
 
   methods: {
     restoreValue(value) {
+      let newValue;
       if (Array.isArray(value)) {
-        this.value = this.options
-        .filter((option) => value.some((value) => `${value}` === option[this.storedProp]));
+        newValue = this.options
+          .filter((option) => value
+            .some((value) => value === option[this.storedProp]));
       } else {
-        this.value = this.options
-        .find((option) => option[this.storedProp] === value) || this.defaultValue;
+        newValue = this.options
+          .find((option) => value === option[this.storedProp]);
       }
+      this.setValue({ filter: this.filterQuery, value: newValue });
     },
   },
 };
