@@ -16,51 +16,39 @@ localVue.use(VueRouter);
 const router = new VueRouter();
 
 describe('Enum filter mixin', () => {
-  let wrapper;
+  const setValue = jest.fn();
   const Component = {
     render() {
     },
     mixins: [enumFilterMixin],
     data: () => ({
-      filterQuery: 'type',
+      filterQuery: 'direction',
+      storedProp: 'value',
       options,
     }),
+    methods: { setValue },
   };
 
   beforeEach(() => {
+    setValue.mockClear();
     if (Object.keys(router.currentRoute.query).length) router.replace({ query: null });
   });
 
   it('Correctly sets value from $route query', async () => {
-    await router.replace({ query: { type: [options[0].value] } });
-    wrapper = shallowMount(Component, {
+    await router.replace({ query: { direction: options[0].value } });
+    const wrapper = shallowMount(Component, {
       localVue,
       router,
     });
     await wrapper.vm.$nextTick();
-    expect(wrapper.vm.value).toEqual([options[0]]);
+    expect(setValue).toHaveBeenCalledWith({ filter: 'direction', value: options[0] });
   });
 
-  it('Correctly sets single value from $route query', async () => {
-    await router.replace({ query: { type: options[0].value } });
-    wrapper = shallowMount(Component, {
+  it('Sets empty array value if $route query is empty', async () => {
+    const wrapper = shallowMount(Component, {
       localVue,
       router,
     });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.vm.value).toEqual(options[0]);
-  });
-
-  it('Resets value after $route query reset', async () => {
-    await router.replace({ query: { type: [options[0].value] } });
-    wrapper = shallowMount(Component, {
-      localVue,
-      router,
-    });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.vm.value).toEqual([options[0]]);
-    await wrapper.vm.$router.replace({ query: null });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.vm.value).toEqual([]);
+    expect(setValue).not.toHaveBeenCalled();
   });
 });

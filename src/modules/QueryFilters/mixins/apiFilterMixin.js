@@ -18,5 +18,6 @@ export default {
         this.setValue({ filter: this.filterQuery, value: newValue });
       }
     },
+    fetchSelected() {},
   },
 };
