@@ -1,5 +1,5 @@
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
-import { SortSymbols, queryToSortAdapter, sortToQueryAdapter } from '../../scripts/sortQueryAdapters';
+import { SortSymbols, queryToSortAdapter, sortToQueryAdapter } from '../../../scripts/sortQueryAdapters';
 
 const getNextSortOrder = (sort) => {
   switch (sort) {

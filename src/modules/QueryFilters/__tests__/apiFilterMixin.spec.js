@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import apiFilterMixin from '../apiFilterMixin';
+import apiFilterMixin from '../mixins/apiFilterMixin';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
