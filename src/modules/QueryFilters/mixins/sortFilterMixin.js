@@ -1,10 +1,5 @@
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
-
-const SortSymbols = Object.freeze({
-  ASC: 'asc',
-  DESC: 'desc',
-  NONE: null,
-});
+import { SortSymbols, queryToSortAdapter, sortToQueryAdapter } from '../../../scripts/sortQueryAdapters';
 
 const getNextSortOrder = (sort) => {
   switch (sort) {
@@ -12,22 +7,6 @@ const getNextSortOrder = (sort) => {
     case SortSymbols.ASC: return SortSymbols.DESC;
     case SortSymbols.DESC: return SortSymbols.NONE;
     default: return SortSymbols.ASC;
-  }
-};
-
-const sortToQueryAdapter = (order) => {
-  switch (order) {
-    case SortSymbols.ASC: return '+';
-    case SortSymbols.DESC: return '-';
-    default: return '';
-  }
-};
-
-const queryToSortAdapter = (order) => {
-  switch (order) {
-    case '+': return SortSymbols.ASC;
-    case '-': return SortSymbols.DESC;
-    default: return SortSymbols.NONE;
   }
 };
 
@@ -53,11 +32,12 @@ export default {
     },
 
     setValue({ column, order }) {
-      this.headers = this.headers.map((col) => ({
-        ...col,
-        sort: col === column ? order : null,
+      const headers = this.headers.map((header) => ({
+        ...header,
+        sort: header === column ? order : null,
       }));
       const value = encodeSortQuery({ column, order });
+      this.setHeaders(headers);
       this.setValueToQuery({
         value,
         filterQuery: this.filterQuery,
@@ -66,10 +46,11 @@ export default {
 
     restoreValue(value) {
       const sortedColumns = decodeSortQuery({ value });
-      this.headers = this.headers.map((header) => ({
+      const headers = this.headers.map((header) => ({
         ...header,
         sort: sortedColumns[header.field] || null,
       }));
+      this.setHeaders(headers);
     },
   },
 };

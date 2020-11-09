@@ -10,25 +10,9 @@ export default {
     },
   },
 
-  data: () => ({
-    page: '1',
-    size: '10',
-  }),
-
-  watch: {
-    '$route.query': {
-      handler(newValue, oldValue) {
-        if (newValue.page !== oldValue.page
-          || newValue.size !== oldValue.size) {
-          this.restore();
-        }
-      },
-    },
-  },
-
   computed: {
     isPrev() {
-      return +this.page > 1;
+      return this.page > 1;
     },
   },
 
@@ -39,19 +23,21 @@ export default {
     },
 
     restorePage() {
-      const page = '1';
-      this.page = this.getValueFromQuery({ filterQuery: 'page' }) || page;
+      const defaultPage = 1;
+      const value = +this.getValueFromQuery({ filterQuery: 'page' }) || defaultPage;
+      this.setPage(value);
     },
 
     restoreSize() {
-      const size = '10';
-      this.size = this.getValueFromQuery({ filterQuery: 'size' }) || size;
+      const defaultSize = 10;
+      const value = +this.getValueFromQuery({ filterQuery: 'size' }) || defaultSize;
+      this.setSize(value);
     },
 
     next() {
       this.$emit('input');
-      const value = `${+this.page + 1}`;
-      this.page = value;
+      const value = this.page + 1;
+      this.setPage(value);
       this.setValueToQuery({
         filterQuery: 'page',
         value,
@@ -60,8 +46,8 @@ export default {
 
     prev() {
       this.$emit('input');
-      const value = `${+this.page - 1}`;
-      this.page = value;
+      const value = this.page - 1;
+      this.setPage(value);
       this.setValueToQuery({
         filterQuery: 'page',
         value,
@@ -70,6 +56,7 @@ export default {
 
     sizeChange(value) {
       this.$emit('input');
+      this.setSize(value);
       this.setValueToQuery({
         filterQuery: 'size',
         value,
