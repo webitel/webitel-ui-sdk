@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.5.16</h1>
+          <h1>Webitel UI SDK v. 0.5.20</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -267,11 +267,6 @@ export default {
             value: 'validation',
             route: 'validation',
           },
-          {
-            name: 'Data filters',
-            value: 'data-filter',
-            route: 'data-filter',
-          },
         ],
       };
     },
@@ -281,6 +276,11 @@ export default {
         value: 'modules',
         route: '/modules',
         subNav: [
+          {
+            name: 'Data filters',
+            value: 'data-filter',
+            route: 'data-filter',
+          },
           {
             name: 'Export CSV',
             value: 'export-csv',
@@ -321,9 +321,19 @@ export default {
             route: 'event-bus',
           },
           {
+            name: 'Is empty',
+            value: 'is-empty',
+            route: 'is-empty',
+          },
+          {
             name: 'Prevent hidden page calls decorator',
             value: 'prevent-hidden-page-calls-decorator',
-            route: 'convert-duration',
+            route: 'prevent-hidden-page-calls-decorator',
+          },
+          {
+            name: 'Sort query adapters',
+            value: 'sort-query-adapters',
+            route: 'sort-query-adapters',
           },
         ],
       };

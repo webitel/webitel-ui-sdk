@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import paginationFilterMixin from '../mixins/paginationFilterMixin';
+import paginationFilterMixin from '../paginationFilterMixin';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);

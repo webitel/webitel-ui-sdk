@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import sortFilterMixin from '../mixins/sortFilterMixin';
+import sortFilterMixin from '../sortFilterMixin';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);

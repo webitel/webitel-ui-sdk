@@ -61,6 +61,7 @@ import WtTableDocs from '../components/pages/components/organisms/wt-table/wt-ta
 import WtTableActionsDocs
   from '../components/pages/components/organisms/wt-table-actions/wt-table-actions-docs.vue';
 
+// other
 import FiltersDocs from '../components/pages/filters/filters-docs.vue';
 import TruncateFilterDocs from '../components/pages/filters/truncate-filter/truncate-filter-docs.vue';
 
@@ -69,9 +70,9 @@ import ClickawayDirectiveDocs from '../components/pages/directives/clickaway-dir
 
 import MixinsDocs from '../components/pages/mixins/mixins-docs.vue';
 import ValidationMixinDocs from '../components/pages/mixins/validation-mixin/validation-mixin-docs.vue';
-import DataFilterMixinDocs from '../components/pages/mixins/data-filter-mixin/data-filter-mixin-docs.vue';
 
 import ModulesDocs from '../components/pages/modules/modules-docs.vue';
+import DataFilterModuleDocs from '../components/pages/modules/data-filter-module/data-filter-module-docs.vue';
 import ExportCSVModuleDocs from '../components/pages/modules/export-csv-module/export-csv-module-docs.vue';
 import ExportFilesModuleDocs from '../components/pages/modules/export-files-module/export-files-module-docs.vue';
 
@@ -80,7 +81,9 @@ import CaseConverterScriptsDocs from '../components/pages/scripts/case-converter
 import ConvertDurationScriptDocs from '../components/pages/scripts/convert-duration-script/convert-duration-script-docs.vue';
 import DebounceScriptDocs from '../components/pages/scripts/debounce-script/debounce-script-docs.vue';
 import EventBusScriptDocs from '../components/pages/scripts/event-bus-script/event-bus-script-docs.vue';
+import IsEmptyScriptDocs from '../components/pages/scripts/is-empty-script/is-empty-script-docs.vue';
 import PreventHiddenPageCallsDecoratorScriptDocs from '../components/pages/scripts/prevent-hidden-page-calls-decorator-script/prevent-hidden-page-calls-decorator-script-docs.vue';
+import SortQueryAdapterScriptsDocs from '../components/pages/scripts/sort-query-adapter-scripts/sort-query-adapter-scripts-docs.vue';
 
 Vue.use(VueRouter);
 
@@ -118,7 +121,7 @@ const routes = [
     children: [
       // atoms
       {
-        path: 'badge',
+        path: '/components/badge',
         name: 'badge-docs',
         component: WtBadgeDocs,
       },
@@ -322,11 +325,6 @@ const routes = [
         name: 'validation',
         component: ValidationMixinDocs,
       },
-      {
-        path: 'data-filter',
-        name: 'data-filter',
-        component: DataFilterMixinDocs,
-      },
     ],
   },
   {
@@ -334,6 +332,11 @@ const routes = [
     name: 'modules',
     component: ModulesDocs,
     children: [
+      {
+        path: 'data-filter',
+        name: 'data-filter',
+        component: DataFilterModuleDocs,
+      },
       {
         path: 'export-csv',
         name: 'export-csv',
@@ -372,9 +375,19 @@ const routes = [
         component: EventBusScriptDocs,
       },
       {
-        path: '/prevent-hidden-page-calls-decorator',
+        path: 'is-empty',
+        name: 'is-empty',
+        component: IsEmptyScriptDocs,
+      },
+      {
+        path: 'prevent-hidden-page-calls-decorator',
         name: 'prevent-hidden-page-calls-decorator',
         component: PreventHiddenPageCallsDecoratorScriptDocs,
+      },
+      {
+        path: 'sort-query-adapters',
+        name: 'sort-query-adapters',
+        component: SortQueryAdapterScriptsDocs,
       },
     ],
   },

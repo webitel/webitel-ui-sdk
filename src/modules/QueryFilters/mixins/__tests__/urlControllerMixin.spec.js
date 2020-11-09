@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import _urlControllerMixin from '../mixins/_urlControllerMixin/_urlControllerMixin';
+import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);

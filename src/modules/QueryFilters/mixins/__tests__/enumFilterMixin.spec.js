@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import enumFilterMixin from '../mixins/enumFilterMixin';
+import enumFilterMixin from '../enumFilterMixin';
 
 const options = [{
     name: 'Inbound',
