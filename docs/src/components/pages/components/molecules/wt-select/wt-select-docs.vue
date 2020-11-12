@@ -57,6 +57,7 @@
         ></wt-select>
       </div>
     </article>
+    <p><b>In order to work with single object value, you need to pass '' as default to see placeholder</b></p>
     <component-model
     ></component-model>
     <h3>Full docs: <a class="full-docs-link" href="https://vue-multiselect.js.org/">Vue

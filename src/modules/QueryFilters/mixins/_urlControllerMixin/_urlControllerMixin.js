@@ -19,6 +19,8 @@ export default {
         } else {
           newValue = value.map((item) => item[storedProp]);
         }
+      } else if (typeof value === 'object' && value !== null) {
+        newValue = value[storedProp];
       } else {
         newValue = value;
       }

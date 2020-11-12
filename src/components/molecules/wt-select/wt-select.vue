@@ -193,7 +193,6 @@ export default {
     clearValue() {
       let value = '';
       if (Array.isArray(this.value)) value = [];
-      else if (typeof this.value === 'object') value = {};
       this.input(value);
       this.$emit('reset', value);
     },
