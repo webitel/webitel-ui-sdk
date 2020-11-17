@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
-import WtStatusSelect from '../wt-status-select.vue';
-import WtSelect from '../../../molecules/wt-select/wt-select.vue';
+import WtStatusSelect from '../../wt-status-select.vue';
+import WtSelect from '../../../../molecules/wt-select/wt-select.vue';
 
 describe('WtStatusSelect', () => {
   it('renders a component', () => {
