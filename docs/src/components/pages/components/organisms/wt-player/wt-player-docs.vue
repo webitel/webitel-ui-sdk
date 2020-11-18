@@ -9,7 +9,16 @@
       </div>
     </article>
     <article>
-      <p><strong>Important: player icons won't be shown without copied to /public/img/plyr.svg icons.</strong></p>
+      <p><strong>Important: player is looking for icons in {/{$baseURL}/}img/plyr.svg (or /img/plyr.svg by default).</strong>
+      $baseURL should be passed as global variable in plugins/webitel-ui.js:
+      </p>
+      <pre><code class="language-javascript">
+            const globals = {
+              $baseURL: process.env.BASE_URL,
+            };
+            // init plugin
+            Vue.use(WebitelUI, { eventBus, router, globals });
+      </code></pre>
     </article>
     <component-props
       :properties="properties"

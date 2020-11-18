@@ -17,6 +17,9 @@ import i18n from '../locale/i18n';
 import router from '../router/index';
 import eventBus from '../../../src/scripts/eventBus';
 
-Vue.use(WebitelUI, { eventBus, router });
+const globals = {
+  $baseURL: process.env.BASE_URL,
+};
+Vue.use(WebitelUI, { eventBus, router, globals });
 i18n.mergeLocaleMessage('en', WebitelUIEn);
 i18n.mergeLocaleMessage('ru', WebitelUIRu);

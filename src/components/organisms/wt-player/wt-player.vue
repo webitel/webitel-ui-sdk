@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     setupPlayer() {
+      const baseURL = this.$baseURL || process.env.BASE_URL;
       if (this.player) this.player.restart();
       const controls = ['play-large', 'play', 'progress', 'current-time',
         'mute', 'volume', 'captions', 'settings', 'pip',
@@ -53,7 +54,7 @@ export default {
       this.player = new Plyr('#wt-player__player', {
         autoplay: this.autoplay,
         loadSprite: false,
-        iconUrl: '/img/plyr.svg',
+        iconUrl: `${baseURL}img/plyr.svg`,
         controls,
         loop: {
           active: this.loop,

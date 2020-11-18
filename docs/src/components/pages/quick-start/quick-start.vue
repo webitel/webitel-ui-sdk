@@ -23,8 +23,11 @@
             // import scss variables and other reusables
             import '@webitel/ui-sdk/src/css/main.scss';
 
+            const globals = {
+              $baseURL: process.env.BASE_URL,
+            };
             // init plugin
-            Vue.use(WebitelUI, { eventBus });
+            Vue.use(WebitelUI, { eventBus, router, globals });
             // add plugin locales to main i18n
             i18n.mergeLocaleMessage('en', WebitelUIEn);
             i18n.mergeLocaleMessage('ru', WebitelUIRu);</code></pre>
