@@ -3,7 +3,7 @@
 //@import "../../../src/css/components/organisms/wt-notifications-bar/variables";
 
 body {
-  //@extend %typo-body-lg;
+  @extend %typo-body-lg;
 }
 
 .docs {
@@ -12,7 +12,7 @@ body {
   }
 
   h3 {
-    //@extend %typo-heading-md;
+    @extend %typo-heading-md;
     margin: 20px 10px;
   }
 
