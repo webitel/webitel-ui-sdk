@@ -2,11 +2,13 @@ import Vue from 'vue';
 import App from './the-app.vue';
 import router from './router';
 // import store from './store';
-// import './plugins/webitel-ui';
 import i18n from './locale/i18n';
-import './components/shared';
 import eventBus from '../../src/scripts/eventBus';
+
 import 'prismjs/themes/prism.css';
+import './plugins/webitel-ui';
+import './css/main.scss';
+import './components/shared';
 
 Vue.config.productionTip = false;
 Vue.prototype.$eventBus = eventBus;
