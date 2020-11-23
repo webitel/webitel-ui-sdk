@@ -7,6 +7,7 @@ import WtBadge from './atoms/wt-badge/wt-badge.vue';
 import WtDivider from './atoms/wt-divider/wt-divider.vue';
 import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
 import WtLabel from './atoms/wt-label/wt-label.vue';
+import WtRoundedAction from './atoms/wt-rounded-action/wt-rounded-action.vue';
 import WtLoader from './atoms/wt-loader/wt-loader.vue';
 
 import WtCheckbox from './molecules/wt-checkbox/wt-checkbox.vue';
@@ -48,6 +49,7 @@ const Components = {
   WtTooltip,
   WtLabel,
   WtLoader,
+  WtRoundedAction,
   WtCheckbox,
   WtDatepicker,
   WtDatetimepicker,

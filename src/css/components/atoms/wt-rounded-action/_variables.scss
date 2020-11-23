@@ -1,0 +1,32 @@
+:root {
+  --rounded-action-size--lg: 60px;
+  --rounded-action-size--md: 50px; // default
+  --rounded-action-size--sm: 40px;
+  --rounded-action-border: 1px solid;
+
+  // BUTTON COLORS
+  --rounded-action-dark-font-color: #000;
+  --rounded-action-light-font-color: #fff;
+
+  --rounded-action-primary-color: var(--main-accent-color);
+  --rounded-action-primary--hover-color: #EFB917;
+
+  --rounded-action-secondary-color: #808080;
+  --rounded-action-secondary-bg-color: transparent;
+  --rounded-action-secondary--hover-color: #000;
+
+  --rounded-action-disabled-color: var(--disabled-color);
+  --rounded-action-disabled-bg-color: transparent;
+
+  --rounded-action-true-color: var(--true-color);
+  --rounded-action-true--hover-color: var(--true--hover-color);
+
+  --rounded-action-false-color: var(--false-color);
+  --rounded-action-false--hover-color: var(--false--hover-color);
+
+  --rounded-action-hold-color: var(--hold-color);
+  --rounded-action-hold--hover-color: var(--hold--hover-color);
+
+  --rounded-action-transfer-color: var(--transfer-color);
+  --rounded-action-transfer--hover-color: var(--transfer--hover-color);
+}
