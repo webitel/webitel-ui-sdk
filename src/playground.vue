@@ -1,7 +1,12 @@
 <template>
   <div class="playground">
-<!--    wt-select-->
-    <wt-status-select></wt-status-select>
+    <wt-rounded-action icon="call" disabled></wt-rounded-action>
+    <wt-rounded-action icon="call" size="lg"></wt-rounded-action>
+    <wt-rounded-action icon="call" size="sm" color="success"></wt-rounded-action>
+    <wt-rounded-action icon="call" color="secondary"></wt-rounded-action>
+    <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
+    <wt-rounded-action icon="call" color="danger"></wt-rounded-action>
+
     <wt-navigation-bar :nav="[{name: 'name1', route: '/1'}]"></wt-navigation-bar>
     <div style="margin-top: 250px;">
       <h2>Player</h2>

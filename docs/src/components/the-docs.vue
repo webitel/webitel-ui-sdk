@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.6.4</h1>
+          <h1>Webitel UI SDK v. 0.6.8</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -224,6 +224,11 @@ export default {
             name: 'Table actions',
             value: 'table-actions',
             route: 'table-actions',
+          },
+          {
+            name: 'Rounded action',
+            value: 'rounded-action',
+            route: 'rounded-action',
           },
         ].sort((a, b) => a.name.localeCompare(b.name)),
       };

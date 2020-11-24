@@ -5,7 +5,7 @@
       colorClass,
         `wt-rounded-action--${size}`,
       {
-        'wt-wt-rounded-action--disabled': disabled,
+        'wt-rounded-action--disabled': disabled,
       }
     ]"
     type="button"
@@ -145,6 +145,10 @@ export default {
     border-color: var(--disabled-color);
     cursor: auto;
     pointer-events: none;
+
+    .wt-icon ::v-deep .wt-icon__icon {
+      fill: var(--icon--disabled-color);
+    }
   }
 
   &:hover,

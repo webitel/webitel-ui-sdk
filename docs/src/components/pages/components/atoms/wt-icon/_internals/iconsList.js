@@ -1,4 +1,5 @@
 export default [
+  'icon-attach--md',
   'icon-dashboard-grid-1--md',
   'icon-dashboard-grid-2--md',
   'icon-dashboard-grid-3--md',
@@ -93,11 +94,15 @@ export default [
   'icon-call-inbound--md',
   'icon-call--sm',
 
+  'icon-chat--md',
   'icon-chat-join--md',
   'icon-chat-transfer--md',
   'icon-chat-end--md',
   'icon-chat-group--md',
   'icon-chat-quick-response--md',
+  'icon-chat-send--md',
+  'icon-chat-smile--md',
+  'icon-chat-reply--md',
 
   'icon-sort-arrow-down--md',
   'icon-sort-arrow-up--md',
