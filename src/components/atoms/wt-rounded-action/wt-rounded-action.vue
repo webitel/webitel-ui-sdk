@@ -13,11 +13,12 @@
     @click="$emit('click', $event)"
   >
     <spinner v-if="loading" :color="color"/>
-    <wt-icon
-      v-else
-      :icon="icon"
-      :color="computeIconColor"
-    ></wt-icon>
+    <slot v-else>
+      <wt-icon
+        :icon="icon"
+        :color="computeIconColor"
+      ></wt-icon>
+    </slot>
   </button>
 </template>
 
@@ -32,7 +33,6 @@ export default {
   props: {
     icon: {
       type: String,
-      required: true,
     },
     color: {
       type: String,
@@ -87,6 +87,7 @@ export default {
   align-items: center;
   justify-content: center;
   border: var(--rounded-action-border);
+  color: var(--rounded-action-dark-font-color);
   background: var(--rounded-action-primary-color);
   border-color: var(--rounded-action-primary-color);
   border-radius: 50%;
@@ -141,6 +142,7 @@ export default {
   }
 
   &--disabled {
+    color: var(--text--disabled-color);
     background: var(--rounded-action-disabled-bg-color);
     border-color: var(--disabled-color);
     cursor: auto;
@@ -151,7 +153,12 @@ export default {
     }
   }
 
-  &:hover,
+  &:hover {
+    background: var(--rounded-action-primary--hover-color);
+    border-color: var(--rounded-action-primary--hover-color);
+  }
+
+  &.active,
   &:active {
     background: var(--rounded-action-primary--hover-color);
     border-color: var(--rounded-action-primary--hover-color);
@@ -161,8 +168,7 @@ export default {
     border-color: var(--rounded-action-secondary-color);
     background: var(--rounded-action-secondary-bg-color);
 
-    &:hover,
-    &:active {
+    &:hover{
       border-color: var(--rounded-action-secondary--hover-color);
       background: var(--rounded-action-secondary-bg-color);
 
@@ -170,9 +176,21 @@ export default {
         fill: var(--icon--hover-color);
       }
     }
+
+    &.active,
+    &:active {
+      color: var(--text-primary-color);
+      border-color: var(--rounded-action-secondary--active-color);
+      background: var(--rounded-action-secondary-bg-color);
+
+      .wt-icon ::v-deep .wt-icon__icon {
+        fill: var(--icon--active-color);
+      }
+    }
   }
 
   &.success {
+    color: var(--text-contrast-color);
     background: var(--rounded-action-true-color);
     border-color: var(--rounded-action-true-color);
 
@@ -184,6 +202,7 @@ export default {
   }
 
   &.transfer {
+    color: var(--text-contrast-color);
     background: var(--rounded-action-transfer-color);
     border-color: var(--rounded-action-transfer-color);
 
@@ -195,6 +214,7 @@ export default {
   }
 
   &.danger {
+    color: var(--text-contrast-color);
     background: var(--rounded-action-false-color);
     border-color: var(--rounded-action-false-color);
 

@@ -15,6 +15,7 @@
         <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
         <wt-rounded-action icon="call" color="transfer" disabled></wt-rounded-action>
       </div>
+      <p>! class 'active', attached to secondary color button, highlights it.</p>
     </article>
     <component-props
       :properties="properties"

@@ -5,15 +5,13 @@
   --rounded-action-border: 1px solid;
 
   // BUTTON COLORS
-  --rounded-action-dark-font-color: #000;
-  --rounded-action-light-font-color: #fff;
-
   --rounded-action-primary-color: var(--main-accent-color);
   --rounded-action-primary--hover-color: #EFB917;
 
   --rounded-action-secondary-color: #808080;
   --rounded-action-secondary-bg-color: transparent;
   --rounded-action-secondary--hover-color: #000;
+  --rounded-action-secondary--active-color: #000;
 
   --rounded-action-disabled-color: var(--disabled-color);
   --rounded-action-disabled-bg-color: transparent;
