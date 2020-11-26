@@ -318,10 +318,10 @@ export default {
       transition: var(--transition);
 
       .multiselect__option {
+        @extend %typo-body-lg;
         padding: var(--select-options-padding);
 
         & > span {
-          @extend %typo-body-lg;
           color: var(--form-placeholder-color);
         }
 
