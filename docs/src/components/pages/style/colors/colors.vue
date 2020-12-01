@@ -280,6 +280,23 @@ export default {
           },
         ],
       },
+      {
+        title: 'Chat colors',
+        colors: [
+          {
+            textColor: '#000',
+            code: '#FFF9E6',
+            color: '--chat-client-message-bg-color',
+            name: 'Client message background',
+          },
+          {
+            textColor: '#000',
+            code: '#F9F9F9',
+            color: '--chat-agent-message-bg-color',
+            name: 'Client message background',
+          },
+        ],
+      },
     ],
   }),
 };
