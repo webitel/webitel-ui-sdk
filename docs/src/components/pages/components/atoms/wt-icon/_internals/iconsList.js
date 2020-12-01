@@ -103,6 +103,8 @@ export default [
   'icon-chat-send--md',
   'icon-chat-smile--md',
   'icon-chat-reply--md',
+  'icon-chat-message-status-sent--sm',
+  'icon-chat-message-status-read--sm',
 
   'icon-sort-arrow-down--md',
   'icon-sort-arrow-up--md',
