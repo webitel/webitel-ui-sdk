@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.6.8</h1>
+          <h1>Webitel UI SDK v. 0.6.12</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -329,6 +329,11 @@ export default {
             name: 'Is empty',
             value: 'is-empty',
             route: 'is-empty',
+          },
+          {
+            name: 'Prettify time',
+            value: 'prettify-time',
+            route: 'prettify-time',
           },
           {
             name: 'Prevent hidden page calls decorator',
