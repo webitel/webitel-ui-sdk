@@ -15,6 +15,7 @@
         :value="value"
         :placeholder="placeholder || label"
         @input="$emit('input', $event.target.value)"
+        @keypress="handleKeypress"
       ></textarea>
       <wt-icon-btn
         class="wt-textarea__reset-icon-btn"
@@ -58,6 +59,10 @@
         type: String,
         default: '',
       },
+      chatMode: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     data: () => ({
@@ -70,6 +75,13 @@
     },
 
     methods: {
+      handleKeypress(event) {
+        if (!this.chatMode) return;
+        if (event.key === 'Enter' && !event.shiftKey) {
+          this.$emit('enter');
+          event.preventDefault();
+        }
+      },
     },
   };
 </script>

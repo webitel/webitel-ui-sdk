@@ -58,6 +58,13 @@
           default: '',
           description: 'Input id name for label association',
         },
+        {
+          value: 'chatMode',
+          code: '<wt-textarea chat-mode></wt-textarea>',
+          type: 'Boolean',
+          default: 'false',
+          description: 'If passed, "Enter" key press emits "enter" event, new line is shift+enter',
+        },
       ],
       events: [
         {
@@ -65,6 +72,10 @@
           params: [
             { name: 'value', type: 'String' },
           ],
+        },
+        {
+          value: 'enter',
+          description: 'fires at enter key press "if chat-mode" is on',
         },
       ],
       slots: [

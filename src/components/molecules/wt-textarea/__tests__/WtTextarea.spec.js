@@ -22,4 +22,25 @@ describe('WtTextarea', () => {
     });
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });
+
+  it('emits "Enter" event if chat-mode prop is passed', () => {
+    const wrapper = shallowMount(WtTextarea, {
+      stubs: {
+        WtLabel,
+      },
+      propsData: { chatMode: true },
+    });
+    wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
+    expect(wrapper.emitted().enter).toBeTruthy();
+  });
+
+  it('do not emit "Enter" event if chat-mode prop is not passed', () => {
+    const wrapper = shallowMount(WtTextarea, {
+      stubs: {
+        WtLabel,
+      },
+    });
+    wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
+    expect(wrapper.emitted().enter).toBeFalsy();
+  });
 });
