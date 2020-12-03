@@ -35,4 +35,18 @@ describe('Case converters', () => {
     expect(objCamelToSnake(camelArr)).toEqual(snakeArr);
     expect(objSnakeToCamel(snakeArr)).toEqual(camelArr);
   });
+
+  it('Camel-to-Snake Object skips passed keys', () => {
+    const skippedKeys = ['skippedKey'];
+    const camelArr = { camelToSnake: null, skippedKey: null };
+    const snakeArr = { camel_to_snake: null, skippedKey: null };
+    expect(objCamelToSnake(camelArr, skippedKeys)).toEqual(snakeArr);
+  });
+
+  it('Snake-to-Camel Object skips passed keys', () => {
+    const skippedKeys = ['skipped_key'];
+    const camelArr = { camelToSnake: null, skipped_key: null };
+    const snakeArr = { camel_to_snake: null, skipped_key: null };
+    expect(objSnakeToCamel(snakeArr, skippedKeys)).toEqual(camelArr);
+  });
 });

@@ -24,25 +24,25 @@ export const camelToKebab = (str) => str.replace(
     .replace('', '-'),
 );
 
-export const objSnakeToCamel = (obj) => {
+export const objSnakeToCamel = (obj, skipKeys = []) => {
   const newObj = {};
   if (Array.isArray(obj)) {
     return obj.map((value) => {
       if (typeof value === 'object') {
-        return objSnakeToCamel(value);
+        return objSnakeToCamel(value, skipKeys);
       }
       return snakeToCamel(value);
     });
   }
   Object.keys(obj)
     .forEach((oldKey) => {
-      if (oldKey === 'schema') {
+      if (skipKeys.includes(oldKey)) {
         newObj[oldKey] = obj[oldKey];
       } else {
         const newKey = snakeToCamel(oldKey);
         let value = obj[oldKey];
         if (Array.isArray(value) || (value !== null && value.constructor === Object)) {
-          value = objSnakeToCamel(value);
+          value = objSnakeToCamel(value, skipKeys);
         }
         newObj[newKey] = value;
       }
@@ -51,25 +51,25 @@ export const objSnakeToCamel = (obj) => {
   return newObj;
 };
 
-export const objCamelToSnake = (obj) => {
+export const objCamelToSnake = (obj, skipKeys = []) => {
   const newObj = {};
   if (Array.isArray(obj)) {
     return obj.map((value) => {
       if (typeof value === 'object') {
-        return objCamelToSnake(value);
+        return objCamelToSnake(value, skipKeys);
       }
       return camelToSnake(value);
     });
   }
   Object.keys(obj)
     .forEach((oldKey) => {
-      if (oldKey === 'schema') {
+      if (skipKeys.includes(oldKey)) {
         newObj[oldKey] = obj[oldKey];
       } else {
         const newKey = camelToSnake(oldKey);
         let value = obj[oldKey];
         if (Array.isArray(value) || (value !== null && value.constructor === Object)) {
-          value = objCamelToSnake(value);
+          value = objCamelToSnake(value, skipKeys);
         }
         newObj[newKey] = value;
       }

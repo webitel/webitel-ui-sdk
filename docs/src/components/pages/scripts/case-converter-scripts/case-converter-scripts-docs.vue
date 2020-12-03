@@ -7,7 +7,7 @@
         Usage:
         <pre>
           <code class="language-javascript">import { camelToSnake } from '@webitel/ui-sdk/src/scripts/caseConverters'</code>
-          <code class="language-javascript">console.log('helloThere!')</code>
+          <code class="language-javascript">console.log(camelToSnake('helloThere!'))</code>
         </pre>
       </div>
       <div>Available converters:
@@ -21,6 +21,14 @@
           <li>objCamelToSnake</li>
         </ul>
       </div>
+    </article>
+    <article>
+      <h3>Skipped keys</h3>
+      <p>obj- case converters have 2nd optional param, which accepts array of keys to prevent from
+      converting like:
+        <code class="language-javascript">
+          console.log(objCamelToSnake({ doNotConvertMe: 'helloThere!' }, ['doNotConvertMe']))
+        </code></p>
     </article>
   </section>
 </template>
