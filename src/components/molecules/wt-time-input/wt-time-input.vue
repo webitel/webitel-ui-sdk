@@ -19,7 +19,7 @@
         :max="maxValue"
         :disabled="disabled"
         type="number"
-        @input="$emit('input', $event.target.value)"
+        v-on="listeners"
       >
     </div>
   </div>
@@ -76,6 +76,14 @@
       outline: {
         type: Boolean,
         default: false,
+      },
+    },
+    computed: {
+      listeners() {
+        return {
+          ...this.$listeners,
+          input: (event) => this.$emit('input', event.target.value),
+        };
       },
     },
   };

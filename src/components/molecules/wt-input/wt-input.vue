@@ -30,7 +30,7 @@
         :disabled="disabled"
         :min="numberMin"
         :max="numberMax"
-        @input="inputHandler"
+        v-on="listeners"
       >
       <slot
         v-if="isPassword"
@@ -179,6 +179,13 @@
 
       showPasswordIcon() {
         return this.isPasswordVisible ? 'eye-closed' : 'eye-opened';
+      },
+
+      listeners() {
+        return {
+          ...this.$listeners,
+          input: this.inputHandler,
+        };
       },
     },
     methods: {

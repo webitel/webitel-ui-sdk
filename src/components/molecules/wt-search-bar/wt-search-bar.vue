@@ -11,9 +11,7 @@
         :value="value"
         :placeholder="placeholder"
         type="search"
-        @input="$emit('input', $event.target.value)"
-        @keyup.enter="$emit('enter', $event.target.value)"
-        @keyup.esc="$emit('input', '')"
+        v-on="listeners"
       >
       <wt-icon
         class="wt-search-bar__search-icon"
@@ -76,9 +74,28 @@
       }
     },
 
+    computed: {
+      listeners() {
+        return {
+          ...this.$listeners,
+          input: (event) => this.$emit('input', event.target.value),
+          keyup: this.handleKeyup,
+        };
+      },
+    },
+
     methods: {
       search() {
         this.$emit('search', this.value);
+      },
+      handleKeyup(event) {
+        if (event.key === 'Enter') {
+          this.$emit('enter');
+          event.preventDefault();
+        } else if (event.key === 'Esc') {
+          this.$emit('input', '');
+          event.preventDefault();
+        }
       },
     },
   };
