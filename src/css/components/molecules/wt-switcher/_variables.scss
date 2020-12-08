@@ -6,9 +6,9 @@
   --switcher-checkmark-size: 14px;
   --switcher-checkmark-margin: 4px;
   --switcher-checkmark-translateX: 17px;
-  --switcher-bg-color: var(--icon-outline-color);
+  --switcher-bg-color: var(--icon-primary-color);
+  --switcher-bg--hover-color: var(--main-primary-accent-color);
+  --switcher-bg--active-color: var(--main-accent-color);
   --switcher-checkmark-color: var(--main-primary-color);
-  --switcher-checkmark--hover-color: var(--icon-outline--hover-color);
-  --switcher-checkmark--active-color: var(--main-accent-color);
   --switcher-border-radius: 24px;
 }

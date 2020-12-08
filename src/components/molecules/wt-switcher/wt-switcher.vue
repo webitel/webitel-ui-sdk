@@ -124,7 +124,7 @@
     }
 
     .wt-switcher__checkmark {
-      background: var(--switcher-checkmark--hover-color);
+      background: var(--switcher-bg--hover-color);
     }
   }
 
@@ -134,7 +134,7 @@
     }
 
     .wt-switcher__checkmark {
-      background: var(--switcher-checkmark--active-color);
+      background: var(--switcher-bg--active-color);
 
       /* Show the indicator (dot/circle) when checked */
       &:before {
