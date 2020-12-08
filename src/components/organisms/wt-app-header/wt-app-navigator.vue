@@ -125,7 +125,7 @@
             >
               <img
                 class="wt-app-navigator__card__img"
-                src="../../../assets/components/organisms/wt-app-header/app-navigator/app-grafana.svg"
+                src="../../../assets/components/organisms/wt-app-header/app-navigator/app-analytics.svg"
                 alt="grafana-pic"
               >
             </a>
