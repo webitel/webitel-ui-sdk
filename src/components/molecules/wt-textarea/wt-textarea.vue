@@ -1,8 +1,7 @@
 <template>
   <div
     class="wt-textarea"
-    :class="{
-    }"
+    :class="{}"
   >
     <wt-label :for="name">
       <!-- @slot Custom input label -->
@@ -14,15 +13,14 @@
         class="wt-textarea__textarea"
         :value="value"
         :placeholder="placeholder || label"
-        @input="$emit('input', $event.target.value)"
-        @keypress="handleKeypress"
+        v-on="listeners"
       ></textarea>
       <wt-icon-btn
         class="wt-textarea__reset-icon-btn"
         :class="{ 'hidden': !value }"
         icon="remove-rounded"
         size="sm"
-        @click.native="$emit('input', '')"
+        @click="$emit('input', '')"
       ></wt-icon-btn>
     </div>
   </div>
@@ -65,13 +63,14 @@
       },
     },
 
-    data: () => ({
-    }),
-
-    mounted() {
-    },
-
     computed: {
+      listeners() {
+        return {
+          ...this.$listeners,
+          input: (event) => this.$emit('input', event.target.value),
+          keypress: (event) => this.handleKeypress(event),
+        };
+      },
     },
 
     methods: {
