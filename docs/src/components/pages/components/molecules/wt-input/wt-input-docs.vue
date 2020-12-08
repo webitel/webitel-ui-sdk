@@ -147,6 +147,9 @@
             { name: 'input value', type: "['String', 'Number'], depends on input type" },
           ],
         },
+        {
+          value: 'PLUS ALL NATIVE INPUT EVENTS',
+        },
       ],
       slots: [
         {

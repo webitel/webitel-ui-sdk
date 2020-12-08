@@ -104,6 +104,9 @@
             { name: 'value', type: 'Number' },
           ],
         },
+        {
+          value: 'PLUS ALL NATIVE INPUT EVENTS',
+        },
       ],
       slots: [
         {

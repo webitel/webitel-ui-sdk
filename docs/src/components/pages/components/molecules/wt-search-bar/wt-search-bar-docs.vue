@@ -88,6 +88,9 @@
             },
           ],
         },
+        {
+          value: 'PLUS ALL NATIVE INPUT EVENTS',
+        },
       ],
     }),
     mounted() {

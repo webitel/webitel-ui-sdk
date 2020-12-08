@@ -55,6 +55,12 @@ export default {
         default: '00:00:00',
         description: 'If seconds number, converts to hh:mm:ss format',
       },
+      {
+        value: 'options',
+        code: '<wt-status-select :options="[{ color:\'success\', text: \'Success!\', value: \'AgentStatus.ONLINE\' }]"></wt-status-select>',
+        type: 'Array',
+        description: 'If passed, replaces default status-select options. Should have 3 required properties: "color", "text" and "value"',
+      },
     ],
     events: [
       {

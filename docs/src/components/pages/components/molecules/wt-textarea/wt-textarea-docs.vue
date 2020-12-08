@@ -77,6 +77,9 @@
           value: 'enter',
           description: 'fires at enter key press "if chat-mode" is on',
         },
+        {
+          value: 'PLUS ALL NATIVE TEXTAREA EVENTS',
+        },
       ],
       slots: [
         {
