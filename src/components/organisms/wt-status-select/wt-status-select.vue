@@ -38,6 +38,9 @@ export default {
       type: String,
       default: '00:00:00',
     },
+    options: {
+      type: Array,
+    },
   },
   model: {
     prop: 'status',
@@ -45,10 +48,11 @@ export default {
   },
   computed: {
     selectedOption() {
-      return this.options.find((option) => option.value === this.status);
+      return this.statusOptions.find((option) => option.value === this.status);
     },
-    options() {
-      return [
+    statusOptions() {
+      return this.options ? this.options
+      : [
         {
           text: this.$t('webitelUI.statusSelect.online'),
           color: 'success',
@@ -67,7 +71,7 @@ export default {
       ];
     },
     availableOptions() {
-      return this.options.filter((option) => option.value !== this.status);
+      return this.statusOptions.filter((option) => option.value !== this.status);
     },
     duration() {
       if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
