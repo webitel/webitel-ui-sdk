@@ -295,6 +295,18 @@ export default {
             color: '--chat-agent-message-bg-color',
             name: 'Client message background',
           },
+          {
+            textColor: '#000',
+            code: '#FFC107',
+            color: '--chat-client-attachment-bg-color',
+            name: 'Client message attachment background',
+          },
+          {
+            textColor: '#000',
+            code: '#EAEAEA',
+            color: '--chat-agent-attachment-bg-color',
+            name: 'Client message attachment background',
+          },
         ],
       },
     ],

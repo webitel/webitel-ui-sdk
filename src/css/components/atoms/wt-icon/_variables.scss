@@ -8,6 +8,7 @@
 
   // ICON COLORS
   --icon-primary-color: #808080;
+  --icon-contrast-color: var(--main-primary-color);
   --icon--active-color: #000;
   --icon--hover-color: #000;
   --icon-outline-color: var(--main-outline-color);
@@ -28,4 +29,5 @@
 
   --icon-transfer-color: var(--transfer-color);
   --icon-transfer--hover-color: var(--transfer--hover-color);
+
 }
