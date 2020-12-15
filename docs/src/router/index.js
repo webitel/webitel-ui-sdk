@@ -83,6 +83,7 @@ import ConvertDurationScriptDocs from '../components/pages/scripts/convert-durat
 import DebounceScriptDocs from '../components/pages/scripts/debounce-script/debounce-script-docs.vue';
 import EventBusScriptDocs from '../components/pages/scripts/event-bus-script/event-bus-script-docs.vue';
 import IsEmptyScriptDocs from '../components/pages/scripts/is-empty-script/is-empty-script-docs.vue';
+import PrettifyFileSizeScriptDocs from '../components/pages/scripts/prettify-file-size-script/prettify-file-size-script.vue';
 import PrettifyTimeScriptDocs from '../components/pages/scripts/prettify-time-script/prettify-time-script-docs.vue';
 import PreventHiddenPageCallsDecoratorScriptDocs from '../components/pages/scripts/prevent-hidden-page-calls-decorator-script/prevent-hidden-page-calls-decorator-script-docs.vue';
 import SortQueryAdapterScriptsDocs from '../components/pages/scripts/sort-query-adapter-scripts/sort-query-adapter-scripts-docs.vue';
@@ -385,6 +386,11 @@ const routes = [
         path: 'is-empty',
         name: 'is-empty',
         component: IsEmptyScriptDocs,
+      },
+      {
+        path: 'prettify-file-size',
+        name: 'prettify-file-size',
+        component: PrettifyFileSizeScriptDocs,
       },
       {
         path: 'prettify-time',

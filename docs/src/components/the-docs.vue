@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.6.22</h1>
+          <h1>Webitel UI SDK v. 0.6.23</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -328,6 +328,11 @@ export default {
             name: 'Is empty',
             value: 'is-empty',
             route: 'is-empty',
+          },
+          {
+            name: 'Prettify file size',
+            value: 'prettify-file-size',
+            route: 'prettify-file-size',
           },
           {
             name: 'Prettify time',
