@@ -52,6 +52,13 @@
           type: 'Boolean',
           default: 'false',
         },
+        {
+          value: 'disabledDates',
+          code: '<wt-datepicker :disabled-dates="{to: new Date(2016, 0, 5), from: new Date(2016, 0, 26)}"></wt-datepicker>',
+          type: 'Object',
+          default: 'null',
+          description: 'https://www.npmjs.com/package/vuejs-datepicker#disabled-dates',
+        },
       ],
       events: [
         {

@@ -46,6 +46,7 @@
           class="wt-datetimepicker__datepicker"
           :value="draft"
           :maximum-view="'day'"
+          :disabled-dates="disabledDates"
           monday-first
           inline
           @input="setDraft($event.getTime())"
@@ -89,6 +90,9 @@
       disabled: {
         type: Boolean,
         default: false,
+      },
+      disabledDates: {
+        type: Object,
       },
     },
     model: {
