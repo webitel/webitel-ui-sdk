@@ -48,14 +48,14 @@
         {
           value: 'value',
           code: '<wt-radio :value="value"></wt-radio>',
-          type: 'String',
+          type: '[String, Number, Boolean]',
           default: '',
           description: 'Value, set by radio',
         },
         {
           value: 'selected',
           code: '<wt-radio :selected="value"></wt-radio>',
-          type: 'String',
+          type: '[String, Number, Boolean]',
           default: '',
           description: '[V-MODEL] currently selected value',
         },
