@@ -183,6 +183,12 @@ export default {
         description: 'Add / removes search select',
       },
       {
+        value: 'required',
+        code: '<wt-input required></wt-input>',
+        type: 'Boolean',
+        default: 'false',
+      },
+      {
         value: 'allowEmpty',
         code: '<wt-select allow-empty></wt-select>',
         type: 'Boolean',

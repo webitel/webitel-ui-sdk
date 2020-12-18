@@ -15,7 +15,7 @@
       :invalid="invalid"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ label }}</slot>
+      <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
     </wt-label>
     <div class="wt-input__wrapper">
       <input
@@ -173,6 +173,10 @@
         return !!(this.label || this.$slots.label);
       },
 
+      requiredLabel() {
+        return this.required ? `${this.label}*` : this.label;
+      },
+
       isPassword() {
         return this.type === 'password' && this.hasShowPassword;
       },
@@ -190,7 +194,6 @@
     },
     methods: {
       inputHandler(event) {
-        if (this.invalid) this.v.$touch(); // if value is wrong, always check it
         this.$emit('input', event.target.value);
       },
 

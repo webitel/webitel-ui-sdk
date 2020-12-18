@@ -14,7 +14,7 @@
       :invalid="invalid"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ label }}</slot>
+      <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
     </wt-label>
     <vue-multiselect
       class="wt-select__select"
@@ -146,6 +146,11 @@ export default {
       default: true,
     },
 
+    required: {
+      type: Boolean,
+      default: false,
+    },
+
     allowEmpty: {
       type: Boolean,
       default: true,
@@ -165,6 +170,10 @@ export default {
   computed: {
     hasLabel() {
       return !!(this.label || this.$slots.label);
+    },
+
+    requiredLabel() {
+      return this.required ? `${this.label}*` : this.label;
     },
 
     selectOptions() {
