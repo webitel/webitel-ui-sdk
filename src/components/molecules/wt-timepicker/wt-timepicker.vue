@@ -1,26 +1,29 @@
 <template>
   <div class="wt-timepicker">
-    <wt-time-input
-      v-if="isHour"
-      v-model="hour"
-      :label="$t('webitelUI.timepicker.hour')"
-      :maxValue="dateMode ? 23 : null"
-      :disabled="disabled"
-    ></wt-time-input>
-    <wt-time-input
-      v-if="isMin"
-      v-model="min"
-      :label="$t('webitelUI.timepicker.min')"
-      :maxValue="59"
-      :disabled="disabled"
-    ></wt-time-input>
-    <wt-time-input
-      v-if="isSec"
-      v-model="sec"
-      :label="$t('webitelUI.timepicker.sec')"
-      :maxValue="59"
-      :disabled="disabled"
-    ></wt-time-input>
+    <wt-label v-if="label">{{`${ label } (${ format })`}}</wt-label>
+    <div class="wt-timepicker__wrapper">
+      <wt-time-input
+        v-if="isHour"
+        v-model="hour"
+        :label="label ? null : $t('webitelUI.timepicker.hour') "
+        :maxValue="dateMode ? 23 : null"
+        :disabled="disabled"
+      ></wt-time-input>
+      <wt-time-input
+        v-if="isMin"
+        v-model="min"
+        :label="label ? null : $t('webitelUI.timepicker.min')"
+        :maxValue="59"
+        :disabled="disabled"
+      ></wt-time-input>
+      <wt-time-input
+        v-if="isSec"
+        v-model="sec"
+        :label="label ? null :  $t('webitelUI.timepicker.sec')"
+        :maxValue="59"
+        :disabled="disabled"
+      ></wt-time-input>
+    </div>
   </div>
 </template>
 
@@ -38,6 +41,10 @@ export default {
     dateMode: {
       type: Boolean,
       default: false,
+    },
+    label: {
+      type: String,
+      default: '',
     },
     format: {
       type: String,
@@ -110,6 +117,21 @@ export default {
 
 <style lang="scss" scoped>
 .wt-timepicker {
+  display: flex;
+  flex-direction: column;
+}
+
+.wt-label {
+  margin-bottom: var(--label-margin);
+  cursor: text;
+
+  .wt-timepicker:hover &,
+  .wt-timepicker:focus-within & {
+    color: var(--form-label--hover-color);
+  }
+}
+
+.wt-timepicker__wrapper {
   display: flex;
 }
 

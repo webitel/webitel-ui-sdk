@@ -4,8 +4,8 @@
     <article>
       <div class="example-wrapper">
         <h3>Default Mode</h3>
-        <wt-timepicker v-model="value"></wt-timepicker>
-        <pre><code class="language-html">&lt;wt-timepicker v-model="value"&gt;&lt;/wt-timepicker&gt;</code></pre>
+        <wt-timepicker label="Timepicker" v-model="value"></wt-timepicker>
+        <pre><code class="language-html">&lt;wt-timepicker label="Timepicker" v-model="value"&gt;&lt;/wt-timepicker&gt;</code></pre>
         <span>value: {{value}}</span>
       </div>
       <div class="example-wrapper">
@@ -62,9 +62,16 @@
         {
           value: 'date-mode',
           code: '<wt-timepicker date-mode></wt-timepicker>',
-          type: 'String',
+          type: 'Boolean',
           default: 'false',
           description: 'If date-mode is true, timepicker asserts value is timestamp and displays/changes timestamp value',
+        },
+        {
+          value: 'label',
+          code: '<wt-timepicker label="Timepicker"></wt-timepicker>',
+          type: 'String',
+          default: '',
+          description: 'if passed, replaces "hour", "min", "sec" with a single label + format prop value',
         },
         {
           value: 'format',

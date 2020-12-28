@@ -6,7 +6,7 @@
       'wt-time-input--disabled': disabled,
     }"
   >
-    <wt-label :for="name" :outline="outline" :disabled="disabled">
+    <wt-label v-if="hasLabel" :for="name" :outline="outline" :disabled="disabled">
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
@@ -79,6 +79,9 @@
       },
     },
     computed: {
+      hasLabel() {
+        return !!(this.label || this.$slots.label);
+      },
       listeners() {
         return {
           ...this.$listeners,
