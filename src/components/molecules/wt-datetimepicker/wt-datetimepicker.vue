@@ -55,6 +55,7 @@
           class="wt-datetimepicker__timepicker"
           v-model="draft"
           format="hh:mm"
+          date-mode
         ></wt-timepicker>
       </div>
       <div class="wt-datetimepicker__actions">

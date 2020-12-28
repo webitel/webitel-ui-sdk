@@ -3,9 +3,16 @@
     <h2>Timepicker</h2>
     <article>
       <div class="example-wrapper">
+        <h3>Default Mode</h3>
         <wt-timepicker v-model="value"></wt-timepicker>
         <pre><code class="language-html">&lt;wt-timepicker v-model="value"&gt;&lt;/wt-timepicker&gt;</code></pre>
         <span>value: {{value}}</span>
+      </div>
+      <div class="example-wrapper">
+        <h3>Date Mode</h3>
+        <wt-timepicker v-model="dateValue" date-mode></wt-timepicker>
+        <pre><code class="language-html">&lt;wt-timepicker v-model="value"&gt;&lt;/wt-timepicker&gt;</code></pre>
+        <span>value: {{dateValue}}</span>
       </div>
       <div class="example-wrapper">
         <wt-timepicker
@@ -42,19 +49,22 @@
   export default {
     name: 'wt-timepicker-docs',
     data: () => ({
-      value: Date.now(),
+      value: 332,
+      dateValue: Date.now(),
       properties: [
         {
           value: 'value',
           code: '<wt-timepicker :value="value"></wt-timepicker>',
           type: "['String', 'Number'] converts String to Number",
           default: 0,
+          description: 'Time value in seconds (not milliseconds!)',
         },
         {
-          value: 'label',
-          code: '<wt-timepicker label="Label"></wt-timepicker>',
+          value: 'date-mode',
+          code: '<wt-timepicker date-mode></wt-timepicker>',
           type: 'String',
-          default: '',
+          default: 'false',
+          description: 'If date-mode is true, timepicker asserts value is timestamp and displays/changes timestamp value',
         },
         {
           value: 'format',
@@ -74,7 +84,11 @@
         {
           value: 'input',
           params: [
-            { name: 'value', type: 'Number timestamp', description: 'Event is triggered immediately after value change.' },
+            {
+              name: 'value',
+              type: 'Number sec value or timestamp, depending on date-mode prop value',
+              description: 'Event is triggered immediately after value change.',
+            },
           ],
         },
       ],

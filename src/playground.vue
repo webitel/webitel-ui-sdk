@@ -1,6 +1,6 @@
 <template>
   <div class="playground">
-    <wt-select :value="select.value" :options="select.stringOptions" :track-by="null" @input="log"></wt-select>
+    <wt-timepicker v-model="timepicker" @input="log"></wt-timepicker>
   </div>
 </template>
 
@@ -9,6 +9,7 @@
 export default {
   name: 'playground',
   data: () => ({
+    timepicker: 12,
     vValid: {
       $error: false,
       $dirty: true,

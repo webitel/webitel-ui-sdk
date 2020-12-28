@@ -134,7 +134,7 @@ export default {
         code: '<wt-select trackBy="id"></wt-select>',
         type: 'String',
         default: 'id',
-        description: 'Used to compare objects. Only use if options are objects.',
+        description: 'Used to compare objects. IF OPTIONS ARE STRINGS, PROP "null" VALUE IS REQUIRED.',
       },
       {
         value: 'multiple',
