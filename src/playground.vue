@@ -1,100 +1,6 @@
 <template>
   <div class="playground">
-    <wt-rounded-action icon="call" disabled></wt-rounded-action>
-    <wt-rounded-action icon="call" size="lg"></wt-rounded-action>
-    <wt-rounded-action icon="call" size="sm" color="success"></wt-rounded-action>
-    <wt-rounded-action icon="call" color="secondary"></wt-rounded-action>
-    <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
-    <wt-rounded-action icon="call" color="danger"></wt-rounded-action>
-
-    <wt-navigation-bar :nav="[{name: 'name1', route: '/1'}]"></wt-navigation-bar>
-    <div style="margin-top: 250px;">
-      <h2>Player</h2>
-      <wt-button @click="player.src = 'https://cdn6.sefon.pro/files/prev/1/The%20Eagles%20-%20Hotel%20California%20%28192kbps%29.mp3'"></wt-button>
-      <wt-player :src="player.src || 'example.com'"></wt-player>
-    </div>
-    <div>
-      <h2>Table</h2>
-      <wt-table
-        :headers="table.headers"
-        :data="table.data"
-        sortable
-      ></wt-table>
-    </div>
-    <div>
-      <h2>Status Select</h2>
-      <wt-status-select/>
-    </div>
-    <div>
-      <h2>Select</h2>
-      <wt-select
-        v-model="select.value"
-        :options="select.options"
-        label="Select"
-        track-by="name"
-      ></wt-select>
-      <wt-select
-        v-model="select.multipleValue"
-        :options="select.options"
-        :close-on-select="false"
-        label="Multiple Select"
-        track-by="name"
-        :v="vValid"
-        multiple
-      ></wt-select>
-      <wt-select
-        v-model="select.value"
-        label="Disabled Select"
-        track-by="name"
-        disabled
-      ></wt-select>
-      <wt-select
-        v-model="select.value"
-        label="Invalid Select"
-        track-by="name"
-        :v="vInvalid"
-      ></wt-select>
-    </div>
-    <div>
-      <h2>Notifications bar</h2>
-      <div style="position:relative; : 800px; height: 800px; background: var(--main-outline-color);">
-        <wt-notifications-bar style="position: absolute;"/>
-      </div>
-    </div>
-    <div>
-      <h2>App Header</h2>
-      <wt-app-header>
-        <wt-app-navigator :apps="appHeader.apps"></wt-app-navigator>
-        <wt-header-actions :user="{name: 'Name', account: 'name@example.com'}"></wt-header-actions>
-      </wt-app-header>
-    </div>
-    <div>
-      <h2>Scrollbar</h2>
-      <div class="scrollbar-outer" style="width: 300px; height: 300px; overflow: scroll;">
-        <div style="width: 1000px; height: 1000px;"></div>
-      </div>
-    </div>
-    <div style="padding: 30px; background: #EAEAEA;">
-      <h2>Headline</h2>
-      <wt-headline>
-        <template slot="title">
-          Headline
-        </template>
-        <template slot="search">
-          <wt-search-bar></wt-search-bar>
-        </template>
-        <template slot="actions">
-          <wt-button style="margin-left: 20px;">Hello</wt-button>
-          <wt-button style="margin-left: 20px;" color="secondary">there!</wt-button>
-        </template>
-      </wt-headline>
-    </div>
-    <div>
-      <h2>Table Actions</h2>
-      <wt-table-actions
-        :icons="['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings']"
-      ></wt-table-actions>
-    </div>
+    <wt-select :value="select.value" :options="select.stringOptions" :track-by="null" @input="log"></wt-select>
   </div>
 </template>
 
@@ -111,9 +17,6 @@ export default {
       $error: true,
       $dirty: true,
       required: false,
-    },
-    player: {
-      src: '',
     },
     table: {
       headers: [
@@ -163,8 +66,9 @@ export default {
         }],
     },
     select: {
-      value: '',
+      value: '876878768787687876878768787687',
       multipleValue: [],
+      stringOptions: ['123123123123', '321123123123123', '456'],
       options: [
         { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
         { name: 'Adonis2', language: 'JavaScript' },
@@ -191,6 +95,11 @@ export default {
       },
     },
   }),
+  methods: {
+    log(event, inputEvent) {
+      console.log(event, inputEvent);
+    },
+  },
 };
 </script>
 

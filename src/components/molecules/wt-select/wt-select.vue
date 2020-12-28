@@ -18,7 +18,7 @@
     </wt-label>
     <vue-multiselect
       class="wt-select__select"
-      :value="value"
+      :value="selectValue"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :multiple="multiple"
@@ -46,11 +46,17 @@
 
       <template slot="singleLabel" slot-scope="{ option }">
         <slot name="singleLabel" v-bind="{ option }">
+          <span class="multiselect__single-label">
+            {{ option[optionLabel] || option }}
+          </span>
         </slot>
       </template>
 
       <template slot="option" slot-scope="{ option }">
         <slot name="option" v-bind="{ option }">
+          <span>
+            {{ option[optionLabel] || option }}
+          </span>
         </slot>
       </template>
 
@@ -168,6 +174,11 @@ export default {
   },
 
   computed: {
+    selectValue() {
+      // vue-multiselect doesn't show placeholder if value is empty object
+      return this.isValue ? this.value : '';
+    },
+
     hasLabel() {
       return !!(this.label || this.$slots.label);
     },
@@ -296,7 +307,7 @@ export default {
         width: 100%;
       }
 
-      .multiselect__custom-tag {
+      .multiselect__custom-tag, .multiselect__single-label {
         @extend %typo-body-lg;
         color: var(--form-input-color);
 
