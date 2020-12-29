@@ -1,4 +1,5 @@
 export default [
+  'icon-rounded-info--md',
   'icon-copy--md',
   'icon-attach--md',
   'icon-dashboard-grid-1--md',
