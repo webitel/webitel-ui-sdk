@@ -3,6 +3,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  sourceMap: process.env.NODE_ENV !== 'production',
   css: {
     loaderOptions: {
       sass: {

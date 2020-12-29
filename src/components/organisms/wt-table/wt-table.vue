@@ -112,11 +112,11 @@ export default {
 
     columnsStyle() {
       let gridTemplateColumns = '';
-      if (this.selectable) gridTemplateColumns += '24px'; // checkbox
+      if (this.selectable) gridTemplateColumns += '24px '; // checkbox
 
-      const defaultColumnWidth = ' minmax(200px, 1fr) ';
+      const defaultColumnWidth = 'minmax(200px, 1fr)';
       this.dataHeaders.forEach((header) => {
-        gridTemplateColumns += header.width || defaultColumnWidth;
+        gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
       });
 
       if (this.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions

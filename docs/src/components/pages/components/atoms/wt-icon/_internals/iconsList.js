@@ -1,4 +1,5 @@
 export default [
+  'icon-copy--md',
   'icon-attach--md',
   'icon-dashboard-grid-1--md',
   'icon-dashboard-grid-2--md',
