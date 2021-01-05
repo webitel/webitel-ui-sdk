@@ -1,4 +1,5 @@
 export default [
+  'icon-generate--md',
   'icon-rounded-info--md',
   'icon-copy--md',
   'icon-attach--md',
