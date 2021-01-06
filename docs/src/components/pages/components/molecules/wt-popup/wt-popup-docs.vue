@@ -41,6 +41,9 @@
           </code></pre>
       </div>
     </article>
+    <component-props
+      :properties="properties"
+    ></component-props>
     <component-events
       :events="events"
     ></component-events>
@@ -56,6 +59,19 @@
   export default {
     name: 'wt-popup-docs',
     data: () => ({
+      properties: [
+        {
+          value: 'minWidth',
+          type: 'Number, String',
+          description: 'sets min-width style value to popup container',
+        },
+        {
+          value: 'overflow',
+          type: 'Boolean',
+          default: 'false',
+          description: 'If true, popup has overflow: "visible"',
+        },
+      ],
       events: [
         {
           value: 'close',

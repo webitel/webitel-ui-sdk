@@ -1,4 +1,5 @@
 export default [
+  'icon-history--md',
   'icon-generate--md',
   'icon-rounded-info--md',
   'icon-copy--md',
@@ -89,7 +90,6 @@ export default [
   'icon-call-missed--md',
   'icon-call-merge--md',
   'icon-call-end--md',
-  'icon-call-history--md',
   'icon-call-transfer--md',
   'icon-call-add-to--md',
   'icon-call-disconnect--md',

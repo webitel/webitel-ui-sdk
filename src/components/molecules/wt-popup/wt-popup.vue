@@ -1,7 +1,11 @@
 <template>
   <div class="wt-popup">
     <div class="wt-popup__shadow"></div>
-    <aside class="wt-popup__popup">
+    <aside
+      class="wt-popup__popup"
+      :class="{'wt-popup__popup--overflow': overflow}"
+      :style="popupStyle"
+    >
       <header class="wt-popup__header">
         <slot name="header">
           <h3 class="wt-popup__header__title">
@@ -29,6 +33,20 @@
 <script>
 export default {
   name: 'wt-popup',
+  props: {
+    minWidth: {
+      type: [Number, String],
+    },
+    overflow: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    popupStyle() {
+      return this.minWidth ? `min-width: ${this.minWidth}px;` : '';
+    },
+  },
 };
 </script>
 
@@ -67,6 +85,10 @@ export default {
   box-shadow: var(--box-shadow);
   overflow-y: auto;
   z-index: 1;
+
+  &--overflow {
+    overflow: visible;
+  }
 }
 
 .wt-popup__header {
