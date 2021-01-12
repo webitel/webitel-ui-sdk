@@ -22,6 +22,7 @@ import WtSearchBar from './molecules/wt-search-bar/wt-search-bar.vue';
 import WtSelect from './molecules/wt-select/wt-select.vue';
 import WtSwitcher from './molecules/wt-switcher/wt-switcher.vue';
 import WtTabs from './molecules/wt-tabs/wt-tabs.vue';
+import WtTagsInput from './molecules/wt-tags-input/wt-tags-input.vue';
 import WtTimeInput from './molecules/wt-time-input/wt-time-input.vue';
 import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
@@ -62,6 +63,7 @@ const Components = {
   WtSelect,
   WtSwitcher,
   WtTabs,
+  WtTagsInput,
   WtTimeInput,
   WtTimepicker,
   WtTextarea,

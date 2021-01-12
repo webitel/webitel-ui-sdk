@@ -21,6 +21,7 @@
     "src/modules/*"
   ],
   "dependencies": {
+    "@johmun/vue-tags-input": "^2.1.0",
     "bamboo-jest-reporter": "^1.0.3",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
