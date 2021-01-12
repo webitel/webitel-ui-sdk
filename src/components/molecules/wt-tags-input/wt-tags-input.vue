@@ -3,6 +3,7 @@
     class="wt-tags-input"
     :class="{
       'wt-tags-input--disabled': disabled,
+      'wt-tags-input--invalid': invalid,
     }"
   >
     <wt-label
@@ -231,6 +232,22 @@ export default {
             background: var(--tags-input-option-bg-color--hover);
           }
         }
+      }
+    }
+  }
+}
+
+.wt-tags-input--invalid,
+.wt-tags-input--invalid:hover,
+.wt-tags-input--invalid:focus-within, {
+  .wt-label {
+    color: var(--false-color);
+  }
+
+  .wt-tags-input__tags-input {
+    ::v-deep {
+      .ti-input {
+        border-color: var(--false-color);
       }
     }
   }
