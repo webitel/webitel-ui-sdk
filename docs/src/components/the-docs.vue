@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.6.41</h1>
+          <h1>Webitel UI SDK v. 0.6.49</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -158,6 +158,11 @@ export default {
             name: 'Tabs',
             value: 'tabs',
             route: 'tabs',
+          },
+          {
+            name: 'Tags Input',
+            value: 'tags-input',
+            route: 'tags-input',
           },
           {
             name: 'Textarea',

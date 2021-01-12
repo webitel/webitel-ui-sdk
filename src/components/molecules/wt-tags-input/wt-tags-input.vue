@@ -61,6 +61,7 @@ export default {
 
     autocompleteItems: {
       type: Array,
+      default: () => [],
     },
 
     label: {
@@ -108,11 +109,11 @@ export default {
     },
 
     tags() {
-      return this.value;
+      if (!this.value) return [];
+      return this.value.map((item) => ({ text: item.name || item.value, ...item }));
     },
 
     autocompleteOptions() {
-      if (!this.autocompleteItems) return null;
       return this.autocompleteItems
         .map((item) => ({
           text: item.name || item.value,

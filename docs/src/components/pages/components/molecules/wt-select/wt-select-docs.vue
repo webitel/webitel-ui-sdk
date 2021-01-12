@@ -107,7 +107,7 @@ export default {
     ],
     properties: [
       {
-        value: 'type',
+        value: 'value',
         code: '<wt-select :value="value"></wt-select>',
         type: 'any',
       },

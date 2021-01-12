@@ -41,6 +41,7 @@ import WtSelectDocs from '../components/pages/components/molecules/wt-select/wt-
 import WtSwitcherDocs
   from '../components/pages/components/molecules/wt-switcher/wt-switcher-docs.vue';
 import WtTabsDocs from '../components/pages/components/molecules/wt-tabs/wt-tabs-docs.vue';
+import WtTagsInputDocs from '../components/pages/components/molecules/wt-tags-input/wt-tags-input-docs.vue';
 import WtTextareaDocs
   from '../components/pages/components/molecules/wt-textarea/wt-textarea-docs.vue';
 import WtTimeInputDocs
@@ -234,6 +235,11 @@ const routes = [
         path: 'tabs',
         name: 'tabs-docs',
         component: WtTabsDocs,
+      },
+      {
+        path: 'tags-input',
+        name: 'tags-input-docs',
+        component: WtTagsInputDocs,
       },
       {
         path: 'textarea',
