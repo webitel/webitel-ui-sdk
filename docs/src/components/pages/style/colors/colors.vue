@@ -274,7 +274,7 @@ export default {
           },
           {
             textColor: '#000',
-            code: '#F3F4F4',
+            code: '#ACACAC',
             color: '--text--disabled-color',
             name: 'Text disabled color',
           },
