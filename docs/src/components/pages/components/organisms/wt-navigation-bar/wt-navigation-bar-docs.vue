@@ -50,8 +50,8 @@ export default {
   data: () => ({
     properties: [
       {
-        value: 'activeApp',
-        code: '<wt-navigation-bar active-app="admin"></wt-navigation-bar>',
+        value: 'currentApp',
+        code: '<wt-navigation-bar current-app="admin"></wt-navigation-bar>',
         type: 'String',
         description: 'Currently opened app',
       },

@@ -17,12 +17,12 @@
       <article>
         <div class="example-wrapper">
           <wt-app-header>
-            <wt-app-navigator active-app="admin" :apps="apps"></wt-app-navigator>
+            <wt-app-navigator current-app="admin" :apps="apps"></wt-app-navigator>
           </wt-app-header>
           <pre><code
             class="language-html">
         &lt;wt-app-header&gt;
-            &lt;wt-app-navigator active-app="admin" :apps="apps"&gt;&lt;/wt-app-navigator&gt;
+            &lt;wt-app-navigator current-app="admin" :apps="apps"&gt;&lt;/wt-app-navigator&gt;
         &lt;/wt-app-header&gt;
         </code></pre>
         </div>
@@ -78,8 +78,8 @@ export default {
     ],
     appNavigatorProps: [
       {
-        value: 'activeApp',
-        code: '<wt-app-navigator active-app="admin"></wt-app-navigator>',
+        value: 'currentApp',
+        code: '<wt-app-navigator current-app="admin"></wt-app-navigator>',
         type: 'String',
         description: 'Currently opened app',
       },

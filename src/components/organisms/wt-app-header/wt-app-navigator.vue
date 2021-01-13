@@ -20,7 +20,7 @@
           <li
             v-if="apps.agent"
             class="wt-app-navigator__card"
-            :class="{'active': activeApp === 'agent'}"
+            :class="{'active': currentApp === 'agent'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -39,7 +39,7 @@
           <li
             v-if="apps.supervisor"
             class="wt-app-navigator__card"
-            :class="{'active': activeApp === 'supervisor'}"
+            :class="{'active': currentApp === 'supervisor'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -58,7 +58,7 @@
           <li
             v-if="apps.history"
             class="wt-app-navigator__card"
-            :class="{'active': activeApp === 'history'}"
+            :class="{'active': currentApp === 'history'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -77,7 +77,7 @@
           <li
             v-if="apps.audit"
             class="wt-app-navigator__card"
-            :class="{'active': activeApp === 'audit'}"
+            :class="{'active': currentApp === 'audit'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -96,7 +96,7 @@
           <li
             v-if="apps.admin"
             class="wt-app-navigator__card"
-            :class="{'active': activeApp === 'admin'}"
+            :class="{'active': currentApp === 'admin'}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -115,7 +115,7 @@
           <li
             v-if="apps.grafana && isOnSite"
             class="wt-app-navigator__card"
-            :class="{'active': apps.grafana === activeApp}"
+            :class="{'active': apps.grafana === currentApp}"
           >
             <a
               class="wt-app-navigator__card__link"
@@ -146,7 +146,7 @@ export default {
   }),
 
   props: {
-    activeApp: {
+    currentApp: {
       type: String,
     },
     apps: {
