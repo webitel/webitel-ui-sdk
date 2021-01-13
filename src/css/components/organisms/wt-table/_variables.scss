@@ -6,6 +6,7 @@
   --table-head-borer-bottom: 1px solid;
   --table-head-borer-color: var(--main-outline-color);
 
+  --table-min-height: calc(24px + var(--table-row-padding) * 2); // 24px icon size + 2 paddings
   --table-column-gap: 20px;
   --table-row-padding: 10px;
 

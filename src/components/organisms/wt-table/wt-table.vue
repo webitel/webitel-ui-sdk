@@ -163,6 +163,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
   grid-column-gap: var(--table-column-gap);
+  min-height: var(--table-min-height);
   padding: var(--table-row-padding);
   transition: var(--transition);
 
