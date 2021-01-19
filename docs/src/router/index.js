@@ -30,6 +30,7 @@ import WtDatepickerDocs
   from '../components/pages/components/molecules/wt-datepicker/wt-datepicker-docs.vue';
 import WtDatetimepickerDocs
   from '../components/pages/components/molecules/wt-datetimepicker/wt-datetimepicker-docs.vue';
+import WtIconBtnDocs from '../components/pages/components/molecules/wt-icon-btn/wt-icon-btn-docs.vue';
 import WtInputDocs from '../components/pages/components/molecules/wt-input/wt-input-docs.vue';
 import WtNotificationDocs
   from '../components/pages/components/molecules/wt-notification/wt-notification-docs.vue';
@@ -195,6 +196,11 @@ const routes = [
         path: 'datetimepicker',
         name: 'datetimepicker-docs',
         component: WtDatetimepickerDocs,
+      },
+      {
+        path: 'icon-btn',
+        name: 'icon-btn-docs',
+        component: WtIconBtnDocs,
       },
       {
         path: 'input',

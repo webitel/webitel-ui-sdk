@@ -120,6 +120,11 @@ export default {
             route: 'datetimepicker',
           },
           {
+            name: 'Icon Button',
+            value: 'icon-btn',
+            route: 'icon-btn',
+          },
+          {
             name: 'Input',
             value: 'input',
             route: 'input',
