@@ -46,6 +46,14 @@
     data: () => ({
       slots: [
         {
+          name: 'default',
+          description: 'headline direct child',
+        },
+        {
+          name: 'title-wrapper',
+          description: 'headline direct child slot, but with search and actions slots available',
+        },
+        {
           name: 'title',
           description: 'Title slot',
         },

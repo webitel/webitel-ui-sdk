@@ -9,6 +9,12 @@ export default {
     required: 'Field is required',
     numeric: 'Should be numeric',
     email: 'Should look like email',
+    gatewayHostValidator: 'Should look like IPv4 or FQDN',
+    sipAccountValidator: 'Should look like SIP account',
+    ipValidator: 'Should look like IPv4',
+    macValidator: 'Should look like MAC',
+    minValue: 'Value should be not less than',
+    maxValue: 'Value should be not much than',
   },
   webitelUI: {
     timepicker: {

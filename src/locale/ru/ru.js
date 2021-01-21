@@ -7,8 +7,14 @@ export default {
   },
   validation: {
     required: 'Обязательное поле',
-    numeric: 'Should be numeric',
-    email: 'Should look like email',
+    numeric: 'Необходимо ввести цифровое значение',
+    email: 'Необходимо ввести адрес электронной почты',
+    gatewayHostValidator: 'Необходимо ввести IPv4 или FQDN',
+    sipAccountValidator: 'Необходимо ввести SIP-аккаунт',
+    ipValidator: 'Необходимо ввести IPv4',
+    macValidator: 'Необходимо ввести MAC-адрес',
+    minValue: 'Значение должно быть не меньше',
+    maxValue: 'Значение должно быть не больше',
   },
   webitelUI: {
     timepicker: {

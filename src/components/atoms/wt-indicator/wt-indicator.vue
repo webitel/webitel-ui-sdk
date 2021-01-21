@@ -26,16 +26,13 @@ export default {
 
   computed: {
     isText() {
-      return this.text !== undefined
-        || this.text !== null
-        || this.text !== '';
+      return this.text !== undefined && this.text !== null && this.text !== '';
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .wt-indicator {
   display: flex;
   align-items: center;

@@ -9,6 +9,15 @@ describe('WtHeadline', () => {
     expect(wrapper.classes('wt-headline')).toBe(true);
   });
 
+  it('renders headline main content via title-wrapper slot', () => {
+    const content = 'Headline title';
+    const wrapper = shallowMount(WtHeadline, {
+      stubs: { WtIconBtn: true },
+      slots: { 'title-wrapper': content },
+    });
+    expect(wrapper.find('.wt-headline').text()).toBe(content);
+  });
+
   it('renders headline title via title slot', () => {
     const content = 'Headline title';
     const wrapper = shallowMount(WtHeadline, {
