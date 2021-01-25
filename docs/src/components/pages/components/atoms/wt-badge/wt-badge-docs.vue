@@ -19,6 +19,9 @@
           .my-div { @extend .wt-badge; }
         </code></pre>
     </article>
+    <component-props
+      :properties="properties"
+    ></component-props>
     <component-slots
     ></component-slots>
   </section>
@@ -30,6 +33,16 @@
   export default {
     name: 'wt-badge-docs',
     data: () => ({
+      properties: [
+        {
+          value: 'color',
+          code: '<wt-badge color="primary"></wt-badge>',
+          type: 'String',
+          options: ['"main", "primary", "outline"'],
+          default: 'main',
+          description: 'main color - lighten primary (--main-secondary-accent-color). Primary color - --primary-accent-color',
+        },
+      ],
     }),
     mounted() {
       Prism.highlightAll();

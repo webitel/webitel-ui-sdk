@@ -1,5 +1,5 @@
 <template>
-  <span class="wt-badge">
+  <span class="wt-badge" :class="`wt-badge--${color}-color`">
     <slot></slot>
   </span>
 </template>
@@ -7,6 +7,12 @@
 <script>
   export default {
     name: 'wt-badge',
+    props: {
+      color: {
+        type: String,
+        default: 'main',
+      },
+    },
   };
 </script>
 

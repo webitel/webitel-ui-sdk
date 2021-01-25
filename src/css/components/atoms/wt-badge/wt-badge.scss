@@ -5,4 +5,16 @@
   padding: var(--badge-padding);
   background: var(--badge-bg-color);
   border-radius: var(--badge-border-radius);
+
+  &--main-color {
+    background: var(--badge-bg-color);
+  }
+
+  &--outline-color {
+    background: var(--badge-bg-color--outline);
+  }
+
+  &--primary-color {
+    background: var(--main-accent-color);
+  }
 }
