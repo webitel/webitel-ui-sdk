@@ -1,5 +1,5 @@
 <template>
-  <aside class="wt-navigation-bar">
+  <aside class="wt-navigation-bar" v-clickaway="close">
     <wt-icon-btn
       class="wt-navigation-bar__menu-btn"
       icon="menu"
