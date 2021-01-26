@@ -13,8 +13,7 @@
             :headers="headers"
             :data="data"
             sortable
-          &gt;
-          &lt;/wt-table&gt;
+          &gt;&lt;/wt-table&gt;
         </code></pre>
       </div>
     </article>
@@ -151,13 +150,20 @@
         },
         {
           name: ':headerColumn.value',
-          scope: [{ name: 'item', description: 'Data row object' }],
+          scope: [
+            { name: 'item', description: 'Data row object' },
+            { name: 'index', description: 'Data row index' },
+          ],
           description: 'Customize data columns. '
             + 'Recommended for representing nested data structures like object or array, '
             + 'and adding specific elements like select or badge',
         },
         {
           name: 'actions',
+          scope: [
+            { name: 'item', description: 'Data row object' },
+            { name: 'index', description: 'Data row index' },
+          ],
           description: 'Table body actions row slot',
         },
       ],

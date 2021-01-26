@@ -56,7 +56,7 @@
           v-for="(col, headerKey) of dataHeaders"
           :key="headerKey"
         >
-          <slot :name="col.value" :item="row">
+          <slot :name="col.value" :item="row" :index="dataKey">
             <div>{{ row[col.value] }}</div>
           </slot>
         </td>
