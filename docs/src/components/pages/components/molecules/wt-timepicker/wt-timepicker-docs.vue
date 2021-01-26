@@ -11,7 +11,7 @@
       <div class="example-wrapper">
         <h3>Date Mode</h3>
         <wt-timepicker v-model="dateValue" date-mode></wt-timepicker>
-        <pre><code class="language-html">&lt;wt-timepicker v-model="value"&gt;&lt;/wt-timepicker&gt;</code></pre>
+        <pre><code class="language-html">&lt;wt-timepicker v-model="value" date-mode&gt;&lt;/wt-timepicker&gt;</code></pre>
         <span>value: {{dateValue}}</span>
       </div>
       <div class="example-wrapper">

@@ -6,7 +6,7 @@
         v-if="isHour"
         v-model="hour"
         :label="label ? null : $t('webitelUI.timepicker.hour') "
-        :maxValue="dateMode ? 23 : null"
+        :maxValue="dateMode ? null : 23"
         :disabled="disabled"
       ></wt-time-input>
       <wt-time-input
