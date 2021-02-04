@@ -6,7 +6,7 @@
       :class="`wt-icon__icon--${size}`"
       :style="iconStyle"
     >
-      <use :xlink:href="`#_icon-${icon}--${size}`"></use>
+      <use :xlink:href="iconName"></use>
     </svg>
   </i>
 </template>
@@ -27,8 +27,17 @@ export default {
       type: String,
       default: 'primary',
     },
+    iconPrefix: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
+    iconName() {
+      let name = '#_icon';
+      if (this.iconPrefix) name += `-${this.iconPrefix}`;
+      return `${name}-${this.icon}--${this.size}`;
+    },
     iconStyle() {
       return {
         '--icon-color': `var(--icon-${this.color}-color)`,

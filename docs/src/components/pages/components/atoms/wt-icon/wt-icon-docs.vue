@@ -71,6 +71,14 @@
           default: 'primary',
           description: 'Options from list of icon colors, using formula --icon-{color}-color',
         },
+        {
+          value: 'iconPrefix',
+          code: '<wt-icon icon="close" icon-prefix="adm"></wt-icon>',
+          type: 'String',
+          default: '',
+          description: `inserts icon name prefix between "icon" and actual icon name ("icon" prop).
+            Useful for library icons extension with project-level icons with this prefix in name`,
+        },
       ],
     }),
     mounted() {
