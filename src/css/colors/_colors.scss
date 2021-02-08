@@ -1,69 +1,131 @@
 :root {
+  // HSL COLORS HUE VALUE
+  --_accent-color-hue: 42;
+  --_page-bg-color-hue: 209;
+  --_icon-color-hue: 202;
+  --_positive-color-hue: 119;
+  --_negative-color-hue: 11;
+
+  --_hold-color-hue: 54;
+  --_transfer-color-hue: 227;
+
+  // DEFAULT STATES OPACITY
+  --_opacity--default: 0.8;
+  --_opacity--hover: 1;
+  --_opacity--active: 1;
+  --_opacity--focus: 0.8;
+  --_opacity--disabled: 0.2;
+
+  // BASIC HSL COLORS VALUES
+  --_accent-color: var(--_accent-color-hue), 100%, 50%;
+  --_main-color: var(--_accent-color-hue), 20%, 99%;
+  --_contrast-color: var(--_accent-color-hue), 20%, 1%;
+  --_secondary-color: var(--_accent-color-hue), 50%, 90%;
+  --_page-bg-color: var(--_page-bg-color-hue), 50%, 90%;
+  --_header-color: var(--_page-bg-color-hue), 20%, 90%;
+  --_positive-color: var(--_positive-color-hue), 60%, 50%;
+  --_negative-color: var(--_negative-color-hue) , 80%, 50%;
+  --_icon-color: var(--_icon-color-hue), 100%, 15%;
+
+  --_hold-color: var(--_hold-color-hue), 80%, 50%;
+  --_transfer-color: var(--_transfer-color-hue), 80%, 50%;
+
   // MAIN COLORS
-  --main-primary-color: #fff;
-  --main-primary-accent-color: #171A2A;
-  --main-outline-color: #EAEAEA;
+  --accent-color: hsla(var(--_accent-color), 1);
+  --main-accent-color: var(--accent-color); // DEPRECATED
 
-  --main-secondary-color: #000;
-  --main-secondary-accent-color: #FFE69C;
+  --main-color: hsla(var(--_main-color), 1);
+  --main-primary-color: var(--main-color); // DEPRECATED
 
-  --main-accent-color: #FFC107;
-  --main-page-bg-color: #F1F4F6;
+  --contrast-color: hsla(var(--_contrast-color), 1);
+  --main-primary-accent-color: var(--contrast-color); // DEPRECATED
 
-  --main-option-hover-color: #FFF9E6;
+  --secondary-color: hsla(var(--_secondary-color), 1);
+  --main-secondary-color: var(--secondary-color); // DEPRECATED
+  --main-outline-color: var(--secondary-color); // DEPRECATED
+
+  --icon-color: hsla(var(--_icon-color), 1);
+
+  --page-bg-color: hsla(var(--_page-bg-color), 1);
+  --header-color: hsla(var(--_header-color), 1);
+  --main-page-bg-color: var(--page-bg-color); // DEPRECATED
+
+  --accent-secondary-color: hsla(var(--_accent-color), 0.3);
+  --main-secondary-accent-color: var(--accent-secondary-color); // DEPRECATED
+  --main-option-hover-color: var(--accent-secondary-color); // DEPRECATED
 
   // SEMANTIC COLORS
-  --disabled-color: #F3F4F4;
+  --disabled-color: hsl(var(--_contrast-color), var(--_opacity--disabled));
 
-  --true-color: #4CAF50;
-  --true--hover-color: #43A146;
+  --true-color: hsla(var(--_positive-color), var(--_opacity--default));
+  --true--hover-color: hsla(var(--_positive-color), var(--_opacity--hover)); // DEPRECATED
 
-  --false-color: #FF4444;
-  --false--hover-color: #F03D3D;
+  --false-color: hsla(var(--_negative-color), var(--_opacity--default));
+  --false--hover-color: hsla(var(--_negative-color), var(--_opacity--hover)); // DEPRECATED
 
-  --hold-color: #FFC107;
-  --hold--hover-color: #EFB917;
+  --hold-color: hsla(var(--_hold-color), var(--_opacity--default));
+  --hold--hover-color: hsla(var(--_hold-color), var(--_opacity--hover)); // DEPRECATED
 
-  --transfer-color: #708FFF;
-  --transfer--hover-color: #6582EB;
+  --transfer-color: hsla(var(--_transfer-color), var(--_opacity--default));
+  --transfer--hover-color: hsla(var(--_transfer-color), var(--_opacity--hover)); // DEPRECATED
 
   // SUBORDINATE COLORS
   --tag-bg-color: var(--main-secondary-accent-color);
 
+  // FORM STATES OPACITY
+  --form-opacity--default: var(--_opacity--default);
+  --form-opacity--hover: var(--_opacity--hover);
+  --form-opacity--active: var(--_opacity--active);
+  --form-opacity--focus: var(--_opacity--focus);
+  --form-opacity--disabled: var(--_opacity--disabled);
+
+  --form-opacity--ouline--default: 0.4;
+  --form-opacity--ouline--hover: 0.7;
+
   // FORM COLORS
-  --form-input-color: #000; // user input color
+  --form-input-color: var(--contrast-color); // user input color
 
-  --form-label-color: #ACACAC;
-  --form-label--active-color: #000;
-  --form-label--hover-color: #000;
-  --form-label--disabled-color: #EAEAEA;
+  --form-label-color: hsla(var(--_contrast-color), var(--form-opacity--default));
+  --form-label--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
+  --form-label--active-color: hsla(var(--_contrast-color), var(--form-opacity--active));
+  --form-label--disabled-color: hsla(var(--_contrast-color), var(--form-opacity--disabled));
 
-  --form-border-color: #ACACAC;
-  --form-border--hover-color: #000;
-  --form-border--disabled-color: #F5F5F5;
+  --form-border-color: hsla(var(--_contrast-color), var(--form-opacity--default));
+  --form-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
+  --form-border--disabled-color: hsla(var(--_contrast-color), var(--form-opacity--disabled));
 
-  --form-placeholder-color: #ACACAC;
-  --form-placeholder--hover-color: #000;
-  --form-placeholder--disabled-color: #E3E3E3;
+  --form-placeholder-color: hsla(var(--_contrast-color), var(--form-opacity--default));
+  --form-placeholder--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
+  --form-placeholder--disabled-color: hsla(var(--_contrast-color), var(--form-opacity--disabled));
 
   // outline
-  --form-outline-label-color: #EAEAEA;
+  --form-outline-label-color: hsla(var(--_contrast-color), var(--form-opacity--default));
 
-  --form-outline-border-color: #EAEAEA;
-  --form-outline-border--hover-color: #ACACAC;
+  --form-outline-border-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--default));
+  --form-outline-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--hover));
 
-  --form-outline-placeholder-color: #EAEAEA;
-  --form-outline-placeholder--hover-color: #ACACAC;
+  --form-outline-placeholder-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--default));
+  --form-outline-placeholder--hover-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--hover));
+
+  // TEXT OPACITY
+  --text-opacity--default: var(--_opacity--default);
+  --text-opacity----outline--default: 0.7;
+  --text-opacity--disabled: 0.5;
 
   // TEXT COLORS
-  --text-primary-color: #000;
-  --text-outline-color: #ACACAC;
-  --text-contrast-color: #FFF;
-  --text--disabled-color: #ACACAC;
+  --text-primary-color: hsla(var(--_contrast-color), var(--text-opacity--default));
+  --text-outline-color: hsla(var(--_contrast-color), var(--text-opacity----outline--default));
+  --text-contrast-color: hsla(var(--main-color), var(--text-opacity--default));
+  --text--disabled-color: hsla(var(--_contrast-color), var(--text-opacity--disabled));
 
   // CHAT COLORS
-  --chat-client-message-bg-color: #FFF9E6;
-  --chat-agent-message-bg-color: #F9F9F9;
-  --chat-client-attachment-bg-color: var(--main-accent-color);
-  --chat-agent-attachment-bg-color: #EAEAEA;
+  --_chat-client-color: var(--_accent-color);
+  --_chat-client-opacity: 0.2;
+  --_chat-agent-color: var(--_contrast-color);
+  --_chat-agent-opacity: 0.1;
+
+  --chat-client-message-bg-color: hsla(var(--_chat-client-color), 0.2);
+  --chat-agent-message-bg-color: hsla(var(--_chat-agent-color), 0.1);
+  --chat-client-attachment-bg-color: hsla(var(--_chat-client-color), 0.2);
+  --chat-agent-attachment-bg-color: hsla(var(--_chat-agent-color), 0.1);
 }
