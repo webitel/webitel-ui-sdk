@@ -52,6 +52,13 @@
           description: 'icon name. For more information check "Icons" docs',
         },
         {
+          value: 'icon-prefix',
+          code: '<wt-icon-btn icon-prefix="adm" icon="permissions"></wt-icon-btn>',
+          type: 'String',
+          default: '',
+          description: 'icon name prefix. For more information check "Icons" docs',
+        },
+        {
           value: 'size',
           code: '<wt-icon-btn icon="edit" size="sm"></wt-icon-btn>',
           type: 'String',

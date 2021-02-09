@@ -3,6 +3,7 @@
     <button class="wt-icon-btn__button" type="button">
       <wt-icon
         :icon="icon"
+        :icon-prefix="iconPrefix"
         :size="size"
         :color="color"
         @click.native="$emit('click', $event)"
@@ -23,6 +24,10 @@
       icon: {
         type: String,
         required: true,
+      },
+      iconPrefix: {
+        type: String,
+        default: '',
       },
       size: {
         type: String,
