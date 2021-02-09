@@ -117,4 +117,12 @@ export default [
   'icon-arrow-right--md',
   'icon-arrow-up--md',
   'icon-arrow-up--sm',
+
+  /* ADM icons */
+  'icon-adm-integrations--md',
+  'icon-adm-contact-center--md',
+  'icon-adm-permissions--md',
+  'icon-adm-directory--md',
+  'icon-adm-lookups--md',
+  'icon-adm-routing--md',
 ];
