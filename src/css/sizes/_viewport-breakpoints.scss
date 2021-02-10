@@ -1,0 +1,18 @@
+/*
+xl: @media only screen and (min-width: $viewport-xl) {}
+lg: @media only screen and (max-width: $viewport-xl) {}
+md: @media only screen and (max-width: $viewport-lg) {}
+sm: @media only screen and (max-width: $viewport-md) {}
+xs: @media only screen and (max-width: $viewport-sm) {}
+ */
+$viewport-xl: 1440px;
+$viewport-lg: 1280px;
+$viewport-md: 992px;
+$viewport-sm: 600px;
+
+$media: only screen;
+$media-width-xl: (min-width: $viewport-xl);
+$media-width-lg: (max-width: $viewport-xl);
+$media-width-md: (max-width: $viewport-lg);
+$media-width-sm: (max-width: $viewport-md);
+$media-width-xs: (max-width: $viewport-sm);

@@ -1,0 +1,17 @@
+//@import './viewport-breakpoints';
+
+:root {
+  --component-padding: 15px;
+  --component-spacing: 15px;
+  --icon-spacing: 10px;
+
+  @media #{$media} and #{$media-width-sm} {
+    --component-padding: 10px;
+    --component-spacing: 10px;
+  }
+
+  @media #{$media} and #{$media-width-xs} {
+    --component-padding: 10px;
+    --component-spacing: 1px;
+  }
+}

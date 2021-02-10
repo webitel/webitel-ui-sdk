@@ -7,7 +7,7 @@ import i18n from './locale/i18n';
 import eventBus from './scripts/eventBus';
 import './assets/icons/svg-sprites/wt-icon.svg';
 
-import './css/fonts.scss';
+import './css/fonts/_fonts.scss';
 import router from './router';
 
 Vue.config.productionTip = false;

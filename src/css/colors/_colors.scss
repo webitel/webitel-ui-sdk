@@ -1,6 +1,7 @@
 :root {
   // HSL COLORS HUE VALUE
   --_accent-color-hue: 42;
+  --_secondary-color-hue: 202;
   --_page-bg-color-hue: 209;
   --_icon-color-hue: 202;
   --_positive-color-hue: 119;
@@ -20,7 +21,7 @@
   --_accent-color: var(--_accent-color-hue), 100%, 50%;
   --_main-color: var(--_accent-color-hue), 20%, 99%;
   --_contrast-color: var(--_accent-color-hue), 20%, 1%;
-  --_secondary-color: var(--_accent-color-hue), 50%, 90%;
+  --_secondary-color: var(--_secondary-color-hue), 20%, 90%;
   --_page-bg-color: var(--_page-bg-color-hue), 50%, 90%;
   --_header-color: var(--_page-bg-color-hue), 20%, 90%;
   --_positive-color: var(--_positive-color-hue), 60%, 50%;

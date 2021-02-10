@@ -1,6 +1,8 @@
-@import "./styleguide/styleguide";
-@import "./transitions/transitions";
-@import "./components/components";
+@import 'sizes/sizes';
+@import 'display-helpers/display-helpers';
+@import 'styleguide/styleguide';
+@import 'transitions/transitions';
+@import 'components/components';
 
 :root {
   --transition: 0.2s;

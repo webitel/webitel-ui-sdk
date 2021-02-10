@@ -1,0 +1,21 @@
+.d-none {
+  display: none;
+}
+
+@media #{$media} and #{$media-width-sm} {
+  .d-sm-none {
+    display: none;
+  }
+  .d-sm-block {
+    display: block;
+  }
+}
+
+@media #{$media} and #{$media-width-xs} {
+  .d-xs-none {
+    display: none;
+  }
+  .d-xs-block {
+    display: block;
+  }
+}

@@ -3,7 +3,7 @@ import LibVue from 'vue';
 import Components from './components'; // init all components
 import Directives from './directives'; // init all directives
 import Filters from './filters'; // init all directives
-import './css/fonts.scss';
+import './css/fonts/_fonts.scss';
 
 export default {
   install(Vue, { eventBus, router, globals = {} }) {

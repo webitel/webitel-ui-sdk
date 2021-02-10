@@ -1,10 +1,10 @@
 :root {
-  --scrollbar-width: 8px;
-  --scrollbar-height: 8px;
-  --scrollbar-thumb-width: 8px;
-  --scrollbar-bg-color: var(--main-primary-color);
-  --scrollbar-thumb-color: var(--main-accent-color);
-  --scrollbar-border-radius: 7px;
+  --scrollbar-width: 5px;
+  --scrollbar-height: 5px;
+  --scrollbar-thumb-width: 5px;
+  --scrollbar-bg-color: var(--main-color);
+  --scrollbar-thumb-color: var(--secondary-color);
+  --scrollbar-border-radius: var(--border-radius);
 }
 
 %wt-scrollbar {
@@ -14,6 +14,7 @@
     height: var(--scrollbar-height);
     background-color: var(--scrollbar-bg-color);
     cursor: pointer;
+    border-radius: 50%; // dont overlay borders
   }
 
   // scrollable element
