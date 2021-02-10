@@ -9,6 +9,7 @@ import 'prismjs/themes/prism.css';
 import './plugins/webitel-ui';
 import './css/main.scss';
 import './components/shared';
+import prismMixin from './mixins/prismMixin';
 
 Vue.config.productionTip = false;
 Vue.prototype.$eventBus = eventBus;
@@ -17,5 +18,6 @@ new Vue({
   router,
   // store,
   i18n,
+  mixins: [prismMixin],
   render: (h) => h(App),
 }).$mount('#app');

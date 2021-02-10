@@ -16,8 +16,21 @@ body {
     margin: 20px 10px;
   }
 
+  h4 {
+    @extend %typo-heading-sm;
+    margin: 15px 10px;
+  }
+
   p {
     margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: initial;
+  }
+
+  li {
+    margin: 20px 10px;
   }
 }
 

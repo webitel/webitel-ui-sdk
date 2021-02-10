@@ -3,19 +3,19 @@
 }
 
 @media #{$media} and #{$media-width-sm} {
-  .d-sm-none {
+  .d-none-sm {
     display: none;
   }
-  .d-sm-block {
+  .d-block-sm {
     display: block;
   }
 }
 
 @media #{$media} and #{$media-width-xs} {
-  .d-xs-none {
+  .d-none-xs {
     display: none;
   }
-  .d-xs-block {
+  .d-block-xs {
     display: block;
   }
 }

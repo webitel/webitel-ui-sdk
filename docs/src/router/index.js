@@ -4,8 +4,11 @@ import VueRouter from 'vue-router';
 import QuickStart from '../components/pages/quick-start/quick-start.vue';
 
 import StyleDocs from '../components/pages/style/style-docs.vue';
-import Typography from '../components/pages/style/typography/typography.vue';
+import Breakpoints from '../components/pages/style/breakpoints/breakpoints.vue';
 import Colors from '../components/pages/style/colors/colors.vue';
+import DisplayHelpers from '../components/pages/style/display-helpers/display-helpers.vue';
+import Spacing from '../components/pages/style/spacing/spacing.vue';
+import Typography from '../components/pages/style/typography/typography.vue';
 
 import ComponentsDocs from '../components/pages/components/components-docs.vue';
 // atoms
@@ -108,14 +111,29 @@ const routes = [
     component: StyleDocs,
     children: [
       {
-        path: 'typography',
-        name: 'typography',
-        component: Typography,
+        path: 'breakpoints',
+        name: 'breakpoints',
+        component: Breakpoints,
       },
       {
         path: 'colors',
         name: 'colors',
         component: Colors,
+      },
+      {
+        path: 'display-helpers',
+        name: 'display-helpers',
+        component: DisplayHelpers,
+      },
+      {
+        path: 'spacing',
+        name: 'spacing',
+        component: Spacing,
+      },
+      {
+        path: 'typography',
+        name: 'typography',
+        component: Typography,
       },
     ],
   },

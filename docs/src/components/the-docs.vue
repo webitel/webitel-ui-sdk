@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.7.6</h1>
+          <h1>Webitel UI SDK v. 0.7.14</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -41,14 +41,29 @@ export default {
         route: '/style',
         subNav: [
           {
-            name: 'Typography',
-            value: 'typography',
-            route: 'typography',
+            name: 'Breakpoints',
+            value: 'breakpoints',
+            route: 'breakpoints',
           },
           {
             name: 'Colors',
             value: 'colors',
             route: 'colors',
+          },
+          {
+            name: 'Display Helpers',
+            value: 'display-helpers',
+            route: 'display-helpers',
+          },
+          {
+            name: 'Spacing',
+            value: 'spacing',
+            route: 'spacing',
+          },
+          {
+            name: 'Typography',
+            value: 'typography',
+            route: 'typography',
           },
         ],
       };
