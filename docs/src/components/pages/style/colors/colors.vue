@@ -42,9 +42,9 @@ const ACCENT_COLOR = `${ACCENT_COLOR_HUE}, 100%, 50%`;
 const MAIN_COLOR = `${ACCENT_COLOR_HUE}, 20%, 99%`;
 const CONTRAST_COLOR = `${ACCENT_COLOR_HUE}, 20%, 1%`;
 const SECONDARY_COLOR = `${SECONDARY_COLOR_HUE}, 20%, 90%`;
-const PAGE_BG_COLOR = `${PAGE_BG_COLOR_HUE}, 50%, 90%`;
+const PAGE_BG_COLOR = `${PAGE_BG_COLOR_HUE}, 20%, 95%`;
 const HEADER_COLOR = `${PAGE_BG_COLOR_HUE}, 20%, 90%`;
-const POSITIVE_COLOR = `${POSITIVE_COLOR_HUE}, 60%, 50%`;
+const POSITIVE_COLOR = `${POSITIVE_COLOR_HUE}, 60%, 40%`;
 const NEGATIVE_COLOR = `${NEGATIVE_COLOR_HUE}, 80%, 50%`;
 const HOLD_COLOR = `${HOLD_COLOR_HUE}, 80%, 50%`;
 const TRANSFER_COLOR = `${TRANSFER_COLOR_HUE}, 80%, 50%`;
@@ -391,7 +391,7 @@ export default {
 }
 
 .color-item__color {
-  flex: 0 0 180px;
+  flex: 0 0 200px;
   display: flex;
   height: 60px;
   padding: 10px;
