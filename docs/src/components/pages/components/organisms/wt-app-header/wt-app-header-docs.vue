@@ -96,8 +96,8 @@ export default {
         value: 'user',
         code: '<wt-user-actions :user="userInfo"></wt-user-actions>',
         type: 'Object',
-        description: 'User info object. Should have account, name or username fields for representation.'
-          + 'In most cases, this is the data returned from /userinfo api.',
+        description: `User info object. Should have preferredUsername or account and name or username fields for representation.
+          In most cases, this is the data returned from /userinfo api.1`,
       },
     ],
     headerActionsEvents: [
