@@ -1,9 +1,14 @@
 <template>
   <div
     class="wt-textarea"
-    :class="{}"
+    :class="{
+      'wt-textarea--disabled': disabled,
+      }"
   >
-    <wt-label :for="name">
+    <wt-label
+      :for="name"
+      :disabled="disabled"
+    >
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
@@ -13,6 +18,7 @@
         class="wt-textarea__textarea"
         :value="value"
         :placeholder="placeholder || label"
+        :disabled="disabled"
         v-on="listeners"
       ></textarea>
       <wt-icon-btn
@@ -20,6 +26,7 @@
         :class="{ 'hidden': !value }"
         icon="remove-rounded"
         size="sm"
+        :disabled="disabled"
         @click="$emit('input', '')"
       ></wt-icon-btn>
     </div>
@@ -49,6 +56,14 @@
        */
       placeholder: {
         type: String,
+      },
+      /**
+       * Native textarea disabled attribute
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+        description: 'Native textarea disabled attribute',
       },
       /**
        * textarea name
@@ -88,6 +103,10 @@
 <style lang="scss" scoped>
   .wt-textarea {
     cursor: text;
+
+    &--disabled {
+      pointer-events: none;
+    }
   }
 
   .wt-textarea__wrapper {
@@ -140,6 +159,15 @@
 
       &::placeholder {
         color: var(--form-placeholder--hover-color)
+      }
+    }
+
+    .wt-textarea--disabled & {
+      background: var(--form-border--disabled-color);
+      border-color: var(--form-border--disabled-color);
+
+      &::placeholder {
+        color: var(--form-placeholder--disabled-color);
       }
     }
   }

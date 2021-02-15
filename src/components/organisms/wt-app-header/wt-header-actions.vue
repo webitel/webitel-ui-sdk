@@ -12,7 +12,7 @@
     <section class="wt-header-actions__panel-wrapper" v-show="isOpened">
       <header class="wt-header-actions__header" v-if="isHeader">
         <h3
-          class="wt-header-actions__name">{{ userName }}}</h3>
+          class="wt-header-actions__name">{{ userName }}</h3>
         <p
           class="wt-header-actions__account">{{ userAccount }}</p>
       </header>
@@ -67,7 +67,7 @@
 
     computed: {
       isHeader() {
-        return !(this.userName || this.userAccount);
+        return !!(this.userName || this.userAccount);
       },
       userName() {
         return this.user.name || this.user.username;

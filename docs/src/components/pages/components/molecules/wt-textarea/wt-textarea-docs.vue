@@ -52,6 +52,12 @@
           default: 'label value',
         },
         {
+          value: 'disabled',
+          code: '<wt-input disabled></wt-input>',
+          type: 'Boolean',
+          default: 'false',
+        },
+        {
           value: 'name',
           code: '<wt-textarea name="my-textarea"></wt-textarea>',
           type: 'String',
