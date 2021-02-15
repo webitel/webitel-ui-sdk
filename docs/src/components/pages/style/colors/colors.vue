@@ -54,7 +54,7 @@ const DEFAULT_OPACITY = 0.8;
 const HOVER_OPACITY = 1;
 const ACTIVE_OPACITY = 1;
 // const FOCUS_OPACITY = 0.8;
-const DISABLED_OPACITY = 0.2;
+const DISABLED_OPACITY = 0.05;
 
 export default {
   name: 'colors',
@@ -352,7 +352,7 @@ export default {
           },
           {
             textColor: '#000',
-            code: `hsla(${CONTRAST_COLOR}, 0.2)`,
+            code: `hsla(${CONTRAST_COLOR}, 0.1)`,
             color: '--chat-agent-message-bg-color',
             name: 'Client message background',
           },
@@ -364,7 +364,7 @@ export default {
           },
           {
             textColor: '#000',
-            code: `hsla(${CONTRAST_COLOR}, 0.2)`,
+            code: `hsla(${CONTRAST_COLOR}, 0.1)`,
             color: '--chat-agent-attachment-bg-color',
             name: 'Client message attachment background',
           },

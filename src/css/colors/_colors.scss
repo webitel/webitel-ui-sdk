@@ -15,7 +15,7 @@
   --_opacity--hover: 1;
   --_opacity--active: 1;
   --_opacity--focus: 0.8;
-  --_opacity--disabled: 0.2;
+  --_opacity--disabled: 0.05;
 
   // BASIC HSL COLORS VALUES
   --_accent-color: var(--_accent-color-hue), 100%, 50%;
@@ -125,8 +125,8 @@
   --_chat-agent-color: var(--_contrast-color);
   --_chat-agent-opacity: 0.1;
 
-  --chat-client-message-bg-color: hsla(var(--_chat-client-color), 0.2);
-  --chat-agent-message-bg-color: hsla(var(--_chat-agent-color), 0.1);
-  --chat-client-attachment-bg-color: hsla(var(--_chat-client-color), 0.2);
-  --chat-agent-attachment-bg-color: hsla(var(--_chat-agent-color), 0.1);
+  --chat-client-message-bg-color: hsla(var(--_chat-client-color), var(--_chat-client-opacity));
+  --chat-agent-message-bg-color: hsla(var(--_chat-agent-color), var(--_chat-agent-opacity));
+  --chat-client-attachment-bg-color: hsla(var(--_chat-client-color), var(--_chat-client-opacity));
+  --chat-agent-attachment-bg-color: hsla(var(--_chat-agent-color), var(--_chat-agent-opacity));
 }
