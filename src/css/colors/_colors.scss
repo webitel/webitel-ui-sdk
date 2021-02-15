@@ -80,6 +80,8 @@
   --form-opacity--focus: var(--_opacity--focus);
   --form-opacity--disabled: var(--_opacity--disabled);
 
+  --form-label-opacity--disabled: 0.2;
+
   --form-opacity--ouline--default: 0.4;
   --form-opacity--ouline--hover: 0.7;
 
@@ -89,7 +91,7 @@
   --form-label-color: hsla(var(--_contrast-color), var(--form-opacity--default));
   --form-label--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
   --form-label--active-color: hsla(var(--_contrast-color), var(--form-opacity--active));
-  --form-label--disabled-color: hsla(var(--_contrast-color), var(--form-opacity--disabled));
+  --form-label--disabled-color: hsla(var(--_contrast-color), var(--form-label-opacity--disabled));
 
   --form-border-color: hsla(var(--_contrast-color), var(--form-opacity--default));
   --form-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));

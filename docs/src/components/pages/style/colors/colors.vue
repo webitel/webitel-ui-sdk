@@ -56,6 +56,8 @@ const ACTIVE_OPACITY = 1;
 // const FOCUS_OPACITY = 0.8;
 const DISABLED_OPACITY = 0.05;
 
+const FORM_LABEL_DISABLED_OPACITY = 0.2;
+
 export default {
   name: 'colors',
   data: () => ({
@@ -235,7 +237,7 @@ export default {
           },
           {
             textColor: '#fff',
-            code: `hsla(${CONTRAST_COLOR}, ${DISABLED_OPACITY})`,
+            code: `hsla(${CONTRAST_COLOR}, ${FORM_LABEL_DISABLED_OPACITY})`,
             color: '--form-label--disabled-color',
             name: 'Form label disabled color',
           },
