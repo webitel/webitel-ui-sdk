@@ -2,7 +2,8 @@
   <div
     class="wt-switcher"
     :class="{
-      'wt-switcher--active': value,
+      'wt-switcher--off': !value,
+      'wt-switcher--on': value,
       'wt-switcher--disabled': disabled,
     }"
   >
@@ -86,6 +87,9 @@
       margin-left: 0;
       margin-right: var(--switcher-icon-margin);
     }
+    .wt-switcher:hover & {
+      color: var(--form-label--hover-color);
+    }
   }
 
   .wt-switcher__input {
@@ -101,44 +105,59 @@
     display: block;
     width: var(--switcher-width);
     height: var(--switcher-height);
-    background: var(--switcher-bg-color);
     border-radius: var(--switcher-border-radius);
     transition: var(--transition);
 
     &:before {
       content: '';
       position: absolute;
-      bottom: var(--switcher-checkmark-margin);
-      left: var(--switcher-checkmark-margin);
-      height: var(--switcher-checkmark-size);
-      width: var(--switcher-checkmark-size);
-      background: var(--switcher-checkmark-color);
+      bottom: var(--switcher-cicle-margin);
+      left: var(--switcher-cicle-margin);
+      height: var(--switcher-cicle-size);
+      width: var(--switcher-cicle-size);
+      background: var(--switcher-circle-bg-color);
       border-radius: 50%;
       transition: var(--transition);
     }
   }
 
-  .wt-switcher:hover {
-    .wt-switcher__label {
-      color: var(--form-label--hover-color);
+  .wt-switcher--off {
+    .wt-switcher__checkmark {
+      background: var(--switcher-bg-color--off);
     }
 
-    .wt-switcher__checkmark {
-      background: var(--switcher-bg--hover-color);
+    &:hover {
+      .wt-switcher__checkmark {
+        background: var(--switcher-bg-color--off--hover);
+      }
+    }
+
+    &.wt-switcher--disabled {
+      .wt-switcher__checkmark {
+        background: var(--switcher-bg-color--off--disabled);
+      }
     }
   }
 
-  .wt-switcher--active, .wt-switcher--active:hover {
-    .wt-switcher__label {
-      color: var(--form-label--active-color);
-    }
-
+  .wt-switcher--on {
     .wt-switcher__checkmark {
-      background: var(--switcher-bg--active-color);
+      background: var(--switcher-bg-color--on);
 
       /* Show the indicator (dot/circle) when checked */
       &:before {
-        transform: translateX(var(--switcher-checkmark-translateX));
+        transform: translateX(var(--switcher-cicle-translateX));
+      }
+    }
+
+    &:hover {
+      .wt-switcher__checkmark {
+        background: var(--switcher-bg-color--on--hover);
+      }
+    }
+
+    &.wt-switcher--disabled {
+      .wt-switcher__checkmark {
+        background: var(--switcher-bg-color--on--disabled);
       }
     }
   }
@@ -148,10 +167,6 @@
 
     .wt-switcher__label {
       color: var(--form-label--disabled-color);
-    }
-
-    .wt-switcher__checkmark {
-      background: var(--icon--disabled-color);
     }
   }
 </style>

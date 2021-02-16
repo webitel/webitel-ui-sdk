@@ -3,12 +3,15 @@
   --switcher-icon-margin: 10px;
   --switcher-width: 40px;
   --switcher-height: 22px;
-  --switcher-checkmark-size: 14px;
-  --switcher-checkmark-margin: 4px;
-  --switcher-checkmark-translateX: 17px;
-  --switcher-bg-color: var(--icon-primary-color);
-  --switcher-bg--hover-color: var(--main-primary-accent-color);
-  --switcher-bg--active-color: var(--main-accent-color);
-  --switcher-checkmark-color: var(--main-primary-color);
+  --switcher-cicle-size: 14px;
+  --switcher-cicle-margin: 4px;
+  --switcher-cicle-translateX: 17px;
+  --switcher-bg-color--off: hsla(var(--_icon-color), var(--_opacity--default));
+  --switcher-bg-color--on: hsla(var(--_accent-color), var(--_opacity--default));
+  --switcher-bg-color--off--hover: hsla(var(--_icon-color), var(--_opacity--hover));
+  --switcher-bg-color--on--hover: hsla(var(--_accent-color), var(--_opacity--hover));
+  --switcher-bg-color--off--disabled: hsla(var(--_icon-color), var(--_opacity--disabled));
+  --switcher-bg-color--on--disabled: hsla(var(--_accent-color), var(--_opacity--disabled));
+  --switcher-circle-bg-color: var(--main-color);
   --switcher-border-radius: 24px;
 }
