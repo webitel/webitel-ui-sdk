@@ -8,7 +8,9 @@
         </wt-headline>
       </template>
       <template slot="main">
-        <router-view/>
+        <div class="docs-content-wrapper">
+          <router-view/>
+        </div>
       </template>
     </wt-page-wrapper>
   </main>
