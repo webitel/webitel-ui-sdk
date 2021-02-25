@@ -176,7 +176,7 @@ export default {
 .wt-table__td {
   @extend %typo-body-md;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 0;
   width: 100%;
   max-width: 100%;
