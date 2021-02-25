@@ -165,11 +165,6 @@
           }],
           description: 'Replace show password icon',
         },
-        {
-          name: 'validation-text',
-          scope: [{ name: 'invalid', description: 'Component computed property which decides when to make component red and show validation message' }],
-          description: 'Custom validation text slot',
-        },
       ],
     }),
     mounted() {

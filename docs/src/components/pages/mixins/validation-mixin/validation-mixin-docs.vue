@@ -4,6 +4,12 @@
     <article class="mixin">
       <p>Mixin wraps up the validation implementation in the library, providing minimal methods
         for computing the validation state.</p>
+      <h3>Props</h3>
+      <pre>
+        <code class="language-javascript">this.v /* Object: expects vuelidate validation object for this input prop */</code>
+        <code class="language-javascript">this.customValidators /* Array with objects. Each object should contain 'name' (validator name) and 'text' (locale) properties */</code>
+      </pre>
+      <h3>Methods</h3>
       <pre>
         <code class="language-javascript">this.isValidation // Boolean: checks is there any active validators</code>
         <code class="language-javascript">this.invalid // Boolean: checks if validation is throwing "invalid" error</code>
