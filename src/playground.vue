@@ -1,6 +1,6 @@
 <template>
   <div class="playground">
-    <wt-timepicker v-model="timepicker" @input="log"></wt-timepicker>
+    <wt-pagination></wt-pagination>
   </div>
 </template>
 
@@ -9,7 +9,13 @@
 export default {
   name: 'playground',
   data: () => ({
-    timepicker: 12,
+    switcher: true,
+    autocomplete: [
+      { name: 'Laravel5', language: 'PHP' },
+      { name: 'Phoenix6', language: 'Elixir' },
+      { name: 'Vue.js7', language: 'JavaScript' },
+      { name: 'Adonis8', language: 'JavaScript' },
+    ],
     vValid: {
       $error: false,
       $dirty: true,
@@ -68,6 +74,7 @@ export default {
     },
     select: {
       value: '876878768787687876878768787687',
+      objValue: { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
       multipleValue: [],
       stringOptions: ['123123123123', '321123123123123', '456'],
       options: [
