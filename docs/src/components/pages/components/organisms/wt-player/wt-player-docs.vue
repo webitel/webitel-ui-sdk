@@ -10,7 +10,9 @@
     </article>
     <article>
       <p><strong>Important: player is looking for icons in {/{$baseURL}/}img/plyr.svg (or /img/plyr.svg by default).</strong>
-      $baseURL should be passed as global variable in plugins/webitel-ui.js:
+        First, download plyr.svg from <a href="https://github.com/webitel/webitel-ui-sdk/tree/master/public" target="_blank">
+          Github</a> and place it in project /public folder.
+      Then, $baseURL should be passed as global variable in plugins/webitel-ui.js:
       </p>
       <pre><code class="language-javascript">
             const globals = {
@@ -23,6 +25,9 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
@@ -55,6 +60,9 @@ export default {
         default: '(url) => url.replace(\'/stream\', \'/download\')',
         description: 'if false, no download button will be shown',
       },
+    ],
+    events: [
+      { value: 'all native <audio> events' },
     ],
   }),
   mounted() {

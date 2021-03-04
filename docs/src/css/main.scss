@@ -25,12 +25,18 @@ body {
     margin-bottom: 10px;
   }
 
-  .docs-content-wrapper ul {
-    list-style: initial;
-  }
+  .docs-content-wrapper {
+    ul {
+      list-style: initial;
 
-  li {
-    margin: 20px 10px;
+      li {
+        margin: 20px 10px;
+      }
+    }
+
+    a {
+      text-decoration: underline;
+    }
   }
 }
 

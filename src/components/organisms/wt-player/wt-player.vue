@@ -5,6 +5,7 @@
       :src="src"
       :autoplay="autoplay"
       controls
+      v-on="listeners"
     ></audio>
   </aside>
 </template>
@@ -42,6 +43,13 @@ export default {
   },
   mounted() {
     this.setupPlayer();
+  },
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+      };
+    },
   },
   methods: {
     setupPlayer() {
