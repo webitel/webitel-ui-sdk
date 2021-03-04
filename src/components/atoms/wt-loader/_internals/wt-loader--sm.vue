@@ -1,9 +1,9 @@
 <!--https://codepen.io/adityapunjani/pen/YyQmBZ-->
 
 <template>
-  <div class="spinner" :class="color">
-    <div class="spinnerContainer active common">
-      <div class="spinner-layer layer-1 common">
+  <div class="wt-loader--sm" :class="`wt-loader--sm--${color}`">
+    <div class="wt-loader--sm__container active common">
+      <div class="wt-loader--sm__layer layer-1 common">
         <div class="circle-clipper left common">
           <div class="circle common" style="border-width:3px;"></div>
         </div>
@@ -20,11 +20,11 @@
 
 <script>
 export default {
-  name: 'spinner',
   props: {
     color: {
       type: String,
-      default: 'primary',
+      default: 'contrast',
+      description: '["main", "contrast"]',
     },
   },
 };
@@ -36,42 +36,29 @@ export default {
   position: relative;
 }
 
-.spinner {
+.wt-loader--sm {
   width: 14px;
   height: 14px;
   display: block;
   position: relative;
   text-align: initial;
-  color: var(--btn-dark-font-color);
+  color: var(--contrast-color);
 
-  &.primary {
-    color: var(--btn-dark-font-color);
+  &--main {
+    color: var(--main-color);
   }
-
-  &.secondary {
-    color: var(--btn-secondary-color);
-  }
-
-  &.success {
-    color: var(--btn-light-font-color);
-  }
-
-  &.transfer {
-    color: var(--btn-light-font-color);
-  }
-
-  &.danger {
-    color: var(--btn-light-font-color);
+  &--contrast {
+    color: var(--contrast-color);
   }
 }
 
-.spinnerContainer {
+.wt-loader--sm__container {
   width: 100%;
   height: 100%;
   direction: ltr;
 }
 
-.spinnerContainer.active {
+.wt-loader--sm__container.active {
   animation: container-rotate 1568ms linear infinite;
 }
 
@@ -81,13 +68,13 @@ export default {
   }
 }
 
-.spinner-layer {
+.wt-loader--sm__layer {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-.active .spinner-layer.layer-1 {
+.active .wt-loader--sm__layer.layer-1 {
   animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 

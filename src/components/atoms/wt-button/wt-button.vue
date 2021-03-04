@@ -14,19 +14,15 @@
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
-    <spinner v-if="loading" :color="color"/>
+    <wt-loader v-if="loading" size="sm" :color="loaderColor"/>
     <slot v-else></slot>
   </button>
 </template>
 
 <script>
-  import Spinner from './_internals/spinner.vue';
 
   export default {
     name: 'wt-button',
-    components: {
-      Spinner,
-    },
     props: {
       color: {
         type: String,
@@ -58,12 +54,15 @@
         if (!this.disabled) return `${this.color}`;
         return '';
       },
+      loaderColor() {
+        if (['success', 'transfer', 'danger'].includes(this.color)) return 'main';
+        return 'contrast';
+      },
     },
   };
 </script>
 
 <style lang="scss" scoped>
-
   .wt-button {
     @extend %typo-btn;
     position: relative;

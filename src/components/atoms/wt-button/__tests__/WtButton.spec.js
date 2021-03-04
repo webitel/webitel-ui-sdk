@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtButton from '../wt-button.vue';
-import BtnSpinner from '../_internals/spinner.vue';
+import WtLoader from '../../wt-loader/wt-loader.vue';
 
 describe('WtButton', () => {
   it('renders a component', () => {
@@ -24,6 +24,6 @@ describe('WtButton', () => {
         loading: true,
       },
     });
-    expect(wrapper.findComponent(BtnSpinner).exists()).toBe(true);
+    expect(wrapper.findComponent(WtLoader).exists()).toBe(true);
   });
 });

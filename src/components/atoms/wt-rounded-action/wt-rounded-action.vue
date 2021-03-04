@@ -12,7 +12,7 @@
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
-    <spinner v-if="loading" :color="color"/>
+    <wt-loader v-if="loading" size="sm" :color="loaderColor"/>
     <slot v-else>
       <wt-icon
         :icon="icon"
@@ -23,13 +23,8 @@
 </template>
 
 <script>
-import Spinner from '../wt-button/_internals/spinner.vue';
-
 export default {
   name: 'wt-rounded-action',
-  components: {
-    Spinner,
-  },
   props: {
     icon: {
       type: String,
@@ -74,6 +69,10 @@ export default {
         default:
           return 'active';
       }
+    },
+    loaderColor() {
+      if (['success', 'transfer', 'danger'].includes(this.color)) return 'main';
+      return 'contrast';
     },
   },
 };

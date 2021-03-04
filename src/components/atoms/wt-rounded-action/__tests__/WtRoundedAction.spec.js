@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtRoundedAction from '../wt-rounded-action.vue';
-import BtnSpinner from '../../wt-button/_internals/spinner.vue';
+import WtLoader from '../../wt-loader/wt-loader.vue';
 
 describe('WtRoundedAction', () => {
   it('renders a component', () => {
@@ -15,6 +15,6 @@ describe('WtRoundedAction', () => {
         loading: true,
       },
     });
-    expect(wrapper.findComponent(BtnSpinner).exists()).toBe(true);
+    expect(wrapper.findComponent(WtLoader).exists()).toBe(true);
   });
 });
