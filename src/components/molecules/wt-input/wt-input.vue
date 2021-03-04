@@ -50,7 +50,8 @@
     <wt-input-info
       v-if="isValidation"
       :invalid="invalid"
-    ></wt-input-info>
+    >{{ validationText }}
+    </wt-input-info>
   </div>
 </template>
 
