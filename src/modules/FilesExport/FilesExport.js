@@ -18,7 +18,7 @@ export default class FilesExport {
   constructor({ fetchMethod, filename, filesURL }) {
     if (fetchMethod) this.fetchMethod = fetchMethod;
     if (filename) this.filename = filename;
-    if (filesURL) this.generateURL = filesURL;
+    if (filesURL) this.filesURL = filesURL;
   }
 
   _fetchFileBinary(fileId) {
@@ -91,7 +91,7 @@ export default class FilesExport {
   async exportFiles(files, { reqParams }) {
     try {
       const zip = new JSZip();
-      if (files) await this._addFilesToZip(files, zip);
+      if (files && files.length) await this._addFilesToZip(files, zip);
       else {
         await this._fetchAndZip(zip, reqParams);
       }
