@@ -1,4 +1,5 @@
 export default [
+  'icon-move--md',
   'icon-queue-member--md',
   'icon-history--md',
   'icon-generate--md',
