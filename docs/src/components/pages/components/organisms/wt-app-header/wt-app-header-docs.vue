@@ -36,12 +36,15 @@
       <article>
         <div class="example-wrapper">
           <wt-app-header>
-            <wt-header-actions></wt-header-actions>
+            <wt-header-actions :user="user" :build-info="buildInfo"></wt-header-actions>
           </wt-app-header>
           <pre><code
             class="language-html">
         &lt;wt-app-header&gt;
-            &lt;wt-header-actions>&gt;&lt;/wt-header-actions>&gt;
+            &lt;wt-header-actions
+            :user="{ name: 'My name', preferredUsername: 'My username' }"
+            :build-info="{ release: '21.02', build: 'AWS-12' }"
+            &gt;&lt;/wt-header-actions>&gt;
         &lt;/wt-app-header&gt;
         </code></pre>
         </div>
@@ -69,6 +72,14 @@ export default {
       audit: { href: 'https://example.com' },
       admin: { href: 'https://example.com' },
       grafana: { href: 'https://example.com' },
+    },
+    user: {
+      name: 'My name',
+      preferredUsername: 'My username',
+    },
+    buildInfo: {
+      release: '21.02',
+      build: 'AWS-12',
     },
     headerSlots: [
       {
@@ -98,6 +109,13 @@ export default {
         type: 'Object',
         description: `User info object. Should have preferredUsername or account and name or username fields for representation.
           In most cases, this is the data returned from /userinfo api.1`,
+      },
+      {
+        value: 'buildInfo',
+        code: '<wt-user-actions :build-info="{ release: \'xx.xx\', build: \'yy-yy\' }"></wt-user-actions>',
+        type: 'Object',
+        description: `Build info object. Should have "release" and "build"
+         string fields for representation.`,
       },
     ],
     headerActionsEvents: [

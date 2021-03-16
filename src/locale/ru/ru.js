@@ -45,6 +45,7 @@ export default {
       docs: 'Документация',
       settings: 'Настройки',
       logout: 'Выйти',
+      buildVersion: 'Версия сборки',
     },
     tableActions: {
       filterReset: 'Сбросить фильтры',

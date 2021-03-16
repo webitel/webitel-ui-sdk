@@ -45,6 +45,7 @@ export default {
       docs: 'Docs',
       settings: 'Settings',
       logout: 'Logout',
+      buildVersion: 'Build version',
     },
     tableActions: {
       filterReset: 'Reset filters',

@@ -47,6 +47,11 @@
           </a>
         </li>
       </ul>
+      <footer class="wt-header-actions__footer" v-if="isFooter">
+        <p class="wt-header-actions__build__version">
+          {{ buildVersion }}
+        </p>
+      </footer>
     </section>
     </transition>
   </div>
@@ -63,17 +68,26 @@
         type: Object,
         default: () => ({}),
       },
+      buildInfo: {
+        type: Object,
+      },
     },
 
     computed: {
       isHeader() {
         return !!(this.userName || this.userAccount);
       },
+      isFooter() {
+        return this.buildInfo;
+      },
       userName() {
         return this.user.name || this.user.username;
       },
       userAccount() {
         return this.user.preferredUsername || this.user.account;
+      },
+      buildVersion() {
+        return `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
       },
     },
 
@@ -117,16 +131,18 @@
     transition: var(--transition);
   }
 
-  .wt-header-actions__header {
+  .wt-header-actions__header, .wt-header-actions__footer {
     padding: var(--wt-app-header-content-gap);
   }
 
   .wt-header-actions__name {
     @extend %typo-body-lg;
+    white-space: nowrap;
   }
 
   .wt-header-actions__account {
     @extend %typo-body-lg;
+    white-space: nowrap;
   }
 
   .wt-header-actions__action {
@@ -152,5 +168,10 @@
     &--logout .wt-header-actions__action__link {
       color: var(--false-color);
     }
+  }
+
+  .wt-header-actions__build__version {
+    @extend %typo-body-sm;
+    white-space: nowrap;
   }
 </style>
