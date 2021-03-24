@@ -31,7 +31,7 @@
             icon="sort-arrow-down"
           ></wt-icon>
         </th>
-        <th class="wt-table__th__actions"  v-if="gridActions">
+        <th class="wt-table__th__actions" v-if="gridActions">
           <slot name="actions-header"></slot>
         </th>
       </tr>
@@ -66,6 +66,20 @@
         </td>
       </tr>
       </tbody>
+
+      <tfoot class="wt-table__foot" v-if="isTableFooter">
+      <tr class="wt-table__tr wt-table__tr__foot" :style="columnsStyle">
+<!--        empty checkbox column -->
+        <th class="wt-table__th__checkbox" v-if="selectable"></th>
+        <td
+          class="wt-table__td"
+          v-for="(col, headerKey) of dataHeaders"
+          :key="headerKey"
+        >
+          <slot :name="`${col.value}-footer`" :header="col" :index="headerKey"></slot>
+        </td>
+      </tr>
+      </tfoot>
     </table>
   </div>
 </template>
@@ -121,6 +135,10 @@ export default {
 
       if (this.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
       return `grid-template-columns: ${gridTemplateColumns}`;
+    },
+
+    isTableFooter() {
+      return Object.keys(this.$scopedSlots).some((slotName) => slotName.includes('-footer'));
     },
   },
 
@@ -212,5 +230,10 @@ export default {
   &--sort-desc .wt-table__th__sort-arrow--desc {
     display: block;
   }
+}
+
+.wt-table__foot {
+  border-top: var(--table-head-borer-bottom);
+  border-color: var(--table-head-borer-color);
 }
 </style>
