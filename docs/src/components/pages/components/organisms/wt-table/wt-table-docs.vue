@@ -159,6 +159,15 @@
             + 'and adding specific elements like select or badge',
         },
         {
+          // eslint-disable-next-line no-template-curly-in-string
+          name: ':${headerColumn.value}-footer',
+          scope: [
+            { name: 'header', description: 'header object' },
+          ],
+          description: `Add your custom aggregations for column in table footer. Table footer
+          is rendered conditionally depending on templates with "-footer" name`,
+        },
+        {
           name: 'actions',
           scope: [
             { name: 'item', description: 'Data row object' },
