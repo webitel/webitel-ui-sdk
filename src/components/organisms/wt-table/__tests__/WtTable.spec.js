@@ -70,6 +70,29 @@ describe('WtTable', () => {
     expect(wrapper.findAll('.wt-table__tr__head th').length).toBe(headers.length);
   });
 
+  it('do not renders table footer by default', () => {
+    const wrapper = shallowMount(WtTable, {
+      propsData: {
+        headers,
+        data,
+      },
+    });
+    expect(wrapper.find('.wt-table__foot').exists()).toBe(false);
+  });
+
+  it('renders table footer if footer slot is passed', () => {
+    const wrapper = shallowMount(WtTable, {
+      propsData: {
+        headers,
+        data,
+      },
+      scopedSlots: {
+        'data-footer': '',
+      },
+    });
+    expect(wrapper.find('.wt-table__foot').isVisible()).toBe(true);
+  });
+
   it('emits sort event at header click when sortable is true', () => {
     const wrapper = shallowMount(WtTable, {
       propsData: {
