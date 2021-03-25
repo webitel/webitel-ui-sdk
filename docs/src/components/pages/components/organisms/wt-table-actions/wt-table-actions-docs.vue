@@ -31,7 +31,7 @@ export default {
     properties: [
       {
         value: 'icons',
-        code: '<wt-pagination :icons="[]"></wt-pagination>',
+        code: '<wt-table-actions :icons="[]"></wt-table-actions>',
         type: 'Array',
         options: ['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings'],
         default: "['refresh']",

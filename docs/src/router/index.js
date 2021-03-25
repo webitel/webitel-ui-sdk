@@ -66,6 +66,8 @@ import WtStatusSelectDocs
 import WtTableDocs from '../components/pages/components/organisms/wt-table/wt-table-docs.vue';
 import WtTableActionsDocs
   from '../components/pages/components/organisms/wt-table-actions/wt-table-actions-docs.vue';
+import WtTableColumnSelectDocs
+  from '../components/pages/components/organisms/wt-table-column-select/wt-table-column-select-docs.vue';
 
 // other
 import FiltersDocs from '../components/pages/filters/filters-docs.vue';
@@ -326,6 +328,11 @@ const routes = [
         path: 'table-actions',
         name: 'table-actions-docs',
         component: WtTableActionsDocs,
+      },
+      {
+        path: 'table-column-select',
+        name: 'table-column-select-docs',
+        component: WtTableColumnSelectDocs,
       },
     ],
   },

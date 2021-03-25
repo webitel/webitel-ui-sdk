@@ -53,6 +53,9 @@ export default {
       refreshTable: 'Обновить',
       expandFilters: 'Раскрыть фильтры',
     },
+    tableColumnSelect: {
+      title: 'Выберите отоброжаемые колонки',
+    },
     statusSelect: {
       online: 'Онлайн',
       pause: 'Пауза',

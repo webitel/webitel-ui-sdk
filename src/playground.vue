@@ -1,6 +1,6 @@
 <template>
   <div class="playground">
-    <wt-pagination></wt-pagination>
+    <wt-table-column-select v-model="columnSelect"></wt-table-column-select>
   </div>
 </template>
 
@@ -102,6 +102,8 @@ export default {
         grafana: { href: 'https://example.com' },
       },
     },
+    columnSelect: [
+    ],
   }),
   methods: {
     log(event, inputEvent) {

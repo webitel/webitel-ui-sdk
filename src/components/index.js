@@ -39,6 +39,7 @@ import WtPlayer from './organisms/wt-player/wt-player.vue';
 import WtStatusSelect from './organisms/wt-status-select/wt-status-select.vue';
 import WtTable from './organisms/wt-table/wt-table.vue';
 import WtTableActions from './organisms/wt-table-actions/wt-table-actions.vue';
+import WtTableColumnSelect from './organisms/wt-table-column-select/wt-table-column-select.vue';
 
 const Components = {
   WtIcon,
@@ -79,6 +80,7 @@ const Components = {
   WtStatusSelect,
   WtTable,
   WtTableActions,
+  WtTableColumnSelect,
 };
 
 Object.keys(Components).forEach((name) => {

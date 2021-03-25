@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.7.42",
+  "version": "0.7.45",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -25,6 +25,7 @@
     "bamboo-jest-reporter": "^1.0.3",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
+    "deep-copy": "^1.4.2",
     "deep-equal": "^2.0.3",
     "file-saver": "^2.0.2",
     "jszip": "^3.5.0",

@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.7.42</h1>
+          <h1>Webitel UI SDK v. 0.7.44</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -250,6 +250,11 @@ export default {
             name: 'Table actions',
             value: 'table-actions',
             route: 'table-actions',
+          },
+          {
+            name: 'Table column select',
+            value: 'table-column-select',
+            route: 'table-column-select',
           },
           {
             name: 'Rounded action',

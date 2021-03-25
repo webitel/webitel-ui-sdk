@@ -53,6 +53,9 @@ export default {
       refreshTable: 'Refresh table',
       expandFilters: 'Expand filters',
     },
+    tableColumnSelect: {
+      title: 'Select visible columns',
+    },
     statusSelect: {
       online: 'Online',
       pause: 'Pause',
