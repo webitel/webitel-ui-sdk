@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.7.44</h1>
+          <h1>Webitel UI SDK v. 0.7.51</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -34,6 +34,7 @@ export default {
         this.mixinsNav,
         this.modulesNav,
         this.scriptsNav,
+        this.storeNav,
       ];
     },
     styleNav() {
@@ -380,6 +381,20 @@ export default {
             name: 'Sort query adapters',
             value: 'sort-query-adapters',
             route: 'sort-query-adapters',
+          },
+        ],
+      };
+    },
+    storeNav() {
+      return {
+        name: 'Store',
+        value: 'store',
+        route: '/store',
+        subNav: [
+          {
+            name: 'helpers/Get Namespaced State',
+            value: 'get-namespaced-state',
+            route: 'get-namespaced-state',
           },
         ],
       };

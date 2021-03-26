@@ -5,9 +5,13 @@
     to control state of filters and get to their correctly computed values and filter mixins, that
       control the filters from the component side</p>
     <article class="module">
-      <h3>queryFilter store Module</h3>
+      <h3>QueryFilterStoreModule.js</h3>
       <p>the module is a constructor of the object with namespaced, getters, actions and mutations,
-        which provide the ability to take the values of filters, set the value to filter, + reset filters action</p>
+        which provide the ability to take the values of filters, set the value to filter, + reset filters action.
+        Constructor: ({ state? })
+        methods: getModule({ namespaced?, getters?, actions?, mutations? }) -- returns store module.
+        If some arguments were passed, merges default values with them -- with arguments higher priority.
+      </p>
       <p><b>State: </b> each filter should have the following schema: </p>
       <ul>
         <li><b>filter schema:</b></li>
@@ -34,7 +38,7 @@
       <h3>Simple usage example, filters store module</h3>
       <pre>
         <code class="language-javascript">
-            import queryFilter from '@webitel/ui-sdk/src/modules/QueryFilters/store/queryFilter';
+            import QueryFilterStoreModule from '@webitel/ui-sdk/src/modules/QueryFilters/store/QueryFilterStoreModule';
 
             const state = {
               search: {
@@ -53,16 +57,13 @@
               },
             };
 
-            export default {
-              ...queryFilters(),
-              state,
-            };
+            export default new QueryFilterStoreModule({ state }).getModule();
         </code>
      </pre>
     </article>
     <article class="mixin">
       <h3>Base Filter Mixin</h3>
-      <p>Mixin contains basic get/set filter params to query logic.</p>
+      <p>Mixin contains basic get/set filter params to query logic, 'namespace' string prop</p>
       <p><b>When component is created,
         retrieves filter value from query and calls this.restoreValue(value); method.
         Watches for url change to call restore() method.</b></p>
@@ -81,6 +82,8 @@
             setValueToQuery({ filterQuery, value, storedProp = 'id' }) /* sets value to query. If array of objects,
             stores only value by storedProp key (value[storedProp]).
             Tracks equality of previous and new value. Should NOT be overridden */
+
+            setValue(payload) {} // by default tries to dispatch SET_FILTER store action with namespace, passed as component prop
           },
         </code>
      </pre>

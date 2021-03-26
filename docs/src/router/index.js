@@ -95,6 +95,9 @@ import PrettifyTimeScriptDocs from '../components/pages/scripts/prettify-time-sc
 import PreventHiddenPageCallsDecoratorScriptDocs from '../components/pages/scripts/prevent-hidden-page-calls-decorator-script/prevent-hidden-page-calls-decorator-script-docs.vue';
 import SortQueryAdapterScriptsDocs from '../components/pages/scripts/sort-query-adapter-scripts/sort-query-adapter-scripts-docs.vue';
 
+import StoreDocs from '../components/pages/store/store-docs.vue';
+import GetNamespacedStateDocs from '../components/pages/store/helpers/get-namespaced-state-docs.vue';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -443,6 +446,18 @@ const routes = [
         path: 'sort-query-adapters',
         name: 'sort-query-adapters',
         component: SortQueryAdapterScriptsDocs,
+      },
+    ],
+  },
+  {
+    path: '/store',
+    name: 'store',
+    component: StoreDocs,
+    children: [
+      {
+        path: 'get-namespaced-state',
+        name: 'get-namespaced-state',
+        component: GetNamespacedStateDocs,
       },
     ],
   },

@@ -1,6 +1,7 @@
 // import { shallowMount, createLocalVue } from '@vue/test-utils';
 // import Vuex from 'vuex';
-import queryFilters from '../queryFilters';
+// import queryFilters from '../queryFilters';
+import QueryFiltersStoreModule from '../QueryFiltersStoreModule';
 
 const valueFilter = 'search';
 const arrayFilter = 'agent';
@@ -17,10 +18,10 @@ const state = {
   },
 };
 
-describe('queryFilters getters', () => {
+describe('QueryFiltersStoreModule getters', () => {
   let module;
   beforeEach(() => {
-    module = queryFilters();
+    module = new QueryFiltersStoreModule().getModule();
   });
   it('GET_FILTER: single value filter', () => {
     expect(module.getters.GET_FILTER(state)(valueFilter))
@@ -38,12 +39,12 @@ describe('queryFilters getters', () => {
   });
 });
 
-describe('queryFilters actions', () => {
+describe('QueryFiltersStoreModule actions', () => {
   const context = {
     state: { ...state },
     commit: jest.fn(),
   };
-  const module = queryFilters();
+  const module = new QueryFiltersStoreModule().getModule();
   it('SET_FILTER: single value filter', () => {
     const filter = { filter: valueFilter, value: '3' };
     module.actions.SET_FILTER(context, filter);
@@ -72,8 +73,8 @@ describe('queryFilters actions', () => {
   });
 });
 
-describe('queryFilters mutations', () => {
-  const module = queryFilters();
+describe('QueryFiltersStoreModule mutations', () => {
+  const module = new QueryFiltersStoreModule().getModule();
   it('correctly mutates state at RESET_FILTERS call', () => {
     expect(Object.values(state).every((filter) => filter.value === filter.defaultValue)).toBeFalsy();
     module.mutations.RESET_FILTERS(state);

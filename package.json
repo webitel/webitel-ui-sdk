@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.7.46",
+  "version": "0.7.51",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -18,7 +18,8 @@
     "src/enums/*",
     "src/mixins/*",
     "src/scripts/*",
-    "src/modules/*"
+    "src/modules/*",
+    "src/store/*"
   ],
   "dependencies": {
     "@johmun/vue-tags-input": "^2.1.0",
