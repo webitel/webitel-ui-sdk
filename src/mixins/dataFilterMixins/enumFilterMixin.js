@@ -5,11 +5,16 @@ export default {
 
   data: () => ({
     value: [],
-    options: [],
     defaultValue: [],
     trackBy: 'value',
     storedProp: 'value',
   }),
+
+  computed: {
+    options() {
+      return [];
+    },
+  },
 
   methods: {
     restoreValue(value) {

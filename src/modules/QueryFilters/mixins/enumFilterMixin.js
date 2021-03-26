@@ -2,11 +2,11 @@ import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
 
 export default {
   mixins: [baseFilterMixin],
-
-  data: () => ({
-    options: [],
-  }),
-
+  computed: {
+    options() {
+      return [];
+    },
+  },
   methods: {
     restoreValue(value) {
       let newValue;

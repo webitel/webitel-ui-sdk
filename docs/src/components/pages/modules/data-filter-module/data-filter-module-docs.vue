@@ -104,9 +104,11 @@
       <pre>
         <code class="language-javascript">
           // following options should be overridden, if necessary
-          data: () => ({
-            options: [], // enum options. Should be overridden
-          }),
+          computed: {
+            options() { // enum options. Should be overridden
+              return [];
+            },
+          },
           methods: {
             restoreValue(value) {} // by default, searches value (or values) in options and
           calls this.setValue() method, which should be mapped from filters store "SET_FILTER" action */
