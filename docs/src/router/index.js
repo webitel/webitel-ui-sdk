@@ -96,6 +96,7 @@ import PreventHiddenPageCallsDecoratorScriptDocs from '../components/pages/scrip
 import SortQueryAdapterScriptsDocs from '../components/pages/scripts/sort-query-adapter-scripts/sort-query-adapter-scripts-docs.vue';
 
 import StoreDocs from '../components/pages/store/store-docs.vue';
+import BaseStoreModuleDocs from '../components/pages/store/modules/base-store-module-docs.vue';
 import GetNamespacedStateDocs from '../components/pages/store/helpers/get-namespaced-state-docs.vue';
 
 Vue.use(VueRouter);
@@ -454,6 +455,11 @@ const routes = [
     name: 'store',
     component: StoreDocs,
     children: [
+      {
+        path: 'base-store-module',
+        name: 'base-store-module',
+        component: BaseStoreModuleDocs,
+      },
       {
         path: 'get-namespaced-state',
         name: 'get-namespaced-state',

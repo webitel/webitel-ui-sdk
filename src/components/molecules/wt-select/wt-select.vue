@@ -219,7 +219,11 @@ export default {
     },
 
     input(value) {
-      if (value === null) return; // prevents crush at selected option click
+    //  if (value === null) return; //  ATTENTION prevents crush at selected option click
+      if (value === null) {
+        this.$emit('input', this.value); //  ATTENTION prevents crush at selected option click
+        return;
+      }
       this.$emit('input', value);
     },
 
