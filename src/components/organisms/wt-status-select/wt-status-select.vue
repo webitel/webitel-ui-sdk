@@ -71,7 +71,13 @@ export default {
       ];
     },
     availableOptions() {
-      return this.statusOptions.filter((option) => option.value !== this.status);
+     return this.statusOptions.reduce((options, opt) => {
+       // PAUSE option is always passed
+       if (this.status === opt.value && opt.value !== AgentStatus.PAUSE) {
+         return options;
+       }
+       return [...options, opt];
+     }, []);
     },
     duration() {
       if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;

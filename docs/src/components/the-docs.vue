@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.7.51</h1>
+          <h1>Webitel UI SDK v. 0.7.57</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -391,6 +391,11 @@ export default {
         value: 'store',
         route: '/store',
         subNav: [
+          {
+            name: 'modules/Base Store Module',
+            value: 'base-store-module',
+            route: 'base-store-module',
+          },
           {
             name: 'helpers/Get Namespaced State',
             value: 'get-namespaced-state',
