@@ -128,7 +128,7 @@ export default {
       let gridTemplateColumns = '';
       if (this.selectable) gridTemplateColumns += '24px '; // checkbox
 
-      const defaultColumnWidth = 'minmax(200px, 1fr)';
+      const defaultColumnWidth = 'minmax(140px, 1fr)';
       this.dataHeaders.forEach((header) => {
         gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
       });
@@ -199,6 +199,7 @@ export default {
   width: 100%;
   max-width: 100%;
   overflow-wrap: break-word;
+  word-break: break-all;
 
   &__actions {
     display: flex;

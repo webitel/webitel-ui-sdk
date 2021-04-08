@@ -97,6 +97,10 @@
     align-items: center;
     user-select: none;
     cursor: pointer;
+
+    .wt-checkbox__checkmark {
+      line-height: 0; // prevent icon height >> content
+    }
   }
 
   .wt-checkbox__label {
