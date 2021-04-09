@@ -4,7 +4,19 @@ export default {
   mixins: [baseFilterMixin],
   computed: {
     options() {
-      return [];
+      return this.filterSchema.options;
+    },
+    locale() {
+      return this.filterSchema?.locale;
+    },
+    storedProp() {
+      return this.filterSchema?.storedProp;
+    },
+    multiple() {
+      return this.filterSchema?.multiple;
+    },
+    closeOnSelect() {
+      return this.filterSchema?.storedProp;
     },
   },
   methods: {

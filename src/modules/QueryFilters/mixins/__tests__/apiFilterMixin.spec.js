@@ -1,11 +1,13 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import VueRouter from 'vue-router';
+import ApiFilterSchema from '../../classes/ApiFilterSchema';
 import apiFilterMixin from '../apiFilterMixin';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 const router = new VueRouter();
 const team = ['1', '2'];
+const filterSchema = new ApiFilterSchema();
 
 describe('API filter mixin', () => {
   const setValue = jest.fn();
@@ -15,6 +17,9 @@ describe('API filter mixin', () => {
     data: () => ({
       filterQuery: 'team',
     }),
+    computed: {
+      filterSchema() { return filterSchema; },
+    },
     methods: { setValue },
   };
 
@@ -29,7 +34,7 @@ describe('API filter mixin', () => {
       localVue,
       router,
     });
-    expect(setValue).toHaveBeenCalledWith({ filter: 'team', value: { id: team } });
+    expect(setValue).toHaveBeenCalledWith({ filter: 'team', value: [{ id: team[0] }, { id: team[1] }] });
   });
 
   it('Sets empty array value if $route query is empty', async () => {

@@ -2,7 +2,20 @@ import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
 
 export default {
   mixins: [baseFilterMixin],
-
+  computed: {
+    locale() {
+      return this.filterSchema?.locale;
+    },
+    storedProp() {
+      return this.filterSchema?.storedProp;
+    },
+    multiple() {
+      return this.filterSchema?.multiple;
+    },
+    closeOnSelect() {
+      return this.filterSchema?.storedProp;
+    },
+  },
   methods: {
     async restoreValue(id) {
       if (id && id.length) {

@@ -1,4 +1,5 @@
 import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
+import getNamespacedState from '../../../../store/helpers/getNamespacedState';
 
 export default {
   mixins: [_urlControllerMixin],
@@ -11,7 +12,15 @@ export default {
   created() {
     this.restore({ filterQuery: this.filterQuery });
   },
-
+  computed: {
+    filterSchema() {
+      if (!this.$store) throw new Error('Vuex is required for default filterSchema baseFilterMixin property');
+      return getNamespacedState(this.$store.state, this.namespace)[this.filterQuery];
+    },
+    value() {
+      return this.filterSchema.value;
+    },
+  },
   methods: {
     restore({ filterQuery }) {
       const value = this.getValueFromQuery({ filterQuery });

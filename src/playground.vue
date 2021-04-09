@@ -1,6 +1,13 @@
 <template>
   <div class="playground">
-    <wt-table-column-select v-model="columnSelect"></wt-table-column-select>
+    <wt-table
+      :headers="table.headers"
+      :data="table.data"
+    >
+<!--      <template slot="h1">-->
+<!--        <wt-select></wt-select>-->
+<!--      </template>-->
+    </wt-table>
   </div>
 </template>
 
@@ -45,11 +52,48 @@ export default {
           text: 'heading 3',
           value: 'h3',
         },
+        {
+          text: 'heading 3',
+          value: 'h3',
+        },
+        {
+          text: 'heading 1',
+          value: 'h1',
+          sort: 'desc',
+        },
+        {
+          text: 'heading2',
+          value: 'h2',
+          sort: 'asc',
+        },
+        {
+          text: 'heading 3',
+          value: 'h3',
+        },
       ],
       data: [
         {
           h1: 'value 1',
           h2: 'value 2',
+          // h3: '876878768787687876878768787687',
+          h3: '123',
+          _isSelected: false,
+        },
+        {
+          h1: 'value 1',
+          h2: 'value 2',
+          h3: 'value 3',
+          _isSelected: false,
+        },
+        {
+          h1: 'value 1',
+          h2: 'value 2',
+          h3: 'value 3',
+          _isSelected: false,
+        },
+        {
+          h1: 'value 1',
+          h2: 'value 2',
           h3: 'value 3',
           _isSelected: false,
         },
@@ -70,7 +114,32 @@ export default {
           h2: 'value 2',
           h3: 'value 3',
           _isSelected: false,
-        }],
+        },
+        {
+          h1: 'value 1',
+          h2: 'value 2',
+          h3: 'value 3',
+          _isSelected: false,
+        },
+        {
+          h1: 'value 1',
+          h2: 'value 2',
+          h3: 'value 3',
+          _isSelected: false,
+        },
+        {
+          h1: 'value 1',
+          h2: 'value 2',
+          h3: 'value 3',
+          _isSelected: false,
+        },
+        {
+          h1: 'value 1',
+          h2: 'value 2',
+          h3: 'value 3',
+          _isSelected: false,
+        },
+      ],
     },
     select: {
       value: '876878768787687876878768787687',

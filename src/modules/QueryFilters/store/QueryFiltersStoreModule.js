@@ -1,10 +1,7 @@
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 import isEmpty from '../../../scripts/isEmpty';
 
-export default class QueryFiltersStoreModule {
-  namespaced = true;
-
-  state = {}
-
+export default class QueryFiltersStoreModule extends BaseStoreModule {
   getters = {
     GET_FILTERS: (state, getters) => Object.keys(state)
       .reduce((filters, filterKey) => {
@@ -47,18 +44,7 @@ export default class QueryFiltersStoreModule {
   };
 
   constructor({ state = {} } = {}) {
+    super();
     this.state = state;
-  }
-
-  getModule({
-              namespaced, getters, actions, mutations,
-            } = {}) {
-    return {
-      state: this.state,
-      getters: { ...this.getters, ...getters },
-      actions: { ...this.actions, ...actions },
-      mutations: { ...this.mutations, ...mutations },
-      namespaced: typeof namespaced === 'boolean' ? namespaced : this.namespaced,
-    };
   }
 }
