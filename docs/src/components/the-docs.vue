@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.7.59</h1>
+          <h1>Webitel UI SDK v. 0.7.60</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -261,6 +261,11 @@ export default {
             name: 'Rounded action',
             value: 'rounded-action',
             route: 'rounded-action',
+          },
+          {
+            name: 'Filters panel wrapper',
+            value: 'filters-panel-wrapper',
+            route: 'filters-panel-wrapper',
           },
         ].sort((a, b) => a.name.localeCompare(b.name)),
       };

@@ -199,7 +199,7 @@
   .wt-datetimepicker__form {
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 0;
     padding: var(--datetimepicker-form-padding);
     background: var(--datetimepicker-form-bg-color);
     box-sizing: border-box;

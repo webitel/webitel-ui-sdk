@@ -52,6 +52,7 @@ import WtTimeInputDocs
   from '../components/pages/components/molecules/wt-time-input/wt-time-input-docs.vue';
 // organisms
 import WtAppHeaderDocs from '../components/pages/components/organisms/wt-app-header/wt-app-header-docs.vue';
+import WtFiltersPanelWrapperDocs from '../components/pages/components/organisms/wt-filters-panel-wrapper/wt-table-actions-docs.vue';
 import WtHeadlineDocs from '../components/pages/components/organisms/wt-headline/wt-headline-docs.vue';
 import WtNavigationBarDocs
   from '../components/pages/components/organisms/wt-navigation-bar/wt-navigation-bar-docs.vue';
@@ -287,6 +288,11 @@ const routes = [
         path: 'app-header',
         name: 'app-header-docs',
         component: WtAppHeaderDocs,
+      },
+      {
+        path: 'filters-panel-wrapper',
+        name: 'filters-panel-wrapper-docs',
+        component: WtFiltersPanelWrapperDocs,
       },
       {
         path: 'headline',

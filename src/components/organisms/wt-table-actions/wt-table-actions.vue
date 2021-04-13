@@ -1,5 +1,6 @@
 <template>
   <aside class="wt-table-actions">
+    <slot></slot>
     <wt-icon-btn
       v-if="isImport"
       icon="download"
@@ -42,7 +43,7 @@
 
 <script>
 export default {
-  name: 'table-actions',
+  name: 'wt-table-actions',
   props: {
     icons: {
       type: Array,
@@ -79,9 +80,10 @@ export default {
 <style lang="scss" scoped>
 .wt-table-actions {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
 
-  .wt-icon-btn {
+  & > * {
     margin-left: var(--table-actions-icon-gap);
   }
 }

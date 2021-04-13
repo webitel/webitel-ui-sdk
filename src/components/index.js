@@ -29,6 +29,7 @@ import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
+import WtFiltersPanelWrapper from './organisms/wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue';
 import WtHeaderActions from './organisms/wt-app-header/wt-header-actions.vue';
 import WtHeadline from './organisms/wt-headline/wt-headline.vue';
 import WtNavigationBar from './organisms/wt-navigation-bar/wt-navigation-bar.vue';
@@ -72,6 +73,7 @@ const Components = {
   WtHeadline,
   WtNavigationBar,
   WtAppNavigator,
+  WtFiltersPanelWrapper,
   WtHeaderActions,
   WtNotificationsBar,
   WtPageWrapper,

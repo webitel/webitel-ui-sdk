@@ -19,6 +19,8 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+    ></component-slots>
   </section>
 </template>
 
