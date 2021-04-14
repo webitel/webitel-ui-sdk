@@ -1,6 +1,7 @@
 module.exports = {
   // publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
   publicPath: '/ui-sdk',
+  lintOnSave: false,
   css: {
     loaderOptions: {
       sass: {

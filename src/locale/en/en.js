@@ -61,5 +61,11 @@ export default {
       pause: 'Pause',
       offline: 'Offline',
     },
+    table: {
+      tableCells: {
+        deleteActionHint: 'Delete',
+        editActionHint: 'Edit',
+      },
+    },
   },
 };
