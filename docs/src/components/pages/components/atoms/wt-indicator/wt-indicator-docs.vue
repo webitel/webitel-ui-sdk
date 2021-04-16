@@ -12,6 +12,7 @@
         <wt-indicator color="disabled" text="Disabled color"></wt-indicator>
         <wt-indicator color="success" text="Success color"></wt-indicator>
         <wt-indicator color="danger" text="Danger color"></wt-indicator>
+        <wt-indicator color="break-out" text="Break-out color"></wt-indicator>
         <wt-indicator color="transfer" text="Transfer color"></wt-indicator>
       </div>
     </article>
@@ -32,7 +33,7 @@
           value: 'color',
           code: '<wt-icon color="danger"></wt-icon>',
           type: ['String', 'Number'],
-          options: ['primary', 'secondary', 'success', 'danger', 'transfer', 'disabled'],
+          options: ['primary', 'secondary', 'success', 'danger', 'transfer', 'disabled', 'break-out'],
           default: 'secondary',
         },
         {

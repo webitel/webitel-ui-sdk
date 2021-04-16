@@ -72,5 +72,9 @@ export default {
   &--transfer {
     background: var(--indicator-transfer-color);
   }
+
+  &--break-out {
+    background: var(--indicator-break-out-color);
+  }
 }
 </style>
