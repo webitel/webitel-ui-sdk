@@ -6,6 +6,14 @@
         <wt-indicator color="primary" text="Indicator"></wt-indicator>
         <pre><code class="language-html">&lt;wt-indicator color="primary" text="Indicator"&gt;&lt;/wt-indicator&gt;</code></pre>
       </div>
+      <div class="example-wrapper">
+        <wt-indicator color="primary" text="Primary color"></wt-indicator>
+        <wt-indicator color="secondary" text="Secondary color"></wt-indicator>
+        <wt-indicator color="disabled" text="Disabled color"></wt-indicator>
+        <wt-indicator color="success" text="Success color"></wt-indicator>
+        <wt-indicator color="danger" text="Danger color"></wt-indicator>
+        <wt-indicator color="transfer" text="Transfer color"></wt-indicator>
+      </div>
     </article>
     <component-props
       :properties="properties"
@@ -24,7 +32,7 @@
           value: 'color',
           code: '<wt-icon color="danger"></wt-icon>',
           type: ['String', 'Number'],
-          options: ['primary', 'secondary', 'success', 'danger', 'transfer'],
+          options: ['primary', 'secondary', 'success', 'danger', 'transfer', 'disabled'],
           default: 'secondary',
         },
         {
