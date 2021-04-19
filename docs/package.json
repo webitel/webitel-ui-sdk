@@ -9,7 +9,7 @@
     "link-local-webitel-ui": "rm -rf node_modules/@webitel/ui-sdk && ln -s /home/user/Projects/webitel-ui-sdk node_modules/@webitel/ui-sdk"
   },
   "dependencies": {
-    "@webitel/ui-sdk": "^0.7.64",
+    "@webitel/ui-sdk": "^0.7.66",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
     "file-saver": "^2.0.2",
