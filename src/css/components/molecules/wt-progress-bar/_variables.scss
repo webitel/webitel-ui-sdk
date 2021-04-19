@@ -1,0 +1,11 @@
+
+:root {
+  --progress-bar-height: 16px;
+  --progress-bar-padding: 2px;
+  --progress-bar-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.05), inset -1px -1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 8px rgba(0, 0, 0, 0.1);
+
+  --progress-bar-bg-color--primary: var(--accent-color);
+  --progress-bar-bg-color--secondary: var(--secondary-color);
+  --progress-bar-bg-color--success: var(--true-color);
+  --progress-bar-bg-color--danger: var(--false-color);
+}

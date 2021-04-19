@@ -38,6 +38,7 @@ import WtInputDocs from '../components/pages/components/molecules/wt-input/wt-in
 import WtNotificationDocs
   from '../components/pages/components/molecules/wt-notification/wt-notification-docs.vue';
 import WtPopupDocs from '../components/pages/components/molecules/wt-popup/wt-popup-docs.vue';
+import WtProgressBarDocs from '../components/pages/components/molecules/wt-progress-bar/wt-progress-bar-docs.vue';
 import WtRadioDocs from '../components/pages/components/molecules/wt-radio/wt-radio-docs.vue';
 import WtSearchBarDocs
   from '../components/pages/components/molecules/wt-search-bar/wt-search-bar-docs.vue';
@@ -241,6 +242,11 @@ const routes = [
         path: 'popup',
         name: 'popup-docs',
         component: WtPopupDocs,
+      },
+      {
+        path: 'progress-bar',
+        name: 'progress-bar-docs',
+        component: WtProgressBarDocs,
       },
       {
         path: 'radio',
