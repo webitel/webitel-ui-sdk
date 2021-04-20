@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.7.68</h1>
+          <h1>Webitel UI SDK v. 0.7.69</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -30,6 +30,7 @@ export default {
         this.styleNav,
         this.componentsNav,
         this.filtersNav,
+        this.localeNav,
         this.directivesNav,
         this.mixinsNav,
         this.modulesNav,
@@ -287,6 +288,14 @@ export default {
             route: 'truncate',
           },
         ],
+      };
+    },
+    localeNav() {
+      return {
+        name: 'Locale',
+        value: 'locale',
+        route: '/locale',
+        // subNav: [],
       };
     },
     directivesNav() {

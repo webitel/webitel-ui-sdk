@@ -75,6 +75,8 @@ import WtTableColumnSelectDocs
 import FiltersDocs from '../components/pages/filters/filters-docs.vue';
 import TruncateFilterDocs from '../components/pages/filters/truncate-filter/truncate-filter-docs.vue';
 
+import LocaleDocs from '../components/pages/locale/locale-docs.vue';
+
 import DirectivesDocs from '../components/pages/directives/directives-docs.vue';
 import ClickawayDirectiveDocs from '../components/pages/directives/clickaway-directive/clickaway-directive-docs.vue';
 
@@ -363,6 +365,18 @@ const routes = [
         name: 'truncate',
         component: TruncateFilterDocs,
       },
+    ],
+  },
+  {
+    path: '/locale',
+    name: 'locale',
+    component: LocaleDocs,
+    children: [
+      // {
+      //   path: 'truncate',
+      //   name: 'truncate',
+      //   component: TruncateFilterDocs,
+      // },
     ],
   },
   {

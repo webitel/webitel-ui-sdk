@@ -1,9 +1,21 @@
 export default {
+  // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    total: 'Всего',
+    ok: 'Ок',
+    Save: 'Сохранить',
+    close: 'Закрыть',
     add: 'Добавить',
     cancel: 'Отменить',
     import: 'Импорт',
     export: 'Экспорт',
+  },
+  // describes Webitel system entities
+  objects: {
+    team: 'Команда | Команды',
+    supervisor: 'Супервизор | Супервизоры',
+    auditor: 'Аудитор | Аудиторы',
+    region: 'Регион | Регионы',
   },
   validation: {
     required: 'Обязательное поле',
@@ -15,6 +27,8 @@ export default {
     macValidator: 'Необходимо ввести MAC-адрес',
     minValue: 'Значение должно быть не меньше',
     maxValue: 'Значение должно быть не больше',
+    sameAs: 'Неверный пароль',
+    requiredArrayValue: 'Поле не должно быть пустым',
   },
   webitelUI: {
     timepicker: {
