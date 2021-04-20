@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.7.66</h1>
+          <h1>Webitel UI SDK v. 0.7.68</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -361,6 +361,11 @@ export default {
             name: 'Debounce',
             value: 'debounce',
             route: 'debounce',
+          },
+          {
+            name: 'Edit proxy',
+            value: 'edit-proxy',
+            route: 'edit-proxy',
           },
           {
             name: 'Event bus',

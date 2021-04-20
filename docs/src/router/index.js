@@ -90,6 +90,7 @@ import ScriptsDocs from '../components/pages/scripts/scripts-docs.vue';
 import CaseConverterScriptsDocs from '../components/pages/scripts/case-converter-scripts/case-converter-scripts-docs.vue';
 import ConvertDurationScriptDocs from '../components/pages/scripts/convert-duration-script/convert-duration-script-docs.vue';
 import DebounceScriptDocs from '../components/pages/scripts/debounce-script/debounce-script-docs.vue';
+import EditProxyScriptDocs from '../components/pages/scripts/edit-proxy-script/edit-proxy-script-docs.vue';
 import EventBusScriptDocs from '../components/pages/scripts/event-bus-script/event-bus-script-docs.vue';
 import IsEmptyScriptDocs from '../components/pages/scripts/is-empty-script/is-empty-script-docs.vue';
 import PrettifyFileSizeScriptDocs from '../components/pages/scripts/prettify-file-size-script/prettify-file-size-script.vue';
@@ -429,6 +430,11 @@ const routes = [
         path: 'debounce',
         name: 'debounce',
         component: DebounceScriptDocs,
+      },
+      {
+        path: 'edit-proxy',
+        name: 'edit-proxy',
+        component: EditProxyScriptDocs,
       },
       {
         path: 'event-bus',
