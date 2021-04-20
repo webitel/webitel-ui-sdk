@@ -22,11 +22,11 @@ export default class ApiFilterSchema extends BaseFilterSchema {
   }
 
   search(params) {
-    return this.API.getList(params);
+    return this.API(params);
   }
 
   fetchSelected(idsList) {
     const params = { size: idsList.length, ids: idsList };
-    return this.API.getList(params);
+    return this.API(params);
   }
 }

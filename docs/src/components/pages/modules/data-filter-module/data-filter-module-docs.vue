@@ -22,8 +22,7 @@
           <li><code>storedProp</code> - object property, stored in url <i>(default = 'id' )</i></li>
           <li><code>multiple</code> - select multiple value boolean <i>(default = true )</i></li>
           <li><code>closeOnSelect</code> - close select options after select <i>(default = false )</i></li>
-          <li><code>API</code> - Options API object with implemented getList(params) method for options fetch,
-          search and restoring selected values</li>
+          <li><code>API</code> - Options API method for options fetch, search and restoring selected values</li>
 
         <h4><code>EnumFilterSchema.js</code></h4>
         <p>used specifically for lookup-entities filtering (eg. direction or statuses).
@@ -66,7 +65,7 @@
             const state = {
               search: new BaseFilterSchema(),
               agent: New ApiFilterSchema({
-                API: { getList: () => {} },
+                API: () => {},
                 locale: { label: 'path.to.agent' },
               }),
               from: new BaseFilterSchema({

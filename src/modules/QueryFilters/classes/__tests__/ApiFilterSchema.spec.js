@@ -1,9 +1,9 @@
 import ApiFilterSchema from '../ApiFilterSchema';
 
 describe('Api Filter Schema', () => {
-  const getListMock = jest.fn();
+  const APIMock = jest.fn();
   beforeEach(() => {
-    getListMock.mockClear();
+    APIMock.mockClear();
   });
   it('creates default class without passed params', () => {
     const filter = new ApiFilterSchema();
@@ -11,15 +11,15 @@ describe('Api Filter Schema', () => {
   });
   it('calls API getList() method at search()', () => {
     const params = { page: 1 };
-    const filter = new ApiFilterSchema({ API: { getList: getListMock } });
+    const filter = new ApiFilterSchema({ API: APIMock });
     filter.search(params);
-    expect(getListMock).toHaveBeenCalledWith(params);
+    expect(APIMock).toHaveBeenCalledWith(params);
   });
   it('calls API getList() method at fetchSelected()', () => {
     const idsList = [1];
     const expectedParams = { size: 1, ids: [1] };
-    const filter = new ApiFilterSchema({ API: { getList: getListMock } });
+    const filter = new ApiFilterSchema({ API: APIMock });
     filter.fetchSelected(idsList);
-    expect(getListMock).toHaveBeenCalledWith(expectedParams);
+    expect(APIMock).toHaveBeenCalledWith(expectedParams);
   });
 });
