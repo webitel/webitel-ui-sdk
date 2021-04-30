@@ -118,10 +118,11 @@
     computed: {
       // prop value representation on picker preview
       displayValue() {
-        const date = new Date(+this.value).toLocaleDateString();
-        const time = new Date(+this.value).toTimeString()
-          .slice(0, 5);
-        return `${date} ${time}`;
+        // const date = new Date(+this.value).toLocaleDateString();
+        // const time = new Date(+this.value).toLocaleTimeString() // https://stackoverflow.com/questions/17913681/how-do-i-use-tolocaletimestring-without-displaying-seconds
+        //   .slice(0, 5);
+        // return `${date} ${time}`;
+        return new Date(+this.value).toLocaleString();
       },
     },
 
