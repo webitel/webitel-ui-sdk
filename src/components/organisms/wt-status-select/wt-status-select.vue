@@ -26,6 +26,7 @@
 <script>
 import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum';
 import convertDuration from '../../../scripts/convertDuration';
+import StatusOptions from './_internals/StatusOptions.lookup';
 
 export default {
   name: 'wt-status-select',
@@ -52,28 +53,16 @@ export default {
     },
     statusOptions() {
       return this.options ? this.options
-      : [
-        {
-          text: this.$t('webitelUI.statusSelect.online'),
-          color: 'success',
-          value: AgentStatus.ONLINE,
-        },
-        {
-          text: this.$t('webitelUI.statusSelect.pause'),
-          color: 'primary',
-          value: AgentStatus.PAUSE,
-        },
-        {
-          text: this.$t('webitelUI.statusSelect.offline'),
-          color: 'danger',
-          value: AgentStatus.OFFLINE,
-        },
-      ];
+        : StatusOptions.map((opt) => ({
+          ...opt,
+          text: this.$t(opt.locale),
+        }));
     },
     availableOptions() {
      return this.statusOptions.reduce((options, opt) => {
        // PAUSE option is always passed
-       if (this.status === opt.value && opt.value !== AgentStatus.PAUSE) {
+       if ((this.status === opt.value && opt.value !== AgentStatus.PAUSE)
+       || opt.value === AgentStatus.BREAK_OUT) { // skip breakout option
          return options;
        }
        return [...options, opt];

@@ -74,6 +74,7 @@ export default {
       online: 'Онлайн',
       pause: 'Пауза',
       offline: 'Оффлайн',
+      breakOut: 'Принудительный перерыв',
     },
     table: {
       tableCells: {

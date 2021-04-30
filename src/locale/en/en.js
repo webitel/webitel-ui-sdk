@@ -74,6 +74,7 @@ export default {
       online: 'Online',
       pause: 'Pause',
       offline: 'Offline',
+      breakOut: 'Break Out',
     },
     table: {
       tableCells: {

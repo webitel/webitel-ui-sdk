@@ -17,6 +17,7 @@ export default {
     color: {
       type: String,
       default: 'secondary',
+      options: ['primary', 'secondary', 'disabled', 'success', 'danger', 'transfer', 'break-out'],
     },
 
     text: {

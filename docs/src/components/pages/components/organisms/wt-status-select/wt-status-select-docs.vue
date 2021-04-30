@@ -16,8 +16,16 @@
       <pre><code class="language-javascript">
           import AgentStatus from '@webitel/ui-sdk/src/enums/AgentStatus/AgentStatus.enum';
         </code></pre>
-      <p>Enumerate with ONLINE ('online'), PAUSE ('pause') and OFFLINE ('offline') values. Used
+      <p>Enumerate with ONLINE ('online'), PAUSE ('pause'), OFFLINE ('offline'), BREAK_OUT ('break_out') values. Used
         for agent status identifying and <b>recommended</b> for use in app logic</p>
+    </article>
+    <article>
+      <h3>Status Options lookup</h3>
+      <pre><code class="language-javascript">
+          import StatusOptions from '@webitel/ui-sdk/src/components/organisms/wt-status-select/_internals/StatusOptions.lookup';
+        </code></pre>
+      <p>Default wt-status-select options. Each option object contains "color",
+        "locale" (for this.$t(locale) usage) and AgentStatus enum value</p>
     </article>
     <component-model
       prop="status"
