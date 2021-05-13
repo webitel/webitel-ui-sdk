@@ -10,6 +10,10 @@ export default {
     import: 'Import',
     export: 'Export',
   },
+  // date-related texts
+  date: {
+    sec: 'Sec',
+  },
   // describes Webitel system entities
   objects: {
     team: 'Team | Teams',
