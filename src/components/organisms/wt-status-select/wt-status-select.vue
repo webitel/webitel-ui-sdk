@@ -33,11 +33,11 @@ export default {
   props: {
     status: {
       type: String,
-      default: AgentStatus.ONLINE,
+      default: AgentStatus.OFFLINE,
     },
     statusDuration: {
-      type: String,
-      default: '00:00:00',
+      type: [String, Number],
+      default: 0,
     },
     options: {
       type: Array,

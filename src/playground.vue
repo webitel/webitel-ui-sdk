@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-status-select></wt-status-select>
     <wt-table
       :headers="table.headers"
       :data="table.data"
