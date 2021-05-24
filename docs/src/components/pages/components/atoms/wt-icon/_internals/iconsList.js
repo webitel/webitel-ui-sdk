@@ -1,4 +1,6 @@
 export default [
+  'icon-role--md',
+  'icon-user--md',
   'icon-move--md',
   'icon-queue-member--md',
   'icon-history--md',
