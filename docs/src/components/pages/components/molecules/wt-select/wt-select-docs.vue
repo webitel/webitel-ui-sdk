@@ -221,6 +221,16 @@ export default {
         scope: [{ name: 'label' }],
         description: 'Custom label slot',
       },
+      {
+        name: 'option',
+        scope: [{ name: 'option', description: 'option itself' }, { name: 'optionLabel', description: 'optionLabel prop' }],
+        description: 'Watch vue-multiselect option slot',
+      },
+      {
+        name: 'singleLabel',
+        scope: [{ name: 'option', description: 'option itself' }, { name: 'optionLabel', description: 'optionLabel prop' }],
+        description: 'Watch vue-multiselect singleLabel slot',
+      },
     ],
   }),
   mounted() {

@@ -45,7 +45,7 @@
       </template>
 
       <template slot="singleLabel" slot-scope="{ option }">
-        <slot name="singleLabel" v-bind="{ option }">
+        <slot name="singleLabel" v-bind="{ option, optionLabel }">
           <span class="multiselect__single-label">
             {{ option[optionLabel] || option }}
           </span>
@@ -53,7 +53,7 @@
       </template>
 
       <template slot="option" slot-scope="{ option }">
-        <slot name="option" v-bind="{ option }">
+        <slot name="option" v-bind="{ option, optionLabel }">
           <span>
             {{ option[optionLabel] || option }}
           </span>
