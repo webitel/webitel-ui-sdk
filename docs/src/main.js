@@ -7,7 +7,6 @@ import eventBus from '../../src/scripts/eventBus';
 
 import 'prismjs/themes/prism.css';
 import './plugins/webitel-ui';
-import './css/main.scss';
 import './components/shared';
 import prismMixin from './mixins/prismMixin';
 

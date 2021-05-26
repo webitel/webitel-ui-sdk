@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media #{$media} and #{$media-width-sm} {
+@media (#{$media} and #{$media-width-sm}) {
   .d-none-sm {
     display: none;
   }
@@ -11,7 +11,7 @@
   }
 }
 
-@media #{$media} and #{$media-width-xs} {
+@media (#{$media} and #{$media-width-xs}) {
   .d-none-xs {
     display: none;
   }

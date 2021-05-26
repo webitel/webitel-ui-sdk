@@ -11,9 +11,10 @@ $viewport-lg: 1280px;
 $viewport-md: 992px;
 $viewport-sm: 600px;
 
-$media: only screen;
-$media-width-xl: (min-width: $viewport-xl);
-$media-width-lg: (max-width: $viewport-xl);
-$media-width-md: (max-width: $viewport-lg);
-$media-width-sm: (max-width: $viewport-md);
-$media-width-xs: (max-width: $viewport-sm);
+$media: #{'only screen'};
+$media-width-xl: #{'min-width: '} $viewport-xl;
+$media-width-lg: #{'max-width: '} $viewport-xl;
+$media-width-md: #{'max-width: '} $viewport-lg;
+$media-width-sm: #{'max-width: '} $viewport-md;
+$media-width-xs: #{'max-width: '} $viewport-sm;
+
