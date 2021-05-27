@@ -9,6 +9,7 @@ export default {
     cancel: 'Cancel',
     import: 'Import',
     export: 'Export',
+    true: 'True',
   },
   // date-related texts
   date: {

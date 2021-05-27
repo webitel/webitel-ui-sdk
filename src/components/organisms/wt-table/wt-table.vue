@@ -209,6 +209,7 @@ export default {
 }
 
 .wt-table__th {
+  min-height: 24px; // prevent sort arrow toggling layout shift
   font-weight: normal;
 
   &--sortable {

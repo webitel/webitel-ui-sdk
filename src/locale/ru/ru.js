@@ -9,6 +9,7 @@ export default {
     cancel: 'Отменить',
     import: 'Импорт',
     export: 'Экспорт',
+    true: 'Да',
   },
   // date-related texts
   date: {
