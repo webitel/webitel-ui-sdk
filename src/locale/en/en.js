@@ -10,6 +10,7 @@ export default {
     import: 'Import',
     export: 'Export',
     true: 'True',
+    delete: 'Delete',
   },
   // date-related texts
   date: {

@@ -109,6 +109,7 @@ export default {
 }
 
 .wt-popup__main {
+  @extend %typo-body-lg;
   padding: var(--popup-main-padding);
 }
 
