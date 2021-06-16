@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtTimeInput from '../wt-time-input.vue';
-import WtLabel from '../../../atoms/wt-label/wt-label.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
 
 describe('WtTimeInput', () => {
   it('renders a component', () => {

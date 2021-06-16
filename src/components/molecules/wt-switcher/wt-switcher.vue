@@ -10,6 +10,7 @@
     <wt-label
       class="wt-switcher__wrapper"
       :class="{'wt-switcher__wrapper--label-left': labelLeft}"
+      v-bind="labelProps"
     >
       <input
         class="wt-switcher__input"
@@ -46,6 +47,10 @@
       disabled: {
         type: Boolean,
         default: false,
+      },
+      labelProps: {
+        type: Object,
+        description: 'Object with props, passed down to wt-label as props',
       },
     },
     model: {

@@ -7,7 +7,7 @@
     }"
     v-clickaway="close"
   >
-    <wt-label :disabled="disabled">
+    <wt-label :disabled="disabled" v-bind="labelProps">
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
@@ -94,6 +94,10 @@
       },
       disabledDates: {
         type: Object,
+      },
+      labelProps: {
+        type: Object,
+        description: 'Object with props, passed down to wt-label as props',
       },
     },
     model: {

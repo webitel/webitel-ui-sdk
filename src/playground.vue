@@ -1,6 +1,9 @@
 <template>
   <div class="playground">
-    <wt-status-select></wt-status-select>
+    <wt-input
+      label="hihihi"
+      :label-props="{ hint: 'hui chai' }"
+    ></wt-input>
     <wt-table
       :headers="table.headers"
       :data="table.data"

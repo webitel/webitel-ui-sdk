@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtSelect from '../wt-select.vue';
-import WtLabel from '../../../atoms/wt-label/wt-label.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
 
 describe('WtSelect', () => {
   it('renders a component', () => {

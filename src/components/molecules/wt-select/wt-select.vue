@@ -12,6 +12,7 @@
       v-if="hasLabel"
       :disabled="disabled"
       :invalid="invalid"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
@@ -160,6 +161,11 @@ export default {
     allowEmpty: {
       type: Boolean,
       default: true,
+    },
+
+    labelProps: {
+      type: Object,
+      description: 'Object with props, passed down to wt-label as props',
     },
   },
 

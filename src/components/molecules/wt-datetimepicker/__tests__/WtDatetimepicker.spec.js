@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtDatetimepicker from '../wt-datetimepicker.vue';
-import WtLabel from '../../../atoms/wt-label/wt-label.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
 import WtIcon from '../../../atoms/wt-icon/wt-icon.vue';
 import WtButton from '../../../atoms/wt-button/wt-button.vue';
 

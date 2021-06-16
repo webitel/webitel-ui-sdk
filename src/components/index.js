@@ -6,7 +6,6 @@ import WtButton from './atoms/wt-button/wt-button.vue';
 import WtBadge from './atoms/wt-badge/wt-badge.vue';
 import WtDivider from './atoms/wt-divider/wt-divider.vue';
 import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
-import WtLabel from './atoms/wt-label/wt-label.vue';
 import WtRoundedAction from './atoms/wt-rounded-action/wt-rounded-action.vue';
 import WtLoader from './atoms/wt-loader/wt-loader.vue';
 
@@ -27,6 +26,7 @@ import WtTagsInput from './molecules/wt-tags-input/wt-tags-input.vue';
 import WtTimeInput from './molecules/wt-time-input/wt-time-input.vue';
 import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
+import WtLabel from './molecules/wt-label/wt-label.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';

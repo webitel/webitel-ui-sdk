@@ -7,7 +7,7 @@
       'wt-checkbox--disabled': disabled,
     }"
   >
-    <wt-label class="wt-checkbox__wrapper">
+    <wt-label class="wt-checkbox__wrapper" v-bind="labelProps">
       <input
         class="wt-checkbox__input"
         type="checkbox"
@@ -54,6 +54,10 @@
       outline: {
         type: Boolean,
         default: false,
+      },
+      labelProps: {
+        type: Object,
+        description: 'Object with props, passed down to wt-label as props',
       },
     },
     computed: {

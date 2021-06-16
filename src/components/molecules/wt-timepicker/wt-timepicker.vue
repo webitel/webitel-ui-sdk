@@ -1,6 +1,6 @@
 <template>
   <div class="wt-timepicker">
-    <wt-label v-if="label">{{`${ label } (${ format })`}}</wt-label>
+    <wt-label v-if="label" v-bind="labelProps">{{`${ label } (${ format })`}}</wt-label>
     <div class="wt-timepicker__wrapper">
       <wt-time-input
         v-if="isHour"
@@ -53,6 +53,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    labelProps: {
+      type: Object,
+      description: 'Object with props, passed down to wt-label as props',
     },
   },
   model: {

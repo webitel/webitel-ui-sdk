@@ -48,6 +48,19 @@
           default: 'false',
           description: 'Changes label visual style to invalid (red)',
         },
+        {
+          value: 'hint',
+          code: '<wt-label hint="hello there!"></wt-label>',
+          type: 'String',
+          description: 'Adds wt-icon-btn with tooltip value, passed as prop',
+        },
+        {
+          value: 'hintPosition',
+          code: '<wt-label hint-position="right"></wt-label>',
+          type: 'String',
+          default: 'See wt-icon-btn tooltip-position prop',
+          description: 'See wt-icon-btn tooltip-position prop',
+        },
       ],
     }),
     mounted() {

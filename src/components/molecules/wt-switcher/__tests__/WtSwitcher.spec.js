@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtSwitcher from '../wt-switcher.vue';
-import WtLabel from '../../../atoms/wt-label/wt-label.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
 
 describe('WtSwitcher', () => {
   it('renders a component', () => {

@@ -195,6 +195,12 @@ export default {
         default: 'false',
         description: 'Allows to remove all selected values. Otherwise one must be left selected.',
       },
+      {
+        value: 'labelProps',
+        code: '<wt-checkbox :label-props="{}"></wt-checkbox>',
+        type: 'Object',
+        description: 'Object with props, passed down to wt-label as props',
+      },
     ],
     events: [
       {

@@ -71,6 +71,12 @@
           default: 'false',
           description: 'If passed, "Enter" key press emits "enter" event, new line is shift+enter',
         },
+        {
+          value: 'labelProps',
+          code: '<wt-checkbox :label-props="{}"></wt-checkbox>',
+          type: 'Object',
+          description: 'Object with props, passed down to wt-label as props',
+        },
       ],
       events: [
         {

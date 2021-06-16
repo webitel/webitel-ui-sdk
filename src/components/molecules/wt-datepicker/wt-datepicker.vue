@@ -5,7 +5,7 @@
       'wt-datepicker--disabled': disabled,
     }"
   >
-    <wt-label :disabled="disabled">
+    <wt-label :disabled="disabled" v-bind="labelProps">
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
@@ -62,6 +62,10 @@
       lang: {
         type: String,
         default: 'en',
+      },
+      labelProps: {
+        type: Object,
+        description: 'Object with props, passed down to wt-label as props',
       },
     },
     model: {

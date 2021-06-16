@@ -21,7 +21,7 @@ import WtIndicatorDocs
   from '../components/pages/components/atoms/wt-indicator/wt-indicator-docs.vue';
 import WtInputInfoDocs
   from '../components/pages/components/atoms/wt-input-info/wt-input-info-docs.vue';
-import WtLabelDocs from '../components/pages/components/atoms/wt-label/wt-label-docs.vue';
+import WtLabelDocs from '../components/pages/components/molecules/wt-label/wt-label-docs.vue';
 import WtLoaderDocs from '../components/pages/components/atoms/wt-loader/wt-loader-docs.vue';
 import WtLRoundedActionDocs from '../components/pages/components/atoms/wt-rounded-action/wt-rounded-action-docs.vue';
 import WtTooltipDocs from '../components/pages/components/atoms/wt-tooltip/wt-tooltip-docs.vue';

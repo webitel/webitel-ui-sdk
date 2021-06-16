@@ -59,6 +59,12 @@
           default: 'null',
           description: 'https://www.npmjs.com/package/vuejs-datepicker#disabled-dates',
         },
+        {
+          value: 'labelProps',
+          code: '<wt-checkbox :label-props="{}"></wt-checkbox>',
+          type: 'Object',
+          description: 'Object with props, passed down to wt-label as props',
+        },
       ],
       events: [
         {

@@ -6,7 +6,13 @@
       'wt-time-input--disabled': disabled,
     }"
   >
-    <wt-label v-if="hasLabel" :for="name" :outline="outline" :disabled="disabled">
+    <wt-label
+      v-if="hasLabel"
+      :for="name"
+      :outline="outline"
+      :disabled="disabled"
+      v-bind="labelProps"
+    >
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ label }}</slot>
     </wt-label>
@@ -76,6 +82,11 @@
       outline: {
         type: Boolean,
         default: false,
+      },
+
+      labelProps: {
+        type: Object,
+        description: 'Object with props, passed down to wt-label as props',
       },
     },
     computed: {

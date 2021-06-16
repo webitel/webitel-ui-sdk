@@ -8,6 +8,7 @@
     <wt-label
       :for="name"
       :disabled="disabled"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ label }}</slot>
@@ -75,6 +76,10 @@
       chatMode: {
         type: Boolean,
         default: false,
+      },
+      labelProps: {
+        type: Object,
+        description: 'Object with props, passed down to wt-label as props',
       },
     },
 

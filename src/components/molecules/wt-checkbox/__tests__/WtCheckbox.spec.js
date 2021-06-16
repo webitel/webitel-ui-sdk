@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtCheckbox from '../wt-checkbox.vue';
-import WtLabel from '../../../atoms/wt-label/wt-label.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
 import WtIcon from '../../../atoms/wt-icon/wt-icon.vue';
 
 describe('WtCheckbox', () => {

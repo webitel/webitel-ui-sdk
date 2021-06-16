@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtTextarea from '../wt-textarea.vue';
-import WtLabel from '../../../atoms/wt-label/wt-label.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
 
 describe('WtTextarea', () => {
   it('renders a component', () => {

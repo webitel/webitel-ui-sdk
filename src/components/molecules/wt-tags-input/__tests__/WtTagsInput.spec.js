@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import WtTagsInput from '../wt-tags-input.vue';
-import WtLabel from '../../../atoms/wt-label/wt-label.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
 
 describe('WtTagsInput', () => {
   it('renders a component', () => {
