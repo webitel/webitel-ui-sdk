@@ -69,6 +69,11 @@ export default {
             value: 'typography',
             route: 'typography',
           },
+          {
+            name: 'Shadows',
+            value: 'shadows',
+            route: 'shadows',
+          },
         ],
       };
     },

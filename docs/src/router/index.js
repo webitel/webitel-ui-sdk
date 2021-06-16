@@ -9,6 +9,7 @@ import Colors from '../components/pages/style/colors/colors.vue';
 import DisplayHelpers from '../components/pages/style/display-helpers/display-helpers.vue';
 import Spacing from '../components/pages/style/spacing/spacing.vue';
 import Typography from '../components/pages/style/typography/typography.vue';
+import Shadows from '../components/pages/style/shadows/shadows.vue';
 
 import ComponentsDocs from '../components/pages/components/components-docs.vue';
 // atoms
@@ -145,6 +146,11 @@ const routes = [
         path: 'typography',
         name: 'typography',
         component: Typography,
+      },
+      {
+        path: 'shadows',
+        name: 'shadows',
+        component: Shadows,
       },
     ],
   },

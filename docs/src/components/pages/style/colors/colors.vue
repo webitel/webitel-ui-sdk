@@ -42,6 +42,7 @@ const ACCENT_COLOR = `${ACCENT_COLOR_HUE}, 100%, 50%`;
 const MAIN_COLOR = `${ACCENT_COLOR_HUE}, 20%, 99%`;
 const CONTRAST_COLOR = `${ACCENT_COLOR_HUE}, 20%, 1%`;
 const SECONDARY_COLOR = `${SECONDARY_COLOR_HUE}, 20%, 90%`;
+const SECONDARY_COLOR_50 = `${SECONDARY_COLOR_HUE}, 22%, 94%`;
 const PAGE_BG_COLOR = `${PAGE_BG_COLOR_HUE}, 20%, 95%`;
 const HEADER_COLOR = `${PAGE_BG_COLOR_HUE}, 20%, 90%`;
 const POSITIVE_COLOR = `${POSITIVE_COLOR_HUE}, 60%, 40%`;
@@ -103,6 +104,12 @@ export default {
             code: `hsla(${SECONDARY_COLOR}, ${MAIN_COLOR_OPACITY})`,
             color: '--secondary-color',
             name: 'Secondary color',
+          },
+          {
+            textColor: '#000',
+            code: `hsla(${SECONDARY_COLOR_50}, ${MAIN_COLOR_OPACITY})`,
+            color: '--secondary-color-50',
+            name: 'Secondary color 50',
           },
           {
             color: '--main-secondary-color',
