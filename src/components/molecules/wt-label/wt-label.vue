@@ -77,6 +77,8 @@ export default {
   margin-left: var(--component-spacing);
   ::v-deep {
     .wt-tooltip {
+      width: max-content; // experimental css property
+      width: -moz-max-content; // experimental css property
       min-width: 120px;
       max-width: 280px;
     }
