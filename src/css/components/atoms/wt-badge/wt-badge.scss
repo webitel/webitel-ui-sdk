@@ -14,7 +14,23 @@
     background: var(--badge-bg-color--outline);
   }
 
-  &--primary-color {
-    background: var(--main-accent-color);
+  &--accent-color {
+    background: var(--accent-color);
+  }
+
+  &--secondary-color {
+    background: var(--secondary-color);
+  }
+
+  &--success-color {
+    background: var(--true-color);
+  }
+
+  &--danger-color {
+    background: var(--false-color);
+  }
+
+  &--transfer-color {
+    background: var(--transfer-color);
   }
 }

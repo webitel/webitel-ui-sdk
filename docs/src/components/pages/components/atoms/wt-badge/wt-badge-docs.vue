@@ -8,6 +8,17 @@
       </div>
     </article>
     <article>
+      <div class="example-wrapper">
+        <wt-badge>Main color</wt-badge>
+        <wt-badge color="outline">Outline color</wt-badge>
+        <wt-badge color="accent">Accent color</wt-badge>
+        <wt-badge color="secondary">Secondary color</wt-badge>
+        <wt-badge color="success">Success color</wt-badge>
+        <wt-badge color="danger">Danger color</wt-badge>
+        <wt-badge color="transfer">Transfer color</wt-badge>
+      </div>
+    </article>
+    <article>
       <h3>Badge class</h3>
       <p>Badge has it's own class, <code class="language-css">.wt-badge</code>. It can be
       reused on other elements to make them look like wt-badge:</p>
@@ -38,9 +49,9 @@
           value: 'color',
           code: '<wt-badge color="primary"></wt-badge>',
           type: 'String',
-          options: ['"main", "primary", "outline"'],
+          options: ['main', 'outline', 'accent', 'secondary', 'success', 'danger', 'transfer'],
           default: 'main',
-          description: 'main color - lighten primary (--main-secondary-accent-color). Primary color - --primary-accent-color',
+          description: '"main" and "outline" are badge-specific colors',
         },
       ],
     }),

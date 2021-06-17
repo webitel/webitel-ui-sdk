@@ -1,9 +1,5 @@
 <template>
   <div class="playground">
-    <wt-input
-      label="hihihi"
-      :label-props="{ hint: 'hui chai' }"
-    ></wt-input>
     <wt-table
       :headers="table.headers"
       :data="table.data"
