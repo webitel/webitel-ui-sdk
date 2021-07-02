@@ -9,6 +9,8 @@ export default class FilesExport {
 
   fetchMethod = null;
 
+  isLoading = false;
+
   downloadProgress = { count: 0 };
 
   zippingProgress = { percent: 0 };
@@ -90,6 +92,7 @@ export default class FilesExport {
 
   async exportFiles(files, { reqParams }) {
     try {
+      this.isLoading = true;
       const zip = new JSZip();
       if (files && files.length) await this._addFilesToZip(files, zip);
       else {
@@ -100,6 +103,8 @@ export default class FilesExport {
       this.resetProgress();
     } catch (err) {
       throw err;
+    } finally {
+      this.isLoading = false;
     }
   }
 }

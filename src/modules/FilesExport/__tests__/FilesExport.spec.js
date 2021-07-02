@@ -60,7 +60,7 @@ describe('File Export', () => {
       await wrapper.vm.exportFiles();
     } catch (err) {
       expect(err).toBeTruthy();
-      expect(wrapper.vm.isFilesLoading).toBe(false);
+      expect(wrapper.vm.isFilesLoading).toBeFalsy();
     }
   });
 });

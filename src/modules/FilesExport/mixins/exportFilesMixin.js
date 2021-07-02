@@ -7,7 +7,7 @@ export default {
 
   computed: {
     isFilesLoading() {
-      return !!(this.filesDownloadProgress || this.filesZippingProgress);
+      return this.FilesExport?.isLoading;
     },
 
     filesDownloadProgress() {
