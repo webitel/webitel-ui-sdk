@@ -27,8 +27,8 @@ export default {
     },
   },
   methods: {
-    search(...args) {
-      return this.filterSchema.search(...args);
+    search(search) {
+      return this.filterSchema.search({ search });
     },
     fetchSelected(...args) {
       return this.filterSchema.fetchSelected(...args);
