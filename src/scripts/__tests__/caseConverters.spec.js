@@ -22,6 +22,12 @@ describe('Case converters', () => {
     expect(snakeToCamel(snakeStr)).toBe(camelStr);
   });
 
+  it('Camel <- Snake skips first char "_"', () => {
+    const camelStr = '_camelToSnake';
+    const snakeStr = '_camel_to_snake';
+    expect(snakeToCamel(snakeStr)).toBe(camelStr);
+  });
+
   it('Camel-Snake Objects', () => {
     const camelObj = { camelToSnake: { camelToSnake: null } };
     const snakeObj = { camel_to_snake: { camel_to_snake: null } };
