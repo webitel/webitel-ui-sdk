@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.8.7</h1>
+          <h1>Webitel UI SDK v. 0.8.11</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -32,6 +32,7 @@ export default {
         this.filtersNav,
         this.localeNav,
         this.directivesNav,
+        this.enumsNav,
         this.mixinsNav,
         this.modulesNav,
         this.scriptsNav,
@@ -301,6 +302,35 @@ export default {
         value: 'locale',
         route: '/locale',
         // subNav: [],
+      };
+    },
+    enumsNav() {
+      return {
+        name: 'Enums',
+        value: 'enums',
+        route: '/enums',
+        subNav: [
+          {
+            name: 'Agent Status',
+            value: 'agent-status',
+            route: 'agent-status',
+          },
+          {
+            name: 'Webitel Applications',
+            value: 'webitel-applications',
+            route: 'webitel-applications',
+          },
+          {
+            name: 'Supervisor Sections',
+            value: 'supervisor-sections',
+            route: 'supervisor-sections',
+          },
+          {
+            name: 'Admin Sections',
+            value: 'admin-sections',
+            route: 'admin-sections',
+          },
+        ],
       };
     },
     directivesNav() {
