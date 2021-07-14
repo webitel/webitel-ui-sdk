@@ -11,6 +11,7 @@ export default {
     export: 'Export',
     true: 'True',
     delete: 'Delete',
+    search: 'Search',
   },
   // date-related texts
   date: {
