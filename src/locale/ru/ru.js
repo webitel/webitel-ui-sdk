@@ -11,6 +11,7 @@ export default {
     export: 'Экспорт',
     true: 'Да',
     delete: 'Удалить',
+    search: 'Поиск',
   },
   // date-related texts
   date: {
@@ -74,7 +75,7 @@ export default {
       expandFilters: 'Раскрыть фильтры',
     },
     tableColumnSelect: {
-      title: 'Выберите отоброжаемые колонки',
+      title: 'Выберите отображаемые колонки',
     },
     statusSelect: {
       online: 'Онлайн',
