@@ -18,13 +18,13 @@
         <ul class="wt-app-navigator__nav">
 
           <li
-            v-if="apps.agent"
+            v-if="formattedApps.agent"
             class="wt-app-navigator__card"
-            :class="{'active': currentApp === 'agent'}"
+            :class="{'active': formattedApps.agent.currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="apps.agent.href"
+              :href="formattedApps.agent.href"
               :title="$t('webitelUI.appNavigator.agent')"
               target="_blank"
             >
@@ -37,13 +37,13 @@
           </li>
 
           <li
-            v-if="apps.supervisor"
+            v-if="formattedApps.supervisor"
             class="wt-app-navigator__card"
-            :class="{'active': currentApp === 'supervisor'}"
+            :class="{'active': formattedApps.supervisor.currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="apps.supervisor.href"
+              :href="formattedApps.supervisor.href"
               :title="$t('webitelUI.appNavigator.supervisor')"
               target="_blank"
             >
@@ -56,13 +56,13 @@
           </li>
 
           <li
-            v-if="apps.history"
+            v-if="formattedApps.history"
             class="wt-app-navigator__card"
-            :class="{'active': currentApp === 'history'}"
+            :class="{'active': formattedApps.history.currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="apps.history.href"
+              :href="formattedApps.history.href"
               :title="$t('webitelUI.appNavigator.history')"
               target="_blank"
             >
@@ -75,13 +75,13 @@
           </li>
 
           <li
-            v-if="apps.audit"
+            v-if="formattedApps.audit"
             class="wt-app-navigator__card"
-            :class="{'active': currentApp === 'audit'}"
+            :class="{'active': formattedApps.audit.currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="apps.audit.href"
+              :href="formattedApps.audit.href"
               :title="$t('webitelUI.appNavigator.audit')"
               target="_blank"
             >
@@ -94,13 +94,13 @@
           </li>
 
           <li
-            v-if="apps.admin"
+            v-if="formattedApps.admin"
             class="wt-app-navigator__card"
-            :class="{'active': currentApp === 'admin'}"
+            :class="{'active': formattedApps.admin.currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="apps.admin.href"
+              :href="formattedApps.admin.href"
               :title="$t('webitelUI.appNavigator.admin')"
               target="_blank"
             >
@@ -113,13 +113,13 @@
           </li>
 
           <li
-            v-if="apps.grafana && isOnSite"
+            v-if="formattedApps.grafana"
             class="wt-app-navigator__card"
-            :class="{'active': apps.grafana === currentApp}"
+            :class="{'active': formattedApps.grafana.currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="apps.grafana.href"
+              :href="formattedApps.grafana.href"
               :title="$t('webitelUI.appNavigator.grafana')"
               target="_blank"
             >
@@ -150,14 +150,20 @@ export default {
       type: String,
     },
     apps: {
-      type: Object,
-      default: () => ({}),
+      type: Array,
+      default: () => [],
     },
   },
 
   computed: {
-    isOnSite() {
-      return this.$config?.ON_SITE;
+    formattedApps() {
+      return this.apps.reduce((apps, app) => ({
+        ...apps,
+        [app.name]: {
+          ...app,
+          currentApp: this.currentApp === app.name,
+        },
+      }), {});
     },
   },
 
