@@ -89,5 +89,16 @@ export default {
         editActionHint: 'Edit',
       },
     },
+    errorPages: {
+      goBack: 'Go back',
+      page403: {
+        title: 'Access denied',
+        text: 'Sorry, you have not enough privileges to see this page.',
+      },
+      page404: {
+        title: "Looks like you're lost",
+        text: 'Sorry, we can\'t find the page you want.',
+      },
+    },
   },
 };

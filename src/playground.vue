@@ -1,5 +1,8 @@
 <template>
   <div class="playground">
+    <wt-error-page
+      type="403"
+    ></wt-error-page>
     <wt-table
       :headers="table.headers"
       :data="table.data"

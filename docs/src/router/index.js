@@ -55,6 +55,7 @@ import WtTimeInputDocs
 // organisms
 import WtAppHeaderDocs from '../components/pages/components/organisms/wt-app-header/wt-app-header-docs.vue';
 import WtFiltersPanelWrapperDocs from '../components/pages/components/organisms/wt-filters-panel-wrapper/wt-table-actions-docs.vue';
+import WtErrorPageDocs from '../components/pages/components/organisms/wt-error-page/wt-error-page-docs.vue';
 import WtHeadlineDocs from '../components/pages/components/organisms/wt-headline/wt-headline-docs.vue';
 import WtNavigationBarDocs
   from '../components/pages/components/organisms/wt-navigation-bar/wt-navigation-bar-docs.vue';
@@ -319,6 +320,11 @@ const routes = [
         path: 'headline',
         name: 'headline-docs',
         component: WtHeadlineDocs,
+      },
+      {
+        path: 'error-page',
+        name: 'error-page-docs',
+        component: WtErrorPageDocs,
       },
       {
         path: 'navigation-bar',

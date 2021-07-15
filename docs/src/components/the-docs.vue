@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.8.11</h1>
+          <h1>Webitel UI SDK v. 0.8.18</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -223,6 +223,11 @@ export default {
             name: 'Headline',
             value: 'headline',
             route: 'headline',
+          },
+          {
+            name: 'Error page',
+            value: 'error-page',
+            route: 'error-page',
           },
           {
             name: 'Navigation bar',
