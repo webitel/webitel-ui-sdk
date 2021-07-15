@@ -2,7 +2,7 @@
   <section class="enums">
     <h2>Webitel Applications</h2>
     <p><code class="language-javascript">Webitel Applications enum</code> is used for applications identifying across
-      projects.</p>
+      projects. Enum is used in <code class="language-html">wt-app-navigator.vue</code></p>
     <article class="enum">
       <pre><code class="language-javascript">{{ WebitelApplications }}</code></pre>
     </article>

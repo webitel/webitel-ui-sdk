@@ -18,115 +18,115 @@
         <ul class="wt-app-navigator__nav">
 
           <li
-            v-if="formattedApps.agent"
+            v-if="formattedApps[WebitelApplications.AGENT]"
             class="wt-app-navigator__card"
-            :class="{'active': formattedApps.agent.currentApp }"
+            :class="{'active': formattedApps[WebitelApplications.AGENT].currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="formattedApps.agent.href"
-              :title="$t('webitelUI.appNavigator.agent')"
+              :href="formattedApps[WebitelApplications.AGENT].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.AGENT]}`)"
               target="_blank"
             >
               <img
                 class="wt-app-navigator__card__img"
                 src="../../../assets/components/organisms/wt-app-header/app-navigator/app-agent.svg"
-                alt="agent-pic"
+                :alt="`${[WebitelApplications.AGENT]}-pic`"
               >
             </a>
           </li>
 
           <li
-            v-if="formattedApps.supervisor"
+            v-if="formattedApps[WebitelApplications.SUPERVISOR]"
             class="wt-app-navigator__card"
-            :class="{'active': formattedApps.supervisor.currentApp }"
+            :class="{'active': formattedApps[WebitelApplications.SUPERVISOR].currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="formattedApps.supervisor.href"
-              :title="$t('webitelUI.appNavigator.supervisor')"
+              :href="formattedApps[WebitelApplications.SUPERVISOR].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.SUPERVISOR]}`)"
               target="_blank"
             >
               <img
                 class="wt-app-navigator__card__img"
                 src="../../../assets/components/organisms/wt-app-header/app-navigator/app-supervisor.svg"
-                alt="supervisor-pic"
+                :alt="`${[WebitelApplications.SUPERVISOR]}-pic`"
               >
             </a>
           </li>
 
           <li
-            v-if="formattedApps.history"
+            v-if="formattedApps[WebitelApplications.HISTORY]"
             class="wt-app-navigator__card"
-            :class="{'active': formattedApps.history.currentApp }"
+            :class="{'active': formattedApps[WebitelApplications.HISTORY].currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="formattedApps.history.href"
-              :title="$t('webitelUI.appNavigator.history')"
+              :href="formattedApps[WebitelApplications.HISTORY].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.HISTORY]}`)"
               target="_blank"
             >
               <img
                 class="wt-app-navigator__card__img"
                 src="../../../assets/components/organisms/wt-app-header/app-navigator/app-history.svg"
-                alt="history-pic"
+                :alt="`${[WebitelApplications.HISTORY]}-pic`"
               >
             </a>
           </li>
 
           <li
-            v-if="formattedApps.audit"
+            v-if="formattedApps[WebitelApplications.AUDIT]"
             class="wt-app-navigator__card"
-            :class="{'active': formattedApps.audit.currentApp }"
+            :class="{'active': formattedApps[WebitelApplications.AUDIT].currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="formattedApps.audit.href"
-              :title="$t('webitelUI.appNavigator.audit')"
+              :href="formattedApps[WebitelApplications.AUDIT].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.AUDIT]}`)"
               target="_blank"
             >
               <img
                 class="wt-app-navigator__card__img"
                 src="../../../assets/components/organisms/wt-app-header/app-navigator/app-audit.svg"
-                alt="audit-pic"
+                :alt="`${[WebitelApplications.AUDIT]}-pic`"
               >
             </a>
           </li>
 
           <li
-            v-if="formattedApps.admin"
+            v-if="formattedApps[WebitelApplications.ADMIN]"
             class="wt-app-navigator__card"
-            :class="{'active': formattedApps.admin.currentApp }"
+            :class="{'active': formattedApps[WebitelApplications.ADMIN].currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="formattedApps.admin.href"
-              :title="$t('webitelUI.appNavigator.admin')"
+              :href="formattedApps[WebitelApplications.ADMIN].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.ADMIN]}`)"
               target="_blank"
             >
               <img
                 class="wt-app-navigator__card__img"
                 src="../../../assets/components/organisms/wt-app-header/app-navigator/app-admin.svg"
-                alt="admin-pic"
+                :alt="`${[WebitelApplications.ADMIN]}-pic`"
               >
             </a>
           </li>
 
           <li
-            v-if="formattedApps.grafana"
+            v-if="formattedApps[WebitelApplications.ANALYTICS]"
             class="wt-app-navigator__card"
-            :class="{'active': formattedApps.grafana.currentApp }"
+            :class="{'active': formattedApps[WebitelApplications.ANALYTICS].currentApp }"
           >
             <a
               class="wt-app-navigator__card__link"
-              :href="formattedApps.grafana.href"
-              :title="$t('webitelUI.appNavigator.grafana')"
+              :href="formattedApps[WebitelApplications.ANALYTICS].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.ANALYTICS]}`)"
               target="_blank"
             >
               <img
                 class="wt-app-navigator__card__img"
                 src="../../../assets/components/organisms/wt-app-header/app-navigator/app-analytics.svg"
-                alt="grafana-pic"
+                :alt="`${[WebitelApplications.ANALYTICS]}-pic`"
               >
             </a>
           </li>
@@ -138,10 +138,12 @@
 </template>
 
 <script>
+import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum';
 
 export default {
   name: 'wt-app-navigator',
   data: () => ({
+    WebitelApplications,
     isOpened: false,
   }),
 
