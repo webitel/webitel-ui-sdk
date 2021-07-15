@@ -1,11 +1,12 @@
 import { shallowMount } from '@vue/test-utils';
+import WebitelApplications from '../../../../enums/WebitelApplications/WebitelApplications.enum';
 import WtAppNavigator from '../wt-app-navigator.vue';
 
-const apps = {
-  admin: { href: '' },
-  agent: { href: '' },
-  history: { href: '' },
-};
+const apps = [
+  { name: WebitelApplications.ADMIN, href: '' },
+  { name: WebitelApplications.HISTORY, href: '' },
+  { name: WebitelApplications.SUPERVISOR, href: '' },
+];
 describe('WtAppNavigator', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(WtAppNavigator);

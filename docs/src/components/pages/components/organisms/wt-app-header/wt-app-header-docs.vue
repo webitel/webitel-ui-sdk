@@ -61,18 +61,19 @@
 
 <script>
 import Prism from 'prismjs';
+import WebitelApplications from '../../../../../../../src/enums/WebitelApplications/WebitelApplications.enum';
 
 export default {
   name: 'wt-app-header-docs',
   data: () => ({
-    apps: {
-      agent: { href: 'https://example.com' },
-      supervisor: { href: 'https://example.com' },
-      history: { href: 'https://example.com' },
-      audit: { href: 'https://example.com' },
-      admin: { href: 'https://example.com' },
-      grafana: { href: 'https://example.com' },
-    },
+    apps: [
+      { name: WebitelApplications.AGENT, href: 'https://example.com' },
+      { name: WebitelApplications.AUDIT, href: 'https://example.com' },
+      { name: WebitelApplications.SUPERVISOR, href: 'https://example.com' },
+      { name: WebitelApplications.ADMIN, href: 'https://example.com' },
+      { name: WebitelApplications.HISTORY, href: 'https://example.com' },
+      { name: WebitelApplications.ANALYTICS, href: 'https://example.com' },
+    ],
     user: {
       name: 'My name',
       preferredUsername: 'My username',
@@ -96,9 +97,9 @@ export default {
       },
       {
         value: 'apps',
-        code: '<wt-app-navigator :apps="{admin: {href: `dev.webitel.com/admin`}}"></wt-app-navigator>',
-        type: 'Object',
-        default: '{}',
+        code: '<wt-app-navigator :apps="[{name: WebitelApplications.ADMIN, href: `dev.webitel.com/admin`}]"></wt-app-navigator>',
+        type: 'Array',
+        default: '[]',
         description: 'Available apps with its links',
       },
     ],

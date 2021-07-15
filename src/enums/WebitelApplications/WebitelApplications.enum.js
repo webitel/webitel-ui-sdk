@@ -1,6 +1,6 @@
 const WebitelApplications = Object.freeze({
   ADMIN: 'admin',
-  WORKSPACE: 'agent',
+  AGENT: 'agent',
   SUPERVISOR: 'supervisor',
   HISTORY: 'history',
   AUDIT: 'audit',
