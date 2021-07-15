@@ -3,7 +3,7 @@ export default {
   reusable: {
     total: 'Всього',
     ok: 'Ок',
-    Save: 'Зберегти',
+    save: 'Зберегти',
     close: 'Закрити',
     add: 'Додати',
     cancel: 'Відмінити',
