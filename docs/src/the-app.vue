@@ -13,5 +13,6 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import './css/main.scss';
 </style>

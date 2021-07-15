@@ -81,6 +81,12 @@ import LocaleDocs from '../components/pages/locale/locale-docs.vue';
 import DirectivesDocs from '../components/pages/directives/directives-docs.vue';
 import ClickawayDirectiveDocs from '../components/pages/directives/clickaway-directive/clickaway-directive-docs.vue';
 
+import EnumsDocs from '../components/pages/enums/enums-docs.vue';
+import AgentStatusEnumDocs from '../components/pages/enums/agent-status/agent-status-enum-docs.vue';
+import WebitelApplicationsEnumDocs from '../components/pages/enums/webitel-applications/webitel-applications-enum-docs.vue';
+import SupevisorSectionsEnumDocs from '../components/pages/enums/supervisor-sections/supervisor-sections-enum-docs.vue';
+import AdminSectionsEnumDocs from '../components/pages/enums/admin-sections/admin-sections-enum-docs.vue';
+
 import MixinsDocs from '../components/pages/mixins/mixins-docs.vue';
 import ValidationMixinDocs from '../components/pages/mixins/validation-mixin/validation-mixin-docs.vue';
 
@@ -394,6 +400,33 @@ const routes = [
         path: 'clickaway',
         name: 'clickaway',
         component: ClickawayDirectiveDocs,
+      },
+    ],
+  },
+  {
+    path: '/enums',
+    name: 'enums',
+    component: EnumsDocs,
+    children: [
+      {
+        path: 'agent-status',
+        name: 'agent-status',
+        component: AgentStatusEnumDocs,
+      },
+      {
+        path: 'webitel-applications',
+        name: 'webitel-applications',
+        component: WebitelApplicationsEnumDocs,
+      },
+      {
+        path: 'supervisor-sections',
+        name: 'supervisor-sections',
+        component: SupevisorSectionsEnumDocs,
+      },
+      {
+        path: 'admin-sections',
+        name: 'admin-sections',
+        component: AdminSectionsEnumDocs,
       },
     ],
   },

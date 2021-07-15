@@ -4,6 +4,7 @@
     debounce
     @input="setValue({ filter: filterQuery, value: $event })"
     @search="setValueToQuery({ filter: filterQuery, value: $event })"
+    :placeholder="$t('reusable.search')"
   />
 </template>
 
