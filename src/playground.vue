@@ -1,7 +1,7 @@
 <template>
   <div class="playground">
     <wt-error-page
-      type="403"
+      type="404"
     ></wt-error-page>
     <wt-table
       :headers="table.headers"

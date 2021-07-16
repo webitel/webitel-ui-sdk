@@ -13,36 +13,39 @@
     <component-props
       :properties="properties"
     ></component-props>
+    <component-events
+      :events="events"
+    ></component-events>
   </section>
 </template>
 
 <script>
-  import Prism from 'prismjs';
+import Prism from 'prismjs';
 
-  export default {
-    name: 'wt-error-page-docs',
-    data: () => ({
-      properties: [
-        {
-          name: 'type',
-          code: '<wt-error-page type="404"></wt-error-page>',
-          required: true,
-          type: String,
-          options: ['404', '403'],
-          description: 'Error type',
-        },
-        {
-          name: 'back',
-          code: '<wt-error-page back="() => {]"></wt-error-page>',
-          type: Function,
-          description: 'Callback that should be called at "go back" button',
-        },
-      ],
-    }),
-    mounted() {
-      Prism.highlightAll();
-    },
-  };
+export default {
+  name: 'wt-error-page-docs',
+  data: () => ({
+    properties: [
+      {
+        name: 'type',
+        code: '<wt-error-page type="404"></wt-error-page>',
+        required: true,
+        type: String,
+        options: ['404', '403'],
+        description: 'Error type',
+      },
+    ],
+    events: [
+      {
+        name: 'back',
+        description: '"back" button click event',
+      },
+    ],
+  }),
+  mounted() {
+    Prism.highlightAll();
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -10,9 +10,8 @@
         class="wt-error-page__title">{{ errorTitle }}</h2>
       <p class="wt-error-page__text">{{ errorText }}</p>
       <wt-button
-        v-if="back"
         class="wt-error-page__action"
-        @click.native="back"
+        @click="$emit('back')"
       >{{ $t('webitelUI.errorPages.goBack') }}
       </wt-button>
     </article>
@@ -30,9 +29,6 @@ export default {
       type: String,
       required: true,
       options: ['403', '404'],
-    },
-    back: {
-      type: Function,
     },
   },
   computed: {
