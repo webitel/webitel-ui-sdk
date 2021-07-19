@@ -24,6 +24,14 @@ export default {
       required: true,
     },
   },
+  // computed: {
+  //   options() {
+  //     return this.filterSchema.options.map((item) => ({
+  //       ...item,
+  //         name: typeof item.locale === 'string' ? this.$t(item.locale) : this.$t(...item.locale),
+  //     }));
+  //   },
+  // },
 };
 </script>
 

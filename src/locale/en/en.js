@@ -37,6 +37,15 @@ export default {
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
   },
+  filters: {
+    timeFilter: {
+      sixHours: '6 hour',
+      threeHours: '3 hour',
+      oneHour: '1 hour',
+      thirtyMinutes: '30 min',
+      fifteenMinutes: '15 min',
+    },
+  },
   webitelUI: {
     timepicker: {
       hour: 'Hour:',

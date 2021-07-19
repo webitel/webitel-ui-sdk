@@ -37,6 +37,15 @@ export default {
     sameAs: 'Неверный пароль',
     requiredArrayValue: 'Поле не должно быть пустым',
   },
+  filters: {
+    timeFilter: {
+      sixHours: '6 часов',
+      threeHours: '3 часа',
+      oneHour: '1 час',
+      thirtyMinutes: '30 мин',
+      fifteenMinutes: '15 мин',
+    },
+  },
   webitelUI: {
     timepicker: {
       hour: 'Час:',
