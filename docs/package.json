@@ -12,6 +12,7 @@
     "@webitel/ui-sdk": "^0.8.20",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
+    "deepmerge": "^4.2.2",
     "file-saver": "^2.0.2",
     "plyr": "^3.6.2",
     "prismjs": "^1.20.0",

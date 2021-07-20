@@ -1,3 +1,7 @@
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
@@ -23,6 +27,50 @@ export default {
     supervisor: 'Supervisor | Supervisors',
     auditor: 'Auditor | Auditors',
     region: 'Region | Regions',
+  },
+  // describes Webitel FRONTEND applications + their navs
+  WebitelApplications: {
+    [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
+    [WebitelApplications.AUDIT]: { name: 'Audit' },
+    [WebitelApplications.HISTORY]: { name: 'Call History' },
+    [WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
+    [WebitelApplications.SUPERVISOR]: {
+      name: 'Supervisor Workspace',
+      sections: {
+        [SupervisorSections.QUEUES]: 'Queues',
+        [SupervisorSections.AGENTS]: 'Agents',
+        [SupervisorSections.ACTIVE_CALLS]: 'Active calls',
+      },
+    },
+    [WebitelApplications.ADMIN]: {
+      name: 'Admin',
+      sections: {
+        [AdminSections.USERS]: 'Users',
+        [AdminSections.LICENSE]: 'License',
+        [AdminSections.DEVICES]: 'Devices',
+        [AdminSections.FLOW]: 'Flow',
+        [AdminSections.DIALPLAN]: 'Dialplan',
+        [AdminSections.GATEWAYS]: 'Gateways',
+        [AdminSections.SKILLS]: 'Agent skills',
+        [AdminSections.BUCKETS]: 'Buckets',
+        [AdminSections.MEDIA]: 'Media files',
+        [AdminSections.BLACKLIST]: 'Call list',
+        [AdminSections.CALENDARS]: 'Calendars',
+        [AdminSections.REGIONS]: 'Location',
+        [AdminSections.COMMUNICATIONS]: 'Communication types',
+        [AdminSections.PAUSE_CAUSE]: 'Agent statuses',
+        [AdminSections.AGENTS]: 'Agents',
+        [AdminSections.TEAMS]: 'Teams',
+        [AdminSections.RESOURCES]: 'Resources',
+        [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
+        [AdminSections.QUEUES]: 'Queues',
+        [AdminSections.STORAGE]: 'Storage',
+        [AdminSections.MEDIA]: 'Media',
+        [AdminSections.BLACKLIST]: 'Call lists',
+        [AdminSections.ROLES]: 'Roles',
+        [AdminSections.OBJECTS]: 'Objects',
+      },
+    },
   },
   validation: {
     required: 'Field is required',

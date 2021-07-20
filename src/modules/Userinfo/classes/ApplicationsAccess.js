@@ -1,0 +1,166 @@
+import deepmerge from 'deepmerge';
+import deepCopy from 'deep-copy';
+import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum';
+import SupervisorSections from '../../../enums/WebitelApplications/SupervisorSections.enum';
+import AdminSections from '../../../enums/WebitelApplications/AdminSections.enum';
+
+const applicationsAccess = (value = true) => ({
+  [WebitelApplications.AGENT]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WebitelApplications.AGENT}.name`,
+  },
+  [WebitelApplications.HISTORY]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WebitelApplications.HISTORY}.name`,
+  },
+  [WebitelApplications.ANALYTICS]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WebitelApplications.ANALYTICS}.name`,
+  },
+  [WebitelApplications.SUPERVISOR]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.name`,
+    [SupervisorSections.QUEUES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.sections.${SupervisorSections.QUEUES}`,
+    },
+    [SupervisorSections.AGENTS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.sections.${SupervisorSections.AGENTS}`,
+    },
+    [SupervisorSections.ACTIVE_CALLS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.sections.${SupervisorSections.ACTIVE_CALLS}`,
+    },
+  },
+  [WebitelApplications.ADMIN]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WebitelApplications.ADMIN}.name`,
+    [AdminSections.LICENSE]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.LICENSE}`,
+    },
+    [AdminSections.USERS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.USERS}`,
+    },
+    [AdminSections.DEVICES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.DEVICES}`,
+    },
+    [AdminSections.FLOW]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.FLOW}`,
+    },
+    [AdminSections.DIALPLAN]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.DIALPLAN}`,
+    },
+    [AdminSections.GATEWAYS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.GATEWAYS}`,
+    },
+    [AdminSections.SKILLS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SKILLS}`,
+    },
+    [AdminSections.BUCKETS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.BUCKETS}`,
+    },
+    [AdminSections.BLACKLIST]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.BLACKLIST}`,
+    },
+    [AdminSections.REGIONS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.REGIONS}`,
+    },
+    [AdminSections.CALENDARS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CALENDARS}`,
+    },
+    [AdminSections.COMMUNICATIONS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.COMMUNICATIONS}`,
+    },
+    [AdminSections.PAUSE_CAUSE]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.PAUSE_CAUSE}`,
+    },
+    [AdminSections.MEDIA]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.MEDIA}`,
+    },
+    [AdminSections.AGENTS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.AGENTS}`,
+    },
+    [AdminSections.TEAMS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.TEAMS}`,
+    },
+    [AdminSections.RESOURCES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.RESOURCES}`,
+    },
+    [AdminSections.RESOURCE_GROUPS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.RESOURCE_GROUPS}`,
+    },
+    [AdminSections.QUEUES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.QUEUES}`,
+    },
+    [AdminSections.STORAGE]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.STORAGE}`,
+    },
+    [AdminSections.ROLES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.ROLES}`,
+    },
+    [AdminSections.OBJECTS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.OBJECTS}`,
+    },
+  },
+});
+
+/**
+ */
+export default class ApplicationsAccess {
+  // value param could be passed to set same value for all options
+  constructor({ access, value } = { value: true }) {
+    /* if access, deeply merge with falsy values schema
+     if no access, "not configured => full permissions" */
+    this.access = access ? ApplicationsAccess.restore(access) : applicationsAccess(value);
+  }
+
+  getAccess() {
+    return this.access;
+  }
+
+  // minify schema for API sending
+  static minify(access) {
+    const rmEmptyKeys = (obj) => {
+      Object.keys(obj).forEach((key) => {
+        // eslint-disable-next-line no-param-reassign
+        if (!obj[key] || key === '_locale') delete obj[key];
+        if (typeof obj[key] === 'object') {
+          rmEmptyKeys(obj[key]);
+          // eslint-disable-next-line no-param-reassign
+          if (!Object.keys(obj[key]).length) delete obj[key];
+        }
+      });
+      return obj;
+    };
+    return rmEmptyKeys(deepCopy(access));
+  }
+
+  // restore minified schema from API response
+  static restore(access) {
+    return deepmerge(applicationsAccess(false), access);
+    // return deepmerge(access, applicationsAccess(false));
+  }
+}
