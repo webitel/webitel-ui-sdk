@@ -174,6 +174,7 @@ export default {
         align-items: center;
         padding: var(--tags-input-padding);
         margin: 0; // reset default
+        word-break: break-word; //break long word
       }
 
       .ti-new-tag-input-wrapper {
@@ -195,7 +196,7 @@ export default {
         @extend %typo-body-lg;
         height: fit-content;
         padding: var(--tags-input-padding);
-        margin: 0 var(--tags-input-tag-spacing-margin) 0 0;  // reset default
+        margin: 0 var(--tags-input-tag-spacing-margin) var(--tags-input-tag-spacing-margin) 0;  // reset default
         color: var(--tags-input-tag-text-color);
         background: var(--tags-input-tag-bg-color);
         border-radius: var(--tags-input-tag-border-radius);
