@@ -39,7 +39,7 @@ export default class BaseStoreModule {
             } = {}) {
     return {
       namespaced,
-      state: { ...this.state, state },
+      state: { ...this.state, ...state },
       getters: { ...this.getters, ...getters },
       actions: { ...this.actions, ...actions },
       mutations: { ...this.mutations, ...mutations },
