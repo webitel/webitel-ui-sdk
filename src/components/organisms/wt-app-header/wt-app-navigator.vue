@@ -75,7 +75,7 @@
           </li>
 
           <li
-            v-if="formattedApps[WebitelApplications.AUDIT]"
+            v-if="false && formattedApps[WebitelApplications.AUDIT]"
             class="wt-app-navigator__card"
             :class="{'active': formattedApps[WebitelApplications.AUDIT].currentApp }"
           >

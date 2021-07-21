@@ -23,7 +23,8 @@ export default class UserinfoStoreModule extends BaseStoreModule {
   }
 
   getters = {
-    CHECK_APP_ACCESS: (state) => (app) => state.access[app]?._enabled,
+    // if no access[app] => accessed by default
+    CHECK_APP_ACCESS: (state) => (app) => !state.access[app] || state.access[app]?._enabled,
     CHECK_OBJECT_ACCESS: (state, getters) => ({ name, route }) => {
       if (!state.access.admin || !state.access.admin._enabled) return false;
       if (route) return getters.CHECK_OBJECT_ACCESS_BY_ROUTE(route);
