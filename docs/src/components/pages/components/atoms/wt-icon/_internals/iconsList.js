@@ -76,6 +76,8 @@ export default [
   'icon-rounded-tick--md',
   'icon-attention--md',
 
+  'icon-widget-occupancy--sm',
+  'icon-widget-utilization--sm',
   'icon-widget-missed--sm',
   'icon-widget-handles--sm',
   'icon-widget-inbound--sm',

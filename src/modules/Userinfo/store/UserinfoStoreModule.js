@@ -23,19 +23,20 @@ export default class UserinfoStoreModule extends BaseStoreModule {
   }
 
   getters = {
+    THIS_APP: (state) => state.thisApp,
     // if no access[app] => accessed by default
     CHECK_APP_ACCESS: (state) => (app) => !state.access[app] || state.access[app]?._enabled,
     CHECK_OBJECT_ACCESS: (state, getters) => ({ name, route }) => {
-      if (!state.access.admin || !state.access.admin._enabled) return false;
+      if (!state.access[getters.THIS_APP] || !state.access._enabled) return false;
       if (route) return getters.CHECK_OBJECT_ACCESS_BY_ROUTE(route);
       return getters.CHECK_OBJECT_ACCESS_BY_NAME(name);
     },
-    CHECK_OBJECT_ACCESS_BY_NAME: (state) => (name) => (
-      state.access.admin[name]?._enabled
+    CHECK_OBJECT_ACCESS_BY_NAME: (state, getters) => (name) => (
+      state.access[getters.THIS_APP][name]?._enabled
     ),
-    CHECK_OBJECT_ACCESS_BY_ROUTE: (state) => (route) => {
-      const accessKey = Object.keys(state.access.admin).find((object) => route.name.includes(object));
-      return state.access.admin[accessKey]?._enabled;
+    CHECK_OBJECT_ACCESS_BY_ROUTE: (state, getters) => (route) => {
+      const accessKey = Object.keys(state.access[getters.THIS_APP]).find((object) => route.name.includes(object));
+      return state.access[getters.THIS_APP][accessKey]?._enabled;
     },
   }
 
