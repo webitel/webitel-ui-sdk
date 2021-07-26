@@ -27,7 +27,7 @@ export default class UserinfoStoreModule extends BaseStoreModule {
     // if no access[app] => accessed by default
     CHECK_APP_ACCESS: (state) => (app) => !state.access[app] || state.access[app]?._enabled,
     CHECK_OBJECT_ACCESS: (state, getters) => ({ name, route }) => {
-      if (!state.access[getters.THIS_APP] || !state.access._enabled) return false;
+      if (!state.access[getters.THIS_APP] || !state.access[getters.THIS_APP]._enabled) return false;
       if (route) return getters.CHECK_OBJECT_ACCESS_BY_ROUTE(route);
       return getters.CHECK_OBJECT_ACCESS_BY_NAME(name);
     },
@@ -41,7 +41,6 @@ export default class UserinfoStoreModule extends BaseStoreModule {
   }
 
   actions = {
-    REDIRECT_TO_AUTH: () => {}, // should be overridden with router.replace('/auth');
     BEFORE_OPEN_SESSION_HOOK: () => {},
     AFTER_OPEN_SESSION_HOOK: () => {},
     CONVERT_USER_SCOPE: (context, scope) => scope,
@@ -49,10 +48,11 @@ export default class UserinfoStoreModule extends BaseStoreModule {
 
     OPEN_SESSION: async (context) => {
       await context.dispatch('BEFORE_OPEN_SESSION_HOOK');
-      if (!localStorage.getItem('access-token')) {
-        context.dispatch('REDIRECT_TO_AUTH');
-        throw new Error('No access-token in localStorage');
-      }
+      // !!! it should be checked in router.js beforeEach hook
+      // if (!localStorage.getItem('access-token')) {
+      //   context.dispatch('REDIRECT_TO_AUTH');
+      //   throw new Error('No access-token in localStorage');
+      // }
       const session = await userinfo.getSession();
       await context.dispatch('SET_SESSION', session);
       const access = await userinfo.getApplicationsAccess();

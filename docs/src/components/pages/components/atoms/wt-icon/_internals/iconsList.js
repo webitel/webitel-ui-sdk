@@ -1,4 +1,5 @@
 export default [
+  'icon-lock--md',
   'icon-role--md',
   'icon-user--md',
   'icon-move--md',
