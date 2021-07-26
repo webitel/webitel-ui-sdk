@@ -20,7 +20,7 @@
 
 <script>
 import pic403 from '../../../assets/components/organisms/wt-error-page/403.svg';
-import pic404 from '../../../assets/components/organisms/wt-error-page/404.png';
+import pic404 from '../../../assets/components/organisms/wt-error-page/404.svg';
 
 export default {
   name: 'wt-error-page',
