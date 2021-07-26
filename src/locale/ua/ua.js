@@ -16,6 +16,7 @@ export default {
     true: 'Так',
     delete: 'Видалити',
     search: 'Пошук',
+    open: 'Відкрити',
   },
   // date-related texts
   date: {
