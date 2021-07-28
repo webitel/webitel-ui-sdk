@@ -1,10 +1,20 @@
 :root {
-  --scrollbar-width: 8px;
-  --scrollbar-height: 8px;
-  --scrollbar-thumb-width: 8px;
-  --scrollbar-bg-color: var(--main-ouline-color);
-  --scrollbar-thumb-color: var(--main-accent-color);
-  --scrollbar-border-radius: 7px;
+  //--scrollbar-width: 5px;
+  //--scrollbar-height: 5px;
+  //--scrollbar-thumb-width: 5px;
+  //--scrollbar-bg-color: var(--main-color);
+  //--scrollbar-thumb-color: var(--secondary-color);
+  //--scrollbar-border-radius: var(--border-radius);
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-height);
+    background-color: var(--main-color);
+  }
+  ::-webkit-scrollbar-thumb {
+    width: var(--scrollbar-width);
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+  }
 }
 
 %wt-scrollbar {
