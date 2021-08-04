@@ -4,6 +4,7 @@
     :class="{
       'wt-time-input--outline': outline,
       'wt-time-input--disabled': disabled,
+      'wt-time-input--invalid': invalid,
     }"
   >
     <wt-label
@@ -11,6 +12,7 @@
       :for="name"
       :outline="outline"
       :disabled="disabled"
+      :invalid="invalid"
       v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
@@ -28,12 +30,20 @@
         v-on="listeners"
       >
     </div>
+    <wt-input-info
+      v-if="showInfo"
+      :invalid="invalid"
+    >{{ validationText }}
+    </wt-input-info>
   </div>
 </template>
 
 <script>
+import validationMixin from '../../../mixins/validationMixin/validationMixin';
+
   export default {
     name: 'wt-time-input',
+    mixins: [validationMixin],
     props: {
       /**
        * Current input value (`v-model`)
@@ -88,6 +98,15 @@
         type: Object,
         description: 'Object with props, passed down to wt-label as props',
       },
+
+      v: {
+        type: Object,
+      },
+
+      showInvalidInfo: {
+        type: Boolean,
+        default: false,
+      },
     },
     computed: {
       hasLabel() {
@@ -98,6 +117,9 @@
           ...this.$listeners,
           input: (event) => this.$emit('input', event.target.value),
         };
+      },
+      showInfo() {
+        return this.isValidation && this.showInvalidInfo;
       },
     },
   };
@@ -125,6 +147,11 @@
     .wt-time-input:hover &,
     .wt-time-input:focus-within & {
       color: var(--form-label--hover-color);
+    }
+
+    .wt-time-input--invalid:hover &,
+    .wt-time-input--invalid:focus-within & {
+      color: var(--label--invalid-color);
     }
   }
 
@@ -158,6 +185,12 @@
     .wt-time-input--disabled & {
       background: var(--form-border--disabled-color);
       border-color: var(--form-border--disabled-color);
+    }
+
+    .wt-time-input--invalid &,
+    .wt-time-input--invalid:hover & {
+      border-color: var(--false-color);
+      outline: none; // prevent outline overlapping false color
     }
   }
 </style>
