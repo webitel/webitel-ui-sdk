@@ -118,9 +118,6 @@ import validationMixin from '../../../mixins/validationMixin/validationMixin';
         return this.isValidation && this.hideInputInfo;
       },
     },
-    mounted() {
-      console.log(this.hideInputInfo);
-    },
   };
 </script>
 

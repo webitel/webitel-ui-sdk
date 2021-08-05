@@ -15,7 +15,7 @@
         :label="label ? null : $t('webitelUI.timepicker.hour') "
         :maxValue="dateMode ? null : 23"
         :disabled="disabled"
-        :hideInputInfo="true"
+        hide-input-info
       ></wt-time-input>
       <wt-time-input
         v-if="isMin"
@@ -24,7 +24,7 @@
         :label="label ? null : $t('webitelUI.timepicker.min')"
         :maxValue="59"
         :disabled="disabled"
-        :hideInputInfo="true"
+        hide-input-info
       ></wt-time-input>
       <wt-time-input
         v-if="isSec"
@@ -33,7 +33,7 @@
         :label="label ? null :  $t('webitelUI.timepicker.sec')"
         :maxValue="59"
         :disabled="disabled"
-        :hideInputInfo="true"
+        hide-input-info
       ></wt-time-input>
     </div>
     <wt-input-info
