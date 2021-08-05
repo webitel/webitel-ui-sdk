@@ -15,7 +15,7 @@
         :label="label ? null : $t('webitelUI.timepicker.hour') "
         :maxValue="dateMode ? null : 23"
         :disabled="disabled"
-        :showInvalidInfo="false"
+        :hideInputInfo="true"
       ></wt-time-input>
       <wt-time-input
         v-if="isMin"
@@ -24,7 +24,7 @@
         :label="label ? null : $t('webitelUI.timepicker.min')"
         :maxValue="59"
         :disabled="disabled"
-        :showInvalidInfo="false"
+        :hideInputInfo="true"
       ></wt-time-input>
       <wt-time-input
         v-if="isSec"
@@ -33,11 +33,11 @@
         :label="label ? null :  $t('webitelUI.timepicker.sec')"
         :maxValue="59"
         :disabled="disabled"
-        :showInvalidInfo="false"
+        :hideInputInfo="true"
       ></wt-time-input>
     </div>
     <wt-input-info
-      v-if="showValidation"
+      v-if="isValidation"
       :invalid="invalid"
     >{{ validationText }}
     </wt-input-info>
@@ -77,9 +77,6 @@ export default {
     labelProps: {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
-    },
-    v: {
-      type: Object,
     },
   },
   model: {
@@ -135,9 +132,6 @@ export default {
           : this.value - this.sec + +value;
         this.$emit('input', newValue);
       },
-    },
-    showValidation() {
-      return this.isValidation && this.invalid;
     },
   },
 

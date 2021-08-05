@@ -99,11 +99,7 @@ import validationMixin from '../../../mixins/validationMixin/validationMixin';
         description: 'Object with props, passed down to wt-label as props',
       },
 
-      v: {
-        type: Object,
-      },
-
-      showInvalidInfo: {
+      hideInputInfo: {
         type: Boolean,
         default: false,
       },
@@ -119,8 +115,11 @@ import validationMixin from '../../../mixins/validationMixin/validationMixin';
         };
       },
       showInfo() {
-        return this.isValidation && this.showInvalidInfo;
+        return this.isValidation && this.hideInputInfo;
       },
+    },
+    mounted() {
+      console.log(this.hideInputInfo);
     },
   };
 </script>
