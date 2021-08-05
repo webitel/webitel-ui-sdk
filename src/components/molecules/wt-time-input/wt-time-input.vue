@@ -115,7 +115,7 @@ import validationMixin from '../../../mixins/validationMixin/validationMixin';
         };
       },
       showInfo() {
-        return this.isValidation && this.hideInputInfo;
+        return this.isValidation && !this.hideInputInfo;
       },
     },
   };
