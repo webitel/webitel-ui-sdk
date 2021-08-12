@@ -26,8 +26,7 @@
       :placeholder="placeholder || label"
       :add-only-from-autocomplete="addOnlyFromAutocomplete"
       :autocomplete-filter-duplicates="autocompleteFilterDuplicates"
-      @input="searchTags"
-      @tags-changed="changeTags"
+      v-on="listeners"
     >
       <template slot="tag-actions" slot-scope="{ index, performDelete }">
         <wt-icon-btn
@@ -126,6 +125,14 @@ export default {
           ...item,
         }))
         .filter((item) => item.text?.includes(this.input));
+    },
+
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.searchTags,
+        'tags-changed': this.changeTags,
+      };
     },
   },
 
