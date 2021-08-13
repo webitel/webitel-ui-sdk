@@ -10,6 +10,7 @@ const AdminSections = Object.freeze({
   FLOW: 'flow',                          // scope: flow
   DIALPLAN: 'dialplan',                  // scope: acr_routing
   GATEWAYS: 'gateways',                  // scope: gateways
+  CHAT_GATEWAYS: 'chat-gateways',        // scope: chats
 
   // LOOKUPS
   BLACKLIST: 'blacklist',                // scope: cc_list
