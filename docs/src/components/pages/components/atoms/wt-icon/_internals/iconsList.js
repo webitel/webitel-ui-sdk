@@ -1,4 +1,9 @@
 export default [
+  'icon-messenger-telegram--md',
+  'icon-messenger-facebook--md',
+  'icon-messenger-viber--md',
+  'icon-messenger-web-chat--md',
+  'icon-messenger-whatsapp--md',
   'icon-lock--md',
   'icon-role--md',
   'icon-user--md',
