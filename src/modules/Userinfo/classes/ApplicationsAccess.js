@@ -60,6 +60,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.GATEWAYS}`,
     },
+    [AdminSections.CHAT_GATEWAYS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CHAT_GATEWAYS}`,
+    },
     [AdminSections.SKILLS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SKILLS}`,
