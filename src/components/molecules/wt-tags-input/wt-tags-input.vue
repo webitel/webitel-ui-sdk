@@ -162,7 +162,8 @@ export default {
   }
 }
 
-.wt-tags-input__tags-input {
+// increase specificity
+.wt-tags-input .wt-tags-input__tags-input {
   width: 100%;
   max-width: 100%; // reset default
 
@@ -269,7 +270,7 @@ export default {
 }
 
 .wt-tags-input--disabled {
-    pointer-events: none;
+  pointer-events: none;
 
   .wt-tags-input__tags-input {
     width: 100%;
