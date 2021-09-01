@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+
+    <div>
+      <wt-tags-input :value="values" :tags="values"></wt-tags-input>
+    </div>
+
     <wt-icon icon-prefix="messenger" icon="telegram" size="sm"></wt-icon>
     <wt-icon icon-prefix="messenger" icon="viber" size="sm"></wt-icon>
     <wt-icon icon-prefix="messenger" icon="facebook" size="sm"></wt-icon>
@@ -9,9 +14,9 @@
       :headers="table.headers"
       :data="table.data"
     >
-<!--      <template slot="h1">-->
-<!--        <wt-select></wt-select>-->
-<!--      </template>-->
+      <!--      <template slot="h1">-->
+      <!--        <wt-select></wt-select>-->
+      <!--      </template>-->
     </wt-table>
   </div>
 </template>
@@ -21,6 +26,7 @@
 export default {
   name: 'playground',
   data: () => ({
+    values: [{ name: 'pes' }, { name: 'kit' }],
     switcher: true,
     autocomplete: [
       { name: 'Laravel5', language: 'PHP' },
@@ -176,8 +182,7 @@ export default {
         grafana: { href: 'https://example.com' },
       },
     },
-    columnSelect: [
-    ],
+    columnSelect: [],
   }),
   methods: {
     log(event, inputEvent) {

@@ -249,6 +249,10 @@ export default {
         }
       }
     }
+
+    .vue-tags-input {
+      max-width: 100%;
+    }
   }
 }
 
@@ -269,7 +273,7 @@ export default {
 }
 
 .wt-tags-input--disabled {
-    pointer-events: none;
+  pointer-events: none;
 
   .wt-tags-input__tags-input {
     width: 100%;
