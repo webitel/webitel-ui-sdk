@@ -62,6 +62,7 @@ export default [
   'icon-mic-bold--md',
   'icon-mic-muted-bold--md',
   'icon-collapse-bold--xl',
+  'icon-collapse--md',
   'icon-expand-bold--md',
   'icon-bucket--md',
   'icon-tick--md',
