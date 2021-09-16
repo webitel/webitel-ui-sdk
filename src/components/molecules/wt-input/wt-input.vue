@@ -200,7 +200,7 @@
     },
     methods: {
       inputHandler(event) {
-        this.$emit('input', event.target.value);
+        this.$emit('input', event.target.value.trim());
       },
 
       switchVisibilityPassword() {
