@@ -12,7 +12,7 @@ export const camelToSnake = (str) => str.replace(
 export const kebabToCamel = (str) => str.replace(
   /([-_][a-z])/g,
   (group) => group.toUpperCase()
-    .replace('-', '')
+    .replace('-', ''),
 );
 
 export const camelToKebab = (str) => str.replace(
@@ -28,8 +28,8 @@ export const objSnakeToCamel = (obj, skipKeys = []) => {
     return obj.map((value) => {
       if (typeof value === 'object') {
         return objSnakeToCamel(value, skipKeys);
-      }
-      return snakeToCamel(value);
+      } if (typeof value === 'string') return snakeToCamel(value);
+      return value; // number
     });
   }
   Object.keys(obj)
@@ -56,8 +56,8 @@ export const objCamelToSnake = (obj, skipKeys = []) => {
     return obj.map((value) => {
       if (typeof value === 'object') {
         return objCamelToSnake(value, skipKeys);
-      }
-      return camelToSnake(value);
+      } if (typeof value === 'string') return camelToSnake(value);
+      return value; // number
     });
   }
   Object.keys(obj)

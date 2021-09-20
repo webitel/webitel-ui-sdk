@@ -29,8 +29,8 @@ describe('Case converters', () => {
   });
 
   it('Camel-Snake Objects', () => {
-    const camelObj = { camelToSnake: { camelToSnake: null } };
-    const snakeObj = { camel_to_snake: { camel_to_snake: null } };
+    const camelObj = { camelToSnake: { camelToSnake: null, arr: [10] } };
+    const snakeObj = { camel_to_snake: { camel_to_snake: null, arr: [10] } };
     expect(objCamelToSnake(camelObj)).toEqual(snakeObj);
     expect(objSnakeToCamel(snakeObj)).toEqual(camelObj);
   });
