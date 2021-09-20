@@ -69,7 +69,7 @@ export default {
      }, []);
     },
     duration() {
-      if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
+      if (typeof this.statusDuration === 'string') return this.statusDuration;
       if (this.statusDuration !== undefined) {
         return convertDuration(this.statusDuration);
       }
