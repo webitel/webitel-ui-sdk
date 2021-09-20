@@ -17,6 +17,11 @@ export default {
     delete: 'Delete',
     search: 'Search',
     open: 'Open',
+    lang: {
+      en: 'English',
+      ru: 'Русский',
+      ua: 'Українська',
+    },
   },
   // date-related texts
   date: {
