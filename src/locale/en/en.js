@@ -91,6 +91,7 @@ export default {
     maxValue: 'Value should be not much than',
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
+    minLength: 'Quantity of characters should not be less than',
   },
   webitelUI: {
     timepicker: {
