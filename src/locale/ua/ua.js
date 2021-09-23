@@ -89,6 +89,7 @@ export default {
     maxValue: 'Значення повинно бути не більше',
     sameAs: 'Неправильний пароль',
     requiredArrayValue: 'Поле не повинно бути пустим',
+    minLength: 'Значення має містити більше символів',
   },
   webitelUI: {
     timepicker: {
