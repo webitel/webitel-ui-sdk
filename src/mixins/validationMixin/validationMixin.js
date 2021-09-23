@@ -27,6 +27,7 @@ export default {
         if (this.v.minValue === false) return `${this.$t('validation.minValue')} ${this.v.$params.minValue.min}`;
         if (this.v.maxValue === false) return `${this.$t('validation.maxValue')} ${this.v.$params.maxValue.max}`;
         if (this.v.sipAccountValidator === false) return this.$t('validation.sipAccountValidator');
+        if (this.v.minLength === false) return this.$t('validation.minLength');
       }
       // eslint-disable-next-line no-restricted-syntax
       for (const { name, text } of this.customValidators) {
