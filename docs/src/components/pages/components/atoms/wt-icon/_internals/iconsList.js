@@ -1,4 +1,7 @@
 export default [
+  'icon-send-arrow--sm',
+  'icon-close--sm',
+  'icon-attach--sm',
   'icon-messenger-infobip--sm',
   'icon-messenger-telegram--sm',
   'icon-messenger-facebook--sm',
