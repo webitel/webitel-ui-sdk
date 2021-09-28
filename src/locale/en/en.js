@@ -8,6 +8,7 @@ export default {
     total: 'Total',
     ok: 'Ok',
     save: 'Save',
+    saved: 'Saved',
     close: 'Close',
     add: 'Add',
     cancel: 'Cancel',

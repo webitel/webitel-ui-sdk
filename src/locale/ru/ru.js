@@ -8,6 +8,7 @@ export default {
     total: 'Всего',
     ok: 'Ок',
     save: 'Сохранить',
+    saved: 'Сохранено',
     close: 'Закрыть',
     add: 'Добавить',
     cancel: 'Отменить',
