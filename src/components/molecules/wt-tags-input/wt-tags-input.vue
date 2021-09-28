@@ -26,8 +26,7 @@
       :placeholder="placeholder || label"
       :add-only-from-autocomplete="addOnlyFromAutocomplete"
       :autocomplete-filter-duplicates="autocompleteFilterDuplicates"
-      @input="searchTags"
-      @tags-changed="changeTags"
+      v-on="listeners"
     >
       <template slot="tag-actions" slot-scope="{ index, performDelete }">
         <wt-icon-btn
@@ -127,6 +126,14 @@ export default {
         }))
         .filter((item) => item.text?.includes(this.input));
     },
+
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.searchTags,
+        'tags-changed': this.changeTags,
+      };
+    },
   },
 
   methods: {
@@ -155,7 +162,8 @@ export default {
   }
 }
 
-.wt-tags-input__tags-input {
+// increase specificity
+.wt-tags-input .wt-tags-input__tags-input {
   width: 100%;
   max-width: 100%; // reset default
 
@@ -174,6 +182,7 @@ export default {
         align-items: center;
         padding: var(--tags-input-padding);
         margin: 0; // reset default
+        word-break: break-word; //break long word
       }
 
       .ti-new-tag-input-wrapper {
@@ -195,7 +204,7 @@ export default {
         @extend %typo-body-lg;
         height: fit-content;
         padding: var(--tags-input-padding);
-        margin: 0 var(--tags-input-tag-spacing-margin) 0 0;  // reset default
+        margin: 0 var(--tags-input-tag-spacing-margin) var(--tags-input-tag-spacing-margin) 0;  // reset default
         color: var(--tags-input-tag-text-color);
         background: var(--tags-input-tag-bg-color);
         border-radius: var(--tags-input-tag-border-radius);
@@ -261,7 +270,7 @@ export default {
 }
 
 .wt-tags-input--disabled {
-    pointer-events: none;
+  pointer-events: none;
 
   .wt-tags-input__tags-input {
     width: 100%;

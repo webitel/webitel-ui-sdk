@@ -1,4 +1,11 @@
 export default [
+  'icon-messenger-infobip--sm',
+  'icon-messenger-telegram--sm',
+  'icon-messenger-facebook--sm',
+  'icon-messenger-viber--sm',
+  'icon-messenger-web-chat--sm',
+  'icon-messenger-whatsapp--sm',
+  'icon-lock--md',
   'icon-role--md',
   'icon-user--md',
   'icon-move--md',
@@ -76,6 +83,8 @@ export default [
   'icon-rounded-tick--md',
   'icon-attention--md',
 
+  'icon-widget-occupancy--sm',
+  'icon-widget-utilization--sm',
   'icon-widget-missed--sm',
   'icon-widget-handles--sm',
   'icon-widget-inbound--sm',

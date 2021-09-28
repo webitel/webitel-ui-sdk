@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    <wt-icon icon-prefix="messenger" icon="telegram" size="sm"></wt-icon>
+    <wt-icon icon-prefix="messenger" icon="viber" size="sm"></wt-icon>
+    <wt-icon icon-prefix="messenger" icon="facebook" size="sm"></wt-icon>
+    <wt-icon icon-prefix="messenger" icon="web-chat" size="sm"></wt-icon>
+    <wt-icon icon-prefix="messenger" icon="whatsapp" size="sm"></wt-icon>
     <wt-table
       :headers="table.headers"
       :data="table.data"

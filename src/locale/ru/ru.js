@@ -1,3 +1,7 @@
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
@@ -12,6 +16,7 @@ export default {
     true: 'Да',
     delete: 'Удалить',
     search: 'Поиск',
+    open: 'Открыть',
   },
   // date-related texts
   date: {
@@ -23,6 +28,49 @@ export default {
     supervisor: 'Супервизор | Супервизоры',
     auditor: 'Аудитор | Аудиторы',
     region: 'Регион | Регионы',
+  },
+  // describes Webitel FRONTEND applications + their navs
+  WebitelApplications: {
+    [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
+    [WebitelApplications.AUDIT]: { name: 'Audit' },
+    [WebitelApplications.HISTORY]: { name: 'Call History' },
+    [WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
+    [WebitelApplications.SUPERVISOR]: {
+      name: 'Supervisor Workspace',
+      sections: {
+        [SupervisorSections.QUEUES]: 'Очереди',
+        [SupervisorSections.AGENTS]: 'Агенты',
+        [SupervisorSections.ACTIVE_CALLS]: 'Активные звонки',
+      },
+    },
+    [WebitelApplications.ADMIN]: {
+      name: 'Admin',
+      sections: {
+        [AdminSections.USERS]: 'Пользователи',
+        [AdminSections.LICENSE]: 'Лицензии',
+        [AdminSections.DEVICES]: 'Устройства',
+        [AdminSections.FLOW]: 'Схемы звонка',
+        [AdminSections.DIALPLAN]: 'Исходящая маршрутизация',
+        [AdminSections.GATEWAYS]: 'Шлюзы',
+        [AdminSections.CHAT_GATEWAYS]: 'Текстовые шлюзы',
+        [AdminSections.SKILLS]: 'Навыки оператора',
+        [AdminSections.BUCKETS]: 'Корзины',
+        [AdminSections.MEDIA]: 'Медиафайлы',
+        [AdminSections.BLACKLIST]: 'Cписки обзвона',
+        [AdminSections.CALENDARS]: 'Календари',
+        [AdminSections.COMMUNICATIONS]: 'Типы связи',
+        [AdminSections.REGIONS]: 'Площадки',
+        [AdminSections.PAUSE_CAUSE]: 'Статусы агента',
+        [AdminSections.AGENTS]: 'Операторы',
+        [AdminSections.TEAMS]: 'Команды',
+        [AdminSections.RESOURCES]: 'Ресурсы',
+        [AdminSections.RESOURCE_GROUPS]: 'Группы ресурсов',
+        [AdminSections.QUEUES]: 'Очереди',
+        [AdminSections.STORAGE]: 'Хранилища',
+        [AdminSections.ROLES]: 'Роли',
+        [AdminSections.OBJECTS]: 'Операции',
+      },
+    },
   },
   validation: {
     required: 'Обязательное поле',
@@ -96,6 +144,17 @@ export default {
       tableCells: {
         deleteActionHint: 'Удалить',
         editActionHint: 'Редактировать',
+      },
+    },
+    errorPages: {
+      goBack: 'Вернуться назад',
+      page403: {
+        title: 'Нет доступа',
+        text: 'Извините, у вас недостаточно прав доступа для просмотра этой страницы.',
+      },
+      page404: {
+        title: 'Похоже, вы потерялись',
+        text: 'Извините, мы не можем найти то, что вы ищете',
       },
     },
   },

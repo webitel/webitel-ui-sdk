@@ -45,7 +45,7 @@ export default {
 }
 
 .wt-indicator__indicator {
-  width: var(--indicator-size);
+  min-width: var(--indicator-size);
   height: var(--indicator-size);
   background: var(--indicator-disabled-color);
   border-radius: 50%;

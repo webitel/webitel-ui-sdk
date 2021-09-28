@@ -33,7 +33,7 @@
       </div>
     </article>
     <component-model></component-model>
-    <h3>Full docs: <a class="full-docs-link" href="https://http://www.vue-tags-input.com/#/">Vue
+    <h3>Full docs: <a class="full-docs-link" href="https://vue-tags-input.com/#/">Vue
       Tags Input</a></h3>
     <component-props
       :properties="properties"
@@ -140,6 +140,9 @@ export default {
               property in tag view`,
           },
         ],
+      },
+      {
+        value: 'plus all vue-tags-input native events. For more information, see vue-tags-input docs.',
       },
     ],
     slots: [

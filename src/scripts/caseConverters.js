@@ -22,6 +22,7 @@ export const camelToKebab = (str) => str.replace(
 );
 
 export const objSnakeToCamel = (obj, skipKeys = []) => {
+  if (!obj) return obj;
   const newObj = {};
   if (Array.isArray(obj)) {
     return obj.map((value) => {
@@ -49,6 +50,7 @@ export const objSnakeToCamel = (obj, skipKeys = []) => {
 };
 
 export const objCamelToSnake = (obj, skipKeys = []) => {
+  if (!obj) return obj;
   const newObj = {};
   if (Array.isArray(obj)) {
     return obj.map((value) => {
