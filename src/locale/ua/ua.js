@@ -7,7 +7,7 @@ export default {
   reusable: {
     total: 'Всього',
     ok: 'Ок',
-    Save: 'Зберегти',
+    save: 'Зберегти',
     close: 'Закрити',
     add: 'Додати',
     cancel: 'Відмінити',
@@ -17,6 +17,7 @@ export default {
     delete: 'Видалити',
     search: 'Пошук',
     open: 'Відкрити',
+    name: 'Ім\'я',
     lang: {
       en: 'English',
       ru: 'Русский',

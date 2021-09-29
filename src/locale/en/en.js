@@ -17,6 +17,7 @@ export default {
     delete: 'Delete',
     search: 'Search',
     open: 'Open',
+    name: 'Name',
     lang: {
       en: 'English',
       ru: 'Русский',
