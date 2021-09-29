@@ -28,7 +28,7 @@ export default {
         if (this.v.maxValue === false) return `${this.$t('validation.maxValue')} ${this.v.$params.maxValue.max}`;
         if (this.v.sipAccountValidator === false) return this.$t('validation.sipAccountValidator');
         if (this.v.minLength === false) return `${this.$t('validation.minLength')} ${this.v.$params.minLength.min}`;
-        if(this.v.url === false) return `${this.$t('validation.url')}`
+        if (this.v.url === false) return `${this.$t('validation.url')}`;
       }
       // eslint-disable-next-line no-restricted-syntax
       for (const { name, text } of this.customValidators) {
