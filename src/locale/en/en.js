@@ -93,6 +93,7 @@ export default {
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
     minLength: 'Quantity of characters should not be less than',
+    url: 'Should look like url',
   },
   webitelUI: {
     timepicker: {

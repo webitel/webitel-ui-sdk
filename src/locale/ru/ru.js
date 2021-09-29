@@ -91,6 +91,7 @@ export default {
     sameAs: 'Неверный пароль',
     requiredArrayValue: 'Поле не должно быть пустым',
     minLength: 'Количество символов не должно быть меньше, чем',
+    url: 'Необходимо ввести корректный url-адрес',
   },
   webitelUI: {
     timepicker: {
