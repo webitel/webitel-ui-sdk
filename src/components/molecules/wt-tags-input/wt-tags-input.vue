@@ -86,7 +86,7 @@ export default {
 
     addOnlyFromAutocomplete: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     autocompleteFilterDuplicates: {
