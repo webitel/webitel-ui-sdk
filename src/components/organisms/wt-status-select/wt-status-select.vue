@@ -69,7 +69,12 @@ export default {
      }, []);
     },
     duration() {
-      if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
+      /* The check commented below limits the display of time in the status to 8 characters.
+      Accordingly, if the agent is in the status of 100 hours (100: 00: 00),
+      then this time will be displayed as NaN:NaN:NaN */
+
+      // if (typeof this.statusDuration === 'string' && this.statusDuration.length === 8) return this.statusDuration;
+      if (typeof this.statusDuration === 'string') return this.statusDuration;
       if (this.statusDuration !== undefined) {
         return convertDuration(this.statusDuration);
       }

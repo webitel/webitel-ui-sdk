@@ -18,6 +18,12 @@ export default {
     delete: 'Delete',
     search: 'Search',
     open: 'Open',
+    name: 'Name',
+    lang: {
+      en: 'English',
+      ru: 'Русский',
+      ua: 'Українська',
+    },
   },
   // date-related texts
   date: {
@@ -87,6 +93,8 @@ export default {
     maxValue: 'Value should be not much than',
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
+    minLength: 'Quantity of characters should not be less than',
+    url: 'Should look like url',
   },
   filters: {
     timeFilter: {

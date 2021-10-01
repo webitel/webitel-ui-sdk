@@ -18,6 +18,12 @@ export default {
     delete: 'Видалити',
     search: 'Пошук',
     open: 'Відкрити',
+    name: 'Ім\'я',
+    lang: {
+      en: 'English',
+      ru: 'Русский',
+      ua: 'Українська',
+    },
   },
   // date-related texts
   date: {
@@ -85,6 +91,8 @@ export default {
     maxValue: 'Значення повинно бути не більше',
     sameAs: 'Неправильний пароль',
     requiredArrayValue: 'Поле не повинно бути пустим',
+    minLength: 'Кількість символів повинна бути не меншою, ніж',
+    url: 'Необхідно ввести правильну url-адресу',
   },
   filters: {
     timeFilter: {

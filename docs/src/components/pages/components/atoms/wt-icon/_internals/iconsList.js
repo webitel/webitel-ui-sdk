@@ -1,4 +1,7 @@
 export default [
+  'icon-send-arrow--sm',
+  'icon-close--sm',
+  'icon-attach--sm',
   'icon-messenger-infobip--sm',
   'icon-messenger-telegram--sm',
   'icon-messenger-facebook--sm',
@@ -62,6 +65,7 @@ export default [
   'icon-mic-bold--md',
   'icon-mic-muted-bold--md',
   'icon-collapse-bold--xl',
+  'icon-collapse--md',
   'icon-expand-bold--md',
   'icon-bucket--md',
   'icon-tick--md',
