@@ -246,6 +246,7 @@ export default {
 
 .wt-select {
   width: 100%;
+  min-width: 0;
 }
 
 .wt-label {
