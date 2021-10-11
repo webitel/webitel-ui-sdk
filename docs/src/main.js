@@ -10,6 +10,8 @@ import './plugins/webitel-ui';
 import './components/shared';
 import prismMixin from './mixins/prismMixin';
 
+import twitter from './assets/svg-sprites/twitter.svg';
+
 Vue.config.productionTip = false;
 Vue.prototype.$eventBus = eventBus;
 

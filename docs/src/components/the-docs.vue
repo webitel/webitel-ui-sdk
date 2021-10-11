@@ -3,6 +3,8 @@
     <wt-page-wrapper :actions-panel="false">
       <template slot="header">
         <wt-headline>
+          <wt-icon icon="edit"></wt-icon>
+          <svg><use xlink:href="#twitter"></use></svg>
           <wt-navigation-bar :nav="nav"/>
           <h1>Webitel UI SDK v. 0.8.53</h1>
         </wt-headline>
