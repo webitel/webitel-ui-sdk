@@ -225,11 +225,17 @@ export default {
     },
 
     input(value) {
-    //  if (value === null) return; //  ATTENTION prevents crush at selected option click
-      if (value === null) {
-        this.$emit('input', this.value); //  ATTENTION prevents crush at selected option click
-        return;
-      }
+     if (value === null) return; //  ATTENTION prevents crush at selected option click
+      /*
+      if "input" with current value is emitted, value is re-set
+      and it may cause unneeded patch or smth like this
+      so i tried to just cancel "input", if the same value is selected
+       ("null" is emitted from VueMultiselect because default lib behavior fot this action is "reset")
+       */
+    //   if (value === null) {
+    //     this.$emit('input', this.value); //  ATTENTION prevents crush at selected option click
+    //     return;
+    //   }
       this.$emit('input', value);
     },
 
