@@ -1,0 +1,13 @@
+
+:root {
+  --wt-slider-box-sizing: border-box;
+  --wt-slider-width: 100%;
+  --wt-slider-height: 8px;
+  --wt-slider-border: 1px solid var(--secondary-color);
+
+  --wt-slider-pointer-size: 16px;
+  --wt-slider-pointer-radius: 50%;
+
+  --wt-slider-vertical-transform: translate(-100%, -50%) rotate(-90deg);
+  --wt-slider-vertical-transform-origin: 100%;
+}
