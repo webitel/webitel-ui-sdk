@@ -42,7 +42,7 @@
       </template>
 
       <template slot="tag" slot-scope="{ option }">
-        <span class="multiselect__custom-tag">{{ option[optionLabel] }}</span>
+        <span class="multiselect__custom-tag">{{ option[optionLabel] || option }}</span>
       </template>
 
       <template slot="singleLabel" slot-scope="{ option }">
