@@ -185,6 +185,11 @@ export default {
             route: 'select',
           },
           {
+            name: 'Slider',
+            value: 'slider',
+            route: 'slider',
+          },
+          {
             name: 'Switcher',
             value: 'switcher',
             route: 'switcher',

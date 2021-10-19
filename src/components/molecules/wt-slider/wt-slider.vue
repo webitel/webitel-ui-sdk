@@ -10,30 +10,33 @@ To achieve correct slider height we:
  2. Set the new slider width (which is now positioned from bottom to top) using fixed number of pixels, received with props.
  3. Set the container element height to 100% so it is always calculated correctly depending on it`s child dimensions.
 
-Untill there are no possibility to style input range and position it vertically, we are rotating our slider with css
+Until there are no possibility to style input range and position it vertically, we are rotating our slider with css
 and swapping height/width of this component in order to have the correct output.
 -->
 
 <template>
-  <div
-    class="wt-slider"
-    :class="{
-    'wt-slider--disabled': disabled,
-    'wt-slider--vertical': vertical,
-    }"
-    :style="{ width: verticalHeight }"
-  > <!-- The row above is needed in order to set correct component width when slider is vertical -->
-    <input
-      type="range"
-      class="wt-slider__slider"
-      :style="{ background: progressStyle }"
-      :min="min"
-      :max="max"
-      :step="step"
-      :value="value"
-      :disabled="disabled"
-      @input="inputHandler"
-    />
+  <div :style="{ height: verticalHeight }">
+    <div
+      class="wt-slider"
+      :class="{
+        'wt-slider--disabled': disabled,
+        'wt-slider--vertical': vertical,
+      }"
+      :style="{ width: verticalHeight }"
+    >
+      <!-- The row above is needed in order to set correct component width when slider is vertical -->
+      <input
+        type="range"
+        class="wt-slider__slider"
+        :style="{ background: progressStyle }"
+        :min="min"
+        :max="max"
+        :step="step"
+        :value="value"
+        :disabled="disabled"
+        @input="inputHandler"
+      />
+    </div>
   </div>
 </template>
 
