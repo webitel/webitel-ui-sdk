@@ -1,3 +1,19 @@
+<!-- We were trying to draw our own slider using <div> tags, but realizing all the limitations decided to use
+the native input of type 'range', styling it as per Webitel needs for every of the most popular web browsers.
+
+The biggest issue to solve was the vertical input. At the moment browsers do not support vertical input range having
+custom styling, so we are using css rotation.
+Dealing with rotation we realized rotated element is very hard to position correctly with no fixed height of the parent element.
+Considering the fact parent height is always relative to it's childs height, we are manipulating the child width/height on rotation.
+To achieve correct slider height we:
+ 1. Rotate slider by 90deg, so the width of slider becomes 'heigth' of the parent.
+ 2. Set the new slider width (which is now positioned from bottom to top) using fixed number of pixels, received with props.
+ 3. Set the container element height to 100% so it is always calculated correctly depending on it`s child dimensions.
+
+Untill there are no possibility to style input range and position it vertically, we are rotating our slider with css
+and swapping height/width of this component in order to have the correct output.
+-->
+
 <template>
   <div
     class="wt-slider"
