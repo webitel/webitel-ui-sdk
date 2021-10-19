@@ -15,13 +15,16 @@ and swapping height/width of this component in order to have the correct output.
 -->
 
 <template>
-  <div :style="{ height: verticalHeight }">
-    <div
-      class="wt-slider"
-      :class="{
+  <div
+    class="wt-slider"
+    :class="{
         'wt-slider--disabled': disabled,
         'wt-slider--vertical': vertical,
       }"
+    :style="{ height: verticalHeight }"
+  >
+    <div
+      class="wt-slider__wrapper"
       :style="{ width: verticalHeight }"
     >
       <!-- The row above is needed in order to set correct component width when slider is vertical -->
@@ -93,7 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.wt-slider {
+.wt-slider__wrapper {
   width: var(--wt-slider-width)
 }
 
@@ -156,7 +159,7 @@ export default {
   }
 }
 
-.wt-slider--vertical {
+.wt-slider--vertical .wt-slider__wrapper {
   transform: var(--wt-slider-vertical-transform);
   transform-origin: var(--wt-slider-vertical-transform-origin);
 }
