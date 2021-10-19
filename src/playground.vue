@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    <wt-tags-input
+      :value="[]"
+      :autocomplete-items="['123', 'asd', 'zxc']"
+      add-only-from-autocomplete
+    ></wt-tags-input>
     <wt-icon icon-prefix="messenger" icon="telegram" size="sm"></wt-icon>
     <wt-icon icon-prefix="messenger" icon="viber" size="sm"></wt-icon>
     <wt-icon icon-prefix="messenger" icon="facebook" size="sm"></wt-icon>

@@ -121,7 +121,7 @@ export default {
     autocompleteOptions() {
       return this.autocompleteItems
         .map((item) => ({
-          text: item.name || item.value,
+          text: typeof item === 'object' ? item.name || item.value : item,
           ...item,
         }))
         .filter((item) => item.text?.includes(this.input));
