@@ -44,6 +44,7 @@ import WtRadioDocs from '../components/pages/components/molecules/wt-radio/wt-ra
 import WtSearchBarDocs
   from '../components/pages/components/molecules/wt-search-bar/wt-search-bar-docs.vue';
 import WtSelectDocs from '../components/pages/components/molecules/wt-select/wt-select-docs.vue';
+import WtSliderDocs from '../components/pages/components/molecules/wt-slider/wt-slider-docs.vue';
 import WtSwitcherDocs
   from '../components/pages/components/molecules/wt-switcher/wt-switcher-docs.vue';
 import WtTabsDocs from '../components/pages/components/molecules/wt-tabs/wt-tabs-docs.vue';
@@ -278,6 +279,11 @@ const routes = [
         path: 'select',
         name: 'select-docs',
         component: WtSelectDocs,
+      },
+      {
+        path: 'slider',
+        name: 'slider-docs',
+        component: WtSliderDocs,
       },
       {
         path: 'switcher',
