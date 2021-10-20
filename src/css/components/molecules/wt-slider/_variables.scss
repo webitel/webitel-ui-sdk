@@ -8,6 +8,8 @@
   --wt-slider-pointer-size: 16px;
   --wt-slider-pointer-radius: 50%;
 
-  --wt-slider-vertical-transform: translate(-100%, -50%) rotate(-90deg);
-  --wt-slider-vertical-transform-origin: 100%;
+  --wt-slider-vertical-container-width: 20px;
+  --wt-slider-vertical-container-translation: translate(2px);
+  --wt-slider-vertical-transform: translate(-100%, 0) rotate(-90deg);
+  --wt-slider-vertical-transform-origin: 100% 0;
 }

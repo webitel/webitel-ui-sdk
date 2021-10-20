@@ -159,9 +159,17 @@ export default {
   }
 }
 
-.wt-slider--vertical .wt-slider__wrapper {
-  transform: var(--wt-slider-vertical-transform);
-  transform-origin: var(--wt-slider-vertical-transform-origin);
-}
+.wt-slider--vertical {
+  width: var(--wt-slider-vertical-container-width);
+  transform: var(--wt-slider-vertical-container-translation);
 
+  .wt-slider__wrapper {
+    transform: var(--wt-slider-vertical-transform);
+    transform-origin: var(--wt-slider-vertical-transform-origin);
+
+    .wt-slider__slider {
+      margin: 0;
+    }
+  }
+}
 </style>
