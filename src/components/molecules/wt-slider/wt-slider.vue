@@ -167,8 +167,8 @@ export default {
     transform: var(--wt-slider-vertical-transform);
     transform-origin: var(--wt-slider-vertical-transform-origin);
 
-    input {
-      margin: var(--wt-slider-input-margin);
+    .wt-slider__slider {
+      margin: 0;
     }
   }
 }
