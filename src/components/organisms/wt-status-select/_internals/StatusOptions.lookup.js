@@ -13,7 +13,7 @@ export default [
   },
   {
     locale: 'webitelUI.statusSelect.offline',
-    color: 'danger',
+    color: 'disabled',
     value: AgentStatus.OFFLINE,
   },
   {
