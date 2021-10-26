@@ -42,7 +42,7 @@
             class="wt-header-actions__action__link"
             @click.prevent="logout"
           >
-            <wt-icon icon="logout" size="sm" color="false"></wt-icon>
+            <wt-icon icon="logout" size="sm" color="danger"></wt-icon>
             <span>{{$t('webitelUI.headerActions.logout')}}</span>
           </a>
         </li>

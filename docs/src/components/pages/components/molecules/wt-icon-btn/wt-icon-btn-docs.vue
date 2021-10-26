@@ -18,7 +18,7 @@
         <wt-icon-btn
           icon="rounded-tick"
           tooltip="Success color icon"
-          color="true"
+          color="success"
         ></wt-icon-btn>
         <wt-icon-btn
           icon="rounded-tick"
@@ -66,7 +66,7 @@
         },
         {
           value: 'color',
-          code: '<wt-icon-btn icon="edit" color="true"></wt-icon-btn>',
+          code: '<wt-icon-btn icon="edit" color="success"></wt-icon-btn>',
           type: 'String',
           description: 'icon color. For more information check "Icons" docs',
         },

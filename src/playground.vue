@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
     default
     <wt-icon icon="mic-bold" size="xl"></wt-icon>
     accent

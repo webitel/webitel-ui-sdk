@@ -70,7 +70,7 @@ svg {
   transition: var(--transition);
 }
 
-.wt-icon.wt-icon--color {
+.wt-icon--color {
   &-default .wt-icon__icon {
     fill: var(--icon-color);
   }

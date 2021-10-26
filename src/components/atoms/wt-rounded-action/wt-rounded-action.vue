@@ -59,13 +59,13 @@ export default {
       if (this.iconColor) return this.iconColor;
       switch (this.colorClass) {
         case 'secondary':
-          return 'primary';
+          return 'default';
         case 'success':
-          return 'outline';
+          return 'contrast';
         case 'transfer':
-          return 'outline';
+          return 'contrast';
         case 'danger':
-          return 'outline';
+          return 'contrast';
         default:
           return 'active';
       }
