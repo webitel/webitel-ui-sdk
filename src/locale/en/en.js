@@ -53,7 +53,7 @@ export default {
       name: 'Admin',
       sections: {
         [AdminSections.USERS]: 'Users',
-        [AdminSections.LICENSE]: 'License',
+        [AdminSections.LICENSE]: 'Licenses',
         [AdminSections.DEVICES]: 'Devices',
         [AdminSections.FLOW]: 'Flow',
         [AdminSections.DIALPLAN]: 'Dialplan',
