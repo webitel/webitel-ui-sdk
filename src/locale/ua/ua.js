@@ -64,7 +64,7 @@ export default {
         [AdminSections.MEDIA]: 'Медіафайли',
         [AdminSections.BLACKLIST]: 'Cписки обдзвону',
         [AdminSections.CALENDARS]: 'Календарі',
-        [AdminSections.REGIONS]: 'Розміщення',
+        [AdminSections.REGIONS]: 'Розташування',
         [AdminSections.COMMUNICATIONS]: 'Типи зв\'язку',
         [AdminSections.PAUSE_CAUSE]: 'Статуси оператора',
         [AdminSections.AGENTS]: 'Оператори',
@@ -109,7 +109,7 @@ export default {
       next: 'Вперед',
     },
     appNavigator: {
-      title: 'Аплікації Webitel',
+      title: 'Застосунки Webitel',
       admin: 'Admin',
       agent: 'Agent Workspace',
       supervisor: 'Supervisor Workspace',
