@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.8.67",
+  "version": "0.8.68",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
