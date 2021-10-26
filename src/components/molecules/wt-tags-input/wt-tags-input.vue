@@ -20,12 +20,10 @@
     <vue-tags-input
       class="wt-tags-input__tags-input"
       v-model="input"
+      v-bind="{ ...$attrs, ...$props }"
       :tags="tags"
       :autocomplete-items="autocompleteOptions"
-      :autocomplete-min-length="autocompleteMinLength"
       :placeholder="placeholder || label"
-      :add-only-from-autocomplete="addOnlyFromAutocomplete"
-      :autocomplete-filter-duplicates="autocompleteFilterDuplicates"
       v-on="listeners"
     >
       <template slot="tag-actions" slot-scope="{ index, performDelete }">
@@ -137,7 +135,8 @@ export default {
   },
 
   methods: {
-    searchTags() {
+    searchTags(search) {
+      this.$emit('search', search);
     },
 
     changeTags(tags) {

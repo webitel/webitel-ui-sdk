@@ -142,6 +142,14 @@ export default {
         ],
       },
       {
+        value: 'search',
+        params: [
+          {
+            name: 'value', type: ['String'], description: 'vue-tags-input "input" value.',
+          },
+        ],
+      },
+      {
         value: 'plus all vue-tags-input native events. For more information, see vue-tags-input docs.',
       },
     ],
