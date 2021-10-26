@@ -55,7 +55,7 @@
   --icon-color-accent: var(--accent-color);
   --icon-color-contrast: var(--main-color);
   --icon-color-active: var(--icon-color--hover);
-  --icon-color-disabled: var(--disabled-color);
+  --icon-color-disabled: hsla(var(--_icon-color), var(--_opacity--disabled));
   --icon-color-success: var(--true-color);
   --icon-color-danger: var(--false-color);
   --icon-color-transfer: var(--transfer-color);
