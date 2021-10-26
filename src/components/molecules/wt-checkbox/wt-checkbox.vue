@@ -17,7 +17,10 @@
         @change="inputHandler"
       >
       <span class="wt-checkbox__checkmark">
-      <wt-icon :icon="checkboxIcon"></wt-icon>
+      <wt-icon
+        :icon="checkboxIcon"
+        :color="iconColor"
+      ></wt-icon>
     </span>
       <!-- @slot Custom label markup -->
       <slot name="label" v-bind="{ label, isChecked, disabled }">
@@ -69,6 +72,11 @@
       },
       checkboxIcon() {
         return this.isChecked ? 'checkbox--checked' : 'checkbox';
+      },
+      iconColor() {
+        if (this.disabled) return 'disabled';
+        if (this.isChecked) return 'active';
+        return null;
       },
     },
     methods: {
@@ -127,17 +135,13 @@
     }
 
     ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
   }
 
   .wt-checkbox--active {
     .wt-checkbox__label {
       color: var(--form-label--active-color);
-    }
-
-    ::v-deep .wt-icon__icon {
-      fill: var(--icon--active-color);
     }
   }
 
@@ -166,10 +170,6 @@
 
     .wt-checkbox__label {
       color: var(--form-label--disabled-color);
-    }
-
-    ::v-deep .wt-icon__icon {
-      fill: var(--icon--disabled-color);
     }
   }
 </style>

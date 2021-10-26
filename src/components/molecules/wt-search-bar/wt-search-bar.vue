@@ -177,7 +177,7 @@
   /* make icons black */
   .wt-search-bar:hover ::v-deep .wt-icon__icon,
   .wt-search-bar:focus-within ::v-deep .wt-icon__icon {
-    fill: var(--icon--hover-color);
+    fill: var(--icon-color--hover);
   }
 
   /* clears the 'X' from Internet Explorer */

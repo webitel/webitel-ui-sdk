@@ -216,7 +216,7 @@ export default {
     cursor: pointer;
 
     &:hover ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
   }
 

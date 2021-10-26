@@ -113,7 +113,7 @@
     }
 
     ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
   }
 
@@ -123,7 +123,7 @@
     }
 
     ::v-deep .wt-icon__icon {
-      fill: var(--icon--active-color);
+      fill: var(--icon-color-active);
     }
   }
 
@@ -162,7 +162,7 @@
     }
 
     ::v-deep .wt-icon__icon {
-      fill: var(--icon--disabled-color);
+      fill: var(--icon-color-disabled);
     }
   }
 </style>

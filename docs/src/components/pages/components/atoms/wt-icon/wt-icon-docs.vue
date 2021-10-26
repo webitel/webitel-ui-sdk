@@ -66,10 +66,20 @@
         },
         {
           value: 'color',
-          code: '<wt-icon icon="close" color="primary"></wt-icon>',
+          code: '<wt-icon icon="close" color="success"></wt-icon>',
           type: 'String',
-          default: 'primary',
-          description: 'Options from list of icon colors, using formula --icon-{color}-color',
+          default: 'default',
+          options: [
+            'default - var(--icon-color)',
+            'contrast - var(--main-color)',
+            'active - default icon color at :hover',
+            'disabled - icon color, but with "disabled" opacity',
+            'success - inherited from Semantic colors',
+            'danger - inherited from Semantic colors',
+            'transfer - inherited from Semantic colors',
+            'hold - inherited from Semantic colors',
+          ],
+          description: 'Icon colors. Attention! Hover color is changing only for "default color".',
         },
         {
           value: 'iconPrefix',

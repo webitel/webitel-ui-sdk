@@ -38,7 +38,11 @@
       @close="close"
     >
       <template slot="caret">
-        <wt-icon class="wt-select__arrow-caret" icon="arrow-down"></wt-icon>
+        <wt-icon
+          class="wt-select__arrow-caret"
+          icon="arrow-down"
+          :disabled="disabled"
+        ></wt-icon>
       </template>
 
       <template slot="tag" slot-scope="{ option }">
@@ -66,6 +70,7 @@
           v-if="clearable"
           class="wt-select__clear"
           :class="{ 'hidden': !isValue }"
+          :disabled="disabled"
           icon="remove-rounded"
           size="sm"
           @click="clearValue"
@@ -386,11 +391,11 @@ export default {
 
   .wt-select:hover & {
     .wt-select__arrow-caret ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
 
     ::v-deep .wt-select__clear .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
 
     ::v-deep {
@@ -410,7 +415,7 @@ export default {
     }
 
     .wt-select__arrow-caret ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
 
     ::v-deep {
@@ -456,7 +461,7 @@ export default {
 
   .wt-select__arrow-caret ::v-deep .wt-icon__icon,
   .wt-select__clear ::v-deep .wt-icon__icon {
-    fill: var(--icon--disabled-color);
+    fill: var(--icon-color-disabled);
   }
 
   .multiselect {

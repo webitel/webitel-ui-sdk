@@ -305,12 +305,12 @@
     transform: translateY(-50%);
 
     .wt-input--disabled & ::v-deep .wt-icon__icon {
-      fill: var(--icon--disabled-color);
+      fill: var(--icon-color-disabled);
     }
 
     .wt-input:hover & ::v-deep .wt-icon__icon,
     .wt-input:focus-within & ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
   }
 </style>

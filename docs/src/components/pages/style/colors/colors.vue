@@ -37,6 +37,7 @@ const POSITIVE_COLOR_HUE = 119;
 const NEGATIVE_COLOR_HUE = 11;
 const HOLD_COLOR_HUE = 54;
 const TRANSFER_COLOR_HUE = 227;
+const ICON_COLOR_HUE = 202;
 
 const ACCENT_COLOR = `${ACCENT_COLOR_HUE}, 100%, 50%`;
 const MAIN_COLOR = `${ACCENT_COLOR_HUE}, 20%, 99%`;
@@ -49,14 +50,17 @@ const POSITIVE_COLOR = `${POSITIVE_COLOR_HUE}, 60%, 40%`;
 const NEGATIVE_COLOR = `${NEGATIVE_COLOR_HUE}, 80%, 50%`;
 const HOLD_COLOR = `${HOLD_COLOR_HUE}, 80%, 50%`;
 const TRANSFER_COLOR = `${TRANSFER_COLOR_HUE}, 80%, 50%`;
+const ICON_COLOR = `${ICON_COLOR_HUE}, 100%, 15%`;
 
 const MAIN_COLOR_OPACITY = 1;
 const DEFAULT_OPACITY = 0.8;
 const HOVER_OPACITY = 1;
 const ACTIVE_OPACITY = 1;
 // const FOCUS_OPACITY = 0.8;
-const DISABLED_OPACITY = 0.2;
+const DISABLED_OPACITY = 0.4;
 
+const FORM_PLACEHOLDER_OPACITY = 0.4;
+const FORM_PLACEHOLDER_OPACITY__HOVER = 0.6;
 const FORM_BORDER_DISABLED_OPACITY = 0.05;
 
 export default {
@@ -216,6 +220,29 @@ export default {
         ],
       },
       {
+        title: 'Icon colors',
+        colors: [
+          {
+            textColor: '#fff',
+            code: `hsla(${ICON_COLOR}, ${DEFAULT_OPACITY})`,
+            color: '--icon-color',
+            name: 'Icon color',
+          },
+          {
+            textColor: '#fff',
+            code: `hsla(${ICON_COLOR}, ${HOVER_OPACITY})`,
+            color: '--icon-color--hover',
+            name: 'Icon hover color',
+          },
+          {
+            textColor: '#fff',
+            code: `hsla(${ICON_COLOR}, ${DISABLED_OPACITY})`,
+            color: '--icon-color-disabled',
+            name: 'Icon disabled color',
+          },
+        ],
+      },
+      {
         title: 'Form colors',
         colors: [
           {
@@ -268,13 +295,13 @@ export default {
           },
           {
             textColor: '#fff',
-            code: `hsla(${CONTRAST_COLOR}, ${DEFAULT_OPACITY})`,
+            code: `hsla(${CONTRAST_COLOR}, ${FORM_PLACEHOLDER_OPACITY})`,
             color: '--form-placeholder-color',
             name: 'Form placeholder color',
           },
           {
             textColor: '#fff',
-            code: `hsla(${CONTRAST_COLOR}, ${HOVER_OPACITY})`,
+            code: `hsla(${CONTRAST_COLOR}, ${FORM_PLACEHOLDER_OPACITY__HOVER})`,
             color: '--form-placeholder--hover-color',
             name: 'Form placeholder hover color',
           },
