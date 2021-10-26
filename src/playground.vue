@@ -1,23 +1,92 @@
 <template>
   <div class="playground">
-    <wt-tags-input
-      :value="[]"
-      :autocomplete-items="['123', 'asd', 'zxc']"
-      add-only-from-autocomplete
-    ></wt-tags-input>
-    <wt-icon icon-prefix="messenger" icon="telegram" size="sm"></wt-icon>
-    <wt-icon icon-prefix="messenger" icon="viber" size="sm"></wt-icon>
-    <wt-icon icon-prefix="messenger" icon="facebook" size="sm"></wt-icon>
-    <wt-icon icon-prefix="messenger" icon="web-chat" size="sm"></wt-icon>
-    <wt-icon icon-prefix="messenger" icon="whatsapp" size="sm"></wt-icon>
-    <wt-table
-      :headers="table.headers"
-      :data="table.data"
-    >
-<!--      <template slot="h1">-->
-<!--        <wt-select></wt-select>-->
-<!--      </template>-->
-    </wt-table>
+    default
+    <wt-icon icon="mic-bold" size="xl"></wt-icon>
+    accent
+    <wt-icon icon="mic-bold" size="xl" color="accent"></wt-icon>
+    contrast
+    <div style="background: #000; display: inline-block;"><wt-icon icon="mic-bold" size="xl" color="contrast"></wt-icon></div>
+    active
+    <wt-icon icon="mic-bold" size="xl" color="active"></wt-icon>
+    disabled
+    <wt-icon icon="mic-bold" size="xl" color="disabled"></wt-icon>
+    success
+    <wt-icon icon="mic-bold" size="xl" color="success"></wt-icon>
+    danger
+    <wt-icon icon="mic-bold" size="xl" color="danger"></wt-icon>
+    transfer
+    <wt-icon icon="mic-bold" size="xl" color="transfer"></wt-icon>
+    hold
+    <wt-icon icon="mic-bold" size="xl" color="hold"></wt-icon>
+    <br>
+    default, hoverable
+    <wt-icon-btn icon="mic-bold" size="xl"></wt-icon-btn>
+    accent
+    <wt-icon-btn icon="mic-bold" size="xl" color="accent"></wt-icon-btn>
+    contrast
+    <div style="background: #000; display: inline-block;"><wt-icon-btn icon="mic-bold" size="xl" color="contrast"></wt-icon-btn></div>
+    active
+    <wt-icon-btn icon="mic-bold" size="xl" color="active"></wt-icon-btn>
+    COLOR: disabled
+    <wt-icon-btn icon="mic-bold" size="xl" color="disabled"></wt-icon-btn>
+    disabled actions
+    <wt-icon-btn icon="mic-bold" size="xl" disabled></wt-icon-btn>
+    disabled actions, but COLOR IS SUCCESS
+    <wt-icon-btn icon="mic-bold" size="xl" disabled color="success"></wt-icon-btn>
+    success
+    <wt-icon-btn icon="mic-bold" size="xl" color="success"></wt-icon-btn>
+    danger
+    <wt-icon-btn icon="mic-bold" size="xl" color="danger"></wt-icon-btn>
+    transfer
+    <wt-icon-btn icon="mic-bold" size="xl" color="transfer"></wt-icon-btn>
+    hold
+    <wt-icon-btn icon="mic-bold" size="xl" color="hold"></wt-icon-btn>
+
+    <wt-checkbox selected label="value"></wt-checkbox>
+    <wt-checkbox selected label="value" disabled></wt-checkbox>
+    <wt-textarea
+      label="value"
+      value="hello"
+      disabled
+    ></wt-textarea>
+    <wt-textarea
+      label="placeholder"
+      placeholder="hello"
+      disabled
+    ></wt-textarea>
+    <wt-select
+      label="value"
+      value="hello"
+      disabled
+    ></wt-select>
+    <wt-select
+      label="placeholder"
+      placeholder="hello"
+      disabled
+    ></wt-select>
+    <wt-input
+      label="value"
+      value="hello"
+      disabled
+    ></wt-input>
+    <wt-input
+      label="placeholder"
+      placeholder="hello"
+      disabled
+    ></wt-input>
+    <wt-input
+      label="value"
+      value="hello"
+      disabled
+    ></wt-input>
+<!--    <wt-table-->
+<!--      :headers="table.headers"-->
+<!--      :data="table.data"-->
+<!--    >-->
+<!--&lt;!&ndash;      <template slot="h1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <wt-select></wt-select>&ndash;&gt;-->
+<!--&lt;!&ndash;      </template>&ndash;&gt;-->
+<!--    </wt-table>-->
   </div>
 </template>
 

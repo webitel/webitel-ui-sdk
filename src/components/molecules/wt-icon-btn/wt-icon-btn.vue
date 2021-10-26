@@ -5,7 +5,7 @@
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="size"
-        :color="color"
+        :color="iconColor"
         @click.native="$emit('click', $event)"
       ></wt-icon>
     </button>
@@ -47,6 +47,12 @@
         type: String,
       },
     },
+    computed: {
+      iconColor() {
+        if (this.disabled && !this.color) return 'disabled';
+        return this.color;
+      },
+    },
   };
 </script>
 
@@ -59,21 +65,14 @@
       display: flex;
     }
 
-    &:hover ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+    // add hover style only for "default" icon color cause non-default already may have opacity 1
+    &:hover ::v-deep .wt-icon__icon.wt-icon__icon--color-default {
+      fill: var(--icon-color--hover);
     }
 
-    &.active ::v-deep .wt-icon__icon,
-    &.opened ::v-deep .wt-icon__icon {
-      fill: var(--icon--actvie-color);
-    }
-
+    // icon "disabled" color is set from iconColor computed
     &--disabled {
       pointer-events: none;
-
-      ::v-deep .wt-icon__icon {
-        fill: var(--icon--disabled-color);
-      }
     }
   }
 

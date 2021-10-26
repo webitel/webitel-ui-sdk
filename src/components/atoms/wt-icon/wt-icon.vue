@@ -3,8 +3,10 @@
   <i class="wt-icon">
     <svg
       class="wt-icon__icon"
-      :class="`wt-icon__icon--${size}`"
-      :style="iconStyle"
+      :class="[
+        `wt-icon__icon--size-${size}`,
+        `wt-icon__icon--color-${color}`,
+      ]"
     >
       <use :xlink:href="iconName"></use>
     </svg>
@@ -25,7 +27,8 @@ export default {
     },
     color: {
       type: String,
-      default: 'primary',
+      default: 'default',
+      options: ['default', 'contrast', 'active', 'disabled', 'success', 'danger', 'transfer', 'hold'],
     },
     iconPrefix: {
       type: String,
@@ -37,11 +40,6 @@ export default {
       let name = '#_icon';
       if (this.iconPrefix) name += `-${this.iconPrefix}`;
       return `${name}-${this.icon}--${this.size}`;
-    },
-    iconStyle() {
-      return {
-        '--icon-color': `var(--icon-${this.color}-color)`,
-      };
     },
   },
 };
@@ -65,23 +63,53 @@ svg {
   transition: var(--transition);
 }
 
-.wt-icon__icon {
-  &--xl {
+.wt-icon__icon--color {
+  &-default {
+    fill: var(--icon-color);
+  }
+  &-accent {
+    fill: var(--icon-color-accent);
+  }
+  &-contrast {
+    fill: var(--icon-color-contrast);
+  }
+  &-active {
+    fill: var(--icon-color-active);
+  }
+  &-disabled {
+    fill: var(--icon-color-disabled);
+ }
+  &-success {
+    fill: var(--icon-color-success);
+ }
+  &-danger {
+    fill: var(--icon-color-danger);
+ }
+  &-transfer {
+    fill: var(--icon-color-transfer);
+ }
+  &-hold {
+    fill: var(--icon-color-hold);
+ }
+}
+
+.wt-icon__icon--size {
+  &-xl {
     width: var(--icon-xl-size);
     height: var(--icon-xl-size);
   }
 
-  &--lg {
+  &-lg {
     width: var(--icon-lg-size);
     height: var(--icon-lg-size);
   }
 
-  &--md {
+  &-md {
     width: var(--icon-md-size);
     height: var(--icon-md-size);
   }
 
-  &--sm {
+  &-sm {
     width: var(--icon-sm-size);
     height: var(--icon-sm-size);
   }

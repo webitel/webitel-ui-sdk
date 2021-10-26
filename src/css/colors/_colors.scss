@@ -15,7 +15,7 @@
   --_opacity--hover: 1;
   --_opacity--active: 1;
   --_opacity--focus: 0.8;
-  --_opacity--disabled: 0.2;
+  --_opacity--disabled: 0.4;
 
   // BASIC HSL COLORS VALUES
   --_accent-color: var(--_accent-color-hue), 100%, 50%;
@@ -47,7 +47,20 @@
   --main-secondary-color: var(--secondary-color); // DEPRECATED
   --main-outline-color: var(--secondary-color); // DEPRECATED
 
-  --icon-color: hsla(var(--_icon-color), 1);
+  // ICON COLORS
+  --icon-color: hsla(var(--_icon-color), var(--_opacity--default));
+
+  --icon-color--hover: hsla(var(--_icon-color), var(--_opacity--hover));
+
+  --icon-color-accent: var(--accent-color);
+  --icon-color-contrast: var(--main-color);
+  --icon-color-active: var(--icon-color--hover);
+  --icon-color-disabled: var(--disabled-color);
+  --icon-color-success: var(--true-color);
+  --icon-color-danger: var(--false-color);
+  --icon-color-transfer: var(--transfer-color);
+  --icon-color-hold: var(--hold-color);
+
 
   --page-bg-color: hsla(var(--_page-bg-color), 1);
   --header-color: hsla(var(--_header-color), 1);
@@ -81,6 +94,9 @@
   --form-opacity--active: var(--_opacity--active);
   --form-opacity--focus: var(--_opacity--focus);
   --form-opacity--disabled: var(--_opacity--disabled);
+
+  --form-placeholder-opacity: 0.4;
+  --form-placeholder-opacity--hover: 0.6;
   --form-border-opacity--disabled: 0.05;
 
   --form-opacity--ouline--default: 0.4;
@@ -98,8 +114,8 @@
   --form-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
   --form-border--disabled-color: hsla(var(--_contrast-color), var(--form-border-opacity--disabled));
 
-  --form-placeholder-color: hsla(var(--_contrast-color), var(--form-opacity--default));
-  --form-placeholder--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
+  --form-placeholder-color: hsla(var(--_contrast-color), var(--form-placeholder-opacity));
+  --form-placeholder--hover-color: hsla(var(--_contrast-color), var(--form-placeholder-opacity--hover));
   --form-placeholder--disabled-color: hsla(var(--_contrast-color), var(--form-opacity--disabled));
 
   // outline
