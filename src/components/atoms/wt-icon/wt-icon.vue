@@ -1,12 +1,15 @@
 <!-- eslint-disable -->
 <template>
-  <i class="wt-icon">
+  <i
+    class="wt-icon"
+    :class="[
+       `wt-icon--size-${size}`,
+       `wt-icon--color-${color}`,
+       { 'wt-icon--disabled': disabled }
+     ]"
+  >
     <svg
       class="wt-icon__icon"
-      :class="[
-        `wt-icon__icon--size-${size}`,
-        `wt-icon__icon--color-${color}`,
-      ]"
     >
       <use :xlink:href="iconName"></use>
     </svg>
@@ -33,6 +36,10 @@ export default {
     iconPrefix: {
       type: String,
       default: '',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -63,53 +70,65 @@ svg {
   transition: var(--transition);
 }
 
-.wt-icon__icon--color {
-  &-default {
+.wt-icon.wt-icon--color {
+  &-default .wt-icon__icon {
     fill: var(--icon-color);
   }
-  &-accent {
+
+  &-accent .wt-icon__icon {
     fill: var(--icon-color-accent);
   }
-  &-contrast {
+
+  &-contrast .wt-icon__icon {
     fill: var(--icon-color-contrast);
   }
-  &-active {
+
+  &-active .wt-icon__icon {
     fill: var(--icon-color-active);
   }
-  &-disabled {
-    fill: var(--icon-color-disabled);
- }
-  &-success {
+
+  &-success .wt-icon__icon {
     fill: var(--icon-color-success);
- }
-  &-danger {
+  }
+
+  &-danger .wt-icon__icon {
     fill: var(--icon-color-danger);
- }
-  &-transfer {
+  }
+
+  &-transfer .wt-icon__icon {
     fill: var(--icon-color-transfer);
- }
-  &-hold {
+  }
+
+  &-hold .wt-icon__icon {
     fill: var(--icon-color-hold);
- }
+  }
+
+  &-disabled .wt-icon__icon {
+    fill: var(--icon-color-disabled);
+  }
 }
 
-.wt-icon__icon--size {
-  &-xl {
+.wt-icon.wt-icon--disabled .wt-icon__icon {
+  fill: var(--icon-color-disabled);
+}
+
+.wt-icon--size {
+  &-xl .wt-icon__icon {
     width: var(--icon-xl-size);
     height: var(--icon-xl-size);
   }
 
-  &-lg {
+  &-lg .wt-icon__icon {
     width: var(--icon-lg-size);
     height: var(--icon-lg-size);
   }
 
-  &-md {
+  &-md .wt-icon__icon {
     width: var(--icon-md-size);
     height: var(--icon-md-size);
   }
 
-  &-sm {
+  &-sm .wt-icon__icon {
     width: var(--icon-sm-size);
     height: var(--icon-sm-size);
   }

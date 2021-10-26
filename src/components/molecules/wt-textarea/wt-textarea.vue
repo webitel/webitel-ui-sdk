@@ -180,6 +180,6 @@
   /* make icons black */
   .wt-textarea:hover ::v-deep .wt-icon__icon,
   .wt-textarea:focus-within ::v-deep .wt-icon__icon {
-    fill: var(--icon--hover-color);
+    fill: var(--icon-color--hover);
   }
 </style>

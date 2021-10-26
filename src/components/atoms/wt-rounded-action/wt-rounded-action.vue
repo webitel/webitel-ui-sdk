@@ -148,7 +148,7 @@ export default {
     pointer-events: none;
 
     .wt-icon ::v-deep .wt-icon__icon {
-      fill: var(--icon--disabled-color);
+      fill: var(--icon-color-disabled);
     }
   }
 
@@ -172,7 +172,7 @@ export default {
       background: var(--rounded-action-secondary-bg-color);
 
       .wt-icon ::v-deep .wt-icon__icon {
-        fill: var(--icon--hover-color);
+        fill: var(--icon-color--hover);
       }
     }
 
@@ -183,7 +183,7 @@ export default {
       background: var(--rounded-action-secondary-bg-color);
 
       .wt-icon ::v-deep .wt-icon__icon {
-        fill: var(--icon--active-color);
+        fill: var(--icon-color-active);
       }
     }
   }

@@ -274,7 +274,7 @@
 
     .wt-datetimepicker__calendar-icon ::v-deep .wt-icon__icon,
     .wt-datetimepicker__arrow-icon ::v-deep .wt-icon__icon {
-      fill: var(--icon--hover-color);
+      fill: var(--icon-color--hover);
     }
   }
 
@@ -294,7 +294,7 @@
 
     .wt-datetimepicker__calendar-icon ::v-deep .wt-icon__icon,
     .wt-datetimepicker__arrow-icon ::v-deep .wt-icon__icon {
-      fill: var(--icon--active-color);
+      fill: var(--icon-color-active);
     }
   }
 
@@ -308,7 +308,7 @@
 
     .wt-datetimepicker__calendar-icon ::v-deep .wt-icon__icon,
     .wt-datetimepicker__arrow-icon ::v-deep .wt-icon__icon {
-      fill: var(--icon--disabled-color);
+      fill: var(--icon-color-disabled);
     }
   }
 </style>

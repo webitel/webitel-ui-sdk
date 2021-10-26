@@ -49,7 +49,7 @@
     },
     computed: {
       iconColor() {
-        if (this.disabled && !this.color) return 'disabled';
+        if (this.disabled) return 'disabled';
         return this.color;
       },
     },
