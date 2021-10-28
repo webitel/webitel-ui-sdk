@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 9h2v2h-2v-2z"></path>
+    <path d="M9 15h2v2h-2v-2z"></path>
+    <path d="M9 21h2v2h-2v-2z"></path>
+    <path d="M15 9h2v2h-2v-2z"></path>
+    <path d="M15 15h2v2h-2v-2z"></path>
+    <path d="M15 21h2v2h-2v-2z"></path>
+    <path d="M21 9h2v2h-2v-2z"></path>
+    <path d="M21 15h2v2h-2v-2z"></path>
+    <path d="M21 21h2v2h-2v-2z"></path>
+</svg>
