@@ -1,7 +1,15 @@
 <template>
   <section class="icon-grid">
     <wt-select
-      class="icon-grid__color-select"
+      class="icon-grid__select"
+      v-model="iconSize"
+      label="Icons size"
+      :options="iconSizeOptions"
+      :track-by="null"
+      :clearable="false"
+    ></wt-select>
+    <wt-select
+      class="icon-grid__select"
       v-model="iconColor"
       label="Icons color"
       :options="iconColorOptions"
@@ -17,7 +25,7 @@
       >
         <wt-icon
           :icon="icon.name"
-          :size="icon.size"
+          :size="iconSize"
           :color="iconColor"
         ></wt-icon>
         <div class="icon__name">{{ icon.name }}</div>
@@ -35,13 +43,15 @@ import iconsList from './iconsList';
 export default {
   name: 'icon-grid',
   data: () => ({
+    iconSize: 'md',
+    iconSizeOptions: ['sm', 'md', 'lg', 'xl'],
     iconColor: 'default',
     iconColorOptions: ['default', 'contrast', 'active', 'disabled', 'success', 'danger', 'transfer', 'hold'],
   }),
   computed: {
     icons() {
       return iconsList.map((icon) => ({
-        name: icon.slice(5, -4),
+        name: icon,
         size: icon.slice(-2),
       })).sort((icon1, icon2) => {
         const sortOrder = ['xl', 'lg', 'md', 'sm', 'xs'];
@@ -53,9 +63,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icon-grid__color-select {
+.icon-grid__select {
   max-width: 400px;
-  margin-bottom: var(--component-spacing);
+  margin: 0 var(--component-spacing) var(--component-spacing) 0;
 }
 
 .icon-grid__grid {

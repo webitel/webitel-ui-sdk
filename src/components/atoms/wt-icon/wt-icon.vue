@@ -10,6 +10,7 @@
   >
     <svg
       class="wt-icon__icon"
+      :viewBox="viewBox"
     >
       <use :xlink:href="iconName"></use>
     </svg>
@@ -44,9 +45,21 @@ export default {
   },
   computed: {
     iconName() {
-      let name = '#_icon';
-      if (this.iconPrefix) name += `-${this.iconPrefix}`;
-      return `${name}-${this.icon}--${this.size}`;
+      // let name = '#_icon';
+      // if (this.iconPrefix) name += `-${this.iconPrefix}`;
+      // return `${name}-${this.icon}--${this.size}`;
+      let name = '#';
+      if (this.iconPrefix) name += `${this.iconPrefix}-`;
+      return `${name}${this.icon}`;
+    },
+    viewBox() {
+      switch (this.size) {
+        case 'sm': return '0 0 16 16';
+        case 'md': return '0 0 24 24';
+        case 'lg': return '0 0 32 32';
+        case 'xl': return '0 0 40 40';
+        default: return '0 0 24 24';
+      }
     },
   },
 };
@@ -58,16 +71,16 @@ export default {
   justify-content: center;
   align-items: center;
   transition: var(--transition);
-}
 
-/*svg instead of .icon to override styles by .icon-icon-name-size without any other seelectors*/
-svg {
-  display: flex;
-  width: var(--icon-md-size);
-  height: var(--icon-md-size);
-  stroke-width: 0;
-  fill: var(--icon-color);
-  transition: var(--transition);
+  /*svg instead of .icon to override styles by .icon-icon-name-size without any other seelectors*/
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    stroke-width: 0;
+    fill: var(--icon-color);
+    transition: var(--transition);
+  }
 }
 
 .wt-icon--color {
@@ -113,22 +126,22 @@ svg {
 }
 
 .wt-icon--size {
-  &-xl .wt-icon__icon {
+  &-xl {
     width: var(--icon-xl-size);
     height: var(--icon-xl-size);
   }
 
-  &-lg .wt-icon__icon {
+  &-lg {
     width: var(--icon-lg-size);
     height: var(--icon-lg-size);
   }
 
-  &-md .wt-icon__icon {
+  &-md {
     width: var(--icon-md-size);
     height: var(--icon-md-size);
   }
 
-  &-sm .wt-icon__icon {
+  &-sm {
     width: var(--icon-sm-size);
     height: var(--icon-sm-size);
   }

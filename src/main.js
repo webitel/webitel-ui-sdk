@@ -5,7 +5,7 @@ import './filters'; // init all filters
 import './components'; // init all components
 import i18n from './locale/i18n';
 import eventBus from './scripts/eventBus';
-import './assets/icons/svg-sprites/wt-icon.svg';
+import './assets/icons/sprite';
 
 import './css/fonts/_fonts.scss';
 import router from './router';

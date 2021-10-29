@@ -21,6 +21,6 @@ module.exports = {
       .test(/^(.*sprites).*\.svg/)
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
-      .options({ symbolId: () => '' });
+      .options({ symbolId: (filePath) => filePath.includes('wt-icon.svg') ? '' : filePath.split('/').pop().replace('.svg', '') }); // only file name without ".svg" ext
   },
 };

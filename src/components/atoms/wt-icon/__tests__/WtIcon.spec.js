@@ -11,7 +11,7 @@ describe('WtIcon', () => {
     expect(wrapper.classes('wt-icon')).toBe(true);
   });
   it('correctly computes icon name', () => {
-    const iconName = '#_icon-jest-bucket--sm';
+    const iconName = '#jest-bucket';
     const wrapper = shallowMount(WtIcon, {
       propsData: {
         icon: 'bucket',

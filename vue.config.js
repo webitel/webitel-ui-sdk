@@ -31,8 +31,8 @@ module.exports = {
           from: 'src/assets/icons/plyr.svg',
           to: 'img',
         }, {
-          from: 'src/assets/icons/svg-sprites/wt-icon.svg',
-          to: 'img/svg-sprites',
+          from: 'src/assets/icons/sprite/',
+          to: 'img/sprite',
         }],
       ]);
 
@@ -58,17 +58,16 @@ module.exports = {
 
     svgRule
       .test(/\.svg/)
-      .exclude.add(path.resolve(__dirname, 'src/assets/icons/svg-sprites/wt-icon.svg'))
+      .exclude.add(/^(.*sprite).*\.svg/) // same as in svg-sprite-loader
       .end()
       .use('svg-url-loader')
       .loader('svg-url-loader')
 
     config.module
       .rule('svg-sprite')
-      .test(/^(.*sprites).*\.svg/)
-      // .test(/\.svg/)
+      .test(/^(.*sprite).*\.svg/)  // same as in svg-url-loader
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
-      .options({ symbolId: () => '', });
+      // .options({ symbolId: (filePath) => filePath.includes('wt-icon.svg') ? '' : filePath.split('/').pop().replace('.svg', '') }); // only file name without ".svg" ext
   },
 };
