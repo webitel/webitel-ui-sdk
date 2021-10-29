@@ -1,4 +1,6 @@
 export default [
+  'zoom-in',
+  'zoom-out',
   'send-arrow',
   'close',
   'attach',
@@ -9,8 +11,6 @@ export default [
   'messenger-web-chat',
   'messenger-whatsapp',
   'lock',
-  'role',
-  'user',
   'move',
   'queue-member',
   'history',
@@ -18,12 +18,7 @@ export default [
   'rounded-info',
   'copy',
   'attach',
-  'dashboard-grid-1',
-  'dashboard-grid-2',
-  'dashboard-grid-3',
   'menu',
-  'leg-a-marker',
-  'forks',
   'clear',
   'video-on',
   'video-off',
@@ -133,12 +128,4 @@ export default [
   'arrow-right',
   'arrow-up',
   'arrow-up',
-
-  /* ADM icons */
-  'adm-integrations',
-  'adm-contact-center',
-  'adm-permissions',
-  'adm-directory',
-  'adm-lookups',
-  'adm-routing',
 ];

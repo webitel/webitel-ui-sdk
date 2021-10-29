@@ -14,13 +14,12 @@ module.exports = {
   chainWebpack: (config) => {
     config.module
       .rule('svg')
-      .exclude.add(/^(.*sprites).*\.svg/);
+      .exclude.add(/^(.*sprite).*\.svg/); // same as in svg-sprite-loader
 
     config.module
       .rule('svg-sprite')
-      .test(/^(.*sprites).*\.svg/)
+      .test(/^(.*sprite).*\.svg/) // same as in svg-url-loader
       .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .options({ symbolId: (filePath) => filePath.includes('wt-icon.svg') ? '' : filePath.split('/').pop().replace('.svg', '') }); // only file name without ".svg" ext
+      .loader('svg-sprite-loader');
   },
 };

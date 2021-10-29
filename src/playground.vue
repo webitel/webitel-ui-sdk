@@ -1,7 +1,6 @@
 <template>
   <div class="playground">
-    md <wt-icon icon="call-missed" size="xl" style="border: 1px solid blue; margin-right: 10px;"></wt-icon>
-    lg <wt-icon icon="call-merge" size="xl" style="border: 1px solid blue; margin-right: 10px;"></wt-icon>
+    md <wt-icon icon="widget-occupancy" size="xl" style="border: 1px solid blue; margin-right: 10px;"></wt-icon>
 <!--    <svg><use xlink:href="#search"></use></svg>-->
 <!--    <svg><use xlink:href="#close"></use></svg>-->
 <!--    <svg><use xlink:href="#lock"></use></svg>-->

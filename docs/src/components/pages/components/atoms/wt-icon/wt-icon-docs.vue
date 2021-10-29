@@ -7,32 +7,7 @@
         <pre><code class="language-html">&lt;wt-icon icon="bucket"&gt;&lt;/wt-icon&gt;</code></pre>
       </div>
     </article>
-    <article>
-      <h3>Wt-icon installation:</h3>
-      <p>(FROM QUICK START PAGE) In order to use icons you need to install svg-sprite-loader and
-        configure webpack build and import the sprite itself.</p>
-      <ol>
-        <li>
-          Install sprite loader with <strong>npm</strong>:
-          <pre><code class="language-bash">npm i svg-sprite-loader</code></pre>
-        </li>
-        <li>
-          In plugins/webitel-ui.js
-          <pre><code class="language-javascript">import '@webitel/ui-sdk/dist/img/svg-sprites/wt-icon.svg';</code></pre>
-        </li>
-        <li>
-          in vue.config.js
-          <pre><code class="language-javascript">
-            // exclude sprites default building
-            config.module.rule('svg').exclude.add(/^(.*sprites).*\.svg/);
-
-            // use svg-sprite-loader to process icons sprite
-          config.module.rule('svg-sprite').test(/^(.*sprites).*\.svg/)
-            .use('svg-sprite-loader').loader('svg-sprite-loader').options({ symbolId: () => '' });
-          </code></pre>
-        </li>
-      </ol>
-    </article>
+    <h3>For wt-icon sprites installation, see: <router-link to="/quick-start">Quick Start</router-link> page</h3>
     <component-props
       :properties="properties"
     ></component-props>
@@ -61,7 +36,7 @@
           value: 'size',
           code: '<wt-icon icon="close" size="sm"></wt-icon>',
           type: 'String',
-          options: ['"sm", "md", "lg", "xl"'],
+          options: ['sm (16px)', 'md (24px)', 'lg (32px)', 'xl (40px)'],
           default: 'md',
         },
         {

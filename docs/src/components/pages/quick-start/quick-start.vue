@@ -15,8 +15,11 @@
             // import locale
             import WebitelUIEn from '@webitel/ui-sdk/src/locale/en/en';
             import WebitelUIRu from '@webitel/ui-sdk/src/locale/ru/ru';
+            import WebitelUIUa from '@webitel/ui-sdk/src/locale/ua/ua';
             import i18n from '../locale/i18n';
             import eventBus from '../scripts/eventBus';
+
+            import '@webitel/ui-sdk/dist/img/sprite';
 
             // import styles
             import '@webitel/ui-sdk/dist/ui-sdk.css';
@@ -30,7 +33,8 @@
             Vue.use(WebitelUI, { eventBus, router, globals });
             // add plugin locales to main i18n
             i18n.mergeLocaleMessage('en', WebitelUIEn);
-            i18n.mergeLocaleMessage('ru', WebitelUIRu);</code></pre>
+            i18n.mergeLocaleMessage('ru', WebitelUIRu);
+            i18n.mergeLocaleMessage('ua', WebitelUIUa);</code></pre>
       </li>
       <li>
         Import file to <strong>main.js</strong>:
@@ -47,17 +51,22 @@
         </li>
         <li>
           In plugins/webitel-ui.js
-        <pre><code class="language-javascript">import '@webitel/ui-sdk/dist/img/svg-sprites/wt-icon.svg';</code></pre>
+        <pre><code class="language-javascript">import '@webitel/ui-sdk/dist/img/sprite';</code></pre>
         </li>
         <li>
           in vue.config.js
           <pre><code class="language-javascript">
             // exclude sprites default building
-            config.module.rule('svg').exclude.add(/^(.*sprites).*\.svg/);
+                config.module
+                  .rule('svg')
+                  .exclude.add(/^(.*sprite).*\.svg/); // same as in svg-sprite-loader
 
             // use svg-sprite-loader to process icons sprite
-          config.module.rule('svg-sprite').test(/^(.*sprites).*\.svg/)
-            .use('svg-sprite-loader').loader('svg-sprite-loader').options({ symbolId: () => '' });
+              config.module
+                .rule('svg-sprite')
+                .test(/^(.*sprite).*\.svg/) // same as in svg-url-loader
+                .use('svg-sprite-loader')
+                .loader('svg-sprite-loader');
           </code></pre>
         </li>
       </ol>
