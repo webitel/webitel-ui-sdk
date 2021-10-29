@@ -1,5 +1,4 @@
 /* eslint-disable */
-const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -13,7 +12,6 @@ module.exports = {
     },
   },
   chainWebpack: (config) => {
-
     config.module
       .rule('fonts')
       .use('url-loader')
@@ -31,8 +29,8 @@ module.exports = {
           from: 'src/assets/icons/plyr.svg',
           to: 'img',
         }, {
-          from: 'src/assets/icons/svg-sprites/wt-icon.svg',
-          to: 'img/svg-sprites',
+          from: 'src/assets/icons/sprite/',
+          to: 'img/sprite',
         }],
       ]);
 
@@ -54,21 +52,25 @@ module.exports = {
     //   .end();
     // }
     const svgRule = config.module.rule('svg')
-    svgRule.uses.clear()
+    svgRule.uses.clear();
 
     svgRule
       .test(/\.svg/)
-      .exclude.add(path.resolve(__dirname, 'src/assets/icons/svg-sprites/wt-icon.svg'))
+      .exclude.add(/^(.*sprite).*\.svg/) // same as in svg-sprite-loader
       .end()
       .use('svg-url-loader')
-      .loader('svg-url-loader')
+      .loader('svg-url-loader');
 
     config.module
       .rule('svg-sprite')
-      .test(/^(.*sprites).*\.svg/)
-      // .test(/\.svg/)
+      .test(/^(.*sprite).*\.svg/)  // same as in svg-url-loader
       .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .options({ symbolId: () => '', });
+      .loader('svg-sprite-loader');
+    /*
+     // only file name without ".svg" ext
+      .options({ symbolId: (filePath) => filePath.includes('wt-icon.svg')
+       ? ''
+        : filePath.split('/').pop().replace('.svg', '') });
+     */
   },
 };

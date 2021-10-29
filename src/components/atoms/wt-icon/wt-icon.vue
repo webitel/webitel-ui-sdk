@@ -8,9 +8,7 @@
        { 'wt-icon--disabled': disabled }
      ]"
   >
-    <svg
-      class="wt-icon__icon"
-    >
+    <svg class="wt-icon__icon">
       <use :xlink:href="iconName"></use>
     </svg>
   </i>
@@ -44,9 +42,9 @@ export default {
   },
   computed: {
     iconName() {
-      let name = '#_icon';
-      if (this.iconPrefix) name += `-${this.iconPrefix}`;
-      return `${name}-${this.icon}--${this.size}`;
+      let name = '#';
+      if (this.iconPrefix) name += `${this.iconPrefix}-`;
+      return `${name}${this.icon}`;
     },
   },
 };
@@ -62,9 +60,9 @@ export default {
 
 /*svg instead of .icon to override styles by .icon-icon-name-size without any other seelectors*/
 svg {
-  display: flex;
-  width: var(--icon-md-size);
-  height: var(--icon-md-size);
+  display: block;
+  width: 100%;
+  height: 100%;
   stroke-width: 0;
   fill: var(--icon-color);
   transition: var(--transition);
@@ -113,22 +111,22 @@ svg {
 }
 
 .wt-icon--size {
-  &-xl .wt-icon__icon {
+  &-xl {
     width: var(--icon-xl-size);
     height: var(--icon-xl-size);
   }
 
-  &-lg .wt-icon__icon {
+  &-lg {
     width: var(--icon-lg-size);
     height: var(--icon-lg-size);
   }
 
-  &-md .wt-icon__icon {
+  &-md {
     width: var(--icon-md-size);
     height: var(--icon-md-size);
   }
 
-  &-sm .wt-icon__icon {
+  &-sm {
     width: var(--icon-sm-size);
     height: var(--icon-sm-size);
   }
