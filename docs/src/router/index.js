@@ -23,7 +23,8 @@ import WtInputInfoDocs
   from '../components/pages/components/atoms/wt-input-info/wt-input-info-docs.vue';
 import WtLabelDocs from '../components/pages/components/molecules/wt-label/wt-label-docs.vue';
 import WtLoaderDocs from '../components/pages/components/atoms/wt-loader/wt-loader-docs.vue';
-import WtLRoundedActionDocs from '../components/pages/components/atoms/wt-rounded-action/wt-rounded-action-docs.vue';
+import WtLRoundedActionDocs
+  from '../components/pages/components/atoms/wt-rounded-action/wt-rounded-action-docs.vue';
 import WtTooltipDocs from '../components/pages/components/atoms/wt-tooltip/wt-tooltip-docs.vue';
 // molecules
 import WtCheckboxDocs
@@ -34,12 +35,14 @@ import WtDatepickerDocs
   from '../components/pages/components/molecules/wt-datepicker/wt-datepicker-docs.vue';
 import WtDatetimepickerDocs
   from '../components/pages/components/molecules/wt-datetimepicker/wt-datetimepicker-docs.vue';
-import WtIconBtnDocs from '../components/pages/components/molecules/wt-icon-btn/wt-icon-btn-docs.vue';
+import WtIconBtnDocs
+  from '../components/pages/components/molecules/wt-icon-btn/wt-icon-btn-docs.vue';
 import WtInputDocs from '../components/pages/components/molecules/wt-input/wt-input-docs.vue';
 import WtNotificationDocs
   from '../components/pages/components/molecules/wt-notification/wt-notification-docs.vue';
 import WtPopupDocs from '../components/pages/components/molecules/wt-popup/wt-popup-docs.vue';
-import WtProgressBarDocs from '../components/pages/components/molecules/wt-progress-bar/wt-progress-bar-docs.vue';
+import WtProgressBarDocs
+  from '../components/pages/components/molecules/wt-progress-bar/wt-progress-bar-docs.vue';
 import WtRadioDocs from '../components/pages/components/molecules/wt-radio/wt-radio-docs.vue';
 import WtSearchBarDocs
   from '../components/pages/components/molecules/wt-search-bar/wt-search-bar-docs.vue';
@@ -48,23 +51,29 @@ import WtSliderDocs from '../components/pages/components/molecules/wt-slider/wt-
 import WtSwitcherDocs
   from '../components/pages/components/molecules/wt-switcher/wt-switcher-docs.vue';
 import WtTabsDocs from '../components/pages/components/molecules/wt-tabs/wt-tabs-docs.vue';
-import WtTagsInputDocs from '../components/pages/components/molecules/wt-tags-input/wt-tags-input-docs.vue';
+import WtTagsInputDocs
+  from '../components/pages/components/molecules/wt-tags-input/wt-tags-input-docs.vue';
 import WtTextareaDocs
   from '../components/pages/components/molecules/wt-textarea/wt-textarea-docs.vue';
 import WtTimeInputDocs
   from '../components/pages/components/molecules/wt-time-input/wt-time-input-docs.vue';
 // organisms
-import WtAppHeaderDocs from '../components/pages/components/organisms/wt-app-header/wt-app-header-docs.vue';
-import WtFiltersPanelWrapperDocs from '../components/pages/components/organisms/wt-filters-panel-wrapper/wt-table-actions-docs.vue';
-import WtErrorPageDocs from '../components/pages/components/organisms/wt-error-page/wt-error-page-docs.vue';
-import WtHeadlineDocs from '../components/pages/components/organisms/wt-headline/wt-headline-docs.vue';
+import WtAppHeaderDocs
+  from '../components/pages/components/organisms/wt-app-header/wt-app-header-docs.vue';
+import WtFiltersPanelWrapperDocs
+  from '../components/pages/components/organisms/wt-filters-panel-wrapper/wt-table-actions-docs.vue';
+import WtErrorPageDocs
+  from '../components/pages/components/organisms/wt-error-page/wt-error-page-docs.vue';
+import WtHeadlineDocs
+  from '../components/pages/components/organisms/wt-headline/wt-headline-docs.vue';
 import WtNavigationBarDocs
   from '../components/pages/components/organisms/wt-navigation-bar/wt-navigation-bar-docs.vue';
 import WtNotificationsBarDocs
   from '../components/pages/components/organisms/wt-notifications-bar/wt-notifications-bar-docs.vue';
 import WtPageWrapperDocs
   from '../components/pages/components/organisms/wt-page-wrapper/wt-page-wrapper-docs.vue';
-import WtPaginationDocs from '../components/pages/components/organisms/wt-pagination/wt-pagination-docs.vue';
+import WtPaginationDocs
+  from '../components/pages/components/organisms/wt-pagination/wt-pagination-docs.vue';
 import WtPlayerDocs from '../components/pages/components/organisms/wt-player/wt-player-docs.vue';
 import WtStatusSelectDocs
   from '../components/pages/components/organisms/wt-status-select/wt-status-select-docs.vue';
@@ -76,42 +85,62 @@ import WtTableColumnSelectDocs
 
 // other
 import FiltersDocs from '../components/pages/filters/filters-docs.vue';
-import TruncateFilterDocs from '../components/pages/filters/truncate-filter/truncate-filter-docs.vue';
+import TruncateFilterDocs
+  from '../components/pages/filters/truncate-filter/truncate-filter-docs.vue';
 
 import LocaleDocs from '../components/pages/locale/locale-docs.vue';
 
 import DirectivesDocs from '../components/pages/directives/directives-docs.vue';
-import ClickawayDirectiveDocs from '../components/pages/directives/clickaway-directive/clickaway-directive-docs.vue';
+import ClickawayDirectiveDocs
+  from '../components/pages/directives/clickaway-directive/clickaway-directive-docs.vue';
 
 import EnumsDocs from '../components/pages/enums/enums-docs.vue';
 import AgentStatusEnumDocs from '../components/pages/enums/agent-status/agent-status-enum-docs.vue';
-import WebitelApplicationsEnumDocs from '../components/pages/enums/webitel-applications/webitel-applications-enum-docs.vue';
-import SupevisorSectionsEnumDocs from '../components/pages/enums/supervisor-sections/supervisor-sections-enum-docs.vue';
-import AdminSectionsEnumDocs from '../components/pages/enums/admin-sections/admin-sections-enum-docs.vue';
+import WebitelApplicationsEnumDocs
+  from '../components/pages/enums/webitel-applications/webitel-applications-enum-docs.vue';
+import SupevisorSectionsEnumDocs
+  from '../components/pages/enums/supervisor-sections/supervisor-sections-enum-docs.vue';
+import AdminSectionsEnumDocs
+  from '../components/pages/enums/admin-sections/admin-sections-enum-docs.vue';
 
 import MixinsDocs from '../components/pages/mixins/mixins-docs.vue';
-import ValidationMixinDocs from '../components/pages/mixins/validation-mixin/validation-mixin-docs.vue';
+import ValidationMixinDocs
+  from '../components/pages/mixins/validation-mixin/validation-mixin-docs.vue';
 
 import ModulesDocs from '../components/pages/modules/modules-docs.vue';
-import DataFilterModuleDocs from '../components/pages/modules/data-filter-module/data-filter-module-docs.vue';
-import ExportCSVModuleDocs from '../components/pages/modules/export-csv-module/export-csv-module-docs.vue';
-import ExportFilesModuleDocs from '../components/pages/modules/export-files-module/export-files-module-docs.vue';
+import DataFilterModuleDocs
+  from '../components/pages/modules/data-filter-module/data-filter-module-docs.vue';
+import ExportCSVModuleDocs
+  from '../components/pages/modules/export-csv-module/export-csv-module-docs.vue';
+import ExportFilesModuleDocs
+  from '../components/pages/modules/export-files-module/export-files-module-docs.vue';
 
 import ScriptsDocs from '../components/pages/scripts/scripts-docs.vue';
-import CaseConverterScriptsDocs from '../components/pages/scripts/case-converter-scripts/case-converter-scripts-docs.vue';
-import ConvertDurationScriptDocs from '../components/pages/scripts/convert-duration-script/convert-duration-script-docs.vue';
-import DebounceScriptDocs from '../components/pages/scripts/debounce-script/debounce-script-docs.vue';
-import EditProxyScriptDocs from '../components/pages/scripts/edit-proxy-script/edit-proxy-script-docs.vue';
-import EventBusScriptDocs from '../components/pages/scripts/event-bus-script/event-bus-script-docs.vue';
-import IsEmptyScriptDocs from '../components/pages/scripts/is-empty-script/is-empty-script-docs.vue';
-import PrettifyFileSizeScriptDocs from '../components/pages/scripts/prettify-file-size-script/prettify-file-size-script.vue';
-import PrettifyTimeScriptDocs from '../components/pages/scripts/prettify-time-script/prettify-time-script-docs.vue';
-import PreventHiddenPageCallsDecoratorScriptDocs from '../components/pages/scripts/prevent-hidden-page-calls-decorator-script/prevent-hidden-page-calls-decorator-script-docs.vue';
-import SortQueryAdapterScriptsDocs from '../components/pages/scripts/sort-query-adapter-scripts/sort-query-adapter-scripts-docs.vue';
+import CaseConverterScriptsDocs
+  from '../components/pages/scripts/case-converter-scripts/case-converter-scripts-docs.vue';
+import ConvertDurationScriptDocs
+  from '../components/pages/scripts/convert-duration-script/convert-duration-script-docs.vue';
+import DebounceScriptDocs
+  from '../components/pages/scripts/debounce-script/debounce-script-docs.vue';
+import EditProxyScriptDocs
+  from '../components/pages/scripts/edit-proxy-script/edit-proxy-script-docs.vue';
+import EventBusScriptDocs
+  from '../components/pages/scripts/event-bus-script/event-bus-script-docs.vue';
+import IsEmptyScriptDocs
+  from '../components/pages/scripts/is-empty-script/is-empty-script-docs.vue';
+import PrettifyFileSizeScriptDocs
+  from '../components/pages/scripts/prettify-file-size-script/prettify-file-size-script.vue';
+import PrettifyTimeScriptDocs
+  from '../components/pages/scripts/prettify-time-script/prettify-time-script-docs.vue';
+import PreventHiddenPageCallsDecoratorScriptDocs
+  from '../components/pages/scripts/prevent-hidden-page-calls-decorator-script/prevent-hidden-page-calls-decorator-script-docs.vue';
+import SortQueryAdapterScriptsDocs
+  from '../components/pages/scripts/sort-query-adapter-scripts/sort-query-adapter-scripts-docs.vue';
 
 import StoreDocs from '../components/pages/store/store-docs.vue';
 import BaseStoreModuleDocs from '../components/pages/store/modules/base-store-module-docs.vue';
-import GetNamespacedStateDocs from '../components/pages/store/helpers/get-namespaced-state-docs.vue';
+import GetNamespacedStateDocs
+  from '../components/pages/store/helpers/get-namespaced-state-docs.vue';
 
 Vue.use(VueRouter);
 
@@ -556,6 +585,15 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+  // eslint-disable-next-line no-unused-vars
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return { selector: to.hash };
+      // Or for Vue 3:
+      // return {el: to.hash}
+    }
+    return { x: 0, y: 0 };
+  },
 });
 
 export default router;

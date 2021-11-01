@@ -1,5 +1,6 @@
 <template>
   <section class="icon-grid">
+    <h3 id="icon-demo"><a href="#icon-demo">Icon demo:</a></h3>
     <wt-select
       class="icon-grid__select"
       v-model="iconSize"

@@ -17,7 +17,6 @@ export default [
   'generate',
   'rounded-info',
   'copy',
-  'attach',
   'menu',
   'clear',
   'video-on',
@@ -40,7 +39,6 @@ export default [
   'filter',
   'column-select',
   'refresh',
-  'filter',
   'remove-rounded',
   'calendar',
   'radio',
@@ -65,7 +63,6 @@ export default [
   'edit',
   'plus',
   'settings',
-  'close',
   'search',
   'rec-stop',
   'rec',
@@ -96,8 +93,6 @@ export default [
   'call-ringing',
   'call-missed',
   'call-merge',
-  'call-end',
-  'call-transfer',
   'call-add-to',
   'call-disconnect',
   'call-outbound',
@@ -121,4 +116,4 @@ export default [
   'arrow-left',
   'arrow-right',
   'arrow-up',
-];
+].sort();
