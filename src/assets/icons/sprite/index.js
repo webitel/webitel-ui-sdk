@@ -32,16 +32,21 @@ import './call-transfer.svg';
 import './call-transfer--filled.svg';
 
 import './chat.svg';
+import './chat--filled.svg';
+import './chat-emoji.svg';
 import './chat-end.svg';
+import './chat-end--filled.svg';
 import './chat-group.svg';
 import './chat-join.svg';
 import './chat-message-status-read.svg';
 import './chat-message-status-sent.svg';
 import './chat-quick-response.svg';
+import './chat-quick-response--filled.svg';
 import './chat-reply.svg';
 import './chat-send.svg';
-import './chat-smile.svg';
 import './chat-transfer.svg';
+import './chat-transfer--filled.svg';
+
 import './checkbox.svg';
 import './checkbox--checked.svg';
 import './checkbox--checked--filled.svg';
