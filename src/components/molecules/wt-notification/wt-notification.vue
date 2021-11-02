@@ -28,7 +28,7 @@
     computed: {
       notificationIcon() {
         switch (this.type) {
-          case 'info': return 'rounded-tick';
+          case 'info': return 'done';
           case 'error': return 'attention';
           default: return '';
         }

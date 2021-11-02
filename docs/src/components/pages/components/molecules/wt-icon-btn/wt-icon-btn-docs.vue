@@ -11,17 +11,17 @@
       </div>
       <div class="example-wrapper">
         <wt-icon-btn
-          icon="rounded-tick"
+          icon="done"
           tooltip="Active color icon"
           color="active"
         ></wt-icon-btn>
         <wt-icon-btn
-          icon="rounded-tick"
+          icon="done"
           tooltip="Success color icon"
           color="success"
         ></wt-icon-btn>
         <wt-icon-btn
-          icon="rounded-tick"
+          icon="done"
           tooltip="Success color icon"
           color="success"
           disabled
