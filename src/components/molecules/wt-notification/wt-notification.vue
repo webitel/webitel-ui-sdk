@@ -35,8 +35,8 @@
       },
       notificationIconColor() {
         switch (this.type) {
-          case 'info': return 'true';
-          case 'error': return 'false';
+          case 'info': return 'success';
+          case 'error': return 'danger';
           default: return '';
         }
       },
