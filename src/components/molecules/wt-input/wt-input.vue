@@ -188,7 +188,7 @@
       },
 
       showPasswordIcon() {
-        return this.isPasswordVisible ? 'eye-closed' : 'eye-opened';
+        return this.isPasswordVisible ? 'eye--closed' : 'eye--opened';
       },
 
       listeners() {
