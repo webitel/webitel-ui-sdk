@@ -33,9 +33,7 @@
       :disabled="disabled"
       :allow-empty="allowEmpty"
       :searchable="searchable"
-      @input="input"
-      @search-change="fetch"
-      @close="close"
+      v-on="listeners"
     >
       <template slot="caret">
         <wt-icon
@@ -209,6 +207,17 @@ export default {
       if (Array.isArray(this.value)) return !!this.value.length;
       if (typeof this.value === 'object') return !!Object.keys(this.value).length;
       return !!this.value;
+    },
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.input,
+        close: this.close,
+        'search-change': (search) => {
+          this.$emit('search-change', search);
+          this.fetch(search);
+        },
+      };
     },
   },
 

@@ -220,6 +220,9 @@ export default {
       {
         value: 'closed',
       },
+      {
+        value: 'Plus all vue-multiselect events',
+      },
     ],
     slots: [
       {
