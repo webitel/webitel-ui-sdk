@@ -28,7 +28,7 @@
     >
       <template slot="tag-actions" slot-scope="{ index, performDelete }">
         <wt-icon-btn
-          icon="remove-rounded"
+          icon="close--filled"
           size="sm"
           color="active"
           @click="performDelete(index)"

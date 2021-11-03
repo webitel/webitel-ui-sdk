@@ -71,7 +71,7 @@
           class="wt-select__clear"
           :class="{ 'hidden': !isValue }"
           :disabled="disabled"
-          icon="remove-rounded"
+          icon="close--filled"
           size="sm"
           @click="clearValue"
         ></wt-icon-btn>

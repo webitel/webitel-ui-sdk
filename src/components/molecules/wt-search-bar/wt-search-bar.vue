@@ -20,7 +20,7 @@
       <wt-icon-btn
         class="wt-search-bar__reset-icon-btn"
         :class="{ 'hidden': !value }"
-        icon="remove-rounded"
+        icon="close--filled"
         size="sm"
         @click="$emit('input', '')"
       ></wt-icon-btn>

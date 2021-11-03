@@ -25,7 +25,7 @@
       <wt-icon-btn
         class="wt-textarea__reset-icon-btn"
         :class="{ 'hidden': !value }"
-        icon="remove-rounded"
+        icon="close--filled"
         size="sm"
         :disabled="disabled"
         @click="$emit('input', '')"

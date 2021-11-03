@@ -14,7 +14,7 @@
         </slot>
         <wt-icon-btn
           class="wt-popup__close-btn"
-          icon="remove-rounded"
+          icon="close--filled"
           size="sm"
           color="active"
           @click.native="$emit('close')"
