@@ -18,6 +18,7 @@
       <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
     </wt-label>
     <vue-multiselect
+      ref="vue-multiselect"
       class="wt-select__select"
       :value="selectValue"
       :options="selectOptions"

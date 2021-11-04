@@ -71,6 +71,15 @@
     <component-slots
       :slots="slots"
     ></component-slots>
+    <article>
+      <h3>How to close select programmatically?</h3>
+      <a href="https://github.com/shentao/vue-multiselect/pull/947/files/05760bd1e92ce53353a1733aee054a996738f181">vue-multiselect docs link</a>
+    </article>
+    <pre class="language-javascript"><code>
+    closeSelect() {
+      this.$refs['wt-select'].$refs['vue-multiselect'].deactivate(); // 'vue-multiselect' ref is always present
+    },
+    </code></pre>
   </section>
 </template>
 
