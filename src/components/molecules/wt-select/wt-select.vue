@@ -20,34 +20,29 @@
     <vue-multiselect
       ref="vue-multiselect"
       class="wt-select__select"
+      v-bind="$attrs"
       :value="selectValue"
       :options="selectOptions"
       :placeholder="placeholder || label"
-      :multiple="multiple"
-      :close-on-select="closeOnSelect"
       :limit="1"
       :label="optionLabel"
       :track-by="trackBy"
-      :limitText="limitText"
-      :loading="false"
-      :internal-search="internalSearch"
+      :limit-text="(count) => count"
+      :loading="true"
+      :internal-search="!search"
       :disabled="disabled"
       :allow-empty="allowEmpty"
-      :searchable="searchable"
       v-on="listeners"
     >
-      <template slot="caret">
-        <wt-icon
-          class="wt-select__arrow-caret"
-          icon="arrow-down"
-          :disabled="disabled"
-        ></wt-icon>
-      </template>
 
+<!--      Slot that is used for all selected options (tags)-->
       <template slot="tag" slot-scope="{ option }">
-        <span class="multiselect__custom-tag">{{ option[optionLabel] || option }}</span>
+        <span class="multiselect__custom-tag">
+          {{ option[optionLabel] || option }}
+        </span>
       </template>
 
+<!--      Slot for custom label template for single select-->
       <template slot="singleLabel" slot-scope="{ option }">
         <slot name="singleLabel" v-bind="{ option, optionLabel }">
           <span class="multiselect__single-label">
@@ -56,6 +51,7 @@
         </slot>
       </template>
 
+<!--      Slot for custom option template -->
       <template slot="option" slot-scope="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
           <span>
@@ -64,6 +60,18 @@
         </slot>
       </template>
 
+<!--      Element for opening and closing the dropdown -->
+      <template slot="caret" slot-scope="{ toggle }">
+        <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
+        <wt-icon-btn
+          class="wt-select__arrow-caret"
+          icon="arrow-down"
+          :disabled="disabled"
+          @mousedown.native.prevent.stop="toggle"
+        ></wt-icon-btn>
+      </template>
+
+<!--      Slot located before the tags -->
       <template slot="clear" slot-scope="{}">
         <wt-icon-btn
           v-if="clearable"
@@ -74,6 +82,14 @@
           size="sm"
           @click="clearValue"
         ></wt-icon-btn>
+      </template>
+
+<!--      <template slot="beforeList" v-show="isLoading">-->
+<!--        <wt-loader/>-->
+<!--      </template>-->
+
+      <template slot="afterList" v-if="showIntersectionObserver">
+        <div v-observe-visibility="handleAfterListIntersect"></div>
       </template>
     </vue-multiselect>
     <wt-input-info
@@ -86,15 +102,18 @@
 
 <script>
 import VueMultiselect from 'vue-multiselect';
+import { ObserveVisibility } from 'vue-observe-visibility';
+import isEmpty from '../../../scripts/isEmpty';
 import debounce from '../../../scripts/debounce';
 import validationMixin from '../../../mixins/validationMixin/validationMixin';
 
 export default {
   name: 'wt-select',
+  mixins: [validationMixin],
+  directives: { ObserveVisibility },
   components: {
     VueMultiselect,
   },
-  mixins: [validationMixin],
   props: {
     value: {},
 
@@ -118,24 +137,9 @@ export default {
       default: 'id',
     },
 
-    multiple: {
-      type: Boolean,
-      default: false,
-    },
-
-    closeOnSelect: {
-      type: Boolean,
-      default: true,
-    },
-
     optionLabel: {
       type: String,
       default: 'name',
-    },
-
-    internalSearch: {
-      type: Boolean,
-      default: true,
     },
 
     search: {
@@ -145,11 +149,6 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
-    },
-
-    searchable: {
-      type: Boolean,
-      default: true,
     },
 
     clearable: {
@@ -164,7 +163,7 @@ export default {
 
     allowEmpty: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     labelProps: {
@@ -174,16 +173,15 @@ export default {
   },
 
   data: () => ({
-    isLoading: false,
     fetchedOptions: [],
   }),
-
-  created() {
-    this.fetch();
-    this.fetch = debounce(this.fetch);
-  },
-
   computed: {
+    isApiMode() {
+      return !!this.search;
+    },
+    showIntersectionObserver() {
+      return !this.search && this.fetchedOptions.length;
+    },
     selectValue() {
       // vue-multiselect doesn't show placeholder if value is empty object
       return this.isValue ? this.value : '';
@@ -198,21 +196,16 @@ export default {
     },
 
     selectOptions() {
-      if (!this.internalSearch) {
-        return this.fetchedOptions;
-      }
+      if (this.search) return this.fetchedOptions;
       return this.options;
     },
 
     isValue() {
-      if (Array.isArray(this.value)) return !!this.value.length;
-      if (typeof this.value === 'object') return !!Object.keys(this.value).length;
-      return !!this.value;
+      return !isEmpty(this.value);
     },
     listeners() {
       return {
         ...this.$listeners,
-        input: this.input,
         close: this.close,
         'search-change': (search) => {
           this.$emit('search-change', search);
@@ -223,12 +216,9 @@ export default {
   },
 
   methods: {
-    limitText: (count) => `${count}`,
-
     async fetch(search) {
-      if (!this.internalSearch) {
-        this.fetchedOptions = await this.search(search);
-      }
+      if (!this.isApiMode) return;
+      this.fetchedOptions = await this.search(search);
     },
 
     clearValue() {
@@ -239,24 +229,19 @@ export default {
       this.$emit('reset', value);
     },
 
-    input(value) {
-     if (value === null) return; //  ATTENTION prevents crush at selected option click
-      /*
-      if "input" with current value is emitted, value is re-set
-      and it may cause unneeded patch or smth like this
-      so i tried to just cancel "input", if the same value is selected
-       ("null" is emitted from VueMultiselect because default lib behavior fot this action is "reset")
-       */
-    //   if (value === null) {
-    //     this.$emit('input', this.value); //  ATTENTION prevents crush at selected option click
-    //     return;
-    //   }
-      this.$emit('input', value);
+    handleAfterListIntersect(isVisible) {
+      if (isVisible) {
+      }
     },
 
     close() {
       this.$emit('closed');
     },
+  },
+
+  created() {
+    this.fetch();
+    this.fetch = debounce(this.fetch);
   },
 };
 </script>
@@ -395,6 +380,21 @@ export default {
           font-weight: normal;
           background: var(--select-option--active-color)
         }
+      }
+    }
+
+    .multiselect__spinner {
+      position: absolute;
+      top: var(--select-spinner-top-pos);
+      right: var(--select-spinner-right-pos);
+      width: var(--icon-sm-size);
+      height: var(--icon-sm-size);
+      z-index: var(--select-spinner-z-index);
+
+      &:before, &:after {
+        border-top-color: var(--icon-color);
+        width: calc(var(--icon-sm-size) / 2);
+        height: calc(var(--icon-sm-size) / 2);
       }
     }
   }

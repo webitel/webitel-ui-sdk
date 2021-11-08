@@ -1,7 +1,15 @@
 <template>
   <div class="playground">
-    md <wt-icon icon="widget-occupancy" size="xl" style="border: 1px solid blue; margin-right: 10px;"></wt-icon>
-<!--    <svg><use xlink:href="#search"></use></svg>-->
+  <wt-select
+    :search="search"
+    :internal-search="false"
+  ></wt-select>
+  <wt-select
+    :value="123"
+    :search="search"
+    :internal-search="false"
+  ></wt-select>
+    <!--    <svg><use xlink:href="#search"></use></svg>-->
 <!--    <svg><use xlink:href="#close"></use></svg>-->
 <!--    <svg><use xlink:href="#lock"></use></svg>-->
 <!--    <wt-table-->
@@ -178,6 +186,9 @@ export default {
     ],
   }),
   methods: {
+    search(search) {
+      return Array(10).fill({ name: search || '123' });
+    },
     log(event, inputEvent) {
       console.log(event, inputEvent);
     },
