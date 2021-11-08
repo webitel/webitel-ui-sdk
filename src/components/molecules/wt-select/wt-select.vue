@@ -28,8 +28,8 @@
       :label="optionLabel"
       :track-by="trackBy"
       :limit-text="(count) => count"
-      :loading="true"
-      :internal-search="!search"
+      :loading="isLoading"
+      :internal-search="!searchMethod"
       :disabled="disabled"
       :allow-empty="allowEmpty"
       v-on="listeners"
@@ -83,10 +83,6 @@
           @click="clearValue"
         ></wt-icon-btn>
       </template>
-
-<!--      <template slot="beforeList" v-show="isLoading">-->
-<!--        <wt-loader/>-->
-<!--      </template>-->
 
       <template slot="afterList" v-if="showIntersectionObserver">
         <div v-observe-visibility="handleAfterListIntersect"></div>
@@ -142,7 +138,7 @@ export default {
       default: 'name',
     },
 
-    search: {
+    searchMethod: {
       type: Function,
     },
 
@@ -173,14 +169,21 @@ export default {
   },
 
   data: () => ({
-    fetchedOptions: [],
+    apiOptions: [],
+    isLoading: false,
+
+    searchParams: {
+      search: '',
+      page: 1,
+    },
+    searchHasNext: true,
   }),
   computed: {
     isApiMode() {
-      return !!this.search;
+      return !!this.searchMethod;
     },
     showIntersectionObserver() {
-      return !this.search && this.fetchedOptions.length;
+      return this.isApiMode && !this.isLoading && this.apiOptions.length;
     },
     selectValue() {
       // vue-multiselect doesn't show placeholder if value is empty object
@@ -196,8 +199,7 @@ export default {
     },
 
     selectOptions() {
-      if (this.search) return this.fetchedOptions;
-      return this.options;
+      return this.isApiMode ? this.apiOptions : this.options;
     },
 
     isValue() {
@@ -209,16 +211,34 @@ export default {
         close: this.close,
         'search-change': (search) => {
           this.$emit('search-change', search);
-          this.fetch(search);
+          this.handleSearchChange(search);
         },
       };
     },
   },
 
   methods: {
-    async fetch(search) {
+    handleSearchChange(search) {
+      this.isLoading = true;
+      this.searchParams.page = 1;
+      this.searchParams.search = search;
+      this.fetchOptions();
+    },
+
+    handleAfterListIntersect(isVisible) {
+      if (isVisible && this.searchHasNext) {
+        this.isLoading = true;
+        this.searchParams.page += 1;
+        this.fetchOptions();
+      }
+    },
+
+    async fetchOptions({ search, page } = this.searchParams) {
       if (!this.isApiMode) return;
-      this.fetchedOptions = await this.search(search);
+      const { items, next } = await this.searchMethod({ search, page });
+      this.apiOptions = this.searchParams.page === 1 ? items : this.apiOptions.concat(items);
+      this.searchHasNext = next;
+      this.isLoading = false;
     },
 
     clearValue() {
@@ -229,19 +249,14 @@ export default {
       this.$emit('reset', value);
     },
 
-    handleAfterListIntersect(isVisible) {
-      if (isVisible) {
-      }
-    },
-
     close() {
       this.$emit('closed');
     },
   },
 
   created() {
-    this.fetch();
-    this.fetch = debounce(this.fetch);
+    this.fetchOptions();
+    this.fetchOptions = debounce(this.fetchOptions);
   },
 };
 </script>

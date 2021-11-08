@@ -45,7 +45,7 @@ describe('WtSelect', () => {
         WtLabel,
         WtIcon: true,
       },
-      propsData: { options, internalSearch: false, search: () => searchOptions },
+      propsData: { options, searchMethod: () => ({ items: searchOptions }) },
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.selectOptions).toBe(searchOptions);
