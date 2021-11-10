@@ -4,17 +4,12 @@
   --select-caret-right-pos: 10px;
   --select-caret-z-index: 1;
 
-  --select-spinner-top-pos: calc(var(--select-clear-top-pos) + 2px); // 2px visual correction
-  --select-spinner-right-pos: calc(10px + (var(--icon-md-size) + var(--select-caret-right-pos))); // 10px spacing + caret icon + caret right pos
-  --select-spinner-z-index: var(--select-caret-z-index);
-
   --select-clear-top-pos: 11px;
-  --select-clear-right-pos: calc(10px + (var(--icon-sm-size) + var(--select-spinner-right-pos))); // 10px spacing + spinner icon + spinner right pos
+  --select-clear-right-pos: calc(10px + (var(--icon-md-size) + var(--select-caret-right-pos))); // 10px spacing + caret icon + caret right pos
   --select-clear-z-index: var(--select-caret-z-index);
 
-
   --select-tags-min-height: 38px;
-  --select-tags-padding: 9px calc(10px + var(--icon-sm-size) + var(--select-spinner-right-pos)) 9px 9px; // right pos = 10px spacing + spinner icon size + spinner offset
+  --select-tags-padding: 9px calc(10px + var(--icon-md-size) + var(--select-caret-right-pos)) 9px 9px; // right pos = 10px spacing + caret icon size + caret offset
   --select-tags-padding--clearable: 9px calc(10px + var(--icon-sm-size) + var(--select-clear-right-pos)) 9px 9px; // right pos = 10px spacing + clear icon size + clear offset
   --select-tags-border: var(--input-border);
 

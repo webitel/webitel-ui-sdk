@@ -5,6 +5,7 @@
       'wt-select--disabled': disabled,
       'wt-select--invalid': invalid,
       'wt-select--clearable': clearable,
+      'wt-select--loading': isLoading,
     }"
   >
     <wt-label
@@ -27,22 +28,22 @@
       :limit="1"
       :label="optionLabel"
       :track-by="trackBy"
-      :limit-text="(count) => count"
-      :loading="isLoading"
+      :limit-text="(count) => `+${count}`"
+      :loading="false"
       :internal-search="!searchMethod"
       :disabled="disabled"
       :allow-empty="allowEmpty"
       v-on="listeners"
     >
 
-<!--      Slot that is used for all selected options (tags)-->
+      <!--      Slot that is used for all selected options (tags)-->
       <template slot="tag" slot-scope="{ option }">
         <span class="multiselect__custom-tag">
           {{ option[optionLabel] || option }}
         </span>
       </template>
 
-<!--      Slot for custom label template for single select-->
+      <!--      Slot for custom label template for single select-->
       <template slot="singleLabel" slot-scope="{ option }">
         <slot name="singleLabel" v-bind="{ option, optionLabel }">
           <span class="multiselect__single-label">
@@ -51,7 +52,7 @@
         </slot>
       </template>
 
-<!--      Slot for custom option template -->
+      <!--      Slot for custom option template -->
       <template slot="option" slot-scope="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
           <span>
@@ -60,7 +61,7 @@
         </slot>
       </template>
 
-<!--      Element for opening and closing the dropdown -->
+      <!--      Element for opening and closing the dropdown -->
       <template slot="caret" slot-scope="{ toggle }">
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
@@ -71,7 +72,7 @@
         ></wt-icon-btn>
       </template>
 
-<!--      Slot located before the tags -->
+      <!--      Slot located before the tags -->
       <template slot="clear" slot-scope="{}">
         <wt-icon-btn
           v-if="clearable"
@@ -82,6 +83,12 @@
           size="sm"
           @click="clearValue"
         ></wt-icon-btn>
+      </template>
+
+      <template slot="beforeList">
+        <div class="wt-select__loading-wrapper" v-show="isLoading">
+          <wt-loader size="sm"></wt-loader>
+        </div>
       </template>
 
       <template slot="afterList" v-if="showIntersectionObserver">
@@ -256,7 +263,7 @@ export default {
 
   created() {
     this.fetchOptions();
-    this.fetchOptions = debounce(this.fetchOptions);
+    this.fetchOptions = debounce(this.fetchOptions, 500);
   },
 };
 </script>
@@ -331,10 +338,6 @@ export default {
         margin: 0;
         font-weight: normal;
         z-index: var(--select-badge-z-index);
-
-        &:before {
-          content: '+';
-        }
       }
 
       .multiselect__tags-wrap {
@@ -398,19 +401,17 @@ export default {
       }
     }
 
-    .multiselect__spinner {
-      position: absolute;
-      top: var(--select-spinner-top-pos);
-      right: var(--select-spinner-right-pos);
-      width: var(--icon-sm-size);
-      height: var(--icon-sm-size);
-      z-index: var(--select-spinner-z-index);
-
-      &:before, &:after {
-        border-top-color: var(--icon-color);
-        width: calc(var(--icon-sm-size) / 2);
-        height: calc(var(--icon-sm-size) / 2);
-      }
+    .wt-select__loading-wrapper {
+      position: sticky;
+      width: 100%;
+      height: 300px; // max dropdown panel height
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      z-index: 1;
     }
   }
 
@@ -458,6 +459,10 @@ export default {
       }
     }
   }
+}
+
+.wt-select--loading ::v-deep .multiselect__content-wrapper {
+  overflow-y: hidden;
 }
 
 .wt-select--invalid,

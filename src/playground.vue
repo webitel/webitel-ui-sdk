@@ -1,13 +1,19 @@
 <template>
   <div class="playground">
   <wt-select
-    :search="search"
+    :search-method="search"
     :internal-search="false"
   ></wt-select>
   <wt-select
     :value="123"
-    :search="search"
+    :search-method="search"
     :internal-search="false"
+  ></wt-select>
+  <wt-select
+    :value="[123, 321]"
+    :search-method="search"
+    :internal-search="false"
+    multiple
   ></wt-select>
     <!--    <svg><use xlink:href="#search"></use></svg>-->
 <!--    <svg><use xlink:href="#close"></use></svg>-->
@@ -187,7 +193,7 @@ export default {
   }),
   methods: {
     search(search) {
-      return Array(10).fill({ name: search || '123' });
+      return { items: Array(10).fill({ name: search || '123' }), next: true };
     },
     log(event, inputEvent) {
       console.log(event, inputEvent);
