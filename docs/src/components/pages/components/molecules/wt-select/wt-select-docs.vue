@@ -117,12 +117,12 @@ export default {
     properties: [
       {
         value: 'value',
-        code: '<wt-select :value="value"></wt-select>',
+        code: '<wt-select :value="\'my value\'"></wt-select>',
         type: 'any',
       },
       {
         value: 'options',
-        code: '<wt-select :options="options"></wt-select>',
+        code: '<wt-select :options="[1, 2, 3]"></wt-select>',
         type: 'Array',
         default: '[]',
       },
@@ -150,13 +150,14 @@ export default {
         code: '<wt-select multiple></wt-select>',
         type: 'Boolean',
         default: 'false',
-        description: 'Make multiselect',
+        description: 'VUE-MULTISELECT PROP: Make multiselect',
       },
       {
         value: 'closeOnSelect',
         code: '<wt-select close-on-select></wt-select>',
         type: 'Boolean',
         default: 'true',
+        description: 'VUE-MULTISELECT PROP',
       },
       {
         value: 'optionLabel',
@@ -166,30 +167,17 @@ export default {
         description: 'Used to compare objects. Only use if options are objects.',
       },
       {
-        value: 'internalSearch',
-        code: '<wt-select internal-search></wt-select>',
-        type: 'Boolean',
-        default: 'true',
-        description: 'Decide whether to filter the results internally based on search query. Useful for async filtering, where we search through more complex data.',
-      },
-      {
-        value: 'search',
-        code: '<wt-select search="() => {}"></wt-select>',
+        value: 'search-method',
+        code: '<wt-select search="({ search, size }) => ({ items, next })"></wt-select>',
         type: 'Function',
-        description: 'External search api function',
+        description: `External search api function. Select works in api mode, if passed.
+         Response object should have "items" and "next" properties`,
       },
       {
         value: 'disabled',
         code: '<wt-select disabled></wt-select>',
         type: 'Boolean',
         default: 'false',
-      },
-      {
-        value: 'searchable',
-        code: '<wt-select searchable></wt-select>',
-        type: 'Boolean',
-        default: 'true',
-        description: 'Add / removes search select',
       },
       {
         value: 'required',
@@ -209,6 +197,9 @@ export default {
         code: '<wt-checkbox :label-props="{}"></wt-checkbox>',
         type: 'Object',
         description: 'Object with props, passed down to wt-label as props',
+      },
+      {
+        value: 'PLUS ALL VUE_MUTLISELECT PROPS',
       },
     ],
     events: [

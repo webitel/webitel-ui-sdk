@@ -215,6 +215,7 @@ export default {
     listeners() {
       return {
         ...this.$listeners,
+        input: this.input,
         close: this.close,
         'search-change': (search) => {
           this.$emit('search-change', search);
@@ -254,6 +255,10 @@ export default {
       else if (typeof this.value === 'object' && this.value !== null) value = {};
       this.input(value);
       this.$emit('reset', value);
+    },
+
+    input(value) {
+      this.$emit('input', value);
     },
 
     close() {
@@ -338,6 +343,31 @@ export default {
         margin: 0;
         font-weight: normal;
         z-index: var(--select-badge-z-index);
+
+        /* these before-after elements are fixing issue when badge is visually overflown by
+        selected option name (yep, badge has z-index, but its background has 0.3 opacity)*/
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: -2; // below badge itself
+          background: var(--main-color);
+        }
+
+        &:after {
+          @extend .wt-badge;
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: -1; // below badge itself
+
+        }
       }
 
       .multiselect__tags-wrap {

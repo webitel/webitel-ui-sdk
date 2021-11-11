@@ -10,7 +10,7 @@
     :internal-search="false"
   ></wt-select>
   <wt-select
-    :value="[123, 321]"
+    :value="['loremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem', 321]"
     :search-method="search"
     :internal-search="false"
     multiple
