@@ -1,42 +1,33 @@
 <template>
   <div class="wt-button-select">
-    <button
-      class="wt-button-select__button"
-      :class="[
-        colorClass,
-        {
-          'wt-button-select__button--outline': outline,
-          'wt-button-select__button--disabled': disabled,
-        }
-      ]"
-      type="button"
+    <wt-button
+      :color="color"
       :disabled="disabled"
-      @click="$emit('click', $event)"
-    >
-      <wt-loader v-if="loading" size="sm" :color="loaderColor"/>
-      <slot v-else></slot>
-    </button>
-    <div
-      class="wt-button-select__icon-btn-wrapper"
+      :outline="outline"
+      :loading="loading"
+      @click="$emit('btn-click', $event)"
+    >{{ name }}
+    </wt-button>
+
+    <wt-icon-btn
       :class="[
         colorClass,
         {
-          'wt-button-select__icon-btn-wrapper--outline': outline,
-          'wt-button-select__icon-btn-wrapper--disabled': disabled
+          'wt-icon-btn--active': isOpened,
+          'wt-icon-btn--disabled': disabled,
+          'wt-icon-btn--outline': outline,
         }
       ]"
-    >
-      <wt-icon-btn
-        :class="[colorClass, {'wt-icon-btn--active': active}]"
-        icon="arrow-down"
-        :disabled="disabled"
-        @click="toggleArrow"
-      ></wt-icon-btn>
-    </div>
+      icon="arrow-down"
+      :color="iconColor"
+      :disabled="disabled"
+      @click="clickOnSelect"
+      ref="button-select"
+    ></wt-icon-btn>
 
     <ul
       class="wt-button-select__options"
-      :class="{'hidden': !active}"
+      :class="{'hidden': !isOpened}"
     >
       <li
         v-for="(option, index) in options"
@@ -48,37 +39,19 @@
     </ul>
   </div>
 </template>
-
 <script>
+import buttonMixin from '../../atoms/wt-button/buttonMixin';
+
 export default {
   name: 'wt-button-select',
+  mixins: [buttonMixin],
   data: () => ({
-    active: false,
+    isOpened: false,
   }),
   props: {
-    color: {
+    name: {
       type: String,
       default: '',
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    large: {
-      type: Boolean,
-      default: false,
-    },
-    outline: {
-      type: Boolean,
-      default: false,
-    },
-    wide: {
-      type: Boolean,
-      default: false,
-    },
-    loading: {
-      type: Boolean,
-      default: false,
     },
     options: {
       type: Array,
@@ -86,30 +59,38 @@ export default {
     },
   },
   computed: {
-    colorClass() {
-      if (!this.disabled) return `${this.color}`;
+    iconColor() {
+      if (this.outline) return this.color;
+      if (!this.outline && this.color === 'primary') return 'default';
+      if (!this.outline && this.color === 'secondary') return 'secondary';
+      if (!this.outline) return 'contrast';
       return '';
-    },
-    loaderColor() {
-      if (['success', 'transfer', 'danger'].includes(this.color)) return 'main';
-      return 'contrast';
     },
   },
   methods: {
     toggleArrow() {
-      this.active = !this.active;
+      this.isOpened = !this.isOpened;
     },
+
+    clickOnSelect(event) {
+      this.toggleArrow();
+      this.$emit('select-click', event);
+    },
+
     selectOption(option, index) {
-      this.$emit('select-option', option, index);
+      this.$emit('select-option', {
+        option,
+        index,
+      });
       this.toggleArrow();
     },
   },
 };
 </script>
-
 <style lang="scss" scoped>
 $optionsPadding: 9px;
 $optionPadding: 9px 11px;
+$iconBtnPadding: 6px 10px;
 $buttonHeight: 38px;
 $minOptionWidth: 150px;
 
@@ -120,49 +101,135 @@ $minOptionWidth: 150px;
   gap: 1px;
 }
 
-.wt-button-select__icon-btn-wrapper,
-.wt-button-select__button {
-  @extend %typo-btn;
-  display: inline-block;
-  padding: var(--btn-padding);
+.wt-button {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.wt-icon-btn {
+  padding: $iconBtnPadding;
   border: var(--btn-border);
-  color: var(--btn-dark-font-color);
   background: var(--btn-primary-color);
   border-color: var(--btn-primary-color);
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
   transition: var(--transition);
   cursor: pointer;
 
+  // Open and shut arrow
+  &::v-deep .wt-icon {
+    transform: rotate(0);
+  }
+
+  &--active::v-deep .wt-icon {
+    transform: rotate(180deg);
+  }
+
+  // Disabled arrow btn
   &--disabled {
-    color: var(--disabled-color);
     background: var(--btn-disabled-bg-color);
     border-color: var(--disabled-color);
     cursor: auto;
     pointer-events: none;
   }
 
-  &:hover,
-  &:active {
-    background: var(--btn-primary--hover-color);
-    border-color: var(--btn-primary--hover-color);
+  // Outline arrow btn
+  &--outline {
+    &:not(.wt-icon-btn--disabled) {
+      border-color: var(--btn-primary-color);
+      background: transparent;
+    }
+
+    &::v-deep .wt-icon svg {
+      &:hover,
+      &:active {
+        fill: var(--btn-primary--hover-color);
+      }
+    }
+
+    &:hover,
+    &:active {
+      border-color: var(--btn-primary--hover-color);
+      background: transparent;
+    }
+
+    &.secondary {
+      border-color: var(--btn-secondary-color);
+
+      &::v-deep .wt-icon svg {
+        &:hover,
+        &:active {
+          fill: var(--btn-secondary--hover-color);
+        }
+      }
+
+      &:hover,
+      &:active {
+        border-color: var(--btn-secondary--hover-color);
+      }
+    }
+
+    &.success {
+      border-color: var(--btn-true-color);
+
+      &::v-deep .wt-icon svg {
+        &:hover,
+        &:active {
+          fill: var(--btn-true--hover-color);
+        }
+      }
+
+      &:hover,
+      &:active {
+        border-color: var(--btn-true--hover-color);
+      }
+    }
+
+    &.transfer {
+      border-color: var(--btn-transfer-color);
+
+      &::v-deep .wt-icon svg {
+        &:hover,
+        &:active {
+          fill: var(--btn-transfer--hover-color);
+        }
+      }
+
+      &:hover,
+      &:active {
+        border-color: var(--btn-transfer--hover-color);
+      }
+    }
+
+    &.danger {
+      border-color: var(--btn-false-color);
+
+      &::v-deep .wt-icon svg {
+        &:hover,
+        &:active {
+          fill: var(--btn-false--hover-color);
+        }
+      }
+
+      &:hover,
+      &:active {
+        border-color: var(--btn-false--hover-color);
+      }
+    }
   }
 
+  // Normal arrow btn (NOT OUTLINE)
   &:not(&--outline) {
     &.secondary {
-      color: var(--btn-secondary-color);
       border-color: var(--btn-secondary-color);
       background: var(--btn-secondary-bg-color);
 
       &:hover,
       &:active {
-        color: var(--btn-secondary--hover-color);
         border-color: var(--btn-secondary--hover-color);
         background: var(--btn-secondary-bg-color);
       }
     }
 
     &.success {
-      color: var(--btn-light-font-color);
       background: var(--btn-true-color);
       border-color: var(--btn-true-color);
 
@@ -174,7 +241,6 @@ $minOptionWidth: 150px;
     }
 
     &.transfer {
-      color: var(--btn-light-font-color);
       background: var(--btn-transfer-color);
       border-color: var(--btn-transfer-color);
 
@@ -186,7 +252,6 @@ $minOptionWidth: 150px;
     }
 
     &.danger {
-      color: var(--btn-light-font-color);
       background: var(--btn-false-color);
       border-color: var(--btn-false-color);
 
@@ -197,179 +262,6 @@ $minOptionWidth: 150px;
       }
     }
   }
-
-  &--outline {
-    &:not(.wt-button-select__button--disabled, .wt-button-select__icon-btn-wrapper--disabled) {
-      color: var(--btn-primary-color);
-      border-color: var(--btn-primary-color);
-      background: transparent;
-    }
-
-    &:hover,
-    &:active {
-      color: var(--btn-primary--hover-color);
-      border-color: var(--btn-primary--hover-color);
-      background: transparent;
-    }
-
-    &.secondary {
-      color: var(--btn-secondary-color);
-      border-color: var(--btn-secondary-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-secondary--hover-color);
-        border-color: var(--btn-secondary--hover-color);
-      }
-    }
-
-    &.success {
-      color: var(--btn-true-color);
-      border-color: var(--btn-true-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-true--hover-color);
-        border-color: var(--btn-true--hover-color);
-      }
-    }
-
-    &.transfer {
-      color: var(--btn-transfer-color);
-      border-color: var(--btn-transfer-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-transfer--hover-color);
-        border-color: var(--btn-transfer--hover-color);
-      }
-    }
-
-    &.danger {
-      color: var(--btn-false-color);
-      border-color: var(--btn-false-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-false--hover-color);
-        border-color: var(--btn-false--hover-color);
-      }
-    }
-  }
-}
-
-.wt-button-select__icon-btn-wrapper {
-  @extend %typo-btn;
-  padding: 6px 10px;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
-
-  &:hover,
-  &:active {
-    background: var(--btn-primary--hover-color);
-    border-color: var(--btn-primary--hover-color);
-  }
-
-  .wt-icon-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: rotate(0);
-    transition: var(--transition);
-    z-index: var(--select-caret-z-index);
-
-    &--active {
-      transform: rotate(180deg);
-    }
-    // Fix me!!!!!!!!!!!!!!!!!!
-    // May be need to add the primary and secondary icon color in to library ?
-    &::v-deep {
-      & .wt-icon svg {
-        fill: var(--btn-dark-font-color);
-      }
-
-      &.secondary .wt-icon svg {
-        fill: var(--btn-secondary-color);
-
-        &:hover,
-        &:active {
-          fill: var(--btn-secondary--hover-color);
-        }
-      }
-
-      &.danger .wt-icon svg {
-        fill: var(--icon-color-contrast);
-      }
-
-      &.success .wt-icon svg {
-        fill: var(--icon-color-contrast);
-      }
-
-      &.transfer .wt-icon svg {
-        fill: var(--icon-color-contrast);
-      }
-    }
-  }
-
-  //FIX ME!!!!!!!!
-  // May be need to add the primary and secondary icon color in to library ?
-  &--outline::v-deep {
-    & .wt-icon-btn .wt-icon svg {
-      fill: var(--btn-primary-color);
-
-      &:hover,
-      &:active {
-        fill: var(--btn-primary--hover-color);
-      }
-    }
-
-    &:hover {
-      background: transparent;
-    }
-
-    &.secondary .wt-icon-btn .wt-icon svg {
-      fill: var(--btn-secondary-color);
-
-      &:hover,
-      &:active {
-        fill: var(--btn-secondary--hover-color);
-      }
-    }
-
-    &.success .wt-icon-btn .wt-icon svg {
-      fill: var(--btn-true-color);
-
-      &:hover,
-      &:active {
-        fill: var(--btn-true--hover-color);
-      }
-    }
-
-    &.transfer .wt-icon-btn .wt-icon svg {
-      fill: var(--btn-transfer-color);
-
-      &:hover,
-      &:active {
-        fill: var(--btn-transfer--hover-color);
-      }
-    }
-
-    &.danger .wt-icon-btn .wt-icon svg {
-      fill: var(--btn-false-color);
-
-      &:hover,
-      &:active {
-        fill: var(--btn-false--hover-color);
-      }
-    }
-  }
-
-  //FIX ME!!!!!!!!
-  // May be need to add the primary and secondary icon color in to library ?
-  &--disabled {
-    .wt-icon-btn::v-deep .wt-icon svg {
-      fill: var(--disabled-color);
-    }
-  }
 }
 
 .wt-button-select__options {
@@ -377,8 +269,8 @@ $minOptionWidth: 150px;
   position: absolute;
   top: $buttonHeight;
   left: 0;
-  min-width: $minOptionWidth;
   padding: $optionsPadding;
+  min-width: $minOptionWidth;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background-color: var(--main-color);

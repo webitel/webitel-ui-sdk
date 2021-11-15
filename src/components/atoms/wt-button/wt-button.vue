@@ -20,43 +20,19 @@
 </template>
 
 <script>
+import buttonMixin from './buttonMixin';
 
   export default {
     name: 'wt-button',
+    mixins: [buttonMixin],
     props: {
-      color: {
-        type: String,
-        default: '',
-      },
-      disabled: {
-        type: Boolean,
-        default: false,
-      },
       large: {
-        type: Boolean,
-        default: false,
-      },
-      outline: {
         type: Boolean,
         default: false,
       },
       wide: {
         type: Boolean,
         default: false,
-      },
-      loading: {
-        type: Boolean,
-        default: false,
-      },
-    },
-    computed: {
-      colorClass() {
-        if (!this.disabled) return `${this.color}`;
-        return '';
-      },
-      loaderColor() {
-        if (['success', 'transfer', 'danger'].includes(this.color)) return 'main';
-        return 'contrast';
       },
     },
   };
