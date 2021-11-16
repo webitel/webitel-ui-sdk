@@ -1,16 +1,15 @@
 <template>
   <div class="playground">
-    <!--    <wt-button color="primary">Save</wt-button>-->
     <wt-button-select
-      name="Save as"
+      name="Save"
       :options="options"
-      @btn-click="someTestClickMethod"
-      @select-option="someTestSelectClickMethod"
-      @select-click="selectClickMethod"
-      :my-click="someFunc"
-    ></wt-button-select>
+      outline
 
-    <wt-select></wt-select>
+      color="danger"
+      @click="log"
+      @click:arrow="log"
+      @click:option="log"
+    ></wt-button-select>
   </div>
 </template>
 
@@ -23,10 +22,22 @@ export default {
     options: ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6'],
     active: true,
     autocomplete: [
-      { name: 'Laravel5', language: 'PHP' },
-      { name: 'Phoenix6', language: 'Elixir' },
-      { name: 'Vue.js7', language: 'JavaScript' },
-      { name: 'Adonis8', language: 'JavaScript' },
+      {
+        name: 'Laravel5',
+        language: 'PHP',
+      },
+      {
+        name: 'Phoenix6',
+        language: 'Elixir',
+      },
+      {
+        name: 'Vue.js7',
+        language: 'JavaScript',
+      },
+      {
+        name: 'Adonis8',
+        language: 'JavaScript',
+      },
     ],
     vValid: {
       $error: false,
@@ -148,22 +159,61 @@ export default {
     },
     select: {
       value: '876878768787687876878768787687',
-      objValue: { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
+      objValue: {
+        name: 'Vue.js1AAAAAA',
+        language: 'JavaScript',
+      },
       multipleValue: [],
       stringOptions: ['123123123123', '321123123123123', '456'],
       options: [
-        { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
-        { name: 'Adonis2', language: 'JavaScript' },
-        { name: 'Rails3', language: 'Ruby' },
-        { name: 'Sinatra4', language: 'Ruby' },
-        { name: 'Laravel5', language: 'PHP' },
-        { name: 'Phoenix6', language: 'Elixir' },
-        { name: 'Vue.js7', language: 'JavaScript' },
-        { name: 'Adonis8', language: 'JavaScript' },
-        { name: 'Rails9', language: 'Ruby' },
-        { name: 'Sinatra10', language: 'Ruby' },
-        { name: 'Laravel11', language: 'PHP' },
-        { name: 'Phoenix12', language: 'Elixir' },
+        {
+          name: 'Vue.js1AAAAAA',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Adonis2',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Rails3',
+          language: 'Ruby',
+        },
+        {
+          name: 'Sinatra4',
+          language: 'Ruby',
+        },
+        {
+          name: 'Laravel5',
+          language: 'PHP',
+        },
+        {
+          name: 'Phoenix6',
+          language: 'Elixir',
+        },
+        {
+          name: 'Vue.js7',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Adonis8',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Rails9',
+          language: 'Ruby',
+        },
+        {
+          name: 'Sinatra10',
+          language: 'Ruby',
+        },
+        {
+          name: 'Laravel11',
+          language: 'PHP',
+        },
+        {
+          name: 'Phoenix12',
+          language: 'Elixir',
+        },
       ],
     },
     appHeader: {
@@ -176,25 +226,16 @@ export default {
         grafana: { href: 'https://example.com' },
       },
     },
-    columnSelect: [
-    ],
+    columnSelect: [],
   }),
 
   methods: {
-    someFunc() {
-      console.log('Works');
-    },
-    someTestSelectClickMethod(clickData) {
-      console.log(clickData);
-    },
-    someTestClickMethod() {
-      console.log('Click test-method works');
-    },
-    selectClickMethod(event) {
-      console.log(event.target);
-    },
     search(search) {
-      return { items: Array(10).fill({ name: search || '123' }), next: true };
+      return {
+        items: Array(10)
+          .fill({ name: search || '123' }),
+        next: true,
+      };
     },
     log(event, inputEvent) {
       console.log(event, inputEvent);
@@ -208,14 +249,16 @@ export default {
   min-height: 100vh;
   padding: 90px;
   box-sizing: border-box;
+
   & > div {
     margin-bottom: 30px;
-    border-bottom: 2px solid lightskyblue;
+    //border-bottom: 2px solid lightskyblue;
     & > * {
       margin: 10px;
     }
   }
 }
+
 .scrollbar-outer {
   @extend %wt-scrollbar;
 }

@@ -1,50 +1,40 @@
 <template>
   <div class="wt-button-select">
     <wt-button
+      v-bind="$attrs"
       :color="color"
-      :disabled="disabled"
       :outline="outline"
-      :loading="loading"
-      @click="$emit('btn-click', $event)"
+      @click="$emit('click', $event)"
     >{{ name }}
     </wt-button>
-
     <wt-icon-btn
       :class="[
         colorClass,
         {
           'wt-icon-btn--active': isOpened,
-          'wt-icon-btn--disabled': disabled,
           'wt-icon-btn--outline': outline,
         }
       ]"
+      v-bind="$attrs"
       icon="arrow-down"
       :color="iconColor"
-      :disabled="disabled"
-      @click="clickOnSelect"
-      ref="button-select"
+      @click="clickOnArrowBtn"
+      v-clickaway="away"
     ></wt-icon-btn>
 
-    <ul
-      class="wt-button-select__options"
-      :class="{'hidden': !isOpened}"
-    >
-      <li
-        v-for="(option, index) in options"
-        :key="index"
-        @click="selectOption(option, index)"
-      >
-        {{ option }}
-      </li>
-    </ul>
+    <wt-list
+      v-bind="$attrs"
+      :is-opened="isOpened"
+      @click="clickOnOption"
+    ></wt-list>
   </div>
 </template>
 <script>
-import buttonMixin from '../../atoms/wt-button/buttonMixin';
+import clickaway from '../../../directives/clickaway/clickaway';
 
 export default {
   name: 'wt-button-select',
-  mixins: [buttonMixin],
+  directives: { clickaway },
   data: () => ({
     isOpened: false,
   }),
@@ -53,12 +43,24 @@ export default {
       type: String,
       default: '',
     },
-    options: {
-      type: Array,
-      require: true,
+    color: {
+      type: String,
+      default: 'primary',
+    },
+    outline: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
+    colorClass() {
+      if (!this.disabled) return `${this.color}`;
+      return '';
+    },
+    loaderColor() {
+      if (['success', 'transfer', 'danger'].includes(this.color)) return 'main';
+      return 'contrast';
+    },
     iconColor() {
       if (this.outline) return this.color;
       if (!this.outline && this.color === 'primary') return 'default';
@@ -72,33 +74,32 @@ export default {
       this.isOpened = !this.isOpened;
     },
 
-    clickOnSelect(event) {
+    clickOnArrowBtn() {
       this.toggleArrow();
-      this.$emit('select-click', event);
+      this.$emit('click:arrow');
     },
 
-    selectOption(option, index) {
-      this.$emit('select-option', {
-        option,
-        index,
-      });
+    clickOnOption(options) {
+      this.$emit('click:option', options);
       this.toggleArrow();
+    },
+    away() {
+      this.isOpened = false;
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-$optionsPadding: 9px;
-$optionPadding: 9px 11px;
 $iconBtnPadding: 6px 10px;
 $buttonHeight: 38px;
 $minOptionWidth: 150px;
+$buttonsGap: 1px;
 
 .wt-button-select {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 1px;
+  gap: $buttonsGap;
 }
 
 .wt-button {
@@ -129,6 +130,10 @@ $minOptionWidth: 150px;
     border-color: var(--disabled-color);
     cursor: auto;
     pointer-events: none;
+
+    &::v-deep .wt-icon__icon {
+      fill: var(--disabled-color)
+    }
   }
 
   // Outline arrow btn
@@ -138,7 +143,9 @@ $minOptionWidth: 150px;
       background: transparent;
     }
 
-    &::v-deep .wt-icon svg {
+    &:not(.wt-icon-btn--disabled) ::v-deep .wt-icon__icon {
+      fill: var(--btn-primary-color);
+
       &:hover,
       &:active {
         fill: var(--btn-primary--hover-color);
@@ -154,7 +161,9 @@ $minOptionWidth: 150px;
     &.secondary {
       border-color: var(--btn-secondary-color);
 
-      &::v-deep .wt-icon svg {
+      &::v-deep .wt-icon__icon {
+        fill:  var(--btn-secondary-color);
+
         &:hover,
         &:active {
           fill: var(--btn-secondary--hover-color);
@@ -170,7 +179,9 @@ $minOptionWidth: 150px;
     &.success {
       border-color: var(--btn-true-color);
 
-      &::v-deep .wt-icon svg {
+      &::v-deep .wt-icon__icon {
+        fill:  var(--btn-true-color);
+
         &:hover,
         &:active {
           fill: var(--btn-true--hover-color);
@@ -186,7 +197,9 @@ $minOptionWidth: 150px;
     &.transfer {
       border-color: var(--btn-transfer-color);
 
-      &::v-deep .wt-icon svg {
+      &::v-deep .wt-icon__icon {
+        fill:  var(--btn-transfer-color);
+
         &:hover,
         &:active {
           fill: var(--btn-transfer--hover-color);
@@ -202,7 +215,9 @@ $minOptionWidth: 150px;
     &.danger {
       border-color: var(--btn-false-color);
 
-      &::v-deep .wt-icon svg {
+      &::v-deep .wt-icon__icon {
+        fill: var(--btn-false-color);
+
         &:hover,
         &:active {
           fill: var(--btn-false--hover-color);
@@ -221,6 +236,15 @@ $minOptionWidth: 150px;
     &.secondary {
       border-color: var(--btn-secondary-color);
       background: var(--btn-secondary-bg-color);
+
+      &::v-deep .wt-icon .wt-icon__icon {
+        fill: var(--btn-secondary-color);
+
+        &:hover ,
+        &:active {
+          fill: var(--btn-secondary--hover-color);
+        }
+      }
 
       &:hover,
       &:active {
@@ -264,27 +288,10 @@ $minOptionWidth: 150px;
   }
 }
 
-.wt-button-select__options {
-  @extend %typo-body-md;
+.wt-list {
   position: absolute;
   top: $buttonHeight;
   left: 0;
-  padding: $optionsPadding;
   min-width: $minOptionWidth;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  background-color: var(--main-color);
-  transition: var(--transition);
-  z-index: var(--select-caret-z-index);
-
-  li {
-    padding: $optionPadding;
-    cursor: pointer;
-
-    &:hover {
-      border-radius: var(--border-radius);
-      background-color: var(--secondary-color);
-    }
-  }
 }
 </style>

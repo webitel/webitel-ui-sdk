@@ -104,14 +104,6 @@ svg {
   &-disabled .wt-icon__icon {
     fill: var(--icon-color-disabled);
   }
-  // Create "--icon-color-disabled" and "--icon-color-disabled"?
-  &-primary .wt-icon__icon {
-    fill: var(--btn-primary-color);
-  }
-
-  &-secondary .wt-icon__icon {
-    fill: var(--btn-secondary-color);
-  }
 }
 
 .wt-icon.wt-icon--disabled .wt-icon__icon {
