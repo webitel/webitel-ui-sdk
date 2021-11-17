@@ -2,9 +2,9 @@
   <div class="playground">
     <wt-button-select
       name="Save"
-      is-opened
-      color="danger"
       :options="options"
+      outline
+      color="transfer"
       @click="log"
       @click:option="log"
     ></wt-button-select>

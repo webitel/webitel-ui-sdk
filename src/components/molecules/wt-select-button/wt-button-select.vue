@@ -24,7 +24,7 @@
 
     <wt-context-menu
       v-bind="$attrs"
-      :is-visible="isOpened"
+      :visible="isOpened"
       @click="selectOption"
     ></wt-context-menu>
   </div>
@@ -56,22 +56,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$iconBtnPadding: 6px 10px;
-$buttonHeight: 38px;
-$minOptionWidth: 150px;
-$buttonsGap: 1px;
-
 .wt-button-select {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: $buttonsGap;
+  gap: var(--buttons-gap);
 
   .wt-context-menu {
     position: absolute;
-    top: $buttonHeight;
+    top: 100%;
     left: 0;
-    min-width: $minOptionWidth;
   }
 }
 
@@ -80,36 +74,57 @@ $buttonsGap: 1px;
 }
 
 .wt-button-select__select-btn {
-  padding: $iconBtnPadding;
+  padding: var(--icon-button-padding);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 
-  // DISABLED MODE
-  &.wt-button--disabled .wt-icon::v-deep .wt-icon__icon {
-    fill: var(--btn-disabled-color)
+  // NORMAL MODE
+  &::v-deep {
+    & .wt-icon--color-default .wt-icon__icon {
+      fill: var(--icon-color-dark);
+    }
+
+    //For danger, success, transfer icon fill-colors.
+    //In another case we will need to write three additional strings
+    & .wt-icon__icon:not(&.wt-button--outline) {
+      fill: var(--main-color);
+    }
+
+    &.secondary .wt-icon--color-secondary .wt-icon__icon {
+      fill: var(--icon-color-secondary);
+    }
+
+    &.secondary {
+      &:hover,
+      &:active {
+        .wt-icon__icon {
+          fill: var(--icon-color-secondary--hover);
+        }
+      }
+    }
   }
 
   //OUTLINE MODE
-  &.wt-button--outline:not(.wt-button--disabled)::v-deep {
-    .wt-icon--color-default .wt-icon__icon {
-      fill: var(--btn-primary-color);
+  &.wt-button--outline::v-deep {
+    & .wt-icon--color-default .wt-icon__icon {
+      fill: var(--icon-color-primary);
     }
 
     &:hover,
     &:active {
       .wt-icon__icon {
-        fill: var(--btn-primary--hover-color);
+        fill: var(--iocn-color-primary--hover);
       }
     }
 
     .wt-icon--color-secondary .wt-icon__icon {
-      fill: var(--btn-secondary-color);
+      fill: var(--icon-color-secondary);
     }
 
     &.danger {
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--btn-false--hover-color);
+          fill: var(--iocn-color-danger--hover);
         }
       }
     }
@@ -118,7 +133,7 @@ $buttonsGap: 1px;
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--btn-true--hover-color);
+          fill: var(--icon-color-success--hover);
         }
       }
     }
@@ -127,7 +142,7 @@ $buttonsGap: 1px;
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--btn-transfer--hover-color);
+          fill: var(--icon-color-transfer--hover);
         }
       }
     }
@@ -136,39 +151,18 @@ $buttonsGap: 1px;
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--btn-secondary--hover-color);
+          fill: var(--icon-color-secondary--hover);
         }
       }
     }
   }
 
-  // NORMAL MODE
-  &:not(.wt-button--outline)::v-deep {
-    & .wt-icon__icon {
-      fill: var(--btn-dark-font-color);
-    }
-
-    &.danger .wt-icon__icon,
-    &.success .wt-icon__icon,
-    &.transfer .wt-icon__icon {
-      fill: var(--main-color);
-    }
-
-    &.secondary .wt-icon__icon {
-      fill: var(--btn-secondary-color);
-    }
-
-    &.secondary {
-      &:hover,
-      &:active {
-        .wt-icon__icon {
-          fill: var(--btn-dark-font-color);
-        }
-      }
-    }
+  // DISABLED MODE
+  &.wt-button--disabled .wt-icon::v-deep .wt-icon__icon {
+    fill: var(--btn-disabled-color);
   }
 
-  // Open and shut arrow
+  // OPEN AND SHUT ARROW
   .wt-icon {
     display: flex;
     transform: rotate(0);

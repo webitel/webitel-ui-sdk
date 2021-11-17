@@ -1,14 +1,19 @@
 <template>
   <ul
     class="wt-context-menu"
-    :class="{'hidden': !isVisible}"
+    :class="{'wt-context-menu--hidden': !visible}"
   >
     <li
       v-for="(option, index) in options"
       :key="index"
-      @click="$emit('click', { option, index })"
     >
-      {{ option }}
+      <a
+        class="wt-context-menu__option"
+        href="#"
+        @click="$emit('click', { option, index })"
+        >
+        {{ option }}
+      </a>
     </li>
   </ul>
 </template>
@@ -19,9 +24,9 @@ export default {
   props: {
     options: {
       type: Array,
-      require: true,
+      required: true,
     },
-    isVisible: {
+    visible: {
       type: Boolean,
       default: true,
     },
@@ -30,26 +35,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$optionsPadding: 9px;
-$optionPadding: 9px 11px;
+.wt-context-menu--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .wt-context-menu {
   @extend %typo-body-md;
-  padding: $optionsPadding;
+  min-width: var(--min-option-width);
+  padding: var(--options-padding);
   background-color: var(--main-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: var(--transition);
   z-index: 1;
+}
 
-  li {
-    padding: $optionPadding;
-    cursor: pointer;
+.wt-context-menu__option {
+  display: block;
+  padding: var(--option-padding);
+  cursor: pointer;
 
-    &:hover {
-      background-color: var(--secondary-color);
-      border-radius: var(--border-radius);
-    }
+  &:hover {
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
   }
 }
 </style>

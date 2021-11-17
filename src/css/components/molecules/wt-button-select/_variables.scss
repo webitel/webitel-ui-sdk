@@ -1,0 +1,14 @@
+:root {
+  --icon-button-padding: 6px 10px;
+  --buttons-gap: 1px;
+
+  --icon-color-primary: var(--btn-primary-color);
+  --icon-color-secondary: var(--btn-secondary-color);
+  --icon-color-dark: var(--btn-dark-font-color);
+
+  --iocn-color-primary--hover: var(--btn-primary--hover-color);
+  --iocn-color-danger--hover: var(--btn-false--hover-color);
+  --icon-color-success--hover: var(--btn-true--hover-color);
+  --icon-color-transfer--hover: var(--btn-transfer--hover-color);
+  --icon-color-secondary--hover: var(--btn-dark-font-color);
+}
