@@ -1,7 +1,7 @@
 <template>
   <ul
-    class="wt-list"
-    :class="{'hidden': !isOpened}"
+    class="wt-context-menu"
+    :class="{'hidden': !isVisible}"
   >
     <li
       v-for="(option, index) in options"
@@ -15,13 +15,13 @@
 
 <script>
 export default {
-  name: 'wt-list',
+  name: 'wt-context-menu',
   props: {
     options: {
       type: Array,
       require: true,
     },
-    isOpened: {
+    isVisible: {
       type: Boolean,
       default: true,
     },
@@ -33,12 +33,12 @@ export default {
 $optionsPadding: 9px;
 $optionPadding: 9px 11px;
 
-.wt-list {
+.wt-context-menu {
   @extend %typo-body-md;
   padding: $optionsPadding;
+  background-color: var(--main-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  background-color: var(--main-color);
   transition: var(--transition);
   z-index: 1;
 
@@ -47,8 +47,8 @@ $optionPadding: 9px 11px;
     cursor: pointer;
 
     &:hover {
-      border-radius: var(--border-radius);
       background-color: var(--secondary-color);
+      border-radius: var(--border-radius);
     }
   }
 }

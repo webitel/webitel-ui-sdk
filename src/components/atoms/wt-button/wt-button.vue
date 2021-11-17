@@ -25,7 +25,7 @@
     props: {
       color: {
         type: String,
-        default: 'primary',
+        default: '',
       },
       disabled: {
         type: Boolean,

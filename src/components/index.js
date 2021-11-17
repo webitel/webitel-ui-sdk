@@ -8,7 +8,7 @@ import WtDivider from './atoms/wt-divider/wt-divider.vue';
 import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
 import WtRoundedAction from './atoms/wt-rounded-action/wt-rounded-action.vue';
 import WtLoader from './atoms/wt-loader/wt-loader.vue';
-import WtList from './atoms/wt-list/wt-list.vue';
+import WtContextMenu from './atoms/wt-context-menu/wt-context-menu.vue';
 
 import WtCheckbox from './molecules/wt-checkbox/wt-checkbox.vue';
 import WtDatepicker from './molecules/wt-datepicker/wt-datepicker.vue';
@@ -92,7 +92,7 @@ const Components = {
   WtTableActions,
   WtTableColumnSelect,
   WtButtonSelect,
-  WtList,
+  WtContextMenu,
 };
 
 Object.keys(Components).forEach((name) => {
