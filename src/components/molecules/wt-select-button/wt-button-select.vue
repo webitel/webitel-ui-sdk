@@ -7,7 +7,8 @@
       class="wt-button-select__button"
       v-bind="$attrs"
       @click="$emit('click', $event)"
-    >{{ name }}
+    >
+      <slot></slot>
     </wt-button>
 
     <wt-button
@@ -19,6 +20,7 @@
         :class="{'wt-icon--active': isOpened}"
         v-bind="$attrs"
         icon="arrow-down"
+        size="sm"
       ></wt-icon>
     </wt-button>
 
@@ -38,12 +40,6 @@ export default {
   data: () => ({
     isOpened: false,
   }),
-  props: {
-    name: {
-      type: String,
-      default: '',
-    },
-  },
   methods: {
     selectOption(options) {
       this.$emit('click:option', options);
@@ -60,7 +56,7 @@ export default {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: var(--buttons-gap);
+  gap: var(--button-select-buttons-gap);
 
   .wt-context-menu {
     position: absolute;
@@ -70,17 +66,19 @@ export default {
 }
 
 .wt-button-select__button {
+  @extend %typo-btn-select;
+  padding: var(--button-select-button-padding);
   border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
 .wt-button-select__select-btn {
-  padding: var(--icon-button-padding);
+  padding: var(--button-select-icon-button-padding);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 
   // NORMAL MODE
   &::v-deep {
     & .wt-icon--color-default .wt-icon__icon {
-      fill: var(--icon-color-dark);
+      fill: var(--button-select-icon-color-dark);
     }
 
     //For danger, success, transfer icon fill-colors.
@@ -90,14 +88,14 @@ export default {
     }
 
     &.secondary .wt-icon--color-secondary .wt-icon__icon {
-      fill: var(--icon-color-secondary);
+      fill: var(--button-select-icon-color-secondary);
     }
 
     &.secondary {
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--icon-color-secondary--hover);
+          fill: var(--button-select-icon-color-secondary--hover);
         }
       }
     }
@@ -106,25 +104,25 @@ export default {
   //OUTLINE MODE
   &.wt-button--outline::v-deep {
     & .wt-icon--color-default .wt-icon__icon {
-      fill: var(--icon-color-primary);
+      fill: var(--button-select-icon-color-primary);
     }
 
     &:hover,
     &:active {
       .wt-icon__icon {
-        fill: var(--iocn-color-primary--hover);
+        fill: var(--button-select-iocn-color-primary--hover);
       }
     }
 
     .wt-icon--color-secondary .wt-icon__icon {
-      fill: var(--icon-color-secondary);
+      fill: var(--button-select-icon-color-secondary);
     }
 
     &.danger {
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--iocn-color-danger--hover);
+          fill: var(--button-select-icon-color-danger--hover);
         }
       }
     }
@@ -133,7 +131,7 @@ export default {
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--icon-color-success--hover);
+          fill: var(--button-select-icon-color-success--hover);
         }
       }
     }
@@ -142,7 +140,7 @@ export default {
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--icon-color-transfer--hover);
+          fill: var(--button-select-icon-color-transfer--hover);
         }
       }
     }
@@ -151,7 +149,7 @@ export default {
       &:hover,
       &:active {
         .wt-icon__icon {
-          fill: var(--icon-color-secondary--hover);
+          fill: var(--button-select-icon-color-secondary--hover);
         }
       }
     }
@@ -159,7 +157,7 @@ export default {
 
   // DISABLED MODE
   &.wt-button--disabled .wt-icon::v-deep .wt-icon__icon {
-    fill: var(--btn-disabled-color);
+    fill: var(--button-select-icon-color-disable);
   }
 
   // OPEN AND SHUT ARROW

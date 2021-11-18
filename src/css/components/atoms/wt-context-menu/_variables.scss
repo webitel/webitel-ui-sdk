@@ -1,5 +1,13 @@
-:root {
-  --options-padding: 9px 11px;
-  --option-padding: 9px;
-  --min-option-width: 150px;
+.wt-context-menu {
+  %typo-context-menu {
+    font: {
+      family: 'Montserrat Regular', monospace;
+      size: 10px;
+    }
+    line-height: 20px;
+  }
+
+  // wt-icon has own paddings, that why the paddings bellow are like they are
+  --context-menu-option-padding: var(--spacing--sm);
+  --context-menu-min-option-width: 150px;
 }

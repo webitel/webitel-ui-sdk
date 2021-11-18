@@ -4,6 +4,7 @@
     :class="{'wt-context-menu--hidden': !visible}"
   >
     <li
+      class="wt-context-menu__item"
       v-for="(option, index) in options"
       :key="index"
     >
@@ -35,30 +36,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wt-context-menu--hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .wt-context-menu {
-  @extend %typo-body-md;
-  min-width: var(--min-option-width);
-  padding: var(--options-padding);
+  min-width: var(--context-menu-min-option-width);
   background-color: var(--main-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: var(--transition);
   z-index: 1;
+
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.wt-context-menu__item {
+  &:first-of-type {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+  }
+  &:last-of-type {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+  &:only-of-type {
+    border-radius: var(--border-radius);
+  }
+  &:hover {
+    background-color: var(--secondary-color);
+    transition: var(--transition);
+  }
 }
 
 .wt-context-menu__option {
+  @extend %typo-context-menu;
   display: block;
-  padding: var(--option-padding);
+  padding: var(--context-menu-option-padding);
   cursor: pointer;
-
-  &:hover {
-    background-color: var(--secondary-color);
-    border-radius: var(--border-radius);
-  }
 }
 </style>

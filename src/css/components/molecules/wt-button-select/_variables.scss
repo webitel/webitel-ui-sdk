@@ -1,14 +1,27 @@
-:root {
-  --icon-button-padding: 6px 10px;
-  --buttons-gap: 1px;
+.wt-button-select {
+  // This component we use in FLOW, where a line-height is another
+  // If a line-height will be 14px(like in normal button), a button-select will have unbalanced appearance.
+  %typo-btn-select {
+    font: {
+      family: 'Montserrat Semi', monospace;
+      size: 12px;
+    }
+    line-height: 24px;
+  }
+  // wt-icon has own paddings. BUt this component we use in Flow, where paddings are like paddings bellow.
+  --button-select-button-padding: var(--spacing--sm) var(--spacing--lg);
+  --button-select-icon-button-padding: var(--spacing--md) var(--spacing--lg);
 
-  --icon-color-primary: var(--btn-primary-color);
-  --icon-color-secondary: var(--btn-secondary-color);
-  --icon-color-dark: var(--btn-dark-font-color);
+  --button-select-buttons-gap: 1px;
 
-  --iocn-color-primary--hover: var(--btn-primary--hover-color);
-  --iocn-color-danger--hover: var(--btn-false--hover-color);
-  --icon-color-success--hover: var(--btn-true--hover-color);
-  --icon-color-transfer--hover: var(--btn-transfer--hover-color);
-  --icon-color-secondary--hover: var(--btn-dark-font-color);
+  --button-select-icon-color-primary: var(--btn-primary-color);
+  --button-select-icon-color-secondary: var(--btn-secondary-color);
+  --button-select-icon-color-dark: var(--btn-dark-font-color);
+  --button-select-icon-color-disable: var(--btn-disabled-color);
+
+  --button-select-icon-color-primary--hover: var(--btn-primary--hover-color);
+  --button-select-icon-color-danger--hover: var(--btn-false--hover-color);
+  --button-select-icon-color-success--hover: var(--btn-true--hover-color);
+  --button-select-icon-color-transfer--hover: var(--btn-transfer--hover-color);
+  --button-select-icon-color-secondary--hover: var(--btn-dark-font-color);
 }

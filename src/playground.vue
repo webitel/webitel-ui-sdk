@@ -27,13 +27,14 @@
 <!--&lt;!&ndash;      </template>&ndash;&gt;-->
 <!--    </wt-table>-->
     <wt-button-select
-      name="Save"
+      color="danger"
       :options="options"
       outline
-      color="transfer"
       @click="log"
       @click:option="log"
-    ></wt-button-select>
+    >
+      Save
+    </wt-button-select>
   </div>
 </template>
 
@@ -223,7 +224,7 @@ export default {
 
   & > div {
     margin-bottom: 30px;
-    border-bottom: 2px solid lightskyblue;
+    //border-bottom: 2px solid lightskyblue;
 
     & > * {
       margin: 10px;
