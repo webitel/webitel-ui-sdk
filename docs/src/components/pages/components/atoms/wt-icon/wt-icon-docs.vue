@@ -30,6 +30,11 @@
       id="icons-naming-convention"
       class="markdown-body"
     ></article>
+    <article
+      v-html="cleanupIconsMd"
+      id="cleanup-icons"
+      class="markdown-body"
+    ></article>
   </section>
 </template>
 
@@ -40,6 +45,7 @@ import IconGrid from './_internals/icon-grid.vue';
 import howDoesItWorkMd from './md/how-does-it-work';
 import howToInstallCustomIconsToProjectMd from './md/how-to-install-custom-icons-to-project';
 import iconsNamingConventionMd from './md/icons-naming-convention';
+import cleanupIconsMd from './md/cleanup-icons';
 
 export default {
   name: 'wt-icon-docs',
@@ -97,6 +103,9 @@ export default {
     },
     iconsNamingConventionMd() {
       return iconsNamingConventionMd[this.$i18n.locale] || iconsNamingConventionMd.default;
+    },
+    cleanupIconsMd() {
+      return cleanupIconsMd[this.$i18n.locale] || cleanupIconsMd.default;
     },
   },
   mounted() {
