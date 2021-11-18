@@ -17,7 +17,8 @@
       @click="isOpened = !isOpened"
     >
       <wt-icon
-        :class="{'wt-icon--active': isOpened}"
+        class="wt-button-select__select-arrow"
+        :class="{'wt-button-select__select-arrow--active': isOpened}"
         v-bind="$attrs"
         icon="arrow-down"
         size="sm"
@@ -32,17 +33,14 @@
   </div>
 </template>
 <script>
-import clickaway from '../../../directives/clickaway/clickaway';
-
 export default {
   name: 'wt-button-select',
-  directives: { clickaway },
   data: () => ({
     isOpened: false,
   }),
   methods: {
-    selectOption(options) {
-      this.$emit('click:option', options);
+    selectOption({ option, index }) {
+      this.$emit('click:option', { option, index });
       this.isOpened = false;
     },
     away() {
@@ -76,15 +74,15 @@ export default {
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 
   // NORMAL MODE
-  &::v-deep {
+  &:not(.wt-button--outline)::v-deep {
     & .wt-icon--color-default .wt-icon__icon {
       fill: var(--button-select-icon-color-dark);
     }
 
     //For danger, success, transfer icon fill-colors.
     //In another case we will need to write three additional strings
-    & .wt-icon__icon:not(&.wt-button--outline) {
-      fill: var(--main-color);
+    & .wt-icon__icon {
+      fill: var(--button-select-icon-color-ligth);
     }
 
     &.secondary .wt-icon--color-secondary .wt-icon__icon {
@@ -110,7 +108,7 @@ export default {
     &:hover,
     &:active {
       .wt-icon__icon {
-        fill: var(--button-select-iocn-color-primary--hover);
+        fill: var(--button-select-icon-color-primary--hover);
       }
     }
 
@@ -157,11 +155,11 @@ export default {
 
   // DISABLED MODE
   &.wt-button--disabled .wt-icon::v-deep .wt-icon__icon {
-    fill: var(--button-select-icon-color-disable);
+    fill: var(--icon-color-disabled);
   }
 
   // OPEN AND SHUT ARROW
-  .wt-icon {
+  .wt-button-select__select-arrow {
     display: flex;
     transform: rotate(0);
 

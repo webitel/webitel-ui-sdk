@@ -7,7 +7,11 @@
     line-height: 20px;
   }
 
+  --context-menu-option-color--hover: var(--secondary-color);
+
+  --context-menu-background-color: var(--main-color);
+
   // wt-icon has own paddings, that why the paddings bellow are like they are
   --context-menu-option-padding: var(--spacing--sm);
-  --context-menu-min-option-width: 150px;
+  --context-menu-min-width : 150px;
 }

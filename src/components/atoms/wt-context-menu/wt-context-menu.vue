@@ -4,7 +4,7 @@
     :class="{'wt-context-menu--hidden': !visible}"
   >
     <li
-      class="wt-context-menu__item"
+      class="wt-context-menu__option-wrapper"
       v-for="(option, index) in options"
       :key="index"
     >
@@ -13,7 +13,7 @@
         href="#"
         @click="$emit('click', { option, index })"
         >
-        {{ option }}
+        {{ option.text || option }}
       </a>
     </li>
   </ul>
@@ -26,6 +26,7 @@ export default {
     options: {
       type: Array,
       required: true,
+      description: '[{ text }] or [\'str\']',
     },
     visible: {
       type: Boolean,
@@ -37,8 +38,8 @@ export default {
 
 <style lang="scss" scoped>
 .wt-context-menu {
-  min-width: var(--context-menu-min-option-width);
-  background-color: var(--main-color);
+  min-width: var(--context-menu-min-width);
+  background-color: var(--context-menu-background-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: var(--transition);
@@ -50,7 +51,7 @@ export default {
   }
 }
 
-.wt-context-menu__item {
+.wt-context-menu__option-wrapper {
   &:first-of-type {
     border-radius: var(--border-radius) var(--border-radius) 0 0;
   }
@@ -61,7 +62,7 @@ export default {
     border-radius: var(--border-radius);
   }
   &:hover {
-    background-color: var(--secondary-color);
+    background-color: var( --context-menu-option-color--hover);
     transition: var(--transition);
   }
 }
