@@ -22,6 +22,13 @@ describe('Case converters', () => {
     expect(snakeToCamel(snakeStr)).toBe(camelStr);
   });
 
+  it('Camel-Snake, test case 1: do not convert 1st uppercase letter', () => {
+    const camelStr = 'Timer';
+    const snakeStr = 'Timer';
+    expect(camelToSnake(camelStr)).toBe(snakeStr);
+    expect(snakeToCamel(snakeStr)).toBe(camelStr);
+  });
+
   it('Camel <- Snake skips first char "_"', () => {
     const camelStr = '_camelToSnake';
     const snakeStr = '_camel_to_snake';

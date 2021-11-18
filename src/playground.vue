@@ -1,5 +1,31 @@
 <template>
   <div class="playground">
+  <wt-select
+    :search-method="search"
+    :internal-search="false"
+  ></wt-select>
+  <wt-select
+    :value="123"
+    :search-method="search"
+    :internal-search="false"
+  ></wt-select>
+  <wt-select
+    :value="['loremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem', 321]"
+    :search-method="search"
+    :internal-search="false"
+    multiple
+  ></wt-select>
+    <!--    <svg><use xlink:href="#search"></use></svg>-->
+<!--    <svg><use xlink:href="#close"></use></svg>-->
+<!--    <svg><use xlink:href="#lock"></use></svg>-->
+<!--    <wt-table-->
+<!--      :headers="table.headers"-->
+<!--      :data="table.data"-->
+<!--    >-->
+<!--&lt;!&ndash;      <template slot="h1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <wt-select></wt-select>&ndash;&gt;-->
+<!--&lt;!&ndash;      </template>&ndash;&gt;-->
+<!--    </wt-table>-->
     <wt-button-select
       name="Save"
       :options="options"
@@ -12,7 +38,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'playground',
   data: () => ({
@@ -20,22 +45,10 @@ export default {
     options: ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6'],
     active: true,
     autocomplete: [
-      {
-        name: 'Laravel5',
-        language: 'PHP',
-      },
-      {
-        name: 'Phoenix6',
-        language: 'Elixir',
-      },
-      {
-        name: 'Vue.js7',
-        language: 'JavaScript',
-      },
-      {
-        name: 'Adonis8',
-        language: 'JavaScript',
-      },
+      { name: 'Laravel5', language: 'PHP' },
+      { name: 'Phoenix6', language: 'Elixir' },
+      { name: 'Vue.js7', language: 'JavaScript' },
+      { name: 'Adonis8', language: 'JavaScript' },
     ],
     vValid: {
       $error: false,
@@ -157,61 +170,22 @@ export default {
     },
     select: {
       value: '876878768787687876878768787687',
-      objValue: {
-        name: 'Vue.js1AAAAAA',
-        language: 'JavaScript',
-      },
+      objValue: { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
       multipleValue: [],
       stringOptions: ['123123123123', '321123123123123', '456'],
       options: [
-        {
-          name: 'Vue.js1AAAAAA',
-          language: 'JavaScript',
-        },
-        {
-          name: 'Adonis2',
-          language: 'JavaScript',
-        },
-        {
-          name: 'Rails3',
-          language: 'Ruby',
-        },
-        {
-          name: 'Sinatra4',
-          language: 'Ruby',
-        },
-        {
-          name: 'Laravel5',
-          language: 'PHP',
-        },
-        {
-          name: 'Phoenix6',
-          language: 'Elixir',
-        },
-        {
-          name: 'Vue.js7',
-          language: 'JavaScript',
-        },
-        {
-          name: 'Adonis8',
-          language: 'JavaScript',
-        },
-        {
-          name: 'Rails9',
-          language: 'Ruby',
-        },
-        {
-          name: 'Sinatra10',
-          language: 'Ruby',
-        },
-        {
-          name: 'Laravel11',
-          language: 'PHP',
-        },
-        {
-          name: 'Phoenix12',
-          language: 'Elixir',
-        },
+        { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
+        { name: 'Adonis2', language: 'JavaScript' },
+        { name: 'Rails3', language: 'Ruby' },
+        { name: 'Sinatra4', language: 'Ruby' },
+        { name: 'Laravel5', language: 'PHP' },
+        { name: 'Phoenix6', language: 'Elixir' },
+        { name: 'Vue.js7', language: 'JavaScript' },
+        { name: 'Adonis8', language: 'JavaScript' },
+        { name: 'Rails9', language: 'Ruby' },
+        { name: 'Sinatra10', language: 'Ruby' },
+        { name: 'Laravel11', language: 'PHP' },
+        { name: 'Phoenix12', language: 'Elixir' },
       ],
     },
     appHeader: {
@@ -226,7 +200,6 @@ export default {
     },
     columnSelect: [],
   }),
-
   methods: {
     search(search) {
       return {
@@ -250,7 +223,8 @@ export default {
 
   & > div {
     margin-bottom: 30px;
-    //border-bottom: 2px solid lightskyblue;
+    border-bottom: 2px solid lightskyblue;
+
     & > * {
       margin: 10px;
     }

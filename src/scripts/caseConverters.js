@@ -4,9 +4,8 @@ export const snakeToCamel = (str) => str.replace(
 );
 
 export const camelToSnake = (str) => str.replace(
-  /([A-Z])/g,
-  (group) => group.toLowerCase()
-    .replace('', '_'),
+  /([a-z])([A-Z])/g,
+  (group, p1, p2) => [p1, '_', p2.toLowerCase()].join(''),
 );
 
 export const kebabToCamel = (str) => str.replace(

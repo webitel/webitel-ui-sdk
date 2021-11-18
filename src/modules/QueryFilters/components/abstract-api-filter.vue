@@ -4,8 +4,7 @@
     :label="$t(filterSchema.locale.label)"
     :track-by="filterSchema.storedProp"
     :multiple="filterSchema.multiple"
-    :search="search"
-    :internal-search="false"
+    :search-method="search"
     :close-on-select="filterSchema.closeOnSelect"
     v-bind="$attrs"
     @input="setValue({ filter: filterQuery, value: $event })"
@@ -27,8 +26,8 @@ export default {
     },
   },
   methods: {
-    search(search) {
-      return this.filterSchema.search({ search });
+    search(params) {
+      return this.filterSchema.search(params);
     },
     fetchSelected(...args) {
       return this.filterSchema.fetchSelected(...args);
