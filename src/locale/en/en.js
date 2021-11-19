@@ -96,6 +96,9 @@ export default {
     url: 'Should look like url',
   },
   webitelUI: {
+    searchBar: {
+      placeholder: 'Search',
+    },
     timepicker: {
       hour: 'Hour:',
       min: 'Min:',

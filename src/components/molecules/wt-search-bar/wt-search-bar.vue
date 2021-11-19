@@ -9,7 +9,7 @@
       <input
         class="wt-search-bar__input"
         :value="value"
-        :placeholder="placeholder"
+        :placeholder="searchBarPlaceholder"
         type="search"
         v-on="listeners"
       >
@@ -46,7 +46,6 @@
        */
       placeholder: {
         type: String,
-        default: 'Search',
       },
       debounce: {
         type: Boolean,
@@ -81,6 +80,9 @@
           input: (event) => this.$emit('input', event.target.value),
           keyup: this.handleKeyup,
         };
+      },
+      searchBarPlaceholder() {
+        return this.placeholder || this.$t('webitelUI.searchBar.placeholder');
       },
     },
 

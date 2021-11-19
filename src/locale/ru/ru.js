@@ -94,6 +94,9 @@ export default {
     url: 'Необходимо ввести корректный url-адрес',
   },
   webitelUI: {
+    searchBar: {
+      placeholder: 'Поиск',
+    },
     timepicker: {
       hour: 'Час:',
       min: 'Мин:',
