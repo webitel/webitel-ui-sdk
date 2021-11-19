@@ -8,6 +8,7 @@ import WtDivider from './atoms/wt-divider/wt-divider.vue';
 import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
 import WtRoundedAction from './atoms/wt-rounded-action/wt-rounded-action.vue';
 import WtLoader from './atoms/wt-loader/wt-loader.vue';
+import WtContextMenu from './atoms/wt-context-menu/wt-context-menu.vue';
 
 import WtCheckbox from './molecules/wt-checkbox/wt-checkbox.vue';
 import WtDatepicker from './molecules/wt-datepicker/wt-datepicker.vue';
@@ -28,6 +29,7 @@ import WtTimeInput from './molecules/wt-time-input/wt-time-input.vue';
 import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
 import WtLabel from './molecules/wt-label/wt-label.vue';
+import WtButtonSelect from './molecules/wt-select-button/wt-button-select.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
@@ -89,6 +91,8 @@ const Components = {
   WtTable,
   WtTableActions,
   WtTableColumnSelect,
+  WtButtonSelect,
+  WtContextMenu,
 };
 
 Object.keys(Components).forEach((name) => {

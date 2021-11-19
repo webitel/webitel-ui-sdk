@@ -1,0 +1,21 @@
+.wt-button-select {
+  --button-select-button-padding: var(--spacing--md) var(--spacing--lg);
+  /*
+  Reduce 1px from "spacing--md" for align a difference between arrow size in "wt-button-select__select"
+  and line-height of text in "wt-button-select__button"
+  */
+  --button-select-icon-button-padding: calc(var(--spacing--md) - 1px);
+
+  --button-select-buttons-gap: 1px;
+
+  --button-select-icon-color-primary: var(--btn-primary-color);
+  --button-select-icon-color-secondary: var(--btn-secondary-color);
+  --button-select-icon-color-dark: var(--btn-dark-font-color);
+  --button-select-icon-color-ligth: var(--main-color);
+
+  --button-select-icon-color-primary--hover: var(--btn-primary--hover-color);
+  --button-select-icon-color-danger--hover: var(--btn-false--hover-color);
+  --button-select-icon-color-success--hover: var(--btn-true--hover-color);
+  --button-select-icon-color-transfer--hover: var(--btn-transfer--hover-color);
+  --button-select-icon-color-secondary--hover: var(--btn-dark-font-color);
+}

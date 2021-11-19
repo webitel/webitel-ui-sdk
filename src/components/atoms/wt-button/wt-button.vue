@@ -20,7 +20,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'wt-button',
     props: {
@@ -32,19 +31,19 @@
         type: Boolean,
         default: false,
       },
-      large: {
-        type: Boolean,
-        default: false,
-      },
       outline: {
         type: Boolean,
         default: false,
       },
-      wide: {
+      loading: {
         type: Boolean,
         default: false,
       },
-      loading: {
+      large: {
+        type: Boolean,
+        default: false,
+      },
+      wide: {
         type: Boolean,
         default: false,
       },

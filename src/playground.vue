@@ -26,6 +26,15 @@
 <!--&lt;!&ndash;        <wt-select></wt-select>&ndash;&gt;-->
 <!--&lt;!&ndash;      </template>&ndash;&gt;-->
 <!--    </wt-table>-->
+    <wt-button-select
+      outline
+      color="danger"
+      :options="options"
+      @click="log"
+      @click:option="log"
+    >
+      Save
+    </wt-button-select>
   </div>
 </template>
 
@@ -34,6 +43,8 @@ export default {
   name: 'playground',
   data: () => ({
     switcher: true,
+    options: [{ name: 'Roman' }, { name: 'Roman' }, { name: 'Roman' }].map((item) => item.name),
+    active: true,
     autocomplete: [
       { name: 'Laravel5', language: 'PHP' },
       { name: 'Phoenix6', language: 'Elixir' },
@@ -160,22 +171,61 @@ export default {
     },
     select: {
       value: '876878768787687876878768787687',
-      objValue: { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
+      objValue: {
+        name: 'Vue.js1AAAAAA',
+        language: 'JavaScript',
+      },
       multipleValue: [],
       stringOptions: ['123123123123', '321123123123123', '456'],
       options: [
-        { name: 'Vue.js1AAAAAA', language: 'JavaScript' },
-        { name: 'Adonis2', language: 'JavaScript' },
-        { name: 'Rails3', language: 'Ruby' },
-        { name: 'Sinatra4', language: 'Ruby' },
-        { name: 'Laravel5', language: 'PHP' },
-        { name: 'Phoenix6', language: 'Elixir' },
-        { name: 'Vue.js7', language: 'JavaScript' },
-        { name: 'Adonis8', language: 'JavaScript' },
-        { name: 'Rails9', language: 'Ruby' },
-        { name: 'Sinatra10', language: 'Ruby' },
-        { name: 'Laravel11', language: 'PHP' },
-        { name: 'Phoenix12', language: 'Elixir' },
+        {
+          name: 'Vue.js1AAAAAA',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Adonis2',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Rails3',
+          language: 'Ruby',
+        },
+        {
+          name: 'Sinatra4',
+          language: 'Ruby',
+        },
+        {
+          name: 'Laravel5',
+          language: 'PHP',
+        },
+        {
+          name: 'Phoenix6',
+          language: 'Elixir',
+        },
+        {
+          name: 'Vue.js7',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Adonis8',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Rails9',
+          language: 'Ruby',
+        },
+        {
+          name: 'Sinatra10',
+          language: 'Ruby',
+        },
+        {
+          name: 'Laravel11',
+          language: 'PHP',
+        },
+        {
+          name: 'Phoenix12',
+          language: 'Elixir',
+        },
       ],
     },
     appHeader: {
@@ -188,15 +238,18 @@ export default {
         grafana: { href: 'https://example.com' },
       },
     },
-    columnSelect: [
-    ],
+    columnSelect: [],
   }),
   methods: {
     search(search) {
-      return { items: Array(10).fill({ name: search || '123' }), next: true };
+      return {
+        items: Array(10)
+          .fill({ name: search || '123' }),
+        next: true,
+      };
     },
-    log(event, inputEvent) {
-      console.log(event, inputEvent);
+    log(options) {
+      console.log(options);
     },
   },
 };
@@ -210,7 +263,7 @@ export default {
 
   & > div {
     margin-bottom: 30px;
-    border-bottom: 2px solid lightskyblue;
+    //border-bottom: 2px solid lightskyblue;
 
     & > * {
       margin: 10px;
