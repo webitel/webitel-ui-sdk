@@ -14,6 +14,7 @@
     <wt-button
       class="wt-button-select__select-btn"
       v-bind="$attrs"
+      :loading="false"
       @click="isOpened = !isOpened"
     >
       <wt-icon

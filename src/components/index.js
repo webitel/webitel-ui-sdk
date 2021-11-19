@@ -29,7 +29,7 @@ import WtTimeInput from './molecules/wt-time-input/wt-time-input.vue';
 import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
 import WtLabel from './molecules/wt-label/wt-label.vue';
-import WtButtonSelect from './molecules/wt-select-button/wt-button-select.vue';
+import WtButtonSelect from './molecules/wt-button-select/wt-button-select.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
