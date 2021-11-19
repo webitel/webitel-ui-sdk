@@ -64,7 +64,6 @@ export default {
 }
 
 .wt-button-select__button {
-  @extend %typo-btn-select;
   padding: var(--button-select-button-padding);
   border-radius: var(--border-radius) 0 0 var(--border-radius);
 }

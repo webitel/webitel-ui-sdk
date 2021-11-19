@@ -1,16 +1,10 @@
 .wt-button-select {
-  // This component we use in FLOW, where a line-height is another
-  // If a line-height will be 14px(like in normal button), a button-select will have unbalanced appearance.
-  %typo-btn-select {
-    font: {
-      family: 'Montserrat Semi', monospace;
-      size: 12px;
-    }
-    line-height: 24px;
-  }
-  // wt-icon has own paddings. BUt this component we use in Flow, where paddings are like paddings bellow.
-  --button-select-button-padding: var(--spacing--sm) var(--spacing--lg);
-  --button-select-icon-button-padding: var(--spacing--md) var(--spacing--lg);
+  --button-select-button-padding: var(--spacing--md) var(--spacing--lg);
+  /*
+  Reduce 1px from "spacing--md" for align a difference between arrow size in "wt-button-select__select"
+  and line-height of text in "wt-button-select__button"
+  */
+  --button-select-icon-button-padding: calc(var(--spacing--md) - 1px);
 
   --button-select-buttons-gap: 1px;
 

@@ -38,6 +38,7 @@ export default {
 
 <style lang="scss" scoped>
 .wt-context-menu {
+  @extend %typo-body-sm;
   min-width: var(--context-menu-min-width);
   background-color: var(--context-menu-background-color);
   border-radius: var(--border-radius);
@@ -68,7 +69,6 @@ export default {
 }
 
 .wt-context-menu__option {
-  @extend %typo-context-menu;
   display: block;
   padding: var(--context-menu-option-padding);
   cursor: pointer;
