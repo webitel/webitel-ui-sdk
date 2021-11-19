@@ -33,6 +33,7 @@
     ></wt-context-menu>
   </div>
 </template>
+
 <script>
 export default {
   name: 'wt-button-select',
