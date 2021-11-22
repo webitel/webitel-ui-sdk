@@ -8,10 +8,11 @@
       v-for="(option, index) in options"
       :key="index"
     >
+<!--      <a> click.prevent prevents redirect to # -->
       <a
         class="wt-context-menu__option"
         href="#"
-        @click="$emit('click', { option, index })"
+        @click.prevent="$emit('click', { option, index })"
         >
         {{ option.text || option }}
       </a>
