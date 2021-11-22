@@ -42,7 +42,7 @@ export default {
   }),
   methods: {
     selectOption({ option, index }) {
-      this.$emit('click:option', { option, index });
+      this.$emit('click:option', option, index);
       this.isOpened = false;
     },
     away() {
