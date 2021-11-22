@@ -1,6 +1,9 @@
+import { AgentStatus, CallDirection } from 'webitel-sdk';
+import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
 import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
 import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+import { snakeToCamel } from '../../scripts/caseConverters';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
@@ -34,6 +37,32 @@ export default {
     supervisor: 'Супервізор | Супервізори',
     auditor: 'Аудитор | Аудитори',
     region: 'Регіон | Регіони',
+    queue: {
+      type: {
+        [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
+        [QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
+        [QueueType.OUTBOUND_IVR_QUEUE]: 'Вихідний IVR',
+        [QueueType.PREDICTIVE_DIALER]: 'Предиктивний обзвін',
+        [QueueType.PROGRESSIVE_DIALER]: 'Прогресивний обзвін',
+        [QueueType.PREVIEW_DIALER]: 'Прев\'ю обзвін',
+        [QueueType.CHAT_INBOUND_QUEUE]: 'Черга чатів',
+        [QueueType.TASK_QUEUE]: 'Черга задач',
+      },
+    },
+    agent: {
+      status: {
+        [AgentStatus.Online]: 'Онлайн',
+        [AgentStatus.Pause]: 'Пауза',
+        [AgentStatus.Offline]: 'Офлайн',
+        [snakeToCamel(AgentStatus.BreakOut)]: 'Примусова перерва',
+      },
+    },
+  },
+  calls: {
+    direction: {
+      [CallDirection.Inbound]: 'Вхідний | Вхідні',
+      [CallDirection.Outbound]: 'Вихідний | Вихідні',
+    },
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {

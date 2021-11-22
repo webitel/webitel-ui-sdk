@@ -9,12 +9,7 @@
     :search-method="search"
     :internal-search="false"
   ></wt-select>
-  <wt-select
-    :value="['loremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem', 321]"
-    :search-method="search"
-    :internal-search="false"
-    multiple
-  ></wt-select>
+  <wt-search-bar></wt-search-bar>
     <!--    <svg><use xlink:href="#search"></use></svg>-->
 <!--    <svg><use xlink:href="#close"></use></svg>-->
 <!--    <svg><use xlink:href="#lock"></use></svg>-->
@@ -43,7 +38,7 @@ export default {
   name: 'playground',
   data: () => ({
     switcher: true,
-    options: [{ name: 'Roman' }, { name: 'Roman' }, { name: 'Roman' }].map((item) => item.name),
+    options: [{ text: 'Save as Save as Save as Save as  Save as Save as Save asSave as  Save as Save as Save as' }],
     active: true,
     autocomplete: [
       { name: 'Laravel5', language: 'PHP' },

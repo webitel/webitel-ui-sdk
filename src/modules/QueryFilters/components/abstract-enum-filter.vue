@@ -1,7 +1,7 @@
 <template>
   <wt-select
     :value="filterSchema.value"
-    :options="filterSchema.options"
+    :options="localizedOptions"
     :label="$t(filterSchema.locale.label)"
     :track-by="filterSchema.storedProp"
     :multiple="filterSchema.multiple"
