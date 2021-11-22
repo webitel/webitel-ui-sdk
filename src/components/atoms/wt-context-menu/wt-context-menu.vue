@@ -40,6 +40,7 @@ export default {
 .wt-context-menu {
   @extend %typo-body-sm;
   min-width: var(--context-menu-min-width);
+  max-width: var(--context-menu-max-width);
   background-color: var(--context-menu-background-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);

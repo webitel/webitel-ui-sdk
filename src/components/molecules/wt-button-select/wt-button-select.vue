@@ -22,7 +22,6 @@
         :class="{'wt-button-select__select-arrow--active': isOpened}"
         v-bind="$attrs"
         icon="arrow-down"
-        size="sm"
       ></wt-icon>
     </wt-button>
 
@@ -60,7 +59,7 @@ export default {
 
   .wt-context-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 1px);
     left: 0;
   }
 }

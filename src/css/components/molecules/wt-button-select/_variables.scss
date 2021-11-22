@@ -4,7 +4,7 @@
   Reduce 1px from "spacing--md" for align a difference between arrow size in "wt-button-select__select"
   and line-height of text in "wt-button-select__button"
   */
-  --button-select-icon-button-padding: calc(var(--spacing--md) - 1px);
+  --button-select-icon-button-padding: calc(var(--spacing--sm) - 1px);
 
   --button-select-buttons-gap: 1px;
 
