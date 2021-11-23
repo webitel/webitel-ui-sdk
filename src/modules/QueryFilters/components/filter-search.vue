@@ -3,7 +3,7 @@
     :value="filterSchema.value"
     debounce
     @input="setValue({ filter: filterQuery, value: $event })"
-    @search="setValueToQuery({ filter: filterQuery, value: $event })"
+    @search="setValueToQuery({ filterQuery, value: $event })"
     :placeholder="$t('reusable.search')"
   />
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     restoreValue(value) {
-      this.setValue({ filterQuery: this.filterQuery, value });
+      this.setValue({ filter: this.filterQuery, value });
     },
   },
 };

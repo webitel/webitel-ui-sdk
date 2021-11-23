@@ -29,8 +29,9 @@ export default {
     search(params) {
       return this.filterSchema.search(params);
     },
-    fetchSelected(...args) {
-      return this.filterSchema.fetchSelected(...args);
+    async fetchSelected(...args) {
+      const { items = [] } = await this.filterSchema.fetchSelected(...args);
+      return items;
     },
   },
 };
