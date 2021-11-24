@@ -1,6 +1,6 @@
 <template>
   <wt-select
-    :value="filterSchema.value"
+    :value="value"
     :options="localizedOptions"
     :label="$t(filterSchema.locale.label)"
     :track-by="filterSchema.storedProp"

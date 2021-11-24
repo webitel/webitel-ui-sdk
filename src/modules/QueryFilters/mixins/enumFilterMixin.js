@@ -33,11 +33,11 @@ export default {
     restoreValue(value) {
       let newValue;
       if (Array.isArray(value)) {
-        newValue = this.options
+        newValue = this.localizedOptions
           .filter((option) => value
             .some((value) => value === option[this.storedProp]));
       } else {
-        newValue = this.options
+        newValue = this.localizedOptions
           .find((option) => value === option[this.storedProp]);
       }
       this.setValue({ filter: this.filterQuery, value: newValue });
