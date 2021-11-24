@@ -44,6 +44,6 @@ describe('Search Filter', () => {
     const setValueMock = jest.fn();
     jest.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
     shallowMount(SearchFilter, mountOptions);
-    expect(setValueMock).toHaveBeenCalledWith({ filterQuery, value: search });
+    expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value: search });
   });
 });
