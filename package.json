@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.9.34",
+  "version": "0.9.43",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -40,7 +40,8 @@
     "vue-multiselect": "^2.1.6",
     "vue-observe-visibility": "^1.0.0",
     "vue-router": "^3.2.0",
-    "vuejs-datepicker": "^1.6.2"
+    "vuejs-datepicker": "^1.6.2",
+    "webitel-sdk": "^0.1.84"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",

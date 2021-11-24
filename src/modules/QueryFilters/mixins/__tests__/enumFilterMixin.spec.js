@@ -45,10 +45,26 @@ describe('Enum filter mixin', () => {
   });
 
   it('Sets empty array value if $route query is empty', async () => {
-    const wrapper = shallowMount(Component, {
+    shallowMount(Component, {
       localVue,
       router,
     });
     expect(setValue).not.toHaveBeenCalled();
+  });
+
+  it('Attaches locales to options, if they have "locale" key', async () => {
+    const options = [{
+      locale: 'jest.locale',
+    }];
+    const expectedOptions = [{
+      locale: options[0].locale,
+      name: options[0].locale,
+    }];
+    const wrapper = shallowMount(Component, {
+      localVue,
+      router,
+      data: () => ({ options }),
+    });
+    expect(wrapper.vm.localizedOptions).toEqual(expectedOptions);
   });
 });

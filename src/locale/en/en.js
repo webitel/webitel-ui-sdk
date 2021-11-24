@@ -1,3 +1,6 @@
+import { AgentStatus, CallDirection } from 'webitel-sdk';
+import { QueueType } from 'webitel-sdk/esm2015/enums';
+import { snakeToCamel } from '../../scripts/caseConverters';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
 import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
 import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
@@ -34,6 +37,32 @@ export default {
     supervisor: 'Supervisor | Supervisors',
     auditor: 'Auditor | Auditors',
     region: 'Region | Regions',
+    queue: {
+      type: {
+        [QueueType.INBOUND_QUEUE]: 'Inbound queue',
+        [QueueType.OFFLINE_QUEUE]: 'Offline queue',
+        [QueueType.OUTBOUND_IVR_QUEUE]: 'Outbound IVR queue',
+        [QueueType.PREDICTIVE_DIALER]: 'Predictive dialer',
+        [QueueType.PROGRESSIVE_DIALER]: 'Progressive dialer',
+        [QueueType.PREVIEW_DIALER]: 'Preview dialer',
+        [QueueType.CHAT_INBOUND_QUEUE]: 'Chat queue',
+        [QueueType.TASK_QUEUE]: 'Task queue',
+      },
+    },
+    agent: {
+      status: {
+        [AgentStatus.Online]: 'Online',
+        [AgentStatus.Pause]: 'Pause',
+        [AgentStatus.Offline]: 'Offline',
+        [snakeToCamel(AgentStatus.BreakOut)]: 'Break out',
+      },
+    },
+  },
+  calls: {
+    direction: {
+      [CallDirection.Inbound]: 'Inbound',
+      [CallDirection.Outbound]: 'Outbound',
+    },
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {

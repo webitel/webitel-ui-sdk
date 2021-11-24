@@ -27,7 +27,8 @@
         <h4><code>EnumFilterSchema.js</code></h4>
         <p>used specifically for lookup-entities filtering (eg. direction or statuses).
           Extends <code>BaseFilterSchema</code> and accepts additional optional params:</p>
-        <li><code>options</code> - Array of options within following format: <code>{ value, name }</code></li>
+        <li><code>options</code> - Array of options within following format: <code>{ value, locale?, name }</code>
+          (if locale is passed, then name is overridden by $t(locale))</li>
         <li><code>storedProp</code> - same as <code>ApiFilterSchema</code>, but <i>(default = 'value' )</i></li>
         <li><strong>...same as ApiFilterSchema, without <code>API</code></strong></li>
       </ul>
