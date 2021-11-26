@@ -1,15 +1,10 @@
 <template>
   <div class="playground">
-  <wt-select
-    :search-method="search"
-    :internal-search="false"
-  ></wt-select>
-  <wt-select
-    :value="123"
-    :search-method="search"
-    :internal-search="false"
-  ></wt-select>
-  <wt-search-bar></wt-search-bar>
+  <wt-input>
+    <template slot="after-input">
+    <div>123</div>
+    </template>
+  </wt-input>
     <!--    <svg><use xlink:href="#search"></use></svg>-->
 <!--    <svg><use xlink:href="#close"></use></svg>-->
 <!--    <svg><use xlink:href="#lock"></use></svg>-->

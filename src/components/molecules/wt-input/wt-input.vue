@@ -25,6 +25,7 @@
         :class="{
           'wt-input--is-password': isPassword,
         }"
+        ref="wt-input"
         :value="value"
         :type="inputType"
         :placeholder="placeholder || label"
@@ -33,20 +34,28 @@
         :max="numberMax"
         v-on="listeners"
       >
-      <slot
-        v-if="isPassword"
-        name="show-password"
-        v-bind="{
+      <div
+        class="wt-input__after-wrapper"
+        ref="after-wrapper"
+      >
+        <slot
+          name="after-input"
+        ></slot>
+        <slot
+          v-if="isPassword"
+          name="show-password"
+          v-bind="{
           isPasswordVisible,
           switchVisibilityPassword,
         }"
-      >
-        <wt-icon-btn
-          class="wt-input__password-button"
-          :icon="showPasswordIcon"
-          @click.native="switchVisibilityPassword"
-        ></wt-icon-btn>
-      </slot>
+        >
+          <wt-icon-btn
+            class="wt-input__password-button"
+            :icon="showPasswordIcon"
+            @click.native="switchVisibilityPassword"
+          ></wt-icon-btn>
+        </slot>
+      </div>
     </div>
     <wt-input-info
       v-if="isValidation"
@@ -57,9 +66,9 @@
 </template>
 
 <script>
-  import validationMixin from '../../../mixins/validationMixin/validationMixin';
+import validationMixin from '../../../mixins/validationMixin/validationMixin';
 
-  export default {
+export default {
     name: 'wt-input',
     mixins: [validationMixin],
     props: {
@@ -207,8 +216,20 @@
         this.isPasswordVisible = !this.isPasswordVisible;
         this.inputType = this.isPasswordVisible ? 'text' : 'password';
       },
+
+      updateInputPaddings() {
+        // cant test this thing cause vue test utils doesnt render elements width :/
+        const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
+        const inputEl = this.$refs['wt-input'];
+        const defaultInputPadding = parseInt(getComputedStyle(document.documentElement)
+          .getPropertyValue('--input-padding'), 10);
+        inputEl.style.paddingRight = `${defaultInputPadding + afterWrapperWidth + defaultInputPadding}px`;
+      },
     },
-  };
+    mounted() {
+      this.updateInputPaddings();
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -298,19 +319,24 @@
     }
   }
 
-  .wt-input__password-button {
+  .wt-input__after-wrapper {
+    display: flex;
+    gap: var(--input-after-wrapper-gap);
+    align-items: center;
     position: absolute;
     top: 50%;
     right: var(--input-icon-margin);
     transform: translateY(-50%);
 
-    .wt-input--disabled & ::v-deep .wt-icon__icon {
-      fill: var(--icon-color-disabled);
-    }
+    .wt-input__password-button {
+      .wt-input--disabled & ::v-deep .wt-icon__icon {
+        fill: var(--icon-color-disabled);
+      }
 
-    .wt-input:hover & ::v-deep .wt-icon__icon,
-    .wt-input:focus-within & ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
+      .wt-input:hover & ::v-deep .wt-icon__icon,
+      .wt-input:focus-within & ::v-deep .wt-icon__icon {
+        fill: var(--icon-color--hover);
+      }
     }
   }
 </style>
