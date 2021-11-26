@@ -26,9 +26,8 @@
   --btn-primary-color: var(--main-accent-color);
   --btn-primary--hover-color: #EFB917;
 
-  --btn-secondary-color: #808080;
-  --btn-secondary-bg-color: transparent;
-  --btn-secondary--hover-color: #000;
+  --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
+  --btn-secondary--hover-color: hsla(var(--_secondary-color), var(--_opacity--hover));
 
   --btn-disabled-color: var(--disabled-color);
   --btn-disabled-bg-color: transparent;

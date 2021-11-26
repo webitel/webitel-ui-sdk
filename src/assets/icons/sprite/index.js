@@ -1,4 +1,5 @@
 import './account.svg';
+import './adfs.svg';
 import './app-navigator.svg';
 import './arrow-down.svg';
 import './arrow-left.svg';
@@ -65,6 +66,7 @@ import './eye--closed.svg';
 import './eye--opened.svg';
 import './filter.svg';
 import './generate.svg';
+import './google.svg';
 import './history.svg';
 import './hold.svg';
 import './lock.svg';

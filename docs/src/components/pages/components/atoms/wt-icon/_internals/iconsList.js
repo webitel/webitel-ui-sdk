@@ -1,4 +1,5 @@
 export default [
+  'adfs',
   'zoom-in',
   'zoom-out',
   'send-arrow',
@@ -16,6 +17,7 @@ export default [
   'queue-member',
   'history',
   'generate',
+  'google',
   'rounded-info',
   'copy',
   'menu',
