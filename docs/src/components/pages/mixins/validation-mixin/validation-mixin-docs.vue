@@ -15,6 +15,18 @@
         <code class="language-javascript">this.invalid // Boolean: checks if validation is throwing "invalid" error</code>
         <code class="language-javascript">this.validationText // String: validation error text, has its own error prioritization</code>
       </pre>
+      <p>Validation error text has been created for every built-in validation. If needed, it can be
+        modified or extended.
+        To extend or modify some text developer should follow the standard approach for creating
+        validations.
+        It's important to re the text only, indicating the name of imported validation.
+      </p>
+      <pre><code class="language-javascript">import { minValue } from 'vuelidate/lib/validators'
+      computed: {
+        customValidation() {
+          return [{ name: 'minValue', text: this.$t('minValue') }]
+        }
+      }</code></pre>
     </article>
   </section>
 </template>
