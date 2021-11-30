@@ -1,24 +1,8 @@
 <template>
   <div class="playground">
-  <wt-input>
-    <template slot="after-input">
-    <div>123</div>
-    </template>
-  </wt-input>
-    <!--    <svg><use xlink:href="#search"></use></svg>-->
-<!--    <svg><use xlink:href="#close"></use></svg>-->
-<!--    <svg><use xlink:href="#lock"></use></svg>-->
-<!--    <wt-table-->
-<!--      :headers="table.headers"-->
-<!--      :data="table.data"-->
-<!--    >-->
-<!--&lt;!&ndash;      <template slot="h1">&ndash;&gt;-->
-<!--&lt;!&ndash;        <wt-select></wt-select>&ndash;&gt;-->
-<!--&lt;!&ndash;      </template>&ndash;&gt;-->
-<!--    </wt-table>-->
+  <wt-button color="secondary">Secondary</wt-button>
     <wt-button-select
-      outline
-      color="danger"
+      color="secondary"
       :options="options"
       @click="log"
       @click:option="log"

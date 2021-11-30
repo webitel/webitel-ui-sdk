@@ -106,7 +106,7 @@
 
         &:hover,
         &:active {
-          color: var(--btn-secondary--hover-color);
+          color: var(--btn-dark-font-color);
           border-color: var(--btn-secondary--hover-color);
           background: var(--btn-secondary-color);
         }
