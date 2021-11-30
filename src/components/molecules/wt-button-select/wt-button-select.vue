@@ -6,6 +6,7 @@
     <wt-button
       class="wt-button-select__button"
       v-bind="$attrs"
+      :disabled="disabled"
       @click="$emit('click', $event)"
     >
       <slot></slot>
@@ -14,6 +15,7 @@
     <wt-button
       class="wt-button-select__select-btn"
       v-bind="$attrs"
+      :disabled="disabled"
       :loading="false"
       @click="isOpened = !isOpened"
     >
@@ -26,8 +28,8 @@
     </wt-button>
 
     <wt-context-menu
-      v-bind="$attrs"
       :visible="isOpened"
+      :options="options"
       @click="selectOption"
     ></wt-context-menu>
   </div>
@@ -39,6 +41,18 @@ export default {
   data: () => ({
     isOpened: false,
   }),
+  props: {
+    // all buttons props are passed as "$attrs"
+    // all wt-icon props are passed as "$attrs"
+    options: {
+      type: Array,
+      required: true,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
   methods: {
     selectOption({ option, index }) {
       this.$emit('click:option', option, index);

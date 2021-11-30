@@ -2,58 +2,41 @@ import { shallowMount } from '@vue/test-utils';
 import WtContextMenu from '../wt-context-menu.vue';
 
 describe('WtContextMenu', () => {
-  it('render a component', () => {
-    const options = ['1', '2'];
-    const wrapper = shallowMount(WtContextMenu, {
-      propsData: { options },
-    });
+  const options = ['1', '2'];
+
+  it('renders a component', () => {
+    const wrapper = shallowMount(WtContextMenu);
     expect(wrapper.classes('wt-context-menu')).toBe(true);
   });
 
-  it('should  check is a the component visible', () => {
-    const options = ['1', '2'];
-    const wrapper = shallowMount(WtContextMenu, {
-      propsData: { options },
-    });
+  it('component is visible by default', () => {
+    const wrapper = shallowMount(WtContextMenu);
     expect(wrapper.find('.wt-context-menu').isVisible()).toBe(true);
   });
 
-  it('depending on "visible" prop should toggle a wt-context-menu-hidden class', () => {
-    const visible = true;
-    const options = ['1', '2'];
+  it('component is invisible, if "visible" prop = false', () => {
+    const wrapper = shallowMount(WtContextMenu, {
+      propsData: { visible: false },
+    });
+    expect(wrapper.classes('wt-context-menu--hidden')).toBe(true);
+  });
+
+  it('correctly display the options length', () => {
     const wrapper = shallowMount(WtContextMenu, {
       propsData: { options },
     });
-    if (!visible) {
-      expect(wrapper.classes('wt-context-menu--hidden')).toBe(true);
-    }
-    expect(wrapper.classes('wt-context-menu--hidden')).toBe(false);
+    expect(wrapper.findAll('.wt-context-menu__option').length).toBe(options.length);
   });
 
-  it('correctly compute a options', () => {
-    const options = ['1', '2'];
-    const wrapper = shallowMount(WtContextMenu, {
-      propsData: { options },
-    });
-    expect(wrapper.vm.options).toBe(options);
-  });
-
-  it('should raise click event when clicked', () => {
-    const options = ['1', '2'];
-    const wrapper = shallowMount(WtContextMenu, {
-      propsData: { options },
-    });
-    wrapper.find('.wt-context-menu__option').trigger('click');
-    expect(wrapper.emitted().click).toBeTruthy();
-  });
-
-  it('should emit { option, index } when clicked on option', () => {
-    const options = ['1', '2'];
+  it('should raise click event, and emit { option, index } when clicked', () => {
     const emittingArgs = { option: '1', index: 0 };
     const wrapper = shallowMount(WtContextMenu, {
       propsData: { options },
     });
+
     wrapper.find('.wt-context-menu__option').trigger('click');
+    expect(wrapper.emitted().click).toBeTruthy();
+
     expect(wrapper.emitted('click')[0][0]).toEqual(emittingArgs);
   });
 });

@@ -2,23 +2,10 @@ import { shallowMount } from '@vue/test-utils';
 import WtSelectButton from '../wt-button-select.vue';
 import WtContextMenu from '../../../atoms/wt-context-menu/wt-context-menu.vue';
 
-describe('wt-button-select', () => {
+describe('WtSelectButton', () => {
   it('renders a component', () => {
-    const options = ['1', '2'];
-    const wrapper = shallowMount(WtSelectButton, {
-      propsData: { options },
-    });
-    expect(wrapper.classes('wt-button-select')).toBe(true);
-  });
-
-  it('should toggle isOpened', () => {
     const wrapper = shallowMount(WtSelectButton);
-
-    wrapper.find('.wt-button-select__select-btn').vm.$emit('click');
-    expect(wrapper.vm.isOpened).toBe(true);
-
-    wrapper.find('.wt-button-select__select-btn').vm.$emit('click');
-    expect(wrapper.vm.isOpened).toBe(false);
+    expect(wrapper.classes('wt-button-select')).toBe(true);
   });
 
   it('renders a button content via default slot', () => {
@@ -31,30 +18,46 @@ describe('wt-button-select', () => {
     expect(wrapper.find('.wt-button-select__button').text()).toBe(content);
   });
 
-  it('should switch isOpened to false on wt-context-menu', () => {
-    const wrapper = shallowMount(WtSelectButton);
-
-    wrapper.find(WtContextMenu).vm.$emit('click');
-    expect(wrapper.vm.isOpened).toBe(false);
+  it('context-menu is invisible at start', () => {
+    const wrapper = shallowMount(WtSelectButton, {
+      stubs: { WtContextMenu },
+    });
+    expect(wrapper.findComponent(WtContextMenu).classes('wt-context-menu--hidden')).toBe(true);
   });
 
-  it('should add "wt-button-select__select-arrow--active" class', () => {
-    const isOpened = false;
-    const wrapper = shallowMount(WtSelectButton);
+  it('toggles isOpened, if select-btn is clicked', async () => {
+    const wrapper = shallowMount(WtSelectButton, {
+      stubs: { WtContextMenu },
+    });
+    wrapper.find('.wt-button-select__select-btn').vm.$emit('click');
+    await wrapper.vm.$nextTick();
+    expect(wrapper.findComponent(WtContextMenu).element.classList[1]).toBe(undefined);
 
-    if (isOpened) {
-      expect(wrapper.classes('wt-button-select__select-arrow--active')).toBe(true);
-    }
+    wrapper.find('.wt-button-select__select-btn').vm.$emit('click');
+    await wrapper.vm.$nextTick();
+    expect(wrapper.findComponent(WtContextMenu).element.classList[1]).toBe('wt-context-menu--hidden');
   });
 
-  it('Component wt-context-menu should be invisible', () => {
-    const isOpened = false;
+  it('hides context-menu on its click event', async () => {
+    const isOpened = true;
+    const options = ['1', '2'];
+    const wrapper = shallowMount(WtSelectButton, {
+      stubs: { WtContextMenu },
+      data: () => ({ isOpened }),
+      propsData: { options },
+    });
+    wrapper.findComponent({ name: 'WtContextMenu' }).vm.$emit('click', { option: '1' });
+    await wrapper.vm.$nextTick();
+    expect(wrapper.findComponent({ name: 'WtContextMenu' }).classes()).toContain('wt-context-menu--hidden');
+  });
 
-    const wrapper = shallowMount(WtSelectButton);
-    if (isOpened) {
-      expect(wrapper.find(WtContextMenu).isVisible()).toBe(false);
-    } else if (!isOpened) {
-      expect(wrapper.find(WtContextMenu).isVisible()).toBe(true);
-    }
+  it('should rotate the arrow', () => {
+    const wrapper = shallowMount(WtSelectButton, {
+      data: () => ({
+        isOpened: true,
+      }),
+    });
+    const wtIcon = wrapper.find('.wt-button-select__select-arrow');
+    expect(wtIcon.classes()).toContain('wt-button-select__select-arrow--active');
   });
 });
