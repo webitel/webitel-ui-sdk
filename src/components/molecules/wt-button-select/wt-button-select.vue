@@ -6,7 +6,6 @@
     <wt-button
       class="wt-button-select__button"
       v-bind="$attrs"
-      :color="color"
       :disabled="disabled"
       @click="$emit('click', $event)"
     >
@@ -16,7 +15,6 @@
     <wt-button
       class="wt-button-select__select-btn"
       v-bind="$attrs"
-      :color="color"
       :disabled="disabled"
       :loading="false"
       @click="isOpened = !isOpened"
@@ -25,7 +23,6 @@
         class="wt-button-select__select-arrow"
         :class="{'wt-button-select__select-arrow--active': isOpened}"
         icon="arrow-down"
-        :color="color"
         :disabled="disabled"
       ></wt-icon>
     </wt-button>
@@ -53,9 +50,6 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
-    },
-    color: {
-      type: String,
     },
   },
   methods: {
@@ -94,33 +88,22 @@ export default {
 
   // NORMAL MODE
   &:not(.wt-button--outline)::v-deep {
-    & .wt-icon--color-default .wt-icon__icon {
+    & .wt-icon__icon {
       fill: var(--button-select-icon-color-dark);
     }
 
-    //For danger, success, transfer icon fill-colors.
-    //In another case we will need to write three additional strings
-    & .wt-icon__icon {
-      fill: var(--button-select-icon-color-ligth);
-    }
-
-    &.secondary .wt-icon--color-secondary .wt-icon__icon {
-      fill: var(--button-select-icon-color-secondary);
-    }
-
-    &.secondary {
-      &:hover,
-      &:active {
-        .wt-icon__icon {
-          fill: var(--button-select-icon-color-secondary--hover);
-        }
+    &.danger,
+    &.success,
+    &.transfer {
+      .wt-icon__icon {
+        fill: var(--button-select-icon-color-ligth);
       }
     }
   }
 
   //OUTLINE MODE
   &.wt-button--outline::v-deep {
-    & .wt-icon--color-default .wt-icon__icon {
+    & .wt-icon__icon {
       fill: var(--button-select-icon-color-primary);
     }
 
@@ -131,11 +114,11 @@ export default {
       }
     }
 
-    .wt-icon--color-secondary .wt-icon__icon {
-      fill: var(--button-select-icon-color-secondary);
-    }
-
     &.danger {
+      & .wt-icon__icon {
+        fill: var(--icon-color-danger)
+      }
+
       &:hover,
       &:active {
         .wt-icon__icon {
@@ -145,6 +128,10 @@ export default {
     }
 
     &.success {
+      & .wt-icon__icon {
+        fill: var(--icon-color-success)
+      }
+
       &:hover,
       &:active {
         .wt-icon__icon {
@@ -154,6 +141,10 @@ export default {
     }
 
     &.transfer {
+      & .wt-icon__icon {
+        fill: var(--icon-color-transfer)
+      }
+
       &:hover,
       &:active {
         .wt-icon__icon {
@@ -161,13 +152,18 @@ export default {
         }
       }
     }
+  }
 
-    &.secondary {
-      &:hover,
-      &:active {
-        .wt-icon__icon {
-          fill: var(--button-select-icon-color-secondary--hover);
-        }
+  // SECONDARY MODE (is same for outline and normal modes)
+  &.secondary::v-deep {
+    .wt-icon__icon {
+      fill: var(--button-select-icon-color-secondary);
+    }
+
+    &:hover,
+    &:active {
+      .wt-icon__icon {
+        fill: var(--button-select-icon-color-secondary--hover);
       }
     }
   }
