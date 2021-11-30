@@ -11,13 +11,14 @@ describe('WtContextMenu', () => {
 
   it('component is visible by default', () => {
     const wrapper = shallowMount(WtContextMenu);
-    expect(wrapper.find('.wt-context-menu').isVisible()).toBe(true);
+    expect(wrapper.classes()).not.toContain('wt-context-menu--hidden');
   });
 
   it('component is invisible, if "visible" prop = false', () => {
     const wrapper = shallowMount(WtContextMenu, {
       propsData: { visible: false },
     });
+    // Here we don't use "isVsisble()" because we hide our elements with "opacity: 0"
     expect(wrapper.classes('wt-context-menu--hidden')).toBe(true);
   });
 

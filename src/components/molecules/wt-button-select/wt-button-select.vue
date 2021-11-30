@@ -6,6 +6,7 @@
     <wt-button
       class="wt-button-select__button"
       v-bind="$attrs"
+      :color="color"
       :disabled="disabled"
       @click="$emit('click', $event)"
     >
@@ -15,6 +16,7 @@
     <wt-button
       class="wt-button-select__select-btn"
       v-bind="$attrs"
+      :color="color"
       :disabled="disabled"
       :loading="false"
       @click="isOpened = !isOpened"
@@ -22,8 +24,9 @@
       <wt-icon
         class="wt-button-select__select-arrow"
         :class="{'wt-button-select__select-arrow--active': isOpened}"
-        v-bind="$attrs"
         icon="arrow-down"
+        :color="color"
+        :disabled="disabled"
       ></wt-icon>
     </wt-button>
 
@@ -43,7 +46,6 @@ export default {
   }),
   props: {
     // all buttons props are passed as "$attrs"
-    // all wt-icon props are passed as "$attrs"
     options: {
       type: Array,
       required: true,
@@ -51,6 +53,9 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    color: {
+      type: String,
     },
   },
   methods: {
