@@ -38,6 +38,32 @@
           :v="vInvalid"
         ></wt-input>
       </div>
+      <div class="example-wrapper">
+        <wt-input
+          v-model="value"
+          label="After input slot usage"
+        >
+          <template slot="after-input">
+            <wt-icon-btn icon="edit"></wt-icon-btn>
+            <wt-icon-btn icon="edit" size="sm"></wt-icon-btn>
+            <wt-icon-btn icon="edit"></wt-icon-btn>
+            <wt-icon-btn icon="edit" size="sm"></wt-icon-btn>
+          </template>
+        </wt-input>
+        <pre><code class="language-html">
+          &lt;wt-input
+            v-model="value"
+            label="After input slot usage"
+          &gt;
+          &lt;template slot="after-input"&gt;
+            &lt;wt-icon-btn icon="edit"&gt;&lt;/wt-icon-btn&gt;
+            &lt;wt-icon-btn icon="edit" size="sm"&gt;&lt;/wt-icon-btn&gt;
+            &lt;wt-icon-btn icon="edit"&gt;&lt;/wt-icon-btn&gt;
+            &lt;wt-icon-btn icon="edit" size="sm"&gt;&lt;/wt-icon-btn&gt;
+          &lt;/template&gt;
+        &lt;/wt-input&gt;
+        </code></pre>
+      </div>
     </article>
     <component-model
     ></component-model>
@@ -162,6 +188,10 @@
           name: 'label',
           scope: [{ name: 'label' }],
           description: 'Custom label slot',
+        },
+        {
+          name: 'after-input',
+          description: 'Pass anything you want to be after input (like icon actions), but inside border',
         },
         {
           name: 'show-password',

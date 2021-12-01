@@ -1,29 +1,8 @@
 <template>
   <div class="playground">
-  <wt-select
-    :search-method="search"
-    :internal-search="false"
-  ></wt-select>
-  <wt-select
-    :value="123"
-    :search-method="search"
-    :internal-search="false"
-  ></wt-select>
-  <wt-search-bar></wt-search-bar>
-    <!--    <svg><use xlink:href="#search"></use></svg>-->
-<!--    <svg><use xlink:href="#close"></use></svg>-->
-<!--    <svg><use xlink:href="#lock"></use></svg>-->
-<!--    <wt-table-->
-<!--      :headers="table.headers"-->
-<!--      :data="table.data"-->
-<!--    >-->
-<!--&lt;!&ndash;      <template slot="h1">&ndash;&gt;-->
-<!--&lt;!&ndash;        <wt-select></wt-select>&ndash;&gt;-->
-<!--&lt;!&ndash;      </template>&ndash;&gt;-->
-<!--    </wt-table>-->
+  <wt-button color="secondary">Secondary</wt-button>
     <wt-button-select
-      outline
-      color="danger"
+      color="secondary"
       :options="options"
       @click="log"
       @click:option="log"

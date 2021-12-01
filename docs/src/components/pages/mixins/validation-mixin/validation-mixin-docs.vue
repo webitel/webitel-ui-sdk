@@ -15,6 +15,12 @@
         <code class="language-javascript">this.invalid // Boolean: checks if validation is throwing "invalid" error</code>
         <code class="language-javascript">this.validationText // String: validation error text, has its own error prioritization</code>
       </pre>
+      <p>
+        this.validationText contains locales for some default validations, and it can be
+        extended with custom validation, passing them via 'custom-validation' prop.
+        It's also possible to overwrite text and localization of default validations,
+        using the same parameters as per custom validation.
+      </p>
     </article>
   </section>
 </template>

@@ -100,15 +100,15 @@
 
     &:not(&--outline) {
       &.secondary {
-        color: var(--btn-secondary-color);
+        color: var(--btn-dark-font-color);
         border-color: var(--btn-secondary-color);
-        background: var(--btn-secondary-bg-color);
+        background: var(--btn-secondary-color);
 
         &:hover,
         &:active {
-          color: var(--btn-secondary--hover-color);
+          color: var(--btn-dark-font-color);
           border-color: var(--btn-secondary--hover-color);
-          background: var(--btn-secondary-bg-color);
+          background: var(--btn-secondary-color);
         }
       }
 
