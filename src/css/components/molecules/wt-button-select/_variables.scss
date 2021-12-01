@@ -9,7 +9,7 @@
   --button-select-buttons-gap: 1px;
 
   --button-select-icon-color-primary: var(--btn-primary-color);
-  --button-select-icon-color-secondary: var(--btn-dark-font-color);
+  --button-select-icon-color-secondary: var(--btn-secondary-color);
   --button-select-icon-color-dark: var(--btn-dark-font-color);
   --button-select-icon-color-ligth: var(--main-color);
 
@@ -17,5 +17,5 @@
   --button-select-icon-color-danger--hover: var(--btn-false--hover-color);
   --button-select-icon-color-success--hover: var(--btn-true--hover-color);
   --button-select-icon-color-transfer--hover: var(--btn-transfer--hover-color);
-  --button-select-icon-color-secondary--hover: var(--btn-dark-font-color);
+  --button-select-icon-color-secondary--hover: var(--btn-secondary--hover-color);
 }

@@ -26,6 +26,7 @@ import WtLoaderDocs from '../components/pages/components/atoms/wt-loader/wt-load
 import WtLRoundedActionDocs
   from '../components/pages/components/atoms/wt-rounded-action/wt-rounded-action-docs.vue';
 import WtTooltipDocs from '../components/pages/components/atoms/wt-tooltip/wt-tooltip-docs.vue';
+import WtContextMenuDocs from '../components/pages/components/atoms/wt-context-menu/wt-context-menu-docs.vue';
 // molecules
 import WtCheckboxDocs
   from '../components/pages/components/molecules/wt-checkbox/wt-checkbox-docs.vue';
@@ -57,6 +58,8 @@ import WtTextareaDocs
   from '../components/pages/components/molecules/wt-textarea/wt-textarea-docs.vue';
 import WtTimeInputDocs
   from '../components/pages/components/molecules/wt-time-input/wt-time-input-docs.vue';
+import WtButtonSelectDocs
+  from '../components/pages/components/molecules/wt-button-select/wt-button-select-docs.vue';
 // organisms
 import WtAppHeaderDocs
   from '../components/pages/components/organisms/wt-app-header/wt-app-header-docs.vue';
@@ -198,6 +201,11 @@ const routes = [
     children: [
       // atoms
       {
+        path: 'context-menu',
+        name: 'context-menu-docs',
+        component: WtContextMenuDocs,
+      },
+      {
         path: '/components/badge',
         name: 'badge-docs',
         component: WtBadgeDocs,
@@ -249,6 +257,11 @@ const routes = [
       },
 
       // molecules
+      {
+        path: 'button-select',
+        name: 'button-select',
+        component: WtButtonSelectDocs,
+      },
       {
         path: 'checkbox',
         name: 'checkbox-docs',
