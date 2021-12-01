@@ -100,6 +100,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wt-table-column-select {
+  line-height: 0; // prevent 24x28 icon heght :/
+}
+
 .wt-table-column-select__popup__list {
   @extend %wt-scrollbar;
   max-height: 35vh; // fixme popup fixed sizes
