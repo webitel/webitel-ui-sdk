@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.9.47</h1>
+          <h1>Webitel UI SDK v. 0.9.50</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -84,6 +84,16 @@ export default {
         value: 'components',
         route: '/components',
         subNav: [
+          {
+            name: 'Button Select',
+            value: 'button-select',
+            route: 'button-select',
+          },
+          {
+            name: 'Context Menu',
+            value: 'context-menu',
+            route: 'context-menu',
+          },
           {
             name: 'Badge',
             value: 'badge',
