@@ -92,6 +92,8 @@ export default {
       fill: var(--button-select-icon-color-dark);
     }
 
+    // For secondary color, the icon color and icon hover color are the same as in primary color mode
+
     &.danger,
     &.success,
     &.transfer {
@@ -152,18 +154,17 @@ export default {
         }
       }
     }
-  }
 
-  // SECONDARY MODE (is same for outline and normal modes)
-  &.secondary::v-deep {
-    .wt-icon__icon {
-      fill: var(--button-select-icon-color-secondary);
-    }
-
-    &:hover,
-    &:active {
+    &.secondary {
       .wt-icon__icon {
-        fill: var(--button-select-icon-color-secondary--hover);
+        fill: var(--button-select-icon-color-secondary);
+      }
+
+      &:hover,
+      &:active {
+        .wt-icon__icon {
+          fill: var(--button-select-icon-color-secondary--hover);
+        }
       }
     }
   }
