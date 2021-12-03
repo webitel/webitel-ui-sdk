@@ -69,11 +69,10 @@ export default {
   }),
 
   watch: {
-    headers: {
+    isColumnSelectPopup: {
       handler() {
         this.fillHeadersDraft();
       },
-      immediate: true,
     },
   },
   computed: {
