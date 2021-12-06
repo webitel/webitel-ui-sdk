@@ -227,6 +227,7 @@ export default {
 
   methods: {
     handleSearchChange(search) {
+      if (!this.isApiMode) return;
       this.isLoading = true;
       this.searchParams.page = 1;
       this.searchParams.search = search;
