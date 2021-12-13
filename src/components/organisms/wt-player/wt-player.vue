@@ -7,6 +7,10 @@
       controls
       v-on="listeners"
     ></audio>
+    <wt-icon-btn
+      icon="close"
+      @click="$emit('close')"
+    ></wt-icon-btn>
   </aside>
 </template>
 
@@ -84,22 +88,25 @@ export default {
 <style lang="scss">
 @import "~plyr/src/sass/plyr.scss";
 
-:root {
-  --plyr-color-main: var(--main-accent-color);
-  --plyr-audio-control-color: var(--icon-primary-color);
-  // --plyr-control-toggle-checked-background: var(--main-primary-color);
-}
-
 .wt-player {
   @extend %typo-body-md;
   position: sticky;
   bottom: 60px;
+  display: flex;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
+
+  .plyr {
+    flex-grow: 1;
+  }
 
   .plyr__control:hover, {
     background: var(--main-option-hover-color);
     color: var(--text-primary-color);
+  }
+
+  .wt-icon-btn {
+    margin: var(--player-close-icon-spacing) var(--player-close-icon-spacing) 0 0;
   }
 
   //.plyr__control[role='menuitemradio']::before,
