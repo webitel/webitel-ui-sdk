@@ -96,9 +96,14 @@ export default {
   display: flex;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
+  background: var(--main-color);
 
   .plyr {
     flex-grow: 1;
+
+    &__controls {
+      background: transparent;
+    };
   }
 
   &__close-icon {
