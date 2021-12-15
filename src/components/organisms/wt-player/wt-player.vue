@@ -96,6 +96,7 @@ export default {
   display: flex;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
+  background-color: var(--player-main-color);
 
   .plyr {
     flex-grow: 1;
