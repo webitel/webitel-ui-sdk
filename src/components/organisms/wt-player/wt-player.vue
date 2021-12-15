@@ -8,6 +8,7 @@
       v-on="listeners"
     ></audio>
     <wt-icon-btn
+      class="wt-player__close-icon"
       icon="close"
       @click="$emit('close')"
     ></wt-icon-btn>
@@ -100,13 +101,13 @@ export default {
     flex-grow: 1;
   }
 
+  &__close-icon {
+    margin: var(--player-close-icon-spacing) var(--player-close-icon-spacing) 0 0;
+  }
+
   .plyr__control:hover, {
     background: var(--main-option-hover-color);
     color: var(--text-primary-color);
-  }
-
-  .wt-icon-btn {
-    margin: var(--player-close-icon-spacing) var(--player-close-icon-spacing) 0 0;
   }
 
   //.plyr__control[role='menuitemradio']::before,
