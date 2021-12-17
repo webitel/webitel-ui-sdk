@@ -2,13 +2,17 @@
   <aside class="wt-player">
     <audio
       id="wt-player__player"
+      ref="audio"
       :src="src"
       :autoplay="autoplay"
       controls
       v-on="listeners"
     ></audio>
+
+    <!-- The "wt-icon-btn" component is append in to "audio" element by "setCloseIcon" method-->
     <wt-icon-btn
       class="wt-player__close-icon"
+      ref="close-icon"
       icon="close"
       @click="$emit('close')"
     ></wt-icon-btn>
@@ -38,6 +42,7 @@ export default {
   data: () => ({
     player: null,
   }),
+
   watch: {
     src() {
       this.setupDownload();
@@ -46,9 +51,11 @@ export default {
       this.setupDownload();
     },
   },
+
   mounted() {
     this.setupPlayer();
   },
+
   computed: {
     listeners() {
       return {
@@ -56,6 +63,7 @@ export default {
       };
     },
   },
+
   methods: {
     setupPlayer() {
       const baseURL = this.$baseURL || process.env.BASE_URL;
@@ -73,6 +81,7 @@ export default {
           active: this.loop,
         },
       });
+      this.setCloseIcon();
     },
     setupDownload() {
       if (!this.download) this.setupPlayer();
@@ -81,6 +90,12 @@ export default {
       } else if (typeof this.download === 'function') {
         this.player.download = this.download(this.src);
       }
+    },
+    setCloseIcon() {
+      const plyrControls = this.$refs.audio.plyr?.elements?.controls;
+      const closeIcon = this.$refs['close-icon'].$el;
+      // eslint-disable-next-line no-unused-expressions
+      plyrControls?.append(closeIcon);
     },
   },
 };
@@ -93,21 +108,15 @@ export default {
   @extend %typo-body-md;
   position: sticky;
   bottom: 60px;
-  display: flex;
-  box-shadow: var(--box-shadow);
-  border-radius: var(--border-radius);
-  background: var(--main-color);
 
   .plyr {
-    flex-grow: 1;
-
-    &__controls {
-      background: transparent;
-    };
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
   }
 
   &__close-icon {
-    margin: var(--player-close-icon-spacing) var(--player-close-icon-spacing) 0 0;
+    transform: translate(var(--player-close-icon-transform-translate-x),
+      var(--player-close-icon-transform-translate-y));
   }
 
   .plyr__control:hover, {
