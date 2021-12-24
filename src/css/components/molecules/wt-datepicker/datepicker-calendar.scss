@@ -53,11 +53,11 @@
     @extend %typo-body-lg;
     width: var(--datepicker-cell-size);
     height: var(--datepicker-cell-size);
+    margin: 1px;
     padding: 0;
+    border: none;
     line-height: var(--datepicker-cell-size);
     transition: var(--transition);
-    border: none;
-    margin: 1px;
 
     &.day-header {
       @extend %typo-body-sm;
