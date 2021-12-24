@@ -74,7 +74,7 @@ export default {
       name: 'Supervisor Workspace',
       sections: {
         [SupervisorSections.QUEUES]: 'Черги',
-        [SupervisorSections.AGENTS]: 'Агенти',
+        [SupervisorSections.AGENTS]: 'Оператори',
         [SupervisorSections.ACTIVE_CALLS]: 'Активні дзвінки',
       },
     },
