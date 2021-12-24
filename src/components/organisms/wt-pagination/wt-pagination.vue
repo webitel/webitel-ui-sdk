@@ -98,7 +98,7 @@ export default {
 
 <style lang="scss" scoped>
 .wt-pagination {
-  @extend %typo-body-md;
+  @extend %typo-body-2;
 
   display: inline-flex;
   align-items: center;

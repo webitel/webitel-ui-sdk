@@ -53,7 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 .wt-label {
-  @extend %typo-body-lg;
+  @extend %typo-body-1;
 
   display: flex;
   align-items: center;

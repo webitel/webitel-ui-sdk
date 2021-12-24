@@ -40,7 +40,7 @@ export default {
 }
 
 .wt-indicator__text {
-  @extend %typo-strong-lg;
+  @extend %typo-subtitle-1;
   margin-left: var(--indicator-text-margin);
 }
 

@@ -63,7 +63,7 @@ export default {
   border-radius: var(--border-radius);
 
   &__name {
-    @extend %typo-strong-lg;
+    @extend %typo-subtitle-1;
   }
 }
 </style>

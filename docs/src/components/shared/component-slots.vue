@@ -62,11 +62,11 @@
 
       p {
         margin-top: 5px;
-        @extend %typo-body-md;
+        @extend %typo-body-2;
       }
     }
     .slot__param {
-      @extend %typo-body-md;
+      @extend %typo-body-2;
     }
   }
 </style>

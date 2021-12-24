@@ -4,7 +4,7 @@
 //@import "../../../src/css/components/organisms/wt-notifications-bar/variables";
 
 body {
-  @extend %typo-body-lg;
+  @extend %typo-body-1;
 }
 
 .docs {
@@ -13,12 +13,12 @@ body {
   }
 
   h3 {
-    @extend %typo-heading-md;
+    @extend %typo-heading-2;
     margin: 20px 10px;
   }
 
   h4 {
-    @extend %typo-heading-sm;
+    @extend %typo-heading-3;
     margin: 15px 10px;
   }
 

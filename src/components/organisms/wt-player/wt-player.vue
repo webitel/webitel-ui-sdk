@@ -106,7 +106,7 @@ export default {
 @import "~plyr/src/sass/plyr.scss";
 
 .wt-player {
-  @extend %typo-body-md;
+  @extend %typo-body-2;
   position: sticky;
   bottom: 60px;
 

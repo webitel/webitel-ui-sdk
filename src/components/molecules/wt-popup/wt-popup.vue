@@ -96,7 +96,7 @@ export default {
   padding: var(--popup-header-padding);
 
   .wt-popup__header__title {
-    @extend %typo-strong-lg;
+    @extend %typo-subtitle-1;
     text-align: center;
     padding: var(--popup-header-title-padding);
   }
@@ -109,7 +109,7 @@ export default {
 }
 
 .wt-popup__main {
-  @extend %typo-body-lg;
+  @extend %typo-body-1;
   padding: var(--popup-main-padding);
 }
 

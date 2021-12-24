@@ -203,7 +203,7 @@ export default {
 }
 
 .wt-app-navigator__nav-title {
-  @extend %typo-strong-lg;
+  @extend %typo-subtitle-1;
   text-align: center;
   text-transform: uppercase;
   margin-bottom: var(--wt-app-header-content-gap);

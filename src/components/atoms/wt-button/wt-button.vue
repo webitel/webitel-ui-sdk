@@ -63,7 +63,7 @@
 
 <style lang="scss" scoped>
   .wt-button {
-    @extend %typo-btn;
+    @extend %typo-button;
     position: relative;
     display: inline-block;
     padding: var(--btn-padding);
@@ -80,7 +80,6 @@
     }
 
     &--large {
-      @extend %typo-btn-lg;
       padding: var(--btn-lg-padding); // 16px 30px - border
     }
 

@@ -133,7 +133,7 @@
   }
 
   .wt-search-bar__input {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
 
     display: block;
     width: 100%;

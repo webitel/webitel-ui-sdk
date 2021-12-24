@@ -328,7 +328,7 @@ export default {
 
       .multiselect__input,
       .multiselect__single {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         min-height: var(--select-input-min-height); // reset original 20px style
         padding: 0;
         margin: 0;
@@ -336,7 +336,7 @@ export default {
       }
 
       .multiselect__strong {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         @extend .wt-badge;
         position: absolute;
         right: var(--select-badge-right-pos);
@@ -376,7 +376,7 @@ export default {
       }
 
       .multiselect__custom-tag, .multiselect__single-label {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         color: var(--form-input-color);
 
         // text overflow 3 dots
@@ -406,7 +406,7 @@ export default {
       transition: var(--transition);
 
       .multiselect__option {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         padding: var(--select-options-padding);
 
         & > span {

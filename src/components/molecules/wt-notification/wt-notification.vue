@@ -46,7 +46,7 @@
 
 <style lang="scss" scoped>
   .wt-notification {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
     @include width-fit-content;
 
     position: relative;

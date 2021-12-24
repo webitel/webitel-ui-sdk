@@ -89,7 +89,7 @@
       position: relative;
 
       input {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         box-sizing: border-box;
         width: 100%;
         padding: var(--datepicker-padding);

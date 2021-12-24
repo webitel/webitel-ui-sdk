@@ -190,17 +190,17 @@ export default {
       }
 
       .ti-new-tag-input {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         border-radius: var(--border-radius);
 
         &::placeholder {
-          @extend %typo-body-lg;
+          @extend %typo-body-1;
           color: var(--form-placeholder-color);
         }
       }
 
       .ti-tag {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         height: fit-content;
         padding: var(--tags-input-padding);
         margin: 0 var(--tags-input-tag-spacing-margin) var(--tags-input-tag-spacing-margin) 0;  // reset default
@@ -237,7 +237,7 @@ export default {
         background: transparent; // reset default
 
         & > div {
-          @extend %typo-body-lg;
+          @extend %typo-body-1;
           padding: var(--tags-input-autocomplete-option-padding);
           color: var(--tags-input-autocomplete-option--text-color);
           transition: var(--transition);

@@ -1,81 +1,100 @@
 
-%typo-heading-lg {
+%typo-heading-1 {
+  font: {
+    family: 'Montserrat', monospace;
+    size: 32px;
+    weight: 600;
+  }
+  line-height: 48px;
+  letter-spacing: 0.28px; // 0.02em
+}
+
+%typo-heading-2 {
   font: {
     family: 'Montserrat', monospace;
     size: 24px;
     weight: 600;
   }
-  line-height: 30px;
+  line-height: 40px;
+  letter-spacing: 0.28px; // 0.02em
 }
 
-%typo-heading-md {
+%typo-heading-3 {
   font: {
     family: 'Montserrat', monospace;
     size: 20px;
     weight: 600;
   }
-  line-height: 30px;
+  line-height: 32px;
+  letter-spacing: 0.28px; // 0.02em
 }
 
-%typo-heading-sm {
+%typo-subtitle-1 {
   font: {
     family: 'Montserrat', monospace;
-    size: 18px;
-    weight: 600;
+    size: 16px;
+    weight: 500;
   }
   line-height: 24px;
+  letter-spacing: 0.28px; // 0.02em
 }
 
-%typo-strong-lg {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 14px;
-    weight: 600;
-  }
-  line-height: 18px;
-}
-
-%typo-strong-md {
+%typo-subtitle-2 {
   font: {
     family: 'Montserrat', monospace;
     size: 12px;
-    weight: 600;
+    weight: 500;
   }
-  line-height: 14px;
+  line-height: 20px;
+  letter-spacing: 0.28px; // 0.02em
 }
 
-%typo-strong-sm {
-  font: {
-    family: 'Montserrat', monospace;
-    size: 10px;
-    weight: 600;
-  }
-  line-height: 12px;
-}
-
-%typo-body-lg {
+%typo-body-1 {
   font: {
     family: 'Montserrat', monospace;
     size: 14px;
     weight: 400;
   }
-  line-height: 18px;
+  line-height: 24px;
+  letter-spacing: 0.56px; // 0.04em
 }
 
-%typo-body-md {
+%typo-body-2 {
   font: {
     family: 'Montserrat', monospace;
     size: 12px;
     weight: 400;
   }
-  line-height: 14px;
+  line-height: 20px;
+  letter-spacing: 0.16px; // 0.01em
 }
 
-%typo-body-sm {
+%typo-button {
+  font: {
+    family: 'Montserrat', monospace;
+    size: 12px;
+    weight: 500;
+  }
+  line-height: 24px;
+  letter-spacing: 0.96px; // 0.06em
+}
+
+%typo-caption {
   font: {
     family: 'Montserrat', monospace;
     size: 10px;
     weight: 400;
  }
-  line-height: 12px;
+  line-height: 16px;
+  letter-spacing: 0.48px; // 0.03em
+}
+
+%typo-overline {
+  font: {
+    family: 'Montserrat', monospace;
+    size: 12px;
+    weight: 500;
+  }
+  line-height: 20px;
+  letter-spacing: 2.56px; // 0.16em
 }

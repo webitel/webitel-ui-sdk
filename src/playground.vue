@@ -1,14 +1,15 @@
 <template>
   <div class="playground">
-  <wt-button color="secondary">Secondary</wt-button>
-    <wt-button-select
-      color="secondary"
-      :options="options"
-      @click="log"
-      @click:option="log"
-    >
-      Save
-    </wt-button-select>
+    <wt-button color="secondary">Secondary</wt-button>
+    <div class="h1">Heading 1</div>
+    <div class="h2">Heading 2</div>
+    <div class="h3">Heading 3</div>
+    <div class="st1">Subtitle 1</div>
+    <div class="st2">Subtitle 2</div>
+    <div class="b1">Body 1</div>
+    <div class="b2">Body 2</div>
+    <div class="c">caption</div>
+    <div class="o">OVERLINE</div>
   </div>
 </template>
 
@@ -231,9 +232,9 @@ export default {
 
 <style lang="scss" scoped>
 .playground {
+  box-sizing: border-box;
   min-height: 100vh;
   padding: 90px;
-  box-sizing: border-box;
 
   & > div {
     margin-bottom: 30px;
@@ -247,5 +248,41 @@ export default {
 
 .scrollbar-outer {
   @extend %wt-scrollbar;
+}
+
+.h1 {
+  @extend %typo-heading-1;
+}
+
+.h2 {
+  @extend %typo-heading-2;
+}
+
+.h3 {
+  @extend %typo-heading-3;
+}
+
+.st1 {
+  @extend %typo-subtitle-1;
+}
+
+.st2 {
+  @extend %typo-subtitle-2;
+}
+
+.b1 {
+  @extend %typo-body-1;
+}
+
+.b2 {
+  @extend %typo-body-2;
+}
+
+.c {
+  @extend %typo-caption;
+}
+
+.o {
+  @extend %typo-overline;
 }
 </style>

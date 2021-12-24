@@ -119,7 +119,7 @@
   }
 
   .wt-header-actions__panel-wrapper {
-    @extend %typo-body-md;
+    @extend %typo-body-2;
     position: absolute;
     top: 100%; // icon
     right: 0;
@@ -136,12 +136,12 @@
   }
 
   .wt-header-actions__name {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
     white-space: nowrap;
   }
 
   .wt-header-actions__account {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
     white-space: nowrap;
   }
 
@@ -153,7 +153,7 @@
     }
 
     .wt-header-actions__action__link {
-      @extend %typo-body-md;
+      @extend %typo-body-2;
       display: flex;
       align-items: center;
       width: 100%;
@@ -171,7 +171,7 @@
   }
 
   .wt-header-actions__build__version {
-    @extend %typo-body-sm;
+    @extend %typo-caption;
     white-space: nowrap;
   }
 </style>

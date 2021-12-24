@@ -152,7 +152,7 @@ import validationMixin from '../../../mixins/validationMixin/validationMixin';
   }
 
   .wt-time-input__input {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
 
     display: block;
     width: 100%;

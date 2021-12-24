@@ -140,7 +140,7 @@
   }
 
   .wt-textarea__textarea {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
 
     display: block;
     width: 100%;

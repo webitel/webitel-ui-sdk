@@ -75,7 +75,7 @@
   }
 
   .wt-tab {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
     position: relative;
     display: inline-block;
     padding: var(--tab-padding);
@@ -92,12 +92,12 @@
 
     &:hover,
     &:focus, {
-      @extend %typo-strong-lg;
+      @extend %typo-subtitle-1;
       color: var(--tab--hover-color);
     }
 
     &.wt-tab--highlight {
-      @extend %typo-strong-lg;
+      @extend %typo-subtitle-1;
       color: var(--tab--active-color);
       border-bottom-color: var(--tab--active-border-color);
     }

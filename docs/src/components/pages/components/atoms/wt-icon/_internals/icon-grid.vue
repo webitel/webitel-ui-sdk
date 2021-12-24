@@ -81,7 +81,7 @@ export default {
   }
 
   .icon__name {
-    @extend %typo-strong-md;
+    @extend %typo-subtitle-2;
   }
 }
 </style>

@@ -6,13 +6,13 @@
       <div class="typo__family-wrapper">
         <div class="typo__item">
           <div class="typo__item-text typo__item-text--heading-lg">Heading large (24px): </div>
-          <code class="language-css">.heading { @extend %typo-heading-lg; }</code>
+          <code class="language-css">.heading { @extend %typo-heading-1; }</code>
         </div>
         <div class="typo__item">
           <div class="typo__item-text typo__item-text--heading-md">Heading medium (20px): </div>
           <code class="language-css">
             .heading {
-              @extend %typo-heading-md;
+              @extend %typo-heading-2;
             }
           </code>
         </div>
@@ -20,7 +20,7 @@
           <div class="typo__item-text typo__item-text--heading-sm">Heading small (18px): </div>
           <code class="language-css">
             .heading {
-              @extend %typo-heading-sm;
+              @extend %typo-heading-3;
             }
           </code>
         </div>
@@ -34,7 +34,7 @@
           <div class="typo__item-text typo__item-text--strong-lg">Strong large (14px): </div>
           <code class="language-css">
             .strong {
-              @extend %typo-strong-lg;
+              @extend %typo-subtitle-1;
             }
           </code>
         </div>
@@ -42,7 +42,7 @@
           <div class="typo__item-text typo__item-text--strong-md">Strong medium (12px): </div>
           <code class="language-css">
             .strong {
-              @extend %typo-strong-md;
+              @extend %typo-subtitle-2;
             }
           </code>
         </div>
@@ -64,7 +64,7 @@
           <div class="typo__item-text typo__item-text--body-lg">Body large (14px): </div>
           <code class="language-css">
             .body {
-              @extend %typo-body-lg;
+              @extend %typo-body-1;
             }
           </code>
         </div>
@@ -72,7 +72,7 @@
           <div class="typo__item-text typo__item-text--body-md">Body medium (12px): </div>
           <code class="language-css">
             .body {
-              @extend %typo-body-md;
+              @extend %typo-body-2;
             }
           </code>
         </div>
@@ -80,7 +80,7 @@
           <div class="typo__item-text typo__item-text--body-sm">Body small (10px): </div>
           <code class="language-css">
             .body {
-              @extend %typo-body-sm;
+              @extend %typo-caption;
             }
           </code>
         </div>
@@ -125,21 +125,21 @@
 
     &--heading {
       &-lg {
-        @extend %typo-heading-lg;
+        @extend %typo-heading-1;
       }
       &-md {
-        @extend %typo-heading-md;
+        @extend %typo-heading-2;
       }
       &-sm {
-        @extend %typo-heading-sm;
+        @extend %typo-heading-3;
       }
     }
     &--strong {
       &-lg {
-        @extend %typo-strong-lg;
+        @extend %typo-subtitle-1;
       }
       &-md {
-        @extend %typo-strong-md;
+        @extend %typo-subtitle-2;
       }
       &-sm {
         @extend %typo-strong-sm;
@@ -147,13 +147,13 @@
     }
     &--body {
       &-lg {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
       }
       &-md {
-        @extend %typo-body-md;
+        @extend %typo-body-2;
       }
       &-sm {
-        @extend %typo-body-sm;
+        @extend %typo-caption;
       }
     }
   }

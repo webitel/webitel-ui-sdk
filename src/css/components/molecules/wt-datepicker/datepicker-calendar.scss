@@ -13,7 +13,7 @@
     line-height: 0;
 
     .day__month_btn {
-      @extend %typo-strong-lg;
+      @extend %typo-subtitle-1;
       padding-top: 5px;
     }
 
@@ -50,7 +50,7 @@
   }
 
   .cell {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
     width: var(--datepicker-cell-size);
     height: var(--datepicker-cell-size);
     margin: 1px;
@@ -60,7 +60,7 @@
     transition: var(--transition);
 
     &.day-header {
-      @extend %typo-body-sm;
+      @extend %typo-caption;
       height: auto;
       letter-spacing: 0.4px;
       color: var(--form-label-color);
@@ -70,7 +70,7 @@
       border-radius: var(--border-radius);
 
       &.selected {
-        @extend %typo-strong-lg;
+        @extend %typo-subtitle-1;
         color: var(--datepicker-selected-cell-text-color);
         background: var(--datepicker-selected-cell-bg-color) !important;
         line-height: var(--datepicker-cell-size);

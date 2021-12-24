@@ -192,7 +192,7 @@ export default {
 
 .wt-table__th,
 .wt-table__td {
-  @extend %typo-body-md;
+  @extend %typo-body-2;
   display: flex;
   align-items: center;
   padding: 0;

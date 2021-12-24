@@ -34,7 +34,7 @@ export default {
 }
 
 .wt-headline__title {
-  @extend %typo-heading-md;
+  @extend %typo-heading-2;
   margin-right: var(--headline-title-margin);
 }
 

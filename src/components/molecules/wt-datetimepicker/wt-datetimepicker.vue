@@ -174,7 +174,7 @@
     outline: none;
 
     &__input {
-      @extend %typo-body-lg;
+      @extend %typo-body-1;
       display: block;
       width: 100%;
       box-sizing: border-box;
@@ -222,7 +222,7 @@
   }
 
   .wt-datetimepicker__quick-filter {
-    @extend %typo-body-sm;
+    @extend %typo-caption;
     text-decoration: underline;
     cursor: pointer;
   }

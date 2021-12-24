@@ -185,7 +185,7 @@ export default {
 }
 
 .wt-navigation-bar__nav-item-link {
-  @extend %typo-body-lg;
+  @extend %typo-body-1;
   display: block;
   padding: var(--navigation-bar-link-padding);
   transition: var(--transition);
@@ -201,7 +201,7 @@ export default {
 }
 
 .wt-navigation-bar__nav-expansion {
-  @extend %typo-heading-sm;
+  @extend %typo-heading-3;
   position: relative;
   display: flex;
   justify-content: space-between;
