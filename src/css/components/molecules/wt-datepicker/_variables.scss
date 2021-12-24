@@ -11,7 +11,7 @@
   --datepicker-width: calc(
           7 * var(--datepicker-cell-size)
           + 2 * var(--datepicker-calendar-padding)
-          + 9px
+          + 8px
           + 7 * 2 * var(--datepicker-cell-margin)); // 7 cells * 2 sides
 
   --datepicker-selected-cell-text-color: var(--main-primary-color);

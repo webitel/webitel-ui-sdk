@@ -56,6 +56,8 @@
     padding: 0;
     line-height: var(--datepicker-cell-size);
     transition: var(--transition);
+    border: none;
+    margin: 1px;
 
     &.day-header {
       @extend %typo-body-sm;
@@ -66,7 +68,6 @@
 
     &.day {
       border-radius: var(--border-radius);
-      margin: 1px;
 
       &.selected {
         @extend %typo-strong-lg;
