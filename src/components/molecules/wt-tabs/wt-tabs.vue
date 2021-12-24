@@ -106,7 +106,8 @@
     &:after {
       display: block;
       content: attr(value);
-      font-family: 'Montserrat Semi', monospace;
+      font-family: 'Montserrat', monospace;
+      font-weight: 600;
       height: 0;
       overflow: hidden;
       visibility: hidden;

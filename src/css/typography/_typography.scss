@@ -1,72 +1,81 @@
 
 %typo-heading-lg {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 24px;
+    weight: 600;
   }
   line-height: 30px;
 }
 
 %typo-heading-md {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 20px;
+    weight: 600;
   }
   line-height: 30px;
 }
 
 %typo-heading-sm {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 18px;
+    weight: 600;
   }
   line-height: 24px;
 }
 
 %typo-strong-lg {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 14px;
+    weight: 600;
   }
   line-height: 18px;
 }
 
 %typo-strong-md {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 12px;
+    weight: 600;
   }
   line-height: 14px;
 }
 
 %typo-strong-sm {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 10px;
+    weight: 600;
   }
   line-height: 12px;
 }
 
 %typo-body-lg {
   font: {
-    family: 'Montserrat Regular', monospace;
+    family: 'Montserrat', monospace;
     size: 14px;
+    weight: 400;
   }
   line-height: 18px;
 }
 
 %typo-body-md {
   font: {
-    family: 'Montserrat Regular', monospace;
+    family: 'Montserrat', monospace;
     size: 12px;
+    weight: 400;
   }
   line-height: 14px;
 }
 
 %typo-body-sm {
   font: {
-    family: 'Montserrat Regular', monospace;
+    family: 'Montserrat', monospace;
     size: 10px;
-  }
+    weight: 400;
+ }
   line-height: 12px;
 }

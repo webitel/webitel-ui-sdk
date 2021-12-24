@@ -1,15 +1,17 @@
 %typo-btn {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 12px;
+    weight: 600;
   }
   line-height: 14px;
 }
 
 %typo-btn-lg {
   font: {
-    family: 'Montserrat Semi', monospace;
+    family: 'Montserrat', monospace;
     size: 20px;
+    weight: 600;
   }
   line-height: 24px;
 }
