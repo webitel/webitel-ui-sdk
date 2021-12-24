@@ -81,7 +81,7 @@ export default {
           active: this.loop,
         },
       });
-      this.setCloseIcon();
+      this.appendCloseIcon();
     },
     setupDownload() {
       if (!this.download) this.setupPlayer();
@@ -91,11 +91,12 @@ export default {
         this.player.download = this.download(this.src);
       }
     },
-    setCloseIcon() {
+    appendCloseIcon() {
       const plyrControls = this.$refs.audio.plyr?.elements?.controls;
       const closeIcon = this.$refs['close-icon'].$el;
-      // eslint-disable-next-line no-unused-expressions
-      plyrControls?.append(closeIcon);
+      if (plyrControls) {
+        plyrControls.append(closeIcon);
+      }
     },
   },
 };
