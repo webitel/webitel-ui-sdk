@@ -1,8 +1,9 @@
-@import 'sizes/sizes';
+@import 'spacings/spacings';
 @import 'display-helpers/display-helpers';
 @import 'styleguide/styleguide';
 @import 'transitions/transitions';
 @import 'components/components';
+@import 'viewport-breakpoints/viewport-breakpoints';
 
 :root {
   --transition: 0.2s;

@@ -2,7 +2,7 @@
   --plyr-color-main: var(--main-accent-color);
   --plyr-audio-control-color: var(--icon-primary-color);
   // --plyr-control-toggle-checked-background: var(--main-primary-color);
-  --player-close-icon-transform-translate-x: var(--spacing--sm);
+  --player-close-icon-transform-translate-x: var(--spacing-sm);
   // "-1 * var" for use the negative value of a variable
-  --player-close-icon-transform-translate-y: calc(-1 * var(--spacing--md));
+  --player-close-icon-transform-translate-y: calc(-1 * var(--spacing-md));
 }

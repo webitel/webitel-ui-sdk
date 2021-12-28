@@ -1,0 +1,23 @@
+:root {
+  // Start point
+  --_spacing-multiplicator: 4px;
+
+  // Spacings
+  --spacing-3xs: calc(var(--_spacing-multiplicator) / 4);
+  --spacing-2xs: calc(var(--_spacing-multiplicator) / 2);
+  --spacing-xs: calc(var(--_spacing-multiplicator) * 1);
+  --spacing-sm: calc(var(--_spacing-multiplicator) * 2);
+  --spacing-md: calc(var(--_spacing-multiplicator) * 3);
+  --spacing-lg: calc(var(--_spacing-multiplicator) * 4);
+  --spacing-xl: calc(var(--_spacing-multiplicator) * 5);
+  --spacing-2xl: calc(var(--_spacing-multiplicator) * 6);
+  --spacing-3xl: calc(var(--_spacing-multiplicator) * 7);
+
+  // Border radius
+  --border-radius: var(--spacing-xs);
+
+  // DEPRECATED
+  --component-padding: var(--spacing-sm);
+  --component-spacing: var(--spacing-sm);
+  --icon-spacing: var(--spacing-2xs);
+}
