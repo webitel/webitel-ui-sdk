@@ -67,7 +67,7 @@ $actions-width: calc(2 * (24px + var(--table-actions-icon-gap)));
 // -- sass doesnt work with css variables :(
 $width-except-filters: 60px + 60px + 88px;
 $filter-width: 230px;
-$filter-gap: 10px; // var(--component-spacing)
+$filter-gap: 10px; // var(--spacing-sm)
 @function filters-width($num) {
   // 1px corrects max width
   @return ($filter-width * $num) + $filter-gap * $num + $width-except-filters - 1px;
@@ -76,7 +76,7 @@ $filter-gap: 10px; // var(--component-spacing)
 .filters-wrap {
   display: grid;
   flex-wrap: wrap;
-  grid-gap: var(--component-spacing);
+  grid-gap: var(--spacing-sm);
 
   .filters-panel-wrapper & > * {
   }

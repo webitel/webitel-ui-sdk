@@ -74,7 +74,7 @@ export default {
 }
 
 .wt-label__hint {
-  margin-left: var(--component-spacing);
+  margin-left: var(--spacing-sm);
   ::v-deep {
     .wt-tooltip {
       width: max-content; // experimental css property

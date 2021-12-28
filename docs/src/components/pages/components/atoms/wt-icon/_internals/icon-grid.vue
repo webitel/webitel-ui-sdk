@@ -59,13 +59,13 @@ export default {
 <style lang="scss" scoped>
 .icon-grid__select {
   max-width: 400px;
-  margin: 0 var(--component-spacing) var(--component-spacing) 0;
+  margin: 0 var(--spacing-sm) var(--spacing-sm) 0;
 }
 
 .icon-grid__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, 120px);
-  grid-gap: var(--component-spacing);
+  grid-gap: var(--spacing-sm);
 
   .icon-grid__icon-wrapper {
     text-align: center;
