@@ -35,7 +35,7 @@
     color: var(--tooltip-light-text-color);
     background: var(--tooltip-light-bg-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--tooltip-elevation);
     transition: var(--transition);
     opacity: 0;
     pointer-events: none;
