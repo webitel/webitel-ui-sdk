@@ -59,6 +59,18 @@ describe('Pagination filter mixin', () => {
     expect(wrapper.vm.$route.query.page).toBe(`${page + 1}`);
   });
 
+  it('At "restPage" method, changes query and emits event', async () => {
+    await router.replace({ query: { page: 100, size } });
+    wrapper = shallowMount(Component, {
+      localVue,
+      router,
+    });
+    wrapper._emitted.input = []; // reset emitted events
+    wrapper.vm.resetPage();
+    expect(wrapper.emitted().input).toBeTruthy();
+    expect(wrapper.vm.$route.query.page).toBe('1');
+  });
+
   it('At "sizeChange", changes query and emits event', async () => {
     const newSize = 40;
     await router.replace({ query: { page, size } });

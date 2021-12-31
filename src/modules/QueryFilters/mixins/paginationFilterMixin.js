@@ -54,6 +54,16 @@ export default {
       });
     },
 
+    resetPage() {
+      this.$emit('input');
+      const value = 1;
+      this.setPage(value);
+      this.setValueToQuery({
+        filterQuery: 'page',
+        value,
+      });
+    },
+
     sizeChange(value) {
       this.$emit('input');
       this.setSize(value);
