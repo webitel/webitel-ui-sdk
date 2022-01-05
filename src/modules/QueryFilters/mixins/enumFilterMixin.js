@@ -31,16 +31,18 @@ export default {
   },
   methods: {
     restoreValue(value) {
-      let newValue;
-      if (Array.isArray(value)) {
-        newValue = this.localizedOptions
-          .filter((option) => value
-            .some((value) => value === option[this.storedProp]));
-      } else {
-        newValue = this.localizedOptions
-          .find((option) => value === option[this.storedProp]);
+      if (value && value.length) {
+        let newValue;
+        if (Array.isArray(value)) {
+          newValue = this.localizedOptions
+                         .filter((option) => value
+                           .some((value) => value === option[this.storedProp]));
+        } else {
+          newValue = this.localizedOptions
+                         .find((option) => value === option[this.storedProp]);
+        }
+        this.setValue({ filter: this.filterQuery, value: newValue });
       }
-      this.setValue({ filter: this.filterQuery, value: newValue });
     },
   },
 };

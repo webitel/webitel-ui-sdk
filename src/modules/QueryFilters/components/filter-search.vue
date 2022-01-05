@@ -5,7 +5,7 @@
     @input="setValue({ filter: filterQuery, value: $event })"
     @search="setValueToQuery({ filterQuery, value: $event })"
     :placeholder="$t('reusable.search')"
-  />
+  ></wt-search-bar>
 </template>
 
 <script>

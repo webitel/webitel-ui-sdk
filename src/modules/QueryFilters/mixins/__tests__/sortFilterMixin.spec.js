@@ -1,10 +1,5 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
 import sortFilterMixin from '../sortFilterMixin';
-
-const localVue = createLocalVue();
-localVue.use(VueRouter);
-const router = new VueRouter();
 
 const headers = [{
   value: 'queue',
@@ -30,27 +25,37 @@ const sortedHeaders = [{
   field: 'online',
 }];
 
+const queryValue = '+queue';
+
 describe('Sort filter mixin', () => {
   const setHeaders = jest.fn();
+  const setValueToQuery = jest.fn();
+  const getValueFromQuery = jest.fn(() => queryValue);
+
   const Component = {
     render() {},
     mixins: [sortFilterMixin],
     data: () => ({ headers }),
-    methods: { setHeaders },
+    methods: {
+      setHeaders,
+      setValueToQuery,
+      getValueFromQuery,
+    },
   };
 
   beforeEach(() => {
-    router.replace('/');
+    setHeaders.mockClear();
+    setValueToQuery.mockClear();
+    getValueFromQuery.mockClear();
   });
 
   it('Correctly sets value from $route query', async () => {
-    await router.replace({ path: '/', query: { sort: '+queue' } });
-    const wrapper = shallowMount(Component, { localVue, router });
+    const wrapper = shallowMount(Component);
     expect(setHeaders).toHaveBeenCalledWith(sortedHeaders);
   });
 
   it('After "sort" trigger, header column sort value changes properly', () => {
-    const wrapper = shallowMount(Component, { localVue, router });
+    const wrapper = shallowMount(Component);
     const queue = wrapper.vm.headers.find((header) => header.value === 'queue');
     wrapper.vm.sort(queue);
     expect(setHeaders).toHaveBeenCalledWith(sortedHeaders);

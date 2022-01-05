@@ -1,49 +1,44 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
 import SearchFilter from '../filter-search.vue';
 import BaseFilterSchema from '../../classes/BaseFilterSchema';
 import baseFilterMixin from '../../mixins/baseFilterMixin/baseFilterMixin';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueRouter);
-const router = new VueRouter();
+const namespace = 'jest';
+const filterQuery = 'jest';
+const filterSchema = new BaseFilterSchema();
+const searchValue = 'jest-search';
 
 describe('Search Filter', () => {
-  const namespace = 'jest';
-  const filterQuery = 'jest';
-  const filterSchema = new BaseFilterSchema();
-  const store = new Vuex.Store({
-    modules: {
-      [namespace]: {
-        namespaced: true,
-        state: {
-          [filterQuery]: filterSchema,
-        },
-      },
-    },
-  });
+  const setValue = jest.fn();
+  const setValueToQuery = jest.fn();
+  const getValueFromQuery = jest.fn(() => searchValue);
 
   const mountOptions = {
-    localVue,
-    store,
-    router,
     propsData: {
       namespace,
       filterQuery,
     },
+    computed: {
+      filterSchema() { return filterSchema; },
+    },
   };
+
+  jest.spyOn(baseFilterMixin.methods, 'setValue').mockImplementation(setValue);
+  jest.spyOn(baseFilterMixin.methods, 'setValueToQuery').mockImplementation(setValueToQuery);
+  jest.spyOn(baseFilterMixin.methods, 'getValueFromQuery').mockImplementation(getValueFromQuery);
+
+  beforeEach(() => {
+    setValue.mockClear();
+    setValueToQuery.mockClear();
+    getValueFromQuery.mockClear();
+  });
+
   it('renders a component', () => {
     const wrapper = shallowMount(SearchFilter, mountOptions);
     expect(wrapper.exists()).toBe(true);
   });
   it('initial restoreValue() triggers setValue() method', async () => {
-    const search = 'jest';
-    await router.replace({ query: { [filterQuery]: search } });
-    const setValueMock = jest.fn();
-    jest.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
     shallowMount(SearchFilter, mountOptions);
-    expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value: search });
+    expect(setValue).toHaveBeenCalledWith({ filter: filterQuery, value: searchValue });
   });
 });

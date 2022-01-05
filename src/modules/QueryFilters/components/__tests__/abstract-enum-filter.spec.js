@@ -20,6 +20,9 @@ describe('Abstract Enum Filter', () => {
         state: {
           [filterQuery]: filterSchema,
         },
+        getters: {
+          GET_VALUE_FROM_QUERY: () => {},
+        },
       },
     },
   });

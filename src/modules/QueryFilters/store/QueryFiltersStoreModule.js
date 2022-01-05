@@ -43,6 +43,12 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
     },
   };
 
+  generateQueryControllerActions(controllerNamespace) {
+    this.actions.SET_VALUE_TO_QUERY = (context, payload) => context.dispatch(`${controllerNamespace}/SET_VALUE_TO_QUERY`, payload, { root: true });
+    this.actions.GET_VALUE_FROM_QUERY = (context, payload) => context.dispatch(`${controllerNamespace}/GET_VALUE_FROM_QUERY`, payload, { root: true });
+    return this;
+  }
+
   constructor({ state = {} } = {}) {
     super();
     this.state = state;
