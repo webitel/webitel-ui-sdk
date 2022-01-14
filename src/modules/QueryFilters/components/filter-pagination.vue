@@ -42,7 +42,7 @@ export default {
       return getNamespacedState(this.$store.state, this.namespace)[this.sizeFilterQuery];
     },
     isPrev() {
-      return this.page > 1;
+      return this.pageFilterSchema.value > 1;
     },
   },
 
