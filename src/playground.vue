@@ -1,15 +1,35 @@
 <template>
   <div class="playground">
-    <wt-button color="secondary">Secondary</wt-button>
-    <div class="h1">Heading 1</div>
-    <div class="h2">Heading 2</div>
-    <div class="h3">Heading 3</div>
-    <div class="st1">Subtitle 1</div>
-    <div class="st2">Subtitle 2</div>
-    <div class="b1">Body 1</div>
-    <div class="b2">Body 2</div>
-    <div class="c">caption</div>
-    <div class="o">OVERLINE</div>
+    <section class="playground-docs playground-box-shadow">
+      <h1 class="title">Elevations</h1>
+      <article>
+        <div class="el el-1">Elevation 1</div>
+        <div class="el el-2">Elevation 2</div>
+        <div class="el el-3">Elevation 3</div>
+        <div class="el el-4">Elevation 4</div>
+        <div class="el el-5">Elevation 5</div>
+        <div class="el el-6">Elevation 6</div>
+        <div class="el el-7">Elevation 7</div>
+        <div class="el el-8">Elevation 8</div>
+        <div class="el el-9">Elevation 9</div>
+        <div class="el el-10">Elevation 10</div>
+      </article>
+    </section>
+    <section class="playground-docs playground-typo">
+      <h1 class="title">Typo</h1>
+      <article>
+        <wt-button color="secondary">Secondary</wt-button>
+        <div class="h1">Heading 1</div>
+        <div class="h2">Heading 2</div>
+        <div class="h3">Heading 3</div>
+        <div class="st1">Subtitle 1</div>
+        <div class="st2">Subtitle 2</div>
+        <div class="b1">Body 1</div>
+        <div class="b2">Body 2</div>
+        <div class="c">caption</div>
+        <div class="o">OVERLINE</div>
+      </article>
+    </section>
   </div>
 </template>
 
@@ -250,39 +270,100 @@ export default {
   @extend %wt-scrollbar;
 }
 
-.h1 {
-  @extend %typo-heading-1;
+.playground-docs {
+  margin-bottom: var(--spacing-3xl);
+
+  .title {
+    @extend %typo-heading-1;
+    margin-bottom: var(--spacing-xl);
+  }
 }
 
-.h2 {
-  @extend %typo-heading-2;
+.playground-box-shadow article {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-3xl);
+
+  .el {
+    @extend %typo-overline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    height: 100px;
+    border-radius: var(--border-radius);
+  }
+  .el-1 {
+    box-shadow: var(--elevation-1);
+  }
+  .el-2 {
+    box-shadow: var(--elevation-2);
+  }
+  .el-3 {
+    box-shadow: var(--elevation-3);
+  }
+  .el-4 {
+    box-shadow: var(--elevation-4);
+  }
+  .el-5 {
+    box-shadow: var(--elevation-5);
+  }
+  .el-6 {
+    box-shadow: var(--elevation-6);
+  }
+  .el-7 {
+    box-shadow: var(--elevation-7);
+  }
+  .el-8 {
+    box-shadow: var(--elevation-8);
+  }
+  .el-9 {
+    box-shadow: var(--elevation-9);
+  }
+  .el-10 {
+    box-shadow: var(--elevation-10);
+  }
 }
 
-.h3 {
-  @extend %typo-heading-3;
-}
+.playground-typo {
+  article > * {
+    margin-bottom: var(--spacing-xl);
+  }
 
-.st1 {
-  @extend %typo-subtitle-1;
-}
+  .h1 {
+    @extend %typo-heading-1;
+  }
 
-.st2 {
-  @extend %typo-subtitle-2;
-}
+  .h2 {
+    @extend %typo-heading-2;
+  }
 
-.b1 {
-  @extend %typo-body-1;
-}
+  .h3 {
+    @extend %typo-heading-3;
+  }
 
-.b2 {
-  @extend %typo-body-2;
-}
+  .st1 {
+    @extend %typo-subtitle-1;
+  }
 
-.c {
-  @extend %typo-caption;
-}
+  .st2 {
+    @extend %typo-subtitle-2;
+  }
 
-.o {
-  @extend %typo-overline;
+  .b1 {
+    @extend %typo-body-1;
+  }
+
+  .b2 {
+    @extend %typo-body-2;
+  }
+
+  .c {
+    @extend %typo-caption;
+  }
+
+  .o {
+    @extend %typo-overline;
+  }
 }
 </style>
