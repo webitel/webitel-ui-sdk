@@ -13,6 +13,7 @@
         <wt-badge color="outline">Outline color</wt-badge>
         <wt-badge color="accent">Accent color</wt-badge>
         <wt-badge color="secondary">Secondary color</wt-badge>
+        <wt-badge color="secondary-50">Secondary-50 color</wt-badge>
         <wt-badge color="success">Success color</wt-badge>
         <wt-badge color="danger">Danger color</wt-badge>
         <wt-badge color="transfer">Transfer color</wt-badge>
@@ -49,7 +50,7 @@
           value: 'color',
           code: '<wt-badge color="primary"></wt-badge>',
           type: 'String',
-          options: ['main', 'outline', 'accent', 'secondary', 'success', 'danger', 'transfer'],
+          options: ['main', 'outline', 'accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer'],
           default: 'main',
           description: '"main" and "outline" are badge-specific colors',
         },
