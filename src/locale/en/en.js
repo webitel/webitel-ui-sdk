@@ -1,9 +1,14 @@
-import { AgentStatus, CallDirection } from 'webitel-sdk';
+import {
+  AgentStatus,
+  CallDirection,
+  ChannelState,
+  ChannelType,
+} from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums';
-import { snakeToCamel } from '../../scripts/caseConverters';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
 import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
 import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+import { snakeToCamel } from '../../scripts/caseConverters';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
@@ -55,6 +60,26 @@ export default {
         [AgentStatus.Pause]: 'Pause',
         [AgentStatus.Offline]: 'Offline',
         [snakeToCamel(AgentStatus.BreakOut)]: 'Break out',
+      },
+    },
+    channel: {
+      state: {
+        [ChannelState.Waiting]: 'Waiting',
+        [ChannelState.Distribute]: 'Distribute',
+        [ChannelState.Offering]: 'Offering',
+        [ChannelState.Answered]: 'Answered',
+        [ChannelState.Active]: 'Active',
+        [ChannelState.Bridged]: 'Bridged',
+        [ChannelState.Hold]: 'Hold',
+        [ChannelState.Missed]: 'Missed',
+        [snakeToCamel(ChannelState.WrapTime)]: 'Wrap time',
+        [ChannelState.Processing]: 'Processing',
+        [ChannelState.Transfer]: 'Transfer',
+      },
+      type: {
+        [ChannelType.Call]: 'Call',
+        [ChannelType.Email]: 'Email',
+        [ChannelType.Chat]: 'Chat',
       },
     },
   },
@@ -186,7 +211,7 @@ export default {
         text: 'Sorry, you have not enough privileges to see this page.',
       },
       page404: {
-        title: "Looks like you're lost",
+        title: 'Looks like you\'re lost',
         text: 'Sorry, we can\'t find the page you want.',
       },
     },
