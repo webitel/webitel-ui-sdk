@@ -41,7 +41,7 @@
     "vue-observe-visibility": "^1.0.0",
     "vue-router": "^3.2.0",
     "vuejs-datepicker": "^1.6.2",
-    "webitel-sdk": "^0.1.84"
+    "webitel-sdk": "^0.1.91"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
