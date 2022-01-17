@@ -95,9 +95,9 @@ export default {
             route: 'context-menu',
           },
           {
-            name: 'Badge',
-            value: 'badge',
-            route: 'badge',
+            name: 'Chip',
+            value: 'chip',
+            route: 'chip',
           },
           {
             name: 'Button',

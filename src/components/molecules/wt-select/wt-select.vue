@@ -276,7 +276,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~vue-multiselect/dist/vue-multiselect.min.css';
-@import '../../../css/components/atoms/wt-badge/wt-badge';
+@import '../../../css/components/atoms/wt-chip/wt-chip';
 
 .wt-select {
   width: 100%;
@@ -337,16 +337,16 @@ export default {
 
       .multiselect__strong {
         @extend %typo-body-1;
-        @extend .wt-badge;
+        @extend .wt-chip;
         position: absolute;
-        right: var(--select-badge-right-pos);
+        right: var(--select-chip-right-pos);
         min-height: var(--select-input-min-height); // reset original 20px style
         margin: 0;
         font-weight: normal;
-        z-index: var(--select-badge-z-index);
+        z-index: var(--select-chip-z-index);
 
-        /* these before-after elements are fixing issue when badge is visually overflown by
-        selected option name (yep, badge has z-index, but its background has 0.3 opacity)*/
+        /* these before-after elements are fixing issue when chip is visually overflown by
+        selected option name (yep, chip has z-index, but its background has 0.3 opacity)*/
         &:before {
           content: '';
           position: absolute;
@@ -354,19 +354,19 @@ export default {
           right: 0;
           bottom: 0;
           left: 0;
-          z-index: -2; // below badge itself
+          z-index: -2; // below chip itself
           background: var(--main-color);
         }
 
         &:after {
-          @extend .wt-badge;
+          @extend .wt-chip;
           content: '';
           position: absolute;
           top: 0;
           right: 0;
           bottom: 0;
           left: 0;
-          z-index: -1; // below badge itself
+          z-index: -1; // below chip itself
 
         }
       }
@@ -546,7 +546,7 @@ export default {
     }
 
     .multiselect__strong {
-      right: var(--select-badge-right-pos--clearable);
+      right: var(--select-chip-right-pos--clearable);
     }
   }
 }

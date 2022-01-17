@@ -1,23 +1,23 @@
 <template>
-  <span class="wt-badge" :class="`wt-badge--${color}-color`">
+  <span class="wt-chip" :class="`wt-chip--${color}-color`">
     <slot></slot>
   </span>
 </template>
 
 <script>
   export default {
-    name: 'wt-badge',
+    name: 'wt-chip',
     props: {
       color: {
         type: String,
         default: 'main',
         options: ['main', 'outline', 'accent', 'secondary', 'success', 'danger', 'transfer'],
-        notes: '"main" and "outline" are badge-specific colors',
+        notes: '"main" and "outline" are chip-specific colors',
       },
     },
   };
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../css/components/atoms/wt-badge/wt-badge';
+  @import '../../../css/components/atoms/wt-chip/wt-chip';
 </style>

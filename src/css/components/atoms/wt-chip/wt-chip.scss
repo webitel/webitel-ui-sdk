@@ -1,17 +1,17 @@
-.wt-badge {
+.wt-chip {
   @extend %typo-body-2;
 
   display: inline-block;
-  padding: var(--badge-padding);
-  background: var(--badge-bg-color);
-  border-radius: var(--badge-border-radius);
+  padding: var(--chip-padding);
+  background: var(--chip-bg-color);
+  border-radius: var(--chip-border-radius);
 
   &--main-color {
-    background: var(--badge-bg-color);
+    background: var(--chip-bg-color);
   }
 
   &--outline-color {
-    background: var(--badge-bg-color--outline);
+    background: var(--chip-bg-color--outline);
   }
 
   &--accent-color {

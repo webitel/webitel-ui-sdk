@@ -13,7 +13,7 @@ import Elevations from '../components/pages/style/elevations/elevations.vue';
 
 import ComponentsDocs from '../components/pages/components/components-docs.vue';
 // atoms
-import WtBadgeDocs from '../components/pages/components/atoms/wt-badge/wt-badge-docs.vue';
+import WtChipDocs from '../components/pages/components/atoms/wt-chip/wt-chip-docs.vue';
 import WtBtnDocs from '../components/pages/components/atoms/wt-button/wt-button-docs.vue';
 import WtDividerDocs from '../components/pages/components/atoms/wt-divider/wt-divider-docs.vue';
 import WtIconDocs from '../components/pages/components/atoms/wt-icon/wt-icon-docs.vue';
@@ -206,9 +206,9 @@ const routes = [
         component: WtContextMenuDocs,
       },
       {
-        path: '/components/badge',
-        name: 'badge-docs',
-        component: WtBadgeDocs,
+        path: '/components/chip',
+        name: 'chip-docs',
+        component: WtChipDocs,
       },
       {
         path: 'button',
