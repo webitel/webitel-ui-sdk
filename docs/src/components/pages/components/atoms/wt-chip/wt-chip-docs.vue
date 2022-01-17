@@ -13,6 +13,7 @@
         <wt-chip color="outline">Outline color</wt-chip>
         <wt-chip color="accent">Accent color</wt-chip>
         <wt-chip color="secondary">Secondary color</wt-chip>
+        <wt-chip color="secondary-50">Secondary-50 color</wt-chip>
         <wt-chip color="success">Success color</wt-chip>
         <wt-chip color="danger">Danger color</wt-chip>
         <wt-chip color="transfer">Transfer color</wt-chip>
@@ -49,7 +50,7 @@
           value: 'color',
           code: '<wt-chip color="primary"></wt-chip>',
           type: 'String',
-          options: ['main', 'outline', 'accent', 'secondary', 'success', 'danger', 'transfer'],
+          options: ['main', 'outline', 'accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer'],
           default: 'main',
           description: '"main" and "outline" are chip-specific colors',
         },

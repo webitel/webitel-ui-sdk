@@ -1,4 +1,9 @@
-import { AgentStatus, CallDirection } from 'webitel-sdk';
+import {
+  AgentStatus,
+  CallDirection,
+  ChannelState,
+  ChannelType,
+} from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
 import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
@@ -56,6 +61,26 @@ export default {
         [AgentStatus.Offline]: 'Офлайн',
         [snakeToCamel(AgentStatus.BreakOut)]: 'Примусова перерва',
       },
+    },
+  },
+  channel: {
+    state: {
+      [ChannelState.Waiting]: 'Очікування',
+      [ChannelState.Distribute]: 'Зарезервований',
+      [ChannelState.Offering]: 'Розподіл',
+      [ChannelState.Answered]: 'Прийнятий',
+      [ChannelState.Active]: 'Активний',
+      [ChannelState.Bridged]: 'З\'єднаний',
+      [ChannelState.Hold]: 'Утримання',
+      [ChannelState.Missed]: 'Пропущений',
+      [snakeToCamel(ChannelState.WrapTime)]: 'Постобробка',
+      [ChannelState.Processing]: 'Обробка',
+      [ChannelState.Transfer]: 'Перевід',
+    },
+    type: {
+      [ChannelType.Call]: 'Дзвінок',
+      [ChannelType.Email]: 'Пошта',
+      [ChannelType.Chat]: 'Чат',
     },
   },
   calls: {
