@@ -11,7 +11,7 @@
       color: {
         type: String,
         default: 'main',
-        options: ['main', 'outline', 'accent', 'secondary', 'success', 'danger', 'transfer'],
+        options: ['main', 'outline', 'accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer'],
         notes: '"main" and "outline" are badge-specific colors',
       },
     },
