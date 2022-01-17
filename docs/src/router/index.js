@@ -7,7 +7,7 @@ import StyleDocs from '../components/pages/style/style-docs.vue';
 import Breakpoints from '../components/pages/style/breakpoints/breakpoints.vue';
 import Colors from '../components/pages/style/colors/colors.vue';
 import DisplayHelpers from '../components/pages/style/display-helpers/display-helpers.vue';
-import Spacing from '../components/pages/style/spacing/spacing.vue';
+import Spacings from '../components/pages/style/spacings/spacings.vue';
 import Typography from '../components/pages/style/typography/typography.vue';
 import Elevations from '../components/pages/style/elevations/elevations.vue';
 
@@ -178,9 +178,9 @@ const routes = [
         component: DisplayHelpers,
       },
       {
-        path: 'spacing',
-        name: 'spacing',
-        component: Spacing,
+        path: 'spacings',
+        name: 'spacings',
+        component: Spacings,
       },
       {
         path: 'typography',

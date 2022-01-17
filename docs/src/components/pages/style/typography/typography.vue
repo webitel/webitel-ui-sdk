@@ -118,7 +118,6 @@ export default {
   padding: 10px;
   border-bottom: 1px solid black;
 
-
   .typo__family-heading {
     margin-bottom: 10px;
   }
