@@ -1,0 +1,78 @@
+// https://stackoverflow.com/a/17181946/17782185
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+%placeholder {
+  @extend %typo-body-1;
+  color: var(--form-placeholder-color);
+}
+
+%placeholder--focus {
+  @extend %placeholder;
+  color: var(--form-placeholder--hover-color);
+}
+
+%placeholder--disabled {
+  @extend %placeholder;
+  color: var(--form-placeholder--disabled-color);
+}
+
+%placeholder--outline {
+  @extend %typo-body-1;
+  color: var(--form-outline-placeholder-color);
+}
+
+%placeholder--outline--focus {
+  @extend %placeholder;
+  color: var(--form-outline-placeholder--hover-color);
+}
+
+@mixin wt-placeholder($style: '') {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @if ($style == 'outline') {
+      @extend %placeholder--outline;
+    } @else if ($style == 'disabled') {
+      @extend %placeholder--disabled;
+    } @else {
+      @extend %placeholder;
+    }
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @if ($style == 'outline') {
+      @extend %placeholder--outline;
+    } @else if ($style == 'disabled') {
+      @extend %placeholder--disabled;
+    } @else {
+      @extend %placeholder;
+    }
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @if ($style == 'outline') {
+      @extend %placeholder--outline;
+    } @else if ($style == 'disabled') {
+      @extend %placeholder--disabled;
+    } @else {
+      @extend %placeholder;
+    }
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @if ($style == 'outline') {
+      @extend %placeholder--outline;
+    } @else if ($style == 'disabled') {
+      @extend %placeholder--disabled;
+    } @else {
+      @extend %placeholder;
+    }
+    @content;
+  }
+}

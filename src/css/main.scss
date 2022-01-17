@@ -3,6 +3,9 @@
 @import 'components/components';
 @import 'display-helpers/display-helpers';
 
+
+@include wt-placeholder;
+
 :root {
   --transition: 0.2s;
 
