@@ -1,4 +1,8 @@
 
 :root {
-  --search-bar-padding: 9px 35px 9px 43px; // sides 10px + 24/16px icon + 10px margin
+  --search-bar-padding:
+    var(--input-padding)
+    calc(var(--input-padding) + var(--icon-sm-size) + var(--spacing-sm))
+    var(--input-padding)
+    calc(var(--input-padding) + var(--icon-md-size) + var(--spacing-sm));
 }

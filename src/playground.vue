@@ -1,7 +1,7 @@
 <template>
   <div class="playground">
     <section>
-      <wt-input style="margin-bottom: 10px;" placeholder="40px height"></wt-input>
+      <wt-search-bar :value="'Dont forget right X'" style="margin-bottom: 10px;" ></wt-search-bar>
       <wt-input style="margin-bottom: 10px;" placeholder="42px height"></wt-input>
     </section>
     <section>
