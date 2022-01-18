@@ -191,12 +191,9 @@ export default {
 
       .ti-new-tag-input {
         @extend %typo-body-1;
-        border-radius: var(--border-radius);
+        @include wt-placeholder;
 
-        &::placeholder {
-          @extend %typo-body-1;
-          color: var(--form-placeholder-color);
-        }
+        border-radius: var(--border-radius);
       }
 
       .ti-tag {

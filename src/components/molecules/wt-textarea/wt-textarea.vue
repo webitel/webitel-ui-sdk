@@ -141,6 +141,7 @@
 
   .wt-textarea__textarea {
     @extend %typo-body-1;
+    @include wt-placeholder;
 
     display: block;
     width: 100%;
@@ -154,26 +155,18 @@
     transition: var(--transition);
     resize: none;
 
-    &::placeholder {
-      color: var(--form-placeholder-color)
-    }
-
     .wt-textarea:hover &,
     &:focus {
-      border-color: var(--form-border--hover-color);
+      @include wt-placeholder('focus');
 
-      &::placeholder {
-        color: var(--form-placeholder--hover-color)
-      }
+      border-color: var(--form-border--hover-color);
     }
 
     .wt-textarea--disabled & {
+      @include wt-placeholder('disabled');
+
       background: var(--form-border--disabled-color);
       border-color: var(--form-border--disabled-color);
-
-      &::placeholder {
-        color: var(--form-placeholder--disabled-color);
-      }
     }
   }
 

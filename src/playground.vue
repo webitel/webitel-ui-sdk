@@ -1,5 +1,17 @@
 <template>
   <div class="playground">
+    <section>
+      <h1 class="title">Placeholders</h1>
+      <wt-textarea placeholder="Textarea placeholder"></wt-textarea>
+      <wt-textarea placeholder="Disabled textarea placeholder" disabled></wt-textarea>
+      <wt-search-bar placeholder="Search bar placeholder"></wt-search-bar>
+      <wt-search-bar placeholder="Outline search bar placeholder" outline></wt-search-bar>
+      <wt-tags-input placeholder="Tags input placeholder"></wt-tags-input>
+      <wt-input placeholder="Input placeholder"></wt-input>
+      <wt-input placeholder="Outline input placeholder" outline></wt-input>
+      <wt-input placeholder="Disabled input placeholder" disabled></wt-input>
+      <wt-input placeholder="Disabled outline input placeholder" outline disabled></wt-input>
+    </section>
     <section class="playground-docs playground-box-shadow">
       <h1 class="title">Elevations</h1>
       <article>

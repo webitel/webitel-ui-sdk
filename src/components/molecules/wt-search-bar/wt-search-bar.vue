@@ -134,6 +134,7 @@
 
   .wt-search-bar__input {
     @extend %typo-body-1;
+    @include wt-placeholder;
 
     display: block;
     width: 100%;
@@ -145,34 +146,21 @@
     border-radius: var(--border-radius);
     transition: var(--transition);
 
-    &::placeholder {
-      color: var(--form-placeholder-color)
-    }
-
     .wt-search-bar:hover &,
     &:focus {
+      @include wt-placeholder('focus');
       border-color: var(--form-border--hover-color);
-
-      &::placeholder {
-        color: var(--form-placeholder--hover-color)
-      }
     }
 
     .wt-search-bar--outline & {
+      @include wt-placeholder('outline');
       border-color: var(--form-outline-border-color);
-
-      &::placeholder {
-        color: var(--form-outline-placeholder-color)
-      }
     }
 
     .wt-search-bar--outline:hover &,
     .wt-search-bar--outline &:focus {
+      @include wt-placeholder('outline:focus');
       border-color: var(--form-outline-border--hover-color);
-
-      &::placeholder {
-        color: var(--form-outline-placeholder--hover-color)
-      }
     }
   }
 
