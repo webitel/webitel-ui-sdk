@@ -1,20 +1,28 @@
 <template>
   <div class="playground">
     <section>
-      <wt-search-bar :value="'Dont forget right X'" style="margin-bottom: 10px;" ></wt-search-bar>
-      <wt-input style="margin-bottom: 10px;" placeholder="42px height"></wt-input>
+      <wt-select placeholder="placeholder!"></wt-select>
+      <wt-search-bar :value="'Dont forget right X'" style="margin-bottom: 10px;"></wt-search-bar>
+      <wt-input placeholder="42px height" style="margin-bottom: 10px;"></wt-input>
     </section>
     <section>
       <h1 class="title">Placeholders</h1>
       <wt-textarea placeholder="Textarea placeholder"></wt-textarea>
-      <wt-textarea placeholder="Disabled textarea placeholder" disabled></wt-textarea>
+      <wt-textarea disabled placeholder="Disabled textarea placeholder"></wt-textarea>
       <wt-search-bar placeholder="Search bar placeholder"></wt-search-bar>
-      <wt-search-bar placeholder="Outline search bar placeholder" outline></wt-search-bar>
-      <wt-tags-input placeholder="Tags input placeholder"></wt-tags-input>
+      <wt-search-bar outline placeholder="Outline search bar placeholder"></wt-search-bar>
+      <wt-tags-input label="Tags input" placeholder="Tags input placeholder"></wt-tags-input>
+      <wt-tags-input
+        :value="[{ text: 'Disabled tags input' }, { text: 'Is here' }]"
+        disabled
+        placeholder="Disabled tags input placeholder"
+      ></wt-tags-input>
+      <wt-select placeholder="Select placeholder"></wt-select>
+      <wt-select disabled placeholder="Disabled select placeholder"></wt-select>
       <wt-input placeholder="Input placeholder"></wt-input>
-      <wt-input placeholder="Outline input placeholder" outline></wt-input>
-      <wt-input placeholder="Disabled input placeholder" disabled></wt-input>
-      <wt-input placeholder="Disabled outline input placeholder" outline disabled></wt-input>
+      <wt-input outline placeholder="Outline input placeholder"></wt-input>
+      <wt-input disabled placeholder="Disabled input placeholder"></wt-input>
+      <wt-input disabled outline placeholder="Disabled outline input placeholder"></wt-input>
     </section>
     <section class="playground-docs playground-box-shadow">
       <h1 class="title">Elevations</h1>
@@ -309,33 +317,43 @@ export default {
     height: 100px;
     border-radius: var(--border-radius);
   }
+
   .el-1 {
     box-shadow: var(--elevation-1);
   }
+
   .el-2 {
     box-shadow: var(--elevation-2);
   }
+
   .el-3 {
     box-shadow: var(--elevation-3);
   }
+
   .el-4 {
     box-shadow: var(--elevation-4);
   }
+
   .el-5 {
     box-shadow: var(--elevation-5);
   }
+
   .el-6 {
     box-shadow: var(--elevation-6);
   }
+
   .el-7 {
     box-shadow: var(--elevation-7);
   }
+
   .el-8 {
     box-shadow: var(--elevation-8);
   }
+
   .el-9 {
     box-shadow: var(--elevation-9);
   }
+
   .el-10 {
     box-shadow: var(--elevation-10);
   }

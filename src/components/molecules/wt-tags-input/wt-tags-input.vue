@@ -154,11 +154,6 @@ export default {
 .wt-label {
   margin-bottom: var(--label-margin);
   cursor: text;
-
-  .wt-tags-input:hover &,
-  .wt-tags-input:focus-within & {
-    color: var(--form-label--hover-color);
-  }
 }
 
 // increase specificity
@@ -245,6 +240,20 @@ export default {
           }
         }
       }
+    }
+  }
+}
+
+.wt-tags-input:hover,
+.wt-tags-input:focus-within {
+  .wt-label {
+    color: var(--form-label--hover-color);
+  }
+
+  .wt-tags-input__tags-input ::v-deep {
+    .ti-new-tag-input {
+      @include wt-placeholder('focus');
+      border-color: var(--form-border--hover-color);
     }
   }
 }

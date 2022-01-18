@@ -7,7 +7,7 @@
   }
 }
 
-$vendors: (':-webkit','-moz',':-moz','-ms');
+$vendors: (':-webkit', '-moz', ':-moz', '-ms');
 
 @mixin wt-placeholder($style: '') {
   @each $vendor in $vendors {
@@ -40,4 +40,24 @@ $vendors: (':-webkit','-moz',':-moz','-ms');
       @content;
     }
   }
+}
+
+/*
+  Classes for direct extending in placeholder-like elements styling
+   (e.g. vue-multiselect .multiselect__placeholder which is technically a span)
+*/
+%wt-placeholder {
+  @extend %typo-body-1;
+  transition: var(--transition);
+  color: var(--form-placeholder-color);
+}
+
+%wt-placeholder--focus {
+  @extend %wt-placeholder;
+  color: var(--form-placeholder--hover-color);
+}
+
+%wt-placeholder--disabled {
+  @extend %wt-placeholder;
+  color: var(--form-placeholder--disabled-color);
 }

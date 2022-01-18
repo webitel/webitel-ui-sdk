@@ -387,9 +387,9 @@ export default {
       }
 
       .multiselect__placeholder {
+        @extend %wt-placeholder;
         padding: 0;
         margin: 0;
-        color: var(--form-placeholder-color);
 
         // text overflow 3 dots
         white-space: nowrap;
@@ -410,7 +410,7 @@ export default {
         padding: var(--select-options-padding);
 
         & > span {
-          color: var(--form-placeholder-color);
+          @extend %wt-placeholder;
         }
 
         &:after {
@@ -461,7 +461,7 @@ export default {
       }
 
       .multiselect__placeholder {
-        color: var(--form-placeholder--hover-color);
+        @extend %wt-placeholder--focus;
       }
     }
   }
@@ -485,7 +485,7 @@ export default {
         }
 
         .multiselect__placeholder {
-          color: var(--form-placeholder--active-color);
+          @extend %wt-placeholder--focus;
         }
       }
     }
@@ -532,7 +532,8 @@ export default {
         border-color: var(--form-border--disabled-color);
 
         .multiselect__placeholder {
-          color: var(--form-placeholder--disabled-color);
+          @extend %wt-placeholder--disabled;
+          //color: var(--form-placeholder--disabled-color);
         }
       }
     }
