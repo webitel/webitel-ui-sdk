@@ -1,7 +1,8 @@
 <template>
   <div class="playground">
     <section>
-      <wt-select placeholder="placeholder!"></wt-select>
+      <wt-select :value="[{ name: 'test' }, { name: 'test2' }]" placeholder="placeholder!" :clearable="false"></wt-select>
+      <wt-select :value="[{ name: 'test' }, { name: 'test2' }]" placeholder="placeholder!"></wt-select>
       <wt-search-bar :value="'Dont forget right X'" style="margin-bottom: 10px;"></wt-search-bar>
       <wt-input placeholder="42px height" style="margin-bottom: 10px;"></wt-input>
     </section>
