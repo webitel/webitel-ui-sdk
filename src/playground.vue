@@ -1,6 +1,10 @@
 <template>
   <div class="playground">
     <section>
+      <wt-input style="margin-bottom: 10px;" placeholder="40px height"></wt-input>
+      <wt-input style="margin-bottom: 10px;" placeholder="42px height"></wt-input>
+    </section>
+    <section>
       <h1 class="title">Placeholders</h1>
       <wt-textarea placeholder="Textarea placeholder"></wt-textarea>
       <wt-textarea placeholder="Disabled textarea placeholder" disabled></wt-textarea>
