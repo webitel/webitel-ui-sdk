@@ -48,13 +48,13 @@
       <h3 class="typo__family-heading">Body:</h3>
       <div class="typo__family-wrapper">
         <div class="typo__item">
-          <div class="typo__item-text typo__item-text--body-lg">Body-1:</div>
+          <div class="typo__item-text typo__item-text--body-1">Body-1:</div>
           <code class="language-css">
             .body { @extend %typo-body-1; }
           </code>
         </div>
         <div class="typo__item">
-          <div class="typo__item-text typo__item-text--body-md">Body-2:</div>
+          <div class="typo__item-text typo__item-text--body-2">Body-2:</div>
           <code class="language-css">
             .body { @extend %typo-body-2; }
           </code>
