@@ -2,7 +2,7 @@
 :root {
   --search-bar-padding:
     var(--input-padding)
-    calc(var(--input-padding) + var(--icon-sm-size) + var(--spacing-sm))
+    calc(var(--input-padding) + var(--icon-sm-size) + var(--spacing-xs))
     var(--input-padding)
-    calc(var(--input-padding) + var(--icon-md-size) + var(--spacing-sm));
+    calc(var(--input-padding) + var(--icon-md-size) + var(--spacing-xs));
 }

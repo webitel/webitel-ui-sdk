@@ -111,6 +111,6 @@ export default {
 }
 
 .wt-table-column-select__popup__item {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
 }
 </style>

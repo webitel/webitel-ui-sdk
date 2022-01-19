@@ -18,6 +18,6 @@
       --spacing-2xl: calc(var(--_spacing-multiplicator) * 6);
       --spacing-3xl: calc(var(--_spacing-multiplicator) * 7);
 
-      --border-radius: var(--spacing-xs);
+      --border-radius: var(--spacing-2xs);
 </code></pre>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="playground">
     <section>
+      <wt-button-select>btn slct</wt-button-select>
       <wt-select placeholder="placeholder!"></wt-select>
       <wt-search-bar :value="'Dont forget right X'" style="margin-bottom: 10px;"></wt-search-bar>
       <wt-input placeholder="42px height" style="margin-bottom: 10px;"></wt-input>
@@ -299,7 +300,7 @@ export default {
 
   .title {
     @extend %typo-heading-1;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
   }
 }
 
@@ -361,7 +362,7 @@ export default {
 
 .playground-typo {
   article > * {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
   }
 
   .h1 {
