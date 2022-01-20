@@ -16,11 +16,33 @@
       :maximum-view="maximumView"
       :disabled="disabled"
       :disabled-dates="disabledDates"
+      :placeholder="label || placeholder"
       :lang="lang"
-      calendar-button
       monday-first
       @input="$emit('change', $event.getTime())"
     >
+      <template slot="afterDateInput">
+        <wt-icon
+          class="wt-datepicker__calendar-icon"
+          icon="calendar"
+          :color="disabled ? 'disabled' : 'default'"
+        ></wt-icon>
+        <wt-icon
+          class="wt-datepicker__arrow-icon"
+          icon="arrow-down"
+          :color="disabled ? 'disabled' : 'default'"
+        ></wt-icon>
+      </template>
+      <template slot="beforeCalendarHeader">
+        <wt-icon
+          class="wt-datepicker__month-arrow wt-datepicker__month-arrow--left"
+          icon="arrow-left"
+        ></wt-icon>
+        <wt-icon
+          class="wt-datepicker__month-arrow wt-datepicker__month-arrow--right"
+          icon="arrow-right"
+        ></wt-icon>
+      </template>
     </vue-datepicker>
   </div>
 </template>
@@ -42,6 +64,10 @@
        * label above calendar input
        */
       label: {
+        type: String,
+        default: '',
+      },
+      placeholder: {
         type: String,
         default: '',
       },
@@ -81,6 +107,34 @@
     cursor: text;
   }
 
+  .wt-datepicker__calendar-icon {
+    position: absolute;
+    top: var(--spacing-xs);
+    left: var(--input-padding);
+    pointer-events: none;
+  }
+
+  .wt-datepicker__arrow-icon {
+    position: absolute;
+    top: var(--spacing-xs);
+    right: var(--input-padding);
+    pointer-events: none;
+  }
+
+  .wt-datepicker__month-arrow{
+    position: absolute;
+    top: var(--spacing-xs);
+    pointer-events: none;
+
+    &--right {
+      right: var(--spacing-xs);
+    }
+
+    &--left {
+      left: var(--spacing-xs);
+    }
+  }
+
   ::v-deep .vdp-datepicker {
     min-width: var(--datepicker-width);
 
@@ -98,43 +152,8 @@
         border-radius: var(--border-radius);
       }
 
-      // arrow down icon
       .vdp-datepicker__calendar-button {
-        position: absolute;
-        top: 50%;
-        right: var(--datepicker-icon-margin);
-        width: 24px;
-        height: 24px;
-        transform: translateY(-50%);
-
-        &:before {
-          content: '';
-          position: absolute;
-          width: 24px;
-          height: 24px;
-          background: url("../../../assets/icons/arrow-down--md.svg") center center;
-          background-size: contain;
-          transition: var(--transition);
-        }
-
-        // hide defaults
-        span {
-          display: none;
-        }
-      }
-
-      // calendar icon
-      &:before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: var(--datepicker-icon-margin);
-        width: 24px;
-        height: 24px;
-        background: url("../../../assets/icons/calendar--md.svg") center center;
-        background-size: contain;
-        transform: translateY(-50%);
-        pointer-events: none;
+        display: none;
       }
     }
     @import '../../../css/components/molecules/wt-datepicker/datepicker-calendar';
@@ -154,17 +173,6 @@
 
         input {
           border-color: var(--form-border--hover-color);
-        }
-
-        // arrow down icon
-        .vdp-datepicker__calendar-button:before {
-          background: url("../../../assets/icons/arrow-down--active--md.svg") center center;
-          background-size: contain;
-        }
-
-        // calendar icon
-        &:before {
-          background: url("../../../assets/icons/calendar--active--md.svg") center center;
         }
       }
     }
@@ -191,17 +199,6 @@
         input {
           background: var(--form-border--disabled-color);
           border-color: var(--form-border--disabled-color);
-        }
-
-        // arrow down icon
-        .vdp-datepicker__calendar-button:before {
-          background: url("../../../assets/icons/arrow-down--disabled--md.svg") center center;
-          background-size: contain;
-        }
-
-        // calendar icon
-        &:before {
-          background: url("../../../assets/icons/calendar--disabled--md.svg") center center;
         }
       }
     }

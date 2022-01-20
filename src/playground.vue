@@ -1,6 +1,7 @@
 <template>
   <div class="playground">
     <section>
+      <wt-datepicker placeholder="PLAHCEHOLDER"></wt-datepicker>
       <wt-select :value="[{ name: 'test' }, { name: 'test2' }]" placeholder="placeholder!" :clearable="false"></wt-select>
       <wt-select :value="[{ name: 'test' }, { name: 'test2' }]" placeholder="placeholder!"></wt-select>
       <wt-textarea value="123321"></wt-textarea>

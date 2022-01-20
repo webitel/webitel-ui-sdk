@@ -1,9 +1,9 @@
 .vdp-datepicker__calendar {
-  width: var(--datepicker-width);
+  width: fit-content;
   right: 0;
   padding: var(--datepicker-calendar-padding);
-  line-height: var(--datepicker-cell-size);
   border-radius: var(--border-radius);
+  box-shadow: var(-elevation-1);
 
   header {
     display: flex;
@@ -13,8 +13,7 @@
     line-height: 0;
 
     .day__month_btn {
-      @extend %typo-subtitle-1;
-      padding-top: 5px;
+      @extend %typo-body-1;
     }
 
     .prev, .next {
@@ -22,47 +21,39 @@
       text-indent: 0;
       color: transparent;
       cursor: pointer;
+      //background: red !important;
+      border: none !important; // hide default arrows
 
       &:hover {
-        background-color: transparent !important;
+        background: none;
       }
 
-      &:after {
-        content: '';
-        position: absolute;
-        top: 5px;
-        width: 24px;
-        height: 24px;
-        background: url("../../../assets/icons/arrow-down--md.svg") center center;
-        background-size: contain;
-        border: none !important; // hide default arrows
-        transform: translateX(-50%) rotate(90deg);
-      }
-
-      &:hover:after {
-        background: url("../../../assets/icons/arrow-down--active--md.svg") center center;
+      &:before, &:after {
+        display: none;
       }
     }
+  }
 
-    .next:after {
-      transform: translateX(-50%) rotate(-90deg);
-    }
+  // cells wrapper
+  & > div:last-child {
+    display: grid;
+    grid-template-columns: repeat(7, 32px);
+    grid-gap: var(--datepicker-cell-gap);
   }
 
   .cell {
     @extend %typo-body-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: var(--datepicker-cell-size);
     height: var(--datepicker-cell-size);
-    margin: 1px;
     padding: 0;
-    border: none;
-    line-height: var(--datepicker-cell-size);
+    border: none !important;
     transition: var(--transition);
 
     &.day-header {
       @extend %typo-caption;
-      height: auto;
-      letter-spacing: 0.4px;
       color: var(--form-label-color);
     }
 
@@ -70,10 +61,8 @@
       border-radius: var(--border-radius);
 
       &.selected {
-        @extend %typo-subtitle-1;
         color: var(--datepicker-selected-cell-text-color);
         background: var(--datepicker-selected-cell-bg-color) !important;
-        line-height: var(--datepicker-cell-size);
       }
 
       &:not(.blank):not(.disabled).day:hover,
