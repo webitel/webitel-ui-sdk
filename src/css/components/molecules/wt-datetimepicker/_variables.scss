@@ -1,12 +1,12 @@
 
 :root {
-  --datetimepicker-padding: 9px 44px;
-  --datetimepicker-icon-margin: 10px;
+  --datetimepicker-padding: var(--datepicker-padding);
+  --datetimepicker-icon-margin: var(--datepicker-icon-margin);
   --datetimepicker-border: 1px solid;
 
-  --datetimepicker-form-padding: 10px;
-  --datetimepicker-form-bg-color: var(--main-primary-color);
+  --datetimepicker-form-padding: var(--spacing-xs);
+  --datetimepicker-form-bg-color: var(--main-color);
   --datetimepicker-form-z-index: 5; // overflow selects' arrow
 
-  --datetimepicker-form-content-margin: 10px;
+  --datetimepicker-form-content-margin: var(--spacing-xs);
 }
