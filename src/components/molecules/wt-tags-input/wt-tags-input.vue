@@ -192,7 +192,9 @@ export default {
       }
 
       .ti-tag {
-        @extend %typo-body-1;
+        @import '../../../css/components/atoms/wt-chip/wt-chip';
+        @extend .wt-chip;
+        //@extend %typo-body-1;
         height: fit-content;
         padding: var(--tags-input-padding);
         margin: 0 var(--tags-input-tag-spacing-margin) var(--tags-input-tag-spacing-margin) 0;  // reset default
@@ -275,8 +277,6 @@ export default {
 }
 
 .wt-tags-input--disabled {
-  pointer-events: none;
-
   .wt-tags-input__tags-input {
     width: 100%;
     max-width: 100%; // reset default
