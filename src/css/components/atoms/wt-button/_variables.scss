@@ -1,14 +1,14 @@
 
 :root {
-  --btn-padding: 11px 19px;
-  --btn-lg-padding: 10px 29px;
+  --btn-padding: calc(var(--spacing-xs) - 1px); // 1px border
+  --btn-lg-padding: var(--spacing-sm);
   --btn-border: 1px solid;
 
   // BUTTON COLORS
-  --btn-dark-font-color: #000;
-  --btn-light-font-color: #fff;
+  --btn-dark-font-color: var(--text-primary-color);
+  --btn-light-font-color: var(--text-contrast-color);
 
-  --btn-primary-color: var(--main-accent-color);
+  --btn-primary-color: var(--accent-color);
   --btn-primary--hover-color: #EFB917;
 
   --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
