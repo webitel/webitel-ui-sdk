@@ -1,7 +1,7 @@
 
 :root {
-  --chip-padding: 5px 10px;
-  --chip-border-radius: 20px;
+  --chip-padding: var(--spacing-2xs) var(--spacing-xs);
+  --chip-border-radius: var(--spacing-lg);
   --chip-bg-color: var(--main-secondary-accent-color);
   --chip-bg-color--outline: var(--main-outline-color);
 }
