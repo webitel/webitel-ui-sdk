@@ -1,7 +1,7 @@
 
 :root {
-  --headline-min-height: 64px;
-  --headline-padding: 12px 30px;
-  --headline-title-margin: 20px;
-  --headline-background: var(--main-primary-color);
+  --headline-padding: var(--spacing-sm);
+  --headline-min-height: calc(40px + var(--headline-padding)); // button/search-bar height + paddings
+  --headline-title-margin: var(--spacing-sm);
+  --headline-background: var(--main-color);
 }

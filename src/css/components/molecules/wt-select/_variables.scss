@@ -4,7 +4,7 @@
   --select-caret-right-pos: var(--spacing-xs);
   --select-caret-z-index: 1;
 
-  --select-clear-top-pos: 12px;
+  --select-clear-top-pos: var(--spacing-xs);
 
   --select-clear-right-pos: calc(
     var(--input-padding)
@@ -30,7 +30,7 @@
     var(--input-padding)
     calc(
       var(--input-padding)
-      + var(--icon-sm-size)
+      + var(--icon-md-size)
       + var(--select-clear-right-pos)
     )
     var(--input-padding)
@@ -48,7 +48,7 @@
 
   --select-chip-right-pos--clearable: calc(
     var(--spacing-xs)
-    + var(--icon-sm-size)
+    + var(--icon-md-size)
     + var(--select-chip-right-pos)
   ); // spacing after bottom arrow + "reset" sm icon
 

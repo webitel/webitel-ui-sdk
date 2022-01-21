@@ -1,6 +1,20 @@
 <template>
   <div class="playground">
     <section>
+      <wt-tabs :tabs="[{name: 'Tab 1', value: 1}, { name: 'Tab 2', value: 2}]"></wt-tabs>
+      <wt-headline style="background: blue;">
+        <template slot="title">
+          Headline
+        </template>
+        <template slot="search">
+          <wt-search-bar></wt-search-bar>
+        </template>
+        <template slot="actions">
+          <wt-button style="margin-left: 20px;">Hello</wt-button>
+          <wt-button style="margin-left: 20px;" color="secondary">there!</wt-button>
+        </template>
+      </wt-headline>
+      <wt-app-header></wt-app-header>
       <wt-datetimepicker></wt-datetimepicker>
       <wt-datepicker placeholder="PLAHCEHOLDER"></wt-datepicker>
       <wt-select :value="[{ name: 'test' }, { name: 'test2' }]" placeholder="placeholder!" :clearable="false"></wt-select>

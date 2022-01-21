@@ -1,6 +1,6 @@
 
 :root {
-  --switcher-icon-margin: 10px;
+  --switcher-icon-margin: var(--spacing-xs);
   --switcher-width: 40px;
   --switcher-height: 22px;
   --switcher-cicle-size: 14px;
