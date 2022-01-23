@@ -6,10 +6,13 @@
     "serve-docs": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "link-local-webitel-ui": "rm -rf node_modules/@webitel/ui-sdk && ln -s /home/user/Projects/webitel-ui-sdk node_modules/@webitel/ui-sdk"
+    "build-and-run-locally": "npm run build && npm run run-locally:simple",
+    "run-locally:simple": "sudo docker run -p 80:80 -v ${PWD}/dist:/usr/share/nginx/html:rw nginx",
+    "run-locally": "sudo docker run -p 80:80 -v ${PWD}/dist:/usr/share/nginx/html:rw -v ${HOME}/default.conf:/etc/nginx/conf.d/default.conf:ro -v ${PWD}/dist:/opt/www/ui-sdk:rw -v ${HOME}/Projects/web-client-auth/dist:/opt/www/auth:ro --rm nginx",
+    "link-local-webitel-ui": "rm -rf node_modules/@webitel/ui-sdk/* && cp -r -t node_modules/@webitel/ui-sdk ${HOME}/Projects/webitel-ui-sdk/src ${HOME}/Projects/webitel-ui-sdk/dist"
   },
   "dependencies": {
-    "@webitel/ui-sdk": "^0.9.66",
+    "@webitel/ui-sdk": "^0.1.100",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
     "deepmerge": "^4.2.2",
