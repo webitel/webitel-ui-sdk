@@ -4,11 +4,11 @@
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
+    "build:app": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix",
-    "build-lib": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
-    "build-publish-lib": "npm run test:unit && npm run build-lib && npm publish --access public"
+    "publish": "npm run test:unit && npm run build-lib && npm publish --access public"
   },
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [

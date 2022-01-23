@@ -71,9 +71,14 @@ export default {
             route: 'typography',
           },
           {
-            name: 'Shadows',
-            value: 'shadows',
-            route: 'shadows',
+            name: 'Elevations',
+            value: 'elevations',
+            route: 'elevations',
+          },
+          {
+            name: 'Border radius',
+            value: 'border-radius',
+            route: 'border-radius',
           },
         ],
       };

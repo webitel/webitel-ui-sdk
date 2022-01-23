@@ -10,6 +10,7 @@ import DisplayHelpers from '../components/pages/style/display-helpers/display-he
 import Spacings from '../components/pages/style/spacings/spacings.vue';
 import Typography from '../components/pages/style/typography/typography.vue';
 import Elevations from '../components/pages/style/elevations/elevations.vue';
+import BorderRadius from '../components/pages/style/border-radius/border-radius.vue';
 
 import ComponentsDocs from '../components/pages/components/components-docs.vue';
 // atoms
@@ -188,9 +189,14 @@ const routes = [
         component: Typography,
       },
       {
-        path: 'Elevations',
-        name: 'Elevations',
+        path: 'elevations',
+        name: 'elevations',
         component: Elevations,
+      },
+      {
+        path: 'border-radius',
+        name: 'border-radius',
+        component: BorderRadius,
       },
     ],
   },
