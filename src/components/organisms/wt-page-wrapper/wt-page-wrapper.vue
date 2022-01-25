@@ -3,7 +3,7 @@
     <div class="wt-page-wrapper__header">
       <slot name="header"></slot>
     </div>
-    <div class="wt-page-wrapper__actions-panel" v-if="actionsPanel">
+    <div v-if="actionsPanel" class="wt-page-wrapper__actions-panel">
       <slot name="actions-panel"></slot>
     </div>
     <div class="wt-page-wrapper__main">
@@ -28,33 +28,25 @@ export default {
 .wt-page-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
   box-sizing: border-box;
+  min-height: 100%;
   padding: var(--page-wrapper-padding);
+  gap: var(--page-wrapper-section-gap);
 }
 
 .wt-page-wrapper__header,
 .wt-page-wrapper__actions-panel,
 .wt-page-wrapper__main {
   box-sizing: border-box;
-  background: var(--main-primary-color);
+  padding: var(--page-wrapper-section-padding);
   border-radius: var(--border-radius);
-}
-
-.wt-page-wrapper__header,
-.wt-page-wrapper__actions-panel {
-  margin-bottom: var(--page-wrapper-section-margin);
-}
-
-.wt-page-wrapper__actions-panel {
-  padding: var(--page-wrapper-padding);
+  background: var(--main-color);
 }
 
 .wt-page-wrapper__main {
-  flex: 1;
   display: flex;
+  flex: 1;
   width: 100%;
-  padding: var(--page-wrapper-main-section-padding);
 }
 
 </style>

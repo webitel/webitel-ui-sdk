@@ -1,5 +1,5 @@
 :root {
-  --page-wrapper-padding: 20px 30px;
-  --page-wrapper-section-margin: 20px;
-  --page-wrapper-main-section-padding: 20px 30px 30px;
+  --page-wrapper-padding: var(--spacing-sm);
+  --page-wrapper-section-padding: var(--spacing-sm);
+  --page-wrapper-section-gap: var(--spacing-sm);
 }
