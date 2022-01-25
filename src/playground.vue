@@ -1,6 +1,9 @@
 <template>
   <div class="playground">
     <section>
+      <wt-table-actions
+        :icons="['refresh', 'import', 'export']"
+      ></wt-table-actions>
       <wt-tabs v-model="currentTab" :tabs="[{text: 'Tab 1', value: 1}, { text: 'Tab 2', value: 2}]"></wt-tabs>
       <wt-headline>
         <template slot="title">

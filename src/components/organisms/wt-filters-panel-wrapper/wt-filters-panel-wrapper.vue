@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$actions-width: calc(2 * (24px + var(--table-actions-icon-gap)));
+$actions-width: calc(2 * (var(--icon-md-size) + var(--table-actions-icon-gap)));
 
 .filters-panel-wrapper {
   display: flex;

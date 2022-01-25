@@ -1,4 +1,5 @@
 
 :root {
-  --table-actions-icon-gap: 20px;
+  --table-actions-padding: var(--spacing-xs);
+  --table-actions-icon-gap: var(--spacing-xs);
 }

@@ -82,9 +82,7 @@ export default {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-
-  & > * {
-    margin-left: var(--table-actions-icon-gap);
-  }
+  gap: var(--table-actions-icon-gap);
+  padding: var(--table-actions-padding);
 }
 </style>
