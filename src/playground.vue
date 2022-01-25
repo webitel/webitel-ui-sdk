@@ -1,8 +1,8 @@
 <template>
   <div class="playground">
     <section>
-      <wt-tabs :tabs="[{name: 'Tab 1', value: 1}, { name: 'Tab 2', value: 2}]"></wt-tabs>
-      <wt-headline style="background: blue;">
+      <wt-tabs v-model="currentTab" :tabs="[{text: 'Tab 1', value: 1}, { text: 'Tab 2', value: 2}]"></wt-tabs>
+      <wt-headline>
         <template slot="title">
           Headline
         </template>
@@ -62,6 +62,11 @@
     <section class="playground-docs playground-typo">
       <h1 class="title">Typo</h1>
       <article>
+        <div style="display: flex; border: 1px solid blue;">
+          <span style="display: inline-block;" class="b1">Tab</span>
+          <strong style="display: inline-block;" class="st1">Tab</strong>
+          <div style="width: 24px; height: 24px; background: red; display: inline-block;"></div>
+        </div>
         <wt-button color="secondary">Secondary</wt-button>
         <div class="h1">Heading 1</div>
         <div class="h2">Heading 2</div>
@@ -81,6 +86,7 @@
 export default {
   name: 'playground',
   data: () => ({
+    currentTab: { value: 1 },
     switcher: true,
     options: [{ text: 'Save as Save as Save as Save as  Save as Save as Save asSave as  Save as Save as Save as' }],
     active: true,

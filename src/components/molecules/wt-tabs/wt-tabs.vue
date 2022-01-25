@@ -12,7 +12,7 @@
       @click="open(tab)"
     >
       <slot :name="tab.value" v-bind="{ tab, current }">
-        {{tab.text}}
+        <span style="display: block;">{{ tab.text }}</span>
       </slot>
     </button>
 
@@ -78,7 +78,7 @@
     @extend %typo-body-1;
     position: relative;
     display: inline-block;
-    padding: var(--tab-padding);
+    padding-bottom: var(--tab-padding);
     margin: var(--tab-margin);
     color: var(--tab-color);
     background: transparent;
@@ -92,37 +92,25 @@
 
     &:hover,
     &:focus, {
-      @extend %typo-subtitle-1;
       color: var(--tab--hover-color);
+      border-bottom-color: var(--tab--active-border-color);
     }
 
     &.wt-tab--highlight {
-      @extend %typo-subtitle-1;
+      font-weight: 700;
       color: var(--tab--active-color);
       border-bottom-color: var(--tab--active-border-color);
     }
 
-    // disables bold font resize on hover
+    //// disables bold font resize on hover
     &:after {
       display: block;
       content: attr(value);
-      font-family: 'Montserrat', monospace;
-      font-weight: 600;
+      font-weight: bold;
       height: 0;
       overflow: hidden;
       visibility: hidden;
     }
-  }
-
-  // all tabs underline
-  .wt-tabs__underline {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: var(--tabs-underiline-height);
-    background: var(--tabs-underiline-color);
-    z-index: 0;
   }
 
 </style>
