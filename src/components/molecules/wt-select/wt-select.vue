@@ -328,10 +328,15 @@ export default {
       .multiselect__input,
       .multiselect__single {
         @extend %typo-body-1;
+        @include wt-placeholder;
         min-height: var(--select-input-min-height); // reset original 20px style
         padding: 0;
         margin: 0;
         background: transparent;
+      }
+
+      .multiselect__input:focus {
+        @include wt-placeholder('focus');
       }
 
       .multiselect__strong {
@@ -457,10 +462,6 @@ export default {
     ::v-deep {
       .multiselect__tags {
         border-color: var(--form-border--hover-color);
-      }
-
-      .multiselect__placeholder {
-        @extend %wt-placeholder--focus;
       }
     }
   }

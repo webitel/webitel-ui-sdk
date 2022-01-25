@@ -145,20 +145,17 @@
     border-radius: var(--border-radius);
     transition: var(--transition);
 
-    .wt-search-bar:hover &,
     &:focus {
       @include wt-placeholder('focus');
       border-color: var(--form-border--hover-color);
     }
 
     .wt-search-bar--outline & {
-      @include wt-placeholder('outline');
       border-color: var(--form-outline-border-color);
     }
 
     .wt-search-bar--outline:hover &,
     .wt-search-bar--outline &:focus {
-      @include wt-placeholder('outline:focus');
       border-color: var(--form-outline-border--hover-color);
     }
   }

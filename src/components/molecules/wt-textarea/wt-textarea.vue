@@ -155,7 +155,6 @@
     transition: var(--transition);
     resize: none;
 
-    .wt-textarea:hover &,
     &:focus {
       @include wt-placeholder('focus');
 

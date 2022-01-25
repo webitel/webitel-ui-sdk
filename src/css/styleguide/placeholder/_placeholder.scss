@@ -12,27 +12,13 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
 @mixin wt-placeholder($style: '') {
   @each $vendor in $vendors {
     @include optional-at-root(':#{$vendor}-input-placeholder') {
-
-      // @extend %typo-body-1;
-      /* Extends doesn't work for placeholders. See https://stackoverflow.com/a/49192800/17782185 */
-      font: {
-        family: 'Montserrat', monospace;
-        size: 14px;
-        weight: 400;
-      }
-      line-height: 24px;
-      letter-spacing: 0.56px; // 0.04em
-
+      font: inherit;
       transition: var(--transition);
 
       @if ($style == 'focus') {
-        color: var(--form-placeholder--hover-color);
+        color: var(--form-placeholder-color--focus);
       } @else if ($style == 'disabled') {
-        color: var(--form-placeholder--disabled-color);
-      } @else if ($style == 'outline') {
-        color: var(--form-outline-placeholder-color);
-      } @else if ($style == 'outline:focus') {
-        color: var(--form-outline-placeholder--hover-color);
+        color: var(--form-placeholder-color--disabled);
       } @else {
         color: var(--form-placeholder-color);
       }
@@ -47,17 +33,17 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
    (e.g. vue-multiselect .multiselect__placeholder which is technically a span)
 */
 %wt-placeholder {
-  @extend %typo-body-1;
+  font: inherit;
   transition: var(--transition);
   color: var(--form-placeholder-color);
 }
 
 %wt-placeholder--focus {
   @extend %wt-placeholder;
-  color: var(--form-placeholder--hover-color);
+  color: var(--form-placeholder-color--focus);
 }
 
 %wt-placeholder--disabled {
   @extend %wt-placeholder;
-  color: var(--form-placeholder--disabled-color);
+  color: var(--form-placeholder-color--disabled);
 }

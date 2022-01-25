@@ -274,20 +274,17 @@ export default {
     border-radius: var(--border-radius);
     transition: var(--transition);
 
-    .wt-input:hover &,
     &:focus {
       @include wt-placeholder('focus');
       border-color: var(--form-border--hover-color);
     }
 
     .wt-input--outline & {
-      @include wt-placeholder('outline');
       border-color: var(--form-outline-border-color);
     }
 
     .wt-input--outline:hover &,
     .wt-input--outline &:focus {
-      @include wt-placeholder('outline:focus');
       border-color: var(--form-outline-border--hover-color);
     }
 

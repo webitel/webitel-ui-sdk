@@ -254,8 +254,15 @@ export default {
 
   .wt-tags-input__tags-input ::v-deep {
     .ti-new-tag-input {
-      @include wt-placeholder('focus');
       border-color: var(--form-border--hover-color);
+    }
+  }
+}
+
+.wt-tags-input:focus-within {
+  .wt-tags-input__tags-input ::v-deep {
+    .ti-new-tag-input {
+      @include wt-placeholder('focus');
     }
   }
 }

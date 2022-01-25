@@ -144,12 +144,17 @@
 
       input {
         @extend %typo-body-1;
+        @include wt-placeholder;
         box-sizing: border-box;
         width: 100%;
         padding: var(--datepicker-padding);
         border: var(--datepicker-border);
         border-color: var(--form-border-color);
         border-radius: var(--border-radius);
+
+        &:focus {
+          @include wt-placeholder('focus');
+        }
       }
 
       .vdp-datepicker__calendar-button {
