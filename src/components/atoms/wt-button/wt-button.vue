@@ -3,10 +3,10 @@
     class="wt-button"
     :class="[
       colorClass,
+      `wt-button--size-${size}`,
       {
         'wt-button--outline': outline,
         'wt-button--wide': wide,
-        'wt-button--large': large,
         'wt-button--disabled': disabled,
       }
     ]"
@@ -25,7 +25,8 @@
     props: {
       color: {
         type: String,
-        default: '',
+        default: 'accent',
+        options: ['accent', 'secondary', 'success', 'danger', 'transfer'],
       },
       disabled: {
         type: Boolean,
@@ -39,9 +40,10 @@
         type: Boolean,
         default: false,
       },
-      large: {
-        type: Boolean,
-        default: false,
+      size: {
+        type: String,
+        default: 'md',
+        options: ['sm', 'md'],
       },
       wide: {
         type: Boolean,
@@ -79,16 +81,21 @@
       width: 100%;
     }
 
-    &--large {
-      padding: var(--btn-lg-padding); // 16px 30px - border
-    }
-
     &--disabled {
       color: var(--disabled-color);
       background: var(--btn-disabled-bg-color);
       border-color: var(--disabled-color);
       cursor: auto;
       pointer-events: none;
+    }
+
+    &--size {
+      &-sm {
+        padding: var(--btn-padding--size-sm);
+      }
+      &-md {
+        padding: var(--btn-padding--size-md);
+      }
     }
 
     &:hover,

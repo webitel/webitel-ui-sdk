@@ -1,15 +1,17 @@
 
 :root {
-  --btn-padding: calc(var(--spacing-xs) - 1px); // 1px border
-  --btn-lg-padding: var(--spacing-sm);
+  --btn-padding: calc(var(--spacing-xs) - 1px) calc(var(--spacing-sm) - 1px); // 1px border
+  --btn-padding--size-md: var(--btn-padding);
+  --btn-padding--size-sm: calc(var(--spacing-2xs) - 1px) calc(var(--spacing-xs) - 1px); // 1px border
+
   --btn-border: 1px solid;
 
   // BUTTON COLORS
   --btn-dark-font-color: var(--text-primary-color);
   --btn-light-font-color: var(--text-contrast-color);
 
-  --btn-primary-color: var(--accent-color);
-  --btn-primary--hover-color: #EFB917;
+  --btn-primary-color: hsla(var(--_accent-color), var(--_opacity--default));
+  --btn-primary--hover-color: hsla(var(--_accent-color), var(--_opacity--hover));
 
   --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
   --btn-secondary--hover-color: hsla(var(--_secondary-color), var(--_opacity--hover));

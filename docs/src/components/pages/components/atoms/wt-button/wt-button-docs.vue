@@ -8,7 +8,7 @@
           class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
       </div>
       <div class="example-wrapper">
-        <wt-button large>Large button</wt-button>
+        <wt-button size="sm" color="secondary">Small button</wt-button>
       </div>
       <div class="example-wrapper">
         <wt-button wide>Wide button</wt-button>
@@ -62,11 +62,11 @@
           default: 'false',
         },
         {
-          value: 'large',
-          code: '<wt-button large></wt-button>',
-          type: 'Boolean',
-          default: 'false',
-          description: 'Makes button bigger',
+          value: 'size',
+          code: '<wt-button size="sm"></wt-button>',
+          type: 'String',
+          default: 'md',
+          options: ['sm', 'md'],
         },
         {
           value: 'outline',
