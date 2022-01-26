@@ -1,6 +1,8 @@
 <template>
   <div class="playground">
     <section>
+      <wt-notification type="error">ERROR!</wt-notification>
+      <wt-notification type="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, eligendi error exercitationem molestias sapiente sed ullam! Deleniti dolorum enim est exercitationem expedita in, ipsam minima optio quasi, quis reiciendis tenetur?</wt-notification>
       <wt-app-header>
         <wt-status-select style="width: 160px;"></wt-status-select>
         <wt-switcher label="Contact Center"></wt-switcher>
