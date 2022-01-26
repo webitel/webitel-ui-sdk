@@ -42,6 +42,11 @@ export default {
     options: {
       type: Array,
     },
+    // size: {
+    //   type: String,
+    //   default: 'md',
+    //   options: ['sm', 'md'],
+    // },
   },
   model: {
     prop: 'status',
@@ -90,19 +95,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wt-select ::v-deep {
-  box-shadow: var(--box-shadow);
+.wt-status-select.wt-select ::v-deep {
+  box-shadow: var(--elevation-5);
+
+  .multiselect {
+    min-height: 0;
+  }
 
   .multiselect__tags {
-    padding: var(--status-select-select-tags-padding);
+    min-height: 0;
+    padding: var(--status-select-padding);
     border: none;
+  }
+
+  .wt-select__arrow-caret {
+    top: 0;
+    right: 0;
   }
 
   .multiselect__content-wrapper {
     border: none;
 
+    .multiselect__option {
+      min-height: 0;
+      padding: 0;
+      color: var(--status-select-option-color);
+    }
+
     .multiselect__option--highlight {
-      color: var(--status-select--hover-color);
       background: var(--status-select-bg--hover-color);
     }
   }

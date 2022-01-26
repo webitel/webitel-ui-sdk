@@ -1,6 +1,12 @@
 <template>
   <div class="playground">
     <section>
+      <wt-app-header>
+        <wt-status-select style="width: 160px;"></wt-status-select>
+        <wt-switcher label="Contact Center"></wt-switcher>
+        <wt-app-navigator current-app="admin" :apps="[]"></wt-app-navigator>
+      </wt-app-header>
+      <wt-status-select style="margin-bottom: 10px;"></wt-status-select>
       <wt-indicator
         color="success"
         text="Indicator text"
@@ -26,7 +32,6 @@
           <wt-button style="margin-left: 20px;" color="secondary">there!</wt-button>
         </template>
       </wt-headline>
-      <wt-app-header></wt-app-header>
       <wt-datetimepicker></wt-datetimepicker>
       <wt-datepicker placeholder="PLAHCEHOLDER"></wt-datepicker>
       <wt-select :value="[{ name: 'test' }, { name: 'test2' }]" placeholder="placeholder!" :clearable="false"></wt-select>

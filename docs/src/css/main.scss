@@ -7,42 +7,42 @@ body {
   @extend %typo-body-1;
 }
 
-.docs {
-  h2 {
-    margin-bottom: 20px;
-  }
+.docs *:not(.initial) {
+  //h2 {
+  //  margin-bottom: 20px;
+  //}
+  //
+  //h3 {
+  //  @extend %typo-heading-2;
+  //  margin: 20px 10px;
+  //}
+  //
+  //h4 {
+  //  @extend %typo-heading-3;
+  //  margin: 15px 10px;
+  //}
+  //
+  //p {
+  //  margin-bottom: 10px;
+  //}
 
-  h3 {
-    @extend %typo-heading-2;
-    margin: 20px 10px;
-  }
-
-  h4 {
-    @extend %typo-heading-3;
-    margin: 15px 10px;
-  }
-
-  p {
-    margin-bottom: 10px;
-  }
-
-  .docs-content-wrapper {
-    ul {
-      list-style: initial;
-
-      li {
-        margin: 20px 10px;
-      }
-    }
-
-    a {
-      text-decoration: underline;
-    }
-
-    code {
-      font-size: 120%;
-    }
-  }
+  //.docs-content-wrapper {
+  //  ul {
+  //    list-style: initial;
+  //
+  //    li {
+  //      margin: 20px 10px;
+  //    }
+  //  }
+  //
+  //  a {
+  //    text-decoration: underline;
+  //  }
+  //
+  //  code {
+  //    font-size: 120%;
+  //  }
+  //}
 }
 
 // for wrapping component example usage

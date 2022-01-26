@@ -114,7 +114,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    margin-left: var(--wt-app-header-content-gap);
     z-index: var(--wt-app-header-content-z-index);
   }
 

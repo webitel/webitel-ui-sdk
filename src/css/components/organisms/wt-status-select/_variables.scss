@@ -1,6 +1,6 @@
 
 :root {
-  --status-select-select-tags-padding: 9px 34px 9px 9px; // 34px = 24 + 10
-  --status-select--hover-color: var(--form-input-color);
-  --status-select-bg--hover-color: #F9F9F9; // zebra-like
+  --status-select-padding: 0 calc(var(--icon-size-md) + var(--spacing-xs)) 0 0; // reset wt-select padding, but preserve arrow icon padding
+  --status-select-option-color: var(--form-input-color);
+  --status-select-bg--hover-color: var(--secondary-color);
 }
