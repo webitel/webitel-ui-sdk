@@ -1,6 +1,7 @@
 <template>
   <div class="playground">
     <section>
+      <wt-progress-bar :value="50"></wt-progress-bar>
       <wt-notification type="error">ERROR!</wt-notification>
       <wt-notification type="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, eligendi error exercitationem molestias sapiente sed ullam! Deleniti dolorum enim est exercitationem expedita in, ipsam minima optio quasi, quis reiciendis tenetur?</wt-notification>
       <wt-app-header>

@@ -48,7 +48,7 @@ export default {
   padding: var(--progress-bar-padding);
   line-height: 0;
   border-radius: var(--border-radius);
-  box-shadow: var(--progress-bar-box-shadow);
+  box-shadow: var(--elevation-1);
 }
 
 .wt-progress-bar__progress {
@@ -56,9 +56,8 @@ export default {
   height: var(--progress-bar-height);
   will-change: width;
   background: var(--accent-color);
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-radius: var(--progress-bar-border-radius) 0 0 var(--progress-bar-border-radius);
   transition: var(--transition);
-  box-shadow: var(--progress-bar-box-shadow);
 }
 
 .wt-progress-bar--primary .wt-progress-bar__progress {
@@ -75,6 +74,6 @@ export default {
 }
 
 .wt-progress-bar--overflow .wt-progress-bar__progress {
-  border-radius: var(--border-radius);
+  border-radius: var(--progress-bar-border-radius);
 }
 </style>
