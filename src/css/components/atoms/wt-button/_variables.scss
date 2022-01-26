@@ -1,10 +1,15 @@
 
 :root {
-  --btn-padding: calc(var(--spacing-xs) - 1px) calc(var(--spacing-sm) - 1px); // 1px border
+  --btn-border-size: 2px;
+  --btn-padding:
+    calc(var(--spacing-xs) - var(--btn-border-size))
+    calc(var(--spacing-sm) - var(--btn-border-size));
   --btn-padding--size-md: var(--btn-padding);
-  --btn-padding--size-sm: calc(var(--spacing-2xs) - 1px) calc(var(--spacing-xs) - 1px); // 1px border
+  --btn-padding--size-sm:
+    calc(var(--spacing-2xs) - var(--btn-border-size))
+    calc(var(--spacing-xs) - var(--btn-border-size));
 
-  --btn-border: 1px solid;
+  --btn-border: var(--btn-border-size) solid;
 
   // BUTTON COLORS
   --btn-dark-font-color: var(--text-primary-color);

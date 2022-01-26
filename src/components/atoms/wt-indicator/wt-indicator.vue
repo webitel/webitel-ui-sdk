@@ -1,8 +1,15 @@
 <template>
-  <div class="wt-indicator">
+  <div
+    class="wt-indicator"
+    :class="[
+      `wt-indicator--size-${size}`
+    ]"
+  >
     <span
       class="wt-indicator__indicator"
-      :class="`wt-indicator__indicator--${color}`"
+      :class="[
+        `wt-indicator__indicator--${color}`,
+      ]"
     ></span>
     <div v-if="isText" class="wt-indicator__text">
       {{ text }}
@@ -19,9 +26,13 @@ export default {
       default: 'secondary',
       options: ['primary', 'secondary', 'disabled', 'success', 'danger', 'transfer', 'break-out'],
     },
-
     text: {
       type: [String, Number],
+    },
+    size: {
+      type: String,
+      default: 'md',
+      options: ['sm', 'md'],
     },
   },
 
@@ -40,13 +51,14 @@ export default {
 }
 
 .wt-indicator__text {
-  @extend %typo-subtitle-1;
+  @extend %typo-body-1;
   margin-left: var(--indicator-text-margin);
 }
 
 .wt-indicator__indicator {
-  min-width: var(--indicator-size);
-  height: var(--indicator-size);
+  min-width: var(--indicator-dot-size);
+  height: var(--indicator-dot-size);
+  margin: var(--indicator-dot-offset);
   background: var(--indicator-disabled-color);
   border-radius: 50%;
 
@@ -76,6 +88,27 @@ export default {
 
   &--break-out {
     background: var(--indicator-break-out-color);
+  }
+}
+
+.wt-indicator--size {
+  &-sm {
+    .wt-indicator__indicator {
+      min-width: var(--indicator-dot-size--size-sm);
+      height: var(--indicator-dot-size--size-sm);
+    }
+    .wt-indicator__text {
+      @extend %typo-caption;
+    }
+  }
+  &-md {
+    .wt-indicator__indicator {
+      min-width: var(--indicator-dot-size--size-md);
+      height: var(--indicator-dot-size--size-md);
+    }
+    .wt-indicator__text {
+      @extend %typo-body-1;
+    }
   }
 }
 </style>

@@ -422,7 +422,7 @@ export default {
         }
 
         &--highlight {
-          background: var(--select-option--hover-color);
+          background: var(--т, еselect-option--hover-color);
 
           & > span {
             color: var(--form-input-color);

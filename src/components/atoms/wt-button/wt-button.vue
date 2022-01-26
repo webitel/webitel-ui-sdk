@@ -71,7 +71,8 @@
     padding: var(--btn-padding);
     border: var(--btn-border);
     color: var(--btn-dark-font-color);
-    background: var(--btn-primary-color);
+    background-color: var(--btn-primary-color);
+    background-clip: padding-box;
     border-color: var(--btn-primary-color);
     border-radius: var(--border-radius);
     transition: var(--transition);
@@ -83,7 +84,7 @@
 
     &--disabled {
       color: var(--disabled-color);
-      background: var(--btn-disabled-bg-color);
+      background-color: var(--btn-disabled-bg-color);
       border-color: var(--disabled-color);
       cursor: auto;
       pointer-events: none;
@@ -100,7 +101,7 @@
 
     &:hover,
     &:active {
-      background: var(--btn-primary--hover-color);
+      background-color: var(--btn-primary--hover-color);
       border-color: var(--btn-primary--hover-color);
     }
 
@@ -108,48 +109,48 @@
       &.secondary {
         color: var(--btn-dark-font-color);
         border-color: var(--btn-secondary-color);
-        background: var(--btn-secondary-color);
+        background-color: var(--btn-secondary-color);
 
         &:hover,
         &:active {
           color: var(--btn-dark-font-color);
           border-color: var(--btn-secondary--hover-color);
-          background: var(--btn-secondary-color);
+          background-color: var(--btn-secondary-color);
         }
       }
 
       &.success {
         color: var(--btn-light-font-color);
-        background: var(--btn-true-color);
+        background-color: var(--btn-true-color);
         border-color: var(--btn-true-color);
 
         &:hover,
         &:active {
-          background: var(--btn-true--hover-color);
+          background-color: var(--btn-true--hover-color);
           border-color: var(--btn-true--hover-color);
         }
       }
 
       &.transfer {
         color: var(--btn-light-font-color);
-        background: var(--btn-transfer-color);
+        background-color: var(--btn-transfer-color);
         border-color: var(--btn-transfer-color);
 
         &:hover,
         &:active {
-          background: var(--btn-transfer--hover-color);
+          background-color: var(--btn-transfer--hover-color);
           border-color: var(--btn-transfer--hover-color);
         }
       }
 
       &.danger {
         color: var(--btn-light-font-color);
-        background: var(--btn-false-color);
+        background-color: var(--btn-false-color);
         border-color: var(--btn-false-color);
 
         &:hover,
         &:active {
-          background: var(--btn-false--hover-color);
+          background-color: var(--btn-false--hover-color);
           border-color: var(--btn-false--hover-color);
         }
       }
@@ -159,14 +160,14 @@
       &:not(.wt-button--disabled) {
         color: var(--btn-primary-color);
         border-color: var(--btn-primary-color);
-        background: transparent;
+        background-color: transparent;
       }
 
       &:hover,
       &:active {
         color: var(--btn-primary--hover-color);
         border-color: var(--btn-primary--hover-color);
-        background: transparent;
+        background-color: transparent;
       }
 
       &.secondary {

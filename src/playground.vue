@@ -1,6 +1,15 @@
 <template>
   <div class="playground">
     <section>
+      <wt-indicator
+        color="success"
+        text="Indicator text"
+    ></wt-indicator>
+      <wt-indicator
+        color="success"
+        text="Indicator text"
+        size="sm"
+    ></wt-indicator>
       <wt-table-actions
         :icons="['refresh', 'import', 'export']"
       ></wt-table-actions>
