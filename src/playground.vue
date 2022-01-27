@@ -1,6 +1,12 @@
 <template>
   <div class="playground">
     <section>
+      <wt-tags-input
+        label="Tags input"
+        placeholder="Tags input placeholder"
+        v-model="autocomplete"
+        :autocomplete-items="autocomplete"
+      ></wt-tags-input>
       <wt-radio label="Label"></wt-radio>
       <wt-checkbox label="Label"></wt-checkbox>
       <wt-progress-bar :value="50"></wt-progress-bar>

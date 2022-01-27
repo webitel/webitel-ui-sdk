@@ -1,15 +1,14 @@
 
 :root {
-  --tags-input-min-height: 40px; // 38px + border-box
-  --tags-input-padding: 5px 10px;
+  --tags-input-padding: var(--input-padding);
+  --tags-input-min-height: 40px; // 24px lh + paddings
   --tags-input-border: var(--input-border);
   --tags-input-border-color: var(--form-border-color);
 
-  --tags-input-tag-spacing-margin: 10px;
+  --tags-input-tags-gap: var(--spacing-xs);
   --tags-input-tag-text-color: var(--text-primary-color);
   --tags-input-tag-bg-color: var(--main-secondary-accent-color);
-  --tags-input-tag-border-radius: 20px;
-  --tags-input-tag-actions-margin-left: var(--tags-input-tag-spacing-margin);
+  --tags-input-tag-actions-margin-left: var(--spacing-2xs);
 
   --tags-input-tag-text-color--deletion: var(--text-contrast-color);
   --tags-input-tag-bg-color--deletion: var(--false-color);

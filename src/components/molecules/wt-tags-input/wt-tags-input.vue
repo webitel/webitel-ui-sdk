@@ -147,6 +147,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../../css/components/atoms/wt-chip/wt-chip';
+
 .wt-tags-input {
   width: 100%;
 }
@@ -174,6 +176,7 @@ export default {
       .ti-tags {
         display: flex;
         align-items: center;
+        gap: var(--tags-input-tags-gap);
         padding: var(--tags-input-padding);
         margin: 0; // reset default
         word-break: break-word; //break long word
@@ -192,15 +195,10 @@ export default {
       }
 
       .ti-tag {
-        @import '../../../css/components/atoms/wt-chip/wt-chip';
         @extend .wt-chip;
-        //@extend %typo-body-1;
+        display: flex;
         height: fit-content;
-        padding: var(--tags-input-padding);
-        margin: 0 var(--tags-input-tag-spacing-margin) var(--tags-input-tag-spacing-margin) 0;  // reset default
-        color: var(--tags-input-tag-text-color);
-        background: var(--tags-input-tag-bg-color);
-        border-radius: var(--tags-input-tag-border-radius);
+        margin: 0;  // reset default
         transition: var(--transition);
 
         .ti-actions {

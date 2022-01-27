@@ -3,8 +3,9 @@
 
   display: inline-block;
   padding: var(--chip-padding);
-  background: var(--chip-bg-color);
+  color: var(--text-primary-color);
   border-radius: var(--chip-border-radius);
+  background: var(--chip-bg-color);
 
   &--main-color {
     background: var(--chip-bg-color);
