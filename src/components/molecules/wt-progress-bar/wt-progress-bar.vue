@@ -48,7 +48,7 @@ export default {
   padding: var(--progress-bar-padding);
   line-height: 0;
   border-radius: var(--border-radius);
-  box-shadow: var(--elevation-1);
+  box-shadow: var(--elevation-2);
 }
 
 .wt-progress-bar__progress {
