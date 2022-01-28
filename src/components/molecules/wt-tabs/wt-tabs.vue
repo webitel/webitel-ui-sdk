@@ -97,7 +97,6 @@
     }
 
     &.wt-tab--highlight {
-      font-weight: 700;
       color: var(--tab--active-color);
       border-bottom-color: var(--tab--active-border-color);
     }

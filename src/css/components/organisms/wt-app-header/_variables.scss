@@ -9,12 +9,16 @@
   --wt-app-header-content-z-index: 11;
 
   --wt-app-navigator-max-height: 80vh;
+  --wt-app-navigator-padding: var(--wt-app-header-content-gap);
   --wt-app-navigator-item-size: 120px;
+  --wt-app-navigator-item-gap: var(--wt-app-header-content-gap);
   --wt-app-navigator-item-border: 1px solid;
   --wt-app-navigator-item-border-color: var(--secondary-color);
   --wt-app-navigator-item-border-color--hover: var(--accent-color);
 
   --wt-header-actions-min-width: 120px;
-  --wt-header-actions-action-bg-color--hover: var(--page-bg-color);
+  --wt-header-actions-content-sections-gap: var(--spacing-lg);
+  --wt-header-actions-padding: var(--wt-app-header-content-gap);
+  --wt-header-actions-action-bg-color--hover: var(--secondary-color);
   --wt-header-actions-action-link-padding: var(--spacing-xs);
 }

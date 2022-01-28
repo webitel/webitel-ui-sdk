@@ -1,6 +1,12 @@
 <template>
   <div class="playground">
     <section>
+      <wt-app-header>
+        <wt-status-select style="width: 160px;"></wt-status-select>
+        <wt-switcher label="Contact Center"></wt-switcher>
+        <wt-header-actions :user="{name: 'Адміністратор', account: 'adm@demo.webitel.com'}" :build-info="{ release: '12.12' }"></wt-header-actions>
+        <wt-app-navigator current-app="admin" :apps="[{ name: 'admin' }, { name: 'admin' }, { name: 'admin' }, { name: 'grafana' }, { name: 'agent' }, { name: 'supervisor' }, { name: 'history' }]"></wt-app-navigator>
+      </wt-app-header>
       <wt-tags-input
         label="Tags input"
         placeholder="Tags input placeholder"
@@ -12,11 +18,6 @@
       <wt-progress-bar :value="50"></wt-progress-bar>
       <wt-notification type="error">ERROR!</wt-notification>
       <wt-notification type="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, eligendi error exercitationem molestias sapiente sed ullam! Deleniti dolorum enim est exercitationem expedita in, ipsam minima optio quasi, quis reiciendis tenetur?</wt-notification>
-      <wt-app-header>
-        <wt-status-select style="width: 160px;"></wt-status-select>
-        <wt-switcher label="Contact Center"></wt-switcher>
-        <wt-app-navigator current-app="admin" :apps="[]"></wt-app-navigator>
-      </wt-app-header>
       <wt-status-select style="margin-bottom: 10px;"></wt-status-select>
       <wt-indicator
         color="success"
