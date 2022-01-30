@@ -1,5 +1,6 @@
 
 :root {
+  --btn-min-width: 90px;
   --btn-border-size: 2px;
   --btn-padding:
     calc(var(--spacing-xs) - var(--btn-border-size))
@@ -15,14 +16,14 @@
   --btn-dark-font-color: var(--text-primary-color);
   --btn-light-font-color: var(--text-contrast-color);
 
-  --btn-primary-color: hsla(var(--_accent-color), var(--_opacity--default));
-  --btn-primary--hover-color: hsla(var(--_accent-color), var(--_opacity--hover));
+  --btn-accent-color: hsla(var(--_accent-color), var(--_opacity--default));
+  --btn-accent--hover-color: hsla(var(--_accent-color), var(--_opacity--hover));
 
   --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
   --btn-secondary--hover-color: hsla(var(--_secondary-color), var(--_opacity--hover));
 
+  --btn-disabled-font-color: var(--secondary-color-50);
   --btn-disabled-color: var(--disabled-color);
-  --btn-disabled-bg-color: transparent;
 
   --btn-true-color: var(--true-color);
   --btn-true--hover-color: var(--true--hover-color);

@@ -1,6 +1,35 @@
 <template>
   <div class="playground">
     <section>
+      <article>
+        <div class="example-wrapper">
+          <wt-button>Primary button</wt-button>
+          <pre><code
+            class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
+        </div>
+        <div class="example-wrapper">
+          <wt-button size="sm" color="secondary">Small button</wt-button>
+        </div>
+        <div class="example-wrapper">
+          <wt-button wide>Wide button</wt-button>
+        </div>
+        <div class="example-wrapper">
+          <wt-button>Primary</wt-button>
+          <wt-button color="secondary">Secondary</wt-button>
+          <wt-button disabled>Disabled</wt-button>
+          <wt-button color="success">Success</wt-button>
+          <wt-button color="danger">Danger</wt-button>
+          <wt-button color="transfer">Transfer</wt-button>
+        </div>
+        <div class="example-wrapper">
+          <wt-button outline>Primary</wt-button>
+          <wt-button outline color="secondary">Secondary</wt-button>
+          <wt-button outline disabled>Disabled</wt-button>
+          <wt-button outline color="success">Success</wt-button>
+          <wt-button outline color="danger">Danger</wt-button>
+          <wt-button outline color="transfer">Transfer</wt-button>
+        </div>
+      </article>
       <wt-app-header>
         <wt-status-select style="width: 160px;"></wt-status-select>
         <wt-switcher label="Contact Center"></wt-switcher>
@@ -334,6 +363,10 @@ export default {
   box-sizing: border-box;
   min-height: 100vh;
   padding: 90px;
+
+  .wt-button {
+    margin: 10px;
+  }
 
   & > div {
     margin-bottom: 30px;
