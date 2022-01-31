@@ -1,7 +1,33 @@
 <template>
   <div class="playground">
     <section>
-      <article>
+      <article style="width: 1000px; height: 400px; position: relative;">
+        <wt-popup style="position: absolute;">
+          <template slot="title">
+            Popup header
+          </template>
+          <template slot="main">
+            <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit. Accusamus autem consequatur consequuntur earum, eius, exercitationem, expedita
+              fugiat mollitia nam nesciunt omnis placeat provident quos sed tempore ullam
+              voluptate.
+              Est, molestias.Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit. Accusamus autem consequatur consequuntur earum, eius, exercitationem, expedita
+              fugiat mollitia nam nesciunt omnis placeat provident quos sed tempore ullam
+              voluptate.
+              Est, molestias.Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit. Accusamus autem consequatur consequuntur earum, eius, exercitationem, expedita
+              fugiat mollitia nam nesciunt omnis placeat provident quos sed tempore ullam
+              voluptate.
+              Est, molestias.</p>
+          </template>
+          <template slot="actions">
+            <wt-button color="primary">Ok</wt-button>
+            <wt-button color="secondary">Not Ok</wt-button>
+          </template>
+        </wt-popup>
+      </article>
+      <article class="buttons">
         <div class="example-wrapper">
           <wt-rounded-action wide icon="call"></wt-rounded-action>
           <wt-rounded-action loading icon="call"></wt-rounded-action>
@@ -19,7 +45,7 @@
         <p>! class 'active', attached to secondary color button, highlights it.</p>
       </article>
 
-      <article>
+      <article class="buttons">
         <wt-button :loading="isLoading" @click="load">Load!</wt-button>
         <wt-button-select>123</wt-button-select>
         <div class="example-wrapper">
@@ -391,7 +417,7 @@ export default {
   min-height: 100vh;
   padding: 90px;
 
-  .wt-button {
+  .buttons .wt-button {
     margin: 10px;
   }
 
