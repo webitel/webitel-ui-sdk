@@ -77,7 +77,7 @@ export default {
 
   methods: {
     inputHandler(value) {
-      const size = (value > 0 && value <= 1000)
+      const size = (value >= 0 && value <= 1000)
         ? value
         : this.defaultSize;
       this.$emit('input', size);
@@ -98,7 +98,7 @@ export default {
 
 <style lang="scss" scoped>
 .wt-pagination {
-  @extend %typo-body-2;
+  @extend %typo-body-1;
 
   display: inline-flex;
   align-items: center;
@@ -108,11 +108,11 @@ export default {
 .wt-pagination__size {
   display: flex;
   align-items: center;
-  margin-right: var(--pagination-margin-right);
+  margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-text {
-  margin-right: var(--pagination-size-text-margin-right);
+  margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-input {
@@ -125,7 +125,7 @@ export default {
 }
 
 .wt-pagination__page-control {
-  margin-left: var(--pagination-page-controls-margin);
+  margin-left: var(--pagination-gap);
 
   &:first-child {
     margin-left: 0;

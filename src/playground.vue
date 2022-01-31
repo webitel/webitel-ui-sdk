@@ -1,6 +1,12 @@
 <template>
   <div class="playground">
     <section>
+      <wt-pagination
+        :size="10"
+        :page="10"
+        prev="true"
+        next="true"
+      ></wt-pagination>
       <article style="width: 1000px; height: 400px; position: relative;">
         <wt-popup style="position: absolute;">
           <template slot="title">
