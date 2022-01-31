@@ -7,6 +7,7 @@
       {
         'wt-button--outline': outline,
         'wt-button--wide': wide,
+        'wt-button--rounded': rounded,
         'wt-button--disabled': disabled,
       }
     ]"
@@ -49,6 +50,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    rounded: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     colorClass() {
@@ -71,17 +76,19 @@ export default {
   display: inline-block;
   min-width: var(--btn-min-width);
   padding: var(--btn-padding);
-  border: var(--btn-border);
   color: var(--btn-dark-font-color);
   background-color: var(--btn-accent-color);
   background-clip: padding-box;
-  border-color: var(--btn-accent-color);
   border-radius: var(--border-radius);
   transition: var(--transition);
   cursor: pointer;
 
   &--wide {
     width: 100%;
+  }
+
+  &--rounded {
+    border-radius: var(--border-radius--pill);
   }
 
   &--size {
@@ -150,9 +157,21 @@ export default {
   }
 
   &.wt-button--outline {
+    border: var(--btn-border);
+    padding: var(--btn-padding--outline);
     background-color: transparent;
     color: var(--btn-accent-color);
     border-color: var(--btn-accent-color);
+
+    &.wt-button--size {
+      &-sm {
+        padding: var(--btn-padding--size-sm--outline);
+      }
+
+      &-md {
+        padding: var(--btn-padding--size-md--outline);
+      }
+    }
 
     &:hover,
     &:active {

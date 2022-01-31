@@ -83,6 +83,7 @@ export default {
 }
 
 .wt-button-select__select-btn {
+  min-width: auto;
   padding: var(--button-select-icon-button-padding);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 

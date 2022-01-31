@@ -2,8 +2,10 @@
   <div class="playground">
     <section>
       <article>
+        <wt-button-select>123</wt-button-select>
         <div class="example-wrapper">
-          <wt-button>Primary button</wt-button>
+          <wt-button>Primary button Primary button</wt-button>
+          <wt-button outline>Primary button Primary button</wt-button>
           <pre><code
             class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
         </div>
@@ -14,10 +16,10 @@
           <wt-button wide>Wide button</wt-button>
         </div>
         <div class="example-wrapper">
-          <wt-button>Primary</wt-button>
-          <wt-button color="secondary">Secondary</wt-button>
-          <wt-button disabled>Disabled</wt-button>
-          <wt-button color="success">Success</wt-button>
+          <wt-button rounded class="el-1">Primary</wt-button>
+          <wt-button rounded color="secondary">Secondary</wt-button>
+          <wt-button rounded disabled>Disabled</wt-button>
+          <wt-button rounded color="success">Success</wt-button>
           <wt-button color="danger">Danger</wt-button>
           <wt-button color="transfer">Transfer</wt-button>
         </div>
@@ -25,8 +27,8 @@
           <wt-button outline>Primary</wt-button>
           <wt-button outline color="secondary">Secondary</wt-button>
           <wt-button outline disabled>Disabled</wt-button>
-          <wt-button outline color="success">Success</wt-button>
-          <wt-button outline color="danger">Danger</wt-button>
+          <wt-button rounded outline color="success">Success</wt-button>
+          <wt-button rounded outline color="danger">Danger</wt-button>
           <wt-button outline color="transfer">Transfer</wt-button>
         </div>
       </article>
@@ -395,7 +397,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-3xl);
-
+}
   .el {
     @extend %typo-overline;
     display: flex;
@@ -445,11 +447,12 @@ export default {
   .el-10 {
     box-shadow: var(--elevation-10);
   }
-}
+//}
 
 .playground-typo {
   article > * {
     margin-bottom: var(--spacing-sm);
+  }
   }
 
   .h1 {
@@ -487,5 +490,5 @@ export default {
   .o {
     @extend %typo-overline;
   }
-}
+//}
 </style>
