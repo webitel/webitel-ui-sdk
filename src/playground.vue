@@ -2,9 +2,29 @@
   <div class="playground">
     <section>
       <article>
+        <div class="example-wrapper">
+          <wt-rounded-action wide icon="call"></wt-rounded-action>
+          <wt-rounded-action loading icon="call"></wt-rounded-action>
+          <pre><code
+            class="language-html">&lt;wt-rounded-action icon="call"&gt;&lt;/wt-rounded-action&gt;</code></pre>
+        </div>
+        <div class="example-wrapper" style="display: flex;">
+          <wt-rounded-action icon="call" color="secondary"></wt-rounded-action>
+          <wt-rounded-action icon="call" disabled></wt-rounded-action>
+          <wt-rounded-action icon="call" color="success"></wt-rounded-action>
+          <wt-rounded-action icon="call" color="danger"></wt-rounded-action>
+          <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
+          <wt-rounded-action icon="call" color="transfer" disabled></wt-rounded-action>
+        </div>
+        <p>! class 'active', attached to secondary color button, highlights it.</p>
+      </article>
+
+      <article>
+        <wt-button :loading="isLoading" @click="load">Load!</wt-button>
         <wt-button-select>123</wt-button-select>
         <div class="example-wrapper">
-          <wt-button>Primary button Primary button</wt-button>
+<!--          <wt-button :loading="isLoading" @click="load">Load!</wt-button>-->
+          <wt-button loading></wt-button>
           <wt-button outline>Primary button Primary button</wt-button>
           <pre><code
             class="language-html">&lt;wt-button&gt;Primary button&lt;/wt-button&gt;</code></pre>
@@ -344,6 +364,7 @@ export default {
       },
     },
     columnSelect: [],
+    isLoading: false,
   }),
   methods: {
     search(search) {
@@ -352,6 +373,10 @@ export default {
           .fill({ name: search || '123' }),
         next: true,
       };
+    },
+    load() {
+      this.isLoading = true;
+      setTimeout(() => { this.isLoading = false; }, 1000);
     },
     log(options) {
       console.log(options);

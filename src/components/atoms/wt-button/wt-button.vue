@@ -15,7 +15,11 @@
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
-    <wt-loader v-if="loading" size="sm" :color="loaderColor" />
+    <wt-loader
+      v-if="loading"
+      size="sm"
+      :color="loaderColor"
+    ></wt-loader>
     <slot v-else></slot>
   </button>
 </template>
@@ -235,6 +239,10 @@ export default {
     cursor: auto;
     pointer-events: none;
     box-shadow: none;
+  }
+
+  .wt-loader {
+    margin: auto;
   }
 }
 </style>

@@ -101,6 +101,10 @@ svg {
     fill: var(--icon-color-hold);
   }
 
+  &-secondary-50 .wt-icon__icon {
+    fill: var(--icon-color-secondary-50);
+  }
+
   &-disabled .wt-icon__icon {
     fill: var(--icon-color-disabled);
   }
