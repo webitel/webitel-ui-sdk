@@ -3,7 +3,7 @@
     <table class="wt-table__table">
       <thead class="wt-table__head">
       <tr class="wt-table__tr wt-table__tr__head" :style="columnsStyle">
-        <th class="wt-table__th__checkbox" v-if="selectable">
+        <th class="wt-table__th wt-table__th--checkbox" v-if="selectable">
           <wt-checkbox
             :selected="isAllSelected"
             @change="selectAll"
@@ -24,11 +24,13 @@
             class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
             v-if="sortable"
             icon="sort-arrow-up"
+            size="sm"
           ></wt-icon>
           <wt-icon
             class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
             v-if="sortable"
             icon="sort-arrow-down"
+            size="sm"
           ></wt-icon>
         </th>
         <th class="wt-table__th__actions" v-if="gridActions">
@@ -45,7 +47,7 @@
         :key="dataKey"
         :style="columnsStyle"
       >
-        <td class="wt-table__td__checkbox" v-if="selectable">
+        <td class="wt-table__td wt-table__td--checkbox" v-if="selectable">
           <wt-checkbox
             v-model="row._isSelected"
           ></wt-checkbox>
@@ -69,7 +71,7 @@
 
       <tfoot class="wt-table__foot" v-if="isTableFooter">
       <tr class="wt-table__tr wt-table__tr__foot" :style="columnsStyle">
-<!--        empty checkbox column -->
+        <!--        empty checkbox column -->
         <th class="wt-table__th__checkbox" v-if="selectable"></th>
         <td
           class="wt-table__td"
@@ -121,7 +123,7 @@ export default {
 
     dataHeaders() {
       return this.headers
-        .filter((header) => header.show === undefined || header.show);
+                 .filter((header) => header.show === undefined || header.show);
     },
 
     columnsStyle() {
@@ -169,8 +171,9 @@ export default {
 
 .wt-table__head {
   //display: block;
-  border-bottom: var(--table-head-borer-bottom);
-  border-color: var(--table-head-borer-color);
+  border-radius: var(--border-radius);
+  border: var(--table-head-border);
+  border-color: var(--table-head-border-color);
 }
 
 //.wt-table__head {
@@ -181,7 +184,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
   grid-column-gap: var(--table-column-gap);
-  min-height: var(--table-min-height);
   padding: var(--table-row-padding);
   transition: var(--transition);
 
@@ -192,12 +194,14 @@ export default {
 
 .wt-table__th,
 .wt-table__td {
-  @extend %typo-body-2;
+  @extend %typo-body-1;
   display: flex;
   align-items: center;
   padding: 0;
   width: 100%;
   max-width: 100%;
+  min-height: var(--table-min-height);
+  height: fit-content;
   overflow-wrap: break-word;
   word-break: break-all;
 
@@ -209,7 +213,6 @@ export default {
 }
 
 .wt-table__th {
-  min-height: 24px; // prevent sort arrow toggling layout shift
   font-weight: normal;
 
   &--sortable {
@@ -235,7 +238,7 @@ export default {
 }
 
 .wt-table__foot {
-  border-top: var(--table-head-borer-bottom);
-  border-color: var(--table-head-borer-color);
+  border-top: var(--table-head-border);
+  border-color: var(--table-head-border-color);
 }
 </style>
