@@ -24,7 +24,7 @@ describe('WtPopup', () => {
       stubs: { WtIconBtn: true },
       slots: { title: content },
     });
-    expect(wrapper.find('.wt-popup__header__title').text()).toBe(content);
+    expect(wrapper.find('.wt-popup__title').text()).toBe(content);
   });
 
   it('renders popup main via main slot', () => {
