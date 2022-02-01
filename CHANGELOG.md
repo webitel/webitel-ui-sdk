@@ -1,6 +1,6 @@
 # Webitel UI Changelog
 
-## [1.0.0] - 01.02.2022
+## [1.0.0] - 02.02.2022
 
 ### What's new
 
@@ -38,3 +38,4 @@
     - removed hover
     - removeed outline styles
     - focus style now is more transparent than default state
+1. Many component styles reviewed and updated

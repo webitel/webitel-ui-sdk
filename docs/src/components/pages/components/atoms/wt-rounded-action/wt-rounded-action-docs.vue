@@ -5,7 +5,8 @@
       <div class="example-wrapper">
         <wt-rounded-action icon="call"></wt-rounded-action>
         <pre><code
-          class="language-html">&lt;wt-rounded-action icon="call"&gt;&lt;/wt-rounded-action&gt;</code></pre>
+          class="language-html"
+        >&lt;wt-rounded-action icon="call"&gt;&lt;/wt-rounded-action&gt;</code></pre>
       </div>
       <div class="example-wrapper" style="display: flex;">
         <wt-rounded-action icon="call" color="secondary"></wt-rounded-action>
@@ -29,54 +30,54 @@
 </template>
 
 <script>
-  import Prism from 'prismjs';
+import Prism from 'prismjs';
 
-  export default {
-    name: 'wt-rounded-action-docs',
-    data: () => ({
-      properties: [
-        {
-          value: 'color',
-          code: '<wt-rounded-action color="primary"></wt-rounded-action>',
-          type: 'String',
-          options: ['"primary", "secondary", "success", "danger", "transfer"'],
-          default: 'primary',
-        },
-        {
-          value: 'disabled',
-          code: '<wt-rounded-action disabled></wt-rounded-action>',
-          type: 'Boolean',
-          default: 'false',
-        },
-        {
-          value: 'size',
-          code: '<wt-rounded-action size="md"></wt-rounded-action>',
-          type: 'String',
-          default: 'md',
-          options: ['"sm", "md", "lg"'],
-          description: 'Controls button size',
-        },
-        {
-          value: 'loading',
-          code: '<wt-rounded-action loading></wt-rounded-action>',
-          type: 'Boolean',
-          default: 'false',
-          description: 'Displays loader instead of icon',
-        },
-      ],
-      events: [
-        {
-          value: 'click',
-          params: [
-            { name: 'event', type: 'Event' },
-          ],
-        },
-      ],
-    }),
-    mounted() {
-      Prism.highlightAll();
-    },
-  };
+export default {
+  name: 'wt-rounded-action-docs',
+  data: () => ({
+    properties: [
+      {
+        value: 'color',
+        code: '<wt-rounded-action color="primary"></wt-rounded-action>',
+        type: 'String',
+        options: ['"primary", "secondary", "success", "danger", "transfer"'],
+        default: 'primary',
+      },
+      {
+        value: 'disabled',
+        code: '<wt-rounded-action disabled></wt-rounded-action>',
+        type: 'Boolean',
+        default: 'false',
+      },
+      {
+        value: 'size',
+        code: '<wt-rounded-action size="md"></wt-rounded-action>',
+        type: 'String',
+        default: 'md',
+        options: ['sm', 'md', 'lg'],
+        description: 'Controls button size',
+      },
+      {
+        value: 'loading',
+        code: '<wt-rounded-action loading></wt-rounded-action>',
+        type: 'Boolean',
+        default: 'false',
+        description: 'Displays loader instead of icon',
+      },
+    ],
+    events: [
+      {
+        value: 'click',
+        params: [
+          { name: 'event', type: 'Event' },
+        ],
+      },
+    ],
+  }),
+  mounted() {
+    Prism.highlightAll();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
