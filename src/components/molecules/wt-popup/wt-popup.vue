@@ -116,6 +116,7 @@ export default {
   min-height: 0;
   flex-grow: 1;
   overflow-y: auto;
+  padding-right: var(--popup-main-section-padding-right);
 }
 
 .wt-popup__actions {
