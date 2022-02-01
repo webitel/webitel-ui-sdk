@@ -1,13 +1,27 @@
 <template>
   <div class="playground">
     <section>
+      <wt-navigation-bar
+        :current-app="'history'"
+        :nav="[
+            { value: '1', name: 'Name 1', route: '/1' },
+            { value: 'exp1', name: 'Expansion 1', subNav: [
+            { value: '2', name: 'Name 2', route: '/2' },
+            { value: '3', name: 'Name 3', route: '/3' },
+            ] },
+            { value: 'exp2', name: 'Expansion 2', subNav: [
+            { value: '4', name: 'Name 4', route: '/4' },
+            { value: '5', name: 'Name 5', route: '/5' },
+            ] },
+            ]"
+      ></wt-navigation-bar>
       <wt-pagination
         :size="10"
         :page="10"
         prev="true"
         next="true"
       ></wt-pagination>
-      <article style="width: 1000px; height: 400px; position: relative;">
+      <article style="width: 1000px; height: 400px; position: relative; z-index: 0;">
         <wt-popup style="position: absolute;">
           <template slot="title">
             Popup header

@@ -158,10 +158,11 @@ export default {
   bottom: 0;
   left: 0;
   width: var(--navigation-bar-width);
+  padding: var(--navigation-bar-padding);
   overflow: auto;
   z-index: var(--navigation-bar-z-index);
   border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--elevation-10);
   background: var(--navigation-bar-bg-color);
 
   // expand animation optimization
@@ -180,10 +181,6 @@ export default {
   padding: var(--navigation-bar-header-padding);
 }
 
-.wt-navigation-bar__nav-list {
-  padding: var(--navigation-bar-list-padding);
-}
-
 .wt-navigation-bar__nav-item-link {
   @extend %typo-body-1;
   display: block;
@@ -192,11 +189,11 @@ export default {
   word-wrap: break-word;
 
   &:hover {
-    background: var(--main-option-hover-color);
+    background: var(--accent-secondary-color);
   }
 
   &--active {
-    background: var(--main-option-hover-color);
+    background: var(--accent-secondary-color);
   }
 }
 
@@ -216,10 +213,10 @@ export default {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: calc(var(--navigation-bar-horizontal-padding) * -1);
+    left: 0;
     width: var(--navigation-bar-active-expansion-flag-width);
     border-radius: var(--border-radius);
-    background: var(--main-accent-color);
+    background: var(--accent-color);
     transition: var(--transition);
   }
 
