@@ -7,7 +7,7 @@
 
   --tags-input-tags-gap: var(--spacing-xs);
   --tags-input-tag-text-color: var(--text-primary-color);
-  --tags-input-tag-bg-color: var(--main-secondary-accent-color);
+  --tags-input-tag-bg-color: var(--accent-secondary-color);
   --tags-input-tag-actions-margin-left: var(--spacing-2xs);
 
   --tags-input-tag-text-color--deletion: var(--text-contrast-color);
@@ -19,6 +19,6 @@
   --tags-input-autocomplete-option-padding: var(--input-padding);
   --tags-input-autocomplete-option--text-color: var(--form-placeholder-color);
 
-  --tags-input-option-bg-color--hover: var(--main-secondary-accent-color);
+  --tags-input-option-bg-color--hover: var(--accent-secondary-color);
   --tags-input-option-text-color--hover: var(--text-primary-color);
 }

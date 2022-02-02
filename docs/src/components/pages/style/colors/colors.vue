@@ -77,31 +77,16 @@ export default {
             name: 'Accent color',
           },
           {
-            color: '--main-accent-color',
-            name: 'Accent color',
-            description: '[DEPRECATED]. Inherited from color above',
-          },
-          {
             textColor: '#000',
             code: `hsla(${MAIN_COLOR}, ${MAIN_COLOR_OPACITY})`,
             color: '--main-color',
             name: 'Main color',
           },
           {
-            color: '--main-primary-color',
-            name: 'Main color',
-            description: '[DEPRECATED]. Inherited from color above',
-          },
-          {
             textColor: '#fff',
             code: `hsla(${CONTRAST_COLOR}, ${MAIN_COLOR_OPACITY})`,
             color: '--contrast-color',
             name: 'Contrast color',
-          },
-          {
-            color: '--main-primary-accent-color',
-            name: 'Contrast color',
-            description: '[DEPRECATED]. Inherited from color above',
           },
           {
             textColor: '#000',
@@ -116,25 +101,10 @@ export default {
             name: 'Secondary color 50',
           },
           {
-            color: '--main-secondary-color',
-            name: 'Secondary color',
-            description: '[DEPRECATED]. Inherited from color above',
-          },
-          {
-            color: '--main-outline-color',
-            name: 'Secondary color',
-            description: '[DEPRECATED]. Inherited from color above',
-          },
-          {
             textColor: '#000',
             code: `hsla(${PAGE_BG_COLOR}, ${MAIN_COLOR_OPACITY})`,
             color: '--page-bg-color',
             name: 'Page background color',
-          },
-          {
-            color: '--main-page-bg-color',
-            name: 'Page background color',
-            description: '[DEPRECATED]. Inherited from color above',
           },
           {
             textColor: '#000',
@@ -147,16 +117,6 @@ export default {
             code: `hsla(${ACCENT_COLOR}, 0.3)`,
             color: '--accent-secondary-color',
             name: 'Accent secondary color',
-          },
-          {
-            color: '--main-secondary-accent-color',
-            name: 'Accent secondary color',
-            description: '[DEPRECATED]. Inherited from color above',
-          },
-          {
-            color: '--main-option-hover-color',
-            name: 'Accent secondary color',
-            description: '[DEPRECATED]. Inherited from color above',
           },
         ],
       },

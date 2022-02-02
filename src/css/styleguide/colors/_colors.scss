@@ -34,18 +34,13 @@
 
   // MAIN COLORS
   --accent-color: hsla(var(--_accent-color), 1);
-  --main-accent-color: var(--accent-color); // DEPRECATED
 
   --main-color: hsla(var(--_main-color), 1);
-  --main-primary-color: var(--main-color); // DEPRECATED
 
   --contrast-color: hsla(var(--_contrast-color), 1);
-  --main-primary-accent-color: var(--contrast-color); // DEPRECATED
 
   --secondary-color: hsla(var(--_secondary-color), 1);
   --secondary-color-50: hsla(var(--_secondary-color-50), 1);
-  --main-secondary-color: var(--secondary-color); // DEPRECATED
-  --main-outline-color: var(--secondary-color); // DEPRECATED
 
   // ICON COLORS
   --icon-color: hsla(var(--_icon-color), var(--_opacity--default));
@@ -65,29 +60,26 @@
 
   --page-bg-color: hsla(var(--_page-bg-color), 1);
   --header-color: hsla(var(--_header-color), 1);
-  --main-page-bg-color: var(--page-bg-color); // DEPRECATED
 
   --accent-secondary-color: hsla(var(--_accent-color), 0.3);
-  --main-secondary-accent-color: var(--accent-secondary-color); // DEPRECATED
-  --main-option-hover-color: var(--accent-secondary-color); // DEPRECATED
 
   // SEMANTIC COLORS
   --disabled-color: hsl(var(--_contrast-color), var(--_opacity--disabled));
 
   --true-color: hsla(var(--_positive-color), var(--_opacity--default));
-  --true--hover-color: hsla(var(--_positive-color), var(--_opacity--hover)); // DEPRECATED
+  --true--hover-color: hsla(var(--_positive-color), var(--_opacity--hover));
 
   --false-color: hsla(var(--_negative-color), var(--_opacity--default));
-  --false--hover-color: hsla(var(--_negative-color), var(--_opacity--hover)); // DEPRECATED
+  --false--hover-color: hsla(var(--_negative-color), var(--_opacity--hover));
 
   --hold-color: hsla(var(--_hold-color), var(--_opacity--default));
-  --hold--hover-color: hsla(var(--_hold-color), var(--_opacity--hover)); // DEPRECATED
+  --hold--hover-color: hsla(var(--_hold-color), var(--_opacity--hover));
 
   --transfer-color: hsla(var(--_transfer-color), var(--_opacity--default));
-  --transfer--hover-color: hsla(var(--_transfer-color), var(--_opacity--hover)); // DEPRECATED
+  --transfer--hover-color: hsla(var(--_transfer-color), var(--_opacity--hover));
 
   // SUBORDINATE COLORS
-  --tag-bg-color: var(--main-secondary-accent-color);
+  --tag-bg-color: var(--accent-secondary-color);
 
   // FORM STATES OPACITY
   --form-opacity--default: var(--_opacity--default);

@@ -121,18 +121,18 @@ export default {
   }
 
   .plyr__control:hover, {
-    background: var(--main-option-hover-color);
+    background: var(--accent-secondary-color);
     color: var(--text-primary-color);
   }
 
   //.plyr__control[role='menuitemradio']::before,
   //.plyr__control[role='menuitemradio']:hover::before {
-  //  border: 2px solid var(--main-secondary-color);
-  //  background: var(--main-primary-color);
+  //  border: 2px solid var(--secondary-color);
+  //  background: var(--main-color);
   //}
   //
   //.plyr__control[role='menuitemradio']::after {
-  //  background: var(--main-secondary-color);
+  //  background: var(--secondary-color);
   //}
 }
 
