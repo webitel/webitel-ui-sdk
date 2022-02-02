@@ -2,8 +2,8 @@
 :root {
   --popup-wrapper-z-index: 11;
 
-  --popup-shadow-color: var(--contrast-color);
   --popup-shadow-opacity: 0.5;
+  --popup-shadow-color: hsla(var(--_contrast-color), var(--popup-shadow-opacity));
 
   --popup-max-height: 80%;
 

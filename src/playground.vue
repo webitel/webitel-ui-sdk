@@ -23,6 +23,7 @@
       ></wt-pagination>
       <article style="width: 1000px; height: 400px; position: relative; z-index: 0;">
         <wt-popup style="position: absolute;">
+<!--        <wt-popup>-->
           <template slot="title">
             Popup header
           </template>
@@ -68,6 +69,7 @@
       <article class="buttons">
         <wt-button :loading="isLoading" @click="load">Load!</wt-button>
         <wt-button-select>123</wt-button-select>
+        <wt-button-select disabled>123</wt-button-select>
         <div class="example-wrapper">
 <!--          <wt-button :loading="isLoading" @click="load">Load!</wt-button>-->
           <wt-button loading></wt-button>

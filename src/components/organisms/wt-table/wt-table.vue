@@ -170,7 +170,7 @@ export default {
 }
 
 .wt-table__head {
-  //display: block;
+  display: block;
   border-radius: var(--border-radius);
   border: var(--table-head-border);
   border-color: var(--table-head-border-color);

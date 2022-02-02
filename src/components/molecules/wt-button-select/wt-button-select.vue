@@ -172,7 +172,7 @@ export default {
 
   // DISABLED MODE
   &.wt-button--disabled .wt-icon::v-deep .wt-icon__icon {
-    fill: var(--icon-color-disabled);
+    fill: var(--icon-color-secondary-50);
   }
 
   // OPEN AND SHUT ARROW
