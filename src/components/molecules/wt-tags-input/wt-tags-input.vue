@@ -153,11 +153,6 @@ export default {
   width: 100%;
 }
 
-.wt-label {
-  margin-bottom: var(--label-margin);
-  cursor: text;
-}
-
 // increase specificity
 .wt-tags-input .wt-tags-input__tags-input {
   width: 100%;

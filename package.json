@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.1.100",
+  "version": "1.0.2",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -8,7 +8,7 @@
     "build:app": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix",
-    "publish": "npm run test:unit && npm run build-lib && npm publish --access public"
+    "publish": "npm run test:unit && npm run build && npm publish --access public"
   },
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [

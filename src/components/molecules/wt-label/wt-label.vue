@@ -59,6 +59,7 @@ export default {
   align-items: center;
   color: var(--form-label-color);
   transition: var(--transition);
+  cursor: text;
 
   &--outline {
     color: var(--form-outline-label-color);
@@ -74,7 +75,9 @@ export default {
 }
 
 .wt-label__hint {
+  cursor: pointer;
   margin-left: var(--spacing-xs);
+
   ::v-deep {
     .wt-tooltip {
       width: max-content; // experimental css property

@@ -283,9 +283,6 @@ export default {
 }
 
 .wt-label {
-  margin-bottom: var(--label-margin);
-  cursor: text;
-
   .wt-select:hover &,
   .wt-select:focus-within & {
     color: var(--form-label--hover-color);

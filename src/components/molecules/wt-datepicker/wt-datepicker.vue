@@ -102,11 +102,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .wt-label {
-    margin-bottom: var(--label-margin);
-    cursor: text;
-  }
-
   .wt-datepicker__calendar-icon {
     position: absolute;
     top: var(--spacing-xs);

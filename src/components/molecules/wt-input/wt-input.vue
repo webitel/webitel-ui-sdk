@@ -246,9 +246,6 @@ export default {
   }
 
   .wt-label {
-    margin-bottom: var(--label-margin);
-    cursor: text;
-
     .wt-input:hover &,
     .wt-input:focus-within & {
       color: var(--form-label--hover-color);

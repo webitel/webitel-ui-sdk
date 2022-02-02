@@ -163,11 +163,6 @@
     position: relative;
   }
 
-  .wt-label {
-    margin-bottom: var(--label-margin);
-    cursor: text;
-  }
-
   .wt-datetimepicker__preview {
     position: relative;
     cursor: text;

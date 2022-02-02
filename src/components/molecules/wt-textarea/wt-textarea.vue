@@ -119,9 +119,6 @@
   }
 
   .wt-label {
-    margin-bottom: var(--label-margin);
-    cursor: text;
-
     .wt-textarea:hover &,
     .wt-textarea:focus-within & {
       color: var(--form-label--hover-color);

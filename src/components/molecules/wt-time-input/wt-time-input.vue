@@ -137,8 +137,6 @@ import validationMixin from '../../../mixins/validationMixin/validationMixin';
 
   .wt-label {
     text-align: center;
-    margin-bottom: var(--label-margin);
-    cursor: text;
 
     .wt-time-input:hover &,
     .wt-time-input:focus-within & {
