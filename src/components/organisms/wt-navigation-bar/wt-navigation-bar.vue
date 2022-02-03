@@ -198,7 +198,7 @@ export default {
 }
 
 .wt-navigation-bar__nav-expansion {
-  @extend %typo-heading-3;
+  @extend %typo-subtitle-1;
   position: relative;
   display: flex;
   justify-content: space-between;

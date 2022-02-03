@@ -101,6 +101,10 @@
   .wt-checkbox {
     @include width-fit-content;
     box-sizing: border-box;
+
+    .wt-label {
+      cursor: pointer;
+    }
   }
 
   .wt-checkbox__wrapper {
@@ -108,7 +112,6 @@
     display: flex;
     align-items: center;
     user-select: none;
-    cursor: pointer;
 
     .wt-checkbox__checkmark {
       line-height: 0; // prevent icon height >> content
@@ -118,6 +121,7 @@
   .wt-checkbox__label {
     margin-left: var(--checkbox-icon-margin);
     transition: var(--transition);
+    cursor: pointer;
   }
 
   /* Hide the browser's default checkbox */

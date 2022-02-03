@@ -183,6 +183,11 @@ export default {
   z-index: var(--wt-app-header-content-z-index);
   display: flex;
   align-items: center;
+
+  ::v-deep .wt-icon-btn__tooltip {
+    left: 50%;
+    transform: translateX(-100%);
+  }
 }
 
 // dropdown part
@@ -198,7 +203,7 @@ export default {
   transition: var(--transition);
   border-radius: var(--border-radius);
   background: var(--wt-app-header-content-bg-color);
-  box-shadow: var(--elevation-1);
+  box-shadow: var(--elevation-10);
 }
 
 .wt-app-navigator__nav-title {

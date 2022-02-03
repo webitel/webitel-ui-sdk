@@ -26,7 +26,7 @@
               target="_blank"
               @click="close"
             >
-              <wt-icon icon="docs" size="sm"></wt-icon>
+              <wt-icon icon="docs"></wt-icon>
               <span>{{ $t('webitelUI.headerActions.docs') }}</span>
             </a>
           </li>
@@ -35,7 +35,7 @@
               class="wt-header-actions__action__link"
               @click.prevent="settings"
             >
-              <wt-icon icon="settings" size="sm"></wt-icon>
+              <wt-icon icon="settings"></wt-icon>
               <span>{{ $t('webitelUI.headerActions.settings') }}</span>
             </a>
           </li>
@@ -44,7 +44,7 @@
               class="wt-header-actions__action__link"
               @click.prevent="logout"
             >
-              <wt-icon color="danger" icon="logout" size="sm"></wt-icon>
+              <wt-icon color="danger" icon="logout"></wt-icon>
               <span>{{ $t('webitelUI.headerActions.logout') }}</span>
             </a>
           </li>
@@ -117,6 +117,11 @@ export default {
   z-index: var(--wt-app-header-content-z-index);
   display: flex;
   align-items: center;
+
+  ::v-deep .wt-icon-btn__tooltip {
+    left: 50%;
+    transform: translateX(-100%);
+  }
 }
 
 .wt-header-actions__panel-wrapper {
@@ -132,7 +137,7 @@ export default {
   transition: var(--transition);
   border-radius: var(--border-radius);
   background: var(--wt-app-header-content-bg-color);
-  box-shadow: var(--elevation-1);
+  box-shadow: var(--elevation-10);
 }
 
 .wt-header-actions__name {

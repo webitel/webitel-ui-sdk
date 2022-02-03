@@ -1,9 +1,11 @@
 <template>
-  <div class="wt-popup">
+  <div
+    class="wt-popup"
+    :class="{ 'wt-popup--overflow': overflow }"
+  >
     <div class="wt-popup__shadow"></div>
     <aside
       class="wt-popup__popup"
-      :class="{'wt-popup__popup--overflow': overflow}"
       :style="popupStyle"
     >
       <header class="wt-popup__header">
@@ -82,10 +84,6 @@ export default {
   border-radius: var(--border-radius);
   box-shadow: var(--elevation-10);
   z-index: 1;
-
-  &--overflow {
-    overflow: visible;
-  }
 }
 
 .wt-popup__header {
@@ -124,5 +122,16 @@ export default {
   align-items: center;
   gap: var(--popup-actions-padding);
   padding: var(--popup-actions-padding);
+}
+
+.wt-popup--overflow {
+  .wt-popup__popup {
+    overflow: visible;
+  }
+
+  .wt-popup__main {
+    overflow: visible;
+    padding-right: 0;
+  }
 }
 </style>

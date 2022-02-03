@@ -81,6 +81,10 @@
   .wt-radio {
     @include width-fit-content;
     box-sizing: border-box;
+
+    .wt-label {
+      cursor: pointer;
+    }
   }
 
   .wt-radio__wrapper {

@@ -306,6 +306,7 @@ export default {
     top: 50%;
     right: var(--input-icon-margin);
     transform: translateY(-50%);
+    pointer-events: auto; // override --disabled p-events none
 
     .wt-input__password-button {
       .wt-input--disabled & ::v-deep .wt-icon__icon {
