@@ -116,8 +116,8 @@ export default {
   }
 
   &__close-icon {
-    transform: translate(var(--player-close-icon-transform-translate-x),
-      var(--player-close-icon-transform-translate-y));
+    //transform: translate(var(--player-close-icon-transform-translate-x),
+    //  var(--player-close-icon-transform-translate-y));
   }
 
   .plyr__control:hover, {

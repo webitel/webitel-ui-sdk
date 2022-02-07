@@ -33,17 +33,17 @@ describe('WtDatetimepicker', () => {
 
   it('opens form at preview click', async () => {
     const wrapper = shallowMount(WtDatetimepicker, {
-      stubs: {
-        WtLabel,
-        WtIcon,
-        WtButton,
-        WtTimepicker: true,
-      },
+      // stubs: {
+      //   WtLabel,
+      //   WtIcon,
+      //   WtButton,
+      //   WtTimepicker: true,
+      // },
     });
     expect(wrapper.find('.wt-datetimepicker__form').element).not.toBeVisible();
     wrapper.find('.wt-datetimepicker__preview').trigger('click');
     await wrapper.vm.$nextTick();
-    expect(wrapper.find('.wt-datetimepicker__form').element).toBeVisible();
+    expect(wrapper.find('.wt-datetimepicker__form').isVisible()).toBe(true);
   });
 
   it('Triggers change event after button "add" click', async () => {
