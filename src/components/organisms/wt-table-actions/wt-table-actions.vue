@@ -81,7 +81,6 @@ export default {
 .wt-table-actions {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: var(--table-actions-icon-gap);
   padding: var(--table-actions-padding);
 }

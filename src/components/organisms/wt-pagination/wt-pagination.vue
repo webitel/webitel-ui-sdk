@@ -3,27 +3,29 @@
     <div class="wt-pagination__size">
       <div class="wt-pagination__size-text">{{ $t('webitelUI.pagination.sizeText') }}</div>
       <wt-input
-        class="wt-pagination__size-input"
-        :value="size"
-        type="number"
-        :number-min="1"
         :number-max="1000"
+        :number-min="1"
+        :value="size"
+        class="wt-pagination__size-input"
+        type="number"
         @input="inputHandler"
       ></wt-input>
     </div>
     <div class="wt-pagination__page-controls">
       <wt-icon-btn
+        :disabled="!prev"
+        :tooltip="$t('webitelUI.pagination.prev')"
         class="wt-pagination__page-control"
         icon="arrow-left"
-        :tooltip="$t('webitelUI.pagination.prev')"
-        :disabled="!prev"
+        tooltip-position="left"
         @click="goPrev"
       ></wt-icon-btn>
       <wt-icon-btn
+        :disabled="!next"
+        :tooltip="$t('webitelUI.pagination.next')"
         class="wt-pagination__page-control"
         icon="arrow-right"
-        :tooltip="$t('webitelUI.pagination.next')"
-        :disabled="!next"
+        tooltip-position="left"
         @click="goNext"
       ></wt-icon-btn>
     </div>

@@ -1,6 +1,9 @@
 <template>
   <div class="playground">
     <section>
+      <wt-datetimepicker
+        v-model="date"
+      ></wt-datetimepicker>
       <wt-navigation-bar
         :current-app="'history'"
         :nav="[
@@ -214,6 +217,7 @@
 export default {
   name: 'playground',
   data: () => ({
+    date: Date.now(),
     currentTab: { value: 1 },
     switcher: true,
     options: [{ text: 'Save as Save as Save as Save as  Save as Save as Save asSave as  Save as Save as Save as' }],

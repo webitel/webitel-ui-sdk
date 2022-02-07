@@ -21,6 +21,8 @@
 1. Removed all deprecated colors variables. Existing components moved to newest ones.
 1. Removed deprecated `--box-shadow` css variable 
 1. Removed `strong` typography classes. (`strong` typo -> `subtitle` typo)
+1. Now font-family is used like "Montserrat" (without "Regular" or "Semi"). Boldness
+ is regulated by `font-weight` property.
 1. Typo size suffixes update: `-sm`, `-md`, `-lg` -> `-3`, `-2`, `-1`
 1. Removed `--label-margin` variable. Now visual offset between label and input is
 provided by label's line-height

@@ -79,7 +79,7 @@ export default {
 
   &__wrapper {
     text-align: center;
-    color: var(--text-contrast-color);
+    //color: var(--text-contrast-color);
   }
 
   &__img {
