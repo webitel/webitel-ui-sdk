@@ -92,9 +92,9 @@
     width: 60%;
     padding: 10px;
     margin-right: 60px;
-    background: var(--main-primary-accent-color);
+    background: var(--contrast-color);
     border-radius: var(--border-radius);
-    color: var(--main-primary-color);
+    color: var(--main-color);
     cursor: text;
   }
 </style>

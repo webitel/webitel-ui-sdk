@@ -146,9 +146,6 @@ export default {
 }
 
 .wt-label {
-  margin-bottom: var(--label-margin);
-  cursor: text;
-
   .wt-timepicker:hover &,
   .wt-timepicker:focus-within & {
     color: var(--form-label--hover-color);

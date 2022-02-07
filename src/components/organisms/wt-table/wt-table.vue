@@ -2,36 +2,38 @@
   <div class="wt-table">
     <table class="wt-table__table">
       <thead class="wt-table__head">
-      <tr class="wt-table__tr wt-table__tr__head" :style="columnsStyle">
-        <th class="wt-table__th__checkbox" v-if="selectable">
+      <tr :style="columnsStyle" class="wt-table__tr wt-table__tr__head">
+        <th v-if="selectable" class="wt-table__th wt-table__th--checkbox">
           <wt-checkbox
             :selected="isAllSelected"
             @change="selectAll"
           ></wt-checkbox>
         </th>
         <th
-          class="wt-table__th"
+          v-for="(col, key) of dataHeaders"
+          :key="key"
           :class="[
            {'wt-table__th--sortable': sortable},
            `wt-table__th--sort-${col.sort}`,
         ]"
-          v-for="(col, key) of dataHeaders"
-          :key="key"
+          class="wt-table__th"
           @click="sort(col)"
         >
           <div class="wt-table__th__text">{{ col.text }}</div>
           <wt-icon
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
             v-if="sortable"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
             icon="sort-arrow-up"
+            size="sm"
           ></wt-icon>
           <wt-icon
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
             v-if="sortable"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
             icon="sort-arrow-down"
+            size="sm"
           ></wt-icon>
         </th>
-        <th class="wt-table__th__actions" v-if="gridActions">
+        <th v-if="gridActions" class="wt-table__th__actions">
           <slot name="actions-header"></slot>
         </th>
       </tr>
@@ -39,44 +41,44 @@
 
       <tbody class="wt-table__body">
       <tr
-        class="wt-table__tr wt-table__tr__body"
         v-for="(row, dataKey) of data"
-        :class="`wt-table__tr__${row.id || dataKey}`"
         :key="dataKey"
+        :class="`wt-table__tr__${row.id || dataKey}`"
         :style="columnsStyle"
+        class="wt-table__tr wt-table__tr__body"
       >
-        <td class="wt-table__td__checkbox" v-if="selectable">
+        <td v-if="selectable" class="wt-table__td wt-table__td--checkbox">
           <wt-checkbox
             v-model="row._isSelected"
           ></wt-checkbox>
         </td>
 
         <td
-          class="wt-table__td"
           v-for="(col, headerKey) of dataHeaders"
           :key="headerKey"
+          class="wt-table__td"
         >
-          <slot :name="col.value" :item="row" :index="dataKey">
+          <slot :index="dataKey" :item="row" :name="col.value">
             <div>{{ row[col.value] }}</div>
           </slot>
         </td>
 
-        <td class="wt-table__td__actions" v-if="gridActions">
-          <slot name="actions" :item="row" :index="dataKey"></slot>
+        <td v-if="gridActions" class="wt-table__td__actions">
+          <slot :index="dataKey" :item="row" name="actions"></slot>
         </td>
       </tr>
       </tbody>
 
-      <tfoot class="wt-table__foot" v-if="isTableFooter">
-      <tr class="wt-table__tr wt-table__tr__foot" :style="columnsStyle">
-<!--        empty checkbox column -->
-        <th class="wt-table__th__checkbox" v-if="selectable"></th>
+      <tfoot v-if="isTableFooter" class="wt-table__foot">
+      <tr :style="columnsStyle" class="wt-table__tr wt-table__tr__foot">
+        <!--        empty checkbox column -->
+        <th v-if="selectable" class="wt-table__th__checkbox"></th>
         <td
-          class="wt-table__td"
           v-for="(col, headerKey) of dataHeaders"
           :key="headerKey"
+          class="wt-table__td"
         >
-          <slot :name="`${col.value}-footer`" :header="col" :index="headerKey"></slot>
+          <slot :header="col" :index="headerKey" :name="`${col.value}-footer`"></slot>
         </td>
       </tr>
       </tfoot>
@@ -121,7 +123,7 @@ export default {
 
     dataHeaders() {
       return this.headers
-        .filter((header) => header.show === undefined || header.show);
+                 .filter((header) => header.show === undefined || header.show);
     },
 
     columnsStyle() {
@@ -163,14 +165,16 @@ export default {
 }
 
 .wt-table__table {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
 }
 
 .wt-table__head {
-  //display: block;
-  border-bottom: var(--table-head-borer-bottom);
-  border-color: var(--table-head-borer-color);
+  display: block;
+  box-sizing: border-box;
+  border: var(--table-head-border);
+  border-color: var(--table-head-border-color);
+  border-radius: var(--border-radius);
 }
 
 //.wt-table__head {
@@ -179,11 +183,10 @@ export default {
 
 .wt-table__tr {
   display: grid;
-  grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
-  grid-column-gap: var(--table-column-gap);
-  min-height: var(--table-min-height);
   padding: var(--table-row-padding);
   transition: var(--transition);
+  grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
+  grid-column-gap: var(--table-column-gap);
 
   &:nth-child(2n) {
     background: var(--table-secondary-color);
@@ -192,14 +195,16 @@ export default {
 
 .wt-table__th,
 .wt-table__td {
-  @extend %typo-body-md;
+  @extend %typo-body-1;
   display: flex;
   align-items: center;
-  padding: 0;
   width: 100%;
   max-width: 100%;
-  overflow-wrap: break-word;
+  height: fit-content;
+  min-height: var(--table-min-height);
+  padding: 0;
   word-break: break-all;
+  overflow-wrap: break-word;
 
   &__actions {
     display: flex;
@@ -209,7 +214,6 @@ export default {
 }
 
 .wt-table__th {
-  min-height: 24px; // prevent sort arrow toggling layout shift
   font-weight: normal;
 
   &--sortable {
@@ -235,7 +239,7 @@ export default {
 }
 
 .wt-table__foot {
-  border-top: var(--table-head-borer-bottom);
-  border-color: var(--table-head-borer-color);
+  border-color: var(--table-head-border-color);
+  border-top: var(--table-head-border);
 }
 </style>

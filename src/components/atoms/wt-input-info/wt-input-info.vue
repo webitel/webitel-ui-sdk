@@ -23,7 +23,7 @@
 
 <style lang="scss" scoped>
   .wt-input-info {
-    @extend %typo-body-sm;
+    @extend %typo-caption;
     margin-top: var(--input-info-margin);
     color: var(--input-info-color);
     min-height: var(--input-info-min-height);

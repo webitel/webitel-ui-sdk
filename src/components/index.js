@@ -3,7 +3,7 @@ import WtIcon from './atoms/wt-icon/wt-icon.vue';
 import WtIndicator from './atoms/wt-indicator/wt-indicator.vue';
 import WtInputInfo from './atoms/wt-input-info/wt-input-info.vue';
 import WtButton from './atoms/wt-button/wt-button.vue';
-import WtBadge from './atoms/wt-badge/wt-badge.vue';
+import WtChip from './atoms/wt-chip/wt-chip.vue';
 import WtDivider from './atoms/wt-divider/wt-divider.vue';
 import WtTooltip from './atoms/wt-tooltip/wt-tooltip.vue';
 import WtRoundedAction from './atoms/wt-rounded-action/wt-rounded-action.vue';
@@ -52,7 +52,7 @@ const Components = {
   WtIndicator,
   WtInputInfo,
   WtButton,
-  WtBadge,
+  WtChip,
   WtDivider,
   WtTooltip,
   WtLabel,

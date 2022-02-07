@@ -1,36 +1,34 @@
-%typo-btn {
-  font: {
-    family: 'Montserrat Semi', monospace;
-    size: 12px;
-  }
-  line-height: 14px;
-}
-
-%typo-btn-lg {
-  font: {
-    family: 'Montserrat Semi', monospace;
-    size: 20px;
-  }
-  line-height: 24px;
-}
 
 :root {
-  --btn-padding: 11px 19px;
-  --btn-lg-padding: 10px 29px;
-  --btn-border: 1px solid;
+  --btn-min-width: 90px;
+  --btn-border-size: 2px;
+  --btn-padding: var(--spacing-xs) var(--spacing-sm);
+
+  --btn-padding--size-md: var(--btn-padding);
+  --btn-padding--size-sm: var(--spacing-2xs) var(--spacing-xs);
+
+  --btn-padding--outline:
+    calc(var(--spacing-xs) - var(--btn-border-size))
+    calc(var(--spacing-sm) - var(--btn-border-size));
+  --btn-padding--size-md--outline: var(--btn-padding--outline);
+  --btn-padding--size-sm--outline:
+    calc(var(--spacing-2xs) - var(--btn-border-size))
+    calc(var(--spacing-xs) - var(--btn-border-size));
+
+  --btn-border: var(--btn-border-size) solid;
 
   // BUTTON COLORS
-  --btn-dark-font-color: #000;
-  --btn-light-font-color: #fff;
+  --btn-dark-font-color: var(--text-primary-color);
+  --btn-light-font-color: var(--text-contrast-color);
 
-  --btn-primary-color: var(--main-accent-color);
-  --btn-primary--hover-color: #EFB917;
+  --btn-accent-color: hsla(var(--_accent-color), var(--_opacity--default));
+  --btn-accent--hover-color: hsla(var(--_accent-color), var(--_opacity--hover));
 
   --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
   --btn-secondary--hover-color: hsla(var(--_secondary-color), var(--_opacity--hover));
 
-  --btn-disabled-color: var(--disabled-color);
-  --btn-disabled-bg-color: transparent;
+  --btn-disabled-font-color: var(--secondary-color-50);
+  --btn-disabled-color: hsla(var(--_secondary-color-hue), 15%, 80%, var(--_opacity--active));
 
   --btn-true-color: var(--true-color);
   --btn-true--hover-color: var(--true--hover-color);

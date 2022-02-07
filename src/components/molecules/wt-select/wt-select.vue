@@ -79,8 +79,7 @@
           class="wt-select__clear"
           :class="{ 'hidden': !isValue }"
           :disabled="disabled"
-          icon="close--filled"
-          size="sm"
+          icon="close"
           @click="clearValue"
         ></wt-icon-btn>
       </template>
@@ -276,7 +275,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~vue-multiselect/dist/vue-multiselect.min.css';
-@import '../../../css/components/atoms/wt-badge/wt-badge';
+@import '../../../css/components/atoms/wt-chip/wt-chip';
 
 .wt-select {
   width: 100%;
@@ -284,9 +283,6 @@ export default {
 }
 
 .wt-label {
-  margin-bottom: var(--label-margin);
-  cursor: text;
-
   .wt-select:hover &,
   .wt-select:focus-within & {
     color: var(--form-label--hover-color);
@@ -328,25 +324,30 @@ export default {
 
       .multiselect__input,
       .multiselect__single {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
+        @include wt-placeholder;
         min-height: var(--select-input-min-height); // reset original 20px style
         padding: 0;
         margin: 0;
         background: transparent;
       }
 
+      .multiselect__input:focus {
+        @include wt-placeholder('focus');
+      }
+
       .multiselect__strong {
-        @extend %typo-body-lg;
-        @extend .wt-badge;
+        @extend %typo-body-1;
+        @extend .wt-chip;
         position: absolute;
-        right: var(--select-badge-right-pos);
+        right: var(--select-chip-right-pos);
         min-height: var(--select-input-min-height); // reset original 20px style
         margin: 0;
         font-weight: normal;
-        z-index: var(--select-badge-z-index);
+        z-index: var(--select-chip-z-index);
 
-        /* these before-after elements are fixing issue when badge is visually overflown by
-        selected option name (yep, badge has z-index, but its background has 0.3 opacity)*/
+        /* these before-after elements are fixing issue when chip is visually overflown by
+        selected option name (yep, chip has z-index, but its background has 0.3 opacity)*/
         &:before {
           content: '';
           position: absolute;
@@ -354,19 +355,19 @@ export default {
           right: 0;
           bottom: 0;
           left: 0;
-          z-index: -2; // below badge itself
+          z-index: -2; // below chip itself
           background: var(--main-color);
         }
 
         &:after {
-          @extend .wt-badge;
+          @extend .wt-chip;
           content: '';
           position: absolute;
           top: 0;
           right: 0;
           bottom: 0;
           left: 0;
-          z-index: -1; // below badge itself
+          z-index: -1; // below chip itself
 
         }
       }
@@ -376,7 +377,7 @@ export default {
       }
 
       .multiselect__custom-tag, .multiselect__single-label {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         color: var(--form-input-color);
 
         // text overflow 3 dots
@@ -387,9 +388,9 @@ export default {
       }
 
       .multiselect__placeholder {
+        @extend %wt-placeholder;
         padding: 0;
         margin: 0;
-        color: var(--form-placeholder-color);
 
         // text overflow 3 dots
         white-space: nowrap;
@@ -406,11 +407,11 @@ export default {
       transition: var(--transition);
 
       .multiselect__option {
-        @extend %typo-body-lg;
+        @extend %typo-body-1;
         padding: var(--select-options-padding);
 
         & > span {
-          color: var(--form-placeholder-color);
+          @extend %wt-placeholder;
         }
 
         &:after {
@@ -418,7 +419,7 @@ export default {
         }
 
         &--highlight {
-          background: var(--select-option--hover-color);
+          background: var(--т, еselect-option--hover-color);
 
           & > span {
             color: var(--form-input-color);
@@ -459,10 +460,6 @@ export default {
       .multiselect__tags {
         border-color: var(--form-border--hover-color);
       }
-
-      .multiselect__placeholder {
-        color: var(--form-placeholder--hover-color);
-      }
     }
   }
 
@@ -485,7 +482,7 @@ export default {
         }
 
         .multiselect__placeholder {
-          color: var(--form-placeholder--active-color);
+          @extend %wt-placeholder--focus;
         }
       }
     }
@@ -532,7 +529,8 @@ export default {
         border-color: var(--form-border--disabled-color);
 
         .multiselect__placeholder {
-          color: var(--form-placeholder--disabled-color);
+          @extend %wt-placeholder--disabled;
+          //color: var(--form-placeholder--disabled-color);
         }
       }
     }
@@ -546,7 +544,7 @@ export default {
     }
 
     .multiselect__strong {
-      right: var(--select-badge-right-pos--clearable);
+      right: var(--select-chip-right-pos--clearable);
     }
   }
 }

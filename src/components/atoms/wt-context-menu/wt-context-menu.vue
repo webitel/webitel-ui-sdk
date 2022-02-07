@@ -39,7 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 .wt-context-menu {
-  @extend %typo-body-md;
+  @extend %typo-body-2;
   min-width: var(--context-menu-min-width);
   max-width: var(--context-menu-max-width);
   background-color: var(--context-menu-background-color);

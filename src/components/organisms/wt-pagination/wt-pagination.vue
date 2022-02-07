@@ -3,27 +3,29 @@
     <div class="wt-pagination__size">
       <div class="wt-pagination__size-text">{{ $t('webitelUI.pagination.sizeText') }}</div>
       <wt-input
-        class="wt-pagination__size-input"
-        :value="size"
-        type="number"
-        :number-min="1"
         :number-max="1000"
+        :number-min="1"
+        :value="size"
+        class="wt-pagination__size-input"
+        type="number"
         @input="inputHandler"
       ></wt-input>
     </div>
     <div class="wt-pagination__page-controls">
       <wt-icon-btn
+        :disabled="!prev"
+        :tooltip="$t('webitelUI.pagination.prev')"
         class="wt-pagination__page-control"
         icon="arrow-left"
-        :tooltip="$t('webitelUI.pagination.prev')"
-        :disabled="!prev"
+        tooltip-position="left"
         @click="goPrev"
       ></wt-icon-btn>
       <wt-icon-btn
+        :disabled="!next"
+        :tooltip="$t('webitelUI.pagination.next')"
         class="wt-pagination__page-control"
         icon="arrow-right"
-        :tooltip="$t('webitelUI.pagination.next')"
-        :disabled="!next"
+        tooltip-position="left"
         @click="goNext"
       ></wt-icon-btn>
     </div>
@@ -77,7 +79,7 @@ export default {
 
   methods: {
     inputHandler(value) {
-      const size = (value > 0 && value <= 1000)
+      const size = (value >= 0 && value <= 1000)
         ? value
         : this.defaultSize;
       this.$emit('input', size);
@@ -98,7 +100,7 @@ export default {
 
 <style lang="scss" scoped>
 .wt-pagination {
-  @extend %typo-body-md;
+  @extend %typo-body-1;
 
   display: inline-flex;
   align-items: center;
@@ -108,11 +110,11 @@ export default {
 .wt-pagination__size {
   display: flex;
   align-items: center;
-  margin-right: var(--pagination-margin-right);
+  margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-text {
-  margin-right: var(--pagination-size-text-margin-right);
+  margin-right: var(--pagination-gap);
 }
 
 .wt-pagination__size-input {
@@ -125,7 +127,7 @@ export default {
 }
 
 .wt-pagination__page-control {
-  margin-left: var(--pagination-page-controls-margin);
+  margin-left: var(--pagination-gap);
 
   &:first-child {
     margin-left: 0;

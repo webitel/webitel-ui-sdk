@@ -1,0 +1,49 @@
+// https://stackoverflow.com/a/17181946/17782185
+// https://stackoverflow.com/a/49192800/17782185
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+$vendors: (':-webkit', '-moz', ':-moz', '-ms');
+
+@mixin wt-placeholder($style: '') {
+  @each $vendor in $vendors {
+    @include optional-at-root(':#{$vendor}-input-placeholder') {
+      font: inherit;
+      transition: var(--transition);
+
+      @if ($style == 'focus') {
+        color: var(--form-placeholder-color--focus);
+      } @else if ($style == 'disabled') {
+        color: var(--form-placeholder-color--disabled);
+      } @else {
+        color: var(--form-placeholder-color);
+      }
+
+      @content;
+    }
+  }
+}
+
+/*
+  Classes for direct extending in placeholder-like elements styling
+   (e.g. vue-multiselect .multiselect__placeholder which is technically a span)
+*/
+%wt-placeholder {
+  font: inherit;
+  transition: var(--transition);
+  color: var(--form-placeholder-color);
+}
+
+%wt-placeholder--focus {
+  @extend %wt-placeholder;
+  color: var(--form-placeholder-color--focus);
+}
+
+%wt-placeholder--disabled {
+  @extend %wt-placeholder;
+  color: var(--form-placeholder-color--disabled);
+}

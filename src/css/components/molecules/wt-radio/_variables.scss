@@ -1,6 +1,6 @@
 
 :root {
-  --radio-icon-margin: 10px;
+  --radio-icon-margin: var(--spacing-xs);
   --radio-checkmark-size: 18px;
   --radio-bullet-size: 8px;
   --radio-border: 2px solid;

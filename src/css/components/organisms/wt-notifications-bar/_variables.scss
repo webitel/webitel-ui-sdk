@@ -1,7 +1,7 @@
 
 :root {
   --notifications-bar-max-height: 60%;
-  --notifications-bar-corner-margin: 10px;
-  --notifications-bar-notifications-margin: 0 10px 10px auto;
+  --notifications-bar-corner-margin: var(--spacing-sm);
+  --notifications-bar-notifications-margin: 0 0 var(--spacing-xs) auto;
   --notifications-bar-z-index: 101;
 }

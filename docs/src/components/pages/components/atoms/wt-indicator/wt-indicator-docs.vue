@@ -7,6 +7,10 @@
         <pre><code class="language-html">&lt;wt-indicator color="primary" text="Indicator"&gt;&lt;/wt-indicator&gt;</code></pre>
       </div>
       <div class="example-wrapper">
+        <wt-indicator color="primary" text="Sm size Indicator" size="sm"></wt-indicator>
+        <pre><code class="language-html">&lt;wt-indicator color="primary" text="Sm size Indicator" size="sm"&gt;&lt;/wt-indicator&gt;</code></pre>
+      </div>
+      <div class="example-wrapper">
         <wt-indicator color="primary" text="Primary color"></wt-indicator>
         <wt-indicator color="secondary" text="Secondary color"></wt-indicator>
         <wt-indicator color="disabled" text="Disabled color"></wt-indicator>
@@ -40,6 +44,12 @@
           value: 'text',
           code: '<wt-icon text="Hello there!"></wt-icon>',
           type: 'String',
+        },
+        {
+          value: 'size',
+          code: '<wt-icon size="sm"></wt-icon>',
+          type: 'String',
+          options: ['sm', 'md'],
         },
       ],
     }),

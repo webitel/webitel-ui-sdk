@@ -1,10 +1,12 @@
 
 :root {
-  --tooltip-padding: 10px 20px;
+  --tooltip-padding: var(--spacing-2xs) var(--spacing-xs);
   --tooltip-z-index: 100;
 
-  --tooltip-light-text-color: #000;
-  --tooltip-light-bg-color: #fff;
-  --tooltip-dark-text-color: #fff;
-  --tooltip-dark-bg-color: #464858;
+  --tooltip-light-text-color: var(--text-primary-color);
+  --tooltip-light-bg-color: var(--main-color);
+  --tooltip-dark-text-color: var(--text-contrast-color);
+  --tooltip-dark-bg-color: var(--contrast-color);
+
+  --tooltip-elevation: var(--elevation-10);
 }

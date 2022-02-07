@@ -1,14 +1,14 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "0.9.66",
+  "version": "1.0.12",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
+    "build:app": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix",
-    "build-lib": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
-    "build-publish-lib": "npm run test:unit && npm run build-lib && npm publish --access public"
+    "publish-lib": "npm run test:unit && npm run build && npm publish --access public"
   },
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [
@@ -44,14 +44,14 @@
     "webitel-sdk": "^0.1.91"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/jest-dom": "^5.16.2",
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-plugin-router": "^4.5.4",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/test-utils": "^1.0.3",
+    "@vue/test-utils": "^1.3.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",

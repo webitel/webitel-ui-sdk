@@ -1,0 +1,41 @@
+.wt-chip {
+  @extend %typo-caption;
+
+  display: inline-block;
+  padding: var(--chip-padding);
+  color: var(--text-primary-color);
+  border-radius: var(--chip-border-radius);
+  background: var(--chip-bg-color);
+
+  &--main-color {
+    background: var(--chip-bg-color);
+  }
+
+  &--outline-color {
+    background: var(--chip-bg-color--outline);
+  }
+
+  &--accent-color {
+    background: var(--accent-color);
+  }
+
+  &--secondary-color {
+    background: var(--secondary-color);
+  }
+
+  &--secondary-50-color {
+    background: var(--secondary-color-50);
+  }
+
+  &--success-color {
+    background: var(--true-color);
+  }
+
+  &--danger-color {
+    background: var(--false-color);
+  }
+
+  &--transfer-color {
+    background: var(--transfer-color);
+  }
+}

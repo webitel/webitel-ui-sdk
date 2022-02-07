@@ -2,21 +2,20 @@
   <section>
     <h2>Page Wrapper</h2>
     <article>
-      <div class="example-wrapper" style="padding: 30px; background: #EAEAEA;">
-        <wt-page-wrapper>
+      <div class="example-wrapper">
+        <wt-page-wrapper style="background: var(--page-bg-color);">
           <template slot="header">
-            <wt-headline>
-              <template slot="title">Wt Headline</template>
-            </wt-headline>
+            <div style="height: 40px; background: lightblue;"></div>
           </template>
           <template slot="actions-panel">
-            <div style="height: 150px; background: lightblue;"></div>
+            <div style="height: 80px; background: lightblue;"></div>
           </template>
           <template slot="main">
-            <div style="width: 100%; height: 500px; background: lightblue;"></div>
+            <div style="width: 100%; height: 320px; background: lightblue;"></div>
           </template>
         </wt-page-wrapper>
-        <pre><code
+      </div>
+      <pre><code
           class="language-html">
         &lt;wt-page-wrapper&gt;
           &lt;template slot="header"&gt;
@@ -30,7 +29,6 @@
           &lt;/template&gt;
         &lt;/wt-page-wrapper&gt;
         </code></pre>
-      </div>
     </article>
     <component-props
       :properties="properties"

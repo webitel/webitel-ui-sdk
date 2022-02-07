@@ -1,6 +1,10 @@
 :root {
-  --indicator-size: 14px;
-  --indicator-text-margin: 10px;
+  --indicator-dot-size--size-sm: var(--spacing-xs);
+  --indicator-dot-size--size-md: var(--spacing-sm);
+  --indicator-dot-size: var(--indicator-size--size-md);
+  --indicator-dot-offset: var(--spacing-2xs);
+
+  --indicator-text-margin: var(--spacing-2xs);
   
   --indicator-primary-color: var(--accent-color);
 

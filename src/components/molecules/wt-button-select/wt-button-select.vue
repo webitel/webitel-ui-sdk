@@ -83,6 +83,7 @@ export default {
 }
 
 .wt-button-select__select-btn {
+  min-width: auto;
   padding: var(--button-select-icon-button-padding);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
 
@@ -171,7 +172,7 @@ export default {
 
   // DISABLED MODE
   &.wt-button--disabled .wt-icon::v-deep .wt-icon__icon {
-    fill: var(--icon-color-disabled);
+    fill: var(--icon-color-secondary-50);
   }
 
   // OPEN AND SHUT ARROW

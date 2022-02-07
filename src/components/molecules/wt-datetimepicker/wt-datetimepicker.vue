@@ -42,15 +42,24 @@
         </span>
       </div>
       <div class="wt-datetimepicker__form-wrapper">
-        <datepicker
+<!--        <datepicker-->
+<!--          class="wt-datetimepicker__datepicker"-->
+<!--          :value="draft"-->
+<!--          :maximum-view="'day'"-->
+<!--          :disabled-dates="disabledDates"-->
+<!--          monday-first-->
+<!--          inline-->
+<!--          @input="setDraft($event.getTime())"-->
+<!--        ></datepicker>-->
+        <wt-datepicker
           class="wt-datetimepicker__datepicker"
           :value="draft"
           :maximum-view="'day'"
           :disabled-dates="disabledDates"
           monday-first
           inline
-          @input="setDraft($event.getTime())"
-        ></datepicker>
+          @change="setDraft"
+        ></wt-datepicker>
         <wt-timepicker
           class="wt-datetimepicker__timepicker"
           v-model="draft"
@@ -71,12 +80,12 @@
 </template>
 
 <script>
-  import Datepicker from 'vuejs-datepicker';
+  // import Datepicker from 'vuejs-datepicker';
 
   export default {
     name: 'wt-datetimepicker',
     components: {
-      Datepicker,
+      // Datepicker,
     },
 
     props: {
@@ -163,18 +172,13 @@
     position: relative;
   }
 
-  .wt-label {
-    margin-bottom: var(--label-margin);
-    cursor: text;
-  }
-
   .wt-datetimepicker__preview {
     position: relative;
     cursor: text;
     outline: none;
 
     &__input {
-      @extend %typo-body-lg;
+      @extend %typo-body-1;
       display: block;
       width: 100%;
       box-sizing: border-box;
@@ -222,7 +226,7 @@
   }
 
   .wt-datetimepicker__quick-filter {
-    @extend %typo-body-sm;
+    @extend %typo-caption;
     text-decoration: underline;
     cursor: pointer;
   }
@@ -231,18 +235,15 @@
     display: flex;
     flex-direction: column;
 
-    .wt-datetimepicker__datepicker {
-      input {
+    .wt-datetimepicker__datepicker ::v-deep {
+      .wt-datepicker__calendar-icon,
+      .wt-datepicker__arrow-icon {
         display: none;
       }
-
-      ::v-deep {
-        @import '../../../css/components/molecules/wt-datepicker/datepicker-calendar';
-
-        .vdp-datepicker__calendar {
-          margin: auto;
-          border: none;
-        }
+      .vdp-datepicker__calendar {
+        padding: 0;
+        border-color: transparent;
+        box-shadow: none;
       }
     }
 
@@ -271,11 +272,6 @@
     .wt-datetimepicker__preview__input {
       border-color: var(--form-border--hover-color);
     }
-
-    .wt-datetimepicker__calendar-icon ::v-deep .wt-icon__icon,
-    .wt-datetimepicker__arrow-icon ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
-    }
   }
 
   .wt-datetimepicker:focus-within,
@@ -291,11 +287,6 @@
     .wt-datetimepicker__arrow-icon {
       transform: translateY(-50%) rotate(180deg);
     }
-
-    .wt-datetimepicker__calendar-icon ::v-deep .wt-icon__icon,
-    .wt-datetimepicker__arrow-icon ::v-deep .wt-icon__icon {
-      fill: var(--icon-color-active);
-    }
   }
 
   .wt-datetimepicker--disabled {
@@ -304,11 +295,6 @@
     .wt-datetimepicker__preview__input {
       border-color: var(--form-border--disabled-color);
       background: var(--form-border--disabled-color);
-    }
-
-    .wt-datetimepicker__calendar-icon ::v-deep .wt-icon__icon,
-    .wt-datetimepicker__arrow-icon ::v-deep .wt-icon__icon {
-      fill: var(--icon-color-disabled);
     }
   }
 </style>

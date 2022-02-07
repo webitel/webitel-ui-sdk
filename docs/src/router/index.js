@@ -7,13 +7,14 @@ import StyleDocs from '../components/pages/style/style-docs.vue';
 import Breakpoints from '../components/pages/style/breakpoints/breakpoints.vue';
 import Colors from '../components/pages/style/colors/colors.vue';
 import DisplayHelpers from '../components/pages/style/display-helpers/display-helpers.vue';
-import Spacing from '../components/pages/style/spacing/spacing.vue';
+import Spacings from '../components/pages/style/spacings/spacings.vue';
 import Typography from '../components/pages/style/typography/typography.vue';
-import Shadows from '../components/pages/style/shadows/shadows.vue';
+import Elevations from '../components/pages/style/elevations/elevations.vue';
+import BorderRadius from '../components/pages/style/border-radius/border-radius.vue';
 
 import ComponentsDocs from '../components/pages/components/components-docs.vue';
 // atoms
-import WtBadgeDocs from '../components/pages/components/atoms/wt-badge/wt-badge-docs.vue';
+import WtChipDocs from '../components/pages/components/atoms/wt-chip/wt-chip-docs.vue';
 import WtBtnDocs from '../components/pages/components/atoms/wt-button/wt-button-docs.vue';
 import WtDividerDocs from '../components/pages/components/atoms/wt-divider/wt-divider-docs.vue';
 import WtIconDocs from '../components/pages/components/atoms/wt-icon/wt-icon-docs.vue';
@@ -178,9 +179,9 @@ const routes = [
         component: DisplayHelpers,
       },
       {
-        path: 'spacing',
-        name: 'spacing',
-        component: Spacing,
+        path: 'spacings',
+        name: 'spacings',
+        component: Spacings,
       },
       {
         path: 'typography',
@@ -188,9 +189,14 @@ const routes = [
         component: Typography,
       },
       {
-        path: 'shadows',
-        name: 'shadows',
-        component: Shadows,
+        path: 'elevations',
+        name: 'elevations',
+        component: Elevations,
+      },
+      {
+        path: 'border-radius',
+        name: 'border-radius',
+        component: BorderRadius,
       },
     ],
   },
@@ -206,9 +212,9 @@ const routes = [
         component: WtContextMenuDocs,
       },
       {
-        path: '/components/badge',
-        name: 'badge-docs',
-        component: WtBadgeDocs,
+        path: '/components/chip',
+        name: 'chip-docs',
+        component: WtChipDocs,
       },
       {
         path: 'button',

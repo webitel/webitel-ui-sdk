@@ -246,9 +246,6 @@ export default {
   }
 
   .wt-label {
-    margin-bottom: var(--label-margin);
-    cursor: text;
-
     .wt-input:hover &,
     .wt-input:focus-within & {
       color: var(--form-label--hover-color);
@@ -261,7 +258,8 @@ export default {
   }
 
   .wt-input__input {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
+    @include wt-placeholder;
 
     display: block;
     width: 100%;
@@ -273,34 +271,18 @@ export default {
     border-radius: var(--border-radius);
     transition: var(--transition);
 
-    &::placeholder {
-      color: var(--form-placeholder-color);
-    }
-
-    .wt-input:hover &,
     &:focus {
+      @include wt-placeholder('focus');
       border-color: var(--form-border--hover-color);
-
-      &::placeholder {
-        color: var(--form-placeholder--hover-color)
-      }
     }
 
     .wt-input--outline & {
       border-color: var(--form-outline-border-color);
-
-      &::placeholder {
-        color: var(--form-outline-placeholder-color);
-      }
     }
 
     .wt-input--outline:hover &,
     .wt-input--outline &:focus {
       border-color: var(--form-outline-border--hover-color);
-
-      &::placeholder {
-        color: var(--form-outline-placeholder--hover-color)
-      }
     }
 
     .wt-input--invalid &,
@@ -310,12 +292,9 @@ export default {
     }
 
     .wt-input--disabled & {
+      @include wt-placeholder('disabled');
       background: var(--form-border--disabled-color);
       border-color: var(--form-border--disabled-color);
-
-      &::placeholder {
-        color: var(--form-placeholder--disabled-color);
-      }
     }
   }
 
@@ -327,6 +306,7 @@ export default {
     top: 50%;
     right: var(--input-icon-margin);
     transform: translateY(-50%);
+    pointer-events: auto; // override --disabled p-events none
 
     .wt-input__password-button {
       .wt-input--disabled & ::v-deep .wt-icon__icon {

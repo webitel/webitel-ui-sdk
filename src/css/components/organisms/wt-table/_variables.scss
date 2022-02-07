@@ -2,15 +2,15 @@
 :root {
   --table-col-min-width: 140px;
 
-  --table-head-sort-arrow-margin: 10px;
-  --table-head-borer-bottom: 1px solid;
-  --table-head-borer-color: var(--main-outline-color);
+  --table-head-sort-arrow-margin: var(--spacing-xs);
+  --table-head-border: 1px solid;
+  --table-head-border-color: var(--secondary-color);
 
-  --table-min-height: 24px; // 24px icon size + 2 paddings
-  --table-column-gap: 20px;
-  --table-row-padding: 10px;
+  --table-min-height: 24px; // 24px icon size or body-1 lh
+  --table-column-gap: var(--spacing-xs);
+  --table-row-padding: var(--spacing-xs);
 
-  --table-primary-color: var(--main-primary-color);
-  --table--hover-color: var(--main-secondary-accent-color);
-  --table-secondary-color: #F9F9F9; // zebra
+  --table-primary-color: var(--main-color);
+  --table--hover-color: var(--accent-secondary-color);
+  --table-secondary-color: var(--secondary-color-50); // zebra
 }

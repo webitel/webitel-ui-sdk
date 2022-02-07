@@ -1,8 +1,6 @@
 <template>
-  <div class="wt-loader">
-    <wt-loader-sm v-if="size === 'sm'" :color="color"></wt-loader-sm>
-    <wt-loader-md v-if="size === 'md'"></wt-loader-md>
-  </div>
+  <wt-loader-sm class="wt-loader" v-if="size === 'sm'" :color="color"></wt-loader-sm>
+  <wt-loader-md class="wt-loader" v-else-if="size === 'md'"></wt-loader-md>
 </template>
 
 <script>

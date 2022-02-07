@@ -20,8 +20,7 @@
       <wt-icon-btn
         class="wt-search-bar__reset-icon-btn"
         :class="{ 'hidden': !value }"
-        icon="close--filled"
-        size="sm"
+        icon="close"
         @click="$emit('input', '')"
       ></wt-icon-btn>
     </div>
@@ -133,7 +132,8 @@
   }
 
   .wt-search-bar__input {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
+    @include wt-placeholder;
 
     display: block;
     width: 100%;
@@ -145,34 +145,18 @@
     border-radius: var(--border-radius);
     transition: var(--transition);
 
-    &::placeholder {
-      color: var(--form-placeholder-color)
-    }
-
-    .wt-search-bar:hover &,
     &:focus {
+      @include wt-placeholder('focus');
       border-color: var(--form-border--hover-color);
-
-      &::placeholder {
-        color: var(--form-placeholder--hover-color)
-      }
     }
 
     .wt-search-bar--outline & {
       border-color: var(--form-outline-border-color);
-
-      &::placeholder {
-        color: var(--form-outline-placeholder-color)
-      }
     }
 
     .wt-search-bar--outline:hover &,
     .wt-search-bar--outline &:focus {
       border-color: var(--form-outline-border--hover-color);
-
-      &::placeholder {
-        color: var(--form-outline-placeholder--hover-color)
-      }
     }
   }
 

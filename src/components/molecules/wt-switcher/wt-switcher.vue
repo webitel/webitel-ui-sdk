@@ -70,6 +70,10 @@
     @include width-fit-content;
     position: relative;
     box-sizing: border-box;
+
+    .wt-label {
+      cursor: pointer;
+    }
   }
 
   .wt-switcher__wrapper {

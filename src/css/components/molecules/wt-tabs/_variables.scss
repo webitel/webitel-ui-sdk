@@ -3,12 +3,12 @@
   --tabs-underiline-height: 1px;
   --tabs-underiline-color: transparent;
 
-  --tab-padding: 20px 0;
+  --tab-padding: var(--spacing-2xs);
   --tab-margin: 0 5px;
   --tab-color: var(--text-outline-color);
   --tab--hover-color: var(--text-primary-color);
   --tab--active-color: var(--text-primary-color);
-  --tab-border: 2px solid;
-  --tab--active-border-color: var(--main-accent-color);
+  --tab-border: 4px solid;
+  --tab--active-border-color: var(--accent-color);
   --tab-z-index: 1;
 }

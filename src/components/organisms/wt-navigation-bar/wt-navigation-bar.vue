@@ -1,44 +1,64 @@
 <template>
-  <aside class="wt-navigation-bar" v-clickaway="close">
+  <aside v-clickaway="close" class="wt-navigation-bar">
     <wt-icon-btn
+      :class="{'active': isOpened}"
       class="wt-navigation-bar__menu-btn"
       icon="menu"
-      :class="{'active': isOpened}"
       @click="isOpened = !isOpened"
     ></wt-icon-btn>
     <transition name="fade">
-      <nav class="wt-navigation-bar__nav" v-show="isOpened">
+      <nav v-show="isOpened" class="wt-navigation-bar__nav">
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
-          <img v-if="currentApp === 'admin'"
-               src="../../../assets/components/organisms/wt-navigation-bar/logo-admin-app.svg" alt="admin">
-          <img v-if="currentApp === 'agent'"
-               src="../../../assets/components/organisms/wt-navigation-bar/logo-agent-app.svg" alt="agent">
-          <img v-if="currentApp === 'audit'"
-               src="../../../assets/components/organisms/wt-navigation-bar/logo-audit-app.svg" alt="audit">
-          <img v-if="currentApp === 'history'"
-               src="../../../assets/components/organisms/wt-navigation-bar/logo-history-app.svg" alt="history">
-          <img v-if="currentApp === 'supervisor'"
-               src="../../../assets/components/organisms/wt-navigation-bar/logo-supervisor-app.svg" alt="supervisor">
+          <img
+            v-if="currentApp === 'admin'"
+            alt="admin"
+            class="wt-navigation-bar__app-pic"
+            src="../../../assets/components/organisms/wt-navigation-bar/logo-admin-app.svg"
+          >
+          <img
+            v-if="currentApp === 'agent'"
+            alt="agent"
+            class="wt-navigation-bar__app-pic"
+            src="../../../assets/components/organisms/wt-navigation-bar/logo-agent-app.svg"
+          >
+          <img
+            v-if="currentApp === 'audit'"
+            alt="audit"
+            class="wt-navigation-bar__app-pic"
+            src="../../../assets/components/organisms/wt-navigation-bar/logo-audit-app.svg"
+          >
+          <img
+            v-if="currentApp === 'history'"
+            alt="history"
+            class="wt-navigation-bar__app-pic"
+            src="../../../assets/components/organisms/wt-navigation-bar/logo-history-app.svg"
+          >
+          <img
+            v-if="currentApp === 'supervisor'"
+            alt="supervisor"
+            class="wt-navigation-bar__app-pic"
+            src="../../../assets/components/organisms/wt-navigation-bar/logo-supervisor-app.svg"
+          >
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
             @click="isOpened = false"
           ></wt-icon-btn>
         </header>
-        <wt-divider/>
+        <wt-divider />
         <ul class="wt-navigation-bar__nav-list">
           <li
             v-for="(navItem, key) of nav"
-            class="wt-navigation-bar__nav-item"
             :key="key"
+            class="wt-navigation-bar__nav-item"
           >
             <div v-if="!navItem.subNav">
               <div class="wt-navigation-bar__nav-item-wrapper">
                 <router-link
-                  class="wt-navigation-bar__nav-item-link"
                   :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === navItem.value}"
                   :to="navItem.route"
+                  class="wt-navigation-bar__nav-item-link"
                   @click.native="close"
                 > {{ navItem.name || navItem.value }}
                 </router-link>
@@ -46,33 +66,33 @@
             </div>
             <div v-else>
               <button
-                class="wt-navigation-bar__nav-expansion"
                 :class="{
                   'wt-navigation-bar__nav-expansion--expanded': isExpanded(navItem),
                   'wt-navigation-bar__nav-expansion--active': currentNav.expansion === navItem.value,
                 }"
+                class="wt-navigation-bar__nav-expansion"
                 type="button"
                 @click="expand(navItem)"
               >
                 <span class="wt-navigation-bar__nav-expansion-name">{{ navItem.name || navItem.value }}</span>
                 <wt-icon
                   class="wt-navigation-bar__expansion-arrow"
-                  icon="arrow-right"
                   color="active"
+                  icon="arrow-right"
                 ></wt-icon>
               </button>
               <expand-transition>
                 <ul v-if="isExpanded(navItem)">
                   <li
                     v-for="(subNavItem, subNavKey) of navItem.subNav"
-                    class="wt-navigation-bar__nav-item"
                     :key="subNavKey"
+                    class="wt-navigation-bar__nav-item"
                   >
                     <div class="wt-navigation-bar__nav-item-wrapper">
                       <router-link
-                        class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
                         :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
                         :to="nestedRoute(subNavItem, navItem)"
+                        class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
                         @click.native="close"
                       >{{ subNavItem.name || subNavItem.value }}
                       </router-link>
@@ -113,14 +133,14 @@ export default {
     currentNav() {
       const path = this.$route.fullPath;
       const currentNav = this.nav
-        .reduce((flatNav, currentNavItem) => {
-          if (currentNavItem.subNav) return flatNav.concat(currentNavItem.subNav);
-          return [...flatNav, currentNavItem];
-        }, [])
-        .find((navItem) => path.includes(navItem.route));
+                             .reduce((flatNav, currentNavItem) => {
+                               if (currentNavItem.subNav) return flatNav.concat(currentNavItem.subNav);
+                               return [...flatNav, currentNavItem];
+                             }, [])
+                             .find((navItem) => path.includes(navItem.route));
       const currentExpansion = this.nav
-        .filter((nav) => nav.subNav)
-        .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
+                                   .filter((nav) => nav.subNav)
+                                   .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
       return {
         nav: currentNav?.value,
         expansion: currentExpansion?.value,
@@ -154,20 +174,21 @@ export default {
 .wt-navigation-bar__nav {
   @extend %wt-scrollbar;
   position: fixed;
+  z-index: var(--navigation-bar-z-index);
   top: 0;
   bottom: 0;
   left: 0;
-  width: var(--navigation-bar-width);
   overflow: auto;
-  z-index: var(--navigation-bar-z-index);
+  width: var(--navigation-bar-width);
+  padding: var(--navigation-bar-padding);
   border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
   background: var(--navigation-bar-bg-color);
+  box-shadow: var(--elevation-10);
 
   // expand animation optimization
   * {
-    will-change: height;
     transform: translateZ(0);
+    will-change: height;
     backface-visibility: hidden;
     perspective: 1000px;
   }
@@ -175,52 +196,53 @@ export default {
 
 .wt-navigation-bar__nav-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: var(--navigation-bar-header-padding);
 }
 
-.wt-navigation-bar__nav-list {
-  padding: var(--navigation-bar-list-padding);
+.wt-navigation-bar__app-pic {
+  width: var(--navigation-bar-app-pic-width);
+  height: var(--navigation-bar-app-pic-height);
 }
 
 .wt-navigation-bar__nav-item-link {
-  @extend %typo-body-lg;
+  @extend %typo-body-1;
   display: block;
   padding: var(--navigation-bar-link-padding);
   transition: var(--transition);
   word-wrap: break-word;
 
   &:hover {
-    background: var(--main-option-hover-color);
+    background: var(--accent-secondary-color);
   }
 
   &--active {
-    background: var(--main-option-hover-color);
+    background: var(--accent-secondary-color);
   }
 }
 
 .wt-navigation-bar__nav-expansion {
-  @extend %typo-heading-sm;
+  @extend %typo-subtitle-1;
   position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   padding: var(--navigation-bar-link-padding);
   outline: none;
 
   &:before {
-    opacity: 0;
-    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
-    left: calc(var(--navigation-bar-horizontal-padding) * -1);
+    left: 0;
     width: var(--navigation-bar-active-expansion-flag-width);
-    border-radius: var(--border-radius);
-    background: var(--main-accent-color);
+    content: '';
     transition: var(--transition);
+    opacity: 0;
+    border-radius: var(--border-radius);
+    background: var(--accent-color);
   }
 
   .wt-navigation-bar__expansion-arrow {

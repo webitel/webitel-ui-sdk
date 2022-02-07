@@ -1,14 +1,16 @@
 :root {
-  --navigation-bar-width: 350px;
+  --navigation-bar-width: 340px;
   --navigation-bar-z-index: 10;
-  --navigation-bar-bg-color: var(--main-primary-color);
-  --navigation-bar-verical-padding: 15px;
-  --navigation-bar-horizontal-padding: 10px;
+  --navigation-bar-bg-color: var(--main-color);
+  --navigation-bar-padding: var(--spacing-sm);
 
-  --navigation-bar-header-padding: var(--navigation-bar-verical-padding) 15px;
-  --navigation-bar-list-padding: var(--navigation-bar-verical-padding) var(--navigation-bar-horizontal-padding);
-  --navigation-bar-link-padding: var(--navigation-bar-verical-padding) var(--navigation-bar-horizontal-padding);
-  --navigation-bar-subnav-padding-left: 40px;
+  --navigation-bar-header-padding: var(--spacing-xs);
+  --navigation-bar-app-pic-width: 200px;
+  --navigation-bar-app-pic-height: 30px;
+
+  --navigation-bar-list-padding: var(--navigation-bar-padding);
+  --navigation-bar-link-padding: var(--navigation-bar-padding);
+  --navigation-bar-subnav-padding-left: var(--spacing-lg);
   --navigation-bar-active-expansion-flag-width: 5px;
-  --navigation-bar-active-expansion-name-max-width: calc(100% - 24px - 10px); // 100% - icon - icon margin
+  --navigation-bar-active-expansion-name-max-width: calc(100% - var(--icon-md-size) - var(--spacing-xs));
 }

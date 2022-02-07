@@ -46,7 +46,7 @@
 
 <style lang="scss" scoped>
   .wt-notification {
-    @extend %typo-body-lg;
+    @extend %typo-body-1;
     @include width-fit-content;
 
     position: relative;
@@ -58,11 +58,12 @@
     color: var(--notification-text-color);
     background: var(--notification-bg-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--elevation-1);
     cursor: pointer;
   }
 
   .wt-notification__icon {
+    flex: 0 0 var(--icon-md-size);
     margin-right: var(--notification-icon-margin);
   }
 

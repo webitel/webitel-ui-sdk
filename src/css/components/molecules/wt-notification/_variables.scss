@@ -2,9 +2,9 @@
 :root {
   --notification-min-width: 30vw;
   --notification-max-width: 40vw;
-  --notification-padding: 10px;
-  --notification-icon-margin: 10px;
+  --notification-padding: var(--spacing-xs);
+  --notification-icon-margin: var(--spacing-xs);
 
-  --notification-text-color: #000;
-  --notification-bg-color: #fff;
+  --notification-text-color: var(--text-primary-color);
+  --notification-bg-color: var(--main-color);
 }

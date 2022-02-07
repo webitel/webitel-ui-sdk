@@ -187,7 +187,7 @@
           ],
           description: 'Customize data columns. '
             + 'Recommended for representing nested data structures like object or array, '
-            + 'and adding specific elements like select or badge',
+            + 'and adding specific elements like select or chip',
         },
         {
           // eslint-disable-next-line no-template-curly-in-string

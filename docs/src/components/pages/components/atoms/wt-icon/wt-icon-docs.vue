@@ -81,6 +81,7 @@ export default {
           'danger - inherited from Semantic colors',
           'transfer - inherited from Semantic colors',
           'hold - inherited from Semantic colors',
+          'secondary-50',
         ],
         description: 'Icon colors. Attention! Hover color is changing only for "default color".',
       },

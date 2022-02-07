@@ -71,9 +71,14 @@ export default {
             route: 'typography',
           },
           {
-            name: 'Shadows',
-            value: 'shadows',
-            route: 'shadows',
+            name: 'Elevations',
+            value: 'elevations',
+            route: 'elevations',
+          },
+          {
+            name: 'Border radius',
+            value: 'border-radius',
+            route: 'border-radius',
           },
         ],
       };
@@ -95,9 +100,9 @@ export default {
             route: 'context-menu',
           },
           {
-            name: 'Badge',
-            value: 'badge',
-            route: 'badge',
+            name: 'Chip',
+            value: 'chip',
+            route: 'chip',
           },
           {
             name: 'Button',
@@ -490,7 +495,7 @@ export default {
 <style lang="scss" scoped>
 .docs {
   min-height: 100%;
-  background: var(--main-page-bg-color);
+  background: var(--page-bg-color);
 
   .wt-page-wrapper__main > * {
     width: 100%;

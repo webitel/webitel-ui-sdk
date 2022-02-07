@@ -27,14 +27,13 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   min-height: var(--headline-min-height);
-  padding: var(--headline-padding);
   box-sizing: border-box;
   background: var(--headline-background);
   border-radius: var(--border-radius);
 }
 
 .wt-headline__title {
-  @extend %typo-heading-md;
+  @extend %typo-heading-2;
   margin-right: var(--headline-title-margin);
 }
 

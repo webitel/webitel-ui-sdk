@@ -147,18 +147,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../../css/components/atoms/wt-chip/wt-chip';
+
 .wt-tags-input {
   width: 100%;
-}
-
-.wt-label {
-  margin-bottom: var(--label-margin);
-  cursor: text;
-
-  .wt-tags-input:hover &,
-  .wt-tags-input:focus-within & {
-    color: var(--form-label--hover-color);
-  }
 }
 
 // increase specificity
@@ -179,6 +171,7 @@ export default {
       .ti-tags {
         display: flex;
         align-items: center;
+        gap: var(--tags-input-tags-gap);
         padding: var(--tags-input-padding);
         margin: 0; // reset default
         word-break: break-word; //break long word
@@ -190,23 +183,17 @@ export default {
       }
 
       .ti-new-tag-input {
-        @extend %typo-body-lg;
-        border-radius: var(--border-radius);
+        @extend %typo-body-1;
+        @include wt-placeholder;
 
-        &::placeholder {
-          @extend %typo-body-lg;
-          color: var(--form-placeholder-color);
-        }
+        border-radius: var(--border-radius);
       }
 
       .ti-tag {
-        @extend %typo-body-lg;
+        @extend .wt-chip;
+        display: flex;
         height: fit-content;
-        padding: var(--tags-input-padding);
-        margin: 0 var(--tags-input-tag-spacing-margin) var(--tags-input-tag-spacing-margin) 0;  // reset default
-        color: var(--tags-input-tag-text-color);
-        background: var(--tags-input-tag-bg-color);
-        border-radius: var(--tags-input-tag-border-radius);
+        margin: 0;  // reset default
         transition: var(--transition);
 
         .ti-actions {
@@ -237,7 +224,7 @@ export default {
         background: transparent; // reset default
 
         & > div {
-          @extend %typo-body-lg;
+          @extend %typo-body-1;
           padding: var(--tags-input-autocomplete-option-padding);
           color: var(--tags-input-autocomplete-option--text-color);
           transition: var(--transition);
@@ -248,6 +235,27 @@ export default {
           }
         }
       }
+    }
+  }
+}
+
+.wt-tags-input:hover,
+.wt-tags-input:focus-within {
+  .wt-label {
+    color: var(--form-label--hover-color);
+  }
+
+  .wt-tags-input__tags-input ::v-deep {
+    .ti-new-tag-input {
+      border-color: var(--form-border--hover-color);
+    }
+  }
+}
+
+.wt-tags-input:focus-within {
+  .wt-tags-input__tags-input ::v-deep {
+    .ti-new-tag-input {
+      @include wt-placeholder('focus');
     }
   }
 }
@@ -269,8 +277,6 @@ export default {
 }
 
 .wt-tags-input--disabled {
-  pointer-events: none;
-
   .wt-tags-input__tags-input {
     width: 100%;
     max-width: 100%; // reset default
