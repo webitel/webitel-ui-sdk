@@ -1,6 +1,7 @@
 <template>
   <div class="playground">
     <section>
+      <wt-checkbox></wt-checkbox>
       <wt-datetimepicker
         v-model="date"
       ></wt-datetimepicker>
