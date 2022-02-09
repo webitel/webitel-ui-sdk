@@ -29,7 +29,7 @@ export default {
     color: {
       type: String,
       default: 'default',
-      options: ['default', 'contrast', 'active', 'disabled', 'success', 'danger', 'transfer', 'hold'],
+      options: ['default', 'contrast', 'active', 'accent', 'disabled', 'success', 'danger', 'transfer', 'hold', 'secondary-50'],
     },
     iconPrefix: {
       type: String,

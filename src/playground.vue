@@ -1,5 +1,49 @@
 <template>
   <div class="playground">
+    <article class="buttons">
+      <div class="example-wrapper">
+        <wt-rounded-action wide rounded icon="call"></wt-rounded-action>
+        <wt-rounded-action wide icon="call"></wt-rounded-action>
+        <wt-rounded-action loading icon="call"></wt-rounded-action>
+        <pre><code
+          class="language-html">&lt;wt-rounded-action icon="call"&gt;&lt;/wt-rounded-action&gt;</code></pre>
+      </div>
+      <div class="example-wrapper" style="display: flex; align-items: center;">
+        <wt-rounded-action rounded icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action icon="call" disabled></wt-rounded-action>
+        <wt-rounded-action icon="call" color="accent"></wt-rounded-action>
+        <wt-rounded-action icon="call" color="success"></wt-rounded-action>
+        <wt-rounded-action icon="call" color="danger"></wt-rounded-action>
+        <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
+        <wt-rounded-action icon="call" color="transfer" disabled></wt-rounded-action>
+
+        <wt-rounded-action active size="sm" rounded icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action active size="sm" icon="call" disabled></wt-rounded-action>
+        <wt-rounded-action active icon="call" color="accent"></wt-rounded-action>
+        <wt-rounded-action active size="sm" icon="call" color="success"></wt-rounded-action>
+        <wt-rounded-action active size="xl" icon="call" color="danger"></wt-rounded-action>
+        <wt-rounded-action active size="sm" icon="call" color="transfer"></wt-rounded-action>
+        <wt-rounded-action active icon="call" color="transfer" disabled></wt-rounded-action>
+      </div>
+      <div class="example-wrapper" style="display: flex; align-items: center;">
+        <wt-rounded-action rounded icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" disabled></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="accent"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="success"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="danger"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="transfer"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="transfer" disabled></wt-rounded-action>
+
+        <wt-rounded-action rounded active size="sm" icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action rounded active size="sm" icon="call" disabled></wt-rounded-action>
+        <wt-rounded-action rounded active icon="call" color="accent"></wt-rounded-action>
+        <wt-rounded-action rounded active size="sm" icon="call" color="success"></wt-rounded-action>
+        <wt-rounded-action rounded active size="xl" icon="call" color="danger"></wt-rounded-action>
+        <wt-rounded-action rounded active size="sm" icon="call" color="transfer"></wt-rounded-action>
+        <wt-rounded-action rounded active icon="call" color="transfer" disabled></wt-rounded-action>
+      </div>
+      <p>! class 'active', attached to secondary color button, highlights it.</p>
+    </article>
     <section>
       <wt-checkbox></wt-checkbox>
       <wt-datetimepicker
@@ -51,23 +95,6 @@
             <wt-button color="secondary">Not Ok</wt-button>
           </template>
         </wt-popup>
-      </article>
-      <article class="buttons">
-        <div class="example-wrapper">
-          <wt-rounded-action wide icon="call"></wt-rounded-action>
-          <wt-rounded-action loading icon="call"></wt-rounded-action>
-          <pre><code
-            class="language-html">&lt;wt-rounded-action icon="call"&gt;&lt;/wt-rounded-action&gt;</code></pre>
-        </div>
-        <div class="example-wrapper" style="display: flex;">
-          <wt-rounded-action icon="call" color="secondary"></wt-rounded-action>
-          <wt-rounded-action icon="call" disabled></wt-rounded-action>
-          <wt-rounded-action icon="call" color="success"></wt-rounded-action>
-          <wt-rounded-action icon="call" color="danger"></wt-rounded-action>
-          <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
-          <wt-rounded-action icon="call" color="transfer" disabled></wt-rounded-action>
-        </div>
-        <p>! class 'active', attached to secondary color button, highlights it.</p>
       </article>
 
       <article class="buttons">

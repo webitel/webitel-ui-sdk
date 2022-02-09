@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 0.9.52</h1>
+          <h1>Webitel UI SDK v. 1.0.14</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -22,6 +22,11 @@ export default {
   computed: {
     nav() {
       return [
+        {
+          name: 'Changelog',
+          value: 'changelog',
+          route: '/changelog',
+        },
         {
           name: 'Quick Start',
           value: 'quick-start',

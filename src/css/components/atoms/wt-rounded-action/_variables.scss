@@ -1,5 +1,5 @@
 :root {
-  --rounded-action-padding: var(--spacing-xs);
+  --rounded-action-padding: calc(var(--spacing-xs) - var(--btn-border-size));
 
   --rounded-action-padding--outline: calc(var(--spacing-xs) - var(--btn-border-size));
 

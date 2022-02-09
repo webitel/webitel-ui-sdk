@@ -16,7 +16,34 @@
         <wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
         <wt-rounded-action icon="call" color="transfer" disabled></wt-rounded-action>
       </div>
-      <p>! class 'active', attached to secondary color button, highlights it.</p>
+      <div class="example-wrapper" style="display: flex;">
+        <wt-rounded-action active icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action active icon="call" disabled></wt-rounded-action>
+        <wt-rounded-action active icon="call" color="success"></wt-rounded-action>
+        <wt-rounded-action active icon="call" color="danger"></wt-rounded-action>
+        <wt-rounded-action active icon="call" color="transfer"></wt-rounded-action>
+        <wt-rounded-action active icon="call" color="transfer" disabled></wt-rounded-action>
+      </div>
+      <div class="example-wrapper" style="display: flex;">
+        <wt-rounded-action wide icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action wide rounded icon="call" color="secondary"></wt-rounded-action>
+      </div>
+      <div class="example-wrapper" style="display: flex;">
+        <wt-rounded-action rounded icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" disabled></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="success"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="danger"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="transfer"></wt-rounded-action>
+        <wt-rounded-action rounded icon="call" color="transfer" disabled></wt-rounded-action>
+      </div>
+      <div class="example-wrapper" style="display: flex;">
+        <wt-rounded-action size="sm" icon="call" color="secondary"></wt-rounded-action>
+        <wt-rounded-action size="sm" icon="call" disabled></wt-rounded-action>
+        <wt-rounded-action size="sm" icon="call" color="success"></wt-rounded-action>
+        <wt-rounded-action size="sm" icon="call" color="danger"></wt-rounded-action>
+        <wt-rounded-action size="sm" icon="call" color="transfer"></wt-rounded-action>
+        <wt-rounded-action size="sm" icon="call" color="transfer" disabled></wt-rounded-action>
+      </div>
     </article>
     <component-props
       :properties="properties"
@@ -38,10 +65,33 @@ export default {
     properties: [
       {
         value: 'color',
-        code: '<wt-rounded-action color="primary"></wt-rounded-action>',
+        code: '<wt-rounded-action color="secondary"></wt-rounded-action>',
         type: 'String',
-        options: ['"primary", "secondary", "success", "danger", "transfer"'],
-        default: 'primary',
+        options: ['secondary', 'accent', 'success', 'danger', 'hold', 'transfer'],
+        default: 'secondary',
+      },
+      {
+        value: 'icon',
+        code: '<wt-rounded-action icon="call"></wt-rounded-action>',
+        type: 'String',
+      },
+      {
+        value: 'iconColor',
+        code: '<wt-rounded-action icon-color="secondary-50"></wt-rounded-action>',
+        type: 'String',
+        description: 'a prop for passing a specific color to icon. not for regular usage',
+      },
+      {
+        value: 'rounded',
+        code: '<wt-rounded-action rounded></wt-rounded-action>',
+        type: 'Boolean',
+        default: 'false',
+      },
+      {
+        value: 'wide',
+        code: '<wt-rounded-action wide></wt-rounded-action>',
+        type: 'Boolean',
+        default: 'false',
       },
       {
         value: 'disabled',
@@ -50,19 +100,21 @@ export default {
         default: 'false',
       },
       {
+        value: 'active',
+        code: '<wt-rounded-action active></wt-rounded-action>',
+        type: 'Boolean',
+        default: 'false',
+      },
+      {
         value: 'size',
         code: '<wt-rounded-action size="md"></wt-rounded-action>',
         type: 'String',
         default: 'md',
-        options: ['sm', 'md', 'lg'],
+        options: ['sm', 'md'],
         description: 'Controls button size',
       },
       {
-        value: 'loading',
-        code: '<wt-rounded-action loading></wt-rounded-action>',
-        type: 'Boolean',
-        default: 'false',
-        description: 'Displays loader instead of icon',
+        value: 'Plus all other wt-button props including "loading" :)'
       },
     ],
     events: [
@@ -81,4 +133,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.example-wrapper .wt-rounded-action {
+  margin: 10px;
+}
 </style>

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import Changelog from '../components/changelog.vue';
 import QuickStart from '../components/pages/quick-start/quick-start.vue';
 
 import StyleDocs from '../components/pages/style/style-docs.vue';
@@ -151,7 +152,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: '/quick-start',
+    redirect: '/changelog',
+  },
+  {
+    path: '/changelog',
+    name: 'changelog',
+    component: Changelog,
   },
   {
     path: '/quick-start',
