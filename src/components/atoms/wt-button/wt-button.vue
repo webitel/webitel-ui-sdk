@@ -5,6 +5,7 @@
       colorClass,
       `wt-button--size-${size}`,
       {
+        'wt-button--contains-icon': containsIcon,
         'wt-button--outline': outline,
         'wt-button--wide': wide,
         'wt-button--rounded': rounded,
@@ -58,6 +59,11 @@ export default {
       type: Boolean,
       default: false,
     },
+    containsIcon: {
+      type: Boolean,
+      default: false,
+      description: 'https://stackoverflow.com/a/11126701',
+    },
   },
   computed: {
     colorClass() {
@@ -93,6 +99,11 @@ export default {
 
   &--rounded {
     border-radius: var(--border-radius--pill);
+  }
+
+  // https://stackoverflow.com/a/11126701
+  &--contains-icon {
+    line-height: 0;
   }
 
   &--size {

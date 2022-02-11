@@ -16,27 +16,27 @@ and swapping height/width of this component in order to have the correct output.
 
 <template>
   <div
-    class="wt-slider"
     :class="{
         'wt-slider--disabled': disabled,
         'wt-slider--vertical': vertical,
       }"
     :style="{ height: verticalHeight }"
+    class="wt-slider"
   >
     <div
-      class="wt-slider__wrapper"
       :style="{ width: verticalHeight }"
+      class="wt-slider__wrapper"
     >
       <!-- The row above is needed in order to set correct component width when slider is vertical -->
       <input
-        type="range"
-        class="wt-slider__slider"
-        :style="{ background: progressStyle }"
-        :min="min"
-        :max="max"
-        :step="step"
-        :value="value"
         :disabled="disabled"
+        :max="max"
+        :min="min"
+        :step="step"
+        :style="{ background: progressStyle }"
+        :value="value"
+        class="wt-slider__slider"
+        type="range"
         @input="inputHandler"
       />
     </div>
@@ -95,18 +95,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .wt-slider__wrapper {
-  width: var(--wt-slider-width)
+  display: flex;
+  align-items: center;
+  width: var(--wt-slider-width);
+  height: var(--wt-slider-height);
 }
 
 .wt-slider__slider {
-  box-sizing: var(--wt-slider-box-sizing);
+  box-sizing: border-box;
   width: var(--wt-slider-width);
-  height: var(--wt-slider-height);
+  height: var(--wt-slider-input-height);
+  margin: 0;
+  cursor: pointer;
   border: var(--wt-slider-border);
   border-radius: var(--border-radius);
-  cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
 
@@ -160,16 +163,12 @@ export default {
 }
 
 .wt-slider--vertical {
-  width: var(--wt-slider-vertical-container-width);
+  width: var(--wt-slider-height);
   transform: var(--wt-slider-vertical-container-translation);
 
   .wt-slider__wrapper {
     transform: var(--wt-slider-vertical-transform);
     transform-origin: var(--wt-slider-vertical-transform-origin);
-
-    .wt-slider__slider {
-      margin: 0;
-    }
   }
 }
 </style>

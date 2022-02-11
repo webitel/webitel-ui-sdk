@@ -1,5 +1,7 @@
 <template>
   <div class="playground">
+    <wt-slider vertical></wt-slider>
+    <wt-slider></wt-slider>
     <article class="buttons">
       <div class="example-wrapper">
         <wt-rounded-action wide rounded icon="call"></wt-rounded-action>

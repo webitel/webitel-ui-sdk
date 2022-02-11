@@ -83,6 +83,13 @@
           description: 'Stretches button to all available width',
         },
         {
+          value: 'contains-icon',
+          code: '<wt-button contains-icon></wt-button>',
+          type: 'Boolean',
+          default: 'false',
+          description: 'sets wt-button line-height to 0 to prevent height changing: https://stackoverflow.com/a/11126701',
+        },
+        {
           value: 'loading',
           code: '<wt-button loading></wt-button>',
           type: 'Boolean',
