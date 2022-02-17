@@ -221,9 +221,9 @@ export default {
         // cant test this thing cause vue test utils doesnt render elements width :/
         const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
         const inputEl = this.$refs['wt-input'];
-        const defaultInputPadding = parseInt(getComputedStyle(document.documentElement)
-          .getPropertyValue('--input-padding'), 10);
-        inputEl.style.paddingRight = `${defaultInputPadding + afterWrapperWidth + defaultInputPadding}px`;
+        const defaultInputPadding = getComputedStyle(document.documentElement)
+          .getPropertyValue('--input-padding');
+        inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
       },
     },
     mounted() {
