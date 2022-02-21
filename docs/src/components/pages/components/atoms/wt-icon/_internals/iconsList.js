@@ -78,6 +78,8 @@ export default [
   'widget-inbound',
   'widget-avg-hold',
   'widget-avg-talk',
+  'widget-chat-accepts',
+  'widget-chat-aht',
 
   'call',
   'call--filled',

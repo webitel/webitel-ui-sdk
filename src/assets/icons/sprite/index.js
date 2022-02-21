@@ -116,5 +116,7 @@ import './widget-inbound.svg';
 import './widget-missed.svg';
 import './widget-occupancy.svg';
 import './widget-utilization.svg';
+import './widget-chat-accepts.svg';
+import './widget-chat-aht.svg';
 import './zoom-in.svg';
 import './zoom-out.svg';
