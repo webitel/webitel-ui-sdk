@@ -1,3 +1,6 @@
+/*
+NOTE:   text-transform: none; is set explicitly cause t-t is inherited from parent
+ */
 
 %typo-heading-1 {
   font: {
@@ -6,6 +9,7 @@
     weight: 600;
   }
   line-height: 48px;
+  text-transform: none;
   //letter-spacing: 0.28px; // 0.02em
 }
 
@@ -16,6 +20,7 @@
     weight: 600;
   }
   line-height: 40px;
+  text-transform: none;
   //letter-spacing: 0.28px; // 0.02em
 }
 
@@ -26,6 +31,7 @@
     weight: 600;
   }
   line-height: 32px;
+  text-transform: none;
   //letter-spacing: 0.28px; // 0.02em
 }
 
@@ -36,6 +42,7 @@
     weight: 500;
   }
   line-height: 24px;
+  text-transform: none;
   //letter-spacing: 0.28px; // 0.02em
 }
 
@@ -46,6 +53,7 @@
     weight: 500;
   }
   line-height: 20px;
+  text-transform: none;
   //letter-spacing: 0.28px; // 0.02em
 }
 
@@ -56,6 +64,7 @@
     weight: 400;
   }
   line-height: 24px;
+  text-transform: none;
   //letter-spacing: 0.56px; // 0.04em
 }
 
@@ -66,6 +75,7 @@
     weight: 400;
   }
   line-height: 16px;
+  text-transform: none;
   //letter-spacing: 0.16px; // 0.01em
 }
 
@@ -87,6 +97,7 @@
     weight: 400;
   }
   line-height: 16px;
+  text-transform: none;
   //letter-spacing: 0.48px; // 0.03em
 }
 
