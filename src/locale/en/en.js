@@ -112,6 +112,7 @@ export default {
         [AdminSections.FLOW]: 'Flow',
         [AdminSections.DIALPLAN]: 'Dialplan',
         [AdminSections.GATEWAYS]: 'Gateways',
+        [AdminSections.CHATPLAN]: 'Chatplan',
         [AdminSections.CHAT_GATEWAYS]: 'Chat gateways',
         [AdminSections.SKILLS]: 'Agent skills',
         [AdminSections.BUCKETS]: 'Buckets',

@@ -112,6 +112,7 @@ export default {
         [AdminSections.FLOW]: 'Схеми дзвінка',
         [AdminSections.DIALPLAN]: 'Правила вихідного набору',
         [AdminSections.GATEWAYS]: 'Шлюзи',
+        [AdminSections.CHATPLAN]: 'Правила маршрутизації текстових повідомлень',
         [AdminSections.CHAT_GATEWAYS]: 'Текстові шлюзи',
         [AdminSections.SKILLS]: 'Навички оператора',
         [AdminSections.BUCKETS]: 'Кошики',
