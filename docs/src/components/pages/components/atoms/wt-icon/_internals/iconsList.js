@@ -77,14 +77,6 @@ export default [
   'done',
   'attention',
 
-  'widget-occupancy',
-  'widget-utilization',
-  'widget-missed',
-  'widget-handles',
-  'widget-inbound',
-  'widget-avg-hold',
-  'widget-avg-talk',
-
   'call',
   'call--filled',
   'call-end',
