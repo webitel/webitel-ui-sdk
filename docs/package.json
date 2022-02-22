@@ -12,7 +12,7 @@
     "link-local-webitel-ui": "rm -rf node_modules/@webitel/ui-sdk/* && cp -r -t node_modules/@webitel/ui-sdk ${HOME}/Projects/webitel-ui-sdk/src ${HOME}/Projects/webitel-ui-sdk/dist"
   },
   "dependencies": {
-    "@webitel/ui-sdk": "^1.0.18",
+    "@webitel/ui-sdk": "^0.2.1",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
     "deepmerge": "^4.2.2",
