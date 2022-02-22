@@ -1,5 +1,13 @@
 <template>
   <div class="playground">
+    <wt-input style="width: 300px;" value="lorem lorem lorem lorem lorem lorem">
+      <template slot="after-input">
+        <wt-icon icon="edit"></wt-icon>
+        <wt-icon icon="edit"></wt-icon>
+        <wt-icon icon="edit"></wt-icon>
+        <wt-icon icon="edit"></wt-icon>
+      </template>
+    </wt-input>
     <wt-slider vertical></wt-slider>
     <wt-slider></wt-slider>
     <article class="buttons">
