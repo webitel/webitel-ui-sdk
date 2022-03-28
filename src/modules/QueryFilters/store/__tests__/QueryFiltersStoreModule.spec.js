@@ -67,6 +67,12 @@ describe('QueryFiltersStoreModule actions', () => {
     expect(context.commit)
       .toHaveBeenCalledWith('SET_FILTER', { filter: filter.filter, value: [] });
   });
+  it('SET_FILTER: sets "false" value filter', () => {
+    const filter = { filter: valueFilter, value: false };
+    module.actions.SET_FILTER(context, filter);
+    expect(context.commit)
+      .toHaveBeenCalledWith('SET_FILTER', { filter: filter.filter, value: false });
+  });
   it('calls RESET_FILTERS mutation on RESET_FILTERS action call', () => {
     module.actions.RESET_FILTERS(context);
     expect(context.commit).toHaveBeenCalledWith('RESET_FILTERS');
