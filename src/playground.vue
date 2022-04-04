@@ -1,5 +1,8 @@
 <template>
   <div class="playground">
+    <wt-avatar
+      badge
+    ></wt-avatar>
     <wt-input style="width: 300px;" value="lorem lorem lorem lorem lorem lorem">
       <template slot="after-input">
         <wt-icon icon="edit"></wt-icon>

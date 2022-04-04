@@ -1,0 +1,9 @@
+:root {
+  --avatar-size--md: var(--spacing-md);
+  --avatar-size: var(--avatar-size--md);
+
+  --online-color: var(--true-color);
+  --dnd-color: var(--accent-color);
+  --busy-color: var(--false-color);
+  --offline-color: var(--secondary-color);
+}

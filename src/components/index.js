@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import WtAvatar from './atoms/wt-avatar/wt-avatar.vue';
+import WtBadge from './atoms/wt-badge/wt-badge.vue';
 import WtIcon from './atoms/wt-icon/wt-icon.vue';
 import WtIndicator from './atoms/wt-indicator/wt-indicator.vue';
 import WtInputInfo from './atoms/wt-input-info/wt-input-info.vue';
@@ -48,6 +50,8 @@ import WtTableActions from './organisms/wt-table-actions/wt-table-actions.vue';
 import WtTableColumnSelect from './organisms/wt-table-column-select/wt-table-column-select.vue';
 
 const Components = {
+  WtAvatar,
+  WtBadge,
   WtIcon,
   WtIndicator,
   WtInputInfo,
