@@ -1,7 +1,7 @@
 import debounce from '../debounce';
 
 describe('debounce', () => {
-  it('debounces call', async (done) => {
+  it('debounces call', async () => {
     let isFnCalled = false;
     let fn = () => { isFnCalled = true; };
     fn = debounce(fn, 50);
@@ -9,7 +9,6 @@ describe('debounce', () => {
     expect(isFnCalled).toBeFalsy();
     await setTimeout(() => {
       expect(isFnCalled).toBeTruthy();
-      done();
     }, 100);
   });
 });

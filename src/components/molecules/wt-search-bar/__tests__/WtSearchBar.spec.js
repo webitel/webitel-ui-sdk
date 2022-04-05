@@ -12,7 +12,7 @@ describe('WtSearchBar', () => {
     expect(wrapper.classes('wt-search-bar')).toBe(true);
   });
 
-  it('debounces search event when debounce prop is true', async (done) => {
+  it('debounces search event when debounce prop is true', async () => {
     const props = {
       value: '',
       debounce: true,
@@ -30,7 +30,6 @@ describe('WtSearchBar', () => {
     expect(wrapper.emitted().search).toBeFalsy();
     await setTimeout(() => {
       expect(wrapper.emitted().search[0].length).toBe(1);
-      done();
     }, 1000);
   });
 });

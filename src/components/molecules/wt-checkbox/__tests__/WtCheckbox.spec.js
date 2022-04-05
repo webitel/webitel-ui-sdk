@@ -35,7 +35,7 @@ describe('WtCheckbox', () => {
       },
       propsData: { selected },
     });
-    wrapper.find('.wt-checkbox__wrapper').trigger('click');
-    expect(wrapper.emitted().change.pop()).toEqual([!selected]);
+    wrapper.find('.wt-checkbox__input').trigger('change');
+    expect(wrapper.emitted().change[0]).toEqual([!selected]);
   });
 });

@@ -36,7 +36,7 @@ describe('WtRadio', () => {
       },
       propsData: { selected, value },
     });
-    wrapper.find('.wt-radio__wrapper').trigger('click');
-    expect(wrapper.emitted().input.pop()).toEqual([value]);
+    wrapper.find('.wt-radio__input').trigger('input');
+    expect(wrapper.emitted().input[0]).toEqual([value]);
   });
 });

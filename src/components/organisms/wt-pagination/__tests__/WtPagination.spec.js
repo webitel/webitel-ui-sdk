@@ -7,7 +7,7 @@ describe('WtPagination', () => {
     expect(wrapper.classes('wt-pagination')).toBe(true);
   });
 
-  it('debounces size change event when debounce prop is true', async (done) => {
+  it('debounces size change event when debounce prop is true', async () => {
     const props = {
       size: '10',
       debounce: true,
@@ -21,7 +21,6 @@ describe('WtPagination', () => {
     expect(wrapper.emitted().change).toBeFalsy();
     await setTimeout(() => {
       expect(wrapper.emitted().change[0].length).toBe(1);
-      done();
     }, 1000);
   });
 

@@ -43,7 +43,7 @@ describe('Auth', () => {
     expect(wrapper.classes('auth-wrap')).toBe(true);
   });
 
-  it('sets token, gets session and opens app after auth token message emit', async (done) => {
+  it('sets token, gets session and opens app after auth token message emit', async () => {
     const accessToken = 'hello there';
     window.postMessage({ accessToken }, '*');
     await setTimeout(() => {
@@ -51,7 +51,6 @@ describe('Auth', () => {
       expect(userinfoAPI.getSession).toHaveBeenCalled();
       expect(userinfoAPI.getApplicationsAccess).toHaveBeenCalled();
       expect(router.replace).toHaveBeenCalled();
-      done();
     }, 100);
   });
 });

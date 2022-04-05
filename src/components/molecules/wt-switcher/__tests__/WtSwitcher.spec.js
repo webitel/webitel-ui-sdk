@@ -25,7 +25,7 @@ describe('WtSwitcher', () => {
       stubs: { WtLabel },
       propsData: { value },
     });
-    wrapper.find('.wt-switcher__wrapper').trigger('click');
-    expect(wrapper.emitted().change.pop()).toEqual([!value]);
+    wrapper.find('.wt-switcher__input').trigger('change');
+    expect(wrapper.emitted().change[0]).toEqual([!value]);
   });
 });
