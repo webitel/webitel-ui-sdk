@@ -33,7 +33,7 @@ export default {
     border-radius: 50%;
 
     &--outside {
-      transform: translate(-100%, -100%);
+      transform: translate(100%, -100%);
     }
   }
 </style>

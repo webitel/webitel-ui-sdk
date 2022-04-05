@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-player></wt-player>
     <wt-avatar
       badge
     ></wt-avatar>
@@ -144,7 +145,6 @@
           <wt-button outline color="transfer">Transfer</wt-button>
         </div>
       </article>
-      <wt-player></wt-player>
       <wt-app-header>
         <wt-status-select style="width: 160px;"></wt-status-select>
         <wt-switcher label="Contact Center"></wt-switcher>

@@ -15,6 +15,8 @@ import BorderRadius from '../components/pages/style/border-radius/border-radius.
 
 import ComponentsDocs from '../components/pages/components/components-docs.vue';
 // atoms
+import WtAvatarDocs from '../components/pages/components/atoms/wt-avatar/wt-avatar-docs.vue';
+import WtBadgeDocs from '../components/pages/components/atoms/wt-badge/wt-badge-docs.vue';
 import WtChipDocs from '../components/pages/components/atoms/wt-chip/wt-chip-docs.vue';
 import WtBtnDocs from '../components/pages/components/atoms/wt-button/wt-button-docs.vue';
 import WtDividerDocs from '../components/pages/components/atoms/wt-divider/wt-divider-docs.vue';
@@ -100,6 +102,7 @@ import ClickawayDirectiveDocs
   from '../components/pages/directives/clickaway-directive/clickaway-directive-docs.vue';
 
 import EnumsDocs from '../components/pages/enums/enums-docs.vue';
+import AbstractUserStatusEnumDocs from '../components/pages/enums/abstract-user-status/abstract-user-status-enum-docs.vue';
 import AgentStatusEnumDocs from '../components/pages/enums/agent-status/agent-status-enum-docs.vue';
 import WebitelApplicationsEnumDocs
   from '../components/pages/enums/webitel-applications/webitel-applications-enum-docs.vue';
@@ -212,6 +215,16 @@ const routes = [
     component: ComponentsDocs,
     children: [
       // atoms
+      {
+        path: 'avatar',
+        name: 'avatar-docs',
+        component: WtAvatarDocs,
+      },
+      {
+        path: 'badge',
+        name: 'badge-docs',
+        component: WtBadgeDocs,
+      },
       {
         path: 'context-menu',
         name: 'context-menu-docs',
@@ -474,6 +487,11 @@ const routes = [
     name: 'enums',
     component: EnumsDocs,
     children: [
+      {
+        path: 'abstract-user-status',
+        name: 'abstract-user-status',
+        component: AbstractUserStatusEnumDocs,
+      },
       {
         path: 'agent-status',
         name: 'agent-status',

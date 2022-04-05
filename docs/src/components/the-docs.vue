@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 1.0.21</h1>
+          <h1>Webitel UI SDK v. 1.0.28</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -94,6 +94,16 @@ export default {
         value: 'components',
         route: '/components',
         subNav: [
+          {
+            name: 'Avatar',
+            value: 'avatar',
+            route: 'avatar',
+          },
+          {
+            name: 'Badge',
+            value: 'badge',
+            route: 'badge',
+          },
           {
             name: 'Button Select',
             value: 'button-select',
@@ -340,6 +350,11 @@ export default {
         value: 'enums',
         route: '/enums',
         subNav: [
+          {
+            name: 'Abstract User Status',
+            value: 'abstract-user-status',
+            route: 'abstract-user-status',
+          },
           {
             name: 'Agent Status',
             value: 'agent-status',

@@ -54,6 +54,30 @@ export default {
         default: 'false',
       },
       {
+        value: 'mime',
+        code: '<wt-player mime="video"></wt-player>',
+        default: 'audio',
+        description: 'On mime type depends, wt-player will draw a video or audio component',
+      },
+      {
+        value: 'resetOnEnd',
+        code: '<wt-player reset-on-end></wt-player>',
+        default: 'false',
+        description: 'Plyr-specific prop. Resets player position to start on file end.',
+      },
+      {
+        value: 'invertTime',
+        code: '<wt-player invert-time></wt-player>',
+        default: 'true',
+        description: 'Plyr-specific prop.',
+      },
+      {
+        value: 'resetVolume',
+        code: '<wt-player reset-volume></wt-player>',
+        default: 'false',
+        description: 'plyr is caching volume settings ("muted" too) so we could reset them at init',
+      },
+      {
         value: 'download',
         code: '<wt-player :loop="false"></wt-player>',
         type: ['Boolean', 'String', 'Function'],
