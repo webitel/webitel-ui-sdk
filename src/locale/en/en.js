@@ -26,6 +26,8 @@ export default {
     search: 'Search',
     open: 'Open',
     name: 'Name',
+    expand: 'Expand',
+    collapse: 'Collapse',
     lang: {
       en: 'English',
       ru: 'Русский',

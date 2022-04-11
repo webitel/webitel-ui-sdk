@@ -26,6 +26,8 @@ export default {
     search: 'Пошук',
     open: 'Відкрити',
     name: 'Ім\'я',
+    expand: 'Розгорнути',
+    collapse: 'Згорнути',
     lang: {
       en: 'English',
       ru: 'Русский',

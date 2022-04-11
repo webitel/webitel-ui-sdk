@@ -112,7 +112,6 @@
         const inputEl = this.$refs['wt-textarea'];
         const defaultInputPadding = getComputedStyle(document.documentElement)
           .getPropertyValue('--textarea-padding');
-        console.info(defaultInputPadding, afterWrapperWidth);
         inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
       },
     },
