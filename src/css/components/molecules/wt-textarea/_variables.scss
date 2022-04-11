@@ -1,13 +1,5 @@
 
 :root {
   --textarea-min-height: 100px;
-  --textarea-padding:
-    var(--input-padding)
-    calc(
-      var(--input-padding)
-      + var(--icon-sm-size)
-      + var(--spacing-xs)
-    )
-    var(--input-padding)
-    var(--input-padding); // right reset icon 16px
+  --textarea-padding: var(--input-padding);
 }

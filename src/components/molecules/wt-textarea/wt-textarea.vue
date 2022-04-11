@@ -16,20 +16,24 @@
     <div class="wt-textarea__wrapper">
       <textarea
         :id="name"
+        ref="wt-textarea"
         class="wt-textarea__textarea"
         :value="value"
         :placeholder="placeholder || label"
         :disabled="disabled"
         v-on="listeners"
       ></textarea>
-      <wt-icon-btn
-        class="wt-textarea__reset-icon-btn"
-        :class="{ 'hidden': !value }"
-        icon="close--filled"
-        size="sm"
-        :disabled="disabled"
-        @click="$emit('input', '')"
-      ></wt-icon-btn>
+      <div class="wt-textarea__after-wrapper" ref="after-wrapper">
+        <slot name="after-input"></slot>
+        <wt-icon-btn
+          class="wt-textarea__reset-icon-btn"
+          :class="{ 'hidden': !value }"
+          icon="close--filled"
+          size="sm"
+          :disabled="disabled"
+          @click="$emit('input', '')"
+        ></wt-icon-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -101,6 +105,19 @@
           event.preventDefault();
         }
       },
+
+      updateInputPaddings() {
+        // cant test this thing cause vue test utils doesnt render elements width :/
+        const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
+        const inputEl = this.$refs['wt-textarea'];
+        const defaultInputPadding = getComputedStyle(document.documentElement)
+          .getPropertyValue('--textarea-padding');
+        console.info(defaultInputPadding, afterWrapperWidth);
+        inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
+      },
+    },
+    mounted() {
+      this.updateInputPaddings();
     },
   };
 </script>
@@ -122,17 +139,6 @@
     .wt-textarea:hover &,
     .wt-textarea:focus-within & {
       color: var(--form-label--hover-color);
-    }
-  }
-
-  .wt-textarea__reset-icon-btn {
-    position: absolute;
-    top: var(--input-icon-margin);
-    right: var(--input-icon-margin);
-
-    .wt-textarea:not(:focus-within) & {
-      opacity: 0;
-      pointer-events: none;
     }
   }
 
@@ -167,8 +173,18 @@
   }
 
   /* make icons black */
-  .wt-textarea:hover ::v-deep .wt-icon__icon,
-  .wt-textarea:focus-within ::v-deep .wt-icon__icon {
+  .wt-textarea:hover ::v-deep .wt-icon-btn:not(.wt-textarea__reset-icon-btn) .wt-icon__icon,
+  .wt-textarea:focus-within ::v-deep .wt-icon-btn:not(.wt-textarea__reset-icon-btn) .wt-icon__icon {
     fill: var(--icon-color--hover);
+  }
+
+  .wt-textarea__after-wrapper {
+    display: flex;
+    gap: var(--input-after-wrapper-gap);
+    align-items: center;
+    position: absolute;
+    top: var(--input-icon-margin);
+    right: var(--input-icon-margin);
+    pointer-events: auto; // override --disabled p-events none
   }
 </style>

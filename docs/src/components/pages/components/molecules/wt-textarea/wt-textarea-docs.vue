@@ -99,6 +99,10 @@
           scope: [{ name: 'label' }],
           description: 'Custom label slot',
         },
+        {
+          name: 'after-input',
+          description: 'Pass anything you want to be after input (like icon actions), but inside border',
+        },
       ],
     }),
     mounted() {

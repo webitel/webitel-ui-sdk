@@ -1,6 +1,12 @@
 <template>
   <div class="playground">
-    <wt-player></wt-player>
+    <wt-textarea v-model="date">
+      <template slot="after-input"><wt-icon-btn icon="edit"></wt-icon-btn></template>
+    </wt-textarea>
+    <wt-textarea v-model="date">
+    </wt-textarea>
+    <wt-textarea value="lorem" disabled>
+    </wt-textarea>
     <wt-avatar
       size="xs"
       badge
