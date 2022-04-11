@@ -1,6 +1,11 @@
 :root {
-  --avatar-size--md: var(--spacing-md);
-  --avatar-size: var(--avatar-size--md);
+  --avatar-size--size-xs: calc(var(--_spacing-multiplicator) * 3);
+  --avatar-size--size-sm: calc(var(--_spacing-multiplicator) * 4);
+  --avatar-size--size-md: calc(var(--_spacing-multiplicator) * 5);
+  --avatar-size--size-lg: calc(var(--_spacing-multiplicator) * 9);
+  --avatar-size--size-xl: calc(var(--_spacing-multiplicator) * 12);
+
+  --avatar-size: var(--avatar-size--size-md);
 
   --online-color: var(--true-color);
   --dnd-color: var(--accent-color);

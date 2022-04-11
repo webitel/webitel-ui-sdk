@@ -13,6 +13,32 @@
         ></wt-avatar>
         <pre><code class="language-html">&lt;wt-avatar :status="AbstractUserStatus.ACTIVE" badged&gt;&lt;/wt-avatar&gt;</code></pre>
       </div>
+      <div class="example-wrapper avatars-row">
+        <wt-avatar
+          :status="AbstractUserStatus.ACTIVE"
+          size="xs"
+          badge
+        ></wt-avatar>
+        <wt-avatar
+          :status="AbstractUserStatus.ACTIVE"
+          size="sm"
+          badge
+        ></wt-avatar>
+        <wt-avatar
+          :status="AbstractUserStatus.ACTIVE"
+          badge
+        ></wt-avatar>
+        <wt-avatar
+          :status="AbstractUserStatus.ACTIVE"
+          size="lg"
+          badge
+        ></wt-avatar>
+        <wt-avatar
+          :status="AbstractUserStatus.ACTIVE"
+          size="xl"
+          badge
+        ></wt-avatar>
+      </div>
     </article>
     <component-props
       :properties="properties"
@@ -34,7 +60,7 @@
           code: '<wt-avatar size="md"></wt-avatar>',
           type: 'String',
           default: 'md',
-          options: ['md'],
+          options: ['xs', 'sm', 'md', 'lg', 'xl'],
           description: 'Avatar size',
         },
         {
@@ -61,4 +87,9 @@
 </script>
 
 <style lang="scss" scoped>
+.avatars-row {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: nowrap;
+}
 </style>

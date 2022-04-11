@@ -14,7 +14,7 @@ describe('Abstract Api Filter', () => {
   const filterQuery = 'jest';
   const filterSchema = new ApiFilterSchema({ locale: {} });
   const searchMock = jest.fn();
-  const fetchSelectedMock = jest.fn();
+  const fetchSelectedMock = jest.fn(() => ({ items: [] }));
   jest.spyOn(filterSchema, 'search').mockImplementation(searchMock);
   jest.spyOn(filterSchema, 'fetchSelected').mockImplementation(fetchSelectedMock);
   const store = new Vuex.Store({

@@ -2,6 +2,22 @@
   <div class="playground">
     <wt-player></wt-player>
     <wt-avatar
+      size="xs"
+      badge
+    ></wt-avatar>
+    <wt-avatar
+      size="sm"
+      badge
+    ></wt-avatar>
+    <wt-avatar
+      badge
+    ></wt-avatar>
+    <wt-avatar
+      size="lg"
+      badge
+    ></wt-avatar>
+    <wt-avatar
+      size="xl"
       badge
     ></wt-avatar>
     <wt-input style="width: 300px;" value="lorem lorem lorem lorem lorem lorem">

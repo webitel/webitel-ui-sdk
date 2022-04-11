@@ -55,10 +55,36 @@ export default {
     position: relative;
     width: var(--avatar-size);
     height: var(--avatar-size);
+    user-select: none;
 
     &__img {
       width: 100%;
       height: 100%;
+    }
+
+    &--size-xs {
+      width: var(--avatar-size--size-xs);
+      height: var(--avatar-size--size-xs);
+    }
+
+    &--size-sm {
+      width: var(--avatar-size--size-sm);
+      height: var(--avatar-size--size-sm);
+    }
+
+    &--size-md {
+      width: var(--avatar-size--size-md);
+      height: var(--avatar-size--size-md);
+    }
+
+    &--size-lg {
+      width: var(--avatar-size--size-lg);
+      height: var(--avatar-size--size-lg);
+    }
+
+    &--size-xl {
+      width: var(--avatar-size--size-xl);
+      height: var(--avatar-size--size-xl);
     }
   }
 </style>
