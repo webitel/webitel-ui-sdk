@@ -24,6 +24,7 @@
       :tags="tags"
       :autocomplete-items="autocompleteOptions"
       :placeholder="placeholder || label"
+      :separators="['   ']"
       v-on="listeners"
     >
       <template slot="tag-actions" slot-scope="{ index, performDelete }">

@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -25,7 +25,6 @@
   ],
   "dependencies": {
     "@johmun/vue-tags-input": "^2.1.0",
-    "bamboo-jest-reporter": "^1.0.3",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.1",
     "deep-copy": "^1.4.2",
@@ -34,7 +33,6 @@
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "plyr": "3.6.2",
-    "svg-sprite-loader": "^5.0.0",
     "vue": "^2.6.11",
     "vue-i18n": "^8.18.2",
     "vue-multiselect": "^2.1.6",
@@ -51,16 +49,18 @@
     "@vue/cli-plugin-unit-jest": "^5.0.4",
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/vue2-jest": "^27.0.0-alpha.4",
     "@vue/test-utils": "^1.3.0",
+    "@vue/vue2-jest": "^27.0.0-alpha.4",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "bamboo-jest-reporter": "^1.0.3",
+    "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.0",
     "sass": "^1.49.11",
     "sass-loader": "^10.2.0",
-    "svg-url-loader": "^6.0.0",
+    "svg-sprite-loader": "^6.0.11",
+    "svg-url-loader": "^7.1.1",
     "vue-template-compiler": "^2.6.11",
     "vuex": "^3.6.2"
   }
