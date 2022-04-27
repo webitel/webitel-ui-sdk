@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-tags-input v-model="select.stringOptions"></wt-tags-input>
     <wt-textarea v-model="date">
       <template slot="after-input"><wt-icon-btn icon="edit"></wt-icon-btn></template>
     </wt-textarea>
