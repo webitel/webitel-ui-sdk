@@ -130,6 +130,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
         [AdminSections.QUEUES]: 'Queues',
         [AdminSections.STORAGE]: 'Storage',
+        [AdminSections.STORAGE]: 'Cognitive profiles',
         [AdminSections.MEDIA]: 'Media',
         [AdminSections.BLACKLIST]: 'Call lists',
         [AdminSections.ROLES]: 'Roles',

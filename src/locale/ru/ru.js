@@ -130,6 +130,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Группы ресурсов',
         [AdminSections.QUEUES]: 'Очереди',
         [AdminSections.STORAGE]: 'Хранилища',
+        [AdminSections.COGNITIVE_PROFILES]: 'Языковые профили',
         [AdminSections.ROLES]: 'Роли',
         [AdminSections.OBJECTS]: 'Разделы',
       },

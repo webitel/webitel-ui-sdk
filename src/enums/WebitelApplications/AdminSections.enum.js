@@ -33,6 +33,7 @@ const AdminSections = Object.freeze({
 
   // INTEGRATIONS
   STORAGE: 'storage',                   // scope: storage_profile
+  COGNITIVE_PROFILES: 'cognitive-profiles',  // scope: cognitive_profile
 
   // PERMISSIONS
   OBJECTS: 'objects',                // permissions: add
