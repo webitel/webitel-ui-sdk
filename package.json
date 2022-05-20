@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "1.0.41",
+  "version": "1.0.45",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix",
     "publish-lib": "npm run test:unit && npm run build && npm publish --access public",
+    "publish-lib:testless": "npm run build && npm publish --access public",
     "prepare": "husky install"
   },
   "main": "./dist/@webitel/ui-sdk.common.js",
@@ -25,14 +26,17 @@
   ],
   "dependencies": {
     "@johmun/vue-tags-input": "^2.1.0",
-    "csv-stringify": "^5.5.3",
     "core-js": "^3.6.5",
+    "csv-stringify": "^5.5.3",
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.0.3",
     "file-saver": "^2.0.2",
+    "floating-vue": "^1.0.0-beta.17",
+    "i": "^0.3.7",
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "node-polyfill-webpack-plugin": "^1.1.4",
+    "npm": "^8.10.0",
     "plyr": "3.6.2",
     "vue": "^2.6.11",
     "vue-i18n": "^8.18.2",

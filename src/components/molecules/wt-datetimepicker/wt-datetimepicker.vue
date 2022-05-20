@@ -1,11 +1,12 @@
 <template>
-  <div
+  <v-dropdown
     class="wt-datetimepicker"
     :class="{
       'wt-datetimepicker--active': isOpened,
       'wt-datetimepicker--disabled': disabled,
     }"
-    v-clickaway="close"
+    :shown.sync="isOpened"
+    placement="bottom-start"
   >
     <wt-label :disabled="disabled" v-bind="labelProps">
       <!-- @slot Custom input label -->
@@ -13,11 +14,8 @@
     </wt-label>
     <div
       class="wt-datetimepicker__preview"
-      :class="{'wt-datetimepicker__preview--opened': isOpened}"
       tabindex="0"
-      @click="isOpened = !isOpened"
       @keyup.enter="isOpened = !isOpened"
-      @keyup.esc="isOpened = false"
     >
       <wt-icon class="wt-datetimepicker__calendar-icon" icon="calendar"></wt-icon>
       <input
@@ -26,57 +24,61 @@
         autocomplete="off"
         readonly
       >
-      <wt-icon class="wt-datetimepicker__arrow-icon" icon="arrow-down"></wt-icon>
+      <wt-icon
+        class="wt-datetimepicker__arrow-icon"
+        icon="arrow-down"
+      ></wt-icon>
     </div>
-
-    <div
-      class="wt-datetimepicker__form"
-      v-show="isOpened"
-    >
-      <div class="wt-datetimepicker__quick-filters-wrapper">
+    <template v-slot:popper>
+      <div
+        class="wt-datetimepicker__form"
+      >
+        <div class="wt-datetimepicker__quick-filters-wrapper">
         <span class="wt-datetimepicker__quick-filter" @click="setLastHour">
           {{$t('webitelUI.datetimepicker.lastHour')}}
         </span>
-        <span class="wt-datetimepicker__quick-filter" @click="setLastDay">
+          <span class="wt-datetimepicker__quick-filter" @click="setLastDay">
                 {{$t('webitelUI.datetimepicker.lastDay')}}
         </span>
+        </div>
+        <div class="wt-datetimepicker__form-wrapper">
+          <!--        <datepicker-->
+          <!--          class="wt-datetimepicker__datepicker"-->
+          <!--          :value="draft"-->
+          <!--          :maximum-view="'day'"-->
+          <!--          :disabled-dates="disabledDates"-->
+          <!--          monday-first-->
+          <!--          inline-->
+          <!--          @input="setDraft($event.getTime())"-->
+          <!--        ></datepicker>-->
+          <wt-datepicker
+            class="wt-datetimepicker__datepicker"
+            :value="draft"
+            :maximum-view="'day'"
+            :disabled-dates="disabledDates"
+            monday-first
+            inline
+            @change="setDraft"
+          ></wt-datepicker>
+          <wt-timepicker
+            class="wt-datetimepicker__timepicker"
+            v-model="draft"
+            format="hh:mm"
+            date-mode
+          ></wt-timepicker>
+        </div>
+        <div class="wt-datetimepicker__actions">
+          <wt-button @click="input">
+            {{$t('reusable.add')}}
+          </wt-button>
+          <wt-button color="secondary" @click="close">
+            {{$t('reusable.cancel')}}
+          </wt-button>
+        </div>
       </div>
-      <div class="wt-datetimepicker__form-wrapper">
-<!--        <datepicker-->
-<!--          class="wt-datetimepicker__datepicker"-->
-<!--          :value="draft"-->
-<!--          :maximum-view="'day'"-->
-<!--          :disabled-dates="disabledDates"-->
-<!--          monday-first-->
-<!--          inline-->
-<!--          @input="setDraft($event.getTime())"-->
-<!--        ></datepicker>-->
-        <wt-datepicker
-          class="wt-datetimepicker__datepicker"
-          :value="draft"
-          :maximum-view="'day'"
-          :disabled-dates="disabledDates"
-          monday-first
-          inline
-          @change="setDraft"
-        ></wt-datepicker>
-        <wt-timepicker
-          class="wt-datetimepicker__timepicker"
-          v-model="draft"
-          format="hh:mm"
-          date-mode
-        ></wt-timepicker>
-      </div>
-      <div class="wt-datetimepicker__actions">
-        <wt-button @click="input">
-          {{$t('reusable.add')}}
-        </wt-button>
-        <wt-button color="secondary" @click="close">
-          {{$t('reusable.cancel')}}
-        </wt-button>
-      </div>
-    </div>
-  </div>
+
+    </template>
+  </v-dropdown>
 </template>
 
 <script>
@@ -206,16 +208,12 @@
   }
 
   .wt-datetimepicker__form {
-    position: absolute;
-    top: 100%;
-    left: 0;
     padding: var(--datetimepicker-form-padding);
     background: var(--datetimepicker-form-bg-color);
     box-sizing: border-box;
     border: var(--datetimepicker-border);
     border-color: var(--form-border-color);
     border-radius: var(--border-radius);
-    z-index: var(--datetimepicker-form-z-index);
   }
 
   .wt-datetimepicker__quick-filters-wrapper {
@@ -283,7 +281,9 @@
     .wt-datetimepicker__preview__input {
       border-color: var(--form-border--active-color);
     }
+  }
 
+  .wt-datetimepicker--active {
     .wt-datetimepicker__arrow-icon {
       transform: translateY(-50%) rotate(180deg);
     }

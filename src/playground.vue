@@ -1,5 +1,8 @@
 <template>
   <div class="playground">
+    <wt-datetimepicker
+      v-model="date"
+    ></wt-datetimepicker>
     <wt-tags-input v-model="select.stringOptions"></wt-tags-input>
     <wt-textarea v-model="date">
       <template slot="after-input"><wt-icon-btn icon="edit"></wt-icon-btn></template>
@@ -83,9 +86,6 @@
     </article>
     <section>
       <wt-checkbox></wt-checkbox>
-      <wt-datetimepicker
-        v-model="date"
-      ></wt-datetimepicker>
       <wt-navigation-bar
         :current-app="'history'"
         :nav="[

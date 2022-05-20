@@ -68,3 +68,8 @@ a {
   opacity: 0;
   pointer-events: none;
 }
+
+// https://github.com/Akryum/floating-vue/issues/488
+.v-popper__arrow-container {
+  display: none;
+}

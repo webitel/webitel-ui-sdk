@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import FloatingVue from 'floating-vue';
+import 'floating-vue/dist/style.css';
 import App from './the-app.vue';
 import './directives'; // init all directives
 import './filters'; // init all filters
@@ -12,6 +14,10 @@ import router from './router';
 
 Vue.config.productionTip = false;
 Vue.prototype.$eventBus = eventBus;
+
+Vue.use(FloatingVue, {
+  arrowOverflow: true,
+});
 
 new Vue({
   i18n,
