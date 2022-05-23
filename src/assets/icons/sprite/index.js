@@ -84,6 +84,7 @@ import './messenger-viber--filled.svg';
 import './messenger-web-chat.svg';
 import './messenger-whatsapp.svg';
 import './messenger-whatsapp--filled.svg';
+import './messenger-messenger.svg';
 import './mic.svg';
 import './mic-muted.svg';
 import './move.svg';

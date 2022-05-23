@@ -18,6 +18,7 @@ export default [
   'messenger-web-chat',
   'messenger-whatsapp',
   'messenger-whatsapp--filled',
+  'messenger-messenger',
   'lock',
   'move',
   'queue-member',
