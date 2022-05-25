@@ -9,14 +9,10 @@
     :for="this.for"
   >
     <slot></slot>
-    <wt-icon-btn
+    <wt-hint
       v-if="hint"
-      class="wt-label__hint"
-      icon="rounded-info"
-      color="outline"
-      :tooltip="hint"
-      :tooltip-position="hintPosition"
-    ></wt-icon-btn>
+    >{{ hint }}
+    </wt-hint>
   </label>
 </template>
 
@@ -42,10 +38,6 @@ export default {
     hint: {
       type: String,
       description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
-    },
-    hintPosition: {
-      type: String,
-      description: 'See wt-icon-btn tooltip-position prop',
     },
   },
 };
@@ -74,17 +66,7 @@ export default {
   }
 }
 
-.wt-label__hint {
-  cursor: pointer;
+.wt-hint {
   margin-left: var(--spacing-xs);
-
-  ::v-deep {
-    .wt-tooltip {
-      width: max-content; // experimental css property
-      width: -moz-max-content; // experimental css property
-      min-width: 120px;
-      max-width: 280px;
-    }
-  }
 }
 </style>

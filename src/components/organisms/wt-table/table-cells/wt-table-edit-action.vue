@@ -1,11 +1,14 @@
 <template>
-  <wt-icon-btn
-    class="table-action"
-    icon="edit"
-    :tooltip="$t('webitelUI.table.tableCells.editActionHint')"
-    tooltip-position="left"
-    @click="$emit('click')"
-  ></wt-icon-btn>
+  <wt-tooltip>
+    <template v-slot:activator>
+      <wt-icon-btn
+        class="table-action"
+        icon="edit"
+        @click="$emit('click')"
+      ></wt-icon-btn>
+    </template>
+    {{ $t('webitelUI.table.tableCells.editActionHint') }}
+  </wt-tooltip>
 </template>
 
 <script>

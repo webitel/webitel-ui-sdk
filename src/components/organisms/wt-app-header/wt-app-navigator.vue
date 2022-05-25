@@ -1,12 +1,17 @@
 <template>
   <div v-clickaway="close" class="wt-app-navigator">
-    <wt-icon-btn
-      :class="{'active': isOpened}"
-      :tooltip="$t('webitelUI.appNavigator.title')"
-      class="wt-app-navigator__btn"
-      icon="app-navigator"
-      @click="isOpened = !isOpened"
-    ></wt-icon-btn>
+    <wt-tooltip>
+      <template v-slot:activator>
+        <wt-icon-btn
+          :class="{'active': isOpened}"
+          class="wt-app-navigator__btn"
+          icon="app-navigator"
+          @click="isOpened = !isOpened"
+        ></wt-icon-btn>
+      </template>
+      {{ $t('webitelUI.appNavigator.title') }}
+    </wt-tooltip>
+
     <transition name="fade">
       <nav
         v-show="isOpened"
@@ -183,11 +188,6 @@ export default {
   z-index: var(--wt-app-header-content-z-index);
   display: flex;
   align-items: center;
-
-  ::v-deep .wt-icon-btn__tooltip {
-    left: 50%;
-    transform: translateX(-100%);
-  }
 }
 
 // dropdown part

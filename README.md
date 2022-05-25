@@ -1,4 +1,4 @@
-# webitel-ui-sdk
+# webitel-ui-sdk (1.0.46)
 
 ## Project setup
 ```

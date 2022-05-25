@@ -1,13 +1,18 @@
 <template>
   <div class="wt-header-actions">
-    <wt-icon-btn
-      v-clickaway="close"
-      :class="{'active': isOpened}"
-      :tooltip="$t('webitelUI.headerActions.account')"
-      class="wt-header-actions__btn"
-      icon="account"
-      @click="isOpened = !isOpened"
-    ></wt-icon-btn>
+    <wt-tooltip>
+      <template v-slot:activator>
+        <wt-icon-btn
+          v-clickaway="close"
+          :class="{'active': isOpened}"
+          class="wt-header-actions__btn"
+          icon="account"
+          @click="isOpened = !isOpened"
+        ></wt-icon-btn>
+      </template>
+      {{ $t('webitelUI.headerActions.account') }}
+    </wt-tooltip>
+
     <transition name="fade">
       <section v-show="isOpened" class="wt-header-actions__panel-wrapper">
         <header v-if="isHeader" class="wt-header-actions__header">
@@ -117,11 +122,6 @@ export default {
   z-index: var(--wt-app-header-content-z-index);
   display: flex;
   align-items: center;
-
-  ::v-deep .wt-icon-btn__tooltip {
-    left: 50%;
-    transform: translateX(-100%);
-  }
 }
 
 .wt-header-actions__panel-wrapper {
