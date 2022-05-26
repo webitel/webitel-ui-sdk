@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import WtTableColumnSelect from '../wt-table-column-select.vue';
 
 describe('WtTableColumnSelect', () => {
@@ -19,7 +19,7 @@ describe('WtTableColumnSelect', () => {
     expect(wrapper.find('wt-table-column-select__popup').exists()).toBe(false);
   });
   it('column select popup is opening by icon-btn click', async () => {
-    const wrapper = shallowMount(WtTableColumnSelect, {
+    const wrapper = mount(WtTableColumnSelect, {
       propsData: {
         headers: [],
       },

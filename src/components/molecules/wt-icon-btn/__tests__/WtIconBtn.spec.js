@@ -13,19 +13,4 @@ describe('WtIconBtn', () => {
     });
     expect(wrapper.classes('wt-icon-btn')).toBe(true);
   });
-
-  it('renders tooltip text when passed', () => {
-    const tooltip = 'Hello there';
-    const wrapper = shallowMount(WtIconBtn, {
-      stubs: {
-        WtTooltip,
-        WtIcon: true,
-      },
-      propsData: {
-        tooltip,
-        icon: 'bucket',
-      },
-    });
-    expect(wrapper.find('.wt-tooltip').text()).toBe(tooltip);
-  });
 });

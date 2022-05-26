@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import WtPagination from '../wt-pagination.vue';
 
 describe('WtPagination', () => {
@@ -25,11 +25,10 @@ describe('WtPagination', () => {
   });
 
   it('changes pages at icon btn click', async () => {
-    const wrapper = shallowMount(WtPagination, {
+    const wrapper = mount(WtPagination, {
       props: { isNext: true, page: 2 },
     });
     const pageControls = wrapper.findAll('.wt-pagination__page-control');
-    console.info(pageControls.at(0).find({ name: 'wt-icon-btn' }));
     pageControls.at(0).vm.$emit('click');
     pageControls.at(1).vm.$emit('click');
     expect(wrapper.emitted().prev.length).toBe(1);
