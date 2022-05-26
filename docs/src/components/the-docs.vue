@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 1.0.46</h1>
+          <h1>Webitel UI SDK v. 2.0.0</h1>
         </wt-headline>
       </template>
       <template slot="main">
@@ -108,6 +108,11 @@ export default {
             name: 'Button Select',
             value: 'button-select',
             route: 'button-select',
+          },
+          {
+            name: 'Hint',
+            value: 'hint',
+            route: 'hint',
           },
           {
             name: 'Context Menu',
