@@ -1,60 +1,54 @@
 <template>
   <aside class="wt-table-actions">
     <slot></slot>
-    <wt-tooltip>
+    <wt-tooltip v-if="isImport">
       <template v-slot:activator>
         <wt-icon-btn
-          v-if="isImport"
           icon="download"
           @click="$emit('input', 'import')"
         ></wt-icon-btn>
       </template>
       {{ $t('reusable.import') }}
     </wt-tooltip>
-    <wt-tooltip>
+    <wt-tooltip v-if="isExport">
       <template v-slot:activator>
         <wt-icon-btn
-          v-if="isExport"
           icon="upload"
           @click="$emit('input', 'export')"
         ></wt-icon-btn>
       </template>
       {{ $t('reusable.export') }}
     </wt-tooltip>
-    <wt-tooltip>
+    <wt-tooltip v-if="isFilterReset">
       <template v-slot:activator>
         <wt-icon-btn
-          v-if="isFilterReset"
           icon="clear"
           @click="$emit('input', 'filterReset')"
         ></wt-icon-btn>
       </template>
       {{ $t('webitelUI.tableActions.filterReset') }}
     </wt-tooltip>
-    <wt-tooltip>
+    <wt-tooltip v-if="isColumnSelect">
       <template v-slot:activator>
         <wt-icon-btn
-          v-if="isColumnSelect"
           icon="column-select"
           @click="$emit('input', 'columnSelect')"
         ></wt-icon-btn>
       </template>
       {{ $t('webitelUI.tableActions.columnSelect') }}
     </wt-tooltip>
-    <wt-tooltip>
+    <wt-tooltip v-if="isRefresh">
       <template v-slot:activator>
         <wt-icon-btn
-          v-if="isRefresh"
           icon="refresh"
           @click="$emit('input', 'refresh')"
         ></wt-icon-btn>
       </template>
       {{ $t('webitelUI.tableActions.refreshTable') }}
     </wt-tooltip>
-    <wt-tooltip>
+    <wt-tooltip v-if="isSettings">
       <template v-slot:activator>
         <wt-icon-btn
-          v-if="isSettings"
           :class="{'active': isSettingsActive}"
           icon="filter"
           @click="$emit('input', 'settings')"

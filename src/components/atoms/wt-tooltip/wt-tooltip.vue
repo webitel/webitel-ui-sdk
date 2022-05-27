@@ -8,6 +8,7 @@
       'wt-tooltip__popper',
        { 'wt-tooltip--contrast__popper': contrast },
      ]"
+    :triggers="['hover', 'focus', 'touch']"
     class="wt-tooltip"
   >
     <slot name="activator"></slot>
@@ -37,5 +38,6 @@ export default {
 .wt-tooltip {
   display: inline-block;
   line-height: 0;
+  height: fit-content;
 }
 </style>
