@@ -49,11 +49,12 @@ export default class CSVExport {
   }
 
   save(csv) {
-    saveAs(csv, `${this.filename}.csv`);
+    const blob = new Blob([csv], { type: 'data:text/csv;charset=utf-8' });
+    saveAs(blob, `${this.filename}.csv`);
   }
 
   async stringify(params = {}) {
-    let csv = 'data:text/csv;charset=utf-8,';
+    let csv = '';
     let isNext = false;
     let columns = params?.fields ? objSnakeToCamel(params?.fields) : [];
     let page = 1;
