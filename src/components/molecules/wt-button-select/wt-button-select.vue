@@ -12,26 +12,28 @@
       <slot></slot>
     </wt-button>
 
-    <wt-button
-      class="wt-button-select__select-btn"
-      v-bind="$attrs"
-      :disabled="disabled"
-      :loading="false"
-      @click="isOpened = !isOpened"
-    >
-      <wt-icon
-        class="wt-button-select__select-arrow"
-        :class="{'wt-button-select__select-arrow--active': isOpened}"
-        icon="arrow-down"
-        :disabled="disabled"
-      ></wt-icon>
-    </wt-button>
-
     <wt-context-menu
-      :visible="isOpened"
       :options="options"
+      :visible="isOpened"
       @click="selectOption"
-    ></wt-context-menu>
+    >
+      <template v-slot:activator>
+        <wt-button
+          class="wt-button-select__select-btn"
+          v-bind="$attrs"
+          :disabled="disabled"
+          :loading="false"
+          @click="isOpened = !isOpened"
+        >
+          <wt-icon
+            class="wt-button-select__select-arrow"
+            :class="{'wt-button-select__select-arrow--active': isOpened}"
+            icon="arrow-down"
+            :disabled="disabled"
+          ></wt-icon>
+        </wt-button>
+      </template>
+    </wt-context-menu>
   </div>
 </template>
 
@@ -69,12 +71,6 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: var(--button-select-buttons-gap);
-
-  .wt-context-menu {
-    position: absolute;
-    top: calc(100% + 1px);
-    left: 0;
-  }
 }
 
 .wt-button-select__button {

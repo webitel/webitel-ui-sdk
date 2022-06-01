@@ -1,5 +1,8 @@
 <template>
   <div class="playground">
+    <wt-button-select :options="['lorem', 'ipsum']">lorem ipsum dolor sit amet</wt-button-select>
+    <br>
+    <wt-button-select disabled>123</wt-button-select>
     <wt-header-actions></wt-header-actions>
     <wt-label hint="hint!">hi</wt-label>
     <wt-tooltip>
@@ -149,8 +152,6 @@
 
       <article class="buttons">
         <wt-button :loading="isLoading" @click="load">Load!</wt-button>
-        <wt-button-select>123</wt-button-select>
-        <wt-button-select disabled>123</wt-button-select>
         <div class="example-wrapper">
 <!--          <wt-button :loading="isLoading" @click="load">Load!</wt-button>-->
           <wt-button loading></wt-button>

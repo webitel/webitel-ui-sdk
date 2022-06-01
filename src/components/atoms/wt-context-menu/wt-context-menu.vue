@@ -1,23 +1,30 @@
 <template>
-  <ul
+  <v-dropdown
     class="wt-context-menu"
-    :class="{'wt-context-menu--hidden': !visible}"
+    :shown="visible"
+    :triggers="['click', 'touch']"
+    placement="bottom-end"
   >
-    <li
-      class="wt-context-menu__option-wrapper"
-      v-for="(option, index) in options"
-      :key="index"
-    >
-<!--      <a> click.prevent prevents redirect to # -->
-      <a
-        class="wt-context-menu__option"
-        href="#"
-        @click.prevent="$emit('click', { option, index })"
+    <slot name="activator"></slot>
+    <template #popper>
+      <ul class="wt-context-menu__menu">
+        <li
+          class="wt-context-menu__option-wrapper"
+          v-for="(option, index) in options"
+          :key="index"
         >
-        {{ option.text || option }}
-      </a>
-    </li>
-  </ul>
+          <!--      <a> click.prevent prevents redirect to # -->
+          <a
+            class="wt-context-menu__option"
+            href="#"
+            @click.prevent="$emit('click', { option, index })"
+          >
+            {{ option.text || option }}
+          </a>
+        </li>
+      </ul>
+    </template>
+  </v-dropdown>
 </template>
 
 <script>
@@ -31,7 +38,7 @@ export default {
     },
     visible: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
 };
@@ -39,6 +46,10 @@ export default {
 
 <style lang="scss" scoped>
 .wt-context-menu {
+  line-height: 0;
+}
+
+.wt-context-menu__menu {
   @extend %typo-body-2;
   min-width: var(--context-menu-min-width);
   max-width: var(--context-menu-max-width);
@@ -47,11 +58,6 @@ export default {
   box-shadow: var(--box-shadow);
   transition: var(--transition);
   z-index: 1;
-
-  &--hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
 }
 
 .wt-context-menu__option-wrapper {
