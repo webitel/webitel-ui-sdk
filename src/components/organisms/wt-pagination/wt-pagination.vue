@@ -12,22 +12,28 @@
       ></wt-input>
     </div>
     <div class="wt-pagination__page-controls">
-      <wt-icon-btn
-        :disabled="!prev"
-        :tooltip="$t('webitelUI.pagination.prev')"
-        class="wt-pagination__page-control"
-        icon="arrow-left"
-        tooltip-position="left"
-        @click="goPrev"
-      ></wt-icon-btn>
-      <wt-icon-btn
-        :disabled="!next"
-        :tooltip="$t('webitelUI.pagination.next')"
-        class="wt-pagination__page-control"
-        icon="arrow-right"
-        tooltip-position="left"
-        @click="goNext"
-      ></wt-icon-btn>
+      <wt-tooltip>
+        <template v-slot:activator>
+          <wt-icon-btn
+            :disabled="!prev"
+            class="wt-pagination__page-control"
+            icon="arrow-left"
+            @click="goPrev"
+          ></wt-icon-btn>
+        </template>
+        {{ $t('webitelUI.pagination.prev') }}
+      </wt-tooltip>
+      <wt-tooltip>
+        <template v-slot:activator>
+          <wt-icon-btn
+            :disabled="!next"
+            class="wt-pagination__page-control"
+            icon="arrow-right"
+            @click="goNext"
+          ></wt-icon-btn>
+        </template>
+        {{ $t('webitelUI.pagination.next') }}
+      </wt-tooltip>
     </div>
   </footer>
 </template>

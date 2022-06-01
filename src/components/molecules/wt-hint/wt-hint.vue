@@ -1,21 +1,21 @@
 <template>
-  <wt-tooltip>
+  <wt-tooltip class="wt-hint">
     <template v-slot:activator>
       <wt-icon-btn
-        icon="bucket"
-        @click="$emit('click')"
+        icon="rounded-info"
+        color="outline"
       ></wt-icon-btn>
     </template>
-    {{ $t('webitelUI.table.tableCells.deleteActionHint') }}
+    <slot></slot>
   </wt-tooltip>
 </template>
 
 <script>
 export default {
-  name: 'wt-table-delete-action',
+  name: 'wt-hint',
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

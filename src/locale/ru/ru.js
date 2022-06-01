@@ -33,6 +33,8 @@ export default {
       ru: 'Русский',
       ua: 'Українська',
     },
+    from: 'От',
+    to: 'До',
   },
   // date-related texts
   date: {

@@ -1,5 +1,5 @@
 <template>
-  <article class="slots">
+  <article class="slots markdown-body">
     <h3>Slots: </h3>
     <article
       class="slots-wrapper"

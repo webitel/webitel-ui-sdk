@@ -1,5 +1,18 @@
 <template>
   <div class="playground">
+    <wt-header-actions></wt-header-actions>
+    <wt-label hint="hint!">hi</wt-label>
+    <wt-tooltip>
+      <template v-slot:activator="{ on }">
+        <wt-icon-btn
+          icon="edit"
+          size="xl"
+          v-on="on"
+        ></wt-icon-btn>
+      </template>
+      tooltip="hello there!"
+    </wt-tooltip>
+
     <wt-datetimepicker
       v-model="date"
     ></wt-datetimepicker>

@@ -32,6 +32,7 @@ import WtTextarea from './molecules/wt-textarea/wt-textarea.vue';
 import WtTimepicker from './molecules/wt-timepicker/wt-timepicker.vue';
 import WtLabel from './molecules/wt-label/wt-label.vue';
 import WtButtonSelect from './molecules/wt-button-select/wt-button-select.vue';
+import WtHint from './molecules/wt-hint/wt-hint.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
@@ -67,6 +68,7 @@ const Components = {
   WtDatetimepicker,
   WtIconBtn,
   WtInput,
+  WtHint,
   WtNotification,
   WtPopup,
   WtProgressBar,

@@ -18,6 +18,11 @@ export default {
     closeOnSelect() {
       return this.filterSchema?.storedProp;
     },
+    label() {
+      return Array.isArray(this.locale.label)
+        ? this.$tc(...this.locale.label)
+        : this.$t(this.locale.label);
+    },
     localizedOptions() {
       const optsHaveLocale = this.options.length && this.options[0].locale; // just check 1st el
       if (optsHaveLocale) {

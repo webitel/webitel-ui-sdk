@@ -1,5 +1,5 @@
 <template>
-  <article class="props">
+  <article class="props markdown-body">
     <h3>Props: </h3>
     <article
       class="props-wrapper"
@@ -25,13 +25,19 @@
       <div class="prop__default" v-if="prop.default"><strong>Default:</strong> {{prop.default}}</div>
       <div v-if="prop.description">
         <strong>Description: </strong>
-        <p>{{prop.description}}</p>
+        <p v-html="md.render(prop.description)"></p>
       </div>
     </article>
   </article>
 </template>
 
 <script>
+import MarkdownIt from 'markdown-it';
+
+const md = new MarkdownIt({
+  linkify: true,
+});
+
   export default {
     name: 'component-props',
     props: {
@@ -40,6 +46,9 @@
         default: () => [],
       },
     },
+    data: () => ({
+      md,
+    }),
   };
 </script>
 

@@ -1,18 +1,18 @@
 <template>
   <div
-    class="wt-select"
     :class="{
       'wt-select--disabled': disabled,
       'wt-select--invalid': invalid,
       'wt-select--clearable': clearable,
       'wt-select--loading': isLoading,
     }"
+    class="wt-select"
   >
     <wt-label
-      class="wt-select__label"
       v-if="hasLabel"
       :disabled="disabled"
       :invalid="invalid"
+      class="wt-select__label"
       v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
@@ -20,19 +20,19 @@
     </wt-label>
     <vue-multiselect
       ref="vue-multiselect"
-      class="wt-select__select"
-      v-bind="$attrs"
-      :value="selectValue"
-      :options="selectOptions"
-      :placeholder="placeholder || label"
-      :limit="1"
+      :allow-empty="allowEmpty"
+      :disabled="disabled"
+      :internal-search="!searchMethod"
       :label="optionLabel"
-      :track-by="trackBy"
+      :limit="1"
       :limit-text="(count) => `+${count}`"
       :loading="false"
-      :internal-search="!searchMethod"
-      :disabled="disabled"
-      :allow-empty="allowEmpty"
+      :options="selectOptions"
+      :placeholder="placeholder || label"
+      :track-by="trackBy"
+      :value="selectValue"
+      class="wt-select__select"
+      v-bind="$attrs"
       v-on="listeners"
     >
 
@@ -47,7 +47,7 @@
       <template slot="singleLabel" slot-scope="{ option }">
         <slot name="singleLabel" v-bind="{ option, optionLabel }">
           <span class="multiselect__single-label">
-            {{ $te(option.locale) ? $t(option.locale) : (option[optionLabel] || option) }}
+            {{ getOptionLabel({ option, optionLabel }) }}
           </span>
         </slot>
       </template>
@@ -56,7 +56,7 @@
       <template slot="option" slot-scope="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
           <span>
-            {{ $te(option.locale) ? $t(option.locale) : (option[optionLabel] || option) }}
+            {{ getOptionLabel({ option, optionLabel }) }}
           </span>
         </slot>
       </template>
@@ -65,9 +65,9 @@
       <template slot="caret" slot-scope="{ toggle }">
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
+          :disabled="disabled"
           class="wt-select__arrow-caret"
           icon="arrow-down"
-          :disabled="disabled"
           @mousedown.native.prevent.stop="toggle"
         ></wt-icon-btn>
       </template>
@@ -76,21 +76,21 @@
       <template slot="clear" slot-scope="{}">
         <wt-icon-btn
           v-if="clearable"
-          class="wt-select__clear"
           :class="{ 'hidden': !isValue }"
           :disabled="disabled"
+          class="wt-select__clear"
           icon="close"
           @click="clearValue"
         ></wt-icon-btn>
       </template>
 
       <template slot="beforeList">
-        <div class="wt-select__loading-wrapper" v-show="isLoading">
+        <div v-show="isLoading" class="wt-select__loading-wrapper">
           <wt-loader size="sm"></wt-loader>
         </div>
       </template>
 
-      <template slot="afterList" v-if="showIntersectionObserver">
+      <template v-if="showIntersectionObserver" slot="afterList">
         <div v-observe-visibility="handleAfterListIntersect"></div>
       </template>
     </vue-multiselect>
@@ -105,9 +105,9 @@
 <script>
 import VueMultiselect from 'vue-multiselect';
 import { ObserveVisibility } from 'vue-observe-visibility';
-import isEmpty from '../../../scripts/isEmpty';
-import debounce from '../../../scripts/debounce';
 import validationMixin from '../../../mixins/validationMixin/validationMixin';
+import debounce from '../../../scripts/debounce';
+import isEmpty from '../../../scripts/isEmpty';
 
 export default {
   name: 'wt-select',
@@ -225,6 +225,13 @@ export default {
   },
 
   methods: {
+    getOptionLabel({ option, optionLabel }) {
+      if (option.locale) {
+        if (Array.isArray(option.locale)) return this.$tc(...option.locale);
+        return this.$t(option.locale);
+      }
+      return option[optionLabel] || option;
+    },
     handleSearchChange(search) {
       if (!this.isApiMode) return;
       this.isLoading = true;
@@ -294,28 +301,28 @@ export default {
 
   .wt-select__arrow-caret {
     position: absolute;
+    z-index: var(--select-caret-z-index);
     top: var(--select-caret-top-pos);
     right: var(--select-caret-right-pos);
-    transform: rotate(0);
     transition: var(--transition);
-    z-index: var(--select-caret-z-index);
+    transform: rotate(0);
   }
 
   ::v-deep .wt-select__clear {
     position: absolute;
+    z-index: var(--select-clear-z-index);
     top: var(--select-clear-top-pos);
     right: var(--select-clear-right-pos);
-    transform: rotate(0);
     transition: var(--transition);
-    z-index: var(--select-clear-z-index);
+    transform: rotate(0);
   }
 
   ::v-deep {
     .multiselect__tags {
       display: flex;
       align-items: center;
-      min-height: var(--select-tags-min-height); // reset original 20px style
       box-sizing: border-box;
+      min-height: var(--select-tags-min-height); // reset original 20px style
       padding: var(--select-tags-padding);
       color: var(--form-input-color);
       border: var(--select-tags-border);
@@ -327,8 +334,8 @@ export default {
         @extend %typo-body-1;
         @include wt-placeholder;
         min-height: var(--select-input-min-height); // reset original 20px style
-        padding: 0;
         margin: 0;
+        padding: 0;
         background: transparent;
       }
 
@@ -340,34 +347,34 @@ export default {
         @extend %typo-body-1;
         @extend .wt-chip;
         position: absolute;
+        z-index: var(--select-chip-z-index);
         right: var(--select-chip-right-pos);
         min-height: var(--select-input-min-height); // reset original 20px style
         margin: 0;
         font-weight: normal;
-        z-index: var(--select-chip-z-index);
 
         /* these before-after elements are fixing issue when chip is visually overflown by
         selected option name (yep, chip has z-index, but its background has 0.3 opacity)*/
         &:before {
-          content: '';
           position: absolute;
+          z-index: -2; // below chip itself
           top: 0;
           right: 0;
           bottom: 0;
           left: 0;
-          z-index: -2; // below chip itself
+          content: '';
           background: var(--main-color);
         }
 
         &:after {
           @extend .wt-chip;
-          content: '';
           position: absolute;
+          z-index: -1; // below chip itself
           top: 0;
           right: 0;
           bottom: 0;
           left: 0;
-          z-index: -1; // below chip itself
+          content: '';
 
         }
       }
@@ -378,33 +385,33 @@ export default {
 
       .multiselect__custom-tag, .multiselect__single-label {
         @extend %typo-body-1;
-        color: var(--form-input-color);
+        display: block;
 
         // text overflow 3 dots
-        display: block;
-        white-space: nowrap;
         overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
+        color: var(--form-input-color);
       }
 
       .multiselect__placeholder {
         @extend %wt-placeholder;
-        padding: 0;
+        overflow: hidden;
         margin: 0;
 
         // text overflow 3 dots
+        padding: 0;
         white-space: nowrap;
-        overflow: hidden;
         text-overflow: ellipsis;
       }
     }
 
     .multiselect__content-wrapper {
       @extend %wt-distant-scrollbar;
+      transition: var(--transition);
       border: var(--select-tags-border);
       border-color: var(--form-border-color);
       border-radius: var(--border-radius);
-      transition: var(--transition);
 
       .multiselect__option {
         @extend %typo-body-1;
@@ -435,15 +442,15 @@ export default {
 
     .wt-select__loading-wrapper {
       position: sticky;
-      width: 100%;
-      height: 300px; // max dropdown panel height
+      z-index: 1;
       top: 0;
       left: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      height: 300px; // max dropdown panel height
       backdrop-filter: blur(4px);
-      z-index: 1;
     }
   }
 
@@ -513,8 +520,8 @@ export default {
   pointer-events: none;
 
   .multiselect--disabled {
-    background: none;
     opacity: 1;
+    background: none;
   }
 
   .wt-select__arrow-caret ::v-deep .wt-icon__icon,
@@ -525,8 +532,8 @@ export default {
   .multiselect {
     ::v-deep {
       .multiselect__tags {
-        background: var(--form-border--disabled-color);
         border-color: var(--form-border--disabled-color);
+        background: var(--form-border--disabled-color);
 
         .multiselect__placeholder {
           @extend %wt-placeholder--disabled;

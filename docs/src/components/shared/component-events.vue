@@ -1,5 +1,5 @@
 <template>
-  <article class="events">
+  <article class="events markdown-body">
     <h3>Events: </h3>
     <article
       class="events-wrapper"

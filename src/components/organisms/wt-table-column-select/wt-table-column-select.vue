@@ -1,10 +1,14 @@
 <template>
   <div class="wt-table-column-select">
-    <wt-icon-btn
-      icon="column-select"
-      :tooltip="$t('webitelUI.tableColumnSelect.title')"
-      @click="openPopup"
-    ></wt-icon-btn>
+    <wt-tooltip>
+      <template v-slot:activator>
+        <wt-icon-btn
+          icon="column-select"
+          @click="openPopup"
+        ></wt-icon-btn>
+      </template>
+      {{ $t('webitelUI.tableColumnSelect.title') }}
+    </wt-tooltip>
     <wt-popup
       v-if="isColumnSelectPopup"
       class="wt-table-column-select__popup"
@@ -16,12 +20,12 @@
       <template slot="main">
         <ul class="wt-table-column-select__popup__list">
           <li
-            class="wt-table-column-select__popup__item"
             v-for="(col, key) of changeableDraft"
             :key="key"
+            class="wt-table-column-select__popup__item"
             @click.capture.prevent="col.show = !col.show"
           >
-            <wt-checkbox v-model="col.show" :label="col.text"/>
+            <wt-checkbox v-model="col.show" :label="col.text" />
           </li>
         </ul>
       </template>
@@ -105,9 +109,9 @@ export default {
 
 .wt-table-column-select__popup__list {
   @extend %wt-scrollbar;
-  max-height: 35vh; // fixme popup fixed sizes
-  width: 550px; // fixme popup fixed sizes
   overflow: auto;
+  width: 550px; // fixme popup fixed sizes
+  max-height: 35vh; // fixme popup fixed sizes
 }
 
 .wt-table-column-select__popup__item {

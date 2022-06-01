@@ -2,83 +2,87 @@
   <section>
     <h2>Tooltip</h2>
     <article>
+      <h3>Tooltip implementation is based on
+        <a class="full-docs-link" href="https://floating-vue.starpad.dev/">Floating Vue</a>
+        lib
+      </h3>
       <div class="example-wrapper">
-        <div class="my-div">
-          Hover me!
-          <wt-tooltip>Hello there!</wt-tooltip>
-        </div>
+        <wt-tooltip>
+          <template v-slot:activator>
+            <div class="my-div">
+              Hover me!
+            </div>
+          </template>
+          Hello there!
+        </wt-tooltip>
         <pre><code class="language-html">
-          &lt;div class="my-div"&gt; Hover me!
-            &lt;wt-tooltip&gt;Hello there!&lt;/wt-tooltip&gt;
-          &lt;/div&gt;
-        </code><code class="language-css">
-          .my-div:hover .wt-tooltip {
-              opacity: 1;
-              pointer-events: auto;
-          }</code></pre>
-        <wt-tooltip contrast visible>Contrast visible tooltip</wt-tooltip>
+          &lt;wt-tooltip&gt;
+          &lt;template v-slot:activator&gt;
+            Hover me!
+          &lt;/template&gt;
+          Hello there!
+        &lt;/wt-tooltip&gt;
+        </code></pre>
       </div>
+      <wt-tooltip contrast>
+        <template v-slot:activator>
+          <div class="my-div">
+            Contrast tooltip is here
+          </div>
+        </template>
+        Hello there!
+      </wt-tooltip>
     </article>
     <component-props
       :properties="properties"
     ></component-props>
-    <article>
-      <h3>Tooltip positioning</h3>
-      <p>By default, tooltip positioning is static. If you want make it absolute, you should do it
-        explicitly in CSS</p>
-      <pre><code class="language-html">
-          &lt;wt-tooltip&gt;1010&lt;/wt-tooltip&gt;
-        </code><code class="language-css">
-          .wt-tooltip { position: absolute; }
-        </code></pre>
-    </article>
     <component-slots
     ></component-slots>
   </section>
 </template>
 
 <script>
-  import Prism from 'prismjs';
+import Prism from 'prismjs';
 
-  export default {
-    name: 'wt-tooltip-docs',
-    data: () => ({
-      properties: [
-        {
-          value: 'contrast',
-          code: '<wt-tooltip contrast></wt-tooltip>',
-          type: 'Boolean',
-          default: 'false',
-          description: 'Inverts tooltip colors',
-        },
-        {
-          value: 'visible',
-          code: '<wt-tooltip visible></wt-tooltip>',
-          type: 'Boolean',
-          default: 'false',
-          description: 'Makes tooltip constantly visible',
-        },
-      ],
-    }),
-    mounted() {
-      Prism.highlightAll();
-    },
-  };
+export default {
+  name: 'wt-tooltip-docs',
+  data: () => ({
+    properties: [
+      {
+        value: 'contrast',
+        code: '<wt-tooltip contrast></wt-tooltip>',
+        type: 'Boolean',
+        default: 'false',
+        description: 'Inverts tooltip colors',
+      },
+      {
+        value: 'placement',
+        code: '<wt-tooltip placement="left"></wt-tooltip>',
+        type: 'String',
+        default: 'auto',
+        description: 'see [**Floating Vue**](https://floating-vue.starpad.dev/api/#placement) docs',
+      },
+    ],
+  }),
+  mounted() {
+    Prism.highlightAll();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .my-div {
-    display: inline-block;
-    padding: 10px;
-    border: 1px solid red;
+.my-div {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid red;
 
-    .wt-tooltip {
-      position: absolute;
-    }
-
-    &:hover .wt-tooltip {
-      opacity: 1;
-      pointer-events: auto;
-    }
+  .wt-tooltip {
+    position: absolute;
   }
+
+  &:hover .wt-tooltip {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
 </style>

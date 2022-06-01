@@ -1,54 +1,43 @@
 <template>
-  <span
-    class="wt-tooltip"
+  <v-tooltip
     :class="{
-      'wt-tooltip--visible': visible,
       'wt-tooltip--contrast': contrast
     }"
+    :placement="placement"
+    :popper-class="[
+      'wt-tooltip__popper',
+       { 'wt-tooltip--contrast__popper': contrast },
+     ]"
+    :triggers="['hover', 'focus', 'touch']"
+    class="wt-tooltip"
   >
-    <slot></slot>
-  </span>
+    <slot name="activator"></slot>
+    <template #popper>
+      <slot></slot>
+    </template>
+  </v-tooltip>
 </template>
 
 <script>
-  export default {
-    name: 'wt-tooltip',
-    props: {
-      visible: {
-        type: Boolean,
-        default: false,
-      },
-      contrast: {
-        type: Boolean,
-        default: false,
-      },
+export default {
+  name: 'wt-tooltip',
+  props: {
+    contrast: {
+      type: Boolean,
+      default: false,
     },
-  };
+    placement: {
+      type: String,
+      default: 'auto',
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .wt-tooltip {
-    @extend %typo-body-1;
-    display: inline-block;
-    min-width: 0;
-    padding: var(--tooltip-padding);
-    color: var(--tooltip-light-text-color);
-    background: var(--tooltip-light-bg-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--tooltip-elevation);
-    transition: var(--transition);
-    opacity: 0;
-    pointer-events: none;
-    z-index: var(--tooltip-z-index);
-
-    &--contrast {
-      color: var(--tooltip-dark-text-color);
-      background: var(--tooltip-dark-bg-color);
-    }
-
-    &--visible, &:hover {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
+.wt-tooltip {
+  display: inline-block;
+  line-height: 0;
+  height: fit-content;
+}
 </style>

@@ -1,7 +1,6 @@
 
 :root {
   --tooltip-padding: var(--spacing-2xs) var(--spacing-xs);
-  --tooltip-z-index: 100;
 
   --tooltip-light-text-color: var(--text-primary-color);
   --tooltip-light-bg-color: var(--main-color);
@@ -9,4 +8,20 @@
   --tooltip-dark-bg-color: var(--contrast-color);
 
   --tooltip-elevation: var(--elevation-10);
+}
+
+// cause we need to set styles to element somewhere in the HTML, not inside .wt-tooltip scope
+.wt-tooltip__popper .v-popper__inner {
+  @extend %typo-body-1;
+  padding: var(--tooltip-padding);
+  color: var(--tooltip-light-text-color);
+  background: var(--tooltip-light-bg-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--tooltip-elevation);
+  transition: var(--transition);
+}
+
+.wt-tooltip--contrast__popper .v-popper__inner {
+  color: var(--tooltip-dark-text-color);
+  background: var(--tooltip-dark-bg-color);
 }

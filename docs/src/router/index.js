@@ -64,6 +64,8 @@ import WtTimeInputDocs
   from '../components/pages/components/molecules/wt-time-input/wt-time-input-docs.vue';
 import WtButtonSelectDocs
   from '../components/pages/components/molecules/wt-button-select/wt-button-select-docs.vue';
+import WtHintDocs
+  from '../components/pages/components/molecules/wt-hint/wt-hint-docs';
 // organisms
 import WtAppHeaderDocs
   from '../components/pages/components/organisms/wt-app-header/wt-app-header-docs.vue';
@@ -286,6 +288,11 @@ const routes = [
         path: 'button-select',
         name: 'button-select',
         component: WtButtonSelectDocs,
+      },
+      {
+        path: 'hint',
+        name: 'hint',
+        component: WtHintDocs,
       },
       {
         path: 'checkbox',

@@ -2,7 +2,7 @@
   <wt-select
     :value="value"
     :options="localizedOptions"
-    :label="$t(filterSchema.locale.label)"
+    :label="label"
     :track-by="filterSchema.storedProp"
     :multiple="filterSchema.multiple"
     v-bind="$attrs"
