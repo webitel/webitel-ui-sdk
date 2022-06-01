@@ -15,6 +15,11 @@ export default {
     closeOnSelect() {
       return this.filterSchema?.storedProp;
     },
+    label() {
+      return Array.isArray(this.locale.label)
+        ? this.$tc(...this.locale.label)
+        : this.$t(this.locale.label);
+    },
   },
   methods: {
     async restoreValue(id) {
