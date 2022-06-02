@@ -6,7 +6,7 @@
     placement="bottom-end"
   >
     <slot name="activator"></slot>
-    <template #popper>
+    <template #popper="{ hide }">
       <ul class="wt-context-menu__menu">
         <li
           class="wt-context-menu__option-wrapper"
@@ -17,7 +17,7 @@
           <a
             class="wt-context-menu__option"
             href="#"
-            @click.prevent="$emit('click', { option, index })"
+            @click.prevent="handleOptionClick({ option, index, hide })"
           >
             {{ option.text || option }}
           </a>
@@ -39,6 +39,12 @@ export default {
     visible: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    handleOptionClick({ option, index, hide }) {
+      this.$emit('click', { option, index });
+      hide();
     },
   },
 };
