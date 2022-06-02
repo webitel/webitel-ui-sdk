@@ -85,6 +85,7 @@ import './messenger-web-chat.svg';
 import './messenger-whatsapp.svg';
 import './messenger-whatsapp--filled.svg';
 import './messenger-messenger.svg';
+import './instagram.svg';
 import './mic.svg';
 import './mic-muted.svg';
 import './move.svg';

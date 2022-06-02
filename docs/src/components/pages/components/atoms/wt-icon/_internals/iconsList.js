@@ -1,5 +1,6 @@
 export default [
   'adfs',
+  'instagram',
   'zoom-in',
   'zoom-out',
   'send-arrow',

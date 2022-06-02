@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-icon icon="instagram"></wt-icon>
     <wt-button-select :options="['lorem', 'ipsum']">lorem ipsum dolor sit amet</wt-button-select>
     <br>
     <wt-button-select disabled>123</wt-button-select>
