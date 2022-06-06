@@ -13,6 +13,8 @@
 // cause we need to set styles to element somewhere in the HTML, not inside .wt-tooltip scope
 .wt-tooltip__popper .v-popper__inner {
   @extend %typo-body-1;
+  max-width: 80vw;
+  max-height: 80vh;
   padding: var(--tooltip-padding);
   color: var(--tooltip-light-text-color);
   background: var(--tooltip-light-bg-color);
