@@ -7,6 +7,7 @@
     :popper-class="[
       'wt-tooltip__popper',
        { 'wt-tooltip--contrast__popper': contrast },
+       popperClass,
      ]"
     :triggers="['hover', 'focus', 'touch']"
     class="wt-tooltip"
@@ -29,6 +30,10 @@ export default {
     placement: {
       type: String,
       default: 'auto',
+    },
+    popperClass: {
+      type: String,
+      default: '',
     },
   },
 };
