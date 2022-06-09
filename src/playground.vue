@@ -1,6 +1,11 @@
 <template>
   <div class="playground">
-    <wt-icon icon="instagram"></wt-icon>
+    <wt-tooltip>
+      <template v-slot:activator>
+        <wt-icon icon="instagram"></wt-icon>
+      </template>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda autem corporis eaque earum esse est in incidunt ipsa ipsam ipsum, maxime odit quaerat recusandae sunt tempora unde vel vitae?
+    </wt-tooltip>
     <wt-button-select :options="['lorem', 'ipsum']">lorem ipsum dolor sit amet</wt-button-select>
     <br>
     <wt-button-select disabled>123</wt-button-select>
