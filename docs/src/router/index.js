@@ -65,7 +65,7 @@ import WtTimeInputDocs
 import WtButtonSelectDocs
   from '../components/pages/components/molecules/wt-button-select/wt-button-select-docs.vue';
 import WtHintDocs
-  from '../components/pages/components/molecules/wt-hint/wt-hint-docs';
+  from '../components/pages/components/molecules/wt-hint/wt-hint-docs.vue';
 // organisms
 import WtAppHeaderDocs
   from '../components/pages/components/organisms/wt-app-header/wt-app-header-docs.vue';
@@ -124,6 +124,8 @@ import ExportCSVModuleDocs
   from '../components/pages/modules/export-csv-module/export-csv-module-docs.vue';
 import ExportFilesModuleDocs
   from '../components/pages/modules/export-files-module/export-files-module-docs.vue';
+import NotificationsModuleDocs
+  from '../components/pages/modules/notifications-module/notifications-module-docs.vue';
 
 import ScriptsDocs from '../components/pages/scripts/scripts-docs.vue';
 import CaseConverterScriptsDocs
@@ -552,6 +554,11 @@ const routes = [
         path: 'export-files',
         name: 'export-files',
         component: ExportFilesModuleDocs,
+      },
+      {
+        path: 'notifications-module',
+        name: 'notifications-module',
+        component: NotificationsModuleDocs,
       },
     ],
   },

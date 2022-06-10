@@ -62,6 +62,12 @@ export default {
         default: 'auto',
         description: 'see [**Floating Vue**](https://floating-vue.starpad.dev/api/#placement) docs',
       },
+      {
+        value: 'popper-class',
+        code: '<wt-tooltip popper-class="my-class"></wt-tooltip>',
+        type: 'String',
+        description: 'see [**Floating Vue**](https://floating-vue.starpad.dev/api/#popperclass) docs',
+      },
     ],
   }),
   mounted() {
