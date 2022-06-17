@@ -1,4 +1,4 @@
-import { ChatActions, CallActions } from 'webitel-sdk';
+import { ChatActions, CallActions, JobState } from 'webitel-sdk';
 import i18n from '../../../locale/i18n';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 import endChatSound from '../assets/audio/end-chat.wav';
@@ -12,6 +12,7 @@ const NOTIFICATION_VISIBLE_INTERVAL = 2000;
 const getNotificationSound = (action) => {
   switch (action) {
     case ChatActions.UserInvite:
+    case JobState.Distribute:
       return new Audio(newChatSound);
     case ChatActions.Message:
       return new Audio(newMessageSound);

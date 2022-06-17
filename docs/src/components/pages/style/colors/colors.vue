@@ -37,6 +37,7 @@ const POSITIVE_COLOR_HUE = 119;
 const NEGATIVE_COLOR_HUE = 11;
 const HOLD_COLOR_HUE = 54;
 const TRANSFER_COLOR_HUE = 227;
+const JOB_COLOR_HUE = 209;
 const ICON_COLOR_HUE = 202;
 
 const ACCENT_COLOR = `${ACCENT_COLOR_HUE}, 100%, 50%`;
@@ -50,6 +51,7 @@ const POSITIVE_COLOR = `${POSITIVE_COLOR_HUE}, 60%, 40%`;
 const NEGATIVE_COLOR = `${NEGATIVE_COLOR_HUE}, 80%, 50%`;
 const HOLD_COLOR = `${HOLD_COLOR_HUE}, 80%, 50%`;
 const TRANSFER_COLOR = `${TRANSFER_COLOR_HUE}, 80%, 50%`;
+const JOB_COLOR = `${JOB_COLOR_HUE}, 96%, 57%`;
 const ICON_COLOR = `${ICON_COLOR_HUE}, 100%, 15%`;
 
 const MAIN_COLOR_OPACITY = 1;
@@ -176,6 +178,18 @@ export default {
             code: `hsla(${TRANSFER_COLOR}, ${HOVER_OPACITY})`,
             color: '--transfer--hover-color',
             name: 'Transfer hover color',
+          },
+          {
+            textColor: '#000',
+            code: `hsla(${JOB_COLOR}, ${DEFAULT_OPACITY})`,
+            color: '--job-color',
+            name: 'Job color',
+          },
+          {
+            textColor: '#000',
+            code: `hsla(${JOB_COLOR}, ${HOVER_OPACITY})`,
+            color: '--job--hover-color',
+            name: 'Job hover color',
           },
         ],
       },

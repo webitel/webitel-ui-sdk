@@ -32,7 +32,7 @@ export default {
     color: {
       type: String,
       default: 'accent',
-      options: ['accent', 'secondary', 'success', 'danger', 'transfer'],
+      options: ['accent', 'secondary', 'success', 'danger', 'transfer', 'job'],
     },
     disabled: {
       type: Boolean,
@@ -71,7 +71,7 @@ export default {
       return '';
     },
     loaderColor() {
-      if (['success', 'transfer', 'danger'].includes(this.color)) return 'main';
+      if (['success', 'transfer', 'danger', 'job'].includes(this.color)) return 'main';
       return 'contrast';
     },
   },
@@ -159,6 +159,18 @@ export default {
     }
   }
 
+  &.job {
+    color: var(--btn-light-font-color);
+    background-color: var(--btn-job-color);
+    border-color: var(--btn-job-color);
+
+    &:hover,
+    &:active {
+      background-color: var(--btn-job--hover-color);
+      border-color: var(--btn-job--hover-color);
+    }
+  }
+
   &.danger {
     color: var(--btn-light-font-color);
     background-color: var(--btn-false-color);
@@ -226,6 +238,18 @@ export default {
       &:active {
         color: var(--btn-transfer--hover-color);
         border-color: var(--btn-transfer--hover-color);
+        background-color: transparent;
+      }
+    }
+
+    &.job {
+      color: var(--btn-job-color);
+      border-color: var(--btn-job-color);
+
+      &:hover,
+      &:active {
+        color: var(--btn-job--hover-color);
+        border-color: var(--btn-job--hover-color);
         background-color: transparent;
       }
     }

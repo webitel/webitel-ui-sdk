@@ -9,6 +9,7 @@
 
   --_hold-color-hue: 54;
   --_transfer-color-hue: 227;
+  --_job-color-hue: 209;
 
   // DEFAULT STATES OPACITY
   --_opacity--default: 0.8;
@@ -31,6 +32,7 @@
 
   --_hold-color: var(--_hold-color-hue), 80%, 50%;
   --_transfer-color: var(--_transfer-color-hue), 80%, 50%;
+  --_job-color: var(--_job-color-hue), 96%, 57%;
 
   // MAIN COLORS
   --accent-color: hsla(var(--_accent-color), 1);
@@ -77,6 +79,9 @@
 
   --transfer-color: hsla(var(--_transfer-color), var(--_opacity--default));
   --transfer--hover-color: hsla(var(--_transfer-color), var(--_opacity--hover));
+
+  --job-color: hsla(var(--_job-color), var(--_opacity--default));
+  --job--hover-color: hsla(var(--_job-color), var(--_opacity--hover));
 
   // SUBORDINATE COLORS
   --tag-bg-color: var(--accent-secondary-color);

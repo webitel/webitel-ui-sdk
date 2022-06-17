@@ -4,7 +4,7 @@
       <template slot="header">
         <wt-headline>
           <wt-navigation-bar :nav="nav"/>
-          <h1>Webitel UI SDK v. 2.0.10</h1>
+          <h1>Webitel UI SDK v. 2.0.11</h1>
         </wt-headline>
       </template>
       <template slot="main">

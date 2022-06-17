@@ -20,6 +20,7 @@
         <wt-button color="success">Success</wt-button>
         <wt-button color="danger">Danger</wt-button>
         <wt-button color="transfer">Transfer</wt-button>
+        <wt-button color="task">Task</wt-button>
       </div>
       <div class="example-wrapper">
         <wt-button outline>Primary</wt-button>
@@ -28,6 +29,7 @@
         <wt-button outline color="success">Success</wt-button>
         <wt-button outline color="danger">Danger</wt-button>
         <wt-button outline color="transfer">Transfer</wt-button>
+        <wt-button outline color="task">Task</wt-button>
       </div>
     </article>
     <component-props
@@ -52,7 +54,7 @@
           value: 'color',
           code: '<wt-button color="primary"></wt-button>',
           type: 'String',
-          options: ['"primary", "secondary", "success", "danger", "transfer"'],
+          options: ['primary', 'secondary', 'success', 'danger', 'transfer', 'task'],
           default: 'primary',
         },
         {

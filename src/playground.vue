@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    <wt-button color="job">Task</wt-button>
+    <wt-button color="job" outline>Task Outlined</wt-button>
+    <wt-icon icon="job" color="job" size="xl"></wt-icon>
+    <wt-icon icon="job--accept" color="job" size="xl"></wt-icon>
+    <wt-icon icon="job--end" color="job" size="xl"></wt-icon>
     <wt-tooltip>
       <template v-slot:activator>
         <wt-icon icon="instagram"></wt-icon>

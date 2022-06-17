@@ -47,6 +47,9 @@ import './chat-reply.svg';
 import './chat-send.svg';
 import './chat-transfer.svg';
 import './chat-transfer--filled.svg';
+import './job.svg';
+import './job--accept.svg';
+import './job--end.svg';
 
 import './checkbox.svg';
 import './checkbox--checked.svg';

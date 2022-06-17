@@ -114,6 +114,10 @@ export default [
   'chat-message-status-sent',
   'chat-message-status-read',
 
+  'job',
+  'job--accept',
+  'job--end',
+
   'sort-arrow-down',
   'sort-arrow-up',
   'arrow-down',
