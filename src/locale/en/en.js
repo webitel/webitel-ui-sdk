@@ -28,6 +28,7 @@ export default {
     name: 'Name',
     expand: 'Expand',
     collapse: 'Collapse',
+    generate: 'Generate',
     lang: {
       en: 'English',
       ru: 'Русский',
@@ -35,6 +36,15 @@ export default {
     },
     from: 'From',
     to: 'To',
+    tts: 'Text-to-Speech',
+    state: 'State',
+  },
+  // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
+  vocabulary: {
+    language: 'Language',
+    voice: 'Voice',
+    format: 'Format',
+    text: 'Text',
   },
   // date-related texts
   date: {
@@ -55,7 +65,8 @@ export default {
         [QueueType.PROGRESSIVE_DIALER]: 'Progressive dialer',
         [QueueType.PREVIEW_DIALER]: 'Preview dialer',
         [QueueType.CHAT_INBOUND_QUEUE]: 'Chat queue',
-        [QueueType.TASK_QUEUE]: 'Task queue',
+        [QueueType.INBOUND_JOB_QUEUE]: 'Inbound job queue',
+        [QueueType.OUTBOUND_JOB_QUEUE]: 'Outbound job queue',
       },
     },
     agent: {

@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "2.0.13",
+  "version": "2.0.13-1",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -44,7 +44,7 @@
     "vue-observe-visibility": "^1.0.0",
     "vue-router": "^3.2.0",
     "vuejs-datepicker": "^1.6.2",
-    "webitel-sdk": "^0.1.128"
+    "webitel-sdk": "^0.1.130"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",

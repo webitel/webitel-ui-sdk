@@ -28,6 +28,7 @@ export default {
     name: 'Имя',
     expand: 'Развернуть',
     collapse: 'Свернуть',
+    generate: 'Сгенерировать',
     lang: {
       en: 'English',
       ru: 'Русский',
@@ -35,6 +36,14 @@ export default {
     },
     from: 'От',
     to: 'До',
+    tts: 'Text-to-Speech',
+    state: 'Состояние',
+  },
+  vocabulary: {
+    language: 'Язык',
+    voice: 'Голос',
+    format: 'Формат',
+    text: 'Текст',
   },
   // date-related texts
   date: {
@@ -55,7 +64,8 @@ export default {
         [QueueType.PROGRESSIVE_DIALER]: 'Прогрессивный обзвон',
         [QueueType.PREVIEW_DIALER]: 'Превью обзвон',
         [QueueType.CHAT_INBOUND_QUEUE]: 'Очередь чатов',
-        [QueueType.TASK_QUEUE]: 'Очередь задач',
+        [QueueType.INBOUND_JOB_QUEUE]: 'Входящая очередь заданий',
+        [QueueType.OUTBOUND_JOB_QUEUE]: 'Исходящая очередь заданий',
       },
     },
     agent: {
