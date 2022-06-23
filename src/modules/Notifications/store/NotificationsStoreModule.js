@@ -131,7 +131,7 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
     STOP_SOUND: (context) => {
       const { currentlyPlaying } = context.state;
-      if (currentlyPlaying) currentlyPlaying.pause();
+      if (currentlyPlaying && currentlyPlaying instanceof Audio) currentlyPlaying.pause();
       localStorage.removeItem('wtIsPlaying');
       context.commit('RESET_CURRENTLY_PLAYING');
     },

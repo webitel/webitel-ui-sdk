@@ -1,5 +1,13 @@
 <template>
   <div class="playground">
+    <wt-input
+       label="hello world"
+       :v="{ $error: true }"
+    ></wt-input>
+    <wt-textarea
+       label="hello world"
+       :v="{ $error: true }"
+    ></wt-textarea>
     <wt-button color="job">Task</wt-button>
     <wt-button color="job" outline>Task Outlined</wt-button>
     <wt-icon icon="job" color="job" size="xl"></wt-icon>

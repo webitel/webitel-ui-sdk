@@ -124,4 +124,5 @@ export default [
   'arrow-left',
   'arrow-right',
   'arrow-up',
+  'tts-download',
 ].sort();

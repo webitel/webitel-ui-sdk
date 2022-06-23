@@ -3,15 +3,17 @@
     class="wt-textarea"
     :class="{
       'wt-textarea--disabled': disabled,
-      }"
+      'wt-textarea--invalid': invalid,
+    }"
   >
     <wt-label
       :for="name"
       :disabled="disabled"
+      :invalid="invalid"
       v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ label }}</slot>
+      <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
     </wt-label>
     <div class="wt-textarea__wrapper">
       <textarea
@@ -35,12 +37,20 @@
         ></wt-icon-btn>
       </div>
     </div>
+    <wt-input-info
+      v-if="isValidation"
+      :invalid="invalid"
+    >{{ validationText }}
+    </wt-input-info>
   </div>
 </template>
 
 <script>
+  import validationMixin from '../../../mixins/validationMixin/validationMixin';
+
   export default {
     name: 'wt-textarea',
+    mixins: [validationMixin],
     props: {
       /**
        * Current textarea value (`v-model`)
@@ -95,6 +105,10 @@
           keypress: (event) => this.handleKeypress(event),
         };
       },
+
+      requiredLabel() {
+        return this.required ? `${this.label}*` : this.label;
+      },
     },
 
     methods: {
@@ -139,6 +153,11 @@
     .wt-textarea:focus-within & {
       color: var(--form-label--hover-color);
     }
+
+    .wt-textarea--invalid:hover &,
+    .wt-textarea--invalid:focus-within & {
+      color: var(--label--invalid-color);
+    }
   }
 
   .wt-textarea__textarea {
@@ -168,6 +187,12 @@
 
       background: var(--form-border--disabled-color);
       border-color: var(--form-border--disabled-color);
+    }
+
+    .wt-textarea--invalid &,
+    .wt-textarea--invalid:hover & {
+      border-color: var(--false-color);
+      outline: none; // prevent outline overlapping false color
     }
   }
 
