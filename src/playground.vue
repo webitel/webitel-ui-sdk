@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-select v-model="select.value" :options="select.stringOptions" :track-by="null"></wt-select>
     <wt-input
        label="hello world"
        :v="{ $error: true }"

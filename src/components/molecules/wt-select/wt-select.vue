@@ -23,7 +23,7 @@
       :allow-empty="allowEmpty"
       :disabled="disabled"
       :internal-search="!searchMethod"
-      :label="optionLabel"
+      :label="trackBy ? optionLabel : null"
       :limit="1"
       :limit-text="(count) => `+${count}`"
       :loading="false"

@@ -1,5 +1,8 @@
 <template>
-  <aside class="wt-player">
+  <aside
+    class="wt-player"
+    :class="[`wt-player--position-${position}`]"
+  >
     <component
       :is="playerType"
       class="wt-player__player"
@@ -12,6 +15,7 @@
 
     <!-- The "wt-icon-btn" component is append in to "audio" element by "setCloseIcon" method-->
     <wt-icon-btn
+      v-if="closable"
       class="wt-player__close-icon"
       ref="close-icon"
       icon="close"
@@ -56,6 +60,14 @@ export default {
     resetVolume: {
       type: Boolean,
       default: false,
+    },
+    closable: {
+      type: Boolean,
+      default: true,
+    },
+    position: {
+      type: String,
+      default: 'sticky',
     },
   },
   data: () => ({
@@ -111,7 +123,7 @@ export default {
       if (this.resetVolume) this.makeVolumeReset();
       if (this.download) this.setupDownload();
 
-      this.appendCloseIcon();
+      if (this.closable) this.appendCloseIcon();
       this.$emit('initialized', this.player);
     },
     makeVolumeReset() {
@@ -142,8 +154,20 @@ export default {
 
 .wt-player {
   @extend %typo-body-2;
-  position: sticky;
   bottom: 60px;
+
+  &--position {
+    &-sticky {
+      position: sticky;
+    }
+    &-relative {
+      position: relative;
+      bottom: unset;
+    }
+    &-static {
+      position: static;
+    }
+  }
 
   .plyr {
     max-width: 100%; // prevents <video> container overflow
