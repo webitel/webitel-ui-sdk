@@ -8,6 +8,7 @@ const defaultState = () => ({
   name: '',
   username: '',
   account: '',
+  preferredUsername: '',
   userId: 0,
   scope: {},
   permissions: {},
