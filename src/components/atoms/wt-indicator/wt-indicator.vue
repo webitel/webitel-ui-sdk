@@ -24,7 +24,7 @@ export default {
     color: {
       type: String,
       default: 'secondary',
-      options: ['primary', 'secondary', 'disabled', 'success', 'danger', 'transfer', 'break-out'],
+      options: ['primary', 'secondary', 'accent', 'disabled', 'success', 'danger', 'transfer', 'break-out', 'job'],
     },
     text: {
       type: [String, Number],
@@ -62,7 +62,8 @@ export default {
   background: var(--indicator-disabled-color);
   border-radius: 50%;
 
-  &--primary {
+  &--primary,
+  &--accent {
     background: var(--indicator-primary-color);
   }
 
@@ -88,6 +89,10 @@ export default {
 
   &--break-out {
     background: var(--indicator-break-out-color);
+  }
+
+  &--job {
+    background: var(--job-color);
   }
 }
 
