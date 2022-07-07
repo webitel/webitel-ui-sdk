@@ -40,6 +40,7 @@ import WtFiltersPanelWrapper from './organisms/wt-filters-panel-wrapper/wt-filte
 import WtHeaderActions from './organisms/wt-app-header/wt-header-actions.vue';
 import WtErrorPage from './organisms/wt-error-page/wt-error-page.vue';
 import WtHeadline from './organisms/wt-headline/wt-headline.vue';
+import WtHeadlineNav from './organisms/wt-headline-nav/wt-headline-nav.vue';
 import WtNavigationBar from './organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtNotificationsBar from './organisms/wt-notifications-bar/wt-notifications-bar.vue';
 import WtPageWrapper from './organisms/wt-page-wrapper/wt-page-wrapper.vue';
@@ -84,6 +85,7 @@ const Components = {
   WtTextarea,
   WtAppHeader,
   WtHeadline,
+  WtHeadlineNav,
   WtNavigationBar,
   WtAppNavigator,
   WtFiltersPanelWrapper,

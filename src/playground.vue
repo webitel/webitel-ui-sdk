@@ -1,5 +1,13 @@
 <template>
   <div class="playground">
+    <wt-headline-nav
+      style=" border: 1px solid blue;"
+      :path="[
+        { name: 'path 1!', route: 'path/1' },
+        { name: 'path 2!', route: 'path/2' },
+        { name: 'path 4!', route: 'path/2' },
+      ]"
+    ></wt-headline-nav>
     <wt-select v-model="select.value" :options="select.stringOptions" :track-by="null"></wt-select>
     <wt-input
        label="hello world"

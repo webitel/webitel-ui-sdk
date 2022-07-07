@@ -44,6 +44,8 @@ export default {
     voice: 'Голос',
     format: 'Формат',
     text: 'Текст',
+    yes: 'Да',
+    no: 'Нет',
   },
   // date-related texts
   date: {

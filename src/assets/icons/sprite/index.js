@@ -123,3 +123,4 @@ import './video.svg';
 import './zoom-in.svg';
 import './zoom-out.svg';
 import './tts-download.svg';
+import './stt.svg';

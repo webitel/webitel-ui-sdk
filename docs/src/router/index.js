@@ -75,6 +75,8 @@ import WtErrorPageDocs
   from '../components/pages/components/organisms/wt-error-page/wt-error-page-docs.vue';
 import WtHeadlineDocs
   from '../components/pages/components/organisms/wt-headline/wt-headline-docs.vue';
+import WtHeadlineNavDocs
+  from '../components/pages/components/organisms/wt-headline-nav/wt-headline-nav-docs.vue';
 import WtNavigationBarDocs
   from '../components/pages/components/organisms/wt-navigation-bar/wt-navigation-bar-docs.vue';
 import WtNotificationsBarDocs
@@ -402,6 +404,11 @@ const routes = [
         path: 'headline',
         name: 'headline-docs',
         component: WtHeadlineDocs,
+      },
+      {
+        path: 'headline-nav',
+        name: 'headline-nav-docs',
+        component: WtHeadlineNavDocs,
       },
       {
         path: 'error-page',
