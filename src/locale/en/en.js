@@ -47,6 +47,9 @@ export default {
     text: 'Text',
     yes: 'Yes',
     no: 'No',
+    description: 'Description',
+    login: 'Login',
+    host: 'Host',
   },
   // date-related texts
   date: {
@@ -146,6 +149,7 @@ export default {
         [AdminSections.QUEUES]: 'Queues',
         [AdminSections.STORAGE]: 'Storage',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
+        [AdminSections.EMAIL_PROFILES]: 'Email profiles',
         [AdminSections.MEDIA]: 'Media',
         [AdminSections.BLACKLIST]: 'Call lists',
         [AdminSections.ROLES]: 'Roles',

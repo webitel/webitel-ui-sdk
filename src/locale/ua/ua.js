@@ -46,6 +46,9 @@ export default {
     text: 'Текст',
     yes: 'Так',
     no: 'Ні',
+    description: 'Опис',
+    login: 'Логін',
+    host: 'Хост',
   },
   // date-related texts
   date: {
@@ -145,6 +148,7 @@ export default {
         [AdminSections.QUEUES]: 'Черги',
         [AdminSections.STORAGE]: 'Сховища',
         [AdminSections.COGNITIVE_PROFILES]: 'Мовні профілі',
+        [AdminSections.EMAIL_PROFILES]: 'Email профілі',
         [AdminSections.ROLES]: 'Ролі',
         [AdminSections.OBJECTS]: 'Розділи',
       },
