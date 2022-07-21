@@ -37,7 +37,7 @@
           value: 'color',
           type: 'String',
           default: 'contrast',
-          options: ['main', 'contrast'],
+          options: ['main', 'contrast', 'icon'],
           description: 'Works only for sm loader',
         },
       ],

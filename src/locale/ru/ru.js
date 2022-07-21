@@ -38,6 +38,8 @@ export default {
     to: 'До',
     tts: 'Text-to-Speech',
     state: 'Состояние',
+    refresh: 'Обновить',
+    retry: 'Повторить',
   },
   vocabulary: {
     language: 'Язык',
@@ -49,6 +51,9 @@ export default {
     description: 'Описание',
     login: 'Логин',
     host: 'Хост',
+    time: 'Время',
+    channel: 'Канал',
+    file: 'Файл',
   },
   // date-related texts
   date: {

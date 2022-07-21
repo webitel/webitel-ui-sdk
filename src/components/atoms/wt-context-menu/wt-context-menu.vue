@@ -7,7 +7,10 @@
   >
     <slot name="activator"></slot>
     <template #popper="{ hide }">
-      <ul class="wt-context-menu__menu">
+      <ul
+        class="wt-context-menu__menu"
+        :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
+      >
         <li
           class="wt-context-menu__option-wrapper"
           v-for="(option, index) in options"
@@ -42,6 +45,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    width: {
+      type: [String],
+      default: 'auto',
+    },
+    minWidth: {
+      type: [String],
+      default: '160px',
+    },
+    maxWidth: {
+      type: [String],
+      default: '300px',
+    },
   },
   methods: {
     handleOptionClick({ option, index, hide }) {
@@ -59,8 +74,6 @@ export default {
 
 .wt-context-menu__menu {
   @extend %typo-body-2;
-  min-width: var(--context-menu-min-width);
-  max-width: var(--context-menu-max-width);
   background-color: var(--context-menu-background-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);

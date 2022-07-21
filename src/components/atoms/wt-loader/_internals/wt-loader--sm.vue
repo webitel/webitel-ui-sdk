@@ -14,7 +14,7 @@ export default {
     color: {
       type: String,
       default: 'contrast',
-      description: '["main", "contrast"]',
+      description: '["main", "contrast", "icon"]',
     },
   },
 };
@@ -43,6 +43,9 @@ export default {
   }
   &--main circle {
     stroke: var(--main-color);
+  }
+  &--icon circle {
+    stroke: var(--icon-color);
   }
 }
 

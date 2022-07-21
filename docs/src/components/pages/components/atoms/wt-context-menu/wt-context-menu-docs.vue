@@ -37,6 +37,24 @@ export default {
         type: 'Boolean',
         default: 'true',
       },
+      {
+        value: 'width',
+        code: ' <wt-context-menu width="300px"></wt-context-menu>',
+        type: ['String'],
+        default: 'auto',
+      },
+      {
+        value: 'minWidth',
+        code: ' <wt-context-menu min-width="300px"></wt-context-menu>',
+        type: ['String'],
+        default: '160px',
+      },
+      {
+        value: 'width',
+        code: ' <wt-context-menu max-width="300px"></wt-context-menu>',
+        type: ['String'],
+        default: '300px',
+      },
     ],
     events: [
       {

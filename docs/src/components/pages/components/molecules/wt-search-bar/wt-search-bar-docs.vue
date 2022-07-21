@@ -18,6 +18,9 @@
     <component-events
       :events="events"
     ></component-events>
+    <component-slots
+      :slots="slots"
+    ></component-slots>
   </section>
 </template>
 
@@ -90,6 +93,12 @@
         },
         {
           value: 'PLUS ALL NATIVE INPUT EVENTS',
+        },
+      ],
+      slots: [
+        {
+          name: 'search-icon',
+          description: 'Change default search icon',
         },
       ],
     }),

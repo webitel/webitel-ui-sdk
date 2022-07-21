@@ -39,7 +39,7 @@
       <!--      Slot that is used for all selected options (tags)-->
       <template slot="tag" slot-scope="{ option }">
         <span class="multiselect__custom-tag">
-          {{ option[optionLabel] || option }}
+            {{ getOptionLabel({ option, optionLabel }) }}
         </span>
       </template>
 
@@ -141,7 +141,6 @@ export default {
 
     optionLabel: {
       type: String,
-      default: 'name',
     },
 
     searchMethod: {
@@ -226,11 +225,14 @@ export default {
 
   methods: {
     getOptionLabel({ option, optionLabel }) {
+      const defaultOptionLabel = 'name';
+
+      if (optionLabel) return option[optionLabel];
       if (option.locale) {
         if (Array.isArray(option.locale)) return this.$tc(...option.locale);
         return this.$t(option.locale);
       }
-      return option[optionLabel] || option;
+      return option[defaultOptionLabel] || option;
     },
     handleSearchChange(search) {
       if (!this.isApiMode) return;

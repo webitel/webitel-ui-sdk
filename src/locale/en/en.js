@@ -38,6 +38,8 @@ export default {
     to: 'To',
     tts: 'Text-to-Speech',
     state: 'State',
+    refresh: 'Refresh',
+    retry: 'Retry',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -50,6 +52,9 @@ export default {
     description: 'Description',
     login: 'Login',
     host: 'Host',
+    time: 'Time',
+    channel: 'Channel',
+    file: 'File',
   },
   // date-related texts
   date: {

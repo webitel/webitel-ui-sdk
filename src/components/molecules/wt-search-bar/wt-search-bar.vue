@@ -13,10 +13,13 @@
         type="search"
         v-on="listeners"
       >
-      <wt-icon
-        class="wt-search-bar__search-icon"
-        icon="search"
-      ></wt-icon>
+      <div class="wt-search-bar__search-icon">
+        <slot name="search-icon">
+          <wt-icon
+            icon="search"
+          ></wt-icon>
+        </slot>
+      </div>
       <wt-icon-btn
         class="wt-search-bar__reset-icon-btn"
         :class="{ 'hidden': !value }"
@@ -112,6 +115,7 @@
   }
 
   .wt-search-bar__search-icon {
+    line-height: 0;
     position: absolute;
     top: 50%;
     left: var(--input-icon-margin);

@@ -126,4 +126,7 @@ export default [
   'arrow-up',
   'tts-download',
   'stt',
+  'stt-download',
+  'stt-search',
+  'idle',
 ].sort();

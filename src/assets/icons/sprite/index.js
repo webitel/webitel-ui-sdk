@@ -124,3 +124,6 @@ import './zoom-in.svg';
 import './zoom-out.svg';
 import './tts-download.svg';
 import './stt.svg';
+import './stt-download.svg';
+import './stt-search.svg';
+import './idle.svg';
