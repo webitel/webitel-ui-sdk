@@ -154,6 +154,7 @@ export default {
         [AdminSections.STORAGE]: 'Сховища',
         [AdminSections.COGNITIVE_PROFILES]: 'Мовні профілі',
         [AdminSections.EMAIL_PROFILES]: 'Email профілі',
+        [AdminSections.IMPORT_CSV]: 'Імпорт даних з CSV файлу',
         [AdminSections.ROLES]: 'Ролі',
         [AdminSections.OBJECTS]: 'Розділи',
       },

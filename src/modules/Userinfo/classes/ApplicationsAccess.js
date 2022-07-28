@@ -132,6 +132,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.EMAIL_PROFILES}`,
     },
+    [AdminSections.IMPORT_CSV]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.IMPORT_CSV}`,
+    },
     [AdminSections.ROLES]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.ROLES}`,
