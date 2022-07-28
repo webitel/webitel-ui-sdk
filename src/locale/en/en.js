@@ -155,6 +155,7 @@ export default {
         [AdminSections.STORAGE]: 'Storage',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
         [AdminSections.EMAIL_PROFILES]: 'Email profiles',
+        [AdminSections.IMPORT_CSV]: 'Import data from CSV file',
         [AdminSections.MEDIA]: 'Media',
         [AdminSections.BLACKLIST]: 'Call lists',
         [AdminSections.ROLES]: 'Roles',
