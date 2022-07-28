@@ -20,6 +20,18 @@ export const camelToKebab = (str) => str.replace(
     .replace('', '-'),
 );
 
+export const kebabToSnake = (str) => str.replace(
+  /([-_][a-z])/g,
+  (group) => group
+    .replace('-', '_'),
+);
+
+export const snakeToKebab = (str) => str.replace(
+  /([-_][a-z])/g,
+  (group) => group
+    .replace('_', '-'),
+);
+
 export const objSnakeToCamel = (obj, skipKeys = []) => {
   if (!obj) return obj;
   const newObj = {};

@@ -2,6 +2,8 @@ import {
   camelToKebab,
   camelToSnake,
   kebabToCamel,
+  snakeToKebab,
+  kebabToSnake,
   objCamelToSnake,
   objSnakeToCamel,
   snakeToCamel,
@@ -13,6 +15,13 @@ describe('Case converters', () => {
     const kebabStr = 'camel-to-kebab';
     expect(camelToKebab(camelStr)).toBe(kebabStr);
     expect(kebabToCamel(kebabStr)).toBe(camelStr);
+  });
+
+  it('Snake-Kebab', () => {
+    const snakeStr = 'snake_to_kebab';
+    const kebabStr = 'snake-to-kebab';
+    expect(snakeToKebab(snakeStr)).toBe(kebabStr);
+    expect(kebabToSnake(kebabStr)).toBe(snakeStr);
   });
 
   it('Camel-Snake', () => {
