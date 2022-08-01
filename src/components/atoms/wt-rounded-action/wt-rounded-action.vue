@@ -52,6 +52,7 @@ export default {
     iColor() {
       if (this.iconColor) return this.iconColor;
       if (this.disabled) return 'secondary-50';
+      if (this.color === 'secondary') return null; // dont change icon color
       return this.color;
     },
   },
