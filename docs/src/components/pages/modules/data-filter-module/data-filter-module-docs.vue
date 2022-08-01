@@ -158,7 +158,7 @@
 <!--          methods: {-->
 <!--            restoreValue(idList) {} /* by default, works with value like id array. If not empty, calls fetchSelected method with these ids.-->
 <!--              Then, calls this.setValue() method, which should be mapped from filters store "SET_FILTER" action */-->
-<!--            fetchSelected(idList) {} // API get call with ids filter. Should be implemented-->
+<!--            fetchSelected(idList) {} // API get call with id filter. Should be implemented-->
 <!--          },-->
 <!--        </code>-->
 <!--     </pre>-->

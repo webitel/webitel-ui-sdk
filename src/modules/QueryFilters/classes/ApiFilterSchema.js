@@ -26,7 +26,7 @@ export default class ApiFilterSchema extends BaseFilterSchema {
   }
 
   fetchSelected(idsList) {
-    const params = { size: idsList.length, ids: idsList };
+    const params = { size: idsList.length, id: idsList };
     return this.API(params);
   }
 }

@@ -34,7 +34,7 @@ export default {
         ...exportParams || routeQuery,
         size: 5000,
       };
-      if (this.isAnySelected) params.ids = this.selectedIds;
+      if (this.isAnySelected) params.id = this.selectedIds;
 
       try {
         await this.CSVExport.export(params);
