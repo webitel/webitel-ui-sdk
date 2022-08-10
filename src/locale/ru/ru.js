@@ -152,7 +152,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Группы ресурсов',
         [AdminSections.QUEUES]: 'Очереди',
         [AdminSections.STORAGE]: 'Хранилища',
-        [AdminSections.COGNITIVE_PROFILES]: 'Языковые профили',
+        [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
         [AdminSections.EMAIL_PROFILES]: 'Email профили',
         [AdminSections.IMPORT_CSV]: 'Импорт данных из CSV файла',
         [AdminSections.ROLES]: 'Роли',
