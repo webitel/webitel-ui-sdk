@@ -10,6 +10,7 @@
         'wt-button--wide': wide,
         'wt-button--rounded': rounded,
         'wt-button--disabled': disabled,
+        'wt-button--loading': loading,
       }
     ]"
     type="button"
@@ -114,6 +115,10 @@ export default {
     &-md {
       padding: var(--btn-padding--size-md);
     }
+  }
+
+  &--loading {
+    pointer-events: none;
   }
 
   &:hover,
