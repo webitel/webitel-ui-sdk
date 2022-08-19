@@ -54,6 +54,7 @@ export default {
     time: 'Час',
     channel: 'Канал',
     file: 'Файл',
+    priority: 'Приорітет',
   },
   // date-related texts
   date: {

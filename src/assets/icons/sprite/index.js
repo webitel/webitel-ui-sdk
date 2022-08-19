@@ -127,3 +127,4 @@ import './stt.svg';
 import './stt-download.svg';
 import './stt-search.svg';
 import './idle.svg';
+import './telegram-bot.svg';
