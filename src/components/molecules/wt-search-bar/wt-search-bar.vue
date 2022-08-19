@@ -1,15 +1,15 @@
 <template>
   <div
-    class="wt-search-bar"
     :class="{
       'wt-search-bar--outline': outline,
     }"
+    class="wt-search-bar"
   >
     <div class="wt-search-bar__wrapper">
       <input
-        class="wt-search-bar__input"
-        :value="value"
         :placeholder="searchBarPlaceholder"
+        :value="value"
+        class="wt-search-bar__input"
         type="search"
         v-on="listeners"
       >
@@ -21,8 +21,8 @@
         </slot>
       </div>
       <wt-icon-btn
-        class="wt-search-bar__reset-icon-btn"
         :class="{ 'hidden': !value }"
+        class="wt-search-bar__reset-icon-btn"
         icon="close"
         @click="$emit('input', '')"
       ></wt-icon-btn>
@@ -31,95 +31,95 @@
 </template>
 
 <script>
-  import debounce from '../../../scripts/debounce';
+import debounce from '../../../scripts/debounce';
 
-  export default {
-    name: 'wt-search-bar',
-    props: {
-      /**
-       * Current search-bar value (`v-model`)
-       */
-      value: {
-        type: String,
-        default: '',
-      },
-      /**
-       * search-bar placeholder
-       */
-      placeholder: {
-        type: String,
-      },
-      debounce: {
-        type: Boolean,
-        default: false,
-      },
-      debounceDelay: {
-        type: Number,
-        default: 1000,
-      },
-      outline: {
-        type: Boolean,
-        default: false,
-      },
+export default {
+  name: 'wt-search-bar',
+  props: {
+    /**
+     * Current search-bar value (`v-model`)
+     */
+    value: {
+      type: String,
+      default: '',
     },
-
-    watch: {
-      value() {
-        this.search.call(this);
-      },
+    /**
+     * search-bar placeholder
+     */
+    placeholder: {
+      type: String,
     },
+    debounce: {
+      type: Boolean,
+      default: false,
+    },
+    debounceDelay: {
+      type: Number,
+      default: 1000,
+    },
+    outline: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
-    created() {
-      if (this.debounce) {
-        this.search = debounce(this.search, this.debounceDelay);
+  watch: {
+    value() {
+      this.search.call(this);
+    },
+  },
+
+  created() {
+    if (this.debounce) {
+      this.search = debounce(this.search, this.debounceDelay);
+    }
+  },
+
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: (event) => this.$emit('input', event.target.value),
+        keyup: this.handleKeyup,
+      };
+    },
+    searchBarPlaceholder() {
+      return this.placeholder || this.$t('webitelUI.searchBar.placeholder');
+    },
+  },
+
+  methods: {
+    search() {
+      this.$emit('search', this.value);
+    },
+    handleKeyup(event) {
+      if (event.key === 'Enter') {
+        this.$emit('enter');
+        event.preventDefault();
+      } else if (event.key === 'Esc') {
+        this.$emit('input', '');
+        event.preventDefault();
       }
     },
-
-    computed: {
-      listeners() {
-        return {
-          ...this.$listeners,
-          input: (event) => this.$emit('input', event.target.value),
-          keyup: this.handleKeyup,
-        };
-      },
-      searchBarPlaceholder() {
-        return this.placeholder || this.$t('webitelUI.searchBar.placeholder');
-      },
-    },
-
-    methods: {
-      search() {
-        this.$emit('search', this.value);
-      },
-      handleKeyup(event) {
-        if (event.key === 'Enter') {
-          this.$emit('enter');
-          event.preventDefault();
-        } else if (event.key === 'Esc') {
-          this.$emit('input', '');
-          event.preventDefault();
-        }
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .wt-search-bar {
-    cursor: text;
-  }
+.wt-search-bar {
+  cursor: text;
+
 
   .wt-search-bar__wrapper {
     position: relative;
   }
 
   .wt-search-bar__search-icon {
-    line-height: 0;
     position: absolute;
     top: 50%;
     left: var(--input-icon-margin);
     transform: translateY(-50%);
+    line-height: 0;
     pointer-events: none;
   }
 
@@ -130,8 +130,8 @@
     transform: translateY(-50%);
 
     .wt-search-bar:not(:focus-within) & {
-      opacity: 0;
       pointer-events: none;
+      opacity: 0;
     }
   }
 
@@ -140,14 +140,14 @@
     @include wt-placeholder;
 
     display: block;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     padding: var(--search-bar-padding);
+    transition: var(--transition);
     color: var(--form-input-color);
     border: var(--input-border);
     border-color: var(--form-border-color);
     border-radius: var(--border-radius);
-    transition: var(--transition);
 
     &:focus {
       @include wt-placeholder('focus');
@@ -190,4 +190,5 @@
   .wt-search-bar__input::-webkit-search-results-decoration {
     display: none;
   }
+}
 </style>

@@ -54,7 +54,9 @@ export default {
     time: 'Час',
     channel: 'Канал',
     file: 'Файл',
+    logout: 'Вийти',
     priority: 'Приорітет',
+    variables: 'Змінна | Змінні',
   },
   // date-related texts
   date: {
