@@ -58,6 +58,7 @@ export default {
     logout: 'Logout',
     priority: 'Priority',
     variables: 'Variable | Variables',
+    type: 'Type',
   },
   // date-related texts
   date: {

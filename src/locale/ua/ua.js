@@ -57,6 +57,7 @@ export default {
     logout: 'Вийти',
     priority: 'Приорітет',
     variables: 'Змінна | Змінні',
+    type: 'Тип',
   },
   // date-related texts
   date: {
