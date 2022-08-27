@@ -19,6 +19,7 @@
     ></wt-textarea>
     <wt-button color="job">Task</wt-button>
     <wt-button color="job" outline>Task Outlined</wt-button>
+    <wt-button color="job" loading>Task Outlined</wt-button>
     <wt-icon icon="job" color="job" size="xl"></wt-icon>
     <wt-icon icon="job--accept" color="job" size="xl"></wt-icon>
     <wt-icon icon="job--end" color="job" size="xl"></wt-icon>

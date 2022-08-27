@@ -9,6 +9,7 @@ export default [
   'attach',
   'mail',
   'mail--color',
+  'telegram-bot',
   'messenger-infobip',
   'messenger-telegram',
   'messenger-telegram--filled',

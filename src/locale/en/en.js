@@ -55,6 +55,10 @@ export default {
     time: 'Time',
     channel: 'Channel',
     file: 'File',
+    logout: 'Logout',
+    priority: 'Priority',
+    variables: 'Variable | Variables',
+    type: 'Type',
   },
   // date-related texts
   date: {
