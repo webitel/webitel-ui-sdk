@@ -74,6 +74,8 @@ import './history.svg';
 import './hold.svg';
 import './lock.svg';
 import './logout.svg';
+import './loupe-in.svg';
+import './loupe-out.svg';
 import './menu.svg';
 import './mail.svg';
 import './mail--color.svg';
