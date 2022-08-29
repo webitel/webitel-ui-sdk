@@ -2,7 +2,7 @@ import {
   AgentStatus,
   CallDirection,
   ChannelState,
-  ChannelType,
+  ChannelType, EngineRoutingSchemaType,
 } from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
@@ -88,6 +88,14 @@ export default {
         [AgentStatus.Pause]: 'Пауза',
         [AgentStatus.Offline]: 'Оффлайн',
         [snakeToCamel(AgentStatus.BreakOut)]: 'Принудительный перерыв',
+      },
+    },
+    flow: {
+      type: {
+        [EngineRoutingSchemaType.Chat]: 'Чат',
+        [EngineRoutingSchemaType.Voice]: 'Голос',
+        [EngineRoutingSchemaType.Service]: 'Сервис',
+        [EngineRoutingSchemaType.Processing]: 'Обработка',
       },
     },
   },

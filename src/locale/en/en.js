@@ -3,6 +3,7 @@ import {
   CallDirection,
   ChannelState,
   ChannelType,
+  EngineRoutingSchemaType,
 } from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
@@ -89,6 +90,14 @@ export default {
         [AgentStatus.Pause]: 'Pause',
         [AgentStatus.Offline]: 'Offline',
         [snakeToCamel(AgentStatus.BreakOut)]: 'Break out',
+      },
+    },
+    flow: {
+      type: {
+        [EngineRoutingSchemaType.Chat]: 'Chat',
+        [EngineRoutingSchemaType.Voice]: 'Voice',
+        [EngineRoutingSchemaType.Service]: 'Service',
+        [EngineRoutingSchemaType.Processing]: 'Processing',
       },
     },
   },
