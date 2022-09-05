@@ -130,7 +130,7 @@ export default {
   }
 
   .wt-popup__main {
-    overflow: visible;
+    overflow: scroll;
     padding-right: 0;
   }
 }
