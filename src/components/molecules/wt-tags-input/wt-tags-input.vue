@@ -1,41 +1,94 @@
 <template>
   <div
-    class="wt-tags-input"
     :class="{
       'wt-tags-input--disabled': disabled,
       'wt-tags-input--invalid': invalid,
+      'wt-tags-input--clearable': clearable,
+      'wt-tags-input--loading': isLoading,
     }"
+    class="wt-tags-input"
   >
     <wt-label
-      class="wt-tags-input__label"
       v-if="hasLabel"
       :disabled="disabled"
       :invalid="invalid"
+      class="wt-tags-input__label"
       v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
     </wt-label>
 
-    <vue-tags-input
-      class="wt-tags-input__tags-input"
-      v-model="input"
-      v-bind="{ ...$attrs, ...$props }"
-      :tags="tags"
-      :autocomplete-items="autocompleteOptions"
+    <vue-multiselect
+      ref="vue-multiselect"
+      :disabled="disabled"
+      :internal-search="!searchMethod"
+      :label="trackBy ? optionLabel : null"
+      :loading="false"
+      :options="selectOptions"
       :placeholder="placeholder || label"
-      :separators="['   ']"
+      :taggable="taggable"
+      :track-by="trackBy"
+      :value="selectValue"
+      class="wt-tags-input__select"
+      v-bind="$attrs"
       v-on="listeners"
     >
-      <template slot="tag-actions" slot-scope="{ index, performDelete }">
+
+      <!--      Slot that is used for all selected options (tags)-->
+      <template v-slot:tag="{ option, remove }">
+        <wt-chip class="multiselect__custom-tag">
+          {{ getOptionLabel({ option, optionLabel }) }}
+          <wt-icon-btn
+            icon="close--filled"
+            size="sm"
+            @click="remove"
+          ></wt-icon-btn>
+        </wt-chip>
+      </template>
+
+      <!--      Slot for custom option template -->
+      <template v-slot:option="{ option }">
+        <slot name="option" v-bind="{ option, optionLabel }">
+          <span>
+            {{ getOptionLabel({ option, optionLabel }) }}
+          </span>
+        </slot>
+      </template>
+
+      <!--      Element for opening and closing the dropdown -->
+      <template v-slot:caret="{ toggle }">
+        <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
-          icon="close--filled"
-          size="sm"
-          color="active"
-          @click="performDelete(index)"
+          :disabled="disabled"
+          class="multiselect__arrow-caret"
+          icon="arrow-down"
+          @mousedown.native.prevent.stop="toggle"
         ></wt-icon-btn>
       </template>
-    </vue-tags-input>
+
+      <!--      Slot located before the tags -->
+      <template v-slot:clear>
+        <wt-icon-btn
+          v-if="clearable"
+          :class="{ 'hidden': !isValue }"
+          :disabled="disabled"
+          class="multiselect__clear"
+          icon="close"
+          @click="clearValue"
+        ></wt-icon-btn>
+      </template>
+
+      <template v-slot:beforeList>
+        <div v-show="isLoading" class="multiselect__loading-wrapper">
+          <wt-loader size="sm"></wt-loader>
+        </div>
+      </template>
+
+      <template v-if="showIntersectionObserver" v-slot:afterList>
+        <div v-observe-visibility="handleAfterListIntersect"></div>
+      </template>
+    </vue-multiselect>
 
     <wt-input-info
       v-if="isValidation"
@@ -46,218 +99,58 @@
 </template>
 
 <script>
-import VueTagsInput from '@johmun/vue-tags-input';
-import validationMixin from '../../../mixins/validationMixin/validationMixin';
+import multiselectMixin from '../wt-select/mixins/multiselectMixin';
 
 export default {
   name: 'wt-tags-input',
-  mixins: [validationMixin],
-  components: { VueTagsInput },
+  mixins: [multiselectMixin],
   props: {
     value: {
       type: Array,
     },
-
-    autocompleteItems: {
-      type: Array,
-      default: () => [],
-    },
-
-    label: {
-      type: String,
-      default: '',
-    },
-
-    placeholder: {
-      type: String,
-      default: '',
-    },
-
-    disabled: {
+    taggable: {
       type: Boolean,
       default: false,
     },
-
-    autocompleteMinLength: {
-      type: Number,
-      default: 0,
-    },
-
-    addOnlyFromAutocomplete: {
+    manualTagging: {
       type: Boolean,
       default: false,
-    },
+      description: `
+      False: "tag" method automatically pushes { optionLabel | "name", trackBy } object to value
+      array and $emits "input" event.
 
-    autocompleteFilterDuplicates: {
-      type: Boolean,
-      default: true,
-    },
-
-    labelProps: {
-      type: Object,
-      description: 'Object with props, passed down to wt-label as props',
-    },
-  },
-
-  data: () => ({
-    input: '',
-  }),
-
-  computed: {
-    hasLabel() {
-      return !!(this.label || this.$slots.label);
-    },
-
-    requiredLabel() {
-      return this.required ? `${this.label}*` : this.label;
-    },
-
-    tags() {
-      if (!this.value) return [];
-      return this.value.map((item) => ({ text: item.name || item.value, ...item }));
-    },
-
-    autocompleteOptions() {
-      return this.autocompleteItems
-        .map((item) => ({
-          text: typeof item === 'object' ? item.name || item.value : item,
-          ...item,
-        }))
-        .filter((item) => item.text?.includes(this.input));
-    },
-
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: this.searchTags,
-        'tags-changed': this.changeTags,
-      };
+      True: "tag" method only $emits "tag" event. Tag addition is responsibility of client side.
+    `,
     },
   },
 
   methods: {
-    searchTags(search) {
-      this.$emit('search', search);
-    },
-
-    changeTags(tags) {
-      this.$emit('input', tags);
+    tag(searchQuery, id) {
+      this.$emit('tag', searchQuery, id);
+      if (!this.manualTagging) {
+        const tag = this.trackBy ? {
+          [this.optionLabel || 'name']: searchQuery,
+          [this.trackBy]: id || searchQuery,
+        } : searchQuery;
+        const value = [...this.value, tag];
+        this.input(value);
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../../css/components/atoms/wt-chip/wt-chip';
+@import '../../../css/components/molecules/wt-select/multiselect';
 
 .wt-tags-input {
   width: 100%;
-}
-
-// increase specificity
-.wt-tags-input .wt-tags-input__tags-input {
-  width: 100%;
-  max-width: 100%; // reset default
-
-  ::v-deep {
-    .ti-input {
-      box-sizing: border-box;
-      min-height: var(--tags-input-min-height); // preserve height, if tags is empty
-      padding: 0; // reset default
-      border: var(--tags-input-border);
-      border-color: var(--tags-input-border-color);
-      border-radius: var(--border-radius);
-      transition: var(--transition);
-
-      .ti-tags {
-        display: flex;
-        align-items: center;
-        gap: var(--tags-input-tags-gap);
-        padding: var(--tags-input-padding);
-        margin: 0; // reset default
-        word-break: break-word; //break long word
-      }
-
-      .ti-new-tag-input-wrapper {
-        padding: 0; // reset default
-        margin: 0; // reset default
-      }
-
-      .ti-new-tag-input {
-        @extend %typo-body-1;
-        @include wt-placeholder;
-
-        border-radius: var(--border-radius);
-      }
-
-      .ti-tag {
-        @extend .wt-chip;
-        display: flex;
-        height: fit-content;
-        margin: 0;  // reset default
-        transition: var(--transition);
-
-        .ti-actions {
-          margin-left: var(--tags-input-tag-actions-margin-left);
-        }
-        // pre-delete state after 1 backspace press
-        &.ti-deletion-mark {   // FIXME
-          color: var(--tags-input-tag-text-color--deletion);
-          background: var(--tags-input-tag-bg-color--deletion);
-
-          .wt-icon__icon {
-            fill: var(--tags-input-tag-text-color--deletion);
-          }
-        }
-      }
-    }
-
-    .ti-autocomplete {
-      @extend %wt-distant-scrollbar;
-      max-height: var(--tags-input-autocomplete-max-height);
-      border: var(--tags-input-autocomplete-border);
-      border-color: var(--tags-input-autocomplete-border-color);
-      border-radius: var(--border-radius);
-      transition: var(--transition);
-      overflow: auto;
-
-      .ti-item {
-        background: transparent; // reset default
-
-        & > div {
-          @extend %typo-body-1;
-          padding: var(--tags-input-autocomplete-option-padding);
-          color: var(--tags-input-autocomplete-option--text-color);
-          transition: var(--transition);
-
-          &:hover {
-            color: var(--tags-input-option-text-color--hover);
-            background: var(--tags-input-option-bg-color--hover);
-          }
-        }
-      }
-    }
-  }
 }
 
 .wt-tags-input:hover,
 .wt-tags-input:focus-within {
   .wt-label {
     color: var(--form-label--hover-color);
-  }
-
-  .wt-tags-input__tags-input ::v-deep {
-    .ti-new-tag-input {
-      border-color: var(--form-border--hover-color);
-    }
-  }
-}
-
-.wt-tags-input:focus-within {
-  .wt-tags-input__tags-input ::v-deep {
-    .ti-new-tag-input {
-      @include wt-placeholder('focus');
-    }
   }
 }
 
@@ -267,36 +160,27 @@ export default {
   .wt-label {
     color: var(--false-color);
   }
-
-  .wt-tags-input__tags-input {
-    ::v-deep {
-      .ti-input {
-        border-color: var(--false-color);
-      }
-    }
-  }
 }
 
 .wt-tags-input--disabled {
   .wt-tags-input__tags-input {
     width: 100%;
     max-width: 100%; // reset default
-
-    ::v-deep {
-      .ti-input {
-        border-color: transparent;
-
-        .ti-new-tag-input-wrapper {
-          display: none;
-        }
-
-        .ti-tag {
-          .ti-actions {
-            display: none;
-          }
-        }
-      }
-    }
   }
+}
+
+.multiselect ::v-deep {
+ .multiselect__tags {
+   .multiselect__tags-wrap {
+     //display: flex;
+     gap: var(--spacing-xs);
+     flex-wrap: wrap;
+   }
+   .multiselect__custom-tag {
+     display: flex;
+     align-items: center;
+     gap: var(--spacing-xs);
+   }
+ }
 }
 </style>
