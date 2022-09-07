@@ -42,7 +42,7 @@
           <wt-icon-btn
             icon="close--filled"
             size="sm"
-            @click="remove"
+            @click="remove(option)"
           ></wt-icon-btn>
         </wt-chip>
       </template>
@@ -50,9 +50,7 @@
       <!--      Slot for custom option template -->
       <template v-slot:option="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
-          <span>
-            {{ getOptionLabel({ option, optionLabel }) }}
-          </span>
+          {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
       </template>
 
@@ -61,7 +59,8 @@
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
           :disabled="disabled"
-          class="multiselect__arrow-caret"
+          class="multiselect__select"
+          color="active"
           icon="arrow-down"
           @mousedown.native.prevent.stop="toggle"
         ></wt-icon-btn>
@@ -169,18 +168,28 @@ export default {
   }
 }
 
-.multiselect ::v-deep {
- .multiselect__tags {
-   .multiselect__tags-wrap {
-     //display: flex;
-     gap: var(--spacing-xs);
-     flex-wrap: wrap;
-   }
-   .multiselect__custom-tag {
-     display: flex;
-     align-items: center;
-     gap: var(--spacing-xs);
-   }
- }
+.wt-tags-input .multiselect ::v-deep {
+  .multiselect__tags {
+    padding-bottom: 0;
+
+    .multiselect__tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .multiselect__custom-tag {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      max-width: 100%;
+      margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0; // border bottom
+      word-break: break-all;
+      gap: var(--spacing-xs);
+    }
+  }
+
+  .multiselect__input {
+    margin-bottom: calc(var(--spacing-xs) - 1px); // border
+  }
 }
 </style>

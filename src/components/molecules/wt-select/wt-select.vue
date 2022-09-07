@@ -25,7 +25,6 @@
       :internal-search="!searchMethod"
       :label="trackBy ? optionLabel : null"
       :limit="1"
-      :limit-text="(count) => `+${count}`"
       :loading="false"
       :options="selectOptions"
       :placeholder="placeholder || label"
@@ -33,10 +32,12 @@
       :value="selectValue"
       class="wt-select__select"
       v-bind="$attrs"
+      @close="isOpened = false"
+      @open="isOpened = true"
       v-on="listeners"
     >
-      <template v-slot:limit>
-        limit!!
+      <template v-if="!isOpened" v-slot:limit>
+        <wt-chip class="wt-select__limit">+{{ value.length - 1 }}</wt-chip>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
@@ -58,18 +59,16 @@
       <!--      Slot for custom option template -->
       <template slot="option" slot-scope="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
-          <span>
-            {{ getOptionLabel({ option, optionLabel }) }}
-          </span>
+          {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
       </template>
 
       <!--      Element for opening and closing the dropdown -->
-      <template slot="caret" slot-scope="{ toggle }">
+      <template v-slot:caret="{ toggle }">
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
           :disabled="disabled"
-          class="multiselect__arrow-caret"
+          class="multiselect__select"
           icon="arrow-down"
           @mousedown.native.prevent.stop="toggle"
         ></wt-icon-btn>
@@ -87,7 +86,7 @@
         ></wt-icon-btn>
       </template>
 
-      <template slot="beforeList">
+      <template v-slot:beforeList>
         <div v-show="isLoading" class="multiselect__loading-wrapper">
           <wt-loader size="sm"></wt-loader>
         </div>
@@ -114,8 +113,12 @@ export default {
   props: {
     value: {},
   },
+  data: () => ({
+    isOpened: false,
+  }),
 };
 </script>
+
 
 <style lang="scss" scoped>
 @import '../../../css/components/molecules/wt-select/multiselect';
@@ -136,6 +139,18 @@ export default {
 .wt-select--invalid:hover {
   .wt-label {
     color: var(--false-color);
+  }
+}
+
+.multiselect ::v-deep {
+  .multiselect__custom-tag,
+  .multiselect__single-label {
+    // text overflow 3 dots
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 }
 

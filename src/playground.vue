@@ -6,6 +6,8 @@
       track-by="name"
       :close-on-select="false"
       multiple
+      placeholder="placeholder"
+      label="label"
     ></wt-tags-input>
     <wt-tags-input
       v-model="select.multipleValue"
@@ -14,12 +16,34 @@
       :close-on-select="false"
       multiple
       taggable
+      placeholder="placeholder"
+      label="label"
     ></wt-tags-input>
     <wt-select
       v-model="select.multipleValue"
       :options="select.options"
       track-by="name"
       multiple
+      placeholder="placeholder"
+      label="label"
+    ></wt-select>
+    <wt-select
+      v-model="select.multipleValue"
+      :options="select.options"
+      :clearable="false"
+      track-by="name"
+      multiple
+      placeholder="placeholder"
+      label="label"
+    ></wt-select>
+    <wt-select
+      :value="'lorem ipsum'"
+      :options="select.options"
+      track-by="name"
+      multiple
+      placeholder="placeholder"
+      label="label"
+      disabled
     ></wt-select>
   </div>
 </template>
@@ -163,7 +187,16 @@ export default {
         name: 'Vue.js1AAAAAA',
         language: 'JavaScript',
       },
-      multipleValue: [],
+      multipleValue: [
+        {
+          name: 'Vue.876878768787687876878768787687',
+          language: 'JavaScript',
+        },
+        {
+          name: 'Adonis2',
+          language: 'JavaScript',
+        },
+      ],
       stringOptions: ['123123123123', '321123123123123', '456'],
       options: [
         {

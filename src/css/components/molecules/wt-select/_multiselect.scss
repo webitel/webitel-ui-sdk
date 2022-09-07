@@ -1,217 +1,162 @@
 @import '~vue-multiselect/dist/vue-multiselect.min.css';
-@import '../../atoms/wt-chip/wt-chip';
 
-.multiselect {
+.multiselect ::v-deep {
   cursor: pointer;
+  position: relative;
 
-  .multiselect__arrow-caret {
+  .multiselect__select {
     position: absolute;
-    z-index: var(--select-caret-z-index);
     top: var(--select-caret-top-pos);
     right: var(--select-caret-right-pos);
+    padding: 0; // reset default
     transition: var(--transition);
-    transform: rotate(0);
+    width: fit-content; // reset default
+    height: fit-content; // reset default
+
+    &:before {
+      display: none; // reset default
+    }
   }
 
-  ::v-deep .multiselect__clear {
+  .wt-select__limit {
+    position: absolute;
+    right: var(--select-chip-right-pos);
+    top: var(--select-chip-top-pos);
+  }
+
+  .multiselect__clear {
     position: absolute;
     z-index: var(--select-clear-z-index);
     top: var(--select-clear-top-pos);
     right: var(--select-clear-right-pos);
+  }
+
+
+  .multiselect__tags {
+    color: var(--form-input-color);
+    border: var(--select-tags-border);
+    border-color: var(--form-border-color);
+    border-radius: var(--border-radius);
+  }
+
+
+  .multiselect__input,
+  .multiselect__single,
+  .multiselect__placeholder {
+    @extend %typo-body-1;
+    @include wt-placeholder;
+
+    padding: 0; // reset default
+    margin: 0; // reset default
+  }
+
+  .multiselect__input:focus {
+    @include wt-placeholder('focus');
+  }
+
+  .multiselect__custom-tag,
+  .multiselect__single-label {
+    color: var(--form-input-color);
+  }
+
+  .multiselect__placeholder {
+    @extend %wt-placeholder;
+    overflow: hidden;
+    max-width: 100%;
+
+    // text overflow 3 dots
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .multiselect__content-wrapper {
+    @extend %wt-distant-scrollbar;
     transition: var(--transition);
-    transform: rotate(0);
+    border: var(--select-tags-border);
+    border-color: var(--form-border-color);
+    border-radius: var(--border-radius);
   }
 
-  ::v-deep {
-    .multiselect__tags {
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      min-height: var(--select-tags-min-height); // reset original 20px style
-      padding: var(--select-tags-padding);
+  .multiselect__option {
+    @extend %typo-body-1;
+    padding: var(--select-options-padding);
+
+    &:after {
+      display: none;
+    }
+
+
+    &--highlight {
       color: var(--form-input-color);
-      border: var(--select-tags-border);
-      border-color: var(--form-border-color);
-      border-radius: var(--border-radius);
-
-      .multiselect__input,
-      .multiselect__single {
-        @extend %typo-body-1;
-        @include wt-placeholder;
-        min-height: var(--select-input-min-height); // reset original 20px style
-        margin: 0;
-        padding: 0;
-        background: transparent;
-      }
-
-      .multiselect__input:focus {
-        @include wt-placeholder('focus');
-      }
-
-      .multiselect__strong {
-        @extend %typo-body-1;
-        @extend .wt-chip;
-        position: absolute;
-        z-index: var(--select-chip-z-index);
-        right: var(--select-chip-right-pos);
-        min-height: var(--select-input-min-height); // reset original 20px style
-        margin: 0;
-        font-weight: normal;
-
-        /* these before-after elements are fixing issue when chip is visually overflown by
-        selected option name (yep, chip has z-index, but its background has 0.3 opacity)*/
-        &:before {
-          position: absolute;
-          z-index: -2; // below chip itself
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          content: '';
-          background: var(--main-color);
-        }
-
-        &:after {
-          @extend .wt-chip;
-          position: absolute;
-          z-index: -1; // below chip itself
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          content: '';
-
-        }
-      }
-
-      .multiselect__tags-wrap {
-        width: 100%;
-      }
-
-      .multiselect__custom-tag, .multiselect__single-label {
-        @extend %typo-body-1;
-        display: block;
-        width: fit-content;
-
-        // text overflow 3 dots
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: var(--form-input-color);
-      }
-
-      .multiselect__placeholder {
-        @extend %wt-placeholder;
-        overflow: hidden;
-        margin: 0;
-
-        // text overflow 3 dots
-        padding: 0;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
+      //background: var(--select-option--hover-color);
+      background: none;
     }
 
-    .multiselect__content-wrapper {
-      @extend %wt-distant-scrollbar;
-      transition: var(--transition);
-      border: var(--select-tags-border);
-      border-color: var(--form-border-color);
-      border-radius: var(--border-radius);
 
-      .multiselect__option {
-        @extend %typo-body-1;
-        padding: var(--select-options-padding);
-
-        & > span {
-          @extend %wt-placeholder;
-        }
-
-        &:after {
-          display: none;
-        }
-
-        &--highlight {
-          background: var(--т, еselect-option--hover-color);
-
-          & > span {
-            color: var(--form-input-color);
-          }
-        }
-
-        &--selected {
-          font-weight: normal;
-          background: var(--select-option--active-color)
-        }
-      }
+    &--selected {
+      font-weight: normal;
+      background: var(--select-option--active-color)
     }
+  }
+}
 
-    .multiselect__loading-wrapper {
-      position: sticky;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 300px; // max dropdown panel height
-      backdrop-filter: blur(4px);
+.multiselect--active ::v-deep {
+  .multiselect__select .wt-icon__icon {
+    fill: var(--icon-color--hover);
+  }
+
+  .multiselect__tags {
+    border-color: var(--form-border--active-color);
+
+    .multiselect__placeholder {
+      @extend %wt-placeholder--focus;
     }
   }
 
-  .wt-select:hover &,
-  .wt-tags-input:hover & {
-    .multiselect__arrow-caret ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
+}
+
+.wt-select:hover,
+.wt-tags-input:hover {
+  .multiselect ::v-deep {
+    .multiselect__tags {
+      border-color: var(--form-border--hover-color);
     }
 
-    ::v-deep .multiselect__clear .wt-icon__icon {
-      fill: var(--icon-color--hover);
-    }
-
-    ::v-deep {
-      .multiselect__tags {
-        border-color: var(--form-border--hover-color);
-      }
-    }
-  }
-
-  &--active {
-    .multiselect__arrow-caret {
-      transform: rotate(180deg);
-    }
-
-    .multiselect__arrow-caret ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
-    }
-
-    ::v-deep {
-      .multiselect__tags {
-        border-color: var(--form-border--active-color);
-
-        .multiselect__placeholder {
-          @extend %wt-placeholder--focus;
-        }
+    .multiselect__select,
+    .multiselect__clear {
+      .wt-icon__icon {
+        fill: var(--icon-color--hover);
       }
     }
   }
 }
 
-.multiselect--loading ::v-deep .multiselect__content-wrapper {
-  overflow-y: hidden;
+.wt-select--loading ::v-deep {
+  .multiselect__content-wrapper {
+    overflow-y: hidden;
+  }
+
+  .multiselect__loading-wrapper {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 300px; // max dropdown panel height
+    backdrop-filter: blur(4px);
+  }
 }
 
-.wt-select--invalid,
-.wt-select--invalid:hover,
-.wt-tags-input--invalid,
-.wt-tags-input--invalid:hover, {
-  .multiselect {
-    ::v-deep {
-      .multiselect__tags {
-        border-color: var(--false-color);
-        outline: none; // prevent outline overlapping false color
-      }
+
+.wt-select.wt-select--invalid,
+.wt-tags-input.wt-tags-input--invalid {
+  .multiselect ::v-deep {
+    .multiselect__tags {
+      border-color: var(--false-color);
+      outline: none; // prevent outline overlapping false color
     }
   }
 }
@@ -252,7 +197,7 @@
       padding: var(--select-tags-padding--clearable);
     }
 
-    .multiselect__strong {
+    .multiselect__limit {
       right: var(--select-chip-right-pos--clearable);
     }
   }
