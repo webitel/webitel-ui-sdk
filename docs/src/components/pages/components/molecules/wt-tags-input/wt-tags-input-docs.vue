@@ -6,17 +6,16 @@
         <wt-tags-input
           v-model="value"
           label="Tags Input"
-          :autocomplete-items="autocomplete"
-          :add-only-from-autocomplete="false"
+          :options="autocomplete"
+          taggable
         ></wt-tags-input>
         <pre><code class="language-html">
           &lt;wt-tags-input
-                v-model="value"
-                label="Tags Input"
-                :autocomplete-items="autocomplete"
-                :add-only-from-autocomplete="false"
-          &gt;
-          &lt;/wt-tags-input&gt;
+            v-model="value"
+            label="Tags Input"
+            :options="autocomplete"
+            taggable
+          &gt;&lt;/wt-tags-input&gt;
         </code></pre>
       </div>
       <div class="example-wrapper">
@@ -33,17 +32,16 @@
       </div>
     </article>
     <component-model></component-model>
-    <h3>Full docs: <a class="full-docs-link" href="https://vue-tags-input.com/#/">Vue
-      Tags Input</a></h3>
+    <h3>This component is built on top of <a class="full-docs-link" href="https://vue-multiselect.js.org/">Vue
+      Multiselect</a>, like wt-select component.
+      There will be described only differences from wt-select component. Same props, events and slots are listed on wt-select page.
+      For more information, see <a class="full-docs-link" href="https://dev.webitel.com/ui-sdk/components/select">WtSelect Docs</a></h3>
     <component-props
       :properties="properties"
     ></component-props>
     <component-events
       :events="events"
     ></component-events>
-    <component-slots
-      :slots="slots"
-    ></component-slots>
   </section>
 </template>
 
@@ -58,7 +56,7 @@ export default {
       $dirty: true,
       required: false,
     },
-    value: [{ name: 'Vue.js' }],
+    value: [{ name: 'React.js' }],
     autocomplete: [
       { name: 'Vue.js', language: 'JavaScript' },
       { name: 'Adonis', language: 'JavaScript' },
@@ -69,95 +67,42 @@ export default {
         value: 'value',
         code: '<wt-tags-input :value="value"></wt-tags-input>',
         type: 'Array',
-        description: 'Array of value objects. Should have "text", "name" or "value" prop to display (in this priority order)',
       },
       {
-        value: 'autocompleteItems',
-        code: '<wt-tags-input :options="options"></wt-tags-input>',
-        type: 'Array',
-        default: '[]',
-        description: 'Expects an array containing objects inside. The objects can have the same properties as a tag object.',
+        value: 'taggable',
+        code: '<wt-tags-input taggable></wt-tags-input>',
+        type: 'Boolean',
+        default: 'false',
+        description: 'If true, user can add tags by himself',
       },
       {
-        value: 'label',
-        code: '<wt-tags-input label="Label"></wt-tags-input>',
+        value: 'trackBy',
+        code: '<wt-tags-input track-by="label"></wt-tags-input>',
         type: 'String',
-        default: '',
+        default: 'null',
+        description: 'Default mode for tags input is array of strings, not objects (that is the difference between tags input and select).',
       },
       {
-        value: 'placeholder',
-        code: '<wt-tags-input placeholder="placeholder"></wt-tags-input>',
-        type: 'String',
-        default: 'label value',
-      },
-      {
-        value: 'autocompleteMinLength',
-        code: '<wt-tags-input autocomplete-min-length="1"></wt-tags-input>',
-        type: 'Number',
-        default: '0',
-        description: 'The minimum character length which is required until the autocomplete layer is shown. If set to 0, then it\'ll be shown on focus.',
-      },
-      {
-        value: 'addOnlyFromAutocomplete',
-        code: '<wt-tags-input :close-on-tags-input="false"></wt-tags-input>',
+        value: 'manualTagging',
+        code: '<wt-tags-input manual-tagging></wt-tags-input>',
         type: 'Boolean',
         default: 'false',
-        description: 'If false, user can enter custom values at enter keypress',
-      },
-      {
-        value: 'autocompleteFilterDuplicates',
-        code: '<wt-tags-input :autocomplete-filter-duplicates="false"></wt-tags-input>',
-        type: 'Boolean',
-        default: 'false',
-        description: 'Filters autocomplete duplicate values',
-      },
-      {
-        value: 'disabled',
-        code: '<wt-tags-input disabled></wt-tags-input>',
-        type: 'Boolean',
-        default: 'false',
-      },
-      {
-        value: 'required',
-        code: '<wt-input required></wt-input>',
-        type: 'Boolean',
-        default: 'false',
-      },
-      {
-        value: 'labelProps',
-        code: '<wt-checkbox :label-props="{}"></wt-checkbox>',
-        type: 'Object',
-        description: 'Object with props, passed down to wt-label as props',
+        description: `
+      False: "tag" method automatically pushes { optionLabel | "name", trackBy } object to value
+      array and $emits "input" event.
+
+      True: "tag" method only $emits "tag" event. Tag addition is responsibility of client side.
+    `,
       },
     ],
     events: [
       {
-        value: 'input',
+        value: 'tag',
         params: [
           {
-            name: 'value', type: ['Array'], description: `tags-changed value. Important: each object
-              in result array will contain "text property" as VueTagsInput component represents only this
-              property in tag view`,
+            name: 'tag', type: ['String'], description: 'vue-multiselect "tag" value.',
           },
         ],
-      },
-      {
-        value: 'search',
-        params: [
-          {
-            name: 'value', type: ['String'], description: 'vue-tags-input "input" value.',
-          },
-        ],
-      },
-      {
-        value: 'plus all vue-tags-input native events. For more information, see vue-tags-input docs.',
-      },
-    ],
-    slots: [
-      {
-        name: 'label',
-        scope: [{ name: 'label' }],
-        description: 'Custom label slot',
       },
     ],
   }),

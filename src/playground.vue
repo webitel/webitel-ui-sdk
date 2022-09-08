@@ -4,8 +4,6 @@
       v-model="select.multipleValue"
       :options="select.options"
       track-by="name"
-      :close-on-select="false"
-      multiple
       placeholder="placeholder"
       label="label"
     ></wt-tags-input>
@@ -13,11 +11,18 @@
       v-model="select.multipleValue"
       :options="select.options"
       track-by="name"
-      :close-on-select="false"
-      multiple
       taggable
       placeholder="placeholder"
       label="label"
+    ></wt-tags-input>
+    <wt-tags-input
+      v-model="select.multipleValue"
+      :options="select.options"
+      track-by="name"
+      taggable
+      placeholder="placeholder"
+      label="label"
+      disabled
     ></wt-tags-input>
     <wt-select
       v-model="select.multipleValue"
@@ -40,7 +45,6 @@
       :value="'lorem ipsum'"
       :options="select.options"
       track-by="name"
-      multiple
       placeholder="placeholder"
       label="label"
       disabled

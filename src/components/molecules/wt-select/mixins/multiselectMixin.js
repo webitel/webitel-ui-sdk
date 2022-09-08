@@ -41,11 +41,6 @@ export default {
       default: false,
     },
 
-    clearable: {
-      type: Boolean,
-      default: true,
-    },
-
     required: {
       type: Boolean,
       default: false,
@@ -132,14 +127,6 @@ export default {
       this.apiOptions = this.searchParams.page === 1 ? items : this.apiOptions.concat(items);
       this.searchHasNext = next;
       this.isLoading = false;
-    },
-
-    clearValue() {
-      let value = '';
-      if (Array.isArray(this.value)) value = [];
-      else if (typeof this.value === 'object' && this.value !== null) value = {};
-      this.input(value);
-      this.$emit('reset', value);
     },
 
     input(value) {

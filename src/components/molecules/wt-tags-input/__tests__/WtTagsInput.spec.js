@@ -17,29 +17,26 @@ describe('WtTagsInput', () => {
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });
 
-  it('emits "input" event at native "tags-changed" event', () => {
-    const tags = [{ text: '123' }];
-    const wrapper = shallowMount(WtTagsInput);
-    wrapper.findComponent({ name: 'vue-tags-input' }).vm.$emit('tags-changed', tags);
-    expect(wrapper.emitted().input[0][0]).toEqual(tags);
+  it('by default emits "input" event at native "tag" event', () => {
+    const tag = '123';
+    const wrapper = shallowMount(WtTagsInput, {
+      propsData: {
+        value: [],
+      },
+    });
+    wrapper.findComponent({ name: 'vue-multiselect' }).vm.$emit('tag', tag);
+    expect(wrapper.emitted().input[0][0]).toEqual([tag]);
   });
 
-  it('correctly computes autocomplete options', () => {
-    const autocompleteItems = [{ name: '123' }, { name: '321' }];
-    const autocompleteOptions = [{ name: '123', text: '123' }, { name: '321', text: '321' }];
+  it('in manual mode doesnt emit "input" event at native "tag" event', () => {
+    const tag = '123';
     const wrapper = shallowMount(WtTagsInput, {
-      propsData: { autocompleteItems },
+      propsData: {
+        value: [],
+        manualTagging: true,
+      },
     });
-    expect(wrapper.vm.autocompleteOptions).toEqual(autocompleteOptions);
-  });
-
-  it('correctly filters autocomplete options with search', () => {
-    const autocompleteItems = [{ name: '123' }, { name: '456' }];
-    const filteredAutocompleteOptions = [{ name: '123', text: '123' }];
-    const wrapper = shallowMount(WtTagsInput, {
-      data: () => ({ input: '1' }),
-      propsData: { autocompleteItems },
-    });
-    expect(wrapper.vm.autocompleteOptions).toEqual(filteredAutocompleteOptions);
+    wrapper.findComponent({ name: 'vue-multiselect' }).vm.$emit('tag', tag);
+    expect(wrapper.emitted().input).toBeFalsy();
   });
 });

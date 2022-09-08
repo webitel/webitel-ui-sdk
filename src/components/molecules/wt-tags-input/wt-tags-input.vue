@@ -3,7 +3,6 @@
     :class="{
       'wt-tags-input--disabled': disabled,
       'wt-tags-input--invalid': invalid,
-      'wt-tags-input--clearable': clearable,
       'wt-tags-input--loading': isLoading,
     }"
     class="wt-tags-input"
@@ -21,6 +20,7 @@
 
     <vue-multiselect
       ref="vue-multiselect"
+      :close-on-select="false"
       :disabled="disabled"
       :internal-search="!searchMethod"
       :label="trackBy ? optionLabel : null"
@@ -31,6 +31,7 @@
       :track-by="trackBy"
       :value="selectValue"
       class="wt-tags-input__select"
+      multiple
       v-bind="$attrs"
       v-on="listeners"
     >
@@ -38,7 +39,7 @@
       <!--      Slot that is used for all selected options (tags)-->
       <template v-slot:tag="{ option, remove }">
         <wt-chip class="multiselect__custom-tag">
-          {{ getOptionLabel({ option, optionLabel }) }}
+          {{ getTagOptionLabel({ option, optionLabel }) }}
           <wt-icon-btn
             icon="close--filled"
             size="sm"
@@ -50,7 +51,7 @@
       <!--      Slot for custom option template -->
       <template v-slot:option="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
-          {{ getOptionLabel({ option, optionLabel }) }}
+          {{ getTagOptionLabel({ option, optionLabel }) }}
         </slot>
       </template>
 
@@ -63,18 +64,6 @@
           color="active"
           icon="arrow-down"
           @mousedown.native.prevent.stop="toggle"
-        ></wt-icon-btn>
-      </template>
-
-      <!--      Slot located before the tags -->
-      <template v-slot:clear>
-        <wt-icon-btn
-          v-if="clearable"
-          :class="{ 'hidden': !isValue }"
-          :disabled="disabled"
-          class="multiselect__clear"
-          icon="close"
-          @click="clearValue"
         ></wt-icon-btn>
       </template>
 
@@ -107,6 +96,10 @@ export default {
     value: {
       type: Array,
     },
+    trackBy: {
+      type: String,
+      default: null,
+    },
     taggable: {
       type: Boolean,
       default: false,
@@ -126,14 +119,25 @@ export default {
   methods: {
     tag(searchQuery, id) {
       this.$emit('tag', searchQuery, id);
+
+      const tag = this.trackBy ? {
+        [this.optionLabel || 'name']: searchQuery,
+        [this.trackBy]: id || searchQuery,
+      } : searchQuery;
+
+      this.options.unshift(tag);
       if (!this.manualTagging) {
-        const tag = this.trackBy ? {
-          [this.optionLabel || 'name']: searchQuery,
-          [this.trackBy]: id || searchQuery,
-        } : searchQuery;
         const value = [...this.value, tag];
         this.input(value);
       }
+    },
+    getTagOptionLabel({ optionLabel, option }) {
+      /*
+      Multiselect creates new tags with "label" property by default, so we need to handle
+      it as well
+       */
+      const label = this.getOptionLabel({ optionLabel, option });
+      return typeof label === 'object' ? option.label : label;
     },
   },
 };

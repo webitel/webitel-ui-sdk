@@ -24,30 +24,4 @@ describe('WtSelect', () => {
     });
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });
-
-  it('Correctly computes internal search options', () => {
-    const options = ['1', '2'];
-    const wrapper = shallowMount(WtSelect, {
-      stubs: {
-        WtLabel,
-        WtIcon: true,
-      },
-      propsData: { options },
-    });
-    expect(wrapper.vm.selectOptions).toBe(options);
-  });
-
-  it('Correctly computes internal search options', async () => {
-    const options = ['1', '2'];
-    const searchOptions = ['1'];
-    const wrapper = shallowMount(WtSelect, {
-      stubs: {
-        WtLabel,
-        WtIcon: true,
-      },
-      propsData: { options, searchMethod: () => ({ items: searchOptions }) },
-    });
-    await wrapper.vm.$nextTick();
-    expect(wrapper.vm.selectOptions).toBe(searchOptions);
-  });
 });

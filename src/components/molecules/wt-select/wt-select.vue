@@ -3,6 +3,7 @@
     :class="{
       'wt-select--disabled': disabled,
       'wt-select--invalid': invalid,
+      'wt-select--multiple': multiple,
       'wt-select--clearable': clearable,
       'wt-select--loading': isLoading,
     }"
@@ -26,6 +27,7 @@
       :label="trackBy ? optionLabel : null"
       :limit="1"
       :loading="false"
+      :multiple="multiple"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :track-by="trackBy"
@@ -37,7 +39,7 @@
       v-on="listeners"
     >
       <template v-if="!isOpened" v-slot:limit>
-        <wt-chip class="wt-select__limit">+{{ value.length - 1 }}</wt-chip>
+        <wt-chip class="multiselect__limit">+{{ value.length - 1 }}</wt-chip>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
@@ -112,13 +114,31 @@ export default {
   mixins: [multiselectMixin],
   props: {
     value: {},
+
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
+
+    clearable: {
+      type: Boolean,
+      default: true,
+    },
   },
   data: () => ({
     isOpened: false,
   }),
+  methods: {
+    clearValue() {
+      let value = '';
+      if (Array.isArray(this.value)) value = [];
+      else if (typeof this.value === 'object' && this.value !== null) value = {};
+      this.input(value);
+      this.$emit('reset', value);
+    },
+  },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import '../../../css/components/molecules/wt-select/multiselect';
@@ -148,9 +168,9 @@ export default {
     // text overflow 3 dots
     display: block;
     overflow: hidden;
+    max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 100%;
   }
 }
 
@@ -158,6 +178,97 @@ export default {
   .multiselect__tags-wrap,
   .multiselect__strong {
     display: none;
+  }
+}
+
+// right padding setup
+
+// default case
+.wt-select {
+  // all is fine
+  .multiselect ::v-deep {
+    .multiselect__tags {
+      padding: var(--input-padding) calc(
+        var(--input-padding)
+        + var(--icon-md-size)
+        + var(--select-caret-right-pos)
+      ) var(--input-padding) var(--input-padding);
+    }
+  }
+}
+
+// only chip
+.wt-select.wt-select--multiple:not(.wt-select--clearable) {
+  .multiselect ::v-deep {
+    $multiselect-limit-right-pos: calc(
+      var(--select-caret-right-pos) // caret offet from border
+      + var(--icon-md-size) // caret size
+      + var(--input-padding) // caret-to-chip offset
+    );
+    .multiselect__tags {
+      padding-right: calc(
+        $multiselect-limit-right-pos
+        + 50px // chip
+        + var(--input-padding) // chip-to-content offset
+      );
+    }
+    .multiselect__limit {
+      right: $multiselect-limit-right-pos;
+    }
+  }
+}
+
+// only clearable
+.wt-select.wt-select--clearable:not(.wt-select--multiple) {
+  .multiselect ::v-deep {
+    $multiselect-clear-right-pos: calc(
+      var(--select-caret-right-pos) // caret offet from border
+      + var(--icon-md-size) // caret size
+      + var(--input-padding) // caret-to-chip offset
+    );
+    .multiselect__tags {
+      padding-right: calc(
+        $multiselect-clear-right-pos
+        + var(--icon-md-size) // clear
+        + var(--input-padding) // clear-to-content offset
+      );
+    }
+
+    .multiselect__clear {
+      right: $multiselect-clear-right-pos;
+    }
+  }
+}
+
+.wt-select.wt-select--multiple.wt-select--clearable {
+  .multiselect ::v-deep {
+    $multiselect-clear-right-pos: calc(
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
+      + var(--input-padding) // caret-to-chip offset
+    );
+
+    $multiselect-limit-right-pos: calc(
+      $multiselect-clear-right-pos// clear offet from border
+      + var(--icon-md-size)// clear size
+      + var(--input-padding) // cleat-to-chip offset
+    );
+
+    .multiselect__tags {
+      padding-right: calc(
+        $multiselect-limit-right-pos
+        + 50px// chip
+        + var(--input-padding) // chip-to-content offset
+      );
+    }
+
+    .multiselect__clear {
+      right: $multiselect-clear-right-pos;
+    }
+
+    .multiselect__limit {
+      right: $multiselect-limit-right-pos;
+    }
   }
 }
 </style>
