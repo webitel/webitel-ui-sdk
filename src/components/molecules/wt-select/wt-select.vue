@@ -3,6 +3,7 @@
     :class="{
       'wt-select--disabled': disabled,
       'wt-select--invalid': invalid,
+      'wt-select--multiple': multiple,
       'wt-select--clearable': clearable,
       'wt-select--loading': isLoading,
     }"
@@ -25,16 +26,21 @@
       :internal-search="!searchMethod"
       :label="trackBy ? optionLabel : null"
       :limit="1"
-      :limit-text="(count) => `+${count}`"
       :loading="false"
+      :multiple="multiple"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :track-by="trackBy"
       :value="selectValue"
       class="wt-select__select"
       v-bind="$attrs"
+      @close="isOpened = false"
+      @open="isOpened = true"
       v-on="listeners"
     >
+      <template v-if="!isOpened" v-slot:limit>
+        <wt-chip class="multiselect__limit">+{{ value.length - 1 }}</wt-chip>
+      </template>
 
       <!--      Slot that is used for all selected options (tags)-->
       <template slot="tag" slot-scope="{ option }">
@@ -55,18 +61,16 @@
       <!--      Slot for custom option template -->
       <template slot="option" slot-scope="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
-          <span>
-            {{ getOptionLabel({ option, optionLabel }) }}
-          </span>
+          {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
       </template>
 
       <!--      Element for opening and closing the dropdown -->
-      <template slot="caret" slot-scope="{ toggle }">
+      <template v-slot:caret="{ toggle }">
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
           :disabled="disabled"
-          class="wt-select__arrow-caret"
+          class="multiselect__select"
           icon="arrow-down"
           @mousedown.native.prevent.stop="toggle"
         ></wt-icon-btn>
@@ -78,14 +82,14 @@
           v-if="clearable"
           :class="{ 'hidden': !isValue }"
           :disabled="disabled"
-          class="wt-select__clear"
+          class="multiselect__clear"
           icon="close"
           @click="clearValue"
         ></wt-icon-btn>
       </template>
 
-      <template slot="beforeList">
-        <div v-show="isLoading" class="wt-select__loading-wrapper">
+      <template v-slot:beforeList>
+        <div v-show="isLoading" class="multiselect__loading-wrapper">
           <wt-loader size="sm"></wt-loader>
         </div>
       </template>
@@ -103,51 +107,15 @@
 </template>
 
 <script>
-import VueMultiselect from 'vue-multiselect';
-import { ObserveVisibility } from 'vue-observe-visibility';
-import validationMixin from '../../../mixins/validationMixin/validationMixin';
-import debounce from '../../../scripts/debounce';
-import isEmpty from '../../../scripts/isEmpty';
+import multiselectMixin from './mixins/multiselectMixin';
 
 export default {
   name: 'wt-select',
-  mixins: [validationMixin],
-  directives: { ObserveVisibility },
-  components: {
-    VueMultiselect,
-  },
+  mixins: [multiselectMixin],
   props: {
     value: {},
 
-    options: {
-      type: Array,
-      default: () => [],
-    },
-
-    label: {
-      type: String,
-      default: '',
-    },
-
-    placeholder: {
-      type: String,
-      default: '',
-    },
-
-    trackBy: {
-      type: String,
-      default: 'id',
-    },
-
-    optionLabel: {
-      type: String,
-    },
-
-    searchMethod: {
-      type: Function,
-    },
-
-    disabled: {
+    multiple: {
       type: Boolean,
       default: false,
     },
@@ -156,108 +124,11 @@ export default {
       type: Boolean,
       default: true,
     },
-
-    required: {
-      type: Boolean,
-      default: false,
-    },
-
-    allowEmpty: {
-      type: Boolean,
-      default: false,
-    },
-
-    labelProps: {
-      type: Object,
-      description: 'Object with props, passed down to wt-label as props',
-    },
   },
-
   data: () => ({
-    apiOptions: [],
-    isLoading: false,
-
-    searchParams: {
-      search: '',
-      page: 1,
-    },
-    searchHasNext: true,
+    isOpened: false,
   }),
-  computed: {
-    isApiMode() {
-      return !!this.searchMethod;
-    },
-    showIntersectionObserver() {
-      return this.isApiMode && !this.isLoading && this.apiOptions.length;
-    },
-    selectValue() {
-      // vue-multiselect doesn't show placeholder if value is empty object
-      return this.isValue ? this.value : '';
-    },
-
-    hasLabel() {
-      return !!(this.label || this.$slots.label);
-    },
-
-    requiredLabel() {
-      return this.required ? `${this.label}*` : this.label;
-    },
-
-    selectOptions() {
-      return this.isApiMode ? this.apiOptions : this.options;
-    },
-
-    isValue() {
-      return !isEmpty(this.value);
-    },
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: this.input,
-        close: this.close,
-        'search-change': (search) => {
-          this.$emit('search-change', search);
-          this.handleSearchChange(search);
-        },
-      };
-    },
-  },
-
   methods: {
-    getOptionLabel({ option, optionLabel }) {
-      const defaultOptionLabel = 'name';
-
-      if (optionLabel) return option[optionLabel];
-      if (option.locale) {
-        if (Array.isArray(option.locale)) return this.$tc(...option.locale);
-        return this.$t(option.locale);
-      }
-      return option[defaultOptionLabel] || option;
-    },
-    handleSearchChange(search) {
-      if (!this.isApiMode) return;
-      this.isLoading = true;
-      this.searchParams.page = 1;
-      this.searchParams.search = search;
-      this.fetchOptions();
-    },
-
-    handleAfterListIntersect(isVisible) {
-      if (isVisible && this.searchHasNext) {
-        this.isLoading = true;
-        this.searchParams.page += 1;
-        this.fetchOptions();
-      }
-    },
-
-    async fetchOptions({ search, page } = this.searchParams) {
-      if (!this.isApiMode) return;
-      const { items, next } = await this.searchMethod({ search, page });
-      this.apiOptions = this.searchParams.page === 1 ? items : this.apiOptions.concat(items);
-      this.searchHasNext = next;
-      this.isLoading = false;
-    },
-
     clearValue() {
       let value = '';
       if (Array.isArray(this.value)) value = [];
@@ -265,26 +136,12 @@ export default {
       this.input(value);
       this.$emit('reset', value);
     },
-
-    input(value) {
-      this.$emit('input', value);
-    },
-
-    close() {
-      this.$emit('closed');
-    },
-  },
-
-  created() {
-    this.fetchOptions();
-    this.fetchOptions = debounce(this.fetchOptions, 500);
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~vue-multiselect/dist/vue-multiselect.min.css';
-@import '../../../css/components/atoms/wt-chip/wt-chip';
+@import '../../../css/components/molecules/wt-select/multiselect';
 
 .wt-select {
   width: 100%;
@@ -293,213 +150,9 @@ export default {
 
 .wt-label {
   .wt-select:hover &,
-  .wt-select:focus-within & {
+  .wt-select:focus-within &, {
     color: var(--form-label--hover-color);
   }
-}
-
-.multiselect {
-  cursor: pointer;
-
-  .wt-select__arrow-caret {
-    position: absolute;
-    z-index: var(--select-caret-z-index);
-    top: var(--select-caret-top-pos);
-    right: var(--select-caret-right-pos);
-    transition: var(--transition);
-    transform: rotate(0);
-  }
-
-  ::v-deep .wt-select__clear {
-    position: absolute;
-    z-index: var(--select-clear-z-index);
-    top: var(--select-clear-top-pos);
-    right: var(--select-clear-right-pos);
-    transition: var(--transition);
-    transform: rotate(0);
-  }
-
-  ::v-deep {
-    .multiselect__tags {
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      min-height: var(--select-tags-min-height); // reset original 20px style
-      padding: var(--select-tags-padding);
-      color: var(--form-input-color);
-      border: var(--select-tags-border);
-      border-color: var(--form-border-color);
-      border-radius: var(--border-radius);
-
-      .multiselect__input,
-      .multiselect__single {
-        @extend %typo-body-1;
-        @include wt-placeholder;
-        min-height: var(--select-input-min-height); // reset original 20px style
-        margin: 0;
-        padding: 0;
-        background: transparent;
-      }
-
-      .multiselect__input:focus {
-        @include wt-placeholder('focus');
-      }
-
-      .multiselect__strong {
-        @extend %typo-body-1;
-        @extend .wt-chip;
-        position: absolute;
-        z-index: var(--select-chip-z-index);
-        right: var(--select-chip-right-pos);
-        min-height: var(--select-input-min-height); // reset original 20px style
-        margin: 0;
-        font-weight: normal;
-
-        /* these before-after elements are fixing issue when chip is visually overflown by
-        selected option name (yep, chip has z-index, but its background has 0.3 opacity)*/
-        &:before {
-          position: absolute;
-          z-index: -2; // below chip itself
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          content: '';
-          background: var(--main-color);
-        }
-
-        &:after {
-          @extend .wt-chip;
-          position: absolute;
-          z-index: -1; // below chip itself
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          content: '';
-
-        }
-      }
-
-      .multiselect__tags-wrap {
-        width: 100%;
-      }
-
-      .multiselect__custom-tag, .multiselect__single-label {
-        @extend %typo-body-1;
-        display: block;
-
-        // text overflow 3 dots
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        color: var(--form-input-color);
-      }
-
-      .multiselect__placeholder {
-        @extend %wt-placeholder;
-        overflow: hidden;
-        margin: 0;
-
-        // text overflow 3 dots
-        padding: 0;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-    }
-
-    .multiselect__content-wrapper {
-      @extend %wt-distant-scrollbar;
-      transition: var(--transition);
-      border: var(--select-tags-border);
-      border-color: var(--form-border-color);
-      border-radius: var(--border-radius);
-
-      .multiselect__option {
-        @extend %typo-body-1;
-        padding: var(--select-options-padding);
-
-        & > span {
-          @extend %wt-placeholder;
-        }
-
-        &:after {
-          display: none;
-        }
-
-        &--highlight {
-          background: var(--т, еselect-option--hover-color);
-
-          & > span {
-            color: var(--form-input-color);
-          }
-        }
-
-        &--selected {
-          font-weight: normal;
-          background: var(--select-option--active-color)
-        }
-      }
-    }
-
-    .wt-select__loading-wrapper {
-      position: sticky;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 300px; // max dropdown panel height
-      backdrop-filter: blur(4px);
-    }
-  }
-
-  .wt-select:hover & {
-    .wt-select__arrow-caret ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
-    }
-
-    ::v-deep .wt-select__clear .wt-icon__icon {
-      fill: var(--icon-color--hover);
-    }
-
-    ::v-deep {
-      .multiselect__tags {
-        border-color: var(--form-border--hover-color);
-      }
-    }
-  }
-
-  &--active {
-    .wt-select__arrow-caret {
-      transform: rotate(180deg);
-    }
-
-    .wt-select__arrow-caret ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
-    }
-
-    ::v-deep {
-      .multiselect__tags {
-        border-color: var(--form-border--active-color);
-
-        .multiselect__tags-wrap,
-        .multiselect__strong {
-          display: none;
-        }
-
-        .multiselect__placeholder {
-          @extend %wt-placeholder--focus;
-        }
-      }
-    }
-  }
-}
-
-.wt-select--loading ::v-deep .multiselect__content-wrapper {
-  overflow-y: hidden;
 }
 
 .wt-select--invalid,
@@ -507,53 +160,114 @@ export default {
   .wt-label {
     color: var(--false-color);
   }
+}
 
-  .multiselect {
-    ::v-deep {
-      .multiselect__tags {
-        border-color: var(--false-color);
-        outline: none; // prevent outline overlapping false color
-      }
-    }
+.multiselect ::v-deep {
+  .multiselect__custom-tag,
+  .multiselect__single-label {
+    // text overflow 3 dots
+    display: block;
+    overflow: hidden;
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
-.wt-select--disabled {
-  pointer-events: none;
-
-  .multiselect--disabled {
-    opacity: 1;
-    background: none;
-  }
-
-  .wt-select__arrow-caret ::v-deep .wt-icon__icon,
-  .wt-select__clear ::v-deep .wt-icon__icon {
-    fill: var(--icon-color-disabled);
-  }
-
-  .multiselect {
-    ::v-deep {
-      .multiselect__tags {
-        border-color: var(--form-border--disabled-color);
-        background: var(--form-border--disabled-color);
-
-        .multiselect__placeholder {
-          @extend %wt-placeholder--disabled;
-          //color: var(--form-placeholder--disabled-color);
-        }
-      }
-    }
+.multiselect--active ::v-deep {
+  .multiselect__tags-wrap,
+  .multiselect__strong {
+    display: none;
   }
 }
 
-.wt-select--clearable {
-  .multiselect::v-deep {
+// right padding setup
+
+// default case
+.wt-select {
+  // all is fine
+  .multiselect ::v-deep {
     .multiselect__tags {
-      padding: var(--select-tags-padding--clearable);
+      padding: var(--input-padding) calc(
+        var(--input-padding)
+        + var(--icon-md-size)
+        + var(--select-caret-right-pos)
+      ) var(--input-padding) var(--input-padding);
+    }
+  }
+}
+
+// only chip
+.wt-select.wt-select--multiple:not(.wt-select--clearable) {
+  .multiselect ::v-deep {
+    $multiselect-limit-right-pos: calc(
+      var(--select-caret-right-pos) // caret offet from border
+      + var(--icon-md-size) // caret size
+      + var(--input-padding) // caret-to-chip offset
+    );
+    .multiselect__tags {
+      padding-right: calc(
+        $multiselect-limit-right-pos
+        + 50px // chip
+        + var(--input-padding) // chip-to-content offset
+      );
+    }
+    .multiselect__limit {
+      right: $multiselect-limit-right-pos;
+    }
+  }
+}
+
+// only clearable
+.wt-select.wt-select--clearable:not(.wt-select--multiple) {
+  .multiselect ::v-deep {
+    $multiselect-clear-right-pos: calc(
+      var(--select-caret-right-pos) // caret offet from border
+      + var(--icon-md-size) // caret size
+      + var(--input-padding) // caret-to-chip offset
+    );
+    .multiselect__tags {
+      padding-right: calc(
+        $multiselect-clear-right-pos
+        + var(--icon-md-size) // clear
+        + var(--input-padding) // clear-to-content offset
+      );
     }
 
-    .multiselect__strong {
-      right: var(--select-chip-right-pos--clearable);
+    .multiselect__clear {
+      right: $multiselect-clear-right-pos;
+    }
+  }
+}
+
+.wt-select.wt-select--multiple.wt-select--clearable {
+  .multiselect ::v-deep {
+    $multiselect-clear-right-pos: calc(
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
+      + var(--input-padding) // caret-to-chip offset
+    );
+
+    $multiselect-limit-right-pos: calc(
+      $multiselect-clear-right-pos// clear offet from border
+      + var(--icon-md-size)// clear size
+      + var(--input-padding) // cleat-to-chip offset
+    );
+
+    .multiselect__tags {
+      padding-right: calc(
+        $multiselect-limit-right-pos
+        + 50px// chip
+        + var(--input-padding) // chip-to-content offset
+      );
+    }
+
+    .multiselect__clear {
+      right: $multiselect-clear-right-pos;
+    }
+
+    .multiselect__limit {
+      right: $multiselect-limit-right-pos;
     }
   }
 }

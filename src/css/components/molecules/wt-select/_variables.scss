@@ -1,58 +1,11 @@
 
 :root {
-  --select-caret-top-pos: var(--spacing-xs);
-  --select-caret-right-pos: var(--spacing-xs);
-  --select-caret-z-index: 1;
+  --select-icon-top-pos: var(--spacing-xs);
+  --select-chip-top-pos: var(--spacing-xs);
 
-  --select-clear-top-pos: var(--spacing-xs);
-
-  --select-clear-right-pos: calc(
-    var(--input-padding)
-    + var(--icon-md-size)
-    + var(--select-caret-right-pos)
-    ); // spacing + caret icon + caret right pos
-
-  --select-clear-z-index: var(--select-caret-z-index);
-
-  --select-tags-min-height: calc(24px + var(--spacing-xs) * 2); // 24px %typo-body-1 line-height
-
-  --select-tags-padding:
-    var(--input-padding)
-    calc(
-      var(--input-padding)
-      + var(--icon-md-size)
-      + var(--select-caret-right-pos)
-    )
-    var(--input-padding)
-    var(--input-padding);  // right pos = 10px spacing + caret icon size + caret offset
-
-  --select-tags-padding--clearable:
-    var(--input-padding)
-    calc(
-      var(--input-padding)
-      + var(--icon-md-size)
-      + var(--select-clear-right-pos)
-    )
-    var(--input-padding)
-    var(--input-padding);
+  --select-caret-right-pos: var(--input-padding);
 
   --select-tags-border: var(--input-border);  // right pos = 10px spacing + clear icon size + clear offset
-
-  --select-input-min-height: 18px;
-
-  --select-chip-right-pos: calc(
-    var(--spacing-xs)
-    + var(--icon-md-size)
-    + var(--spacing-xs)
-  ); // 2 spacings + arrow down icon
-
-  --select-chip-right-pos--clearable: calc(
-    var(--spacing-xs)
-    + var(--icon-md-size)
-    + var(--select-chip-right-pos)
-  ); // spacing after bottom arrow + "reset" sm icon
-
-  --select-chip-z-index: 1;
 
   --select-options-padding: var(--input-padding);
 
