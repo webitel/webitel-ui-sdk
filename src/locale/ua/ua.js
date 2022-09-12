@@ -58,6 +58,7 @@ export default {
     priority: 'Приорітет',
     variables: 'Змінна | Змінні',
     type: 'Тип',
+    tag: 'Тег | Теги',
   },
   // date-related texts
   date: {

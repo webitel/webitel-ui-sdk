@@ -60,6 +60,7 @@ export default {
     priority: 'Priority',
     variables: 'Variable | Variables',
     type: 'Type',
+    tag: 'Tag | Tags',
   },
   // date-related texts
   date: {
