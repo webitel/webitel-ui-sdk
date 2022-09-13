@@ -175,6 +175,11 @@ export default {
 .wt-tags-input .multiselect ::v-deep {
   .multiselect__tags {
     padding-bottom: 0;
+    padding-right: calc(
+      var(--input-padding)
+      + var(--icon-md-size)
+      + var(--select-caret-right-pos)
+    );
 
     .multiselect__tags-wrap {
       display: flex;
