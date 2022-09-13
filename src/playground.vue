@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-status-select></wt-status-select>
     <wt-tags-input
       v-model="select.multipleValue"
       :options="select.stringOptions"

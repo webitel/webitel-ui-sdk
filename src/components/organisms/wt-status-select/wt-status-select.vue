@@ -108,7 +108,7 @@ export default {
     border: none;
   }
 
-  .wt-select__arrow-caret {
+  .multiselect__select {
     top: 0;
     right: 0;
   }
