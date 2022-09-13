@@ -131,22 +131,25 @@
   }
 }
 
-.wt-select--loading ::v-deep {
-  .multiselect__content-wrapper {
-    overflow-y: hidden;
-  }
+.wt-select--loading,
+.wt-tags-input--loading {
+  ::v-deep {
+    .multiselect__content-wrapper {
+      overflow-y: hidden;
+    }
 
-  .multiselect__loading-wrapper {
-    position: sticky;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 300px; // max dropdown panel height
-    backdrop-filter: blur(4px);
+    .multiselect__loading-wrapper {
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 300px; // max dropdown panel height
+      backdrop-filter: blur(4px);
+    }
   }
 }
 
