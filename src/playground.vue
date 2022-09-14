@@ -1,5 +1,27 @@
 <template>
   <div class="playground">
+    <wt-popup width="600">
+      <template v-slot:title>lorem ispsum</template>
+      <template v-slot:main>
+        Lorem markdownum. Causa furca Boebes qua **tumulo se ab** tollit Perseus
+        demersus. Tetigere concipientibus vetitis tamen, volucrum abesse et [tulit
+        ustus](http://tenuihoc.io/cui).
+
+        > Maledictaque inquit, sustinet velit, hoc coniciunt victa tingui fors sacrisque
+        > autem te fecere in hunc cum est **Spercheides**. Nulla decidit! Vittis curru
+        > rotarum. Et animo certe in cum ulva quaesiti servanda bacis versavitque
+        > decebat trahebat vero cadit. Genero tactis novissimus discede, ait nunc iubes
+        > crescunt horrea qui [germanamque et](http://iuncisque-serpens.io/ardesceret)
+        > deae ore ut gravi contudit montanaque, virtute?
+
+        Quies est perstat inire, horrenda cecidisse vulnere, quam natura copia in pia,
+        Atlas conclamat elisi, in. Nutrix fecit victa: mandata Medusaeo sed mihi haut
+        ceras nescio praedator regionibus monstravit guttura amarunt caesique abesse:
+        sub.
+
+        ## Longusque pharetram
+      </template>
+    </wt-popup>
     <wt-status-select></wt-status-select>
     <wt-tags-input
       v-model="select.multipleValue"

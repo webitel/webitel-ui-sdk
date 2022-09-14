@@ -66,6 +66,11 @@
           description: 'sets min-width style value to popup container',
         },
         {
+          value: 'width',
+          type: 'Number, String',
+          description: 'sets width style value to popup container',
+        },
+        {
           value: 'overflow',
           type: 'Boolean',
           default: 'false',

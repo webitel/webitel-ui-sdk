@@ -1,12 +1,11 @@
 <template>
   <div
-    class="wt-popup"
     :class="{ 'wt-popup--overflow': overflow }"
+    class="wt-popup"
   >
-    <div class="wt-popup__shadow"></div>
     <aside
-      class="wt-popup__popup"
       :style="popupStyle"
+      class="wt-popup__popup"
     >
       <header class="wt-popup__header">
         <slot name="header">
@@ -20,10 +19,10 @@
           @click="$emit('close')"
         ></wt-icon-btn>
       </header>
-      <section class="wt-popup__main" v-if="$slots.main">
+      <section v-if="$slots.main" class="wt-popup__main">
         <slot name="main"></slot>
       </section>
-      <footer class="wt-popup__actions" v-if="$slots.actions">
+      <footer v-if="$slots.actions" class="wt-popup__actions">
         <slot name="actions"></slot>
       </footer>
     </aside>
@@ -37,6 +36,9 @@ export default {
     minWidth: {
       type: [Number, String],
     },
+    width: {
+      type: [Number, String],
+    },
     overflow: {
       type: Boolean,
       default: false,
@@ -44,7 +46,10 @@ export default {
   },
   computed: {
     popupStyle() {
-      return this.minWidth ? `min-width: ${this.minWidth}px;` : '';
+      let style = '';
+      style += this.minWidth ? `min-width: ${this.minWidth}px;` : '';
+      style += this.width ? `width: ${this.width}px;` : '';
+      return style;
     },
   },
 };
@@ -53,37 +58,28 @@ export default {
 <style lang="scss" scoped>
 .wt-popup {
   position: fixed;
+  z-index: var(--popup-wrapper-z-index);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--popup-wrapper-z-index);
-
-  &__shadow {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: var(--popup-shadow-color);
-    z-index: 0;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--popup-shadow-color);
 }
 
 .wt-popup__popup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--popup-sections-gap);
   max-height: var(--popup-max-height);
+  margin: var(--popup-padding);
   padding: var(--popup-padding);
-  background: var(--popup-bg-color);
-  transform: translate(-50%, -50%);
   border-radius: var(--border-radius);
+  background: var(--popup-bg-color);
   box-shadow: var(--elevation-10);
-  z-index: 1;
+  gap: var(--popup-sections-gap);
 }
 
 .wt-popup__header {
@@ -92,14 +88,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--popup-header-padding);
   padding: var(--popup-header-padding);
-  background: var(--popup-header-bg-color);
   border-radius: var(--border-radius);
+  background: var(--popup-header-bg-color);
+  gap: var(--popup-header-padding);
 
   .wt-popup__title {
-    font: inherit;
     flex-grow: 1;
+    font: inherit;
   }
 
   .wt-popup__close-btn {
@@ -110,18 +106,18 @@ export default {
 .wt-popup__main {
   @extend %wt-scrollbar;
   @extend %typo-body-1;
-  min-height: 0;
-  flex-grow: 1;
   overflow-y: auto;
+  flex-grow: 1;
+  min-height: 0;
   padding-right: var(--popup-main-section-padding-right);
 }
 
 .wt-popup__actions {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: var(--popup-actions-padding);
+  justify-content: center;
   padding: var(--popup-actions-padding);
+  gap: var(--popup-actions-padding);
 }
 
 .wt-popup--overflow {

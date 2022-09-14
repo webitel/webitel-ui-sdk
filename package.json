@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "2.1.5",
+  "version": "2.1.7",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -31,11 +31,9 @@
     "deep-equal": "^2.0.3",
     "file-saver": "^2.0.2",
     "floating-vue": "^1.0.0-beta.17",
-    "i": "^0.3.7",
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "node-polyfill-webpack-plugin": "^1.1.4",
-    "npm": "^8.10.0",
     "plyr": "3.6.2",
     "vue": "^2.6.11",
     "vue-i18n": "^8.18.2",
