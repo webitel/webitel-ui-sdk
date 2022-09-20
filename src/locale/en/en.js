@@ -61,6 +61,7 @@ export default {
     variables: 'Variable | Variables',
     type: 'Type',
     tag: 'Tag | Tags',
+    output: 'Output | Outputs',
   },
   // date-related texts
   date: {

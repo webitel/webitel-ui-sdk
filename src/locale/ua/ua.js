@@ -59,6 +59,7 @@ export default {
     variables: 'Змінна | Змінні',
     type: 'Тип',
     tag: 'Тег | Теги',
+    output: 'Вихід | Виходи',
   },
   // date-related texts
   date: {
