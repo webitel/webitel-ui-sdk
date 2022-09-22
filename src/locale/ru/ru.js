@@ -169,6 +169,7 @@ export default {
         [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
         [AdminSections.EMAIL_PROFILES]: 'Email профили',
         [AdminSections.IMPORT_CSV]: 'Импорт данных из CSV файла',
+        [AdminSections.TRIGGERS]: 'Триггеры',
         [AdminSections.ROLES]: 'Роли',
         [AdminSections.OBJECTS]: 'Разделы',
       },
