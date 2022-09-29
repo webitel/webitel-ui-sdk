@@ -62,6 +62,8 @@ export default {
     type: 'Type',
     tag: 'Tag | Tags',
     output: 'Output | Outputs',
+    values: 'Value | Values',
+    keys: 'Key | Keys',
   },
   // date-related texts
   date: {
