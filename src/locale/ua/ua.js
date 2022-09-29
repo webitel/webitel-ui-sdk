@@ -60,7 +60,7 @@ export default {
     type: 'Тип',
     tag: 'Тег | Теги',
     output: 'Вихід | Виходи',
-    values: 'Значення',
+    values: 'Значення | Значення',
     keys: 'Ключ | Ключі',
   },
   // date-related texts
