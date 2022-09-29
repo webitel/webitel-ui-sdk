@@ -66,6 +66,7 @@ export default {
   // date-related texts
   date: {
     sec: 'Сек',
+    timezone: 'Часова зона | Часові зони',
   },
   // describes Webitel system entities
   objects: {
