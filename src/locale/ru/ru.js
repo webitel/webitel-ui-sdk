@@ -62,6 +62,7 @@ export default {
     output: 'Выход | Выходы',
     values: 'Значение | Значения',
     keys: 'Ключ | Ключи',
+    duration: 'Длительность',
   },
   // date-related texts
   date: {

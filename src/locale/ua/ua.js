@@ -62,6 +62,7 @@ export default {
     output: 'Вихід | Виходи',
     values: 'Значення | Значення',
     keys: 'Ключ | Ключі',
+    duration: 'Тривалість',
   },
   // date-related texts
   date: {
