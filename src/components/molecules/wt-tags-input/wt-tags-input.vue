@@ -124,11 +124,14 @@ export default {
         [this.optionLabel || 'name']: searchQuery,
         [this.trackBy]: id || searchQuery,
       } : searchQuery;
-
-      this.options.unshift(tag);
-      if (!this.manualTagging) {
-        const value = [...this.value, tag];
-        this.input(value);
+      const trackElemBy = this.trackBy;
+      const isTagExist = this.options.some((elem) => elem[trackElemBy] === tag[trackElemBy]);
+      if (!isTagExist) {
+        this.options.unshift(tag);
+        if (!this.manualTagging) {
+          const value = [...this.value, tag];
+          this.input(value);
+        }
       }
     },
     getTagOptionLabel({ optionLabel, option }) {
