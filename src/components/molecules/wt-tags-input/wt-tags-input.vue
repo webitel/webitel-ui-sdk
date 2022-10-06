@@ -125,14 +125,14 @@ export default {
         [this.trackBy]: id || searchQuery,
       } : searchQuery;
 
-      const isTagExist = () => {
-        if (typeof tag === 'string')
-          return this.options.some((elem) => elem === tag);
-
-          return this.options.some((elem) => elem[this.trackBy] === tag[this.trackBy]);
+      const isTagExist = (newTag) => {
+        if (typeof newTag === 'string') {
+          return this.options.some((elem) => elem === newTag);
+        }
+        return this.options.some((elem) => elem[this.trackBy] === newTag[this.trackBy]);
       }
 
-      if (isTagExist()) return;
+      if (isTagExist(tag)) return;
 
       this.options.unshift(tag);
       if (!this.manualTagging) {
