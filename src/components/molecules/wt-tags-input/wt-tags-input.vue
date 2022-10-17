@@ -23,7 +23,7 @@
       :close-on-select="false"
       :disabled="disabled"
       :internal-search="!searchMethod"
-      :label="trackBy ? (optionLabel || trackBy) : null"
+      :label="trackBy ? optionLabel : null"
       :loading="false"
       :options="selectOptions"
       :placeholder="placeholder || label"
