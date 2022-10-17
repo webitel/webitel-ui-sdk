@@ -26,6 +26,7 @@
     "CHANGELOG.md"
   ],
   "dependencies": {
+    "clipboard-copy": "^4.0.1",
     "core-js": "^3.6.5",
     "csv-stringify": "^5.5.3",
     "deep-copy": "^1.4.2",
