@@ -1,14 +1,14 @@
 import { shallowMount } from '@vue/test-utils';
 import WtIconBtn from '../../wt-icon-btn/wt-icon-btn.vue';
-import WtCopy from '../wt-copy.vue';
+import WtCopyAction from '../wt-copy-action.vue';
 
-describe('WtCopy', () => {
+describe('WtCopyAction', () => {
   it('renders a component', () => {
-    const wrapper = shallowMount(WtCopy, {
+    const wrapper = shallowMount(WtCopyAction, {
       stubs: {
         WtIconBtn,
       },
     });
-    expect(wrapper.classes('wt-copy')).toBe(true);
+    expect(wrapper.classes('wt-copy-action')).toBe(true);
   });
 });

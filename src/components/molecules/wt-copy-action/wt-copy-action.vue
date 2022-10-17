@@ -1,5 +1,5 @@
 <template>
-  <wt-tooltip class="wt-copy">
+  <wt-tooltip class="wt-copy-action">
     <template v-slot:activator>
       <wt-icon-btn
         v-bind="$attrs"
@@ -18,7 +18,7 @@ import copy from 'clipboard-copy';
 let copiedIdTimeout = null;
 
 export default {
-  name: 'wt-copy',
+  name: 'wt-copy-action',
   data: () => ({
     copied: false,
   }),
@@ -60,8 +60,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .wt-tooltip {
-  white-space: nowrap;
-  overflow-wrap: normal;
-}
 </style>
