@@ -115,7 +115,9 @@ export default {
     `,
     },
   },
-
+  data: () => ({
+    defaultOptionLabel: 'label',
+  }),
   methods: {
     tag(searchQuery, id) {
       this.$emit('tag', searchQuery, id);

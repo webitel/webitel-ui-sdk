@@ -54,6 +54,7 @@ export default {
   data: () => ({
     apiOptions: [],
     isLoading: false,
+    defaultOptionLabel: 'name',
 
     searchParams: {
       search: '',
@@ -96,14 +97,12 @@ export default {
 
   methods: {
     getOptionLabel({ option, optionLabel }) {
-      const defaultOptionLabel = 'name';
-
-      if (optionLabel) return option[optionLabel];
+      if (optionLabel && option[optionLabel]) return option[optionLabel];
       if (option.locale) {
         if (Array.isArray(option.locale)) return this.$tc(...option.locale);
         return this.$t(option.locale);
       }
-      return option[defaultOptionLabel] || option;
+      return option[this.defaultOptionLabel] || option;
     },
     handleSearchChange(search) {
       if (!this.isApiMode) return;
