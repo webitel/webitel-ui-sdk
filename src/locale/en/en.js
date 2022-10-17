@@ -264,7 +264,7 @@ export default {
         text: 'Sorry, we can\'t find the page you want.',
       },
     },
-    copy: {
+    copyAction: {
       copy: 'Copy',
       copied: 'Copied to clipboard!',
     },

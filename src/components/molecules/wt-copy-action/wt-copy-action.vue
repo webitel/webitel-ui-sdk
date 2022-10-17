@@ -36,10 +36,10 @@ export default {
   },
   computed: {
     copyTooltip() {
-      return this.tooltips.copy || this.$t('webitelUI.copy.copy');
+      return this.tooltips.copy || this.$t('webitelUI.copyAction.copy');
     },
     copiedTooltip() {
-      return this.tooltips.copied || this.$t('webitelUI.copy.copied');
+      return this.tooltips.copied || this.$t('webitelUI.copyAction.copied');
     },
   },
   methods: {
