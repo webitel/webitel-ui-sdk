@@ -40,6 +40,7 @@ export default {
     state: 'Стан',
     refresh: 'Оновити',
     retry: 'Повторити',
+    reset: 'Скинути',
   },
   vocabulary: {
     language: 'Мова',

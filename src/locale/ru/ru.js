@@ -63,6 +63,7 @@ export default {
     values: 'Значение | Значения',
     keys: 'Ключ | Ключи',
     duration: 'Длительность',
+    reset: 'Сбросить',
   },
   // date-related texts
   date: {
