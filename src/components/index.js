@@ -34,6 +34,7 @@ import WtLabel from './molecules/wt-label/wt-label.vue';
 import WtButtonSelect from './molecules/wt-button-select/wt-button-select.vue';
 import WtHint from './molecules/wt-hint/wt-hint.vue';
 import WtCopyAction from './molecules/wt-copy-action/wt-copy-action.vue';
+import WtLoadBar from './molecules/wt-load-bar/wt-load-bar.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
@@ -103,6 +104,7 @@ const Components = {
   WtButtonSelect,
   WtContextMenu,
   WtCopyAction,
+  WtLoadBar,
 };
 
 Object.keys(Components).forEach((name) => {

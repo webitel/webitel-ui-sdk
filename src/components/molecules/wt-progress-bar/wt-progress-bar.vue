@@ -13,11 +13,11 @@ export default {
   name: 'wt-progress-bar',
   props: {
     max: {
-      type: Number,
+      type: [Number, String],
       default: 100,
     },
     value: {
-      type: Number,
+      type: [Number, String],
       default: 0,
     },
     color: {

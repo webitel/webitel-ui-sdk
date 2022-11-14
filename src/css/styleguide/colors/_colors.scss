@@ -83,6 +83,9 @@
   --job-color: hsla(var(--_job-color), var(--_opacity--default));
   --job--hover-color: hsla(var(--_job-color), var(--_opacity--hover));
 
+  --link-color: hsla(205, 90%, 45%, 1);
+  --link--hover-color: hsla(205, 90%, 60%, 1);
+
   // SUBORDINATE COLORS
   --tag-bg-color: var(--accent-secondary-color);
 
