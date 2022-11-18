@@ -66,6 +66,7 @@ export default {
     keys: 'Key | Keys',
     duration: 'Duration',
     reset: 'Reset',
+    errors: 'Error | Errors',
   },
   // date-related texts
   date: {

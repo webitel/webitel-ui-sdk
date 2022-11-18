@@ -64,6 +64,7 @@ export default {
     values: 'Значення | Значення',
     keys: 'Ключ | Ключі',
     duration: 'Тривалість',
+    errors: 'Помилка | Помилки',
   },
   // date-related texts
   date: {

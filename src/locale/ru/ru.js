@@ -64,6 +64,7 @@ export default {
     keys: 'Ключ | Ключи',
     duration: 'Длительность',
     reset: 'Сбросить',
+    errors: 'Ошибка | Ошибки',
   },
   // date-related texts
   date: {
