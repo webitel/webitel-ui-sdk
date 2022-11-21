@@ -40,6 +40,7 @@ export default {
     state: 'Состояние',
     refresh: 'Обновить',
     retry: 'Повторить',
+    downloadAll: 'Скачать всё',
   },
   vocabulary: {
     language: 'Язык',

@@ -41,6 +41,7 @@ export default {
     state: 'State',
     refresh: 'Refresh',
     retry: 'Retry',
+    downloadAll: 'Download all',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {

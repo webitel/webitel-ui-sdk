@@ -41,6 +41,7 @@ export default {
     refresh: 'Оновити',
     retry: 'Повторити',
     reset: 'Скинути',
+    downloadAll: 'Завантажити все',
   },
   vocabulary: {
     language: 'Мова',
