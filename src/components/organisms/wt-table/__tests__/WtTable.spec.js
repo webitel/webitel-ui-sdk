@@ -6,6 +6,7 @@ const headers = [
   {
     text: 'heading 1',
     value: 'h1',
+    sort: null,
   },
   {
     text: 'heading2',

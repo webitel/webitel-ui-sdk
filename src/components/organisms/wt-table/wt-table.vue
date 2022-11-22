@@ -13,7 +13,7 @@
           v-for="(col, key) of dataHeaders"
           :key="key"
           :class="[
-           {'wt-table__th--sortable': sortable},
+           {'wt-table__th--sortable': isColSortable(col)},
            `wt-table__th--sort-${col.sort}`,
         ]"
           class="wt-table__th"
@@ -146,10 +146,17 @@ export default {
 
   methods: {
     sort(col) {
+      if (!this.isColSortable(col)) return;
       const nextSort = getNextSortOrder(col.sort);
-      if (this.sortable) this.$emit('sort', col, nextSort);
+      this.$emit('sort', col, nextSort);
     },
-
+    isColSortable({ sort }) {
+      /*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
+            strict check for  === undefined is used because col.sort = null is sort order too (actualu, without sort)
+            so we need to check if this property is present
+    */
+      return this.sortable && sort !== undefined;
+    },
     selectAll() {
       const { isAllSelected } = this;
       // eslint-disable-next-line no-param-reassign,no-return-assign
