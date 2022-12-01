@@ -7,14 +7,17 @@ const headers = [
     text: 'heading 1',
     value: 'h1',
     sort: null,
+    sortable: true,
   },
   {
     text: 'heading2',
     value: 'h2',
+    sortable: false,
   },
   {
     text: 'heading 3',
     value: 'h3',
+    sortable: true,
   },
 ];
 const data = [
