@@ -149,7 +149,7 @@ export default {
     isColSortable({ sortable }) {
       /*       --sortable !== false cause there may be some columns we don't want to sort
     */
-      return sortable !== false;
+      return sortable === true;
     },
     selectAll() {
       const { isAllSelected } = this;
