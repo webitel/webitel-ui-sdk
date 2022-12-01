@@ -21,13 +21,13 @@
         >
           <div class="wt-table__th__text">{{ col.text }}</div>
           <wt-icon
-            v-if="sortable"
+            v-if="col.sortable"
             class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
             icon="sort-arrow-up"
             size="sm"
           ></wt-icon>
           <wt-icon
-            v-if="sortable"
+            v-if="col.sortable"
             class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
             icon="sort-arrow-down"
             size="sm"
@@ -100,10 +100,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    sortable: {
-      type: Boolean,
-      default: false,
-    },
     selectable: {
       type: Boolean,
       default: true,
@@ -150,12 +146,10 @@ export default {
       const nextSort = getNextSortOrder(col.sort);
       this.$emit('sort', col, nextSort);
     },
-    isColSortable({ sort }) {
-      /*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
-            strict check for  === undefined is used because col.sort = null is sort order too (actualu, without sort)
-            so we need to check if this property is present
+    isColSortable({ sortable }) {
+      /*       --sortable !== false cause there may be some columns we don't want to sort
     */
-      return this.sortable && sort !== undefined;
+      return sortable !== false;
     },
     selectAll() {
       const { isAllSelected } = this;
