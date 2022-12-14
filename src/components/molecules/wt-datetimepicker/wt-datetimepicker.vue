@@ -166,6 +166,11 @@
         this.isOpened = false;
       },
     },
+    created() {
+      if (this.value === 'now') {
+        this.value = new Date();
+      }
+    },
   };
 </script>
 
