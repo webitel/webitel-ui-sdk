@@ -29,7 +29,7 @@ export default {
     color: {
       type: String,
       default: 'default',
-      options: ['default', 'contrast', 'active', 'accent', 'secondary', 'disabled', 'success', 'danger', 'transfer', 'job', 'hold', 'secondary-50'],
+      options: ['default', 'contrast', 'active', 'accent', 'secondary', 'disabled', 'success', 'danger', 'transfer', 'job', 'hold', 'secondary-50', 'icon-secondary'],
     },
     iconPrefix: {
       type: String,
@@ -111,6 +111,10 @@ svg {
 
   &-secondary-50 .wt-icon__icon {
     fill: var(--icon-color-secondary-50);
+  }
+
+  &-icon-secondary .wt-icon__icon {
+    fill: var(--icon-color-secondary);
   }
 
   &-disabled .wt-icon__icon {

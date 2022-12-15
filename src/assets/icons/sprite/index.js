@@ -128,6 +128,8 @@ import './stt-download.svg';
 import './stt-search.svg';
 import './idle.svg';
 import './telegram-bot.svg';
+import './pin.svg';
+import './unpin.svg';
 
 import './preview-tag-audio.svg';
 import './preview-tag-video.svg';

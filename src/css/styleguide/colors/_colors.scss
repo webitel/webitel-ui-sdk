@@ -46,6 +46,7 @@
 
   // ICON COLORS
   --icon-color: hsla(var(--_icon-color), var(--_opacity--default));
+  --icon-color-secondary: hsla(var(--_icon-color), 0.25);
 
   --icon-color--hover: hsla(var(--_icon-color), var(--_opacity--hover));
 
