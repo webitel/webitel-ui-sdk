@@ -34,10 +34,10 @@ export default {
 
 <style lang="scss" scoped>
 .wt-expansion-panel {
-  @extend %typo-body-2;
+  @extend %typo-body-1;
 
   &__header {
-    @extend %typo-subtitle-2;
+    @extend %typo-subtitle-1;
     display: flex;
     background-color: var(--secondary-color-50);
     padding: var(--spacing-2xs) var(--spacing-xs);
