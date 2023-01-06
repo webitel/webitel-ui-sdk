@@ -51,7 +51,7 @@ export default {
 }
 
 .wt-indicator__text {
-  @extend %typo-body-1;
+  @extend %typo-subtitle-2;
   margin-left: var(--indicator-text-margin);
 }
 
