@@ -35,8 +35,6 @@ import WtButtonSelect from './molecules/wt-button-select/wt-button-select.vue';
 import WtHint from './molecules/wt-hint/wt-hint.vue';
 import WtCopyAction from './molecules/wt-copy-action/wt-copy-action.vue';
 import WtLoadBar from './molecules/wt-load-bar/wt-load-bar.vue';
-import WtExpansionPanel
-  from './molecules/wt-expansion-panel/wt-expansion-panel.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
@@ -54,6 +52,8 @@ import WtStatusSelect from './organisms/wt-status-select/wt-status-select.vue';
 import WtTable from './organisms/wt-table/wt-table.vue';
 import WtTableActions from './organisms/wt-table-actions/wt-table-actions.vue';
 import WtTableColumnSelect from './organisms/wt-table-column-select/wt-table-column-select.vue';
+import WtExpansionPanel
+  from './organisms/wt-expansion-panel/wt-expansion-panel.vue';
 
 const Components = {
   WtAvatar,

@@ -43,12 +43,12 @@ export default {
 <style lang="scss" scoped>
 .wt-progress-bar {
   box-sizing: border-box;
+  width: 100%;
   position: relative;
   padding: var(--progress-bar-padding);
   line-height: 0;
   border-radius: var(--border-radius);
   box-shadow: var(--elevation-1);
-  margin: 0 10px;
 }
 
 .wt-progress-bar__progress {

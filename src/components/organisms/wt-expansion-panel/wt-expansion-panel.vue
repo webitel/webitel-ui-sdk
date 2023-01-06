@@ -1,21 +1,22 @@
 <template>
   <div class="wt-expansion-panel">
     <div
-      class="wt-expansion-panel__header"
+      class="wt-expansion-panel-header"
       @click="open = !open"
     >
       <div
-        class="wt-expansion-panel__header-title"
+        class="wt-expansion-panel-header__title"
       >
-        {{ $t(title) }}
+        <slot name="title"></slot>
       </div>
-      <wt-icon-btn
-        :icon="open ? 'arrow-down' : 'arrow-right'"
-      ></wt-icon-btn>
+      <wt-icon
+        :class="{'wt-expansion-panel__arrow':open}"
+        icon="arrow-right"
+      ></wt-icon>
     </div>
     <transition name="fade">
       <div v-show="open">
-        <slot name="wt-expansion-panel-content"></slot>
+        <slot></slot>
       </div>
     </transition>
   </div>
@@ -25,12 +26,6 @@
 <script>
 export default {
   name: 'wt-expansion-panel',
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-  },
   data: () => ({
     open: true,
   }),
@@ -44,10 +39,16 @@ export default {
   &__header {
     @extend %typo-subtitle-2;
     display: flex;
-    justify-content: space-between;
-    background-color: var(--secondary-middle-color);
+    background-color: var(--secondary-color-50);
     padding: var(--spacing-2xs) var(--spacing-xs);
+  }
 
+  .wt-icon{
+    margin-left: auto;
+  }
+
+  &__arrow {
+    transform: rotate(90deg);
   }
 }
 
