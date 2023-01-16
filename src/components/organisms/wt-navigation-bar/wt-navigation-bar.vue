@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import ExpandTransition from '../../transitions/expand-transition.vue';
+import ExpandTransition from '../../transitions/wt-expand-transition.vue';
 
 export default {
   name: 'wt-navigation-bar',

@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 // https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/
 export default {
-  name: 'expand-transition',
+  name: 'wt-expand-transition',
   functional: true,
   render(createElement, context) {
     const data = {
