@@ -1,4 +1,4 @@
-<svg width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_2624_1875)">
 <g opacity="0.96">
 <path d="M98.9918 51.0041C99.0074 62.5772 94.8247 73.7632 87.2195 82.4872C86.8503 82.9219 86.4565 83.3567 86.0627 83.775C85.5295 84.3493 84.9716 84.9153 84.422 85.4649C75.3754 94.233 63.2443 99.0938 50.6456 98.9986C38.047 98.9035 25.9907 93.86 17.0776 84.9563C16.2572 84.136 15.5189 83.3157 14.7806 82.4954C14.4688 82.1345 14.1653 81.7817 13.8699 81.4126C8.99452 75.4622 5.62087 68.4273 4.03326 60.9005C2.44564 53.3738 2.69056 45.5757 4.74739 38.1634C6.80422 30.7511 10.6127 23.9417 15.8519 18.309C21.0911 12.6762 27.6076 8.38522 34.8523 5.79743C42.0969 3.20964 49.8575 2.40091 57.4801 3.43939C65.1027 4.47788 72.364 7.33315 78.6522 11.7646C84.9404 16.1961 90.0713 22.0739 93.6124 28.9029C97.1536 35.7318 99.0014 43.3118 99 51.0041H98.9918Z" fill="#030302"/>
@@ -24,7 +24,7 @@
 </g>
 </g>
 <defs>
-<filter id="filter0_d_2624_1875" x="0" y="0" width="102" height="102" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_d_2624_1875" x="0" y="0" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feMorphology radius="1" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_2624_1875"/>
