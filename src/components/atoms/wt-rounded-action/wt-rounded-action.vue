@@ -6,6 +6,7 @@
       { 'wt-rounded-action--active': active },
       { 'wt-rounded-action--disabled': disabled },
     ]"
+    :size="size"
     class="wt-rounded-action"
     color="secondary"
     @click="$emit('click', $event)"
