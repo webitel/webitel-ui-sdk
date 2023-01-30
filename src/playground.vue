@@ -61,6 +61,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'the-playground',
   data: () => ({

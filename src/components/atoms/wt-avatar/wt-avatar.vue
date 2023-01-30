@@ -9,18 +9,22 @@
     ></wt-badge>
     <img
       class="wt-avatar__img"
-      src="../../../assets/components/atoms/wt-avatar/default-avatar.svg"
+      :src="imgSrc"
       alt="avatar"
     >
   </div>
 </template>
 
 <script>
+import defaultAvatar from '../../../assets/components/atoms/wt-avatar/default-avatar.svg';
 import AbstractUserStatus from '../../../enums/AbstractUserStatus/AbstractUserStatus.enum';
 
 export default {
   name: 'wt-avatar',
   props: {
+    src: {
+      type: String,
+    },
     size: {
       type: String,
       default: 'md',
@@ -37,6 +41,9 @@ export default {
     },
   },
   computed: {
+    imgSrc() {
+      return this.src || defaultAvatar;
+    },
     badgeColorVar() {
       switch (this.status) {
         case AbstractUserStatus.ACTIVE: return 'online-color';
@@ -60,6 +67,7 @@ export default {
     &__img {
       width: 100%;
       height: 100%;
+      border-radius: 50%;
     }
 
     &--size-xs {
