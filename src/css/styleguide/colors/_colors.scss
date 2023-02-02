@@ -140,8 +140,8 @@
   // CHAT COLORS
   --_chat-client-color: var(--_accent-color);
   --_chat-client-opacity: 0.2;
-  --_chat-agent-color: var(--_contrast-color);
-  --_chat-agent-opacity: 0.1;
+  --_chat-agent-color: var(--_secondary-color-50);
+  --_chat-agent-opacity: 1;
 
   --chat-client-message-bg-color: hsla(var(--_chat-client-color), var(--_chat-client-opacity));
   --chat-agent-message-bg-color: hsla(var(--_chat-agent-color), var(--_chat-agent-opacity));
