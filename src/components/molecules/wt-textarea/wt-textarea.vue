@@ -162,6 +162,7 @@
 
   .wt-textarea__textarea {
     @extend %typo-body-1;
+    @extend %wt-scrollbar;
     @include wt-placeholder;
 
     display: block;

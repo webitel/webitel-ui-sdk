@@ -5,10 +5,10 @@
       `wt-rounded-action--color-${color}`,
       { 'wt-rounded-action--active': active },
       { 'wt-rounded-action--disabled': disabled },
+      { 'wt-rounded-action--filled': filled },
     ]"
     :size="size"
     class="wt-rounded-action"
-    color="secondary"
     @click="$emit('click', $event)"
   >
     <wt-icon
@@ -28,7 +28,6 @@ export default {
     },
     color: {
       type: String,
-      default: 'secondary',
       options: ['secondary', 'accent', 'success', 'danger', 'hold', 'transfer'],
     },
     iconColor: {
@@ -48,13 +47,17 @@ export default {
       type: Boolean,
       default: false,
     },
+    filled: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     iColor() {
       if (this.iconColor) return this.iconColor;
       if (this.disabled) return 'secondary-50';
       if (this.color === 'secondary') return null; // dont change icon color
-      return this.color;
+      return '';
     },
   },
 };
@@ -102,6 +105,44 @@ export default {
 
     &.wt-rounded-action--color-transfer {
       border-color: var(--btn-transfer--hover-color);
+    }
+  }
+
+  &--filled {
+    background: inherit;
+
+    &:hover {
+      box-shadow: var(--elevation-5);
+    }
+
+    &.wt-rounded-action--color-secondary {
+      border-color: var(--btn-secondary-color);
+      background-color: var(--btn-secondary-color);
+    }
+
+    &.wt-rounded-action--color-accent {
+      border-color: var(--btn-accent--hover-color);
+      background-color: var(--btn-accent--hover-color);
+    }
+
+    &.wt-rounded-action--color-success {
+      border-color: var(--btn-true--hover-color);
+      background-color: var(--btn-true--hover-color);
+    }
+
+    &.wt-rounded-action--color-danger {
+      border-color: var(--btn-false--hover-color);
+      background-color: var(--btn-false--hover-color);
+    }
+
+    &.wt-rounded-action--color-hold {
+      border-color: var(--btn-hold--hover-color);
+      background-color: var(--btn-false--hover-color);
+    }
+
+    &.wt-rounded-action--color-transfer {
+      border-color: var(--btn-transfer--hover-color);
+      background-color: var(--btn-false--hover-color);
     }
   }
 
