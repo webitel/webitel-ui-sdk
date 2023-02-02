@@ -58,6 +58,10 @@ export default {
     fill: var(--icon-color--hover);
   }
 
+  &:hover ::v-deep .wt-icon--color-icon-secondary .wt-icon__icon {
+    fill: var(--icon-color);
+  }
+
   // icon "disabled" color is set from iconColor computed
   &--disabled {
     pointer-events: none;

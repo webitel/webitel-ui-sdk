@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-icon-btn icon="edit" size="lg" color="icon-secondary"></wt-icon-btn>
     <wt-load-bar
       max="100"
       value="50"
