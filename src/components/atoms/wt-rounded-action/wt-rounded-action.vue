@@ -8,6 +8,7 @@
       { 'wt-rounded-action--filled': filled },
     ]"
     :size="size"
+    color="secondary"
     class="wt-rounded-action"
     @click="$emit('click', $event)"
   >
@@ -57,7 +58,8 @@ export default {
       if (this.iconColor) return this.iconColor;
       if (this.disabled) return 'secondary-50';
       if (this.color === 'secondary') return null; // dont change icon color
-      return '';
+      if (this.filled && this.color) return 'contrast';
+      return this.color;
     },
   },
 };
@@ -109,39 +111,32 @@ export default {
   }
 
   &--filled {
-    background: inherit;
 
     &:hover {
       box-shadow: var(--elevation-5);
     }
 
     &.wt-rounded-action--color-secondary {
-      border-color: var(--btn-secondary-color);
       background-color: var(--btn-secondary-color);
     }
 
     &.wt-rounded-action--color-accent {
-      border-color: var(--btn-accent--hover-color);
       background-color: var(--btn-accent--hover-color);
     }
 
     &.wt-rounded-action--color-success {
-      border-color: var(--btn-true--hover-color);
       background-color: var(--btn-true--hover-color);
     }
 
     &.wt-rounded-action--color-danger {
-      border-color: var(--btn-false--hover-color);
       background-color: var(--btn-false--hover-color);
     }
 
     &.wt-rounded-action--color-hold {
-      border-color: var(--btn-hold--hover-color);
       background-color: var(--btn-false--hover-color);
     }
 
     &.wt-rounded-action--color-transfer {
-      border-color: var(--btn-transfer--hover-color);
       background-color: var(--btn-false--hover-color);
     }
   }
