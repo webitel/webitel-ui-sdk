@@ -80,31 +80,6 @@ export default {
   &:hover {
     background: var(--rounded-action-bg-color); // override default wt-button hover
     box-shadow: var(--elevation-2);
-    border-color: var(--rounded-action-bg-color);
-
-    &.wt-rounded-action--color-secondary {
-      border-color: var(--icon-color);
-    }
-
-    &.wt-rounded-action--color-accent {
-      border-color: var(--btn-accent--hover-color);
-    }
-
-    &.wt-rounded-action--color-success {
-      border-color: var(--btn-true--hover-color);
-    }
-
-    &.wt-rounded-action--color-danger {
-      border-color: var(--btn-false--hover-color);
-    }
-
-    &.wt-rounded-action--color-hold {
-      border-color: var(--btn-hold--hover-color);
-    }
-
-    &.wt-rounded-action--color-transfer {
-      border-color: var(--btn-transfer--hover-color);
-    }
   }
 
   &--active {
@@ -139,30 +114,37 @@ export default {
 
     &:hover {
       box-shadow: var(--elevation-5);
+      border-color: var(--rounded-action-bg-color);
     }
 
     &.wt-rounded-action--color-secondary {
       background-color: var(--btn-secondary-color);
+      border-color: var(--btn-secondary-color);
     }
 
     &.wt-rounded-action--color-accent {
       background-color: var(--btn-accent--hover-color);
+      border-color: var(--btn-accent--hover-color);
     }
 
     &.wt-rounded-action--color-success {
       background-color: var(--btn-true--hover-color);
+      border-color: var(--btn-true--hover-color);
     }
 
     &.wt-rounded-action--color-danger {
       background-color: var(--btn-false--hover-color);
+      border-color: var(--btn-false--hover-color);
     }
 
     &.wt-rounded-action--color-hold {
       background-color: var(--btn-false--hover-color);
+      border-color: var(--btn-false--hover-color);
     }
 
     &.wt-rounded-action--color-transfer {
       background-color: var(--btn-false--hover-color);
+      border-color: var(--btn-false--hover-color);
     }
   }
 
