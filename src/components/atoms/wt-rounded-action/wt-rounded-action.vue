@@ -78,7 +78,7 @@ export default {
   box-shadow: var(--elevation-1);
 
   &:hover {
-    background: inherit;
+    background: var(--rounded-action-bg-color); // override default wt-button hover
     box-shadow: var(--elevation-2);
   }
 
