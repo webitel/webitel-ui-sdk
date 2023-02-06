@@ -156,7 +156,7 @@ export default {
         [AdminSections.USERS]: 'Users',
         [AdminSections.LICENSE]: 'Licenses',
         [AdminSections.DEVICES]: 'Devices',
-        [AdminSections.FLOW]: 'Flow',
+        [AdminSections.FLOW]: 'Flow schemas',
         [AdminSections.DIALPLAN]: 'Dialplan',
         [AdminSections.GATEWAYS]: 'Gateways',
         [AdminSections.CHATPLAN]: 'Chatplan',
