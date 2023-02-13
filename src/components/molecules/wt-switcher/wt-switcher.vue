@@ -112,6 +112,7 @@
   .wt-switcher__checkmark {
     position: relative;
     display: block;
+    flex: 0 0 var(--switcher-width);
     width: var(--switcher-width);
     height: var(--switcher-height);
     border-radius: var(--switcher-border-radius);
