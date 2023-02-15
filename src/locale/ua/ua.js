@@ -42,6 +42,8 @@ export default {
     retry: 'Повторити',
     reset: 'Скинути',
     downloadAll: 'Завантажити все',
+    warning: 'Попередження',
+    doNotSave: 'Не зберігати',
   },
   vocabulary: {
     language: 'Мова',
