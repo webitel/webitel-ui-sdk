@@ -41,6 +41,8 @@ export default {
     refresh: 'Обновить',
     retry: 'Повторить',
     downloadAll: 'Скачать всё',
+    warning: 'Предупреждение',
+    doNotSave: 'Не сохранять',
   },
   vocabulary: {
     language: 'Язык',

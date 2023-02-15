@@ -42,6 +42,8 @@ export default {
     refresh: 'Refresh',
     retry: 'Retry',
     downloadAll: 'Download all',
+    warning: 'Warning',
+    doNotSave: 'Don\'t save',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
