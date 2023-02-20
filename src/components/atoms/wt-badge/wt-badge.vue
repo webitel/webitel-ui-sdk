@@ -2,11 +2,13 @@
   <aside
     class="wt-badge"
     :class="{ 'wt-badge--outside': outside }"
-    :style="{ background: `var(--${colorVariable})` }"
+    :style="{ background: iconBadge ? `url(${this.showIconBadge})` : `var(--${colorVariable})` }"
   ></aside>
 </template>
 
 <script>
+import BadgeDnd from '../../../assets/icons/badge-dnd.svg';
+
 export default {
   name: 'wt-badge',
   props: {
@@ -18,6 +20,17 @@ export default {
     outside: {
       type: Boolean,
       default: false,
+    },
+    iconBadge: {
+      type: String,
+    },
+  },
+  computed: {
+    showIconBadge() {
+      switch (this.iconBadge) {
+        case 'dnd': return BadgeDnd;
+        default: return null;
+      }
     },
   },
 };

@@ -6,6 +6,7 @@
     <wt-badge
       v-if="badge"
       :color-variable="badgeColorVar"
+      :icon-badge="isDnd ? 'dnd' : null"
     ></wt-badge>
     <img
       class="wt-avatar__img"
@@ -43,6 +44,9 @@ export default {
   computed: {
     imgSrc() {
       return this.src || defaultAvatar;
+    },
+    isDnd() {
+      return this.status === AbstractUserStatus.DND;
     },
     badgeColorVar() {
       switch (this.status) {

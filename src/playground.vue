@@ -1,5 +1,9 @@
 <template>
   <div class="playground">
+    <wt-avatar
+      status="dnd"
+      badge
+    ></wt-avatar>
     <wt-icon-btn icon="edit" size="lg" color="icon-secondary"></wt-icon-btn>
     <wt-load-bar
       max="100"
