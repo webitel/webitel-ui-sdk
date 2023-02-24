@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "2.1.44",
+  "version": "2.1.46",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -22,6 +22,7 @@
     "src/mixins/*",
     "src/scripts/*",
     "src/modules/*",
+    "src/plugins/*",
     "src/store/*",
     "CHANGELOG.md"
   ],

@@ -6,15 +6,20 @@ sm: @media only screen and (max-width: $viewport-md) {}
 xs: @media only screen and (max-width: $viewport-sm) {}
  */
 
-$viewport-xl: 1440px;
-$viewport-lg: 1280px;
-$viewport-md: 992px;
-$viewport-sm: 600px;
+// OLD, REMOVE ME
+//$viewport-xl: 1440px;
+//$viewport-lg: 1280px;
+//$viewport-md: 992px;
+//$viewport-sm: 600px;
+
+$viewport-lg: 1904px; // and lower
+$viewport-md: 1264px; // and lower
+$viewport-sm: 960px; // and lower
+$viewport-xs: 600px; // and lower
 
 $media: #{'only screen'};
-$media-width-xl: #{'min-width: '} $viewport-xl;
-$media-width-lg: #{'max-width: '} $viewport-xl;
-$media-width-md: #{'max-width: '} $viewport-lg;
-$media-width-sm: #{'max-width: '} $viewport-md;
-$media-width-xs: #{'max-width: '} $viewport-sm;
+$media-width-lg: #{'min-width: '} $viewport-lg;
+$media-width-md: #{'max-width: '} $viewport-md;
+$media-width-sm: #{'max-width: '} $viewport-sm;
+$media-width-xs: #{'max-width: '} $viewport-xs;
 
