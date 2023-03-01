@@ -4,7 +4,11 @@
       status="dnd"
       badge
     ></wt-avatar>
-    <wt-icon-btn icon="edit" size="lg" color="icon-secondary"></wt-icon-btn>
+    <wt-icon
+      icon="bucket"
+      @click.native="log"
+    ></wt-icon>
+    <wt-icon-btn icon="edit" size="lg" color="icon-secondary" @click="log"></wt-icon-btn>
     <wt-load-bar
       max="100"
       value="50"
@@ -20,31 +24,31 @@
       placeholder="placeholder"
       label="label"
     ></wt-tags-input>
-    <wt-tags-input
-      v-model="select.multipleValue"
-      :options="select.options"
-      track-by="name"
-      taggable
-      placeholder="placeholder"
-      label="label"
-    ></wt-tags-input>
-    <wt-tags-input
-      v-model="select.multipleValue"
-      :options="select.options"
-      track-by="name"
-      taggable
-      placeholder="placeholder"
-      label="label"
-      disabled
-    ></wt-tags-input>
-    <wt-select
-      v-model="select.multipleValue"
-      :options="select.options"
-      track-by="name"
-      multiple
-      placeholder="placeholder"
-      label="label"
-    ></wt-select>
+<!--    <wt-tags-input-->
+<!--      v-model="select.multipleValue"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      taggable-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--    ></wt-tags-input>-->
+<!--    <wt-tags-input-->
+<!--      v-model="select.multipleValue"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      taggable-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--      disabled-->
+<!--    ></wt-tags-input>-->
+<!--    <wt-select-->
+<!--      v-model="select.multipleValue"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      multiple-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--    ></wt-select>-->
     <wt-select
       v-model="select.multipleValue"
       :options="select.options"
@@ -54,14 +58,14 @@
       placeholder="placeholder"
       label="label"
     ></wt-select>
-    <wt-select
-      :value="'lorem ipsum'"
-      :options="select.options"
-      track-by="name"
-      placeholder="placeholder"
-      label="label"
-      disabled
-    ></wt-select>
+<!--    <wt-select-->
+<!--      :value="'lorem ipsum'"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--      disabled-->
+<!--    ></wt-select>-->
   </div>
 </template>
 

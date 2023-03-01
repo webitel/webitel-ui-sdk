@@ -29,7 +29,7 @@
       :placeholder="placeholder || label"
       :taggable="taggable"
       :track-by="trackBy"
-      :value="selectValue"
+      :model-value="selectValue"
       class="wt-tags-input__select"
       multiple
       v-bind="$attrs"

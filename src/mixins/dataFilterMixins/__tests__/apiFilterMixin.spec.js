@@ -1,10 +1,11 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
 import apiFilterMixin from '../apiFilterMixin';
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
-const router = new VueRouter();
+const router = new createRouter({
+  history: createWebHistory(),
+  routes: [],
+});
 const team = ['1', '2'];
 
 describe('API filter mixin', () => {
@@ -18,14 +19,13 @@ describe('API filter mixin', () => {
   };
 
   beforeEach(() => {
-    if (Object.keys(router.currentRoute.query).length) router.replace({ query: null });
+    if (Object.keys(router.currentRoute.value.query).length) router.replace({ query: null });
   });
 
   it('Correctly sets value from $route query', async () => {
     await router.replace({ query: { team } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      plugins: [router],
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.value).toEqual(team);

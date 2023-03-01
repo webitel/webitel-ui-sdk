@@ -1,10 +1,9 @@
-import Vue from 'vue';
+import Vue, { createApp } from 'vue';
 import FloatingVue from 'floating-vue';
 import 'floating-vue/dist/style.css';
 import App from './the-app.vue';
-import './directives'; // init all directives
-import './filters'; // init all filters
-import './components'; // init all components
+import Directives from './directives'; // init all directives
+import Components from './components'; // init all components
 import i18n from './locale/i18n';
 import eventBus from './scripts/eventBus';
 import './assets/icons/sprite';
@@ -12,15 +11,20 @@ import './assets/icons/sprite';
 import './css/styleguide/fonts/_fonts.scss';
 import router from './router';
 
-Vue.config.productionTip = false;
-Vue.prototype.$eventBus = eventBus;
-
-Vue.use(FloatingVue, {
+const app = createApp(App)
+.use(router)
+.use(FloatingVue, {
   arrowOverflow: true,
+})
+.use(i18n)
+.provide('$eventBus', eventBus);
+
+Object.keys(Components).forEach((name) => {
+  app.component(name, Components[name]);
 });
 
-new Vue({
-  i18n,
-  router,
-  render: (h) => h(App),
-}).$mount('#app');
+Object.keys(Directives).forEach((name) => {
+  app.directive(name, Directives[name]);
+});
+
+app.mount('#app');

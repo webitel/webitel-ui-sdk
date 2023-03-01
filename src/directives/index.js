@@ -5,8 +5,4 @@ const Directives = {
   clickaway,
 };
 
-Object.keys(Directives).forEach((name) => {
-  Vue.directive(name, Directives[name]);
-});
-
 export default Directives;
