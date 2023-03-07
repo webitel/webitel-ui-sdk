@@ -28,7 +28,7 @@ describe('Abstract Enum Filter', () => {
     localVue,
     store,
     router,
-    propsData: {
+    props: {
       namespace,
       filterQuery,
     },

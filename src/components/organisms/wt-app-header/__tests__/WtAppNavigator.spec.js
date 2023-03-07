@@ -14,7 +14,7 @@ describe('WtAppNavigator', () => {
   });
   it('renders specified app cards', () => {
     const wrapper = shallowMount(WtAppNavigator, {
-      propsData: {
+      props: {
         apps,
       },
     });

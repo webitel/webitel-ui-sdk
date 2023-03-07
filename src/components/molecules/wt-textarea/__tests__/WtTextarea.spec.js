@@ -18,7 +18,7 @@ describe('WtTextarea', () => {
       stubs: {
         WtLabel,
       },
-      propsData: { label },
+      props: { label },
     });
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });
@@ -28,7 +28,7 @@ describe('WtTextarea', () => {
       stubs: {
         WtLabel,
       },
-      propsData: { chatMode: true },
+      props: { chatMode: true },
     });
     wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
     expect(wrapper.emitted().enter).toBeTruthy();

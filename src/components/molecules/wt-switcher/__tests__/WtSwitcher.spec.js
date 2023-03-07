@@ -14,7 +14,7 @@ describe('WtSwitcher', () => {
     const label = 'Hello there';
     const wrapper = shallowMount(WtSwitcher, {
       stubs: { WtLabel },
-      propsData: { label },
+      props: { label },
     });
     expect(wrapper.find('.wt-switcher__label').text()).toBe(label);
   });
@@ -23,7 +23,7 @@ describe('WtSwitcher', () => {
     const value = true;
     const wrapper = shallowMount(WtSwitcher, {
       stubs: { WtLabel },
-      propsData: { value },
+      props: { value },
     });
     wrapper.find('.wt-switcher__input').trigger('change');
     expect(wrapper.emitted().change[0]).toEqual([!value]);

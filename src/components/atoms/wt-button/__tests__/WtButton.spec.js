@@ -20,7 +20,7 @@ describe('WtButton', () => {
 
   it('renders button spinner', () => {
     const wrapper = shallowMount(WtButton, {
-      propsData: {
+      props: {
         loading: true,
       },
     });

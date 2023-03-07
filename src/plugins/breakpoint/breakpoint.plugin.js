@@ -1,3 +1,4 @@
+import { reactive } from 'vue';
 import debounce from '../../scripts/debounce';
 
 // https://stackoverflow.com/questions/41791193/vuejs-reactive-binding-for-a-plugin-how-to/41801107#41801107
@@ -124,13 +125,13 @@ const onResize = () => {
   breakpoint.mobile = current <= max;
 };
 
-const install = (Vue) => {
+const install = (app) => {
   window.addEventListener('resize', debounce(onResize), { passive: true });
 
   onResize();
 
   // eslint-disable-next-line no-param-reassign
-  Vue.prototype.$breakpoint = Vue.observable(breakpoint);
+  app.config.globalProperties.$breakpoint = reactive(breakpoint);
 };
 
 export { install };

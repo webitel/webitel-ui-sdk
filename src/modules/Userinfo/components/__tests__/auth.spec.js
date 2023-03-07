@@ -1,6 +1,6 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createRouter, createWebHistory } from 'vue-router';
 import JSDOM from 'jsdom';
 import authAPI from '../../api/auth';
 import userinfoAPI from '../../api/userinfo';
@@ -11,10 +11,6 @@ import '../../../../../tests/mocks/localStorageMock';
 
 localStorage.setItem('access-token', 'jest');
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueRouter);
-
 authAPI.setToken = jest.fn();
 userinfoAPI.getSession = jest.fn(() => ({}));
 userinfoAPI.getApplicationsAccess = jest.fn(() => ({}));
@@ -23,19 +19,22 @@ describe('Auth', () => {
   let store;
   let wrapper;
   global.window = new JSDOM.JSDOM().window;
-  const router = new VueRouter();
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [],
+  });
   router.replace = jest.fn();
 
   const userinfo = new UserinfoStoreModule().getModule();
   beforeEach(() => {
-    store = new Vuex.Store({
+    store = createStore({
       modules: { userinfo },
     });
 
     wrapper = shallowMount(Auth, {
-      localVue,
-      store,
-      router,
+      global: {
+        plugins: [router, store],
+      },
     });
   });
 

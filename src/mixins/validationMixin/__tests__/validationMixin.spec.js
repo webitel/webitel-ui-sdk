@@ -11,7 +11,7 @@ describe('Validation mixin', () => {
 
   it('detects validation prop', () => {
     wrapper = shallowMount(Component, {
-      propsData: {
+      props: {
         v: {
           $error: true,
         },
@@ -23,7 +23,7 @@ describe('Validation mixin', () => {
 
   it('computes error message on validation error', () => {
     wrapper = shallowMount(Component, {
-      propsData: {
+      props: {
         v: {
           $error: true,
           email: false,
@@ -35,7 +35,7 @@ describe('Validation mixin', () => {
 
   it('prioritizes error messages', () => {
     wrapper = shallowMount(Component, {
-      propsData: {
+      props: {
         v: {
           $error: true,
           required: false,

@@ -4,7 +4,7 @@ import WtTableColumnSelect from '../wt-table-column-select.vue';
 describe('WtTableColumnSelect', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(WtTableColumnSelect, {
-      propsData: {
+      props: {
         headers: [],
       },
     });
@@ -12,7 +12,7 @@ describe('WtTableColumnSelect', () => {
   });
   it('column select popup is invisible by default', () => {
     const wrapper = shallowMount(WtTableColumnSelect, {
-      propsData: {
+      props: {
         headers: [],
       },
     });
@@ -20,7 +20,7 @@ describe('WtTableColumnSelect', () => {
   });
   it('column select popup is opening by icon-btn click', async () => {
     const wrapper = mount(WtTableColumnSelect, {
-      propsData: {
+      props: {
         headers: [],
       },
     });

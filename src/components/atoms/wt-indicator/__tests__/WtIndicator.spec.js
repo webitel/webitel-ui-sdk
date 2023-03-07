@@ -10,7 +10,7 @@ describe('WtIndicator', () => {
   it('renders a component text, if passed', () => {
     const content = 'Hello there!';
     const wrapper = shallowMount(WtIndicator, {
-      propsData: {
+      props: {
         text: content,
       },
     });
@@ -19,7 +19,7 @@ describe('WtIndicator', () => {
 
   it('changed indicator color, if prop is passed', () => {
     const wrapper = shallowMount(WtIndicator, {
-      propsData: {
+      props: {
         color: 'primary',
       },
     });

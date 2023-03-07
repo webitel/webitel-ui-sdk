@@ -12,7 +12,7 @@ describe('WtTagsInput', () => {
     const label = 'Hello there';
     const wrapper = shallowMount(WtTagsInput, {
       stubs: { WtLabel },
-      propsData: { label },
+      props: { label },
     });
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });
@@ -20,7 +20,7 @@ describe('WtTagsInput', () => {
   it('by default emits "input" event at native "tag" event', () => {
     const tag = '123';
     const wrapper = shallowMount(WtTagsInput, {
-      propsData: {
+      props: {
         value: [],
       },
     });
@@ -31,7 +31,7 @@ describe('WtTagsInput', () => {
   it('in manual mode doesnt emit "input" event at native "tag" event', () => {
     const tag = '123';
     const wrapper = shallowMount(WtTagsInput, {
-      propsData: {
+      props: {
         value: [],
         manualTagging: true,
       },

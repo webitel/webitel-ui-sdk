@@ -29,7 +29,7 @@ describe('DatetimeFilter Filter', () => {
     localVue,
     store,
     router,
-    propsData: {
+    props: {
       namespace,
       filterQuery,
     },

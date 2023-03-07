@@ -20,7 +20,7 @@ describe('WtTooltip', () => {
 
   it('changed tooltip color, if prop is passed', () => {
     const wrapper = shallowMount(WtTooltip, {
-      propsData: {
+      props: {
         contrast: true,
       },
     });
