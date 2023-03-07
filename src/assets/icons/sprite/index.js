@@ -131,6 +131,7 @@ import './telegram-bot.svg';
 import './pin.svg';
 import './unpin.svg';
 import './conference.svg';
+import './meta.svg';
 
 import './preview-tag-audio.svg';
 import './preview-tag-video.svg';
