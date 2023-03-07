@@ -3,7 +3,11 @@ module.exports = {
   transformIgnorePatterns: [
     // commented this after jest felt at icons sprite index.js import build from webitel-ui
     // '/node_modules/(?!webitel-sdk).+\\.js$',
+    'jest-runner',
   ],
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
   reporters: ['default', 'bamboo-jest-reporter'],
   collectCoverage: true,
   collectCoverageFrom: [
@@ -17,8 +21,6 @@ module.exports = {
   ],
   setupFiles: [
     './tests/config/config.js',
-    './src/components/index.js',
-    './src/directives/index.js',
   ],
   setupFilesAfterEnv: ['./tests/config/jest.config.js'],
 };

@@ -4,7 +4,7 @@ import WtHeadlineNav from '../wt-headline-nav.vue';
 describe('WtHeadlineNav', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(WtHeadlineNav, {
-      propsData: {
+      props: {
         path: [],
       },
     });

@@ -8,13 +8,13 @@
     :searchable="false"
     @input="inputHandler"
   >
-    <template slot="singleLabel" slot-scope="{ option }">
+    <template v-slot:singleLabel="{ option }">
       <wt-indicator
         :color="option.color"
         :text="duration"
       ></wt-indicator>
     </template>
-    <template slot="option" slot-scope="{ option }">
+    <template v-slot:option="{ option }">
       <wt-indicator
         :color="option.color"
         :text="option.text"

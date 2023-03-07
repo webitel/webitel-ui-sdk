@@ -10,7 +10,7 @@ describe('WtTabs', () => {
 
   it('component emits change at tab click', () => {
     const wrapper = shallowMount(WtTabs, {
-      propsData: { tabs },
+      props: { tabs },
     });
     wrapper.find('.wt-tab').trigger('click');
     expect(wrapper.emitted().change.pop()).toEqual([tabs[0]]);
@@ -18,7 +18,7 @@ describe('WtTabs', () => {
 
   it('renders tab default content', () => {
     const wrapper = shallowMount(WtTabs, {
-      propsData: { tabs },
+      props: { tabs },
     });
     expect(wrapper.find('.wt-tab').text()).toBe(tabs[0].text);
   });
@@ -26,7 +26,7 @@ describe('WtTabs', () => {
   it('renders tab custom content via default slot', () => {
     const custom = 'custom name';
     const wrapper = shallowMount(WtTabs, {
-      propsData: { tabs },
+      props: { tabs },
       slots: {
         tab1: custom,
       },

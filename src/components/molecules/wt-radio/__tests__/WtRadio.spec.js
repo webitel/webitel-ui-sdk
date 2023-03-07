@@ -21,7 +21,7 @@ describe('WtRadio', () => {
         WtLabel,
         WtIcon,
       },
-      propsData: { label },
+      props: { label },
     });
     expect(wrapper.find('.wt-radio__label').text()).toBe(label);
   });
@@ -34,7 +34,7 @@ describe('WtRadio', () => {
         WtLabel,
         WtIcon,
       },
-      propsData: { selected, value },
+      props: { selected, value },
     });
     wrapper.find('.wt-radio__input').trigger('input');
     expect(wrapper.emitted().input[0]).toEqual([value]);

@@ -15,6 +15,7 @@
 <script>
   export default {
     name: 'wt-notifications-bar',
+    inject: ['$eventBus'],
     data: () => ({
       notificationDuration: 4000,
       notifications: [],

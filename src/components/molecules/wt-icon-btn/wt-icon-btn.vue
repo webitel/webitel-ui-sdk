@@ -13,8 +13,11 @@
 </template>
 
 <script>
+import WtIcon from '../../atoms/wt-icon/wt-icon.vue';
+
 export default {
   name: 'wt-icon-btn',
+  components: { WtIcon },
   props: {
     icon: {
       type: String,

@@ -84,7 +84,7 @@ export default {
     listeners() {
       return {
         ...this.$listeners,
-        input: this.input,
+        'update:model-value': this.input,
         close: this.close,
         tag: this.tag,
         'search-change': (search) => {

@@ -1,5 +1,5 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
 import enumFilterMixin from '../enumFilterMixin';
 
 const options = [{
@@ -11,9 +11,10 @@ const options = [{
     value: 'outbound',
   }];
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
-const router = new VueRouter();
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [],
+});
 
 describe('Enum filter mixin', () => {
   let wrapper;
@@ -34,8 +35,9 @@ describe('Enum filter mixin', () => {
   it('Correctly sets value from $route query', async () => {
     await router.replace({ query: { type: [options[0].value] } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: {
+        plugins: [router],
+      },
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.value).toEqual([options[0]]);
@@ -44,8 +46,9 @@ describe('Enum filter mixin', () => {
   it('Correctly sets single value from $route query', async () => {
     await router.replace({ query: { type: options[0].value } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: {
+        plugins: [router],
+      },
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.value).toEqual(options[0]);
@@ -54,8 +57,9 @@ describe('Enum filter mixin', () => {
   it('Resets value after $route query reset', async () => {
     await router.replace({ query: { type: [options[0].value] } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: {
+        plugins: [router],
+      },
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.value).toEqual([options[0]]);

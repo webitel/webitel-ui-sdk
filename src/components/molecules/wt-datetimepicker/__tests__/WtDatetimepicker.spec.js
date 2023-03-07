@@ -1,21 +1,21 @@
-import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import FloatingVue, { Dropdown, Popper } from 'floating-vue';
 import WtDatetimepicker from '../wt-datetimepicker.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 import WtIcon from '../../../atoms/wt-icon/wt-icon.vue';
 import WtButton from '../../../atoms/wt-button/wt-button.vue';
 
-const localVue = createLocalVue();
-localVue.use(FloatingVue);
-
 describe('WtDatetimepicker', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(WtDatetimepicker, {
-      stubs: {
-        WtLabel,
-        WtIcon,
-        WtButton,
-        WtTimepicker: true,
+      global: {
+        plugins: [FloatingVue],
+        stubs: {
+          WtLabel,
+          WtIcon,
+          WtButton,
+          WtTimepicker: true,
+        },
       },
     });
     expect(wrapper.classes('wt-datetimepicker')).toBe(true);
@@ -23,14 +23,17 @@ describe('WtDatetimepicker', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtDatetimepicker, {
-      stubs: {
-        WtLabel,
-        WtIcon,
-        WtButton,
-        WtTimepicker: true,
+    const wrapper = mount(WtDatetimepicker, {
+      global: {
+        plugins: [FloatingVue],
+        stubs: {
+          WtLabel,
+          WtIcon,
+          WtButton,
+          WtTimepicker: true,
+        },
       },
-      propsData: { label },
+      props: { label },
     });
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });
@@ -62,7 +65,7 @@ describe('WtDatetimepicker', () => {
   //       VDropdown: Dropdown,
   //       WtTimepicker: true,
   //     },
-  //     propsData: {
+  //     props: {
   //       value: now,
   //     },
   //   });

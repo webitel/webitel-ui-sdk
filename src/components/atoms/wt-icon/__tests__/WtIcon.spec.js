@@ -4,7 +4,7 @@ import WtIcon from '../wt-icon.vue';
 describe('WtIcon', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(WtIcon, {
-      propsData: {
+      props: {
         icon: 'icon-name',
       },
     });
@@ -13,7 +13,7 @@ describe('WtIcon', () => {
   it('correctly computes icon name', () => {
     const iconName = '#jest-bucket';
     const wrapper = shallowMount(WtIcon, {
-      propsData: {
+      props: {
         icon: 'bucket',
         size: 'sm',
         iconPrefix: 'jest',

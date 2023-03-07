@@ -1,10 +1,11 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
 import sortFilterMixin from '../sortFilterMixin';
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
-const router = new VueRouter();
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [],
+});
 
 const headers = [{
   value: 'queue',
@@ -18,8 +19,6 @@ const headers = [{
   field: 'online',
 }];
 
-const $t = () => {};
-
 describe('Sort filter mixin', () => {
   let wrapper;
   const Component = {
@@ -31,9 +30,7 @@ describe('Sort filter mixin', () => {
   beforeEach(() => {
     router.replace('/');
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
-      mocks: { $t },
+      global: { plugins: [router] },
     });
   });
 

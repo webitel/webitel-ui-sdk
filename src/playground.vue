@@ -1,10 +1,27 @@
 <template>
   <div class="playground">
+    <wt-navigation-bar
+      :nav="[
+          { value: '1', name: 'Name 1', route: '/1' },
+          { value: 'exp1', name: 'Expansion 1', subNav: [
+          { value: '2', name: 'Name 2', route: '/2' },
+          { value: '3', name: 'Name 3', route: '/3' },
+          ] },
+          { value: 'exp2', name: 'Expansion 2', subNav: [
+          { value: '4', name: 'Name 4', route: '/4' },
+          { value: '5', name: 'Name 5', route: '/5' },
+          ] },
+          ]"
+    ></wt-navigation-bar>
     <wt-avatar
       status="dnd"
       badge
     ></wt-avatar>
-    <wt-icon-btn icon="edit" size="lg" color="icon-secondary"></wt-icon-btn>
+    <wt-icon
+      icon="bucket"
+      @click.native="log"
+    ></wt-icon>
+    <wt-icon-btn icon="edit" size="lg" color="icon-secondary" @click="log"></wt-icon-btn>
     <wt-load-bar
       max="100"
       value="50"
@@ -20,31 +37,31 @@
       placeholder="placeholder"
       label="label"
     ></wt-tags-input>
-    <wt-tags-input
-      v-model="select.multipleValue"
-      :options="select.options"
-      track-by="name"
-      taggable
-      placeholder="placeholder"
-      label="label"
-    ></wt-tags-input>
-    <wt-tags-input
-      v-model="select.multipleValue"
-      :options="select.options"
-      track-by="name"
-      taggable
-      placeholder="placeholder"
-      label="label"
-      disabled
-    ></wt-tags-input>
-    <wt-select
-      v-model="select.multipleValue"
-      :options="select.options"
-      track-by="name"
-      multiple
-      placeholder="placeholder"
-      label="label"
-    ></wt-select>
+<!--    <wt-tags-input-->
+<!--      v-model="select.multipleValue"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      taggable-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--    ></wt-tags-input>-->
+<!--    <wt-tags-input-->
+<!--      v-model="select.multipleValue"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      taggable-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--      disabled-->
+<!--    ></wt-tags-input>-->
+<!--    <wt-select-->
+<!--      v-model="select.multipleValue"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      multiple-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--    ></wt-select>-->
     <wt-select
       v-model="select.multipleValue"
       :options="select.options"
@@ -54,21 +71,25 @@
       placeholder="placeholder"
       label="label"
     ></wt-select>
-    <wt-select
-      :value="'lorem ipsum'"
-      :options="select.options"
-      track-by="name"
-      placeholder="placeholder"
-      label="label"
-      disabled
-    ></wt-select>
+<!--    <wt-select-->
+<!--      :value="'lorem ipsum'"-->
+<!--      :options="select.options"-->
+<!--      track-by="name"-->
+<!--      placeholder="placeholder"-->
+<!--      label="label"-->
+<!--      disabled-->
+<!--    ></wt-select>-->
   </div>
 </template>
 
 <script>
 
+import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
+import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
+
 export default {
   name: 'the-playground',
+  components: { WtNavigationBar, WtExpandTransition },
   data: () => ({
     date: Date.now(),
     currentTab: { value: 1 },

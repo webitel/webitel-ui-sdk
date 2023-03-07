@@ -21,7 +21,7 @@ describe('WtDatepicker', () => {
         WtLabel,
         WtIcon,
       },
-      propsData: { label },
+      props: { label },
     });
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });

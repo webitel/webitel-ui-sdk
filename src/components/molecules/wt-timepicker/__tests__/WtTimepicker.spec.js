@@ -17,7 +17,7 @@ describe('WtTimepicker', () => {
       stubs: {
         WtTimeInput,
       },
-      propsData: { format: 'mm' },
+      props: { format: 'mm' },
     });
     expect(wrapper.findAllComponents(WtTimeInput).length).toBe(1);
   });
@@ -28,7 +28,7 @@ describe('WtTimepicker', () => {
       stubs: {
         WtTimeInput,
       },
-      propsData: { value },
+      props: { value },
     });
     wrapper.findAllComponents(WtTimeInput).at(0).vm.$emit('input', 21);
     expect(wrapper.emitted().input[0]).toEqual([21 * 60 * 60]);
@@ -40,7 +40,7 @@ describe('WtTimepicker', () => {
       stubs: {
         WtTimeInput,
       },
-      propsData: { value },
+      props: { value },
     });
     wrapper.findAllComponents(WtTimeInput).at(1).vm.$emit('input', 21);
     expect(wrapper.emitted().input[0]).toEqual([21 * 60]);
@@ -52,7 +52,7 @@ describe('WtTimepicker', () => {
       stubs: {
         WtTimeInput,
       },
-      propsData: { value },
+      props: { value },
     });
     wrapper.findAllComponents(WtTimeInput).at(2).vm.$emit('input', 21);
     expect(wrapper.emitted().input[0]).toEqual([21]);

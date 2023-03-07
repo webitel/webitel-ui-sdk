@@ -51,7 +51,7 @@ describe('WtTable', () => {
 
   it('renders table data rows', () => {
     const wrapper = shallowMount(WtTable, {
-      propsData: {
+      props: {
         headers,
         data,
       },
@@ -61,7 +61,7 @@ describe('WtTable', () => {
 
   it('renders table headers', () => {
     const wrapper = shallowMount(WtTable, {
-      propsData: {
+      props: {
         headers,
         data,
         selectable: false,
@@ -73,7 +73,7 @@ describe('WtTable', () => {
 
   it('do not renders table footer by default', () => {
     const wrapper = shallowMount(WtTable, {
-      propsData: {
+      props: {
         headers,
         data,
       },
@@ -83,7 +83,7 @@ describe('WtTable', () => {
 
   it('renders table footer if footer slot is passed', () => {
     const wrapper = shallowMount(WtTable, {
-      propsData: {
+      props: {
         headers,
         data,
       },
@@ -96,7 +96,7 @@ describe('WtTable', () => {
 
   it('emits sort event at header click when sortable is true', () => {
     const wrapper = shallowMount(WtTable, {
-      propsData: {
+      props: {
         headers,
         data,
         sortable: true,
@@ -109,7 +109,7 @@ describe('WtTable', () => {
   it('draws sort arrow, if a column is sorted', () => {
     headers[0].sort = 'asc';
     const wrapper = shallowMount(WtTable, {
-      propsData: {
+      props: {
         headers,
         data,
         sortable: true,
@@ -122,7 +122,7 @@ describe('WtTable', () => {
 
   it('selects all rows at header checkbox click', async () => {
     const wrapper = shallowMount(WtTable, {
-      propsData: {
+      props: {
         headers,
         data,
         selectable: true,

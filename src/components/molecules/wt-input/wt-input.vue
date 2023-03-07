@@ -30,9 +30,9 @@
         :min="numberMin"
         :placeholder="placeholder || label"
         :type="inputType"
-        :value="value"
+        :value="modelValue"
         class="wt-input__input"
-        v-on="listeners"
+        @input="inputHandler"
       >
       <div
         ref="after-wrapper"
@@ -73,9 +73,9 @@ export default {
   mixins: [validationMixin],
   props: {
     /**
-     * Current input value (`v-model`)
+     * Current input modelValue (`v-model`)
      */
-    value: {
+    modelValue: {
       type: [String, Number],
       default: '',
     },
@@ -155,7 +155,7 @@ export default {
       description: 'Object with props, passed down to wt-label as props',
     },
   },
-
+  emits: ['update:modelValue'],
   data: () => ({
     inputType: '',
     isPasswordVisible: false,
@@ -199,17 +199,10 @@ export default {
     showPasswordIcon() {
       return this.isPasswordVisible ? 'eye--closed' : 'eye--opened';
     },
-
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: this.inputHandler,
-      };
-    },
   },
   methods: {
     inputHandler(event) {
-      this.$emit('input', event.target.value.trim());
+      this.$emit('update:modelValue', event.target.value.trim());
     },
 
     switchVisibilityPassword() {

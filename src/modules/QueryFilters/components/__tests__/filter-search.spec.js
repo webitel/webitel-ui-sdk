@@ -29,7 +29,7 @@ describe('Search Filter', () => {
     localVue,
     store,
     router,
-    propsData: {
+    props: {
       namespace,
       filterQuery,
     },

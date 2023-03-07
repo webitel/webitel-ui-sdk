@@ -31,7 +31,7 @@
       :options="selectOptions"
       :placeholder="placeholder || label"
       :track-by="trackBy"
-      :value="selectValue"
+      :model-value="selectValue"
       class="wt-select__select"
       v-bind="$attrs"
       @close="isOpened = false"
@@ -43,14 +43,14 @@
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
-      <template slot="tag" slot-scope="{ option }">
+      <template v-slot:tag="{ option }">
         <span class="multiselect__custom-tag">
             {{ getOptionLabel({ option, optionLabel }) }}
         </span>
       </template>
 
       <!--      Slot for custom label template for single select-->
-      <template slot="singleLabel" slot-scope="{ option }">
+      <template v-slot:singleLabel="{ option }">
         <slot name="singleLabel" v-bind="{ option, optionLabel }">
           <span class="multiselect__single-label">
             {{ getOptionLabel({ option, optionLabel }) }}
@@ -59,7 +59,7 @@
       </template>
 
       <!--      Slot for custom option template -->
-      <template slot="option" slot-scope="{ option }">
+      <template v-slot:option="{ option }">
         <slot name="option" v-bind="{ option, optionLabel }">
           {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
@@ -77,7 +77,7 @@
       </template>
 
       <!--      Slot located before the tags -->
-      <template slot="clear" slot-scope="{}">
+      <template v-slot:clear="{}">
         <wt-icon-btn
           v-if="clearable"
           :class="{ 'hidden': !isValue }"

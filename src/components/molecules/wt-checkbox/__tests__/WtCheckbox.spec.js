@@ -21,7 +21,7 @@ describe('WtCheckbox', () => {
         WtLabel,
         WtIcon,
       },
-      propsData: { label },
+      props: { label },
     });
     expect(wrapper.find('.wt-checkbox__label').text()).toBe(label);
   });
@@ -33,7 +33,7 @@ describe('WtCheckbox', () => {
         WtLabel,
         WtIcon,
       },
-      propsData: { selected },
+      props: { selected },
     });
     wrapper.find('.wt-checkbox__input').trigger('change');
     expect(wrapper.emitted().change[0]).toEqual([!selected]);
