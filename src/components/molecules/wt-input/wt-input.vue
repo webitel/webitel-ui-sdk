@@ -30,7 +30,7 @@
         :min="numberMin"
         :placeholder="placeholder || label"
         :type="inputType"
-        :value="modelValue"
+        :value="value || modelValue"
         class="wt-input__input"
         @input="inputHandler"
       >
@@ -68,10 +68,18 @@
 <script>
 import validationMixin from '../../../mixins/validationMixin/validationMixin';
 
+/*
+* IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
+* TWO PROPS: VALUE AND MODELVALUE, AND 2 EVENTS: @UPDATE:MODELVALUE AND @INPUT
+* */
 export default {
   name: 'wt-input',
   mixins: [validationMixin],
   props: {
+    value: {
+      type: [String, Number],
+      default: '',
+    },
     /**
      * Current input modelValue (`v-model`)
      */
@@ -155,7 +163,7 @@ export default {
       description: 'Object with props, passed down to wt-label as props',
     },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'input'],
   data: () => ({
     inputType: '',
     isPasswordVisible: false,
@@ -203,6 +211,7 @@ export default {
   methods: {
     inputHandler(event) {
       this.$emit('update:modelValue', event.target.value.trim());
+      this.$emit('input', event.target.value.trim());
     },
 
     switchVisibilityPassword() {
