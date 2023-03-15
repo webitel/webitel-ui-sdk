@@ -3,6 +3,8 @@ import deepCopy from 'deep-copy';
 import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum';
 import SupervisorSections from '../../../enums/WebitelApplications/SupervisorSections.enum';
 import AdminSections from '../../../enums/WebitelApplications/AdminSections.enum';
+import AuditorSections
+  from '../../../enums/WebitelApplications/AuditorSections.enum';
 
 const applicationsAccess = (value = true) => ({
   [WebitelApplications.AGENT]: {
@@ -147,6 +149,14 @@ const applicationsAccess = (value = true) => ({
     [AdminSections.OBJECTS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.OBJECTS}`,
+    },
+  },
+  [WebitelApplications.AUDIT]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WebitelApplications.AUDIT}.name`,
+    [AuditorSections.SCORECARDS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.AUDIT}.sections.${AuditorSections.SCORECARDS}`,
     },
   },
 });

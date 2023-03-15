@@ -9,6 +9,8 @@ import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
 import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
 import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+import AuditorSections
+  from '../../enums/WebitelApplications/AuditorSections.enum';
 import { snakeToCamel } from '../../scripts/caseConverters';
 
 export default {
@@ -141,7 +143,12 @@ export default {
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
-    [WebitelApplications.AUDIT]: { name: 'Audit' },
+    [WebitelApplications.AUDIT]: {
+      name: 'Audit',
+      section: {
+        [AuditorSections.SCORECARDS]: 'Scorecards',
+      },
+    },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
     [WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
     [WebitelApplications.SUPERVISOR]: {
