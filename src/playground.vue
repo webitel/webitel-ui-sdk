@@ -1,5 +1,15 @@
 <template>
   <div class="playground">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <audit-form
+        style="border: 1px solid red;"
+        mode="create"
+      ></audit-form>
+      <audit-form
+        style="border: 1px solid blue;"
+        mode="fill"
+      ></audit-form>
+    </div>
     <wt-navigation-bar
       :nav="[
           { value: '1', name: 'Name 1', route: '/1' },
@@ -87,9 +97,11 @@
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
 
+import AuditForm from './modules/AuditForm/components/audit-form.vue';
+
 export default {
   name: 'the-playground',
-  components: { WtNavigationBar, WtExpandTransition },
+  components: { WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     date: Date.now(),
     currentTab: { value: 1 },
