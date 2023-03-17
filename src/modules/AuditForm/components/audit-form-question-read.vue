@@ -1,17 +1,24 @@
 <template>
-  <article class="audit-form-question-read">
+  <article
+    class="audit-form-question-read"
+    :class="{
+      'audit-form-question-read--filled': result && result.score != null,
+    }"
+    @keyup.enter="emits('activate')"
+    @click="emits('activate')"
+  >
     <header class="audit-form-question-read-header">
       <p
         class="audit-form-question-read-text"
         :class="{
-          'audit-form-question-read-text--required': props.question.required,
+          'audit-form-question-read-text--required': question.required,
         }"
-      >{{ props.question.text }}</p>
+      >{{ question.text }}</p>
     </header>
     <section class="audit-form-question-read-content">
       <div v-if="question.type === 'options'">
         <wt-radio
-          v-for="({ text, score }) of props.question.options"
+          v-for="({ text, score }) of question.options"
           :key="score"
           :label="text"
           :value="score"
@@ -50,12 +57,13 @@ const props = defineProps({
 
 const emits = defineEmits([
   'change:result',
+  'activate',
 ]);
 
 const scoreRange = computed(() => {
   if (props.question.min > props.question.max) return [];
   const result = [];
-  let i = props.question.min;
+  let i = +props.question.min;
   do {
     result.push(i);
     i += 1;

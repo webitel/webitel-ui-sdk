@@ -6,7 +6,9 @@
       :question="question"
       :result="(result && result[key]) ? result[key] : null"
       :mode="mode"
-      @update:question="emits('update:question')"
+      @copy="copyQuestion({ question, key })"
+      @delete="deleteQuestion({ question, key})"
+      @update:question="handleQuestionUpdate({ key, value: $event })"
       @update:result="handleResultUpdate({ key, value: $event })"
     ></audit-form-question>
     <wt-button
@@ -18,7 +20,8 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import cloneDeep from 'lodash/cloneDeep';
+import { watch, watchEffect } from 'vue';
 import AuditFormQuestion from './audit-form-question.vue';
 import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
 
@@ -44,24 +47,45 @@ const emits = defineEmits([
   'update:result',
 ]);
 
-const questions = reactive([
-  ...props.questions,
-]);
-
-function addQuestion() {
+function addQuestion({ index, question } = {}) {
   const defaultQuestion = {
-    options: {
       required: true,
-      text: 'Hello',
+      text: 'My Anketa number 1',
+      type: 'options',
       options: [
         {
-          text: 'Hello',
+          text: 'My first var!',
+          score: 5,
+        },
+        {
+          text: 'My lorem ipsum var!',
           score: 10,
         },
       ],
-    },
-  };
-  questions.push(defaultQuestion);
+    };
+  const questions = [...props.questions];
+  const newQuestion = question || defaultQuestion;
+  if (index != null) questions.splice(index, 0, newQuestion);
+  else questions.push(newQuestion);
+  emits('update:questions', questions);
+}
+
+function handleQuestionUpdate({ key, value }) {
+  const questions = [...props.questions];
+  questions[key] = value;
+  emits('update:questions', questions);
+}
+
+function copyQuestion({ question, key }) {
+  const questions = [...props.questions];
+  questions.splice(key + 1, 0, cloneDeep(question));
+  emits('update:questions', questions);
+}
+
+function deleteQuestion({ key }) {
+  const questions = [...props.questions];
+  questions.splice(key, 1);
+  emits('update:questions', questions);
 }
 
 function handleResultUpdate({ key, value }) {
@@ -69,6 +93,14 @@ function handleResultUpdate({ key, value }) {
   result[key] = value;
   emits('update:result', result);
 }
+
+function initResult() {
+  console.info('questions changed');
+  const result = props.questions.map(() => null);
+  emits('update:result', result);
+}
+
+watchEffect(initResult);
 </script>
 
 <style lang="scss" scoped>
