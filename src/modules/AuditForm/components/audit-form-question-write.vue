@@ -1,10 +1,10 @@
 <template>
-  <article class="audit-form-question-create">
-    <header class="audit-form-question-create-header">
+  <article class="audit-form-question-write">
+    <header class="audit-form-question-write-header">
       <wt-switcher
         :value="question.required"
       ></wt-switcher>
-      <div class="audit-form-question-create-header__actions">
+      <div class="audit-form-question-write-header__actions">
         <wt-icon-btn
           icon="copy"
           @click="emit('copy')"
@@ -15,8 +15,8 @@
         ></wt-icon-btn>
       </div>
     </header>
-    <section class="audit-form-question-create-content">
-      <div class="audit-form-question-create-content-question">
+    <section class="audit-form-question-write-content">
+      <div class="audit-form-question-write-content-question">
         <wt-input
           :value="question.text"
         ></wt-input>

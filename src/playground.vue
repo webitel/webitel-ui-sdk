@@ -3,10 +3,13 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <audit-form
         style="border: 1px solid red;"
+        v-model:questions="auditQuestions"
         mode="create"
       ></audit-form>
       <audit-form
         style="border: 1px solid blue;"
+        :questions="auditQuestions"
+        v-model:result="auditResult"
         mode="fill"
       ></audit-form>
     </div>
@@ -103,6 +106,36 @@ export default {
   name: 'the-playground',
   components: { WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
+    auditQuestions: [
+      {
+        required: true,
+        text: 'My Anketa number 1',
+        type: 'options',
+        options: [
+          {
+            text: 'My first var!',
+            score: 5,
+          },
+          {
+            text: 'My lorem ipsum var!',
+            score: 10,
+          },
+        ],
+      },
+      {
+        required: true,
+        text: 'My anketa number two!',
+        type: 'score',
+        min: 1,
+        max: 10,
+      },
+    ],
+    auditResult: [
+      {
+        score: null,
+      },
+      { score: null },
+    ],
     date: Date.now(),
     currentTab: { value: 1 },
     switcher: true,

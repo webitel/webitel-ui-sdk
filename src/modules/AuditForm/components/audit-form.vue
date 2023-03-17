@@ -4,7 +4,10 @@
       v-for="(question, key) of questions"
       :key="key"
       :question="question"
+      :result="(result && result[key]) ? result[key] : null"
       :mode="mode"
+      @update:question="emits('update:question')"
+      @update:result="handleResultUpdate({ key, value: $event })"
     ></audit-form-question>
     <wt-button
       v-if="props.mode === 'create'"
@@ -17,6 +20,7 @@
 <script setup>
 import { reactive } from 'vue';
 import AuditFormQuestion from './audit-form-question.vue';
+import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
 
 const props = defineProps({
   mode: {
@@ -28,28 +32,17 @@ const props = defineProps({
   },
   questions: {
     type: Array,
-    default: () => [
-      {
-        required: true,
-        text: 'Hello',
-        type: 'options',
-        options: [
-          {
-            text: 'Hello',
-            score: 10,
-          },
-        ],
-      },
-      {
-        required: true,
-        text: 'Hello',
-        type: 'score',
-        min: 10,
-        max: 10,
-      },
-    ],
+    required: true,
+  },
+  result: {
+    type: Array,
   },
 });
+
+const emits = defineEmits([
+  'update:questions',
+  'update:result',
+]);
 
 const questions = reactive([
   ...props.questions,
@@ -69,6 +62,12 @@ function addQuestion() {
     },
   };
   questions.push(defaultQuestion);
+}
+
+function handleResultUpdate({ key, value }) {
+  const result = [...props.result];
+  result[key] = value;
+  emits('update:result', result);
 }
 </script>
 
