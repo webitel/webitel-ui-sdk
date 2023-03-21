@@ -1,11 +1,15 @@
 <template>
   <component
+    class="audit-form-question"
+    :class="[
+     `audit-form-question--mode-${mode}`
+    ]"
+    v-clickaway="saveQuestion"
     :is="component"
     :question="question"
     :result="result"
     @copy="emits('copy')"
     @delete="emits('delete')"
-    @save="saveQuestion"
     @activate="activateQuestion"
     @change:question="emits('update:question', $event)"
     @change:result="emits('update:result', $event)"
@@ -14,8 +18,9 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import QuestionWrite from './audit-form-question-write.vue';
-import QuestionRead from './audit-form-question-read.vue';
+import vClickaway from '../../../directives/clickaway/clickaway';
+import QuestionWrite from './audit-form-question-write-wrapper.vue';
+import QuestionRead from './audit-form-question-read-wrapper.vue';
 
 const props = defineProps({
   question: {
@@ -42,7 +47,7 @@ const QuestionState = {
   EDIT: 'edit',
 };
 
-const state = ref(QuestionState.EDIT);
+const state = ref(QuestionState.SAVED);
 
 const component = computed(() => {
   if (props.mode === 'create') {
@@ -63,5 +68,13 @@ function activateQuestion() {
 </script>
 
 <style lang="scss" scoped>
+.audit-form-question {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  box-shadow: var(--elevation-1);
 
+  &--mode-create.audit-form-question-read {
+    cursor: pointer;
+  }
+}
 </style>

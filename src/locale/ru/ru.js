@@ -282,6 +282,7 @@ export default {
       question: 'Вопрос',
       option: 'Опция | Опции',
       score: 'Оценка | Оценки',
+      addQuestion: 'Добавить вопрос',
       type: {
         options: 'Опции',
         score: 'Оценка',

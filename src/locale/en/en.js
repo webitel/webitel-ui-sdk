@@ -286,6 +286,7 @@ export default {
       question: 'Question',
       option: 'Option | Options',
       score: 'Score | Scores',
+      addQuestion: 'Add question',
       type: {
         options: 'Options',
         score: 'Score',

@@ -3,7 +3,6 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
-          style="border: 1px solid red;"
           v-model:questions="auditQuestions"
           mode="create"
         ></audit-form>
@@ -11,7 +10,6 @@
       </div>
       <div>
         <audit-form
-          style="border: 1px solid blue;"
           :questions="auditQuestions"
           v-model:result="auditResult"
           mode="fill"
@@ -133,7 +131,7 @@ export default {
         text: 'My anketa number two!',
         type: 'score',
         min: 1,
-        max: 10,
+        max: 5,
       },
     ],
     auditResult: [],

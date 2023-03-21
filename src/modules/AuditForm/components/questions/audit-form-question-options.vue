@@ -36,21 +36,39 @@
       >{{ $t('reusable.add') }}
       </wt-button>
     </div>
+    <div
+      v-else-if="mode === 'read'"
+      class="audit-form-question-options-read"
+    >
+      <wt-radio
+        v-for="({ text, score }) of question.options"
+        :key="score"
+        :label="text"
+        :value="score"
+        :selected="result ? result.score : result"
+        @input="emit('change:result', { score })"
+      ></wt-radio>
+    </div>
+    <div v-else>Unknown mode: {{ mode }}</div>
   </article>
 </template>
 
 <script setup>
-import set from 'lodash/set';
-import cloneDeep from 'lodash/cloneDeep';
+import updateObject from '../../../../scripts/updateObject';
 import WtTooltip from '../../../../components/atoms/wt-tooltip/wt-tooltip.vue';
 import WtIconBtn from '../../../../components/molecules/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../../components/molecules/wt-input/wt-input.vue';
 import WtButton from '../../../../components/atoms/wt-button/wt-button.vue';
+import WtRadio from '../../../../components/molecules/wt-radio/wt-radio.vue';
+import { generateOption } from '../../schemas/AuditFormQuestionOptionsSchema';
 
 const props = defineProps({
   question: {
     type: Object,
     required: true,
+  },
+  result: {
+    type: Object,
   },
   mode: {
     // options: ['read', 'write']
@@ -65,16 +83,11 @@ const emit = defineEmits([
 ]);
 
 function updateQuestion({ path, value }) {
-  const question = set(cloneDeep(props.question), path, value);
-  emit('change:question', question);
+  emit('change:question', updateObject({ obj: props.question, path, value }));
 }
 
 function addQuestionOption() {
-  const option = {
-    text: 'My first var!',
-    score: 5,
-  };
-  const options = [...props.question.options, option];
+  const options = [...props.question.options, generateOption()];
   return updateQuestion({ path: 'options', value: options });
 }
 
@@ -101,5 +114,11 @@ function deleteQuestionOption({ key }) {
   grid-template-columns: 3fr 1fr 24px;
   gap: var(--spacing-sm);
   align-items: center;
+}
+
+.audit-form-question-options-read {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 </style>
