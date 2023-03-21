@@ -42,7 +42,7 @@ const QuestionState = {
   EDIT: 'edit',
 };
 
-const state = ref(QuestionState.SAVED);
+const state = ref(QuestionState.EDIT);
 
 const component = computed(() => {
   if (props.mode === 'create') {

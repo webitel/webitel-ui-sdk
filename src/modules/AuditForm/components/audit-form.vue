@@ -21,7 +21,7 @@
 
 <script setup>
 import cloneDeep from 'lodash/cloneDeep';
-import { watch, watchEffect } from 'vue';
+import { watchEffect } from 'vue';
 import AuditFormQuestion from './audit-form-question.vue';
 import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
 

@@ -45,6 +45,8 @@ export default {
     downloadAll: 'Скачать всё',
     warning: 'Предупреждение',
     doNotSave: 'Не сохранять',
+    required: 'Обязательный',
+    copy: 'Скопировать',
   },
   vocabulary: {
     language: 'Язык',
@@ -275,6 +277,15 @@ export default {
     copyAction: {
       copy: 'Копировать',
       copied: 'Скопировано!',
+    },
+    auditForm: {
+      question: 'Вопрос',
+      option: 'Опция | Опции',
+      score: 'Оценка | Оценки',
+      type: {
+        options: 'Опции',
+        score: 'Оценка',
+      },
     },
   },
 };

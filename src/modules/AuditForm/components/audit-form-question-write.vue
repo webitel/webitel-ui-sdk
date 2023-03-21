@@ -3,55 +3,52 @@
     <header class="audit-form-question-write-header">
       <wt-switcher
         :value="question.required"
+        :label="$t('reusable.required')"
         @change="updateQuestion({ path: 'required', value: $event })"
       ></wt-switcher>
       <div class="audit-form-question-write-header__actions">
-        <wt-icon-btn
-          icon="copy"
-          @click="emit('copy')"
-        ></wt-icon-btn>
-        <wt-icon-btn
-          icon="bucket"
-          @click="emit('delete')"
-        ></wt-icon-btn>
+        <wt-tooltip>
+          <template v-slot:activator>
+            <wt-icon-btn
+              icon="copy"
+              @click="emit('copy')"
+            ></wt-icon-btn>
+          </template>
+          {{ $t('reusable.copy') }}
+        </wt-tooltip>
+        <wt-tooltip>
+          <template v-slot:activator>
+            <wt-icon-btn
+              icon="bucket"
+              @click="emit('delete')"
+            ></wt-icon-btn>
+          </template>
+          {{ $t('reusable.delete') }}
+        </wt-tooltip>
       </div>
     </header>
     <section class="audit-form-question-write-content">
       <div class="audit-form-question-write-content-question">
         <wt-input
           :value="question.text"
+          :label="$t('webitelUI.auditForm.question')"
           @input="updateQuestion({ path: 'text', value: $event })"
         ></wt-input>
         <wt-select
-          :value="question.type"
+          :value="prettifiedQuestionType"
           :options="QuestionType"
-          :track-by="null"
-          @input="handleQuestionTypeChange"
+          track-by="value"
+          :clearable="false"
+          :label="$t('vocabulary.type')"
+          @input="handleQuestionTypeChange($event.value)"
         ></wt-select>
       </div>
-      <div v-if="question.type === 'options'">
-        <div
-          v-for="({ text, score }, key) of question.options"
-          :key="key"
-        >
-          <wt-input
-            :value="text"
-            @input="updateQuestion({ path: `options[${key}].text`, value: $event })"
-          ></wt-input>
-          <wt-input
-            :value="score"
-            type="number"
-            @input="updateQuestion({ path: `options[${key}].score`, value: $event })"
-          ></wt-input>
-          <wt-icon-btn
-            icon="bucket"
-            @click="deleteQuestionOption({ key })"
-          ></wt-icon-btn>
-        </div>
-        <wt-button
-          @click="addQuestionOption"
-        >Add</wt-button>
-      </div>
+      <component
+        :is="QuestionTypeComponent"
+        :question="question"
+        mode="write"
+        @change:question="emit('change:question', $event)"
+      ></component>
       <div v-if="question.type === 'score'">
         <wt-input
           :value="question.min"
@@ -74,11 +71,15 @@
 <script setup>
 import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
+import { computed } from 'vue';
+import WtTooltip from '../../../components/atoms/wt-tooltip/wt-tooltip.vue';
 import WtSwitcher from '../../../components/molecules/wt-switcher/wt-switcher.vue';
 import WtIconBtn from '../../../components/molecules/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../components/molecules/wt-input/wt-input.vue';
 import WtSelect from '../../../components/molecules/wt-select/wt-select.vue';
 import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
+
+import AuditFormQuestionOptions from './questions/audit-form-question-options.vue';
 
 const props = defineProps({
   question: {
@@ -94,26 +95,21 @@ const emit = defineEmits([
   'save',
 ]);
 
-const QuestionType = ['options', 'score'];
+const QuestionType = [
+  { value: 'options', locale: 'webitelUI.auditForm.type.options' },
+  { value: 'score', locale: 'webitelUI.auditForm.type.score' },
+];
+
+const prettifiedQuestionType = computed(() => QuestionType.find(({ value }) => value === props.question.type));
+
+const QuestionTypeComponent = computed(() => {
+  if (props.question.type === 'options') return AuditFormQuestionOptions;
+  return WtButton;
+});
 
 function updateQuestion({ path, value }) {
   const question = set(cloneDeep(props.question), path, value);
   emit('change:question', question);
-}
-
-function addQuestionOption() {
-  const option = {
-    text: 'My first var!',
-    score: 5,
-  };
-  const options = [...props.question.options, option];
-  return updateQuestion({ path: 'options', value: options });
-}
-
-function deleteQuestionOption({ key }) {
-  const options = [...props.question.options];
-  options.splice(key, 1);
-  return updateQuestion({ path: 'options', value: options });
 }
 
 function handleQuestionTypeChange(type) {
@@ -135,5 +131,29 @@ function handleQuestionTypeChange(type) {
 </script>
 
 <style lang="scss" scoped>
+.audit-form-question-write {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+}
 
+.audit-form-question-write-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__actions {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+}
+
+.audit-form-question-write-content-question {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--spacing-sm);
+  margin-right: calc(24px + var(--spacing-sm)); // delete icon action for type "options"
+  margin-bottom: var(--spacing-sm);
+}
 </style>
