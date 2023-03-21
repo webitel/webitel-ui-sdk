@@ -14,6 +14,12 @@
           'audit-form-question-read-text--required': question.required,
         }"
       >{{ question.text }}</p>
+      <wt-icon
+        class="sortable-movable"
+        icon="edit"
+        size="lg"
+        style="border: 1px solid red;"
+      ></wt-icon>
     </header>
     <section class="audit-form-question-read-content">
       <component

@@ -1,16 +1,21 @@
 <template>
   <section class="audit-form">
-    <audit-form-question
-      v-for="(question, key) of questions"
-      :key="key"
-      :question="question"
-      :result="(result && result[key]) ? result[key] : null"
-      :mode="mode"
-      @copy="copyQuestion({ question, key })"
-      @delete="deleteQuestion({ question, key})"
-      @update:question="handleQuestionUpdate({ key, value: $event })"
-      @update:result="handleResultUpdate({ key, value: $event })"
-    ></audit-form-question>
+    <div
+      class="audit-form__sortable-wrapper"
+      ref="sortableWrapper"
+    >
+      <audit-form-question
+        v-for="(question, key) of questions"
+        :key="key"
+        :question="question"
+        :result="(result && result[key]) ? result[key] : null"
+        :mode="mode"
+        @copy="copyQuestion({ question, key })"
+        @delete="deleteQuestion({ question, key})"
+        @update:question="handleQuestionUpdate({ key, value: $event })"
+        @update:result="handleResultUpdate({ key, value: $event })"
+      ></audit-form-question>
+    </div>
     <wt-button
       class="audit-form__add-button"
       v-if="props.mode === 'create'"
@@ -22,8 +27,9 @@
 </template>
 
 <script setup>
+import Sortable from 'sortablejs';
 import cloneDeep from 'lodash/cloneDeep';
-import { watchEffect } from 'vue';
+import { watchEffect, ref, onMounted, onUnmounted } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import AuditFormQuestion from './audit-form-question.vue';
 import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
@@ -46,51 +52,76 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits([
+const emit = defineEmits([
   'update:questions',
   'update:result',
 ]);
 
 const v$ = useVuelidate();
 
+const sortableWrapper = ref(null);
+let sortable;
+
 function addQuestion({ index, question } = {}) {
   const questions = [...props.questions];
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);
   else questions.push(newQuestion);
-  emits('update:questions', questions);
+  emit('update:questions', questions);
 }
 
 function handleQuestionUpdate({ key, value }) {
   const questions = [...props.questions];
   questions[key] = value;
-  emits('update:questions', questions);
+  emit('update:questions', questions);
 }
 
 function copyQuestion({ question, key }) {
   const questions = [...props.questions];
   questions.splice(key + 1, 0, cloneDeep(question));
-  emits('update:questions', questions);
+  emit('update:questions', questions);
 }
 
 function deleteQuestion({ key }) {
   const questions = [...props.questions];
   questions.splice(key, 1);
-  emits('update:questions', questions);
+  emit('update:questions', questions);
+}
+
+function changeQuestionsOrder({ oldIndex, newIndex }) {
+  const questions = [...props.questions];
+  const el = questions[oldIndex];
+  questions.splice(oldIndex, 1);
+  questions.splice(newIndex, 0, el);
+  emit('update:questions', questions);
 }
 
 function handleResultUpdate({ key, value }) {
   const result = [...props.result];
   result[key] = value;
-  emits('update:result', result);
+  emit('update:result', result);
 }
 
 function initResult() {
   const result = props.questions.map(() => null);
-  emits('update:result', result);
+  emit('update:result', result);
 }
 
 watchEffect(initResult);
+
+onMounted(() => {
+  sortable = Sortable.create(sortableWrapper.value, {
+    handle: '.sortable-movable',
+    onEnd: ({ oldIndex, newIndex }) => {
+      if (oldIndex === newIndex) return;
+      changeQuestionsOrder({ oldIndex, newIndex });
+    },
+  });
+});
+
+onUnmounted(() => {
+  if (sortable) sortable.destroy();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -98,6 +129,10 @@ watchEffect(initResult);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+
+  &__sortable-wrapper {
+    display: contents;
+  }
 }
 
 .audit-form__add-button {

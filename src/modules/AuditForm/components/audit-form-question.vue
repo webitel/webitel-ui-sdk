@@ -70,6 +70,7 @@ function activateQuestion() {
 <style lang="scss" scoped>
 .audit-form-question {
   padding: var(--spacing-sm);
+  background: var(--main-color);
   border-radius: var(--border-radius);
   box-shadow: var(--elevation-1);
 
