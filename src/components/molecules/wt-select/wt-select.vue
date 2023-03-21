@@ -94,7 +94,7 @@
         </div>
       </template>
 
-      <template v-if="showIntersectionObserver" slot="afterList">
+      <template v-if="showIntersectionObserver" v-slot="afterList">
         <div v-observe-visibility="handleAfterListIntersect"></div>
       </template>
     </vue-multiselect>

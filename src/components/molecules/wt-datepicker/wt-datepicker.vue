@@ -17,7 +17,7 @@
       monday-first
       @input="$emit('change', $event.getTime())"
     >
-      <template slot="afterDateInput">
+      <template v-slot="afterDateInput">
         <wt-icon
           :color="disabled ? 'disabled' : 'default'"
           class="wt-datepicker__calendar-icon"
@@ -29,7 +29,7 @@
           icon="arrow-down"
         ></wt-icon>
       </template>
-      <template slot="beforeCalendarHeader">
+      <template v-slot="beforeCalendarHeader">
         <wt-icon
           class="wt-datepicker__month-arrow wt-datepicker__month-arrow--left"
           icon="arrow-left"

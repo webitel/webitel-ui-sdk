@@ -14,10 +14,10 @@
       class="wt-table-column-select__popup"
       @close="close"
     >
-      <template slot="title">
+      <template v-slot="title">
         {{ $t('webitelUI.tableColumnSelect.title') }}
       </template>
-      <template slot="main">
+      <template v-slot="main">
         <ul class="wt-table-column-select__popup__list">
           <li
             v-for="(col, key) of changeableDraft"
@@ -29,7 +29,7 @@
           </li>
         </ul>
       </template>
-      <template slot="actions">
+      <template v-slot="actions">
         <wt-button
           @click="setShownColumns"
         >{{ $t('reusable.add') }}
