@@ -34,6 +34,7 @@ export default {
     generate: 'Generate',
     lang: {
       en: 'English',
+      es: 'Español',
       ru: 'Русский',
       ua: 'Українська',
     },
