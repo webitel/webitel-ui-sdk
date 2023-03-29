@@ -45,6 +45,8 @@ export default {
     downloadAll: 'Скачать всё',
     warning: 'Предупреждение',
     doNotSave: 'Не сохранять',
+    required: 'Обязательный',
+    copy: 'Скопировать',
   },
   vocabulary: {
     language: 'Язык',
@@ -275,6 +277,16 @@ export default {
     copyAction: {
       copy: 'Копировать',
       copied: 'Скопировано!',
+    },
+    auditForm: {
+      question: 'Критерий',
+      option: 'Вариант | Варианты',
+      score: 'Бал | Балы',
+      addQuestion: 'Добавить критерий',
+      type: {
+        options: 'Критерии',
+        score: 'Бал',
+      },
     },
   },
 };

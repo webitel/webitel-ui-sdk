@@ -1,5 +1,22 @@
 <template>
   <div class="playground">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <audit-form
+          v-model:questions="auditQuestions"
+          mode="create"
+        ></audit-form>
+        {{ auditQuestions }}
+      </div>
+      <div>
+        <audit-form
+          :questions="auditQuestions"
+          v-model:result="auditResult"
+          mode="fill"
+        ></audit-form>
+        {{ auditResult }}
+      </div>
+      </div>
     <wt-navigation-bar
       :nav="[
           { value: '1', name: 'Name 1', route: '/1' },
@@ -87,10 +104,37 @@
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
 
+import AuditForm from './modules/AuditForm/components/audit-form.vue';
+
 export default {
   name: 'the-playground',
-  components: { WtNavigationBar, WtExpandTransition },
+  components: { WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
+    auditQuestions: [
+      {
+        required: true,
+        text: 'My Anketa number 1',
+        type: 'options',
+        options: [
+          {
+            text: 'My first var!',
+            score: 5,
+          },
+          {
+            text: 'My lorem ipsum var!',
+            score: 10,
+          },
+        ],
+      },
+      {
+        required: true,
+        text: 'My anketa number two!',
+        type: 'score',
+        min: 1,
+        max: 5,
+      },
+    ],
+    auditResult: [],
     date: Date.now(),
     currentTab: { value: 1 },
     switcher: true,

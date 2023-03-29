@@ -46,6 +46,8 @@ export default {
     downloadAll: 'Download all',
     warning: 'Warning',
     doNotSave: 'Don\'t save',
+    required: 'Required',
+    copy: 'Copy',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -279,6 +281,16 @@ export default {
     copyAction: {
       copy: 'Copy',
       copied: 'Copied to clipboard!',
+    },
+    auditForm: {
+      question: 'Criteria',
+      option: 'Option | Options',
+      score: 'Score | Scores',
+      addQuestion: 'Add criteria',
+      type: {
+        options: 'Options',
+        score: 'Score',
+      },
     },
   },
 };

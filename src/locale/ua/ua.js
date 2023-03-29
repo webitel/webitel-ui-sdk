@@ -46,6 +46,8 @@ export default {
     downloadAll: 'Завантажити все',
     warning: 'Попередження',
     doNotSave: 'Не зберігати',
+    required: 'Обов\'язковий',
+    copy: 'Скопіювати',
   },
   vocabulary: {
     language: 'Мова',
@@ -275,6 +277,16 @@ export default {
     copyAction: {
       copy: 'Копіювати',
       copied: 'Скопійовано!',
+    },
+    auditForm: {
+      question: 'Критерій',
+      option: 'Варіант | Варіанти',
+      score: 'Бал | Бали',
+      addQuestion: 'Додати критерій',
+      type: {
+        options: 'Критерії',
+        score: 'Бал',
+      },
     },
   },
 };
