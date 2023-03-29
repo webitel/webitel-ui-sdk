@@ -67,6 +67,7 @@ const v$ = useVuelidate();
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
 
 function addQuestion({ index, question } = {}) {
+  console.info('here!');
   const questions = [...props.questions];
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);

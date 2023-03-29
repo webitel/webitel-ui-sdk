@@ -22,7 +22,7 @@
       <wt-radio
         v-for="(value) of scoreRange"
         :key="value"
-        :label="value"
+        :label="`${value}`"
         :value="value"
         :selected="result ? result.score : result"
         @input="emit('change:result', { score: value })"

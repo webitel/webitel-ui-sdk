@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import AuditForm from '../audit-form.vue';
 
 import {
@@ -19,7 +19,23 @@ describe('AuditForm', () => {
     });
     expect(wrapper.isVisible()).toBe(true);
   });
-  it('adds new question', () => {
+  it('add question button triggers addQuestion method', async () => {
+    const wrapper = mount(AuditForm, {
+      props: {
+        mode: 'create',
+        questions: [],
+      },
+    });
+    // const mock = jest.fn();
+    const mock = (wrapper.vm.addQuestion = jest.fn());
+    // jest.spyOn(wrapper.vm, 'addQuestion').mockImplementationOnce(mock);
+    wrapper.findComponent('.audit-form__add-button').vm.$emit('click');
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+    expect(mock).toHaveBeenCalled();
+  });
+  it('addQuestion method emits update event', () => {
     const wrapper = shallowMount(AuditForm, {
       props: {
         mode: '',
