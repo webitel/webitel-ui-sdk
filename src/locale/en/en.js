@@ -283,10 +283,10 @@ export default {
       copied: 'Copied to clipboard!',
     },
     auditForm: {
-      question: 'Question',
+      question: 'Criteria',
       option: 'Option | Options',
       score: 'Score | Scores',
-      addQuestion: 'Add question',
+      addQuestion: 'Add criteria',
       type: {
         options: 'Options',
         score: 'Score',
