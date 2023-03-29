@@ -67,7 +67,6 @@ const v$ = useVuelidate();
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
 
 function addQuestion({ index, question } = {}) {
-  console.info('here!');
   const questions = [...props.questions];
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);
@@ -124,11 +123,6 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 
 watch(v$, () => emit('update:validation', v$));
 watchEffect(initResult);
-
-// for testing purpose
-defineExpose({
-  addQuestion,
-});
 </script>
 
 <style lang="scss" scoped>
