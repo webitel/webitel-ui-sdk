@@ -3,6 +3,7 @@
     <div
       class="audit-form__sortable-wrapper"
       ref="sortableWrapper"
+      v-if="!reloadSortable"
     >
       <audit-form-question
         v-for="(question, key) of questions"
@@ -10,6 +11,7 @@
         :question="question"
         :result="(result && result[key]) ? result[key] : null"
         :mode="mode"
+        :disable-delete="questions.length <= 1"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
@@ -18,19 +20,21 @@
     </div>
     <wt-button
       class="audit-form__add-button"
-      v-if="props.mode === 'create'"
+      v-if="mode === 'create'"
+      :disabled="isInvalidForm"
       @click="addQuestion"
     >{{ $t('webitelUI.auditForm.addQuestion') }}
     </wt-button>
-    {{ v$ }}
   </section>
 </template>
 
 <script setup>
-import Sortable from 'sortablejs';
 import cloneDeep from 'lodash/cloneDeep';
-import { watchEffect, ref, onMounted, onUnmounted } from 'vue';
+import {
+  watch, watchEffect, ref, computed,
+} from 'vue';
 import { useVuelidate } from '@vuelidate/core';
+import { useDestroyableSortable } from '../composables/useDestroyableSortable';
 import AuditFormQuestion from './audit-form-question.vue';
 import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';
@@ -55,12 +59,12 @@ const props = defineProps({
 const emit = defineEmits([
   'update:questions',
   'update:result',
+  'update:validation',
 ]);
 
 const v$ = useVuelidate();
 
-const sortableWrapper = ref(null);
-let sortable;
+const isInvalidForm = computed(() => !!v$.value.$errors.length);
 
 function addQuestion({ index, question } = {}) {
   const questions = [...props.questions];
@@ -90,8 +94,7 @@ function deleteQuestion({ key }) {
 
 function changeQuestionsOrder({ oldIndex, newIndex }) {
   const questions = [...props.questions];
-  const el = questions[oldIndex];
-  questions.splice(oldIndex, 1);
+  const [el] = questions.splice(oldIndex, 1);
   questions.splice(newIndex, 0, el);
   emit('update:questions', questions);
 }
@@ -107,20 +110,23 @@ function initResult() {
   emit('update:result', result);
 }
 
-watchEffect(initResult);
+const sortableWrapper = ref(null);
 
-onMounted(() => {
-  sortable = Sortable.create(sortableWrapper.value, {
-    handle: '.sortable-movable',
-    onEnd: ({ oldIndex, newIndex }) => {
-      if (oldIndex === newIndex) return;
-      changeQuestionsOrder({ oldIndex, newIndex });
-    },
-  });
+const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
+  handle: '.audit-form-question-read__drag-icon',
+  disabled: props.mode !== 'create',
+  onEnd: ({ newIndex, oldIndex }) => {
+    if (newIndex === oldIndex) return;
+    changeQuestionsOrder({ oldIndex, newIndex });
+  },
 });
 
-onUnmounted(() => {
-  if (sortable) sortable.destroy();
+watch(v$, () => emit('update:validation', v$));
+watchEffect(initResult);
+
+// for testing purpose
+defineExpose({
+  addQuestion,
 });
 </script>
 

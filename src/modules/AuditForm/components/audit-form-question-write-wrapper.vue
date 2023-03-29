@@ -20,6 +20,7 @@
           <template v-slot:activator>
             <wt-icon-btn
               icon="bucket"
+              :disabled="disableDelete"
               @click="emit('delete')"
             ></wt-icon-btn>
           </template>
@@ -32,6 +33,8 @@
         <wt-input
           :value="question.text"
           :label="$t('webitelUI.auditForm.question')"
+          :v="v.question.text"
+          required
           @input="updateQuestion({ path: 'text', value: $event })"
         ></wt-input>
         <wt-select
@@ -73,6 +76,13 @@ const props = defineProps({
   question: {
     type: Object,
     required: true,
+  },
+  disableDelete: {
+    type: Boolean,
+    default: true,
+  },
+  v: {
+    type: Object,
   },
 });
 

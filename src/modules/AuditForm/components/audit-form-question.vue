@@ -8,6 +8,9 @@
     :is="component"
     :question="question"
     :result="result"
+    :v="v$"
+    :disable-dragging="mode === 'fill'"
+    :disable-delete="disableDelete"
     @copy="emits('copy')"
     @delete="emits('delete')"
     @activate="activateQuestion"
@@ -17,7 +20,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { computed, ref, toRefs } from 'vue';
 import vClickaway from '../../../directives/clickaway/clickaway';
 import QuestionWrite from './audit-form-question-write-wrapper.vue';
 import QuestionRead from './audit-form-question-read-wrapper.vue';
@@ -32,6 +37,10 @@ const props = defineProps({
   },
   mode: {
     type: String,
+  },
+  disableDelete: {
+    type: Boolean,
+    default: true,
   },
 });
 
@@ -48,6 +57,18 @@ const QuestionState = {
 };
 
 const state = ref(QuestionState.SAVED);
+
+const { question } = toRefs(props);
+
+// validate only "create" mode
+const v$ = useVuelidate(computed(() => (
+  (props.mode === 'create')
+    ? {
+      question: {
+        text: { required },
+      },
+      $autoDirty: true,
+    } : {})), { question });
 
 const component = computed(() => {
   if (props.mode === 'create') {

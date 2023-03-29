@@ -15,10 +15,10 @@
         }"
       >{{ question.text }}</p>
       <wt-icon
-        class="sortable-movable"
-        icon="edit"
-        size="lg"
-        style="border: 1px solid red;"
+        class="audit-form-question-read__drag-icon"
+        v-if="!disableDragging"
+        icon="move"
+        color="secondary"
       ></wt-icon>
     </header>
     <section class="audit-form-question-read-content">
@@ -37,6 +37,7 @@
 import { computed } from 'vue';
 import AuditFormQuestionOptions from './questions/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/audit-form-question-score.vue';
+import WtIcon from '../../../components/atoms/wt-icon/wt-icon.vue';
 
 const props = defineProps({
   question: {
@@ -46,6 +47,10 @@ const props = defineProps({
   result: {
     type: Object,
     required: true,
+  },
+  disableDragging: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -63,6 +68,7 @@ const QuestionTypeComponent = computed(() => {
 
 <style lang="scss" scoped>
 .audit-form-question-read {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
@@ -70,6 +76,13 @@ const QuestionTypeComponent = computed(() => {
   &--filled {
     background: var(--secondary-color-50);
   }
+}
+
+.audit-form-question-read__drag-icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .audit-form-question-read-header {
