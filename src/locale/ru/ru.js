@@ -33,6 +33,7 @@ export default {
     generate: 'Сгенерировать',
     lang: {
       en: 'English',
+      es: 'Español',
       ru: 'Русский',
       ua: 'Українська',
     },
