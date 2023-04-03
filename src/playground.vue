@@ -110,31 +110,6 @@ export default {
   name: 'the-playground',
   components: { WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
-    auditQuestions: [
-      {
-        required: true,
-        text: 'My Anketa number 1',
-        type: 'options',
-        options: [
-          {
-            text: 'My first var!',
-            score: 5,
-          },
-          {
-            text: 'My lorem ipsum var!',
-            score: 10,
-          },
-        ],
-      },
-      {
-        required: true,
-        text: 'My anketa number two!',
-        type: 'score',
-        min: 1,
-        max: 5,
-      },
-    ],
-    auditResult: [],
     date: Date.now(),
     currentTab: { value: 1 },
     switcher: true,
