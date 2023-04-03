@@ -31,11 +31,11 @@
     <section class="audit-form-question-write-content">
       <div class="audit-form-question-write-content-question">
         <wt-input
-          :value="question.text"
+          :value="question.question"
           :label="$t('webitelUI.auditForm.question')"
-          :v="v.question.text"
+          :v="v.question.question"
           required
-          @input="updateQuestion({ path: 'text', value: $event })"
+          @input="updateQuestion({ path: 'question', value: $event })"
         ></wt-input>
         <wt-select
           :value="prettifiedQuestionType"

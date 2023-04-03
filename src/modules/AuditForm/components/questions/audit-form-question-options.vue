@@ -5,14 +5,14 @@
       class="audit-form-question-options-write"
     >
       <div
-        v-for="({ text, score }, key) of question.options"
+        v-for="({ name, score }, key) of question.options"
         :key="key"
         class="audit-form-question-options-write-row"
       >
         <wt-input
-          :value="text"
+          :value="name"
           :label="$tc('webitelUI.auditForm.option', 1)"
-          @input="updateQuestion({ path: `options[${key}].text`, value: $event })"
+          @input="updateQuestion({ path: `options[${key}].name`, value: $event })"
         ></wt-input>
         <wt-input
           :value="score"
@@ -41,9 +41,9 @@
       class="audit-form-question-options-read"
     >
       <wt-radio
-        v-for="({ text, score }) of question.options"
+        v-for="({ name, score }) of question.options"
         :key="score"
-        :label="text"
+        :label="name"
         :value="score"
         :selected="result ? result.score : result"
         @input="emit('change:result', { score })"

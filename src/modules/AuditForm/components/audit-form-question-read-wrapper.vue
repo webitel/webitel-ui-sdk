@@ -13,7 +13,7 @@
         :class="{
           'audit-form-question-read-text--required': question.required,
         }"
-      >{{ question.text }}</p>
+      >{{ question.question }}</p>
       <wt-icon
         class="audit-form-question-read__drag-icon"
         v-if="!disableDragging"

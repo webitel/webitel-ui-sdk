@@ -1,5 +1,5 @@
 export const generateOption = () => ({
-  text: '',
+  name: '',
   score: 10,
 });
 

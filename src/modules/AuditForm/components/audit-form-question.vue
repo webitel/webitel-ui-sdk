@@ -65,7 +65,7 @@ const v$ = useVuelidate(computed(() => (
   (props.mode === 'create')
     ? {
       question: {
-        text: { required },
+        question: { required },
       },
       $autoDirty: true,
     } : {})), { question });

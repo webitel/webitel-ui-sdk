@@ -16,7 +16,7 @@
         ></audit-form>
         {{ auditResult }}
       </div>
-      </div>
+    </div>
     <wt-navigation-bar
       :nav="[
           { value: '1', name: 'Name 1', route: '/1' },
@@ -54,31 +54,31 @@
       placeholder="placeholder"
       label="label"
     ></wt-tags-input>
-<!--    <wt-tags-input-->
-<!--      v-model="select.multipleValue"-->
-<!--      :options="select.options"-->
-<!--      track-by="name"-->
-<!--      taggable-->
-<!--      placeholder="placeholder"-->
-<!--      label="label"-->
-<!--    ></wt-tags-input>-->
-<!--    <wt-tags-input-->
-<!--      v-model="select.multipleValue"-->
-<!--      :options="select.options"-->
-<!--      track-by="name"-->
-<!--      taggable-->
-<!--      placeholder="placeholder"-->
-<!--      label="label"-->
-<!--      disabled-->
-<!--    ></wt-tags-input>-->
-<!--    <wt-select-->
-<!--      v-model="select.multipleValue"-->
-<!--      :options="select.options"-->
-<!--      track-by="name"-->
-<!--      multiple-->
-<!--      placeholder="placeholder"-->
-<!--      label="label"-->
-<!--    ></wt-select>-->
+    <!--    <wt-tags-input-->
+    <!--      v-model="select.multipleValue"-->
+    <!--      :options="select.options"-->
+    <!--      track-by="name"-->
+    <!--      taggable-->
+    <!--      placeholder="placeholder"-->
+    <!--      label="label"-->
+    <!--    ></wt-tags-input>-->
+    <!--    <wt-tags-input-->
+    <!--      v-model="select.multipleValue"-->
+    <!--      :options="select.options"-->
+    <!--      track-by="name"-->
+    <!--      taggable-->
+    <!--      placeholder="placeholder"-->
+    <!--      label="label"-->
+    <!--      disabled-->
+    <!--    ></wt-tags-input>-->
+    <!--    <wt-select-->
+    <!--      v-model="select.multipleValue"-->
+    <!--      :options="select.options"-->
+    <!--      track-by="name"-->
+    <!--      multiple-->
+    <!--      placeholder="placeholder"-->
+    <!--      label="label"-->
+    <!--    ></wt-select>-->
     <wt-select
       v-model="select.multipleValue"
       :options="select.options"
@@ -88,14 +88,14 @@
       placeholder="placeholder"
       label="label"
     ></wt-select>
-<!--    <wt-select-->
-<!--      :value="'lorem ipsum'"-->
-<!--      :options="select.options"-->
-<!--      track-by="name"-->
-<!--      placeholder="placeholder"-->
-<!--      label="label"-->
-<!--      disabled-->
-<!--    ></wt-select>-->
+    <!--    <wt-select-->
+    <!--      :value="'lorem ipsum'"-->
+    <!--      :options="select.options"-->
+    <!--      track-by="name"-->
+    <!--      placeholder="placeholder"-->
+    <!--      label="label"-->
+    <!--      disabled-->
+    <!--    ></wt-select>-->
   </div>
 </template>
 
@@ -110,6 +110,31 @@ export default {
   name: 'the-playground',
   components: { WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
+    auditQuestions: [
+      {
+        'required': true,
+        'question': 'My Anketa number 1',
+        'type': 'options',
+        'options': [
+          {
+            'name': 'My first var!',
+            'score': 5,
+          },
+          {
+            'name': 'My lorem ipsum var!',
+            'score': 10,
+          },
+        ],
+      },
+      {
+        'required': true,
+        'question': 'My anketa number two!',
+        'type': 'score',
+        'min': 1,
+        'max': 5,
+      },
+    ],
+    auditResult: [],
     date: Date.now(),
     currentTab: { value: 1 },
     switcher: true,
@@ -324,7 +349,7 @@ export default {
     search(search) {
       return {
         items: Array(10)
-          .fill({ name: search || '123' }),
+        .fill({ name: search || '123' }),
         next: true,
       };
     },
@@ -377,97 +402,100 @@ export default {
   grid-template-columns: repeat(5, 1fr);
   gap: var(--spacing-3xl);
 }
-  .el {
-    @extend %typo-overline;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 110px;
-    height: 100px;
-    border-radius: var(--border-radius);
-  }
 
-  .el-1 {
-    box-shadow: var(--elevation-1);
-  }
+.el {
+  @extend %typo-overline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  height: 100px;
+  border-radius: var(--border-radius);
+}
 
-  .el-2 {
-    box-shadow: var(--elevation-2);
-  }
+.el-1 {
+  box-shadow: var(--elevation-1);
+}
 
-  .el-3 {
-    box-shadow: var(--elevation-3);
-  }
+.el-2 {
+  box-shadow: var(--elevation-2);
+}
 
-  .el-4 {
-    box-shadow: var(--elevation-4);
-  }
+.el-3 {
+  box-shadow: var(--elevation-3);
+}
 
-  .el-5 {
-    box-shadow: var(--elevation-5);
-  }
+.el-4 {
+  box-shadow: var(--elevation-4);
+}
 
-  .el-6 {
-    box-shadow: var(--elevation-6);
-  }
+.el-5 {
+  box-shadow: var(--elevation-5);
+}
 
-  .el-7 {
-    box-shadow: var(--elevation-7);
-  }
+.el-6 {
+  box-shadow: var(--elevation-6);
+}
 
-  .el-8 {
-    box-shadow: var(--elevation-8);
-  }
+.el-7 {
+  box-shadow: var(--elevation-7);
+}
 
-  .el-9 {
-    box-shadow: var(--elevation-9);
-  }
+.el-8 {
+  box-shadow: var(--elevation-8);
+}
 
-  .el-10 {
-    box-shadow: var(--elevation-10);
-  }
+.el-9 {
+  box-shadow: var(--elevation-9);
+}
+
+.el-10 {
+  box-shadow: var(--elevation-10);
+}
+
 //}
 
 .playground-typo {
   article > * {
     margin-bottom: var(--spacing-sm);
   }
-  }
+}
 
-  .h1 {
-    @extend %typo-heading-1;
-  }
+.h1 {
+  @extend %typo-heading-1;
+}
 
-  .h2 {
-    @extend %typo-heading-2;
-  }
+.h2 {
+  @extend %typo-heading-2;
+}
 
-  .h3 {
-    @extend %typo-heading-3;
-  }
+.h3 {
+  @extend %typo-heading-3;
+}
 
-  .st1 {
-    @extend %typo-subtitle-1;
-  }
+.st1 {
+  @extend %typo-subtitle-1;
+}
 
-  .st2 {
-    @extend %typo-subtitle-2;
-  }
+.st2 {
+  @extend %typo-subtitle-2;
+}
 
-  .b1 {
-    @extend %typo-body-1;
-  }
+.b1 {
+  @extend %typo-body-1;
+}
 
-  .b2 {
-    @extend %typo-body-2;
-  }
+.b2 {
+  @extend %typo-body-2;
+}
 
-  .c {
-    @extend %typo-caption;
-  }
+.c {
+  @extend %typo-caption;
+}
 
-  .o {
-    @extend %typo-overline;
-  }
+.o {
+  @extend %typo-overline;
+}
+
 //}
 </style>
