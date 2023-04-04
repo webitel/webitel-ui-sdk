@@ -60,6 +60,7 @@
 import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
+import { EngineAuditQuestionType } from 'webitel-sdk';
 import WtTooltip from '../../../components/atoms/wt-tooltip/wt-tooltip.vue';
 import WtSwitcher from '../../../components/molecules/wt-switcher/wt-switcher.vue';
 import WtIconBtn from '../../../components/molecules/wt-icon-btn/wt-icon-btn.vue';
@@ -93,15 +94,15 @@ const emit = defineEmits([
 ]);
 
 const QuestionType = [
-  { value: 'options', locale: 'webitelUI.auditForm.type.options' },
-  { value: 'score', locale: 'webitelUI.auditForm.type.score' },
+  { value: EngineAuditQuestionType.Option, locale: 'webitelUI.auditForm.type.options' },
+  { value: EngineAuditQuestionType.Score, locale: 'webitelUI.auditForm.type.score' },
 ];
 
 const prettifiedQuestionType = computed(() => QuestionType.find(({ value }) => value === props.question.type));
 
 const QuestionTypeComponent = computed(() => {
-  if (props.question.type === 'options') return AuditFormQuestionOptions;
-  if (props.question.type === 'score') return AuditFormQuestionScore;
+  if (props.question.type === EngineAuditQuestionType.Option) return AuditFormQuestionOptions;
+  if (props.question.type === EngineAuditQuestionType.Score) return AuditFormQuestionScore;
   return null;
 });
 
@@ -112,9 +113,9 @@ function updateQuestion({ path, value }) {
 
 function handleQuestionTypeChange(type) {
   const question = cloneDeep(props.question);
-  if (type === 'options') {
+  if (type === EngineAuditQuestionType.Option) {
     Object.assign(question, generateQuestionOptionsSchema());
-  } else if (type === 'score') {
+  } else if (type === EngineAuditQuestionType.Score) {
     Object.assign(question, generateQuestionScoreSchema());
   }
   emit('change:question', question);

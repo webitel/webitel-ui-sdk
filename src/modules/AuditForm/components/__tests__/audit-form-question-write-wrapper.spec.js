@@ -1,6 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
+import { EngineAuditQuestionType } from 'webitel-sdk';
 import {
-  generateQuestionOptionsSchema
+  generateQuestionOptionsSchema,
 } from '../../schemas/AuditFormQuestionOptionsSchema';
 import AuditFormQuestionWriteWrapper from '../audit-form-question-write-wrapper.vue';
 import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema';
@@ -39,7 +40,7 @@ describe('AuditFormQuestionWriteWrapper', () => {
       },
     });
     wrapper.find('.audit-form-question-write-content-question')
-    .findComponent({ name: 'wt-select' }).vm.$emit('input', { value: 'score' });
+    .findComponent({ name: 'wt-select' }).vm.$emit('input', { value: EngineAuditQuestionType.Score });
     expect(wrapper.emitted()['change:question'][0][0])
     .toEqual(generateQuestionScoreSchema());
   });

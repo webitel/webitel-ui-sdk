@@ -101,6 +101,7 @@
 
 <script>
 
+import { EngineAuditQuestionType } from 'webitel-sdk';
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
 
@@ -114,7 +115,7 @@ export default {
       {
         'required': true,
         'question': 'My Anketa number 1',
-        'type': 'options',
+        'type': EngineAuditQuestionType.Option,
         'options': [
           {
             'name': 'My first var!',
@@ -129,7 +130,7 @@ export default {
       {
         'required': true,
         'question': 'My anketa number two!',
-        'type': 'score',
+        'type': EngineAuditQuestionType.Score,
         'min': 1,
         'max': 5,
       },

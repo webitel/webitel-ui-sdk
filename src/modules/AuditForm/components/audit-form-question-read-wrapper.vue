@@ -35,6 +35,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import { EngineAuditQuestionType } from 'webitel-sdk';
 import AuditFormQuestionOptions from './questions/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/audit-form-question-score.vue';
 import WtIcon from '../../../components/atoms/wt-icon/wt-icon.vue';
@@ -60,8 +61,8 @@ const emit = defineEmits([
 ]);
 
 const QuestionTypeComponent = computed(() => {
-  if (props.question.type === 'options') return AuditFormQuestionOptions;
-  if (props.question.type === 'score') return AuditFormQuestionScore;
+  if (props.question.type === EngineAuditQuestionType.Option) return AuditFormQuestionOptions;
+  if (props.question.type === EngineAuditQuestionType.Score) return AuditFormQuestionScore;
   return null;
 });
 </script>
