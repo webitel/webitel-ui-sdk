@@ -7,10 +7,12 @@ import {
 } from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
 import AuditorSections
   from '../../enums/WebitelApplications/AuditorSections.enum';
+import SupervisorSections
+  from '../../enums/WebitelApplications/SupervisorSections.enum';
+import WebitelApplications
+  from '../../enums/WebitelApplications/WebitelApplications.enum';
 import { snakeToCamel } from '../../scripts/caseConverters';
 
 export default {
@@ -262,11 +264,9 @@ export default {
       offline: 'Offline',
       breakOut: 'Break Out',
     },
-    table: {
-      tableCells: {
-        deleteActionHint: 'Delete',
-        editActionHint: 'Edit',
-      },
+    iconAction: {
+      deleteActionHint: 'Delete',
+      editActionHint: 'Edit',
     },
     errorPages: {
       goBack: 'Go back',

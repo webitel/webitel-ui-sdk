@@ -2,14 +2,17 @@ import {
   AgentStatus,
   CallDirection,
   ChannelState,
-  ChannelType, EngineRoutingSchemaType,
+  ChannelType,
+  EngineRoutingSchemaType,
 } from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
 import AuditorSections
   from '../../enums/WebitelApplications/AuditorSections.enum';
+import SupervisorSections
+  from '../../enums/WebitelApplications/SupervisorSections.enum';
+import WebitelApplications
+  from '../../enums/WebitelApplications/WebitelApplications.enum';
 import { snakeToCamel } from '../../scripts/caseConverters';
 
 export default {
@@ -258,11 +261,9 @@ export default {
       offline: 'Оффлайн',
       breakOut: 'Принудительный перерыв',
     },
-    table: {
-      tableCells: {
-        deleteActionHint: 'Удалить',
-        editActionHint: 'Редактировать',
-      },
+    iconAction: {
+      deleteActionHint: 'Удалить',
+      editActionHint: 'Редактировать',
     },
     errorPages: {
       goBack: 'Вернуться назад',

@@ -2,18 +2,17 @@
   <wt-tooltip>
     <template v-slot:activator>
       <wt-icon-btn
-        class="table-action"
-        icon="edit"
+        icon="bucket"
         @click="$emit('click')"
       ></wt-icon-btn>
     </template>
-    {{ $t('webitelUI.table.tableCells.editActionHint') }}
+    {{ $t('webitelUI.iconAction.deleteActionHint') }}
   </wt-tooltip>
 </template>
 
 <script>
 export default {
-  name: 'wt-table-edit-action',
+  name: 'wt-delete-icon-action',
 };
 </script>
 

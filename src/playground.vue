@@ -1,5 +1,11 @@
 <template>
   <div class="playground">
+    <wt-icon-action
+      action="edit"
+    ></wt-icon-action>
+    <wt-icon-action
+      action="delete"
+    ></wt-icon-action>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
