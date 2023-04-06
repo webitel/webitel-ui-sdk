@@ -3,6 +3,7 @@
     <template v-slot:activator>
       <wt-icon-btn
         icon="download"
+        :disabled="disabled"
         @click="$emit('click')"
       ></wt-icon-btn>
     </template>
@@ -13,6 +14,12 @@
 <script>
 export default {
   name: 'wt-download-icon-action',
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
 };
 </script>
 

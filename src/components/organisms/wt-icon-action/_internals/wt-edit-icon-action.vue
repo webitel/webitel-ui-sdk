@@ -4,6 +4,7 @@
       <wt-icon-btn
         class="table-action"
         icon="edit"
+        :disabled="disabled"
         @click="$emit('click')"
       ></wt-icon-btn>
     </template>
@@ -14,6 +15,12 @@
 <script>
 export default {
   name: 'wt-edit-icon-action',
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
 };
 </script>
 

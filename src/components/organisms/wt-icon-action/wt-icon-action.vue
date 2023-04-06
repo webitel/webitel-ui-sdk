@@ -2,6 +2,7 @@
   <component
     :is="actionComponent"
     :selectedCount="selectedCount"
+    :disabled="disabled"
     @click="$emit('click')"
   ></component>
 </template>
@@ -23,6 +24,10 @@ const props = defineProps({
   },
   selectedCount: {
     type: Number,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 

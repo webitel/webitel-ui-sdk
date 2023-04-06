@@ -3,6 +3,7 @@
     <template v-slot:activator>
       <wt-icon-btn
         icon="bucket"
+        :disabled="disabled"
         @click="$emit('click')"
       ></wt-icon-btn>
     </template>
@@ -16,6 +17,12 @@ export default {
   props: {
     selectedCount: {
       type: Number,
+    },
+    props: {
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
   },
   computed: {
