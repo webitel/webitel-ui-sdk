@@ -267,6 +267,11 @@ export default {
     iconAction: {
       deleteActionHint: 'Delete',
       editActionHint: 'Edit',
+      addActionHint: 'Add',
+      historyActionHint: 'History',
+      downloadActionHint: 'Download',
+      deleteAllActionHint: 'Delete all items',
+      deleteSelectedActionHint: 'Delete {count} selected items',
     },
     errorPages: {
       goBack: 'Go back',
