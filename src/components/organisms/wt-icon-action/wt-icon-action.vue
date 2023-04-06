@@ -1,6 +1,7 @@
 <template>
   <component
     :is="actionComponent"
+    @click="$emit('click')"
   ></component>
 </template>
 
