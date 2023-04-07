@@ -3,6 +3,7 @@
     :is="actionComponent"
     :selectedCount="selectedCount"
     :disabled="disabled"
+    class="wt-icon-action"
     @click="$emit('click')"
   ></component>
 </template>
@@ -52,5 +53,7 @@ const actionComponent = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-
+.wt-icon-action {
+  margin-left: var(--icon-action-margin);
+}
 </style>
