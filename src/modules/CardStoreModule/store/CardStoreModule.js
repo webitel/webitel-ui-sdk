@@ -29,8 +29,8 @@ export default class CardStoreModule extends BaseStoreModule {
       }
     },
     UPDATE_ITEM: async (context) => {
-        await context.dispatch('api/UPD_ITEM', { context });
-        context.dispatch('LOAD_ITEM');
+      await context.dispatch('api/UPD_ITEM', { context });
+      context.dispatch('LOAD_ITEM');
     },
     SET_ITEM_PROPERTY: (context, payload) => {
       context.commit('SET_ITEM_PROPERTY', payload);
