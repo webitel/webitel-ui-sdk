@@ -1,8 +1,8 @@
 import {
   SortSymbols,
   sortToQueryAdapter,
-} from '../../scripts/sortQueryAdapters';
-import BaseStoreModule from './BaseStoreModule';
+} from '../../../scripts/sortQueryAdapters';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 
 export default class TableStoreModule extends BaseStoreModule {
   state = {
