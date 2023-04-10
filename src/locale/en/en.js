@@ -21,6 +21,7 @@ export default {
     total: 'Total',
     ok: 'Ok',
     save: 'Save',
+    saveAs: 'SaveAs',
     close: 'Close',
     add: 'Add',
     cancel: 'Cancel',
@@ -51,6 +52,14 @@ export default {
     doNotSave: 'Don\'t save',
     required: 'Required',
     copy: 'Copy',
+    new: 'New',
+    createdAt: 'Created on',
+    createdBy: 'Created by',
+    modifiedAt: 'Modified on',
+    modifiedBy: 'Modified by',
+    general: 'General',
+    generalInfo: 'General info',
+    all: 'All {entity}',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
