@@ -290,5 +290,11 @@ export default {
         score: 'Бал',
       },
     },
+    deleteConfirmationPopup: {
+      title: 'Підтвердіть видалення',
+      askingAlert: 'Ви впевнені, що хочете видалити {count} запис? | Ви впевнені, що хочете видалити {count} записів?',
+      undoneActionAlert: 'Дана дія не може бути скасована.',
+      deleteAll: 'ВСІ',
+    },
   },
 };

@@ -1,6 +1,5 @@
-import BaseStoreModule
-  from '@webitel/ui-sdk/src/store/BaseStoreModules/BaseStoreModule';
 import deepCopy from 'deep-copy';
+import BaseStoreModule from './BaseStoreModule';
 
 export default class CardStoreModule extends BaseStoreModule {
   state = {
@@ -18,20 +17,20 @@ export default class CardStoreModule extends BaseStoreModule {
     },
     LOAD_ITEM: async (context) => {
       if (context.state.itemId) {
-        const item = await context.dispatch('GET_ITEM');
+        const item = await context.dispatch('api/GET_ITEM', { context });
         context.commit('SET_ITEM', item);
       }
     },
     ADD_ITEM: async (context) => {
       if (!context.state.itemId) {
-        const { id } = await context.dispatch('POST_ITEM');
+        const { id } = await context.dispatch('api/POST_ITEM', { context });
         await context.dispatch('SET_ITEM_ID', id);
         context.dispatch('LOAD_ITEM');
       }
     },
     UPDATE_ITEM: async (context) => {
       if (context.state.itemInstance._dirty) {
-        await context.dispatch('UPD_ITEM');
+        await context.dispatch('api/UPD_ITEM', { context });
         context.dispatch('LOAD_ITEM');
       }
     },

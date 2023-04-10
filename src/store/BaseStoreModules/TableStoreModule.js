@@ -1,9 +1,8 @@
 import {
   SortSymbols,
   sortToQueryAdapter,
-} from '@webitel/ui-sdk/src/scripts/sortQueryAdapters';
-import BaseStoreModule
-  from '@webitel/ui-sdk/src/store/BaseStoreModules/BaseStoreModule';
+} from '../../scripts/sortQueryAdapters';
+import BaseStoreModule from './BaseStoreModule';
 
 export default class TableStoreModule extends BaseStoreModule {
   state = {
@@ -27,7 +26,7 @@ export default class TableStoreModule extends BaseStoreModule {
         let {
           items = [],
           next = false,
-        } = await context.dispatch('api/GET_LIST', query);
+        } = await context.dispatch('api/GET_LIST', { context, params: query });
         /* we should set _isSelected property to all items in tables cause their checkbox selection
         * is based on this property. Previously, this prop was set it api consumers, but now
         * admin-specific were replaced by webitel-sdk consumers and i supposed it will be
@@ -100,7 +99,7 @@ export default class TableStoreModule extends BaseStoreModule {
       const id = item?.id || context.state.dataList[index].id;
       const changes = { [prop]: value };
       try {
-        await context.dispatch('api/PATCH_ITEM', { id, changes });
+        await context.dispatch('api/PATCH_ITEM', { context, id, changes });
         context.commit('PATCH_ITEM_PROPERTY', {
           item, index, prop, value,
         });
@@ -124,7 +123,7 @@ export default class TableStoreModule extends BaseStoreModule {
     },
     DELETE_SINGLE: async (context, { id }) => {
       try {
-        await context.dispatch('api/DELETE_ITEM', id);
+        await context.dispatch('api/DELETE_ITEM', { context, id });
       } catch (err) {
         throw err;
       }

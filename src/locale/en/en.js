@@ -293,5 +293,11 @@ export default {
         score: 'Score',
       },
     },
+    deleteConfirmationPopup: {
+      title: 'Confirm deletion',
+      askingAlert: 'Are you sure you want to delete {count} item? | Are you sure you want to delete {count} items?',
+      undoneActionAlert: 'This action cannot be undone.',
+      deleteAll: 'ALL',
+    },
   },
 };

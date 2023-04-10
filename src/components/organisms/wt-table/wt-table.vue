@@ -123,7 +123,16 @@ export default {
 
     dataHeaders() {
       return this.headers
-                 .filter((header) => header.show === undefined || header.show);
+      .filter((header) => header.show === undefined || header.show)
+      .map((header) => {
+        if (!header.text && header.locale) {
+          return {
+            ...header,
+            text: typeof header.locale === 'string' ? this.$t(header.locale) : this.$t(...header.locale),
+          };
+        }
+        return header;
+      });
     },
 
     columnsStyle() {

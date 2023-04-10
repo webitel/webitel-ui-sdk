@@ -290,5 +290,11 @@ export default {
         score: 'Бал',
       },
     },
+    deleteConfirmationPopup: {
+      title: 'Подтвердите удаление',
+      askingAlert: 'Вы уверенны, что хотите удалить {count} запись? | Вы уверенны, что хотите удалить {count} записей?',
+      undoneActionAlert: 'Это действие не может быть отменено.',
+      deleteAll: 'ВСЕ',
+    },
   },
 };
