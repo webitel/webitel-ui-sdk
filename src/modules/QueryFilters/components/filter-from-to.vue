@@ -14,6 +14,7 @@
           :value="filterSchema.value.from"
           type="number"
           :number-min="0"
+          :number-max="numberMax"
           @input="setFrom"
         ></wt-input>
       </div>
@@ -29,6 +30,7 @@
           :value="filterSchema.value.to"
           type="number"
           :number-min="0"
+          :number-max="numberMax"
           @input="setTo"
         ></wt-input>
       </div>
@@ -50,6 +52,9 @@ export default {
     },
     label: {
       type: String,
+    },
+    numberMax: {
+      type: Number,
     },
   },
   methods: {
@@ -74,16 +79,16 @@ export default {
       this.setValue({ filter: this.filterQuery, value });
     },
 
-    setFrom(value) {
-      this.setValueToQuery({
+    async setFrom(value) {
+      await this.setValueToQuery({
         filterQuery: `${this.filterQuery}From`,
         value,
       });
       this.restoreFrom();
     },
 
-    setTo(value) {
-      this.setValueToQuery({
+    async setTo(value) {
+      await this.setValueToQuery({
         filterQuery: `${this.filterQuery}To`,
         value,
       });
