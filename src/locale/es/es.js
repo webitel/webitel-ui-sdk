@@ -262,11 +262,6 @@ export default {
     iconAction: {
       deleteActionHint: 'Eliminar',
       editActionHint: 'Editar',
-      addActionHint: 'Agregar',
-      historyActionHint: 'History',
-      downloadActionHint: 'Descargar',
-      deleteAllActionHint: 'Eliminar todos los elementos',
-      deleteSelectedActionHint: 'Eliminar {count} elementos seleccionados',
     },
     errorPages: {
       goBack: 'Regresar',
