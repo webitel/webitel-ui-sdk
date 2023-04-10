@@ -11,12 +11,12 @@
       >
         <wt-input
           :value="name"
-          :label="$tc('webitelUI.auditForm.option', 1)"
+          :label="$t('webitelUI.auditForm.option', 1)"
           @input="updateQuestion({ path: `options[${key}].name`, value: $event })"
         ></wt-input>
         <wt-input
           :value="score"
-          :label="$tc('webitelUI.auditForm.score', 1)"
+          :label="$t('webitelUI.auditForm.score', 1)"
           type="number"
           @input="updateQuestion({ path: `options[${key}].score`, value: $event })"
         ></wt-input>
