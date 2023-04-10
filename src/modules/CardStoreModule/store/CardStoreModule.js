@@ -1,5 +1,5 @@
 import deepCopy from 'deep-copy';
-import BaseStoreModule from './BaseStoreModule';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 
 export default class CardStoreModule extends BaseStoreModule {
   state = {
