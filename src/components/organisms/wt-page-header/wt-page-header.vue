@@ -23,7 +23,7 @@
         color="secondary"
         @click="secondaryAction"
       >
-        {{ t('reusable.delete') }}
+        {{ secondaryText || t('reusable.close') }}
       </wt-button>
     </template>
   </wt-headline>
