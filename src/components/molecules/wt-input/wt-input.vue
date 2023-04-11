@@ -162,6 +162,11 @@ export default {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
+
+    preventTrim: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue', 'input'],
   data: () => ({
@@ -210,8 +215,9 @@ export default {
   },
   methods: {
     inputHandler(event) {
-      this.$emit('update:modelValue', event.target.value.trim());
-      this.$emit('input', event.target.value.trim());
+      const value = this.preventTrim ? event.target.value : event.target.value.trim();
+      this.$emit('update:modelValue', value);
+      this.$emit('input', value);
     },
 
     switchVisibilityPassword() {

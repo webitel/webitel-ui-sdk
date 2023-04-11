@@ -35,6 +35,7 @@
           :label="$t('webitelUI.auditForm.question')"
           :v="v.question.question"
           required
+          prevent-trim
           @input="updateQuestion({ path: 'question', value: $event })"
         ></wt-input>
         <wt-select
