@@ -267,8 +267,6 @@ export default {
       addActionHint: 'Додати',
       historyActionHint: 'Історія',
       downloadActionHint: 'Скачати',
-      deleteAllActionHint: 'Видалити всі об\'єкти',
-      deleteSelectedActionHint: 'Видалити {count} обраних об\'єктів',
     },
     errorPages: {
       goBack: 'Повернутись назад',

@@ -270,8 +270,6 @@ export default {
       addActionHint: 'Add',
       historyActionHint: 'History',
       downloadActionHint: 'Download',
-      deleteAllActionHint: 'Delete all items',
-      deleteSelectedActionHint: 'Delete {count} selected items',
     },
     errorPages: {
       goBack: 'Go back',

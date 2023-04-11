@@ -267,8 +267,6 @@ export default {
       addActionHint: 'Добавить',
       historyActionHint: 'История',
       downloadActionHint: 'Скачать',
-      deleteAllActionHint: 'Удалить все объекты',
-      deleteSelectedActionHint: 'Удалить {count} выбранных объектов',
     },
     errorPages: {
       goBack: 'Вернуться назад',
