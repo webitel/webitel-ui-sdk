@@ -25,7 +25,10 @@
             class="wt-table-column-select__popup__item"
             @click.capture.prevent="col.show = !col.show"
           >
-            <wt-checkbox v-model="col.show" :label="col.text" />
+            <wt-checkbox
+              v-model="col.show"
+              :label="shownColLabel(col)"
+            ></wt-checkbox>
           </li>
         </ul>
       </template>
@@ -85,6 +88,12 @@ export default {
     },
   },
   methods: {
+    shownColLabel({ text, locale }) {
+      if (!text && locale) {
+        return typeof locale === 'string' ? this.$t(locale) : this.$t(...locale);
+      }
+      return text;
+    },
     openPopup() {
       this.isColumnSelectPopup = true;
     },
