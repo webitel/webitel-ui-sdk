@@ -65,11 +65,11 @@ export default class CardStoreModule extends BaseStoreModule {
             } = {}) {
     this.state = {
       ...this.state,
-      state,
+      ...state,
     };
     return super.getModule({
-      state: deepCopy(this.state),
       ...rest,
+      state: deepCopy(this.state),
     });
   }
 }
