@@ -1,7 +1,6 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import getNamespacedState
-  from '@webitel/ui-sdk/src/store/helpers/getNamespacedState';
+import getNamespacedState from '../../../store/helpers/getNamespacedState';
 
 // eslint-disable-next-line import/prefer-default-export
 export const useCardStore = (namespace) => {
@@ -28,6 +27,10 @@ export const useCardStore = (namespace) => {
     return store.dispatch(`${cardNamespace}/SET_ITEM_ID`, payload);
   }
 
+  function resetState() {
+    return store.dispatch(`${cardNamespace}/RESET_ITEM_STATE`);
+  }
+
   return {
     id,
     itemInstance,
@@ -36,5 +39,6 @@ export const useCardStore = (namespace) => {
     addItem,
     updateItem,
     setId,
+    resetState,
   };
 };
