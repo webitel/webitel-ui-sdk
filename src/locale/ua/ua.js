@@ -264,6 +264,9 @@ export default {
     iconAction: {
       deleteActionHint: 'Видалити',
       editActionHint: 'Редагувати',
+      addActionHint: 'Додати',
+      historyActionHint: 'Історія',
+      downloadActionHint: 'Скачати',
     },
     errorPages: {
       goBack: 'Повернутись назад',

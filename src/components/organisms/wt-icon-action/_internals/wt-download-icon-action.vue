@@ -2,18 +2,18 @@
   <wt-tooltip>
     <template v-slot:activator>
       <wt-icon-btn
-        icon="bucket"
+        icon="download"
         :disabled="disabled"
         @click="$emit('click')"
       ></wt-icon-btn>
     </template>
-    {{ $t('webitelUI.iconAction.deleteActionHint') }}
+    {{ $t('webitelUI.iconAction.downloadActionHint') }}
   </wt-tooltip>
 </template>
 
 <script>
 export default {
-  name: 'wt-delete-icon-action',
+  name: 'wt-download-icon-action',
   props: {
     disabled: {
       type: Boolean,

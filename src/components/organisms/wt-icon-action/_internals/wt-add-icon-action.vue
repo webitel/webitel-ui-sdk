@@ -2,18 +2,18 @@
   <wt-tooltip>
     <template v-slot:activator>
       <wt-icon-btn
-        icon="bucket"
+        icon="plus"
         :disabled="disabled"
         @click="$emit('click')"
       ></wt-icon-btn>
     </template>
-    {{ $t('webitelUI.iconAction.deleteActionHint') }}
+    {{ $t('webitelUI.iconAction.addActionHint') }}
   </wt-tooltip>
 </template>
 
 <script>
 export default {
-  name: 'wt-delete-icon-action',
+  name: 'wt-add-icon-action',
   props: {
     disabled: {
       type: Boolean,

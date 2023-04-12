@@ -267,6 +267,9 @@ export default {
     iconAction: {
       deleteActionHint: 'Delete',
       editActionHint: 'Edit',
+      addActionHint: 'Add',
+      historyActionHint: 'History',
+      downloadActionHint: 'Download',
     },
     errorPages: {
       goBack: 'Go back',
