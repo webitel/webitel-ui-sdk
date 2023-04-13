@@ -31,6 +31,10 @@ export const useCardStore = (namespace) => {
     return store.dispatch(`${cardNamespace}/RESET_ITEM_STATE`);
   }
 
+  function setItemProp(payload) {
+    return store.dispatch(`${cardNamespace}/SET_ITEM_PROPERTY`, payload);
+  }
+
   return {
     id,
     itemInstance,
@@ -40,5 +44,6 @@ export const useCardStore = (namespace) => {
     updateItem,
     setId,
     resetState,
+    setItemProp,
   };
 };
