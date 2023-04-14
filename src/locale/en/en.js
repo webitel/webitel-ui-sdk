@@ -22,6 +22,7 @@ export default {
     ok: 'Ok',
     save: 'Save',
     saveAs: 'SaveAs',
+    saved: 'Saved',
     close: 'Close',
     add: 'Add',
     cancel: 'Cancel',

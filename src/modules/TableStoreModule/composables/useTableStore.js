@@ -10,7 +10,7 @@ export const useTableStore = (namespace) => {
 
   const dataList = computed(() => getNamespacedState(store.state, tableNamespace).dataList);
 
-  const isLoaded = computed(() => getNamespacedState(store.state, tableNamespace).isLoading);
+  const isLoading = computed(() => getNamespacedState(store.state, tableNamespace).isLoading);
 
   const headers = computed(() => getNamespacedState(store.state, tableNamespace).headers);
 
@@ -19,6 +19,8 @@ export const useTableStore = (namespace) => {
   const page = computed(() => getNamespacedState(store.state, tableNamespace).page);
 
   const size = computed(() => getNamespacedState(store.state, tableNamespace).size);
+
+  const search = computed(() => getNamespacedState(store.state, tableNamespace).search);
 
   async function loadData() {
     return store.dispatch(`${tableNamespace}/LOAD_DATA_LIST`);
@@ -40,8 +42,8 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/PATCH_ITEM_PROPERTY`, payload);
   }
 
-  async function deleteItem(payload) {
-    return store.dispatch(`${tableNamespace}/DELETE_ITEM`, payload);
+  async function deleteData(payload) {
+    return store.dispatch(`${tableNamespace}/DELETE`, payload);
   }
 
   async function sort(...params) {
@@ -55,21 +57,32 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/SET_HEADERS`, payload);
   }
 
+  async function setSearch(payload) {
+    return store.dispatch(`${tableNamespace}/SET_SEARCH`, payload);
+  }
+
+  async function setIsLoading(payload) {
+    return store.dispatch(`${tableNamespace}/SET_LOADING`, payload);
+  }
+
   return {
     dataList,
-    isLoaded,
+    isLoading,
     headers,
     isNext,
     page,
     size,
+    search,
 
     loadData,
     setSize,
     nextPage,
     prevPage,
     patchProperty,
-    deleteItem,
+    deleteData,
     sort,
     setHeaders,
+    setSearch,
+    setIsLoading,
   };
 };

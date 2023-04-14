@@ -49,6 +49,7 @@ const props = defineProps({
   },
   questions: {
     type: Array,
+    default: () => [],
     required: true,
   },
   result: {

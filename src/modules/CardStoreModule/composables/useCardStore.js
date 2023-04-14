@@ -35,6 +35,10 @@ export const useCardStore = (namespace) => {
     return store.dispatch(`${cardNamespace}/SET_ITEM_PROPERTY`, payload);
   }
 
+  function deleteItem(payload) {
+    return store.dispatch(`${cardNamespace}/DELETE_ITEM`, payload);
+  }
+
   return {
     id,
     itemInstance,
@@ -45,5 +49,6 @@ export const useCardStore = (namespace) => {
     setId,
     resetState,
     setItemProp,
+    deleteItem,
   };
 };

@@ -20,7 +20,8 @@
       </slot>
       <wt-button
         v-if="!hideSecondary"
-        color="secondary"
+        :color="secondaryColor"
+        :disabled="secondaryDisabled"
         @click="secondaryAction"
       >
         {{ secondaryText || t('reusable.close') }}
@@ -55,6 +56,14 @@ const props = defineProps({
   },
   secondaryAction: {
     type: Function,
+  },
+  secondaryDisabled: {
+    type: Boolean,
+    default: false,
+  },
+  secondaryColor: {
+    type: String,
+    default: 'secondary',
   },
 });
 
