@@ -61,10 +61,6 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/SET_SEARCH`, payload);
   }
 
-  async function setIsLoading(payload) {
-    return store.dispatch(`${tableNamespace}/SET_LOADING`, payload);
-  }
-
   return {
     dataList,
     isLoading,
@@ -83,6 +79,5 @@ export const useTableStore = (namespace) => {
     sort,
     setHeaders,
     setSearch,
-    setIsLoading,
   };
 };

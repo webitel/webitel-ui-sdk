@@ -7,7 +7,7 @@ export const useDeleteConfirmationPopup = () => {
   const deleteCallback = ref(null);
 
   function askDeleteConfirmation({ deleted, callback }) {
-    if (Array.isArray(deleted.value)) deleteCount.value = deleted.value.length;
+    if (Array.isArray(deleted)) deleteCount.value = deleted.length;
     else deleteCount.value = 1;
     isVisible.value = true;
     deleteCallback.value = callback;

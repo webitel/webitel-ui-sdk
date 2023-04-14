@@ -12,7 +12,7 @@
       <slot name="primary-action">
         <wt-button
           v-if="!hidePrimary"
-          :disabled="primaryDisabled"
+          color="secondary"
           @click="primaryAction"
         >
           {{ primaryText || t('reusable.add') }}
@@ -56,14 +56,6 @@ const props = defineProps({
   },
   secondaryAction: {
     type: Function,
-  },
-  secondaryDisabled: {
-    type: Boolean,
-    default: false,
-  },
-  secondaryColor: {
-    type: String,
-    default: 'secondary',
   },
 });
 

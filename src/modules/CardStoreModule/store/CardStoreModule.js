@@ -39,10 +39,6 @@ export default class CardStoreModule extends BaseStoreModule {
     RESET_ITEM_STATE: async (context) => {
       context.commit('RESET_ITEM_STATE');
     },
-    DELETE_ITEM: async (context, { id }) => {
-      await context.dispatch('api/DELETE_ITEM', { context, id });
-      await context.dispatch('api/GET_LIST', { context });
-    },
   };
 
   mutations = {
