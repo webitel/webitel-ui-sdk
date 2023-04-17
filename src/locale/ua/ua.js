@@ -22,6 +22,7 @@ export default {
     ok: 'Ок',
     save: 'Зберегти',
     saveAs: 'Зберігти як нового',
+    saved: 'Збережено',
     close: 'Закрити',
     add: 'Додати',
     cancel: 'Відмінити',

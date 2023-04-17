@@ -12,6 +12,7 @@ export default class TableStoreModule extends BaseStoreModule {
     search: '',
     page: 1,
     sort: '',
+    isLoading: false,
     isNextPage: false,
   };
 
@@ -23,6 +24,7 @@ export default class TableStoreModule extends BaseStoreModule {
     LOAD_DATA_LIST: async (context, _query) => {
       const query = { ...context.getters['filters/GET_FILTERS'], ..._query };
       try {
+        context.commit('SET_LOADING', true);
         let {
           items = [],
           next = false,
@@ -41,6 +43,8 @@ export default class TableStoreModule extends BaseStoreModule {
         context.dispatch('AFTER_SET_DATA_LIST_HOOK', afterHook);
       } catch (err) {
         console.error(err);
+      } finally {
+        context.commit('SET_LOADING', false);
       }
     },
     SET_SIZE: async (context, size) => {
@@ -168,9 +172,9 @@ export default class TableStoreModule extends BaseStoreModule {
     PATCH_ITEM_PROPERTY: (state, { index, prop, value }) => {
       state.dataList[index][prop] = value;
     },
-    // REMOVE_ITEM: (state, index) => {
-    //   state.dataList.splice(index, 1);
-    // },
+    SET_LOADING: (state, value) => {
+      state.isLoading = value;
+    },
   };
 
   constructor({ headers = [] }) {
