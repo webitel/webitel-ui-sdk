@@ -12,7 +12,7 @@
       <slot name="primary-action">
         <wt-button
           v-if="!hidePrimary"
-          color="secondary"
+          :disabled="primaryDisabled"
           @click="primaryAction"
         >
           {{ primaryText || t('reusable.add') }}
@@ -20,8 +20,7 @@
       </slot>
       <wt-button
         v-if="!hideSecondary"
-        :color="secondaryColor"
-        :disabled="secondaryDisabled"
+        color="secondary"
         @click="secondaryAction"
       >
         {{ secondaryText || t('reusable.close') }}

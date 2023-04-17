@@ -14,7 +14,7 @@ export const useTableStore = (namespace) => {
 
   const headers = computed(() => getNamespacedState(store.state, tableNamespace).headers);
 
-  const isNext = computed(() => getNamespacedState(store.state, tableNamespace).isNext);
+  const isNext = computed(() => getNamespacedState(store.state, tableNamespace).isNextPage);
 
   const page = computed(() => getNamespacedState(store.state, tableNamespace).page);
 
@@ -31,7 +31,7 @@ export const useTableStore = (namespace) => {
   }
 
   async function nextPage() {
-    return store.dispatch(`${tableNamespace}/SET_NEXT_PAGE`);
+    return store.dispatch(`${tableNamespace}/NEXT_PAGE`);
   }
 
   async function prevPage() {
