@@ -6,7 +6,7 @@ import debounce from '../../scripts/debounce';
 
 // https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/services/breakpoint/index.ts
 
-const breakpoint = {
+const breakpoint = reactive({
   // Breakpoints
   xs: false,
   sm: false,
@@ -35,7 +35,7 @@ const breakpoint = {
   // Dimensions
   height: 0,
   width: 0,
-};
+});
 
 const getClientWidth = () => Math.max(
   document.documentElement.clientWidth,
@@ -131,7 +131,7 @@ const install = (app) => {
   onResize();
 
   // eslint-disable-next-line no-param-reassign
-  app.config.globalProperties.$breakpoint = reactive(breakpoint);
+  app.config.globalProperties.$breakpoint = breakpoint;
 };
 
 export { install };
