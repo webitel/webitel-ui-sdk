@@ -52,7 +52,7 @@
           <wt-icon-btn
             :icon="showPasswordIcon"
             class="wt-input__password-button"
-            @click.native="switchVisibilityPassword"
+            @click="switchVisibilityPassword"
           ></wt-icon-btn>
         </slot>
       </div>
