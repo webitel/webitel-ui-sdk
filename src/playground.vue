@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    <wt-datepicker
+      label="Test 123"
+      v-model="date"
+    ></wt-datepicker>
+    {{  date }}
     <wt-icon-action
       action="edit"
     ></wt-icon-action>
@@ -108,6 +113,7 @@
 <script>
 
 import { EngineAuditQuestionType } from 'webitel-sdk';
+import WtDatepicker from './components/molecules/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
 
@@ -115,7 +121,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { WtNavigationBar, WtExpandTransition, AuditForm },
+  components: { WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     auditQuestions: [
       {
