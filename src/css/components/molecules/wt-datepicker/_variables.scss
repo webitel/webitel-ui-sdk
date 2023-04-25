@@ -1,21 +1,56 @@
-
 :root {
-  --datepicker-padding:
-    var(--input-padding)
-    calc(
-      var(--input-padding)
-    + var(--icon-md-size)
-    + var(--spacing-xs)
-    );
-  --datepicker-icon-margin: var(--spacing-xs);
-  --datepicker-border: 1px solid;
+  /*General*/
+  --dp-font-family: 'Montserrat';
+  --dp-border-radius: var(--border-radius); /*Configurable border-radius*/
+  --dp-cell-border-radius: var(--border-radius); /*Specific border radius for the calendar cell*/
 
-  --datepicker-cell-size: var(--spacing-lg);
-  --datepicker-cell-gap: var(--spacing-xs);
-  --datepicker-calendar-padding: var(--spacing-xs);
-  --datepicker-calendar-header-margin: var(--spacing-xs);
+  /*Sizing*/
+  --dp-button-heigh: 32px; /*Size for buttons in overlays*/
+  --dp-month-year-row-height: 32px; /*Height of the month-year select row*/
+  --dp-month-year-row-button-size: 32px; /*Specific height for the next/previous buttons*/
+  --dp-button-icon-height: var(--icon-md-size); /*Icon sizing in buttons*/
+  --dp-cell-size: 32px; /*Width and height of calendar cell*/
+  --dp-cell-padding: var(--spacing-2xs); /*Padding in the cell*/
+  --dp-common-padding: var(--spacing-xs); /*Common padding used*/
+  --dp-input-icon-padding: calc(var(--icon-md-size) + 2 * var(--spacing-xs)); /*Padding on the left side of the input if icon is present*/
+  --dp-input-padding: calc(var(--spacing-xs) - 1px) calc(var(--icon-md-size) + 2 * var(--spacing-xs)); /*Padding in the input*/
+  //--dp-menu-min-width: 260px; /*Adjust the min width of the menu*/
+  --dp-action-buttons-padding: 2px 5px; /*Adjust padding for the action buttons in action row*/
+  --dp-row-maring: var(--spacing-xs); /*Adjust the spacing between rows in the calendar*/
+  --dp-calendar-header-cell-padding: 0.5rem; /*Adjust padding in calendar header cells*/
+  --dp-two-calendars-spacing: 10px; /*Space between multiple calendars*/
+  --dp-overlay-col-padding: 3px; /*Padding in the overlay column*/
+  --dp-time-inc-dec-button-size: 32px; /*Sizing for arrow buttons in the time picker*/
 
-  --datepicker-selected-cell-text-color: var(--main-color);
-  --datepicker-selected-cell-bg-color: var(--accent-color);
-  --datepicker-cell--hover-color: var(--secondary-color-50);
+  /*Font sizes*/
+  --dp-font-size: 14px; /*Default font-size*/
+  --dp-preview-font-size: 12px; /*Font size of the date preview in the action row*/
+  --dp-time-font-size: 12px; /*Font size in the time picker*/
+
+  /*Transitions*/
+  --dp-animation-duration: var(--transition); /*Transition duration*/
+  --dp-menu-appear-transition-timing: cubic-bezier(.4, 0, 1, 1); /*Timing on menu appear animation*/
+  --dp-transition-timing: ease-out; /*Timing on slide animations*/
+}
+
+.dp__theme_light {
+  --dp-background-color: var(--main-color);
+  --dp-text-color: var(--contrast-color);
+  --dp-hover-color: var(--secondary-color-50);
+  --dp-hover-text-color: var(--contrast-color);
+  --dp-hover-icon-color: var(--icon-color--hover);
+  --dp-primary-color: var(--accent-color);
+  --dp-primary-text-color: var(--main-color);
+  --dp-secondary-color: var(--secondary-color);
+  --dp-border-color: var(--form-border-color);
+  --dp-menu-border-color: transparent;
+  --dp-border-color-hover: var(--form-border--hover-color);
+  --dp-disabled-color: var(--disabled-color);
+  //--dp-scroll-bar-background: #f3f3f3;
+  //--dp-scroll-bar-color: #959595;
+  --dp-success-color: var(--true-color);
+  //--dp-success-color-disabled: #a3d9b1;
+  --dp-icon-color: var(--icon-color);
+  --dp-danger-color: var(--false-color);
+  //--dp-highlight-color: rgba(25, 118, 210, 0.1);
 }

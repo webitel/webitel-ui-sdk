@@ -1,6 +1,9 @@
 <template>
   <div class="playground">
-    <wt-input @keyup.enter="log(123)" @input="log(321)"></wt-input>
+    <wt-datetimepicker
+      label="Test 123"
+      v-model="date"
+    ></wt-datetimepicker>
     <wt-datepicker
       label="Test 123"
       v-model="date"
@@ -114,6 +117,7 @@
 <script>
 
 import { EngineAuditQuestionType } from 'webitel-sdk';
+import VueDatepicker from '@vuepic/vue-datepicker';
 import WtDatepicker from './components/molecules/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
@@ -122,7 +126,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
+  components: { VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     auditQuestions: [
       {

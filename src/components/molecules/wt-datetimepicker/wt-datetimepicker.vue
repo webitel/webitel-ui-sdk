@@ -35,10 +35,10 @@
       >
         <div class="wt-datetimepicker__quick-filters-wrapper">
         <span class="wt-datetimepicker__quick-filter" @click="setLastHour">
-          {{$t('webitelUI.datetimepicker.lastHour')}}
+          {{ $t('webitelUI.datetimepicker.lastHour') }}
         </span>
           <span class="wt-datetimepicker__quick-filter" @click="setLastDay">
-                {{$t('webitelUI.datetimepicker.lastDay')}}
+                {{ $t('webitelUI.datetimepicker.lastDay') }}
         </span>
         </div>
         <div class="wt-datetimepicker__form-wrapper">
@@ -69,10 +69,10 @@
         </div>
         <div class="wt-datetimepicker__actions">
           <wt-button @click="input">
-            {{$t('reusable.add')}}
+            {{ $t('reusable.add') }}
           </wt-button>
           <wt-button color="secondary" @click="close">
-            {{$t('reusable.cancel')}}
+            {{ $t('reusable.cancel') }}
           </wt-button>
         </div>
       </div>
@@ -82,219 +82,220 @@
 </template>
 
 <script>
-  // import Datepicker from 'vuejs-datepicker';
+// import Datepicker from 'vuejs-datepicker';
 
-  export default {
-    name: 'wt-datetimepicker',
-    components: {
-      // Datepicker,
+export default {
+  name: 'wt-datetimepicker',
+  components: {
+    // Datepicker,
+  },
+
+  props: {
+    value: {
+      type: [String, Number],
+      default: 0,
+    },
+    label: {
+      type: String,
+      default: '',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    disabledDates: {
+      type: Object,
+    },
+    labelProps: {
+      type: Object,
+      description: 'Object with props, passed down to wt-label as props',
+    },
+  },
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
+
+  watch: {
+    isOpened: {
+      handler() {
+        this.draft = this.value;
+      },
+      immediate: true,
+    },
+  },
+
+  data: () => ({
+    isOpened: false,
+    draft: 0,
+  }),
+
+  computed: {
+    // prop value representation on picker preview
+    displayValue() {
+      // const date = new Date(+this.value).toLocaleDateString();
+      // const time = new Date(+this.value).toLocaleTimeString() // https://stackoverflow.com/questions/17913681/how-do-i-use-tolocaletimestring-without-displaying-seconds
+      //   .slice(0, 5);
+      // return `${date} ${time}`;
+      return new Date(+this.value).toLocaleString();
+    },
+  },
+
+  methods: {
+    setLastHour() {
+      const value = Date.now() - 60 * 60 * 10 ** 3; // 60 min x 60 sec x 1000 ms
+      this.$emit('change', value);
+      this.close();
+    },
+    setLastDay() {
+      const value = Date.now() - 24 * 60 * 60 * 10 ** 3; // 24hour x 60 min x 60 sec x 1000 ms
+      this.$emit('change', value);
+      this.close();
     },
 
-    props: {
-      value: {
-        type: [String, Number],
-        default: 0,
-      },
-      label: {
-        type: String,
-        default: '',
-      },
-      disabled: {
-        type: Boolean,
-        default: false,
-      },
-      disabledDates: {
-        type: Object,
-      },
-      labelProps: {
-        type: Object,
-        description: 'Object with props, passed down to wt-label as props',
-      },
-    },
-    model: {
-      prop: 'value',
-      event: 'change',
+    input() {
+      this.$emit('change', this.draft);
+      this.close();
     },
 
-    watch: {
-      isOpened: {
-        handler() {
-          this.draft = this.value;
-        },
-        immediate: true,
-      },
+    setDraft(value) {
+      this.draft = value;
     },
 
-    data: () => ({
-      isOpened: false,
-      draft: 0,
-    }),
-
-    computed: {
-      // prop value representation on picker preview
-      displayValue() {
-        // const date = new Date(+this.value).toLocaleDateString();
-        // const time = new Date(+this.value).toLocaleTimeString() // https://stackoverflow.com/questions/17913681/how-do-i-use-tolocaletimestring-without-displaying-seconds
-        //   .slice(0, 5);
-        // return `${date} ${time}`;
-        return new Date(+this.value).toLocaleString();
-      },
+    close() {
+      this.isOpened = false;
     },
-
-    methods: {
-      setLastHour() {
-        const value = Date.now() - 60 * 60 * 10 ** 3; // 60 min x 60 sec x 1000 ms
-        this.$emit('change', value);
-        this.close();
-      },
-      setLastDay() {
-        const value = Date.now() - 24 * 60 * 60 * 10 ** 3; // 24hour x 60 min x 60 sec x 1000 ms
-        this.$emit('change', value);
-        this.close();
-      },
-
-      input() {
-        this.$emit('change', this.draft);
-        this.close();
-      },
-
-      setDraft(value) {
-        this.draft = value;
-      },
-
-      close() {
-        this.isOpened = false;
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .wt-datetimepicker {
-    position: relative;
-  }
+.wt-datetimepicker {
+  position: relative;
+}
 
-  .wt-datetimepicker__preview {
-    position: relative;
-    cursor: text;
-    outline: none;
+.wt-datetimepicker__preview {
+  position: relative;
+  cursor: text;
+  outline: none;
 
-    &__input {
-      @extend %typo-body-1;
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-      padding: var(--datetimepicker-padding);
-      border: var(--datetimepicker-border);
-      border-color: var(--form-border-color);
-      border-radius: var(--border-radius);
-    }
-
-    .wt-datetimepicker__calendar-icon {
-      position: absolute;
-      top: 50%;
-      left: var(--datetimepicker-icon-margin);
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .wt-datetimepicker__arrow-icon {
-      position: absolute;
-      top: 50%;
-      right: var(--datetimepicker-icon-margin);
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-  }
-
-  .wt-datetimepicker__form {
-    padding: var(--datetimepicker-form-padding);
-    background: var(--datetimepicker-form-bg-color);
+  &__input {
+    @extend %typo-body-1;
+    display: block;
+    width: 100%;
     box-sizing: border-box;
+    padding: var(--datetimepicker-padding);
     border: var(--datetimepicker-border);
     border-color: var(--form-border-color);
     border-radius: var(--border-radius);
   }
 
-  .wt-datetimepicker__quick-filters-wrapper {
-    text-align: center;
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: var(--datetimepicker-form-content-margin);
-  }
-
-  .wt-datetimepicker__quick-filter {
-    @extend %typo-caption;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  .wt-datetimepicker__form-wrapper {
-    display: flex;
-    flex-direction: column;
-
-    .wt-datetimepicker__datepicker ::v-deep {
-      .wt-datepicker__calendar-icon,
-      .wt-datepicker__arrow-icon {
-        display: none;
-      }
-      .vdp-datepicker__calendar {
-        padding: 0;
-        border-color: transparent;
-        box-shadow: none;
-      }
-    }
-
-    .wt-datetimepicker__timepicker {
-      margin: var(--datetimepicker-form-content-margin) auto 0;
-    }
-  }
-
-  .wt-datetimepicker__actions {
-    display: flex;
-    justify-content: center;
-    margin-top: var(--datetimepicker-form-content-margin);
-
-    .wt-button {
-      &.secondary {
-        margin-left: var(--datetimepicker-form-content-margin);
-      }
-    }
-  }
-
-  .wt-datetimepicker:hover {
-    .wt-label {
-      color: var(--form-label--hover-color);
-    }
-
-    .wt-datetimepicker__preview__input {
-      border-color: var(--form-border--hover-color);
-    }
-  }
-
-  .wt-datetimepicker:focus-within,
-  .wt-datetimepicker--active {
-    .wt-label {
-      color: var(--form-label--active-color);
-    }
-
-    .wt-datetimepicker__preview__input {
-      border-color: var(--form-border--active-color);
-    }
-  }
-
-  .wt-datetimepicker--active {
-    .wt-datetimepicker__arrow-icon {
-      transform: translateY(-50%) rotate(180deg);
-    }
-  }
-
-  .wt-datetimepicker--disabled {
+  .wt-datetimepicker__calendar-icon {
+    position: absolute;
+    top: 50%;
+    left: var(--datetimepicker-icon-margin);
+    transform: translateY(-50%);
     pointer-events: none;
+  }
 
-    .wt-datetimepicker__preview__input {
-      border-color: var(--form-border--disabled-color);
-      background: var(--form-border--disabled-color);
+  .wt-datetimepicker__arrow-icon {
+    position: absolute;
+    top: 50%;
+    right: var(--datetimepicker-icon-margin);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}
+
+.wt-datetimepicker__form {
+  padding: var(--datetimepicker-form-padding);
+  background: var(--datetimepicker-form-bg-color);
+  box-sizing: border-box;
+  border: var(--datetimepicker-border);
+  border-color: var(--form-border-color);
+  border-radius: var(--border-radius);
+}
+
+.wt-datetimepicker__quick-filters-wrapper {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: var(--datetimepicker-form-content-margin);
+}
+
+.wt-datetimepicker__quick-filter {
+  @extend %typo-caption;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.wt-datetimepicker__form-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .wt-datetimepicker__datepicker ::v-deep {
+    .wt-datepicker__calendar-icon,
+    .wt-datepicker__arrow-icon {
+      display: none;
+    }
+
+    .vdp-datepicker__calendar {
+      padding: 0;
+      border-color: transparent;
+      box-shadow: none;
     }
   }
+
+  .wt-datetimepicker__timepicker {
+    margin: var(--datetimepicker-form-content-margin) auto 0;
+  }
+}
+
+.wt-datetimepicker__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--datetimepicker-form-content-margin);
+
+  .wt-button {
+    &.secondary {
+      margin-left: var(--datetimepicker-form-content-margin);
+    }
+  }
+}
+
+.wt-datetimepicker:hover {
+  .wt-label {
+    color: var(--form-label--hover-color);
+  }
+
+  .wt-datetimepicker__preview__input {
+    border-color: var(--form-border--hover-color);
+  }
+}
+
+.wt-datetimepicker:focus-within,
+.wt-datetimepicker--active {
+  .wt-label {
+    color: var(--form-label--active-color);
+  }
+
+  .wt-datetimepicker__preview__input {
+    border-color: var(--form-border--active-color);
+  }
+}
+
+.wt-datetimepicker--active {
+  .wt-datetimepicker__arrow-icon {
+    transform: translateY(-50%) rotate(180deg);
+  }
+}
+
+.wt-datetimepicker--disabled {
+  pointer-events: none;
+
+  .wt-datetimepicker__preview__input {
+    border-color: var(--form-border--disabled-color);
+    background: var(--form-border--disabled-color);
+  }
+}
 </style>
