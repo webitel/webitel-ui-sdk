@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-input @keyup.enter="log(123)" @input="log(321)"></wt-input>
     <wt-datepicker
       label="Test 123"
       v-model="date"

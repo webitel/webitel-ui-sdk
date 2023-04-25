@@ -22,6 +22,7 @@
       <input
         :id="name"
         ref="wt-input"
+        v-bind="$attrs"
         :class="{
           'wt-input--is-password': isPassword,
         }"
@@ -33,6 +34,7 @@
         :value="value || modelValue"
         class="wt-input__input"
         @input="inputHandler"
+        @keyup="$emit('keyup', $event)"
       >
       <div
         ref="after-wrapper"
