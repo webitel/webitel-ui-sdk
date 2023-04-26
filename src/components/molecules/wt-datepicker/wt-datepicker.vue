@@ -11,7 +11,7 @@
     </wt-label>
     <vue-datepicker
       ref="datepicker"
-      :locale="locale"
+      :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
       :placeholder="label || placeholder"
       class="wt-datepicker__datepicker"
@@ -84,8 +84,7 @@
 <script setup>
 import VueDatepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ref } from 'vue';
 
 const props = defineProps({
   mode: {
@@ -126,16 +125,8 @@ const props = defineProps({
 });
 const emit = defineEmits(['input']);
 
-const i18n = useI18n();
-
 const isOpened = ref(false);
 const datepicker = ref(null); // template ref
-
-const locale = computed(() => {
-  const { locale } = i18n;
-  if (locale === 'ua') return 'uk';
-  return locale;
-});
 
 const isDateTime = props.mode === 'datetime';
 </script>

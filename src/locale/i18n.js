@@ -13,7 +13,7 @@ const messages = {
 
 // eslint-disable-next-line new-cap
 export default new createI18n({
-  legacy: false,
+  // legacy: false,
   locale: 'en',
   fallbackLocale: 'en',
   messages,
