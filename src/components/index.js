@@ -14,7 +14,6 @@ import WtContextMenu from './atoms/wt-context-menu/wt-context-menu.vue';
 
 import WtCheckbox from './molecules/wt-checkbox/wt-checkbox.vue';
 import WtDatepicker from './molecules/wt-datepicker/wt-datepicker.vue';
-import WtDatetimepicker from './molecules/wt-datetimepicker/wt-datetimepicker.vue';
 import WtIconBtn from './molecules/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from './molecules/wt-input/wt-input.vue';
 import WtNotification from './molecules/wt-notification/wt-notification.vue';
@@ -70,7 +69,6 @@ const Components = {
   WtRoundedAction,
   WtCheckbox,
   WtDatepicker,
-  WtDatetimepicker,
   WtIconBtn,
   WtInput,
   WtHint,

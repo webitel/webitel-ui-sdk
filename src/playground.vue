@@ -1,12 +1,13 @@
 <template>
   <div class="playground">
-    <wt-datetimepicker
-      label="Test 123"
-      v-model="date"
-    ></wt-datetimepicker>
     <wt-datepicker
       label="Test 123"
       v-model="date"
+    ></wt-datepicker>
+    <wt-datepicker
+      label="Test 123"
+      v-model="date"
+      mode="datetime"
     ></wt-datepicker>
     {{  date }}
     <wt-icon-action

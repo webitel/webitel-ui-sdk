@@ -11,12 +11,12 @@
     </wt-label>
     <vue-datepicker
       ref="datepicker"
+      :locale="locale"
       :model-value="+value"
       :placeholder="label || placeholder"
       class="wt-datepicker__datepicker"
       v-bind="{ ...$attrs, ...$props }"
-      format="dd.mm.yyyy"
-      :locale="locale"
+      :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
       @closed="isOpened = false"
       @open="isOpened = true"
       @update:model-value="emit('input', $event.getTime())"
@@ -45,6 +45,25 @@
           icon="arrow-right"
         ></wt-icon-btn>
       </template>
+      <template
+        v-if="isDateTime"
+        v-slot:time-picker="{ time, updateTime }"
+      >
+        <div class="datepicker__timepicker">
+          <wt-time-input
+            :label="$t('webitelUI.timepicker.hour')"
+            :value="time.hours"
+            max-value="23"
+            @input="updateTime"
+          ></wt-time-input>
+          <wt-time-input
+            :label="$t('webitelUI.timepicker.min')"
+            :value="time.minutes"
+            max-value="59"
+            @input="updateTime($event, false)"
+          ></wt-time-input>
+        </div>
+      </template>
       <template v-slot:action-select>
         <wt-button
           wide
@@ -69,6 +88,11 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
+  mode: {
+    type: String,
+    default: 'date',
+    options: ['date', 'datetime'],
+  },
   value: {
     type: [String, Number],
     default: 'Date.now()',
@@ -112,18 +136,20 @@ const locale = computed(() => {
   if (locale === 'ua') return 'uk';
   return locale;
 });
+
+const isDateTime = props.mode === 'datetime';
 </script>
 
 <style lang="scss" scoped>
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {
-    line-height: 0;
     left: var(--spacing-xs);
+    line-height: 0;
   }
 
   .dp__clear_icon {
-    line-height: 0;
     right: var(--spacing-xs);
+    line-height: 0;
   }
 
   .dp__input {
@@ -148,8 +174,8 @@ const locale = computed(() => {
   }
 
   .dp__menu {
-    box-shadow: var(--elevation-10);
     border-radius: var(--border-radius);
+    box-shadow: var(--elevation-10);
   }
 
   .dp__calendar_header_separator {
@@ -184,5 +210,12 @@ const locale = computed(() => {
     display: flex;
     gap: var(--spacing-xs);
   }
+}
+
+.datepicker__timepicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
 }
 </style>

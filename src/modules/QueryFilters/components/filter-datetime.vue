@@ -1,9 +1,10 @@
 <template>
-  <wt-datetimepicker
+  <wt-datepicker
     :value="filterSchema.value"
     :label="label"
+    mode="datetime"
     @change="handleChange"
-  ></wt-datetimepicker>
+  ></wt-datepicker>
 </template>
 
 <script>
