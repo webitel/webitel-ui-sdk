@@ -3,7 +3,7 @@
     :value="filterSchema.value"
     :label="label"
     mode="datetime"
-    @change="handleChange"
+    @input="handleChange"
   ></wt-datepicker>
 </template>
 
