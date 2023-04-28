@@ -136,6 +136,25 @@
             </a>
           </li>
 
+          <li
+            v-if="formattedApps[WebitelApplications.AUDIT]"
+            :class="{'active': formattedApps[WebitelApplications.AUDIT].currentApp }"
+            class="wt-app-navigator__card"
+          >
+            <a
+              :href="formattedApps[WebitelApplications.AUDIT].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.AUDIT]}`)"
+              class="wt-app-navigator__card__link"
+              target="_blank"
+            >
+              <img
+                :alt="`${[WebitelApplications.AUDIT]}-pic`"
+                class="wt-app-navigator__card__img"
+                src="../../../assets/components/organisms/wt-app-header/app-navigator/app-audit.svg"
+              >
+            </a>
+          </li>
+
         </ul>
       </nav>
     </transition>

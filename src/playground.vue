@@ -1,5 +1,8 @@
 <template>
   <div class="playground">
+    <wt-app-navigator
+      :apps="[{ name: 'audit' }, { name: 'admin' }]"
+    ></wt-app-navigator>
     <wt-datepicker
       label="Test 123"
       v-model="date"
