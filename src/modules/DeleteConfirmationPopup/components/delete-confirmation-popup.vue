@@ -64,9 +64,8 @@ const deleteMessage = computed(() => {
   }
   return t(
     'webitelUI.deleteConfirmationPopup.askingAlert',
-    props.deleteCount === 1 ? 1 : 2,
-    null,
     { count: props.deleteCount },
+    null,
   );
 });
 
