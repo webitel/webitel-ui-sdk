@@ -14,6 +14,7 @@ export default class TableStoreModule extends BaseStoreModule {
     sort: '',
     isLoading: false,
     isNextPage: false,
+    errors: {},
   };
 
   actions = {
@@ -43,6 +44,7 @@ export default class TableStoreModule extends BaseStoreModule {
         context.dispatch('AFTER_SET_DATA_LIST_HOOK', afterHook);
       } catch (err) {
         console.error(err);
+        context.commit('SET_ERRORS', err);
       } finally {
         context.commit('SET_LOADING', false);
       }
@@ -174,6 +176,9 @@ export default class TableStoreModule extends BaseStoreModule {
     },
     SET_LOADING: (state, value) => {
       state.isLoading = value;
+    },
+    SET_ERRORS: (state, value) => {
+      state.errors = value;
     },
   };
 
