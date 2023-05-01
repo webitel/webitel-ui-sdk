@@ -74,6 +74,11 @@ const QuestionTypeComponent = computed(() => {
   flex-direction: column;
   gap: var(--spacing-sm);
 
+  &:hover,
+  &:focus {
+    border: 1px solid var(--accent-color);
+  }
+
   &--filled {
     background: var(--secondary-color-50);
   }
