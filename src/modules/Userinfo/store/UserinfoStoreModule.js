@@ -39,13 +39,52 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       const accessKey = Object.keys(state.access[getters.THIS_APP]).find((object) => route.name.includes(object));
       return state.access[getters.THIS_APP][accessKey]?._enabled;
     },
+    GET_OBJECT_SCOPE: (state, getters) => ({ name, route }) => {
+      if (route) return getters.GET_OBJECT_SCOPE_BY_ROUTE(route);
+      return getters.GET_OBJECT_SCOPE_BY_NAME(name);
+    },
+    GET_OBJECT_SCOPE_BY_NAME: (state) => (name) => (
+      Object.values(state.scope).find((object) => name === object.name)
+    ),
+    GET_OBJECT_SCOPE_BY_ROUTE: (state) => (route) => (
+      Object.values(state.scope).find((object) => route.name.includes(object.route))
+    ),
+    HAS_READ_ACCESS: (state, getters) => (checkedObject) => {
+      if (!getters.CHECK_OBJECT_ACCESS(checkedObject)) return false;
+      if (state.permissions[Permissions.READ]) return true;
+      const objectScope = getters.GET_OBJECT_SCOPE(checkedObject);
+      return objectScope?.access?.includes('r');
+    },
+    HAS_CREATE_ACCESS: (state, getters) => (checkedObject) => {
+      if (state.permissions[Permissions.CREATE]) return true;
+      const objectScope = getters.GET_OBJECT_SCOPE(checkedObject);
+      return objectScope?.access?.includes('x');
+    },
+    HAS_EDIT_ACCESS: (state, getters) => (checkedObject) => {
+      if (state.permissions[Permissions.EDIT]) return true;
+      const objectScope = getters.GET_OBJECT_SCOPE(checkedObject);
+      return objectScope?.access?.includes('w');
+    },
+    HAS_DELETE_ACCESS: (state, getters) => (checkedObject) => {
+      if (state.permissions[Permissions.DELETE]) return true;
+      const objectScope = getters.GET_OBJECT_SCOPE(checkedObject);
+      return objectScope?.access?.includes('d');
+    },
   }
 
   actions = {
     BEFORE_OPEN_SESSION_HOOK: () => {},
     AFTER_OPEN_SESSION_HOOK: () => {},
     CONVERT_USER_SCOPE: (context, scope) => scope,
-    CONVERT_USER_PERMISSIONS: (context, permissions) => permissions,
+    CONVERT_USER_PERMISSIONS: (context, initialPermissions) => {
+      let permissions = {};
+      if (!initialPermissions) return permissions;
+      permissions = initialPermissions.reduce((permissions, currentPermission) => ({
+        ...permissions,
+        [currentPermission.id]: currentPermission,
+      }), {});
+      return permissions;
+    },
 
     OPEN_SESSION: async (context) => {
       await context.dispatch('BEFORE_OPEN_SESSION_HOOK');
