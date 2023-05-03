@@ -40,6 +40,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  hideSecondary: {
+    type: Boolean,
+    default: false,
+  },
   primaryText: {
     type: String,
   },
