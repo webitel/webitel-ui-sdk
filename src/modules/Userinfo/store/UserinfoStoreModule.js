@@ -1,6 +1,7 @@
 import userinfo from '../api/userinfo';
 import ApplicationsAccess from '../classes/ApplicationsAccess';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
+import Permissions from '../enums/Permissions.enum';
 
 const defaultState = () => ({
   isLoading: true,
