@@ -9,9 +9,11 @@
     </template>
     <template v-slot:actions>
       <slot name="actions"></slot>
-      <slot name="primary-action">
+      <slot
+        name="primary-action"
+        v-if="!hidePrimary"
+      >
         <wt-button
-          v-if="!hidePrimary"
           :disabled="primaryDisabled"
           @click="primaryAction"
         >
