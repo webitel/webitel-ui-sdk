@@ -34,6 +34,7 @@ import WtButtonSelect from './molecules/wt-button-select/wt-button-select.vue';
 import WtHint from './molecules/wt-hint/wt-hint.vue';
 import WtCopyAction from './molecules/wt-copy-action/wt-copy-action.vue';
 import WtLoadBar from './molecules/wt-load-bar/wt-load-bar.vue';
+import WtLink from './molecules/wt-link/wt-link.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
@@ -107,6 +108,7 @@ const Components = {
   WtLoadBar,
   WtIconAction,
   WtPageHeader,
+  WtLink,
 };
 
 export default Components;
