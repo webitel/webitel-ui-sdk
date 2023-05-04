@@ -23,8 +23,8 @@ export const useTableStore = (namespace) => {
   const search = computed(() => getNamespacedState(store.state, tableNamespace).search);
 
   const error = computed(() => getNamespacedState(store.state, tableNamespace).errors);
-  async function loadData() {
-    return store.dispatch(`${tableNamespace}/LOAD_DATA_LIST`);
+  async function loadData(payload) {
+    return store.dispatch(`${tableNamespace}/LOAD_DATA_LIST`, payload);
   }
 
   async function setSize(payload) {
