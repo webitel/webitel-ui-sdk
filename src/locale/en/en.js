@@ -23,6 +23,8 @@ export default {
     save: 'Save',
     saveAs: 'SaveAs',
     saved: 'Saved',
+    send: 'Send',
+    start: 'Start',
     close: 'Close',
     add: 'Add',
     cancel: 'Cancel',
