@@ -127,6 +127,16 @@ svg {
 }
 
 .wt-icon--size {
+  &-3xl {
+    width: var(--icon-3xl-size);
+    height: var(--icon-3xl-size);
+  }
+
+  &-2xl {
+    width: var(--icon-2xl-size);
+    height: var(--icon-2xl-size);
+  }
+
   &-xl {
     width: var(--icon-xl-size);
     height: var(--icon-xl-size);
