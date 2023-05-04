@@ -19,7 +19,7 @@
         </wt-button>
       </slot>
       <wt-button
-        v-if="!hideSecondary"
+        v-if="!hideSecondary && !emptySecondary"
         color="secondary"
         @click="secondaryAction"
       >
@@ -62,7 +62,7 @@ const props = defineProps({
   },
 });
 
-const hideSecondary = computed(() => !(props.secondaryAction || props.secondaryText));
+const emptySecondary = computed(() => !(props.secondaryAction || props.secondaryText));
 </script>
 
 <style lang="scss" scoped>
