@@ -2,9 +2,9 @@
   <router-link
     :target="target"
     :to="to"
-    class="wt-link"
+    class="wt-item-link"
   >
-    <slot>{{ text }}</slot>
+    <slot></slot>
   </router-link>
 </template>
 
@@ -12,10 +12,6 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  text: {
-    type: String,
-    default: '',
-  },
   link: {
     type: [String, Object],
     default: '',
@@ -39,7 +35,7 @@ const to = computed(() => props.link || {
 </script>
 
 <style lang="scss" scoped>
-.wt-link {
+.wt-item-link {
   display: flex;
   align-items: center;
   cursor: pointer;

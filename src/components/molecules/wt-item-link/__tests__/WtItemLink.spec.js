@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import WtLink from '../wt-link.vue';
+import WtItemLink from '../wt-item-link.vue';
 
-describe('WtLink', () => {
+describe('WtItemLink', () => {
   it('renders a component', () => {
-    const wrapper = shallowMount(WtLink);
+    const wrapper = shallowMount(WtItemLink);
     expect(wrapper.exists()).toBe(true);
   });
 });
