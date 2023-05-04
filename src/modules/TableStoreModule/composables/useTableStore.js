@@ -63,6 +63,8 @@ export const useTableStore = (namespace) => {
   }
 
   return {
+    namespace: tableNamespace,
+
     dataList,
     isLoading,
     headers,
