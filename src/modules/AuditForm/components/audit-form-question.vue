@@ -11,6 +11,7 @@
     :v="v$"
     :disable-dragging="mode === 'fill'"
     :disable-delete="disableDelete"
+    :readonly="readonly"
     @copy="emits('copy')"
     @delete="emits('delete')"
     @activate="activateQuestion"
@@ -42,6 +43,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits([
@@ -71,6 +76,7 @@ const v$ = useVuelidate(computed(() => (
     } : {})), { question });
 
 const component = computed(() => {
+  if (props.readonly) return QuestionRead;
   if (props.mode === 'create') {
     if (state.value === QuestionState.SAVED) return QuestionRead;
     return QuestionWrite;

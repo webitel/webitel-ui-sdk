@@ -3,6 +3,7 @@
     class="audit-form-question-read"
     :class="{
       'audit-form-question-read--filled': result && result.score != null,
+      'audit-form-question-read--readonly': readonly,
     }"
     @keyup.enter="emit('activate')"
     @click="emit('activate')"
@@ -27,7 +28,7 @@
         :question="question"
         :result="result"
         mode="read"
-        @change:result="emit('change:result', $event)"
+        @change:result="!readonly && emit('change:result', $event)"
       ></component>
     </section>
   </article>
@@ -50,6 +51,10 @@ const props = defineProps({
     required: true,
   },
   disableDragging: {
+    type: Boolean,
+    default: false,
+  },
+  readonly: {
     type: Boolean,
     default: false,
   },
@@ -76,9 +81,11 @@ const QuestionTypeComponent = computed(() => {
   border: 1px solid transparent;
   transition: var(--transition);
 
-  &:hover,
-  &:focus-within {
-    border: 1px solid var(--accent-color);
+  &:not(.audit-form-question-read--readonly) {
+    &:hover,
+    &:focus-within {
+      border: 1px solid var(--accent-color);
+    }
   }
 
   &--filled {

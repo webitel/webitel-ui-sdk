@@ -12,6 +12,7 @@
         :result="(result && result[key]) ? result[key] : null"
         :mode="mode"
         :disable-delete="questions.length <= 1"
+        :readonly="readonly"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
@@ -20,7 +21,7 @@
     </div>
     <wt-button
       class="audit-form__add-button"
-      v-if="mode === 'create'"
+      v-if="mode === 'create' && !readonly"
       :disabled="isInvalidForm"
       @click="addQuestion"
     >{{ $t('webitelUI.auditForm.addQuestion') }}
@@ -53,6 +54,10 @@ const props = defineProps({
   },
   result: {
     type: Array,
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
   },
 });
 
