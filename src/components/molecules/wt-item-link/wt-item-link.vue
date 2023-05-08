@@ -1,7 +1,7 @@
 <template>
   <router-link
     :target="target"
-    :to="to"
+    :to="disabled ? '' : to"
     class="wt-item-link"
   >
     <slot></slot>
@@ -25,6 +25,10 @@ const props = defineProps({
   },
   id: {
     type: [String, Number],
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 
