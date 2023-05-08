@@ -4,6 +4,7 @@
       <wt-switcher
         :value="question.required"
         :label="$t('reusable.required')"
+        :disabled="first"
         @change="updateQuestion({ path: 'required', value: $event })"
       ></wt-switcher>
       <div class="audit-form-question-write-header__actions">
@@ -20,7 +21,7 @@
           <template v-slot:activator>
             <wt-icon-btn
               icon="bucket"
-              :disabled="disableDelete"
+              :disabled="first"
               @click="emit('delete')"
             ></wt-icon-btn>
           </template>
@@ -79,9 +80,9 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  disableDelete: {
+  first: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   v: {
     type: Object,

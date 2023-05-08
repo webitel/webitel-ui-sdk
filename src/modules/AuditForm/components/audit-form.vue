@@ -11,7 +11,7 @@
         :question="question"
         :result="(result && result[key]) ? result[key] : null"
         :mode="mode"
-        :disable-delete="questions.length <= 1"
+        :first="key === 0"
         :readonly="readonly"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
@@ -32,7 +32,7 @@
 <script setup>
 import cloneDeep from 'lodash/cloneDeep';
 import {
-  watch, watchEffect, ref, computed,
+  watch, watchEffect, ref, computed, onMounted,
 } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { useDestroyableSortable } from '../composables/useDestroyableSortable';
@@ -115,6 +115,12 @@ function initResult() {
   emit('update:result', result);
 }
 
+function initQuestions() {
+  if (props.mode === 'create' && !props.questions.length) {
+    addQuestion(generateQuestionSchema({ required: true }));
+  }
+}
+
 const sortableWrapper = ref(null);
 
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
@@ -128,6 +134,10 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 
 watch(v$, () => emit('update:validation', v$));
 watchEffect(initResult);
+
+onMounted(() => {
+  initQuestions();
+});
 </script>
 
 <style lang="scss" scoped>

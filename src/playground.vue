@@ -1,24 +1,5 @@
 <template>
   <div class="playground">
-    <wt-app-navigator
-      :apps="[{ name: 'audit' }, { name: 'admin' }]"
-    ></wt-app-navigator>
-    <wt-datepicker
-      label="Test 123"
-      v-model="date"
-    ></wt-datepicker>
-    <wt-datepicker
-      label="Test 123"
-      v-model="date"
-      mode="datetime"
-    ></wt-datepicker>
-    {{  date }}
-    <wt-icon-action
-      action="edit"
-    ></wt-icon-action>
-    <wt-icon-action
-      action="delete"
-    ></wt-icon-action>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
