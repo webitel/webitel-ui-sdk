@@ -83,7 +83,7 @@ function updateQuestion({ path, value }) {
 
 .audit-form-question-score-read {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: var(--spacing-sm);
 }
 </style>
