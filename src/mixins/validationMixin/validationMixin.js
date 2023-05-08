@@ -19,21 +19,21 @@ export default {
     validationText() {
       let validationText = '';
       if (this.isValidation && this.invalid) {
-        if (this.v.required.$invalid) validationText = this.$t('validation.required');
-        else if (this.v.numeric.$invalid) validationText = this.$t('validation.numeric');
-        else if (this.v.email.$invalid) validationText = this.$t('validation.email');
-        else if (this.v.gatewayHostValidator.$invalid) validationText = this.$t('validation.gatewayHostValidator');
-        else if (this.v.ipValidator.$invalid) validationText = this.$t('validation.ipValidator');
-        else if (this.v.macValidator.$invalid) validationText = this.$t('validation.macValidator');
-        else if (this.v.minValue.$invalid) validationText = `${this.$t('validation.minValue')} ${this.v.$params.minValue.min}`;
-        else if (this.v.maxValue.$invalid) validationText = `${this.$t('validation.maxValue')} ${this.v.$params.maxValue.max}`;
-        else if (this.v.sipAccountValidator.$invalid) validationText = this.$t('validation.sipAccountValidator');
-        else if (this.v.minLength.$invalid) validationText = `${this.$t('validation.minLength')} ${this.v.$params.minLength.min}`;
-        else if (this.v.url.$invalid) validationText = `${this.$t('validation.url')}`;
+        if (this.v.required?.$invalid) validationText = this.$t('validation.required');
+        else if (this.v.numeric?.$invalid) validationText = this.$t('validation.numeric');
+        else if (this.v.email?.$invalid) validationText = this.$t('validation.email');
+        else if (this.v.gatewayHostValidator?.$invalid) validationText = this.$t('validation.gatewayHostValidator');
+        else if (this.v.ipValidator?.$invalid) validationText = this.$t('validation.ipValidator');
+        else if (this.v.macValidator?.$invalid) validationText = this.$t('validation.macValidator');
+        else if (this.v.minValue?.$invalid) validationText = `${this.$t('validation.minValue')} ${this.v.minValue.$params.min}`;
+        else if (this.v.maxValue?.$invalid) validationText = `${this.$t('validation.maxValue')} ${this.v.maxValue.$params.max}`;
+        else if (this.v.sipAccountValidator?.$invalid) validationText = this.$t('validation.sipAccountValidator');
+        else if (this.v.minLength?.$invalid) validationText = `${this.$t('validation.minLength')} ${this.v.minLength.$params.min}`;
+        else if (this.v.url?.$invalid) validationText = `${this.$t('validation.url')}`;
       }
       // eslint-disable-next-line no-restricted-syntax
       for (const { name, text } of this.customValidators) {
-        if (this.v[name].$invalid) validationText = text;
+        if (this.v[name]?.$invalid) validationText = text;
       }
       return validationText;
     },

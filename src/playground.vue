@@ -114,28 +114,28 @@ export default {
   components: { VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     auditQuestions: [
-      {
-        'required': true,
-        'question': 'My Anketa number 1',
-        'type': EngineAuditQuestionType.Option,
-        'options': [
-          {
-            'name': 'My first var!',
-            'score': 5,
-          },
-          {
-            'name': 'My lorem ipsum var!',
-            'score': 10,
-          },
-        ],
-      },
-      {
-        'required': true,
-        'question': 'My anketa number two!',
-        'type': EngineAuditQuestionType.Score,
-        'min': 1,
-        'max': 5,
-      },
+      // {
+      //   'required': true,
+      //   'question': 'My Anketa number 1',
+      //   'type': EngineAuditQuestionType.Option,
+      //   'options': [
+      //     {
+      //       'name': 'My first var!',
+      //       'score': 5,
+      //     },
+      //     {
+      //       'name': 'My lorem ipsum var!',
+      //       'score': 10,
+      //     },
+      //   ],
+      // },
+      // {
+      //   'required': true,
+      //   'question': 'My anketa number two!',
+      //   'type': EngineAuditQuestionType.Score,
+      //   'min': 1,
+      //   'max': 5,
+      // },
     ],
     auditResult: [],
     date: Date.now(),
