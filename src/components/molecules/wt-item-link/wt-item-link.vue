@@ -2,6 +2,7 @@
   <router-link
     :target="target"
     :to="to"
+    :class="{ 'wt-item-link--disabled': disabled }"
     class="wt-item-link"
   >
     <slot></slot>
@@ -26,6 +27,10 @@ const props = defineProps({
   id: {
     type: [String, Number],
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const to = computed(() => props.link || {
@@ -43,6 +48,10 @@ const to = computed(() => props.link || {
 
   &:hover {
     text-decoration: underline;
+  }
+
+  &--disabled {
+    pointer-events: none;
   }
 }
 </style>
