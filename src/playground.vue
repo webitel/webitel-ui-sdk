@@ -1,5 +1,11 @@
 <template>
   <div class="playground">
+    <wt-tooltip>
+      <template v-slot:activator>
+        <wt-icon icon="edit"></wt-icon>
+      </template>
+      lorem ipsum
+    </wt-tooltip>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
@@ -103,6 +109,7 @@
 
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
+import WtTooltip from './components/atoms/wt-tooltip/wt-tooltip.vue';
 import WtDatepicker from './components/molecules/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
@@ -111,7 +118,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
+  components: { WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     auditQuestions: [
       // {
