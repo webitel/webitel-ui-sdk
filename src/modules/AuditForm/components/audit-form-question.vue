@@ -1,20 +1,20 @@
 <template>
   <component
-    class="audit-form-question"
+    :is="component"
+    v-clickaway="saveQuestion"
     :class="[
      `audit-form-question--mode-${mode}`
     ]"
-    v-clickaway="saveQuestion"
-    :is="component"
+    :disable-dragging="mode === 'fill'"
+    :first="first"
     :question="question"
+    :readonly="readonly"
     :result="result"
     :v="v$"
-    :disable-dragging="mode === 'fill'"
-    :disable-delete="disableDelete"
-    :readonly="readonly"
+    class="audit-form-question"
+    @activate="activateQuestion"
     @copy="emits('copy')"
     @delete="emits('delete')"
-    @activate="activateQuestion"
     @change:question="emits('update:question', $event)"
     @change:result="emits('update:result', $event)"
   ></component>
@@ -23,10 +23,10 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, ref, toRefs } from 'vue';
+import { computed, onMounted, ref, toRefs } from 'vue';
 import vClickaway from '../../../directives/clickaway/clickaway';
-import QuestionWrite from './audit-form-question-write-wrapper.vue';
 import QuestionRead from './audit-form-question-read-wrapper.vue';
+import QuestionWrite from './audit-form-question-write-wrapper.vue';
 
 const props = defineProps({
   question: {
@@ -39,9 +39,9 @@ const props = defineProps({
   mode: {
     type: String,
   },
-  disableDelete: {
+  first: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   readonly: {
     type: Boolean,
@@ -63,17 +63,20 @@ const QuestionState = {
 
 const state = ref(QuestionState.SAVED);
 
-const { question } = toRefs(props);
+// is needed for useVuelidate, because props.question/props.result isn't reactive
+const { question, result } = toRefs(props);
 
-// validate only "create" mode
 const v$ = useVuelidate(computed(() => (
   (props.mode === 'create')
     ? {
       question: {
         question: { required },
       },
-      $autoDirty: true,
-    } : {})), { question });
+    } : {
+      result: {
+        required: (value) => (question.value.required ? !!value : true),
+      },
+    })), { question, result }, { $autoDirty: true });
 
 const component = computed(() => {
   if (props.readonly) return QuestionRead;
@@ -92,13 +95,19 @@ function activateQuestion() {
   if (props.mode !== 'create') return;
   state.value = QuestionState.EDIT;
 }
+
+// initialize validations
+onMounted(() => {
+  v$.value.$touch();
+  activateQuestion();
+});
 </script>
 
 <style lang="scss" scoped>
 .audit-form-question {
   padding: var(--spacing-sm);
-  background: var(--main-color);
   border-radius: var(--border-radius);
+  background: var(--main-color);
   box-shadow: var(--elevation-1);
 
   &--mode-create.audit-form-question-read {

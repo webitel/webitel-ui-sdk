@@ -69,8 +69,8 @@ import WtIconBtn from '../../../components/molecules/wt-icon-btn/wt-icon-btn.vue
 import WtInput from '../../../components/molecules/wt-input/wt-input.vue';
 import WtSelect from '../../../components/molecules/wt-select/wt-select.vue';
 
-import AuditFormQuestionOptions from './questions/audit-form-question-options.vue';
-import AuditFormQuestionScore from './questions/audit-form-question-score.vue';
+import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
+import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
 
 import { generateQuestionScoreSchema } from '../schemas/AuditFormQuestionScoreSchema';
 import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema';

@@ -27,9 +27,8 @@ describe('AuditFormQuestionOptions', () => {
         mode: 'write',
       },
     });
-    const deleteBtn = wrapper.findComponent({ name: 'wt-icon-btn' });
-    expect(deleteBtn.props().icon).toBe('bucket');
-    deleteBtn.vm.$emit('click');
+    const writeRow = wrapper.findComponent({ name: 'audit-form-question-options-write-row' });
+    writeRow.vm.$emit('delete');
     expect(wrapper.emitted()['change:question'][0][0].options.length).toBe(0);
   });
   it('emits result change with selected radio option score', () => {

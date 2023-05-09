@@ -117,7 +117,7 @@ function initResult() {
 
 function initQuestions() {
   if (props.mode === 'create' && !props.questions.length) {
-    addQuestion(generateQuestionSchema({ required: true }));
+    addQuestion({ question: generateQuestionSchema({ required: true }) });
   }
 }
 
@@ -132,7 +132,7 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
   },
 });
 
-watch(v$, () => emit('update:validation', v$));
+watch(v$, () => emit('update:validation', { invalid: isInvalidForm, v$ }));
 watchEffect(initResult);
 
 onMounted(() => {

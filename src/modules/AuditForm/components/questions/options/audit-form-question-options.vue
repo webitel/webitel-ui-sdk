@@ -4,32 +4,14 @@
       v-if="mode === 'write'"
       class="audit-form-question-options-write"
     >
-      <div
-        v-for="({ name, score }, key) of question.options"
+      <options-write-row
+        v-for="(option, key) of question.options"
         :key="key"
-        class="audit-form-question-options-write-row"
-      >
-        <wt-input
-          :value="name"
-          :label="$t('webitelUI.auditForm.option', 1)"
-          @input="updateQuestion({ path: `options[${key}].name`, value: $event })"
-        ></wt-input>
-        <wt-input
-          :value="score"
-          :label="$t('webitelUI.auditForm.score', 1)"
-          type="number"
-          @input="updateQuestion({ path: `options[${key}].score`, value: $event })"
-        ></wt-input>
-        <wt-tooltip>
-          <template v-slot:activator>
-            <wt-icon-btn
-              icon="bucket"
-              @click="deleteQuestionOption({ key })"
-            ></wt-icon-btn>
-          </template>
-          {{ $t('reusable.delete') }}
-        </wt-tooltip>
-      </div>
+        :option="option"
+        :first="key === 0"
+        @update:option="updateQuestion({ path: `options[${key}]`, value: $event })"
+        @delete="deleteQuestionOption({ key })"
+      ></options-write-row>
       <wt-button
         class="audit-form-question-options-write__add-button"
         @click="addQuestionOption"
@@ -44,8 +26,8 @@
         v-for="({ name, score }) of question.options"
         :key="score"
         :label="name"
-        :value="score"
         :selected="result ? result.score : result"
+        :value="score"
         @input="emit('change:result', { score })"
       ></wt-radio>
     </div>
@@ -54,13 +36,11 @@
 </template>
 
 <script setup>
-import updateObject from '../../../../scripts/updateObject';
-import WtTooltip from '../../../../components/atoms/wt-tooltip/wt-tooltip.vue';
-import WtIconBtn from '../../../../components/molecules/wt-icon-btn/wt-icon-btn.vue';
-import WtInput from '../../../../components/molecules/wt-input/wt-input.vue';
-import WtButton from '../../../../components/atoms/wt-button/wt-button.vue';
-import WtRadio from '../../../../components/molecules/wt-radio/wt-radio.vue';
-import { generateOption } from '../../schemas/AuditFormQuestionOptionsSchema';
+import OptionsWriteRow from './audit-form-question-options-write-row.vue';
+import WtButton from '../../../../../components/atoms/wt-button/wt-button.vue';
+import WtRadio from '../../../../../components/molecules/wt-radio/wt-radio.vue';
+import updateObject from '../../../../../scripts/updateObject';
+import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
 
 const props = defineProps({
   question: {
@@ -107,13 +87,6 @@ function deleteQuestionOption({ key }) {
   &__add-button {
     align-self: flex-start;
   }
-}
-
-.audit-form-question-options-write-row {
-  display: grid;
-  grid-template-columns: 3fr 1fr 24px;
-  gap: var(--spacing-sm);
-  align-items: center;
 }
 
 .audit-form-question-options-read {

@@ -37,8 +37,8 @@
 <script setup>
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
-import AuditFormQuestionOptions from './questions/audit-form-question-options.vue';
-import AuditFormQuestionScore from './questions/audit-form-question-score.vue';
+import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
+import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
 import WtIcon from '../../../components/atoms/wt-icon/wt-icon.vue';
 
 const props = defineProps({
@@ -47,7 +47,7 @@ const props = defineProps({
     required: true,
   },
   result: {
-    type: Object,
+    type: [Object, null],
     required: true,
   },
   disableDragging: {

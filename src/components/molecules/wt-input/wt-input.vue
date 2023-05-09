@@ -170,7 +170,7 @@ export default {
       default: false,
     },
   },
-  emits: ['update:modelValue', 'input'],
+  emits: ['update:modelValue', 'input', 'keyup'],
   data: () => ({
     inputType: '',
     isPasswordVisible: false,
