@@ -99,7 +99,7 @@ function activateQuestion() {
 // initialize validations
 onMounted(() => {
   v$.value.$touch();
-  activateQuestion();
+  if (props.first) activateQuestion();
 });
 </script>
 
