@@ -43,9 +43,9 @@
 import { useVuelidate } from '@vuelidate/core';
 import { maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, onMounted, toRefs } from 'vue';
-import updateObject from '../../../../scripts/updateObject';
-import WtRadio from '../../../../components/molecules/wt-radio/wt-radio.vue';
-import WtInput from '../../../../components/molecules/wt-input/wt-input.vue';
+import updateObject from '../../../../../scripts/updateObject';
+import WtRadio from '../../../../../components/molecules/wt-radio/wt-radio.vue';
+import WtInput from '../../../../../components/molecules/wt-input/wt-input.vue';
 
 const props = defineProps({
   question: {
@@ -76,12 +76,12 @@ const v$ = useVuelidate(
       question: {
         min: {
           minValue: minValue(0),
-          maxValue: maxValue(19),
+          maxValue: maxValue(9),
           required,
         },
         max: {
           minValue: minValue(1),
-          maxValue: maxValue(20),
+          maxValue: maxValue(10),
           required,
         },
       },
