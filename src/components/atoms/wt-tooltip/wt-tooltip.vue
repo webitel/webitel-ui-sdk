@@ -10,6 +10,7 @@
        popperClass,
      ]"
     :triggers="triggers"
+    :popper-triggers="popperTriggers"
     class="wt-tooltip"
   >
     <slot name="activator"></slot>
@@ -30,6 +31,10 @@ export default {
     placement: {
       type: String,
       default: 'auto',
+    },
+    popperTriggers: {
+      type: Array,
+      default: () => [],
     },
     triggers: {
       type: Array,
