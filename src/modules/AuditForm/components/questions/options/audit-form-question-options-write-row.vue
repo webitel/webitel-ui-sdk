@@ -4,6 +4,7 @@
       :label="$t('webitelUI.auditForm.option', 1)"
       :value="option.name"
       :v="v$.option.name"
+      prevent-trim
       @input="emit('update:option', { name: $event, score: option.score })"
     ></wt-input>
     <wt-input
