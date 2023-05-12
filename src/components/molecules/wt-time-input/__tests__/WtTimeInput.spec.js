@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import WtTimeInput from '../wt-time-input.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 
@@ -14,7 +14,7 @@ describe('WtTimeInput', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtTimeInput, {
+    const wrapper = mount(WtTimeInput, {
       stubs: {
         WtLabel,
       },

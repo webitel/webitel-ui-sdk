@@ -149,7 +149,7 @@ export default {
     },
 
     isTableFooter() {
-      return Object.keys(this.$scopedSlots).some((slotName) => slotName.includes('-footer'));
+      return Object.keys(this.$slots).some((slotName) => slotName.includes('-footer'));
     },
   },
 

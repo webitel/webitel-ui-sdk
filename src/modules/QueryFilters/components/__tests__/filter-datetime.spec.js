@@ -1,20 +1,20 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createRouter, createWebHistory } from 'vue-router';
 import DatetimeFilter from '../filter-datetime.vue';
 import BaseFilterSchema from '../../classes/BaseFilterSchema';
 import baseFilterMixin from '../../mixins/baseFilterMixin/baseFilterMixin';
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueRouter);
-const router = new VueRouter();
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [{ path: '/', name: 'jest' }],
+});
 
 describe('DatetimeFilter Filter', () => {
   const namespace = 'jest';
   const filterQuery = 'jest';
   const filterSchema = new BaseFilterSchema();
-  const store = new Vuex.Store({
+  const store = createStore({
     modules: {
       [namespace]: {
         namespaced: true,
@@ -26,9 +26,9 @@ describe('DatetimeFilter Filter', () => {
   });
 
   const mountOptions = {
-    localVue,
-    store,
-    router,
+    global: {
+      plugins: [router, store],
+    },
     props: {
       namespace,
       filterQuery,

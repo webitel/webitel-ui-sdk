@@ -10,30 +10,33 @@
     <div class="wt-timepicker__wrapper">
       <wt-time-input
         v-if="isHour"
-        v-model="hour"
+        :value="hour"
         :v="v"
         :label="label ? null : $t('webitelUI.timepicker.hour') "
         :maxValue="dateMode ? null : 23"
         :disabled="disabled"
         hide-input-info
+        @input="hour = $event"
       ></wt-time-input>
       <wt-time-input
         v-if="isMin"
-        v-model="min"
+        :value="min"
         :v="v"
         :label="label ? null : $t('webitelUI.timepicker.min')"
         :maxValue="59"
         :disabled="disabled"
         hide-input-info
+        @input="min = $event"
       ></wt-time-input>
       <wt-time-input
         v-if="isSec"
-        v-model="sec"
+        :value="sec"
         :v="v"
         :label="label ? null :  $t('webitelUI.timepicker.sec')"
         :maxValue="59"
         :disabled="disabled"
         hide-input-info
+        @input="sec = $event"
       ></wt-time-input>
     </div>
     <wt-input-info
@@ -50,7 +53,7 @@ import validationMixin from '../../../mixins/validationMixin/validationMixin';
 const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;
 
-export default {
+export default  {
   name: 'wt-timepicker',
   mixins: [validationMixin],
   props: {

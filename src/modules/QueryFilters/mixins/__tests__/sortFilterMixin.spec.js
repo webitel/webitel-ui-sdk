@@ -1,10 +1,11 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
 import sortFilterMixin from '../sortFilterMixin';
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
-const router = new VueRouter();
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [{ path: '/', name: 'jest' }],
+});
 
 const headers = [{
   value: 'queue',
@@ -39,18 +40,22 @@ describe('Sort filter mixin', () => {
     methods: { setHeaders },
   };
 
-  beforeEach(() => {
-    router.replace('/');
+  beforeEach(async () => {
+    await router.replace('/');
   });
 
   it('Correctly sets value from $route query', async () => {
     await router.replace({ path: '/', query: { sort: '+queue' } });
-    const wrapper = shallowMount(Component, { localVue, router });
+    const wrapper = shallowMount(Component, {
+      global: { plugins: [router] },
+    });
     expect(setHeaders).toHaveBeenCalledWith(sortedHeaders);
   });
 
   it('After "sort" trigger, header column sort value changes properly', () => {
-    const wrapper = shallowMount(Component, { localVue, router });
+    const wrapper = shallowMount(Component, {
+      global: { plugins: [router] },
+    });
     const queue = wrapper.vm.headers.find((header) => header.value === 'queue');
     wrapper.vm.sort(queue);
     expect(setHeaders).toHaveBeenCalledWith(sortedHeaders);

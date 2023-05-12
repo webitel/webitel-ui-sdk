@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import WtTagsInput from '../wt-tags-input.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 
@@ -10,7 +10,7 @@ describe('WtTagsInput', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtTagsInput, {
+    const wrapper = mount(WtTagsInput, {
       stubs: { WtLabel },
       props: { label },
     });
@@ -19,7 +19,7 @@ describe('WtTagsInput', () => {
 
   it('by default emits "input" event at native "tag" event', () => {
     const tag = '123';
-    const wrapper = shallowMount(WtTagsInput, {
+    const wrapper = mount(WtTagsInput, {
       props: {
         value: [],
       },
@@ -30,7 +30,7 @@ describe('WtTagsInput', () => {
 
   it('in manual mode doesnt emit "input" event at native "tag" event', () => {
     const tag = '123';
-    const wrapper = shallowMount(WtTagsInput, {
+    const wrapper = mount(WtTagsInput, {
       props: {
         value: [],
         manualTagging: true,

@@ -38,7 +38,7 @@ export default {
       this.$emit('input');
       const value = this.page + 1;
       this.setPage(value);
-      this.setValueToQuery({
+      return this.setValueToQuery({
         filterQuery: 'page',
         value,
       });
@@ -48,7 +48,7 @@ export default {
       this.$emit('input');
       const value = this.page - 1;
       this.setPage(value);
-      this.setValueToQuery({
+      return this.setValueToQuery({
         filterQuery: 'page',
         value,
       });
@@ -58,7 +58,7 @@ export default {
       this.$emit('input');
       const value = 1;
       this.setPage(value);
-      this.setValueToQuery({
+      return this.setValueToQuery({
         filterQuery: 'page',
         value,
       });
@@ -67,7 +67,7 @@ export default {
     sizeChange(value) {
       this.$emit('input');
       this.setSize(value);
-      this.setValueToQuery({
+      return this.setValueToQuery({
         filterQuery: 'size',
         value,
       });

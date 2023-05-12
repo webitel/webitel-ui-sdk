@@ -29,7 +29,7 @@ describe('AuditForm', () => {
     });
     wrapper.findComponent('.audit-form__add-button').vm.$emit('click');
     expect(wrapper.emitted()['update:questions'][0][0])
-    .toEqual([generateQuestionSchema()]);
+    .toEqual([generateQuestionSchema({ required: true })]);
   });
   it('delete event from child question emits update without passed question', () => {
     const wrapper = shallowMount(AuditForm, {

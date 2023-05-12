@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import WtCheckbox from '../wt-checkbox.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 import WtIcon from '../../../atoms/wt-icon/wt-icon.vue';
@@ -16,7 +16,7 @@ describe('WtCheckbox', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtCheckbox, {
+    const wrapper = mount(WtCheckbox, {
       stubs: {
         WtLabel,
         WtIcon,
@@ -28,7 +28,7 @@ describe('WtCheckbox', () => {
 
   it('toggles passed value at click', () => {
     const selected = true;
-    const wrapper = shallowMount(WtCheckbox, {
+    const wrapper = mount(WtCheckbox, {
       stubs: {
         WtLabel,
         WtIcon,

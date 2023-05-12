@@ -53,7 +53,7 @@ describe('AuditFormQuestionWriteWrapper', () => {
       },
     });
     wrapper.find('.audit-form-question-write-content-question')
-    .findComponent({ name: 'wt-select' }).vm.$emit('input', { value: 'options' });
+    .findComponent({ name: 'wt-select' }).vm.$emit('input', { value: EngineAuditQuestionType.Option });
     expect(wrapper.emitted()['change:question'][0][0])
     .toEqual(generateQuestionOptionsSchema());
   });

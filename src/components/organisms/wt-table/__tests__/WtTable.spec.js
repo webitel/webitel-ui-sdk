@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import WtTable from '../wt-table.vue';
 import WtCheckbox from '../../../molecules/wt-checkbox/wt-checkbox.vue';
 
@@ -87,7 +87,7 @@ describe('WtTable', () => {
         headers,
         data,
       },
-      scopedSlots: {
+      slots: {
         'data-footer': '',
       },
     });
@@ -121,7 +121,7 @@ describe('WtTable', () => {
   });
 
   it('selects all rows at header checkbox click', async () => {
-    const wrapper = shallowMount(WtTable, {
+    const wrapper = mount(WtTable, {
       props: {
         headers,
         data,

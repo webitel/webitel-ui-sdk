@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import WtSwitcher from '../wt-switcher.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 
@@ -12,7 +12,7 @@ describe('WtSwitcher', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtSwitcher, {
+    const wrapper = mount(WtSwitcher, {
       stubs: { WtLabel },
       props: { label },
     });
@@ -21,7 +21,7 @@ describe('WtSwitcher', () => {
 
   it('toggles passed value at click', () => {
     const value = true;
-    const wrapper = shallowMount(WtSwitcher, {
+    const wrapper = mount(WtSwitcher, {
       stubs: { WtLabel },
       props: { value },
     });

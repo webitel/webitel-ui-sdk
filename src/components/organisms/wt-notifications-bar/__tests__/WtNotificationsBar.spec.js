@@ -6,14 +6,14 @@ import eventBus from '../../../../scripts/eventBus';
 describe('WtNotificationsBar', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(WtNotificationsBar, {
-      mocks: { $eventBus: eventBus },
+      global: { provide: { $eventBus: eventBus } },
     });
     expect(wrapper.classes('wt-notifications-bar')).toBe(true);
   });
 
   it('shows notification at event bus event', async () => {
     const wrapper = shallowMount(WtNotificationsBar, {
-      mocks: { $eventBus: eventBus },
+      global: { provide: { $eventBus: eventBus } },
     });
     wrapper.vm.$eventBus.$emit('notification', {
       type: 'error', text: 'error',
@@ -24,7 +24,7 @@ describe('WtNotificationsBar', () => {
 
   it('closes notification manually', async () => {
     const wrapper = shallowMount(WtNotificationsBar, {
-      mocks: { $eventBus: eventBus },
+      global: { provide: { $eventBus: eventBus } },
     });
     wrapper.vm.$eventBus.$emit('notification', {
       type: 'error', text: 'error',
@@ -37,7 +37,7 @@ describe('WtNotificationsBar', () => {
 
   it('closes notification automatically', async () => {
     const wrapper = shallowMount(WtNotificationsBar, {
-      mocks: { $eventBus: eventBus },
+      global: { provide: { $eventBus: eventBus } },
       data: () => ({ notificationDuration: 100 }),
     });
     wrapper.vm.$eventBus.$emit('notification', {

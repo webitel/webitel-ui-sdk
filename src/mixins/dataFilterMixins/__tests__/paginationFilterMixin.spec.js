@@ -1,10 +1,11 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import VueRouter from 'vue-router';
+import { shallowMount } from '@vue/test-utils';
+import { createRouter, createWebHistory } from 'vue-router';
 import paginationFilterMixin from '../paginationFilterMixin';
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
-const router = new VueRouter();
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [{ path: '/', name: 'jest' }],
+});
 const page = '2';
 const size = '20';
 
@@ -15,15 +16,14 @@ describe('Pagination filter mixin', () => {
     mixins: [paginationFilterMixin],
   };
 
-  beforeEach(() => {
-    if (Object.keys(router.currentRoute.query).length) router.replace({ query: null });
+  beforeEach(async () => {
+    await router.replace({ path: '/', query: null });
   });
 
   it('Correctly sets value from $route query', async () => {
-    await router.replace({ query: { page, size } });
+    await router.replace({ path: '/', query: { page, size } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.page).toEqual(page);
@@ -32,8 +32,7 @@ describe('Pagination filter mixin', () => {
 
   it('Sets initial value if $route query is empty', async () => {
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
       data: () => ({
         filterQuery: 'queue',
       }),
@@ -43,50 +42,43 @@ describe('Pagination filter mixin', () => {
   });
 
   it('Resets value after $route query reset', async () => {
-    await router.replace({ query: { page, size } });
+    await router.replace({ path: '/', query: { page, size } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
     });
-    await wrapper.vm.$router.replace({ query: null });
+    await wrapper.vm.$router.replace({ path: '/', query: null });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.page).toEqual('1');
     expect(wrapper.vm.size).toEqual('10');
   });
 
   it('At "prev" page, changes query and emits event', async () => {
-    await router.replace({ query: { page, size } });
+    await router.replace({ path: '/', query: { page, size } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
     });
-    wrapper._emitted.input = []; // reset emitted events
-    wrapper.vm.prev();
+    await wrapper.vm.prev();
     expect(wrapper.emitted().input).toBeTruthy();
     expect(wrapper.vm.$route.query.page).toBe(`${page - 1}`);
   });
 
   it('At "next" page, changes query and emits event', async () => {
-    await router.replace({ query: { page, size } });
+    await router.replace({ path: '/', query: { page, size } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
     });
-    wrapper._emitted.input = []; // reset emitted events
-    wrapper.vm.next();
+    await wrapper.vm.next();
     expect(wrapper.emitted().input).toBeTruthy();
     expect(wrapper.vm.$route.query.page).toBe(`${+page + 1}`);
   });
 
   it('At "sizeChange", changes query and emits event', async () => {
     const newSize = '40';
-    await router.replace({ query: { page, size } });
+    await router.replace({ path: '/', query: { page, size } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
     });
-    wrapper._emitted.input = []; // reset emitted events
-    wrapper.vm.sizeChange(newSize);
+    await wrapper.vm.sizeChange(newSize);
     expect(wrapper.emitted().input).toBeTruthy();
     expect(wrapper.vm.$route.query.size).toBe(newSize);
   });

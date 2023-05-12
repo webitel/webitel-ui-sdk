@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    <wt-table>
+      <template v-slot:table-footer>
+        footer!
+      </template>
+    </wt-table>
     <wt-tooltip>
       <template v-slot:activator>
         <wt-icon icon="edit"></wt-icon>

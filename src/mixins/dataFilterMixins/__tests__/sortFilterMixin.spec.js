@@ -4,7 +4,7 @@ import sortFilterMixin from '../sortFilterMixin';
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [],
+  routes: [{ path: '/', name: 'jest' }],
 });
 
 const headers = [{
@@ -27,8 +27,8 @@ describe('Sort filter mixin', () => {
     data: () => ({ headers }),
   };
 
-  beforeEach(() => {
-    router.replace('/');
+  beforeEach(async () => {
+    await router.replace('/');
     wrapper = shallowMount(Component, {
       global: { plugins: [router] },
     });
@@ -40,10 +40,10 @@ describe('Sort filter mixin', () => {
     expect(queue.sort).toEqual('asc');
   });
 
-  it('After "sort" trigger, header column sort value changes properly', () => {
+  it('After "sort" trigger, header column sort value changes properly', async () => {
     let queue;
     queue = wrapper.vm.headers.find((header) => header.value === 'queue');
-    wrapper.vm.sort(queue);
+    await wrapper.vm.sort(queue);
     queue = wrapper.vm.headers.find((header) => header.value === 'queue');
     expect(queue.sort).toEqual('asc');
   });
@@ -51,7 +51,7 @@ describe('Sort filter mixin', () => {
   it('After "sort" trigger, url query changes properly', async () => {
     await router.replace({ path: '/', query: { sort: '+queue' } });
     const queue = wrapper.vm.headers.find((header) => header.value === 'queue');
-    wrapper.vm.sort(queue);
+    await wrapper.vm.sort(queue);
     expect(wrapper.vm.$route.query.sort).toEqual('-queue');
   });
 });

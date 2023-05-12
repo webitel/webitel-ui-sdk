@@ -2,9 +2,9 @@ import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
 import apiFilterMixin from '../apiFilterMixin';
 
-const router = new createRouter({
+const router = createRouter({
   history: createWebHistory(),
-  routes: [],
+  routes: [{ path: '/', name: 'jest' }],
 });
 const team = ['1', '2'];
 
@@ -25,7 +25,7 @@ describe('API filter mixin', () => {
   it('Correctly sets value from $route query', async () => {
     await router.replace({ query: { team } });
     wrapper = shallowMount(Component, {
-      plugins: [router],
+      global: { plugins: [router] },
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.value).toEqual(team);
@@ -33,8 +33,7 @@ describe('API filter mixin', () => {
 
   it('Sets empty array value if $route query is empty', async () => {
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
       data: () => ({
         filterQuery: 'queue',
       }),
@@ -45,8 +44,7 @@ describe('API filter mixin', () => {
   it('Resets value after $route query reset', async () => {
     await router.replace({ query: { team } });
     wrapper = shallowMount(Component, {
-      localVue,
-      router,
+      global: { plugins: [router] },
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.value).toEqual(team);

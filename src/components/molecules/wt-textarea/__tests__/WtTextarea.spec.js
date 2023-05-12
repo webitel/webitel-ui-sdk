@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import WtTextarea from '../wt-textarea.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 
@@ -14,7 +14,7 @@ describe('WtTextarea', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtTextarea, {
+    const wrapper = mount(WtTextarea, {
       stubs: {
         WtLabel,
       },
