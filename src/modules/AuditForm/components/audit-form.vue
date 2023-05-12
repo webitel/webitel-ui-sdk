@@ -132,7 +132,7 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
   },
 });
 
-watch(v$, () => emit('update:validation', { invalid: isInvalidForm, v$ }));
+watch(v$, () => emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }));
 watchEffect(initResult);
 
 onMounted(() => {
