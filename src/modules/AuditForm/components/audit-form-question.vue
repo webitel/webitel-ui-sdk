@@ -47,6 +47,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  closeFirst: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits([
@@ -99,7 +103,7 @@ function activateQuestion() {
 // initialize validations
 onMounted(() => {
   v$.value.$touch();
-  if (props.first) activateQuestion();
+  if (props.first && !props.closeFirst) activateQuestion();
 });
 </script>
 

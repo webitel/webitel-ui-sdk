@@ -13,6 +13,8 @@
         :mode="mode"
         :first="key === 0"
         :readonly="readonly"
+        :close-first="isCloseFirstQuestion"
+        :class="{'audit-form-question--sort-ignore': key === 0}"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
@@ -70,6 +72,7 @@ const emit = defineEmits([
 const v$ = useVuelidate();
 
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
+const isCloseFirstQuestion = ref(false);
 
 function addQuestion({ index, question } = {}) {
   const questions = [...props.questions];
@@ -98,9 +101,11 @@ function deleteQuestion({ key }) {
 }
 
 function changeQuestionsOrder({ oldIndex, newIndex }) {
+  if (newIndex === 0) return;
   const questions = [...props.questions];
   const [el] = questions.splice(oldIndex, 1);
   questions.splice(newIndex, 0, el);
+  isCloseFirstQuestion.value = true;
   emit('update:questions', questions);
 }
 
@@ -126,6 +131,7 @@ const sortableWrapper = ref(null);
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
   handle: '.audit-form-question-read__drag-icon',
   disabled: props.mode !== 'create',
+  filter: '.audit-form-question--sort-ignore',
   onEnd: ({ newIndex, oldIndex }) => {
     if (newIndex === oldIndex) return;
     changeQuestionsOrder({ oldIndex, newIndex });
