@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-datepicker mode="datetime"></wt-datepicker>
     <wt-table>
       <template v-slot:table-footer>
         footer!
