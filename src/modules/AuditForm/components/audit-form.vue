@@ -7,13 +7,13 @@
     >
       <audit-form-question
         v-for="(question, key) of questions"
+        ref="auditQuestions"
         :key="key"
         :question="question"
         :result="(result && result[key]) ? result[key] : null"
         :mode="mode"
         :first="key === 0"
         :readonly="readonly"
-        :close-first="isCloseFirstQuestion"
         :class="{'audit-form-question--sort-ignore': key === 0}"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
@@ -72,14 +72,15 @@ const emit = defineEmits([
 const v$ = useVuelidate();
 
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
-const isCloseFirstQuestion = ref(false);
+const auditQuestions = ref(null);
 
-function addQuestion({ index, question } = {}) {
+async function addQuestion({ index, question } = {}) {
   const questions = [...props.questions];
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);
   else questions.push(newQuestion);
-  emit('update:questions', questions);
+  await emit('update:questions', questions);
+  auditQuestions.value.at(index || -1).activateQuestion();
 }
 
 function handleQuestionUpdate({ key, value }) {
@@ -105,7 +106,6 @@ function changeQuestionsOrder({ oldIndex, newIndex }) {
   const questions = [...props.questions];
   const [el] = questions.splice(oldIndex, 1);
   questions.splice(newIndex, 0, el);
-  isCloseFirstQuestion.value = true;
   emit('update:questions', questions);
 }
 
@@ -143,6 +143,7 @@ watchEffect(initResult);
 
 onMounted(() => {
   initQuestions();
+  auditQuestions.value.at(0).activateQuestion();
 });
 </script>
 

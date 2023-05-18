@@ -47,10 +47,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  closeFirst: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const emits = defineEmits([
@@ -100,10 +96,11 @@ function activateQuestion() {
   state.value = QuestionState.EDIT;
 }
 
+defineExpose({ activateQuestion });
+
 // initialize validations
 onMounted(() => {
   v$.value.$touch();
-  if (props.first && !props.closeFirst) activateQuestion();
 });
 </script>
 
