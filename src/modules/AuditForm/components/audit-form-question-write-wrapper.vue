@@ -44,7 +44,7 @@
           :options="QuestionType"
           track-by="value"
           :clearable="false"
-          :label="$t('vocabulary.type')"
+          :label="$t('webitelUI.auditForm.answerType')"
           @input="handleQuestionTypeChange($event.value)"
         ></wt-select>
       </div>
