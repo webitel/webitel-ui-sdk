@@ -123,7 +123,7 @@ function initResult() {
 function initQuestions() {
   if (props.mode === 'create' && !props.questions.length) {
     addQuestion({ question: generateQuestionSchema({ required: true }) });
-  }
+  } else if (props.questions.length) auditQuestions.value.at(0).activateQuestion();
 }
 
 const sortableWrapper = ref(null);
@@ -143,7 +143,6 @@ watchEffect(initResult);
 
 onMounted(() => {
   initQuestions();
-  auditQuestions.value.at(0).activateQuestion();
 });
 </script>
 

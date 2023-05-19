@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils';
+import { ref } from 'vue';
 import AuditForm from '../audit-form.vue';
 import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema';
 
@@ -8,17 +9,16 @@ import {
 
 jest.mock('../../composables/useDestroyableSortable');
 
-useDestroyableSortable.mockImplementation(() => ({}));
+useDestroyableSortable.mockImplementation(() => ({ reloadSortable: ref(false) }));
 
 describe('AuditForm', () => {
-  it('renders a component', () => {
+  it('renders a component', async () => {
     const wrapper = mount(AuditForm, {
       props: {
         mode: '',
         questions: [],
       },
     });
-     wrapper.vm.$refs.auditQuestions.value.at(0).activateQuestion = jest.fn()
     expect(wrapper.isVisible()).toBe(true);
   });
   it('add question button triggers update question event', async () => {
@@ -28,8 +28,11 @@ describe('AuditForm', () => {
         questions: [],
       },
     });
-    wrapper.vm.$refs.auditQuestions.value.at(0).activateQuestion = jest.fn()
     await wrapper.findComponent('.audit-form__add-button').vm.$emit('click');
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+    console.info(wrapper.html());
     expect(wrapper.emitted()['update:questions'][0][0])
     .toEqual([generateQuestionSchema({ required: true })]);
   });
@@ -40,7 +43,6 @@ describe('AuditForm', () => {
         questions: [generateQuestionSchema()],
       },
     });
-    wrapper.vm.$refs.auditQuestions.value.at(0).activateQuestion = jest.fn()
     await wrapper.findComponent({ name: 'audit-form-question' }).vm.$emit('delete', { key: 0 });
     expect(wrapper.emitted()['update:questions'][0][0])
     .toEqual([]);
@@ -53,7 +55,6 @@ describe('AuditForm', () => {
         questions: [question],
       },
     });
-    wrapper.vm.$refs.auditQuestions.value.at(0).activateQuestion = jest.fn()
     await wrapper.findComponent({ name: 'audit-form-question' }).vm.$emit('copy', { question, key: 0 });
     expect(wrapper.emitted()['update:questions'][0][0])
     .toEqual([question, question]);
@@ -65,7 +66,6 @@ describe('AuditForm', () => {
         questions: [generateQuestionSchema(), generateQuestionSchema(), generateQuestionSchema()],
       },
     });
-    wrapper.vm.$refs.auditQuestions.value.at(0).activateQuestion = jest.fn()
     expect(wrapper.emitted()['update:result'][0][0]).toEqual([null, null, null]);
   });
 });
