@@ -9,6 +9,7 @@
         :v="v$.question.min"
         :number-min="0"
         :number-max="19"
+        :label="$t('reusable.from')"
         type="number"
         required
         @input="updateQuestion({ path: 'min', value: $event })"
@@ -18,6 +19,7 @@
         :v="v$.question.max"
         :number-min="1"
         :number-max="20"
+        :label="$t('reusable.to')"
         type="number"
         required
         @input="updateQuestion({ path: 'max', value: $event })"
