@@ -144,7 +144,7 @@ const isDateTime = props.mode === 'datetime';
   }
 
   .dp__input {
-    line-height: 24px;
+    @extend %typo-body-1;
   }
 
   .dp__arrow_top {
@@ -218,5 +218,13 @@ const isDateTime = props.mode === 'datetime';
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xs);
   margin: 0 var(--spacing-xs);
+}
+
+.wt-datepicker__open-arrow {
+  transition: var(--transition);
+
+  &--opened {
+    transform: rotate(180deg);
+  }
 }
 </style>
