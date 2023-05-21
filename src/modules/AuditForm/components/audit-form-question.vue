@@ -3,7 +3,10 @@
     :is="component"
     v-clickaway="saveQuestion"
     :class="[
-     `audit-form-question--mode-${mode}`
+     `audit-form-question--mode-${mode}`,
+     {
+       'audit-form-question--answered': !!result,
+     },
     ]"
     :disable-dragging="mode === 'fill'"
     :first="first"
@@ -109,6 +112,15 @@ onMounted(() => {
   border-radius: var(--border-radius);
   background: var(--main-color);
   box-shadow: var(--elevation-1);
+
+  // override audit-form-question-read-wrapper specificity for hover
+  &.audit-form-question--answered {
+    background: var(--secondary-color-50);
+    &:hover,
+    &:focus-within {
+      border-color: transparent;
+    }
+  }
 
   &--mode-create.audit-form-question-read {
     cursor: pointer;
