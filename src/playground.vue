@@ -1,5 +1,13 @@
 <template>
   <div class="playground">
+    <wt-filters-panel-wrapper>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select></wt-filters-panel-wrapper>
     <wt-datepicker :value="Date.now()"></wt-datepicker>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
