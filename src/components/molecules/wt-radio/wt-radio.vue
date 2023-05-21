@@ -31,12 +31,12 @@
     props: {
       // value, set by radio
       value: {
-        type: [String, Number, Boolean],
+        type: [String, Number, Boolean, Object],
         default: '',
       },
       // currently selected value
       selected: {
-        type: [String, Number, Boolean],
+        type: [String, Number, Boolean, Object],
         default: '',
       },
       label: {

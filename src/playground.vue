@@ -1,17 +1,5 @@
 <template>
   <div class="playground">
-    <wt-datepicker mode="datetime"></wt-datepicker>
-    <wt-table>
-      <template v-slot:table-footer>
-        footer!
-      </template>
-    </wt-table>
-    <wt-tooltip>
-      <template v-slot:activator>
-        <wt-icon icon="edit"></wt-icon>
-      </template>
-      lorem ipsum
-    </wt-tooltip>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
@@ -127,21 +115,21 @@ export default {
   components: { WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     auditQuestions: [
-      // {
-      //   'required': true,
-      //   'question': 'My Anketa number 1',
-      //   'type': EngineAuditQuestionType.Option,
-      //   'options': [
-      //     {
-      //       'name': 'My first var!',
-      //       'score': 5,
-      //     },
-      //     {
-      //       'name': 'My lorem ipsum var!',
-      //       'score': 10,
-      //     },
-      //   ],
-      // },
+      {
+        'required': true,
+        'question': 'My Anketa number 1',
+        'type': EngineAuditQuestionType.Option,
+        'options': [
+          {
+            'name': 'My first var!',
+            'score': 10,
+          },
+          {
+            'name': 'My lorem ipsum var!',
+            'score': 10,
+          },
+        ],
+      },
       // {
       //   'required': true,
       //   'question': 'My anketa number two!',
