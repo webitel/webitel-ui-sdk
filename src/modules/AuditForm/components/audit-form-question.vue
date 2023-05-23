@@ -78,7 +78,7 @@ const v$ = useVuelidate(computed(() => (
       },
     } : {
       result: {
-        required: (value) => (question.value.required ? !!value : true),
+        required: (value) => (question.value.required ? !isEmpty(value) : true),
       },
     })), { question, result }, { $autoDirty: true });
 
