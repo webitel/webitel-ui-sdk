@@ -66,6 +66,6 @@ describe('AuditForm', () => {
         questions: [generateQuestionSchema(), generateQuestionSchema(), generateQuestionSchema()],
       },
     });
-    expect(wrapper.emitted()['update:result'][0][0]).toEqual([null, null, null]);
+    expect(wrapper.emitted()['update:result'][0][0]).toEqual([{}, {}, {}]);
   });
 });

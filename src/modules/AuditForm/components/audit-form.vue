@@ -119,7 +119,7 @@ function handleResultUpdate({ key, value }) {
 }
 
 function initResult() {
-  const result = props.questions.map(() => null);
+  const result = props.questions.map(() => ({}));
   emit('update:result', result);
 }
 

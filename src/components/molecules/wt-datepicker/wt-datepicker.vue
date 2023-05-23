@@ -144,7 +144,7 @@ const isDateTime = props.mode === 'datetime';
   }
 
   .dp__input {
-    line-height: 24px;
+    @extend %typo-body-1;
   }
 
   .dp__arrow_top {
@@ -159,14 +159,24 @@ const isDateTime = props.mode === 'datetime';
     pointer-events: none;
   }
 
+  .dp__month_year_select,
+  .dp__cell_inner {
+    @extend %typo-body-2;
+  }
+
   // reset right/left arrow hover
   .dp__inner_nav:hover {
     background: inherit;
   }
 
   .dp__menu {
+    min-width: 196px;
     border-radius: var(--border-radius);
     box-shadow: var(--elevation-10);
+  }
+
+  .dp__calendar_header_item {
+    @extend %typo-subtitle-2;
   }
 
   .dp__calendar_header_separator {
@@ -175,7 +185,7 @@ const isDateTime = props.mode === 'datetime';
 
   .dp__calendar_header,
   .dp__calendar_row {
-    gap: var(--spacing-xs);
+    gap: var(--spacing-3xs);
   }
 
   // switch to time view
@@ -204,9 +214,17 @@ const isDateTime = props.mode === 'datetime';
 }
 
 .datepicker__timepicker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xs);
+  margin: 0 var(--spacing-xs);
+}
+
+.wt-datepicker__open-arrow {
+  transition: var(--transition);
+
+  &--opened {
+    transform: rotate(180deg);
+  }
 }
 </style>

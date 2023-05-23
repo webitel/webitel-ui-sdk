@@ -3,7 +3,10 @@
     :is="component"
     v-clickaway="saveQuestion"
     :class="[
-     `audit-form-question--mode-${mode}`
+     `audit-form-question--mode-${mode}`,
+     {
+       'audit-form-question--answered': isResult,
+     },
     ]"
     :disable-dragging="mode === 'fill'"
     :first="first"
@@ -24,6 +27,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { computed, onMounted, ref, toRefs } from 'vue';
+import isEmpty from '../../../scripts/isEmpty';
 import vClickaway from '../../../directives/clickaway/clickaway';
 import QuestionRead from './audit-form-question-read-wrapper.vue';
 import QuestionWrite from './audit-form-question-write-wrapper.vue';
@@ -87,6 +91,8 @@ const component = computed(() => {
   return QuestionRead;
 });
 
+const isResult = computed(() => !isEmpty(props.result));
+
 function saveQuestion() {
   state.value = QuestionState.SAVED;
 }
@@ -110,6 +116,15 @@ onMounted(() => {
   border-radius: var(--border-radius);
   background: var(--main-color);
   box-shadow: var(--elevation-1);
+
+  // override audit-form-question-read-wrapper specificity for hover
+  &.audit-form-question--answered {
+    background: var(--secondary-color-50);
+    &:hover,
+    &:focus-within {
+      border-color: transparent;
+    }
+  }
 
   &--mode-create.audit-form-question-read {
     cursor: pointer;

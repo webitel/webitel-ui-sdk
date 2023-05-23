@@ -23,12 +23,12 @@
       class="audit-form-question-options-read"
     >
       <wt-radio
-        v-for="({ name, score }) of question.options"
-        :key="score"
-        :label="name"
-        :selected="result ? result.score : result"
-        :value="score"
-        @input="emit('change:result', { score })"
+        v-for="opt of question.options"
+        :key="opt.score+opt.name"
+        :label="opt.name"
+        :selected="result"
+        :value="opt"
+        @input="emit('change:result', $event)"
       ></wt-radio>
     </div>
     <div v-else>Unknown mode: {{ mode }}</div>

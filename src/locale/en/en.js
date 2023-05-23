@@ -303,6 +303,7 @@ export default {
       option: 'Option | Options',
       score: 'Score | Scores',
       addQuestion: 'Add criteria',
+      answerType: 'Answer type',
       type: {
         options: 'Options',
         score: 'Score',

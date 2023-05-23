@@ -2,7 +2,7 @@
   <article
     class="audit-form-question-read"
     :class="{
-      'audit-form-question-read--filled': result && result.score != null,
+      'audit-form-question-read--filled': isResult && result.score != null,
       'audit-form-question-read--readonly': readonly,
     }"
     @keyup.enter="emit('activate')"
@@ -37,6 +37,7 @@
 <script setup>
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
+import isEmpty from '../../../scripts/isEmpty';
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
 import WtIcon from '../../../components/atoms/wt-icon/wt-icon.vue';
@@ -74,6 +75,8 @@ const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Score) return AuditFormQuestionScore;
   return null;
 });
+
+const isResult = computed(() => !isEmpty(props.result));
 </script>
 
 <style lang="scss" scoped>
