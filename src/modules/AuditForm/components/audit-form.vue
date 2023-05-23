@@ -14,7 +14,6 @@
         :mode="mode"
         :first="key === 0"
         :readonly="readonly"
-        :class="{'audit-form-question--sort-ignore': key === 0}"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
