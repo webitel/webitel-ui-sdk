@@ -35,6 +35,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 import {
   watch, watchEffect, ref, computed, onMounted,
+  reactive, nextTick,
 } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { useDestroyableSortable } from '../composables/useDestroyableSortable';
@@ -73,6 +74,7 @@ const v$ = useVuelidate();
 
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
 const auditQuestions = ref(null);
+const isQuestionAdded = reactive({ value: false, index: null });
 
 async function addQuestion({ index, question } = {}) {
   const questions = [...props.questions];
@@ -80,7 +82,8 @@ async function addQuestion({ index, question } = {}) {
   if (index != null) questions.splice(index, 0, newQuestion);
   else questions.push(newQuestion);
   await emit('update:questions', questions);
-  auditQuestions.value.at(index || -1).activateQuestion();
+  isQuestionAdded.value = true;
+  isQuestionAdded.index = index || 'last';
 }
 
 function handleQuestionUpdate({ key, value }) {
@@ -126,6 +129,20 @@ function initQuestions() {
   } else if (props.questions.length) auditQuestions.value.at(0).activateQuestion();
 }
 
+// https://my.webitel.com/browse/WTEL-3451, https://my.webitel.com/browse/WTEL-3436
+// at new question added, activate this question
+async function atQuestionAdded() {
+  // wait for new question to render
+  await nextTick();
+  const index = isQuestionAdded.index && isQuestionAdded.index === 'last'
+    ? -1
+    : isQuestionAdded.index;
+  auditQuestions.value.at(index).activateQuestion();
+
+  isQuestionAdded.value = false;
+  isQuestionAdded.index = null;
+}
+
 const sortableWrapper = ref(null);
 
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
@@ -140,6 +157,10 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 
 watch(v$, () => emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }));
 watchEffect(initResult);
+watch(() => props.questions, () => {
+  if (!isQuestionAdded.value) return;
+ atQuestionAdded();
+});
 
 onMounted(() => {
   initQuestions();
