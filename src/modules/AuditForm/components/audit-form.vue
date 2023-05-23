@@ -7,12 +7,14 @@
     >
       <audit-form-question
         v-for="(question, key) of questions"
+        ref="auditQuestions"
         :key="key"
         :question="question"
         :result="(result && result[key]) ? result[key] : null"
         :mode="mode"
         :first="key === 0"
         :readonly="readonly"
+        :class="{'audit-form-question--sort-ignore': key === 0}"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
@@ -33,6 +35,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 import {
   watch, watchEffect, ref, computed, onMounted,
+  reactive, nextTick,
 } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { useDestroyableSortable } from '../composables/useDestroyableSortable';
@@ -70,13 +73,17 @@ const emit = defineEmits([
 const v$ = useVuelidate();
 
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
+const auditQuestions = ref(null);
+const isQuestionAdded = reactive({ value: false, index: null });
 
-function addQuestion({ index, question } = {}) {
+async function addQuestion({ index, question } = {}) {
   const questions = [...props.questions];
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);
   else questions.push(newQuestion);
-  emit('update:questions', questions);
+  await emit('update:questions', questions);
+  isQuestionAdded.value = true;
+  isQuestionAdded.index = index || 'last';
 }
 
 function handleQuestionUpdate({ key, value }) {
@@ -98,6 +105,7 @@ function deleteQuestion({ key }) {
 }
 
 function changeQuestionsOrder({ oldIndex, newIndex }) {
+  if (newIndex === 0) return;
   const questions = [...props.questions];
   const [el] = questions.splice(oldIndex, 1);
   questions.splice(newIndex, 0, el);
@@ -118,7 +126,21 @@ function initResult() {
 function initQuestions() {
   if (props.mode === 'create' && !props.questions.length) {
     addQuestion({ question: generateQuestionSchema({ required: true }) });
-  }
+  } else if (props.questions.length) auditQuestions.value.at(0).activateQuestion();
+}
+
+// https://my.webitel.com/browse/WTEL-3451, https://my.webitel.com/browse/WTEL-3436
+// at new question added, activate this question
+async function atQuestionAdded() {
+  // wait for new question to render
+  await nextTick();
+  const index = isQuestionAdded.index && isQuestionAdded.index === 'last'
+    ? -1
+    : isQuestionAdded.index;
+  auditQuestions.value.at(index).activateQuestion();
+
+  isQuestionAdded.value = false;
+  isQuestionAdded.index = null;
 }
 
 const sortableWrapper = ref(null);
@@ -126,6 +148,7 @@ const sortableWrapper = ref(null);
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
   handle: '.audit-form-question-read__drag-icon',
   disabled: props.mode !== 'create',
+  filter: '.audit-form-question--sort-ignore',
   onEnd: ({ newIndex, oldIndex }) => {
     if (newIndex === oldIndex) return;
     changeQuestionsOrder({ oldIndex, newIndex });
@@ -134,6 +157,10 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 
 watch(v$, () => emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }));
 watchEffect(initResult);
+watch(() => props.questions, () => {
+  if (!isQuestionAdded.value) return;
+ atQuestionAdded();
+});
 
 onMounted(() => {
   initQuestions();

@@ -102,10 +102,11 @@ function activateQuestion() {
   state.value = QuestionState.EDIT;
 }
 
+defineExpose({ activateQuestion });
+
 // initialize validations
 onMounted(() => {
   v$.value.$touch();
-  if (props.first) activateQuestion();
 });
 </script>
 

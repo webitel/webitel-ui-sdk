@@ -17,7 +17,7 @@
       >{{ question.question }}</p>
       <wt-icon
         class="audit-form-question-read__drag-icon"
-        v-if="!disableDragging"
+        v-if="!disableDragging && !first"
         icon="move"
         color="secondary"
       ></wt-icon>
@@ -56,6 +56,10 @@ const props = defineProps({
     default: false,
   },
   readonly: {
+    type: Boolean,
+    default: false,
+  },
+  first: {
     type: Boolean,
     default: false,
   },
