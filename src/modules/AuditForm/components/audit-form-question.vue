@@ -7,6 +7,9 @@
      {
        'audit-form-question--answered': isResult,
      },
+     {
+       'audit-form-question--sort-ignore': first && mode === 'fill'
+     }
     ]"
     :disable-dragging="mode === 'fill'"
     :first="first"
