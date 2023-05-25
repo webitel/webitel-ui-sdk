@@ -80,9 +80,9 @@ async function addQuestion({ index, question } = {}) {
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);
   else questions.push(newQuestion);
-  await emit('update:questions', questions);
   isQuestionAdded.value = true;
   isQuestionAdded.index = index || 'last';
+  await emit('update:questions', questions);
 }
 
 function handleQuestionUpdate({ key, value }) {
@@ -158,7 +158,7 @@ watch(v$, () => emit('update:validation', { invalid: isInvalidForm.value, v$: v$
 watchEffect(initResult);
 watch(() => props.questions, () => {
   if (!isQuestionAdded.value) return;
- atQuestionAdded();
+  atQuestionAdded();
 });
 
 onMounted(() => {
