@@ -52,7 +52,7 @@
 import deepCopy from 'deep-copy';
 
 export default {
-  name: 'table-column-select-lib',
+  name: 'wt-table-column-select',
   props: {
     headers: {
       type: Array,
@@ -111,7 +111,6 @@ export default {
       this.draft = deepCopy(this.headers);
     },
     setShownColumns() {
-      console.log('this.draft:', this.draft, 'changeableDraft:', this.changeableDraft);
       this.$emit('change', this.draft);
       this.close();
     },
@@ -121,14 +120,18 @@ export default {
 
 <style lang="scss" scoped>
 
+.wt-table-column-select {
+  line-height: 0; // prevent 24x28 icon height :/
+}
+
 .wt-table-column-select__heading {
   text-align: center;
 }
 
 .wt-table-column-select__popup__list {
   @extend %wt-scrollbar;
-  max-height: 48vh;
-  min-width: 550px;
+  max-height: 48vh; // fixme popup fixed sizes
+  min-width: 550px; // fixme popup fixed sizes
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -142,4 +145,5 @@ export default {
   margin-right: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
 }
+
 </style>
