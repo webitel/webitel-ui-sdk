@@ -12,26 +12,33 @@
     <wt-popup
       v-if="isColumnSelectPopup"
       class="wt-table-column-select__popup"
-      :width="popupWidth"
       @close="close"
     >
       <template v-slot:title>
         {{ $t('webitelUI.tableColumnSelect.title') }}
       </template>
       <template v-slot:main>
-        <ul class="wt-table-column-select__popup__list">
-          <li
-            v-for="(column, key) of changeableDraft"
-            :key="key"
-            class="wt-table-column-select__popup__item"
-            @click.capture.prevent="column.show = !column.show"
+        <div class="wt-table-column-select__popup-list-wrap">
+          <ul
+            class="wt-table-column-select__popup-list"
+            :class="{
+            'wt-table-column-select__popup-list--sm': changeableDraft.length > 20,
+            'wt-table-column-select__popup-list--md': changeableDraft.length > 30
+            }"
           >
-            <wt-checkbox
-              v-model="column.show"
-              :label="shownColLabel(column)"
-            ></wt-checkbox>
-          </li>
-        </ul>
+            <li
+              v-for="(column, key) of changeableDraft"
+              :key="key"
+              class="wt-table-column-select__popup-item"
+              @click.capture.prevent="column.show = !column.show"
+            >
+              <wt-checkbox
+                v-model="column.show"
+                :label="shownColLabel(column)"
+              ></wt-checkbox>
+            </li>
+          </ul>
+        </div>
       </template>
       <template v-slot:actions>
         <wt-button
@@ -119,31 +126,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$list-height: 400px;
+$list-width-sm: calc(500px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
+$list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
 
 .wt-table-column-select {
   line-height: 0; // prevent 24x28 icon height :/
 }
+.wt-table-column-select {
+  &__heading {
+    text-align: center;
+  }
 
-.wt-table-column-select__heading {
-  text-align: center;
-}
+  &__popup-list-wrap {
+    max-height: $list-height; // fixme popup fixed sizes
+  }
 
-.wt-table-column-select__popup__list {
-  @extend %wt-scrollbar;
-  max-height: 48vh; // fixme popup fixed sizes
-  min-width: 550px; // fixme popup fixed sizes
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: initial;
-}
+  &__popup-list {
+    @extend %wt-scrollbar;
+    max-height: $list-height;
+    width: $list-width-sm;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-x: hidden;
 
-.wt-table-column-select__popup__item {
-  display: flex;
-  align-items: center;
-  margin-right: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+    // for 20-30 items
+    &--sm {
+      width: $list-width-md;
+    }
+
+    // for 30+ items
+    &--md {
+      max-height: none;
+      display: block;
+      -webkit-column-count: 3; // Chrome, Safari, Opera
+      -moz-column-count: 3; // Firefox
+      column-count: 3;
+      overflow-y: auto;
+    }
+  }
+
+  &__popup-item {
+    display: flex;
+    align-items: center;
+    margin-right: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
 }
 
 </style>
+
