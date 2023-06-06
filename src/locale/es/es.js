@@ -209,7 +209,6 @@ export default {
     requiredArrayValue: 'El campo no debe estar vacío',
     minLength: 'El número de caracteres no debe ser menor que',
     url: 'Se debe ingresar una URL válida',
-    regExpValidator: 'Esta expresión regular no es válida',
   },
   webitelUI: {
     searchBar: {
