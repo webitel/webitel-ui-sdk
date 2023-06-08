@@ -24,7 +24,7 @@
     <section class="audit-form-question-read-content">
       <component
         :is="QuestionTypeComponent"
-        :question="question"
+        :question="completeQuestion"
         :result="result"
         mode="read"
         @change:result="emit('change:result', $event)"
@@ -59,6 +59,22 @@ const emit = defineEmits([
   'change:result',
   'activate',
 ]);
+
+const completeQuestion = computed(() => {
+  if (props.question.type === EngineAuditQuestionType.Option && !props.question.score) {
+    return {
+      ...props.question,
+      score: 0,
+    };
+  }
+  if (props.question.type === EngineAuditQuestionType.Score && !props.question.min) {
+    return {
+      ...props.question,
+      min: 0,
+    };
+  }
+  return props.question;
+});
 
 const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Option) return AuditFormQuestionOptions;

@@ -67,6 +67,7 @@ const v$ = useVuelidate();
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
 
 function addQuestion({ index, question } = {}) {
+  console.log('!addQuestion!');
   const questions = [...props.questions];
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);
@@ -75,6 +76,7 @@ function addQuestion({ index, question } = {}) {
 }
 
 function handleQuestionUpdate({ key, value }) {
+  console.log('!handleQuestionUpdate!');
   const questions = [...props.questions];
   questions[key] = value;
   emit('update:questions', questions);
@@ -100,6 +102,7 @@ function changeQuestionsOrder({ oldIndex, newIndex }) {
 }
 
 function handleResultUpdate({ key, value }) {
+  console.log('handleResultUpdate props.result:', props.result);
   const result = [...props.result];
   result[key] = value;
   emit('update:result', result);
@@ -107,6 +110,7 @@ function handleResultUpdate({ key, value }) {
 
 function initResult() {
   const result = props.questions.map(() => null);
+  console.log('initResult result:', result);
   emit('update:result', result);
 }
 

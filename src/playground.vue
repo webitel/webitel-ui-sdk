@@ -33,7 +33,8 @@
           v-model:result="auditResult"
           mode="fill"
         ></audit-form>
-        {{ auditResult }}
+        auditResult: {{ auditResult }}
+        auditQuestions: {{ auditQuestions }}
       </div>
     </div>
     <wt-navigation-bar
@@ -152,7 +153,7 @@ export default {
         'required': true,
         'question': 'My anketa number two!',
         'type': EngineAuditQuestionType.Score,
-        'min': 1,
+        // 'min': 1,
         'max': 5,
       },
     ],
