@@ -61,17 +61,19 @@ const emit = defineEmits([
 ]);
 
 const completeQuestion = computed(() => {
-  if (props.question.type === EngineAuditQuestionType.Option && !props.question.score) {
-    return {
-      ...props.question,
-      score: 0,
-    };
-  }
   if (props.question.type === EngineAuditQuestionType.Score && !props.question.min) {
+    return { ...props.question, min: 0 };
+    // if props.question doesn't have min field (because we can`t gat 0 from data)
+  }
+  if (props.question.type === EngineAuditQuestionType.Option) {
     return {
       ...props.question,
-      min: 0,
+      options: props.question.options.map((option) => ({
+        ...option,
+        score: option.score || 0,
+      })),
     };
+    // if options in props.question doesn't have score field (because we can`t gat 0 from data)
   }
   return props.question;
 });

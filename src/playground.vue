@@ -25,7 +25,7 @@
           v-model:questions="auditQuestions"
           mode="create"
         ></audit-form>
-        {{ auditQuestions }}
+        auditQuestions: {{ auditQuestions }}
       </div>
       <div>
         <audit-form
@@ -33,8 +33,8 @@
           v-model:result="auditResult"
           mode="fill"
         ></audit-form>
-        auditResult: {{ auditResult }}
-        auditQuestions: {{ auditQuestions }}
+        <p> auditResult: {{ auditResult }} </p>
+        <p> auditQuestions: {{ auditQuestions }} </p>
       </div>
     </div>
     <wt-navigation-bar
