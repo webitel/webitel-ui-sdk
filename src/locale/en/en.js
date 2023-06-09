@@ -23,6 +23,8 @@ export default {
     save: 'Save',
     saveAs: 'SaveAs',
     saved: 'Saved',
+    send: 'Send',
+    start: 'Start',
     close: 'Close',
     add: 'Add',
     cancel: 'Cancel',
@@ -160,7 +162,7 @@ export default {
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
-      section: {
+      sections: {
         [AuditorSections.SCORECARDS]: 'Scorecards',
       },
     },
@@ -301,6 +303,7 @@ export default {
       option: 'Option | Options',
       score: 'Score | Scores',
       addQuestion: 'Add criteria',
+      answerType: 'Answer type',
       type: {
         options: 'Options',
         score: 'Score',

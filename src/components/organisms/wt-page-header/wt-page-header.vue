@@ -9,9 +9,11 @@
     </template>
     <template v-slot:actions>
       <slot name="actions"></slot>
-      <slot name="primary-action">
+      <slot
+        name="primary-action"
+        v-if="!hidePrimary"
+      >
         <wt-button
-          v-if="!hidePrimary"
           :disabled="primaryDisabled"
           @click="primaryAction"
         >
@@ -19,7 +21,7 @@
         </wt-button>
       </slot>
       <wt-button
-        v-if="!hideSecondary"
+        v-if="!hideSecondary && !emptySecondary"
         color="secondary"
         @click="secondaryAction"
       >
@@ -37,6 +39,10 @@ const { t } = useI18n();
 
 const props = defineProps({
   hidePrimary: {
+    type: Boolean,
+    default: false,
+  },
+  hideSecondary: {
     type: Boolean,
     default: false,
   },
@@ -58,7 +64,7 @@ const props = defineProps({
   },
 });
 
-const hideSecondary = computed(() => !(props.secondaryAction || props.secondaryText));
+const emptySecondary = computed(() => !(props.secondaryAction || props.secondaryText));
 </script>
 
 <style lang="scss" scoped>

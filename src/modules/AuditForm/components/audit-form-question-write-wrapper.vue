@@ -4,6 +4,7 @@
       <wt-switcher
         :value="question.required"
         :label="$t('reusable.required')"
+        :disabled="first"
         @change="updateQuestion({ path: 'required', value: $event })"
       ></wt-switcher>
       <div class="audit-form-question-write-header__actions">
@@ -20,7 +21,7 @@
           <template v-slot:activator>
             <wt-icon-btn
               icon="bucket"
-              :disabled="disableDelete"
+              :disabled="first"
               @click="emit('delete')"
             ></wt-icon-btn>
           </template>
@@ -43,7 +44,7 @@
           :options="QuestionType"
           track-by="value"
           :clearable="false"
-          :label="$t('vocabulary.type')"
+          :label="$t('webitelUI.auditForm.answerType')"
           @input="handleQuestionTypeChange($event.value)"
         ></wt-select>
       </div>
@@ -68,8 +69,8 @@ import WtIconBtn from '../../../components/molecules/wt-icon-btn/wt-icon-btn.vue
 import WtInput from '../../../components/molecules/wt-input/wt-input.vue';
 import WtSelect from '../../../components/molecules/wt-select/wt-select.vue';
 
-import AuditFormQuestionOptions from './questions/audit-form-question-options.vue';
-import AuditFormQuestionScore from './questions/audit-form-question-score.vue';
+import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
+import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
 
 import { generateQuestionScoreSchema } from '../schemas/AuditFormQuestionScoreSchema';
 import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema';
@@ -79,9 +80,9 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  disableDelete: {
+  first: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   v: {
     type: Object,

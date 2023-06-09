@@ -2,7 +2,8 @@
   <article
     class="audit-form-question-read"
     :class="{
-      'audit-form-question-read--filled': result && result.score != null,
+      'audit-form-question-read--filled': isResult && result.score != null,
+      'audit-form-question-read--readonly': readonly,
     }"
     @keyup.enter="emit('activate')"
     @click="emit('activate')"
@@ -16,7 +17,7 @@
       >{{ question.question }}</p>
       <wt-icon
         class="audit-form-question-read__drag-icon"
-        v-if="!disableDragging"
+        v-if="!disableDragging && !first"
         icon="move"
         color="secondary"
       ></wt-icon>
@@ -27,7 +28,7 @@
         :question="completeQuestion"
         :result="result"
         mode="read"
-        @change:result="emit('change:result', $event)"
+        @change:result="!readonly && emit('change:result', $event)"
       ></component>
     </section>
   </article>
@@ -36,8 +37,9 @@
 <script setup>
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
-import AuditFormQuestionOptions from './questions/audit-form-question-options.vue';
-import AuditFormQuestionScore from './questions/audit-form-question-score.vue';
+import isEmpty from '../../../scripts/isEmpty';
+import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
+import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
 import WtIcon from '../../../components/atoms/wt-icon/wt-icon.vue';
 
 const props = defineProps({
@@ -46,10 +48,18 @@ const props = defineProps({
     required: true,
   },
   result: {
-    type: Object,
+    type: [Object, null],
     required: true,
   },
   disableDragging: {
+    type: Boolean,
+    default: false,
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
+  first: {
     type: Boolean,
     default: false,
   },
@@ -83,6 +93,8 @@ const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Score) return AuditFormQuestionScore;
   return null;
 });
+
+const isResult = computed(() => !isEmpty(props.result));
 </script>
 
 <style lang="scss" scoped>
@@ -91,6 +103,15 @@ const QuestionTypeComponent = computed(() => {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  border: 1px solid transparent;
+  transition: var(--transition);
+
+  &:not(.audit-form-question-read--readonly) {
+    &:hover,
+    &:focus-within {
+      border: 1px solid var(--accent-color);
+    }
+  }
 
   &:hover,
   &:focus {

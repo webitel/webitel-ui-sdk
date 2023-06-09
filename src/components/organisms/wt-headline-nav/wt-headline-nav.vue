@@ -41,6 +41,7 @@ export default {
 .wt-headline-nav {
   display: flex;
   align-items: center;
+  max-width: 100%;
 }
 
 .wt-headline-nav__wrapper {

@@ -49,7 +49,7 @@ export default {
   methods: {
     sort(column) {
       const order = getNextSortOrder(column.sort);
-      this.setValue({ column, order });
+      return this.setValue({ column, order });
     },
 
     setValue({ column, order }) {
@@ -58,7 +58,7 @@ export default {
         sort: col === column ? order : null,
       }));
       const value = encodeSortQuery({ column, order });
-      this.setValueToQuery({
+      return this.setValueToQuery({
         value,
         filterQuery: this.filterQuery,
       });

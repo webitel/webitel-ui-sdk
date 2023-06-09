@@ -17,7 +17,7 @@ describe('MultiselectMixin', () => {
     const wrapper = shallowMount(Component, {
       props: { options },
     });
-    expect(wrapper.vm.selectOptions).toBe(options);
+    expect(wrapper.vm.selectOptions).toEqual(options);
   });
 
   it('Correctly computes internal search options: search case', async () => {
@@ -27,6 +27,6 @@ describe('MultiselectMixin', () => {
       props: { options, searchMethod: () => ({ items: searchOptions }) },
     });
     await wrapper.vm.$nextTick();
-    expect(wrapper.vm.selectOptions).toBe(searchOptions);
+    expect(wrapper.vm.selectOptions).toEqual(searchOptions);
   });
 });

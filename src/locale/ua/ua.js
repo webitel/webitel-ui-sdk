@@ -21,8 +21,10 @@ export default {
     total: 'Всього',
     ok: 'Ок',
     save: 'Зберегти',
-    saveAs: 'Зберігти як нового',
+    saveAs: 'Зберегти як нового',
     saved: 'Збережено',
+    send: 'Надіслати',
+    start: 'Почати',
     close: 'Закрити',
     add: 'Додати',
     cancel: 'Відмінити',
@@ -32,7 +34,7 @@ export default {
     delete: 'Видалити',
     search: 'Пошук',
     open: 'Відкрити',
-    name: 'Ім\'я',
+    name: 'Назва',
     expand: 'Розгорнути',
     collapse: 'Згорнути',
     generate: 'Згенерувати',
@@ -159,7 +161,7 @@ export default {
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
-      section: {
+      sections: {
         [AuditorSections.SCORECARDS]: 'Анкети',
       },
     },
@@ -263,7 +265,7 @@ export default {
       expandFilters: 'Розкрити фільтри',
     },
     tableColumnSelect: {
-      title: 'Виберіть відображені колонки',
+      title: 'Виберіть колонки',
     },
     statusSelect: {
       online: 'Онлайн',
@@ -298,8 +300,9 @@ export default {
       option: 'Варіант | Варіанти',
       score: 'Бал | Бали',
       addQuestion: 'Додати критерій',
+      answerType: 'Тип відповіді',
       type: {
-        options: 'Критерії',
+        options: 'Варіант',
         score: 'Бал',
       },
     },

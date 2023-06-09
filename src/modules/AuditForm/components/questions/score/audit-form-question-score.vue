@@ -6,12 +6,22 @@
     >
       <wt-input
         :value="question.min"
+        :v="v$.question.min"
+        :number-min="0"
+        :number-max="19"
+        :label="$t('reusable.from')"
         type="number"
+        required
         @input="updateQuestion({ path: 'min', value: $event })"
       ></wt-input>
       <wt-input
         :value="question.max"
+        :v="v$.question.max"
+        :number-min="1"
+        :number-max="20"
+        :label="$t('reusable.to')"
         type="number"
+        required
         @input="updateQuestion({ path: 'max', value: $event })"
       ></wt-input>
     </div>
@@ -24,7 +34,7 @@
         :key="value"
         :label="`${value}`"
         :value="value"
-        :selected="result ? result.score : result"
+        :selected="isResult ? result.score : null"
         @input="emit('change:result', { score: value })"
       ></wt-radio>
     </div>
@@ -32,10 +42,13 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import updateObject from '../../../../scripts/updateObject';
-import WtRadio from '../../../../components/molecules/wt-radio/wt-radio.vue';
-import WtInput from '../../../../components/molecules/wt-input/wt-input.vue';
+import { useVuelidate } from '@vuelidate/core';
+import { maxValue, minValue, required } from '@vuelidate/validators';
+import { computed, onMounted, toRefs } from 'vue';
+import isEmpty from '../../../../../scripts/isEmpty';
+import updateObject from '../../../../../scripts/updateObject';
+import WtRadio from '../../../../../components/molecules/wt-radio/wt-radio.vue';
+import WtInput from '../../../../../components/molecules/wt-input/wt-input.vue';
 
 const props = defineProps({
   question: {
@@ -57,6 +70,29 @@ const emit = defineEmits([
   'change:result',
 ]);
 
+// is needed for useVuelidate, because props.question/props.result isn't reactive
+const { question } = toRefs(props);
+
+const v$ = useVuelidate(
+  computed(() => (
+    {
+      question: {
+        min: {
+          minValue: minValue(0),
+          maxValue: maxValue(9),
+          required,
+        },
+        max: {
+          minValue: minValue(1),
+          maxValue: maxValue(10),
+          required,
+        },
+      },
+    })),
+  { question },
+  { $autoDirty: true },
+);
+
 const scoreRange = computed(() => {
   if (props.question.min > props.question.max) return [];
   const result = [];
@@ -68,9 +104,14 @@ const scoreRange = computed(() => {
   return result;
 });
 
+const isResult = computed(() => !isEmpty(props.result));
+
 function updateQuestion({ path, value }) {
   emit('change:question', updateObject({ obj: props.question, path, value }));
 }
+
+// init validation
+onMounted(() => v$.value.$touch());
 </script>
 
 <style lang="scss" scoped>
@@ -83,7 +124,7 @@ function updateQuestion({ path, value }) {
 
 .audit-form-question-score-read {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: var(--spacing-sm);
 }
 </style>

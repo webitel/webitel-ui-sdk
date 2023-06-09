@@ -16,7 +16,7 @@
         :disabled="disabled"
         @input="inputHandler"
       >
-      <wt-icon :icon="radioIcon"></wt-icon>
+      <wt-icon class="wt-radio__icon" :icon="radioIcon"></wt-icon>
       <!-- @slot Custom input label -->
       <slot name="label" v-bind="{ label, isChecked, disabled }">
         <div v-if="label" class="wt-radio__label">{{ label }}</div>
@@ -31,12 +31,12 @@
     props: {
       // value, set by radio
       value: {
-        type: [String, Number, Boolean],
+        type: [String, Number, Boolean, Object],
         default: '',
       },
       // currently selected value
       selected: {
-        type: [String, Number, Boolean],
+        type: [String, Number, Boolean, Object],
         default: '',
       },
       label: {
@@ -107,6 +107,10 @@
     height: 0;
     opacity: 0;
     pointer-events: none;
+  }
+
+  .wt-radio__icon {
+    flex: 0 0 var(--icon-md-size);
   }
 
   .wt-radio:hover {

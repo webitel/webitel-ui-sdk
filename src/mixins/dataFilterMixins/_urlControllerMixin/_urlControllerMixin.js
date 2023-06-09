@@ -11,7 +11,7 @@ export default {
       });
     },
 
-    setValueToQuery({ filterQuery, value, storedProp = 'id' }) {
+    async setValueToQuery({ filterQuery, value, storedProp = 'id' }) {
       let newValue = '';
       if (Array.isArray(value)) {
         if (value.length && typeof value[0] !== 'object') {
@@ -23,7 +23,7 @@ export default {
         newValue = value;
       }
       if (!deepEqual(this.$route.query[filterQuery], newValue)) {
-        this.changeRouteQuery({
+        await this.changeRouteQuery({
           value: newValue,
           filterQuery,
         });

@@ -1,31 +1,21 @@
 <template>
   <div class="playground">
-    <wt-app-navigator
-      :apps="[{ name: 'audit' }, { name: 'admin' }]"
-    ></wt-app-navigator>
-    <wt-datepicker
-      label="Test 123"
-      v-model="date"
-    ></wt-datepicker>
-    <wt-datepicker
-      label="Test 123"
-      v-model="date"
-      mode="datetime"
-    ></wt-datepicker>
-    {{  date }}
-    <wt-icon-action
-      action="edit"
-    ></wt-icon-action>
-    <wt-icon-action
-      action="delete"
-    ></wt-icon-action>
+    <wt-filters-panel-wrapper>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select>
+      <wt-select></wt-select></wt-filters-panel-wrapper>
+    <wt-datepicker :value="Date.now()"></wt-datepicker>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
           v-model:questions="auditQuestions"
           mode="create"
         ></audit-form>
-        auditQuestions: {{ auditQuestions }}
+        {{ auditQuestions }}
       </div>
       <div>
         <audit-form
@@ -33,8 +23,7 @@
           v-model:result="auditResult"
           mode="fill"
         ></audit-form>
-        <p> auditResult: {{ auditResult }} </p>
-        <p> auditQuestions: {{ auditQuestions }} </p>
+        {{ auditResult }}
       </div>
     </div>
     <wt-navigation-bar
@@ -123,6 +112,7 @@
 
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
+import WtTooltip from './components/atoms/wt-tooltip/wt-tooltip.vue';
 import WtDatepicker from './components/molecules/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
@@ -131,7 +121,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
+  components: { WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     auditQuestions: [
       {
@@ -141,7 +131,7 @@ export default {
         'options': [
           {
             'name': 'My first var!',
-            'score': 5,
+            'score': 10,
           },
           {
             'name': 'My lorem ipsum var!',
@@ -149,13 +139,13 @@ export default {
           },
         ],
       },
-      {
-        'required': true,
-        'question': 'My anketa number two!',
-        'type': EngineAuditQuestionType.Score,
-        // 'min': 1,
-        'max': 5,
-      },
+      // {
+      //   'required': true,
+      //   'question': 'My anketa number two!',
+      //   'type': EngineAuditQuestionType.Score,
+      //   'min': 1,
+      //   'max': 5,
+      // },
     ],
     auditResult: [],
     date: Date.now(),

@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import WtRadio from '../wt-radio.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 import WtIcon from '../../../atoms/wt-icon/wt-icon.vue';
@@ -16,7 +16,7 @@ describe('WtRadio', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtRadio, {
+    const wrapper = mount(WtRadio, {
       stubs: {
         WtLabel,
         WtIcon,
@@ -29,7 +29,7 @@ describe('WtRadio', () => {
   it('toggles passed value at click', () => {
     const selected = '';
     const value = 'jest';
-    const wrapper = shallowMount(WtRadio, {
+    const wrapper = mount(WtRadio, {
       stubs: {
         WtLabel,
         WtIcon,

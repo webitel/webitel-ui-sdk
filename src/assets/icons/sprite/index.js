@@ -114,6 +114,7 @@ import './sort-arrow-down.svg';
 import './sort-arrow-up.svg';
 import './sound-off.svg';
 import './sound-on.svg';
+import './scorecard.svg';
 import './star.svg';
 import './star--filled.svg';
 import './stop.svg';

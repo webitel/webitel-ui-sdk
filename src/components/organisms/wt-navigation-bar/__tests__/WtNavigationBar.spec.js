@@ -60,9 +60,9 @@ describe('WtNavigationBar', () => {
       },
       props: { nav },
     });
-    wrapper.find('.wt-navigation-bar__nav-expansion').trigger('click');
+    await wrapper.find('.wt-navigation-bar__nav-expansion').trigger('click');
     await wrapper.vm.$nextTick();
-    expect(wrapper.find('.wt-navigation-bar__nav-item-link--subnav').attributes('to'))
+    expect(wrapper.findComponent('.wt-navigation-bar__nav-item-link--subnav').attributes('href'))
       .toBe('/2/3');
   });
 });

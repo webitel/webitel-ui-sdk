@@ -9,7 +9,7 @@ describe('WtSelectButton', () => {
 
   it('renders a button content via default slot', () => {
     const content = 'button content';
-    const wrapper = shallowMount(WtSelectButton, {
+    const wrapper = mount(WtSelectButton, {
       slots: {
         default: content,
       },

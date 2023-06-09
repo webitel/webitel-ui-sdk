@@ -26,7 +26,7 @@ describe('Validation mixin', () => {
       props: {
         v: {
           $error: true,
-          email: false,
+          email: { $invalid: true },
         },
       },
     });
@@ -38,7 +38,7 @@ describe('Validation mixin', () => {
       props: {
         v: {
           $error: true,
-          required: false,
+          required: { $invalid: true },
         },
       },
     });

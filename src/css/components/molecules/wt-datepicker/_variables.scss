@@ -6,24 +6,24 @@
 
   /*Sizing*/
   --dp-button-heigh: 32px; /*Size for buttons in overlays*/
-  --dp-month-year-row-height: 32px; /*Height of the month-year select row*/
-  --dp-month-year-row-button-size: 32px; /*Specific height for the next/previous buttons*/
+  --dp-month-year-row-height: 24px; /*Height of the month-year select row*/
+  --dp-month-year-row-button-size: 24px; /*Specific height for the next/previous buttons*/
   --dp-button-icon-height: var(--icon-md-size); /*Icon sizing in buttons*/
-  --dp-cell-size: 32px; /*Width and height of calendar cell*/
+  --dp-cell-size: 24px; /*Width and height of calendar cell*/
   --dp-cell-padding: var(--spacing-2xs); /*Padding in the cell*/
   --dp-common-padding: var(--spacing-xs); /*Common padding used*/
   --dp-input-icon-padding: calc(var(--icon-md-size) + 2 * var(--spacing-xs)); /*Padding on the left side of the input if icon is present*/
   --dp-input-padding: calc(var(--spacing-xs) - 1px) calc(var(--icon-md-size) + 2 * var(--spacing-xs)); /*Padding in the input*/
   //--dp-menu-min-width: 260px; /*Adjust the min width of the menu*/
   --dp-action-buttons-padding: 2px 5px; /*Adjust padding for the action buttons in action row*/
-  --dp-row-maring: var(--spacing-xs); /*Adjust the spacing between rows in the calendar*/
+  --dp-row-maring: var(--spacing-3xs); /*Adjust the spacing between rows in the calendar*/
   --dp-calendar-header-cell-padding: 0.5rem; /*Adjust padding in calendar header cells*/
   --dp-two-calendars-spacing: 10px; /*Space between multiple calendars*/
   --dp-overlay-col-padding: 3px; /*Padding in the overlay column*/
-  --dp-time-inc-dec-button-size: 32px; /*Sizing for arrow buttons in the time picker*/
+  --dp-time-inc-dec-button-size: 24px; /*Sizing for arrow buttons in the time picker*/
 
   /*Font sizes*/
-  --dp-font-size: 14px; /*Default font-size*/
+  --dp-font-size: 12px; /*Default font-size*/
   --dp-preview-font-size: 12px; /*Font size of the date preview in the action row*/
   --dp-time-font-size: 12px; /*Font size in the time picker*/
 

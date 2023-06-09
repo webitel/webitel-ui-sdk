@@ -30,6 +30,7 @@ export default {
   flex-direction: column;
   box-sizing: border-box;
   min-height: 100%;
+  max-width: 100%;
   padding: var(--page-wrapper-padding);
   gap: var(--page-wrapper-section-gap);
 }

@@ -1,19 +1,26 @@
 <template>
   <component
-    class="audit-form-question"
-    :class="[
-     `audit-form-question--mode-${mode}`
-    ]"
-    v-clickaway="saveQuestion"
     :is="component"
+    v-clickaway="saveQuestion"
+    :class="[
+     `audit-form-question--mode-${mode}`,
+     {
+       'audit-form-question--answered': isResult,
+     },
+     {
+       'audit-form-question--sort-ignore': first && mode === 'fill'
+     }
+    ]"
+    :disable-dragging="mode === 'fill'"
+    :first="first"
     :question="question"
+    :readonly="readonly"
     :result="result"
     :v="v$"
-    :disable-dragging="mode === 'fill'"
-    :disable-delete="disableDelete"
+    class="audit-form-question"
+    @activate="activateQuestion"
     @copy="emits('copy')"
     @delete="emits('delete')"
-    @activate="activateQuestion"
     @change:question="emits('update:question', $event)"
     @change:result="emits('update:result', $event)"
   ></component>
@@ -22,10 +29,11 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, ref, toRefs } from 'vue';
+import { computed, onMounted, ref, toRefs } from 'vue';
+import isEmpty from '../../../scripts/isEmpty';
 import vClickaway from '../../../directives/clickaway/clickaway';
-import QuestionWrite from './audit-form-question-write-wrapper.vue';
 import QuestionRead from './audit-form-question-read-wrapper.vue';
+import QuestionWrite from './audit-form-question-write-wrapper.vue';
 
 const props = defineProps({
   question: {
@@ -38,9 +46,13 @@ const props = defineProps({
   mode: {
     type: String,
   },
-  disableDelete: {
+  first: {
     type: Boolean,
-    default: true,
+    default: false,
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -58,25 +70,31 @@ const QuestionState = {
 
 const state = ref(QuestionState.SAVED);
 
-const { question } = toRefs(props);
+// is needed for useVuelidate, because props.question/props.result isn't reactive
+const { question, result } = toRefs(props);
 
-// validate only "create" mode
 const v$ = useVuelidate(computed(() => (
   (props.mode === 'create')
     ? {
       question: {
         question: { required },
       },
-      $autoDirty: true,
-    } : {})), { question });
+    } : {
+      result: {
+        required: (value) => (question.value.required ? !isEmpty(value) : true),
+      },
+    })), { question, result }, { $autoDirty: true });
 
 const component = computed(() => {
+  if (props.readonly) return QuestionRead;
   if (props.mode === 'create') {
     if (state.value === QuestionState.SAVED) return QuestionRead;
     return QuestionWrite;
   }
   return QuestionRead;
 });
+
+const isResult = computed(() => !isEmpty(props.result));
 
 function saveQuestion() {
   state.value = QuestionState.SAVED;
@@ -86,14 +104,30 @@ function activateQuestion() {
   if (props.mode !== 'create') return;
   state.value = QuestionState.EDIT;
 }
+
+defineExpose({ activateQuestion });
+
+// initialize validations
+onMounted(() => {
+  v$.value.$touch();
+});
 </script>
 
 <style lang="scss" scoped>
 .audit-form-question {
   padding: var(--spacing-sm);
-  background: var(--main-color);
   border-radius: var(--border-radius);
+  background: var(--main-color);
   box-shadow: var(--elevation-1);
+
+  // override audit-form-question-read-wrapper specificity for hover
+  &.audit-form-question--answered {
+    background: var(--secondary-color-50);
+    &:hover,
+    &:focus-within {
+      border-color: transparent;
+    }
+  }
 
   &--mode-create.audit-form-question-read {
     cursor: pointer;

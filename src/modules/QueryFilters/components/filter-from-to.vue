@@ -68,7 +68,7 @@ export default {
       const queryValue = this.$route.query[`${this.filterQuery}From`];
       // this.value.from = +queryValue || from;
       const value = { from: +queryValue || from, to: this.value.to };
-      this.setValue({ filter: this.filterQuery, value });
+      return this.setValue({ filter: this.filterQuery, value });
     },
 
     restoreTo() {
@@ -76,23 +76,25 @@ export default {
       const queryValue = this.$route.query[`${this.filterQuery}To`];
       // this.value.to = +queryValue || to;
       const value = { from: this.value.from, to: +queryValue || to };
-      this.setValue({ filter: this.filterQuery, value });
+      return this.setValue({ filter: this.filterQuery, value });
     },
 
     async setFrom(value) {
+      const filterValue = { from: value, to: this.value.to };
+      await this.setValue({ filter: this.filterQuery, value: filterValue });
       await this.setValueToQuery({
         filterQuery: `${this.filterQuery}From`,
         value,
       });
-      this.restoreFrom();
     },
 
     async setTo(value) {
+      const filterValue = { from: this.value.from, to: value };
+      await this.setValue({ filter: this.filterQuery, value: filterValue });
       await this.setValueToQuery({
         filterQuery: `${this.filterQuery}To`,
         value,
       });
-      this.restoreTo();
     },
   },
 

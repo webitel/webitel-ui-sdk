@@ -4,7 +4,7 @@ import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [],
+  routes: [{ path: '/', name: 'jest' }],
 });
 
 const filterQuery = 'team';
@@ -27,21 +27,21 @@ describe('URL Controller mixin Set and Get operations', () => {
 
   it('Array of objects', async () => {
     const value = [{ name: 'team 1', id: '1' }, { name: 'team 2', id: '2' }];
-    wrapper.vm.setValueToQuery({ filterQuery, value });
+    await wrapper.vm.setValueToQuery({ filterQuery, value });
     const queryValue = wrapper.vm.getValueFromQuery({ filterQuery });
     expect(queryValue).toEqual(['1', '2']);
   });
 
   it('Array of values', async () => {
     const value = ['hello', '1'];
-    wrapper.vm.setValueToQuery({ filterQuery, value });
+    await wrapper.vm.setValueToQuery({ filterQuery, value });
     const queryValue = wrapper.vm.getValueFromQuery({ filterQuery });
     expect(queryValue).toEqual(value);
   });
 
   it('String value', async () => {
     const value = 'hello there';
-    wrapper.vm.setValueToQuery({ filterQuery, value });
+    await wrapper.vm.setValueToQuery({ filterQuery, value });
     const queryValue = wrapper.vm.getValueFromQuery({ filterQuery });
     expect(queryValue).toEqual(value);
   });

@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import WtSelect from '../wt-select.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 
@@ -15,7 +15,7 @@ describe('WtSelect', () => {
 
   it('renders label text when passed', () => {
     const label = 'Hello there';
-    const wrapper = shallowMount(WtSelect, {
+    const wrapper = mount(WtSelect, {
       stubs: {
         WtLabel,
         WtIcon: true,

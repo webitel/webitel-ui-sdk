@@ -13,7 +13,7 @@ const options = [{
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [],
+  routes: [{ path: '/', name: 'jest' }],
 });
 
 describe('Enum filter mixin', () => {
@@ -29,7 +29,7 @@ describe('Enum filter mixin', () => {
   };
 
   beforeEach(() => {
-    if (Object.keys(router.currentRoute.query).length) router.replace({ query: null });
+    router.replace({ query: null });
   });
 
   it('Correctly sets value from $route query', async () => {
@@ -51,7 +51,7 @@ describe('Enum filter mixin', () => {
       },
     });
     await wrapper.vm.$nextTick();
-    expect(wrapper.vm.value).toEqual(options[0]);
+    expect(wrapper.vm.value).toEqual([options[0]]);
   });
 
   it('Resets value after $route query reset', async () => {

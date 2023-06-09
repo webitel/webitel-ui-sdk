@@ -12,9 +12,36 @@ export default class TableStoreModule extends BaseStoreModule {
     search: '',
     page: 1,
     sort: '',
+    error: {},
     isLoading: false,
     isNextPage: false,
-    errors: {},
+  };
+
+  getters = {
+    // required fields to send as "fields" param with GET_LIST
+    REQUIRED_FIELDS: () => ['id'],
+
+    // fields to send with GET_LIST
+    FIELDS: (state) => {
+      let fields = state.headers
+      .filter((header) => header.show)
+      .map((header) => header.field);
+      fields = [...new Set(fields)];
+      return fields;
+    },
+
+    // main GET_LIST params collector
+    GET_LIST_PARAMS: (state, getters) => (query) => {
+      const fields = getters.FIELDS.concat(getters.REQUIRED_FIELDS);
+
+      const filters = getters.GET_FILTERS || getters['filters/GET_FILTERS'];
+
+      return {
+        ...query,
+        ...filters,
+        fields,
+      };
+    },
   };
 
   actions = {
@@ -22,14 +49,14 @@ export default class TableStoreModule extends BaseStoreModule {
     BEFORE_SET_DATA_LIST_HOOK: (context, { items, next }) => ({ items, next }),
     AFTER_SET_DATA_LIST_HOOK: (context, { items, next }) => ({ items, next }),
 
-    LOAD_DATA_LIST: async (context, _query) => {
-      const query = { ...context.getters['filters/GET_FILTERS'], ..._query };
+    LOAD_DATA_LIST: async (context, query) => {
+      const params = context.getters.GET_LIST_PARAMS(query);
       try {
         context.commit('SET_LOADING', true);
         let {
           items = [],
           next = false,
-        } = await context.dispatch('api/GET_LIST', { context, params: query });
+        } = await context.dispatch('api/GET_LIST', { context, params });
         /* we should set _isSelected property to all items in tables cause their checkbox selection
         * is based on this property. Previously, this prop was set it api consumers, but now
         * admin-specific were replaced by webitel-sdk consumers and i supposed it will be
@@ -44,7 +71,7 @@ export default class TableStoreModule extends BaseStoreModule {
         context.dispatch('AFTER_SET_DATA_LIST_HOOK', afterHook);
       } catch (err) {
         console.error(err);
-        context.commit('SET_ERRORS', err);
+        context.commit('SET_ERROR', err);
       } finally {
         context.commit('SET_LOADING', false);
       }
@@ -177,8 +204,8 @@ export default class TableStoreModule extends BaseStoreModule {
     SET_LOADING: (state, value) => {
       state.isLoading = value;
     },
-    SET_ERRORS: (state, value) => {
-      state.errors = value;
+    SET_ERROR: (state, value) => {
+      state.error = value;
     },
   };
 

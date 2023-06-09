@@ -23,6 +23,8 @@ export default {
     save: 'Сохранить',
     saveAs: 'Сохранить как нового',
     saved: 'Сохранено',
+    send: 'Отправить',
+    start: 'Начать',
     close: 'Закрыть',
     add: 'Добавить',
     cancel: 'Отменить',
@@ -32,7 +34,7 @@ export default {
     delete: 'Удалить',
     search: 'Поиск',
     open: 'Открыть',
-    name: 'Имя',
+    name: 'Название',
     expand: 'Развернуть',
     collapse: 'Свернуть',
     generate: 'Сгенерировать',
@@ -51,7 +53,7 @@ export default {
     downloadAll: 'Скачать всё',
     warning: 'Предупреждение',
     doNotSave: 'Не сохранять',
-    required: 'Обязательный',
+    required: 'Обязательное',
     copy: 'Скопировать',
     new: 'Новый',
     createdAt: 'Создано',
@@ -159,7 +161,7 @@ export default {
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
-      section: {
+      sections: {
         [AuditorSections.SCORECARDS]: 'Анкеты',
       },
     },
@@ -298,8 +300,9 @@ export default {
       option: 'Вариант | Варианты',
       score: 'Бал | Балы',
       addQuestion: 'Добавить критерий',
+      answerType: 'Тип ответа',
       type: {
-        options: 'Критерии',
+        options: 'Вариант',
         score: 'Бал',
       },
     },

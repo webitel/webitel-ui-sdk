@@ -147,7 +147,7 @@ export default {
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
-      section: {
+      sections: {
         [AuditorSections.SCORECARDS]: 'Formularios',
       },
     },
