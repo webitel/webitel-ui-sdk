@@ -11,12 +11,11 @@
     <h1
       v-if="props.locale"
       class="wt-dummy__title">{{ props.locale }}</h1>
-    <div v-if="props.action">
-      <wt-button
-        @click="emits('create')"
+    <wt-button
+      v-if="props.action"
+      @click="emits('create')"
       >{{ $t('reusable.add') }}
-      </wt-button>
-    </div>
+    </wt-button>
   </div>
 </template>
 
