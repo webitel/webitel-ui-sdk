@@ -30,6 +30,7 @@ export default {
         else if (this.v.sipAccountValidator?.$invalid) validationText = this.$t('validation.sipAccountValidator');
         else if (this.v.minLength?.$invalid) validationText = `${this.$t('validation.minLength')} ${this.v.minLength.$params.min}`;
         else if (this.v.url?.$invalid) validationText = `${this.$t('validation.url')}`;
+        else if (this.v.regExpValidator?.$invalid) validationText = `${this.$t('validation.regExpValidator')}`;
       }
       // eslint-disable-next-line no-restricted-syntax
       for (const { name, text } of this.customValidators) {
