@@ -53,6 +53,7 @@ export default {
       default: false,
     },
   },
+  emits: ['click'],
   computed: {
     iColor() {
       if (this.iconColor) return this.iconColor;
