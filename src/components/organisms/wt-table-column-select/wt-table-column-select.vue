@@ -22,8 +22,10 @@
           <ul
             class="wt-table-column-select__popup-list"
             :class="{
-            'wt-table-column-select__popup-list--sm': changeableDraft.length > 20,
-            'wt-table-column-select__popup-list--md': changeableDraft.length > 30
+            'wt-table-column-select__popup-list--md':
+            changeableDraft.length > 20 && changeableDraft.length <= 30,
+            'wt-table-column-select__popup-list--lg':
+            changeableDraft.length > 30
             }"
           >
             <li
@@ -96,7 +98,7 @@ export default {
   computed: {
     changeableDraft() {
       return this.draft.filter((header) => !this.staticHeaders.includes(header.value)).sort((a, b) => {
-        return a.text > b.text ? 1 : -1;
+        return a.text.localeCompare(b.text);
         // sorting headers for alphabet just in popup
       });
     },
@@ -139,7 +141,7 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
   }
 
   &__popup-list-wrap {
-    max-height: $list-height; // fixme popup fixed sizes
+    max-height: $list-height;
   }
 
   &__popup-list {
@@ -152,16 +154,15 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
     overflow-x: hidden;
 
     // for 20-30 items
-    &--sm {
+    &--md {
       width: $list-width-md;
     }
 
     // for 30+ items
-    &--md {
+    &--lg {
+      width: $list-width-md;
       max-height: none;
       display: block;
-      -webkit-column-count: 3; // Chrome, Safari, Opera
-      -moz-column-count: 3; // Firefox
       column-count: 3;
       overflow-y: auto;
     }
