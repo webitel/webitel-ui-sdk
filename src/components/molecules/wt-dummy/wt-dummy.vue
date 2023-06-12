@@ -12,7 +12,7 @@
       v-if="props.locale"
       class="wt-dummy__title">{{ props.locale }}</h1>
     <wt-button
-      v-if="props.action"
+      v-if="props.showAction"
       @click="emits('create')"
       >{{ $t('reusable.add') }}
     </wt-button>
@@ -28,7 +28,7 @@ const props = defineProps({
   locale: {
     type: String,
   },
-  action: {
+  showAction: {
     type: Boolean,
     default: false,
   },
