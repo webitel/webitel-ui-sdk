@@ -223,6 +223,7 @@ export default {
     requiredArrayValue: 'Поле не должно быть пустым',
     minLength: 'Количество символов не должно быть меньше, чем',
     url: 'Необходимо ввести корректный url-адрес',
+    regExpValidator: 'Не правильное регулярное выражение',
   },
   webitelUI: {
     searchBar: {
