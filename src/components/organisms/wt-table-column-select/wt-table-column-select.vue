@@ -73,9 +73,6 @@ export default {
       default: () => [],
       description: 'Header values to exclude from selection',
     },
-    popupWidth: {
-      type: [Number, String],
-    },
   },
 
   model: {
