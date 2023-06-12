@@ -9,6 +9,7 @@ import { QueueType } from 'webitel-sdk/esm2015/enums';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
 import AuditorSections
   from '../../enums/WebitelApplications/AuditorSections.enum';
+import CrmSections from '../../enums/WebitelApplications/CrmSections.enum';
 import SupervisorSections
   from '../../enums/WebitelApplications/SupervisorSections.enum';
 import WebitelApplications
@@ -163,6 +164,12 @@ export default {
       name: 'Audit',
       sections: {
         [AuditorSections.SCORECARDS]: 'Анкеты',
+      },
+    },
+    [WebitelApplications.CRM]: {
+      name: 'CRM',
+      sections: {
+        [CrmSections.CONTACTS]: 'Контакты',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },

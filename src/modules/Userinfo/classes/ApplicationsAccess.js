@@ -1,5 +1,6 @@
 import deepmerge from 'deepmerge';
 import deepCopy from 'deep-copy';
+import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum';
 import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum';
 import SupervisorSections from '../../../enums/WebitelApplications/SupervisorSections.enum';
 import AdminSections from '../../../enums/WebitelApplications/AdminSections.enum';
@@ -157,6 +158,14 @@ const applicationsAccess = (value = true) => ({
     [AuditorSections.SCORECARDS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.AUDIT}.sections.${AuditorSections.SCORECARDS}`,
+    },
+  },
+  [WebitelApplications.CRM]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WebitelApplications.CRM}.name`,
+    [CrmSections.CONTACTS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACTS}`,
     },
   },
 });

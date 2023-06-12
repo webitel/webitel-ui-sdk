@@ -5,6 +5,7 @@ const WebitelApplications = Object.freeze({
   HISTORY: 'history',
   AUDIT: 'audit',
   ANALYTICS: 'grafana',
+  CRM: 'crm',
 });
 
 export default WebitelApplications;
