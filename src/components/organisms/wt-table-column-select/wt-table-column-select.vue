@@ -18,19 +18,29 @@
         {{ $t('webitelUI.tableColumnSelect.title') }}
       </template>
       <template v-slot:main>
-        <ul class="wt-table-column-select__popup__list">
-          <li
-            v-for="(col, key) of changeableDraft"
-            :key="key"
-            class="wt-table-column-select__popup__item"
-            @click.capture.prevent="col.show = !col.show"
+        <div class="wt-table-column-select__popup-list-wrap">
+          <ul
+            class="wt-table-column-select__popup-list"
+            :class="{
+            'wt-table-column-select__popup-list--md':
+            changeableDraft.length > 20 && changeableDraft.length <= 30,
+            'wt-table-column-select__popup-list--lg':
+            changeableDraft.length > 30
+            }"
           >
-            <wt-checkbox
-              v-model="col.show"
-              :label="shownColLabel(col)"
-            ></wt-checkbox>
-          </li>
-        </ul>
+            <li
+              v-for="(column, key) of changeableDraft"
+              :key="key"
+              class="wt-table-column-select__popup-item"
+              @click.capture.prevent="column.show = !column.show"
+            >
+              <wt-checkbox
+                v-model="column.show"
+                :label="shownColLabel(column)"
+              ></wt-checkbox>
+            </li>
+          </ul>
+        </div>
       </template>
       <template v-slot:actions>
         <wt-button
@@ -84,7 +94,10 @@ export default {
   },
   computed: {
     changeableDraft() {
-      return this.draft.filter((header) => !this.staticHeaders.includes(header.value));
+      return this.draft.filter((header) => !this.staticHeaders.includes(header.value)).sort((a, b) => {
+        return a.text.localeCompare(b.text);
+        // sorting headers for alphabet just in popup
+      });
     },
   },
   methods: {
@@ -112,18 +125,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$list-height: 400px;
+$list-width-sm: calc(500px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
+$list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
+
 .wt-table-column-select {
-  line-height: 0; // prevent 24x28 icon heght :/
+  line-height: 0; // prevent 24x28 icon height :/
+}
+.wt-table-column-select {
+  &__heading {
+    text-align: center;
+  }
+
+  &__popup-list-wrap {
+    max-height: $list-height;
+  }
+
+  &__popup-list {
+    @extend %wt-scrollbar;
+    max-height: $list-height;
+    width: $list-width-sm;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+
+    // for 20-30 items
+    &--md {
+      width: $list-width-md;
+    }
+
+    // for 30+ items
+    &--lg {
+      width: $list-width-md;
+      max-height: none;
+      display: block;
+      column-count: 3;
+      overflow-y: auto;
+    }
+  }
+
+  &__popup-item {
+    display: flex;
+    align-items: center;
+    margin-right: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
 }
 
-.wt-table-column-select__popup__list {
-  @extend %wt-scrollbar;
-  overflow: auto;
-  width: 550px; // fixme popup fixed sizes
-  max-height: 35vh; // fixme popup fixed sizes
-}
-
-.wt-table-column-select__popup__item {
-  margin-bottom: var(--spacing-xs);
-}
 </style>
+
