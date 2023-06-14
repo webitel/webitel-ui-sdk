@@ -64,6 +64,7 @@ export default {
     general: 'Общее',
     generalInfo: 'Общая информация',
     all: 'Все {entity}',
+    upload: 'Загрузить',
   },
   vocabulary: {
     language: 'Язык',

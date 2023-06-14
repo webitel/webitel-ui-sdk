@@ -64,6 +64,7 @@ export default {
     general: 'General',
     generalInfo: 'General info',
     all: 'All {entity}',
+    upload: 'Upload',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
