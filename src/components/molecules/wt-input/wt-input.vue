@@ -31,7 +31,7 @@
         :min="numberMin"
         :placeholder="placeholder || label"
         :type="inputType"
-        :value="value || modelValue"
+        :value="validValue"
         class="wt-input__input"
         @input="inputHandler"
         @keyup="$emit('keyup', $event)"
@@ -199,6 +199,11 @@ export default {
   },
 
   computed: {
+    validValue() {
+      return this.value || this.value === 0 ? this.value : this.modelValue;
+      // because value = 0 is valid
+    },
+
     hasLabel() {
       return !!(this.label || this.$slots.label);
     },
