@@ -1,4 +1,4 @@
-import Vue, { createApp } from 'vue';
+import { createApp } from 'vue';
 import FloatingVue from 'floating-vue';
 import 'floating-vue/dist/style.css';
 import App from './the-app.vue';
