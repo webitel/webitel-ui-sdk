@@ -19,6 +19,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'max-len': 'off',
     indent: 'off',
+    'no-param-reassign': ['error', { props: false }],
   },
   overrides: [
     {
