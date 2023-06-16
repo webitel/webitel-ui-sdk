@@ -31,7 +31,7 @@
         :min="numberMin"
         :placeholder="placeholder || label"
         :type="inputType"
-        :value="validValue"
+        :value="inputValue"
         class="wt-input__input"
         @input="inputHandler"
         @keyup="$emit('keyup', $event)"
@@ -80,14 +80,12 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: '',
     },
     /**
      * Current input modelValue (`v-model`)
      */
     modelValue: {
       type: [String, Number],
-      default: '',
     },
     /**
      * Form input label
@@ -199,9 +197,8 @@ export default {
   },
 
   computed: {
-    validValue() {
-      return this.value || this.value === 0 ? this.value : this.modelValue;
-      // because value = 0 is valid
+    inputValue() {
+      return this.value !== undefined ? this.value : this.modelValue;
     },
 
     hasLabel() {
