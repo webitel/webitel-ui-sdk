@@ -5,6 +5,7 @@ import './arrow-down.svg';
 import './arrow-left.svg';
 import './arrow-right.svg';
 import './arrow-up.svg';
+import './arrow-mix.svg';
 import './attach.svg';
 import './attention.svg';
 import './back.svg';
