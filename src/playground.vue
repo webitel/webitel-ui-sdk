@@ -1,5 +1,13 @@
 <template>
   <div class="playground">
+    <wt-tooltip>
+      <template v-slot:activator>
+        <div class="my-div">
+          Hover me!
+        </div>
+      </template>
+      Hello there!
+    </wt-tooltip>
     <wt-button-select
       :options="[
         { text: 'ipsum 2' },{ text: 'ipsum 2' },{ text: 'ipsum 2' },

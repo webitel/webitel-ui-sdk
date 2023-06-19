@@ -139,9 +139,12 @@ const unsubscribeTriggers = () => {
 };
 
 const { floatingStyles } = useFloating(activator, floating, {
-  placement: props.placement,
+  placement: props.placement === 'auto' ? null : props.placement,
   // https://floating-ui.com/docs/middleware
-  middleware: [shift(), flip(), offset(8)],
+  middleware: [
+    shift(), flip(), offset(8),
+    props.placement === 'auto' ? autoPlacement() : null,
+  ],
 });
 
 watch(props.visible, (value) => {
