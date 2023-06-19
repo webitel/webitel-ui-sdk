@@ -15,16 +15,19 @@
     <div
       ref="floating"
       class="wt-tooltip__floating"
+      v-clickaway="hideTooltip"
       :class="[popperClass]"
       :style="floatingStyles"
     >
-      <slot></slot>
+      <slot v-bind="{ hide: hideTooltip }"></slot>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import {
+  ref, onMounted, onBeforeUnmount, watch,
+} from 'vue';
 import {
   useFloating, autoPlacement, shift, flip, offset,
 } from '@floating-ui/vue';
@@ -48,6 +51,10 @@ const HIDE_EVENT_MAP = {
 };
 
 const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false,
+  },
   contrast: {
     type: Boolean,
     default: false,
@@ -75,7 +82,7 @@ const floating = ref(null);
 
 const isVisible = ref(false);
 
-const showTooltip = (event) => {
+const showTooltip = (event = {}) => {
   if (isVisible.value) return;
   isVisible.value = true;
 
@@ -83,7 +90,7 @@ const showTooltip = (event) => {
   event.usedByTooltip = true;
 };
 
-const hideTooltip = (event) => {
+const hideTooltip = (event = {}) => {
   if (event.usedByTooltip) return;
   isVisible.value = false;
 };
@@ -132,11 +139,20 @@ const unsubscribeTriggers = () => {
 };
 
 const { floatingStyles } = useFloating(activator, floating, {
+  placement: props.placement,
   // https://floating-ui.com/docs/middleware
-  middleware: [autoPlacement(), shift(), flip(), offset(8)],
+  middleware: [shift(), flip(), offset(8)],
 });
 
-onMounted(() => subscribeTriggers());
+watch(props.visible, (value) => {
+  if (value) showTooltip();
+  else hideTooltip();
+});
+
+onMounted(() => {
+  subscribeTriggers();
+  if (props.visible) showTooltip();
+});
 onBeforeUnmount(() => unsubscribeTriggers());
 </script>
 

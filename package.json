@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "3.1.98",
+  "version": "3.1.99",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -39,7 +39,6 @@
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.0.3",
     "file-saver": "^2.0.2",
-    "floating-vue": "^2.0.0-beta.20",
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "node-polyfill-webpack-plugin": "^1.1.4",

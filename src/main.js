@@ -1,6 +1,4 @@
 import { createApp } from 'vue';
-import FloatingVue from 'floating-vue';
-import 'floating-vue/dist/style.css';
 import App from './the-app.vue';
 import Directives from './directives'; // init all directives
 import Components from './components'; // init all components
@@ -13,9 +11,6 @@ import router from './router';
 
 const app = createApp(App)
 .use(router)
-.use(FloatingVue, {
-  arrowOverflow: true,
-})
 .use(i18n)
 .provide('$eventBus', eventBus);
 

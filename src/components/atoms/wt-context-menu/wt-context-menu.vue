@@ -1,19 +1,21 @@
 <template>
-  <v-dropdown
+  <wt-tooltip
     class="wt-context-menu"
-    :shown="visible"
+    :visible="visible"
     :triggers="['click', 'touch']"
     placement="bottom-end"
   >
-    <slot name="activator"></slot>
-    <template #popper="{ hide }">
+    <template v-slot:activator>
+      <slot name="activator"></slot>
+    </template>
+    <template v-slot:default="{ hide }">
       <ul
         class="wt-context-menu__menu"
         :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
       >
         <li
           class="wt-context-menu__option-wrapper"
-          v-for="(option, index) in options"
+          v-for="(option, index) of options"
           :key="index"
         >
           <!--      <a> click.prevent prevents redirect to # -->
@@ -29,47 +31,47 @@
         </li>
       </ul>
     </template>
-  </v-dropdown>
+  </wt-tooltip>
 </template>
 
-<script>
-export default {
-  name: 'wt-context-menu',
-  props: {
-    options: {
-      type: Array,
-      required: true,
-      description: '[{ text }] or [\'str\']',
-    },
-    visible: {
-      type: Boolean,
-      default: false,
-    },
-    width: {
-      type: [String],
-      default: 'auto',
-    },
-    minWidth: {
-      type: [String],
-      default: '160px',
-    },
-    maxWidth: {
-      type: [String],
-      default: '300px',
-    },
+<script setup>
+const props = defineProps({
+  options: {
+    type: Array,
+    required: true,
+    description: '[{ text }]',
   },
-  methods: {
-    handleOptionClick({ option, index, hide }) {
-      this.$emit('click', { option, index });
-      hide();
-    },
+  visible: {
+    type: Boolean,
   },
-};
+  width: {
+    type: [String],
+    default: 'auto',
+  },
+  minWidth: {
+    type: [String],
+    default: '160px',
+  },
+  maxWidth: {
+    type: [String],
+    default: '300px',
+  },
+});
+
+function handleOptionClick({ option, index, hide }) {
+  this.$emit('click', { option, index });
+  hide();
+}
+
 </script>
 
 <style lang="scss" scoped>
 .wt-context-menu {
   line-height: 0;
+
+  &.wt-tooltip :deep(.wt-tooltip__floating) {
+  padding: 0;
+}
 }
 
 .wt-context-menu__menu {
@@ -85,14 +87,17 @@ export default {
   &:first-of-type {
     border-radius: var(--border-radius) var(--border-radius) 0 0;
   }
+
   &:last-of-type {
     border-radius: 0 0 var(--border-radius) var(--border-radius);
   }
+
   &:only-of-type {
     border-radius: var(--border-radius);
   }
+
   &:hover {
-    background-color: var( --context-menu-option-color--hover);
+    background-color: var(--context-menu-option-color--hover);
     transition: var(--transition);
   }
 }

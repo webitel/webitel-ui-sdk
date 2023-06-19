@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    <wt-button-select
+      :options="[
+        { text: 'ipsum 2' },{ text: 'ipsum 2' },{ text: 'ipsum 2' },
+      ]"
+    ></wt-button-select>
     <wt-tooltip contrast :triggers="['click']">
       <template v-slot:activator>
         <wt-icon icon="edit"></wt-icon>

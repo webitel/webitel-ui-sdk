@@ -1,7 +1,4 @@
 /* eslint-disable */
-import LibVue from 'vue';
-import FloatingVue from 'floating-vue';
-import 'floating-vue/dist/style.css';
 import Components from './components'; // init all components
 import Directives from './directives'; // init all directives
 import './css/styleguide/fonts/_fonts.scss';
@@ -22,6 +19,5 @@ export default {
     });
     app.provide('$eventBus', eventBus);
     if (router) app.use(router);
-    app.use(FloatingVue);
   },
 };
