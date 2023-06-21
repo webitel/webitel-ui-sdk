@@ -59,8 +59,12 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits([
+  'click',
+]);
+
 function handleOptionClick({ option, index, hide }) {
-  this.$emit('click', { option, index });
+  emit('click', { option, index });
   hide();
 }
 
