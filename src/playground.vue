@@ -1,6 +1,6 @@
 <template>
   <div class="playground">
-    <wt-tooltip>
+    <wt-tooltip :triggers="['click']" :popper-triggers="['click']">
       <template v-slot:activator>
         <div class="my-div">
           Hover me!

@@ -12,44 +12,31 @@
     >
       <slot name="activator"></slot>
     </div>
-    <div
+    <wt-tooltip-floating
       v-if="isVisible"
       ref="floating"
       class="wt-tooltip__floating"
       v-clickaway="hideTooltip"
       :class="[popperClass]"
       :style="floatingStyles"
+      :triggers="popperTriggers"
+      @show="showTooltip"
+      @hide="hideTooltip"
     >
       <slot v-bind="{ hide: hideTooltip }"></slot>
-    </div>
+    </wt-tooltip-floating>
   </div>
 </template>
 
 <script setup>
 import {
-  ref, onMounted, onBeforeUnmount, watch,
+  ref, onMounted, watch,
 } from 'vue';
 import {
   useFloating, autoPlacement, shift, flip, offset, autoUpdate,
 } from '@floating-ui/vue';
-
-// https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/util/events.ts
-const SHOW_EVENT_MAP = {
-  hover: 'mouseenter',
-  focus: 'focus',
-  click: 'click',
-  touch: 'touchstart',
-  pointer: 'pointerdown',
-};
-
-// https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/util/events.ts
-const HIDE_EVENT_MAP = {
-  hover: 'mouseleave',
-  focus: 'blur',
-  click: 'click',
-  touch: 'touchend',
-  pointer: 'pointerup',
-};
+import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions';
+import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
 
 const props = defineProps({
   visible: {
@@ -96,49 +83,6 @@ const hideTooltip = (event = {}) => {
   isVisible.value = false;
 };
 
-const subscribeTriggers = () => {
-  const setEventListeners = (target, triggers) => {
-    triggers.forEach((trigger) => {
-      const showEvent = SHOW_EVENT_MAP[trigger];
-      if (showEvent) {
-        target.addEventListener(showEvent, showTooltip);
-      } else {
-        console.log(`No Tooltip Show event for ${trigger} trigger`);
-      }
-      const hideEvent = HIDE_EVENT_MAP[trigger];
-      if (hideEvent) {
-        target.addEventListener(hideEvent, hideTooltip);
-      } else {
-        console.log(`No Tooltip Hide event for ${trigger} trigger`);
-      }
-    });
-  };
-
-  setEventListeners(activator.value, props.triggers);
-  setEventListeners(floating.value, props.popperTriggers);
-};
-const unsubscribeTriggers = () => {
-  const unsetEventListeners = (target, triggers) => {
-    triggers.forEach((trigger) => {
-      const showEvent = SHOW_EVENT_MAP[trigger];
-      if (showEvent) {
-        target.removeEventListener(showEvent, showTooltip);
-      } else {
-        console.log(`No Tooltip Show event for ${trigger} trigger`);
-      }
-      const hideEvent = HIDE_EVENT_MAP[trigger];
-      if (hideEvent) {
-        target.removeEventListener(hideEvent, hideTooltip);
-      } else {
-        console.log(`No Tooltip Hide event for ${trigger} trigger`);
-      }
-    });
-  };
-
-  unsetEventListeners(activator.value, props.triggers);
-  unsetEventListeners(floating.value, props.popperTriggers);
-};
-
 // https://floating-ui.com/docs/misc#clipping
 const { floatingStyles } = useFloating(activator, floating, {
   placement: props.placement === 'auto' ? null : props.placement,
@@ -155,16 +99,21 @@ const { floatingStyles } = useFloating(activator, floating, {
   ],
 });
 
+useTooltipTriggerSubscriptions({
+  target: activator,
+  triggers: props.triggers,
+  show: showTooltip,
+  hide: hideTooltip,
+});
+
 watch(props.visible, (value) => {
   if (value) showTooltip();
   else hideTooltip();
 });
 
 onMounted(() => {
-  subscribeTriggers();
   if (props.visible) showTooltip();
 });
-onBeforeUnmount(() => unsubscribeTriggers());
 </script>
 
 <style lang="scss" scoped>
@@ -176,7 +125,7 @@ onBeforeUnmount(() => unsubscribeTriggers());
     line-height: 0;
   }
 
-  &__floating {
+  .wt-tooltip-floating {
     @extend %typo-body-2;
     padding: var(--spacing-2xs) var(--spacing-xs);
     color: var(--contrast-color);
@@ -187,7 +136,7 @@ onBeforeUnmount(() => unsubscribeTriggers());
   }
 
   &--contrast {
-    .wt-tooltip__floating {
+    .wt-tooltip-floating {
       color: var(--main-color);
       background: var(--contrast-color);
     }
