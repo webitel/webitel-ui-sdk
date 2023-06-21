@@ -4,6 +4,7 @@
     :visible="visible"
     :triggers="['click', 'touch']"
     placement="bottom-end"
+    popper-class="wt-context-menu__floating-wrapper"
   >
     <template v-slot:activator>
       <slot name="activator"></slot>
@@ -69,9 +70,9 @@ function handleOptionClick({ option, index, hide }) {
 .wt-context-menu {
   line-height: 0;
 
-  &.wt-tooltip :deep(.wt-tooltip__floating) {
-  padding: 0;
-}
+  &.wt-tooltip :deep(.wt-context-menu__floating-wrapper) {
+    padding: 0;
+  }
 }
 
 .wt-context-menu__menu {

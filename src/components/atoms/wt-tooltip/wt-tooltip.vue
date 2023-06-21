@@ -13,6 +13,7 @@
       <slot name="activator"></slot>
     </div>
     <div
+      v-if="isVisible"
       ref="floating"
       class="wt-tooltip__floating"
       v-clickaway="hideTooltip"
@@ -29,7 +30,7 @@ import {
   ref, onMounted, onBeforeUnmount, watch,
 } from 'vue';
 import {
-  useFloating, autoPlacement, shift, flip, offset,
+  useFloating, autoPlacement, shift, flip, offset, autoUpdate,
 } from '@floating-ui/vue';
 
 // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/util/events.ts
@@ -138,12 +139,19 @@ const unsubscribeTriggers = () => {
   unsetEventListeners(floating.value, props.popperTriggers);
 };
 
+// https://floating-ui.com/docs/misc#clipping
 const { floatingStyles } = useFloating(activator, floating, {
   placement: props.placement === 'auto' ? null : props.placement,
+  strategy: 'fixed', // https://floating-ui.com/docs/computeposition#strategy
   // https://floating-ui.com/docs/middleware
+
+  /* WE SHOULD USE v-if INSTEAD OF OPACITY VISIBILITY
+  TOGGLE BECAUSE OF PERFORMANCE ISSUES, RELATED TO USAGE OF AUTO_UPDATE OF POSITIONS
+  */
+  whileElementsMounted: autoUpdate, // https://floating-ui.com/docs/vue#anchoring
   middleware: [
-    shift(), flip(), offset(8),
-    props.placement === 'auto' ? autoPlacement() : null,
+    shift(), offset(4),
+    props.placement === 'auto' ? autoPlacement() : flip(),
   ],
 });
 
@@ -176,27 +184,12 @@ onBeforeUnmount(() => unsubscribeTriggers());
     border-radius: var(--border-radius);
     box-shadow: var(--elevation-10);
     z-index: 1000;
-    transition: var(--transition);
   }
 
   &--contrast {
     .wt-tooltip__floating {
       color: var(--main-color);
       background: var(--contrast-color);
-    }
-  }
-}
-
-.wt-tooltip {
-  .wt-tooltip__floating {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  &--visible {
-    .wt-tooltip__floating {
-      opacity: 1;
-      pointer-events: auto;
     }
   }
 }

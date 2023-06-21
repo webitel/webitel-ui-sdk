@@ -1,6 +1,13 @@
 import { shallowMount, mount } from '@vue/test-utils';
 import WtSelectButton from '../wt-button-select.vue';
 
+// helps to mock @floating-ui/vue autoUpdate method
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));
+
 describe('WtSelectButton', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(WtSelectButton);
@@ -22,6 +29,9 @@ describe('WtSelectButton', () => {
       data: () => ({
         isOpened: true,
       }),
+      props: {
+        options: [],
+      },
     });
     const wtIcon = wrapper.find('.wt-button-select__select-arrow');
     expect(wtIcon.classes()).toContain('wt-button-select__select-arrow--active');
