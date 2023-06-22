@@ -9,8 +9,8 @@
       >
     </div>
     <h1
-      v-if="props.locale"
-      class="wt-dummy__title">{{ props.locale }}</h1>
+      v-if="props.text"
+      class="wt-dummy__text">{{ props.text }}</h1>
     <wt-button
       v-if="props.showAction"
       @click="emits('create')"
@@ -25,7 +25,7 @@ const props = defineProps({
   src: {
     type: String,
   },
-  locale: {
+  text: {
     type: String,
   },
   showAction: {
@@ -52,7 +52,7 @@ const emits = defineEmits([
   align-items: center;
   justify-content: center;
 
-  &__title {
+  &__text {
     @extend %typo-body-1;
     margin-bottom: var(--spacing-sm);
   }
