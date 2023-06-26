@@ -1,4 +1,8 @@
 import BaseAPIService from './BaseAPIService';
+import applyTransform, {
+  handleUnauthorized,
+  notify,
+} from '../../../api/transformers';
 
 class AuthAPI extends BaseAPIService {
   async setToken(token) {
@@ -19,7 +23,10 @@ class AuthAPI extends BaseAPIService {
       await this._instance.post(url, {});
       this.removeToken();
     } catch (err) {
-      throw err;
+      throw applyTransform(err, [
+        handleUnauthorized,
+        notify,
+      ]);
     }
   }
 }

@@ -1,3 +1,8 @@
+import applyTransform, {
+  handleUnauthorized,
+  notify,
+  snakeToCamel,
+} from '../../../api/transformers';
 import BaseAPIService from './BaseAPIService';
 
 class UserinfoAPI extends BaseAPIService {
@@ -9,9 +14,14 @@ class UserinfoAPI extends BaseAPIService {
     const url = '/userinfo';
     try {
       const response = await this._instance.get(url);
-      return response;
+      return applyTransform(response.data, [
+        snakeToCamel(),
+      ]);
     } catch (err) {
-      throw err;
+      throw applyTransform(err, [
+        handleUnauthorized,
+        notify,
+      ]);
     }
     // }
   }
@@ -20,9 +30,14 @@ class UserinfoAPI extends BaseAPIService {
     const url = 'role/metadata/access';
     try {
       const response = await this._instance.get(url);
-      return response;
+      return applyTransform(response.data, [
+        snakeToCamel(),
+      ]);
     } catch (err) {
-      throw err;
+      throw applyTransform(err, [
+        handleUnauthorized,
+        notify,
+      ]);
     }
   }
 }
