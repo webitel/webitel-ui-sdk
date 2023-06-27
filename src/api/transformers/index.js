@@ -7,6 +7,8 @@ import snakeToCamel from './snakeToCamel/snakeToCamel.transformer';
 import handleUnauthorized from './handleUnauthorized/handleUnauthorized.transformer';
 import notify from './notify/notify.transformer';
 import sanitize from './sanitize/sanitize.transformer';
+import generateUrl from './generateUrl/generateUrl.transformer';
+import mergeEach from './mergeEach/mergeEach.transformer';
 
 export default applyTransform;
 export {
@@ -18,4 +20,6 @@ export {
   snakeToCamel,
   handleUnauthorized,
   sanitize,
+  generateUrl,
+  mergeEach,
 };

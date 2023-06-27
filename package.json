@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "3.2.1",
+  "version": "3.2.3",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -44,6 +44,7 @@
     "jszip-utils": "^0.1.0",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "plyr": "3.6.2",
+    "query-string": "^8.1.0",
     "sortablejs": "^1.15.0",
     "tiny-emitter": "^2.1.0",
     "vue": "^3.2.47",
