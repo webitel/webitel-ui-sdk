@@ -14,7 +14,7 @@
     <wt-button
       v-if="props.showAction"
       @click="emits('create')"
-      >{{ $t('reusable.add') }}
+      >{{ buttonText || $t('reusable.add') }}
     </wt-button>
   </div>
 </template>
@@ -26,6 +26,9 @@ const props = defineProps({
     type: String,
   },
   text: {
+    type: String,
+  },
+  buttonText: {
     type: String,
   },
   showAction: {
