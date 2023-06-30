@@ -2,11 +2,13 @@
   <div class="wt-dummy">
     <div class="wt-dummy__img">
       <img
+        v-if="props.src"
         :src="props.src"
         :width="props.size"
         :height="props.size"
         alt="dummy-picture"
       >
+      <slot></slot>
     </div>
     <h1
       v-if="props.text"
