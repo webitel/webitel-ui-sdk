@@ -17,7 +17,7 @@
           :disabled="primaryDisabled"
           @click="primaryAction"
         >
-          {{ primaryText || t('reusable.add') }}
+          {{ primaryText || $t('reusable.add') }}
         </wt-button>
       </slot>
       <wt-button
@@ -25,17 +25,14 @@
         color="secondary"
         @click="secondaryAction"
       >
-        {{ secondaryText || t('reusable.close') }}
+        {{ secondaryText || $t('reusable.close') }}
       </wt-button>
     </template>
   </wt-headline>
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
-
-const { t } = useI18n();
 
 const props = defineProps({
   hidePrimary: {
