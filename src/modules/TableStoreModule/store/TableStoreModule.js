@@ -50,6 +50,13 @@ export default class TableStoreModule extends BaseStoreModule {
     AFTER_SET_DATA_LIST_HOOK: (context, { items, next }) => ({ items, next }),
 
     LOAD_DATA_LIST: async (context, query) => {
+      /*
+   https://my.webitel.com/browse/WTEL-3560
+   preventively disable isNext to handle case when user is clicking
+    "next" faster than actual request is made
+  */
+      context.commit('SET_IS_NEXT', false);
+
       const params = context.getters.GET_LIST_PARAMS(query);
       try {
         context.commit('SET_LOADING', true);
