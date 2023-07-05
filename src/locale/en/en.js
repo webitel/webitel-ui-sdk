@@ -112,8 +112,8 @@ export default {
         [QueueType.PROGRESSIVE_DIALER]: 'Progressive dialer',
         [QueueType.PREVIEW_DIALER]: 'Preview dialer',
         [QueueType.CHAT_INBOUND_QUEUE]: 'Chat queue',
-        [QueueType.INBOUND_JOB_QUEUE]: 'Inbound job queue',
-        [QueueType.OUTBOUND_JOB_QUEUE]: 'Outbound job queue',
+        [QueueType.INBOUND_JOB_QUEUE]: 'Inbound task queue',
+        [QueueType.OUTBOUND_JOB_QUEUE]: 'Outbound task queue',
       },
     },
     agent: {
