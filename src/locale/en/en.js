@@ -22,7 +22,7 @@ export default {
     total: 'Total',
     ok: 'Ok',
     save: 'Save',
-    saveAs: 'SaveAs',
+    saveAs: 'Save as',
     saved: 'Saved',
     send: 'Send',
     start: 'Start',

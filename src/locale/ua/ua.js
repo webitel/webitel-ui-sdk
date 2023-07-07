@@ -22,7 +22,7 @@ export default {
     total: 'Всього',
     ok: 'Ок',
     save: 'Зберегти',
-    saveAs: 'Зберегти як нового',
+    saveAs: 'Зберегти як',
     saved: 'Збережено',
     send: 'Надіслати',
     start: 'Почати',
