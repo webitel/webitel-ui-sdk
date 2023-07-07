@@ -66,6 +66,7 @@ export default {
       description: 'https://stackoverflow.com/a/11126701',
     },
   },
+  emits: ['click'],
   computed: {
     colorClass() {
       if (!this.disabled) return `${this.color}`;
