@@ -95,7 +95,7 @@ export default {
   computed: {
     changeableDraft() {
       return this.draft.filter((header) => !this.staticHeaders.includes(header.value)).sort((a, b) => {
-        return this.$t(a.locale).localeCompare(this.$t(b.locale));
+        return this.shownColLabel(a).localeCompare(this.shownColLabel(b));
         // sorting headers for alphabet just in popup
       });
     },
