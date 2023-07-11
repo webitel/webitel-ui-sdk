@@ -16,27 +16,9 @@ export const useTableStore = (namespace) => {
 
   const isNext = computed(() => getNamespacedState(store.state, tableNamespace).isNextPage);
 
-  const page = computed(() => getNamespacedState(store.state, tableNamespace).page);
-
-  const size = computed(() => getNamespacedState(store.state, tableNamespace).size);
-
-  const search = computed(() => getNamespacedState(store.state, tableNamespace).search);
-
   const error = computed(() => getNamespacedState(store.state, tableNamespace).errors);
   async function loadData(payload) {
     return store.dispatch(`${tableNamespace}/LOAD_DATA_LIST`, payload);
-  }
-
-  async function setSize(payload) {
-    return store.dispatch(`${tableNamespace}/SET_SIZE`, payload);
-  }
-
-  async function nextPage() {
-    return store.dispatch(`${tableNamespace}/NEXT_PAGE`);
-  }
-
-  async function prevPage() {
-    return store.dispatch(`${tableNamespace}/PREV_PAGE`);
   }
 
   async function patchProperty(payload) {
@@ -58,10 +40,6 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/SET_HEADERS`, payload);
   }
 
-  async function setSearch(payload) {
-    return store.dispatch(`${tableNamespace}/SET_SEARCH`, payload);
-  }
-
   return {
     namespace: tableNamespace,
 
@@ -69,19 +47,12 @@ export const useTableStore = (namespace) => {
     isLoading,
     headers,
     isNext,
-    page,
-    size,
-    search,
     error,
 
     loadData,
-    setSize,
-    nextPage,
-    prevPage,
     patchProperty,
     deleteData,
     sort,
     setHeaders,
-    setSearch,
   };
 };
