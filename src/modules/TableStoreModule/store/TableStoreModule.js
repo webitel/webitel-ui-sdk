@@ -27,8 +27,8 @@ export default class TableStoreModule extends BaseStoreModule {
       .map((header) => header.field);
 
       const getFieldsByFieldValues = (values) => {
-        values.map((passedValue) => state.headers.find(({ value }) => passedValue ===
-          value).field);
+        values.map((passedValue) => state.headers.find(({ value }) => passedValue
+          === value).field);
       };
 
       return [
@@ -52,10 +52,6 @@ export default class TableStoreModule extends BaseStoreModule {
   };
 
   actions = {
-    // HOOKS TO BE OVERRIDEN, IF NEEDED
-    BEFORE_SET_DATA_LIST_HOOK: (context, { items, next }) => ({ items, next }),
-    AFTER_SET_DATA_LIST_HOOK: (context, { items, next }) => ({ items, next }),
-
     LOAD_DATA_LIST: async (context, query) => {
       const params = context.getters.GET_LIST_PARAMS(query);
       try {
@@ -69,44 +65,15 @@ export default class TableStoreModule extends BaseStoreModule {
         * admin-specific were replaced by webitel-sdk consumers and i supposed it will be
         * weird to set this property in each api file through defaultListObject */
         items = items.map((item) => ({ ...item, _isSelected: false }));
-        const afterHook = await context.dispatch('BEFORE_SET_DATA_LIST_HOOK', {
-          items,
-          next,
-        });
-        context.commit('SET_DATA_LIST', afterHook.items);
-        context.commit('SET_IS_NEXT', afterHook.next);
-        context.dispatch('AFTER_SET_DATA_LIST_HOOK', afterHook);
+        context.commit('SET_DATA_LIST', items);
+        context.commit('SET_IS_NEXT', next);
       } catch (err) {
-        console.error(err);
         context.commit('SET_ERROR', err);
       } finally {
         context.commit('SET_LOADING', false);
       }
     },
-    SET_SIZE: async (context, size) => {
-      context.commit('SET_SIZE', size);
-      await context.dispatch('RESET_PAGE');
-    },
-    SET_SEARCH: async (context, search) => {
-      context.commit('SET_SEARCH', search);
-      await context.dispatch('RESET_PAGE');
-    },
-    NEXT_PAGE: (context) => {
-      const page = context.state.page + 1;
-      context.commit('SET_PAGE', page);
-      context.dispatch('LOAD_DATA_LIST');
-    },
-    PREV_PAGE: (context) => {
-      if (context.state.page > 1) {
-        const page = context.state.page - 1;
-        context.commit('SET_PAGE', page);
-        context.dispatch('LOAD_DATA_LIST');
-      }
-    },
-    RESET_PAGE: (context) => {
-      const page = 1;
-      context.commit('SET_PAGE', page);
-    },
+    SET_HEADERS: (context, headers) => context.commit('SET_HEADERS', headers),
     RESTORE_FIELDS_FROM_FILTER: (context, { value }) => {
       const headers = context.state.headers.map((header) => ({
         ...header,
@@ -114,7 +81,6 @@ export default class TableStoreModule extends BaseStoreModule {
       }));
       return context.dispatch('SET_HEADERS', headers);
     },
-    SET_HEADERS: (context, headers) => context.commit('SET_HEADERS', headers),
     SORT: async (context, { header, nextSortOrder }) => {
       const sort = nextSortOrder
         ? `${sortToQueryAdapter(nextSortOrder)}${header.field}`
@@ -134,14 +100,12 @@ export default class TableStoreModule extends BaseStoreModule {
       });
     },
     UPDATE_HEADER_SORT: (context, { header, nextSortOrder }) => {
-      const headers = context.state.headers.map((oldHeader) => {
-        return {
-          ...oldHeader,
-          sort: oldHeader.field === header.field
-            ? nextSortOrder
-            : SortSymbols.NONE,
-        };
-      });
+      const headers = context.state.headers.map((oldHeader) => ({
+        ...oldHeader,
+        sort: oldHeader.field === header.field
+          ? nextSortOrder
+          : SortSymbols.NONE,
+      }));
       context.commit('SET_HEADERS', headers);
     },
     PATCH_ITEM_PROPERTY: async (context, {
@@ -184,29 +148,11 @@ export default class TableStoreModule extends BaseStoreModule {
       context,
       deleted,
     ) => Promise.allSettled(deleted.map((item) => context.dispatch('DELETE_SINGLE', item))),
-    // REMOVE_ITEM: async (context, index) => {
-    //   const id = context.state.dataList[index].id;
-    //   context.commit('REMOVE_ITEM', index);
-    //   try {
-    //     await context.dispatch('DELETE_ITEM', id);
-    //   } catch (err) {
-    //     throw err;
-    //   }
-    // },
   };
 
   mutations = {
     SET_DATA_LIST: (state, items) => {
       state.dataList = items;
-    },
-    SET_SIZE: (state, size) => {
-      state.size = size;
-    },
-    SET_SEARCH: (state, search) => {
-      state.search = search;
-    },
-    SET_PAGE: (state, page) => {
-      state.page = page;
     },
     SET_IS_NEXT: (state, next) => {
       state.isNextPage = next;

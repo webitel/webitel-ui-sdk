@@ -5,6 +5,16 @@ import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 
 export default class FiltersStoreModule extends BaseStoreModule {
   getters = {
+    ROUTER: () => console.error('setup ROUTER getter for filters store'),
+    TABLE_NAMESPACE: () => console.error('setup TABLE_NAMESPACE getter for filters store'),
+
+    GET_FILTER: (state) => (filter) => {
+      if (!state[filter]) return null;
+      const { value, storedProp, multiple } = state[filter];
+      if (multiple) return value.map((item) => item[storedProp]); // if arr, map
+      if (storedProp) return value[storedProp]; // if object and has specific prop, return this prop
+      return value; // else return val
+    },
     GET_FILTERS: (state, getters) => Object.keys(state)
     .reduce((filters, filterKey) => {
       const filterValue = getters.GET_FILTER(filterKey);
@@ -13,13 +23,6 @@ export default class FiltersStoreModule extends BaseStoreModule {
         [filterKey]: filterValue,
       };
     }, {}),
-    GET_FILTER: (state) => (filter) => {
-      if (!state[filter]) return null;
-      const { value, storedProp, multiple } = state[filter];
-      if (multiple) return value.map((item) => item[storedProp]); // if arr, map
-      if (storedProp) return value[storedProp]; // if object and has specific prop, return this prop
-      return value; // else return val
-    },
     GET_VALUE_FROM_QUERY: (state, getters) => ({ filterQuery }) => (
       getters.ROUTER.currentRoute.value.query[filterQuery]
     ),
@@ -40,7 +43,12 @@ export default class FiltersStoreModule extends BaseStoreModule {
       });
       context.commit('SET_FILTER', { filter, value: newValue });
 
-      if (filter !== 'page') context.dispatch('SET_FILTER', { filter: 'page', value: 1 });
+      if (filter !== 'page') {
+ context.dispatch('SET_FILTER', {
+        filter: 'page',
+        value: 1,
+      });
+}
 
       return context.dispatch('ON_FILTER_SET', { filter, value });
     },
@@ -80,10 +88,14 @@ export default class FiltersStoreModule extends BaseStoreModule {
       const query = context.getters.GET_VALUE_FROM_QUERY({ filterQuery: filter });
       // note: restore fn may still return value even if there's no query value
       // from localStorage, for instance
-      const value = context.state[filter].restore ? context.state[filter].restore({ query }) : query;
+      const value = context.state[filter].restore
+        ? context.state[filter].restore({ query })
+        : query;
       if (value) {
-        if (filter === 'sort') await context.dispatch('RESTORE_SORT', { value });
-        else if (filter === 'fields') await context.dispatch('RESTORE_FIELDS', { value });
+        if (filter
+          === 'sort') await context.dispatch('RESTORE_SORT', { value });
+        else if (filter
+          === 'fields') await context.dispatch('RESTORE_FIELDS', { value });
         await context.dispatch('SET_FILTER', ({ filter, value }));
         return true;
       }
@@ -104,9 +116,17 @@ export default class FiltersStoreModule extends BaseStoreModule {
       }
     },
     RESET_FILTERS: (context) => {
-      context.commit('RESET_FILTERS');
+      Object.keys(context.state).forEach((filter) => {
+        context.dispatch('SET_FILTER', {
+          filter,
+          value: context.state[filter].defaultValue,
+        });
+      });
     },
-    ON_FILTER_SET: debounce((context, { filter, value }) => context.dispatch('LOAD_DATA_LIST'), 500),
+    ON_FILTER_SET: debounce((
+      context,
+      { filter, value },
+    ) => context.dispatch('LOAD_DATA_LIST'), 500),
 
     LOAD_DATA_LIST: (context) => context.dispatch(
       `${context.getters.TABLE_NAMESPACE}/LOAD_DATA_LIST`,
@@ -128,11 +148,6 @@ export default class FiltersStoreModule extends BaseStoreModule {
   mutations = {
     SET_FILTER: (state, { filter, value }) => {
       state[filter].value = value;
-    },
-    RESET_FILTERS: (state) => {
-      Object.keys(state).forEach((filter) => {
-        state[filter].value = state[filter].defaultValue;
-      });
     },
   };
 }
