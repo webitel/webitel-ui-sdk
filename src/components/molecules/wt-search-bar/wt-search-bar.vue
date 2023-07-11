@@ -7,11 +7,12 @@
   >
     <div class="wt-search-bar__wrapper">
       <input
-        :placeholder="searchBarPlaceholder"
+        :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
         :value="value"
         class="wt-search-bar__input"
         type="search"
-        v-on="listeners"
+        @input="handleInput($event.target.value)"
+        @keyup="handleKeyup"
       >
       <div class="wt-search-bar__search-icon">
         <slot name="search-icon">
@@ -24,91 +25,64 @@
         :class="{ 'hidden': !value }"
         class="wt-search-bar__reset-icon-btn"
         icon="close"
-        @click="$emit('input', '')"
+        @click="handleInput('')"
       ></wt-icon-btn>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import debounce from '../../../scripts/debounce';
 
-export default {
-  name: 'wt-search-bar',
-  props: {
-    /**
-     * Current search-bar value (`v-model`)
-     */
-    value: {
-      type: String,
-      default: '',
-    },
-    /**
-     * search-bar placeholder
-     */
-    placeholder: {
-      type: String,
-    },
-    debounce: {
-      type: Boolean,
-      default: false,
-    },
-    debounceDelay: {
-      type: Number,
-      default: 1000,
-    },
-    outline: {
-      type: Boolean,
-      default: false,
-    },
+const props = defineProps({
+  /**
+   * Current search-bar value (`v-model`)
+   */
+  value: {
+    type: String,
+    default: '',
   },
+  /**
+   * search-bar placeholder
+   */
+  placeholder: {
+    type: String,
+  },
+  outline: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-  watch: {
-    value() {
-      this.search.call(this);
-    },
-  },
+const emit = defineEmits([
+  'input',
+  'search',
+  'enter',
+]);
 
-  created() {
-    if (this.debounce) {
-      this.search = debounce(this.search, this.debounceDelay);
-    }
-  },
+const search = debounce((value) => {
+  emit('search', value);
+}, 1000);
 
-  computed: {
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: (event) => this.$emit('input', event.target.value),
-        keyup: this.handleKeyup,
-      };
-    },
-    searchBarPlaceholder() {
-      return this.placeholder || this.$t('webitelUI.searchBar.placeholder');
-    },
-  },
+function handleInput(value) {
+  emit('input', value);
+  search(value);
+}
 
-  methods: {
-    search() {
-      this.$emit('search', this.value);
-    },
-    handleKeyup(event) {
-      if (event.key === 'Enter') {
-        this.$emit('enter');
-        event.preventDefault();
-      } else if (event.key === 'Esc') {
-        this.$emit('input', '');
-        event.preventDefault();
-      }
-    },
-  },
-};
+function handleKeyup(event) {
+  if (event.key === 'Enter') {
+    search(props.value);
+    event.preventDefault();
+  } else if (event.key === 'Esc') {
+    handleInput('');
+    event.preventDefault();
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .wt-search-bar {
   cursor: text;
-
 
   .wt-search-bar__wrapper {
     position: relative;

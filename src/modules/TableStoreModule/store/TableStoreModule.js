@@ -1,4 +1,5 @@
 import {
+  queryToSortAdapter,
   SortSymbols,
   sortToQueryAdapter,
 } from '../../../scripts/sortQueryAdapters';
@@ -8,38 +9,44 @@ export default class TableStoreModule extends BaseStoreModule {
   state = {
     headers: [],
     dataList: [],
-    size: 10,
-    search: '',
-    page: 1,
-    sort: '',
     error: {},
     isLoading: false,
     isNextPage: false,
   };
 
   getters = {
+    GET_FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
+
     // required fields to send as "fields" param with GET_LIST
     REQUIRED_FIELDS: () => ['id'],
 
-    // fields to send with GET_LIST
-    FIELDS: (state) => {
-      let fields = state.headers
-      .filter((header) => header.show)
+    FIELDS: (state, getters) => {
+      const filtersFields = getters.GET_FILTERS.filters;
+
+      const defaultFields = state.headers.filter((header) => header.show)
       .map((header) => header.field);
-      fields = [...new Set(fields)];
-      return fields;
+
+      const getFieldsByFieldValues = (values) => {
+        values.map((passedValue) => state.headers.find(({ value }) => passedValue ===
+          value).field);
+      };
+
+      return [
+        ...new Set(filtersFields
+          ? getFieldsByFieldValues(filtersFields)
+          : defaultFields),
+      ].concat(getters.REQUIRED_FIELDS);
     },
 
     // main GET_LIST params collector
-    GET_LIST_PARAMS: (state, getters) => (query) => {
-      const fields = getters.FIELDS.concat(getters.REQUIRED_FIELDS);
-
-      const filters = getters.GET_FILTERS || getters['filters/GET_FILTERS'];
+    GET_LIST_PARAMS: (state, getters) => (overrideFilters) => {
+      const filters = getters.GET_FILTERS;
+      const fields = getters.FIELDS;
 
       return {
-        ...query,
         ...filters,
         fields,
+        ...overrideFilters,
       };
     },
   };
@@ -50,13 +57,6 @@ export default class TableStoreModule extends BaseStoreModule {
     AFTER_SET_DATA_LIST_HOOK: (context, { items, next }) => ({ items, next }),
 
     LOAD_DATA_LIST: async (context, query) => {
-      /*
-   https://my.webitel.com/browse/WTEL-3560
-   preventively disable isNext to handle case when user is clicking
-    "next" faster than actual request is made
-  */
-      context.commit('SET_IS_NEXT', false);
-
       const params = context.getters.GET_LIST_PARAMS(query);
       try {
         context.commit('SET_LOADING', true);
@@ -107,28 +107,40 @@ export default class TableStoreModule extends BaseStoreModule {
       const page = 1;
       context.commit('SET_PAGE', page);
     },
+    RESTORE_FIELDS_FROM_FILTER: (context, { value }) => {
+      const headers = context.state.headers.map((header) => ({
+        ...header,
+        show: value.includes(header.value),
+      }));
+      return context.dispatch('SET_HEADERS', headers);
+    },
     SET_HEADERS: (context, headers) => context.commit('SET_HEADERS', headers),
     SORT: async (context, { header, nextSortOrder }) => {
       const sort = nextSortOrder
         ? `${sortToQueryAdapter(nextSortOrder)}${header.field}`
         : nextSortOrder;
-      context.commit('SET_SORT', sort);
-      context.dispatch('UPDATE_HEADER_SORT', { header, nextSortOrder });
-      await context.dispatch('RESET_PAGE');
-      return context.dispatch('LOAD_DATA_LIST');
+      await context.dispatch('filters/SET_FILTER', {
+        filter: 'sort',
+        value: sort,
+      });
+      await context.dispatch('UPDATE_HEADER_SORT', { header, nextSortOrder });
+    },
+    RESTORE_SORT_FROM_FILTER: (context, { value }) => {
+      const sort = queryToSortAdapter(value.slice(0, 1));
+      const field = sort ? value.slice(1) : value;
+      return context.dispatch('UPDATE_HEADER_SORT', {
+        header: { field },
+        nextSortOrder: sort,
+      });
     },
     UPDATE_HEADER_SORT: (context, { header, nextSortOrder }) => {
       const headers = context.state.headers.map((oldHeader) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (oldHeader.sort !== undefined) {
-          return {
-            ...oldHeader,
-            sort: oldHeader.field === header.field
-              ? nextSortOrder
-              : SortSymbols.NONE,
-          };
-        }
-        return oldHeader;
+        return {
+          ...oldHeader,
+          sort: oldHeader.field === header.field
+            ? nextSortOrder
+            : SortSymbols.NONE,
+        };
       });
       context.commit('SET_HEADERS', headers);
     },
@@ -195,9 +207,6 @@ export default class TableStoreModule extends BaseStoreModule {
     },
     SET_PAGE: (state, page) => {
       state.page = page;
-    },
-    SET_SORT: (state, sort) => {
-      state.sort = sort;
     },
     SET_IS_NEXT: (state, next) => {
       state.isNextPage = next;

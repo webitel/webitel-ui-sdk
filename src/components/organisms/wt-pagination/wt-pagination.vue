@@ -64,6 +64,7 @@ export default {
       default: 1000,
     },
   },
+  emits: ['change', 'input', 'prev', 'next'],
   model: {
     prop: 'size',
     event: 'change',
