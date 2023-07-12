@@ -188,6 +188,7 @@ export default {
 .wt-table__head {
   display: block;
   box-sizing: border-box;
+  background: var(--table-primary-color);
   border: var(--table-head-border);
   border-color: var(--table-head-border-color);
   border-radius: var(--border-radius);
@@ -226,6 +227,7 @@ export default {
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
+    gap: var(--spacing-xs);
   }
 }
 

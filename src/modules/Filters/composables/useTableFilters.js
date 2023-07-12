@@ -7,7 +7,7 @@ export const useTableFilters = (namespace) => {
   const filtersNamespace = `${namespace}/filters`;
 
   function restoreFilters(payload) {
-    return store.dispatch(`${filtersNamespace.value}/RESTORE_FILTERS`, payload);
+    return store.dispatch(`${filtersNamespace}/RESTORE_FILTERS`, payload);
   }
 
   onMounted(() => restoreFilters());
