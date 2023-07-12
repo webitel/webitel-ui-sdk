@@ -29,7 +29,11 @@ export default class FiltersStoreModule extends BaseStoreModule {
   };
 
   actions = {
-    SET_FILTER: async (context, { filter, value }) => {
+    SET_FILTER: async (context, {
+      filter,
+      value,
+      source, // === restore, if this is filters restore call
+    }) => {
       const { multiple, defaultValue } = context.state[filter];
       let newValue = value;
       if (newValue) {
@@ -43,12 +47,12 @@ export default class FiltersStoreModule extends BaseStoreModule {
       });
       context.commit('SET_FILTER', { filter, value: newValue });
 
-      if (filter !== 'page') {
- context.dispatch('SET_FILTER', {
-        filter: 'page',
-        value: 1,
-      });
-}
+      if (source !== 'restore' && filter !== 'page') {
+        context.dispatch('SET_FILTER', {
+          filter: 'page',
+          value: 1,
+        });
+      }
 
       return context.dispatch('ON_FILTER_SET', { filter, value });
     },
@@ -96,7 +100,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
           === 'sort') await context.dispatch('RESTORE_SORT', { value });
         else if (filter
           === 'fields') await context.dispatch('RESTORE_FIELDS', { value });
-        await context.dispatch('SET_FILTER', ({ filter, value }));
+        await context.dispatch('SET_FILTER', ({ filter, value, source: 'restore' }));
         return true;
       }
       return false;
