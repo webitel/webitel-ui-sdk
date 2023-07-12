@@ -321,5 +321,8 @@ export default {
       undoneActionAlert: 'Это действие не может быть отменено.',
       deleteAll: 'ВСЕ',
     },
+    dummy: {
+      text: 'Записи в разделе еще не созданы',
+    },
   },
 };

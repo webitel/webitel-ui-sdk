@@ -321,5 +321,8 @@ export default {
       undoneActionAlert: 'Дана дія не може бути скасована.',
       deleteAll: 'ВСІ',
     },
+    dummy: {
+      text: 'Записи у розділі ще не створені',
+    },
   },
 };

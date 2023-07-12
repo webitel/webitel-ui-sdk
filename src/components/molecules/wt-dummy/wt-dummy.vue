@@ -2,17 +2,15 @@
   <div class="wt-dummy">
     <div class="wt-dummy__img">
       <img
-        :src="props.src"
-        :width="props.size"
-        :height="props.size"
+        :src="src || dummy"
+        :width="size"
+        :height="size"
         alt="dummy-picture"
       >
     </div>
-    <h1
-      v-if="props.text"
-      class="wt-dummy__text">{{ props.text }}</h1>
+    <p class="wt-dummy__text">{{ text || $t('webitelUI.dummy.text') }}</p>
     <wt-button
-      v-if="props.showAction"
+      v-if="showAction"
       @click="emits('create')"
       >{{ buttonText || $t('reusable.add') }}
     </wt-button>
@@ -20,6 +18,7 @@
 </template>
 
 <script setup>
+import dummy from '../../../assets/components/molecules/wt-dummy/dummy.svg';
 
 const props = defineProps({
   src: {

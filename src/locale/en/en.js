@@ -324,5 +324,8 @@ export default {
       undoneActionAlert: 'This action cannot be undone.',
       deleteAll: 'ALL',
     },
+    dummy: {
+      text: 'There are no records yet',
+    },
   },
 };
