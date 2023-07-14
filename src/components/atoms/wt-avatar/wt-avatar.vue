@@ -29,7 +29,7 @@ export default {
     size: {
       type: String,
       default: 'md',
-      options: ['md'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
     },
     badge: {
       type: Boolean,
@@ -97,6 +97,16 @@ export default {
     &--size-xl {
       width: var(--avatar-size--size-xl);
       height: var(--avatar-size--size-xl);
+    }
+
+    &--size-2xl {
+      width: var(--avatar-size--size-2xl);
+      height: var(--avatar-size--size-2xl);
+    }
+
+    &--size-3xl {
+      width: var(--avatar-size--size-3xl);
+      height: var(--avatar-size--size-3xl);
     }
   }
 </style>

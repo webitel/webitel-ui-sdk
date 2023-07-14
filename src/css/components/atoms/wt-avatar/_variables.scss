@@ -2,8 +2,10 @@
   --avatar-size--size-xs: calc(var(--_spacing-multiplicator) * 3);
   --avatar-size--size-sm: calc(var(--_spacing-multiplicator) * 4);
   --avatar-size--size-md: calc(var(--_spacing-multiplicator) * 5);
-  --avatar-size--size-lg: calc(var(--_spacing-multiplicator) * 9);
-  --avatar-size--size-xl: calc(var(--_spacing-multiplicator) * 12);
+  --avatar-size--size-lg: calc(var(--_spacing-multiplicator) * 7);
+  --avatar-size--size-xl: calc(var(--_spacing-multiplicator) * 9);
+  --avatar-size--size-2xl: calc(var(--_spacing-multiplicator) * 12);
+  --avatar-size--size-3xl: calc(var(--_spacing-multiplicator) * 16);
 
   --avatar-size: var(--avatar-size--size-md);
 

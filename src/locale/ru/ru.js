@@ -65,6 +65,7 @@ export default {
     generalInfo: 'Общая информация',
     all: 'Все {entity}',
     upload: 'Загрузить',
+    edit: 'Редактировать',
   },
   vocabulary: {
     language: 'Язык',
@@ -90,6 +91,9 @@ export default {
     duration: 'Длительность',
     reset: 'Сбросить',
     errors: 'Ошибка | Ошибки',
+    labels: 'Метка | Метки',
+    permissions: 'Разрешение | Разрешения',
+    options: 'Опция | Опции',
   },
   // date-related texts
   date: {

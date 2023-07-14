@@ -65,6 +65,7 @@ export default {
     generalInfo: 'General info',
     all: 'All {entity}',
     upload: 'Upload',
+    edit: 'Edit',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -91,11 +92,14 @@ export default {
     duration: 'Duration',
     reset: 'Reset',
     errors: 'Error | Errors',
+    labels: 'Label | Labels',
+    permissions: 'Permission | Permissions',
+    options: 'Option | Options',
   },
   // date-related texts
   date: {
     sec: 'Sec',
-    timezone: 'Timezone | Timezones',
+    timezone: 'Time zone | Time zones',
   },
   // describes Webitel system entities
   objects: {

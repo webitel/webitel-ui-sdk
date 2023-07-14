@@ -66,6 +66,7 @@ export default {
     generalInfo: 'Загальна інформація',
     all: 'Всі {entity}',
     upload: 'Завантажити',
+    edit: 'Редагувати',
   },
   vocabulary: {
     language: 'Мова',
@@ -90,6 +91,9 @@ export default {
     keys: 'Ключ | Ключі',
     duration: 'Тривалість',
     errors: 'Помилка | Помилки',
+    labels: 'Мітка | Мітки',
+    permissions: 'Дозвіл | Дозволи',
+    options: 'Опція | Опції',
   },
   // date-related texts
   date: {

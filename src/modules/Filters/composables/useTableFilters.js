@@ -1,4 +1,3 @@
-import { onMounted } from 'vue';
 import { useStore } from 'vuex';
 
 export const useTableFilters = (namespace) => {
@@ -10,7 +9,7 @@ export const useTableFilters = (namespace) => {
     return store.dispatch(`${filtersNamespace}/RESTORE_FILTERS`, payload);
   }
 
-  onMounted(() => restoreFilters());
+  restoreFilters();
 
   return {
     filtersNamespace,
