@@ -36,6 +36,7 @@ export const useCardStore = (namespace) => {
   }
 
   return {
+    namespace: cardNamespace,
     id,
     itemInstance,
 

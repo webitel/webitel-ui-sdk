@@ -94,6 +94,9 @@ export default {
     labels: 'Метка | Метки',
     permissions: 'Разрешение | Разрешения',
     options: 'Опция | Опции',
+    emails: 'Email | Emails',
+    phones: 'Телефон | Телефоны',
+    messaging: 'Сообщения',
   },
   // date-related texts
   date: {
@@ -106,6 +109,7 @@ export default {
     supervisor: 'Супервизор | Супервизоры',
     auditor: 'Аудитор | Аудиторы',
     region: 'Регион | Регионы',
+    communicationType: 'Тип связи | Типы связи',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Входящая очередь',

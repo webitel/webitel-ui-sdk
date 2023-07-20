@@ -15,6 +15,8 @@ export default class TableStoreModule extends BaseStoreModule {
   };
 
   getters = {
+    PARENT_ID: () => null,
+
     GET_FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
 
     // required fields to send as "fields" param with GET_LIST
@@ -42,8 +44,10 @@ export default class TableStoreModule extends BaseStoreModule {
     GET_LIST_PARAMS: (state, getters) => (overrideFilters) => {
       const filters = getters.GET_FILTERS;
       const fields = getters.FIELDS;
+      const parentId = getters.PARENT_ID;
 
       return {
+        parentId,
         ...filters,
         fields,
         ...overrideFilters,

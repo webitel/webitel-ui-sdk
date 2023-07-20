@@ -95,6 +95,9 @@ export default {
     labels: 'Label | Labels',
     permissions: 'Permission | Permissions',
     options: 'Option | Options',
+    emails: 'Email | Emails',
+    phones: 'Phone | Phones',
+    messaging: 'Messaging',
   },
   // date-related texts
   date: {
@@ -107,6 +110,7 @@ export default {
     supervisor: 'Supervisor | Supervisors',
     auditor: 'Auditor | Auditors',
     region: 'Region | Regions',
+    communicationType: 'Communication type | Communication types',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',

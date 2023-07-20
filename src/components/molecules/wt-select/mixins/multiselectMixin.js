@@ -99,7 +99,7 @@ export default {
     getOptionLabel({ option, optionLabel }) {
       if (optionLabel && option[optionLabel]) return option[optionLabel];
       if (option.locale) {
-        if (Array.isArray(option.locale)) return this.$tc(...option.locale);
+        if (Array.isArray(option.locale)) return this.$t(...option.locale);
         return this.$t(option.locale);
       }
       return option[this.defaultOptionLabel] || option;

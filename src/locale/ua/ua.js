@@ -94,6 +94,9 @@ export default {
     labels: 'Мітка | Мітки',
     permissions: 'Дозвіл | Дозволи',
     options: 'Опція | Опції',
+    emails: 'Email | Emails',
+    phones: 'Телефон | Телефони',
+    messaging: 'Повідомлення',
   },
   // date-related texts
   date: {
@@ -106,6 +109,7 @@ export default {
     supervisor: 'Супервізор | Супервізори',
     auditor: 'Аудитор | Аудитори',
     region: 'Регіон | Регіони',
+    communicationType: 'Тип зв\'язку | Типи зв\'язку',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',

@@ -96,7 +96,7 @@
         description: 'Object with props, passed down to wt-label as props',
       },
     },
-
+    emits: ['input', 'enter'],
     computed: {
       listeners() {
         return {
