@@ -16,22 +16,25 @@ export default class ApiStoreModule extends BaseStoreModule {
     this.actions
       .POST_ITEM = (
       _,
-      { context: callerContext = {} } = {},
-    ) => api.add(callerContext.state);
+      { context: callerContext = {}, ...rest } = {},
+    ) => api.add({ ...callerContext.state, ...rest });
     this.actions
-      .PATCH_ITEM = (_, { context: callerContext = {}, id, changes }) => (
-      api.patch({ ...callerContext.state, id, changes })
+      .PATCH_ITEM = (
+      _,
+      { context: callerContext = {}, id, changes, ...rest },
+    ) => (
+      api.patch({ ...callerContext.state, ...rest, id, changes })
     );
     this.actions
       .UPD_ITEM = (
       _,
-      { context: callerContext = {} } = {},
-    ) => api.update(callerContext.state);
+      { context: callerContext = {}, ...rest } = {},
+    ) => api.update({ ...callerContext.state, ...rest });
     this.actions
       .DELETE_ITEM = (
       _,
-      { context: callerContext = {}, id },
-    ) => api.delete({ ...callerContext.state, id });
+      { context: callerContext = {}, id, ...rest },
+    ) => api.delete({ ...callerContext.state, ...rest, id });
     return this;
   }
 }
