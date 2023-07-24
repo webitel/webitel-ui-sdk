@@ -66,6 +66,8 @@ export default {
     all: 'All {entity}',
     upload: 'Upload',
     edit: 'Edit',
+    back: 'Back',
+    step: 'Step { count }',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {

@@ -55,6 +55,7 @@ import WtTableActions from './organisms/wt-table-actions/wt-table-actions.vue';
 import WtTableColumnSelect from './organisms/wt-table-column-select/wt-table-column-select.vue';
 import WtIconAction from './organisms/wt-icon-action/wt-icon-action.vue';
 import WtPageHeader from './organisms/wt-page-header/wt-page-header.vue';
+import WtStepper from './organisms/wt-stepper/wt-stepper.vue';
 
 const Components = {
   WtAvatar,
@@ -111,6 +112,7 @@ const Components = {
   WtPageHeader,
   WtItemLink,
   WtDummy,
+  WtStepper,
 };
 
 export default Components;
