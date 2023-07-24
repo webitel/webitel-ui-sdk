@@ -15,7 +15,7 @@
       <wt-button
         color="secondary"
         :disabled="isDeleting"
-        @click="cancel"
+        @click="close"
       >{{ $t('reusable.cancel') }}
       </wt-button>
       <wt-button
@@ -44,8 +44,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits([
-  'confirm',
-  'cancel',
   'close',
 ]);
 
@@ -76,17 +74,11 @@ function close() {
 async function confirm() {
   try {
     isDeleting.value = true;
-    emit('confirm');
     await props.callback();
+    close();
   } finally {
     isDeleting.value = false;
-    close();
   }
-}
-
-function cancel() {
-  emit('cancel');
-  close();
 }
 </script>
 

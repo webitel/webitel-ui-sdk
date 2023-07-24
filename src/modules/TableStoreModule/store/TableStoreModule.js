@@ -124,14 +124,21 @@ export default class TableStoreModule extends BaseStoreModule {
     }) => {
       await context.commit('PATCH_ITEM_PROPERTY', { index, prop, value });
       const id = item?.id || context.state.dataList[index].id;
+      const { etag } = item;
       const changes = { [prop]: value };
       try {
-        await context.dispatch('api/PATCH_ITEM', { context, id, changes });
+        await context.dispatch('api/PATCH_ITEM', {
+          context,
+          id,
+          etag,
+          changes,
+        });
         context.commit('PATCH_ITEM_PROPERTY', {
           item, index, prop, value,
         });
-      } catch {
-        context.dispatch('LOAD_DATA_LIST');
+      } catch (err) {
+        await context.dispatch('LOAD_DATA_LIST');
+        throw err;
       }
     },
     DELETE: async (context, deleted) => {
@@ -148,9 +155,9 @@ export default class TableStoreModule extends BaseStoreModule {
         await context.dispatch('LOAD_DATA_LIST');
       }
     },
-    DELETE_SINGLE: async (context, { id }) => {
+    DELETE_SINGLE: async (context, { id, etag }) => {
       try {
-        await context.dispatch('api/DELETE_ITEM', { context, id });
+        await context.dispatch('api/DELETE_ITEM', { context, id, etag });
       } catch (err) {
         throw err;
       }
