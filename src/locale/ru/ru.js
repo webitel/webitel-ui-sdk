@@ -66,6 +66,8 @@ export default {
     all: 'Все {entity}',
     upload: 'Загрузить',
     edit: 'Редактировать',
+    back: 'Назад',
+    step: 'Шаг { count }',
   },
   vocabulary: {
     language: 'Язык',
