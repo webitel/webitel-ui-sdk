@@ -245,6 +245,7 @@ export default {
     minLength: 'Quantity of characters should not be less than',
     url: 'Should look like url',
     regExpValidator: 'This regular expression is not valid',
+    domainValidator: 'Incorrect domain',
   },
   webitelUI: {
     searchBar: {

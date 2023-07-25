@@ -242,6 +242,7 @@ export default {
     minLength: 'Кількість символів повинна бути не меншою, ніж',
     url: 'Необхідно ввести правильну url-адресу',
     regExpValidator: 'Не правильний регулярний вираз',
+    domainValidator: 'Невірний домен',
   },
   webitelUI: {
     searchBar: {
