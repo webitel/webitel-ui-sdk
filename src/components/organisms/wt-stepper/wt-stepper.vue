@@ -53,7 +53,7 @@ const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
 
 <style lang="scss" scoped>
 .wt-stepper {
-  text-align: center;
+  text-align: start;
 }
 
 .wt-stepper-header {
@@ -84,5 +84,6 @@ const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
 
 .wt-stepper-description {
   margin-bottom: var(--spacing-lg);
+  text-align: center;
 }
 </style>
