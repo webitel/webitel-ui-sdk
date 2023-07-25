@@ -31,6 +31,7 @@ export default {
         else if (this.v.minLength?.$invalid) validationText = `${this.$t('validation.minLength')} ${this.v.minLength.$params.min}`;
         else if (this.v.url?.$invalid) validationText = `${this.$t('validation.url')}`;
         else if (this.v.regExpValidator?.$invalid) validationText = `${this.$t('validation.regExpValidator')}`;
+        else if (this.v.sameAs?.$invalid) validationText = `${this.$t('validation.sameAs')}`;
       }
       // eslint-disable-next-line no-restricted-syntax
       for (const { name, text } of this.customValidators) {
