@@ -40,6 +40,7 @@
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.0.3",
     "file-saver": "^2.0.2",
+    "is-valid-domain": "^0.1.6",
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "node-polyfill-webpack-plugin": "^1.1.4",
