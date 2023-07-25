@@ -37,7 +37,7 @@ import {
   reactive, nextTick,
 } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
-import { useDestroyableSortable } from '../composables/useDestroyableSortable';
+import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable';
 import AuditFormQuestion from './audit-form-question.vue';
 import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';

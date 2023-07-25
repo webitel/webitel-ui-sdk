@@ -2,12 +2,11 @@ import { mount } from '@vue/test-utils';
 import { ref } from 'vue';
 import AuditForm from '../audit-form.vue';
 import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema';
-
 import {
   useDestroyableSortable,
-} from '../../composables/useDestroyableSortable';
+} from '../../../../composables/useDestroyableSortable/useDestroyableSortable';
 
-jest.mock('../../composables/useDestroyableSortable');
+jest.mock('../../../../composables/useDestroyableSortable/useDestroyableSortable');
 
 useDestroyableSortable.mockImplementation(() => ({ reloadSortable: ref(false) }));
 
