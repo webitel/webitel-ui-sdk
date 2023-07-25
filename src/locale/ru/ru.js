@@ -259,7 +259,7 @@ export default {
     pagination: {
       sizeText: 'Записей на странице:',
       prev: 'Назад',
-      next: 'Вперед',
+      next: 'Далее',
     },
     appNavigator: {
       title: 'Приложения Webitel',
