@@ -207,7 +207,7 @@ export default {
         [AdminSections.SKILLS]: 'Навички оператора',
         [AdminSections.BUCKETS]: 'Кошики',
         [AdminSections.MEDIA]: 'Медіафайли',
-        [AdminSections.BLACKLIST]: 'Cписки обдзвону',
+        [AdminSections.BLACKLIST]: 'Cписки',
         [AdminSections.CALENDARS]: 'Календарі',
         [AdminSections.REGIONS]: 'Розташування',
         [AdminSections.COMMUNICATIONS]: 'Типи зв\'язку',
