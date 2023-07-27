@@ -20,11 +20,11 @@ and swapping height/width of this component in order to have the correct output.
         'wt-slider--disabled': disabled,
         'wt-slider--vertical': vertical,
       }"
-    :style="{ height: verticalHeight }"
+    :style="{ height: vertical && verticalHeight }"
     class="wt-slider"
   >
     <div
-      :style="{ width: verticalHeight }"
+      :style="{ width: !vertical && verticalHeight }"
       class="wt-slider__wrapper"
     >
       <!-- The row above is needed in order to set correct component width when slider is vertical -->
