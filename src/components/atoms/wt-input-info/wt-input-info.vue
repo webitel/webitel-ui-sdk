@@ -26,7 +26,7 @@
     @extend %typo-caption;
     margin-top: var(--input-info-margin);
     color: var(--input-info-color);
-    min-height: var(--input-info-min-height);
+    height: var(--input-info-min-height);
 
     &--invalid {
       color: var(--input-info--invalid-color);
