@@ -52,6 +52,10 @@ const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
 </script>
 
 <style lang="scss" scoped>
+.wt-stepper {
+  width: 100%;
+}
+
 .wt-stepper-header {
   display: flex;
   flex-direction: column;
