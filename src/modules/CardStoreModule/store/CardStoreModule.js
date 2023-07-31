@@ -1,4 +1,5 @@
 import deepCopy from 'deep-copy';
+import set from 'lodash/set';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 
 export default class CardStoreModule extends BaseStoreModule {
@@ -34,7 +35,7 @@ export default class CardStoreModule extends BaseStoreModule {
     },
     SET_ITEM_PROPERTY: (context, payload) => {
       context.commit('SET_ITEM_PROPERTY', payload);
-      context.commit('SET_ITEM_PROPERTY', { prop: '_dirty', value: true });
+      context.commit('SET_ITEM_PROPERTY', { path: '_dirty', value: true });
     },
     RESET_ITEM_STATE: async (context) => {
       context.commit('RESET_ITEM_STATE');
@@ -48,8 +49,13 @@ export default class CardStoreModule extends BaseStoreModule {
     SET_ITEM_ID: (state, id) => {
       state.itemId = id;
     },
-    SET_ITEM_PROPERTY: (state, { prop, value }) => {
-      state.itemInstance[prop] = value;
+    SET_ITEM_PROPERTY: (state, { prop, value, path }) => {
+      if (path) {
+        set(state.itemInstance, path, value);
+      } else {
+        // DEPRECATED, LEGACY CODE
+        state.itemInstance[prop] = value;
+      }
     },
     SET_ITEM: (state, item) => {
       state.itemInstance = item;
