@@ -12,7 +12,6 @@ class AuthAPI extends BaseAPIService {
 
   removeToken() {
     localStorage.removeItem('access-token');
-    localStorage.removeItem('domain');
     this._instance.defaults.headers['X-Webitel-Access'] = '';
   }
 
