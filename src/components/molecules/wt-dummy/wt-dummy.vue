@@ -8,7 +8,9 @@
         alt="dummy-picture"
       >
     </div>
-    <p class="wt-dummy__text">{{ text || $t('webitelUI.dummy.text') }}</p>
+    <p
+      v-if="!hiddenText"
+      class="wt-dummy__text">{{ text || $t('webitelUI.dummy.text') }}</p>
     <wt-button
       v-if="showAction"
       @click="emits('create')"
@@ -37,6 +39,10 @@ const props = defineProps({
   size: {
     type: [String, Number],
     default: 200,
+  },
+  hiddenText: {
+    type: Boolean,
+    default: false,
   },
 });
 
