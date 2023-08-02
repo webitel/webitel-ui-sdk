@@ -1,18 +1,15 @@
 import BaseAPIService from './BaseAPIService';
 import applyTransform, {
-  handleUnauthorized,
   notify,
 } from '../../../api/transformers';
 
 class AuthAPI extends BaseAPIService {
   async setToken(token) {
     localStorage.setItem('access-token', token);
-    this._instance.defaults.headers['X-Webitel-Access'] = localStorage.getItem('access-token');
   }
 
   removeToken() {
     localStorage.removeItem('access-token');
-    this._instance.defaults.headers['X-Webitel-Access'] = '';
   }
 
   async logout() {
@@ -23,7 +20,6 @@ class AuthAPI extends BaseAPIService {
       this.removeToken();
     } catch (err) {
       throw applyTransform(err, [
-        handleUnauthorized,
         notify,
       ]);
     }

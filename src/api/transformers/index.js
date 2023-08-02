@@ -4,7 +4,6 @@ import merge from './merge/merge.transformer';
 import starToSearch from './starToSearch/starToSearch.transformer';
 import camelToSnake from './camelToSnake/camelToSnake.transformer';
 import snakeToCamel from './snakeToCamel/snakeToCamel.transformer';
-import handleUnauthorized from './handleUnauthorized/handleUnauthorized.transformer';
 import notify from './notify/notify.transformer';
 import sanitize from './sanitize/sanitize.transformer';
 import generateUrl from './generateUrl/generateUrl.transformer';
@@ -18,7 +17,6 @@ export {
   starToSearch,
   camelToSnake,
   snakeToCamel,
-  handleUnauthorized,
   sanitize,
   generateUrl,
   mergeEach,

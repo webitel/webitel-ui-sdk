@@ -1,5 +1,4 @@
 import applyTransform, {
-  handleUnauthorized,
   notify,
   snakeToCamel,
 } from '../../../api/transformers';
@@ -19,7 +18,6 @@ class UserinfoAPI extends BaseAPIService {
       ]);
     } catch (err) {
       throw applyTransform(err, [
-        handleUnauthorized,
         notify,
       ]);
     }
@@ -35,7 +33,6 @@ class UserinfoAPI extends BaseAPIService {
       ]);
     } catch (err) {
       throw applyTransform(err, [
-        handleUnauthorized,
         notify,
       ]);
     }
