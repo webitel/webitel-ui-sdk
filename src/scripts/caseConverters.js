@@ -50,7 +50,7 @@ export const objSnakeToCamel = (obj, skipKeys = []) => {
       } else {
         const newKey = snakeToCamel(oldKey);
         let value = obj[oldKey];
-        if (Array.isArray(value) || (value !== null && value.constructor === Object)) {
+        if (Array.isArray(value) || (value !== null && value !== undefined && value.constructor === Object)) {
           value = objSnakeToCamel(value, skipKeys);
         }
         newObj[newKey] = value;
@@ -78,7 +78,7 @@ export const objCamelToSnake = (obj, skipKeys = []) => {
       } else {
         const newKey = camelToSnake(oldKey);
         let value = obj[oldKey];
-        if (Array.isArray(value) || (value !== null && value.constructor === Object)) {
+        if (Array.isArray(value) || (value !== null && value !== undefined && value.constructor === Object)) {
           value = objCamelToSnake(value, skipKeys);
         }
         newObj[newKey] = value;

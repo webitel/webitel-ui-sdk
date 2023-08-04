@@ -115,6 +115,7 @@ export default {
     `,
     },
   },
+  emits: ['input', 'tag', 'search-change', 'closed'],
   data: () => ({
     defaultOptionLabel: 'label',
   }),
