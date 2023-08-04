@@ -8,6 +8,7 @@ import './arrow-up.svg';
 import './arrow-mix.svg';
 import './attach.svg';
 import './attention.svg';
+import './azure.svg';
 import './back.svg';
 import './bell.svg';
 import './bell-badged.svg';
