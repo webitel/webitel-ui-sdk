@@ -2,14 +2,14 @@ name: Webitel UI CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-      
+
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js
