@@ -36,6 +36,8 @@ import WtCopyAction from './molecules/wt-copy-action/wt-copy-action.vue';
 import WtLoadBar from './molecules/wt-load-bar/wt-load-bar.vue';
 import WtItemLink from './molecules/wt-item-link/wt-item-link.vue';
 import WtDummy from './molecules/wt-dummy/wt-dummy.vue';
+import WtCollapseAction
+  from './molecules/wt-collapse-action/wt-collapse-action.vue';
 
 import WtAppHeader from './organisms/wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './organisms/wt-app-header/wt-app-navigator.vue';
@@ -113,6 +115,7 @@ const Components = {
   WtItemLink,
   WtDummy,
   WtStepper,
+  WtCollapseAction,
 };
 
 export default Components;
