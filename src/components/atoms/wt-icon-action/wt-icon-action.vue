@@ -13,12 +13,13 @@ import WtEditIconAction from './_internals/wt-edit-icon-action.vue';
 import WtAddIconAction from './_internals/wt-add-icon-action.vue';
 import WtHistoryIconAction from './_internals/wt-history-icon-action.vue';
 import WtDownloadIconAction from './_internals/wt-download-icon-action.vue';
+import WtRefreshIconAction from './_internals/wt-refresh-icon-action.vue';
 
 const props = defineProps({
   action: {
     type: String,
     required: true,
-    options: ['delete', 'edit', 'add', 'history', 'download'],
+    options: ['delete', 'edit', 'add', 'history', 'download', 'refresh'],
   },
   disabled: {
     type: Boolean,
@@ -40,6 +41,8 @@ const actionComponent = computed(() => {
       return WtHistoryIconAction;
     case 'download':
       return WtDownloadIconAction;
+    case 'refresh':
+      return WtRefreshIconAction;
     default:
       return WtEditIconAction;
   }

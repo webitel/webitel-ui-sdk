@@ -112,6 +112,7 @@ export default {
     auditor: 'Аудитор | Аудитори',
     region: 'Регіон | Регіони',
     communicationType: 'Тип зв\'язку | Типи зв\'язку',
+    grantee: 'Отримувач | Отримувачі',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',

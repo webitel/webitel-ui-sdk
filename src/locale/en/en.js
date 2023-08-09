@@ -113,6 +113,7 @@ export default {
     auditor: 'Auditor | Auditors',
     region: 'Region | Regions',
     communicationType: 'Communication type | Communication types',
+    grantee: 'Grantee | Grantees',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
