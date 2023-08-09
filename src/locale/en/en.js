@@ -249,6 +249,7 @@ export default {
   webitelUI: {
     searchBar: {
       placeholder: 'Search',
+      settingsHint: 'Search mode',
     },
     timepicker: {
       hour: 'Hour:',
