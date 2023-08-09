@@ -6,7 +6,7 @@
         :icon="icon"
         :icon-prefix="iconPrefix"
         :size="size"
-        @click.native="$emit('click', $event)"
+        @click="$emit('click', $event)"
       ></wt-icon>
     </button>
   </div>
@@ -38,6 +38,7 @@ export default {
       type: String,
     },
   },
+  emits: ['click'],
   computed: {
     iconColor() {
       if (this.disabled) return 'disabled';

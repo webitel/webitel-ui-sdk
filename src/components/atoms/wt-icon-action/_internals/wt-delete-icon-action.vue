@@ -4,23 +4,22 @@
       <wt-icon-btn
         icon="bucket"
         :disabled="disabled"
-        @click="$emit('click')"
+        @click="emit('click')"
       ></wt-icon-btn>
     </template>
     {{ $t('webitelUI.iconAction.deleteActionHint') }}
   </wt-tooltip>
 </template>
 
-<script>
-export default {
-  name: 'wt-delete-icon-action',
-  props: {
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+const props = defineProps({
+  disabled: {
+    type: Boolean,
+    default: false,
   },
-};
+});
+
+const emit = defineEmits(['click']);
 </script>
 
 <style scoped>

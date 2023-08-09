@@ -2,7 +2,7 @@
   <component
     :is="actionComponent"
     :disabled="disabled"
-    @click="$emit('click')"
+    @click="emit('click')"
   ></component>
 </template>
 
@@ -25,6 +25,8 @@ const props = defineProps({
     default: false,
   },
 });
+
+const emit = defineEmits(['click']);
 
 const actionComponent = computed(() => {
   switch (props.action) {

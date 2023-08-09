@@ -53,7 +53,7 @@ import WtStatusSelect from './organisms/wt-status-select/wt-status-select.vue';
 import WtTable from './organisms/wt-table/wt-table.vue';
 import WtTableActions from './organisms/wt-table-actions/wt-table-actions.vue';
 import WtTableColumnSelect from './organisms/wt-table-column-select/wt-table-column-select.vue';
-import WtIconAction from './organisms/wt-icon-action/wt-icon-action.vue';
+import WtIconAction from './atoms/wt-icon-action/wt-icon-action.vue';
 import WtPageHeader from './organisms/wt-page-header/wt-page-header.vue';
 import WtStepper from './organisms/wt-stepper/wt-stepper.vue';
 
