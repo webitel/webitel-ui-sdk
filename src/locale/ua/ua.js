@@ -247,6 +247,7 @@ export default {
   webitelUI: {
     searchBar: {
       placeholder: 'Пошук',
+      settingsHint: 'Налаштування пошуку',
     },
     timepicker: {
       hour: 'Год:',
