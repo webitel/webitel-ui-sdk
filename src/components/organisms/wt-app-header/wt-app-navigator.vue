@@ -267,6 +267,7 @@ function close() {
   display: inline-block;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 
 // img inside a

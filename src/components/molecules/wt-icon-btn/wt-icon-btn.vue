@@ -7,7 +7,9 @@
         :icon-prefix="iconPrefix"
         :size="size"
         @click="$emit('click', $event)"
+        @click.native="$emit('click', $event)"
       ></wt-icon>
+<!--      @click for vue3, @click.native for v2-compatible -->
     </button>
   </div>
 </template>
