@@ -155,50 +155,59 @@
             </a>
           </li>
 
+          <li
+            v-if="formattedApps[WebitelApplications.CRM]"
+            :class="{'active': formattedApps[WebitelApplications.CRM].currentApp }"
+            class="wt-app-navigator__card"
+          >
+            <a
+              :href="formattedApps[WebitelApplications.CRM].href"
+              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.CRM]}`)"
+              class="wt-app-navigator__card__link"
+              target="_blank"
+            >
+              <img
+                :alt="`${[WebitelApplications.CRM]}-pic`"
+                class="wt-app-navigator__card__img"
+                src="../../../assets/components/organisms/wt-app-header/app-navigator/app-crm.svg"
+              >
+            </a>
+          </li>
+
         </ul>
       </nav>
     </transition>
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed, ref } from 'vue';
 import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum';
 
-export default {
-  name: 'wt-app-navigator',
-  data: () => ({
-    WebitelApplications,
-    isOpened: false,
-  }),
-
-  props: {
-    currentApp: {
-      type: String,
-    },
-    apps: {
-      type: Array,
-      default: () => [],
-    },
+const props = defineProps({
+  currentApp: {
+    type: String,
   },
-
-  computed: {
-    formattedApps() {
-      return this.apps.reduce((apps, app) => ({
-        ...apps,
-        [app.name]: {
-          ...app,
-          currentApp: this.currentApp === app.name,
-        },
-      }), {});
-    },
+  apps: {
+    type: Array,
+    default: () => [],
   },
+});
 
-  methods: {
-    close() {
-      this.isOpened = false;
-    },
+const isOpened = ref(false);
+
+const formattedApps = computed(() => props.apps.reduce((apps, app) => ({
+  ...apps,
+  [app.name]: {
+    ...app,
+    currentApp: props.currentApp === app.name,
   },
-};
+}), {}));
+
+function close() {
+  isOpened.value = false;
+}
+
 </script>
 
 <style lang="scss" scoped>
