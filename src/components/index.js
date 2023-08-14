@@ -56,6 +56,8 @@ import WtTableColumnSelect from './organisms/wt-table-column-select/wt-table-col
 import WtIconAction from './atoms/wt-icon-action/wt-icon-action.vue';
 import WtPageHeader from './organisms/wt-page-header/wt-page-header.vue';
 import WtStepper from './organisms/wt-stepper/wt-stepper.vue';
+import WtExpansionPanel
+  from './organisms/wt-expansion-panel/wt-expansion-panel.vue';
 
 const Components = {
   WtAvatar,
@@ -113,6 +115,7 @@ const Components = {
   WtItemLink,
   WtDummy,
   WtStepper,
+  WtExpansionPanel,
 };
 
 export default Components;
