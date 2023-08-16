@@ -49,7 +49,8 @@
       >
         <td v-if="selectable" class="wt-table__td wt-table__td--checkbox">
           <wt-checkbox
-            v-model="row._isSelected"
+            :selected="row._isSelected"
+            @change="row._isSelected = !row._isSelected"
           ></wt-checkbox>
         </td>
 
