@@ -1,6 +1,7 @@
 import jszipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
+import path from 'path';
 import generateMediaURL from './scripts/generateMediaURL';
 
 /* eslint-disable no-await-in-loop, no-restricted-syntax */
@@ -47,8 +48,8 @@ export default class FilesExport {
       } else {
         const binary = await this._fetchFileBinary(item.id);
         const ext = item.mimeType.split('/').pop();
-        // itemName needed to remove extension from item.name
-        const itemName = item.name.substr(0, item.name.lastIndexOf('.'));
+        // itemName needed to remove extension from item.name https://stackoverflow.com/a/31615711
+        const itemName = path.parse(item.name).name;
         zip.file(`${itemName}.${ext}`, binary);
         this.downloadProgress.count += 1;
       }
