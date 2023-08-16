@@ -21,6 +21,9 @@
         >
           <!--      <a> click.prevent prevents redirect to # -->
           <a
+            :class="[
+              { 'wt-context-menu__option--disabled': option.disabled },
+            ]"
             class="wt-context-menu__option"
             href="#"
             @click.prevent="handleOptionClick({ option, index, hide })"
@@ -40,7 +43,7 @@ const props = defineProps({
   options: {
     type: Array,
     required: true,
-    description: '[{ text }]',
+    description: '[{ text, disabled, ... anything you need }]',
   },
   visible: {
     type: Boolean,
@@ -100,16 +103,21 @@ function handleOptionClick({ option, index, hide }) {
   &:only-of-type {
     border-radius: var(--border-radius);
   }
-
-  &:hover {
-    background-color: var(--context-menu-option-color--hover);
-    transition: var(--transition);
-  }
 }
 
 .wt-context-menu__option {
   display: block;
   padding: var(--context-menu-option-padding);
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--context-menu-option-color--hover);
+    transition: var(--transition);
+  }
+
+  &--disabled {
+    pointer-events: none;
+    color: var(--context-menu-option-color--disabled);
+  }
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
   <div class="playground">
+    <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }]">
+      <template v-slot:activator><wt-button>context menu</wt-button></template>
+    </wt-context-menu>
     <wt-tooltip :triggers="['click']" :popper-triggers="['click']">
       <template v-slot:activator>
         <div class="my-div">
@@ -122,6 +125,7 @@
 
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
+import WtContextMenu from './components/atoms/wt-context-menu/wt-context-menu.vue';
 import WtTooltip from './components/atoms/wt-tooltip/wt-tooltip.vue';
 import WtDatepicker from './components/molecules/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
@@ -131,7 +135,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
+  components: { WtContextMenu, WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
   data: () => ({
     auditQuestions: [
       {
