@@ -47,7 +47,9 @@ export default class FilesExport {
       } else {
         const binary = await this._fetchFileBinary(item.id);
         const ext = item.mimeType.split('/').pop();
-        zip.file(`${item.name}.${ext}`, binary);
+        // itemName needed to remove extension from item.name
+        const itemName = item.name.substr(0, item.name.lastIndexOf('.'));
+        zip.file(`${itemName}.${ext}`, binary);
         this.downloadProgress.count += 1;
       }
     }
