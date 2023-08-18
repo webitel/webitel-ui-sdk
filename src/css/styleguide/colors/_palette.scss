@@ -50,7 +50,6 @@
   --hue-amber: 43;
   --hue-orange: 32;
   --hue-deep-orange: 11;
-  --hue-blue-grey: 225;
 
   // RED
   --red-lighten-5: hsla(var(--hue-red), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
@@ -324,22 +323,35 @@
   --deep-orange-accent-2: hsla(var(--hue-deep-orange), var(--saturation-accent-2), var(--lightness-accent-2), 1);
   --deep-orange-accent-1: hsla(var(--hue-deep-orange), var(--saturation-accent-1), var(--lightness-accent-1), 1);
 
-  // blue-grey
-  --blue-grey-lighten-5: hsla(var(--hue-blue-grey), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
-  --blue-grey-lighten-4: hsla(var(--hue-blue-grey), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
-  --blue-grey-lighten-3: hsla(var(--hue-blue-grey), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
-  --blue-grey-lighten-2: hsla(var(--hue-blue-grey), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
-  --blue-grey-lighten-1: hsla(var(--hue-blue-grey), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+  // grey
 
-  --blue-grey-darken-4: hsla(var(--hue-blue-grey), var(--saturation-darken-4), var(--lightness-darken-4), 1);
-  --blue-grey-darken-3: hsla(var(--hue-blue-grey), var(--saturation-darken-3), var(--lightness-darken-3), 1);
-  --blue-grey-darken-2: hsla(var(--hue-blue-grey), var(--saturation-darken-2), var(--lightness-darken-2), 1);
-  --blue-grey-darken-1: hsla(var(--hue-blue-grey), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+  --lightness-lighten-5-grey: 94%;
+  --lightness-lighten-4-grey: 84%;
+  --lightness-lighten-3-grey: 74%;
+  --lightness-lighten-2-grey: 64%;
+  --lightness-lighten-1-grey: 54%;
 
-  --blue-grey-accent-4: hsla(var(--hue-blue-grey), var(--saturation-accent-4), var(--lightness-accent-4), 1);
-  --blue-grey-accent-3: hsla(var(--hue-blue-grey), var(--saturation-accent-3), var(--lightness-accent-3), 1);
-  --blue-grey-accent-2: hsla(var(--hue-blue-grey), var(--saturation-accent-2), var(--lightness-accent-2), 1);
-  --blue-grey-accent-1: hsla(var(--hue-blue-grey), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+  --lightness-darken-1-grey: 44%;
+  --lightness-darken-2-grey: 34%;
+  --lightness-darken-3-grey: 24%;
+  --lightness-darken-4-grey: 14%;
+  --lightness-darken-5-grey: 4%;
+
+  --saturation-grey: 20;
+  --hue-grey: 225;
+
+
+  --grey-lighten-5: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-lighten-5-grey), 1);
+  --grey-lighten-4: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-lighten-4-grey), 1);
+  --grey-lighten-3: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-lighten-3-grey), 1);
+  --grey-lighten-2: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-lighten-2-grey), 1);
+  --grey-lighten-1: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-lighten-1-grey), 1);
+
+  --grey-darken-1: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-darken-1-grey), 1);
+  --grey-darken-2: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-darken-2-grey), 1);
+  --grey-darken-3: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-darken-3-grey), 1);
+  --grey-darken-4: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-darken-4-grey), 1);
+  --grey-darken-5: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-darken-5-grey), 1);
 
   --black: hsla(0, 0, 0, 1);
   --white: hsla(0, 0, 100, 1);
