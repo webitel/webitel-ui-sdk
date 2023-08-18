@@ -1,0 +1,346 @@
+:root {
+  // LIGHTNESS
+  --lightness-lighten-5: 95%;
+  --lightness-lighten-4: 90%;
+  --lightness-lighten-3: 80%;
+  --lightness-lighten-2: 70%;
+  --lightness-lighten-1: 60%;
+
+  --lightness-darken-1: 50%;
+  --lightness-darken-2: 45%;
+  --lightness-darken-3: 40%;
+  --lightness-darken-4: 35%;
+
+  --lightness-accent-1: 75%;
+  --lightness-accent-2: 65%;
+  --lightness-accent-3: 50%;
+  --lightness-accent-4: 40%;
+
+  // SATURATION
+  --saturation-lighten-5: 92%;
+  --saturation-lighten-4: 88%;
+  --saturation-lighten-3: 90%;
+  --saturation-lighten-2: 90%;
+  --saturation-lighten-1: 90%;
+
+  --saturation-darken-1: 75%;
+  --saturation-darken-2: 75%;
+  --saturation-darken-3: 75%;
+  --saturation-darken-4: 75%;
+
+  --saturation-accent-1: 91%;
+  --saturation-accent-2: 90%;
+  --saturation-accent-3: 97%;
+  --saturation-accent-4: 97%;
+
+  // HUE
+  --hue-red: 0;
+  --hue-pink: 337;
+  --hue-purple: 291;
+  --hue-deep-purple: 263;
+  --hue-indigo: 232;
+  --hue-blue: 209;
+  --hue-light-blue: 202;
+  --hue-cyan: 188;
+  --hue-teal: 173;
+  --hue-green: 121;
+  --hue-light-green: 88;
+  --hue-lime: 66;
+  --hue-yellow: 54;
+  --hue-amber: 43;
+  --hue-orange: 32;
+  --hue-deep-orange: 11;
+  --hue-blue-grey: 225;
+
+  // RED
+  --red-lighten-5: hsla(var(--hue-red), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --red-lighten-4: hsla(var(--hue-red), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --red-lighten-3: hsla(var(--hue-red), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --red-lighten-2: hsla(var(--hue-red), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --red-lighten-1: hsla(var(--hue-red), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --red-darken-4: hsla(var(--hue-red), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --red-darken-3: hsla(var(--hue-red), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --red-darken-2: hsla(var(--hue-red), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --red-darken-1: hsla(var(--hue-red), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --red-accent-4: hsla(var(--hue-red), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --red-accent-3: hsla(var(--hue-red), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --red-accent-2: hsla(var(--hue-red), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --red-accent-1: hsla(var(--hue-red), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // PINK
+  --pink-lighten-5: hsla(var(--hue-pink), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --pink-lighten-4: hsla(var(--hue-pink), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --pink-lighten-3: hsla(var(--hue-pink), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --pink-lighten-2: hsla(var(--hue-pink), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --pink-lighten-1: hsla(var(--hue-pink), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --pink-darken-4: hsla(var(--hue-pink), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --pink-darken-3: hsla(var(--hue-pink), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --pink-darken-2: hsla(var(--hue-pink), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --pink-darken-1: hsla(var(--hue-pink), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --pink-accent-4: hsla(var(--hue-pink), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --pink-accent-3: hsla(var(--hue-pink), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --pink-accent-2: hsla(var(--hue-pink), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --pink-accent-1: hsla(var(--hue-pink), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // PURPLE
+  --purple-lighten-5: hsla(var(--hue-purple), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --purple-lighten-4: hsla(var(--hue-purple), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --purple-lighten-3: hsla(var(--hue-purple), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --purple-lighten-2: hsla(var(--hue-purple), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --purple-lighten-1: hsla(var(--hue-purple), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --purple-darken-4: hsla(var(--hue-purple), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --purple-darken-3: hsla(var(--hue-purple), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --purple-darken-2: hsla(var(--hue-purple), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --purple-darken-1: hsla(var(--hue-purple), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --purple-accent-4: hsla(var(--hue-purple), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --purple-accent-3: hsla(var(--hue-purple), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --purple-accent-2: hsla(var(--hue-purple), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --purple-accent-1: hsla(var(--hue-purple), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // DEEP PURPLE
+  --deep-purple-lighten-5: hsla(var(--hue-deep-purple), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --deep-purple-lighten-4: hsla(var(--hue-deep-purple), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --deep-purple-lighten-3: hsla(var(--hue-deep-purple), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --deep-purple-lighten-2: hsla(var(--hue-deep-purple), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --deep-purple-lighten-1: hsla(var(--hue-deep-purple), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --deep-purple-darken-4: hsla(var(--hue-deep-purple), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --deep-purple-darken-3: hsla(var(--hue-deep-purple), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --deep-purple-darken-2: hsla(var(--hue-deep-purple), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --deep-purple-darken-1: hsla(var(--hue-deep-purple), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --deep-purple-accent-4: hsla(var(--hue-deep-purple), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --deep-purple-accent-3: hsla(var(--hue-deep-purple), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --deep-purple-accent-2: hsla(var(--hue-deep-purple), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --deep-purple-accent-1: hsla(var(--hue-deep-purple), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // INDIGO
+  --indigo-lighten-5: hsla(var(--hue-indigo), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --indigo-lighten-4: hsla(var(--hue-indigo), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --indigo-lighten-3: hsla(var(--hue-indigo), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --indigo-lighten-2: hsla(var(--hue-indigo), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --indigo-lighten-1: hsla(var(--hue-indigo), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --indigo-darken-4: hsla(var(--hue-indigo), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --indigo-darken-3: hsla(var(--hue-indigo), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --indigo-darken-2: hsla(var(--hue-indigo), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --indigo-darken-1: hsla(var(--hue-indigo), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --indigo-accent-4: hsla(var(--hue-indigo), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --indigo-accent-3: hsla(var(--hue-indigo), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --indigo-accent-2: hsla(var(--hue-indigo), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --indigo-accent-1: hsla(var(--hue-indigo), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // BLUE
+  --blue-lighten-5: hsla(var(--hue-blue), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --blue-lighten-4: hsla(var(--hue-blue), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --blue-lighten-3: hsla(var(--hue-blue), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --blue-lighten-2: hsla(var(--hue-blue), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --blue-lighten-1: hsla(var(--hue-blue), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --blue-darken-4: hsla(var(--hue-blue), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --blue-darken-3: hsla(var(--hue-blue), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --blue-darken-2: hsla(var(--hue-blue), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --blue-darken-1: hsla(var(--hue-blue), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --blue-accent-4: hsla(var(--hue-blue), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --blue-accent-3: hsla(var(--hue-blue), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --blue-accent-2: hsla(var(--hue-blue), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --blue-accent-1: hsla(var(--hue-blue), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // LIGHT BLUE
+  --light-blue-lighten-5: hsla(var(--hue-light-blue), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --light-blue-lighten-4: hsla(var(--hue-light-blue), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --light-blue-lighten-3: hsla(var(--hue-light-blue), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --light-blue-lighten-2: hsla(var(--hue-light-blue), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --light-blue-lighten-1: hsla(var(--hue-light-blue), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --light-blue-darken-4: hsla(var(--hue-light-blue), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --light-blue-darken-3: hsla(var(--hue-light-blue), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --light-blue-darken-2: hsla(var(--hue-light-blue), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --light-blue-darken-1: hsla(var(--hue-light-blue), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --light-blue-accent-4: hsla(var(--hue-light-blue), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --light-blue-accent-3: hsla(var(--hue-light-blue), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --light-blue-accent-2: hsla(var(--hue-light-blue), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --light-blue-accent-1: hsla(var(--hue-light-blue), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // CYAN
+  --cyan-lighten-5: hsla(var(--hue-cyan), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --cyan-lighten-4: hsla(var(--hue-cyan), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --cyan-lighten-3: hsla(var(--hue-cyan), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --cyan-lighten-2: hsla(var(--hue-cyan), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --cyan-lighten-1: hsla(var(--hue-cyan), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --cyan-darken-4: hsla(var(--hue-cyan), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --cyan-darken-3: hsla(var(--hue-cyan), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --cyan-darken-2: hsla(var(--hue-cyan), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --cyan-darken-1: hsla(var(--hue-cyan), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --cyan-accent-4: hsla(var(--hue-cyan), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --cyan-accent-3: hsla(var(--hue-cyan), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --cyan-accent-2: hsla(var(--hue-cyan), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --cyan-accent-1: hsla(var(--hue-cyan), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // TEAL
+  --teal-lighten-5: hsla(var(--hue-teal), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --teal-lighten-4: hsla(var(--hue-teal), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --teal-lighten-3: hsla(var(--hue-teal), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --teal-lighten-2: hsla(var(--hue-teal), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --teal-lighten-1: hsla(var(--hue-teal), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --teal-darken-4: hsla(var(--hue-teal), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --teal-darken-3: hsla(var(--hue-teal), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --teal-darken-2: hsla(var(--hue-teal), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --teal-darken-1: hsla(var(--hue-teal), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --teal-accent-4: hsla(var(--hue-teal), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --teal-accent-3: hsla(var(--hue-teal), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --teal-accent-2: hsla(var(--hue-teal), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --teal-accent-1: hsla(var(--hue-teal), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // GREEN
+  --green-lighten-5: hsla(var(--hue-green), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --green-lighten-4: hsla(var(--hue-green), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --green-lighten-3: hsla(var(--hue-green), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --green-lighten-2: hsla(var(--hue-green), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --green-lighten-1: hsla(var(--hue-green), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --green-darken-4: hsla(var(--hue-green), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --green-darken-3: hsla(var(--hue-green), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --green-darken-2: hsla(var(--hue-green), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --green-darken-1: hsla(var(--hue-green), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --green-accent-4: hsla(var(--hue-green), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --green-accent-3: hsla(var(--hue-green), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --green-accent-2: hsla(var(--hue-green), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --green-accent-1: hsla(var(--hue-green), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // LIGHT GREEN
+  --light-green-lighten-5: hsla(var(--hue-light-green), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --light-green-lighten-4: hsla(var(--hue-light-green), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --light-green-lighten-3: hsla(var(--hue-light-green), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --light-green-lighten-2: hsla(var(--hue-light-green), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --light-green-lighten-1: hsla(var(--hue-light-green), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --light-green-darken-4: hsla(var(--hue-light-green), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --light-green-darken-3: hsla(var(--hue-light-green), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --light-green-darken-2: hsla(var(--hue-light-green), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --light-green-darken-1: hsla(var(--hue-light-green), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --light-green-accent-4: hsla(var(--hue-light-green), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --light-green-accent-3: hsla(var(--hue-light-green), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --light-green-accent-2: hsla(var(--hue-light-green), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --light-green-accent-1: hsla(var(--hue-light-green), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // LIME
+  --lime-lighten-5: hsla(var(--hue-lime), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --lime-lighten-4: hsla(var(--hue-lime), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --lime-lighten-3: hsla(var(--hue-lime), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --lime-lighten-2: hsla(var(--hue-lime), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --lime-lighten-1: hsla(var(--hue-lime), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --lime-darken-4: hsla(var(--hue-lime), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --lime-darken-3: hsla(var(--hue-lime), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --lime-darken-2: hsla(var(--hue-lime), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --lime-darken-1: hsla(var(--hue-lime), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --lime-accent-4: hsla(var(--hue-lime), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --lime-accent-3: hsla(var(--hue-lime), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --lime-accent-2: hsla(var(--hue-lime), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --lime-accent-1: hsla(var(--hue-lime), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // yellow
+  --yellow-lighten-5: hsla(var(--hue-yellow), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --yellow-lighten-4: hsla(var(--hue-yellow), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --yellow-lighten-3: hsla(var(--hue-yellow), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --yellow-lighten-2: hsla(var(--hue-yellow), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --yellow-lighten-1: hsla(var(--hue-yellow), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --yellow-darken-4: hsla(var(--hue-yellow), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --yellow-darken-3: hsla(var(--hue-yellow), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --yellow-darken-2: hsla(var(--hue-yellow), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --yellow-darken-1: hsla(var(--hue-yellow), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --yellow-accent-4: hsla(var(--hue-yellow), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --yellow-accent-3: hsla(var(--hue-yellow), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --yellow-accent-2: hsla(var(--hue-yellow), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --yellow-accent-1: hsla(var(--hue-yellow), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // amber
+  --amber-lighten-5: hsla(var(--hue-amber), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --amber-lighten-4: hsla(var(--hue-amber), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --amber-lighten-3: hsla(var(--hue-amber), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --amber-lighten-2: hsla(var(--hue-amber), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --amber-lighten-1: hsla(var(--hue-amber), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --amber-darken-4: hsla(var(--hue-amber), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --amber-darken-3: hsla(var(--hue-amber), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --amber-darken-2: hsla(var(--hue-amber), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --amber-darken-1: hsla(var(--hue-amber), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --amber-accent-4: hsla(var(--hue-amber), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --amber-accent-3: hsla(var(--hue-amber), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --amber-accent-2: hsla(var(--hue-amber), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --amber-accent-1: hsla(var(--hue-amber), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // orange
+  --orange-lighten-5: hsla(var(--hue-orange), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --orange-lighten-4: hsla(var(--hue-orange), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --orange-lighten-3: hsla(var(--hue-orange), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --orange-lighten-2: hsla(var(--hue-orange), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --orange-lighten-1: hsla(var(--hue-orange), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --orange-darken-4: hsla(var(--hue-orange), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --orange-darken-3: hsla(var(--hue-orange), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --orange-darken-2: hsla(var(--hue-orange), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --orange-darken-1: hsla(var(--hue-orange), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --orange-accent-4: hsla(var(--hue-orange), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --orange-accent-3: hsla(var(--hue-orange), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --orange-accent-2: hsla(var(--hue-orange), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --orange-accent-1: hsla(var(--hue-orange), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // deep-orange
+  --deep-orange-lighten-5: hsla(var(--hue-deep-orange), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --deep-orange-lighten-4: hsla(var(--hue-deep-orange), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --deep-orange-lighten-3: hsla(var(--hue-deep-orange), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --deep-orange-lighten-2: hsla(var(--hue-deep-orange), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --deep-orange-lighten-1: hsla(var(--hue-deep-orange), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --deep-orange-darken-4: hsla(var(--hue-deep-orange), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --deep-orange-darken-3: hsla(var(--hue-deep-orange), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --deep-orange-darken-2: hsla(var(--hue-deep-orange), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --deep-orange-darken-1: hsla(var(--hue-deep-orange), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --deep-orange-accent-4: hsla(var(--hue-deep-orange), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --deep-orange-accent-3: hsla(var(--hue-deep-orange), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --deep-orange-accent-2: hsla(var(--hue-deep-orange), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --deep-orange-accent-1: hsla(var(--hue-deep-orange), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  // blue-grey
+  --blue-grey-lighten-5: hsla(var(--hue-blue-grey), var(--saturation-lighten-5), var(--lightness-lighten-5), 1);
+  --blue-grey-lighten-4: hsla(var(--hue-blue-grey), var(--saturation-lighten-4), var(--lightness-lighten-4), 1);
+  --blue-grey-lighten-3: hsla(var(--hue-blue-grey), var(--saturation-lighten-3), var(--lightness-lighten-3), 1);
+  --blue-grey-lighten-2: hsla(var(--hue-blue-grey), var(--saturation-lighten-2), var(--lightness-lighten-2), 1);
+  --blue-grey-lighten-1: hsla(var(--hue-blue-grey), var(--saturation-lighten-1), var(--lightness-lighten-1), 1);
+
+  --blue-grey-darken-4: hsla(var(--hue-blue-grey), var(--saturation-darken-4), var(--lightness-darken-4), 1);
+  --blue-grey-darken-3: hsla(var(--hue-blue-grey), var(--saturation-darken-3), var(--lightness-darken-3), 1);
+  --blue-grey-darken-2: hsla(var(--hue-blue-grey), var(--saturation-darken-2), var(--lightness-darken-2), 1);
+  --blue-grey-darken-1: hsla(var(--hue-blue-grey), var(--saturation-darken-1), var(--lightness-darken-1), 1);
+
+  --blue-grey-accent-4: hsla(var(--hue-blue-grey), var(--saturation-accent-4), var(--lightness-accent-4), 1);
+  --blue-grey-accent-3: hsla(var(--hue-blue-grey), var(--saturation-accent-3), var(--lightness-accent-3), 1);
+  --blue-grey-accent-2: hsla(var(--hue-blue-grey), var(--saturation-accent-2), var(--lightness-accent-2), 1);
+  --blue-grey-accent-1: hsla(var(--hue-blue-grey), var(--saturation-accent-1), var(--lightness-accent-1), 1);
+
+  --black: hsla(0, 0, 0, 1);
+  --white: hsla(0, 0, 100, 1);
+}
