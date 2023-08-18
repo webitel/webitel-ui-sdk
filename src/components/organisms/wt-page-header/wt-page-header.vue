@@ -23,6 +23,7 @@
       <wt-button
         v-if="!hideSecondary && !emptySecondary"
         color="secondary"
+        :disabled="secondaryDisabled"
         @click="secondaryAction"
       >
         {{ secondaryText || $t('reusable.close') }}
@@ -50,6 +51,10 @@ const props = defineProps({
     type: Function,
   },
   primaryDisabled: {
+    type: Boolean,
+    default: false,
+  },
+  secondaryDisabled: {
     type: Boolean,
     default: false,
   },
