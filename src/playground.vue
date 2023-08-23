@@ -1,5 +1,22 @@
 <template>
   <div class="playground">
+   <div style="display: flex; gap: 10px; flex-wrap: wrap">
+     <wt-avatar size="sm"></wt-avatar>
+     <wt-avatar size="sm" username="A B"></wt-avatar>
+     <wt-avatar size="lg" username="A b"></wt-avatar>
+     <wt-avatar size="2xl" username="c d"></wt-avatar>
+     <wt-avatar size="3xl" username="e f"></wt-avatar>
+     <wt-avatar size="sm" username="g h"></wt-avatar>
+     <wt-avatar size="lg" username="i j"></wt-avatar>
+     <wt-avatar size="2xl" username="kl"></wt-avatar>
+     <wt-avatar size="3xl" username="mn"></wt-avatar>
+     <wt-avatar size="sm" username="op"></wt-avatar>
+     <wt-avatar size="lg" username="qr"></wt-avatar>
+     <wt-avatar size="2xl" username="s t"></wt-avatar>
+     <wt-avatar size="3xl" username="u v"></wt-avatar>
+     <wt-avatar size="sm" username="w x"></wt-avatar>
+     <wt-avatar size="lg" username="y z"></wt-avatar>
+   </div>
     <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }]">
       <template v-slot:activator><wt-button>context menu</wt-button></template>
     </wt-context-menu>
