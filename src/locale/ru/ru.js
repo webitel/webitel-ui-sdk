@@ -225,6 +225,7 @@ export default {
         [AdminSections.TRIGGERS]: 'Триггеры',
         [AdminSections.ROLES]: 'Роли',
         [AdminSections.OBJECTS]: 'Разделы',
+        [AdminSections.CHANGELOGS]: 'Журналы изменений',
       },
     },
   },

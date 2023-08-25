@@ -41,6 +41,9 @@ const AdminSections = Object.freeze({
   // PERMISSIONS
   OBJECTS: 'objects',                // permissions: add
   ROLES: 'roles',                   // scope: roles
+
+  // SYSTEM
+  CHANGELOGS: 'changelogs',
 });
 
 export default AdminSections;
