@@ -35,6 +35,18 @@ export const useCardStore = (namespace) => {
     return store.dispatch(`${cardNamespace}/SET_ITEM_PROPERTY`, payload);
   }
 
+  function addVariable(payload) {
+    return store.dispatch(`${cardNamespace}/ADD_VARIABLE_PAIR`, payload);
+  }
+
+  function setVariableProp(payload) {
+    return store.dispatch(`${cardNamespace}/SET_VARIABLE_PROP`, payload);
+  }
+
+  function deleteVariable(payload) {
+    return store.dispatch(`${cardNamespace}/DELETE_VARIABLE_PAIR`, payload);
+  }
+
   return {
     namespace: cardNamespace,
     id,
@@ -46,5 +58,8 @@ export const useCardStore = (namespace) => {
     setId,
     resetState,
     setItemProp,
+    addVariable,
+    setVariableProp,
+    deleteVariable,
   };
 };
