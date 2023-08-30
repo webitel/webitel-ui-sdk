@@ -63,11 +63,11 @@ import set from 'lodash/set';
 import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
-import WtTooltip from '../../../components/atoms/wt-tooltip/wt-tooltip.vue';
-import WtSwitcher from '../../../components/molecules/wt-switcher/wt-switcher.vue';
-import WtIconBtn from '../../../components/molecules/wt-icon-btn/wt-icon-btn.vue';
-import WtInput from '../../../components/molecules/wt-input/wt-input.vue';
-import WtSelect from '../../../components/molecules/wt-select/wt-select.vue';
+import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';
+import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
+import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
+import WtInput from '../../../components/wt-input/wt-input.vue';
+import WtSelect from '../../../components/wt-select/wt-select.vue';
 
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';

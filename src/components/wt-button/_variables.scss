@@ -1,0 +1,46 @@
+:root {
+  --btn-min-width: 90px;
+  --btn-border-size: 2px;
+  --btn-padding: var(--spacing-xs) var(--spacing-sm);
+
+  --btn-padding--size-md: var(--btn-padding);
+  --btn-padding--size-sm: var(--spacing-2xs) var(--spacing-xs);
+
+  --btn-padding--outline:
+    calc(var(--spacing-xs) - var(--btn-border-size))
+    calc(var(--spacing-sm) - var(--btn-border-size));
+  --btn-padding--size-md--outline: var(--btn-padding--outline);
+  --btn-padding--size-sm--outline:
+    calc(var(--spacing-2xs) - var(--btn-border-size))
+    calc(var(--spacing-xs) - var(--btn-border-size));
+
+  --btn-border: var(--btn-border-size) solid;
+
+  // BUTTON COLORS
+  --btn-dark-font-color: var(--text-primary-color);
+  --btn-light-font-color: var(--text-contrast-color);
+
+  --btn-accent-color: hsla(var(--_accent-color), var(--_opacity--default));
+  --btn-accent--hover-color: hsla(var(--_accent-color), var(--_opacity--hover));
+
+  --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
+  --btn-secondary--hover-color: hsla(var(--_secondary-color), var(--_opacity--hover));
+
+  --btn-disabled-font-color: var(--secondary-color-50);
+  --btn-disabled-color: hsla(var(--_secondary-color-hue), 15%, 75%, var(--_opacity--active));
+
+  --btn-true-color: var(--true-color);
+  --btn-true--hover-color: var(--true--hover-color);
+
+  --btn-false-color: var(--false-color);
+  --btn-false--hover-color: var(--false--hover-color);
+
+  --btn-hold-color: var(--hold-color);
+  --btn-hold--hover-color: var(--hold--hover-color);
+
+  --btn-transfer-color: var(--transfer-color);
+  --btn-transfer--hover-color: var(--transfer--hover-color);
+
+  --btn-job-color: var(--job-color);
+  --btn-job--hover-color: var(--job--hover-color);
+}

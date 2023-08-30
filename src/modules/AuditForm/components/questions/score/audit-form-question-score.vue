@@ -47,8 +47,8 @@ import { maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, onMounted, toRefs } from 'vue';
 import isEmpty from '../../../../../scripts/isEmpty';
 import updateObject from '../../../../../scripts/updateObject';
-import WtRadio from '../../../../../components/molecules/wt-radio/wt-radio.vue';
-import WtInput from '../../../../../components/molecules/wt-input/wt-input.vue';
+import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
+import WtInput from '../../../../../components/wt-input/wt-input.vue';
 
 const props = defineProps({
   question: {

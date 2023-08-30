@@ -39,7 +39,7 @@ import {
 import { useVuelidate } from '@vuelidate/core';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable';
 import AuditFormQuestion from './audit-form-question.vue';
-import WtButton from '../../../components/atoms/wt-button/wt-button.vue';
+import WtButton from '../../../components/wt-button/wt-button.vue';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';
 
 const props = defineProps({

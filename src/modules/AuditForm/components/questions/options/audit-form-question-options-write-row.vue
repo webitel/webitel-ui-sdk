@@ -31,9 +31,9 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required, minValue, maxValue } from '@vuelidate/validators';
 import { computed, onMounted, toRefs } from 'vue';
-import WtTooltip from '../../../../../components/atoms/wt-tooltip/wt-tooltip.vue';
-import WtIconBtn from '../../../../../components/molecules/wt-icon-btn/wt-icon-btn.vue';
-import WtInput from '../../../../../components/molecules/wt-input/wt-input.vue';
+import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
+import WtIconBtn from '../../../../../components/wt-icon-btn/wt-icon-btn.vue';
+import WtInput from '../../../../../components/wt-input/wt-input.vue';
 
 const props = defineProps({
   option: {

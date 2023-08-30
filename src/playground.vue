@@ -142,10 +142,10 @@
 
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
-import WtContextMenu from './components/atoms/wt-context-menu/wt-context-menu.vue';
-import WtTooltip from './components/atoms/wt-tooltip/wt-tooltip.vue';
-import WtDatepicker from './components/molecules/wt-datepicker/wt-datepicker.vue';
-import WtNavigationBar from './components/organisms/wt-navigation-bar/wt-navigation-bar.vue';
+import WtContextMenu from './components/wt-context-menu/wt-context-menu.vue';
+import WtTooltip from './components/wt-tooltip/wt-tooltip.vue';
+import WtDatepicker from './components/wt-datepicker/wt-datepicker.vue';
+import WtNavigationBar from './components/wt-navigation-bar/wt-navigation-bar.vue';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
 
 import AuditForm from './modules/AuditForm/components/audit-form.vue';

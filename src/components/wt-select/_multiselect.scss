@@ -1,0 +1,198 @@
+@import '../../../node_modules/vue-multiselect/dist/vue3-multiselect.css';
+
+.multiselect ::v-deep {
+  cursor: pointer;
+  position: relative;
+
+  .multiselect__select {
+    position: absolute;
+    top: var(--select-icon-top-pos);
+    right: var(--select-caret-right-pos);
+    padding: 0; // reset default
+    transition: var(--transition);
+    width: fit-content; // reset default
+    height: fit-content; // reset default
+
+    &:before {
+      display: none; // reset default
+    }
+  }
+
+  .multiselect__limit {
+    position: absolute;
+    top: var(--select-chip-top-pos);
+  }
+
+  .multiselect__clear {
+    position: absolute;
+    z-index: 1;
+    top: var(--select-icon-top-pos);
+  }
+
+
+  .multiselect__tags {
+    padding: calc(var(--spacing-xs) - 1px); // borders
+    color: var(--form-input-color);
+    border: var(--select-tags-border);
+    border-color: var(--form-border-color);
+    border-radius: var(--border-radius);
+  }
+
+
+  .multiselect__input,
+  .multiselect__single,
+  .multiselect__placeholder {
+    @extend %typo-body-1;
+    @include wt-placeholder;
+    background: transparent;
+    padding: 0; // reset default
+    margin: 0; // reset default
+  }
+
+  .multiselect__input:focus {
+    @include wt-placeholder('focus');
+  }
+
+  .multiselect__custom-tag,
+  .multiselect__single-label {
+    color: var(--form-input-color);
+  }
+
+  .multiselect__placeholder {
+    @extend %wt-placeholder;
+    overflow: hidden;
+    max-width: 100%;
+    display: block;
+
+    // text overflow 3 dots
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .multiselect__content-wrapper {
+    @extend %wt-distant-scrollbar;
+    transition: var(--transition);
+    border: var(--select-tags-border);
+    border-color: var(--form-border-color);
+    border-radius: var(--border-radius);
+  }
+
+  .multiselect__option {
+    @extend %typo-body-1;
+    padding: var(--select-options-padding);
+
+    &:after {
+      display: none;
+    }
+
+
+    &--highlight {
+      color: var(--form-input-color);
+      //background: var(--select-option--hover-color);
+      background: none;
+    }
+
+
+    &--selected {
+      font-weight: normal;
+      background: var(--select-option--active-color)
+    }
+  }
+}
+
+.multiselect--active ::v-deep {
+  .multiselect__select .wt-icon__icon {
+    fill: var(--icon-color--hover);
+  }
+
+  .multiselect__tags {
+    border-color: var(--form-border--active-color);
+
+    .multiselect__placeholder {
+      @extend %wt-placeholder--focus;
+    }
+  }
+
+}
+
+.wt-select:hover,
+.wt-tags-input:hover {
+  .multiselect ::v-deep {
+    .multiselect__tags {
+      border-color: var(--form-border--hover-color);
+    }
+
+    .multiselect__select,
+    .multiselect__clear {
+      .wt-icon__icon {
+        fill: var(--icon-color--hover);
+      }
+    }
+  }
+}
+
+.wt-select--loading,
+.wt-tags-input--loading {
+  ::v-deep {
+    .multiselect__content-wrapper {
+      overflow-y: hidden;
+    }
+
+    .multiselect__loading-wrapper {
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 300px; // max dropdown panel height
+      backdrop-filter: blur(4px);
+    }
+  }
+}
+
+
+.wt-select.wt-select--invalid,
+.wt-tags-input.wt-tags-input--invalid {
+  .multiselect ::v-deep {
+    .multiselect__tags {
+      border-color: var(--false-color);
+      outline: none; // prevent outline overlapping false color
+    }
+  }
+}
+
+.wt-select--disabled,
+.wt-tags-input--disabled {
+  pointer-events: none;
+
+  .multiselect--disabled {
+    opacity: 1;
+    background: none;
+  }
+
+  .multiselect__select {
+    background: transparent; // reset default
+  }
+
+  .multiselect__arrow-caret ::v-deep .wt-icon__icon,
+  .multiselect__clear ::v-deep .wt-icon__icon {
+    fill: var(--icon-color-disabled);
+  }
+
+  .multiselect {
+    ::v-deep {
+      .multiselect__tags {
+        border-color: var(--form-border--disabled-color);
+        background: var(--form-border--disabled-color);
+
+        .multiselect__placeholder {
+          @extend %wt-placeholder--disabled;
+          //color: var(--form-placeholder--disabled-color);
+        }
+      }
+    }
+  }
+}

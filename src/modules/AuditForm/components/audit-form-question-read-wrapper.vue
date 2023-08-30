@@ -40,7 +40,7 @@ import { EngineAuditQuestionType } from 'webitel-sdk';
 import isEmpty from '../../../scripts/isEmpty';
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
-import WtIcon from '../../../components/atoms/wt-icon/wt-icon.vue';
+import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 
 const props = defineProps({
   question: {
