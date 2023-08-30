@@ -330,10 +330,9 @@ export default {
       },
     },
     deleteConfirmationPopup: {
-      title: 'Підтвердіть видалення',
-      askingAlert: 'Ви впевнені, що хочете видалити {count} запис? | Ви впевнені, що хочете видалити {count} записів?',
-      undoneActionAlert: 'Дана дія не може бути скасована.',
-      deleteAll: 'ВСІ',
+      title: 'Delete {entity}',
+      askingAlert: 'Are you sure to delete {entity}?',
+      deleteAll: 'ALL',
     },
     dummy: {
       text: 'Записи у розділі ще не створені',
