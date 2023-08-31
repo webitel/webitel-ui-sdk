@@ -164,8 +164,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
 
 .wt-navigation-bar__menu-btn {
   display: block;

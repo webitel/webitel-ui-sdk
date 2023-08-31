@@ -131,8 +131,11 @@ const datepicker = ref(null); // template ref
 const isDateTime = props.mode === 'datetime';
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {

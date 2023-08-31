@@ -66,9 +66,12 @@ export default {
 };
 </script>
 
+<style lang="scss">
+@import './variables.scss';
+</style>
+
 <!--not scoped to change .icon colors-->
 <style lang="scss" scoped>
-@import './variables.scss';
 
 .wt-button.wt-rounded-action {
   min-width: auto;

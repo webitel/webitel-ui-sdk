@@ -155,10 +155,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './variables.scss';
 @import '../wt-select/multiselect.scss';
+</style>
 
+<style lang="scss" scoped>
 .wt-tags-input {
   width: 100%;
 }

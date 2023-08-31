@@ -12,31 +12,30 @@
     ></wt-indicator>
     <wt-indicator
       color="primary"
-      :text="pause"
+      :text="status.pause"
       :size="size"
     ></wt-indicator>
   </article>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-
 const props = defineProps({
+  /**
+   * @description Status object
+   * @type {Object}
+   * @property {String} offline
+   * @property {String} online
+   * @property {String} pause
+   */
   status: {
     type: Object,
     required: true,
-    description: '{ offline, pause, online, allowPause? }',
   },
   size: {
     type: String,
     default: 'md',
     options: ['sm', 'md'],
   },
-});
-
-const pause = computed(() => {
-  if (!props.status.allowPause) return props.status.pause;
-  return `${props.status.pause} / ${props.status.allowPause}`;
 });
 </script>
 

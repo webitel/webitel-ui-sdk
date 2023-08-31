@@ -80,8 +80,11 @@ function handleKeyup(event) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
 
 .wt-search-bar {
   cursor: text;
