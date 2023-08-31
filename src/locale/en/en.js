@@ -340,5 +340,12 @@ export default {
     dummy: {
       text: 'There are no records yet',
     },
+    agentStatusSelect: {
+      pauseCausePopup: {
+        title: 'Select a pause cause',
+        min: 'Min',
+        unlimited: 'Unlimited',
+      },
+    },
   },
 };

@@ -338,5 +338,12 @@ export default {
     dummy: {
       text: 'Записи у розділі ще не створені',
     },
+    agentStatusSelect: {
+      pauseCausePopup: {
+        title: 'Виберіть причину паузи',
+        min: 'Хв',
+        unlimited: 'Безліміт',
+      },
+    },
   },
 };
