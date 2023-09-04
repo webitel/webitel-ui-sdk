@@ -99,36 +99,35 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
-.wt-status-select.wt-select ::v-deep {
+.wt-status-select.wt-select {
   box-shadow: var(--elevation-5);
 
-  .multiselect {
+  :deep(.multiselect) {
     min-height: 0;
-  }
 
-  .multiselect__tags {
-    min-height: 0;
-    padding: var(--status-select-padding);
-    border: none;
-  }
-
-  .multiselect__select {
-    top: 0;
-    right: 0;
-  }
-
-  .multiselect__content-wrapper {
-    border: none;
-
-    .multiselect__option {
+    .multiselect__tags {
       min-height: 0;
-      padding: 0;
-      color: var(--status-select-option-color);
+      padding: var(--status-select-padding);
+      border: none;
     }
 
-    .multiselect__option--highlight {
-      background: var(--status-select-bg--hover-color);
+    .multiselect__select {
+      top: 0;
+      right: 0;
+    }
+
+    .multiselect__content-wrapper {
+      border: none;
+
+      .multiselect__option {
+        min-height: 0;
+        padding: 0;
+        color: var(--status-select-option-color);
+      }
+
+      .multiselect__option--highlight {
+        background: var(--status-select-bg--hover-color);
+      }
     }
   }
 }

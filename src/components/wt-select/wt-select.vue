@@ -142,10 +142,10 @@ export default {
 
 <style lang="scss">
 @import './variables.scss';
-@import './multiselect.scss';
 </style>
 
 <style lang="scss" scoped>
+@import './multiselect.scss';
 
 .wt-select {
   width: 100%;
