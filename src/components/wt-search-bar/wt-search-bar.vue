@@ -40,8 +40,9 @@
 </template>
 
 <script setup>
+import { toRefs } from 'vue';
 import debounce from '../../scripts/debounce';
-import { validationComposable } from '../../mixins/validationMixin/validationComposable';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 const props = defineProps({
   v: {
@@ -74,13 +75,15 @@ const props = defineProps({
   },
 });
 
-const { invalid } = validationComposable(props);
-
 const emit = defineEmits([
   'input',
   'search',
   'enter',
 ]);
+
+const { v, customValidators } = toRefs(props);
+
+const { invalid } = useValidation({ v, customValidators });
 
 const search = debounce((value) => {
   emit('search', value);

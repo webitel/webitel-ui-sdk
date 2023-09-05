@@ -141,7 +141,7 @@
       :v="vInvalid"
       invalid
       :placeholder="$t('reusable.search')"
-      :value="'1231232'"
+      :value="searchValue"
       debounce
       required
     >
@@ -405,6 +405,7 @@ export default {
     },
     columnSelect: [],
     isLoading: false,
+    searchValue: '',
   }),
   methods: {
     search(search) {

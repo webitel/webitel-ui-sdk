@@ -1,12 +1,12 @@
 import { computed } from 'vue';
 
-export function validationComposable(props) {
+export function useValidation(props) {
   const isValidation = computed(() => !!props.v && !!Object.keys(props.v).length);
   const invalid = computed(() => isValidation.value && props.v.$error);
 
   const validationText = computed(() => {
     let validationText = '';
-    if (this.isValidation && this.invalid) {
+    if (isValidation && invalid) {
       if (this.v.required?.$invalid) validationText = this.$t('validation.required');
       else if (this.v.numeric?.$invalid) validationText = this.$t('validation.numeric');
       else if (this.v.email?.$invalid) validationText = this.$t('validation.email');
