@@ -1,8 +1,8 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n();
 export function useValidation(props) {
+  const { t } = useI18n();
   const isValidation = computed(() => !!props.v && !!Object.keys(props.v).length);
   const invalid = computed(() => isValidation.value && props.v.$error);
 
