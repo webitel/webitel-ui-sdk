@@ -346,6 +346,10 @@ export default {
         min: 'Min',
         unlimited: 'Unlimited',
       },
+      statusSelectErrorPopup: {
+        title: 'Attention',
+        message: 'he limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
+      },
     },
   },
 };

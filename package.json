@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "3.2.135",
+  "version": "3.2.141",
   "private": false,
   "scripts": {
     "serve-lib": "vue-cli-service serve",
@@ -55,7 +55,7 @@
     "vue-multiselect": "^3.0.0-beta.1",
     "vue-observe-visibility": "^1.0.0",
     "vue-router": "^4.1.6",
-    "webitel-sdk": "^0.1.184"
+    "webitel-sdk": "^23.7.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",

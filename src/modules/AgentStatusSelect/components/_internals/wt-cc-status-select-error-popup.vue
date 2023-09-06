@@ -14,7 +14,7 @@
           color="danger"
         ></wt-icon>
         <p class="wt-cc-status-select-error-popup__message">
-          {{ $t(`webitelUI.agentStatusSelect.statusSelectErrorPopup.${'message'}`) }}
+          {{ $t('webitelUI.agentStatusSelect.statusSelectErrorPopup.message') }}
         </p>
       </article>
     </template>
@@ -29,7 +29,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
   error: {
     type: Object,
