@@ -139,7 +139,6 @@
     <wt-search-bar
       :hint="'qwe qwe'"
       :v="vInvalid"
-      invalid
       :placeholder="$t('reusable.search')"
       :value="searchValue"
       debounce

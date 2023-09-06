@@ -10,6 +10,7 @@
       <div class="wt-search-bar__search-icon">
         <slot name="search-icon">
           <wt-icon
+            color="danger"
             icon="search"
           ></wt-icon>
         </slot>
@@ -40,7 +41,7 @@
 </template>
 
 <script setup>
-import { toRefs } from 'vue';
+import { reactive } from 'vue';
 import debounce from '../../scripts/debounce';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -81,7 +82,7 @@ const emit = defineEmits([
   'enter',
 ]);
 
-const { v, customValidators } = toRefs(props);
+const { v, customValidators } = reactive(props);
 
 const { invalid } = useValidation({ v, customValidators });
 
@@ -119,7 +120,8 @@ function handleKeyup(event) {
       border-color: var(--false-color);
       outline: none; // prevent outline overlapping false color
     }
-    ::v-deep .wt-icon__icon {
+    //deep needed to change color for icons in slot
+    :deep .wt-icon__icon {
       fill: var(--false-color);
     }
     .wt-search-bar__input {
