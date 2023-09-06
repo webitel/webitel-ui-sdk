@@ -344,6 +344,10 @@ export default {
         min: 'Мин',
         unlimited: 'Безлимит',
       },
+      statusSelectErrorPopup: {
+        title: 'Внимание',
+        message: 'Лимит операторов в паузе превишен. Перерыв сейчас недоступен.',
+      },
     },
   },
 };

@@ -20,9 +20,10 @@
 </template>
 
 <script setup>
-import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+import { PauseNotAllowedError } from 'webitel-sdk';
+import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum';
 import AgentStatusAPIFactory from '../api/agent-status';
 import PauseCauseAPIFactory from '../api/pause-cause';
 import PauseCausePopup from './_internals/wt-cc-pause-cause-popup.vue';
@@ -76,7 +77,7 @@ async function changeStatus({ status, pauseCause }) {
     await updateStatus(statusPayload);
     emit('changed', statusPayload);
   } catch (err) {
-    error.value = err;
+    if (err.response.data.id === PauseNotAllowedError.id) error.value = err;
     throw err;
   }
 }
@@ -101,6 +102,6 @@ function handlePauseCauseInput(pauseCause) {
 
 <style lang="scss" scoped>
 .wt-cc-agent-status-select .wt-status-select {
-  max-width: 200px;
+  width: 150px;
 }
 </style>

@@ -344,6 +344,10 @@ export default {
         min: 'Хв',
         unlimited: 'Безліміт',
       },
+      statusSelectErrorPopup: {
+        title: 'Увага',
+        message: 'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
+      },
     },
   },
 };
