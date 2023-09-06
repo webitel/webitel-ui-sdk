@@ -10,7 +10,6 @@
       <div class="wt-search-bar__search-icon">
         <slot name="search-icon">
           <wt-icon
-            color="danger"
             icon="search"
           ></wt-icon>
         </slot>
