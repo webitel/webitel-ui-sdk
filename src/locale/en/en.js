@@ -348,7 +348,7 @@ export default {
       },
       statusSelectErrorPopup: {
         title: 'Attention',
-        message: 'he limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
+        message: 'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
       },
     },
   },
