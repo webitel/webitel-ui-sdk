@@ -43,7 +43,7 @@
 
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
-import { maxValue, minValue, required } from '@vuelidate/validators';
+import { maxValue, minValue, required, integer } from '@vuelidate/validators';
 import { computed, onMounted, toRefs } from 'vue';
 import isEmpty from '../../../../../scripts/isEmpty';
 import updateObject from '../../../../../scripts/updateObject';
@@ -81,11 +81,13 @@ const v$ = useVuelidate(
           minValue: minValue(0),
           maxValue: maxValue(9),
           required,
+          integer,
         },
         max: {
           minValue: minValue(1),
           maxValue: maxValue(10),
           required,
+          integer,
         },
       },
     })),
