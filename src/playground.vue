@@ -136,6 +136,21 @@
     <!--      label="label"-->
     <!--      disabled-->
     <!--    ></wt-select>-->
+    <wt-search-bar
+      :hint="'qwe qwe'"
+      :v="vInvalid"
+      invalid
+      :placeholder="$t('reusable.search')"
+      :value="searchValue"
+      debounce
+      required
+    >
+      <template v-slot:additional-actions>
+        <wt-icon
+          icon="bucket"
+        ></wt-icon>
+      </template>
+    </wt-search-bar>
   </div>
 </template>
 
@@ -144,6 +159,7 @@
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
 import WtContextMenu from './components/wt-context-menu/wt-context-menu.vue';
+import WtSearchBar from './components/wt-search-bar/wt-search-bar.vue';
 import WtTooltip from './components/wt-tooltip/wt-tooltip.vue';
 import WtDatepicker from './components/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/wt-navigation-bar/wt-navigation-bar.vue';
@@ -153,7 +169,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { WtContextMenu, WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
+  components: { WtContextMenu, WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm, WtSearchBar },
   data: () => ({
     auditQuestions: [
       {
@@ -389,6 +405,7 @@ export default {
     },
     columnSelect: [],
     isLoading: false,
+    searchValue: '',
   }),
   methods: {
     search(search) {
