@@ -81,9 +81,9 @@ const emit = defineEmits([
   'enter',
 ]);
 
-const { v, customValidators } = reactive(props);
+const { v } = reactive(props);
 
-const { invalid } = useValidation({ v, customValidators });
+const { invalid } = useValidation(v);
 
 const search = debounce((value) => {
   emit('search', value);
