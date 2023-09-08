@@ -33,6 +33,8 @@ export default {
         else if (this.v.regExpValidator?.$invalid) validationText = `${this.$t('validation.regExpValidator')}`;
         else if (this.v.sameAs?.$invalid) validationText = `${this.$t('validation.sameAs')}`;
         else if (this.v.domainValidator?.$invalid) validationText = `${this.$t('validation.domainValidator')}`;
+        else if (this.v.decimalValidator?.$invalid) validationText = `${this.$t('validation.decimalValidator')} ${this.v.decimalValidator.$params.count}`;
+        else if (this.v.integer?.$invalid) validationText = `${this.$t('validation.integer')}`;
       }
       // eslint-disable-next-line no-restricted-syntax
       for (const { name, text } of this.customValidators) {

@@ -245,6 +245,8 @@ export default {
     url: 'Необходимо ввести корректный url-адрес',
     regExpValidator: 'Не правильное регулярное выражение',
     domainValidator: 'Неправильный домен',
+    decimalValidator: 'Количество десятичных знаков не должно быть больше { count }',
+    integer: 'Поле должно содержать только целые числа',
   },
   webitelUI: {
     searchBar: {

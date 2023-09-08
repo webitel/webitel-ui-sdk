@@ -247,6 +247,8 @@ export default {
     url: 'Should look like url',
     regExpValidator: 'This regular expression is not valid',
     domainValidator: 'Incorrect domain',
+    decimalValidator: 'Decimal precision should be no more than { count } places',
+    integer: 'The field should contain only whole numbers',
   },
   webitelUI: {
     searchBar: {
