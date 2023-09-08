@@ -23,6 +23,8 @@ export function useValidation({ v, customValidators }) {
       else if (v.regExpValidator?.$invalid) validationText = `${t('validation.regExpValidator')}`;
       else if (v.sameAs?.$invalid) validationText = `${t('validation.sameAs')}`;
       else if (v.domainValidator?.$invalid) validationText = `${t('validation.domainValidator')}`;
+      else if (v.decimalValidator?.$invalid) validationText = `${t('validation.decimalValidator')} ${v.decimalValidator.$params.count}`;
+      else if (v.integer?.$invalid) validationText = `${t('validation.integer')}`;
     }
     // eslint-disable-next-line no-restricted-syntax
     for (const { name, text } of customValidators) {
