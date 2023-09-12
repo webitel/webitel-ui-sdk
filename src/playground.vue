@@ -136,14 +136,17 @@
     <!--      label="label"-->
     <!--      disabled-->
     <!--    ></wt-select>-->
+
+    <template v-if="message === '123'">
+      <p >{{ message + '333' }}</p>
+    </template>
+    <p >{{ message }}</p>
+    <input v-model="message">
     <wt-search-bar
       :hint="'qwe qwe'"
-      :v="vInvalid"
+      :v="message === '123' ? vInvalid : null"
       invalid
       :placeholder="$t('reusable.search')"
-      :value="searchValue"
-      debounce
-      required
     >
       <template v-slot:additional-actions>
         <wt-icon
@@ -406,6 +409,7 @@ export default {
     columnSelect: [],
     isLoading: false,
     searchValue: '',
+    message: '',
   }),
   methods: {
     search(search) {
