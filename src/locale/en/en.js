@@ -227,7 +227,6 @@ export default {
         [AdminSections.MEDIA]: 'Media files',
         [AdminSections.ROLES]: 'Roles',
         [AdminSections.OBJECTS]: 'Objects',
-        [AdminSections.CHANGELOGS]: 'Change logs',
       },
     },
   },
@@ -332,8 +331,9 @@ export default {
       },
     },
     deleteConfirmationPopup: {
-      title: 'Delete {entity}',
-      askingAlert: 'Are you sure to delete {entity}?',
+      title: 'Confirm deletion',
+      askingAlert: 'Are you sure you want to delete {count} item? | Are you sure you want to delete {count} items?',
+      undoneActionAlert: 'This action cannot be undone.',
       deleteAll: 'ALL',
     },
     dummy: {

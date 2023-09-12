@@ -9,8 +9,8 @@
       <div class="delete-confirmation-popup__content">
         <wt-icon icon="attention" color="danger"/>
         <p class="delete-confirmation-popup__message">
-          {{ $t('webitelUI.deleteConfirmationPopup.askingAlert',
-          { entity: props.entity || defaultEntity }) }}
+          {{ deleteMessage }}
+          {{ $t('webitelUI.deleteConfirmationPopup.undoneActionAlert') }}
         </p>
       </div>
     </template>
@@ -44,9 +44,6 @@ const props = defineProps({
     type: Function,
     required: true,
   },
-  entity: {
-    type: String,
-  },
 });
 
 const emit = defineEmits([
@@ -57,7 +54,21 @@ const { t } = useI18n();
 
 const isDeleting = ref(false);
 
-const defaultEntity = props.deleteCount === 1 ? 'item' : 'items';
+const deleteMessage = computed(() => {
+  if (props.deleteCount === 0) {
+    return t(
+      'webitelUI.deleteConfirmationPopup.askingAlert',
+      2,
+      null,
+      { count: t('webitelUI.deleteConfirmationPopup.deleteAll') },
+    );
+  }
+  return t(
+    'webitelUI.deleteConfirmationPopup.askingAlert',
+    { count: props.deleteCount },
+    null,
+  );
+});
 
 function close() {
   emit('close');
@@ -84,6 +95,7 @@ async function confirm() {
 
 .delete-confirmation-popup__message {
   text-align: center;
+
 }
 
 </style>

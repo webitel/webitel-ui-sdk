@@ -225,7 +225,6 @@ export default {
         [AdminSections.TRIGGERS]: 'Тригери',
         [AdminSections.ROLES]: 'Ролі',
         [AdminSections.OBJECTS]: 'Розділи',
-        [AdminSections.CHANGELOGS]: 'Журнали змін',
       },
     },
   },
@@ -330,9 +329,10 @@ export default {
       },
     },
     deleteConfirmationPopup: {
-      title: 'Delete {entity}',
-      askingAlert: 'Are you sure to delete {entity}?',
-      deleteAll: 'ALL',
+      title: 'Підтвердіть видалення',
+      askingAlert: 'Ви впевнені, що хочете видалити {count} запис? | Ви впевнені, що хочете видалити {count} записів?',
+      undoneActionAlert: 'Дана дія не може бути скасована.',
+      deleteAll: 'ВСІ',
     },
     dummy: {
       text: 'Записи у розділі ще не створені',

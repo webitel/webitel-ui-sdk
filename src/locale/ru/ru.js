@@ -225,7 +225,6 @@ export default {
         [AdminSections.TRIGGERS]: 'Триггеры',
         [AdminSections.ROLES]: 'Роли',
         [AdminSections.OBJECTS]: 'Разделы',
-        [AdminSections.CHANGELOGS]: 'Журналы изменений',
       },
     },
   },
@@ -330,8 +329,9 @@ export default {
       },
     },
     deleteConfirmationPopup: {
-      title: 'Удалить {entity}',
-      askingAlert: 'Вы уверенны, что хотите удалить {entity}?',
+      title: 'Подтвердите удаление',
+      askingAlert: 'Вы уверенны, что хотите удалить {count} запись? | Вы уверенны, что хотите удалить {count} записей?',
+      undoneActionAlert: 'Это действие не может быть отменено.',
       deleteAll: 'ВСЕ',
     },
     dummy: {
