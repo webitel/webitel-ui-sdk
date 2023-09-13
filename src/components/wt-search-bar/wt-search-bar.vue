@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { toRefs } from 'vue';
 import debounce from '../../scripts/debounce';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -81,7 +81,7 @@ const emit = defineEmits([
   'enter',
 ]);
 
-const { v, customValidators } = reactive(props);
+const { v, customValidators } = toRefs(props);
 
 const { invalid } = useValidation({ v, customValidators });
 
