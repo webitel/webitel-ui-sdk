@@ -1,28 +1,31 @@
 <template>
   <wt-popup
     class="delete-confirmation-popup"
-    min-width="480"
+    width="500"
     @close="close"
   >
     <template v-slot:title>{{ $t('webitelUI.deleteConfirmationPopup.title') }}</template>
     <template v-slot:main>
-      <p>
-        {{ deleteMessage }}
-        {{ $t('webitelUI.deleteConfirmationPopup.undoneActionAlert') }}
-      </p>
+      <div class="delete-confirmation-popup__content">
+        <wt-icon icon="attention" color="danger"/>
+        <p class="delete-confirmation-popup__message">
+          {{ deleteMessage }}
+          {{ $t('webitelUI.deleteConfirmationPopup.undoneActionAlert') }}
+        </p>
+      </div>
     </template>
     <template v-slot:actions>
+      <wt-button
+        color="accent"
+        :loading="isDeleting"
+        @click="confirm"
+      >{{ $t('vocabulary.yes') }}
+      </wt-button>
       <wt-button
         color="secondary"
         :disabled="isDeleting"
         @click="close"
-      >{{ $t('reusable.cancel') }}
-      </wt-button>
-      <wt-button
-        color="danger"
-        :loading="isDeleting"
-        @click="confirm"
-      >{{ $t('reusable.delete') }}
+      >{{ $t('vocabulary.no') }}
       </wt-button>
     </template>
   </wt-popup>
@@ -83,5 +86,15 @@ async function confirm() {
 </script>
 
 <style scoped>
+.delete-confirmation-popup__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.delete-confirmation-popup__message {
+  text-align: center;
+}
 
 </style>

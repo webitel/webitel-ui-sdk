@@ -1,34 +1,40 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import DeleteConfirmationPopup from '../components/delete-confirmation-popup.vue';
 
-describe('WtPopup', () => {
+describe('DeleteConfirmationPopup', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(DeleteConfirmationPopup, {
       stubs: { WtBtn: true, WtIcon: true },
-    });
-    expect(wrapper.classes('.delete-confirmation-popup').toBe(true));
-  });
-
-  it('renders delete popup message block', () => {
-    const content = 'delete popup message';
-    const wrapper = shallowMount(DeleteConfirmationPopup, {
-      stubs: { WtIcon: true },
-      slots: { main: content },
-    });
-    expect(wrapper.find('.delete-confirmation-popup__message').text())
-      .toBe(content);
-  });
-
-  it('delete event from child question emits update without passed question', async () => {
-    const wrapper = shallowMount(DeleteConfirmationPopup, {
-      props: {
+      propsData: {
+        deleteCount: 1,
         callback: jest.fn(),
       },
     });
+    expect(wrapper.classes('delete-confirmation-popup')).toBe(true);
+  });
+
+  it('delete event from child question emits update without passed question', async () => {
+    const callback = jest.fn();
+    const wrapper = mount(DeleteConfirmationPopup, {
+      props: {
+        deleteCount: 1,
+        callback,
+      },
+    });
     const button = wrapper.getComponent({ name: 'wt-button' });
-    expect(wrapper.button.text()).toContain('yes');
+    expect(button.text()).toContain('Yes');
     await button.trigger('click');
     await wrapper.vm.$nextTick();
-    expect(wrapper.props.callback).toBeCalled();
+    expect(callback).toHaveBeenCalled();
+  });
+
+  it('renders delete popup message block', () => {
+    const wrapper = mount(DeleteConfirmationPopup, {
+      props: {
+        deleteCount: 1,
+      },
+    });
+    expect(wrapper.find('.delete-confirmation-popup__content').text())
+      .toMatch('1');
   });
 });
