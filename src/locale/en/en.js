@@ -254,6 +254,7 @@ export default {
     searchBar: {
       placeholder: 'Search',
       settingsHint: 'Search mode',
+      filterSearchHint: 'Query format: "key=value"',
     },
     timepicker: {
       hour: 'Hour:',
