@@ -16,14 +16,14 @@
     </template>
     <template v-slot:actions>
       <wt-button
-        color="accent"
         :loading="isDeleting"
+        color="accent"
         @click="confirm"
       >{{ $t('vocabulary.yes') }}
       </wt-button>
       <wt-button
-        color="secondary"
         :disabled="isDeleting"
+        color="secondary"
         @click="close"
       >{{ $t('vocabulary.no') }}
       </wt-button>

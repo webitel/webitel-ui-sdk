@@ -20,7 +20,8 @@ describe('DeleteConfirmationPopup', () => {
         callback,
       },
     });
-    const button = wrapper.getComponent({ name: 'wt-button' });
+    const button = wrapper.findAllComponents({name: 'wt-button'}).find((btn) => btn.text().includes('Yes'));
+    console.log('button:', button);
     expect(button.text()).toContain('Yes');
     await button.trigger('click');
     await wrapper.vm.$nextTick();
