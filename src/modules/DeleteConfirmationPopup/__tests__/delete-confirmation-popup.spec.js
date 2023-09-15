@@ -4,8 +4,7 @@ import DeleteConfirmationPopup from '../components/delete-confirmation-popup.vue
 describe('DeleteConfirmationPopup', () => {
   it('renders a component', () => {
     const wrapper = shallowMount(DeleteConfirmationPopup, {
-      stubs: { WtBtn: true, WtIcon: true },
-      propsData: {
+      props: {
         deleteCount: 1,
         callback: jest.fn(),
       },
@@ -29,12 +28,13 @@ describe('DeleteConfirmationPopup', () => {
   });
 
   it('renders delete popup message block', () => {
+    const deleteCount = 123;
     const wrapper = mount(DeleteConfirmationPopup, {
       props: {
-        deleteCount: 1,
+        deleteCount,
       },
     });
     expect(wrapper.find('.delete-confirmation-popup__content').text())
-      .toMatch('1');
+      .toMatch(deleteCount.toString());
   });
 });
