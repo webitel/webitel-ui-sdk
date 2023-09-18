@@ -119,10 +119,6 @@ function handleKeyup(event) {
       border-color: var(--false-color);
       outline: none; // prevent outline overlapping false color
     }
-    //deep needed to change color for icons in slot
-    :deep .wt-icon__icon {
-      fill: var(--false-color);
-    }
     .wt-search-bar__input {
       color: var(--false-color);
     }
