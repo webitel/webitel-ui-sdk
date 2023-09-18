@@ -17,7 +17,6 @@
     <template v-slot:actions>
       <wt-button
         :loading="isDeleting"
-        color="accent"
         @click="confirm"
       >{{ $t('vocabulary.yes') }}
       </wt-button>
