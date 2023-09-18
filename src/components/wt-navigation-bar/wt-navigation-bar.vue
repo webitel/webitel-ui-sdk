@@ -40,6 +40,12 @@
             class="wt-navigation-bar__app-pic"
             src="../../assets/components/organisms/wt-navigation-bar/logo-supervisor-app.svg"
           >
+          <img
+            v-if="currentApp === 'crm'"
+            alt="crm"
+            class="wt-navigation-bar__app-pic"
+            src="../../assets/components/organisms/wt-navigation-bar/logo-crm-app.svg"
+          >
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
