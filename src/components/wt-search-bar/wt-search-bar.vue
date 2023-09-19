@@ -8,8 +8,12 @@
   >
     <div class="wt-search-bar__wrapper">
       <div class="wt-search-bar__search-icon">
-        <slot name="search-icon">
+        <slot
+          :invalid="invalid"
+          name="search-icon"
+        >
           <wt-icon
+            :color="invalidColorProvider"
             icon="search"
           ></wt-icon>
         </slot>
@@ -27,20 +31,25 @@
           :class="{ 'hidden': !value }"
           class="wt-search-bar__reset-icon-btn"
           icon="close"
+          :color="invalidColorProvider"
           @click="handleInput('')"
         ></wt-icon-btn>
         <wt-hint
           v-if="hint"
+          :color="invalidColorProvider"
         >{{ hint }}
         </wt-hint>
-        <slot name="additional-actions"></slot>
+        <slot
+          :invalid="invalid"
+          name="additional-actions"
+        ></slot>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 import debounce from '../../scripts/debounce';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -84,6 +93,10 @@ const emit = defineEmits([
 const { v, customValidators } = toRefs(props);
 
 const { invalid } = useValidation({ v, customValidators });
+
+const invalidColorProvider = computed(() => {
+  return invalid ? 'danger' : null;
+});
 
 const search = debounce((value) => {
   emit('search', value);

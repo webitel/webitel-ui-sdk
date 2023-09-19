@@ -148,8 +148,9 @@
       invalid
       :placeholder="$t('reusable.search')"
     >
-      <template v-slot:additional-actions>
+      <template v-slot:additional-actions="options">
         <wt-icon
+          :color="options.invalid ? 'danger' : null"
           icon="bucket"
         ></wt-icon>
       </template>
