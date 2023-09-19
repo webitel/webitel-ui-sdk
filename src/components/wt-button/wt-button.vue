@@ -33,7 +33,7 @@ export default {
     color: {
       type: String,
       default: 'accent',
-      options: ['accent', 'secondary', 'success', 'danger', 'transfer', 'job'],
+      options: ['accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer', 'job'],
     },
     disabled: {
       type: Boolean,
@@ -143,6 +143,19 @@ export default {
       color: var(--btn-dark-font-color);
       border-color: var(--btn-secondary--hover-color);
       background-color: var(--btn-secondary--hover-color);
+    }
+  }
+
+  &.secondary-50 {
+    color: var(--btn-dark-font-color);
+    border-color: var(--btn-secondary-50-color);
+    background-color: var(--btn-secondary-50-color);
+
+    &:hover,
+    &:active {
+      color: var(--btn-dark-font-color);
+      border-color: var(--btn-secondary-color);
+      background-color: var(--btn-secondary-color);
     }
   }
 

@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-button color="secondary-50">123</wt-button>
     <wt-status-select></wt-status-select>
    <div style="display: flex; gap: 10px; flex-wrap: wrap">
      <wt-avatar size="sm"></wt-avatar>
