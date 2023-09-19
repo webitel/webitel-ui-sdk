@@ -77,6 +77,7 @@ import './hold.svg';
 import './lock.svg';
 import './logout.svg';
 import './menu.svg';
+import './email.svg';
 import './mail.svg';
 import './mail--color.svg';
 import './messenger-facebook.svg';
