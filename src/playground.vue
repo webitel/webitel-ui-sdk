@@ -144,12 +144,13 @@
     <input v-model="message">
     <wt-search-bar
       :hint="'qwe qwe'"
-      :v="message === '123' ? vInvalid : null"
+      :v="vInvalid"
       invalid
       :placeholder="$t('reusable.search')"
     >
-      <template v-slot:additional-actions>
+      <template v-slot:additional-actions="options">
         <wt-icon
+          :color="options.invalid ? 'danger' : null"
           icon="bucket"
         ></wt-icon>
       </template>
