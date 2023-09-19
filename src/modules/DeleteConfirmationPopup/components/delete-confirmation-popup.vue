@@ -10,7 +10,6 @@
         <wt-icon icon="attention" color="danger"/>
         <p class="delete-confirmation-popup__message">
           {{ deleteMessage }}
-          {{ $t('webitelUI.deleteConfirmationPopup.undoneActionAlert') }}
         </p>
       </div>
     </template>
@@ -46,7 +45,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits([
-  'close',
+ 'close',
 ]);
 
 const { t } = useI18n();
