@@ -3,7 +3,7 @@
     <template v-slot:activator>
       <wt-icon-btn
         icon="rounded-info"
-        :color="color"
+        :color="iconColor"
       ></wt-icon-btn>
     </template>
     <slot></slot>
@@ -14,24 +14,9 @@
 export default {
   name: 'wt-hint',
   props: {
-    color: {
+    iconColor: {
       type: String,
-      default: 'default',
-      options: [
-        'default',
-        'contrast',
-        'active',
-        'accent',
-        'secondary',
-        'disabled',
-        'success',
-        'danger',
-        'transfer',
-        'job',
-        'hold',
-        'secondary-50',
-        'icon-secondary',
-      ],
+      default: 'outline',
     },
   }
 };

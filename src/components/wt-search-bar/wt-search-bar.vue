@@ -36,7 +36,7 @@
         ></wt-icon-btn>
         <wt-hint
           v-if="hint"
-          :color="invalidColorProvider"
+          :iconColor="invalidColorProvider"
         >{{ hint }}
         </wt-hint>
         <slot
