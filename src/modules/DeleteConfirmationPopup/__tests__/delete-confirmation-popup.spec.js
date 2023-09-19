@@ -52,7 +52,7 @@ describe('DeleteConfirmationPopup', () => {
     expect(button.emitted('close')).toBeTruthy();
   });
 
-  it('yes button emitted close', async () => {
+  it('no button emitted close', async () => {
     const wrapper = mount(DeleteConfirmationPopup, {
       props: {
         deleteCount: 1,
