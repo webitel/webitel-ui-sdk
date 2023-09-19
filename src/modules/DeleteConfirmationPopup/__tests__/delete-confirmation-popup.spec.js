@@ -1,5 +1,15 @@
 import { mount, shallowMount } from '@vue/test-utils';
+import { ref } from 'vue';
+import { useValidation } from '../../../mixins/validationMixin/useValidation';
 import DeleteConfirmationPopup from '../components/delete-confirmation-popup.vue';
+
+jest.mock('../../../mixins/validationMixin/useValidation');
+
+useValidation.mockImplementation(() => ({
+  isValidation: ref(false),
+  invalid: ref(false),
+  validationText: ref(''),
+}));
 
 describe('DeleteConfirmationPopup', () => {
   it('renders a component', () => {
