@@ -247,6 +247,8 @@ export default {
     url: 'Should look like url',
     regExpValidator: 'This regular expression is not valid',
     domainValidator: 'Incorrect domain',
+    decimalValidator: 'Decimal precision should be no more than { count } places',
+    integer: 'The field should contain only whole numbers',
   },
   webitelUI: {
     searchBar: {
@@ -338,6 +340,17 @@ export default {
     },
     dummy: {
       text: 'There are no records yet',
+    },
+    agentStatusSelect: {
+      pauseCausePopup: {
+        title: 'Select a pause cause',
+        min: 'Min',
+        unlimited: 'Unlimited',
+      },
+      statusSelectErrorPopup: {
+        title: 'Attention',
+        message: 'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
+      },
     },
   },
 };

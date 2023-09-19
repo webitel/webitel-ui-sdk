@@ -26,6 +26,8 @@
   --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
   --btn-secondary--hover-color: hsla(var(--_secondary-color), var(--_opacity--hover));
 
+  --btn-secondary-50-color: var(--secondary-color-50);
+
   --btn-disabled-font-color: var(--secondary-color-50);
   --btn-disabled-color: hsla(var(--_secondary-color-hue), 15%, 75%, var(--_opacity--active));
 

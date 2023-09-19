@@ -245,6 +245,8 @@ export default {
     url: 'Необхідно ввести правильну url-адресу',
     regExpValidator: 'Не правильний регулярний вираз',
     domainValidator: 'Невірний домен',
+    decimalValidator: 'Кількість десяткових знаків не повинна бути більше { count }',
+    integer: 'Поле повинно містити лише цілі числа',
   },
   webitelUI: {
     searchBar: {
@@ -336,6 +338,17 @@ export default {
     },
     dummy: {
       text: 'Записи у розділі ще не створені',
+    },
+    agentStatusSelect: {
+      pauseCausePopup: {
+        title: 'Виберіть причину паузи',
+        min: 'Хв',
+        unlimited: 'Безліміт',
+      },
+      statusSelectErrorPopup: {
+        title: 'Увага',
+        message: 'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
+      },
     },
   },
 };

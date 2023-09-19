@@ -2,10 +2,22 @@
   <div
     :class="{
       'wt-search-bar--outline': outline,
+      'wt-search-bar--invalid': invalid,
     }"
     class="wt-search-bar"
   >
     <div class="wt-search-bar__wrapper">
+      <div class="wt-search-bar__search-icon">
+        <slot
+          :invalid="invalid"
+          name="search-icon"
+        >
+          <wt-icon
+            :color="invalidColorProvider"
+            icon="search"
+          ></wt-icon>
+        </slot>
+      </div>
       <input
         :placeholder="placeholder || $t('webitelUI.searchBar.placeholder')"
         :value="value"
@@ -14,27 +26,41 @@
         @input="handleInput($event.target.value)"
         @keyup="handleKeyup"
       >
-      <div class="wt-search-bar__search-icon">
-        <slot name="search-icon">
-          <wt-icon
-            icon="search"
-          ></wt-icon>
-        </slot>
+      <div class="wt-search-bar__icon-controls">
+        <wt-icon-btn
+          :class="{ 'hidden': !value }"
+          class="wt-search-bar__reset-icon-btn"
+          icon="close"
+          :color="invalidColorProvider"
+          @click="handleInput('')"
+        ></wt-icon-btn>
+        <wt-hint
+          v-if="hint"
+          :iconColor="invalidColorProvider"
+        >{{ hint }}
+        </wt-hint>
+        <slot
+          :invalid="invalid"
+          name="additional-actions"
+        ></slot>
       </div>
-      <wt-icon-btn
-        :class="{ 'hidden': !value }"
-        class="wt-search-bar__reset-icon-btn"
-        icon="close"
-        @click="handleInput('')"
-      ></wt-icon-btn>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed, toRefs } from 'vue';
 import debounce from '../../scripts/debounce';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 const props = defineProps({
+  v: {
+    type: Object,
+  },
+  customValidators: {
+    type: Array,
+    default: () => [],
+  },
   /**
    * Current search-bar value (`v-model`)
    */
@@ -52,6 +78,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  hint: {
+    type: String,
+    description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
+  },
 });
 
 const emit = defineEmits([
@@ -59,6 +89,14 @@ const emit = defineEmits([
   'search',
   'enter',
 ]);
+
+const { v, customValidators } = toRefs(props);
+
+const { invalid } = useValidation({ v, customValidators });
+
+const invalidColorProvider = computed(() => {
+  return invalid.value ? 'danger' : null;
+});
 
 const search = debounce((value) => {
   emit('search', value);
@@ -80,31 +118,40 @@ function handleKeyup(event) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
 
 .wt-search-bar {
   cursor: text;
 
+  &.wt-search-bar--invalid {
+    .wt-search-bar__wrapper {
+      border-color: var(--false-color);
+      outline: none; // prevent outline overlapping false color
+    }
+    .wt-search-bar__input {
+      color: var(--false-color);
+    }
+  }
+
   .wt-search-bar__wrapper {
-    position: relative;
+    border: var(--input-border);
+    border-color: var(--form-border-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
+    align-items: center;
+    gap: var(--spacing-xs);
   }
 
   .wt-search-bar__search-icon {
-    position: absolute;
-    top: 50%;
-    left: var(--input-icon-margin);
-    transform: translateY(-50%);
-    line-height: 0;
-    pointer-events: none;
+    display: flex;
   }
 
   .wt-search-bar__reset-icon-btn {
-    position: absolute;
-    top: 50%;
-    right: var(--input-icon-margin);
-    transform: translateY(-50%);
-
     .wt-search-bar:not(:focus-within) & {
       pointer-events: none;
       opacity: 0;
@@ -118,12 +165,11 @@ function handleKeyup(event) {
     display: block;
     box-sizing: border-box;
     width: 100%;
-    padding: var(--search-bar-padding);
+    padding: 0;
     transition: var(--transition);
     color: var(--form-input-color);
-    border: var(--input-border);
-    border-color: var(--form-border-color);
-    border-radius: var(--border-radius);
+    border: none;
+    outline: none;
 
     &:focus {
       @include wt-placeholder('focus');
@@ -165,6 +211,12 @@ function handleKeyup(event) {
   .wt-search-bar__input::-webkit-search-results-button,
   .wt-search-bar__input::-webkit-search-results-decoration {
     display: none;
+  }
+
+  .wt-search-bar__icon-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
   }
 }
 </style>

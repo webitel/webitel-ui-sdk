@@ -14,7 +14,7 @@
       type="number"
       @input="emit('update:option', { name: option.name, score: $event })"
     ></wt-input>
-    <wt-tooltip>
+    <wt-tooltip class="audit-form-question-options-write-row__tooltip">
       <template v-slot:activator>
         <wt-icon-btn
           :disabled="first"
@@ -34,6 +34,7 @@ import { computed, onMounted, toRefs } from 'vue';
 import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
 import WtIconBtn from '../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../../../components/wt-input/wt-input.vue';
+import decimalValidator from '../../../../../validators/decimalValidator';
 
 const props = defineProps({
   option: {
@@ -63,6 +64,7 @@ const v$ = useVuelidate(
           required,
           minValue: minValue(0),
           maxValue: maxValue(10),
+          decimalValidator: decimalValidator(2),
         },
       },
     })),
@@ -77,8 +79,11 @@ onMounted(() => v$.value.$touch());
 <style lang="scss" scoped>
 .audit-form-question-options-write-row {
   display: grid;
-  align-items: center;
   grid-template-columns: 3fr 1fr 24px;
   gap: var(--spacing-sm);
+
+  &__tooltip {
+    padding-top: var(--spacing-md);
+  }
 }
 </style>

@@ -40,6 +40,12 @@
             class="wt-navigation-bar__app-pic"
             src="../../assets/components/organisms/wt-navigation-bar/logo-supervisor-app.svg"
           >
+          <img
+            v-if="currentApp === 'crm'"
+            alt="crm"
+            class="wt-navigation-bar__app-pic"
+            src="../../assets/components/organisms/wt-navigation-bar/logo-crm-app.svg"
+          >
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
@@ -164,8 +170,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
 
 .wt-navigation-bar__menu-btn {
   display: block;

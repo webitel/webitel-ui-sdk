@@ -1,5 +1,7 @@
 <template>
   <div class="playground">
+    <wt-button color="secondary-50">123</wt-button>
+    <wt-status-select></wt-status-select>
    <div style="display: flex; gap: 10px; flex-wrap: wrap">
      <wt-avatar size="sm"></wt-avatar>
      <wt-avatar size="sm" username="A B"></wt-avatar>
@@ -135,6 +137,25 @@
     <!--      label="label"-->
     <!--      disabled-->
     <!--    ></wt-select>-->
+
+    <template v-if="message === '123'">
+      <p >{{ message + '333' }}</p>
+    </template>
+    <p >{{ message }}</p>
+    <input v-model="message">
+    <wt-search-bar
+      :hint="'qwe qwe'"
+      :v="vInvalid"
+      invalid
+      :placeholder="$t('reusable.search')"
+    >
+      <template v-slot:additional-actions="options">
+        <wt-icon
+          :color="options.invalid ? 'danger' : null"
+          icon="bucket"
+        ></wt-icon>
+      </template>
+    </wt-search-bar>
   </div>
 </template>
 
@@ -143,6 +164,7 @@
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
 import WtContextMenu from './components/wt-context-menu/wt-context-menu.vue';
+import WtSearchBar from './components/wt-search-bar/wt-search-bar.vue';
 import WtTooltip from './components/wt-tooltip/wt-tooltip.vue';
 import WtDatepicker from './components/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/wt-navigation-bar/wt-navigation-bar.vue';
@@ -152,7 +174,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { WtContextMenu, WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm },
+  components: { WtContextMenu, WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm, WtSearchBar },
   data: () => ({
     auditQuestions: [
       {
@@ -388,6 +410,8 @@ export default {
     },
     columnSelect: [],
     isLoading: false,
+    searchValue: '',
+    message: '',
   }),
   methods: {
     search(search) {

@@ -102,8 +102,11 @@ const badgeColorVar = computed(() => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
 
 %wt-avatar-typo-sm {
   font-size: 12px;

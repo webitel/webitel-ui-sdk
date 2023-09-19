@@ -3,7 +3,7 @@
     <template v-slot:activator>
       <wt-icon-btn
         icon="rounded-info"
-        color="outline"
+        :color="iconColor"
       ></wt-icon-btn>
     </template>
     <slot></slot>
@@ -13,6 +13,12 @@
 <script>
 export default {
   name: 'wt-hint',
+  props: {
+    iconColor: {
+      type: String,
+      default: 'outline',
+    },
+  }
 };
 </script>
 
