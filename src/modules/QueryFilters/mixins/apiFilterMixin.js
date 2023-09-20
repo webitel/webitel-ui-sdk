@@ -17,7 +17,7 @@ export default {
     },
     label() {
       return Array.isArray(this.locale.label)
-        ? this.$tc(...this.locale.label)
+        ? this.$t(...this.locale.label)
         : this.$t(this.locale.label);
     },
   },

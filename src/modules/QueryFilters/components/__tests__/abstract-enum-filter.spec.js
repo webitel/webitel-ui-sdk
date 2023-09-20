@@ -12,7 +12,9 @@ const router = createRouter({
 describe('Abstract Enum Filter', () => {
   const namespace = 'jest';
   const filterQuery = 'jest';
-  const filterSchema = new EnumFilterSchema({ locale: {} });
+  const filterSchema = new EnumFilterSchema({
+    locale: { label: ''}
+  });
   const store = createStore({
     modules: {
       [namespace]: {
