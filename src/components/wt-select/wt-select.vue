@@ -24,7 +24,7 @@
       :allow-empty="allowEmpty"
       :disabled="disabled"
       :internal-search="!searchMethod"
-      :label="trackBy ? optionLabel : null"
+      :label="selectOptionLabel"
       :limit="1"
       :loading="false"
       :multiple="multiple"

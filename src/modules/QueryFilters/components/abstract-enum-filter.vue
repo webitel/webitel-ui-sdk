@@ -4,7 +4,6 @@
     :options="localizedOptions"
     :label="label"
     :track-by="filterSchema.storedProp"
-    :option-label="filterSchema.storedProp"
     :multiple="filterSchema.multiple"
     v-bind="$attrs"
     @input="setValue({ filter: filterQuery, value: $event })"

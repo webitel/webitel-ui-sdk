@@ -63,6 +63,11 @@ export default {
     searchHasNext: true,
   }),
   computed: {
+    selectOptionLabel() {
+      // trackBy === null means that options are not objects but primitives
+      if (this.trackBy === null) return null;
+      return this.optionLabel || this.defaultOptionLabel;
+    },
     isApiMode() {
       return !!this.searchMethod;
     },
