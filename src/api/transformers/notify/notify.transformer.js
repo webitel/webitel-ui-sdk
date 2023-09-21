@@ -23,7 +23,7 @@ const notifyTransformer = (notificationObject) => {
   if (notificationObject instanceof Error) {
     eventBus.$emit('notification', {
       type: 'error',
-      text: notificationObject.response?.data?.detail || notificationObject.response?.data?.message,
+      text: notificationObject.response?.data?.detail || notificationObject.response?.data?.message || notificationObject,
     });
   }
   return notificationObject;
