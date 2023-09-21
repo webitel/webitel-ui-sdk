@@ -111,12 +111,15 @@ const badgeColorVar = computed(() => {
 %wt-avatar-typo-sm {
   font-size: 12px;
 }
+
 %wt-avatar-typo-lg {
   font-size: 20px;
 }
+
 %wt-avatar-typo-2xl {
   font-size: 36px;
 }
+
 %wt-avatar-typo-3xl {
   font-size: 48px;
 }
@@ -127,7 +130,6 @@ const badgeColorVar = computed(() => {
   height: var(--avatar-size);
   user-select: none;
   border-radius: 50%;
-  overflow: hidden;
 
   &__letters {
     height: 100%;
@@ -135,6 +137,7 @@ const badgeColorVar = computed(() => {
     align-items: center;
     justify-content: center;
     color: var(--avatar-font-color);
+    border-radius: 50%;
   }
 
   &__img {

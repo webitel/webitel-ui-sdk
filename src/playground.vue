@@ -5,7 +5,7 @@
    <div style="display: flex; gap: 10px; flex-wrap: wrap">
      <wt-avatar size="sm"></wt-avatar>
      <wt-avatar size="sm" username="A B"></wt-avatar>
-     <wt-avatar size="lg" username="A b"></wt-avatar>
+     <wt-avatar badge size="lg" username="A b"></wt-avatar>
      <wt-avatar size="2xl" username="c d"></wt-avatar>
      <wt-avatar size="3xl" username="e f"></wt-avatar>
      <wt-avatar size="sm" username="g h"></wt-avatar>
