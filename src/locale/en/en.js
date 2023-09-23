@@ -227,7 +227,7 @@ export default {
         [AdminSections.MEDIA]: 'Media files',
         [AdminSections.ROLES]: 'Roles',
         [AdminSections.OBJECTS]: 'Objects',
-        [AdminSections.CHANGELOGS]: 'Change logs',
+        [AdminSections.CHANGELOGS]: 'Change log',
       },
     },
   },
