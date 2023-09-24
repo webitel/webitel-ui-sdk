@@ -125,6 +125,7 @@ export default {
       default: true,
     },
   },
+  emits: ['reset', 'search-change', 'input', 'closed'],
   data: () => ({
     isOpened: false,
   }),
