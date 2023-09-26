@@ -100,6 +100,7 @@ export default {
     emails: 'Email | Emails',
     phones: 'Phone | Phones',
     messaging: 'Messaging',
+    emptyResultSearch: 'Your search yielded no results',
   },
   // date-related texts
   date: {
