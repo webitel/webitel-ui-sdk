@@ -99,6 +99,7 @@ export default {
     emails: 'Email | Emails',
     phones: 'Телефон | Телефони',
     messaging: 'Повідомлення',
+    emptyResultSearch: 'Пошук не дав результатів',
   },
   // date-related texts
   date: {
