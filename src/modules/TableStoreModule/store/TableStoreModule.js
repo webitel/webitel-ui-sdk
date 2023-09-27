@@ -71,6 +71,17 @@ export default class TableStoreModule extends BaseStoreModule {
           items = [],
           next = false,
         } = await context.dispatch('api/GET_LIST', { context, params });
+
+        /* [https://my.webitel.com/browse/WTEL-3793]
+        * When deleting the last item from list,
+        * if there are other items on the previous page, you need to go back */
+        if (!items.length && params.page > 1) {
+          return context.dispatch('filters/SET_FILTER', {
+            filter: 'page',
+            value: params.page - 1,
+          });
+        }
+
         /* we should set _isSelected property to all items in tables cause their checkbox selection
         * is based on this property. Previously, this prop was set it api consumers, but now
         * admin-specific were replaced by webitel-sdk consumers and i supposed it will be
