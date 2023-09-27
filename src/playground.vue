@@ -1,5 +1,10 @@
 <template>
   <div class="playground">
+    {{ date }}
+    <wt-datepicker
+      v-model="date"
+      mode="datetime"
+    ></wt-datepicker>
     <wt-button color="secondary-50">123</wt-button>
     <wt-status-select></wt-status-select>
    <div style="display: flex; gap: 10px; flex-wrap: wrap">
