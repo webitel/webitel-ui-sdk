@@ -155,6 +155,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CHANGELOGS}`,
     },
+    [AdminSections.SETTINGS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SETTINGS}`,
+    },
   },
   [WebitelApplications.AUDIT]: {
     _enabled: value,
