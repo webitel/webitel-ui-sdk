@@ -96,7 +96,7 @@ export default {
     labels: 'Мітка | Мітки',
     permissions: 'Дозвіл | Дозволи',
     options: 'Опція | Опції',
-    emails: 'Email | Emails',
+    emails: 'Електронна адреса | Електронні адреси',
     phones: 'Телефон | Телефони',
     messaging: 'Повідомлення',
     emptyResultSearch: 'Пошук не дав результатів',

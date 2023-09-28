@@ -96,7 +96,7 @@ export default {
     labels: 'Метка | Метки',
     permissions: 'Разрешение | Разрешения',
     options: 'Опция | Опции',
-    emails: 'Email | Emails',
+    emails: 'Электронный адрес | Электронные адреса',
     phones: 'Телефон | Телефоны',
     messaging: 'Сообщения',
     emptyResultSearch: 'Поиск не дал результатов',
