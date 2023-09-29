@@ -23,9 +23,7 @@
             class="wt-table-column-select__popup-list"
             :class="{
             'wt-table-column-select__popup-list--md':
-            changeableDraft.length > 20 && changeableDraft.length <= 30,
-            'wt-table-column-select__popup-list--lg':
-            changeableDraft.length > 30
+            changeableDraft.length > 10
             }"
           >
             <li
@@ -150,13 +148,8 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
     flex-wrap: wrap;
     overflow-x: hidden;
 
-    // for 20-30 items
+    // for 10+ items
     &--md {
-      width: $list-width-md;
-    }
-
-    // for 30+ items
-    &--lg {
       width: $list-width-md;
       max-height: none;
       display: block;
@@ -168,10 +161,9 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
   &__popup-item {
     display: flex;
     align-items: center;
-    margin-right: var(--spacing-sm);
+    margin-right: var(--spacing-xs);
     margin-bottom: var(--spacing-sm);
   }
 }
 
 </style>
-
