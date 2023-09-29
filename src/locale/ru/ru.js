@@ -332,6 +332,7 @@ export default {
         options: 'Вариант',
         score: 'Бал',
       },
+      clearSelection: 'Очистить выбор',
     },
     deleteConfirmationPopup: {
       title: 'Подтвердите удаление',

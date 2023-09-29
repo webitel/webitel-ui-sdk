@@ -38,6 +38,11 @@
         @input="emit('change:result', { score: value })"
       ></wt-radio>
     </div>
+    <a
+      v-show="isResult"
+      class="audit-form-question--cleaned"
+      @click="emit('change:result', {})"
+    >{{ $t('webitelUI.auditForm.clearSelection') }}</a>
   </article>
 </template>
 
@@ -117,6 +122,12 @@ onMounted(() => v$.value.$touch());
 </script>
 
 <style lang="scss" scoped>
+.audit-form-question-score {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
 .audit-form-question-score-write {
   display: grid;
   grid-template-columns: 100px 100px;
@@ -128,5 +139,10 @@ onMounted(() => v$.value.$touch());
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
+}
+
+.audit-form-question--cleaned {
+  color: var(--link-color);
+  cursor: pointer;
 }
 </style>

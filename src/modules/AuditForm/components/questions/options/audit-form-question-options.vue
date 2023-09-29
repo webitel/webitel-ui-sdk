@@ -30,12 +30,19 @@
         :value="opt"
         @input="emit('change:result', $event)"
       ></wt-radio>
+      <a
+        v-show="isResult"
+        class="audit-form-question--cleaned"
+        @click="emit('change:result', {})"
+      >{{ $t('webitelUI.auditForm.clearSelection') }}</a>
     </div>
     <div v-else>Unknown mode: {{ mode }}</div>
   </article>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import isEmpty from '../../../../../scripts/isEmpty';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 import WtButton from '../../../../../components/wt-button/wt-button.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
@@ -61,6 +68,8 @@ const emit = defineEmits([
   'change:question',
   'change:result',
 ]);
+
+const isResult = computed(() => !isEmpty(props.result));
 
 function updateQuestion({ path, value }) {
   emit('change:question', updateObject({ obj: props.question, path, value }));
@@ -93,5 +102,10 @@ function deleteQuestionOption({ key }) {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+}
+
+.audit-form-question--cleaned {
+  color: var(--link-color);
+  cursor: pointer;
 }
 </style>
