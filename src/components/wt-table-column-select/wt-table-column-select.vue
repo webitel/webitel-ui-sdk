@@ -23,9 +23,9 @@
             class="wt-table-column-select__popup-list"
             :class="{
             'wt-table-column-select__popup-list--md':
-            changeableDraft.length > 20 && changeableDraft.length <= 30,
+            changeableDraft.length > 10 && changeableDraft.length <= 20,
             'wt-table-column-select__popup-list--lg':
-            changeableDraft.length > 30
+            changeableDraft.length > 20
             }"
           >
             <li
@@ -150,9 +150,11 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
     flex-wrap: wrap;
     overflow-x: hidden;
 
-    // for 20-30 items
+    // for 10-30 items
     &--md {
       width: $list-width-md;
+      display: block;
+      column-count: 2;
     }
 
     // for 30+ items
@@ -174,4 +176,3 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
 }
 
 </style>
-
