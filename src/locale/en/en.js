@@ -334,6 +334,7 @@ export default {
         options: 'Options',
         score: 'Score',
       },
+      clearSelection: 'Clear selection',
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',

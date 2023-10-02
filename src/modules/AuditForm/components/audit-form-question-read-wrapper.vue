@@ -30,6 +30,11 @@
         mode="read"
         @change:result="!readonly && emit('change:result', $event)"
       ></component>
+      <div
+        v-show="isResult"
+        class="audit-form-question--clear"
+        @click="emit('change:result', {})"
+      >{{ $t('webitelUI.auditForm.clearSelection') }}</div>
     </section>
   </article>
 </template>
@@ -118,5 +123,10 @@ const isResult = computed(() => !isEmpty(props.result));
       color: var(--false-color);
     }
   }
+}
+.audit-form-question--clear {
+  margin-top: var(--spacing-sm);;
+  cursor: pointer;
+  color: var(--link-color);
 }
 </style>
