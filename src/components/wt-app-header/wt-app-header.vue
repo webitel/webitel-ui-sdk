@@ -24,7 +24,6 @@ export default {
   min-height: var(--wt-app-header-min-height); // fixed height because anything can be put inside slot, so padding won't work properly
   padding: var(--wt-app-header-padding);
   box-sizing: border-box;
-  //background: var(--wt-app-header-background);
   background: var(--wt-app-header-background);
 }
 </style>

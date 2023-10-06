@@ -28,7 +28,7 @@ export default {
       required: true,
     },
     /**
-     * @values sm (16px), md (24px), lg (32px), xl (40px)
+     * @values xs, sm (16px), md (24px), lg (32px), xl (40px), 2xl, 3xl
      * @example '<wt-icon icon="close" size="sm"></wt-icon>'
      */
     size: {
@@ -38,6 +38,7 @@ export default {
     /**
      *Icon colors. Attention! Hover color is changing only for "default color"
      * @values default, contrast, active, disabled, success, danger, transfer, hold, secondary-50
+     * @old values default, contrast, active, disabled, success, danger, transfer, hold, secondary-50
      */
     color: {
       type: String,
@@ -175,6 +176,11 @@ svg {
   &-sm {
     width: var(--icon-sm-size);
     height: var(--icon-sm-size);
+  }
+
+  &-xs {
+    width: var(--icon-xs-size);
+    height: var(--icon-xs-size);
   }
 }
 </style>

@@ -1,11 +1,17 @@
 <template>
   <div class="playground">
+    <wt-icon icon="edit"></wt-icon>
     <wt-switcher
       v-model="dark"
       label="Dark theme"
       @change="changeTheme"
     ></wt-switcher>
-    <wt-app-header></wt-app-header>
+    <wt-app-header>
+      <wt-app-navigator :current-app="'admin'" :apps="[{name: 'admin', href: `dev.webitel.com/admin`}]"></wt-app-navigator>
+      <wt-header-actions
+        :user="{ name: 'John Doe' }"
+      />
+    </wt-app-header>
     {{ date }}
     <wt-datepicker
       v-model="date"

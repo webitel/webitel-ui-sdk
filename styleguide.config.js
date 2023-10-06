@@ -11,6 +11,12 @@ module.exports = {
   require: [
     path.join(__dirname, 'src/main.js'),
   ],
+  // Override Styleguidist components
+  // https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/customised/styleguide.config.js#L33C2-L38C4
+  styleguideComponents: {
+    // StyleGuideRenderer: path.join(__dirname, 'styleguide/components/style-guide'),
+    LogoRenderer: path.join(__dirname, 'styleguide/components/logo'),
+  },
   // defaultExample: true,
   // sections: [
   //   {

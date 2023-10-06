@@ -52,11 +52,23 @@
   --info-light-color: var(--blue-lighten-4);
   --on-info-color: var(--black);
 
+  // job colors
+  --job-color: var(--blue-darken-1);
+  --job-hover-color: var(--blue-lighten-1);
+  --job-light-color: var(--blue-lighten-4);
+  --on-job-color: var(--black);
+
   // chat colors
   --chat-color: var(--indigo-accent-2);
   --chat-hover-color: var(--indigo-accent-2);
   --chat-light-color: var(--indigo-lighten-4);
   --on-chat-color: var(--black);
+
+  // transfer colors
+  --transfer-color: var(--indigo-darken-1);
+  --transfer-hover-color: var(--indigo-lighten-1);
+  --transfer-light-color: var(--indigo-lighten-4);
+  --on-transfer-color: var(--white);
 
   // primary colors
   --primary-color: var(--amber-accent-2);
@@ -126,11 +138,23 @@
   --info-light-color: var(--blue-lighten-3);
   --on-info-color: var(--white);
 
+  // job colors
+  --job-color: var(--blue-darken-1);
+  --job-hover-color: var(--blue-lighten-1);
+  --job-light-color: var(--blue-lighten-3);
+  --on-job-color: var(--white);
+
   // chat colors
   --chat-color: var(--indigo-accent-2);
   --chat-hover-color: var(--indigo-accent-2);
   --chat-light-color: var(--indigo-lighten-3);
   --on-chat-color: var(--white);
+
+  // transfer colors
+  --transfer-color: var(--indigo-darken-1);
+  --transfer-hover-color: var(--indigo-lighten-1);
+  --transfer-light-color: var(--indigo-lighten-4);
+  --on-transfer-color: var(--white);
 
   // primary colors
   --primary-color: var(--amber-accent-2);
