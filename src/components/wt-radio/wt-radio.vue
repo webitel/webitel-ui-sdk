@@ -18,7 +18,10 @@
       >
       <wt-icon class="wt-radio__icon" :icon="radioIcon"></wt-icon>
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label, isChecked, disabled }">
+      <slot
+        v-bind="{ label, isChecked, disabled }"
+        name="label"
+      >
         <div v-if="label" class="wt-radio__label">{{ label }}</div>
       </slot>
     </wt-label>

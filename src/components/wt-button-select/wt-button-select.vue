@@ -4,8 +4,8 @@
     v-clickaway="away">
 
     <wt-button
-      class="wt-button-select__button"
       v-bind="$attrs"
+      class="wt-button-select__button"
       :disabled="disabled"
       @click="$emit('click', $event)"
     >
@@ -19,8 +19,8 @@
     >
       <template v-slot:activator>
         <wt-button
-          class="wt-button-select__select-btn"
           v-bind="$attrs"
+          class="wt-button-select__select-btn"
           :disabled="disabled"
           :loading="false"
           @click="isOpened = !isOpened"

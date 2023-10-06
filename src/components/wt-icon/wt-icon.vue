@@ -15,36 +15,38 @@
 </template>
 
 <script>
+
 export default {
   name: 'wt-icon',
   props: {
+    /**
+     * Icon name
+     * @example '<wt-icon icon="close"></wt-icon>'
+     */
     icon: {
       type: String,
       required: true,
     },
+    /**
+     * @values sm (16px), md (24px), lg (32px), xl (40px)
+     * @example '<wt-icon icon="close" size="sm"></wt-icon>'
+     */
     size: {
       type: String,
       default: 'md',
     },
+    /**
+     *Icon colors. Attention! Hover color is changing only for "default color"
+     * @values default, contrast, active, disabled, success, danger, transfer, hold, secondary-50
+     */
     color: {
       type: String,
       default: 'default',
-      options: [
-        'default',
-        'contrast',
-        'active',
-        'accent',
-        'secondary',
-        'disabled',
-        'success',
-        'danger',
-        'transfer',
-        'job',
-        'hold',
-        'secondary-50',
-        'icon-secondary',
-      ],
     },
+    /**
+     * inserts icon name prefix between "icon" and actual icon name ("icon" prop).
+     * Useful for library icons extension with project-level icons with this prefix in name
+     */
     iconPrefix: {
       type: String,
       default: '',

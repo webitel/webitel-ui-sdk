@@ -3,14 +3,16 @@
   "version": "23.09.2",
   "private": false,
   "scripts": {
-    "serve-lib": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
-    "build:app": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix",
+    "build:app": "vue-cli-service build",
+    "prepare": "husky install",
     "publish-lib": "npm run test:unit && npm run build && npm publish --access public",
     "publish-lib:testless": "npm run build && npm publish --access public",
-    "prepare": "husky install"
+    "serve-lib": "vue-cli-service serve",
+    "styleguide": "vue-cli-service styleguidist",
+    "styleguide:build": "vue-cli-service styleguidist:build"
   },
   "main": "./dist/@webitel/ui-sdk.common.js",
   "files": [
@@ -78,6 +80,7 @@
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "svg-sprite-loader": "^6.0.11",
+    "vue-cli-plugin-styleguidist": "~4.72.4",
     "vuex": "^4.1.0"
   },
   "overrides": {

@@ -65,7 +65,7 @@
                   :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === navItem.value}"
                   :to="navItem.route"
                   class="wt-navigation-bar__nav-item-link"
-                  @click.native="close"
+                  @click="close"
                 > {{ navItem.name || navItem.value }}
                 </router-link>
               </div>
@@ -99,7 +99,7 @@
                         :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
                         :to="nestedRoute(subNavItem, navItem)"
                         class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
-                        @click.native="close"
+                        @click="close"
                       >{{ subNavItem.name || subNavItem.value }}
                       </router-link>
                     </div>

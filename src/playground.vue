@@ -48,15 +48,6 @@
         { text: 'ipsum 2' },{ text: 'ipsum 2' },{ text: 'ipsum 2' },
       ]"
     ></wt-button-select>
-    <wt-tooltip contrast :triggers="['click']">
-      <template v-slot:activator>
-        <wt-icon icon="edit"></wt-icon>
-      </template>
-      <template> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur debitis earum illum iure modi
-        optio tempore ut? Assumenda debitis facilis numquam quasi, quisquam similique. Aperiam cum dolorum eos error
-        natus!
-      </template>
-    </wt-tooltip>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
@@ -93,7 +84,7 @@
     ></wt-avatar>
     <wt-icon
       icon="bucket"
-      @click.native="log"
+      @click="log"
     ></wt-icon>
     <wt-icon-btn icon="edit" size="lg" color="icon-secondary" @click="log"></wt-icon-btn>
     <wt-load-bar

@@ -7,7 +7,10 @@
       'wt-checkbox--disabled': disabled,
     }"
   >
-    <wt-label class="wt-checkbox__wrapper" v-bind="labelProps">
+    <wt-label
+      v-bind="labelProps"
+      class="wt-checkbox__wrapper"
+    >
       <input
         class="wt-checkbox__input"
         type="checkbox"
@@ -23,7 +26,10 @@
       ></wt-icon>
     </span>
       <!-- @slot Custom label markup -->
-      <slot name="label" v-bind="{ label, isChecked, disabled }">
+      <slot
+        v-bind="{ label, isChecked, disabled }"
+        name="label"
+      >
         <div v-if="label" class="wt-checkbox__label">{{ label }}</div>
       </slot>
     </wt-label>

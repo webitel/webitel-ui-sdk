@@ -28,7 +28,10 @@
             href="#"
             @click.prevent="handleOptionClick({ option, index, hide })"
           >
-            <slot name="option" v-bind="option">
+            <slot
+              v-bind="option"
+              name="option"
+            >
               {{ option.text || option }}
             </slot>
           </a>
