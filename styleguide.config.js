@@ -10,6 +10,7 @@ module.exports = {
   components: 'src/components/**/wt-*.vue',
   require: [
     path.join(__dirname, 'src/main.js'),
+    path.join(__dirname, 'styleguide/styles/styleguide.scss'),
   ],
   // Override Styleguidist components
   // https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/examples/customised/styleguide.config.js#L33C2-L38C4
