@@ -8,6 +8,7 @@ module.exports = {
   // set your styleguidist configuration here
   title: 'Default Style Guide',
   components: 'src/components/**/wt-*.vue',
+  enhancePreviewApp: path.resolve(__dirname, 'styleguide/preview.js'),
   require: [
     path.join(__dirname, 'src/main.js'),
     path.join(__dirname, 'styleguide/styles/styleguide.scss'),

@@ -5,13 +5,12 @@
 
 Different color icons:
 ```vue
-const colors = ['default', 'contrast', 'active', 'disabled', 'success', 'danger', 'transfer', 'hold', 'secondary-50'];
+const colors = ['default', 'disabled', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer'];
 
 <div
   style="display: flex; align-items: center; gap: 5px;"
   v-for="color of this.colors"
   :key="color"
-  :style="color === 'contrast' && `background: var(--grey-darken-1);'`"
 >
 <wt-icon
   icon="edit"

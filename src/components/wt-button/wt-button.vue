@@ -34,7 +34,7 @@ export default {
      */
     color: {
       type: String,
-      default: 'accent',
+      default: 'primary',
     },
     disabled: {
       type: Boolean,

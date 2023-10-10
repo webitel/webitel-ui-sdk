@@ -9,8 +9,6 @@
   --icon-xs-size: 8px;
 
   --icon-color: var(--grey-darken-2);
-  --icon-hover-color: var(--grey-darken-5);
-  --icon-disabled-color: var(--grey-lighten-4);
   --icon-error-color: var(--error-color);
   --icon-success-color: var(--success-color);
   --icon-warning-color: var(--warning-color);
@@ -20,11 +18,11 @@
   --icon-info-color: var(--info-color);
   --icon-chat-color: var(--chat-color);
   --icon-transfer-color: var(--transfer-color);
+  --icon-disabled-color: var(--grey-lighten-4);
 }
 
 :root.theme--dark {
   --icon-color: var(--grey-lighten-2);
-  --icon-hover-color: var(--grey-lighten-5);
   --icon-disabled-color: var(--grey-darken-2);
   --icon-error-color: var(--error-color);
   --icon-success-color: var(--success-color);
