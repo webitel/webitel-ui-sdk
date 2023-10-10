@@ -1,6 +1,6 @@
 <template>
   <div class="playground">
-    <wt-icon icon="edit"></wt-icon>
+    <wt-icon-btn icon="edit" @click="() => alert('wt-icon-btn clicked')"></wt-icon-btn>
     <wt-switcher
       v-model="dark"
       label="Dark theme"
