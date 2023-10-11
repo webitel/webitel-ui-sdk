@@ -1,4 +1,4 @@
-name: Webitel UI CI
+name: Webitel UI run tests
 
 on:
   push:

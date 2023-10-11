@@ -31,7 +31,7 @@ module.exports = {
   // webpackConfig: {
   //   // custom config goes here
   // },
-  styleguideDir: 'dist',
+  styleguideDir: 'docs-dist',
   exampleMode: 'collapse',
   pagePerSection: true,
   simpleEditor: true, // https://github.com/vue-styleguidist/vue-styleguidist/blob/dev/docs/Configuration.md#simpleeditor
