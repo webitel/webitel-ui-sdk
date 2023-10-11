@@ -24,11 +24,12 @@ jobs:
 
       - name: Create release
         id: create_release
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ steps.package-version.outputs.current-version}}
+          tag_name: ${{ steps.package-version.outputs.current-version}}
           name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
           body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
+          files: docs-dist
 #      - name: Upload build artifacts
 #        id: upload_artifacts
 #        uses: actions/upload-artifact@v3
