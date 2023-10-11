@@ -4,7 +4,8 @@ on:
   push:
     branches: [ master ]
 
-  build:
+jobs:
+  test-build-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
