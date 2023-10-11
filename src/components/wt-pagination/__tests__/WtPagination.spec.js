@@ -28,9 +28,10 @@ describe('WtPagination', () => {
     const wrapper = mount(WtPagination, {
       props: { isNext: true, page: 2 },
     });
-    const pageControls = wrapper.findAllComponents('.wt-pagination__page-control');
+    const pageControls = wrapper.findAllComponents({ name: 'wt-icon-btn' });
     pageControls.at(0).vm.$emit('click');
     pageControls.at(1).vm.$emit('click');
+    console.info(wrapper.emitted());
     expect(wrapper.emitted().prev.length).toBe(1);
     expect(wrapper.emitted().next.length).toBe(1);
   });
