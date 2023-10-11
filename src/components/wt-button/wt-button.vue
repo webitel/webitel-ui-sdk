@@ -40,9 +40,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    /**
-     * Changes button style to alternative (outlined)
-     */
     loading: {
       type: Boolean,
       default: false,
