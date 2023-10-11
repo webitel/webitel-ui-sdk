@@ -15,7 +15,7 @@ jobs:
           node-version: '18.x'
       - run: npm ci
       - run: npm run test:unit
-      - run: npm run build
+#      - run: npm run build
       - run: npm run styleguide:build
 
       - name: get-npm-version
