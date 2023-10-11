@@ -5,17 +5,23 @@
     }"
     class="wt-datepicker"
   >
-    <wt-label :disabled="disabled" v-bind="labelProps">
+    <wt-label
+      v-bind="labelProps"
+      :disabled="disabled"
+    >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ label }}</slot>
+      <slot
+        v-bind="{ label }"
+        name="label"
+      >{{ label }}</slot>
     </wt-label>
     <vue-datepicker
+      v-bind="{ ...$attrs, ...$props }"
       ref="datepicker"
       :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
       :placeholder="label || placeholder"
       class="wt-datepicker__datepicker"
-      v-bind="{ ...$attrs, ...$props }"
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
       :close-on-auto-apply="false"
       auto-apply

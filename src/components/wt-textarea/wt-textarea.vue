@@ -7,13 +7,16 @@
     }"
   >
     <wt-label
+      v-bind="labelProps"
       :for="name"
       :disabled="disabled"
       :invalid="invalid"
-      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
+      <slot
+        v-bind="{ label }"
+        name="label"
+      >{{ requiredLabel }}</slot>
     </wt-label>
     <div class="wt-textarea__wrapper">
       <textarea

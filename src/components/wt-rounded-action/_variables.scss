@@ -1,7 +1,45 @@
 :root {
-  --rounded-action-padding: calc(var(--spacing-xs) - var(--btn-border-size));
+  --rounded-action-border-size: 1px;
+  --rounded-action-padding: calc(var(--spacing-xs) - var(--rounded-action-border-size));
 
-  --rounded-action-padding--outline: calc(var(--spacing-xs) - var(--btn-border-size));
+  --rounded-action-rounded-border-radius: var(--border-radius--pill);
 
-  --rounded-action-bg-color: var(--main-color);
+  --rounded-action-primary-color: var(--primary-color);
+  --rounded-action-primary-hover-color: var(--primary-hover-color);
+
+  --rounded-action-secondary-color: var(--dp-20-surface-color);
+  --rounded-action-secondary-hover-color: var(--dp-18-surface-color);
+  --rounded-action-secondary-active-color: var(--grey-lighten-1);
+
+  --rounded-action-success-color: var(--success-color);
+  --rounded-action-success-hover-color: var(--success-hover-color);
+
+  --rounded-action-error-color: var(--error-color);
+  --rounded-action-error-hover-color: var(--error-hover-color);
+
+  --rounded-action-transfer-color: var(--transfer-color);
+  --rounded-action-transfer-hover-color: var(--transfer-hover-color);
+
+  --rounded-action-disabled-color: var(--dp-18-surface-color);
+}
+
+:root.theme--dark {
+  --rounded-action-primary-color: var(--primary-color);
+  --rounded-action-primary-hover-color: var(--primary-hover-color);
+
+  --rounded-action-secondary-color: var(--dp-20-surface-color);
+  --rounded-action-secondary-hover-color: var(--dp-18-surface-color);
+  --rounded-action-secondary-active-color: var(--grey-darken-1);
+
+  --rounded-action-success-color: var(--success-color);
+  --rounded-action-success-hover-color: var(--success-hover-color);
+
+  --rounded-action-error-color: var(--error-color);
+  --rounded-action-error-hover-color: var(--error-hover-color);
+
+  --rounded-action-transfer-color: var(--transfer-color);
+  --rounded-action-transfer-hover-color: var(--transfer-hover-color);
+
+  --rounded-action-disabled-color: var(--dp-18-surface-color);
+
 }

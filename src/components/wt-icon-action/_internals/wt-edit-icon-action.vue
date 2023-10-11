@@ -2,7 +2,6 @@
   <wt-tooltip>
     <template v-slot:activator>
       <wt-icon-btn
-        class="table-action"
         icon="edit"
         :disabled="disabled"
         @click="emit('click')"

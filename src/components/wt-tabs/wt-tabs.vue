@@ -11,7 +11,10 @@
       type="button"
       @click="open(tab)"
     >
-      <slot :name="tab.value" v-bind="{ tab, current }">
+      <slot
+        v-bind="{ tab, current }"
+        :name="tab.value"
+      >
         <span style="display: block;">{{ tab.text }}</span>
       </slot>
     </button>

@@ -8,9 +8,9 @@
     }"
   >
     <wt-label
+      v-bind="labelProps"
       class="wt-switcher__wrapper"
       :class="{'wt-switcher__wrapper--label-left': labelLeft}"
-      v-bind="labelProps"
     >
       <input
         class="wt-switcher__input"
@@ -21,7 +21,10 @@
       >
       <span class="wt-switcher__checkmark"></span>
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label, value, disabled }">
+      <slot
+        v-bind="{ label, value, disabled }"
+        name="label"
+      >
         <div v-if="label" class="wt-switcher__label">{{ label }}</div>
       </slot>
     </wt-label>

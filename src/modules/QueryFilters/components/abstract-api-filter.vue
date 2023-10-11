@@ -1,12 +1,12 @@
 <template>
   <wt-select
+    v-bind="$attrs"
     :value="filterSchema.value"
     :label="label"
     :track-by="filterSchema.storedProp"
     :multiple="filterSchema.multiple"
     :search-method="search"
     :close-on-select="filterSchema.closeOnSelect"
-    v-bind="$attrs"
     @input="setValue({ filter: filterQuery, value: $event })"
     @reset="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
     @closed="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"

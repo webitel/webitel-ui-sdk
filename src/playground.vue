@@ -1,5 +1,17 @@
 <template>
   <div class="playground">
+    <wt-icon-btn icon="edit" @click="() => alert('wt-icon-btn clicked')"></wt-icon-btn>
+    <wt-switcher
+      v-model="dark"
+      label="Dark theme"
+      @change="changeTheme"
+    ></wt-switcher>
+    <wt-app-header>
+      <wt-app-navigator :current-app="'admin'" :apps="[{name: 'admin', href: `dev.webitel.com/admin`}]"></wt-app-navigator>
+      <wt-header-actions
+        :user="{ name: 'John Doe' }"
+      />
+    </wt-app-header>
     {{ date }}
     <wt-datepicker
       v-model="date"
@@ -7,25 +19,27 @@
     ></wt-datepicker>
     <wt-button color="secondary-50">123</wt-button>
     <wt-status-select></wt-status-select>
-   <div style="display: flex; gap: 10px; flex-wrap: wrap">
-     <wt-avatar size="sm"></wt-avatar>
-     <wt-avatar size="sm" username="A B"></wt-avatar>
-     <wt-avatar badge size="lg" username="A b"></wt-avatar>
-     <wt-avatar size="2xl" username="c d"></wt-avatar>
-     <wt-avatar size="3xl" username="e f"></wt-avatar>
-     <wt-avatar size="sm" username="g h"></wt-avatar>
-     <wt-avatar size="lg" username="i j"></wt-avatar>
-     <wt-avatar size="2xl" username="kl"></wt-avatar>
-     <wt-avatar size="3xl" username="mn"></wt-avatar>
-     <wt-avatar size="sm" username="op"></wt-avatar>
-     <wt-avatar size="lg" username="qr"></wt-avatar>
-     <wt-avatar size="2xl" username="s t"></wt-avatar>
-     <wt-avatar size="3xl" username="u v"></wt-avatar>
-     <wt-avatar size="sm" username="w x"></wt-avatar>
-     <wt-avatar size="lg" username="y z"></wt-avatar>
-   </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap">
+      <wt-avatar size="sm"></wt-avatar>
+      <wt-avatar size="sm" username="A B"></wt-avatar>
+      <wt-avatar badge size="lg" username="A b"></wt-avatar>
+      <wt-avatar size="2xl" username="c d"></wt-avatar>
+      <wt-avatar size="3xl" username="e f"></wt-avatar>
+      <wt-avatar size="sm" username="g h"></wt-avatar>
+      <wt-avatar size="lg" username="i j"></wt-avatar>
+      <wt-avatar size="2xl" username="kl"></wt-avatar>
+      <wt-avatar size="3xl" username="mn"></wt-avatar>
+      <wt-avatar size="sm" username="op"></wt-avatar>
+      <wt-avatar size="lg" username="qr"></wt-avatar>
+      <wt-avatar size="2xl" username="s t"></wt-avatar>
+      <wt-avatar size="3xl" username="u v"></wt-avatar>
+      <wt-avatar size="sm" username="w x"></wt-avatar>
+      <wt-avatar size="lg" username="y z"></wt-avatar>
+    </div>
     <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }]">
-      <template v-slot:activator><wt-button>context menu</wt-button></template>
+      <template v-slot:activator>
+        <wt-button>context menu</wt-button>
+      </template>
     </wt-context-menu>
     <wt-tooltip :triggers="['click']" :popper-triggers="['click']">
       <template v-slot:activator>
@@ -40,12 +54,6 @@
         { text: 'ipsum 2' },{ text: 'ipsum 2' },{ text: 'ipsum 2' },
       ]"
     ></wt-button-select>
-    <wt-tooltip contrast :triggers="['click']">
-      <template v-slot:activator>
-        <wt-icon icon="edit"></wt-icon>
-      </template>
-      <template> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur debitis earum illum iure modi optio tempore ut? Assumenda debitis facilis numquam quasi, quisquam similique. Aperiam cum dolorum eos error natus!</template>
-    </wt-tooltip>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
@@ -82,7 +90,7 @@
     ></wt-avatar>
     <wt-icon
       icon="bucket"
-      @click.native="log"
+      @click="log"
     ></wt-icon>
     <wt-icon-btn icon="edit" size="lg" color="icon-secondary" @click="log"></wt-icon-btn>
     <wt-load-bar
@@ -144,9 +152,9 @@
     <!--    ></wt-select>-->
 
     <template v-if="message === '123'">
-      <p >{{ message + '333' }}</p>
+      <p>{{ message + '333' }}</p>
     </template>
-    <p >{{ message }}</p>
+    <p>{{ message }}</p>
     <input v-model="message">
     <wt-search-bar
       :hint="'qwe qwe'"
@@ -179,8 +187,18 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'the-playground',
-  components: { WtContextMenu, WtTooltip, VueDatepicker, WtDatepicker, WtNavigationBar, WtExpandTransition, AuditForm, WtSearchBar },
+  components: {
+    WtContextMenu,
+    WtTooltip,
+    VueDatepicker,
+    WtDatepicker,
+    WtNavigationBar,
+    WtExpandTransition,
+    AuditForm,
+    WtSearchBar,
+  },
   data: () => ({
+    dark: false,
     auditQuestions: [
       {
         'required': true,
@@ -432,6 +450,9 @@ export default {
     },
     log(options) {
       console.log(options);
+    },
+    changeTheme() {
+      document.documentElement.classList.toggle('theme--dark');
     },
   },
 };

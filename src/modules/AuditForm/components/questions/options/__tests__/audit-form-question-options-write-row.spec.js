@@ -17,7 +17,7 @@ describe('AuditFormQuestionOptionsWriteRow', () => {
       },
     });
     const deleteBtn = wrapper.findComponent({ name: 'wt-icon-btn' });
-    expect(deleteBtn.props().icon).toBe('bucket');
+    expect(deleteBtn.attributes().icon).toBe('bucket');
     deleteBtn.vm.$emit('click');
     expect(wrapper.emitted().delete).toBeTruthy();
   });

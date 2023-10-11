@@ -1,48 +1,71 @@
 :root {
   --btn-min-width: 90px;
-  --btn-border-size: 2px;
   --btn-padding: var(--spacing-xs) var(--spacing-sm);
-
-  --btn-padding--size-md: var(--btn-padding);
   --btn-padding--size-sm: var(--spacing-2xs) var(--spacing-xs);
 
-  --btn-padding--outline:
-    calc(var(--spacing-xs) - var(--btn-border-size))
-    calc(var(--spacing-sm) - var(--btn-border-size));
-  --btn-padding--size-md--outline: var(--btn-padding--outline);
-  --btn-padding--size-sm--outline:
-    calc(var(--spacing-2xs) - var(--btn-border-size))
-    calc(var(--spacing-xs) - var(--btn-border-size));
+  // COLORS
+  --btn-primary-color: var(--primary-color);
+  --btn-primary-hover-color: var(--primary-hover-color);
+  --btn-primary-text-color: var(--on-primary-color);
 
-  --btn-border: var(--btn-border-size) solid;
+  --btn-secondary-color: var(--dp-10-surface-color);
+  --btn-secondary-hover-color: var(--dp-14-surface-color);
+  --btn-secondary-text-color: var(--grey-darken-4);
 
-  // BUTTON COLORS
-  --btn-dark-font-color: var(--text-primary-color);
-  --btn-light-font-color: var(--text-contrast-color);
+  --btn-success-color: var(--success-color);
+  --btn-success-hover-color: var(--success-hover-color);
+  --btn-success-text-color: var(--grey-lighten-5);
 
-  --btn-accent-color: hsla(var(--_accent-color), var(--_opacity--default));
-  --btn-accent--hover-color: hsla(var(--_accent-color), var(--_opacity--hover));
-
-  --btn-secondary-color: hsla(var(--_secondary-color), var(--_opacity--default));
-  --btn-secondary--hover-color: hsla(var(--_secondary-color), var(--_opacity--hover));
-
-  --btn-secondary-50-color: var(--secondary-color-50);
-
-  --btn-disabled-font-color: var(--secondary-color-50);
-  --btn-disabled-color: hsla(var(--_secondary-color-hue), 15%, 75%, var(--_opacity--active));
-
-  --btn-true-color: var(--true-color);
-  --btn-true--hover-color: var(--true--hover-color);
-
-  --btn-false-color: var(--false-color);
-  --btn-false--hover-color: var(--false--hover-color);
-
-  --btn-hold-color: var(--hold-color);
-  --btn-hold--hover-color: var(--hold--hover-color);
-
-  --btn-transfer-color: var(--transfer-color);
-  --btn-transfer--hover-color: var(--transfer--hover-color);
+  --btn-info-color: var(--info-color);
+  --btn-info-hover-color: var(--info-hover-color);
+  --btn-info-text-color: var(--grey-lighten-5);
 
   --btn-job-color: var(--job-color);
-  --btn-job--hover-color: var(--job--hover-color);
+  --btn-job-hover-color: var(--job-hover-color);
+  --btn-job-text-color: var(--grey-lighten-5);
+
+  --btn-error-color: var(--error-color);
+  --btn-error-hover-color: var(--error-hover-color);
+  --btn-error-text-color: var(--grey-lighten-5);
+
+  --btn-transfer-color: var(--transfer-color);
+  --btn-transfer-hover-color: var(--transfer-hover-color);
+  --btn-transfer-text-color: var(--on-transfer-color);
+
+  --btn-disabled-color: var(--dp-16-surface-color);
+  --btn-disabled-text-color: var(--grey-darken-1);
+}
+
+:root.theme--dark {
+  // COLORS
+  --btn-primary-color: var(--primary-color);
+  --btn-primary-hover-color: var(--primary-hover-color);
+  --btn-primary-text-color: var(--on-primary-color);
+
+  --btn-secondary-color: var(--dp-10-surface-color);
+  --btn-secondary-hover-color: var(--dp-14-surface-color);
+  --btn-secondary-text-color: var(--grey-lighten-4);
+
+  --btn-success-color: var(--success-color);
+  --btn-success-hover-color: var(--success-hover-color);
+  --btn-success-text-color: var(--grey-lighten-5);
+
+  --btn-info-color: var(--info-color);
+  --btn-info-hover-color: var(--info-hover-color);
+  --btn-info-text-color: var(--grey-lighten-5);
+
+  --btn-job-color: var(--job-color);
+  --btn-job-hover-color: var(--job-hover-color);
+  --btn-job-text-color: var(--grey-lighten-5);
+
+  --btn-error-color: var(--error-color);
+  --btn-error-hover-color: var(--error-hover-color);
+  --btn-error-text-color: var(--grey-lighten-5);
+
+  --btn-transfer-color: var(--transfer-color);
+  --btn-transfer-hover-color: var(--transfer-hover-color);
+  --btn-transfer-text-color: var(--on-transfer-color);
+
+  --btn-disabled-color: var(--dp-16-surface-color);
+  --btn-disabled-text-color: var(--grey-lighten-1);
 }

@@ -353,6 +353,6 @@
   --grey-darken-4: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-darken-4-grey), 1);
   --grey-darken-5: hsla(var(--hue-grey), var(--saturation-grey), var(--lightness-darken-5-grey), 1);
 
-  --black: hsla(0, 0, 0, 1);
-  --white: hsla(0, 0, 100, 1);
+  --black: hsla(0, 0%, 0%, 1);
+  --white: hsla(0, 0%, 100%, 1);
 }

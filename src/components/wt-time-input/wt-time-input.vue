@@ -8,15 +8,18 @@
     }"
   >
     <wt-label
+      v-bind="labelProps"
       v-if="hasLabel"
       :for="name"
       :outline="outline"
       :disabled="disabled"
       :invalid="invalid"
-      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ label }}</slot>
+      <slot
+        v-bind="{ label }"
+        name="label"
+      >{{ label }}</slot>
     </wt-label>
     <div class="wt-time-input__wrapper">
       <input
