@@ -4,7 +4,6 @@ on:
   push:
     branches: [ master ]
 
-jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -14,15 +13,9 @@ jobs:
         with:
           node-version: '18.x'
       - run: npm ci
+      - run: npm run test:unit
       - run: npm run build
       - run: npm run styleguide:build
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
 
       - name: get-npm-version
         id: package-version
