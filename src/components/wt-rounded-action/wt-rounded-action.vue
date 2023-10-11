@@ -77,7 +77,7 @@ const emit = defineEmits(['click']);
 
 const iColor = computed(() => {
   const onDark = ['success', 'error', 'transfer'];
-  const onLight = ['primary', 'secondary'];
+  const onLight = ['primary'];
   if (props.disabled) return 'disabled';
   if (onDark.includes(props.color)) return 'on-dark';
   if (onLight.includes(props.color)) return 'on-light';
