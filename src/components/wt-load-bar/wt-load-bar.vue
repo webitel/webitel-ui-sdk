@@ -40,7 +40,7 @@ export default {
   width: 100%;
   padding: var(--load-bar-padding);
   line-height: 0;
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
 }
 
@@ -49,7 +49,7 @@ export default {
   height: var(--load-bar-height);
   transition: var(--transition);
   border-radius: var(--load-bar-border-radius);
-  background: var(--accent-color);
+  background: var(--primary-color);
   will-change: width;
 }
 </style>

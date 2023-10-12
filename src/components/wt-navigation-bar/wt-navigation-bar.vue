@@ -253,7 +253,7 @@ export default {
     transition: var(--transition);
     opacity: 0;
     border-radius: var(--border-radius);
-    background: var(--accent-color);
+    background: var(--primary-color);
   }
 
   .wt-navigation-bar__expansion-arrow {

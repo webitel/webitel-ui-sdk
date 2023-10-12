@@ -62,7 +62,7 @@ export default {
   display: inline-block;
   height: var(--progress-bar-height);
   will-change: width;
-  background: var(--accent-color);
+  background: var(--primary-color);
   border-radius: var(--progress-bar-border-radius) 0 0 var(--progress-bar-border-radius);
   transition: var(--transition);
 }

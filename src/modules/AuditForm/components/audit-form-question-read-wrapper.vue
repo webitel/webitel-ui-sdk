@@ -96,7 +96,7 @@ const isResult = computed(() => !isEmpty(props.result));
   &:not(.audit-form-question-read--readonly) {
     &:hover,
     &:focus-within {
-      border: 1px solid var(--accent-color);
+      border: 1px solid var(--primary-color);
     }
   }
 
