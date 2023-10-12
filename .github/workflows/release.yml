@@ -22,6 +22,13 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
+      - name: Easy Zip Files
+        uses: vimtor/action-zip@v1.1
+        with:
+          files: docs-dist/
+          dest: docs.zip
+
+
       - name: Create release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -30,7 +37,7 @@ jobs:
           name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
           body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
           fail_on_unmatched_files: true
-          files: /docs-dist
+          files: docs.zip
 #      - name: Upload build artifacts
 #        id: upload_artifacts
 #        uses: actions/upload-artifact@v3
