@@ -5,7 +5,7 @@
 
 Different color icons:
 ```vue
-const colors = ['default', 'disabled', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer'];
+const colors = ['default', 'disabled', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer', 'job'];
 
 <div
   style="display: flex; align-items: center; gap: 5px;"
