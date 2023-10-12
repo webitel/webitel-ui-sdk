@@ -100,16 +100,11 @@ const loaderColor = computed(() => {
   width: fit-content;
   line-height: 0;
   padding: var(--rounded-action-padding);
-  box-shadow: var(--elevation-1);
   border: var(--rounded-action-border-size) solid;
   background: var(--rounded-action-secondary-color);
   border-color: var(--rounded-action-secondary-color);
   border-radius: var(--border-radius);
   transition: var(--transition);
-
-  &:hover {
-    box-shadow: var(--elevation-2);
-  }
 
   &--wide {
     width: 100%;
@@ -179,7 +174,6 @@ const loaderColor = computed(() => {
   &.wt-rounded-action--disabled {
     background: var(--rounded-action-disabled-color);
     border-color: var(--rounded-action-disabled-color);
-    box-shadow: none;
     pointer-events: none;
   }
 
