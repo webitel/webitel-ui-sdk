@@ -33,6 +33,7 @@ const emit = defineEmits(['click']);
 .wt-icon-btn {
   position: relative;
   display: block;
+  width: fit-content;
   line-height: 0;
 
   &:hover .wt-icon--color-default :deep .wt-icon__icon {
