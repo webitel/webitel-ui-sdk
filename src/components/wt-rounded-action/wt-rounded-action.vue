@@ -1,7 +1,6 @@
 <template>
   <button
     :class="[
-      `wt-rounded-action--color-${color}`,
       `wt-rounded-action--size-${size}`,
       { 'wt-rounded-action--active': active },
       { 'wt-rounded-action--disabled': disabled },
@@ -76,16 +75,14 @@ const props = defineProps({
 const emit = defineEmits(['click']);
 
 const iColor = computed(() => {
-  const onDark = ['success', 'error', 'transfer'];
-  const onLight = ['primary'];
   if (props.disabled) return 'disabled';
-  if (onDark.includes(props.color)) return 'on-dark';
-  if (onLight.includes(props.color)) return 'on-light';
-  if (props.active) return 'default';
-  return 'default';
+  switch (props.color) {
+    case 'secondary': return 'default';
+    default: return props.color;
+  }
 });
 const loaderColor = computed(() => {
-  if (['success', 'transfer', 'error'].includes(props.color)) return 'main';
+  // if (['success', 'transfer', 'error'].includes(props.color)) return 'main';
   return 'contrast';
 });
 </script>
@@ -101,10 +98,15 @@ const loaderColor = computed(() => {
   line-height: 0;
   padding: var(--rounded-action-padding);
   border: var(--rounded-action-border-size) solid;
-  background: var(--rounded-action-secondary-color);
-  border-color: var(--rounded-action-secondary-color);
+  background: var(--rounded-action-bg-color);
+  border-color: var(--rounded-action-bg-color);
   border-radius: var(--border-radius);
   transition: var(--transition);
+
+  &:hover {
+    background: var(--rounded-action-bg-hover-color);
+    border-color: var(--rounded-action-bg-hover-color);
+  }
 
   &--wide {
     width: 100%;
@@ -114,66 +116,15 @@ const loaderColor = computed(() => {
     border-radius: var(--rounded-action-rounded-border-radius);
   }
 
-  &--color {
-    &-primary {
-      background: var(--rounded-action-primary-color);
-      border-color: var(--rounded-action-primary-color);
+  &--active {
+    border-color: var(--rounded-action-active-color);
 
-      &:hover {
-        background: var(--rounded-action-primary-hover-color);
-        border-color: var(--rounded-action-primary-hover-color);
-      }
-    }
-
-    &-secondary {
-      background: var(--rounded-action-secondary-color);
-      border-color: var(--rounded-action-secondary-color);
-
-      &:hover {
-        background: var(--rounded-action-secondary-hover-color);
-        border-color: var(--rounded-action-secondary-hover-color);
-      }
-
-      &.wt-rounded-action--active {
-        background: transparent;
-        border-color: var(--rounded-action-secondary-active-color);
-      }
-    }
-
-    &-success {
-      background: var(--rounded-action-success-color);
-      border-color: var(--rounded-action-success-color);
-
-      &:hover {
-        background: var(--rounded-action-success-hover-color);
-        border-color: var(--rounded-action-success-hover-color);
-      }
-    }
-
-    &-error {
-      background: var(--rounded-action-error-color);
-      border-color: var(--rounded-action-error-color);
-
-      &:hover {
-        background: var(--rounded-action-error-hover-color);
-        border-color: var(--rounded-action-error-hover-color);
-      }
-    }
-
-    &-transfer {
-      background: var(--rounded-action-transfer-color);
-      border-color: var(--rounded-action-transfer-color);
-
-      &:hover {
-        background: var(--rounded-action-transfer-hover-color);
-        border-color: var(--rounded-action-transfer-hover-color);
-      }
+    &:hover {
+      border-color: var(--rounded-action-active-color);
     }
   }
 
   &.wt-rounded-action--disabled {
-    background: var(--rounded-action-disabled-color);
-    border-color: var(--rounded-action-disabled-color);
     pointer-events: none;
   }
 

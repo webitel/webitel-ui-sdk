@@ -37,35 +37,5 @@
 }
 
 :root.theme--dark {
-  // COLORS
-  --btn-primary-color: var(--primary-color);
-  --btn-primary-hover-color: var(--primary-hover-color);
-  --btn-primary-text-color: var(--on-primary-color);
-
-  --btn-secondary-color: var(--dp-10-surface-color);
-  --btn-secondary-hover-color: var(--dp-14-surface-color);
   --btn-secondary-text-color: var(--grey-lighten-4);
-
-  --btn-success-color: var(--success-color);
-  --btn-success-hover-color: var(--success-hover-color);
-  --btn-success-text-color: var(--grey-lighten-5);
-
-  --btn-info-color: var(--info-color);
-  --btn-info-hover-color: var(--info-hover-color);
-  --btn-info-text-color: var(--grey-lighten-5);
-
-  --btn-job-color: var(--job-color);
-  --btn-job-hover-color: var(--job-hover-color);
-  --btn-job-text-color: var(--grey-lighten-5);
-
-  --btn-error-color: var(--error-color);
-  --btn-error-hover-color: var(--error-hover-color);
-  --btn-error-text-color: var(--grey-lighten-5);
-
-  --btn-transfer-color: var(--transfer-color);
-  --btn-transfer-hover-color: var(--transfer-hover-color);
-  --btn-transfer-text-color: var(--on-transfer-color);
-
-  --btn-disabled-color: var(--dp-16-surface-color);
-  --btn-disabled-text-color: var(--grey-lighten-1);
 }

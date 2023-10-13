@@ -28,6 +28,9 @@
   --dp-2-surface-color: hsl(225, 20%, 78%);
   --dp-1-surface-color: hsl(225, 20%, 77%);
 
+  // content wrapper
+  --content-wrapper-color: var(--dp-24-surface-color);
+
   // success colors
   --success-color: var(--green-darken-4);
   --success-hover-color: var(--green-darken-3);
@@ -65,8 +68,8 @@
   --on-chat-color: var(--black);
 
   // transfer colors
-  --transfer-color: var(--indigo-darken-1);
-  --transfer-hover-color: var(--indigo-lighten-1);
+  --transfer-color: var(--indigo-lighten-1);
+  --transfer-hover-color: var(--indigo-lighten-2);
   --transfer-light-color: var(--indigo-lighten-4);
   --on-transfer-color: var(--white);
 
@@ -113,6 +116,9 @@
   --dp-3-surface-color: hsl(225, 20%, 4%);
   --dp-2-surface-color: hsl(225, 20%, 3%);
   --dp-1-surface-color: hsl(225, 20%, 2%);
+
+  // content wrapper
+  --content-wrapper-color: var(--dp-24-surface-color);
 
   // success colors
   --success-color: var(--green-darken-4);
