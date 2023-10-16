@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "23.12.17",
+  "version": "23.12.18",
   "private": false,
   "scripts": {
     "build": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
