@@ -1,5 +1,8 @@
 
 :root {
-  --headline-nav-indicator-size: 6px;
-  --headline-nav-indicator-margin: 19px;
+  --headline-nav-indicator-size: 4px;
+  --headline-nav-gap: var(--spacing-sm);
+  --headline-nav-dot-gap: var(--spacing-2xs);
+  --headline-nav-indicator-color: var(--icon-color);
+  --headline-nav-accent-indicator-color: var(--primary-color);
 }
