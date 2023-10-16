@@ -35,7 +35,7 @@ const props = defineProps({
     default: 'md',
   },
   /**
-   * @values 'default', 'disabled', 'primary', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer', 'job'
+   * @values 'default', 'active', 'disabled', 'primary', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer', 'job'
    */
   color: {
     type: String,
@@ -87,6 +87,9 @@ svg {
 .wt-icon--color {
   &-default .wt-icon__icon {
     fill: var(--icon-color);
+  }
+  &-active .wt-icon__icon {
+    fill: var(--icon-active-color);
   }
   &-primary .wt-icon__icon {
     fill: var(--icon-primary-color);

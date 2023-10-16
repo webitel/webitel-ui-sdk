@@ -9,6 +9,7 @@
   --icon-xs-size: 8px;
 
   --icon-color: var(--grey-darken-2);
+  --icon-active-color: var(--grey-darken-4);
   --icon-primary-color: var(--primary-color);
   --icon-error-color: var(--error-color);
   --icon-success-color: var(--success-color);
@@ -25,5 +26,6 @@
 
 :root.theme--dark {
   --icon-color: var(--grey-lighten-2);
+  --icon-active-color: var(--grey-lighten-4);
   --icon-disabled-color: var(--grey-darken-2);
 }
