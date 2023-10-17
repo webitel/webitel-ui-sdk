@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "23.12.20",
+  "version": "23.12.21",
   "private": false,
   "scripts": {
     "build": "vue-cli-service build --target lib --name ui-sdk ./src/install.js",
@@ -48,6 +48,7 @@
     "is-valid-domain": "^0.1.6",
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
+    "lodash": "^4.17.21",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "plyr": "3.6.2",
     "query-string": "^8.1.0",
