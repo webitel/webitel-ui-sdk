@@ -222,6 +222,7 @@ export default {
         [AdminSections.STORAGE]: 'Хранилища',
         [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
         [AdminSections.EMAIL_PROFILES]: 'Email профили',
+        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
         [AdminSections.IMPORT_CSV]: 'Импорт данных из CSV файлов',
         [AdminSections.TRIGGERS]: 'Триггеры',
         [AdminSections.ROLES]: 'Роли',

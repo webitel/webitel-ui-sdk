@@ -223,6 +223,7 @@ export default {
         [AdminSections.STORAGE]: 'Storage',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
         [AdminSections.EMAIL_PROFILES]: 'Email profiles',
+        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
         [AdminSections.IMPORT_CSV]: 'Imports of CSV from file',
         [AdminSections.TRIGGERS]: 'Triggers',
         [AdminSections.MEDIA]: 'Media files',

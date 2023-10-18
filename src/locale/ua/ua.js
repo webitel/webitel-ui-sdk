@@ -222,6 +222,7 @@ export default {
         [AdminSections.STORAGE]: 'Сховища',
         [AdminSections.COGNITIVE_PROFILES]: 'Голосові профілі',
         [AdminSections.EMAIL_PROFILES]: 'Email профілі',
+        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
         [AdminSections.IMPORT_CSV]: 'Імпорт даних з CSV файлів',
         [AdminSections.TRIGGERS]: 'Тригери',
         [AdminSections.ROLES]: 'Ролі',
