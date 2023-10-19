@@ -230,7 +230,7 @@ export default {
         [AdminSections.ROLES]: 'Roles',
         [AdminSections.OBJECTS]: 'Objects',
         [AdminSections.CHANGELOGS]: 'Change log',
-        [AdminSections.SETTINGS]: 'Settings',
+        [AdminSections.CONFIGURATION]: 'Configuration',
       },
     },
   },

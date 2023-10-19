@@ -228,7 +228,7 @@ export default {
         [AdminSections.ROLES]: 'Ролі',
         [AdminSections.OBJECTS]: 'Розділи',
         [AdminSections.CHANGELOGS]: 'Журнал змін',
-        [AdminSections.SETTINGS]: 'Налаштування',
+        [AdminSections.CONFIGURATION]: 'Конфігурація',
       },
     },
   },
