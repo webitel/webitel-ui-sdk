@@ -144,8 +144,16 @@ export default {
     tag() {},
   },
 
+  watch: {
+    disabled() {
+      // load options if becomes enabled
+      if (!this.disabled) this.fetchOptions();
+    }
+  },
+
   created() {
-    this.fetchOptions();
+    // load options only if not disabled
+    if (!this.disabled) this.fetchOptions();
     this.fetchOptions = debounce(this.fetchOptions, 500);
   },
 };
