@@ -135,6 +135,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.EMAIL_PROFILES}`,
     },
+    [AdminSections.SINGLE_SIGN_ON]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SINGLE_SIGN_ON}`,
+    },
     [AdminSections.IMPORT_CSV]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.IMPORT_CSV}`,
@@ -154,6 +158,10 @@ const applicationsAccess = (value = true) => ({
     [AdminSections.CHANGELOGS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CHANGELOGS}`,
+    },
+    [AdminSections.CONFIGURATION]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CONFIGURATION}`,
     },
   },
   [WebitelApplications.AUDIT]: {

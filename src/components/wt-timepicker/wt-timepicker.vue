@@ -1,9 +1,9 @@
 <template>
   <div class="wt-timepicker" :class="{'wt-timepicker--invalid': invalid}">
     <wt-label
+      v-bind="labelProps"
       v-if="label"
       :invalid="invalid"
-      v-bind="labelProps"
     >
       {{ `${label} (${format})` }}
     </wt-label>

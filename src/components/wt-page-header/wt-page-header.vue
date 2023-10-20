@@ -2,10 +2,10 @@
   <wt-headline>
     <template v-slot:title-wrapper>
       <slot>
-        <template slot="title">
-          <slot name="title"></slot>
-        </template>
       </slot>
+    </template>
+    <template v-slot:title>
+      <slot name="title"></slot>
     </template>
     <template v-slot:actions>
       <slot name="actions"></slot>

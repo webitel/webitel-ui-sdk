@@ -1,12 +1,13 @@
 <template>
   <div
+    v-clickaway="atClickaway"
     class="wt-button-select"
-    v-clickaway="away">
-
+  >
     <wt-button
-      class="wt-button-select__button"
       v-bind="$attrs"
+      :color="color"
       :disabled="disabled"
+      class="wt-button-select__button"
       @click="$emit('click', $event)"
     >
       <slot></slot>
@@ -19,17 +20,19 @@
     >
       <template v-slot:activator>
         <wt-button
-          class="wt-button-select__select-btn"
           v-bind="$attrs"
+          :color="color"
           :disabled="disabled"
           :loading="false"
+          class="wt-button-select__select-btn"
           @click="isOpened = !isOpened"
         >
           <wt-icon
-            class="wt-button-select__select-arrow"
             :class="{'wt-button-select__select-arrow--active': isOpened}"
-            icon="arrow-down"
+            :color="color === 'primary' ? 'on-primary' : 'default'"
             :disabled="disabled"
+            class="wt-button-select__select-arrow"
+            icon="arrow-down"
           ></wt-icon>
         </wt-button>
       </template>
@@ -37,33 +40,58 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'wt-button-select',
-  data: () => ({
-    isOpened: false,
-  }),
-  props: {
-    // all buttons props are passed as "$attrs"
-    options: {
-      type: Array,
-      required: true,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+import { ref } from 'vue';
+
+const props = defineProps({
+  /**
+   * See context-menu component docs
+   */
+  options: {
+    type: Array,
+    required: true,
   },
-  methods: {
-    selectOption({ option, index }) {
-      this.$emit('click:option', option, index);
-      this.isOpened = false;
-    },
-    away() {
-      this.isOpened = false;
-    },
+  /**
+   * @values 'primary', 'secondary'
+   * @example <wt-button color="secondary"></wt-button>
+   */
+  color: {
+    type: String,
+    default: 'primary',
   },
-};
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emit = defineEmits([
+  /**
+   * @event click
+   */
+  'click',
+  /**
+   * Click on option in context-menu
+   *
+   * @event click:option
+   *
+   * @property {object} option clicked option object
+   * @property {index} index clicked option index in options list
+   */
+  'click:option',
+]);
+
+const isOpened = ref(false);
+
+function selectOption({ option, index }) {
+  emit('click:option', option, index);
+  isOpened.value = false;
+}
+
+function atClickaway() {
+  isOpened.value = false;
+}
+
 </script>
 
 <style lang="scss">
@@ -88,94 +116,6 @@ export default {
   min-width: auto;
   padding: var(--button-select-icon-button-padding);
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
-
-  // NORMAL MODE
-  &:not(.wt-button--outline)::v-deep {
-    & .wt-icon__icon {
-      fill: var(--button-select-icon-color-dark);
-    }
-
-    // For secondary color, the icon color and icon hover color are the same as in primary color mode
-
-    &.danger,
-    &.success,
-    &.transfer {
-      .wt-icon__icon {
-        fill: var(--button-select-icon-color-ligth);
-      }
-    }
-  }
-
-  //OUTLINE MODE
-  &.wt-button--outline::v-deep {
-    & .wt-icon__icon {
-      fill: var(--button-select-icon-color-primary);
-    }
-
-    &:hover,
-    &:active {
-      .wt-icon__icon {
-        fill: var(--button-select-icon-color-primary--hover);
-      }
-    }
-
-    &.danger {
-      & .wt-icon__icon {
-        fill: var(--icon-color-danger)
-      }
-
-      &:hover,
-      &:active {
-        .wt-icon__icon {
-          fill: var(--button-select-icon-color-danger--hover);
-        }
-      }
-    }
-
-    &.success {
-      & .wt-icon__icon {
-        fill: var(--icon-color-success)
-      }
-
-      &:hover,
-      &:active {
-        .wt-icon__icon {
-          fill: var(--button-select-icon-color-success--hover);
-        }
-      }
-    }
-
-    &.transfer {
-      & .wt-icon__icon {
-        fill: var(--icon-color-transfer)
-      }
-
-      &:hover,
-      &:active {
-        .wt-icon__icon {
-          fill: var(--button-select-icon-color-transfer--hover);
-        }
-      }
-    }
-
-    &.secondary {
-      .wt-icon__icon {
-        fill: var(--button-select-icon-color-secondary);
-      }
-
-      &:hover,
-      &:active {
-        .wt-icon__icon {
-          fill: var(--button-select-icon-color-secondary--hover);
-        }
-      }
-    }
-  }
-
-  // DISABLED MODE
-  &.wt-button--disabled .wt-icon::v-deep .wt-icon__icon {
-    fill: var(--icon-color-secondary-50);
-  }
 
   // OPEN AND SHUT ARROW
   .wt-button-select__select-arrow {

@@ -59,14 +59,15 @@ const emits = defineEmits([
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: var(--spacing-sm);
+
+  &__img {
+    height: 200px;
+    width: 200px;
+  }
 
   &__text {
     @extend %typo-body-1;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  &__img {
-    margin-bottom: var(--spacing-sm);
   }
 }
 </style>

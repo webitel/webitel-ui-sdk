@@ -1,0 +1,58 @@
+name: Webitel UI release with docs
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  test-build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: npm ci
+      - run: npm run test:unit
+#      - run: npm run build
+      - run: npm run styleguide:build
+
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: Easy Zip Files
+        uses: vimtor/action-zip@v1.1
+        with:
+          files: docs-dist/
+          dest: docs.zip
+
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.package-version.outputs.current-version}}
+          name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
+          body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
+          fail_on_unmatched_files: true
+          files: docs.zip
+#      - name: Upload build artifacts
+#        id: upload_artifacts
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: build
+#          path: /
+
+#      - name: Publish release
+#        id: publish_release
+#        uses: actions/github-script@v6
+#        with:
+#          script: |
+#            github.repos.updateRelease({
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              release_id: steps.create_release.outputs.id,
+#              body: steps.upload_artifacts.outputs.artifact_url
+#            })

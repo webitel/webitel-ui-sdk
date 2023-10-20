@@ -8,22 +8,26 @@
     class="wt-tags-input"
   >
     <wt-label
+      v-bind="labelProps"
       v-if="hasLabel"
       :disabled="disabled"
       :invalid="invalid"
       class="wt-tags-input__label"
-      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
+      <slot
+        v-bind="{ label }"
+        name="label"
+      >{{ requiredLabel }}</slot>
     </wt-label>
 
     <vue-multiselect
+      v-bind="$attrs"
       ref="vue-multiselect"
       :close-on-select="false"
       :disabled="disabled"
       :internal-search="!searchMethod"
-      :label="trackBy ? optionLabel : null"
+      :label="selectOptionLabel"
       :loading="false"
       :options="selectOptions"
       :placeholder="placeholder || label"
@@ -32,7 +36,6 @@
       :model-value="selectValue"
       class="wt-tags-input__select"
       multiple
-      v-bind="$attrs"
       v-on="listeners"
     >
 
@@ -50,7 +53,10 @@
 
       <!--      Slot for custom option template -->
       <template v-slot:option="{ option }">
-        <slot name="option" v-bind="{ option, optionLabel }">
+        <slot
+          v-bind="{ option, optionLabel }"
+          name="option"
+        >
           {{ getTagOptionLabel({ option, optionLabel }) }}
         </slot>
       </template>
@@ -63,7 +69,7 @@
           class="multiselect__select"
           color="active"
           icon="arrow-down"
-          @mousedown.native.prevent.stop="toggle"
+          @mousedown.prevent.stop="toggle"
         ></wt-icon-btn>
       </template>
 

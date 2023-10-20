@@ -100,6 +100,7 @@ export default {
     emails: 'Email | Emails',
     phones: 'Phone | Phones',
     messaging: 'Messaging',
+    emptyResultSearch: 'Your search yielded no results',
   },
   // date-related texts
   date: {
@@ -222,12 +223,14 @@ export default {
         [AdminSections.STORAGE]: 'Storage',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
         [AdminSections.EMAIL_PROFILES]: 'Email profiles',
+        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
         [AdminSections.IMPORT_CSV]: 'Imports of CSV from file',
         [AdminSections.TRIGGERS]: 'Triggers',
         [AdminSections.MEDIA]: 'Media files',
         [AdminSections.ROLES]: 'Roles',
         [AdminSections.OBJECTS]: 'Objects',
-        [AdminSections.CHANGELOGS]: 'Change logs',
+        [AdminSections.CHANGELOGS]: 'Change log',
+        [AdminSections.CONFIGURATION]: 'Configuration',
       },
     },
   },
@@ -254,6 +257,7 @@ export default {
     searchBar: {
       placeholder: 'Search',
       settingsHint: 'Search mode',
+      variableSearchHint: 'Query format: "key=value"',
     },
     timepicker: {
       hour: 'Hour:',
@@ -332,6 +336,7 @@ export default {
         options: 'Options',
         score: 'Score',
       },
+      clearSelection: 'Clear selection',
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',

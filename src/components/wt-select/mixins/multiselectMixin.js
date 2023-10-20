@@ -63,6 +63,11 @@ export default {
     searchHasNext: true,
   }),
   computed: {
+    selectOptionLabel() {
+      // trackBy === null means that options are not objects but primitives
+      if (this.trackBy === null) return null;
+      return this.optionLabel || this.defaultOptionLabel;
+    },
     isApiMode() {
       return !!this.searchMethod;
     },
@@ -139,8 +144,16 @@ export default {
     tag() {},
   },
 
+  watch: {
+    disabled() {
+      // load options if becomes enabled
+      if (!this.disabled) this.fetchOptions();
+    }
+  },
+
   created() {
-    this.fetchOptions();
+    // load options only if not disabled
+    if (!this.disabled) this.fetchOptions();
     this.fetchOptions = debounce(this.fetchOptions, 500);
   },
 };

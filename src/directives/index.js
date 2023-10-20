@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import clickaway from './clickaway/clickaway';
 
 const Directives = {

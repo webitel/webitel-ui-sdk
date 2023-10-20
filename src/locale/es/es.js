@@ -188,6 +188,7 @@ export default {
         [AdminSections.STORAGE]: 'Almacenamiento',
         [AdminSections.COGNITIVE_PROFILES]: 'Perfiles de voz',
         [AdminSections.EMAIL_PROFILES]: 'Perfiles de correo electrónico',
+        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
         [AdminSections.IMPORT_CSV]: 'Importación de datos de archivos CSV',
         [AdminSections.TRIGGERS]: 'Activadores',
         [AdminSections.ROLES]: 'Funciones',

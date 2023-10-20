@@ -96,9 +96,10 @@ export default {
     labels: 'Метка | Метки',
     permissions: 'Разрешение | Разрешения',
     options: 'Опция | Опции',
-    emails: 'Email | Emails',
+    emails: 'Электронный адрес | Электронные адреса',
     phones: 'Телефон | Телефоны',
     messaging: 'Сообщения',
+    emptyResultSearch: 'Поиск не дал результатов',
   },
   // date-related texts
   date: {
@@ -221,11 +222,13 @@ export default {
         [AdminSections.STORAGE]: 'Хранилища',
         [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
         [AdminSections.EMAIL_PROFILES]: 'Email профили',
+        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
         [AdminSections.IMPORT_CSV]: 'Импорт данных из CSV файлов',
         [AdminSections.TRIGGERS]: 'Триггеры',
         [AdminSections.ROLES]: 'Роли',
         [AdminSections.OBJECTS]: 'Разделы',
-        [AdminSections.CHANGELOGS]: 'Журналы изменений',
+        [AdminSections.CHANGELOGS]: 'Журнал изменений',
+        [AdminSections.CONFIGURATION]: 'Конфигурация',
       },
     },
   },
@@ -252,6 +255,7 @@ export default {
     searchBar: {
       placeholder: 'Поиск',
       settingsHint: 'Настройки поиска',
+      variableSearchHint: 'Формат запроса: "ключ=значение"',
     },
     timepicker: {
       hour: 'Час:',
@@ -330,6 +334,7 @@ export default {
         options: 'Вариант',
         score: 'Бал',
       },
+      clearSelection: 'Очистить выбор',
     },
     deleteConfirmationPopup: {
       title: 'Подтвердите удаление',

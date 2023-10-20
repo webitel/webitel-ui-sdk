@@ -5,18 +5,26 @@
     }"
     class="wt-datepicker"
   >
-    <wt-label :disabled="disabled" v-bind="labelProps">
+    <wt-label
+      v-bind="labelProps"
+      :disabled="disabled"
+    >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ label }}</slot>
+      <slot
+        v-bind="{ label }"
+        name="label"
+      >{{ label }}</slot>
     </wt-label>
     <vue-datepicker
+      v-bind="{ ...$attrs, ...$props }"
       ref="datepicker"
       :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
       :placeholder="label || placeholder"
       class="wt-datepicker__datepicker"
-      v-bind="{ ...$attrs, ...$props }"
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
+      :close-on-auto-apply="false"
+      auto-apply
       @closed="isOpened = false"
       @open="isOpened = true"
       @update:model-value="emit('input', $event.getTime())"
@@ -51,31 +59,17 @@
       >
         <div class="datepicker__timepicker">
           <wt-time-input
-            :label="$t('webitelUI.timepicker.hour')"
             :value="time.hours"
             max-value="23"
             @input="updateTime"
           ></wt-time-input>
+          :
           <wt-time-input
-            :label="$t('webitelUI.timepicker.min')"
             :value="time.minutes"
             max-value="59"
             @input="updateTime($event, false)"
           ></wt-time-input>
         </div>
-      </template>
-      <template v-slot:action-select>
-        <wt-button
-          wide
-          @click="datepicker.selectDate()"
-        >{{ $t('reusable.ok') }}
-        </wt-button>
-        <wt-button
-          color="secondary"
-          wide
-          @click="datepicker.closeMenu()"
-        >{{ $t('reusable.cancel') }}
-        </wt-button>
       </template>
     </vue-datepicker>
   </div>
@@ -175,9 +169,16 @@ const isDateTime = props.mode === 'datetime';
   }
 
   .dp__menu {
+    box-sizing: border-box;
     min-width: 196px;
+    width: 196px;
+    padding: var(--spacing-xs);
     border-radius: var(--border-radius);
     box-shadow: var(--elevation-10);
+  }
+
+  .dp__calendar_wrap {
+    gap: var(--spacing-2xs);
   }
 
   .dp__calendar_header_item {
@@ -219,10 +220,14 @@ const isDateTime = props.mode === 'datetime';
 }
 
 .datepicker__timepicker {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: center;
   gap: var(--spacing-xs);
-  margin: 0 var(--spacing-xs);
+  margin-top: var(--spacing-xs);
+
+  .wt-time-input {
+    flex-grow: 1;
+  }
 }
 
 .wt-datepicker__open-arrow {

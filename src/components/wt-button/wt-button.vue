@@ -6,9 +6,7 @@
       `wt-button--size-${size}`,
       {
         'wt-button--contains-icon': containsIcon,
-        'wt-button--outline': outline,
         'wt-button--wide': wide,
-        'wt-button--rounded': rounded,
         'wt-button--disabled': disabled,
         'wt-button--loading': loading,
       }
@@ -22,7 +20,7 @@
       size="sm"
       :color="loaderColor"
     ></wt-loader>
-    <slot v-else></slot>
+    <slot v-else>no content provided</slot>
   </button>
 </template>
 
@@ -30,16 +28,15 @@
 export default {
   name: 'wt-button',
   props: {
+    /**
+     * @values 'primary', 'secondary', 'success', 'error', 'transfer', 'job', 'info'
+     * @example <wt-button color="success"></wt-button>
+     */
     color: {
       type: String,
-      default: 'accent',
-      options: ['accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer', 'job'],
+      default: 'primary',
     },
     disabled: {
-      type: Boolean,
-      default: false,
-    },
-    outline: {
       type: Boolean,
       default: false,
     },
@@ -47,19 +44,25 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * @values 'sm', 'md'
+     * @example <wt-button size="sm"></wt-button>
+     */
     size: {
       type: String,
       default: 'md',
       options: ['sm', 'md'],
     },
+    /**
+     * Stretches button to all available width
+     */
     wide: {
       type: Boolean,
       default: false,
     },
-    rounded: {
-      type: Boolean,
-      default: false,
-    },
+    /**
+     * sets wt-button line-height to 0 to prevent height changing: [stack overflow](https://stackoverflow.com/a/11126701)
+     */
     containsIcon: {
       type: Boolean,
       default: false,
@@ -73,7 +76,7 @@ export default {
       return '';
     },
     loaderColor() {
-      if (['success', 'transfer', 'danger', 'job'].includes(this.color)) return 'main';
+      if (['success', 'transfer', 'error', 'job'].includes(this.color)) return 'main';
       return 'contrast';
     },
   },
@@ -85,7 +88,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
 .wt-button {
   @extend %typo-button;
   box-sizing: border-box;
@@ -93,8 +95,8 @@ export default {
   display: inline-block;
   min-width: var(--btn-min-width);
   padding: var(--btn-padding);
-  color: var(--btn-dark-font-color);
-  background-color: var(--btn-accent-color);
+  color: var(--btn-primary-text-color);
+  background-color: var(--btn-primary-color);
   background-clip: padding-box;
   border-radius: var(--border-radius);
   transition: var(--transition);
@@ -104,13 +106,13 @@ export default {
     width: 100%;
   }
 
-  &--rounded {
-    border-radius: var(--border-radius--pill);
-  }
-
   // https://stackoverflow.com/a/11126701
   &--contains-icon {
     line-height: 0;
+  }
+
+  &--loading {
+    pointer-events: none;
   }
 
   &--size {
@@ -119,182 +121,78 @@ export default {
     }
 
     &-md {
-      padding: var(--btn-padding--size-md);
+      padding: var(--btn-padding);
     }
-  }
-
-  &--loading {
-    pointer-events: none;
   }
 
   &:hover,
   &:active {
-    background-color: var(--btn-accent--hover-color);
-    border-color: var(--btn-accent--hover-color);
+    background-color: var(--btn-primary-hover-color);
   }
 
   &.secondary {
-    color: var(--btn-dark-font-color);
-    border-color: var(--btn-secondary-color);
+    color: var(--btn-secondary-text-color);
     background-color: var(--btn-secondary-color);
 
     &:hover,
     &:active {
-      color: var(--btn-dark-font-color);
-      border-color: var(--btn-secondary--hover-color);
-      background-color: var(--btn-secondary--hover-color);
-    }
-  }
-
-  &.secondary-50 {
-    color: var(--btn-dark-font-color);
-    border-color: var(--btn-secondary-50-color);
-    background-color: var(--btn-secondary-50-color);
-
-    &:hover,
-    &:active {
-      color: var(--btn-dark-font-color);
-      border-color: var(--btn-secondary-color);
-      background-color: var(--btn-secondary-color);
+      background-color: var(--btn-secondary-hover-color);
     }
   }
 
   &.success {
-    color: var(--btn-light-font-color);
-    background-color: var(--btn-true-color);
-    border-color: var(--btn-true-color);
+    color: var(--btn-success-text-color);
+    background-color: var(--btn-success-color);
 
     &:hover,
     &:active {
-      background-color: var(--btn-true--hover-color);
-      border-color: var(--btn-true--hover-color);
+      background-color: var(--btn-success-hover-color);
     }
   }
 
-  &.transfer {
-    color: var(--btn-light-font-color);
-    background-color: var(--btn-transfer-color);
-    border-color: var(--btn-transfer-color);
+  &.info {
+    color: var(--btn-info-text-color);
+    background-color: var(--btn-info-color);
 
     &:hover,
     &:active {
-      background-color: var(--btn-transfer--hover-color);
-      border-color: var(--btn-transfer--hover-color);
+      background-color: var(--btn-info-hover-color);
     }
   }
 
   &.job {
-    color: var(--btn-light-font-color);
+    color: var(--btn-job-text-color);
     background-color: var(--btn-job-color);
-    border-color: var(--btn-job-color);
 
     &:hover,
     &:active {
-      background-color: var(--btn-job--hover-color);
-      border-color: var(--btn-job--hover-color);
+      background-color: var(--btn-job-hover-color);
     }
   }
 
-  &.danger {
-    color: var(--btn-light-font-color);
-    background-color: var(--btn-false-color);
-    border-color: var(--btn-false-color);
+  &.transfer {
+    color: var(--btn-transfer-text-color);
+    background-color: var(--btn-transfer-color);
 
     &:hover,
     &:active {
-      background-color: var(--btn-false--hover-color);
-      border-color: var(--btn-false--hover-color);
+      background-color: var(--btn-transfer-hover-color);
     }
   }
 
-  &.wt-button--outline {
-    border: var(--btn-border);
-    padding: var(--btn-padding--outline);
-    background-color: transparent;
-    color: var(--btn-accent-color);
-    border-color: var(--btn-accent-color);
-
-    &.wt-button--size {
-      &-sm {
-        padding: var(--btn-padding--size-sm--outline);
-      }
-
-      &-md {
-        padding: var(--btn-padding--size-md--outline);
-      }
-    }
+  &.error {
+    color: var(--btn-error-text-color);
+    background-color: var(--btn-error-color);
 
     &:hover,
     &:active {
-      color: var(--btn-accent--hover-color);
-      border-color: var(--btn-accent--hover-color);
-      background-color: transparent;
-    }
-
-    &.secondary {
-      color: var(--btn-dark-font-color);
-      border-color: var(--btn-secondary-color);
-
-      &:hover,
-      &:active {
-        border-color: var(--btn-secondary--hover-color);
-        background-color: transparent;
-      }
-    }
-
-    &.success {
-      color: var(--btn-true-color);
-      border-color: var(--btn-true-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-true--hover-color);
-        border-color: var(--btn-true--hover-color);
-        background-color: transparent;
-      }
-    }
-
-    &.transfer {
-      color: var(--btn-transfer-color);
-      border-color: var(--btn-transfer-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-transfer--hover-color);
-        border-color: var(--btn-transfer--hover-color);
-        background-color: transparent;
-      }
-    }
-
-    &.job {
-      color: var(--btn-job-color);
-      border-color: var(--btn-job-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-job--hover-color);
-        border-color: var(--btn-job--hover-color);
-        background-color: transparent;
-      }
-    }
-
-    &.danger {
-      color: var(--btn-false-color);
-      border-color: var(--btn-false-color);
-
-      &:hover,
-      &:active {
-        color: var(--btn-false--hover-color);
-        border-color: var(--btn-false--hover-color);
-        background-color: transparent;
-      }
+      background-color: var(--btn-error-hover-color);
     }
   }
 
   &.wt-button--disabled {
-    color: var(--btn-disabled-font-color);
+    color: var(--btn-disabled-text-color);
     background-color: var(--btn-disabled-color);
-    border-color: var(--btn-disabled-color);
     cursor: auto;
     pointer-events: none;
     box-shadow: none;

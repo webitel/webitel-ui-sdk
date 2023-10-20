@@ -96,9 +96,10 @@ export default {
     labels: 'Мітка | Мітки',
     permissions: 'Дозвіл | Дозволи',
     options: 'Опція | Опції',
-    emails: 'Email | Emails',
+    emails: 'Електронна адреса | Електронні адреси',
     phones: 'Телефон | Телефони',
     messaging: 'Повідомлення',
+    emptyResultSearch: 'Пошук не дав результатів',
   },
   // date-related texts
   date: {
@@ -221,11 +222,13 @@ export default {
         [AdminSections.STORAGE]: 'Сховища',
         [AdminSections.COGNITIVE_PROFILES]: 'Голосові профілі',
         [AdminSections.EMAIL_PROFILES]: 'Email профілі',
+        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
         [AdminSections.IMPORT_CSV]: 'Імпорт даних з CSV файлів',
         [AdminSections.TRIGGERS]: 'Тригери',
         [AdminSections.ROLES]: 'Ролі',
         [AdminSections.OBJECTS]: 'Розділи',
-        [AdminSections.CHANGELOGS]: 'Журнали змін',
+        [AdminSections.CHANGELOGS]: 'Журнал змін',
+        [AdminSections.CONFIGURATION]: 'Конфігурація',
       },
     },
   },
@@ -252,6 +255,7 @@ export default {
     searchBar: {
       placeholder: 'Пошук',
       settingsHint: 'Налаштування пошуку',
+      variableSearchHint: 'Формат запиту: "ключ=значення"',
     },
     timepicker: {
       hour: 'Год:',
@@ -330,6 +334,7 @@ export default {
         options: 'Варіант',
         score: 'Бал',
       },
+      clearSelection: 'Очистити вибір',
     },
     deleteConfirmationPopup: {
       title: 'Підтвердіть видалення',

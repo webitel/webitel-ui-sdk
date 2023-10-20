@@ -1,152 +1,180 @@
-@import 'palette';
+@import './deprecated';
+@import './palette';
 
 :root {
-  // HSL COLORS HUE VALUE
-  --_accent-color-hue: 42;
-  --_secondary-color-hue: 202;
-  --_page-bg-color-hue: 209;
-  --_icon-color-hue: 202;
-  --_positive-color-hue: 119;
-  --_negative-color-hue: 11;
+  // dp colors
+  --dp-24-surface-color: hsl(0, 0%, 100%);
+  --dp-23-surface-color: hsl(225, 20%, 99%);
+  --dp-22-surface-color: hsl(225, 20%, 98%);
+  --dp-21-surface-color: hsl(225, 20%, 97%);
+  --dp-20-surface-color: hsl(225, 20%, 96%);
+  --dp-19-surface-color: hsl(225, 20%, 95%);
+  --dp-18-surface-color: hsl(225, 20%, 94%);
+  --dp-17-surface-color: hsl(225, 20%, 93%);
+  --dp-16-surface-color: hsl(225, 20%, 92%);
+  --dp-15-surface-color: hsl(225, 20%, 91%);
+  --dp-14-surface-color: hsl(225, 20%, 90%);
+  --dp-13-surface-color: hsl(225, 20%, 89%);
+  --dp-12-surface-color: hsl(225, 20%, 88%);
+  --dp-11-surface-color: hsl(225, 20%, 87%);
+  --dp-10-surface-color: hsl(225, 20%, 86%);
+  --dp-9-surface-color: hsl(225, 20%, 85%);
+  --dp-8-surface-color: hsl(225, 20%, 84%);
+  --dp-7-surface-color: hsl(225, 20%, 83%);
+  --dp-6-surface-color: hsl(225, 20%, 82%);
+  --dp-5-surface-color: hsl(225, 20%, 81%);
+  --dp-4-surface-color: hsl(225, 20%, 80%);
+  --dp-3-surface-color: hsl(225, 20%, 79%);
+  --dp-2-surface-color: hsl(225, 20%, 78%);
+  --dp-1-surface-color: hsl(225, 20%, 77%);
 
-  --_hold-color-hue: 54;
-  --_transfer-color-hue: 227;
-  --_job-color-hue: 209;
+  // content wrapper
+  --content-wrapper-color: var(--dp-24-surface-color);
 
-  // DEFAULT STATES OPACITY
-  --_opacity--default: 0.8;
-  --_opacity--hover: 1;
-  --_opacity--active: 1;
-  --_opacity--focus: 0.8;
-  --_opacity--disabled: 0.4;
+  // success colors
+  --success-color: var(--green-darken-4);
+  --success-hover-color: var(--green-darken-3);
+  --success-light-color: var(--green-lighten-4);
+  --on-success-color: var(--black);
 
-  // BASIC HSL COLORS VALUES
-  --_accent-color: var(--_accent-color-hue), 100%, 50%;
-  --_main-color: var(--_accent-color-hue), 20%, 99%;
-  --_contrast-color: var(--_accent-color-hue), 20%, 1%;
-  --_secondary-color: var(--_secondary-color-hue), 20%, 90%;
-  --_secondary-color-50: var(--_secondary-color-hue), 22%, 96%;
-  --_page-bg-color: var(--_page-bg-color-hue), 20%, 95%;
-  --_header-color: var(--_page-bg-color-hue), 20%, 90%;
-  --_positive-color: var(--_positive-color-hue), 60%, 40%;
-  --_negative-color: var(--_negative-color-hue) , 80%, 50%;
-  --_icon-color: var(--_icon-color-hue), 100%, 15%;
+  // warning colors
+  --warning-color: var(--orange-accent-2);
+  --warning-hover-color: var(--orange-accent-1);
+  --warning-light-color: var(--orange-lighten-4);
+  --on-warning-color: var(--black);
 
-  --_hold-color: var(--_hold-color-hue), 80%, 50%;
-  --_transfer-color: var(--_transfer-color-hue), 80%, 50%;
-  --_job-color: var(--_job-color-hue), 96%, 57%;
+  // error colors
+  --error-color: var(--red-accent-2);
+  --error-hover-color: var(--red-lighten-2);
+  --error-light-color: var(--red-lighten-4);
+  --on-error-color: var(--black);
 
-  // MAIN COLORS
-  --accent-color: hsla(var(--_accent-color), 1);
+  // info colors
+  --info-color: var(--blue-darken-1);
+  --info-hover-color: var(--blue-lighten-1);
+  --info-light-color: var(--blue-lighten-4);
+  --on-info-color: var(--black);
 
-  --main-color: hsla(var(--_main-color), 1);
+  // job colors
+  --job-color: var(--blue-darken-1);
+  --job-hover-color: var(--blue-lighten-1);
+  --job-light-color: var(--blue-lighten-4);
+  --on-job-color: var(--black);
 
-  --contrast-color: hsla(var(--_contrast-color), 1);
+  // chat colors
+  --chat-color: var(--indigo-accent-2);
+  --chat-hover-color: var(--indigo-accent-2);
+  --chat-light-color: var(--indigo-lighten-4);
+  --on-chat-color: var(--black);
 
-  --secondary-color: hsla(var(--_secondary-color), 1);
-  --secondary-color-50: hsla(var(--_secondary-color-50), 1);
+  // transfer colors
+  --transfer-color: var(--indigo-lighten-1);
+  --transfer-hover-color: var(--indigo-lighten-2);
+  --transfer-light-color: var(--indigo-lighten-4);
+  --on-transfer-color: var(--white);
 
-  // ICON COLORS
-  --icon-color: hsla(var(--_icon-color), var(--_opacity--default));
-  --icon-color-secondary: hsla(var(--_icon-color), 0.25);
+  // primary colors
+  --primary-color: var(--amber-accent-3);
+  --primary-hover-color: var(--amber-accent-2);
+  --primary-light-color: var(--amber-lighten-4);
+  --on-primary-color: var(--black);
 
-  --icon-color--hover: hsla(var(--_icon-color), var(--_opacity--hover));
+  // accent colors
+  --accent-color: var(--purple-lighten-1);
+  --sub-accent-color: var(--indigo-darken-3);
 
-  --icon-color-accent: var(--accent-color);
-  --icon-color-contrast: hsla(var(--_main-color), var(--_opacity--default));
-  --icon-color-active: var(--icon-color--hover);
-  --icon-color-disabled: hsla(var(--_icon-color), var(--_opacity--disabled));
-  --icon-color-success: var(--true-color);
-  --icon-color-danger: var(--false-color);
-  --icon-color-transfer: var(--transfer-color);
-  --icon-color-hold: var(--hold-color);
-  --icon-color-secondary-50: var(--secondary-color-50);
+  // typography colors
+  --main-text-color: var(--grey-darken-3);
+  --main-text-disabled-color: var(--grey-lighten-1);
+  --negative-text-color: var(--error-color);
+  --link-color: var(--info-color);
+}
 
+:root.theme--dark {
+  // dp colors
+  --dp-24-surface-color: hsl(0, 0%, 25%);
+  --dp-23-surface-color: hsl(225, 20%, 24%);
+  --dp-22-surface-color: hsl(225, 20%, 23%);
+  --dp-21-surface-color: hsl(225, 20%, 22%);
+  --dp-20-surface-color: hsl(225, 20%, 21%);
+  --dp-19-surface-color: hsl(225, 20%, 20%);
+  --dp-18-surface-color: hsl(225, 20%, 19%);
+  --dp-17-surface-color: hsl(225, 20%, 18%);
+  --dp-16-surface-color: hsl(225, 20%, 17%);
+  --dp-15-surface-color: hsl(225, 20%, 16%);
+  --dp-14-surface-color: hsl(225, 20%, 15%);
+  --dp-13-surface-color: hsl(225, 20%, 14%);
+  --dp-12-surface-color: hsl(225, 20%, 13%);
+  --dp-11-surface-color: hsl(225, 20%, 12%);
+  --dp-10-surface-color: hsl(225, 20%, 11%);
+  --dp-9-surface-color: hsl(225, 20%, 10%);
+  --dp-8-surface-color: hsl(225, 20%, 9%);
+  --dp-7-surface-color: hsl(225, 20%, 8%);
+  --dp-6-surface-color: hsl(225, 20%, 7%);
+  --dp-5-surface-color: hsl(225, 20%, 6%);
+  --dp-4-surface-color: hsl(225, 20%, 5%);
+  --dp-3-surface-color: hsl(225, 20%, 4%);
+  --dp-2-surface-color: hsl(225, 20%, 3%);
+  --dp-1-surface-color: hsl(225, 20%, 2%);
 
-  --page-bg-color: hsla(var(--_page-bg-color), 1);
-  --header-color: hsla(var(--_header-color), 1);
+  // content wrapper
+  --content-wrapper-color: var(--dp-24-surface-color);
 
-  --accent-secondary-color: hsla(var(--_accent-color), 0.3);
+  // success colors
+  --success-color: var(--green-darken-4);
+  --success-hover-color: var(--green-darken-3);
+  --success-light-color: var(--green-lighten-3);
+  --on-success-color: var(--white);
 
-  // SEMANTIC COLORS
-  --disabled-color: hsl(var(--_contrast-color), var(--_opacity--disabled));
+  // warning colors
+  --warning-color: var(--orange-accent-2);
+  --warning-hover-color: var(--orange-accent-1);
+  --warning-light-color: var(--orange-lighten-3);
+  --on-warning-color: var(--white);
 
-  --true-color: hsla(var(--_positive-color), var(--_opacity--default));
-  --true--hover-color: hsla(var(--_positive-color), var(--_opacity--hover));
+  // error colors
+  --error-color: var(--red-accent-2);
+  --error-hover-color: var(--red-lighten-2);
+  --error-light-color: var(--red-lighten-3);
+  --on-error-color: var(--white);
 
-  --false-color: hsla(var(--_negative-color), var(--_opacity--default));
-  --false--hover-color: hsla(var(--_negative-color), var(--_opacity--hover));
+  // info colors
+  --info-color: var(--blue-darken-1);
+  --info-hover-color: var(--blue-lighten-1);
+  --info-light-color: var(--blue-lighten-3);
+  --on-info-color: var(--white);
 
-  --hold-color: hsla(var(--_hold-color), var(--_opacity--default));
-  --hold--hover-color: hsla(var(--_hold-color), var(--_opacity--hover));
+  // job colors
+  --job-color: var(--blue-darken-1);
+  --job-hover-color: var(--blue-lighten-1);
+  --job-light-color: var(--blue-lighten-3);
+  --on-job-color: var(--white);
 
-  --transfer-color: hsla(var(--_transfer-color), var(--_opacity--default));
-  --transfer--hover-color: hsla(var(--_transfer-color), var(--_opacity--hover));
+  // chat colors
+  --chat-color: var(--indigo-accent-2);
+  --chat-hover-color: var(--indigo-accent-2);
+  --chat-light-color: var(--indigo-lighten-3);
+  --on-chat-color: var(--white);
 
-  --job-color: hsla(var(--_job-color), var(--_opacity--default));
-  --job--hover-color: hsla(var(--_job-color), var(--_opacity--hover));
+  // transfer colors
+  --transfer-color: var(--indigo-darken-1);
+  --transfer-hover-color: var(--indigo-lighten-1);
+  --transfer-light-color: var(--indigo-lighten-4);
+  --on-transfer-color: var(--white);
 
-  --link-color: hsla(205, 90%, 45%, 1);
-  --link--hover-color: hsla(205, 90%, 60%, 1);
+  // primary colors
+  --primary-color: var(--amber-accent-2);
+  --primary-hover-color: var(--amber-accent-3);
+  --primary-light-color: var(--amber-lighten-4);
+  --on-primary-color: var(--black);
 
-  // SUBORDINATE COLORS
-  --tag-bg-color: var(--accent-secondary-color);
+  // accent colors
+  --accent-color: var(--purple-lighten-1);
+  --sub-accent-color: var(--indigo-darken-3);
 
-  // FORM STATES OPACITY
-  --form-opacity--default: var(--_opacity--default);
-  --form-opacity--hover: var(--_opacity--hover);
-  --form-opacity--active: var(--_opacity--active);
-  --form-opacity--focus: var(--_opacity--focus);
-  --form-opacity--disabled: var(--_opacity--disabled);
-
-  --form-placeholder-opacity: 0.6;
-  --form-placeholder-opacity--focus: 0.4;
-  --form-border-opacity--disabled: 0.05;
-
-  --form-opacity--ouline--default: 0.4;
-  --form-opacity--ouline--hover: 0.7;
-
-  // FORM COLORS
-  --form-input-color: var(--contrast-color); // user input color
-
-  --form-label-color: hsla(var(--_contrast-color), var(--form-opacity--default));
-  --form-label--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
-  --form-label--active-color: hsla(var(--_contrast-color), var(--form-opacity--active));
-  --form-label--disabled-color: hsla(var(--_contrast-color), var(--form-opacity--disabled));
-
-  --form-border-color: hsla(var(--_contrast-color), var(--form-opacity--default));
-  --form-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
-  --form-border--disabled-color: hsla(var(--_contrast-color), var(--form-border-opacity--disabled));
-
-  --form-placeholder-color: hsla(var(--_contrast-color), var(--form-placeholder-opacity));
-  --form-placeholder-color--focus: hsla(var(--_contrast-color), var(--form-placeholder-opacity--focus));
-  --form-placeholder-color--disabled: hsla(var(--_contrast-color), var(--form-opacity--disabled));
-
-  // outline
-  --form-outline-label-color: hsla(var(--_contrast-color), var(--form-opacity--default));
-
-  --form-outline-border-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--default));
-  --form-outline-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--hover));
-
-  // TEXT OPACITY
-  --text-opacity--default: var(--_opacity--default);
-  --text-opacity----outline--default: 0.7;
-  --text-opacity--disabled: 0.5;
-
-  // TEXT COLORS
-  --text-primary-color: hsla(var(--_contrast-color), var(--text-opacity--default));
-  --text-outline-color: hsla(var(--_contrast-color), var(--text-opacity----outline--default));
-  --text-contrast-color: hsla(var(--_main-color), var(--text-opacity--default));
-  --text--disabled-color: hsla(var(--_contrast-color), var(--text-opacity--disabled));
-
-  // CHAT COLORS
-  --_chat-client-color: var(--_accent-color);
-  --_chat-client-opacity: 0.2;
-  --_chat-agent-color: var(--_secondary-color-50);
-  --_chat-agent-opacity: 1;
-
-  --chat-client-message-bg-color: hsla(var(--_chat-client-color), var(--_chat-client-opacity));
-  --chat-agent-message-bg-color: hsla(var(--_chat-agent-color), var(--_chat-agent-opacity));
-  --chat-client-attachment-bg-color: hsla(var(--_chat-client-color), var(--_chat-client-opacity));
-  --chat-agent-attachment-bg-color: hsla(var(--_chat-agent-color), var(--_chat-agent-opacity));
+  // typography colors
+  --main-text-color: var(--grey-lighten-3);
+  --main-text-disabled-color: var(--grey-darken-1);
+  --negative-text-color: var(--error-color);
+  --link-color: var(--info-color);
 }

@@ -1,16 +1,16 @@
 <template>
   <nav class="wt-headline-nav">
     <div
-      class="wt-headline-nav__wrapper"
       v-for="(singlePath, key) of path"
       :key="key"
+      class="wt-headline-nav__wrapper"
     >
       <span v-if="key !== 0" class="wt-headline-nav__indicator"></span>
       <h1 class="wt-headline-nav__title">
         <router-link
           v-if="singlePath.route"
-          class="wt-headline-nav__text wt-headline-nav__title-link"
           :to="singlePath.route"
+          class="wt-headline-nav__text wt-headline-nav__text--link"
         >{{ singlePath.name }}
         </router-link>
         <span v-else class="wt-headline-nav__text">{{ singlePath.name }}</span>
@@ -19,22 +19,21 @@
   </nav>
 </template>
 
-<script>
-export default {
-  name: 'wt-headline-nav',
-  props: {
-    path: {
-      type: Array,
-      required: true,
-      // PATH EXAMPLE
-      // default: () => [
-      //   { name: 'directory' },
-      //   { name: 'users', route: '/directory/users' },
-      //   { name: 'adm', route: '/directory/users/3' },
-      // ],
-    },
+<script setup>
+const props = defineProps({
+  /**
+   * PATH EXAMPLE
+   *  default: () => [
+   *      { name: 'directory' },
+   *      { name: 'users', route: '/directory/users' },
+   *      { name: 'adm', route: '/directory/users/3' },
+   *    ],
+   */
+  path: {
+    type: Array,
+    required: true,
   },
-};
+});
 </script>
 
 <style lang="scss">
@@ -42,26 +41,35 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
 .wt-headline-nav {
   display: flex;
   align-items: center;
   max-width: 100%;
+  gap: var(--headline-nav-gap);
 }
 
 .wt-headline-nav__wrapper {
   display: flex;
   align-items: center;
+  gap: var(--headline-nav-dot-gap);
 }
 
 .wt-headline-nav__indicator {
-  display: inline-block;
-  width: var(--headline-nav-indicator-size);
-  height: var(--headline-nav-indicator-size);
-  margin: 0 var(--headline-nav-indicator-margin);
-  background: var(--icon-color);
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+  justify-content: center;
+  width: var(--icon-md-size);
+  height: var(--icon-md-size);
+
+  &:before {
+    display: block;
+    width: var(--headline-nav-indicator-size);
+    height: var(--headline-nav-indicator-size);
+    content: '';
+    border-radius: 50%;
+    background: var(--headline-nav-indicator-color);
+  }
 }
 
 .wt-headline-nav__title {
@@ -69,23 +77,21 @@ export default {
 }
 
 .wt-headline-nav__text {
-  color: var(--text-outline-color);
+  color: var(--main-text-color);
 }
 
 .wt-headline-nav__wrapper:last-child {
   min-width: 0;
 
   .wt-headline-nav__indicator {
-    background: var(--icon-color-accent);
+    &:before {
+      background: var(--headline-nav-accent-indicator-color);
+    }
   }
 
   .wt-headline-nav__title {
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .wt-headline-nav__text {
-    color: var(--text-primary-color);
   }
 }
 </style>

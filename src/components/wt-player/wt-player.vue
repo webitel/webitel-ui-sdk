@@ -101,7 +101,7 @@ export default {
   methods: {
     async setupPlayer() {
       await this.$nextTick(); // test is failing to render component if element is passed to Plyr as Vue $ref
-      const baseURL = this.$baseURL || process.env.BASE_URL;
+      const baseURL = this.$baseURL || process.env.BASE_URL || import.meta.env.BASE_URL;
       if (this.player) this.player.destroy();
       const controls = [
         'play-large', 'play', 'progress', 'current-time',

@@ -80,7 +80,7 @@ export default {
   computed: {
     progressStyle() { // To achieve the correct color styling:
       const progressPercent = ((this.value - this.min) / (this.max - this.min)) * 100;
-      return `linear-gradient(to right, var(--accent-color) ${progressPercent}%, var(--secondary-color) 0%)`;
+      return `linear-gradient(to right, var(--primary-color) ${progressPercent}%, var(--secondary-color) 0%)`;
     },
     verticalHeight() { // in order to have correct parent height after slider rotation
       return this.vertical ? `${this.height}px` : '100%';

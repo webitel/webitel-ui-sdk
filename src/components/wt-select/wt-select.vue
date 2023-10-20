@@ -10,21 +10,25 @@
     class="wt-select"
   >
     <wt-label
+      v-bind="labelProps"
       v-if="hasLabel"
       :disabled="disabled"
       :invalid="invalid"
       class="wt-select__label"
-      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
+      <slot
+        v-bind="{ label }"
+        name="label"
+      >{{ requiredLabel }}</slot>
     </wt-label>
     <vue-multiselect
+      v-bind="$attrs"
       ref="vue-multiselect"
       :allow-empty="allowEmpty"
       :disabled="disabled"
       :internal-search="!searchMethod"
-      :label="trackBy ? optionLabel : null"
+      :label="selectOptionLabel"
       :limit="1"
       :loading="false"
       :multiple="multiple"
@@ -33,7 +37,6 @@
       :track-by="trackBy"
       :model-value="selectValue"
       class="wt-select__select"
-      v-bind="$attrs"
       @close="isOpened = false"
       @open="isOpened = true"
       v-on="listeners"
@@ -51,7 +54,10 @@
 
       <!--      Slot for custom label template for single select-->
       <template v-slot:singleLabel="{ option }">
-        <slot name="singleLabel" v-bind="{ option, optionLabel }">
+        <slot
+          v-bind="{ option, optionLabel }"
+          name="singleLabel"
+        >
           <span class="multiselect__single-label">
             {{ getOptionLabel({ option, optionLabel }) }}
           </span>
@@ -60,7 +66,10 @@
 
       <!--      Slot for custom option template -->
       <template v-slot:option="{ option }">
-        <slot name="option" v-bind="{ option, optionLabel }">
+        <slot
+          v-bind="{ option, optionLabel }"
+          name="option"
+        >
           {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
       </template>
@@ -72,7 +81,7 @@
           :disabled="disabled"
           class="multiselect__select"
           icon="arrow-down"
-          @mousedown.native.prevent.stop="toggle"
+          @mousedown.prevent.stop="toggle"
         ></wt-icon-btn>
       </template>
 
@@ -125,6 +134,7 @@ export default {
       default: true,
     },
   },
+  emits: ['reset', 'search-change', 'input', 'closed'],
   data: () => ({
     isOpened: false,
   }),

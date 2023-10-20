@@ -8,21 +8,24 @@
     class="wt-input"
   >
     <wt-label
+      v-bind="labelProps"
       v-if="hasLabel"
       :disabled="disabled"
       :for="name"
       :invalid="invalid"
       :outline="outline"
-      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
-      <slot name="label" v-bind="{ label }">{{ requiredLabel }}</slot>
+      <slot
+        v-bind="{ label }"
+        name="label"
+      >{{ requiredLabel }}</slot>
     </wt-label>
     <div class="wt-input__wrapper">
       <input
+        v-bind="$attrs"
         :id="name"
         ref="wt-input"
-        v-bind="$attrs"
         :class="{
           'wt-input--is-password': isPassword,
         }"
@@ -44,12 +47,12 @@
           name="after-input"
         ></slot>
         <slot
-          v-if="isPassword"
-          name="show-password"
           v-bind="{
           isPasswordVisible,
           switchVisibilityPassword,
         }"
+          v-if="isPassword"
+          name="show-password"
         >
           <wt-icon-btn
             :icon="showPasswordIcon"

@@ -1,162 +1,139 @@
 <template>
-  <wt-button
-    v-bind="{ ...$attrs, ...$props }"
+  <button
     :class="[
-      `wt-rounded-action--color-${color}`,
+      `wt-rounded-action--size-${size}`,
       { 'wt-rounded-action--active': active },
       { 'wt-rounded-action--disabled': disabled },
-      { 'wt-rounded-action--filled': filled },
+      { 'wt-rounded-action--rounded': rounded },
+      { 'wt-rounded-action--wide': wide },
     ]"
-    :size="size"
-    color="secondary"
+    type="button"
     class="wt-rounded-action"
-    @click="$emit('click', $event)"
+    @click="emit('click', $event)"
   >
+    <wt-loader
+      v-if="loading"
+      size="sm"
+      :color="loaderColor"
+    ></wt-loader>
     <wt-icon
+      v-else
       :color="iColor"
       :icon="icon"
       :size="size"
     ></wt-icon>
-  </wt-button>
+  </button>
 </template>
 
-<script>
-export default {
-  name: 'wt-rounded-action',
-  props: {
-    icon: {
-      type: String,
-    },
-    color: {
-      type: String,
-      options: ['secondary', 'accent', 'success', 'danger', 'hold', 'transfer'],
-    },
-    iconColor: {
-      type: String,
-      default: null,
-    },
-    size: {
-      type: String,
-      default: 'md',
-      options: ['sm', 'md'],
-    },
-    active: {
-      type: Boolean,
-      default: false,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    filled: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  icon: {
+    type: String,
+    required: true,
   },
-  emits: ['click'],
-  computed: {
-    iColor() {
-      if (this.iconColor) return this.iconColor;
-      if (this.disabled) return 'secondary-50';
-      if (this.color === 'secondary') return null; // dont change icon color
-      if (this.filled && this.color) return 'contrast';
-      return this.color;
-    },
+  /**
+   * @values 'primary', 'secondary', 'success', 'error', 'transfer'
+   */
+  color: {
+    type: String,
+    options: ['primary', 'secondary', 'success', 'error', 'transfer'],
+    default: 'secondary',
   },
-};
+  /**
+   * @values 'sm', 'md'
+   */
+  size: {
+    type: String,
+    default: 'md',
+  },
+  active: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  rounded: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * Stretches button to all available width
+   */
+  wide: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+});
+const emit = defineEmits(['click']);
+
+const iColor = computed(() => {
+  if (props.disabled) return 'disabled';
+  switch (props.color) {
+    case 'secondary': return 'default';
+    default: return props.color;
+  }
+});
+const loaderColor = computed(() => {
+  // if (['success', 'transfer', 'error'].includes(props.color)) return 'main';
+  return 'contrast';
+});
 </script>
 
 <style lang="scss">
 @import './variables.scss';
 </style>
 
-<!--not scoped to change .icon colors-->
 <style lang="scss" scoped>
-
-.wt-button.wt-rounded-action {
-  min-width: auto;
-  min-height: 0;
-  padding: var(--rounded-action-padding);
+.wt-rounded-action {
+  display: block;
+  width: fit-content;
   line-height: 0;
-  border: var(--btn-border);
-  border-color: transparent;
+  padding: var(--rounded-action-padding);
+  border: var(--rounded-action-border-size) solid;
   background: var(--rounded-action-bg-color);
-  box-shadow: var(--elevation-1);
+  border-color: var(--rounded-action-bg-color);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
 
   &:hover {
-    background: var(--rounded-action-bg-color); // override default wt-button hover
-    box-shadow: var(--elevation-2);
+    background: var(--rounded-action-bg-hover-color);
+    border-color: var(--rounded-action-bg-hover-color);
+  }
+
+  &--wide {
+    width: 100%;
+  }
+
+  &--rounded {
+    border-radius: var(--rounded-action-rounded-border-radius);
   }
 
   &--active {
-    border-color: var(--icon-color);
-
-    &.wt-rounded-action--color-secondary {
-      border-color: var(--icon-color);
-    }
-
-    &.wt-rounded-action--color-accent {
-      border-color: var(--btn-accent--hover-color);
-    }
-
-    &.wt-rounded-action--color-success {
-      border-color: var(--btn-true--hover-color);
-    }
-
-    &.wt-rounded-action--color-danger {
-      border-color: var(--btn-false--hover-color);
-    }
-
-    &.wt-rounded-action--color-hold {
-      border-color: var(--btn-hold--hover-color);
-    }
-
-    &.wt-rounded-action--color-transfer {
-      border-color: var(--btn-transfer--hover-color);
-    }
-  }
-
-  &--filled {
+    border-color: var(--rounded-action-active-color);
 
     &:hover {
-      box-shadow: var(--elevation-5);
-      border-color: var(--rounded-action-bg-color);
-    }
-
-    &.wt-rounded-action--color-secondary {
-      background-color: var(--btn-secondary-color);
-      border-color: var(--btn-secondary-color);
-    }
-
-    &.wt-rounded-action--color-accent {
-      background-color: var(--btn-accent--hover-color);
-      border-color: var(--btn-accent--hover-color);
-    }
-
-    &.wt-rounded-action--color-success {
-      background-color: var(--btn-true--hover-color);
-      border-color: var(--btn-true--hover-color);
-    }
-
-    &.wt-rounded-action--color-danger {
-      background-color: var(--btn-false--hover-color);
-      border-color: var(--btn-false--hover-color);
-    }
-
-    &.wt-rounded-action--color-hold {
-      background-color: var(--btn-false--hover-color);
-      border-color: var(--btn-false--hover-color);
-    }
-
-    &.wt-rounded-action--color-transfer {
-      background-color: var(--btn-false--hover-color);
-      border-color: var(--btn-false--hover-color);
+      border-color: var(--rounded-action-active-color);
     }
   }
 
   &.wt-rounded-action--disabled {
-    border-color: transparent;
-    box-shadow: none;
+    pointer-events: none;
+  }
+
+  &--size {
+    &-sm {
+    }
+
+    &-md {
+    }
   }
 }
 </style>
