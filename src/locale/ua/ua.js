@@ -255,6 +255,7 @@ export default {
     searchBar: {
       placeholder: 'Пошук',
       settingsHint: 'Налаштування пошуку',
+      variableSearchHint: 'Формат запиту: "ключ=значення"',
     },
     timepicker: {
       hour: 'Год:',
