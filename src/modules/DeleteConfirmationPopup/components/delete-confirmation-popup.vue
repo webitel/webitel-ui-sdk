@@ -7,7 +7,7 @@
     <template v-slot:title>{{ $t('webitelUI.deleteConfirmationPopup.title') }}</template>
     <template v-slot:main>
       <div class="delete-confirmation-popup__content">
-        <wt-icon icon="attention" color="danger"/>
+        <wt-icon icon="attention" color="error"/>
         <p class="delete-confirmation-popup__message">
           {{ deleteMessage }}
         </p>
