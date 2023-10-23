@@ -41,7 +41,7 @@ export default {
         case 'info':
           return 'success';
         case 'error':
-          return 'danger';
+          return 'error';
         default:
           return '';
       }
