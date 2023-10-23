@@ -164,7 +164,7 @@
     >
       <template v-slot:additional-actions="options">
         <wt-icon
-          :color="options.invalid ? 'danger' : null"
+          :color="options.invalid ? 'error' : null"
           icon="bucket"
         ></wt-icon>
       </template>
