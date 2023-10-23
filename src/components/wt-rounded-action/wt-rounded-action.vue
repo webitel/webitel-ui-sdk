@@ -38,8 +38,7 @@ const props = defineProps({
    */
   color: {
     type: String,
-    options: ['primary', 'secondary', 'success', 'error', 'transfer'],
-    default: 'secondary',
+    options: ['primary', 'success', 'error', 'transfer'],
   },
   /**
    * @values 'sm', 'md'
@@ -76,10 +75,7 @@ const emit = defineEmits(['click']);
 
 const iColor = computed(() => {
   if (props.disabled) return 'disabled';
-  switch (props.color) {
-    case 'secondary': return 'default';
-    default: return props.color;
-  }
+  return props.color;
 });
 const loaderColor = computed(() => {
   // if (['success', 'transfer', 'error'].includes(props.color)) return 'main';
