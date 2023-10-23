@@ -338,8 +338,7 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Подтвердите удаление',
-      askingAlert: 'Вы уверенны, что хотите удалить {count} запись? | Вы уверенны, что хотите удалить {count} записей?',
-      undoneActionAlert: 'Это действие не может быть отменено.',
+      askingAlert: 'Вы уверенны, что хотите\n удалить {count} запись? | Вы уверенны, что хотите\n удалить {count} записей?',
       deleteAll: 'ВСЕ',
     },
     dummy: {

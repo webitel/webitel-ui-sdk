@@ -30,7 +30,7 @@ describe('Validation mixin', () => {
         },
       },
     });
-    expect(wrapper.vm.validationText).toBe('validation.email');
+    expect(wrapper.vm.validationText).toBe('Should look like email');
   });
 
   it('prioritizes error messages', () => {
@@ -42,6 +42,6 @@ describe('Validation mixin', () => {
         },
       },
     });
-    expect(wrapper.vm.validationText).toBe('validation.required');
+    expect(wrapper.vm.validationText).toBe('Field is required');
   });
 });

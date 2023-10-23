@@ -340,8 +340,7 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',
-      askingAlert: 'Are you sure you want to delete {count} item? | Are you sure you want to delete {count} items?',
-      undoneActionAlert: 'This action cannot be undone.',
+      askingAlert: 'Are you sure you want\n to delete {count} records? | Are you sure you want\n to delete {count} records?',
       deleteAll: 'ALL',
     },
     dummy: {

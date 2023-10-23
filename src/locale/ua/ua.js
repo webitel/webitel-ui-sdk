@@ -338,8 +338,7 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Підтвердіть видалення',
-      askingAlert: 'Ви впевнені, що хочете видалити {count} запис? | Ви впевнені, що хочете видалити {count} записів?',
-      undoneActionAlert: 'Дана дія не може бути скасована.',
+      askingAlert: 'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
       deleteAll: 'ВСІ',
     },
     dummy: {

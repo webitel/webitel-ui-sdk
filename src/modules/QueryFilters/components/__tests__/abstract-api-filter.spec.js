@@ -12,7 +12,9 @@ const router = createRouter({
 describe('Abstract Api Filter', () => {
   const namespace = 'jest';
   const filterQuery = 'jest';
-  const filterSchema = new ApiFilterSchema({ locale: {} });
+  const filterSchema = new ApiFilterSchema({
+    locale: { label: '' }
+  });
   const searchMock = jest.fn();
   const fetchSelectedMock = jest.fn(() => ({ items: [] }));
   jest.spyOn(filterSchema, 'search').mockImplementation(searchMock);
