@@ -248,6 +248,7 @@ export default {
     requiredArrayValue: 'Array should not be empty',
     minLength: 'Quantity of characters should not be less than',
     url: 'Should look like url',
+    websocketValidator: 'Should look like WebSocket url',
     regExpValidator: 'This regular expression is not valid',
     domainValidator: 'Incorrect domain',
     decimalValidator: 'Decimal precision should be no more than { count } places',

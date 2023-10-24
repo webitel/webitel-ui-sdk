@@ -24,6 +24,7 @@ export function useValidation({ v, customValidators }) {
       else if (v.value.sameAs?.$invalid) validationText = `${t('validation.sameAs')}`;
       else if (v.value.domainValidator?.$invalid) validationText = `${t('validation.domainValidator')}`;
       else if (v.value.decimalValidator?.$invalid) validationText = `${t('validation.decimalValidator')} ${v.value.decimalValidator.$params.count}`;
+      else if (v.value.websocketValidator?.$invalid) validationText = `${t('validation.websocketValidator')}`;
       else if (v.value.integer?.$invalid) validationText = `${t('validation.integer')}`;
     }
     // eslint-disable-next-line no-restricted-syntax
