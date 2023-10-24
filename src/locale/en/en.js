@@ -340,7 +340,7 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',
-      askingAlert: 'Are you sure you want\n to delete {count} records? | Are you sure you want\n to delete {count} records?',
+      askingAlert: 'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
       deleteAll: 'ALL',
     },
     dummy: {
