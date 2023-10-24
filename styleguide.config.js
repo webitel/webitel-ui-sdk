@@ -19,13 +19,21 @@ module.exports = {
     // StyleGuideRenderer: path.join(__dirname, 'styleguide/components/style-guide'),
     LogoRenderer: path.join(__dirname, 'styleguide/components/logo'),
   },
-  // defaultExample: true,
-  // sections: [
-  //   {
-  //     name: 'First Section',
-  //     components: 'src/components/**/[A-Z]*.vue'
-  //   }
-  // ],
+  sections: [
+    {
+      name: 'Components',
+      components: 'src/components/**/*.vue',
+    },
+    {
+      name: 'Validators',
+      sections: [
+        {
+          name: 'Websocket Validator',
+          content: 'src/validators/websocketValidator/Readme.md',
+        },
+      ],
+    },
+  ],
   // eslint-disable-next-line global-require,import/extensions
   // webpackConfig: { ...output /* Custom config options */ },
   // webpackConfig: {
