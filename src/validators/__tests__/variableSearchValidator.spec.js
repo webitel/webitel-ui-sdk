@@ -33,8 +33,12 @@ describe('Variable search validator', () => {
     const searchValue = 'height = 100';
     expect(variableSearchValidator(searchValue)).toBe(false);
   });
-  it('Empty search', () => {
+  it('Space search', () => {
     const searchValue = ' ';
     expect(variableSearchValidator(searchValue)).toBe(false);
+  });
+  it('Empty search', () => {
+    const searchValue = '';
+    expect(variableSearchValidator(searchValue)).toBe(true);
   });
 });
