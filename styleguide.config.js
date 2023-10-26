@@ -31,6 +31,10 @@ module.exports = {
           name: 'Websocket Validator',
           content: 'src/validators/websocketValidator/Readme.md',
         },
+        {
+          name: 'Variable Search Validator',
+          content: 'src/validators/variableSearchValidator/Readme.md',
+        },
       ],
     },
   ],
