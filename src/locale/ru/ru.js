@@ -246,6 +246,7 @@ export default {
     requiredArrayValue: 'Поле не должно быть пустым',
     minLength: 'Количество символов не должно быть меньше, чем',
     url: 'Необходимо ввести корректный url-адрес',
+    websocketValidator: 'Необходимо ввести корректный WebSocket url-адрес',
     regExpValidator: 'Не правильное регулярное выражение',
     domainValidator: 'Неправильный домен',
     decimalValidator: 'Количество десятичных знаков не должно быть больше { count }',

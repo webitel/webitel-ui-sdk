@@ -16,9 +16,8 @@ export default {
   props: {
     iconColor: {
       type: String,
-      default: 'outline',
     },
-  }
+  },
 };
 </script>
 
