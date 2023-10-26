@@ -8,22 +8,22 @@
     class="wt-input"
   >
     <wt-label
-      v-bind="labelProps"
       v-if="hasLabel"
       :disabled="disabled"
       :for="name"
       :invalid="invalid"
       :outline="outline"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
-      >{{ requiredLabel }}</slot>
+        v-bind="{ label }"
+      >{{ requiredLabel }}
+      </slot>
     </wt-label>
     <div class="wt-input__wrapper">
       <input
-        v-bind="$attrs"
         :id="name"
         ref="wt-input"
         :class="{
@@ -36,6 +36,7 @@
         :type="inputType"
         :value="inputValue"
         class="wt-input__input"
+        v-bind="$attrs"
         @input="inputHandler"
         @keyup="$emit('keyup', $event)"
       >
@@ -47,12 +48,12 @@
           name="after-input"
         ></slot>
         <slot
+          v-if="isPassword"
+          name="show-password"
           v-bind="{
           isPasswordVisible,
           switchVisibilityPassword,
         }"
-          v-if="isPassword"
-          name="show-password"
         >
           <wt-icon-btn
             :icon="showPasswordIcon"
@@ -237,7 +238,7 @@ export default {
       const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
       const inputEl = this.$refs['wt-input'];
       const defaultInputPadding = getComputedStyle(document.documentElement)
-        .getPropertyValue('--input-padding');
+      .getPropertyValue('--input-padding');
       if (afterWrapperWidth >= inputEl.offsetWidth) return; // fixes https://my.webitel.com/browse/WTEL-2635
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
     },
@@ -331,12 +332,7 @@ export default {
 
   .wt-input__password-button {
     .wt-input--disabled & ::v-deep .wt-icon__icon {
-      fill: var(--icon-color-disabled);
-    }
-
-    .wt-input:hover & ::v-deep .wt-icon__icon,
-    .wt-input:focus-within & ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
+      fill: var(--icon-disabled-color);
     }
   }
 }
