@@ -1,41 +1,42 @@
 <template>
   <div
-    class="wt-textarea"
     :class="{
       'wt-textarea--disabled': disabled,
       'wt-textarea--invalid': invalid,
     }"
+    class="wt-textarea"
   >
     <wt-label
-      v-bind="labelProps"
-      :for="name"
       :disabled="disabled"
+      :for="name"
       :invalid="invalid"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
-      >{{ requiredLabel }}</slot>
+        v-bind="{ label }"
+      >{{ requiredLabel }}
+      </slot>
     </wt-label>
     <div class="wt-textarea__wrapper">
       <textarea
         :id="name"
         ref="wt-textarea"
-        class="wt-textarea__textarea"
-        :value="value"
-        :placeholder="placeholder || label"
         :disabled="disabled"
+        :placeholder="placeholder || label"
+        :value="value"
+        class="wt-textarea__textarea"
         v-on="listeners"
       ></textarea>
-      <div class="wt-textarea__after-wrapper" ref="after-wrapper">
+      <div ref="after-wrapper" class="wt-textarea__after-wrapper">
         <slot name="after-input"></slot>
         <wt-icon-btn
-          class="wt-textarea__reset-icon-btn"
           :class="{ 'hidden': !value }"
+          :disabled="disabled"
+          class="wt-textarea__reset-icon-btn"
           icon="close--filled"
           size="sm"
-          :disabled="disabled"
           @click="$emit('input', '')"
         ></wt-icon-btn>
       </div>
@@ -174,16 +175,16 @@ export default {
   @include wt-placeholder;
 
   display: block;
+  box-sizing: border-box;
   width: 100%;
   min-height: var(--textarea-min-height);
-  box-sizing: border-box;
   padding: var(--textarea-padding);
+  resize: none;
+  transition: var(--transition);
   color: var(--form-input-color);
   border: var(--input-border);
   border-color: var(--form-border-color);
   border-radius: var(--border-radius);
-  transition: var(--transition);
-  resize: none;
 
   &:focus {
     @include wt-placeholder('focus');
@@ -194,8 +195,8 @@ export default {
   .wt-textarea--disabled & {
     @include wt-placeholder('disabled');
 
-    background: var(--form-border--disabled-color);
     border-color: var(--form-border--disabled-color);
+    background: var(--form-border--disabled-color);
   }
 
   .wt-textarea--invalid &,
@@ -205,19 +206,13 @@ export default {
   }
 }
 
-/* make icons black */
-.wt-textarea:hover ::v-deep .wt-icon-btn:not(.wt-textarea__reset-icon-btn) .wt-icon__icon,
-.wt-textarea:focus-within ::v-deep .wt-icon-btn:not(.wt-textarea__reset-icon-btn) .wt-icon__icon {
-  fill: var(--icon-color--hover);
-}
-
 .wt-textarea__after-wrapper {
-  display: flex;
-  gap: var(--input-after-wrapper-gap);
-  align-items: center;
   position: absolute;
   top: var(--input-icon-margin);
   right: var(--input-icon-margin);
+  display: flex;
+  align-items: center;
   pointer-events: auto; // override --disabled p-events none
+  gap: var(--input-after-wrapper-gap);
 }
 </style>

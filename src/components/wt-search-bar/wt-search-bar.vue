@@ -29,9 +29,9 @@
       <div class="wt-search-bar__icon-controls">
         <wt-icon-btn
           :class="{ 'hidden': !value }"
+          :color="invalidColorProvider"
           class="wt-search-bar__reset-icon-btn"
           icon="close"
-          :color="invalidColorProvider"
           @click="handleInput('')"
         ></wt-icon-btn>
         <wt-hint
@@ -50,8 +50,8 @@
 
 <script setup>
 import { computed, toRefs } from 'vue';
-import debounce from '../../scripts/debounce';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
+import debounce from '../../scripts/debounce';
 
 const props = defineProps({
   v: {
@@ -94,9 +94,7 @@ const { v, customValidators } = toRefs(props);
 
 const { invalid } = useValidation({ v, customValidators });
 
-const invalidColorProvider = computed(() => {
-  return invalid.value ? 'error' : null;
-});
+const invalidColorProvider = computed(() => (invalid.value ? 'error' : 'default'));
 
 const search = debounce((value) => {
   emit('search', value);
@@ -132,18 +130,19 @@ function handleKeyup(event) {
       border-color: var(--false-color);
       outline: none; // prevent outline overlapping false color
     }
+
     .wt-search-bar__input {
       color: var(--false-color);
     }
   }
 
   .wt-search-bar__wrapper {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
     border: var(--input-border);
     border-color: var(--form-border-color);
     border-radius: var(--border-radius);
-    display: flex;
-    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
-    align-items: center;
     gap: var(--spacing-xs);
   }
 
@@ -184,12 +183,6 @@ function handleKeyup(event) {
     .wt-search-bar--outline &:focus {
       border-color: var(--form-outline-border--hover-color);
     }
-  }
-
-  /* make icons black */
-  .wt-search-bar:hover ::v-deep .wt-icon__icon,
-  .wt-search-bar:focus-within ::v-deep .wt-icon__icon {
-    fill: var(--icon-color--hover);
   }
 
   /* clears the 'X' from Internet Explorer */
