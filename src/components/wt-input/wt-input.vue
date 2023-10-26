@@ -56,8 +56,8 @@
         }"
         >
           <wt-icon-btn
+            :disabled="disabled"
             :icon="showPasswordIcon"
-            class="wt-input__password-button"
             @click="switchVisibilityPassword"
           ></wt-icon-btn>
         </slot>
@@ -329,11 +329,5 @@ export default {
   transform: translateY(-50%);
   pointer-events: auto; // override --disabled p-events none
   gap: var(--input-after-wrapper-gap);
-
-  .wt-input__password-button {
-    .wt-input--disabled & ::v-deep .wt-icon__icon {
-      fill: var(--icon-disabled-color);
-    }
-  }
 }
 </style>

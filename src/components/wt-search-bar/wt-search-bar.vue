@@ -94,7 +94,7 @@ const { v, customValidators } = toRefs(props);
 
 const { invalid } = useValidation({ v, customValidators });
 
-const invalidColorProvider = computed(() => (invalid.value ? 'error' : undefined));
+const invalidColorProvider = computed(() => (invalid.value ? 'error' : 'default'));
 
 const search = debounce((value) => {
   emit('search', value);
