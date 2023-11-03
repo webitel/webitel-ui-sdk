@@ -6,7 +6,8 @@ process.env.VSG_WEBPACK_PATH = webpackPath;
 
 module.exports = {
   // set your styleguidist configuration here
-  title: 'Default Style Guide',
+  title: 'Webitel UI',
+  tocMode: 'collapse',
   components: 'src/components/**/wt-*.vue',
   enhancePreviewApp: path.resolve(__dirname, 'styleguide/preview.js'),
   require: [
@@ -34,6 +35,15 @@ module.exports = {
         {
           name: 'Variable Search Validator',
           content: 'src/validators/variableSearchValidator/Readme.md',
+        },
+      ],
+    },
+    {
+      name: 'How To',
+      sections: [
+        {
+          name: 'Add Docs Section',
+          content: 'src/docs/how-to/add-docs-section.md',
         },
       ],
     },
