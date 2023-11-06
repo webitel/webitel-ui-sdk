@@ -74,6 +74,7 @@ import './generate.svg';
 import './google.svg';
 import './history.svg';
 import './hold.svg';
+import './link.svg';
 import './lock.svg';
 import './logout.svg';
 import './menu.svg';
