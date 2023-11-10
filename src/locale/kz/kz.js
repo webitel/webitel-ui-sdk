@@ -311,5 +311,12 @@ export default {
     dummy: {
       text: 'Бөлімде әлі жазбалар жасалмаған',
     },
+    agentStatusSelect: {
+      pauseCausePopup: {
+        title: 'Үзіліс себебін таңдаңыз',
+        min: 'Мин',
+        unlimited: 'Шексіз',
+      },
+    },
   },
 };
