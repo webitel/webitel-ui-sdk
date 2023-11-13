@@ -44,6 +44,7 @@ export default {
       es: 'Español',
       ru: 'Русский',
       ua: 'Українська',
+      kz: 'Қазақ',
     },
     from: 'Від',
     to: 'До',
