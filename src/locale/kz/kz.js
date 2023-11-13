@@ -37,7 +37,11 @@ export default {
     collapse: 'Жабу',
     generate: 'Жасау',
     lang: {
+      en: 'English',
+      es: 'Español',
       ru: 'Орысша',
+      ua: 'Українська',
+      kz: 'Қазақ',
     },
     from: 'Бастап',
     to: 'Бұрын/Дейін',

@@ -39,6 +39,7 @@ export default {
       es: 'Español',
       ru: 'Русский',
       ua: 'Українська',
+      kz: 'Қазақ',
     },
     from: 'De',
     to: 'Hasta',
