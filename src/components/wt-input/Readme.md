@@ -1,14 +1,13 @@
 ```vue
-debugger;
 <div>
 value: {{ this.value }}
 </div>
 
 <wt-input
-  :value="this.value"
+  :model-value="this.value"
   label="Input"
   name="label-input"
-  @input="this.value = $event"
+  @update:modelValue="this.value = $event"
 ></wt-input>
 ```
 

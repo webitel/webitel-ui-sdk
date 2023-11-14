@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-input></wt-input>
     <wt-icon-btn icon="edit" @click="() => alert('wt-icon-btn clicked')"></wt-icon-btn>
     <wt-switcher
       v-model="dark"

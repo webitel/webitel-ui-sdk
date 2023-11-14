@@ -25,7 +25,7 @@
     <div class="wt-input__wrapper">
       <input
         :id="name"
-        ref="wt-input"
+        ref="WtInput"
         :class="{
           'wt-input--is-password': isPassword,
         }"
@@ -41,7 +41,7 @@
         @keyup="$emit('keyup', $event)"
       >
       <div
-        ref="after-wrapper"
+        ref="AfterWrapper"
         class="wt-input__after-wrapper"
       >
         <slot
@@ -72,179 +72,200 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, useSlots, onMounted } from 'vue';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /*
 * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
 * TWO PROPS: VALUE AND MODELVALUE, AND 2 EVENTS: @UPDATE:MODELVALUE AND @INPUT
 * */
-  const props = defineProps({
-    value: {
-      type: [String, Number],
-    },
-    /**
-     * Current input modelValue (`v-model`)
-     */
-    modelValue: {
-      type: [String, Number],
-    },
-    /**
-     * Form input label
-     */
-    label: {
-      type: String,
-      default: '',
-    },
-    /**
-     * Form input placeholder
-     */
-    placeholder: {
-      type: String,
-    },
-    /**
-     * Form input name
-     */
-    name: {
-      type: String,
-      default: '',
-    },
-    /**
-     * Form input type
-     */
-    type: {
-      type: String,
-      default: 'text',
-    },
-    /**
-     * Native input required attribute
-     */
-    required: {
-      type: Boolean,
-      default: false,
-      description: 'Native input required attribute',
-    },
-    /**
-     * Native input disabled attribute
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
-      description: 'Native input disabled attribute',
-    },
-    /**
-     * Status of show password icon display
-     */
-    hasShowPassword: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Native number input restrictions
-     */
-    numberMin: {
-      type: Number,
-      default: 0,
-    },
-
-    /**
-     * Native number input restrictions
-     */
-    numberMax: {
-      type: Number,
-    },
-
-    outline: {
-      type: Boolean,
-      default: false,
-    },
-
-    labelProps: {
-      type: Object,
-      description: 'Object with props, passed down to wt-label as props',
-    },
-
-    preventTrim: {
-      type: Boolean,
-      default: false,
-    },
-  });
-  const emits = defineEmits(['update:modelValue', 'input', 'keyup']);
-
-    // const inputType = ref('');
-    const isPasswordVisible = ref(false);
-
-
-      // FIXME: uncomment and test, because this code was copy-pasted from vue-storefront long ago
-  // watch: {
-  //   type: {
-  //     immediate: true,
-  //     handler(type) {
-  //       let inputType = type;
-  //       // Safari has bug for number input
-  //       if (typeof window !== 'undefined' || typeof document !== 'undefined') {
-  //         const ua = navigator.userAgent.toLocaleLowerCase();
-  //         if (
-  //           ua.indexOf('safari') !== -1
-  //           && ua.indexOf('chrome') === -1
-  //           && type === 'number'
-  //         ) {
-  //           inputType = 'text';
-  //         }
-  //       }
-  //       this.inputType = inputType;
-  //     },
-  //   },
-  // },
-
-  computed: {
-    inputValue() {
-      return this.value !== undefined ? this.value : this.modelValue;
-    },
-
-    hasLabel() {
-      return !!(this.label || this.$slots.label);
-    },
-
-    requiredLabel() {
-      return this.required ? `${this.label}*` : this.label;
-    },
-
-    isPassword() {
-      return this.type === 'password' && this.hasShowPassword;
-    },
-
-    showPasswordIcon() {
-      return this.isPasswordVisible ? 'eye--closed' : 'eye--opened';
-    },
+const props = defineProps({
+  value: {
+    type: [String, Number],
   },
-  methods: {
-    inputHandler(event) {
-      const value = this.preventTrim ? event.target.value : event.target.value.trim();
-      this.$emit('update:modelValue', value);
-      this.$emit('input', value);
-    },
-
-    switchVisibilityPassword() {
-      this.isPasswordVisible = !this.isPasswordVisible;
-      this.inputType = this.isPasswordVisible ? 'text' : 'password';
-    },
-
-    async updateInputPaddings() {
-      // cant test this thing cause vue test utils doesnt render elements width :/
-      const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
-      const inputEl = this.$refs['wt-input'];
-      const defaultInputPadding = getComputedStyle(document.documentElement)
-      .getPropertyValue('--input-padding');
-      if (afterWrapperWidth >= inputEl.offsetWidth) return; // fixes https://my.webitel.com/browse/WTEL-2635
-      inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
-    },
+  /**
+   * Current input modelValue (`v-model`)
+   */
+  modelValue: {
+    type: [String, Number],
   },
-  mounted() {
-    this.updateInputPaddings();
+  /**
+   * Form input label
+   */
+  label: {
+    type: String,
+    default: '',
   },
-};
+  /**
+   * Form input placeholder
+   */
+  placeholder: {
+    type: String,
+  },
+  /**
+   * Form input name
+   */
+  name: {
+    type: String,
+    default: '',
+  },
+  /**
+   * Form input type
+   */
+  type: {
+    type: String,
+    default: 'text',
+  },
+  /**
+   * Native input required attribute
+   */
+  required: {
+    type: Boolean,
+    default: false,
+    description: 'Native input required attribute',
+  },
+  /**
+   * Native input disabled attribute
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+    description: 'Native input disabled attribute',
+  },
+  /**
+   * Status of show password icon display
+   */
+  hasShowPassword: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * Native number input restrictions
+   */
+  numberMin: {
+    type: Number,
+    default: 0,
+  },
+
+  /**
+   * Native number input restrictions
+   */
+  numberMax: {
+    type: Number,
+  },
+
+  outline: {
+    type: Boolean,
+    default: false,
+  },
+
+  labelProps: {
+    type: Object,
+    description: 'Object with props, passed down to wt-label as props',
+  },
+
+  preventTrim: {
+    type: Boolean,
+    default: false,
+  },
+
+  // validation rules
+  // TODO: move to separate file to make it reusable
+  v: {
+    type: Object,
+  },
+  customValidators: {
+    type: Array,
+    default: () => [],
+  },
+});
+const emit = defineEmits(['update:modelValue', 'input', 'keyup']);
+
+const slots = useSlots();
+const {
+  isValidation,
+  invalid,
+  validationText
+} = useValidation({ v: props.v, customValidators: props.customValidators });
+
+// toggles password <-> text at showPassword
+const inputType = ref('');
+inputType.value = props.type;
+
+// template ref
+const AfterWrapper = ref(null);
+// template ref
+const WtInput = ref(null);
+
+const isPasswordVisible = ref(false);
+
+// FIXME: uncomment and test, because this code was copy-pasted from vue-storefront long ago
+// watch: {
+//   type: {
+//     immediate: true,
+//     handler(type) {
+//       let inputType = type;
+//       // Safari has bug for number input
+//       if (typeof window !== 'undefined' || typeof document !== 'undefined') {
+//         const ua = navigator.userAgent.toLocaleLowerCase();
+//         if (
+//           ua.indexOf('safari') !== -1
+//           && ua.indexOf('chrome') === -1
+//           && type === 'number'
+//         ) {
+//           inputType = 'text';
+//         }
+//       }
+//       this.inputType = inputType;
+//     },
+//   },
+// },
+
+const inputValue = computed(() => {
+  return props.value !== undefined ? props.value : props.modelValue;
+});
+
+const hasLabel = computed(() => {
+  return !!(props.label || slots.label);
+});
+
+const requiredLabel = computed(() => {
+  return props.required ? `${props.label}*` : props.label;
+});
+
+const isPassword = computed(() => {
+  return props.type === 'password' && props.hasShowPassword;
+});
+
+const showPasswordIcon = computed(() => {
+  return isPasswordVisible.value ? 'eye--closed' : 'eye--opened';
+});
+
+function inputHandler(event) {
+  const value = props.preventTrim ? event.target.value : event.target.value.trim();
+  emit('update:modelValue', value);
+  emit('input', value);
+}
+
+function switchVisibilityPassword() {
+  isPasswordVisible.value = !isPasswordVisible.value;
+  inputType.value = isPasswordVisible.value ? 'text' : 'password';
+}
+
+function updateInputPaddings() {
+  // cant test this thing cause vue test utils doesnt render elements width :/
+  const afterWrapperWidth = AfterWrapper.value.offsetWidth;
+  const inputEl = WtInput.value;
+  const defaultInputPadding = getComputedStyle(document.documentElement)
+  .getPropertyValue('--input-padding');
+  if (afterWrapperWidth >= inputEl.offsetWidth) return; // fixes https://my.webitel.com/browse/WTEL-2635
+  inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
+}
+
+onMounted(() => {
+  updateInputPaddings();
+});
 </script>
 
 <style lang="scss">
