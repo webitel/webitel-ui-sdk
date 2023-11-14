@@ -126,6 +126,6 @@ const isResult = computed(() => !isEmpty(props.result));
 .audit-form-question--clear {
   margin-top: var(--spacing-sm);;
   cursor: pointer;
-  color: var(--link-color);
+  color: var(--text-link-color);
 }
 </style>

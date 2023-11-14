@@ -1,0 +1,20 @@
+// shared text field colors
+
+:root {
+  // TODO: move to separate helper-text component
+  --wt-helper-text-color: var(--text-main-color);
+  --wt-helper-text-disabled-color: var(--text-disabled-color);
+
+  --wt-text-field-error-text-color: var(--error-color);
+  --wt-text-field-placeholder-color: var(--text-main-color);
+  --wt-text-field-placeholder-error-color: var(--error-color);
+  --wt-text-field-placeholder-disabled-color: var(--text-disabled-color);
+
+  --wt-text-field-input-border-color: var(--grey-darken-1);
+  --wt-text-field-input-border-disabled-color: var(--dp-16-surface-color);
+  --wt-text-field-input-border-error-color: var(--error-color);
+}
+
+:root.theme--dark {
+  --wt-text-field-input-border-color: var(--grey-lighten-1);
+}

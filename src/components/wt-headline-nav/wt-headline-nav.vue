@@ -77,7 +77,7 @@ const props = defineProps({
 }
 
 .wt-headline-nav__text {
-  color: var(--main-text-color);
+  color: var(--text-main-color);
 }
 
 .wt-headline-nav__wrapper:last-child {

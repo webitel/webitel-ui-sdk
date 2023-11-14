@@ -71,17 +71,15 @@
   </div>
 </template>
 
-<script>
-import validationMixin from '../../mixins/validationMixin/validationMixin';
+<script setup>
+import { ref } from 'vue';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /*
 * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
 * TWO PROPS: VALUE AND MODELVALUE, AND 2 EVENTS: @UPDATE:MODELVALUE AND @INPUT
 * */
-export default {
-  name: 'wt-input',
-  mixins: [validationMixin],
-  props: {
+  const props = defineProps({
     value: {
       type: [String, Number],
     },
@@ -171,34 +169,34 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  emits: ['update:modelValue', 'input', 'keyup'],
-  data: () => ({
-    inputType: '',
-    isPasswordVisible: false,
-  }),
+  });
+  const emits = defineEmits(['update:modelValue', 'input', 'keyup']);
 
-  watch: {
-    type: {
-      immediate: true,
-      handler(type) {
-        let inputType = type;
-        // Safari has bug for number input
-        if (typeof window !== 'undefined' || typeof document !== 'undefined') {
-          const ua = navigator.userAgent.toLocaleLowerCase();
-          if (
-            ua.indexOf('safari') !== -1
-            && ua.indexOf('chrome') === -1
-            && type === 'number'
-          ) {
-            this.isNumberTypeSafari = true;
-            inputType = 'text';
-          }
-        }
-        this.inputType = inputType;
-      },
-    },
-  },
+    // const inputType = ref('');
+    const isPasswordVisible = ref(false);
+
+
+      // FIXME: uncomment and test, because this code was copy-pasted from vue-storefront long ago
+  // watch: {
+  //   type: {
+  //     immediate: true,
+  //     handler(type) {
+  //       let inputType = type;
+  //       // Safari has bug for number input
+  //       if (typeof window !== 'undefined' || typeof document !== 'undefined') {
+  //         const ua = navigator.userAgent.toLocaleLowerCase();
+  //         if (
+  //           ua.indexOf('safari') !== -1
+  //           && ua.indexOf('chrome') === -1
+  //           && type === 'number'
+  //         ) {
+  //           inputType = 'text';
+  //         }
+  //       }
+  //       this.inputType = inputType;
+  //     },
+  //   },
+  // },
 
   computed: {
     inputValue() {
@@ -265,18 +263,6 @@ export default {
 
 .wt-input__wrapper {
   position: relative;
-}
-
-.wt-label {
-  .wt-input:hover &,
-  .wt-input:focus-within & {
-    color: var(--form-label--hover-color);
-  }
-
-  .wt-input--invalid:hover &,
-  .wt-input--invalid:focus-within & {
-    color: var(--label--invalid-color);
-  }
 }
 
 .wt-input__input {

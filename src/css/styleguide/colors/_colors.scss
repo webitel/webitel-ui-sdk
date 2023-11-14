@@ -1,5 +1,6 @@
 @import './deprecated';
 @import './palette';
+@import './reusable/text-field';
 
 :root {
   // dp colors
@@ -84,10 +85,10 @@
   --sub-accent-color: var(--indigo-darken-3);
 
   // typography colors
-  --main-text-color: var(--grey-darken-3);
-  --main-text-disabled-color: var(--grey-lighten-1);
-  --negative-text-color: var(--error-color);
-  --link-color: var(--info-color);
+  --text-main-color: var(--grey-darken-3);
+  --text-disabled-color: var(--grey-lighten-1);
+  --text-error-color: var(--error-color);
+  --text-link-color: var(--info-color);
 }
 
 :root.theme--dark {
@@ -173,8 +174,8 @@
   --sub-accent-color: var(--indigo-darken-3);
 
   // typography colors
-  --main-text-color: var(--grey-lighten-3);
-  --main-text-disabled-color: var(--grey-darken-1);
-  --negative-text-color: var(--error-color);
-  --link-color: var(--info-color);
+  --text-main-color: var(--grey-lighten-3);
+  --text-disabled-color: var(--grey-darken-1);
+  --text-error-color: var(--error-color);
+  --text-link-color: var(--info-color);
 }
