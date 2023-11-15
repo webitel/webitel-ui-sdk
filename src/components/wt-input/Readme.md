@@ -1,26 +1,50 @@
 ```vue
-<div>
-value: {{ this.value }}
-</div>
+<template>
+  <div>
+    <wt-input
+      :value="this.value"
+      label="Input"
+      name="label-input"
+      @input="this.handler"
+    ></wt-input>
 
-<wt-input
-  :model-value="this.value"
-  label="Input"
-  name="label-input"
-  @update:modelValue="this.value = $event"
-></wt-input>
+    value: {{ this.value }}
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const value = ref('');
+
+const handler = (e) => {
+  value.value = e;
+};
+</script>
 ```
 
 ```vue
+<template>
+  <wt-input
+    :value="this.value"
+    disabled
+    has-show-password
+    label="Disabled"
+    name="disabled-input"
+    type="password"
+    @input="this.handler"
+  ></wt-input>
+</template>
 
-<wt-input
-  v-model="value"
-  disabled
-  has-show-password
-  label="Disabled"
-  name="disabled-input"
-  type="password"
-></wt-input>
+<script setup>
+import { ref } from 'vue';
+
+const value = ref('disabled value');
+
+const handler = (e) => {
+  value.value = e;
+};
+</script>
 ```
 
 ```vue
@@ -44,15 +68,29 @@ value: {{ this.value }}
 ```
 
 ```vue
-<wt-input
-  v-model="value"
-  label="After input slot usage"
->
-<template v-slot:after-input>
-  <wt-icon-btn icon="edit"></wt-icon-btn>
-  <wt-icon-btn icon="edit" size="sm"></wt-icon-btn>
-  <wt-icon-btn icon="edit"></wt-icon-btn>
-  <wt-icon-btn icon="edit" size="sm"></wt-icon-btn>
+
+<template>
+  <wt-input
+    :value="this.value"
+    label="After input slot usage"
+    @input="this.handler"
+  >
+    <template v-slot:after-input>
+      <wt-icon-btn icon="edit"></wt-icon-btn>
+      <wt-icon-btn icon="edit" size="sm"></wt-icon-btn>
+      <wt-icon-btn icon="edit"></wt-icon-btn>
+      <wt-icon-btn icon="edit" size="sm"></wt-icon-btn>
+    </template>
+  </wt-input>
 </template>
-</wt-input>
+
+<script setup>
+import { ref } from 'vue';
+
+const value = ref('loooooooooooooooooooooooooooooooooooooooooong value');
+
+const handler = (e) => {
+  value.value = e;
+};
+</script>
 ```

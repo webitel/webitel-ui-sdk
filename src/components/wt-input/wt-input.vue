@@ -72,7 +72,9 @@
 </template>
 
 <script setup>
-import { ref, computed, useSlots, onMounted } from 'vue';
+import {
+  ref, computed, useSlots, onMounted,
+} from 'vue';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /*
@@ -186,7 +188,7 @@ const slots = useSlots();
 const {
   isValidation,
   invalid,
-  validationText
+  validationText,
 } = useValidation({ v: props.v, customValidators: props.customValidators });
 
 // toggles password <-> text at showPassword

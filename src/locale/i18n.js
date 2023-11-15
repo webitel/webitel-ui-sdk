@@ -14,7 +14,7 @@ const messages = {
 };
 
 // eslint-disable-next-line new-cap
-export default new createI18n({
+export default createI18n({
   // legacy: false,
   locale: 'en',
   allowComposition: true,
