@@ -1,12 +1,15 @@
 <template>
-  <span class="wt-chip" :class="`wt-chip--${color}-color`">
-    <slot></slot>
+  <span
+    class="wt-chip"
+    :class="`wt-chip--${color}-color`"
+  >
+    <slot />
   </span>
 </template>
 
 <script>
 export default {
-  name: 'wt-chip',
+  name: 'WtChip',
   props: {
     color: {
       type: String,

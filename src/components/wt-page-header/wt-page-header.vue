@@ -1,17 +1,16 @@
 <template>
   <wt-headline>
-    <template v-slot:title-wrapper>
-      <slot>
-      </slot>
+    <template #title-wrapper>
+      <slot />
     </template>
-    <template v-slot:title>
-      <slot name="title"></slot>
+    <template #title>
+      <slot name="title" />
     </template>
-    <template v-slot:actions>
-      <slot name="actions"></slot>
+    <template #actions>
+      <slot name="actions" />
       <slot
-        name="primary-action"
         v-if="!hidePrimary"
+        name="primary-action"
       >
         <wt-button
           :disabled="primaryDisabled"

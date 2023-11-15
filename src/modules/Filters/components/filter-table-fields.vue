@@ -3,7 +3,7 @@
     :headers="headers"
     :static-headers="staticHeaders"
     @change="handleChange"
-  ></wt-table-column-select>
+  />
 </template>
 
 <script setup>

@@ -5,22 +5,22 @@
   >
     <component
       :is="playerType"
-      class="wt-player__player"
       ref="player"
+      class="wt-player__player"
       :src="src"
       :autoplay="autoplay"
       controls
       v-on="listeners"
-    ></component>
+    />
 
     <!-- The "wt-icon-btn" component is append in to "audio" element by "setCloseIcon" method-->
     <wt-icon-btn
       v-if="closable"
-      class="wt-player__close-icon"
       ref="close-icon"
+      class="wt-player__close-icon"
       icon="close"
       @click="$emit('close')"
-    ></wt-icon-btn>
+    />
   </aside>
 </template>
 
@@ -28,7 +28,7 @@
 import Plyr from 'plyr';
 
 export default {
-  name: 'wt-player',
+  name: 'WtPlayer',
   props: {
     src: {},
     autoplay: {
@@ -74,6 +74,17 @@ export default {
     player: null,
   }),
 
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+      };
+    },
+    playerType() {
+      return this.mime.includes('video') ? 'video' : 'audio';
+    },
+  },
+
   watch: {
     src() {
       this.setupDownload();
@@ -85,17 +96,6 @@ export default {
 
   mounted() {
     this.setupPlayer();
-  },
-
-  computed: {
-    listeners() {
-      return {
-        ...this.$listeners,
-      };
-    },
-    playerType() {
-      return this.mime.includes('video') ? 'video' : 'audio';
-    },
   },
 
   methods: {

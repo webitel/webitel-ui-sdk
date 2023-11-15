@@ -8,7 +8,7 @@ export function useValidation({ v, customValidators }) {
 
   const validationText = computed(() => {
     let validationText = '';
-    if (isValidation && invalid) {
+    if (isValidation.value && invalid) {
       if (v.value.required?.$invalid) validationText = t('validation.required');
       else if (v.value.numeric?.$invalid) validationText = t('validation.numeric');
       else if (v.value.email?.$invalid) validationText = t('validation.email');

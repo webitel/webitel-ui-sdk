@@ -4,17 +4,17 @@
       color="disabled"
       :text="status.offline"
       :size="size"
-    ></wt-indicator>
+    />
     <wt-indicator
       color="success"
       :text="status.online"
       :size="size"
-    ></wt-indicator>
+    />
     <wt-indicator
       color="primary"
       :text="status.pause"
       :size="size"
-    ></wt-indicator>
+    />
   </article>
 </template>
 

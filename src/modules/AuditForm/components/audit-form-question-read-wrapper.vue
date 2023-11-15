@@ -14,12 +14,14 @@
         :class="{
           'audit-form-question-read-text--required': question.required,
         }"
-      >{{ question.question }}</p>
+      >
+        {{ question.question }}
+      </p>
       <wt-icon
-        class="audit-form-question-read__drag-icon"
         v-if="!disableDragging && !first"
+        class="audit-form-question-read__drag-icon"
         icon="move"
-      ></wt-icon>
+      />
     </header>
     <section class="audit-form-question-read-content">
       <component
@@ -28,12 +30,14 @@
         :result="result"
         mode="read"
         @change:result="!readonly && emit('change:result', $event)"
-      ></component>
+      />
       <div
         v-show="isResult"
         class="audit-form-question--clear"
         @click="emit('change:result', {})"
-      >{{ $t('webitelUI.auditForm.clearSelection') }}</div>
+      >
+        {{ $t('webitelUI.auditForm.clearSelection') }}
+      </div>
     </section>
   </article>
 </template>

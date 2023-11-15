@@ -2,13 +2,13 @@
   <i
     class="wt-icon"
     :class="[
-       `wt-icon--size-${size}`,
-       `wt-icon--color-${color}`,
-       { 'wt-icon--disabled': disabled },
-     ]"
+      `wt-icon--size-${size}`,
+      `wt-icon--color-${color}`,
+      { 'wt-icon--disabled': disabled },
+    ]"
   >
     <svg class="wt-icon__icon">
-      <use :xlink:href="iconName"></use>
+      <use :xlink:href="iconName" />
     </svg>
   </i>
 </template>

@@ -26,14 +26,19 @@
           transform: `translateX(${activeLineOffset}px)`
         }"
         class="wt-tab__underline--highlight"
-      ></div>
+      />
     </div>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'wt-tabs',
+  name: 'WtTabs',
+
+  model: {
+    prop: 'current',
+    event: 'change',
+  },
   props: {
     current: {
       type: Object,
@@ -43,11 +48,6 @@ export default {
       type: Array,
       default: () => [],
     },
-  },
-
-  model: {
-    prop: 'current',
-    event: 'change',
   },
 
   data: () => ({

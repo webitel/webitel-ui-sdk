@@ -1,7 +1,9 @@
-import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { defineConfig, loadEnv } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
+
 const resolve = require('path').resolve;
 
 // https://vitejs.dev/config/
@@ -27,6 +29,11 @@ export default ({ mode }) => {
           globals: {
             vue: 'Vue',
           },
+          // https://github.com/vitejs/vite/issues/4863#issuecomment-1005451468
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name === 'style.css') return 'ui-sdk.css';
+            return assetInfo.name;
+          },
         },
       },
     },
@@ -46,7 +53,7 @@ export default ({ mode }) => {
     },
     resolve: {
       alias: {
-        vue: '@vue/compat',
+        // vue: '@vue/compat',
       },
     },
     plugins: [
@@ -58,6 +65,18 @@ export default ({ mode }) => {
             },
           },
         },
+      }),
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'src/assets/icons/plyr.svg',
+            dest: 'img',
+          }, {
+            src: 'src/assets/icons/sprite/',
+            dest: 'img',
+          },
+
+        ],
       }),
       // https://www.npmjs.com/package/vite-plugin-node-polyfills
       nodePolyfills({

@@ -1,13 +1,16 @@
 <template>
-  <div v-clickaway="close" class="wt-app-navigator">
+  <div
+    v-clickaway="close"
+    class="wt-app-navigator"
+  >
     <wt-tooltip>
-      <template v-slot:activator>
+      <template #activator>
         <wt-icon-btn
           :class="{'active': isOpened}"
           class="wt-app-navigator__btn"
           icon="app-navigator"
           @click="isOpened = !isOpened"
-        ></wt-icon-btn>
+        />
       </template>
       {{ $t('webitelUI.appNavigator.title') }}
     </wt-tooltip>
@@ -21,7 +24,6 @@
           {{ $t('webitelUI.appNavigator.title') }}
         </h3>
         <ul class="wt-app-navigator__nav">
-
           <li
             v-if="formattedApps[WebitelApplications.AGENT]"
             :class="{'active': formattedApps[WebitelApplications.AGENT].currentApp }"
@@ -173,7 +175,6 @@
               >
             </a>
           </li>
-
         </ul>
       </nav>
     </transition>

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[{'wt-expansion-panel--opened':open},
-    `wt-expansion-panel--${props.size}`]"
+             `wt-expansion-panel--${props.size}`]"
     class="wt-expansion-panel"
   >
     <div
@@ -10,14 +10,14 @@
       @click="open = !open"
       @keypress.enter="open = !open"
     >
-      <slot name="title"></slot>
+      <slot name="title" />
       <wt-icon
         icon="arrow-right"
-      ></wt-icon>
+      />
     </div>
     <wt-expand-transition>
       <div v-show="open">
-        <slot></slot>
+        <slot />
       </div>
     </wt-expand-transition>
   </div>

@@ -4,14 +4,14 @@
     :label="label"
     mode="datetime"
     @input="handleChange"
-  ></wt-datepicker>
+  />
 </template>
 
 <script>
 import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
 
 export default {
-  name: 'filter-from',
+  name: 'FilterFrom',
   mixins: [baseFilterMixin],
   props: {
     filterQuery: {

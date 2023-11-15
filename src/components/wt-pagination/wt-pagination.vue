@@ -1,7 +1,9 @@
 <template>
   <footer class="wt-pagination">
     <div class="wt-pagination__size">
-      <div class="wt-pagination__size-text">{{ $t('webitelUI.pagination.sizeText') }}</div>
+      <div class="wt-pagination__size-text">
+        {{ $t('webitelUI.pagination.sizeText') }}
+      </div>
       <wt-input
         :number-max="1000"
         :number-min="1"
@@ -9,28 +11,28 @@
         class="wt-pagination__size-input"
         type="number"
         @input="inputHandler"
-      ></wt-input>
+      />
     </div>
     <div class="wt-pagination__page-controls">
       <wt-tooltip>
-        <template v-slot:activator>
+        <template #activator>
           <wt-icon-btn
             :disabled="!prev"
             class="wt-pagination__page-control"
             icon="arrow-left"
             @click="goPrev"
-          ></wt-icon-btn>
+          />
         </template>
         {{ $t('webitelUI.pagination.prev') }}
       </wt-tooltip>
       <wt-tooltip>
-        <template v-slot:activator>
+        <template #activator>
           <wt-icon-btn
             :disabled="!next"
             class="wt-pagination__page-control"
             icon="arrow-right"
             @click="goNext"
-          ></wt-icon-btn>
+          />
         </template>
         {{ $t('webitelUI.pagination.next') }}
       </wt-tooltip>
@@ -42,7 +44,11 @@
 import debounce from '../../scripts/debounce';
 
 export default {
-  name: 'wt-pagination',
+  name: 'WtPagination',
+  model: {
+    prop: 'size',
+    event: 'change',
+  },
   props: {
     size: {
       type: [String, Number],
@@ -65,20 +71,16 @@ export default {
     },
   },
   emits: ['change', 'input', 'prev', 'next'],
-  model: {
-    prop: 'size',
-    event: 'change',
-  },
+
+  data: () => ({
+    defaultSize: '10',
+  }),
 
   watch: {
     size(value) {
       this.changeSize(value);
     },
   },
-
-  data: () => ({
-    defaultSize: '10',
-  }),
 
   created() {
     if (this.debounce) this.changeSize = debounce(this.changeSize, this.debounceDelay);

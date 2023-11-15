@@ -15,13 +15,13 @@
       v-if="loading"
       size="sm"
       :color="loaderColor"
-    ></wt-loader>
+    />
     <wt-icon
       v-else
       :color="iColor"
       :icon="icon"
       :size="size"
-    ></wt-icon>
+    />
   </button>
 </template>
 

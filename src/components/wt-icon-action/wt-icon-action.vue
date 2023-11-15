@@ -3,7 +3,7 @@
     :is="actionComponent"
     :disabled="disabled"
     @click="emit('click')"
-  ></component>
+  />
 </template>
 
 <script setup>

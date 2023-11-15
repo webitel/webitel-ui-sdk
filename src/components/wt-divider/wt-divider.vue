@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'wt-divider',
+  name: 'WtDivider',
 };
 </script>
 

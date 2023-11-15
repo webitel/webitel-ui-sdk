@@ -4,18 +4,18 @@
       :status="status"
       :status-duration="statusDuration"
       @change="handleStatusSelectInput"
-    ></wt-status-select>
+    />
     <pause-cause-popup
       v-if="isPauseCausePopup"
       :options="pauseCauses"
       @change="handlePauseCauseInput"
       @close="closePauseCausePopup"
-    ></pause-cause-popup>
+    />
     <status-select-error-popup
       v-if="error"
       :error="error"
       @close="error = null"
-    ></status-select-error-popup>
+    />
   </article>
 </template>
 

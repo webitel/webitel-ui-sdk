@@ -19,14 +19,16 @@
       v-if="loading"
       size="sm"
       :color="loaderColor"
-    ></wt-loader>
-    <slot v-else>no content provided</slot>
+    />
+    <slot v-else>
+      no content provided
+    </slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'wt-button',
+  name: 'WtButton',
   props: {
     /**
      * @values 'primary', 'secondary', 'success', 'error', 'transfer', 'job', 'info'

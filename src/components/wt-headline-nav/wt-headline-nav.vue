@@ -5,15 +5,22 @@
       :key="key"
       class="wt-headline-nav__wrapper"
     >
-      <span v-if="key !== 0" class="wt-headline-nav__indicator"></span>
+      <span
+        v-if="key !== 0"
+        class="wt-headline-nav__indicator"
+      />
       <h1 class="wt-headline-nav__title">
         <router-link
           v-if="singlePath.route"
           :to="singlePath.route"
           class="wt-headline-nav__text wt-headline-nav__text--link"
-        >{{ singlePath.name }}
+        >
+          {{ singlePath.name }}
         </router-link>
-        <span v-else class="wt-headline-nav__text">{{ singlePath.name }}</span>
+        <span
+          v-else
+          class="wt-headline-nav__text"
+        >{{ singlePath.name }}</span>
       </h1>
     </div>
   </nav>

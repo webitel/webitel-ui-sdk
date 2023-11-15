@@ -4,16 +4,16 @@
     min-width="480"
     @close="close"
   >
-    <template v-slot:title>
+    <template #title>
       {{ $t('webitelUI.agentStatusSelect.pauseCausePopup.title') }}
     </template>
-    <template v-slot:main>
+    <template #main>
       <form @submit.prevent="setPause">
         <ul>
           <li
-            class="wt-cc-pause-cause-popup-option"
             v-for="(option) of pauseCause"
             :key="option.id"
+            class="wt-cc-pause-cause-popup-option"
           >
             <wt-radio
               class="wt-cc-pause-cause-popup-option__radio"
@@ -21,12 +21,12 @@
               :value="option.id"
               :label="option.name"
               @input="select(option)"
-            ></wt-radio>
+            />
             <div class="wt-cc-pause-cause-popup-option__limits-wrapper">
               <span
                 :class="{
-                    'wt-cc-pause-cause-popup-option__duration--overflow': option.isOverflow,
-                 }"
+                  'wt-cc-pause-cause-popup-option__duration--overflow': option.isOverflow,
+                }"
               >
                 {{ option.duration }}
               </span>
@@ -37,16 +37,18 @@
         </ul>
       </form>
     </template>
-    <template v-slot:actions>
+    <template #actions>
       <wt-button
         :disabled="!selected"
         @click="setPause"
-      >{{ $t('reusable.ok') }}
+      >
+        {{ $t('reusable.ok') }}
       </wt-button>
       <wt-button
         color="secondary"
         @click="close"
-      >{{ $t('reusable.cancel') }}
+      >
+        {{ $t('reusable.cancel') }}
       </wt-button>
     </template>
   </wt-popup>

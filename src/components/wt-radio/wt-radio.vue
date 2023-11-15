@@ -16,13 +16,21 @@
         :disabled="disabled"
         @input="inputHandler"
       >
-      <wt-icon class="wt-radio__icon" :icon="radioIcon"></wt-icon>
+      <wt-icon
+        class="wt-radio__icon"
+        :icon="radioIcon"
+      />
       <!-- @slot Custom input label -->
       <slot
         v-bind="{ label, isChecked, disabled }"
         name="label"
       >
-        <div v-if="label" class="wt-radio__label">{{ label }}</div>
+        <div
+          v-if="label"
+          class="wt-radio__label"
+        >
+          {{ label }}
+        </div>
       </slot>
     </wt-label>
   </div>
@@ -30,7 +38,11 @@
 
 <script>
 export default {
-  name: 'wt-radio',
+  name: 'WtRadio',
+  model: {
+    prop: 'selected',
+    event: 'input',
+  },
   props: {
     // value, set by radio
     value: {
@@ -58,10 +70,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  model: {
-    prop: 'selected',
-    event: 'input',
   },
   computed: {
     isChecked() {

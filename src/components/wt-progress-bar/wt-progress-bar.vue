@@ -1,18 +1,22 @@
 <template>
   <div
-    class="wt-progress-bar" :class="[{
-      'wt-progress-bar--overflow': isOverflow,
-     },
-     `wt-progress-bar--${color}`
-     ]"
+    class="wt-progress-bar"
+    :class="[{
+               'wt-progress-bar--overflow': isOverflow,
+             },
+             `wt-progress-bar--${color}`
+    ]"
   >
-    <span class="wt-progress-bar__progress" :style="`width: ${this.progressWidth}%;`"></span>
+    <span
+      class="wt-progress-bar__progress"
+      :style="`width: ${progressWidth}%;`"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'wt-progress-bar',
+  name: 'WtProgressBar',
   props: {
     max: {
       type: [Number, String],

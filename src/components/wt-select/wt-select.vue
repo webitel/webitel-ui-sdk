@@ -10,8 +10,8 @@
     class="wt-select"
   >
     <wt-label
-      v-bind="labelProps"
       v-if="hasLabel"
+      v-bind="labelProps"
       :disabled="disabled"
       :invalid="invalid"
       class="wt-select__label"
@@ -20,7 +20,9 @@
       <slot
         v-bind="{ label }"
         name="label"
-      >{{ requiredLabel }}</slot>
+      >
+        {{ requiredLabel }}
+      </slot>
     </wt-label>
     <vue-multiselect
       v-bind="$attrs"
@@ -41,19 +43,24 @@
       @open="isOpened = true"
       v-on="listeners"
     >
-      <template v-if="!isOpened" v-slot:limit>
-        <wt-chip class="multiselect__limit">+{{ value.length - 1 }}</wt-chip>
+      <template
+        v-if="!isOpened"
+        #limit
+      >
+        <wt-chip class="multiselect__limit">
+          +{{ value.length - 1 }}
+        </wt-chip>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
-      <template v-slot:tag="{ option }">
+      <template #tag="{ option }">
         <span class="multiselect__custom-tag">
-            {{ getOptionLabel({ option, optionLabel }) }}
+          {{ getOptionLabel({ option, optionLabel }) }}
         </span>
       </template>
 
       <!--      Slot for custom label template for single select-->
-      <template v-slot:singleLabel="{ option }">
+      <template #singleLabel="{ option }">
         <slot
           v-bind="{ option, optionLabel }"
           name="singleLabel"
@@ -65,7 +72,7 @@
       </template>
 
       <!--      Slot for custom option template -->
-      <template v-slot:option="{ option }">
+      <template #option="{ option }">
         <slot
           v-bind="{ option, optionLabel }"
           name="option"
@@ -75,18 +82,18 @@
       </template>
 
       <!--      Element for opening and closing the dropdown -->
-      <template v-slot:caret="{ toggle }">
+      <template #caret="{ toggle }">
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
           :disabled="disabled"
           class="multiselect__select"
           icon="arrow-down"
           @mousedown.prevent.stop="toggle"
-        ></wt-icon-btn>
+        />
       </template>
 
       <!--      Slot located before the tags -->
-      <template v-slot:clear="{}">
+      <template #clear="{}">
         <wt-icon-btn
           v-if="clearable"
           :class="{ 'hidden': !isValue }"
@@ -94,23 +101,30 @@
           class="multiselect__clear"
           icon="close"
           @click="clearValue"
-        ></wt-icon-btn>
+        />
       </template>
 
-      <template v-slot:beforeList>
-        <div v-show="isLoading" class="multiselect__loading-wrapper">
-          <wt-loader size="sm"></wt-loader>
+      <template #beforeList>
+        <div
+          v-show="isLoading"
+          class="multiselect__loading-wrapper"
+        >
+          <wt-loader size="sm" />
         </div>
       </template>
 
-      <template v-if="showIntersectionObserver" v-slot:afterList>
-        <div v-observe-visibility="handleAfterListIntersect"></div>
+      <template
+        v-if="showIntersectionObserver"
+        #afterList
+      >
+        <div v-observe-visibility="handleAfterListIntersect" />
       </template>
     </vue-multiselect>
     <wt-input-info
       v-if="isValidation"
       :invalid="invalid"
-    >{{ validationText }}
+    >
+      {{ validationText }}
     </wt-input-info>
   </div>
 </template>
@@ -119,7 +133,7 @@
 import multiselectMixin from './mixins/multiselectMixin';
 
 export default {
-  name: 'wt-select',
+  name: 'WtSelect',
   mixins: [multiselectMixin],
   props: {
     value: {},

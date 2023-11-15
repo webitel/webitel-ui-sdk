@@ -19,13 +19,18 @@
         :disabled="disabled"
         @change="inputHandler"
       >
-      <span class="wt-switcher__checkmark"></span>
+      <span class="wt-switcher__checkmark" />
       <!-- @slot Custom input label -->
       <slot
         v-bind="{ label, value, disabled }"
         name="label"
       >
-        <div v-if="label" class="wt-switcher__label">{{ label }}</div>
+        <div
+          v-if="label"
+          class="wt-switcher__label"
+        >
+          {{ label }}
+        </div>
       </slot>
     </wt-label>
   </div>
@@ -33,7 +38,11 @@
 
 <script>
 export default {
-  name: 'wt-switcher',
+  name: 'WtSwitcher',
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   props: {
     value: {
       type: Boolean,
@@ -55,10 +64,6 @@ export default {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
-  },
-  model: {
-    prop: 'value',
-    event: 'change',
   },
   methods: {
     inputHandler() {

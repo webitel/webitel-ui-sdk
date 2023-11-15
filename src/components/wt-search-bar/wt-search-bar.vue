@@ -15,7 +15,7 @@
           <wt-icon
             :color="invalidColorProvider"
             icon="search"
-          ></wt-icon>
+          />
         </slot>
       </div>
       <input
@@ -33,16 +33,17 @@
           class="wt-search-bar__reset-icon-btn"
           icon="close"
           @click="handleInput('')"
-        ></wt-icon-btn>
+        />
         <wt-hint
           v-if="hint"
-          :iconColor="invalidColorProvider"
-        >{{ hint }}
+          :icon-color="invalidColorProvider"
+        >
+          {{ hint }}
         </wt-hint>
         <slot
           :invalid="invalid"
           name="additional-actions"
-        ></slot>
+        />
       </div>
     </div>
   </div>

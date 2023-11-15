@@ -1,9 +1,16 @@
 <!--https://codepen.io/zapdev/pen/MYJRaj-->
 
 <template>
-  <div class="wt-loader--sm" :class="`wt-loader--sm--${color}`">
+  <div
+    class="wt-loader--sm"
+    :class="`wt-loader--sm--${color}`"
+  >
     <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="8" />
+      <circle
+        cx="12"
+        cy="12"
+        r="8"
+      />
     </svg>
   </div>
 </template>

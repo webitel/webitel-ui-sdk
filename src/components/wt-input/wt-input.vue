@@ -19,7 +19,8 @@
       <slot
         name="label"
         v-bind="{ label }"
-      >{{ requiredLabel }}
+      >
+        {{ requiredLabel }}
       </slot>
     </wt-label>
     <div class="wt-input__wrapper">
@@ -46,27 +47,28 @@
       >
         <slot
           name="after-input"
-        ></slot>
+        />
         <slot
           v-if="isPassword"
           name="show-password"
           v-bind="{
-          isPasswordVisible,
-          switchVisibilityPassword,
-        }"
+            isPasswordVisible,
+            switchVisibilityPassword,
+          }"
         >
           <wt-icon-btn
             :disabled="disabled"
             :icon="showPasswordIcon"
             @click="switchVisibilityPassword"
-          ></wt-icon-btn>
+          />
         </slot>
       </div>
     </div>
     <wt-input-info
       v-if="isValidation"
       :invalid="invalid"
-    >{{ validationText }}
+    >
+      {{ validationText }}
     </wt-input-info>
   </div>
 </template>

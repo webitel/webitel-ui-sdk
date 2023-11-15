@@ -16,7 +16,8 @@
       <slot
         name="label"
         v-bind="{ label }"
-      >{{ requiredLabel }}
+      >
+        {{ requiredLabel }}
       </slot>
     </wt-label>
     <div class="wt-textarea__wrapper">
@@ -28,9 +29,12 @@
         :value="value"
         class="wt-textarea__textarea"
         v-on="listeners"
-      ></textarea>
-      <div ref="after-wrapper" class="wt-textarea__after-wrapper">
-        <slot name="after-input"></slot>
+      />
+      <div
+        ref="after-wrapper"
+        class="wt-textarea__after-wrapper"
+      >
+        <slot name="after-input" />
         <wt-icon-btn
           :class="{ 'hidden': !value }"
           :disabled="disabled"
@@ -38,13 +42,14 @@
           icon="close--filled"
           size="sm"
           @click="$emit('input', '')"
-        ></wt-icon-btn>
+        />
       </div>
     </div>
     <wt-input-info
       v-if="isValidation"
       :invalid="invalid"
-    >{{ validationText }}
+    >
+      {{ validationText }}
     </wt-input-info>
   </div>
 </template>
@@ -53,7 +58,7 @@
 import validationMixin from '../../mixins/validationMixin/validationMixin';
 
 export default {
-  name: 'wt-textarea',
+  name: 'WtTextarea',
   mixins: [validationMixin],
   props: {
     /**
@@ -114,6 +119,9 @@ export default {
       return this.required ? `${this.label}*` : this.label;
     },
   },
+  mounted() {
+    this.updateInputPaddings();
+  },
 
   methods: {
     handleKeypress(event) {
@@ -132,9 +140,6 @@ export default {
       .getPropertyValue('--textarea-padding');
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
     },
-  },
-  mounted() {
-    this.updateInputPaddings();
   },
 };
 </script>

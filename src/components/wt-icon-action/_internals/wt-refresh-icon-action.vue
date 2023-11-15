@@ -1,11 +1,11 @@
 <template>
   <wt-tooltip>
-    <template v-slot:activator>
+    <template #activator>
       <wt-icon-btn
         icon="refresh"
         :disabled="disabled"
         @click="emit('click')"
-      ></wt-icon-btn>
+      />
     </template>
     {{ $t('reusable.refresh') }}
   </wt-tooltip>

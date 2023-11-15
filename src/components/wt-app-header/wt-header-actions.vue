@@ -1,27 +1,37 @@
 <template>
   <div class="wt-header-actions">
     <wt-tooltip>
-      <template v-slot:activator>
+      <template #activator>
         <wt-icon-btn
           v-clickaway="close"
           :class="{'active': isOpened}"
           class="wt-header-actions__btn"
           icon="account"
           @click="isOpened = !isOpened"
-        ></wt-icon-btn>
+        />
       </template>
       {{ $t('webitelUI.headerActions.account') }}
     </wt-tooltip>
 
     <transition name="fade">
-      <section v-show="isOpened" class="wt-header-actions__panel-wrapper">
-        <header v-if="isHeader" class="wt-header-actions__header">
+      <section
+        v-show="isOpened"
+        class="wt-header-actions__panel-wrapper"
+      >
+        <header
+          v-if="isHeader"
+          class="wt-header-actions__header"
+        >
           <h3
             class="wt-header-actions__name"
-          >{{ userName }}</h3>
+          >
+            {{ userName }}
+          </h3>
           <p
             class="wt-header-actions__account"
-          >{{ userAccount }}</p>
+          >
+            {{ userAccount }}
+          </p>
         </header>
         <ul class="wt-header-actions__actions-wrapper">
           <li class="wt-header-actions__action">
@@ -31,7 +41,7 @@
               target="_blank"
               @click="close"
             >
-              <wt-icon icon="docs"></wt-icon>
+              <wt-icon icon="docs" />
               <span>{{ $t('webitelUI.headerActions.docs') }}</span>
             </a>
           </li>
@@ -40,7 +50,7 @@
               class="wt-header-actions__action__link"
               @click.prevent="settings"
             >
-              <wt-icon icon="settings"></wt-icon>
+              <wt-icon icon="settings" />
               <span>{{ $t('webitelUI.headerActions.settings') }}</span>
             </a>
           </li>
@@ -49,12 +59,18 @@
               class="wt-header-actions__action__link"
               @click.prevent="logout"
             >
-              <wt-icon color="error" icon="logout"></wt-icon>
+              <wt-icon
+                color="error"
+                icon="logout"
+              />
               <span>{{ $t('webitelUI.headerActions.logout') }}</span>
             </a>
           </li>
         </ul>
-        <footer v-if="isFooter" class="wt-header-actions__footer">
+        <footer
+          v-if="isFooter"
+          class="wt-header-actions__footer"
+        >
           <p class="wt-header-actions__build__version">
             {{ buildVersion }}
           </p>
@@ -66,10 +82,7 @@
 
 <script>
 export default {
-  name: 'wt-header-actions',
-  data: () => ({
-    isOpened: false,
-  }),
+  name: 'WtHeaderActions',
   props: {
     user: {
       type: Object,
@@ -79,6 +92,9 @@ export default {
       type: Object,
     },
   },
+  data: () => ({
+    isOpened: false,
+  }),
 
   computed: {
     isHeader() {

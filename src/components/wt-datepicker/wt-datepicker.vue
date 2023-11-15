@@ -13,7 +13,9 @@
       <slot
         v-bind="{ label }"
         name="label"
-      >{{ label }}</slot>
+      >
+        {{ label }}
+      </slot>
     </wt-label>
     <vue-datepicker
       v-bind="{ ...$attrs, ...$props }"
@@ -29,46 +31,46 @@
       @open="isOpened = true"
       @update:model-value="emit('input', $event.getTime())"
     >
-      <template v-slot:input-icon>
+      <template #input-icon>
         <wt-icon
           :color="disabled ? 'disabled' : 'default'"
           icon="calendar"
-        ></wt-icon>
+        />
       </template>
-      <template v-slot:clear-icon>
+      <template #clear-icon>
         <wt-icon
           :class="{ 'wt-datepicker__open-arrow--opened': isOpened }"
           :color="disabled ? 'disabled' : 'default'"
           class="wt-datepicker__open-arrow"
           icon="arrow-down"
-        ></wt-icon>
+        />
       </template>
-      <template v-slot:arrow-left>
+      <template #arrow-left>
         <wt-icon-btn
           icon="arrow-left"
-        ></wt-icon-btn>
+        />
       </template>
-      <template v-slot:arrow-right>
+      <template #arrow-right>
         <wt-icon-btn
           icon="arrow-right"
-        ></wt-icon-btn>
+        />
       </template>
       <template
         v-if="isDateTime"
-        v-slot:time-picker="{ time, updateTime }"
+        #time-picker="{ time, updateTime }"
       >
         <div class="datepicker__timepicker">
           <wt-time-input
             :value="time.hours"
             max-value="23"
             @input="updateTime"
-          ></wt-time-input>
+          />
           :
           <wt-time-input
             :value="time.minutes"
             max-value="59"
             @input="updateTime($event, false)"
-          ></wt-time-input>
+          />
         </div>
       </template>
     </vue-datepicker>

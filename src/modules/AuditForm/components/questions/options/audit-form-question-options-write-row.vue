@@ -6,21 +6,21 @@
       :v="v$.option.name"
       prevent-trim
       @input="emit('update:option', { name: $event, score: option.score })"
-    ></wt-input>
+    />
     <wt-input
       :label="$t('webitelUI.auditForm.score', 1)"
       :value="option.score"
       :v="v$.option.score"
       type="number"
       @input="emit('update:option', { name: option.name, score: $event })"
-    ></wt-input>
+    />
     <wt-tooltip class="audit-form-question-options-write-row__tooltip">
-      <template v-slot:activator>
+      <template #activator>
         <wt-icon-btn
           :disabled="first"
           icon="bucket"
           @click="emit('delete')"
-        ></wt-icon-btn>
+        />
       </template>
       {{ $t('reusable.delete') }}
     </wt-tooltip>

@@ -1,8 +1,11 @@
 <template>
-  <div class="wt-timepicker" :class="{'wt-timepicker--invalid': invalid}">
+  <div
+    class="wt-timepicker"
+    :class="{'wt-timepicker--invalid': invalid}"
+  >
     <wt-label
-      v-bind="labelProps"
       v-if="label"
+      v-bind="labelProps"
       :invalid="invalid"
     >
       {{ `${label} (${format})` }}
@@ -13,36 +16,37 @@
         :value="hour"
         :v="v"
         :label="label ? null : $t('webitelUI.timepicker.hour') "
-        :maxValue="dateMode ? null : 23"
+        :max-value="dateMode ? null : 23"
         :disabled="disabled"
         hide-input-info
         @input="hour = $event"
-      ></wt-time-input>
+      />
       <wt-time-input
         v-if="isMin"
         :value="min"
         :v="v"
         :label="label ? null : $t('webitelUI.timepicker.min')"
-        :maxValue="59"
+        :max-value="59"
         :disabled="disabled"
         hide-input-info
         @input="min = $event"
-      ></wt-time-input>
+      />
       <wt-time-input
         v-if="isSec"
         :value="sec"
         :v="v"
-        :label="label ? null :  $t('webitelUI.timepicker.sec')"
-        :maxValue="59"
+        :label="label ? null : $t('webitelUI.timepicker.sec')"
+        :max-value="59"
         :disabled="disabled"
         hide-input-info
         @input="sec = $event"
-      ></wt-time-input>
+      />
     </div>
     <wt-input-info
       v-if="isValidation"
       :invalid="invalid"
-    >{{ validationText }}
+    >
+      {{ validationText }}
     </wt-input-info>
   </div>
 </template>
@@ -54,8 +58,12 @@ const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;
 
 export default {
-  name: 'wt-timepicker',
+  name: 'WtTimepicker',
   mixins: [validationMixin],
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
     value: {
       type: [String, Number],
@@ -81,10 +89,6 @@ export default {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
-  },
-  model: {
-    prop: 'value',
-    event: 'input',
   },
 
   computed: {

@@ -1,20 +1,23 @@
 <template>
-  <article class="filters-panel-wrapper" :class="{ 'filters-panel-wrapper--opened': isOpened }">
+  <article
+    class="filters-panel-wrapper"
+    :class="{ 'filters-panel-wrapper--opened': isOpened }"
+  >
     <div class="filters-wrap">
-      <slot></slot>
+      <slot />
     </div>
     <div class="actions-wrap">
       <wt-table-actions
         :icons="['filter-reset', 'settings']"
         @input="tableActionsHandler"
-      ></wt-table-actions>
+      />
     </div>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'filters-panel-wrapper',
+  name: 'FiltersPanelWrapper',
   data: () => ({
     isOpened: false,
     filtersCount: 0,

@@ -3,27 +3,27 @@
     :class="{
       'wt-tooltip--contrast': contrast,
       'wt-tooltip--visible': isVisible,
-     }"
+    }"
     class="wt-tooltip"
   >
     <div
       ref="activator"
       class="wt-tooltip__activator"
     >
-      <slot name="activator"></slot>
+      <slot name="activator" />
     </div>
     <wt-tooltip-floating
       v-if="isVisible"
       ref="floating"
-      class="wt-tooltip__floating"
       v-clickaway="hideTooltip"
+      class="wt-tooltip__floating"
       :class="[popperClass]"
       :style="floatingStyles"
       :triggers="popperTriggers"
       @show="showTooltip"
       @hide="hideTooltip"
     >
-      <slot v-bind="{ hide: hideTooltip }"></slot>
+      <slot v-bind="{ hide: hideTooltip }" />
     </wt-tooltip-floating>
   </div>
 </template>
