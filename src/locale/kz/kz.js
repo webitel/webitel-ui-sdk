@@ -322,5 +322,10 @@ export default {
         unlimited: 'Шексіз',
       },
     },
+    saveFailedPopup: {
+      title: 'Қатені сақтау',
+      label: 'Бірдеңе дұрыс болмады.',
+      exportToJson: 'JSON файлына экспорттау',
+    },
   },
 };

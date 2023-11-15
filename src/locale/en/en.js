@@ -359,5 +359,10 @@ export default {
         message: 'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
       },
     },
+    saveFailedPopup: {
+      title: 'Save failed',
+      label: 'Something went wrong, please try again',
+      exportToJson: 'Export to JSON',
+    },
   },
 };
