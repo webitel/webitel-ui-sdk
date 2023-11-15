@@ -32,7 +32,7 @@ const sortedHeaders = [{
 }];
 
 describe('Sort filter mixin', () => {
-  const setHeaders = jest.fn();
+  const setHeaders = vi.fn();
   const Component = {
     render() {},
     mixins: [sortFilterMixin],

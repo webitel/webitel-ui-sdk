@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import 'vue-multiselect/dist/vue3-multiselect.css';
 import App from './the-app.vue';
 import Directives from './directives'; // init all directives
 import Components from './components'; // init all components

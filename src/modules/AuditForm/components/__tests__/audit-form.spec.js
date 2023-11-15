@@ -6,7 +6,7 @@ import {
   useDestroyableSortable,
 } from '../../../../composables/useDestroyableSortable/useDestroyableSortable';
 
-jest.mock('../../../../composables/useDestroyableSortable/useDestroyableSortable');
+vi.mock('../../../../composables/useDestroyableSortable/useDestroyableSortable');
 
 useDestroyableSortable.mockImplementation(() => ({ reloadSortable: ref(false) }));
 

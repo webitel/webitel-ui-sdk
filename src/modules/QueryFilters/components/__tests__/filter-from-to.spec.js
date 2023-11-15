@@ -39,8 +39,8 @@ describe('FilterFromTo Filter', () => {
   it('initial restoreValue() triggers setValue() method: From case', async () => {
     const value = 10;
     await router.replace({ query: { [`${filterQuery}From`]: value } });
-    const setValueMock = jest.fn();
-    jest.spyOn(baseFilterMixin.methods, 'setValue')
+    const setValueMock = vi.fn();
+    vi.spyOn(baseFilterMixin.methods, 'setValue')
     .mockImplementation(setValueMock);
     shallowMount(FilterFromTo, mountOptions);
     expect(setValueMock).toHaveBeenNthCalledWith(1, {
@@ -51,8 +51,8 @@ describe('FilterFromTo Filter', () => {
   it('initial restoreValue() triggers setValue() method: To case', async () => {
     const value = 10;
     await router.replace({ query: { [`${filterQuery}To`]: value } });
-    const setValueMock = jest.fn();
-    jest.spyOn(baseFilterMixin.methods, 'setValue')
+    const setValueMock = vi.fn();
+    vi.spyOn(baseFilterMixin.methods, 'setValue')
     .mockImplementation(setValueMock);
     shallowMount(FilterFromTo, mountOptions);
     expect(setValueMock).toHaveBeenNthCalledWith(2, {

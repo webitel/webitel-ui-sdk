@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useValidation } from '../../../mixins/validationMixin/useValidation';
 import DeleteConfirmationPopup from '../components/delete-confirmation-popup.vue';
 
-jest.mock('../../../mixins/validationMixin/useValidation');
+vi.mock('../../../mixins/validationMixin/useValidation');
 
 useValidation.mockImplementation(() => ({
   isValidation: ref(false),
@@ -16,14 +16,14 @@ describe('DeleteConfirmationPopup', () => {
     const wrapper = shallowMount(DeleteConfirmationPopup, {
       props: {
         deleteCount: 1,
-        callback: jest.fn(),
+        callback: vi.fn(),
       },
     });
     expect(wrapper.classes('delete-confirmation-popup')).toBe(true);
   });
 
   it('yes button called props callback', async () => {
-    const callback = jest.fn();
+    const callback = vi.fn();
     const wrapper = mount(DeleteConfirmationPopup, {
       props: {
         deleteCount: 1,
@@ -42,7 +42,7 @@ describe('DeleteConfirmationPopup', () => {
     const wrapper = mount(DeleteConfirmationPopup, {
       props: {
         deleteCount,
-        callback: jest.fn(),
+        callback: vi.fn(),
       },
     });
     expect(wrapper.find('.delete-confirmation-popup__content').text())
@@ -53,7 +53,7 @@ describe('DeleteConfirmationPopup', () => {
     const wrapper = mount(DeleteConfirmationPopup, {
       props: {
         deleteCount: 1,
-        callback: jest.fn(),
+        callback: vi.fn(),
       },
     });
     const button = wrapper.findAllComponents({ name: 'wt-button' }).find((btn) => btn.text().includes('Yes'));
@@ -66,7 +66,7 @@ describe('DeleteConfirmationPopup', () => {
     const wrapper = mount(DeleteConfirmationPopup, {
       props: {
         deleteCount: 1,
-        callback: jest.fn(),
+        callback: vi.fn(),
       },
     });
     const button = wrapper.findAllComponents({ name: 'wt-button' }).find((btn) => btn.text().includes('No'));

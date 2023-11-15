@@ -5,9 +5,9 @@ import jszipUtils from 'jszip-utils';
 import FilesExportMixin from '../mixins/exportFilesMixin';
 import '../../../../tests/mocks/localStorageMock';
 
-jest.mock('jszip');
-jest.mock('jszip-utils');
-jest.mock('file-saver');
+vi.mock('jszip');
+vi.mock('jszip-utils');
+vi.mock('file-saver');
 const dataList = [
   { files: [{ name: 'jest', id: '1', mimeType: 'mime/type' }] },
 ];

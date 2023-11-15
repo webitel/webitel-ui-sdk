@@ -11,8 +11,8 @@ const page = 2;
 const size = 20;
 
 describe('Pagination filter mixin', () => {
-  const setPage = jest.fn();
-  const setSize = jest.fn();
+  const setPage = vi.fn();
+  const setSize = vi.fn();
   let wrapper;
   const Component = {
     render() {},

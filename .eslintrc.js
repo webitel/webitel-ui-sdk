@@ -2,14 +2,11 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    es2022: true,
   },
   extends: [
-    'plugin:vue/essential',
-    '@vue/airbnb',
+    'plugin:vue/vue3-recommended',
   ],
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-  },
   rules: {
     'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -21,15 +18,4 @@ module.exports = {
     indent: 'off',
     'no-param-reassign': ['error', { props: false }],
   },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
-      },
-    },
-  ],
 };

@@ -3,7 +3,7 @@ import { shallowMount } from '@vue/test-utils';
 import WtSearchBar from '../wt-search-bar.vue';
 import { useValidation } from '../../../mixins/validationMixin/useValidation';
 
-jest.mock('../../../mixins/validationMixin/useValidation');
+vi.mock('../../../mixins/validationMixin/useValidation');
 useValidation.mockImplementation(() => ({
   isValidation: ref(false),
   invalid: ref(false),

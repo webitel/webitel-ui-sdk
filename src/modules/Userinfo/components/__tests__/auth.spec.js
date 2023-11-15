@@ -11,9 +11,9 @@ import '../../../../../tests/mocks/localStorageMock';
 
 localStorage.setItem('access-token', 'jest');
 
-authAPI.setToken = jest.fn();
-userinfoAPI.getSession = jest.fn(() => ({}));
-userinfoAPI.getApplicationsAccess = jest.fn(() => ({}));
+authAPI.setToken = vi.fn();
+userinfoAPI.getSession = vi.fn(() => ({}));
+userinfoAPI.getApplicationsAccess = vi.fn(() => ({}));
 
 describe('Auth', () => {
   let store;
@@ -23,7 +23,7 @@ describe('Auth', () => {
     history: createWebHistory(),
     routes: [],
   });
-  router.replace = jest.fn();
+  router.replace = vi.fn();
 
   const userinfo = new UserinfoStoreModule().getModule();
   beforeEach(() => {

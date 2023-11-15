@@ -12,7 +12,7 @@ const team = ['1', '2'];
 const filterSchema = new ApiFilterSchema();
 
 describe('API filter mixin', () => {
-  const setValue = jest.fn();
+  const setValue = vi.fn();
   const Component = {
     render() {},
     mixins: [apiFilterMixin],

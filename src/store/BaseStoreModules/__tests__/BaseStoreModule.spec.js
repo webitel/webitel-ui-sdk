@@ -1,12 +1,12 @@
 import BaseStoreModule from '../BaseStoreModule';
 
 const APIModule = {
-  getList: jest.fn(),
-  get: jest.fn(),
-  add: jest.fn(),
-  update: jest.fn(),
-  patch: jest.fn(),
-  delete: jest.fn(),
+  getList: vi.fn(),
+  get: vi.fn(),
+  add: vi.fn(),
+  update: vi.fn(),
+  patch: vi.fn(),
+  delete: vi.fn(),
 };
 
 describe('Base Store Module', () => {

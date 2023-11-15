@@ -33,7 +33,7 @@ describe('QueryFiltersStoreModule getters', () => {
   });
   it('GET_FILTERS filters aggregator', () => {
     const { GET_FILTER } = module.getters;
-    module.getters.GET_FILTER = jest.fn((filter) => GET_FILTER(state)(filter));
+    module.getters.GET_FILTER = vi.fn((filter) => GET_FILTER(state)(filter));
     expect(module.getters.GET_FILTERS(state, module.getters))
       .toEqual({ agent: [1], search: 'jest' });
   });
@@ -42,7 +42,7 @@ describe('QueryFiltersStoreModule getters', () => {
 describe('QueryFiltersStoreModule actions', () => {
   const context = {
     state: { ...state },
-    commit: jest.fn(),
+    commit: vi.fn(),
   };
   const module = new QueryFiltersStoreModule().getModule();
   it('SET_FILTER: single value filter', () => {

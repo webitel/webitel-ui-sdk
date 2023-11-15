@@ -39,8 +39,8 @@ describe('Search Filter', () => {
   it('initial restoreValue() triggers setValue() method', async () => {
     const search = 'jest';
     await router.replace({ query: { [filterQuery]: search } });
-    const setValueMock = jest.fn();
-    jest.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
+    const setValueMock = vi.fn();
+    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
     shallowMount(SearchFilter, mountOptions);
     expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value: search });
   });

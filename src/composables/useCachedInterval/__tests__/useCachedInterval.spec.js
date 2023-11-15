@@ -1,14 +1,14 @@
 import { useCachedInterval } from '../useCachedInterval';
 
 describe('useCachedInterval', () => {
-  it('subscribe', (done) => {
-    const callback = jest.fn();
+  it('subscribe', async () => {
+    const callback = vi.fn();
     const { subscribe } = useCachedInterval({ timeout: 10 });
     subscribe(callback);
     expect(callback).toHaveBeenCalledTimes(1);
-    setTimeout(() => {
+    return await new Promise((resolve, reject) => setTimeout(() => {
       expect(callback).toHaveBeenCalledTimes(2);
-      done();
-    }, 10);
+      resolve();
+    }, 10));
   });
 });
