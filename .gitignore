@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-/docs-dist
+/docs/.vitepress/dist
+/docs/.vitepress/.cache
 /coverage
 demo.html
 jest.json

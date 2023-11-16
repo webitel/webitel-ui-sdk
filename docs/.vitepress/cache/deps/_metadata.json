@@ -1,0 +1,113 @@
+{
+  "hash": "cf98e065",
+  "browserHash": "afab24c0",
+  "optimized": {
+    "vue": {
+      "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "5bc67ced",
+      "needsInterop": false
+    },
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../../node_modules/@vue/devtools-api/lib/esm/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "127c289d",
+      "needsInterop": false
+    },
+    "vue-i18n": {
+      "src": "../../../../node_modules/vue-i18n/dist/vue-i18n.esm-bundler.js",
+      "file": "vue-i18n.js",
+      "fileHash": "78dffe20",
+      "needsInterop": false
+    },
+    "markdown-it": {
+      "src": "../../../../node_modules/markdown-it/index.js",
+      "file": "markdown-it.js",
+      "fileHash": "dff627f9",
+      "needsInterop": true
+    },
+    "webitel-sdk": {
+      "src": "../../../../node_modules/webitel-sdk/esm5/index.js",
+      "file": "webitel-sdk.js",
+      "fileHash": "77da4c29",
+      "needsInterop": false
+    },
+    "webitel-sdk/esm2015/enums": {
+      "src": "../../../../node_modules/webitel-sdk/esm2015/enums/index.js",
+      "file": "webitel-sdk_esm2015_enums.js",
+      "fileHash": "e973041c",
+      "needsInterop": false
+    },
+    "@vueuse/components": {
+      "src": "../../../../node_modules/@vueuse/components/index.mjs",
+      "file": "@vueuse_components.js",
+      "fileHash": "30c88a59",
+      "needsInterop": false
+    },
+    "@floating-ui/vue": {
+      "src": "../../../../node_modules/@floating-ui/vue/dist/floating-ui.vue.esm.js",
+      "file": "@floating-ui_vue.js",
+      "fileHash": "887f563a",
+      "needsInterop": false
+    },
+    "@vuepic/vue-datepicker": {
+      "src": "../../../../node_modules/@vuepic/vue-datepicker/dist/vue-datepicker.js",
+      "file": "@vuepic_vue-datepicker.js",
+      "fileHash": "48c112ab",
+      "needsInterop": false
+    },
+    "clipboard-copy": {
+      "src": "../../../../node_modules/clipboard-copy/index.js",
+      "file": "clipboard-copy.js",
+      "fileHash": "4ba5a062",
+      "needsInterop": true
+    },
+    "deep-copy": {
+      "src": "../../../../node_modules/deep-copy/index.js",
+      "file": "deep-copy.js",
+      "fileHash": "0f797bc0",
+      "needsInterop": true
+    },
+    "plyr": {
+      "src": "../../../../node_modules/plyr/dist/plyr.min.mjs",
+      "file": "plyr.js",
+      "fileHash": "7af40de1",
+      "needsInterop": false
+    },
+    "lodash/debounce": {
+      "src": "../../../../node_modules/lodash/debounce.js",
+      "file": "lodash_debounce.js",
+      "fileHash": "da460a53",
+      "needsInterop": true
+    },
+    "vue-multiselect": {
+      "src": "../../../../node_modules/vue-multiselect/dist/vue-multiselect.esm.js",
+      "file": "vue-multiselect.js",
+      "fileHash": "33d56b7c",
+      "needsInterop": false
+    },
+    "vue-observe-visibility": {
+      "src": "../../../../node_modules/vue-observe-visibility/dist/vue-observe-visibility.esm.js",
+      "file": "vue-observe-visibility.js",
+      "fileHash": "83f7aa79",
+      "needsInterop": false
+    },
+    "prismjs": {
+      "src": "../../../../node_modules/prismjs/prism.js",
+      "file": "prismjs.js",
+      "fileHash": "1b0ae204",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-J4VLYDXT": {
+      "file": "chunk-J4VLYDXT.js"
+    },
+    "chunk-2YWP3TL2": {
+      "file": "chunk-2YWP3TL2.js"
+    },
+    "chunk-ROME4SDB": {
+      "file": "chunk-ROME4SDB.js"
+    }
+  }
+}
