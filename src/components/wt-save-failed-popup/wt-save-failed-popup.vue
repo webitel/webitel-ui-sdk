@@ -24,7 +24,7 @@
       </wt-button>
       <wt-button
         color="secondary"
-        @click="downloadFlowJSON"
+        @click="download"
       >
         {{ $t('webitelUI.saveFailedPopup.exportToJson') }}
       </wt-button>
@@ -41,7 +41,7 @@
 <script>
 export default {
   name: 'FlowSaveFailedPopup',
-  emits: ['close-popup', 'save', 'download-flow-json'],
+  emits: ['close-popup', 'save', 'download'],
   methods: {
     closePopup() {
       this.$emit('close-popup');
@@ -49,8 +49,8 @@ export default {
     save() {
       this.$emit('save');
     },
-    downloadFlowJSON() {
-      this.$emit('download-flow-json');
+    download() {
+      this.$emit('download');
     },
   },
 };
