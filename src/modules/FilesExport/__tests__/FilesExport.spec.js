@@ -7,7 +7,10 @@ import '../../../../tests/mocks/localStorageMock';
 
 vi.mock('jszip');
 vi.mock('jszip-utils');
-vi.mock('file-saver');
+vi.mock('file-saver', () => ({
+  saveAs: vi.fn(),
+}));
+
 const dataList = [
   { files: [{ name: 'jest', id: '1', mimeType: 'mime/type' }] },
 ];

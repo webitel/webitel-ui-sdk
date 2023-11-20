@@ -5,7 +5,10 @@ import CSVExportMixin from '../mixins/exportCSVMixin';
 import '../../../../tests/mocks/localStorageMock';
 
 vi.mock('csv-stringify/lib/sync');
-vi.mock('file-saver');
+vi.mock('file-saver', () => ({
+  saveAs: vi.fn(),
+}));
+
 const dataList = [
   { _isSelected: true, id: 1 },
   { _isSelected: true, id: 2 },

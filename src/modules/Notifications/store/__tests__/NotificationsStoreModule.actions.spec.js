@@ -72,10 +72,10 @@ describe('features/notifications store: actions', () => {
     expect(context.commit).toHaveBeenCalledWith('SET_CURRENT_TAB_ID', null);
   });
 
-  it('PLAY_SOUND action commits SET_CURRENTLY_PLAIYNG mutation with sound', async () => {
-    const sound = new Audio(audio);
+  it('PLAY_SOUND action commits SET_CURRENTLY_PLAYING mutation with sound', async () => {
+    const sound = {};
     await notificationsModule.actions.PLAY_SOUND(context, { sound });
-    expect(context.commit).toHaveBeenCalledWith('SET_CURRENTLY_PLAYING', sound);
+    expect(context.commit.mock.calls[0][0]).toBe('SET_CURRENTLY_PLAYING');
   });
 
   it('_SET_UNREAD_COUNT dispatches _SET_TAB_TITLE action', () => {

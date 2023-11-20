@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { createStore } from 'vuex';
 import { createRouter, createWebHistory } from 'vue-router';
-import JSDOM from 'jsdom';
 import authAPI from '../../api/auth';
 import userinfoAPI from '../../api/userinfo';
 import Auth from '../the-auth.vue';
@@ -18,7 +17,6 @@ userinfoAPI.getApplicationsAccess = vi.fn(() => ({}));
 describe('Auth', () => {
   let store;
   let wrapper;
-  global.window = new JSDOM.JSDOM().window;
   const router = createRouter({
     history: createWebHistory(),
     routes: [],
