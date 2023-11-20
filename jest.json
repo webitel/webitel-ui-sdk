@@ -1,0 +1,1839 @@
+{
+  "stats": {
+    "duration": 27067,
+    "start": "2023-08-31T15:04:54.703Z",
+    "end": "2023-08-31T15:05:21.770Z",
+    "passes": 302,
+    "failures": 0,
+    "tests": 302
+  },
+  "failures": [],
+  "passes": [
+    {
+      "title": "correctly updates _dirty prop at object property change",
+      "fullTitle": "editProxy correctly updates _dirty prop at object property change",
+      "duration": 2825,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtHeadline renders a component",
+      "duration": 2992,
+      "errorCount": 0
+    },
+    {
+      "title": "renders headline main content via title-wrapper slot",
+      "fullTitle": "WtHeadline renders headline main content via title-wrapper slot",
+      "duration": 2992,
+      "errorCount": 0
+    },
+    {
+      "title": "renders headline title via title slot",
+      "fullTitle": "WtHeadline renders headline title via title slot",
+      "duration": 2992,
+      "errorCount": 0
+    },
+    {
+      "title": "renders headline search via search slot",
+      "fullTitle": "WtHeadline renders headline search via search slot",
+      "duration": 2992,
+      "errorCount": 0
+    },
+    {
+      "title": "renders headline actions via actions slot",
+      "fullTitle": "WtHeadline renders headline actions via actions slot",
+      "duration": 2992,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtButton renders a component",
+      "duration": 2981,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a button content via default slot",
+      "fullTitle": "WtButton renders a button content via default slot",
+      "duration": 2981,
+      "errorCount": 0
+    },
+    {
+      "title": "renders button spinner",
+      "fullTitle": "WtButton renders button spinner",
+      "duration": 2981,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtIndicator renders a component",
+      "duration": 3003,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component text, if passed",
+      "fullTitle": "WtIndicator renders a component text, if passed",
+      "duration": 3003,
+      "errorCount": 0
+    },
+    {
+      "title": "changed indicator color, if prop is passed",
+      "fullTitle": "WtIndicator changed indicator color, if prop is passed",
+      "duration": 3003,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "AuditFormQuestion renders a component",
+      "duration": 3093,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "AuditFormQuestionScore renders a component",
+      "duration": 3127,
+      "errorCount": 0
+    },
+    {
+      "title": "emits result change with selected radio score",
+      "fullTitle": "AuditFormQuestionScore emits result change with selected radio score",
+      "duration": 3127,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "API filter mixin Correctly sets value from $route query",
+      "duration": 3230,
+      "errorCount": 0
+    },
+    {
+      "title": "Sets empty array value if $route query is empty",
+      "fullTitle": "API filter mixin Sets empty array value if $route query is empty",
+      "duration": 3230,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "Enum filter mixin Correctly sets value from $route query",
+      "duration": 3393,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets single value from $route query",
+      "fullTitle": "Enum filter mixin Correctly sets single value from $route query",
+      "duration": 3393,
+      "errorCount": 0
+    },
+    {
+      "title": "Resets value after $route query reset",
+      "fullTitle": "Enum filter mixin Resets value after $route query reset",
+      "duration": 3393,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "AuditForm renders a component",
+      "duration": 3532,
+      "errorCount": 0
+    },
+    {
+      "title": "add question button triggers update question event",
+      "fullTitle": "AuditForm add question button triggers update question event",
+      "duration": 3532,
+      "errorCount": 0
+    },
+    {
+      "title": "delete event from child question emits update without passed question",
+      "fullTitle": "AuditForm delete event from child question emits update without passed question",
+      "duration": 3532,
+      "errorCount": 0
+    },
+    {
+      "title": "copy event from child question emits update with duplicated questions",
+      "fullTitle": "AuditForm copy event from child question emits update with duplicated questions",
+      "duration": 3532,
+      "errorCount": 0
+    },
+    {
+      "title": "initializes result depending on passed questions",
+      "fullTitle": "AuditForm initializes result depending on passed questions",
+      "duration": 3532,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtNotificationsBar renders a component",
+      "duration": 1459,
+      "errorCount": 0
+    },
+    {
+      "title": "shows notification at event bus event",
+      "fullTitle": "WtNotificationsBar shows notification at event bus event",
+      "duration": 1459,
+      "errorCount": 0
+    },
+    {
+      "title": "closes notification manually",
+      "fullTitle": "WtNotificationsBar closes notification manually",
+      "duration": 1459,
+      "errorCount": 0
+    },
+    {
+      "title": "closes notification automatically",
+      "fullTitle": "WtNotificationsBar closes notification automatically",
+      "duration": 1459,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtSwitcher renders a component",
+      "duration": 1152,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtSwitcher renders label text when passed",
+      "duration": 1152,
+      "errorCount": 0
+    },
+    {
+      "title": "toggles passed value at click",
+      "fullTitle": "WtSwitcher toggles passed value at click",
+      "duration": 1152,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "Pagination filter mixin Correctly sets value from $route query",
+      "duration": 1330,
+      "errorCount": 0
+    },
+    {
+      "title": "Sets initial value if $route query is empty",
+      "fullTitle": "Pagination filter mixin Sets initial value if $route query is empty",
+      "duration": 1330,
+      "errorCount": 0
+    },
+    {
+      "title": "Resets value after $route query reset",
+      "fullTitle": "Pagination filter mixin Resets value after $route query reset",
+      "duration": 1330,
+      "errorCount": 0
+    },
+    {
+      "title": "At \"prev\" page, changes query and emits event",
+      "fullTitle": "Pagination filter mixin At \"prev\" page, changes query and emits event",
+      "duration": 1330,
+      "errorCount": 0
+    },
+    {
+      "title": "At \"next\" page, changes query and emits event",
+      "fullTitle": "Pagination filter mixin At \"next\" page, changes query and emits event",
+      "duration": 1330,
+      "errorCount": 0
+    },
+    {
+      "title": "At \"sizeChange\", changes query and emits event",
+      "fullTitle": "Pagination filter mixin At \"sizeChange\", changes query and emits event",
+      "duration": 1330,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "Sort filter mixin Correctly sets value from $route query",
+      "duration": 1301,
+      "errorCount": 0
+    },
+    {
+      "title": "After \"sort\" trigger, header column sort value changes properly",
+      "fullTitle": "Sort filter mixin After \"sort\" trigger, header column sort value changes properly",
+      "duration": 1301,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTable renders a component",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "renders table data rows",
+      "fullTitle": "WtTable renders table data rows",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "renders table headers",
+      "fullTitle": "WtTable renders table headers",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "do not renders table footer by default",
+      "fullTitle": "WtTable do not renders table footer by default",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "renders table footer if footer slot is passed",
+      "fullTitle": "WtTable renders table footer if footer slot is passed",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "emits sort event at header click when sortable is true",
+      "fullTitle": "WtTable emits sort event at header click when sortable is true",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "draws sort arrow, if a column is sorted",
+      "fullTitle": "WtTable draws sort arrow, if a column is sorted",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "selects all rows at header checkbox click",
+      "fullTitle": "WtTable selects all rows at header checkbox click",
+      "duration": 1519,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "Sort filter mixin Correctly sets value from $route query",
+      "duration": 1358,
+      "errorCount": 0
+    },
+    {
+      "title": "After \"sort\" trigger, header column sort value changes properly",
+      "fullTitle": "Sort filter mixin After \"sort\" trigger, header column sort value changes properly",
+      "duration": 1358,
+      "errorCount": 0
+    },
+    {
+      "title": "After \"sort\" trigger, url query changes properly",
+      "fullTitle": "Sort filter mixin After \"sort\" trigger, url query changes properly",
+      "duration": 1358,
+      "errorCount": 0
+    },
+    {
+      "title": "goes through all important steps to save file",
+      "fullTitle": "File Export goes through all important steps to save file",
+      "duration": 1527,
+      "errorCount": 0
+    },
+    {
+      "title": "mixin correctly computes empty export progress from class data",
+      "fullTitle": "File Export mixin correctly computes empty export progress from class data",
+      "duration": 1527,
+      "errorCount": 0
+    },
+    {
+      "title": "mixin correctly computes selectedFiles()",
+      "fullTitle": "File Export mixin correctly computes selectedFiles()",
+      "duration": 1527,
+      "errorCount": 0
+    },
+    {
+      "title": "mixin catches export error and resets isFilesLoading on export error",
+      "fullTitle": "File Export mixin catches export error and resets isFilesLoading on export error",
+      "duration": 1527,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtStatusSelect renders a component",
+      "duration": 1159,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly represents duration",
+      "fullTitle": "WtStatusSelect correctly represents duration",
+      "duration": 1159,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtHistoryIconAction renders a component",
+      "duration": 1365,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel-Kebab",
+      "fullTitle": "Case converters Camel-Kebab",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Snake-Kebab",
+      "fullTitle": "Case converters Snake-Kebab",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel-Snake",
+      "fullTitle": "Case converters Camel-Snake",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel-Snake, test case 1: do not convert 1st uppercase letter",
+      "fullTitle": "Case converters Camel-Snake, test case 1: do not convert 1st uppercase letter",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel <- Snake skips first char \"_\"",
+      "fullTitle": "Case converters Camel <- Snake skips first char \"_\"",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel-Snake Objects",
+      "fullTitle": "Case converters Camel-Snake Objects",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel-Snake Objects: NULL VALUES",
+      "fullTitle": "Case converters Camel-Snake Objects: NULL VALUES",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel-Snake Arrays",
+      "fullTitle": "Case converters Camel-Snake Arrays",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Camel-to-Snake Object skips passed keys",
+      "fullTitle": "Case converters Camel-to-Snake Object skips passed keys",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "Snake-to-Camel Object skips passed keys",
+      "fullTitle": "Case converters Snake-to-Camel Object skips passed keys",
+      "duration": 1116,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "Auth renders a component",
+      "duration": 5528,
+      "errorCount": 0
+    },
+    {
+      "title": "sets token, gets session and opens app after auth token message emit",
+      "fullTitle": "Auth sets token, gets session and opens app after auth token message emit",
+      "duration": 5528,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtCcAgentStatusTimers renders a component",
+      "duration": 1251,
+      "errorCount": 0
+    },
+    {
+      "title": "renders component with empty status prop",
+      "fullTitle": "WtCcAgentStatusTimers renders component with empty status prop",
+      "duration": 1251,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtPageWrapper renders a component",
+      "duration": 1292,
+      "errorCount": 0
+    },
+    {
+      "title": "renders page wrapper header via header slot",
+      "fullTitle": "WtPageWrapper renders page wrapper header via header slot",
+      "duration": 1292,
+      "errorCount": 0
+    },
+    {
+      "title": "renders page wrapper actions panel via actions panel slot",
+      "fullTitle": "WtPageWrapper renders page wrapper actions panel via actions panel slot",
+      "duration": 1292,
+      "errorCount": 0
+    },
+    {
+      "title": "renders page wrapper main content via main slot",
+      "fullTitle": "WtPageWrapper renders page wrapper main content via main slot",
+      "duration": 1292,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtRadio renders a component",
+      "duration": 1192,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtRadio renders label text when passed",
+      "duration": 1192,
+      "errorCount": 0
+    },
+    {
+      "title": "toggles passed value at click",
+      "fullTitle": "WtRadio toggles passed value at click",
+      "duration": 1192,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "ExpandTransition renders a component",
+      "duration": 1282,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtHint renders a component",
+      "duration": 1298,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtIcon renders a component",
+      "duration": 1244,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes icon name",
+      "fullTitle": "WtIcon correctly computes icon name",
+      "duration": 1244,
+      "errorCount": 0
+    },
+    {
+      "title": "doesn't mutate original object",
+      "fullTitle": "updateObject doesn't mutate original object",
+      "duration": 1236,
+      "errorCount": 0
+    },
+    {
+      "title": "changes shallow value",
+      "fullTitle": "updateObject changes shallow value",
+      "duration": 1236,
+      "errorCount": 0
+    },
+    {
+      "title": "changes deep value",
+      "fullTitle": "updateObject changes deep value",
+      "duration": 1236,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtInput renders a component",
+      "duration": 1248,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtInput renders label text when passed",
+      "duration": 1248,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly returns nested object values",
+      "fullTitle": "getNamespacedState correctly returns nested object values",
+      "duration": 1212,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTableColumnSelect renders a component",
+      "duration": 1525,
+      "errorCount": 0
+    },
+    {
+      "title": "column select popup is invisible by default",
+      "fullTitle": "WtTableColumnSelect column select popup is invisible by default",
+      "duration": 1525,
+      "errorCount": 0
+    },
+    {
+      "title": "column select popup is opening by icon-btn click",
+      "fullTitle": "WtTableColumnSelect column select popup is opening by icon-btn click",
+      "duration": 1525,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtPageHeader renders a component",
+      "duration": 1400,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_THIS_TAB_ID sets thisTabId to state",
+      "fullTitle": "features/notifications store: mutations SET_THIS_TAB_ID sets thisTabId to state",
+      "duration": 1239,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_CURRENT_TAB_ID sets currentTabId to state",
+      "fullTitle": "features/notifications store: mutations SET_CURRENT_TAB_ID sets currentTabId to state",
+      "duration": 1239,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_BROADCAST_CHANNEL sets broadcastChannel to state",
+      "fullTitle": "features/notifications store: mutations SET_BROADCAST_CHANNEL sets broadcastChannel to state",
+      "duration": 1239,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_CURRENTLY_PLAIYNG mutation sets currentlyPlaying to state",
+      "fullTitle": "features/notifications store: mutations SET_CURRENTLY_PLAIYNG mutation sets currentlyPlaying to state",
+      "duration": 1239,
+      "errorCount": 0
+    },
+    {
+      "title": "RESET_CURRENTLY_PLAYING mutation sets currentlyPlaying to false in state",
+      "fullTitle": "features/notifications store: mutations RESET_CURRENTLY_PLAYING mutation sets currentlyPlaying to false in state",
+      "duration": 1239,
+      "errorCount": 0
+    },
+    {
+      "title": "_SET_UNREAD_COUNT mutation sets unreadCount to state",
+      "fullTitle": "features/notifications store: mutations _SET_UNREAD_COUNT mutation sets unreadCount to state",
+      "duration": 1239,
+      "errorCount": 0
+    },
+    {
+      "title": "debounces call",
+      "fullTitle": "debounce debounces call",
+      "duration": 1145,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "Abstract Enum Filter renders a component",
+      "duration": 1533,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtDivider renders a component",
+      "duration": 1207,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtDummy renders a component",
+      "duration": 1192,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "AuditFormQuestionOptions renders a component",
+      "duration": 1602,
+      "errorCount": 0
+    },
+    {
+      "title": "adds new question option at \"add\" button click",
+      "fullTitle": "AuditFormQuestionOptions adds new question option at \"add\" button click",
+      "duration": 1602,
+      "errorCount": 0
+    },
+    {
+      "title": "deletes existing question option at \"delete\" icon-btn click",
+      "fullTitle": "AuditFormQuestionOptions deletes existing question option at \"delete\" icon-btn click",
+      "duration": 1602,
+      "errorCount": 0
+    },
+    {
+      "title": "emits result change with selected radio option score",
+      "fullTitle": "AuditFormQuestionOptions emits result change with selected radio option score",
+      "duration": 1602,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTooltip renders a component",
+      "duration": 1379,
+      "errorCount": 0
+    },
+    {
+      "title": "changed tooltip color, if prop is passed",
+      "fullTitle": "WtTooltip changed tooltip color, if prop is passed",
+      "duration": 1379,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtPagination renders a component",
+      "duration": 1493,
+      "errorCount": 0
+    },
+    {
+      "title": "debounces size change event when debounce prop is true",
+      "fullTitle": "WtPagination debounces size change event when debounce prop is true",
+      "duration": 1493,
+      "errorCount": 0
+    },
+    {
+      "title": "changes pages at icon btn click",
+      "fullTitle": "WtPagination changes pages at icon btn click",
+      "duration": 1493,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtLabel renders a component",
+      "duration": 1151,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtLoadBar renders a component",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtIconBtn renders a component",
+      "duration": 1115,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtProgressBar renders a component",
+      "duration": 1072,
+      "errorCount": 0
+    },
+    {
+      "title": "isOverflow correctly computes overflow=true",
+      "fullTitle": "WtProgressBar isOverflow correctly computes overflow=true",
+      "duration": 1072,
+      "errorCount": 0
+    },
+    {
+      "title": "isOverflow correctly computes overflow=false",
+      "fullTitle": "WtProgressBar isOverflow correctly computes overflow=false",
+      "duration": 1072,
+      "errorCount": 0
+    },
+    {
+      "title": "sortToQueryAdapter",
+      "fullTitle": " sortToQueryAdapter",
+      "duration": 1076,
+      "errorCount": 0
+    },
+    {
+      "title": "queryToSortAdapter",
+      "fullTitle": " queryToSortAdapter",
+      "duration": 1076,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "MultiselectMixin renders a component",
+      "duration": 1087,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly computes internal search options",
+      "fullTitle": "MultiselectMixin Correctly computes internal search options",
+      "duration": 1087,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly computes internal search options: search case",
+      "fullTitle": "MultiselectMixin Correctly computes internal search options: search case",
+      "duration": 1087,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtChip renders a component",
+      "duration": 1080,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a chip content via default slot",
+      "fullTitle": "WtChip renders a chip content via default slot",
+      "duration": 1080,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTimeInput renders a component",
+      "duration": 1139,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtTimeInput renders label text when passed",
+      "duration": 1139,
+      "errorCount": 0
+    },
+    {
+      "title": "Array of objects",
+      "fullTitle": "URL Controller mixin Set and Get operations Array of objects",
+      "duration": 1157,
+      "errorCount": 0
+    },
+    {
+      "title": "Array of values",
+      "fullTitle": "URL Controller mixin Set and Get operations Array of values",
+      "duration": 1157,
+      "errorCount": 0
+    },
+    {
+      "title": "String value",
+      "fullTitle": "URL Controller mixin Set and Get operations String value",
+      "duration": 1157,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "Enum filter mixin Correctly sets value from $route query",
+      "duration": 1286,
+      "errorCount": 0
+    },
+    {
+      "title": "Sets empty array value if $route query is empty",
+      "fullTitle": "Enum filter mixin Sets empty array value if $route query is empty",
+      "duration": 1286,
+      "errorCount": 0
+    },
+    {
+      "title": "Attaches locales to options, if they have \"locale\" key",
+      "fullTitle": "Enum filter mixin Attaches locales to options, if they have \"locale\" key",
+      "duration": 1286,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "FilterFromTo Filter renders a component",
+      "duration": 1360,
+      "errorCount": 0
+    },
+    {
+      "title": "initial restoreValue() triggers setValue() method: From case",
+      "fullTitle": "FilterFromTo Filter initial restoreValue() triggers setValue() method: From case",
+      "duration": 1360,
+      "errorCount": 0
+    },
+    {
+      "title": "initial restoreValue() triggers setValue() method: To case",
+      "fullTitle": "FilterFromTo Filter initial restoreValue() triggers setValue() method: To case",
+      "duration": 1360,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTextarea renders a component",
+      "duration": 1353,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtTextarea renders label text when passed",
+      "duration": 1353,
+      "errorCount": 0
+    },
+    {
+      "title": "emits \"Enter\" event if chat-mode prop is passed",
+      "fullTitle": "WtTextarea emits \"Enter\" event if chat-mode prop is passed",
+      "duration": 1353,
+      "errorCount": 0
+    },
+    {
+      "title": "do not emit \"Enter\" event if chat-mode prop is not passed",
+      "fullTitle": "WtTextarea do not emit \"Enter\" event if chat-mode prop is not passed",
+      "duration": 1353,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "Abstract Api Filter renders a component",
+      "duration": 1391,
+      "errorCount": 0
+    },
+    {
+      "title": "calls filter schema API search()",
+      "fullTitle": "Abstract Api Filter calls filter schema API search()",
+      "duration": 1391,
+      "errorCount": 0
+    },
+    {
+      "title": " filter schema API fetchSelected()",
+      "fullTitle": "Abstract Api Filter  filter schema API fetchSelected()",
+      "duration": 1391,
+      "errorCount": 0
+    },
+    {
+      "title": "listResponseHandler returns only lookups from response",
+      "fullTitle": "filter api Defaults listResponseHandler returns only lookups from response",
+      "duration": 1096,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtNavigationBar renders a component",
+      "duration": 1544,
+      "errorCount": 0
+    },
+    {
+      "title": "renders navigation links",
+      "fullTitle": "WtNavigationBar renders navigation links",
+      "duration": 1544,
+      "errorCount": 0
+    },
+    {
+      "title": "renders navigation expansions with subNav inside it",
+      "fullTitle": "WtNavigationBar renders navigation expansions with subNav inside it",
+      "duration": 1544,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes subNav nested routes",
+      "fullTitle": "WtNavigationBar correctly computes subNav nested routes",
+      "duration": 1544,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtSearchBar renders a component",
+      "duration": 1275,
+      "errorCount": 0
+    },
+    {
+      "title": "debounces search event when debounce prop is true",
+      "fullTitle": "WtSearchBar debounces search event when debounce prop is true",
+      "duration": 1275,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes duration",
+      "fullTitle": "useRepresentableAgentPauseCause correctly computes duration",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "isOverflow with limit = 0 returns false",
+      "fullTitle": "useRepresentableAgentPauseCause isOverflow with limit = 0 returns false",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "isOverflow with duration < limit returns false",
+      "fullTitle": "useRepresentableAgentPauseCause isOverflow with duration < limit returns false",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "isOverflow with duration > limit returns true",
+      "fullTitle": "useRepresentableAgentPauseCause isOverflow with duration > limit returns true",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "isOverflow with duration = limit returns false",
+      "fullTitle": "useRepresentableAgentPauseCause isOverflow with duration = limit returns false",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes progressColor",
+      "fullTitle": "useRepresentableAgentPauseCause correctly computes progressColor",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes progressColor with duration > limit",
+      "fullTitle": "useRepresentableAgentPauseCause correctly computes progressColor with duration > limit",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes progressColor with duration < limit",
+      "fullTitle": "useRepresentableAgentPauseCause correctly computes progressColor with duration < limit",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes progressColor with duration = limit",
+      "fullTitle": "useRepresentableAgentPauseCause correctly computes progressColor with duration = limit",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly computes limit",
+      "fullTitle": "useRepresentableAgentPauseCause correctly computes limit",
+      "duration": 1187,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtSelectButton renders a component",
+      "duration": 1615,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a button content via default slot",
+      "fullTitle": "WtSelectButton renders a button content via default slot",
+      "duration": 1615,
+      "errorCount": 0
+    },
+    {
+      "title": "should rotate the arrow",
+      "fullTitle": "WtSelectButton should rotate the arrow",
+      "duration": 1615,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "API filter mixin Correctly sets value from $route query",
+      "duration": 1396,
+      "errorCount": 0
+    },
+    {
+      "title": "Sets empty array value if $route query is empty",
+      "fullTitle": "API filter mixin Sets empty array value if $route query is empty",
+      "duration": 1396,
+      "errorCount": 0
+    },
+    {
+      "title": "Resets value after $route query reset",
+      "fullTitle": "API filter mixin Resets value after $route query reset",
+      "duration": 1396,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTagsInput renders a component",
+      "duration": 1299,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtTagsInput renders label text when passed",
+      "duration": 1299,
+      "errorCount": 0
+    },
+    {
+      "title": "by default emits \"input\" event at native \"tag\" event",
+      "fullTitle": "WtTagsInput by default emits \"input\" event at native \"tag\" event",
+      "duration": 1299,
+      "errorCount": 0
+    },
+    {
+      "title": "in manual mode doesnt emit \"input\" event at native \"tag\" event",
+      "fullTitle": "WtTagsInput in manual mode doesnt emit \"input\" event at native \"tag\" event",
+      "duration": 1299,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtDatepicker renders a component",
+      "duration": 1319,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtDatepicker renders label text when passed",
+      "duration": 1319,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtHeadlineNav renders a component",
+      "duration": 1193,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "Search Filter renders a component",
+      "duration": 1309,
+      "errorCount": 0
+    },
+    {
+      "title": "initial restoreValue() triggers setValue() method",
+      "fullTitle": "Search Filter initial restoreValue() triggers setValue() method",
+      "duration": 1309,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly sets value from $route query",
+      "fullTitle": "Pagination filter mixin Correctly sets value from $route query",
+      "duration": 1394,
+      "errorCount": 0
+    },
+    {
+      "title": "At \"prev\" page, changes query and emits event",
+      "fullTitle": "Pagination filter mixin At \"prev\" page, changes query and emits event",
+      "duration": 1394,
+      "errorCount": 0
+    },
+    {
+      "title": "At \"next\" page, changes query and emits event",
+      "fullTitle": "Pagination filter mixin At \"next\" page, changes query and emits event",
+      "duration": 1394,
+      "errorCount": 0
+    },
+    {
+      "title": "At \"restPage\" method, changes query and emits event",
+      "fullTitle": "Pagination filter mixin At \"restPage\" method, changes query and emits event",
+      "duration": 1394,
+      "errorCount": 0
+    },
+    {
+      "title": "At \"sizeChange\", changes query and emits event",
+      "fullTitle": "Pagination filter mixin At \"sizeChange\", changes query and emits event",
+      "duration": 1394,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "AuditFormQuestionWriteWrapper renders a component",
+      "duration": 1647,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly changes question",
+      "fullTitle": "AuditFormQuestionWriteWrapper correctly changes question",
+      "duration": 1647,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly changes question type to Score",
+      "fullTitle": "AuditFormQuestionWriteWrapper correctly changes question type to Score",
+      "duration": 1647,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly changes question type to Options",
+      "fullTitle": "AuditFormQuestionWriteWrapper correctly changes question type to Options",
+      "duration": 1647,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "Filters Panel Wrapper renders a component",
+      "duration": 1182,
+      "errorCount": 0
+    },
+    {
+      "title": "emits \"reset\" event at wt-table-actions \"filterReset\" event",
+      "fullTitle": "Filters Panel Wrapper emits \"reset\" event at wt-table-actions \"filterReset\" event",
+      "duration": 1182,
+      "errorCount": 0
+    },
+    {
+      "title": "toggles \"filters-panel-wrapper--opened\" class at\n   wt-table-actions \"settings\" event",
+      "fullTitle": "Filters Panel Wrapper toggles \"filters-panel-wrapper--opened\" class at\n   wt-table-actions \"settings\" event",
+      "duration": 1182,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "AuditFormQuestionReadWrapper renders a component",
+      "duration": 1566,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtSelect renders a component",
+      "duration": 1251,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtSelect renders label text when passed",
+      "duration": 1251,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTabs renders a component",
+      "duration": 1150,
+      "errorCount": 0
+    },
+    {
+      "title": "component emits change at tab click",
+      "fullTitle": "WtTabs component emits change at tab click",
+      "duration": 1150,
+      "errorCount": 0
+    },
+    {
+      "title": "renders tab default content",
+      "fullTitle": "WtTabs renders tab default content",
+      "duration": 1150,
+      "errorCount": 0
+    },
+    {
+      "title": "renders tab custom content via default slot",
+      "fullTitle": "WtTabs renders tab custom content via default slot",
+      "duration": 1150,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtAvatar renders a component",
+      "duration": 1163,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtAddIconAction renders a component",
+      "duration": 1160,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTimepicker renders a component",
+      "duration": 1240,
+      "errorCount": 0
+    },
+    {
+      "title": "renders only specified by format time inputs",
+      "fullTitle": "WtTimepicker renders only specified by format time inputs",
+      "duration": 1240,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly converts value from MIN time-input to output",
+      "fullTitle": "WtTimepicker Correctly converts value from MIN time-input to output",
+      "duration": 1240,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly converts value from HOUR time-input to output",
+      "fullTitle": "WtTimepicker Correctly converts value from HOUR time-input to output",
+      "duration": 1240,
+      "errorCount": 0
+    },
+    {
+      "title": "Correctly converts value from SEC time-input to output",
+      "fullTitle": "WtTimepicker Correctly converts value from SEC time-input to output",
+      "duration": 1240,
+      "errorCount": 0
+    },
+    {
+      "title": "Array of objects",
+      "fullTitle": "URL Controller mixin Set and Get operations Array of objects",
+      "duration": 1797,
+      "errorCount": 0
+    },
+    {
+      "title": "Array of values",
+      "fullTitle": "URL Controller mixin Set and Get operations Array of values",
+      "duration": 1797,
+      "errorCount": 0
+    },
+    {
+      "title": "String value",
+      "fullTitle": "URL Controller mixin Set and Get operations String value",
+      "duration": 1797,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtIconAction renders a component",
+      "duration": 2425,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtContextMenu renders a component",
+      "duration": 3005,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtAppNavigator renders a component",
+      "duration": 3035,
+      "errorCount": 0
+    },
+    {
+      "title": "renders specified app cards",
+      "fullTitle": "WtAppNavigator renders specified app cards",
+      "duration": 3035,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtSlider renders a component",
+      "duration": 2776,
+      "errorCount": 0
+    },
+    {
+      "title": "duration from sec value",
+      "fullTitle": "Case converters duration from sec value",
+      "duration": 2033,
+      "errorCount": 0
+    },
+    {
+      "title": "duration from sec string value",
+      "fullTitle": "Case converters duration from sec string value",
+      "duration": 2033,
+      "errorCount": 0
+    },
+    {
+      "title": "duration from false value",
+      "fullTitle": "Case converters duration from false value",
+      "duration": 2033,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtCopyAction renders a component",
+      "duration": 2846,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtDownloadIconAction renders a component",
+      "duration": 2690,
+      "errorCount": 0
+    },
+    {
+      "title": "prevents call on hidden page",
+      "fullTitle": "preventHiddenPageCallsDecorator prevents call on hidden page",
+      "duration": 2894,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "AuditFormQuestionOptionsWriteRow renders a component",
+      "duration": 2783,
+      "errorCount": 0
+    },
+    {
+      "title": "emits \"delete\" event at \"delete\" icon-btn click",
+      "fullTitle": "AuditFormQuestionOptionsWriteRow emits \"delete\" event at \"delete\" icon-btn click",
+      "duration": 2783,
+      "errorCount": 0
+    },
+    {
+      "title": "creates default class without passed params",
+      "fullTitle": "Api Filter Schema creates default class without passed params",
+      "duration": 2564,
+      "errorCount": 0
+    },
+    {
+      "title": "calls API getList() method at search()",
+      "fullTitle": "Api Filter Schema calls API getList() method at search()",
+      "duration": 2564,
+      "errorCount": 0
+    },
+    {
+      "title": "calls API getList() method at fetchSelected()",
+      "fullTitle": "Api Filter Schema calls API getList() method at fetchSelected()",
+      "duration": 2564,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtStepper renders a component",
+      "duration": 1854,
+      "errorCount": 0
+    },
+    {
+      "title": "INITIALIZE action dispatches _SETUP_THIS_TAB_ID action",
+      "fullTitle": "features/notifications store: actions INITIALIZE action dispatches _SETUP_THIS_TAB_ID action",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "INITIALIZE action dispatches _SETUP_UNREAD_COUND_BROADCAST_LISTENING action",
+      "fullTitle": "features/notifications store: actions INITIALIZE action dispatches _SETUP_UNREAD_COUND_BROADCAST_LISTENING action",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "INITIALIZE action dispatches _SETUP_THIS_TAB_ID action",
+      "fullTitle": "features/notifications store: actions INITIALIZE action dispatches _SETUP_THIS_TAB_ID action",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "DESTROY action dispatches STOP_SOUND action",
+      "fullTitle": "features/notifications store: actions DESTROY action dispatches STOP_SOUND action",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "DESTROY action dispatches _REMOVE_CURRENT_TAB_ID action",
+      "fullTitle": "features/notifications store: actions DESTROY action dispatches _REMOVE_CURRENT_TAB_ID action",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "INCREMENT_UNREAD_COUNT action dispatches _SET_UNREAD_COUNT and increases unreadCount",
+      "fullTitle": "features/notifications store: actions INCREMENT_UNREAD_COUNT action dispatches _SET_UNREAD_COUNT and increases unreadCount",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_SETUP_UNREAD_COUND_BROADCAST_LISTENING action commits SET_BROADCAST_CHANNEL mutation",
+      "fullTitle": "features/notifications store: actions _SETUP_UNREAD_COUND_BROADCAST_LISTENING action commits SET_BROADCAST_CHANNEL mutation",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_SUBSCRIBE_TAB_CLOSING action commits SET_CURRENT_TAB_ID mutation",
+      "fullTitle": "features/notifications store: actions _SUBSCRIBE_TAB_CLOSING action commits SET_CURRENT_TAB_ID mutation",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "PLAY_SOUND action commits SET_CURRENTLY_PLAIYNG mutation with sound",
+      "fullTitle": "features/notifications store: actions PLAY_SOUND action commits SET_CURRENTLY_PLAIYNG mutation with sound",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_SET_UNREAD_COUNT dispatches _SET_TAB_TITLE action",
+      "fullTitle": "features/notifications store: actions _SET_UNREAD_COUNT dispatches _SET_TAB_TITLE action",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_SETUP_THIS_TAB_ID commits SET_THIS_TAB_ID mutation",
+      "fullTitle": "features/notifications store: actions _SETUP_THIS_TAB_ID commits SET_THIS_TAB_ID mutation",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_SETUP_THIS_TAB_ID commits SET_CURRENT_TAB_ID mutation",
+      "fullTitle": "features/notifications store: actions _SETUP_THIS_TAB_ID commits SET_CURRENT_TAB_ID mutation",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_SET_UNREAD_COUNT action commits _SET_UNREAD_COUNT mutation with count",
+      "fullTitle": "features/notifications store: actions _SET_UNREAD_COUNT action commits _SET_UNREAD_COUNT mutation with count",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_RESET_UNREAD_COUNT action does not dispatch if unread count is 0",
+      "fullTitle": "features/notifications store: actions _RESET_UNREAD_COUNT action does not dispatch if unread count is 0",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "_RESET_UNREAD_COUNT action dispatches _SET_UNREAD_COUNT passing unread count equal to 0",
+      "fullTitle": "features/notifications store: actions _RESET_UNREAD_COUNT action dispatches _SET_UNREAD_COUNT passing unread count equal to 0",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "PLAY_SOUND action sets localStorage wtIsPlaying to true",
+      "fullTitle": "features/notifications store: actions PLAY_SOUND action sets localStorage wtIsPlaying to true",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "STOP_SOUND action commits RESET_CURRENTLY_PLAYING mutation",
+      "fullTitle": "features/notifications store: actions STOP_SOUND action commits RESET_CURRENTLY_PLAYING mutation",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "STOP_SOUND action removes localStorage wtIsPlaying",
+      "fullTitle": "features/notifications store: actions STOP_SOUND action removes localStorage wtIsPlaying",
+      "duration": 1737,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtDeleteIconAction renders a component",
+      "duration": 1289,
+      "errorCount": 0
+    },
+    {
+      "title": "goes through all important steps to generate and save csv",
+      "fullTitle": "CSV Export goes through all important steps to generate and save csv",
+      "duration": 2054,
+      "errorCount": 0
+    },
+    {
+      "title": "mixin correctly computes empty export progress from class data",
+      "fullTitle": "CSV Export mixin correctly computes empty export progress from class data",
+      "duration": 2054,
+      "errorCount": 0
+    },
+    {
+      "title": "computes selected ids and isAnySelected",
+      "fullTitle": "CSV Export computes selected ids and isAnySelected",
+      "duration": 2054,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly generates csv headers from passed fields",
+      "fullTitle": "CSV Export correctly generates csv headers from passed fields",
+      "duration": 2054,
+      "errorCount": 0
+    },
+    {
+      "title": "config csv export from localStorage",
+      "fullTitle": "CSV Export config csv export from localStorage",
+      "duration": 2054,
+      "errorCount": 0
+    },
+    {
+      "title": "prettifies bytes to kb's",
+      "fullTitle": "prettifyFileSize prettifies bytes to kb's",
+      "duration": 2490,
+      "errorCount": 0
+    },
+    {
+      "title": "prettifies bytes to mb's",
+      "fullTitle": "prettifyFileSize prettifies bytes to mb's",
+      "duration": 2490,
+      "errorCount": 0
+    },
+    {
+      "title": "handles 0 size",
+      "fullTitle": "prettifyFileSize handles 0 size",
+      "duration": 2490,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtLoader renders a component",
+      "duration": 2278,
+      "errorCount": 0
+    },
+    {
+      "title": "falsy cases (not empty)",
+      "fullTitle": "isEmpty falsy cases (not empty)",
+      "duration": 2000,
+      "errorCount": 0
+    },
+    {
+      "title": "truthy cases (empty)",
+      "fullTitle": "isEmpty truthy cases (empty)",
+      "duration": 2000,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtHeaderActions renders a component",
+      "duration": 2351,
+      "errorCount": 0
+    },
+    {
+      "title": "renders user data",
+      "fullTitle": "WtHeaderActions renders user data",
+      "duration": 2351,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "Error Page renders a component",
+      "duration": 2444,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component with 404 type",
+      "fullTitle": "Error Page renders a component with 404 type",
+      "duration": 2444,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component with 403 type",
+      "fullTitle": "Error Page renders a component with 403 type",
+      "duration": 2444,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtPopup renders a component",
+      "duration": 2381,
+      "errorCount": 0
+    },
+    {
+      "title": "renders popup header via header slot",
+      "fullTitle": "WtPopup renders popup header via header slot",
+      "duration": 2381,
+      "errorCount": 0
+    },
+    {
+      "title": "renders popup header via title slot",
+      "fullTitle": "WtPopup renders popup header via title slot",
+      "duration": 2381,
+      "errorCount": 0
+    },
+    {
+      "title": "renders popup main via main slot",
+      "fullTitle": "WtPopup renders popup main via main slot",
+      "duration": 2381,
+      "errorCount": 0
+    },
+    {
+      "title": "renders popup actions via actions slot",
+      "fullTitle": "WtPopup renders popup actions via actions slot",
+      "duration": 2381,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "DatetimeFilter Filter renders a component",
+      "duration": 2707,
+      "errorCount": 0
+    },
+    {
+      "title": "initial restoreValue() triggers setValue() method",
+      "fullTitle": "DatetimeFilter Filter initial restoreValue() triggers setValue() method",
+      "duration": 2707,
+      "errorCount": 0
+    },
+    {
+      "title": "prettifies date-format time",
+      "fullTitle": "prettifyTime prettifies date-format time",
+      "duration": 2684,
+      "errorCount": 0
+    },
+    {
+      "title": "prettifies number-format time",
+      "fullTitle": "prettifyTime prettifies number-format time",
+      "duration": 2684,
+      "errorCount": 0
+    },
+    {
+      "title": "prettifies string-format time",
+      "fullTitle": "prettifyTime prettifies string-format time",
+      "duration": 2684,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtInputInfo renders a component",
+      "duration": 2636,
+      "errorCount": 0
+    },
+    {
+      "title": "detects validation prop",
+      "fullTitle": "Validation mixin detects validation prop",
+      "duration": 3115,
+      "errorCount": 0
+    },
+    {
+      "title": "computes error message on validation error",
+      "fullTitle": "Validation mixin computes error message on validation error",
+      "duration": 3115,
+      "errorCount": 0
+    },
+    {
+      "title": "prioritizes error messages",
+      "fullTitle": "Validation mixin prioritizes error messages",
+      "duration": 3115,
+      "errorCount": 0
+    },
+    {
+      "title": "attaches api module and generates API actions from it",
+      "fullTitle": "Base Store Module attaches api module and generates API actions from it",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "generated GET_LIST correctly gets passed params",
+      "fullTitle": "Base Store Module generated GET_LIST correctly gets passed params",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "generated GET_ITEM correctly gets passed params",
+      "fullTitle": "Base Store Module generated GET_ITEM correctly gets passed params",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "generated POST_ITEM correctly gets passed params",
+      "fullTitle": "Base Store Module generated POST_ITEM correctly gets passed params",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "generated PATCH_ITEM correctly gets passed params",
+      "fullTitle": "Base Store Module generated PATCH_ITEM correctly gets passed params",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "generated UPD_ITEM correctly gets passed params",
+      "fullTitle": "Base Store Module generated UPD_ITEM correctly gets passed params",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "generated DELETE_ITEM correctly gets passed params",
+      "fullTitle": "Base Store Module generated DELETE_ITEM correctly gets passed params",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "sets child modules",
+      "fullTitle": "Base Store Module sets child modules",
+      "duration": 2602,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtBadge renders a component",
+      "duration": 2200,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtEditIconAction renders a component",
+      "duration": 2565,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtRoundedAction renders a component",
+      "duration": 2790,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtTableActions renders a component",
+      "duration": 2682,
+      "errorCount": 0
+    },
+    {
+      "title": "GET_FILTER: single value filter",
+      "fullTitle": "QueryFiltersStoreModule getters GET_FILTER: single value filter",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "GET_FILTER: array value filter",
+      "fullTitle": "QueryFiltersStoreModule getters GET_FILTER: array value filter",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "GET_FILTERS filters aggregator",
+      "fullTitle": "QueryFiltersStoreModule getters GET_FILTERS filters aggregator",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_FILTER: single value filter",
+      "fullTitle": "QueryFiltersStoreModule actions SET_FILTER: single value filter",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_FILTER: array value filter",
+      "fullTitle": "QueryFiltersStoreModule actions SET_FILTER: array value filter",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_FILTER: array value filter with single object value",
+      "fullTitle": "QueryFiltersStoreModule actions SET_FILTER: array value filter with single object value",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_FILTER: sets array value filter with null value to defaultValue",
+      "fullTitle": "QueryFiltersStoreModule actions SET_FILTER: sets array value filter with null value to defaultValue",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "SET_FILTER: sets \"false\" value filter",
+      "fullTitle": "QueryFiltersStoreModule actions SET_FILTER: sets \"false\" value filter",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "calls RESET_FILTERS mutation on RESET_FILTERS action call",
+      "fullTitle": "QueryFiltersStoreModule actions calls RESET_FILTERS mutation on RESET_FILTERS action call",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "correctly mutates state at RESET_FILTERS call",
+      "fullTitle": "QueryFiltersStoreModule mutations correctly mutates state at RESET_FILTERS call",
+      "duration": 3543,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtRefreshIconAction renders a component",
+      "duration": 2927,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtExpansionPanel renders a component",
+      "duration": 3538,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtItemLink renders a component",
+      "duration": 2057,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtNotification renders a component",
+      "duration": 2147,
+      "errorCount": 0
+    },
+    {
+      "title": "renders message via default slot",
+      "fullTitle": "WtNotification renders message via default slot",
+      "duration": 2147,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtAppHeader renders a component",
+      "duration": 5027,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a app-header content via default slot",
+      "fullTitle": "WtAppHeader renders a app-header content via default slot",
+      "duration": 5027,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component",
+      "fullTitle": "WtCheckbox renders a component",
+      "duration": 3624,
+      "errorCount": 0
+    },
+    {
+      "title": "renders label text when passed",
+      "fullTitle": "WtCheckbox renders label text when passed",
+      "duration": 3624,
+      "errorCount": 0
+    },
+    {
+      "title": "toggles passed value at click",
+      "fullTitle": "WtCheckbox toggles passed value at click",
+      "duration": 3624,
+      "errorCount": 0
+    }
+  ],
+  "skipped": [
+    {
+      "title": "renders a component",
+      "fullTitle": "WtPlayer renders a component",
+      "duration": 2815,
+      "errorCount": 0
+    },
+    {
+      "title": "renders a component text, if passed",
+      "fullTitle": "WtTooltip renders a component text, if passed",
+      "duration": 1379,
+      "errorCount": 0
+    }
+  ]
+}

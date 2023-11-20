@@ -4,11 +4,6 @@ node_modules
 /docs/.vitepress/dist
 /docs/.vitepress/.cache
 /coverage
-demo.html
-jest.json
-
-docs/node_modules
-docs/dist
 
 # local env files
 .env.local
