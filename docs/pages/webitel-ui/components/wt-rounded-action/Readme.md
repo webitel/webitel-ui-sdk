@@ -1,74 +1,71 @@
 <script setup>
-
+import Docs from './wt-rounded-action-docs.vue';
+import ExampleActiveRoundedAction from './examples/example-active-rounded-action.vue';
+import ExampleLoadingStateRoundedAction from './examples/example-loading-state-rounded-action.vue';
+import ExampleWideRoundedAction from './examples/example-wide-rounded-action.vue';
+import ExampleRoundedActionDifferentColors from './examples/example-rounded-action-different-colors.vue';
+import ExampleRoundedRoundedAction from './examples/example-rounded-rounded-action.vue';
+import ExampleSmallRoundedAction from './examples/example-small-rounded-action.vue';
 </script>
 
 # WtRoundedAction
 
-## Different colors
+## Props
+::: raw
+<Docs />
+:::
 
-```vue
-<div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
-<wt-rounded-action icon="call" color="primary"></wt-rounded-action>
-<wt-rounded-action icon="call" color="secondary"></wt-rounded-action>
-<wt-rounded-action icon="call" disabled></wt-rounded-action>
-<wt-rounded-action icon="call" color="success"></wt-rounded-action>
-<wt-rounded-action icon="call" color="error"></wt-rounded-action>
-<wt-rounded-action icon="call" color="transfer"></wt-rounded-action>
-</div>
-```
+## Different colors
+::: raw
+<ExampleRoundedActionDifferentColors />
+:::
+
+::: details Code
+<<< ./examples/example-rounded-action-different-colors.vue{js}
+:::
 
 ## Active (pressed) buttons
-```vue
-<div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
-<wt-rounded-action active icon="call" color="primary"></wt-rounded-action>
-<wt-rounded-action active icon="call" color="secondary"></wt-rounded-action>
-<wt-rounded-action active icon="call" disabled></wt-rounded-action>
-<wt-rounded-action active icon="call" color="success"></wt-rounded-action>
-<wt-rounded-action active icon="call" color="error"></wt-rounded-action>
-<wt-rounded-action active icon="call" color="transfer"></wt-rounded-action>
-</div>
-```
+::: raw
+<ExampleActiveRoundedAction />
+:::
+
+::: details Code
+<<< ./examples/example-active-rounded-action.vue{js}
+:::
 
 ## Wide buttons
-```vue
-<div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
-<wt-rounded-action wide icon="call" color="secondary"></wt-rounded-action>
-<wt-rounded-action wide rounded icon="call" color="secondary"></wt-rounded-action>
-</div>
-```
+::: raw
+<ExampleWideRoundedAction />
+:::
+
+::: details Code
+<<< ./examples/example-wide-rounded-action.vue{js}
+:::
 
 ## Rounded buttons
-```vue
-<div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
-<wt-rounded-action rounded icon="call" color="primary"></wt-rounded-action>
-<wt-rounded-action rounded icon="call" color="secondary"></wt-rounded-action>
-<wt-rounded-action rounded icon="call" disabled></wt-rounded-action>
-<wt-rounded-action rounded icon="call" color="success"></wt-rounded-action>
-<wt-rounded-action rounded icon="call" color="error"></wt-rounded-action>
-<wt-rounded-action rounded icon="call" color="transfer"></wt-rounded-action>
-</div>
-```
+::: raw
+<ExampleRoundedRoundedAction />
+:::
+
+::: details Code
+<<< ./examples/example-rounded-rounded-action.vue{js}
+:::
 
 ## Small (sm) buttons
-```vue
-<div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
-<wt-rounded-action size="sm" icon="call" color="primary"></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="secondary"></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" disabled></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="success"></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="error"></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="transfer"></wt-rounded-action>
-</div>
-```
+::: raw
+<ExampleSmallRoundedAction />
+:::
+
+::: details Code
+<<< ./examples/example-small-rounded-action.vue{js}
+:::
 
 ## Loading-state buttons
-```vue
-<div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
-<wt-rounded-action size="sm" icon="call" color="primary" loading></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="secondary" loading></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" disabled loading></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="success" loading></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="error" loading></wt-rounded-action>
-<wt-rounded-action size="sm" icon="call" color="transfer" loading></wt-rounded-action>
-</div>
-```
+::: raw
+<ExampleLoadingStateRoundedAction />
+:::
+
+::: details Code
+<<< ./examples/example-loading-state-rounded-action.vue{js}
+:::
+
