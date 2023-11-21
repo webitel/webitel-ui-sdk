@@ -13,7 +13,7 @@ _By new component we mean "New component" == has `.vue` extension and stored in 
 [events](https://vue-styleguidist.github.io/docs/Documenting.html#events),
 [slots](https://vue-styleguidist.github.io/docs/Documenting.html#slots)
 
-2. [How to add examples to a component](https://vue-styleguidist.github.io/docs/Documenting.html#writing-code-examples)ччч
+2. [How to add examples to a component](https://vue-styleguidist.github.io/docs/Documenting.html#writing-code-examples)
 
 ### Practice
 1. Create `Readme.md` file (capitalized!) in the same folder as component

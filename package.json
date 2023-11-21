@@ -69,6 +69,7 @@
     "bamboo-jest-reporter": "^1.0.3",
     "eslint": "^8.53.0",
     "eslint-plugin-vue": "^9.18.1",
+    "globby": "^14.0.0",
     "happy-dom": "^12.9.1",
     "husky": "^8.0.3",
     "markdown-it": "^13.0.2",
