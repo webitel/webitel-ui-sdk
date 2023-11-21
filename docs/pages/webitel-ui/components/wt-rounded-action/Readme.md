@@ -1,4 +1,10 @@
-### Different colors
+<script setup>
+
+</script>
+
+# WtRoundedAction
+
+## Different colors
 
 ```vue
 <div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
@@ -11,7 +17,7 @@
 </div>
 ```
 
-### Active (pressed) buttons
+## Active (pressed) buttons
 ```vue
 <div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
 <wt-rounded-action active icon="call" color="primary"></wt-rounded-action>
@@ -23,7 +29,7 @@
 </div>
 ```
 
-### Wide buttons
+## Wide buttons
 ```vue
 <div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
 <wt-rounded-action wide icon="call" color="secondary"></wt-rounded-action>
@@ -31,7 +37,7 @@
 </div>
 ```
 
-### Rounded buttons
+## Rounded buttons
 ```vue
 <div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
 <wt-rounded-action rounded icon="call" color="primary"></wt-rounded-action>
@@ -43,7 +49,7 @@
 </div>
 ```
 
-### Small (sm) buttons
+## Small (sm) buttons
 ```vue
 <div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
 <wt-rounded-action size="sm" icon="call" color="primary"></wt-rounded-action>
@@ -55,7 +61,7 @@
 </div>
 ```
 
-### Loading-state buttons
+## Loading-state buttons
 ```vue
 <div class="example-wrapper" style="display: flex; gap: var(--spacing-xs);">
 <wt-rounded-action size="sm" icon="call" color="primary" loading></wt-rounded-action>
