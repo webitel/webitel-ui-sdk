@@ -1,33 +1,5 @@
 <template>
   <section>
-    <h2>Icon Button</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-icon-btn
-          icon="bucket"
-          tooltip="Bucket icon"
-        />
-        <pre><code class="language-html">&lt;wt-icon-btn icon="bucket" tooltip="Bucket icon"&gt;&lt;/wt-icon-btn&gt;</code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-icon-btn
-          icon="done"
-          tooltip="Active color icon"
-          color="active"
-        />
-        <wt-icon-btn
-          icon="done"
-          tooltip="Success color icon"
-          color="success"
-        />
-        <wt-icon-btn
-          icon="done"
-          tooltip="Success color icon"
-          color="success"
-          disabled
-        />
-      </div>
-    </article>
     <component-props
       :properties="properties"
     />
