@@ -3,6 +3,7 @@ import path from 'path';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import { defineConfig } from 'vitepress';
 
+const sidebarHowTo = globbySync('pages/docs/how-to/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarComponents = globbySync('pages/webitel-ui/components/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarValidators = globbySync('pages/webitel-ui/validators/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 
@@ -32,6 +33,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
     ],
     sidebar: [
+      { text: 'How To', items: sidebarHowTo },
       { text: 'Components', items: sidebarComponents },
       { text: 'Validators', items: sidebarValidators },
     ].map(({ text, items }) => (
