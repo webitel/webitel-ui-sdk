@@ -7,12 +7,12 @@
     <div
       class="wt-expansion-panel-header"
       tabindex="0"
-      @click="open = !open"
-      @keypress.enter="open = !open"
     >
       <slot name="title"></slot>
       <wt-icon
         icon="arrow-right"
+        @click="open = !open"
+        @keypress.enter="open = !open"
       ></wt-icon>
     </div>
     <wt-expand-transition>
