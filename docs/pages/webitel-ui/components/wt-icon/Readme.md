@@ -1,15 +1,24 @@
+# WtIcon
+<script setup>
+import Docs from './wt-icon-docs.vue';
+import iconsList from './_internals/iconsList';
 
-```vue
-<wt-icon icon="edit"></wt-icon>
-```
-
-Different color icons:
-```vue
 const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer', 'job'];
+</script>
+
+## Props
+
+::: raw
+<Docs />
+:::
+
+<wt-icon icon="edit"></wt-icon>
+
+### Different colors:
 
 <div
   style="display: flex; align-items: center; gap: 5px;"
-  v-for="color of this.colors"
+  v-for="color of colors"
   :key="color"
 >
 <wt-icon
@@ -19,7 +28,6 @@ const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 
 ></wt-icon>
 {{ color }}
 </div>
-```
 
 ## How does it work?
 
@@ -32,10 +40,8 @@ by the way check for `width` `height` absence).
 
 For example:
 
-```
-const img = require('./docs/svg-icon-code-example.png');
-<img :src="this.img" alt="svg icon code example">
-```
+![svg icon code example](./assets/svg-icon-code-example.png)
+
 
 At build stage, <code><a href="https://github.com/JetBrains/svg-sprite-loader#svg-sprite-loader">svg-sprite-loader</a></code>
 collects all icons (looking for "All files`.svg` in all directories, which names include `sprite`,
@@ -58,10 +64,7 @@ So that, all these icons are collected in one sprite. This sprite is injected in
 
 For example: (By the way, you can check it if you want to see, which icons were collected in this sprite):
 
-```
-const img = require('./docs/svg-sprite-in-dom.png');
-<img :src="this.img" alt="svg-sprite-in-dom">
-```
+![svg-sprite-in-dom](./assets/svg-sprite-in-dom.png)
 
 Then, these icons can be used as:
 
@@ -121,32 +124,22 @@ After export from Figma, icons should be cleaned up to avoid a few issues.
 
 Use this checklist:
 1. **Remove** `width` and `height` from svg-tag
-```
-const img = require('./docs/cleanup-svg-width-height.png');
-<img :src="this.img" alt="Remove width and height">
-```
+
+![width and height should be removed](./assets/cleanup-svg-width-height.png)
 
 2. **Check** `viewBox`: it's size should be square **(BUT DO NOT DELETE!)**
 
 If there's an issue, contact the designer.
 
 Incorrect:
-```
-const img = require('./docs/cleanup-svg-viewbox-incorrect.png');
-<img :src="this.img" alt="viewBox is incorrect">
-```
+![viewBox is incorrect](./assets/cleanup-svg-viewbox-incorrect.png)
 
 Correct:
-```
-const img = require('./docs/cleanup-svg-viewbox-correct.png');
-<img :src="this.img" alt="viewBox is correct">
-```
+![viewBox is correct](./assets/cleanup-svg-viewbox-correct.png)
 
 4. **Remove** `fill="none"` from svg-tag
-```
-const img = require('./docs/cleanup-svg-fill-none.png');
-<img :src="this.img" alt="Remove "fill=none"">
-```
+
+![fill="none" should be removed](./assets/cleanup-svg-fill-none.png)
 
 5. **Remove** all `fill=""` with default color
 
@@ -154,17 +147,14 @@ const img = require('./docs/cleanup-svg-fill-none.png');
 changing this fill in styles to suit our needs.
 But! Specific colors should stay in svg-code. (for instance, red dot in `record` icon)*
 
-```
-const img = require('./docs/cleanup-svg-fill.png');
-<img :src="this.img" alt="Remove this fill">
-```
+!["fill" should be removed](./assets/cleanup-svg-fill.png)
 
-```vue
-<template>
+## Available icons
+
   <div style="display: grid; grid-template-columns: repeat(auto-fit, 120px); grid-gap: var(--spacing-xs);">
     <div
       style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px;"
-      v-for="icon of this.icons"
+      v-for="icon of iconsList"
       :key="icon"
     >
       <wt-icon
@@ -174,154 +164,4 @@ const img = require('./docs/cleanup-svg-fill.png');
       {{ icon }}
     </div>
   </div>
-</template>
 
-<script setup>
-const icons = [
-  'email',
-  'adfs',
-  'azure',
-  'instagram',
-  'zoom-in',
-  'zoom-out',
-  'send-arrow',
-  'close',
-  'close--filled',
-  'attach',
-  'mail',
-  'mail--color',
-  'telegram-bot',
-  'messenger-infobip',
-  'messenger-telegram',
-  'messenger-telegram--filled',
-  'messenger-facebook',
-  'messenger-facebook--filled',
-  'messenger-viber',
-  'messenger-viber--filled',
-  'messenger-web-chat',
-  'messenger-whatsapp',
-  'messenger-whatsapp--filled',
-  'messenger-messenger',
-  'meta',
-  'lock',
-  'move',
-  'queue-member',
-  'history',
-  'generate',
-  'google',
-  'rounded-info',
-  'copy',
-  'menu',
-  'clear',
-  'video-cam',
-  'video-cam-off',
-  'bell',
-  'bell-badged',
-  'star',
-  'star--filled',
-  'sound-on',
-  'sound-off',
-  'back',
-  'prompter',
-  'play',
-  'pause',
-  'stop',
-  'download',
-  'upload',
-  'filter',
-  'column-select',
-  'refresh',
-  'calendar',
-  'radio',
-  'radio--checked',
-  'checkbox',
-  'checkbox--checked',
-  'checkbox--checked--filled',
-  'eye--closed',
-  'eye--opened',
-  'numpad',
-  'settings',
-  'docs',
-  'logout',
-  'account',
-  'app-navigator',
-  'collapse',
-  'expand',
-  'bucket',
-  'tick',
-  'edit',
-  'plus',
-  'search',
-  'rec-off',
-  'rec',
-  'note',
-  'mic',
-  'mic-muted',
-  'hold',
-  'contacts',
-  'done',
-  'attention',
-
-  'call',
-  'call--filled',
-  'call-end',
-  'call-end--filled',
-  'call-transfer',
-  'call-transfer--filled',
-  'call-ringing',
-  'call-ringing--filled',
-  'call-missed',
-  'call-missed--filled',
-  'call-add-to',
-  'call-add-to--filled',
-  'call-disconnect',
-  'call-disconnect--filled',
-  'call-outbound',
-  'call-outbound--filled',
-  'call-inbound',
-  'call-inbound--filled',
-
-  'chat',
-  'chat--filled',
-  'chat-join',
-  'chat-transfer',
-  'chat-transfer--filled',
-  'chat-end',
-  'chat-end--filled',
-  'chat-group',
-  'chat-quick-response',
-  'chat-quick-response--filled',
-  'chat-send',
-  'chat-emoji',
-  'chat-reply',
-  'chat-message-status-sent',
-  'chat-message-status-read',
-
-  'job',
-  'job--accept',
-  'job--end',
-
-  'sort-arrow-down',
-  'sort-arrow-up',
-  'arrow-down',
-  'arrow-left',
-  'arrow-mix',
-  'arrow-right',
-  'arrow-up',
-  'tts-download',
-  'stt',
-  'stt-download',
-  'stt-search',
-  'scorecard',
-  'idle',
-  'pin',
-  'unpin',
-  'options',
-
-  'preview-tag-video',
-  'preview-tag-audio',
-  'preview-tag-application',
-  'preview-tag-image',
-].sort();
-</script>
-```

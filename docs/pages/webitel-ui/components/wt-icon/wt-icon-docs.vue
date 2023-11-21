@@ -1,61 +1,16 @@
 <template>
   <section>
-    <h2>Icons</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-icon icon="bucket" />
-        <pre><code class="language-html">&lt;wt-icon icon="bucket"&gt;&lt;/wt-icon&gt;</code></pre>
-      </div>
-    </article>
-    <h3>
-      For wt-icon sprites installation, see:
-      <router-link to="/quick-start">
-        Quick Start
-      </router-link>
-      page
-    </h3>
     <component-props
       :properties="properties"
-    />
-    <icon-grid />
-    <article
-      id="how-does-it-work"
-      class="markdown-body"
-      v-html="howDoesItWorkMd"
-    />
-    <article
-      id="how-to-install-custom-icons"
-      class="markdown-body"
-      v-html="howToInstallCustomIconsToProjectMd"
-    />
-    <article
-      id="icons-naming-convention"
-      class="markdown-body"
-      v-html="iconsNamingConventionMd"
-    />
-    <article
-      id="cleanup-icons"
-      class="markdown-body"
-      v-html="cleanupIconsMd"
     />
   </section>
 </template>
 
 <script>
 import Prism from 'prismjs';
-import md from 'markdown-it';
-import IconGrid from './_internals/icon-grid.vue';
-
-import howDoesItWorkMd from './md/how-does-it-work/how-does-it-work.en.md?raw';
-import howToInstallCustomIconsToProjectMd from './md/how-to-install-custom-icons-to-project/how-to-install-custom-icons-to-project.en.md?raw';
-import iconsNamingConventionMd from './md/icons-naming-convention/icons-naming-convention.en.md?raw';
-import cleanupIconsMd from './md/cleanup-icons/cleanup-icons.en.md?raw';
 
 export default {
   name: 'WtIconDocs',
-  components: {
-    IconGrid,
-  },
   data: () => ({
     properties: [
       {
@@ -99,20 +54,6 @@ export default {
       },
     ],
   }),
-  computed: {
-    howDoesItWorkMd() {
-      return md().render(howDoesItWorkMd, { linkify: true });
-    },
-    howToInstallCustomIconsToProjectMd() {
-      return md().render(howToInstallCustomIconsToProjectMd, { linkify: true });
-    },
-    iconsNamingConventionMd() {
-      return md().render(iconsNamingConventionMd, { linkify: true });
-    },
-    cleanupIconsMd() {
-      return md().render(cleanupIconsMd, { linkify: true });
-    },
-  },
   mounted() {
     Prism.highlightAll();
   },

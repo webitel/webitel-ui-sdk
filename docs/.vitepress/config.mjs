@@ -1,3 +1,4 @@
+import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
@@ -12,6 +13,11 @@ export default defineConfig({
         },
       },
     },
+    plugins: [
+      createSvgSpritePlugin({
+        include: '**/sprite/*.svg',
+      }),
+    ],
   },
 
   // additionalData: `@import "../../src/css/main.scss";`,
@@ -25,6 +31,7 @@ export default defineConfig({
       {
         text: 'Components',
         items: [
+          { text: 'wt-icon', link: '/pages/webitel-ui/components/wt-icon/Readme' },
           { text: 'wt-input', link: '/pages/webitel-ui/components/wt-input/wt-input' },
           // { text: 'Runtime API Examples', link: '/api-examples' }
         ]
