@@ -1,14 +1,15 @@
-import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
-import { defineConfig } from 'vitepress';
 import { globbySync } from 'globby';
 import path from 'path';
+import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
+import { defineConfig } from 'vitepress';
 
-const sidebarComponents = globbySync('pages/**/Readme.md', { cwd: path.resolve(__dirname, '../')})
+const sidebarComponents = globbySync('pages/webitel-ui/components/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+const sidebarValidators = globbySync('pages/webitel-ui/validators/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Webitel UI",
-  description: "Webitel UI docs",
+  title: 'Webitel UI',
+  description: 'Webitel UI docs',
   vite: {
     css: {
       preprocessorOptions: {
@@ -31,19 +32,21 @@ export default defineConfig({
       { text: 'Home', link: '/' },
     ],
     sidebar: [
+      { text: 'Components', items: sidebarComponents },
+      { text: 'Validators', items: sidebarValidators },
+    ].map(({ text, items }) => (
       {
-        text: 'Components',
-        items: sidebarComponents.map(comp => {
+        text,
+        items: items.map(doc => {
           return {
-            text: comp.split('/').at(-2), // get only folder name, where Readme.md is located
-            link: '/' + comp.replace(/\.md$/, '')
-          }
-        })
-      }
-    ]
+            text: doc.split('/').at(-2), // get only folder name, where Readme.md is located
+            link: '/' + doc.replace(/\.md$/, ''),
+          };
+        }),
+      })),
 
     // socialLinks: [
     //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     // ]
-  }
-})
+  },
+});

@@ -1,5 +1,5 @@
 Validator for variable search string
-```javascript
+```js
 import variableSearchValidator from '@webitel/ui-sdk/src/validators/variableSearchValidator/variableSearchValidator';
 
 isValidKeyValuePair("height=100"); // true
