@@ -1,76 +1,5 @@
 <template>
   <section>
-    <h2>Input</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-input
-          v-model="value"
-          label="Input"
-          name="label-input"
-        />
-        <pre><code class="language-html">&lt;wt-input v-model="value" label="Input" name="label-input"&gt;&lt;/wt-input&gt;</code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-input
-          v-model="value"
-          label="Disabled"
-          name="disabled-input"
-          type="password"
-          has-show-password
-          disabled
-        />
-      </div>
-      <div class="example-wrapper">
-        <wt-input
-          v-model="value"
-          label="Password"
-          name="password-input"
-          type="password"
-          :v="vValid"
-          has-show-password
-        />
-      </div>
-      <div class="example-wrapper">
-        <wt-input
-          v-model="value"
-          label="Invalid input"
-          name="invalid-input"
-          :v="vInvalid"
-        />
-      </div>
-      <div class="example-wrapper">
-        <wt-input
-          v-model="value"
-          label="After input slot usage"
-        >
-          <template #after-input>
-            <wt-icon-btn icon="edit" />
-            <wt-icon-btn
-              icon="edit"
-              size="sm"
-            />
-            <wt-icon-btn icon="edit" />
-            <wt-icon-btn
-              icon="edit"
-              size="sm"
-            />
-          </template>
-        </wt-input>
-        <pre><code class="language-html">
-          &lt;wt-input
-            v-model="value"
-            label="After input slot usage"
-          &gt;
-          &lt;template v-slot:after-input&gt;
-            &lt;wt-icon-btn icon="edit"&gt;&lt;/wt-icon-btn&gt;
-            &lt;wt-icon-btn icon="edit" size="sm"&gt;&lt;/wt-icon-btn&gt;
-            &lt;wt-icon-btn icon="edit"&gt;&lt;/wt-icon-btn&gt;
-            &lt;wt-icon-btn icon="edit" size="sm"&gt;&lt;/wt-icon-btn&gt;
-          &lt;/template&gt;
-        &lt;/wt-input&gt;
-        </code></pre>
-      </div>
-    </article>
     <component-model />
     <component-props
       :properties="properties"
@@ -90,16 +19,6 @@
   export default {
     name: 'WtInputDocs',
     data: () => ({
-      value: 'str value',
-      vValid: {
-        $error: false,
-        $dirty: true,
-      },
-      vInvalid: {
-        $error: true,
-        $dirty: true,
-        required: false,
-      },
       properties: [
         {
           value: 'value',

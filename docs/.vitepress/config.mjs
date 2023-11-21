@@ -1,5 +1,9 @@
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
-import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress';
+import { globbySync } from 'globby';
+import path from 'path';
+
+const sidebarComponents = globbySync('pages/**/Readme.md', { cwd: path.resolve(__dirname, '../')})
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -26,18 +30,18 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
     ],
-
     sidebar: [
       {
         text: 'Components',
-        items: [
-          { text: 'wt-icon', link: '/pages/webitel-ui/components/wt-icon/Readme' },
-          { text: 'wt-input', link: '/pages/webitel-ui/components/wt-input/wt-input' },
-          // { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
+        items: sidebarComponents.map(comp => {
+          return {
+            text: comp.split('/').at(-2), // get only folder name, where Readme.md is located
+            link: '/' + comp.replace(/\.md$/, '')
+          }
+        })
       }
-    ],
-    //
+    ]
+
     // socialLinks: [
     //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     // ]
