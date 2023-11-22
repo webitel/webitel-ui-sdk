@@ -43,11 +43,12 @@ describe('Auth', () => {
   it('sets token, gets session and opens app after auth token message emit', async () => {
     const accessToken = 'hello there';
     window.postMessage({ accessToken }, '*');
-    await setTimeout(() => {
+    await new Promise((resolve) => setTimeout(() => {
       expect(authAPI.setToken).toHaveBeenCalledWith(accessToken);
       expect(userinfoAPI.getSession).toHaveBeenCalled();
       expect(userinfoAPI.getApplicationsAccess).toHaveBeenCalled();
       expect(router.replace).toHaveBeenCalled();
-    }, 100);
+      resolve();
+    }, 100));
   });
 });
