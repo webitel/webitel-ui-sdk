@@ -11,6 +11,7 @@ const sidebarValidators = globbySync('pages/webitel-ui/validators/**/Readme.md',
 export default defineConfig({
   title: 'Webitel UI',
   description: 'Webitel UI docs',
+  base: '/ui-sdk/new',
   vite: {
     ssr: {
       noExternal: [
