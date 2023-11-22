@@ -12,11 +12,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - run: npm ci
       - run: npm run test:unit
 #      - run: npm run build
-      - run: npm run styleguide:build
+      - run: npm run docs:build
 
       - name: get-npm-version
         id: package-version
@@ -25,7 +25,7 @@ jobs:
       - name: Easy Zip Files
         uses: vimtor/action-zip@v1.1
         with:
-          files: docs-dist/
+          files: docs/.vitepress/dist/
           dest: docs.zip
 
 

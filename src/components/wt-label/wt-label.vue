@@ -6,7 +6,6 @@
       'wt-label--invalid': invalid,
       'wt-label--disabled': disabled,
     }"
-    :for="this.for"
   >
     <slot />
     <wt-hint
@@ -20,9 +19,6 @@
 export default {
   name: 'WtLabel',
   props: {
-    for: {
-      type: String,
-    },
     disabled: {
       type: Boolean,
       default: false,

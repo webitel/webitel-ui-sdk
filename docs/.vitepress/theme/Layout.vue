@@ -3,7 +3,7 @@
 <script setup>
 import { useData } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
-import { provide } from 'vue';
+import { onMounted, provide } from 'vue';
 
 const { isDark } = useData();
 
@@ -13,10 +13,12 @@ const toggleComponentsDarkTheme = (value) => {
   else html.classList.remove('theme--dark');
 };
 
-toggleComponentsDarkTheme(isDark.value);
-
 provide('toggle-appearance', () => {
   isDark.value = !isDark.value;
+  toggleComponentsDarkTheme(isDark.value);
+});
+
+onMounted(() => {
   toggleComponentsDarkTheme(isDark.value);
 });
 </script>

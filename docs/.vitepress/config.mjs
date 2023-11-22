@@ -12,6 +12,13 @@ export default defineConfig({
   title: 'Webitel UI',
   description: 'Webitel UI docs',
   vite: {
+    ssr: {
+      noExternal: [
+        '@vuelidate/core',
+        'vue-multiselect',
+        'webitel-sdk',
+      ],
+    },
     css: {
       preprocessorOptions: {
         scss: {
