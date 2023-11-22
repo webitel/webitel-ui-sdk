@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <playground/>
+    <playground />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
   import Playground from './playground.vue';
 
   export default {
-    name: 'the-app',
+    name: 'TheApp',
     components: {
       Playground,
     },

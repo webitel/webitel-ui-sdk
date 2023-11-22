@@ -10,14 +10,14 @@
     @input="setValue({ filter: filterQuery, value: $event })"
     @reset="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
     @closed="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
-  ></wt-select>
+  />
 </template>
 
 <script>
 import apiFilterMixin from '../mixins/apiFilterMixin';
 
 export default {
-  name: 'abstract-api-filter',
+  name: 'AbstractApiFilter',
   mixins: [apiFilterMixin],
   props: {
     filterQuery: {

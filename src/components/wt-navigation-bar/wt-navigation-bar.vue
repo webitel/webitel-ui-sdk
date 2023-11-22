@@ -1,13 +1,19 @@
 <template>
-  <aside v-clickaway="close" class="wt-navigation-bar">
+  <aside
+    v-clickaway="close"
+    class="wt-navigation-bar"
+  >
     <wt-icon-btn
       :class="{'active': isOpened}"
       class="wt-navigation-bar__menu-btn"
       icon="menu"
       @click="isOpened = !isOpened"
-    ></wt-icon-btn>
+    />
     <transition name="fade">
-      <nav v-show="isOpened" class="wt-navigation-bar__nav">
+      <nav
+        v-show="isOpened"
+        class="wt-navigation-bar__nav"
+      >
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
           <img
@@ -50,7 +56,7 @@
             class="wt-navigation-bar__nav-close"
             icon="close"
             @click="isOpened = false"
-          ></wt-icon-btn>
+          />
         </header>
         <wt-divider />
         <ul class="wt-navigation-bar__nav-list">
@@ -66,7 +72,8 @@
                   :to="navItem.route"
                   class="wt-navigation-bar__nav-item-link"
                   @click="close"
-                > {{ navItem.name || navItem.value }}
+                >
+                  {{ navItem.name || navItem.value }}
                 </router-link>
               </div>
             </div>
@@ -85,7 +92,7 @@
                   class="wt-navigation-bar__expansion-arrow"
                   color="active"
                   icon="arrow-right"
-                ></wt-icon>
+                />
               </button>
               <expand-transition>
                 <ul v-if="isExpanded(navItem)">
@@ -100,7 +107,8 @@
                         :to="nestedRoute(subNavItem, navItem)"
                         class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
                         @click="close"
-                      >{{ subNavItem.name || subNavItem.value }}
+                      >
+                        {{ subNavItem.name || subNavItem.value }}
                       </router-link>
                     </div>
                   </li>
@@ -118,7 +126,7 @@
 import ExpandTransition from '../transitions/wt-expand-transition.vue';
 
 export default {
-  name: 'wt-navigation-bar',
+  name: 'WtNavigationBar',
   components: { ExpandTransition },
   props: {
     currentApp: {

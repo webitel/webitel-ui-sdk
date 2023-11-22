@@ -1,7 +1,10 @@
 <template>
   <div class="auth-wrap">
-    <div v-show="!isLoaded" class="auth-loader">
-      <wt-loader/>
+    <div
+      v-show="!isLoaded"
+      class="auth-loader"
+    >
+      <wt-loader />
     </div>
     <iframe
       class="auth"
@@ -19,7 +22,7 @@ import AuthAPI from '../api/auth';
 const authURL = process ? process.env.VUE_APP_AUTH_MODULE_URL : import.meta.env.VITE_AUTH_MODE_URL;
 
 export default {
-  name: 'auth',
+  name: 'Auth',
   props: {
     namespace: {
       type: String,
@@ -34,7 +37,7 @@ export default {
   mounted() {
     window.addEventListener('message', this.authMessageHandler, false);
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('message', this.authMessageHandler, false);
   },
 

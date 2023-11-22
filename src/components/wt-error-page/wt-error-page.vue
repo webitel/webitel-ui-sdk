@@ -7,12 +7,18 @@
         :alt="errorPic.alt"
       >
       <h2
-        class="wt-error-page__title">{{ errorTitle }}</h2>
-      <p class="wt-error-page__text">{{ errorText }}</p>
+        class="wt-error-page__title"
+      >
+        {{ errorTitle }}
+      </h2>
+      <p class="wt-error-page__text">
+        {{ errorText }}
+      </p>
       <wt-button
         class="wt-error-page__action"
         @click="$emit('back')"
-      >{{ $t('webitelUI.errorPages.goBack') }}
+      >
+        {{ $t('webitelUI.errorPages.goBack') }}
       </wt-button>
     </article>
   </section>
@@ -23,7 +29,7 @@ import pic403 from '../../assets/components/organisms/wt-error-page/403.svg';
 import pic404 from '../../assets/components/organisms/wt-error-page/404.svg';
 
 export default {
-  name: 'wt-error-page',
+  name: 'WtErrorPage',
   props: {
     type: {
       type: String,

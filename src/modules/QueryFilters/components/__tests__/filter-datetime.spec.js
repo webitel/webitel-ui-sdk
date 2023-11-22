@@ -41,8 +41,8 @@ describe('DatetimeFilter Filter', () => {
   it('initial restoreValue() triggers setValue() method', async () => {
     const value = Date.now();
     await router.replace({ query: { [filterQuery]: value } });
-    const setValueMock = jest.fn();
-    jest.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
+    const setValueMock = vi.fn();
+    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
     shallowMount(DatetimeFilter, mountOptions);
     expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value });
   });

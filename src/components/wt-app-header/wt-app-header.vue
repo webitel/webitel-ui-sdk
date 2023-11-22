@@ -1,12 +1,12 @@
 <template>
   <header class="wt-app-header">
-    <slot></slot>
+    <slot />
   </header>
 </template>
 
 <script>
 export default {
-  name: 'wt-app-header',
+  name: 'WtAppHeader',
 };
 </script>
 

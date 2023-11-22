@@ -5,7 +5,7 @@
     :class="{ 'wt-item-link--disabled': disabled }"
     class="wt-item-link"
   >
-    <slot></slot>
+    <slot />
   </router-link>
 </template>
 

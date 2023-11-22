@@ -5,13 +5,13 @@
       'wt-input-info--invalid': invalid,
     }"
   >
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'wt-input-info',
+  name: 'WtInputInfo',
   props: {
     invalid: {
       type: Boolean,

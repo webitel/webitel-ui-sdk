@@ -6,24 +6,24 @@
         :label="$t('reusable.required')"
         :disabled="first"
         @change="updateQuestion({ path: 'required', value: $event })"
-      ></wt-switcher>
+      />
       <div class="audit-form-question-write-header__actions">
         <wt-tooltip>
-          <template v-slot:activator>
+          <template #activator>
             <wt-icon-btn
               icon="copy"
               @click="emit('copy')"
-            ></wt-icon-btn>
+            />
           </template>
           {{ $t('reusable.copy') }}
         </wt-tooltip>
         <wt-tooltip>
-          <template v-slot:activator>
+          <template #activator>
             <wt-icon-btn
               icon="bucket"
               :disabled="first"
               @click="emit('delete')"
-            ></wt-icon-btn>
+            />
           </template>
           {{ $t('reusable.delete') }}
         </wt-tooltip>
@@ -38,7 +38,7 @@
           required
           prevent-trim
           @input="updateQuestion({ path: 'question', value: $event })"
-        ></wt-input>
+        />
         <wt-select
           :value="prettifiedQuestionType"
           :options="QuestionType"
@@ -46,14 +46,14 @@
           :clearable="false"
           :label="$t('webitelUI.auditForm.answerType')"
           @input="handleQuestionTypeChange($event.value)"
-        ></wt-select>
+        />
       </div>
       <component
         :is="QuestionTypeComponent"
         :question="question"
         mode="write"
         @change:question="emit('change:question', $event)"
-      ></component>
+      />
     </section>
   </article>
 </template>

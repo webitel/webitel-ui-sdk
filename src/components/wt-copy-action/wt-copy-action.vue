@@ -1,12 +1,12 @@
 <template>
   <wt-tooltip class="wt-copy-action">
-    <template v-slot:activator>
+    <template #activator>
       <wt-icon-btn
         v-bind="$attrs"
         :icon="copied ? 'done' : 'copy'"
         class="copy-action"
         @click="copy"
-      ></wt-icon-btn>
+      />
     </template>
     {{ copied ? copiedTooltip : copyTooltip }}
   </wt-tooltip>
@@ -18,10 +18,7 @@ import copy from 'clipboard-copy';
 let copiedIdTimeout = null;
 
 export default {
-  name: 'wt-copy-action',
-  data: () => ({
-    copied: false,
-  }),
+  name: 'WtCopyAction',
   props: {
     value: {
       type: String,
@@ -34,6 +31,9 @@ export default {
       }),
     },
   },
+  data: () => ({
+    copied: false,
+  }),
   computed: {
     copyTooltip() {
       return this.tooltips.copy || this.$t('webitelUI.copyAction.copy');

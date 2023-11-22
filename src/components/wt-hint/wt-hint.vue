@@ -1,18 +1,18 @@
 <template>
   <wt-tooltip class="wt-hint">
-    <template v-slot:activator>
+    <template #activator>
       <wt-icon-btn
         icon="rounded-info"
         :color="iconColor"
-      ></wt-icon-btn>
+      />
     </template>
-    <slot></slot>
+    <slot />
   </wt-tooltip>
 </template>
 
 <script>
 export default {
-  name: 'wt-hint',
+  name: 'WtHint',
   props: {
     iconColor: {
       type: String,

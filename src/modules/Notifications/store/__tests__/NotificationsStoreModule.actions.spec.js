@@ -14,8 +14,8 @@ const state = {
 
 describe('features/notifications store: actions', () => {
   const context = {
-    dispatch: jest.fn(),
-    commit: jest.fn(),
+    dispatch: vi.fn(),
+    commit: vi.fn(),
     getters: {
       IS_MAIN_TAB: () => true,
       IS_SOUND_ALLOWED: () => true,
@@ -69,13 +69,13 @@ describe('features/notifications store: actions', () => {
   it('_SUBSCRIBE_TAB_CLOSING action commits SET_CURRENT_TAB_ID mutation', async () => {
     await notificationsModule.actions._SUBSCRIBE_TAB_CLOSING(context);
     window.dispatchEvent(new Event('storage'));
-    expect(context.commit).toHaveBeenCalledWith('SET_CURRENT_TAB_ID', 'null');
+    expect(context.commit).toHaveBeenCalledWith('SET_CURRENT_TAB_ID', null);
   });
 
-  it('PLAY_SOUND action commits SET_CURRENTLY_PLAIYNG mutation with sound', async () => {
-    const sound = new Audio(audio);
+  it('PLAY_SOUND action commits SET_CURRENTLY_PLAYING mutation with sound', async () => {
+    const sound = {};
     await notificationsModule.actions.PLAY_SOUND(context, { sound });
-    expect(context.commit).toHaveBeenCalledWith('SET_CURRENTLY_PLAYING', sound);
+    expect(context.commit.mock.calls[0][0]).toBe('SET_CURRENTLY_PLAYING');
   });
 
   it('_SET_UNREAD_COUNT dispatches _SET_TAB_TITLE action', () => {

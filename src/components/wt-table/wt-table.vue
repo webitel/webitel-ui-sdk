@@ -2,86 +2,124 @@
   <div class="wt-table">
     <table class="wt-table__table">
       <thead class="wt-table__head">
-      <tr :style="columnsStyle" class="wt-table__tr wt-table__tr__head">
-        <th v-if="selectable" class="wt-table__th wt-table__th--checkbox">
-          <wt-checkbox
-            :selected="isAllSelected"
-            @change="selectAll"
-          ></wt-checkbox>
-        </th>
-        <th
-          v-for="(col, key) of dataHeaders"
-          :key="key"
-          :class="[
-           {'wt-table__th--sortable': isColSortable(col)},
-           `wt-table__th--sort-${col.sort}`,
-        ]"
-          class="wt-table__th"
-          @click="sort(col)"
+        <tr
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__head"
         >
-          <div class="wt-table__th__text">{{ col.text }}</div>
-          <wt-icon
-            v-if="sortable"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-            icon="sort-arrow-up"
-            size="sm"
-          ></wt-icon>
-          <wt-icon
-            v-if="sortable"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-            icon="sort-arrow-down"
-            size="sm"
-          ></wt-icon>
-        </th>
-        <th v-if="gridActions" class="wt-table__th__actions">
-          <slot name="actions-header"></slot>
-        </th>
-      </tr>
+          <th
+            v-if="selectable"
+            class="wt-table__th wt-table__th--checkbox"
+          >
+            <wt-checkbox
+              :selected="isAllSelected"
+              @change="selectAll"
+            />
+          </th>
+          <th
+            v-for="(col, key) of dataHeaders"
+            :key="key"
+            :class="[
+              {'wt-table__th--sortable': isColSortable(col)},
+              `wt-table__th--sort-${col.sort}`,
+            ]"
+            class="wt-table__th"
+            @click="sort(col)"
+          >
+            <div class="wt-table__th__text">
+              {{ col.text }}
+            </div>
+            <wt-icon
+              v-if="sortable"
+              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+              icon="sort-arrow-up"
+              size="sm"
+            />
+            <wt-icon
+              v-if="sortable"
+              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+              icon="sort-arrow-down"
+              size="sm"
+            />
+          </th>
+          <th
+            v-if="gridActions"
+            class="wt-table__th__actions"
+          >
+            <slot name="actions-header" />
+          </th>
+        </tr>
       </thead>
 
       <tbody class="wt-table__body">
-      <tr
-        v-for="(row, dataKey) of data"
-        :key="dataKey"
-        :class="`wt-table__tr__${row.id || dataKey}`"
-        :style="columnsStyle"
-        class="wt-table__tr wt-table__tr__body"
-      >
-        <td v-if="selectable" class="wt-table__td wt-table__td--checkbox">
-          <wt-checkbox
-            :selected="row._isSelected"
-            @change="row._isSelected = !row._isSelected"
-          ></wt-checkbox>
-        </td>
-
-        <td
-          v-for="(col, headerKey) of dataHeaders"
-          :key="headerKey"
-          class="wt-table__td"
+        <tr
+          v-for="(row, dataKey) of data"
+          :key="dataKey"
+          :class="`wt-table__tr__${row.id || dataKey}`"
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__body"
         >
-          <slot :index="dataKey" :item="row" :name="col.value">
-            <div>{{ row[col.value] }}</div>
-          </slot>
-        </td>
+          <td
+            v-if="selectable"
+            class="wt-table__td wt-table__td--checkbox"
+          >
+            <wt-checkbox
+              :selected="row._isSelected"
+              @change="row._isSelected = !row._isSelected"
+            />
+          </td>
 
-        <td v-if="gridActions" class="wt-table__td__actions">
-          <slot :index="dataKey" :item="row" name="actions"></slot>
-        </td>
-      </tr>
+          <td
+            v-for="(col, headerKey) of dataHeaders"
+            :key="headerKey"
+            class="wt-table__td"
+          >
+            <slot
+              :index="dataKey"
+              :item="row"
+              :name="col.value"
+            >
+              <div>{{ row[col.value] }}</div>
+            </slot>
+          </td>
+
+          <td
+            v-if="gridActions"
+            class="wt-table__td__actions"
+          >
+            <slot
+              :index="dataKey"
+              :item="row"
+              name="actions"
+            />
+          </td>
+        </tr>
       </tbody>
 
-      <tfoot v-if="isTableFooter" class="wt-table__foot">
-      <tr :style="columnsStyle" class="wt-table__tr wt-table__tr__foot">
-        <!--        empty checkbox column -->
-        <th v-if="selectable" class="wt-table__th__checkbox"></th>
-        <td
-          v-for="(col, headerKey) of dataHeaders"
-          :key="headerKey"
-          class="wt-table__td"
+      <tfoot
+        v-if="isTableFooter"
+        class="wt-table__foot"
+      >
+        <tr
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__foot"
         >
-          <slot :header="col" :index="headerKey" :name="`${col.value}-footer`"></slot>
-        </td>
-      </tr>
+          <!--        empty checkbox column -->
+          <th
+            v-if="selectable"
+            class="wt-table__th__checkbox"
+          />
+          <td
+            v-for="(col, headerKey) of dataHeaders"
+            :key="headerKey"
+            class="wt-table__td"
+          >
+            <slot
+              :header="col"
+              :index="headerKey"
+              :name="`${col.value}-footer`"
+            />
+          </td>
+        </tr>
       </tfoot>
     </table>
   </div>
@@ -91,7 +129,7 @@
 import getNextSortOrder from './_internals/getSortOrder';
 
 export default {
-  name: 'wt-table',
+  name: 'WtTable',
   props: {
     headers: {
       type: Array,

@@ -1,11 +1,11 @@
 <template>
   <wt-tooltip>
-    <template v-slot:activator>
+    <template #activator>
       <wt-icon-btn
         icon="history"
         :disabled="disabled"
         @click="emit('click')"
-      ></wt-icon-btn>
+      />
     </template>
     {{ $t('webitelUI.iconAction.historyActionHint') }}
   </wt-tooltip>

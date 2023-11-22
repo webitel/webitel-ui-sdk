@@ -7,10 +7,10 @@
       v-if="badge"
       :color-variable="badgeColorVar"
       :icon-badge="isDnd ? 'dnd' : null"
-    ></wt-badge>
+    />
     <div
-      class="wt-avatar__letters"
       v-if="isLetterAvatar"
+      class="wt-avatar__letters"
       :style="{ background: `var(${avatarLettersBackground})` }"
     >
       {{ avatarLetters }}

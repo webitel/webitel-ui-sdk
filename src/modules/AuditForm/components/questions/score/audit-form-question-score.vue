@@ -13,7 +13,7 @@
         type="number"
         required
         @input="updateQuestion({ path: 'min', value: $event })"
-      ></wt-input>
+      />
       <wt-input
         :value="question.max"
         :v="v$.question.max"
@@ -23,7 +23,7 @@
         type="number"
         required
         @input="updateQuestion({ path: 'max', value: $event })"
-      ></wt-input>
+      />
     </div>
     <div
       v-else-if="mode === 'read'"
@@ -36,7 +36,7 @@
         :value="value"
         :selected="isResult ? result.score : null"
         @input="emit('change:result', { score: value })"
-      ></wt-radio>
+      />
     </div>
   </article>
 </template>

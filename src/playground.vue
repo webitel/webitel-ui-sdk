@@ -1,13 +1,20 @@
 <template>
   <div class="playground">
-    <wt-icon-btn icon="edit" @click="() => alert('wt-icon-btn clicked')"></wt-icon-btn>
+    <wt-input />
+    <wt-icon-btn
+      icon="edit"
+      @click="() => alert('wt-icon-btn clicked')"
+    />
     <wt-switcher
       v-model="dark"
       label="Dark theme"
       @change="changeTheme"
-    ></wt-switcher>
+    />
     <wt-app-header>
-      <wt-app-navigator :current-app="'admin'" :apps="[{name: 'admin', href: `dev.webitel.com/admin`}]"></wt-app-navigator>
+      <wt-app-navigator
+        :current-app="'admin'"
+        :apps="[{name: 'admin', href: `dev.webitel.com/admin`}]"
+      />
       <wt-header-actions
         :user="{ name: 'John Doe' }"
       />
@@ -16,33 +23,81 @@
     <wt-datepicker
       v-model="date"
       mode="datetime"
-    ></wt-datepicker>
-    <wt-button color="secondary-50">123</wt-button>
-    <wt-status-select></wt-status-select>
+    />
+    <wt-button color="secondary-50">
+      123
+    </wt-button>
+    <wt-status-select />
     <div style="display: flex; gap: 10px; flex-wrap: wrap">
-      <wt-avatar size="sm"></wt-avatar>
-      <wt-avatar size="sm" username="A B"></wt-avatar>
-      <wt-avatar badge size="lg" username="A b"></wt-avatar>
-      <wt-avatar size="2xl" username="c d"></wt-avatar>
-      <wt-avatar size="3xl" username="e f"></wt-avatar>
-      <wt-avatar size="sm" username="g h"></wt-avatar>
-      <wt-avatar size="lg" username="i j"></wt-avatar>
-      <wt-avatar size="2xl" username="kl"></wt-avatar>
-      <wt-avatar size="3xl" username="mn"></wt-avatar>
-      <wt-avatar size="sm" username="op"></wt-avatar>
-      <wt-avatar size="lg" username="qr"></wt-avatar>
-      <wt-avatar size="2xl" username="s t"></wt-avatar>
-      <wt-avatar size="3xl" username="u v"></wt-avatar>
-      <wt-avatar size="sm" username="w x"></wt-avatar>
-      <wt-avatar size="lg" username="y z"></wt-avatar>
+      <wt-avatar size="sm" />
+      <wt-avatar
+        size="sm"
+        username="A B"
+      />
+      <wt-avatar
+        badge
+        size="lg"
+        username="A b"
+      />
+      <wt-avatar
+        size="2xl"
+        username="c d"
+      />
+      <wt-avatar
+        size="3xl"
+        username="e f"
+      />
+      <wt-avatar
+        size="sm"
+        username="g h"
+      />
+      <wt-avatar
+        size="lg"
+        username="i j"
+      />
+      <wt-avatar
+        size="2xl"
+        username="kl"
+      />
+      <wt-avatar
+        size="3xl"
+        username="mn"
+      />
+      <wt-avatar
+        size="sm"
+        username="op"
+      />
+      <wt-avatar
+        size="lg"
+        username="qr"
+      />
+      <wt-avatar
+        size="2xl"
+        username="s t"
+      />
+      <wt-avatar
+        size="3xl"
+        username="u v"
+      />
+      <wt-avatar
+        size="sm"
+        username="w x"
+      />
+      <wt-avatar
+        size="lg"
+        username="y z"
+      />
     </div>
     <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }]">
-      <template v-slot:activator>
+      <template #activator>
         <wt-button>context menu</wt-button>
       </template>
     </wt-context-menu>
-    <wt-tooltip :triggers="['click']" :popper-triggers="['click']">
-      <template v-slot:activator>
+    <wt-tooltip
+      :triggers="['click']"
+      :popper-triggers="['click']"
+    >
+      <template #activator>
         <div class="my-div">
           Hover me!
         </div>
@@ -53,61 +108,66 @@
       :options="[
         { text: 'ipsum 2' },{ text: 'ipsum 2' },{ text: 'ipsum 2' },
       ]"
-    ></wt-button-select>
+    />
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div>
         <audit-form
           v-model:questions="auditQuestions"
           mode="create"
-        ></audit-form>
+        />
         {{ auditQuestions }}
       </div>
       <div>
         <audit-form
-          :questions="auditQuestions"
           v-model:result="auditResult"
+          :questions="auditQuestions"
           mode="fill"
-        ></audit-form>
+        />
         {{ auditResult }}
       </div>
     </div>
     <wt-navigation-bar
       :nav="[
-          { value: '1', name: 'Name 1', route: '/1' },
-          { value: 'exp1', name: 'Expansion 1', subNav: [
+        { value: '1', name: 'Name 1', route: '/1' },
+        { value: 'exp1', name: 'Expansion 1', subNav: [
           { value: '2', name: 'Name 2', route: '/2' },
           { value: '3', name: 'Name 3', route: '/3' },
-          ] },
-          { value: 'exp2', name: 'Expansion 2', subNav: [
+        ] },
+        { value: 'exp2', name: 'Expansion 2', subNav: [
           { value: '4', name: 'Name 4', route: '/4' },
           { value: '5', name: 'Name 5', route: '/5' },
-          ] },
-          ]"
-    ></wt-navigation-bar>
+        ] },
+      ]"
+    />
     <wt-avatar
       status="dnd"
       badge
-    ></wt-avatar>
+    />
     <wt-icon
       icon="bucket"
       @click="log"
-    ></wt-icon>
-    <wt-icon-btn icon="edit" size="lg" color="icon-secondary" @click="log"></wt-icon-btn>
+    />
+    <wt-icon-btn
+      icon="edit"
+      size="lg"
+      color="icon-secondary"
+      @click="log"
+    />
     <wt-load-bar
       max="100"
       value="50"
-    ></wt-load-bar>
+    />
     <wt-load-bar
       max="100"
       value="100"
-    ></wt-load-bar>
-    <wt-status-select></wt-status-select>
+    />
+    <wt-status-select />
     <wt-tags-input
       v-model="select.multipleValue"
       :options="select.stringOptions"
       placeholder="placeholder"
       label="label"
-    ></wt-tags-input>
+    />
     <!--    <wt-tags-input-->
     <!--      v-model="select.multipleValue"-->
     <!--      :options="select.options"-->
@@ -141,7 +201,7 @@
       multiple
       placeholder="placeholder"
       label="label"
-    ></wt-select>
+    />
     <!--    <wt-select-->
     <!--      :value="'lorem ipsum'"-->
     <!--      :options="select.options"-->
@@ -162,11 +222,11 @@
       invalid
       :placeholder="$t('reusable.search')"
     >
-      <template v-slot:additional-actions="options">
+      <template #additional-actions="options">
         <wt-icon
           :color="options.invalid ? 'error' : null"
           icon="bucket"
-        ></wt-icon>
+        />
       </template>
     </wt-search-bar>
   </div>
@@ -186,7 +246,7 @@ import WtExpandTransition from './components/transitions/wt-expand-transition.vu
 import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
-  name: 'the-playground',
+  name: 'ThePlayground',
   components: {
     WtContextMenu,
     WtTooltip,

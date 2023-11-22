@@ -10,20 +10,26 @@
       <header class="wt-popup__header">
         <slot name="header">
           <h3 class="wt-popup__title">
-            <slot name="title"></slot>
+            <slot name="title" />
           </h3>
         </slot>
         <wt-icon-btn
           class="wt-popup__close-btn"
           icon="close"
           @click="$emit('close')"
-        ></wt-icon-btn>
+        />
       </header>
-      <section v-if="$slots.main" class="wt-popup__main">
-        <slot name="main"></slot>
+      <section
+        v-if="$slots.main"
+        class="wt-popup__main"
+      >
+        <slot name="main" />
       </section>
-      <footer v-if="$slots.actions" class="wt-popup__actions">
-        <slot name="actions"></slot>
+      <footer
+        v-if="$slots.actions"
+        class="wt-popup__actions"
+      >
+        <slot name="actions" />
       </footer>
     </aside>
   </div>
@@ -31,7 +37,7 @@
 
 <script>
 export default {
-  name: 'wt-popup',
+  name: 'WtPopup',
   props: {
     minWidth: {
       type: [Number, String],

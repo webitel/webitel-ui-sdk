@@ -3,12 +3,12 @@ import { useI18n } from 'vue-i18n';
 
 export function useValidation({ v, customValidators }) {
   const { t } = useI18n();
-  const isValidation = computed(() => !!v.value && !!Object.keys(v.value).length);
+  const isValidation = computed(() => !!v && !!v.value && !!Object.keys(v.value).length);
   const invalid = computed(() => isValidation.value && v.value.$error);
 
   const validationText = computed(() => {
     let validationText = '';
-    if (isValidation && invalid) {
+    if (isValidation.value && invalid) {
       if (v.value.required?.$invalid) validationText = t('validation.required');
       else if (v.value.numeric?.$invalid) validationText = t('validation.numeric');
       else if (v.value.email?.$invalid) validationText = t('validation.email');

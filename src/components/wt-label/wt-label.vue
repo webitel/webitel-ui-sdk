@@ -8,7 +8,7 @@
     }"
     :for="this.for"
   >
-    <slot></slot>
+    <slot />
     <wt-hint
       v-if="hint"
     >{{ hint }}
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'wt-label',
+  name: 'WtLabel',
   props: {
     for: {
       type: String,

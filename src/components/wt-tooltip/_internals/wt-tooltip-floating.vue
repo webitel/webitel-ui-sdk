@@ -1,9 +1,9 @@
 <template>
   <aside
-    class="wt-tooltip-floating"
     ref="floating"
+    class="wt-tooltip-floating"
   >
-    <slot></slot>
+    <slot />
   </aside>
 </template>
 

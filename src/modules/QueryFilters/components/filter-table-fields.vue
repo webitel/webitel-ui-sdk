@@ -3,15 +3,20 @@
     :headers="headers"
     :static-headers="staticHeaders"
     @change="change"
-  ></wt-table-column-select>
+  />
 </template>
 
 <script>
 import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
 
 export default {
-  name: 'filter-table-fields',
+  name: 'FilterTableFields',
   mixins: [baseFilterMixin],
+
+  model: {
+    prop: 'headers',
+    event: 'change',
+  },
   props: {
     entity: {
       type: String,
@@ -30,11 +35,6 @@ export default {
     storedProp: 'value',
     filterQuery: 'fields',
   }),
-
-  model: {
-    prop: 'headers',
-    event: 'change',
-  },
 
   methods: {
     change(headers) {

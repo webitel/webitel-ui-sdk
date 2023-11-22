@@ -1,12 +1,16 @@
 <template>
   <aside class="wt-notifications-bar">
-    <transition-group name="wt-notifications-transition" tag="div">
+    <transition-group
+      name="wt-notifications-transition"
+      tag="div"
+    >
       <wt-notification
         v-for="(notification, key) of notifications"
-        :type="notification.type"
         :key="key+notification.text"
+        :type="notification.type"
         @close="closeNotification(notification)"
-      >{{ notification.text }}
+      >
+        {{ notification.text }}
       </wt-notification>
     </transition-group>
   </aside>
@@ -14,7 +18,7 @@
 
 <script>
 export default {
-  name: 'wt-notifications-bar',
+  name: 'WtNotificationsBar',
   inject: ['$eventBus'],
   data: () => ({
     notificationDuration: 4000,
@@ -27,7 +31,7 @@ export default {
       console.error('wt-notifications-bar cannot work without globally registered eventBus', err);
     }
   },
-  destroyed() {
+  unmounted() {
     this.$eventBus.$off('notification', this.showNotification);
   },
   methods: {

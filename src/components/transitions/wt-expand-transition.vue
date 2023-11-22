@@ -5,7 +5,7 @@
     @enter="enter"
     @leave="leave"
   >
-    <slot></slot>
+    <slot />
   </transition>
 </template>
 
@@ -13,7 +13,7 @@
 /* eslint-disable no-param-reassign */
 // https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/
 export default {
-  name: 'wt-expand-transition',
+  name: 'WtExpandTransition',
   methods: {
     afterEnter(element) {
       element.style.height = 'auto';

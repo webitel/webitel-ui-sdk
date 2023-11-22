@@ -11,11 +11,12 @@
         :first="key === 0"
         @update:option="updateQuestion({ path: `options[${key}]`, value: $event })"
         @delete="deleteQuestionOption({ key })"
-      ></options-write-row>
+      />
       <wt-button
         class="audit-form-question-options-write__add-button"
         @click="addQuestionOption"
-      >{{ $t('reusable.add') }}
+      >
+        {{ $t('reusable.add') }}
       </wt-button>
     </div>
     <div
@@ -29,9 +30,11 @@
         :selected="result"
         :value="opt"
         @input="emit('change:result', $event)"
-      ></wt-radio>
+      />
     </div>
-    <div v-else>Unknown mode: {{ mode }}</div>
+    <div v-else>
+      Unknown mode: {{ mode }}
+    </div>
   </article>
 </template>
 

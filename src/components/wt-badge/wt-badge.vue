@@ -2,15 +2,15 @@
   <aside
     class="wt-badge"
     :class="{ 'wt-badge--outside': outside }"
-    :style="{ background: iconBadge ? `url(${this.showIconBadge})` : `var(--${colorVariable})` }"
-  ></aside>
+    :style="{ background: iconBadge ? `url(${showIconBadge})` : `var(--${colorVariable})` }"
+  />
 </template>
 
 <script>
 import BadgeDnd from '../../assets/icons/badge-dnd.svg';
 
 export default {
-  name: 'wt-badge',
+  name: 'WtBadge',
   props: {
     colorVariable: {
       type: String,

@@ -9,14 +9,14 @@
     @input="setValue({ filter: filterQuery, value: $event })"
     @reset="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
     @closed="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
-  ></wt-select>
+  />
 </template>
 
 <script>
 import enumFilterMixin from '../mixins/enumFilterMixin';
 
 export default {
-  name: 'abstract-enum-filter',
+  name: 'AbstractEnumFilter',
   mixins: [enumFilterMixin],
   props: {
     filterQuery: {

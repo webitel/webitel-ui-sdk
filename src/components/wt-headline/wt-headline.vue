@@ -3,12 +3,12 @@
     <slot>
       <slot name="title-wrapper">
         <h1 class="wt-headline__title">
-          <slot name="title"></slot>
+          <slot name="title" />
         </h1>
       </slot>
       <div class="wt-headline__actions-wrapper">
-        <slot name="search"></slot>
-        <slot name="actions"></slot>
+        <slot name="search" />
+        <slot name="actions" />
       </div>
     </slot>
   </header>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'wt-headline',
+  name: 'WtHeadline',
 };
 </script>
 

@@ -8,8 +8,8 @@
     }"
   >
     <wt-label
-      v-bind="labelProps"
       v-if="hasLabel"
+      v-bind="labelProps"
       :for="name"
       :outline="outline"
       :disabled="disabled"
@@ -19,7 +19,9 @@
       <slot
         v-bind="{ label }"
         name="label"
-      >{{ label }}</slot>
+      >
+        {{ label }}
+      </slot>
     </wt-label>
     <div class="wt-time-input__wrapper">
       <input
@@ -36,7 +38,8 @@
     <wt-input-info
       v-if="showInfo"
       :invalid="invalid"
-    >{{ validationText }}
+    >
+      {{ validationText }}
     </wt-input-info>
   </div>
 </template>
@@ -45,7 +48,7 @@
 import validationMixin from '../../mixins/validationMixin/validationMixin';
 
 export default {
-  name: 'wt-time-input',
+  name: 'WtTimeInput',
   mixins: [validationMixin],
   props: {
     /**

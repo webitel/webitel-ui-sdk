@@ -4,26 +4,33 @@
     width="500"
     @close="close"
   >
-    <template v-slot:title>{{ $t('webitelUI.deleteConfirmationPopup.title') }}</template>
-    <template v-slot:main>
+    <template #title>
+      {{ $t('webitelUI.deleteConfirmationPopup.title') }}
+    </template>
+    <template #main>
       <div class="delete-confirmation-popup__content">
-        <wt-icon icon="attention" color="error"/>
+        <wt-icon
+          icon="attention"
+          color="error"
+        />
         <p class="delete-confirmation-popup__message">
           {{ deleteMessage }}
         </p>
       </div>
     </template>
-    <template v-slot:actions>
+    <template #actions>
       <wt-button
         :loading="isDeleting"
         @click="confirm"
-      >{{ $t('vocabulary.yes') }}
+      >
+        {{ $t('vocabulary.yes') }}
       </wt-button>
       <wt-button
         :disabled="isDeleting"
         color="secondary"
         @click="close"
-      >{{ $t('vocabulary.no') }}
+      >
+        {{ $t('vocabulary.no') }}
       </wt-button>
     </template>
   </wt-popup>

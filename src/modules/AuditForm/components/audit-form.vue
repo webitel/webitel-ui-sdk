@@ -1,9 +1,9 @@
 <template>
   <section class="audit-form">
     <div
-      class="audit-form__sortable-wrapper"
-      ref="sortableWrapper"
       v-if="!reloadSortable"
+      ref="sortableWrapper"
+      class="audit-form__sortable-wrapper"
     >
       <audit-form-question
         v-for="(question, key) of questions"
@@ -18,14 +18,15 @@
         @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
         @update:result="handleResultUpdate({ key, value: $event })"
-      ></audit-form-question>
+      />
     </div>
     <wt-button
-      class="audit-form__add-button"
       v-if="mode === 'create' && !readonly"
+      class="audit-form__add-button"
       :disabled="isInvalidForm"
       @click="addQuestion"
-    >{{ $t('webitelUI.auditForm.addQuestion') }}
+    >
+      {{ $t('webitelUI.auditForm.addQuestion') }}
     </wt-button>
   </section>
 </template>

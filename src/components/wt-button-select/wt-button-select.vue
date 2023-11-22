@@ -10,7 +10,7 @@
       class="wt-button-select__button"
       @click="$emit('click', $event)"
     >
-      <slot></slot>
+      <slot />
     </wt-button>
 
     <wt-context-menu
@@ -18,7 +18,7 @@
       :visible="isOpened"
       @click="selectOption"
     >
-      <template v-slot:activator>
+      <template #activator>
         <wt-button
           v-bind="$attrs"
           :color="color"
@@ -33,7 +33,7 @@
             :disabled="disabled"
             class="wt-button-select__select-arrow"
             icon="arrow-down"
-          ></wt-icon>
+          />
         </wt-button>
       </template>
     </wt-context-menu>

@@ -4,8 +4,11 @@ import stringify from 'csv-stringify/lib/sync';
 import CSVExportMixin from '../mixins/exportCSVMixin';
 import '../../../../tests/mocks/localStorageMock';
 
-jest.mock('csv-stringify/lib/sync');
-jest.mock('file-saver');
+vi.mock('csv-stringify/lib/sync');
+vi.mock('file-saver', () => ({
+  saveAs: vi.fn(),
+}));
+
 const dataList = [
   { _isSelected: true, id: 1 },
   { _isSelected: true, id: 2 },

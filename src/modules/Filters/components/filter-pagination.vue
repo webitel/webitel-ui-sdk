@@ -8,7 +8,7 @@
     @change="setSize(localSize)"
     @next="setPage(+page + 1)"
     @prev="setPage(page - 1)"
-  ></wt-pagination>
+  />
 </template>
 
 <script setup>

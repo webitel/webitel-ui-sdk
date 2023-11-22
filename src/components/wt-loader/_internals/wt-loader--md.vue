@@ -1,7 +1,16 @@
 <template>
   <div class="wt-loader wt-loader--md">
-    <svg class="wt-loader--md__svg" viewBox="0 0 80 80">
-      <rect class="wt-loader--md__svg__rect" x="8" y="8" width="64" height="64"></rect>
+    <svg
+      class="wt-loader--md__svg"
+      viewBox="0 0 80 80"
+    >
+      <rect
+        class="wt-loader--md__svg__rect"
+        x="8"
+        y="8"
+        width="64"
+        height="64"
+      />
     </svg>
   </div>
 </template>

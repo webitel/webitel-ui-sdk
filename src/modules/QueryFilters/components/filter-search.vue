@@ -2,9 +2,9 @@
   <wt-search-bar
     :value="filterSchema.value"
     debounce
+    :placeholder="$t('reusable.search')"
     @input="setValue({ filter: filterQuery, value: $event })"
     @search="setValueToQuery({ filterQuery, value: $event })"
-    :placeholder="$t('reusable.search')"
   />
 </template>
 
@@ -12,7 +12,7 @@
 import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
 
 export default {
-  name: 'filter-search',
+  name: 'FilterSearch',
   mixins: [baseFilterMixin],
   props: {
     filterQuery: {

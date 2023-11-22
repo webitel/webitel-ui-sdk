@@ -8,7 +8,7 @@
     <wt-icon
       v-bind="$attrs"
       :disabled="disabled"
-    ></wt-icon>
+    />
   </button>
 </template>
 

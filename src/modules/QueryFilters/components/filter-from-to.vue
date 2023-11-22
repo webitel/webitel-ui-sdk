@@ -6,7 +6,8 @@
         <wt-label
           class="filter-from-to__input-label"
           for="filter-from-to-from"
-        >{{ $t('reusable.from') }}
+        >
+          {{ $t('reusable.from') }}
         </wt-label>
         <wt-input
           class="filter-from-to-input"
@@ -16,13 +17,14 @@
           :number-min="0"
           :number-max="numberMax"
           @input="setFrom"
-        ></wt-input>
+        />
       </div>
       <div class="filter-from-to__input-wrapper">
         <wt-label
           class="filter-from-to__input-label"
           for="filter-from-to-to"
-        >{{ $t('reusable.to') }}
+        >
+          {{ $t('reusable.to') }}
         </wt-label>
         <wt-input
           class="filter-from-to-input"
@@ -32,7 +34,7 @@
           :number-min="0"
           :number-max="numberMax"
           @input="setTo"
-        ></wt-input>
+        />
       </div>
     </div>
   </div>
@@ -43,7 +45,7 @@ import debounce from '../../../scripts/debounce';
 import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
 
 export default {
-  name: 'filter-from-to',
+  name: 'FilterFromTo',
   mixins: [baseFilterMixin],
   props: {
     filterQuery: {
@@ -56,6 +58,11 @@ export default {
     numberMax: {
       type: Number,
     },
+  },
+
+  created() {
+    this.setFrom = debounce(this.setFrom);
+    this.setTo = debounce(this.setTo);
   },
   methods: {
     restore() {
@@ -96,11 +103,6 @@ export default {
         value,
       });
     },
-  },
-
-  created() {
-    this.setFrom = debounce(this.setFrom);
-    this.setTo = debounce(this.setTo);
   },
 };
 </script>

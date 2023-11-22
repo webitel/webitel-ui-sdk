@@ -17,9 +17,9 @@ and swapping height/width of this component in order to have the correct output.
 <template>
   <div
     :class="{
-        'wt-slider--disabled': disabled,
-        'wt-slider--vertical': vertical,
-      }"
+      'wt-slider--disabled': disabled,
+      'wt-slider--vertical': vertical,
+    }"
     :style="{ height: vertical && verticalHeight }"
     class="wt-slider"
   >
@@ -38,14 +38,14 @@ and swapping height/width of this component in order to have the correct output.
         class="wt-slider__slider"
         type="range"
         @input="inputHandler"
-      />
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'wt-slider',
+  name: 'WtSlider',
   props: {
     value: {
       type: Number,

@@ -1,11 +1,11 @@
 <template>
   <div class="wt-table-column-select">
     <wt-tooltip>
-      <template v-slot:activator>
+      <template #activator>
         <wt-icon-btn
           icon="column-select"
           @click="openPopup"
-        ></wt-icon-btn>
+        />
       </template>
       {{ $t('webitelUI.tableColumnSelect.title') }}
     </wt-tooltip>
@@ -14,18 +14,18 @@
       class="wt-table-column-select__popup"
       @close="close"
     >
-      <template v-slot:title>
+      <template #title>
         {{ $t('webitelUI.tableColumnSelect.title') }}
       </template>
-      <template v-slot:main>
+      <template #main>
         <div class="wt-table-column-select__popup-list-wrap">
           <ul
             class="wt-table-column-select__popup-list"
             :class="{
-            'wt-table-column-select__popup-list--md':
-            changeableDraft.length > 10 && changeableDraft.length <= 20,
-            'wt-table-column-select__popup-list--lg':
-            changeableDraft.length > 20
+              'wt-table-column-select__popup-list--md':
+                changeableDraft.length > 10 && changeableDraft.length <= 20,
+              'wt-table-column-select__popup-list--lg':
+                changeableDraft.length > 20
             }"
           >
             <li
@@ -37,20 +37,22 @@
               <wt-checkbox
                 v-model="column.show"
                 :label="shownColLabel(column)"
-              ></wt-checkbox>
+              />
             </li>
           </ul>
         </div>
       </template>
-      <template v-slot:actions>
+      <template #actions>
         <wt-button
           @click="setShownColumns"
-        >{{ $t('reusable.add') }}
+        >
+          {{ $t('reusable.add') }}
         </wt-button>
         <wt-button
           color="secondary"
           @click="close"
-        >{{ $t('reusable.cancel') }}
+        >
+          {{ $t('reusable.cancel') }}
         </wt-button>
       </template>
     </wt-popup>
@@ -61,7 +63,12 @@
 import deepCopy from 'deep-copy';
 
 export default {
-  name: 'wt-table-column-select',
+  name: 'WtTableColumnSelect',
+
+  model: {
+    prop: 'headers',
+    event: 'change',
+  },
   props: {
     headers: {
       type: Array,
@@ -75,29 +82,24 @@ export default {
     },
   },
 
-  model: {
-    prop: 'headers',
-    event: 'change',
-  },
-
   data: () => ({
     draft: [], // headers draft
     isColumnSelectPopup: false,
   }),
-
-  watch: {
-    isColumnSelectPopup: {
-      handler() {
-        this.fillHeadersDraft();
-      },
-    },
-  },
   computed: {
     changeableDraft() {
       return this.draft.filter((header) => !this.staticHeaders.includes(header.value)).sort((a, b) => {
         return this.shownColLabel(a).localeCompare(this.shownColLabel(b));
         // sorting headers for alphabet just in popup
       });
+    },
+  },
+
+  watch: {
+    isColumnSelectPopup: {
+      handler() {
+        this.fillHeadersDraft();
+      },
     },
   },
   methods: {

@@ -17,7 +17,7 @@ const router = createRouter({
 });
 
 describe('Enum filter mixin', () => {
-  const setValue = jest.fn();
+  const setValue = vi.fn();
   const Component = {
     render() {
     },
@@ -53,7 +53,7 @@ describe('Enum filter mixin', () => {
 
   it('Attaches locales to options, if they have "locale" key', async () => {
     const options = [{
-      locale: 'jest.locale',
+      locale: 'vi.locale',
     }];
     const expectedOptions = [{
       locale: options[0].locale,

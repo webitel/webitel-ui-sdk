@@ -1,20 +1,23 @@
 <template>
   <section class="wt-page-wrapper">
     <div class="wt-page-wrapper__header">
-      <slot name="header"></slot>
+      <slot name="header" />
     </div>
-    <div v-if="actionsPanel" class="wt-page-wrapper__actions-panel">
-      <slot name="actions-panel"></slot>
+    <div
+      v-if="actionsPanel"
+      class="wt-page-wrapper__actions-panel"
+    >
+      <slot name="actions-panel" />
     </div>
     <div class="wt-page-wrapper__main">
-      <slot name="main"></slot>
+      <slot name="main" />
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'wt-page-wrapper',
+  name: 'WtPageWrapper',
   props: {
     actionsPanel: {
       type: Boolean,

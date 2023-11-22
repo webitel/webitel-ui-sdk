@@ -6,13 +6,13 @@ import * as PauseCauseAPIFactory from '../../api/pause-cause';
 import WtCcAgentStatusSelect from '../wt-cc-agent-status-select.vue';
 
 const pauseCauses = [{ name: 'jest1' }, { name: 'jest2' }];
-const getAgentPauseCausesMock = jest.fn(() => ({ items: pauseCauses }));
+const getAgentPauseCausesMock = vi.fn(() => ({ items: pauseCauses }));
 // https://stackoverflow.com/a/63727813
-jest.spyOn(PauseCauseAPIFactory, 'default').mockImplementation(() => ({ getList: getAgentPauseCausesMock }));
+vi.spyOn(PauseCauseAPIFactory, 'default').mockImplementation(() => ({ getList: getAgentPauseCausesMock }));
 
-const agentStatusMock = jest.fn(() => {});
+const agentStatusMock = vi.fn(() => {});
 // https://stackoverflow.com/a/63727813
-jest.spyOn(AgentStatusAPIFactory, 'default').mockImplementation(() => ({ patch: agentStatusMock }));
+vi.spyOn(AgentStatusAPIFactory, 'default').mockImplementation(() => ({ patch: agentStatusMock }));
 
 const agent = {
   status: '',

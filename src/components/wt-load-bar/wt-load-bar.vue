@@ -1,12 +1,15 @@
 <template>
   <div class="wt-load-bar">
-    <span :style="`width: ${this.progressWidth}%;`" class="wt-load-bar__progress"></span>
+    <span
+      :style="`width: ${progressWidth}%;`"
+      class="wt-load-bar__progress"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'wt-load-bar',
+  name: 'WtLoadBar',
   props: {
     max: {
       type: [Number, String],

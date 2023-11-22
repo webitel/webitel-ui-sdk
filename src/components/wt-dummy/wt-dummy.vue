@@ -10,11 +10,15 @@
     </div>
     <p
       v-if="!hiddenText"
-      class="wt-dummy__text">{{ text || $t('webitelUI.dummy.text') }}</p>
+      class="wt-dummy__text"
+    >
+      {{ text || $t('webitelUI.dummy.text') }}
+    </p>
     <wt-button
       v-if="showAction"
       @click="emits('create')"
-      >{{ buttonText || $t('reusable.add') }}
+    >
+      {{ buttonText || $t('reusable.add') }}
     </wt-button>
   </div>
 </template>

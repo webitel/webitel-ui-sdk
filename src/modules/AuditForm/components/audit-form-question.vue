@@ -3,13 +3,13 @@
     :is="component"
     v-clickaway="saveQuestion"
     :class="[
-     `audit-form-question--mode-${mode}`,
-     {
-       'audit-form-question--answered': isResult,
-     },
-     {
-       'audit-form-question--sort-ignore': first && mode === 'fill'
-     }
+      `audit-form-question--mode-${mode}`,
+      {
+        'audit-form-question--answered': isResult,
+      },
+      {
+        'audit-form-question--sort-ignore': first && mode === 'fill'
+      }
     ]"
     :disable-dragging="mode === 'fill'"
     :first="first"
@@ -23,7 +23,7 @@
     @delete="emits('delete')"
     @change:question="emits('update:question', $event)"
     @change:result="emits('update:result', $event)"
-  ></component>
+  />
 </template>
 
 <script setup>

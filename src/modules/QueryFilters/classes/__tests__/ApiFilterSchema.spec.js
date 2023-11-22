@@ -1,7 +1,7 @@
 import ApiFilterSchema from '../ApiFilterSchema';
 
 describe('Api Filter Schema', () => {
-  const APIMock = jest.fn();
+  const APIMock = vi.fn();
   beforeEach(() => {
     APIMock.mockClear();
   });

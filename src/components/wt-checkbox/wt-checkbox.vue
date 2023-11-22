@@ -20,17 +20,22 @@
         @change="inputHandler"
       >
       <span class="wt-checkbox__checkmark">
-      <wt-icon
-        :icon="checkboxIcon"
-        :color="iconColor"
-      ></wt-icon>
-    </span>
+        <wt-icon
+          :icon="checkboxIcon"
+          :color="iconColor"
+        />
+      </span>
       <!-- @slot Custom label markup -->
       <slot
         v-bind="{ label, isChecked, disabled }"
         name="label"
       >
-        <div v-if="label" class="wt-checkbox__label">{{ label }}</div>
+        <div
+          v-if="label"
+          class="wt-checkbox__label"
+        >
+          {{ label }}
+        </div>
       </slot>
     </wt-label>
   </div>
@@ -38,7 +43,7 @@
 
 <script>
 export default {
-  name: 'wt-checkbox',
+  name: 'WtCheckbox',
   model: {
     prop: 'selected',
     event: 'change',

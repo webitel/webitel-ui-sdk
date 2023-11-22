@@ -8,17 +8,17 @@
     :searchable="false"
     @input="inputHandler"
   >
-    <template v-slot:singleLabel="{ option }">
+    <template #singleLabel="{ option }">
       <wt-indicator
         :color="option.color"
         :text="duration"
-      ></wt-indicator>
+      />
     </template>
-    <template v-slot:option="{ option }">
+    <template #option="{ option }">
       <wt-indicator
         :color="option.color"
         :text="option.text"
-      ></wt-indicator>
+      />
     </template>
   </wt-select>
 </template>
@@ -29,7 +29,11 @@ import convertDuration from '../../scripts/convertDuration';
 import StatusOptions from './_internals/StatusOptions.lookup';
 
 export default {
-  name: 'wt-status-select',
+  name: 'WtStatusSelect',
+  model: {
+    prop: 'status',
+    event: 'change',
+  },
   props: {
     status: {
       type: String,
@@ -47,10 +51,6 @@ export default {
     //   default: 'md',
     //   options: ['sm', 'md'],
     // },
-  },
-  model: {
-    prop: 'status',
-    event: 'change',
   },
   computed: {
     selectedOption() {

@@ -15,10 +15,10 @@ describe('Abstract Api Filter', () => {
   const filterSchema = new ApiFilterSchema({
     locale: { label: '' }
   });
-  const searchMock = jest.fn();
-  const fetchSelectedMock = jest.fn(() => ({ items: [] }));
-  jest.spyOn(filterSchema, 'search').mockImplementation(searchMock);
-  jest.spyOn(filterSchema, 'fetchSelected').mockImplementation(fetchSelectedMock);
+  const searchMock = vi.fn();
+  const fetchSelectedMock = vi.fn(() => ({ items: [] }));
+  vi.spyOn(filterSchema, 'search').mockImplementation(searchMock);
+  vi.spyOn(filterSchema, 'fetchSelected').mockImplementation(fetchSelectedMock);
   const store = createStore({
     modules: {
       [namespace]: {

@@ -6,18 +6,18 @@
     placement="bottom-end"
     popper-class="wt-context-menu__floating-wrapper"
   >
-    <template v-slot:activator>
-      <slot name="activator"></slot>
+    <template #activator>
+      <slot name="activator" />
     </template>
-    <template v-slot:default="{ hide }">
+    <template #default="{ hide }">
       <ul
         class="wt-context-menu__menu"
         :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
       >
         <li
-          class="wt-context-menu__option-wrapper"
           v-for="(option, index) of options"
           :key="index"
+          class="wt-context-menu__option-wrapper"
         >
           <!--      <a> click.prevent prevents redirect to # -->
           <a

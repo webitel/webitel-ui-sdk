@@ -5,29 +5,31 @@
         class="wt-stepper-steps"
       >
         <div
-          class="wt-stepper-steps__wrapper"
           v-for="({name, completed}, idx) in stepWithCompleted"
+          class="wt-stepper-steps__wrapper"
         >
           <div
             v-if="idx !== 0"
             class="wt-stepper-steps__divider"
             :class="{ 'wt-stepper-steps__divider--completed': completed }"
-          ></div>
+          />
           <wt-chip
             class="wt-stepper-steps__item"
             :color="!completed && 'secondary'"
-          >{{ name }}
+          >
+            {{ name }}
           </wt-chip>
         </div>
       </div>
     </div>
 
     <slot name="description">
-      <p class="wt-stepper-description">{{ description }}</p>
+      <p class="wt-stepper-description">
+        {{ description }}
+      </p>
     </slot>
 
-    <slot name="main"></slot>
-
+    <slot name="main" />
   </div>
 </template>
 <script setup>

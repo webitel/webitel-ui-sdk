@@ -10,8 +10,11 @@
       :class="[
         `wt-indicator__indicator--${color}`,
       ]"
-    ></span>
-    <div v-if="isText" class="wt-indicator__text">
+    />
+    <div
+      v-if="isText"
+      class="wt-indicator__text"
+    >
       {{ text }}
     </div>
   </div>
@@ -19,7 +22,7 @@
 
 <script>
 export default {
-  name: 'wt-indicator',
+  name: 'WtIndicator',
   props: {
     color: {
       type: String,

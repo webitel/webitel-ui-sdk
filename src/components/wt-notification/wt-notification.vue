@@ -7,10 +7,10 @@
       class="wt-notification__icon"
       :icon="notificationIcon"
       :color="notificationIconColor"
-    ></wt-icon>
+    />
 
     <p class="wt-notification__text">
-      <slot></slot>
+      <slot />
     </p>
   </article>
 </template>
@@ -18,7 +18,7 @@
 <script>
 
 export default {
-  name: 'wt-notification',
+  name: 'WtNotification',
   props: {
     type: {
       type: String,

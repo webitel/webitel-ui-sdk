@@ -1,13 +1,9 @@
 .DS_Store
 node_modules
 /dist
-/docs-dist
+/docs/.vitepress/cache
+/docs/.vitepress/dist
 /coverage
-demo.html
-jest.json
-
-docs/node_modules
-docs/dist
 
 # local env files
 .env.local
