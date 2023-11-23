@@ -130,10 +130,11 @@ export default {
     },
     flow: {
       type: {
-        [EngineRoutingSchemaType.Chat]: 'Чат',
-        [EngineRoutingSchemaType.Voice]: 'Дауыс',
-        [EngineRoutingSchemaType.Service]: 'Сервис',
-        [EngineRoutingSchemaType.Processing]: 'Өңдеу',
+        [EngineRoutingSchemaType.Chat]: 'Мәтіндік',
+        [EngineRoutingSchemaType.Voice]: 'Дыбыстық',
+        [EngineRoutingSchemaType.Service]: 'Қызметтік',
+        [EngineRoutingSchemaType.Processing]: 'Нысандар',
+        [EngineRoutingSchemaType.Default]: 'Типі жоқ',
       },
     },
   },
