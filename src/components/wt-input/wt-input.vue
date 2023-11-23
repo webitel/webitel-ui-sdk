@@ -307,7 +307,7 @@ onMounted(() => {
   .wt-input--disabled & {
     @include wt-placeholder('disabled');
     border-color: var(--wt-text-field-input-border-disabled-color);
-    background: var(--form-border--disabled-color);
+    background: var(--wt-text-field-input-background-disabled-color);
   }
 }
 
