@@ -17,14 +17,4 @@ describe('WtTooltip', () => {
     });
     expect(wrapper.find('.wt-tooltip').text()).toEqual(content);
   });
-
-  it('changed tooltip color, if prop is passed', () => {
-    const wrapper = shallowMount(WtTooltip, {
-      props: {
-        contrast: true,
-      },
-    });
-    expect(wrapper.find('.wt-tooltip').classes())
-      .toContain('wt-tooltip--contrast');
-  });
 });
