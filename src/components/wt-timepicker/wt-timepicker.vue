@@ -157,18 +157,6 @@ export default {
   flex-direction: column;
 }
 
-.wt-label {
-  .wt-timepicker:hover &,
-  .wt-timepicker:focus-within & {
-    color: var(--form-label--hover-color);
-  }
-
-  .wt-timepicker--invalid:hover &,
-  .wt-timepicker--invalid:focus-within & {
-    color: var(--wt-label-error-color);
-  }
-}
-
 .wt-timepicker__wrapper {
   display: flex;
 }

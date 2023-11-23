@@ -2,7 +2,6 @@
   <div
     class="wt-time-input"
     :class="{
-      'wt-time-input--outline': outline,
       'wt-time-input--disabled': disabled,
       'wt-time-input--invalid': invalid,
     }"
@@ -10,8 +9,6 @@
     <wt-label
       v-if="hasLabel"
       v-bind="labelProps"
-      :for="name"
-      :outline="outline"
       :disabled="disabled"
       :invalid="invalid"
     >
@@ -25,7 +22,6 @@
     </wt-label>
     <div class="wt-time-input__wrapper">
       <input
-        :id="name"
         class="wt-time-input__input"
         :value="value"
         :min="0"
@@ -66,13 +62,6 @@ export default {
       default: '',
     },
     /**
-     * Form input name
-     */
-    name: {
-      type: String,
-      default: '',
-    },
-    /**
      * Time type: day, minute, second
      */
     maxValue: {
@@ -94,22 +83,22 @@ export default {
       default: false,
       description: 'Native input disabled attribute',
     },
-
-    outline: {
-      type: Boolean,
-      default: false,
-    },
-
     labelProps: {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
-
     hideInputInfo: {
       type: Boolean,
       default: false,
     },
   },
+  emits: [
+    /**
+     * Emits on input value change
+     * @param {string} value
+     */
+    'input',
+  ],
   computed: {
     hasLabel() {
       return !!(this.label || this.$slots.label);
@@ -137,16 +126,6 @@ export default {
 
 .wt-label {
   text-align: center;
-
-  .wt-time-input:hover &,
-  .wt-time-input:focus-within & {
-    color: var(--form-label--hover-color);
-  }
-
-  .wt-time-input--invalid:hover &,
-  .wt-time-input--invalid:focus-within & {
-    color: var(--wt-label-error-color);
-  }
 }
 
 .wt-time-input__input {
@@ -156,35 +135,23 @@ export default {
   width: 100%;
   box-sizing: border-box;
   padding: var(--input-padding);
-  color: var(--form-input-color);
   border: var(--input-border);
-  border-color: var(--form-border-color);
+  border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
   transition: var(--transition);
 
-  .wt-time-input:hover &,
-  &:focus {
-    border-color: var(--form-border--hover-color);
-  }
-
-  .wt-time-input--outline & {
-    border-color: var(--form-outline-border-color);
-  }
-
-  .wt-time-input--outline:hover &,
-  .wt-time-input--outline &:focus {
-    border-color: var(--form-outline-border--hover-color);
+  .wt-time-input--invalid &,
+  .wt-time-input--invalid:hover & {
+    @include wt-placeholder('error');
+    color: var(--wt-text-field-error-text-color);
+    border-color: var(--wt-text-field-input-border-error-color);
+    outline: none; // prevent outline overlapping false color
   }
 
   .wt-time-input--disabled & {
-    background: var(--form-border--disabled-color);
-    border-color: var(--form-border--disabled-color);
-  }
-
-  .wt-time-input--invalid &,
-  .wt-time-input--invalid:hover & {
-    border-color: var(--false-color);
-    outline: none; // prevent outline overlapping false color
+    @include wt-placeholder('disabled');
+    border-color: var(--wt-text-field-input-border-disabled-color);
+    background: var(--wt-text-field-input-background-disabled-color);
   }
 }
 </style>
