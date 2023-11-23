@@ -1,7 +1,6 @@
 <template>
   <div
     :class="{
-      'wt-input--outline': outline,
       'wt-input--disabled': disabled,
       'wt-input--invalid': invalid,
     }"
@@ -12,7 +11,6 @@
       :disabled="disabled"
       :for="name"
       :invalid="invalid"
-      :outline="outline"
       v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
@@ -159,11 +157,6 @@ const props = defineProps({
     type: Number,
   },
 
-  outline: {
-    type: Boolean,
-    default: false,
-  },
-
   labelProps: {
     type: Object,
     description: 'Object with props, passed down to wt-label as props',
@@ -299,34 +292,21 @@ onMounted(() => {
   width: 100%;
   padding: var(--input-padding);
   transition: var(--transition);
-  color: var(--form-input-color);
   border: var(--input-border);
-  border-color: var(--form-border-color);
+  border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
-
-  &:focus {
-    @include wt-placeholder('focus');
-    border-color: var(--form-border--hover-color);
-  }
-
-  .wt-input--outline & {
-    border-color: var(--form-outline-border-color);
-  }
-
-  .wt-input--outline:hover &,
-  .wt-input--outline &:focus {
-    border-color: var(--form-outline-border--hover-color);
-  }
 
   .wt-input--invalid &,
   .wt-input--invalid:hover & {
-    border-color: var(--false-color);
+    @include wt-placeholder('error');
+    color: var(--wt-text-field-error-text-color);
+    border-color: var(--wt-text-field-input-border-error-color);
     outline: none; // prevent outline overlapping false color
   }
 
   .wt-input--disabled & {
     @include wt-placeholder('disabled');
-    border-color: var(--form-border--disabled-color);
+    border-color: var(--wt-text-field-input-border-disabled-color);
     background: var(--form-border--disabled-color);
   }
 }

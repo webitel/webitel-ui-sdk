@@ -170,7 +170,7 @@ export default {
 
   .wt-textarea--invalid:hover &,
   .wt-textarea--invalid:focus-within & {
-    color: var(--label--invalid-color);
+    color: var(--wt-label-error-color);
   }
 }
 

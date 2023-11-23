@@ -165,7 +165,7 @@ export default {
 
   .wt-timepicker--invalid:hover &,
   .wt-timepicker--invalid:focus-within & {
-    color: var(--label--invalid-color);
+    color: var(--wt-label-error-color);
   }
 }
 

@@ -1,12 +1,5 @@
 <template>
   <section>
-    <h2>Label</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-label>Input label</wt-label>
-        <pre><code class="language-html">&lt;wt-label&gt;Input label&lt;/wt-label&gt;</code></pre>
-      </div>
-    </article>
     <component-props
       :properties="properties"
     />
@@ -21,12 +14,6 @@
     name: 'WtLabelDocs',
     data: () => ({
       properties: [
-        {
-          value: 'for',
-          code: '<wt-label for="inputIdName"></wt-label>',
-          type: 'String',
-          description: 'Functionally binds label to its input',
-        },
         {
           value: 'disabled',
           code: '<wt-label disabled></wt-label>',

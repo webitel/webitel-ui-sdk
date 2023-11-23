@@ -108,7 +108,7 @@
     border-color: var(--form-border--active-color);
 
     .multiselect__placeholder {
-      @extend %wt-placeholder--focus;
+      //@extend %wt-placeholder--focus;
     }
   }
 

@@ -15,12 +15,12 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
       font: inherit;
       transition: var(--transition);
 
-      @if ($style == 'focus') {
-        color: var(--form-placeholder-color--focus);
+      @if ($style == 'error') {
+        color: var(--wt-text-field-placeholder-error-color);
       } @else if ($style == 'disabled') {
-        color: var(--form-placeholder-color--disabled);
+        color: var(--wt-text-field-placeholder-disabled-color);
       } @else {
-        color: var(--form-placeholder-color);
+        color: var(--wt-text-field-placeholder-color);
       }
 
       @content;
@@ -35,15 +35,10 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
 %wt-placeholder {
   font: inherit;
   transition: var(--transition);
-  color: var(--form-placeholder-color);
-}
-
-%wt-placeholder--focus {
-  @extend %wt-placeholder;
-  color: var(--form-placeholder-color--focus);
+  color: var(--wt-text-field-placeholder-color);
 }
 
 %wt-placeholder--disabled {
   @extend %wt-placeholder;
-  color: var(--form-placeholder-color--disabled);
+  color: var(--wt-text-field-placeholder-disabled-color);
 }

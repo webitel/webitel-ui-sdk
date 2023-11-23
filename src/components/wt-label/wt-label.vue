@@ -2,7 +2,6 @@
   <label
     class="wt-label"
     :class="{
-      'wt-label--outline': outline,
       'wt-label--invalid': invalid,
       'wt-label--disabled': disabled,
     }"
@@ -20,10 +19,6 @@ export default {
   name: 'WtLabel',
   props: {
     disabled: {
-      type: Boolean,
-      default: false,
-    },
-    outline: {
       type: Boolean,
       default: false,
     },
@@ -50,20 +45,16 @@ export default {
 
   display: flex;
   align-items: center;
-  color: var(--form-label-color);
+  color: var(--wt-label-color);
   transition: var(--transition);
   cursor: text;
 
-  &--outline {
-    color: var(--form-outline-label-color);
-  }
-
   &--invalid {
-    color: var(--label--invalid-color);
+    color: var(--wt-label-error-color);
   }
 
   &--disabled {
-    color: var(--form-label--disabled-color);
+    color: var(--wt-label-disabled-color);
   }
 }
 

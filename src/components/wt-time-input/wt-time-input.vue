@@ -145,7 +145,7 @@ export default {
 
   .wt-time-input--invalid:hover &,
   .wt-time-input--invalid:focus-within & {
-    color: var(--label--invalid-color);
+    color: var(--wt-label-error-color);
   }
 }
 

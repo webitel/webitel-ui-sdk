@@ -1,4 +1,6 @@
 
 :root {
-  --label--invalid-color: var(--false-color);
+  --wt-label-color: var(--text-main-color);
+  --wt-label-error-color: var(--text-error-color);
+  --wt-label-disabled-color: var(--text-disabled-color);
 }
