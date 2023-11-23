@@ -9,10 +9,10 @@
       :selectable="false"
     >
       <template #name="{ item }">
-        <code class="language-javascript">{{ item.name }}</code>
+        <code>{{ item.name }}</code>
       </template>
       <template #scope="{ item }">
-        <code class="language-markup">{{ item.scope }}</code>
+        <code>{{ item.scope }}</code>
       </template>
       <template #description="{ item }">
         <p

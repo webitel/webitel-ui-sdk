@@ -9,7 +9,7 @@
       :selectable="false"
     >
       <template #value="{ item }">
-        <code class="language-javascript">{{ item.value }}</code>
+        <code>{{ item.value }}</code>
       </template>
       <template #description="{ item }">
         <p

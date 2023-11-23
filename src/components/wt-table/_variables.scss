@@ -4,13 +4,16 @@
 
   --table-head-sort-arrow-margin: var(--spacing-xs);
   --table-head-border: 1px solid;
-  --table-head-border-color: var(--secondary-color);
 
   --table-min-height: 24px; // 24px icon size or body-1 lh
   --table-column-gap: var(--spacing-xs);
   --table-row-padding: var(--spacing-xs);
 
-  --table-primary-color: var(--main-color);
-  --table--hover-color: var(--accent-secondary-color);
-  --table-secondary-color: var(--secondary-color-50); // zebra
+  --wt-table-head-border-color: var(--grey-lighten-1);
+  --wt-table-primary-color: var(--content-wrapper-color);
+  --wt-table-zebra-color: var(--dp-18-surface-color);
+}
+
+:root.theme--dark {
+  --table-head-border-color: var(--grey-darken-1);
 }

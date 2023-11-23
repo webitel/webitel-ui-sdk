@@ -229,18 +229,13 @@ export default {
   border-collapse: collapse;
 }
 
-.wt-table__head {
+.wt-table__tr__head {
   display: block;
   box-sizing: border-box;
-  background: var(--table-primary-color);
   border: var(--table-head-border);
-  border-color: var(--table-head-border-color);
+  border-color: var(--wt-table-head-border-color);
   border-radius: var(--border-radius);
 }
-
-//.wt-table__head {
-//  display: block;
-//}
 
 .wt-table__tr {
   display: grid;
@@ -248,9 +243,10 @@ export default {
   transition: var(--transition);
   grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
   grid-column-gap: var(--table-column-gap);
+  background: var(--wt-table-primary-color);
 
   &:nth-child(2n) {
-    background: var(--table-secondary-color);
+    background: var(--wt-table-zebra-color);
   }
 }
 
@@ -281,8 +277,8 @@ export default {
   &--sortable {
     cursor: pointer;
 
-    &:hover ::v-deep .wt-icon__icon {
-      fill: var(--icon-color--hover);
+    &:hover :deep .wt-icon__icon {
+      fill: var(--icon-active-color);
     }
   }
 
@@ -301,7 +297,7 @@ export default {
 }
 
 .wt-table__foot {
-  border-color: var(--table-head-border-color);
-  border-top: var(--table-head-border);
+  border-color: var(--wt-table-head-border-color);
+  border-top: var(--wt-table-head-border-color);
 }
 </style>

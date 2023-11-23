@@ -9,16 +9,16 @@
       :selectable="false"
     >
       <template #value="{ item }">
-        <code class="language-javascript">{{ item.value }}</code>
+        <code>{{ item.value }}</code>
       </template>
       <template #type="{ item }">
-        <code class="language-javascript">{{ item.type }}</code>
+        <code>{{ item.type }}</code>
       </template>
       <template #default="{ item }">
-        <code class="language-javascript">{{ item.default }}</code>
+        <code>{{ item.default }}</code>
       </template>
       <template #code="{ item }">
-        <code class="language-markup">{{ item.code }}</code>
+        <code>{{ item.code }}</code>
       </template>
       <template #description="{ item }">
         <div>
@@ -27,7 +27,7 @@
             :value="item.description"
           />
           <p v-if="item.options">
-            Options: <code class="language-javascript">{{ item.options }}</code>
+            Options: <code>{{ item.options }}</code>
           </p>
         </div>
       </template>
