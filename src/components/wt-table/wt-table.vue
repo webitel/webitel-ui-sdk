@@ -229,14 +229,6 @@ export default {
   border-collapse: collapse;
 }
 
-.wt-table__tr__head {
-  display: block;
-  box-sizing: border-box;
-  border: var(--table-head-border);
-  border-color: var(--wt-table-head-border-color);
-  border-radius: var(--border-radius);
-}
-
 .wt-table__tr {
   display: grid;
   padding: var(--table-row-padding);
@@ -248,6 +240,13 @@ export default {
   &:nth-child(2n) {
     background: var(--wt-table-zebra-color);
   }
+}
+
+.wt-table__tr__head {
+  border: var(--table-head-border);
+  border-color: var(--wt-table-head-border-color);
+  border-radius: var(--border-radius);
+  background: transparent;
 }
 
 .wt-table__th,

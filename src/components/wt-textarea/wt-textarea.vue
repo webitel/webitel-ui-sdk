@@ -162,18 +162,6 @@ export default {
   position: relative;
 }
 
-.wt-label {
-  .wt-textarea:hover &,
-  .wt-textarea:focus-within & {
-    color: var(--form-label--hover-color);
-  }
-
-  .wt-textarea--invalid:hover &,
-  .wt-textarea--invalid:focus-within & {
-    color: var(--wt-label-error-color);
-  }
-}
-
 .wt-textarea__textarea {
   @extend %typo-body-1;
   @extend %wt-scrollbar;
@@ -186,27 +174,22 @@ export default {
   padding: var(--textarea-padding);
   resize: none;
   transition: var(--transition);
-  color: var(--form-input-color);
   border: var(--input-border);
-  border-color: var(--form-border-color);
+  border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
-
-  &:focus {
-    @include wt-placeholder('focus');
-
-    border-color: var(--form-border--hover-color);
-  }
 
   .wt-textarea--disabled & {
     @include wt-placeholder('disabled');
 
-    border-color: var(--form-border--disabled-color);
-    background: var(--form-border--disabled-color);
+    border-color: var(--wt-text-field-input-border-disabled-color);
+    background: var(--wt-text-field-input-background-disabled-color);
   }
 
   .wt-textarea--invalid &,
   .wt-textarea--invalid:hover & {
-    border-color: var(--false-color);
+    @include wt-placeholder('error');
+    color: var(--wt-text-field-error-text-color);
+    border-color: var(--wt-text-field-input-border-error-color);
     outline: none; // prevent outline overlapping false color
   }
 }

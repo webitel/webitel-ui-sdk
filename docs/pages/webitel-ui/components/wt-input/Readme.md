@@ -7,6 +7,8 @@ import ExampleInputAfterSlot from './examples/example-input-after-slot.vue';
 import ExamplePasswordInput from './examples/example-password-input.vue';
 </script>
 
+# WtInput
+
 ::: raw
 
 <Docs />
