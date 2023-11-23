@@ -1,7 +1,6 @@
 <template>
   <div
     :class="{
-      'wt-tooltip--contrast': contrast,
       'wt-tooltip--visible': isVisible,
     }"
     class="wt-tooltip"
@@ -40,10 +39,6 @@ import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
 
 const props = defineProps({
   visible: {
-    type: Boolean,
-    default: false,
-  },
-  contrast: {
     type: Boolean,
     default: false,
   },
@@ -133,18 +128,11 @@ onMounted(() => {
   .wt-tooltip-floating {
     @extend %typo-body-2;
     padding: var(--spacing-2xs) var(--spacing-xs);
-    color: var(--contrast-color);
-    background: var(--main-color);
+    color: var(--wt-tooltip-text-color);
+    background: var(--wt-tooltip-background-color-color);
     border-radius: var(--border-radius);
     box-shadow: var(--elevation-10);
     z-index: 1000;
-  }
-
-  &--contrast {
-    .wt-tooltip-floating {
-      color: var(--main-color);
-      background: var(--contrast-color);
-    }
   }
 }
 </style>

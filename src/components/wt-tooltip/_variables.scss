@@ -2,10 +2,8 @@
 :root {
   --tooltip-padding: var(--spacing-2xs) var(--spacing-xs);
 
-  --tooltip-light-text-color: var(--text-primary-color);
-  --tooltip-light-bg-color: var(--main-color);
-  --tooltip-dark-text-color: var(--text-contrast-color);
-  --tooltip-dark-bg-color: var(--contrast-color);
+  --wt-tooltip-text-color: var(--text-main-color);
+  --wt-tooltip-background-color: var(--dp-24-surface-color);
 
   --tooltip-elevation: var(--elevation-10);
 }
