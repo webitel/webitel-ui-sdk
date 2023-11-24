@@ -5,8 +5,9 @@
     type="button"
     @click="emit('click', $event)"
   >
+<!--    prevent icon-btn classes to fall to wt-icon -->
     <wt-icon
-      v-bind="$attrs"
+      v-bind="{ ...$attrs, class: '' }"
       :disabled="disabled"
     />
   </button>

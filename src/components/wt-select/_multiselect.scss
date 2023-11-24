@@ -1,5 +1,5 @@
 
-.multiselect ::v-deep {
+.multiselect :deep {
   cursor: pointer;
   position: relative;
 
@@ -11,6 +11,7 @@
     transition: var(--transition);
     width: fit-content; // reset default
     height: fit-content; // reset default
+    background: transparent;
 
     &:before {
       display: none; // reset default
@@ -29,12 +30,13 @@
   }
 
 
+  // visible select input wrapper
   .multiselect__tags {
     padding: calc(var(--spacing-xs) - 1px); // borders
-    color: var(--form-input-color);
     border: var(--select-tags-border);
-    border-color: var(--form-border-color);
+    border-color: var(--wt-text-field-input-border-color);
     border-radius: var(--border-radius);
+    background: transparent;
   }
 
 
@@ -48,13 +50,9 @@
     margin: 0; // reset default
   }
 
-  .multiselect__input:focus {
-    @include wt-placeholder('focus');
-  }
-
   .multiselect__custom-tag,
   .multiselect__single-label {
-    color: var(--form-input-color);
+    color: var(--wt-text-field-placeholder-color);
   }
 
   .multiselect__placeholder {
@@ -68,17 +66,22 @@
     text-overflow: ellipsis;
   }
 
+  // select options wrapper
   .multiselect__content-wrapper {
     @extend %wt-distant-scrollbar;
     transition: var(--transition);
     border: var(--select-tags-border);
-    border-color: var(--form-border-color);
+    border-color: var(--wt-text-field-select-option-wrapper-border-color);
     border-radius: var(--border-radius);
+    box-shadow: var(--elevation-10);
   }
 
+  // select options
   .multiselect__option {
     @extend %typo-body-1;
     padding: var(--select-options-padding);
+    color: var(--wt-text-field-select-option-text-color);
+    background: var(--wt-text-field-select-option-background-color);
 
     &:after {
       display: none;
@@ -86,53 +89,28 @@
 
 
     &--highlight {
-      color: var(--form-input-color);
-      //background: var(--select-option--hover-color);
-      background: none;
+      color: var(--wt-text-field-select-option-text-hover-color);
+      background: var(--wt-text-field-select-option-background-hover-color);
     }
 
 
     &--selected {
-      font-weight: normal;
-      background: var(--select-option--active-color)
+      font-weight: normal; // reset
+      color: var(--wt-text-field-select-option-text-selected-color);
+      background: var(--wt-text-field-select-option-background-selected-color)
     }
   }
 }
 
-.multiselect--active ::v-deep {
+.multiselect--active :deep {
   .multiselect__select .wt-icon__icon {
-    fill: var(--icon-color--hover);
-  }
-
-  .multiselect__tags {
-    border-color: var(--form-border--active-color);
-
-    .multiselect__placeholder {
-      //@extend %wt-placeholder--focus;
-    }
-  }
-
-}
-
-.wt-select:hover,
-.wt-tags-input:hover {
-  .multiselect ::v-deep {
-    .multiselect__tags {
-      border-color: var(--form-border--hover-color);
-    }
-
-    .multiselect__select,
-    .multiselect__clear {
-      .wt-icon__icon {
-        fill: var(--icon-color--hover);
-      }
-    }
+    fill: var(--icon-active-color);
   }
 }
 
 .wt-select--loading,
 .wt-tags-input--loading {
-  ::v-deep {
+  :deep {
     .multiselect__content-wrapper {
       overflow-y: hidden;
     }
@@ -155,10 +133,20 @@
 
 .wt-select.wt-select--invalid,
 .wt-tags-input.wt-tags-input--invalid {
-  .multiselect ::v-deep {
+  .multiselect :deep {
     .multiselect__tags {
-      border-color: var(--false-color);
+      border-color: var(--wt-text-field-input-border-error-color);
       outline: none; // prevent outline overlapping false color
+    }
+
+    .multiselect__custom-tag,
+    .multiselect__single-label {
+      color: var(--wt-text-field-placeholder-error-color);
+    }
+
+    .multiselect__placeholder {
+      @extend %wt-placeholder--error;
+      //color: var(--form-placeholder--disabled-color);
     }
   }
 }
@@ -176,21 +164,29 @@
     background: transparent; // reset default
   }
 
-  .multiselect__arrow-caret ::v-deep .wt-icon__icon,
-  .multiselect__clear ::v-deep .wt-icon__icon {
-    fill: var(--icon-color-disabled);
-  }
-
   .multiselect {
-    ::v-deep {
+    :deep {
       .multiselect__tags {
-        border-color: var(--form-border--disabled-color);
-        background: var(--form-border--disabled-color);
+        border-color: var(--wt-text-field-input-border-disabled-color);
+        background: var(--wt-text-field-input-background-disabled-color);
 
         .multiselect__placeholder {
           @extend %wt-placeholder--disabled;
           //color: var(--form-placeholder--disabled-color);
         }
+      }
+    }
+  }
+}
+
+// override .wt-select colors on chips
+.wt-tags-input,
+.wt-tags-input--invalid {
+  .multiselect :deep {
+    .multiselect__tags {
+      .multiselect__custom-tag,
+      .multiselect__single-label {
+        color: var(--wt-chip-main-text-color);
       }
     }
   }

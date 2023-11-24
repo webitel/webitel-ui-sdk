@@ -47,6 +47,7 @@
           <wt-icon-btn
             icon="close--filled"
             size="sm"
+            color="on-primary"
             @click="remove(option)"
           />
         </wt-chip>
@@ -169,30 +170,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import './variables.scss';
-</style>
-
 <style lang="scss" scoped>
 @import '../wt-select/multiselect.scss';
 
 .wt-tags-input {
   width: 100%;
-}
-
-.wt-tags-input:hover,
-.wt-tags-input:focus-within {
-  .wt-label {
-    color: var(--form-label--hover-color);
-  }
-}
-
-.wt-tags-input--invalid,
-.wt-tags-input--invalid:hover,
-.wt-tags-input--invalid:focus-within, {
-  .wt-label {
-    color: var(--false-color);
-  }
 }
 
 .wt-tags-input--disabled {
@@ -202,7 +184,8 @@ export default {
   }
 }
 
-.wt-tags-input .multiselect ::v-deep {
+// paddings recalc
+.wt-tags-input .multiselect :deep {
   .multiselect__tags {
     padding-bottom: 0;
     padding-right: calc(

@@ -1,90 +1,15 @@
 <template>
-  <section>
-    <h2>Select</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-select
-          v-model="value"
-          :options="options"
-          label="Select"
-          track-by="name"
-        />
-        <pre><code class="language-html">
-          &lt;wt-select
-            v-model="value"
-            :options="options"
-            label="Select"
-            track-by="name"
-          &gt;
-          &lt;/wt-select&gt;
-        </code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-select
-          v-model="multipleValue"
-          :options="options"
-          :close-on-select="false"
-          label="Multiple Select"
-          track-by="name"
-          :v="vValid"
-          multiple
-        />
-        <pre><code class="language-html">
-          &lt;wt-select
-            v-model="multipleValue"
-            :options="options"
-            :close-on-select="false"
-            label="Multiple Select"
-            track-by="name"
-            :v="vValid"
-            multiple
-          &gt;
-          &lt;/wt-select&gt;
-        </code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-select
-          v-model="value"
-          label="Disabled Select"
-          track-by="name"
-          disabled
-        />
-        <wt-select
-          v-model="value"
-          label="Invalid Select"
-          track-by="name"
-          :v="vInvalid"
-        />
-      </div>
-    </article>
-    <p><b>In order to work with single object value, you need to pass '' as default to see placeholder</b></p>
-    <component-model />
-    <h3>
-      Full docs: <a
-        class="full-docs-link"
-        href="https://vue-multiselect.js.org/"
-      >Vue
-        Multiselect</a>
-    </h3>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-    <component-slots
-      :slots="slots"
-    />
-    <article>
-      <h3>How to close select programmatically?</h3>
-      <a href="https://github.com/shentao/vue-multiselect/pull/947/files/05760bd1e92ce53353a1733aee054a996738f181">vue-multiselect docs link</a>
-    </article>
-    <pre class="language-javascript"><code>
-    closeSelect() {
-      this.$refs['wt-select'].$refs['vue-multiselect'].deactivate(); // 'vue-multiselect' ref is always present
-    },
-    </code></pre>
-  </section>
+  <component-model />
+
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
+  <component-slots
+    :slots="slots"
+  />
 </template>
 
 <script>
@@ -93,31 +18,6 @@ import Prism from 'prismjs';
 export default {
   name: 'WtSelectDocs',
   data: () => ({
-    vValid: {
-      $error: false,
-      $dirty: true,
-    },
-    vInvalid: {
-      $error: true,
-      $dirty: true,
-      required: false,
-    },
-    value: '',
-    multipleValue: [],
-    options: [
-      { name: 'Vue.js1', language: 'JavaScript' },
-      { name: 'Adonis2', language: 'JavaScript' },
-      { name: 'Rails3', language: 'Ruby' },
-      { name: 'Sinatra4', language: 'Ruby' },
-      { name: 'Laravel5', language: 'PHP' },
-      { name: 'Phoenix6', language: 'Elixir' },
-      { name: 'Vue.js7', language: 'JavaScript' },
-      { name: 'Adonis8', language: 'JavaScript' },
-      { name: 'Rails9', language: 'Ruby' },
-      { name: 'Sinatra10', language: 'Ruby' },
-      { name: 'Laravel11', language: 'PHP' },
-      { name: 'Phoenix12', language: 'Elixir' },
-    ],
     properties: [
       {
         value: 'value',
@@ -216,7 +116,7 @@ export default {
       {
         value: 'reset',
         params: [
-          { name: 'value', type: "['String', 'Array', 'Object'] -- depends on value prop datatype" },
+          { name: 'value', type: '[\'String\', \'Array\', \'Object\'] -- depends on value prop datatype' },
         ],
         description: 'Emitted on "reset" icon click, along with "input" (input is emitted first) '
           + 'event with empty value',
@@ -236,12 +136,18 @@ export default {
       },
       {
         name: 'option',
-        scope: [{ name: 'option', description: 'option itself' }, { name: 'optionLabel', description: 'optionLabel prop' }],
+        scope: [
+          { name: 'option', description: 'option itself' },
+          { name: 'optionLabel', description: 'optionLabel prop' },
+        ],
         description: 'Watch vue-multiselect option slot',
       },
       {
         name: 'singleLabel',
-        scope: [{ name: 'option', description: 'option itself' }, { name: 'optionLabel', description: 'optionLabel prop' }],
+        scope: [
+          { name: 'option', description: 'option itself' },
+          { name: 'optionLabel', description: 'optionLabel prop' },
+        ],
         description: 'Watch vue-multiselect singleLabel slot',
       },
     ],

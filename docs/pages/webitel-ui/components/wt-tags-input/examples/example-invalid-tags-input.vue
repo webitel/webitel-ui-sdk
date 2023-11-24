@@ -2,13 +2,17 @@
 import { useVuelidate } from '@vuelidate/core';
 import { computed, ref } from 'vue';
 
-const value = ref([]);
-
 const autocomplete = [
   { name: 'Vue.js', language: 'JavaScript' },
   { name: 'Adonis', language: 'JavaScript' },
   { name: 'Rails', language: 'Ruby' },
 ];
+
+const value = ref([
+  autocomplete[0],
+  autocomplete[1],
+]);
+
 
 const v$ = useVuelidate(computed(() => ({
   value: {
@@ -28,6 +32,14 @@ v$.value.$touch();
     option-label="name"
     :v="v$"
     @input="value = $event"
+  />
+  <wt-tags-input
+    :value="[]"
+    label="Empty Tags Input"
+    :options="autocomplete"
+    track-by="name"
+    option-label="name"
+    :v="v$"
   />
 </template>
 

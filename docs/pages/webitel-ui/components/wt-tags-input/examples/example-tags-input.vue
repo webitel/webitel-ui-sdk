@@ -19,6 +19,13 @@ const autocomplete = [
     option-label="name"
     @input="value = $event"
   />
+  <wt-tags-input
+    :value="''"
+    label="Empty Tags Input"
+    :options="autocomplete"
+    track-by="name"
+    option-label="name"
+  />
 </template>
 
 <style scoped lang="scss">

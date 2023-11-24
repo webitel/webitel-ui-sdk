@@ -36,6 +36,7 @@ export default defineConfig({
 
   // additionalData: `@import "../../src/css/main.scss";`,
   themeConfig: {
+    // search: { provider: 'local' },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },

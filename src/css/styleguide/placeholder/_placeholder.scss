@@ -42,3 +42,8 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
   @extend %wt-placeholder;
   color: var(--wt-text-field-placeholder-disabled-color);
 }
+
+%wt-placeholder--error {
+  @extend %wt-placeholder;
+  color: var(--wt-text-field-placeholder-error-color);
+}
