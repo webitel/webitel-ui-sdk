@@ -1,12 +1,22 @@
 <script setup>
-
+  const colors = [
+    'main',
+    'primary',
+    'secondary',
+    'success',
+    'warning',
+    'error',
+    'transfer',
+  ];
 </script>
 
 <template>
   <div style="display: flex; flex-wrap: nowrap; gap: 10px;">
-    <wt-chip color="primary">Primary</wt-chip>
-    <wt-chip color="secondary">Secondary</wt-chip>
-    <wt-chip color="success">Success</wt-chip>
+    <wt-chip
+      v-for="color of colors"
+      :key="color"
+      :color="color"
+    >{{color}}</wt-chip>
   </div>
 </template>
 

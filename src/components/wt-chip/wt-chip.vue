@@ -11,11 +11,13 @@
 export default {
   name: 'WtChip',
   props: {
+    /**
+     * The color of the chip
+     * @values main, primary, secondary, success, warning, error, transfer
+     */
     color: {
       type: String,
       default: 'main',
-      options: ['main', 'outline', 'accent', 'secondary', 'secondary-50', 'success', 'danger', 'transfer'],
-      notes: '"main" and "outline" are chip-specific colors',
     },
   },
 };

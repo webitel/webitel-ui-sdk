@@ -3,39 +3,42 @@
 
   display: inline-block;
   padding: var(--chip-padding);
-  color: var(--text-primary-color);
+  color: var(--wt-chip-main-text-color);
   border-radius: var(--chip-border-radius);
-  background: var(--chip-bg-color);
+  background: var(--wt-chip-main-background-color);
 
   &--main-color {
-    background: var(--chip-bg-color);
+    background: var(--wt-chip-main-background-color);
+    color: var(--wt-chip-main-text-color);
   }
 
-  &--outline-color {
-    background: var(--chip-bg-color--outline);
-  }
-
-  &--accent-color {
-    background: var(--primary-color);
+  &--primary-color {
+    background: var(--wt-chip-primary-background-color);
+    color: var(--wt-chip-primary-text-color);
   }
 
   &--secondary-color {
-    background: var(--secondary-color);
-  }
-
-  &--secondary-50-color {
-    background: var(--secondary-color-50);
+    background: var(--wt-chip-secondary-background-color);
+    color: var(--wt-chip-secondary-text-color);
   }
 
   &--success-color {
-    background: var(--true-color);
+    background: var(--wt-chip-success-background-color);
+    color: var(--wt-chip-success-text-color);
   }
 
-  &--danger-color {
-    background: var(--false-color);
+  &--warning-color {
+    background: var(--wt-chip-warning-background-color);
+    color: var(--wt-chip-warning-text-color);
+  }
+
+  &--error-color {
+    background: var(--wt-chip-error-background-color);
+    color: var(--wt-chip-error-text-color);
   }
 
   &--transfer-color {
-    background: var(--transfer-color);
+    background: var(--wt-chip-transfer-background-color);
+    color: var(--wt-chip-transfer-text-color);
   }
 }

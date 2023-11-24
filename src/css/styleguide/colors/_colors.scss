@@ -36,7 +36,7 @@
   --success-color: var(--green-darken-4);
   --success-hover-color: var(--green-darken-3);
   --success-light-color: var(--green-lighten-4);
-  --success-on-color: var(--black);
+  --success-on-color: var(--white);
 
   // warning colors
   --warning-color: var(--orange-accent-2);
@@ -48,7 +48,7 @@
   --error-color: var(--red-accent-2);
   --error-hover-color: var(--red-lighten-2);
   --error-light-color: var(--red-lighten-4);
-  --error-on-color: var(--black);
+  --error-on-color: var(--white);
 
   // info colors
   --info-color: var(--blue-darken-1);
@@ -125,19 +125,19 @@
   --success-color: var(--green-darken-4);
   --success-hover-color: var(--green-darken-3);
   --success-light-color: var(--green-lighten-3);
-  --success-on-color: var(--white);
+  --success-on-color: var(--black);
 
   // warning colors
   --warning-color: var(--orange-accent-2);
   --warning-hover-color: var(--orange-accent-1);
   --warning-light-color: var(--orange-lighten-3);
-  --warning-on-color: var(--white);
+  --warning-on-color: var(--black);
 
   // error colors
   --error-color: var(--red-accent-2);
   --error-hover-color: var(--red-lighten-2);
   --error-light-color: var(--red-lighten-3);
-  --error-on-color: var(--white);
+  --error-on-color: var(--black);
 
   // info colors
   --info-color: var(--blue-darken-1);
