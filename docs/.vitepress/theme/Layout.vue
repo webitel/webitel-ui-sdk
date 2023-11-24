@@ -26,3 +26,12 @@ onMounted(() => {
 <template>
   <DefaultTheme.Layout />
 </template>
+
+<style lang="scss">
+:root {
+  --vp-c-bg: var(--dp-22-surface-color);
+  --vp-c-bg-alt: var(--dp-20-surface-color);
+  --vp-c-bg-elv: var(--dp-18-surface-color);
+  --vp-c-bg-soft: var(--dp-16-surface-color);
+}
+</style>
