@@ -1,57 +1,11 @@
 <template>
-  <section>
-    <h2>Tags Input</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-tags-input
-          v-model="value"
-          label="Tags Input"
-          :options="autocomplete"
-          track-by="name"
-          taggable
-        />
-        <pre><code class="language-html">
-          &lt;wt-tags-input
-            v-model="value"
-            label="Tags Input"
-            :options="autocomplete"
-            taggable
-          &gt;&lt;/wt-tags-input&gt;
-        </code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-tags-input
-          v-model="value"
-          label="Disabled Tags Input"
-          disabled
-        />
-        <wt-tags-input
-          v-model="value"
-          label="Invalid Tags Input"
-          :v="vInvalid"
-        />
-      </div>
-    </article>
-    <component-model />
-    <h3>
-      This component is built on top of <a
-        class="full-docs-link"
-        href="https://vue-multiselect.js.org/"
-      >Vue
-        Multiselect</a>, like wt-select component.
-      There will be described only differences from wt-select component. Same props, events and slots are listed on wt-select page.
-      For more information, see <a
-        class="full-docs-link"
-        href="https://dev.webitel.com/ui-sdk/components/select"
-      >WtSelect Docs</a>
-    </h3>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+  <component-model />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -60,17 +14,6 @@ import Prism from 'prismjs';
 export default {
   name: 'WtTagsInputDocs',
   data: () => ({
-    vInvalid: {
-      $error: true,
-      $dirty: true,
-      required: false,
-    },
-    value: [],
-    autocomplete: [
-      { name: 'Vue.js', language: 'JavaScript' },
-      { name: 'Adonis', language: 'JavaScript' },
-      { name: 'Rails', language: 'Ruby' },
-    ],
     properties: [
       {
         value: 'value',

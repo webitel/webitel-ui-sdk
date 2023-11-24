@@ -2,6 +2,6 @@
 :root {
   --chip-padding: var(--spacing-2xs) var(--spacing-sm);
   --chip-border-radius: var(--spacing-lg);
-  --chip-bg-color: var(--accent-secondary-color);
-  --chip-bg-color--outline: var(--secondary-color);
+
+  wt-chip-background-primary-color: var(--primary-color);
 }
