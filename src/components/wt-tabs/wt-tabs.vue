@@ -49,7 +49,9 @@ export default {
       default: () => [],
     },
   },
-
+  emits: [
+    'change',
+  ],
   data: () => ({
     activeLineWidth: 0,
     activeLineOffset: 0,
@@ -93,7 +95,7 @@ export default {
   padding-bottom: var(--tab-padding);
   cursor: pointer;
   transition: var(--transition);
-  color: var(--tab-color);
+  color: var(--wt-tabs-text-color);
   border: none;
   border-bottom: var(--tab-border);
   border-bottom-color: transparent;
@@ -102,13 +104,13 @@ export default {
 
   &:hover,
   &:focus, {
-    color: var(--tab--hover-color);
-    border-bottom-color: var(--tab--active-border-color);
+    color: var(--wt-tabs-text-hover-color);
+    border-bottom-color: var(--wt-tabs-underline-active-color);
   }
 
   &.wt-tab--highlight {
-    color: var(--tab--active-color);
-    border-bottom-color: var(--tab--active-border-color);
+    color: var(--wt-tabs-text-active-color);
+    border-bottom-color: var(--wt-tabs-underline-active-color);
   }
 
   //// disables bold font resize on hover

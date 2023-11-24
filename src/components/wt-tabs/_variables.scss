@@ -5,10 +5,10 @@
 
   --tab-padding: var(--spacing-2xs);
   --tab-gap: var(--spacing-2xs);
-  --tab-color: var(--text-outline-color);
-  --tab--hover-color: var(--text-primary-color);
-  --tab--active-color: var(--text-primary-color);
+  --wt-tabs-text-color: var(--text-main-color);
+  --wt-tabs-text-hover-color: var(--wt-tabs-text-color);
+  --wt-tabs-text-active-color: var(--wt-tabs-text-color);
   --tab-border: 4px solid;
-  --tab--active-border-color: var(--primary-color);
+  --wt-tabs-underline-active-color: var(--primary-color);
   --tab-z-index: 1;
 }
