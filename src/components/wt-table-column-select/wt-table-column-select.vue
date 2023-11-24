@@ -35,8 +35,9 @@
               @click.capture.prevent="column.show = !column.show"
             >
               <wt-checkbox
-                v-model="column.show"
+                :selected="column.show"
                 :label="shownColLabel(column)"
+                @change="column.show = $event"
               />
             </li>
           </ul>
@@ -81,7 +82,9 @@ export default {
       description: 'Header values to exclude from selection',
     },
   },
-
+  emits: [
+    'change',
+  ],
   data: () => ({
     draft: [], // headers draft
     isColumnSelectPopup: false,

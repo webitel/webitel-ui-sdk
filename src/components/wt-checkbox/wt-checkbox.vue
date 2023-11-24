@@ -3,12 +3,12 @@
     class="wt-checkbox"
     :class="{
       'wt-checkbox--active': isChecked,
-      'wt-checkbox--outline': outline,
       'wt-checkbox--disabled': disabled,
     }"
   >
     <wt-label
       v-bind="labelProps"
+      :disabled="disabled"
       class="wt-checkbox__wrapper"
     >
       <input
@@ -62,10 +62,6 @@ export default {
       default: '',
     },
     disabled: {
-      type: Boolean,
-      default: false,
-    },
-    outline: {
       type: Boolean,
       default: false,
     },
@@ -151,46 +147,12 @@ export default {
 }
 
 .wt-checkbox:hover {
-  .wt-checkbox__label {
-    color: var(--form-label--hover-color);
-  }
-
-  ::v-deep .wt-icon__icon {
-    fill: var(--icon-color--hover);
-  }
-}
-
-.wt-checkbox--active {
-  .wt-checkbox__label {
-    color: var(--form-label--active-color);
-  }
-}
-
-.wt-checkbox--outline {
-  .wt-checkbox__label {
-    color: var(--form-outline-label-color);
-  }
-
-  ::v-deep .wt-icon__icon {
-    fill: var(--icon-outline-color);
-  }
-
-  &.wt-checkbox--active {
-    .wt-checkbox__label {
-      color: var(--form-label--active-color);
-    }
-
-    ::v-deep .wt-icon__icon {
-      fill: var(--icon-outline--active-color);
-    }
+  :deep .wt-icon__icon {
+    fill: var(--icon-active-color);
   }
 }
 
 .wt-checkbox--disabled {
   pointer-events: none;
-
-  .wt-checkbox__label {
-    color: var(--form-label--disabled-color);
-  }
 }
 </style>

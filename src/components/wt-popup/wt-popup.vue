@@ -50,6 +50,7 @@ export default {
       default: false,
     },
   },
+  emits: ['close'],
   computed: {
     popupStyle() {
       let style = '';
@@ -77,7 +78,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--popup-shadow-color);
+  background: var(--wt-popup-shadow-color);
 }
 
 .wt-popup__popup {
@@ -88,7 +89,7 @@ export default {
   margin: var(--popup-padding);
   padding: var(--popup-padding);
   border-radius: var(--border-radius);
-  background: var(--popup-bg-color);
+  background: var(--wt-popup-background-color);
   box-shadow: var(--elevation-10);
   gap: var(--popup-sections-gap);
 }
@@ -99,9 +100,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--wt-popup-header-text-color);
   padding: var(--popup-header-padding);
   border-radius: var(--border-radius);
-  background: var(--popup-header-bg-color);
+  background: var(--wt-popup-header-background-color);
   gap: var(--popup-header-padding);
 
   .wt-popup__title {

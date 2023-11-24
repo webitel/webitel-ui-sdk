@@ -3,16 +3,17 @@
   --popup-wrapper-z-index: 11;
 
   --popup-shadow-opacity: 0.8;
-  --popup-shadow-color: hsla(var(--_contrast-color), var(--popup-shadow-opacity));
+  --wt-popup-shadow-color: hsla(0, 0%, 0%, var(--popup-shadow-opacity));
 
   --popup-max-height: 90%;
 
-  --popup-bg-color: var(--main-color);
+  --wt-popup-background-color: var(--dp-24-surface-color);
   --popup-sections-gap: var(--spacing-sm);
   --popup-padding: var(--popup-sections-gap);
 
   --popup-header-padding: var(--spacing-xs);
-  --popup-header-bg-color: var(--secondary-color);
+  --wt-popup-header-background-color: var(--dp-18-surface-color);
+  --wt-popup-header-text-color: var(--text-main-color);
 
   --popup-main-section-padding-right: var(--spacing-xs); // scroll offset
 
