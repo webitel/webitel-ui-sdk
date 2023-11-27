@@ -50,7 +50,7 @@ export default defineConfig({
     sidebar: [
       { text: 'How To', items: sidebarHowTo },
       { text: 'Components', items: sidebarComponents },
-      { text: 'сomponents/on-demand', items: onDemandSidebarComponents },
+      { text: 'Components/on-demand', items: onDemandSidebarComponents },
       { text: 'Validators', items: sidebarValidators },
     ].map(({ text, items }) => (
       {
