@@ -51,6 +51,7 @@ export default [
   'upload',
   'filter',
   'column-select',
+  'variable-select',
   'refresh',
   'calendar',
   'radio',
