@@ -1,26 +1,11 @@
 <template>
-  <section>
-    <h2>Table Actions</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-table-actions
-          :icons="['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings']"
-        />
-        <pre><code class="language-html">
-          &lt;wt-table-actions
-            :icons="['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings']"
-          &gt;&lt;/wt-table-actions&gt;
-        </code></pre>
-      </div>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-    <component-slots />
-  </section>
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
+  <component-slots />
 </template>
 
 <script>
@@ -35,7 +20,7 @@ export default {
         code: '<wt-table-actions :icons="[]"></wt-table-actions>',
         type: 'Array',
         options: ['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings'],
-        default: "['refresh']",
+        default: '[\'refresh\']',
       },
     ],
     events: [

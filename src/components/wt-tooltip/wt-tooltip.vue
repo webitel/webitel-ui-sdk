@@ -129,7 +129,7 @@ onMounted(() => {
     @extend %typo-body-2;
     padding: var(--spacing-2xs) var(--spacing-xs);
     color: var(--wt-tooltip-text-color);
-    background: var(--wt-tooltip-background-color-color);
+    background: var(--wt-tooltip-background-color);
     border-radius: var(--border-radius);
     box-shadow: var(--elevation-10);
     z-index: 1000;
