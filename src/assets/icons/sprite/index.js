@@ -61,6 +61,7 @@ import './close.svg';
 import './close--filled.svg';
 import './collapse.svg';
 import './column-select.svg';
+import './variable-select.svg';
 import './contacts.svg';
 import './copy.svg';
 import './docs.svg';
