@@ -33,14 +33,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.flow-save-filed-popup__wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-
-  .wt-icon {
-    margin-bottom: var(--spacing-sm);
-  }
-}
 </style>
