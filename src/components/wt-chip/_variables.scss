@@ -9,8 +9,8 @@
   --wt-chip-primary-background-color: var(--primary-color);
   --wt-chip-primary-text-color: var(--primary-on-color);
 
-  --wt-chip-secondary-background-color: var(--dp-14-surface-color);
-  --wt-chip-secondary-text-color: var(--grey-darken-4);
+  --wt-chip-secondary-background-color: var(--secondary-color);
+  --wt-chip-secondary-text-color: var(--secondary-on-color);
 
   --wt-chip-success-background-color: var(--success-color);
   --wt-chip-success-text-color: var(--success-on-color);
@@ -23,8 +23,4 @@
 
   --wt-chip-transfer-background-color: var(--transfer-color);
   --wt-chip-transfer-text-color: var(--transfer-on-color);
-}
-
-:root.theme--dark {
-  --wt-chip-secondary-text-color: var(--grey-lighten-4);
 }

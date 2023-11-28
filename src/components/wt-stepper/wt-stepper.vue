@@ -15,7 +15,7 @@
           />
           <wt-chip
             class="wt-stepper-steps__item"
-            :color="!completed && 'secondary'"
+            :color="completed ? 'primary' : 'secondary'"
           >
             {{ name }}
           </wt-chip>
@@ -53,6 +53,10 @@ const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
   })));
 </script>
 
+<style lang="scss">
+@import './variables.scss';
+</style>
+
 <style lang="scss" scoped>
 .wt-stepper {
   width: 100%;
@@ -76,10 +80,10 @@ const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
   &__divider {
     flex: 1 1 auto;
     height: 1px;
-    background: var(--secondary-color);
+    background: var(--wt-stepper-divider-background-color);
 
     &--completed {
-      background-color: var(--chip-bg-color);
+      background-color: var(--wt-stepper-divider-background-completed-color);
     }
   }
 }

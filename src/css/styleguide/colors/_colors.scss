@@ -80,6 +80,12 @@
   --primary-light-color: var(--amber-lighten-4);
   --primary-on-color: var(--black);
 
+  // secondary colors
+  --secondary-color: var(--dp-10-surface-color);
+  --secondary-hover-color: var(--dp-14-surface-color);
+  --secondary-light-color: var(--dp-16-surface-color);
+  --secondary-on-color: var(--grey-darken-4);
+
   // accent colors
   --accent-color: var(--purple-lighten-1);
   --sub-accent-color: var(--indigo-darken-3);
@@ -168,6 +174,9 @@
   --primary-hover-color: var(--amber-accent-3);
   --primary-light-color: var(--amber-lighten-4);
   --primary-on-color: var(--black);
+
+  // secondary colors
+  --secondary-on-color: var(--grey-lighten-4);
 
   // accent colors
   --accent-color: var(--purple-lighten-1);
