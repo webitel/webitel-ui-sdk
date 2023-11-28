@@ -71,6 +71,7 @@ export default {
       default: false,
     },
   },
+  emits: ['input'],
   computed: {
     isChecked() {
       return this.value === this.selected;
@@ -87,9 +88,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
 
 /* Customize the label (the container) */
 .wt-radio {
@@ -128,61 +131,22 @@ export default {
 }
 
 .wt-radio:hover {
-  .wt-radio__label {
-    color: var(--form-label--hover-color);
-  }
-
-  ::v-deep .wt-icon__icon {
-    fill: var(--icon-color--hover);
+  :deep .wt-icon__icon {
+    fill: var(--icon-btn-hover-color);
   }
 }
 
 .wt-radio--active {
-  .wt-radio__label {
-    color: var(--form-label--active-color);
-  }
-
-  ::v-deep .wt-icon__icon {
-    fill: var(--icon-color-active);
-  }
-}
-
-.wt-radio--outline {
-  .wt-radio__label {
-    color: var(--form-outline-label-color);
-  }
-
-  ::v-deep .wt-icon__icon {
-    fill: var(--icon-outline-color);
-  }
-
-  &.wt-radio--active {
-    .wt-radio__label {
-      color: var(--form-label--active-color);
-    }
-
-    ::v-deep .wt-icon__icon {
-      fill: var(--icon-outline--active-color);
-    }
-  }
-
-  &:hover {
-
-    ::v-deep .wt-icon__icon {
-      fill: var(--icon-outline--hover-color);
-    }
+  :deep .wt-icon__icon {
+    fill: var(--icon-active-color);
   }
 }
 
 .wt-radio--disabled {
   pointer-events: none;
 
-  .wt-radio__label {
-    color: var(--form-label--disabled-color);
-  }
-
-  ::v-deep .wt-icon__icon {
-    fill: var(--icon-color-disabled);
+  :deep .wt-icon__icon {
+    fill: var(--icon-disabled-color);
   }
 }
 </style>
