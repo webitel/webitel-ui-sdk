@@ -53,7 +53,7 @@ export default ({ mode }) => {
     },
     resolve: {
       alias: {
-        vue: '@vue/compat',
+        // vue: '@vue/compat',
       },
     },
     plugins: [
