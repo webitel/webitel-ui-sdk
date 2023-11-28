@@ -1,7 +1,6 @@
 <template>
   <div
     :class="{
-      'wt-search-bar--outline': outline,
       'wt-search-bar--invalid': invalid,
     }"
     class="wt-search-bar"
@@ -75,10 +74,6 @@ const props = defineProps({
   placeholder: {
     type: String,
   },
-  outline: {
-    type: Boolean,
-    default: false,
-  },
   hint: {
     type: String,
     description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
@@ -128,12 +123,13 @@ function handleKeyup(event) {
 
   &.wt-search-bar--invalid {
     .wt-search-bar__wrapper {
-      border-color: var(--false-color);
+      border-color: var(--wt-text-field-input-border-error-color);
       outline: none; // prevent outline overlapping false color
     }
 
     .wt-search-bar__input {
-      color: var(--false-color);
+      @include wt-placeholder('error');
+      color: var(--wt-text-field-error-text-color);
     }
   }
 
@@ -142,7 +138,7 @@ function handleKeyup(event) {
     align-items: center;
     padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
     border: var(--input-border);
-    border-color: var(--form-border-color);
+    border-color: var(--wt-text-field-input-border-color);
     border-radius: var(--border-radius);
     gap: var(--spacing-xs);
   }
@@ -167,23 +163,9 @@ function handleKeyup(event) {
     width: 100%;
     padding: 0;
     transition: var(--transition);
-    color: var(--form-input-color);
+    color: var(--wt-text-field-placeholder-color);
     border: none;
     outline: none;
-
-    &:focus {
-      @include wt-placeholder('focus');
-      border-color: var(--form-border--hover-color);
-    }
-
-    .wt-search-bar--outline & {
-      border-color: var(--form-outline-border-color);
-    }
-
-    .wt-search-bar--outline:hover &,
-    .wt-search-bar--outline &:focus {
-      border-color: var(--form-outline-border--hover-color);
-    }
   }
 
   /* clears the 'X' from Internet Explorer */
