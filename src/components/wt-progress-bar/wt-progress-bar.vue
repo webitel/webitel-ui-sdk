@@ -29,7 +29,7 @@ export default {
     color: {
       type: String,
       default: 'primary',
-      options: ['primary', 'secondary', 'success', 'danger'],
+      options: ['primary', 'secondary', 'success', 'error'],
     },
   },
   computed: {
@@ -56,38 +56,43 @@ export default {
   box-sizing: border-box;
   width: 100%;
   position: relative;
-  padding: var(--progress-bar-padding);
+  padding: var(--wt-progress-bar-padding);
   line-height: 0;
+  background: var(--wt-progress-bar-background-color);
   border-radius: var(--border-radius);
   box-shadow: var(--elevation-1);
 }
 
 .wt-progress-bar__progress {
   display: inline-block;
-  height: var(--progress-bar-height);
+  height: var(--wt-progress-bar-height);
   will-change: width;
-  background: var(--primary-color);
-  border-radius: var(--progress-bar-border-radius) 0 0 var(--progress-bar-border-radius);
+  background: var(--wt-progress-bar-background-primary-color);
+  border-radius: var(--wt-progress-bar-border-radius) 0 0 var(--wt-progress-bar-border-radius);
   transition: var(--transition);
 }
 
 .wt-progress-bar--primary .wt-progress-bar__progress {
-  background: var(--progress-bar-bg-color--primary);
+  background: var(--wt-progress-bar-background-primary-color);
 }
 
 .wt-progress-bar--secondary .wt-progress-bar__progress {
-  background: var(--progress-bar-bg-color--secondary);
+  background: var(--wt-progress-bar-background-secondary-color);
 }
 
 .wt-progress-bar--success .wt-progress-bar__progress {
-  background: var(--progress-bar-bg-color--success);
+  background: var(--wt-progress-bar-background-success-color);
 }
 
-.wt-progress-bar--danger .wt-progress-bar__progress {
-  background: var(--progress-bar-bg-color--danger);
+.wt-progress-bar--error .wt-progress-bar__progress {
+  background: var(--wt-progress-bar-background-error-color);
+}
+
+.wt-progress-bar--warning .wt-progress-bar__progress {
+  background: var(--wt-progress-bar-background-warning-color);
 }
 
 .wt-progress-bar--overflow .wt-progress-bar__progress {
-  border-radius: var(--progress-bar-border-radius);
+  border-radius: var(--wt-progress-bar-border-radius);
 }
 </style>
