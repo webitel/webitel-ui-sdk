@@ -4,12 +4,6 @@
   </header>
 </template>
 
-<script>
-export default {
-  name: 'WtAppHeader',
-};
-</script>
-
 <style lang="scss">
 @import './variables.scss';
 </style>
