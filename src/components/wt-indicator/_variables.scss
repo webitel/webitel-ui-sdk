@@ -1,22 +1,16 @@
 :root {
-  --indicator-dot-size--size-sm: var(--spacing-xs);
-  --indicator-dot-size--size-md: var(--spacing-sm);
-  --indicator-dot-size: var(--indicator-size--size-md);
-  --indicator-dot-offset: var(--spacing-2xs);
+  --wt-indicator-dot-size--size-sm: var(--spacing-xs);
+  --wt-indicator-dot-size--size-md: var(--spacing-sm);
+  --wt-indicator-dot-size: var(--wt-indicator-size--size-md);
+  --wt-indicator-dot-offset: var(--spacing-2xs);
 
-  --indicator-text-margin: var(--spacing-2xs);
+  --wt-indicator-text-margin: var(--spacing-2xs);
 
-  --indicator-primary-color: var(--primary-color);
-
-  --indicator-secondary-color: var(--secondary-color);
-
-  --indicator-disabled-color: var(--disabled-color);
-
-  --indicator-true-color: var(--true-color);
-
-  --indicator-false-color: var(--false-color);
-
-  --indicator-transfer-color: var(--transfer-color);
-
-  --indicator-break-out-color: hsla(36, 90%, 50%, 1);
+  --wt-indicator-primary-color: var(--primary-color);
+  --wt-indicator-secondary-color: var(--dp-1-surface-color);
+  --wt-indicator-disabled-color: var(--dp-10-surface-color);
+  --wt-indicator-success-color: var(--success-color);
+  --wt-indicator-error-color: var(--error-color);
+  --wt-indicator-transfer-color: var(--transfer-color);
+  --wt-indicator-break-out-color: var(--warning-color);
 }

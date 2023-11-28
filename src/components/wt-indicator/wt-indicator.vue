@@ -27,7 +27,7 @@ export default {
     color: {
       type: String,
       default: 'secondary',
-      options: ['primary', 'secondary', 'accent', 'disabled', 'success', 'danger', 'transfer', 'break-out', 'job'],
+      options: ['primary', 'secondary', 'disabled', 'success', 'error', 'transfer', 'break-out'],
     },
     text: {
       type: [String, Number],
@@ -60,55 +60,50 @@ export default {
 
 .wt-indicator__text {
   @extend %typo-body-1;
-  margin-left: var(--indicator-text-margin);
+  margin-left: var(--wt-indicator-text-margin);
 }
 
 .wt-indicator__indicator {
-  min-width: var(--indicator-dot-size);
-  height: var(--indicator-dot-size);
-  margin: var(--indicator-dot-offset);
-  background: var(--indicator-disabled-color);
+  min-width: var(--wt-indicator-dot-size);
+  height: var(--wt-indicator-dot-size);
+  margin: var(--wt-indicator-dot-offset);
+  background: var(--wt-indicator-disabled-color);
   border-radius: 50%;
 
-  &--primary,
-  &--accent {
-    background: var(--indicator-primary-color);
+  &--primary {
+    background: var(--wt-indicator-primary-color);
   }
 
   &--secondary {
-    background: var(--indicator-secondary-color);
+    background: var(--wt-indicator-secondary-color);
   }
 
   &--disabled {
-    background: var(--indicator-disabled-color);
+    background: var(--wt-indicator-disabled-color);
   }
 
   &--success {
-    background: var(--indicator-true-color);
+    background: var(--wt-indicator-success-color);
   }
 
-  &--danger {
-    background: var(--indicator-false-color);
+  &--error {
+    background: var(--wt-indicator-error-color);
   }
 
   &--transfer {
-    background: var(--indicator-transfer-color);
+    background: var(--wt-indicator-transfer-color);
   }
 
   &--break-out {
-    background: var(--indicator-break-out-color);
-  }
-
-  &--job {
-    background: var(--job-color);
+    background: var(--wt-indicator-break-out-color);
   }
 }
 
 .wt-indicator--size {
   &-sm {
     .wt-indicator__indicator {
-      min-width: var(--indicator-dot-size--size-sm);
-      height: var(--indicator-dot-size--size-sm);
+      min-width: var(--wt-indicator-dot-size--size-sm);
+      height: var(--wt-indicator-dot-size--size-sm);
     }
     .wt-indicator__text {
       @extend %typo-caption;
@@ -116,8 +111,8 @@ export default {
   }
   &-md {
     .wt-indicator__indicator {
-      min-width: var(--indicator-dot-size--size-md);
-      height: var(--indicator-dot-size--size-md);
+      min-width: var(--wt-indicator-dot-size--size-md);
+      height: var(--wt-indicator-dot-size--size-md);
     }
     .wt-indicator__text {
       @extend %typo-body-1;
