@@ -1,6 +1,8 @@
 
 :root {
-  --status-select-padding: 0 calc(var(--icon-size-md) + var(--spacing-xs)) 0 0; // reset wt-select padding, but preserve arrow icon padding
-  --status-select-option-color: var(--form-input-color);
-  --status-select-bg--hover-color: var(--secondary-color);
+  --wt-status-select-padding: 0 calc(var(--icon-size-md) + var(--spacing-xs)) 0 0; // reset wt-select padding, but preserve arrow icon padding
+
+  --wt-status-select-option-text-color: var(--form-input-color);
+  --wt-status-select-option-background-hover-color: var(--secondary-color);
+  --wt-status-select-option-background-selected-color: var(--secondary-color);
 }

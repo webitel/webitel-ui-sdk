@@ -1,47 +1,34 @@
 <template>
-  <section>
-    <h2>Status select</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-status-select
-          v-model="status"
-        />
-        <pre><code class="language-html">
-          &lt;wt-status-select v-model="status"&gt;&lt;/wt-status-select&gt;
-        </code></pre>
-      </div>
-    </article>
-    <article>
-      <h3>Agent Status enum</h3>
-      <pre><code class="language-javascript">
+  <article>
+    <h3>Agent Status enum</h3>
+    <pre><code class="language-javascript">
           import AgentStatus from '@webitel/ui-sdk/src/enums/AgentStatus/AgentStatus.enum';
         </code></pre>
-      <p>
-        Enumerate with ONLINE ('online'), PAUSE ('pause'), OFFLINE ('offline'), BREAK_OUT ('break_out') values. Used
-        for agent status identifying and <b>recommended</b> for use in app logic
-      </p>
-    </article>
-    <article>
-      <h3>Status Options lookup</h3>
-      <pre><code class="language-javascript">
+    <p>
+      Enumerate with ONLINE ('online'), PAUSE ('pause'), OFFLINE ('offline'), BREAK_OUT ('break_out') values. Used
+      for agent status identifying and <b>recommended</b> for use in app logic
+    </p>
+  </article>
+  <article>
+    <h3>Status Options lookup</h3>
+    <pre><code class="language-javascript">
           import StatusOptions from '@webitel/ui-sdk/src/components/organisms/wt-status-select/_internals/StatusOptions.lookup';
         </code></pre>
-      <p>
-        Default wt-status-select options. Each option object contains "color",
-        "locale" (for this.$t(locale) usage) and AgentStatus enum value
-      </p>
-    </article>
-    <component-model
-      prop="status"
-      event="change"
-    />
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+    <p>
+      Default wt-status-select options. Each option object contains "color",
+      "locale" (for this.$t(locale) usage) and AgentStatus enum value
+    </p>
+  </article>
+  <component-model
+    prop="status"
+    event="change"
+  />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>

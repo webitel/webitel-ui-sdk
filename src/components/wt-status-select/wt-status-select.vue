@@ -52,6 +52,7 @@ export default {
     //   options: ['sm', 'md'],
     // },
   },
+  emits: ['change'],
   computed: {
     selectedOption() {
       return this.statusOptions.find((option) => option.value === this.status);
@@ -107,7 +108,7 @@ export default {
 
     .multiselect__tags {
       min-height: 0;
-      padding: var(--status-select-padding);
+      padding: var(--wt-status-select-padding);
       border: none;
     }
 
@@ -122,11 +123,15 @@ export default {
       .multiselect__option {
         min-height: 0;
         padding: 0;
-        color: var(--status-select-option-color);
+        color: var(--wt-status-select-option-text-color);
       }
 
       .multiselect__option--highlight {
-        background: var(--status-select-bg--hover-color);
+        background: var(--wt-status-select-option-background-hover-color);
+      }
+
+      .multiselect__option--selected {
+        background: var(--wt-status-select-option-background-selected-color);
       }
     }
   }

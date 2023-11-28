@@ -1,41 +1,11 @@
 <template>
-  <section>
-    <h2>Slider</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-slider
-          :value="number"
-          :min="0"
-          :max="100"
-          :step="1"
-          @input="setNumber"
-        />
-        <pre><code class="language-html">&lt;wt-slider :value="70" :min="0" :max="100" :step="1" @input="setNumber"&gt;&lt;/wt-slider&gt;</code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-label>Disabled</wt-label>
-        <wt-slider
-          disabled
-          :value="disabledValue"
-        />
-      </div>
-      <div class="example-wrapper">
-        <wt-label>Vertical</wt-label>
-        <wt-slider
-          v-model="verticalValue"
-          vertical
-          :height="100"
-        />
-      </div>
-    </article>
-    <component-model />
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+  <component-model />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -64,7 +34,7 @@ export default {
       },
       {
         value: 'max',
-        code: '<wt-slider :max=100></wt-slider>',
+        code: '<wt-slider :max="100"></wt-slider>',
         type: 'Number',
         default: 100,
         description: 'The biggest slider value',
@@ -109,11 +79,6 @@ export default {
   }),
   mounted() {
     Prism.highlightAll();
-  },
-  methods: {
-    setNumber(value) {
-      this.number = value;
-    },
   },
 };
 </script>

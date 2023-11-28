@@ -24,7 +24,7 @@ and swapping height/width of this component in order to have the correct output.
     class="wt-slider"
   >
     <div
-      :style="{ width: !vertical && verticalHeight }"
+      :style="{ width: vertical && verticalHeight }"
       class="wt-slider__wrapper"
     >
       <!-- The row above is needed in order to set correct component width when slider is vertical -->
@@ -77,10 +77,11 @@ export default {
       default: 100,
     },
   },
+  emits: ['input'],
   computed: {
     progressStyle() { // To achieve the correct color styling:
       const progressPercent = ((this.value - this.min) / (this.max - this.min)) * 100;
-      return `linear-gradient(to right, var(--primary-color) ${progressPercent}%, var(--secondary-color) 0%)`;
+      return `linear-gradient(to right, var(--wt-slider-background-completed-color) ${progressPercent}%, var(--wt-slider-background-color) 0%)`;
     },
     verticalHeight() { // in order to have correct parent height after slider rotation
       return this.vertical ? `${this.height}px` : '100%';
@@ -123,7 +124,7 @@ export default {
     height: var(--wt-slider-pointer-size);
     border: var(--wt-slider-border);
     border-radius: var(--wt-slider-pointer-radius);
-    background: var(--main-color);
+    background: var(--wt-slider-pointer-background-color);
     -webkit-appearance: none;
   }
 
@@ -136,7 +137,7 @@ export default {
     height: var(--wt-slider-pointer-size);
     border: var(--wt-slider-border);
     border-radius: var(--wt-slider-pointer-radius);
-    background: var(--main-color);
+    background: var(--wt-slider-pointer-background-color);
     -moz-appearance: none;
   }
 
