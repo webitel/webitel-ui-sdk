@@ -4,6 +4,9 @@
   </header>
 </template>
 
+<script setup>
+</script>
+
 <style lang="scss">
 @import './variables.scss';
 </style>
