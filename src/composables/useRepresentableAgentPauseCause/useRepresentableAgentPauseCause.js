@@ -18,7 +18,7 @@ const duration = ({ durationMin, limitMin }) => {
 };
 
 const pauseCauseProgressColor = ({ durationMin, limitMin }) => {
-  if (isDurationOverflow({ durationMin, limitMin })) return 'danger';
+  if (isDurationOverflow({ durationMin, limitMin })) return 'error';
   if (durationMin <= (limitMin * 0.75)) return 'success';
   return 'primary';
 };

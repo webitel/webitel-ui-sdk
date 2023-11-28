@@ -54,7 +54,7 @@ describe('useRepresentableAgentPauseCause', () => {
     const {
       representablePauseCause,
     } = useRepresentableAgentPauseCause(pauseCauses);
-    expect(representablePauseCause.value[0].progressColor).toBe('danger');
+    expect(representablePauseCause.value[0].progressColor).toBe('error');
   });
 
   it('correctly computes progressColor with duration < limit', () => {
