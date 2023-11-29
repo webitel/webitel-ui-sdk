@@ -14,8 +14,6 @@ export function useValidation({ v: inputV, customValidators: inputCustomValidato
   }
   // end
 
-  console.info(v, inputV, isRef(v), isReactive(inputV));
-
   const isValidation = computed(() => !!v && !!v.value && !!Object.keys(v.value).length);
   const invalid = computed(() => isValidation.value && v.value.$error);
 
@@ -40,11 +38,14 @@ export function useValidation({ v: inputV, customValidators: inputCustomValidato
       else if (v.value.websocketValidator?.$invalid) validationText = `${t('validation.websocketValidator')}`;
       else if (v.value.integer?.$invalid) validationText = `${t('validation.integer')}`;
     }
-    // eslint-disable-next-line no-restricted-syntax
-    for (const { name, text } of customValidators.value) {
-      if (v.value[name]?.$invalid) validationText = text;
+
+    if (customValidators && customValidators.value) {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const { name, text } of customValidators.value) {
+        if (v.value[name]?.$invalid) validationText = text;
+      }
+      return validationText;
     }
-    return validationText;
   });
 
   return {

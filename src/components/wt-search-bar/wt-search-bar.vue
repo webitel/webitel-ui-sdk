@@ -163,7 +163,7 @@ function handleKeyup(event) {
     width: 100%;
     padding: 0;
     transition: var(--transition);
-    color: var(--wt-text-field-placeholder-color);
+    color: var(--wt-text-field-text-color);
     border: none;
     outline: none;
   }

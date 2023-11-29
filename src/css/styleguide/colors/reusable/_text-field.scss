@@ -6,9 +6,12 @@
   --wt-helper-text-color: var(--text-main-color);
   --wt-helper-text-disabled-color: var(--text-disabled-color);
 
+  // text
+  --wt-text-field-text-color: var(--black);
+
   // placeholder
   --wt-text-field-error-text-color: var(--error-color);
-  --wt-text-field-placeholder-color: var(--text-main-color);
+  --wt-text-field-placeholder-color: var(--grey-lighten-1);
   --wt-text-field-placeholder-error-color: var(--error-color);
   --wt-text-field-placeholder-disabled-color: var(--text-disabled-color);
 
@@ -32,5 +35,8 @@
 }
 
 :root.theme--dark {
+  // text
+  --wt-text-field-text-color: var(--white);
+
   --wt-text-field-input-border-color: var(--grey-lighten-1);
 }
