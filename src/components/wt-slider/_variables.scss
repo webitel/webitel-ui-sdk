@@ -6,10 +6,12 @@
   --wt-slider-width: 100%;
   --wt-slider-input-height: 8px;
   --wt-slider-border: 1px solid var(--secondary-color);
-  --wt-slider-background-color: var(--secondary-color);
+  --wt-slider-background-color: var(--dp-1-surface-color);
   --wt-slider-background-completed-color: var(--primary-color);
 
-  --wt-slider-pointer-background-color: var(--white);
+  --wt-slider-pointer-background-color: var(--dp-24-surface-color);
+  --wt-slider-pointer-background-hover-color: var(--dp-22-surface-color);
+  --wt-slider-pointer-border-color: var(--dp-10-surface-color);
 
   --wt-slider-pointer-radius: 50%;
 

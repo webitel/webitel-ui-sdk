@@ -126,6 +126,7 @@ export default {
     border-radius: var(--wt-slider-pointer-radius);
     background: var(--wt-slider-pointer-background-color);
     -webkit-appearance: none;
+    transition: var(--transition);
   }
 
   &::-webkit-slider-runnable-track {
@@ -137,8 +138,10 @@ export default {
     height: var(--wt-slider-pointer-size);
     border: var(--wt-slider-border);
     border-radius: var(--wt-slider-pointer-radius);
+    border-color: var(--wt-slider-pointer-border-color);
     background: var(--wt-slider-pointer-background-color);
     -moz-appearance: none;
+    transition: var(--transition);
   }
 
   &::-moz-range-track {
@@ -151,6 +154,18 @@ export default {
 
   &::-ms-track {
     appearance: none;
+  }
+}
+
+.wt-slider:hover {
+  .wt-slider__slider {
+    &::-webkit-slider-thumb {
+      background: var(--wt-slider-pointer-background-hover-color);
+    }
+
+    &::-moz-range-thumb {
+      background: var(--wt-slider-pointer-background-hover-color);
+    }
   }
 }
 

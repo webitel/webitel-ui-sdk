@@ -124,6 +124,7 @@ export default {
         min-height: 0;
         padding: 0;
         color: var(--wt-status-select-option-text-color);
+        background: var(--wt-status-select-option-background-color);
       }
 
       .multiselect__option--highlight {
@@ -131,7 +132,7 @@ export default {
       }
 
       .multiselect__option--selected {
-        background: var(--wt-status-select-option-background-selected-color);
+        //background: var(--wt-status-select-option-background-selected-color);
       }
     }
   }

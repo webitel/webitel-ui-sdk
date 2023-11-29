@@ -61,6 +61,7 @@ export default {
 .wt-indicator__text {
   @extend %typo-body-1;
   margin-left: var(--wt-indicator-text-margin);
+  color: var(--wt-indicator-text-color);
 }
 
 .wt-indicator__indicator {
