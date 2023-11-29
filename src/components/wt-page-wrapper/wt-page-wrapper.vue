@@ -49,7 +49,7 @@ export default {
   box-sizing: border-box;
   padding: var(--page-wrapper-section-padding);
   border-radius: var(--border-radius);
-  background: var(--main-color);
+  background: var(--wt-page-wrapper-background-color);
 }
 
 .wt-page-wrapper__main {

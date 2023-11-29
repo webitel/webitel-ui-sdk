@@ -2,4 +2,10 @@
   --page-wrapper-padding: var(--spacing-sm);
   --page-wrapper-section-padding: var(--spacing-sm);
   --page-wrapper-section-gap: var(--spacing-sm);
+
+  --wt-page-wrapper-background-color: var(--grey-lighten-5);
+}
+
+:root.theme--dark {
+  --wt-page-wrapper-background-color: var(--grey-darken-4);
 }
