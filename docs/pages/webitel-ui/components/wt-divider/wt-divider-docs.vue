@@ -1,15 +1,5 @@
 <template>
-  <section>
-    <h2>Divider</h2>
-    <article>
-      <div class="example-wrapper">
-        <div class="divider-wrapper">
-          <wt-divider />
-        </div>
-        <pre><code class="language-html">&lt;wt-divider/&gt;</code></pre>
-      </div>
-    </article>
-  </section>
+
 </template>
 
 <script>
@@ -24,7 +14,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .divider-wrapper {
-    width: 50%;
-  }
+
 </style>
