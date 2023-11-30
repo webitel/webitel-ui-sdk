@@ -1,42 +1,10 @@
 <template>
-  <section>
-    <h2>Icon Action</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-icon-action
-          action="edit"
-        />
-        <wt-icon-action
-          action="delete"
-        />
-        <wt-icon-action
-          action="add"
-        />
-        <wt-icon-action
-          action="history"
-        />
-        <wt-icon-action
-          action="download"
-        />
-        <wt-icon-action
-          action="refresh"
-        />
-        <pre><code
-          class="language-html"
-        >
-        &ltwt-icon-action
-          action="edit"
-        &gt;&lt;/wt-icon-action&gt;
-        </code></pre>
-      </div>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script setup>
@@ -57,7 +25,6 @@ const properties = [
     default: 'false',
   },
 ];
-
 
 const events = [
   { value: 'click' },
