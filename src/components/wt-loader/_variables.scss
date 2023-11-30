@@ -2,7 +2,12 @@
 :root {
   --loader-size: 44px;
   --loader-dot-size: 6px;
-  --loader-path-color: var(--contrast-color);
-  --loader-dot-color: var(--primary-color);
   --loader-animation-duration: 3s;
+
+  --wt-loader-md-path-color: var(--grey-darken-2);
+  --wt-loader-md-dot-color: var(--primary-color);
+}
+
+:root.theme--dark {
+  --wt-loader-md-path-color: var(--grey-lighten-2);
 }

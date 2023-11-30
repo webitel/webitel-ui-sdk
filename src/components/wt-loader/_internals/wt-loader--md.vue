@@ -37,7 +37,7 @@
       top: 37px;
       left: 19px;
       transform: translate(-18px, -18px);
-      background: var(--loader-dot-color);
+      background: var(--wt-loader-md-dot-color);
       border-radius: 50%;
       animation: dotRect var(--loader-animation-duration) linear infinite;
     }
@@ -49,7 +49,7 @@
 
       &__rect {
         fill: none;
-        stroke: var(--loader-path-color);
+        stroke: var(--wt-loader-md-path-color);
         stroke-width: 10px;
         stroke-linejoin: round;
         stroke-linecap: round;
