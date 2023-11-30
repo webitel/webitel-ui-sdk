@@ -33,7 +33,7 @@ export default {
   flex-wrap: wrap;
   min-height: var(--headline-min-height);
   box-sizing: border-box;
-  background: var(--headline-background);
+  background: var(--wt-headline-background-color);
   border-radius: var(--border-radius);
 }
 

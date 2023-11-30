@@ -1,31 +1,11 @@
 <template>
-  <div>
-    <section>
-      <h2>Page Header</h2>
-      <article>
-        <div class="example-wrapper">
-          <div
-            style="padding: 10px; background: cadetblue;"
-          >
-            <wt-page-header
-              secondary-text="lorem ipsum (or close)"
-            >
-              <template #title>
-                Title Slot
-              </template>
-            </wt-page-header>
-          </div>
-          <pre><code class="language-html">&lt;wt-page-header&gt;&lt;/wt-page-header&gt;</code></pre>
-        </div>
-      </article>
-      <component-props
-        :properties="properties"
-      />
-      <component-slots
-        :slots="slots"
-      />
-    </section>
-  </div>
+  <component-props
+    :properties="properties"
+  />
+  <component-slots
+    :slots="slots"
+  />
+
 </template>
 
 <script setup>
@@ -54,7 +34,7 @@ const properties = [
     value: 'hidePrimary',
     type: 'Boolean',
     default: false,
-    code: '<wt-page-header hide-primary></wt-page-header>'
+    code: '<wt-page-header hide-primary></wt-page-header>',
   },
   {
     value: 'secondaryText',
@@ -77,7 +57,7 @@ const properties = [
     value: 'hideSecondary',
     type: 'Boolean',
     default: false,
-    code: '<wt-page-header hide-secondary></wt-page-header>'
+    code: '<wt-page-header hide-secondary></wt-page-header>',
   },
 ];
 const slots = [
