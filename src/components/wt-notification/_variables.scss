@@ -1,10 +1,10 @@
 
 :root {
-  --notification-min-width: 30vw;
-  --notification-max-width: 40vw;
-  --notification-padding: var(--spacing-xs);
-  --notification-icon-margin: var(--spacing-xs);
+  --wt-notification-min-width: 30vw;
+  --wt-notification-max-width: 40vw;
+  --wt-notification-padding: var(--spacing-xs);
+  --wt-notification-icon-margin: var(--spacing-xs);
 
-  --notification-text-color: var(--text-primary-color);
-  --notification-bg-color: var(--main-color);
+  --wt-notification-text-color: var(--text-primary-color);
+  --wt-notification-bg-color: var(--main-color);
 }

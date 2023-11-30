@@ -63,11 +63,11 @@ export default {
   position: relative;
   display: flex;
   align-items: flex-start;
-  min-width: var(--notification-min-width);
-  max-width: var(--notification-max-width);
-  padding: var(--notification-padding);
-  color: var(--notification-text-color);
-  background: var(--notification-bg-color);
+  min-width: var(--wt-notification-min-width);
+  max-width: var(--wt-notification-max-width);
+  padding: var(--wt-notification-padding);
+  color: var(--wt-notification-text-color);
+  background: var(--wt-notification-bg-color);
   border-radius: var(--border-radius);
   box-shadow: var(--elevation-1);
   cursor: pointer;
@@ -75,7 +75,7 @@ export default {
 
 .wt-notification__icon {
   flex: 0 0 var(--icon-md-size);
-  margin-right: var(--notification-icon-margin);
+  margin-right: var(--wt-notification-icon-margin);
 }
 
 .wt-notification__text {
