@@ -1,5 +1,7 @@
 import { globbySync } from 'globby';
 import path from 'path';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import { defineConfig } from 'vitepress';
 
@@ -13,6 +15,8 @@ const sidebarComponents = globbySync(
 );
 const onDemandSidebarComponents = globbySync('pages/webitel-ui/components/on-demand/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarValidators = globbySync('pages/webitel-ui/validators/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+
+const plyrIconsPath = path.resolve(__dirname, '../../src/assets/icons/plyr.svg');
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -35,6 +39,20 @@ export default defineConfig({
       },
     },
     plugins: [
+      nodePolyfills({
+        globals: {
+          process: true,
+        },
+      }),
+
+      viteStaticCopy({
+        targets: [
+          {
+            src: plyrIconsPath,
+            dest: 'img',
+          },
+        ],
+      }),
       createSvgSpritePlugin({
         include: '**/sprite/*.svg',
       }),

@@ -110,6 +110,7 @@ export default {
       min-height: 0;
       padding: var(--wt-status-select-padding);
       border: none;
+      background: var(--wt-status-select-background-color);
     }
 
     .multiselect__select {

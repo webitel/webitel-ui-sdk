@@ -26,6 +26,7 @@
 
 <script>
 import Plyr from 'plyr';
+import 'plyr/src/sass/plyr.scss';
 
 export default {
   name: 'WtPlayer',
@@ -70,6 +71,7 @@ export default {
       default: 'sticky',
     },
   },
+  emits: ['initialized', 'close'],
   data: () => ({
     player: null,
   }),
@@ -152,9 +154,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../node_modules/plyr/src/sass/plyr';
 @import './variables.scss';
+</style>
 
+<style lang="scss" scoped>
 .wt-player {
   @extend %typo-body-2;
   bottom: 60px;
@@ -174,35 +177,37 @@ export default {
     }
   }
 
-  .plyr {
-    max-width: 100%; // prevents <video> container overflow
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-  }
+  :deep {
+    .plyr {
+      max-width: 100%; // prevents <video> container overflow
+      border-radius: var(--border-radius);
+      box-shadow: var(--elevation-10);
+    }
 
-  &__close-icon {
-    //transform: translate(var(--player-close-icon-transform-translate-x),
-    //  var(--player-close-icon-transform-translate-y));
-  }
+    &__close-icon {
+      //transform: translate(var(--player-close-icon-transform-translate-x),
+      //  var(--player-close-icon-transform-translate-y));
+    }
 
-  .plyr__control:hover, {
-    background: var(--accent-secondary-color);
-    color: var(--text-primary-color);
-  }
+    .plyr__control:hover, {
+      //background: var(--accent-secondary-color);
+      //color: var(--text-primary-color);
+    }
 
-  .plyr__control--overlaid svg {
-    left: 0; // reset plyr style for video "play" button icon
-  }
+    .plyr__control--overlaid svg {
+      //left: 0; // reset plyr style for video "play" button icon
+    }
 
-  //.plyr__control[role='menuitemradio']::before,
-  //.plyr__control[role='menuitemradio']:hover::before {
-  //  border: 2px solid var(--secondary-color);
-  //  background: var(--main-color);
-  //}
-  //
-  //.plyr__control[role='menuitemradio']::after {
-  //  background: var(--secondary-color);
-  //}
+    //.plyr__control[role='menuitemradio']::before,
+    //.plyr__control[role='menuitemradio']:hover::before {
+    //  border: 2px solid var(--secondary-color);
+    //  background: var(--main-color);
+    //}
+    //
+    //.plyr__control[role='menuitemradio']::after {
+    //  background: var(--secondary-color);
+    //}
+  }
 }
 
 </style>

@@ -1,38 +1,29 @@
 <template>
-  <section>
-    <h2>Player</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-button @click="src = 'https://cdn6.sefon.pro/files/prev/1/The%20Eagles%20-%20Hotel%20California%20%28192kbps%29.mp3'" />
-        <wt-player :src="src" />
-        <pre><code class="language-html">&lt;wt-player :src="src"&gt;&lt;/wt-player&gt;</code></pre>
-      </div>
-    </article>
-    <article>
-      <p>
-        <strong>Important: player is looking for icons in {/{$baseURL}/}img/plyr.svg (or /img/plyr.svg by default).</strong>
-        First, download plyr.svg from <a
-          href="https://github.com/webitel/webitel-ui-sdk/tree/master/public"
-          target="_blank"
-        >
-          Github</a> and place it in project /public folder.
-        Then, $baseURL should be passed as global variable in plugins/webitel-ui.js:
-      </p>
-      <pre><code class="language-javascript">
+  <article>
+    <p>
+      <strong>Important: player is looking for icons in {/{$baseURL}/}img/plyr.svg (or /img/plyr.svg by
+        default).</strong>
+      First, download plyr.svg from <a
+      href="https://github.com/webitel/webitel-ui-sdk/tree/master/public"
+      target="_blank"
+    >
+      Github</a> and place it in project /public folder.
+      Then, $baseURL should be passed as global variable in plugins/webitel-ui.js:
+    </p>
+    <pre><code class="language-javascript">
             const globals = {
               $baseURL: process.env.BASE_URL,
             };
             // init plugin
             Vue.use(WebitelUI, { eventBus, router, globals });
       </code></pre>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+  </article>
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -41,7 +32,6 @@ import Prism from 'prismjs';
 export default {
   name: 'WtPlayerDocs',
   data: () => ({
-    src: '',
     properties: [
       {
         value: 'src',

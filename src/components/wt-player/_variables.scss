@@ -1,6 +1,10 @@
 .wt-player {
   --plyr-color-main: var(--primary-color);
-  --plyr-audio-control-color: var(--icon-primary-color);
+  --plyr-audio-control-color: var(--icon-color);
+  --plyr-audio-control-color-hover: var(--icon-btn-hover-color);
+  --plyr-audio-controls-background: var(--content-wrapper-color);
+  --plyr-audio-control-background-hover: transparent;
+
   // --plyr-control-toggle-checked-background: var(--main-color);
   --player-close-icon-transform-translate-x: var(--spacing-md);
   // "-1 * var" for use the negative value of a variable
