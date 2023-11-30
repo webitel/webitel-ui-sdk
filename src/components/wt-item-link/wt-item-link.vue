@@ -39,11 +39,16 @@ const to = computed(() => props.link || {
   });
 </script>
 
+<style lang="scss">
+@import './variables.scss';
+</style>
+
 <style lang="scss" scoped>
 .wt-item-link {
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: var(--wt-item-link-text-color);
   transition: var(--transition);
 
   &:hover {

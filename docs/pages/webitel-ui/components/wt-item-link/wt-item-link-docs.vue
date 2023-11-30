@@ -1,22 +1,10 @@
 <template>
-  <section>
-    <h2>Item link</h2>
-    <article>
-      <div class="example-wrapper">
-        <pre><code
-          class="language-html"
-        >
-          &lt;item-link :link="editLink(item)"&gt;&lt;/item-link&gt;
-        </code></pre>
-      </div>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script setup>
@@ -56,7 +44,6 @@ const properties = [
     default: 'false',
   },
 ];
-
 
 const events = [
   { value: 'click' },
