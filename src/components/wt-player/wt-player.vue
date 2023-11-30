@@ -188,8 +188,13 @@ export default {
       left: 0; // reset plyr style for video "play" button icon
     }
 
+    .plyr__progress__buffer {
+      background: var(--wt-player-audio-progress-background);
+    }
+
     .plyr__progress input,
     .plyr__volume input {
+      cursor: pointer;
 
       &::-webkit-slider-thumb {
         border: var(--wt-slider-border);

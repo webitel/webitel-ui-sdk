@@ -5,6 +5,10 @@
   --plyr-audio-controls-background: var(--content-wrapper-color);
   --plyr-control-icon-size: var(--icon-md-size);
   --plyr-audio-control-background-hover: transparent;
+  --plyr-audio-progress-buffered-background: var(--dp-14-surface-color); // loaded color
+  --wt-player-audio-progress-background: var(--wt-slider-background-color); // not played color
+  --plyr-tooltip-background: var(--wt-tooltip-background-color);
+  --plyr-tooltip-color: var(--wt-tooltip-text-color);
 
   // --plyr-control-toggle-checked-background: var(--main-color);
   --player-close-icon-transform-translate-x: var(--spacing-md);
