@@ -3,11 +3,7 @@
     <h2>Notifications bar</h2>
     <article>
       <div class="example-wrapper">
-        <div
-          style="position:relative; : 500px; height: 500px; background: var(--secondary-color);"
-        >
-          <wt-notifications-bar style="position:absolute;" />
-        </div>
+
         <pre><code
         class="language-html"
         >&lt;wt-notifications-bar&gt;&lt;/wt-notifications-bar&gt;</code></pre>
@@ -44,9 +40,6 @@
     data: () => ({}),
     mounted() {
       Prism.highlightAll();
-      this.$eventBus.$emit('notification', { type: 'error', text: 'Text1' });
-      this.$eventBus.$emit('notification', { type: 'info', text: 'Text2' });
-      this.$eventBus.$emit('notification', { type: 'error', text: 'Text3' });
     },
   };
 </script>
