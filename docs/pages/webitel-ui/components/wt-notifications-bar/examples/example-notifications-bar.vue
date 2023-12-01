@@ -4,15 +4,24 @@ import eventBus from '../../../../../../src/scripts/eventBus';
 
 provide('$eventBus', eventBus);
 
-function sendNotification() {
-  eventBus.$emit('notification', { type: 'error', text: 'Text4' });
+function sendNotification(type) {
+  eventBus.$emit('notification', { type, text: 'Text4' });
 }
 </script>
 
 <template>
-  <wt-button @click="sendNotification">Send notification</wt-button>
-  <div style="position:relative; : 500px; height: 500px;">
-    <wt-notifications-bar style="position:absolute;" />
+  <wt-button
+    @click="sendNotification('error')"
+  >Send error notification
+  </wt-button>
+  <wt-button
+    style="margin-left: 10px;"
+    @click="sendNotification('info')"
+  >Send info notification
+  </wt-button>
+
+  <div style="margin-top: 10px;">
+    <wt-notifications-bar style="position:static;" />
   </div>
 </template>
 
