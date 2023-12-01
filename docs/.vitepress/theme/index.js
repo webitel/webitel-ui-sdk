@@ -1,6 +1,10 @@
 // .vitepress/theme/index.js
 import DefaultTheme from 'vitepress/theme';
-import { createRouter, createWebHistory } from 'vue-router';
+import {
+  createMemoryHistory,
+  createRouter,
+  createWebHistory,
+} from 'vue-router';
 import WebitelUI from '../../../src/install.js';
 import i18n from '../../../src/locale/i18n';
 import sharedComponents from '../../shared';
@@ -9,7 +13,7 @@ import 'prismjs/themes/prism.min.css';
 import Layout from './Layout.vue';
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
   routes: [],
 });
 

@@ -6,8 +6,8 @@ const size = ref(10);
 const isNext = ref(true);
 const isPrev = ref(false);
 
-function alert(value) {
-  window.alert(value);
+function callAlert(value) {
+  alert(value);
 }
 </script>
 
@@ -17,8 +17,8 @@ function alert(value) {
     :next="isNext"
     :prev="isPrev"
     @input="size = $event"
-    @next="alert('next')"
-    @prev="alert('prev')"
+    @next="callAlert('next')"
+    @prev="callAlert('prev')"
   />
 </template>
 
