@@ -56,6 +56,10 @@ const emits = defineEmits([
 
 </script>
 
+<style lang="scss">
+@import './variables.scss';
+</style>
+
 <style lang="scss" scoped>
 .wt-dummy {
   text-align: center;
@@ -72,6 +76,7 @@ const emits = defineEmits([
 
   &__text {
     @extend %typo-body-1;
+    color: var(--wt-dummy-text-color);
   }
 }
 </style>
