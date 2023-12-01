@@ -16,7 +16,10 @@
       />
     </div>
     <wt-expand-transition>
-      <div v-show="open">
+      <div
+        class="wt-expansion-panel-body"
+        v-show="open"
+      >
         <slot />
       </div>
     </wt-expand-transition>
@@ -36,6 +39,10 @@ const props = defineProps({
 const open = ref(true);
 </script>
 
+<style lang="scss">
+@import './variables.scss';
+</style>
+
 <style lang="scss" scoped>
 .wt-expansion-panel {
   .wt-expansion-panel-header {
@@ -44,8 +51,14 @@ const open = ref(true);
     align-items: center;
     padding: var(--spacing-2xs) var(--spacing-xs);
     cursor: pointer;
+    color: var(--wt-expansion-panel-header-text-color);
     border-radius: var(--spacing-2xs);
-    background-color: var(--secondary-color-50);
+    background-color: var(--wt-expansion-panel-header-background-color);
+  }
+
+  .wt-expansion-panel-body {
+    color: var(--wt-expansion-panel-body-text-color);
+    background-color: var(--wt-expansion-panel-body-background-color);
   }
 
   .wt-icon {

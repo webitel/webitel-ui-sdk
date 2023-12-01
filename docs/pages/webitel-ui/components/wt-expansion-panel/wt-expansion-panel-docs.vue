@@ -1,33 +1,10 @@
 <template>
-  <section>
-    <h2>Expansion panel</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-expansion-panel>
-          <template #title>
-            Title
-          </template>
-          <template>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </template>
-        </wt-expansion-panel>
-        <pre><code
-          class="language-html"
->
-          &lt;wt-expansion-panel&gt;
-            &lt;template v-slot:title&gt;Title&lt;/template&gt;
-            &lt;template&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/template&gt;
-          &lt;/wt-expansion-panel&gt;
-        </code></pre>
-      </div>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <component-slots
-      :slots="slots"
-    />
-  </section>
+  <component-props
+    :properties="properties"
+  />
+  <component-slots
+    :slots="slots"
+  />
 </template>
 
 <script>
@@ -54,7 +31,7 @@ export default {
         name: 'title',
         description: 'Display title for collapse panel',
       },
-    ]
+    ],
   }),
   mounted() {
     Prism.highlightAll();
