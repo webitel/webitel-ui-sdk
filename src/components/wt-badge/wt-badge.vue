@@ -14,7 +14,7 @@ export default {
   props: {
     colorVariable: {
       type: String,
-      default: 'false-color',
+      default: 'error-color',
       description: 'see all available colors in webitel-ui docs',
     },
     outside: {
