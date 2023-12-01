@@ -1,19 +1,10 @@
 <template>
-  <section>
-    <h2>Context Menu</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-context-menu :options="options" />
-        <pre><code class="language-html">&lt;wt-context-menu :options="[{ text: 'Option-1' },{ text: 'Option-2', disabled: true },...]"&gt;&lt;/wt-context-menu&gt;</code></pre>
-      </div>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -22,7 +13,6 @@ import Prism from 'prismjs';
 export default {
   name: 'WtContextMenuDocs',
   data: () => ({
-    options: [{ text: 'Option-1' }, { text: 'Option-2', disabled: true }, { text: 'Option-3' }, { text: 'Option-4', disabled: true }],
     properties: [
       {
         value: 'options',
@@ -78,19 +68,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-  .wt-context-menu::v-deep {
-    // FIXME: REMOVE AFTER DEFAULT STYLES REFACTOR
-    list-style: none!important;
 
-    .wt-context-menu__option-wrapper {
-      margin: 0;
-      padding: 0;
-
-      .wt-context-menu__option {
-        text-decoration: none;
-      }
-    }
-  }
-}
 </style>

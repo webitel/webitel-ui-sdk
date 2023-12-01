@@ -1,19 +1,10 @@
 <template>
-  <section>
-    <h2>Copy Action</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-copy-action :value="value" />
-        <pre><code class="language-html">&lt;wt-copy-action :value="value"&gt;&lt;/wt-copy-action&gt;</code></pre>
-      </div>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <component-events
-      :events="events"
-    />
-  </section>
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 

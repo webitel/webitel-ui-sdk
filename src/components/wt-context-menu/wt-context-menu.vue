@@ -92,7 +92,7 @@ function handleOptionClick({ option, index, hide }) {
 
 .wt-context-menu__menu {
   @extend %typo-body-2;
-  background-color: var(--context-menu-background-color);
+  background-color: var(--wt-context-menu-background-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   transition: var(--transition);
@@ -115,17 +115,19 @@ function handleOptionClick({ option, index, hide }) {
 
 .wt-context-menu__option {
   display: block;
-  padding: var(--context-menu-option-padding);
+  padding: var(--wt-context-menu-option-padding);
   cursor: pointer;
+  color: var(--wt-context-menu-option-text-color);
 
   &:hover {
-    background-color: var(--context-menu-option-color--hover);
+    background-color: var(--wt-context-menu-option-hover-color);
     transition: var(--transition);
   }
 
   &--disabled {
     pointer-events: none;
-    color: var(--context-menu-option-color--disabled);
+    color: var(--wt-context-menu-option-text-disabled-color);
+    background-color: var(--wt-context-menu-option-background-disabled-color);
   }
 }
 </style>

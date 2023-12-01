@@ -1,5 +1,9 @@
 
 :root {
   --divider-border: 1px solid;
-  --divider-border-color: var(--secondary-color);
+  --divider-border-color: var(--grey-lighten-5);
+}
+
+:root.theme--dark {
+  --divider-border-color: var(--grey-darken-3);
 }
