@@ -1,71 +1,10 @@
 <template>
-  <section>
-    <h2>Avatar</h2>
-    <article>
-      <div class="example-wrapper">
-        <wt-avatar
-          size="lg"
-          :src="pic"
-        />
-        <pre><code class="language-html">&lt;wt-avatar size="lg" :src="pic"&gt;&lt;/wt-avatar&gt;</code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-avatar
-          size="lg"
-          username="Daniil Lohvinov"
-        />
-        <pre><code class="language-html">&lt;wt-avatar size="lg" username="Daniil Lohvinov"&gt;&lt;/wt-avatar&gt;</code></pre>
-      </div>
-      <div class="example-wrapper">
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          badge
-        />
-        <pre><code class="language-html">&lt;wt-avatar :status="AbstractUserStatus.ACTIVE" badged&gt;&lt;/wt-avatar&gt;</code></pre>
-      </div>
-      <div class="example-wrapper avatars-row">
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          size="xs"
-          badge
-        />
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          size="sm"
-          badge
-        />
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          badge
-        />
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          size="lg"
-          badge
-        />
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          size="xl"
-          badge
-        />
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          size="2xl"
-          badge
-        />
-        <wt-avatar
-          :status="AbstractUserStatus.ACTIVE"
-          size="3xl"
-          badge
-        />
-      </div>
-    </article>
-    <component-props
-      :properties="properties"
-    />
-    <article>
-      <h2>Why to pass image itself as src prop?</h2>
-      <pre>
+  <component-props
+    :properties="properties"
+  />
+  <article>
+    <h2>Why to pass image itself as src prop?</h2>
+    <pre>
         <code class="language-javascript">
           &lt;wt-avatar :src="pic"&gt;&lt;/wt-avatar&gt;
 
@@ -74,7 +13,7 @@
           data: () => ({ pic }),
         </code>
       </pre>
-      <pre>
+    <pre>
       <p>
         NOTE ONLY FOR LOCAL IMAGES INSIDE PROJECT FILES!
 
@@ -87,14 +26,13 @@
         so that webpack won't lose it.
       </p>
         </pre>
-    </article>
-  </section>
+  </article>
 </template>
 
 <script>
 import Prism from 'prismjs';
 import AbstractUserStatus from '../../../../../src/enums/AbstractUserStatus/AbstractUserStatus.enum';
-import pic from './pic.jpg';
+import pic from './examples/pic.jpg';
 
 export default {
   name: 'WtAvatarDocs',

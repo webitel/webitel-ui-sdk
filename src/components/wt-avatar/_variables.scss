@@ -9,12 +9,12 @@
 
   --avatar-size: var(--avatar-size--size-md);
 
-  --online-color: var(--true-color);
-  --dnd-color: var(--primary-color);
-  --busy-color: var(--false-color);
-  --offline-color: var(--secondary-color);
+  --online-color: var(--success-color);
+  --dnd-color: var(--warning-color);
+  --busy-color: var(--error-color);
+  --offline-color: var(--disabled-color);
 
-  --avatar-font-color: var(--main-color);
+  --avatar-font-color: var(--white);
 
   --avatar-letters-p1-color: var(--red-lighten-2);
   --avatar-letters-p2-color: var(--purple-lighten-2);
@@ -29,4 +29,8 @@
   --avatar-letters-p11-color: var(--amber-lighten-2);
   --avatar-letters-p12-color: var(--orange-darken-1);
   --avatar-letters-p13-color: var(--deep-purple-lighten-1);
+}
+
+:root.theme--dark {
+  --avatar-font-color: var(--black);
 }
