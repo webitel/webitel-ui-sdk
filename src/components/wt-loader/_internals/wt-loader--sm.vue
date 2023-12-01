@@ -20,8 +20,8 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'contrast',
-      description: '["main", "contrast", "icon"]',
+      default: 'main',
+      description: '["main", "icon", "on-dark", "on-light"]',
     },
   },
 };
@@ -49,10 +49,16 @@ export default {
     stroke-width: 3;
   }
   &--main circle {
-    stroke: var(--main-color);
+    stroke: var(--wt-loader-sm-path-main-color);
   }
   &--icon circle {
-    stroke: var(--icon-color);
+    stroke: var(--wt-loader-sm-path-icon-color);
+  }
+  &--on-light circle {
+    stroke: var(--wt-loader-sm-path-on-light-color);
+  }
+  &--on-dark circle {
+    stroke: var(--wt-loader-sm-path-on-dark-color);
   }
 }
 

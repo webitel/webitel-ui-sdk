@@ -3,6 +3,7 @@ import Docs from './wt-button-docs.vue';
 import ExampleButtonsDifferentColor from './examples/example-buttons-different-color.vue';
 import ExampleSmallButton from './examples/example-small-button.vue';
 import ExampleWideButton from './examples/example-wide-button.vue';
+import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-different-color-loaders.vue';
 </script>
 
 # WtButton
@@ -37,4 +38,13 @@ import ExampleWideButton from './examples/example-wide-button.vue';
 
 ::: details Code
 <<< ./examples/example-wide-button.vue{js}
+:::
+
+## Different colors with loaders:
+::: raw
+<ExampleButtonsDifferentColorLoaders />
+:::
+
+::: details Code
+<<< ./examples/example-buttons-different-color-loaders.vue{js}
 :::

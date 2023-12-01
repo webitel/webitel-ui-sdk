@@ -5,9 +5,17 @@
   --loader-animation-duration: 3s;
 
   --wt-loader-md-path-color: var(--grey-darken-2);
-  --wt-loader-md-dot-color: var(--primary-color);
+  --wt-loader-md-point-color: var(--primary-color);
+
+  --wt-loader-sm-path-main-color: var(--grey-darken-2);
+  --wt-loader-sm-path-icon-color: var(--icon-color);
+  --wt-loader-sm-path-on-light-color: var(--icon-on-light-color);
+  --wt-loader-sm-path-on-dark-color: var(--icon-on-dark-color);
 }
 
 :root.theme--dark {
   --wt-loader-md-path-color: var(--grey-lighten-2);
+
+  --wt-loader-sm-path-main-color: var(--grey-lighten-2);
+
 }

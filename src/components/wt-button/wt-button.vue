@@ -78,8 +78,9 @@ export default {
       return '';
     },
     loaderColor() {
-      if (['success', 'transfer', 'error', 'job'].includes(this.color)) return 'main';
-      return 'contrast';
+      return 'main';
+      // if (['success', 'transfer', 'error', 'job'].includes(this.color)) return 'on-dark';
+      // return 'on-light';
     },
   },
 };

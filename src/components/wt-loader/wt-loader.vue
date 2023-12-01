@@ -28,8 +28,8 @@ export default {
     },
     color: {
       type: String,
-      default: 'contrast',
-      description: '["main", "contrast"]',
+      default: 'main',
+      description: '["main", "icon", "on-dark", "on-light"]',
     },
   },
 };

@@ -37,7 +37,7 @@
       top: 37px;
       left: 19px;
       transform: translate(-18px, -18px);
-      background: var(--wt-loader-md-dot-color);
+      background: var(--wt-loader-md-point-color);
       border-radius: 50%;
       animation: dotRect var(--loader-animation-duration) linear infinite;
     }

@@ -14,7 +14,7 @@
     <wt-loader
       v-if="loading"
       size="sm"
-      :color="loaderColor"
+      color="main"
     />
     <wt-icon
       v-else
@@ -80,10 +80,6 @@ const iColor = computed(() => {
     case 'secondary': return 'default';
     default: return props.color;
   }
-});
-const loaderColor = computed(() => {
-  // if (['success', 'transfer', 'error'].includes(props.color)) return 'main';
-  return 'contrast';
 });
 </script>
 
