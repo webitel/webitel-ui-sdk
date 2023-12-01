@@ -51,14 +51,14 @@ const open = ref(true);
     align-items: center;
     padding: var(--spacing-2xs) var(--spacing-xs);
     cursor: pointer;
-    color: var(--wt-expansion-panel-header-text-color);
+    color: var(--wt-expansion-panel-header-title-color);
     border-radius: var(--spacing-2xs);
     background-color: var(--wt-expansion-panel-header-background-color);
   }
 
   .wt-expansion-panel-body {
-    color: var(--wt-expansion-panel-body-text-color);
-    background-color: var(--wt-expansion-panel-body-background-color);
+    color: var(--wt-expansion-panel-content-text-color);
+    background-color: var(--wt-expansion-panel-content-background-color);
   }
 
   .wt-icon {
