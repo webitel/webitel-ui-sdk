@@ -64,22 +64,22 @@ const avatarLetters = computed(() => {
 const avatarLettersBackground = computed(() => {
   // en.concat(uk)
   const letterList = [
-    { letters: 'AB'.concat('АБВ'), color: '--avatar-letters-p1-color' },
-    { letters: 'CD'.concat('ГҐД'), color: '--avatar-letters-p2-color' },
-    { letters: 'EF'.concat('ЕЄЖ'), color: '--avatar-letters-p3-color' },
-    { letters: 'GH'.concat('ЗИІ'), color: '--avatar-letters-p4-color' },
-    { letters: 'IJ'.concat('ЇЙК'), color: '--avatar-letters-p5-color' },
-    { letters: 'KL'.concat('ЛМН'), color: '--avatar-letters-p6-color' },
-    { letters: 'MN'.concat('ОПР'), color: '--avatar-letters-p7-color' },
-    { letters: 'OP'.concat('СТУ'), color: '--avatar-letters-p8-color' },
-    { letters: 'QR'.concat('ФХЦ'), color: '--avatar-letters-p9-color' },
-    { letters: 'ST'.concat('ЧШЩ'), color: '--avatar-letters-p10-color' },
-    { letters: 'UV'.concat('ЬЮЯ'), color: '--avatar-letters-p11-color' },
-    { letters: 'WX'.concat(''), color: '--avatar-letters-p12-color' },
-    { letters: 'YZ'.concat(''), color: '--avatar-letters-p13-color' },
+    { letters: 'AB'.concat('АБВ'), color: '--wt-avatar-letters-p1-color' },
+    { letters: 'CD'.concat('ГҐД'), color: '--wt-avatar-letters-p2-color' },
+    { letters: 'EF'.concat('ЕЄЖ'), color: '--wt-avatar-letters-p3-color' },
+    { letters: 'GH'.concat('ЗИІ'), color: '--wt-avatar-letters-p4-color' },
+    { letters: 'IJ'.concat('ЇЙК'), color: '--wt-avatar-letters-p5-color' },
+    { letters: 'KL'.concat('ЛМН'), color: '--wt-avatar-letters-p6-color' },
+    { letters: 'MN'.concat('ОПР'), color: '--wt-avatar-letters-p7-color' },
+    { letters: 'OP'.concat('СТУ'), color: '--wt-avatar-letters-p8-color' },
+    { letters: 'QR'.concat('ФХЦ'), color: '--wt-avatar-letters-p9-color' },
+    { letters: 'ST'.concat('ЧШЩ'), color: '--wt-avatar-letters-p10-color' },
+    { letters: 'UV'.concat('ЬЮЯ'), color: '--wt-avatar-letters-p11-color' },
+    { letters: 'WX'.concat(''), color: '--wt-avatar-letters-p12-color' },
+    { letters: 'YZ'.concat(''), color: '--wt-avatar-letters-p13-color' },
   ];
   const searchedLetter = letterList.find(({ letters }) => letters.includes(avatarLetters.value.at(0).toUpperCase()));
-  return (searchedLetter && searchedLetter.color) || '--avatar-letters-p1-color';
+  return (searchedLetter && searchedLetter.color) || '--wt-avatar-letters-p1-color';
 });
 
 const imgSrc = computed(() => props.src || defaultAvatar);
@@ -126,8 +126,8 @@ const badgeColorVar = computed(() => {
 
 .wt-avatar {
   position: relative;
-  width: var(--avatar-size);
-  height: var(--avatar-size);
+  width: var(--wt-avatar-size);
+  height: var(--wt-avatar-size);
   user-select: none;
   border-radius: 50%;
 
@@ -136,7 +136,7 @@ const badgeColorVar = computed(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--avatar-font-color);
+    color: var(--wt-avatar-text-color);
     border-radius: 50%;
   }
 
@@ -147,42 +147,42 @@ const badgeColorVar = computed(() => {
   }
 
   &--size-xs {
-    width: var(--avatar-size--size-xs);
-    height: var(--avatar-size--size-xs);
+    width: var(--wt-avatar-size--size-xs);
+    height: var(--wt-avatar-size--size-xs);
   }
 
   &--size-sm {
     @extend %wt-avatar-typo-sm;
-    width: var(--avatar-size--size-sm);
-    height: var(--avatar-size--size-sm);
+    width: var(--wt-avatar-size--size-sm);
+    height: var(--wt-avatar-size--size-sm);
   }
 
   &--size-md {
-    width: var(--avatar-size--size-md);
-    height: var(--avatar-size--size-md);
+    width: var(--wt-avatar-size--size-md);
+    height: var(--wt-avatar-size--size-md);
   }
 
   &--size-lg {
     @extend %wt-avatar-typo-lg;
-    width: var(--avatar-size--size-lg);
-    height: var(--avatar-size--size-lg);
+    width: var(--wt-avatar-size--size-lg);
+    height: var(--wt-avatar-size--size-lg);
   }
 
   &--size-xl {
-    width: var(--avatar-size--size-xl);
-    height: var(--avatar-size--size-xl);
+    width: var(--wt-avatar-size--size-xl);
+    height: var(--wt-avatar-size--size-xl);
   }
 
   &--size-2xl {
     @extend %wt-avatar-typo-2xl;
-    width: var(--avatar-size--size-2xl);
-    height: var(--avatar-size--size-2xl);
+    width: var(--wt-avatar-size--size-2xl);
+    height: var(--wt-avatar-size--size-2xl);
   }
 
   &--size-3xl {
     @extend %wt-avatar-typo-3xl;
-    width: var(--avatar-size--size-3xl);
-    height: var(--avatar-size--size-3xl);
+    width: var(--wt-avatar-size--size-3xl);
+    height: var(--wt-avatar-size--size-3xl);
   }
 }
 </style>

@@ -2,61 +2,18 @@
   <div>
     <section>
       <h2>App Header</h2>
-      <article>
-        <div class="example-wrapper">
-          <wt-app-header />
-          <pre><code class="language-html">&lt;wt-app-header&gt;&lt;/wt-app-header&gt;</code></pre>
-        </div>
-      </article>
       <component-slots
         :slots="headerSlots"
       />
     </section>
     <section>
       <h2>App Navigator</h2>
-      <article>
-        <div class="example-wrapper">
-          <wt-app-header>
-            <wt-app-navigator
-              current-app="admin"
-              :apps="apps"
-            />
-          </wt-app-header>
-          <pre><code
-            class="language-html"
->
-        &lt;wt-app-header&gt;
-            &lt;wt-app-navigator current-app="admin" :apps="apps"&gt;&lt;/wt-app-navigator&gt;
-        &lt;/wt-app-header&gt;
-        </code></pre>
-        </div>
-      </article>
       <component-props
         :properties="appNavigatorProps"
       />
     </section>
     <section>
       <h2>Header Actions</h2>
-      <article>
-        <div class="example-wrapper">
-          <wt-app-header>
-            <wt-header-actions
-              :user="user"
-              :build-info="buildInfo"
-            />
-          </wt-app-header>
-          <pre><code
-            class="language-html"
->
-        &lt;wt-app-header&gt;
-            &lt;wt-header-actions
-            :user="{ name: 'My name', preferredUsername: 'My username' }"
-            :build-info="{ release: '21.02', build: 'AWS-12' }"
-            &gt;&lt;/wt-header-actions>&gt;
-        &lt;/wt-app-header&gt;
-        </code></pre>
-        </div>
-      </article>
       <component-props
         :properties="headerActionsProps"
       />
@@ -74,22 +31,6 @@ import WebitelApplications from '../../../../../src/enums/WebitelApplications/We
 export default {
   name: 'WtAppHeaderDocs',
   data: () => ({
-    apps: [
-      { name: WebitelApplications.AGENT, href: 'https://example.com' },
-      { name: WebitelApplications.AUDIT, href: 'https://example.com' },
-      { name: WebitelApplications.SUPERVISOR, href: 'https://example.com' },
-      { name: WebitelApplications.ADMIN, href: 'https://example.com' },
-      { name: WebitelApplications.HISTORY, href: 'https://example.com' },
-      { name: WebitelApplications.ANALYTICS, href: 'https://example.com' },
-    ],
-    user: {
-      name: 'My name',
-      preferredUsername: 'My username',
-    },
-    buildInfo: {
-      release: '21.02',
-      build: 'AWS-12',
-    },
     headerSlots: [
       {
         name: 'default',

@@ -159,11 +159,13 @@ export default {
 .wt-header-actions__name {
   @extend %typo-subtitle-1;
   white-space: nowrap;
+  color: var(--text-main-color);
 }
 
 .wt-header-actions__account {
   @extend %typo-body-1;
   white-space: nowrap;
+  color: var(--text-main-color);
 }
 
 .wt-header-actions__action {
@@ -181,6 +183,7 @@ export default {
     width: 100%;
     padding: var(--wt-header-actions-action-link-padding);
     cursor: pointer;
+    color: var(--text-main-color);
 
     .wt-icon {
       margin-right: var(--wt-header-actions-action-link-padding);
@@ -188,12 +191,13 @@ export default {
   }
 
   &--logout .wt-header-actions__action__link {
-    color: var(--false-color);
+    color: var(--error-color);
   }
 }
 
 .wt-header-actions__build__version {
   @extend %typo-caption;
   white-space: nowrap;
+  color: var(--text-main-color);
 }
 </style>

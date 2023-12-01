@@ -1,0 +1,25 @@
+<script setup>
+import WebitelApplications from '../../../../../../src/enums/WebitelApplications/WebitelApplications.enum';
+
+const apps = [
+  { name: WebitelApplications.AGENT, href: 'https://example.com' },
+  { name: WebitelApplications.AUDIT, href: 'https://example.com' },
+  { name: WebitelApplications.SUPERVISOR, href: 'https://example.com' },
+  { name: WebitelApplications.ADMIN, href: 'https://example.com' },
+  { name: WebitelApplications.HISTORY, href: 'https://example.com' },
+  { name: WebitelApplications.ANALYTICS, href: 'https://example.com' },
+];
+</script>
+
+<template>
+  <wt-app-header>
+    <wt-app-navigator
+      current-app="admin"
+      :apps="apps"
+    />
+  </wt-app-header>
+</template>
+
+<style scoped lang="scss">
+
+</style>
