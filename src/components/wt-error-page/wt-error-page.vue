@@ -81,11 +81,11 @@ export default {
   min-width: 100vw;
   min-height: 100vh;
   padding: 90px;
-  background: var(--main-color);
+  background: var(--wt-error-page-background-color);
 
   &__wrapper {
     text-align: center;
-    //color: var(--text-contrast-color);
+    color: var(--wt-error-page-text-color);
   }
 
   &__img {
