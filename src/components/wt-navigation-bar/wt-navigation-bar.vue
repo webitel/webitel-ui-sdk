@@ -237,7 +237,8 @@ export default {
     background: var(--wt-navigation-bar-option-background-hover-color);
   }
 
-  &--active {
+  &.wt-navigation-bar__nav-item-link--active {
+    color: var(--wt-navigation-bar-option-text-active-color);
     background: var(--wt-navigation-bar-option-background-active-color);
   }
 }
