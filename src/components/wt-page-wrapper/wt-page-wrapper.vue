@@ -41,6 +41,7 @@ export default {
   max-width: 100%;
   padding: var(--page-wrapper-padding);
   gap: var(--page-wrapper-section-gap);
+  background: var(--wt-page-wrapper-background-color);
 }
 
 .wt-page-wrapper__header,
