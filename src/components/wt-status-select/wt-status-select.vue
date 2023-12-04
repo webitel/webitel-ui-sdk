@@ -120,6 +120,7 @@ export default {
 
     .multiselect__content-wrapper {
       border: none;
+      background: transparent;
 
       .multiselect__option {
         min-height: 0;

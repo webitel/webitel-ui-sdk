@@ -295,6 +295,7 @@ onMounted(() => {
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
+  background: transparent;
 
   .wt-input--invalid &,
   .wt-input--invalid:hover & {

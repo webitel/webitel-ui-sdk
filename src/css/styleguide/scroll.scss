@@ -2,8 +2,8 @@
   --scrollbar-width: 5px;
   --scrollbar-height: 5px;
   --scrollbar-thumb-width: 5px;
-  --scrollbar-bg-color: var(--main-color);
-  --scrollbar-thumb-color: var(--secondary-color);
+  --scrollbar-bg-color: var(--dp-16-surface-color);
+  --scrollbar-thumb-color: var(--primary-color);
   --scrollbar-border-radius: var(--border-radius);
 }
 
@@ -14,7 +14,7 @@
     height: var(--scrollbar-height);
     background-color: var(--scrollbar-bg-color);
     cursor: pointer;
-    border-radius: 50%; // dont overlay borders
+    border-radius: var(--scrollbar-border-radius);
   }
 
   // scrollable element

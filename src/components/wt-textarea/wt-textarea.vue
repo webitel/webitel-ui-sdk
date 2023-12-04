@@ -174,6 +174,7 @@ export default {
   padding: var(--textarea-padding);
   resize: none;
   transition: var(--transition);
+  background: transparent;
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
