@@ -14,6 +14,7 @@ import './bell.svg';
 import './bell-badged.svg';
 import './bucket.svg';
 import './calendar.svg';
+import './dark-mode.svg';
 
 import './call.svg';
 import './call--filled.svg';
