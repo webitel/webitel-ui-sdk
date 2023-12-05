@@ -1,14 +1,24 @@
 import { shallowMount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import AppearanceStoreModule from '../../store/AppearanceStoreModule';
 import WtDarkModeSwitcher from '../wt-dark-mode-switcher.vue';
 
 describe('WtDarkModeSwitcher', () => {
+  let store;
+
+  store = createStore(new AppearanceStoreModule().getModule());
+
+  const wrapper = shallowMount(WtDarkModeSwitcher, {
+    global: {
+      plugins: [store],
+    },
+  });
+
   it('should render component', () => {
-    const wrapper = shallowMount(WtDarkModeSwitcher, {});
     expect(wrapper.exists()).toBe(true);
   });
 
   it('toggles dark mode class', async () => {
-    const wrapper = shallowMount(WtDarkModeSwitcher, {});
     expect(window.document.documentElement.classList.contains('theme--dark'))
     .toBe(false);
     await wrapper.findComponent({ name: 'wt-switcher' }).trigger('change');

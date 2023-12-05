@@ -7,18 +7,24 @@
     <div
       class="wt-expansion-panel-header"
       tabindex="0"
-      @click="open = !open"
-      @keypress.enter="open = !open"
+      @click="toggleOpen"
+      @keypress.enter="toggleOpen"
     >
       <slot name="title" />
-      <wt-icon
-        icon="arrow-right"
-      />
+      <div class="wt-expansion-panel-actions">
+        <slot
+          name="actions"
+          v-bind="{ open, toggleOpen }"
+        />
+        <wt-icon
+          icon="arrow-right"
+        />
+      </div>
     </div>
     <wt-expand-transition>
       <div
-        class="wt-expansion-panel-body"
         v-show="open"
+        class="wt-expansion-panel-body"
       >
         <slot />
       </div>
@@ -37,6 +43,7 @@ const props = defineProps({
 });
 
 const open = ref(true);
+const toggleOpen = () => open.value = !open.value;
 </script>
 
 <style lang="scss">
@@ -49,6 +56,7 @@ const open = ref(true);
     @extend %typo-subtitle-1;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: var(--spacing-2xs) var(--spacing-xs);
     cursor: pointer;
     color: var(--wt-expansion-panel-header-title-color);
@@ -61,8 +69,9 @@ const open = ref(true);
     background-color: var(--wt-expansion-panel-content-background-color);
   }
 
-  .wt-icon {
-    margin-left: auto;
+  .wt-expansion-panel-actions {
+    display: flex;
+    gap: var(--spacing-xs);
   }
 
   &--sm {

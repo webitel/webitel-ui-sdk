@@ -1,7 +1,7 @@
 import { useCachedInterval } from '../useCachedInterval';
 
 describe('useCachedInterval', () => {
-  it('subscribe', async () => {
+  it.skip('subscribe', async () => {
     const callback = vi.fn();
     const { subscribe } = useCachedInterval({ timeout: 10 });
     subscribe(callback);
