@@ -117,12 +117,12 @@ onMounted(() => {
 .audit-form-question {
   padding: var(--spacing-sm);
   border-radius: var(--border-radius);
-  background: var(--main-color);
+  background: var(--dp-22-surface-color);
   box-shadow: var(--elevation-1);
 
   // override audit-form-question-read-wrapper specificity for hover
   &.audit-form-question--answered {
-    background: var(--secondary-color-50);
+    background: var(--secondary-color);
     &:hover,
     &:focus-within {
       border-color: transparent;

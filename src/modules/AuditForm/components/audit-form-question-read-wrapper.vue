@@ -104,7 +104,7 @@ const isResult = computed(() => !isEmpty(props.result));
   }
 
   &--filled {
-    background: var(--secondary-color-50);
+    background: var(--secondary-color);
   }
 }
 
@@ -123,13 +123,13 @@ const isResult = computed(() => !isEmpty(props.result));
   &--required {
     &:after {
       content: '*';
-      color: var(--false-color);
+      color: var(--error-color);
     }
   }
 }
 .audit-form-question--clear {
-  margin-top: var(--spacing-sm);;
+  margin-top: var(--spacing-sm);
   cursor: pointer;
-  color: var(--text-link-color);
+  color: var(--info-color);
 }
 </style>
