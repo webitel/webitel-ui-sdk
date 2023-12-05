@@ -46,6 +46,7 @@
     @extend %typo-body-1;
     @include wt-placeholder;
     background: transparent;
+    color: var(--wt-text-field-text-color);
     padding: 0; // reset default
     margin: 0; // reset default
   }

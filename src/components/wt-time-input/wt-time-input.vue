@@ -118,7 +118,36 @@ export default {
   &--disabled {
     pointer-events: none;
   }
+  .wt-time-input__input {
+    @extend %typo-body-1;
+
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--input-padding);
+    border: var(--input-border);
+    border-color: var(--wt-text-field-input-border-color);
+    border-radius: var(--border-radius);
+    color: var(--wt-text-field-text-color);
+    background: transparent;
+    transition: var(--transition);
+
+    .wt-time-input--invalid &,
+    .wt-time-input--invalid:hover & {
+      @include wt-placeholder('error');
+      color: var(--wt-text-field-error-text-color);
+      border-color: var(--wt-text-field-input-border-error-color);
+      outline: none; // prevent outline overlapping false color
+    }
+
+    .wt-time-input--disabled & {
+      @include wt-placeholder('disabled');
+      border-color: var(--wt-text-field-input-border-disabled-color);
+      background: var(--wt-text-field-input-background-disabled-color);
+    }
+  }
 }
+
 
 .wt-time-input__wrapper {
   position: relative;
@@ -126,32 +155,5 @@ export default {
 
 .wt-label {
   text-align: center;
-}
-
-.wt-time-input__input {
-  @extend %typo-body-1;
-
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: var(--input-padding);
-  border: var(--input-border);
-  border-color: var(--wt-text-field-input-border-color);
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-
-  .wt-time-input--invalid &,
-  .wt-time-input--invalid:hover & {
-    @include wt-placeholder('error');
-    color: var(--wt-text-field-error-text-color);
-    border-color: var(--wt-text-field-input-border-error-color);
-    outline: none; // prevent outline overlapping false color
-  }
-
-  .wt-time-input--disabled & {
-    @include wt-placeholder('disabled');
-    border-color: var(--wt-text-field-input-border-disabled-color);
-    background: var(--wt-text-field-input-background-disabled-color);
-  }
 }
 </style>

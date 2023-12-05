@@ -221,6 +221,7 @@ export default {
 <style lang="scss" scoped>
 
 .wt-table {
+  @extend %wt-scrollbar;
   overflow: auto;
 }
 

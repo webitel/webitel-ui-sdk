@@ -173,6 +173,7 @@ export default {
   min-height: var(--textarea-min-height);
   padding: var(--textarea-padding);
   resize: none;
+  color: var(--wt-text-field-text-color);
   transition: var(--transition);
   background: transparent;
   border: var(--input-border);
