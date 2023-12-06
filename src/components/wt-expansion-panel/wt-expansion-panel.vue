@@ -1,20 +1,20 @@
 <template>
   <div
-    :class="[{'wt-expansion-panel--opened':open},
+    :class="[{'wt-expansion-panel--opened':opened },
              `wt-expansion-panel--${props.size}`]"
     class="wt-expansion-panel"
   >
     <div
       class="wt-expansion-panel-header"
       tabindex="0"
-      @click="toggleOpen"
-      @keypress.enter="toggleOpen"
+      @click="opened = !opened"
+      @keypress.enter="opened = !opened"
     >
       <slot name="title" />
       <div class="wt-expansion-panel-actions">
         <slot
           name="actions"
-          v-bind="{ open, toggleOpen }"
+          v-bind="{ open }"
         />
         <wt-icon
           icon="arrow-right"
@@ -23,7 +23,7 @@
     </div>
     <wt-expand-transition>
       <div
-        v-show="open"
+        v-show="opened"
         class="wt-expansion-panel-body"
       >
         <slot />
@@ -42,8 +42,11 @@ const props = defineProps({
   },
 });
 
-const open = ref(true);
-const toggleOpen = () => open.value = !open.value;
+const opened = ref(true);
+
+function open() {
+  if (!opened.value) opened.value = true;
+}
 </script>
 
 <style lang="scss">
