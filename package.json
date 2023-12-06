@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "23.12.92",
+  "version": "23.12.94",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "publish-lib": "npm run test:unit && npm run build && npm publish --access public",
     "publish-lib:testless": "npm run build && npm publish --access public",
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },

@@ -1,5 +1,7 @@
 <template>
   <div class="playground">
+    <wt-select></wt-select>
+    <wt-pagination></wt-pagination>
     <wt-input />
     <wt-icon-btn
       icon="edit"

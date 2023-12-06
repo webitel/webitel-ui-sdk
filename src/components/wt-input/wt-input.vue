@@ -298,6 +298,20 @@ onMounted(() => {
   border-radius: var(--border-radius);
   background: transparent;
 
+  // disable arrows
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  // disable arrows
+  /* Firefox */
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+
   .wt-input--invalid &,
   .wt-input--invalid:hover & {
     @include wt-placeholder('error');
