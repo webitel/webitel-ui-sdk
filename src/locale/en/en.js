@@ -283,6 +283,7 @@ export default {
       audit: 'Audit',
       history: 'Call History',
       grafana: 'Grafana',
+      crm: 'CRM',
     },
     headerActions: {
       account: 'Account',

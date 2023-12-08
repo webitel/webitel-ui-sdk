@@ -5,6 +5,10 @@ export default class AppearanceStoreModule extends BaseStoreModule {
     theme: null,
   }
 
+  getters = {
+    DARK_MODE: (state) => state.theme === 'dark',
+  }
+
   actions = {
     SET_THEME: (context, theme) => {
       context.commit('SET_THEME', theme);

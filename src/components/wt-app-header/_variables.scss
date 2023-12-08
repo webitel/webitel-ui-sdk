@@ -11,10 +11,13 @@
 
   --wt-app-navigator-max-height: 80vh;
   --wt-app-navigator-padding: var(--wt-app-header-content-gap);
-  --wt-app-navigator-item-size: 120px;
+  --wt-app-navigator-item-width: 128px;
+  --wt-app-navigator-item-height: 162px;
+  --wt-app-navigator-item-padding: 20px;
   --wt-app-navigator-item-gap: var(--wt-app-header-content-gap);
   --wt-app-navigator-item-border: 1px solid;
   --wt-app-navigator-item-border-color: var(--secondary-color);
+  --wt-app-navigator-item-pic-size: 88px;
   --wt-app-navigator-item-border-color--hover: var(--primary-color);
 
   --wt-header-actions-min-width: 120px;

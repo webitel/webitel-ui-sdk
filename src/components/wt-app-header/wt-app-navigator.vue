@@ -25,154 +25,27 @@
         </h3>
         <ul class="wt-app-navigator__nav">
           <li
-            v-if="formattedApps[WebitelApplications.AGENT]"
-            :class="{'active': formattedApps[WebitelApplications.AGENT].currentApp }"
+            v-for="app of formattedApps"
+            :key="app.name"
+            :class="{'active': app.currentApp }"
             class="wt-app-navigator__card"
           >
             <a
-              :href="formattedApps[WebitelApplications.AGENT].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.AGENT]}`)"
+              :href="app.href"
+              :title="$t(`webitelUI.appNavigator.${app.name}`)"
               class="wt-app-navigator__card__link"
               target="_blank"
             >
               <img
-                :alt="`${[WebitelApplications.AGENT]}-pic`"
+                :alt="`${app.name}-pic`"
                 class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-agent.svg"
+                :src="app.img"
               >
-            </a>
-          </li>
-
-          <li
-            v-if="formattedApps[WebitelApplications.SUPERVISOR]"
-            :class="{'active': formattedApps[WebitelApplications.SUPERVISOR].currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="formattedApps[WebitelApplications.SUPERVISOR].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.SUPERVISOR]}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${[WebitelApplications.SUPERVISOR]}-pic`"
-                class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-supervisor.svg"
+              <p
+                class="wt-app-navigator__card__title"
               >
-            </a>
-          </li>
-
-          <li
-            v-if="formattedApps[WebitelApplications.HISTORY]"
-            :class="{'active': formattedApps[WebitelApplications.HISTORY].currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="formattedApps[WebitelApplications.HISTORY].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.HISTORY]}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${[WebitelApplications.HISTORY]}-pic`"
-                class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-history.svg"
-              >
-            </a>
-          </li>
-
-          <li
-            v-if="false && formattedApps[WebitelApplications.AUDIT]"
-            :class="{'active': formattedApps[WebitelApplications.AUDIT].currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="formattedApps[WebitelApplications.AUDIT].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.AUDIT]}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${[WebitelApplications.AUDIT]}-pic`"
-                class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-audit.svg"
-              >
-            </a>
-          </li>
-
-          <li
-            v-if="formattedApps[WebitelApplications.ADMIN]"
-            :class="{'active': formattedApps[WebitelApplications.ADMIN].currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="formattedApps[WebitelApplications.ADMIN].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.ADMIN]}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${[WebitelApplications.ADMIN]}-pic`"
-                class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-admin.svg"
-              >
-            </a>
-          </li>
-
-          <li
-            v-if="formattedApps[WebitelApplications.ANALYTICS]"
-            :class="{'active': formattedApps[WebitelApplications.ANALYTICS].currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="formattedApps[WebitelApplications.ANALYTICS].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.ANALYTICS]}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${[WebitelApplications.ANALYTICS]}-pic`"
-                class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-analytics.svg"
-              >
-            </a>
-          </li>
-
-          <li
-            v-if="formattedApps[WebitelApplications.AUDIT]"
-            :class="{'active': formattedApps[WebitelApplications.AUDIT].currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="formattedApps[WebitelApplications.AUDIT].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.AUDIT]}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${[WebitelApplications.AUDIT]}-pic`"
-                class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-audit.svg"
-              >
-            </a>
-          </li>
-
-          <li
-            v-if="formattedApps[WebitelApplications.CRM]"
-            :class="{'active': formattedApps[WebitelApplications.CRM].currentApp }"
-            class="wt-app-navigator__card"
-          >
-            <a
-              :href="formattedApps[WebitelApplications.CRM].href"
-              :title="$t(`webitelUI.appNavigator.${[WebitelApplications.CRM]}`)"
-              class="wt-app-navigator__card__link"
-              target="_blank"
-            >
-              <img
-                :alt="`${[WebitelApplications.CRM]}-pic`"
-                class="wt-app-navigator__card__img"
-                src="../../assets/components/organisms/wt-app-header/app-navigator/app-crm.svg"
-              >
+                {{ $t(`webitelUI.appNavigator.${app.name}`) }}
+              </p>
             </a>
           </li>
         </ul>
@@ -185,6 +58,52 @@
 import { computed, ref } from 'vue';
 import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
 
+import AdminDark from './assets/admin-dark.svg';
+import AdminLight from './assets/admin-light.svg';
+import AgentDark from './assets/agent-dark.svg';
+import AgentLight from './assets/agent-light.svg';
+import AnalyticsDark from './assets/analytics-dark.svg';
+import AnalyticsLight from './assets/analytics-light.svg';
+import CrmDark from './assets/crm-dark.svg';
+import CrmLight from './assets/crm-light.svg';
+import HistoryDark from './assets/history-dark.svg';
+import HistoryLight from './assets/history-light.svg';
+import AuditDark from './assets/audit-dark.svg';
+import AuditLight from './assets/audit-light.svg';
+import SupervisorDark from './assets/supervisor-dark.svg';
+import SupervisorLight from './assets/supervisor-light.svg';
+
+const pics = {
+  [WebitelApplications.ADMIN]: {
+    dark: AdminDark,
+    light: AdminLight,
+  },
+  [WebitelApplications.AGENT]: {
+    dark: AgentDark,
+    light: AgentLight,
+  },
+  [WebitelApplications.ANALYTICS]: {
+    dark: AnalyticsDark,
+    light: AnalyticsLight,
+  },
+  [WebitelApplications.CRM]: {
+    dark: CrmDark,
+    light: CrmLight,
+  },
+  [WebitelApplications.HISTORY]: {
+    dark: HistoryDark,
+    light: HistoryLight,
+  },
+  [WebitelApplications.AUDIT]: {
+    dark: AuditDark,
+    light: AuditLight,
+  },
+  [WebitelApplications.SUPERVISOR]: {
+    dark: SupervisorDark,
+    light: SupervisorLight,
+  },
+};
+
 const props = defineProps({
   currentApp: {
     type: String,
@@ -192,6 +111,10 @@ const props = defineProps({
   apps: {
     type: Array,
     default: () => [],
+  },
+  darkMode: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -201,6 +124,7 @@ const formattedApps = computed(() => props.apps.reduce((apps, app) => ({
   ...apps,
   [app.name]: {
     ...app,
+    img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
     currentApp: props.currentApp === app.name,
   },
 }), {}));
@@ -251,8 +175,8 @@ function close() {
 
 .wt-app-navigator__card {
   box-sizing: border-box;
-  width: var(--wt-app-navigator-item-size);
-  height: var(--wt-app-navigator-item-size);
+  width: var(--wt-app-navigator-item-width);
+  height: var(--wt-app-navigator-item-height);
   transition: var(--transition);
   border: var(--wt-app-navigator-item-border);
   border-color: var(--wt-app-navigator-item-border-color);
@@ -269,11 +193,20 @@ function close() {
   width: 100%;
   height: 100%;
   cursor: pointer;
+  padding: var(--wt-app-navigator-item-padding);
 }
 
 // img inside a
 .wt-app-navigator__card__img {
-  width: 100%;
-  height: 100%;
+  width: var(--wt-app-navigator-item-pic-size);
+  aspect-ratio: 1;
+  margin: auto;
+}
+
+// app title
+.wt-app-navigator__card__title {
+  @extend %typo-overline;
+  text-align: center;
+  color: var(--text-main-color);
 }
 </style>
