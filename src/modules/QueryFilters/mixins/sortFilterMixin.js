@@ -32,10 +32,13 @@ export default {
     },
 
     setValue({ column, order }) {
-      const headers = this.headers.map((header) => ({
-        ...header,
-        sort: header === column ? order : null,
-      }));
+      const headers = this.headers.map((header) => {
+        const sortFieldValue = header?.sort;
+        return {
+          ...header,
+          sort: header === column ? order : sortFieldValue,
+        };
+      });
       const value = encodeSortQuery({ column, order });
       this.setHeaders(headers);
       this.setValueToQuery({
