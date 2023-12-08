@@ -17,40 +17,9 @@
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
           <img
-            v-if="currentApp === 'admin'"
-            alt="admin"
             class="wt-navigation-bar__app-pic"
-            src="../../assets/components/organisms/wt-navigation-bar/logo-admin-app.svg"
-          >
-          <img
-            v-if="currentApp === 'agent'"
-            alt="agent"
-            class="wt-navigation-bar__app-pic"
-            src="../../assets/components/organisms/wt-navigation-bar/logo-agent-app.svg"
-          >
-          <img
-            v-if="currentApp === 'audit'"
-            alt="audit"
-            class="wt-navigation-bar__app-pic"
-            src="../../assets/components/organisms/wt-navigation-bar/logo-audit-app.svg"
-          >
-          <img
-            v-if="currentApp === 'history'"
-            alt="history"
-            class="wt-navigation-bar__app-pic"
-            src="../../assets/components/organisms/wt-navigation-bar/logo-history-app.svg"
-          >
-          <img
-            v-if="currentApp === 'supervisor'"
-            alt="supervisor"
-            class="wt-navigation-bar__app-pic"
-            src="../../assets/components/organisms/wt-navigation-bar/logo-supervisor-app.svg"
-          >
-          <img
-            v-if="currentApp === 'crm'"
-            alt="crm"
-            class="wt-navigation-bar__app-pic"
-            src="../../assets/components/organisms/wt-navigation-bar/logo-crm-app.svg"
+            :src="darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light"
+            :alt="currentApp"
           >
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
@@ -124,6 +93,46 @@
 
 <script>
 import ExpandTransition from '../transitions/wt-expand-transition.vue';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+import AdminDark from './assets/dark/app-logo-dark-admin.svg';
+import AdminLight from './assets/light/app-logo-light-admin.svg';
+import WorkspaceDark from './assets/dark/app-logo-dark-workspace.svg';
+import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
+import AuditDark from './assets/dark/app-logo-dark-audit.svg';
+import AuditLight from './assets/light/app-logo-light-audit.svg';
+import HistoryDark from './assets/dark/app-logo-dark-history.svg';
+import HistoryLight from './assets/light/app-logo-light-history.svg';
+import SupervisorDark from './assets/dark/app-logo-dark-supervisor.svg';
+import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
+import CrmDark from './assets/dark/app-logo-dark-crm.svg';
+import CrmLight from './assets/light/app-logo-light-crm.svg';
+
+const appLogo = {
+  [WebitelApplications.SUPERVISOR]: {
+    dark: SupervisorDark,
+    light: SupervisorLight,
+  },
+  [WebitelApplications.ADMIN]: {
+    dark: AdminDark,
+    light: AdminLight,
+  },
+  [WebitelApplications.AGENT]: {
+    dark: WorkspaceDark,
+    light: WorkspaceLight,
+  },
+  [WebitelApplications.AUDIT]: {
+    dark: AuditDark,
+    light: AuditLight,
+  },
+  [WebitelApplications.HISTORY]: {
+    dark: HistoryDark,
+    light: HistoryLight,
+  },
+  [WebitelApplications.CRM]: {
+    dark: CrmDark,
+    light: CrmLight,
+  },
+};
 
 export default {
   name: 'WtNavigationBar',
@@ -137,10 +146,14 @@ export default {
       type: Array,
       default: () => [],
     },
+    darkMode: {
+      type: Boolean,
+      default: false,}
   },
   data: () => ({
     isOpened: false,
     expandedName: '',
+    appLogo,
   }),
 
   computed: {

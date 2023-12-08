@@ -278,10 +278,10 @@ export default {
     appNavigator: {
       title: 'Webitel applications',
       admin: 'Admin',
-      agent: 'Agent Workspace',
-      supervisor: 'Supervisor Workspace',
+      agent: 'Agent',
+      supervisor: 'Supervisor',
       audit: 'Audit',
-      history: 'Call History',
+      history: 'History',
       grafana: 'Grafana',
       crm: 'CRM',
     },
