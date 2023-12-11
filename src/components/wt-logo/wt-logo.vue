@@ -18,6 +18,13 @@ const props = defineProps({
   >
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import './variables.scss';
+</style>
 
+<style lang="scss" scoped>
+.wt-logo {
+  width: var(--wt-logo-width);
+  height: var(--wt-logo-height);
+}
 </style>
