@@ -1,5 +1,6 @@
 <template>
   <div class="playground">
+    <wt-logo></wt-logo>
     <wt-select></wt-select>
     <wt-pagination></wt-pagination>
     <wt-input />

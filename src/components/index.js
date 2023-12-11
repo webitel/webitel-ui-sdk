@@ -1,3 +1,4 @@
+import WtLogo from './wt-logo/wt-logo.vue';
 import WtAvatar from './wt-avatar/wt-avatar.vue';
 import WtBadge from './wt-badge/wt-badge.vue';
 import WtIcon from './wt-icon/wt-icon.vue';
@@ -57,6 +58,7 @@ import WtExpansionPanel
   from './wt-expansion-panel/wt-expansion-panel.vue';
 
 const Components = {
+  WtLogo,
   WtAvatar,
   WtBadge,
   WtIcon,

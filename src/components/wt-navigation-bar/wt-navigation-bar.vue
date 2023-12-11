@@ -234,7 +234,7 @@ export default {
 }
 
 .wt-navigation-bar__app-pic {
-  width: var(--wt-navigation-bar-app-pic-width);
+  width: auto;
   height: var(--wt-navigation-bar-app-pic-height);
 }
 

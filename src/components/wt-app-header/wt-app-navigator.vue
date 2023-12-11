@@ -189,6 +189,7 @@ function close() {
 
 // a tag
 .wt-app-navigator__card__link {
+  box-sizing: border-box;
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
@@ -201,7 +202,7 @@ function close() {
 // img inside a
 .wt-app-navigator__card__img {
   width: var(--wt-app-navigator-item-pic-size);
-  aspect-ratio: 1;
+  height: var(--wt-app-navigator-item-pic-size);
   margin: auto;
 }
 
