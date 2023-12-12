@@ -1,5 +1,6 @@
 <template>
-  <div class="playground">
+  <div class="playground" style="background: var(--content-wrapper-color);">
+    <wt-input type="number"></wt-input>
     <wt-logo></wt-logo>
     <wt-select></wt-select>
     <wt-pagination></wt-pagination>

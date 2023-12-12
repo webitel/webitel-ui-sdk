@@ -132,20 +132,6 @@ export default {
     background: transparent;
     transition: var(--transition);
 
-    // disable arrows
-    /* Chrome, Safari, Edge, Opera */
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    // disable arrows
-    /* Firefox */
-    &[type=number] {
-      -moz-appearance: textfield;
-    }
-
     .wt-time-input--invalid &,
     .wt-time-input--invalid:hover & {
       @include wt-placeholder('error');
