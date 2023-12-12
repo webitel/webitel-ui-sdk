@@ -40,9 +40,13 @@ const props = defineProps({
     type: String,
     default: 'md',
   },
+  collapsed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const opened = ref(true);
+const opened = ref(!props.collapsed);
 
 function open() {
   if (!opened.value) opened.value = true;
