@@ -247,7 +247,7 @@ export default {
   border: var(--table-head-border);
   border-color: var(--wt-table-head-border-color);
   border-radius: var(--border-radius);
-  background: transparent;
+  background: var(--wt-table-head-background-color);
 }
 
 .wt-table__th,
