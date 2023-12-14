@@ -38,8 +38,8 @@
             >
               <img
                 :alt="`${app.name}-pic`"
-                class="wt-app-navigator__card__img"
                 :src="app.img"
+                class="wt-app-navigator__card__img"
               >
               <p
                 class="wt-app-navigator__card__title"
@@ -64,12 +64,12 @@ import AgentDark from './assets/agent-dark.svg';
 import AgentLight from './assets/agent-light.svg';
 import AnalyticsDark from './assets/analytics-dark.svg';
 import AnalyticsLight from './assets/analytics-light.svg';
+import AuditDark from './assets/audit-dark.svg';
+import AuditLight from './assets/audit-light.svg';
 import CrmDark from './assets/crm-dark.svg';
 import CrmLight from './assets/crm-light.svg';
 import HistoryDark from './assets/history-dark.svg';
 import HistoryLight from './assets/history-light.svg';
-import AuditDark from './assets/audit-dark.svg';
-import AuditLight from './assets/audit-light.svg';
 import SupervisorDark from './assets/supervisor-dark.svg';
 import SupervisorLight from './assets/supervisor-light.svg';
 
@@ -120,14 +120,24 @@ const props = defineProps({
 
 const isOpened = ref(false);
 
-const formattedApps = computed(() => props.apps.reduce((apps, app) => ({
+const order = [
+  WebitelApplications.AGENT,
+  WebitelApplications.SUPERVISOR,
+  WebitelApplications.HISTORY,
+  WebitelApplications.ADMIN,
+  WebitelApplications.ANALYTICS,
+  WebitelApplications.AUDIT,
+  WebitelApplications.CRM,
+];
+
+const formattedApps = computed(() => props.apps.reduce((apps, app) => ([
   ...apps,
-  [app.name]: {
+  {
     ...app,
     img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
     currentApp: props.currentApp === app.name,
   },
-}), {}));
+]), []).sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name)));
 
 function close() {
   isOpened.value = false;
@@ -189,14 +199,14 @@ function close() {
 
 // a tag
 .wt-app-navigator__card__link {
-  box-sizing: border-box;
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
-  cursor: pointer;
   padding: var(--wt-app-navigator-item-padding);
+  cursor: pointer;
 }
 
 // img inside a
