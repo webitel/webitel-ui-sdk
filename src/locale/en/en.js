@@ -142,7 +142,7 @@ export default {
         [EngineRoutingSchemaType.Chat]: 'Chat',
         [EngineRoutingSchemaType.Voice]: 'Voice',
         [EngineRoutingSchemaType.Service]: 'Service',
-        [EngineRoutingSchemaType.Processing]: 'Processing',
+        [EngineRoutingSchemaType.Processing]: 'Forms',
       },
     },
   },
