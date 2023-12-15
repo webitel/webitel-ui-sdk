@@ -16,7 +16,7 @@
           v-bind="{ open }"
         />
         <wt-icon
-          :class="{ 'wt-icon--opened':opened }"
+          :class="{ 'wt-expansion-panel-arrow--opened':opened }"
           icon="arrow-right"
         />
       </div>
@@ -81,7 +81,7 @@ function open() {
     gap: var(--spacing-xs);
   }
 
-  .wt-icon--returned {
+  .wt-expansion-panel-arrow--opened {
     transform: rotate(90deg);
   }
 
@@ -89,10 +89,6 @@ function open() {
     .wt-expansion-panel-header {
       @extend %typo-subtitle-2;
     }
-  }
-
-  .wt-icon--opened {
-    transform: rotate(90deg);
   }
 }
 </style>
