@@ -53,11 +53,15 @@ export default {
     },
 
     setValue({ column, order }) {
-      this.headers = this.headers.map((col) => ({
-        ...col,
-        sort: col === column ? order : null,
-      }));
+      const headers = this.headers.map((col) => {
+        const sortFieldValue = col?.sort;
+        return {
+          ...col,
+          sort: col === column ? order : sortFieldValue,
+        }
+      });
       const value = encodeSortQuery({ column, order });
+      this.setHeaders(headers);
       return this.setValueToQuery({
         value,
         filterQuery: this.filterQuery,
@@ -66,10 +70,11 @@ export default {
 
     restoreValue(value) {
       const sortedColumns = decodeSortQuery({ value });
-      this.headers = this.headers.map((header) => ({
+      const headers = this.headers.map((header) => ({
         ...header,
         sort: sortedColumns[header.field] || null,
       }));
+      this.setHeaders(headers);
     },
   },
 };
