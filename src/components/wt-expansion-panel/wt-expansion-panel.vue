@@ -1,7 +1,6 @@
 <template>
   <div
-    :class="[{'wt-expansion-panel--opened':opened },
-             `wt-expansion-panel--${props.size}`]"
+    :class="[`wt-expansion-panel--${props.size}`]"
     class="wt-expansion-panel"
   >
     <div
@@ -17,6 +16,7 @@
           v-bind="{ open }"
         />
         <wt-icon
+          :class="{ 'wt-icon--returned':opened }"
           icon="arrow-right"
         />
       </div>
@@ -81,16 +81,18 @@ function open() {
     gap: var(--spacing-xs);
   }
 
+  .wt-icon--returned {
+    transform: rotate(90deg);
+  }
+
   &--sm {
     .wt-expansion-panel-header {
       @extend %typo-subtitle-2;
     }
   }
 
-  &--opened {
-    .wt-icon {
-      transform: rotate(90deg);
-    }
+  .wt-icon--returned {
+    transform: rotate(90deg);
   }
 }
 </style>
