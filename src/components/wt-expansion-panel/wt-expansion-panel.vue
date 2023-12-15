@@ -16,7 +16,7 @@
           v-bind="{ open }"
         />
         <wt-icon
-          :class="{ 'wt-icon--returned':opened }"
+          :class="{ 'wt-icon--opened':opened }"
           icon="arrow-right"
         />
       </div>
@@ -91,7 +91,7 @@ function open() {
     }
   }
 
-  .wt-icon--returned {
+  .wt-icon--opened {
     transform: rotate(90deg);
   }
 }
