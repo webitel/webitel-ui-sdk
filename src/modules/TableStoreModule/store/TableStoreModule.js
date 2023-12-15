@@ -122,12 +122,15 @@ export default class TableStoreModule extends BaseStoreModule {
       });
     },
     UPDATE_HEADER_SORT: (context, { header, nextSortOrder }) => {
-      const headers = context.state.headers.map((oldHeader) => ({
-        ...oldHeader,
-        sort: oldHeader.field === header.field
-          ? nextSortOrder
-          : SortSymbols.NONE,
-      }));
+      const headers = context.state.headers.map((oldHeader) => {
+        const sortFieldValue = oldHeader?.sort;
+        return {
+          ...oldHeader,
+          sort: oldHeader.field === header.field
+            ? nextSortOrder
+            : sortFieldValue,
+        };
+      });
       context.commit('SET_HEADERS', headers);
     },
     PATCH_ITEM_PROPERTY: async (context, {
