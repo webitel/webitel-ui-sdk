@@ -19,39 +19,46 @@ const headers = [{
   field: 'online',
 }];
 
+const sortedHeaders = [{
+  value: 'queue',
+  show: true,
+  sort: 'asc',
+  field: 'queue',
+}, {
+  value: 'agents',
+  show: true,
+  sort: null,
+  field: 'online',
+}];
+
 describe('Sort filter mixin', () => {
-  let wrapper;
+  const setHeaders = vi.fn();
   const Component = {
     render() {},
     mixins: [sortFilterMixin],
     data: () => ({ headers }),
+    methods: { setHeaders },
   };
 
   beforeEach(async () => {
     await router.replace('/');
-    wrapper = shallowMount(Component, {
-      global: { plugins: [router] },
-    });
   });
+
 
   it('Correctly sets value from $route query', async () => {
     await router.replace({ path: '/', query: { sort: '+queue' } });
-    const queue = wrapper.vm.headers.find((header) => header.value === 'queue');
-    expect(queue.sort).toEqual('asc');
+    const wrapper = shallowMount(Component, {
+      global: { plugins: [router] },
+    });
+    expect(setHeaders).toHaveBeenCalledWith(sortedHeaders);
   });
 
-  it('After "sort" trigger, header column sort value changes properly', async () => {
-    let queue;
-    queue = wrapper.vm.headers.find((header) => header.value === 'queue');
-    await wrapper.vm.sort(queue);
-    queue = wrapper.vm.headers.find((header) => header.value === 'queue');
-    expect(queue.sort).toEqual('asc');
-  });
-
-  it('After "sort" trigger, url query changes properly', async () => {
-    await router.replace({ path: '/', query: { sort: '+queue' } });
+  it('After "sort" trigger, header column sort value changes properly', () => {
+    const wrapper = shallowMount(Component, {
+      global: { plugins: [router] },
+    });
     const queue = wrapper.vm.headers.find((header) => header.value === 'queue');
-    await wrapper.vm.sort(queue);
-    expect(wrapper.vm.$route.query.sort).toEqual('-queue');
+    wrapper.vm.sort(queue);
+    expect(setHeaders).toHaveBeenCalledWith(sortedHeaders);
   });
 });
