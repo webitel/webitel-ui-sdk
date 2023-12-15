@@ -138,10 +138,10 @@ export default {
     },
     flow: {
       type: {
-        [EngineRoutingSchemaType.Chat]: 'Чат',
-        [EngineRoutingSchemaType.Voice]: 'Голос',
-        [EngineRoutingSchemaType.Service]: 'Сервис',
-        [EngineRoutingSchemaType.Processing]: 'Обработка',
+        [EngineRoutingSchemaType.Chat]: 'Текстовая',
+        [EngineRoutingSchemaType.Voice]: 'Голосовая',
+        [EngineRoutingSchemaType.Service]: 'Служебная',
+        [EngineRoutingSchemaType.Processing]: 'Формы',
       },
     },
   },
