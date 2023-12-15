@@ -19,7 +19,7 @@
 <script>
 import AuthAPI from '../api/auth';
 
-const authURL = process ? process.env.VUE_APP_AUTH_MODULE_URL : import.meta.env.VITE_AUTH_MODE_URL;
+const authURL = process?.env?.VUE_APP_AUTH_MODULE_URL || import.meta.env.VITE_AUTH_MODE_URL;
 
 export default {
   name: 'Auth',
