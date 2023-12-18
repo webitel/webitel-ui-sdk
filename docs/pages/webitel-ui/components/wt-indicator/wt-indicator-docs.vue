@@ -13,9 +13,9 @@ export default {
     properties: [
       {
         value: 'color',
-        code: '<wt-indicator color="danger"></wt-indicator>',
+        code: '<wt-indicator color="error"></wt-indicator>',
         type: ['String', 'Number'],
-        options: ['primary', 'secondary', 'success', 'error', 'transfer', 'disabled', 'break-out'],
+        options: ['primary', 'secondary', 'success', 'error', 'transfer', 'disabled', 'break-out', 'info'],
         default: 'secondary',
       },
       {

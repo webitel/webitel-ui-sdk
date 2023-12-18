@@ -27,7 +27,7 @@ export default {
     color: {
       type: String,
       default: 'secondary',
-      options: ['primary', 'secondary', 'disabled', 'success', 'error', 'transfer', 'break-out'],
+      options: ['primary', 'secondary', 'disabled', 'success', 'error', 'transfer', 'break-out', 'info'],
     },
     text: {
       type: [String, Number],
@@ -97,6 +97,10 @@ export default {
 
   &--break-out {
     background: var(--wt-indicator-break-out-color);
+  }
+
+  &--info {
+    background: var(--wt-indicator-info-color);
   }
 }
 
