@@ -11,7 +11,7 @@
       <article class="wt-cc-status-select-error-popup__main-wrapper">
         <wt-icon
           icon="attention"
-          color="danger"
+          color="error"
         />
         <p class="wt-cc-status-select-error-popup__message">
           {{ $t('webitelUI.agentStatusSelect.statusSelectErrorPopup.message') }}
