@@ -11,21 +11,20 @@
   >
     <wt-label
       v-if="hasLabel"
-      v-bind="labelProps"
       :disabled="disabled"
       :invalid="invalid"
       class="wt-select__label"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
+        v-bind="{ label }"
       >
         {{ requiredLabel }}
       </slot>
     </wt-label>
     <vue-multiselect
-      v-bind="$attrs"
       ref="vue-multiselect"
       :allow-empty="allowEmpty"
       :disabled="disabled"
@@ -33,12 +32,13 @@
       :label="selectOptionLabel"
       :limit="1"
       :loading="false"
+      :model-value="selectValue"
       :multiple="multiple"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :track-by="trackBy"
-      :model-value="selectValue"
       class="wt-select__select"
+      v-bind="$attrs"
       @close="isOpened = false"
       @open="isOpened = true"
       v-on="listeners"
@@ -62,8 +62,8 @@
       <!--      Slot for custom label template for single select-->
       <template #singleLabel="{ option }">
         <slot
-          v-bind="{ option, optionLabel }"
           name="singleLabel"
+          v-bind="{ option, optionLabel }"
         >
           <span class="multiselect__single-label">
             {{ getOptionLabel({ option, optionLabel }) }}
@@ -74,8 +74,8 @@
       <!--      Slot for custom option template -->
       <template #option="{ option }">
         <slot
-          v-bind="{ option, optionLabel }"
           name="option"
+          v-bind="{ option, optionLabel }"
         >
           {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
@@ -85,10 +85,17 @@
       <template #caret="{ toggle }">
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
+          v-if="allowCustomValue ? !searchParams.search : true"
           :disabled="disabled"
           class="multiselect__select"
           icon="arrow-down"
           @mousedown.prevent.stop="toggle"
+        />
+        <wt-icon-btn
+          v-if="allowCustomValue && searchParams.search"
+          class="multiselect__select"
+          icon="back"
+          @mousedown.prevent.stop="addCustomValue(toggle)"
         />
       </template>
 
@@ -147,8 +154,12 @@ export default {
       type: Boolean,
       default: true,
     },
+    allowCustomValue: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['reset', 'search-change', 'input', 'closed'],
+  emits: ['reset', 'search-change', 'input', 'closed', 'add-custom-value'],
   data: () => ({
     isOpened: false,
   }),
@@ -159,6 +170,10 @@ export default {
       else if (typeof this.value === 'object' && this.value !== null) value = {};
       this.input(value);
       this.$emit('reset', value);
+    },
+    addCustomValue(toggle) {
+      this.$emit('add-custom-value', this.searchParams.search);
+      toggle();
     },
   },
 };
@@ -215,17 +230,19 @@ export default {
 .wt-select.wt-select--multiple:not(.wt-select--clearable) {
   .multiselect :deep {
     $multiselect-limit-right-pos: calc(
-      var(--select-caret-right-pos) // caret offet from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
+
     .multiselect__tags {
       padding-right: calc(
         $multiselect-limit-right-pos
-        + 50px // chip
+        + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
     }
+
     .multiselect__limit {
       right: $multiselect-limit-right-pos;
     }
@@ -236,14 +253,15 @@ export default {
 .wt-select.wt-select--clearable:not(.wt-select--multiple) {
   .multiselect :deep {
     $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos) // caret offset from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offset from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
+
     .multiselect__tags {
       padding-right: calc(
         $multiselect-clear-right-pos
-        + var(--icon-md-size) // clear
+        + var(--icon-md-size)// clear
         + var(--input-padding) // clear-to-content offset
       );
     }

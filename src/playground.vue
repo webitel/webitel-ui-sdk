@@ -1,9 +1,18 @@
 <template>
-  <div class="playground" style="background: var(--content-wrapper-color);">
-    <wt-input type="number"></wt-input>
-    <wt-logo></wt-logo>
-    <wt-select></wt-select>
-    <wt-pagination></wt-pagination>
+  <div
+    class="playground"
+    style="background: var(--content-wrapper-color);"
+  >
+    <wt-select
+      :options="finalOptions"
+      allow-custom-value
+      @add-custom-value="pushNewOptions"
+    />
+
+    <wt-input type="number" />
+    <wt-logo />
+    <wt-select />
+    <wt-pagination />
     <wt-input />
     <wt-icon-btn
       icon="edit"
@@ -16,8 +25,8 @@
     />
     <wt-app-header>
       <wt-app-navigator
-        :current-app="'admin'"
         :apps="[{name: 'admin', href: `dev.webitel.com/admin`}]"
+        :current-app="'admin'"
       />
       <wt-header-actions
         :user="{ name: 'John Doe' }"
@@ -98,8 +107,8 @@
       </template>
     </wt-context-menu>
     <wt-tooltip
-      :triggers="['click']"
       :popper-triggers="['click']"
+      :triggers="['click']"
     >
       <template #activator>
         <div class="my-div">
@@ -144,17 +153,17 @@
       ]"
     />
     <wt-avatar
-      status="dnd"
       badge
+      status="dnd"
     />
     <wt-icon
       icon="bucket"
       @click="log"
     />
     <wt-icon-btn
+      color="icon-secondary"
       icon="edit"
       size="lg"
-      color="icon-secondary"
       @click="log"
     />
     <wt-load-bar
@@ -169,8 +178,8 @@
     <wt-tags-input
       v-model="select.multipleValue"
       :options="select.stringOptions"
-      placeholder="placeholder"
       label="label"
+      placeholder="placeholder"
     />
     <!--    <wt-tags-input-->
     <!--      v-model="select.multipleValue"-->
@@ -199,12 +208,12 @@
     <!--    ></wt-select>-->
     <wt-select
       v-model="select.multipleValue"
-      :options="select.options"
       :clearable="false"
-      track-by="name"
+      :options="select.options"
+      label="label"
       multiple
       placeholder="placeholder"
-      label="label"
+      track-by="name"
     />
     <!--    <wt-select-->
     <!--      :value="'lorem ipsum'"-->
@@ -222,9 +231,9 @@
     <input v-model="message">
     <wt-search-bar
       :hint="'qwe qwe'"
+      :placeholder="$t('reusable.search')"
       :v="vInvalid"
       invalid
-      :placeholder="$t('reusable.search')"
     >
       <template #additional-actions="options">
         <wt-icon
@@ -238,20 +247,23 @@
 
 <script>
 
-import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
+import { EngineAuditQuestionType } from 'webitel-sdk';
+import amdEnumEnum from './AmdEnum.enum';
+import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
 import WtContextMenu from './components/wt-context-menu/wt-context-menu.vue';
-import WtSearchBar from './components/wt-search-bar/wt-search-bar.vue';
-import WtTooltip from './components/wt-tooltip/wt-tooltip.vue';
 import WtDatepicker from './components/wt-datepicker/wt-datepicker.vue';
 import WtNavigationBar from './components/wt-navigation-bar/wt-navigation-bar.vue';
-import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
+import WtSearchBar from './components/wt-search-bar/wt-search-bar.vue';
+import WtSelect from './components/wt-select/wt-select.vue';
+import WtTooltip from './components/wt-tooltip/wt-tooltip.vue';
 
 import AuditForm from './modules/AuditForm/components/audit-form.vue';
 
 export default {
   name: 'ThePlayground',
   components: {
+    WtSelect,
     WtContextMenu,
     WtTooltip,
     VueDatepicker,
@@ -499,7 +511,11 @@ export default {
     isLoading: false,
     searchValue: '',
     message: '',
+    finalOptions: [],
   }),
+  mounted() {
+    this.finalOptions = [...amdEnumEnum];
+  },
   methods: {
     search(search) {
       return {
@@ -517,6 +533,12 @@ export default {
     },
     changeTheme() {
       document.documentElement.classList.toggle('theme--dark');
+    },
+    pushNewOptions(value) {
+      this.finalOptions.push({
+        name: value.toUpperCase(),
+        value: value.toUpperCase(),
+      });
     },
   },
 };
