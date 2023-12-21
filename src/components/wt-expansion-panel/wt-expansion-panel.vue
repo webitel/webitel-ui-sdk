@@ -13,7 +13,7 @@
       <div class="wt-expansion-panel-actions">
         <slot
           name="actions"
-          v-bind="{ open }"
+          v-bind="{ open, opened }"
         />
         <wt-icon
           :class="{ 'wt-expansion-panel-arrow--opened':opened }"
@@ -59,6 +59,9 @@ function open() {
 
 <style lang="scss" scoped>
 .wt-expansion-panel {
+  display: flex;
+  flex-direction: column;
+
   .wt-expansion-panel-header {
     @extend %typo-subtitle-1;
     display: flex;
