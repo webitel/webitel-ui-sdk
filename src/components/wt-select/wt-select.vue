@@ -159,7 +159,7 @@ export default {
       default: false,
     },
   },
-  emits: ['reset', 'search-change', 'input', 'closed', 'add-custom-value'],
+  emits: ['reset', 'search-change', 'input', 'closed'],
   data: () => ({
     isOpened: false,
   }),
@@ -172,7 +172,7 @@ export default {
       this.$emit('reset', value);
     },
     addCustomValue(toggle) {
-      this.$emit('add-custom-value', this.searchParams.search);
+      this.$emit('input', this.searchParams.search);
       toggle();
     },
   },

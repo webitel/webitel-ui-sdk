@@ -79,7 +79,13 @@ export default {
     },
 
     selectOptions() {
-      return this.isApiMode ? this.apiOptions : this.options;
+      const arrayOptions = this.isApiMode ? this.apiOptions : this.options;
+      if (this.value && !isEmpty(this.value)) {
+        const isIdenticalObj = arrayOptions.some(obj => JSON.stringify(obj) ===
+          JSON.stringify(this.value));
+        if (!isIdenticalObj) arrayOptions.push(this.value);
+      }
+      return arrayOptions;
     },
 
     isValue() {

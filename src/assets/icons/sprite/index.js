@@ -28,6 +28,7 @@ import './call-inbound.svg';
 import './call-inbound--filled.svg';
 import './call-missed.svg';
 import './call-missed--filled.svg';
+import './call-merge-filled.svg';
 import './call-outbound.svg';
 import './call-outbound--filled.svg';
 import './call-ringing.svg';

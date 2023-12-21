@@ -5,8 +5,9 @@
   >
     <wt-select
       :options="finalOptions"
+      :value="searchValue"
       allow-custom-value
-      @add-custom-value="pushNewOptions"
+      @input="selectValue"
     />
 
     <wt-input type="number" />
@@ -534,11 +535,14 @@ export default {
     changeTheme() {
       document.documentElement.classList.toggle('theme--dark');
     },
-    pushNewOptions(value) {
-      this.finalOptions.push({
-        name: value.toUpperCase(),
-        value: value.toUpperCase(),
-      });
+    selectValue(value) {
+      if (typeof value === 'string') {
+        return this.searchValue = {
+          value: value,
+          name: value,
+        };
+      }
+      this.searchValue = value;
     },
   },
 };
