@@ -21,9 +21,10 @@
         />
       </div>
     </div>
-    <wt-expand-transition>
+    <wt-expand-transition
+      v-show="opened"
+    >
       <div
-        v-show="opened"
         class="wt-expansion-panel-body"
       >
         <slot />
