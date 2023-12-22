@@ -34,7 +34,7 @@
       :loading="false"
       :model-value="selectValue"
       :multiple="multiple"
-      :options="selectOptions"
+      :options="selectOptionsWithCustomValues"
       :placeholder="placeholder || label"
       :track-by="trackBy"
       class="wt-select__select"
@@ -162,7 +162,13 @@ export default {
   emits: ['reset', 'search-change', 'input', 'closed'],
   data: () => ({
     isOpened: false,
+    customValues: [],
   }),
+  computed: {
+    selectOptionsWithCustomValues() {
+      return [...this.customValues, ...this.selectOptions];
+    },
+  },
   methods: {
     clearValue() {
       let value = '';
@@ -173,6 +179,7 @@ export default {
     },
     addCustomValue(toggle) {
       this.$emit('input', this.searchParams.search);
+      this.customValues.push(this.searchParams.search);
       toggle();
     },
   },
