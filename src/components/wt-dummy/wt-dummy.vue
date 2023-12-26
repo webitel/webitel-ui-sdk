@@ -2,9 +2,9 @@
   <div class="wt-dummy">
     <div class="wt-dummy__img">
       <img
+        :height="size"
         :src="src || dummy"
         :width="size"
-        :height="size"
         alt="dummy-picture"
       >
     </div>
@@ -24,7 +24,9 @@
 </template>
 
 <script setup>
-import dummy from '../../assets/components/molecules/wt-dummy/dummy.svg';
+import { computed } from 'vue';
+import dummyDark from '../../assets/components/molecules/wt-dummy/dummyDark.svg';
+import dummyLight from '../../assets/components/molecules/wt-dummy/dummyLight.svg';
 
 const props = defineProps({
   src: {
@@ -48,11 +50,17 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  darkMode: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits([
   'create',
 ]);
+
+const dummy = computed(() => props.darkMode ? dummyDark : dummyLight);
 
 </script>
 
@@ -62,16 +70,16 @@ const emits = defineEmits([
 
 <style lang="scss" scoped>
 .wt-dummy {
-  text-align: center;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
   gap: var(--spacing-sm);
 
   &__img {
-    height: 200px;
     width: 200px;
+    height: 200px;
   }
 
   &__text {
