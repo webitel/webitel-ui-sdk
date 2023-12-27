@@ -33,7 +33,7 @@ export default {
 
     setValue({ column, order }) {
       const headers = this.headers.map((header) => {
-        const sortFieldValue = header?.sort;
+        const sortFieldValue = header?.sort && null;
         return {
           ...header,
           sort: header === column ? order : sortFieldValue,
