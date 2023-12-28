@@ -163,6 +163,7 @@ export default {
       [ChannelType.Call]: 'Дзвінок',
       [ChannelType.Email]: 'Пошта',
       [ChannelType.Chat]: 'Чат',
+      [ChannelType.Job]: 'Задача',
     },
   },
   calls: {

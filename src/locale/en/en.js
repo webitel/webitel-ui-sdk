@@ -164,6 +164,7 @@ export default {
       [ChannelType.Call]: 'Call',
       [ChannelType.Email]: 'Email',
       [ChannelType.Chat]: 'Chat',
+      [ChannelType.Job]: 'Task',
     },
   },
   calls: {
