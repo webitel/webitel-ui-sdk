@@ -156,6 +156,7 @@ export default {
       [ChannelType.Call]: 'Қоңырау',
       [ChannelType.Email]: 'Пошта',
       [ChannelType.Chat]: 'Чат',
+      [ChannelType.Job]: 'Тапсырма',
     },
   },
   calls: {

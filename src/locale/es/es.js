@@ -135,6 +135,7 @@ export default {
       [ChannelType.Call]: 'Llamada',
       [ChannelType.Email]: 'Correo electrónico',
       [ChannelType.Chat]: 'Chat',
+      [ChannelType.Job]: 'Tarea',
     },
   },
   calls: {
