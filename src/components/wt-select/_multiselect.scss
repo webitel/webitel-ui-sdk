@@ -1,16 +1,15 @@
-
 .multiselect :deep {
-  cursor: pointer;
   position: relative;
+  cursor: pointer;
 
   .multiselect__select {
     position: absolute;
     top: var(--select-icon-top-pos);
     right: var(--select-caret-right-pos);
-    padding: 0; // reset default
-    transition: var(--transition);
     width: fit-content; // reset default
     height: fit-content; // reset default
+    padding: 0; // reset default
+    transition: var(--transition);
     background: transparent;
 
     &:before {
@@ -45,10 +44,10 @@
   .multiselect__placeholder {
     @extend %typo-body-1;
     @include wt-placeholder;
-    background: transparent;
-    color: var(--wt-text-field-text-color);
-    padding: 0; // reset default
     margin: 0; // reset default
+    padding: 0; // reset default
+    color: var(--wt-text-field-text-color);
+    background: transparent;
   }
 
   .multiselect__custom-tag,
@@ -58,9 +57,9 @@
 
   .multiselect__placeholder {
     @extend %wt-placeholder;
+    display: block;
     overflow: hidden;
     max-width: 100%;
-    display: block;
 
     // text overflow 3 dots
     white-space: nowrap;
@@ -74,8 +73,8 @@
     border: var(--select-tags-border);
     border-color: var(--wt-text-field-select-option-wrapper-border-color);
     border-radius: var(--border-radius);
-    box-shadow: var(--elevation-10);
     background: transparent;
+    box-shadow: var(--elevation-10);
   }
 
   // select options
@@ -107,6 +106,10 @@
 .multiselect--active :deep {
   .multiselect__select .wt-icon__icon {
     fill: var(--icon-active-color);
+  }
+
+  .multiselect__custom-value-arrow {
+    transform: none;
   }
 }
 

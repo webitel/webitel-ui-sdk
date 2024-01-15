@@ -34,7 +34,7 @@
       :loading="false"
       :model-value="selectValue"
       :multiple="multiple"
-      :options="selectOptions"
+      :options="selectOptionsWithCustomValues"
       :placeholder="placeholder || label"
       :track-by="trackBy"
       class="wt-select__select"
@@ -93,8 +93,8 @@
         />
         <wt-icon-btn
           v-if="allowCustomValue && searchParams.search"
-          class="multiselect__select"
-          icon="back"
+          class="multiselect__select multiselect__custom-value-arrow"
+          icon="call-merge-filled"
           @mousedown.prevent.stop="addCustomValue(toggle)"
         />
       </template>
@@ -162,7 +162,13 @@ export default {
   emits: ['reset', 'search-change', 'input', 'closed'],
   data: () => ({
     isOpened: false,
+    customValues: [],
   }),
+  computed: {
+    selectOptionsWithCustomValues() {
+      return [...this.selectOptions, ...this.customValues];
+    },
+  },
   methods: {
     clearValue() {
       let value = '';
