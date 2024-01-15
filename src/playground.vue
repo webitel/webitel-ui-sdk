@@ -7,6 +7,7 @@
       :options="finalOptions"
       :value="searchValue"
       allow-custom-value
+      track-by="value"
       @input="selectValue"
     />
 

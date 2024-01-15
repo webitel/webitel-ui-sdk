@@ -80,6 +80,8 @@ export default {
 
     selectOptions() {
       const arrayOptions = this.isApiMode ? this.apiOptions : this.options;
+      /* https://my.webitel.com/browse/WTEL-3181 */
+      /* Before adding a custom value, we check it for the presence of an identical object in the options */
       if (this.value && !isEmpty(this.value)) {
         const isIdenticalObj = arrayOptions.some(obj => JSON.stringify(obj) ===
           JSON.stringify(this.value));

@@ -93,8 +93,8 @@
         />
         <wt-icon-btn
           v-if="allowCustomValue && searchParams.search"
-          class="multiselect__select"
-          icon="back"
+          class="multiselect__select multiselect__custom-value-arrow"
+          icon="call-merge-filled"
           @mousedown.prevent.stop="addCustomValue(toggle)"
         />
       </template>
@@ -166,7 +166,7 @@ export default {
   }),
   computed: {
     selectOptionsWithCustomValues() {
-      return [...this.customValues, ...this.selectOptions];
+      return [...this.selectOptions, ...this.customValues];
     },
   },
   methods: {
@@ -179,7 +179,6 @@ export default {
     },
     addCustomValue(toggle) {
       this.$emit('input', this.searchParams.search);
-      this.customValues.push(this.searchParams.search);
       toggle();
     },
   },
