@@ -25,7 +25,7 @@ describe('WtTagsInput', () => {
       },
     });
     wrapper.findComponent({ name: 'vue-multiselect' }).vm.$emit('tag', tag);
-    expect(wrapper.emitted().input[0][0]).toEqual([tag]);
+    expect(wrapper.emitted().input[0][0]).toEqual(tag);
   });
 
   it('in manual mode doesnt emit "input" event at native "tag" event', () => {
