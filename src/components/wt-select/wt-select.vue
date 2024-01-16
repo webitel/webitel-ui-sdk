@@ -11,21 +11,20 @@
   >
     <wt-label
       v-if="hasLabel"
-      v-bind="labelProps"
       :disabled="disabled"
       :invalid="invalid"
       class="wt-select__label"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
+        v-bind="{ label }"
       >
         {{ requiredLabel }}
       </slot>
     </wt-label>
     <vue-multiselect
-      v-bind="$attrs"
       ref="vue-multiselect"
       :allow-empty="allowEmpty"
       :disabled="disabled"
@@ -33,12 +32,13 @@
       :label="selectOptionLabel"
       :limit="1"
       :loading="false"
+      :model-value="selectValue"
       :multiple="multiple"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :track-by="trackBy"
-      :model-value="selectValue"
       class="wt-select__select"
+      v-bind="$attrs"
       @close="isOpened = false"
       @open="isOpened = true"
       v-on="listeners"
@@ -62,8 +62,8 @@
       <!--      Slot for custom label template for single select-->
       <template #singleLabel="{ option }">
         <slot
-          v-bind="{ option, optionLabel }"
           name="singleLabel"
+          v-bind="{ option, optionLabel }"
         >
           <span class="multiselect__single-label">
             {{ getOptionLabel({ option, optionLabel }) }}
@@ -74,8 +74,8 @@
       <!--      Slot for custom option template -->
       <template #option="{ option }">
         <slot
-          v-bind="{ option, optionLabel }"
           name="option"
+          v-bind="{ option, optionLabel }"
         >
           {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
@@ -83,11 +83,13 @@
 
       <!--      Element for opening and closing the dropdown -->
       <template #caret="{ toggle }">
+        <!--    In mode allowCustomValues, adding is done by clicking on 'call-merge-filled' icon  -->
+        <!--    [https://my.webitel.com/browse/WTEL-3181]-->
         <wt-icon-btn
           v-if="allowCustomValues && searchParams.search"
-          class="multiselect__select"
           :disabled="disabled"
-          icon="edit"
+          class="multiselect__select multiselect__custom-value-arrow"
+          icon="call-merge-filled"
           @mousedown.prevent.stop="handleCustomValue(toggle)"
         />
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
@@ -145,7 +147,7 @@ export default {
   name: 'WtSelect',
   mixins: [
     multiselectMixin,
-    // taggableMixin is used to add custom select values, see WTEL-3181
+    // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181]
     taggableMixin,
   ],
   props: {
@@ -164,7 +166,7 @@ export default {
     allowCustomValues: {
       type: Boolean,
       default: false,
-      description: 'See wt-tags-input "taggable" prop.'
+      description: 'See wt-tags-input "taggable" prop.',
     },
     // for taggableMixin functionality
     handleCustomValuesAdditionManually: {

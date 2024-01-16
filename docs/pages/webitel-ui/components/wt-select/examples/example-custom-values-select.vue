@@ -23,12 +23,12 @@ const singleValue = ref({});
 <template>
   <div>
     <wt-select
-      :value="multipleValue"
       :options="options"
-      label="Taggable Multiple Select"
-      track-by="id"
+      :value="multipleValue"
+      allow-custom-values
+      label="Custom Values in Multiple Select"
       multiple
-      taggable
+      track-by="id"
       @input="multipleValue = $event"
     />
 
@@ -37,11 +37,11 @@ const singleValue = ref({});
 
   <div>
     <wt-select
-      :value="singleValue"
       :options="options"
-      label="Taggable Single Select"
+      :value="singleValue"
+      allow-custom-values
+      label="Custom Values in Single Select"
       track-by="id"
-      taggable
       @input="singleValue = $event"
     />
 
@@ -49,6 +49,6 @@ const singleValue = ref({});
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>

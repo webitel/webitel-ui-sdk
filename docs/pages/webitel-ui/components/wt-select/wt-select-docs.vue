@@ -98,9 +98,17 @@ export default {
       },
       {
         value: 'labelProps',
-        code: '<wt-checkbox :label-props="{}"></wt-checkbox>',
+        code: '<wt-select :label-props="{}"></wt-select>',
         type: 'Object',
         description: 'Object with props, passed down to wt-label as props',
+      },
+      {
+        value: 'allowCustomValues',
+        code: '<wt-select allow-custom-values></wt-select>',
+        type: 'Boolean',
+        default: 'false',
+        description: 'Allows to add custom values. After addition custom value will be in this.value and in options. ' +
+          'Custom value will be cleared after the page is reloaded if it was not selected as a value',
       },
       {
         value: 'PLUS ALL VUE_MUTLISELECT PROPS',
@@ -123,6 +131,10 @@ export default {
       },
       {
         value: 'closed',
+      },
+      {
+        value: 'custom-value',
+        description: 'Event fires when allowCustomValues and new customValue is added',
       },
       {
         value: 'Plus all vue-multiselect events',

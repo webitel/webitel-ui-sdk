@@ -4,18 +4,21 @@ import ExampleSelect from './examples/example-select.vue';
 import ExampleMultipleSelect from './examples/example-multiple-select.vue';
 import ExampleDisabledSelect from './examples/example-disabled-select.vue';
 import ExampleInvalidSelect from './examples/example-invalid-select.vue';
-import ExampleTaggableSelect from './examples/example-taggable-select.vue';
+import ExampleCustomValuesSelect from './examples/example-custom-values-select.vue';
 </script>
 
 # WtSelect
-###  Full docs: [Vue Multiselect](https://vue-multiselect.js.org/)
+
+### Full docs: [Vue Multiselect](https://vue-multiselect.js.org/)
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Select
+
 ::: raw
 <ExampleSelect/>
 :::
@@ -25,6 +28,7 @@ import ExampleTaggableSelect from './examples/example-taggable-select.vue';
 :::
 
 ## Example Multiple Select
+
 ::: raw
 <ExampleMultipleSelect/>
 :::
@@ -34,6 +38,7 @@ import ExampleTaggableSelect from './examples/example-taggable-select.vue';
 :::
 
 ## Example Disabled Select
+
 ::: raw
 <ExampleDisabledSelect/>
 :::
@@ -43,6 +48,7 @@ import ExampleTaggableSelect from './examples/example-taggable-select.vue';
 :::
 
 ## Example Invalid Select
+
 ::: raw
 <ExampleInvalidSelect/>
 :::
@@ -51,19 +57,23 @@ import ExampleTaggableSelect from './examples/example-taggable-select.vue';
 <<< ./examples/example-invalid-select.vue
 :::
 
-## Example Taggable Select
+## Example Custom Values Select
+
 ::: raw
-<ExampleTaggableSelect/>
+<ExampleCustomValuesSelect/>
 :::
 
 ::: details Code
-<<< ./examples/example-taggable-select.vue
+<<< ./examples/example-custom-values-select.vue
 :::
 
 ## How to close Select programmatically?
+
 [Issue](https://github.com/shentao/vue-multiselect/pull/947/files/05760bd1e92ce53353a1733aee054a996738f181)
+
 ```js
-closeSelect() {
+closeSelect()
+{
   this.$refs['wt-select'].$refs['vue-multiselect'].deactivate(); // 'vue-multiselect' ref is always present
 }
 ```
