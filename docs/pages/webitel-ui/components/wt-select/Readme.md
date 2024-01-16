@@ -4,6 +4,7 @@ import ExampleSelect from './examples/example-select.vue';
 import ExampleMultipleSelect from './examples/example-multiple-select.vue';
 import ExampleDisabledSelect from './examples/example-disabled-select.vue';
 import ExampleInvalidSelect from './examples/example-invalid-select.vue';
+import ExampleTaggableSelect from './examples/example-taggable-select.vue';
 </script>
 
 # WtSelect
@@ -48,6 +49,15 @@ import ExampleInvalidSelect from './examples/example-invalid-select.vue';
 
 ::: details Code
 <<< ./examples/example-invalid-select.vue
+:::
+
+## Example Taggable Select
+::: raw
+<ExampleTaggableSelect/>
+:::
+
+::: details Code
+<<< ./examples/example-taggable-select.vue
 :::
 
 ## How to close Select programmatically?

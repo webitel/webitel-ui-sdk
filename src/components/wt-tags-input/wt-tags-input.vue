@@ -103,10 +103,11 @@
 
 <script>
 import multiselectMixin from '../wt-select/mixins/multiselectMixin';
+import taggableMixin from './mixin/taggableMixin';
 
 export default {
   name: 'WtTagsInput',
-  mixins: [multiselectMixin],
+  mixins: [multiselectMixin, taggableMixin],
   props: {
     value: {
       type: Array,
@@ -135,29 +136,6 @@ export default {
     defaultOptionLabel: 'label',
   }),
   methods: {
-    tag(searchQuery, id) {
-      this.$emit('tag', searchQuery, id);
-
-      const tag = this.trackBy ? {
-        [this.optionLabel || 'name']: searchQuery,
-        [this.trackBy]: id || searchQuery,
-      } : searchQuery;
-
-      const isTagExist = (newTag) => {
-        if (typeof newTag === 'string') {
-          return this.options.some((elem) => elem === newTag);
-        }
-        return this.options.some((elem) => elem[this.trackBy] === newTag[this.trackBy]);
-      }
-
-      if (isTagExist(tag)) return;
-
-      this.options.unshift(tag);
-      if (!this.manualTagging) {
-        const value = [...this.value, tag];
-        this.input(value);
-      }
-    },
     getTagOptionLabel({ optionLabel, option }) {
       /*
       Multiselect creates new tags with "label" property by default, so we need to handle
