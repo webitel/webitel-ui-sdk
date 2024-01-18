@@ -69,6 +69,7 @@ export default {
     edit: 'Edit',
     back: 'Back',
     step: 'Step { count }',
+    more: 'More',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {

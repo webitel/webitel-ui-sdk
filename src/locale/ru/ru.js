@@ -69,6 +69,7 @@ export default {
     edit: 'Редактировать',
     back: 'Назад',
     step: 'Шаг { count }',
+    more: 'Больше',
   },
   vocabulary: {
     language: 'Язык',
