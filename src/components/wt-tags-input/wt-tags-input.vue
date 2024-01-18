@@ -9,35 +9,35 @@
   >
     <wt-label
       v-if="hasLabel"
-      v-bind="labelProps"
       :disabled="disabled"
       :invalid="invalid"
       class="wt-tags-input__label"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
+        v-bind="{ label }"
       >
         {{ requiredLabel }}
       </slot>
     </wt-label>
 
     <vue-multiselect
-      v-bind="$attrs"
       ref="vue-multiselect"
       :close-on-select="false"
       :disabled="disabled"
       :internal-search="!searchMethod"
       :label="selectOptionLabel"
       :loading="false"
+      :model-value="selectValue"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :taggable="taggable"
       :track-by="trackBy"
-      :model-value="selectValue"
       class="wt-tags-input__select"
       multiple
+      v-bind="$attrs"
       v-on="listeners"
     >
       <!--      Slot that is used for all selected options (tags)-->
@@ -45,9 +45,9 @@
         <wt-chip class="multiselect__custom-tag">
           {{ getTagOptionLabel({ option, optionLabel }) }}
           <wt-icon-btn
+            color="on-primary"
             icon="close--filled"
             size="sm"
-            color="on-primary"
             @click="remove(option)"
           />
         </wt-chip>
@@ -56,8 +56,8 @@
       <!--      Slot for custom option template -->
       <template #option="{ option }">
         <slot
-          v-bind="{ option, optionLabel }"
           name="option"
+          v-bind="{ option, optionLabel }"
         >
           {{ getTagOptionLabel({ option, optionLabel }) }}
         </slot>
@@ -103,10 +103,15 @@
 
 <script>
 import multiselectMixin from '../wt-select/mixins/multiselectMixin';
+import taggableMixin from './mixin/taggableMixin';
 
 export default {
   name: 'WtTagsInput',
-  mixins: [multiselectMixin],
+  mixins: [
+    multiselectMixin,
+    // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181
+    taggableMixin,
+  ],
   props: {
     value: {
       type: Array,
@@ -135,29 +140,6 @@ export default {
     defaultOptionLabel: 'label',
   }),
   methods: {
-    tag(searchQuery, id) {
-      this.$emit('tag', searchQuery, id);
-
-      const tag = this.trackBy ? {
-        [this.optionLabel || 'name']: searchQuery,
-        [this.trackBy]: id || searchQuery,
-      } : searchQuery;
-
-      const isTagExist = (newTag) => {
-        if (typeof newTag === 'string') {
-          return this.options.some((elem) => elem === newTag);
-        }
-        return this.options.some((elem) => elem[this.trackBy] === newTag[this.trackBy]);
-      }
-
-      if (isTagExist(tag)) return;
-
-      this.options.unshift(tag);
-      if (!this.manualTagging) {
-        const value = [...this.value, tag];
-        this.input(value);
-      }
-    },
     getTagOptionLabel({ optionLabel, option }) {
       /*
       Multiselect creates new tags with "label" property by default, so we need to handle
@@ -187,12 +169,12 @@ export default {
 // paddings recalc
 .wt-tags-input .multiselect :deep {
   .multiselect__tags {
-    padding-bottom: 0;
     padding-right: calc(
       var(--input-padding)
       + var(--icon-md-size)
       + var(--select-caret-right-pos)
     );
+    padding-bottom: 0;
 
     .multiselect__tags-wrap {
       display: flex;

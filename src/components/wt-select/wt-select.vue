@@ -11,21 +11,20 @@
   >
     <wt-label
       v-if="hasLabel"
-      v-bind="labelProps"
       :disabled="disabled"
       :invalid="invalid"
       class="wt-select__label"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
+        v-bind="{ label }"
       >
         {{ requiredLabel }}
       </slot>
     </wt-label>
     <vue-multiselect
-      v-bind="$attrs"
       ref="vue-multiselect"
       :allow-empty="allowEmpty"
       :disabled="disabled"
@@ -33,12 +32,13 @@
       :label="selectOptionLabel"
       :limit="1"
       :loading="false"
+      :model-value="selectValue"
       :multiple="multiple"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :track-by="trackBy"
-      :model-value="selectValue"
       class="wt-select__select"
+      v-bind="$attrs"
       @close="isOpened = false"
       @open="isOpened = true"
       v-on="listeners"
@@ -62,8 +62,8 @@
       <!--      Slot for custom label template for single select-->
       <template #singleLabel="{ option }">
         <slot
-          v-bind="{ option, optionLabel }"
           name="singleLabel"
+          v-bind="{ option, optionLabel }"
         >
           <span class="multiselect__single-label">
             {{ getOptionLabel({ option, optionLabel }) }}
@@ -74,8 +74,8 @@
       <!--      Slot for custom option template -->
       <template #option="{ option }">
         <slot
-          v-bind="{ option, optionLabel }"
           name="option"
+          v-bind="{ option, optionLabel }"
         >
           {{ getOptionLabel({ option, optionLabel }) }}
         </slot>
@@ -83,8 +83,19 @@
 
       <!--      Element for opening and closing the dropdown -->
       <template #caret="{ toggle }">
+        <!--    In mode allowCustomValues, adding is done by clicking on this icon  -->
+        <!--    [https://my.webitel.com/browse/WTEL-3181]-->
+        <wt-icon-btn
+          v-if="allowCustomValues && searchParams.search"
+          :disabled="disabled"
+          class="multiselect__select multiselect__custom-value-arrow"
+          icon="call-merge-filled"
+          @mousedown.prevent.stop="handleCustomValue(toggle)"
+        />
+        <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
+          v-else
           :disabled="disabled"
           class="multiselect__select"
           icon="arrow-down"
@@ -130,11 +141,16 @@
 </template>
 
 <script>
+import taggableMixin from '../wt-tags-input/mixin/taggableMixin';
 import multiselectMixin from './mixins/multiselectMixin';
 
 export default {
   name: 'WtSelect',
-  mixins: [multiselectMixin],
+  mixins: [
+    multiselectMixin,
+    // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181]
+    taggableMixin,
+  ],
   props: {
     value: {},
 
@@ -147,12 +163,45 @@ export default {
       type: Boolean,
       default: true,
     },
+    // for taggableMixin functionality
+    allowCustomValues: {
+      type: Boolean,
+      default: false,
+      description: 'See wt-tags-input "taggable" prop.',
+    },
+    // for taggableMixin functionality
+    handleCustomValuesAdditionManually: {
+      type: Boolean,
+      default: false,
+      description: 'See wt-tags-input "manualTagging" prop.',
+    },
   },
-  emits: ['reset', 'search-change', 'input', 'closed'],
+  emits: [
+    'reset',
+    'search-change',
+    'input',
+    'closed',
+    'custom-value', // fires when allowCustomValues and new customValue is added
+  ],
   data: () => ({
     isOpened: false,
   }),
+  computed: {
+    // for taggableMixin
+    taggable() { return this.allowCustomValues; },
+    // for taggableMixin
+    manualTagging() { return this.handleCustomValuesAdditionManually; },
+  },
   methods: {
+    // for taggableMixin functionality
+    handleCustomValue(toggle) {
+      toggle();
+      this.tag(this.searchParams.search);
+    },
+    // for taggableMixin functionality
+    emitTagEvent(searchQuery, id) {
+      this.$emit('custom-value', searchQuery, id);
+    },
     clearValue() {
       let value = '';
       if (Array.isArray(this.value)) value = [];
@@ -215,17 +264,19 @@ export default {
 .wt-select.wt-select--multiple:not(.wt-select--clearable) {
   .multiselect :deep {
     $multiselect-limit-right-pos: calc(
-      var(--select-caret-right-pos) // caret offet from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
+
     .multiselect__tags {
       padding-right: calc(
         $multiselect-limit-right-pos
-        + 50px // chip
+        + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
     }
+
     .multiselect__limit {
       right: $multiselect-limit-right-pos;
     }
@@ -236,14 +287,15 @@ export default {
 .wt-select.wt-select--clearable:not(.wt-select--multiple) {
   .multiselect :deep {
     $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos) // caret offset from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offset from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
+
     .multiselect__tags {
       padding-right: calc(
         $multiselect-clear-right-pos
-        + var(--icon-md-size) // clear
+        + var(--icon-md-size)// clear
         + var(--input-padding) // clear-to-content offset
       );
     }

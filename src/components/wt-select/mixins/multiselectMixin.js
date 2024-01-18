@@ -110,10 +110,12 @@ export default {
       return option[this.defaultOptionLabel] || option;
     },
     handleSearchChange(search) {
+      // search can be used in non-api mode too
+      this.searchParams.search = search;
+
       if (!this.isApiMode) return;
       this.isLoading = true;
       this.searchParams.page = 1;
-      this.searchParams.search = search;
       this.fetchOptions();
     },
 
