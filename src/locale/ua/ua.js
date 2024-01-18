@@ -70,6 +70,7 @@ export default {
     edit: 'Редагувати',
     back: 'Назад',
     step: 'Крок { count }',
+    more: 'Більше',
   },
   vocabulary: {
     language: 'Мова',
