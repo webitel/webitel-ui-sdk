@@ -83,7 +83,7 @@
 
       <!--      Element for opening and closing the dropdown -->
       <template #caret="{ toggle }">
-        <!--    In mode allowCustomValues, adding is done by clicking on 'call-merge-filled' icon  -->
+        <!--    In mode allowCustomValues, adding is done by clicking on this icon  -->
         <!--    [https://my.webitel.com/browse/WTEL-3181]-->
         <wt-icon-btn
           v-if="allowCustomValues && searchParams.search"
@@ -92,6 +92,7 @@
           icon="call-merge-filled"
           @mousedown.prevent.stop="handleCustomValue(toggle)"
         />
+        <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
           v-else
