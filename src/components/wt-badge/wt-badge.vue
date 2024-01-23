@@ -10,6 +10,7 @@
 import BadgeDnd from '../../assets/icons/badge-dnd.svg';
 import BadgeOnline from '../../assets/icons/badge-online.svg';
 import BadgePause from '../../assets/icons/badge-pause.svg';
+import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum';
 
 export default {
   name: 'WtBadge',
@@ -30,11 +31,11 @@ export default {
   computed: {
     showIconBadge() {
       switch (this.iconBadge) {
-        case 'dnd':
+        case AbstractUserStatus.DND:
           return BadgeDnd;
-        case 'online':
+        case AbstractUserStatus.ONLINE:
           return BadgeOnline;
-        case 'pause':
+        case AbstractUserStatus.PAUSE:
           return BadgePause;
         default:
           return null;
