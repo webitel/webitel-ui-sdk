@@ -8,6 +8,8 @@
 
 <script>
 import BadgeDnd from '../../assets/icons/badge-dnd.svg';
+import BadgeOnline from '../../assets/icons/badge-online.svg';
+import BadgePause from '../../assets/icons/badge-pause.svg';
 
 export default {
   name: 'WtBadge',
@@ -30,6 +32,10 @@ export default {
       switch (this.iconBadge) {
         case 'dnd':
           return BadgeDnd;
+        case 'online':
+          return BadgeOnline;
+        case 'pause':
+          return BadgePause;
         default:
           return null;
       }

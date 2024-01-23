@@ -6,7 +6,7 @@
     <wt-badge
       v-if="badge"
       :color-variable="badgeColorVar"
-      :icon-badge="isDnd ? 'dnd' : null"
+      :icon-badge="isBadge ? props.status : null"
     />
     <div
       v-if="isLetterAvatar"
@@ -84,7 +84,14 @@ const avatarLettersBackground = computed(() => {
 
 const imgSrc = computed(() => props.src || defaultAvatar);
 
-const isDnd = computed(() => props.status === AbstractUserStatus.DND);
+const isBadge = computed(() => {
+  const eligibleStatuses = [
+    AbstractUserStatus.DND,
+    AbstractUserStatus.ONLINE,
+    AbstractUserStatus.PAUSE
+  ];
+  return eligibleStatuses.includes(props.status);
+});
 
 const badgeColorVar = computed(() => {
   switch (props.status) {
@@ -96,6 +103,10 @@ const badgeColorVar = computed(() => {
       return 'busy-color';
     case AbstractUserStatus.OFFLINE:
       return 'offline-color';
+    case AbstractUserStatus.ONLINE:
+      return 'online-color';
+    case AbstractUserStatus.PAUSE:
+      return 'pause-color';
     default:
       return 'offline-color';
   }
