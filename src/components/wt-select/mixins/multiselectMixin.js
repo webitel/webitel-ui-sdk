@@ -142,8 +142,6 @@ export default {
     close() {
       this.$emit('closed');
     },
-
-    tag() {},
   },
 
   watch: {
