@@ -90,7 +90,8 @@
           :disabled="disabled"
           class="multiselect__select multiselect__custom-value-arrow"
           icon="call-merge-filled"
-          @mousedown.prevent.stop="handleCustomValue(toggle)"
+          @mousedown.prevent
+          @click="handleCustomValue(toggle)"
         />
         <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
@@ -99,7 +100,8 @@
           :disabled="disabled"
           class="multiselect__select"
           icon="arrow-down"
-          @mousedown.prevent.stop="toggle"
+          @mousedown.prevent
+          @click="toggle"
         />
       </template>
 

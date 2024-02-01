@@ -3,6 +3,7 @@
     class="wt-icon-btn"
     :class="{ 'wt-icon-btn--disabled': disabled }"
     type="button"
+    @mousedown="emit('mousedown', $event)"
     @click="emit('click', $event)"
   >
 <!--    prevent icon-btn classes to fall to wt-icon -->
@@ -23,7 +24,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click', 'mousedown']);
 </script>
 
 <style lang="scss">
