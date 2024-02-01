@@ -5,12 +5,9 @@ Abstract User Status enum is used for status identifying in design purposes (lik
 
 ### How to import
 ```
-import AgentStatus from '@webitel/ui-sdk/src/enums/AbstractUserStatus/AbstractUserStatus.enum';
+import AbstractUserStatus from '@webitel/ui-sdk/src/enums/AbstractUserStatus/AbstractUserStatus.enum';
 ```
 ### Whats inside
-```
-ONLINE: online
-PAUSE: pause
-BREAK_OUT: break_out
-OFFLINE: offline
-```
+::: details Code
+<<< ../../../../../src/enums/AbstractUserStatus/AbstractUserStatus.enum.js
+:::

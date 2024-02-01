@@ -8,8 +8,6 @@ Supervisor Sections enum is used for supervisor nav sections identifying across 
 import SupervisorSections from '@webitel/ui-sdk/src/enums/WebitelApplications/SupervisorSections.enum';
 ```
 ### Whats inside
-```
-   QUEUES: queues
-   AGENTS: agents
-   ACTIVE_CALLS: activeCalls
-```
+::: details Code
+<<< ../../../../../src/enums/WebitelApplications/SupervisorSections.enum.js
+:::

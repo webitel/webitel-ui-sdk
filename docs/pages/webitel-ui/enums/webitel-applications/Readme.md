@@ -8,12 +8,6 @@ Webitel Applications enum is used for applications identifying across projects. 
 import WebitelApplications from '@webitel/ui-sdk/src/enums/WebitelApplications/WebitelApplications.enum';
 ```
 ### Whats inside
-```
-   ADMIN: admin
-   AGENT: agent
-   SUPERVISOR: supervisor
-   HISTORY: history
-   AUDIT: audit
-   ANALYTICS: grafana
-   CRM: crm
-```
+::: details Code
+<<< ../../../../../src/enums/WebitelApplications/WebitelApplications.enum.js
+:::
