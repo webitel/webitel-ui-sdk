@@ -88,7 +88,6 @@ export default {
     },
     listeners() {
       return {
-        ...this.$listeners,
         'update:model-value': this.input,
         close: this.close,
         tag: this.tag,
