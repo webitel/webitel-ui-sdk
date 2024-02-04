@@ -196,9 +196,25 @@ export default {
   },
   methods: {
     // for taggableMixin functionality
-    handleCustomValue(toggle) {
-      toggle();
+    async handleCustomValue(toggle) {
+      /**
+       * tag emits input event, but there is a drawback
+       * there are causes, when input handler is async, but close event, emitted by toggle(),
+       * is performing some operations with input value.
+       * filter selects (abstract-enum(api)-filter.vue) for instance
+       *
+       * for now, i've tested this cause and it works well even without waiting for $nextTick()
+       * however, this is a potential problem, so, i've left this comment here
+       */
       this.tag(this.searchParams.search);
+      // await this.$nextTick();
+
+      /**
+       * call toggle strictly after tag() method because tag() emits input,
+       * because there could be code, which performs operation with input only after select close
+       * so that, it's crucial to emit input before close
+       */
+      toggle();
     },
     // for taggableMixin functionality
     emitTagEvent(searchQuery, id) {
