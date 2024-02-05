@@ -26,7 +26,7 @@ import './call-end.svg';
 import './call-end--filled.svg';
 import './call-inbound.svg';
 import './call-inbound--filled.svg';
-import './call-merge-filled.svg';
+import './select-custom-value-enter.svg';
 import './call-missed.svg';
 import './call-missed--filled.svg';
 import './call-outbound.svg';

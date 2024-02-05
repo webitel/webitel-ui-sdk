@@ -4,6 +4,7 @@
     :value="value"
     :options="localizedOptions"
     :label="label"
+    :allow-custom-values="allowCustomValues"
     :track-by="filterSchema.storedProp"
     :multiple="filterSchema.multiple"
     @input="setValue({ filter: filterQuery, value: $event })"

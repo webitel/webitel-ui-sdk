@@ -105,11 +105,11 @@
 }
 
 .multiselect--active :deep {
-  .multiselect__select .wt-icon__icon {
+  .multiselect__select.multiselect__arrow .wt-icon__icon {
     fill: var(--icon-active-color);
   }
 
-  .multiselect__custom-value-arrow {
+  .multiselect__select.multiselect__custom-value {
     transform: none;
   }
 }

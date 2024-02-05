@@ -34,7 +34,7 @@
       :loading="false"
       :model-value="selectValue"
       :multiple="multiple"
-      :options="selectOptions"
+      :options="optionsWithCustomValues"
       :placeholder="placeholder || label"
       :track-by="trackBy"
       class="wt-select__select"
@@ -88,8 +88,8 @@
         <wt-icon-btn
           v-if="allowCustomValues && searchParams.search"
           :disabled="disabled"
-          class="multiselect__select multiselect__custom-value-arrow"
-          icon="call-merge-filled"
+          class="multiselect__select multiselect__custom-value"
+          icon="select-custom-value-enter"
           @mousedown.prevent
           @click="handleCustomValue(toggle)"
         />
@@ -98,7 +98,7 @@
         <wt-icon-btn
           v-else
           :disabled="disabled"
-          class="multiselect__select"
+          class="multiselect__select multiselect__arrow"
           icon="arrow-down"
           @mousedown.prevent
           @click="toggle"
@@ -165,7 +165,10 @@ export default {
       type: Boolean,
       default: true,
     },
-    // for taggableMixin functionality
+    /*
+     for taggableMixin functionality
+     for more info, see WTEL-3181
+     */
     allowCustomValues: {
       type: Boolean,
       default: false,
@@ -193,6 +196,30 @@ export default {
     taggable() { return this.allowCustomValues; },
     // for taggableMixin
     manualTagging() { return this.handleCustomValuesAdditionManually; },
+    optionsWithCustomValues() {
+      if (!this.allowCustomValues) return this.selectOptions;
+
+      /**
+        custom values could be restored after refresh, so that they could be not included in options prop,
+       so that we should add them to options manually (but filter duplicates, which are already in options)
+
+       i assume it's bad decision and it's better to include custom values to options prop,
+       but current filters logic restores value at filter component, but options value are pre-defined at store state
+       */
+
+      const customValuesToOptions = Array.isArray(this.value) ? this.value : [this.value];
+      const optionsWithoutValues = this.selectOptions.filter((opt) => {
+        const optKey = this.trackBy ? opt[this.trackBy] : opt;
+        return !customValuesToOptions.some((customValue) => {
+          const customValueKey = this.trackBy ? customValue[this.trackBy] : customValue;
+          return customValueKey === optKey;
+        });
+      });
+      return [
+        ...customValuesToOptions,
+        ...optionsWithoutValues,
+      ];
+    },
   },
   methods: {
     // for taggableMixin functionality
