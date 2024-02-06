@@ -2,8 +2,15 @@
   <aside
     class="wt-badge"
     :class="{ 'wt-badge--outside': outside }"
-    :style="{ background: iconBadge ? `url(${showIconBadge})` : `var(--${colorVariable})` }"
-  />
+    :style="{ background: `var(--${colorVariable})` }"
+  >
+    <img
+      class="wt-badge__pic"
+      v-if="iconBadgePic"
+      :src="iconBadgePic"
+      :alt="iconBadge"
+    >
+  </aside>
 </template>
 
 <script>
@@ -29,7 +36,7 @@ export default {
     },
   },
   computed: {
-    showIconBadge() {
+    iconBadgePic() {
       switch (this.iconBadge) {
         case AbstractUserStatus.DND:
           return BadgeDnd;
@@ -61,6 +68,12 @@ export default {
 
   &--outside {
     transform: translate(100%, -100%);
+  }
+
+  &__pic {
+    position: absolute;
+    width: var(--wt-badge-size);
+    height: var(--wt-badge-size);
   }
 }
 </style>
