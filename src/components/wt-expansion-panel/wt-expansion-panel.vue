@@ -6,8 +6,8 @@
     <div
       class="wt-expansion-panel-header"
       tabindex="0"
-      @click="opened = !opened"
-      @keypress.enter="opened = !opened"
+      @click="toggle"
+      @keypress.enter="toggle"
     >
       <slot name="title" />
       <div class="wt-expansion-panel-actions">
@@ -16,7 +16,8 @@
           v-bind="{ open, opened }"
         />
         <wt-icon
-          :class="{ 'wt-expansion-panel-arrow--opened':opened }"
+          class="wt-expansion-panel-arrow"
+          :class="{ 'wt-expansion-panel-arrow--opened': opened }"
           icon="arrow-right"
         />
       </div>
@@ -34,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
   size: {
@@ -47,11 +48,35 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['opened', 'closed']);
+
 const opened = ref(!props.collapsed);
 
 function open() {
-  if (!opened.value) opened.value = true;
+  if (!opened.value) {
+    opened.value = true;
+    emit('opened');
+  }
 }
+
+function close() {
+  if (opened.value) {
+    opened.value = false;
+    emit('closed');
+  }
+}
+
+function toggle() {
+  return opened.value ? close() : open();
+}
+
+watch(() => props.collapsed, (newVal) => {
+  if (newVal) {
+    close();
+  } else {
+    open();
+  }
+});
 </script>
 
 <style lang="scss">
@@ -85,8 +110,13 @@ function open() {
     gap: var(--spacing-xs);
   }
 
-  .wt-expansion-panel-arrow--opened {
-    transform: rotate(90deg);
+  .wt-expansion-panel-arrow {
+    transition: var(--transition);
+
+    &--opened {
+      transform: rotate(90deg);
+
+    }
   }
 
   &--sm {
