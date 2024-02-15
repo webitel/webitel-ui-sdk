@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.2.48",
+  "version": "24.2.50",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -31,6 +31,7 @@
     "src/modules/*",
     "src/plugins/*",
     "src/store/*",
+    "src/tests/*",
     "CHANGELOG.md"
   ],
   "dependencies": {
