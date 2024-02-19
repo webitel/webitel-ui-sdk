@@ -56,7 +56,8 @@ export default class CSVExport {
   async stringify(params = {}) {
     let csv = '';
     let isNext = false;
-    let columns = params?.fields ? objSnakeToCamel(params?.fields) : [];
+    // why _columns? https://webitel.atlassian.net/browse/DEV-3797
+    let columns = params._columns || (params?.fields ? objSnakeToCamel(params?.fields) : []);
     let page = 1;
 
     do {
