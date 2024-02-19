@@ -232,6 +232,7 @@ export default {
         [AdminSections.OBJECTS]: 'Разделы',
         [AdminSections.CHANGELOGS]: 'Журнал изменений',
         [AdminSections.CONFIGURATION]: 'Конфигурация',
+        [AdminSections.GLOBAL_VARIABLES]: 'Глобальные переменные',
       },
     },
   },
