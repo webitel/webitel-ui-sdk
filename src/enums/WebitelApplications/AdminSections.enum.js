@@ -46,6 +46,7 @@ const AdminSections = Object.freeze({
   // SYSTEM
   CHANGELOGS: 'changelogs',
   CONFIGURATION: 'configuration',
+  GLOBAL_VARIABLES: 'global-variables',
 });
 
 export default AdminSections;

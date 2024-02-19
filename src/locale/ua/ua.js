@@ -232,6 +232,7 @@ export default {
         [AdminSections.OBJECTS]: 'Розділи',
         [AdminSections.CHANGELOGS]: 'Журнал змін',
         [AdminSections.CONFIGURATION]: 'Конфігурація',
+        [AdminSections.GLOBAL_VARIABLES]: 'Глобальні змінні',
       },
     },
   },

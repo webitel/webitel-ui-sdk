@@ -234,6 +234,7 @@ export default {
         [AdminSections.OBJECTS]: 'Objects',
         [AdminSections.CHANGELOGS]: 'Change log',
         [AdminSections.CONFIGURATION]: 'Configuration',
+        [AdminSections.GLOBAL_VARIABLES]: 'Global variables',
       },
     },
   },
