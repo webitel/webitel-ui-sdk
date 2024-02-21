@@ -1,10 +1,15 @@
 <template>
-  <nav class="wt-tabs">
+  <nav
+    class="wt-tabs"
+    :class="{
+      'wt-tabs--wide': wide,
+    }"
+  >
     <button
       v-for="(tab) in tabs"
       :key="tab.value"
       :class="{
-        'wt-tab--highlight': tab.value === current.value
+        'wt-tab--highlight': tab.value === current.value,
       }"
       :value="tab.text"
       class="wt-tab"
@@ -48,6 +53,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    wide: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: [
     'change',
@@ -85,6 +94,13 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   gap: var(--tab-gap);
+
+  &--wide {
+    .wt-tab {
+      display: block;
+      width: 100%;
+    }
+  }
 }
 
 .wt-tab {
