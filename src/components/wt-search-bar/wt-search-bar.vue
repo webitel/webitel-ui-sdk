@@ -59,7 +59,7 @@
           <template #option="{ value, text }">
             <wt-radio
               :label="text"
-              :selected="searchMode.value === value"
+              :selected="(typeof searchMode === 'string' ? searchMode : searchMode.value) === value"
               :value="true"
             />
           </template>
@@ -105,7 +105,7 @@ const props = defineProps({
     description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
   },
   searchMode: {
-    type: String,
+    type: [String, Object],
   },
   searchModeOptions: {
     type: Array,
