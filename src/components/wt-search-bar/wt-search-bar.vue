@@ -39,6 +39,32 @@
         >
           {{ hint }}
         </wt-hint>
+
+        <wt-context-menu
+          v-if="searchMode"
+          :options="searchModeOptions"
+          @click="emit('change:search-mode', $event.option)"
+        >
+          <template #activator>
+            <wt-tooltip>
+              <template #activator>
+                <wt-icon-btn
+                  :color="invalid ? 'error' : 'default'"
+                  icon="filter"
+                />
+              </template>
+              {{ $t('webitelUI.searchBar.settingsHint') }}
+            </wt-tooltip>
+          </template>
+          <template #option="{ value, text }">
+            <wt-radio
+              :label="text"
+              :selected="searchMode.value === value"
+              :value="true"
+            />
+          </template>
+        </wt-context-menu>
+
         <slot
           :invalid="invalid"
           name="additional-actions"
@@ -78,12 +104,20 @@ const props = defineProps({
     type: String,
     description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
   },
+  searchMode: {
+    type: String,
+  },
+  searchModeOptions: {
+    type: Array,
+    default: () => ([]),
+  },
 });
 
 const emit = defineEmits([
   'input',
   'search',
   'enter',
+  'change:search-mode',
 ]);
 
 const { v, customValidators } = toRefs(props);
