@@ -6,6 +6,7 @@ import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import { defineConfig } from 'vitepress';
 
 const sidebarHowTo = globbySync('pages/docs/how-to/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+
 const sidebarComponents = globbySync(
   'pages/webitel-ui/components/**/Readme.md',
   {
@@ -18,6 +19,8 @@ const sidebarEnums = globbySync('pages/webitel-ui/enums/**/Readme.md', { cwd: pa
 const sidebarModules = globbySync('pages/webitel-ui/modules/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarTests = globbySync('pages/webitel-ui/tests/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarValidators = globbySync('pages/webitel-ui/validators/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+
+const sidebarTestsCookbook = globbySync('pages/docs/tests-cookbook/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 
 const plyrIconsPath = path.resolve(__dirname, '../../src/assets/icons/plyr.svg');
 
@@ -78,6 +81,7 @@ export default defineConfig({
       { text: 'Modules', items: sidebarModules },
       { text: 'Test utils and Mocks', items: sidebarTests },
       { text: 'Validators', items: sidebarValidators },
+      { text: 'Tests Cookbook', items: sidebarTestsCookbook },
     ].map(({ text, items }) => (
       {
         text,
