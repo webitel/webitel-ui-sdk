@@ -14,6 +14,7 @@
       label="Dark theme"
       @change="changeTheme"
     />
+    <wt-rounded-action icon="edit" />
     <wt-app-header>
       <wt-app-navigator
         :current-app="'admin'"
@@ -241,6 +242,7 @@
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
 import WtContextMenu from './components/wt-context-menu/wt-context-menu.vue';
+import WtRoundedAction from './components/wt-rounded-action/wt-rounded-action.vue';
 import WtSearchBar from './components/wt-search-bar/wt-search-bar.vue';
 import WtTooltip from './components/wt-tooltip/wt-tooltip.vue';
 import WtDatepicker from './components/wt-datepicker/wt-datepicker.vue';
@@ -252,6 +254,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 export default {
   name: 'ThePlayground',
   components: {
+    WtRoundedAction,
     WtContextMenu,
     WtTooltip,
     VueDatepicker,
