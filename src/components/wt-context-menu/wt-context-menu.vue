@@ -118,10 +118,10 @@ function handleOptionClick({ option, index, hide }) {
   padding: var(--wt-context-menu-option-padding);
   cursor: pointer;
   color: var(--wt-context-menu-option-text-color);
+  transition: var(--transition);
 
   &:hover {
-    background-color: var(--wt-context-menu-option-hover-color);
-    transition: var(--transition);
+    background-color: var(--wt-context-menu-option-background-hover-color);
   }
 
   &--disabled {

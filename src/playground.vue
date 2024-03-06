@@ -92,7 +92,7 @@
         username="y z"
       />
     </div>
-    <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }]">
+    <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }, { text: 'lorem ipsum'}, { text: 'lorem ipsum'}]">
       <template #activator>
         <wt-button>context menu</wt-button>
       </template>
