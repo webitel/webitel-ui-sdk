@@ -4,7 +4,7 @@
       <template #header>
         <wt-headline>
           <wt-navigation-bar :nav="nav" />
-          <h1>Webitel UI SDK v. 3.2.153</h1>
+          <h1>Webitel UI SDK v.24.4.06</h1>
         </wt-headline>
       </template>
       <template #main>
@@ -455,6 +455,11 @@ export default {
             name: 'Admin Sections',
             value: 'admin-sections',
             route: 'admin-sections',
+          },
+          {
+            name: 'Chat Gateway Provider',
+            value: 'chat-gateway-provider',
+            route: 'chat-gateway-provider',
           },
         ],
       };
