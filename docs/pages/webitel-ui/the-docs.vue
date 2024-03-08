@@ -456,11 +456,6 @@ export default {
             value: 'admin-sections',
             route: 'admin-sections',
           },
-          {
-            name: 'Chat Gateway Provider',
-            value: 'chat-gateway-provider',
-            route: 'chat-gateway-provider',
-          },
         ],
       };
     },
