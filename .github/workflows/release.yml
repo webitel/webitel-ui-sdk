@@ -8,7 +8,7 @@ jobs:
   test-build-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -23,7 +23,7 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
       - name: Easy Zip Files
-        uses: vimtor/action-zip@v1.1
+        uses: vimtor/action-zip@v1.2
         with:
           files: docs/.vitepress/dist/
           dest: docs.zip
@@ -31,15 +31,13 @@ jobs:
 
       - name: Create release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.package-version.outputs.current-version}}
           name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
           body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
           fail_on_unmatched_files: true
-          files: |
-            docs.zip
-            dist/
+          files: '*'
 #      - name: Upload build artifacts
 #        id: upload_artifacts
 #        uses: actions/upload-artifact@v3
