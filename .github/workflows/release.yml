@@ -15,7 +15,7 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run test:unit
-      - run: npm run build
+    #  - run: npm run build
       - run: npm run docs:build
 
       - name: get-npm-version
@@ -37,7 +37,7 @@ jobs:
           name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
           body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
           fail_on_unmatched_files: true
-          files: '*'
+          files: docs.zip
 #      - name: Upload build artifacts
 #        id: upload_artifacts
 #        uses: actions/upload-artifact@v3
