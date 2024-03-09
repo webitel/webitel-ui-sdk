@@ -31,13 +31,14 @@ jobs:
 
       - name: Create release
         id: create_release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.package-version.outputs.current-version}}
           name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
           body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
           fail_on_unmatched_files: true
           files: docs.zip
+
 #      - name: Upload build artifacts
 #        id: upload_artifacts
 #        uses: actions/upload-artifact@v3
