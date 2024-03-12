@@ -33,6 +33,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.DLOHVINOV_GITHUB_SECRET }} #https://stackoverflow.com/a/60418414
           tag_name: ${{ steps.package-version.outputs.current-version}}
           name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
           body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
