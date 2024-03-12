@@ -27,6 +27,7 @@
 <script>
 import Plyr from 'plyr';
 import 'plyr/src/sass/plyr.scss';
+import createPlyrURL from '../../scripts/createPlyrURL';
 
 export default {
   name: 'WtPlayer',
@@ -104,9 +105,7 @@ export default {
     async setupPlayer() {
       await this.$nextTick(); // test is failing to render component if element is passed to Plyr as Vue $ref
       const baseURL = this.$baseURL || process.env.BASE_URL || import.meta.env.BASE_URL;
-      let normalizedBaseURL = baseURL === "/" ? "" : baseURL;
-      normalizedBaseURL = normalizedBaseURL.endsWith('/') ? normalizedBaseURL.slice(0, -1) : normalizedBaseURL;
-      const iconUrl = `${normalizedBaseURL}/img/plyr.svg`;
+      const iconURL = createPlyrURL(baseURL);
       if (this.player) this.player.destroy();
       const controls = [
         'play-large', 'play', 'progress', 'current-time',
@@ -120,7 +119,7 @@ export default {
         loadSprite: false,
         resetOnEnd: this.resetOnEnd,
         invertTime: this.invertTime,
-        iconUrl: iconUrl,
+        iconUrl: iconURL,
         controls,
         loop: {
           active: this.loop,
