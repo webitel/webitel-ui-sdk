@@ -15,6 +15,13 @@
       @change="changeTheme"
     />
     <wt-rounded-action icon="edit" />
+    <wt-player
+      :autoplay="false"
+      mime="video"
+      reset-on-end
+      reset-volume
+      src="https://www.w3schools.com/html/mov_bbb.mp4"
+    ></wt-player>
     <wt-app-header>
       <wt-app-navigator
         :current-app="'admin'"
@@ -242,6 +249,7 @@
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import VueDatepicker from '@vuepic/vue-datepicker';
 import WtContextMenu from './components/wt-context-menu/wt-context-menu.vue';
+import WtPlayer from './components/wt-player/wt-player.vue';
 import WtRoundedAction from './components/wt-rounded-action/wt-rounded-action.vue';
 import WtSearchBar from './components/wt-search-bar/wt-search-bar.vue';
 import WtTooltip from './components/wt-tooltip/wt-tooltip.vue';
@@ -254,6 +262,7 @@ import AuditForm from './modules/AuditForm/components/audit-form.vue';
 export default {
   name: 'ThePlayground',
   components: {
+    WtPlayer,
     WtRoundedAction,
     WtContextMenu,
     WtTooltip,
