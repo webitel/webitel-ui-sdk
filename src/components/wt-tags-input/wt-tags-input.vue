@@ -138,6 +138,10 @@ export default {
   emits: ['input', 'tag', 'search-change', 'closed'],
   data: () => ({
     defaultOptionLabel: 'label',
+
+    // [https://webitel.atlassian.net/browse/WTEL-4310]
+    // Multiply value is needed in TaggableMixin mixin to correctly add custom values
+
     multiply: true,
   }),
   methods: {
