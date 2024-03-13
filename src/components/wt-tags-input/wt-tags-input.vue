@@ -31,12 +31,12 @@
       :label="selectOptionLabel"
       :loading="false"
       :model-value="selectValue"
+      :multiple="multiple"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :taggable="taggable"
       :track-by="trackBy"
       class="wt-tags-input__select"
-      multiple
       v-bind="$attrs"
       v-on="listeners"
     >
@@ -138,6 +138,11 @@ export default {
   emits: ['input', 'tag', 'search-change', 'closed'],
   data: () => ({
     defaultOptionLabel: 'label',
+
+    // [https://webitel.atlassian.net/browse/WTEL-4310]
+    // Multiple value is needed in TaggableMixin mixin to correctly add custom values
+
+    multiple: true,
   }),
   methods: {
     getTagOptionLabel({ optionLabel, option }) {
