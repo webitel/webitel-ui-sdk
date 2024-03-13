@@ -31,7 +31,7 @@
       :label="selectOptionLabel"
       :loading="false"
       :model-value="selectValue"
-      :multiple="multiply"
+      :multiple="multiple"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :taggable="taggable"
@@ -140,9 +140,9 @@ export default {
     defaultOptionLabel: 'label',
 
     // [https://webitel.atlassian.net/browse/WTEL-4310]
-    // Multiply value is needed in TaggableMixin mixin to correctly add custom values
+    // Multiple value is needed in TaggableMixin mixin to correctly add custom values
 
-    multiply: true,
+    multiple: true,
   }),
   methods: {
     getTagOptionLabel({ optionLabel, option }) {
