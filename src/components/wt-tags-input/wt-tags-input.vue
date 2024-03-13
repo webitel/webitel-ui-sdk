@@ -31,12 +31,12 @@
       :label="selectOptionLabel"
       :loading="false"
       :model-value="selectValue"
+      :multiple="multiply"
       :options="selectOptions"
       :placeholder="placeholder || label"
       :taggable="taggable"
       :track-by="trackBy"
       class="wt-tags-input__select"
-      multiple
       v-bind="$attrs"
       v-on="listeners"
     >
@@ -138,6 +138,7 @@ export default {
   emits: ['input', 'tag', 'search-change', 'closed'],
   data: () => ({
     defaultOptionLabel: 'label',
+    multiply: true,
   }),
   methods: {
     getTagOptionLabel({ optionLabel, option }) {
