@@ -73,7 +73,7 @@
 
 <script setup>
 import {
-  ref, computed, useSlots, onMounted,
+  ref, computed, useSlots, onMounted, toRefs,
 } from 'vue';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -180,11 +180,15 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'input', 'keyup']);
 
 const slots = useSlots();
+
+// https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
+const { v, customValidators } = toRefs(props);
+
 const {
   isValidation,
   invalid,
   validationText,
-} = useValidation({ v: props.v, customValidators: props.customValidators });
+} = useValidation({ v, customValidators });
 
 // toggles password <-> text at showPassword
 const inputType = ref('');
