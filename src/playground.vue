@@ -1,5 +1,12 @@
 <template>
   <div class="playground" style="background: var(--content-wrapper-color);">
+    <wt-player
+      :autoplay="false"
+      mime="video"
+      reset-on-end
+      reset-volume
+      src="https://www.w3schools.com/html/mov_bbb.mp4"
+    ></wt-player>
     <wt-input type="number"></wt-input>
     <wt-logo></wt-logo>
     <wt-select></wt-select>
