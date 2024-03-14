@@ -27,6 +27,7 @@
 <script>
 import Plyr from 'plyr';
 import 'plyr/src/sass/plyr.scss';
+import createPlyrURL from './scripts/createPlyrURL';
 
 export default {
   name: 'WtPlayer',
@@ -104,6 +105,7 @@ export default {
     async setupPlayer() {
       await this.$nextTick(); // test is failing to render component if element is passed to Plyr as Vue $ref
       const baseURL = this.$baseURL || process.env.BASE_URL || import.meta.env.BASE_URL;
+      const iconUrl = createPlyrURL(baseURL);
       if (this.player) this.player.destroy();
       const controls = [
         'play-large', 'play', 'progress', 'current-time',
@@ -117,7 +119,7 @@ export default {
         loadSprite: false,
         resetOnEnd: this.resetOnEnd,
         invertTime: this.invertTime,
-        iconUrl: `${baseURL}img/plyr.svg`,
+        iconUrl,
         controls,
         loop: {
           active: this.loop,
@@ -182,6 +184,15 @@ export default {
       max-width: 100%; // prevents <video> container overflow
       border-radius: var(--border-radius);
       box-shadow: var(--elevation-10);
+    }
+
+    .plyr__controls .plyr__control {
+      padding: var(--plyr-controls-icon-padding);
+
+      svg {
+        height: var(--plyr-controls-icon-size);
+        width: var(--plyr-controls-icon-size);
+      }
     }
 
     .plyr__control--overlaid svg {
