@@ -1,5 +1,5 @@
 <script setup>
-import Docs from './wt-button-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleButtonsDifferentColor from './examples/example-buttons-different-color.vue';
 import ExampleSmallButton from './examples/example-small-button.vue';
 import ExampleWideButton from './examples/example-wide-button.vue';
@@ -8,12 +8,10 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 
 # WtButton
 
-## Props
-::: raw
-<Docs />
-:::
+## Specs
+<Specs />
 
-## Different colors:
+## Different colors
 ::: raw
 <ExampleButtonsDifferentColor />
 :::
@@ -22,7 +20,7 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 <<< ./examples/example-buttons-different-color.vue{js}
 :::
 
-## Small button:
+## Small button
 ::: raw
 <ExampleSmallButton />
 :::
@@ -31,7 +29,7 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 <<< ./examples/example-small-button.vue{js}
 :::
 
-## Wide button:
+## Wide button
 ::: raw
 <ExampleWideButton />
 :::
@@ -40,7 +38,7 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 <<< ./examples/example-wide-button.vue{js}
 :::
 
-## Different colors with loaders:
+## Different colors with loaders
 ::: raw
 <ExampleButtonsDifferentColorLoaders />
 :::

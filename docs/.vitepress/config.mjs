@@ -3,6 +3,7 @@ import path from 'path';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
+import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
 
 const sidebarHowTo = globbySync('pages/docs/how-to/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
@@ -62,6 +63,7 @@ export default defineConfig({
       createSvgSpritePlugin({
         include: '**/sprite/*.svg',
       }),
+      vueDocgenPlugin(),
     ],
   },
 
