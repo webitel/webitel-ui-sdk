@@ -4,6 +4,14 @@ on:
   push:
     branches: [ master ]
 
+permissions:
+  actions: read
+  pages: write
+  id-token: write
+  contents: write
+  pull-requests: write
+  repository-projects: write
+
 jobs:
   test-build-release:
     runs-on: ubuntu-latest
@@ -39,7 +47,7 @@ jobs:
           fail_on_unmatched_files: true
           files: docs.zip
 
-      - name: Check publish satatus
+      - name: Check publish status
         id: check_publish
         uses: tehpsalmist/npm-publish-status-action@v1
 
@@ -47,17 +55,19 @@ jobs:
       - name: Publish release
         id: publish_release
         if: ${{ steps.check_publish.outputs.exists == '0' }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     #    continue-on-error: true
           # Setup .npmrc file to publish to npm
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: 20
+#          registry-url: 'https://registry.npmjs.org'
+        run: |
+          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
+          npm run build
+          npm publish --access public
 
       - name: Report publish status
         if: ${{ steps.check_publish.outputs.exists == '1' }}
@@ -69,7 +79,7 @@ jobs:
 
       - name: Upload artifacts
         id: upload_artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: 'docs/.vitepress/dist'
 
