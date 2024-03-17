@@ -26,81 +26,81 @@ jobs:
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm ci
 
-#  test:
-#    needs: [install_deps]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - uses: actions/cache@v3
-#        with:
-#          path: node_modules
-#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-#
-#      - name: Use Node.js
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#
-#      - run: npm run test:unit
+  test:
+    needs: [install_deps]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm run test:unit
 
 
-#  release:
-#    needs: [install_deps, test]
-#    permissions:
-#      contents: write
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: get-npm-version
-#        id: package-version
-#        uses: martinbeentjes/npm-get-version-action@v1.3.1
-#
-#      - name: Create release
-#        id: create_release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          tag_name: ${{ steps.package-version.outputs.current-version}}
-#          name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
-#          body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
-#          generate_release_notes: true
+  release:
+    needs: [install_deps, test]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-#  publish:
-#    needs: [install_deps, test]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - uses: actions/cache@v3
-#        with:
-#          path: node_modules
-#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-#
-#      - name: Use Node.js
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#
-#      - name: Check publish status
-#        id: check_publish
-#        uses: tehpsalmist/npm-publish-status-action@v1
-#
-#      - name: Publish release
-#        id: publish_release
-#        if: ${{ steps.check_publish.outputs.exists == '0' }}
-#        env:
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#
-#        run: |
-#          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
-#          npm run build
-#          npm publish --access public
-#
-#      - name: Report publish status
-#        if: ${{ steps.check_publish.outputs.exists == '1' }}
-#        run: echo "Package already published"
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.package-version.outputs.current-version}}
+          name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
+          body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
+          generate_release_notes: true
+
+  publish:
+    needs: [install_deps, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check publish status
+        id: check_publish
+        uses: tehpsalmist/npm-publish-status-action@v1
+
+      - name: Publish release
+        id: publish_release
+        if: ${{ steps.check_publish.outputs.exists == '0' }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+        run: |
+          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
+          npm run build
+          npm publish --access public
+
+      - name: Report publish status
+        if: ${{ steps.check_publish.outputs.exists == '1' }}
+        run: echo "Package already published"
 
   build_docs:
     needs: [install_deps]
@@ -121,16 +121,10 @@ jobs:
       - name: Build docs
         run: npm run docs:build
 
-#      - name: Tar docs
-#        run: tar -cvf _site.tar docs/.vitepress/dist
-
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
-#        uses: actions/upload-artifact@v4
         with:
           name: docs
-#          path: _site.tar
-#          if-no-files-found: error
           path: docs/.vitepress/dist
 
   deploy:
