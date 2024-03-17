@@ -40,6 +40,7 @@ jobs:
           files: docs.zip
 
       - name: Publish release
+        continue-on-error: true
           # Setup .npmrc file to publish to npm
         uses: actions/setup-node@v4
         with:
@@ -64,4 +65,4 @@ jobs:
       - name: deploy to Github Pages
         id: deploy_pages
         uses: actions/deploy-pages@v4
-        
+
