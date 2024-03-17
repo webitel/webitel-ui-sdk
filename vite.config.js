@@ -93,7 +93,7 @@ export default ({ mode }) => {
     test: {
       globals: true,
       coverage: {
-        enabled: true,
+        enabled: false,
         reporter: 'json',
       },
       environment: 'happy-dom',
