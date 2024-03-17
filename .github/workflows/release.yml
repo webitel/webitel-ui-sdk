@@ -51,22 +51,17 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: setup Github Pages
+        id: setup_pages
+        uses: actions/configure-pages@v4
 
-#      - name: Upload build artifacts
-#        id: upload_artifacts
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: build
-#          path: /
+      - name: Upload artifacts
+        id: upload_artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          path: 'docs/.vitepress/dist'
 
-#      - name: Publish release
-#        id: publish_release
-#        uses: actions/github-script@v6
-#        with:
-#          script: |
-#            github.repos.updateRelease({
-#              owner: context.repo.owner,
-#              repo: context.repo.repo,
-#              release_id: steps.create_release.outputs.id,
-#              body: steps.upload_artifacts.outputs.artifact_url
-#            })
+      - name: deploy to Github Pages
+        id: deploy_pages
+        uses: actions/deploy-pages@v4
+        
