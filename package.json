@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "5.0.3",
-    "@vitest/coverage-v8": "^0.34.6",
+    "@vitest/coverage-v8": "^1.4.0",
     "@vue/compat": "^3.4.15",
     "@vue/compiler-sfc": "^3.4.15",
     "@vue/test-utils": "^2.4.4",
@@ -83,7 +83,7 @@
     "vite-plugin-svg-sprite": "^0.5.1",
     "vite-plugin-vue-docgen": "^0.3.4",
     "vitepress": "^1.0.0-rc.26",
-    "vitest": "^0.34.6",
+    "vitest": "^1.4.0",
     "vue": "^3.4.15",
     "vuex": "^4.1.0"
   }
