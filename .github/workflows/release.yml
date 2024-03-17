@@ -39,8 +39,15 @@ jobs:
           fail_on_unmatched_files: true
           files: docs.zip
 
+      - name: Check publish satatus
+        id: check_publish
+        uses: tehpsalmist/npm-publish-status-action@v1
+
+
       - name: Publish release
-        continue-on-error: true
+        id: publish_release
+        if: ${{ steps.check_publish.outputs.exists == '0' }}
+    #    continue-on-error: true
           # Setup .npmrc file to publish to npm
         uses: actions/setup-node@v4
         with:
@@ -51,6 +58,10 @@ jobs:
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Report publish status
+        if: ${{ steps.check_publish.outputs.exists == '1' }}
+        run: echo "Package already published"
 
       - name: setup Github Pages
         id: setup_pages
