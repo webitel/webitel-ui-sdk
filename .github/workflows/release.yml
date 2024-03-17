@@ -13,29 +13,79 @@ permissions:
   repository-projects: write
 
 jobs:
-  test-build-release:
+  install_deps:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - run: npm ci
-      - run: npm run test:unit
-    #  - run: npm run build
-      - run: npm run docs:build
 
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 'project'
+          path: .
 
-      - name: Easy Zip Files
+  test:
+    needs: install_deps
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: 'project'
+
+    - run: chmod -R 777 .
+
+    - run: npm run test:unit
+
+  build_docs:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: 'project'
+
+      - run: chmod -R 777 .
+
+      - run: pwd
+
+      - run: ls
+
+      - run: ls -R
+
+      - name: Build docs
+        run: npm run docs:build
+
+      - name: zip docs
         uses: vimtor/action-zip@v1.2
         with:
           files: docs/.vitepress/dist/
           dest: docs.zip
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 'zipped_docs'
+          path: docs.zip
+
+
+  release:
+    needs: build_docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: 'zipped_docs'
+
+      - run: chmod -R 777 .
 
       - name: Create release
         id: create_release
@@ -47,10 +97,19 @@ jobs:
           fail_on_unmatched_files: true
           files: docs.zip
 
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: 'project'
+
+      - run: chmod -R 777 .
+
       - name: Check publish status
         id: check_publish
         uses: tehpsalmist/npm-publish-status-action@v1
-
 
       - name: Publish release
         id: publish_release
@@ -58,12 +117,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-    #    continue-on-error: true
-          # Setup .npmrc file to publish to npm
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#          registry-url: 'https://registry.npmjs.org'
+
         run: |
           echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
           npm run build
@@ -73,17 +127,29 @@ jobs:
         if: ${{ steps.check_publish.outputs.exists == '1' }}
         run: echo "Package already published"
 
-      - name: setup Github Pages
-        id: setup_pages
-        uses: actions/configure-pages@v4
+  deploy:
+      needs: build_docs
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/download-artifact@v4
+          with:
+            name: 'project'
 
-      - name: Upload artifacts
-        id: upload_artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          path: 'docs/.vitepress/dist'
+        - run: chmod -R 777 .
 
-      - name: deploy to Github Pages
-        id: deploy_pages
-        uses: actions/deploy-pages@v4
+        - run: npm run docs:build
+
+        - name: setup Github Pages
+          id: setup_pages
+          uses: actions/configure-pages@v4
+
+        - name: Upload artifacts
+          id: upload_artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            path: 'docs/.vitepress/dist'
+
+        - name: deploy to Github Pages
+          id: deploy_pages
+          uses: actions/deploy-pages@v4
 
