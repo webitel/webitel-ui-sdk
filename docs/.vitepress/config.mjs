@@ -29,7 +29,7 @@ const plyrIconsPath = path.resolve(__dirname, '../../src/assets/icons/plyr.svg')
 export default defineConfig({
   title: 'Webitel UI',
   description: 'Webitel UI docs',
-  base: '/ui-sdk/new',
+  base: '/webitel-ui-sdk/',
   vite: {
     ssr: {
       noExternal: [
