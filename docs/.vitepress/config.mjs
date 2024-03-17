@@ -63,7 +63,15 @@ export default defineConfig({
       createSvgSpritePlugin({
         include: '**/sprite/*.svg',
       }),
-      vueDocgenPlugin(),
+      (() => {
+        const docgen = vueDocgenPlugin({
+          include: globbySync(['src/components/**/*.vue']),
+          injectAt: 'docs',
+        });
+        // dunno why, but default enforce value breaks build
+        docgen.enforce = null;
+        return docgen;
+      })(),
     ],
   },
 
