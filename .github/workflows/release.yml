@@ -19,28 +19,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - run: npm ci
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: 'project'
-          path: .
+#
+#      - run: npm run test:unit
+#
+#      - uses: actions/upload-artifact@v4
+#        with:
+#          name: 'project'
+#          path: .
 
   test:
     needs: [install_deps]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: 'project'
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: 'project'
 
-      - run: chmod -R 777 .
+#      - run: chmod -R 777 .
 
       - run: npm run test:unit
 

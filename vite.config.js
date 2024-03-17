@@ -3,8 +3,7 @@ import { defineConfig, loadEnv } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
-
-const resolve = require('path').resolve;
+import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
