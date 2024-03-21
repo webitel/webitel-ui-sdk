@@ -2,17 +2,12 @@ import applyTransform, {
   notify,
   snakeToCamel,
 } from '../../../api/transformers';
-import BaseAPIService from './BaseAPIService';
 
-class UserinfoAPI extends BaseAPIService {
-  // gets user by token from localstorage
-// stores response username in vuex
+const userinfo = (instance) => ({
   async getSession() {
-    // const tokenCheck = localStorage.getItem('access-token');
-    // if (typeof tokenCheck === 'string') { // if there is no token, localStorage returns object
     const url = '/userinfo';
     try {
-      const response = await this._instance.get(url);
+      const response = await instance.get(url);
       return applyTransform(response.data, [
         snakeToCamel(),
       ]);
@@ -21,13 +16,12 @@ class UserinfoAPI extends BaseAPIService {
         notify,
       ]);
     }
-    // }
-  }
+  },
 
   async getApplicationsAccess() {
     const url = 'role/metadata/access';
     try {
-      const response = await this._instance.get(url);
+      const response = await instance.get(url);
       return applyTransform(response.data, [
         snakeToCamel(),
       ]);
@@ -36,9 +30,19 @@ class UserinfoAPI extends BaseAPIService {
         notify,
       ]);
     }
-  }
-}
+  },
 
-const userinfo = new UserinfoAPI();
+  async logout() {
+    const url = '/logout';
+
+    try {
+      return await instance.post(url, {});
+    } catch (err) {
+      throw applyTransform(err, [
+        notify,
+      ]);
+    }
+  }
+});
 
 export default userinfo;

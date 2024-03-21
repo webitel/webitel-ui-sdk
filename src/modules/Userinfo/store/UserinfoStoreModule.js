@@ -1,7 +1,9 @@
-import userinfo from '../api/userinfo';
+import userinfoGenerator from '../api/userinfo';
 import ApplicationsAccess from '../classes/ApplicationsAccess';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 import Permissions from '../enums/Permissions.enum';
+
+let userinfo = null;
 
 const defaultState = () => ({
   isLoading: true,
@@ -87,7 +89,9 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       return permissions;
     },
 
-    OPEN_SESSION: async (context) => {
+    OPEN_SESSION: async (context, { instance }) => {
+      let userinfo = userinfoGenerator(instance);
+
       await context.dispatch('BEFORE_OPEN_SESSION_HOOK');
       // !!! it should be checked in router.js beforeEach hook
       // if (!localStorage.getItem('access-token')) {
@@ -120,6 +124,12 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       } catch (err) {
         throw err;
       }
+    },
+
+    LOGOUT: async (context, { authUrl = import.meta.env.VITE_AUTH_URL }) => {
+      if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
+      await userinfo.logout();
+      window.location.href = authUrl;
     },
 
     SET_APPLICATIONS_ACCESS: (context, access) => context.commit('SET_APPLICATIONS_ACCESS', access),
