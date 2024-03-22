@@ -90,7 +90,7 @@ export default class UserinfoStoreModule extends BaseStoreModule {
     },
 
     OPEN_SESSION: async (context, { instance }) => {
-      let userinfo = userinfoGenerator(instance);
+      userinfo = userinfoGenerator(instance);
 
       await context.dispatch('BEFORE_OPEN_SESSION_HOOK');
       // !!! it should be checked in router.js beforeEach hook
