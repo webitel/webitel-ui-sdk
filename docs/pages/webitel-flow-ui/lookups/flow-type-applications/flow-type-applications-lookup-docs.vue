@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import FlowTypeApplications from '@webitel/flow-ui-sdk/src/lookups/FlowTypeApplications.lookup';
+import FlowTypeApplications from '../../../../../src/lookups/FlowTypeApplications/FlowTypeApplications.lookup';
 import enumReducer from '../../../webitel-ui/enums/_internals/enumReducer';
 
 export default {
   name: 'FlowTypeApplicationsLookupDocs',
   computed: {
     lookup() {
-      const _import = 'import FlowTypeApplications from \'@webitel/flow-ui-sdk/src/lookups/FlowTypeApplications.lookup\';\n';
+      const _import = 'import FlowTypeApplications from \'@webitel/ui-sdk/src/lookups/FlowTypeApplications.lookup\';\n';
       return enumReducer(FlowTypeApplications, _import);
     },
   },

@@ -143,6 +143,7 @@ export default {
         [EngineRoutingSchemaType.Voice]: 'Голосовая',
         [EngineRoutingSchemaType.Service]: 'Служебная',
         [EngineRoutingSchemaType.Processing]: 'Формы',
+        [EngineRoutingSchemaType.Default]: 'Нет типа',
       },
     },
   },
