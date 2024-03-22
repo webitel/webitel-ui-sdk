@@ -23,6 +23,8 @@ const sidebarValidators = globbySync('pages/webitel-ui/validators/**/Readme.md',
 
 const sidebarTestsCookbook = globbySync('pages/docs/tests-cookbook/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 
+const flowPieces = globbySync('pages/webitel-flow-ui/**/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+
 const plyrIconsPath = path.resolve(__dirname, '../../src/assets/icons/plyr.svg');
 
 // https://vitepress.dev/reference/site-config
@@ -92,6 +94,7 @@ export default defineConfig({
       { text: 'Test utils and Mocks', items: sidebarTests },
       { text: 'Validators', items: sidebarValidators },
       { text: 'Tests Cookbook', items: sidebarTestsCookbook },
+      { text: 'Flow pieces', items: flowPieces },
     ].map(({ text, items }) => (
       {
         text,
