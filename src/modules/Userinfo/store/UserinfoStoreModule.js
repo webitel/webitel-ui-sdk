@@ -93,12 +93,16 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       userinfo = userinfoGenerator(instance);
 
       await context.dispatch('BEFORE_OPEN_SESSION_HOOK');
-      // !!! it should be checked in router.js beforeEach hook
-      // if (!localStorage.getItem('access-token')) {
-      //   context.dispatch('REDIRECT_TO_AUTH');
-      //   throw new Error('No access-token in localStorage');
-      // }
+
+      const HOUR_LENGTH = 60 * 60 * 1000;
+
       const session = await userinfo.getSession();
+
+      if ((session.expiresAt - Date.now() < HOUR_LENGTH)) {
+        await context.dispatch('LOGOUT');
+        throw new Error(`Session expires soon ${session.expiresAt}`);
+      }
+
       await context.dispatch('SET_SESSION', session);
       const access = await userinfo.getApplicationsAccess();
       await context.dispatch('SET_APPLICATIONS_ACCESS', new ApplicationsAccess({ access }).getAccess());
