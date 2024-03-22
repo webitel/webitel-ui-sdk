@@ -126,7 +126,7 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       }
     },
 
-    LOGOUT: async (context, { authUrl = import.meta.env.VITE_AUTH_URL }) => {
+    LOGOUT: async (context, { authUrl = import.meta.env.VITE_AUTH_URL } = {}) => {
       if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
       await userinfo.logout();
       window.location.href = authUrl;
