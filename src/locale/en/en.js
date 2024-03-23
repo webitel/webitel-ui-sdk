@@ -144,6 +144,7 @@ export default {
         [EngineRoutingSchemaType.Voice]: 'Voice',
         [EngineRoutingSchemaType.Service]: 'Service',
         [EngineRoutingSchemaType.Processing]: 'Forms',
+        [EngineRoutingSchemaType.Default]: 'No type',
       },
     },
   },
