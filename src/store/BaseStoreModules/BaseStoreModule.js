@@ -44,7 +44,7 @@ export default class BaseStoreModule {
       getters: { ...this.getters, ...getters },
       actions: { ...this.actions, ...actions },
       mutations: { ...this.mutations, ...mutations },
-      modules: { ...this.modules, modules },
+      modules: { ...this.modules, ...modules },
     };
   }
 }
