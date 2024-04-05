@@ -17,9 +17,9 @@
     <wt-rounded-action icon="edit" />
     <wt-player
       :autoplay="false"
-      mime="video"
-      reset-on-end
-      reset-volume
+      :closable="false"
+      :download="false"
+      position="static"
       src="https://www.w3schools.com/html/mov_bbb.mp4"
     ></wt-player>
     <wt-app-header>
