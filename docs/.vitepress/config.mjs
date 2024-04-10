@@ -6,6 +6,7 @@ import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
 
+const sidebarApi = globbySync('pages/webitel-ui/api/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarHowTo = globbySync('pages/docs/how-to/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 
 const sidebarComponents = globbySync(
@@ -85,6 +86,7 @@ export default defineConfig({
     ],
     sidebar: [
       { text: 'How To', items: sidebarHowTo },
+      { text: 'API', items: sidebarApi },
       { text: 'Components', items: sidebarComponents },
       { text: 'Components/on-demand', items: onDemandSidebarComponents },
       { text: 'Enums', items: sidebarEnums },
