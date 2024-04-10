@@ -5,6 +5,7 @@ const ChatGatewayProvider = Object.freeze({
   VIBER: 'viber',
   WEBCHAT: 'webchat',
   INFOBIP: 'infobip_whatsapp',
+  CUSTOM: 'custom',
 });
 
 export default ChatGatewayProvider;

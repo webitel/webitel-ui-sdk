@@ -66,6 +66,7 @@ import './column-select.svg';
 import './variable-select.svg';
 import './contacts.svg';
 import './copy.svg';
+import './custom-chat-gateway.svg';
 import './docs.svg';
 import './download.svg';
 import './edit.svg';
