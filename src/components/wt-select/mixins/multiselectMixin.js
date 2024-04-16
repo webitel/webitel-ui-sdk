@@ -101,6 +101,10 @@ export default {
 
   methods: {
     getOptionLabel({ option, optionLabel }) {
+      // https://webitel.atlassian.net/browse/WTEL-3181
+      // if allowCustomValue select mode, return vue-multiselect label as is
+      if (this.allowCustomValues && option.isTag) return option.label;
+
       if (optionLabel && option[optionLabel]) return option[optionLabel];
       if (option.locale) {
         if (Array.isArray(option.locale)) return this.$t(...option.locale);

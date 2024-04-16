@@ -17,7 +17,7 @@ const options = [
 ];
 
 const multipleValue = ref([options[0]]);
-const singleValue = ref({});
+const singleValue = ref('');
 </script>
 
 <template>

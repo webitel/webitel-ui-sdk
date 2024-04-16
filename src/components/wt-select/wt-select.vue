@@ -37,6 +37,7 @@
       :options="optionsWithCustomValues"
       :placeholder="placeholder || label"
       :track-by="trackBy"
+      :taggable="taggable"
       class="wt-select__select"
       v-bind="$attrs"
       @close="isOpened = false"
@@ -85,18 +86,17 @@
       <template #caret="{ toggle }">
         <!--    In mode allowCustomValues, adding is done by clicking on this icon  -->
         <!--    [https://my.webitel.com/browse/WTEL-3181]-->
-        <wt-icon-btn
-          v-if="allowCustomValues && searchParams.search"
-          :disabled="disabled"
-          class="multiselect__select multiselect__custom-value"
-          icon="select-custom-value-enter"
-          @mousedown.prevent
-          @click="handleCustomValue(toggle)"
-        />
+<!--        <wt-icon-btn-->
+<!--          v-if="allowCustomValues && searchParams.search"-->
+<!--          :disabled="disabled"-->
+<!--          class="multiselect__select multiselect__custom-value"-->
+<!--          icon="select-custom-value-enter"-->
+<!--          @mousedown.prevent-->
+<!--          @click="handleCustomValue(toggle)"-->
+<!--        />-->
         <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
-          v-else
           :disabled="disabled"
           class="multiselect__select multiselect__arrow"
           icon="arrow-down"
@@ -143,6 +143,7 @@
 </template>
 
 <script>
+import isEmpty from '../../scripts/isEmpty';
 import taggableMixin from '../wt-tags-input/mixin/taggableMixin';
 import multiselectMixin from './mixins/multiselectMixin';
 
@@ -197,7 +198,9 @@ export default {
     // for taggableMixin
     manualTagging() { return this.handleCustomValuesAdditionManually; },
     optionsWithCustomValues() {
+      // https://webitel.atlassian.net/browse/WTEL-3181
       if (!this.allowCustomValues) return this.selectOptions;
+
 
       /**
         custom values could be restored after refresh, so that they could be not included in options prop,
@@ -207,7 +210,10 @@ export default {
        but current filters logic restores value at filter component, but options value are pre-defined at store state
        */
 
-      const customValuesToOptions = Array.isArray(this.value) ? this.value : [this.value];
+      const customValuesToOptions =
+        Array.isArray(this.value)
+          ? this.value
+          : (isEmpty(this.value) ? [] : [this.value]); //do not add empty values
       const optionsWithoutValues = this.selectOptions.filter((opt) => {
         const optKey = this.trackBy ? opt[this.trackBy] : opt;
         return !customValuesToOptions.some((customValue) => {
@@ -222,8 +228,14 @@ export default {
     },
   },
   methods: {
+
     // for taggableMixin functionality
-    async handleCustomValue(toggle) {
+    async handleCustomValue(value) {
+      // https://webitel.atlassian.net/browse/WTEL-3181
+      this.tag(value);
+
+
+      // OLD CODE, but can be useful in future
       /**
        * tag emits input event, but there is a drawback
        * there are causes, when input handler is async, but close event, emitted by toggle(),
@@ -233,7 +245,7 @@ export default {
        * for now, i've tested this cause and it works well even without waiting for $nextTick()
        * however, this is a potential problem, so, i've left this comment here
        */
-      this.tag(this.searchParams.search);
+      // this.tag(this.searchParams.search);
       // await this.$nextTick();
 
       /**
@@ -241,7 +253,7 @@ export default {
        * because there could be code, which performs operation with input only after select close
        * so that, it's crucial to emit input before close
        */
-      toggle();
+      // toggle();
     },
     // for taggableMixin functionality
     emitTagEvent(searchQuery, id) {
