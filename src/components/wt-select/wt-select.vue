@@ -86,17 +86,18 @@
       <template #caret="{ toggle }">
         <!--    In mode allowCustomValues, adding is done by clicking on this icon  -->
         <!--    [https://my.webitel.com/browse/WTEL-3181]-->
-<!--        <wt-icon-btn-->
-<!--          v-if="allowCustomValues && searchParams.search"-->
-<!--          :disabled="disabled"-->
-<!--          class="multiselect__select multiselect__custom-value"-->
-<!--          icon="select-custom-value-enter"-->
-<!--          @mousedown.prevent-->
-<!--          @click="handleCustomValue(toggle)"-->
-<!--        />-->
+        <wt-icon-btn
+          v-if="allowCustomValues && searchParams.search"
+          :disabled="disabled"
+          class="multiselect__select multiselect__custom-value"
+          icon="select-custom-value-enter"
+          @mousedown.prevent
+          @click="handleCustomValueArrowInput(toggle)"
+        />
         <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
         <wt-icon-btn
+          v-else
           :disabled="disabled"
           class="multiselect__select multiselect__arrow"
           icon="arrow-down"
@@ -233,8 +234,10 @@ export default {
     async handleCustomValue(value) {
       // https://webitel.atlassian.net/browse/WTEL-3181
       this.tag(value);
-
-
+    },
+    // for taggableMixin functionality
+    async handleCustomValueArrowInput(toggle) {
+      // https://webitel.atlassian.net/browse/WTEL-3181
       // OLD CODE, but can be useful in future
       /**
        * tag emits input event, but there is a drawback
@@ -245,7 +248,7 @@ export default {
        * for now, i've tested this cause and it works well even without waiting for $nextTick()
        * however, this is a potential problem, so, i've left this comment here
        */
-      // this.tag(this.searchParams.search);
+      this.tag(this.searchParams.search);
       // await this.$nextTick();
 
       /**
@@ -253,7 +256,7 @@ export default {
        * because there could be code, which performs operation with input only after select close
        * so that, it's crucial to emit input before close
        */
-      // toggle();
+      toggle();
     },
     // for taggableMixin functionality
     emitTagEvent(searchQuery, id) {
