@@ -4,6 +4,7 @@
       <wt-icon-btn
         icon="rounded-info"
         :color="iconColor"
+        size="sm"
       />
     </template>
     <slot />
@@ -16,6 +17,7 @@ export default {
   props: {
     iconColor: {
       type: String,
+      default: 'info',
     },
   },
 };
