@@ -24,7 +24,7 @@ export default {
         value: 'iconColor',
         code: '<wt-hint :icon-сolor="iconColor"></wt-hint>',
         type: 'String',
-        default: 'outline',
+        default: 'info',
         description: 'This prop is changing color only for hint icon',
       },
     ],
