@@ -1,14 +1,19 @@
 <script setup>
-import Docs from './wt-hint-docs.vue';
 import ExampleHint from './examples/example-hint.vue';
 </script>
 
 # WtHint
 
 ## Props
-::: raw
-<Docs/>
-:::
+
+| Prop              | Type     | Default | Code                                                  | Description              |
+|-------------------|----------|---------|-------------------------------------------------------|--------------------------|
+| iconColor         | String   | 'info'  | `<wt-hint :iconColor="'info'">{{ hint }}</wt-hint>`   | Prop for hint icon color |
+## Slots
+
+| Name       | Scope                                                                                 | Description          |
+|------------|---------------------------------------------------------------------------------------|----------------------|
+| default    |                                                                                       | Default content slot |
 
 ## Example Hint
 ::: raw
