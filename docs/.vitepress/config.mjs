@@ -8,6 +8,8 @@ import { defineConfig } from 'vitepress';
 
 const sidebarApi = globbySync('pages/webitel-ui/api/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarHowTo = globbySync('pages/docs/how-to/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+const sidebarFAQ = globbySync('pages/docs/faq/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+const sidebarArchitectureAndStructures = globbySync('pages/docs/architecture-and-structures/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 
 const sidebarComponents = globbySync(
   'pages/webitel-ui/components/**/Readme.md',
@@ -85,6 +87,8 @@ export default defineConfig({
       { text: 'Home', link: '/' },
     ],
     sidebar: [
+      { text: 'FAQ', items: sidebarFAQ },
+      { text: 'Architecture, Structures, Design, etc', items: sidebarArchitectureAndStructures },
       { text: 'How To', items: sidebarHowTo },
       { text: 'API', items: sidebarApi },
       { text: 'Components', items: sidebarComponents },
