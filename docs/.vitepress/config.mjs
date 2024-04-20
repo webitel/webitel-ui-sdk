@@ -90,7 +90,7 @@ export default defineConfig({
       { text: 'FAQ', items: sidebarFAQ },
       { text: 'Architecture, Structures, Design, etc', items: sidebarArchitectureAndStructures },
       { text: 'How To', items: sidebarHowTo },
-      { text: 'API', items: sidebarApi },
+      { text: 'API Tools', items: sidebarApi },
       { text: 'Components', items: sidebarComponents },
       { text: 'Components/on-demand', items: onDemandSidebarComponents },
       { text: 'Enums', items: sidebarEnums },
