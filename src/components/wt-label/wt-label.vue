@@ -59,6 +59,6 @@ export default {
 }
 
 .wt-hint {
-  margin-left: var(--spacing-xs);
+  margin-left: var(--spacing-2xs);
 }
 </style>
