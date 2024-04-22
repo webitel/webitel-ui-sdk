@@ -6,9 +6,9 @@ import ExampleHint from './examples/example-hint.vue';
 
 ## Props
 
-| Prop              | Type     | Default | Code                                                  | Description              |
-|-------------------|----------|---------|-------------------------------------------------------|--------------------------|
-| iconColor         | String   | 'info'  | `<wt-hint :iconColor="'info'">{{ hint }}</wt-hint>`   | Prop for hint icon color |
+| Prop              | Type     | Default | Code                                                  | Description                                                                                                       |
+|-------------------|----------|---------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| iconColor         | String   | 'info'  | `<wt-hint :iconColor="'info'">{{ hint }}</wt-hint>`   | Prop for hint icon color. iconColor prop value can be the same as the color props values in the wt-icon component |
 ## Slots
 
 | Name       | Scope                                                                                 | Description          |
