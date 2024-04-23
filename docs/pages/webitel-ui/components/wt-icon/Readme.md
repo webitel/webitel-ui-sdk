@@ -1,18 +1,20 @@
-# WtIcon
 <script setup>
-import Docs from './wt-icon-docs.vue';
-import iconsList from './_internals/iconsList';
+import iconsList from './_internals/iconsList.js';
 
 const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer', 'job'];
 </script>
 
+# WtIcon
+
 ## Props
 
-::: raw
-<Docs />
-:::
-
-<wt-icon icon="edit"></wt-icon>
+| Prop       | Type    | Default | Required | Code                                                | Options                                                                                                               |
+|------------|---------|---------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| icon       | String  |         | true     | `<wt-icon icon="close"></wt-icon>`                  |                                                                                                                       |             
+| size       | String  | md      |          | `<wt-icon icon="close" size="sm"></wt-icon>`        | sm, md, lg, xl                                                                                                        |             
+| color      | String  | default |          | `<wt-icon icon="close" color="success"></wt-icon>`  | default, active, disabled, primary, error, success, warning, on-dark, on-light, on-primary, info, chat, transfer, job |             
+| iconPrefix | String  | `''`    |          | `<wt-icon icon="close" icon-prefix="ws"></wt-icon>` |                                                                                                                       |             
+| disabled   | Boolean | false   |          | `<wt-icon icon="close" disabled></wt-icon>`         |                                                                                                                       |             
 
 ### Different colors:
 
@@ -29,6 +31,22 @@ const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 
 {{ color }}
 </div>
 
+## Available icons
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, 120px); grid-gap: var(--spacing-xs);">
+    <div
+      style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px;"
+      v-for="icon of iconsList"
+      :key="icon"
+    >
+      <wt-icon
+        :icon="icon"
+        size="xl"
+      ></wt-icon>
+      {{ icon }}
+    </div>
+  </div>
+
 ## How does it work?
 
 Icons are located in <code>assets/icons/sprite</code> directory, in <code>SVG</code> format,
@@ -42,22 +60,14 @@ For example:
 
 ![svg icon code example](./assets/svg-icon-code-example.png)
 
-
-At build stage, <code><a href="https://github.com/JetBrains/svg-sprite-loader#svg-sprite-loader">svg-sprite-loader</a></code>
+At build stage, <code><a href="https://www.npmjs.com/package/vite-plugin-svg-sprite">
+vite-plugin-svg-sprite</a></code>
 collects all icons (looking for "All files`.svg` in all directories, which names include `sprite`,
-). This rule is described in <code>vue.config.js:</code>
+). This rule is described in <code>vite.config.js:</code>
 (from "Quick Start" icons installation section):
 
 <pre class="language-javascript"><code>
-config.module
-    .rule('svg')
-    .exclude.add(/^(.*sprite).*\.svg/); // same as in svg-sprite-loader
-
-config.module
-    .rule('svg-sprite')
-    .test(/^(.*sprite).*\.svg/) // same as in svg-url-loader
-    .use('svg-sprite-loader')
-    .loader('svg-sprite-loader');
+import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 </code></pre>
 
 So that, all these icons are collected in one sprite. This sprite is injected in <code>index.html</code>.
@@ -76,7 +86,7 @@ Then, these icons can be used as:
 
 ## How to install your custom icons to project?
 
-`svg-sprite-loader` webpack rule in <code>vue.config.js</code> also collects all icons from `sprite`
+`vite-plugin-svg-sprite` vite rule in <code>vite.config.js</code> also collects all icons from `sprite`
 directories in project and adds it to final sprite.
 
 *In fact, webitel-ui icons are added to sprite just cause they're imported from
@@ -95,6 +105,7 @@ And, then, if you put some new icons in this directory, and import them in `inde
 they automatically become available in project.
 
 ### Simple TODO:
+
 * Create directory `src/(app?)/assets/icons/sprite/` (if doesn't exists)
 * in this folder, create `index.js` (if doesn't exists)
 * Import `index.js` to `>main.js` (if doesn't exists)
@@ -111,6 +122,7 @@ in this app, or library - and update it, if needed.
 from all icon usages (and, of course, rename the icon file)*
 
 ### Icon prefix corresponding to application:
+
 * **Webitel UI:** no prefix
 * **Admin:** `adm-`
 * **Workspace:** `ws-`
@@ -123,6 +135,7 @@ from all icon usages (and, of course, rename the icon file)*
 After export from Figma, icons should be cleaned up to avoid a few issues.
 
 Use this checklist:
+
 1. **Remove** `width` and `height` from svg-tag
 
 ![width and height should be removed](./assets/cleanup-svg-width-height.png)
@@ -149,19 +162,4 @@ But! Specific colors should stay in svg-code. (for instance, red dot in `record`
 
 !["fill" should be removed](./assets/cleanup-svg-fill.png)
 
-## Available icons
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, 120px); grid-gap: var(--spacing-xs);">
-    <div
-      style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px;"
-      v-for="icon of iconsList"
-      :key="icon"
-    >
-      <wt-icon
-        :icon="icon"
-        size="xl"
-      ></wt-icon>
-      {{ icon }}
-    </div>
-  </div>
 

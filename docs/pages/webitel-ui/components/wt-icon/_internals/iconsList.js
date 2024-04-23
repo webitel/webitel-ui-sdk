@@ -84,6 +84,8 @@ export default [
   'contacts',
   'done',
   'attention',
+  'agent',
+  'bot',
 
   'call',
   'call--filled',
