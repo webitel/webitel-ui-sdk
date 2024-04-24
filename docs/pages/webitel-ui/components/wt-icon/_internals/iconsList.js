@@ -51,6 +51,7 @@ export default [
   'download',
   'upload',
   'filter',
+  'flows',
   'column-select',
   'variable-select',
   'refresh',
