@@ -77,6 +77,7 @@ import './expand.svg';
 import './eye--closed.svg';
 import './eye--opened.svg';
 import './filter.svg';
+import './flows.svg';
 import './generate.svg';
 import './google.svg';
 import './history.svg';
