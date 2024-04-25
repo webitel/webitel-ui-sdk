@@ -1,4 +1,5 @@
 import './account.svg';
+import './agent.svg';
 import './adfs.svg';
 import './app-navigator.svg';
 import './arrow-down.svg';
@@ -13,6 +14,7 @@ import './back.svg';
 import './bell.svg';
 import './bell-badged.svg';
 import './bucket.svg';
+import './bot.svg';
 import './calendar.svg';
 import './dark-mode.svg';
 
@@ -75,6 +77,7 @@ import './expand.svg';
 import './eye--closed.svg';
 import './eye--opened.svg';
 import './filter.svg';
+import './flows.svg';
 import './generate.svg';
 import './google.svg';
 import './history.svg';

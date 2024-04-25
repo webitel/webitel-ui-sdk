@@ -51,6 +51,7 @@ export default [
   'download',
   'upload',
   'filter',
+  'flows',
   'column-select',
   'variable-select',
   'refresh',
@@ -84,6 +85,8 @@ export default [
   'contacts',
   'done',
   'attention',
+  'agent',
+  'bot',
 
   'call',
   'call--filled',
