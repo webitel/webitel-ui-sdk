@@ -138,6 +138,7 @@ export default {
       },
     },
     flow: {
+      name: 'Схема | Схемы',
       type: {
         [EngineRoutingSchemaType.Chat]: 'Текстовая',
         [EngineRoutingSchemaType.Voice]: 'Голосовая',
