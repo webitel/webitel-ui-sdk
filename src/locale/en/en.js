@@ -139,6 +139,7 @@ export default {
       },
     },
     flow: {
+      name: 'Flow schema | Flow schemas',
       type: {
         [EngineRoutingSchemaType.Chat]: 'Chat',
         [EngineRoutingSchemaType.Voice]: 'Voice',
