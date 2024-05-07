@@ -111,7 +111,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
       // note: restore fn may still return value even if there's no query value
       // from localStorage, for instance
       const value = context.state[filter].restore
-        ? context.state[filter].restore({ query })
+        ? context.state[filter].restore({ query, defaultValue: context.state[filter].defaultValue })
         : query;
       if (value) {
         if (filter
