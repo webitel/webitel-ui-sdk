@@ -2,6 +2,8 @@
 
 **Сутності створюємо свої, а ті що в прикладах - не чіпаємо!**
 
+[[toc]]
+
 ## How to setup agent account and assign it to queue?
 
 1. Створити користувача.
@@ -21,6 +23,9 @@
 
 [Приклад черги](https://dev.webitel.com/contact-center/queues/730)
 
+## How to chat yourself from telegram bot to Workspace?
+
+TODO
 
 ## How to call to yourself to Inbound Queue?
 
@@ -73,6 +78,33 @@ _Виконані пункти можна пропустити._
 1. Зайти у Contact-center з акаунта агента.
 2. Задача має прийти автоматично.
 
+## Contacts: link chat to a contact?
 
+### Setup agent
 
+Див. [вище](#how-to-setup-agent-account-and-assign-it-to-queue)
 
+### Setup chat bot
+
+Див. [вище](#how-to-chat-yourself-from-telegram-bot-to-workspace)
+
+### Setup contact
+
+1. Створити контакт у CRM.
+
+### How to link?
+
+Пишемо з телеграма у чат-бот. Чат-бот перекидає чат на Workspace. У цього чату є `conversationId`.
+
+Наразі, через [swagger](https://swagger.webitel.com/#/ContactLinkingService/ContactLinkingService_LinkContactToClient),
+передавши в нього id контакта та id самого чату.
+
+## Contacts: link call to a contact?
+
+TODO
+
+## Contact Timeline: How to add records to a contact history timeline?
+
+Потрібно привʼязати [чат](#contacts-link-chat-to-a-contact) та/або [дзвінок](#contacts-link-call-to-a-contact) до контакту.
+
+Історія має зʼявитись автоматично.
