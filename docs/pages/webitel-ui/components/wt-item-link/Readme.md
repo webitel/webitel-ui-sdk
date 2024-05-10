@@ -1,18 +1,16 @@
 <script setup>
-import Docs from './wt-item-link-docs.vue';
-import ExampleItemLink from './examples/example-item-link.vue';
+import Specs from './component-specs.vue';
 </script>
 
 # WtItemLink
 
-## Props
-::: raw
-<Docs/>
-:::
+## Specs
+<Specs />
 
 ## Example Item Link
+
 ::: raw
-<ExampleItemLink/>
+<ExampleItemLink />
 :::
 
 ::: details Code

@@ -10,7 +10,7 @@ const isPopup = ref(false);
   >Toggle popup
   </wt-button>
   <wt-popup
-    v-show="isPopup"
+    :shown="isPopup"
     @close="isPopup = false"
   >
     <template #header>
