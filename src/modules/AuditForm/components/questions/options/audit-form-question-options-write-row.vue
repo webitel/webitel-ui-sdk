@@ -11,6 +11,7 @@
       :label="$t('webitelUI.auditForm.score', 1)"
       :value="option.score"
       :v="v$.option.score"
+      :number-max="10"
       type="number"
       @input="emit('update:option', { name: option.name, score: $event })"
     />

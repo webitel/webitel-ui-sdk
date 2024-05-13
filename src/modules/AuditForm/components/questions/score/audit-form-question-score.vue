@@ -8,7 +8,7 @@
         :value="question.min"
         :v="v$.question.min"
         :number-min="0"
-        :number-max="19"
+        :number-max="9"
         :label="$t('reusable.from')"
         type="number"
         required
@@ -18,7 +18,7 @@
         :value="question.max"
         :v="v$.question.max"
         :number-min="1"
-        :number-max="20"
+        :number-max="10"
         :label="$t('reusable.to')"
         type="number"
         required
@@ -97,12 +97,13 @@ const v$ = useVuelidate(
 
 const scoreRange = computed(() => {
   if (props.question.min > props.question.max) return [];
+  const max = props.question.max > 10 ? 10 : props.question.max;
   const result = [];
   let i = +props.question.min;
   do {
     result.push(i);
     i += 1;
-  } while (i <= props.question.max);
+  } while (i <= max);
   return result;
 });
 
