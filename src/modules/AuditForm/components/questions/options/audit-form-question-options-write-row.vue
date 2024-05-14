@@ -12,6 +12,7 @@
       :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '10'}), hintPosition: 'right' }"
       :value="option.score"
       :v="v$.option.score"
+      :number-min="0"
       :number-max="10"
       type="number"
       @input="emit('update:option', { name: option.name, score: $event })"
