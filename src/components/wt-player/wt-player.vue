@@ -109,8 +109,8 @@ export default {
       if (this.player) this.player.destroy();
       const controls = [
         'play-large', 'play', 'progress', 'current-time',
-        'mute', 'volume', 'captions', 'settings', 'pip',
-        'airplay', 'fullscreen',
+        'duration', 'mute', 'volume', 'captions', 'settings',
+        'pip', 'airplay', 'fullscreen'
       ];
       if (this.download) controls.push('download');
       this.player = new Plyr(this.$refs.player, {
