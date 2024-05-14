@@ -66,7 +66,7 @@ const emit = defineEmits([
 ]);
 
 function updateQuestion({ path, value }) {
-  const score = value.score > 10 ? 10 : Number(Math.abs(value.score)); // for trying to enter -1, 000 or string value
+  const score = value.score > 10 ? 10 : Number(Math.abs(value.score)); // to prevent -1, 000 or string value
   emit('change:question', updateObject({
     obj: props.question,
     path,

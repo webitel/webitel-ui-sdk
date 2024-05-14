@@ -111,7 +111,7 @@ const scoreRange = computed(() => {
 const isResult = computed(() => !isEmpty(props.result));
 
 function updateQuestion({ path, value }) {
-  const number = value > 10 ? 10 : Number(Math.abs(value)); // for trying to enter -1, 000 or string value
+  const number = value > 10 ? 10 : Number(Math.abs(value)); // to prevent -1, 000 or string value
   emit('change:question', updateObject({ obj: props.question, path, value: number }));
 }
 
