@@ -1,49 +1,65 @@
 <template>
   <div
-    :class="{ 'wt-popup--overflow': overflow }"
+    v-show="wrapperShown"
+    :class="[
+      `wt-popup--size-${size}`,
+      { 'wt-popup--overflow': overflow }
+    ]"
     class="wt-popup"
   >
-    <aside
-      :style="popupStyle"
-      class="wt-popup__popup"
+    <transition-slide
+      :offset="[0, -1440/2]"
     >
-      <header class="wt-popup__header">
-        <slot name="header">
-          <h3 class="wt-popup__title">
-            <slot name="title" />
-          </h3>
-        </slot>
-        <wt-icon-btn
-          class="wt-popup__close-btn"
-          icon="close"
-          @click="$emit('close')"
-        />
-      </header>
-      <section
-        v-if="$slots.main"
-        class="wt-popup__main"
+      <aside
+        v-if="shown"
+        class="wt-popup__popup"
       >
-        <slot name="main" />
-      </section>
-      <footer
-        v-if="$slots.actions"
-        class="wt-popup__actions"
-      >
-        <slot name="actions" />
-      </footer>
-    </aside>
+        <header class="wt-popup__header">
+          <slot name="header">
+            <h3 class="wt-popup__title">
+              <slot name="title" />
+            </h3>
+          </slot>
+          <wt-icon-btn
+            class="wt-popup__close-btn"
+            icon="close"
+            @click="$emit('close')"
+          />
+        </header>
+        <section
+          v-if="$slots.main"
+          class="wt-popup__main"
+        >
+          <slot name="main" />
+        </section>
+        <footer
+          v-if="$slots.actions"
+          class="wt-popup__actions"
+        >
+          <slot name="actions" />
+        </footer>
+      </aside>
+    </transition-slide>
   </div>
 </template>
 
 <script>
+import { TransitionSlide } from '@morev/vue-transitions';
+
 export default {
   name: 'WtPopup',
+  components: {
+    TransitionSlide,
+  },
   props: {
-    minWidth: {
-      type: [Number, String],
+    shown: {
+      type: Boolean,
+      default: true, // TODO: change me to false after refactor
     },
-    width: {
-      type: [Number, String],
+    size: {
+      type: String,
+      default: 'md',
+      validator: (v) => ['xs', 'sm', 'md', 'lg'].includes(v),
     },
     overflow: {
       type: Boolean,
@@ -51,12 +67,21 @@ export default {
     },
   },
   emits: ['close'],
-  computed: {
-    popupStyle() {
-      let style = '';
-      style += this.minWidth ? `min-width: ${this.minWidth}px;` : '';
-      style += this.width ? `width: ${this.width}px;` : '';
-      return style;
+  data: () => ({
+    wrapperShown: false,
+  }),
+  watch: {
+    // overlay should be shown before popup to show animation properly
+    shown: {
+      handler(value) {
+        if (value) {
+          this.wrapperShown = true;
+        } else {
+          setTimeout(() => {
+            this.wrapperShown = value;
+          }, 200); // 200 -> 0.2s css var(--transition); duration
+        }
+      }, immediate: true,
     },
   },
 };
@@ -79,6 +104,30 @@ export default {
   align-items: center;
   justify-content: center;
   background: var(--wt-popup-shadow-color);
+
+  &--size {
+    &-xs {
+      .wt-popup__popup {
+        width: var(--wt-popup-size-xs);
+      }
+    }
+    &-sm {
+      .wt-popup__popup {
+        width: var(--wt-popup-size-sm);
+      }
+    }
+    &-md {
+      .wt-popup__popup {
+        width: var(--wt-popup-size-md);
+      }
+    }
+    &-lg {
+      .wt-popup__popup {
+        width: var(--wt-popup-size-lg);
+      }
+    }
+
+  }
 }
 
 .wt-popup__popup {
@@ -100,8 +149,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--wt-popup-header-text-color);
   padding: var(--popup-header-padding);
+  color: var(--wt-popup-header-text-color);
   border-radius: var(--border-radius);
   background: var(--wt-popup-header-background-color);
   gap: var(--popup-header-padding);

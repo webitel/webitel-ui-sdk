@@ -8,21 +8,24 @@
         'wt-button--contains-icon': containsIcon,
         'wt-button--wide': wide,
         'wt-button--disabled': disabled,
-        'wt-button--loading': loading,
+        'wt-button--loading': showLoader,
       }
     ]"
     type="button"
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
+    <!--  Show loader and button contents at the same time to prevent width shift if content > min-width of button -->
     <wt-loader
-      v-if="loading"
+      v-if="showLoader"
       size="sm"
       :color="loaderColor"
     />
-    <slot v-else>
-      no content provided
-    </slot>
+    <div class="wt-button__contents">
+      <slot>
+        no content provided
+      </slot>
+    </div>
   </button>
 </template>
 
@@ -72,16 +75,34 @@ export default {
     },
   },
   emits: ['click'],
+  data: () => ({
+    showLoader: false,
+  }),
   computed: {
     colorClass() {
       if (!this.disabled) return `${this.color}`;
       return '';
     },
     loaderColor() {
-      return 'main';
+      return 'on-dark';
       // if (['success', 'transfer', 'error', 'job'].includes(this.color)) return 'on-dark';
       // return 'on-light';
     },
+  },
+  watch: {
+    loading: {
+      immediate: true,
+      handler(value) {
+        if (value) {
+          this.showLoader = true;
+        } else {
+          setTimeout(() => {
+            this.showLoader = value;
+          }, 1000); // why 1s? https://ux.stackexchange.com/a/104782
+        }
+      },
+    },
+
   },
 };
 </script>
@@ -105,6 +126,17 @@ export default {
   transition: var(--transition);
   cursor: pointer;
 
+  &__contents {
+    display: contents;
+  }
+
+  .wt-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   &--wide {
     width: 100%;
   }
@@ -116,6 +148,10 @@ export default {
 
   &--loading {
     pointer-events: none;
+
+    .wt-button__contents {
+      visibility: hidden;
+    }
   }
 
   &--size {

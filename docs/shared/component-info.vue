@@ -15,23 +15,25 @@ const props = defineProps({
 });
 
 const result = computed(() => {
-  const propsTable = props.info.props && markdownTable([
-    ['Name', 'Required', 'Types', 'Default', 'Description', 'Example'],
+  const propsTable = !!props.info.props && markdownTable([
+    ['Name', 'Required', 'Types', 'Default', 'Description', 'Example', 'Deprecated'],
     ...props.info.props.map(({
       name, type, required, defaultValue, description, tags,
     }) => {
       const _name = `\`${name}\``;
-      const _type = `\`${type.name}\``;
+      const _type = `\`${type.name.split('|')}\``;
 
       const _defaultValue = `\`${defaultValue.value}\``;
 
       const example = tags?.example && tags.example.map(({ description }) => `\`\`\`${description} \`\`\``);
 
-      return [_name, required, _type, _defaultValue, description, example];
+      const deprecated = !!tags?.deprecated;
+
+      return [_name, required, _type, _defaultValue, description, example, deprecated];
     }),
   ]);
 
-  const eventsTable = props.info.events && markdownTable([
+  const eventsTable = !!props.info.events && markdownTable([
     ['Name', 'Params', 'Description'],
     ...props.info.events.map(({ name, params, description }) => {
       const _name = `\`${name}\``;
@@ -39,7 +41,7 @@ const result = computed(() => {
     }),
   ]);
 
-  const slotsTable = props.info.slots && markdownTable([
+  const slotsTable = !!props.info.slots && markdownTable([
     ['Name', 'Scope', 'Description'],
     ...props.info.slots.map(({ name, scope, description }) => {
       const _name = `\`${name}\``;

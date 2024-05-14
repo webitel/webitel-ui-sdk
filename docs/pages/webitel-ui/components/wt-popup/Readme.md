@@ -1,14 +1,12 @@
 <script setup>
-import Docs from './wt-popup-docs.vue';
+import Specs from './component-specs.vue';
 import ExamplePopup from './examples/example-popup.vue';
 </script>
 
 # WtPopup
 
-## Props
-::: raw
-<Docs />
-:::
+## Specs
+<Specs />
 
 ## Example Popup
 ::: raw
