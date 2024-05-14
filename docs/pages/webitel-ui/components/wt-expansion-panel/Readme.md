@@ -1,4 +1,5 @@
 <script setup>
+import ExampleExpansionPanelDifferentSizes from './examples/example-expansion-panel-different-sizes.vue';
 </script>
 
 # WtExpansionPanel
