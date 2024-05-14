@@ -4,32 +4,28 @@
       v-if="mode === 'write'"
       class="audit-form-question-score-write"
     >
-      <wt-label :hint="$t('reusable.from')">
-        <wt-input
-          :value="question.min"
-          :v="v$.question.min"
-          :number-min="0"
-          :number-max="9"
-          :label="$t('reusable.from')"
-          :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '9'}), hintPosition: 'right' }"
-          type="number"
-          required
-          @input="updateQuestion({ path: 'min', value: $event })"
-        />
-      </wt-label>
-      <wt-label :hint="$t('reusable.to')">
-        <wt-input
-          :value="question.max"
-          :v="v$.question.max"
-          :number-min="1"
-          :number-max="10"
-          :label="$t('reusable.to')"
-          :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '1', max: '10'}), hintPosition: 'right' }"
-          type="number"
-          required
-          @input="updateQuestion({ path: 'max', value: $event })"
-        />
-      </wt-label>
+      <wt-input
+        :value="question.min"
+        :v="v$.question.min"
+        :number-min="0"
+        :number-max="9"
+        :label="$t('reusable.from')"
+        :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '9'}), hintPosition: 'right' }"
+        type="number"
+        required
+        @input="updateQuestion({ path: 'min', value: $event })"
+      />
+      <wt-input
+        :value="question.max"
+        :v="v$.question.max"
+        :number-min="1"
+        :number-max="10"
+        :label="$t('reusable.to')"
+        :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '1', max: '10'}), hintPosition: 'right' }"
+        type="number"
+        required
+        @input="updateQuestion({ path: 'max', value: $event })"
+      />
     </div>
     <div
       v-else-if="mode === 'read'"
