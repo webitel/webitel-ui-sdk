@@ -9,6 +9,7 @@
     />
     <wt-input
       :label="$t('webitelUI.auditForm.score', 1)"
+      :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '10'}), hintPosition: 'right' }"
       :value="option.score"
       :v="v$.option.score"
       :number-max="10"

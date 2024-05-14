@@ -342,6 +342,7 @@ export default {
         score: 'Бал',
       },
       clearSelection: 'Очистити вибір',
+      scoreInputTooltip: 'Значення повинно бути не менше {min} та не більше {max}',
     },
     deleteConfirmationPopup: {
       title: 'Підтвердіть видалення',

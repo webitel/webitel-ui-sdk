@@ -344,6 +344,7 @@ export default {
         score: 'Score',
       },
       clearSelection: 'Clear selection',
+      scoreInputTooltip: 'Value should be more than {min} and less than {max}',
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',

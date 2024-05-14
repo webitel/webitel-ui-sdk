@@ -4,26 +4,32 @@
       v-if="mode === 'write'"
       class="audit-form-question-score-write"
     >
-      <wt-input
-        :value="question.min"
-        :v="v$.question.min"
-        :number-min="0"
-        :number-max="9"
-        :label="$t('reusable.from')"
-        type="number"
-        required
-        @input="updateQuestion({ path: 'min', value: $event })"
-      />
-      <wt-input
-        :value="question.max"
-        :v="v$.question.max"
-        :number-min="1"
-        :number-max="10"
-        :label="$t('reusable.to')"
-        type="number"
-        required
-        @input="updateQuestion({ path: 'max', value: $event })"
-      />
+      <wt-label :hint="$t('reusable.from')">
+        <wt-input
+          :value="question.min"
+          :v="v$.question.min"
+          :number-min="0"
+          :number-max="9"
+          :label="$t('reusable.from')"
+          :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '9'}), hintPosition: 'right' }"
+          type="number"
+          required
+          @input="updateQuestion({ path: 'min', value: $event })"
+        />
+      </wt-label>
+      <wt-label :hint="$t('reusable.to')">
+        <wt-input
+          :value="question.max"
+          :v="v$.question.max"
+          :number-min="1"
+          :number-max="10"
+          :label="$t('reusable.to')"
+          :label-props="{hint: $t('scorecards.scoreInputTooltip', { min: '1', max: '10'}), hintPosition: 'right' }"
+          type="number"
+          required
+          @input="updateQuestion({ path: 'max', value: $event })"
+        />
+      </wt-label>
     </div>
     <div
       v-else-if="mode === 'read'"
@@ -97,20 +103,20 @@ const v$ = useVuelidate(
 
 const scoreRange = computed(() => {
   if (props.question.min > props.question.max) return [];
-  const max = props.question.max > 10 ? 10 : props.question.max;
   const result = [];
   let i = +props.question.min;
   do {
     result.push(i);
     i += 1;
-  } while (i <= max);
+  } while (i <= props.question.max);
   return result;
 });
 
 const isResult = computed(() => !isEmpty(props.result));
 
 function updateQuestion({ path, value }) {
-  emit('change:question', updateObject({ obj: props.question, path, value }));
+  const number = value > 10 ? 10 : Number(Math.abs(value)); // for trying to enter -1, 000 or string value
+  emit('change:question', updateObject({ obj: props.question, path, value: number }));
 }
 
 // init validation
