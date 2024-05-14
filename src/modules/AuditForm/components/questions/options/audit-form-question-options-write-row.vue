@@ -9,10 +9,13 @@
     />
     <wt-input
       :label="$t('webitelUI.auditForm.score', 1)"
+      :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '10'}), hintPosition: 'right' }"
       :value="option.score"
       :v="v$.option.score"
+      :number-min="0"
+      :number-max="10"
       type="number"
-      @input="emit('update:option', { name: option.name, score: $event })"
+      @input="changeScore"
     />
     <wt-tooltip class="audit-form-question-options-write-row__tooltip">
       <template #activator>
@@ -71,6 +74,11 @@ const v$ = useVuelidate(
   { option },
   { $autoDirty: true },
 );
+
+function changeScore (value) {
+  const score = value > 10 ? 10 : Number(Math.abs(value)); // to prevent -1, 000 or string value
+  emit('update:option', { name: props.option.name, score });
+}
 
 // init validation
 onMounted(() => v$.value.$touch());
