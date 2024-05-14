@@ -186,13 +186,15 @@ export default {
       box-shadow: var(--elevation-10);
     }
 
-    .plyr__controls .plyr__control {
+    .plyr__controls > .plyr__control,
+    .plyr__controls > .plyr__controls__item > .plyr__control {
       padding: var(--plyr-controls-icon-padding);
+    }
 
-      svg {
-        height: var(--plyr-controls-icon-size);
-        width: var(--plyr-controls-icon-size);
-      }
+    .plyr__controls > .plyr__control > svg,
+    .plyr__controls > .plyr__controls__item > .plyr__control > svg {
+      height: var(--plyr-controls-icon-size);
+      width: var(--plyr-controls-icon-size);
     }
 
     .plyr__control--overlaid svg {
