@@ -111,7 +111,7 @@ const scoreRange = computed(() => {
 const isResult = computed(() => !isEmpty(props.result));
 
 function updateQuestion({ path, value }) {
-  const number = value > 10 ? 10 : Number(Math.abs(value)); // to prevent -1, 000 or string value
+  const number = value > 10 ? 10 : Number(Math.abs(value)); // to prevent -1, 000 or string value because of this task https://webitel.atlassian.net/browse/WTEL-4505
   emit('change:question', updateObject({ obj: props.question, path, value: number }));
 }
 

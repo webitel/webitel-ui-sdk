@@ -9,11 +9,11 @@
     />
     <wt-input
       :label="$t('webitelUI.auditForm.score', 1)"
-      :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '10'}), hintPosition: 'right' }"
+      :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: minScore, max: maxScore}), hintPosition: 'right' }"
       :value="option.score"
       :v="v$.option.score"
-      :number-min="0"
-      :number-max="10"
+      :number-min="minScore"
+      :number-max="maxScore"
       type="number"
       @input="changeScore"
     />
@@ -58,6 +58,9 @@ const emit = defineEmits([
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { option } = toRefs(props);
 
+const minScore = 0;
+const maxScore = 10;
+
 const v$ = useVuelidate(
   computed(() => (
     {
@@ -65,8 +68,8 @@ const v$ = useVuelidate(
         name: { required },
         score: {
           required,
-          minValue: minValue(0),
-          maxValue: maxValue(10),
+          minValue: minValue(minScore),
+          maxValue: maxValue(maxScore),
           decimalValidator: decimalValidator(2),
         },
       },
@@ -75,8 +78,9 @@ const v$ = useVuelidate(
   { $autoDirty: true },
 );
 
-function changeScore (value) {
-  const score = value > 10 ? 10 : Number(Math.abs(value)); // to prevent -1, 000 or string value
+
+function changeScore(value) {
+  const score = value > maxScore ? maxScore : Number(Math.abs(value)); // to prevent -1, 000 or string value because of this task https://webitel.atlassian.net/browse/WTEL-4505
   emit('update:option', { name: props.option.name, score });
 }
 
