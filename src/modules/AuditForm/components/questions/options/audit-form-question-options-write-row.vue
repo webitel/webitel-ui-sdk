@@ -9,10 +9,13 @@
     />
     <wt-input
       :label="$t('webitelUI.auditForm.score', 1)"
+      :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: minScore, max: maxScore}), hintPosition: 'right' }"
       :value="option.score"
       :v="v$.option.score"
+      :number-min="minScore"
+      :number-max="maxScore"
       type="number"
-      @input="emit('update:option', { name: option.name, score: $event })"
+      @input="changeScore"
     />
     <wt-tooltip class="audit-form-question-options-write-row__tooltip">
       <template #activator>
@@ -55,6 +58,9 @@ const emit = defineEmits([
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { option } = toRefs(props);
 
+const minScore = 0;
+const maxScore = 10;
+
 const v$ = useVuelidate(
   computed(() => (
     {
@@ -62,8 +68,8 @@ const v$ = useVuelidate(
         name: { required },
         score: {
           required,
-          minValue: minValue(0),
-          maxValue: maxValue(10),
+          minValue: minValue(minScore),
+          maxValue: maxValue(maxScore),
           decimalValidator: decimalValidator(2),
         },
       },
@@ -71,6 +77,12 @@ const v$ = useVuelidate(
   { option },
   { $autoDirty: true },
 );
+
+
+function changeScore(value) {
+  const score = value > maxScore ? maxScore : Number(Math.abs(value)); // to prevent -1, 000 or string value because of this task https://webitel.atlassian.net/browse/WTEL-4505
+  emit('update:option', { name: props.option.name, score });
+}
 
 // init validation
 onMounted(() => v$.value.$touch());

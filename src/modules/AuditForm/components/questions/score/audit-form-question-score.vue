@@ -8,8 +8,9 @@
         :value="question.min"
         :v="v$.question.min"
         :number-min="0"
-        :number-max="19"
+        :number-max="9"
         :label="$t('reusable.from')"
+        :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '9'}), hintPosition: 'right' }"
         type="number"
         required
         @input="updateQuestion({ path: 'min', value: $event })"
@@ -18,8 +19,9 @@
         :value="question.max"
         :v="v$.question.max"
         :number-min="1"
-        :number-max="20"
+        :number-max="10"
         :label="$t('reusable.to')"
+        :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: '1', max: '10'}), hintPosition: 'right' }"
         type="number"
         required
         @input="updateQuestion({ path: 'max', value: $event })"
@@ -109,7 +111,8 @@ const scoreRange = computed(() => {
 const isResult = computed(() => !isEmpty(props.result));
 
 function updateQuestion({ path, value }) {
-  emit('change:question', updateObject({ obj: props.question, path, value }));
+  const number = value > 10 ? 10 : Number(Math.abs(value)); // to prevent -1, 000 or string value because of this task https://webitel.atlassian.net/browse/WTEL-4505
+  emit('change:question', updateObject({ obj: props.question, path, value: number }));
 }
 
 // init validation
