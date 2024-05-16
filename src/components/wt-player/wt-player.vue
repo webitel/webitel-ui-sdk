@@ -41,9 +41,9 @@ export default {
       type: Boolean,
       default: false,
     },
-    duration: {
+    hideDuration: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     download: {
       type: [String, Function, Boolean],
@@ -118,9 +118,9 @@ export default {
         'pip', 'airplay', 'fullscreen'
       ];
 
-      const controls = this.duration
-        ? defaultControls
-        : defaultControls.filter(control => control !== 'duration');
+      const controls = this.hideDuration
+        ? defaultControls.filter(control => control !== 'duration')
+        : defaultControls;
 
       if (this.download) controls.push('download');
       this.player = new Plyr(this.$refs.player, {
