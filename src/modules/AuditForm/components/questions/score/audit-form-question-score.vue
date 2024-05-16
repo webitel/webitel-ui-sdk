@@ -10,7 +10,7 @@
         :number-min="0"
         :number-max="9"
         :label="$t('reusable.from')"
-        :label-props="{ hint: $t('webitelUI.auditForm.scoreInputTooltip', { min: '0', max: '9'}), hintPosition: 'right' }"
+        :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: '0', max: '9'}), hintPosition: 'right' }"
         type="number"
         required
         @input="updateQuestion({ path: 'min', value: $event })"
@@ -21,7 +21,7 @@
         :number-min="1"
         :number-max="10"
         :label="$t('reusable.to')"
-        :label-props="{ hint: $t('webitelUI.auditForm.scoreInputTooltip', { min: '1', max: '10'}), hintPosition: 'right' }"
+        :label-props="{ hint: $t('scorecards.scoreInputTooltip', { min: '1', max: '10'}), hintPosition: 'right' }"
         type="number"
         required
         @input="updateQuestion({ path: 'max', value: $event })"
