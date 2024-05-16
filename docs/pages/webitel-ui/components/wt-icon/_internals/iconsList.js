@@ -1,4 +1,5 @@
 export default [
+  'link',
   'email',
   'adfs',
   'azure',
