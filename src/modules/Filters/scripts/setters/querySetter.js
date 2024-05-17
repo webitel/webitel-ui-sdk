@@ -18,22 +18,24 @@ const handleArray = ({ value, storedProp }) => {
 };
 
 function querySetter(router) {
-  const { value: rawValue, name: filterQuery, storedProp } = this;
+  return function() {
+    const { value: rawValue, name: filterQuery, storedProp } = this;
 
-  let value = '';
+    let value = '';
 
-  if (Array.isArray(rawValue)) {
-    value = handleArray({ value: rawValue, storedProp });
-  } else if (isObject(rawValue)) {
-    value = handleObject({ value: rawValue, storedProp });
-  } else {
-    value = handlePrimitive({ value });
+    if (Array.isArray(rawValue)) {
+      value = handleArray({ value: rawValue, storedProp });
+    } else if (isObject(rawValue)) {
+      value = handleObject({ value: rawValue, storedProp });
+    } else {
+      value = handlePrimitive({ value });
+    }
+
+    return changeRouteQuery(router)({
+      filterQuery,
+      value,
+    });
   }
-
-  return changeRouteQuery(router)({
-    filterQuery,
-    value,
-  });
 }
 
 export default querySetter;

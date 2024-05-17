@@ -1,7 +1,7 @@
 import deepEqual from 'deep-equal';
 
 const changeRouteQuery = (router) => ({ filterQuery, value }) => {
-  if (deepEqual(route.query[filterQuery], value)) return;
+  if (deepEqual(router.currentRoute.value.query[filterQuery], value)) return;
 
   const newQuery = {
     ...router.currentRoute.value.query,

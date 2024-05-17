@@ -15,7 +15,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
     // get value of specific filter
     GET_FILTER: (state) => (filterName) => {
       const filter = state[filterName];
-      if (!filter) return throw new Error(`Unknown filter: ${filterName}`);
+      if (!filter) throw new Error(`Unknown filter: ${filterName}`);
 
       return filter.get();
     },
@@ -56,7 +56,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
       if (value) {
         await context.dispatch('SET_FILTER', ({
-          filter,
+          name,
           value,
         }));
         return true;
