@@ -41,6 +41,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    hideDuration: {
+      type: Boolean,
+      default: false,
+    },
     download: {
       type: [String, Function, Boolean],
       default: () => (url) => url.replace('/stream', '/download'),
@@ -107,11 +111,17 @@ export default {
       const baseURL = this.$baseURL || process.env.BASE_URL || import.meta.env.BASE_URL;
       const iconUrl = createPlyrURL(baseURL);
       if (this.player) this.player.destroy();
-      const controls = [
+
+      const defaultControls = [
         'play-large', 'play', 'progress', 'current-time',
         'duration', 'mute', 'volume', 'captions', 'settings',
         'pip', 'airplay', 'fullscreen'
       ];
+
+      const controls = this.hideDuration
+        ? defaultControls.filter(control => control !== 'duration')
+        : defaultControls;
+
       if (this.download) controls.push('download');
       this.player = new Plyr(this.$refs.player, {
         // this.player = new Plyr('.wt-player__player', {
