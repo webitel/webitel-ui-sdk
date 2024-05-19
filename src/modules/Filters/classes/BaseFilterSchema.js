@@ -9,7 +9,7 @@ export default class BaseFilterSchema {
                 get,
                 set,
                 restore,
-                router, // is needed for query get/set, if getters/setters are passed as strings
+                router, // is required for query get/set, if getters/setters are passed as strings
                 ...rest
               } = {}) {
     if (!name) throw new Error('Filter name is required');

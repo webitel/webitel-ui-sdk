@@ -1,48 +1,39 @@
+import set from 'lodash/set';
 import {
   queryToSortAdapter,
-  SortSymbols,
   sortToQueryAdapter,
 } from '../../../scripts/sortQueryAdapters';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
+import FilterEvent from '../../Filters/enums/FilterEvent.enum';
 
 export default class TableStoreModule extends BaseStoreModule {
   state = {
     headers: [],
     dataList: [],
+    selected: [],
     error: {},
     isLoading: false,
     isNextPage: false,
   };
 
   getters = {
-    PARENT_ID: () => null,
+    PARENT_ID: () => null, // override me
 
-    GET_FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
+    // FIXME
+    FILTERS: (state, getters) => getters['filters/GET_FILTERS'], // override me, if necessary
 
-    // required fields to send as "fields" param with GET_LIST
-    REQUIRED_FIELDS: () => ['id'],
+    FIELDS: (state) => {
+      const fields = state.headers.reduce(fields, ({ show }) => {
+        if (show) return [...fields, show];
+        return fields;
+      }, []);
 
-    FIELDS: (state, getters) => {
-      const filtersFields = getters.GET_FILTERS.filters;
-
-      const defaultFields = state.headers.filter((header) => header.show)
-      .map((header) => header.field);
-
-      const getFieldsByFieldValues = (values) => {
-        values.map((passedValue) => state.headers.find(({ value }) => passedValue
-          === value).field);
-      };
-
-      return [
-        ...new Set(filtersFields
-          ? getFieldsByFieldValues(filtersFields)
-          : defaultFields),
-      ].concat(getters.REQUIRED_FIELDS);
+      return [...new Set(['id', ...fields])];
     },
 
     // main GET_LIST params collector
-    GET_LIST_PARAMS: (state, getters) => (overrideFilters) => {
-      const filters = getters.GET_FILTERS;
+    GET_LIST_PARAMS: (state, getters) => (overrides) => {
+      const filters = getters.FILTERS;
       const fields = getters.FIELDS;
       const parentId = getters.PARENT_ID;
 
@@ -50,43 +41,85 @@ export default class TableStoreModule extends BaseStoreModule {
         parentId,
         ...filters,
         fields,
-        ...overrideFilters,
+        ...overrides,
       };
     },
   };
 
   actions = {
+    // FIXME override me, if necessary
+    SET_FILTER: (
+      context,
+      payload,
+    ) => context.dispatch('filters/SET_FILTER', payload),
+
+    // FIXME
+    ON_FILTER_EVENT: async (context, { event, payload }) => {
+      switch (event) {
+        case FilterEvent.RESTORED:
+          return context.dispatch('LOAD_DATA_LIST');
+
+        case FilterEvent.FILTER_SET:
+          if (payload.name === 'fields') {
+            const headers = context.state.headers.map((header) => ({
+              ...header,
+              show: payload.value.includes(header.value),
+            }));
+            context.commit('SET', { path: 'headers', value: headers });
+          }
+
+          if (payload.name === 'sort') {
+            const nextSort = queryToSortAdapter(payload.value.slice(0, 1));
+            const field = nextSort ? payload.value.slice(1) : payload.value;
+
+            const headers = context.state.headers.map(({
+                                                         sort: currentSort,
+                                                         ...header
+                                                       }) => {
+              const sort = field === header.field ? nextSort : currentSort;
+              return { ...header, sort };
+            });
+
+            if (payload.value !== 'page') {
+              await context.dispatch('filters/SET_FILTER', {
+                name: 'page',
+                value: 1,
+                silent: true,
+              });
+              }
+            }
+
+            context.commit('SET', { path: 'headers', value: headers });
+
+          return context.dispatch('LOAD_DATA_LIST');
+        default:
+          throw new Error(`Unknown filter event: ${event}`);
+      }
+    },
+
+    // FIXME
+    HANDLE_FILTERS_RESTORE: () => {},
+
+    // FIXME
+    HANDLE_FILTER_SET: () => {},
+
+    // FIXME
+    HANDLE_FIELDS_CHANGE: () => {},
+
+    // FIXME
+    HANDLE_SORT_CHANGE: () => {},
+
     LOAD_DATA_LIST: async (context, query) => {
-      /*
-  https://my.webitel.com/browse/WTEL-3560
-  preventively disable isNext to handle case when user is clicking
-   "next" faster than actual request is made
- */
-      context.commit('SET_IS_NEXT', false);
+      context.commit('SET_LOADING', true);
+      context.commit('SET_IS_NEXT', false); // [WTEL-3560]
 
       const params = context.getters.GET_LIST_PARAMS(query);
       try {
-        context.commit('SET_LOADING', true);
         let {
           items = [],
           next = false,
         } = await context.dispatch('api/GET_LIST', { context, params });
 
-        /* [https://my.webitel.com/browse/WTEL-3793]
-        * When deleting the last item from list,
-        * if there are other items on the previous page, you need to go back */
-        if (!items.length && params.page > 1) {
-          return context.dispatch('filters/SET_FILTER', {
-            filter: 'page',
-            value: params.page - 1,
-          });
-        }
-
-        /* we should set _isSelected property to all items in tables cause their checkbox selection
-        * is based on this property. Previously, this prop was set it api consumers, but now
-        * admin-specific were replaced by webitel-sdk consumers and i supposed it will be
-        * weird to set this property in each api file through defaultListObject */
-        items = items.map((item) => ({ ...item, _isSelected: false }));
         context.commit('SET_DATA_LIST', items);
         context.commit('SET_IS_NEXT', next);
       } catch (err) {
@@ -95,14 +128,7 @@ export default class TableStoreModule extends BaseStoreModule {
         context.commit('SET_LOADING', false);
       }
     },
-    SET_HEADERS: (context, headers) => context.commit('SET_HEADERS', headers),
-    RESTORE_FIELDS_FROM_FILTER: (context, { value }) => {
-      const headers = context.state.headers.map((header) => ({
-        ...header,
-        show: value.includes(header.value),
-      }));
-      return context.dispatch('SET_HEADERS', headers);
-    },
+
     SORT: async (context, { header, nextSortOrder }) => {
       const sort = nextSortOrder
         ? `${sortToQueryAdapter(nextSortOrder)}${header.field}`
@@ -113,33 +139,21 @@ export default class TableStoreModule extends BaseStoreModule {
       });
       await context.dispatch('UPDATE_HEADER_SORT', { header, nextSortOrder });
     },
-    RESTORE_SORT_FROM_FILTER: (context, { value }) => {
-      const sort = queryToSortAdapter(value.slice(0, 1));
-      const field = sort ? value.slice(1) : value;
-      return context.dispatch('UPDATE_HEADER_SORT', {
-        header: { field },
-        nextSortOrder: sort,
-      });
-    },
-    UPDATE_HEADER_SORT: (context, { header, nextSortOrder }) => {
-      const headers = context.state.headers.map((oldHeader) => {
-        const sortFieldValue = oldHeader?.sort;
-        return {
-          ...oldHeader,
-          sort: oldHeader.field === header.field
-            ? nextSortOrder
-            : sortFieldValue,
-        };
-      });
-      context.commit('SET_HEADERS', headers);
-    },
+
     PATCH_ITEM_PROPERTY: async (context, {
-      item, index, prop, value,
+      item: _item, index, prop, value,
     }) => {
-      await context.commit('PATCH_ITEM_PROPERTY', { index, prop, value });
-      const id = item?.id || context.state.dataList[index].id;
-      const { etag } = item;
+      const item = _item || context.state.dataList[index];
+
+      const { id, etag } = item;
+
+      context.commit('PATCH_ITEM_PROPERTY', {
+        path: `dataList[${index}].${prop}`,
+        value,
+      });
+
       const changes = { [prop]: value };
+
       try {
         await context.dispatch('api/PATCH_ITEM', {
           context,
@@ -147,14 +161,12 @@ export default class TableStoreModule extends BaseStoreModule {
           etag,
           changes,
         });
-        context.commit('PATCH_ITEM_PROPERTY', {
-          item, index, prop, value,
-        });
       } catch (err) {
         await context.dispatch('LOAD_DATA_LIST');
         throw err;
       }
     },
+
     DELETE: async (context, deleted) => {
       let action = 'DELETE_SINGLE';
       if (Array.isArray(deleted)) {
@@ -167,8 +179,17 @@ export default class TableStoreModule extends BaseStoreModule {
         throw err;
       } finally {
         await context.dispatch('LOAD_DATA_LIST');
+
+        /* if no items on current page after DELETE, move to prev page [WTEL-3793] */
+        if (!context.items.length && context.getters.FILTERS.page > 1) {
+          await context.dispatch('SET_FILTER', {
+            name: 'page',
+            value: context.getters.FILTERS.page - 1,
+          });
+        }
       }
     },
+
     DELETE_SINGLE: async (context, { id, etag }) => {
       try {
         await context.dispatch('api/DELETE_ITEM', { context, id, etag });
@@ -176,30 +197,20 @@ export default class TableStoreModule extends BaseStoreModule {
         throw err;
       }
     },
+
     DELETE_BULK: async (
       context,
       deleted,
     ) => Promise.allSettled(deleted.map((item) => context.dispatch('DELETE_SINGLE', item))),
+
+    SET_SELECTED: (context, selected) => {
+      context.commit('SET', { path: 'selected', value: selected });
+    },
   };
 
   mutations = {
-    SET_DATA_LIST: (state, items) => {
-      state.dataList = items;
-    },
-    SET_IS_NEXT: (state, next) => {
-      state.isNextPage = next;
-    },
-    SET_HEADERS: (state, headers) => {
-      state.headers = headers;
-    },
-    PATCH_ITEM_PROPERTY: (state, { index, prop, value }) => {
-      state.dataList[index][prop] = value;
-    },
-    SET_LOADING: (state, value) => {
-      state.isLoading = value;
-    },
-    SET_ERROR: (state, value) => {
-      state.error = value;
+    SET: (state, { path, value }) => {
+      return set(state, path, value);
     },
   };
 
