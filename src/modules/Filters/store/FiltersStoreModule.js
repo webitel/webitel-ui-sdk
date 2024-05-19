@@ -39,7 +39,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
     }) => {
       const filter = context.state[name];
 
-      filter.set(value);
+      await filter.set(value);
 
       if (!silent) await context.dispatch('EMIT', {
         event: FilterEvent.FILTER_SET,
