@@ -95,16 +95,16 @@ describe('FiltersStoreModule', () => {
           name: 'vi',
           value: 1,
           router,
-          get: function() {
-            return valueGetter(this)();
+          get: (context) => () => {
+            return valueGetter(context)();
           },
-          set: async function(v) {
-            valueSetter(this)(v);
-            await querySetter(this)(router)(v);
-            return this;
+          set: (context) => async (v) => {
+            valueSetter(context)(v);
+            await querySetter(context)(router)(v);
+            return context;
           },
-          restore: function() {
-            return queryRestore(this)(router)();
+          restore: (context) => () => {
+            return queryRestore(context)(router)();
           },
         }),
       },

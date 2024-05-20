@@ -1,4 +1,4 @@
-import changeRouteQuery from '../changeRouteQuery';
+import changeRouteQuery from '../utils/changeRouteQuery';
 
 const isObject = (value) => typeof value === 'object' &&
   !Array.isArray(value) && value !== null;
