@@ -1,11 +1,12 @@
-import Emitter from 'tiny-emitter';
+import mitt from 'mitt';
 import isEmpty from '../../../scripts/isEmpty';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
+import BaseFilterSchema from '../classes/BaseFilterSchema';
 import FilterEvent from '../enums/FilterEvent.enum';
 
 export default class FiltersStoreModule extends BaseStoreModule {
   state = {
-    _emitter: new Emitter(),
+    _emitter: mitt(),
   };
 
   getters = {
@@ -21,7 +22,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
     },
 
     // get all filters values
-    GET_FILTERS: (state, getters) => context.getters._STATE_FILTER_NAMES
+    GET_FILTERS: (state, getters) => getters._STATE_FILTER_NAMES
     .reduce((values, filterName) => {
       const filterValue = getters.GET_FILTER(filterName);
       return isEmpty(filterValue) ? filters : {
@@ -58,6 +59,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
         await context.dispatch('SET_FILTER', ({
           name,
           value,
+          silent: true,
         }));
       }
     },
@@ -85,15 +87,44 @@ export default class FiltersStoreModule extends BaseStoreModule {
     ),
 
     SUBSCRIBE: (context, { event, callback }) => {
-      return context.state._emitter.on(event, callback);
+      const subscribe = () => context.state._emitter.on(event, callback);
+      if (Array.isArray(event)) event.forEach((e) => subscribe(e, callback));
+      else subscribe(event, callback);
     },
 
-    UNSUBSCRIBE: (context, { event, callback }) => {
-      return context.state._emitter.off(event, callback);
+    FLUSH_SUBSCRIBERS: (context) => {
+      return context.state._emitter.off('*');
     },
 
-    EMIT: (context, { event, payload }) => {
-      return context.state._emitter.emit(event, payload);
+    EMIT: async (context, { event, payload }) => {
+      return new Promise(async (resolve, reject) => {
+        const listeners = context.state._emitter.all.get(event);
+
+        if (!listeners) {
+          console.info(`No listeners for ${event} event`);
+          resolve();
+        }
+
+        try {
+          for (const listener of listeners) {
+            await listener({ event, payload });
+          }
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+      });
     },
   };
-}
+
+  addFilter(filter) {
+    const setup = (filter) => {
+      this.state[filter.name] = new BaseFilterSchema(filter);
+    };
+
+    if (Array.isArray(filter)) filter.forEach((f) => setup(f));
+    else setup(filter);
+
+    return this;
+  }
+};

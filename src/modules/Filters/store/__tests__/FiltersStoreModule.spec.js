@@ -1,29 +1,22 @@
-import { createStore } from 'vuex';
 import { createRouter, createWebHistory } from 'vue-router';
-import { localStorageRestore, queryRestore } from '../../scripts/restores';
-import FiltersStoreModule from '../FiltersStoreModule';
-import BaseFilterSchema from '../../classes/BaseFilterSchema';
+import { createStore } from 'vuex';
 import { valueGetter } from '../../scripts/getters';
-import {
-  localStorageSetter,
-  querySetter,
-  valueSetter,
-} from '../../scripts/setters';
+import { queryRestore } from '../../scripts/restores';
+import { querySetter, valueSetter } from '../../scripts/setters';
+import FiltersStoreModule from '../FiltersStoreModule';
 
 describe('FiltersStoreModule', () => {
   it('get/sets primitive type filter', async () => {
-    const filters = new FiltersStoreModule().getModule({
-      state: {
-        vi: new BaseFilterSchema({
-          name: 'vi',
-          value: 1,
-          defaultValue: 1,
-          get: ['value'],
-          set: ['value'],
-          restore: [],
-        }),
+    const filters = new FiltersStoreModule().addFilter([
+      {
+        name: 'vi',
+        value: 1,
+        defaultValue: 1,
+        get: ['value'],
+        set: ['value'],
+        restore: [],
       },
-    });
+    ]).getModule();
 
     const store = createStore({
       modules: {
@@ -44,18 +37,16 @@ describe('FiltersStoreModule', () => {
   it('sets/restores primitive type filter', async () => {
     const localStorageKey = 'vivivi';
 
-    const filters = new FiltersStoreModule().getModule({
-      state: {
-        vi: new BaseFilterSchema({
-          name: 'vi',
-          value: 1,
-          localStorageKey,
-          get: ['value'],
-          set: ['value', 'localStorage'],
-          restore: ['localStorage'],
-        }),
-      },
-    });
+    const filters = new FiltersStoreModule()
+    .addFilter({
+      name: 'vi',
+      value: 1,
+      localStorageKey,
+      get: ['value'],
+      set: ['value', 'localStorage'],
+      restore: ['localStorage'],
+    })
+    .getModule();
 
     const store = createStore({
       modules: {
@@ -89,26 +80,23 @@ describe('FiltersStoreModule', () => {
 
     await router.push({ name: 'home' });
 
-    const filters = new FiltersStoreModule().getModule({
-      state: {
-        vi: new BaseFilterSchema({
-          name: 'vi',
-          value: 1,
-          router,
-          get: (context) => () => {
-            return valueGetter(context)();
-          },
-          set: (context) => async (v) => {
-            valueSetter(context)(v);
-            await querySetter(context)(router)(v);
-            return context;
-          },
-          restore: (context) => () => {
-            return queryRestore(context)(router)();
-          },
-        }),
+    const filters = new FiltersStoreModule()
+    .addFilter({
+      name: 'vi',
+      value: 1,
+      get: (context) => () => {
+        return valueGetter(context)();
       },
-    });
+      set: (context) => async (v) => {
+        valueSetter(context)(v);
+        await querySetter(context)(router)(v);
+        return context;
+      },
+      restore: (context) => () => {
+        return queryRestore(context)(router)();
+      },
+    })
+    .getModule();
 
     const store = createStore({
       modules: {
@@ -140,18 +128,16 @@ describe('FiltersStoreModule', () => {
 
     await router.push({ name: 'home' });
 
-    const filters = new FiltersStoreModule().getModule({
-      state: {
-        vi: new BaseFilterSchema({
-          name: 'vi',
-          value: 1,
-          router,
-          get: ['value'],
-          set: ['value', 'query'],
-          restore: ['query'],
-        }),
-      },
-    });
+    const filters = new FiltersStoreModule()
+    .addFilter({
+      name: 'vi',
+      value: 1,
+      get: ['value'],
+      set: ['value', 'query'],
+      restore: ['query'],
+      router,
+    })
+    .getModule();
 
     const store = createStore({
       modules: {

@@ -5,7 +5,6 @@ import {
 } from '../../../scripts/sortQueryAdapters';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 import FilterEvent from '../../Filters/enums/FilterEvent.enum';
-import FilterSearch from '../../QueryFilters/components/filter-search.vue';
 
 export default class TableStoreModule extends BaseStoreModule {
   state = {
@@ -20,12 +19,12 @@ export default class TableStoreModule extends BaseStoreModule {
   getters = {
     PARENT_ID: () => null, // override me
 
-    // FIXME
-    FILTERS: (state, getters) => getters['filters/GET_FILTERS'], // override me, if necessary
+    // FIXME: maybe move to filters module?
+    FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
 
     FIELDS: (state) => {
-      const fields = state.headers.reduce(fields, ({ show }) => {
-        if (show) return [...fields, show];
+      const fields = state.headers.reduce((fields, { show, field }) => {
+        if (show) return [...fields, field];
         return fields;
       }, []);
 
@@ -48,71 +47,77 @@ export default class TableStoreModule extends BaseStoreModule {
   };
 
   actions = {
-    // FIXME override me, if necessary
+    // FIXME: maybe move to filters module?
     SET_FILTER: (
       context,
       payload,
     ) => context.dispatch('filters/SET_FILTER', payload),
 
-    // FIXME
+    // FIXME: maybe move to filters module?
     ON_FILTER_EVENT: async (context, { event, payload }) => {
       switch (event) {
         case FilterEvent.RESTORED:
-          return context.dispatch('LOAD_DATA_LIST');
-
+          return context.dispatch('HANDLE_FILTERS_RESTORE', payload);
         case FilterEvent.FILTER_SET:
-          if (payload.name === 'fields') {
-            const headers = context.state.headers.map((header) => ({
-              ...header,
-              show: payload.value.includes(header.value),
-            }));
-            context.commit('SET', { path: 'headers', value: headers });
-          }
-
-          if (payload.name === 'sort') {
-            const nextSort = queryToSortAdapter(payload.value.slice(0, 1));
-            const field = nextSort ? payload.value.slice(1) : payload.value;
-
-            const headers = context.state.headers.map(({
-                                                         sort: currentSort,
-                                                         ...header
-                                                       }) => {
-              const sort = field === header.field ? nextSort : currentSort;
-              return { ...header, sort };
-            });
-
-            if (payload.value !== 'page') {
-              await context.dispatch('filters/SET_FILTER', {
-                name: 'page',
-                value: 1,
-                silent: true,
-              });
-              }
-            }
-
-            context.commit('SET', { path: 'headers', value: headers });
-
-          return context.dispatch('LOAD_DATA_LIST');
+          return context.dispatch('HANDLE_FILTER_SET', payload);
         default:
           throw new Error(`Unknown filter event: ${event}`);
       }
     },
 
-    // FIXME
-    HANDLE_FILTERS_RESTORE: () => {},
+    // FIXME: maybe move to filters module?
+    HANDLE_FILTERS_RESTORE: (context) => {
+      return context.dispatch('LOAD_DATA_LIST');
+    },
 
-    // FIXME
-    HANDLE_FILTER_SET: () => {},
+    // FIXME: maybe move to filters module?
+    HANDLE_FILTER_SET: async (context, payload) => {
+      if (payload.name === 'fields') {
+        await context.dispatch('HANDLE_FIELDS_CHANGE', payload);
+      } else if (payload.name === 'sort') {
+        await context.dispatch('HANDLE_SORT_CHANGE', payload);
+      }
 
-    // FIXME
-    HANDLE_FIELDS_CHANGE: () => {},
+      if (context.getters.FILTERS.page && payload.value !== 'page') {
+        await context.dispatch('SET_FILTER', {
+          name: 'page',
+          value: 1,
+          silent: true,
+        });
+      }
 
-    // FIXME
-    HANDLE_SORT_CHANGE: () => {},
+      return context.dispatch('LOAD_DATA_LIST');
+    },
+
+    // FIXME: maybe move to filters module?
+    HANDLE_FIELDS_CHANGE: (context, payload) => {
+      const headers = context.state.headers.map((header) => ({
+        ...header,
+        show: payload.value.includes(header.value),
+      }));
+
+      context.commit('SET', { path: 'headers', value: headers });
+    },
+
+    // FIXME: maybe move to filters module?
+    HANDLE_SORT_CHANGE: (context, payload) => {
+      const nextSort = queryToSortAdapter(payload.value.slice(0, 1));
+      const field = nextSort ? payload.value.slice(1) : payload.value;
+
+      const headers = context.state.headers.map(({
+                                                   sort: currentSort,
+                                                   ...header
+                                                 }) => {
+        const sort = field === header.field ? nextSort : currentSort;
+        return { ...header, sort };
+      });
+
+      context.commit('SET', { path: 'headers', value: headers });
+    },
 
     LOAD_DATA_LIST: async (context, query) => {
-      context.commit('SET_LOADING', true);
-      context.commit('SET_IS_NEXT', false); // [WTEL-3560]
+      context.commit('SET', { path: 'isLoading', value: true });
+      context.commit('SET', { path: 'isNextPage', value: false }); // [WTEL-3560]
 
       const params = context.getters.GET_LIST_PARAMS(query);
       try {
@@ -121,24 +126,25 @@ export default class TableStoreModule extends BaseStoreModule {
           next = false,
         } = await context.dispatch('api/GET_LIST', { context, params });
 
-        context.commit('SET_DATA_LIST', items);
-        context.commit('SET_IS_NEXT', next);
+        context.commit('SET', { path: 'dataList', value: items });
+        context.commit('SET', { path: 'isNextPage', value: next });
       } catch (err) {
-        context.commit('SET_ERROR', err);
+        context.commit('SET', { path: 'error', value: err });
+        throw err;
       } finally {
-        context.commit('SET_LOADING', false);
+        context.commit('SET', { path: 'isLoading', value: false });
       }
     },
 
-    SORT: async (context, { header, nextSortOrder }) => {
+    // FIXME: maybe move to filters module?
+    SORT: (context, { header, nextSortOrder }) => {
       const sort = nextSortOrder
         ? `${sortToQueryAdapter(nextSortOrder)}${header.field}`
         : nextSortOrder;
-      await context.dispatch('filters/SET_FILTER', {
-        filter: 'sort',
+      return context.dispatch('SET_FILTER', {
+        name: 'sort',
         value: sort,
       });
-      await context.dispatch('UPDATE_HEADER_SORT', { header, nextSortOrder });
     },
 
     PATCH_ITEM_PROPERTY: async (context, {
@@ -148,7 +154,7 @@ export default class TableStoreModule extends BaseStoreModule {
 
       const { id, etag } = item;
 
-      context.commit('PATCH_ITEM_PROPERTY', {
+      context.commit('SET', {
         path: `dataList[${index}].${prop}`,
         value,
       });
@@ -220,7 +226,3 @@ export default class TableStoreModule extends BaseStoreModule {
     this.state.headers = headers;
   }
 }
-
-new TableStoreModule().setExtension(FiltersSm.EXT).getModule({
-
-});

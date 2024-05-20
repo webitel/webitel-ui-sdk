@@ -81,7 +81,7 @@ export default class BaseFilterSchema {
                 ...rest
               } = {}) {
     if (!name) throw new Error('Filter name is required');
-    if (!value) throw new Error(`Filter value is required: ${name}`);
+    if (value === undefined) throw new Error(`Filter value is required: ${name}`);
 
     if (!get) throw new Error(`Filter getter is required: ${name}`);
     if (!set) throw new Error(`Filter setter is required: ${name}`);
