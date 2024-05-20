@@ -34,26 +34,26 @@ const store = useStore();
 
 const localSize = ref(0);
 
-const page = computed(() => getNamespacedState(store.state, props.namespace)[pageFilterName].value);
-const size = computed(() => getNamespacedState(store.state, props.namespace)[sizeFilterName].value);
+const page = computed(() => store.getters[`${props.namespace}/GET_FILTER`](pageFilterName));
+const size = computed(() => store.getters[`${props.namespace}/GET_FILTER`](sizeFilterName));
 
 function setFilter(payload) {
   return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
 }
 
 function setPage(value) {
-  return setFilter({ value, filter: pageFilterName });
+  return setFilter({ value, name: pageFilterName });
 }
 
 function setSize(value) {
   if (value === size.value) return;
-  // eslint-disable-next-line consistent-return
-  return setFilter({ value, filter: sizeFilterName });
+  return setFilter({ value, name: sizeFilterName });
 }
 
-watch(size, () => {
-  localSize.value = size.value;
-}, { immediate: true });
+// TF?
+// watch(size, () => {
+//   localSize.value = size.value;
+// }, { immediate: true });
 </script>
 
 <style lang="scss" scoped>
