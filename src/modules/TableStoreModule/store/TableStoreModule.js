@@ -5,6 +5,7 @@ import {
 } from '../../../scripts/sortQueryAdapters';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 import FilterEvent from '../../Filters/enums/FilterEvent.enum';
+import FilterSearch from '../../QueryFilters/components/filter-search.vue';
 
 export default class TableStoreModule extends BaseStoreModule {
   state = {
@@ -219,3 +220,7 @@ export default class TableStoreModule extends BaseStoreModule {
     this.state.headers = headers;
   }
 }
+
+new TableStoreModule().setExtension(FiltersSm.EXT).getModule({
+
+});

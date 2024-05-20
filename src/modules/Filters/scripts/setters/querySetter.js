@@ -17,25 +17,25 @@ const handleArray = ({ value, storedProp }) => {
   }
 };
 
-function querySetter(router) {
-  return function() {
-    const { value: rawValue, name: filterQuery, storedProp } = this;
+const querySetter = (context) => (router) => async (rawValue = context.value) => {
+  const { name: filterQuery, storedProp } = this;
 
-    let value = '';
+  let value = '';
 
-    if (Array.isArray(rawValue)) {
-      value = handleArray({ value: rawValue, storedProp });
-    } else if (isObject(rawValue)) {
-      value = handleObject({ value: rawValue, storedProp });
-    } else {
-      value = handlePrimitive({ value });
-    }
-
-    return changeRouteQuery(router)({
-      filterQuery,
-      value,
-    });
+  if (Array.isArray(rawValue)) {
+    value = handleArray({ value: rawValue, storedProp });
+  } else if (isObject(rawValue)) {
+    value = handleObject({ value: rawValue, storedProp });
+  } else {
+    value = handlePrimitive({ value });
   }
-}
+
+  await changeRouteQuery(router)({
+    filterQuery,
+    value,
+  });
+
+  return context;
+};
 
 export default querySetter;

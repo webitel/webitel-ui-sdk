@@ -59,9 +59,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
           name,
           value,
         }));
-        return true;
       }
-      return false;
     },
 
     RESTORE_FILTERS: async (context) => {
@@ -83,7 +81,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
           filter,
           value: filter.defaultValue,
         });
-      })
+      }),
     ),
 
     SUBSCRIBE: (context, { event, callback }) => {

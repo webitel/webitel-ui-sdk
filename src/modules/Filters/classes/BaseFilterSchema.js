@@ -46,15 +46,15 @@ export default class BaseFilterSchema {
 
       getter = () => {
         if (getters.includes('value')) {
-          const value = valueGetter.bind(this)();
+          const value = valueGetter(this)();
           if (value) return value;
         }
         if (getters.includes('query')) {
-          const value = queryGetter(router).bind(this);
+          const value = queryGetter(this)(router)();
           if (value) return value;
         }
         if (getters.includes('localStorage')) {
-          const value = localStorageGetter.bind(this)();
+          const value = localStorageGetter(this)();
           if (value) return value;
         }
 
@@ -62,7 +62,7 @@ export default class BaseFilterSchema {
 
         return undefined;
       };
-    } else if (typeof getter === 'function') {
+    } else if (typeof getters === 'function') {
       getter = getters;
     } else {
       throw new Error('Getter should be a function or an array of available getters');
@@ -82,13 +82,13 @@ export default class BaseFilterSchema {
       });
 
       setter = async (value) => {
-        if (setters.includes('value')) valueSetter.bind(this)(value);
-        if (setters.includes('query')) await querySetter(router).bind(this);
-        if (setters.includes('localStorage')) localStorageSetter.bind(this)(value);
+        if (setters.includes('value')) valueSetter(this)(value);
+        if (setters.includes('query')) await querySetter(this)(router)(value);
+        if (setters.includes('localStorage')) localStorageSetter(this)(value);
 
         return this;
       };
-    } else if (typeof setter === 'function') {
+    } else if (typeof setters === 'function') {
       setter = setters;
     } else {
       throw new Error('Setter should be a function or an array of available setters');
@@ -109,16 +109,16 @@ export default class BaseFilterSchema {
 
       restore = () => {
         if (restores.includes('query')) {
-          const restoredValue = queryRestore.bind(this)(router)();
+          const restoredValue = queryRestore(this)(router)();
           if (restoredValue) return restoredValue;
         }
 
         if (restores.includes('localStorage')) {
-          const restoredValue = localStorageRestore.bind(this)();
+          const restoredValue = localStorageRestore(this)();
           if (restoredValue) return restoredValue;
         }
       };
-    } else if (typeof restore === 'function') {
+    } else if (typeof restores === 'function') {
       restore = restores;
     } else {
       throw new Error('Restore should be a function or an array of available restores');

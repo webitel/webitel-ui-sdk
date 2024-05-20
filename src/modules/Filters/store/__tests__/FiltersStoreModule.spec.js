@@ -18,9 +18,9 @@ describe('FiltersStoreModule', () => {
           name: 'vi',
           value: 1,
           defaultValue: 1,
-          get: valueGetter,
-          set: valueSetter,
-          restore: () => {},
+          get: ['value'],
+          set: ['value'],
+          restore: [],
         }),
       },
     });
@@ -50,12 +50,9 @@ describe('FiltersStoreModule', () => {
           name: 'vi',
           value: 1,
           localStorageKey,
-          get: valueGetter,
-          set: function(v) {
-            valueSetter.bind(this)(v);
-            return localStorageSetter.bind(this)(v);
-          },
-          restore: localStorageRestore,
+          get: ['value'],
+          set: ['value', 'localStorage'],
+          restore: ['localStorage'],
         }),
       },
     });
@@ -92,20 +89,23 @@ describe('FiltersStoreModule', () => {
 
     await router.push({ name: 'home' });
 
-    const _qSetter = querySetter(router);
-
     const filters = new FiltersStoreModule().getModule({
       state: {
         vi: new BaseFilterSchema({
           name: 'vi',
           value: 1,
           router,
-          get: valueGetter,
-          set: function(v) {
-            valueSetter.bind(this)(v);
-            return _qSetter.bind(this)(v);
+          get: function() {
+            return valueGetter(this)();
           },
-          restore: queryRestore(router),
+          set: async function(v) {
+            valueSetter(this)(v);
+            await querySetter(this)(router)(v);
+            return this;
+          },
+          restore: function() {
+            return queryRestore(this)(router)();
+          },
         }),
       },
     });
