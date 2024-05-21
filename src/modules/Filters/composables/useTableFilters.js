@@ -9,9 +9,8 @@ export const useTableFilters = (namespace) => {
     return store.dispatch(`${filtersNamespace}/RESTORE_FILTERS`, payload);
   }
 
-  restoreFilters();
-
   return {
-    filtersNamespace,
+    namespace: filtersNamespace,
+    restoreFilters,
   };
 };
