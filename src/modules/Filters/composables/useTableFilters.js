@@ -5,6 +5,14 @@ export const useTableFilters = (namespace) => {
 
   const filtersNamespace = `${namespace}/filters`;
 
+  function subscribe(payload) {
+    return store.dispatch(`${filtersNamespace}/SUBSCRIBE`, payload);
+  }
+
+  function flushSubscribers(payload) {
+    return store.dispatch(`${filtersNamespace}/FLUSH_SUBSCRIBERS`, payload);
+  }
+
   function restoreFilters(payload) {
     return store.dispatch(`${filtersNamespace}/RESTORE_FILTERS`, payload);
   }
@@ -12,5 +20,8 @@ export const useTableFilters = (namespace) => {
   return {
     namespace: filtersNamespace,
     restoreFilters,
+
+    subscribe,
+    flushSubscribers,
   };
 };
