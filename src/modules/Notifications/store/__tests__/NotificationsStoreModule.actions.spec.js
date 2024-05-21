@@ -69,7 +69,7 @@ describe('features/notifications store: actions', () => {
   it('_SUBSCRIBE_TAB_CLOSING action commits SET_CURRENT_TAB_ID mutation', async () => {
     await notificationsModule.actions._SUBSCRIBE_TAB_CLOSING(context);
     window.dispatchEvent(new Event('storage'));
-    expect(context.commit).toHaveBeenCalledWith('SET_CURRENT_TAB_ID', null);
+    expect(context.commit).toHaveBeenCalledWith('SET_CURRENT_TAB_ID', 'null');
   });
 
   it('PLAY_SOUND action commits SET_CURRENTLY_PLAYING mutation with sound', async () => {
