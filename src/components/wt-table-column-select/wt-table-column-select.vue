@@ -10,7 +10,7 @@
       {{ $t('webitelUI.tableColumnSelect.title') }}
     </wt-tooltip>
     <wt-popup
-      v-if="isColumnSelectPopup"
+      :shown="isColumnSelectPopup"
       class="wt-table-column-select__popup"
       @close="close"
     >
