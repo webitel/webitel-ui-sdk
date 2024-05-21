@@ -1,7 +1,8 @@
 <template>
   <wt-popup
     class="delete-confirmation-popup"
-    width="500"
+    v-bind="attrs"
+    size="sm"
     @close="close"
   >
     <template #title>
@@ -37,7 +38,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
@@ -54,6 +55,8 @@ const props = defineProps({
 const emit = defineEmits([
  'close',
 ]);
+
+const attrs = useAttrs();
 
 const { t } = useI18n();
 
