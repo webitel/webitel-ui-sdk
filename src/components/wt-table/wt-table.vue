@@ -63,8 +63,8 @@
             class="wt-table__td wt-table__td--checkbox"
           >
             <wt-checkbox
-              :selected="row._isSelected"
-              @change="row._isSelected = !row._isSelected"
+              :selected="_selected.includes(row)"
+              @change="handleSelection(row, $event)"
             />
           </td>
 
@@ -147,17 +147,30 @@ export default {
       type: Boolean,
       default: true,
     },
+    selected: {
+      type: Array,
+      // no default! because we need to know if it's passed or not
+    },
     gridActions: {
       type: Boolean,
       default: true,
     },
   },
+  emits: [
+    'sort',
+    'update:selected',
+  ],
 
   data: () => ({}),
 
   computed: {
+    _selected() {
+      // _isSelected for backwards compatibility
+      return this.selected || this.data.filter((item) => item._isSelected);
+    },
+
     isAllSelected() {
-      return this.data.every((item) => item._isSelected);
+      return this._selected.length === this.data.length && this.data.length > 0;
     },
 
     dataHeaders() {
@@ -206,11 +219,33 @@ export default {
       return this.sortable && sort !== undefined;
     },
     selectAll() {
-      const { isAllSelected } = this;
-      // eslint-disable-next-line no-param-reassign,no-return-assign
-      this.data.forEach((item) => item._isSelected = !isAllSelected);
+      if (this.selected) {
+        if (this.isAllSelected) {
+          this.$emit('update:selected', []);
+        } else {
+          this.$emit('update:selected', [...this.data]);
+        }
+      } else {
+        // for backwards compatibility
+        this.data.forEach((item) => {
+          item._isSelected = !this.isAllSelected;
+        });
+      }
     },
+    handleSelection(row, remove) {
+      if (this.selected) {
+        if (remove) {
+          this.$emit('update:selected', this._selected.filter((item) => item !== row));
+        } else {
+          this.$emit('update:selected', [...this._selected, row]);
+        }
+      } else {
+        // for backwards compatibility
+        row._isSelected = !row._isSelected;
+      }
+    }
   },
+
 };
 </script>
 
