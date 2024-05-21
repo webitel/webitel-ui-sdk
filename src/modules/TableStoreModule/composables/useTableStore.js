@@ -24,6 +24,10 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/LOAD_DATA_LIST`, payload);
   }
 
+  function onFilterEvent(payload) {
+    return store.dispatch(`${tableNamespace}/ON_FILTER_EVENT`, payload);
+  }
+
   function patchProperty(payload) {
     return store.dispatch(`${tableNamespace}/PATCH_ITEM_PROPERTY`, payload);
   }
@@ -54,6 +58,7 @@ export const useTableStore = (namespace) => {
     error,
 
     loadData,
+    onFilterEvent,
     patchProperty,
     deleteData,
     sort,
