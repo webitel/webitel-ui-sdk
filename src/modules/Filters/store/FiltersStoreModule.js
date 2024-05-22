@@ -31,7 +31,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
       if (state._requireRouter && !getters.ROUTER) return filter.defaultValue;
 
       return filter.get({
-        router: this.getters.ROUTER,
+        router: getters.ROUTER,
       });
     },
 
