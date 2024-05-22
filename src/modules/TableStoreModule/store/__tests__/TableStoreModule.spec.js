@@ -1,3 +1,4 @@
+import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
 import { SortSymbols } from '../../../../scripts/sortQueryAdapters';
 import FilterEvent from '../../../Filters/enums/FilterEvent.enum';
@@ -20,6 +21,11 @@ describe('TableStoreModule', () => {
 });
 
 describe('TableStoreModule integration with FiltersStoreModule', () => {
+  const router = createRouter({
+    history: createWebHistory(),
+    routes: [],
+  });
+
   it('filters restore event triggers LOAD_DATA_LIST', async () => {
     const filters = new FiltersStoreModule()
     .addFilter({
@@ -42,6 +48,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
     .mockImplementationOnce(mock);
 
     const store = createStore({
+      state: { router },
       modules: { table },
     });
 
@@ -79,6 +86,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
     .mockImplementationOnce(mock);
 
     const store = createStore({
+      state: { router },
       modules: { table },
     });
 
@@ -130,6 +138,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
     .mockImplementationOnce(vi.fn());
 
     const store = createStore({
+      state: { router },
       modules: { table },
     });
 
@@ -174,6 +183,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
     .mockImplementationOnce(vi.fn());
 
     const store = createStore({
+      state: { router },
       modules: { table },
     });
 
@@ -219,6 +229,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
     .mockImplementationOnce(vi.fn());
 
     const store = createStore({
+      state: { router },
       modules: { table },
     });
 

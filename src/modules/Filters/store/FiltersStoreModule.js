@@ -7,9 +7,19 @@ import FilterEvent from '../enums/FilterEvent.enum';
 export default class FiltersStoreModule extends BaseStoreModule {
   state = {
     _emitter: mitt(),
+    _requireRouter: false,
   };
 
   getters = {
+    ROUTER: (state, g, rootState) => {
+      if (!state._requireRouter) return null;
+      if (rootState.router === undefined) {
+        throw new Error('"rootState.router" is needed for filters to work properly.' +
+          ' Please, provide to root state, or setup it in filters module as getter "ROUTER"');
+      }
+      return rootState.router;
+    },
+
     _STATE_FILTER_NAMES: (state) => Object.keys(state)
     .filter((key) => !key.startsWith('_')),
 
@@ -18,7 +28,9 @@ export default class FiltersStoreModule extends BaseStoreModule {
       const filter = state[filterName];
       if (!filter) throw new Error(`Unknown filter: ${filterName}`);
 
-      return filter.get();
+      return filter.get({
+        router: this.getters.ROUTER,
+      });
     },
 
     // get all filters values
@@ -40,7 +52,9 @@ export default class FiltersStoreModule extends BaseStoreModule {
     }) => {
       const filter = context.state[name];
 
-      await filter.set(value);
+      await filter.set(value, {
+        router: context.getters.ROUTER,
+      });
 
       if (!silent) await context.dispatch('EMIT', {
         event: FilterEvent.FILTER_SET,
@@ -53,7 +67,9 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
     RESTORE_FILTER: async (context, { name }) => {
       const filter = context.state[name];
-      const value = filter.restore();
+      const value = filter.restore({
+        router: context.getters.ROUTER,
+      });
 
       if (value) {
         await context.dispatch('SET_FILTER', ({
@@ -119,7 +135,9 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
   addFilter(filter) {
     const setup = (filter) => {
-      this.state[filter.name] = new BaseFilterSchema(filter);
+      const stateFilter = new BaseFilterSchema(filter);
+      if (stateFilter.requireRouter) this.state._requireRouter = true;
+      this.state[filter.name] = stateFilter;
     };
 
     if (Array.isArray(filter)) filter.forEach((f) => setup(f));

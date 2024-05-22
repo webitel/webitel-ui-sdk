@@ -19,6 +19,9 @@ describe('FiltersStoreModule', () => {
     ]).getModule();
 
     const store = createStore({
+      state: {
+        router: null,
+      },
       modules: {
         filters,
       },
@@ -49,6 +52,9 @@ describe('FiltersStoreModule', () => {
     .getModule();
 
     const store = createStore({
+      state: {
+        router: null,
+      },
       modules: {
         filters,
       },
@@ -84,21 +90,25 @@ describe('FiltersStoreModule', () => {
     .addFilter({
       name: 'vi',
       value: 1,
+      requireRouter: true,
       get: (context) => () => {
         return valueGetter(context)();
       },
-      set: (context) => async (v) => {
+      set: (context) => async (v, { router }) => {
         valueSetter(context)(v);
         await querySetter(context)(router)(v);
         return context;
       },
-      restore: (context) => () => {
+      restore: (context) => ({ router }) => {
         return queryRestore(context)(router)();
       },
     })
     .getModule();
 
     const store = createStore({
+      state: {
+        router,
+      },
       modules: {
         filters,
       },
@@ -140,6 +150,9 @@ describe('FiltersStoreModule', () => {
     .getModule();
 
     const store = createStore({
+      state: {
+        router,
+      },
       modules: {
         filters,
       },

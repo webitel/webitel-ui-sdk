@@ -1,15 +1,23 @@
-import { valueSetter, querySetter, localStorageSetter } from '../scripts/setters';
-import { queryRestore, localStorageRestore } from '../scripts/restores';
-import { valueGetter, queryGetter, localStorageGetter } from '../scripts/getters';
+import {
+  localStorageGetter,
+  queryGetter,
+  valueGetter,
+} from '../scripts/getters';
+import { localStorageRestore, queryRestore } from '../scripts/restores';
+import {
+  localStorageSetter,
+  querySetter,
+  valueSetter,
+} from '../scripts/setters';
 
-const convertGetterArray = (context) => (router) => (getters) => {
+const convertGetterArray = (context) => (getters) => {
   const availableGetters = ['value', 'query', 'localStorage'];
 
   getters.forEach((getter) => {
     if (!availableGetters.includes(getter)) throw new Error(`Unknown getter: ${getter}`);
   });
 
-  const getter = () => {
+  const getter = ({ router }) => {
     if (getters.includes('value')) {
       const value = valueGetter(context)();
       if (value) return value;
@@ -31,13 +39,13 @@ const convertGetterArray = (context) => (router) => (getters) => {
   return getter;
 };
 
-const convertSetterArray = (context) => (router) => (setters) => {
+const convertSetterArray = (context) => (setters) => {
   const availableSetters = ['value', 'query', 'localStorage'];
   setters.forEach((setter) => {
     if (!availableSetters.includes(setter)) throw new Error(`Unknown setter: ${setter}`);
   });
 
-  const setter = async (value) => {
+  const setter = async (value, { router }) => {
     if (setters.includes('value')) valueSetter(context)(value);
     if (setters.includes('query')) await querySetter(context)(router)(value);
     if (setters.includes('localStorage')) localStorageSetter(context)(value);
@@ -48,14 +56,14 @@ const convertSetterArray = (context) => (router) => (setters) => {
   return setter;
 };
 
-const convertRestoreArray = (context) => (router) => (restores) => {
+const convertRestoreArray = (context) => (restores) => {
   const availableRestores = ['query', 'localStorage'];
 
   restores.forEach((restore) => {
     if (!availableRestores.includes(restore)) throw new Error(`Unknown restore: ${restore}`);
   });
 
-  const restore = () => {
+  const restore = ({ router }) => {
     if (restores.includes('query')) {
       const restoredValue = queryRestore(context)(router)();
       if (restoredValue) return restoredValue;
@@ -73,40 +81,35 @@ const convertRestoreArray = (context) => (router) => (restores) => {
 export default class BaseFilterSchema {
   constructor({
                 name,
-                value,
-                get,
-                set,
-                restore,
-                router, // is required for query get/set, if getters/setters are passed as strings
+                value = '',
+                defaultValue = '',
+                get = ['value', 'query'],
+                set = ['value', 'query'],
+                restore = ['query'],
                 ...rest
               } = {}) {
     if (!name) throw new Error('Filter name is required');
-    if (value === undefined) throw new Error(`Filter value is required: ${name}`);
-
-    if (!get) throw new Error(`Filter getter is required: ${name}`);
-    if (!set) throw new Error(`Filter setter is required: ${name}`);
-    if (!restore) throw new Error(`Filter restore is required: ${name}`);
 
     Object.assign(this, {
       name,
       value,
-      get,
-      set,
-      restore,
+      defaultValue,
     }, rest);
 
-    this.setupGetters(get, { router });
-    this.setupSetters(set, { router });
-    this.setupRestores(restore, { router });
+    this.setupGetters(get);
+    this.setupSetters(set);
+    this.setupRestores(restore);
 
     return this;
   }
 
-  setupGetters(getters, { router }) {
+  setupGetters(getters) {
     let getter;
 
     if (Array.isArray(getters)) {
-      getter = convertGetterArray(this)(router)(getters);
+      if (getters.includes('query')) this.requireRouter = true;
+
+      getter = convertGetterArray(this)(getters);
     } else if (typeof getters === 'function') {
       getter = getters(this);
     } else {
@@ -116,11 +119,13 @@ export default class BaseFilterSchema {
     this.get = getter;
   }
 
-  setupSetters(setters, { router }) {
+  setupSetters(setters) {
     let setter;
 
     if (Array.isArray(setters)) {
-      setter = convertSetterArray(this)(router)(setters);
+      if (setters.includes('query')) this.requireRouter = true;
+
+      setter = convertSetterArray(this)(setters);
     } else if (typeof setters === 'function') {
       setter = setters(this);
     } else {
@@ -130,11 +135,13 @@ export default class BaseFilterSchema {
     this.set = setter;
   }
 
-  setupRestores(restores, { router }) {
+  setupRestores(restores) {
     let restore;
 
     if (Array.isArray(restores)) {
-     restore = convertRestoreArray(this)(router)(restores);
+      if (restores.includes('query')) this.requireRouter = true;
+
+      restore = convertRestoreArray(this)(restores);
     } else if (typeof restores === 'function') {
       restore = restores(this);
     } else {
