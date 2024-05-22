@@ -24,9 +24,11 @@ export default class FiltersStoreModule extends BaseStoreModule {
     .filter((key) => !key.startsWith('_')),
 
     // get value of specific filter
-    GET_FILTER: (state) => (filterName) => {
+    GET_FILTER: (state, getters) => (filterName) => {
       const filter = state[filterName];
       if (!filter) throw new Error(`Unknown filter: ${filterName}`);
+
+      if (state._requireRouter && !getters.ROUTER) return filter.defaultValue;
 
       return filter.get({
         router: this.getters.ROUTER,
