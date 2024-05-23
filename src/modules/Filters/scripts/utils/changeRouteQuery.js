@@ -12,6 +12,8 @@ const changeRouteQuery = (router) => ({ filterQuery, value }) => {
     [filterQuery]: value,
   };
 
+  console.info('newQuery', newQuery);
+
   return router.replace({
     name,
     query: newQuery,

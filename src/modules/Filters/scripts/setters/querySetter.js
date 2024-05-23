@@ -18,7 +18,7 @@ const handleArray = ({ value, storedProp }) => {
 };
 
 const querySetter = (context) => (router) => async (rawValue = context.value) => {
-  const { name: filterQuery, storedProp } = this;
+  const { name: filterQuery, storedProp } = context;
 
   let value = '';
 
@@ -27,7 +27,7 @@ const querySetter = (context) => (router) => async (rawValue = context.value) =>
   } else if (isObject(rawValue)) {
     value = handleObject({ value: rawValue, storedProp });
   } else {
-    value = handlePrimitive({ value });
+    value = handlePrimitive({ value: rawValue });
   }
 
   await changeRouteQuery(router)({

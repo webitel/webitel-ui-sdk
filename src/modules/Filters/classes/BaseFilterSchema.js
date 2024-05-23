@@ -31,9 +31,9 @@ const convertGetterArray = (context) => (getters) => {
       if (value) return value;
     }
 
-    console.error(`No value found for ${context.name} filter!`);
+    // console.info(`No value found for ${context.name} filter!`);
 
-    return undefined;
+    return null;
   };
 
   return getter;

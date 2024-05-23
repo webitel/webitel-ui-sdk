@@ -7,7 +7,7 @@
     @input="localSize = $event"
     @change="setSize(localSize)"
     @next="setPage(+page + 1)"
-    @prev="setPage(page - 1)"
+    @prev="setPage(+page - 1)"
   />
 </template>
 
@@ -34,8 +34,10 @@ const store = useStore();
 
 const localSize = ref(0);
 
-const page = computed(() => store.getters[`${props.namespace}/GET_FILTER`](pageFilterName));
-const size = computed(() => store.getters[`${props.namespace}/GET_FILTER`](sizeFilterName));
+const page = computed(() => getNamespacedState(store.state, props.namespace).page.value);
+const size = computed(() => getNamespacedState(store.state, props.namespace).size.value);
+
+const sizeGetter = computed(() => store.getters[`${props.namespace}/FILTERS__size`]);
 
 function setFilter(payload) {
   return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
@@ -50,10 +52,18 @@ function setSize(value) {
   return setFilter({ value, name: sizeFilterName });
 }
 
-// TF?
-// watch(size, () => {
-//   localSize.value = size.value;
-// }, { immediate: true });
+watch(size, () => {
+  localSize.value = size.value;
+  console.info('size changed', size.value);
+}, { immediate: true });
+
+watch(page, () => {
+  console.info('page changed', page.value);
+});
+
+watch(sizeGetter, () => {
+  console.info('sizeGetter changed', sizeGetter.value);
+});
 </script>
 
 <style lang="scss" scoped>

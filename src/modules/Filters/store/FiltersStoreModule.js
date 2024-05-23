@@ -20,15 +20,23 @@ export default class FiltersStoreModule extends BaseStoreModule {
       return rootState.router;
     },
 
-    _STATE_FILTER_NAMES: (state) => Object.keys(state)
-    .filter((key) => !key.startsWith('_')),
+    _STATE_FILTER_NAMES: (state) => {
+      return Object.values(state)
+      .reduce((names, prop) => prop.value || prop.name
+        ? [...names, prop.name]
+        : names, []);
+    },
 
     // get value of specific filter
     GET_FILTER: (state, getters) => (filterName) => {
+      return getters['FILTER__' + filterName];
+
       const filter = state[filterName];
       if (!filter) throw new Error(`Unknown filter: ${filterName}`);
 
-      if (state._requireRouter && !getters.ROUTER) return filter.defaultValue;
+      if (state._requireRouter && !getters.ROUTER) {
+        throw new Error(`Router is required for filter: ${filterName}`);
+      }
 
       return filter.get({
         router: getters.ROUTER,
@@ -36,14 +44,16 @@ export default class FiltersStoreModule extends BaseStoreModule {
     },
 
     // get all filters values
-    GET_FILTERS: (state, getters) => getters._STATE_FILTER_NAMES
-    .reduce((values, filterName) => {
-      const filterValue = getters.GET_FILTER(filterName);
-      return isEmpty(filterValue) ? filters : {
-        ...values,
-        [filterName]: filterValue,
-      };
-    }, {}),
+    GET_FILTERS: (state, getters) => () => {
+      return getters._STATE_FILTER_NAMES
+      .reduce((values, filterName) => {
+        const filterValue = getters.GET_FILTER(filterName);
+        return isEmpty(filterValue) ? values : {
+          ...values,
+          [filterName]: filterValue,
+        };
+      }, {});
+    },
   };
 
   actions = {
@@ -132,6 +142,15 @@ export default class FiltersStoreModule extends BaseStoreModule {
           reject(err);
         }
       });
+    },
+  };
+
+  mutations = {
+    RECOMPUTE_FILTER_VALUES: (state) => {
+      state._recompute = true;
+      setTimeout(() => {
+        state._recompute = false;
+      }, 0);
     },
   };
 

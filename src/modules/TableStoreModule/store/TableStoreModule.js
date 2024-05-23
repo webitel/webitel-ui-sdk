@@ -33,7 +33,7 @@ export default class TableStoreModule extends BaseStoreModule {
 
     // main GET_LIST params collector
     GET_LIST_PARAMS: (state, getters) => (overrides) => {
-      const filters = getters.FILTERS;
+      const filters = getters.FILTERS();
       const fields = getters.FIELDS;
       const parentId = getters.PARENT_ID;
 
