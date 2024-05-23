@@ -232,12 +232,12 @@ export default {
         });
       }
     },
-    handleSelection(row, remove) {
+    handleSelection(row, select) {
       if (this.selected) {
-        if (remove) {
-          this.$emit('update:selected', this._selected.filter((item) => item !== row));
-        } else {
+        if (select) {
           this.$emit('update:selected', [...this._selected, row]);
+        } else {
+          this.$emit('update:selected', this._selected.filter((item) => item !== row));
         }
       } else {
         // for backwards compatibility

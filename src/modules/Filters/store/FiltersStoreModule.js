@@ -29,9 +29,8 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
     // get value of specific filter
     GET_FILTER: (state, getters) => (filterName) => {
-      return getters['FILTER__' + filterName];
-
       const filter = state[filterName];
+
       if (!filter) throw new Error(`Unknown filter: ${filterName}`);
 
       if (state._requireRouter && !getters.ROUTER) {
@@ -66,6 +65,12 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
       await filter.set(value, {
         router: context.getters.ROUTER,
+      });
+
+      // upd reactivity
+      context.commit('UPDATE_FILTER', {
+        ...filter,
+        value: context.getters.GET_FILTER(name),
       });
 
       if (!silent) await context.dispatch('EMIT', {
@@ -146,11 +151,8 @@ export default class FiltersStoreModule extends BaseStoreModule {
   };
 
   mutations = {
-    RECOMPUTE_FILTER_VALUES: (state) => {
-      state._recompute = true;
-      setTimeout(() => {
-        state._recompute = false;
-      }, 0);
+    UPDATE_FILTER: (state, filter) => {
+      state[filter.name] = filter;
     },
   };
 

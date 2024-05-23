@@ -14,7 +14,6 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
-import getNamespacedState from '../../../store/helpers/getNamespacedState';
 
 const props = defineProps({
   namespace: {
@@ -34,10 +33,8 @@ const store = useStore();
 
 const localSize = ref(0);
 
-const page = computed(() => getNamespacedState(store.state, props.namespace).page.value);
-const size = computed(() => getNamespacedState(store.state, props.namespace).size.value);
-
-const sizeGetter = computed(() => store.getters[`${props.namespace}/FILTERS__size`]);
+const page = computed(() => store.getters[`${props.namespace}/GET_FILTER`](pageFilterName));
+const size = computed(() => store.getters[`${props.namespace}/GET_FILTER`](sizeFilterName));
 
 function setFilter(payload) {
   return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
@@ -54,16 +51,7 @@ function setSize(value) {
 
 watch(size, () => {
   localSize.value = size.value;
-  console.info('size changed', size.value);
 }, { immediate: true });
-
-watch(page, () => {
-  console.info('page changed', page.value);
-});
-
-watch(sizeGetter, () => {
-  console.info('sizeGetter changed', sizeGetter.value);
-});
 </script>
 
 <style lang="scss" scoped>

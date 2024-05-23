@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.6.10",
+  "version": "24.6.11",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -15,6 +15,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "main": "./dist/@webitel/ui-sdk.mjs",
+  "type": "module",
   "files": [
     "dist/*",
     "src/api/*",
