@@ -1,7 +1,7 @@
 import jszipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
-import path from 'path';
+import path from 'path-browserify';
 import generateMediaURL from './scripts/generateMediaURL';
 
 /* eslint-disable no-await-in-loop, no-restricted-syntax */
