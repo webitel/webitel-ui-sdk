@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.6.11",
+  "version": "24.6.12",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -53,6 +53,7 @@
     "jszip-utils": "^0.1.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.1",
+    "path-browserify": "^1.0.1",
     "plyr": "3.6.3",
     "query-string": "^8.1.0",
     "sortablejs": "^1.15.0",
