@@ -126,12 +126,18 @@ export default class FiltersStoreModule extends BaseStoreModule {
     },
 
     FLUSH_SUBSCRIBERS: (context) => {
-      return context.state._emitter.off('*');
+      return context.state._emitter.all.clear();
     },
 
     EMIT: async (context, { event, payload }) => {
       return new Promise(async (resolve, reject) => {
-        const listeners = context.state._emitter.all.get(event);
+        const wildcardListeners = context.state._emitter.all.get('*');
+        const eventListeners = context.state._emitter.all.get(event);
+
+        const listeners = [
+          ...(wildcardListeners || []),
+          ...(eventListeners || []),
+        ];
 
         if (!listeners) {
           console.info(`No listeners for ${event} event`);

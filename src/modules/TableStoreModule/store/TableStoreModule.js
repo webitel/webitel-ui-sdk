@@ -101,14 +101,21 @@ export default class TableStoreModule extends BaseStoreModule {
 
     // FIXME: maybe move to filters module?
     HANDLE_SORT_CHANGE: (context, payload) => {
-      const nextSort = queryToSortAdapter(payload.value.slice(0, 1));
+      const nextSort = queryToSortAdapter(payload.value?.slice(0, 1) || '');
       const field = nextSort ? payload.value.slice(1) : payload.value;
 
       const headers = context.state.headers.map(({
                                                    sort: currentSort,
                                                    ...header
                                                  }) => {
-        const sort = field === header.field ? nextSort : currentSort;
+        let sort;
+
+        if (field) {
+          sort = field === header.field ? nextSort : currentSort;
+        } else {
+          sort = nextSort; // null
+        }
+
         return { ...header, sort };
       });
 

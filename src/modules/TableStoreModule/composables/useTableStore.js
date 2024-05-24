@@ -36,7 +36,7 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/DELETE`, payload);
   }
 
-  function sort([header, nextSortOrder]) {
+  function sort(header, nextSortOrder) {
     return store.dispatch(`${tableNamespace}/SORT`, {
       header,
       nextSortOrder,
