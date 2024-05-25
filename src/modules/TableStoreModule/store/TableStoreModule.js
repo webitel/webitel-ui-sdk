@@ -195,7 +195,8 @@ export default class TableStoreModule extends BaseStoreModule {
         await context.dispatch('LOAD_DATA_LIST');
 
         /* if no items on current page after DELETE, move to prev page [WTEL-3793] */
-        if (!context.items.length && context.getters.FILTERS.page > 1) {
+        if (!context.state.dataList.length && context.getters.FILTERS.page >
+          1) {
           await context.dispatch('SET_FILTER', {
             name: 'page',
             value: context.getters.FILTERS.page - 1,
