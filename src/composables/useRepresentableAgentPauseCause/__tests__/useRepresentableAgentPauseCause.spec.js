@@ -1,6 +1,6 @@
 import {
   useRepresentableAgentPauseCause,
-} from '../useRepresentableAgentPauseCause';
+} from '../useRepresentableAgentPauseCause.js';
 
 describe('useRepresentableAgentPauseCause', () => {
   it('correctly computes duration', () => {

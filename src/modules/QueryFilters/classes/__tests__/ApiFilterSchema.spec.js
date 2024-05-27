@@ -1,4 +1,4 @@
-import ApiFilterSchema from '../ApiFilterSchema';
+import ApiFilterSchema from '../ApiFilterSchema.js';
 
 describe('Api Filter Schema', () => {
   const APIMock = vi.fn();

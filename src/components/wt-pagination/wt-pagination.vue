@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import debounce from '../../scripts/debounce';
+import debounce from '../../scripts/debounce.js';
 
 export default {
   name: 'WtPagination',

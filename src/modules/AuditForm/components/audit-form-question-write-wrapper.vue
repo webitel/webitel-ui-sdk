@@ -68,9 +68,9 @@ import WtInput from '../../../components/wt-input/wt-input.vue';
 import WtSelect from '../../../components/wt-select/wt-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';
-import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema';
+import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema.js';
 
-import { generateQuestionScoreSchema } from '../schemas/AuditFormQuestionScoreSchema';
+import { generateQuestionScoreSchema } from '../schemas/AuditFormQuestionScoreSchema.js';
 
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';

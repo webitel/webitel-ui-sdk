@@ -1,6 +1,6 @@
 import deepCopy from 'deep-copy';
 import set from 'lodash/set';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 
 export default class CardStoreModule extends BaseStoreModule {
   state = {

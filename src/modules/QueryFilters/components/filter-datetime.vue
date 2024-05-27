@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
+import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
   name: 'FilterFrom',

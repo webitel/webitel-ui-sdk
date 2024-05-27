@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import validationMixin from '../../mixins/validationMixin/validationMixin';
+import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
   name: 'WtTextarea',

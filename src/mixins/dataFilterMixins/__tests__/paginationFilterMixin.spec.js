@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
-import paginationFilterMixin from '../paginationFilterMixin';
+import paginationFilterMixin from '../paginationFilterMixin.js';
 
 const router = createRouter({
   history: createWebHistory(),

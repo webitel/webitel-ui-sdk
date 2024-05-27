@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import EnumFilterSchema from '../../classes/EnumFilterSchema';
+import EnumFilterSchema from '../../classes/EnumFilterSchema.js';
 import AbstractEnumFilter from '../abstract-enum-filter.vue';
 
 const router = createRouter({

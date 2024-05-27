@@ -1,9 +1,9 @@
 import { createI18n } from 'vue-i18n';
 import en from './en/en.js';
-import es from './es/es';
-import kz from './kz/kz';
-import ru from './ru/ru';
-import ua from './ua/ua';
+import es from './es/es.js';
+import kz from './kz/kz.js';
+import ru from './ru/ru.js';
+import ua from './ua/ua.js';
 
 const messages = {
   en,

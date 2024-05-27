@@ -1,6 +1,6 @@
 import { CallActions, ChatActions, JobState } from 'webitel-sdk';
-import i18n from '../../../locale/i18n';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
+import i18n from '../../../locale/i18n.js';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import endChatSound from '../assets/audio/end-chat.wav';
 import newChatSound from '../assets/audio/new-chat.wav';
 import newMessageSound from '../assets/audio/new-message.wav';

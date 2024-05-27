@@ -1,6 +1,6 @@
 import 'vue-multiselect/dist/vue-multiselect.css';
-import Components from './components'; // init all components
-import Directives from './directives'; // init all directives
+import Components from './components/index.js'; // init all components
+import Directives from './directives/index.js'; // init all directives
 import './css/styleguide/fonts/_fonts.scss';
 
 export default {

@@ -1,4 +1,4 @@
-import getNamespacedState from '../getNamespacedState';
+import getNamespacedState from '../getNamespacedState.js';
 
 describe('getNamespacedState', () => {
   const searchedValue = 'jest!';

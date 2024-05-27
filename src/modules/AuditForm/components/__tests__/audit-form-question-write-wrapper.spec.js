@@ -2,11 +2,11 @@ import { shallowMount } from '@vue/test-utils';
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import {
   generateQuestionOptionsSchema,
-} from '../../schemas/AuditFormQuestionOptionsSchema';
-import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema';
+} from '../../schemas/AuditFormQuestionOptionsSchema.js';
+import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema.js';
 import {
   generateQuestionScoreSchema,
-} from '../../schemas/AuditFormQuestionScoreSchema';
+} from '../../schemas/AuditFormQuestionScoreSchema.js';
 import AuditFormQuestionWriteWrapper
   from '../audit-form-question-write-wrapper.vue';
 

@@ -1,4 +1,4 @@
-import websocketValidator from '../websocketValidator';
+import websocketValidator from '../websocketValidator.js';
 
 describe('websocketValidator', () => {
   it('truthy case 1: localhost ws', () => {

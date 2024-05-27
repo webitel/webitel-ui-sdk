@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import 'vue-multiselect/dist/vue-multiselect.css';
-import Components from './components'; // init all components
-import Directives from './directives'; // init all directives
+import Components from './components/index.js'; // init all components
+import Directives from './directives/index.js'; // init all directives
 import i18n from './locale/i18n';
 import router from './router';
 import eventBus from './scripts/eventBus';

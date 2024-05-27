@@ -1,4 +1,4 @@
-import CSVExport from '../CSVExport';
+import CSVExport from '../CSVExport.js';
 
 export default {
   data: () => ({

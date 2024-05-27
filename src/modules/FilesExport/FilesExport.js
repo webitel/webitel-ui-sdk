@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver';
 import JSZip from 'jszip';
 import jszipUtils from 'jszip-utils';
 import path from 'path-browserify';
-import generateMediaURL from './scripts/generateMediaURL';
+import generateMediaURL from './scripts/generateMediaURL.js';
 
 export default class FilesExport {
   filename = 'files';

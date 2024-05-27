@@ -1,6 +1,6 @@
 import { onBeforeUnmount } from 'vue';
 import preventHiddenPageCallsDecorator
-  from '../../scripts/preventHiddenPageCallsDecorator';
+  from '../../scripts/preventHiddenPageCallsDecorator.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const useCachedInterval = ({

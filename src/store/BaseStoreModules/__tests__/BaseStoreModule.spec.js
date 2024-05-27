@@ -1,4 +1,4 @@
-import BaseStoreModule from '../BaseStoreModule';
+import BaseStoreModule from '../BaseStoreModule.js';
 
 const APIModule = {
   getList: vi.fn(),

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import UsersAPI from '../users';
+import UsersAPI from '../users.js';
 
 // axios mock should be copy-pasted :(
 // https://stackoverflow.com/questions/65554910/jest-referenceerror-cannot-access-before-initialization

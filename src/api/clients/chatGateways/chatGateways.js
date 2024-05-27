@@ -1,12 +1,12 @@
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 import ChatGatewayProvider
-  from '../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum';
+  from '../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
   getDefaultInstance,
-} from '../../defaults';
+} from '../../defaults/index.js';
 import applyTransform, {
   camelToSnake,
   generateUrl,
@@ -16,8 +16,8 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers';
-import webChatGateway from './defaults/webChatGateway';
+} from '../../transformers/index.js';
+import webChatGateway from './defaults/webChatGateway.js';
 
 const instance = getDefaultInstance();
 

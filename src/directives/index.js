@@ -1,4 +1,4 @@
-import clickaway from './clickaway/clickaway';
+import clickaway from './clickaway/clickaway.js';
 
 const Directives = {
   clickaway,

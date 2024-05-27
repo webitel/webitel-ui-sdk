@@ -1,6 +1,6 @@
 import stringify from 'csv-stringify/lib/sync';
 import { saveAs } from 'file-saver';
-import { objSnakeToCamel } from '../../scripts/caseConverters';
+import { objSnakeToCamel } from '../../scripts/caseConverters.js';
 
 const cast = {
   object: (separator) => {

@@ -2,8 +2,8 @@ import {
   queryToSortAdapter,
   SortSymbols,
   sortToQueryAdapter,
-} from '../../../scripts/sortQueryAdapters';
-import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
+} from '../../../scripts/sortQueryAdapters.js';
+import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 const getNextSortOrder = (sort) => {
   switch (sort) {

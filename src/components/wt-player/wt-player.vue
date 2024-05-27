@@ -27,7 +27,7 @@
 <script>
 import Plyr from 'plyr';
 import 'plyr/src/sass/plyr.scss';
-import createPlyrURL from './scripts/createPlyrURL';
+import createPlyrURL from './scripts/createPlyrURL.js';
 
 export default {
   name: 'WtPlayer',

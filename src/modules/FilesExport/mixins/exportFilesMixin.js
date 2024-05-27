@@ -1,4 +1,4 @@
-import FilesExport from '../FilesExport';
+import FilesExport from '../FilesExport.js';
 
 export default {
   data: () => ({

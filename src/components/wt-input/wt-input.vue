@@ -73,7 +73,7 @@
 
 <script setup>
 import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { useValidation } from '../../mixins/validationMixin/useValidation.js';
 
 /*
 * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S

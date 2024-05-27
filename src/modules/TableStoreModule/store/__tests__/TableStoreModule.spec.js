@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import { SortSymbols } from '../../../../scripts/sortQueryAdapters';
-import FilterEvent from '../../../Filters/enums/FilterEvent.enum';
-import FiltersStoreModule from '../../../Filters/store/FiltersStoreModule';
-import TableStoreModule from '../TableStoreModule';
+import { SortSymbols } from '../../../../scripts/sortQueryAdapters.js';
+import FilterEvent from '../../../Filters/enums/FilterEvent.enum.js';
+import FiltersStoreModule from '../../../Filters/store/FiltersStoreModule.js';
+import TableStoreModule from '../TableStoreModule.js';
 
 describe('TableStoreModule', () => {
   it('correctly computes FIELDS getter', () => {

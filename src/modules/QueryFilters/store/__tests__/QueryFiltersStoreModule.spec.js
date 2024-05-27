@@ -1,7 +1,7 @@
 // import { shallowMount, createLocalVue } from '@vue/test-utils';
 // import Vuex from 'vuex';
 // import queryFilters from '../queryFilters';
-import QueryFiltersStoreModule from '../QueryFiltersStoreModule';
+import QueryFiltersStoreModule from '../QueryFiltersStoreModule.js';
 
 const valueFilter = 'search';
 const arrayFilter = 'agent';

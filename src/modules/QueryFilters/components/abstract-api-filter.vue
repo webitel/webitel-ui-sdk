@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import apiFilterMixin from '../mixins/apiFilterMixin';
+import apiFilterMixin from '../mixins/apiFilterMixin.js';
 
 export default {
   name: 'AbstractApiFilter',

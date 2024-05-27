@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import enumFilterMixin from '../mixins/enumFilterMixin';
+import enumFilterMixin from '../mixins/enumFilterMixin.js';
 
 export default {
   name: 'AbstractEnumFilter',

@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { createStore } from 'vuex';
-import AppearanceStoreModule from '../../store/AppearanceStoreModule';
+import AppearanceStoreModule from '../../store/AppearanceStoreModule.js';
 import WtDarkModeSwitcher from '../wt-dark-mode-switcher.vue';
 
 describe('WtDarkModeSwitcher', () => {

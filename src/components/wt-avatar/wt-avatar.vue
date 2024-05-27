@@ -27,7 +27,7 @@
 <script setup>
 import { computed } from 'vue';
 import defaultAvatar from '../../assets/components/atoms/wt-avatar/default-avatar.svg';
-import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum';
+import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
 const props = defineProps({
   src: {

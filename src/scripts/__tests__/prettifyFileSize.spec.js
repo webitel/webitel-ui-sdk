@@ -1,4 +1,4 @@
-import prettifyFileSize from '../prettifyFileSize';
+import prettifyFileSize from '../prettifyFileSize.js';
 
 describe('prettifyFileSize', () => {
   it('prettifies bytes to kb\'s', () => {

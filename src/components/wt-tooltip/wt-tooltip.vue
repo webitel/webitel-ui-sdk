@@ -30,7 +30,7 @@
 <script setup>
 import { autoPlacement, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
 import { onMounted, ref, watch } from 'vue';
-import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions';
+import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions.js';
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
 
 const props = defineProps({

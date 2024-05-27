@@ -34,7 +34,7 @@ import { computed, onMounted, toRefs } from 'vue';
 import WtIconBtn from '../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../../../components/wt-input/wt-input.vue';
 import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
-import decimalValidator from '../../../../../validators/decimalValidator';
+import decimalValidator from '../../../../../validators/decimalValidator.js';
 
 const props = defineProps({
   option: {

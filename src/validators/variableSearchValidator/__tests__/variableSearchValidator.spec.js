@@ -1,4 +1,4 @@
-import variableSearchValidator from '../variableSearchValidator';
+import variableSearchValidator from '../variableSearchValidator.js';
 
 describe('Variable search validator', () => {
   it('Ordinary search', () => {

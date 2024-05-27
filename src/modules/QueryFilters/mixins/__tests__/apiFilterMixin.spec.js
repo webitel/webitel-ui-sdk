@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
-import ApiFilterSchema from '../../classes/ApiFilterSchema';
-import apiFilterMixin from '../apiFilterMixin';
+import ApiFilterSchema from '../../classes/ApiFilterSchema.js';
+import apiFilterMixin from '../apiFilterMixin.js';
 
 const router = createRouter({
   history: createWebHistory(),

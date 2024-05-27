@@ -1,4 +1,4 @@
-import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
+import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin.js';
 
 export default {
   mixins: [_urlControllerMixin],

@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import validationMixin from '../../mixins/validationMixin/validationMixin';
+import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;

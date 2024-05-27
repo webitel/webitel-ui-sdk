@@ -36,8 +36,8 @@ import { useVuelidate } from '@vuelidate/core';
 import cloneDeep from 'lodash/cloneDeep';
 import { computed, nextTick, onMounted, reactive, ref, watch, watchEffect } from 'vue';
 import WtButton from '../../../components/wt-button/wt-button.vue';
-import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable';
-import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';
+import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
+import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
 import AuditFormQuestion from './audit-form-question.vue';
 
 const props = defineProps({

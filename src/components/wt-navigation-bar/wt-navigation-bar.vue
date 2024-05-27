@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import ExpandTransition from '../transitions/wt-expand-transition.vue';
 import AdminDark from './assets/dark/app-logo-dark-admin.svg';
 import AuditDark from './assets/dark/app-logo-dark-audit.svg';

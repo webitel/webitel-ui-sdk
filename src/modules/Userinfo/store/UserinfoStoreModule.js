@@ -1,7 +1,7 @@
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
-import userinfoGenerator from '../api/userinfo';
-import ApplicationsAccess from '../classes/ApplicationsAccess';
-import Permissions from '../enums/Permissions.enum';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import userinfoGenerator from '../api/userinfo.js';
+import ApplicationsAccess from '../classes/ApplicationsAccess.js';
+import Permissions from '../enums/Permissions.enum.js';
 
 let userinfo = null;
 

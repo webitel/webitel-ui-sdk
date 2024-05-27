@@ -1,7 +1,7 @@
 import applyTransform, {
   notify,
   snakeToCamel,
-} from '../../../api/transformers';
+} from '../../../api/transformers/index.js';
 
 const userinfo = (instance) => ({
   async getSession() {

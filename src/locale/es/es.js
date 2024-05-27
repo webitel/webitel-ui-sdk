@@ -6,14 +6,14 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums/index.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum';
+  from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum';
+  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
 import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum';
-import { snakeToCamel } from '../../scripts/caseConverters';
+  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements

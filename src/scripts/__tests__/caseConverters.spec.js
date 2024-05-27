@@ -7,7 +7,7 @@ import {
   objSnakeToCamel,
   snakeToCamel,
   snakeToKebab,
-} from '../caseConverters';
+} from '../caseConverters.js';
 
 describe('Case converters', () => {
   it('Camel-Kebab', () => {

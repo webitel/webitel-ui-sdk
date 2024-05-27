@@ -1,4 +1,4 @@
-import BaseStoreModule from './BaseStoreModule';
+import BaseStoreModule from './BaseStoreModule.js';
 
 const getParentIdFromContext = (context) => (
   context?.getters?.PARENT_ID || context?.state?.parentId

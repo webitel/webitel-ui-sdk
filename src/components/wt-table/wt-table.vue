@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import getNextSortOrder from './_internals/getSortOrder';
+import getNextSortOrder from './_internals/getSortOrder.js';
 
 export default {
   name: 'WtTable',

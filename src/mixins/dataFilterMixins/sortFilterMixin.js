@@ -1,4 +1,4 @@
-import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
+import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 const SortSymbols = Object.freeze({
   ASC: 'asc',

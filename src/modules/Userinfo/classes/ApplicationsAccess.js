@@ -1,14 +1,14 @@
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 import AdminSections
-  from '../../../enums/WebitelApplications/AdminSections.enum';
+  from '../../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections
-  from '../../../enums/WebitelApplications/AuditorSections.enum';
-import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum';
+  from '../../../enums/WebitelApplications/AuditorSections.enum.js';
+import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum.js';
 import SupervisorSections
-  from '../../../enums/WebitelApplications/SupervisorSections.enum';
+  from '../../../enums/WebitelApplications/SupervisorSections.enum.js';
 import WebitelApplications
-  from '../../../enums/WebitelApplications/WebitelApplications.enum';
+  from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
 
 const applicationsAccess = (value = true) => ({
   [WebitelApplications.AGENT]: {

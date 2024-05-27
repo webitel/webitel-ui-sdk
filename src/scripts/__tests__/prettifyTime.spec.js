@@ -1,4 +1,4 @@
-import prettifyTime from '../prettifyTime';
+import prettifyTime from '../prettifyTime.js';
 
 describe('prettifyTime', () => {
   it('prettifies date-format time', () => {

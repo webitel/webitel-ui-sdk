@@ -56,7 +56,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 
 import AdminDark from './assets/admin-dark.svg';
 import AdminLight from './assets/admin-light.svg';

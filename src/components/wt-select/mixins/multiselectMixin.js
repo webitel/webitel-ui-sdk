@@ -1,9 +1,9 @@
 import VueMultiselect from 'vue-multiselect';
 import { ObserveVisibility } from 'vue-observe-visibility';
-import validationMixin from '../../../mixins/validationMixin/validationMixin';
-import debounce from '../../../scripts/debounce';
-import isEmpty from '../../../scripts/isEmpty';
-import labelUsageMixin from '../../wt-label/mixins/labelUsageMixin';
+import validationMixin from '../../../mixins/validationMixin/validationMixin.js';
+import debounce from '../../../scripts/debounce.js';
+import isEmpty from '../../../scripts/isEmpty.js';
+import labelUsageMixin from '../../wt-label/mixins/labelUsageMixin.js';
 
 export default {
   mixins: [validationMixin, labelUsageMixin],

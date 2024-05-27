@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import debounce from '../../../scripts/debounce';
-import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
+import debounce from '../../../scripts/debounce.js';
+import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
   name: 'FilterFromTo',

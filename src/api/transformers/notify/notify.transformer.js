@@ -1,4 +1,4 @@
-import eventBus from '../../../scripts/eventBus';
+import eventBus from '../../../scripts/eventBus.js';
 
 const notifyTransformer = (notificationObject) => {
   /*

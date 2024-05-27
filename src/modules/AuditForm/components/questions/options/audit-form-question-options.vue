@@ -41,8 +41,8 @@
 <script setup>
 import WtButton from '../../../../../components/wt-button/wt-button.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
-import updateObject from '../../../../../scripts/updateObject';
-import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
+import updateObject from '../../../../../scripts/updateObject.js';
+import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema.js';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 
 const props = defineProps({

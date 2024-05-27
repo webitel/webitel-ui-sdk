@@ -1,4 +1,4 @@
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 
 export default class AppearanceStoreModule extends BaseStoreModule {
   state = {

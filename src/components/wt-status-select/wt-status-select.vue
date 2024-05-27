@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import AgentStatus from '../../enums/AgentStatus/AgentStatus.enum';
-import convertDuration from '../../scripts/convertDuration';
-import StatusOptions from './_internals/StatusOptions.lookup';
+import AgentStatus from '../../enums/AgentStatus/AgentStatus.enum.js';
+import convertDuration from '../../scripts/convertDuration.js';
+import StatusOptions from './_internals/StatusOptions.lookup.js';
 
 export default {
   name: 'WtStatusSelect',

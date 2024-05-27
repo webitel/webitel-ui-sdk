@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import MultiselectMixin from '../multiselectMixin';
+import MultiselectMixin from '../multiselectMixin.js';
 
 const Component = {
   mixins: [MultiselectMixin],

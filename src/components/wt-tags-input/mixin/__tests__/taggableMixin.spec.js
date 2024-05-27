@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import taggableMixin from '../taggableMixin';
+import taggableMixin from '../taggableMixin.js';
 
 describe('taggableMixin', () => {
   const Component = {

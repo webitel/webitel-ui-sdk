@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { createStore } from 'vuex';
-import FiltersStoreModule from '../../store/FiltersStoreModule';
+import FiltersStoreModule from '../../store/FiltersStoreModule.js';
 import FilterPagination from '../filter-pagination.vue';
 
 const filtersSchema = [

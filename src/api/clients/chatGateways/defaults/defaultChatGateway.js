@@ -1,4 +1,4 @@
-import generateUri from '../scripts/generateUri';
+import generateUri from '../scripts/generateUri.js';
 
 const defaultChatGateway = () => ({
   name: '',

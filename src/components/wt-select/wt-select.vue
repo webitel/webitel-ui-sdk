@@ -144,9 +144,9 @@
 </template>
 
 <script>
-import isEmpty from '../../scripts/isEmpty';
-import taggableMixin from '../wt-tags-input/mixin/taggableMixin';
-import multiselectMixin from './mixins/multiselectMixin';
+import isEmpty from '../../scripts/isEmpty.js';
+import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
+import multiselectMixin from './mixins/multiselectMixin.js';
 
 export default {
   name: 'WtSelect',

@@ -1,4 +1,4 @@
-import updateObject from '../updateObject';
+import updateObject from '../updateObject.js';
 
 describe('updateObject', () => {
   it('doesn\'t mutate original object', () => {

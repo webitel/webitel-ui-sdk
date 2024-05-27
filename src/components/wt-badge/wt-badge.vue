@@ -17,7 +17,7 @@
 import BadgeDnd from '../../assets/icons/badge-dnd.svg';
 import BadgeOnline from '../../assets/icons/badge-online.svg';
 import BadgePause from '../../assets/icons/badge-pause.svg';
-import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum';
+import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
 export default {
   name: 'WtBadge',

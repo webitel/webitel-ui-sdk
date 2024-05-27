@@ -2,9 +2,9 @@ import set from 'lodash/set';
 import {
   queryToSortAdapter,
   sortToQueryAdapter,
-} from '../../../scripts/sortQueryAdapters';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
-import FilterEvent from '../../Filters/enums/FilterEvent.enum';
+} from '../../../scripts/sortQueryAdapters.js';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import FilterEvent from '../../Filters/enums/FilterEvent.enum.js';
 
 export default class TableStoreModule extends BaseStoreModule {
   state = {

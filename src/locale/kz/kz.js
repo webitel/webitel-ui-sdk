@@ -6,13 +6,13 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 import { QueueType } from 'webitel-sdk/esm2015/enums/index.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum';
+  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
 import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum';
-import { snakeToCamel } from '../../scripts/caseConverters';
+  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
   reusable: {

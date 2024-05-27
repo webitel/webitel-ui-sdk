@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import convertDuration from '../../scripts/convertDuration';
+import convertDuration from '../../scripts/convertDuration.js';
 
 const prettifyPauseCauseDuration = (min) => {
   const SEC_IN_MIN = 60;
