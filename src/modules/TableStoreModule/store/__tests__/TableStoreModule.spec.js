@@ -154,7 +154,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       value: 24,
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('page')).toBe(1);
+    expect(store.getters['table/filters/GET_FILTER']('vi')).toBe(24);
 
     await store.dispatch('table/filters/FLUSH_SUBSCRIBERS');
   });
