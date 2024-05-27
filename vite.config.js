@@ -54,6 +54,7 @@ export default ({ mode }) => {
     resolve: {
       alias: {
         // vue: '@vue/compat',
+        path: 'path-browserify',
       },
     },
     plugins: [
