@@ -173,12 +173,12 @@ export default {
   min-height: var(--textarea-min-height);
   padding: var(--textarea-padding);
   resize: none;
-  color: var(--wt-text-field-text-color);
   transition: var(--transition);
-  background: transparent;
+  color: var(--wt-text-field-text-color);
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
+  background: transparent;
 
   .wt-textarea--disabled & {
     @include wt-placeholder('disabled');

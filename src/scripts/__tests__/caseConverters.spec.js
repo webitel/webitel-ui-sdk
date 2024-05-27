@@ -2,11 +2,11 @@ import {
   camelToKebab,
   camelToSnake,
   kebabToCamel,
-  snakeToKebab,
   kebabToSnake,
   objCamelToSnake,
   objSnakeToCamel,
   snakeToCamel,
+  snakeToKebab,
 } from '../caseConverters';
 
 describe('Case converters', () => {
@@ -60,7 +60,10 @@ describe('Case converters', () => {
 
   it('Camel-Snake Arrays', () => {
     const camelArr = ['camelToSnake', { camelToSnake: { camelToSnake: null } }];
-    const snakeArr = ['camel_to_snake', { camel_to_snake: { camel_to_snake: null } }];
+    const snakeArr = [
+      'camel_to_snake',
+      { camel_to_snake: { camel_to_snake: null } },
+    ];
     expect(objCamelToSnake(camelArr)).toEqual(snakeArr);
     expect(objSnakeToCamel(snakeArr)).toEqual(camelArr);
   });

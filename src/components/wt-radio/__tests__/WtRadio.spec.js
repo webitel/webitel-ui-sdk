@@ -1,7 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import WtRadio from '../wt-radio.vue';
-import WtLabel from '../../wt-label/wt-label.vue';
 import WtIcon from '../../wt-icon/wt-icon.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
+import WtRadio from '../wt-radio.vue';
 
 describe('WtRadio', () => {
   it('renders a component', () => {

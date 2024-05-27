@@ -3,8 +3,8 @@ import convertDuration from '../../../scripts/convertDuration';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
-  getDefaultOpenAPIConfig,
   getDefaultInstance,
+  getDefaultOpenAPIConfig,
 } from '../../defaults';
 import applyTransform, {
   camelToSnake,

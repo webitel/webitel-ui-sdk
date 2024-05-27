@@ -198,9 +198,9 @@ function handleKeyup(event) {
     padding: 0;
     transition: var(--transition);
     color: var(--wt-text-field-text-color);
-    background: transparent;
     border: none;
     outline: none;
+    background: transparent;
   }
 
   /* clears the 'X' from Internet Explorer */

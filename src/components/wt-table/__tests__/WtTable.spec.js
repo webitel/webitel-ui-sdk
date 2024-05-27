@@ -1,6 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import WtTable from '../wt-table.vue';
 import WtCheckbox from '../../wt-checkbox/wt-checkbox.vue';
+import WtTable from '../wt-table.vue';
 
 const headers = [
   {
@@ -41,7 +41,8 @@ const data = [
     h2: 'value 2',
     h3: 'value 3',
     _isSelected: false,
-  }];
+  },
+];
 
 describe('WtTable', () => {
   it('renders a component', () => {
@@ -68,7 +69,8 @@ describe('WtTable', () => {
         gridActions: false,
       },
     });
-    expect(wrapper.findAll('.wt-table__tr__head th').length).toBe(headers.length);
+    expect(wrapper.findAll('.wt-table__tr__head th').length)
+    .toBe(headers.length);
   });
 
   it('do not renders table footer by default', () => {
@@ -116,8 +118,8 @@ describe('WtTable', () => {
       },
     });
     expect(wrapper
-      .find('.wt-table__th--sortable .wt-table__th__sort-arrow')
-      .exists()).toBe(true);
+    .find('.wt-table__th--sortable .wt-table__th__sort-arrow')
+    .exists()).toBe(true);
   });
 
   it('selects all rows at header checkbox click', async () => {

@@ -2,8 +2,8 @@
   <wt-tooltip>
     <template #activator>
       <wt-icon-btn
-        icon="history"
         :disabled="disabled"
+        icon="history"
         @click="emit('click')"
       />
     </template>

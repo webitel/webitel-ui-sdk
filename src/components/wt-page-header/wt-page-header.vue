@@ -21,8 +21,8 @@
       </slot>
       <wt-button
         v-if="!hideSecondary && !emptySecondary"
-        color="secondary"
         :disabled="secondaryDisabled"
+        color="secondary"
         @click="secondaryAction"
       >
         {{ secondaryText || $t('reusable.close') }}

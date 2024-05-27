@@ -16,8 +16,8 @@
           v-bind="{ open, opened }"
         />
         <wt-icon
-          class="wt-expansion-panel-arrow"
           :class="{ 'wt-expansion-panel-arrow--opened': opened }"
+          class="wt-expansion-panel-arrow"
           icon="arrow-right"
         />
       </div>

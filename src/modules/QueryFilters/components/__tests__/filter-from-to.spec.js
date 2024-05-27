@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
-import { createStore } from 'vuex';
 import { createRouter, createWebHistory } from 'vue-router';
+import { createStore } from 'vuex';
 import BaseFilterSchema from '../../classes/BaseFilterSchema';
 import baseFilterMixin from '../../mixins/baseFilterMixin/baseFilterMixin';
 import FilterFromTo from '../filter-from-to.vue';

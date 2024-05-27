@@ -6,7 +6,7 @@ describe('Variable search validator', () => {
     expect(variableSearchValidator(searchValue)).toBe(true);
   });
   it('Search with spacing in value and key', () => {
-   const searchValue = 'your height=5 feet 5½ inches (166 cm)';
+    const searchValue = 'your height=5 feet 5½ inches (166 cm)';
     expect(variableSearchValidator(searchValue)).toBe(true);
   });
   it('Search with spacing in value', () => {

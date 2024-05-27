@@ -1,34 +1,34 @@
 <template>
   <div
-    class="wt-checkbox"
     :class="{
       'wt-checkbox--active': isChecked,
       'wt-checkbox--disabled': disabled,
     }"
+    class="wt-checkbox"
   >
     <wt-label
-      v-bind="labelProps"
       :disabled="disabled"
       class="wt-checkbox__wrapper"
+      v-bind="labelProps"
     >
       <input
-        class="wt-checkbox__input"
-        type="checkbox"
-        :value="value"
         :checked="isChecked"
         :disabled="disabled"
+        :value="value"
+        class="wt-checkbox__input"
+        type="checkbox"
         @change="inputHandler"
       >
       <span class="wt-checkbox__checkmark">
         <wt-icon
-          :icon="checkboxIcon"
           :color="iconColor"
+          :icon="checkboxIcon"
         />
       </span>
       <!-- @slot Custom label markup -->
       <slot
-        v-bind="{ label, isChecked, disabled }"
         name="label"
+        v-bind="{ label, isChecked, disabled }"
       >
         <div
           v-if="label"
@@ -133,8 +133,8 @@ export default {
 
 .wt-checkbox__label {
   margin-left: var(--checkbox-icon-margin);
-  transition: var(--transition);
   cursor: pointer;
+  transition: var(--transition);
 }
 
 /* Hide the browser's default checkbox */
@@ -142,8 +142,8 @@ export default {
   position: absolute;
   width: 0;
   height: 0;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
 }
 
 .wt-checkbox:hover {

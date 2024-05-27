@@ -7,14 +7,14 @@
       { 'wt-rounded-action--rounded': rounded },
       { 'wt-rounded-action--wide': wide },
     ]"
-    type="button"
     class="wt-rounded-action"
+    type="button"
     @click="emit('click', $event)"
   >
     <wt-loader
       v-if="loading"
-      size="sm"
       color="main"
+      size="sm"
     />
     <wt-icon
       v-else
@@ -77,8 +77,10 @@ const emit = defineEmits(['click']);
 const iColor = computed(() => {
   if (props.disabled) return 'disabled';
   switch (props.color) {
-    case 'secondary': return 'default';
-    default: return props.color;
+    case 'secondary':
+      return 'default';
+    default:
+      return props.color;
   }
 });
 </script>
@@ -91,17 +93,17 @@ const iColor = computed(() => {
 .wt-rounded-action {
   display: block;
   width: fit-content;
-  line-height: 0;
   padding: var(--rounded-action-padding);
+  transition: var(--transition);
+  line-height: 0;
   border: var(--rounded-action-border-size) solid;
-  background: var(--rounded-action-bg-color);
   border-color: var(--rounded-action-bg-color);
   border-radius: var(--border-radius);
-  transition: var(--transition);
+  background: var(--rounded-action-bg-color);
 
   &:hover {
-    background: var(--rounded-action-bg-hover-color);
     border-color: var(--rounded-action-bg-hover-color);
+    background: var(--rounded-action-bg-hover-color);
   }
 
   &--wide {

@@ -1,7 +1,10 @@
-import { computed, isReactive, isRef } from 'vue';
+import { computed, isReactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-export function useValidation({ v: inputV, customValidators: inputCustomValidators }) {
+export function useValidation({
+                                v: inputV,
+                                customValidators: inputCustomValidators,
+                              }) {
   const { t } = useI18n();
 
   // support vue options api, where v is a reactive, not ref
@@ -14,7 +17,8 @@ export function useValidation({ v: inputV, customValidators: inputCustomValidato
   }
   // end
 
-  const isValidation = computed(() => !!v && !!v.value && !!Object.keys(v.value).length);
+  const isValidation = computed(() => !!v && !!v.value &&
+    !!Object.keys(v.value).length);
   const invalid = computed(() => isValidation.value && v.value.$error);
 
   const validationText = computed(() => {
@@ -40,7 +44,7 @@ export function useValidation({ v: inputV, customValidators: inputCustomValidato
     }
 
     if (customValidators && customValidators.value) {
-      // eslint-disable-next-line no-restricted-syntax
+
       for (const { name, text } of customValidators.value) {
         if (v.value[name]?.$invalid) validationText = text;
       }

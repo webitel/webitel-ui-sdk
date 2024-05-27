@@ -29,12 +29,12 @@ export default {
 .wt-headline {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
-  min-height: var(--headline-min-height);
+  justify-content: space-between;
   box-sizing: border-box;
-  background: var(--wt-headline-background-color);
+  min-height: var(--headline-min-height);
   border-radius: var(--border-radius);
+  background: var(--wt-headline-background-color);
 }
 
 .wt-headline__title {
@@ -43,8 +43,8 @@ export default {
 }
 
 .wt-headline__actions-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
 }
 </style>

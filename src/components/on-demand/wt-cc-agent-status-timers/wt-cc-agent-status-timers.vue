@@ -1,19 +1,19 @@
 <template>
   <article class="wt-cc-agent-status-timers">
     <wt-indicator
-      color="disabled"
+      :size="size"
       :text="status.offline"
-      :size="size"
+      color="disabled"
     />
     <wt-indicator
-      color="success"
+      :size="size"
       :text="status.online"
-      :size="size"
+      color="success"
     />
     <wt-indicator
-      color="primary"
-      :text="status.pause"
       :size="size"
+      :text="status.pause"
+      color="primary"
     />
   </article>
 </template>

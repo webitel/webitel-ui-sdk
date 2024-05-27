@@ -1,4 +1,3 @@
-/* eslint-disable */
 import 'vue-multiselect/dist/vue-multiselect.css';
 import Components from './components'; // init all components
 import Directives from './directives'; // init all directives

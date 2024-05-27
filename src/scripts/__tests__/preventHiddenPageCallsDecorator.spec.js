@@ -1,4 +1,5 @@
-import preventHiddenPageCallsDecorator from '../preventHiddenPageCallsDecorator';
+import preventHiddenPageCallsDecorator
+  from '../preventHiddenPageCallsDecorator';
 
 describe('preventHiddenPageCallsDecorator', () => {
   it('prevents call on hidden page', () => {

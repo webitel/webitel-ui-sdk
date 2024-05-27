@@ -18,7 +18,7 @@ describe('taggableMixin', () => {
 
     wrapper.vm.$emit('tag', searchQuery);
 
-    expect(wrapper.emitted().tag).toBeTruthy()
+    expect(wrapper.emitted().tag).toBeTruthy();
     expect(wrapper.emitted().input).toBeFalsy();
   });
-})
+});

@@ -1,32 +1,32 @@
 <template>
   <div
-    class="wt-time-input"
     :class="{
       'wt-time-input--disabled': disabled,
       'wt-time-input--invalid': invalid,
     }"
+    class="wt-time-input"
   >
     <wt-label
       v-if="hasLabel"
-      v-bind="labelProps"
       :disabled="disabled"
       :invalid="invalid"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
+        v-bind="{ label }"
       >
         {{ label }}
       </slot>
     </wt-label>
     <div class="wt-time-input__wrapper">
       <input
-        class="wt-time-input__input"
-        :value="value"
-        :min="0"
-        :max="maxValue"
         :disabled="disabled"
+        :max="maxValue"
+        :min="0"
+        :value="value"
+        class="wt-time-input__input"
         type="number"
         @input="$emit('input', $event.target.value)"
       >
@@ -118,19 +118,20 @@ export default {
   &--disabled {
     pointer-events: none;
   }
+
   .wt-time-input__input {
     @extend %typo-body-1;
 
     display: block;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
     padding: var(--input-padding);
+    transition: var(--transition);
+    color: var(--wt-text-field-text-color);
     border: var(--input-border);
     border-color: var(--wt-text-field-input-border-color);
     border-radius: var(--border-radius);
-    color: var(--wt-text-field-text-color);
     background: transparent;
-    transition: var(--transition);
 
     .wt-time-input--invalid &,
     .wt-time-input--invalid:hover & {

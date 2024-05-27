@@ -1,15 +1,15 @@
 <template>
   <div
-    class="wt-progress-bar"
     :class="[{
                'wt-progress-bar--overflow': isOverflow,
              },
              `wt-progress-bar--${color}`
     ]"
+    class="wt-progress-bar"
   >
     <span
-      class="wt-progress-bar__progress"
       :style="`width: ${progressWidth}%;`"
+      class="wt-progress-bar__progress"
     />
   </div>
 </template>
@@ -53,23 +53,23 @@ export default {
 <style lang="scss" scoped>
 
 .wt-progress-bar {
+  position: relative;
   box-sizing: border-box;
   width: 100%;
-  position: relative;
   padding: var(--wt-progress-bar-padding);
   line-height: 0;
-  background: var(--wt-progress-bar-background-color);
   border-radius: var(--border-radius);
+  background: var(--wt-progress-bar-background-color);
   box-shadow: var(--elevation-1);
 }
 
 .wt-progress-bar__progress {
   display: inline-block;
   height: var(--wt-progress-bar-height);
-  will-change: width;
-  background: var(--wt-progress-bar-background-primary-color);
-  border-radius: var(--wt-progress-bar-border-radius) 0 0 var(--wt-progress-bar-border-radius);
   transition: var(--transition);
+  border-radius: var(--wt-progress-bar-border-radius) 0 0 var(--wt-progress-bar-border-radius);
+  background: var(--wt-progress-bar-background-primary-color);
+  will-change: width;
 }
 
 .wt-progress-bar--primary .wt-progress-bar__progress {

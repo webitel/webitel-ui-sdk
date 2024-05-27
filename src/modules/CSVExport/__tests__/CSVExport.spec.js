@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
-import * as fileSaver from 'file-saver';
 import stringify from 'csv-stringify/lib/sync';
+import * as fileSaver from 'file-saver';
 import CSVExportMixin from '../mixins/exportCSVMixin';
 import '../../../../tests/mocks/localStorageMock';
 

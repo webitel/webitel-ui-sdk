@@ -1,5 +1,5 @@
-import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
 import getNamespacedState from '../../../../store/helpers/getNamespacedState';
+import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
 
 export default {
   mixins: [_urlControllerMixin],

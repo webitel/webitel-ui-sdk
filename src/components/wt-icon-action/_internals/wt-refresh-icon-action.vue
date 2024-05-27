@@ -2,8 +2,8 @@
   <wt-tooltip>
     <template #activator>
       <wt-icon-btn
-        icon="refresh"
         :disabled="disabled"
+        icon="refresh"
         @click="emit('click')"
       />
     </template>

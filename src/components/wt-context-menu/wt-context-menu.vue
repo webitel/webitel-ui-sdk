@@ -1,8 +1,8 @@
 <template>
   <wt-tooltip
-    class="wt-context-menu"
-    :visible="visible"
     :triggers="['click', 'touch']"
+    :visible="visible"
+    class="wt-context-menu"
     placement="bottom-end"
     popper-class="wt-context-menu__floating-wrapper"
   >
@@ -11,8 +11,8 @@
     </template>
     <template #default="{ hide }">
       <ul
-        class="wt-context-menu__menu"
         :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
+        class="wt-context-menu__menu"
       >
         <li
           v-for="(option, index) of options"
@@ -29,8 +29,8 @@
             @click.prevent="handleOptionClick({ option, index, hide })"
           >
             <slot
-              v-bind="option"
               name="option"
+              v-bind="option"
             >
               {{ option.text || option }}
             </slot>
@@ -92,11 +92,11 @@ function handleOptionClick({ option, index, hide }) {
 
 .wt-context-menu__menu {
   @extend %typo-body-2;
-  background-color: var(--wt-context-menu-background-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  transition: var(--transition);
   z-index: 1;
+  transition: var(--transition);
+  border-radius: var(--border-radius);
+  background-color: var(--wt-context-menu-background-color);
+  box-shadow: var(--box-shadow);
 }
 
 .wt-context-menu__option-wrapper {
@@ -117,8 +117,8 @@ function handleOptionClick({ option, index, hide }) {
   display: block;
   padding: var(--wt-context-menu-option-padding);
   cursor: pointer;
-  color: var(--wt-context-menu-option-text-color);
   transition: var(--transition);
+  color: var(--wt-context-menu-option-text-color);
 
   &:hover {
     background-color: var(--wt-context-menu-option-background-hover-color);

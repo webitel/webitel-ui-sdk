@@ -24,6 +24,6 @@ describe('WtIndicator', () => {
       },
     });
     expect(wrapper.find('.wt-indicator__indicator').classes())
-      .toContain('wt-indicator__indicator--primary');
+    .toContain('wt-indicator__indicator--primary');
   });
 });

@@ -7,29 +7,33 @@ const router = createRouter({
   routes: [{ path: '/', name: 'jest' }],
 });
 
-const headers = [{
-  value: 'queue',
-  show: true,
-  sort: null,
-  field: 'queue',
-}, {
-  value: 'agents',
-  show: true,
-  sort: null,
-  field: 'online',
-}];
+const headers = [
+  {
+    value: 'queue',
+    show: true,
+    sort: null,
+    field: 'queue',
+  }, {
+    value: 'agents',
+    show: true,
+    sort: null,
+    field: 'online',
+  },
+];
 
-const sortedHeaders = [{
-  value: 'queue',
-  show: true,
-  sort: 'asc',
-  field: 'queue',
-}, {
-  value: 'agents',
-  show: true,
-  sort: null,
-  field: 'online',
-}];
+const sortedHeaders = [
+  {
+    value: 'queue',
+    show: true,
+    sort: 'asc',
+    field: 'queue',
+  }, {
+    value: 'agents',
+    show: true,
+    sort: null,
+    field: 'online',
+  },
+];
 
 describe('Sort filter mixin', () => {
   const setHeaders = vi.fn();
@@ -43,7 +47,6 @@ describe('Sort filter mixin', () => {
   beforeEach(async () => {
     await router.replace('/');
   });
-
 
   it('Correctly sets value from $route query', async () => {
     await router.replace({ path: '/', query: { sort: '+queue' } });

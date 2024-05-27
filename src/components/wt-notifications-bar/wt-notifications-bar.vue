@@ -57,12 +57,12 @@ export default {
   @extend %wt-scrollbar;
 
   position: fixed;
+  z-index: var(--notifications-bar-z-index);
   top: var(--notifications-bar-corner-margin);
   right: var(--notifications-bar-corner-margin);
-  max-height: var(--notifications-bar-max-height);
-  overflow-y: auto;
   overflow-x: hidden;
-  z-index: var(--notifications-bar-z-index);
+  overflow-y: auto;
+  max-height: var(--notifications-bar-max-height);
 
   .wt-notification {
     margin: var(--notifications-bar-notifications-margin);
@@ -76,7 +76,7 @@ export default {
 
 .wt-notifications-transition-enter,
 .wt-notifications-transition-leave-to {
-  opacity: 0;
   transform: translateX(60px);
+  opacity: 0;
 }
 </style>

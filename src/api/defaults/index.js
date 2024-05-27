@@ -1,7 +1,9 @@
+import getDefaultGetListResponse
+  from './getDefaultGetListResponse/getDefaultGetListResponse';
 import getDefaultGetParams from './getDefaultGetParams/getDefaultGetParams';
-import getDefaultGetListResponse from './getDefaultGetListResponse/getDefaultGetListResponse';
 import getDefaultInstance from './getDefaultInstance/getDefaultInstance';
-import getDefaultOpenAPIConfig from './getDefaultOpenAPIConfig/getDefaultOpenAPIConfig';
+import getDefaultOpenAPIConfig
+  from './getDefaultOpenAPIConfig/getDefaultOpenAPIConfig';
 
 export {
   getDefaultGetParams,

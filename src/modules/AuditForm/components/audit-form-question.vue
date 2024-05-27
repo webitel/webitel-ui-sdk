@@ -30,8 +30,8 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { computed, onMounted, ref, toRefs } from 'vue';
-import isEmpty from '../../../scripts/isEmpty';
 import vClickaway from '../../../directives/clickaway/clickaway';
+import isEmpty from '../../../scripts/isEmpty';
 import QuestionRead from './audit-form-question-read-wrapper.vue';
 import QuestionWrite from './audit-form-question-write-wrapper.vue';
 
@@ -123,6 +123,7 @@ onMounted(() => {
   // override audit-form-question-read-wrapper specificity for hover
   &.audit-form-question--answered {
     background: var(--secondary-color);
+
     &:hover,
     &:focus-within {
       border-color: transparent;

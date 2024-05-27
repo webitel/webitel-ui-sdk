@@ -7,9 +7,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
 import { useStore } from 'vuex';
-import getNamespacedState from '../../../store/helpers/getNamespacedState';
 
 const props = defineProps({
   namespace: {

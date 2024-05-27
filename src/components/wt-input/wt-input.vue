@@ -72,9 +72,7 @@
 </template>
 
 <script setup>
-import {
-  ref, computed, useSlots, onMounted, toRefs,
-} from 'vue';
+import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
 /*
@@ -296,8 +294,8 @@ onMounted(() => {
   width: 100%;
   padding: var(--input-padding);
   transition: var(--transition);
-  border: var(--input-border);
   color: var(--wt-text-field-text-color);
+  border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
   background: transparent;

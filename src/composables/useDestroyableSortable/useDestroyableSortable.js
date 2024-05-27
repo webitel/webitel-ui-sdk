@@ -1,10 +1,5 @@
 import Sortable from 'sortablejs';
-import {
-  ref,
-  nextTick,
-  onMounted,
-  onUnmounted,
-} from 'vue';
+import { nextTick, onMounted, onUnmounted, ref } from 'vue';
 
 /**
  * @param elRef

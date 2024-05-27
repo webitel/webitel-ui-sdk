@@ -1,19 +1,19 @@
 <template>
   <article
-    class="audit-form-question-read"
     :class="{
       'audit-form-question-read--filled': isResult && result.score != null,
       'audit-form-question-read--readonly': readonly,
     }"
-    @keyup.enter="emit('activate')"
+    class="audit-form-question-read"
     @click="emit('activate')"
+    @keyup.enter="emit('activate')"
   >
     <header class="audit-form-question-read-header">
       <p
-        class="audit-form-question-read-text"
         :class="{
           'audit-form-question-read-text--required': question.required,
         }"
+        class="audit-form-question-read-text"
       >
         {{ question.question }}
       </p>
@@ -45,10 +45,10 @@
 <script setup>
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
+import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import isEmpty from '../../../scripts/isEmpty';
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
-import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 
 const props = defineProps({
   question: {
@@ -92,9 +92,9 @@ const isResult = computed(() => !isEmpty(props.result));
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  border: 1px solid transparent;
   transition: var(--transition);
+  border: 1px solid transparent;
+  gap: var(--spacing-sm);
 
   &:not(.audit-form-question-read--readonly) {
     &:hover,
@@ -127,6 +127,7 @@ const isResult = computed(() => !isEmpty(props.result));
     }
   }
 }
+
 .audit-form-question--clear {
   margin-top: var(--spacing-sm);
   cursor: pointer;

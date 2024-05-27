@@ -1,29 +1,29 @@
 <template>
   <div
-    class="wt-radio"
     :class="{
       'wt-radio--active': isChecked,
       'wt-radio--outline': outline,
       'wt-radio--disabled': disabled,
     }"
+    class="wt-radio"
   >
     <wt-label class="wt-radio__wrapper">
       <input
-        class="wt-radio__input"
-        type="radio"
-        :value="value"
         :checked="isChecked"
         :disabled="disabled"
+        :value="value"
+        class="wt-radio__input"
+        type="radio"
         @input="inputHandler"
       >
       <wt-icon
-        class="wt-radio__icon"
         :icon="radioIcon"
+        class="wt-radio__icon"
       />
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label, isChecked, disabled }"
         name="label"
+        v-bind="{ label, isChecked, disabled }"
       >
         <div
           v-if="label"
@@ -108,8 +108,8 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-  user-select: none;
   cursor: pointer;
+  user-select: none;
 }
 
 .wt-radio__label {
@@ -122,8 +122,8 @@ export default {
   position: absolute;
   width: 0;
   height: 0;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
 }
 
 .wt-radio__icon {

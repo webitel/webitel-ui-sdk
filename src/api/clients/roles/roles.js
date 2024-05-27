@@ -1,4 +1,6 @@
 import deepCopy from 'deep-copy';
+import ApplicationsAccess
+  from '../../../modules/Userinfo/classes/ApplicationsAccess';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -13,8 +15,6 @@ import applyTransform, {
   snakeToCamel,
   starToSearch,
 } from '../../transformers';
-import ApplicationsAccess
-  from '../../../modules/Userinfo/classes/ApplicationsAccess';
 
 const instance = getDefaultInstance();
 

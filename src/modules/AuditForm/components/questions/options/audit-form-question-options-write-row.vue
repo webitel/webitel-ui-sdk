@@ -2,15 +2,15 @@
   <div class="audit-form-question-options-write-row">
     <wt-input
       :label="$t('webitelUI.auditForm.option', 1)"
-      :value="option.name"
       :v="v$.option.name"
+      :value="option.name"
       prevent-trim
       @input="emit('update:option', { name: $event, score: option.score })"
     />
     <wt-input
       :label="$t('webitelUI.auditForm.score', 1)"
-      :value="option.score"
       :v="v$.option.score"
+      :value="option.score"
       type="number"
       @input="emit('update:option', { name: option.name, score: $event })"
     />
@@ -29,11 +29,11 @@
 
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
-import { required, minValue, maxValue } from '@vuelidate/validators';
+import { maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, onMounted, toRefs } from 'vue';
-import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
 import WtIconBtn from '../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../../../components/wt-input/wt-input.vue';
+import WtTooltip from '../../../../../components/wt-tooltip/wt-tooltip.vue';
 import decimalValidator from '../../../../../validators/decimalValidator';
 
 const props = defineProps({

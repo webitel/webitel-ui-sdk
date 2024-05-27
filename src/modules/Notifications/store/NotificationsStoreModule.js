@@ -1,4 +1,4 @@
-import { ChatActions, CallActions, JobState } from 'webitel-sdk';
+import { CallActions, ChatActions, JobState } from 'webitel-sdk';
 import i18n from '../../../locale/i18n';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
 import endChatSound from '../assets/audio/end-chat.wav';
@@ -19,7 +19,7 @@ const getNotificationSound = (action) => {
     case ChatActions.Close:
       return new Audio(endChatSound);
     case CallActions.Ringing:
-      // eslint-disable-next-line no-case-declarations
+
       const audio = new Audio(ringingSound);
       audio.loop = true;
       return audio;
@@ -43,7 +43,8 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
   getters = {
     IS_MAIN_TAB: (state) => state.thisTabId === state.currentTabId,
-    IS_SOUND_ALLOWED: (state, getters) => getters.IS_MAIN_TAB && !state.currentlyPlaying,
+    IS_SOUND_ALLOWED: (state, getters) => getters.IS_MAIN_TAB &&
+      !state.currentlyPlaying,
   };
 
   actions = {
@@ -100,17 +101,17 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
     // public
     INITIALIZE: (context) => Promise
-      .allSettled([
-                    context.dispatch('_SETUP_THIS_TAB_ID'),
-                    context.dispatch('_SETUP_UNREAD_COUND_BROADCAST_LISTENING'),
-                    context.dispatch('_SUBSCRIBE_TAB_CLOSING'),
-                  ]),
+    .allSettled([
+      context.dispatch('_SETUP_THIS_TAB_ID'),
+      context.dispatch('_SETUP_UNREAD_COUND_BROADCAST_LISTENING'),
+      context.dispatch('_SUBSCRIBE_TAB_CLOSING'),
+    ]),
 
     DESTROY: (context) => Promise
-      .allSettled([
-                    context.dispatch('STOP_SOUND'),
-                    context.dispatch('_REMOVE_CURRENT_TAB_ID'),
-                  ]),
+    .allSettled([
+      context.dispatch('STOP_SOUND'),
+      context.dispatch('_REMOVE_CURRENT_TAB_ID'),
+    ]),
 
     PLAY_SOUND: (context, {
       action,
@@ -131,7 +132,8 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
     STOP_SOUND: (context) => {
       const { currentlyPlaying } = context.state;
-      if (currentlyPlaying && currentlyPlaying instanceof Audio) currentlyPlaying.pause();
+      if (currentlyPlaying && currentlyPlaying instanceof
+        Audio) currentlyPlaying.pause();
       localStorage.removeItem('wtIsPlaying');
       context.commit('RESET_CURRENTLY_PLAYING');
     },

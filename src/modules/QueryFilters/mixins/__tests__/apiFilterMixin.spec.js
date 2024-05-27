@@ -35,7 +35,11 @@ describe('API filter mixin', () => {
     const wrapper = shallowMount(Component, {
       global: { plugins: [router] },
     });
-    expect(setValue).toHaveBeenCalledWith({ filter: 'team', value: [{ id: team[0] }, { id: team[1] }] });
+    expect(setValue)
+    .toHaveBeenCalledWith({
+      filter: 'team',
+      value: [{ id: team[0] }, { id: team[1] }],
+    });
   });
 
   it('Sets empty array value if $route query is empty', async () => {

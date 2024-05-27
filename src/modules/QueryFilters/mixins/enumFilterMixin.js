@@ -35,7 +35,9 @@ export default {
       if (optsHaveLocale) {
         return this.options.map((opt) => ({
           ...opt,
-          name: Array.isArray(opt.locale) ? this.$tc(...opt.locale) : this.$t(opt.locale),
+          name: Array.isArray(opt.locale)
+            ? this.$tc(...opt.locale)
+            : this.$t(opt.locale),
         }));
       }
       return this.options;
@@ -49,8 +51,8 @@ export default {
         restore not just value, but value with all client-side properties like locale
          */
         newValue = this.localizedOptions
-          .filter((option) => value
-            .some((value) => value === option[this.storedProp]));
+        .filter((option) => value
+        .some((value) => value === option[this.storedProp]));
 
         /*
         but if allowCustomValues is true, we should also restore custom values,
@@ -59,9 +61,9 @@ export default {
         if (this.allowCustomValues) {
           newValue = newValue.concat(
             value
-              .filter((val) => !this.localizedOptions
-                .some((option) => val === option[this.storedProp]))
-              .map((val) => ({ [this.storedProp]: val, name: val })),
+            .filter((val) => !this.localizedOptions
+            .some((option) => val === option[this.storedProp]))
+            .map((val) => ({ [this.storedProp]: val, name: val })),
           );
         }
       } else {
@@ -69,10 +71,10 @@ export default {
         see comments above
          */
         newValue = this.localizedOptions
-          .find((option) => value === option[this.storedProp]);
-          if (this.allowCustomValues) {
-            newValue = newValue || { [this.storedProp]: value, name: value };
-          }
+        .find((option) => value === option[this.storedProp]);
+        if (this.allowCustomValues) {
+          newValue = newValue || { [this.storedProp]: value, name: value };
+        }
       }
       this.setValue({ filter: this.filterQuery, value: newValue });
     },

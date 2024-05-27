@@ -37,7 +37,7 @@ export default {
         else if (this.v.websocketValidator?.$invalid) validationText = `${this.$t('validation.websocketValidator')}`;
         else if (this.v.integer?.$invalid) validationText = `${this.$t('validation.integer')}`;
       }
-      // eslint-disable-next-line no-restricted-syntax
+
       for (const { name, text } of this.customValidators) {
         if (this.v[name]?.$invalid) validationText = text;
       }

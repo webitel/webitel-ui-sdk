@@ -2,8 +2,8 @@
   <wt-tooltip>
     <template #activator>
       <wt-icon-btn
-        icon="download"
         :disabled="disabled"
+        icon="download"
         @click="emit('click')"
       />
     </template>

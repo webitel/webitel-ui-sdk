@@ -1,10 +1,10 @@
 <template>
   <label
-    class="wt-label"
     :class="{
       'wt-label--invalid': invalid,
       'wt-label--disabled': disabled,
     }"
+    class="wt-label"
   >
     <slot />
     <wt-hint
@@ -45,9 +45,9 @@ export default {
 
   display: flex;
   align-items: center;
-  color: var(--wt-label-color);
-  transition: var(--transition);
   cursor: text;
+  transition: var(--transition);
+  color: var(--wt-label-color);
 
   &--invalid {
     color: var(--wt-label-error-color);

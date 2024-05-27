@@ -2,8 +2,8 @@
   <wt-tooltip class="wt-hint">
     <template #activator>
       <wt-icon-btn
-        icon="rounded-info"
         :color="iconColor"
+        icon="rounded-info"
         size="sm"
       />
     </template>

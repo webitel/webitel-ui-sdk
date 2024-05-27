@@ -1,5 +1,5 @@
 import { createI18n } from 'vue-i18n';
-import en from './en/en';
+import en from './en/en.js';
 import es from './es/es';
 import kz from './kz/kz';
 import ru from './ru/ru';
@@ -13,7 +13,6 @@ const messages = {
   kz,
 };
 
-// eslint-disable-next-line new-cap
 export default createI18n({
   // legacy: false,
   locale: 'en',

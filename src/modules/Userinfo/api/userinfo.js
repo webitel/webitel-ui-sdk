@@ -42,7 +42,7 @@ const userinfo = (instance) => ({
         notify,
       ]);
     }
-  }
+  },
 });
 
 export default userinfo;

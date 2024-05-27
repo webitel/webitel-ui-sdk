@@ -111,16 +111,19 @@ export default {
         width: var(--wt-popup-size-xs);
       }
     }
+
     &-sm {
       .wt-popup__popup {
         width: var(--wt-popup-size-sm);
       }
     }
+
     &-md {
       .wt-popup__popup {
         width: var(--wt-popup-size-md);
       }
     }
+
     &-lg {
       .wt-popup__popup {
         width: var(--wt-popup-size-lg);

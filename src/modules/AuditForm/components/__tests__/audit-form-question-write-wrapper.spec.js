@@ -3,9 +3,12 @@ import { EngineAuditQuestionType } from 'webitel-sdk';
 import {
   generateQuestionOptionsSchema,
 } from '../../schemas/AuditFormQuestionOptionsSchema';
-import AuditFormQuestionWriteWrapper from '../audit-form-question-write-wrapper.vue';
 import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema';
-import { generateQuestionScoreSchema } from '../../schemas/AuditFormQuestionScoreSchema';
+import {
+  generateQuestionScoreSchema,
+} from '../../schemas/AuditFormQuestionScoreSchema';
+import AuditFormQuestionWriteWrapper
+  from '../audit-form-question-write-wrapper.vue';
 
 const v = { question: {} };
 
@@ -27,7 +30,9 @@ describe('AuditFormQuestionWriteWrapper', () => {
         v,
       },
     });
-    wrapper.findComponent({ name: 'wt-switcher' }).vm.$emit('change', !question.required);
+    wrapper.findComponent({ name: 'wt-switcher' })
+    .vm
+    .$emit('change', !question.required);
     expect(wrapper.emitted()['change:question'][0][0].required)
     .toBe(!question.required);
   });
@@ -40,7 +45,9 @@ describe('AuditFormQuestionWriteWrapper', () => {
       },
     });
     wrapper.find('.audit-form-question-write-content-question')
-    .findComponent({ name: 'wt-select' }).vm.$emit('input', { value: EngineAuditQuestionType.Score });
+    .findComponent({ name: 'wt-select' })
+    .vm
+    .$emit('input', { value: EngineAuditQuestionType.Score });
     expect(wrapper.emitted()['change:question'][0][0])
     .toEqual(generateQuestionScoreSchema());
   });
@@ -53,7 +60,9 @@ describe('AuditFormQuestionWriteWrapper', () => {
       },
     });
     wrapper.find('.audit-form-question-write-content-question')
-    .findComponent({ name: 'wt-select' }).vm.$emit('input', { value: EngineAuditQuestionType.Option });
+    .findComponent({ name: 'wt-select' })
+    .vm
+    .$emit('input', { value: EngineAuditQuestionType.Option });
     expect(wrapper.emitted()['change:question'][0][0])
     .toEqual(generateQuestionOptionsSchema());
   });

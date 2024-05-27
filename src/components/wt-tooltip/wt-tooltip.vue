@@ -15,12 +15,12 @@
       v-if="isVisible"
       ref="floating"
       v-clickaway="hideTooltip"
-      class="wt-tooltip__floating"
       :class="[popperClass]"
       :style="floatingStyles"
       :triggers="popperTriggers"
-      @show="showTooltip"
+      class="wt-tooltip__floating"
       @hide="hideTooltip"
+      @show="showTooltip"
     >
       <slot v-bind="{ hide: hideTooltip }" />
     </wt-tooltip-floating>
@@ -28,12 +28,8 @@
 </template>
 
 <script setup>
-import {
-  ref, onMounted, watch,
-} from 'vue';
-import {
-  useFloating, autoPlacement, shift, flip, offset, autoUpdate,
-} from '@floating-ui/vue';
+import { autoPlacement, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
+import { onMounted, ref, watch } from 'vue';
 import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions';
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
 
@@ -127,12 +123,12 @@ onMounted(() => {
 
   .wt-tooltip-floating {
     @extend %typo-body-2;
+    z-index: 1000;
     padding: var(--spacing-2xs) var(--spacing-xs);
     color: var(--wt-tooltip-text-color);
-    background: var(--wt-tooltip-background-color);
     border-radius: var(--border-radius);
+    background: var(--wt-tooltip-background-color);
     box-shadow: var(--elevation-10);
-    z-index: 1000;
   }
 }
 </style>

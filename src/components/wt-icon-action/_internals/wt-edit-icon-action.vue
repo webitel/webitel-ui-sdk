@@ -2,8 +2,8 @@
   <wt-tooltip>
     <template #activator>
       <wt-icon-btn
-        icon="edit"
         :disabled="disabled"
+        icon="edit"
         @click="emit('click')"
       />
     </template>

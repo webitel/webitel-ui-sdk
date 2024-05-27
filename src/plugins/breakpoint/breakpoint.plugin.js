@@ -130,7 +130,6 @@ const install = (app) => {
 
   onResize();
 
-  // eslint-disable-next-line no-param-reassign
   app.config.globalProperties.$breakpoint = breakpoint;
 };
 

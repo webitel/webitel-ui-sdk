@@ -1,4 +1,3 @@
-
 // context === filter "this"
 const queryGetter = (context) => (router) => () => {
   if (!router) throw new Error('Router is required for queryGetter!');

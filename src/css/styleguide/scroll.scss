@@ -12,17 +12,17 @@
   &::-webkit-scrollbar {
     width: var(--scrollbar-width);
     height: var(--scrollbar-height);
-    background-color: var(--scrollbar-bg-color);
     cursor: pointer;
     border-radius: var(--scrollbar-border-radius);
+    background-color: var(--scrollbar-bg-color);
   }
 
   // scrollable element
   &::-webkit-scrollbar-thumb {
     width: var(--scrollbar-thumb-width);
     height: var(--scrollbar-thumb-height);
-    background-color: var(--scrollbar-thumb-color);
     border-radius: var(--scrollbar-border-radius);
+    background-color: var(--scrollbar-thumb-color);
   }
 }
 
@@ -32,12 +32,13 @@
     height: 18px;
     background-color: var(--scrollbar-bg-color);
   }
+
   &::-webkit-scrollbar-thumb {
     height: 2px;
     border: 4px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    background-color: var(--scrollbar-thumb-color);
     border-radius: var(--scrollbar-border-radius);
-   // -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+    background-color: var(--scrollbar-thumb-color);
+    background-clip: padding-box;
+    // -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
   }
 }

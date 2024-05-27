@@ -1,7 +1,8 @@
 import deepCopy from 'deep-copy';
 import {
   getDefaultGetListResponse,
-  getDefaultGetParams, getDefaultInstance,
+  getDefaultGetParams,
+  getDefaultInstance,
 } from '../../defaults';
 import applyTransform, {
   camelToSnake,
@@ -84,7 +85,7 @@ const getUser = async ({ itemId: id }) => {
     const copy = deepCopy(item);
     if (copy.license) {
       copy.license.forEach((item) => {
-        // eslint-disable-next-line no-param-reassign
+
         item.name = item.prod;
       });
     }
@@ -118,9 +119,9 @@ const getUser = async ({ itemId: id }) => {
 const preRequestHandler = (item) => {
   const copy = deepCopy(item);
   if (item.device && !item.device.id) delete copy.device;
-  // eslint-disable-next-line no-param-reassign
+
   if (copy.roles) copy.roles.forEach((copy) => delete copy.text);
-  // eslint-disable-next-line no-param-reassign
+
   if (copy.devices) copy.devices.forEach((copy) => delete copy.text);
   if (copy.license) {
     copy.license = copy.license.map((copy) => ({ id: copy.id }));

@@ -2,8 +2,8 @@ import { BucketServiceApiFactory } from 'webitel-sdk';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
-  getDefaultOpenAPIConfig,
   getDefaultInstance,
+  getDefaultOpenAPIConfig,
 } from '../../defaults';
 import applyTransform, {
   camelToSnake,

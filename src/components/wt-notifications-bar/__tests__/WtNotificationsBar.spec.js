@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
-import WtNotificationsBar from '../wt-notifications-bar.vue';
-import WtNotification from '../../wt-notification/wt-notification.vue';
 import eventBus from '../../../scripts/eventBus';
+import WtNotification from '../../wt-notification/wt-notification.vue';
+import WtNotificationsBar from '../wt-notifications-bar.vue';
 
 describe('WtNotificationsBar', () => {
   it('renders a component', () => {

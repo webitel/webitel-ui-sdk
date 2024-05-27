@@ -1,6 +1,6 @@
-import { shallowMount, mount } from '@vue/test-utils';
-import WtTimepicker from '../wt-timepicker.vue';
+import { mount, shallowMount } from '@vue/test-utils';
 import WtTimeInput from '../../wt-time-input/wt-time-input.vue';
+import WtTimepicker from '../wt-timepicker.vue';
 
 describe('WtTimepicker', () => {
   it('renders a component', () => {

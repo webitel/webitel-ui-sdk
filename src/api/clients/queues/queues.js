@@ -1,5 +1,6 @@
-import { QueueServiceApiFactory } from 'webitel-sdk';
 import deepCopy from 'deep-copy';
+import { QueueServiceApiFactory } from 'webitel-sdk';
+import isEmpty from '../../../scripts/isEmpty';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -15,7 +16,6 @@ import applyTransform, {
   snakeToCamel,
   starToSearch,
 } from '../../transformers';
-import isEmpty from '../../../scripts/isEmpty';
 import processing from './defaults/processing';
 
 const instance = getDefaultInstance();
@@ -239,11 +239,11 @@ const getQueuesTags = async (params) => {
   ]);
   try {
     const response = await queueService.searchQueueTags(
-        page,
-        size,
-        search,
-        sort,
-        fields,
+      page,
+      size,
+      search,
+      sort,
+      fields,
     );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(doNotConvertKeys),

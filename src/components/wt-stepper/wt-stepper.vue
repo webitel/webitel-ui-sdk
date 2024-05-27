@@ -10,12 +10,12 @@
         >
           <div
             v-if="idx !== 0"
-            class="wt-stepper-steps__divider"
             :class="{ 'wt-stepper-steps__divider--completed': completed }"
+            class="wt-stepper-steps__divider"
           />
           <wt-chip
-            class="wt-stepper-steps__item"
             :color="completed ? 'primary' : 'secondary'"
+            class="wt-stepper-steps__item"
           >
             {{ name }}
           </wt-chip>
@@ -48,9 +48,9 @@ const props = defineProps({
 const description = computed(() => props.steps[props.activeStep - 1].description);
 
 const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
-    ...item,
-    completed: props.activeStep > idx,
-  })));
+  ...item,
+  completed: props.activeStep > idx,
+})));
 </script>
 
 <style lang="scss">
@@ -65,8 +65,8 @@ const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
 .wt-stepper-header {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-lg);
 }
 
 .wt-stepper-steps {

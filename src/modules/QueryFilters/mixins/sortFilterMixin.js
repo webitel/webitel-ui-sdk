@@ -1,16 +1,27 @@
+import {
+  queryToSortAdapter,
+  SortSymbols,
+  sortToQueryAdapter,
+} from '../../../scripts/sortQueryAdapters';
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
-import { SortSymbols, queryToSortAdapter, sortToQueryAdapter } from '../../../scripts/sortQueryAdapters';
 
 const getNextSortOrder = (sort) => {
   switch (sort) {
-    case SortSymbols.NONE: return SortSymbols.ASC;
-    case SortSymbols.ASC: return SortSymbols.DESC;
-    case SortSymbols.DESC: return SortSymbols.NONE;
-    default: return SortSymbols.ASC;
+    case SortSymbols.NONE:
+      return SortSymbols.ASC;
+    case SortSymbols.ASC:
+      return SortSymbols.DESC;
+    case SortSymbols.DESC:
+      return SortSymbols.NONE;
+    default:
+      return SortSymbols.ASC;
   }
 };
 
-const encodeSortQuery = ({ column, order }) => (`${sortToQueryAdapter(order)}${column.field}`);
+const encodeSortQuery = ({
+                           column,
+                           order,
+                         }) => (`${sortToQueryAdapter(order)}${column.field}`);
 
 const decodeSortQuery = ({ value }) => {
   const sort = queryToSortAdapter(value.slice(0, 1));

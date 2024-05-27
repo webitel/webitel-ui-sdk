@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
-import WtNotification from '../wt-notification.vue';
 import WtIcon from '../../wt-icon/wt-icon.vue';
+import WtNotification from '../wt-notification.vue';
 
 describe('WtNotification', () => {
   it('renders a component', () => {

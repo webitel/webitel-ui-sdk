@@ -7,8 +7,10 @@ import {
 } from '../../defaults';
 import applyTransform, {
   camelToSnake,
-  merge, mergeEach,
-  notify, sanitize,
+  merge,
+  mergeEach,
+  notify,
+  sanitize,
   snakeToCamel,
   starToSearch,
 } from '../../transformers';

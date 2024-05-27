@@ -1,6 +1,5 @@
 <template>
   <button
-    class="wt-button"
     :class="[
       colorClass,
       `wt-button--size-${size}`,
@@ -11,15 +10,16 @@
         'wt-button--loading': showLoader,
       }
     ]"
-    type="button"
     :disabled="disabled"
+    class="wt-button"
+    type="button"
     @click="$emit('click', $event)"
   >
     <!--  Show loader and button contents at the same time to prevent width shift if content > min-width of button -->
     <wt-loader
       v-if="showLoader"
-      size="sm"
       :color="loaderColor"
+      size="sm"
     />
     <div class="wt-button__contents">
       <slot>
@@ -114,17 +114,17 @@ export default {
 <style lang="scss" scoped>
 .wt-button {
   @extend %typo-button;
-  box-sizing: border-box;
   position: relative;
   display: inline-block;
+  box-sizing: border-box;
   min-width: var(--btn-min-width);
   padding: var(--btn-padding);
+  cursor: pointer;
+  transition: var(--transition);
   color: var(--btn-primary-text-color);
+  border-radius: var(--border-radius);
   background-color: var(--btn-primary-color);
   background-clip: padding-box;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-  cursor: pointer;
 
   &__contents {
     display: contents;
@@ -230,10 +230,10 @@ export default {
   }
 
   &.wt-button--disabled {
-    color: var(--btn-disabled-text-color);
-    background-color: var(--btn-disabled-color);
     cursor: auto;
     pointer-events: none;
+    color: var(--btn-disabled-text-color);
+    background-color: var(--btn-disabled-color);
     box-shadow: none;
   }
 

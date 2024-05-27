@@ -1,8 +1,8 @@
 <template>
   <wt-search-bar
+    :placeholder="$t('reusable.search')"
     :value="filterSchema.value"
     debounce
-    :placeholder="$t('reusable.search')"
     @input="setValue({ filter: filterQuery, value: $event })"
     @search="setValueToQuery({ filterQuery, value: $event })"
   />

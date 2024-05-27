@@ -7,10 +7,10 @@
       <options-write-row
         v-for="(option, key) of question.options"
         :key="key"
-        :option="option"
         :first="key === 0"
-        @update:option="updateQuestion({ path: `options[${key}]`, value: $event })"
+        :option="option"
         @delete="deleteQuestionOption({ key })"
+        @update:option="updateQuestion({ path: `options[${key}]`, value: $event })"
       />
       <wt-button
         class="audit-form-question-options-write__add-button"
@@ -39,11 +39,11 @@
 </template>
 
 <script setup>
-import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 import WtButton from '../../../../../components/wt-button/wt-button.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import updateObject from '../../../../../scripts/updateObject';
 import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema';
+import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 
 const props = defineProps({
   question: {

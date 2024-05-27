@@ -1,4 +1,4 @@
-import { shallowMount, mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { createStore } from 'vuex';
 import AgentStatus from '../../../../enums/AgentStatus/AgentStatus.enum';
 import * as AgentStatusAPIFactory from '../../api/agent-status';
@@ -8,11 +8,13 @@ import WtCcAgentStatusSelect from '../wt-cc-agent-status-select.vue';
 const pauseCauses = [{ name: 'jest1' }, { name: 'jest2' }];
 const getAgentPauseCausesMock = vi.fn(() => ({ items: pauseCauses }));
 // https://stackoverflow.com/a/63727813
-vi.spyOn(PauseCauseAPIFactory, 'default').mockImplementation(() => ({ getList: getAgentPauseCausesMock }));
+vi.spyOn(PauseCauseAPIFactory, 'default')
+.mockImplementation(() => ({ getList: getAgentPauseCausesMock }));
 
 const agentStatusMock = vi.fn(() => {});
 // https://stackoverflow.com/a/63727813
-vi.spyOn(AgentStatusAPIFactory, 'default').mockImplementation(() => ({ patch: agentStatusMock }));
+vi.spyOn(AgentStatusAPIFactory, 'default')
+.mockImplementation(() => ({ patch: agentStatusMock }));
 
 const agent = {
   status: '',
@@ -64,7 +66,8 @@ describe('Wt Cc Agent Status Select', () => {
     await wrapper.vm.$nextTick(); // load pause causes
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick(); // render popup
-    expect(wrapper.findComponent({ name: 'pause-cause-popup' }).isVisible()).toBe(true);
+    expect(wrapper.findComponent({ name: 'pause-cause-popup' }).isVisible())
+    .toBe(true);
   });
   it(`at pause-cause-popup "change" event, triggers patch agent status
    with "pause" status and passed pauseCause`, async () => {

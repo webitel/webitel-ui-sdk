@@ -1,14 +1,14 @@
 <template>
   <aside
-    class="wt-badge"
     :class="{ 'wt-badge--outside': outside }"
     :style="{ background: `var(--${colorVariable})` }"
+    class="wt-badge"
   >
     <img
-      class="wt-badge__pic"
       v-if="iconBadgePic"
-      :src="iconBadgePic"
       :alt="iconBadge"
+      :src="iconBadgePic"
+      class="wt-badge__pic"
     >
   </aside>
 </template>

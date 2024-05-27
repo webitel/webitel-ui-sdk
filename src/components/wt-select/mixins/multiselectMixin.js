@@ -1,7 +1,6 @@
 import VueMultiselect from 'vue-multiselect';
 import { ObserveVisibility } from 'vue-observe-visibility';
-import validationMixin
-  from '../../../mixins/validationMixin/validationMixin';
+import validationMixin from '../../../mixins/validationMixin/validationMixin';
 import debounce from '../../../scripts/debounce';
 import isEmpty from '../../../scripts/isEmpty';
 import labelUsageMixin from '../../wt-label/mixins/labelUsageMixin';
@@ -133,7 +132,9 @@ export default {
     async fetchOptions({ search, page } = this.searchParams) {
       if (!this.isApiMode) return;
       const { items, next } = await this.searchMethod({ search, page });
-      this.apiOptions = this.searchParams.page === 1 ? items : this.apiOptions.concat(items);
+      this.apiOptions = this.searchParams.page === 1
+        ? items
+        : this.apiOptions.concat(items);
       this.searchHasNext = next;
       this.isLoading = false;
     },
@@ -153,7 +154,7 @@ export default {
     disabled() {
       // load options if becomes enabled
       if (!this.disabled) this.fetchOptions();
-    }
+    },
   },
 
   created() {

@@ -5,23 +5,23 @@
       class="audit-form-question-score-write"
     >
       <wt-input
-        :value="question.min"
-        :v="v$.question.min"
-        :number-min="0"
-        :number-max="19"
         :label="$t('reusable.from')"
-        type="number"
+        :number-max="19"
+        :number-min="0"
+        :v="v$.question.min"
+        :value="question.min"
         required
+        type="number"
         @input="updateQuestion({ path: 'min', value: $event })"
       />
       <wt-input
-        :value="question.max"
-        :v="v$.question.max"
-        :number-min="1"
-        :number-max="20"
         :label="$t('reusable.to')"
-        type="number"
+        :number-max="20"
+        :number-min="1"
+        :v="v$.question.max"
+        :value="question.max"
         required
+        type="number"
         @input="updateQuestion({ path: 'max', value: $event })"
       />
     </div>
@@ -33,8 +33,8 @@
         v-for="(value) of scoreRange"
         :key="value"
         :label="`${value}`"
-        :value="value"
         :selected="isResult ? result.score : null"
+        :value="value"
         @input="emit('change:result', { score: value })"
       />
     </div>
@@ -43,12 +43,12 @@
 
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
-import { maxValue, minValue, required, integer } from '@vuelidate/validators';
+import { integer, maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, onMounted, toRefs } from 'vue';
+import WtInput from '../../../../../components/wt-input/wt-input.vue';
+import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import isEmpty from '../../../../../scripts/isEmpty';
 import updateObject from '../../../../../scripts/updateObject';
-import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
-import WtInput from '../../../../../components/wt-input/wt-input.vue';
 
 const props = defineProps({
   question: {
@@ -119,9 +119,9 @@ onMounted(() => v$.value.$touch());
 <style lang="scss" scoped>
 .audit-form-question-score-write {
   display: grid;
+  margin-right: calc(var(--spacing-sm) + 24px); // icon offset
   grid-template-columns: 100px 100px;
   gap: var(--spacing-sm);
-  margin-right: calc(var(--spacing-sm) + 24px); // icon offset
 }
 
 .audit-form-question-score-read {

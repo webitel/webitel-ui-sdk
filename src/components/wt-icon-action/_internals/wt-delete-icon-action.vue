@@ -2,8 +2,8 @@
   <wt-tooltip>
     <template #activator>
       <wt-icon-btn
-        icon="bucket"
         :disabled="disabled"
+        icon="bucket"
         @click="emit('click')"
       />
     </template>

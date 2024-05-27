@@ -4,8 +4,8 @@
     :prev="page > 1"
     :size="localSize"
     debounce
-    @input="localSize = $event"
     @change="setSize(localSize)"
+    @input="localSize = $event"
     @next="setPage(+page + 1)"
     @prev="setPage(+page - 1)"
   />

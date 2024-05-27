@@ -12,9 +12,9 @@ const props = defineProps({
 
 <template>
   <img
-    class="wt-logo"
-    alt="Webitel"
     :src="darkMode ? LogoDark : LogoLight"
+    alt="Webitel"
+    class="wt-logo"
   >
 </template>
 
