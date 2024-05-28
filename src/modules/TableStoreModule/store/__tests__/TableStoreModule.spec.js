@@ -147,14 +147,14 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       callback: (payload) => store.dispatch('table/ON_FILTER_EVENT', payload),
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('page')).toBe(12);
+    expect(store.getters['table/FILTERS']().page).toBe(12);
 
     await store.dispatch('table/filters/SET_FILTER', {
       name: 'vi',
       value: 24,
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('page')).toBe(1);
+    expect(store.getters['table/FILTERS']().page).toBe(1);
 
     await store.dispatch('table/filters/FLUSH_SUBSCRIBERS');
   });
