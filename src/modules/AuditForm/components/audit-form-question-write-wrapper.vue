@@ -59,8 +59,8 @@
 </template>
 
 <script setup>
-import cloneDeep from 'lodash/cloneDeep';
-import set from 'lodash/set';
+import cloneDeep from 'lodash/cloneDeep.js';
+import set from 'lodash/set.js';
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';

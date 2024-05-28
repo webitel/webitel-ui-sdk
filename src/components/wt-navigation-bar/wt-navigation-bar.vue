@@ -197,11 +197,11 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-navigation-bar__menu-btn {
   display: block;
   width: fit-content;
-  width: -moz-fit-content;
 }
 
 .wt-navigation-bar__nav {

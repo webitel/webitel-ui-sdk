@@ -146,6 +146,8 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 .wt-app-navigator {
   position: relative;
   z-index: var(--wt-app-header-content-z-index);

@@ -112,6 +112,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 .wt-button {
   @extend %typo-button;
   position: relative;

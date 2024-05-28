@@ -5,8 +5,9 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import { QueueType } from 'webitel-sdk/esm2015/enums/index.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import QueueType from '../../enums/QueueType/QueueType.enum.js';
+import AdminSections
+  from '../../enums/WebitelApplications/AdminSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import SupervisorSections
   from '../../enums/WebitelApplications/SupervisorSections.enum.js';

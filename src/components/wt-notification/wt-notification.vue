@@ -55,14 +55,15 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-notification {
   @extend %typo-body-1;
-  @include width-fit-content;
-
   position: relative;
+
   display: flex;
   align-items: flex-start;
+  width: fit-content;
   min-width: var(--wt-notification-min-width);
   max-width: var(--wt-notification-max-width);
   padding: var(--wt-notification-padding);

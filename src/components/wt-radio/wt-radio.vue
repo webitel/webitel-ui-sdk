@@ -96,8 +96,8 @@ export default {
 
 /* Customize the label (the container) */
 .wt-radio {
-  @include width-fit-content;
   box-sizing: border-box;
+  width: fit-content;
 
   .wt-label {
     cursor: pointer;

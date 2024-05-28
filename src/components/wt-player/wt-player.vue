@@ -160,6 +160,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 .wt-player {
   @extend %typo-body-2;
   bottom: 60px;

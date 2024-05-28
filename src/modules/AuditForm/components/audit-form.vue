@@ -33,7 +33,7 @@
 
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
-import cloneDeep from 'lodash/cloneDeep';
+import cloneDeep from 'lodash/cloneDeep.js';
 import { computed, nextTick, onMounted, reactive, ref, watch, watchEffect } from 'vue';
 import WtButton from '../../../components/wt-button/wt-button.vue';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';

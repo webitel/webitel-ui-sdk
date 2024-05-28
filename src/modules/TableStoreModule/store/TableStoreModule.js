@@ -1,9 +1,10 @@
-import set from 'lodash/set';
+import set from 'lodash/set.js';
 import {
   queryToSortAdapter,
   sortToQueryAdapter,
 } from '../../../scripts/sortQueryAdapters.js';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import BaseStoreModule
+  from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import FilterEvent from '../../Filters/enums/FilterEvent.enum.js';
 
 export default class TableStoreModule extends BaseStoreModule {

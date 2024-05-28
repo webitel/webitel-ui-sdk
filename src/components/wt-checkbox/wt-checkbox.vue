@@ -112,8 +112,8 @@ export default {
 <style lang="scss" scoped>
 
 .wt-checkbox {
-  @include width-fit-content;
   box-sizing: border-box;
+  width: fit-content;
 
   .wt-label {
     cursor: pointer;

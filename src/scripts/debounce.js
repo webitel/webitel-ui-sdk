@@ -1,4 +1,4 @@
-import lodashDebounce from 'lodash/debounce';
+import lodashDebounce from 'lodash/debounce.js';
 
 const debounce = (
   fn,

@@ -1,5 +1,5 @@
 import deepcopy from 'deep-copy';
-import get from 'lodash/get';
+import get from 'lodash/get.js';
 import updateObject from '../../../scripts/updateObject.js';
 
 const starToSearchTransformer = (path = 'search') => (params) => {

@@ -52,6 +52,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-notifications-bar {
   @extend %wt-scrollbar;

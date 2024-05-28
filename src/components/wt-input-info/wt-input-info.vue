@@ -26,6 +26,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-input-info {
   @extend %typo-caption;

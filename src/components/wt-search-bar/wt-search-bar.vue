@@ -151,6 +151,7 @@ function handleKeyup(event) {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-search-bar {
   cursor: text;

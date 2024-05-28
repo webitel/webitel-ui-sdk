@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.6.18",
+  "version": "24.6.30",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -57,7 +57,6 @@
     "plyr": "3.6.3",
     "query-string": "^8.1.0",
     "sortablejs": "^1.15.0",
-    "tiny-emitter": "^2.1.0",
     "vue-i18n": "^9.2.2",
     "vue-multiselect": "^3.0.0-beta.3",
     "vue-observe-visibility": "^2.0.0-alpha.1",

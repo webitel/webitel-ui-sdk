@@ -1,7 +1,10 @@
+import './css/main.scss';
 import 'vue-multiselect/dist/vue-multiselect.css';
+import generateInstance from './api/axios/generateInstance.js';
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
 import './css/styleguide/fonts/_fonts.scss';
+import './assets/icons/sprite/index.js';
 
 export default {
   install(app, { eventBus, router, globals = {} }) {
@@ -20,4 +23,5 @@ export default {
     app.provide('$eventBus', eventBus);
     if (router) app.use(router);
   },
+  generateInstance,
 };

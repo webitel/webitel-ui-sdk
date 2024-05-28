@@ -112,6 +112,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-pagination {
   @extend %typo-body-1;

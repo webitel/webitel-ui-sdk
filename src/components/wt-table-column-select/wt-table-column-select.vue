@@ -130,6 +130,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 $list-height: 400px;
 $list-width-sm: calc(500px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
 $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
