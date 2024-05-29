@@ -1,6 +1,7 @@
 import mitt from 'mitt';
 import isEmpty from '../../../scripts/isEmpty.js';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import BaseStoreModule
+  from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import BaseFilterSchema from '../classes/BaseFilterSchema.js';
 import FilterEvent from '../enums/FilterEvent.enum.js';
 
@@ -104,7 +105,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
       return context.dispatch('EMIT', {
         event: FilterEvent.RESTORED,
-        payload: context.getters.GET_FILTERS,
+        payload: context.getters.GET_FILTERS(),
       });
     },
 

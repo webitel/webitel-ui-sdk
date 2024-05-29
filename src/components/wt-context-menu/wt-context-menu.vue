@@ -81,7 +81,7 @@ function handleOptionClick({ option, index, hide }) {
 </style>
 
 <style lang="scss" scoped>
-@import 'src/css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-context-menu {
   line-height: 0;

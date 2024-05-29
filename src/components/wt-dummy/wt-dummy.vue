@@ -69,7 +69,7 @@ const dummy = computed(() => props.darkMode ? dummyDark : dummyLight);
 </style>
 
 <style lang="scss" scoped>
-@import 'src/css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-dummy {
   display: flex;

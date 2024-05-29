@@ -272,7 +272,7 @@ onMounted(() => {
 </style>
 
 <style lang="scss" scoped>
-@import 'src/css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-input {
   cursor: text;

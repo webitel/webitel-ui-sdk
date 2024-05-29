@@ -67,7 +67,12 @@ export default class TableStoreModule extends BaseStoreModule {
     },
 
     // FIXME: maybe move to filters module?
-    HANDLE_FILTERS_RESTORE: (context) => {
+    HANDLE_FILTERS_RESTORE: async (context, {
+      fields,
+      sort,
+    }) => {
+      if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
+      if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
       return context.dispatch('LOAD_DATA_LIST');
     },
 
@@ -91,19 +96,19 @@ export default class TableStoreModule extends BaseStoreModule {
     },
 
     // FIXME: maybe move to filters module?
-    HANDLE_FIELDS_CHANGE: (context, payload) => {
+    HANDLE_FIELDS_CHANGE: (context, { value }) => {
       const headers = context.state.headers.map((header) => ({
         ...header,
-        show: payload.value.includes(header.value),
+        show: value.includes(header.value),
       }));
 
       context.commit('SET', { path: 'headers', value: headers });
     },
 
     // FIXME: maybe move to filters module?
-    HANDLE_SORT_CHANGE: (context, payload) => {
-      const nextSort = queryToSortAdapter(payload.value?.slice(0, 1) || '');
-      const field = nextSort ? payload.value.slice(1) : payload.value;
+    HANDLE_SORT_CHANGE: (context, { value }) => {
+      const nextSort = queryToSortAdapter(value?.slice(0, 1) || '');
+      const field = nextSort ? value.slice(1) : value;
 
       const headers = context.state.headers.map(({
                                                    sort: currentSort,
