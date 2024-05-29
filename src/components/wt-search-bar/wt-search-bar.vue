@@ -43,7 +43,7 @@
         <wt-context-menu
           v-if="searchMode"
           :options="searchModeOptions"
-          @click="emit('change:search-mode', $event.option)"
+          @click="updateSearchMode"
         >
           <template #activator>
             <wt-tooltip>
@@ -117,6 +117,10 @@ const emit = defineEmits([
   'input',
   'search',
   'enter',
+  'update:search-mode',
+  /**
+   * @deprecated
+   */
   'change:search-mode',
 ]);
 
@@ -143,6 +147,11 @@ function handleKeyup(event) {
     handleInput('');
     event.preventDefault();
   }
+}
+
+function updateSearchMode({ option }) {
+  emit('update:search-mode', option);
+  emit('change:search-mode', option);
 }
 </script>
 
