@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils';
 import { ref } from 'vue';
-import AuditForm from '../audit-form.vue';
-import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema';
 import {
   useDestroyableSortable,
-} from '../../../../composables/useDestroyableSortable/useDestroyableSortable';
+} from '../../../../composables/useDestroyableSortable/useDestroyableSortable.js';
+import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema.js';
+import AuditForm from '../audit-form.vue';
 
-vi.mock('../../../../composables/useDestroyableSortable/useDestroyableSortable');
+vi.mock('../../../../composables/useDestroyableSortable/useDestroyableSortable.js');
 
 useDestroyableSortable.mockImplementation(() => ({ reloadSortable: ref(false) }));
 
@@ -42,7 +42,9 @@ describe('AuditForm', () => {
         questions: [generateQuestionSchema()],
       },
     });
-    await wrapper.findComponent({ name: 'audit-form-question' }).vm.$emit('delete', { key: 0 });
+    await wrapper.findComponent({ name: 'audit-form-question' })
+    .vm
+    .$emit('delete', { key: 0 });
     expect(wrapper.emitted()['update:questions'][0][0])
     .toEqual([]);
   });
@@ -54,15 +56,21 @@ describe('AuditForm', () => {
         questions: [question],
       },
     });
-    await wrapper.findComponent({ name: 'audit-form-question' }).vm.$emit('copy', { question, key: 0 });
+    await wrapper.findComponent({ name: 'audit-form-question' })
+    .vm
+    .$emit('copy', { question, key: 0 });
     expect(wrapper.emitted()['update:questions'][0][0])
     .toEqual([question, question]);
   });
-  it('initializes result depending on passed questions',() => {
+  it('initializes result depending on passed questions', () => {
     const wrapper = mount(AuditForm, {
       props: {
         mode: 'fill',
-        questions: [generateQuestionSchema(), generateQuestionSchema(), generateQuestionSchema()],
+        questions: [
+          generateQuestionSchema(),
+          generateQuestionSchema(),
+          generateQuestionSchema(),
+        ],
       },
     });
     expect(wrapper.emitted()['update:result'][0][0]).toEqual([{}, {}, {}]);

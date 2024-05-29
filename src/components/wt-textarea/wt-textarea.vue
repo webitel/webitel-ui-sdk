@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import validationMixin from '../../mixins/validationMixin/validationMixin';
+import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
   name: 'WtTextarea',
@@ -149,6 +149,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-textarea {
   cursor: text;
@@ -173,12 +174,12 @@ export default {
   min-height: var(--textarea-min-height);
   padding: var(--textarea-padding);
   resize: none;
-  color: var(--wt-text-field-text-color);
   transition: var(--transition);
-  background: transparent;
+  color: var(--wt-text-field-text-color);
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
+  background: transparent;
 
   .wt-textarea--disabled & {
     @include wt-placeholder('disabled');

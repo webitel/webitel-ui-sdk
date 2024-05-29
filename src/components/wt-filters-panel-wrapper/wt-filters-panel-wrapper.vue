@@ -1,7 +1,7 @@
 <template>
   <article
-    class="filters-panel-wrapper"
     :class="{ 'filters-panel-wrapper--opened': isOpened }"
+    class="filters-panel-wrapper"
   >
     <div class="filters-wrap">
       <slot />
@@ -56,9 +56,9 @@ $actions-width: calc(2 * (var(--icon-md-size) + var(--table-actions-icon-gap)));
 
   .actions-wrap {
     display: flex;
-    margin-left: auto;
-    margin-top: 24px;
     flex: 0 0 $actions-width;
+    margin-top: 24px;
+    margin-left: auto;
 
     .wt-table-actions {
       height: fit-content;

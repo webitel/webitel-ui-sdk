@@ -4,10 +4,10 @@
     class="wt-button-select"
   >
     <wt-button
-      v-bind="$attrs"
       :color="color"
       :disabled="disabled"
       class="wt-button-select__button"
+      v-bind="$attrs"
       @click="$emit('click', $event)"
     >
       <slot />
@@ -20,11 +20,11 @@
     >
       <template #activator>
         <wt-button
-          v-bind="$attrs"
           :color="color"
           :disabled="disabled"
           :loading="false"
           class="wt-button-select__select-btn"
+          v-bind="$attrs"
           @click="isOpened = !isOpened"
         >
           <wt-icon

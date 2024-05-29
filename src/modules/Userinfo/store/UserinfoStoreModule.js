@@ -1,7 +1,7 @@
-import userinfoGenerator from '../api/userinfo';
-import ApplicationsAccess from '../classes/ApplicationsAccess';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
-import Permissions from '../enums/Permissions.enum';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import userinfoGenerator from '../api/userinfo.js';
+import ApplicationsAccess from '../classes/ApplicationsAccess.js';
+import Permissions from '../enums/Permissions.enum.js';
 
 let userinfo = null;
 
@@ -24,14 +24,16 @@ const defaultState = () => ({
 export default class UserinfoStoreModule extends BaseStoreModule {
   state = {
     ...defaultState(),
-  }
+  };
 
   getters = {
     THIS_APP: (state) => state.thisApp,
     // if no access[app] => accessed by default
-    CHECK_APP_ACCESS: (state) => (app) => !state.access[app] || state.access[app]?._enabled,
+    CHECK_APP_ACCESS: (state) => (app) => !state.access[app] ||
+      state.access[app]?._enabled,
     CHECK_OBJECT_ACCESS: (state, getters) => ({ name, route }) => {
-      if (!state.access[getters.THIS_APP] || !state.access[getters.THIS_APP]._enabled) return false;
+      if (!state.access[getters.THIS_APP] ||
+        !state.access[getters.THIS_APP]._enabled) return false;
       if (route) return getters.CHECK_OBJECT_ACCESS_BY_ROUTE(route);
       return getters.CHECK_OBJECT_ACCESS_BY_NAME(name);
     },
@@ -39,7 +41,8 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       state.access[getters.THIS_APP][name]?._enabled
     ),
     CHECK_OBJECT_ACCESS_BY_ROUTE: (state, getters) => (route) => {
-      const accessKey = Object.keys(state.access[getters.THIS_APP]).find((object) => route.name.includes(object));
+      const accessKey = Object.keys(state.access[getters.THIS_APP])
+      .find((object) => route.name.includes(object));
       return state.access[getters.THIS_APP][accessKey]?._enabled;
     },
     GET_OBJECT_SCOPE: (state, getters) => ({ name, route }) => {
@@ -50,7 +53,8 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       Object.values(state.scope).find((object) => name === object.name)
     ),
     GET_OBJECT_SCOPE_BY_ROUTE: (state) => (route) => (
-      Object.values(state.scope).find((object) => route.name.includes(object.route))
+      Object.values(state.scope)
+      .find((object) => route.name.includes(object.route))
     ),
     HAS_READ_ACCESS: (state, getters) => (checkedObject) => {
       if (!getters.CHECK_OBJECT_ACCESS(checkedObject)) return false;
@@ -73,7 +77,7 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       const objectScope = getters.GET_OBJECT_SCOPE(checkedObject);
       return objectScope?.access?.includes('d');
     },
-  }
+  };
 
   actions = {
     BEFORE_OPEN_SESSION_HOOK: () => {},
@@ -82,7 +86,10 @@ export default class UserinfoStoreModule extends BaseStoreModule {
     CONVERT_USER_PERMISSIONS: (context, initialPermissions) => {
       let permissions = {};
       if (!initialPermissions) return permissions;
-      permissions = initialPermissions.reduce((permissions, currentPermission) => ({
+      permissions = initialPermissions.reduce((
+        permissions,
+        currentPermission,
+      ) => ({
         ...permissions,
         [currentPermission.id]: currentPermission,
       }), {});
@@ -130,13 +137,19 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       }
     },
 
-    LOGOUT: async (context, { authUrl = import.meta.env.VITE_AUTH_URL } = {}) => {
+    LOGOUT: async (
+      context,
+      { authUrl = import.meta.env.VITE_AUTH_URL } = {},
+    ) => {
       if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
       await userinfo.logout();
       window.location.href = authUrl;
     },
 
-    SET_APPLICATIONS_ACCESS: (context, access) => context.commit('SET_APPLICATIONS_ACCESS', access),
+    SET_APPLICATIONS_ACCESS: (
+      context,
+      access,
+    ) => context.commit('SET_APPLICATIONS_ACCESS', access),
 
     SET_LOADING: (context, isLoading) => {
       context.commit('SET_LOADING', isLoading);
@@ -145,7 +158,7 @@ export default class UserinfoStoreModule extends BaseStoreModule {
     RESET_STATE: (context) => {
       context.commit('RESET_STATE');
     },
-  }
+  };
 
   mutations = {
     SET_SESSION: (state, session) => {
@@ -163,5 +176,5 @@ export default class UserinfoStoreModule extends BaseStoreModule {
     RESET_STATE: (state) => {
       Object.assign(state, defaultState());
     },
-  }
+  };
 }

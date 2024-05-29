@@ -1,20 +1,20 @@
 <template>
   <wt-select
-    v-bind="$attrs"
-    :value="filterSchema.value"
+    :close-on-select="filterSchema.closeOnSelect"
     :label="label"
-    :track-by="filterSchema.storedProp"
     :multiple="filterSchema.multiple"
     :search-method="search"
-    :close-on-select="filterSchema.closeOnSelect"
+    :track-by="filterSchema.storedProp"
+    :value="filterSchema.value"
+    v-bind="$attrs"
+    @closed="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
     @input="setValue({ filter: filterQuery, value: $event })"
     @reset="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
-    @closed="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
   />
 </template>
 
 <script>
-import apiFilterMixin from '../mixins/apiFilterMixin';
+import apiFilterMixin from '../mixins/apiFilterMixin.js';
 
 export default {
   name: 'AbstractApiFilter',

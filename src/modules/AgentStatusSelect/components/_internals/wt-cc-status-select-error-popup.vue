@@ -10,8 +10,8 @@
     <template #main>
       <article class="wt-cc-status-select-error-popup__main-wrapper">
         <wt-icon
-          icon="attention"
           color="error"
+          icon="attention"
         />
         <p class="wt-cc-status-select-error-popup__message">
           {{ $t('webitelUI.agentStatusSelect.statusSelectErrorPopup.message') }}
@@ -48,9 +48,9 @@ function close() {
 <style lang="scss" scoped>
 .wt-cc-status-select-error-popup__main-wrapper {
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: var(--spacing-sm);
 }
 </style>

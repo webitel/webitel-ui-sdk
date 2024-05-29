@@ -1,4 +1,4 @@
-import BaseStoreModule from '../BaseStoreModules/BaseStoreModule';
+import BaseStoreModule from '../BaseStoreModules/BaseStoreModule.js';
 
 let interval = null;
 

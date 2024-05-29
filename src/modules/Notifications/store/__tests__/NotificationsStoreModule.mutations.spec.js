@@ -1,5 +1,5 @@
-import NotificationsStoreModule from '../NotificationsStoreModule';
-import '../../../../../tests/mocks/broadcastChannelMock';
+import NotificationsStoreModule from '../NotificationsStoreModule.js';
+import '../../../../../tests/mocks/broadcastChannelMock.js';
 
 const notificationsModule = new NotificationsStoreModule().getModule();
 

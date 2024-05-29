@@ -1,7 +1,7 @@
 <template>
   <wt-popup
-    class="wt-save-failed-popup"
     :width="500"
+    class="wt-save-failed-popup"
     @close="closePopup"
   >
     <template #title>

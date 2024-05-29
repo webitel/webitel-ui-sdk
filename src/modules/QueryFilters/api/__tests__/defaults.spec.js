@@ -1,4 +1,4 @@
-import { listResponseHandler } from '../defaults';
+import { listResponseHandler } from '../defaults.js';
 
 describe('filter api Defaults', () => {
   it('listResponseHandler returns only lookups from response', () => {

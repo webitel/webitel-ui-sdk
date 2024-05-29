@@ -6,27 +6,27 @@
     class="wt-datepicker"
   >
     <wt-label
-      v-bind="labelProps"
       :disabled="disabled"
+      v-bind="labelProps"
     >
       <!-- @slot Custom input label -->
       <slot
-        v-bind="{ label }"
         name="label"
+        v-bind="{ label }"
       >
         {{ label }}
       </slot>
     </wt-label>
     <vue-datepicker
-      v-bind="{ ...$attrs, ...$props }"
       ref="datepicker"
+      :close-on-auto-apply="false"
+      :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
       :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
       :placeholder="label || placeholder"
-      class="wt-datepicker__datepicker"
-      :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
-      :close-on-auto-apply="false"
       auto-apply
+      class="wt-datepicker__datepicker"
+      v-bind="{ ...$attrs, ...$props }"
       @closed="isOpened = false"
       @open="isOpened = true"
       @update:model-value="emit('input', $event.getTime())"
@@ -132,6 +132,7 @@ const isDateTime = props.mode === 'datetime';
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {
@@ -172,8 +173,8 @@ const isDateTime = props.mode === 'datetime';
 
   .dp__menu {
     box-sizing: border-box;
-    min-width: 196px;
     width: 196px;
+    min-width: 196px;
     padding: var(--spacing-xs);
     border-radius: var(--border-radius);
     box-shadow: var(--elevation-10);
@@ -224,8 +225,8 @@ const isDateTime = props.mode === 'datetime';
 .datepicker__timepicker {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
   margin-top: var(--spacing-xs);
+  gap: var(--spacing-xs);
 
   .wt-time-input {
     flex-grow: 1;

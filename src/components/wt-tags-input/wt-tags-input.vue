@@ -102,8 +102,8 @@
 </template>
 
 <script>
-import multiselectMixin from '../wt-select/mixins/multiselectMixin';
-import taggableMixin from './mixin/taggableMixin';
+import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
+import taggableMixin from './mixin/taggableMixin.js';
 
 export default {
   name: 'WtTagsInput',

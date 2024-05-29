@@ -1,4 +1,4 @@
-import BaseFilterSchema from './BaseFilterSchema';
+import BaseFilterSchema from './BaseFilterSchema.js';
 
 export default class EnumFilterSchema extends BaseFilterSchema {
   constructor(params = {}) {

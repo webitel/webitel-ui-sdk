@@ -1,8 +1,8 @@
 <template>
   <wt-loader-sm
     v-if="size === 'sm'"
-    class="wt-loader"
     :color="color"
+    class="wt-loader"
   />
   <wt-loader-md
     v-else-if="size === 'md'"
@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import WtLoaderSm from './_internals/wt-loader--sm.vue';
 import WtLoaderMd from './_internals/wt-loader--md.vue';
+import WtLoaderSm from './_internals/wt-loader--sm.vue';
 
 export default {
   name: 'WtLoader',

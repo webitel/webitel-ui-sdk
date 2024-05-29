@@ -1,4 +1,4 @@
-import { useCachedInterval } from '../useCachedInterval';
+import { useCachedInterval } from '../useCachedInterval.js';
 
 describe('useCachedInterval', () => {
   it.skip('subscribe', async () => {

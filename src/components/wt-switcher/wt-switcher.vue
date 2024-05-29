@@ -84,9 +84,9 @@ export default {
 <style lang="scss" scoped>
 
 .wt-switcher {
-  @include width-fit-content;
   position: relative;
   box-sizing: border-box;
+  width: fit-content;
 
   .wt-label {
     cursor: pointer;

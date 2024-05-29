@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import { createStore } from 'vuex';
 import { createRouter, createWebHistory } from 'vue-router';
+import { createStore } from 'vuex';
+import BaseFilterSchema from '../../classes/BaseFilterSchema.js';
+import baseFilterMixin from '../../mixins/baseFilterMixin/baseFilterMixin.js';
 import DatetimeFilter from '../filter-datetime.vue';
-import BaseFilterSchema from '../../classes/BaseFilterSchema';
-import baseFilterMixin from '../../mixins/baseFilterMixin/baseFilterMixin';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -42,7 +42,8 @@ describe('DatetimeFilter Filter', () => {
     const value = Date.now();
     await router.replace({ query: { [filterQuery]: value } });
     const setValueMock = vi.fn();
-    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
+    vi.spyOn(baseFilterMixin.methods, 'setValue')
+    .mockImplementationOnce(setValueMock);
     shallowMount(DatetimeFilter, mountOptions);
     expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value });
   });

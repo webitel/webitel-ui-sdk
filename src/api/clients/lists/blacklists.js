@@ -4,14 +4,16 @@ import {
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults';
+} from '../../defaults/index.js';
 import applyTransform, {
   camelToSnake,
-  merge, mergeEach,
-  notify, sanitize,
+  merge,
+  mergeEach,
+  notify,
+  sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers';
+} from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

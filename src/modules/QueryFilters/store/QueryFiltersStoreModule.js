@@ -1,5 +1,5 @@
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
-import isEmpty from '../../../scripts/isEmpty';
+import isEmpty from '../../../scripts/isEmpty.js';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 
 export default class QueryFiltersStoreModule extends BaseStoreModule {
   getters = {

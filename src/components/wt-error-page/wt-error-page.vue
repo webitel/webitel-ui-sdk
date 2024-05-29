@@ -2,9 +2,9 @@
   <section class="wt-error-page">
     <article class="wt-error-page__wrapper">
       <img
-        class="wt-error-page__img"
-        :src="errorPic.src"
         :alt="errorPic.alt"
+        :src="errorPic.src"
+        class="wt-error-page__img"
       >
       <h2
         class="wt-error-page__title"
@@ -74,10 +74,10 @@ export default {
 
 <style lang="scss" scoped>
 .wt-error-page {
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   min-width: 100vw;
   min-height: 100vh;
   padding: 90px;
@@ -89,14 +89,14 @@ export default {
   }
 
   &__img {
-    max-width: 65vw;
     width: 778px;
+    max-width: 65vw;
     user-select: none;
   }
 
   &__title {
-    text-transform: uppercase;
     margin-top: 69px;
+    text-transform: uppercase;
   }
 
   &__text {

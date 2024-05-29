@@ -2,9 +2,9 @@
   <wt-tooltip class="wt-copy-action">
     <template #activator>
       <wt-icon-btn
-        v-bind="$attrs"
         :icon="copied ? 'done' : 'copy'"
         class="copy-action"
+        v-bind="$attrs"
         @click="copy"
       />
     </template>

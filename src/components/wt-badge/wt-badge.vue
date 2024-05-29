@@ -1,14 +1,14 @@
 <template>
   <aside
-    class="wt-badge"
     :class="{ 'wt-badge--outside': outside }"
     :style="{ background: `var(--${colorVariable})` }"
+    class="wt-badge"
   >
     <img
-      class="wt-badge__pic"
       v-if="iconBadgePic"
-      :src="iconBadgePic"
       :alt="iconBadge"
+      :src="iconBadgePic"
+      class="wt-badge__pic"
     >
   </aside>
 </template>
@@ -17,7 +17,7 @@
 import BadgeDnd from '../../assets/icons/badge-dnd.svg';
 import BadgeOnline from '../../assets/icons/badge-online.svg';
 import BadgePause from '../../assets/icons/badge-pause.svg';
-import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum';
+import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
 export default {
   name: 'WtBadge',

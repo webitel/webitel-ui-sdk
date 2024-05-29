@@ -1,39 +1,31 @@
-import axios from 'axios';
-import UsersAPI from '../users';
+import axiosMock from '../../../../tests/mocks/axiosMock.js';
 
-// axios mock should be copy-pasted :(
-// https://stackoverflow.com/questions/65554910/jest-referenceerror-cannot-access-before-initialization
-vi.mock('axios', () => {
-  return {
-    default: {
-      post: vi.fn(),
-      get: vi.fn(),
-      delete: vi.fn(),
-      put: vi.fn(),
-      patch: vi.fn(),
-      create: vi.fn().mockReturnThis(),
-      interceptors: {
-        request: {
-          use: vi.fn(), eject: vi.fn(),
-        }, response: {
-          use: vi.fn(), eject: vi.fn(),
-        },
-      },
-    },
-  };
-});
+const instanceMock = axiosMock()().default;
+
+vi.doMock('../../../defaults/getDefaultInstance/getDefaultInstance.js', () => ({
+  default: () => instanceMock,
+}));
 
 describe('UsersAPI', () => {
+  beforeEach(() => {
+    Object.assign(instanceMock, axiosMock()().default);
+  });
+
   it('correctly computes "getList" method api call', async () => {
+    const get = vi.fn(() => Promise.resolve({
+      data: {},
+    }));
+
+    instanceMock.get = get;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     const inputParams = {
       fields: ['id', 'name', 'vitest'],
     };
     const url = '/users?fields=id&fields=name&fields=vitest&page=1&size=10';
-    const mock = axios.get.mockImplementationOnce(() => Promise.resolve({
-      data: {},
-    }));
     await UsersAPI.getList(inputParams);
-    expect(mock).toHaveBeenCalledWith(url);
+    expect(get).toHaveBeenCalledWith(url);
   });
 
   it('correctly computes "getList" method output', async () => {
@@ -57,7 +49,13 @@ describe('UsersAPI', () => {
         ], next: true,
       },
     };
-    axios.get.mockImplementationOnce(() => Promise.resolve(response));
+
+    const get = vi.fn(() => Promise.resolve(response));
+
+    instanceMock.get = get;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     expect(await UsersAPI.getList({})).toEqual(output);
   });
 
@@ -66,11 +64,17 @@ describe('UsersAPI', () => {
       itemId: 1,
     };
     const url = '/users/1';
-    const mock = axios.get.mockImplementationOnce(() => Promise.resolve({
+
+    const get = vi.fn(() => Promise.resolve({
       data: {},
     }));
+
+    instanceMock.get = get;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     await UsersAPI.get(inputParams);
-    expect(mock).toHaveBeenCalledWith(url);
+    expect(get).toHaveBeenCalledWith(url);
   });
 
   it('correctly computes "get" method output', async () => {
@@ -87,7 +91,13 @@ describe('UsersAPI', () => {
         id: 1,
       },
     };
-    axios.get.mockImplementationOnce(() => Promise.resolve(response));
+
+    const get = vi.fn(() => Promise.resolve(response));
+
+    instanceMock.get = get;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     expect(await UsersAPI.get({})).toEqual(output);
   });
 
@@ -104,11 +114,17 @@ describe('UsersAPI', () => {
     };
 
     const url = '/users';
-    const mock = axios.post.mockImplementationOnce(() => Promise.resolve({
+
+    const post = vi.fn(() => Promise.resolve({
       data: {},
     }));
+
+    instanceMock.post = post;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     await UsersAPI.add(input);
-    expect(mock).toHaveBeenCalledWith(url, body);
+    expect(post).toHaveBeenCalledWith(url, body);
   });
 
   it('correctly computes "add" method output', async () => {
@@ -123,7 +139,13 @@ describe('UsersAPI', () => {
         check_case: '',
       },
     };
-    axios.post.mockImplementationOnce(() => Promise.resolve(response));
+
+    const post = vi.fn(() => Promise.resolve(response));
+
+    instanceMock.post = post;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     expect(await UsersAPI.add({ itemInstance: {} })).toEqual(output);
   });
 
@@ -141,11 +163,17 @@ describe('UsersAPI', () => {
     };
 
     const url = '/users/1';
-    const mock = axios.put.mockImplementationOnce(() => Promise.resolve({
+
+    const put = vi.fn(() => Promise.resolve({
       data: {},
     }));
+
+    instanceMock.put = put;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     await UsersAPI.update(input);
-    expect(mock).toHaveBeenCalledWith(url, body);
+    expect(put).toHaveBeenCalledWith(url, body);
   });
 
   it('correctly computes "update" method output', async () => {
@@ -160,7 +188,13 @@ describe('UsersAPI', () => {
         check_case: '',
       },
     };
-    axios.put.mockImplementationOnce(() => Promise.resolve(response));
+
+    const put = vi.fn(() => Promise.resolve(response));
+
+    instanceMock.put = put;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     expect(await UsersAPI.update({ itemInstance: {}, itemId: 1 }))
     .toEqual(output);
   });
@@ -178,11 +212,17 @@ describe('UsersAPI', () => {
     };
 
     const url = '/users/1';
-    const mock = axios.patch.mockImplementationOnce(() => Promise.resolve({
+
+    const patch = vi.fn(() => Promise.resolve({
       data: {},
     }));
+
+    instanceMock.patch = patch;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     await UsersAPI.patch(input);
-    expect(mock).toHaveBeenCalledWith(url, body);
+    expect(patch).toHaveBeenCalledWith(url, body);
   });
 
   it('correctly computes "delete" method api call', async () => {
@@ -191,10 +231,16 @@ describe('UsersAPI', () => {
     };
 
     const url = '/users/1?permanent=true';
-    const mock = axios.delete.mockImplementationOnce(() => Promise.resolve({
+
+    const _delete = vi.fn(() => Promise.resolve({
       data: {},
     }));
+
+    instanceMock.delete = _delete;
+
+    const UsersAPI = (await import('../users.js')).default;
+
     await UsersAPI.delete(input);
-    expect(mock).toHaveBeenCalledWith(url);
+    expect(_delete).toHaveBeenCalledWith(url);
   });
 });

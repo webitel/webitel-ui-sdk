@@ -1,4 +1,4 @@
-import convertDuration from '../convertDuration';
+import convertDuration from '../convertDuration.js';
 
 describe('Case converters', () => {
   it('duration from sec value', () => {

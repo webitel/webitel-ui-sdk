@@ -1,3 +1,5 @@
+@import 'src/css/main.scss';
+
 .wt-chip {
   @extend %typo-body-2;
 
@@ -8,37 +10,37 @@
   background: var(--wt-chip-main-background-color);
 
   &--main-color {
-    background: var(--wt-chip-main-background-color);
     color: var(--wt-chip-main-text-color);
+    background: var(--wt-chip-main-background-color);
   }
 
   &--primary-color {
-    background: var(--wt-chip-primary-background-color);
     color: var(--wt-chip-primary-text-color);
+    background: var(--wt-chip-primary-background-color);
   }
 
   &--secondary-color {
-    background: var(--wt-chip-secondary-background-color);
     color: var(--wt-chip-secondary-text-color);
+    background: var(--wt-chip-secondary-background-color);
   }
 
   &--success-color {
-    background: var(--wt-chip-success-background-color);
     color: var(--wt-chip-success-text-color);
+    background: var(--wt-chip-success-background-color);
   }
 
   &--warning-color {
-    background: var(--wt-chip-warning-background-color);
     color: var(--wt-chip-warning-text-color);
+    background: var(--wt-chip-warning-background-color);
   }
 
   &--error-color {
-    background: var(--wt-chip-error-background-color);
     color: var(--wt-chip-error-text-color);
+    background: var(--wt-chip-error-background-color);
   }
 
   &--transfer-color {
-    background: var(--wt-chip-transfer-background-color);
     color: var(--wt-chip-transfer-text-color);
+    background: var(--wt-chip-transfer-background-color);
   }
 }

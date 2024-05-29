@@ -3,9 +3,9 @@ import { CalendarServiceApiFactory } from 'webitel-sdk';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
-  getDefaultOpenAPIConfig,
   getDefaultInstance,
-} from '../../defaults';
+  getDefaultOpenAPIConfig,
+} from '../../defaults/index.js';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -13,7 +13,7 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers';
+} from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -71,7 +71,7 @@ const getCalendar = async ({ itemId: id }) => {
       accepts: [],
       excepts: [],
     };
-    // eslint-disable-next-line no-param-reassign
+
     copy.accepts = copy.accepts.map((accept) => ({
       day: accept.day || 0,
       disabled: accept.disabled || false,
@@ -79,7 +79,7 @@ const getCalendar = async ({ itemId: id }) => {
       end: accept.endTimeOfDay || 0,
     }));
     if (copy.excepts) {
-      // eslint-disable-next-line no-param-reassign
+
       copy.excepts = copy.excepts.map((except) => ({
         name: except.name || '',
         date: except.date || 0,

@@ -1,11 +1,11 @@
 <template>
   <wt-select
-    class="wt-status-select"
-    :value="selectedOption"
-    :options="availableOptions"
-    track-by="value"
     :clearable="false"
+    :options="availableOptions"
     :searchable="false"
+    :value="selectedOption"
+    class="wt-status-select"
+    track-by="value"
     @input="inputHandler"
   >
     <template #singleLabel="{ option }">
@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import AgentStatus from '../../enums/AgentStatus/AgentStatus.enum';
-import convertDuration from '../../scripts/convertDuration';
-import StatusOptions from './_internals/StatusOptions.lookup';
+import AgentStatus from '../../enums/AgentStatus/AgentStatus.enum.js';
+import convertDuration from '../../scripts/convertDuration.js';
+import StatusOptions from './_internals/StatusOptions.lookup.js';
 
 export default {
   name: 'WtStatusSelect',
@@ -65,14 +65,14 @@ export default {
         }));
     },
     availableOptions() {
-     return this.statusOptions.reduce((options, opt) => {
-       // PAUSE option is always passed
-       if ((this.status === opt.value && opt.value !== AgentStatus.PAUSE)
-       || opt.value === AgentStatus.BREAK_OUT) { // skip breakout option
-         return options;
-       }
-       return [...options, opt];
-     }, []);
+      return this.statusOptions.reduce((options, opt) => {
+        // PAUSE option is always passed
+        if ((this.status === opt.value && opt.value !== AgentStatus.PAUSE)
+          || opt.value === AgentStatus.BREAK_OUT) { // skip breakout option
+          return options;
+        }
+        return [...options, opt];
+      }, []);
     },
     duration() {
       /* The check commented below limits the display of time in the status to 8 characters.

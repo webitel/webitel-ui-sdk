@@ -2,131 +2,131 @@
   <div class="wt-table">
     <table class="wt-table__table">
       <thead class="wt-table__head">
-        <tr
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__head"
+      <tr
+        :style="columnsStyle"
+        class="wt-table__tr wt-table__tr__head"
+      >
+        <th
+          v-if="selectable"
+          class="wt-table__th wt-table__th--checkbox"
         >
-          <th
-            v-if="selectable"
-            class="wt-table__th wt-table__th--checkbox"
-          >
-            <wt-checkbox
-              :selected="isAllSelected"
-              @change="selectAll"
-            />
-          </th>
-          <th
-            v-for="(col, key) of dataHeaders"
-            :key="key"
-            :class="[
+          <wt-checkbox
+            :selected="isAllSelected"
+            @change="selectAll"
+          />
+        </th>
+        <th
+          v-for="(col, key) of dataHeaders"
+          :key="key"
+          :class="[
               {'wt-table__th--sortable': isColSortable(col)},
               `wt-table__th--sort-${col.sort}`,
             ]"
-            class="wt-table__th"
-            @click="sort(col)"
-          >
-            <div class="wt-table__th__text">
-              {{ col.text }}
-            </div>
-            <wt-icon
-              v-if="sortable"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-              icon="sort-arrow-up"
-              size="sm"
-            />
-            <wt-icon
-              v-if="sortable"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-              icon="sort-arrow-down"
-              size="sm"
-            />
-          </th>
-          <th
-            v-if="gridActions"
-            class="wt-table__th__actions"
-          >
-            <slot name="actions-header" />
-          </th>
-        </tr>
+          class="wt-table__th"
+          @click="sort(col)"
+        >
+          <div class="wt-table__th__text">
+            {{ col.text }}
+          </div>
+          <wt-icon
+            v-if="sortable"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+            icon="sort-arrow-up"
+            size="sm"
+          />
+          <wt-icon
+            v-if="sortable"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+            icon="sort-arrow-down"
+            size="sm"
+          />
+        </th>
+        <th
+          v-if="gridActions"
+          class="wt-table__th__actions"
+        >
+          <slot name="actions-header" />
+        </th>
+      </tr>
       </thead>
 
       <tbody class="wt-table__body">
-        <tr
-          v-for="(row, dataKey) of data"
-          :key="dataKey"
-          :class="`wt-table__tr__${row.id || dataKey}`"
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__body"
+      <tr
+        v-for="(row, dataKey) of data"
+        :key="dataKey"
+        :class="`wt-table__tr__${row.id || dataKey}`"
+        :style="columnsStyle"
+        class="wt-table__tr wt-table__tr__body"
+      >
+        <td
+          v-if="selectable"
+          class="wt-table__td wt-table__td--checkbox"
         >
-          <td
-            v-if="selectable"
-            class="wt-table__td wt-table__td--checkbox"
-          >
-            <wt-checkbox
-              :selected="_selected.includes(row)"
-              @change="handleSelection(row, $event)"
-            />
-          </td>
+          <wt-checkbox
+            :selected="_selected.includes(row)"
+            @change="handleSelection(row, $event)"
+          />
+        </td>
 
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
+        <td
+          v-for="(col, headerKey) of dataHeaders"
+          :key="headerKey"
+          class="wt-table__td"
+        >
+          <slot
+            :index="dataKey"
+            :item="row"
+            :name="col.value"
           >
-            <slot
-              :index="dataKey"
-              :item="row"
-              :name="col.value"
-            >
-              <div>{{ row[col.value] }}</div>
-            </slot>
-          </td>
+            <div>{{ row[col.value] }}</div>
+          </slot>
+        </td>
 
-          <td
-            v-if="gridActions"
-            class="wt-table__td__actions"
-          >
-            <slot
-              :index="dataKey"
-              :item="row"
-              name="actions"
-            />
-          </td>
-        </tr>
+        <td
+          v-if="gridActions"
+          class="wt-table__td__actions"
+        >
+          <slot
+            :index="dataKey"
+            :item="row"
+            name="actions"
+          />
+        </td>
+      </tr>
       </tbody>
 
       <tfoot
         v-if="isTableFooter"
         class="wt-table__foot"
       >
-        <tr
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__foot"
+      <tr
+        :style="columnsStyle"
+        class="wt-table__tr wt-table__tr__foot"
+      >
+        <!--        empty checkbox column -->
+        <th
+          v-if="selectable"
+          class="wt-table__th__checkbox"
+        />
+        <td
+          v-for="(col, headerKey) of dataHeaders"
+          :key="headerKey"
+          class="wt-table__td"
         >
-          <!--        empty checkbox column -->
-          <th
-            v-if="selectable"
-            class="wt-table__th__checkbox"
+          <slot
+            :header="col"
+            :index="headerKey"
+            :name="`${col.value}-footer`"
           />
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
-          >
-            <slot
-              :header="col"
-              :index="headerKey"
-              :name="`${col.value}-footer`"
-            />
-          </td>
-        </tr>
+        </td>
+      </tr>
       </tfoot>
     </table>
   </div>
 </template>
 
 <script>
-import getNextSortOrder from './_internals/getSortOrder';
+import getNextSortOrder from './_internals/getSortOrder.js';
 
 export default {
   name: 'WtTable',
@@ -243,7 +243,7 @@ export default {
         // for backwards compatibility
         row._isSelected = !row._isSelected;
       }
-    }
+    },
   },
 
 };
@@ -254,6 +254,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-table {
   @extend %wt-scrollbar;
@@ -269,9 +270,9 @@ export default {
   display: grid;
   padding: var(--table-row-padding);
   transition: var(--transition);
+  background: var(--wt-table-primary-color);
   grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
   grid-column-gap: var(--table-column-gap);
-  background: var(--wt-table-primary-color);
 
   &:nth-child(2n) {
     background: var(--wt-table-zebra-color);

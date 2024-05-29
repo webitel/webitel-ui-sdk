@@ -16,6 +16,7 @@ describe('WtHeaderActions', () => {
       props: { user },
     });
     expect(wrapper.find('.wt-header-actions__name').text()).toBe(user.name);
-    expect(wrapper.find('.wt-header-actions__account').text()).toBe(user.account);
+    expect(wrapper.find('.wt-header-actions__account').text())
+    .toBe(user.account);
   });
 });

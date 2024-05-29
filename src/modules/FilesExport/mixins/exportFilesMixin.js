@@ -1,4 +1,4 @@
-import FilesExport from '../FilesExport';
+import FilesExport from '../FilesExport.js';
 
 export default {
   data: () => ({
@@ -15,7 +15,9 @@ export default {
     },
 
     filesZippingProgress() {
-      return this.FilesExport ? Math.floor(this.FilesExport.zippingProgress.percent) : 0;
+      return this.FilesExport
+        ? Math.floor(this.FilesExport.zippingProgress.percent)
+        : 0;
     },
   },
 
@@ -28,7 +30,9 @@ export default {
       let files = null;
       if (this.selectedItems?.length) {
         files = this.selectedItems.reduce((filesAccumulator, next) => (
-          next.files ? [...filesAccumulator, ...next.files] : filesAccumulator), []);
+          next.files
+            ? [...filesAccumulator, ...next.files]
+            : filesAccumulator), []);
       }
       return files;
     },

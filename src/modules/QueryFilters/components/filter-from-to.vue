@@ -10,12 +10,12 @@
           {{ $t('reusable.from') }}
         </wt-label>
         <wt-input
+          :number-max="numberMax"
+          :number-min="0"
+          :value="filterSchema.value.from"
           class="filter-from-to-input"
           name="filter-from-to-from"
-          :value="filterSchema.value.from"
           type="number"
-          :number-min="0"
-          :number-max="numberMax"
           @input="setFrom"
         />
       </div>
@@ -27,12 +27,12 @@
           {{ $t('reusable.to') }}
         </wt-label>
         <wt-input
+          :number-max="numberMax"
+          :number-min="0"
+          :value="filterSchema.value.to"
           class="filter-from-to-input"
           name="filter-from-to-to"
-          :value="filterSchema.value.to"
           type="number"
-          :number-min="0"
-          :number-max="numberMax"
           @input="setTo"
         />
       </div>
@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import debounce from '../../../scripts/debounce';
-import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
+import debounce from '../../../scripts/debounce.js';
+import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
   name: 'FilterFromTo',

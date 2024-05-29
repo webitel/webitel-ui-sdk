@@ -17,9 +17,9 @@
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
           <img
-            class="wt-navigation-bar__app-pic"
-            :src="darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light"
             :alt="currentApp"
+            :src="darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light"
+            class="wt-navigation-bar__app-pic"
           >
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
@@ -92,20 +92,20 @@
 </template>
 
 <script>
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import ExpandTransition from '../transitions/wt-expand-transition.vue';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum';
 import AdminDark from './assets/dark/app-logo-dark-admin.svg';
-import AdminLight from './assets/light/app-logo-light-admin.svg';
-import WorkspaceDark from './assets/dark/app-logo-dark-workspace.svg';
-import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
 import AuditDark from './assets/dark/app-logo-dark-audit.svg';
-import AuditLight from './assets/light/app-logo-light-audit.svg';
-import HistoryDark from './assets/dark/app-logo-dark-history.svg';
-import HistoryLight from './assets/light/app-logo-light-history.svg';
-import SupervisorDark from './assets/dark/app-logo-dark-supervisor.svg';
-import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
 import CrmDark from './assets/dark/app-logo-dark-crm.svg';
+import HistoryDark from './assets/dark/app-logo-dark-history.svg';
+import SupervisorDark from './assets/dark/app-logo-dark-supervisor.svg';
+import WorkspaceDark from './assets/dark/app-logo-dark-workspace.svg';
+import AdminLight from './assets/light/app-logo-light-admin.svg';
+import AuditLight from './assets/light/app-logo-light-audit.svg';
 import CrmLight from './assets/light/app-logo-light-crm.svg';
+import HistoryLight from './assets/light/app-logo-light-history.svg';
+import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
+import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
 
 const appLogo = {
   [WebitelApplications.SUPERVISOR]: {
@@ -148,7 +148,8 @@ export default {
     },
     darkMode: {
       type: Boolean,
-      default: false,}
+      default: false,
+    },
   },
   data: () => ({
     isOpened: false,
@@ -196,11 +197,11 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-navigation-bar__menu-btn {
   display: block;
   width: fit-content;
-  width: -moz-fit-content;
 }
 
 .wt-navigation-bar__nav {
@@ -264,8 +265,8 @@ export default {
   justify-content: space-between;
   width: 100%;
   padding: var(--wt-navigation-bar-link-padding);
-  outline: none;
   color: var(--wt-navigation-bar-option-text-color);
+  outline: none;
 
   &:before {
     position: absolute;

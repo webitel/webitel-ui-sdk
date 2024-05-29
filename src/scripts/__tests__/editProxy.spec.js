@@ -1,4 +1,4 @@
-import editProxy from '../editProxy';
+import editProxy from '../editProxy.js';
 
 describe('editProxy', () => {
   it('correctly updates _dirty prop at object property change', () => {

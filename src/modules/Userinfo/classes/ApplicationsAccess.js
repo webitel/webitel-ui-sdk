@@ -1,11 +1,14 @@
-import deepmerge from 'deepmerge';
 import deepCopy from 'deep-copy';
-import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum';
-import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum';
-import SupervisorSections from '../../../enums/WebitelApplications/SupervisorSections.enum';
-import AdminSections from '../../../enums/WebitelApplications/AdminSections.enum';
+import deepmerge from 'deepmerge';
+import AdminSections
+  from '../../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections
-  from '../../../enums/WebitelApplications/AuditorSections.enum';
+  from '../../../enums/WebitelApplications/AuditorSections.enum.js';
+import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum.js';
+import SupervisorSections
+  from '../../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications
+  from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
 
 const applicationsAccess = (value = true) => ({
   [WebitelApplications.AGENT]: {
@@ -193,22 +196,20 @@ export default class ApplicationsAccess {
   constructor({ access, value } = { value: true }) {
     /* if access, deeply merge with falsy values schema
      if no access, "not configured => full permissions" */
-    this.access = access ? ApplicationsAccess.restore(access) : applicationsAccess(value);
-  }
-
-  getAccess() {
-    return this.access;
+    this.access = access
+      ? ApplicationsAccess.restore(access)
+      : applicationsAccess(value);
   }
 
   // minify schema for API sending
   static minify(access) {
     const rmEmptyKeys = (obj) => {
       Object.keys(obj).forEach((key) => {
-        // eslint-disable-next-line no-param-reassign
+
         if (!obj[key] || key === '_locale') delete obj[key];
         if (typeof obj[key] === 'object') {
           rmEmptyKeys(obj[key]);
-          // eslint-disable-next-line no-param-reassign
+
           if (!Object.keys(obj[key]).length) delete obj[key];
         }
       });
@@ -221,5 +222,9 @@ export default class ApplicationsAccess {
   static restore(access) {
     return deepmerge(applicationsAccess(false), access);
     // return deepmerge(access, applicationsAccess(false));
+  }
+
+  getAccess() {
+    return this.access;
   }
 }

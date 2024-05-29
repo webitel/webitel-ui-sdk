@@ -37,11 +37,11 @@ export default {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  min-height: 100%;
   max-width: 100%;
+  min-height: 100%;
   padding: var(--page-wrapper-padding);
-  gap: var(--page-wrapper-section-gap);
   background: var(--wt-page-wrapper-background-color);
+  gap: var(--page-wrapper-section-gap);
 }
 
 .wt-page-wrapper__header,

@@ -1,4 +1,4 @@
-import * as sortQueryAdapters from '../sortQueryAdapters';
+import * as sortQueryAdapters from '../sortQueryAdapters.js';
 
 test('sortToQueryAdapter', () => {
   expect(sortQueryAdapters.sortToQueryAdapter('asc')).toBe('+');

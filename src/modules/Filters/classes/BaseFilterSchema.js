@@ -2,13 +2,13 @@ import {
   localStorageGetter,
   queryGetter,
   valueGetter,
-} from '../scripts/getters';
-import { localStorageRestore, queryRestore } from '../scripts/restores';
+} from '../scripts/getters/index.js';
+import { localStorageRestore, queryRestore } from '../scripts/restores/index.js';
 import {
   localStorageSetter,
   querySetter,
   valueSetter,
-} from '../scripts/setters';
+} from '../scripts/setters/index.js';
 
 const convertGetterArray = (context) => (getters) => {
   const availableGetters = ['value', 'query', 'localStorage'];

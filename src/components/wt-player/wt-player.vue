@@ -1,14 +1,14 @@
 <template>
   <aside
-    class="wt-player"
     :class="[`wt-player--position-${position}`]"
+    class="wt-player"
   >
     <component
       :is="playerType"
       ref="player"
-      class="wt-player__player"
-      :src="src"
       :autoplay="autoplay"
+      :src="src"
+      class="wt-player__player"
       controls
       v-on="listeners"
     />
@@ -27,7 +27,7 @@
 <script>
 import Plyr from 'plyr';
 import 'plyr/src/sass/plyr.scss';
-import createPlyrURL from './scripts/createPlyrURL';
+import createPlyrURL from './scripts/createPlyrURL.js';
 
 export default {
   name: 'WtPlayer',
@@ -160,6 +160,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 .wt-player {
   @extend %typo-body-2;
   bottom: 60px;
@@ -190,8 +192,8 @@ export default {
       padding: var(--plyr-controls-icon-padding);
 
       svg {
-        height: var(--plyr-controls-icon-size);
         width: var(--plyr-controls-icon-size);
+        height: var(--plyr-controls-icon-size);
       }
     }
 
@@ -208,11 +210,11 @@ export default {
       cursor: pointer;
 
       &::-webkit-slider-thumb {
+        transition: var(--transition);
         border: var(--wt-slider-border);
         border-radius: var(--wt-slider-pointer-radius);
         background: var(--wt-slider-pointer-background-color);
         -webkit-appearance: none;
-        transition: var(--transition);
       }
 
       &::-webkit-slider-runnable-track {
@@ -222,12 +224,12 @@ export default {
       &::-moz-range-thumb {
         width: var(--wt-slider-pointer-size);
         height: var(--wt-slider-pointer-size);
+        transition: var(--transition);
         border: var(--wt-slider-border);
-        border-radius: var(--wt-slider-pointer-radius);
         border-color: var(--wt-slider-pointer-border-color);
+        border-radius: var(--wt-slider-pointer-radius);
         background: var(--wt-slider-pointer-background-color);
         -moz-appearance: none;
-        transition: var(--transition);
       }
 
       &::-moz-range-track {

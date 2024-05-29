@@ -1,5 +1,3 @@
-/* eslint-disable no-multi-spaces */
-
 const AdminSections = Object.freeze({
   // DIRECTORY
   LICENSE: 'license',                   // permissions: add

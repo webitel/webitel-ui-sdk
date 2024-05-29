@@ -1,4 +1,4 @@
-import { shallowMount, mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import AuditFormQuestionOptions from '../audit-form-question-options.vue';
 
 describe('AuditFormQuestionOptions', () => {
@@ -17,7 +17,9 @@ describe('AuditFormQuestionOptions', () => {
         mode: 'write',
       },
     });
-    wrapper.findComponent('.audit-form-question-options-write__add-button').vm.$emit('click');
+    wrapper.findComponent('.audit-form-question-options-write__add-button')
+    .vm
+    .$emit('click');
     expect(wrapper.emitted()['change:question'][0][0].options.length).toBe(2);
   });
   it('deletes existing question option at "delete" icon-btn click', () => {

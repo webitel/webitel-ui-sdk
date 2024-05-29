@@ -1,9 +1,9 @@
 <template>
   <div
-    class="wt-input-info"
     :class="{
       'wt-input-info--invalid': invalid,
     }"
+    class="wt-input-info"
   >
     <slot />
   </div>
@@ -26,12 +26,13 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-input-info {
   @extend %typo-caption;
+  min-height: var(--input-info-min-height);
   margin-top: var(--input-info-margin);
   color: var(--wt-helper-text-color);
-  min-height: var(--input-info-min-height);
 
   &--invalid {
     color: var(--wt-helper-text-invalid-color);

@@ -2,9 +2,9 @@ import { BucketServiceApiFactory } from 'webitel-sdk';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
-  getDefaultOpenAPIConfig,
   getDefaultInstance,
-} from '../../defaults';
+  getDefaultOpenAPIConfig,
+} from '../../defaults/index.js';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -12,7 +12,7 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers';
+} from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

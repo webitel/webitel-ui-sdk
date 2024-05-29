@@ -11,6 +11,6 @@ const localStorageSetter = (context) => (rawValue) => {
   localStorage.setItem(key, value);
 
   return context;
-}
+};
 
 export default localStorageSetter;

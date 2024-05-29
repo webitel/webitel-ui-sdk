@@ -21,8 +21,8 @@ export default {
   max-width: 100%;
   height: 0;
   max-height: 0;
-  padding: 0;
   margin: 0;
+  padding: 0;
   border: var(--divider-border);
   border-color: var(--divider-border-color);
   border-top-width: thin;

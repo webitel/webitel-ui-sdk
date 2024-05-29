@@ -1,4 +1,4 @@
-import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum';
+import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum.js';
 
 export default [
   {

@@ -1,7 +1,7 @@
-import { shallowMount, mount } from '@vue/test-utils';
-import WtDatepicker from '../wt-datepicker.vue';
-import WtLabel from '../../wt-label/wt-label.vue';
+import { mount, shallowMount } from '@vue/test-utils';
 import WtIcon from '../../wt-icon/wt-icon.vue';
+import WtLabel from '../../wt-label/wt-label.vue';
+import WtDatepicker from '../wt-datepicker.vue';
 
 describe('WtDatepicker', () => {
   it('renders a component', () => {

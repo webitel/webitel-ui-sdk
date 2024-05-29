@@ -5,16 +5,16 @@
 </template>
 
 <script>
-  import Playground from './playground.vue';
+import Playground from './playground.vue';
 
-  export default {
-    name: 'TheApp',
-    components: {
-      Playground,
-    },
-  };
+export default {
+  name: 'TheApp',
+  components: {
+    Playground,
+  },
+};
 </script>
 
 <style lang="scss">
-  @import './css/main';
+@import './css/main';
 </style>

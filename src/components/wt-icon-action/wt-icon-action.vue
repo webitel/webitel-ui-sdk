@@ -8,11 +8,11 @@
 
 <script setup>
 import { computed } from 'vue';
-import WtDeleteIconAction from './_internals/wt-delete-icon-action.vue';
-import WtEditIconAction from './_internals/wt-edit-icon-action.vue';
 import WtAddIconAction from './_internals/wt-add-icon-action.vue';
-import WtHistoryIconAction from './_internals/wt-history-icon-action.vue';
+import WtDeleteIconAction from './_internals/wt-delete-icon-action.vue';
 import WtDownloadIconAction from './_internals/wt-download-icon-action.vue';
+import WtEditIconAction from './_internals/wt-edit-icon-action.vue';
+import WtHistoryIconAction from './_internals/wt-history-icon-action.vue';
 import WtRefreshIconAction from './_internals/wt-refresh-icon-action.vue';
 
 const props = defineProps({

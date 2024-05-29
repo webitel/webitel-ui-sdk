@@ -1,4 +1,4 @@
-import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin';
+import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin.js';
 
 export default {
   mixins: [_urlControllerMixin],
@@ -22,7 +22,8 @@ export default {
 
   methods: {
     restore({ filterQuery }) {
-      const value = this.getValueFromQuery({ filterQuery }) || this.defaultValue;
+      const value = this.getValueFromQuery({ filterQuery }) ||
+        this.defaultValue;
       this.restoreValue(value);
     },
   },

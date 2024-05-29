@@ -1,6 +1,6 @@
-import { createStore } from 'vuex';
 import { mount } from '@vue/test-utils';
-import FiltersStoreModule from '../../store/FiltersStoreModule';
+import { createStore } from 'vuex';
+import FiltersStoreModule from '../../store/FiltersStoreModule.js';
 import FilterTableFields from '../filter-table-fields.vue';
 
 const filterSchema = {

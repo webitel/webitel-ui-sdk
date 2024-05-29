@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import { valueGetter } from '../../scripts/getters';
-import { queryRestore } from '../../scripts/restores';
-import { querySetter, valueSetter } from '../../scripts/setters';
-import FiltersStoreModule from '../FiltersStoreModule';
+import { valueGetter } from '../../scripts/getters/index.js';
+import { queryRestore } from '../../scripts/restores/index.js';
+import { querySetter, valueSetter } from '../../scripts/setters/index.js';
+import FiltersStoreModule from '../FiltersStoreModule.js';
 
 describe('FiltersStoreModule', () => {
   it('get/sets primitive type filter', async () => {

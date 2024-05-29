@@ -1,7 +1,7 @@
 <template>
   <span
-    class="wt-chip"
     :class="`wt-chip--${color}-color`"
+    class="wt-chip"
   >
     <slot />
   </span>

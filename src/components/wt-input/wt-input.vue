@@ -72,10 +72,8 @@
 </template>
 
 <script setup>
-import {
-  ref, computed, useSlots, onMounted, toRefs,
-} from 'vue';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
+import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
+import { useValidation } from '../../mixins/validationMixin/useValidation.js';
 
 /*
 * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
@@ -274,6 +272,7 @@ onMounted(() => {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-input {
   cursor: text;
@@ -296,8 +295,8 @@ onMounted(() => {
   width: 100%;
   padding: var(--input-padding);
   transition: var(--transition);
-  border: var(--input-border);
   color: var(--wt-text-field-text-color);
+  border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
   background: transparent;

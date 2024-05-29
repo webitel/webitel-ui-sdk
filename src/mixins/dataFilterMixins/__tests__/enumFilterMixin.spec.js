@@ -1,15 +1,17 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
-import enumFilterMixin from '../enumFilterMixin';
+import enumFilterMixin from '../enumFilterMixin.js';
 
-const options = [{
+const options = [
+  {
     name: 'Inbound',
     value: 'inbound',
   },
   {
     name: 'Outbound',
     value: 'outbound',
-  }];
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),

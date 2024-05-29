@@ -13,13 +13,13 @@ describe('WtCcAgentStatusTimers', () => {
       },
     });
     expect(wrapper.exists())
-      .toBe(true);
+    .toBe(true);
   });
   it('renders component with empty status prop', () => {
     const wrapper = shallowMount(WtCcAgentStatusTimers, {
       props: { status: {} },
     });
     expect(wrapper.exists())
-      .toBe(true);
+    .toBe(true);
   });
 });

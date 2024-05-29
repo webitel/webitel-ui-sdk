@@ -1,9 +1,9 @@
 import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
-import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -42,13 +42,6 @@ export default ({ mode }) => {
     },
     server: {
       port: 8080,
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@import "./src/css/main.scss";`,
-        },
-      },
     },
     resolve: {
       alias: {

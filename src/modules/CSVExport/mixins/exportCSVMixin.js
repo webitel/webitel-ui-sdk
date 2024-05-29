@@ -1,4 +1,4 @@
-import CSVExport from '../CSVExport';
+import CSVExport from '../CSVExport.js';
 
 export default {
   data: () => ({
@@ -15,8 +15,8 @@ export default {
     },
     selectedIds() {
       return this.dataList
-        .filter((item) => item._isSelected)
-        .map((item) => item.id);
+      .filter((item) => item._isSelected)
+      .map((item) => item.id);
     },
     isAnySelected() {
       return !!this.selectedIds.length;
@@ -40,7 +40,8 @@ export default {
         await this.CSVExport.export(params);
       } catch (err) {
         throw err;
-      };
+      }
+
     },
   },
 };

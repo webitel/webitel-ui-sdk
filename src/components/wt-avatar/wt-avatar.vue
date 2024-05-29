@@ -1,7 +1,7 @@
 <template>
   <div
-    class="wt-avatar"
     :class="[`wt-avatar--size-${size}`]"
+    class="wt-avatar"
   >
     <wt-badge
       v-if="badge"
@@ -10,16 +10,16 @@
     />
     <div
       v-if="isLetterAvatar"
-      class="wt-avatar__letters"
       :style="{ background: `var(${avatarLettersBackground})` }"
+      class="wt-avatar__letters"
     >
       {{ avatarLetters }}
     </div>
     <img
       v-else
-      class="wt-avatar__img"
       :src="imgSrc"
       alt="avatar"
+      class="wt-avatar__img"
     >
   </div>
 </template>
@@ -27,7 +27,7 @@
 <script setup>
 import { computed } from 'vue';
 import defaultAvatar from '../../assets/components/atoms/wt-avatar/default-avatar.svg';
-import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum';
+import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
 const props = defineProps({
   src: {
@@ -88,7 +88,7 @@ const isBadge = computed(() => {
   const eligibleStatuses = [
     AbstractUserStatus.DND,
     AbstractUserStatus.ONLINE,
-    AbstractUserStatus.PAUSE
+    AbstractUserStatus.PAUSE,
   ];
   return eligibleStatuses.includes(props.status);
 });
@@ -143,10 +143,10 @@ const badgeColorVar = computed(() => {
   border-radius: 50%;
 
   &__letters {
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
     color: var(--wt-avatar-text-color);
     border-radius: 50%;
   }

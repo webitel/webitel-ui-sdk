@@ -1,8 +1,8 @@
 <template>
   <wt-popup
     class="delete-confirmation-popup"
-    v-bind="attrs"
     size="sm"
+    v-bind="attrs"
     @close="close"
   >
     <template #title>
@@ -11,8 +11,8 @@
     <template #main>
       <div class="delete-confirmation-popup__content">
         <wt-icon
-          icon="attention"
           color="error"
+          icon="attention"
         />
         <p class="delete-confirmation-popup__message">
           {{ deleteMessage }}
@@ -53,7 +53,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits([
- 'close',
+  'close',
 ]);
 
 const attrs = useAttrs();
@@ -96,8 +96,8 @@ async function confirm() {
 <style scoped>
 .delete-confirmation-popup__content {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   gap: var(--spacing-sm);
 }
 

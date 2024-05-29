@@ -4,9 +4,9 @@
     @click="$emit('close')"
   >
     <wt-icon
-      class="wt-notification__icon"
-      :icon="notificationIcon"
       :color="notificationIconColor"
+      :icon="notificationIcon"
+      class="wt-notification__icon"
     />
 
     <p class="wt-notification__text">
@@ -55,22 +55,23 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-notification {
   @extend %typo-body-1;
-  @include width-fit-content;
-
   position: relative;
+
   display: flex;
   align-items: flex-start;
+  width: fit-content;
   min-width: var(--wt-notification-min-width);
   max-width: var(--wt-notification-max-width);
   padding: var(--wt-notification-padding);
-  color: var(--wt-notification-text-color);
-  background: var(--wt-notification-bg-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--elevation-1);
   cursor: pointer;
+  color: var(--wt-notification-text-color);
+  border-radius: var(--border-radius);
+  background: var(--wt-notification-bg-color);
+  box-shadow: var(--elevation-1);
 }
 
 .wt-notification__icon {
@@ -79,8 +80,8 @@ export default {
 }
 
 .wt-notification__text {
-  flex-grow: 1;
   align-self: center;
+  flex-grow: 1;
   margin: 0;
 }
 </style>

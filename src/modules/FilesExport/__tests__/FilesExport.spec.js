@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils';
 import * as fileSaver from 'file-saver';
 import jszip from 'jszip';
 import jszipUtils from 'jszip-utils';
-import FilesExportMixin from '../mixins/exportFilesMixin';
+import FilesExportMixin from '../mixins/exportFilesMixin.js';
 import '../../../../tests/mocks/localStorageMock';
 
 vi.mock('jszip');
@@ -15,19 +15,31 @@ const dataList = [
   { files: [{ name: 'jest', id: '1', mimeType: 'mime/type' }] },
 ];
 const selectedDataList = [
-  { _isSelected: true, files: [{ name: 'jest1', id: '1', mimeType: 'mime/type' }] },
-  { _isSelected: true, files: [{ name: 'jest2', id: '2', mimeType: 'mime/type' }] },
+  {
+    _isSelected: true,
+    files: [{ name: 'jest1', id: '1', mimeType: 'mime/type' }],
+  },
+  {
+    _isSelected: true,
+    files: [{ name: 'jest2', id: '2', mimeType: 'mime/type' }],
+  },
 ];
 
 describe('File Export', () => {
-  jszipUtils.getBinaryContent.mockImplementation((url, callback) => callback(null, {}));
+  jszipUtils.getBinaryContent.mockImplementation((
+    url,
+    callback,
+  ) => callback(null, {}));
   let wrapper;
   const Component = {
     render() {
     },
     mixins: [FilesExportMixin],
     created() {
-      this.initFilesExport({ fetchMethod: () => ({ items: dataList }), filename: 'jest' });
+      this.initFilesExport({
+        fetchMethod: () => ({ items: dataList }),
+        filename: 'jest',
+      });
     },
     data: () => ({ dataList }),
   };
@@ -51,7 +63,7 @@ describe('File Export', () => {
       computed: { selectedItems() { return selectedDataList; } },
     });
     expect(wrapper.vm.getSelectedFiles())
-      .toEqual([...selectedDataList[0].files, ...selectedDataList[1].files]);
+    .toEqual([...selectedDataList[0].files, ...selectedDataList[1].files]);
   });
 
   it('mixin catches export error and resets isFilesLoading on export error', async () => {

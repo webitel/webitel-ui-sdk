@@ -7,13 +7,13 @@
     >
       <audit-form-question
         v-for="(question, key) of questions"
-        ref="auditQuestions"
         :key="key"
-        :question="question"
-        :result="(result && result[key]) ? result[key] : null"
-        :mode="mode"
+        ref="auditQuestions"
         :first="key === 0"
+        :mode="mode"
+        :question="question"
         :readonly="readonly"
+        :result="(result && result[key]) ? result[key] : null"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
@@ -22,8 +22,8 @@
     </div>
     <wt-button
       v-if="mode === 'create' && !readonly"
-      class="audit-form__add-button"
       :disabled="isInvalidForm"
+      class="audit-form__add-button"
       @click="addQuestion"
     >
       {{ $t('webitelUI.auditForm.addQuestion') }}
@@ -32,16 +32,13 @@
 </template>
 
 <script setup>
-import cloneDeep from 'lodash/cloneDeep';
-import {
-  watch, watchEffect, ref, computed, onMounted,
-  reactive, nextTick,
-} from 'vue';
 import { useVuelidate } from '@vuelidate/core';
-import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable';
-import AuditFormQuestion from './audit-form-question.vue';
+import cloneDeep from 'lodash/cloneDeep.js';
+import { computed, nextTick, onMounted, reactive, ref, watch, watchEffect } from 'vue';
 import WtButton from '../../../components/wt-button/wt-button.vue';
-import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema';
+import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
+import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
+import AuditFormQuestion from './audit-form-question.vue';
 
 const props = defineProps({
   mode: {

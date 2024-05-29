@@ -2,8 +2,8 @@
 
 <template>
   <div
-    class="wt-loader--sm"
     :class="`wt-loader--sm--${color}`"
+    class="wt-loader--sm"
   >
     <svg viewBox="0 0 24 24">
       <circle
@@ -33,30 +33,34 @@ export default {
   height: 24px;
 
   svg {
-    animation: rotate 1.5s linear infinite;
-    height: 100%;
     width: 100%;
+    height: 100%;
+    animation: rotate 1.5s linear infinite;
   }
 
   circle {
+    animation: dash 1.5s ease-in-out infinite 0s;
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
-    animation: dash 1.5s ease-in-out infinite 0s;
     //color 6s ease-in-out infinite -0.75s
     stroke-linecap: round;
     fill: none;
     stroke: var(--contrast-color);
     stroke-width: 3;
   }
+
   &--main circle {
     stroke: var(--wt-loader-sm-path-main-color);
   }
+
   &--icon circle {
     stroke: var(--wt-loader-sm-path-icon-color);
   }
+
   &--on-light circle {
     stroke: var(--wt-loader-sm-path-on-light-color);
   }
+
   &--on-dark circle {
     stroke: var(--wt-loader-sm-path-on-dark-color);
   }

@@ -1,4 +1,4 @@
-import createPlyrURL from '../createPlyrURL';
+import createPlyrURL from '../createPlyrURL.js';
 
 describe('createPlyrURL', () => {
   it('baseURL equals to "/"', () => {

@@ -48,6 +48,8 @@ const props = defineProps({
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 .wt-headline-nav {
   display: flex;
   align-items: center;

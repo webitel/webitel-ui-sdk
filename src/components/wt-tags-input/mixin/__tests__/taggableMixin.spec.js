@@ -1,5 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import taggableMixin from '../taggableMixin';
+import taggableMixin from '../taggableMixin.js';
 
 describe('taggableMixin', () => {
   const Component = {
@@ -18,7 +18,7 @@ describe('taggableMixin', () => {
 
     wrapper.vm.$emit('tag', searchQuery);
 
-    expect(wrapper.emitted().tag).toBeTruthy()
+    expect(wrapper.emitted().tag).toBeTruthy();
     expect(wrapper.emitted().input).toBeFalsy();
   });
-})
+});

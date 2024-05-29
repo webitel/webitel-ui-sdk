@@ -1,43 +1,43 @@
 <template>
   <div
-    class="wt-timepicker"
     :class="{'wt-timepicker--invalid': invalid}"
+    class="wt-timepicker"
   >
     <wt-label
       v-if="label"
-      v-bind="labelProps"
       :invalid="invalid"
+      v-bind="labelProps"
     >
       {{ `${label} (${format})` }}
     </wt-label>
     <div class="wt-timepicker__wrapper">
       <wt-time-input
         v-if="isHour"
-        :value="hour"
-        :v="v"
+        :disabled="disabled"
         :label="label ? null : $t('webitelUI.timepicker.hour') "
         :max-value="dateMode ? null : 23"
-        :disabled="disabled"
+        :v="v"
+        :value="hour"
         hide-input-info
         @input="hour = $event"
       />
       <wt-time-input
         v-if="isMin"
-        :value="min"
-        :v="v"
+        :disabled="disabled"
         :label="label ? null : $t('webitelUI.timepicker.min')"
         :max-value="59"
-        :disabled="disabled"
+        :v="v"
+        :value="min"
         hide-input-info
         @input="min = $event"
       />
       <wt-time-input
         v-if="isSec"
-        :value="sec"
-        :v="v"
+        :disabled="disabled"
         :label="label ? null : $t('webitelUI.timepicker.sec')"
         :max-value="59"
-        :disabled="disabled"
+        :v="v"
+        :value="sec"
         hide-input-info
         @input="sec = $event"
       />
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import validationMixin from '../../mixins/validationMixin/validationMixin';
+import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;

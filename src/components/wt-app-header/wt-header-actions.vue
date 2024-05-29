@@ -133,6 +133,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 .wt-header-actions {
   position: relative;
   z-index: var(--wt-app-header-content-z-index);
@@ -146,7 +148,6 @@ export default {
   right: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--wt-header-actions-content-sections-gap);
   min-width: var(--wt-header-actions-min-width);
   margin-top: var(--wt-app-header-content-panel-margin);
   padding: var(--wt-header-actions-padding);
@@ -154,6 +155,7 @@ export default {
   border-radius: var(--border-radius);
   background: var(--wt-app-header-content-bg-color);
   box-shadow: var(--elevation-10);
+  gap: var(--wt-header-actions-content-sections-gap);
 }
 
 .wt-header-actions__name {

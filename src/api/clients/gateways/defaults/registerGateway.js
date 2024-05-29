@@ -1,4 +1,4 @@
-import defaultGateway from './defaultGateway';
+import defaultGateway from './defaultGateway.js';
 
 const registerGateway = () => ({
   ...defaultGateway(),

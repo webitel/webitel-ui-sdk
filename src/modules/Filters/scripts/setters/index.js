@@ -1,6 +1,6 @@
-import localStorageSetter from './localStorageSetter';
-import querySetter from './querySetter';
-import valueSetter from './valueSetter';
+import localStorageSetter from './localStorageSetter.js';
+import querySetter from './querySetter.js';
+import valueSetter from './valueSetter.js';
 
 export {
   localStorageSetter,

@@ -1,16 +1,16 @@
 <template>
   <transition
     name="expand"
-    @after-enter="afterEnter"
     @enter="enter"
     @leave="leave"
+    @after-enter="afterEnter"
   >
     <slot />
   </transition>
 </template>
 
 <script>
-/* eslint-disable no-param-reassign */
+
 // https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/
 export default {
   name: 'WtExpandTransition',
@@ -33,19 +33,17 @@ export default {
 
       // Force repaint to make sure the
       // animation is triggered correctly.
-      // eslint-disable-next-line no-unused-expressions
+
       getComputedStyle(element).height;
 
-      // eslint-disable-next-line no-return-assign
       requestAnimationFrame(() => element.style.height = height);
     },
     leave(element) {
       const { height } = getComputedStyle(element);
       element.style.height = height;
-      // eslint-disable-next-line no-unused-expressions
+
       getComputedStyle(element).height;
 
-      // eslint-disable-next-line no-return-assign
       requestAnimationFrame(() => element.style.height = 0);
     },
   },
@@ -55,14 +53,15 @@ export default {
 <style lang="scss">
 .expand-enter-active,
 .expand-leave-active {
-  transition: height var(--transition);
   overflow: hidden;
+  transition: height var(--transition);
 }
 
 .expand-enter,
 .expand-leave-to {
   height: 0;
 }
+
 /*
   // expand animation optimization
   transform: translateZ(0);

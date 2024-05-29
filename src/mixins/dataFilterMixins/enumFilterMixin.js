@@ -1,4 +1,4 @@
-import baseFilterMixin from './baseFilterMixin/baseFilterMixin';
+import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';
 
 export default {
   mixins: [baseFilterMixin],
@@ -20,10 +20,12 @@ export default {
     restoreValue(value) {
       if (Array.isArray(value)) {
         this.value = this.options
-        .filter((option) => value.some((value) => `${value}` === option[this.storedProp]));
+        .filter((option) => value.some((value) => `${value}` ===
+          option[this.storedProp]));
       } else {
         this.value = this.options
-        .find((option) => option[this.storedProp] === value) || this.defaultValue;
+          .find((option) => option[this.storedProp] === value) ||
+          this.defaultValue;
       }
     },
   },

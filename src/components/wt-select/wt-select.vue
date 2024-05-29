@@ -36,8 +36,8 @@
       :multiple="multiple"
       :options="optionsWithCustomValues"
       :placeholder="placeholder || label"
-      :track-by="trackBy"
       :taggable="taggable"
+      :track-by="trackBy"
       class="wt-select__select"
       v-bind="$attrs"
       @close="isOpened = false"
@@ -91,8 +91,8 @@
           :disabled="disabled"
           class="multiselect__select multiselect__custom-value"
           icon="select-custom-value-enter"
-          @mousedown.prevent
           @click="handleCustomValueArrowInput(toggle)"
+          @mousedown.prevent
         />
         <!--    To view a list of possible values, click on this icon  -->
         <!-- @mousedown.native.prevent.stop="toggle": https://github.com/shentao/vue-multiselect/issues/1204#issuecomment-615114727 -->
@@ -101,8 +101,8 @@
           :disabled="disabled"
           class="multiselect__select multiselect__arrow"
           icon="arrow-down"
-          @mousedown.prevent
           @click="toggle"
+          @mousedown.prevent
         />
       </template>
 
@@ -144,9 +144,9 @@
 </template>
 
 <script>
-import isEmpty from '../../scripts/isEmpty';
-import taggableMixin from '../wt-tags-input/mixin/taggableMixin';
-import multiselectMixin from './mixins/multiselectMixin';
+import isEmpty from '../../scripts/isEmpty.js';
+import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
+import multiselectMixin from './mixins/multiselectMixin.js';
 
 export default {
   name: 'WtSelect',
@@ -202,9 +202,8 @@ export default {
       // https://webitel.atlassian.net/browse/WTEL-3181
       if (!this.allowCustomValues) return this.selectOptions;
 
-
       /**
-        custom values could be restored after refresh, so that they could be not included in options prop,
+       custom values could be restored after refresh, so that they could be not included in options prop,
        so that we should add them to options manually (but filter duplicates, which are already in options)
 
        i assume it's bad decision and it's better to include custom values to options prop,

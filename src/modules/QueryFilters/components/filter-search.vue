@@ -1,15 +1,15 @@
 <template>
   <wt-search-bar
+    :placeholder="$t('reusable.search')"
     :value="filterSchema.value"
     debounce
-    :placeholder="$t('reusable.search')"
     @input="setValue({ filter: filterQuery, value: $event })"
     @search="setValueToQuery({ filterQuery, value: $event })"
   />
 </template>
 
 <script>
-import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
+import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
   name: 'FilterSearch',

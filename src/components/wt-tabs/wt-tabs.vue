@@ -1,9 +1,9 @@
 <template>
   <nav
-    class="wt-tabs"
     :class="{
       'wt-tabs--wide': wide,
     }"
+    class="wt-tabs"
   >
     <button
       v-for="(tab) in tabs"
@@ -17,8 +17,8 @@
       @click="open(tab)"
     >
       <slot
-        v-bind="{ tab, current }"
         :name="tab.value"
+        v-bind="{ tab, current }"
       >
         <span style="display: block;">{{ tab.text }}</span>
       </slot>
@@ -88,6 +88,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-tabs {
   position: relative;

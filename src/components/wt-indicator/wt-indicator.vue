@@ -1,15 +1,15 @@
 <template>
   <div
-    class="wt-indicator"
     :class="[
       `wt-indicator--size-${size}`
     ]"
+    class="wt-indicator"
   >
     <span
-      class="wt-indicator__indicator"
       :class="[
         `wt-indicator__indicator--${color}`,
       ]"
+      class="wt-indicator__indicator"
     />
     <div
       v-if="isText"
@@ -52,6 +52,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-indicator {
   display: flex;
@@ -68,8 +69,8 @@ export default {
   min-width: var(--wt-indicator-dot-size);
   height: var(--wt-indicator-dot-size);
   margin: var(--wt-indicator-dot-offset);
-  background: var(--wt-indicator-disabled-color);
   border-radius: 50%;
+  background: var(--wt-indicator-disabled-color);
 
   &--primary {
     background: var(--wt-indicator-primary-color);
@@ -110,15 +111,18 @@ export default {
       min-width: var(--wt-indicator-dot-size--size-sm);
       height: var(--wt-indicator-dot-size--size-sm);
     }
+
     .wt-indicator__text {
       @extend %typo-caption;
     }
   }
+
   &-md {
     .wt-indicator__indicator {
       min-width: var(--wt-indicator-dot-size--size-md);
       height: var(--wt-indicator-dot-size--size-md);
     }
+
     .wt-indicator__text {
       @extend %typo-body-1;
     }

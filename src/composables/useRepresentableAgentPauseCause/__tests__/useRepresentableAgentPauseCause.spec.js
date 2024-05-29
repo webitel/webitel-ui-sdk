@@ -1,7 +1,6 @@
 import {
   useRepresentableAgentPauseCause,
-} from '../useRepresentableAgentPauseCause';
-
+} from '../useRepresentableAgentPauseCause.js';
 
 describe('useRepresentableAgentPauseCause', () => {
   it('correctly computes duration', () => {
@@ -65,9 +64,9 @@ describe('useRepresentableAgentPauseCause', () => {
     expect(representablePauseCause.value[0].progressColor).toBe('success');
   });
 
-it('correctly computes progressColor with duration = limit', () => {
-  const pauseCauses = { value: [{ durationMin: 12, limitMin: 12 }] };
-  const {
+  it('correctly computes progressColor with duration = limit', () => {
+    const pauseCauses = { value: [{ durationMin: 12, limitMin: 12 }] };
+    const {
       representablePauseCause,
     } = useRepresentableAgentPauseCause(pauseCauses);
     expect(representablePauseCause.value[0].progressColor).toBe('primary');

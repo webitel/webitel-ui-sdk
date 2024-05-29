@@ -12,6 +12,6 @@ const localStorageGetter = (context) => () => {
   const splitted = value.split(',');
   if (splitted.length === 1) return splitted[0];
   return splitted;
-}
+};
 
 export default localStorageGetter;

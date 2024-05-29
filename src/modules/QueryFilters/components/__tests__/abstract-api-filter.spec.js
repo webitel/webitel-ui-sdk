@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import { createStore } from 'vuex';
 import { createRouter, createWebHistory } from 'vue-router';
+import { createStore } from 'vuex';
+import ApiFilterSchema from '../../classes/ApiFilterSchema.js';
 import AbstractApiFilter from '../abstract-api-filter.vue';
-import ApiFilterSchema from '../../classes/ApiFilterSchema';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,7 +13,7 @@ describe('Abstract Api Filter', () => {
   const namespace = 'jest';
   const filterQuery = 'jest';
   const filterSchema = new ApiFilterSchema({
-    locale: { label: '' }
+    locale: { label: '' },
   });
   const searchMock = vi.fn();
   const fetchSelectedMock = vi.fn(() => ({ items: [] }));

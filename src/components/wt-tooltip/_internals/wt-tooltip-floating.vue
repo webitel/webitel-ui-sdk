@@ -18,7 +18,7 @@
 * */
 
 import { ref } from 'vue';
-import { useTooltipTriggerSubscriptions } from './useTooltipTriggerSubscriptions';
+import { useTooltipTriggerSubscriptions } from './useTooltipTriggerSubscriptions.js';
 
 const props = defineProps({
   triggers: {

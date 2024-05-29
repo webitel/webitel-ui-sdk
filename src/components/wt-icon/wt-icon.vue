@@ -1,11 +1,11 @@
 <template>
   <i
-    class="wt-icon"
     :class="[
       `wt-icon--size-${size}`,
       `wt-icon--color-${color}`,
       { 'wt-icon--disabled': disabled },
     ]"
+    class="wt-icon"
   >
     <svg class="wt-icon__icon">
       <use :xlink:href="iconName" />
@@ -69,8 +69,8 @@ const iconName = computed(() => {
 <style lang="scss" scoped>
 .wt-icon {
   display: inline-flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   transition: var(--transition);
 }
 
@@ -79,51 +79,64 @@ svg {
   display: block;
   width: 100%;
   height: 100%;
+  transition: var(--transition);
   stroke-width: 0;
   fill: var(--icon-color);
-  transition: var(--transition);
 }
 
 .wt-icon--color {
   &-default .wt-icon__icon {
     fill: var(--icon-color);
   }
+
   &-active .wt-icon__icon {
     fill: var(--icon-active-color);
   }
+
   &-primary .wt-icon__icon {
     fill: var(--icon-primary-color);
   }
+
   &-error .wt-icon__icon {
     fill: var(--icon-error-color);
   }
+
   &-success .wt-icon__icon {
     fill: var(--icon-success-color);
   }
+
   &-warning .wt-icon__icon {
     fill: var(--icon-warning-color);
   }
+
   &-on-dark .wt-icon__icon {
     fill: var(--icon-on-dark-color);
   }
+
   &-on-light .wt-icon__icon {
     fill: var(--icon-on-light-color);
   }
+
   &-on-primary .wt-icon__icon {
     fill: var(--icon-on-primary-color);
   }
+
   &-info .wt-icon__icon {
     fill: var(--icon-info-color);
   }
+
   &-chat .wt-icon__icon {
     fill: var(--icon-chat-color);
   }
+
   &-transfer .wt-icon__icon {
     fill: var(--icon-transfer-color);
   }
+
   &-job .wt-icon__icon {
     fill: var(--icon-job-color);
   }
+
   &-disabled .wt-icon__icon {
     fill: var(--icon-disabled-color);
   }

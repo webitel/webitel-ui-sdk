@@ -16,8 +16,8 @@
           v-bind="{ open, opened }"
         />
         <wt-icon
-          class="wt-expansion-panel-arrow"
           :class="{ 'wt-expansion-panel-arrow--opened': opened }"
+          class="wt-expansion-panel-arrow"
           icon="arrow-right"
         />
       </div>
@@ -84,6 +84,8 @@ watch(() => props.collapsed, (newVal) => {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 .wt-expansion-panel {
   display: flex;
   flex-direction: column;

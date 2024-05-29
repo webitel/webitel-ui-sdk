@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import { SortSymbols } from '../../../../scripts/sortQueryAdapters';
-import FilterEvent from '../../../Filters/enums/FilterEvent.enum';
-import FiltersStoreModule from '../../../Filters/store/FiltersStoreModule';
-import TableStoreModule from '../TableStoreModule';
+import { SortSymbols } from '../../../../scripts/sortQueryAdapters.js';
+import FilterEvent from '../../../Filters/enums/FilterEvent.enum.js';
+import FiltersStoreModule from '../../../Filters/store/FiltersStoreModule.js';
+import TableStoreModule from '../TableStoreModule.js';
 
 describe('TableStoreModule', () => {
   it('correctly computes FIELDS getter', () => {
@@ -147,14 +147,14 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       callback: (payload) => store.dispatch('table/ON_FILTER_EVENT', payload),
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('page')).toBe(12);
+    expect(store.getters['table/FILTERS']().page).toBe(12);
 
     await store.dispatch('table/filters/SET_FILTER', {
       name: 'vi',
       value: 24,
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('page')).toBe(1);
+    expect(store.getters['table/FILTERS']().page).toBe(1);
 
     await store.dispatch('table/filters/FLUSH_SUBSCRIBERS');
   });
@@ -243,7 +243,8 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       value: ['surname'],
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('fields')).toEqual(['surname']);
+    expect(store.getters['table/filters/GET_FILTER']('fields'))
+    .toEqual(['surname']);
 
     expect(store.getters['table/FIELDS']).toEqual(['id', 'included']);
 

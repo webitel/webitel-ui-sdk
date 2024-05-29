@@ -20,13 +20,13 @@
       <template #main>
         <div class="wt-table-column-select__popup-list-wrap">
           <ul
-            class="wt-table-column-select__popup-list"
             :class="{
               'wt-table-column-select__popup-list--md':
                 changeableDraft.length > 10 && changeableDraft.length <= 20,
               'wt-table-column-select__popup-list--lg':
                 changeableDraft.length > 20
             }"
+            class="wt-table-column-select__popup-list"
           >
             <li
               v-for="(column, key) of changeableDraft"
@@ -35,8 +35,8 @@
               @click.capture.prevent="column.show = !column.show"
             >
               <wt-checkbox
-                :selected="column.show"
                 :label="shownColLabel(column)"
+                :selected="column.show"
                 @change="column.show = $event"
               />
             </li>
@@ -130,6 +130,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
+
 $list-height: 400px;
 $list-width-sm: calc(500px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
 $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
@@ -137,6 +139,7 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
 .wt-table-column-select {
   line-height: 0; // prevent 24x28 icon height :/
 }
+
 .wt-table-column-select {
   &__heading {
     text-align: center;
@@ -148,27 +151,27 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
 
   &__popup-list {
     @extend %wt-scrollbar;
-    max-height: $list-height;
-    width: $list-width-sm;
     display: flex;
+    overflow-x: hidden;
     flex-direction: column;
     flex-wrap: wrap;
-    overflow-x: hidden;
+    width: $list-width-sm;
+    max-height: $list-height;
 
     // for 10-30 items
     &--md {
-      width: $list-width-md;
       display: block;
+      width: $list-width-md;
       column-count: 2;
     }
 
     // for 30+ items
     &--lg {
+      display: block;
+      overflow-y: auto;
       width: $list-width-md;
       max-height: none;
-      display: block;
       column-count: 3;
-      overflow-y: auto;
     }
   }
 

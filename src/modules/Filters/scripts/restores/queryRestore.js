@@ -2,6 +2,6 @@
  * restore copies getter logic
  */
 
-import queryGetter from '../getters/queryGetter';
+import queryGetter from '../getters/queryGetter.js';
 
 export default queryGetter;

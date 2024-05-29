@@ -1,6 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils';
-import WtTextarea from '../wt-textarea.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
+import WtTextarea from '../wt-textarea.vue';
 
 describe('WtTextarea', () => {
   it('renders a component', () => {
@@ -30,7 +30,8 @@ describe('WtTextarea', () => {
       },
       props: { chatMode: true },
     });
-    wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
+    wrapper.find('.wt-textarea__textarea')
+    .trigger('keypress', { key: 'Enter' });
     expect(wrapper.emitted().enter).toBeTruthy();
   });
 
@@ -40,7 +41,8 @@ describe('WtTextarea', () => {
         WtLabel,
       },
     });
-    wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
+    wrapper.find('.wt-textarea__textarea')
+    .trigger('keypress', { key: 'Enter' });
     expect(wrapper.emitted().enter).toBeFalsy();
   });
 });

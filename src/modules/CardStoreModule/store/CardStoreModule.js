@@ -1,6 +1,7 @@
 import deepCopy from 'deep-copy';
-import set from 'lodash/set';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule';
+import set from 'lodash/set.js';
+import BaseStoreModule
+  from '../../../store/BaseStoreModules/BaseStoreModule.js';
 
 export default class CardStoreModule extends BaseStoreModule {
   state = {
@@ -41,7 +42,7 @@ export default class CardStoreModule extends BaseStoreModule {
       context.commit('RESET_ITEM_STATE');
     },
     DELETE_ITEM: async (context, { id }) => {
-      await context.dispatch('api/DELETE_ITEM', {context, id});
+      await context.dispatch('api/DELETE_ITEM', { context, id });
     },
   };
 

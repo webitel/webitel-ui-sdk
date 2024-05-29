@@ -1,5 +1,5 @@
-import localStorageRestore from './localStorageRestore';
-import queryRestore from './queryRestore';
+import localStorageRestore from './localStorageRestore.js';
+import queryRestore from './queryRestore.js';
 
 export {
   localStorageRestore,

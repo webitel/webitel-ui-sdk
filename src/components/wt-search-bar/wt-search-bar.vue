@@ -76,8 +76,8 @@
 
 <script setup>
 import { computed, toRefs } from 'vue';
-import { useValidation } from '../../mixins/validationMixin/useValidation';
-import debounce from '../../scripts/debounce';
+import { useValidation } from '../../mixins/validationMixin/useValidation.js';
+import debounce from '../../scripts/debounce.js';
 
 const props = defineProps({
   v: {
@@ -151,6 +151,7 @@ function handleKeyup(event) {
 </style>
 
 <style lang="scss" scoped>
+@import 'src/css/main.scss';
 
 .wt-search-bar {
   cursor: text;
@@ -198,9 +199,9 @@ function handleKeyup(event) {
     padding: 0;
     transition: var(--transition);
     color: var(--wt-text-field-text-color);
-    background: transparent;
     border: none;
     outline: none;
+    background: transparent;
   }
 
   /* clears the 'X' from Internet Explorer */

@@ -1,14 +1,14 @@
 <template>
   <wt-datepicker
-    :value="filterSchema.value"
     :label="label"
+    :value="filterSchema.value"
     mode="datetime"
     @input="handleChange"
   />
 </template>
 
 <script>
-import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin';
+import baseFilterMixin from '../mixins/baseFilterMixin/baseFilterMixin.js';
 
 export default {
   name: 'FilterFrom',

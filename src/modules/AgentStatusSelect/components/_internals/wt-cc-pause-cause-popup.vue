@@ -16,10 +16,10 @@
             class="wt-cc-pause-cause-popup-option"
           >
             <wt-radio
-              class="wt-cc-pause-cause-popup-option__radio"
+              :label="option.name"
               :selected="selected.id"
               :value="option.id"
-              :label="option.name"
+              class="wt-cc-pause-cause-popup-option__radio"
               @input="select(option)"
             />
             <div class="wt-cc-pause-cause-popup-option__limits-wrapper">
@@ -57,7 +57,9 @@
 <script setup>
 import { computed, ref, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRepresentableAgentPauseCause } from '../../../../composables/useRepresentableAgentPauseCause/useRepresentableAgentPauseCause';
+import {
+  useRepresentableAgentPauseCause,
+} from '../../../../composables/useRepresentableAgentPauseCause/useRepresentableAgentPauseCause.js';
 
 const props = defineProps({
   options: {
@@ -103,8 +105,8 @@ function setPause() {
 <style lang="scss" scoped>
 .wt-cc-pause-cause-popup-option {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   &:not(:last-child) {
     margin-bottom: var(--spacing-sm);

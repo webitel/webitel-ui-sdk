@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import { createStore } from 'vuex';
 import { createRouter, createWebHistory } from 'vue-router';
+import { createStore } from 'vuex';
+import EnumFilterSchema from '../../classes/EnumFilterSchema.js';
 import AbstractEnumFilter from '../abstract-enum-filter.vue';
-import EnumFilterSchema from '../../classes/EnumFilterSchema';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,7 +13,7 @@ describe('Abstract Enum Filter', () => {
   const namespace = 'jest';
   const filterQuery = 'jest';
   const filterSchema = new EnumFilterSchema({
-    locale: { label: ''}
+    locale: { label: '' },
   });
   const store = createStore({
     modules: {

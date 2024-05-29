@@ -1,15 +1,17 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
-import enumFilterMixin from '../enumFilterMixin';
+import enumFilterMixin from '../enumFilterMixin.js';
 
-const options = [{
+const options = [
+  {
     name: 'Inbound',
     value: 'inbound',
   },
   {
     name: 'Outbound',
     value: 'outbound',
-  }];
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
@@ -41,7 +43,8 @@ describe('Enum filter mixin', () => {
       global: { plugins: [router] },
     });
     await wrapper.vm.$nextTick();
-    expect(setValue).toHaveBeenCalledWith({ filter: 'direction', value: options[0] });
+    expect(setValue)
+    .toHaveBeenCalledWith({ filter: 'direction', value: options[0] });
   });
 
   it('Sets empty array value if $route query is empty', async () => {
@@ -52,13 +55,17 @@ describe('Enum filter mixin', () => {
   });
 
   it('Attaches locales to options, if they have "locale" key', async () => {
-    const options = [{
-      locale: 'vi.locale',
-    }];
-    const expectedOptions = [{
-      locale: options[0].locale,
-      name: options[0].locale,
-    }];
+    const options = [
+      {
+        locale: 'vi.locale',
+      },
+    ];
+    const expectedOptions = [
+      {
+        locale: options[0].locale,
+        name: options[0].locale,
+      },
+    ];
     const wrapper = shallowMount(Component, {
       global: { plugins: [router] },
       data: () => ({ options }),
