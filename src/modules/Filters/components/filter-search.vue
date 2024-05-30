@@ -2,7 +2,9 @@
   <wt-search-bar
     :search-mode="multisearch && filterName"
     :search-mode-options="multisearch && searchModeOpts"
+    :hint="multisearch && currentSearchMode.hint"
     :value="localValue"
+    :v="multisearch && v$"
     class="filter-search"
     @input="localValue = $event"
     @search="setValue({ name: filterName, value: localValue })"
@@ -11,6 +13,7 @@
 </template>
 
 <script setup>
+import { useVuelidate } from '@vuelidate/core';
 import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import FilterEvent from '../enums/FilterEvent.enum.js';
@@ -46,9 +49,23 @@ function setValue(payload) {
 
 const filterName = ref(props.multisearch ? props.searchModeOpts[0].value : props.name);
 
+const currentSearchMode = computed(
+  () => props.searchModeOpts.find(({ value }) => value === filterName.value),
+);
+
 const filterValue = computed(() => getValue(filterName.value));
 
 const localValue = ref(filterValue.value);
+
+const v$ = props.multisearch && useVuelidate(computed(() => {
+  return {
+    localValue: {
+      ...currentSearchMode.value.v || {},
+    },
+  };
+}), { localValue }, { $autoDirty: true });
+
+v$.value.$touch();
 
 async function changeMode({ value }, { clearValue = true } = {}) {
   if (clearValue) await setValue({ name: filterName.value, value: '' });
