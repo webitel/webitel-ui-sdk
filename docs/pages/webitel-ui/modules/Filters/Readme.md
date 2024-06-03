@@ -96,21 +96,26 @@ Restores використовуються для відновлення знач
 Використовувати слід за інтерфейсом:
 
 * Взяти значення одного фільтра по нейму:
-  `GET_FILTER: (filterName: string) => filterValue: any`
+
+`GET_FILTER: (filterName: string) => filterValue: any`
 
 * Взяти значення всіх фільтрів (зверніть увагу, треба викликати, як функцію):
-  `GET_FILTERS: () => filters: { [filterName: string]: any }`
+
+`GET_FILTERS: () => filters: { [filterName: string]: any }`
 
 * Встановити значення фільтра:
-  `SET_FILTER: ({ name: string, value: any, silent: bool }) => void`
+
+`SET_FILTER: ({ name: string, value: any, silent: bool }) => void`
 
 Залежно від параметра `silent`, (не) емітиться подія `FILTER_SET`.
 
 * Підписка на події у фільтрах (можна підписатися на все через `'*'`):
-  `SUBSCRIBE: ({ event: FiltersEvent | '*', callback: fn: (payload) =>  => Promise | void })) => void`
+
+`SUBSCRIBE: ({ event: FiltersEvent | '*', callback: fn: (payload) =>  => Promise | void })) => void`
 
 * Відписка від **ВСІХ** подій у фільтрах:
-  `FLUSH_SUBSCRIBERS: () => void`
+
+`FLUSH_SUBSCRIBERS: () => void`
 
 ### Як додати фільтр у state?
 
@@ -156,9 +161,25 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 
 Компонент для фільтрації пагінації: `page` + `size`.
 
+#### Props:
+
+| Name        | Type   | Default | Required | Description               |
+|-------------|--------|---------|----------|---------------------------|
+| `namespace` | String | -       | +        | Неймспейс фільтрів        |
+| `isNext`    | Bool   | `false` |          | Відобраення кнопки "Next" |
+
 ### `filter-search.vue`
 
 Компонент для фільтрації пошуку. Підтримує `multisearch`.
+
+#### Props:
+
+| Name             | Type   | Default | Required | Description                                                                                            |
+|------------------|--------|---------|----------|--------------------------------------------------------------------------------------------------------|
+| `namespace`      | String | -       | +        | Неймспейс фільтрів                                                                                     |
+| `multisearch`    | Bool   | `false` |          | Включити мультипошук з вибором поля, по якому ми шукаємо                                               |
+| `name`           | String | `'q'`   |          | Імʼя поля, по якому ми шукаємо                                                                         |
+| `searchModeOpts` | Array  | `[]`    |          | Масив обʼєктів `{ value: string, label?: string, hint?: string, v?: object }` для вибору режиму пошуку |
 
 ### `filter-table-fields.vue`
 
@@ -184,8 +205,88 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 
 ## Наглядно
 
-*Hint: "Open image in new tab" for better view.*
+**TODO**
 
-![](new-schema.jpg)
+Якщо по тексту вам не дуже зроз і ви потребуєте діаграмки - пінганіть мене будь ласка.
 
 ## Приклад використання
+
+### Стор фільтрів
+
+```javascript
+// filters.store.js
+
+import FiltersStoreModule from '@webitel/ui-sdk/src/modules/Filters/store/FiltersStoreModule.js';
+
+const module = new FiltersStoreModule().addFilter([
+  { name: 'page', value: 1, defaultValue: 1 },
+  { name: 'size', value: 10, defaultValue: 10 },
+  { name: 'search' },
+  { name: 'sort' },
+  {
+    name: 'fields',
+    getters: ['value', 'query', 'localStorage'],
+    setters: ['value', 'query', 'localStorage'],
+    restores: ['query', 'localStorage'],
+  },
+]).getModule();
+```
+
+### Стор таблички
+
+```javascript
+// table.store.js
+
+import TableStoreModule from '@webitel/ui-sdk/src/modules/TableStoreModule/store/TableStoreModule.js';
+import filters from './filters.store.js';
+
+const module = new TableStoreModule().getModule({
+  modules: { filters },
+});
+```
+
+### Компонент
+
+```vue
+<!--   the-table.vue -->
+
+<template>
+  <filter-search
+          :namespace="filtersNamespace"
+          name="q"
+  />
+</template>
+
+<script setup>
+  import { useTableFilters } from '@webitel/ui-sdk/src/modules/Filters/composables/useTableFilters.js';
+  import { useTableStore } from '@webitel/ui-sdk/src/modules/TableStoreModule/composables/useTableStore.js';
+  import FilterSearch from '@webitel/ui-sdk/src/modules/Filters/components/filter-search.vue';
+
+  const namespace = 'docs';
+
+  const {
+    namespace: tableNamespace,
+    // ...
+    onFilterEvent,
+  } = useTableStore(namespace);
+
+  const {
+    namespace: filtersNamespace,
+
+    subscribe,
+    flushSubscribers,
+    restoreFilters,
+  } = useTableFilters(tableNamespace);
+
+  subscribe({
+    event: '*',
+    callback: onFilterEvent,
+  });
+
+  restoreFilters();
+
+  onUnmounted(() => {
+    flushSubscribers();
+  });
+</script>
+```
