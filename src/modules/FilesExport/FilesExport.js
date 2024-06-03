@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver-es';
 import JSZip from 'jszip';
 import jszipUtils from 'jszip-utils';
 import path from 'path-browserify';

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import * as fileSaver from 'file-saver';
+import * as fileSaver from 'file-saver-es';
 import jszip from 'jszip';
 import jszipUtils from 'jszip-utils';
 import FilesExportMixin from '../mixins/exportFilesMixin.js';
