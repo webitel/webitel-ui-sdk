@@ -21,6 +21,7 @@ const sidebarComponents = globbySync(
 const onDemandSidebarComponents = globbySync('pages/webitel-ui/components/on-demand/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarEnums = globbySync('pages/webitel-ui/enums/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarModules = globbySync('pages/webitel-ui/modules/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
+const sidebarStore = globbySync('pages/webitel-ui/store/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarTests = globbySync('pages/webitel-ui/tests/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarValidators = globbySync('pages/webitel-ui/validators/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 
@@ -40,13 +41,6 @@ export default defineConfig({
         'vue-multiselect',
         'webitel-sdk',
       ],
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@import "./src/css/main.scss";`,
-        },
-      },
     },
     plugins: [
       nodePolyfills({
@@ -95,6 +89,7 @@ export default defineConfig({
       { text: 'Components/on-demand', items: onDemandSidebarComponents },
       { text: 'Enums', items: sidebarEnums },
       { text: 'Modules', items: sidebarModules },
+      { text: 'Store', items: sidebarStore },
       { text: 'Test utils and Mocks', items: sidebarTests },
       { text: 'Validators', items: sidebarValidators },
       { text: 'Tests Cookbook', items: sidebarTestsCookbook },

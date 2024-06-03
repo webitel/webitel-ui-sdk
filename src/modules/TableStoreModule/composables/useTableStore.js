@@ -2,7 +2,6 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import getNamespacedState from '../../../store/helpers/getNamespacedState.js';
 
-// eslint-disable-next-line import/prefer-default-export
 export const useTableStore = (namespace) => {
   const store = useStore();
 
