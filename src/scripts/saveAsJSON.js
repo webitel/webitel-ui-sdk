@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver-es';
 
 const saveAsJSON = (name, content) => {
   const fileName = name.replace(/[ ,]+/g, '-');

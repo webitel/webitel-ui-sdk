@@ -1,11 +1,11 @@
 import { shallowMount } from '@vue/test-utils';
 import stringify from 'csv-stringify/lib/sync';
-import * as fileSaver from 'file-saver';
+import * as fileSaver from 'file-saver-es';
 import CSVExportMixin from '../mixins/exportCSVMixin.js';
 import '../../../../tests/mocks/localStorageMock.js';
 
 vi.mock('csv-stringify/lib/sync');
-vi.mock('file-saver', () => ({
+vi.mock('file-saver-es', () => ({
   saveAs: vi.fn(),
 }));
 
