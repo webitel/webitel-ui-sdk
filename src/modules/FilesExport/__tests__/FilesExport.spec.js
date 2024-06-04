@@ -7,7 +7,7 @@ import '../../../../tests/mocks/localStorageMock';
 
 vi.mock('jszip');
 vi.mock('jszip-utils');
-vi.mock('file-saver', () => ({
+vi.mock('file-saver-es', () => ({
   saveAs: vi.fn(),
 }));
 
