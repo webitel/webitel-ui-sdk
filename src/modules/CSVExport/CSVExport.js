@@ -1,4 +1,4 @@
-import stringify from 'csv-stringify/lib/sync';
+import stringify from 'csv-stringify/lib/sync.js';
 import { saveAs } from 'file-saver-es';
 import { objSnakeToCamel } from '../../scripts/caseConverters.js';
 
