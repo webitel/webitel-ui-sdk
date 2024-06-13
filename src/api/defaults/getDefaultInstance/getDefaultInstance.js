@@ -9,6 +9,7 @@ const getDefaultInstance = () => generateInstance({
     request: [updateTokenInterceptor],
     response: [handleUnauthorizedInterceptor],
   },
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 export default getDefaultInstance;
