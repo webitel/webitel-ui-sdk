@@ -105,25 +105,25 @@ function atClickaway() {
   display: inline-flex;
   align-items: center;
   gap: var(--button-select-buttons-gap);
-}
 
-.wt-button-select__button {
-  padding: var(--button-select-button-padding);
-  border-radius: var(--border-radius) 0 0 var(--border-radius);
-}
+  .wt-button-select__button {
+    padding: var(--button-select-button-padding);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+  }
 
-.wt-button-select__select-btn {
-  min-width: auto;
-  padding: var(--button-select-icon-button-padding);
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  .wt-button-select__select-btn {
+    min-width: auto;
+    padding: var(--button-select-icon-button-padding);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 
-  // OPEN AND SHUT ARROW
-  .wt-button-select__select-arrow {
-    display: flex;
-    transform: rotate(0);
+    // OPEN AND SHUT ARROW
+    .wt-button-select__select-arrow {
+      display: flex;
+      transform: rotate(0);
 
-    &--active {
-      transform: rotate(180deg);
+      &--active {
+        transform: rotate(180deg);
+      }
     }
   }
 }
