@@ -45,8 +45,13 @@ export default {
   methods: {
     async copy() {
       try {
-        await copy(this.value);
-        this.copied = this.value;
+        let textToCopy = this.value;
+
+        // Replace <br> tags with newline characters
+        textToCopy = textToCopy.replace(/<br\s*\/?>/gi, '\n');
+
+        await copy(textToCopy);
+        this.copied = textToCopy;
         if (copiedIdTimeout) window.clearTimeout(copiedIdTimeout);
         copiedIdTimeout = setTimeout(() => {
           this.copied = null;
