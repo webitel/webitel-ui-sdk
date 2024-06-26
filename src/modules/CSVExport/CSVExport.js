@@ -22,16 +22,17 @@ export default class CSVExport {
 
   downloadProgress = { count: 0 };
 
-  constructor(fetchMethod, { filename }) {
+  constructor(fetchMethod, { filename, delimiter }) {
     if (!fetchMethod) throw new Error('fetch method should be specified!');
     this.fetchMethod = fetchMethod;
     this.filename = filename;
+    this.delimiter = delimiter || ',';
   }
 
-  static _getStringifyOptions() {
+  static _getStringifyOptions(delimiter) {
     const defaultOptions = {
       header: true,
-      delimiter: ',',
+      delimiter,
     };
     const localStorageOptions = JSON.parse(localStorage.getItem('csv-export-options')) ||
       {};
@@ -71,7 +72,7 @@ export default class CSVExport {
       if (!columns.length && items.length) columns = Object.keys(items[0]);
 
       const options = {
-        ...CSVExport._getStringifyOptions(),
+        ...CSVExport._getStringifyOptions(params.delimiter),
         columns,
       };
 
