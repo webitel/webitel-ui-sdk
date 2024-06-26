@@ -32,7 +32,7 @@ export default class CSVExport {
   static _getStringifyOptions(delimiter) {
     const defaultOptions = {
       header: true,
-      delimiter: delimiter,
+      delimiter,
     };
     const localStorageOptions = JSON.parse(localStorage.getItem('csv-export-options')) ||
       {};
