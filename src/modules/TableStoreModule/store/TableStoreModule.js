@@ -84,7 +84,7 @@ export default class TableStoreModule extends BaseStoreModule {
         await context.dispatch('HANDLE_SORT_CHANGE', payload);
       }
 
-      if (context.getters.FILTERS().page && payload.value !== 'page') {
+      if (context.getters.FILTERS().page && payload.name !== 'page') {
         await context.dispatch('SET_FILTER', {
           name: 'page',
           value: 1,
