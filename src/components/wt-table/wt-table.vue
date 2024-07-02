@@ -227,9 +227,15 @@ export default {
         }
       } else {
         // for backwards compatibility
-        this.data.forEach((item) => {
-          item._isSelected = !this.isAllSelected;
-        });
+        if (this.isAllSelected) {
+          this.data.forEach((item) => {
+            item._isSelected = false;
+          });
+        } else {
+          this.data.forEach((item) => {
+            item._isSelected = true;
+          });
+        }
       }
     },
     handleSelection(row, select) {
