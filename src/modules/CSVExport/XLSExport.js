@@ -19,22 +19,39 @@ export default class XLSExport {
     this.downloadProgress = { count: 0 };
   }
 
+  extractNameFromObject(value) {
+    if (value && typeof value === 'object' && value.name) {
+      return value.name;
+    }
+    return value;
+  }
+
   filterDataByColumns(data, columns) {
     return data.map(item => {
       let filteredItem = {};
       columns.forEach(column => {
-        if (item.hasOwnProperty(column)) {
-          filteredItem[column] = item[column];
-        }
+        const value = item.hasOwnProperty(column) ? this.extractNameFromObject(item[column]) : '';
+        filteredItem[column] = value;
       });
       return filteredItem;
     });
   }
 
+  calculateColumnWidths(data, columns) {
+    return columns.map(column => {
+      const maxLength = data.reduce((max, item) => {
+        const value = item[column] || '';
+        return Math.max(max, value.toString().length);
+      }, column.length);
+      return { wch: maxLength + 2 }; // Adding some padding
+    });
+  }
+
   save(data, columns) {
-    console.log('xls save', data, columns);
     const filteredData = this.filterDataByColumns(data, columns);
     const ws = XLSX.utils.json_to_sheet(filteredData);
+    const columnWidths = this.calculateColumnWidths(filteredData, columns);
+    ws['!cols'] = columnWidths;
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
@@ -49,8 +66,6 @@ export default class XLSExport {
     let columns = params._columns ||
       (params?.fields ? objSnakeToCamel(params?.fields) : []);
 
-    console.log('xls columns', columns);
-    console.log('xls params', params);
     do {
       const { items, next } = await this.fetchMethod({
         ...params,
@@ -63,13 +78,11 @@ export default class XLSExport {
       isNext = next;
       page += 1;
     } while (isNext);
-    console.log('xls data', data);
     return { data, columns };
   }
 
   async export(params) {
     const { data, columns } = await this.fetchAndPrepareData(params);
-    console.log('xls export params', data);
     this.save(data, columns);
     this.resetProgress();
   }
