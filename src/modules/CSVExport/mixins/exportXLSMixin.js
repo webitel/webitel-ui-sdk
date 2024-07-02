@@ -4,6 +4,7 @@ export default {
   data: () => ({
     XLSExport: null,
   }),
+
   computed: {
     isXLSLoading() {
       return !!this.XLSDownloadProgress;
@@ -12,7 +13,14 @@ export default {
     XLSDownloadProgress() {
       return this.XLSExport ? this.XLSExport.downloadProgress.count : 0;
     },
-
+    selectedIds() {
+      return this.dataList
+      .filter((item) => item._isSelected)
+      .map((item) => item.id);
+    },
+    isAnySelected() {
+      return !!this.selectedIds.length;
+    },
   },
   methods: {
     initXLSExport(fetchMethod, options) {
@@ -33,6 +41,5 @@ export default {
         throw err;
       }
     },
-
   },
 };
