@@ -51,6 +51,7 @@ export default class CSVExport {
   }
 
   save(csv) {
+    console.log('csv save', csv);
     const blob = new Blob([csv], { type: 'data:text/csv;charset=utf-8' });
     saveAs(blob, `${this.filename}.csv`);
   }
@@ -82,11 +83,14 @@ export default class CSVExport {
       isNext = next;
       page += 1;
     } while (isNext);
+    console.log('csv stringify', csv);
     return csv;
   }
 
   async export(params) {
+    console.log('params export params', params);
     const csv = await this.stringify(params);
+    console.log('csv export params',csv);
     this.save(csv);
     this.resetProgress();
   }
