@@ -227,9 +227,20 @@ export default {
         }
       } else {
         // for backwards compatibility
-        this.data.forEach((item) => {
-          item._isSelected = !this.isAllSelected;
-        });
+
+        // https://webitel.atlassian.net/browse/WTEL-4634
+        // Value for _isSelected must be assigned explicitly.
+        // Because allSelected recomputes after each change
+
+        if (this.isAllSelected) {
+          this.data.forEach((item) => {
+            item._isSelected = false;
+          });
+        } else {
+          this.data.forEach((item) => {
+            item._isSelected = true;
+          });
+        }
       }
     },
     handleSelection(row, select) {
