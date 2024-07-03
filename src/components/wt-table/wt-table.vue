@@ -230,8 +230,7 @@ export default {
 
         // https://webitel.atlassian.net/browse/WTEL-4634
         // Value for _isSelected must be assigned explicitly.
-        // Assigning _isSelected the value isAllSelected is incorrect, because after the first changed item,
-        // isAllSelected will change the value and all checkboxes will not be selected/deselected
+        // Because allSelected recomputes after each change
 
         if (this.isAllSelected) {
           this.data.forEach((item) => {
