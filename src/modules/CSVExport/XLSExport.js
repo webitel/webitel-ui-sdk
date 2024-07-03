@@ -19,6 +19,7 @@ export default class XLSExport {
     this.downloadProgress = { count: 0 };
   }
 
+  // NOTE: if the value is an object with a name property, extract the name to display it in the EXEL file
   extractNameFromObject(value) {
     if (value && typeof value === 'object' && value.name) {
       return value.name;
@@ -26,17 +27,19 @@ export default class XLSExport {
     return value;
   }
 
+  // NOTE: creates a new object that only includes the properties specified in the columns array
   filterDataByColumns(data, columns) {
     return data.map(item => {
       let filteredItem = {};
       columns.forEach(column => {
-        const value = item.hasOwnProperty(column) ? this.extractNameFromObject(item[column]) : '';
+        const value = item.hasOwnProperty(column) ? this.extractNameFromObject(item[column]) : ''; // '' needed to display column that has no data
         filteredItem[column] = value;
       });
       return filteredItem;
     });
   }
 
+  // NOTE: calculates the width of the columns based on the data to display it in the EXEL file
   calculateColumnWidths(data, columns) {
     return columns.map(column => {
       const maxLength = data.reduce((max, item) => {
@@ -71,7 +74,6 @@ export default class XLSExport {
         ...params,
         page,
       });
-      if (!columns.length && items.length) columns = Object.keys(items[0]);
       data = data.concat(items);
       this.downloadProgress.count += items.length;
 
