@@ -20,9 +20,8 @@ const getNotificationSound = (action) => {
     case ChatActions.Close:
       return new Audio(endChatSound);
     case CallActions.Ringing:
-      const audio = new Audio(ringingSound);
-      audio.loop = true;
-      return audio;
+      // default call ringtone sound
+      return new Audio(ringingSound);
     case CallActions.Hangup:
       return new Audio(endCallSound);
     default:
@@ -127,9 +126,13 @@ export default class NotificationsStoreModule extends BaseStoreModule {
           return;
 
         const audio = sound instanceof Audio ? sound : new Audio(sound);
+
         audio.addEventListener('ended', () => {
           context.dispatch('STOP_SOUND');
         }, { once: true });
+
+        if (action === CallActions.Ringing) audio.loop = true;
+
         audio.play();
         localStorage.setItem('wtIsPlaying', 'true');
         context.commit('SET_CURRENTLY_PLAYING', audio);
