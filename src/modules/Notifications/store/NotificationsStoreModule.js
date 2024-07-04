@@ -123,7 +123,7 @@ export default class NotificationsStoreModule extends BaseStoreModule {
         && !localStorage.getItem('wtIsPlaying')
       ) {
         if (action === CallActions.Hangup
-          && !localStorage.getItem('callEndSound'))
+          && !localStorage.getItem('settings/callEndSound'))
           return;
 
         const audio = sound instanceof Audio ? sound : new Audio(sound);
