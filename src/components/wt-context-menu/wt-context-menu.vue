@@ -2,6 +2,7 @@
   <wt-tooltip
     :triggers="['click', 'touch']"
     :visible="visible"
+    :disabled="disabled"
     class="wt-context-menu"
     placement="bottom-end"
     popper-class="wt-context-menu__floating-wrapper"
@@ -62,6 +63,10 @@ const props = defineProps({
   maxWidth: {
     type: [String],
     default: '300px',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 

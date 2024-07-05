@@ -54,6 +54,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const activator = ref(null);
@@ -62,6 +66,7 @@ const floating = ref(null);
 const isVisible = ref(false);
 
 const showTooltip = (event = {}) => {
+  if (props.disabled) return;
   if (isVisible.value) return;
   isVisible.value = true;
 

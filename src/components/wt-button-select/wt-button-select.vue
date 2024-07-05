@@ -14,6 +14,7 @@
     </wt-button>
 
     <wt-context-menu
+      :disabled="disabled"
       :options="options"
       :visible="isOpened"
       @click="selectOption"
