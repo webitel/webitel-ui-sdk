@@ -2,6 +2,7 @@ import { CallActions, ChatActions, JobState } from 'webitel-sdk';
 import i18n from '../../../locale/i18n.js';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import endChatSound from '../assets/audio/end-chat.wav';
+import endCallSound from '../assets/audio/end-call.mp3';
 import newChatSound from '../assets/audio/new-chat.wav';
 import newMessageSound from '../assets/audio/new-message.wav';
 import ringingSound from '../assets/audio/ringing.mp3';
@@ -19,10 +20,10 @@ const getNotificationSound = (action) => {
     case ChatActions.Close:
       return new Audio(endChatSound);
     case CallActions.Ringing:
-
-      const audio = new Audio(ringingSound);
-      audio.loop = true;
-      return audio;
+      // default call ringtone sound
+      return new Audio(ringingSound);
+    case CallActions.Hangup:
+      return new Audio(endCallSound);
     default:
       return false;
   }
@@ -120,10 +121,18 @@ export default class NotificationsStoreModule extends BaseStoreModule {
       if (context.getters.IS_SOUND_ALLOWED
         && !localStorage.getItem('wtIsPlaying')
       ) {
+        if (action === CallActions.Hangup
+          && !localStorage.getItem('settings/callEndSound'))
+          return;
+
         const audio = sound instanceof Audio ? sound : new Audio(sound);
+
         audio.addEventListener('ended', () => {
           context.dispatch('STOP_SOUND');
         }, { once: true });
+
+        if (action === CallActions.Ringing) audio.loop = true;
+
         audio.play();
         localStorage.setItem('wtIsPlaying', 'true');
         context.commit('SET_CURRENTLY_PLAYING', audio);
