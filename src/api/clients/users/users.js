@@ -12,7 +12,6 @@ import applyTransform, {
   notify,
   sanitize,
   snakeToCamel,
-  starToSearch,
 } from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
@@ -45,7 +44,6 @@ const getUsersList = async (params) => {
 
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
-    starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),
