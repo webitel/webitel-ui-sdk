@@ -35,6 +35,17 @@ NOTE:   text-transform: none; is set explicitly cause t-t is inherited from pare
   //letter-spacing: 0.28px; // 0.02em
 }
 
+%typo-heading-4 {
+  font: {
+    family: 'Montserrat', monospace;
+    size: 16px;
+    weight: 600;
+  }
+  line-height: 24px;
+  text-transform: none;
+  //letter-spacing: 0.28px; // 0.02em
+}
+
 %typo-subtitle-1 {
   font: {
     family: 'Montserrat', monospace;

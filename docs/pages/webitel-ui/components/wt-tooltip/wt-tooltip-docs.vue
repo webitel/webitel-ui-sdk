@@ -52,6 +52,12 @@ export default {
         default: 'false',
         description: 'Make tooltip visible',
       },
+      {
+        value: 'disabled',
+        code: '<wt-tooltip disabled></>',
+        type: 'Boolean',
+        default: 'false',
+      },
     ],
   }),
   mounted() {

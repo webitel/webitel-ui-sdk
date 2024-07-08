@@ -51,6 +51,12 @@ export default {
         type: ['String'],
         default: '300px',
       },
+      {
+        value: 'disabled',
+        code: '<wt-tooltip disabled></>',
+        type: 'Boolean',
+        default: 'false',
+      },
     ],
     events: [
       {
