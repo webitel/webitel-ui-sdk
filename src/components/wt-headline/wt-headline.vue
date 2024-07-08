@@ -30,7 +30,6 @@ export default {
 .wt-headline {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: space-between;
   box-sizing: border-box;
   min-height: var(--headline-min-height);
