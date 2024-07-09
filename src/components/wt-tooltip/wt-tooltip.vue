@@ -54,6 +54,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const activator = ref(null);
@@ -62,7 +66,8 @@ const floating = ref(null);
 const isVisible = ref(false);
 
 const showTooltip = (event = {}) => {
-  if (isVisible.value) return;
+  if (props.disabled || isVisible.value) return;
+
   isVisible.value = true;
 
   // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/components/Popper.ts#L884
