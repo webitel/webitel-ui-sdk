@@ -10,7 +10,6 @@ import ExampleTooltip from './examples/example-tooltip.vue';
 
 | Prop            | Type    | Default                     | Code                                                     | Description                                                                                          |
 |-----------------|---------|-----------------------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| contrast        | Boolean | false                       | `<wt-tooltip contrast></wt-tooltip>`                     | Inverts tooltip colors                                                                               |
 | placement       | String  | auto                        | `<wt-tooltip placement="left"></wt-tooltip>`             | see [Floating UI](https://floating-ui.com/docs/tutorial#placements) docs, + "auto" for autoPlacement |
 | popper-class    | String  |                             | `<wt-tooltip popper-class="my-class"></wt-tooltip>`      | add special class to a floating part of tooltip                                                      |
 | triggers        | Array   | ['hover', 'focus', 'touch'] | `<wt-tooltip :triggers="['click']"></wt-tooltip>`        | see [Floating Vue](https://floating-vue.starpad.dev/api/#triggers) docs                              |
