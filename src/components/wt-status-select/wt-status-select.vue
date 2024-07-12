@@ -1,26 +1,44 @@
 <template>
-  <wt-select
-    :clearable="false"
-    :options="availableOptions"
-    :searchable="false"
-    :value="selectedOption"
-    class="wt-status-select"
-    track-by="value"
-    @input="inputHandler"
-  >
-    <template #singleLabel="{ option }">
-      <wt-indicator
-        :color="option.color"
-        :text="duration"
-      />
-    </template>
-    <template #option="{ option }">
-      <wt-indicator
-        :color="option.color"
-        :text="option.text"
-      />
-    </template>
-  </wt-select>
+<!--  <wt-select-->
+<!--    :clearable="false"-->
+<!--    :options="availableOptions"-->
+<!--    :searchable="false"-->
+<!--    :value="selectedOption"-->
+<!--    class="wt-status-select"-->
+<!--    track-by="value"-->
+<!--    @input="inputHandler"-->
+<!--  >-->
+<!--    <template #singleLabel="{ option }">-->
+<!--      <wt-indicator-->
+<!--        :color="option.color"-->
+<!--        :text="duration"-->
+<!--      />-->
+<!--    </template>-->
+<!--    <template #option="{ option }">-->
+<!--      <wt-indicator-->
+<!--        :color="option.color"-->
+<!--        :text="option.text"-->
+<!--      />-->
+<!--    </template>-->
+<!--  </wt-select>-->
+
+    <div class="my-select">
+      <div class="my-select__selected" @click="toggleDropdown">
+        {{ selectedOption ? selectedOption.text : 'Select an option' }}
+      </div>
+      <div class="my-select__dropdown" v-if="dropdownOpen">
+        <div
+          class="my-select__option"
+          v-for="option in availableOptions"
+          :key="option.id"
+          @click="selectOption(option)"
+          :class="option.color"
+        >
+          {{ option.text }}
+        </div>
+      </div>
+    </div>
+
 </template>
 
 <script>
@@ -46,11 +64,26 @@ export default {
     options: {
       type: Array,
     },
+    value: {
+      type: Object,
+      default: null,
+    },
     // size: {
     //   type: String,
     //   default: 'md',
     //   options: ['sm', 'md'],
     // },
+  },
+  data() {
+    return {
+      selectedOption: this.value,
+      dropdownOpen: false,
+    };
+  },
+  watch: {
+    value(newValue) {
+      this.selectedOption = newValue;
+    },
   },
   emits: ['change'],
   computed: {
@@ -91,12 +124,60 @@ export default {
     inputHandler(value) {
       this.$emit('change', value.value);
     },
+    toggleDropdown() {
+      this.dropdownOpen = !this.dropdownOpen;
+    },
+    selectOption(option) {
+      this.selectedOption = option;
+      this.$emit('change', option.value);
+      this.dropdownOpen = false;
+
+      console.log('option', option);
+    },
   },
 };
 </script>
 
 <style lang="scss">
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
+  .my-select {
+    position: relative;
+    width: 120px;
+    font-family: Arial, sans-serif;
+    min-height: 0;
+    padding: var(--wt-status-select-padding);
+    border: none;
+    background: var(--wt-status-select-background-color);
+  }
+
+  .my-select__selected {
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: #fff;
+  }
+
+  .my-select__dropdown {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    background-color: #fff;
+    z-index: 1000;
+  }
+
+  .my-select__option {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .my-select__option:hover {
+    background-color: #f0f0f0;
+  }
+
 </style>
 
 <style lang="scss" scoped>
