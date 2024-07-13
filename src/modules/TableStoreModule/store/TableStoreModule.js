@@ -1,4 +1,3 @@
-import set from 'lodash/set.js';
 import {
   queryToSortAdapter,
   sortToQueryAdapter,
@@ -230,9 +229,6 @@ export default class TableStoreModule extends BaseStoreModule {
   };
 
   mutations = {
-    SET: (state, { path, value }) => {
-      return set(state, path, value);
-    },
   };
 
   constructor({ headers = [] }) {
