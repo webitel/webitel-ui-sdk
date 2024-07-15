@@ -6,9 +6,9 @@ import ExampleNotification from './examples/example-notification.vue';
 
 ## Props
 
-| Prop | Type   | Default | Code                                                 | Description |
-|------|--------|---------|------------------------------------------------------|-------------|
-| type | String | success | `<wt-notification type="success"></wt-notification>` |             |
+| Prop | Type   | Default | Code                                                 | Description | Options                       |
+|------|--------|---------|------------------------------------------------------|-------------|-------------------------------|
+| type | String | success | `<wt-notification type="success"></wt-notification>` |             | info, error, warning, success |
 
 ## Events
 
