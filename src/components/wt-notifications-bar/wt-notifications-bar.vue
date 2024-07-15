@@ -37,7 +37,7 @@ export default {
   methods: {
     showNotification(notification) {
       this.notifications.unshift(notification);
-        setTimeout(() => this.closeNotification(notification), (notification.timeout * 1000 || this.notificationDuration));
+        setTimeout(() => this.closeNotification(notification), (notification.timeout * 1000) || this.notificationDuration);
     },
     closeNotification(notification) {
       const index = this.notifications.indexOf(notification);
