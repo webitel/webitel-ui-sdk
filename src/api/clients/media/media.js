@@ -97,7 +97,7 @@ const addMedia = async (params) => {
   try {
     const response = await addMediaInstance.post(url, formData);
     applyTransform(response, [
-      notify(() => ({ type: 'info', text: 'Successfully added' })),
+      notify(() => ({ type: 'success', text: 'Successfully added' })),
     ]);
     return response;
   } catch (err) {
