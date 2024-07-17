@@ -111,10 +111,11 @@ export default {
       const baseURL = this.$baseURL || process.env.BASE_URL || import.meta.env.BASE_URL;
       const iconUrl = createPlyrURL(baseURL);
       if (this.player) this.player.destroy();
+
       const defaultControls = [
         'play-large', 'play', 'progress', 'current-time',
         'duration', 'mute', 'volume', 'captions', 'settings',
-        'pip', 'airplay', 'fullscreen'
+        'pip', 'airplay', 'fullscreen',
       ];
 
       const controls = this.hideDuration
@@ -146,8 +147,9 @@ export default {
       this.player.muted = false;
     },
     setupDownload() {
-      if (!this.download) this.setupPlayer();
-      else if (typeof this.download === 'string') {
+      if (!this.download) {
+        this.setupPlayer();
+      } else if (typeof this.download === 'string') {
         this.player.download = this.download;
       } else if (typeof this.download === 'function') {
         this.player.download = this.download(this.src);
@@ -197,13 +199,15 @@ export default {
       box-shadow: var(--elevation-10);
     }
 
-    .plyr__controls .plyr__control {
+    .plyr__controls > .plyr__control,
+    .plyr__controls > .plyr__controls__item > .plyr__control {
       padding: var(--plyr-controls-icon-padding);
+    }
 
-      svg {
-        width: var(--plyr-controls-icon-size);
-        height: var(--plyr-controls-icon-size);
-      }
+    .plyr__controls > .plyr__control > svg,
+    .plyr__controls > .plyr__controls__item > .plyr__control > svg {
+      width: var(--plyr-controls-icon-size);
+      height: var(--plyr-controls-icon-size);
     }
 
     .plyr__control--overlaid svg {
