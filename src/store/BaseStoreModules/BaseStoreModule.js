@@ -1,3 +1,5 @@
+import set from 'lodash/set.js';
+
 export default class BaseStoreModule {
   state = {};
 
@@ -5,7 +7,11 @@ export default class BaseStoreModule {
 
   actions = {};
 
-  mutations = {};
+  mutations = {
+    SET: (state, { path, value }) => {
+      return set(state, path, value);
+    },
+  };
 
   modules = {};
 

@@ -22,29 +22,26 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'info',
+      default: 'success',
     },
   },
   computed: {
     notificationIcon() {
       switch (this.type) {
         case 'info':
-          return 'done';
+          return 'rounded-info';
         case 'error':
           return 'attention';
+        case 'warning':
+          return 'attention';
+        case 'success':
+          return 'done';
         default:
           return '';
       }
     },
     notificationIconColor() {
-      switch (this.type) {
-        case 'info':
-          return 'success';
-        case 'error':
-          return 'error';
-        default:
-          return '';
-      }
+      return this.type || ''
     },
   },
 };

@@ -120,7 +120,7 @@ const notificationCallback = ({
                                 // callback which actually emits event with received
                                 callback, 
                               }) => {
-  callback({ type: 'info', text: 'custom message' });
+  callback({ type: 'success', text: 'custom message' });
 };
 
 // => emits event; returns data;

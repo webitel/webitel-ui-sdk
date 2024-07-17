@@ -1,16 +1,23 @@
 <script setup>
-import Docs from './wt-notification-docs.vue';
 import ExampleNotification from './examples/example-notification.vue';
 </script>
 
 # WtNotification
 
 ## Props
-::: raw
-<Docs/>
-:::
+
+| Prop | Type   | Default | Code                                                 | Description | Options                       |
+|------|--------|---------|------------------------------------------------------|-------------|-------------------------------|
+| type | String | success | `<wt-notification type="success"></wt-notification>` |             | info, error, warning, success |
+
+## Events
+
+| Value | Params | Description |
+|-------|--------|-------------|
+| close |        |             |
 
 ## Example Notification
+
 ::: raw
 <ExampleNotification/>
 :::
