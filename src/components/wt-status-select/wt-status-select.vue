@@ -1,44 +1,18 @@
 <template>
-<!--  <wt-select-->
-<!--    :clearable="false"-->
-<!--    :options="availableOptions"-->
-<!--    :searchable="false"-->
-<!--    :value="selectedOption"-->
-<!--    class="wt-status-select"-->
-<!--    track-by="value"-->
-<!--    @input="inputHandler"-->
-<!--  >-->
-<!--    <template #singleLabel="{ option }">-->
-<!--      <wt-indicator-->
-<!--        :color="option.color"-->
-<!--        :text="duration"-->
-<!--      />-->
-<!--    </template>-->
-<!--    <template #option="{ option }">-->
-<!--      <wt-indicator-->
-<!--        :color="option.color"-->
-<!--        :text="option.text"-->
-<!--      />-->
-<!--    </template>-->
-<!--  </wt-select>-->
-
-    <div class="my-select">
-      <div class="my-select__selected" @click="toggleDropdown">
-        {{ selectedOption ? selectedOption.text : 'Select an option' }}
-      </div>
-      <div class="my-select__dropdown" v-if="dropdownOpen">
-        <div
-          class="my-select__option"
-          v-for="option in availableOptions"
-          :key="option.id"
-          @click="selectOption(option)"
-          :class="option.color"
-        >
-          {{ option.text }}
-        </div>
+  <div class="status-select" v-clickaway="closeDropdown">
+    <div class="status-select__selected" @click="toggleDropdown(false)"
+      :class="{ 'multiselect--active': dropdownOpen }">
+      <wt-indicator :color="selectedOption.color" :text="duration" />
+      <wt-icon-btn :disabled="disabled" class="multiselect__select multiselect__arrow status-select__arrow open"
+        :class="{ 'open': dropdownOpen }" icon="arrow-down" @mousedown.prevent />
+    </div>
+    <div class="status-select__dropdown" v-if="dropdownOpen">
+      <div class="status-select__option" v-for="option in availableOptions" :key="option.id"
+        @click="selectOption(option)" :class="option.color">
+        <wt-indicator :color="option.color" :text="option.text" />
       </div>
     </div>
-
+  </div>
 </template>
 
 <script>
@@ -68,11 +42,6 @@ export default {
       type: Object,
       default: null,
     },
-    // size: {
-    //   type: String,
-    //   default: 'md',
-    //   options: ['sm', 'md'],
-    // },
   },
   data() {
     return {
@@ -124,16 +93,18 @@ export default {
     inputHandler(value) {
       this.$emit('change', value.value);
     },
-    toggleDropdown() {
-      this.dropdownOpen = !this.dropdownOpen;
+    toggleDropdown(close) {
+      close ? this.dropdownOpen = false : this.dropdownOpen = !this.dropdownOpen;
+    },
+    closeDropdown() {
+      this.toggleDropdown(true)
     },
     selectOption(option) {
       this.selectedOption = option;
       this.$emit('change', option.value);
       this.dropdownOpen = false;
-
-      console.log('option', option);
     },
+
   },
 };
 </script>
@@ -143,41 +114,74 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-  .my-select {
-    position: relative;
-    width: 120px;
-    font-family: Arial, sans-serif;
-    min-height: 0;
-    padding: var(--wt-status-select-padding);
-    border: none;
+.wt-icon-btn.multiselect__select.multiselect__arrow {
+  &:before {
+    position: absolute;
+    display: none;
+    opacity: 0;
+  }
+}
+
+.status-select {
+  position: relative;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--elevation-5);
+  max-width: 200px;
+  width: 150px;
+
+  &__arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    transition: var(--transition);
+  }
+
+  &__selected {
+    max-width: 200px;
+    width: 150px;
     background: var(--wt-status-select-background-color);
-  }
-
-  .my-select__selected {
-    padding: 0 10px;
-    border: 1px solid #ccc;
+    color: var(--wt-text-field-text-color);
+    border-radius: var(--border-radius);
     cursor: pointer;
-    background-color: #fff;
+    border: none;
   }
 
-  .my-select__dropdown {
+  &__dropdown {
     position: absolute;
     width: 100%;
-    border: 1px solid #ccc;
-    border-top: none;
     background-color: #fff;
-    z-index: 1000;
+    z-index: 10;
+    border-radius: var(--border-radius);
+    box-shadow: var(--elevation-5);
   }
 
-  .my-select__option {
-    padding: 10px;
+  &__option {
+    padding: 0;
     cursor: pointer;
-  }
 
-  .my-select__option:hover {
-    background-color: #f0f0f0;
-  }
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
 
+    &:last-child {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+}
+
+:deep(.wt-indicator__text) {
+  user-select: none;
+}
 </style>
 
 <style lang="scss" scoped>
