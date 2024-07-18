@@ -41,6 +41,7 @@ export function useValidation({
       else if (v.value.decimalValidator?.$invalid) validationText = `${t('validation.decimalValidator')} ${v.value.decimalValidator.$params.count}`;
       else if (v.value.websocketValidator?.$invalid) validationText = `${t('validation.websocketValidator')}`;
       else if (v.value.integer?.$invalid) validationText = `${t('validation.integer')}`;
+      else if (v.value.isRegExpMatched?.$invalid) validationText = v.value.isRegExpMatched?.$params?.errorMessage || `${t('validation.isRegExpMatched')} ${v.value.isRegExpMatched?.$params?.regExp}`;
     }
 
     if (customValidators && customValidators.value) {

@@ -36,6 +36,7 @@ export default {
         else if (this.v.decimalValidator?.$invalid) validationText = `${this.$t('validation.decimalValidator')} ${this.v.decimalValidator.$params.count}`;
         else if (this.v.websocketValidator?.$invalid) validationText = `${this.$t('validation.websocketValidator')}`;
         else if (this.v.integer?.$invalid) validationText = `${this.$t('validation.integer')}`;
+        else if (this.v.isRegExpMatched?.$invalid) validationText = this.v.isRegExpMatched?.$params?.errorMessage || `${t('validation.isRegExpMatched')} ${this.v.isRegExpMatched?.$params?.regExp}`;
       }
 
       for (const { name, text } of this.customValidators) {

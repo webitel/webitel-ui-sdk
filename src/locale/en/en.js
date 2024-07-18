@@ -255,6 +255,7 @@ export default {
     minLength: 'Quantity of characters should not be less than',
     url: 'Should look like url',
     websocketValidator: 'Should look like WebSocket url',
+    isRegExpMatched: 'Password must match the regular expression:',
     regExpValidator: 'This regular expression is not valid',
     domainValidator: 'Incorrect domain',
     decimalValidator: 'Decimal precision should be no more than { count } places',
