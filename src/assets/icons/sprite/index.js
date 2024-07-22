@@ -89,6 +89,7 @@ import './menu.svg';
 import './email.svg';
 import './mail.svg';
 import './mail--color.svg';
+import './custom.svg';
 import './messenger-facebook.svg';
 import './messenger-facebook--filled.svg';
 import './messenger-infobip.svg';
