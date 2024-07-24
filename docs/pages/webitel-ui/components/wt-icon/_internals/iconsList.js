@@ -1,5 +1,7 @@
 export default [
   'email',
+  'email-inbound',
+  'email-outbound',
   'adfs',
   'azure',
   'instagram',
