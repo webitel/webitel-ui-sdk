@@ -3,7 +3,7 @@
     <div v-if="mode === 'write'" class="audit-form-question-score-write">
       <wt-input
         :label="$t('reusable.from')"
-        :number-max="19"
+        :number-max="9"
         :number-min="0"
         :v="v$.question.min"
         :value="question.min"
@@ -13,7 +13,7 @@
       />
       <wt-input
         :label="$t('reusable.to')"
-        :number-max="20"
+        :number-max="10"
         :number-min="question.min"
         :v="v$.question.max"
         :value="question.max"
