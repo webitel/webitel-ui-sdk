@@ -1,9 +1,6 @@
 <template>
   <article class="audit-form-question-score">
-    <div
-      v-if="mode === 'write'"
-      class="audit-form-question-score-write"
-    >
+    <div v-if="mode === 'write'" class="audit-form-question-score-write">
       <wt-input
         :label="$t('reusable.from')"
         :number-max="19"
@@ -17,7 +14,7 @@
       <wt-input
         :label="$t('reusable.to')"
         :number-max="20"
-        :number-min="1"
+        :number-min="question.min"
         :v="v$.question.max"
         :value="question.max"
         required
@@ -27,14 +24,12 @@
     </div>
     <div
       v-else-if="mode === 'read'"
-      class="audit-form-question-score-read"
-    >
+      class="audit-form-question-score-read">
       <wt-radio
         v-for="(value) of scoreRange"
         :key="value"
         :label="`${value}`"
-        :selected="isResult ? result.score : null"
-        :value="value"
+        :selected="isResult ? result.score : null" :value="value"
         @input="emit('change:result', { score: value })"
       />
     </div>
@@ -84,7 +79,7 @@ const v$ = useVuelidate(
           integer,
         },
         max: {
-          minValue: minValue(1),
+          minValue: minValue(props.question.min ? props.question.min : 1),
           maxValue: maxValue(10),
           required,
           integer,
