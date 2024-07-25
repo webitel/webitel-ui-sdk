@@ -91,6 +91,7 @@ import './email-inbound.svg';
 import './email-outbound.svg';
 import './mail.svg';
 import './mail--color.svg';
+import './messenger-custom.svg';
 import './messenger-facebook.svg';
 import './messenger-facebook--filled.svg';
 import './messenger-infobip.svg';
