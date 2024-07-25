@@ -117,6 +117,7 @@ export default {
     region: 'Регион | Регионы',
     communicationType: 'Тип связи | Типы связи',
     grantee: 'Получатель | Получатели',
+    user: 'Пользователь | Пользователи',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Входящая очередь',
