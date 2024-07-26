@@ -5,6 +5,8 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import ChatGatewayProvider
+  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections
   from '../../enums/WebitelApplications/AdminSections.enum.js';
@@ -148,6 +150,15 @@ export default {
         [EngineRoutingSchemaType.Service]: 'Service',
         [EngineRoutingSchemaType.Processing]: 'Forms',
       },
+    },
+    messengers: {
+      [ChatGatewayProvider.TELEGRAM_BOT]: 'Telegram Bot',
+      [ChatGatewayProvider.TELEGRAM_APP]: 'Telegram App',
+      [ChatGatewayProvider.MESSENGER]: 'Meta',
+      [ChatGatewayProvider.VIBER]: 'Viber',
+      [ChatGatewayProvider.WEBCHAT]: 'Web chat',
+      [ChatGatewayProvider.INFOBIP]: 'Infobip',
+      [ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
     },
   },
   channel: {
