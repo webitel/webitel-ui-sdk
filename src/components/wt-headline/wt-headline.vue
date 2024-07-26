@@ -35,6 +35,7 @@ export default {
   min-height: var(--headline-min-height);
   border-radius: var(--border-radius);
   background: var(--wt-headline-background-color);
+  gap: var(--headline-nav-gap);
 }
 
 .wt-headline__title {

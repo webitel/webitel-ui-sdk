@@ -99,8 +99,7 @@ const props = defineProps({
   }
 
   .wt-headline-nav__title {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-word;
   }
 }
 </style>
