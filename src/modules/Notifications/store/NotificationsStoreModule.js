@@ -40,6 +40,7 @@ export default class NotificationsStoreModule extends BaseStoreModule {
     broadcastChannel: null, // in order to reset the tab title with unread number
     unreadCount: 0,
     currentlyPlaying: false,
+    isHangupSoundAllowed: false, // for prevent pause() of all sounds after end call
   };
 
   getters = {
@@ -121,9 +122,6 @@ export default class NotificationsStoreModule extends BaseStoreModule {
       if (context.getters.IS_SOUND_ALLOWED
         && !localStorage.getItem('wtIsPlaying')
       ) {
-        if (action === CallActions.Hangup
-          && !localStorage.getItem('settings/callEndSound'))
-          return;
 
         const audio = sound instanceof Audio ? sound : new Audio(sound);
 
@@ -191,6 +189,9 @@ export default class NotificationsStoreModule extends BaseStoreModule {
     },
     SET_UNREAD_COUNT: (state, count) => {
       state.unreadCount = count;
+    },
+    SET_HANGUP_STATE: (state, value) => {
+      state.isHangupSoundAllowed = value;
     },
   };
 }
