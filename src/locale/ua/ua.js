@@ -119,6 +119,7 @@ export default {
     region: 'Регіон | Регіони',
     communicationType: 'Тип зв\'язку | Типи зв\'язку',
     grantee: 'Отримувач | Отримувачі',
+    user: 'Користувач | Користувачі',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',

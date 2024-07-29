@@ -120,6 +120,7 @@ export default {
     region: 'Region | Regions',
     communicationType: 'Communication type | Communication types',
     grantee: 'Grantee | Grantees',
+    user: 'User | Users',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
