@@ -180,6 +180,7 @@ export default {
   &--position {
     &-sticky {
       position: sticky;
+      z-index: 2;
     }
 
     &-relative {
