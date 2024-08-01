@@ -7,11 +7,7 @@ export default class BaseStoreModule {
 
   actions = {};
 
-  mutations = {
-    SET: (state, { path, value }) => {
-      return set(state, path, value);
-    },
-  };
+  mutations = {};
 
   modules = {};
 
@@ -61,7 +57,13 @@ export default class BaseStoreModule {
       state: { ...this.state, ...state },
       getters: { ...this.getters, ...getters },
       actions: { ...this.actions, ...actions },
-      mutations: { ...this.mutations, ...mutations },
+      mutations: {
+        ...this.mutations,
+        ...mutations,
+        SET: (state, { path, value }) => {
+          return set(state, path, value);
+        },
+      },
       modules: { ...this.modules, ...modules },
     };
   }
