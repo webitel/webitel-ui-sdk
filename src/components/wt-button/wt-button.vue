@@ -4,6 +4,7 @@
       colorClass,
       `wt-button--size-${size}`,
       {
+        'wt-button--width-by-content': widthByContent,
         'wt-button--contains-icon': containsIcon,
         'wt-button--wide': wide,
         'wt-button--disabled': disabled,
@@ -62,6 +63,13 @@ export default {
      * Stretches button to all available width
      */
     wide: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * Shrinks button to content width
+     */
+    widthByContent: {
       type: Boolean,
       default: false,
     },
@@ -141,6 +149,10 @@ export default {
 
   &--wide {
     width: 100%;
+  }
+
+  &--width-by-content{
+    min-width: 0;
   }
 
   // https://stackoverflow.com/a/11126701
