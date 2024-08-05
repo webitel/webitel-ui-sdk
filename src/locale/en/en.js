@@ -106,6 +106,7 @@ export default {
     phones: 'Phone | Phones',
     messaging: 'Messaging',
     emptyResultSearch: 'Your search yielded no results',
+    contact: 'Contact | Contacts',
   },
   // date-related texts
   date: {

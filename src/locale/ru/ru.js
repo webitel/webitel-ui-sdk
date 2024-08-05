@@ -105,6 +105,7 @@ export default {
     phones: 'Телефон | Телефоны',
     messaging: 'Сообщения',
     emptyResultSearch: 'Поиск не дал результатов',
+    contact: 'Контакт | Контакты',
   },
   // date-related texts
   date: {
