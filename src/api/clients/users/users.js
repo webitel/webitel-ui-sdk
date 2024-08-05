@@ -30,6 +30,7 @@ const fieldsToSend = [
   'device',
   'profile',
   'email',
+  'contact',
 ];
 
 const getUsersList = async (params) => {
