@@ -1,11 +1,12 @@
 const WebitelApplications = Object.freeze({
-  ADMIN: 'admin',
-  AGENT: 'agent',
-  SUPERVISOR: 'supervisor',
-  HISTORY: 'history',
-  AUDIT: 'audit',
-  ANALYTICS: 'grafana',
-  CRM: 'crm',
+	ADMIN: "admin",
+	AGENT: "agent",
+	SUPERVISOR: "supervisor",
+	HISTORY: "history",
+	AUDIT: "audit",
+	ANALYTICS: "grafana",
+	CRM: "crm",
+	CONTACTS: "contacts",
 });
 
 export default WebitelApplications;
