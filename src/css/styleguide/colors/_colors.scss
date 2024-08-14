@@ -86,6 +86,12 @@
   --secondary-light-color: var(--dp-16-surface-color);
   --secondary-on-color: var(--grey-darken-4);
 
+  // email colors
+  --email-color: var(--blue-darken-3);
+  --email-hover-color: var(--blue-darken-2);
+  --email-light-color: var(--blue-lighten-2);
+  --email-on-color: var(--black);
+
   // accent colors
   --accent-color: var(--purple-lighten-1);
   --sub-accent-color: var(--indigo-darken-3);
@@ -174,6 +180,12 @@
 
   // secondary colors
   --secondary-on-color: var(--grey-lighten-4);
+
+  // email colors
+  --email-color: var(--blue-darken-3);
+  --email-hover-color: var(--blue-darken-2);
+  --email-light-color: var(--blue-lighten-1);
+  --email-on-color: var(--white);
 
   // accent colors
   --accent-color: var(--purple-lighten-1);
