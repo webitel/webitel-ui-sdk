@@ -2,19 +2,20 @@
 
 ## Prerequisites
 
-* [modules/TableStoreModule](../../../webitel-ui/modules/table-store-module/Readme.md)
-* [modules/CardStoreModule](../../../webitel-ui/modules/card-store-module/Readme.md)
+* [Store Introduction](../../../webitel-ui/store/_Introduction/Readme.md)
+* [createTableStoreModule](../../../webitel-ui/store/createTableStoreModule/Readme.md)
+* [createCardStoreModule](../../../webitel-ui/store/createCardStoreModule/Readme.md)
+* [createApiStoreModule](../../../webitel-ui/store/createApiStoreModule/Readme.md)
 * [modules/Filters](../../../webitel-ui/modules/Filters/Readme.md)
-* [store/APIStoreModule](../../../webitel-ui/store/api-store-module/Readme.md)
 
 ## Опис
 
 Стор однієї сутності зазвичай складається з кількох (стор) компонентів:
 
-1. табличка [modules/TableStoreModule](../../../webitel-ui/modules/table-store-module/Readme.md)
-2. карточка [modules/CardStoreModule](../../../webitel-ui/modules/card-store-module/Readme.md)
+1. табличка [createTableStoreModule](../../../webitel-ui/store/createTableStoreModule/Readme.md)
+2. карточка [createCardStoreModule](../../../webitel-ui/store/createCardStoreModule/Readme.md)
 3. фільтри [modules/Filters](../../../webitel-ui/modules/Filters/Readme.md)
-4. апішки [store/APIStoreModule](../../../webitel-ui/store/api-store-module/Readme.md)
+4. апішки [createApiStoreModule](../../../webitel-ui/store/createApiStoreModule/Readme.md)
 
 По суті, всі вони потрібні для повноцінної репрезентації сутності в інтерфейсі,
 але, втім, вони достатньо різні, щоб розділити їх одне від одного на окремі модулі.
@@ -24,7 +25,7 @@
 Складаються вони за ось таким форматом, в програмі-максимум:
 
 1. У нас є базовий стор модуль, скажімо, `contacts.store.js`.
-2. Він є інстансом `BaseStoreModule.js` [дока](../../../webitel-ui/store/base-store-module/Readme.md), та включає в
+2. Він є інстансом `BaseStoreModule` [дока](../../../webitel-ui/store/createBaseStoreModule/Readme.md), та включає в
    себе,
    як чайлдів, стор таблички, і стор карточки.
 3. І стор таблички, і стор карточки, містять в собі стор апішок для комунікації з бекендом.
@@ -34,7 +35,7 @@
 
 Наглядно це виглядає ось так:
 
-// **TODO: намалювати діаграмку**
+![воть](./assets/schema.png)
 
 ## Приклад
 
@@ -43,28 +44,41 @@
 ```javascript
 // contacts.store.js
 
-import TableStoreModule from '@webitel/ui-sdk/src/modules/TableStoreModule/store/TableStoreModule.js';
-import CardStoreModule from '@webitel/ui-sdk/src/modules/CardStoreModule/store/CardStoreModule.js';
-import BaseStoreModule from '@webitel/ui-sdk/src/store/BaseStoreModules/BaseStoreModule.js';
-import ApiStoreModule from '@webitel/ui-sdk/src/store/BaseStoreModules/ApiStoreModule.js';
+import {
+   createTableStoreModule,
+   createCardStoreModule,
+   createApiStoreModule,
+   createBaseStoreModule
+} from '@webitel/ui-sdk/store';
 import FiltersStoreModule from '@webitel/ui-sdk/src/modules/Filters/store/FiltersStoreModule.js';
 
 const filters = new FiltersStoreModule().addFilter([{ ... }]).getModule();
 
-const api = new ApiStoreModule()
-.generateAPIActions(ContactsAPI)
-.getModule();
+const api = createApiStoreModule({
+   state: { api: { getList, get, ... } },
+});
 
-const table = new TableStoreModule({ headers })
-.setChildModules({ api, filters })
-.getModule({ getters: tableGetters });
+const table = createTableStoreModule({
+   state: {
+      headers,
+   },
+   getters: tableGetters,
+   modules: {
+      api,
+      filters,
+   },
+});
 
-const card = new CardStoreModule()
-.getModule({ state: cardState });
+const card = createCardStoreModule({
+   state: cardState,
+});
 
-const contacts = new BaseStoreModule()
-.setChildModules({ table, card })
-.getModule();
+const contacts = createBaseStoreModule({
+   modules: {
+      table,
+      card,
+   },
+});
 
 export default contacts;
 ```
