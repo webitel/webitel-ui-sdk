@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.8.12",
+  "version": "24.8.21",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,61 @@
   },
   "main": "./dist/@webitel/ui-sdk.mjs",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/@webitel/ui-sdk.mjs",
+      "require": "./dist/@webitel/ui-sdk.cjs"
+    },
+    "./store": {
+      "import": "./src/store/new/index.js",
+      "require": "./src/store/new/index.js"
+    },
+    "./dist*": {
+      "import": "./dist*"
+    },
+    "./src/api*": {
+      "import": "./src/api*"
+    },
+    "./src/locale*": {
+      "import": "./src/locale*"
+    },
+    "./src/composables*": {
+      "import": "./src/composables*"
+    },
+    "./src/css*": {
+      "import": "./src/css*"
+    },
+    "./src/components*": {
+      "import": "./src/components*"
+    },
+    "./src/directives*": {
+      "import": "./src/directives*"
+    },
+    "./src/enums*": {
+      "import": "./src/enums*"
+    },
+    "./src/mixins*": {
+      "import": "./src/mixins*"
+    },
+    "./src/scripts*": {
+      "import": "./src/scripts*"
+    },
+    "./src/validators*": {
+      "import": "./src/validators*"
+    },
+    "./src/modules*": {
+      "import": "./src/modules*"
+    },
+    "./src/plugins*": {
+      "import": "./src/plugins*"
+    },
+    "./src/store*": {
+      "import": "./src/store*"
+    },
+    "./src/tests*": {
+      "import": "./src/tests*"
+    }
+  },
   "files": [
     "dist/*",
     "src/api/*",
@@ -52,7 +107,7 @@
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "lodash": "^4.17.21",
-    "mitt": "^3.0.1",
+    "mitt": "3.0.1",
     "path-browserify": "^1.0.1",
     "plyr": "3.6.3",
     "query-string": "^8.1.0",
