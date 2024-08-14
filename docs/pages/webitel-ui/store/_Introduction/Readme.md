@@ -125,18 +125,19 @@ const createCustomStoreModule = (modules) => {
 
 ### Тільки табличка
 
-Робите просто табличку? Берете `createTableStoreModule` [дока]() метод для стора,
+Робите просто табличку? Берете `createTableStoreModule` [дока](../createTableStoreModule/Readme.md) метод для стора,
 i компоузабл `useTableStoreModuleя для інтеграції з компонентом.
 
 ### Тільки карточка
 
-Робите тільки карточку? Це не точно, що вам знадобиться, але придивіться до `createCardStoreModule` [дока]().
+Робите тільки карточку? Це не точно, що вам знадобиться, але придивіться
+до `createCardStoreModule` [дока](../createCardStoreModule/Readme.md).
 
 ### Апі
 
 Необхідно підʼєднати api до одного з попередніх кейсів? Використовуйте вже інтегрований в них
-`createApiStoreModule` [дока]().
+`createApiStoreModule` [дока](../createApiStoreModule/Readme.md).
 
 ### Шось своє
 
-**Хочете зробити щось своє? Використовуйте `createBaseStoreModule` [дока]().**
+**Хочете зробити щось своє? Використовуйте `createBaseStoreModule` [дока](../createBaseStoreModule/Readme.md).**
