@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-[Table Store Module](../table-store-module/Readme.md)
+[Table Store Module](../../store/createTableStoreModule/Readme.md)
 
 ## Історіографія питання
 
@@ -237,10 +237,10 @@ const module = new FiltersStoreModule().addFilter([
 ```javascript
 // table.store.js
 
-import TableStoreModule from '@webitel/ui-sdk/src/modules/TableStoreModule/store/TableStoreModule.js';
+import { createTableStoreModule } from '@webitel/ui-sdk/store';
 import filters from './filters.store.js';
 
-const module = new TableStoreModule().getModule({
+const module = new createTableStoreModule({
   modules: { filters },
 });
 ```
@@ -259,7 +259,7 @@ const module = new TableStoreModule().getModule({
 
 <script setup>
   import { useTableFilters } from '@webitel/ui-sdk/src/modules/Filters/composables/useTableFilters.js';
-  import { useTableStore } from '@webitel/ui-sdk/src/modules/TableStoreModule/composables/useTableStore.js';
+  import { useTableStore } from '@webitel/ui-sdk/store';
   import FilterSearch from '@webitel/ui-sdk/src/modules/Filters/components/filter-search.vue';
 
   const namespace = 'docs';
