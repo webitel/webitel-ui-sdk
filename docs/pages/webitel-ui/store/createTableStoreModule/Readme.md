@@ -1,23 +1,23 @@
-# Table Store Module
+# `createTableStoreModule`
 
 This module contains the necessary tools for organizing data in a table view.
 
 **It includes:**
 
-* `store/TableStoreModule.js`
-* `composables/useTableStore.js`
+* `createTableStoreModule`
+* `useTableStore`
 
 **For integration with other store modules (like
-[API](../../store/api-store-module/Readme.md),
-[Card](../card-store-module/Readme.md),
-[Filters](../Filters/Readme.md),
+[API](../createApiStoreModule/Readme.md),
+[Card](../createCardStoreModule/Readme.md),
+[Filters](../../modules/Filters/Readme.md),
 Store Modules)
 see [how-to](../../../docs/how-to/Integration%20between%20store%20modules/Readme.md) page docs.**
 
-## `store/TableStoreModule`
+## `createTableStoreModule`
 
 Vuex store module which contains all necessary logic for working with tables.
-**[API Store Module](../../store/api-store-module/Readme.md) child is required** for it to work properly.
+**[API Store Module](../createApiStoreModule/Readme.md) child is required** for it to work properly.
 
 ### State
 
@@ -45,7 +45,7 @@ See source code
 
 See source code
 
-## `composables/useTableStore`
+## `useTableStore`
 
 ### Receives
 

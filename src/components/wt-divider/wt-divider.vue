@@ -23,7 +23,8 @@ export default {
   max-height: 0;
   margin: 0;
   padding: 0;
-  border: var(--divider-border);
+  border-top: var(--divider-border);
+  border-bottom: 0;
   border-color: var(--divider-border-color);
   border-top-width: thin;
 }

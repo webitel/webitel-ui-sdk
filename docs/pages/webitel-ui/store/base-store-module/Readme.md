@@ -1,3 +1,0 @@
-# Base Store Module
-
-// **TODO**
