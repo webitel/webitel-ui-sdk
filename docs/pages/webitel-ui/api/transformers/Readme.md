@@ -164,7 +164,7 @@ starToSearch('search')({ search: 'string*' });
 
 You can pass withContext option to pass context into transformer function as a second argument.
 
-where use applyTransform:
+example:
 ```js
 const context = {
     value: '1'
@@ -180,96 +180,8 @@ convert = () => {
 }
 ```
 
-How it passes context:
+How it passes context into transformer function:
 ```js
 transformer(result, withContext)
 ```
-
 That give you option to work with node context into transformer.
-
-## How to use
-
-We have base transformers that used into WtNode
-
-```js   
-class WtNode extends ClassicPreset.Node {
-  
-  //...
-  
-  convert({
-      children,
-      transformers = []
-  }) {
-      return applyTransform({}, [
-        transformSchema,
-        transformSchemaChildren(children),
-        transformExtension,
-        ...transformers,
-      ], {
-        withContext: this,
-      })
-    }
-}
-```
-
-Where `transformSchema`, `transformSchemaChildren`, `transformExtension` are base transformers that used into WtNode.
-
-**Example `transformSchema`:**
-```js
-export const transformSchema = (payload, context) => {
-  const schema = deepCopy(context.schema);
-  schema.tag = context.tag;
-
-  return {
-    ...payload,
-    [context.label]: schema
-  };
-};
-```
-they used into WtNode `convert` method for save previous result and apply new field by label from context, where context is `WtNode` instance.
-
-If you want to add custom transformer you can pass it into `transformers` array in your Node class what extends `WtNode`.
-
-**Example:**
-```js
-class UserInfoNode extends WtNode {
-  schema = schema();
-
-  static label = FlowApp.USER_INFO;
-
-  constructor() {
-    super(UserInfoNode.label, {});
-
-    Object.assign(this, reactive(this));
-
-    this.v = useValidation({
-      data: { schema: this.schema },
-      rules: { schema: rules() },
-      tag: this.tag,
-    });
-  }
-
-  convert({
-            children,
-          }) {
-    return super.convert({
-      children,
-      transformers: [
-        transformSetUserInfo
-      ]
-    })
-  }
-}
-```
-`UserInfoNode` extends `WtNode` and pass custom transformer `transformSetUserInfo` into `convert` method. Important call `super.convert()` with `children` params
-
-This transformer `transformSetUserInfo` will be applied after base transformers.
-```js
-export const transformSetUserInfo = (payload, context) => {
-  const schema = payload[context.label]
-  schema.set = KeyValuePairClass.convertToObject(schema.set);
-
-  return payload
-}
-```
-They modify schema field `set` user field from context and return updated object.
