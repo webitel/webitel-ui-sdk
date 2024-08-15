@@ -159,3 +159,29 @@ starToSearch('search')({ search: 'string' });
 // => { search: 'string*' }
 starToSearch('search')({ search: 'string*' });
 ```
+
+## withContext
+
+You can pass withContext option to pass context into transformer function as a second argument.
+
+example:
+```js
+const context = {
+    value: '1'
+    // ...
+}
+
+convert = () => {
+    return applyTransform({}, [
+      transformSchema
+    ], {
+      withContext: context,
+    })
+}
+```
+
+How it passes context into transformer function:
+```js
+transformer(result, withContext)
+```
+That give you option to work with node context into transformer.
