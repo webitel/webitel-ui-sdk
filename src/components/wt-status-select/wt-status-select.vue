@@ -6,6 +6,7 @@
     :value="selectedOption"
     class="wt-status-select"
     track-by="value"
+    @closed="closedHandler"
     @input="inputHandler"
   >
     <template #singleLabel="{ option }">
@@ -52,7 +53,7 @@ export default {
     //   options: ['sm', 'md'],
     // },
   },
-  emits: ['change'],
+  emits: ['change', 'closed'],
   computed: {
     selectedOption() {
       return this.statusOptions.find((option) => option.value === this.status);
@@ -90,6 +91,9 @@ export default {
   methods: {
     inputHandler(value) {
       this.$emit('change', value.value);
+    },
+    closedHandler(event) {
+      this.$emit('closed', event);
     },
   },
 };

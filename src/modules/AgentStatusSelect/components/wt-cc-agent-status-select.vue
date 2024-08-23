@@ -3,6 +3,7 @@
     <wt-status-select
       :status="status"
       :status-duration="statusDuration"
+      @closed="handleClosed"
       @change="handleStatusSelectInput"
     />
     <pause-cause-popup
@@ -92,6 +93,10 @@ async function handleStatusSelectInput(status) {
   }
   if (status === props.status) return;
   await changeStatus({ status });
+}
+
+function handleClosed(event) {
+  return handleStatusSelectInput(event.value);
 }
 
 function handlePauseCauseInput(pauseCause) {
