@@ -10,7 +10,7 @@ import media from './media/media.js';
 import queues from './queues/queues.js';
 import roles from './roles/roles.js';
 import users from './users/users.js';
-import configuration from './configurations/configurations.js';
+import configurations from './configurations/configurations.js';
 
 export {
   agents,
@@ -25,5 +25,5 @@ export {
   queues,
   roles,
   users,
-  configuration,
+  configurations,
 };
