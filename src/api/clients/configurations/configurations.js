@@ -105,7 +105,7 @@ const getObjectsList = async (params) => {
   }
 };
 
-const ConfigurationAPI = {
+const ConfigurationsAPI = {
   getList,
   get,
   add,
@@ -115,4 +115,4 @@ const ConfigurationAPI = {
   getObjectsList,
 };
 
-export default ConfigurationAPI;
+export default ConfigurationsAPI;
