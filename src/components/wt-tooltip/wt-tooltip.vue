@@ -60,23 +60,27 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['update:visible']);
+
 const activator = ref(null);
 const floating = ref(null);
+const isVisible = ref(props.visible);
 
-const isVisible = ref(false);
+const emitVisibilityChange = () => {
+  emit('update:visible', isVisible.value);
+};
 
 const showTooltip = (event = {}) => {
   if (props.disabled || isVisible.value) return;
-
   isVisible.value = true;
-
-  // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/components/Popper.ts#L884
-  event.usedByTooltip = true;
+  event.usedByTooltip = true; // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/components/Popper.ts#L884
+  emitVisibilityChange();
 };
 
 const hideTooltip = (event = {}) => {
   if (event.usedByTooltip) return;
   isVisible.value = false;
+  emitVisibilityChange();
 };
 
 // https://floating-ui.com/docs/misc#clipping
@@ -102,7 +106,8 @@ useTooltipTriggerSubscriptions({
   hide: hideTooltip,
 });
 
-watch(props.visible, (value) => {
+watch(() => props.visible, (value) => {
+  isVisible.value = value;
   if (value) showTooltip();
   else hideTooltip();
 });

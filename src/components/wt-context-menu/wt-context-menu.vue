@@ -1,11 +1,12 @@
 <template>
   <wt-tooltip
     :triggers="['click', 'touch']"
-    :visible="visible"
+    :visible="itemIsVisible"
     :disabled="disabled"
     class="wt-context-menu"
     placement="bottom-end"
     popper-class="wt-context-menu__floating-wrapper"
+    @update:visible="itemIsVisible = $event"
   >
     <template #activator>
       <slot name="activator" />
@@ -20,7 +21,6 @@
           :key="index"
           class="wt-context-menu__option-wrapper"
         >
-          <!--      <a> click.prevent prevents redirect to # -->
           <a
             :class="[
               { 'wt-context-menu__option--disabled': option.disabled },
@@ -43,43 +43,50 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  options: {
-    type: Array,
-    required: true,
-    description: '[{ text, disabled, ... anything you need }]',
-  },
-  visible: {
-    type: Boolean,
-  },
-  width: {
-    type: [String],
-    default: 'auto',
-  },
-  minWidth: {
-    type: [String],
-    default: '160px',
-  },
-  maxWidth: {
-    type: [String],
-    default: '300px',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+  import { ref, watch } from 'vue';
 
-const emit = defineEmits([
-  'click',
-]);
+  const props = defineProps({
+    options: {
+      type: Array,
+      required: true,
+      description: '[{ text, disabled, ... anything you need }]',
+    },
+    itemIsVisible: {
+      type: Boolean,
+      default: false,
+    },
+    width: {
+      type: [String],
+      default: 'auto',
+    },
+    minWidth: {
+      type: [String],
+      default: '160px',
+    },
+    maxWidth: {
+      type: [String],
+      default: '300px',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  });
 
-function handleOptionClick({ option, index, hide }) {
-  emit('click', { option, index });
-  hide();
-}
+  const emit = defineEmits([
+    'click',
+    'update:visible'
+  ]);
 
+
+  function handleOptionClick({ option, index, hide }) {
+    emit('click', { option, index });
+    hide();
+  }
 </script>
+
+
+
 
 <style lang="scss">
 @import './variables.scss';
