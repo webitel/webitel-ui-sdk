@@ -11,13 +11,14 @@ import applyTransform, {
 const instance = getDefaultInstance();
 
 const getList = async (params) => {
-  const mergeChatData = ({ peers, chat }) => {
-    return chat.map(({ from, ...message }) => {
+  const mergeChatMessagesData = ({ peers, messages }) => {
+    const chat = messages.map(({ from, ...message }) => {
       return {
         ...message,
         peer: peers[from.id - 1],
       };
     });
+    return chat;
   };
   const url = applyTransform(params, [
     camelToSnake(),
@@ -29,9 +30,10 @@ const getList = async (params) => {
     const { peers, messages } = applyTransform(response.data, [
       snakeToCamel(),
     ]);
+    console.log('chat reps:', response);
     return {
       items: applyTransform({ peers, messages }, [
-        mergeChatData,
+        mergeChatMessagesData,
       ]).reverse(),
     };
   } catch (err) {

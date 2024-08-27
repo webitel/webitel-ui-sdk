@@ -1,5 +1,5 @@
-import contactChatHistory from './contactChatHistory.js';
+import contactChatMessagesHistoryHistory from './contactChatMessagesHistory.js';
 
 export {
-  contactChatHistory,
+  contactChatMessagesHistoryHistory,
 }
