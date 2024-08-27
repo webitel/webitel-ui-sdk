@@ -107,7 +107,6 @@ useTooltipTriggerSubscriptions({
 });
 
 watch(() => props.visible, (value) => {
-  isVisible.value = value;
   if (value) showTooltip();
   else hideTooltip();
 });
