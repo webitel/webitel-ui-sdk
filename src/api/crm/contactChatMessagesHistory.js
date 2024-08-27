@@ -30,7 +30,6 @@ const getList = async (params) => {
     const { peers, messages } = applyTransform(response.data, [
       snakeToCamel(),
     ]);
-    console.log('chat reps:', response);
     return {
       items: applyTransform({ peers, messages }, [
         mergeChatMessagesData,
