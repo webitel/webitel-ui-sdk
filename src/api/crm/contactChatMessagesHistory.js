@@ -1,32 +1,29 @@
 import {
-  getDefaultInstance,
+  getDefaultInstance, getDefaultOpenAPIConfig,
 } from '../defaults/index.js';
 import applyTransform, {
-  camelToSnake,
-  generateUrl,
   notify,
   snakeToCamel,
 } from '../transformers/index.js';
+import { ContactsChatCatalogApiFactory } from 'webitel-sdk';
 
 const instance = getDefaultInstance();
+const configuration = getDefaultOpenAPIConfig();
 
-const getList = async (params) => {
+const contactChatService = new ContactsChatCatalogApiFactory(configuration, '', instance);
+
+const getList = async ({ contactId, chatId }) => {
   const mergeChatMessagesData = ({ peers, messages }) => {
-    const chat = messages.map(({ from, ...message }) => {
+    return messages.map(({ from, ...message }) => {
       return {
         ...message,
         peer: peers[from.id - 1],
       };
     });
-    return chat;
   };
-  const url = applyTransform(params, [
-    camelToSnake(),
-    generateUrl(`contacts/${params.parentId}/chat/${params.taskId}/messages`),
-  ]);
 
   try {
-    const response = await instance.get(url);
+    const response = await contactChatService.getContactChatHistory(contactId, chatId);
     const { peers, messages } = applyTransform(response.data, [
       snakeToCamel(),
     ]);
