@@ -1,12 +1,12 @@
 <template>
   <wt-tooltip
     :triggers="['click', 'touch']"
-    :visible="itemIsVisible"
+    :visible="visible"
     :disabled="disabled"
     class="wt-context-menu"
     placement="bottom-end"
     popper-class="wt-context-menu__floating-wrapper"
-    @update:visible="itemIsVisible = $event"
+    @update:visible="visible = $event"
   >
     <template #activator>
       <slot name="activator" />
@@ -51,7 +51,7 @@
       required: true,
       description: '[{ text, disabled, ... anything you need }]',
     },
-    itemIsVisible: {
+    visible: {
       type: Boolean,
       default: false,
     },
@@ -84,9 +84,6 @@
     hide();
   }
 </script>
-
-
-
 
 <style lang="scss">
 @import './variables.scss';
