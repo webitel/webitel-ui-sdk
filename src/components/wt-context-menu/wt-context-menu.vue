@@ -43,8 +43,6 @@
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue';
-
   const props = defineProps({
     options: {
       type: Array,
@@ -77,7 +75,6 @@
     'click',
     'update:visible'
   ]);
-
 
   function handleOptionClick({ option, index, hide }) {
     emit('click', { option, index });
