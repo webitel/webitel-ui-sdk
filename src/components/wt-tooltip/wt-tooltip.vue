@@ -76,24 +76,24 @@ const showTooltip = (event = {}) => {
   isVisible.value = true;
   event.usedByTooltip = true; // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/components/Popper.ts#L884
   emitVisibilityChange();
-  setMouseWheelListener();
+  setScrollListener();
 };
 
 const hideTooltip = (event = {}) => {
   if (!isVisible.value || event.usedByTooltip) return;
   isVisible.value = false;
   emitVisibilityChange();
-  removeMouseWheelListener();
+  removeScrollListener();
 };
-const handleWheel = debounce(() => {
+const handleScroll = debounce(() => {
   hideTooltip();
 }, 100);
 
-const setMouseWheelListener = () => {
-  window.addEventListener('scroll', handleWheel, true);
+const setScrollListener = () => {
+  window.addEventListener('scroll', handleScroll, true);
 };
-const removeMouseWheelListener = () => {
-  window.removeEventListener('scroll', handleWheel, true);
+const removeScrollListener = () => {
+  window.removeEventListener('scroll', handleScroll, true);
 };
 
 // https://floating-ui.com/docs/misc#clipping
@@ -129,7 +129,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount( () => {
-  removeMouseWheelListener()
+  removeScrollListener()
 })
 </script>
 
