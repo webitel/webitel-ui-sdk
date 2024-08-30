@@ -29,9 +29,10 @@
 
 <script setup>
 import { autoPlacement, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, onBeforeUnmount, ref, watch } from 'vue';
 import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions.js';
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
+import debounce from '../../scripts/debounce.js';
 
 const props = defineProps({
   visible: {
@@ -75,12 +76,24 @@ const showTooltip = (event = {}) => {
   isVisible.value = true;
   event.usedByTooltip = true; // https://github.com/Akryum/floating-vue/blob/main/packages/floating-vue/src/components/Popper.ts#L884
   emitVisibilityChange();
+  setScrollListener();
 };
 
 const hideTooltip = (event = {}) => {
-  if (event.usedByTooltip) return;
+  if (!isVisible.value || event.usedByTooltip) return;
   isVisible.value = false;
   emitVisibilityChange();
+  removeScrollListener();
+};
+const handleScroll = debounce(() => {
+  hideTooltip();
+}, 100);
+
+const setScrollListener = () => {
+  window.addEventListener('scroll', handleScroll, true);
+};
+const removeScrollListener = () => {
+  window.removeEventListener('scroll', handleScroll, true);
 };
 
 // https://floating-ui.com/docs/misc#clipping
@@ -114,6 +127,10 @@ watch(() => props.visible, (value) => {
 onMounted(() => {
   if (props.visible) showTooltip();
 });
+
+onBeforeUnmount( () => {
+  removeScrollListener()
+})
 </script>
 
 <style lang="scss">
