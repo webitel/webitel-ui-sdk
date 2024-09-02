@@ -85,15 +85,12 @@ const hideTooltip = (event = {}) => {
   emitVisibilityChange();
   removeScrollListener();
 };
-const handleScroll = debounce(() => {
-  hideTooltip();
-}, 100);
 
 const setScrollListener = () => {
-  window.addEventListener('scroll', handleScroll, true);
+  window.addEventListener('scroll', hideTooltip, true);
 };
 const removeScrollListener = () => {
-  window.removeEventListener('scroll', handleScroll, true);
+  window.removeEventListener('scroll', hideTooltip, true);
 };
 
 // https://floating-ui.com/docs/misc#clipping
