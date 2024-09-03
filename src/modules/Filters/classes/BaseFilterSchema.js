@@ -86,6 +86,7 @@ export default class BaseFilterSchema {
                 get = ['value', 'query'],
                 set = ['value', 'query'],
                 restore = ['query'],
+                multiple = false,
                 ...rest
               } = {}) {
     if (!name) throw new Error('Filter name is required');
@@ -94,6 +95,7 @@ export default class BaseFilterSchema {
       name,
       value,
       defaultValue,
+      multiple,
     }, rest);
 
     this.setupGetters(get);
