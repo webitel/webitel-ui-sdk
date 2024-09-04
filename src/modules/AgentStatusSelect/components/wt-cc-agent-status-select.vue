@@ -84,15 +84,16 @@ async function changeStatus({ status, pauseCause }) {
 }
 
 async function handleStatusSelectInput(status) {
+  if (status === props.status) return;
+
   if (status === AgentStatus.PAUSE) {
     await loadPauseCauses();
     if (pauseCauses.value.length) {
       openPauseCausePopup();
-      return;
     }
+  } else {
+    await changeStatus({ status });
   }
-  if (status === props.status) return;
-  await changeStatus({ status });
 }
 
 function handleClosed(event) {
