@@ -113,13 +113,22 @@ export default {
       if (this.player) this.player.destroy();
 
       const defaultControls = [
-        'play-large', 'play', 'progress', 'current-time',
-        'duration', 'mute', 'volume', 'captions', 'settings',
-        'pip', 'airplay', 'fullscreen',
+        'play-large',
+        'play',
+        'progress',
+        'current-time',
+        'duration',
+        'mute',
+        'volume',
+        'captions',
+        'settings',
+        'pip',
+        'airplay',
+        'fullscreen',
       ];
 
       const controls = this.hideDuration
-        ? defaultControls.filter(control => control !== 'duration')
+        ? defaultControls.filter((control) => control !== 'duration')
         : defaultControls;
 
       if (this.download) controls.push('download');

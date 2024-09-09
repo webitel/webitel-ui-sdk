@@ -18,8 +18,7 @@ const dataList = [
 describe('CSV Export', () => {
   let wrapper;
   const Component = {
-    render() {
-    },
+    render() {},
     mixins: [CSVExportMixin],
     created() {
       this.initCSVExport(() => ({ items: dataList }), { filename: 'jest' });

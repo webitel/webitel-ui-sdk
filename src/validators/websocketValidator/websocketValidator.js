@@ -2,7 +2,7 @@
 export default (value) => {
   try {
     const url = new URL(value);
-    return (/^(wss?)/i).test(url.protocol);
+    return /^(wss?)/i.test(url.protocol);
   } catch (e) {
     return false;
   }

@@ -1,5 +1,5 @@
-import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver-es';
+import * as XLSX from 'xlsx';
 import { objSnakeToCamel } from '../../scripts/caseConverters.js';
 
 export default class XLSExport {
@@ -29,9 +29,9 @@ export default class XLSExport {
 
   // NOTE: creates a new object that only includes the properties specified in the columns array
   filterDataByColumns(data, columns) {
-    return data.map(item => {
-      let filteredItem = {};
-      columns.forEach(column => {
+    return data.map((item) => {
+      const filteredItem = {};
+      columns.forEach((column) => {
         const value = item.hasOwnProperty(column) ? this.extractNameFromObject(item[column]) : ''; // '' needed to display column that has no data
         filteredItem[column] = value;
       });
@@ -41,7 +41,7 @@ export default class XLSExport {
 
   // NOTE: calculates the width of the columns based on the data to display it in the EXEL file
   calculateColumnWidths(data, columns) {
-    return columns.map(column => {
+    return columns.map((column) => {
       const maxLength = data.reduce((max, item) => {
         const value = item[column] || '';
         return Math.max(max, value.toString().length);
@@ -66,8 +66,7 @@ export default class XLSExport {
     let data = [];
     let isNext = false;
     let page = 1;
-    let columns = params._columns ||
-      (params?.fields ? objSnakeToCamel(params?.fields) : []);
+    const columns = params._columns || (params?.fields ? objSnakeToCamel(params?.fields) : []);
 
     do {
       const { items, next } = await this.fetchMethod({

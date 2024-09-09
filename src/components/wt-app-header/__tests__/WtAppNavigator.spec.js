@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import WebitelApplications
-  from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
+import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
 import WtAppNavigator from '../wt-app-navigator.vue';
 
 const apps = [

@@ -49,21 +49,27 @@ function setValue(payload) {
 
 const filterName = ref(props.multisearch ? props.searchModeOpts[0].value : props.name);
 
-const currentSearchMode = computed(
-  () => props.searchModeOpts.find(({ value }) => value === filterName.value),
+const currentSearchMode = computed(() =>
+  props.searchModeOpts.find(({ value }) => value === filterName.value),
 );
 
 const filterValue = computed(() => getValue(filterName.value));
 
 const localValue = ref(filterValue.value);
 
-const v$ = props.multisearch && useVuelidate(computed(() => {
-  return {
-    localValue: {
-      ...currentSearchMode.value.v || {},
-    },
-  };
-}), { localValue }, { $autoDirty: true });
+const v$ =
+  props.multisearch &&
+  useVuelidate(
+    computed(() => {
+      return {
+        localValue: {
+          ...(currentSearchMode.value.v || {}),
+        },
+      };
+    }),
+    { localValue },
+    { $autoDirty: true },
+  );
 
 v$.value.$touch();
 
@@ -86,9 +92,12 @@ subscribe({
   callback: restoreSearchMode,
 });
 
-watch(() => filterValue.value, () => {
-  localValue.value = filterValue.value;
-});
+watch(
+  () => filterValue.value,
+  () => {
+    localValue.value = filterValue.value;
+  },
+);
 </script>
 
 <style lang="scss" scoped>

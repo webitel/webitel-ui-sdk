@@ -1,8 +1,5 @@
 import FilterEvent from '../../../../modules/Filters/enums/FilterEvent.enum.js';
-import {
-  queryToSortAdapter,
-  sortToQueryAdapter,
-} from '../../../../scripts/sortQueryAdapters.js';
+import { queryToSortAdapter, sortToQueryAdapter } from '../../../../scripts/sortQueryAdapters.js';
 
 const state = () => ({
   headers: [],
@@ -45,10 +42,7 @@ const getters = {
 
 const actions = {
   // FIXME: maybe move to filters module?
-  SET_FILTER: (
-    context,
-    payload,
-  ) => context.dispatch('filters/SET_FILTER', payload),
+  SET_FILTER: (context, payload) => context.dispatch('filters/SET_FILTER', payload),
 
   // FIXME: maybe move to filters module?
   ON_FILTER_EVENT: async (context, { event, payload }) => {
@@ -63,10 +57,7 @@ const actions = {
   },
 
   // FIXME: maybe move to filters module?
-  HANDLE_FILTERS_RESTORE: async (context, {
-    fields,
-    sort,
-  }) => {
+  HANDLE_FILTERS_RESTORE: async (context, { fields, sort }) => {
     if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
     if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
     return context.dispatch('LOAD_DATA_LIST');
@@ -106,10 +97,7 @@ const actions = {
     const nextSort = queryToSortAdapter(value?.slice(0, 1) || '');
     const field = nextSort ? value.slice(1) : value;
 
-    const headers = context.state.headers.map(({
-                                                 sort: currentSort,
-                                                 ...header
-                                               }) => {
+    const headers = context.state.headers.map(({ sort: currentSort, ...header }) => {
       let sort;
 
       if (field) {
@@ -130,10 +118,10 @@ const actions = {
 
     const params = context.getters.GET_LIST_PARAMS(query);
     try {
-      let {
-        items = [],
-        next = false,
-      } = await context.dispatch('api/GET_LIST', { context, params });
+      const { items = [], next = false } = await context.dispatch('api/GET_LIST', {
+        context,
+        params,
+      });
 
       context.commit('SET', { path: 'dataList', value: items });
       context.commit('SET', { path: 'isNextPage', value: next });
@@ -156,9 +144,7 @@ const actions = {
     });
   },
 
-  PATCH_ITEM_PROPERTY: async (context, {
-    item: _item, index, prop, value,
-  }) => {
+  PATCH_ITEM_PROPERTY: async (context, { item: _item, index, prop, value }) => {
     const item = _item || context.state.dataList[index];
 
     const { id, etag } = item;
@@ -197,8 +183,7 @@ const actions = {
       await context.dispatch('LOAD_DATA_LIST');
 
       /* if no items on current page after DELETE, move to prev page [WTEL-3793] */
-      if (!context.state.dataList.length && context.getters.FILTERS.page >
-        1) {
+      if (!context.state.dataList.length && context.getters.FILTERS.page > 1) {
         await context.dispatch('SET_FILTER', {
           name: 'page',
           value: context.getters.FILTERS.page - 1,
@@ -215,10 +200,8 @@ const actions = {
     }
   },
 
-  DELETE_BULK: async (
-    context,
-    deleted,
-  ) => Promise.allSettled(deleted.map((item) => context.dispatch('DELETE_SINGLE', item))),
+  DELETE_BULK: async (context, deleted) =>
+    Promise.allSettled(deleted.map((item) => context.dispatch('DELETE_SINGLE', item))),
 
   SET_SELECTED: (context, selected) => {
     context.commit('SET', { path: 'selected', value: selected });

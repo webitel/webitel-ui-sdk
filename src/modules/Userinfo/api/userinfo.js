@@ -1,20 +1,13 @@
-import applyTransform, {
-  notify,
-  snakeToCamel,
-} from '../../../api/transformers/index.js';
+import applyTransform, { notify, snakeToCamel } from '../../../api/transformers/index.js';
 
 const userinfo = (instance) => ({
   async getSession() {
     const url = '/userinfo';
     try {
       const response = await instance.get(url);
-      return applyTransform(response.data, [
-        snakeToCamel(),
-      ]);
+      return applyTransform(response.data, [snakeToCamel()]);
     } catch (err) {
-      throw applyTransform(err, [
-        notify,
-      ]);
+      throw applyTransform(err, [notify]);
     }
   },
 
@@ -22,13 +15,9 @@ const userinfo = (instance) => ({
     const url = 'role/metadata/access';
     try {
       const response = await instance.get(url);
-      return applyTransform(response.data, [
-        snakeToCamel(),
-      ]);
+      return applyTransform(response.data, [snakeToCamel()]);
     } catch (err) {
-      throw applyTransform(err, [
-        notify,
-      ]);
+      throw applyTransform(err, [notify]);
     }
   },
 
@@ -38,9 +27,7 @@ const userinfo = (instance) => ({
     try {
       return await instance.post(url, {});
     } catch (err) {
-      throw applyTransform(err, [
-        notify,
-      ]);
+      throw applyTransform(err, [notify]);
     }
   },
 });

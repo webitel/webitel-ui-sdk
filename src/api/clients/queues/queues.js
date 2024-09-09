@@ -68,17 +68,7 @@ const getQueuesList = async (params) => {
     priority: '0',
   };
 
-  const {
-    page,
-    size,
-    search,
-    sort,
-    fields,
-    id,
-    queueType,
-    team,
-    tags,
-  } = applyTransform(params, [
+  const { page, size, search, sort, fields, id, queueType, team, tags } = applyTransform(params, [
     merge(getDefaultGetParams()),
     starToSearch('search'),
   ]);
@@ -100,15 +90,11 @@ const getQueuesList = async (params) => {
       merge(getDefaultGetListResponse()),
     ]);
     return {
-      items: applyTransform(items, [
-        mergeEach(defaultObject),
-      ]),
+      items: applyTransform(items, [mergeEach(defaultObject)]),
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -123,8 +109,7 @@ const getQueue = async ({ itemId: id }) => {
     const copy = deepCopy(item);
     try {
       if (copy.variables) {
-        copy.variables = Object.keys(copy.variables)
-        .map((key) => ({
+        copy.variables = Object.keys(copy.variables).map((key) => ({
           key,
           value: copy.variables[key],
         }));
@@ -150,9 +135,7 @@ const getQueue = async ({ itemId: id }) => {
       responseHandler,
     ]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -164,13 +147,9 @@ const addQueue = async ({ itemInstance }) => {
   ]);
   try {
     const response = await queueService.createQueue(item);
-    return applyTransform(response.data, [
-      snakeToCamel(doNotConvertKeys),
-    ]);
+    return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -182,30 +161,19 @@ const updateQueue = async ({ itemInstance, itemId: id }) => {
   ]);
   try {
     const response = await queueService.updateQueue(id, item);
-    return applyTransform(response.data, [
-      snakeToCamel(doNotConvertKeys),
-    ]);
+    return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
 const patchQueue = async ({ id, changes }) => {
-  const item = applyTransform(changes, [
-    sanitize(fieldsToSend),
-    camelToSnake(doNotConvertKeys),
-  ]);
+  const item = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake(doNotConvertKeys)]);
   try {
     const response = await queueService.patchQueue(id, item);
-    return applyTransform(response.data, [
-      snakeToCamel(doNotConvertKeys),
-    ]);
+    return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -214,37 +182,24 @@ const deleteQueue = async ({ id }) => {
     const response = await queueService.deleteQueue(id);
     return applyTransform(response.data, []);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
-const getQueuesLookup = (params) => getQueuesList({
-  ...params,
-  fields: params.fields || ['id', 'name', 'type'],
-});
+const getQueuesLookup = (params) =>
+  getQueuesList({
+    ...params,
+    fields: params.fields || ['id', 'name', 'type'],
+  });
 
 const getQueuesTags = async (params) => {
-  const {
-    page,
-    size,
-    search,
-    sort,
-    fields,
-  } = applyTransform(params, [
+  const { page, size, search, sort, fields } = applyTransform(params, [
     merge(getDefaultGetParams()),
     starToSearch(),
     camelToSnake(doNotConvertKeys),
   ]);
   try {
-    const response = await queueService.searchQueueTags(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-    );
+    const response = await queueService.searchQueueTags(page, size, search, sort, fields);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(doNotConvertKeys),
       merge(getDefaultGetListResponse()),
@@ -254,10 +209,7 @@ const getQueuesTags = async (params) => {
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 

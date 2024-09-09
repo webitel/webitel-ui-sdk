@@ -57,7 +57,10 @@ const isLetterAvatar = computed(() => !props.src && props.username);
 
 const avatarLetters = computed(() => {
   if (!props.username) return false;
-  const abbreviation = props.username.split(' ').map((word) => word.at(0).toUpperCase()).join('');
+  const abbreviation = props.username
+    .split(' ')
+    .map((word) => word.at(0).toUpperCase())
+    .join('');
   return abbreviation.length > 2 ? abbreviation.at(0).concat(abbreviation.at(-1)) : abbreviation;
 });
 
@@ -78,8 +81,10 @@ const avatarLettersBackground = computed(() => {
     { letters: 'WX'.concat(''), color: '--wt-avatar-letters-p12-color' },
     { letters: 'YZ'.concat(''), color: '--wt-avatar-letters-p13-color' },
   ];
-  const searchedLetter = letterList.find(({ letters }) => letters.includes(avatarLetters.value.at(0).toUpperCase()));
-  return (searchedLetter && searchedLetter.color) || '--wt-avatar-letters-p1-color';
+  const searchedLetter = letterList.find(({ letters }) =>
+    letters.includes(avatarLetters.value.at(0).toUpperCase()),
+  );
+  return searchedLetter?.color || '--wt-avatar-letters-p1-color';
 });
 
 const imgSrc = computed(() => props.src || defaultAvatar);

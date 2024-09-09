@@ -89,18 +89,16 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'change:question',
-  'copy',
-  'delete',
-]);
+const emit = defineEmits(['change:question', 'copy', 'delete']);
 
 const QuestionType = [
   { value: EngineAuditQuestionType.Option, locale: 'webitelUI.auditForm.type.options' },
   { value: EngineAuditQuestionType.Score, locale: 'webitelUI.auditForm.type.score' },
 ];
 
-const prettifiedQuestionType = computed(() => QuestionType.find(({ value }) => value === props.question.type));
+const prettifiedQuestionType = computed(() =>
+  QuestionType.find(({ value }) => value === props.question.type),
+);
 
 const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Option) return AuditFormQuestionOptions;
@@ -122,7 +120,6 @@ function handleQuestionTypeChange(type) {
   }
   emit('change:question', question);
 }
-
 </script>
 
 <style lang="scss" scoped>

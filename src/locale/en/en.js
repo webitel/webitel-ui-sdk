@@ -5,18 +5,13 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -57,7 +52,7 @@ export default {
     retry: 'Retry',
     downloadAll: 'Download all',
     warning: 'Warning',
-    doNotSave: 'Don\'t save',
+    doNotSave: "Don't save",
     required: 'Required',
     copy: 'Copy',
     new: 'New',
@@ -340,8 +335,8 @@ export default {
         text: 'Sorry, you have not enough privileges to see this page.',
       },
       page404: {
-        title: 'Looks like you\'re lost',
-        text: 'Sorry, we can\'t find the page you want.',
+        title: "Looks like you're lost",
+        text: "Sorry, we can't find the page you want.",
       },
     },
     copyAction: {
@@ -362,7 +357,8 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',
-      askingAlert: 'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
+      askingAlert:
+        'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
       deleteAll: 'ALL',
     },
     dummy: {
@@ -376,7 +372,8 @@ export default {
       },
       statusSelectErrorPopup: {
         title: 'Attention',
-        message: 'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
+        message:
+          'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
       },
     },
     saveFailedPopup: {

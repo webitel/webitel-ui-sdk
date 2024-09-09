@@ -1,14 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
 import { EngineAuditQuestionType } from 'webitel-sdk';
-import {
-  generateQuestionOptionsSchema,
-} from '../../schemas/AuditFormQuestionOptionsSchema.js';
+import { generateQuestionOptionsSchema } from '../../schemas/AuditFormQuestionOptionsSchema.js';
 import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema.js';
-import {
-  generateQuestionScoreSchema,
-} from '../../schemas/AuditFormQuestionScoreSchema.js';
-import AuditFormQuestionWriteWrapper
-  from '../audit-form-question-write-wrapper.vue';
+import { generateQuestionScoreSchema } from '../../schemas/AuditFormQuestionScoreSchema.js';
+import AuditFormQuestionWriteWrapper from '../audit-form-question-write-wrapper.vue';
 
 const v = { question: {} };
 
@@ -30,11 +25,8 @@ describe('AuditFormQuestionWriteWrapper', () => {
         v,
       },
     });
-    wrapper.findComponent({ name: 'wt-switcher' })
-    .vm
-    .$emit('change', !question.required);
-    expect(wrapper.emitted()['change:question'][0][0].required)
-    .toBe(!question.required);
+    wrapper.findComponent({ name: 'wt-switcher' }).vm.$emit('change', !question.required);
+    expect(wrapper.emitted()['change:question'][0][0].required).toBe(!question.required);
   });
   it('correctly changes question type to Score', () => {
     const question = {};
@@ -44,12 +36,11 @@ describe('AuditFormQuestionWriteWrapper', () => {
         v,
       },
     });
-    wrapper.find('.audit-form-question-write-content-question')
-    .findComponent({ name: 'wt-select' })
-    .vm
-    .$emit('input', { value: EngineAuditQuestionType.Score });
-    expect(wrapper.emitted()['change:question'][0][0])
-    .toEqual(generateQuestionScoreSchema());
+    wrapper
+      .find('.audit-form-question-write-content-question')
+      .findComponent({ name: 'wt-select' })
+      .vm.$emit('input', { value: EngineAuditQuestionType.Score });
+    expect(wrapper.emitted()['change:question'][0][0]).toEqual(generateQuestionScoreSchema());
   });
   it('correctly changes question type to Options', () => {
     const question = {};
@@ -59,11 +50,10 @@ describe('AuditFormQuestionWriteWrapper', () => {
         v,
       },
     });
-    wrapper.find('.audit-form-question-write-content-question')
-    .findComponent({ name: 'wt-select' })
-    .vm
-    .$emit('input', { value: EngineAuditQuestionType.Option });
-    expect(wrapper.emitted()['change:question'][0][0])
-    .toEqual(generateQuestionOptionsSchema());
+    wrapper
+      .find('.audit-form-question-write-content-question')
+      .findComponent({ name: 'wt-select' })
+      .vm.$emit('input', { value: EngineAuditQuestionType.Option });
+    expect(wrapper.emitted()['change:question'][0][0]).toEqual(generateQuestionOptionsSchema());
   });
 });

@@ -21,8 +21,7 @@ const router = createRouter({
 describe('Enum filter mixin', () => {
   let wrapper;
   const Component = {
-    render() {
-    },
+    render() {},
     mixins: [enumFilterMixin],
     data: () => ({
       filterQuery: 'type',

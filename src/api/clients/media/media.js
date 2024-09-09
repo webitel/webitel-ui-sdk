@@ -22,27 +22,13 @@ const token = localStorage.getItem('access-token');
 const baseUrl = import.meta.env.VITE_API_URL;
 
 const getMediaList = async (params) => {
-  const {
-    page,
-    size,
-    search,
-    sort,
-    fields,
-    id,
-  } = applyTransform(params, [
+  const { page, size, search, sort, fields, id } = applyTransform(params, [
     merge(getDefaultGetParams()),
     starToSearch('search'),
   ]);
 
   try {
-    const response = await mediaService.searchMediaFile(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-    );
+    const response = await mediaService.searchMediaFile(page, size, search, sort, fields, id);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -52,10 +38,7 @@ const getMediaList = async (params) => {
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -64,10 +47,7 @@ const getMedia = async ({ itemId }) => {
   try {
     return await instance.get(url);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -76,10 +56,7 @@ export const downloadMedia = async (id) => {
   try {
     return await instance.get(url);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -96,15 +73,10 @@ const addMedia = async (params) => {
   formData.append('file', params.itemInstance);
   try {
     const response = await addMediaInstance.post(url, formData);
-    applyTransform(response, [
-      notify(() => ({ type: 'success', text: 'Successfully added' })),
-    ]);
+    applyTransform(response, [notify(() => ({ type: 'success', text: 'Successfully added' }))]);
     return response;
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -113,17 +85,15 @@ const deleteMedia = async ({ id }) => {
     const response = await mediaService.deleteMediaFile(id);
     return applyTransform(response.data, []);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
-const getMediaLookup = (params) => getMediaList({
-  ...params,
-  fields: params.fields || ['id', 'name'],
-});
+const getMediaLookup = (params) =>
+  getMediaList({
+    ...params,
+    fields: params.fields || ['id', 'name'],
+  });
 
 const MediaAPI = {
   getList: getMediaList,

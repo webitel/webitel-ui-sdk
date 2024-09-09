@@ -1,7 +1,9 @@
 import { SystemSettingServiceApiFactory } from 'webitel-sdk';
 import {
   getDefaultGetListResponse,
-  getDefaultGetParams, getDefaultInstance, getDefaultOpenAPIConfig,
+  getDefaultGetParams,
+  getDefaultInstance,
+  getDefaultOpenAPIConfig,
 } from '../../defaults/index.js';
 import applyTransform, {
   camelToSnake,
@@ -24,7 +26,14 @@ const getList = async (params) => {
   ]);
 
   try {
-    const response = await configurationService.searchSystemSetting(page, size, search, sort, fields, name);
+    const response = await configurationService.searchSystemSetting(
+      page,
+      size,
+      search,
+      sort,
+      fields,
+      name,
+    );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -91,7 +100,13 @@ const getObjectsList = async (params) => {
   ]);
 
   try {
-    const response = await configurationService.searchAvailableSystemSetting(page, size, search, sort, fields);
+    const response = await configurationService.searchAvailableSystemSetting(
+      page,
+      size,
+      search,
+      sort,
+      fields,
+    );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),

@@ -195,9 +195,13 @@ export default {
   }),
   computed: {
     // for taggableMixin
-    taggable() { return this.allowCustomValues; },
+    taggable() {
+      return this.allowCustomValues;
+    },
     // for taggableMixin
-    manualTagging() { return this.handleCustomValuesAdditionManually; },
+    manualTagging() {
+      return this.handleCustomValuesAdditionManually;
+    },
     optionsWithCustomValues() {
       // https://webitel.atlassian.net/browse/WTEL-3181
       if (!this.allowCustomValues) return this.selectOptions;
@@ -210,10 +214,11 @@ export default {
        but current filters logic restores value at filter component, but options value are pre-defined at store state
        */
 
-      const customValuesToOptions =
-        Array.isArray(this.value)
-          ? this.value
-          : (isEmpty(this.value) ? [] : [this.value]); //do not add empty values
+      const customValuesToOptions = Array.isArray(this.value)
+        ? this.value
+        : isEmpty(this.value)
+          ? []
+          : [this.value]; //do not add empty values
       const optionsWithoutValues = this.selectOptions.filter((opt) => {
         const optKey = this.trackBy ? opt[this.trackBy] : opt;
         return !customValuesToOptions.some((customValue) => {
@@ -221,14 +226,10 @@ export default {
           return customValueKey === optKey;
         });
       });
-      return [
-        ...customValuesToOptions,
-        ...optionsWithoutValues,
-      ];
+      return [...customValuesToOptions, ...optionsWithoutValues];
     },
   },
   methods: {
-
     // for taggableMixin functionality
     async handleCustomValue(value) {
       // https://webitel.atlassian.net/browse/WTEL-3181

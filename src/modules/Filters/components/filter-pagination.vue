@@ -49,9 +49,13 @@ function setSize(value) {
   return setFilter({ value, name: sizeFilterName });
 }
 
-watch(size, () => {
-  localSize.value = size.value;
-}, { immediate: true });
+watch(
+  size,
+  () => {
+    localSize.value = size.value;
+  },
+  { immediate: true },
+);
 </script>
 
 <style lang="scss" scoped>

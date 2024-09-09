@@ -1,14 +1,6 @@
-import {
-  localStorageGetter,
-  queryGetter,
-  valueGetter,
-} from '../scripts/getters/index.js';
+import { localStorageGetter, queryGetter, valueGetter } from '../scripts/getters/index.js';
 import { localStorageRestore, queryRestore } from '../scripts/restores/index.js';
-import {
-  localStorageSetter,
-  querySetter,
-  valueSetter,
-} from '../scripts/setters/index.js';
+import { localStorageSetter, querySetter, valueSetter } from '../scripts/setters/index.js';
 
 const convertGetterArray = (context) => (getters) => {
   const availableGetters = ['value', 'query', 'localStorage'];
@@ -80,23 +72,27 @@ const convertRestoreArray = (context) => (restores) => {
 
 export default class BaseFilterSchema {
   constructor({
-                name,
-                value = '',
-                defaultValue = '',
-                get = ['value', 'query'],
-                set = ['value', 'query'],
-                restore = ['query'],
-                multiple = false,
-                ...rest
-              } = {}) {
+    name,
+    value = '',
+    defaultValue = '',
+    get = ['value', 'query'],
+    set = ['value', 'query'],
+    restore = ['query'],
+    multiple = false,
+    ...rest
+  } = {}) {
     if (!name) throw new Error('Filter name is required');
 
-    Object.assign(this, {
-      name,
-      value,
-      defaultValue,
-      multiple,
-    }, rest);
+    Object.assign(
+      this,
+      {
+        name,
+        value,
+        defaultValue,
+        multiple,
+      },
+      rest,
+    );
 
     this.setupGetters(get);
     this.setupSetters(set);

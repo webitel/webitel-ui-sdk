@@ -27,7 +27,16 @@ export default {
     color: {
       type: String,
       default: 'secondary',
-      options: ['primary', 'secondary', 'disabled', 'success', 'error', 'transfer', 'break-out', 'info'],
+      options: [
+        'primary',
+        'secondary',
+        'disabled',
+        'success',
+        'error',
+        'transfer',
+        'break-out',
+        'info',
+      ],
     },
     text: {
       type: [String, Number],

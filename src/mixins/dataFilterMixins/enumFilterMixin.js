@@ -19,13 +19,12 @@ export default {
   methods: {
     restoreValue(value) {
       if (Array.isArray(value)) {
-        this.value = this.options
-        .filter((option) => value.some((value) => `${value}` ===
-          option[this.storedProp]));
+        this.value = this.options.filter((option) =>
+          value.some((value) => `${value}` === option[this.storedProp]),
+        );
       } else {
-        this.value = this.options
-          .find((option) => option[this.storedProp] === value) ||
-          this.defaultValue;
+        this.value =
+          this.options.find((option) => option[this.storedProp] === value) || this.defaultValue;
       }
     },
   },

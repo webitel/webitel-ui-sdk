@@ -3,14 +3,16 @@ import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js'
 
 export default class QueryFiltersStoreModule extends BaseStoreModule {
   getters = {
-    GET_FILTERS: (state, getters) => Object.keys(state)
-    .reduce((filters, filterKey) => {
-      const filterValue = getters.GET_FILTER(filterKey);
-      return isEmpty(filterValue) ? filters : {
-        ...filters,
-        [filterKey]: filterValue,
-      };
-    }, {}),
+    GET_FILTERS: (state, getters) =>
+      Object.keys(state).reduce((filters, filterKey) => {
+        const filterValue = getters.GET_FILTER(filterKey);
+        return isEmpty(filterValue)
+          ? filters
+          : {
+              ...filters,
+              [filterKey]: filterValue,
+            };
+      }, {}),
     GET_FILTER: (state) => (filter) => {
       const { value, storedProp, multiple } = state[filter];
       if (multiple) return value.map((item) => item[storedProp]); // if arr, map
@@ -25,8 +27,7 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
       let newValue = value;
       if (newValue) {
         if (multiple && !Array.isArray(newValue)) newValue = [newValue];
-      } else if (newValue === null || newValue ===
-        undefined) newValue = defaultValue;
+      } else if (newValue === null || newValue === undefined) newValue = defaultValue;
       context.commit('SET_FILTER', { filter, value: newValue });
     },
     RESET_FILTERS: (context) => {
@@ -46,16 +47,11 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
   };
 
   /* FIXME REMOVE COMPLETELY AND USE GET_MODULE() INSERTION*/
-  constructor({
-                state = {},
-                getters = {},
-                actions = {},
-                mutations = {},
-              } = {}) {
+  constructor({ state = {}, getters = {}, actions = {}, mutations = {} } = {}) {
     super();
     this.state = { ...this.state, ...state };
     this.getters = { ...this.getters, ...getters };
     this.actions = { ...this.actions, ...actions };
     this.mutations = { ...this.mutations, ...mutations };
-  };
+  }
 }

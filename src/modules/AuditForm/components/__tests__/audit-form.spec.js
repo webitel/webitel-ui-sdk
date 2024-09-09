@@ -1,8 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { ref } from 'vue';
-import {
-  useDestroyableSortable,
-} from '../../../../composables/useDestroyableSortable/useDestroyableSortable.js';
+import { useDestroyableSortable } from '../../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema.js';
 import AuditForm from '../audit-form.vue';
 
@@ -32,8 +30,9 @@ describe('AuditForm', () => {
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
     console.info(wrapper.html());
-    expect(wrapper.emitted()['update:questions'][0][0])
-    .toEqual([generateQuestionSchema({ required: true })]);
+    expect(wrapper.emitted()['update:questions'][0][0]).toEqual([
+      generateQuestionSchema({ required: true }),
+    ]);
   });
   it('delete event from child question emits update without passed question', async () => {
     const wrapper = mount(AuditForm, {
@@ -42,11 +41,8 @@ describe('AuditForm', () => {
         questions: [generateQuestionSchema()],
       },
     });
-    await wrapper.findComponent({ name: 'audit-form-question' })
-    .vm
-    .$emit('delete', { key: 0 });
-    expect(wrapper.emitted()['update:questions'][0][0])
-    .toEqual([]);
+    await wrapper.findComponent({ name: 'audit-form-question' }).vm.$emit('delete', { key: 0 });
+    expect(wrapper.emitted()['update:questions'][0][0]).toEqual([]);
   });
   it('copy event from child question emits update with duplicated questions', async () => {
     const question = generateQuestionSchema();
@@ -56,21 +52,16 @@ describe('AuditForm', () => {
         questions: [question],
       },
     });
-    await wrapper.findComponent({ name: 'audit-form-question' })
-    .vm
-    .$emit('copy', { question, key: 0 });
-    expect(wrapper.emitted()['update:questions'][0][0])
-    .toEqual([question, question]);
+    await wrapper
+      .findComponent({ name: 'audit-form-question' })
+      .vm.$emit('copy', { question, key: 0 });
+    expect(wrapper.emitted()['update:questions'][0][0]).toEqual([question, question]);
   });
   it('initializes result depending on passed questions', () => {
     const wrapper = mount(AuditForm, {
       props: {
         mode: 'fill',
-        questions: [
-          generateQuestionSchema(),
-          generateQuestionSchema(),
-          generateQuestionSchema(),
-        ],
+        questions: [generateQuestionSchema(), generateQuestionSchema(), generateQuestionSchema()],
       },
     });
     expect(wrapper.emitted()['update:result'][0][0]).toEqual([{}, {}, {}]);

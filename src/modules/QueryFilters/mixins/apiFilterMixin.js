@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async restoreValue(id) {
-      if (id && id.length) {
+      if (id?.length) {
         let newValue;
         if (this.multiple) {
           const idsArr = Array.isArray(id) ? id : [id];

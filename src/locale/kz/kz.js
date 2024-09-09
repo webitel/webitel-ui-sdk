@@ -6,13 +6,10 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -311,7 +308,8 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Жоюды растаңыз',
-      askingAlert: '{count} жазбасын  жойғыңыз келетініне сенімдісіз бе?  | {count} жазбасын  жойғыңыз келетініне сенімдісіз бе?',
+      askingAlert:
+        '{count} жазбасын  жойғыңыз келетініне сенімдісіз бе?  | {count} жазбасын  жойғыңыз келетініне сенімдісіз бе?',
       undoneActionAlert: 'Бұл әрекетті қайтару мүмкін емес.',
       deleteAll: 'БАРЛЫҒЫ',
     },

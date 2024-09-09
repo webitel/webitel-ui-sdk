@@ -42,7 +42,6 @@ const emit = defineEmits(['close']);
 function close() {
   emit('close');
 }
-
 </script>
 
 <style lang="scss" scoped>

@@ -60,10 +60,13 @@ const props = defineProps({
   },
 });
 
-const to = computed(() => props.link || {
-  name: `${props.routeName}-edit`,
-  params: { id: props.id },
-});
+const to = computed(
+  () =>
+    props.link || {
+      name: `${props.routeName}-edit`,
+      params: { id: props.id },
+    },
+);
 </script>
 
 <style lang="scss">

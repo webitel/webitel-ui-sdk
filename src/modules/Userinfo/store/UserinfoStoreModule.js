@@ -29,33 +29,33 @@ export default class UserinfoStoreModule extends BaseStoreModule {
   getters = {
     THIS_APP: (state) => state.thisApp,
     // if no access[app] => accessed by default
-    CHECK_APP_ACCESS: (state) => (app) => !state.access[app] ||
-      state.access[app]?._enabled,
-    CHECK_OBJECT_ACCESS: (state, getters) => ({ name, route }) => {
-      if (!state.access[getters.THIS_APP] ||
-        !state.access[getters.THIS_APP]._enabled) return false;
-      if (route) return getters.CHECK_OBJECT_ACCESS_BY_ROUTE(route);
-      return getters.CHECK_OBJECT_ACCESS_BY_NAME(name);
-    },
-    CHECK_OBJECT_ACCESS_BY_NAME: (state, getters) => (name) => (
-      state.access[getters.THIS_APP][name]?._enabled
-    ),
+    CHECK_APP_ACCESS: (state) => (app) => !state.access[app] || state.access[app]?._enabled,
+    CHECK_OBJECT_ACCESS:
+      (state, getters) =>
+      ({ name, route }) => {
+        if (!state.access[getters.THIS_APP] || !state.access[getters.THIS_APP]._enabled)
+          return false;
+        if (route) return getters.CHECK_OBJECT_ACCESS_BY_ROUTE(route);
+        return getters.CHECK_OBJECT_ACCESS_BY_NAME(name);
+      },
+    CHECK_OBJECT_ACCESS_BY_NAME: (state, getters) => (name) =>
+      state.access[getters.THIS_APP][name]?._enabled,
     CHECK_OBJECT_ACCESS_BY_ROUTE: (state, getters) => (route) => {
-      const accessKey = Object.keys(state.access[getters.THIS_APP])
-      .find((object) => route.name.includes(object));
+      const accessKey = Object.keys(state.access[getters.THIS_APP]).find((object) =>
+        route.name.includes(object),
+      );
       return state.access[getters.THIS_APP][accessKey]?._enabled;
     },
-    GET_OBJECT_SCOPE: (state, getters) => ({ name, route }) => {
-      if (route) return getters.GET_OBJECT_SCOPE_BY_ROUTE(route);
-      return getters.GET_OBJECT_SCOPE_BY_NAME(name);
-    },
-    GET_OBJECT_SCOPE_BY_NAME: (state) => (name) => (
-      Object.values(state.scope).find((object) => name === object.name)
-    ),
-    GET_OBJECT_SCOPE_BY_ROUTE: (state) => (route) => (
-      Object.values(state.scope)
-      .find((object) => route.name.includes(object.route))
-    ),
+    GET_OBJECT_SCOPE:
+      (state, getters) =>
+      ({ name, route }) => {
+        if (route) return getters.GET_OBJECT_SCOPE_BY_ROUTE(route);
+        return getters.GET_OBJECT_SCOPE_BY_NAME(name);
+      },
+    GET_OBJECT_SCOPE_BY_NAME: (state) => (name) =>
+      Object.values(state.scope).find((object) => name === object.name),
+    GET_OBJECT_SCOPE_BY_ROUTE: (state) => (route) =>
+      Object.values(state.scope).find((object) => route.name.includes(object.route)),
     HAS_READ_ACCESS: (state, getters) => (checkedObject) => {
       if (!getters.CHECK_OBJECT_ACCESS(checkedObject)) return false;
       if (state.permissions[Permissions.READ]) return true;
@@ -86,13 +86,13 @@ export default class UserinfoStoreModule extends BaseStoreModule {
     CONVERT_USER_PERMISSIONS: (context, initialPermissions) => {
       let permissions = {};
       if (!initialPermissions) return permissions;
-      permissions = initialPermissions.reduce((
-        permissions,
-        currentPermission,
-      ) => ({
-        ...permissions,
-        [currentPermission.id]: currentPermission,
-      }), {});
+      permissions = initialPermissions.reduce(
+        (permissions, currentPermission) => ({
+          ...permissions,
+          [currentPermission.id]: currentPermission,
+        }),
+        {},
+      );
       return permissions;
     },
 
@@ -105,14 +105,17 @@ export default class UserinfoStoreModule extends BaseStoreModule {
 
       const session = await userinfo.getSession();
 
-      if ((session.expiresAt - Date.now() < HOUR_LENGTH)) {
+      if (session.expiresAt - Date.now() < HOUR_LENGTH) {
         await context.dispatch('LOGOUT');
         throw new Error(`Session expires soon ${session.expiresAt}`);
       }
 
       await context.dispatch('SET_SESSION', session);
       const access = await userinfo.getApplicationsAccess();
-      await context.dispatch('SET_APPLICATIONS_ACCESS', new ApplicationsAccess({ access }).getAccess());
+      await context.dispatch(
+        'SET_APPLICATIONS_ACCESS',
+        new ApplicationsAccess({ access }).getAccess(),
+      );
       await context.dispatch('AFTER_OPEN_SESSION_HOOK');
     },
     SET_SESSION: async (context, _session) => {
@@ -137,19 +140,13 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       }
     },
 
-    LOGOUT: async (
-      context,
-      { authUrl = import.meta.env.VITE_AUTH_URL } = {},
-    ) => {
+    LOGOUT: async (context, { authUrl = import.meta.env.VITE_AUTH_URL } = {}) => {
       if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
       await userinfo.logout();
       window.location.href = authUrl;
     },
 
-    SET_APPLICATIONS_ACCESS: (
-      context,
-      access,
-    ) => context.commit('SET_APPLICATIONS_ACCESS', access),
+    SET_APPLICATIONS_ACCESS: (context, access) => context.commit('SET_APPLICATIONS_ACCESS', access),
 
     SET_LOADING: (context, isLoading) => {
       context.commit('SET_LOADING', isLoading);

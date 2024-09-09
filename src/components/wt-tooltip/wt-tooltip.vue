@@ -29,10 +29,10 @@
 
 <script setup>
 import { autoPlacement, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
-import { onMounted, onBeforeUnmount, ref, watch } from 'vue';
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import debounce from '../../scripts/debounce.js';
 import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions.js';
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
-import debounce from '../../scripts/debounce.js';
 
 const props = defineProps({
   visible: {
@@ -103,10 +103,7 @@ const { floatingStyles } = useFloating(activator, floating, {
   TOGGLE BECAUSE OF PERFORMANCE ISSUES, RELATED TO USAGE OF AUTO_UPDATE OF POSITIONS
   */
   whileElementsMounted: autoUpdate, // https://floating-ui.com/docs/vue#anchoring
-  middleware: [
-    shift(), offset(4),
-    props.placement === 'auto' ? autoPlacement() : flip(),
-  ],
+  middleware: [shift(), offset(4), props.placement === 'auto' ? autoPlacement() : flip()],
 });
 
 useTooltipTriggerSubscriptions({
@@ -116,18 +113,21 @@ useTooltipTriggerSubscriptions({
   hide: hideTooltip,
 });
 
-watch(() => props.visible, (value) => {
-  if (value) showTooltip();
-  else hideTooltip();
-});
+watch(
+  () => props.visible,
+  (value) => {
+    if (value) showTooltip();
+    else hideTooltip();
+  },
+);
 
 onMounted(() => {
   if (props.visible) showTooltip();
 });
 
-onBeforeUnmount( () => {
-  removeScrollListener()
-})
+onBeforeUnmount(() => {
+  removeScrollListener();
+});
 </script>
 
 <style lang="scss">

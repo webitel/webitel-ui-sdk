@@ -74,7 +74,8 @@ export default {
     headers: {
       type: Array,
       required: true,
-      description: 'Each header should have following schema: { value: String, show: Boolean, text: String }',
+      description:
+        'Each header should have following schema: { value: String, show: Boolean, text: String }',
     },
     staticHeaders: {
       type: Array,
@@ -82,19 +83,19 @@ export default {
       description: 'Header values to exclude from selection',
     },
   },
-  emits: [
-    'change',
-  ],
+  emits: ['change'],
   data: () => ({
     draft: [], // headers draft
     isColumnSelectPopup: false,
   }),
   computed: {
     changeableDraft() {
-      return this.draft.filter((header) => !this.staticHeaders.includes(header.value)).sort((a, b) => {
-        return this.shownColLabel(a).localeCompare(this.shownColLabel(b));
-        // sorting headers for alphabet just in popup
-      });
+      return this.draft
+        .filter((header) => !this.staticHeaders.includes(header.value))
+        .sort((a, b) => {
+          return this.shownColLabel(a).localeCompare(this.shownColLabel(b));
+          // sorting headers for alphabet just in popup
+        });
     },
   },
 
