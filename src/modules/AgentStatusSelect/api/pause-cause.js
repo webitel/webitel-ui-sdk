@@ -8,7 +8,6 @@ import applyTransform, {
 } from '../../../api/transformers/index.js';
 
 const PauseCauseAPIFactory = ({ instance, OpenAPIConfig }) => {
-
   const service = new AgentServiceApiFactory(OpenAPIConfig, '', instance);
 
   const getList = async ({ agentId }) => {
@@ -20,24 +19,17 @@ const PauseCauseAPIFactory = ({ instance, OpenAPIConfig }) => {
 
     const allowChange = true;
     try {
-      const response = await service.searchPauseCauseForAgent(
-        agentId,
-        allowChange,
-      );
+      const response = await service.searchPauseCauseForAgent(agentId, allowChange);
       const { items, next } = applyTransform(response.data, [
         snakeToCamel(),
         merge(getDefaultGetListResponse()),
       ]);
       return {
-        items: applyTransform(items, [
-          mergeEach(defaultObject),
-        ]),
+        items: applyTransform(items, [mergeEach(defaultObject)]),
         next,
       };
     } catch (err) {
-      throw applyTransform(err, [
-        notify,
-      ]);
+      throw applyTransform(err, [notify]);
     }
   };
 

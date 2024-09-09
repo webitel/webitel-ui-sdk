@@ -10,10 +10,7 @@ import './assets/icons/sprite';
 import './css/styleguide/fonts/_fonts.scss';
 import App from './the-app.vue';
 
-const app = createApp(App)
-.use(router)
-.use(i18n)
-.provide('$eventBus', eventBus);
+const app = createApp(App).use(router).use(i18n).provide('$eventBus', eventBus);
 
 Object.keys(Components).forEach((name) => {
   app.component(name, Components[name]);

@@ -24,15 +24,13 @@ export default {
 
     restorePage() {
       const defaultPage = 1;
-      const value = +this.getValueFromQuery({ filterQuery: 'page' }) ||
-        defaultPage;
+      const value = +this.getValueFromQuery({ filterQuery: 'page' }) || defaultPage;
       this.setPage(value);
     },
 
     restoreSize() {
       const defaultSize = 10;
-      const value = +this.getValueFromQuery({ filterQuery: 'size' }) ||
-        defaultSize;
+      const value = +this.getValueFromQuery({ filterQuery: 'size' }) || defaultSize;
       this.setSize(value);
     },
 

@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 // 'X-Webitel-Access' ~ 'X-Access-Token'
-const generateInstance = ({
-                            interceptors,
-                            baseURL,
-                          } = {}) => {
+const generateInstance = ({ interceptors, baseURL } = {}) => {
   const instance = axios.create({
     baseURL,
     headers: {

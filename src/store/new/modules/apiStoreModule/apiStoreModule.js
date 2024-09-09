@@ -1,6 +1,4 @@
-const getParentIdFromContext = (context) => (
-  context?.getters?.PARENT_ID || context?.state?.parentId
-);
+const getParentIdFromContext = (context) => context?.getters?.PARENT_ID || context?.state?.parentId;
 
 const state = () => ({
   api: null,
@@ -9,10 +7,7 @@ const state = () => ({
 const getters = {};
 
 const actions = {
-  GET_LIST: (
-    apiContext,
-    { context: callerContext = {}, params = {} },
-  ) => {
+  GET_LIST: (apiContext, { context: callerContext = {}, params = {} }) => {
     if (!apiContext.state.api.getList) throw Error('No API "getList" method provided');
     return apiContext.state.api.getList({
       ...callerContext.state,
@@ -21,10 +16,7 @@ const actions = {
     });
   },
 
-  GET_ITEM: (
-    apiContext,
-    { context: callerContext = {}, params = {} } = {},
-  ) => {
+  GET_ITEM: (apiContext, { context: callerContext = {}, params = {} } = {}) => {
     if (!apiContext.state.api.get) throw Error('No API "get" method provided');
     return apiContext.state.api.get({
       ...callerContext.state,
@@ -33,10 +25,7 @@ const actions = {
     });
   },
 
-  POST_ITEM: (
-    apiContext,
-    { context: callerContext = {}, ...rest } = {},
-  ) => {
+  POST_ITEM: (apiContext, { context: callerContext = {}, ...rest } = {}) => {
     if (!apiContext.state.api.add) throw Error('No API "add" method provided');
     return apiContext.state.api.add({
       ...callerContext.state,
@@ -45,10 +34,7 @@ const actions = {
     });
   },
 
-  UPD_ITEM: (
-    apiContext,
-    { context: callerContext = {}, ...rest } = {},
-  ) => {
+  UPD_ITEM: (apiContext, { context: callerContext = {}, ...rest } = {}) => {
     if (!apiContext.state.api.update) throw Error('No API "update" method provided');
     return apiContext.state.api.update({
       ...callerContext.state,
@@ -57,10 +43,7 @@ const actions = {
     });
   },
 
-  PATCH_ITEM: (
-    apiContext,
-    { context: callerContext = {}, id, changes, ...rest },
-  ) => {
+  PATCH_ITEM: (apiContext, { context: callerContext = {}, id, changes, ...rest }) => {
     if (!apiContext.state.api.patch) throw Error('No API "patch" method provided');
     return apiContext.state.api.patch({
       ...callerContext.state,
@@ -71,10 +54,7 @@ const actions = {
     });
   },
 
-  DELETE_ITEM: (
-    apiContext,
-    { context: callerContext = {}, id, ...rest },
-  ) => {
+  DELETE_ITEM: (apiContext, { context: callerContext = {}, id, ...rest }) => {
     if (!apiContext.state.api.delete) throw Error('No API "delete" method provided');
     return apiContext.state.api.delete({
       ...callerContext.state,

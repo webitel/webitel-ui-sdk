@@ -1,13 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import FilterEvent
-  from '../../../../../modules/Filters/enums/FilterEvent.enum.js';
-import FiltersStoreModule
-  from '../../../../../modules/Filters/store/FiltersStoreModule.js';
+import FilterEvent from '../../../../../modules/Filters/enums/FilterEvent.enum.js';
+import FiltersStoreModule from '../../../../../modules/Filters/store/FiltersStoreModule.js';
 import { SortSymbols } from '../../../../../scripts/sortQueryAdapters.js';
-import {
-  createTableStoreModule,
-} from '../../../helpers/createTableStoreModule.js';
+import { createTableStoreModule } from '../../../helpers/createTableStoreModule.js';
 
 describe('TableStoreModule', () => {
   it('correctly computes FIELDS getter', () => {
@@ -19,8 +15,7 @@ describe('TableStoreModule', () => {
 
     const state = { headers };
 
-    expect(createTableStoreModule().getters.FIELDS(state))
-    .toEqual(['id', 'age']);
+    expect(createTableStoreModule().getters.FIELDS(state)).toEqual(['id', 'age']);
   });
 });
 
@@ -32,23 +27,22 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 
   it('filters restore event triggers LOAD_DATA_LIST', async () => {
     const filters = new FiltersStoreModule()
-    .addFilter({
-      name: 'vi',
-      value: 23,
-      defaultValue: 23,
-      get: ['value'],
-      set: ['value'],
-      restore: () => 'vivi',
-    })
-    .getModule();
+      .addFilter({
+        name: 'vi',
+        value: 23,
+        defaultValue: 23,
+        get: ['value'],
+        set: ['value'],
+        restore: () => 'vivi',
+      })
+      .getModule();
 
     const table = createTableStoreModule({
       modules: { filters },
     });
 
     const mock = vi.fn();
-    vi.spyOn(table.actions, 'LOAD_DATA_LIST')
-    .mockImplementationOnce(mock);
+    vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(mock);
 
     const store = createStore({
       state: { router },
@@ -69,23 +63,22 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 
   it('FILTER_SET event triggers LOAD_DATA_LIST', async () => {
     const filters = new FiltersStoreModule()
-    .addFilter({
-      name: 'vi',
-      value: 23,
-      defaultValue: 23,
-      get: ['value'],
-      set: ['value'],
-      restore: () => {},
-    })
-    .getModule();
+      .addFilter({
+        name: 'vi',
+        value: 23,
+        defaultValue: 23,
+        get: ['value'],
+        set: ['value'],
+        restore: () => {},
+      })
+      .getModule();
 
     const table = createTableStoreModule({
       modules: { filters },
     });
 
     const mock = vi.fn();
-    vi.spyOn(table.actions, 'LOAD_DATA_LIST')
-    .mockImplementationOnce(mock);
+    vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(mock);
 
     const store = createStore({
       state: { router },
@@ -111,32 +104,31 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 
   it('FILTER_SET with not-page filter name resets page filter', async () => {
     const filters = new FiltersStoreModule()
-    .addFilter([
-      {
-        name: 'vi',
-        value: 23,
-        defaultValue: 23,
-        get: ['value'],
-        set: ['value'],
-        restore: () => {},
-      },
-      {
-        name: 'page',
-        value: 12,
-        defaultValue: 12,
-        get: ['value'],
-        set: ['value'],
-        restore: () => {},
-      },
-    ])
-    .getModule();
+      .addFilter([
+        {
+          name: 'vi',
+          value: 23,
+          defaultValue: 23,
+          get: ['value'],
+          set: ['value'],
+          restore: () => {},
+        },
+        {
+          name: 'page',
+          value: 12,
+          defaultValue: 12,
+          get: ['value'],
+          set: ['value'],
+          restore: () => {},
+        },
+      ])
+      .getModule();
 
     const table = createTableStoreModule({
       modules: { filters },
     });
 
-    vi.spyOn(table.actions, 'LOAD_DATA_LIST')
-    .mockImplementationOnce(vi.fn());
+    vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(vi.fn());
 
     const store = createStore({
       state: { router },
@@ -162,26 +154,23 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 
   it('SORT changes both headers and sort filter', async () => {
     const filters = new FiltersStoreModule()
-    .addFilter({
-      name: 'sort',
-      value: '',
-      get: ['value'],
-      set: ['value'],
-      restore: () => {},
-    })
-    .getModule();
+      .addFilter({
+        name: 'sort',
+        value: '',
+        get: ['value'],
+        set: ['value'],
+        restore: () => {},
+      })
+      .getModule();
 
-    const headers = [
-      { value: 'id', field: 'sort_me', sort: SortSymbols.NONE },
-    ];
+    const headers = [{ value: 'id', field: 'sort_me', sort: SortSymbols.NONE }];
 
     const table = createTableStoreModule({
       state: { headers },
       modules: { filters },
     });
 
-    vi.spyOn(table.actions, 'LOAD_DATA_LIST')
-    .mockImplementationOnce(vi.fn());
+    vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(vi.fn());
 
     const store = createStore({
       state: { router },
@@ -207,14 +196,14 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
 
   it('fields filter change changes headers', async () => {
     const filters = new FiltersStoreModule()
-    .addFilter({
-      name: 'fields',
-      value: [],
-      get: ['value'],
-      set: ['value'],
-      restore: () => {},
-    })
-    .getModule();
+      .addFilter({
+        name: 'fields',
+        value: [],
+        get: ['value'],
+        set: ['value'],
+        restore: () => {},
+      })
+      .getModule();
 
     const headers = [
       { value: 'surname', field: 'included', show: false },
@@ -226,8 +215,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       modules: { filters },
     });
 
-    vi.spyOn(table.actions, 'LOAD_DATA_LIST')
-    .mockImplementationOnce(vi.fn());
+    vi.spyOn(table.actions, 'LOAD_DATA_LIST').mockImplementationOnce(vi.fn());
 
     const store = createStore({
       state: { router },
@@ -244,8 +232,7 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       value: ['surname'],
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('fields'))
-    .toEqual(['surname']);
+    expect(store.getters['table/filters/GET_FILTER']('fields')).toEqual(['surname']);
 
     expect(store.getters['table/FIELDS']).toEqual(['id', 'included']);
 

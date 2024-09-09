@@ -92,7 +92,6 @@ function selectOption({ option, index }) {
 function atClickaway() {
   isOpened.value = false;
 }
-
 </script>
 
 <style lang="scss">

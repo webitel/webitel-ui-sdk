@@ -16,11 +16,7 @@ const configuration = getDefaultOpenAPIConfig();
 
 const transcriptService = new FileTranscriptServiceApiFactory(configuration, '', instance);
 
-const getTranscript = async ({
-                               id,
-                               page = 1,
-                               size = 10000,
-                             }) => {
+const getTranscript = async ({ id, page = 1, size = 10000 }) => {
   try {
     const response = await transcriptService.getFileTranscriptPhrases(id, page, size);
     const { items } = applyTransform(response.data, [
@@ -29,32 +25,22 @@ const getTranscript = async ({
     ]);
     return items;
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
-
 
 const createTranscript = async ({ callId }) => {
   const preRequestHandler = (callId) => {
     return Array.isArray(callId) ? callId : [callId];
-  }
+  };
 
-  const uuid = applyTransform(callId, [
-    preRequestHandler,
-    camelToSnake(),
-  ]);
+  const uuid = applyTransform(callId, [preRequestHandler, camelToSnake()]);
 
   try {
     const response = await transcriptService.createFileTranscript({ uuid });
-    return applyTransform(response.data, [
-      snakeToCamel(),
-    ]);
+    return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -62,23 +48,17 @@ const deleteTranscript = async (item) => {
   const preRequestHandler = ({ fileId, callId }) => {
     if (fileId) {
       return { id: Array.isArray(fileId) ? fileId : [fileId] };
-    } else {
-      return { uuid: Array.isArray(callId) ? callId : [callId] };
     }
-  }
+    return { uuid: Array.isArray(callId) ? callId : [callId] };
+  };
 
-  const body = applyTransform(item, [
-    preRequestHandler,
-    camelToSnake(),
-  ]);
+  const body = applyTransform(item, [preRequestHandler, camelToSnake()]);
 
   try {
     const response = await transcriptService.deleteFileTranscript(body);
     return applyTransform(response.data, []);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 

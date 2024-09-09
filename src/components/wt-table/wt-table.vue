@@ -156,10 +156,7 @@ export default {
       default: true,
     },
   },
-  emits: [
-    'sort',
-    'update:selected',
-  ],
+  emits: ['sort', 'update:selected'],
 
   data: () => ({}),
 
@@ -175,16 +172,19 @@ export default {
 
     dataHeaders() {
       return this.headers
-      .filter((header) => header.show === undefined || header.show)
-      .map((header) => {
-        if (!header.text && header.locale) {
-          return {
-            ...header,
-            text: typeof header.locale === 'string' ? this.$t(header.locale) : this.$t(...header.locale),
-          };
-        }
-        return header;
-      });
+        .filter((header) => header.show === undefined || header.show)
+        .map((header) => {
+          if (!header.text && header.locale) {
+            return {
+              ...header,
+              text:
+                typeof header.locale === 'string'
+                  ? this.$t(header.locale)
+                  : this.$t(...header.locale),
+            };
+          }
+          return header;
+        });
     },
 
     columnsStyle() {
@@ -248,7 +248,10 @@ export default {
         if (select) {
           this.$emit('update:selected', [...this._selected, row]);
         } else {
-          this.$emit('update:selected', this._selected.filter((item) => item !== row));
+          this.$emit(
+            'update:selected',
+            this._selected.filter((item) => item !== row),
+          );
         }
       } else {
         // for backwards compatibility
@@ -256,7 +259,6 @@ export default {
       }
     },
   },
-
 };
 </script>
 

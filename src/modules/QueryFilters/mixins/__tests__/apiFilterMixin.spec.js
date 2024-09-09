@@ -20,7 +20,9 @@ describe('API filter mixin', () => {
       filterQuery: 'team',
     }),
     computed: {
-      filterSchema() { return filterSchema; },
+      filterSchema() {
+        return filterSchema;
+      },
     },
     methods: { setValue },
   };
@@ -35,8 +37,7 @@ describe('API filter mixin', () => {
     const wrapper = shallowMount(Component, {
       global: { plugins: [router] },
     });
-    expect(setValue)
-    .toHaveBeenCalledWith({
+    expect(setValue).toHaveBeenCalledWith({
       filter: 'team',
       value: [{ id: team[0] }, { id: team[1] }],
     });

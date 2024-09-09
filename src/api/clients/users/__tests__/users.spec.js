@@ -12,9 +12,11 @@ describe('UsersAPI', () => {
   });
 
   it('correctly computes "getList" method api call', async () => {
-    const get = vi.fn(() => Promise.resolve({
-      data: {},
-    }));
+    const get = vi.fn(() =>
+      Promise.resolve({
+        data: {},
+      }),
+    );
 
     instanceMock.get = get;
 
@@ -39,14 +41,14 @@ describe('UsersAPI', () => {
           status: '',
           shouldCaseConvert: '',
         },
-      ], next: true,
+      ],
+      next: true,
     };
 
     const response = {
       data: {
-        items: [
-          { id: 1, should_case_convert: '' },
-        ], next: true,
+        items: [{ id: 1, should_case_convert: '' }],
+        next: true,
       },
     };
 
@@ -65,9 +67,11 @@ describe('UsersAPI', () => {
     };
     const url = '/users/1';
 
-    const get = vi.fn(() => Promise.resolve({
-      data: {},
-    }));
+    const get = vi.fn(() =>
+      Promise.resolve({
+        data: {},
+      }),
+    );
 
     instanceMock.get = get;
 
@@ -79,9 +83,15 @@ describe('UsersAPI', () => {
 
   it('correctly computes "get" method output', async () => {
     const output = {
-      id: 1, device: {}, devices: [], license: [], roles: [], variables: [
+      id: 1,
+      device: {},
+      devices: [],
+      license: [],
+      roles: [],
+      variables: [
         {
-          key: '', value: '',
+          key: '',
+          value: '',
         },
       ],
     };
@@ -115,9 +125,11 @@ describe('UsersAPI', () => {
 
     const url = '/users';
 
-    const post = vi.fn(() => Promise.resolve({
-      data: {},
-    }));
+    const post = vi.fn(() =>
+      Promise.resolve({
+        data: {},
+      }),
+    );
 
     instanceMock.post = post;
 
@@ -164,9 +176,11 @@ describe('UsersAPI', () => {
 
     const url = '/users/1';
 
-    const put = vi.fn(() => Promise.resolve({
-      data: {},
-    }));
+    const put = vi.fn(() =>
+      Promise.resolve({
+        data: {},
+      }),
+    );
 
     instanceMock.put = put;
 
@@ -195,8 +209,7 @@ describe('UsersAPI', () => {
 
     const UsersAPI = (await import('../users.js')).default;
 
-    expect(await UsersAPI.update({ itemInstance: {}, itemId: 1 }))
-    .toEqual(output);
+    expect(await UsersAPI.update({ itemInstance: {}, itemId: 1 })).toEqual(output);
   });
 
   it('correctly computes "patch" method api call', async () => {
@@ -213,9 +226,11 @@ describe('UsersAPI', () => {
 
     const url = '/users/1';
 
-    const patch = vi.fn(() => Promise.resolve({
-      data: {},
-    }));
+    const patch = vi.fn(() =>
+      Promise.resolve({
+        data: {},
+      }),
+    );
 
     instanceMock.patch = patch;
 
@@ -232,9 +247,11 @@ describe('UsersAPI', () => {
 
     const url = '/users/1?permanent=true';
 
-    const _delete = vi.fn(() => Promise.resolve({
-      data: {},
-    }));
+    const _delete = vi.fn(() =>
+      Promise.resolve({
+        data: {},
+      }),
+    );
 
     instanceMock.delete = _delete;
 

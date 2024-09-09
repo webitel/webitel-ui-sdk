@@ -24,9 +24,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'change',
-]);
+const emit = defineEmits(['change']);
 
 const filterQuery = 'fields';
 

@@ -248,7 +248,6 @@
 </template>
 
 <script>
-
 import VueDatepicker from '@vuepic/vue-datepicker';
 import { EngineAuditQuestionType } from 'webitel-sdk';
 import WtExpandTransition from './components/transitions/wt-expand-transition.vue';
@@ -280,17 +279,17 @@ export default {
     dark: false,
     auditQuestions: [
       {
-        'required': true,
-        'question': 'My Anketa number 1',
-        'type': EngineAuditQuestionType.Option,
-        'options': [
+        required: true,
+        question: 'My Anketa number 1',
+        type: EngineAuditQuestionType.Option,
+        options: [
           {
-            'name': 'My first var!',
-            'score': 10,
+            name: 'My first var!',
+            score: 10,
           },
           {
-            'name': 'My lorem ipsum var!',
-            'score': 10,
+            name: 'My lorem ipsum var!',
+            score: 10,
           },
         ],
       },
@@ -306,7 +305,11 @@ export default {
     date: Date.now(),
     currentTab: { value: 1 },
     switcher: true,
-    options: [{ text: 'Save as Save as Save as Save as  Save as Save as Save asSave as  Save as Save as Save as' }],
+    options: [
+      {
+        text: 'Save as Save as Save as Save as  Save as Save as Save asSave as  Save as Save as Save as',
+      },
+    ],
     active: true,
     autocomplete: [
       { name: 'Laravel5', language: 'PHP' },
@@ -518,14 +521,15 @@ export default {
   methods: {
     search(search) {
       return {
-        items: Array(10)
-        .fill({ name: search || '123' }),
+        items: Array(10).fill({ name: search || '123' }),
         next: true,
       };
     },
     load() {
       this.isLoading = true;
-      setTimeout(() => { this.isLoading = false; }, 1000);
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 1000);
     },
     log(options) {
       console.log(options);

@@ -1,6 +1,6 @@
 const CrmSections = Object.freeze({
   CONTACTS: 'contacts',
-  CONFIGURATION: 'configuration'
+  CONFIGURATION: 'configuration',
 });
 
 export default CrmSections;

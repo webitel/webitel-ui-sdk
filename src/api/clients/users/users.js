@@ -57,15 +57,11 @@ const getUsersList = async (params) => {
       merge(getDefaultGetListResponse()),
     ]);
     return {
-      items: applyTransform(items, [
-        mergeEach(defaultObject),
-      ]),
+      items: applyTransform(items, [mergeEach(defaultObject)]),
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -75,16 +71,13 @@ const getUser = async ({ itemId: id }) => {
     license: [],
     devices: [],
     device: {},
-    variables: [
-      { key: '', value: '' },
-    ],
+    variables: [{ key: '', value: '' }],
   };
 
   const itemResponseHandler = (item) => {
     const copy = deepCopy(item);
     if (copy.license) {
       copy.license.forEach((item) => {
-
         item.name = item.prod;
       });
     }
@@ -109,9 +102,7 @@ const getUser = async ({ itemId: id }) => {
       itemResponseHandler,
     ]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -142,13 +133,9 @@ const addUser = async ({ itemInstance }) => {
   ]);
   try {
     const response = await instance.post(baseUrl, item);
-    return applyTransform(response.data, [
-      snakeToCamel(['profile']),
-    ]);
+    return applyTransform(response.data, [snakeToCamel(['profile'])]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -162,49 +149,31 @@ const updateUser = async ({ itemInstance, itemId: id }) => {
   const url = `${baseUrl}/${id}`;
   try {
     const response = await instance.put(url, item);
-    return applyTransform(response.data, [
-      snakeToCamel(['profile']),
-    ]);
+    return applyTransform(response.data, [snakeToCamel(['profile'])]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
 const patchUser = async ({ changes, id }) => {
-  const body = applyTransform(changes, [
-    sanitize(fieldsToSend),
-    camelToSnake(['profile']),
-  ]);
+  const body = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake(['profile'])]);
   const url = `${baseUrl}/${id}`;
   try {
     const response = await instance.patch(url, body);
-    return applyTransform(response.data, [
-      snakeToCamel(['profile']),
-    ]);
+    return applyTransform(response.data, [snakeToCamel(['profile'])]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
 const patchUserPresence = async ({ changes, id }) => {
-  const body = applyTransform(changes, [
-    sanitize(fieldsToSend),
-    camelToSnake(['profile']),
-  ]);
+  const body = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake(['profile'])]);
   const url = `${baseUrl}/${id}/presence`;
   try {
     const response = await instance.patch(url, body);
-    return applyTransform(response.data, [
-      snakeToCamel(['profile']),
-    ]);
+    return applyTransform(response.data, [snakeToCamel(['profile'])]);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -215,16 +184,15 @@ const deleteUser = async ({ id }) => {
     const response = await instance.delete(url);
     return applyTransform(response.data, []);
   } catch (err) {
-    throw applyTransform(err, [
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
-const getUsersLookup = (params) => getUsersList({
-  ...params,
-  fields: params.fields || ['id', 'name'],
-});
+const getUsersLookup = (params) =>
+  getUsersList({
+    ...params,
+    fields: params.fields || ['id', 'name'],
+  });
 
 const logoutUser = async ({ id }) => {
   const url = `${baseUrl}/${id}/logout`;
@@ -232,10 +200,7 @@ const logoutUser = async ({ id }) => {
     const response = await instance.post(url, {});
     return applyTransform(response.data, []);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 

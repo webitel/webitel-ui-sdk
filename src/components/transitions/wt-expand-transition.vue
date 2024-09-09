@@ -10,7 +10,6 @@
 </template>
 
 <script>
-
 // https://markus.oberlehner.net/blog/transition-to-height-auto-with-vue/
 export default {
   name: 'WtExpandTransition',
@@ -36,7 +35,7 @@ export default {
 
       getComputedStyle(element).height;
 
-      requestAnimationFrame(() => element.style.height = height);
+      requestAnimationFrame(() => (element.style.height = height));
     },
     leave(element) {
       const { height } = getComputedStyle(element);
@@ -44,7 +43,7 @@ export default {
 
       getComputedStyle(element).height;
 
-      requestAnimationFrame(() => element.style.height = 0);
+      requestAnimationFrame(() => (element.style.height = 0));
     },
   },
 };

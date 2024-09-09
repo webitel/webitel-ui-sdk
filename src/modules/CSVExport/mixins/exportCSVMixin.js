@@ -14,9 +14,7 @@ export default {
       return this.CSVExport ? this.CSVExport.downloadProgress.count : 0;
     },
     selectedIds() {
-      return this.dataList
-      .filter((item) => item._isSelected)
-      .map((item) => item.id);
+      return this.dataList.filter((item) => item._isSelected).map((item) => item.id);
     },
     isAnySelected() {
       return !!this.selectedIds.length;
@@ -31,7 +29,7 @@ export default {
     async exportCSV(exportParams) {
       const routeQuery = this.$route?.query;
       const params = {
-        ...exportParams || routeQuery,
+        ...(exportParams || routeQuery),
         size: 5000,
       };
       if (this.isAnySelected) params.id = this.selectedIds;
@@ -41,7 +39,6 @@ export default {
       } catch (err) {
         throw err;
       }
-
     },
   },
 };

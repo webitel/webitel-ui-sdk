@@ -24,7 +24,10 @@ describe('URL Controller mixin Set and Get operations', () => {
   });
 
   it('Array of objects', async () => {
-    const value = [{ name: 'team 1', id: '1' }, { name: 'team 2', id: '2' }];
+    const value = [
+      { name: 'team 1', id: '1' },
+      { name: 'team 2', id: '2' },
+    ];
     await wrapper.vm.setValueToQuery({ filterQuery, value });
     const queryValue = wrapper.vm.getValueFromQuery({ filterQuery });
     expect(queryValue).toEqual(['1', '2']);

@@ -5,18 +5,13 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -59,7 +54,7 @@ export default {
     downloadAll: 'Завантажити все',
     warning: 'Попередження',
     doNotSave: 'Не зберігати',
-    required: 'Обов\'язковий',
+    required: "Обов'язковий",
     copy: 'Скопіювати',
     new: 'Новий',
     createdAt: 'Створено',
@@ -118,7 +113,7 @@ export default {
     supervisor: 'Супервізор | Супервізори',
     auditor: 'Аудитор | Аудитори',
     region: 'Регіон | Регіони',
-    communicationType: 'Тип зв\'язку | Типи зв\'язку',
+    communicationType: "Тип зв'язку | Типи зв'язку",
     grantee: 'Отримувач | Отримувачі',
     user: 'Користувач | Користувачі',
     queue: {
@@ -128,7 +123,7 @@ export default {
         [QueueType.OUTBOUND_IVR_QUEUE]: 'Вихідний IVR',
         [QueueType.PREDICTIVE_DIALER]: 'Предиктивний обзвін',
         [QueueType.PROGRESSIVE_DIALER]: 'Прогресивний обзвін',
-        [QueueType.PREVIEW_DIALER]: 'Прев\'ю обзвін',
+        [QueueType.PREVIEW_DIALER]: "Прев'ю обзвін",
         [QueueType.CHAT_INBOUND_QUEUE]: 'Черга чатів',
         [QueueType.INBOUND_JOB_QUEUE]: 'Вхідна черга завдань',
         [QueueType.OUTBOUND_JOB_QUEUE]: 'Вихідна черга завдань',
@@ -168,7 +163,7 @@ export default {
       [ChannelState.Offering]: 'Розподіл',
       [ChannelState.Answered]: 'Прийнятий',
       [ChannelState.Active]: 'Активний',
-      [ChannelState.Bridged]: 'З\'єднаний',
+      [ChannelState.Bridged]: "З'єднаний",
       [ChannelState.Hold]: 'Утримання',
       [ChannelState.Missed]: 'Пропущений',
       [snakeToCamel(ChannelState.WrapTime)]: 'Постобробка',
@@ -230,7 +225,7 @@ export default {
         [AdminSections.BLACKLIST]: 'Cписки',
         [AdminSections.CALENDARS]: 'Календарі',
         [AdminSections.REGIONS]: 'Розташування',
-        [AdminSections.COMMUNICATIONS]: 'Типи зв\'язку',
+        [AdminSections.COMMUNICATIONS]: "Типи зв'язку",
         [AdminSections.PAUSE_CAUSE]: 'Статуси оператора',
         [AdminSections.AGENTS]: 'Оператори',
         [AdminSections.TEAMS]: 'Команди',
@@ -252,7 +247,7 @@ export default {
     },
   },
   validation: {
-    required: 'Обов\'язкове поле',
+    required: "Обов'язкове поле",
     numeric: 'Необхідно ввести цифрові значення',
     email: 'Необхідно ввести адресу електронної пошти',
     gatewayHostValidator: 'Необхідно ввести IPv4 або FQDN',
@@ -360,7 +355,8 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Підтвердіть видалення',
-      askingAlert: 'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
+      askingAlert:
+        'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
       deleteAll: 'ВСІ',
     },
     dummy: {

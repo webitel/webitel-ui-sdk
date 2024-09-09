@@ -66,9 +66,7 @@ export default {
       description: 'Object with props, passed down to wt-label as props',
     },
   },
-  emits: [
-    'change',
-  ],
+  emits: ['change'],
   methods: {
     inputHandler() {
       this.$emit('change', !this.value);

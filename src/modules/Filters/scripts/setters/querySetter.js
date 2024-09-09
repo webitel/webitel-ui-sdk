@@ -1,7 +1,6 @@
 import changeRouteQuery from '../utils/changeRouteQuery.js';
 
-const isObject = (value) => typeof value === 'object' &&
-  !Array.isArray(value) && value !== null;
+const isObject = (value) => typeof value === 'object' && !Array.isArray(value) && value !== null;
 
 const handlePrimitive = ({ value }) => value;
 
@@ -17,25 +16,28 @@ const handleArray = ({ value, storedProp }) => {
   }
 };
 
-const querySetter = (context) => (router) => async (rawValue = context.value) => {
-  const { name: filterQuery, storedProp } = context;
+const querySetter =
+  (context) =>
+  (router) =>
+  async (rawValue = context.value) => {
+    const { name: filterQuery, storedProp } = context;
 
-  let value = '';
+    let value = '';
 
-  if (Array.isArray(rawValue)) {
-    value = handleArray({ value: rawValue, storedProp });
-  } else if (isObject(rawValue)) {
-    value = handleObject({ value: rawValue, storedProp });
-  } else {
-    value = handlePrimitive({ value: rawValue });
-  }
+    if (Array.isArray(rawValue)) {
+      value = handleArray({ value: rawValue, storedProp });
+    } else if (isObject(rawValue)) {
+      value = handleObject({ value: rawValue, storedProp });
+    } else {
+      value = handlePrimitive({ value: rawValue });
+    }
 
-  await changeRouteQuery(router)({
-    filterQuery,
-    value,
-  });
+    await changeRouteQuery(router)({
+      filterQuery,
+      value,
+    });
 
-  return context;
-};
+    return context;
+  };
 
 export default querySetter;

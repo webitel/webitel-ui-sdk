@@ -16,7 +16,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'WtNotification',
   props: {
@@ -41,7 +40,7 @@ export default {
       }
     },
     notificationIconColor() {
-      return this.type || ''
+      return this.type || '';
     },
   },
 };

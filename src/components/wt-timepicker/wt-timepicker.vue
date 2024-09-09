@@ -129,9 +129,7 @@ export default {
     },
     sec: {
       get() {
-        return this.dateMode
-          ? new Date(+this.value).getSeconds()
-          : Math.floor(this.value % 60);
+        return this.dateMode ? new Date(+this.value).getSeconds() : Math.floor(this.value % 60);
       },
       set(value) {
         const newValue = this.dateMode

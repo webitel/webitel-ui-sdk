@@ -1,8 +1,8 @@
 import { CallActions, ChatActions, JobState } from 'webitel-sdk';
 import i18n from '../../../locale/i18n.js';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
-import endChatSound from '../assets/audio/end-chat.wav';
 import endCallSound from '../assets/audio/end-call.mp3';
+import endChatSound from '../assets/audio/end-chat.wav';
 import newChatSound from '../assets/audio/new-chat.wav';
 import newMessageSound from '../assets/audio/new-message.wav';
 import ringingSound from '../assets/audio/ringing.mp3';
@@ -45,8 +45,7 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
   getters = {
     IS_MAIN_TAB: (state) => state.thisTabId === state.currentTabId,
-    IS_SOUND_ALLOWED: (state, getters) => getters.IS_MAIN_TAB &&
-      !state.currentlyPlaying,
+    IS_SOUND_ALLOWED: (state, getters) => getters.IS_MAIN_TAB && !state.currentlyPlaying,
   };
 
   actions = {
@@ -102,32 +101,30 @@ export default class NotificationsStoreModule extends BaseStoreModule {
     },
 
     // public
-    INITIALIZE: (context) => Promise
-    .allSettled([
-      context.dispatch('_SETUP_THIS_TAB_ID'),
-      context.dispatch('_SETUP_UNREAD_COUND_BROADCAST_LISTENING'),
-      context.dispatch('_SUBSCRIBE_TAB_CLOSING'),
-    ]),
+    INITIALIZE: (context) =>
+      Promise.allSettled([
+        context.dispatch('_SETUP_THIS_TAB_ID'),
+        context.dispatch('_SETUP_UNREAD_COUND_BROADCAST_LISTENING'),
+        context.dispatch('_SUBSCRIBE_TAB_CLOSING'),
+      ]),
 
-    DESTROY: (context) => Promise
-    .allSettled([
-      context.dispatch('STOP_SOUND'),
-      context.dispatch('_REMOVE_CURRENT_TAB_ID'),
-    ]),
+    DESTROY: (context) =>
+      Promise.allSettled([
+        context.dispatch('STOP_SOUND'),
+        context.dispatch('_REMOVE_CURRENT_TAB_ID'),
+      ]),
 
-    PLAY_SOUND: (context, {
-      action,
-      sound = getNotificationSound(action),
-    }) => {
-      if (context.getters.IS_SOUND_ALLOWED
-        && !localStorage.getItem('wtIsPlaying')
-      ) {
-
+    PLAY_SOUND: (context, { action, sound = getNotificationSound(action) }) => {
+      if (context.getters.IS_SOUND_ALLOWED && !localStorage.getItem('wtIsPlaying')) {
         const audio = sound instanceof Audio ? sound : new Audio(sound);
 
-        audio.addEventListener('ended', () => {
-          context.dispatch('STOP_SOUND');
-        }, { once: true });
+        audio.addEventListener(
+          'ended',
+          () => {
+            context.dispatch('STOP_SOUND');
+          },
+          { once: true },
+        );
 
         if (action === CallActions.Ringing) audio.loop = true;
 
@@ -139,23 +136,29 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
     STOP_SOUND: (context) => {
       const { currentlyPlaying } = context.state;
-      if (currentlyPlaying && currentlyPlaying instanceof
-        Audio) currentlyPlaying.pause();
+      if (currentlyPlaying && currentlyPlaying instanceof Audio) currentlyPlaying.pause();
       localStorage.removeItem('wtIsPlaying');
       context.commit('RESET_CURRENTLY_PLAYING');
     },
 
-    SEND_NOTIFICATION: (context, {
-      locale,
-      text = i18n.t(locale),
-      icon = notificationIcon,
-      interval = NOTIFICATION_VISIBLE_INTERVAL,
-    }) => {
+    SEND_NOTIFICATION: (
+      context,
+      {
+        locale,
+        text = i18n.t(locale),
+        icon = notificationIcon,
+        interval = NOTIFICATION_VISIBLE_INTERVAL,
+      },
+    ) => {
       const notification = new Notification(text, { icon });
 
-      notification.addEventListener('click', () => {
-        window.focus();
-      }, { once: true });
+      notification.addEventListener(
+        'click',
+        () => {
+          window.focus();
+        },
+        { once: true },
+      );
 
       setTimeout(() => {
         notification.close();

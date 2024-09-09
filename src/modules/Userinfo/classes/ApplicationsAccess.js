@@ -1,14 +1,10 @@
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
-import AdminSections
-  from '../../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
+import SupervisorSections from '../../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
 
 const applicationsAccess = (value = true) => ({
   [WebitelApplications.AGENT]: {
@@ -196,16 +192,13 @@ export default class ApplicationsAccess {
   constructor({ access, value } = { value: true }) {
     /* if access, deeply merge with falsy values schema
      if no access, "not configured => full permissions" */
-    this.access = access
-      ? ApplicationsAccess.restore(access)
-      : applicationsAccess(value);
+    this.access = access ? ApplicationsAccess.restore(access) : applicationsAccess(value);
   }
 
   // minify schema for API sending
   static minify(access) {
     const rmEmptyKeys = (obj) => {
       Object.keys(obj).forEach((key) => {
-
         if (!obj[key] || key === '_locale') delete obj[key];
         if (typeof obj[key] === 'object') {
           rmEmptyKeys(obj[key]);

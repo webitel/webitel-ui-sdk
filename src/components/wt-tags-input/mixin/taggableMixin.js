@@ -6,17 +6,18 @@ export default {
     tag(searchQuery, id) {
       this.emitTagEvent(searchQuery, id);
 
-      const tag = this.trackBy ? {
-        [this.optionLabel || 'name']: searchQuery,
-        [this.trackBy]: id || searchQuery,
-      } : searchQuery;
+      const tag = this.trackBy
+        ? {
+            [this.optionLabel || 'name']: searchQuery,
+            [this.trackBy]: id || searchQuery,
+          }
+        : searchQuery;
 
       const isTagExist = (newTag) => {
         if (typeof newTag === 'string') {
           return this.options.some((elem) => elem === newTag);
         }
-        return this.options.some((elem) => elem[this.trackBy] ===
-          newTag[this.trackBy]);
+        return this.options.some((elem) => elem[this.trackBy] === newTag[this.trackBy]);
       };
 
       if (isTagExist(tag)) return;
@@ -33,4 +34,3 @@ export default {
     },
   },
 };
-

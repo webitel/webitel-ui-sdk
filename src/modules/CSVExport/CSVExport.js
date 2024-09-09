@@ -6,8 +6,7 @@ const cast = {
   object: (separator) => {
     const cast = (object) => {
       if (Array.isArray(object)) {
-        return object.map((item) => cast(item))
-        .join(separator);
+        return object.map((item) => cast(item)).join(separator);
       }
       return object.name || JSON.stringify(object);
     };
@@ -34,8 +33,7 @@ export default class CSVExport {
       header: true,
       delimiter,
     };
-    const localStorageOptions = JSON.parse(localStorage.getItem('csv-export-options')) ||
-      {};
+    const localStorageOptions = JSON.parse(localStorage.getItem('csv-export-options')) || {};
     return {
       ...defaultOptions,
       ...localStorageOptions,
@@ -59,12 +57,10 @@ export default class CSVExport {
     let csv = '';
     let isNext = false;
     // why _columns? https://webitel.atlassian.net/browse/DEV-3797
-    let columns = params._columns ||
-      (params?.fields ? objSnakeToCamel(params?.fields) : []);
+    let columns = params._columns || (params?.fields ? objSnakeToCamel(params?.fields) : []);
     let page = 1;
 
     do {
-
       const { items, next } = await this.fetchMethod({
         ...params,
         page,

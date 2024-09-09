@@ -60,32 +60,28 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'change:question',
-  'change:result',
-]);
+const emit = defineEmits(['change:question', 'change:result']);
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { question } = toRefs(props);
 
 const v$ = useVuelidate(
-  computed(() => (
-    {
-      question: {
-        min: {
-          minValue: minValue(0),
-          maxValue: maxValue(9),
-          required,
-          integer,
-        },
-        max: {
-          minValue: minValue(props.question.min ? props.question.min : 1),
-          maxValue: maxValue(10),
-          required,
-          integer,
-        },
+  computed(() => ({
+    question: {
+      min: {
+        minValue: minValue(0),
+        maxValue: maxValue(9),
+        required,
+        integer,
       },
-    })),
+      max: {
+        minValue: minValue(props.question.min ? props.question.min : 1),
+        maxValue: maxValue(10),
+        required,
+        integer,
+      },
+    },
+  })),
   { question },
   { $autoDirty: true },
 );

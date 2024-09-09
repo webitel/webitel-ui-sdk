@@ -13,7 +13,8 @@ const headers = [
     show: true,
     sort: null,
     field: 'queue',
-  }, {
+  },
+  {
     value: 'agents',
     show: true,
     sort: null,
@@ -27,7 +28,8 @@ const sortedHeaders = [
     show: true,
     sort: 'asc',
     field: 'queue',
-  }, {
+  },
+  {
     value: 'agents',
     show: true,
     sort: null,

@@ -1,7 +1,6 @@
 import mitt from 'mitt';
 import isEmpty from '../../../scripts/isEmpty.js';
-import BaseStoreModule
-  from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import BaseFilterSchema from '../classes/BaseFilterSchema.js';
 import FilterEvent from '../enums/FilterEvent.enum.js';
 
@@ -15,17 +14,19 @@ export default class FiltersStoreModule extends BaseStoreModule {
     ROUTER: (state, g, rootState) => {
       if (!state._requireRouter) return null;
       if (rootState.router === undefined) {
-        throw new Error('"rootState.router" is needed for filters to work properly.' +
-          ' Please, provide to root state, or setup it in filters module as getter "ROUTER"');
+        throw new Error(
+          '"rootState.router" is needed for filters to work properly.' +
+            ' Please, provide to root state, or setup it in filters module as getter "ROUTER"',
+        );
       }
       return rootState.router;
     },
 
     _STATE_FILTER_NAMES: (state) => {
-      return Object.values(state)
-      .reduce((names, prop) => prop.value || prop.name
-        ? [...names, prop.name]
-        : names, []);
+      return Object.values(state).reduce(
+        (names, prop) => (prop.value || prop.name ? [...names, prop.name] : names),
+        [],
+      );
     },
 
     // get value of specific filter
@@ -45,23 +46,27 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
     // get all filters values
     GET_FILTERS: (state, getters) => () => {
-      return getters._STATE_FILTER_NAMES
-      .reduce((values, filterName) => {
+      return getters._STATE_FILTER_NAMES.reduce((values, filterName) => {
         const filterValue = getters.GET_FILTER(filterName);
-        return isEmpty(filterValue) ? values : {
-          ...values,
-          [filterName]: filterValue,
-        };
+        return isEmpty(filterValue)
+          ? values
+          : {
+              ...values,
+              [filterName]: filterValue,
+            };
       }, {});
     },
   };
 
   actions = {
-    SET_FILTER: async (context, {
-      name,
-      value,
-      silent = false, // if true, don't call ON_FILTER_SET event
-    }) => {
+    SET_FILTER: async (
+      context,
+      {
+        name,
+        value,
+        silent = false, // if true, don't call ON_FILTER_SET event
+      },
+    ) => {
       const filter = context.state[name];
 
       await filter.set(value, {
@@ -74,13 +79,14 @@ export default class FiltersStoreModule extends BaseStoreModule {
         value: context.getters.GET_FILTER(name),
       });
 
-      if (!silent) await context.dispatch('EMIT', {
-        event: FilterEvent.FILTER_SET,
-        payload: {
-          name,
-          value: context.getters.GET_FILTER(name),
-        },
-      });
+      if (!silent)
+        await context.dispatch('EMIT', {
+          event: FilterEvent.FILTER_SET,
+          payload: {
+            name,
+            value: context.getters.GET_FILTER(name),
+          },
+        });
     },
 
     RESTORE_FILTER: async (context, { name }) => {
@@ -90,18 +96,20 @@ export default class FiltersStoreModule extends BaseStoreModule {
       });
 
       if (value) {
-        await context.dispatch('SET_FILTER', ({
+        await context.dispatch('SET_FILTER', {
           name,
           value,
           silent: true,
-        }));
+        });
       }
     },
 
     RESTORE_FILTERS: async (context) => {
-      await Promise.allSettled(context.getters._STATE_FILTER_NAMES.map((name) => {
-        return context.dispatch('RESTORE_FILTER', { name });
-      }));
+      await Promise.allSettled(
+        context.getters._STATE_FILTER_NAMES.map((name) => {
+          return context.dispatch('RESTORE_FILTER', { name });
+        }),
+      );
 
       return context.dispatch('EMIT', {
         event: FilterEvent.RESTORED,
@@ -109,16 +117,17 @@ export default class FiltersStoreModule extends BaseStoreModule {
       });
     },
 
-    RESET_FILTERS: (context) => Promise.allSettled(
-      context.getters._FILTER_NAMES.map((name) => {
-        const filter = context.state[name];
+    RESET_FILTERS: (context) =>
+      Promise.allSettled(
+        context.getters._FILTER_NAMES.map((name) => {
+          const filter = context.state[name];
 
-        return context.dispatch('SET_FILTER', {
-          filter,
-          value: filter.defaultValue,
-        });
-      }),
-    ),
+          return context.dispatch('SET_FILTER', {
+            filter,
+            value: filter.defaultValue,
+          });
+        }),
+      ),
 
     SUBSCRIBE: (context, { event, callback }) => {
       const subscribe = () => context.state._emitter.on(event, callback);
@@ -135,10 +144,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
         const wildcardListeners = context.state._emitter.all.get('*');
         const eventListeners = context.state._emitter.all.get(event);
 
-        const listeners = [
-          ...(wildcardListeners || []),
-          ...(eventListeners || []),
-        ];
+        const listeners = [...(wildcardListeners || []), ...(eventListeners || [])];
 
         if (!listeners) {
           console.info(`No listeners for ${event} event`);
@@ -175,4 +181,4 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
     return this;
   }
-};
+}

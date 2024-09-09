@@ -40,8 +40,7 @@ describe('FilterFromTo Filter', () => {
     const value = 10;
     await router.replace({ query: { [`${filterQuery}From`]: value } });
     const setValueMock = vi.fn();
-    vi.spyOn(baseFilterMixin.methods, 'setValue')
-    .mockImplementation(setValueMock);
+    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementation(setValueMock);
     shallowMount(FilterFromTo, mountOptions);
     expect(setValueMock).toHaveBeenNthCalledWith(1, {
       filter: filterQuery,
@@ -52,8 +51,7 @@ describe('FilterFromTo Filter', () => {
     const value = 10;
     await router.replace({ query: { [`${filterQuery}To`]: value } });
     const setValueMock = vi.fn();
-    vi.spyOn(baseFilterMixin.methods, 'setValue')
-    .mockImplementation(setValueMock);
+    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementation(setValueMock);
     shallowMount(FilterFromTo, mountOptions);
     expect(setValueMock).toHaveBeenNthCalledWith(2, {
       filter: filterQuery,

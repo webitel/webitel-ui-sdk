@@ -81,7 +81,8 @@ export default {
             this.wrapperShown = value;
           }, 200); // 200 -> 0.2s css var(--transition); duration
         }
-      }, immediate: true,
+      },
+      immediate: true,
     },
   },
 };

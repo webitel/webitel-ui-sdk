@@ -136,8 +136,9 @@ export default {
       // cant test this thing cause vue test utils doesnt render elements width :/
       const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
       const inputEl = this.$refs['wt-textarea'];
-      const defaultInputPadding = getComputedStyle(document.documentElement)
-      .getPropertyValue('--textarea-padding');
+      const defaultInputPadding = getComputedStyle(document.documentElement).getPropertyValue(
+        '--textarea-padding',
+      );
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
     },
   },

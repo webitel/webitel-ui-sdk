@@ -1,7 +1,6 @@
 import deepCopy from 'deep-copy';
 import set from 'lodash/set.js';
-import BaseStoreModule
-  from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 
 export default class CardStoreModule extends BaseStoreModule {
   state = {
@@ -69,10 +68,7 @@ export default class CardStoreModule extends BaseStoreModule {
     },
   };
 
-  getModule({
-              state = {},
-              ...rest
-            } = {}) {
+  getModule({ state = {}, ...rest } = {}) {
     this.state = {
       ...this.state,
       ...state,

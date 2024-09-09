@@ -3,7 +3,9 @@ import debounce from '../debounce.js';
 describe('debounce', () => {
   it('debounces call', async () => {
     let isFnCalled = false;
-    let fn = () => { isFnCalled = true; };
+    let fn = () => {
+      isFnCalled = true;
+    };
     fn = debounce(fn, 50);
     fn();
     expect(isFnCalled).toBeFalsy();
