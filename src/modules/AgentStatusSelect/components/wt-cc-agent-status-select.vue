@@ -4,7 +4,7 @@
       :status="status"
       :status-duration="statusDuration"
       @closed="handleClosed"
-      @change="handleStatusSelectInput"
+      @change="handleSelectInput"
     />
     <pause-cause-popup
       v-if="isPauseCausePopup"
@@ -54,6 +54,7 @@ const PauseCauseAPI = PauseCauseAPIFactory(api);
 const isPauseCausePopup = ref(false);
 const pauseCauses = ref([]);
 const error = ref(null);
+const chosenStatus = ref('');
 
 function openPauseCausePopup() {
   isPauseCausePopup.value = true;
@@ -83,21 +84,33 @@ async function changeStatus({ status, pauseCause }) {
   }
 }
 
-async function handleStatusSelectInput(status) {
-  if (status === props.status) return;
-
+async function handleStatus(status) {
   if (status === AgentStatus.PAUSE) {
     await loadPauseCauses();
     if (pauseCauses.value.length) {
       openPauseCausePopup();
+      return;
     }
-  } else {
-    await changeStatus({ status });
   }
+  if (status === props.status) return;
+  await changeStatus({ status });
+}
+
+function handleSelectInput(newStatus) {
+  handleStatus(newStatus);
+  chosenStatus.value = newStatus;
+  // we need to save changes which come from input, because sometimes we want
+  // to choose 'pause' repeatedly and have to check the previous status
 }
 
 function handleClosed(event) {
-  return handleStatusSelectInput(event.value);
+  // sometimes we want to choose 'pause' repeatedly
+  // but 'change' event from wt-status-select can't give us the same value,
+  // in this case we have to use value from 'closed' event to choose 'pause' status
+  if ((event.value === chosenStatus.value || !chosenStatus.value) // if closed status the same as chosen, or chosen status is empty
+    && event.value === AgentStatus.PAUSE) { // and only for 'pause' status
+    handleStatus(event.value);
+  }
 }
 
 function handlePauseCauseInput(pauseCause) {
