@@ -40,10 +40,8 @@ describe('Search Filter', () => {
     const search = 'jest';
     await router.replace({ query: { [filterQuery]: search } });
     const setValueMock = vi.fn();
-    vi.spyOn(baseFilterMixin.methods, 'setValue')
-    .mockImplementationOnce(setValueMock);
+    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
     shallowMount(SearchFilter, mountOptions);
-    expect(setValueMock)
-    .toHaveBeenCalledWith({ filter: filterQuery, value: search });
+    expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value: search });
   });
 });

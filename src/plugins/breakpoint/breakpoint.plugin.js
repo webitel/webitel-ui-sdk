@@ -37,15 +37,10 @@ const breakpoint = reactive({
   width: 0,
 });
 
-const getClientWidth = () => Math.max(
-  document.documentElement.clientWidth,
-  window.innerWidth || 0,
-);
+const getClientWidth = () => Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
-const getClientHeight = () => Math.max(
-  document.documentElement.clientHeight,
-  window.innerHeight || 0,
-);
+const getClientHeight = () =>
+  Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 const thresholds = {
   xs: 600,
@@ -62,9 +57,9 @@ const onResize = () => {
 
   const xs = width < thresholds.xs;
   const sm = width < thresholds.sm && !xs;
-  const md = width < (thresholds.md - scrollBarWidth) && !(sm || xs);
-  const lg = width < (thresholds.lg - scrollBarWidth) && !(md || sm || xs);
-  const xl = width >= (thresholds.lg - scrollBarWidth);
+  const md = width < thresholds.md - scrollBarWidth && !(sm || xs);
+  const lg = width < thresholds.lg - scrollBarWidth && !(md || sm || xs);
+  const xl = width >= thresholds.lg - scrollBarWidth;
 
   breakpoint.height = height;
   breakpoint.width = width;
@@ -88,16 +83,16 @@ const onResize = () => {
   breakpoint.xlOnly = xl;
 
   switch (true) {
-    case (xs):
+    case xs:
       breakpoint.name = 'xs';
       break;
-    case (sm):
+    case sm:
       breakpoint.name = 'sm';
       break;
-    case (md):
+    case md:
       breakpoint.name = 'md';
       break;
-    case (lg):
+    case lg:
       breakpoint.name = 'lg';
       break;
     default:
@@ -106,7 +101,7 @@ const onResize = () => {
   }
 
   if (typeof mobileBreakpoint === 'number') {
-    breakpoint.mobile = width < parseInt(mobileBreakpoint, 10);
+    breakpoint.mobile = width < Number.parseInt(mobileBreakpoint, 10);
 
     return;
   }

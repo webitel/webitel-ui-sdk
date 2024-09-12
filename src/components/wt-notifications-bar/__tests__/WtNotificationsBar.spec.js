@@ -16,7 +16,8 @@ describe('WtNotificationsBar', () => {
       global: { provide: { $eventBus: eventBus } },
     });
     wrapper.vm.$eventBus.$emit('notification', {
-      type: 'error', text: 'error',
+      type: 'error',
+      text: 'error',
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.findAllComponents(WtNotification).length).toBe(1);
@@ -27,7 +28,8 @@ describe('WtNotificationsBar', () => {
       global: { provide: { $eventBus: eventBus } },
     });
     wrapper.vm.$eventBus.$emit('notification', {
-      type: 'error', text: 'error',
+      type: 'error',
+      text: 'error',
     });
     await wrapper.vm.$nextTick();
     wrapper.findComponent(WtNotification).vm.$emit('close');
@@ -41,7 +43,8 @@ describe('WtNotificationsBar', () => {
       data: () => ({ notificationDuration: 100 }),
     });
     wrapper.vm.$eventBus.$emit('notification', {
-      type: 'error', text: 'error',
+      type: 'error',
+      text: 'error',
     });
     setTimeout(() => {
       expect(wrapper.findAllComponents(WtNotification).length).toBe(0);

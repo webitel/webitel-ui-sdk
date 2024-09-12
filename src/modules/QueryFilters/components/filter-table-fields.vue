@@ -84,11 +84,7 @@ export default {
 
     // copy-pasted params from "setValueArrayToQuery method
     // for easier future refactors, if method should be abstract
-    setToLocalStorage({
-                        filterQuery,
-                        value,
-                        storedProp = 'id',
-                      }) {
+    setToLocalStorage({ filterQuery, value, storedProp = 'id' }) {
       const filter = value.map((item) => item[storedProp]);
       localStorage.setItem(`${this.entity}-${filterQuery}`, filter);
     },

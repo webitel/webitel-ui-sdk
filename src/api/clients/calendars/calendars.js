@@ -21,27 +21,13 @@ const configuration = getDefaultOpenAPIConfig();
 const calendarService = new CalendarServiceApiFactory(configuration, '', instance);
 
 const getCalendarList = async (params) => {
-  const {
-    page,
-    size,
-    search,
-    sort,
-    fields,
-    id,
-  } = applyTransform(params, [
+  const { page, size, search, sort, fields, id } = applyTransform(params, [
     merge(getDefaultGetParams()),
     starToSearch('search'),
   ]);
 
   try {
-    const response = await calendarService.searchCalendar(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-    );
+    const response = await calendarService.searchCalendar(page, size, search, sort, fields, id);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -51,10 +37,7 @@ const getCalendarList = async (params) => {
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -79,7 +62,6 @@ const getCalendar = async ({ itemId: id }) => {
       end: accept.endTimeOfDay || 0,
     }));
     if (copy.excepts) {
-
       copy.excepts = copy.excepts.map((except) => ({
         name: except.name || '',
         date: except.date || 0,
@@ -94,15 +76,9 @@ const getCalendar = async ({ itemId: id }) => {
 
   try {
     const response = await calendarService.readCalendar(id);
-    return applyTransform(response.data, [
-      snakeToCamel(),
-      itemResponseHandler,
-    ]);
+    return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -150,14 +126,9 @@ const addCalendar = async ({ itemInstance }) => {
   ]);
   try {
     const response = await calendarService.createCalendar(item);
-    return applyTransform(response.data, [
-      snakeToCamel(),
-    ]);
+    return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -169,14 +140,9 @@ const updateCalendar = async ({ itemInstance, itemId: id }) => {
   ]);
   try {
     const response = await calendarService.updateCalendar(id, item);
-    return applyTransform(response.data, [
-      snakeToCamel(),
-    ]);
+    return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
@@ -185,40 +151,24 @@ const deleteCalendar = async ({ id }) => {
     const response = await calendarService.deleteCalendar(id);
     return applyTransform(response.data, []);
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 
-const getCalendarsLookup = (params) => getCalendarList({
-  ...params,
-  fields: params.fields || ['id', 'name'],
-});
+const getCalendarsLookup = (params) =>
+  getCalendarList({
+    ...params,
+    fields: params.fields || ['id', 'name'],
+  });
 
 const getTimezonesLookup = async (params) => {
-  const {
-    page,
-    size,
-    search,
-    sort,
-    fields,
-    id,
-  } = applyTransform(params, [
+  const { page, size, search, sort, fields, id } = applyTransform(params, [
     merge(getDefaultGetParams()),
     starToSearch('search'),
   ]);
 
   try {
-    const response = await calendarService.searchTimezones(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-    );
+    const response = await calendarService.searchTimezones(page, size, search, sort, fields, id);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -228,10 +178,7 @@ const getTimezonesLookup = async (params) => {
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [
-
-      notify,
-    ]);
+    throw applyTransform(err, [notify]);
   }
 };
 

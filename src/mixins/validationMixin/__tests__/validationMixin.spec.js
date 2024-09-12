@@ -4,8 +4,7 @@ import validationMixin from '../validationMixin.js';
 describe('Validation mixin', () => {
   let wrapper;
   const Component = {
-    render() {
-    },
+    render() {},
     mixins: [validationMixin],
   };
 

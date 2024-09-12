@@ -45,8 +45,8 @@ const props = defineProps({
     type: String,
     required: true,
     /*
-    * Available options: ['create', 'fill']
-    *  */
+     * Available options: ['create', 'fill']
+     *  */
   },
   questions: {
     type: Array,
@@ -61,11 +61,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'update:questions',
-  'update:result',
-  'update:validation',
-]);
+const emit = defineEmits(['update:questions', 'update:result', 'update:validation']);
 
 const v$ = useVuelidate();
 
@@ -131,9 +127,8 @@ function initQuestions() {
 async function atQuestionAdded() {
   // wait for new question to render
   await nextTick();
-  const index = isQuestionAdded.index && isQuestionAdded.index === 'last'
-    ? -1
-    : isQuestionAdded.index;
+  const index =
+    isQuestionAdded.index && isQuestionAdded.index === 'last' ? -1 : isQuestionAdded.index;
   auditQuestions.value.at(index).activateQuestion();
 
   isQuestionAdded.value = false;
@@ -154,10 +149,13 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 
 watch(v$, () => emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }));
 watchEffect(initResult);
-watch(() => props.questions, () => {
-  if (!isQuestionAdded.value) return;
-  atQuestionAdded();
-});
+watch(
+  () => props.questions,
+  () => {
+    if (!isQuestionAdded.value) return;
+    atQuestionAdded();
+  },
+);
 
 onMounted(() => {
   initQuestions();

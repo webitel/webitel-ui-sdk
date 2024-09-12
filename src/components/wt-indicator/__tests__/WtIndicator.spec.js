@@ -23,7 +23,8 @@ describe('WtIndicator', () => {
         color: 'primary',
       },
     });
-    expect(wrapper.find('.wt-indicator__indicator').classes())
-    .toContain('wt-indicator__indicator--primary');
+    expect(wrapper.find('.wt-indicator__indicator').classes()).toContain(
+      'wt-indicator__indicator--primary',
+    );
   });
 });

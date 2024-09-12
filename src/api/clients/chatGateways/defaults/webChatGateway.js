@@ -1,5 +1,4 @@
-import ChatGatewayProvider
-  from '../../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import defaultChatGateway from '../defaults/defaultChatGateway.js';
 import WebchatAlternativeChannel from '../enums/WebchatAlternativeChannel.enum.js';
 
@@ -57,17 +56,16 @@ const webChatGateway = (_btnCodeDirty = false) => ({
       flow: {},
       id: '',
     },
-    alternativeChannels: Object
-    .values(WebchatAlternativeChannel)
-    .reduce((channels, channel) => (
-      {
+    alternativeChannels: Object.values(WebchatAlternativeChannel).reduce(
+      (channels, channel) => ({
         ...channels,
         [channel]: {
           url: '',
           enabled: false,
         },
-      }
-    ), {}),
+      }),
+      {},
+    ),
   },
 });
 

@@ -8,7 +8,7 @@ const prettifyPauseCauseDuration = (min) => {
 };
 
 const isDurationOverflow = ({ durationMin, limitMin }) => {
-  return (durationMin > limitMin) && limitMin !== 0;
+  return durationMin > limitMin && limitMin !== 0;
 };
 
 const duration = ({ durationMin, limitMin }) => {
@@ -19,19 +19,21 @@ const duration = ({ durationMin, limitMin }) => {
 
 const pauseCauseProgressColor = ({ durationMin, limitMin }) => {
   if (isDurationOverflow({ durationMin, limitMin })) return 'error';
-  if (durationMin <= (limitMin * 0.75)) return 'success';
+  if (durationMin <= limitMin * 0.75) return 'success';
   return 'primary';
 };
 
 // eslint-disable-next-line import/prefer-default-export
 export const useRepresentableAgentPauseCause = (pauseCauses) => {
-  const representablePauseCause = computed(() => pauseCauses.value.map((pauseCause) => ({
-    ...pauseCause,
-    duration: duration(pauseCause),
-    progressColor: pauseCauseProgressColor(pauseCause),
-    isOverflow: isDurationOverflow(pauseCause),
-    limit: prettifyPauseCauseDuration(pauseCause.limitMin),
-  })));
+  const representablePauseCause = computed(() =>
+    pauseCauses.value.map((pauseCause) => ({
+      ...pauseCause,
+      duration: duration(pauseCause),
+      progressColor: pauseCauseProgressColor(pauseCause),
+      isOverflow: isDurationOverflow(pauseCause),
+      limit: prettifyPauseCauseDuration(pauseCause.limitMin),
+    })),
+  );
 
   return { representablePauseCause };
 };

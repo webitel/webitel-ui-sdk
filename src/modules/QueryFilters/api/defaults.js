@@ -8,9 +8,8 @@ export const defaultParams = {
   fields: FIELDS,
 };
 
-export const listResponseHandler = (response) => (
+export const listResponseHandler = (response) =>
   response.items.map((item) => ({
     name: item.name,
     id: item.id,
-  }))
-);
+  }));

@@ -6,6 +6,7 @@
     class="wt-context-menu"
     placement="bottom-end"
     popper-class="wt-context-menu__floating-wrapper"
+    @update:visible="visible = $event"
   >
     <template #activator>
       <slot name="activator" />
@@ -20,7 +21,6 @@
           :key="index"
           class="wt-context-menu__option-wrapper"
         >
-          <!--      <a> click.prevent prevents redirect to # -->
           <a
             :class="[
               { 'wt-context-menu__option--disabled': option.disabled },
@@ -51,6 +51,7 @@ const props = defineProps({
   },
   visible: {
     type: Boolean,
+    default: false,
   },
   width: {
     type: [String],
@@ -70,15 +71,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'click',
-]);
+const emit = defineEmits(['click', 'update:visible']);
 
 function handleOptionClick({ option, index, hide }) {
   emit('click', { option, index });
   hide();
 }
-
 </script>
 
 <style lang="scss">

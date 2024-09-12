@@ -2,10 +2,7 @@ import BaseFilterSchema from './BaseFilterSchema.js';
 
 export default class ApiFilterSchema extends BaseFilterSchema {
   constructor(params = {}) {
-    const {
-      value = [],
-      defaultValue = [],
-    } = params;
+    const { value = [], defaultValue = [] } = params;
     super({ value, defaultValue });
     const {
       locale = { label: 'filter' },

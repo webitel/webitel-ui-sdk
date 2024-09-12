@@ -56,12 +56,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits([
-  'copy',
-  'delete',
-  'update:question',
-  'update:result',
-]);
+const emits = defineEmits(['copy', 'delete', 'update:question', 'update:result']);
 
 const QuestionState = {
   SAVED: 'saved',
@@ -73,17 +68,23 @@ const state = ref(QuestionState.SAVED);
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { question, result } = toRefs(props);
 
-const v$ = useVuelidate(computed(() => (
-  (props.mode === 'create')
-    ? {
-      question: {
-        question: { required },
-      },
-    } : {
-      result: {
-        required: (value) => (question.value.required ? !isEmpty(value) : true),
-      },
-    })), { question, result }, { $autoDirty: true });
+const v$ = useVuelidate(
+  computed(() =>
+    props.mode === 'create'
+      ? {
+          question: {
+            question: { required },
+          },
+        }
+      : {
+          result: {
+            required: (value) => (question.value.required ? !isEmpty(value) : true),
+          },
+        },
+  ),
+  { question, result },
+  { $autoDirty: true },
+);
 
 const component = computed(() => {
   if (props.readonly) return QuestionRead;

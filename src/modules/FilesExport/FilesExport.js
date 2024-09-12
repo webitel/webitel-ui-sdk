@@ -25,14 +25,15 @@ export default class FilesExport {
 
   _fetchFileBinary(fileId) {
     const url = this.filesURL(fileId);
-    return new Promise((resolve, reject) => (
+    return new Promise((resolve, reject) =>
       jszipUtils.getBinaryContent(url, (err, data) => {
         if (err) {
           reject(err);
         } else {
           resolve(data);
         }
-      })));
+      }),
+    );
   }
 
   resetProgress() {
@@ -96,7 +97,7 @@ export default class FilesExport {
     try {
       this.isLoading = true;
       const zip = new JSZip();
-      if (files && files.length) await this._addFilesToZip(files, zip);
+      if (files?.length) await this._addFilesToZip(files, zip);
       else {
         await this._fetchAndZip(zip, reqParams);
       }

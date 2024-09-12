@@ -70,13 +70,16 @@ function toggle() {
   return opened.value ? close() : open();
 }
 
-watch(() => props.collapsed, (newVal) => {
-  if (newVal) {
-    close();
-  } else {
-    open();
-  }
-});
+watch(
+  () => props.collapsed,
+  (newVal) => {
+    if (newVal) {
+      close();
+    } else {
+      open();
+    }
+  },
+);
 </script>
 
 <style lang="scss">

@@ -161,14 +161,14 @@ export default {
     currentNav() {
       const path = this.$route.fullPath;
       const currentNav = this.nav
-      .reduce((flatNav, currentNavItem) => {
-        if (currentNavItem.subNav) return flatNav.concat(currentNavItem.subNav);
-        return [...flatNav, currentNavItem];
-      }, [])
-      .find((navItem) => path.includes(navItem.route));
+        .reduce((flatNav, currentNavItem) => {
+          if (currentNavItem.subNav) return flatNav.concat(currentNavItem.subNav);
+          return [...flatNav, currentNavItem];
+        }, [])
+        .find((navItem) => path.includes(navItem.route));
       const currentExpansion = this.nav
-      .filter((nav) => nav.subNav)
-      .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
+        .filter((nav) => nav.subNav)
+        .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
       return {
         nav: currentNav?.value,
         expansion: currentExpansion?.value,

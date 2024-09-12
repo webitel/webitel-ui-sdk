@@ -79,11 +79,13 @@ export default {
   },
   emits: ['input'],
   computed: {
-    progressStyle() { // To achieve the correct color styling:
+    progressStyle() {
+      // To achieve the correct color styling:
       const progressPercent = ((this.value - this.min) / (this.max - this.min)) * 100;
       return `linear-gradient(to right, var(--wt-slider-background-completed-color) ${progressPercent}%, var(--wt-slider-background-color) 0%)`;
     },
-    verticalHeight() { // in order to have correct parent height after slider rotation
+    verticalHeight() {
+      // in order to have correct parent height after slider rotation
       return this.vertical ? `${this.height}px` : '100%';
     },
   },

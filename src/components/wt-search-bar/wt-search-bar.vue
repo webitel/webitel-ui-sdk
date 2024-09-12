@@ -109,7 +109,7 @@ const props = defineProps({
   },
   searchModeOptions: {
     type: Array,
-    default: () => ([]),
+    default: () => [],
   },
 });
 

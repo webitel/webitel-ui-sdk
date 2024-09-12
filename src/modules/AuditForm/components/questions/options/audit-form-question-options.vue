@@ -60,10 +60,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'change:question',
-  'change:result',
-]);
+const emit = defineEmits(['change:question', 'change:result']);
 
 function updateQuestion({ path, value }) {
   emit('change:question', updateObject({ obj: props.question, path, value }));

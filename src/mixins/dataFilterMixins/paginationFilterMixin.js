@@ -18,8 +18,7 @@ export default {
   watch: {
     '$route.query': {
       handler(newValue, oldValue) {
-        if (newValue.page !== oldValue.page
-          || newValue.size !== oldValue.size) {
+        if (newValue.page !== oldValue.page || newValue.size !== oldValue.size) {
           this.restore();
         }
       },

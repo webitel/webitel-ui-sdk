@@ -1,8 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import { ref } from 'vue';
 import { useValidation } from '../../../mixins/validationMixin/useValidation.js';
-import DeleteConfirmationPopup
-  from '../components/delete-confirmation-popup.vue';
+import DeleteConfirmationPopup from '../components/delete-confirmation-popup.vue';
 
 vi.mock('../../../mixins/validationMixin/useValidation.js');
 
@@ -31,8 +30,9 @@ describe('DeleteConfirmationPopup', () => {
         callback,
       },
     });
-    const button = wrapper.findAllComponents({ name: 'wt-button' })
-    .find((btn) => btn.text().includes('Yes'));
+    const button = wrapper
+      .findAllComponents({ name: 'wt-button' })
+      .find((btn) => btn.text().includes('Yes'));
     expect(button.text()).toContain('Yes');
     await button.trigger('click');
     await wrapper.vm.$nextTick();
@@ -47,8 +47,9 @@ describe('DeleteConfirmationPopup', () => {
         callback: vi.fn(),
       },
     });
-    expect(wrapper.find('.delete-confirmation-popup__content').text())
-    .toContain(deleteCount.toString());
+    expect(wrapper.find('.delete-confirmation-popup__content').text()).toContain(
+      deleteCount.toString(),
+    );
   });
 
   it('yes button emitted close', async () => {
@@ -58,8 +59,9 @@ describe('DeleteConfirmationPopup', () => {
         callback: vi.fn(),
       },
     });
-    const button = wrapper.findAllComponents({ name: 'wt-button' })
-    .find((btn) => btn.text().includes('Yes'));
+    const button = wrapper
+      .findAllComponents({ name: 'wt-button' })
+      .find((btn) => btn.text().includes('Yes'));
     await button.vm.$emit('close');
     await wrapper.vm.$nextTick();
     expect(button.emitted('close')).toBeTruthy();
@@ -72,8 +74,9 @@ describe('DeleteConfirmationPopup', () => {
         callback: vi.fn(),
       },
     });
-    const button = wrapper.findAllComponents({ name: 'wt-button' })
-    .find((btn) => btn.text().includes('No'));
+    const button = wrapper
+      .findAllComponents({ name: 'wt-button' })
+      .find((btn) => btn.text().includes('No'));
     await button.vm.$emit('close');
     await wrapper.vm.$nextTick();
     expect(button.emitted('close')).toBeTruthy();

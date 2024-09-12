@@ -130,19 +130,25 @@ const order = [
   WebitelApplications.ANALYTICS,
 ];
 
-const formattedApps = computed(() => props.apps.reduce((apps, app) => ([
-  ...apps,
-  {
-    ...app,
-    img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
-    currentApp: props.currentApp === app.name,
-  },
-]), []).sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name)));
+const formattedApps = computed(() =>
+  props.apps
+    .reduce(
+      (apps, app) => [
+        ...apps,
+        {
+          ...app,
+          img: props.darkMode ? pics[app.name].dark : pics[app.name].light,
+          currentApp: props.currentApp === app.name,
+        },
+      ],
+      [],
+    )
+    .sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name)),
+);
 
 function close() {
   isOpened.value = false;
 }
-
 </script>
 
 <style lang="scss" scoped>

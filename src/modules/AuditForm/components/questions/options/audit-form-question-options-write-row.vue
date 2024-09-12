@@ -47,27 +47,23 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'change:option',
-  'delete',
-]);
+const emit = defineEmits(['change:option', 'delete']);
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { option } = toRefs(props);
 
 const v$ = useVuelidate(
-  computed(() => (
-    {
-      option: {
-        name: { required },
-        score: {
-          required,
-          minValue: minValue(0),
-          maxValue: maxValue(10),
-          decimalValidator: decimalValidator(2),
-        },
+  computed(() => ({
+    option: {
+      name: { required },
+      score: {
+        required,
+        minValue: minValue(0),
+        maxValue: maxValue(10),
+        decimalValidator: decimalValidator(2),
       },
-    })),
+    },
+  })),
   { option },
   { $autoDirty: true },
 );

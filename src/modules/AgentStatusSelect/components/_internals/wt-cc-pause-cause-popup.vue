@@ -57,9 +57,7 @@
 <script setup>
 import { computed, ref, toRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-import {
-  useRepresentableAgentPauseCause,
-} from '../../../../composables/useRepresentableAgentPauseCause/useRepresentableAgentPauseCause.js';
+import { useRepresentableAgentPauseCause } from '../../../../composables/useRepresentableAgentPauseCause/useRepresentableAgentPauseCause.js';
 
 const props = defineProps({
   options: {
@@ -78,15 +76,17 @@ const { t } = useI18n();
 
 const { representablePauseCause } = useRepresentableAgentPauseCause(options);
 
-const pauseCause = computed(() => representablePauseCause.value.map((cause) => ({
-  ...cause,
-  duration: cause.isOverflow
-    ? `-${cause.durationMin - cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
-    : `${cause.durationMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`,
-  limit: cause.limitMin
-    ? `${cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
-    : t('webitelUI.agentStatusSelect.pauseCausePopup.unlimited'),
-})));
+const pauseCause = computed(() =>
+  representablePauseCause.value.map((cause) => ({
+    ...cause,
+    duration: cause.isOverflow
+      ? `-${cause.durationMin - cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
+      : `${cause.durationMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`,
+    limit: cause.limitMin
+      ? `${cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
+      : t('webitelUI.agentStatusSelect.pauseCausePopup.unlimited'),
+  })),
+);
 
 function select(option) {
   selected.value = option;

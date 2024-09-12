@@ -6,6 +6,7 @@
     :value="selectedOption"
     class="wt-status-select"
     track-by="value"
+    @closed="closedHandler"
     @input="inputHandler"
   >
     <template #singleLabel="{ option }">
@@ -52,23 +53,27 @@ export default {
     //   options: ['sm', 'md'],
     // },
   },
-  emits: ['change'],
+  emits: ['change', 'closed'],
   computed: {
     selectedOption() {
       return this.statusOptions.find((option) => option.value === this.status);
     },
     statusOptions() {
-      return this.options ? this.options
+      return this.options
+        ? this.options
         : StatusOptions.map((opt) => ({
-          ...opt,
-          text: this.$t(opt.locale),
-        }));
+            ...opt,
+            text: this.$t(opt.locale),
+          }));
     },
     availableOptions() {
       return this.statusOptions.reduce((options, opt) => {
         // PAUSE option is always passed
-        if ((this.status === opt.value && opt.value !== AgentStatus.PAUSE)
-          || opt.value === AgentStatus.BREAK_OUT) { // skip breakout option
+        if (
+          (this.status === opt.value && opt.value !== AgentStatus.PAUSE) ||
+          opt.value === AgentStatus.BREAK_OUT
+        ) {
+          // skip breakout option
           return options;
         }
         return [...options, opt];
@@ -90,6 +95,9 @@ export default {
   methods: {
     inputHandler(value) {
       this.$emit('change', value.value);
+    },
+    closedHandler(event) {
+      this.$emit('closed', event);
     },
   },
 };

@@ -47,10 +47,12 @@ const props = defineProps({
 
 const description = computed(() => props.steps[props.activeStep - 1].description);
 
-const stepWithCompleted = computed(() => props.steps.map((item, idx) => ({
-  ...item,
-  completed: props.activeStep > idx,
-})));
+const stepWithCompleted = computed(() =>
+  props.steps.map((item, idx) => ({
+    ...item,
+    completed: props.activeStep > idx,
+  })),
+);
 </script>
 
 <style lang="scss">

@@ -21,8 +21,7 @@ const router = createRouter({
 describe('Enum filter mixin', () => {
   const setValue = vi.fn();
   const Component = {
-    render() {
-    },
+    render() {},
     mixins: [enumFilterMixin],
     data: () => ({
       filterQuery: 'direction',
@@ -43,8 +42,7 @@ describe('Enum filter mixin', () => {
       global: { plugins: [router] },
     });
     await wrapper.vm.$nextTick();
-    expect(setValue)
-    .toHaveBeenCalledWith({ filter: 'direction', value: options[0] });
+    expect(setValue).toHaveBeenCalledWith({ filter: 'direction', value: options[0] });
   });
 
   it('Sets empty array value if $route query is empty', async () => {
