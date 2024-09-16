@@ -1,4 +1,5 @@
 import { ContactsApiFactory } from 'webitel-sdk';
+import deepCopy from 'deep-copy';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -82,7 +83,7 @@ const getList = async (params) => {
       searchKey = ContactsSearchMode.VARIABLES;
     } else if (params[ContactsSearchMode.DESTINATION]) {
       searchValue = params[ContactsSearchMode.DESTINATION];
-      searchKey = 'emails,phones';
+      searchKey = 'emails,phones,imclients{user{name}}';
     }
 
     // This code needed for adding starToSearch method to applyTransform while searchKey !== SearchMode.VARIABLES because '*' in variables search mode brokes backend logic.
@@ -143,6 +144,7 @@ const get = async ({ itemId: id }) => {
   const itemResponseHandler = (item) => {
     return {
       ...item,
+      name: item.name.commonName,
       labels: item.labels ? [...item.labels.data] : [],
       managers: item.managers ? [...item.managers.data] : [],
       timezones: item.timezones ? [...item.timezones.data] : [],
@@ -178,8 +180,17 @@ const sanitizeTimezones = (itemInstance) => {
   return { ...itemInstance, timezones };
 };
 
+const preRequestHandler = (item) => {
+  const copy = deepCopy(item);
+  copy.name = {
+    commonName: copy.name,
+  };
+  return copy;
+};
+
 const add = async ({ itemInstance }) => {
   const item = applyTransform(itemInstance, [
+    preRequestHandler,
     sanitizeManagers,
     sanitizeTimezones,
     sanitize(fieldsToSend),
@@ -196,6 +207,7 @@ const add = async ({ itemInstance }) => {
 const update = async ({ itemInstance }) => {
   const { etag } = itemInstance;
   const item = applyTransform(itemInstance, [
+    preRequestHandler,
     sanitizeManagers,
     sanitizeTimezones,
     sanitize(fieldsToSend),
