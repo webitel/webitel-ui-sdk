@@ -8,7 +8,7 @@
     </div>
     <div class="actions-wrap">
       <wt-table-actions
-        :icons="['filter-reset', 'settings']"
+        :icons="tableActionIcons"
         @input="tableActionsHandler"
       />
     </div>
@@ -18,6 +18,12 @@
 <script>
 export default {
   name: 'FiltersPanelWrapper',
+  props: {
+    tableActionIcons: {
+      type: Array,
+      default: () => ['filter-reset', 'settings'],
+    },
+  },
   data: () => ({
     isOpened: false,
     filtersCount: 0,
@@ -45,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$actions-width: calc(2 * (var(--icon-md-size) + var(--table-actions-icon-gap)));
+$actions-width: calc((var(--icon-md-size) + var(--table-actions-icon-gap)));
 
 .filters-panel-wrapper {
   display: flex;
