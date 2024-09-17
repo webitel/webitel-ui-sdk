@@ -1,7 +1,7 @@
 import { CallActions, ChatActions, JobState } from 'webitel-sdk';
 import i18n from '../../../locale/i18n.js';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
-import endCallSound from '../assets/audio/end-call.mp3';
+import triggerSound from '../assets/audio/triggerSound.js';
 import endChatSound from '../assets/audio/end-chat.wav';
 import newChatSound from '../assets/audio/new-chat.wav';
 import newMessageSound from '../assets/audio/new-message.wav';
@@ -23,7 +23,7 @@ const getNotificationSound = (action) => {
       // default call ringtone sound
       return new Audio(ringingSound);
     case CallActions.Hangup:
-      return new Audio(endCallSound);
+      return triggerSound();
     default:
       return false;
   }
