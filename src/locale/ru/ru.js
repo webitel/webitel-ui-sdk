@@ -222,6 +222,7 @@ export default {
         [AdminSections.SKILLS]: 'Навыки оператора',
         [AdminSections.BUCKETS]: 'Корзины',
         [AdminSections.MEDIA]: 'Медиафайлы',
+        [AdminSections.SHIFT_TEMPLATES]: 'Шаблон смен',
         [AdminSections.BLACKLIST]: 'Cписки',
         [AdminSections.CALENDARS]: 'Календари',
         [AdminSections.COMMUNICATIONS]: 'Типы связи',

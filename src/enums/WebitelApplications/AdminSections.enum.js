@@ -18,6 +18,7 @@ const AdminSections = Object.freeze({
   COMMUNICATIONS: 'communications', // scope: lookups
   PAUSE_CAUSE: 'pause-cause', // scope: lookups
   MEDIA: 'media', // scope: media_file
+  SHIFT_TEMPLATES: 'shift-templates', // scope: shift_templates
 
   // CONTACT CENTER
   SKILLS: 'skills', // scope: lookups
