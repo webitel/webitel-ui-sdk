@@ -223,6 +223,7 @@ export default {
         [AdminSections.SKILLS]: 'Agent skills',
         [AdminSections.BUCKETS]: 'Buckets',
         [AdminSections.MEDIA]: 'Media files',
+        [AdminSections.SHIFT_TEMPLATES]: 'Shift templates',
         [AdminSections.BLACKLIST]: 'Lists',
         [AdminSections.CALENDARS]: 'Calendars',
         [AdminSections.REGIONS]: 'Locations',
