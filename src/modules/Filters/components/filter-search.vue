@@ -71,7 +71,7 @@ const v$ =
     { $autoDirty: true },
   );
 
-v$.value.$touch();
+if (v$) v$.value.$touch();
 
 async function changeMode({ value }, { clearValue = true } = {}) {
   if (clearValue) await setValue({ name: filterName.value, value: '' });

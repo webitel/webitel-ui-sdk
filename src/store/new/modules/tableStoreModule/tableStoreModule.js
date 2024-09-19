@@ -1,5 +1,8 @@
 import FilterEvent from '../../../../modules/Filters/enums/FilterEvent.enum.js';
-import { queryToSortAdapter, sortToQueryAdapter } from '../../../../scripts/sortQueryAdapters.js';
+import {
+  queryToSortAdapter,
+  sortToQueryAdapter,
+} from '../../../../scripts/sortQueryAdapters.js';
 
 const state = () => ({
   headers: [],
@@ -18,7 +21,7 @@ const getters = {
 
   FIELDS: (state) => {
     const fields = state.headers.reduce((fields, { show, field }) => {
-      if (show) return [...fields, field];
+      if (show || show === undefined) return [...fields, field];
       return fields;
     }, []);
 
