@@ -23,16 +23,21 @@ export default {
 .wt-divider {
   display: block;
   box-sizing: border-box;
-
   margin: 0;
   padding: 0;
   border-color: var(--divider-border-color);
 
   &-vertical {
+    min-height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    width: 1px;
+    padding: calc(var(--_spacing-multiplicator) * 1.5) 0;
     border-left: 0;
     border-bottom: 0;
     border-top: 0;
-    border-right-width: thin;
+    border-right: var(--divider-border-color) solid 1px;
   }
 
   &-horizontal {
