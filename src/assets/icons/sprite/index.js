@@ -152,6 +152,12 @@ import './unpin.svg';
 import './conference.svg';
 import './meta.svg';
 import './options.svg';
+import './goto.svg';
+import './json.svg';
+import './redo.svg';
+import './save.svg';
+import './undo.svg';
+import './versions.svg';
 
 import './preview-tag-audio.svg';
 import './preview-tag-video.svg';
