@@ -10,6 +10,11 @@ import ExampleDivider from './examples/example-divider.vue';
 <Docs/>
 :::
 
+| Prop    | Type     | Default    | Code                                  | Description                                         |
+|---------|----------|------------|---------------------------------------|-----------------------------------------------------|
+| variant | `string` | horizontal | `<wt-divider variant="horizontal" />` | You can pass two option `horizontal` and `vertical` |
+
+
 ## Example Divider
 ::: raw
 <ExampleDivider/>
