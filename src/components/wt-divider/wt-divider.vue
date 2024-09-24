@@ -33,7 +33,7 @@ export default {
     position: relative;
     justify-content: center;
     width: 1px;
-    padding: calc(var(--spacing-md)) 0 0;
+    padding: var(--spacing-md) 0 0;
     border-left: 0;
     border-bottom: 0;
     border-top: 0;
