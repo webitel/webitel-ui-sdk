@@ -1,5 +1,11 @@
 export default [
   'email',
+  'goto',
+  'json',
+  'redo',
+  'undo',
+  'save',
+  'versions',
   'email-inbound',
   'email-outbound',
   'adfs',

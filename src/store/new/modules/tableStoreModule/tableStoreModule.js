@@ -132,7 +132,9 @@ const actions = {
       context.commit('SET', { path: 'error', value: err });
       throw err;
     } finally {
-      context.commit('SET', { path: 'isLoading', value: false });
+      setTimeout(() => {
+        context.commit('SET', { path: 'isLoading', value: false });
+      }, 100);  // why 1s? https://ux.stackexchange.com/a/104782
     }
   },
 
