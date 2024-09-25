@@ -4,6 +4,7 @@ import set from 'lodash/set.js';
 const state = () => ({
   itemId: 0,
   itemInstance: {},
+  _resettable: {},
 });
 
 const actions = {
@@ -62,7 +63,7 @@ const mutations = {
     state.itemInstance = item;
   },
   RESET_ITEM_STATE: (state) => {
-    Object.assign(state, deepCopy(this.state));
+    Object.assign(state, deepCopy(state._resettable));
   },
 };
 
