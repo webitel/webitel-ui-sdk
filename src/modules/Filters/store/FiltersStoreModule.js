@@ -1,6 +1,7 @@
 import mitt from 'mitt';
 import isEmpty from '../../../scripts/isEmpty.js';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import BaseStoreModule
+  from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import BaseFilterSchema from '../classes/BaseFilterSchema.js';
 import FilterEvent from '../enums/FilterEvent.enum.js';
 
@@ -117,17 +118,43 @@ export default class FiltersStoreModule extends BaseStoreModule {
       });
     },
 
-    RESET_FILTERS: (context) =>
-      Promise.allSettled(
-        context.getters._FILTER_NAMES.map((name) => {
-          const filter = context.state[name];
+    RESET_FILTER: (context, { name }) => {
+      const filter = context.state[name];
 
-          return context.dispatch('SET_FILTER', {
-            filter,
-            value: filter.defaultValue,
-          });
+      return context.dispatch('SET_FILTER', {
+        name,
+        value: filter.defaultValue,
+        silent: true,
+      });
+    },
+
+    RESET_FILTERS: async (context) => {
+      await Promise.allSettled(
+        context.getters._STATE_FILTER_NAMES.map((name) => {
+          return context.dispatch('RESET_FILTER', { name });
         }),
-      ),
+      );
+
+      // clean up query params
+      const router = context.getters.ROUTER;
+      const query = Object.entries(router.currentRoute.query)
+      .reduce((filteredQuery, [qKey, qValue]) => {
+        if (context.state[qKey]) {
+          return filteredQuery;
+        }
+        return { ...filteredQuery, [qKey]: qValue };
+      }, {});
+
+      await router.push({
+        ...router.currentRoute,
+        query,
+      });
+
+      return context.dispatch('EMIT', {
+        event: FilterEvent.RESET,
+        payload: context.getters.GET_FILTERS(),
+      });
+    },
 
     SUBSCRIBE: (context, { event, callback }) => {
       const subscribe = () => context.state._emitter.on(event, callback);
@@ -174,6 +201,12 @@ export default class FiltersStoreModule extends BaseStoreModule {
       const stateFilter = new BaseFilterSchema(filter);
       if (stateFilter.requireRouter) this.state._requireRouter = true;
       this.state[filter.name] = stateFilter;
+      this.getters[`FILTER_${filter.name}`] = (state, getters) => {
+        // if is used as watcher for getter to recompute,
+        // because GET_FILTER is function ==> it's not reactive
+        if (state[filter.name].value) {}
+        return getters.GET_FILTER(filter.name);
+      };
     };
 
     if (Array.isArray(filter)) filter.forEach((f) => setup(f));
