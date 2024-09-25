@@ -217,7 +217,6 @@ export default {
   box-sizing: border-box;
   width: 100%;
   min-height: var(--textarea-min-height);
-  max-height: 100%;
   padding: var(--textarea-padding);
   resize: none;
   transition: var(--transition);
