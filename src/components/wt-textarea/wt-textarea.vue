@@ -24,11 +24,12 @@
     </wt-label>
     <div class="wt-textarea__wrapper">
       <textarea
-        :id="name"
         ref="wt-textarea"
+        :id="name"
         :disabled="disabled"
         :placeholder="placeholder || label"
         :value="value"
+        rows="1"
         class="wt-textarea__textarea"
         v-on="listeners"
         @input="autoGrow($event)"
@@ -58,7 +59,7 @@
 </template>
 
 <script>
-import validationMixin from '@webitel/ui-sdk/src/mixins/validationMixin/validationMixin.js';
+import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
   name: 'WtTextarea',
@@ -134,9 +135,8 @@ export default {
   methods: {
     handleKeypress(event) {
       if (!this.chatMode) return;
-      console.log('handleKeypress event:', event);
+
       if (event.key === 'Enter' && !event.shiftKey) {
-        console.log('handleKeypress event:', event);
         this.$emit('enter');
         event.preventDefault();
       }
@@ -145,15 +145,15 @@ export default {
 
     autoGrow($event) {
       if (!this.chatMode) return;
-      const bordersSize = 2; // + 2px for height
-      const inputEl = this.$refs['wt-textarea'];
+      const bordersSize = 2; // + 2px for height because of --rounded-action-border-size
+
       $event.target.style.height = "1px"; // set any initial value
       $event.target.style.height = ($event.target.scrollHeight + bordersSize) + "px";
     },
 
     resetGrow() {
       const inputEl = this.$refs['wt-textarea'];
-      inputEl.style.height = ''; // reset text-area height
+      inputEl.style.height = 'auto'; // reset text-area height
     },
 
     cleanTextArea() {
@@ -180,42 +180,32 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@webitel/ui-sdk/src/components/wt-textarea/_variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '@webitel/ui-sdk/src/css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-textarea {
   cursor: text;
-  //height: 100%;
-  //height: 40px;
-
-  //max-height: 150px;
+  max-height: 100%;
 
   &--disabled {
     pointer-events: none;
   }
 
   &--chat .wt-textarea__textarea {
-    height: 40px;
     min-height: auto;
+    max-height: 100%;
     transition: none;
-
-    //max-height: inherit; //1
-
-    max-height: 100%; //2, 3
-    //height: 100%; // 3
   }
 }
 
 .wt-textarea__wrapper {
   position: relative;
 
-  height: 100%; //
-  //max-height: inherit;// 1
-
-  max-height: 100%; // 2
+  height: 100%;
+  max-height: 100%;
 }
 
 .wt-textarea__textarea {
@@ -263,4 +253,3 @@ export default {
   gap: var(--input-after-wrapper-gap);
 }
 </style>
-
