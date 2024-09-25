@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="wt-textarea-wr"
     :class="{
       'wt-textarea--disabled': disabled,
       'wt-textarea--invalid': invalid,
@@ -107,11 +106,7 @@ export default {
     chatMode: {
       type: Boolean,
       default: false,
-      description: '',
-    },
-    maxHeight: {
-      type: String,
-      default: '100%',
+      description: 'enables auto-grow for text-area',
     },
   },
   emits: ['input', 'enter'],
@@ -194,18 +189,23 @@ export default {
     pointer-events: none;
   }
 
-  &--chat .wt-textarea__textarea {
-    min-height: auto;
-    max-height: 100%;
-    transition: none;
+  &--chat {
+    .wt-textarea__textarea {
+      min-height: auto;
+      max-height: 100%;
+      transition: none;
+    }
+
+    .wt-textarea__wrapper {
+      height: 100%;
+      max-height: 100%;
+    }
+
   }
 }
 
 .wt-textarea__wrapper {
   position: relative;
-
-  height: 100%;
-  max-height: 100%;
 }
 
 .wt-textarea__textarea {
