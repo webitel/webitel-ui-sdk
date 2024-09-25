@@ -106,6 +106,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SHIFT_TEMPLATES}`,
     },
+    [AdminSections.PAUSE_TEMPLATES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.PAUSE_TEMPLATES}`,
+    },
     [AdminSections.AGENTS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.AGENTS}`,
