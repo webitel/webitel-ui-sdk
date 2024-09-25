@@ -1,8 +1,10 @@
 <template>
   <div
+    ref="wt-textarea-wr"
     :class="{
       'wt-textarea--disabled': disabled,
       'wt-textarea--invalid': invalid,
+      'wt-textarea--chat': chatMode,
     }"
     class="wt-textarea"
   >
@@ -29,6 +31,7 @@
         :value="value"
         class="wt-textarea__textarea"
         v-on="listeners"
+        @input="autoGrow($event)"
       />
       <div
         ref="after-wrapper"
@@ -41,7 +44,7 @@
           class="wt-textarea__reset-icon-btn"
           icon="close--filled"
           size="sm"
-          @click="$emit('input', '')"
+          @click="cleanTextArea"
         />
       </div>
     </div>
@@ -55,7 +58,7 @@
 </template>
 
 <script>
-import validationMixin from '../../mixins/validationMixin/validationMixin.js';
+import validationMixin from '@webitel/ui-sdk/src/mixins/validationMixin/validationMixin.js';
 
 export default {
   name: 'WtTextarea',
@@ -96,13 +99,18 @@ export default {
       type: String,
       default: '',
     },
-    chatMode: {
-      type: Boolean,
-      default: false,
-    },
     labelProps: {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
+    },
+    chatMode: {
+      type: Boolean,
+      default: false,
+      description: '',
+    },
+    maxHeight: {
+      type: String,
+      default: '100%',
     },
   },
   emits: ['input', 'enter'],
@@ -110,7 +118,7 @@ export default {
     listeners() {
       return {
         ...this.$listeners,
-        input: (event) => this.$emit('input', event.target.value),
+        input: (event) => this.send(event),
         keypress: (event) => this.handleKeypress(event),
       };
     },
@@ -126,10 +134,31 @@ export default {
   methods: {
     handleKeypress(event) {
       if (!this.chatMode) return;
+      console.log('handleKeypress event:', event);
       if (event.key === 'Enter' && !event.shiftKey) {
+        console.log('handleKeypress event:', event);
         this.$emit('enter');
         event.preventDefault();
       }
+      this.resetGrow();
+    },
+
+    autoGrow($event) {
+      if (!this.chatMode) return;
+      const bordersSize = 2; // + 2px for height
+      const inputEl = this.$refs['wt-textarea'];
+      $event.target.style.height = "1px"; // set any initial value
+      $event.target.style.height = ($event.target.scrollHeight + bordersSize) + "px";
+    },
+
+    resetGrow() {
+      const inputEl = this.$refs['wt-textarea'];
+      inputEl.style.height = ''; // reset text-area height
+    },
+
+    cleanTextArea() {
+      if (this.chatMode) this.resetGrow();
+      this.$emit('input', '');
     },
 
     updateInputPaddings() {
@@ -141,27 +170,52 @@ export default {
       );
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
     },
+
+    send($event) {
+      if (this.chatMode) this.resetGrow();
+      this.$emit('input', $event.target.value);
+    },
   },
 };
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@import '@webitel/ui-sdk/src/components/wt-textarea/_variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@import '@webitel/ui-sdk/src/css/main.scss';
 
 .wt-textarea {
   cursor: text;
+  //height: 100%;
+  //height: 40px;
+
+  //max-height: 150px;
 
   &--disabled {
     pointer-events: none;
+  }
+
+  &--chat .wt-textarea__textarea {
+    height: 40px;
+    min-height: auto;
+    transition: none;
+
+    //max-height: inherit; //1
+
+    max-height: 100%; //2, 3
+    //height: 100%; // 3
   }
 }
 
 .wt-textarea__wrapper {
   position: relative;
+
+  height: 100%; //
+  //max-height: inherit;// 1
+
+  max-height: 100%; // 2
 }
 
 .wt-textarea__textarea {
@@ -173,6 +227,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   min-height: var(--textarea-min-height);
+  max-height: 100%;
   padding: var(--textarea-padding);
   resize: none;
   transition: var(--transition);
@@ -208,3 +263,4 @@ export default {
   gap: var(--input-after-wrapper-gap);
 }
 </style>
+
