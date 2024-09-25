@@ -223,6 +223,7 @@ export default {
         [AdminSections.BUCKETS]: 'Корзины',
         [AdminSections.MEDIA]: 'Медиафайлы',
         [AdminSections.SHIFT_TEMPLATES]: 'Шаблон смен',
+        [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
         [AdminSections.BLACKLIST]: 'Cписки',
         [AdminSections.CALENDARS]: 'Календари',
         [AdminSections.COMMUNICATIONS]: 'Типы связи',
