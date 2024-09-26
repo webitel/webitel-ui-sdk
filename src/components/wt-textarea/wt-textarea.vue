@@ -3,7 +3,7 @@
     :class="{
       'wt-textarea--disabled': disabled,
       'wt-textarea--invalid': invalid,
-      'wt-textarea--chat': chatMode,
+      'wt-textarea--expanded': expanded,
     }"
     class="wt-textarea"
   >
@@ -44,7 +44,7 @@
           class="wt-textarea__reset-icon-btn"
           icon="close--filled"
           size="sm"
-          @click="cleanTextArea"
+          @click="handleTextValue"
         />
       </div>
     </div>
@@ -103,7 +103,7 @@ export default {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
-    chatMode: {
+    expanded: {
       type: Boolean,
       default: false,
       description: 'enables auto-grow for text-area',
@@ -114,7 +114,7 @@ export default {
     listeners() {
       return {
         ...this.$listeners,
-        input: (event) => this.send(event),
+        input: (event) => this.handleTextValue(event),
         keypress: (event) => this.handleKeypress(event),
       };
     },
@@ -128,32 +128,31 @@ export default {
   },
 
   methods: {
+    handleTextValue($event) {
+      if (this.expanded && !$event.target.value) this.resetGrow();
+      this.$emit('input', $event.target.value || '');
+    },
+
     handleKeypress(event) {
-      if (!this.chatMode) return;
+      if (!this.expanded) return;
 
       if (event.key === 'Enter' && !event.shiftKey) {
         this.$emit('enter');
         event.preventDefault();
+        this.resetGrow();
       }
-      this.resetGrow();
     },
 
     autoGrow($event) {
-      if (!this.chatMode) return;
+      if (!this.expanded) return;
       const bordersSize = 2; // + 2px for height because of --rounded-action-border-size
 
-      $event.target.style.height = "1px"; // set any initial value
       $event.target.style.height = ($event.target.scrollHeight + bordersSize) + "px";
     },
 
     resetGrow() {
       const inputEl = this.$refs['wt-textarea'];
       inputEl.style.height = 'auto'; // reset text-area height
-    },
-
-    cleanTextArea() {
-      if (this.chatMode) this.resetGrow();
-      this.$emit('input', '');
     },
 
     updateInputPaddings() {
@@ -164,11 +163,6 @@ export default {
         '--textarea-padding',
       );
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
-    },
-
-    send($event) {
-      if (this.chatMode) this.resetGrow();
-      this.$emit('input', $event.target.value);
     },
   },
 };
@@ -189,7 +183,7 @@ export default {
     pointer-events: none;
   }
 
-  &--chat {
+  &--expanded {
     .wt-textarea__textarea {
       min-height: auto;
       max-height: 100%;
@@ -198,7 +192,6 @@ export default {
 
     .wt-textarea__wrapper {
       height: 100%;
-      max-height: 100%;
     }
 
   }
