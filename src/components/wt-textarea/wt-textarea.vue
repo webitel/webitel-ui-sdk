@@ -3,6 +3,7 @@
     :class="{
       'wt-textarea--disabled': disabled,
       'wt-textarea--invalid': invalid,
+      'wt-textarea--autosize': autosize,
     }"
     class="wt-textarea"
   >
@@ -55,6 +56,7 @@
 </template>
 
 <script>
+import autosize from 'autosize';
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
@@ -104,6 +106,10 @@ export default {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
+    autosize: {
+      type: Boolean,
+      default: true,
+    },
   },
   emits: ['input', 'enter'],
   computed: {
@@ -121,6 +127,9 @@ export default {
   },
   mounted() {
     this.updateInputPaddings();
+    if (this.autosize) {
+      autosize(this.$refs['wt-textarea']);
+    }
   },
 
   methods: {
@@ -206,5 +215,12 @@ export default {
   align-items: center;
   pointer-events: auto; // override --disabled p-events none
   gap: var(--input-after-wrapper-gap);
+}
+
+.wt-textarea--autosize {
+  .wt-textarea__textarea {
+    min-height: 80px;
+    max-height: 100px;
+  }
 }
 </style>
