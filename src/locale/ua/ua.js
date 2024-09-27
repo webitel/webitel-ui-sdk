@@ -224,6 +224,7 @@ export default {
         [AdminSections.MEDIA]: 'Медіафайли',
         [AdminSections.SHIFT_TEMPLATES]: 'Шаблон змін',
         [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
+        [AdminSections.WORKING_CONDITIONS]: 'Умови роботи',
         [AdminSections.BLACKLIST]: 'Cписки',
         [AdminSections.CALENDARS]: 'Календарі',
         [AdminSections.REGIONS]: 'Розташування',
