@@ -114,11 +114,9 @@ export default class NotificationsStoreModule extends BaseStoreModule {
         context.dispatch('_REMOVE_CURRENT_TAB_ID'),
       ]),
 
-    PLAY_SOUND: (context, { action, sound = getNotificationSound(action), volume = 1.0 }) => {
+    PLAY_SOUND: async (context, { action, sound = getNotificationSound(action), volume = 1.0 }) => {
       if (context.getters.IS_SOUND_ALLOWED && !localStorage.getItem('wtIsPlaying')) {
-        const audio = sound instanceof Audio ? sound : new Audio(sound);
-
-        // Set the volume of the audio
+        const audio = sound instanceof Audio || sound.play ? sound : new Audio(sound);
         audio.volume = volume;
 
         audio.addEventListener(
