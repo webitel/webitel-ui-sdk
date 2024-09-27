@@ -1,5 +1,9 @@
 function triggerSound(soundVolume = 0.6, soundDuration = 0.2) {
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  let audioContext;
+
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
   const gainNode = audioContext.createGain();
   const oscillator = audioContext.createOscillator();
 
@@ -17,9 +21,15 @@ function triggerSound(soundVolume = 0.6, soundDuration = 0.2) {
   const audio = {
     play: () => {
       isPlaying = true;
-      oscillator.start();
+      try {
+        oscillator.start();
+      } catch (error) {
+        console.error('Error starting oscillator:', error);
+      }
       setTimeout(() => {
         oscillator.stop();
+        oscillator.disconnect();
+        gainNode.disconnect();
         audio.dispatchEvent(new Event('ended'));
       }, soundDuration * 1000);
     },
