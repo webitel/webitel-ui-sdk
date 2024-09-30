@@ -1,5 +1,6 @@
 import './account.svg';
 import './agent.svg';
+import './arrange.svg';
 import './adfs.svg';
 import './app-navigator.svg';
 import './arrow-down.svg';

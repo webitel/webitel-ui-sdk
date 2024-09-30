@@ -1,4 +1,5 @@
 export default [
+  'arrange',
   'email',
   'goto',
   'json',
