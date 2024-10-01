@@ -259,8 +259,16 @@ function updateInputPaddings() {
   inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
 }
 
+function focus () {
+  WtInput.value.focus();
+}
+
 onMounted(() => {
   updateInputPaddings();
+});
+
+defineExpose({
+  focus,
 });
 </script>
 
