@@ -23,18 +23,18 @@ describe('WtTextarea', () => {
     expect(wrapper.find('.wt-label').text()).toBe(label);
   });
 
-  it('emits "Enter" event if chat-mode prop is passed', () => {
+  it('emits "Enter" event if expanded prop is passed', () => {
     const wrapper = shallowMount(WtTextarea, {
       stubs: {
         WtLabel,
       },
-      props: { chatMode: true },
+      props: { expanded: true },
     });
     wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
     expect(wrapper.emitted().enter).toBeTruthy();
   });
 
-  it('do not emit "Enter" event if chat-mode prop is not passed', () => {
+  it('do not emit "Enter" event if expanded prop is not passed', () => {
     const wrapper = shallowMount(WtTextarea, {
       stubs: {
         WtLabel,
