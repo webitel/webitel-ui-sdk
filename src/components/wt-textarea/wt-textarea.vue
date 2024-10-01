@@ -3,7 +3,7 @@
     :class="{
       'wt-textarea--disabled': disabled,
       'wt-textarea--invalid': invalid,
-      'wt-textarea--expanded': expanded,
+      'wt-textarea--autoresize': autoresize,
     }"
     class="wt-textarea"
   >
@@ -103,7 +103,7 @@ export default {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
-    expanded: {
+    autoresize: {
       type: Boolean,
       default: false,
       description: 'enables auto-grow for text-area',
@@ -125,7 +125,7 @@ export default {
   },
   mounted() {
     this.updateInputPaddings();
-    if (this.expanded) this.setupAutosize();
+    if (this.autoresize) this.setupAutosize();
   },
   beforeUpdate() {
     if(!this.value) this.$nextTick(() => autosize.update(this.$refs['wt-textarea']));
@@ -138,7 +138,7 @@ export default {
     },
 
     handleKeypress(event) {
-      if (!this.expanded) return;
+      if (!this.autoresize) return;
 
       if (event.key === 'Enter' && !event.shiftKey) {
         this.$emit('enter');
@@ -177,7 +177,7 @@ export default {
     pointer-events: none;
   }
 
-  &--expanded {
+  &--autoresize {
     .wt-textarea__textarea {
       min-height: auto;
       max-height: 100%;
