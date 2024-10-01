@@ -147,6 +147,7 @@ export default {
       if (!this.expanded) return;
       const bordersSize = 2; // + 2px for height because of --rounded-action-border-size
 
+      $event.target.style.height = '1px';
       $event.target.style.height = ($event.target.scrollHeight + bordersSize) + "px";
     },
 
