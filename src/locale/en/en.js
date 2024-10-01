@@ -225,6 +225,7 @@ export default {
         [AdminSections.MEDIA]: 'Media files',
         [AdminSections.SHIFT_TEMPLATES]: 'Shift templates',
         [AdminSections.PAUSE_TEMPLATES]: 'Pause templates',
+        [AdminSections.WORKING_CONDITIONS]: 'Working conditions',
         [AdminSections.BLACKLIST]: 'Lists',
         [AdminSections.CALENDARS]: 'Calendars',
         [AdminSections.REGIONS]: 'Locations',

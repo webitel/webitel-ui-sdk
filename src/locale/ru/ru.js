@@ -224,6 +224,7 @@ export default {
         [AdminSections.MEDIA]: 'Медиафайлы',
         [AdminSections.SHIFT_TEMPLATES]: 'Шаблон смен',
         [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
+        [AdminSections.WORKING_CONDITIONS]: 'Условия работы',
         [AdminSections.BLACKLIST]: 'Cписки',
         [AdminSections.CALENDARS]: 'Календари',
         [AdminSections.COMMUNICATIONS]: 'Типы связи',
