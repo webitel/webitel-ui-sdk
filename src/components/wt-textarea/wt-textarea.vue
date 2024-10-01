@@ -31,7 +31,6 @@
         rows="1"
         class="wt-textarea__textarea"
         v-on="listeners"
-        @input="autoGrow($event)"
       />
       <div
         ref="after-wrapper"
@@ -44,7 +43,7 @@
           class="wt-textarea__reset-icon-btn"
           icon="close--filled"
           size="sm"
-          @click="handleTextValue"
+          @click="cleanInput"
         />
       </div>
     </div>
@@ -58,6 +57,7 @@
 </template>
 
 <script>
+import autosize from 'autosize';
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
@@ -114,7 +114,7 @@ export default {
     listeners() {
       return {
         ...this.$listeners,
-        input: (event) => this.handleTextValue(event),
+        input: (event) => this.$emit('input', event.target.value),
         keypress: (event) => this.handleKeypress(event),
       };
     },
@@ -125,12 +125,16 @@ export default {
   },
   mounted() {
     this.updateInputPaddings();
+    if (this.expanded) this.setupAutosize();
+  },
+  beforeUpdate() {
+    if(!this.value) this.$nextTick(() => autosize.update(this.$refs['wt-textarea']));
   },
 
   methods: {
-    handleTextValue($event) {
-      if (this.expanded && !$event.target.value) this.resetGrow();
-      this.$emit('input', $event.target.value || '');
+    cleanInput() {
+      this.$emit('input', '');
+      this.$nextTick(() => autosize.update(this.$refs['wt-textarea']));
     },
 
     handleKeypress(event) {
@@ -139,23 +143,9 @@ export default {
       if (event.key === 'Enter' && !event.shiftKey) {
         this.$emit('enter');
         event.preventDefault();
-        this.resetGrow();
+        this.$nextTick(() => autosize.update(this.$refs['wt-textarea']));
       }
     },
-
-    autoGrow($event) {
-      if (!this.expanded) return;
-      const bordersSize = 2; // + 2px for height because of --rounded-action-border-size
-
-      $event.target.style.height = '1px';
-      $event.target.style.height = ($event.target.scrollHeight + bordersSize) + "px";
-    },
-
-    resetGrow() {
-      const inputEl = this.$refs['wt-textarea'];
-      inputEl.style.height = 'auto'; // reset text-area height
-    },
-
     updateInputPaddings() {
       // cant test this thing cause vue test utils doesnt render elements width :/
       const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
@@ -164,6 +154,9 @@ export default {
         '--textarea-padding',
       );
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
+    },
+    setupAutosize() {
+      autosize(this.$refs['wt-textarea']);
     },
   },
 };
