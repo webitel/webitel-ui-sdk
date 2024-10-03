@@ -36,6 +36,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 
 const props = defineProps({
   size: {
