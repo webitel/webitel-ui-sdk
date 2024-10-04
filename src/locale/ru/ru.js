@@ -382,4 +382,7 @@ export default {
       exportToJson: 'Экспортировать в JSON',
     },
   },
+  errorNotifications: {
+    chatHistoryApi: 'Произошла ошибка загрузки истории чата',
+  },
 };

@@ -4,7 +4,7 @@ import {
   getDefaultInstance,
   getDefaultOpenAPIConfig,
 } from '../defaults/index.js';
-import applyTransform, { notify, snakeToCamel, merge } from '../transformers/index.js';
+import applyTransform, { notify, snakeToCamel, merge, sanitize } from '../transformers/index.js';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -33,7 +33,8 @@ const getChat = async ({ contactId, chatId }) => {
 };
 
 // all messages from all contacts chats
-const getAllMessages = async ({ id }) => {
+const getAllMessages = async (params) => {
+
   const mergeMessagesData = ({ messages, peers, chats }) => {
     return messages.map(({ from, chat, ...message }) => {
       return {
@@ -44,8 +45,20 @@ const getAllMessages = async ({ id }) => {
     });
   };
 
+  const {
+    contactId,
+    page,
+    size,
+  } = params;
+
   try {
-    const response = await contactChatService.getContactChatHistory2(id);
+    const response = await contactChatService.getContactChatHistory2(
+      contactId,
+      undefined,
+      undefined,
+      size,
+      `${page || 1}`,
+    );
     const { messages, peers, chats, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -55,7 +68,12 @@ const getAllMessages = async ({ id }) => {
       next,
     };
   } catch (err) {
-    throw applyTransform(err, [notify]);
+    throw applyTransform(err, [
+      notify(({ callback }) => callback({
+        type: 'error',
+        text: t('errorNotifications.chatHistoryApi'),
+      })),
+    ]);
   }
 };
 
