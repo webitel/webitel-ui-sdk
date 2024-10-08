@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { notify } from '../../api/transformers/index.js';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
@@ -384,5 +385,8 @@ export default {
       label: 'Something went wrong, please try again',
       exportToJson: 'Export to JSON',
     },
+  },
+  errorNotifications: {
+    chatHistoryApi: 'There was an error loading the chat history',
   },
 };
