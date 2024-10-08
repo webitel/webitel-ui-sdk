@@ -8,14 +8,12 @@ import FilterEvent from '../enums/FilterEvent.enum.js';
 export default class FiltersStoreModule extends BaseStoreModule {
   state = {
     _emitter: mitt(),
-    _requireRouter: false,
   };
 
   getters = {
     ROUTER: (state, g, rootState) => {
-      if (!state._requireRouter) return null;
       if (rootState.router === undefined) {
-        throw new Error(
+        console.warn(
           '"rootState.router" is needed for filters to work properly.' +
             ' Please, provide to root state, or setup it in filters module as getter "ROUTER"',
         );
@@ -35,10 +33,6 @@ export default class FiltersStoreModule extends BaseStoreModule {
       const filter = state[filterName];
 
       if (!filter) throw new Error(`Unknown filter: ${filterName}`);
-
-      if (state._requireRouter && !getters.ROUTER) {
-        throw new Error(`Router is required for filter: ${filterName}`);
-      }
 
       return filter.get({
         router: getters.ROUTER,
@@ -137,13 +131,15 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
       // clean up query params
       const router = context.getters.ROUTER;
-      const query = Object.entries(router.currentRoute.query)
-      .reduce((filteredQuery, [qKey, qValue]) => {
-        if (context.state[qKey]) {
-          return filteredQuery;
-        }
-        return { ...filteredQuery, [qKey]: qValue };
-      }, {});
+      const query = Object.entries(router.currentRoute.query).reduce(
+        (filteredQuery, [qKey, qValue]) => {
+          if (context.state[qKey]) {
+            return filteredQuery;
+          }
+          return { ...filteredQuery, [qKey]: qValue };
+        },
+        {},
+      );
 
       await router.push({
         ...router.currentRoute,
@@ -167,26 +163,22 @@ export default class FiltersStoreModule extends BaseStoreModule {
     },
 
     EMIT: async (context, { event, payload }) => {
-      return new Promise(async (resolve, reject) => {
-        const wildcardListeners = context.state._emitter.all.get('*');
-        const eventListeners = context.state._emitter.all.get(event);
+      const wildcardListeners = context.state._emitter.all.get('*');
+      const eventListeners = context.state._emitter.all.get(event);
 
-        const listeners = [...(wildcardListeners || []), ...(eventListeners || [])];
+      const listeners = [
+        ...(wildcardListeners || []),
+        ...(eventListeners || []),
+      ];
 
-        if (!listeners) {
-          console.info(`No listeners for ${event} event`);
-          resolve();
-        }
+      if (!listeners) {
+        console.info(`No listeners for ${event} event`);
+        return;
+      }
 
-        try {
-          for (const listener of listeners) {
-            await listener({ event, payload });
-          }
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      });
+      for (const listener of listeners) {
+        await listener({ event, payload });
+      }
     },
   };
 
@@ -198,13 +190,13 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
   addFilter(filter) {
     const setup = (filter) => {
-      const stateFilter = new BaseFilterSchema(filter);
-      if (stateFilter.requireRouter) this.state._requireRouter = true;
-      this.state[filter.name] = stateFilter;
+      this.state[filter.name] = new BaseFilterSchema(filter);
+
       this.getters[`FILTER_${filter.name}`] = (state, getters) => {
         // if is used as watcher for getter to recompute,
         // because GET_FILTER is function ==> it's not reactive
-        if (state[filter.name].value) {}
+        if (state[filter.name].value) {
+        }
         return getters.GET_FILTER(filter.name);
       };
     };
