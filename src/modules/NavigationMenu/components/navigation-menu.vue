@@ -8,12 +8,12 @@
       >
         <nav-menu-lvl-2
           :categories="subcategories"
-          class="nav-menu__innerLvl2 d-none d-block-xs"
+          class="nav-menu__innerLvl2"
         />
       </nav-menu-lvl-1>
       <nav-menu-lvl-2
         :categories="subcategories"
-        class="nav-menu__outerLvl2 d-none-xs"
+        class="nav-menu__outerLvl2"
       />
     </article>
   </section>
