@@ -8,12 +8,12 @@
       >
         <nav-menu-lvl-2
           :categories="subcategories"
-          class="d-none d-block-xs"
+          class="nav-menu__innerLvl2 d-none d-block-xs"
         />
       </nav-menu-lvl-1>
       <nav-menu-lvl-2
         :categories="subcategories"
-        class="d-none-xs"
+        class="nav-menu__outerLvl2 d-none-xs"
       />
     </article>
   </section>
@@ -84,6 +84,64 @@
     --lvl-1-bg--hover: var(--dp-20-surface-color);
     --lvl-1-bg--selected: var(--primary-color);
     --lvl-1-text--selected: var(--primary-on-color);
+
+    &__wrapper {
+      @extend %wt-scrollbar;
+
+      display: grid;
+      box-sizing: border-box;
+      width: var(--wrapper-width);
+      height: var(--wrapper-height);
+      margin: auto;
+      padding: var(--spacing-xs);
+      border-radius: var(--spacing-xs);
+      background: var(--dp-20-surface-color);
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: var(--spacing-sm);
+    }
+
+    &__innerLvl2{
+      display: none;
+
+      @media (#{$media} and #{$media-width-xs}) {
+        display: block;
+      }
+    }
+    &__outerLvl2{
+      @media (#{$media} and #{$media-width-xs}) {
+        display: none;
+      }
+    }
+  }
+  .nav-menu {
+    --button-min-height: 60px;
+    --wrapper-width: 60%;
+    --wrapper-height: calc(
+      var(--spacing-sm) * 2
+      + var(--button-min-height) * 7
+      + var(--spacing-2xs) * 6
+    );
+
+    --lvl-1-bg: var(--dp-18-surface-color);
+    --lvl-1-bg--hover: var(--dp-20-surface-color);
+    --lvl-1-bg--selected: var(--primary-color);
+    --lvl-1-text--selected: var(--primary-on-color);
+
+    @media (#{$media} and #{$media-width-sm}) {
+      --wrapper-width: 80%;
+    }
+
+    @media (#{$media} and #{$media-width-xs}) {
+      --wrapper-width: 100%;
+      --wrapper-height: 100%;
+    }
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
   }
 
   .nav-menu__wrapper {
@@ -94,10 +152,14 @@
     width: var(--wrapper-width);
     height: var(--wrapper-height);
     margin: auto;
-    padding: var(--spacing-xs);
-    border-radius: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
     background: var(--dp-20-surface-color);
     grid-template-columns: repeat(2, 1fr);
     grid-gap: var(--spacing-sm);
+
+    @media (#{$media} and #{$media-width-xs}) {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

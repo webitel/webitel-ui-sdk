@@ -13,11 +13,11 @@
         <wt-icon
           :color="selected.value === category.value ? 'on-primary' : 'default'"
           :icon="category.value"
-          icon-prefix="conf"
+          icon-prefix="nav"
         />
         {{ category.name }}
       </button>
-      <div>
+      <div v-show="selected.value === category.value">
         <slot />
       </div>
     </li>
