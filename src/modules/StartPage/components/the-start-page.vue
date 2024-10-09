@@ -26,7 +26,7 @@
       type: Array,
       required: true,
     },
-    logoPath: {
+    lightDarkLogos: {
       type: Object,
       required: true,
     }
@@ -35,7 +35,7 @@
   const darkMode = computed(() => store.getters['appearance/DARK_MODE']);
 
   const logo = computed(() => {
-    return darkMode.value ? props.logoPath.dark : props.logoPath.light;
+    return darkMode.value ? props.lightDarkLogos.dark : props.lightDarkLogos.light;
   });
 
   const navCards = computed(() => {
