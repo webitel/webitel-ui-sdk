@@ -4,7 +4,7 @@
     class="wt-timepicker"
   >
     <wt-label
-      v-if="label"
+      v-if="label || !noLabel"
       :invalid="invalid"
       v-bind="labelProps"
     >
@@ -14,7 +14,7 @@
       <wt-time-input
         v-if="isHour"
         :disabled="disabled"
-        :label="label ? null : $t('webitelUI.timepicker.hour') "
+        :label="labelHours"
         :max-value="dateMode ? null : 23"
         :v="v"
         :value="hour"
@@ -24,7 +24,7 @@
       <wt-time-input
         v-if="isMin"
         :disabled="disabled"
-        :label="label ? null : $t('webitelUI.timepicker.min')"
+        :label="labelMin"
         :max-value="59"
         :v="v"
         :value="min"
@@ -34,7 +34,7 @@
       <wt-time-input
         v-if="isSec"
         :disabled="disabled"
-        :label="label ? null : $t('webitelUI.timepicker.sec')"
+        :label="labelSec"
         :max-value="59"
         :v="v"
         :value="sec"
@@ -89,6 +89,10 @@ export default {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
     },
+    noLabel: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -100,6 +104,18 @@ export default {
     },
     isSec() {
       return this.format.includes('ss');
+    },
+    labelHours() {
+      if(this.noLabel) return null;
+      return this.label ? null : this.$t('webitelUI.timepicker.hour');
+    },
+    labelMin() {
+      if(this.noLabel) return null;
+      return this.label ? null : this.$t('webitelUI.timepicker.min');
+    },
+    labelSec() {
+      if(this.noLabel) return null;
+      return this.label ? null : this.$t('webitelUI.timepicker.sec');
     },
     hour: {
       get() {

@@ -1,6 +1,17 @@
-import { localStorageGetter, queryGetter, valueGetter } from '../scripts/getters/index.js';
-import { localStorageRestore, queryRestore } from '../scripts/restores/index.js';
-import { localStorageSetter, querySetter, valueSetter } from '../scripts/setters/index.js';
+import {
+  localStorageGetter,
+  queryGetter,
+  valueGetter,
+} from '../scripts/getters/index.js';
+import {
+  localStorageRestore,
+  queryRestore,
+} from '../scripts/restores/index.js';
+import {
+  localStorageSetter,
+  querySetter,
+  valueSetter,
+} from '../scripts/setters/index.js';
 
 const convertGetterArray = (context) => (getters) => {
   const availableGetters = ['value', 'query', 'localStorage'];
@@ -88,8 +99,8 @@ export default class BaseFilterSchema {
       {
         name,
         value,
-        defaultValue,
         multiple,
+        defaultValue: defaultValue || value,
       },
       rest,
     );
@@ -97,8 +108,6 @@ export default class BaseFilterSchema {
     this.setupGetters(get);
     this.setupSetters(set);
     this.setupRestores(restore);
-
-    return this;
   }
 
   setupGetters(getters) {

@@ -4,6 +4,7 @@ const CrmConfigurationSections = Object.freeze({
 	SERVICE_CATALOG: 'service-catalog',
 	PRIORITIES: 'priorities',
 	STATUSES: 'statuses',
+	SOURCES: 'sources',
 	CLOSURE_REASONS: 'closure-reasons',
 	CONTACT_GROUPS: 'contact-groups',
 	CASE_SOURCES: 'case-sources',
