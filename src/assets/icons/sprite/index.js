@@ -153,7 +153,6 @@ import './unpin.svg';
 import './conference.svg';
 import './meta.svg';
 import './options.svg';
-import './goto.svg';
 import './json.svg';
 import './redo.svg';
 import './save.svg';
