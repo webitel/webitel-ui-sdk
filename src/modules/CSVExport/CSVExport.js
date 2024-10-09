@@ -49,7 +49,10 @@ export default class CSVExport {
   }
 
   save(csv) {
-    const blob = new Blob([csv], { type: 'data:text/csv;charset=utf-8' });
+    // Prepending '\uFEFF' (the BOM) forces these applications to treat the file as UTF-8,
+    // ensuring that non-ASCII characters, such as Cyrillic, are displayed correctly.
+    const bom = '\uFEFF';
+    const blob = new Blob([bom + csv], { type: 'data:text/csv;charset=utf-8' });
     saveAs(blob, `${this.filename}.csv`);
   }
 

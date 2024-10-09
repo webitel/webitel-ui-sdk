@@ -17,9 +17,15 @@ export const useTableFilters = (namespace) => {
     return store.dispatch(`${filtersNamespace}/RESTORE_FILTERS`, payload);
   }
 
+  function resetFilters(payload) {
+    return store.dispatch(`${filtersNamespace}/RESET_FILTERS`, payload);
+  }
+
   return {
     namespace: filtersNamespace,
+
     restoreFilters,
+    resetFilters,
 
     subscribe,
     flushSubscribers,

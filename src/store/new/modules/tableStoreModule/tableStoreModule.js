@@ -54,6 +54,8 @@ const actions = {
         return context.dispatch('HANDLE_FILTERS_RESTORE', payload);
       case FilterEvent.FILTER_SET:
         return context.dispatch('HANDLE_FILTER_SET', payload);
+      case FilterEvent.RESET:
+        return context.dispatch('HANDLE_FILTER_RESET', payload);
       default:
         throw new Error(`Unknown filter event: ${event}`);
     }
@@ -61,6 +63,13 @@ const actions = {
 
   // FIXME: maybe move to filters module?
   HANDLE_FILTERS_RESTORE: async (context, { fields, sort }) => {
+    if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
+    if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
+    return context.dispatch('LOAD_DATA_LIST');
+  },
+
+  // FIXME: maybe move to filters module?
+  HANDLE_FILTER_RESET: async (context, { fields, sort }) => {
     if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
     if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
     return context.dispatch('LOAD_DATA_LIST');
@@ -132,7 +141,9 @@ const actions = {
       context.commit('SET', { path: 'error', value: err });
       throw err;
     } finally {
-      context.commit('SET', { path: 'isLoading', value: false });
+      setTimeout(() => {
+        context.commit('SET', { path: 'isLoading', value: false });
+      }, 100);  // why 1s? https://ux.stackexchange.com/a/104782
     }
   },
 

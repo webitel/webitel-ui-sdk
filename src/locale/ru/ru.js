@@ -223,6 +223,8 @@ export default {
         [AdminSections.BUCKETS]: 'Корзины',
         [AdminSections.MEDIA]: 'Медиафайлы',
         [AdminSections.SHIFT_TEMPLATES]: 'Шаблон смен',
+        [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
+        [AdminSections.WORKING_CONDITIONS]: 'Условия работы',
         [AdminSections.BLACKLIST]: 'Cписки',
         [AdminSections.CALENDARS]: 'Календари',
         [AdminSections.COMMUNICATIONS]: 'Типы связи',
@@ -379,5 +381,8 @@ export default {
       label: 'Что-то пошло не так. Пожалуйста, попробуйте еще раз',
       exportToJson: 'Экспортировать в JSON',
     },
+  },
+  errorNotifications: {
+    chatHistoryApi: 'Произошла ошибка загрузки истории чата',
   },
 };
