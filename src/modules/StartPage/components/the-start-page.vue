@@ -42,8 +42,6 @@
     return props.nav.map((navItem) => ({
       ...navItem,
       disabled: false, // Статус доступу до навігаційних карток
-      name: t(`startPage.${navItem.value}.name`),
-      text: t(`startPage.${navItem.value}.text`),
       image: darkMode.value ? navItem.images.dark : navItem.images.light,
     }));
   });
