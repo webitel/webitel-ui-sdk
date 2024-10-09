@@ -1,7 +1,6 @@
 export default [
   'arrange',
   'email',
-  'goto',
   'json',
   'redo',
   'undo',
