@@ -26,7 +26,7 @@
       type: Array,
       required: true,
     },
-    lightDarkLogos: {
+    appLogo: {
       type: Object,
       required: true,
     }
@@ -35,13 +35,12 @@
   const darkMode = computed(() => store.getters['appearance/DARK_MODE']);
 
   const logo = computed(() => {
-    return darkMode.value ? props.lightDarkLogos.dark : props.lightDarkLogos.light;
+    return darkMode.value ? props.appLogo.dark : props.appLogo.light;
   });
 
   const navCards = computed(() => {
     return props.nav.map((navItem) => ({
       ...navItem,
-      disabled: false, // Статус доступу до навігаційних карток
       image: darkMode.value ? navItem.images.dark : navItem.images.light,
     }));
   });
