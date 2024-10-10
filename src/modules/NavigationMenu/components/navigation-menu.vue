@@ -42,7 +42,7 @@
   const subcategories = computed(() => {
     if (!selected.value.subNav) return [];
     return selected.value.subNav.map((subNav) => {
-      const route = `${selected.value.route}/${subNav.route}`;
+      const route = `${subNav.route}`;
       const name = subNav.name;
       return {
         ...subNav,
