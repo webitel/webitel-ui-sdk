@@ -24,6 +24,7 @@ import WtIcon from './wt-icon/wt-icon.vue';
 import WtIndicator from './wt-indicator/wt-indicator.vue';
 import WtInputInfo from './wt-input-info/wt-input-info.vue';
 import WtInput from './wt-input/wt-input.vue';
+import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
 import WtItemLink from './wt-item-link/wt-item-link.vue';
 import WtLabel from './wt-label/wt-label.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
@@ -74,6 +75,7 @@ const Components = {
   WtDatepicker,
   WtIconBtn,
   WtInput,
+  WtIntersectionObserver,
   WtHint,
   WtNotification,
   WtPopup,
