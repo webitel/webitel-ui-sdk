@@ -3,8 +3,8 @@ import {
   getDefaultGetListResponse,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../defaults/index.js';
-import applyTransform, { notify, snakeToCamel, merge, sanitize } from '../transformers/index.js';
+} from '../../defaults/index.js';
+import applyTransform, { notify, snakeToCamel, merge } from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
