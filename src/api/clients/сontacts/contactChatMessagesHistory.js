@@ -5,6 +5,9 @@ import {
   getDefaultOpenAPIConfig,
 } from '../../defaults/index.js';
 import applyTransform, { notify, snakeToCamel, merge } from '../../transformers/index.js';
+import i18n from '../../../locale/i18n.js';
+
+const { t } = i18n.global;
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
