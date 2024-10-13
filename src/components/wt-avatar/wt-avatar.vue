@@ -124,6 +124,10 @@ const badgeColorVar = computed(() => {
 
 <style lang="scss" scoped>
 
+%wt-avatar-typo-xs {
+  font-size: 10px;
+}
+
 %wt-avatar-typo-sm {
   font-size: 12px;
 }
@@ -163,6 +167,7 @@ const badgeColorVar = computed(() => {
   }
 
   &--size-xs {
+    @extend %wt-avatar-typo-xs;
     width: var(--wt-avatar-size--size-xs);
     height: var(--wt-avatar-size--size-xs);
   }
