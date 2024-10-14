@@ -5,14 +5,14 @@ import {
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../defaults/index.js';
+} from '../../defaults/index.js';
 import applyTransform, {
   camelToSnake,
   merge,
   notify,
   sanitize,
   snakeToCamel,
-} from '../transformers/index.js';
+} from '../../transformers/index.js';
 import ContactsSearchMode from './enums/ContactsSearchMode.js';
 
 const instance = getDefaultInstance();
