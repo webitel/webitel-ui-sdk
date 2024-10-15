@@ -31,6 +31,7 @@
         rows="1"
         class="wt-textarea__textarea"
         v-on="listeners"
+        @input="autoGrow"
       />
       <div
         ref="after-wrapper"
@@ -43,7 +44,7 @@
           class="wt-textarea__reset-icon-btn"
           icon="close--filled"
           size="sm"
-          @click="cleanInput"
+          @click="$emit('input', '')"
         />
       </div>
     </div>
@@ -57,7 +58,6 @@
 </template>
 
 <script>
-import autosize from 'autosize';
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
 export default {
@@ -125,27 +125,35 @@ export default {
   },
   mounted() {
     this.updateInputPaddings();
-    if (this.autoresize) this.setupAutosize();
   },
-  beforeUpdate() {
-    if(!this.value) this.$nextTick(() => autosize.update(this.$refs['wt-textarea']));
+  updated() {
+    if(this.autoresize && !this.value) this.resetGrow();
   },
 
   methods: {
-    cleanInput() {
-      this.$emit('input', '');
-      this.$nextTick(() => autosize.update(this.$refs['wt-textarea']));
-    },
-
     handleKeypress(event) {
       if (!this.autoresize) return;
 
       if (event.key === 'Enter' && !event.shiftKey) {
         this.$emit('enter');
         event.preventDefault();
-        this.$nextTick(() => autosize.update(this.$refs['wt-textarea']));
       }
     },
+
+    autoGrow() {
+      if (!this.autoresize) return;
+      const inputEl = this.$refs['wt-textarea'];
+      const bordersSize = 2; // + 2px for height because of --rounded-action-border-size
+
+      inputEl.style.height = 'auto';
+      inputEl.style.height = (inputEl.scrollHeight + bordersSize) + "px";
+    },
+
+    resetGrow() {
+      const inputEl = this.$refs['wt-textarea'];
+      inputEl.style.height = 'auto'; // reset text-area height
+    },
+
     updateInputPaddings() {
       // cant test this thing cause vue test utils doesnt render elements width :/
       const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
@@ -154,9 +162,6 @@ export default {
         '--textarea-padding',
       );
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
-    },
-    setupAutosize() {
-      autosize(this.$refs['wt-textarea']);
     },
   },
 };
