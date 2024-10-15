@@ -29,6 +29,7 @@ const getChat = async ({ contactId, chatId }) => {
     const { messages, peers } = applyTransform(response.data, [snakeToCamel()]);
     return {
       items: applyTransform({ messages, peers }, [mergeChatMessagesData]).reverse(),
+      peers,
     };
   } catch (err) {
     throw applyTransform(err, [notify]);
