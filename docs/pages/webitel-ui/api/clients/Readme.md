@@ -221,3 +221,22 @@ const {
   getSupervisorOptions,
 } = agents;
 ```
+## Contacts
+
+```js
+import { contacts, contactChatMessagesHistory } from '@webitel/ui-sdk/src/api/contacts/index';
+
+const {
+  getList,
+  get,
+  add,
+  update,
+  delete: _delete,
+  getLookup,
+} = contacts;
+
+const {
+  getChat,
+  getAllMessages,
+} = contactChatMessagesHistory;
+```
