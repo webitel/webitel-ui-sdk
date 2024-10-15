@@ -5,14 +5,21 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import { notify } from '../../api/transformers/index.js';
-import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider
+  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections
+  from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections
+  from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import SupervisorSections
+  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications
+  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import {
+  AccessMode,
+} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -109,6 +116,18 @@ export default {
     sec: 'Sec',
     timezone: 'Time zone | Time zones',
   },
+  // locales, related to user access, permissions, etc.
+  access: {
+    ObAC: 'Managed by operations',
+    RbAC: 'Managed by records',
+    operations: 'Operations',
+    rbacDefault: 'Default Record based Access',
+    accessMode: {
+      [AccessMode.FORBIDDEN]: 'Forbidden',
+      [AccessMode.ALLOW]: 'Allow',
+      [AccessMode.MANAGE]: 'Allow with delegation',
+    },
+  },
   // describes Webitel system entities
   objects: {
     team: 'Team | Teams',
@@ -117,6 +136,8 @@ export default {
     region: 'Region | Regions',
     communicationType: 'Communication type | Communication types',
     grantee: 'Grantee | Grantees',
+    grantor: 'Grantor | Grantors',
+    role: 'Role | Roles',
     user: 'User | Users',
     queue: {
       type: {

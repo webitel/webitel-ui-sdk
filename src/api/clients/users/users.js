@@ -13,6 +13,7 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
 } from '../../transformers/index.js';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi.js';
 
 const instance = getDefaultInstance();
 
@@ -214,6 +215,8 @@ const UsersAPI = {
   getLookup: getUsersLookup,
   patchUserPresence,
   logoutUser,
+
+  ...generatePermissionsApi(baseUrl),
 };
 
 export default UsersAPI;
