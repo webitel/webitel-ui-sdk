@@ -1,7 +1,7 @@
 @import 'styleguide/styleguide';
 @import 'styleguide/display-helpers/display-helpers';
-@import 'defaults/table';
-@import 'defaults/card';
+@import 'pages/table-page';
+@import 'pages/card-page';
 
 @include wt-placeholder;
 
