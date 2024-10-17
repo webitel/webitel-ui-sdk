@@ -7,8 +7,8 @@
 
     <wt-popup
       :shown="shown"
-      overflow
       size="sm"
+      overflow
       @close="close"
     >
       <template #title>
@@ -16,14 +16,14 @@
       </template>
       <template #main>
         <permissions-role-select
-          v-model="grantee"
+          v-model:model-value="grantee"
           :clearable="false"
-          :placeholder="t('object.role', 1)"
+          :placeholder="t('objects.role', 1)"
           :search-method="getAvailableGrantees"
         />
       </template>
       <template #actions>
-        <wt-button @click="save">
+        <wt-button @click="save(grantee)">
           {{ t('objects.add') }}
         </wt-button>
         <wt-button
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref, useAttrs } from 'vue';
+import { computed, ref, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -65,16 +65,25 @@ const existingGranteesList = computed(() => getNamespacedState(store.state, prop
 
 const shown = computed(() => !!route.params.permissionId);
 
-const add = () => router.push({
-  ...route,
-  params: { ...route.params, permissionId: 'new' },
-});
+const add = () => {
+  const { params, query, hash, name } = route;
+
+  router.push({
+    query,
+    hash,
+    name,
+    params: { ...params, permissionId: 'new' },
+  });
+};
 
 const close = () => {
+  const { query, hash, name } = route;
   const { permissionId, ...params } = route.params;
 
   return router.push({
-    ...route,
+    query,
+    hash,
+    name,
     params,
   });
 };
@@ -98,8 +107,8 @@ const getAvailableGrantees = async (params) => {
   };
 };
 
-const save = async (payload = grantee.value) => {
-  await store.dispatch(`${props.namespace}/ADD_ROLE_PERMISSIONS`, payload);
+const save = async (grantee) => {
+  await store.dispatch(`${props.namespace}/ADD_ROLE_PERMISSIONS`, grantee);
   return close();
 };
 

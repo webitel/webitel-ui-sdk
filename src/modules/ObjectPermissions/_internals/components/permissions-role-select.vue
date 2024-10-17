@@ -3,15 +3,17 @@
     class="permissions-role-select"
     option-label="name"
     v-bind="attrs"
+    :value="model"
+    @input="model = $event"
   >
     <template #singleLabel="{ option, optionLabel }">
-      <role-row :role="option.user">
+      <role-row :role="option">
         {{ option[optionLabel] || option }}
       </role-row>
     </template>
 
     <template #option="{ option, optionLabel }">
-      <role-row :role="option.user">
+      <role-row :role="option">
         {{ option[optionLabel] || option }}
       </role-row>
     </template>
@@ -23,6 +25,8 @@ import { useAttrs } from 'vue';
 import RoleRow from './permissions-role-row.vue';
 
 const attrs = useAttrs();
+
+const model = defineModel({ required: true });
 </script>
 
 <style lang="scss" scoped>

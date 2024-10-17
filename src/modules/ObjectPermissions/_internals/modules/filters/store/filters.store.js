@@ -19,7 +19,5 @@ export default () => {
   .addFilter(deepCopy(filtersList))
   .getModule();
 
-  return {
-    filters,
-  };
+  return filters;
 };

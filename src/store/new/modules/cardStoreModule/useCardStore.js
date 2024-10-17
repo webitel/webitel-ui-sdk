@@ -5,7 +5,9 @@ import getNamespacedState from '../../../helpers/getNamespacedState.js';
 export const useCardStore = (namespace) => {
   const store = useStore();
 
-  const cardNamespace = `${namespace}/card`;
+  const cardNamespace = namespace.endsWith('/card')
+    ? namespace
+    : `${namespace}/card`;
 
   const id = computed(() => getNamespacedState(store.state, cardNamespace).itemId);
   const itemInstance = computed(() => getNamespacedState(store.state, cardNamespace).itemInstance);

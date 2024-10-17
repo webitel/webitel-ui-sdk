@@ -14,7 +14,7 @@ import applyTransform, {
   starToSearch,
 } from '../../transformers/index.js';
 
-const permissionsUrl = '/acl';
+const permissionsUrl = 'acl';
 
 const handlePermissionsList = (items) => {
   return items.map((item) => ({

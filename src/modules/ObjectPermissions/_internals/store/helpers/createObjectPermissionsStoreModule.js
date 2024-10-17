@@ -1,15 +1,27 @@
-import { createBaseStoreModule } from '../../../../../store/new/index.js';
-import tableStoreModule
-  from '../../../../../store/new/modules/tableStoreModule/tableStoreModule.js';
+import {
+  createBaseStoreModule,
+  createTableStoreModule,
+} from '../../../../../store/new/index.js';
 import objectPermissionsStoreModule
   from '../modules/objectPermissionsStoreModule.js';
 
-export const createObjectPermissionsStoreModule = (modules = []) => {
+export const createObjectPermissionsStoreModule = (modules) => {
   const modulesArr = Array.isArray(modules) ? modules : [modules];
 
-  return createBaseStoreModule([
-    tableStoreModule(),
+  const tableSubmodule = createTableStoreModule([
     objectPermissionsStoreModule(),
+  ]);
+
+  const cardSubmodule = [
+    // empty, now permissions don't have standard card functionality
+  ];
+
+  return createBaseStoreModule([
+    {
+      modules: {
+        table: tableSubmodule,
+      },
+    },
     ...modulesArr,
   ]);
 };
