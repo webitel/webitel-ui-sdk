@@ -27,7 +27,7 @@ const getters = {
       return fields;
     }, []);
 
-    return [...new Set([getters.REQUIRED_FIELDS, ...fields])];
+    return [...new Set([...getters.REQUIRED_FIELDS, ...fields])];
   },
 
   // main GET_LIST params collector
