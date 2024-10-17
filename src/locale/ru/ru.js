@@ -76,6 +76,7 @@ export default {
     back: 'Назад',
     step: 'Шаг { count }',
     more: 'Больше',
+    read: 'Читать',
   },
   vocabulary: {
     language: 'Язык',
