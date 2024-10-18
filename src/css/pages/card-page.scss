@@ -1,40 +1,8 @@
+
 .tabs-page-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.wt-page-wrapper {
-  width: 100%;
-
-  .main-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    & > section {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-  }
-}
-
-// inner content section
-.object-content {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 65vh;
-  padding: 30px;
-  border-radius: var(--border-radius);
-  background: #fff;
-
-  .pagination {
-    margin: auto 0 0 auto;
-    padding-top: 28px;
-  }
 }
 
 .main-section__wrapper {
@@ -49,14 +17,25 @@
   flex-grow: 1;
 }
 
-.btn-controls {
-  .btn {
-    margin-left: 28px;
+.value-pair {
+  display: grid;
+  align-items: center;
+  margin-bottom: 20px;
+  grid-template-columns: 1fr 1fr 24px;
+  grid-gap: 20px;
+}
+
+.object-with-tabs {
+  padding-top: 28px;
+  padding-right: 0;
+  padding-left: 0;
+
+  .tabs-inner-component {
+    padding: 0 58px 38px 58px;
   }
 }
 
-// SECTION HEADING
-.content-header {
+.opened-card-header {
   position: relative;
   display: flex;
   align-items: center;
@@ -64,24 +43,38 @@
   justify-content: space-between;
   margin: var(--spacing-sm) 0;
 
-  .content-title {
+  &__actions-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--table-actions-icon-gap);
+  }
+
+  &__title {
     @extend %typo-heading-3;
 
     + .hint {
       top: -2px;
     }
   }
+}
 
-  // WRAP FOR SEARCH INPUT
-  .content-header__actions-wrap {
+.wt-page-wrapper {
+  width: 100%;
+}
+
+.opened-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & > section {
     display: flex;
-    align-items: center;
-    gap: var(--table-actions-icon-gap);
+    flex-direction: column;
+    height: 100%;
   }
 }
 
-// GRID TEMPLATE FOR MODULE INPUTS
-.object-input-grid {
+.opened-card-input-grid {
   display: grid;
   align-items: flex-start;
   grid-template-columns: 1fr 1fr;
@@ -99,48 +92,13 @@
 }
 
 .grid-w100 {
-  .object-input-grid {
+  .opened-card-input-grid {
     grid-template-columns: 1fr;
   }
 }
 
 .grid-w50 {
-  .object-input-grid {
+  .opened-card-input-grid {
     grid-template-columns: 50%;
   }
-}
-
-.value-pair {
-  display: grid;
-  align-items: center;
-  margin-bottom: 20px;
-  grid-template-columns: 1fr 1fr 24px;
-  grid-gap: 20px;
-}
-
-.module-new .object-input-grid .select-preview {
-  margin-bottom: 20px;
-}
-
-.module-new {
-  .new_w50 {
-    width: 50%;
-
-    .form-input {
-      margin: 8px 0;
-    }
-  }
-
-  &.object-with-tabs {
-    padding-top: 28px;
-    padding-right: 0;
-    padding-left: 0;
-
-    .tabs-inner-component {
-      padding: 0 58px 38px 58px;
-    }
-  }
-}
-.dummy-wrapper {
-  height: 100%;
 }

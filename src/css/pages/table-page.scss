@@ -1,93 +1,64 @@
 .wt-page-wrapper {
-  flex-grow: 1;
-  display: flex;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
 
-  :deep(.wt-page-wrapper__main) {
-    display: flex;
-    flex-direction: column;
-    max-height: 100%;
+  &__main {
     min-height: 0;
+
+    .wt-loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 
-.table-wrapper {
+.table-section {
   display: flex;
-  flex: 1 1 100%;
   flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding-top: var(--spacing-xs);
   width: 100%;
-  max-height: 100%;
-  min-height: 0;
-  gap: var(--spacing-sm);
 
-  .wt-table {
-    flex-grow: 1;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 100%;
+    width: 100%;
+    gap: var(--spacing-sm);
+    min-height: 0;
 
     .wt-table__head {
       position: sticky;
       top: 0;
       z-index: 1;
     }
-  }
 
-  .wt-pagination {
-    margin-top: 20px;
-    margin-left: auto;
-  }
-
-  .table-action {
-    margin-left: 10px;
-  }
-
-  /*
-   wrapper class for table content overflow: visible preserving table scroll itself
-  .table-wrapper>.table-wrapper__visible-scroll-wrapper>.wt-table
-   */
-  .table-wrapper__visible-scroll-wrapper {
-    overflow: visible;
-    height: 100%;
-
-    .wt-table {
-      overflow: visible;
-    }
-  }
-
-  .table-wrapper__scroll-wrapper {
-    @extend %wt-scrollbar;
-
-    overflow: auto;
-    height: 100%;
-    min-height: 0;
-
-    .wt-table {
-      overflow: visible;
+    .wt-pagination {
+      margin-top: auto;
     }
   }
 }
 
-.actions-panel-wrapper {
+.table-header {
+  position: relative;
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--spacing-sm) 0;
 
-  .filter-wrap {
-    flex: 1;
+  &__title {
+    @extend %typo-heading-3;
+
+    + .hint {
+      top: -2px;
+    }
   }
 
-  .wt-table-actions {
-    height: fit-content;
-    margin-top: 24px;
-  }
-}
-
-.wt-page-wrapper__main {
-  min-height: 0;
-
-  .wt-loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  &__actions-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--table-actions-icon-gap);
   }
 }
