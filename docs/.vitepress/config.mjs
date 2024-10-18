@@ -18,6 +18,7 @@ const sidebarComponents = globbySync(
     ignore: ['pages/webitel-ui/components/on-demand/**'],
   },
 );
+const sbLocale = globbySync('pages/webitel-ui/locale/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const onDemandSidebarComponents = globbySync('pages/webitel-ui/components/on-demand/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarEnums = globbySync('pages/webitel-ui/enums/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
 const sidebarModules = globbySync('pages/webitel-ui/modules/**/Readme.md', { cwd: path.resolve(__dirname, '../') });
@@ -34,6 +35,13 @@ export default defineConfig({
   title: 'Webitel UI',
   description: 'Webitel UI docs',
   base: '/webitel-ui-sdk/',
+  head: [
+    ['link',
+      {
+        rel: 'icon',
+        href: 'data:image/svg+xml,<svg xmlns="%22http://www.w3.org/2000/svg%22" viewBox="%220" 0 100 100%22><text y="%22.9em%22" font-size="%2290%22">💅</text></svg>',
+      }],
+  ],
   vite: {
     ssr: {
       noExternal: [
@@ -85,6 +93,7 @@ export default defineConfig({
       { text: 'Architecture, Structures, Design, etc', items: sidebarArchitectureAndStructures },
       { text: 'How To', items: sidebarHowTo },
       { text: 'API Tools', items: sidebarApi },
+      { text: 'Locale', items: sbLocale },
       { text: 'Components', items: sidebarComponents },
       { text: 'Components/on-demand', items: onDemandSidebarComponents },
       { text: 'Enums', items: sidebarEnums },
