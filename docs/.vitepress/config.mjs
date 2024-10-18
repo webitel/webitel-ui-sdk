@@ -42,6 +42,7 @@ export default defineConfig({
         href: 'data:image/svg+xml,<svg xmlns="%22http://www.w3.org/2000/svg%22" viewBox="%220" 0 100 100%22><text y="%22.9em%22" font-size="%2290%22">💅</text></svg>',
       }],
   ],
+  lastUpdated: true,
   vite: {
     ssr: {
       noExternal: [
@@ -113,8 +114,13 @@ export default defineConfig({
         }),
       })),
 
-    // socialLinks: [
-    //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    // ]
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/webitel/webitel-ui-sdk' },
+    ],
+    // https://vitepress.dev/reference/default-theme-edit-link#site-level-config
+    editLink: {
+      // https://vitepress.dev/reference/runtime-api#usedata
+      pattern: 'https://github.com/webitel/webitel-ui-sdk/tree/master/docs/:path',
+    },
   },
 });
