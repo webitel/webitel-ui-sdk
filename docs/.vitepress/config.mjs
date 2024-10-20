@@ -59,7 +59,7 @@ export default defineConfig({
   // additionalData: `@import "../../src/css/main.scss";`,
   themeConfig: {
     // search won't work till i18n locales are "legacy: false"
-    // search: { provider: 'local' },
+    search: { provider: 'local' },
     // https://vitepress.dev/reference/default-theme-config
     nav: [{ text: 'Home', link: '/' }],
     sidebar,

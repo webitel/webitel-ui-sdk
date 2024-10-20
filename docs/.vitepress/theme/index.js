@@ -11,6 +11,7 @@ import sharedComponents from '../../shared';
 import '../../../src/assets//icons/sprite';
 import 'prismjs/themes/prism.min.css';
 import Layout from './Layout.vue';
+import './main.scss';
 
 const router = createRouter({
   history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
