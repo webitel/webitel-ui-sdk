@@ -5,7 +5,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
-import sidebar from './sidebar.js';
+import { nav, sidebar } from './routes.js';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -23,6 +23,11 @@ export default defineConfig({
   ],
   lastUpdated: true,
   vite: {
+    resolve: {
+      alias: [
+        { find: '__lib__', replacement: path.resolve(__dirname, '../../src') },
+      ],
+    },
     ssr: {
       noExternal: ['@vuelidate/core', 'vue-multiselect', 'webitel-sdk'],
     },
@@ -61,7 +66,7 @@ export default defineConfig({
     // search won't work till i18n locales are "legacy: false"
     search: { provider: 'local' },
     // https://vitepress.dev/reference/default-theme-config
-    nav: [{ text: 'Home', link: '/' }],
+    nav,
     sidebar,
 
     socialLinks: [

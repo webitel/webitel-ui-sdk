@@ -24,7 +24,18 @@ const useDocsPattern = ({
   return globbySync(fullPattern, { cwd: path.resolve(__dirname, '../') });
 };
 
-const nav = [
+const navbarNav = [
+  { text: 'Home', link: '/' },
+  {
+    text: 'icons',
+    link: useDocsPattern({
+      pattern: 'webitel-ui/assets/icons',
+      descendants: false,
+    }).pop(),
+  },
+];
+
+const sidebarNav = [
   {
     text: 'FAQ',
     items: useDocsPattern({ pattern: 'docs/faq' }),
@@ -51,11 +62,15 @@ const nav = [
     collapsed: true,
   },
   {
+    text: 'Assets',
+    items: useDocsPattern({ pattern: 'webitel-ui/assets' }),
+    collapsed: false,
+  },
+  {
     text: 'Components',
     items: useDocsPattern({ pattern: 'webitel-ui/components' }),
     collapsed: true,
   },
-
   {
     text: 'Components/on-demand',
     items: useDocsPattern({ pattern: 'webitel-ui/components/on-demand' }),
@@ -80,15 +95,6 @@ const nav = [
         children: false,
         descendants: false,
       }),
-      // {
-      //   text: 'index',
-      //   items: useDocsPattern({
-      //     pattern: 'webitel-ui/modules/ObjectPermissions',
-      //     filename: ['index.md'],
-      //     children: false,
-      //     descendants: false,
-      //   }),
-      // },
       {
         text: 'Components',
         items: useDocsPattern({
@@ -125,40 +131,55 @@ const nav = [
   },
 ];
 
-const generateSidebar = () => {
-  const linkify = (nav) => {
-    if (Array.isArray(nav)) {
-      return nav.map((item) => linkify(item));
-    }
+const linkify = (nav) => {
+  if (Array.isArray(nav)) {
+    return nav.map((item) => linkify(item));
+  }
 
-    if (isObject(nav)) {
-      return {
-        ...nav,
-        items: nav.items.map((item) => linkify(item)),
-      };
-    }
+  if (isObject(nav)) {
+    if (nav.link) return nav;
 
-    if (typeof nav === 'string') {
-      const getParentDirName = (nav) => nav.split('/').at(-2);
-      const getFilename = (nav) => nav.split('/').pop().replace(/\.md$/, '');
-      const getLink = (nav) => '/'.concat(nav.replace('.md', '.html'));
+    return {
+      ...nav,
+      items: nav.items.map((item) => linkify(item)),
+    };
+  }
 
-      const text = nav.endsWith('Readme.md')
-        ? getParentDirName(nav)
-        : getFilename(nav);
-      const link = getLink(nav);
+  if (typeof nav === 'string') {
+    const getParentDirName = (nav) => nav.split('/').at(-2);
+    const getFilename = (nav) => nav.split('/').pop().replace(/\.md$/, '');
+    const getLink = (nav) => '/'.concat(nav.replace('.md', '.html'));
 
-      return { text, link };
-    }
+    const text = nav.endsWith('Readme.md')
+      ? getParentDirName(nav)
+      : getFilename(nav);
+    const link = getLink(nav);
 
-    console.error('tf is that sidebar nav item type', nav);
+    return { text, link };
+  }
 
-    return nav;
-  };
+  console.error('tf is that sidebar nav item type', nav);
 
-  const sb = linkify(nav);
-  // console.info(JSON.stringify(sb, null, 2));
+  return nav;
+};
+
+const generateSidebar = (sidebarNav) => {
+
+  const sb = linkify(sidebarNav);
+  console.info(JSON.stringify(sb, null, 2));
   return sb;
 };
 
-export default generateSidebar();
+const generateNav = (navbarNav) => {
+  const nav = linkify(navbarNav);
+  // console.info(JSON.stringify(sb, null, 2));
+  return nav;
+};
+
+const sidebar = generateSidebar(sidebarNav);
+const nav = generateNav(navbarNav);
+
+export {
+  sidebar,
+  nav,
+};
