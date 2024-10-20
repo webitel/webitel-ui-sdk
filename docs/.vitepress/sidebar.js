@@ -6,7 +6,7 @@ const useDocsPattern = ({
                           pattern,
                           children = false,
                           descendants = true,
-                          filename = ['Readme.md'], // str or arr
+                          filename = ['*.md'], // str or arr
                         } = {}) => {
   const generatePattern = () => {
     const descendantsPattern = descendants ? '/**' : '';
@@ -77,7 +77,6 @@ const nav = [
     items: [
       ...useDocsPattern({
         pattern: 'webitel-ui/modules/ObjectPermissions',
-        filename: ['index.md'],
         children: false,
         descendants: false,
       }),
@@ -94,14 +93,12 @@ const nav = [
         text: 'Components',
         items: useDocsPattern({
           pattern: 'webitel-ui/modules/ObjectPermissions/components',
-          filename: ['*.md'],
         }),
       },
       {
         text: 'Store',
         items: useDocsPattern({
           pattern: 'webitel-ui/modules/ObjectPermissions/store',
-          filename: ['*.md'],
         }),
       },
     ],
