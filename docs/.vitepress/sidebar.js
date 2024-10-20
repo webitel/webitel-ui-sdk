@@ -2,128 +2,161 @@ import { globbySync } from 'globby';
 import isObject from 'lodash/isObject';
 import path from 'path';
 
-const useDocsPath = (pth, { directChildrenOnly = false } = {}) => {
-  const pattern = directChildrenOnly
-    ? `pages/${pth}/Readme.md`
-    : `pages/${pth}/**/Readme.md`;
+const useDocsPattern = ({
+                          pattern,
+                          children = false,
+                          descendants = true,
+                          filename = ['Readme.md'], // str or arr
+                        } = {}) => {
+  const generatePattern = () => {
+    const descendantsPattern = descendants ? '/**' : '';
+    const childrenPattern = children ? '/*' : '';
 
-  return globbySync(pattern, { cwd: path.resolve(__dirname, '../') });
+    const filenames = Array.isArray(filename) ? filename : [filename];
+    const filenamesPattern = filenames.map((filename) => `/${filename}`)
+    .join(',');
+
+    return `pages/${pattern}${descendantsPattern}${childrenPattern}${filenamesPattern}`;
+  };
+
+  const fullPattern = generatePattern();
+
+  return globbySync(fullPattern, { cwd: path.resolve(__dirname, '../') });
 };
-;
+
+const nav = [
+  {
+    text: 'FAQ',
+    items: useDocsPattern({ pattern: 'docs/faq' }),
+    collapsed: false,
+  },
+  {
+    text: 'Architecture, Structures, Design, etc',
+    items: useDocsPattern({ pattern: 'docs/architecture-and-structures' }),
+    collapsed: true,
+  },
+  {
+    text: 'How To',
+    items: useDocsPattern({ pattern: 'docs/how-to' }),
+    collapsed: true,
+  },
+  {
+    text: 'API Tools',
+    items: useDocsPattern({ pattern: 'webitel-ui/api' }),
+    collapsed: true,
+  },
+  {
+    text: 'Locale',
+    items: useDocsPattern({ pattern: 'webitel-ui/locale' }),
+    collapsed: true,
+  },
+  {
+    text: 'Components',
+    items: useDocsPattern({ pattern: 'webitel-ui/components' }),
+    collapsed: true,
+  },
+
+  {
+    text: 'Components/on-demand',
+    items: useDocsPattern({ pattern: 'webitel-ui/components/on-demand' }),
+    collapsed: true,
+  },
+  {
+    text: 'Enums',
+    items: useDocsPattern({ pattern: 'webitel-ui/enums' }),
+    collapsed: true,
+  },
+  {
+    text: 'Modules',
+    items: useDocsPattern({ pattern: 'webitel-ui/modules' }),
+    collapsed: true,
+  },
+  {
+    text: 'Module: Object Permissions',
+    collapsed: true,
+    items: [
+      ...useDocsPattern({
+        pattern: 'webitel-ui/modules/ObjectPermissions',
+        filename: ['index.md'],
+        children: false,
+        descendants: false,
+      }),
+      // {
+      //   text: 'index',
+      //   items: useDocsPattern({
+      //     pattern: 'webitel-ui/modules/ObjectPermissions',
+      //     filename: ['index.md'],
+      //     children: false,
+      //     descendants: false,
+      //   }),
+      // },
+      {
+        text: 'Components',
+        items: useDocsPattern({
+          pattern: 'webitel-ui/modules/ObjectPermissions/components',
+          filename: ['*.md'],
+        }),
+      },
+      {
+        text: 'Store',
+        items: useDocsPattern({
+          pattern: 'webitel-ui/modules/ObjectPermissions/store',
+          filename: ['*.md'],
+        }),
+      },
+    ],
+  },
+  {
+    text: 'Store',
+    items: useDocsPattern({ pattern: 'webitel-ui/store' }),
+    collapsed: true,
+  },
+  {
+    text: 'Test utils and Mocks',
+    items: useDocsPattern({ pattern: 'webitel-ui/tests' }),
+    collapsed: true,
+  },
+  {
+    text: 'Validators',
+    items: useDocsPattern({ pattern: 'webitel-ui/validators' }),
+    collapsed: true,
+  },
+  {
+    text: 'Tests Cookbook',
+    items: useDocsPattern({ pattern: 'docs/tests-cookbook' }),
+    collapsed: true,
+  },
+];
 
 const generateSidebar = () => {
-  const nav = [
-    {
-      text: 'FAQ',
-      items: useDocsPath('docs/faq'),
-      collapsed: false,
-    },
-    {
-      text: 'Architecture, Structures, Design, etc',
-      items: useDocsPath('docs/architecture-and-structures'),
-      collapsed: true,
-    },
-    {
-      text: 'How To',
-      items: useDocsPath('docs/how-to'),
-      collapsed: true,
-    },
-    {
-      text: 'API Tools',
-      items: useDocsPath('webitel-ui/api'),
-      collapsed: true,
-    },
-    {
-      text: 'Locale',
-      items: useDocsPath('webitel-ui/locale'),
-      collapsed: true,
-    },
-    {
-      text: 'Components',
-      items: useDocsPath('webitel-ui/components'),
-      collapsed: true,
-    },
-
-    {
-      text: 'Components/on-demand',
-      items: useDocsPath('webitel-ui/components/on-demand'),
-      collapsed: true,
-    },
-    {
-      text: 'Enums',
-      items: useDocsPath('webitel-ui/enums'),
-      collapsed: true,
-    },
-    {
-      text: 'Modules',
-      items: useDocsPath('webitel-ui/modules'),
-      collapsed: true,
-    },
-    {
-      text: 'Module: Object Permissions',
-      collapsed: true,
-      items: [
-        {
-          text: 'index',
-          items: useDocsPath('webitel-ui/modules/ObjectPermissions', {
-            directChildrenOnly: true,
-          }),
-        },
-        {
-          text: 'Components',
-          items: useDocsPath('webitel-ui/modules/ObjectPermissions/components'),
-        },
-        {
-          text: 'Store',
-          items: useDocsPath('webitel-ui/modules/ObjectPermissions/store'),
-        },
-      ],
-    },
-    {
-      text: 'Store',
-      items: useDocsPath('webitel-ui/store'),
-      collapsed: true,
-    },
-    {
-      text: 'Test utils and Mocks',
-      items: useDocsPath('webitel-ui/tests'),
-      collapsed: true,
-    },
-    {
-      text: 'Validators',
-      items: useDocsPath('webitel-ui/validators'),
-      collapsed: true,
-    },
-    {
-      text: 'Tests Cookbook',
-      items: useDocsPath('docs/tests-cookbook'),
-      collapsed: true,
-    },
-  ];
-
   const linkify = (nav) => {
     if (Array.isArray(nav)) {
       return nav.map((item) => linkify(item));
     }
 
-    if (isObject(nav.items?.at(0))) {
-      const items = nav.items.map((item) => linkify(item));
+    if (isObject(nav)) {
       return {
         ...nav,
-        items,
+        items: nav.items.map((item) => linkify(item)),
       };
     }
 
-    const items = nav.items.map((path) => ({
-      // ...nav,
-      text: path.split('/').at(-2), // get only last folder name, where Readme.md is located
-      link: path.replace(/\.md$/, ''),
-    }));
+    if (typeof nav === 'string') {
+      const getParentDirName = (nav) => nav.split('/').at(-2);
+      const getFilename = (nav) => nav.split('/').pop().replace(/\.md$/, '');
+      const getLink = (nav) => '/'.concat(nav.replace('.md', '.html'));
 
-    return {
-      ...nav,
-      items,
-    };
+      const text = nav.endsWith('Readme.md')
+        ? getParentDirName(nav)
+        : getFilename(nav);
+      const link = getLink(nav);
+
+      return { text, link };
+    }
+
+    console.error('tf is that sidebar nav item type', nav);
+
+    return nav;
   };
 
   const sb = linkify(nav);
