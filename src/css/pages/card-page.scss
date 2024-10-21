@@ -1,104 +1,47 @@
-
-.tabs-page-wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.main-section__wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.value-pair {
-  display: grid;
-  align-items: center;
-  margin-bottom: 20px;
-  grid-template-columns: 1fr 1fr 24px;
-  grid-gap: 20px;
-}
-
-.object-with-tabs {
-  padding-top: 28px;
-  padding-right: 0;
-  padding-left: 0;
-
-  .tabs-inner-component {
-    padding: 0 58px 38px 58px;
-  }
-}
-
-.opened-card-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: var(--spacing-sm) 0;
-
-  &__actions-wrap {
-    display: flex;
-    align-items: center;
-    gap: var(--table-actions-icon-gap);
-  }
-
-  &__title {
-    @extend %typo-heading-3;
-
-    + .hint {
-      top: -2px;
-    }
-  }
-}
-
-.wt-page-wrapper {
-  width: 100%;
-}
-
 .opened-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    &.wt-page-wrapper {
+      width: 100%;
+    }
 
-  & > section {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-}
+    &-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: var(--spacing-sm) 0;
 
-.opened-card-input-grid {
-  display: grid;
-  align-items: flex-start;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: minmax(85px, auto);
-  grid-column-gap: 20px;
-  grid-row-gap: 10px;
+      &__title {
+        @extend %typo-heading-3;
 
-  &__1-col {
-    grid-template-columns: 1fr;
-  }
+        + .hint {
+          top: -2px;
+        }
+      }
+    }
 
-  &__w50 {
-    width: 50%;
-  }
-}
+    &-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    &-input-grid {
+      display: grid;
+      align-items: flex-start;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: minmax(auto, auto);
+      grid-column-gap: var(--spacing-xs);
+      grid-row-gap: var(--spacing-xs);
 
-.grid-w100 {
-  .opened-card-input-grid {
-    grid-template-columns: 1fr;
-  }
-}
+      &--1-col {
+        grid-template-columns: 1fr;
+      }
 
-.grid-w50 {
-  .opened-card-input-grid {
-    grid-template-columns: 50%;
-  }
+      &--w50 {
+        width: 50%;
+      }
+      &--w100{
+        grid-template-columns: 1fr;
+      }
+    }
 }
