@@ -121,10 +121,16 @@ import RolePopup from '../_internals/components/permissions-tab-role-popup.vue';
 import { AccessMode } from '../_internals/enums/AccessMode.enum.js';
 
 const props = defineProps({
+  /**
+   * Namespace of the parent card store
+   */
   namespace: {
     type: String,
     required: true,
   },
+  /**
+   * Access to the component actions, related to permissions
+   */
   access: {
     type: Object,
     default: () => ({

@@ -166,7 +166,7 @@ const linkify = (nav) => {
 const generateSidebar = (sidebarNav) => {
 
   const sb = linkify(sidebarNav);
-  console.info(JSON.stringify(sb, null, 2));
+  // console.info(JSON.stringify(sb, null, 2));
   return sb;
 };
 

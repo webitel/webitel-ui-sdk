@@ -51,7 +51,7 @@ export default defineConfig({
       }),
       (() => {
         const docgen = vueDocgenPlugin({
-          include: globbySync(['src/components/**/*.vue']),
+          include: globbySync(['src/**/*.vue']),
           injectAt: 'docs',
         });
         // dunno why, but default enforce value breaks build

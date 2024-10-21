@@ -14,8 +14,29 @@ const props = defineProps({
   },
 });
 
+const calcDefaultValue = (defaultValue) => {
+  console.info(defaultValue);
+
+  if (!defaultValue) {
+    return ' - ';
+  }
+
+  if (typeof defaultValue.value === 'function') {
+    return defaultValue.value();
+  }
+
+  // try {
+  //   return JSON.parse(defaultValue.value);
+  // } catch {
+  if (defaultValue.value.includes('\n')) {
+    return `\`${defaultValue.value.replaceAll('\n', '')}\``;
+  }
+  return `\`${defaultValue.value}\``;
+  // }
+};
+
 const result = computed(() => {
-  const propsTable = !!props.info.props && markdownTable([
+  const propsTable = !!props.info?.props && markdownTable([
     ['Name', 'Required', 'Types', 'Default', 'Description', 'Example', 'Deprecated'],
     ...props.info.props.map(({
       name, type, required, defaultValue, description, tags,
@@ -23,17 +44,19 @@ const result = computed(() => {
       const _name = `\`${name}\``;
       const _type = `\`${type.name.split('|')}\``;
 
-      const _defaultValue = `\`${defaultValue.value}\``;
+      const _defaultValue = calcDefaultValue(defaultValue);
 
       const example = tags?.example && tags.example.map(({ description }) => `\`\`\`${description} \`\`\``);
 
-      const deprecated = !!tags?.deprecated;
+      const deprecated = !!tags?.deprecated ? '❗️' : '';
 
-      return [_name, required, _type, _defaultValue, description, example, deprecated];
+      const _required = required ? '✅' : '';
+
+      return [_name, _required, _type, _defaultValue, description, example, deprecated];
     }),
   ]);
 
-  const eventsTable = !!props.info.events && markdownTable([
+  const eventsTable = !!props.info?.events && markdownTable([
     ['Name', 'Params', 'Description'],
     ...props.info.events.map(({ name, params, description }) => {
       const _name = `\`${name}\``;
@@ -41,7 +64,7 @@ const result = computed(() => {
     }),
   ]);
 
-  const slotsTable = !!props.info.slots && markdownTable([
+  const slotsTable = !!props.info?.slots && markdownTable([
     ['Name', 'Scope', 'Description'],
     ...props.info.slots.map(({ name, scope, description }) => {
       const _name = `\`${name}\``;
@@ -49,7 +72,15 @@ const result = computed(() => {
     }),
   ]);
 
-    return md.render(`### Props\n\n${propsTable}\n\n ### Events\n\n${eventsTable}\n\n ### Slots\n\n${slotsTable}`);
+  const mdResult = [
+    { heading: 'Props', data: propsTable },
+    { heading: 'Events', data: eventsTable },
+    { heading: 'Slots', data: slotsTable },
+  ].filter(({ data: v }) => !!v).reduce((md, { heading, data }) => {
+    return ` ${md} ### ${heading} \n\n${data} \n\n`;
+  }, '');
+
+  return md.render(mdResult);
 });
 </script>
 
@@ -57,6 +88,6 @@ const result = computed(() => {
   <div v-html="result" />
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 </style>
