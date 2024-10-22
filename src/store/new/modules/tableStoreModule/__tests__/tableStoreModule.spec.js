@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import FilterEvent from '../../../../../modules/Filters/enums/FilterEvent.enum.js';
-import FiltersStoreModule from '../../../../../modules/Filters/store/FiltersStoreModule.js';
+import FilterEvent
+  from '../../../../../modules/Filters/enums/FilterEvent.enum.js';
+import FiltersStoreModule
+  from '../../../../../modules/Filters/store/FiltersStoreModule.js';
 import { SortSymbols } from '../../../../../scripts/sortQueryAdapters.js';
-import { createTableStoreModule } from '../../../helpers/createTableStoreModule.js';
+import {
+  createTableStoreModule,
+} from '../../../helpers/createTableStoreModule.js';
 
 describe('TableStoreModule', () => {
   it('correctly computes FIELDS getter', () => {
@@ -15,7 +19,11 @@ describe('TableStoreModule', () => {
 
     const state = { headers };
 
-    expect(createTableStoreModule().getters.FIELDS(state)).toEqual(['id', 'age']);
+    const tableStore = createTableStoreModule({ state });
+
+    const store = createStore(tableStore);
+
+    expect(store.getters.FIELDS).toEqual(['id', 'age']);
   });
 });
 

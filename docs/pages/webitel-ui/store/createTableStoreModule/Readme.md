@@ -33,7 +33,8 @@ It contains all required state to power a table view:
 ### Getters
 
 * `PARENT_ID` - **if table is nested, should be overriden**.
-* `FIELDS` - list of fields to get from API, depending on visible `headers` columns
+* `REQUIRED_FIELDS` - list of fields, which should always be included in `FIELDS` getter. `['id']` by default
+* `FIELDS` - list of fields to get from API, depending on visible `headers` columns and `REQUIRED_FIELDS`
 * `GET_LIST_PARAMS`: accepts override object and returns all request filters as params
   **with overrides priority**
 

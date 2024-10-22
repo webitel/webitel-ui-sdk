@@ -14,6 +14,11 @@ i `createApiStoreModule` [дока](../createApiStoreModule/Readme.md).
 
 Обʼєкт сутності, з яким ми працюємо.
 
+### `_resettable`
+
+Обʼєкт, який містить початковий стан сутності, до якого ми ресетаємо `itemInstance`, використовуючи
+[RESET_ITEM_STATE](#RESET_ITEM_STATE).
+
 ## Actions
 
 ### `SET_PARENT_ITEM_ID`
@@ -36,6 +41,8 @@ i `createApiStoreModule` [дока](../createApiStoreModule/Readme.md).
 
 ### `RESET_ITEM_STATE`
 
+Глибоко мерджить стейт з його [`_resettable`](#_resettable).
+
 ### `DELETE_ITEM`
 
 ## Mutations
@@ -46,14 +53,16 @@ i `createApiStoreModule` [дока](../createApiStoreModule/Readme.md).
 
 ### Params
 
-* `namespace`: неймспейс сутності, **без `/card`(!)**
+* `namespace`: неймспейс сутності.
+
+_Примітка: якщо неймспейс вже закінчується на `card`, то ще раз `card` дописуватись не буде._
 
 ### Returns
 
 Станом на зараз:
 
 ```javascript
-{
+const {
   namespace: cardNamespace,
     id,
     itemInstance,
@@ -65,7 +74,7 @@ i `createApiStoreModule` [дока](../createApiStoreModule/Readme.md).
     resetState,
     setItemProp,
     deleteItem,
-}
+} = useCardStore(namespace);
 ```
 
 ## Як користуватись
@@ -107,5 +116,7 @@ import { useCardStore } from '@webitel/ui-sdk/store';
 const namespace = 'smth';
 
 // взяли то шо надо, і використали
-const { ... } = useCardStore(namespace);
+const {
+  // ...
+} = useCardStore(namespace);
 ```

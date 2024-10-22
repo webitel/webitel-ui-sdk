@@ -16,15 +16,15 @@ export const kebabToSnake = (str) =>
 export const snakeToKebab = (str) =>
   str.replace(/([-_][a-z])/g, (group) => group.replace('_', '-'));
 
-export const objSnakeToCamel = (obj, skipKeys = []) => {
+const convertObject = ({ self, converter }) => (obj, skipKeys) => {
   if (!obj) return obj;
   const newObj = {};
   if (Array.isArray(obj)) {
     return obj.map((value) => {
       if (typeof value === 'object') {
-        return objSnakeToCamel(value, skipKeys);
+        return self(value, skipKeys);
       }
-      if (typeof value === 'string') return snakeToCamel(value);
+      if (typeof value === 'string') return converter(value);
       return value; // number
     });
   }
@@ -32,13 +32,13 @@ export const objSnakeToCamel = (obj, skipKeys = []) => {
     if (skipKeys.includes(oldKey)) {
       newObj[oldKey] = obj[oldKey];
     } else {
-      const newKey = snakeToCamel(oldKey);
+      const newKey = converter(oldKey);
       let value = obj[oldKey];
       if (
         Array.isArray(value) ||
         (value !== null && value !== undefined && value.constructor === Object)
       ) {
-        value = objSnakeToCamel(value, skipKeys);
+        value = self(value, skipKeys);
       }
       newObj[newKey] = value;
     }
@@ -47,33 +47,23 @@ export const objSnakeToCamel = (obj, skipKeys = []) => {
   return newObj;
 };
 
-export const objCamelToSnake = (obj, skipKeys = []) => {
-  if (!obj) return obj;
-  const newObj = {};
-  if (Array.isArray(obj)) {
-    return obj.map((value) => {
-      if (typeof value === 'object') {
-        return objCamelToSnake(value, skipKeys);
-      }
-      if (typeof value === 'string') return camelToSnake(value);
-      return value; // number
-    });
-  }
-  Object.keys(obj).forEach((oldKey) => {
-    if (skipKeys.includes(oldKey)) {
-      newObj[oldKey] = obj[oldKey];
-    } else {
-      const newKey = camelToSnake(oldKey);
-      let value = obj[oldKey];
-      if (
-        Array.isArray(value) ||
-        (value !== null && value !== undefined && value.constructor === Object)
-      ) {
-        value = objCamelToSnake(value, skipKeys);
-      }
-      newObj[newKey] = value;
-    }
-  });
+export const objSnakeToCamel = (obj, skipKeys = []) => {
+  return convertObject({
+    self: objSnakeToCamel,
+    converter: snakeToCamel,
+  })(obj, skipKeys);
+};
 
-  return newObj;
+export const objCamelToSnake = (obj, skipKeys = []) => {
+  return convertObject({
+    self: objCamelToSnake,
+    converter: camelToSnake,
+  })(obj, skipKeys);
+};
+
+export const objCamelToKebab = (obj, skipKeys = []) => {
+  return convertObject({
+    self: objCamelToKebab,
+    converter: camelToKebab,
+  })(obj, skipKeys);
 };

@@ -1,6 +1,4 @@
 <script setup>
-import iconsList from './_internals/iconsList.js';
-
 const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 'warning', 'on-dark', 'on-light', 'on-primary', 'info', 'chat', 'transfer', 'job'];
 </script>
 
@@ -31,21 +29,7 @@ const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 
 {{ color }}
 </div>
 
-## Available icons
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, 120px); grid-gap: var(--spacing-xs);">
-    <div
-      style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px;"
-      v-for="icon of iconsList"
-      :key="icon"
-    >
-      <wt-icon
-        :icon="icon"
-        size="xl"
-      ></wt-icon>
-      {{ icon }}
-    </div>
-  </div>
+## [Available icons](../../assets/icons/icons.md)
 
 ## How does it work?
 

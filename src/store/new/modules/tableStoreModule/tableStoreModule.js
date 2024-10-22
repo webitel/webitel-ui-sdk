@@ -19,13 +19,15 @@ const getters = {
   // FIXME: maybe move to filters module?
   FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
 
-  FIELDS: (state) => {
+  REQUIRED_FIELDS: () => ['id'], // override me
+
+  FIELDS: (state, getters) => {
     const fields = state.headers.reduce((fields, { show, field }) => {
       if (show || show === undefined) return [...fields, field];
       return fields;
     }, []);
 
-    return [...new Set(['id', ...fields])];
+    return [...new Set([...getters.REQUIRED_FIELDS, ...fields])];
   },
 
   // main GET_LIST params collector
@@ -130,7 +132,10 @@ const actions = {
 
     const params = context.getters.GET_LIST_PARAMS(query);
     try {
-      const { items = [], next = false } = await context.dispatch('api/GET_LIST', {
+      const {
+        items = [],
+        next = false,
+      } = await context.dispatch('GET_LIST_API', {
         context,
         params,
       });
@@ -171,7 +176,7 @@ const actions = {
     const changes = { [prop]: value };
 
     try {
-      await context.dispatch('api/PATCH_ITEM', {
+      await context.dispatch('PATCH_ITEM_API', {
         context,
         id,
         etag,
@@ -208,7 +213,7 @@ const actions = {
 
   DELETE_SINGLE: async (context, { id, etag }) => {
     try {
-      await context.dispatch('api/DELETE_ITEM', { context, id, etag });
+      await context.dispatch('DELETE_ITEM_API', { context, id, etag });
     } catch (err) {
       throw err;
     }
@@ -220,6 +225,16 @@ const actions = {
   SET_SELECTED: (context, selected) => {
     context.commit('SET', { path: 'selected', value: selected });
   },
+
+  GET_LIST_API: (context, payload) => context.dispatch('api/GET_LIST', payload),
+  PATCH_ITEM_API: (
+    context,
+    payload,
+  ) => context.dispatch('api/PATCH_ITEM', payload),
+  DELETE_ITEM_API: (
+    context,
+    payload,
+  ) => context.dispatch('api/DELETE_ITEM', payload),
 };
 
 export default () => ({

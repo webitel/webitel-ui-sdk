@@ -5,13 +5,21 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider
+  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections
+  from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections
+  from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import SupervisorSections
+  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications
+  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import {
+  AccessMode,
+} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -68,6 +76,7 @@ export default {
     back: 'Назад',
     step: 'Шаг { count }',
     more: 'Больше',
+    read: 'Читать',
   },
   vocabulary: {
     language: 'Язык',
@@ -107,6 +116,18 @@ export default {
     sec: 'Сек',
     timezone: 'Часовая зона | Часовые зоны',
   },
+  // locales, related to user access, permissions, etc.
+  access: {
+    ObAC: 'Управление действиями',
+    RbAC: 'Управление записями',
+    operations: 'Действия',
+    rbacDefault: 'Права доступа по записям по умолчанию',
+    accessMode: {
+      [AccessMode.FORBIDDEN]: 'Запрещено',
+      [AccessMode.ALLOW]: 'Разрешено',
+      [AccessMode.MANAGE]: 'Управление',
+    },
+  },
   // describes Webitel system entities
   objects: {
     team: 'Команда | Команды',
@@ -115,7 +136,9 @@ export default {
     region: 'Регион | Регионы',
     communicationType: 'Тип связи | Типы связи',
     grantee: 'Получатель | Получатели',
+    grantor: 'Праводатель | Праводатели',
     user: 'Пользователь | Пользователи',
+    role: 'Роль | Роли',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Входящая очередь',
