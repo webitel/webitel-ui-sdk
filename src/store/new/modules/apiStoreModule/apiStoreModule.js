@@ -63,6 +63,37 @@ const actions = {
       id,
     });
   },
+
+  GET_OBJECT_PERMISSIONS_LIST: (
+    apiContext,
+    { context: callerContext = {}, params = {} },
+  ) => {
+    if (!apiContext.state.api.getList) throw Error('No API "getPermissionsList" method provided');
+    return apiContext.state.api.getPermissionsList({
+      ...callerContext.state,
+      parentId: getParentIdFromContext(callerContext),
+      ...params,
+    });
+  },
+
+  PATCH_OBJECT_PERMISSIONS_ITEM: (
+    apiContext,
+    {
+      context: callerContext = {},
+      id,
+      changes,
+      ...rest
+    },
+  ) => {
+    if (!apiContext.state.api.patch) throw Error('No API "patchPermissions" method provided');
+    return apiContext.state.api.patchPermissions({
+      ...callerContext.state,
+      parentId: getParentIdFromContext(callerContext),
+      ...rest,
+      id,
+      changes,
+    });
+  },
 };
 
 const mutations = {};

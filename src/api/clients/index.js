@@ -11,6 +11,7 @@ import media from './media/media.js';
 import queues from './queues/queues.js';
 import roles from './roles/roles.js';
 import users from './users/users.js';
+import { contactChatMessagesHistory, contacts } from './сontacts/index.js';
 
 export {
   agents,
@@ -26,4 +27,6 @@ export {
   roles,
   users,
   configurations,
+  contacts,
+  contactChatMessagesHistory,
 };

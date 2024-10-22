@@ -26,7 +26,7 @@
           @click="sort(col)"
         >
           <div class="wt-table__th__text">
-            {{ col.text }}
+            {{ col.text || col.value }}
           </div>
           <wt-icon
             v-if="sortable"

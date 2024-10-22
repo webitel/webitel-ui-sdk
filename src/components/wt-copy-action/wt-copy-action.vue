@@ -25,10 +25,7 @@ export default {
     },
     tooltips: {
       type: Object,
-      default: () => ({
-        copy: '',
-        copied: '',
-      }),
+      default: () => ({}),
     },
   },
   data: () => ({
@@ -44,16 +41,12 @@ export default {
   },
   methods: {
     async copy() {
-      try {
-        await copy(this.value);
-        this.copied = this.value;
-        if (copiedIdTimeout) window.clearTimeout(copiedIdTimeout);
-        copiedIdTimeout = setTimeout(() => {
-          this.copied = null;
-        }, 1500);
-      } catch (err) {
-        throw err;
-      }
+      await copy(this.value);
+      this.copied = this.value;
+      if (copiedIdTimeout) window.clearTimeout(copiedIdTimeout);
+      copiedIdTimeout = setTimeout(() => {
+        this.copied = null;
+      }, 1500);
     },
   },
 };

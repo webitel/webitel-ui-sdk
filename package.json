@@ -143,7 +143,7 @@
     "vite-plugin-static-copy": "^0.17.1",
     "vite-plugin-svg-sprite": "^0.5.1",
     "vite-plugin-vue-docgen": "^0.3.4",
-    "vitepress": "=1.0.0-rc.26",
+    "vitepress": "1.4.1",
     "vitest": "^1.4.0",
     "vue": "^3.4.15",
     "vuex": "^4.1.0"
