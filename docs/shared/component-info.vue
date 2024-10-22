@@ -64,10 +64,16 @@ const result = computed(() => {
     }),
   ]);
 
+  console.info(props.info.slots);
+
   const slotsTable = !!props.info?.slots && markdownTable([
     ['Name', 'Scope', 'Description'],
-    ...props.info.slots.map(({ name, scope, description }) => {
+    ...props.info.slots.map(({ name, tags, scoped, description }) => {
       const _name = `\`${name}\``;
+
+      const scope = tags.scope.reduce((md, { description }) => {
+        return `${md} ${description}`;
+      }, '');
       return [_name, scope, description];
     }),
   ]);
