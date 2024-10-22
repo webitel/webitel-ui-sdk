@@ -71,7 +71,7 @@ const result = computed(() => {
     ...props.info.slots.map(({ name, tags, scoped, description }) => {
       const _name = `\`${name}\``;
 
-      const scope = tags.scope.reduce((md, { description }) => {
+      const scope = tags?.scope?.reduce((md, { description }) => {
         return `${md} ${description}`;
       }, '');
       return [_name, scope, description];
