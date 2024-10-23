@@ -4,6 +4,7 @@ import calendars from './calendars/calendars.js';
 import chatGateways from './chatGateways/chatGateways.js';
 import communications from './communications/communications.js';
 import configurations from './configurations/configurations.js';
+import closedChats from './chats/closedChats.js'
 import flows from './flows/flow.js';
 import gateways from './gateways/gateways.js';
 import lists from './lists/blacklists.js';
@@ -19,6 +20,7 @@ export {
   calendars,
   chatGateways,
   communications,
+  closedChats,
   flows,
   gateways,
   lists,
