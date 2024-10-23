@@ -11,11 +11,20 @@ import applyTransform, {
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const chatsService = new AgentChatsServiceApi(configuration, '', instance);
+const agentChatsService = new AgentChatsServiceApi(configuration, '', instance);
 
 const getList = async (params) => {
+  const { onlyClosed } = params;
+
   try {
-    const response = await chatsService.getAgentChats();
+    const response = await agentChatsService.getAgentChats(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      onlyClosed,
+    );
     const { items } = applyTransform(response.data, [
       snakeToCamel(),
     ]);
@@ -25,8 +34,8 @@ const getList = async (params) => {
   }
 };
 
-const ClosedChatsAPI = {
+const AgentChatsAPI = {
   getList,
 };
 
-export default ClosedChatsAPI;
+export default AgentChatsAPI;
