@@ -1,4 +1,5 @@
 import agents from './agents/agents.js';
+import agentChats from './agents/agentChats.js';
 import buckets from './buckets/buckets.js';
 import calendars from './calendars/calendars.js';
 import chatGateways from './chatGateways/chatGateways.js';
@@ -15,6 +16,7 @@ import { contactChatMessagesHistory, contacts } from './сontacts/index.js';
 
 export {
   agents,
+  agentChats,
   buckets,
   calendars,
   chatGateways,

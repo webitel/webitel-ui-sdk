@@ -2,68 +2,47 @@ import { globbySync } from 'globby';
 import isObject from 'lodash/isObject';
 import path from 'path';
 
-const useDocsPattern = ({
-                          pattern,
-                          children = false,
-                          descendants = true,
-                          filename = ['*.md'], // str or arr
-                        } = {}) => {
-  const generatePattern = () => {
-    const descendantsPattern = descendants ? '/**' : '';
-    const childrenPattern = children ? '/*' : '';
-
-    const filenames = Array.isArray(filename) ? filename : [filename];
-    const filenamesPattern = filenames.map((filename) => `/${filename}`)
-    .join(',');
-
-    return `pages/${pattern}${descendantsPattern}${childrenPattern}${filenamesPattern}`;
-  };
-
-  const fullPattern = generatePattern();
-
-  return globbySync(fullPattern, { cwd: path.resolve(__dirname, '../') });
+const useDocsPattern = (patterns) => {
+  return globbySync(patterns, { cwd: path.resolve(__dirname, '../pages/') });
 };
 
 const navbarNav = [
   { text: 'Home', link: '/' },
   {
     text: 'icons',
-    link: useDocsPattern({
-      pattern: 'webitel-ui/assets/icons',
-      descendants: false,
-    }).pop(),
+    link: useDocsPattern('webitel-ui/assets/icons/**/*.md').pop(),
   },
 ];
 
 const sidebarNav = [
   {
     text: 'FAQ',
-    items: useDocsPattern({ pattern: 'docs/faq' }),
+    items: useDocsPattern('docs/faq/**/*.md'),
     collapsed: false,
   },
   {
     text: 'Architecture, Structures, Design, etc',
-    items: useDocsPattern({ pattern: 'docs/architecture-and-structures' }),
+    items: useDocsPattern('docs/architecture-and-structures/**/*.md'),
     collapsed: true,
   },
   {
     text: 'How To',
-    items: useDocsPattern({ pattern: 'docs/how-to' }),
+    items: useDocsPattern('docs/how-to/**/*.md'),
     collapsed: true,
   },
   {
     text: 'API Tools',
-    items: useDocsPattern({ pattern: 'webitel-ui/api' }),
+    items: useDocsPattern('webitel-ui/api/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Locale',
-    items: useDocsPattern({ pattern: 'webitel-ui/locale' }),
+    items: useDocsPattern('webitel-ui/locale/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Assets',
-    items: useDocsPattern({ pattern: 'webitel-ui/assets' }),
+    items: useDocsPattern('webitel-ui/assets/**/*.md'),
     collapsed: false,
   },
   {
@@ -73,65 +52,76 @@ const sidebarNav = [
   },
   {
     text: 'Components',
-    items: useDocsPattern({ pattern: 'webitel-ui/components' }),
+    items: useDocsPattern('webitel-ui/components/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Components/on-demand',
-    items: useDocsPattern({ pattern: 'webitel-ui/components/on-demand' }),
+    items: useDocsPattern('webitel-ui/components/on-demand/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Enums',
-    items: useDocsPattern({ pattern: 'webitel-ui/enums' }),
+    items: [
+      ...useDocsPattern('webitel-ui/enums/index.md'),
+      {
+        text: 'Non-cathegorized',
+        collapsed: false,
+        items: useDocsPattern([
+          'webitel-ui/enums/**/*.md',
+          '!webitel-ui/enums/index.md',
+          '!webitel-ui/enums/WebitelApplications/*.md',
+        ]),
+      },
+      {
+        text: 'WebitelApplications',
+        collapsed: false,
+        items: useDocsPattern('webitel-ui/enums/WebitelApplications/*.md'),
+      },
+    ],
     collapsed: true,
   },
   {
     text: 'Modules',
-    items: useDocsPattern({ pattern: 'webitel-ui/modules' }),
+    items: useDocsPattern([
+      'webitel-ui/modules/**/*.md',
+      '!webitel-ui/modules/ObjectPermissions',
+    ]),
     collapsed: true,
   },
   {
     text: 'Module: Object Permissions',
     collapsed: true,
     items: [
-      ...useDocsPattern({
-        pattern: 'webitel-ui/modules/ObjectPermissions',
-        children: false,
-        descendants: false,
-      }),
+      ...useDocsPattern('webitel-ui/modules/ObjectPermissions/**/*.md'),
       {
         text: 'Components',
-        items: useDocsPattern({
-          pattern: 'webitel-ui/modules/ObjectPermissions/components',
-        }),
+        items: useDocsPattern('webitel-ui/modules/ObjectPermissions/components/**/*.md'),
       },
       {
         text: 'Store',
-        items: useDocsPattern({
-          pattern: 'webitel-ui/modules/ObjectPermissions/store',
-        }),
+        items: useDocsPattern('webitel-ui/modules/ObjectPermissions/store/**/*.md'),
       },
     ],
   },
   {
     text: 'Store',
-    items: useDocsPattern({ pattern: 'webitel-ui/store' }),
+    items: useDocsPattern('webitel-ui/store/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Test utils and Mocks',
-    items: useDocsPattern({ pattern: 'webitel-ui/tests' }),
+    items: useDocsPattern('webitel-ui/tests/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Validators',
-    items: useDocsPattern({ pattern: 'webitel-ui/validators' }),
+    items: useDocsPattern('webitel-ui/validators/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Tests Cookbook',
-    items: useDocsPattern({ pattern: 'docs/tests-cookbook' }),
+    items: useDocsPattern('docs/tests-cookbook/**/*.md'),
     collapsed: true,
   },
 ];
@@ -153,7 +143,7 @@ const linkify = (nav) => {
   if (typeof nav === 'string') {
     const getParentDirName = (nav) => nav.split('/').at(-2);
     const getFilename = (nav) => nav.split('/').pop().replace(/\.md$/, '');
-    const getLink = (nav) => '/'.concat(nav.replace('.md', '.html'));
+    const getLink = (nav) => '/pages/'.concat(nav.replace('.md', '.html'));
 
     const text = nav.endsWith('Readme.md')
       ? getParentDirName(nav)
@@ -169,7 +159,6 @@ const linkify = (nav) => {
 };
 
 const generateSidebar = (sidebarNav) => {
-
   const sb = linkify(sidebarNav);
   // console.info(JSON.stringify(sb, null, 2));
   return sb;
@@ -184,7 +173,4 @@ const generateNav = (navbarNav) => {
 const sidebar = generateSidebar(sidebarNav);
 const nav = generateNav(navbarNav);
 
-export {
-  sidebar,
-  nav,
-};
+export { sidebar, nav };

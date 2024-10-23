@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.10.47",
+  "version": "24.10.48",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -27,6 +27,10 @@
     "./store": {
       "import": "./src/store/new/index.js",
       "require": "./src/store/new/index.js"
+    },
+    "./enums": {
+      "import": "./src/enums/index.js",
+      "require": "./src/enums/index.js"
     },
     "./dist*": {
       "import": "./dist*"
@@ -120,7 +124,7 @@
     "vue-multiselect": "^3.0.0-beta.3",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.1.6",
-    "webitel-sdk": "^24.8.1",
+    "webitel-sdk": "^24.8.2",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
