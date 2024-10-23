@@ -8,6 +8,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import WtAddIconAction from './_internals/wt-add-icon-action.vue';
 import WtDeleteIconAction from './_internals/wt-delete-icon-action.vue';
 import WtDownloadIconAction from './_internals/wt-download-icon-action.vue';
@@ -16,10 +17,20 @@ import WtHistoryIconAction from './_internals/wt-history-icon-action.vue';
 import WtRefreshIconAction from './_internals/wt-refresh-icon-action.vue';
 
 const props = defineProps({
+  /**
+   * available actions: IconAction.DELETE, IconAction.EDIT, IconAction.ADD, IconAction.HISTORY, IconAction.DOWNLOAD, IconAction.REFRESH
+   */
   action: {
     type: String,
     required: true,
-    options: ['delete', 'edit', 'add', 'history', 'download', 'refresh'],
+    validator: (v) => Object.values([
+      IconAction.DELETE,
+      IconAction.EDIT,
+      IconAction.ADD,
+      IconAction.HISTORY,
+      IconAction.DOWNLOAD,
+      IconAction.REFRESH,
+    ]).includes(v),
   },
   disabled: {
     type: Boolean,
@@ -31,19 +42,20 @@ const emit = defineEmits(['click']);
 
 const actionComponent = computed(() => {
   switch (props.action) {
-    case 'edit':
+    case IconAction.EDIT:
       return WtEditIconAction;
-    case 'delete':
+    case IconAction.DELETE:
       return WtDeleteIconAction;
-    case 'add':
+    case IconAction.ADD:
       return WtAddIconAction;
-    case 'history':
+    case IconAction.HISTORY:
       return WtHistoryIconAction;
-    case 'download':
+    case IconAction.DOWNLOAD:
       return WtDownloadIconAction;
-    case 'refresh':
+    case IconAction.REFRESH:
       return WtRefreshIconAction;
     default:
+      console.error(`Unknown action for wt-icon-action component: ${props.action}`);
       return WtEditIconAction;
   }
 });

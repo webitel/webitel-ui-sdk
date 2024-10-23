@@ -1,4 +1,5 @@
 import FilterEvent from '../../../../modules/Filters/enums/FilterEvent.enum.js';
+import isEmpty from '../../../../scripts/isEmpty.js';
 import {
   queryToSortAdapter,
   sortToQueryAdapter,
@@ -17,7 +18,7 @@ const getters = {
   PARENT_ID: () => null, // override me
 
   // FIXME: maybe move to filters module?
-  FILTERS: (state, getters) => getters['filters/GET_FILTERS'],
+  FILTERS: (state, getters) => () => getters['filters/GET_FILTERS'](),
 
   REQUIRED_FIELDS: () => ['id'], // override me
 
@@ -30,7 +31,33 @@ const getters = {
     return [...new Set([...getters.REQUIRED_FIELDS, ...fields])];
   },
 
-  // main GET_LIST params collector
+  EMPTY_STATE: (state, getters) => {
+    if (state.isLoading) {
+      return { value: false };
+    }
+
+    if (state.error) {
+      return { value: true, cause: 'error' };
+    }
+
+    if (!state.dataList.length) {
+      const filters = getters.FILTERS();
+      const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
+      const filtersApplied = Object.entries(filters).some(
+        ([filterValue, filterName]) =>
+          !isEmpty(filterValue) && !uncheckedFilters.includes(filterName),
+      );
+
+      if (filtersApplied) {
+        return { value: true, cause: 'filters' };
+      }
+
+      return { value: true, cause: 'empty' };
+    }
+
+    return { value: false };
+  },
+
   GET_LIST_PARAMS: (state, getters) => (overrides) => {
     const filters = getters.FILTERS();
     const fields = getters.FIELDS;
@@ -148,7 +175,7 @@ const actions = {
     } finally {
       setTimeout(() => {
         context.commit('SET', { path: 'isLoading', value: false });
-      }, 100);  // why 1s? https://ux.stackexchange.com/a/104782
+      }, 100); // why 1s? https://ux.stackexchange.com/a/104782
     }
   },
 
