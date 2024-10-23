@@ -1,5 +1,5 @@
 <template>
-  <div class="table-transition">
+  <div class="wt-table-transition">
     <transition-slide
       :offset="{
               enter: ['-50%', 0],
@@ -19,7 +19,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .table-transition{
+  .wt-table-transition{
     display:contents;
   }
 </style>
