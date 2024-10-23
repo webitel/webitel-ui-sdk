@@ -28,6 +28,10 @@
       "import": "./src/store/new/index.js",
       "require": "./src/store/new/index.js"
     },
+    "./enums": {
+      "import": "./src/enums/index.js",
+      "require": "./src/enums/index.js"
+    },
     "./dist*": {
       "import": "./dist*"
     },

@@ -1,9 +1,11 @@
 <script setup>
-import Docs from './wt-dummy-docs.vue';
-import ExampleDummy from './examples/example-dummy.vue';
 </script>
 
 # WtDummy
+
+> [!CAUTION]
+> Увага, **Застаріле!** Як робитимете шось нове (або перероблятимете старе),
+> то викиньте той `wt-dummy`, і заюзайте [`wt-empty`](../wt-empty/Readme.md).
 
 ## Props
 ::: raw

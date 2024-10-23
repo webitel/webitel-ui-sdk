@@ -2,7 +2,7 @@
   <div class="wt-action-bar">
     <!--    @slot -->
     <slot name="search-bar" />
-
+    <!-- TODO: slot for custom actions -->
     <!--    @slot
             @scope="{ `action`: IconAction enum string }"
       -->
@@ -38,6 +38,7 @@ const props = defineProps({
     default: () => [],
     validator: (v) => v.every((action) => Object.values(IconAction).includes(action)),
   },
+  // TODO: колись потім
   size: {
     type: String,
     default: 'md',

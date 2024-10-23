@@ -1,9 +1,11 @@
 <script setup>
-import Docs from './wt-table-actions-docs.vue';
-import ExampleTableActions from './examples/example-table-actions.vue';
 </script>
 
 # WtTableActions
+
+> [!CAUTION]
+> Увага! Як робитимете шось нове (або перероблятимете старе), то викиньте той `wt-table-actions`,
+> і заюзайте [`wt-actions-bar`](../wt-actions-bar/Readme.md).
 
 ## Props
 ::: raw
