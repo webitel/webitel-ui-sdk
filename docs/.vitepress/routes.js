@@ -69,7 +69,7 @@ const sidebarNav = [
   {
     text: 'CSS',
     items: useDocsPattern({ pattern: 'webitel-ui/css' }),
-    collapsed: false,
+    collapsed: true,
   },
   {
     text: 'Components',
