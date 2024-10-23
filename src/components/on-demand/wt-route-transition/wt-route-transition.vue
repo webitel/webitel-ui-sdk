@@ -1,5 +1,4 @@
 <template>
-  <router-view v-slot="{ Component }">
     <transition-slide
       :offset="{
               enter: ['-50%', 0],
@@ -9,9 +8,8 @@
       mode="out-in"
       appear
     >
-      <component :is="Component" />
+      <slot />
     </transition-slide>
-  </router-view>
 </template>
 
 <script setup>
