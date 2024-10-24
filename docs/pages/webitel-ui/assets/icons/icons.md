@@ -1,4 +1,5 @@
 <script setup>
+import IconsTable from './icons-table.vue';
 </script>
 
 # Icons

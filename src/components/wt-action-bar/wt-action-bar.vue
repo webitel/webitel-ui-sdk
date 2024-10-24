@@ -35,7 +35,7 @@
 import { computed } from 'vue';
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
-import { cardActionsOrder, tableActionsOrder } from './WtActionBarActionsOrder.js';
+import { tableActionsOrder, cardActionsOrder } from './WtActionBarActionsOrder.js';
 
 const props = defineProps({
   /**

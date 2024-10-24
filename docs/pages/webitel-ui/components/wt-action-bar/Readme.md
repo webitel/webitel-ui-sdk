@@ -1,4 +1,6 @@
 <script setup>
+import Specs from './component-specs.vue';
+import ExampleTableActionBar from './examples/example-table-action-bar.vue';
 </script>
 
 # `wt-actions-bar.vue`

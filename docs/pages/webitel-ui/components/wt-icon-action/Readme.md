@@ -1,4 +1,6 @@
 <script setup>
+import Specs from './component-specs.vue';
+import ExampleIconAction from './examples/example-icon-action.vue';
 </script>
 
 # WtIconAction
