@@ -33,7 +33,7 @@
 
 1. (?) `# v{xx.yy}`
 
-2. `## v{xx.yy.zz}`
+2. `## v{xx.yy.zz}` or `## Docs`, if no new version was added
 
 * (?) `### Related task(s)`
 * (?) `### Features`

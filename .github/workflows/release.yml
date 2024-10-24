@@ -45,6 +45,7 @@ jobs:
       - run: npm run test:unit
 
 
+
   release:
     needs: [install_deps, test]
     permissions:
@@ -52,6 +53,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: generate Release Changelog
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          writeToFile: false
+          includeInvalidCommits: true
+          reverseOrder: true
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
 
       - name: get-npm-version
         id: package-version
@@ -61,10 +72,9 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.package-version.outputs.current-version}}
-          name: "Webitel UI Release ${{ steps.package-version.outputs.current-version}}"
-          body: "This is a release of Webitel UI version ${{ steps.package-version.outputs.current-version}}, built on ${{ github.run_date }}"
-          generate_release_notes: true
+          tag_name: "v${{ steps.package-version.outputs.current-version}}"
+          name: "@webitel/ui-sdk v${{ steps.package-version.outputs.current-version}}"
+          body: ${{ steps.changelog.outputs.changes }}
 
   publish:
     needs: [install_deps, test]
