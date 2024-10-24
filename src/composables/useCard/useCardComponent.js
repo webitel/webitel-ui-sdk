@@ -2,7 +2,7 @@ import { computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useCachedItemInstanceName } from './useCachedItemInstanceName.js';
+import { useCachedItemInstanceName } from '../useCachedItemInstanceName/useCachedItemInstanceName.js';
 
 export const useCardComponent = (params) => {
   const { id,

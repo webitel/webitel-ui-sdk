@@ -1,7 +1,7 @@
 import { useVuelidate } from '@vuelidate/core';
 
 export const useValidate = (schema, data) => {
-  const v$ = useVuelidate(schema, { itemInstance: data  }, { $autoDirty: true });
+  const v$ = useVuelidate(schema, data, { $autoDirty: true });
 
   return {
     v$,
