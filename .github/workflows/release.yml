@@ -158,7 +158,7 @@ jobs:
         run: echo "Package already published"
 
   build_docs:
-    needs: [install_deps]
+    needs: [install_deps, changelog]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
