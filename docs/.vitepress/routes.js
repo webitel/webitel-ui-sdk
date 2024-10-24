@@ -46,6 +46,11 @@ const sidebarNav = [
     collapsed: false,
   },
   {
+    text: 'CSS',
+    items: useDocsPattern({ pattern: 'webitel-ui/css' }),
+    collapsed: true,
+  },
+  {
     text: 'Components',
     items: useDocsPattern('webitel-ui/components/**/*.md'),
     collapsed: true,
