@@ -54,6 +54,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Get previous tag
+        id: previous_tag
+        uses: younited/get-previous-tag-action@v1.1.0
+
       - name: generate Release Changelog
         id: changelog
         uses: requarks/changelog-action@v1
@@ -62,7 +66,8 @@ jobs:
           includeInvalidCommits: true
           reverseOrder: true
           token: ${{ github.token }}
-          tag: ${{ github.ref_name }}
+          fromTag: ${{ github.ref_name }}
+          toTag: ${{ steps.previous_tag.outputs.previous-tag }}
 
       - name: get-npm-version
         id: package-version
