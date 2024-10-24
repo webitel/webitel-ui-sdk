@@ -1,3 +1,4 @@
+import WtActionBar from './wt-action-bar/wt-action-bar.vue';
 import WtAppHeader from './wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './wt-app-header/wt-app-navigator.vue';
 import WtHeaderActions from './wt-app-header/wt-header-actions.vue';
@@ -64,6 +65,7 @@ import WtTimepicker from './wt-timepicker/wt-timepicker.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 
 const Components = {
+  WtActionBar,
   WtImage,
   WtEmpty,
   WtLogo,

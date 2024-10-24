@@ -1,14 +1,27 @@
 <template>
   <div class="wt-action-bar">
-    <!--    @slot -->
-    <slot name="search-bar" />
-    <!-- TODO: slot for custom actions -->
-    <!--    @slot
-            @scope="{ `action`: IconAction enum string }"
+    <!--    @slot searchbar here
+            @scope `{ size<ComponentSize> }`
+     -->
+    <slot
+      name="search-bar"
+      v-bind="{ size }"
+    />
+
+    <!--    @slot custom actions here
+            @scope `{ size<ComponentSize> }`
+     -->
+    <slot
+      v-bind="{ size }"
+    />
+
+    <!--    @slot May be useful to set complex component which draws the same `wt-icon-action`
+            @scope `{ action<IconAction>, size<ComponentSize> }`
       -->
     <slot
       v-for="action in shownActions"
-      v-bind="{ action }"
+      :name="action"
+      v-bind="{ action, size }"
     >
       <wt-icon-action
         :action="action"
@@ -22,45 +35,37 @@
 import { computed } from 'vue';
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
+import { cardActionsOrder, tableActionsOrder } from './WtActionBarActionsOrder.js';
 
 const props = defineProps({
-  // options: [`table`, `card`]
+  /**
+   * [`'table'`, `'card'`]
+   * */
   mode: {
     type: String,
     default: 'table',
     validator: (v) => ['table', 'card'].includes(v),
   },
   /**
-   * see IconAction enum
+   * see `IconAction` enum
    */
   actions: {
     type: Array,
     default: () => [],
     validator: (v) => v.every((action) => Object.values(IconAction).includes(action)),
   },
-  // TODO: колись потім
+
+  /**
+   * Not implemented
+   */
   size: {
     type: String,
-    default: 'md',
-    validator: (v) => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v),
+    // default: 'md',
+    // validator: (v) => ['sm', 'md', 'lg'].includes(v),
   },
 });
 
 const emit = defineEmits(Object.values(IconAction).map((action) => `click:${action}`));
-
-const tableActionsOrder = [
-  IconAction.ADD,
-  IconAction.COLUMNS,
-  IconAction.COPY,
-  IconAction.DOWNLOAD,
-  IconAction.UPLOAD,
-  IconAction.FILTERS,
-  IconAction.DELETE,
-  IconAction.REFRESH,
-];
-
-// TODO
-const cardActionsOrder = tableActionsOrder;
 
 const shownActions = computed(() => {
   const actionsOrder = props.mode === 'card' ? cardActionsOrder : tableActionsOrder;
