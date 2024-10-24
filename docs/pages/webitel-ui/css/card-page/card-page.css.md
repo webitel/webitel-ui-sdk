@@ -7,30 +7,20 @@
 
 ## Які класи використовуються
 
-    opened-card: загальний клас та обгортка сторінки, використовується з wt-page-wrapper
+- `opened-card` - загальний клас та обгортка сторінки, використовується з `wt-page-wrapper`     
+- `opened-card-form` - форма-обгортка для табів та прихованого інпуту
+- `opened-card-tabs` - обгортка для табів
+- `opened-card-tabs__tab` - таб `router-view`        
+- `opened-card-header` - обгортка назви табу
+- `opened-card-header__title` - назву табу
+- `opened-card-input-grid` - грід стилі таблиці    
+- `opened-card-input-grid--1-col` - модифікатор грід стилів - одна колонка (без розділень)
+- `opened-card-input-grid--w50` - модифікатор грід стилів - половина ширини
+- `opened-card-input-grid--w100` - модифікатор грід стилів - повна ширина
     
-    opened-card-form: форма-обгортка для табів та прихованого інпуту
-    
-    opened-card-tabs: обгортка для табів
-    
-    pened-card-tabs__tab: таб router-view
-        
-    opened-card-header: обгортка назви табу
-    
-    opened-card-header__title: назву табу
-    
-    opened-card-input-grid: грід стилі таблиці
-    
-    --1-col: модифікатор грід стилів - одна колонка (без розділень)
-    
-    --w50: модифікатор грід стилів - половина ширини
-    --w100: модифікатор грід стилів - повна ширина
-        
-
 ## Приклад використання
 
 ```vue
-
 // crm,  opened-sources.vue
 <template>
   <wt-page-wrapper class="opened-card">
@@ -62,5 +52,4 @@
     </div>
   </section>
 </template>
-
 ```
