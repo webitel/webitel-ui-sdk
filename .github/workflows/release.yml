@@ -67,13 +67,19 @@ jobs:
         id: changelog
         uses: requarks/changelog-action@v1
         with:
-          writeToFile: true
-          changelogFilePath: ./CHANGELOGUS.md
           reverseOrder: true
           excludeTypes: build
           token: ${{ github.token }}
           fromTag: ${{ github.ref_name }}
           toTag: ${{ env.previousTag }}
+
+
+      - name: commit changelog
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: autoupdate changelog
+          file_pattern: 'CHANGELOG.md'
+
 
       - name: get-npm-version
         id: package-version
