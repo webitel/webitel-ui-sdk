@@ -8,9 +8,11 @@
 // the-crm-workspace.vue
 
 <template>
-  <div class="object-content-wrap">
-    <WtRouteTransition/>
-  </div>
+ ...
+    <wt-route-transition>
+      ...
+    </wt-route-transition>
+  ...
 </template>
 
 <script setup>

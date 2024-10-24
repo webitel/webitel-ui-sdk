@@ -7,15 +7,13 @@
 // the-sources.vue
 
 <template>
-        ...
-        <div class="table-section__table-wrapper" v-show="dataList.length">
-            <wt-table-transition v-if="dataList.length && !isLoading">
-              <wt-table>
-                ...
-              </wt-table>
-            </wt-table-transition>
-        </div>          
-        ...
+  ...
+    <wt-table-transition v-if="dataList.length && !isLoading">
+            <wt-table>
+              ...
+            </wt-table>
+          </wt-table-transition>
+  ...
 </template>
 
 <script setup>
