@@ -9,8 +9,12 @@ const useDocsPattern = (patterns) => {
 const navbarNav = [
   { text: 'Home', link: '/' },
   {
+    text: 'Changelog',
+    items: useDocsPattern('webitel-ui/changelog.md'),
+  },
+  {
     text: 'icons',
-    link: useDocsPattern('webitel-ui/assets/icons/**/*.md').pop(),
+    items: useDocsPattern('webitel-ui/assets/icons/**/*.md'),
   },
 ];
 
@@ -19,6 +23,11 @@ const sidebarNav = [
     text: 'FAQ',
     items: useDocsPattern('docs/faq/**/*.md'),
     collapsed: false,
+  },
+  {
+    text: 'Changelog',
+    items: useDocsPattern('webitel-ui/changelog.md'),
+    // collapsed: false,
   },
   {
     text: 'Architecture, Structures, Design, etc',
@@ -103,6 +112,17 @@ const sidebarNav = [
         items: useDocsPattern('webitel-ui/modules/ObjectPermissions/store/**/*.md'),
       },
     ],
+  },
+  {
+    text: 'Scripts',
+    items: [
+      ...useDocsPattern('webitel-ui/scripts/index.md'),
+      ...useDocsPattern([
+        'webitel-ui/scripts/**/*.md',
+        '!webitel-ui/scripts/index.md',
+      ]),
+    ],
+    collapsed: true,
   },
   {
     text: 'Store',

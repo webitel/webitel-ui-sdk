@@ -1,9 +1,18 @@
-# Webitel UI Changelog
 
-## [1.0.0] - 02.02.2022
+## 24.8
 
-### What's new
+### 24.8.49
+by @dania
 
-### Breaking changes
+#### Features
 
-### Changes
+- Added Changelog section to docs
+
+[//]: # (#### Bug Fixes)
+
+[//]: # (#### Refactors)
+
+[//]: # (#### Breaking changes)
+
+[//]: # (#### Deprecations)
+

@@ -1,4 +1,4 @@
-# `Enums`
+# `Scripts`
 
 ## Imports
 
@@ -6,7 +6,7 @@
 
 ```js
 import {
-  IconAction,
+  camelToSnake,
   // ...
-} from '@webitel/ui-sdk/enums';
+} from '@webitel/ui-sdk/scripts';
 ```

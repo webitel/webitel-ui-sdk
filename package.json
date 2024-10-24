@@ -32,6 +32,10 @@
       "import": "./src/enums/index.js",
       "require": "./src/enums/index.js"
     },
+    "./scripts": {
+      "import": "./src/scripts/index.js",
+      "require": "./src/scripts/index.js"
+    },
     "./dist*": {
       "import": "./dist*"
     },
