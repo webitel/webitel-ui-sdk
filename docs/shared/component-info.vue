@@ -64,8 +64,6 @@ const result = computed(() => {
     }),
   ]);
 
-  console.info(props.info.slots);
-
   const slotsTable = !!props.info?.slots && markdownTable([
     ['Name', 'Scope', 'Description'],
     ...props.info.slots.map(({ name, tags, scoped, description }) => {
@@ -83,7 +81,7 @@ const result = computed(() => {
     { heading: 'Events', data: eventsTable },
     { heading: 'Slots', data: slotsTable },
   ].filter(({ data: v }) => !!v).reduce((md, { heading, data }) => {
-    return ` ${md} ### ${heading} \n\n${data} \n\n`;
+    return `${md} ### ${heading} \n\n${data} \n\n`;
   }, '');
 
   return md.render(mdResult);

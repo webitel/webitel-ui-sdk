@@ -1,16 +1,20 @@
 <script setup>
-import Docs from './wt-icon-action-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleIconAction from './examples/example-icon-action.vue';
 </script>
 
 # WtIconAction
 
-## Props
-::: raw
-<Docs/>
-:::
+## Specs
 
-## Example All Icon Actions
+<Specs />
+
+## All Available Icon Actions
+
 ::: raw
 <ExampleIconAction/>
+:::
+
+::: details Code
+<<< ./examples/example-icon-action.vue{js}
 :::

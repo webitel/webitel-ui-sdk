@@ -9,8 +9,8 @@
     "test:unit": "vitest",
     "lint-all": "npx @biomejs/biome check --write ./src",
     "lint-all:unsafe": "npx @biomejs/biome check --write --unsafe ./src",
-    "lint-changed:unsafe": "npx @biomejs/biome check --write --unsafe --changed",
-    "lint:pre-commit": "npx @biomejs/biome check --write --unsafe --changed --no-errors-on-unmatched",
+    "lint-changed:unsafe": "npx @biomejs/biome check --write --unsafe --changed ./src",
+    "lint:pre-commit": "npx @biomejs/biome check --write ./src --unsafe --changed --no-errors-on-unmatched",
     "publish-lib": "npm run test:unit && npm run build && npm publish --access public",
     "publish-lib:testless": "npm run build && npm publish --access public",
     "docs:dev": "vitepress dev docs --port 8080",
@@ -27,6 +27,10 @@
     "./store": {
       "import": "./src/store/new/index.js",
       "require": "./src/store/new/index.js"
+    },
+    "./enums": {
+      "import": "./src/enums/index.js",
+      "require": "./src/enums/index.js"
     },
     "./dist*": {
       "import": "./dist*"
