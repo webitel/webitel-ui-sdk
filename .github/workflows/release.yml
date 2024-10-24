@@ -70,7 +70,7 @@ jobs:
 #          writeToFile: false
 #          includeInvalidCommits: true
           reverseOrder: true
-          excludeScopes: build
+          excludeTypes: build
           token: ${{ github.token }}
           fromTag: ${{ github.ref_name }}
           toTag: ${{ env.previousTag }}
