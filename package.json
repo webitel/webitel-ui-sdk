@@ -10,7 +10,7 @@
     "lint-all": "npx @biomejs/biome check --write ./src",
     "lint-all:unsafe": "npx @biomejs/biome check --write --unsafe ./src",
     "lint-changed:unsafe": "npx @biomejs/biome check --write --unsafe --changed ./src",
-    "lint:pre-commit": "npx @biomejs/biome check --write --unsafe --changed --no-errors-on-unmatched ./src",
+    "lint:pre-commit": "npx @biomejs/biome check --write  ./src --unsafe --changed --no-errors-on-unmatched",
     "publish-lib": "npm run test:unit && npm run build && npm publish --access public",
     "publish-lib:testless": "npm run build && npm publish --access public",
     "docs:dev": "vitepress dev docs --port 8080",
