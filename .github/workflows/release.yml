@@ -57,6 +57,8 @@ jobs:
       - name: Get previous tag
         id: previous_tag
         uses: younited/get-previous-tag-action@v1.1.0
+        with:
+          match: *
 
       - name: generate Release Changelog
         id: changelog
