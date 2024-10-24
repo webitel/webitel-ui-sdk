@@ -67,8 +67,8 @@ jobs:
         id: changelog
         uses: requarks/changelog-action@v1
         with:
-          writeToFile: false
-          includeInvalidCommits: true
+#          writeToFile: false
+#          includeInvalidCommits: true
           reverseOrder: true
           excludeScopes:
           token: ${{ github.token }}
