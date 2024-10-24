@@ -68,7 +68,7 @@ jobs:
         uses: requarks/changelog-action@v1
         with:
           writeToFile: true
-          changelogFilePath: ./CHANGELOG.md
+          changelogFilePath: ./smth/CHANGELOG.md
           reverseOrder: true
           excludeTypes: build
           token: ${{ github.token }}
