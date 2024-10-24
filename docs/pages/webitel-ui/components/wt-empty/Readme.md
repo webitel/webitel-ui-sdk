@@ -1,4 +1,7 @@
 <script setup>
+import Specs from './component-specs.vue';
+import ExampleEmpty from './examples/example-empty.vue';
+import ExampleEmptySizes from './examples/example-empty-sizes.vue';
 </script>
 
 # `wt-empty.vue`
