@@ -82,6 +82,10 @@ jobs:
           name: "@webitel/ui-sdk v${{ steps.package-version.outputs.current-version}}"
           body: ${{ steps.changelog.outputs.changes }}
 
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+
       - name: Get new tag
         id: newtag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
