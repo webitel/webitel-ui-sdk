@@ -67,6 +67,7 @@ jobs:
       - name: generate Release Changelog
         id: changelog
         uses: requarks/changelog-action@v1
+        continue-on-error: true
         with:
           writeToFile: false
           reverseOrder: true
@@ -100,6 +101,7 @@ jobs:
       - name: update Release Changelog
         id: update-changelog
         uses: requarks/changelog-action@v1
+        continue-on-error: true
         with:
           reverseOrder: true
           excludeTypes: build
