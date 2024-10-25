@@ -86,6 +86,10 @@ jobs:
         run: sleep 30s
         shell: bash
 
+      - name: Get new tag
+        id: newtag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
       - name: update Release Changelog
         id: update-changelog
         uses: requarks/changelog-action@v1
@@ -93,7 +97,8 @@ jobs:
           reverseOrder: true
           excludeTypes: build
           token: ${{ github.token }}
-          fromTag: "v${{ steps.package-version.outputs.current-version}}"
+#          fromTag: "v${{ steps.package-version.outputs.current-version}}"
+          fromTag: ${{ steps.newtag.outputs.tag }}
           toTag: ${{ steps.previoustag.outputs.tag }}
 
       - name: commit changelog
