@@ -71,7 +71,7 @@
 ## 24.10
 
 ### 24.10.49
-by @dania
+by @dania sm changes
 
 #### Features
 
@@ -88,3 +88,4 @@ by @dania
 [//]: # (delete this comment)
 [master]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.49-3...master
 [v24.10.49-5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.49-3...v24.10.49-5
+
