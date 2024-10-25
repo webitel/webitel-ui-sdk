@@ -73,7 +73,7 @@ jobs:
           excludeTypes: build
           token: ${{ github.token }}
           fromTag: ${{ github.ref_name }}
-          toTag: ${{ steps.previoustag.outputs.tag }}
+          toTag: ${{ steps.prevTag.outputs.tag }}
 
       - name: get-npm-version
         id: package-version
