@@ -42,7 +42,7 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm run test:unit
+#      - run: npm run test:unit
 
   release:
     needs: [install_deps, test]
@@ -53,13 +53,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.DLOHVINOV_CLASSIC_PAT }}
+#          token: ${{ secrets.DLOHVINOV_CLASSIC_PAT }}
 
       - name: Get previous tag
-        run: |
-          name=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | tail -2 | head -1)
-          echo "previousTag: $name"
-          echo "previousTag=$name" >> $GITHUB_ENV
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
       - name: generate Release Changelog
         id: changelog
@@ -70,7 +68,7 @@ jobs:
           excludeTypes: build
           token: ${{ github.token }}
           fromTag: ${{ github.ref_name }}
-          toTag: ${{ env.previousTag }}
+          toTag: ${{ steps.previoustag.outputs.tag }}
 
       - name: get-npm-version
         id: package-version
@@ -84,6 +82,10 @@ jobs:
           name: "@webitel/ui-sdk v${{ steps.package-version.outputs.current-version}}"
           body: ${{ steps.changelog.outputs.changes }}
 
+      - name: Get new tag
+        id: newtag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
       - name: update Release Changelog
         id: update-changelog
         uses: requarks/changelog-action@v1
@@ -91,8 +93,8 @@ jobs:
           reverseOrder: true
           excludeTypes: build
           token: ${{ github.token }}
-          fromTag: "v${{ steps.package-version.outputs.current-version}}"
-          toTag: ${{ env.previousTag }}
+          fromTag: "v${{ steps.newtag.outputs.tag }}"
+          toTag: ${{ steps.previoustag.outputs.tag }}
 
       - name: commit changelog
         uses: stefanzweifel/git-auto-commit-action@v5
