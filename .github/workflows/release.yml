@@ -44,7 +44,7 @@ jobs:
 
       - run: npm run test:unit
 
-  changelog:
+  release:
     needs: [install_deps, test]
     permissions:
       contents: write
@@ -54,43 +54,6 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.DLOHVINOV_CLASSIC_PAT }}
-
-      - name: Get previous tag
-        run: |
-          name=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | tail -2 | head -1)
-          echo "previousTag: $name"
-          echo "previousTag=$name" >> $GITHUB_ENV
-
-      - name: generate Release Changelog
-        id: changelog
-        uses: requarks/changelog-action@v1
-        with:
-          reverseOrder: true
-          excludeTypes: build
-          token: ${{ github.token }}
-          fromTag: ${{ github.ref_name }}
-          toTag: ${{ env.previousTag }}
-
-
-      - name: commit changelog
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: autoupdate changelog
-          file_pattern: 'CHANGELOG.md'
-          push_options: --force
-
-
-
-  release:
-    needs: [install_deps, test, changelog]
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-#          fetch-tags: true
-          fetch-depth: 0
 
       - name: Get previous tag
         run: |
@@ -120,6 +83,23 @@ jobs:
           tag_name: "v${{ steps.package-version.outputs.current-version}}"
           name: "@webitel/ui-sdk v${{ steps.package-version.outputs.current-version}}"
           body: ${{ steps.changelog.outputs.changes }}
+
+      - name: update Release Changelog
+        id: update-changelog
+        uses: requarks/changelog-action@v1
+        with:
+          reverseOrder: true
+          excludeTypes: build
+          token: ${{ github.token }}
+          fromTag: "v${{ steps.package-version.outputs.current-version}}"
+          toTag: ${{ env.previousTag }}
+
+      - name: commit changelog
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: autoupdate changelog
+          file_pattern: 'CHANGELOG.md'
+          push_options: --force
 
   publish:
     needs: [release]
@@ -160,7 +140,7 @@ jobs:
         run: echo "Package already published"
 
   build_docs:
-    needs: [install_deps, changelog]
+    needs: [release]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
