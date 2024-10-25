@@ -98,7 +98,7 @@
 ## 24.10
 
 ### 24.10.49
-by @dania sm changes
+by @dania changes
 
 #### Features
 
