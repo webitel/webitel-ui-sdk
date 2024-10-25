@@ -1,4 +1,9 @@
 
+## [v24.10.49-10] - 2024-10-25
+### :memo: Documentation Changes
+- [`bbee371`](https://github.com/webitel/webitel-ui-sdk/commit/bbee371d059e63aef2ae2521f936bc80ab57584b) - generating changelog *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.49-6] - 2024-10-25
 ### :boom: BREAKING CHANGES
 - due to [`754b0a6`](https://github.com/webitel/webitel-ui-sdk/commit/754b0a6ca5cbf596343816a831abb78c417af69b) - testing body *(commit by [@dlohvinov](https://github.com/dlohvinov))*:
@@ -117,3 +122,4 @@ by @dania changes
 [v24.10.49-5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.49-3...v24.10.49-5
 
 [v24.10.49-6]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.49-4...v24.10.49-6
+[v24.10.49-10]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.49-9...v24.10.49-10
