@@ -70,6 +70,11 @@ const sidebarNav = [
     collapsed: true,
   },
   {
+    text: 'Composables',
+    items: useDocsPattern('webitel-ui/composables/**/*.md'),
+    collapsed: true,
+  },
+  {
     text: 'Enums',
     items: [
       ...useDocsPattern('webitel-ui/enums/index.md'),
