@@ -93,7 +93,7 @@ jobs:
           reverseOrder: true
           excludeTypes: build
           token: ${{ github.token }}
-          fromTag: "v${{ steps.newtag.outputs.tag }}"
+          fromTag: ${{ steps.newtag.outputs.tag }}
           toTag: ${{ steps.previoustag.outputs.tag }}
 
       - name: commit changelog
