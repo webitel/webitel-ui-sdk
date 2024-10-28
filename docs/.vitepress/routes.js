@@ -92,35 +92,46 @@ const sidebarNav = [
   },
   {
     text: 'Modules',
-    items: useDocsPattern([
-      'webitel-ui/modules/**/*.md',
-      '!webitel-ui/modules/ObjectPermissions',
-    ]),
-    collapsed: true,
-  },
-  {
-    text: 'Module: Object Permissions',
-    collapsed: true,
     items: [
-      ...useDocsPattern('webitel-ui/modules/ObjectPermissions/**/*.md'),
+      ...useDocsPattern([
+        'webitel-ui/modules/**/*.md',
+        '!webitel-ui/modules/ObjectPermissions',
+        '!webitel-ui/modules/TableComponentModule',
+      ]),
       {
-        text: 'Components',
-        items: useDocsPattern('webitel-ui/modules/ObjectPermissions/components/**/*.md'),
+        text: 'Module: Object Permissions',
+        collapsed: true,
+        items: [
+          ...useDocsPattern(['webitel-ui/modules/ObjectPermissions/index.md']),
+          {
+            text: 'Components',
+            items: useDocsPattern(['webitel-ui/modules/ObjectPermissions/components/**/*.md']),
+          },
+          {
+            text: 'Store',
+            items: useDocsPattern(['webitel-ui/modules/ObjectPermissions/store/**/*.md']),
+          },
+        ],
       },
       {
-        text: 'Store',
-        items: useDocsPattern('webitel-ui/modules/ObjectPermissions/store/**/*.md'),
+        text: 'Module: Table Component Module',
+        collapsed: true,
+        items: [
+          ...useDocsPattern('webitel-ui/modules/TableComponentModule/index.md'),
+          {
+            text: 'Composables',
+            items: useDocsPattern('webitel-ui/modules/TableComponentModule/composables/**/*.md'),
+          },
+        ],
       },
     ],
+    collapsed: true,
   },
   {
     text: 'Scripts',
     items: [
       ...useDocsPattern('webitel-ui/scripts/index.md'),
-      ...useDocsPattern([
-        'webitel-ui/scripts/**/*.md',
-        '!webitel-ui/scripts/index.md',
-      ]),
+      ...useDocsPattern(['webitel-ui/scripts/**/*.md', '!webitel-ui/scripts/index.md']),
     ],
     collapsed: true,
   },
@@ -165,9 +176,7 @@ const linkify = (nav) => {
     const getFilename = (nav) => nav.split('/').pop().replace(/\.md$/, '');
     const getLink = (nav) => '/pages/'.concat(nav.replace('.md', '.html'));
 
-    const text = nav.endsWith('Readme.md')
-      ? getParentDirName(nav)
-      : getFilename(nav);
+    const text = nav.endsWith('Readme.md') ? getParentDirName(nav) : getFilename(nav);
     const link = getLink(nav);
 
     return { text, link };
