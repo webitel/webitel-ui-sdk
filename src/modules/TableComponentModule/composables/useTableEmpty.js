@@ -37,7 +37,7 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
       empty: t(''),
     },
     text: {
-      filters: t(''),
+      filters: t('web'),
       error: t(''),
       empty: t(''),
     },
