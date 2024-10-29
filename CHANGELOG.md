@@ -1,5 +1,10 @@
 
 
+## [v24.10.52] - 2024-10-29
+### :bug: Bug Fixes
+- [`77fdd56`](https://github.com/webitel/webitel-ui-sdk/commit/77fdd5681aa103f3771c90b8d0dfaf377f1d103b) - fixed vue-multiselect-based components placeholder color [WTEL-5387](https://webitel.atlassian.net/browse/WTEL-5373) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.51] - 2024-10-29
 ### :sparkles: New Features
 - [`b7b5fda`](https://github.com/webitel/webitel-ui-sdk/commit/b7b5fda8b945b12f7e126f756ac43590aa13d54c) - useTableEmpty.js locale in progress [WTEL-5284] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -18,3 +23,4 @@
 
 [v24.10.50]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.49-10...v24.10.50
 [v24.10.51]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.50...v24.10.51
+[v24.10.52]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.51...v24.10.52
