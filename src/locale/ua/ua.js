@@ -407,5 +407,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Сталася помилка завантаження історії чату',
+    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”'
   },
 };

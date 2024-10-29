@@ -4,7 +4,8 @@ import {
   getDefaultOpenAPIConfig,
 } from '../../defaults/index.js';
 import applyTransform, {
-  notify,
+  camelToSnake,
+  notify, sanitize,
   snakeToCamel,
 } from '../../transformers/index.js';
 
@@ -13,7 +14,7 @@ const configuration = getDefaultOpenAPIConfig();
 
 const agentChatsService = new AgentChatsServiceApi(configuration, '', instance);
 
-const getList = async (params) => {
+const getChatsList = async (params) => {
   const { onlyClosed } = params;
 
   try {
@@ -34,8 +35,25 @@ const getList = async (params) => {
   }
 };
 
+const markChatProcessed = async (chatId) => { // add to chat unprocessedClose: true
+  try {
+    const response = await agentChatsService.markChatProcessed(chatId);
+    return applyTransform(response.data, [
+      snakeToCamel(),
+    ]);
+  } catch (err) {
+    throw applyTransform(err, [
+      notify(({ callback }) => callback({
+        type: 'error',
+        text: t('errorNotifications.markChatProcessed'),
+      })),
+    ]);
+  }
+};
+
 const AgentChatsAPI = {
-  getList,
+  getList: getChatsList,
+  markChatProcessed,
 };
 
 export default AgentChatsAPI;
