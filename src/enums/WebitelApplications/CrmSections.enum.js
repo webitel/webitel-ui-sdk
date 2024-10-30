@@ -2,7 +2,7 @@ const CrmSections = Object.freeze({
   CONTACTS: 'contacts',
 
   // CONFIGURATION - LOOKUPS
-  SLA: 'sla',
+  SLAS: 'slas',
   SERVICE_CATALOG: 'service-catalog',
   PRIORITIES: 'priorities',
   STATUSES: 'statuses',
