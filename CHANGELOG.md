@@ -1,5 +1,10 @@
 
 
+## [v24.10.54] - 2024-10-30
+### :bug: Bug Fixes
+- [`e3c0907`](https://github.com/webitel/webitel-ui-sdk/commit/e3c0907c4c5993879e8add14439f0c5c0c1cd25e) - rename slas page[WTEL-5379](https://webitel.atlassian.net/browse/WTEL-5379) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.53] - 2024-10-30
 ### :sparkles: New Features
 - [`6eed211`](https://github.com/webitel/webitel-ui-sdk/commit/6eed21158f3e5114ea10449d9593ec7ecd172565) - add sla page in crm section and delete crmConfigurationSections enum [WTEL-5379](https://webitel.atlassian.net/browse/WTEL-5379) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -30,3 +35,4 @@
 [v24.10.51]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.50...v24.10.51
 [v24.10.52]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.51...v24.10.52
 [v24.10.53]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.52...v24.10.53
+[v24.10.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.53...v24.10.54
