@@ -2,6 +2,7 @@ import agents from './agents/agents.js';
 import agentChats from './agents/agentChats.js';
 import buckets from './buckets/buckets.js';
 import calendars from './calendars/calendars.js';
+import catalog from './catalog/catalog.js';
 import chatGateways from './chatGateways/chatGateways.js';
 import communications from './communications/communications.js';
 import configurations from './configurations/configurations.js';
@@ -19,6 +20,7 @@ export {
   agentChats,
   buckets,
   calendars,
+  catalog,
   chatGateways,
   communications,
   flows,

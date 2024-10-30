@@ -411,5 +411,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'There was an error loading the chat history',
+    markChatProcessed: 'Failed to move the chat to “Closed”',
   },
 };
