@@ -1,5 +1,13 @@
 
 
+## [v24.10.55] - 2024-10-30
+### :bug: Bug Fixes
+- [`125309f`](https://github.com/webitel/webitel-ui-sdk/commit/125309fe2bafa7ad5228c34371daacae64a470b2) - changed version [WTEL-5335](https://webitel.atlassian.net/browse/WTEL-5335) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`ff316c1`](https://github.com/webitel/webitel-ui-sdk/commit/ff316c1638aaa4dcadd730c15491f4fc4111d4da) - import i18n.js to agentChats api file [WTEL-5335](https://webitel.atlassian.net/browse/WTEL-5335) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`d957dee`](https://github.com/webitel/webitel-ui-sdk/commit/d957dee98c58b77cf8a362eb994b355b7cf1a9f5) - implemented version [WTEL-5335](https://webitel.atlassian.net/browse/WTEL-5335) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`d0406b5`](https://github.com/webitel/webitel-ui-sdk/commit/d0406b57b27eb001121bc540deb07e1690f2a229) - added catalog api and added new method to agentChats api [WTEL-5335](https://webitel.atlassian.net/browse/WTEL-5335) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.10.54] - 2024-10-30
 ### :bug: Bug Fixes
 - [`e3c0907`](https://github.com/webitel/webitel-ui-sdk/commit/e3c0907c4c5993879e8add14439f0c5c0c1cd25e) - rename slas page[WTEL-5379](https://webitel.atlassian.net/browse/WTEL-5379) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -36,3 +44,4 @@
 [v24.10.52]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.51...v24.10.52
 [v24.10.53]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.52...v24.10.53
 [v24.10.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.53...v24.10.54
+[v24.10.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.54...v24.10.55
