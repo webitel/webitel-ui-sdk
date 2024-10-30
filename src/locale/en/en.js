@@ -220,6 +220,7 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
+        [CrmSections.SLA]: 'SLA',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },

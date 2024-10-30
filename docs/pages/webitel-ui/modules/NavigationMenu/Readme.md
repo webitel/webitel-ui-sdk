@@ -25,18 +25,18 @@
 </template>
 
 <script setup>
-  import CrmConfigurationSections from '@webitel/ui-sdk/src/enums/WebitelApplications/CrmConfigurationSections.enum';
+  import CrmSections from '@webitel/ui-sdk/src/enums/WebitelApplications/CrmSections.enum';
   import { useI18n } from 'vue-i18n';
   import NavigationMenu from '@webitel/ui-sdk/src/modules/NavigationMenu/components/navigation-menu.vue';
 
   const { t } = useI18n();
 
   const navItems = [{
-      value: CrmConfigurationSections.LOOKUPS,
+      value: 'lookups',
       name: t('configuration.lookups'),
       subNav: [
         {
-          value: CrmConfigurationSections.SOURCES,
+          value: CrmSections.SOURCES,
           name: t('configuration.sources'),
           route: "sources",
         },
