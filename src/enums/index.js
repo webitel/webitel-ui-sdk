@@ -12,8 +12,6 @@ import TypesExportedSettings
 // Webitel Applications group
 import AdminSections from './WebitelApplications/AdminSections.enum.js';
 import AuditorSections from './WebitelApplications/AuditorSections.enum.js';
-import CrmConfigurationSections
-  from './WebitelApplications/CrmConfigurationSections.enum.js';
 import CrmSections from './WebitelApplications/CrmSections.enum.js';
 import SupervisorSections
   from './WebitelApplications/SupervisorSections.enum.js';
@@ -33,7 +31,6 @@ export {
   AdminSections,
   AuditorSections,
   CrmSections,
-  CrmConfigurationSections,
   SupervisorSections,
   WebitelApplications,
 };

@@ -1,5 +1,4 @@
 import FilterEvent from '../../../../modules/Filters/enums/FilterEvent.enum.js';
-import isEmpty from '../../../../scripts/isEmpty.js';
 import {
   queryToSortAdapter,
   sortToQueryAdapter,
@@ -29,33 +28,6 @@ const getters = {
     }, []);
 
     return [...new Set([...getters.REQUIRED_FIELDS, ...fields])];
-  },
-
-  EMPTY_STATE: (state, getters) => {
-    if (state.isLoading) {
-      return { value: false };
-    }
-
-    if (state.error) {
-      return { value: true, cause: 'error' };
-    }
-
-    if (!state.dataList.length) {
-      const filters = getters.FILTERS();
-      const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
-      const filtersApplied = Object.entries(filters).some(
-        ([filterValue, filterName]) =>
-          !isEmpty(filterValue) && !uncheckedFilters.includes(filterName),
-      );
-
-      if (filtersApplied) {
-        return { value: true, cause: 'filters' };
-      }
-
-      return { value: true, cause: 'empty' };
-    }
-
-    return { value: false };
   },
 
   GET_LIST_PARAMS: (state, getters) => (overrides) => {
