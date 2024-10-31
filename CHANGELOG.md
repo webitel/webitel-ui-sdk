@@ -1,5 +1,10 @@
 
 
+## [v24.10.56] - 2024-10-31
+### :sparkles: New Features
+- [`d0565ac`](https://github.com/webitel/webitel-ui-sdk/commit/d0565ac468e9dc441a38d7250dfed140c26e52b4) - add edit icon in wt-action-bar[WTEL-4686](https://webitel.atlassian.net/browse/WTEL-4686)] *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.55] - 2024-10-30
 ### :bug: Bug Fixes
 - [`125309f`](https://github.com/webitel/webitel-ui-sdk/commit/125309fe2bafa7ad5228c34371daacae64a470b2) - changed version [WTEL-5335](https://webitel.atlassian.net/browse/WTEL-5335) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -45,3 +50,4 @@
 [v24.10.53]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.52...v24.10.53
 [v24.10.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.53...v24.10.54
 [v24.10.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.54...v24.10.55
+[v24.10.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.55...v24.10.56
