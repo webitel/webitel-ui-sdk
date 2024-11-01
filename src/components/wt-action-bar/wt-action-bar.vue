@@ -64,8 +64,12 @@ const props = defineProps({
     // validator: (v) => ['sm', 'md', 'lg'].includes(v),
   },
 });
-
-const emit = defineEmits(Object.values(IconAction).map((action) => `click:${action}`));
+const emit = defineEmits([
+  /**
+   * click:IconAction
+   */
+  ...Object.values(IconAction).map((action) => `click:${action}`)
+]);
 
 const shownActions = computed(() => {
   const actionsOrder = props.mode === 'card' ? cardActionsOrder : tableActionsOrder;
