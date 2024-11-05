@@ -1,5 +1,10 @@
 
 
+## [v24.10.59] - 2024-11-05
+### :recycle: Refactors
+- [`2d14f6e`](https://github.com/webitel/webitel-ui-sdk/commit/2d14f6e0c8f3378aa535f4409ad64766f37f0131) - version increment [WTEL-5310] (https://webitel.atlassian.net/browse/WTEL-5310) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.10.57] - 2024-11-05
 ### :sparkles: New Features
 - [`f5938a4`](https://github.com/webitel/webitel-ui-sdk/commit/f5938a4bfebd725c115b453d7c26837fb8edaedd) - cases section added to CRM enum [WTEL-5310] (https://webitel.atlassian.net/browse/WTEL-5310) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -60,3 +65,4 @@
 [v24.10.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.54...v24.10.55
 [v24.10.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.55...v24.10.56
 [v24.10.57]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.56...v24.10.57
+[v24.10.59]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.57...v24.10.59
