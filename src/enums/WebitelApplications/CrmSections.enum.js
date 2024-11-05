@@ -1,5 +1,6 @@
 const CrmSections = Object.freeze({
   CONTACTS: 'contacts',
+  CASES: 'cases',
 
   // CONFIGURATION - LOOKUPS
   SLAS: 'slas',
