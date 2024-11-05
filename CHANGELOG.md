@@ -1,5 +1,13 @@
 
 
+## [v24.10.57] - 2024-11-05
+### :sparkles: New Features
+- [`f5938a4`](https://github.com/webitel/webitel-ui-sdk/commit/f5938a4bfebd725c115b453d7c26837fb8edaedd) - cases section added to CRM enum [WTEL-5310] (https://webitel.atlassian.net/browse/WTEL-5310) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :memo: Documentation Changes
+- [`d6516e7`](https://github.com/webitel/webitel-ui-sdk/commit/d6516e7e30e97bd4a7db8c597e5c55be9e67c121) - added wt-action-bar slots docs [WTEL-5307](https://webitel.atlassian.net/browse/WTEL-5307) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.56] - 2024-10-31
 ### :sparkles: New Features
 - [`d0565ac`](https://github.com/webitel/webitel-ui-sdk/commit/d0565ac468e9dc441a38d7250dfed140c26e52b4) - add edit icon in wt-action-bar[WTEL-4686](https://webitel.atlassian.net/browse/WTEL-4686)] *(commit by [@Lera24](https://github.com/Lera24))*
@@ -51,3 +59,4 @@
 [v24.10.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.53...v24.10.54
 [v24.10.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.54...v24.10.55
 [v24.10.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.55...v24.10.56
+[v24.10.57]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.56...v24.10.57
