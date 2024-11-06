@@ -137,6 +137,7 @@ import refresh from './refresh.svg';
 import role from './role.svg';
 import roundedInfo from './rounded-info.svg';
 import save from './save.svg';
+import saveAs from './save-as.svg';
 import scorecard from './scorecard.svg';
 import search from './search.svg';
 import selectCustomValueEnter from './select-custom-value-enter.svg';
@@ -325,6 +326,7 @@ export default objCamelToKebab({
   json,
   redo,
   save,
+  saveAs,
   undo,
   versions,
 
