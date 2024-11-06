@@ -1,5 +1,11 @@
 
 
+## [v24.10.60] - 2024-11-06
+### :sparkles: New Features
+- [`1968f0c`](https://github.com/webitel/webitel-ui-sdk/commit/1968f0ca73eba9be929b31f50570553037245559) - update version [WTEL-5443](https://webitel.atlassian.net/browse/WTEL-5443)
+- [`8bd5487`](https://github.com/webitel/webitel-ui-sdk/commit/8bd54879265262cfd1831e02f876a82be4da5075) - update save icon, implement save as icon [WTEL-5443](https://webitel.atlassian.net/browse/WTEL-5443)
+
+
 ## [v24.10.59] - 2024-11-05
 ### :recycle: Refactors
 - [`2d14f6e`](https://github.com/webitel/webitel-ui-sdk/commit/2d14f6e0c8f3378aa535f4409ad64766f37f0131) - version increment [WTEL-5310] (https://webitel.atlassian.net/browse/WTEL-5310) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -66,3 +72,4 @@
 [v24.10.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.55...v24.10.56
 [v24.10.57]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.56...v24.10.57
 [v24.10.59]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.57...v24.10.59
+[v24.10.60]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.59...v24.10.60
