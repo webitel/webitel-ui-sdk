@@ -1,4 +1,4 @@
-import { AgentChatServiceApi } from 'webitel-sdk';
+import { AgentChatServiceApiFactory } from 'webitel-sdk';
 import {
   getDefaultInstance,
   getDefaultOpenAPIConfig,
@@ -14,7 +14,7 @@ const { t } = i18n.global;
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const agentChatsService = new AgentChatServiceApi(configuration, '', instance);
+const agentChatsService = new AgentChatServiceApiFactory(configuration, '', instance);
 
 const getChatsList = async (params) => {
   const { onlyClosed } = params;
