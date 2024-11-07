@@ -1,5 +1,10 @@
 
 
+## [v24.10.63] - 2024-11-07
+### :bug: Bug Fixes
+- [`6f1531b`](https://github.com/webitel/webitel-ui-sdk/commit/6f1531b75f4d64cb6c7f74642fa8f05c484618bf) - props mode and add new props include/exclude[WTEL-5282] *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.62] - 2024-11-07
 ### :sparkles: New Features
 - [`d153ba8`](https://github.com/webitel/webitel-ui-sdk/commit/d153ba813e0d9b60050004dddbd172720aa5191d) - changed agent chat service in agent chat api [WTEL-5456](https://webitel.atlassian.net/browse/WTEL-5456) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -85,3 +90,4 @@
 [v24.10.60]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.59...v24.10.60
 [v24.10.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.60...v24.10.61
 [v24.10.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.61...v24.10.62
+[v24.10.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.62...v24.10.63
