@@ -1,5 +1,15 @@
 
 
+## [v24.10.62] - 2024-11-07
+### :sparkles: New Features
+- [`d153ba8`](https://github.com/webitel/webitel-ui-sdk/commit/d153ba813e0d9b60050004dddbd172720aa5191d) - changed agent chat service in agent chat api [WTEL-5456](https://webitel.atlassian.net/browse/WTEL-5456) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
+## [v24.10.61] - 2024-11-06
+### :bug: Bug Fixes
+- [`be1b3a2`](https://github.com/webitel/webitel-ui-sdk/commit/be1b3a25d6b6e6b3c0a5d3287556bc775d6bef8e) - fix import agent chat service
+
+
 ## [v24.10.60] - 2024-11-06
 ### :sparkles: New Features
 - [`1968f0c`](https://github.com/webitel/webitel-ui-sdk/commit/1968f0ca73eba9be929b31f50570553037245559) - update version [WTEL-5443](https://webitel.atlassian.net/browse/WTEL-5443)
@@ -73,3 +83,5 @@
 [v24.10.57]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.56...v24.10.57
 [v24.10.59]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.57...v24.10.59
 [v24.10.60]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.59...v24.10.60
+[v24.10.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.60...v24.10.61
+[v24.10.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.61...v24.10.62
