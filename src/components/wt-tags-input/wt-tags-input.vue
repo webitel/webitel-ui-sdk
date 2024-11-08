@@ -102,6 +102,8 @@
 </template>
 
 <script>
+import deepEqual from 'deep-equal';
+
 import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
 import taggableMixin from './mixin/taggableMixin.js';
 
@@ -153,7 +155,25 @@ export default {
       const label = this.getOptionLabel({ optionLabel, option });
       return typeof label === 'object' ? option.label : label;
     },
+    initializeOptions() {
+      if (!this.value) {
+        return [];
+      }
+
+      const newOptions = this.value.filter(valObj => {
+        return !this.options.find(option => {
+          return deepEqual(option, valObj)
+        });
+      });
+
+      this.options.unshift(...newOptions)
+    }
   },
+  created() {
+    if (!this.isApiMode) {
+      this.initializeOptions()
+    }
+  }
 };
 </script>
 
