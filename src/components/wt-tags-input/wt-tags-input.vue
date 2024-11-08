@@ -102,6 +102,8 @@
 </template>
 
 <script>
+import deepEqual from 'deep-equal';
+
 import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
 import taggableMixin from './mixin/taggableMixin.js';
 
@@ -153,25 +155,24 @@ export default {
       const label = this.getOptionLabel({ optionLabel, option });
       return typeof label === 'object' ? option.label : label;
     },
-    updateOptions() {
+    initializeOptions() {
       if (!this.value) {
         return [];
       }
-      this.value.forEach(valObj => {
-        // Check if an object with the same keys and values exists in options
-        const exists = this.options.some(opt =>
-          Object.keys(valObj).every(key => opt[key] === valObj[key])
-        );
 
-        // If it doesn't exist, add it to options
-        if (!exists) {
-          this.options.push(valObj);
-        }
+      const newOptions = this.value.filter(valObj => {
+        return !this.options.find(option => {
+          return deepEqual(option, valObj)
+        });
       });
+
+      this.options.unshift(...newOptions)
     }
   },
   created() {
-    this.updateOptions()
+    if (!this.isApiMode) {
+      this.initializeOptions()
+    }
   }
 };
 </script>
