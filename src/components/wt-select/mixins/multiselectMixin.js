@@ -158,6 +158,8 @@ export default {
   created() {
     // load options only if not disabled
     if (!this.disabled) this.fetchOptions();
+
+    this.options.push(...(this.value ? this.value : []))
     this.fetchOptions = debounce(this.fetchOptions, 500);
   },
 };
