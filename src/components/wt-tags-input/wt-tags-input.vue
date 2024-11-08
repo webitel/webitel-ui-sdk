@@ -153,9 +153,25 @@ export default {
       const label = this.getOptionLabel({ optionLabel, option });
       return typeof label === 'object' ? option.label : label;
     },
+    updateOptions() {
+      if (!this.value) {
+        return [];
+      }
+      this.value.forEach(valObj => {
+        // Check if an object with the same keys and values exists in options
+        const exists = this.options.some(opt =>
+          Object.keys(valObj).every(key => opt[key] === valObj[key])
+        );
+
+        // If it doesn't exist, add it to options
+        if (!exists) {
+          this.options.push(valObj);
+        }
+      });
+    }
   },
   created() {
-    this.options.push(...(this.value ? this.value : []))
+    this.updateOptions()
   }
 };
 </script>

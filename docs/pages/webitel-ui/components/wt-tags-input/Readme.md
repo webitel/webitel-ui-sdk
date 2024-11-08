@@ -1,6 +1,7 @@
 <script setup>
 import Docs from './wt-tags-input-docs.vue';
 import ExampleTagsInput from './examples/example-tags-input.vue';
+import ExampleTaggableWithValueTagsInput from './examples/example-taggable-with-value-tags-input.vue';
 import ExampleTaggableTagsInput from './examples/example-taggable-tags-input.vue';
 import ExampleDisabledTagsInput from './examples/example-disabled-tags-input.vue';
 import ExampleInvalidTagsInput from './examples/example-invalid-tags-input.vue';
@@ -34,6 +35,15 @@ For more information, see WtSelect Docs**
 
 ::: details Code
 <<< ./examples/example-taggable-tags-input.vue
+::: 
+
+## Example Taggable Tags Input With Value
+::: raw
+<ExampleTaggableWithValueTagsInput />
+:::
+
+::: details Code
+<<< ./examples/example-taggable-with-value-tags-input.vue
 :::
 
 ## Example Disabled Tags Input
