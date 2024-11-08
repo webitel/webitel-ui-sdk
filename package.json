@@ -15,7 +15,8 @@
     "publish-lib:testless": "npm run build && npm publish --access public",
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "update-node":"nvm install --lts && nvm alias default node"
   },
   "main": "./dist/@webitel/ui-sdk.mjs",
   "type": "module",
@@ -155,5 +156,9 @@
     "vitest": "^1.4.0",
     "vue": "^3.4.15",
     "vuex": "^4.1.0"
+  },
+  "engines": {
+    "npm": "10.9.0",
+    "node": "v22.11.0"
   }
 }
