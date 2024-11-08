@@ -1,15 +1,16 @@
 <template>
-  <ul class="nav-menu__category nav-menu__category--lvl-2">
+  <ul class="nav-menu__category nav-menu-lvl-2">
     <li
       v-for="(category, key) of categories"
       :key="key"
-      class="nav-menu__category-option__wrapper nav-menu__category-option
-            nav-menu__category-option--lvl-2"
-      >
-      <span class="nav-menu__category-indicator" />
+      class="nav-menu__option
+             nav-menu__item
+             nav-menu-lvl-2__inner"
+    >
+      <span class="nav-menu-lvl-2__indicator" />
       <router-link
         :to="category.route"
-        class="nav-menu__link"
+        class="nav-menu-lvl-2__link"
       >
         {{ category.name }}
       </router-link>
@@ -18,55 +19,45 @@
 </template>
 
 <script setup>
-  import { defineProps } from 'vue';
+import { defineProps } from 'vue';
 
-  const props = defineProps({
-    categories: {
-      type: Array,
-      default: () => [],
-    },
-  });
+const props = defineProps({
+  categories: {
+    type: Array,
+    default: () => [],
+  },
+});
 </script>
 
 <style lang="scss" scoped>
-@import '../../css/navMenu';
+@import '../../css/nav-menu';
 
-.nav-menu{
-  &__category{
-    &--lvl-2 {
-      display: flex;
-      flex-direction: column;
-      overflow-y: scroll;
-      padding: var(--spacing-xs);
-      box-shadow: var(--elevation-6);
-      border-radius: var(--spacing-xs);
-      gap: var(--spacing-xs);
-    }
-    &-option{
-      @extend %typo-subtitle-1;
-    }
-    &-indicator {
+.nav-menu-lvl-2 {
+  @extend %wt-scrollbar;
+  overflow-y: auto;
+
+  &__inner {
+    .nav-menu-lvl-2__indicator {
       position: relative;
       display: block;
-      width: var(--icon-md-size);
-      height: var(--icon-md-size);
+      width: var(--spacing-md);
+      height: var(--spacing-md);
 
       &:after {
-        content: '';
         position: absolute;
         top: 50%;
         left: 50%;
-        width: var(--headline-nav-indicator-size);
-        height: var(--headline-nav-indicator-size);
-        background: var(--text-main-color);
+        width: var(--spacing-2xs);
+        height: var(--spacing-2xs);
+        content: '';
         transform: translate(-50%, -50%);
         border-radius: 50%;
+        background: var(--text-main-color);
       }
     }
-
   }
+
   &__link {
-    @extend %typo-subtitle-1;
     color: var(--text-main-color);
 
     &:hover, &:active {

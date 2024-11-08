@@ -1,56 +1,44 @@
-# Navigation menu
+# NavigationMenu
 
 ### Props:
 
-| Name            | Type   | Default | Required | Description                                                                                                    |
-|-----------------|--------|---------|----------|----------------------------------------------------------------------------------------------------------------|
-| `navItems`      | Array  | `[]`    | +        | Масив обʼєктів `{ value: string, name: string, subNav: array - { value: string, route: string, name: string} }` |
+| Name       | Type  | Default | Required | Description                                                 |
+|------------|-------|---------|----------|-------------------------------------------------------------|
+| `navItems` | Array | `[]`    | +        | Масив обʼєктів включаючих у себе ключі value, name, subName |
 
-### Іконки
+### Icons
 
-Іконки можна додати в app/assets/icons/sprite з приставкою 'nav' (nav-icon, nav-search), не забудьте додати імпорт 
-іконки в файлі index.js в папці з іконками (import './nav-icon.svg';).  
+Іконка в лівій частині новігації буде підтягнута автоматично за значенням `value` з обʼєкта `navItems`.
+Якщо значення value відрізняється від назви іконки - треба прописати виключення в компоненті `nav-menu-lvl-1.vue`.
 
-Якщо іконки не працюють - перевірте чи в main.js вказаний імпорт - import './app/assets/icons/sprite';
-
-##Приклад використання
+## Example Code Navigation Menu
 
 ```vue
-// the-configuration.vue
 
 <template>
-  <section class="config-nav">
-    <navigation-menu :navItems="navItems"/>
-  </section>
+  <navigation-menu :nav-items="navItems" />
 </template>
 
 <script setup>
-  import CrmSections from '@webitel/ui-sdk/src/enums/WebitelApplications/CrmSections.enum';
-  import { useI18n } from 'vue-i18n';
   import NavigationMenu from '@webitel/ui-sdk/src/modules/NavigationMenu/components/navigation-menu.vue';
 
-  const { t } = useI18n();
-
-  const navItems = [{
+  const navItems = [
+    {
       value: 'lookups',
-      name: t('configuration.lookups'),
+      name: 'lookups',
       subNav: [
         {
-          value: CrmSections.SOURCES,
-          name: t('configuration.sources'),
-          route: "sources",
+          value: 'sources',
+          name: 'sources',
+          route: 'lookups/sources',
         },
         {
-          value: 'nav-iconName',
-          name: "other name",
-          route: "other-route",
-        },
-        {
-          value: 'nav-iconName2',
-          name: "other name 2",
-          route: "other-route-2",
+          value: 'slas',
+          name: 'slas',
+          route: 'lookups/slas',
         },
       ],
-    }]
+    },
+  ];
 </script>
 ```

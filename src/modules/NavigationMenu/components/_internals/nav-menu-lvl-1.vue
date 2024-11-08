@@ -1,19 +1,18 @@
 <template>
-  <ul class="nav-menu__category nav-menu__category--lvl-1">
+  <ul class="nav-menu__category nav-menu-lvl-1">
     <li
       v-for="(category, key) of categories"
       :key="key"
-      class="nav-menu__category-option__wrapper"
+      class="nav-menu__option"
     >
       <button
-        :class="{ 'nav-menu__category-option--selected': selected.value === category.value }"
-        class="nav-menu__category-option nav-menu__category-option--lvl-1"
+        :class="{ 'nav-menu-lvl-1__button--selected': selected.value === category.value }"
+        class="nav-menu__item nav-menu-lvl-1__button"
         @click="select(category)"
       >
         <wt-icon
           :color="selected.value === category.value ? 'on-primary' : 'default'"
-          :icon="category.value"
-          icon-prefix="nav"
+          :icon="getIcon(category.value)"
         />
         {{ category.name }}
       </button>
@@ -25,41 +24,55 @@
 </template>
 
 <script setup>
-  import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
-  const props = defineProps({
-    categories: {
-      type: Array,
-      default: () => [],
-    },
-    selected: {
-      type: Object,
-      default: () => ({}),
-    },
-  });
+const props = defineProps({
+  categories: {
+    type: Array,
+    default: () => [],
+  },
+  selected: {
+    type: Object,
+    default: () => ({}),
+  },
+});
 
-  const emit = defineEmits(['select']);
+const emit = defineEmits(['select']);
 
-  function select(category) {
-    emit('select', category);
+function select(category) {
+  emit('select', category);
+}
+
+function getIcon(category) {
+  switch (category) {
+    case 'contact-center':
+      return 'call-ringing';
+    case 'customization':
+      return 'system';
+    default:
+      return category;
   }
+}
 </script>
 
 <style lang="scss" scoped>
-@import '../../css/navMenu';
+@import '../../css/nav-menu';
 
-.nav-menu__category-option--lvl-1 {
-  background: var(--lvl-1-bg);
-  text-transform: uppercase;
-  padding: var(--spacing-xs) var(--spacing-sm);
+.nav-menu-lvl-1__button {
+  background: var(--secondary-color);
 
   &:hover {
-    background: var(--lvl-1-bg--hover);
+    background: var(--secondary-hover-color);
   }
 
-  &.nav-menu__category-option--selected {
-    color: var(--lvl-1-text--selected);
-    background: var(--lvl-1-bg--selected);
+  &--selected {
+    color: var(--primary-on-color);
+    background: var(--primary-color);
+
+    &:hover {
+      color: var(--primary-on-color);
+      background: var(--primary-color);
+    }
   }
 }
 </style>

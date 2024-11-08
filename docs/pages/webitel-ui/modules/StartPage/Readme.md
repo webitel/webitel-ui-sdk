@@ -2,26 +2,21 @@
 
 ### Props:
 
-| Name            | Type   | Default | Required | Description                                                                                                                    |
-|-----------------|--------|---------|----------|--------------------------------------------------------------------------------------------------------------------------------|
-| `nav`           | Array  | `[]`    | +        | Масив обʼєктів `{ value: string, route: string, name: string, text: string, images: object - { light: string, dark: string } }`|
-| `lightDarkLogos`| Object | `{}`    | +        | Об'єкт з зображеннями light/dark mode `{ light: string, dark: stringt }`                                                       |
+| Name      | Type   | Default | Required | Description                                                             |
+|-----------|--------|---------|----------|-------------------------------------------------------------------------|
+| `nav`     | Array  | `[]`    | +        | Масив обʼєктів включаючих у себе ключі value, route, name, text, images |
+| `appLogo` | Object | `{}`    | +        | Об'єкт з зображеннями логотипу для  light/dark теми                     |
 
-##Приклад використання
+## Example Code Start Page
 
 ```vue
-// the-start-page.vue
-
 <template>
-  <div>
-    <start-page :nav="nav" :lightDarkLogos="logo"/>
-  </div>
+  <start-page :nav="nav" :app-logo="logo" />
 </template>
 
 <script setup>
   import { useI18n } from 'vue-i18n';
   import StartPage from '@webitel/ui-sdk/src/modules/StartPage/components/the-start-page.vue';
-  import CrmSections from '@webitel/ui-sdk/src/enums/WebitelApplications/CrmSections.enum';
   import StartLogoLight from '../assets/start-page-logo-light.svg';
   import StartLogoDark from '../assets/start-page-logo-dark.svg';
   import ConfigurationLight from '../assets/configuration-section-light.svg';
@@ -38,20 +33,20 @@
 
   const nav = [
     {
-      value: CrmSections.CONTACTS,
+      value: 'contacts',
       route: '/contacts',
-      name: t(`startPage.${CrmSections.CONTACTS}.name`),
-      text: t(`startPage.${CrmSections.CONTACTS}.text`),
+      name: t(`startPage.contacts.name`),
+      text: t(`startPage.contacts.text`),
       images: {
         light: ContactsLight,
         dark: ContactsDark,
       },
     },
     {
-      value: CrmSections.CONFIGURATION,
+      value: 'configuration',
       route: '/configuration',
-      name: t(`startPage.${CrmSections.CONFIGURATION}.name`),
-      text: t(`startPage.${CrmSections.CONFIGURATION}.text`),
+      name: t(`startPage.configuration.name`),
+      text: t(`startPage.configuration.text`),
       images: {
         light: ConfigurationLight,
         dark: ConfigurationDark,
