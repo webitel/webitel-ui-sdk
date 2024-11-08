@@ -154,6 +154,9 @@ export default {
       return typeof label === 'object' ? option.label : label;
     },
   },
+  created() {
+    this.options.push(...(this.value ? this.value : []))
+  }
 };
 </script>
 
