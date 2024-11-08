@@ -1,5 +1,22 @@
 
 
+## [v24.10.64] - 2024-11-08
+### :sparkles: New Features
+- [`e599e2b`](https://github.com/webitel/webitel-ui-sdk/commit/e599e2babe86f75b5a6aa95db39b6cfcb993cddd) - node and npm engines restriction *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`01852a5`](https://github.com/webitel/webitel-ui-sdk/commit/01852a5a7481a4523ecc9d1646364d99a9ccc93f) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`bdc72a4`](https://github.com/webitel/webitel-ui-sdk/commit/bdc72a437b90572f94fb8ca6164f9c5bd3b486f4) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`294327b`](https://github.com/webitel/webitel-ui-sdk/commit/294327bf52e32de2f0675da97682dec0f8e2e351) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`0291fe0`](https://github.com/webitel/webitel-ui-sdk/commit/0291fe0759f45344fb21f01c9feefdce7bb8d98e) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`08e91c8`](https://github.com/webitel/webitel-ui-sdk/commit/08e91c82ac9c3e7c773f66e940fcdc2b4241e0d8) - Remove from docs taggable input with value.[WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`37dfa1f`](https://github.com/webitel/webitel-ui-sdk/commit/37dfa1f0942e85a108c9deda06d0c248e52e27f4) - update initialize function for options. Remove from docs taggable input with value. Implement unit test [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`3aa1180`](https://github.com/webitel/webitel-ui-sdk/commit/3aa118028d21956fe14959d90948950165e69936) - implement method for set options from value with exist options without duplicate options [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`2039270`](https://github.com/webitel/webitel-ui-sdk/commit/20392702236f7dc7a110bc35e2c7f64c748f5bdf) - move set options from multiselect mixin to wt-tags-input [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`8760c50`](https://github.com/webitel/webitel-ui-sdk/commit/8760c503e13aab3b4819bba6341748a1d75b4bdc) - update package version [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`3739fac`](https://github.com/webitel/webitel-ui-sdk/commit/3739fac8833ad23d371ac5d168aaf18f5eef2647) - implement set options from value on multiselect component [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+
+
 ## [v24.10.63] - 2024-11-07
 ### :bug: Bug Fixes
 - [`6f1531b`](https://github.com/webitel/webitel-ui-sdk/commit/6f1531b75f4d64cb6c7f74642fa8f05c484618bf) - props mode and add new props include/exclude[WTEL-5282] *(commit by [@Lera24](https://github.com/Lera24))*
@@ -91,3 +108,4 @@
 [v24.10.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.60...v24.10.61
 [v24.10.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.61...v24.10.62
 [v24.10.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.62...v24.10.63
+[v24.10.64]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.63...v24.10.64
