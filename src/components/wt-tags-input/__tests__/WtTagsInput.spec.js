@@ -28,6 +28,23 @@ describe('WtTagsInput', () => {
     expect(wrapper.emitted().input[0][0]).toEqual([tag]);
   });
 
+  it('by default when input taggable initialize options should set from value', () => {
+    const wrapper = mount(WtTagsInput, {
+      props: {
+        value: [
+          { label: 'Vue.js', text: 'JavaScript' },
+          { label: 'Vue2.js', text: 'JavaScript' },
+          { label: 'Vue3.js', text: 'JavaScript' }
+        ],
+        options: [
+          { label: 'Vue.js', text: 'JavaScript' }
+        ]
+      },
+    });
+    expect(wrapper.findComponent({ name: 'vue-multiselect' }).vm.$props.options.length).toEqual(3);
+  });
+
+
   it('in manual mode doesnt emit "input" event at native "tag" event', () => {
     const tag = '123';
     const wrapper = mount(WtTagsInput, {
