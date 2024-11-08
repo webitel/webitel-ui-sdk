@@ -36,10 +36,6 @@ For more information, see WtSelect Docs**
 <<< ./examples/example-taggable-tags-input.vue
 :::
 
-::: details Code
-<<< ./examples/example-taggable-with-value-tags-input.vue
-:::
-
 ## Example Disabled Tags Input
 ::: raw
 <ExampleDisabledTagsInput />
