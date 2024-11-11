@@ -1,5 +1,10 @@
 
 
+## [v24.10.65] - 2024-11-11
+### :bug: Bug Fixes
+- [`f409687`](https://github.com/webitel/webitel-ui-sdk/commit/f40968736c808f37dbee27956faabf12318332ab) - exposed install.js script for applications docs [WTEL-5425] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.64] - 2024-11-08
 ### :sparkles: New Features
 - [`e599e2b`](https://github.com/webitel/webitel-ui-sdk/commit/e599e2babe86f75b5a6aa95db39b6cfcb993cddd) - node and npm engines restriction *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -109,3 +114,4 @@
 [v24.10.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.61...v24.10.62
 [v24.10.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.62...v24.10.63
 [v24.10.64]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.63...v24.10.64
+[v24.10.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.64...v24.10.65
