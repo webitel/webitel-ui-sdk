@@ -1,14 +1,13 @@
 <script setup>
-import Docs from './wt-confirm-dialog-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleTableDeleteDialog from './examples/example-table-delete-dialog.vue';
 import ExampleDeleteDialog from './examples/example-delete-dialog.vue';
 </script>
 
 # WtConfirmDialog
-::: raw
 
-<Docs />
-:::
+## Specs
+<Specs />
 
 ## Confirm delete dialog
 ::: raw
