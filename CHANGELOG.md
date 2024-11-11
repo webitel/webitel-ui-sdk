@@ -1,5 +1,13 @@
 
 
+## [v24.10.67] - 2024-11-11
+### :bug: Bug Fixes
+- [`7d1172d`](https://github.com/webitel/webitel-ui-sdk/commit/7d1172d89e3e42fc86c47614d04ab99e1bba68e3) - wt-button-select.vue arrow [WTEL-5475](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :memo: Documentation Changes
+- [`1cd2628`](https://github.com/webitel/webitel-ui-sdk/commit/1cd2628f2e6ea23e75c132cb9589ac53f2fa8688) - logger.js docs [WTEL-5425](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.66] - 2024-11-11
 ### :sparkles: New Features
 - [`2d00667`](https://github.com/webitel/webitel-ui-sdk/commit/2d006673df1befc50fbd506018046baef48934b6) - logger script [WTEL-5425](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -126,3 +134,4 @@
 [v24.10.64]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.63...v24.10.64
 [v24.10.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.64...v24.10.65
 [v24.10.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.65...v24.10.66
+[v24.10.67]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.66...v24.10.67
