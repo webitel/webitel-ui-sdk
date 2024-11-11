@@ -160,6 +160,9 @@
     "vue": "^3.4.15",
     "vuex": "^4.1.0"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
+  },
   "engines": {
     "npm": "10.9.0",
     "node": "v22.11.0"
