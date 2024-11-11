@@ -27,7 +27,6 @@
 <script>
 // import Plyr from 'plyr'; // breaks vitepress build, https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
 import 'plyr/src/sass/plyr.scss';
-import createPlyrURL from './scripts/createPlyrURL.js';
 
 export default {
   name: 'WtPlayer',
@@ -108,8 +107,6 @@ export default {
   methods: {
     async setupPlayer() {
       await this.$nextTick(); // test is failing to render component if element is passed to Plyr as Vue $ref
-      const baseURL = this.$baseURL || process.env.BASE_URL || import.meta.env.BASE_URL;
-      const iconUrl = createPlyrURL(baseURL);
       if (this.player) this.player.destroy();
 
       const defaultControls = [
@@ -135,12 +132,11 @@ export default {
 
       const Plyr = (await import('plyr')).default; // https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
       this.player = new Plyr(this.$refs.player, {
-        // this.player = new Plyr('.wt-player__player', {
         autoplay: this.autoplay,
         loadSprite: false,
         resetOnEnd: this.resetOnEnd,
         invertTime: this.invertTime,
-        iconUrl,
+        iconUrl: '',
         controls,
         loop: {
           active: this.loop,
