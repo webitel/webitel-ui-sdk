@@ -1,5 +1,15 @@
 
 
+## [v24.10.66] - 2024-11-11
+### :sparkles: New Features
+- [`2d00667`](https://github.com/webitel/webitel-ui-sdk/commit/2d006673df1befc50fbd506018046baef48934b6) - logger script [WTEL-5425](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`e589872`](https://github.com/webitel/webitel-ui-sdk/commit/e589872d3f28026ccede040021ef59f26f246320) - tests [WTEL-5425](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`070a54e`](https://github.com/webitel/webitel-ui-sdk/commit/070a54e4baf5e1902a62c6518ba205e1dc1a53d9) - added @rollup/rollup-linux-x64-gnu dependency to fix tests run and build on github actions [WTEL-5425] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`50efdf8`](https://github.com/webitel/webitel-ui-sdk/commit/50efdf89521a5eb83ffa3a664d3e149d0bfedd2d) - docs build fix [WTEL-5425] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.65] - 2024-11-11
 ### :bug: Bug Fixes
 - [`f409687`](https://github.com/webitel/webitel-ui-sdk/commit/f40968736c808f37dbee27956faabf12318332ab) - exposed install.js script for applications docs [WTEL-5425] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -115,3 +125,4 @@
 [v24.10.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.62...v24.10.63
 [v24.10.64]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.63...v24.10.64
 [v24.10.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.64...v24.10.65
+[v24.10.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.65...v24.10.66
