@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.10.66",
+  "version": "24.10.67",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -138,8 +138,8 @@
     "@biomejs/biome": "1.9.4",
     "@vitejs/plugin-vue": "5.1.5",
     "@vitest/coverage-v8": "^2.1.4",
-    "@vue/compat": "^3.4.15",
-    "@vue/compiler-sfc": "^3.4.15",
+    "@vue/compat": "^3.5.12",
+    "@vue/compiler-sfc": "^3.5.12",
     "@vue/test-utils": "^2.4.6",
     "globby": "^14.0.2",
     "happy-dom": "^15.11.0",
@@ -157,7 +157,7 @@
     "vite-plugin-vue-docgen": "^0.3.4",
     "vitepress": "1.5.0",
     "vitest": "^2.1.4",
-    "vue": "^3.4.15",
+    "vue": "^3.5.12",
     "vuex": "^4.1.0"
   },
   "optionalDependencies": {

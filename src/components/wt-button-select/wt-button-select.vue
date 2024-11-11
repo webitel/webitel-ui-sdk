@@ -84,7 +84,7 @@ const emit = defineEmits([
 
 const isOpened = ref(false);
 
-function selectOption({ option, index }) {
+const selectOption = ({ option, index }) => {
   emit('click:option', option, index);
   isOpened.value = false;
 }
