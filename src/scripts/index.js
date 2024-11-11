@@ -7,6 +7,7 @@ import prettifyTime from './prettifyTime.js';
 import preventHiddenPageCallsDecorator
   from './preventHiddenPageCallsDecorator.js';
 import saveAsJSON from './saveAsJSON.js';
+import { wtlog } from './logger.js';
 import {
   sortToQueryAdapter,
   queryToSortAdapter,
@@ -46,6 +47,7 @@ export {
   eventBus,
   isEmpty,
   convertDuration,
+  wtlog,
 
   // compareSize.js
   compareSize,
