@@ -61,9 +61,6 @@ export default ({ mode }) => {
       viteStaticCopy({
         targets: [
           {
-            src: 'src/assets/icons/plyr.svg',
-            dest: 'img',
-          }, {
             src: 'src/assets/icons/sprite/',
             dest: 'img',
           },
