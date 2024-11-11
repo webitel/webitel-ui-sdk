@@ -1,7 +1,6 @@
 import { globbySync } from 'globby';
 import path from 'path';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
@@ -36,15 +35,6 @@ export default defineConfig({
         globals: {
           process: true,
         },
-      }),
-
-      viteStaticCopy({
-        targets: [
-          {
-            src: path.resolve(__dirname, '../../src/assets/icons/plyr.svg'),
-            dest: 'img',
-          },
-        ],
       }),
       createSvgSpritePlugin({
         include: '**/sprite/*.svg',

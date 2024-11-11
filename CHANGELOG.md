@@ -1,5 +1,10 @@
 
 
+## [v24.10.69] - 2024-11-11
+### :recycle: Refactors
+- [`f9f6155`](https://github.com/webitel/webitel-ui-sdk/commit/f9f615521aadf07c279f40f0bf937ec0c33439d5) - simplified plyr icons SO MUCH! (upd webitel-ui) [WTEL-5475](https://webitel.atlassian.net/browse/WTEL-5475) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.67] - 2024-11-11
 ### :bug: Bug Fixes
 - [`7d1172d`](https://github.com/webitel/webitel-ui-sdk/commit/7d1172d89e3e42fc86c47614d04ab99e1bba68e3) - wt-button-select.vue arrow [WTEL-5475](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -135,3 +140,4 @@
 [v24.10.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.64...v24.10.65
 [v24.10.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.65...v24.10.66
 [v24.10.67]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.66...v24.10.67
+[v24.10.69]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.68...v24.10.69
