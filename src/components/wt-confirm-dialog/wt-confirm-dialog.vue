@@ -1,6 +1,6 @@
 <template>
   <wt-popup
-    class="delete-confirmation-popup"
+    class="wt-confirm-dialog"
     size="sm"
     v-bind="attrs"
     @close="close"
@@ -10,8 +10,8 @@
     </template>
     <template #main>
       <slot name="main">
-        <div class="delete-confirmation-popup__content">
-          <p class="delete-confirmation-popup__message">
+        <div class="wt-confirm-dialog__content">
+          <p class="wt-confirm-dialog__message">
             {{ deleteMessage ? deleteMessage : $t('webitelUI.deleteConfirmationPopup.askingAlert', { subject }) }}
           </p>
         </div>
@@ -40,12 +40,11 @@
 
 <script setup>
 import { ref, useAttrs } from 'vue';
-import i18n from '../../locale/i18n.js';
 
 const props = defineProps({
   title: {
     type: String,
-    default: i18n.global.t('webitelUI.deleteConfirmationPopup.title'),
+    required: true
   },
   deleteMessage: {
     type: String,
@@ -55,13 +54,9 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  callback: {
-    type: Function,
-    required: true,
-  },
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'confirm']);
 
 const attrs = useAttrs();
 
@@ -72,25 +67,20 @@ function close() {
 }
 
 async function confirm() {
-  try {
-    isDeleting.value = true;
-    await props.callback();
-    close();
-  } finally {
-    isDeleting.value = false;
-  }
+  emit('confirm')
+  close();
 }
 </script>
 
 <style scoped>
-.delete-confirmation-popup__content {
+.wt-confirm-dialog__content {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: var(--spacing-sm);
 }
 
-.delete-confirmation-popup__message {
+.wt-confirm-dialog__message {
   text-align: center;
 }
 

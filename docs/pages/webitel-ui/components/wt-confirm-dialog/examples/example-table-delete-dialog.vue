@@ -20,15 +20,13 @@ const deleteMessage = computed(() => {
 <template>
   <div class="table-confirm-delete-dialog__action-wrapper">
     <wt-button @click="isShowDialog = true">Show dialog</wt-button>
-    <wt-input :value="deleteCount" @input="deleteCount = $event">
-
-    </wt-input>
+    <wt-input :value="deleteCount" @input="deleteCount = $event" />
   </div>
   <wt-confirm-dialog
-    v-if="isShowDialog"
+    :shown="isShowDialog"
     :title="$t('webitelUI.deleteConfirmationPopup.title')"
     :deleteMessage="deleteMessage"
-    :callback="() => isShowDialog = false"
+    @confirm="isShowDialog = false"
     @close="isShowDialog = false"
   >
     <template #actions="{ isDeleting, close, confirm}">
