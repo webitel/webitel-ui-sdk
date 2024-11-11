@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Plyr from 'plyr';
+// import Plyr from 'plyr'; // breaks vitepress build, https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
 import 'plyr/src/sass/plyr.scss';
 import createPlyrURL from './scripts/createPlyrURL.js';
 
@@ -132,6 +132,8 @@ export default {
         : defaultControls;
 
       if (this.download) controls.push('download');
+
+      const Plyr = (await import('plyr')).default; // https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
       this.player = new Plyr(this.$refs.player, {
         // this.player = new Plyr('.wt-player__player', {
         autoplay: this.autoplay,
