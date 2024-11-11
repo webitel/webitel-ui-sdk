@@ -17,6 +17,7 @@
       :disabled="disabled"
       :options="options"
       :visible="isOpened"
+      :tooltip-triggers="[]"
       @click="selectOption"
     >
       <template #activator>
@@ -89,7 +90,7 @@ const selectOption = ({ option, index }) => {
   isOpened.value = false;
 }
 
-function atClickaway() {
+const atClickaway = () => {
   isOpened.value = false;
 }
 </script>
