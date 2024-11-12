@@ -1,5 +1,10 @@
 
 
+## [v24.10.73] - 2024-11-12
+### :bug: Bug Fixes
+- [`5746c8c`](https://github.com/webitel/webitel-ui-sdk/commit/5746c8ca063af834eb36f20afd1ba21ac03da7e2) - caseConverters.js scripts import fix [WTEL-5516](https://webitel.atlassian.net/browse/WTEL-5516) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.72] - 2024-11-12
 ### :sparkles: New Features
 - [`a1eb8be`](https://github.com/webitel/webitel-ui-sdk/commit/a1eb8bebdff83061e3ef81fe55166108efd8e44b) - FilesExport.js skipFilesWithError config added [WTEL-5173](https://webitel.atlassian.net/browse/WTEL-5173) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -161,3 +166,4 @@
 [v24.10.69]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.68...v24.10.69
 [v24.10.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.69...v24.10.71
 [v24.10.72]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.71...v24.10.72
+[v24.10.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.72...v24.10.73
