@@ -1,5 +1,10 @@
 
 
+## [v24.10.72] - 2024-11-12
+### :sparkles: New Features
+- [`a1eb8be`](https://github.com/webitel/webitel-ui-sdk/commit/a1eb8bebdff83061e3ef81fe55166108efd8e44b) - FilesExport.js skipFilesWithError config added [WTEL-5173](https://webitel.atlassian.net/browse/WTEL-5173) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.71] - 2024-11-12
 ### :sparkles: New Features
 - [`d0bcba0`](https://github.com/webitel/webitel-ui-sdk/commit/d0bcba0b49949566e9487da167b6557f76218585) - Update version [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
@@ -155,3 +160,4 @@
 [v24.10.67]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.66...v24.10.67
 [v24.10.69]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.68...v24.10.69
 [v24.10.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.69...v24.10.71
+[v24.10.72]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.71...v24.10.72
