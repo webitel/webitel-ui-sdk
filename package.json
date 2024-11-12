@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.10.69",
+  "version": "24.10.72",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -150,6 +150,7 @@
     "postcss-prefix-selector": "^2.1.0",
     "prismjs": "^1.29.0",
     "sass": "^1.80.6",
+    "tslib": "^2.8.1",
     "vite": "^5.4.11",
     "vite-plugin-node-polyfills": "^0.22.0",
     "vite-plugin-static-copy": "^2.1.0",
