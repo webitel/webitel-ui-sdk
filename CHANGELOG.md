@@ -1,5 +1,18 @@
 
 
+## [v24.10.71] - 2024-11-12
+### :sparkles: New Features
+- [`d0bcba0`](https://github.com/webitel/webitel-ui-sdk/commit/d0bcba0b49949566e9487da167b6557f76218585) - Update version [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`e09911a`](https://github.com/webitel/webitel-ui-sdk/commit/e09911a2ddfdf5479c8c1eeac102d9f8bba78c2e) - Update usage confirm dialog. Implement callback function [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`323aa43`](https://github.com/webitel/webitel-ui-sdk/commit/323aa4392fb59d15d9f16e8d5b75a5f2724d9ea8) - Remove docs and use specs for wt-confirm-dialog [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`8d8be47`](https://github.com/webitel/webitel-ui-sdk/commit/8d8be47c16be826aafcbcd6955472f65a445a9cf) - Update package version [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`474fb3a`](https://github.com/webitel/webitel-ui-sdk/commit/474fb3a2328d4fca5cba4eb364dd0443616ae500) - Update docs for wt-confirm-dialog. Update examples for confirm dialog. Update props and events wt-confirm-dialog [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`ac269ce`](https://github.com/webitel/webitel-ui-sdk/commit/ac269ce83b1f7f2d95afeae7b5edb4a911722753) - Implement wt-confirm-dialog component. Update delete-confirmation-popup module [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+
+### :bug: Bug Fixes
+- [`fc8b838`](https://github.com/webitel/webitel-ui-sdk/commit/fc8b838984b68f4d8b198394f7b8c567da3d3e56) - implement fix for delete-confirmation-popup [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+
+
 ## [v24.10.69] - 2024-11-11
 ### :recycle: Refactors
 - [`f9f6155`](https://github.com/webitel/webitel-ui-sdk/commit/f9f615521aadf07c279f40f0bf937ec0c33439d5) - simplified plyr icons SO MUCH! (upd webitel-ui) [WTEL-5475](https://webitel.atlassian.net/browse/WTEL-5475) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -141,3 +154,4 @@
 [v24.10.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.65...v24.10.66
 [v24.10.67]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.66...v24.10.67
 [v24.10.69]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.68...v24.10.69
+[v24.10.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.69...v24.10.71
