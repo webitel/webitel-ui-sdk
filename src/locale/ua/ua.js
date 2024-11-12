@@ -383,6 +383,8 @@ export default {
     deleteConfirmationPopup: {
       title: 'Підтвердіть видалення',
       askingAlert:
+        'Ви впевнені, що хочете видалити {subject}? Ця дія не може бути скасована.',
+      tableAskingAlert:
         'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
       deleteAll: 'ВСІ',
     },
