@@ -30,7 +30,7 @@ import {
   objSnakeToCamel,
   objCamelToSnake,
   objCamelToKebab,
-} from 'caseConverters.js';
+} from './caseConverters.js';
 
 
 export {
