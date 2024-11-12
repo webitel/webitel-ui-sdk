@@ -54,6 +54,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  callback: {
+    type: Function,
+    required: true,
+  },
 });
 
 const emit = defineEmits(['close', 'confirm']);
@@ -67,8 +71,14 @@ function close() {
 }
 
 async function confirm() {
-  emit('confirm')
-  close();
+  try {
+    isDeleting.value = true;
+
+    await props.callback()
+    close();
+  } finally {
+    isDeleting.value = false;
+  }
 }
 </script>
 

@@ -2,6 +2,12 @@
 import { ref } from 'vue';
 
 const isShowDialog = ref(false)
+
+const callback = async () => {
+  return new Promise(resolve => setTimeout(() => {
+    resolve()
+  }, 500))
+}
 </script>
 
 <template>
@@ -11,5 +17,6 @@ const isShowDialog = ref(false)
     :title="$t('webitelUI.deleteConfirmationPopup.title')"
     @close="isShowDialog = false"
     @confirm="isShowDialog = false"
+    :callback="callback"
   />
 </template>

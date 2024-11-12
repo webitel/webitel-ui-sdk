@@ -15,10 +15,16 @@ const deleteMessage = computed(() => {
   }
   return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', { count: deleteCount.value }, null);
 });
+
+const callback = async () => {
+  return new Promise(resolve => setTimeout(() => {
+    resolve()
+  }, 500))
+}
 </script>
 
 <template>
-  <div class="table-confirm-delete-dialog__action-wrapper">
+  <div style="display: flex;gap: var(--spacing-xs);">
     <wt-button @click="isShowDialog = true">Show dialog</wt-button>
     <wt-input :value="deleteCount" @input="deleteCount = $event" />
   </div>
@@ -26,7 +32,7 @@ const deleteMessage = computed(() => {
     :shown="isShowDialog"
     :title="$t('webitelUI.deleteConfirmationPopup.title')"
     :deleteMessage="deleteMessage"
-    @confirm="isShowDialog = false"
+    :callback="callback"
     @close="isShowDialog = false"
   >
     <template #actions="{ isDeleting, close, confirm}">
@@ -46,10 +52,3 @@ const deleteMessage = computed(() => {
     </template>
   </wt-confirm-dialog>
 </template>
-
-<style scoped lang="scss">
-.table-confirm-delete-dialog__action-wrapper {
-  display: flex;
-  gap: var(--spacing-xs);
-}
-</style>

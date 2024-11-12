@@ -2,8 +2,8 @@
   <wt-confirm-dialog
     v-bind="attrs"
     :title="$t('webitelUI.deleteConfirmationPopup.title')"
+    :callback="callback"
     @close="close"
-    @confirm="callback"
   >
     <template #main>
       <div class="delete-confirmation-popup__content">
