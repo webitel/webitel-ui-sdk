@@ -220,6 +220,7 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
+        [CrmSections.SLAS]: 'SLAS',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
@@ -410,5 +411,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'There was an error loading the chat history',
+    markChatProcessed: 'Failed to move the chat to “Closed”',
   },
 };

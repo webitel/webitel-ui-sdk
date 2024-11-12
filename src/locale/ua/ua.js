@@ -219,6 +219,7 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Контакти',
+        [CrmSections.SLAS]: 'SLAS',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
@@ -407,5 +408,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Сталася помилка завантаження історії чату',
+    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”'
   },
 };

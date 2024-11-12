@@ -137,6 +137,7 @@ import refresh from './refresh.svg';
 import role from './role.svg';
 import roundedInfo from './rounded-info.svg';
 import save from './save.svg';
+import saveAs from './save-as.svg';
 import scorecard from './scorecard.svg';
 import search from './search.svg';
 import selectCustomValueEnter from './select-custom-value-enter.svg';
@@ -165,6 +166,24 @@ import videoCamOff from './video-cam-off.svg';
 import videoCam from './video-cam.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
+
+import plyrAirplay from './plyr-airplay.svg';
+import plyrCaptionsOff from './plyr-captions-off.svg';
+import plyrCaptionsOn from './plyr-captions-on.svg';
+import plyrDownload from './plyr-download.svg';
+import plyrEnterFullscreen from './plyr-enter-fullscreen.svg';
+import plyrExitFullscreen from './plyr-exit-fullscreen.svg';
+import plyrFastForward from './plyr-fast-forward.svg';
+import plyrLogoVimeo from './plyr-logo-vimeo.svg';
+import plyrLogoYoutube from './plyr-logo-youtube.svg';
+import plyrMuted from './plyr-muted.svg';
+import plyrPause from './plyr-pause.svg';
+import plyrPip from './plyr-pip.svg';
+import plyrPlay from './plyr-play.svg';
+import plyrRestart from './plyr-restart.svg';
+import plyrRewind from './plyr-rewind.svg';
+import plyrSettings from './plyr-settings.svg';
+import plyrVolume from './plyr-volume.svg';
 
 export default objCamelToKebab({
   account,
@@ -325,6 +344,7 @@ export default objCamelToKebab({
   json,
   redo,
   save,
+  saveAs,
   undo,
   versions,
 
@@ -332,4 +352,22 @@ export default objCamelToKebab({
   previewTagVideo,
   previewTagApplication,
   previewTagImage,
+
+  plyrAirplay,
+  plyrCaptionsOff,
+  plyrCaptionsOn,
+  plyrDownload,
+  plyrEnterFullscreen,
+  plyrExitFullscreen,
+  plyrFastForward,
+  plyrLogoVimeo,
+  plyrLogoYoutube,
+  plyrMuted,
+  plyrPause,
+  plyrPip,
+  plyrPlay,
+  plyrRestart,
+  plyrRewind,
+  plyrSettings,
+  plyrVolume,
 });

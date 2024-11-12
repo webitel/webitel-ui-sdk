@@ -1,6 +1,7 @@
 # `UseCardTabs`
 
 Композібл використовується для роботи з табами в карточці сутності.
+Викликає всередині себе роутер та роут для розрахунку
 
 ## Input params
 
@@ -10,10 +11,10 @@
 
 ## Return
 
-| Params     | Description           |
-|------------|-----------------------|
-| currentTab | Поточна відкрита таба |
-| changeTab  | Метод для зміни таби  |
+| Params     | Description                                                               |
+|------------|---------------------------------------------------------------------------|
+| currentTab | Поточна відкрита таба. Розраховується від значення route.name або tabs[0] |
+| changeTab  | Метод для зміни таби. Викликає router і пушить нове значення в нього      |
 
 ## Використання
 
@@ -29,7 +30,7 @@ const tabs = [
   {
     text: t('objects.directory.users.tokens'),
     value: 'tokens',
-    pathName: 'tokens',
+    pathName: 'tokens', // pathName - значення з router. Впливає на розрахунок currentTab та changeTab
   },
 ];
 

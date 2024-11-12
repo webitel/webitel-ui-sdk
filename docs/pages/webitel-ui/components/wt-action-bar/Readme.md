@@ -1,6 +1,7 @@
 <script setup>
 import Specs from './component-specs.vue';
 import ExampleTableActionBar from './examples/example-table-action-bar.vue';
+import ExampleSlottedTableActionBar from './examples/example-slotted-table-action-bar.vue';
 </script>
 
 # `wt-actions-bar.vue`
@@ -13,6 +14,9 @@ import ExampleTableActionBar from './examples/example-table-action-bar.vue';
 ## Specs
 
 <Specs />
+
+## Events
+Events are built dynamically on `click:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
 
 ## Actions Order, depending on `mode` prop
 
@@ -28,4 +32,14 @@ import ExampleTableActionBar from './examples/example-table-action-bar.vue';
 
 ::: details Code
 <<< ./examples/example-table-action-bar.vue
+:::
+
+## Example Slotted Table Actions Bar
+
+::: raw
+<ExampleSlottedTableActionBar />
+:::
+
+::: details Code
+<<< ./examples/example-slotted-table-action-bar.vue
 :::

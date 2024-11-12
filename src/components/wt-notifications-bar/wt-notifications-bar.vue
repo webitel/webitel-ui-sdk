@@ -17,22 +17,29 @@
 </template>
 
 <script>
+import defaultEventBus from '../../scripts/eventBus.js';
+import { _wtUiLog as loggr } from '../../scripts/logger.js';
+
 export default {
   name: 'WtNotificationsBar',
   inject: ['$eventBus'],
   data: () => ({
     notificationDuration: 4000,
     notifications: [],
+
+    eventBus: defaultEventBus,
   }),
   created() {
-    try {
-      this.$eventBus.$on('notification', this.showNotification);
-    } catch (err) {
-      console.error('wt-notifications-bar cannot work without globally registered eventBus', err);
+    if (this.$eventBus) {
+      this.eventBus = this.$eventBus;
+    } else {
+      loggr.warn({ entity: 'component', module: 'wt-notification-bar' })('no globally provided $eventBus found, using default webitel-ui eventBus');
     }
+
+    this.eventBus.$on('notification', this.showNotification);
   },
   unmounted() {
-    this.$eventBus.$off('notification', this.showNotification);
+    this.eventBus.$off('notification', this.showNotification);
   },
   methods: {
     showNotification(notification) {

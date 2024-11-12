@@ -35,16 +35,16 @@
 import { computed } from 'vue';
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
-import { tableActionsOrder, cardActionsOrder } from './WtActionBarActionsOrder.js';
+import { tableActionsOrder, sectionActionsOrder } from './WtActionBarActionsOrder.js';
 
 const props = defineProps({
   /**
-   * [`'table'`, `'card'`]
+   * [`'table'`, `'section'`]
    * */
   mode: {
     type: String,
     default: 'table',
-    validator: (v) => ['table', 'card'].includes(v),
+    validator: (v) => ['table', 'section'].includes(v),
   },
   /**
    * see `IconAction` enum
@@ -63,12 +63,38 @@ const props = defineProps({
     // default: 'md',
     // validator: (v) => ['sm', 'md', 'lg'].includes(v),
   },
-});
 
-const emit = defineEmits(Object.values(IconAction).map((action) => `click:${action}`));
+  /**
+  * Leave the default value for the mode only listed in includes prop
+   */
+
+  include: {
+    type: Array,
+    default: () => [],
+  },
+
+  /**
+  * Leave the default values for the mode, except for those in exclude prop
+   */
+
+  exclude: {
+    type: Array,
+    default: () => [],
+  },
+});
+const emit = defineEmits([
+  /**
+   * click:IconAction
+   */
+  ...Object.values(IconAction).map((action) => `click:${action}`)
+]);
 
 const shownActions = computed(() => {
-  const actionsOrder = props.mode === 'card' ? cardActionsOrder : tableActionsOrder;
+  const actionsOrder = props.mode === 'section' ? sectionActionsOrder : tableActionsOrder;
+
+  if(props.include.length) return actionsOrder.filter((action) => props.include.includes(action));
+
+  if(props.exclude.length) return actionsOrder.filter((action) => !props.exclude.includes(action));
 
   return actionsOrder.filter((action) => props.actions.includes(action));
 });

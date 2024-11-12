@@ -1,21 +1,23 @@
-# `UseCardTabs`
+# `UseCardComponent`
 
 Композібл використовується для роботи з відкритою карточкою сторінки сутності. Вертає необхідні computed властивості та
-методи, для використоання їх у компонентах 'opened-card.vue'.
+методи, для використоання їх у компонентах '<opened-card.vue>'.
+Використовується разом з композіблом [useCardStore](../use-card-store/Readme.md).
 
 ## Input params
 
 Обєкт параметрів який має включати наступні значення:
-| Params | Description |
+
+| Params       | Description                                                        |
 |--------------|--------------------------------------------------------------------|
-| id | |
-| itemInstance | |
-| invalid | Boolean значення, яке вертається з перевірки на валідацію сторінки |
-| loadItem | |
-| addItem | |
-| updateItem | |
-| setId | |
-| resetState | |
+| id           |                                                                    |
+| itemInstance |                                                                    |
+| invalid      | Boolean значення, яке вертається з перевірки на валідацію сторінки |
+| loadItem     |                                                                    |
+| addItem      |                                                                    |
+| updateItem   |                                                                    |
+| setId        |                                                                    |
+| resetState   |                                                                    |
 
 ## Return
 
@@ -24,9 +26,9 @@
 | id           |                                                                                                                                                                                                                    |
 | itemInstance |                                                                                                                                                                                                                    |
 | isNew        | Якщо запис не має id, він вважаєаться новим (ще не створеним)                                                                                                                                                      |
-| pathName     | Назва ще не збереженої сутності (див.useCachedItemInstanceName)                                                                                                                                                    |
+| pathName     | Назва ще не збереженої сутності (див.[useCachedItemInstanceName](../use-cached-item-instance-name/Readme.md))                                                                                                      |
 | disabledSave | Заборона збереження карточки якщо зміни не пройшли валідацію                                                                                                                                                       |
-| saveText     | Текст для кнопки збереження у компоненті 'wt-page-header'                                                                                                                                                          |
+| saveText     | Текст для кнопки збереження у компоненті 'wt-page-header' [components/wt-page-header](../../components/wt-page-header/Readme.md).                                                                                  |
 | save         | Метод для збереження нової сутності або редагування існуючої                                                                                                                                                       |
 | initialize   | Метод, який на mount компонента викликає get запит на бек для завантаження сторінки, а на onMounted робить reset сторінки. Lifecycle hooks винесені в цей окремий метод для можливості кастомізації у разі потреби |
 

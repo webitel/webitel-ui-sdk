@@ -12,4 +12,4 @@ export const tableActionsOrder = [
 ];
 
 // TODO
-export const cardActionsOrder = tableActionsOrder;
+export const sectionActionsOrder = tableActionsOrder;
