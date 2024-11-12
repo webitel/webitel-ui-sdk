@@ -5,11 +5,11 @@ import {
   createRouter,
   createWebHistory,
 } from 'vue-router';
-import WebitelUI from '../../../src/install.js';
-import i18n from '../../../src/locale/i18n';
-import sharedComponents from '../../shared';
-import '../../../src/assets//icons/sprite';
 import 'prismjs/themes/prism.min.css';
+import WebitelUI from '__lib__/install.js';
+import i18n from '__lib__/locale/i18n';
+import sharedComponents from '../../shared';
+import '__lib__/assets/icons/sprite';
 import Layout from './Layout.vue';
 import './main.scss';
 

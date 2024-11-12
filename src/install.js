@@ -1,5 +1,5 @@
-import './css/main.scss';
 import 'vue-multiselect/dist/vue-multiselect.css';
+import './css/main.scss';
 import generateInstance from './api/axios/generateInstance.js';
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
@@ -14,9 +14,6 @@ export default {
     Object.keys(Components).forEach((name) => {
       app.component(name, Components[name]);
     });
-    // Vue.prototype.$webitelUI = {
-    //   // locale: this.$i18n.locale,
-    // };
     Object.keys(globals).forEach((globalKey) => {
       app.provide(globalKey, globals[globalKey]);
     });
