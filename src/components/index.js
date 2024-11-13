@@ -11,6 +11,7 @@ import WtChip from './wt-chip/wt-chip.vue';
 import WtConfirmDialog from './wt-confirm-dialog/wt-confirm-dialog.vue';
 import WtContextMenu from './wt-context-menu/wt-context-menu.vue';
 import WtCopyAction from './wt-copy-action/wt-copy-action.vue';
+import WtCollapseAction from './wt-collapse-action/wt-collapse-action.vue';
 import WtDatepicker from './wt-datepicker/wt-datepicker.vue';
 import WtDivider from './wt-divider/wt-divider.vue';
 import WtDummy from './wt-dummy/wt-dummy.vue';
@@ -82,6 +83,7 @@ const Components = {
   WtButton,
   WtChip,
   WtConfirmDialog,
+  WtCollapseAction,
   WtDivider,
   WtTooltip,
   WtLabel,
