@@ -1,13 +1,10 @@
 <template>
-  <wt-popup
-    class="delete-confirmation-popup"
-    size="sm"
+  <wt-confirm-dialog
     v-bind="attrs"
-    @close="close"
+    class="delete-confirmation-popup"
+    :title="$t('webitelUI.deleteConfirmationPopup.title')"
+    :callback="callback"
   >
-    <template #title>
-      {{ $t('webitelUI.deleteConfirmationPopup.title') }}
-    </template>
     <template #main>
       <div class="delete-confirmation-popup__content">
         <wt-icon
@@ -19,7 +16,7 @@
         </p>
       </div>
     </template>
-    <template #actions>
+    <template #actions="{ isDeleting, close, confirm}">
       <wt-button
         :loading="isDeleting"
         @click="confirm"
@@ -34,11 +31,11 @@
         {{ $t('vocabulary.no') }}
       </wt-button>
     </template>
-  </wt-popup>
+  </wt-confirm-dialog>
 </template>
 
 <script setup>
-import { computed, ref, useAttrs } from 'vue';
+import { computed, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
@@ -58,30 +55,14 @@ const attrs = useAttrs();
 
 const { t } = useI18n();
 
-const isDeleting = ref(false);
-
 const deleteMessage = computed(() => {
   if (props.deleteCount === 0) {
-    return t('webitelUI.deleteConfirmationPopup.askingAlert', 2, null, {
+    return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', 2, null, {
       count: t('webitelUI.deleteConfirmationPopup.deleteAll'),
     });
   }
-  return t('webitelUI.deleteConfirmationPopup.askingAlert', { count: props.deleteCount }, null);
+  return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', { count: props.deleteCount }, null);
 });
-
-function close() {
-  emit('close');
-}
-
-async function confirm() {
-  try {
-    isDeleting.value = true;
-    await props.callback();
-    close();
-  } finally {
-    isDeleting.value = false;
-  }
-}
 </script>
 
 <style scoped>

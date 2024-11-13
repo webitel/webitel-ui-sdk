@@ -25,7 +25,8 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
+          check-latest: true
 
       - name: Install dependencies
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
@@ -45,7 +46,8 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
+          check-latest: true
 
       - run: npm run test:unit
 
@@ -130,7 +132,8 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
+          check-latest: true
           registry-url: https://registry.npmjs.org
 
       - name: Check publish status
@@ -165,7 +168,8 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
+          check-latest: true
 
       - name: Build docs
         run: npm run docs:build

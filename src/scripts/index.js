@@ -7,6 +7,7 @@ import prettifyTime from './prettifyTime.js';
 import preventHiddenPageCallsDecorator
   from './preventHiddenPageCallsDecorator.js';
 import saveAsJSON from './saveAsJSON.js';
+import { wtlog } from './logger.js';
 import {
   sortToQueryAdapter,
   queryToSortAdapter,
@@ -29,7 +30,7 @@ import {
   objSnakeToCamel,
   objCamelToSnake,
   objCamelToKebab,
-} from 'caseConverters.js';
+} from './caseConverters.js';
 
 
 export {
@@ -46,6 +47,7 @@ export {
   eventBus,
   isEmpty,
   convertDuration,
+  wtlog,
 
   // compareSize.js
   compareSize,

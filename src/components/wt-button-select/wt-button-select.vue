@@ -17,6 +17,7 @@
       :disabled="disabled"
       :options="options"
       :visible="isOpened"
+      :tooltip-triggers="[]"
       @click="selectOption"
     >
       <template #activator>
@@ -84,12 +85,12 @@ const emit = defineEmits([
 
 const isOpened = ref(false);
 
-function selectOption({ option, index }) {
+const selectOption = ({ option, index }) => {
   emit('click:option', option, index);
   isOpened.value = false;
 }
 
-function atClickaway() {
+const atClickaway = () => {
   isOpened.value = false;
 }
 </script>

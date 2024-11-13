@@ -1,6 +1,6 @@
 <template>
   <wt-tooltip
-    :triggers="['click', 'touch']"
+    :triggers="tooltipTriggers"
     :visible="visible"
     :disabled="disabled"
     class="wt-context-menu"
@@ -68,6 +68,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  tooltipTriggers: {
+    type: Array,
+    default: () => ['click', 'touch'],
   },
 });
 
