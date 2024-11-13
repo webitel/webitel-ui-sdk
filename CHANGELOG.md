@@ -1,5 +1,10 @@
 
 
+## [v24.10.77] - 2024-11-13
+### :bug: Bug Fixes
+- [`0f67887`](https://github.com/webitel/webitel-ui-sdk/commit/0f67887cd5949e7edf943d79fa1eb0b99be0df15) - fix error with not throw emit from delete-confirmation-popup [WTEL-5522](https://webitel.atlassian.net/browse/WTEL-5522)
+
+
 ## [v24.10.76] - 2024-11-13
 ### :sparkles: New Features
 - [`c73fefb`](https://github.com/webitel/webitel-ui-sdk/commit/c73fefbd50cd6bd981a49d83700ad7256fd2cdf3) - add composables in docs[WTEL-5282] *(commit by [@Lera24](https://github.com/Lera24))*
@@ -197,3 +202,4 @@
 [v24.10.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.73...v24.10.74
 [v24.10.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.74...v24.10.75
 [v24.10.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.75...v24.10.76
+[v24.10.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.76...v24.10.77
