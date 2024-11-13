@@ -1,5 +1,14 @@
 
 
+## [v24.10.74] - 2024-11-13
+### :bug: Bug Fixes
+- [`a5ee794`](https://github.com/webitel/webitel-ui-sdk/commit/a5ee79439ddd1f88512b3666a9a66a3c19b26f9f) - conflict and change lib version and rename props in wt-navigation-menu and wt-start-page[WTEL-4710](https://webitel.atlassian.net/browse/WTEL-4710) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`bac8466`](https://github.com/webitel/webitel-ui-sdk/commit/bac8466080703da8d395e105e237df0b844dd9c6) - navigation-menu and start-page component after codereview(change docs, style, add new prop)[WTEL-4710](https://webitel.atlassian.net/browse/WTEL-4710) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :recycle: Refactors
+- [`7b48cb6`](https://github.com/webitel/webitel-ui-sdk/commit/7b48cb6ac851deb4786d9618c2e26a62c45a88d1) - navigation menu - change styles,layout,documentation [WTEL-4710](https://webitel.atlassian.net/browse/WTEL-4710) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.73] - 2024-11-12
 ### :bug: Bug Fixes
 - [`5746c8c`](https://github.com/webitel/webitel-ui-sdk/commit/5746c8ca063af834eb36f20afd1ba21ac03da7e2) - caseConverters.js scripts import fix [WTEL-5516](https://webitel.atlassian.net/browse/WTEL-5516) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -167,3 +176,4 @@
 [v24.10.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.69...v24.10.71
 [v24.10.72]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.71...v24.10.72
 [v24.10.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.72...v24.10.73
+[v24.10.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.73...v24.10.74
