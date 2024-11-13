@@ -1,7 +1,7 @@
 # `UseValidate`
 
-Композібл створений для інкапсуляції загальної логіки валідації форми. 
-Тепер він містить в собі значення для globalConfig (зараз це $autoDirty: true)
+Композібл створений для інкапсуляції загальної логіки валідації форми.
+Тепер він містить в собі значення для `globalConfig` (зараз це `$autoDirty: true`)
 Вертає обєкт валідації, який використовується на сторінках запису.
 
 ## Input params
@@ -16,14 +16,15 @@
 | Params  | Description                         |
 |---------|-------------------------------------|
 | v$      | Обєкт з результатом валідації форми |
-| invalid | Boolean значення v$.$invalid        |
+| invalid | Boolean значення `v$.$invalid`      |
 
 ## Використання
 
 ```js
 import { useValidate } from '@webitel/ui-sdk/src/composables/useValidate/useValidate.js';
 
-сonst schema = {
+сonst
+schema = {
   name: {
     required: true,
     type: 'string',
@@ -38,7 +39,8 @@ import { useValidate } from '@webitel/ui-sdk/src/composables/useValidate/useVali
   },
 };
 
-сonst data = {
+сonst
+data = {
   name: 'some name',
   description: 'some description',
 };

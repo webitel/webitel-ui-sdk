@@ -1,6 +1,6 @@
 # `UseAccessControl`
 
-Композібл вертає computed властивості для роботи з доступом до сторінок.
+Композібл вертає `computed` властивості для роботи з доступом до сторінок.
 
 ## Return
 
@@ -13,8 +13,8 @@
 | hasSaveActionAccess | чи є доступ на збереження запису  |
 | disableUserInput    | заборона керування певним полем   | 
 
-Параметри hasReadAccess, hasCreateAccess, hasDeleteAccess, hasEditAccess розраховуються в 
-залежності від роуту сторінки, а саме його значення прокидується у getter userinfo і всередині аналізується на наявність доступів
+Параметри `hasReadAccess`, `hasCreateAccess`, `hasDeleteAccess`, `hasEditAccess` розраховуються в 
+залежності від `route` сторінки, а саме його значення прокидується у `getter userinfo` і всередині аналізується на наявність доступів
 
 
 ## Використання

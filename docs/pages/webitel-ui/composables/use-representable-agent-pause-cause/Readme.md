@@ -10,9 +10,9 @@
 
 ## Return
 
-| Params                  | Description                                                                                                   |
-|-------------------------|---------------------------------------------------------------------------------------------------------------|
-| representablePauseCause | Computed property that contains additionally calculated properties duration, progressColor, isOverflow, limit |
+| Params                  | Description                                                                                                           |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| representablePauseCause | Computed property that contains additionally calculated properties `duration`, `progressColor`, `isOverflow`, `limit` |
 
 ## Використання
 
