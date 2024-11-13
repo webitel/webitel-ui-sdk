@@ -1,5 +1,13 @@
 
 
+## [v24.10.75] - 2024-11-13
+### :bug: Bug Fixes
+- [`66327ee`](https://github.com/webitel/webitel-ui-sdk/commit/66327ee37bc3e08ac5837483a15aa2e3e5ab1cc9) - locale in useCardComponent composable[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :memo: Documentation Changes
+- [`f43310f`](https://github.com/webitel/webitel-ui-sdk/commit/f43310f82a001035704109b487342223ce0ff479) - manual testing proposals docs [WTEL-5501](https://webitel.atlassian.net/browse/WTEL-5501) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.74] - 2024-11-13
 ### :bug: Bug Fixes
 - [`a5ee794`](https://github.com/webitel/webitel-ui-sdk/commit/a5ee79439ddd1f88512b3666a9a66a3c19b26f9f) - conflict and change lib version and rename props in wt-navigation-menu and wt-start-page[WTEL-4710](https://webitel.atlassian.net/browse/WTEL-4710) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -177,3 +185,4 @@
 [v24.10.72]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.71...v24.10.72
 [v24.10.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.72...v24.10.73
 [v24.10.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.73...v24.10.74
+[v24.10.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.74...v24.10.75

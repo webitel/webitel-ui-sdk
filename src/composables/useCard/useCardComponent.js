@@ -27,7 +27,7 @@ export const useCardComponent = (params) => {
   });
 
   const saveText = computed(() => {
-    return isNew.value || itemInstance.value._dirty ? t('objects.save') : t('objects.saved');
+    return isNew.value || itemInstance.value._dirty ? t('reusable.save') : t('reusable.saved');
   });
 
   const redirectToEdit = () => {
