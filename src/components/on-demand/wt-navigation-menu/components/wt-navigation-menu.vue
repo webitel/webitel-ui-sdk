@@ -1,19 +1,20 @@
 <template>
-  <section class="navigation-menu">
-    <article class="navigation-menu__wrapper">
+  <section class="wt-navigation-menu">
+    <article class="wt-navigation-menu__wrapper">
       <nav-menu-lvl-1
         :categories="categories"
+        :icons="icons"
         :selected="selected"
         @select="select"
       >
         <nav-menu-lvl-2
           :categories="subcategories"
-          class="d-none d-block-xs"
+          class="wt-navigation-menu__categories--display"
         />
       </nav-menu-lvl-1>
       <nav-menu-lvl-2
         :categories="subcategories"
-        class="d-none-xs"
+        class="wt-navigation-menu__categories--hidden"
       />
     </article>
   </section>
@@ -25,10 +26,22 @@ import NavMenuLvl1 from './_internals/nav-menu-lvl-1.vue';
 import NavMenuLvl2 from './_internals/nav-menu-lvl-2.vue';
 
 const props = defineProps({
+
+  /** entire navigation hierarchy. Value: `{ value: string, name: string, subNav: [{ value: string, route: string, name: string}] }`
+   **/
+
   navItems: {
     type: Array,
     required: true,
-  }
+  },
+
+  /** array icons to display in 1 level menu
+   */
+
+  icons: {
+    type: Array,
+    default: () => ([]),
+  },
 });
 
 const selected = ref({});
@@ -67,7 +80,9 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-.navigation-menu {
+@import '../../../../css/main.scss';
+@import '../../../../css/styleguide/viewport-breakpoints/_viewport-breakpoints.scss';
+.wt-navigation-menu {
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -98,7 +113,7 @@ function select(category) {
     width: var(--wrapper-width);
     height: var(--wrapper-height);
     margin: auto;
-    padding: var(--spacing-xs);
+    padding: var(--spacing-sm);
     border-radius: var(--spacing-xs);
     background: var(--content-wrapper-color);
     grid-template-columns: repeat(2, 1fr);
@@ -106,6 +121,20 @@ function select(category) {
 
     @media only screen and (max-width: $viewport-xs) {
       grid-template-columns: 1fr;
+    }
+  }
+
+  &__categories--display {
+    display: none;
+
+    @media only screen and (max-width: $viewport-xs) {
+      display: block;
+    }
+  }
+
+  &__categories--hidden {
+    @media only screen and (max-width: $viewport-xs) {
+      display: none;
     }
   }
 }

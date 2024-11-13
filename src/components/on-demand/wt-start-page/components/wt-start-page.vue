@@ -1,8 +1,10 @@
 <template>
-  <div class="start-page">
-    <start-page-logo :image="logo" />
+  <div class="wt-start-page">
+    <start-page-logo
+      v-if="appLogo"
+      :image="logo" />
 
-    <div class="start-page__wrapper">
+    <div class="wt-start-page__wrapper">
       <start-page-card
         v-for="card of navCards"
         :key="card.value"
@@ -15,39 +17,41 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
 import StartPageCard from './start-page-card.vue';
 import StartPageLogo from './start-page-logo.vue';
 
 const props = defineProps({
+
+  /** entire navigation hierarchy. Value: `{ value: string, route: string, name: string, text: string, images: object - { light: string, dark: string } }`
+   **/
+
   nav: {
     type: Array,
     required: true,
   },
   appLogo: {
     type: Object,
-    required: true,
+  },
+  darkMode: {
+    type: Boolean,
+    default: false,
   },
 });
 
-const store = useStore();
-
-const darkMode = computed(() => store.getters['appearance/DARK_MODE']);
-
 const logo = computed(() => {
-  return darkMode.value ? props.appLogo.dark : props.appLogo.light;
+  return props.darkMode ? props.appLogo.dark : props.appLogo.light;
 });
 
 const navCards = computed(() => {
   return props.nav.map((navItem) => ({
     ...navItem,
-    image: darkMode.value ? navItem.images.dark : navItem.images.light,
+    image: props.darkMode ? navItem.images.dark : navItem.images.light,
   }));
 });
 </script>
 
 <style scoped>
-.start-page__wrapper {
+.wt-start-page__wrapper {
   display: grid;
   justify-content: center;
   box-sizing: border-box;
