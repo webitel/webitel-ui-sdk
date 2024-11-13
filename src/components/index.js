@@ -8,6 +8,7 @@ import WtButtonSelect from './wt-button-select/wt-button-select.vue';
 import WtButton from './wt-button/wt-button.vue';
 import WtCheckbox from './wt-checkbox/wt-checkbox.vue';
 import WtChip from './wt-chip/wt-chip.vue';
+import WtConfirmDialog from './wt-confirm-dialog/wt-confirm-dialog.vue';
 import WtContextMenu from './wt-context-menu/wt-context-menu.vue';
 import WtCopyAction from './wt-copy-action/wt-copy-action.vue';
 import WtDatepicker from './wt-datepicker/wt-datepicker.vue';
@@ -79,6 +80,7 @@ const Components = {
   WtInputInfo,
   WtButton,
   WtChip,
+  WtConfirmDialog,
   WtDivider,
   WtTooltip,
   WtLabel,

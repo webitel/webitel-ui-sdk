@@ -1,5 +1,5 @@
 <template>
-  <wt-navigation-menu :icons="['lookups']" :nav-items="navItems" />
+  <wt-navigation-menu :icons="['lookups']" :nav="navItems" />
 </template>
 
 <script setup>

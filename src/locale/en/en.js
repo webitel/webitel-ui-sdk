@@ -385,6 +385,8 @@ export default {
     deleteConfirmationPopup: {
       title: 'Confirm deletion',
       askingAlert:
+        'Are you sure you want to delete {subject}? This action cannot be undone.',
+      tableAskingAlert:
         'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
       deleteAll: 'ALL',
     },

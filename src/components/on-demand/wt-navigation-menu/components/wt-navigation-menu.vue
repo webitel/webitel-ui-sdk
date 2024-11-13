@@ -30,7 +30,7 @@ const props = defineProps({
   /** entire navigation hierarchy. Value: `{ value: string, name: string, subNav: [{ value: string, route: string, name: string}] }`
    **/
 
-  navItems: {
+  nav: {
     type: Array,
     required: true,
   },
@@ -47,7 +47,7 @@ const props = defineProps({
 const selected = ref({});
 
 const categories = computed(() => {
-  return props.navItems.map((navItem) => ({
+  return props.nav.map((navItem) => ({
     ...navItem,
     name: navItem.name,
   }));

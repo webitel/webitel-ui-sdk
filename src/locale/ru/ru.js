@@ -383,6 +383,8 @@ export default {
     deleteConfirmationPopup: {
       title: 'Подтвердите удаление',
       askingAlert:
+        'Вы уверены, что хотите удалить {subject}? Это действие не может быть отменено.',
+      tableAskingAlert:
         'Вы уверенны, что хотите\n удалить {count} запись? | Вы уверенны, что хотите\n удалить {count} записей?',
       deleteAll: 'ВСЕ',
     },

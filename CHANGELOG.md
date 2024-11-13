@@ -1,5 +1,73 @@
 
 
+## [v24.10.73] - 2024-11-12
+### :bug: Bug Fixes
+- [`5746c8c`](https://github.com/webitel/webitel-ui-sdk/commit/5746c8ca063af834eb36f20afd1ba21ac03da7e2) - caseConverters.js scripts import fix [WTEL-5516](https://webitel.atlassian.net/browse/WTEL-5516) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.10.72] - 2024-11-12
+### :sparkles: New Features
+- [`a1eb8be`](https://github.com/webitel/webitel-ui-sdk/commit/a1eb8bebdff83061e3ef81fe55166108efd8e44b) - FilesExport.js skipFilesWithError config added [WTEL-5173](https://webitel.atlassian.net/browse/WTEL-5173) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.10.71] - 2024-11-12
+### :sparkles: New Features
+- [`d0bcba0`](https://github.com/webitel/webitel-ui-sdk/commit/d0bcba0b49949566e9487da167b6557f76218585) - Update version [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`e09911a`](https://github.com/webitel/webitel-ui-sdk/commit/e09911a2ddfdf5479c8c1eeac102d9f8bba78c2e) - Update usage confirm dialog. Implement callback function [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`323aa43`](https://github.com/webitel/webitel-ui-sdk/commit/323aa4392fb59d15d9f16e8d5b75a5f2724d9ea8) - Remove docs and use specs for wt-confirm-dialog [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`8d8be47`](https://github.com/webitel/webitel-ui-sdk/commit/8d8be47c16be826aafcbcd6955472f65a445a9cf) - Update package version [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`474fb3a`](https://github.com/webitel/webitel-ui-sdk/commit/474fb3a2328d4fca5cba4eb364dd0443616ae500) - Update docs for wt-confirm-dialog. Update examples for confirm dialog. Update props and events wt-confirm-dialog [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+- [`ac269ce`](https://github.com/webitel/webitel-ui-sdk/commit/ac269ce83b1f7f2d95afeae7b5edb4a911722753) - Implement wt-confirm-dialog component. Update delete-confirmation-popup module [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+
+### :bug: Bug Fixes
+- [`fc8b838`](https://github.com/webitel/webitel-ui-sdk/commit/fc8b838984b68f4d8b198394f7b8c567da3d3e56) - implement fix for delete-confirmation-popup [WTEL-5432](https://webitel.atlassian.net/browse/WTEL-5432)
+
+
+## [v24.10.69] - 2024-11-11
+### :recycle: Refactors
+- [`f9f6155`](https://github.com/webitel/webitel-ui-sdk/commit/f9f615521aadf07c279f40f0bf937ec0c33439d5) - simplified plyr icons SO MUCH! (upd webitel-ui) [WTEL-5475](https://webitel.atlassian.net/browse/WTEL-5475) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.10.67] - 2024-11-11
+### :bug: Bug Fixes
+- [`7d1172d`](https://github.com/webitel/webitel-ui-sdk/commit/7d1172d89e3e42fc86c47614d04ab99e1bba68e3) - wt-button-select.vue arrow [WTEL-5475](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :memo: Documentation Changes
+- [`1cd2628`](https://github.com/webitel/webitel-ui-sdk/commit/1cd2628f2e6ea23e75c132cb9589ac53f2fa8688) - logger.js docs [WTEL-5425](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.10.66] - 2024-11-11
+### :sparkles: New Features
+- [`2d00667`](https://github.com/webitel/webitel-ui-sdk/commit/2d006673df1befc50fbd506018046baef48934b6) - logger script [WTEL-5425](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`e589872`](https://github.com/webitel/webitel-ui-sdk/commit/e589872d3f28026ccede040021ef59f26f246320) - tests [WTEL-5425](https://webitel.atlassian.net/browse/WTEL-5425) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`070a54e`](https://github.com/webitel/webitel-ui-sdk/commit/070a54e4baf5e1902a62c6518ba205e1dc1a53d9) - added @rollup/rollup-linux-x64-gnu dependency to fix tests run and build on github actions [WTEL-5425] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`50efdf8`](https://github.com/webitel/webitel-ui-sdk/commit/50efdf89521a5eb83ffa3a664d3e149d0bfedd2d) - docs build fix [WTEL-5425] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.10.65] - 2024-11-11
+### :bug: Bug Fixes
+- [`f409687`](https://github.com/webitel/webitel-ui-sdk/commit/f40968736c808f37dbee27956faabf12318332ab) - exposed install.js script for applications docs [WTEL-5425] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.10.64] - 2024-11-08
+### :sparkles: New Features
+- [`e599e2b`](https://github.com/webitel/webitel-ui-sdk/commit/e599e2babe86f75b5a6aa95db39b6cfcb993cddd) - node and npm engines restriction *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`01852a5`](https://github.com/webitel/webitel-ui-sdk/commit/01852a5a7481a4523ecc9d1646364d99a9ccc93f) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`bdc72a4`](https://github.com/webitel/webitel-ui-sdk/commit/bdc72a437b90572f94fb8ca6164f9c5bd3b486f4) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`294327b`](https://github.com/webitel/webitel-ui-sdk/commit/294327bf52e32de2f0675da97682dec0f8e2e351) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`0291fe0`](https://github.com/webitel/webitel-ui-sdk/commit/0291fe0759f45344fb21f01c9feefdce7bb8d98e) - workflows node version *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`08e91c8`](https://github.com/webitel/webitel-ui-sdk/commit/08e91c82ac9c3e7c773f66e940fcdc2b4241e0d8) - Remove from docs taggable input with value.[WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`37dfa1f`](https://github.com/webitel/webitel-ui-sdk/commit/37dfa1f0942e85a108c9deda06d0c248e52e27f4) - update initialize function for options. Remove from docs taggable input with value. Implement unit test [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`3aa1180`](https://github.com/webitel/webitel-ui-sdk/commit/3aa118028d21956fe14959d90948950165e69936) - implement method for set options from value with exist options without duplicate options [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`2039270`](https://github.com/webitel/webitel-ui-sdk/commit/20392702236f7dc7a110bc35e2c7f64c748f5bdf) - move set options from multiselect mixin to wt-tags-input [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`8760c50`](https://github.com/webitel/webitel-ui-sdk/commit/8760c503e13aab3b4819bba6341748a1d75b4bdc) - update package version [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+- [`3739fac`](https://github.com/webitel/webitel-ui-sdk/commit/3739fac8833ad23d371ac5d168aaf18f5eef2647) - implement set options from value on multiselect component [WTEL-5463](https://webitel.atlassian.net/browse/WTEL-5463)
+
+
 ## [v24.10.63] - 2024-11-07
 ### :bug: Bug Fixes
 - [`6f1531b`](https://github.com/webitel/webitel-ui-sdk/commit/6f1531b75f4d64cb6c7f74642fa8f05c484618bf) - props mode and add new props include/exclude[WTEL-5282] *(commit by [@Lera24](https://github.com/Lera24))*
@@ -91,3 +159,11 @@
 [v24.10.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.60...v24.10.61
 [v24.10.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.61...v24.10.62
 [v24.10.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.62...v24.10.63
+[v24.10.64]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.63...v24.10.64
+[v24.10.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.64...v24.10.65
+[v24.10.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.65...v24.10.66
+[v24.10.67]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.66...v24.10.67
+[v24.10.69]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.68...v24.10.69
+[v24.10.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.69...v24.10.71
+[v24.10.72]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.71...v24.10.72
+[v24.10.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.72...v24.10.73

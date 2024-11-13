@@ -15,7 +15,7 @@ describe('WtNotificationsBar', () => {
     const wrapper = shallowMount(WtNotificationsBar, {
       global: { provide: { $eventBus: eventBus } },
     });
-    wrapper.vm.$eventBus.$emit('notification', {
+     eventBus.$emit('notification', {
       type: 'error',
       text: 'error',
     });
@@ -27,7 +27,7 @@ describe('WtNotificationsBar', () => {
     const wrapper = shallowMount(WtNotificationsBar, {
       global: { provide: { $eventBus: eventBus } },
     });
-    wrapper.vm.$eventBus.$emit('notification', {
+    eventBus.$emit('notification', {
       type: 'error',
       text: 'error',
     });
@@ -42,7 +42,7 @@ describe('WtNotificationsBar', () => {
       global: { provide: { $eventBus: eventBus } },
       data: () => ({ notificationDuration: 100 }),
     });
-    wrapper.vm.$eventBus.$emit('notification', {
+    eventBus.$emit('notification', {
       type: 'error',
       text: 'error',
     });

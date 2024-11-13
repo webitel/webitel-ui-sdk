@@ -71,7 +71,6 @@ import darkMode from './dark-mode.svg';
 import docs from './docs.svg';
 import done from './done.svg';
 import download from './download.svg';
-import directory from './directory.svg';
 import edit from './edit.svg';
 import elevenlabs from './elevenlabs.svg';
 import emailInbound from './email-inbound.svg';
@@ -88,7 +87,6 @@ import history from './history.svg';
 import hold from './hold.svg';
 import idle from './idle.svg';
 import instagram from './instagram.svg';
-import integrations from './integrations.svg';
 import jobAccept from './job--accept.svg';
 import jobEnd from './job--end.svg';
 import job from './job.svg';
@@ -96,7 +94,6 @@ import json from './json.svg';
 import link from './link.svg';
 import lock from './lock.svg';
 import logout from './logout.svg';
-import lookups from './lookups.svg';
 import mailColor from './mail--color.svg';
 import mail from './mail.svg';
 import menu from './menu.svg';
@@ -130,7 +127,6 @@ import previewTagAudio from './preview-tag-audio.svg';
 import previewTagImage from './preview-tag-image.svg';
 import previewTagVideo from './preview-tag-video.svg';
 import prompter from './prompter.svg';
-import permissions from './permissions.svg';
 import queueMember from './queue-member.svg';
 import radioChecked from './radio--checked.svg';
 import radio from './radio.svg';
@@ -140,7 +136,6 @@ import redo from './redo.svg';
 import refresh from './refresh.svg';
 import role from './role.svg';
 import roundedInfo from './rounded-info.svg';
-import routing from './routing.svg';
 import save from './save.svg';
 import saveAs from './save-as.svg';
 import scorecard from './scorecard.svg';
@@ -158,7 +153,6 @@ import stop from './stop.svg';
 import sttDownload from './stt-download.svg';
 import sttSearch from './stt-search.svg';
 import stt from './stt.svg';
-import system from './system.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import ttsDownload from './tts-download.svg';
@@ -172,6 +166,24 @@ import videoCamOff from './video-cam-off.svg';
 import videoCam from './video-cam.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
+
+import plyrAirplay from './plyr-airplay.svg';
+import plyrCaptionsOff from './plyr-captions-off.svg';
+import plyrCaptionsOn from './plyr-captions-on.svg';
+import plyrDownload from './plyr-download.svg';
+import plyrEnterFullscreen from './plyr-enter-fullscreen.svg';
+import plyrExitFullscreen from './plyr-exit-fullscreen.svg';
+import plyrFastForward from './plyr-fast-forward.svg';
+import plyrLogoVimeo from './plyr-logo-vimeo.svg';
+import plyrLogoYoutube from './plyr-logo-youtube.svg';
+import plyrMuted from './plyr-muted.svg';
+import plyrPause from './plyr-pause.svg';
+import plyrPip from './plyr-pip.svg';
+import plyrPlay from './plyr-play.svg';
+import plyrRestart from './plyr-restart.svg';
+import plyrRewind from './plyr-rewind.svg';
+import plyrSettings from './plyr-settings.svg';
+import plyrVolume from './plyr-volume.svg';
 
 export default objCamelToKebab({
   account,
@@ -248,8 +260,6 @@ export default objCamelToKebab({
   customChatGateway,
   docs,
   download,
-  directory,
-  integrations,
   edit,
   elevenlabs,
   expand,
@@ -264,7 +274,6 @@ export default objCamelToKebab({
   link,
   lock,
   logout,
-  lookups,
   menu,
   email,
   emailInbound,
@@ -294,7 +303,6 @@ export default objCamelToKebab({
   play,
   plus,
   prompter,
-  permissions,
   queueMember,
   radio,
   'radio--checked': radioChecked,
@@ -303,7 +311,6 @@ export default objCamelToKebab({
   refresh,
   roundedInfo,
   role,
-  routing,
   done,
   search,
   sendArrow,
@@ -316,7 +323,6 @@ export default objCamelToKebab({
   star,
   'star--filled': starFilled,
   stop,
-  system,
   tick,
   upload,
   user,
@@ -346,4 +352,22 @@ export default objCamelToKebab({
   previewTagVideo,
   previewTagApplication,
   previewTagImage,
+
+  plyrAirplay,
+  plyrCaptionsOff,
+  plyrCaptionsOn,
+  plyrDownload,
+  plyrEnterFullscreen,
+  plyrExitFullscreen,
+  plyrFastForward,
+  plyrLogoVimeo,
+  plyrLogoYoutube,
+  plyrMuted,
+  plyrPause,
+  plyrPip,
+  plyrPlay,
+  plyrRestart,
+  plyrRewind,
+  plyrSettings,
+  plyrVolume,
 });

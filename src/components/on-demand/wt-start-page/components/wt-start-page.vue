@@ -2,7 +2,7 @@
   <div class="wt-start-page">
     <start-page-logo
       v-if="appLogo"
-      :image="logo" />
+      :logo="logo" />
 
     <div class="wt-start-page__wrapper">
       <start-page-card

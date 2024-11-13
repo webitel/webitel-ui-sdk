@@ -2,6 +2,7 @@ import { saveAs } from 'file-saver-es';
 import JSZip from 'jszip';
 import jszipUtils from 'jszip-utils';
 import path from 'path-browserify';
+import { _wtUiLog } from '../../scripts/logger.js';
 import generateMediaURL from './scripts/generateMediaURL.js';
 
 export default class FilesExport {
@@ -11,16 +12,19 @@ export default class FilesExport {
 
   isLoading = false;
 
+  skipFilesWithError = false;
+
   downloadProgress = { count: 0 };
 
   zippingProgress = { percent: 0 };
 
   filesURL = generateMediaURL;
 
-  constructor({ fetchMethod, filename, filesURL }) {
+  constructor({ fetchMethod, filename, filesURL, skipFilesWithError = false }) {
     if (fetchMethod) this.fetchMethod = fetchMethod;
     if (filename) this.filename = filename;
     if (filesURL) this.filesURL = filesURL;
+    this.skipFilesWithError = skipFilesWithError;
   }
 
   _fetchFileBinary(fileId) {
@@ -46,12 +50,22 @@ export default class FilesExport {
       if (item.files) {
         await this._addFilesToZip(item.files, zip);
       } else {
-        const binary = await this._fetchFileBinary(item.id);
-        const ext = item.mimeType.split('/').pop();
-        // itemName needed to remove extension from item.name https://stackoverflow.com/a/31615711
-        const itemName = path.parse(item.name).name;
-        zip.file(`${itemName}.${ext}`, binary);
-        this.downloadProgress.count += 1;
+        try {
+          const binary = await this._fetchFileBinary(item.id);
+          const ext = item.mimeType.split('/').pop();
+          // itemName needed to remove extension from item.name https://stackoverflow.com/a/31615711
+          const itemName = path.parse(item.name).name;
+          zip.file(`${itemName}.${ext}`, binary);
+          this.downloadProgress.count += 1;
+        } catch (err) {
+          _wtUiLog.warn({ entity: 'script', module: 'FilesExport' })(
+            `An error occurred while downloading a file id=${item.id}`,
+            err,
+          );
+          if (!this.skipFilesWithError) {
+            throw err;
+          }
+        }
       }
     }
   }
