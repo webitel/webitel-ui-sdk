@@ -1,0 +1,32 @@
+@import '../../../../css/main.scss';
+
+.nav-menu {
+  &__category {
+    height: 100%;
+    border-radius: var(--border-radius);
+  }
+
+  &__option {
+    &:not(:last-child) {
+      margin-bottom: var(--spacing-2xs);
+    }
+  }
+
+  &__item {
+    @extend %typo-body-1;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: var(--button-min-height);
+    padding: 18px 20px;
+    transition: var(--transition);
+    text-align: left;
+    color: var(--text-main-color);
+    border-radius: var(--border-radius);
+
+    .wt-icon {
+      margin-right: var(--spacing-xs);
+    }
+  }
+}

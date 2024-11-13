@@ -1,19 +1,23 @@
 <template>
   <article class="start-page-card">
     <header class="start-page-card__header">
-      <wt-icon v-if="card.disabled" icon="lock"/>
+      <wt-icon
+        v-if="card.disabled"
+        icon="lock" />
       {{ card.name }}
     </header>
     <section class="start-page-card__main-section">
-      <img :src="card.image" :alt="card.name">
+      <img
+        :alt="card.name"
+        :src="card.image">
       <p class="start-page-card__description">
         {{ card.text }}
       </p>
     </section>
     <footer>
       <wt-button
-        class="start-page-card__button"
         :disabled="card.disabled"
+        class="start-page-card__button"
         color="secondary"
         wide
         @click="open"
@@ -25,31 +29,32 @@
 </template>
 
 <script setup>
-  import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-  const router = useRouter();
-  const props = defineProps({
-    card: {
-      type: Object,
-      required: true,
-    },
-  });
+const router = useRouter();
+const props = defineProps({
+  card: {
+    type: Object,
+    required: true,
+  },
+});
 
-  const open = () => {
-    return router.push(props.card.route);
-  };
+const open = () => {
+  return router.push(props.card.route);
+};
 </script>
 
 <style lang="scss" scoped>
+@import '../../../../css/main.scss';
 .start-page-card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
   width: 264px;
   padding: var(--spacing-xs);
+  color: var(--text-main-color);
   border-radius: var(--border-radius);
   background-color: var(--content-wrapper-color);
-  color: var(--text-main-color);
+  gap: var(--spacing-xs);
 
   &__header {
     @extend %typo-heading-4;
@@ -57,17 +62,16 @@
     align-items: center;
     justify-content: center;
   }
+
   &__description {
     @extend %typo-body-1;
-    height: 78px;
-    //in order to cut text after 3rd line:
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
     display: -webkit-box;
+    overflow: hidden;
+    height: 78px; //in order to cut text after 3rd line:
+    text-align: center;
+    text-overflow: ellipsis;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
 }
-
 </style>

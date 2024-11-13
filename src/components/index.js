@@ -64,6 +64,9 @@ import WtTextarea from './wt-textarea/wt-textarea.vue';
 import WtTimeInput from './wt-time-input/wt-time-input.vue';
 import WtTimepicker from './wt-timepicker/wt-timepicker.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
+import WtNavigationMenu
+  from './on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
+import WtStartPage from './on-demand/wt-start-page/components/wt-start-page.vue';
 
 const Components = {
   WtActionBar,
@@ -128,6 +131,8 @@ const Components = {
   WtDummy,
   WtStepper,
   WtExpansionPanel,
+  WtNavigationMenu,
+  WtStartPage,
 };
 
 export default Components;
