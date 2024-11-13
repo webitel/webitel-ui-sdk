@@ -1,5 +1,15 @@
 
 
+## [v24.10.76] - 2024-11-13
+### :sparkles: New Features
+- [`c73fefb`](https://github.com/webitel/webitel-ui-sdk/commit/c73fefbd50cd6bd981a49d83700ad7256fd2cdf3) - add composables in docs[WTEL-5282] *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`f1d9ff6`](https://github.com/webitel/webitel-ui-sdk/commit/f1d9ff6812e826a75eba7dc530038901f1e48f7f) - queryfilters module sort filters set/reset [WTEL-5520](https://webitel.atlassian.net/browse/WTEL-5520) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`99b7026`](https://github.com/webitel/webitel-ui-sdk/commit/99b7026d48f41dce49401a1d0a16d70b77c6b553) - style code in composables docs[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`49a0c72`](https://github.com/webitel/webitel-ui-sdk/commit/49a0c72898e733fb8941e33cc92c19a20079cb2a) - docs after code review[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.75] - 2024-11-13
 ### :bug: Bug Fixes
 - [`66327ee`](https://github.com/webitel/webitel-ui-sdk/commit/66327ee37bc3e08ac5837483a15aa2e3e5ab1cc9) - locale in useCardComponent composable[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -186,3 +196,4 @@
 [v24.10.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.72...v24.10.73
 [v24.10.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.73...v24.10.74
 [v24.10.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.74...v24.10.75
+[v24.10.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.75...v24.10.76
