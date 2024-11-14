@@ -68,8 +68,7 @@ $side-panel-md-width: 320px;
   flex-direction: column;
   box-sizing: border-box;
   max-width: 100%;
-  max-height: 100%;
-  min-height: 100%;
+  height: 100%;
   padding: var(--dual-panel-padding);
   background: var(--wt-dual-panel-background-color);
   gap: var(--dual-panel-section-gap);
@@ -83,11 +82,7 @@ $side-panel-md-width: 320px;
     background: var(--wt-dual-panel-content-wrapper-color);
   }
 
-  &__header {
-    flex: 0 0 auto;
-  }
-
-  &__actions-panel {
+  &__header,  &__actions-panel {
     flex: 0 0 auto;
   }
 
