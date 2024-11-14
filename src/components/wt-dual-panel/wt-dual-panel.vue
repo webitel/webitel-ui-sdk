@@ -1,29 +1,31 @@
 <template>
-  <section class="wt-page-wrapper-dual-pane">
-    <div class="wt-page-wrapper-dual-pane__header">
+  <section class="wt-dual-panel">
+    <div class="wt-dual-panel__header">
       <slot name="header" />
     </div>
     <div
       v-if="actionsPanel"
-      class="wt-page-wrapper-dual-pane__actions-panel"
+      class="wt-dual-panel__actions-panel"
     >
       <slot name="actions-panel" />
     </div>
-    <div class="wt-page-wrapper-dual-pane__content">
+    <div class="wt-dual-panel__content">
       <div
         :class="[
-        `wt-page-wrapper-dual-pane__side-pane--${sidePanelSize}`
+        `wt-dual-panel__side-panel--${sidePanelSize}`
       ]"
-        class="wt-page-wrapper-dual-pane__side-pane"
+        class="wt-dual-panel__side-panel"
       >
-        <wt-collapse-action
+        <wt-icon-action
           v-if="collapsible"
-          :collapsed="sidePanelCollapsed"
+          :action="sidePanelCollapsed ? IconAction.EXPAND : IconAction.COLLAPSE"
+          class="wt-dual-panel__icon-action"
+          size="sm"
           @click="toggleSidePanel"
         />
         <slot name="side" />
       </div>
-      <div class="wt-page-wrapper-dual-pane__main-pane">
+      <div class="wt-dual-panel__main-panel">
         <slot name="main" />
       </div>
     </div>
@@ -32,6 +34,7 @@
 
 <script setup>
 import { computed, ref, defineEmits } from 'vue';
+import IconAction from '../../enums/IconAction/IconAction.enum.js';
 
 const props = defineProps({
   actionsPanel: {
@@ -45,11 +48,11 @@ const props = defineProps({
 });
 
 const sidePanelCollapsed = ref(false);
-const emit = defineEmits(['update:size']);
+const emit = defineEmits(['update:side-panel-size']);
 
 const toggleSidePanel = () => {
   sidePanelCollapsed.value = !sidePanelCollapsed.value;
-  emit('update:size', sidePanelSize.value);
+  emit('update:side-panel-size', sidePanelSize.value);
 };
 
 const sidePanelSize = computed(() => (sidePanelCollapsed.value ? 'sm' : 'md'));
@@ -57,23 +60,25 @@ const sidePanelSize = computed(() => (sidePanelCollapsed.value ? 'sm' : 'md'));
 
 <style lang="scss">
 @import './variables.scss';
-.wt-page-wrapper-dual-pane {
+$side-panel-md-width: 320px;
+
+.wt-dual-panel {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   max-width: 100%;
   min-height: 100%;
-  padding: var(--page-wrapper-dual-pane-padding);
-  background: var(--wt-page-wrapper-dual-pane-background-color);
-  gap: var(--page-wrapper-dual-pane-section-gap);
+  padding: var(--dual-panel-padding);
+  background: var(--wt-dual-panel-background-color);
+  gap: var(--dual-panel-section-gap);
 
   &__header,
   &__actions-panel,
   &__main {
     box-sizing: border-box;
-    padding: var(--page-wrapper-dual-pane-padding);
+    padding: var(--dual-panel-padding);
     border-radius: var(--border-radius);
-    background: var(--wt-page-wrapper-dual-pane-content-wrapper-color);
+    background: var(--wt-dual-panel-content-wrapper-color);
   }
 
   &__header {
@@ -91,18 +96,18 @@ const sidePanelSize = computed(() => (sidePanelCollapsed.value ? 'sm' : 'md'));
     gap: var(--spacing-sm);
   }
 
-  &__side-pane {
+  &__side-panel {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: var(--page-wrapper-dual-pane-padding);
+    padding: var(--dual-panel-padding);
     transition: var(--transition);
-    background: var(--wt-page-wrapper-dual-pane-content-wrapper-color);
+    background: var(--wt-dual-panel-content-wrapper-color);
     will-change: width;
     gap: var(--spacing-2xs);
 
     &--md {
-      flex: 0 0 320px;
+      flex: 0 0 $side-panel-md-width;
     }
 
     &--sm {
@@ -110,10 +115,15 @@ const sidePanelSize = computed(() => (sidePanelCollapsed.value ? 'sm' : 'md'));
     }
   }
 
-  &__main-pane {
+  &__icon-action {
+    width: fit-content;
+    line-height: 0;
+  }
+
+  &__main-panel {
     flex: 1 1 auto;
-    padding: var(--page-wrapper-dual-pane-padding);
-    background: var(--wt-page-wrapper-dual-pane-content-wrapper-color);
+    padding: var(--dual-panel-padding);
+    background: var(--wt-dual-panel-content-wrapper-color);
   }
 }
 </style>

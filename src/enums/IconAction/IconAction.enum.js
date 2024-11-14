@@ -10,6 +10,8 @@ const IconAction = Object.freeze({
   COLUMNS: 'columns',
   HISTORY: 'history',
   EDIT: 'edit',
+  COLLAPSE: 'collapse',
+  EXPAND: 'expand',
 });
 
 export default IconAction;

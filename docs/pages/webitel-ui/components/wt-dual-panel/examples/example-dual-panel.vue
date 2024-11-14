@@ -1,6 +1,6 @@
 <template>
-  <wt-page-wrapper-dual-pane
-    @update:size="size"
+  <wt-dual-panel
+    @update:side-panel-size="size"
     :actions-panel="false"
     class="opened-case opened-card"
   >
@@ -12,7 +12,7 @@
           <wt-button
             color="secondary"
           >
-            {{ 'Save' }}
+            {{ t('reusable.edit') }}
           </wt-button>
         </template>
       </wt-page-header>
@@ -21,12 +21,14 @@
     </template>
     <template #main>
     </template>
-  </wt-page-wrapper-dual-pane>
+  </wt-dual-panel>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const size = ref('md');
 
 </script>
