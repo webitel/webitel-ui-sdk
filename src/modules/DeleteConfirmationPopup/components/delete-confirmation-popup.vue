@@ -4,6 +4,7 @@
     class="delete-confirmation-popup"
     :title="$t('webitelUI.deleteConfirmationPopup.title')"
     :callback="callback"
+    @close="$emit('close')"
   >
     <template #main>
       <div class="delete-confirmation-popup__content">
