@@ -59,6 +59,7 @@ const sidePanelSize = computed(() => (sidePanelCollapsed.value ? 'sm' : 'md'));
 </script>
 
 <style lang="scss">
+@import '../../../src/css/main.scss';
 @import './variables.scss';
 $side-panel-md-width: 320px;
 
@@ -67,6 +68,7 @@ $side-panel-md-width: 320px;
   flex-direction: column;
   box-sizing: border-box;
   max-width: 100%;
+  max-height: 100%;
   min-height: 100%;
   padding: var(--dual-panel-padding);
   background: var(--wt-dual-panel-background-color);
@@ -97,6 +99,8 @@ $side-panel-md-width: 320px;
   }
 
   &__side-panel {
+    @extend %wt-scrollbar;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     min-width: 0;
