@@ -103,7 +103,7 @@ $side-panel-md-width: 320px;
     transition: var(--transition);
     background: var(--wt-dual-panel-content-wrapper-color);
     will-change: width;
-    gap: var(--spacing-2xs);
+    gap: var(--page-wrapper-section-gap);
 
     &--md {
       flex: 0 0 $side-panel-md-width;
