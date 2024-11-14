@@ -1,5 +1,11 @@
 
 
+## [v24.10.78] - 2024-11-14
+### :bug: Bug Fixes
+- [`d3b9b92`](https://github.com/webitel/webitel-ui-sdk/commit/d3b9b927a63f6c06f0c8f817aa2e159db6696ec4) - implimented version [WTEL-5437](https://webitel.atlassian.net/browse/WTEL-5437) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`211dff4`](https://github.com/webitel/webitel-ui-sdk/commit/211dff4a97e1203318982a460178c1de4d32d0a4) - bug with error in chat history api if message underfined [WTEL-5437](https://webitel.atlassian.net/browse/WTEL-5437) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.10.77] - 2024-11-13
 ### :bug: Bug Fixes
 - [`0f67887`](https://github.com/webitel/webitel-ui-sdk/commit/0f67887cd5949e7edf943d79fa1eb0b99be0df15) - fix error with not throw emit from delete-confirmation-popup [WTEL-5522](https://webitel.atlassian.net/browse/WTEL-5522)
@@ -203,3 +209,4 @@
 [v24.10.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.74...v24.10.75
 [v24.10.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.75...v24.10.76
 [v24.10.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.76...v24.10.77
+[v24.10.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.77...v24.10.78
