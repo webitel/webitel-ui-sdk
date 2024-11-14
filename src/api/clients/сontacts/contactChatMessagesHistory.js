@@ -16,6 +16,7 @@ const contactChatService = new ContactsChatCatalogApiFactory(configuration, '', 
 
 const getChat = async ({ contactId, chatId }) => {
   const mergeChatMessagesData = ({ messages, peers }) => {
+    if (!messages) return [];
     return messages.map(({ from, ...message }) => {
       return {
         ...message,
@@ -40,6 +41,7 @@ const getChat = async ({ contactId, chatId }) => {
 const getAllMessages = async (params) => {
 
   const mergeMessagesData = ({ messages, peers, chats }) => {
+    if (!messages) return [];
     return messages.map(({ from, chat, ...message }) => {
       return {
         ...message,
