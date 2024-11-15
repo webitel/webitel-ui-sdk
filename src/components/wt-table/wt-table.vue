@@ -45,6 +45,7 @@
           v-if="gridActions"
           class="wt-table__th__actions"
         >
+          <!--    @slot Table head actions row slot -->
           <slot name="actions-header" />
         </th>
       </tr>
@@ -54,7 +55,10 @@
       <tr
         v-for="(row, dataKey) of data"
         :key="dataKey"
-        :class="`wt-table__tr__${row.id || dataKey}`"
+        :class="[
+          `wt-table__tr__${row.id || dataKey}`,
+          { 'wt-table__tr__actions--sticky': actionsSticky }
+        ]"
         :style="columnsStyle"
         class="wt-table__tr wt-table__tr__body"
       >
@@ -73,6 +77,10 @@
           :key="headerKey"
           class="wt-table__td"
         >
+          <!--
+           @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
+           @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
+           -->
           <slot
             :index="dataKey"
             :item="row"
@@ -86,6 +94,10 @@
           v-if="gridActions"
           class="wt-table__td__actions"
         >
+          <!--
+          @slot Table body actions row slot
+          @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
+           -->
           <slot
             :index="dataKey"
             :item="row"
@@ -113,6 +125,10 @@
           :key="headerKey"
           class="wt-table__td"
         >
+          <!--
+           @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
+           @scope [ { "name": "header", "description": "header object" } ]
+           -->
           <slot
             :header="col"
             :index="headerKey"
@@ -131,18 +147,30 @@ import getNextSortOrder from './_internals/getSortOrder.js';
 export default {
   name: 'WtTable',
   props: {
+    /**
+     * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
+     */
     headers: {
       type: Array,
       default: () => [],
     },
+    /**
+     * 'List of data, represented by table. '
+     */
     data: {
       type: Array,
       default: () => [],
     },
+    /**
+     * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
+     */
     sortable: {
       type: Boolean,
       default: false,
     },
+    /**
+     * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
+     */
     selectable: {
       type: Boolean,
       default: true,
@@ -151,9 +179,19 @@ export default {
       type: Array,
       // no default! because we need to know if it's passed or not
     },
+    /**
+     * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
+     */
     gridActions: {
       type: Boolean,
       default: true,
+    },
+    /**
+     * 'If true, actions row is sticky to the side of the table.'
+     */
+    actionsSticky: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['sort', 'update:selected'],
@@ -289,6 +327,20 @@ export default {
 
   &:nth-child(2n) {
     background: var(--wt-table-zebra-color);
+  }
+}
+
+.wt-table__tr__actions--sticky {
+  .wt-table__td__actions {
+    position: sticky;
+    right: 0;
+    background: var(--content-wrapper-color);
+  }
+
+  &:nth-child(2n) {
+    .wt-table__td__actions {
+      background: var(--wt-table-zebra-color);
+    }
   }
 }
 

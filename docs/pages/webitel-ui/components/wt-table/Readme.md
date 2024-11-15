@@ -1,14 +1,12 @@
 <script setup>
-import Docs from './wt-table-docs.vue';
 import ExampleTable from './examples/example-table.vue';
+import Specs from './component-specs.vue';
 </script>
 
 # WtTable
 
-## Props
-::: raw
-<Docs/>
-:::
+## Specs
+<Specs />
 
 ## Example Table
 ::: raw
