@@ -25,6 +25,7 @@
     >
       <wt-icon-action
         :action="action"
+        :disabled="props[`disabled:${action}`]"
         @click="emit(`click:${action}`)"
       />
     </slot>
@@ -81,6 +82,21 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+
+  /**
+   * Built dynamically on `disabled:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
+   */
+
+  disabled: { // Not implemented, but can be used to disable all actions
+    type: Boolean,
+    default: false,
+  },
+
+  ...Object.values(IconAction).reduce((acc, action) => {
+    acc[`disabled:${action}`] = { type: Boolean, default: false };
+    return acc;
+  }, {}),
+
 });
 const emit = defineEmits([
   /**

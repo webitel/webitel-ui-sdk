@@ -1,5 +1,26 @@
 
 
+## [v24.10.80] - 2024-11-15
+### :sparkles: New Features
+- [`add6f93`](https://github.com/webitel/webitel-ui-sdk/commit/add6f9397de8664e1db6328318633edf79dc6ca4) - add desabled prop in wt-action-bar[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`6265f77`](https://github.com/webitel/webitel-ui-sdk/commit/6265f77d3ba419e28b4ebf67255d87d27399afb2) - package.json version[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`a592314`](https://github.com/webitel/webitel-ui-sdk/commit/a59231463ad31f54109282c0508c642f8afbc4dc) - doc for wt-action-bar[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.10.79] - 2024-11-15
+### :bug: Bug Fixes
+- [`7a214f6`](https://github.com/webitel/webitel-ui-sdk/commit/7a214f6d3973180ab62dcc960808d6bea3ea3284) - version in package.json[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`74ee12f`](https://github.com/webitel/webitel-ui-sdk/commit/74ee12f4418fa98e37a3ec9cc2c73ab9308b6481) - display isNew param in useCardComponent[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.10.78] - 2024-11-14
+### :bug: Bug Fixes
+- [`d3b9b92`](https://github.com/webitel/webitel-ui-sdk/commit/d3b9b927a63f6c06f0c8f817aa2e159db6696ec4) - implimented version [WTEL-5437](https://webitel.atlassian.net/browse/WTEL-5437) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`211dff4`](https://github.com/webitel/webitel-ui-sdk/commit/211dff4a97e1203318982a460178c1de4d32d0a4) - bug with error in chat history api if message underfined [WTEL-5437](https://webitel.atlassian.net/browse/WTEL-5437) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.10.77] - 2024-11-13
 ### :bug: Bug Fixes
 - [`0f67887`](https://github.com/webitel/webitel-ui-sdk/commit/0f67887cd5949e7edf943d79fa1eb0b99be0df15) - fix error with not throw emit from delete-confirmation-popup [WTEL-5522](https://webitel.atlassian.net/browse/WTEL-5522)
@@ -203,3 +224,6 @@
 [v24.10.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.74...v24.10.75
 [v24.10.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.75...v24.10.76
 [v24.10.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.76...v24.10.77
+[v24.10.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.77...v24.10.78
+[v24.10.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.78...v24.10.79
+[v24.10.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.79...v24.10.80
