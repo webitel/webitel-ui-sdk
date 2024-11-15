@@ -25,6 +25,7 @@
     >
       <wt-icon-action
         :action="action"
+        :disabled="props[`disabled:${action}`]"
         @click="emit(`click:${action}`)"
       />
     </slot>
@@ -81,6 +82,12 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+
+  ...Object.values(IconAction).reduce((acc, action) => {
+    acc[`disabled:${action}`] = { type: Boolean, default: false };
+    return acc;
+  }, {}),
+
 });
 const emit = defineEmits([
   /**
