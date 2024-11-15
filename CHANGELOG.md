@@ -1,5 +1,14 @@
 
 
+## [v24.10.80] - 2024-11-15
+### :sparkles: New Features
+- [`add6f93`](https://github.com/webitel/webitel-ui-sdk/commit/add6f9397de8664e1db6328318633edf79dc6ca4) - add desabled prop in wt-action-bar[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`6265f77`](https://github.com/webitel/webitel-ui-sdk/commit/6265f77d3ba419e28b4ebf67255d87d27399afb2) - package.json version[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`a592314`](https://github.com/webitel/webitel-ui-sdk/commit/a59231463ad31f54109282c0508c642f8afbc4dc) - doc for wt-action-bar[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.79] - 2024-11-15
 ### :bug: Bug Fixes
 - [`7a214f6`](https://github.com/webitel/webitel-ui-sdk/commit/7a214f6d3973180ab62dcc960808d6bea3ea3284) - version in package.json[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -217,3 +226,4 @@
 [v24.10.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.76...v24.10.77
 [v24.10.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.77...v24.10.78
 [v24.10.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.78...v24.10.79
+[v24.10.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.79...v24.10.80
