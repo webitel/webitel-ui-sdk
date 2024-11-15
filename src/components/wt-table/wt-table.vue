@@ -328,18 +328,18 @@ export default {
   &:nth-child(2n) {
     background: var(--wt-table-zebra-color);
   }
-}
 
-.wt-table__tr__actions--sticky {
-  .wt-table__td__actions {
-    position: sticky;
-    right: 0;
-    background: var(--content-wrapper-color);
-  }
-
-  &:nth-child(2n) {
+  &__actions--sticky {
     .wt-table__td__actions {
-      background: var(--wt-table-zebra-color);
+      position: sticky;
+      right: 0;
+      background: var(--content-wrapper-color);
+    }
+
+    &:nth-child(2n) {
+      .wt-table__td__actions {
+        background: var(--wt-table-zebra-color);
+      }
     }
   }
 }
