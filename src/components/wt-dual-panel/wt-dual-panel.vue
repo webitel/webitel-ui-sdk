@@ -17,15 +17,15 @@
         class="wt-dual-panel__side-panel"
       >
         <wt-icon-action
-          v-if="collapsible"
+          v-if="!disableResize"
           :action="sidePanelCollapsed ? IconAction.EXPAND : IconAction.COLLAPSE"
           class="wt-dual-panel__icon-action"
           size="sm"
           @click="toggleSidePanel"
         />
-        <slot name="side" />
+        <slot name="side-panel" />
       </div>
-      <div class="wt-dual-panel__main-panel">
+      <div class="wt-dual-panel__main">
         <slot name="main" />
       </div>
     </div>
@@ -35,32 +35,37 @@
 <script setup>
 import { computed, ref, defineEmits } from 'vue';
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { ComponentSize } from '../../enums/index.js';
 
 const props = defineProps({
   actionsPanel: {
     type: Boolean,
     default: true,
   },
-  collapsible: {
+  disableResize: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 });
 
+const emit = defineEmits(['update:size']);
+
 const sidePanelCollapsed = ref(false);
-const emit = defineEmits(['update:side-panel-size']);
 
 const toggleSidePanel = () => {
   sidePanelCollapsed.value = !sidePanelCollapsed.value;
   emit('update:side-panel-size', sidePanelSize.value);
 };
 
-const sidePanelSize = computed(() => (sidePanelCollapsed.value ? 'sm' : 'md'));
+const sidePanelSize = computed(() => (sidePanelCollapsed.value ? ComponentSize.SM : ComponentSize.MD));
 </script>
 
 <style lang="scss">
-@import '../../../src/css/main.scss';
 @import './variables.scss';
+</style>
+
+<style lang="scss" scoped>
+@import '../../../src/css/main.scss';
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {
@@ -69,17 +74,21 @@ $side-panel-md-width: 320px;
   box-sizing: border-box;
   max-width: 100%;
   height: 100%;
-  padding: var(--dual-panel-padding);
+  padding: var(--wt-dual-panel-padding);
   background: var(--wt-dual-panel-background-color);
-  gap: var(--dual-panel-section-gap);
+  gap: var(--wt-dual-panel-section-gap);
 
   &__header,
   &__actions-panel,
   &__main {
     box-sizing: border-box;
-    padding: var(--dual-panel-padding);
+    padding: var(--wt-dual-panel-section-padding);
     border-radius: var(--border-radius);
     background: var(--wt-dual-panel-content-wrapper-color);
+  }
+
+  &__main {
+    flex: 1 1 auto;
   }
 
   &__header,  &__actions-panel {
@@ -99,11 +108,11 @@ $side-panel-md-width: 320px;
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: var(--dual-panel-padding);
+    padding: var(--wt-dual-panel-section-padding);
     transition: var(--transition);
     background: var(--wt-dual-panel-content-wrapper-color);
     will-change: width;
-    gap: var(--page-wrapper-section-gap);
+    gap: var(--wt-dual-panel-section-gap);
 
     &--md {
       flex: 0 0 $side-panel-md-width;
@@ -117,12 +126,6 @@ $side-panel-md-width: 320px;
   &__icon-action {
     width: fit-content;
     line-height: 0;
-  }
-
-  &__main-panel {
-    flex: 1 1 auto;
-    padding: var(--dual-panel-padding);
-    background: var(--wt-dual-panel-content-wrapper-color);
   }
 }
 </style>

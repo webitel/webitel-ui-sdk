@@ -1,8 +1,6 @@
 <template>
   <wt-dual-panel
-    @update:side-panel-size="size"
-    :actions-panel="false"
-    class="opened-case opened-card"
+    @update:size="size"
   >
     <template #header>
       <wt-page-header
@@ -27,8 +25,9 @@
 <script setup>
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { ComponentSize } from '../../../../../../src/enums/index.js';
 
 const { t } = useI18n();
-const size = ref('md');
+const size = ref(ComponentSize.MD);
 
 </script>
