@@ -33,7 +33,7 @@ export const useCardComponent = (params) => {
   const redirectToEdit = () => {
     return router.replace({
       ...route,
-      params: { id },
+      params: { id: id?.value },
     });
   };
 
@@ -46,7 +46,7 @@ export const useCardComponent = (params) => {
       await updateItem();
     }
 
-    if (id.value) {
+    if (id?.value) {
       await redirectToEdit();
     }
   };
