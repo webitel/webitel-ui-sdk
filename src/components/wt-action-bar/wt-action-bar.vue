@@ -83,6 +83,15 @@ const props = defineProps({
     default: () => [],
   },
 
+  /**
+   * Built dynamically on `disabled:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
+   */
+
+  disabled: { // Not implemented, but can be used to disable all actions
+    type: Boolean,
+    default: false,
+  },
+
   ...Object.values(IconAction).reduce((acc, action) => {
     acc[`disabled:${action}`] = { type: Boolean, default: false };
     return acc;
