@@ -1,5 +1,11 @@
 
 
+## [v24.10.79] - 2024-11-15
+### :bug: Bug Fixes
+- [`7a214f6`](https://github.com/webitel/webitel-ui-sdk/commit/7a214f6d3973180ab62dcc960808d6bea3ea3284) - version in package.json[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`74ee12f`](https://github.com/webitel/webitel-ui-sdk/commit/74ee12f4418fa98e37a3ec9cc2c73ab9308b6481) - display isNew param in useCardComponent[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.78] - 2024-11-14
 ### :bug: Bug Fixes
 - [`d3b9b92`](https://github.com/webitel/webitel-ui-sdk/commit/d3b9b927a63f6c06f0c8f817aa2e159db6696ec4) - implimented version [WTEL-5437](https://webitel.atlassian.net/browse/WTEL-5437) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -210,3 +216,4 @@
 [v24.10.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.75...v24.10.76
 [v24.10.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.76...v24.10.77
 [v24.10.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.77...v24.10.78
+[v24.10.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.78...v24.10.79
