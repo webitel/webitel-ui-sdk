@@ -118,6 +118,7 @@
     "deep-equal": "^2.0.3",
     "deepmerge": "^4.3.1",
     "file-saver-es": "^2.0.5",
+    "flat": "^6.0.1",
     "is-valid-domain": "^0.1.6",
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
@@ -131,7 +132,7 @@
     "vue-multiselect": "^3.0.0-beta.3",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.1.6",
-    "webitel-sdk": "^24.08.08",
+    "webitel-sdk": "^24.8.8",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
