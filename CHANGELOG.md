@@ -1,5 +1,11 @@
 
 
+## [v24.10.81] - 2024-11-17
+### :bug: Bug Fixes
+- [`9113858`](https://github.com/webitel/webitel-ui-sdk/commit/9113858c25979cf03f0f619a33d6f5b1090848bd) - fixed contacts client empty result [WTEL-5537](https://webitel.atlassian.net/browse/WTEL-5537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`261a0e3`](https://github.com/webitel/webitel-ui-sdk/commit/261a0e3e77c8f3063f2d1a9eae048117d3e1d379) - error in useCardComponent[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.80] - 2024-11-15
 ### :sparkles: New Features
 - [`add6f93`](https://github.com/webitel/webitel-ui-sdk/commit/add6f9397de8664e1db6328318633edf79dc6ca4) - add desabled prop in wt-action-bar[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -227,3 +233,4 @@
 [v24.10.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.77...v24.10.78
 [v24.10.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.78...v24.10.79
 [v24.10.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.79...v24.10.80
+[v24.10.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.80...v24.10.81
