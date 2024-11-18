@@ -55,10 +55,7 @@
       <tr
         v-for="(row, dataKey) of data"
         :key="dataKey"
-        :class="[
-          `wt-table__tr__${row.id || dataKey}`,
-          { 'wt-table__tr__actions--sticky': actionsSticky }
-        ]"
+        :class="`wt-table__tr__${row.id || dataKey}`"
         :style="columnsStyle"
         class="wt-table__tr wt-table__tr__body"
       >
@@ -185,13 +182,6 @@ export default {
     gridActions: {
       type: Boolean,
       default: true,
-    },
-    /**
-     * 'If true, actions row is sticky to the side of the table.'
-     */
-    actionsSticky: {
-      type: Boolean,
-      default: false,
     },
   },
   emits: ['sort', 'update:selected'],
@@ -327,20 +317,6 @@ export default {
 
   &:nth-child(2n) {
     background: var(--wt-table-zebra-color);
-  }
-
-  &__actions--sticky {
-    .wt-table__td__actions {
-      position: sticky;
-      right: 0;
-      background: var(--content-wrapper-color);
-    }
-
-    &:nth-child(2n) {
-      .wt-table__td__actions {
-        background: var(--wt-table-zebra-color);
-      }
-    }
   }
 }
 
