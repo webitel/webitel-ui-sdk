@@ -28,6 +28,24 @@ const decodeSortQuery = ({ value }) => {
   };
 };
 
+const changeHeadersSort = ({ headers, sortedHeader, order }) => {
+  return headers.map((header) => {
+    if (header.sort === undefined) return header;
+
+    // reset all headers by default
+    let newSort = null;
+
+    if (header.field === sortedHeader.field) {
+      newSort = order;
+    }
+
+    return {
+      ...header,
+      sort: newSort,
+    };
+  });
+};
+
 export default {
   mixins: [baseFilterMixin],
   data: () => ({
@@ -40,21 +58,12 @@ export default {
     },
 
     setValue({ column, order }) {
-      const headers = this.headers.map((header) => {
-        if (header.sort === undefined) return header;
-
-        // reset all headers by default
-        let newSort = null;
-
-        if (header.value === column.value) {
-          newSort = order;
-        }
-
-        return {
-          ...header,
-          sort: newSort,
-        };
+      const headers = changeHeadersSort({
+        headers: this.headers,
+        sortedHeader: column,
+        order,
       });
+
       const value = encodeSortQuery({ column, order });
       this.setHeaders(headers);
       this.setValueToQuery({
@@ -65,6 +74,13 @@ export default {
 
     restoreValue(value) {
       const sortedColumns = decodeSortQuery({ value });
+
+      debugger;
+
+      // const sortedHeader =
+
+      // const headers = changeHeadersSort({ headers: this.headers, sortedHeader: { field: sortedColumns[0] }, order });
+
       const headers = this.headers.map((header) => ({
         ...header,
         sort: sortedColumns[header.field] || null,
