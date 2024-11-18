@@ -1,5 +1,28 @@
 
 
+## [v24.10.82] - 2024-11-18
+### :sparkles: New Features
+- [`67d4d6f`](https://github.com/webitel/webitel-ui-sdk/commit/67d4d6f7ff9bd575e8dce97693a75472ca8ca4c5) - new components wt-collapse-action and wt-page-wrapper-dual-pane added [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`2ec2fe9`](https://github.com/webitel/webitel-ui-sdk/commit/2ec2fe9b122da685c35f1a0e7bb2f9c6c2feb554) - wt-page-wrapper-dual-pane component added  [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`a0c150c`](https://github.com/webitel/webitel-ui-sdk/commit/a0c150c80e8cd6c6c8a82f586fb8813d59efb7b6) - rm .reverse() from chat messages-related client api's [WTEL-5544](https://webitel.atlassian.net/browse/WTEL-5544) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`80b5b0a`](https://github.com/webitel/webitel-ui-sdk/commit/80b5b0a8925e348ade1ee0485497dceab9956aa3) - actionsSticky deleted from wt-table [WTEL-5506] (https://webitel.atlassian.net/browse/WTEL-5506) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`bc00cda`](https://github.com/webitel/webitel-ui-sdk/commit/bc00cda63ef4425f68f9db9a1bcc9d740945a30c) - merge with master [WTEL-5506] (https://webitel.atlassian.net/browse/WTEL-5506) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`e42c89d`](https://github.com/webitel/webitel-ui-sdk/commit/e42c89d4d71672be34bd957a36a184eb0f01c1ef) - refactor due to code review [WTEL-5506] (https://webitel.atlassian.net/browse/WTEL-5506) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`8cca843`](https://github.com/webitel/webitel-ui-sdk/commit/8cca84309e02bb3a36df301ef9108741baa3c47c) - refactor due to code review [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`9b7e90f`](https://github.com/webitel/webitel-ui-sdk/commit/9b7e90f4fa853c3d376af75d5c2ac4665d01df83) - actions sticky props added to wt-table [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`3c770dc`](https://github.com/webitel/webitel-ui-sdk/commit/3c770dce0bfd7bad97abde69a94211ffcb53da13) - refactor due to code review  [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`99b7a5d`](https://github.com/webitel/webitel-ui-sdk/commit/99b7a5d28e3b5d8f8f464ca733819a06bbc1a608) - refactor due to code review  [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`55899e2`](https://github.com/webitel/webitel-ui-sdk/commit/55899e2cb3f1edc16a3956995505bd939497a777) - scroll added for dual panel  [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`5093fcd`](https://github.com/webitel/webitel-ui-sdk/commit/5093fcd76fabb46154dad4c6bbd9b13fb11ecdcf) - version increment [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`2cc14a7`](https://github.com/webitel/webitel-ui-sdk/commit/2cc14a7055b99692f3ff20dc44c07c8b6fa6b615) - merge with master [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`7fbda82`](https://github.com/webitel/webitel-ui-sdk/commit/7fbda827bfd2bde7969a73a4da5cf1dc64f40b05) - dual-panel component naming changed [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`e2dcbd3`](https://github.com/webitel/webitel-ui-sdk/commit/e2dcbd3b8abad6f125bea86447f8591c4cf1f7e6) - package.json rollback  [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`762d1de`](https://github.com/webitel/webitel-ui-sdk/commit/762d1de466d16111fd81990bdb74b12750e03387) - tests for WtCollapseAction added  [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`cd3a9a4`](https://github.com/webitel/webitel-ui-sdk/commit/cd3a9a4d477395801de7b4f7f8f0aad5eacb068a) - version incremented [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.10.81] - 2024-11-17
 ### :bug: Bug Fixes
 - [`9113858`](https://github.com/webitel/webitel-ui-sdk/commit/9113858c25979cf03f0f619a33d6f5b1090848bd) - fixed contacts client empty result [WTEL-5537](https://webitel.atlassian.net/browse/WTEL-5537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -234,3 +257,4 @@
 [v24.10.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.78...v24.10.79
 [v24.10.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.79...v24.10.80
 [v24.10.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.80...v24.10.81
+[v24.10.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.81...v24.10.82
