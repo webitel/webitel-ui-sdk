@@ -112,12 +112,14 @@ const getList = async (params) => {
       id,
       qin,
     );
-    const { data, next } = applyTransform(response.data, [
+
+    const { items, next } = applyTransform({ ...response.data, items: response.data.data || [] }, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
     ]);
+
     return {
-      items: applyTransform(data, [(items) => items?.map((item) => formatAccessMode(item)), listResponseHandler]),
+      items: applyTransform(items, [(items) => items?.map((item) => formatAccessMode(item)), listResponseHandler]),
       next,
     };
   } catch (err) {
