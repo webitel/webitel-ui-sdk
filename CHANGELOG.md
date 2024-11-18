@@ -1,5 +1,10 @@
 
 
+## [v24.10.83] - 2024-11-18
+### :bug: Bug Fixes
+- [`e89907d`](https://github.com/webitel/webitel-ui-sdk/commit/e89907d8b732630b534dcf72208202bf5851b417) - sortFilterMixin.js restore sort [WTEL-5520](https://webitel.atlassian.net/browse/WTEL-5520) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.10.82] - 2024-11-18
 ### :sparkles: New Features
 - [`67d4d6f`](https://github.com/webitel/webitel-ui-sdk/commit/67d4d6f7ff9bd575e8dce97693a75472ca8ca4c5) - new components wt-collapse-action and wt-page-wrapper-dual-pane added [WTEL-5485] (https://webitel.atlassian.net/browse/WTEL-5485) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -258,3 +263,4 @@
 [v24.10.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.79...v24.10.80
 [v24.10.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.80...v24.10.81
 [v24.10.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.81...v24.10.82
+[v24.10.83]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.82...v24.10.83
