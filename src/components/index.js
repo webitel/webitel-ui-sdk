@@ -42,6 +42,7 @@ import WtNotificationsBar
   from './wt-notifications-bar/wt-notifications-bar.vue';
 import WtPageHeader from './wt-page-header/wt-page-header.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
+import WtDualPanel from './wt-dual-panel/wt-dual-panel.vue';
 import WtPagination from './wt-pagination/wt-pagination.vue';
 import WtPlayer from './wt-player/wt-player.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
@@ -115,6 +116,7 @@ const Components = {
   WtErrorPage,
   WtNotificationsBar,
   WtPageWrapper,
+  WtDualPanel,
   WtPagination,
   WtPlayer,
   WtStatusSelect,

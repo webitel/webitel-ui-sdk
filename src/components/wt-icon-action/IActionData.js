@@ -31,6 +31,16 @@ const IActionData = Object.freeze({
     icon: 'refresh',
     hint: 'reusable.refresh',
   },
+  [IconAction.EXPAND]: {
+    value: IconAction.EXPAND,
+    icon: 'expand',
+    hint: 'reusable.expand',
+  },
+  [IconAction.COLLAPSE]: {
+    value: IconAction.COLLAPSE,
+    icon: 'collapse',
+    hint: 'reusable.collapse',
+  },
 });
 
 export { IActionData };
