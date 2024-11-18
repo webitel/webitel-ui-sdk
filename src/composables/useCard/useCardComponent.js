@@ -7,7 +7,7 @@ import { useCachedItemInstanceName } from '../useCachedItemInstanceName/useCache
 export const useCardComponent = (params) => {
   const { id,
     itemInstance,
-    invalid,
+    v,
 
     loadItem,
     addItem,
@@ -23,7 +23,9 @@ export const useCardComponent = (params) => {
 
   const isNew = computed(() => route.params.id === 'new');
   const disabledSave = computed(() => {
-    return invalid?.value || !itemInstance.value._dirty;
+    v.value?.$touch();
+    return (v.value?.$error || v.value?.$pending) || (!itemInstance.value._dirty && !!id?.value);
+
   });
 
   const saveText = computed(() => {

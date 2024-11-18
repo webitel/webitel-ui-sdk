@@ -9,16 +9,16 @@
 
 Обєкт параметрів який має включати наступні значення:
 
-| Params       | Description                                                        |
-|--------------|--------------------------------------------------------------------|
-| id           |                                                                    |
-| itemInstance |                                                                    |
-| invalid      | Boolean значення, яке вертається з перевірки на валідацію сторінки |
-| loadItem     |                                                                    |
-| addItem      |                                                                    |
-| updateItem   |                                                                    |
-| setId        |                                                                    |
-| resetState   |                                                                    |
+| Params       | Description                                                              |
+|--------------|--------------------------------------------------------------------------|
+| id           |                                                                          |
+| itemInstance |                                                                          |
+| v            | Об'єкт валідації. Потрібен для значень всередині computed `disabledSave` |
+| loadItem     |                                                                          |
+| addItem      |                                                                          |
+| updateItem   |                                                                          |
+| setId        |                                                                          |
+| resetState   |                                                                          |
 
 ## Return
 
@@ -28,7 +28,7 @@
 | itemInstance |                                                                                                                                                                                                                        |
 | isNew        | Якщо запис не має `id`, він вважаєаться новим (ще не створеним)                                                                                                                                                        |
 | pathName     | Назва ще не збереженої сутності (див.[useCachedItemInstanceName](../use-cached-item-instance-name/Readme.md))                                                                                                          |
-| disabledSave | Заборона збереження карточки якщо зміни не пройшли валідацію                                                                                                                                                           |
+| disabledSave | Дізейбл кнопки `save` якщо зміни не пройшли валідацію. В середині себе викликає `v.touch()`                                                                                                                            |
 | saveText     | Текст для кнопки збереження у компоненті [wt-page-header](../../components/wt-page-header/Readme.md).                                                                                                                  |
 | save         | Метод для збереження нової сутності або редагування існуючої                                                                                                                                                           |
 | initialize   | Метод, який на mount компонента викликає get запит на бек для завантаження сторінки, а на `onMounted` робить `reset` сторінки. Lifecycle hooks винесені в цей окремий метод для можливості кастомізації у разі потреби |
@@ -68,6 +68,6 @@ const {
   updateItem,
   setId,
   resetState,
-  invalid
+  v,
 });
 ```
