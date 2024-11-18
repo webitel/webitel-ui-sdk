@@ -74,17 +74,14 @@ export default {
 
     restoreValue(value) {
       const sortedColumns = decodeSortQuery({ value });
+      const [field, order] = Object.entries(sortedColumns)[0];
 
-      debugger;
+      const headers = changeHeadersSort({
+        headers: this.headers,
+        sortedHeader: { field },
+        order,
+      });
 
-      // const sortedHeader =
-
-      // const headers = changeHeadersSort({ headers: this.headers, sortedHeader: { field: sortedColumns[0] }, order });
-
-      const headers = this.headers.map((header) => ({
-        ...header,
-        sort: sortedColumns[header.field] || null,
-      }));
       this.setHeaders(headers);
     },
   },
