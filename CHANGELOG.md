@@ -1,5 +1,10 @@
 
 
+## [v24.10.87] - 2024-11-19
+### :bug: Bug Fixes
+- [`12df75b`](https://github.com/webitel/webitel-ui-sdk/commit/12df75b9427d3c75804993671835c2ffadbc0fbd) - hiding wfm pages before release *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.86] - 2024-11-19
 ### :sparkles: New Features
 - [`f75077a`](https://github.com/webitel/webitel-ui-sdk/commit/f75077a83057cb8c337aec8fa02b9ead08e05865) - styles for opened-card-tabs added [WTEL-5512] (https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -276,3 +281,4 @@
 [v24.10.83]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.82...v24.10.83
 [v24.10.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.83...v24.10.84
 [v24.10.86]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.85...v24.10.86
+[v24.10.87]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.86...v24.10.87
