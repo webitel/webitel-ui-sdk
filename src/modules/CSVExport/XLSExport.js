@@ -41,22 +41,20 @@ export default class XLSExport {
 
   save(data, columns) {
     const transformedData = data.map(({
-                                        // variables,
+                                        variables,
                                         ...item
                                       }) => {
-      return flatten(item);
+      const flatVariables = flatten({ variables });
 
-      // const flatVariables = flatten({ variables });
-      //
-      // return columns.reduce((acc, column) => {
-      //   return {
-      //     ...acc,
-      //     [column]: item[column] || flatVariables[column] || '',
-      //   };
-      // }, {});
+      return columns.reduce((acc, column) => {
+        return {
+          ...acc,
+          [column]: this.extractNameFromObject(item[column]) || flatVariables[column] || '',
+        };
+      }, {});
     });
 
-    // debugger;
+
     const ws = XLSX.utils.json_to_sheet(transformedData);
     const columnWidths = this.calculateColumnWidths(transformedData, columns);
     ws['!cols'] = columnWidths;
