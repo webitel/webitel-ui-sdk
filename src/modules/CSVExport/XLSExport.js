@@ -1,4 +1,5 @@
 import { saveAs } from 'file-saver-es';
+import { flatten } from 'flat';
 import * as XLSX from 'xlsx';
 import { objSnakeToCamel } from '../../scripts/caseConverters.js';
 
@@ -27,18 +28,6 @@ export default class XLSExport {
     return value;
   }
 
-  // NOTE: creates a new object that only includes the properties specified in the columns array
-  filterDataByColumns(data, columns) {
-    return data.map((item) => {
-      const filteredItem = {};
-      columns.forEach((column) => {
-        const value = item.hasOwnProperty(column) ? this.extractNameFromObject(item[column]) : ''; // '' needed to display column that has no data
-        filteredItem[column] = value;
-      });
-      return filteredItem;
-    });
-  }
-
   // NOTE: calculates the width of the columns based on the data to display it in the EXEL file
   calculateColumnWidths(data, columns) {
     return columns.map((column) => {
@@ -51,9 +40,23 @@ export default class XLSExport {
   }
 
   save(data, columns) {
-    const filteredData = this.filterDataByColumns(data, columns);
-    const ws = XLSX.utils.json_to_sheet(filteredData);
-    const columnWidths = this.calculateColumnWidths(filteredData, columns);
+    const transformedData = data.map(({
+                                        variables,
+                                        ...item
+                                      }) => {
+      const flatVariables = flatten({ variables });
+
+      return columns.reduce((acc, column) => {
+        return {
+          ...acc,
+          [column]: this.extractNameFromObject(item[column]) || flatVariables[column] || '',
+        };
+      }, {});
+    });
+
+
+    const ws = XLSX.utils.json_to_sheet(transformedData);
+    const columnWidths = this.calculateColumnWidths(transformedData, columns);
     ws['!cols'] = columnWidths;
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
@@ -66,7 +69,8 @@ export default class XLSExport {
     let data = [];
     let isNext = false;
     let page = 1;
-    const columns = params._columns || (params?.fields ? objSnakeToCamel(params?.fields) : []);
+    const columns = params._columns ||
+      (params?.fields ? objSnakeToCamel(params?.fields) : []);
 
     do {
       const { items, next } = await this.fetchMethod({
