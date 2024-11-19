@@ -391,6 +391,12 @@ export default {
     dummy: {
       text: 'Записи в разделе еще не созданы',
     },
+    empty: {
+      text: {
+        empty: 'Поиск не дал результата',
+        filters: 'Нет результатов по фильтрам',
+      },
+    },
     agentStatusSelect: {
       pauseCausePopup: {
         title: 'Выберите причину паузы',

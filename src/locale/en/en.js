@@ -393,6 +393,12 @@ export default {
     dummy: {
       text: 'There are no records yet',
     },
+    empty: {
+      text: {
+        empty: 'No results were found',
+        filters: 'No results for the filters',
+      },
+    },
     agentStatusSelect: {
       pauseCausePopup: {
         title: 'Select a pause cause',
