@@ -1,47 +1,52 @@
 .opened-card {
-    &.wt-page-wrapper {
+  width: 100%;
+
+  &.wt-page-wrapper,
+  &.wt-dual-panel {
+    width: 100%;
+  }
+
+  &-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: var(--spacing-sm) 0;
+
+    &__title {
+      @extend %typo-heading-3;
+
+      + .hint {
+        top: -2px;
+      }
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-input-grid {
+    display: grid;
+    align-items: flex-start;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(auto, auto);
+    grid-column-gap: var(--spacing-sm);
+    grid-row-gap: var(--spacing-xs);
+
+    &--1-col {
+      grid-template-columns: 1fr;
+    }
+
+    &--w50 {
+      width: 50%;
+    }
+
+    &--w100 {
       width: 100%;
     }
-
-    &-header {
-      position: relative;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: var(--spacing-sm) 0;
-
-      &__title {
-        @extend %typo-heading-3;
-
-        + .hint {
-          top: -2px;
-        }
-      }
-    }
-
-    &-form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-    &-input-grid {
-      display: grid;
-      align-items: flex-start;
-      grid-template-columns: 1fr 1fr;
-      grid-auto-rows: minmax(auto, auto);
-      grid-column-gap: var(--spacing-sm);
-      grid-row-gap: var(--spacing-xs);
-
-      &--1-col {
-        grid-template-columns: 1fr;
-      }
-
-      &--w50 {
-        width: 50%;
-      }
-      &--w100{
-        width: 100%;
-      }
-    }
+  }
 }
