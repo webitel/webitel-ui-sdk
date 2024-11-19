@@ -1,5 +1,10 @@
 
 
+## [v24.10.84] - 2024-11-19
+### :bug: Bug Fixes
+- [`062e676`](https://github.com/webitel/webitel-ui-sdk/commit/062e6764e47c42c7a3de4ec6e3c39ad9632536f7) - update color for --primary-light-color variable in light and dark theme [WTEL-5557](https://webitel.atlassian.net/browse/WTEL-5557)
+
+
 ## [v24.10.83] - 2024-11-18
 ### :bug: Bug Fixes
 - [`e89907d`](https://github.com/webitel/webitel-ui-sdk/commit/e89907d8b732630b534dcf72208202bf5851b417) - sortFilterMixin.js restore sort [WTEL-5520](https://webitel.atlassian.net/browse/WTEL-5520) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -264,3 +269,4 @@
 [v24.10.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.80...v24.10.81
 [v24.10.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.81...v24.10.82
 [v24.10.83]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.82...v24.10.83
+[v24.10.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.83...v24.10.84
