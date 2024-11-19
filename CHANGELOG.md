@@ -1,5 +1,10 @@
 
 
+## [v24.10.86] - 2024-11-19
+### :sparkles: New Features
+- [`f75077a`](https://github.com/webitel/webitel-ui-sdk/commit/f75077a83057cb8c337aec8fa02b9ead08e05865) - styles for opened-card-tabs added [WTEL-5512] (https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.10.84] - 2024-11-19
 ### :bug: Bug Fixes
 - [`062e676`](https://github.com/webitel/webitel-ui-sdk/commit/062e6764e47c42c7a3de4ec6e3c39ad9632536f7) - update color for --primary-light-color variable in light and dark theme [WTEL-5557](https://webitel.atlassian.net/browse/WTEL-5557)
@@ -270,3 +275,4 @@
 [v24.10.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.81...v24.10.82
 [v24.10.83]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.82...v24.10.83
 [v24.10.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.83...v24.10.84
+[v24.10.86]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.85...v24.10.86
