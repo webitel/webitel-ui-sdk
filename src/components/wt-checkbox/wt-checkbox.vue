@@ -147,7 +147,7 @@ export default {
 }
 
 .wt-checkbox:hover {
-  :deep .wt-icon__icon {
+  :deep(.wt-icon__icon) {
     fill: var(--icon-active-color);
   }
 }

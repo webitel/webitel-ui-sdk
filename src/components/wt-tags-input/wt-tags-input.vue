@@ -192,7 +192,7 @@ export default {
 }
 
 // paddings recalc
-.wt-tags-input .multiselect :deep {
+.wt-tags-input :deep(.multiselect) {
   .multiselect__tags {
     padding-right: calc(
       var(--input-padding)

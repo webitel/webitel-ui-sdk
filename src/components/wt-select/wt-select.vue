@@ -285,7 +285,7 @@ export default {
   min-width: 0;
 }
 
-.multiselect :deep {
+:deep(.multiselect) {
   .multiselect__custom-tag,
   .multiselect__single-label {
     // text overflow 3 dots
@@ -297,7 +297,7 @@ export default {
   }
 }
 
-.multiselect--active :deep {
+:deep(.multiselect--active) {
   .multiselect__tags-wrap,
   .multiselect__strong {
     display: none;
@@ -309,7 +309,7 @@ export default {
 // default case
 .wt-select {
   // all is fine
-  .multiselect :deep {
+  :deep(.multiselect) {
     .multiselect__tags {
       padding: var(--input-padding) calc(
         var(--input-padding)
@@ -322,7 +322,7 @@ export default {
 
 // only chip
 .wt-select.wt-select--multiple:not(.wt-select--clearable) {
-  .multiselect :deep {
+  :deep(.multiselect) {
     $multiselect-limit-right-pos: calc(
       var(--select-caret-right-pos)// caret offet from border
       + var(--icon-md-size)// caret size
@@ -345,7 +345,7 @@ export default {
 
 // only clearable
 .wt-select.wt-select--clearable:not(.wt-select--multiple) {
-  .multiselect :deep {
+  :deep(.multiselect) {
     $multiselect-clear-right-pos: calc(
       var(--select-caret-right-pos)// caret offset from border
       + var(--icon-md-size)// caret size
@@ -368,7 +368,7 @@ export default {
 
 // clearable and chip
 .wt-select.wt-select--multiple.wt-select--clearable {
-  .multiselect :deep {
+  :deep(.multiselect) {
     $multiselect-clear-right-pos: calc(
       var(--select-caret-right-pos)// caret offet from border
       + var(--icon-md-size)// caret size

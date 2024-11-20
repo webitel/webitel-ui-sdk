@@ -1,6 +1,6 @@
 @import '../../../src/css/main.scss';
 
-.multiselect :deep {
+:deep(.multiselect) {
   position: relative;
   cursor: pointer;
 
@@ -106,7 +106,7 @@
   }
 }
 
-.multiselect--active :deep {
+:deep(.multiselect--active) {
   .multiselect__select.multiselect__arrow .wt-icon__icon {
     fill: var(--icon-active-color);
   }
@@ -118,7 +118,7 @@
 
 .wt-select--loading,
 .wt-tags-input--loading {
-  :deep {
+  :deep(.multiselect) {
     .multiselect__content-wrapper {
       overflow-y: hidden;
     }
@@ -141,7 +141,7 @@
 
 .wt-select.wt-select--invalid,
 .wt-tags-input.wt-tags-input--invalid {
-  .multiselect :deep {
+  :deep(.multiselect) {
     .multiselect__tags {
       border-color: var(--wt-text-field-input-border-error-color);
       outline: none; // prevent outline overlapping false color
@@ -172,8 +172,7 @@
     background: transparent; // reset default
   }
 
-  .multiselect {
-    :deep {
+  :deep(.multiselect) {
       .multiselect__tags {
         border-color: var(--wt-text-field-input-border-disabled-color);
         background: var(--wt-text-field-input-background-disabled-color);
@@ -184,13 +183,13 @@
         }
       }
     }
-  }
 }
+
 
 // override .wt-select colors on chips
 .wt-tags-input,
 .wt-tags-input--invalid {
-  .multiselect :deep {
+  :deep(.multiselect) {
     .multiselect__tags {
       .multiselect__custom-tag,
       .multiselect__single-label {

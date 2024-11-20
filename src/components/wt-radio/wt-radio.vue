@@ -131,13 +131,13 @@ export default {
 }
 
 .wt-radio:hover {
-  :deep .wt-icon__icon {
+  :deep(.wt-icon__icon) {
     fill: var(--icon-btn-hover-color);
   }
 }
 
 .wt-radio--active {
-  :deep .wt-icon__icon {
+  :deep(.wt-icon__icon) {
     fill: var(--icon-active-color);
   }
 }
@@ -145,7 +145,7 @@ export default {
 .wt-radio--disabled {
   pointer-events: none;
 
-  :deep .wt-icon__icon {
+  :deep(.wt-icon__icon) {
     fill: var(--icon-disabled-color);
   }
 }

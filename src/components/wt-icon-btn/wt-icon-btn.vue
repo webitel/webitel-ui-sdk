@@ -38,7 +38,7 @@ const emit = defineEmits(['click', 'mousedown']);
   width: fit-content;
   line-height: 0;
 
-  &:hover .wt-icon--color-default :deep .wt-icon__icon {
+  &:hover .wt-icon--color-default :deep(.wt-icon__icon) {
     fill: var(--icon-btn-hover-color);
   }
 
