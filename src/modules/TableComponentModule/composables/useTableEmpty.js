@@ -5,6 +5,8 @@ import { useStore } from 'vuex';
 import { isEmpty } from '../../../scripts/index.js';
 import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
 import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
+import EmptyFiltersDark from '../_internals/assets/empty-filters-dark.svg';
+import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
 
 export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides = {}) => {
   const store = useStore();
@@ -14,8 +16,8 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
   const defaults = computed(() => ({
     image: {
       filters: {
-        dark: EmptyTableDark,
-        light: EmptyTableLight,
+        dark: EmptyFiltersDark,
+        light: EmptyFiltersLight,
       },
       error: {
         dark: EmptyTableDark,
@@ -37,9 +39,9 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
       empty: t(''),
     },
     text: {
-      filters: t('web'),
+      filters: t('webitelUI.empty.text.filters'),
       error: t(''),
-      empty: t(''),
+      empty: t('webitelUI.empty.text.empty'),
     },
     primaryActionText: {
       filters: t(''),
