@@ -1,5 +1,10 @@
 
 
+## [v24.12.1] - 2024-11-20
+### :sparkles: New Features
+- [`6c6cca7`](https://github.com/webitel/webitel-ui-sdk/commit/6c6cca7e9c64d49c9dd1058bbe8a7c4cdca10352) - add locale and default img in useTableEmpty[WTEL-5284](https://webitel.atlassian.net/browse/WTEL-5284) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.0] - 2024-11-20
 ### :sparkles: New Features
 - [`281778c`](https://github.com/webitel/webitel-ui-sdk/commit/281778c1fda716f307fc1febe304ff0b5744d5f8) - Update package version to 24.12.0
@@ -294,3 +299,4 @@
 [v24.10.87]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.86...v24.10.87
 [v24.10.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.87...v24.10.88
 [v24.12.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.88...v24.12.0
+[v24.12.1]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.0...v24.12.1
