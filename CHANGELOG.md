@@ -1,5 +1,10 @@
 
 
+## [v24.10.88] - 2024-11-20
+### :bug: Bug Fixes
+- [`cf746a0`](https://github.com/webitel/webitel-ui-sdk/commit/cf746a0173603767adbeffea4e970fd790aea782) - return wfm pages in release 24.10 *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.10.87] - 2024-11-19
 ### :bug: Bug Fixes
 - [`12df75b`](https://github.com/webitel/webitel-ui-sdk/commit/12df75b9427d3c75804993671835c2ffadbc0fbd) - hiding wfm pages before release *(commit by [@Lera24](https://github.com/Lera24))*
@@ -282,3 +287,4 @@
 [v24.10.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.83...v24.10.84
 [v24.10.86]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.85...v24.10.86
 [v24.10.87]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.86...v24.10.87
+[v24.10.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.87...v24.10.88
