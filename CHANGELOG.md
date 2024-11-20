@@ -1,5 +1,10 @@
 
 
+## [v24.12.0] - 2024-11-20
+### :sparkles: New Features
+- [`281778c`](https://github.com/webitel/webitel-ui-sdk/commit/281778c1fda716f307fc1febe304ff0b5744d5f8) - Update package version to 24.12.0
+
+
 ## [v24.10.88] - 2024-11-20
 ### :bug: Bug Fixes
 - [`cf746a0`](https://github.com/webitel/webitel-ui-sdk/commit/cf746a0173603767adbeffea4e970fd790aea782) - return wfm pages in release 24.10 *(commit by [@Lera24](https://github.com/Lera24))*
@@ -288,3 +293,4 @@
 [v24.10.86]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.85...v24.10.86
 [v24.10.87]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.86...v24.10.87
 [v24.10.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.87...v24.10.88
+[v24.12.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.88...v24.12.0
