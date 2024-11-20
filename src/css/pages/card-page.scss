@@ -6,6 +6,21 @@
     width: 100%;
   }
 
+  &-tabs {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: var(--spacing-sm);
+
+    &__tab {
+      flex-grow: 1;
+      display: flex;
+      min-height: 0;
+      gap: var(--spacing-sm);
+      flex-direction: column;
+    }
+  }
+
   &-header {
     position: relative;
     display: flex;
