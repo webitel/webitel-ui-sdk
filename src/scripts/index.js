@@ -19,7 +19,7 @@ import {
   greaterOrEqual as sizeGreaterOrEqual,
   smallerThen as sizeSmallerThen,
   greaterThen as sizeGreaterThen,
-} from './compareSize.js';
+} from './compareSize.ts';
 import {
   camelToSnake,
   camelToKebab,
