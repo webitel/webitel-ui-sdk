@@ -1,5 +1,10 @@
 
 
+## [v24.12.3] - 2024-11-21
+### :bug: Bug Fixes
+- [`7082c36`](https://github.com/webitel/webitel-ui-sdk/commit/7082c36e16ecb4f195fec4bc58da6de1263571a2) - value in useCardTabs and useValidate composables[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.2] - 2024-11-21
 ### :sparkles: New Features
 - [`5477157`](https://github.com/webitel/webitel-ui-sdk/commit/5477157b4c1956c11a0c89e3f2b1354f829a3590) - add convertDurationWithMinutes[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -310,3 +315,4 @@
 [v24.12.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.88...v24.12.0
 [v24.12.1]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.0...v24.12.1
 [v24.12.2]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.1...v24.12.2
+[v24.12.3]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.2...v24.12.3
