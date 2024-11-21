@@ -1,18 +1,77 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import WtButton from './components/wt-button/wt-button.vue';
-import WtTagsInput from './components/wt-tags-input/wt-tags-input.vue';
+import service from './service.json';
 
 const myInput = ref()
+
+const selected = ref([])
+
+const myTestInput = ref({
+  form: {
+    test: {
+      name: {
+        value: '123',
+        error: false,
+        dirty: false,
+      }
+    }
+  }
+})
+
+const services = service.items
+
+const headers = [
+  {
+    text: 'heading 1',
+    value: 'h1',
+    sort: 'desc',
+  },
+  {
+    text: 'heading2',
+    value: 'h2',
+    sort: 'asc',
+  },
+  {
+    text: 'heading 3',
+    value: 'h3',
+  },
+];
+
+const data = ref([
+  {
+    h1: 'value 1',
+    h2: 'value 2',
+    h3: 'value 3',
+    _isSelected: false,
+  },
+  {
+    h1: 'value 1',
+    h2: 'value 2',
+    h3: 'value 3',
+    _isSelected: false,
+  },
+  {
+    h1: 'value 1',
+    h2: 'value 2',
+    h3: 'value 3',
+    _isSelected: false,
+  },
+  {
+    h1: 'value 1',
+    h2: 'value 2',
+    h3: 'value 3',
+    _isSelected: false,
+  },
+]);
 
 const focusInput = () => {
   myInput.value.focus()
 }
 
-const caseMy = ref([{ "text": "test" }, { "text": "test2" }, { "text": "test3" }])
-const startOptions = ref([{ "text": "case1" }, { "text": "case2" }, { "text": "case3" }])
-
-
+onMounted(() => {
+  console.log('services', services)
+})
 </script>
 
 <template>
@@ -20,20 +79,28 @@ const startOptions = ref([{ "text": "case1" }, { "text": "case2" }, { "text": "c
     class="playground"
     style="background: var(--content-wrapper-color);"
   >
+    myTestInput.form.test.name.value {{ myTestInput.form.test.name.value }}
+    <wt-table
+      :headers="headers"
+      :data="data"
+      :selected="selected"
+      selectable
+      sortable
+    ></wt-table>
+    <wt-tree-table
+      :headers="headers"
+      :data="data"
+      :selected="selected"
+      selectable
+      sortable
+    >
+      <template #actions-header>
+        Test
+      </template>
+    </wt-tree-table>
     <div style="display: flex; gap: 8px; align-items: center">
       <div>
-        {{ caseMy }}
-<!--        :options="startOptions"-->
-
-        <wt-tags-input
-          :value="caseMy"
-          :label="$t('apps.switch.params.cases')"
-          option-label="text"
-          :options="startOptions"
-          track-by="text"
-          taggable
-          @input="caseMy = $event"
-        />
+        <wt-input :value="myTestInput.form.test.name.value" @input="myTestInput.form.test.name.value = $event" ref="myInput"></wt-input>
       </div>
       <wt-divider variant="vertical" />
       <div>
