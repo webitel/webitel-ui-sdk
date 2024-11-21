@@ -1,5 +1,14 @@
 
 
+## [v24.12.2] - 2024-11-21
+### :sparkles: New Features
+- [`5477157`](https://github.com/webitel/webitel-ui-sdk/commit/5477157b4c1956c11a0c89e3f2b1354f829a3590) - add convertDurationWithMinutes[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :recycle: Refactors
+- [`d95500e`](https://github.com/webitel/webitel-ui-sdk/commit/d95500e5011e122a38e5dec90198960958ebcc0e) - deprecated :deep() selector usages [WTEL-5568](https://webitel.atlassian.net/browse/WTEL-5568) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`545437b`](https://github.com/webitel/webitel-ui-sdk/commit/545437b016e51a785ae6e8688753d746af3e7120) - upd packages [WTEL-5568](https://webitel.atlassian.net/browse/WTEL-5568) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.1] - 2024-11-20
 ### :sparkles: New Features
 - [`6c6cca7`](https://github.com/webitel/webitel-ui-sdk/commit/6c6cca7e9c64d49c9dd1058bbe8a7c4cdca10352) - add locale and default img in useTableEmpty[WTEL-5284](https://webitel.atlassian.net/browse/WTEL-5284) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -300,3 +309,4 @@
 [v24.10.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.87...v24.10.88
 [v24.12.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.88...v24.12.0
 [v24.12.1]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.0...v24.12.1
+[v24.12.2]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.1...v24.12.2
