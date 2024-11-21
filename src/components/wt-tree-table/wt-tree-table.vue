@@ -45,63 +45,97 @@
           v-if="gridActions"
           class="wt-table__th__actions"
         >
-          <!--    @slot Table head actions row slot -->
           <slot name="actions-header" />
         </th>
       </tr>
       </thead>
 
       <tbody class="wt-table__body">
-      <tr
-        v-for="(row, dataKey) of data"
-        :key="dataKey"
-        :class="`wt-table__tr__${row.id || dataKey}`"
-        :style="columnsStyle"
-        class="wt-table__tr wt-table__tr__body"
-      >
-        <td
-          v-if="selectable"
-          class="wt-table__td wt-table__td--checkbox"
+      <div v-for="(row, dataKey) of data"
+           :key="dataKey" class="wt-table__tr-wrapper">
+        <tr
+          :class="`wt-table__tr__${row.id || dataKey}`"
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__body"
         >
-          <wt-checkbox
-            :selected="_selected.includes(row)"
-            @change="handleSelection(row, $event)"
-          />
-        </td>
-
-        <td
-          v-for="(col, headerKey) of dataHeaders"
-          :key="headerKey"
-          class="wt-table__td"
-        >
-          <!--
-           @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
-           @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-           -->
-          <slot
-            :index="dataKey"
-            :item="row"
-            :name="col.value"
+          <td
+            v-if="selectable"
+            class="wt-table__td wt-table__td--checkbox"
           >
-            <div>{{ row[col.value] }}</div>
-          </slot>
-        </td>
+            <wt-checkbox
+              :selected="_selected.includes(row)"
+              @change="handleSelection(row, $event)"
+            />
+          </td>
 
-        <td
-          v-if="gridActions"
-          class="wt-table__td__actions"
+          <td
+            v-for="(col, headerKey) of dataHeaders"
+            :key="headerKey"
+            class="wt-table__td"
+          >
+            <slot
+              :index="dataKey"
+              :item="row"
+              :name="col.value"
+            >
+              <div>{{ row[col.value] }}</div>
+            </slot>
+          </td>
+
+          <td
+            v-if="gridActions"
+            class="wt-table__td__actions"
+          >
+            <slot
+              :index="dataKey"
+              :item="row"
+              name="actions"
+            />
+          </td>
+        </tr>
+        <tr
+          :class="`wt-table__tr__${row.id || dataKey}`"
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__body"
         >
-          <!--
-          @slot Table body actions row slot
-          @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-           -->
-          <slot
-            :index="dataKey"
-            :item="row"
-            name="actions"
-          />
-        </td>
-      </tr>
+          <td
+            v-if="selectable"
+            class="wt-table__td wt-table__td--checkbox"
+            :style="`padding-left:calc(var(--spacing-xs)*${1})`"
+          >
+            <wt-checkbox
+              :selected="_selected.includes(row)"
+              @change="handleSelection(row, $event)"
+            />
+          </td>
+
+          <td
+            v-for="(col, headerKey) of dataHeaders"
+            :key="headerKey"
+            class="wt-table__td"
+            :style="`padding-left:calc(var(--spacing-xs)*${1})`"
+          >
+            <slot
+              :index="dataKey"
+              :item="row"
+              :name="col.value"
+            >
+              <div>{{ row[col.value] }}</div>
+            </slot>
+          </td>
+
+          <td
+            v-if="gridActions"
+            class="wt-table__td__actions"
+          >
+            <slot
+              :index="dataKey"
+              :item="row"
+              name="actions"
+            />
+          </td>
+        </tr>
+      </div>
       </tbody>
 
       <tfoot
@@ -122,10 +156,6 @@
           :key="headerKey"
           class="wt-table__td"
         >
-          <!--
-           @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
-           @scope [ { "name": "header", "description": "header object" } ]
-           -->
           <slot
             :header="col"
             :index="headerKey"
@@ -140,6 +170,7 @@
 
 <script setup>
 import { computed, useSlots } from 'vue';
+import { useI18n } from 'vue-i18n';
 import getNextSortOrder from './_internals/getSortOrder.js';
 
 const props = defineProps({
@@ -186,6 +217,7 @@ const props = defineProps({
 
 const emit = defineEmits(['sort', 'update:selected'])
 const slots = useSlots()
+const { t } = useI18n()
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
@@ -205,8 +237,8 @@ const dataHeaders = computed(() => {
             ...header,
             text:
                 typeof header.locale === 'string'
-                    ? this.$t(header.locale)
-                    : this.$t(...header.locale),
+                    ? t(header.locale)
+                    : t(...header.locale),
           };
         }
         return header;
@@ -304,20 +336,28 @@ const handleSelection = (row, select) => {
 .wt-table__table {
   width: 100%;
   border-collapse: collapse;
-}
 
-.wt-table__tr {
-  display: grid;
-  padding: var(--table-row-padding);
-  transition: var(--transition);
-  background: var(--wt-table-primary-color);
-  grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
-  grid-column-gap: var(--table-column-gap);
+  .wt-table__tr-wrapper {
+    background: var(--wt-table-primary-color);
 
-  &:nth-child(2n) {
-    background: var(--wt-table-zebra-color);
+    &:nth-child(2n) {
+      background: var(--wt-table-zebra-color);
+    }
+  }
+
+  .wt-table__tr {
+    display: grid;
+    padding: var(--table-row-padding);
+    transition: var(--transition);
+
+    grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
+    grid-column-gap: var(--table-column-gap);
+
+
   }
 }
+
+
 
 .wt-table__tr__head {
   border: var(--table-head-border);

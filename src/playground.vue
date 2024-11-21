@@ -19,51 +19,160 @@ const myTestInput = ref({
   }
 })
 
-const services = service.items
+const services = ref([service.items])
 
-const headers = [
+const tableData = ref([
   {
-    text: 'heading 1',
-    value: 'h1',
-    sort: 'desc',
+    "name": "Admооо",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "3",
+    "username": "adm",
+    "extension": "202",
+    "presence": {
+      "note": "Chatting"
+    }
   },
   {
-    text: 'heading2',
-    value: 'h2',
-    sort: 'asc',
+    "name": "Ihor Ihor",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "10",
+    "username": "igor",
+    "extension": "1008",
+    "presence": {
+      "note": "Available"
+    }
   },
   {
-    text: 'heading 3',
-    value: 'h3',
+    "name": "Margarita Kadatskaya",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "19",
+    "username": "ddd",
+    "extension": "8888",
+    "presence": {
+      "note": "Available"
+    }
   },
-];
+  {
+    "name": "defaultuserlogin0.",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "31",
+    "username": "7454",
+    "extension": "7454",
+    "presence": {
+      "status": "{dnd}",
+      "note": "On break"
+    }
+  },
+  {
+    "name": "222",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "32",
+    "username": "222",
+    "extension": "777"
+  },
+  {
+    "name": "default us11",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "37",
+    "username": "7677",
+    "extension": "7677",
+    "presence": {
+      "note": "Available"
+    }
+  },
+  {
+    "name": "default user namd",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "39",
+    "username": "defaultuserlogin0.38286564308706494",
+    "extension": "3244444444444444",
+    "presence": {
+      "status": "{dnd}"
+    }
+  },
+  {
+    "name": "258",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "50",
+    "username": "258",
+    "extension": "258",
+    "presence": {
+      "status": "{dnd}"
+    }
+  },
+  {
+    "name": "weweweweц",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "51",
+    "username": "259",
+    "extension": "259"
+  },
+  {
+    "name": "260",
+    "status": "",
+    "state": true,
+    "dnd": false,
+    "id": "52",
+    "username": "260",
+    "extension": "260",
+    "presence": {
+      "status": "{dnd}"
+    }
+  }
+])
 
-const data = ref([
+const dataHeaders = ref([
   {
-    h1: 'value 1',
-    h2: 'value 2',
-    h3: 'value 3',
-    _isSelected: false,
+    "value": "name",
+    "locale": "objects.name",
+    "field": "name",
+    "sort": null
   },
   {
-    h1: 'value 1',
-    h2: 'value 2',
-    h3: 'value 3',
-    _isSelected: false,
+    "value": "status",
+    "locale": "objects.directory.users.status",
+    "width": "minmax(320px, 1fr)",
+    "field": "presence",
+    "sort": null
   },
   {
-    h1: 'value 1',
-    h2: 'value 2',
-    h3: 'value 3',
-    _isSelected: false,
+    "value": "username",
+    "locale": "objects.directory.users.login",
+    "field": "username",
+    "sort": null
   },
   {
-    h1: 'value 1',
-    h2: 'value 2',
-    h3: 'value 3',
-    _isSelected: false,
+    "value": "extensions",
+    "locale": "objects.directory.users.extensions",
+    "field": "extension",
+    "sort": null
   },
-]);
+  {
+    "value": "DnD",
+    "locale": "objects.directory.users.DnD",
+    "width": "120px",
+    "field": "presence",
+    "sort": null
+  }
+])
 
 const focusInput = () => {
   myInput.value.focus()
@@ -81,16 +190,12 @@ onMounted(() => {
   >
     myTestInput.form.test.name.value {{ myTestInput.form.test.name.value }}
     <wt-table
-      :headers="headers"
-      :data="data"
-      :selected="selected"
-      selectable
-      sortable
+      :headers="dataHeaders"
+      :data="tableData"
     ></wt-table>
     <wt-tree-table
-      :headers="headers"
-      :data="data"
-      :selected="selected"
+      :headers="dataHeaders"
+      :data="tableData"
       selectable
       sortable
     >
