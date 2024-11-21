@@ -6,7 +6,7 @@ export const useCardTabs = (tabs) => {
   const route = useRoute();
 
   const currentTab = computed(() => {
-    return tabs.find(({ pathName }) => route.name === pathName) || tabs[0];
+    return tabs?.value.find(({ pathName }) => route.name === pathName) || tabs?.value[0];
   });
 
   function changeTab(tab) {
