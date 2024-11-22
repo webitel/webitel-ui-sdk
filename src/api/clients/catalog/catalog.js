@@ -15,6 +15,7 @@ const catalogService = new CatalogApiFactory(configuration, '', instance);
 
 const getChatMessagesList = async ({ chatId }) => {
   const mergeMessagesData = ({ messages, peers }) => {
+    if (!messages) return [];
     return messages.map(({ from, ...message }) => {
       return {
         ...message,
