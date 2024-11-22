@@ -1,5 +1,10 @@
 
 
+## [v24.12.5] - 2024-11-22
+### :bug: Bug Fixes
+- [`ccb6d0d`](https://github.com/webitel/webitel-ui-sdk/commit/ccb6d0d0f8c48c8127f0868ed9ff49e61fd6f0c9) - filter-from-to.vue set null at falsy input value [WTEL-5576](https://webitel.atlassian.net/browse/WTEL-5576) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.4] - 2024-11-22
 ### :bug: Bug Fixes
 - [`1daec47`](https://github.com/webitel/webitel-ui-sdk/commit/1daec473121791c6e35b8e794a2528ee9e65eacf) - catalog client chat history [WTEL-5515](https://webitel.atlassian.net/browse/WTEL-5515) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -322,3 +327,4 @@
 [v24.12.2]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.1...v24.12.2
 [v24.12.3]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.2...v24.12.3
 [v24.12.4]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.3...v24.12.4
+[v24.12.5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.4...v24.12.5
