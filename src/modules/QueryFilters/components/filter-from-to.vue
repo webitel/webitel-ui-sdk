@@ -87,7 +87,8 @@ export default {
     },
 
     async setFrom(value) {
-      const filterValue = { from: value, to: this.value.to };
+      const from = value ? value : null; // if value is empty, set it to null
+      const filterValue = { from, to: this.value.to };
       await this.setValue({ filter: this.filterQuery, value: filterValue });
       await this.setValueToQuery({
         filterQuery: `${this.filterQuery}From`,
@@ -96,7 +97,8 @@ export default {
     },
 
     async setTo(value) {
-      const filterValue = { from: this.value.from, to: value };
+      const to = value ? value : null; // if value is empty, set it to null
+      const filterValue = { from: this.value.from, to };
       await this.setValue({ filter: this.filterQuery, value: filterValue });
       await this.setValueToQuery({
         filterQuery: `${this.filterQuery}To`,
