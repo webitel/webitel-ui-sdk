@@ -1,5 +1,10 @@
 
 
+## [v24.12.4] - 2024-11-22
+### :bug: Bug Fixes
+- [`1daec47`](https://github.com/webitel/webitel-ui-sdk/commit/1daec473121791c6e35b8e794a2528ee9e65eacf) - catalog client chat history [WTEL-5515](https://webitel.atlassian.net/browse/WTEL-5515) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.3] - 2024-11-21
 ### :bug: Bug Fixes
 - [`7082c36`](https://github.com/webitel/webitel-ui-sdk/commit/7082c36e16ecb4f195fec4bc58da6de1263571a2) - value in useCardTabs and useValidate composables[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -316,3 +321,4 @@
 [v24.12.1]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.0...v24.12.1
 [v24.12.2]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.1...v24.12.2
 [v24.12.3]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.2...v24.12.3
+[v24.12.4]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.3...v24.12.4
