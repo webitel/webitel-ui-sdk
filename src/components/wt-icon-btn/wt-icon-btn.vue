@@ -14,17 +14,19 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import WtIcon from '../wt-icon/wt-icon.vue';
 
-const props = defineProps({
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+const {
+  disabled = false,
+} = defineProps<{
+  disabled?: boolean
+}>();
 
-const emit = defineEmits(['click', 'mousedown']);
+const emit = defineEmits<{
+  click: MouseEvent
+  mousedown: MouseEvent
+}>();
 </script>
 
 <style lang="scss">

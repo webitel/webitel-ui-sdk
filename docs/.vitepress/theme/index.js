@@ -6,7 +6,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 import 'prismjs/themes/prism.min.css';
-import WebitelUI from '__lib__/install.js';
+import WebitelUI from '__lib__/install.ts';
 import i18n from '__lib__/locale/i18n';
 import sharedComponents from '../../shared';
 import '__lib__/assets/icons/sprite';

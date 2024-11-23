@@ -1,8 +1,9 @@
 import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
-import { defineConfig, loadEnv } from 'vite';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
+import {resolve} from 'path';
+import checker from 'vite-plugin-checker';
+import {defineConfig, loadEnv} from 'vite';
+import {nodePolyfills} from 'vite-plugin-node-polyfills';
+import {viteStaticCopy} from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 
 // https://vitejs.dev/config/
@@ -13,7 +14,7 @@ export default ({ mode }) => {
     build: {
       lib: {
         // Could also be a dictionary or array of multiple entry points
-        entry: resolve(__dirname, 'src/install.js'),
+        entry: resolve(__dirname, 'src/install.ts'),
         name: 'ui-sdk',
         // the proper extensions will be added
         fileName: 'ui-sdk',
@@ -37,8 +38,7 @@ export default ({ mode }) => {
       },
     },
     define: {
-      'process.env': JSON.parse(JSON.stringify(env)
-      .replaceAll('VITE_', 'VUE_APP_')),
+      'process.env': JSON.parse(JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_')),
     },
     server: {
       port: 8080,
@@ -64,7 +64,6 @@ export default ({ mode }) => {
             src: 'src/assets/icons/sprite/',
             dest: 'img',
           },
-
         ],
       }),
       // https://www.npmjs.com/package/vite-plugin-node-polyfills
@@ -78,6 +77,11 @@ export default ({ mode }) => {
       createSvgSpritePlugin({
         include: '**/sprite/*.svg',
       }),
+      checker({
+        typescript: false,
+        vueTsc: true,
+        biome: true,
+      }),
     ],
     test: {
       globals: true,
@@ -89,4 +93,4 @@ export default ({ mode }) => {
       setupFiles: ['./tests/config/config.js'],
     },
   });
-}
+};
