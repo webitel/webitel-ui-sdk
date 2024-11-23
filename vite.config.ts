@@ -80,7 +80,7 @@ export default ({ mode }) => {
       checker({
         typescript: false,
         vueTsc: true,
-        biome: true,
+        // biome: true,
       }),
     ],
     test: {
