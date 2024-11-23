@@ -1,5 +1,13 @@
 
 
+## [v24.12.6] - 2024-11-23
+### :sparkles: New Features
+- [`b284960`](https://github.com/webitel/webitel-ui-sdk/commit/b28496024428f1b3f5010df2ff4539331cec61af) - typescript support *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`2e03a0e`](https://github.com/webitel/webitel-ui-sdk/commit/2e03a0eb4ee21acda8a6f9ba3fcb378f5689cb67) - tsc! *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.5] - 2024-11-22
 ### :bug: Bug Fixes
 - [`ccb6d0d`](https://github.com/webitel/webitel-ui-sdk/commit/ccb6d0d0f8c48c8127f0868ed9ff49e61fd6f0c9) - filter-from-to.vue set null at falsy input value [WTEL-5576](https://webitel.atlassian.net/browse/WTEL-5576) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -328,3 +336,4 @@
 [v24.12.3]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.2...v24.12.3
 [v24.12.4]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.3...v24.12.4
 [v24.12.5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.4...v24.12.5
+[v24.12.6]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.5...v24.12.6
