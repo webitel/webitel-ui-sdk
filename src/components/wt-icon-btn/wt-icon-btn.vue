@@ -24,8 +24,8 @@ const {
 }>();
 
 const emit = defineEmits<{
-  click: MouseEvent
-  mousedown: MouseEvent
+  click: MouseEvent[]
+  mousedown: MouseEvent[]
 }>();
 </script>
 
