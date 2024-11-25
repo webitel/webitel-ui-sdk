@@ -53,88 +53,18 @@
       <tbody class="wt-table__body">
       <div v-for="(row, dataKey) of data"
            :key="dataKey" class="wt-table__tr-wrapper">
-        <tr
-          :class="`wt-table__tr__${row.id || dataKey}`"
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__body"
+        <wt-tree-table-row
+          :columns-style="columnsStyle"
+          :data-headers="dataHeaders" :row="row"
+          :selectable="selectable"
+          :children="children"
+          :_selected="_selected"
+          @handleSelection="handleSelection($event.row, $event.select)"
         >
-          <td
-            v-if="selectable"
-            class="wt-table__td wt-table__td--checkbox"
-          >
-            <wt-checkbox
-              :selected="_selected.includes(row)"
-              @change="handleSelection(row, $event)"
-            />
-          </td>
-
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
-          >
-            <slot
-              :index="dataKey"
-              :item="row"
-              :name="col.value"
-            >
-              <div>{{ row[col.value] }}</div>
-            </slot>
-          </td>
-
-          <td
-            v-if="gridActions"
-            class="wt-table__td__actions"
-          >
-            <slot
-              :index="dataKey"
-              :item="row"
-              name="actions"
-            />
-          </td>
-        </tr>
-        <tr
-          :class="`wt-table__tr__${row.id || dataKey}`"
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__body"
-        >
-          <td
-            v-if="selectable"
-            class="wt-table__td wt-table__td--checkbox"
-            :style="`padding-left:calc(var(--spacing-xs)*${1})`"
-          >
-            <wt-checkbox
-              :selected="_selected.includes(row)"
-              @change="handleSelection(row, $event)"
-            />
-          </td>
-
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
-            :style="`padding-left:calc(var(--spacing-xs)*${1})`"
-          >
-            <slot
-              :index="dataKey"
-              :item="row"
-              :name="col.value"
-            >
-              <div>{{ row[col.value] }}</div>
-            </slot>
-          </td>
-
-          <td
-            v-if="gridActions"
-            class="wt-table__td__actions"
-          >
-            <slot
-              :index="dataKey"
-              :item="row"
-              name="actions"
-            />
-          </td>
-        </tr>
+          <template #actions>
+            <slot name="actions" :row="row" />
+          </template>
+        </wt-tree-table-row>
       </div>
       </tbody>
 
@@ -168,64 +98,90 @@
   </div>
 </template>
 
-<script setup>
-import { computed, useSlots } from 'vue';
+<script setup lang="ts">
+import { computed, useSlots, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 import getNextSortOrder from './_internals/getSortOrder.js';
+import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
+import type { TableHeader } from '../../types/table/table-header.js';
 
-const props = defineProps({
+const props = withDefaults(defineProps<{
   /**
    * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
    */
-  headers: {
-    type: Array,
-    default: () => [],
-  },
+  headers: TableHeader[]
   /**
    * 'List of data, represented by table. '
    */
-  data: {
-    type: Array,
-    default: () => [],
-  },
+  data: any[],
   /**
    * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
    */
-  sortable: {
-    type: Boolean,
-    default: false,
-  },
+  sortable: boolean,
   /**
    * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
    */
-  selectable: {
-    type: Boolean,
-    default: true,
-  },
-  selected: {
-    type: Array,
-    // no default! because we need to know if it's passed or not
-  },
+  selectable: boolean,
+  selected: [],
   /**
    * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
    */
-  gridActions: {
-    type: Boolean,
-    default: true,
-  },
+  gridActions: boolean,
+  /**
+   * 'It's a key in data object, which contains children array. '
+   */
+  children: string
+}>(), {
+  sortable: false,
+  selectable: true,
+  gridActions: true
 })
 
 const emit = defineEmits(['sort', 'update:selected'])
 const slots = useSlots()
 const { t } = useI18n()
 
+function getSelectedValue(items) {
+  const selected = [];
+
+  function traverse(item) {
+    if (item._isSelected) {
+      selected.push(item);
+    }
+
+    if (item[props.children] && Array.isArray(item[props.children])) {
+      item[props.children].forEach(traverse);
+    }
+  }
+
+  items.forEach(traverse);
+
+  return selected;
+}
+
+const getAllNestedElements = (item) => {
+  const nested = [];
+
+  function traverse(item) {
+    nested.push(item)
+
+    if (item[props.children] && Array.isArray(item[props.children])) {
+      item[props.children].forEach(traverse);
+    }
+  }
+
+  item.forEach(traverse);
+
+  return nested
+}
+
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
-  return props.selected || props.data.filter((item) => item._isSelected);
+  return props.selected || getSelectedValue(props.data);
 })
 
 const isAllSelected = computed(() => {
-  return _selected.value.length === props.data.length && props.data.length > 0;
+  return _selected.value.length === getAllNestedElements(props.data).length && getAllNestedElements(props.data).length > 0;
 })
 
 const dataHeaders = computed(() => {
@@ -238,7 +194,7 @@ const dataHeaders = computed(() => {
             text:
                 typeof header.locale === 'string'
                     ? t(header.locale)
-                    : t(...header.locale),
+                    : t(header.locale[0]),
           };
         }
         return header;
@@ -278,12 +234,24 @@ const sort = (col) => {
   emit('sort', col, nextSort);
 }
 
+const changeSelectItem = (item, selected) => {
+  function traverse(item) {
+    item._isSelected = selected
+
+    if (item[props.children] && Array.isArray(item[props.children])) {
+      item[props.children].forEach(traverse);
+    }
+  }
+
+  item.forEach(traverse);
+}
+
 const selectAll = () => {
   if (props.selected) {
     if (isAllSelected.value) {
       emit('update:selected', []);
     } else {
-      emit('update:selected', [...props.data]);
+      emit('update:selected', [...getAllNestedElements(props.data)]);
     }
   } else {
     // for backwards compatibility
@@ -293,13 +261,9 @@ const selectAll = () => {
     // Because allSelected recomputes after each change
 
     if (isAllSelected.value) {
-      props.data.forEach((item) => {
-        item._isSelected = false;
-      });
+      changeSelectItem(props.data, false)
     } else {
-      props.data.forEach((item) => {
-        item._isSelected = true;
-      });
+      changeSelectItem(props.data, true)
     }
   }
 }
@@ -315,8 +279,11 @@ const handleSelection = (row, select) => {
       );
     }
   } else {
+    console.log('row', row)
     // for backwards compatibility
     row._isSelected = !row._isSelected;
+
+    console.log('row', row)
   }
 }
 </script>
@@ -345,15 +312,13 @@ const handleSelection = (row, select) => {
     }
   }
 
-  .wt-table__tr {
+  :deep(.wt-table__tr) {
     display: grid;
     padding: var(--table-row-padding);
     transition: var(--transition);
 
     grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
     grid-column-gap: var(--table-column-gap);
-
-
   }
 }
 
@@ -385,6 +350,10 @@ const handleSelection = (row, select) => {
     justify-content: flex-end;
     gap: var(--spacing-xs);
   }
+}
+
+:deep(.wt-table__td:nth-child(2)),:deep(.wt-table__td:nth-child(1)) {
+  padding-left: var(--child-space);
 }
 
 .wt-table__th {

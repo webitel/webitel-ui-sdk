@@ -19,7 +19,7 @@ const myTestInput = ref({
   }
 })
 
-const services = ref([service.items])
+const services = ref([...service.items])
 
 const tableData = ref([
   {
@@ -174,6 +174,22 @@ const dataHeaders = ref([
   }
 ])
 
+const dataHeaders2 = ref([
+  {
+    "value": "name",
+    "locale": "objects.name",
+    "field": "name",
+    "sort": null
+  },
+  {
+    "value": "description",
+    "locale": "objects.description",
+    "width": "minmax(320px, 1fr)",
+    "field": "presence",
+    "sort": null
+  },
+])
+
 const focusInput = () => {
   myInput.value.focus()
 }
@@ -192,16 +208,20 @@ onMounted(() => {
     <wt-table
       :headers="dataHeaders"
       :data="tableData"
-    ></wt-table>
+    >
+      <template #name="data">{{ data }}</template>
+    </wt-table>
     <wt-tree-table
-      :headers="dataHeaders"
-      :data="tableData"
+      :headers="dataHeaders2"
+      :data="services"
+      children="service"
       selectable
       sortable
     >
       <template #actions-header>
         Test
       </template>
+      <template #name="data">{{ data }}</template>
     </wt-tree-table>
     <div style="display: flex; gap: 8px; align-items: center">
       <div>
