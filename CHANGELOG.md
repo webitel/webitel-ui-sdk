@@ -1,5 +1,37 @@
 
 
+## [v24.12.6] - 2024-11-23
+### :sparkles: New Features
+- [`b284960`](https://github.com/webitel/webitel-ui-sdk/commit/b28496024428f1b3f5010df2ff4539331cec61af) - typescript support *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`2e03a0e`](https://github.com/webitel/webitel-ui-sdk/commit/2e03a0eb4ee21acda8a6f9ba3fcb378f5689cb67) - tsc! *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.5] - 2024-11-22
+### :bug: Bug Fixes
+- [`ccb6d0d`](https://github.com/webitel/webitel-ui-sdk/commit/ccb6d0d0f8c48c8127f0868ed9ff49e61fd6f0c9) - filter-from-to.vue set null at falsy input value [WTEL-5576](https://webitel.atlassian.net/browse/WTEL-5576) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.4] - 2024-11-22
+### :bug: Bug Fixes
+- [`1daec47`](https://github.com/webitel/webitel-ui-sdk/commit/1daec473121791c6e35b8e794a2528ee9e65eacf) - catalog client chat history [WTEL-5515](https://webitel.atlassian.net/browse/WTEL-5515) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.3] - 2024-11-21
+### :bug: Bug Fixes
+- [`7082c36`](https://github.com/webitel/webitel-ui-sdk/commit/7082c36e16ecb4f195fec4bc58da6de1263571a2) - value in useCardTabs and useValidate composables[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.2] - 2024-11-21
+### :sparkles: New Features
+- [`5477157`](https://github.com/webitel/webitel-ui-sdk/commit/5477157b4c1956c11a0c89e3f2b1354f829a3590) - add convertDurationWithMinutes[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :recycle: Refactors
+- [`d95500e`](https://github.com/webitel/webitel-ui-sdk/commit/d95500e5011e122a38e5dec90198960958ebcc0e) - deprecated :deep() selector usages [WTEL-5568](https://webitel.atlassian.net/browse/WTEL-5568) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`545437b`](https://github.com/webitel/webitel-ui-sdk/commit/545437b016e51a785ae6e8688753d746af3e7120) - upd packages [WTEL-5568](https://webitel.atlassian.net/browse/WTEL-5568) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.1] - 2024-11-20
 ### :sparkles: New Features
 - [`6c6cca7`](https://github.com/webitel/webitel-ui-sdk/commit/6c6cca7e9c64d49c9dd1058bbe8a7c4cdca10352) - add locale and default img in useTableEmpty[WTEL-5284](https://webitel.atlassian.net/browse/WTEL-5284) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -300,3 +332,8 @@
 [v24.10.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.87...v24.10.88
 [v24.12.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.10.88...v24.12.0
 [v24.12.1]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.0...v24.12.1
+[v24.12.2]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.1...v24.12.2
+[v24.12.3]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.2...v24.12.3
+[v24.12.4]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.3...v24.12.4
+[v24.12.5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.4...v24.12.5
+[v24.12.6]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.5...v24.12.6
