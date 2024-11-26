@@ -12,8 +12,8 @@
        -->
       <slot name="media" v-bind="{ size: mediaSize }">
         <wt-image
-          :src="image"
           :size="mediaSize"
+          :src="image"
           alt="empty-state"
         />
       </slot>
@@ -253,6 +253,7 @@ const onSecondaryClick = onClick('secondary');
   width: var(--wt-empty-width);
   min-width: var(--wt-empty-min-width);
   max-width: var(--wt-empty-max-width);
+  margin: auto;
   padding: var(--spacing-md);
   text-align: center;
   gap: var(--spacing-md);
