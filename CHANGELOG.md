@@ -1,5 +1,10 @@
 
 
+## [v24.12.8] - 2024-11-26
+### :bug: Bug Fixes
+- [`024a2bb`](https://github.com/webitel/webitel-ui-sdk/commit/024a2bb5d786c06833c370dcd90dee8a556365d3) - datepicker version [WTEL-5596](https://webitel.atlassian.net/browse/WTEL-5596) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.7] - 2024-11-26
 ### :bug: Bug Fixes
 - [`510db8d`](https://github.com/webitel/webitel-ui-sdk/commit/510db8dcc0a86da3608312ff305ab3ec36feade3) - small refactor useTableEmpty component[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -345,3 +350,4 @@
 [v24.12.5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.4...v24.12.5
 [v24.12.6]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.5...v24.12.6
 [v24.12.7]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.6...v24.12.7
+[v24.12.8]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.7...v24.12.8
