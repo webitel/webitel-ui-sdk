@@ -64,6 +64,24 @@
           <template #actions>
             <slot name="actions" :row="row" />
           </template>
+          <template v-for="(col, headerKey) of dataHeaders" :key="headerKey" #[col.value]="{ item }">
+            <slot
+              :index="dataKey"
+              :item="item"
+              :name="col.value"
+            >
+              <div>{{ item[col.value] }}</div>
+            </slot>
+          </template>
+          <template v-for="(col, headerKey) of dataHeaders" :key="headerKey" #[`${col.value}-child`]="{ item }">
+            <slot
+              :index="dataKey"
+              :item="item"
+              :name="col.value"
+            >
+              <div>{{ item[col.value] }}</div>
+            </slot>
+          </template>
         </wt-tree-table-row>
       </div>
       </tbody>

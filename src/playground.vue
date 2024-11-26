@@ -221,7 +221,7 @@ onMounted(() => {
       <template #actions-header>
         Test
       </template>
-      <template #name="data">{{ data }}</template>
+      <template #name="data">{{ data.item.name }} + <strong>slot template</strong></template>
     </wt-tree-table>
     <div style="display: flex; gap: 8px; align-items: center">
       <div>

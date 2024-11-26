@@ -65,6 +65,7 @@ defineEmits(['handleSelection'])
       :key="headerKey"
       class="wt-table__td"
     >
+      <div>{{ row[col.value] }}</div>
       <slot
         :index="dataKey"
         :item="row"
@@ -79,9 +80,9 @@ defineEmits(['handleSelection'])
         class="wt-table__td__actions"
     >
       <slot
-          :index="dataKey"
-          :item="row"
-          name="actions"
+        :index="dataKey"
+        :item="row"
+        name="actions"
       />
     </td>
   </tr>
@@ -100,5 +101,19 @@ defineEmits(['handleSelection'])
     })"
     :nestedLevel="nestedLevel + 1"
   >
+    <template
+      v-for="(col, headerKey) of dataHeaders"
+      :key="headerKey"
+      #[col.value]
+    >
+      <slot
+        :index="headerKey"
+        :item="childRow"
+        :name="`${col.value}-child`"
+      >
+        <div>{{ childRow[col.value]  }}</div>
+        <strong>{{ col.value }}</strong>
+      </slot>
+    </template>
   </wt-tree-table-row>
 </template>
