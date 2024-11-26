@@ -3,7 +3,7 @@
     <table class="wt-table__table">
       <thead class="wt-table__head">
       <tr
-        :style="columnsStyle"
+
         class="wt-table__tr wt-table__tr__head"
       >
         <th
@@ -54,7 +54,6 @@
       <div v-for="(row, dataKey) of data"
            :key="dataKey" class="wt-table__tr-wrapper">
         <wt-tree-table-row
-          :columns-style="columnsStyle"
           :data-headers="dataHeaders" :row="row"
           :selectable="selectable"
           :children="children"
@@ -91,7 +90,6 @@
         class="wt-table__foot"
       >
       <tr
-        :style="columnsStyle"
         class="wt-table__tr wt-table__tr__foot"
       >
         <!--        empty checkbox column -->
@@ -219,18 +217,32 @@ const dataHeaders = computed(() => {
       });
 })
 
-const columnsStyle = computed(() => {
-  let gridTemplateColumns = '';
-  if (props.selectable) gridTemplateColumns += '24px '; // checkbox
-
-  const defaultColumnWidth = 'minmax(140px, 1fr)';
-  dataHeaders.value.forEach((header) => {
-    gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
-  });
-
-  if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
-  return `grid-template-columns: ${gridTemplateColumns}`;
-})
+// const columnsStyleHeader = computed(() => {
+//   let gridTemplateColumns = '';
+//   if (props.selectable) gridTemplateColumns += '24px '; // checkbox
+//
+//   const defaultColumnWidth = 'minmax(140px, 1fr)';
+//   dataHeaders.value.forEach((header) => {
+//     gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
+//   });
+//
+//   if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
+//   return `grid-template-columns: ${gridTemplateColumns}`;
+// })
+// calc(48px+var(--child-space))
+// const columnsStyle = computed(() => {
+//   let gridTemplateColumns = '';
+//   // if (props.selectable) gridTemplateColumns += 'calc(48px + var(--child-space)) '; // checkbox
+//   // if (props.selectable) gridTemplateColumns += 'auto'; // checkbox
+//
+//   const defaultColumnWidth = 'minmax(140px, 1fr)';
+//   dataHeaders.value.forEach((header) => {
+//     gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
+//   });
+//
+//   if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
+//   return `grid-template-columns: ${gridTemplateColumns}`;
+// })
 
 const isTableFooter = computed(() => {
   console.log('slots',slots)
@@ -368,10 +380,6 @@ const handleSelection = (row, select) => {
     justify-content: flex-end;
     gap: var(--spacing-xs);
   }
-}
-
-:deep(.wt-table__td:nth-child(2)),:deep(.wt-table__td:nth-child(1)) {
-  padding-left: var(--child-space);
 }
 
 .wt-table__th {
