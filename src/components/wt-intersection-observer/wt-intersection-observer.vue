@@ -11,10 +11,16 @@ import { useIntersectionObserver } from '@vueuse/core';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps({
+  /**
+   * is emit 'next' can be triggered
+   */
   next: {
-    type: Function,
+    type: Boolean,
     required: true,
   },
+  /**
+   * show or hide loader
+   */
   loading: {
     type: Boolean,
     default: false,
