@@ -62,8 +62,8 @@ const lineCount = computed(() => {
       v-if="selectable"
       class="wt-table__td wt-table__td--checkbox"
     >
-<!--      <wt-icon-btn v-for="n in lineCount" :key="n" icon="tree-line" class="wt-tree-table-row__tree-icon"></wt-icon-btn>-->
-<!--      <wt-icon-btn v-if="nestedLevel >= 1" icon="tree-cross" class="wt-tree-table-row__tree-icon"></wt-icon-btn>-->
+      <wt-icon-btn v-for="n in lineCount" :key="n" icon="tree-line" class="wt-tree-table-row__tree-icon"></wt-icon-btn>
+      <wt-icon-btn v-if="nestedLevel >= 1" icon="tree-cross" class="wt-tree-table-row__tree-icon"></wt-icon-btn>
       <wt-checkbox
           :selected="_selected.includes(row)"
           @change="$emit('handleSelection', {

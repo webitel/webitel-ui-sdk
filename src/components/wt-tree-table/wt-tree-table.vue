@@ -3,7 +3,7 @@
     <table class="wt-table__table">
       <thead class="wt-table__head">
       <tr
-
+        :style="columnsStyleHeader"
         class="wt-table__tr wt-table__tr__head"
       >
         <th
@@ -54,7 +54,9 @@
       <div v-for="(row, dataKey) of data"
            :key="dataKey" class="wt-table__tr-wrapper">
         <wt-tree-table-row
-          :data-headers="dataHeaders" :row="row"
+          :data-headers="dataHeaders"
+          :row="row"
+          :columns-style="columnsStyle"
           :selectable="selectable"
           :children="children"
           :_selected="_selected"
@@ -91,6 +93,7 @@
       >
       <tr
         class="wt-table__tr wt-table__tr__foot"
+        :style="columnsStyle"
       >
         <!--        empty checkbox column -->
         <th
@@ -217,32 +220,32 @@ const dataHeaders = computed(() => {
       });
 })
 
-// const columnsStyleHeader = computed(() => {
-//   let gridTemplateColumns = '';
-//   if (props.selectable) gridTemplateColumns += '24px '; // checkbox
-//
-//   const defaultColumnWidth = 'minmax(140px, 1fr)';
-//   dataHeaders.value.forEach((header) => {
-//     gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
-//   });
-//
-//   if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
-//   return `grid-template-columns: ${gridTemplateColumns}`;
-// })
-// calc(48px+var(--child-space))
-// const columnsStyle = computed(() => {
-//   let gridTemplateColumns = '';
-//   // if (props.selectable) gridTemplateColumns += 'calc(48px + var(--child-space)) '; // checkbox
-//   // if (props.selectable) gridTemplateColumns += 'auto'; // checkbox
-//
-//   const defaultColumnWidth = 'minmax(140px, 1fr)';
-//   dataHeaders.value.forEach((header) => {
-//     gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
-//   });
-//
-//   if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
-//   return `grid-template-columns: ${gridTemplateColumns}`;
-// })
+const columnsStyleHeader = computed(() => {
+  let gridTemplateColumns = '';
+  if (props.selectable) gridTemplateColumns += '24px '; // checkbox
+
+  const defaultColumnWidth = 'minmax(140px, 1fr)';
+  dataHeaders.value.forEach((header) => {
+    gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
+  });
+
+  if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
+  return `grid-template-columns: ${gridTemplateColumns}`;
+})
+
+const columnsStyle = computed(() => {
+  let gridTemplateColumns = '';
+  // if (props.selectable) gridTemplateColumns += 'calc(48px + var(--child-space)) '; // checkbox
+  if (props.selectable) gridTemplateColumns += 'auto'; // checkbox
+
+  const defaultColumnWidth = 'minmax(140px, 1fr)';
+  dataHeaders.value.forEach((header) => {
+    gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
+  });
+
+  if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
+  return `grid-template-columns: ${gridTemplateColumns}`;
+})
 
 const isTableFooter = computed(() => {
   console.log('slots',slots)
