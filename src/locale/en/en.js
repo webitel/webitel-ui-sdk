@@ -222,6 +222,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SOURCES]: 'Case sources',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
