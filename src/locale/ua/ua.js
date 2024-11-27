@@ -139,6 +139,7 @@ export default {
     grantor: 'Надавач | Надавачі',
     user: 'Користувач | Користувачі',
     role: 'Роль | Ролі',
+    calendar: 'Календар | Календарі',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
