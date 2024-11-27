@@ -221,6 +221,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакты',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SOURCES]: 'Источники обращений',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
