@@ -139,6 +139,7 @@ export default {
     grantor: 'Надавач | Надавачі',
     user: 'Користувач | Користувачі',
     role: 'Роль | Ролі',
+    calendar: 'Календар | Календарі',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
@@ -220,6 +221,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакти',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SOURCES]: 'Джерела звернень',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },

@@ -140,6 +140,7 @@ export default {
     grantor: 'Grantor | Grantors',
     role: 'Role | Roles',
     user: 'User | Users',
+    calendar: 'Calendar | Calendars',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
@@ -221,6 +222,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SOURCES]: 'Case sources',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },

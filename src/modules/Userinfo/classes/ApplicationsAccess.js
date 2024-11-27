@@ -198,6 +198,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SLAS}`,
     },
+    [CrmSections.SOURCES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SOURCES}`,
+    },
   },
 });
 

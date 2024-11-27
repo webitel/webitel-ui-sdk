@@ -139,6 +139,7 @@ export default {
     grantor: 'Праводатель | Праводатели',
     user: 'Пользователь | Пользователи',
     role: 'Роль | Роли',
+    calendar: 'Календарь | Календари',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Входящая очередь',
@@ -220,6 +221,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакты',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SOURCES]: 'Источники обращений',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },

@@ -1,5 +1,27 @@
 
 
+## [v24.12.10] - 2024-11-27
+### :sparkles: New Features
+- [`972c6cd`](https://github.com/webitel/webitel-ui-sdk/commit/972c6cda702008cbd2629ea82c688ff463b2685d) - add sources page[WTEL-4754](https://webitel.atlassian.net/browse/WTEL-4754) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.9] - 2024-11-27
+### :sparkles: New Features
+- [`333f3b8`](https://github.com/webitel/webitel-ui-sdk/commit/333f3b8ee8d364a8148884f71c54946ab2c28524) - add calendar locale[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.8] - 2024-11-26
+### :bug: Bug Fixes
+- [`024a2bb`](https://github.com/webitel/webitel-ui-sdk/commit/024a2bb5d786c06833c370dcd90dee8a556365d3) - datepicker version [WTEL-5596](https://webitel.atlassian.net/browse/WTEL-5596) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.7] - 2024-11-26
+### :bug: Bug Fixes
+- [`510db8d`](https://github.com/webitel/webitel-ui-sdk/commit/510db8dcc0a86da3608312ff305ab3ec36feade3) - small refactor useTableEmpty component[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`cc2cfb3`](https://github.com/webitel/webitel-ui-sdk/commit/cc2cfb344fc469d5295d30909b0666f9fa259309) - checker biome breaks build *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`67574b7`](https://github.com/webitel/webitel-ui-sdk/commit/67574b79c6a65e9272ade2430b143c249e2a42e4) - typescript declarations *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.6] - 2024-11-23
 ### :sparkles: New Features
 - [`b284960`](https://github.com/webitel/webitel-ui-sdk/commit/b28496024428f1b3f5010df2ff4539331cec61af) - typescript support *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -337,3 +359,7 @@
 [v24.12.4]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.3...v24.12.4
 [v24.12.5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.4...v24.12.5
 [v24.12.6]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.5...v24.12.6
+[v24.12.7]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.6...v24.12.7
+[v24.12.8]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.7...v24.12.8
+[v24.12.9]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.8...v24.12.9
+[v24.12.10]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.9...v24.12.10
