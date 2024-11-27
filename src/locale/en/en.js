@@ -140,6 +140,7 @@ export default {
     grantor: 'Grantor | Grantors',
     role: 'Role | Roles',
     user: 'User | Users',
+    calendar: 'Calendar | Calendars',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
