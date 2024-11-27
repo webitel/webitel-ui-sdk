@@ -1,5 +1,10 @@
 
 
+## [v24.12.10] - 2024-11-27
+### :sparkles: New Features
+- [`972c6cd`](https://github.com/webitel/webitel-ui-sdk/commit/972c6cda702008cbd2629ea82c688ff463b2685d) - add sources page[WTEL-4754](https://webitel.atlassian.net/browse/WTEL-4754) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.9] - 2024-11-27
 ### :sparkles: New Features
 - [`333f3b8`](https://github.com/webitel/webitel-ui-sdk/commit/333f3b8ee8d364a8148884f71c54946ab2c28524) - add calendar locale[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -357,3 +362,4 @@
 [v24.12.7]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.6...v24.12.7
 [v24.12.8]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.7...v24.12.8
 [v24.12.9]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.8...v24.12.9
+[v24.12.10]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.9...v24.12.10
