@@ -222,6 +222,7 @@ export default {
         [CrmSections.CONTACTS]: 'Контакти',
         [CrmSections.SLAS]: 'SLAS',
         [CrmSections.SOURCES]: 'Джерела звернень',
+        [CrmSections.CONTACT_GROUPS]: 'Групи контактів',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
