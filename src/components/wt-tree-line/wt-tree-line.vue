@@ -3,7 +3,7 @@
     <div class="wt-tree-line__icon-wrapper">
       <wt-icon v-for="n in countLines" :key="n" icon="tree-line" />
       <wt-icon v-if="nestedLevel >= 1" :icon="lastChild ? 'tree-corner' : 'tree-cross'" />
-      <wt-icon-btn :class="{ hidden: !data[children] }" :icon="collapsed ? 'plus' : 'minus'" @click="collapsed = !collapsed"/>
+      <wt-icon-btn v-if="data[children]" :icon="collapsed ? 'plus' : 'minus'" @click="collapsed = !collapsed"/>
     </div>
     <p @click="selectElement" class="wt-tree-line__label">{{ label }} nextElement = {{ nextElement }}</p>
   </div>
@@ -28,6 +28,7 @@
 import { computed, ref } from "vue";
 import WtIconBtn from "../wt-icon-btn/wt-icon-btn.vue";
 import WtExpansionPanel from "../wt-expansion-panel/wt-expansion-panel.vue";
+import type { WtTreeNestedIcons } from "./types/wt-tree-nested-icons.ts";
 
 const emit = defineEmits<{
   (e: 'select', data: any): void
@@ -40,6 +41,7 @@ const props = withDefaults(defineProps<{
   children?: string,
   nestedLevel?: number
   lastChild?: boolean
+  nestedIcons?: WtTreeNestedIcons[]
   nextElement?: boolean
 }>(), {
   nestedLevel: 0,
