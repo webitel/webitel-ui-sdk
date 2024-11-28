@@ -1,5 +1,10 @@
 
 
+## [v24.12.11] - 2024-11-28
+### :sparkles: New Features
+- [`32c7669`](https://github.com/webitel/webitel-ui-sdk/commit/32c7669136e4d0fef396e092ac2700b0fe672a95) - add contact groups page[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.10] - 2024-11-27
 ### :sparkles: New Features
 - [`972c6cd`](https://github.com/webitel/webitel-ui-sdk/commit/972c6cda702008cbd2629ea82c688ff463b2685d) - add sources page[WTEL-4754](https://webitel.atlassian.net/browse/WTEL-4754) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -363,3 +368,4 @@
 [v24.12.8]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.7...v24.12.8
 [v24.12.9]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.8...v24.12.9
 [v24.12.10]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.9...v24.12.10
+[v24.12.11]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.10...v24.12.11
