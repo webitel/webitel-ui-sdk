@@ -28,6 +28,7 @@
     >
       <div
         class="wt-expansion-panel-body"
+        :style="`background-color:${background}`"
       >
         <slot />
       </div>
@@ -47,6 +48,10 @@ const props = defineProps({
   collapsed: {
     type: Boolean,
     default: false,
+  },
+  background: {
+    type: String,
+    default: 'var(--wt-expansion-panel-content-background-color)',
   },
   hideTitle: {
     type: Boolean,
@@ -113,7 +118,6 @@ watch(
 
   .wt-expansion-panel-body {
     color: var(--wt-expansion-panel-content-text-color);
-    background-color: var(--wt-expansion-panel-content-background-color);
   }
 
   .wt-expansion-panel-actions {

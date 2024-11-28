@@ -5,18 +5,22 @@ import serviceJson from './service.json';
 import WtTree from './components/wt-tree/wt-tree.vue';
 
 const data = ref(serviceJson.items);
-
-const logElement = (event) => {
-  console.log('event', event)
-}
+const selectedElement = ref("43")
 </script>
 
 <template>
   <div
     class="playground"
-    style="background: var(--content-wrapper-color);"
   >
-    <wt-tree :data="data" item-label="name" children="service" @select="logElement"></wt-tree>
+    selectedElement {{ selectedElement }}
+    <wt-tree
+      v-model="selectedElement"
+      :data="data"
+      item-label="name"
+      item-data="id"
+      children="service"
+      style="height: 420px"
+    ></wt-tree>
   </div>
 </template>
 
