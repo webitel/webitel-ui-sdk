@@ -137,6 +137,12 @@ onMounted(() => {
     padding: 0 var(--spacing-2xs);
     border-radius: var(--border-radius);
     color: var(--wt-tree-item-on);
+    transition: var(--transition);
+
+    &:hover {
+      background: var(--wt-tree-item-hover);
+      color: var(--wt-tree-item-hover-on);
+    }
 
     &.active {
       background: var(--wt-tree-item-active);

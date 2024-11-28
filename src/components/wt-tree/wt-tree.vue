@@ -21,8 +21,8 @@ import WtTreeLine from "../wt-tree-line/wt-tree-line.vue";
 withDefaults(defineProps<{
   modelValue: null | any,
   data: any[],
-  itemLabel?: string | undefined,
-  itemData?: string | undefined,
+  itemLabel?: string,
+  itemData?: string,
   children?: string
 }>(), {
   children: 'children'
