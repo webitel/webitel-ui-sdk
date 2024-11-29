@@ -223,6 +223,7 @@ export default {
         [CrmSections.CONTACTS]: 'Contacts',
         [CrmSections.SLAS]: 'SLAS',
         [CrmSections.SOURCES]: 'Case sources',
+        [CrmSections.CONTACT_GROUPS]: 'Contact groups',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
