@@ -23,32 +23,31 @@
       <wt-icon v-if="isSelected" icon="chat-message-status-sent" />
     </div>
   </div>
-  <wt-expansion-panel
-    background="transparent"
-    hide-title
-    :collapsed="collapsed"
-  >
-    <wt-tree-line
-      v-for="(child, index) in data[children]"
-      :model-value="modelValue"
-      :key="index"
-      :data="child"
-      :children="children"
-      :item-label="itemLabel"
-      :item-data="itemData"
-      :nested-level="nestedLevel + 1"
-      :next-element="!!data[children][index+1]"
-      :nested-icons="displayIcons"
-      :last-child="index === data[children].length - 1"
-      @openParent="onOpenParent"
-      @update:model-value="emit('update:modelValue', $event)"
-    />
-  </wt-expansion-panel>
+  <wt-expand-transition v-show="!collapsed">
+    <div>
+      <wt-tree-line
+        v-for="(child, index) in data[children]"
+        :model-value="modelValue"
+        :key="index"
+        :data="child"
+        :children="children"
+        :item-label="itemLabel"
+        :item-data="itemData"
+        :nested-level="nestedLevel + 1"
+        :next-element="!!data[children][index+1]"
+        :nested-icons="displayIcons"
+        :last-child="index === data[children].length - 1"
+        @openParent="onOpenParent"
+        @update:model-value="emit('update:modelValue', $event)"
+      />
+    </div>
+  </wt-expand-transition>
 </template>
 
 <script setup lang="ts">
 import deepEqual from 'deep-equal';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 import type { WtTreeNestedIcons } from './types/wt-tree-nested-icons.ts';
 
 const emit = defineEmits<{
@@ -129,6 +128,15 @@ onMounted(() => {
     openParent();
   }
 });
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (isSelected.value) {
+      openParent();
+    }
+  },
+);
 </script>
 
 <style lang="scss">

@@ -1,12 +1,24 @@
 <template>
   <p>Selected element: {{ selectedElement }}</p>
-  <wt-tree
+  <div style="display: flex; gap: 16px;">
+    <wt-tree
       v-model="selectedElement"
+      style="height: 300px; flex: 0 0 45%"
       :data="data"
       item-label="name"
       item-data="name"
       children="service"
-  ></wt-tree>
+    ></wt-tree>
+    <wt-tree
+      v-model="selectedElement"
+      style="height: 300px; flex: 0 0 45%"
+      :data="data"
+      mode="list"
+      item-label="name"
+      item-data="name"
+      children="service"
+    ></wt-tree>
+  </div>
 </template>
 
 <script setup>

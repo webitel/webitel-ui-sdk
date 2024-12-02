@@ -1,11 +1,13 @@
 <template>
   <p>Selected element: {{ selectedElement }}</p>
   <wt-tree
-      v-model="selectedElement"
-      :data="data"
-      item-label="name"
-      item-data="name"
-      children="service"
+    v-model="selectedElement"
+    style="height: 350px"
+    :data="data"
+    mode="list"
+    item-label="name"
+    item-data="name"
+    children="service"
   ></wt-tree>
 </template>
 
