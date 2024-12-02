@@ -51,7 +51,7 @@ const props = defineProps({
   hideTitle: {
     type: Boolean,
     default: false,
-  }
+  },
 });
 
 const emit = defineEmits(['opened', 'closed']);

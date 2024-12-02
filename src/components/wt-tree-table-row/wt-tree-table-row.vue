@@ -1,8 +1,6 @@
 <script setup>
-import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
-import WtExpansionPanel from '../wt-expansion-panel/wt-expansion-panel.vue';
 import { computed, ref } from 'vue';
-import WtButton from '../wt-button/wt-button.vue';
+import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
 
 const props = defineProps({
@@ -18,7 +16,7 @@ const props = defineProps({
   },
   selectable: {
     type: Boolean,
-    default: false
+    default: false,
   },
   columnsStyle: {
     type: String,
@@ -40,58 +38,57 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-})
+});
 
-defineEmits(['handleSelection'])
+defineEmits(['handleSelection']);
 
-const collapsed = ref(true)
+const collapsed = ref(true);
 const lineCount = computed(() => {
-  if(props.nestedLevel <= 1) return 0
+  if (props.nestedLevel <= 1) return 0;
 
-  return props.nestedLevel - 1
-})
+  return props.nestedLevel - 1;
+});
 </script>
 
 <template>
   <tr
-    :class="`wt-table__tr__${row.id || dataKey} wt-tree-table-row`"
-    :style="[`--child-space:calc(var(--spacing-sm)*${nestedLevel})`, `--nested-level:${nestedLevel}`, columnsStyle]"
-    class="wt-table__tr wt-table__tr__body"
+    :class="`wt-tree-table__tr__${row.id || dataKey} wt-tree-table-row`"
+    :style="[`--child-space:calc(var(--spacing-sm)*${nestedLevel})`, `--nested-level:${nestedLevel}`]"
+    class="wt-tree-table__tr wt-tree-table__tr__body"
   >
-    <td
-      v-if="selectable"
-      class="wt-table__td wt-table__td--checkbox"
-    >
-      <wt-icon-btn v-for="n in lineCount" :key="n" icon="tree-line" class="wt-tree-table-row__tree-icon"></wt-icon-btn>
-      <wt-icon-btn v-if="nestedLevel >= 1" icon="tree-cross" class="wt-tree-table-row__tree-icon"></wt-icon-btn>
-      <wt-checkbox
-          :selected="_selected.includes(row)"
-          @change="$emit('handleSelection', {
-        row,
-        select: $event
-      })"
-      />
-      <wt-icon-btn class="wt-tree-table-row__show-button" :class="{'hidden': !row[children]}" :icon="collapsed ? 'plus' : 'minus'" @click="collapsed = !collapsed"></wt-icon-btn>
-    </td>
-
     <td
       v-for="(col, headerKey) of dataHeaders"
       :key="headerKey"
-      class="wt-table__td"
+      class="wt-tree-table__td"
     >
-      <div>{{ row[col.value] }}</div>
-      <slot
-        :index="dataKey"
-        :item="row"
-        :name="col.value"
-      >
-        <div>{{ row[col.value] }}</div>
-      </slot>
+      <div class="wt-tree-table__td__content">
+        <div v-if="headerKey === 0" class="wt-tree-table__td__icon-wrapper">
+          <wt-icon-btn v-for="n in lineCount" :key="n" icon="tree-line1" class="wt-tree-table-row__tree-icon"></wt-icon-btn>
+          <wt-icon-btn v-if="nestedLevel >= 1" icon="tree-cross1" class="wt-tree-table-row__tree-icon"></wt-icon-btn>
+          <wt-icon-btn v-if="!row[children]" class="wt-tree-table-row__show-button" :class="{'hidden': !row[children]}" :icon="collapsed ? 'plus' : 'minus'" @click="collapsed = !collapsed"></wt-icon-btn>
+          <wt-checkbox
+              v-if="selectable"
+              :selected="_selected.includes(row)"
+              @change="$emit('handleSelection', {
+        row,
+        select: $event
+      })"
+          />
+          <wt-icon-btn v-if="row[children]" class="wt-tree-table-row__show-button" :icon="collapsed ? 'plus' : 'minus'" @click="collapsed = !collapsed"></wt-icon-btn>
+        </div>
+        <slot
+          :index="dataKey"
+          :item="row"
+          :name="col.value"
+        >
+          <div>{{ row[col.value] }}</div>
+        </slot>
+      </div>
     </td>
 
     <td
         v-if="gridActions"
-        class="wt-table__td__actions"
+        class="wt-tree-table__td__actions"
     >
       <slot
         :index="dataKey"
@@ -100,7 +97,7 @@ const lineCount = computed(() => {
       />
     </td>
   </tr>
-  <wt-expansion-panel :collapsed="collapsed" hideTitle>
+  <template v-if="!collapsed">
     <wt-tree-table-row
         v-for="childRow in row[children]"
         :key="childRow.id"
@@ -131,19 +128,36 @@ const lineCount = computed(() => {
         </slot>
       </template>
     </wt-tree-table-row>
-  </wt-expansion-panel>
+  </template>
 </template>
 
 <style lang="scss" scoped>
-//.wt-tree-table-row {
-//  &__tree-icon {
-//    flex-shrink: 0;
-//  }
-//}
+@import '../../../src/css/main.scss';
 
-.wt-table__td--checkbox {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+.wt-tree-table__td {
+  @extend %typo-body-1;
+  height: fit-content;
+  min-height: var(--table-min-height);
+  padding: var(--spacing-xs);
+  word-break: break-all;
+  overflow-wrap: break-word;
+
+  &__actions {
+    //display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: var(--spacing-xs);
+  }
+
+  &__icon-wrapper {
+    display: flex;
+    margin-right: var(--spacing-xs);
+    align-items: flex-start;
+  }
+
+  &__content {
+    display: flex;
+    align-items: flex-start;
+  }
 }
 </style>
