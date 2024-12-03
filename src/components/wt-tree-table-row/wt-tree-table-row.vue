@@ -52,7 +52,7 @@ const lineCount = computed(() => {
 
 <template>
   <tr
-    :class="`wt-tree-table__tr__${row.id || dataKey} wt-tree-table-row`"
+    :class="[`wt-tree-table__tr__${row.id || dataKey} wt-tree-table-row`, { 'wt-tree-table-row--secondary': dataKey % 2 }]"
     :style="[`--child-space:calc(var(--spacing-sm)*${nestedLevel})`, `--nested-level:${nestedLevel}`]"
     class="wt-tree-table__tr wt-tree-table__tr__body"
   >
@@ -90,17 +90,21 @@ const lineCount = computed(() => {
         v-if="gridActions"
         class="wt-tree-table__td__actions"
     >
-      <slot
-        :index="dataKey"
-        :item="row"
-        name="actions"
-      />
+      <div class="wt-tree-table__td__content">
+        <slot
+          :index="dataKey"
+          :item="row"
+          name="actions"
+        />
+      </div>
     </td>
   </tr>
+
   <template v-if="!collapsed">
     <wt-tree-table-row
         v-for="childRow in row[children]"
         :key="childRow.id"
+        :dataKey="dataKey"
         :data-headers="dataHeaders"
         :row="childRow"
         :columns-style="columnsStyle"
@@ -113,19 +117,21 @@ const lineCount = computed(() => {
     })"
         :nestedLevel="nestedLevel + 1"
     >
-      <template
-          v-for="(col, headerKey) of dataHeaders"
-          :key="headerKey"
-          #[col.value]
-      >
+      <template v-for="(col, headerKey) of dataHeaders" :key="headerKey" #[col.value]="{ item }">
         <slot
-            :index="headerKey"
-            :item="childRow"
-            :name="`${col.value}-child`"
+          :index="dataKey"
+          :item="item"
+          :name="col.value"
         >
-          <div>{{ childRow[col.value]  }}</div>
-          <strong>{{ col.value }}</strong>
+          <div>{{ item[col.value] }}</div>
         </slot>
+      </template>
+      <template #actions="{ item }">
+        <slot
+          :index="dataKey"
+          :item="item"
+          name="actions"
+        />
       </template>
     </wt-tree-table-row>
   </template>
@@ -158,6 +164,11 @@ const lineCount = computed(() => {
   &__content {
     display: flex;
     align-items: flex-start;
+    text-wrap: nowrap;
   }
+}
+
+.wt-tree-table-row--secondary {
+  background: var(--wt-table-zebra-color)
 }
 </style>

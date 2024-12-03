@@ -149,7 +149,7 @@ const dataHeaders = ref([
   {
     "value": "status",
     "locale": "objects.directory.users.status",
-    "width": "minmax(320px, 1fr)",
+    "width": "320px",
     "field": "presence",
     "sort": null
   },
@@ -178,13 +178,84 @@ const dataHeaders2 = ref([
   {
     "value": "name",
     "locale": "objects.name",
+    "width": "320px",
     "field": "name",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "name",
+    "locale": "objects.name",
+    "width": "320px",
+    "field": "name",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
+    "sort": null
+  },
+  {
+    "value": "code",
+    "locale": "objects.code",
+    "width": "320px",
+    "field": "code",
     "sort": null
   },
   {
     "value": "description",
     "locale": "objects.description",
-    "width": "minmax(320px, 1fr)",
+    "width": "320px",
     "field": "presence",
     "sort": null
   },
@@ -221,7 +292,11 @@ onMounted(() => {
       <template #actions-header>
         Test
       </template>
+      <template #actions="data">
+        actions- {{ data.item.name }}
+      </template>
       <template #name="data">{{ data.item.name }} + <strong>slot template</strong></template>
+      <template #description="data"><strong>{{ data.item.name }}</strong></template>
     </wt-tree-table>
     <div style="display: flex; gap: 8px; align-items: center">
       <div>
