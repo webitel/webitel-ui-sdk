@@ -61,10 +61,11 @@ export const useCardComponent = (params) => {
     }
   }
 
-  function initialize(){
-    onMounted(() => {
-      initializeCard();
-    });
+  async function initialize(afterInitializeCard) {
+    await initializeCard();
+    if (typeof afterInitializeCard === 'function') {
+      await afterInitializeCard();
+    }
 
     onUnmounted(() => {
       resetState();
