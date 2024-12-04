@@ -61,11 +61,10 @@ export const useCardComponent = (params) => {
     }
   }
 
-  async function initialize(afterInitializeCard) {
-    await initializeCard();
-    if (typeof afterInitializeCard === 'function') {
-      await afterInitializeCard();
-    }
+  function initialize(){
+    onMounted(() => {
+      initializeCard();
+    });
 
     onUnmounted(() => {
       resetState();
@@ -82,6 +81,7 @@ export const useCardComponent = (params) => {
     saveText,
 
     save,
+    initializeCard,
     initialize,
   }
 }
