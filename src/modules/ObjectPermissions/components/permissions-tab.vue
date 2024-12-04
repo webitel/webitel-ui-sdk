@@ -1,19 +1,17 @@
 <template>
   <section
     v-if="access.read"
-    class="permissions-tab"
+    class="table-page"
   >
-    <header class="content-header">
-      <h3 class="content-title">
-        {{ $t('access.operations') }}
+    <header class="table-title">
+      <h3 class="table-title__title">
+        {{ t('access.operations') }}
       </h3>
-      <div class="content-header__actions-wrap">
-        <!--        TODO replace wt-table-actions -->
-        <!--        <wt-table-actions-->
-        <!--          :icons="['refresh']"-->
-        <!--          @input="(event) => event === 'refresh' && loadData()"-->
-        <!--        >-->
-        <!--        </wt-table-actions>-->
+      <div class="table-title__actions-wrap">
+        <wt-action-bar
+          :include="[IconAction.REFRESH]"
+          @click:refresh="loadData"
+        />
         <role-popup
           v-if="props.access.add"
           :namespace="tableNamespace"
@@ -23,81 +21,66 @@
 
     <wt-loader v-show="isLoading" />
 
-    <!--    TODO -->
-    <!--    <wt-dummy-->
-    <!--      v-if="dummy && !isLoading"-->
-    <!--      :dark-mode="darkMode"-->
-    <!--      :src="dummy.src"-->
-    <!--      :text="dummy.text && t(dummy.text)"-->
-    <!--      class="dummy-wrapper"-->
-    <!--    />-->
+    <wt-empty
+      v-show="showEmpty"
+      :image="imageEmpty"
+      :text="textEmpty"
+    />
 
-    <div class="table-wrapper">
-      <div
-        v-if="dataList.length && !isLoading"
-        style="display:contents;"
-      >
-        <!--        TODO -->
-        <!--        <transition-slide-->
-        <!--          :offset="{-->
-        <!--              enter: ['-5%', 0],-->
-        <!--              leave: [0, 0]-->
-        <!--            }"-->
-        <!--          duration="200"-->
-        <!--          mode="out-in"-->
-        <!--          appear-->
-        <!--        >-->
-        <wt-table
-          :data="localizedDataList"
-          :grid-actions="access.edit"
-          :headers="headers"
-          :selectable="false"
-          sortable
-          @sort="sort"
-        >
-          <template #grantee="{ item }">
-            <role-column
-              :role="item.grantee"
-            />
-          </template>
+    <div class="table-section__table-wrapper">
+      <div>
+        <wt-table-transition v-if="dataList.length && !isLoading">
+          <wt-table
+            :data="localizedDataList"
+            :grid-actions="access.edit"
+            :headers="headers"
+            :selectable="false"
+            sortable
+            @sort="sort"
+          >
+            <template #grantee="{ item }">
+              <role-column
+                :role="item.grantee"
+              />
+            </template>
 
-          <template #read="{ item }">
-            <wt-select
-              :clearable="false"
-              :disabled="!access.edit"
-              :options="accessOptions"
-              :value="item.access.r"
-              @input="changeAccessMode({ item, ruleName: 'r', mode: $event })"
-            />
-          </template>
+            <template #read="{ item }">
+              <wt-select
+                :clearable="false"
+                :disabled="!access.edit"
+                :options="accessOptions"
+                :value="item.access.r"
+                @input="changeAccessMode({ item, ruleName: 'r', mode: $event })"
+              />
+            </template>
 
-          <template #edit="{ item }">
-            <wt-select
-              :clearable="false"
-              :disabled="!access.edit"
-              :options="accessOptions"
-              :value="item.access.w"
-              @input="changeAccessMode({ item, ruleName: 'w', mode: $event })"
-            />
-          </template>
+            <template #edit="{ item }">
+              <wt-select
+                :clearable="false"
+                :disabled="!access.edit"
+                :options="accessOptions"
+                :value="item.access.w"
+                @input="changeAccessMode({ item, ruleName: 'w', mode: $event })"
+              />
+            </template>
 
-          <template #delete="{ item }">
-            <wt-select
-              :clearable="false"
-              :disabled="!access.edit"
-              :options="accessOptions"
-              :value="item.access.d"
-              @input="changeAccessMode({ item, ruleName: 'd', mode: $event })"
-            />
-          </template>
-          <template #actions="{ item }">
-            <wt-icon-action
-              action="delete"
-              @click="changeAccessMode({ item, ruleName: 'r', mode: { id: AccessMode.FORBIDDEN }})"
-            />
-          </template>
-        </wt-table>
-        <!--        </transition-slide>-->
+            <template #delete="{ item }">
+              <wt-select
+                :clearable="false"
+                :disabled="!access.edit"
+                :options="accessOptions"
+                :value="item.access.d"
+                @input="changeAccessMode({ item, ruleName: 'd', mode: $event })"
+              />
+            </template>
+            <template #actions="{ item }">
+              <wt-icon-action
+                action="delete"
+                @click="changeAccessMode({ item, ruleName: 'r', mode: { id: AccessMode.FORBIDDEN }})"
+              />
+            </template>
+          </wt-table>
+        </wt-table-transition>
       </div>
       <filter-pagination
         :namespace="filtersNamespace"
@@ -108,8 +91,6 @@
 </template>
 
 <script setup>
-// TODO: класи, даммі, транзішен таблички. WTEL-3392
-
 import { computed, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
@@ -119,6 +100,8 @@ import { useTableFilters } from '../../Filters/composables/useTableFilters.js';
 import RoleColumn from '../_internals/components/permissions-role-row.vue';
 import RolePopup from '../_internals/components/permissions-tab-role-popup.vue';
 import { AccessMode } from '../_internals/enums/AccessMode.enum.js';
+import IconAction from '../../../enums/IconAction/IconAction.enum.js';
+import { useTableEmpty } from '../../../modules/TableComponentModule/composables/useTableEmpty.js';
 
 const props = defineProps({
   /**
@@ -154,7 +137,7 @@ const {
   isNext,
   error,
 
-  loadData, // TODO: use for refresh button
+  loadData,
   sort,
   onFilterEvent,
 } = useTableStore(`${props.namespace}/permissions`);
@@ -197,11 +180,11 @@ onUnmounted(() => {
   flushSubscribers();
 });
 
-// TODO
-// const { dummy } = useDummy({
-//   namespace,
-//   hiddenText: true,
-// });
+const {
+  showEmpty,
+  image: imageEmpty,
+  text: textEmpty,
+} = useTableEmpty({ dataList, error, isLoading });
 
 const accessOptions = computed(() => {
   return Object.values(AccessMode).map((mode) => ({
