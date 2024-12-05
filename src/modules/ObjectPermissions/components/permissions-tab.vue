@@ -29,7 +29,8 @@
 
     <div class="table-section__table-wrapper">
       <div>
-        <wt-table-transition v-if="dataList.length && !isLoading">
+        <wt-table-transition
+          v-if="dataList.length && !isLoading">
           <wt-table
             :data="localizedDataList"
             :grid-actions="access.edit"
