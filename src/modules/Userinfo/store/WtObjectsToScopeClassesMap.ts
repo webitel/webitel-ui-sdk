@@ -1,0 +1,40 @@
+import WtObject from './WtObjects.enum';
+import { ScopeClasses } from './backend/Scope';
+
+export default interface IWtObjectToScopeClassesMap {
+  [WtObject.USERS]: ScopeClasses.USERS;
+  [WtObject.DEVICES]: ScopeClasses.DEVICES;
+  [WtObject.FLOW_SCHEMA]: ScopeClasses.FLOW;
+  [WtObject.DIALPLANS]: ScopeClasses.ACR_ROUTING;
+  [WtObject.GATEWAYS]: ScopeClasses.GATEWAYS;
+  [WtObject.CHATPLANS]: ScopeClasses.ACR_CHAT_PLAN;
+  [WtObject.CHAT_GATEWAYS]: ScopeClasses.CHATS;
+  [WtObject.AGENT_SKILLS]: ScopeClasses.DICTIONARIES;
+  [WtObject.BUCKETS]: ScopeClasses.DICTIONARIES;
+  [WtObject.COMMUNICATION_TYPES]: ScopeClasses.DICTIONARIES;
+  [WtObject.AGENT_STATUSES]: ScopeClasses.DICTIONARIES;
+  [WtObject.PAUSE_TEMPLATES]: ScopeClasses.DICTIONARIES;
+  [WtObject.LISTS]: ScopeClasses.CC_LIST;
+  [WtObject.CALENDARS]: ScopeClasses.CALENDARS;
+  [WtObject.MEDIA_FILES]: ScopeClasses.MEDIA_FILE;
+  [WtObject.SINGLE_SIGN_ON]: ScopeClasses.SINGLE_SIGN_ON;
+  [WtObject.AGENTS]: ScopeClasses.CC_AGENT;
+  [WtObject.TEAMS]: ScopeClasses.CC_TEAM;
+  [WtObject.RESOURCES]: ScopeClasses.CC_RESOURCE;
+  [WtObject.RESOURCE_GROUPS]: ScopeClasses.CC_RESOURCE_GROUP;
+  [WtObject.QUEUES]: ScopeClasses.CC_QUEUE;
+  [WtObject.STORAGE]: ScopeClasses.STORAGE_PROFILE;
+  [WtObject.COGNITIVE_PROFILES]: ScopeClasses.COGNITIVE_PROFILE;
+  [WtObject.EMAIL_PROFILES]: ScopeClasses.EMAIL_PROFILE;
+  [WtObject.IMPORT_CSV]: ScopeClasses.IMPORT_TEMPLATE;
+  [WtObject.TRIGGERS]: ScopeClasses.TRIGGER;
+  [WtObject.ROLES]: ScopeClasses.ROLES;
+  [WtObject.SHIFT_TEMPLATES]: null;
+  [WtObject.LICENSES]: null;
+  [WtObject.LOCATIONS]: null;
+  [WtObject.WORKING_CONDITIONS]: null;
+  [WtObject.OBJECTS]: null;
+  [WtObject.CHANGE_LOG]: null;
+  [WtObject.CONFIGURATION]: null;
+  [WtObject.GLOBAL_VARIABLES]: null;
+}
