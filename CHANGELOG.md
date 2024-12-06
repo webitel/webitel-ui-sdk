@@ -1,5 +1,15 @@
 
 
+## [v24.12.15] - 2024-12-06
+### :sparkles: New Features
+- [`e8e17bd`](https://github.com/webitel/webitel-ui-sdk/commit/e8e17bdd2368db9c4d1cf56b8f7e6d19918d0825) - add wt-selection-popup[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`2c30ec3`](https://github.com/webitel/webitel-ui-sdk/commit/2c30ec31915cddd8f3c0b10072f7bef58ea918bd) - docs and delete shown prop[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`afe77f0`](https://github.com/webitel/webitel-ui-sdk/commit/afe77f02cd1b227307029cf7c9ca054bfa1c1d99) - merge master[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`0d5bb81`](https://github.com/webitel/webitel-ui-sdk/commit/0d5bb8171d896b0bb78ec6679be93819baa958b9) - doc[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.14] - 2024-12-06
 ### :bug: Bug Fixes
 - [`6bf7c96`](https://github.com/webitel/webitel-ui-sdk/commit/6bf7c9606ce59fd584f192268dc000d54f8cb61d) - node version in package.json *(commit by [@Lera24](https://github.com/Lera24))*
@@ -395,3 +405,4 @@
 [v24.12.12]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.11...v24.12.12
 [v24.12.13]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.12...v24.12.13
 [v24.12.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.13...v24.12.14
+[v24.12.15]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.14...v24.12.15
