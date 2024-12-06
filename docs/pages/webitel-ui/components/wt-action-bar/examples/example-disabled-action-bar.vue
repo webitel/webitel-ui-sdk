@@ -1,6 +1,6 @@
 <template>
   <wt-action-bar
-    :actions="tableActionsOrder"
+    :include="tableActionsOrder"
     disabled:add="true"
     disabled:delete="true"
     disabled:refresh="true"

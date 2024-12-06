@@ -1,5 +1,18 @@
 
 
+## [v24.12.13] - 2024-12-03
+### :bug: Bug Fixes
+- [`75bd888`](https://github.com/webitel/webitel-ui-sdk/commit/75bd888be9e2dbf9966fb1301766fb79e611781a) - conflict[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`22905da`](https://github.com/webitel/webitel-ui-sdk/commit/22905dad808ba29286c4e8d844d514c5414d3e23) - update package.json version[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`8f1ef4c`](https://github.com/webitel/webitel-ui-sdk/commit/8f1ef4c27a81a23c835549bbb7e60de5a7325644) - conflict[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`dbac3aa`](https://github.com/webitel/webitel-ui-sdk/commit/dbac3aa98806754573ce233e85140641b2f046b7) - delete actions prop in wt-action-bar[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.12] - 2024-11-29
+### :bug: Bug Fixes
+- [`967e35f`](https://github.com/webitel/webitel-ui-sdk/commit/967e35fd9dc274ee0e388d7f375fe9c2859a38cc) - returned next value from agent chats api [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.12.11] - 2024-11-28
 ### :sparkles: New Features
 - [`32c7669`](https://github.com/webitel/webitel-ui-sdk/commit/32c7669136e4d0fef396e092ac2700b0fe672a95) - add contact groups page[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -369,3 +382,5 @@
 [v24.12.9]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.8...v24.12.9
 [v24.12.10]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.9...v24.12.10
 [v24.12.11]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.10...v24.12.11
+[v24.12.12]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.11...v24.12.12
+[v24.12.13]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.12...v24.12.13

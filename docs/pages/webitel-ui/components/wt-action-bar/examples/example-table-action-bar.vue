@@ -1,7 +1,6 @@
 <template>
   <wt-action-bar
-    :actions="tableActionsOrder"
-    mode="table"
+    :include="tableActionsOrder"
   />
 </template>
 
