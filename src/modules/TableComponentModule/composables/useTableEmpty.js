@@ -83,7 +83,7 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
     if (!emptyState?.value) return null;
 
     if (error.value) return EmptyCause.ERROR;
-    if (filters.value) {
+    if (filters?.value) {
       const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
       const filtersApplied = Object.entries(filters.value).some(
         ([filterValue, filterName]) =>
