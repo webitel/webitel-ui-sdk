@@ -1,5 +1,15 @@
 
 
+## [v24.12.14] - 2024-12-06
+### :bug: Bug Fixes
+- [`6bf7c96`](https://github.com/webitel/webitel-ui-sdk/commit/6bf7c9606ce59fd584f192268dc000d54f8cb61d) - node version in package.json *(commit by [@Lera24](https://github.com/Lera24))*
+- [`b44baed`](https://github.com/webitel/webitel-ui-sdk/commit/b44baed54b04007e1adee2dbca08e1f5e51fc7ad) - permissions-tab component[WTEL-3392](https://webitel.atlassian.net/browse/WTEL-3392) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`68cce7c`](https://github.com/webitel/webitel-ui-sdk/commit/68cce7c36f006868b51c1bfead4157f250abef6b) - doc[WTEL-3392](https://webitel.atlassian.net/browse/WTEL-3392) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :recycle: Refactors
+- [`a29f08c`](https://github.com/webitel/webitel-ui-sdk/commit/a29f08c548f7a49d7336c8e112ef222a5079382a) - permission module[WTEL-3392](https://webitel.atlassian.net/browse/WTEL-3392) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.13] - 2024-12-03
 ### :bug: Bug Fixes
 - [`75bd888`](https://github.com/webitel/webitel-ui-sdk/commit/75bd888be9e2dbf9966fb1301766fb79e611781a) - conflict[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -384,3 +394,4 @@
 [v24.12.11]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.10...v24.12.11
 [v24.12.12]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.11...v24.12.12
 [v24.12.13]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.12...v24.12.13
+[v24.12.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.13...v24.12.14
