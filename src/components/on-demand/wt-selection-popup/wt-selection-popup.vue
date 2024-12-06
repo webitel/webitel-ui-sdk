@@ -1,6 +1,5 @@
 <template>
   <wt-popup
-    :shown="shown"
     class="wt-selection-popup"
     overflow
     size="sm"
@@ -31,6 +30,11 @@
             <h4 class="wt-selection-popup__item-header">
               {{ option.title }}
             </h4>
+            <p
+              v-if="option.description"
+              class="popup-options__item-text">
+              {{ option.description }}
+            </p>
             <wt-tooltip>
               <template #activator>
                 <wt-icon-btn
@@ -69,17 +73,9 @@
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
-  /**
-   * value determines whether the popup is displayed
-   */
-
-  shown: {
-    type: Boolean,
-    default: false,
-  },
 
   /**
-   * Popup titlt
+   * Popup title
    */
 
   title: {
@@ -87,7 +83,7 @@ const props = defineProps({
   },
 
   /**
-   * Should have following schema: `{ value: '', title: '', description: ''}`
+   * Selected value. The scheme repeats attribute `option` from `options`
    */
 
   selected: {
@@ -95,7 +91,7 @@ const props = defineProps({
   },
 
   /**
-   * All displayed values
+   * All displayed values. Should have following schema: `{ value: '', title: '', description: '', icon: ''}`
    */
 
   options: {
