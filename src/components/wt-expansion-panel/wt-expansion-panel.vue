@@ -4,8 +4,8 @@
     class="wt-expansion-panel"
   >
     <div
-      class="wt-expansion-panel-header"
       v-if="!hideTitle"
+      class="wt-expansion-panel-header"
       tabindex="0"
       @click="toggle"
       @keypress.enter="toggle"

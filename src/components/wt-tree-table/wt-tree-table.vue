@@ -19,8 +19,8 @@
           <div class="wt-tree-table__th__content">
             <div v-if="key === 0 && selectable">
               <wt-checkbox
-                  :selected="isAllSelected"
-                  @change="selectAll"
+                :selected="isAllSelected"
+                @change="selectAll"
               />
             </div>
             <div class="wt-tree-table__th__text">
@@ -58,7 +58,6 @@
         :dataKey="dataKey "
         :data-headers="dataHeaders"
         :row="row"
-        :columns-style="columnsStyle"
         :selectable="selectable"
         :children="children"
         :_selected="_selected"
@@ -158,6 +157,10 @@ const emit = defineEmits(['sort', 'update:selected']);
 const slots = useSlots();
 const { t } = useI18n();
 
+const checkHasChildItems = (item) => {
+  return item[props.children] && Array.isArray(item[props.children]);
+};
+
 function getSelectedValue(items) {
   const selected = [];
 
@@ -166,7 +169,7 @@ function getSelectedValue(items) {
       selected.push(item);
     }
 
-    if (item[props.children] && Array.isArray(item[props.children])) {
+    if (checkHasChildItems(item)) {
       item[props.children].forEach(traverse);
     }
   }
@@ -182,7 +185,7 @@ const getAllNestedElements = (item) => {
   function traverse(item) {
     nested.push(item);
 
-    if (item[props.children] && Array.isArray(item[props.children])) {
+    if (checkHasChildItems(item)) {
       item[props.children].forEach(traverse);
     }
   }
@@ -218,36 +221,7 @@ const dataHeaders = computed(() => {
     });
 });
 
-// const columnsStyleHeader = computed(() => {
-//   let gridTemplateColumns = '';
-//   if (props.selectable) gridTemplateColumns += '24px '; // checkbox
-//
-//   const defaultColumnWidth = 'minmax(140px, 1fr)';
-//   dataHeaders.value.forEach((header) => {
-//     gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
-//   });
-//
-//   if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
-//   return `grid-template-columns: ${gridTemplateColumns}`;
-// });
-
-const columnsStyle = computed(() => {
-  let gridTemplateColumns = '';
-  // if (props.selectable) gridTemplateColumns += 'calc(48px + var(--child-space)) '; // checkbox
-  if (props.selectable) gridTemplateColumns += 'auto'; // checkbox
-
-  const defaultColumnWidth = 'minmax(140px, 1fr)';
-  dataHeaders.value.forEach((header) => {
-    gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
-  });
-
-  if (props.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
-  return `grid-template-columns: ${gridTemplateColumns}`;
-});
-
 const isTableFooter = computed(() => {
-  console.log('slots', slots);
-  console.log('Object.keys(slots)', Object.keys(slots));
   return Object.keys(slots).some((slotName) => slotName.includes('-footer'));
 });
 
@@ -269,7 +243,7 @@ const changeSelectItem = (item, selected) => {
   function traverse(item) {
     item._isSelected = selected;
 
-    if (item[props.children] && Array.isArray(item[props.children])) {
+    if (checkHasChildItems(item)) {
       item[props.children].forEach(traverse);
     }
   }
@@ -279,11 +253,7 @@ const changeSelectItem = (item, selected) => {
 
 const selectAll = () => {
   if (props.selected) {
-    if (isAllSelected.value) {
-      emit('update:selected', []);
-    } else {
-      emit('update:selected', [...getAllNestedElements(props.data)]);
-    }
+    emit('update:selected', isAllSelected.value? [] : [...getAllNestedElements(props.data)]);
   } else {
     // for backwards compatibility
 
@@ -310,11 +280,8 @@ const handleSelection = (row, select) => {
       );
     }
   } else {
-    console.log('row', row);
     // for backwards compatibility
     row._isSelected = !row._isSelected;
-
-    console.log('row', row);
   }
 };
 </script>
@@ -351,13 +318,6 @@ const handleSelection = (row, select) => {
 
 }
 
-//.wt-tree-table__tr__head {
-//  border: var(--table-head-border);
-//  border-color: var(--wt-table-head-border-color);
-//  border-radius: var(--border-radius);
-//  background: var(--wt-table-head-background-color);
-//}
-
 .wt-tree-table__th,
 .wt-tree-table__td {
   @extend %typo-body-1;
@@ -368,7 +328,7 @@ const handleSelection = (row, select) => {
   overflow-wrap: break-word;
 
   &__actions {
-    //display: flex;
+    display: flex;
     align-items: flex-start;
     justify-content: flex-end;
     gap: var(--spacing-xs);

@@ -1,3 +1,14 @@
+<template>
+  <wt-tree-table
+    :headers="dataHeaders"
+    :data="services"
+    children="service"
+    selectable
+    sortable
+  >
+  </wt-tree-table>
+</template>
+
 <script setup>
 import { ref } from 'vue';
 import service from './service.json'
@@ -28,14 +39,3 @@ const dataHeaders = ref([
   },
 ])
 </script>
-
-<template>
-  <wt-tree-table
-    :headers="dataHeaders"
-    :data="services"
-    children="service"
-    selectable
-    sortable
-  >
-  </wt-tree-table>
-</template>
