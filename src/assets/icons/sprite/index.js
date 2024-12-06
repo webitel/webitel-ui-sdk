@@ -112,6 +112,7 @@ import messengerWhatsapp from './messenger-whatsapp.svg';
 import meta from './meta.svg';
 import micMuted from './mic-muted.svg';
 import mic from './mic.svg';
+import minus from './minus.svg';
 import microsoft from './microsoft.svg';
 import move from './move.svg';
 import note from './note.svg';
@@ -156,6 +157,9 @@ import stt from './stt.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import ttsDownload from './tts-download.svg';
+import treeLine from './tree-line.svg'
+import treeCorner from './tree-corner.svg'
+import treeCross from './tree-cross.svg'
 import undo from './undo.svg';
 import unpin from './unpin.svg';
 import upload from './upload.svg';
@@ -297,6 +301,7 @@ export default objCamelToKebab({
   micMuted,
   microsoft,
   move,
+  minus,
   note,
   numpad,
   pause,
@@ -331,6 +336,9 @@ export default objCamelToKebab({
   zoomIn,
   zoomOut,
   ttsDownload,
+  treeLine,
+  treeCorner,
+  treeCross,
   stt,
   sttDownload,
   sttSearch,
