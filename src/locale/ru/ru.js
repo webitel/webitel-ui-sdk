@@ -77,6 +77,7 @@ export default {
     step: 'Шаг { count }',
     more: 'Больше',
     read: 'Читать',
+    create: 'Создать',
   },
   vocabulary: {
     language: 'Язык',

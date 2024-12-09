@@ -7,8 +7,8 @@
 
     <wt-popup
       :shown="shown"
-      size="sm"
       overflow
+      size="sm"
       @close="close"
     >
       <template #title>
@@ -24,13 +24,13 @@
       </template>
       <template #actions>
         <wt-button @click="save(grantee)">
-          {{ t('objects.add') }}
+          {{ t('reusable.add') }}
         </wt-button>
         <wt-button
           color="secondary"
           @click="close"
         >
-          {{ t('objects.close') }}
+          {{ t('reusable.close') }}
         </wt-button>
       </template>
     </wt-popup>
