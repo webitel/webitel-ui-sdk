@@ -81,6 +81,7 @@ export const useCardComponent = (params) => {
     saveText,
 
     save,
+    initializeCard,
     initialize,
   }
 }
