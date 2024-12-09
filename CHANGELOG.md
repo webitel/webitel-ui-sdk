@@ -1,5 +1,17 @@
 
 
+## [v24.12.16] - 2024-12-09
+### :sparkles: New Features
+- [`68e5042`](https://github.com/webitel/webitel-ui-sdk/commit/68e5042da187ec4dfc2fb587bef453e728be6d2a) - adding additional initializeCard return [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :bug: Bug Fixes
+- [`8689d62`](https://github.com/webitel/webitel-ui-sdk/commit/8689d624c778158e29c56ffb26f664bd939863da) - useCardComponent composable initialize function changes [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`bd52b70`](https://github.com/webitel/webitel-ui-sdk/commit/bd52b70268a5928fc8a0a41470168bd6219889e7) - trying to fix git action  [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`1d121b2`](https://github.com/webitel/webitel-ui-sdk/commit/1d121b272515f2a63313f77b754afaa04416a614) - version incremented  [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.15] - 2024-12-06
 ### :sparkles: New Features
 - [`e8e17bd`](https://github.com/webitel/webitel-ui-sdk/commit/e8e17bdd2368db9c4d1cf56b8f7e6d19918d0825) - add wt-selection-popup[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -406,3 +418,4 @@
 [v24.12.13]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.12...v24.12.13
 [v24.12.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.13...v24.12.14
 [v24.12.15]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.14...v24.12.15
+[v24.12.16]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.15...v24.12.16
