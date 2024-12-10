@@ -47,14 +47,6 @@ const props = defineProps({
     default: 'table',
     validator: (v) => ['table', 'section'].includes(v),
   },
-  /**
-   * see `IconAction` enum
-   */
-  actions: {
-    type: Array,
-    default: () => [],
-    validator: (v) => v.every((action) => Object.values(IconAction).includes(action)),
-  },
 
   /**
    * Not implemented
@@ -112,7 +104,7 @@ const shownActions = computed(() => {
 
   if(props.exclude.length) return actionsOrder.filter((action) => !props.exclude.includes(action));
 
-  return actionsOrder.filter((action) => props.actions.includes(action));
+  return actionsOrder;
 });
 </script>
 
