@@ -4,7 +4,6 @@
     class="wt-expansion-panel"
   >
     <div
-      v-if="!hideTitle"
       class="wt-expansion-panel-header"
       tabindex="0"
       @click="toggle"
