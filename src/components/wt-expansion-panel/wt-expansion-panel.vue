@@ -1,24 +1,25 @@
 <template>
   <div
-      :class="[`wt-expansion-panel--${props.size}`]"
-      class="wt-expansion-panel"
+    :class="[`wt-expansion-panel--${props.size}`]"
+    class="wt-expansion-panel"
   >
     <div
-        class="wt-expansion-panel-header"
-        tabindex="0"
-        @click="toggle"
-        @keypress.enter="toggle"
+      v-if="!hideTitle"
+      class="wt-expansion-panel-header"
+      tabindex="0"
+      @click="toggle"
+      @keypress.enter="toggle"
     >
       <slot name="title" />
       <div class="wt-expansion-panel-actions">
         <slot
-            name="actions"
-            v-bind="{ open, opened }"
+          name="actions"
+          v-bind="{ open, opened }"
         />
         <wt-icon
-            :class="{ 'wt-expansion-panel-arrow--opened': opened }"
-            class="wt-expansion-panel-arrow"
-            icon="arrow-right"
+          :class="{ 'wt-expansion-panel-arrow--opened': opened }"
+          class="wt-expansion-panel-arrow"
+          icon="arrow-right"
         />
       </div>
     </div>

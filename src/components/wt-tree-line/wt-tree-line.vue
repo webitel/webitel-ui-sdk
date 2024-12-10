@@ -11,7 +11,11 @@
         v-if="nestedLevel >= 1"
         :icon="lastChild ? 'tree-corner' : 'tree-cross'"
       />
-      <wt-icon-btn v-if="data[children]" :icon="collapsed ? 'plus' : 'minus'" @click="collapsed = !collapsed"/>
+      <wt-icon-btn
+        v-if="data[children]"
+        :icon="collapsed ? 'plus' : 'minus'"
+        @click="collapsed = !collapsed"
+      />
     </div>
     <div :class="{ active: isSelected }" class="wt-tree-line__label-wrapper">
       <p

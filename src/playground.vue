@@ -30,6 +30,4 @@ const selectedElement = ref("43")
   min-height: 100vh;
   padding: 90px;
 }
-
-
 </style>

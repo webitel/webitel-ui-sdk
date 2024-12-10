@@ -1,6 +1,9 @@
 <template>
   <div class="wt-tree">
-    <div class="wt-tree__content" v-if="mode === WtTreeMode.TREE">
+    <div
+      v-if="mode === WtTreeMode.TREE"
+      class="wt-tree__content"
+    >
       <wt-tree-line
         v-for="(item, index) in data"
         :model-value="modelValue"
@@ -12,7 +15,10 @@
         @update:model-value="emit('update:modelValue', $event)"
       />
     </div>
-    <div class="wt-tree__content__list" v-if="mode === WtTreeMode.LIST">
+    <div
+      v-if="mode === WtTreeMode.LIST"
+      class="wt-tree__content__list"
+    >
       <span
         v-for="(item, index) in allData"
         :key="index"
@@ -123,15 +129,18 @@ const compareSelectElement = (item: any) => {
   overflow: auto;
 
   &__content {
+    @extend %wt-scrollbar;
+
     display: flex;
     flex-direction: column;
     overflow: auto;
     height: 100%;
     padding-right: var(--spacing-2xs);
-    @extend %wt-scrollbar;
   }
 
   &__content__list {
+    @extend %wt-scrollbar;
+
     display: flex;
     flex-direction: column;
     padding-right: var(--spacing-2xs);
@@ -139,7 +148,6 @@ const compareSelectElement = (item: any) => {
     overflow: auto;
     align-items: flex-start;
     height: 100%;
-    @extend %wt-scrollbar;
   }
 
   &__label-wrapper {
@@ -151,7 +159,6 @@ const compareSelectElement = (item: any) => {
     color: var(--wt-tree-item-on);
     transition: var(--transition);
 
-
     &:hover {
       background: var(--wt-tree-item-hover);
       color: var(--wt-tree-item-hover-on);
@@ -162,7 +169,6 @@ const compareSelectElement = (item: any) => {
       color: var(--wt-tree-item-active-on);
     }
   }
-
 
   &__label-icon {
     flex-shrink: 0;
