@@ -1,5 +1,10 @@
 
 
+## [v24.12.17] - 2024-12-10
+### :sparkles: New Features
+- [`75b822f`](https://github.com/webitel/webitel-ui-sdk/commit/75b822faa06e8b221c369a931cde3aed3480e7ca) - add new params in contacts api[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.16] - 2024-12-09
 ### :sparkles: New Features
 - [`68e5042`](https://github.com/webitel/webitel-ui-sdk/commit/68e5042da187ec4dfc2fb587bef453e728be6d2a) - adding additional initializeCard return [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -419,3 +424,4 @@
 [v24.12.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.13...v24.12.14
 [v24.12.15]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.14...v24.12.15
 [v24.12.16]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.15...v24.12.16
+[v24.12.17]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.16...v24.12.17
