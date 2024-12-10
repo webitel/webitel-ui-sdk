@@ -4,7 +4,6 @@
     class="wt-expansion-panel"
   >
     <div
-      v-if="!hideTitle"
       class="wt-expansion-panel-header"
       tabindex="0"
       @click="toggle"
@@ -45,10 +44,6 @@ const props = defineProps({
     default: 'md',
   },
   collapsed: {
-    type: Boolean,
-    default: false,
-  },
-  hideTitle: {
     type: Boolean,
     default: false,
   },
