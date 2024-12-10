@@ -1,3 +1,11 @@
+<template>
+  <wt-intersection-observer
+    :next="next"
+    :loading="nextLoading"
+    @next="loadNext"
+  />
+</template>
+
 <script setup>
 import { ref } from 'vue';
 
@@ -11,14 +19,6 @@ const loadNext = async () => {
 }
 
 </script>
-
-<template>
-  <wt-intersection-observer
-    :next="next"
-    :loading="nextLoading"
-    @next="loadNext"
-  />
-</template>
 
 <style scoped lang="scss">
 
