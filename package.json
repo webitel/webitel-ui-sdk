@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.16",
+  "version": "24.12.17",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -132,7 +132,7 @@
     "vue-multiselect": "^3.1.0",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.4.5",
-    "webitel-sdk": "^24.8.8",
+    "webitel-sdk": "^24.10.2",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
