@@ -134,15 +134,15 @@ export default {
   }
 
   &--final-status {
-    background: var(--wt-indicator-info-color);
+    background: var(--wt-indicator-final-status-color);
   }
 
   &--other-status {
-    background: var(--wt-indicator-info-color);
+    background: var(--wt-indicator-other-status-color);
   }
 
   &--initial-status {
-    background: var(--wt-indicator-info-color);
+    background: var(--wt-indicator-initial-status-color);
   }
 }
 
