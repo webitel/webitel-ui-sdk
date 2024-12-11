@@ -1,5 +1,16 @@
 
 
+## [v24.12.19] - 2024-12-11
+### :sparkles: New Features
+- [`96eb87f`](https://github.com/webitel/webitel-ui-sdk/commit/96eb87f71c090b25007742337f3d46c1ed334d39) - new colors added for wt-indicator [WTEL-5507] (https://webitel.atlassian.net/browse/WTEL-5507) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :bug: Bug Fixes
+- [`f626e42`](https://github.com/webitel/webitel-ui-sdk/commit/f626e4244000e8fd0b6e36a4a80924876a3388ca) - styles fixed [WTEL-5507] (https://webitel.atlassian.net/browse/WTEL-5507) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`8cce0ff`](https://github.com/webitel/webitel-ui-sdk/commit/8cce0ff8416ca0d68d55202173f35d6b59ff31f7) - version incremented [WTEL-5507] (https://webitel.atlassian.net/browse/WTEL-5507) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.18] - 2024-12-11
 ### :sparkles: New Features
 - [`86c61d7`](https://github.com/webitel/webitel-ui-sdk/commit/86c61d79eba9d97eb5bb6dc277470f4a0003482b) - update version to 24.12.18 [WTEL-5639](https://webitel.atlassian.net/browse/WTEL-5639)
@@ -433,3 +444,4 @@
 [v24.12.16]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.15...v24.12.16
 [v24.12.17]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.16...v24.12.17
 [v24.12.18]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.17...v24.12.18
+[v24.12.19]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.18...v24.12.19
