@@ -29,7 +29,7 @@ const formatAccessMode = (item) => ({
 });
 
 const getList = async (params) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'qin'];
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'qin', 'groupId', 'notIdGroup'];
 
   if (!params.fields) {
     params.fields = [
@@ -100,7 +100,7 @@ const getList = async (params) => {
 
   const transformations = [sanitize(fieldsToSend), merge(getDefaultGetParams()), camelToSnake()];
 
-  const { page, size, q, sort, fields, id, qin } = applyTransform(changedParams, transformations);
+  const { page, size, q, sort, fields, id, qin, mode, group_id, not_id_group }  = applyTransform(changedParams, transformations);
 
   try {
     const response = await contactService.searchContacts(
@@ -111,6 +111,9 @@ const getList = async (params) => {
       ['mode', ...fields],
       id,
       qin,
+      mode,
+      group_id,
+      not_id_group,
     );
 
     const { items, next } = applyTransform({ ...response.data, items: response.data.data || [] }, [
