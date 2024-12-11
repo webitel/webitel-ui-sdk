@@ -5,21 +5,14 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -222,6 +215,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакты',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервисов',
         [CrmSections.SOURCES]: 'Источники обращений',
         [CrmSections.CONTACT_GROUPS]: 'Группы контактов',
       },
@@ -386,8 +380,7 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Подтвердите удаление',
-      askingAlert:
-        'Вы уверены, что хотите удалить {subject}? Это действие не может быть отменено.',
+      askingAlert: 'Вы уверены, что хотите удалить {subject}? Это действие не может быть отменено.',
       tableAskingAlert:
         'Вы уверенны, что хотите\n удалить {count} запись? | Вы уверенны, что хотите\n удалить {count} записей?',
       deleteAll: 'ВСЕ',
@@ -420,6 +413,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Произошла ошибка загрузки истории чата',
-    markChatProcessed: 'Не удалось переместить чат в “Закрытые”'
+    markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
   },
 };
