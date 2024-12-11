@@ -1,5 +1,12 @@
 
 
+## [v24.12.18] - 2024-12-11
+### :sparkles: New Features
+- [`86c61d7`](https://github.com/webitel/webitel-ui-sdk/commit/86c61d79eba9d97eb5bb6dc277470f4a0003482b) - update version to 24.12.18 [WTEL-5639](https://webitel.atlassian.net/browse/WTEL-5639)
+- [`71ca481`](https://github.com/webitel/webitel-ui-sdk/commit/71ca48197160d529026a001db87f4542814a8c2b) - implement locales for Applications access [WTEL-5639](https://webitel.atlassian.net/browse/WTEL-5639)
+- [`bbf0917`](https://github.com/webitel/webitel-ui-sdk/commit/bbf0917450e751721ac30d3854a54d1bf6be1e17) - update name for crmSections service catalogs [WTEL-5639](https://webitel.atlassian.net/browse/WTEL-5639)
+
+
 ## [v24.12.17] - 2024-12-10
 ### :sparkles: New Features
 - [`75b822f`](https://github.com/webitel/webitel-ui-sdk/commit/75b822faa06e8b221c369a931cde3aed3480e7ca) - add new params in contacts api[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -425,3 +432,4 @@
 [v24.12.15]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.14...v24.12.15
 [v24.12.16]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.15...v24.12.16
 [v24.12.17]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.16...v24.12.17
+[v24.12.18]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.17...v24.12.18
