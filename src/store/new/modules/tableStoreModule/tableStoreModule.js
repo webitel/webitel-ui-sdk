@@ -234,6 +234,13 @@ const actions = {
     context,
     payload,
   ) => context.dispatch('api/DELETE_ITEM', payload),
+
+  RESET_TABLE_STATE: async (context) => {
+    for (const [key, value] of Object.entries(state())) {
+      if(key === 'headers') continue;
+      context.commit('SET', { path: key, value });
+    }
+  },
 };
 
 export default () => ({
