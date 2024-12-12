@@ -1,5 +1,10 @@
 
 
+## [v24.12.20] - 2024-12-12
+### :bug: Bug Fixes
+- [`e3a0342`](https://github.com/webitel/webitel-ui-sdk/commit/e3a0342b485c8aefa4ee23c6eb49ebe3bd6ae560) - order action in wt-action-bar component[WTEL-5721](https://webitel.atlassian.net/browse/WTEL-5721) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.19] - 2024-12-11
 ### :sparkles: New Features
 - [`96eb87f`](https://github.com/webitel/webitel-ui-sdk/commit/96eb87f71c090b25007742337f3d46c1ed334d39) - new colors added for wt-indicator [WTEL-5507] (https://webitel.atlassian.net/browse/WTEL-5507) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -445,3 +450,4 @@
 [v24.12.17]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.16...v24.12.17
 [v24.12.18]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.17...v24.12.18
 [v24.12.19]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.18...v24.12.19
+[v24.12.20]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.19...v24.12.20
