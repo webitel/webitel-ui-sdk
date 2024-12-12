@@ -1,20 +1,19 @@
-
 :root {
-  --table-col-min-width: 140px;
+  --wt-tree-table-col-min-witdh: var(--table-col-min-width);
 
-  --table-head-sort-arrow-margin: var(--spacing-xs);
-  --table-head-border: 1px solid;
+  --wt-tree-table-head-sort-arrow-margin: var(--table-head-sort-arrow-margin);
+  --wt-tree-table-head-border: var(--table-head-border);
 
-  --table-min-height: 24px; // 24px icon size or body-1 lh
-  --table-column-gap: var(--spacing-xs);
-  --table-row-padding: var(--spacing-xs);
+  --wt-tree-table-min-height: var(--table-min-height);
+  --wt-tree-table-column-gap: var(--table-column-gap);
+  --wt-tree-table-row-padding: var(--table-row-padding);
 
-  --wt-table-head-border-color: var(--grey-lighten-1);
-  --wt-table-head-background-color: var(--content-wrapper-color);
-  --wt-table-primary-color: var(--content-wrapper-color);
-  --wt-table-zebra-color: var(--dp-18-surface-color);
+  --wt-tree-table-head-border-color: var(--wt-table-head-border-color);
+  --wt-tree-table-head-background-color: var(--wt-table-head-background-color);
+  --wt-tree-table-primary-color: var(--wt-table-primary-color);
+  --wt-tree-table-zebra-color: var(--wt-table-zebra-color);
 }
 
 :root.theme--dark {
-  --wt-table-head-border-color: var(--grey-darken-1);
+  --wt-tree-table-head-border-color: var(--wt-table-head-border-color);
 }

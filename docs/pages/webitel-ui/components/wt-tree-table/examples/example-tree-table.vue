@@ -2,7 +2,7 @@
   <wt-tree-table
     :headers="dataHeaders"
     :data="services"
-    children="service"
+    childrenProp="service"
     selectable
     sortable
   >
@@ -11,31 +11,31 @@
 
 <script setup>
 import { ref } from 'vue';
-import service from './service.json'
+import service from './service.json';
 
-const services = ref([...service.items])
+const services = ref([...service.items]);
 
 const dataHeaders = ref([
   {
-    "value": "name",
-    "locale": "objects.name",
-    "width": "320px",
-    "field": "name",
-    "sort": null
+    value: 'name',
+    locale: 'objects.name',
+    width: '320px',
+    field: 'name',
+    sort: 'asc',
   },
   {
-    "value": "code",
-    "locale": "objects.code",
-    "width": "160px",
-    "field": "code",
-    "sort": null
+    value: 'code',
+    locale: 'objects.code',
+    width: '160px',
+    field: 'code',
+    sort: null,
   },
   {
-    "value": "description",
-    "locale": "objects.description",
-    "width": "320px",
-    "field": "presence",
-    "sort": null
+    value: 'description',
+    locale: 'objects.description',
+    width: '320px',
+    field: 'presence',
+    sort: null,
   },
-])
+]);
 </script>

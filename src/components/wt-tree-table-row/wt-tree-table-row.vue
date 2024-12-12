@@ -1,69 +1,62 @@
 <template>
   <tr
     :class="[
-      `wt-tree-table__tr__${row.id || dataKey} wt-tree-table-row`,
-      { 'wt-tree-table-row--secondary': dataKey % 2 }
+      `wt-tree-table-row wt-tree-table--tr__${data?.id || rowPosition} `,
+      { 'wt-tree-table-row--alternate': rowPosition % 2 }
     ]"
-    class="wt-tree-table__tr wt-tree-table__tr__body"
+    class="wt-tree-table--tr wt-tree-table--tr__body"
   >
     <td
       v-for="(col, headerKey) of dataHeaders"
       :key="headerKey"
-      class="wt-tree-table__td"
+      class="wt-tree-table-td"
     >
-      <div class="wt-tree-table__td__content">
+      <div class="wt-tree-table-td__content">
         <div
           v-if="!headerKey"
-          class="wt-tree-table__td__icon-wrapper"
+          class="wt-tree-table-td__icon-wrapper"
         >
+          <div v-for="treeLine in lineCount"
+               :key="treeLine" class="wt-tree-table-row__tree-icon"></div>
           <!-- This two empty icons need to create space for nested elements -->
-          <wt-icon
-            v-for="treeLine in lineCount"
-            :key="treeLine"
-            class="wt-tree-table-row__tree-icon"
-          />
-          <wt-icon
-            v-if="nestedLevel >= 1"
-            class="wt-tree-table-row__tree-icon"
-          />
           <wt-icon-btn
-            v-if="!row[children]"
-            :class="{'hidden': !row[children]}"
+            v-if="!data[childrenProp]"
+            :class="{'hidden': !data[childrenProp]}"
             :icon="collapsed ? 'plus' : 'minus'"
             @click="collapsed = !collapsed"
           />
           <wt-checkbox
             v-if="selectable"
-            :selected="_selected.includes(row)"
-            @change="$emit('handleSelection', {
-              row,
+            :selected="isSelectedRow"
+            @change="$emit('update:selected', {
+              data,
               select: $event
             })"
           />
           <wt-icon-btn
-            v-if="row[children]"
+            v-if="data[childrenProp]"
             :icon="collapsed ? 'plus' : 'minus'"
             @click="collapsed = !collapsed"
           />
         </div>
         <slot
-          :index="dataKey"
-          :item="row"
+          :index="rowPosition"
+          :item="data"
           :name="col.value"
         >
-          <div>{{ row[col.value] }}</div>
+          {{ data[col.value] }}
         </slot>
       </div>
     </td>
 
     <td
       v-if="gridActions"
-      class="wt-tree-table__td__actions"
+      class="wt-tree-table-td__actions"
     >
-      <div class="wt-tree-table__td__content">
+      <div class="wt-tree-table-td__content">
         <slot
-          :index="dataKey"
-          :item="row"
+          :index="rowPosition"
+          :item="data"
           name="actions"
         />
       </div>
@@ -72,23 +65,27 @@
 
   <template v-if="!collapsed">
     <wt-tree-table-row
-      v-for="childRow in row[children]"
-      :key="childRow.id"
-      :dataKey="dataKey"
+      v-for="child in data[childrenProp]"
+      :key="child.id"
+      :rowPosition="rowPosition"
       :data-headers="dataHeaders"
-      :row="childRow"
+      :data="child"
       :selectable="selectable"
-      :_selected="_selected"
-      :children="children"
-      @handleSelection="$emit('handleSelection', {
-      row: $event.row,
+      :selectedElements="selectedElements"
+      :childrenProp="childrenProp"
+      @update:selected="$emit('update:selected', {
+      data: $event.data,
       select: $event.select
     })"
-      :nestedLevel="nestedLevel + 1"
+      :nestingLevel="nestingLevel + 1"
     >
-      <template v-for="(col, headerKey) of dataHeaders" :key="headerKey" #[col.value]="{ item }">
+      <template
+          v-for="(col, headerKey) of dataHeaders"
+          :key="headerKey"
+          #[col.value]="{ item }"
+      >
         <slot
-          :index="dataKey"
+          :index="rowPosition"
           :item="item"
           :name="col.value"
         >
@@ -97,7 +94,7 @@
       </template>
       <template #actions="{ item }">
         <slot
-          :index="dataKey"
+          :index="rowPosition"
           :item="item"
           name="actions"
         />
@@ -106,61 +103,61 @@
   </template>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue';
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
+import type { TableHeader } from '../wt-table/types/table-header.ts';
 
-const props = defineProps({
-  row: {
-    type: Object,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    /**
+     * 'It's a data what pass to display row.
+     */
+    data: Record<string, any>;
+    /**
+     * 'It's a number of position row in table.
+     */
+    rowPosition: number;
+    /**
+     * 'It's a key in data object, which contains children array. '
+     */
+    childrenProp: string;
+    selectable?: boolean;
+    selectedElements: Record<string, any>[];
+    dataHeaders: TableHeader[];
+    gridActions?: boolean;
+    /**
+     * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
+     */
+    nestingLevel: number;
+  }>(),
+  {
+    selectable: false,
+    gridActions: true,
+    nestingLevel: 0,
   },
-  dataKey: {
-    type: Number,
-  },
-  children: {
-    type: String,
-  },
-  selectable: {
-    type: Boolean,
-    default: false,
-  },
-  _selected: {
-    type: Array,
-    default: () => [],
-  },
-  dataHeaders: {
-    type: Array,
-    required: true,
-  },
-  gridActions: {
-    type: Boolean,
-    default: true,
-  },
-  nestedLevel: {
-    type: Number,
-    default: 0,
-  },
-});
+);
 
-defineEmits(['handleSelection']);
+defineEmits(['update:selected']);
 
 const collapsed = ref(true);
 const lineCount = computed(() => {
-  if (props.nestedLevel <= 1) return 0;
+  return props.nestingLevel;
+});
 
-  return props.nestedLevel - 1;
+const isSelectedRow = computed(() => {
+  return props.selectedElements.includes(props.data);
 });
 </script>
 
 <style lang="scss" scoped>
 @import '../../../src/css/main.scss';
 
-.wt-tree-table__td {
+.wt-tree-table-td {
   @extend %typo-body-1;
   height: fit-content;
-  min-height: var(--table-min-height);
+  min-height: var(--wt-tree-table-min-height);
   padding: var(--spacing-xs);
   word-break: break-all;
   overflow-wrap: break-word;
@@ -186,10 +183,15 @@ const lineCount = computed(() => {
 }
 
 .wt-tree-table-row {
-  background: var(--wt-table-primary-color)
+  background: var(--wt-tree-table-primary-color);
+
+  &__tree-icon {
+    width: var(--icon-md-size);
+    height: var(--icon-md-size);
+  }
 }
 
-.wt-tree-table-row--secondary {
-  background: var(--wt-table-zebra-color)
+.wt-tree-table-row--alternate {
+  background: var(--wt-tree-table-zebra-color)
 }
 </style>
