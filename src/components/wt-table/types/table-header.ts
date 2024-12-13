@@ -1,8 +1,8 @@
 export type TableHeader = {
+  value: string;
   locale?: string | string[];
   text?: string;
   width?: string;
-  value: string;
   sort?: boolean;
   show?: boolean;
 };

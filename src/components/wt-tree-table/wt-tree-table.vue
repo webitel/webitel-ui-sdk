@@ -57,12 +57,12 @@
       <wt-tree-table-row
         v-for="(row, dataKey) of data"
         :key="dataKey"
-        :rowPosition="dataKey"
+        :row-position="dataKey"
         :data-headers="dataHeaders"
         :data="row"
         :selectable="selectable"
-        :childrenProp="childrenProp"
-        :selectedElements="selectedElements"
+        :children-prop="childrenProp"
+        :selected-elements="selectedElements"
         @update:selected="handleSelection($event.data, $event.select)"
       >
         <template #actions="{ item }">

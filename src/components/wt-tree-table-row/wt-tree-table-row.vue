@@ -1,10 +1,9 @@
 <template>
   <tr
+    class="wt-tree-table-row"
     :class="[
-      `wt-tree-table-row wt-tree-table--tr__${data?.id || rowPosition} `,
       { 'wt-tree-table-row--alternate': rowPosition % 2 }
     ]"
-    class="wt-tree-table--tr wt-tree-table--tr__body"
   >
     <td
       v-for="(col, headerKey) of dataHeaders"
@@ -17,7 +16,7 @@
           class="wt-tree-table-td__icon-wrapper"
         >
           <div v-for="treeLine in lineCount"
-               :key="treeLine" class="wt-tree-table-row__tree-icon"></div>
+               :key="treeLine" class="wt-tree-table-row__tree-space"></div>
           <!-- This two empty icons need to create space for nested elements -->
           <wt-icon-btn
             v-if="!data[childrenProp]"
@@ -67,17 +66,17 @@
     <wt-tree-table-row
       v-for="child in data[childrenProp]"
       :key="child.id"
-      :rowPosition="rowPosition"
+      :row-position="rowPosition"
       :data-headers="dataHeaders"
       :data="child"
       :selectable="selectable"
-      :selectedElements="selectedElements"
-      :childrenProp="childrenProp"
+      :selected-elements="selectedElements"
+      :children-prop="childrenProp"
+      :nesting-level="nestingLevel + 1"
       @update:selected="$emit('update:selected', {
-      data: $event.data,
-      select: $event.select
-    })"
-      :nestingLevel="nestingLevel + 1"
+        data: $event.data,
+        select: $event.select
+      })"
     >
       <template
           v-for="(col, headerKey) of dataHeaders"
@@ -185,13 +184,13 @@ const isSelectedRow = computed(() => {
 .wt-tree-table-row {
   background: var(--wt-tree-table-primary-color);
 
-  &__tree-icon {
+  &__tree-space {
     width: var(--icon-md-size);
     height: var(--icon-md-size);
   }
-}
 
-.wt-tree-table-row--alternate {
-  background: var(--wt-tree-table-zebra-color)
+  &--alternate {
+    background: var(--wt-tree-table-zebra-color)
+  }
 }
 </style>

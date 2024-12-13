@@ -2,7 +2,7 @@
   <wt-tree-table
     :headers="dataHeaders"
     :data="services"
-    childrenProp="service"
+    children-prop="service"
     selectable
     sortable
   >
