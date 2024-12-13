@@ -1,5 +1,10 @@
 
 
+## [v24.12.21] - 2024-12-13
+### :bug: Bug Fixes
+- [`55398a0`](https://github.com/webitel/webitel-ui-sdk/commit/55398a0397d2923a5a99400887378834053fe440) - implement locales for useTableEmpty [WTEL-5642](https://webitel.atlassian.net/browse/WTEL-5642)
+
+
 ## [v24.12.20] - 2024-12-12
 ### :bug: Bug Fixes
 - [`e3a0342`](https://github.com/webitel/webitel-ui-sdk/commit/e3a0342b485c8aefa4ee23c6eb49ebe3bd6ae560) - order action in wt-action-bar component[WTEL-5721](https://webitel.atlassian.net/browse/WTEL-5721) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -451,3 +456,4 @@
 [v24.12.18]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.17...v24.12.18
 [v24.12.19]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.18...v24.12.19
 [v24.12.20]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.19...v24.12.20
+[v24.12.21]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.20...v24.12.21
