@@ -1,5 +1,12 @@
 
 
+## [v24.12.22] - 2024-12-13
+### :bug: Bug Fixes
+- [`d7fc38d`](https://github.com/webitel/webitel-ui-sdk/commit/d7fc38d3c46998df9e79b932460ca96f8b9335f2) - conflict[WTEL-5711](https://webitel.atlassian.net/browse/WTEL-5711) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`31a9aeb`](https://github.com/webitel/webitel-ui-sdk/commit/31a9aeb6b0a5b029503893f76278471745b49224) - change resetTableState action[WTEL-5711](https://webitel.atlassian.net/browse/WTEL-5711) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`98f30da`](https://github.com/webitel/webitel-ui-sdk/commit/98f30da2b20c5b9347e225c3213ab6136ea16b5e) - add resetState in tableStoreModule[WTEL-5711](https://webitel.atlassian.net/browse/WTEL-5711) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.21] - 2024-12-13
 ### :bug: Bug Fixes
 - [`55398a0`](https://github.com/webitel/webitel-ui-sdk/commit/55398a0397d2923a5a99400887378834053fe440) - implement locales for useTableEmpty [WTEL-5642](https://webitel.atlassian.net/browse/WTEL-5642)
@@ -457,3 +464,4 @@
 [v24.12.19]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.18...v24.12.19
 [v24.12.20]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.19...v24.12.20
 [v24.12.21]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.20...v24.12.21
+[v24.12.22]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.21...v24.12.22
