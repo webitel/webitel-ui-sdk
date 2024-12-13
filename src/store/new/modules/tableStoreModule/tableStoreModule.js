@@ -1,3 +1,4 @@
+import deepCopy from 'deep-copy';
 import FilterEvent from '../../../../modules/Filters/enums/FilterEvent.enum.js';
 import {
   queryToSortAdapter,
@@ -11,6 +12,7 @@ const state = () => ({
   error: {},
   isLoading: false,
   isNextPage: false,
+  _resettable: {},
 });
 
 const getters = {
@@ -234,10 +236,21 @@ const actions = {
     context,
     payload,
   ) => context.dispatch('api/DELETE_ITEM', payload),
+
+  RESET_TABLE_STATE: async (context) => {
+    context.commit('RESET_TABLE_STATE');
+  },
+};
+
+const mutations = {
+  RESET_TABLE_STATE: (state) => {
+    Object.assign(state, deepCopy(state._resettable));
+  },
 };
 
 export default () => ({
   state: state(),
   getters,
   actions,
+  mutations,
 });
