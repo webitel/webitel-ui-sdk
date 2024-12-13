@@ -132,7 +132,7 @@
     "vue-multiselect": "^3.1.0",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.4.5",
-    "webitel-sdk": "^24.10.2",
+    "webitel-sdk": "^24.10.4",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
