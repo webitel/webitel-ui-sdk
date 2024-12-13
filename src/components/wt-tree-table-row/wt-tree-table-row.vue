@@ -22,7 +22,7 @@
           <wt-icon-btn
             v-if="!data[childrenProp]"
             :class="{'hidden': !data[childrenProp]}"
-            :icon="collapsed ? 'plus' : 'minus'"
+            :icon="collapsed ? 'tree-expand' : 'tree-collapse'"
             @click="collapsed = !collapsed"
           />
           <wt-checkbox
@@ -35,7 +35,7 @@
           />
           <wt-icon-btn
             v-if="data[childrenProp]"
-            :icon="collapsed ? 'plus' : 'minus'"
+            :icon="collapsed ? 'tree-expand' : 'tree-collapse'"
             @click="collapsed = !collapsed"
           />
         </div>

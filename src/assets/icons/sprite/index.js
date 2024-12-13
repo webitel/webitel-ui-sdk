@@ -112,7 +112,7 @@ import messengerWhatsapp from './messenger-whatsapp.svg';
 import meta from './meta.svg';
 import micMuted from './mic-muted.svg';
 import mic from './mic.svg';
-import minus from './minus.svg';
+import treeCollapse from './tree-collapse.svg';
 import microsoft from './microsoft.svg';
 import move from './move.svg';
 import note from './note.svg';
@@ -121,7 +121,7 @@ import options from './options.svg';
 import pause from './pause.svg';
 import pin from './pin.svg';
 import play from './play.svg';
-import plus from './plus.svg';
+import treeExpand from './tree-expand.svg';
 import previewTagApplication from './preview-tag-application.svg';
 
 import previewTagAudio from './preview-tag-audio.svg';
@@ -300,12 +300,12 @@ export default objCamelToKebab({
   micMuted,
   microsoft,
   move,
-  minus,
+  treeCollapse,
   note,
   numpad,
   pause,
   play,
-  plus,
+  treeExpand,
   prompter,
   queueMember,
   radio,
