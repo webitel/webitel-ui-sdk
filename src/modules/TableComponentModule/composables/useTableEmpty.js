@@ -44,9 +44,9 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
       empty: t('webitelUI.empty.text.empty'),
     },
     primaryActionText: {
-      filters: '',
-      error: '',
-      empty: '',
+      filters: t('reusable.add'),
+      error: t('reusable.add'),
+      empty: t('reusable.add'),
     },
     secondaryActionText: {
       filters: '',
