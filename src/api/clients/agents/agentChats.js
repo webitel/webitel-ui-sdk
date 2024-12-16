@@ -22,7 +22,8 @@ const getChatsList = async (params) => {
   const {
     size,
     page,
-    onlyClosed
+    onlyClosed,
+    onlyUnprocessed,
   } = applyTransform(params, [
     merge(getDefaultGetParams()),
   ]);
@@ -35,6 +36,7 @@ const getChatsList = async (params) => {
       undefined,
       undefined,
       onlyClosed,
+      onlyUnprocessed,
     );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
