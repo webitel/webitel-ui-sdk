@@ -1,5 +1,10 @@
 
 
+## [v24.12.24] - 2024-12-16
+### :bug: Bug Fixes
+- [`c7d7ff0`](https://github.com/webitel/webitel-ui-sdk/commit/c7d7ff055337c16350ca8c56b306fa897326b984) - add required prop in time-date picker conponents[WTEL-5684](https://webitel.atlassian.net/browse/WTEL-5684) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.23] - 2024-12-16
 ### :sparkles: New Features
 - [`60c918a`](https://github.com/webitel/webitel-ui-sdk/commit/60c918a4a7e738a399190c29da8c21fddcad1932) - implimented version [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -475,3 +480,4 @@
 [v24.12.21]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.20...v24.12.21
 [v24.12.22]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.21...v24.12.22
 [v24.12.23]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.22...v24.12.23
+[v24.12.24]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.23...v24.12.24
