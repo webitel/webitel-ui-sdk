@@ -18,6 +18,7 @@ import ExampleTimepickerDateMode from './examples/example-timepicker-date-mode.v
 | labelProps | Object         | false      | `<wt-timepicker :label-props='obj'></wt-timepicker>`  | Object with props, passed down to wt-label as props                                              |
 | noLabel    | Boolean        | false      | `<wt-timepicker noLabel></wt-timepicker>`             | Not displaying label                                                                             |
 | dateMode   | Boolean        | false      | `<wt-timepicker date-mode></wt-timepicker>`           | If date-mode is true, timepicker asserts value is timestamp and displays/changes timestamp value |
+| required   | Boolean        | false      | `<wt-timepicker required></wt-timepicker>`            | Native input required attribute                                                                  |
 
 ## Events
 

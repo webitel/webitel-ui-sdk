@@ -1,15 +1,17 @@
 <script setup>
-import Docs from './wt-datepicker-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleDatepicker from './examples/example-datepicker.vue';
 import ExampleDatepickerDatetimeMode from './examples/example-datepicker-datetime-mode.vue';
 </script>
 
-# WtDatepicker
+# `wt-datepicker.vue`
 
-## Props
-::: raw
-<Docs/>
-:::
+## Specs
+
+<Specs />
+
+## PLUS ALL VUE DATEPICKER NATIVE PROPS
+All passed but not declared props are passed to `<vue-datepicker>` component as attributes
 
 ## Example Datepicker
 ::: raw
