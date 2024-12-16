@@ -2,10 +2,10 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { TableHeader } from '../../components/wt-table/types/table-header.ts';
 
-export const useTable = ({ headers }) => {
+export const useWtTable = ({ headers }) => {
   const { t } = useI18n();
 
-  const dataHeaders = computed<TableHeader[]>(() => {
+  const tableHeaders = computed<TableHeader[]>(() => {
     return headers
       .filter((header: TableHeader) => header.show === undefined || header.show)
       .map((header: TableHeader) => {
@@ -20,6 +20,6 @@ export const useTable = ({ headers }) => {
   });
 
   return {
-    dataHeaders,
+    tableHeaders,
   };
 };

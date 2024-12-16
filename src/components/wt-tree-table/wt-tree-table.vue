@@ -89,7 +89,7 @@
 
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue';
-import { useTable } from '../../composables/useTable/useTable.ts';
+import { useWtTable } from '../../composables/useWtTable/useWtTable.ts';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import type { TableHeader } from '../wt-table/types/table-header.js';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
@@ -112,7 +112,7 @@ const props = withDefaults(
      * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
      */
     selectable?: boolean;
-    selected: [];
+    selected: any[];
     /**
      * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
      */
@@ -181,7 +181,7 @@ const isAllSelected = computed(() => {
   );
 });
 
-const { dataHeaders } = useTable({
+const { tableHeaders: dataHeaders } = useWtTable({
   headers: props.headers,
 });
 
