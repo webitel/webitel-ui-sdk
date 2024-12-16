@@ -201,6 +201,7 @@ const actions = {
       throw err;
     } finally {
       await context.dispatch('LOAD_DATA_LIST');
+      await context.dispatch('SET_SELECTED', []);
 
       /* if no items on current page after DELETE, move to prev page [WTEL-3793] */
       if (!context.state.dataList.length && context.getters.FILTERS.page > 1) {
