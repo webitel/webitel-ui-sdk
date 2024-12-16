@@ -221,3 +221,33 @@ const {
   getSupervisorOptions,
 } = agents;
 ```
+
+## Teams
+
+```js
+import { teams } from '@webitel/ui-sdk/src/api/clients';
+
+const {
+  getList,
+  get,
+  add,
+  update,
+  delete: _delete,
+  getLookup,
+} = teams;
+```
+
+## Skills
+
+```js
+import { skills } from '@webitel/ui-sdk/src/api/clients';
+
+const {
+  getList,
+  get,
+  add,
+  update,
+  delete: _delete,
+  getLookup,
+} = skills;
+```

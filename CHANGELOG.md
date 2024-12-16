@@ -1,5 +1,18 @@
 
 
+## [v24.12.25] - 2024-12-16
+### :bug: Bug Fixes
+- [`33dce9b`](https://github.com/webitel/webitel-ui-sdk/commit/33dce9bbcde8d0ec76ab18e06ebbb00487c51a8d) - update version to 24.12.25 [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+- [`4716561`](https://github.com/webitel/webitel-ui-sdk/commit/4716561bab8442d63ae11060f9c509d0727d7842) - resolve merge conflict [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+- [`cb4dbc8`](https://github.com/webitel/webitel-ui-sdk/commit/cb4dbc85092a7b8a17a1a9a9b07554bb672ab9e1) - update docs for teams and skills api [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+- [`fc6c001`](https://github.com/webitel/webitel-ui-sdk/commit/fc6c001f109259479729851da5fca632c1b2049f) - Implement skills and teams api from admin app [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+
+
+## [v24.12.24] - 2024-12-16
+### :bug: Bug Fixes
+- [`c7d7ff0`](https://github.com/webitel/webitel-ui-sdk/commit/c7d7ff055337c16350ca8c56b306fa897326b984) - add required prop in time-date picker conponents[WTEL-5684](https://webitel.atlassian.net/browse/WTEL-5684) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.23] - 2024-12-16
 ### :sparkles: New Features
 - [`60c918a`](https://github.com/webitel/webitel-ui-sdk/commit/60c918a4a7e738a399190c29da8c21fddcad1932) - implimented version [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -475,3 +488,5 @@
 [v24.12.21]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.20...v24.12.21
 [v24.12.22]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.21...v24.12.22
 [v24.12.23]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.22...v24.12.23
+[v24.12.24]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.23...v24.12.24
+[v24.12.25]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.24...v24.12.25
