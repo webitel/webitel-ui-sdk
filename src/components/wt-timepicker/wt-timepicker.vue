@@ -8,7 +8,13 @@
       :invalid="invalid"
       v-bind="labelProps"
     >
-      {{ `${label} (${format})` }}
+      <!-- @slot Custom input label -->
+      <slot
+        name="label"
+        v-bind="{ label }"
+      >
+        {{ requiredLabel }}
+      </slot>
     </wt-label>
     <div class="wt-timepicker__wrapper">
       <wt-time-input
@@ -65,6 +71,9 @@ export default {
     event: 'input',
   },
   props: {
+    /**
+     * Time value in seconds (not milliseconds!)
+     */
     value: {
       type: [String, Number],
       default: 0,
@@ -92,6 +101,11 @@ export default {
     noLabel: {
       type: Boolean,
       default: false,
+    },
+    required: {
+      type: Boolean,
+      default: false,
+      description: 'Native input required attribute',
     },
   },
 
@@ -153,6 +167,9 @@ export default {
           : this.value - this.sec + +value;
         this.$emit('input', newValue);
       },
+    },
+    requiredLabel() {
+      return this.required ? `${this.label} (${this.format})*` : `${this.label} (${this.format})`;
     },
   },
 
