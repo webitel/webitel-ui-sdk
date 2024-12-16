@@ -1,5 +1,14 @@
 
 
+## [v24.12.23] - 2024-12-16
+### :sparkles: New Features
+- [`60c918a`](https://github.com/webitel/webitel-ui-sdk/commit/60c918a4a7e738a399190c29da8c21fddcad1932) - implimented version [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`1a19bd1`](https://github.com/webitel/webitel-ui-sdk/commit/1a19bd1bc799ea984598b7b99d75486fead1943a) - update agent chats api params [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+### :bug: Bug Fixes
+- [`dbeb016`](https://github.com/webitel/webitel-ui-sdk/commit/dbeb01682efe411da4197a24933a22bdea98294e) - clear selected arr in delete record[WTEL-5730](https://webitel.atlassian.net/browse/WTEL-5730) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.22] - 2024-12-13
 ### :bug: Bug Fixes
 - [`d7fc38d`](https://github.com/webitel/webitel-ui-sdk/commit/d7fc38d3c46998df9e79b932460ca96f8b9335f2) - conflict[WTEL-5711](https://webitel.atlassian.net/browse/WTEL-5711) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -465,3 +474,4 @@
 [v24.12.20]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.19...v24.12.20
 [v24.12.21]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.20...v24.12.21
 [v24.12.22]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.21...v24.12.22
+[v24.12.23]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.22...v24.12.23
