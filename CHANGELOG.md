@@ -1,5 +1,10 @@
 
 
+## [v24.12.29] - 2024-12-18
+### :sparkles: New Features
+- [`680ad53`](https://github.com/webitel/webitel-ui-sdk/commit/680ad530949ffeca8643b25b89177111ff28e9a6) - stop sign icon added [WTEL-5511](https://webitel.atlassian.net/browse/WTEL-5511) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.28] - 2024-12-18
 ### :sparkles: New Features
 - [`e3e3f7b`](https://github.com/webitel/webitel-ui-sdk/commit/e3e3f7b9099f66c0b95fef141bff88342ef1a379) - add filtersValue computed in useTableFilters[WTEL-5744](https://webitel.atlassian.net/browse/WTEL-5744) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -511,3 +516,4 @@
 [v24.12.26]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.25...v24.12.26
 [v24.12.27]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.26...v24.12.27
 [v24.12.28]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.27...v24.12.28
+[v24.12.29]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.28...v24.12.29
