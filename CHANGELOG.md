@@ -1,5 +1,10 @@
 
 
+## [v24.12.28] - 2024-12-18
+### :sparkles: New Features
+- [`e3e3f7b`](https://github.com/webitel/webitel-ui-sdk/commit/e3e3f7b9099f66c0b95fef141bff88342ef1a379) - add filtersValue computed in useTableFilters[WTEL-5744](https://webitel.atlassian.net/browse/WTEL-5744) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.27] - 2024-12-18
 ### :bug: Bug Fixes
 - [`74140f6`](https://github.com/webitel/webitel-ui-sdk/commit/74140f63285437deae1105c35962dd4ab5953c68) - card-page-style[WTEL-5694](https://webitel.atlassian.net/browse/WTEL-5694) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -505,3 +510,4 @@
 [v24.12.25]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.24...v24.12.25
 [v24.12.26]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.25...v24.12.26
 [v24.12.27]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.26...v24.12.27
+[v24.12.28]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.27...v24.12.28
