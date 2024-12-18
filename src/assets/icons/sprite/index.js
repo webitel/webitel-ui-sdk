@@ -155,6 +155,7 @@ import soundOn from './sound-on.svg';
 import starFilled from './star--filled.svg';
 import star from './star.svg';
 import stop from './stop.svg';
+import stopSign from './stop-sign.svg';
 import sttDownload from './stt-download.svg';
 import sttSearch from './stt-search.svg';
 import stt from './stt.svg';
@@ -333,6 +334,7 @@ export default objCamelToKebab({
   star,
   'star--filled': starFilled,
   stop,
+  stopSign,
   tick,
   upload,
   user,
