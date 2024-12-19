@@ -50,7 +50,7 @@ const getChatsList = async (params) => {
   }
 };
 
-const markChatProcessed = async (chatId) => { // add to chat unprocessedClose: true
+const markChatProcessed = async (chatId) => { // makes unprocessedClose:false
   try {
     const response = await agentChatsService.markChatProcessed(chatId);
     return applyTransform(response.data, [
