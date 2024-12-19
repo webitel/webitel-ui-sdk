@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import getNextSortOrder from './_internals/getSortOrder.js';
+import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 
 export default {
   name: 'WtTable',
