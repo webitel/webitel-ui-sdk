@@ -24,6 +24,11 @@
 export default {
   name: 'WtIndicator',
   props: {
+    /**
+     * The color variant for the component
+     * @values 'primary', 'secondary', 'disabled', 'success', 'error', 'transfer', 'break-out', 'info', 'final-status', 'other-status', 'initial-status'
+     * @example '<wt-indicator color="primary"></wt-indicator>'
+     */
     color: {
       type: String,
       default: 'secondary',
@@ -36,17 +41,32 @@ export default {
         'transfer',
         'break-out',
         'info',
+        'final-status',
+        'other-status',
+        'initial-status',
       ],
     },
+    /**
+     * The text content for the component
+     * Can be a string or a number
+     * @example '<wt-indicator text="Sample Text"></wt-indicator>'
+     */
     text: {
       type: [String, Number],
     },
+    /**
+     * The size of the component
+     * @values 'sm', 'md'
+     * @default 'md'
+     * @example '<wt-indicator size="sm"></wt-indicator>'
+     */
     size: {
       type: String,
       default: 'md',
       options: ['sm', 'md'],
     },
   },
+
 
   computed: {
     isText() {
@@ -111,6 +131,18 @@ export default {
 
   &--info {
     background: var(--wt-indicator-info-color);
+  }
+
+  &--final-status {
+    background: var(--wt-indicator-final-status-color);
+  }
+
+  &--other-status {
+    background: var(--wt-indicator-other-status-color);
+  }
+
+  &--initial-status {
+    background: var(--wt-indicator-initial-status-color);
   }
 }
 

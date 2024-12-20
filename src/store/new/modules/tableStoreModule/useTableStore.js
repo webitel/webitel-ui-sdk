@@ -46,6 +46,10 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/SET_SELECTED`, payload);
   }
 
+  function resetState(payload) {
+    return store.dispatch(`${tableNamespace}/RESET_TABLE_STATE`, payload);
+  }
+
   return {
     namespace: tableNamespace,
 
@@ -62,5 +66,6 @@ export const useTableStore = (namespace) => {
     deleteData,
     sort,
     setSelected,
+    resetState,
   };
 };

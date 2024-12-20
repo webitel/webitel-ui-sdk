@@ -2,10 +2,12 @@ import { AgentChatServiceApiFactory } from 'webitel-sdk';
 import {
   getDefaultInstance,
   getDefaultOpenAPIConfig,
+  getDefaultGetParams,
 } from '../../defaults/index.js';
 import applyTransform, {
+  merge,
   notify,
-  snakeToCamel,
+  snakeToCamel, starToSearch,
 } from '../../transformers/index.js';
 import i18n from '../../../locale/i18n.js';
 
@@ -17,21 +19,32 @@ const configuration = getDefaultOpenAPIConfig();
 const agentChatsService = new AgentChatServiceApiFactory(configuration, '', instance);
 
 const getChatsList = async (params) => {
-  const { onlyClosed } = params;
+  const {
+    size,
+    page,
+    onlyClosed,
+    onlyUnprocessed,
+  } = applyTransform(params, [
+    merge(getDefaultGetParams()),
+  ]);
 
   try {
     const response = await agentChatsService.getAgentChats(
-      undefined,
-      undefined,
+      size,
+      page,
       undefined,
       undefined,
       undefined,
       onlyClosed,
+      onlyUnprocessed,
     );
-    const { items } = applyTransform(response.data, [
+    const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
     ]);
-    return items;
+    return {
+      items,
+      next,
+    };
   } catch (err) {
     throw applyTransform(err, [notify]);
   }

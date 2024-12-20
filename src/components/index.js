@@ -69,6 +69,8 @@ import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 import WtNavigationMenu
   from './on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
 import WtStartPage from './on-demand/wt-start-page/components/wt-start-page.vue';
+import WtSelectionPopup
+  from './on-demand/wt-selection-popup/wt-selection-popup.vue';
 
 const Components = {
   WtActionBar,
@@ -137,6 +139,7 @@ const Components = {
   WtExpansionPanel,
   WtNavigationMenu,
   WtStartPage,
+  WtSelectionPopup,
 };
 
 export default Components;

@@ -13,11 +13,11 @@
     gap: var(--spacing-sm);
 
     &__tab {
-      flex-grow: 1;
       display: flex;
+      flex-direction: column;
+      flex-grow: 1;
       min-height: 0;
       gap: var(--spacing-sm);
-      flex-direction: column;
     }
   }
 
@@ -50,7 +50,7 @@
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(auto, auto);
     grid-column-gap: var(--spacing-sm);
-    grid-row-gap: var(--spacing-xs);
+    grid-row-gap: var(--spacing-sm);
 
     &--1-col {
       grid-template-columns: 1fr;

@@ -5,21 +5,14 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -77,6 +70,7 @@ export default {
     step: 'Step { count }',
     more: 'More',
     read: 'Read',
+    create: 'Create',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -140,6 +134,7 @@ export default {
     grantor: 'Grantor | Grantors',
     role: 'Role | Roles',
     user: 'User | Users',
+    calendar: 'Calendar | Calendars',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
@@ -221,6 +216,9 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
+        [CrmSections.SOURCES]: 'Case sources',
+        [CrmSections.CONTACT_GROUPS]: 'Contact groups',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
@@ -384,8 +382,7 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',
-      askingAlert:
-        'Are you sure you want to delete {subject}? This action cannot be undone.',
+      askingAlert: 'Are you sure you want to delete {subject}? This action cannot be undone.',
       tableAskingAlert:
         'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
       deleteAll: 'ALL',

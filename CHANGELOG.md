@@ -1,5 +1,162 @@
 
 
+## [v24.12.29] - 2024-12-18
+### :sparkles: New Features
+- [`680ad53`](https://github.com/webitel/webitel-ui-sdk/commit/680ad530949ffeca8643b25b89177111ff28e9a6) - stop sign icon added [WTEL-5511](https://webitel.atlassian.net/browse/WTEL-5511) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v24.12.28] - 2024-12-18
+### :sparkles: New Features
+- [`e3e3f7b`](https://github.com/webitel/webitel-ui-sdk/commit/e3e3f7b9099f66c0b95fef141bff88342ef1a379) - add filtersValue computed in useTableFilters[WTEL-5744](https://webitel.atlassian.net/browse/WTEL-5744) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.27] - 2024-12-18
+### :bug: Bug Fixes
+- [`74140f6`](https://github.com/webitel/webitel-ui-sdk/commit/74140f63285437deae1105c35962dd4ab5953c68) - card-page-style[WTEL-5694](https://webitel.atlassian.net/browse/WTEL-5694) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.26] - 2024-12-16
+### :sparkles: New Features
+- [`c8aab36`](https://github.com/webitel/webitel-ui-sdk/commit/c8aab36db364f05ec01b3daffba69904b0d420b3) - case icons added [WTEL-5510] (https://webitel.atlassian.net/browse/WTEL-5510) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`21b5b81`](https://github.com/webitel/webitel-ui-sdk/commit/21b5b81985b0487e403348a03ca7285aaa40d71f) - version incremented [WTEL-5510] (https://webitel.atlassian.net/browse/WTEL-5510) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v24.12.25] - 2024-12-16
+### :bug: Bug Fixes
+- [`33dce9b`](https://github.com/webitel/webitel-ui-sdk/commit/33dce9bbcde8d0ec76ab18e06ebbb00487c51a8d) - update version to 24.12.25 [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+- [`4716561`](https://github.com/webitel/webitel-ui-sdk/commit/4716561bab8442d63ae11060f9c509d0727d7842) - resolve merge conflict [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+- [`cb4dbc8`](https://github.com/webitel/webitel-ui-sdk/commit/cb4dbc85092a7b8a17a1a9a9b07554bb672ab9e1) - update docs for teams and skills api [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+- [`fc6c001`](https://github.com/webitel/webitel-ui-sdk/commit/fc6c001f109259479729851da5fca632c1b2049f) - Implement skills and teams api from admin app [WTEL-5645](https://webitel.atlassian.net/browse/WTEL-5645)
+
+
+## [v24.12.24] - 2024-12-16
+### :bug: Bug Fixes
+- [`c7d7ff0`](https://github.com/webitel/webitel-ui-sdk/commit/c7d7ff055337c16350ca8c56b306fa897326b984) - add required prop in time-date picker conponents[WTEL-5684](https://webitel.atlassian.net/browse/WTEL-5684) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.23] - 2024-12-16
+### :sparkles: New Features
+- [`60c918a`](https://github.com/webitel/webitel-ui-sdk/commit/60c918a4a7e738a399190c29da8c21fddcad1932) - implimented version [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`1a19bd1`](https://github.com/webitel/webitel-ui-sdk/commit/1a19bd1bc799ea984598b7b99d75486fead1943a) - update agent chats api params [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+### :bug: Bug Fixes
+- [`dbeb016`](https://github.com/webitel/webitel-ui-sdk/commit/dbeb01682efe411da4197a24933a22bdea98294e) - clear selected arr in delete record[WTEL-5730](https://webitel.atlassian.net/browse/WTEL-5730) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.22] - 2024-12-13
+### :bug: Bug Fixes
+- [`d7fc38d`](https://github.com/webitel/webitel-ui-sdk/commit/d7fc38d3c46998df9e79b932460ca96f8b9335f2) - conflict[WTEL-5711](https://webitel.atlassian.net/browse/WTEL-5711) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`31a9aeb`](https://github.com/webitel/webitel-ui-sdk/commit/31a9aeb6b0a5b029503893f76278471745b49224) - change resetTableState action[WTEL-5711](https://webitel.atlassian.net/browse/WTEL-5711) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`98f30da`](https://github.com/webitel/webitel-ui-sdk/commit/98f30da2b20c5b9347e225c3213ab6136ea16b5e) - add resetState in tableStoreModule[WTEL-5711](https://webitel.atlassian.net/browse/WTEL-5711) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.21] - 2024-12-13
+### :bug: Bug Fixes
+- [`55398a0`](https://github.com/webitel/webitel-ui-sdk/commit/55398a0397d2923a5a99400887378834053fe440) - implement locales for useTableEmpty [WTEL-5642](https://webitel.atlassian.net/browse/WTEL-5642)
+
+
+## [v24.12.20] - 2024-12-12
+### :bug: Bug Fixes
+- [`e3a0342`](https://github.com/webitel/webitel-ui-sdk/commit/e3a0342b485c8aefa4ee23c6eb49ebe3bd6ae560) - order action in wt-action-bar component[WTEL-5721](https://webitel.atlassian.net/browse/WTEL-5721) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.19] - 2024-12-11
+### :sparkles: New Features
+- [`96eb87f`](https://github.com/webitel/webitel-ui-sdk/commit/96eb87f71c090b25007742337f3d46c1ed334d39) - new colors added for wt-indicator [WTEL-5507] (https://webitel.atlassian.net/browse/WTEL-5507) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :bug: Bug Fixes
+- [`f626e42`](https://github.com/webitel/webitel-ui-sdk/commit/f626e4244000e8fd0b6e36a4a80924876a3388ca) - styles fixed [WTEL-5507] (https://webitel.atlassian.net/browse/WTEL-5507) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`8cce0ff`](https://github.com/webitel/webitel-ui-sdk/commit/8cce0ff8416ca0d68d55202173f35d6b59ff31f7) - version incremented [WTEL-5507] (https://webitel.atlassian.net/browse/WTEL-5507) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v24.12.18] - 2024-12-11
+### :sparkles: New Features
+- [`86c61d7`](https://github.com/webitel/webitel-ui-sdk/commit/86c61d79eba9d97eb5bb6dc277470f4a0003482b) - update version to 24.12.18 [WTEL-5639](https://webitel.atlassian.net/browse/WTEL-5639)
+- [`71ca481`](https://github.com/webitel/webitel-ui-sdk/commit/71ca48197160d529026a001db87f4542814a8c2b) - implement locales for Applications access [WTEL-5639](https://webitel.atlassian.net/browse/WTEL-5639)
+- [`bbf0917`](https://github.com/webitel/webitel-ui-sdk/commit/bbf0917450e751721ac30d3854a54d1bf6be1e17) - update name for crmSections service catalogs [WTEL-5639](https://webitel.atlassian.net/browse/WTEL-5639)
+
+
+## [v24.12.17] - 2024-12-10
+### :sparkles: New Features
+- [`75b822f`](https://github.com/webitel/webitel-ui-sdk/commit/75b822faa06e8b221c369a931cde3aed3480e7ca) - add new params in contacts api[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.16] - 2024-12-09
+### :sparkles: New Features
+- [`68e5042`](https://github.com/webitel/webitel-ui-sdk/commit/68e5042da187ec4dfc2fb587bef453e728be6d2a) - adding additional initializeCard return [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :bug: Bug Fixes
+- [`8689d62`](https://github.com/webitel/webitel-ui-sdk/commit/8689d624c778158e29c56ffb26f664bd939863da) - useCardComponent composable initialize function changes [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`bd52b70`](https://github.com/webitel/webitel-ui-sdk/commit/bd52b70268a5928fc8a0a41470168bd6219889e7) - trying to fix git action  [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`1d121b2`](https://github.com/webitel/webitel-ui-sdk/commit/1d121b272515f2a63313f77b754afaa04416a614) - version incremented  [WTEL-5509] (https://webitel.atlassian.net/browse/WTEL-5509) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v24.12.15] - 2024-12-06
+### :sparkles: New Features
+- [`e8e17bd`](https://github.com/webitel/webitel-ui-sdk/commit/e8e17bdd2368db9c4d1cf56b8f7e6d19918d0825) - add wt-selection-popup[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`2c30ec3`](https://github.com/webitel/webitel-ui-sdk/commit/2c30ec31915cddd8f3c0b10072f7bef58ea918bd) - docs and delete shown prop[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`afe77f0`](https://github.com/webitel/webitel-ui-sdk/commit/afe77f02cd1b227307029cf7c9ca054bfa1c1d99) - merge master[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`0d5bb81`](https://github.com/webitel/webitel-ui-sdk/commit/0d5bb8171d896b0bb78ec6679be93819baa958b9) - doc[WTEL-5610](https://webitel.atlassian.net/browse/WTEL-5610) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.14] - 2024-12-06
+### :bug: Bug Fixes
+- [`6bf7c96`](https://github.com/webitel/webitel-ui-sdk/commit/6bf7c9606ce59fd584f192268dc000d54f8cb61d) - node version in package.json *(commit by [@Lera24](https://github.com/Lera24))*
+- [`b44baed`](https://github.com/webitel/webitel-ui-sdk/commit/b44baed54b04007e1adee2dbca08e1f5e51fc7ad) - permissions-tab component[WTEL-3392](https://webitel.atlassian.net/browse/WTEL-3392) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`68cce7c`](https://github.com/webitel/webitel-ui-sdk/commit/68cce7c36f006868b51c1bfead4157f250abef6b) - doc[WTEL-3392](https://webitel.atlassian.net/browse/WTEL-3392) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :recycle: Refactors
+- [`a29f08c`](https://github.com/webitel/webitel-ui-sdk/commit/a29f08c548f7a49d7336c8e112ef222a5079382a) - permission module[WTEL-3392](https://webitel.atlassian.net/browse/WTEL-3392) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.13] - 2024-12-03
+### :bug: Bug Fixes
+- [`75bd888`](https://github.com/webitel/webitel-ui-sdk/commit/75bd888be9e2dbf9966fb1301766fb79e611781a) - conflict[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`22905da`](https://github.com/webitel/webitel-ui-sdk/commit/22905dad808ba29286c4e8d844d514c5414d3e23) - update package.json version[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`8f1ef4c`](https://github.com/webitel/webitel-ui-sdk/commit/8f1ef4c27a81a23c835549bbb7e60de5a7325644) - conflict[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`dbac3aa`](https://github.com/webitel/webitel-ui-sdk/commit/dbac3aa98806754573ce233e85140641b2f046b7) - delete actions prop in wt-action-bar[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.12] - 2024-11-29
+### :bug: Bug Fixes
+- [`967e35f`](https://github.com/webitel/webitel-ui-sdk/commit/967e35fd9dc274ee0e388d7f375fe9c2859a38cc) - returned next value from agent chats api [WTEL-5503](https://webitel.atlassian.net/browse/WTEL-5503) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
+## [v24.12.11] - 2024-11-28
+### :sparkles: New Features
+- [`32c7669`](https://github.com/webitel/webitel-ui-sdk/commit/32c7669136e4d0fef396e092ac2700b0fe672a95) - add contact groups page[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.10] - 2024-11-27
+### :sparkles: New Features
+- [`972c6cd`](https://github.com/webitel/webitel-ui-sdk/commit/972c6cda702008cbd2629ea82c688ff463b2685d) - add sources page[WTEL-4754](https://webitel.atlassian.net/browse/WTEL-4754) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.9] - 2024-11-27
+### :sparkles: New Features
+- [`333f3b8`](https://github.com/webitel/webitel-ui-sdk/commit/333f3b8ee8d364a8148884f71c54946ab2c28524) - add calendar locale[WTEL-4883](https://webitel.atlassian.net/browse/WTEL-4883) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.8] - 2024-11-26
+### :bug: Bug Fixes
+- [`024a2bb`](https://github.com/webitel/webitel-ui-sdk/commit/024a2bb5d786c06833c370dcd90dee8a556365d3) - datepicker version [WTEL-5596](https://webitel.atlassian.net/browse/WTEL-5596) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.7] - 2024-11-26
+### :bug: Bug Fixes
+- [`510db8d`](https://github.com/webitel/webitel-ui-sdk/commit/510db8dcc0a86da3608312ff305ab3ec36feade3) - small refactor useTableEmpty component[WTEL-5282](https://webitel.atlassian.net/browse/WTEL-5282) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`cc2cfb3`](https://github.com/webitel/webitel-ui-sdk/commit/cc2cfb344fc469d5295d30909b0666f9fa259309) - checker biome breaks build *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`67574b7`](https://github.com/webitel/webitel-ui-sdk/commit/67574b79c6a65e9272ade2430b143c249e2a42e4) - typescript declarations *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.6] - 2024-11-23
 ### :sparkles: New Features
 - [`b284960`](https://github.com/webitel/webitel-ui-sdk/commit/b28496024428f1b3f5010df2ff4539331cec61af) - typescript support *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -337,3 +494,26 @@
 [v24.12.4]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.3...v24.12.4
 [v24.12.5]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.4...v24.12.5
 [v24.12.6]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.5...v24.12.6
+[v24.12.7]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.6...v24.12.7
+[v24.12.8]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.7...v24.12.8
+[v24.12.9]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.8...v24.12.9
+[v24.12.10]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.9...v24.12.10
+[v24.12.11]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.10...v24.12.11
+[v24.12.12]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.11...v24.12.12
+[v24.12.13]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.12...v24.12.13
+[v24.12.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.13...v24.12.14
+[v24.12.15]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.14...v24.12.15
+[v24.12.16]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.15...v24.12.16
+[v24.12.17]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.16...v24.12.17
+[v24.12.18]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.17...v24.12.18
+[v24.12.19]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.18...v24.12.19
+[v24.12.20]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.19...v24.12.20
+[v24.12.21]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.20...v24.12.21
+[v24.12.22]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.21...v24.12.22
+[v24.12.23]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.22...v24.12.23
+[v24.12.24]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.23...v24.12.24
+[v24.12.25]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.24...v24.12.25
+[v24.12.26]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.25...v24.12.26
+[v24.12.27]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.26...v24.12.27
+[v24.12.28]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.27...v24.12.28
+[v24.12.29]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.28...v24.12.29

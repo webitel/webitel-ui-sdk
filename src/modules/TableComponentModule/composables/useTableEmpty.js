@@ -29,33 +29,33 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
       },
     },
     headline: {
-      filters: t(''),
-      error: t(''),
-      empty: t(''),
+      filters: '',
+      error: '',
+      empty: '',
     },
     title: {
-      filters: t(''),
-      error: t(''),
-      empty: t(''),
+      filters: '',
+      error: '',
+      empty: '',
     },
     text: {
       filters: t('webitelUI.empty.text.filters'),
-      error: t(''),
+      error: '',
       empty: t('webitelUI.empty.text.empty'),
     },
     primaryActionText: {
-      filters: t(''),
-      error: t(''),
-      empty: t(''),
+      filters: t('reusable.add'),
+      error: t('reusable.add'),
+      empty: t('reusable.add'),
     },
     secondaryActionText: {
-      filters: t(''),
-      error: t(''),
-      empty: t(''),
+      filters: '',
+      error: '',
+      empty: '',
     },
   }));
 
-  const merged = computed(() => deepmerge(defaults, overrides));
+  const merged = computed(() => deepmerge(defaults.value, overrides));
 
   let darkMode = computed(() => false);
 
@@ -76,14 +76,14 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
   });
 
   const emptyState = computed(() => {
-    return !isLoading.value && !error.value && !!dataList.value.length;
+    return !isLoading?.value && !error?.value && !dataList?.value?.length;
   });
 
   const emptyCause = computed(() => {
-    if (!emptyState.value) return null;
+    if (!emptyState?.value) return null;
 
     if (error.value) return EmptyCause.ERROR;
-    if (filters.value) {
+    if (filters?.value) {
       const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
       const filtersApplied = Object.entries(filters.value).some(
         ([filterValue, filterName]) =>
@@ -98,11 +98,11 @@ export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides
   const image = computed(() => {
     switch (emptyCause.value) {
       case EmptyCause.ERROR:
-        return darkMode.value ? merged.value.image.error.dark : merged.value.image.error.light;
+        return darkMode?.value ? merged.value.image.error.dark : merged.value.image.error.light;
       case EmptyCause.FILTERS:
-        return darkMode.value ? merged.value.image.filters.dark : merged.value.image.filters.light;
+        return darkMode?.value ? merged.value.image.filters.dark : merged.value.image.filters.light;
       case EmptyCause.EMPTY:
-        return darkMode.value ? merged.value.image.empty.dark : merged.value.image.empty.light;
+        return darkMode?.value ? merged.value.image.empty.dark : merged.value.image.empty.light;
       default:
         return null;
     }

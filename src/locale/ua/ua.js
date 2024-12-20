@@ -5,21 +5,14 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -78,6 +71,7 @@ export default {
     step: 'Крок { count }',
     more: 'Більше',
     read: 'Читати',
+    create: 'Створити',
   },
   vocabulary: {
     language: 'Мова',
@@ -139,6 +133,7 @@ export default {
     grantor: 'Надавач | Надавачі',
     user: 'Користувач | Користувачі',
     role: 'Роль | Ролі',
+    calendar: 'Календар | Календарі',
     queue: {
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
@@ -220,6 +215,9 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакти',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервісів',
+        [CrmSections.SOURCES]: 'Джерела звернень',
+        [CrmSections.CONTACT_GROUPS]: 'Групи контактів',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
@@ -382,8 +380,7 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Підтвердіть видалення',
-      askingAlert:
-        'Ви впевнені, що хочете видалити {subject}? Ця дія не може бути скасована.',
+      askingAlert: 'Ви впевнені, що хочете видалити {subject}? Ця дія не може бути скасована.',
       tableAskingAlert:
         'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
       deleteAll: 'ВСІ',
@@ -416,6 +413,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Сталася помилка завантаження історії чату',
-    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”'
+    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”',
   },
 };

@@ -1,15 +1,14 @@
 <script setup>
-import Docs from './wt-indicator-docs.vue';
+import Specs from './component-specs.vue';
 import ExampleIndicatorDifferentColors from './examples/example-indicator-different-colors.vue';
 import ExampleIndicatorDifferentSizes from './examples/example-indicator-different-sizes.vue';
 </script>
 
-# WtIndicator
+# `wt-indicator.vue`
 
-## Props
-::: raw
-<Docs/>
-:::
+## Specs
+
+<Specs />
 
 ## Example Indicator Different Colors
 ::: raw

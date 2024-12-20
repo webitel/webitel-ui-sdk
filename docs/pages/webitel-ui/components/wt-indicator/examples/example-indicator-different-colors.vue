@@ -8,6 +8,9 @@ const colors = [
   'disabled',
   'break-out',
   'info',
+  'final-status',
+  'other-status',
+  'initial-status',
 ];
 </script>
 

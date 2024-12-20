@@ -10,6 +10,7 @@ import arrowLeft from './arrow-left.svg';
 import arrowMix from './arrow-mix.svg';
 import arrowRight from './arrow-right.svg';
 import arrowUp from './arrow-up.svg';
+import assignee from './assignee.svg';
 import attach from './attach.svg';
 import attention from './attention.svg';
 import azure from './azure.svg';
@@ -36,6 +37,7 @@ import callRingingFilled from './call-ringing--filled.svg';
 import callRinging from './call-ringing.svg';
 import callTransferFilled from './call-transfer--filled.svg';
 import callTransfer from './call-transfer.svg';
+import caseAuthor from './case-author.svg';
 
 import call from './call.svg';
 import chatFilled from './chat--filled.svg';
@@ -83,9 +85,11 @@ import filter from './filter.svg';
 import flows from './flows.svg';
 import generate from './generate.svg';
 import google from './google.svg';
+import group from './group.svg';
 import history from './history.svg';
 import hold from './hold.svg';
 import idle from './idle.svg';
+import impacted from './impacted.svg';
 import instagram from './instagram.svg';
 import jobAccept from './job--accept.svg';
 import jobEnd from './job--end.svg';
@@ -136,6 +140,7 @@ import rec from './rec.svg';
 import redo from './redo.svg';
 import refresh from './refresh.svg';
 import role from './role.svg';
+import reporter from './reporter.svg';
 import roundedInfo from './rounded-info.svg';
 import save from './save.svg';
 import saveAs from './save-as.svg';
@@ -151,6 +156,7 @@ import soundOn from './sound-on.svg';
 import starFilled from './star--filled.svg';
 import star from './star.svg';
 import stop from './stop.svg';
+import stopSign from './stop-sign.svg';
 import sttDownload from './stt-download.svg';
 import sttSearch from './stt-search.svg';
 import stt from './stt.svg';
@@ -198,6 +204,7 @@ export default objCamelToKebab({
   arrowLeft,
   arrowRight,
   arrowUp,
+  assignee,
   arrowMix,
   attach,
   attention,
@@ -230,6 +237,7 @@ export default objCamelToKebab({
   callTransfer,
   'call-transfer--filled': callTransferFilled,
 
+  caseAuthor,
   chat,
   'chat--filled': chatFilled,
   chatEmoji,
@@ -272,8 +280,10 @@ export default objCamelToKebab({
   flows,
   generate,
   google,
+  group,
   history,
   hold,
+  impacted,
   link,
   lock,
   logout,
@@ -313,6 +323,7 @@ export default objCamelToKebab({
   rec,
   recOff,
   refresh,
+  reporter,
   roundedInfo,
   role,
   done,
@@ -327,6 +338,7 @@ export default objCamelToKebab({
   star,
   'star--filled': starFilled,
   stop,
+  stopSign,
   tick,
   upload,
   user,
