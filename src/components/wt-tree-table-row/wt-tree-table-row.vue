@@ -113,7 +113,7 @@ const props = withDefaults(
     /**
      * 'It's a data what pass to display row.
      */
-    data: Record<string, any>;
+    data: Record<string, unknown>;
     /**
      * 'It's a number of position row in table.
      */
@@ -123,7 +123,7 @@ const props = withDefaults(
      */
     childrenProp: string;
     selectable?: boolean;
-    selectedElements: Record<string, any>[];
+    selectedElements: Record<string, unknown>[];
     dataHeaders: TableHeader[];
     gridActions?: boolean;
     /**

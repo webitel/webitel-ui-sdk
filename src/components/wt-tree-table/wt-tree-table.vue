@@ -103,7 +103,7 @@ const props = withDefaults(
     /**
      * 'List of data, represented by table. '
      */
-    data: Record<string, any>[];
+    data: Record<string, unknown>[];
     /**
      * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
      */
@@ -112,7 +112,7 @@ const props = withDefaults(
      * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
      */
     selectable?: boolean;
-    selected: any[];
+    selected: unknown[];
     /**
      * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
      */
@@ -131,14 +131,14 @@ const props = withDefaults(
 
 const emit = defineEmits(['sort', 'update:selected']);
 
-const checkHasChildItems = (item: Record<string, any>) => {
+const checkHasChildItems = (item: Record<string, unknown>) => {
   return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
 };
 
-const getSelectedValue = (items: Record<string, any>[]) => {
+const getSelectedValue = (items: Record<string, unknown>[]) => {
   const selected = [];
 
-  const pushSelectedElement = (item: Record<string, any>) => {
+  const pushSelectedElement = (item: Record<string, unknown>) => {
     if (item._isSelected) {
       return [item];
     }
@@ -153,10 +153,10 @@ const getSelectedValue = (items: Record<string, any>[]) => {
   return selected;
 };
 
-const getAllNestedElements = (item: Record<string, any>) => {
+const getAllNestedElements = (item: Record<string, unknown>) => {
   const nested = [];
 
-  const pushElement = (item: Record<string, any>) => {
+  const pushElement = (item: Record<string, unknown>) => {
     nested.push(item);
 
     if (checkHasChildItems(item)) {
@@ -169,7 +169,7 @@ const getAllNestedElements = (item: Record<string, any>) => {
   return nested;
 };
 
-const selectedElements = computed<Record<string, any>>(() => {
+const selectedElements = computed<Record<string, unknown>>(() => {
   // _isSelected for backwards compatibility
   return props.selected || getSelectedValue(props.data);
 });
@@ -199,7 +199,7 @@ const sort = (col: TableHeader) => {
   emit('sort', col, nextSort);
 };
 
-const changeSelectItem = (items: Record<string, any>[], selected: boolean) => {
+const changeSelectItem = (items: Record<string, unknownunknown>[], selected: boolean) => {
   items.forEach((item) => {
     item._isSelected = selected;
 
