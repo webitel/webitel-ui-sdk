@@ -29,7 +29,7 @@ import ExamplePasswordInput from './examples/example-password-input.vue';
 :::
 
 ::: details Code
-<<< ./examples/example-disabled-input.vue{highlightLines}
+<<< ./examples/example-disabled-input.vue{vue}
 :::
 
 ## Example Password Input
@@ -38,7 +38,7 @@ import ExamplePasswordInput from './examples/example-password-input.vue';
 :::
 
 ::: details Code
-<<< ./examples/example-password-input.vue{highlightLines}
+<<< ./examples/example-password-input.vue{vue}
 :::
 
 ## Example Invalid Input
@@ -47,7 +47,7 @@ import ExamplePasswordInput from './examples/example-password-input.vue';
 :::
 
 ::: details Code
-<<< ./examples/example-invalid-input.vue{highlightLines}
+<<< ./examples/example-invalid-input.vue{vue}
 :::
 
 ## Example Input After Slot
@@ -56,7 +56,7 @@ import ExamplePasswordInput from './examples/example-password-input.vue';
 :::
 
 ::: details Code
-<<< ./examples/example-input-after-slot.vue{highlightLines}
+<<< ./examples/example-input-after-slot.vue{vue}
 :::
 
 

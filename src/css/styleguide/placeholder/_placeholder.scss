@@ -1,8 +1,9 @@
+@use "sass:selector";
 // https://stackoverflow.com/a/17181946/17782185
 // https://stackoverflow.com/a/49192800/17782185
 
 @mixin optional-at-root($sel) {
-  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+  @at-root #{if(not &, $sel, selector.append(&, $sel))} {
     @content;
   }
 }

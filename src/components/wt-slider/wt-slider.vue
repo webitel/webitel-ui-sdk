@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+//@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>

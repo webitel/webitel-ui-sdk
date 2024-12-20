@@ -1,4 +1,4 @@
-@import '../../../src/css/main.scss';
+@use '../../css/styleguide/placeholder/placeholder';
 
 :deep(.multiselect) {
   position: relative;
@@ -45,7 +45,7 @@
   .multiselect__single,
   .multiselect__placeholder {
     @extend %typo-body-1;
-    @include wt-placeholder;
+    @include placeholder.wt-placeholder;
     margin: 0; // reset default
     padding: 0; // reset default
     color: var(--wt-text-field-text-color);

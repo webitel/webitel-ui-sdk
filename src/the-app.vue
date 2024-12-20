@@ -1,18 +1,11 @@
 <template>
   <div id="app">
-    <playground />
+    webitel ui
   </div>
 </template>
 
-<script>
-import Playground from './playground.vue';
+<script setup>
 
-export default {
-  name: 'TheApp',
-  components: {
-    Playground,
-  },
-};
 </script>
 
 <style lang="scss">

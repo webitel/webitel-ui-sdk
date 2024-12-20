@@ -128,11 +128,11 @@ const isDateTime = props.mode === 'datetime';
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+//@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+//@import '../../../src/css/main.scss';
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {

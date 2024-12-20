@@ -1,6 +1,6 @@
-@import './deprecated';
-@import './palette';
-@import './reusable/text-field';
+@use 'deprecated';
+@use 'palette';
+@use 'reusable/text-field';
 
 :root {
   // dp colors

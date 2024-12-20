@@ -27,7 +27,7 @@ import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 :::
 
 ::: details Code
-<<< ./examples/example-disabled-textarea.vue{highlightLines}
+<<< ./examples/example-disabled-textarea.vue{vue}
 :::
 
 ## Example Invalid Textarea
@@ -36,5 +36,5 @@ import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 :::
 
 ::: details Code
-<<< ./examples/example-invalid-textarea.vue{highlightLines}
+<<< ./examples/example-invalid-textarea.vue{vue}
 :::

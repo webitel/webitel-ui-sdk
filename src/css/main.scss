@@ -1,18 +1,7 @@
-@import 'styleguide/styleguide';
-@import 'styleguide/display-helpers/display-helpers';
-@import 'pages/card-page';
-@import 'pages/table-page';
-
-@include wt-placeholder;
+@use 'styleguide/styleguide';
 
 :root {
   --transition: 0.2s;
-
-  --box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-@mixin width-fit-content {
-  width: fit-content;
 }
 
 html {
@@ -61,14 +50,4 @@ button {
 a {
   text-decoration: none;
   color: #000;
-}
-
-.hidden {
-  pointer-events: none;
-  opacity: 0;
-}
-
-// https://github.com/Akryum/floating-vue/issues/488
-.v-popper__arrow-container {
-  display: none;
 }

@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { computed, ref, defineEmits } from 'vue';
+import { computed, ref } from 'vue';
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import { ComponentSize } from '../../enums/index.js';
 
@@ -61,11 +61,11 @@ const sidePanelSize = computed(() => (sidePanelCollapsed.value ? ComponentSize.S
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+//@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+//@import '../../../src/css/main.scss';
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {

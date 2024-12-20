@@ -152,7 +152,8 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/styleguide/styleguide';
+//@import '../../../src/css/main.scss';
 
 .wt-app-navigator {
   position: relative;

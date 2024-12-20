@@ -1,10 +1,10 @@
-@import '../viewport-breakpoints/viewport-breakpoints';
+@use '../viewport-breakpoints/viewport-breakpoints';
 
 .d-none {
   display: none;
 }
 
-@media (#{$media} and #{$media-width-sm}) {
+@media (#{viewport-breakpoints.$media} and #{viewport-breakpoints.$media-width-sm}) {
   .d-none-sm {
     display: none;
   }
@@ -13,7 +13,7 @@
   }
 }
 
-@media (#{$media} and #{$media-width-xs}) {
+@media (#{viewport-breakpoints.$media} and #{viewport-breakpoints.$media-width-xs}) {
   .d-none-xs {
     display: none;
   }
