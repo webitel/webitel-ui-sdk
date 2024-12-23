@@ -3,11 +3,14 @@
     <h2>editProxy</h2>
     <article>
       <p>
-        Proxies passed object and after each object property assigning marks this object
+        Proxies passed object and after each object property assigning marks
+        this object
         <b><code>_dirty</code></b> flag to <b><code>true</code></b>
       </p>
-      <strong>Note: if you want _dirty property to be reactive, it should declared
-        before this object will be set to store or component data</strong>
+      <strong
+        >Note: if you want _dirty property to be reactive, it should declared
+        before this object will be set to store or component data</strong
+      >
     </article>
     <article>
       <h3>Example usage:</h3>
@@ -32,6 +35,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

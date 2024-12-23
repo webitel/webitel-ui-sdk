@@ -6,7 +6,7 @@
     class="wt-tabs"
   >
     <button
-      v-for="(tab) in tabs"
+      v-for="tab in tabs"
       :key="tab.value"
       :class="{
         'wt-tab--highlight': tab.value === current.value,
@@ -20,7 +20,7 @@
         :name="tab.value"
         v-bind="{ tab, current }"
       >
-        <span style="display: block;">{{ tab.text }}</span>
+        <span style="display: block">{{ tab.text }}</span>
       </slot>
     </button>
 
@@ -28,7 +28,7 @@
       <div
         :style="{
           width: `${activeLineWidth}px`,
-          transform: `translateX(${activeLineOffset}px)`
+          transform: `translateX(${activeLineOffset}px)`,
         }"
         class="wt-tab__underline--highlight"
       />
@@ -72,7 +72,8 @@ export default {
 
     moveActiveLine(newValue) {
       if (!this.current) return;
-      if (!this.$refs || !this.$refs[newValue] || !this.$refs[newValue][0]) return;
+      if (!this.$refs || !this.$refs[newValue] || !this.$refs[newValue][0])
+        return;
       const element = this.$refs[newValue][0];
       this.activeLineWidth = element.clientWidth;
       this.activeLineOffset = element.offsetLeft;
@@ -118,7 +119,7 @@ export default {
   background: transparent;
 
   &:hover,
-  &:focus, {
+  &:focus {
     color: var(--wt-tabs-text-hover-color);
     border-bottom-color: var(--wt-tabs-underline-active-color);
   }
@@ -138,5 +139,4 @@ export default {
     font-weight: bold;
   }
 }
-
 </style>

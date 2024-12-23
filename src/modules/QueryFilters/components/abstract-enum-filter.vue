@@ -7,9 +7,21 @@
     :track-by="filterSchema.storedProp"
     :value="value"
     v-bind="$attrs"
-    @closed="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
+    @closed="
+      setValueToQuery({
+        value,
+        filterQuery,
+        storedProp: filterSchema.storedProp,
+      })
+    "
     @input="setValue({ filter: filterQuery, value: $event })"
-    @reset="setValueToQuery({ value, filterQuery, storedProp: filterSchema.storedProp })"
+    @reset="
+      setValueToQuery({
+        value,
+        filterQuery,
+        storedProp: filterSchema.storedProp,
+      })
+    "
   />
 </template>
 
@@ -28,6 +40,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

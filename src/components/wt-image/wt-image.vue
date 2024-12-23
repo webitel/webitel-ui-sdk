@@ -1,12 +1,12 @@
 <template>
   <div
     :style="{
-    width,
-    height,
-    minWidth,
-    minHeight,
-    maxWidth,
-    maxHeight,
+      width,
+      height,
+      minWidth,
+      minHeight,
+      maxWidth,
+      maxHeight,
     }"
     class="wt-image"
   >
@@ -18,7 +18,7 @@
         :alt="alt"
         :src="src"
         class="wt-image__img"
-      >
+      />
     </slot>
   </div>
 </template>
@@ -29,11 +29,11 @@ import { computed } from 'vue';
 const sizeToUnits = {
   '3xs': '32px',
   '2xs': '64px',
-  'xs': '92px',
-  'sm': '128px',
-  'md': '192px',
-  'lg': '256px',
-  'xl': '380px',
+  xs: '92px',
+  sm: '128px',
+  md: '192px',
+  lg: '256px',
+  xl: '380px',
   '2xl': '512px',
   '3xl': '600px',
 };
@@ -51,7 +51,8 @@ const props = defineProps({
     type: String,
     // default: 'md',
     // required: true,
-    validator: (v) => ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'].includes(v),
+    validator: (v) =>
+      ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'].includes(v),
   },
   alt: {
     type: String,

@@ -11,11 +11,13 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 # WtRoundedAction
 
 ## Props
+
 ::: raw
 <Docs />
 :::
 
 ## Different colors
+
 ::: raw
 <ExampleRoundedActionDifferentColors />
 :::
@@ -25,6 +27,7 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 :::
 
 ## Active (pressed) buttons
+
 ::: raw
 <ExampleActiveRoundedAction />
 :::
@@ -34,6 +37,7 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 :::
 
 ## Wide buttons
+
 ::: raw
 <ExampleWideRoundedAction />
 :::
@@ -43,6 +47,7 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 :::
 
 ## Rounded buttons
+
 ::: raw
 <ExampleRoundedRoundedAction />
 :::
@@ -52,6 +57,7 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 :::
 
 ## Small (sm) buttons
+
 ::: raw
 <ExampleSmallRoundedAction />
 :::
@@ -61,6 +67,7 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 :::
 
 ## Loading-state buttons
+
 ::: raw
 <ExampleLoadingStateRoundedAction />
 :::
@@ -68,4 +75,3 @@ import ExampleSmallRoundedAction from './examples/example-small-rounded-action.v
 ::: details Code
 <<< ./examples/example-loading-state-rounded-action.vue{js}
 :::
-

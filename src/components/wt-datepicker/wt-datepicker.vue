@@ -46,14 +46,10 @@
         />
       </template>
       <template #arrow-left>
-        <wt-icon-btn
-          icon="arrow-left"
-        />
+        <wt-icon-btn icon="arrow-left" />
       </template>
       <template #arrow-right>
-        <wt-icon-btn
-          icon="arrow-right"
-        />
+        <wt-icon-btn icon="arrow-right" />
       </template>
       <template
         v-if="isDateTime"
@@ -83,7 +79,6 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { computed, ref } from 'vue';
 
 const props = defineProps({
-
   /**
    * [`'date'`, `'datetime'`]
    * */

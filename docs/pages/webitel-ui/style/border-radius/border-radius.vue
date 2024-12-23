@@ -5,7 +5,7 @@
       <article
         v-for="(radius, key) of bRadius"
         :key="key"
-        :style="{ 'border-radius': `var(${radius.name})`}"
+        :style="{ 'border-radius': `var(${radius.name})` }"
         class="border-radius-item"
       >
         <div class="border-radius-item__name">
@@ -23,11 +23,15 @@ export default {
     bRadius: [
       {
         name: '--border-radius',
-        value: getComputedStyle(document.documentElement).getPropertyValue('--border-radius'),
+        value: getComputedStyle(document.documentElement).getPropertyValue(
+          '--border-radius',
+        ),
       },
       {
         name: '--border-radius--pill',
-        value: getComputedStyle(document.documentElement).getPropertyValue('--border-radius--pill'),
+        value: getComputedStyle(document.documentElement).getPropertyValue(
+          '--border-radius--pill',
+        ),
       },
     ],
   }),

@@ -1,9 +1,12 @@
 <template>
-  <wt-start-page :app-logo="logo" :dark-mode="false" :nav="nav"/>
+  <wt-start-page
+    :app-logo="logo"
+    :dark-mode="false"
+    :nav="nav"
+  />
 </template>
 
 <script setup>
-
 import StartLogoLight from '../assets/start-page-logo-light.svg';
 import StartLogoDark from '../assets/start-page-logo-dark.svg';
 import ConfigurationLight from '../assets/configuration-section-light.svg';
@@ -13,8 +16,8 @@ import ContactsDark from '../assets/contacts-section-dark.svg';
 
 const logo = {
   light: StartLogoLight,
-  dark: StartLogoDark
-}
+  dark: StartLogoDark,
+};
 
 const nav = [
   {
@@ -35,8 +38,7 @@ const nav = [
       dark: ConfigurationDark,
     },
   },
-]
+];
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

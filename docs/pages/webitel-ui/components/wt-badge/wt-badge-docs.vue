@@ -1,7 +1,5 @@
 <template>
-  <component-props
-    :properties="properties"
-  />
+  <component-props :properties="properties" />
 </template>
 
 <script>
@@ -15,9 +13,12 @@ export default {
         value: 'colorVariable',
         code: '<wt-badge color-variable="true-color"></wt-badge>',
         type: 'String',
-        options: ['Any color from available colors in variables. For more information, see /style/colors section.'],
+        options: [
+          'Any color from available colors in variables. For more information, see /style/colors section.',
+        ],
         default: 'false-color',
-        description: 'Note! Variable name is passed without leading "--" strokes',
+        description:
+          'Note! Variable name is passed without leading "--" strokes',
       },
       {
         value: 'outside',

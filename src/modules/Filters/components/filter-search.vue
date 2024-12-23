@@ -47,7 +47,9 @@ function setValue(payload) {
   return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
 }
 
-const filterName = ref(props.multisearch ? props.searchModeOpts[0].value : props.name);
+const filterName = ref(
+  props.multisearch ? props.searchModeOpts[0].value : props.name,
+);
 
 const currentSearchMode = computed(() =>
   props.searchModeOpts.find(({ value }) => value === filterName.value),
@@ -100,6 +102,4 @@ watch(
 );
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -6,11 +6,11 @@
 
 Недавно було додано:
 
-* `components/filter-select.vue`
-* `components/filter-datetime.vue`
-* `store/actionsRESET_FILTERS`
-* Автовстановлення `defaultValue` фільтрів від `value`
-* на кожен фільтр додався геттер у сторі з його велью
+- `components/filter-select.vue`
+- `components/filter-datetime.vue`
+- `store/actionsRESET_FILTERS`
+- Автовстановлення `defaultValue` фільтрів від `value`
+- на кожен фільтр додався геттер у сторі з його велью
 
 Всі ці зміни я не описую детально наразі, тому що дуже скоро має бути переробка фільтрів
 під новий юі і логіку, а отже, дуже ймовірно, що щось тут та й зміниться.
@@ -39,7 +39,7 @@
 
 ### Як працювали попередні фільтри?
 
-[Детально, QueryFilters](../query-filters%20(old)/Readme.md)
+[Детально, QueryFilters](<../query-filters%20(old)/Readme.md>)
 
 ## Як працюють нові фільтри?
 
@@ -54,10 +54,10 @@
 
 Це клас, який описує схему фільтра. Він містить в собі:
 
-* `name` фільтра
-* `value` фільтра
-* `getters`/`setters`/`restores`
-* додаткові необхідні параметри, такі як, наприклад, `localStorageKey`.
+- `name` фільтра
+- `value` фільтра
+- `getters`/`setters`/`restores`
+- додаткові необхідні параметри, такі як, наприклад, `localStorageKey`.
 
 ### Getters/Setters/Restores
 
@@ -67,9 +67,9 @@
 
 #### Getters
 
-* `value` - повертає значення фільтра з обʼєкта схеми даних
-* `query` - повертає значення фільтра з роута
-* `localStorage` - повертає значення фільтра з localStorage
+- `value` - повертає значення фільтра з обʼєкта схеми даних
+- `query` - повертає значення фільтра з роута
+- `localStorage` - повертає значення фільтра з localStorage
 
 #### Setters
 
@@ -95,39 +95,39 @@ Restores використовуються для відновлення знач
 
 Наразі має тільки:
 
-* `RESTORED`
-* `FILTER_SET`
-* `RESET`
+- `RESTORED`
+- `FILTER_SET`
+- `RESET`
 
 ## Store
 
 Стор відповідає за:
 
-* Зберігання [обʼєктів фільтрів](#обʼєкт-filterschema) (у `state`).
-* Інтерфейси доступу до фільтрів (геттери/сеттери/рестори).
-* (ан)сабскрайб на зміни фільтрів.
+- Зберігання [обʼєктів фільтрів](#обʼєкт-filterschema) (у `state`).
+- Інтерфейси доступу до фільтрів (геттери/сеттери/рестори).
+- (ан)сабскрайб на зміни фільтрів.
 
 Використовувати слід за інтерфейсом:
 
-* Взяти значення одного фільтра по нейму:
+- Взяти значення одного фільтра по нейму:
 
 `GET_FILTER: (filterName: string) => filterValue: any`
 
-* Взяти значення всіх фільтрів (зверніть увагу, треба викликати, як функцію):
+- Взяти значення всіх фільтрів (зверніть увагу, треба викликати, як функцію):
 
 `GET_FILTERS: () => filters: { [filterName: string]: any }`
 
-* Встановити значення фільтра:
+- Встановити значення фільтра:
 
 `SET_FILTER: ({ name: string, value: any, silent: bool }) => void`
 
 Залежно від параметра `silent`, (не) емітиться подія `FILTER_SET`.
 
-* Підписка на події у фільтрах (можна підписатися на все через `'*'`):
+- Підписка на події у фільтрах (можна підписатися на все через `'*'`):
 
 `SUBSCRIBE: ({ event: FiltersEvent | '*', callback: fn: (payload) =>  => Promise | void })) => void`
 
-* Відписка від **ВСІХ** подій у фільтрах:
+- Відписка від **ВСІХ** подій у фільтрах:
 
 `FLUSH_SUBSCRIBERS: () => void`
 
@@ -138,7 +138,9 @@ Restores використовуються для відновлення знач
 створені інстанси класу [`FilterSchema`](#обʼєкт-filterschema).
 
 ```javascript
-const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule();
+const module = new FiltersStoreModule()
+  .addFilter([{ name: '...' }])
+  .getModule();
 ```
 
 ## Composables
@@ -147,27 +149,27 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 
 ### Отримує:
 
-* `namespace` - неймспейс **таблички** (!), які він має використовувати.
+- `namespace` - неймспейс **таблички** (!), які він має використовувати.
 
 ### Вертає:
 
 #### Properties
 
-* `namespace` - неймспейс фільтрів
+- `namespace` - неймспейс фільтрів
 
 #### Methods
 
-* `restoreFilters` - відновити фільтри
-* `subscribe` - підписатися на події
-* `flushSubscribers` - відписатися від усіх подій (**обовʼязково викликаєм на `onUnmounted`**)
+- `restoreFilters` - відновити фільтри
+- `subscribe` - підписатися на події
+- `flushSubscribers` - відписатися від усіх подій (**обовʼязково викликаєм на `onUnmounted`**)
 
 ## Components
 
 "З коробки" є компоненти:
 
-* `components/filter-pagination.vue`
-* `components/filter-search.vue`
-* `components/filter-table-fields.vue`
+- `components/filter-pagination.vue`
+- `components/filter-search.vue`
+- `components/filter-table-fields.vue`
 
 Всі компоненти отримують `namespace` фільтрів як `props`, і самі взаємодіють зі стор модулем.
 
@@ -178,7 +180,7 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 #### Props:
 
 | Name        | Type   | Default | Required | Description               |
-|-------------|--------|---------|----------|---------------------------|
+| ----------- | ------ | ------- | -------- | ------------------------- |
 | `namespace` | String | -       | +        | Неймспейс фільтрів        |
 | `isNext`    | Bool   | `false` |          | Відобраення кнопки "Next" |
 
@@ -189,7 +191,7 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 #### Props:
 
 | Name             | Type   | Default | Required | Description                                                                                            |
-|------------------|--------|---------|----------|--------------------------------------------------------------------------------------------------------|
+| ---------------- | ------ | ------- | -------- | ------------------------------------------------------------------------------------------------------ |
 | `namespace`      | String | -       | +        | Неймспейс фільтрів                                                                                     |
 | `multisearch`    | Bool   | `false` |          | Включити мультипошук з вибором поля, по якому ми шукаємо                                               |
 | `name`           | String | `'q'`   |          | Імʼя поля, по якому ми шукаємо                                                                         |
@@ -202,7 +204,7 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 #### Props:
 
 | Name            | Type   | Default | Required | Description                                          |
-|-----------------|--------|---------|----------|------------------------------------------------------|
+| --------------- | ------ | ------- | -------- | ---------------------------------------------------- |
 | `namespace`     | String | -       | +        | Неймспейс фільтрів                                   |
 | `headers`       | Array  | -       | +        | Хедери таблички                                      |
 | `staticHeaders` | Array  | `[]`    |          | Масив `value` хедерів, обовʼязкових для відображення |
@@ -214,7 +216,7 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 НЕМАЄ ПОТРЕБИ ВИКОНУВАТИ АПДЕЙТ ХЕДЕРІВ `@change`.
 
 | Name     | Payload | Description            |
-|----------|---------|------------------------|
+| -------- | ------- | ---------------------- |
 | `change` | Array   | новий `headers` обʼєкт |
 
 ## Наглядно
@@ -232,18 +234,20 @@ const module = new FiltersStoreModule().addFilter([{ name: '...' }]).getModule()
 
 import FiltersStoreModule from '@webitel/ui-sdk/src/modules/Filters/store/FiltersStoreModule.js';
 
-const module = new FiltersStoreModule().addFilter([
-  { name: 'page', value: 1, defaultValue: 1 },
-  { name: 'size', value: 10, defaultValue: 10 },
-  { name: 'search' },
-  { name: 'sort' },
-  {
-    name: 'fields',
-    getters: ['value', 'query', 'localStorage'],
-    setters: ['value', 'query', 'localStorage'],
-    restores: ['query', 'localStorage'],
-  },
-]).getModule();
+const module = new FiltersStoreModule()
+  .addFilter([
+    { name: 'page', value: 1, defaultValue: 1 },
+    { name: 'size', value: 10, defaultValue: 10 },
+    { name: 'search' },
+    { name: 'sort' },
+    {
+      name: 'fields',
+      getters: ['value', 'query', 'localStorage'],
+      setters: ['value', 'query', 'localStorage'],
+      restores: ['query', 'localStorage'],
+    },
+  ])
+  .getModule();
 ```
 
 ### Стор таблички
@@ -266,41 +270,41 @@ const module = new createTableStoreModule({
 
 <template>
   <filter-search
-          :namespace="filtersNamespace"
-          name="q"
+    :namespace="filtersNamespace"
+    name="q"
   />
 </template>
 
 <script setup>
-  import { useTableFilters } from '@webitel/ui-sdk/src/modules/Filters/composables/useTableFilters.js';
-  import { useTableStore } from '@webitel/ui-sdk/store';
-  import FilterSearch from '@webitel/ui-sdk/src/modules/Filters/components/filter-search.vue';
+import { useTableFilters } from '@webitel/ui-sdk/src/modules/Filters/composables/useTableFilters.js';
+import { useTableStore } from '@webitel/ui-sdk/store';
+import FilterSearch from '@webitel/ui-sdk/src/modules/Filters/components/filter-search.vue';
 
-  const namespace = 'docs';
+const namespace = 'docs';
 
-  const {
-    namespace: tableNamespace,
-    // ...
-    onFilterEvent,
-  } = useTableStore(namespace);
+const {
+  namespace: tableNamespace,
+  // ...
+  onFilterEvent,
+} = useTableStore(namespace);
 
-  const {
-    namespace: filtersNamespace,
+const {
+  namespace: filtersNamespace,
 
-    subscribe,
-    flushSubscribers,
-    restoreFilters,
-  } = useTableFilters(tableNamespace);
+  subscribe,
+  flushSubscribers,
+  restoreFilters,
+} = useTableFilters(tableNamespace);
 
-  subscribe({
-    event: '*',
-    callback: onFilterEvent,
-  });
+subscribe({
+  event: '*',
+  callback: onFilterEvent,
+});
 
-  restoreFilters();
+restoreFilters();
 
-  onUnmounted(() => {
-    flushSubscribers();
-  });
+onUnmounted(() => {
+  flushSubscribers();
+});
 </script>
 ```

@@ -6,8 +6,8 @@ const validateConfig = (config) => {
 
 const logger =
   (globalApp) =>
-    (type) =>
-      (...params) => {
+  (type) =>
+  (...params) => {
     if (validateConfig(params[0])) {
       const config = params[0];
 
@@ -16,9 +16,9 @@ const logger =
       const path = window?.location?.href || 'non-browser env';
 
       return (...msgs) => {
-          const prependix = `@webitel/${app}:${entity}:${module}:`;
+        const prependix = `@webitel/${app}:${entity}:${module}:`;
 
-          const appendix = `[${timestamp}][${path}]`;
+        const appendix = `[${timestamp}][${path}]`;
 
         return console[type](prependix, ...msgs, appendix);
       };

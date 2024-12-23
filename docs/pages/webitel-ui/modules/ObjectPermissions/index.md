@@ -36,7 +36,10 @@
 ```js
 // user module routing
 
-const PermissionsTab = () => import('@webitel/ui-sdk/src/modules/ObjectPermissions/components/permissions-tab.vue');
+const PermissionsTab = () =>
+  import(
+    '@webitel/ui-sdk/src/modules/ObjectPermissions/components/permissions-tab.vue'
+  );
 
 const UsersRoutes = [
   // ...

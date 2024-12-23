@@ -14,7 +14,9 @@ export default {
       return this.XLSExport ? this.XLSExport.downloadProgress.count : 0;
     },
     selectedIds() {
-      return this.dataList.filter((item) => item._isSelected).map((item) => item.id);
+      return this.dataList
+        .filter((item) => item._isSelected)
+        .map((item) => item.id);
     },
     isAnySelected() {
       return !!this.selectedIds.length;

@@ -6,11 +6,13 @@ import ExampleHeadlineNav from './examples/example-headline-nav.vue';
 # WtHeadlineNav
 
 ## Props
+
 ::: raw
 <Docs />
 :::
 
 ## Example:
+
 ::: raw
 <ExampleHeadlineNav />
 :::

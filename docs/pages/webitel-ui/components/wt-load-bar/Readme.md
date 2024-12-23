@@ -6,11 +6,13 @@ import ExampleLoadBar from './examples/example-load-bar.vue';
 # WtLoadBar
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Load Bar
+
 ::: raw
 <ExampleLoadBar/>
 :::

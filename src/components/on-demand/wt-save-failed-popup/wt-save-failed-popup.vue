@@ -17,9 +17,7 @@
       </div>
     </template>
     <template #actions>
-      <wt-button
-        @click="save"
-      >
+      <wt-button @click="save">
         {{ $t('reusable.retry') }}
       </wt-button>
       <wt-button

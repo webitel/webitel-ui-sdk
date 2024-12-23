@@ -15,7 +15,10 @@ describe('TableStoreModule', () => {
 
     const state = { headers };
 
-    expect(new TableStoreModule({}).getters.FIELDS(state)).toEqual(['id', 'age']);
+    expect(new TableStoreModule({}).getters.FIELDS(state)).toEqual([
+      'id',
+      'age',
+    ]);
   });
 });
 
@@ -230,7 +233,9 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       value: ['surname'],
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('fields')).toEqual(['surname']);
+    expect(store.getters['table/filters/GET_FILTER']('fields')).toEqual([
+      'surname',
+    ]);
 
     expect(store.getters['table/FIELDS']).toEqual(['id', 'included']);
 

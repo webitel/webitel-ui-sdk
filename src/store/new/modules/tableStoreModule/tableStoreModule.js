@@ -48,7 +48,8 @@ const getters = {
 
 const actions = {
   // FIXME: maybe move to filters module?
-  SET_FILTER: (context, payload) => context.dispatch('filters/SET_FILTER', payload),
+  SET_FILTER: (context, payload) =>
+    context.dispatch('filters/SET_FILTER', payload),
 
   // FIXME: maybe move to filters module?
   ON_FILTER_EVENT: async (context, { event, payload }) => {
@@ -67,14 +68,16 @@ const actions = {
   // FIXME: maybe move to filters module?
   HANDLE_FILTERS_RESTORE: async (context, { fields, sort }) => {
     if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
-    if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
+    if (fields?.length)
+      await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
     return context.dispatch('LOAD_DATA_LIST');
   },
 
   // FIXME: maybe move to filters module?
   HANDLE_FILTER_RESET: async (context, { fields, sort }) => {
     if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
-    if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
+    if (fields?.length)
+      await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
     return context.dispatch('LOAD_DATA_LIST');
   },
 
@@ -112,17 +115,19 @@ const actions = {
     const nextSort = queryToSortAdapter(value?.slice(0, 1) || '');
     const field = nextSort ? value.slice(1) : value;
 
-    const headers = context.state.headers.map(({ sort: currentSort, ...header }) => {
-      let sort;
+    const headers = context.state.headers.map(
+      ({ sort: currentSort, ...header }) => {
+        let sort;
 
-      if (field) {
-        sort = field === header.field ? nextSort : currentSort;
-      } else {
-        sort = nextSort; // null
-      }
+        if (field) {
+          sort = field === header.field ? nextSort : currentSort;
+        } else {
+          sort = nextSort; // null
+        }
 
-      return { ...header, sort };
-    });
+        return { ...header, sort };
+      },
+    );
 
     context.commit('SET', { path: 'headers', value: headers });
   },
@@ -133,13 +138,13 @@ const actions = {
 
     const params = context.getters.GET_LIST_PARAMS(query);
     try {
-      const {
-        items = [],
-        next = false,
-      } = await context.dispatch('GET_LIST_API', {
-        context,
-        params,
-      });
+      const { items = [], next = false } = await context.dispatch(
+        'GET_LIST_API',
+        {
+          context,
+          params,
+        },
+      );
 
       context.commit('SET', { path: 'dataList', value: items });
       context.commit('SET', { path: 'isNextPage', value: next });
@@ -222,21 +227,19 @@ const actions = {
   },
 
   DELETE_BULK: async (context, deleted) =>
-    Promise.allSettled(deleted.map((item) => context.dispatch('DELETE_SINGLE', item))),
+    Promise.allSettled(
+      deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
+    ),
 
   SET_SELECTED: (context, selected) => {
     context.commit('SET', { path: 'selected', value: selected });
   },
 
   GET_LIST_API: (context, payload) => context.dispatch('api/GET_LIST', payload),
-  PATCH_ITEM_API: (
-    context,
-    payload,
-  ) => context.dispatch('api/PATCH_ITEM', payload),
-  DELETE_ITEM_API: (
-    context,
-    payload,
-  ) => context.dispatch('api/DELETE_ITEM', payload),
+  PATCH_ITEM_API: (context, payload) =>
+    context.dispatch('api/PATCH_ITEM', payload),
+  DELETE_ITEM_API: (context, payload) =>
+    context.dispatch('api/DELETE_ITEM', payload),
 
   RESET_TABLE_STATE: async (context) => {
     context.commit('RESET_TABLE_STATE');

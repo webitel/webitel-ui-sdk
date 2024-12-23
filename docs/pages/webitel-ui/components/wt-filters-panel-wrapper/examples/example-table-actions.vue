@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
   <wt-filters-panel-wrapper>
@@ -14,6 +12,4 @@
   </wt-filters-panel-wrapper>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

@@ -8,11 +8,13 @@ import ExampleIconBadge from './examples/example-icon-badge.vue';
 # WtBadge
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Badge
+
 ::: raw
 <ExampleBadge/>
 :::
@@ -22,6 +24,7 @@ import ExampleIconBadge from './examples/example-icon-badge.vue';
 :::
 
 ## Example Outside Badge
+
 ::: raw
 <ExampleOutsideBadge/>
 :::
@@ -31,6 +34,7 @@ import ExampleIconBadge from './examples/example-icon-badge.vue';
 :::
 
 ## Example Icon Badge
+
 ::: raw
 <ExampleIconBadge/>
 :::
