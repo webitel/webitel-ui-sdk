@@ -34,7 +34,6 @@ TODO
 _Виконані пункти можна пропустити._
 
 ### [How to setup agent account and assign it to queue?](#how-to-setup-agent-account-and-assign-it-to-queue)
-
 Чергу треба створити вхідну.
 
 ### How to setup member account?
@@ -56,7 +55,6 @@ _Виконані пункти можна пропустити._
 [Приклад діалплану](https://dev.webitel.com/routing/dialplan/109)
 
 ### How to call, actually?
-
 1. Зайти у обидва аккаунти з різних браузерів.
 2. У акаунті оператора ввійти в режим Contact Center.
 3. У аккаунті мембера подзвонити на номер, вказаний в діалплані.
@@ -77,7 +75,6 @@ _Виконані пункти можна пропустити._
 2. Створити мембера. Будь-якого.
 
 ### How to receive a task in Workspace?
-
 1. Зайти у Contact-center з акаунта агента.
 2. Задача має прийти автоматично.
 

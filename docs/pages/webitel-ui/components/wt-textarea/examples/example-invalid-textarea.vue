@@ -14,14 +14,11 @@ import { useVuelidate } from '@vuelidate/core';
 
 const value = ref('invalid value');
 
-const v$ = useVuelidate(
-  computed(() => ({
-    value: {
-      required: () => false,
-    },
-  })),
-  { value },
-);
+const v$ = useVuelidate(computed(() => ({
+  value: {
+    required: () => false,
+  },
+})), { value });
 
 v$.value.$touch();
 

@@ -1,10 +1,7 @@
 import get from 'lodash/get.js';
 import { onMounted, ref, watch } from 'vue';
 
-export const useCachedItemInstanceName = (
-  itemInstance,
-  { namePath = 'name' } = {},
-) => {
+export const useCachedItemInstanceName = (itemInstance, { namePath = 'name' } = {}) => {
   const name = ref('');
 
   const updateName = () => {

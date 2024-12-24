@@ -3,7 +3,9 @@
     <li
       v-for="(category, key) of categories"
       :key="key"
-      class="nav-menu__option nav-menu__item nav-menu-lvl-2--inner"
+      class="nav-menu__option
+             nav-menu__item
+             nav-menu-lvl-2--inner"
     >
       <span class="nav-menu-lvl-2__indicator" />
       <router-link
@@ -56,8 +58,7 @@ const props = defineProps({
   &__link {
     color: var(--text-main-color);
 
-    &:hover,
-    &:active {
+    &:hover, &:active {
       text-decoration: underline;
     }
   }

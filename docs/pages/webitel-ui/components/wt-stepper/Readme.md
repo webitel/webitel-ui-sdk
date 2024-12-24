@@ -6,13 +6,11 @@ import ExampleStepper from './examples/example-stepper.vue';
 # WtStepper
 
 ## Props
-
 ::: raw
 <Docs />
 :::
 
 ## Example Stepper
-
 ::: raw
 <ExampleStepper />
 :::

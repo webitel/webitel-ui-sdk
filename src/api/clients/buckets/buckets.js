@@ -26,14 +26,7 @@ const getBucketsList = async (params) => {
   ]);
 
   try {
-    const response = await bucketService.searchBucket(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-    );
+    const response = await bucketService.searchBucket(page, size, search, sort, fields, id);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -59,10 +52,7 @@ const getBucket = async ({ itemId: id }) => {
 const fieldsToSend = ['name', 'description'];
 
 const addBucket = async ({ itemInstance }) => {
-  const item = applyTransform(itemInstance, [
-    sanitize(fieldsToSend),
-    camelToSnake(),
-  ]);
+  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
   try {
     const response = await bucketService.createBucket(item);
     return applyTransform(response.data, [snakeToCamel()]);
@@ -72,10 +62,7 @@ const addBucket = async ({ itemInstance }) => {
 };
 
 const updateBucket = async ({ itemInstance, itemId: id }) => {
-  const item = applyTransform(itemInstance, [
-    sanitize(fieldsToSend),
-    camelToSnake(),
-  ]);
+  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
   try {
     const response = await bucketService.updateBucket(id, item);
     return applyTransform(response.data, [snakeToCamel()]);

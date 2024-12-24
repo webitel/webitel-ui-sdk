@@ -6,11 +6,9 @@ import Specs from './component-specs.vue';
 # WtTable
 
 ## Specs
-
 <Specs />
 
 ## Example Table
-
 ::: raw
 <ExampleTable/>
 :::

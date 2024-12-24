@@ -8,13 +8,11 @@ import ExampleHeaderActions from './examples/example-header-actions.vue';
 # WtAppHeader
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example App Header
-
 ::: raw
 <ExampleAppHeader/>
 :::
@@ -24,7 +22,6 @@ import ExampleHeaderActions from './examples/example-header-actions.vue';
 :::
 
 ## Example App Navigator
-
 ::: raw
 <ExampleAppNavigator/>
 :::
@@ -34,7 +31,6 @@ import ExampleHeaderActions from './examples/example-header-actions.vue';
 :::
 
 ## Example Header Actions
-
 ::: raw
 <ExampleHeaderActions/>
 :::
@@ -42,3 +38,4 @@ import ExampleHeaderActions from './examples/example-header-actions.vue';
 ::: details Code
 <<< ./examples/example-header-actions.vue
 :::
+

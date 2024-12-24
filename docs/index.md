@@ -13,6 +13,7 @@ hero:
     alt: VitePress
 
   actions:
+
     - theme: brand
       text: Старт
       link: /pages/docs/faq/faq/Readme
@@ -29,13 +30,16 @@ hero:
       text: не натискати
       link: https://www.youtube.com/watch?v=BU005EjDm2g
 
-# https://vitepress.dev/reference/default-theme-home-page#features-section
+# https://vitepress.dev/reference/default-theme-home-page#features-section 
 features:
-  - icon: 🛠️
-    title: TODO
 
   - icon: 🛠️
     title: TODO
+
+
+  - icon: 🛠️
+    title: TODO
+
 
   - icon: 🛠️
     title: TODO

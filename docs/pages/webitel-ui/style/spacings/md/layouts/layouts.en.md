@@ -5,3 +5,5 @@ In Figma layouts, page spacings are represented on special type of layout:
 
 So that, each spacing variable has its visual color:
 ![Spacing colors](../../assets/spacing-colors.png)
+
+

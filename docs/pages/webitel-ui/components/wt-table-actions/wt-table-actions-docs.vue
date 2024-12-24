@@ -1,6 +1,10 @@
 <template>
-  <component-props :properties="properties" />
-  <component-events :events="events" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
   <component-slots />
 </template>
 
@@ -15,15 +19,8 @@ export default {
         value: 'icons',
         code: '<wt-table-actions :icons="[]"></wt-table-actions>',
         type: 'Array',
-        options: [
-          'import',
-          'export',
-          'filter-reset',
-          'column-select',
-          'refresh',
-          'settings',
-        ],
-        default: "['refresh']",
+        options: ['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings'],
+        default: '[\'refresh\']',
       },
     ],
     events: [
@@ -44,4 +41,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

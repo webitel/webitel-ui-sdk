@@ -1,7 +1,13 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
-  <wt-app-header> lorem ipsum </wt-app-header>
+  <wt-app-header>
+    lorem ipsum
+  </wt-app-header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

@@ -1,6 +1,8 @@
 <template>
   <section class="colors">
-    <h2 class="colors-family-title">Main Colors</h2>
+    <h2 class="colors-family-title">
+      Main Colors
+    </h2>
     <article
       v-for="({ title, colors }, key) of mainColors"
       :key="key"
@@ -16,16 +18,12 @@
         :grid-actions="false"
       >
         <template #code="{ item }">
-          {{
-            w
-              .getComputedStyle(w.document.documentElement)
-              .getPropertyValue(item.color)
-          }}
+          {{ w.getComputedStyle(w.document.documentElement).getPropertyValue(item.color) }}
         </template>
         <template #preview="{ item }">
           <div
             class="color-preview"
-            :style="{ background: `var(${item.color})` }"
+            :style="{background: `var(${item.color})`}"
           />
         </template>
       </wt-table>
@@ -47,16 +45,12 @@
         :grid-actions="false"
       >
         <template #code="{ item }">
-          {{
-            w
-              .getComputedStyle(w.document.documentElement)
-              .getPropertyValue(item.color)
-          }}
+          {{ w.getComputedStyle(w.document.documentElement).getPropertyValue(item.color) }}
         </template>
         <template #preview="{ item }">
           <div
             class="color-preview"
-            :style="{ background: `var(${item.color})` }"
+            :style="{background: `var(${item.color})`}"
           />
         </template>
       </wt-table>
@@ -79,34 +73,42 @@ const mainColors = [
     title: 'Main colors',
     colors: [
       {
+
         color: '--accent-color',
         name: 'Accent color',
       },
       {
+
         color: '--main-color',
         name: 'Main color',
       },
       {
+
         color: '--contrast-color',
         name: 'Contrast color',
       },
       {
+
         color: '--secondary-color',
         name: 'Secondary color',
       },
       {
+
         color: '--secondary-color-50',
         name: 'Secondary color 50',
       },
       {
+
         color: '--page-bg-color',
         name: 'Page background color',
       },
       {
+
         color: '--header-color',
         name: 'Header color',
       },
       {
+
         color: '--accent-secondary-color',
         name: 'Accent secondary color',
       },
@@ -116,54 +118,67 @@ const mainColors = [
     title: 'Semantic colors',
     colors: [
       {
+
         color: '--disabled-color',
         name: 'Disabled color',
       },
       {
+
         color: '--true-color',
         name: 'True color',
       },
       {
+
         color: '--true--hover-color',
         name: 'True hover color',
       },
       {
+
         color: '--false-color',
         name: 'False color',
       },
       {
+
         color: '--false--hover-color',
         name: 'False hover color',
       },
       {
+
         color: '--hold-color',
         name: 'Hold color',
       },
       {
+
         color: '--hold--hover-color',
         name: 'Hold hover color',
       },
       {
+
         color: '--transfer-color',
         name: 'Transfer color',
       },
       {
+
         color: '--transfer--hover-color',
         name: 'Transfer hover color',
       },
       {
+
         color: '--job-color',
         name: 'Job color',
       },
       {
+
         color: '--job--hover-color',
         name: 'Job hover color',
       },
       {
+
         color: '--link-color',
         name: 'Link color',
       },
       {
+
         color: '--link--hover-color',
         name: 'Link hover color',
       },
@@ -173,18 +188,22 @@ const mainColors = [
     title: 'Icon colors',
     colors: [
       {
+
         color: '--icon-color',
         name: 'Icon color',
       },
       {
+
         color: '--icon-color-secondary',
         name: 'Icon secondary color',
       },
       {
+
         color: '--icon-color--hover',
         name: 'Icon hover color',
       },
       {
+
         color: '--icon-color-disabled',
         name: 'Icon disabled color',
       },
@@ -194,38 +213,47 @@ const mainColors = [
     title: 'Form colors',
     colors: [
       {
+
         color: '--form-input-color',
         name: 'User input color',
       },
       {
+
         color: '--form-label-color',
         name: 'Form label color',
       },
       {
+
         color: '--form-label--hover-color',
         name: 'Form label hover color',
       },
       {
+
         color: '--form-label--active-color',
         name: 'Form label active color',
       },
       {
+
         color: '--form-label--disabled-color',
         name: 'Form label disabled color',
       },
       {
+
         color: '--form-border-color',
         name: 'Form border color',
       },
       {
+
         color: '--form-border--hover-color',
         name: 'Form border hover color',
       },
       {
+
         color: '--form-border--disabled-color',
         name: 'Form border disabled color',
       },
       {
+
         color: '--form-placeholder-color',
         name: 'Form placeholder color',
       },
@@ -235,14 +263,17 @@ const mainColors = [
     title: 'Outline colors',
     colors: [
       {
+
         color: '--form-outline-label-color',
         name: 'Form outline label color',
       },
       {
+
         color: '--form-outline-border-color',
         name: 'Form outline border color',
       },
       {
+
         color: '--form-outline-border--hover-color',
         name: 'Form outline border hover color',
       },
@@ -252,18 +283,22 @@ const mainColors = [
     title: 'Text colors',
     colors: [
       {
+
         color: '--text-primary-color',
         name: 'Text primary color',
       },
       {
+
         color: '--text-outline-color',
         name: 'Text outline color',
       },
       {
+
         color: '--text-contrast-color',
         name: 'Text contrast color',
       },
       {
+
         color: '--text--disabled-color',
         name: 'Text disabled color',
       },
@@ -273,18 +308,22 @@ const mainColors = [
     title: 'Chat colors',
     colors: [
       {
+
         color: '--chat-client-message-bg-color',
         name: 'Client message background',
       },
       {
+
         color: '--chat-agent-message-bg-color',
         name: 'Client message background',
       },
       {
+
         color: '--chat-client-attachment-bg-color',
         name: 'Agent message attachment background',
       },
       {
+
         color: '--chat-agent-attachment-bg-color',
         name: 'Agent message attachment background',
       },
@@ -314,13 +353,8 @@ const paletteRed = {
 const changeColor = (input, replacements) => {
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
   let result = JSON.stringify(input);
-  replacements.forEach(
-    ({ from, to }) => (result = result.replaceAll(from, to)),
-  );
-  replacements.forEach(
-    ({ from, to }) =>
-      (result = result.replaceAll(capitalize(from), capitalize(to))),
-  );
+  replacements.forEach(({ from, to }) => result = result.replaceAll(from, to));
+  replacements.forEach(({ from, to }) => result = result.replaceAll(capitalize(from), capitalize(to)));
   return JSON.parse(result);
 };
 
@@ -360,8 +394,7 @@ const palette = [
 </script>
 
 <style lang="scss" scoped>
-.colors,
-.colors-family {
+.colors, .colors-family {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);

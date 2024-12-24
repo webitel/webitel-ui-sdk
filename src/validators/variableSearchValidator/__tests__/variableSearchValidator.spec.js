@@ -42,8 +42,7 @@ describe('Variable search validator', () => {
     expect(variableSearchValidator(searchValue)).toBe(true);
   });
   it('Multiple "=" search', () => {
-    const searchValue =
-      'height=5 feet 5½ inches (166 cm), age=1231, fin=123231';
+    const searchValue = 'height=5 feet 5½ inches (166 cm), age=1231, fin=123231';
     expect(variableSearchValidator(searchValue)).toBe(false);
   });
 });

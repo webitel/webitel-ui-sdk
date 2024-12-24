@@ -132,8 +132,7 @@ export default {
     async fetchOptions({ search, page } = this.searchParams) {
       if (!this.isApiMode) return;
       const { items, next } = await this.searchMethod({ search, page });
-      this.apiOptions =
-        this.searchParams.page === 1 ? items : this.apiOptions.concat(items);
+      this.apiOptions = this.searchParams.page === 1 ? items : this.apiOptions.concat(items);
       this.searchHasNext = next;
       this.isLoading = false;
     },

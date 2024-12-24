@@ -1,9 +1,15 @@
 <script setup>
-const colors = ['primary', 'secondary', 'success', 'error', 'warning'];
+const colors = [
+  'primary',
+  'secondary',
+  'success',
+  'error',
+  'warning',
+];
 </script>
 
 <template>
-  <div style="display: flex; flex-direction: column; gap: 10px">
+  <div style="display: flex; flex-direction: column; gap: 10px;">
     <wt-progress-bar
       v-for="color of colors"
       :max="100"
@@ -14,4 +20,6 @@ const colors = ['primary', 'secondary', 'success', 'error', 'warning'];
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

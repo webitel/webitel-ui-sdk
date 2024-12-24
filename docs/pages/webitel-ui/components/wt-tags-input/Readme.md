@@ -6,21 +6,19 @@ import ExampleDisabledTagsInput from './examples/example-disabled-tags-input.vue
 import ExampleInvalidTagsInput from './examples/example-invalid-tags-input.vue';
 </script>
 
+
 # WtTagsInput
 
 ### This component is built on top of [Vue Multiselect](https://vue-multiselect.js.org/), like wt-select component.
-
 **There will be described only differences from wt-select component. Same props, events and slots are listed on wt-select page.
 For more information, see WtSelect Docs**
 
 ## Props
-
 ::: raw
 <Docs />
 :::
 
 ## Example Tags Input
-
 ::: raw
 <ExampleTagsInput />
 :::
@@ -30,7 +28,6 @@ For more information, see WtSelect Docs**
 :::
 
 ## Example Taggable Tags Input
-
 ::: raw
 <ExampleTaggableTagsInput />
 :::
@@ -40,7 +37,6 @@ For more information, see WtSelect Docs**
 :::
 
 ## Example Disabled Tags Input
-
 ::: raw
 <ExampleDisabledTagsInput />
 :::
@@ -50,7 +46,6 @@ For more information, see WtSelect Docs**
 :::
 
 ## Example Invalid Tags Input
-
 ::: raw
 <ExampleInvalidTagsInput />
 :::

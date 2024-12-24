@@ -15,9 +15,7 @@
 // import { wtlog } from '@webitel/ui-sdk/scripts';
 
 // with metadata
-wtlog.warn({ entity: 'component', module: 'wt-notifications-bar' })(
-  'Some warning message',
-);
+wtlog.warn({ entity: 'component', module: 'wt-notifications-bar' })('Some warning message');
 
 // without metadata
 wtlog.log('Some warning message');
@@ -27,10 +25,10 @@ wtlog.log('Some warning message');
 
 Так само, як і у обʼєкта `console`:
 
-- `.log(...)`
-- `.warn(...)`
-- `.error(...)`
-- `.info(...)`
+* `.log(...)`
+* `.warn(...)`
+* `.error(...)`
+* `.info(...)`
 
 ### Params
 
@@ -45,10 +43,11 @@ wtlog.log('Some warning message');
 > [!WARNING]
 > В такому разі, логер повертає лог-функцію, а там вже все [те саме](#message).
 
-- `entity` - назва сутності, яка викликала лог (компонент, стор, апі, етс)
-- `module` - назва модуля, який викликає лог (наразі, не придумав точного визначення,
-  тому, на ваш розсуд – але має бути чітко зрозуміло, куди лізти)
-- `app` – назва апплікейшена. якщо передана, може переписати дефолтне (задане глобально).
+* `entity` - назва сутності, яка викликала лог (компонент, стор, апі, етс)
+* `module` - назва модуля, який викликає лог (наразі, не придумав точного визначення,
+тому, на ваш розсуд – але має бути чітко зрозуміло, куди лізти)
+* `app` – назва апплікейшена. якщо передана, може переписати дефолтне (задане глобально).
+
 
 ## Installation
 
@@ -75,7 +74,7 @@ window.wtlog = wtlog('appname');
 import { _wtUiLog } from '../scripts/logger.js'; // зашитий ui-sdk app namespace
 // ...
 
-_wtUiLog.warn({ entity: 'component', module: 'wt-notifications-bar' })(
-  'Some warning message',
-);
+_wtUiLog.warn({ entity: 'component', module: 'wt-notifications-bar' })('Some warning message');
 ```
+
+

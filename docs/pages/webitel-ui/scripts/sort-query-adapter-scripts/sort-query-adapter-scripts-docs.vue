@@ -3,9 +3,9 @@
     <h2>sortQueryAdapters</h2>
     <article class="script">
       <p>
-        has SortSymbols values enum, sortToQueryAdapter and queryToSortAdapter
-        to convert '+', '-', and '' (url and request formal) to 'asc', 'desc',
-        null -- code logic format
+        has SortSymbols values enum,
+        sortToQueryAdapter and queryToSortAdapter to convert '+', '-', and ''
+        (url and request formal) to 'asc', 'desc', null -- code logic format
       </p>
     </article>
   </section>
@@ -22,4 +22,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

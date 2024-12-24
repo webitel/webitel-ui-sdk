@@ -35,9 +35,7 @@ export default {
       if (optsHaveLocale) {
         return this.options.map((opt) => ({
           ...opt,
-          name: Array.isArray(opt.locale)
-            ? this.$tc(...opt.locale)
-            : this.$t(opt.locale),
+          name: Array.isArray(opt.locale) ? this.$tc(...opt.locale) : this.$t(opt.locale),
         }));
       }
       return this.options;
@@ -62,10 +60,7 @@ export default {
           newValue = newValue.concat(
             value
               .filter(
-                (val) =>
-                  !this.localizedOptions.some(
-                    (option) => val === option[this.storedProp],
-                  ),
+                (val) => !this.localizedOptions.some((option) => val === option[this.storedProp]),
               )
               .map((val) => ({ [this.storedProp]: val, name: val })),
           );
@@ -74,9 +69,7 @@ export default {
         /*
         see comments above
          */
-        newValue = this.localizedOptions.find(
-          (option) => value === option[this.storedProp],
-        );
+        newValue = this.localizedOptions.find((option) => value === option[this.storedProp]);
         if (this.allowCustomValues) {
           newValue = newValue || { [this.storedProp]: value, name: value };
         }

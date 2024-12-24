@@ -1,5 +1,6 @@
 import deepCopy from 'deep-copy';
-import FiltersStoreModule from '../../../../../Filters/store/FiltersStoreModule';
+import FiltersStoreModule
+  from '../../../../../Filters/store/FiltersStoreModule';
 
 const filtersList = [
   {
@@ -15,8 +16,8 @@ const filtersList = [
 
 export default () => {
   const filters = new FiltersStoreModule()
-    .addFilter(deepCopy(filtersList))
-    .getModule();
+  .addFilter(deepCopy(filtersList))
+  .getModule();
 
   return filters;
 };

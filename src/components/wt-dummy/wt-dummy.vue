@@ -6,7 +6,7 @@
         :src="src || dummy"
         :width="size"
         alt="dummy-picture"
-      />
+      >
     </div>
     <p
       v-if="!hiddenText"

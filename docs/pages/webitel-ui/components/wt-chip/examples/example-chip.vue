@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
   <wt-chip>+1</wt-chip>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

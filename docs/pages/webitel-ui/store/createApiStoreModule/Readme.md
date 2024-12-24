@@ -56,15 +56,11 @@
 Зазвичай апі стор модуль використовується як чайлд іншого модуля зі своїм контекстом, який його викликає.
 
 ```js
-import {
-  createApiStoreModule,
-  createBaseStoreModule,
-} from '@webitel/ui-sdk/store';
+import { createApiStoreModule, createBaseStoreModule } from '@webitel/ui-sdk/store';
 import smthApi from '../api/smth'; // { getList, get, ... }
 
 const actions = {
-  GET_LIST_OF_SMTH: (context) =>
-    context.dispatch('api/GET_LIST', { context, params: { smth: 'smth' } }),
+  GET_LIST_OF_SMTH: (context) => context.dispatch('api/GET_LIST', { context, params: { smth: 'smth' } }),
 };
 
 const apiModule = createApiStoreModule({
@@ -83,3 +79,4 @@ const baseModule = createBaseStoreModule({
 
 export default baseModule;
 ```
+

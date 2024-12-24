@@ -1,15 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 
-const isShowDialog = ref(false);
+const isShowDialog = ref(false)
 
 const callback = async () => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, 500),
-  );
-};
+  return new Promise(resolve => setTimeout(() => {
+    resolve()
+  }, 500))
+}
 </script>
 
 <template>

@@ -28,14 +28,7 @@
 </template>
 
 <script setup>
-import {
-  autoPlacement,
-  autoUpdate,
-  flip,
-  offset,
-  shift,
-  useFloating,
-} from '@floating-ui/vue';
+import { autoPlacement, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import debounce from '../../scripts/debounce.js';
 import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions.js';
@@ -110,11 +103,7 @@ const { floatingStyles } = useFloating(activator, floating, {
   TOGGLE BECAUSE OF PERFORMANCE ISSUES, RELATED TO USAGE OF AUTO_UPDATE OF POSITIONS
   */
   whileElementsMounted: autoUpdate, // https://floating-ui.com/docs/vue#anchoring
-  middleware: [
-    shift(),
-    offset(4),
-    props.placement === 'auto' ? autoPlacement() : flip(),
-  ],
+  middleware: [shift(), offset(4), props.placement === 'auto' ? autoPlacement() : flip()],
 });
 
 useTooltipTriggerSubscriptions({

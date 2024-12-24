@@ -1,5 +1,4 @@
 Validator for variable search string
-
 ```js
 import variableSearchValidator from '@webitel/ui-sdk/src/validators/variableSearchValidator/variableSearchValidator';
 

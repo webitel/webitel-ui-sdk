@@ -6,13 +6,13 @@
 ## Input params
 
 | Params | Description                                                  |
-| ------ | ------------------------------------------------------------ |
+|--------|--------------------------------------------------------------|
 | name   | Імя сторінки, куди треба повернутись після закриття поточної |
 
 ## Return
 
 | Params | Description |
-| ------ | ----------- |
+|--------|-------------|
 | close  |             |
 
 ## Використання
@@ -21,4 +21,6 @@
 import { useClose } from '@webitel/ui-sdk/src/composables/useClose/useClose.js';
 
 const { close } = useClose('some-route');
+
 ```
+

@@ -8,16 +8,17 @@ const autocomplete = [
   { name: 'Rails', language: 'Ruby' },
 ];
 
-const value = ref([autocomplete[0], autocomplete[1]]);
+const value = ref([
+  autocomplete[0],
+  autocomplete[1],
+]);
 
-const v$ = useVuelidate(
-  computed(() => ({
-    value: {
-      required: () => false,
-    },
-  })),
-  { value },
-);
+
+const v$ = useVuelidate(computed(() => ({
+  value: {
+    required: () => false,
+  },
+})), { value });
 
 v$.value.$touch();
 </script>
@@ -42,4 +43,6 @@ v$.value.$touch();
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

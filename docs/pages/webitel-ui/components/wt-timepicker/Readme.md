@@ -10,7 +10,7 @@ import ExampleTimepickerDateMode from './examples/example-timepicker-date-mode.v
 ## Props
 
 | Prop       | Type           | Default    | Code                                                  | Description                                                                                      |
-| ---------- | -------------- | ---------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+|------------|----------------|------------|-------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | value      | String, Number | 0          | `<wt-timepicker :value="'my value'"></wt-timepicker>` | Time value in seconds (not milliseconds!)                                                        |
 | label      | String         | ''         | `<wt-timepicker :label="My Label"></wt-timepicker>`   | if passed, replaces "hour", "min", "sec" with a single label + format prop value                 |
 | format     | String         | 'hh:mm:ss' | `<wt-timepicker :format='hh:mm'></wt-timepicker>`     | Controls visibility of inputs, depending on presence of h, m, s letters                          |
@@ -23,11 +23,10 @@ import ExampleTimepickerDateMode from './examples/example-timepicker-date-mode.v
 ## Events
 
 | Value | Type                                                             | Description                                        |
-| ----- | ---------------------------------------------------------------- | -------------------------------------------------- |
+|-------|------------------------------------------------------------------|----------------------------------------------------|
 | input | Number sec value or timestamp, depending on date-mode prop value | Event is triggered immediately after value change. |
 
 ## Example Timepicker
-
 ::: raw
 <ExampleTimepicker />
 :::
@@ -37,7 +36,6 @@ import ExampleTimepickerDateMode from './examples/example-timepicker-date-mode.v
 :::
 
 ## Timepicker Date Mode
-
 ::: raw
 <ExampleTimepickerDateMode />
 :::
@@ -47,7 +45,6 @@ import ExampleTimepickerDateMode from './examples/example-timepicker-date-mode.v
 :::
 
 ## Disabled Timepicker
-
 ::: raw
 <ExampleDisabledTimepicker />
 :::
@@ -57,7 +54,6 @@ import ExampleTimepickerDateMode from './examples/example-timepicker-date-mode.v
 :::
 
 ## Invalid Timepicker
-
 ::: raw
 <ExampleInvalidTimepicker />
 :::

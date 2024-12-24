@@ -17,7 +17,7 @@
         </p>
       </div>
     </template>
-    <template #actions="{ isDeleting, close, confirm }">
+    <template #actions="{ isDeleting, close, confirm}">
       <wt-button
         :loading="isDeleting"
         @click="confirm"
@@ -62,11 +62,7 @@ const deleteMessage = computed(() => {
       count: t('webitelUI.deleteConfirmationPopup.deleteAll'),
     });
   }
-  return t(
-    'webitelUI.deleteConfirmationPopup.tableAskingAlert',
-    { count: props.deleteCount },
-    null,
-  );
+  return t('webitelUI.deleteConfirmationPopup.tableAskingAlert', { count: props.deleteCount }, null);
 });
 </script>
 
@@ -81,4 +77,5 @@ const deleteMessage = computed(() => {
 .delete-confirmation-popup__message {
   text-align: center;
 }
+
 </style>

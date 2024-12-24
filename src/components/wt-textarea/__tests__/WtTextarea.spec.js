@@ -30,9 +30,7 @@ describe('WtTextarea', () => {
       },
       props: { autoresize: true },
     });
-    wrapper
-      .find('.wt-textarea__textarea')
-      .trigger('keypress', { key: 'Enter' });
+    wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
     expect(wrapper.emitted().enter).toBeTruthy();
   });
 
@@ -42,9 +40,7 @@ describe('WtTextarea', () => {
         WtLabel,
       },
     });
-    wrapper
-      .find('.wt-textarea__textarea')
-      .trigger('keypress', { key: 'Enter' });
+    wrapper.find('.wt-textarea__textarea').trigger('keypress', { key: 'Enter' });
     expect(wrapper.emitted().enter).toBeFalsy();
   });
 });

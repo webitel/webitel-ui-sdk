@@ -65,12 +65,11 @@ const props = defineProps({
   },
 });
 
-const emptySecondary = computed(
-  () => !(props.secondaryAction || props.secondaryText),
-);
+const emptySecondary = computed(() => !(props.secondaryAction || props.secondaryText));
 </script>
 
 <style lang="scss" scoped>
+
 .wt-headline {
   .wt-button {
     margin-left: var(--spacing-sm);

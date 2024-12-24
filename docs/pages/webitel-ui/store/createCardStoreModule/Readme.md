@@ -53,7 +53,7 @@ i `createApiStoreModule` [дока](../createApiStoreModule/Readme.md).
 
 ### Params
 
-- `namespace`: неймспейс сутності.
+* `namespace`: неймспейс сутності.
 
 _Примітка: якщо неймспейс вже закінчується на `card`, то ще раз `card` дописуватись не буде._
 
@@ -64,16 +64,16 @@ _Примітка: якщо неймспейс вже закінчується �
 ```javascript
 const {
   namespace: cardNamespace,
-  id,
-  itemInstance,
+    id,
+    itemInstance,
 
-  loadItem,
-  addItem,
-  updateItem,
-  setId,
-  resetState,
-  setItemProp,
-  deleteItem,
+    loadItem,
+    addItem,
+    updateItem,
+    setId,
+    resetState,
+    setItemProp,
+    deleteItem,
 } = useCardStore(namespace);
 ```
 
@@ -87,10 +87,7 @@ i [доку](../../../docs/how-to/Integration%20between%20store%20modules/Readme
 ```javascript
 // storeModule.js
 
-import {
-  createCardStoreModule,
-  createApiStoreModule,
-} from '@webitel/ui-sdk/store';
+import { createCardStoreModule, createApiStoreModule } from '@webitel/ui-sdk/store';
 
 // import, setup api module
 

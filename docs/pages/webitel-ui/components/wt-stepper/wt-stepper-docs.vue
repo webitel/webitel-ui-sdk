@@ -1,6 +1,10 @@
 <template>
-  <component-props :properties="properties" />
-  <component-slots :slots="slots" />
+  <component-props
+    :properties="properties"
+  />
+  <component-slots
+    :slots="slots"
+  />
 </template>
 
 <script>
@@ -14,16 +18,14 @@ export default {
         value: 'steps',
         code: '<wt-stepper :steps="[{ name: \'Step 1\' }]"></wt-stepper>',
         type: 'Array',
-        description:
-          'An array of displayed steps. May include "name", "description", "completed"',
+        description: 'An array of displayed steps. May include "name", "description", "completed"',
       },
       {
         value: 'active-step',
         code: '<wt-stepper :active-step="1"></wt-stepper>',
         type: ['String', 'Number'],
         default: '1',
-        description:
-          'All past and active steps are marked with "accent-secondary-color"',
+        description: 'All past and active steps are marked with "accent-secondary-color"',
       },
     ],
     slots: [
@@ -45,4 +47,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

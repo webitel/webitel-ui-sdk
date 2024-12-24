@@ -13,7 +13,7 @@
 return {
   getPermissionsList,
   patchPermissions,
-};
+}
 ```
 
 ## Використання

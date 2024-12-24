@@ -8,10 +8,7 @@ import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
 import EmptyFiltersDark from '../_internals/assets/empty-filters-dark.svg';
 import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
 
-export const useTableEmpty = (
-  { dataList, filters, error, isLoading },
-  overrides = {},
-) => {
+export const useTableEmpty = ({ dataList, filters, error, isLoading }, overrides = {}) => {
   const store = useStore();
   const { t } = useI18n();
 
@@ -101,17 +98,11 @@ export const useTableEmpty = (
   const image = computed(() => {
     switch (emptyCause.value) {
       case EmptyCause.ERROR:
-        return darkMode?.value
-          ? merged.value.image.error.dark
-          : merged.value.image.error.light;
+        return darkMode?.value ? merged.value.image.error.dark : merged.value.image.error.light;
       case EmptyCause.FILTERS:
-        return darkMode?.value
-          ? merged.value.image.filters.dark
-          : merged.value.image.filters.light;
+        return darkMode?.value ? merged.value.image.filters.dark : merged.value.image.filters.light;
       case EmptyCause.EMPTY:
-        return darkMode?.value
-          ? merged.value.image.empty.dark
-          : merged.value.image.empty.light;
+        return darkMode?.value ? merged.value.image.empty.dark : merged.value.image.empty.light;
       default:
         return null;
     }

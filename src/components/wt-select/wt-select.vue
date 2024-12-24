@@ -48,7 +48,9 @@
         v-if="!isOpened"
         #limit
       >
-        <wt-chip class="multiselect__limit"> +{{ value.length - 1 }} </wt-chip>
+        <wt-chip class="multiselect__limit">
+          +{{ value.length - 1 }}
+        </wt-chip>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
@@ -108,7 +110,7 @@
       <template #clear="{}">
         <wt-icon-btn
           v-if="clearable"
-          :class="{ hidden: !isValue }"
+          :class="{ 'hidden': !isValue }"
           :disabled="disabled"
           class="multiselect__clear"
           icon="close"
@@ -220,9 +222,7 @@ export default {
       const optionsWithoutValues = this.selectOptions.filter((opt) => {
         const optKey = this.trackBy ? opt[this.trackBy] : opt;
         return !customValuesToOptions.some((customValue) => {
-          const customValueKey = this.trackBy
-            ? customValue[this.trackBy]
-            : customValue;
+          const customValueKey = this.trackBy ? customValue[this.trackBy] : customValue;
           return customValueKey === optKey;
         });
       });
@@ -265,8 +265,7 @@ export default {
     clearValue() {
       let value = '';
       if (Array.isArray(this.value)) value = [];
-      else if (typeof this.value === 'object' && this.value !== null)
-        value = {};
+      else if (typeof this.value === 'object' && this.value !== null) value = {};
       this.input(value);
       this.$emit('reset', value);
     },
@@ -312,12 +311,11 @@ export default {
   // all is fine
   :deep(.multiselect) {
     .multiselect__tags {
-      padding: var(--input-padding)
-        calc(
-          var(--input-padding) + var(--icon-md-size) +
-            var(--select-caret-right-pos)
-        )
-        var(--input-padding) var(--input-padding);
+      padding: var(--input-padding) calc(
+        var(--input-padding)
+        + var(--icon-md-size)
+        + var(--select-caret-right-pos)
+      ) var(--input-padding) var(--input-padding);
     }
   }
 }
@@ -326,14 +324,15 @@ export default {
 .wt-select.wt-select--multiple:not(.wt-select--clearable) {
   :deep(.multiselect) {
     $multiselect-limit-right-pos: calc(
-      var(--select-caret-right-pos) // caret offet from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
 
     .multiselect__tags {
       padding-right: calc(
-        $multiselect-limit-right-pos + 50px // chip
+        $multiselect-limit-right-pos
+        + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
     }
@@ -348,14 +347,15 @@ export default {
 .wt-select.wt-select--clearable:not(.wt-select--multiple) {
   :deep(.multiselect) {
     $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos) // caret offset from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offset from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
 
     .multiselect__tags {
       padding-right: calc(
-        $multiselect-clear-right-pos + var(--icon-md-size) // clear
+        $multiselect-clear-right-pos
+        + var(--icon-md-size)// clear
         + var(--input-padding) // clear-to-content offset
       );
     }
@@ -370,20 +370,21 @@ export default {
 .wt-select.wt-select--multiple.wt-select--clearable {
   :deep(.multiselect) {
     $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos) // caret offet from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
 
     $multiselect-limit-right-pos: calc(
-      $multiselect-clear-right-pos// clear offet from border +
-        var(--icon-md-size) // clear size
+      $multiselect-clear-right-pos// clear offet from border
+      + var(--icon-md-size)// clear size
       + var(--input-padding) // cleat-to-chip offset
     );
 
     .multiselect__tags {
       padding-right: calc(
-        $multiselect-limit-right-pos + 50px // chip
+        $multiselect-limit-right-pos
+        + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
     }

@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ 'wt-timepicker--invalid': invalid }"
+    :class="{'wt-timepicker--invalid': invalid}"
     class="wt-timepicker"
   >
     <wt-label
@@ -120,15 +120,15 @@ export default {
       return this.format.includes('ss');
     },
     labelHours() {
-      if (this.noLabel) return null;
+      if(this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.hour');
     },
     labelMin() {
-      if (this.noLabel) return null;
+      if(this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.min');
     },
     labelSec() {
-      if (this.noLabel) return null;
+      if(this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.sec');
     },
     hour: {
@@ -159,9 +159,7 @@ export default {
     },
     sec: {
       get() {
-        return this.dateMode
-          ? new Date(+this.value).getSeconds()
-          : Math.floor(this.value % 60);
+        return this.dateMode ? new Date(+this.value).getSeconds() : Math.floor(this.value % 60);
       },
       set(value) {
         const newValue = this.dateMode
@@ -171,9 +169,7 @@ export default {
       },
     },
     requiredLabel() {
-      return this.required
-        ? `${this.label} (${this.format})*`
-        : `${this.label} (${this.format})`;
+      return this.required ? `${this.label} (${this.format})*` : `${this.label} (${this.format})`;
     },
   },
 
@@ -186,6 +182,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+
 .wt-timepicker {
   display: flex;
   flex-direction: column;
@@ -203,4 +200,5 @@ export default {
     margin-right: 0;
   }
 }
+
 </style>

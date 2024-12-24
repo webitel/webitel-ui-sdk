@@ -39,4 +39,6 @@ export default {
 @import './variables.scss';
 </style>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

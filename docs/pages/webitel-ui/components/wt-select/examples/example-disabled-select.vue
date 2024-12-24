@@ -37,4 +37,6 @@ const value = ref(options[0]);
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

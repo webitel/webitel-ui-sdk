@@ -7,7 +7,7 @@ import ExampleContextMenu from './examples/example-context-menu.vue';
 ## Props
 
 | Prop     | Type       | Default | Code                                                                     | Description                                           |
-| -------- | ---------- | ------- | ------------------------------------------------------------------------ | ----------------------------------------------------- |
+|----------|------------|---------|--------------------------------------------------------------------------|-------------------------------------------------------|
 | options  | Array      |         | `<wt-context-menu :options="options"></wt-context-menu>`                 | Array of objects [{ text: text, ?disabled: boolean }] |
 | visible  | Boolean    | true    | `<wt-context-menu :options="options" :visible="true"></wt-context-menu>` |                                                       |
 | width    | ['String'] | auto    | `<wt-context-menu width="300px"></wt-context-menu>`                      |                                                       |
@@ -17,9 +17,9 @@ import ExampleContextMenu from './examples/example-context-menu.vue';
 
 ## Events
 
-| Value | Params                                           | Description |
-| ----- | ------------------------------------------------ | ----------- |
-| click | `[{ name: 'Option and index', type: 'Object' }]` |             |
+| Value        | Params                                           | Description |
+|--------------|--------------------------------------------------|-------------|
+| click        | `[{ name: 'Option and index', type: 'Object' }]` |             |
 
 ## Example Context Menu
 

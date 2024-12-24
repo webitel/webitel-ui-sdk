@@ -4,16 +4,11 @@ const callAlert = (arg) => alert(arg);
 
 <template>
   <wt-table-actions
-    :icons="[
-      'import',
-      'export',
-      'filter-reset',
-      'column-select',
-      'refresh',
-      'settings',
-    ]"
+    :icons="['import', 'export', 'filter-reset', 'column-select', 'refresh', 'settings']"
     @input="callAlert"
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

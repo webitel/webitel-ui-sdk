@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
   <wt-dummy />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

@@ -1,9 +1,9 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
-  <div
-    style="display: grid; grid-template-columns: 140px; gap: var(--spacing-xs)"
-  >
+  <div style="display: grid; grid-template-columns: 140px; gap: var(--spacing-xs);">
     <wt-button>Primary</wt-button>
     <wt-button color="secondary">Secondary</wt-button>
     <wt-button disabled>Disabled</wt-button>
@@ -15,4 +15,6 @@
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

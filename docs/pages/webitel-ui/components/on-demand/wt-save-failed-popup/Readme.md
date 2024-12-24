@@ -6,13 +6,11 @@ import ExampleSaveFailedPopup from './examples/example-save-failed-popup.vue';
 # WtSaveFailedPopup
 
 ## Events
-
 ::: raw
 <Docs />
 :::
 
 ## Save failed popup example:
-
 ::: raw
 <ExampleSaveFailedPopup />
 :::

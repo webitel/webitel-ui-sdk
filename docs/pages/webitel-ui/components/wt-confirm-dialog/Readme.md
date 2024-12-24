@@ -7,11 +7,9 @@ import ExampleDeleteDialog from './examples/example-delete-dialog.vue';
 # WtConfirmDialog
 
 ## Specs
-
 <Specs />
 
 ## Confirm delete dialog
-
 ::: raw
 <ExampleDeleteDialog />
 :::
@@ -21,7 +19,6 @@ import ExampleDeleteDialog from './examples/example-delete-dialog.vue';
 :::
 
 ## Table Confirm delete dialog
-
 ::: raw
 <ExampleTableDeleteDialog />
 :::

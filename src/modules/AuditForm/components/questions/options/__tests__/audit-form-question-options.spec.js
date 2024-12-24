@@ -17,9 +17,7 @@ describe('AuditFormQuestionOptions', () => {
         mode: 'write',
       },
     });
-    wrapper
-      .findComponent('.audit-form-question-options-write__add-button')
-      .vm.$emit('click');
+    wrapper.findComponent('.audit-form-question-options-write__add-button').vm.$emit('click');
     expect(wrapper.emitted()['change:question'][0][0].options.length).toBe(2);
   });
   it('deletes existing question option at "delete" icon-btn click', () => {
@@ -29,9 +27,7 @@ describe('AuditFormQuestionOptions', () => {
         mode: 'write',
       },
     });
-    const writeRow = wrapper.findComponent({
-      name: 'audit-form-question-options-write-row',
-    });
+    const writeRow = wrapper.findComponent({ name: 'audit-form-question-options-write-row' });
     writeRow.vm.$emit('delete');
     expect(wrapper.emitted()['change:question'][0][0].options.length).toBe(0);
   });

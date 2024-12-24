@@ -5,7 +5,7 @@ describe('WtIntersectionObserver', () => {
   const next = () => true;
   it('renders a component', () => {
     const wrapper = shallowMount(WtIntersectionObserver, {
-      props: { next },
+      props: { next }
     });
     expect(wrapper.exists()).toBe(true);
   });

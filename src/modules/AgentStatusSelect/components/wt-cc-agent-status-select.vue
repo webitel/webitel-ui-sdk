@@ -107,11 +107,8 @@ function handleClosed(event) {
   // sometimes we want to choose 'pause' repeatedly
   // but 'change' event from wt-status-select can't give us the same value,
   // in this case we have to use value from 'closed' event to choose 'pause' status
-  if (
-    (event.value === chosenStatus.value || !chosenStatus.value) && // if closed status the same as chosen, or chosen status is empty
-    event.value === AgentStatus.PAUSE
-  ) {
-    // and only for 'pause' status
+  if ((event.value === chosenStatus.value || !chosenStatus.value) // if closed status the same as chosen, or chosen status is empty
+    && event.value === AgentStatus.PAUSE) { // and only for 'pause' status
     handleStatus(event.value);
   }
 }

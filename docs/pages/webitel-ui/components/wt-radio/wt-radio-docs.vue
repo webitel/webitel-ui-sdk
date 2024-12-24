@@ -3,9 +3,15 @@
     prop="selected"
     event="input"
   />
-  <component-props :properties="properties" />
-  <component-events :events="events" />
-  <component-slots :slots="slots" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
+  <component-slots
+    :slots="slots"
+  />
 </template>
 
 <script>
@@ -64,7 +70,9 @@ export default {
     events: [
       {
         value: 'input',
-        params: [{ name: '"value" prop', type: 'String' }],
+        params: [
+          { name: '"value" prop', type: 'String' },
+        ],
       },
     ],
     slots: [
@@ -81,4 +89,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

@@ -10,10 +10,7 @@
       <!--         @slot for custom media, replaces image
                   @scope `{ size: mediaSize }`
        -->
-      <slot
-        name="media"
-        v-bind="{ size: mediaSize }"
-      >
+      <slot name="media" v-bind="{ size: mediaSize }">
         <wt-image
           :size="mediaSize"
           :src="image"
@@ -26,50 +23,45 @@
       v-if="showHeadline || showTitle || showText"
       class="wt-empty__info"
     >
-      <h2
-        v-if="showHeadline"
-        class="wt-empty__headline"
-      >
-        <!--         @slot for custom headline, replaces headline
+    <h2
+      v-if="showHeadline"
+      class="wt-empty__headline"
+    >
+
+
+      <!--         @slot for custom headline, replaces headline
                   @scope `{ headline }`
        -->
-        <slot
-          name="headline"
-          v-bind="{ headline }"
-        >
-          {{ headline }}
-        </slot>
-      </h2>
+      <slot name="headline" v-bind="{ headline }">
+        {{ headline }}
+      </slot>
+    </h2>
 
-      <h3
-        v-if="showTitle"
-        class="wt-empty__title"
-      >
-        <!--         @slot for custom title, replaces title
+    <h3
+      v-if="showTitle"
+      class="wt-empty__title"
+    >
+
+      <!--         @slot for custom title, replaces title
                   @scope `{ title }`
        -->
-        <slot
-          name="title"
-          v-bind="{ title }"
-        >
-          {{ title }}
-        </slot>
-      </h3>
+      <slot name="title" v-bind="{ title }">
+        {{ title }}
+      </slot>
+    </h3>
 
-      <p
-        v-if="showText"
-        class="wt-empty__text"
-      >
-        <!--         @slot for custom text, replaces text
+    <p
+      v-if="showText"
+      class="wt-empty__text"
+    >
+
+      <!--         @slot for custom text, replaces text
                   @scope `{ text }`
        -->
-        <slot
-          name="text"
-          v-bind="{ text }"
-        >
-          {{ text }}
-        </slot>
-      </p>
+      <slot name="text" v-bind="{ text }">
+        {{ text }}
+      </slot>
+    </p>
     </div>
 
     <!--         @slot custom content, between text and actions
@@ -88,6 +80,7 @@
         name="actions"
         v-bind="{ onPrimaryClick, onSecondaryClick }"
       >
+
         <!--         @slot for custom primary action, replaces primaryAction
                     @scope `{ onPrimaryClick }`
          -->
@@ -144,8 +137,7 @@ const props = defineProps({
   size: {
     type: String,
     default: ComponentSize.MD,
-    validator: (v) =>
-      [ComponentSize.SM, ComponentSize.MD, ComponentSize.LG].includes(v),
+    validator: (v) => [ComponentSize.SM, ComponentSize.MD, ComponentSize.LG].includes(v),
   },
   /**
    * shown only if prop or slot is provided

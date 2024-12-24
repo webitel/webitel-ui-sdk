@@ -6,13 +6,11 @@ import ExampleHeadline from './examples/example-headline.vue';
 # WtHeadline
 
 ## Props
-
 ::: raw
 <Docs />
 :::
 
 ## Example Headline
-
 ::: raw
 <ExampleHeadline />
 :::

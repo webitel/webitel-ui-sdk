@@ -26,14 +26,7 @@ const getSkillsList = async (params) => {
   ]);
 
   try {
-    const response = await skillService.searchSkill(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-    );
+    const response = await skillService.searchSkill(page, size, search, sort, fields, id);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -59,10 +52,7 @@ const getSkill = async ({ itemId: id }) => {
 const fieldsToSend = ['name', 'description'];
 
 const addSkill = async ({ itemInstance }) => {
-  const item = applyTransform(itemInstance, [
-    sanitize(fieldsToSend),
-    camelToSnake(),
-  ]);
+  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
   try {
     const response = await skillService.createSkill(item);
     return applyTransform(response.data, [snakeToCamel()]);
@@ -72,10 +62,7 @@ const addSkill = async ({ itemInstance }) => {
 };
 
 const updateSkill = async ({ itemInstance, itemId: id }) => {
-  const item = applyTransform(itemInstance, [
-    sanitize(fieldsToSend),
-    camelToSnake(),
-  ]);
+  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
   try {
     const response = await skillService.updateSkill(id, item);
     return applyTransform(response.data, [snakeToCamel()]);

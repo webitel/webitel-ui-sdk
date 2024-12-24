@@ -3,8 +3,12 @@
     event="input"
     prop="size"
   />
-  <component-props :properties="properties" />
-  <component-events :events="events" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -33,8 +37,7 @@ export default {
         code: '<wt-pagination ebounce></wt-pagination>',
         type: 'Boolean',
         default: 'false',
-        description:
-          'If true, @change event is delayed for debounceDelay from last change',
+        description: 'If true, @change event is delayed for debounceDelay from last change',
       },
       {
         value: 'debounceDelay',
@@ -59,18 +62,21 @@ export default {
           {
             name: 'changed size value',
             type: 'String',
-            description:
-              'The same as input, but if "debounce" is true,event is debounced.',
+            description: 'The same as input, but if "debounce" is true,event is debounced.',
           },
         ],
       },
       {
         value: 'next',
-        params: [{ description: 'Event is triggered on "next" arrow click' }],
+        params: [
+          { description: 'Event is triggered on "next" arrow click' },
+        ],
       },
       {
         value: 'prev',
-        params: [{ description: 'Event is triggered on "prev" arrow click' }],
+        params: [
+          { description: 'Event is triggered on "prev" arrow click' },
+        ],
       },
     ],
   }),
@@ -80,4 +86,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

@@ -68,8 +68,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-edit-link#site-level-config
     editLink: {
       // https://vitepress.dev/reference/runtime-api#usedata
-      pattern:
-        'https://github.com/webitel/webitel-ui-sdk/tree/master/docs/:path',
+      pattern: 'https://github.com/webitel/webitel-ui-sdk/tree/master/docs/:path',
     },
   },
 });

@@ -2,24 +2,30 @@
   <section class="typo">
     <h2>Typography</h2>
     <article class="typo__family">
-      <h3 class="typo__family-heading">Heading:</h3>
+      <h3 class="typo__family-heading">
+        Heading:
+      </h3>
       <div class="typo__family-wrapper">
         <div class="typo__item">
-          <h4 class="typo__item-text typo__item-text--heading-1">Heading-1:</h4>
+          <h4 class="typo__item-text typo__item-text--heading-1">
+            Heading-1:
+          </h4>
           <p>Usage:</p>
-          <code class="language-css"
-            >.heading { @extend %typo-heading-1; }</code
-          >
+          <code class="language-css">.heading { @extend %typo-heading-1; }</code>
         </div>
         <div class="typo__item">
-          <h4 class="typo__item-text typo__item-text--heading-2">Heading-2:</h4>
+          <h4 class="typo__item-text typo__item-text--heading-2">
+            Heading-2:
+          </h4>
           <p>Usage:</p>
           <code class="language-css">
             .heading { @extend %typo-heading-2; }
           </code>
         </div>
         <div class="typo__item">
-          <h4 class="typo__item-text typo__item-text--heading-3">Heading-3:</h4>
+          <h4 class="typo__item-text typo__item-text--heading-3">
+            Heading-3:
+          </h4>
           <p>Usage:</p>
           <code class="language-css">
             .heading { @extend %typo-heading-3; }
@@ -29,7 +35,9 @@
     </article>
 
     <article class="typo__family">
-      <h3 class="typo__family-heading">Subtitle:</h3>
+      <h3 class="typo__family-heading">
+        Subtitle:
+      </h3>
       <div class="typo__family-wrapper">
         <div class="typo__item">
           <div class="typo__item-text typo__item-text--subtitle-1">
@@ -51,34 +59,54 @@
     </article>
 
     <article class="typo__family">
-      <h3 class="typo__family-heading">Body:</h3>
+      <h3 class="typo__family-heading">
+        Body:
+      </h3>
       <div class="typo__family-wrapper">
         <div class="typo__item">
-          <div class="typo__item-text typo__item-text--body-1">Body-1:</div>
-          <code class="language-css"> .body { @extend %typo-body-1; } </code>
+          <div class="typo__item-text typo__item-text--body-1">
+            Body-1:
+          </div>
+          <code class="language-css">
+            .body { @extend %typo-body-1; }
+          </code>
         </div>
         <div class="typo__item">
-          <div class="typo__item-text typo__item-text--body-2">Body-2:</div>
-          <code class="language-css"> .body { @extend %typo-body-2; } </code>
+          <div class="typo__item-text typo__item-text--body-2">
+            Body-2:
+          </div>
+          <code class="language-css">
+            .body { @extend %typo-body-2; }
+          </code>
         </div>
       </div>
     </article>
 
     <article class="typo__family">
-      <h3 class="typo__family-heading">Button:</h3>
+      <h3 class="typo__family-heading">
+        Button:
+      </h3>
       <div class="typo__family-wrapper">
         <div class="typo__item">
-          <div class="typo__item-text typo__item-text--button">Button:</div>
-          <code class="language-css"> .btn { @extend %typo-button; } </code>
+          <div class="typo__item-text typo__item-text--button">
+            Button:
+          </div>
+          <code class="language-css">
+            .btn { @extend %typo-button; }
+          </code>
         </div>
       </div>
     </article>
 
     <article class="typo__family">
-      <h3 class="typo__family-heading">Caption:</h3>
+      <h3 class="typo__family-heading">
+        Caption:
+      </h3>
       <div class="typo__family-wrapper">
         <div class="typo__item">
-          <div class="typo__item-text typo__item-text--caption">Caption:</div>
+          <div class="typo__item-text typo__item-text--caption">
+            Caption:
+          </div>
           <code class="language-css">
             .caption { @extend %typo-caption; }
           </code>
@@ -87,10 +115,14 @@
     </article>
 
     <article class="typo__family">
-      <h3 class="typo__family-heading">Overline:</h3>
+      <h3 class="typo__family-heading">
+        Overline:
+      </h3>
       <div class="typo__family-wrapper">
         <div class="typo__item">
-          <div class="typo__item-text typo__item-text--overline">Overline:</div>
+          <div class="typo__item-text typo__item-text--overline">
+            Overline:
+          </div>
           <code class="language-css">
             .overline { @extend %typo-overline; }
           </code>

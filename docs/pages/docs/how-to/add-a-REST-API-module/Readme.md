@@ -22,7 +22,6 @@
 ## Як додати Webitel SDK Endpoint модуль?
 
 ### TLDR;
-
 Піддивіться у souce code якогось з `api/clients` 🙂
 
 ### Довгий та розумний шлях
@@ -56,15 +55,16 @@ const service = new SomeEntityApiFactory(instance, '', openAPIConfig);
 
 ```javascript
 const addItem = ({ itemInstance }) => {
+
   const body = applyTransform(itemInstance, [
     camelToSnake, // (1)
     sanitize(fieldsToSend), // (2)
     ({ id, ...rest }) => ({
       itemId: id,
-      ...rest,
+    ...rest
     }), // (3)
   ]);
-};
+}
 ```
 
 Далі, ми викликаємо наш api метод
@@ -72,32 +72,36 @@ const addItem = ({ itemInstance }) => {
 ```javascript
 const addItem = async ({ itemInstance }) => {
   // ...
-
+  
   const response = await service.add(body);
-};
+}
 ```
 
 Обробляємо відповідь, наприклад, дописуючи `counter: 0`
 
 ```javascript
 () => {
-  // ...
-
-  const item = applyTransform(response, [(item) => ({ ...item, counter: 0 })]);
-};
+    // ...
+    
+    const item = applyTransform(response, [
+      (item) => ({ ...item, counter: 0 }),
+    ]);
+}
 ```
 
 Ну і, обробляєм потенційну помилку
 
 ```javascript
 () => {
-  // ...
-  try {
     // ...
-  } catch (err) {
-    throw applyTransform(err, [log]);
+    try {
+      // ...
+    } catch (err) {
+      throw applyTransform(err, [
+        log,
+      ]);
   }
-};
+}
 ```
 
 ### Тонкощі
@@ -109,7 +113,6 @@ const addItem = async ({ itemInstance }) => {
 **Щодо методів**, Webitel SDK на TypeScript, тож IDE має підказати вам, які там є методи.
 
 Зазвичай це:
-
 - `getList` це `search...`,
 - `get` це `read...`,
 - `add` це `create...`,
@@ -132,15 +135,13 @@ async (id) => {
 
   const url = `${baseUrl}/${id}`;
   const response = await instance.get(url);
-};
+}
 ```
 
 ### TLDR;
-
 Піддивіться у souce code якогось з `api/clients` 🙂
 
 ### Довгий та розумний шлях
 
 ### Тонкощі
-
 Тут - немає. Берете, формуєте `url`'ку, викликаєте http метод, обробляєте відповідь.

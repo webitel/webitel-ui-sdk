@@ -34,7 +34,7 @@ describe('WtDualPanel', () => {
   it('renders dual panel side panel via side panel slot', () => {
     const content = 'Dual Panel side panel';
     const wrapper = shallowMount(WtDualPanel, {
-      slots: { side: content },
+      slots: { 'side': content },
     });
     expect(wrapper.find('.wt-dual-panel__side-panel').text()).toBe(content);
   });
@@ -42,7 +42,7 @@ describe('WtDualPanel', () => {
   it('renders dual panel main panel via main panel slot', () => {
     const content = 'Dual Panel main panel';
     const wrapper = shallowMount(WtDualPanel, {
-      slots: { main: content },
+      slots: { 'main': content },
     });
     expect(wrapper.find('.wt-dual-panel__main-panel').text()).toBe(content);
   });

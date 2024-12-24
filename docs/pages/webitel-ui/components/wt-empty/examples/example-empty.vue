@@ -23,5 +23,6 @@ const handleClick = (action) => {
 
 <style lang="scss" scoped>
 .example-empty {
+
 }
 </style>

@@ -1,7 +1,11 @@
 <template>
   <section>
-    <component-props :properties="properties" />
-    <component-events :events="events" />
+    <component-props
+      :properties="properties"
+    />
+    <component-events
+      :events="events"
+    />
     <component-slots />
   </section>
 </template>
@@ -17,14 +21,7 @@ export default {
         value: 'color',
         code: '<wt-rounded-action color="secondary"></wt-rounded-action>',
         type: 'String',
-        options: [
-          'secondary',
-          'accent',
-          'success',
-          'danger',
-          'hold',
-          'transfer',
-        ],
+        options: ['secondary', 'accent', 'success', 'danger', 'hold', 'transfer'],
         default: 'secondary',
       },
       {
@@ -36,8 +33,7 @@ export default {
         value: 'iconColor',
         code: '<wt-rounded-action icon-color="secondary-50"></wt-rounded-action>',
         type: 'String',
-        description:
-          'a prop for passing a specific color to icon. not for regular usage',
+        description: 'a prop for passing a specific color to icon. not for regular usage',
       },
       {
         value: 'rounded',
@@ -72,13 +68,15 @@ export default {
         description: 'Controls button size',
       },
       {
-        value: 'Plus all other wt-button props including "loading" :)',
+        value: 'Plus all other wt-button props including "loading" :)'
       },
     ],
     events: [
       {
         value: 'click',
-        params: [{ name: 'event', type: 'Event' }],
+        params: [
+          { name: 'event', type: 'Event' },
+        ],
       },
     ],
   }),

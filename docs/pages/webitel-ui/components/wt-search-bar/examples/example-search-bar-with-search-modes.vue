@@ -1,4 +1,5 @@
 <script setup>
+
 import { ref } from 'vue';
 
 const value = ref('');
@@ -31,4 +32,6 @@ const searchMode = ref(searchModeOptions[0]);
   <p>Search mode: {{ searchMode }}</p>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

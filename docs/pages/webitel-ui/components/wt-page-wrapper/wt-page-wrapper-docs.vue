@@ -1,6 +1,10 @@
 <template>
-  <component-props :properties="properties" />
-  <component-slots :slots="slots" />
+  <component-props
+    :properties="properties"
+  />
+  <component-slots
+    :slots="slots"
+  />
 </template>
 
 <script>
@@ -21,8 +25,7 @@ export default {
     slots: [
       {
         name: 'header',
-        description:
-          'Header (WT-HEADLINE component is highly recommended) slot',
+        description: 'Header (WT-HEADLINE component is highly recommended) slot',
       },
       {
         name: 'actions-panel',
@@ -40,4 +43,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

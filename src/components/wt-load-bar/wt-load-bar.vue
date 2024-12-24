@@ -36,6 +36,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+
 .wt-load-bar {
   position: relative;
   box-sizing: border-box;

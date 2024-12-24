@@ -1,6 +1,7 @@
 import mitt from 'mitt';
 import isEmpty from '../../../scripts/isEmpty.js';
-import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import BaseStoreModule
+  from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import BaseFilterSchema from '../classes/BaseFilterSchema.js';
 import FilterEvent from '../enums/FilterEvent.enum.js';
 
@@ -22,8 +23,7 @@ export default class FiltersStoreModule extends BaseStoreModule {
 
     _STATE_FILTER_NAMES: (state) => {
       return Object.values(state).reduce(
-        (names, prop) =>
-          prop.value || prop.name ? [...names, prop.name] : names,
+        (names, prop) => (prop.value || prop.name ? [...names, prop.name] : names),
         [],
       );
     },

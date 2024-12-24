@@ -7,13 +7,11 @@ import ExampleMinTimeInput from './examples/example-min-time-input.vue';
 # WtTimeInput
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example Hour Time Input
-
 ::: raw
 <ExampleHourTimeInput/>
 :::
@@ -23,7 +21,6 @@ import ExampleMinTimeInput from './examples/example-min-time-input.vue';
 :::
 
 ## Example Min Time Input
-
 ::: raw
 <ExampleMinTimeInput/>
 :::
@@ -31,3 +28,5 @@ import ExampleMinTimeInput from './examples/example-min-time-input.vue';
 ::: details Code
 <<< ./examples/example-min-time-input.vue
 :::
+
+

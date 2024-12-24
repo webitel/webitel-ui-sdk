@@ -8,23 +8,25 @@
         href="https://material.io/design/layout/responsive-layout-grid.html#breakpoints"
       >
         Material Design docs
-      </a>
-      (or
+      </a> (or
       <a
         class="full-docs-link"
         href="https://vuetifyjs.com/en/styles/spacing/#breakpoints"
-        >Vuetify</a
-      >
+      >Vuetify</a>
       simplified docs)
     </p>
-    <p>App has <b>4</b> main breakpoints:</p>
+    <p>
+      App has <b>4</b> main breakpoints:
+    </p>
     <ul>
       <li><code class="language-css">xs</code>: 600px (phones)</li>
       <li><code class="language-css">sm</code>: 992px (tablets)</li>
       <li><code class="language-css">md</code>: 1264px (tablets -> laptops)</li>
       <li><code class="language-css">lg</code>: 1904px (laptops -> desktop)</li>
     </ul>
-    <p>and <b>5</b> <code class="language-css">@media</code> queries:</p>
+    <p>
+      and <b>5</b> <code class="language-css">@media</code> queries:
+    </p>
     <code class="language-css">$media: only screen</code>
     <!--    <ul>-->
     <!--      <li>-->
@@ -57,4 +59,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

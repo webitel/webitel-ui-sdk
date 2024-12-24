@@ -10,7 +10,7 @@
 Обєкт параметрів який має включати наступні значення:
 
 | Params       | Description                                                        |
-| ------------ | ------------------------------------------------------------------ |
+|--------------|--------------------------------------------------------------------|
 | id           |                                                                    |
 | itemInstance |                                                                    |
 | invalid      | Boolean значення, яке вертається з перевірки на валідацію сторінки |
@@ -23,7 +23,7 @@
 ## Return
 
 | Params       | Description                                                                                                                                                                                                            |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | id           |                                                                                                                                                                                                                        |
 | itemInstance |                                                                                                                                                                                                                        |
 | isNew        | Якщо запис не має `id`, він вважаєаться новим (ще не створеним)                                                                                                                                                        |
@@ -38,11 +38,18 @@
 ```js
 import { useCardComponent } from '@webitel/ui-sdk/src/composables/useCard/useCardComponent.js';
 
-сonst;
+сonst
 namespace = 'some-namespace';
 
-const { id, itemInstance, loadItem, addItem, updateItem, setId, resetState } =
-  useCardStore(namespace);
+const {
+  id,
+  itemInstance,
+  loadItem,
+  addItem,
+  updateItem,
+  setId,
+  resetState,
+} = useCardStore(namespace);
 
 const {
   id,
@@ -52,7 +59,7 @@ const {
   disabledSave,
   saveText,
   save,
-  initialize,
+  initialize
 } = useCardComponent({
   id,
   itemInstance,
@@ -61,6 +68,6 @@ const {
   updateItem,
   setId,
   resetState,
-  invalid,
+  invalid
 });
 ```

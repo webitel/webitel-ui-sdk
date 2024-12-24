@@ -1,5 +1,4 @@
 # WtTableTransition
-
 Компонент для "плавної появи" таблиць
 
 ## Приклад використання
@@ -9,9 +8,11 @@
 
 <template>
   ...
-  <wt-table-transition v-if="dataList.length && !isLoading">
-    <wt-table> ... </wt-table>
-  </wt-table-transition>
+    <wt-table-transition v-if="dataList.length && !isLoading">
+            <wt-table>
+              ...
+            </wt-table>
+          </wt-table-transition>
   ...
 </template>
 

@@ -1,10 +1,15 @@
 <template>
   <div
     v-show="wrapperShown"
-    :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
+    :class="[
+      `wt-popup--size-${size}`,
+      { 'wt-popup--overflow': overflow }
+    ]"
     class="wt-popup"
   >
-    <transition-slide :offset="[0, -1440 / 2]">
+    <transition-slide
+      :offset="[0, -1440/2]"
+    >
       <aside
         v-if="shown"
         class="wt-popup__popup"
@@ -126,6 +131,7 @@ export default {
         width: var(--wt-popup-size-lg);
       }
     }
+
   }
 }
 

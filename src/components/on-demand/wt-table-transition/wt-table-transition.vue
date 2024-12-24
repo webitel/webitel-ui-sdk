@@ -2,9 +2,9 @@
   <div class="wt-table-transition">
     <transition-slide
       :offset="{
-        enter: ['-50%', 0],
-        leave: [0, 0],
-      }"
+              enter: ['-50%', 0],
+              leave: [0, 0]
+            }"
       duration="200"
       mode="out-in"
       appear
@@ -15,11 +15,11 @@
 </template>
 
 <script setup>
-import { TransitionSlide } from '@morev/vue-transitions';
+  import { TransitionSlide } from '@morev/vue-transitions';
 </script>
 
 <style lang="scss" scoped>
-.wt-table-transition {
-  display: contents;
-}
+  .wt-table-transition{
+    display:contents;
+  }
 </style>

@@ -24,15 +24,14 @@ const props = defineProps({
   action: {
     type: String,
     required: true,
-    validator: (v) =>
-      Object.values([
-        IconAction.DELETE,
-        IconAction.EDIT,
-        IconAction.ADD,
-        IconAction.HISTORY,
-        IconAction.DOWNLOAD,
-        IconAction.REFRESH,
-      ]).includes(v),
+    validator: (v) => Object.values([
+      IconAction.DELETE,
+      IconAction.EDIT,
+      IconAction.ADD,
+      IconAction.HISTORY,
+      IconAction.DOWNLOAD,
+      IconAction.REFRESH,
+    ]).includes(v),
   },
   disabled: {
     type: Boolean,
@@ -48,9 +47,7 @@ const iconAction = computed(() => {
   const data = IActionData[props.action];
 
   if (!data) {
-    console.error(
-      `Unknown action for wt-icon-action component: ${props.action}`,
-    );
+    console.error(`Unknown action for wt-icon-action component: ${props.action}`);
     return { icon: 'edit', hint: props.action };
   }
 
@@ -58,4 +55,6 @@ const iconAction = computed(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

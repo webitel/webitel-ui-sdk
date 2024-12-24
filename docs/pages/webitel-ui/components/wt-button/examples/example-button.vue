@@ -9,6 +9,7 @@ const load = () => {
     loading.value = false;
   }, 0);
 };
+
 </script>
 
 <template>
@@ -20,4 +21,6 @@ const load = () => {
   </wt-button>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

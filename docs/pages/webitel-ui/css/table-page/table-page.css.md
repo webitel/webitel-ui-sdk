@@ -1,7 +1,6 @@
 # Table page styles
 
 ##### ! Стилі додаються автоматично в main.scss !
-
 #### Що це
 
 Це стилі для сторінки з стандартними таблицями.
@@ -18,23 +17,27 @@
 ## Приклад використання
 
 ```vue
-// crm, the-sources.vue
+// crm,  the-sources.vue
 
 <template>
-  <wt-page-wrapper
-    :actions-panel="false"
-    class="table-page"
-  >
+  <wt-page-wrapper :actions-panel="false"
+                   class="table-page">
     <template #main>
       <section class="table-section">
         <header class="table-title">
-          <h3 class="table-title__title">table title</h3>
-          <div class="table-title__actions-wrap">...</div>
+          <h3 class="table-title__title">
+            table title
+          </h3>
+          <div class="table-title__actions-wrap">
+            ...
+          </div>
         </header>
 
         <div class="table-section__table-wrapper">
-          <wt-table> ... </wt-table>
-        </div>
+           <wt-table>
+              ...
+           </wt-table>
+          </div>
       </section>
     </template>
   </wt-page-wrapper>

@@ -1,7 +1,11 @@
 <template>
   <component-model />
-  <component-props :properties="properties" />
-  <component-events :events="events" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -28,16 +32,14 @@ export default {
         code: '<wt-tags-input track-by="label"></wt-tags-input>',
         type: 'String',
         default: 'null',
-        description:
-          'Default mode for tags input is array of strings, not objects (that is the difference between tags input and select).',
+        description: 'Default mode for tags input is array of strings, not objects (that is the difference between tags input and select).',
       },
       {
         value: 'optionLabel',
         code: '<wt-tags-input option-label="label"></wt-tags-input>',
         type: 'String',
         default: 'null',
-        description:
-          'Represented property of select object. REQUIRED IN OBJECT-DATA TAG-INPUTS TO PREVENT OPTION DUPLICATION.',
+        description: 'Represented property of select object. REQUIRED IN OBJECT-DATA TAG-INPUTS TO PREVENT OPTION DUPLICATION.',
       },
       {
         value: 'manualTagging',
@@ -57,9 +59,7 @@ export default {
         value: 'tag',
         params: [
           {
-            name: 'tag',
-            type: ['String'],
-            description: 'vue-multiselect "tag" value.',
+            name: 'tag', type: ['String'], description: 'vue-multiselect "tag" value.',
           },
         ],
       },
@@ -71,4 +71,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

@@ -12,14 +12,10 @@ const generateInstance = ({ interceptors, baseURL } = {}) => {
   if (interceptors) {
     const { request, response } = interceptors;
     if (request) {
-      request.forEach((interceptor) =>
-        instance.interceptors.request.use(...interceptor),
-      );
+      request.forEach((interceptor) => instance.interceptors.request.use(...interceptor));
     }
     if (response) {
-      response.forEach((interceptor) =>
-        instance.interceptors.response.use(...interceptor),
-      );
+      response.forEach((interceptor) => instance.interceptors.response.use(...interceptor));
     }
   }
 

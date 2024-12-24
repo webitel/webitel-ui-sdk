@@ -1,8 +1,14 @@
 <template>
   <component-model />
-  <component-props :properties="properties" />
-  <component-events :events="events" />
-  <component-slots :slots="slots" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
+  <component-slots
+    :slots="slots"
+  />
 </template>
 
 <script>
@@ -49,8 +55,7 @@ export default {
         code: '<wt-textarea chat-mode></wt-textarea>',
         type: 'Boolean',
         default: 'false',
-        description:
-          'If passed, "Enter" key press emits "enter" event, new line is shift+enter',
+        description: 'If passed, "Enter" key press emits "enter" event, new line is shift+enter',
       },
       {
         value: 'labelProps',
@@ -62,7 +67,9 @@ export default {
     events: [
       {
         value: 'input',
-        params: [{ name: 'value', type: 'String' }],
+        params: [
+          { name: 'value', type: 'String' },
+        ],
       },
       {
         value: 'enter',
@@ -80,8 +87,7 @@ export default {
       },
       {
         name: 'after-input',
-        description:
-          'Pass anything you want to be after input (like icon actions), but inside border',
+        description: 'Pass anything you want to be after input (like icon actions), but inside border',
       },
     ],
   }),
@@ -91,4 +97,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

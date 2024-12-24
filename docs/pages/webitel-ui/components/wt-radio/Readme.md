@@ -7,13 +7,11 @@ import ExampleDisabledRadio from './examples/example-disabled-radio.vue';
 # WtRadio
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example Radio
-
 ::: raw
 <ExampleRadio/>
 :::
@@ -23,7 +21,6 @@ import ExampleDisabledRadio from './examples/example-disabled-radio.vue';
 :::
 
 ## Example Disabled Radio
-
 ::: raw
 <ExampleDisabledRadio/>
 :::
@@ -31,3 +28,4 @@ import ExampleDisabledRadio from './examples/example-disabled-radio.vue';
 ::: details Code
 <<< ./examples/example-disabled-radio.vue
 :::
+

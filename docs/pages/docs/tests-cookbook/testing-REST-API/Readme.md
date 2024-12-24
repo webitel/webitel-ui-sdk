@@ -9,11 +9,10 @@ Prerequisites:
 ## Що ми тестуємо?
 
 Як правило, тестуючи API файлики, ми хочемо перевірити 2 речі:
-
-- чи правильно надсилається
-  запит відносно вхідних параметрів API метода
-- чи правильно обробляється response запиту,
-  і, що вертається на виході з API метода відносно відповіді на запит.
+* чи правильно надсилається
+запит відносно вхідних параметрів API метода
+* чи правильно обробляється response запиту,
+і, що вертається на виході з API метода відносно відповіді на запит.
 
 ## То як же це робиться?
 
@@ -29,11 +28,11 @@ Prerequisites:
 ```javascript
 it('My API method calls axios with right params', async () => {
   const request = vi.fn(() => Promise.resolve({ data: {} }));
-  vi.doMock('axios', axiosMock({ default: { request } }));
+  vi.doMock('axios', axiosMock( { default: { request } }));
 
   const id = '123';
 
-  const API = (await import('../API.js')).default;
+  const API = (await import ('../API.js')).default;
 
   await API.patch({ id });
 
@@ -55,11 +54,11 @@ it('My API method handles API response with right transformations', async () => 
   const input = {
     my_field: 'true',
   };
-
+  
   const output = {
     myField: true,
   };
-
+  
   const request = vi.fn(() => Promise.resolve({ data: { items: [input] } }));
   vi.doMock('axios', axiosMock( { default: { request } }));
 

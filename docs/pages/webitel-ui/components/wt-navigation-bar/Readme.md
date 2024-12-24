@@ -6,13 +6,11 @@ import ExampleNavigationBar from './examples/example-navigation-bar.vue';
 # WtNavigationBar
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example NavigationBar
-
 ::: raw
 <ExampleNavigationBar/>
 :::

@@ -61,6 +61,7 @@
   --icon-color-hold: var(--hold-color);
   --icon-color-secondary-50: var(--secondary-color-50);
 
+
   --page-bg-color: hsla(var(--_page-bg-color), 1);
   --header-color: hsla(var(--_header-color), 1);
 
@@ -107,63 +108,24 @@
   // FORM COLORS
   --form-input-color: var(--contrast-color); // user input color
 
-  --form-label-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--default)
-  );
-  --form-label--hover-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--hover)
-  );
-  --form-label--active-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--active)
-  );
-  --form-label--disabled-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--disabled)
-  );
+  --form-label-color: hsla(var(--_contrast-color), var(--form-opacity--default));
+  --form-label--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
+  --form-label--active-color: hsla(var(--_contrast-color), var(--form-opacity--active));
+  --form-label--disabled-color: hsla(var(--_contrast-color), var(--form-opacity--disabled));
 
-  --form-border-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--default)
-  );
-  --form-border--hover-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--hover)
-  );
-  --form-border--disabled-color: hsla(
-    var(--_contrast-color),
-    var(--form-border-opacity--disabled)
-  );
+  --form-border-color: hsla(var(--_contrast-color), var(--form-opacity--default));
+  --form-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--hover));
+  --form-border--disabled-color: hsla(var(--_contrast-color), var(--form-border-opacity--disabled));
 
-  --form-placeholder-color: hsla(
-    var(--_contrast-color),
-    var(--form-placeholder-opacity)
-  );
-  --form-placeholder-color--focus: hsla(
-    var(--_contrast-color),
-    var(--form-placeholder-opacity--focus)
-  );
-  --form-placeholder-color--disabled: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--disabled)
-  );
+  --form-placeholder-color: hsla(var(--_contrast-color), var(--form-placeholder-opacity));
+  --form-placeholder-color--focus: hsla(var(--_contrast-color), var(--form-placeholder-opacity--focus));
+  --form-placeholder-color--disabled: hsla(var(--_contrast-color), var(--form-opacity--disabled));
 
   // outline
-  --form-outline-label-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--default)
-  );
+  --form-outline-label-color: hsla(var(--_contrast-color), var(--form-opacity--default));
 
-  --form-outline-border-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--ouline--default)
-  );
-  --form-outline-border--hover-color: hsla(
-    var(--_contrast-color),
-    var(--form-opacity--ouline--hover)
-  );
+  --form-outline-border-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--default));
+  --form-outline-border--hover-color: hsla(var(--_contrast-color), var(--form-opacity--ouline--hover));
 
   // TEXT OPACITY
   --text-opacity--default: var(--_opacity--default);
@@ -171,19 +133,10 @@
   --text-opacity--disabled: 0.5;
 
   // TEXT COLORS
-  --text-primary-color: hsla(
-    var(--_contrast-color),
-    var(--text-opacity--default)
-  );
-  --text-outline-color: hsla(
-    var(--_contrast-color),
-    var(--text-opacity----outline--default)
-  );
+  --text-primary-color: hsla(var(--_contrast-color), var(--text-opacity--default));
+  --text-outline-color: hsla(var(--_contrast-color), var(--text-opacity----outline--default));
   --text-contrast-color: hsla(var(--_main-color), var(--text-opacity--default));
-  --text--disabled-color: hsla(
-    var(--_contrast-color),
-    var(--text-opacity--disabled)
-  );
+  --text--disabled-color: hsla(var(--_contrast-color), var(--text-opacity--disabled));
 
   // CHAT COLORS
   --_chat-client-color: var(--_accent-color);
@@ -191,20 +144,8 @@
   --_chat-agent-color: var(--_secondary-color-50);
   --_chat-agent-opacity: 1;
 
-  --chat-client-message-bg-color: hsla(
-    var(--_chat-client-color),
-    var(--_chat-client-opacity)
-  );
-  --chat-agent-message-bg-color: hsla(
-    var(--_chat-agent-color),
-    var(--_chat-agent-opacity)
-  );
-  --chat-client-attachment-bg-color: hsla(
-    var(--_chat-client-color),
-    var(--_chat-client-opacity)
-  );
-  --chat-agent-attachment-bg-color: hsla(
-    var(--_chat-agent-color),
-    var(--_chat-agent-opacity)
-  );
+  --chat-client-message-bg-color: hsla(var(--_chat-client-color), var(--_chat-client-opacity));
+  --chat-agent-message-bg-color: hsla(var(--_chat-agent-color), var(--_chat-agent-opacity));
+  --chat-client-attachment-bg-color: hsla(var(--_chat-client-color), var(--_chat-client-opacity));
+  --chat-agent-attachment-bg-color: hsla(var(--_chat-agent-color), var(--_chat-agent-opacity));
 }

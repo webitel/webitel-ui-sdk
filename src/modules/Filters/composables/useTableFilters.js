@@ -6,9 +6,7 @@ export const useTableFilters = (namespace) => {
 
   const filtersNamespace = `${namespace}/filters`;
 
-  const filtersValue = computed(() =>
-    store.getters[`${filtersNamespace}/GET_FILTERS`](),
-  );
+  const filtersValue = computed(() => store.getters[`${filtersNamespace}/GET_FILTERS`]());
 
   function subscribe(payload) {
     return store.dispatch(`${filtersNamespace}/SUBSCRIBE`, payload);

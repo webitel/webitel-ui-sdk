@@ -49,7 +49,7 @@
     <wt-tooltip v-if="isSettings">
       <template #activator>
         <wt-icon-btn
-          :class="{ active: isSettingsActive }"
+          :class="{'active': isSettingsActive}"
           icon="filter"
           @click="$emit('input', 'settings')"
         />
@@ -100,6 +100,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+
 .wt-table-actions {
   display: flex;
   align-items: center;

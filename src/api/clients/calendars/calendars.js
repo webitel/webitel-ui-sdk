@@ -18,11 +18,7 @@ import applyTransform, {
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const calendarService = new CalendarServiceApiFactory(
-  configuration,
-  '',
-  instance,
-);
+const calendarService = new CalendarServiceApiFactory(configuration, '', instance);
 
 const getCalendarList = async (params) => {
   const { page, size, search, sort, fields, id } = applyTransform(params, [
@@ -31,14 +27,7 @@ const getCalendarList = async (params) => {
   ]);
 
   try {
-    const response = await calendarService.searchCalendar(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-    );
+    const response = await calendarService.searchCalendar(page, size, search, sort, fields, id);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -179,14 +168,7 @@ const getTimezonesLookup = async (params) => {
   ]);
 
   try {
-    const response = await calendarService.searchTimezones(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-    );
+    const response = await calendarService.searchTimezones(page, size, search, sort, fields, id);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),

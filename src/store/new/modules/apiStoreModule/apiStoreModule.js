@@ -1,5 +1,4 @@
-const getParentIdFromContext = (context) =>
-  context?.getters?.PARENT_ID || context?.state?.parentId;
+const getParentIdFromContext = (context) => context?.getters?.PARENT_ID || context?.state?.parentId;
 
 const state = () => ({
   api: null,
@@ -9,8 +8,7 @@ const getters = {};
 
 const actions = {
   GET_LIST: (apiContext, { context: callerContext = {}, params = {} }) => {
-    if (!apiContext.state.api.getList)
-      throw Error('No API "getList" method provided');
+    if (!apiContext.state.api.getList) throw Error('No API "getList" method provided');
     return apiContext.state.api.getList({
       ...callerContext.state,
       parentId: getParentIdFromContext(callerContext),
@@ -37,8 +35,7 @@ const actions = {
   },
 
   UPD_ITEM: (apiContext, { context: callerContext = {}, ...rest } = {}) => {
-    if (!apiContext.state.api.update)
-      throw Error('No API "update" method provided');
+    if (!apiContext.state.api.update) throw Error('No API "update" method provided');
     return apiContext.state.api.update({
       ...callerContext.state,
       parentId: getParentIdFromContext(callerContext),
@@ -46,12 +43,8 @@ const actions = {
     });
   },
 
-  PATCH_ITEM: (
-    apiContext,
-    { context: callerContext = {}, id, changes, ...rest },
-  ) => {
-    if (!apiContext.state.api.patch)
-      throw Error('No API "patch" method provided');
+  PATCH_ITEM: (apiContext, { context: callerContext = {}, id, changes, ...rest }) => {
+    if (!apiContext.state.api.patch) throw Error('No API "patch" method provided');
     return apiContext.state.api.patch({
       ...callerContext.state,
       parentId: getParentIdFromContext(callerContext),
@@ -62,8 +55,7 @@ const actions = {
   },
 
   DELETE_ITEM: (apiContext, { context: callerContext = {}, id, ...rest }) => {
-    if (!apiContext.state.api.delete)
-      throw Error('No API "delete" method provided');
+    if (!apiContext.state.api.delete) throw Error('No API "delete" method provided');
     return apiContext.state.api.delete({
       ...callerContext.state,
       parentId: getParentIdFromContext(callerContext),
@@ -76,8 +68,7 @@ const actions = {
     apiContext,
     { context: callerContext = {}, params = {} },
   ) => {
-    if (!apiContext.state.api.getList)
-      throw Error('No API "getPermissionsList" method provided');
+    if (!apiContext.state.api.getList) throw Error('No API "getPermissionsList" method provided');
     return apiContext.state.api.getPermissionsList({
       ...callerContext.state,
       parentId: getParentIdFromContext(callerContext),
@@ -87,10 +78,14 @@ const actions = {
 
   PATCH_OBJECT_PERMISSIONS_ITEM: (
     apiContext,
-    { context: callerContext = {}, id, changes, ...rest },
+    {
+      context: callerContext = {},
+      id,
+      changes,
+      ...rest
+    },
   ) => {
-    if (!apiContext.state.api.patch)
-      throw Error('No API "patchPermissions" method provided');
+    if (!apiContext.state.api.patch) throw Error('No API "patchPermissions" method provided');
     return apiContext.state.api.patchPermissions({
       ...callerContext.state,
       parentId: getParentIdFromContext(callerContext),

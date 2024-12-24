@@ -6,13 +6,11 @@ import ExamplePlayer from './examples/example-player.vue';
 # WtPlayer
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example Player
-
 ::: raw
 <ExamplePlayer/>
 :::

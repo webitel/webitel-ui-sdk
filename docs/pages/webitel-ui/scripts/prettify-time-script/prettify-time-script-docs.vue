@@ -2,10 +2,7 @@
   <section class="scripts">
     <h2>prettifyTime</h2>
     <article class="script">
-      <p>
-        prettifies Date object or timestamp to time in format hh:mm (AM/PM, if
-        locale is US)
-      </p>
+      <p>prettifies Date object or timestamp to time in format hh:mm (AM/PM, if locale is US)</p>
     </article>
   </section>
 </template>
@@ -21,4 +18,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

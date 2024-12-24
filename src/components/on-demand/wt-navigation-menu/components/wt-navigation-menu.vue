@@ -26,6 +26,7 @@ import NavMenuLvl1 from './_internals/nav-menu-lvl-1.vue';
 import NavMenuLvl2 from './_internals/nav-menu-lvl-2.vue';
 
 const props = defineProps({
+
   /** entire navigation hierarchy. Value: `{ value: string, name: string, subNav: [{ value: string, route: string, name: string}] }`
    **/
 
@@ -39,7 +40,7 @@ const props = defineProps({
 
   icons: {
     type: Array,
-    default: () => [],
+    default: () => ([]),
   },
 });
 
@@ -55,9 +56,7 @@ const categories = computed(() => {
 const subcategories = computed(() => {
   if (!selected.value.subNav) return [];
   return selected.value.subNav.map((subNav) => {
-    const route = selected.value.route
-      ? `${selected.value.route}/${subNav.route}`
-      : subNav.route;
+    const route = selected.value.route ? `${selected.value.route}/${subNav.route}` : subNav.route;
     const name = subNav.name;
     return {
       ...subNav,
@@ -93,8 +92,9 @@ function select(category) {
   --button-min-height: 60px;
   --wrapper-width: 60%;
   --wrapper-height: calc(
-    var(--spacing-sm) * 2 + var(--button-min-height) * 7 + var(--spacing-2xs) *
-      6
+    var(--spacing-sm) * 2
+    + var(--button-min-height) * 7
+    + var(--spacing-2xs) * 6
   );
 
   @media only screen and (max-width: $viewport-sm) {

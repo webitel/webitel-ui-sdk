@@ -6,13 +6,11 @@ import ExampleProgressBarDifferentColors from './examples/example-progress-bar-d
 # WtProgressBar
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example ProgressBar Different Colors
-
 ::: raw
 <ExampleProgressBarDifferentColors/>
 :::
