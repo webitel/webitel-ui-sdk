@@ -157,7 +157,7 @@ const getAllNestedElements = (item: Record<string, any>) => {
   return nested;
 };
 
-const selectedElements = computed<Record<string, any>>(() => {
+const selectedElements = computed<Record<string, any>[]>(() => {
   // _isSelected for backwards compatibility
   return props.selected || getSelectedValue(props.data);
 });
