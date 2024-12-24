@@ -136,6 +136,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.9.1",
     "@vitejs/plugin-vue": "^5.2.0",
