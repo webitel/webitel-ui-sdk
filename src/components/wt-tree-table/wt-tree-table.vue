@@ -285,6 +285,10 @@ const handleSelection = (row, select) => {
     display: flex;
     align-items: center;
   }
+
+  &__text {
+    text-wrap: nowrap;
+  }
 }
 
 .wt-tree-table-th {
