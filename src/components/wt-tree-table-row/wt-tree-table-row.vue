@@ -10,7 +10,7 @@
           ></div>
           <!-- This two empty icons need to create space for nested elements -->
           <wt-icon-btn
-            v-if="!data[childrenProp]"
+            v-if="!data[childrenProp] && nestingLevel"
             :class="{ hidden: !data[childrenProp] }"
             :icon="collapsed ? 'tree-expand' : 'tree-collapse'"
             @click="collapsed = !collapsed"
@@ -54,7 +54,7 @@
       :selectable="selectable"
       :selected-elements="selectedElements"
       :children-prop="childrenProp"
-      :nesting-level="nestingLevel + 1"
+      :nesting-level="childLevel"
       @update:selected="
         $emit('update:selected', {
           data: $event.data,
@@ -95,13 +95,13 @@ const props = withDefaults(
      */
     childrenProp: string;
     selectable?: boolean;
-    selectedElements: Record<string, unknown>[];
+    selectedElements: Record<string, any>[];
     dataHeaders: TableHeader[];
     gridActions?: boolean;
     /**
      * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
      */
-    nestingLevel: number;
+    nestingLevel?: number;
   }>(),
   {
     selectable: false,
@@ -115,6 +115,9 @@ defineEmits(["update:selected"]);
 const collapsed = ref(true);
 const lineCount = computed(() => {
   return props.nestingLevel;
+});
+const childLevel = computed(() => {
+  return props.nestingLevel + 1;
 });
 
 const isSelectedRow = computed(() => {
