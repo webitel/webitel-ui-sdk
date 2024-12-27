@@ -1,7 +1,5 @@
 <template>
-  <component-events
-    :events="events"
-  />
+  <component-events :events="events" />
 </template>
 
 <script>
@@ -24,7 +22,7 @@ export default {
           description: 'Fires at "Export to JSON" button inside popup',
         },
       ],
-    }
+    };
   },
   mounted() {
     Prism.highlightAll();
@@ -32,5 +30,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

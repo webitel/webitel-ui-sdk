@@ -22,7 +22,8 @@ export default {
 
   methods: {
     restore({ filterQuery }) {
-      const value = this.getValueFromQuery({ filterQuery }) || this.defaultValue;
+      const value =
+        this.getValueFromQuery({ filterQuery }) || this.defaultValue;
       this.restoreValue(value);
     },
   },

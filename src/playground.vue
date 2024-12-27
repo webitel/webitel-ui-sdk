@@ -3,27 +3,29 @@ import { ref } from 'vue';
 import WtButton from './components/wt-button/wt-button.vue';
 import WtTagsInput from './components/wt-tags-input/wt-tags-input.vue';
 
-const myInput = ref()
+const myInput = ref();
 
 const focusInput = () => {
-  myInput.value.focus()
-}
+  myInput.value.focus();
+};
 
-const caseMy = ref([{ "text": "test" }, { "text": "test2" }, { "text": "test3" }])
-const startOptions = ref([{ "text": "case1" }, { "text": "case2" }, { "text": "case3" }])
-
-
+const caseMy = ref([{ text: 'test' }, { text: 'test2' }, { text: 'test3' }]);
+const startOptions = ref([
+  { text: 'case1' },
+  { text: 'case2' },
+  { text: 'case3' },
+]);
 </script>
 
 <template>
   <div
     class="playground"
-    style="background: var(--content-wrapper-color);"
+    style="background: var(--content-wrapper-color)"
   >
     <div style="display: flex; gap: 8px; align-items: center">
       <div>
         {{ caseMy }}
-<!--        :options="startOptions"-->
+        <!--        :options="startOptions"-->
 
         <wt-tags-input
           :value="caseMy"
@@ -40,247 +42,247 @@ const startOptions = ref([{ "text": "case1" }, { "text": "case2" }, { "text": "c
         <wt-button @click="focusInput">focusInput</wt-button>
       </div>
     </div>
-<!--    <wt-input type="number" />-->
-<!--    <wt-logo />-->
-<!--    <wt-select />-->
-<!--    <wt-pagination />-->
-<!--    <wt-input />-->
-<!--    <wt-icon-btn-->
-<!--      icon="edit"-->
-<!--      @click="() => alert('wt-icon-btn clicked')"-->
-<!--    />-->
-<!--    <wt-switcher-->
-<!--      v-model="dark"-->
-<!--      label="Dark theme"-->
-<!--      @change="changeTheme"-->
-<!--    />-->
-<!--    <wt-rounded-action icon="edit" />-->
-<!--    <wt-player-->
-<!--      :autoplay="false"-->
-<!--      mime="video"-->
-<!--      reset-on-end-->
-<!--      reset-volume-->
-<!--      src="https://www.w3schools.com/html/mov_bbb.mp4"-->
-<!--    />-->
-<!--    <wt-app-header>-->
-<!--      <wt-app-navigator-->
-<!--        :apps="[{name: 'admin', href: `dev.webitel.com/admin`}]"-->
-<!--        :current-app="'admin'"-->
-<!--      />-->
-<!--      <wt-header-actions-->
-<!--        :user="{ name: 'John Doe' }"-->
-<!--      />-->
-<!--    </wt-app-header>-->
-<!--    {{ date }}-->
-<!--    <wt-datepicker-->
-<!--      v-model="date"-->
-<!--      mode="datetime"-->
-<!--    />-->
-<!--    <wt-button color="secondary-50">-->
-<!--      123-->
-<!--    </wt-button>-->
-<!--    <wt-status-select />-->
-<!--    <div style="display: flex; gap: 10px; flex-wrap: wrap">-->
-<!--      <wt-avatar size="sm" />-->
-<!--      <wt-avatar-->
-<!--        size="sm"-->
-<!--        username="A B"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        badge-->
-<!--        size="lg"-->
-<!--        username="A b"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="2xl"-->
-<!--        username="c d"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="3xl"-->
-<!--        username="e f"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="sm"-->
-<!--        username="g h"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="lg"-->
-<!--        username="i j"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="2xl"-->
-<!--        username="kl"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="3xl"-->
-<!--        username="mn"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="sm"-->
-<!--        username="op"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="lg"-->
-<!--        username="qr"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="2xl"-->
-<!--        username="s t"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="3xl"-->
-<!--        username="u v"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="sm"-->
-<!--        username="w x"-->
-<!--      />-->
-<!--      <wt-avatar-->
-<!--        size="lg"-->
-<!--        username="y z"-->
-<!--      />-->
-<!--    </div>-->
-<!--    <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }, { text: 'lorem ipsum'}, { text: 'lorem ipsum'}]">-->
-<!--      <template #activator>-->
-<!--        <wt-button>context menu</wt-button>-->
-<!--      </template>-->
-<!--    </wt-context-menu>-->
-<!--    <wt-tooltip-->
-<!--      :popper-triggers="['click']"-->
-<!--      :triggers="['click']"-->
-<!--    >-->
-<!--      <template #activator>-->
-<!--        <div class="my-div">-->
-<!--          Hover me!-->
-<!--        </div>-->
-<!--      </template>-->
-<!--      Hello there!-->
-<!--    </wt-tooltip>-->
-<!--    <wt-button-select-->
-<!--      :options="[-->
-<!--        { text: 'ipsum 2' },{ text: 'ipsum 2' },{ text: 'ipsum 2' },-->
-<!--      ]"-->
-<!--    />-->
-<!--    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">-->
-<!--      <div>-->
-<!--        <audit-form-->
-<!--          v-model:questions="auditQuestions"-->
-<!--          mode="create"-->
-<!--        />-->
-<!--        {{ auditQuestions }}-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        <audit-form-->
-<!--          v-model:result="auditResult"-->
-<!--          :questions="auditQuestions"-->
-<!--          mode="fill"-->
-<!--        />-->
-<!--        {{ auditResult }}-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <wt-navigation-bar-->
-<!--      :nav="[-->
-<!--        { value: '1', name: 'Name 1', route: '/1' },-->
-<!--        { value: 'exp1', name: 'Expansion 1', subNav: [-->
-<!--          { value: '2', name: 'Name 2', route: '/2' },-->
-<!--          { value: '3', name: 'Name 3', route: '/3' },-->
-<!--        ] },-->
-<!--        { value: 'exp2', name: 'Expansion 2', subNav: [-->
-<!--          { value: '4', name: 'Name 4', route: '/4' },-->
-<!--          { value: '5', name: 'Name 5', route: '/5' },-->
-<!--        ] },-->
-<!--      ]"-->
-<!--    />-->
-<!--    <wt-avatar-->
-<!--      badge-->
-<!--      status="dnd"-->
-<!--    />-->
-<!--    <wt-icon-->
-<!--      icon="bucket"-->
-<!--      @click="log"-->
-<!--    />-->
-<!--    <wt-icon-btn-->
-<!--      color="icon-secondary"-->
-<!--      icon="edit"-->
-<!--      size="lg"-->
-<!--      @click="log"-->
-<!--    />-->
-<!--    <wt-load-bar-->
-<!--      max="100"-->
-<!--      value="50"-->
-<!--    />-->
-<!--    <wt-load-bar-->
-<!--      max="100"-->
-<!--      value="100"-->
-<!--    />-->
-<!--    <wt-status-select />-->
-<!--    <wt-tags-input-->
-<!--      v-model="select.multipleValue"-->
-<!--      :options="select.stringOptions"-->
-<!--      label="label"-->
-<!--      placeholder="placeholder"-->
-<!--    />-->
-<!--    &lt;!&ndash;    <wt-tags-input&ndash;&gt;-->
-<!--    &lt;!&ndash;      v-model="select.multipleValue"&ndash;&gt;-->
-<!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
-<!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
-<!--    &lt;!&ndash;      taggable&ndash;&gt;-->
-<!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
-<!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
-<!--    &lt;!&ndash;    ></wt-tags-input>&ndash;&gt;-->
-<!--    &lt;!&ndash;    <wt-tags-input&ndash;&gt;-->
-<!--    &lt;!&ndash;      v-model="select.multipleValue"&ndash;&gt;-->
-<!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
-<!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
-<!--    &lt;!&ndash;      taggable&ndash;&gt;-->
-<!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
-<!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
-<!--    &lt;!&ndash;      disabled&ndash;&gt;-->
-<!--    &lt;!&ndash;    ></wt-tags-input>&ndash;&gt;-->
-<!--    &lt;!&ndash;    <wt-select&ndash;&gt;-->
-<!--    &lt;!&ndash;      v-model="select.multipleValue"&ndash;&gt;-->
-<!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
-<!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
-<!--    &lt;!&ndash;      multiple&ndash;&gt;-->
-<!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
-<!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
-<!--    &lt;!&ndash;    ></wt-select>&ndash;&gt;-->
-<!--    <wt-select-->
-<!--      v-model="select.multipleValue"-->
-<!--      :clearable="false"-->
-<!--      :options="select.options"-->
-<!--      label="label"-->
-<!--      multiple-->
-<!--      placeholder="placeholder"-->
-<!--      track-by="name"-->
-<!--    />-->
-<!--    &lt;!&ndash;    <wt-select&ndash;&gt;-->
-<!--    &lt;!&ndash;      :value="'lorem ipsum'"&ndash;&gt;-->
-<!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
-<!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
-<!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
-<!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
-<!--    &lt;!&ndash;      disabled&ndash;&gt;-->
-<!--    &lt;!&ndash;    ></wt-select>&ndash;&gt;-->
+    <!--    <wt-input type="number" />-->
+    <!--    <wt-logo />-->
+    <!--    <wt-select />-->
+    <!--    <wt-pagination />-->
+    <!--    <wt-input />-->
+    <!--    <wt-icon-btn-->
+    <!--      icon="edit"-->
+    <!--      @click="() => alert('wt-icon-btn clicked')"-->
+    <!--    />-->
+    <!--    <wt-switcher-->
+    <!--      v-model="dark"-->
+    <!--      label="Dark theme"-->
+    <!--      @change="changeTheme"-->
+    <!--    />-->
+    <!--    <wt-rounded-action icon="edit" />-->
+    <!--    <wt-player-->
+    <!--      :autoplay="false"-->
+    <!--      mime="video"-->
+    <!--      reset-on-end-->
+    <!--      reset-volume-->
+    <!--      src="https://www.w3schools.com/html/mov_bbb.mp4"-->
+    <!--    />-->
+    <!--    <wt-app-header>-->
+    <!--      <wt-app-navigator-->
+    <!--        :apps="[{name: 'admin', href: `dev.webitel.com/admin`}]"-->
+    <!--        :current-app="'admin'"-->
+    <!--      />-->
+    <!--      <wt-header-actions-->
+    <!--        :user="{ name: 'John Doe' }"-->
+    <!--      />-->
+    <!--    </wt-app-header>-->
+    <!--    {{ date }}-->
+    <!--    <wt-datepicker-->
+    <!--      v-model="date"-->
+    <!--      mode="datetime"-->
+    <!--    />-->
+    <!--    <wt-button color="secondary-50">-->
+    <!--      123-->
+    <!--    </wt-button>-->
+    <!--    <wt-status-select />-->
+    <!--    <div style="display: flex; gap: 10px; flex-wrap: wrap">-->
+    <!--      <wt-avatar size="sm" />-->
+    <!--      <wt-avatar-->
+    <!--        size="sm"-->
+    <!--        username="A B"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        badge-->
+    <!--        size="lg"-->
+    <!--        username="A b"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="2xl"-->
+    <!--        username="c d"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="3xl"-->
+    <!--        username="e f"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="sm"-->
+    <!--        username="g h"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="lg"-->
+    <!--        username="i j"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="2xl"-->
+    <!--        username="kl"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="3xl"-->
+    <!--        username="mn"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="sm"-->
+    <!--        username="op"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="lg"-->
+    <!--        username="qr"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="2xl"-->
+    <!--        username="s t"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="3xl"-->
+    <!--        username="u v"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="sm"-->
+    <!--        username="w x"-->
+    <!--      />-->
+    <!--      <wt-avatar-->
+    <!--        size="lg"-->
+    <!--        username="y z"-->
+    <!--      />-->
+    <!--    </div>-->
+    <!--    <wt-context-menu :options="[{ text: 'lorem ipsum', disabled: true }, { text: 'lorem ipsum'}, { text: 'lorem ipsum'}]">-->
+    <!--      <template #activator>-->
+    <!--        <wt-button>context menu</wt-button>-->
+    <!--      </template>-->
+    <!--    </wt-context-menu>-->
+    <!--    <wt-tooltip-->
+    <!--      :popper-triggers="['click']"-->
+    <!--      :triggers="['click']"-->
+    <!--    >-->
+    <!--      <template #activator>-->
+    <!--        <div class="my-div">-->
+    <!--          Hover me!-->
+    <!--        </div>-->
+    <!--      </template>-->
+    <!--      Hello there!-->
+    <!--    </wt-tooltip>-->
+    <!--    <wt-button-select-->
+    <!--      :options="[-->
+    <!--        { text: 'ipsum 2' },{ text: 'ipsum 2' },{ text: 'ipsum 2' },-->
+    <!--      ]"-->
+    <!--    />-->
+    <!--    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">-->
+    <!--      <div>-->
+    <!--        <audit-form-->
+    <!--          v-model:questions="auditQuestions"-->
+    <!--          mode="create"-->
+    <!--        />-->
+    <!--        {{ auditQuestions }}-->
+    <!--      </div>-->
+    <!--      <div>-->
+    <!--        <audit-form-->
+    <!--          v-model:result="auditResult"-->
+    <!--          :questions="auditQuestions"-->
+    <!--          mode="fill"-->
+    <!--        />-->
+    <!--        {{ auditResult }}-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <wt-navigation-bar-->
+    <!--      :nav="[-->
+    <!--        { value: '1', name: 'Name 1', route: '/1' },-->
+    <!--        { value: 'exp1', name: 'Expansion 1', subNav: [-->
+    <!--          { value: '2', name: 'Name 2', route: '/2' },-->
+    <!--          { value: '3', name: 'Name 3', route: '/3' },-->
+    <!--        ] },-->
+    <!--        { value: 'exp2', name: 'Expansion 2', subNav: [-->
+    <!--          { value: '4', name: 'Name 4', route: '/4' },-->
+    <!--          { value: '5', name: 'Name 5', route: '/5' },-->
+    <!--        ] },-->
+    <!--      ]"-->
+    <!--    />-->
+    <!--    <wt-avatar-->
+    <!--      badge-->
+    <!--      status="dnd"-->
+    <!--    />-->
+    <!--    <wt-icon-->
+    <!--      icon="bucket"-->
+    <!--      @click="log"-->
+    <!--    />-->
+    <!--    <wt-icon-btn-->
+    <!--      color="icon-secondary"-->
+    <!--      icon="edit"-->
+    <!--      size="lg"-->
+    <!--      @click="log"-->
+    <!--    />-->
+    <!--    <wt-load-bar-->
+    <!--      max="100"-->
+    <!--      value="50"-->
+    <!--    />-->
+    <!--    <wt-load-bar-->
+    <!--      max="100"-->
+    <!--      value="100"-->
+    <!--    />-->
+    <!--    <wt-status-select />-->
+    <!--    <wt-tags-input-->
+    <!--      v-model="select.multipleValue"-->
+    <!--      :options="select.stringOptions"-->
+    <!--      label="label"-->
+    <!--      placeholder="placeholder"-->
+    <!--    />-->
+    <!--    &lt;!&ndash;    <wt-tags-input&ndash;&gt;-->
+    <!--    &lt;!&ndash;      v-model="select.multipleValue"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      taggable&ndash;&gt;-->
+    <!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
+    <!--    &lt;!&ndash;    ></wt-tags-input>&ndash;&gt;-->
+    <!--    &lt;!&ndash;    <wt-tags-input&ndash;&gt;-->
+    <!--    &lt;!&ndash;      v-model="select.multipleValue"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      taggable&ndash;&gt;-->
+    <!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      disabled&ndash;&gt;-->
+    <!--    &lt;!&ndash;    ></wt-tags-input>&ndash;&gt;-->
+    <!--    &lt;!&ndash;    <wt-select&ndash;&gt;-->
+    <!--    &lt;!&ndash;      v-model="select.multipleValue"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      multiple&ndash;&gt;-->
+    <!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
+    <!--    &lt;!&ndash;    ></wt-select>&ndash;&gt;-->
+    <!--    <wt-select-->
+    <!--      v-model="select.multipleValue"-->
+    <!--      :clearable="false"-->
+    <!--      :options="select.options"-->
+    <!--      label="label"-->
+    <!--      multiple-->
+    <!--      placeholder="placeholder"-->
+    <!--      track-by="name"-->
+    <!--    />-->
+    <!--    &lt;!&ndash;    <wt-select&ndash;&gt;-->
+    <!--    &lt;!&ndash;      :value="'lorem ipsum'"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      :options="select.options"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      track-by="name"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      placeholder="placeholder"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      label="label"&ndash;&gt;-->
+    <!--    &lt;!&ndash;      disabled&ndash;&gt;-->
+    <!--    &lt;!&ndash;    ></wt-select>&ndash;&gt;-->
 
-<!--    <template v-if="message === '123'">-->
-<!--      <p>{{ message + '333' }}</p>-->
-<!--    </template>-->
-<!--    <p>{{ message }}</p>-->
-<!--    <input v-model="message">-->
-<!--    <wt-search-bar-->
-<!--      :hint="'qwe qwe'"-->
-<!--      :placeholder="$t('reusable.search')"-->
-<!--      :v="vInvalid"-->
-<!--      invalid-->
-<!--    >-->
-<!--      <template #additional-actions="options">-->
-<!--        <wt-icon-->
-<!--          :color="options.invalid ? 'error' : null"-->
-<!--          icon="bucket"-->
-<!--        />-->
-<!--      </template>-->
-<!--    </wt-search-bar>-->
+    <!--    <template v-if="message === '123'">-->
+    <!--      <p>{{ message + '333' }}</p>-->
+    <!--    </template>-->
+    <!--    <p>{{ message }}</p>-->
+    <!--    <input v-model="message">-->
+    <!--    <wt-search-bar-->
+    <!--      :hint="'qwe qwe'"-->
+    <!--      :placeholder="$t('reusable.search')"-->
+    <!--      :v="vInvalid"-->
+    <!--      invalid-->
+    <!--    >-->
+    <!--      <template #additional-actions="options">-->
+    <!--        <wt-icon-->
+    <!--          :color="options.invalid ? 'error' : null"-->
+    <!--          icon="bucket"-->
+    <!--        />-->
+    <!--      </template>-->
+    <!--    </wt-search-bar>-->
   </div>
 </template>
 

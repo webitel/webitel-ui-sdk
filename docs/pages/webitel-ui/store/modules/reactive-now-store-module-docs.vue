@@ -2,7 +2,10 @@
   <section class="store-modules">
     <h2>Reactive Now</h2>
     <article class="store-module">
-      <p>Module provides client with reactive <code>now</code> property from <code>Date.now()</code></p>
+      <p>
+        Module provides client with reactive <code>now</code> property from
+        <code>Date.now()</code>
+      </p>
       <pre class="language-javascript">
         <code>
           // store/index.js
@@ -48,6 +51,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

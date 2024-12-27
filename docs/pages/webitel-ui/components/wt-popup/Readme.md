@@ -6,9 +6,11 @@ import ExamplePopup from './examples/example-popup.vue';
 # WtPopup
 
 ## Specs
+
 <Specs />
 
 ## Example Popup
+
 ::: raw
 <ExamplePopup />
 :::

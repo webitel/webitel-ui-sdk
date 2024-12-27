@@ -16,10 +16,7 @@ const options = [
   { name: 'Phoenix12', language: 'Elixir' },
 ];
 
-const value = ref([
-  options[0],
-  options[1],
-]);
+const value = ref([options[0], options[1]]);
 </script>
 
 <template>
@@ -34,6 +31,4 @@ const value = ref([
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

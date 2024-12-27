@@ -1,5 +1,4 @@
 <script setup>
-
 import { ref } from 'vue';
 
 const value = ref('');
@@ -13,6 +12,4 @@ const value = ref('');
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

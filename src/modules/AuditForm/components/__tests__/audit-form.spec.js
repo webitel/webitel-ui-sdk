@@ -4,9 +4,13 @@ import { useDestroyableSortable } from '../../../../composables/useDestroyableSo
 import { generateQuestionSchema } from '../../schemas/AuditFormQuestionSchema.js';
 import AuditForm from '../audit-form.vue';
 
-vi.mock('../../../../composables/useDestroyableSortable/useDestroyableSortable.js');
+vi.mock(
+  '../../../../composables/useDestroyableSortable/useDestroyableSortable.js',
+);
 
-useDestroyableSortable.mockImplementation(() => ({ reloadSortable: ref(false) }));
+useDestroyableSortable.mockImplementation(() => ({
+  reloadSortable: ref(false),
+}));
 
 describe('AuditForm', () => {
   it('renders a component', async () => {
@@ -41,7 +45,9 @@ describe('AuditForm', () => {
         questions: [generateQuestionSchema()],
       },
     });
-    await wrapper.findComponent({ name: 'audit-form-question' }).vm.$emit('delete', { key: 0 });
+    await wrapper
+      .findComponent({ name: 'audit-form-question' })
+      .vm.$emit('delete', { key: 0 });
     expect(wrapper.emitted()['update:questions'][0][0]).toEqual([]);
   });
   it('copy event from child question emits update with duplicated questions', async () => {
@@ -55,13 +61,20 @@ describe('AuditForm', () => {
     await wrapper
       .findComponent({ name: 'audit-form-question' })
       .vm.$emit('copy', { question, key: 0 });
-    expect(wrapper.emitted()['update:questions'][0][0]).toEqual([question, question]);
+    expect(wrapper.emitted()['update:questions'][0][0]).toEqual([
+      question,
+      question,
+    ]);
   });
   it('initializes result depending on passed questions', () => {
     const wrapper = mount(AuditForm, {
       props: {
         mode: 'fill',
-        questions: [generateQuestionSchema(), generateQuestionSchema(), generateQuestionSchema()],
+        questions: [
+          generateQuestionSchema(),
+          generateQuestionSchema(),
+          generateQuestionSchema(),
+        ],
       },
     });
     expect(wrapper.emitted()['update:result'][0][0]).toEqual([{}, {}, {}]);

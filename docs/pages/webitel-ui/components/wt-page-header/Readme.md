@@ -6,11 +6,13 @@ import ExamplePageHeader from './examples/example-page-header.vue';
 # WtPageHeader
 
 ## Props
+
 ::: raw
 <Docs />
 :::
 
 ## Example Page Header
+
 ::: raw
 <ExamplePageHeader />
 :::

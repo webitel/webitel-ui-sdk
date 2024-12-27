@@ -10,7 +10,9 @@
         :first="key === 0"
         :option="option"
         @delete="deleteQuestionOption({ key })"
-        @update:option="updateQuestion({ path: `options[${key}]`, value: $event })"
+        @update:option="
+          updateQuestion({ path: `options[${key}]`, value: $event })
+        "
       />
       <wt-button
         class="audit-form-question-options-write__add-button"
@@ -25,16 +27,14 @@
     >
       <wt-radio
         v-for="opt of question.options"
-        :key="opt.score+opt.name"
+        :key="opt.score + opt.name"
         :label="opt.name"
         :selected="result"
         :value="opt"
         @input="emit('change:result', $event)"
       />
     </div>
-    <div v-else>
-      Unknown mode: {{ mode }}
-    </div>
+    <div v-else>Unknown mode: {{ mode }}</div>
   </article>
 </template>
 

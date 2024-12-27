@@ -291,7 +291,8 @@ export default {
     isRegExpMatched: 'Password must match the regular expression:',
     regExpValidator: 'This regular expression is not valid',
     domainValidator: 'Incorrect domain',
-    decimalValidator: 'Decimal precision should be no more than { count } places',
+    decimalValidator:
+      'Decimal precision should be no more than { count } places',
     integer: 'The field should contain only whole numbers',
   },
   webitelUI: {
@@ -382,7 +383,8 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Confirm deletion',
-      askingAlert: 'Are you sure you want to delete {subject}? This action cannot be undone.',
+      askingAlert:
+        'Are you sure you want to delete {subject}? This action cannot be undone.',
       tableAskingAlert:
         'Are you sure you want\n to delete {count} record? | Are you sure you want\n to delete {count} records?',
       deleteAll: 'ALL',

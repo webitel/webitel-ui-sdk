@@ -8,11 +8,13 @@ import ExampleVerticalSlider from './examples/example-vertical-slider.vue';
 # WtSlider
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Slider
+
 ::: raw
 <ExampleSlider/>
 :::
@@ -22,6 +24,7 @@ import ExampleVerticalSlider from './examples/example-vertical-slider.vue';
 :::
 
 ## Example Disabled Slider
+
 ::: raw
 <ExampleDisabledSlider/>
 :::
@@ -31,6 +34,7 @@ import ExampleVerticalSlider from './examples/example-vertical-slider.vue';
 :::
 
 ## Example Vertical Slider
+
 ::: raw
 <ExampleVerticalSlider/>
 :::
@@ -38,4 +42,3 @@ import ExampleVerticalSlider from './examples/example-vertical-slider.vue';
 ::: details Code
 <<< ./examples/example-vertical-slider.vue
 :::
-

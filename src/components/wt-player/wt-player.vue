@@ -200,70 +200,69 @@ export default {
     }
   }
 
-    :deep(.plyr) {
-      max-width: 100%; // prevents <video> container overflow
-      border-radius: var(--border-radius);
-      box-shadow: var(--elevation-10);
+  :deep(.plyr) {
+    max-width: 100%; // prevents <video> container overflow
+    border-radius: var(--border-radius);
+    box-shadow: var(--elevation-10);
 
-      .plyr__controls > .plyr__control,
-      .plyr__controls > .plyr__controls__item > .plyr__control {
-        padding: var(--plyr-controls-icon-padding);
+    .plyr__controls > .plyr__control,
+    .plyr__controls > .plyr__controls__item > .plyr__control {
+      padding: var(--plyr-controls-icon-padding);
+    }
+
+    .plyr__controls > .plyr__control > svg,
+    .plyr__controls > .plyr__controls__item > .plyr__control > svg {
+      width: var(--plyr-controls-icon-size);
+      height: var(--plyr-controls-icon-size);
+    }
+
+    .plyr__control--overlaid svg {
+      left: 0; // reset plyr style for video "play" button icon
+    }
+
+    .plyr__progress__buffer {
+      background: var(--wt-player-audio-progress-background);
+    }
+
+    .plyr__progress input,
+    .plyr__volume input {
+      cursor: pointer;
+
+      &::-webkit-slider-thumb {
+        transition: var(--transition);
+        border: var(--wt-slider-border);
+        border-radius: var(--wt-slider-pointer-radius);
+        background: var(--wt-slider-pointer-background-color);
+        -webkit-appearance: none;
       }
 
-      .plyr__controls > .plyr__control > svg,
-      .plyr__controls > .plyr__controls__item > .plyr__control > svg {
-        width: var(--plyr-controls-icon-size);
-        height: var(--plyr-controls-icon-size);
+      &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
       }
 
-      .plyr__control--overlaid svg {
-        left: 0; // reset plyr style for video "play" button icon
+      &::-moz-range-thumb {
+        width: var(--wt-slider-pointer-size);
+        height: var(--wt-slider-pointer-size);
+        transition: var(--transition);
+        border: var(--wt-slider-border);
+        border-color: var(--wt-slider-pointer-border-color);
+        border-radius: var(--wt-slider-pointer-radius);
+        background: var(--wt-slider-pointer-background-color);
+        -moz-appearance: none;
       }
 
-      .plyr__progress__buffer {
-        background: var(--wt-player-audio-progress-background);
+      &::-moz-range-track {
+        -moz-appearance: none;
       }
 
-      .plyr__progress input,
-      .plyr__volume input {
-        cursor: pointer;
+      &::-ms-thumb {
+        appearance: none;
+      }
 
-        &::-webkit-slider-thumb {
-          transition: var(--transition);
-          border: var(--wt-slider-border);
-          border-radius: var(--wt-slider-pointer-radius);
-          background: var(--wt-slider-pointer-background-color);
-          -webkit-appearance: none;
-        }
-
-        &::-webkit-slider-runnable-track {
-          -webkit-appearance: none;
-        }
-
-        &::-moz-range-thumb {
-          width: var(--wt-slider-pointer-size);
-          height: var(--wt-slider-pointer-size);
-          transition: var(--transition);
-          border: var(--wt-slider-border);
-          border-color: var(--wt-slider-pointer-border-color);
-          border-radius: var(--wt-slider-pointer-radius);
-          background: var(--wt-slider-pointer-background-color);
-          -moz-appearance: none;
-        }
-
-        &::-moz-range-track {
-          -moz-appearance: none;
-        }
-
-        &::-ms-thumb {
-          appearance: none;
-        }
-
-        &::-ms-track {
-          appearance: none;
-        }
+      &::-ms-track {
+        appearance: none;
       }
     }
   }
-
+}
 </style>

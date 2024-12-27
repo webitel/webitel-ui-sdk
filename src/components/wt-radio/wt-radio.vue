@@ -15,7 +15,7 @@
         class="wt-radio__input"
         type="radio"
         @input="inputHandler"
-      >
+      />
       <wt-icon
         :icon="radioIcon"
         class="wt-radio__icon"
@@ -93,7 +93,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
 /* Customize the label (the container) */
 .wt-radio {
   box-sizing: border-box;

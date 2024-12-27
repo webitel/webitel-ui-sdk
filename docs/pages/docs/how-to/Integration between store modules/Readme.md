@@ -2,11 +2,11 @@
 
 ## Prerequisites
 
-* [Store Introduction](../../../webitel-ui/store/_Introduction/Readme.md)
-* [createTableStoreModule](../../../webitel-ui/store/createTableStoreModule/Readme.md)
-* [createCardStoreModule](../../../webitel-ui/store/createCardStoreModule/Readme.md)
-* [createApiStoreModule](../../../webitel-ui/store/createApiStoreModule/Readme.md)
-* [modules/Filters](../../../webitel-ui/modules/Filters/Readme.md)
+- [Store Introduction](../../../webitel-ui/store/_Introduction/Readme.md)
+- [createTableStoreModule](../../../webitel-ui/store/createTableStoreModule/Readme.md)
+- [createCardStoreModule](../../../webitel-ui/store/createCardStoreModule/Readme.md)
+- [createApiStoreModule](../../../webitel-ui/store/createApiStoreModule/Readme.md)
+- [modules/Filters](../../../webitel-ui/modules/Filters/Readme.md)
 
 ## Опис
 
@@ -82,4 +82,3 @@ const contacts = createBaseStoreModule({
 
 export default contacts;
 ```
-

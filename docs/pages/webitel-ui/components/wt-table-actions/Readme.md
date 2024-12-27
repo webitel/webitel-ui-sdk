@@ -8,11 +8,13 @@
 > і заюзайте [`wt-actions-bar`](../wt-action-bar/Readme.md).
 
 ## Props
+
 ::: raw
 <Docs />
 :::
 
 ## Example Table Actions
+
 ::: raw
 <ExampleTableActions />
 :::

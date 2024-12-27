@@ -21,7 +21,15 @@ import webChatGateway from './defaults/webChatGateway.js';
 const instance = getDefaultInstance();
 
 const baseUrl = '/chat/bots';
-const fieldsToSend = ['name', 'uri', 'flow', 'enabled', 'provider', 'metadata', 'updates'];
+const fieldsToSend = [
+  'name',
+  'uri',
+  'flow',
+  'enabled',
+  'provider',
+  'metadata',
+  'updates',
+];
 
 const convertWebchatSeconds = (num) => `${num}s`;
 
@@ -31,13 +39,19 @@ const parseTimeoutSeconds = (item) =>
 const webchatRequestConverter = (data) => {
   const copy = deepCopy(data);
   if (data.metadata.readTimeout) {
-    copy.metadata.readTimeout = convertWebchatSeconds(data.metadata.readTimeout);
+    copy.metadata.readTimeout = convertWebchatSeconds(
+      data.metadata.readTimeout,
+    );
   }
   if (data.metadata.writeTimeout) {
-    copy.metadata.writeTimeout = convertWebchatSeconds(data.metadata.writeTimeout);
+    copy.metadata.writeTimeout = convertWebchatSeconds(
+      data.metadata.writeTimeout,
+    );
   }
   if (data.metadata.handshakeTimeout) {
-    copy.metadata.handshakeTimeout = convertWebchatSeconds(data.metadata.handshakeTimeout);
+    copy.metadata.handshakeTimeout = convertWebchatSeconds(
+      data.metadata.handshakeTimeout,
+    );
   }
   if (data.metadata.allowOrigin) {
     copy.metadata.allowOrigin = data.metadata.allowOrigin.join();
@@ -46,7 +60,9 @@ const webchatRequestConverter = (data) => {
   copy.metadata.view = JSON.stringify(data.metadata.view);
   copy.metadata.chat = JSON.stringify(data.metadata.chat);
   copy.metadata.appointment = JSON.stringify(data.metadata.appointment);
-  copy.metadata.alternativeChannels = JSON.stringify(data.metadata.alternativeChannels);
+  copy.metadata.alternativeChannels = JSON.stringify(
+    data.metadata.alternativeChannels,
+  );
   copy.metadata.call = JSON.stringify(data.metadata.call);
 
   if (copy.metadata.captcha.enabled) {
@@ -76,15 +92,21 @@ const viberRequestConverter = (item) => {
 
 const webChatResponseConverter = (data) => {
   const copy = deepCopy(data);
-  copy.metadata.allowOrigin = data.metadata.allowOrigin ? data.metadata.allowOrigin.split(',') : [];
+  copy.metadata.allowOrigin = data.metadata.allowOrigin
+    ? data.metadata.allowOrigin.split(',')
+    : [];
   if (data.metadata.readTimeout) {
     copy.metadata.readTimeout = parseTimeoutSeconds(data.metadata.readTimeout);
   }
   if (data.metadata.writeTimeout) {
-    copy.metadata.writeTimeout = parseTimeoutSeconds(data.metadata.writeTimeout);
+    copy.metadata.writeTimeout = parseTimeoutSeconds(
+      data.metadata.writeTimeout,
+    );
   }
   if (data.metadata.handshakeTimeout) {
-    copy.metadata.handshakeTimeout = parseTimeoutSeconds(data.metadata.handshakeTimeout);
+    copy.metadata.handshakeTimeout = parseTimeoutSeconds(
+      data.metadata.handshakeTimeout,
+    );
   }
   if (data.metadata.view) {
     copy.metadata.view = JSON.parse(data.metadata.view);
@@ -96,7 +118,9 @@ const webChatResponseConverter = (data) => {
     copy.metadata.appointment = JSON.parse(data.metadata.appointment);
   }
   if (data.metadata.alternativeChannels) {
-    copy.metadata.alternativeChannels = JSON.parse(data.metadata.alternativeChannels);
+    copy.metadata.alternativeChannels = JSON.parse(
+      data.metadata.alternativeChannels,
+    );
   }
   if (data.metadata.call) {
     copy.metadata.call = JSON.parse(data.metadata.call);
@@ -118,8 +142,10 @@ const messengerResponseConverter = (item) => {
 
 const viberResponseConverter = (item) => {
   const copy = deepCopy(item);
-  if (item.metadata['btn.back.color']) copy.metadata.btnBackColor = item.metadata['btn.back.color'];
-  if (item.metadata['btn.font.color']) copy.metadata.btnFontColor = item.metadata['btn.font.color'];
+  if (item.metadata['btn.back.color'])
+    copy.metadata.btnBackColor = item.metadata['btn.back.color'];
+  if (item.metadata['btn.font.color'])
+    copy.metadata.btnFontColor = item.metadata['btn.font.color'];
   return copy;
 };
 
@@ -233,7 +259,10 @@ const updateChatGateway = async ({ itemInstance, itemId: id }) => {
 };
 
 const patchChatGateway = async ({ changes, id }) => {
-  const body = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake()]);
+  const body = applyTransform(changes, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   const url = `${baseUrl}/${id}`;
   try {
     const response = await instance.patch(url, body);

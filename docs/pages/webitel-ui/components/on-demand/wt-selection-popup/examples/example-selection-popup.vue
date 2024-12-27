@@ -1,9 +1,6 @@
 <template>
   <div>
-    <wt-button
-      @click="isShownPopup = true"
-    >Open popup
-    </wt-button>
+    <wt-button @click="isShownPopup = true">Open popup </wt-button>
     <wt-selection-popup
       :options="options"
       :selected="selected"
@@ -48,7 +45,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
-
+<style lang="scss" scoped></style>

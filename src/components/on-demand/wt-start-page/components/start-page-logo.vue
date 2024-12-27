@@ -1,6 +1,6 @@
 <template>
   <div class="start-page-logo">
-    <img :src="logo">
+    <img :src="logo" />
   </div>
 </template>
 

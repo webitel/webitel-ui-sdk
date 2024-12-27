@@ -3,12 +3,8 @@
     event="change"
     prop="headers"
   />
-  <component-props
-    :properties="properties"
-  />
-  <component-events
-    :events="events"
-  />
+  <component-props :properties="properties" />
+  <component-events :events="events" />
 </template>
 
 <script>
@@ -20,13 +16,15 @@ export default {
     properties: [
       {
         value: 'headers',
-        code: '<wt-table-column-select :headers="[\n'
-          + '              {value: \'column 1\', text: \'Column 1\', show: true },\n'
-          + '              { value: \'column 2\', text: \'Column 2\', show: false },\n'
-          + '            ]"></wt-table-column-select>',
+        code:
+          '<wt-table-column-select :headers="[\n' +
+          "              {value: 'column 1', text: 'Column 1', show: true },\n" +
+          "              { value: 'column 2', text: 'Column 2', show: false },\n" +
+          '            ]"></wt-table-column-select>',
         type: 'Array',
         required: true,
-        description: 'Each header should have following schema: { value: String, show: Boolean, text: String }',
+        description:
+          'Each header should have following schema: { value: String, show: Boolean, text: String }',
       },
       {
         value: 'staticHeaders',
@@ -53,5 +51,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

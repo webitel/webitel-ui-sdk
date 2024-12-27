@@ -12,6 +12,4 @@ const selected = ref(true);
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
