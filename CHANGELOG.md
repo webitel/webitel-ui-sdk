@@ -1,3 +1,14 @@
+## [v24.12.31] - 2024-12-27
+### :sparkles: New Features
+- [`16a6aca`](https://github.com/webitel/webitel-ui-sdk/commit/16a6acadf46f1c16a3548e82698116dc738172bd) - update prettier config
+- [`eae9dc4`](https://github.com/webitel/webitel-ui-sdk/commit/eae9dc4be79ba6b6a9e92cf8496a4563d28791d8) - run fix eslint errors
+- [`2ca8e63`](https://github.com/webitel/webitel-ui-sdk/commit/2ca8e63b9293e7539b736827d4a5a9ad0f3b28a0) - update lint scripts
+- [`dae2b8b`](https://github.com/webitel/webitel-ui-sdk/commit/dae2b8b80031794e7e1e951e134d9aea166e22f4) - add @eslint/js package
+- [`e6d2bcf`](https://github.com/webitel/webitel-ui-sdk/commit/e6d2bcf1b4bba7ae3be77649c51f67d50f13cc0f) - update package version to 24.12.30
+- [`b8c5fe2`](https://github.com/webitel/webitel-ui-sdk/commit/b8c5fe2ec60df84bcc4bc701e0fd128489681b49) - run fix eslint errors
+- [`aa7f3ab`](https://github.com/webitel/webitel-ui-sdk/commit/aa7f3ab45786b9e0f7aa7e38c9818bf9c352b502) - Implement Eslint lint and prettier configs. Remove Biome
+
+
 ## [v24.12.29] - 2024-12-18
 
 ### :sparkles: New Features
@@ -603,3 +614,4 @@
 [v24.12.27]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.26...v24.12.27
 [v24.12.28]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.27...v24.12.28
 [v24.12.29]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.28...v24.12.29
+[v24.12.31]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.29...v24.12.31
