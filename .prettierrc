@@ -6,6 +6,5 @@
   "trailingComma": "all",
   "printWidth": 80,
   "singleAttributePerLine": true,
-  "arrayExpand": true,
   "endOfLine": "auto"
 }
