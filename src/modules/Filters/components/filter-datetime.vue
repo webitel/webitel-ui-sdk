@@ -25,9 +25,13 @@ const props = defineProps({
 
 const store = useStore();
 
-const filterSchema = computed(() => getNamespacedState(store.state, props.namespace)[props.filterQuery]);
+const filterSchema = computed(
+  () => getNamespacedState(store.state, props.namespace)[props.filterQuery],
+);
 
-const value = computed(() => store.getters[`${props.namespace}/FILTER_${props.filterQuery}`]);
+const value = computed(
+  () => store.getters[`${props.namespace}/FILTER_${props.filterQuery}`],
+);
 
 const setValue = (value) => {
   const payload = { value, name: props.filterQuery };
@@ -35,6 +39,4 @@ const setValue = (value) => {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

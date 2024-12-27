@@ -7,11 +7,13 @@ import Example403ErrorPage from './examples/example-403-error-page.vue';
 # WtErrorPage
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example 404 Error Page
+
 ::: raw
 <Example404ErrorPage/>
 :::
@@ -21,6 +23,7 @@ import Example403ErrorPage from './examples/example-403-error-page.vue';
 :::
 
 ## Example 403 Error Page
+
 ::: raw
 <Example403ErrorPage/>
 :::

@@ -22,12 +22,8 @@
         />
       </div>
     </div>
-    <wt-expand-transition
-      v-show="opened"
-    >
-      <div
-        class="wt-expansion-panel-body"
-      >
+    <wt-expand-transition v-show="opened">
+      <div class="wt-expansion-panel-body">
         <slot />
       </div>
     </wt-expand-transition>
@@ -121,7 +117,6 @@ watch(
 
     &--opened {
       transform: rotate(90deg);
-
     }
   }
 

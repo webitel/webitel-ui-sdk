@@ -20,7 +20,9 @@ describe('WtPageWrapper', () => {
     const wrapper = shallowMount(WtPageWrapper, {
       slots: { 'actions-panel': content },
     });
-    expect(wrapper.find('.wt-page-wrapper__actions-panel').text()).toBe(content);
+    expect(wrapper.find('.wt-page-wrapper__actions-panel').text()).toBe(
+      content,
+    );
   });
 
   it('renders page wrapper main content via main slot', () => {

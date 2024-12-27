@@ -9,6 +9,4 @@ const callAlert = () => window.alert('wt-icon-btn clicked');
   ></wt-icon-btn>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -33,7 +33,14 @@ const getBlacklistList = async (params) => {
   ]);
 
   try {
-    const response = await listService.searchList(page, size, search, sort, fields, id);
+    const response = await listService.searchList(
+      page,
+      size,
+      search,
+      sort,
+      fields,
+      id,
+    );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -59,7 +66,10 @@ const getBlacklist = async ({ itemId: id }) => {
 const fieldsToSend = ['name', 'description'];
 
 const addBlacklist = async ({ itemInstance }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   try {
     const response = await listService.createList(item);
     return applyTransform(response.data, [snakeToCamel()]);
@@ -69,7 +79,10 @@ const addBlacklist = async ({ itemInstance }) => {
 };
 
 const updateBlacklist = async ({ itemInstance, itemId: id }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   try {
     const response = await listService.updateList(id, item);
     return applyTransform(response.data, [snakeToCamel()]);

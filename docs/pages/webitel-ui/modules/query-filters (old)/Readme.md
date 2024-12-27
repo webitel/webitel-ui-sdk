@@ -1,4 +1,5 @@
 # Query Filters
+
 Так само відомі як "старі фільтри".
 
 ## Як працюють старі фільтри?
@@ -38,7 +39,7 @@ set параметрів у store. Вони наслідують міксин р
 
 Все це виглядає приблизно так:
 
-*Hint: "Open image in new tab" for better view.*
+_Hint: "Open image in new tab" for better view._
 
 ![](assets/old-schema.jpg)
 

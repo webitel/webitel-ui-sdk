@@ -33,10 +33,11 @@ const fieldsToSend = [
 ];
 
 const getTeamsList = async (params) => {
-  const { page, size, search, sort, fields, id, strategy, adminId } = applyTransform(params, [
-    merge(getDefaultGetParams()),
-    starToSearch('search'),
-  ]);
+  const { page, size, search, sort, fields, id, strategy, adminId } =
+    applyTransform(params, [
+      merge(getDefaultGetParams()),
+      starToSearch('search'),
+    ]);
 
   try {
     const response = await teamService.searchAgentTeam(
@@ -80,14 +81,20 @@ const getTeam = async ({ itemId: id }) => {
 
   try {
     const response = await teamService.readAgentTeam(id);
-    return applyTransform(response.data, [snakeToCamel(), merge(defaultObject)]);
+    return applyTransform(response.data, [
+      snakeToCamel(),
+      merge(defaultObject),
+    ]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
 };
 
 const addTeam = async ({ itemInstance }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   try {
     const response = await teamService.createAgentTeam(item);
     return applyTransform(response.data, [snakeToCamel()]);
@@ -97,7 +104,10 @@ const addTeam = async ({ itemInstance }) => {
 };
 
 const updateTeam = async ({ itemInstance, itemId: id }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   try {
     const response = await teamService.updateAgentTeam(id, item);
     return applyTransform(response.data, [snakeToCamel()]);

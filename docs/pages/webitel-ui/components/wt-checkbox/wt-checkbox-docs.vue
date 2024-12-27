@@ -3,15 +3,9 @@
     event="change"
     prop="selected"
   />
-  <component-props
-    :properties="properties"
-  />
-  <component-events
-    :events="events"
-  />
-  <component-slots
-    :slots="slots"
-  />
+  <component-props :properties="properties" />
+  <component-events :events="events" />
+  <component-slots :slots="slots" />
 </template>
 
 <script>
@@ -26,14 +20,16 @@ export default {
         code: '<wt-checkbox :value="value"></wt-checkbox>',
         type: ['String', 'Boolean'],
         default: '',
-        description: 'Checkbox value, which should be present in checked list, if checked',
+        description:
+          'Checkbox value, which should be present in checked list, if checked',
       },
       {
         value: 'selected',
         code: '<wt-checkbox :selected="value"></wt-checkbox>',
         type: ['Array', 'Boolean'],
         default: '[]',
-        description: '[V-MODEL] Variable-accumulator, which contains checkbox value (or values, if array)',
+        description:
+          '[V-MODEL] Variable-accumulator, which contains checkbox value (or values, if array)',
       },
       {
         value: 'label',
@@ -64,9 +60,7 @@ export default {
     events: [
       {
         value: 'change',
-        params: [
-          { name: 'selected value', type: ['Boolean', 'Array'] },
-        ],
+        params: [{ name: 'selected value', type: ['Boolean', 'Array'] }],
       },
     ],
     slots: [
@@ -83,5 +77,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

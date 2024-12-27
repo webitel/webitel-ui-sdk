@@ -15,13 +15,12 @@ export default {
   name: 'FlowTypeApplicationsLookupDocs',
   computed: {
     lookup() {
-      const _import = 'import FlowTypeApplications from \'@webitel/flow-ui-sdk/src/lookups/FlowTypeApplications.lookup\';\n';
+      const _import =
+        "import FlowTypeApplications from '@webitel/flow-ui-sdk/src/lookups/FlowTypeApplications.lookup';\n";
       return enumReducer(FlowTypeApplications, _import);
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

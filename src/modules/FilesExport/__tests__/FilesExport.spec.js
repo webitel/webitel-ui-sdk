@@ -11,7 +11,9 @@ vi.mock('file-saver-es', () => ({
   saveAs: vi.fn(),
 }));
 
-const dataList = [{ files: [{ name: 'jest', id: '1', mimeType: 'mime/type' }] }];
+const dataList = [
+  { files: [{ name: 'jest', id: '1', mimeType: 'mime/type' }] },
+];
 const selectedDataList = [
   {
     _isSelected: true,
@@ -24,7 +26,9 @@ const selectedDataList = [
 ];
 
 describe('File Export', () => {
-  jszipUtils.getBinaryContent.mockImplementation((url, callback) => callback(null, {}));
+  jszipUtils.getBinaryContent.mockImplementation((url, callback) =>
+    callback(null, {}),
+  );
   let wrapper;
   const Component = {
     render() {},

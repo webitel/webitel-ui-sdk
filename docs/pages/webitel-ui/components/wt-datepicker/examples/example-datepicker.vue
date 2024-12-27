@@ -1,5 +1,4 @@
 <script setup>
-
 import { ref } from 'vue';
 
 const value = ref(Date.now());
@@ -13,6 +12,4 @@ const value = ref(Date.now());
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

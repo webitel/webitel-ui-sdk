@@ -10,9 +10,11 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 # WtButton
 
 ## Specs
+
 <Specs />
 
 ## Button
+
 ::: raw
 <ExampleButton />
 :::
@@ -22,6 +24,7 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 :::
 
 ## Different colors
+
 ::: raw
 <ExampleButtonsDifferentColor />
 :::
@@ -31,6 +34,7 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 :::
 
 ## Small button
+
 ::: raw
 <ExampleSmallButton />
 :::
@@ -40,6 +44,7 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 :::
 
 ## Wide button
+
 ::: raw
 <ExampleWideButton />
 :::
@@ -49,6 +54,7 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 :::
 
 ## Different colors with loaders
+
 ::: raw
 <ExampleButtonsDifferentColorLoaders />
 :::

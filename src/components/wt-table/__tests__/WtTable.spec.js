@@ -69,7 +69,9 @@ describe('WtTable', () => {
         gridActions: false,
       },
     });
-    expect(wrapper.findAll('.wt-table__tr__head th').length).toBe(headers.length);
+    expect(wrapper.findAll('.wt-table__tr__head th').length).toBe(
+      headers.length,
+    );
   });
 
   it('do not renders table footer by default', () => {
@@ -116,7 +118,11 @@ describe('WtTable', () => {
         sortable: true,
       },
     });
-    expect(wrapper.find('.wt-table__th--sortable .wt-table__th__sort-arrow').exists()).toBe(true);
+    expect(
+      wrapper
+        .find('.wt-table__th--sortable .wt-table__th__sort-arrow')
+        .exists(),
+    ).toBe(true);
   });
 
   it('selects all rows at header checkbox click', async () => {

@@ -17,7 +17,11 @@ import applyTransform, {
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const configurationService = new SystemSettingServiceApiFactory(configuration, '', instance);
+const configurationService = new SystemSettingServiceApiFactory(
+  configuration,
+  '',
+  instance,
+);
 
 const getList = async (params) => {
   const { page, size, search, sort, fields, name } = applyTransform(params, [
@@ -59,7 +63,10 @@ const get = async ({ itemId: id }) => {
 const fieldsToSend = ['id', 'name', 'value'];
 
 const add = async ({ itemInstance }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   try {
     const response = await configurationService.createSystemSetting(item);
     return applyTransform(response.data, [snakeToCamel()]);
@@ -69,7 +76,10 @@ const add = async ({ itemInstance }) => {
 };
 
 const update = async ({ itemInstance, itemId: id }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   try {
     const response = await configurationService.updateSystemSetting(id, item);
     return applyTransform(response.data, [snakeToCamel()]);

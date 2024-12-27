@@ -15,7 +15,9 @@ export default {
     },
 
     filesZippingProgress() {
-      return this.FilesExport ? Math.floor(this.FilesExport.zippingProgress.percent) : 0;
+      return this.FilesExport
+        ? Math.floor(this.FilesExport.zippingProgress.percent)
+        : 0;
     },
   },
 
@@ -29,7 +31,9 @@ export default {
       if (this.selectedItems?.length) {
         files = this.selectedItems.reduce(
           (filesAccumulator, next) =>
-            next.files ? [...filesAccumulator, ...next.files] : filesAccumulator,
+            next.files
+              ? [...filesAccumulator, ...next.files]
+              : filesAccumulator,
           [],
         );
       }

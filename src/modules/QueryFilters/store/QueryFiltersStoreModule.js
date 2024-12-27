@@ -27,7 +27,8 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
       let newValue = value;
       if (newValue) {
         if (multiple && !Array.isArray(newValue)) newValue = [newValue];
-      } else if (newValue === null || newValue === undefined) newValue = defaultValue;
+      } else if (newValue === null || newValue === undefined)
+        newValue = defaultValue;
       context.commit('SET_FILTER', { filter, value: newValue });
     },
     RESET_FILTERS: (context) => {

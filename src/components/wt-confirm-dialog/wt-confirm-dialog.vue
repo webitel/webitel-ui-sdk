@@ -12,13 +12,24 @@
       <slot name="main">
         <div class="wt-confirm-dialog__content">
           <p class="wt-confirm-dialog__message">
-            {{ deleteMessage ? deleteMessage : $t('webitelUI.deleteConfirmationPopup.askingAlert', { subject }) }}
+            {{
+              deleteMessage
+                ? deleteMessage
+                : $t('webitelUI.deleteConfirmationPopup.askingAlert', {
+                    subject,
+                  })
+            }}
           </p>
         </div>
       </slot>
     </template>
     <template #actions>
-      <slot name="actions" :isDeleting="isDeleting" :confirm="confirm" :close="close">
+      <slot
+        name="actions"
+        :isDeleting="isDeleting"
+        :confirm="confirm"
+        :close="close"
+      >
         <wt-button
           :disabled="isDeleting"
           color="secondary"
@@ -44,7 +55,7 @@ import { ref, useAttrs } from 'vue';
 const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   deleteMessage: {
     type: String,
@@ -74,7 +85,7 @@ async function confirm() {
   try {
     isDeleting.value = true;
 
-    await props.callback()
+    await props.callback();
     close();
   } finally {
     isDeleting.value = false;
@@ -93,5 +104,4 @@ async function confirm() {
 .wt-confirm-dialog__message {
   text-align: center;
 }
-
 </style>

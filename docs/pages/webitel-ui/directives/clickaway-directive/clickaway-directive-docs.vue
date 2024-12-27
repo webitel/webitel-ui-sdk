@@ -2,9 +2,7 @@
   <section class="directives">
     <h2>Clickaway</h2>
     <article class="directives">
-      <wt-button v-clickaway="handleClickAway">
-        click away
-      </wt-button>
+      <wt-button v-clickaway="handleClickAway"> click away </wt-button>
       <pre><code class="language-html">&lt;wt-button v-clickaway="handleClickAway"&gt;click away&lt;/wt-button&gt;</code></pre>
     </article>
   </section>
@@ -26,6 +24,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

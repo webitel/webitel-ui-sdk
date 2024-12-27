@@ -66,7 +66,10 @@ describe('QueryFiltersStoreModule actions', () => {
   it('SET_FILTER: sets array value filter with null value to defaultValue', () => {
     const filter = { filter: arrayFilter, value: null };
     module.actions.SET_FILTER(context, filter);
-    expect(context.commit).toHaveBeenCalledWith('SET_FILTER', { filter: filter.filter, value: [] });
+    expect(context.commit).toHaveBeenCalledWith('SET_FILTER', {
+      filter: filter.filter,
+      value: [],
+    });
   });
   it('SET_FILTER: sets "false" value filter', () => {
     const filter = { filter: valueFilter, value: false };
@@ -86,11 +89,15 @@ describe('QueryFiltersStoreModule mutations', () => {
   const module = new QueryFiltersStoreModule().getModule();
   it('correctly mutates state at RESET_FILTERS call', () => {
     expect(
-      Object.values(state).every((filter) => filter.value === filter.defaultValue),
+      Object.values(state).every(
+        (filter) => filter.value === filter.defaultValue,
+      ),
     ).toBeFalsy();
     module.mutations.RESET_FILTERS(state);
     expect(
-      Object.values(state).every((filter) => filter.value === filter.defaultValue),
+      Object.values(state).every(
+        (filter) => filter.value === filter.defaultValue,
+      ),
     ).toBeTruthy();
   });
 });

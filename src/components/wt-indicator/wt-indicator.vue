@@ -1,14 +1,10 @@
 <template>
   <div
-    :class="[
-      `wt-indicator--size-${size}`
-    ]"
+    :class="[`wt-indicator--size-${size}`]"
     class="wt-indicator"
   >
     <span
-      :class="[
-        `wt-indicator__indicator--${color}`,
-      ]"
+      :class="[`wt-indicator__indicator--${color}`]"
       class="wt-indicator__indicator"
     />
     <div
@@ -66,7 +62,6 @@ export default {
       options: ['sm', 'md'],
     },
   },
-
 
   computed: {
     isText() {

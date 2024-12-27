@@ -62,7 +62,9 @@ const getRole = async ({ itemId: id }) => {
 
   const itemResponseHandler = (response) => {
     const copy = deepCopy(response);
-    copy.metadata.access = new ApplicationsAccess({ access: copy.metadata.access }).getAccess();
+    copy.metadata.access = new ApplicationsAccess({
+      access: copy.metadata.access,
+    }).getAccess();
     return copy;
   };
 

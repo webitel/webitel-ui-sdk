@@ -2,16 +2,16 @@
   <section class="module docs-content-wrapper">
     <h2>Query Filters Module</h2>
     <p>
-      <strong>Introduction: </strong> Query Filters Module contains necessary tools for filtering
-      data in applications
+      <strong>Introduction: </strong> Query Filters Module contains necessary
+      tools for filtering data in applications
     </p>
     <article>
       <h3><code>/classes</code></h3>
       Module has 3 <code>filterSchema</code> classes to represent a filter:
       <h4><code>BaseFilterSchema.js</code></h4>
       <p>
-        Base filter schema module which represents base filter schema,
-        shared across all filters in store, accepts following params:
+        Base filter schema module which represents base filter schema, shared
+        across all filters in store, accepts following params:
       </p>
       <ul>
         <li><code>value</code> <i>(default = '')</i></li>
@@ -21,39 +21,61 @@
       <h4><code>ApiFilterSchema.js</code></h4>
       <p>
         used specifically for api-entities filtering (eg. agents or queues).
-        Extends <code>BaseFilterSchema</code> and accepts additional optional params:
+        Extends <code>BaseFilterSchema</code> and accepts additional optional
+        params:
       </p>
       <ul>
-        <li><code>locale</code> -- $t locale paths. <i>(default = { label: 'filter' } )</i></li>
-        <li><code>storedProp</code> - object property, stored in url <i>(default = 'id' )</i></li>
-        <li><code>multiple</code> - select multiple value boolean <i>(default = true )</i></li>
-        <li><code>closeOnSelect</code> - close select options after select <i>(default = false )</i></li>
-        <li><code>API</code> - Options API method for options fetch, search and restoring selected values</li>
+        <li>
+          <code>locale</code> -- $t locale paths.
+          <i>(default = { label: 'filter' } )</i>
+        </li>
+        <li>
+          <code>storedProp</code> - object property, stored in url
+          <i>(default = 'id' )</i>
+        </li>
+        <li>
+          <code>multiple</code> - select multiple value boolean
+          <i>(default = true )</i>
+        </li>
+        <li>
+          <code>closeOnSelect</code> - close select options after select
+          <i>(default = false )</i>
+        </li>
+        <li>
+          <code>API</code> - Options API method for options fetch, search and
+          restoring selected values
+        </li>
 
         <h4><code>EnumFilterSchema.js</code></h4>
         <p>
-          used specifically for lookup-entities filtering (eg. direction or statuses).
-          Extends <code>BaseFilterSchema</code> and accepts additional optional params:
+          used specifically for lookup-entities filtering (eg. direction or
+          statuses). Extends <code>BaseFilterSchema</code> and accepts
+          additional optional params:
         </p>
         <li>
-          <code>options</code> - Array of options within following format: <code>{ value, locale?, name }</code>
+          <code>options</code> - Array of options within following format:
+          <code>{ value, locale?, name }</code>
           (if locale is passed, then name is overridden by $t(locale))
         </li>
-        <li><code>storedProp</code> - same as <code>ApiFilterSchema</code>, but <i>(default = 'value' )</i></li>
-        <li><strong>...same as ApiFilterSchema, without <code>API</code></strong></li>
+        <li>
+          <code>storedProp</code> - same as <code>ApiFilterSchema</code>, but
+          <i>(default = 'value' )</i>
+        </li>
+        <li>
+          <strong>...same as ApiFilterSchema, without <code>API</code></strong>
+        </li>
       </ul>
     </article>
     <article class="module">
       <h3><code>/store</code></h3>
       <h4><code>QueryFiltersStore.js</code></h4>
       <p>
-        extends <router-link to="/store/base-store-module">
+        extends
+        <router-link to="/store/base-store-module">
           BaseStoreModule.js
         </router-link>
       </p>
-      <p>
-        Constructor: ({ state? })
-      </p>
+      <p>Constructor: ({ state? })</p>
       <ul>
         <li><b>getters:</b></li>
         <li><b>GET_FILTER(filterName)</b>: returns filter value by name</li>
@@ -62,11 +84,14 @@
       <ul>
         <li><b>actions:</b></li>
         <li>
-          <b>SET_FILTER({ filter, value })</b>: returns filter value by name.
-          If value is empty, sets defaultValue from filter schema. If filter is multiple, but value is not
-          array -- wraps it.
+          <b>SET_FILTER({ filter, value })</b>: returns filter value by name. If
+          value is empty, sets defaultValue from filter schema. If filter is
+          multiple, but value is not array -- wraps it.
         </li>
-        <li><b>RESET_FILTERS()</b>: sets values of all filters equal to defaultValue property in filter schema</li>
+        <li>
+          <b>RESET_FILTERS()</b>: sets values of all filters equal to
+          defaultValue property in filter schema
+        </li>
       </ul>
     </article>
     <section class="module">
@@ -103,7 +128,10 @@
         <h5>Props:</h5>
         <ul>
           <li><code>namespace</code> - [String] filters store namespace</li>
-          <li><code>filterQuery</code> - [String] store state apiFilterSchema prop and url query prop name</li>
+          <li>
+            <code>filterQuery</code> - [String] store state apiFilterSchema prop
+            and url query prop name
+          </li>
         </ul>
       </article>
       <article>
@@ -112,7 +140,10 @@
         <h5>Props:</h5>
         <ul>
           <li><code>namespace</code> - [String] filters store namespace</li>
-          <li><code>filterQuery</code> - [String] store state enumFilterSchema prop and url query prop name</li>
+          <li>
+            <code>filterQuery</code> - [String] store state enumFilterSchema
+            prop and url query prop name
+          </li>
         </ul>
       </article>
       <article>
@@ -121,7 +152,10 @@
         <h5>Props:</h5>
         <ul>
           <li><code>namespace</code> - [String] filters store namespace</li>
-          <li><code>filterQuery</code> - [String] store state baseFilterSchema prop and url query prop name <i>(default='search')</i></li>
+          <li>
+            <code>filterQuery</code> - [String] store state baseFilterSchema
+            prop and url query prop name <i>(default='search')</i>
+          </li>
         </ul>
       </article>
     </section>
@@ -129,18 +163,23 @@
       <h3><code>/api</code></h3>
       <article>
         <h4><code>defaults.js</code></h4>
-        <p>exports <code>defaultParams</code> and <code>listResponseHandler</code> for select filters api</p>
+        <p>
+          exports <code>defaultParams</code> and
+          <code>listResponseHandler</code> for select filters api
+        </p>
       </article>
     </section>
     <h2><strong>Internals</strong></h2>
     <p>
-      If you need to create a custom filter, you should extend source mixins and override their default
-      methods.
+      If you need to create a custom filter, you should extend source mixins and
+      override their default methods.
     </p>
     <p>
       For detailed information please check mixins code on
-      <a href="https://github.com/webitel/webitel-ui-sdk/tree/master/src/modules/QueryFilters/mixins">github</a>.
-      These docs are in very bad condition now :(
+      <a
+        href="https://github.com/webitel/webitel-ui-sdk/tree/master/src/modules/QueryFilters/mixins"
+        >github</a
+      >. These docs are in very bad condition now :(
     </p>
     <!--    <article class="mixin">-->
     <!--      <h3>Base Filter Mixin</h3>-->
@@ -282,10 +321,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  ul {
-    margin-bottom: 20px;
-    li {
-      margin-bottom: 5px;
-    }
+ul {
+  margin-bottom: 20px;
+  li {
+    margin-bottom: 5px;
   }
+}
 </style>

@@ -10,7 +10,7 @@ import ExampleSearchBarWithSearchModes from './examples/example-search-bar-with-
 ## Props
 
 | Name                | Type     | Default  | Description                               |
-|---------------------|----------|----------|-------------------------------------------|
+| ------------------- | -------- | -------- | ----------------------------------------- |
 | `value`             | `String` | `''`     | The value of the search bar               |
 | `placeholder`       | `String` | 'Search' | The placeholder of the search bar         |
 | `hint`              | `String` | `''`     | The hint of the search bar                |
@@ -22,14 +22,14 @@ import ExampleSearchBarWithSearchModes from './examples/example-search-bar-with-
 ## Events
 
 | Name     | Params            | Description                                                                                                |
-|----------|-------------------|------------------------------------------------------------------------------------------------------------|
+| -------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
 | `input`  | `value`: `String` | Emitted when the value of the search bar changes (not debounced!)                                          |
 | `search` | `value`: `String` | Sends changed value, immediately, or, if "debounced" is on, debounced. Recommended for api search requests |
 
 ## Slots
 
 | Name                 | Scope                  | Description                                                                |
-|----------------------|------------------------|----------------------------------------------------------------------------|
+| -------------------- | ---------------------- | -------------------------------------------------------------------------- |
 | `search-icon`        | `{ invalid: Boolean }` | Change default search icon                                                 |
 | `additional-actions` | `{ invalid: Boolean }` | Adding additional functionality to search bar. For example wt-context-menu |
 
