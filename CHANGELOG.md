@@ -1,3 +1,32 @@
+## [v24.12.32] - 2024-12-30
+### :sparkles: New Features
+- [`4b0b0b1`](https://github.com/webitel/webitel-ui-sdk/commit/4b0b0b1416498a72aabbb8496a32a85181798997) - update package version to 24.12.32
+- [`66362bf`](https://github.com/webitel/webitel-ui-sdk/commit/66362bf41fdd29b1a81f61e3f763d57548bce0cd) - update wt-tree-table row props declared [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`e4e58be`](https://github.com/webitel/webitel-ui-sdk/commit/e4e58bef0736f12f746b6de7e2d2cb17928ec41a) - update set key for child elements [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`0a36419`](https://github.com/webitel/webitel-ui-sdk/commit/0a36419822ba6c3be11e465abbc71673daf021cc) - disable wrap text in tree table header [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`4cfd312`](https://github.com/webitel/webitel-ui-sdk/commit/4cfd312f555029b8e7d88b6f655e8cbe7ef3078b) - fix types for selectedElements [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`2d9e154`](https://github.com/webitel/webitel-ui-sdk/commit/2d9e1545865844471f64ea1750e8da2d9d2b1f56) - rollback changes with unknown types to any, for fix error with build application [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`3085b75`](https://github.com/webitel/webitel-ui-sdk/commit/3085b750667f7b8626e1f3cf69b62179964a8d8a) - implement docs for tree table [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`14feaeb`](https://github.com/webitel/webitel-ui-sdk/commit/14feaeb925bb29fc94043c550c8de0547fecf132) - implement custom slots for cell in tree table. Update display for tree table for display columns with related size from header and body. Implement styles for display zebra colors in table body [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`30b0ada`](https://github.com/webitel/webitel-ui-sdk/commit/30b0ada08cde69fe1ce5c5d6e8bb875d3300769d) - work on width for columns, update styles for wt-tree-table, update template for display wt-tree-table-row [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`e334ab2`](https://github.com/webitel/webitel-ui-sdk/commit/e334ab27a533dc43308f05d7ecfc94c0c821fcae) - update styles for display row in tree table [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`62d8fb8`](https://github.com/webitel/webitel-ui-sdk/commit/62d8fb8681ba5a352e3a6a27a84f7510fde34594) - implement new icons minus, tree-cross, tree-line. Implement display elements in tree table with we-expansion-panel, start working on display tree icons on displayed elements [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`eb18d9e`](https://github.com/webitel/webitel-ui-sdk/commit/eb18d9ec924a7ad8030fe61372d28104ac4a3d99) - started working on create custom slots for table [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`308eded`](https://github.com/webitel/webitel-ui-sdk/commit/308eded322e62e8efaf3622a90a24e8a5a3319dd) - Implement base logic for display wt-tree-table-row with option to select elements and select\deselect all elements [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`cd114f6`](https://github.com/webitel/webitel-ui-sdk/commit/cd114f64ffe3d601d27ac5d7784fd4d3d1d3cdda) - implement playground with selectable items from table, fix error with this in wt-tree-table [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`2db75e3`](https://github.com/webitel/webitel-ui-sdk/commit/2db75e336f6934b63dc2edcdc61ea216e2cb0ecc) - Implement base component wt-tree-table from wt-table with mock array services
+
+### :bug: Bug Fixes
+- [`e031288`](https://github.com/webitel/webitel-ui-sdk/commit/e0312883373b2ad43924b1b027be29abe2a2c414) - update package version to 24.12.30 [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`ba9049e`](https://github.com/webitel/webitel-ui-sdk/commit/ba9049e6c1dd36432b03de90f3905541da127436) - replace any type to unknown [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`a727657`](https://github.com/webitel/webitel-ui-sdk/commit/a727657a803102e7bd223e3c4d664ff6ca528aa4) - Update useTable composable [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`1119ee5`](https://github.com/webitel/webitel-ui-sdk/commit/1119ee5a753f19550290f3a4b2cb17b64d4b52df) - remove unused classes, fix code styles for props [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`7b047b9`](https://github.com/webitel/webitel-ui-sdk/commit/7b047b998825ac7052ff5e5615cb00b49ca16b15) - update name of icons for tree
+- [`bc59539`](https://github.com/webitel/webitel-ui-sdk/commit/bc595395b1a86f873d80031de907e057bd3d8411) - Update wt-table and wt-tree-table classes. Implement composable useTable. Update sortQueryAdapters script. Update functions in wt-tree-table. Update name of variables for wt-tree-table [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`2957fa1`](https://github.com/webitel/webitel-ui-sdk/commit/2957fa1335d8b40f730c2010fff64e5565064dcd) - remove hide title props from wt-expansion-panel
+- [`e982b86`](https://github.com/webitel/webitel-ui-sdk/commit/e982b8607858f530174a4267dacd04ce13cacb58) - implement fixes by code styles and remove unused code [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+
+
 ## [v24.12.31] - 2024-12-27
 ### :sparkles: New Features
 - [`16a6aca`](https://github.com/webitel/webitel-ui-sdk/commit/16a6acadf46f1c16a3548e82698116dc738172bd) - update prettier config
@@ -615,3 +644,4 @@
 [v24.12.28]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.27...v24.12.28
 [v24.12.29]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.28...v24.12.29
 [v24.12.31]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.29...v24.12.31
+[v24.12.32]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.31...v24.12.32
