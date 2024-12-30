@@ -22,7 +22,7 @@ export default ({ mode }) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ['vue'],
+        external: ['vue', '@webitel/fonts'],
         output: {
           // Provide global variables to use in the UMD build
           // for externalized deps
@@ -41,7 +41,8 @@ export default ({ mode }) => {
       'process.env': JSON.parse(JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_')),
     },
     server: {
-      port: 8080,
+      // TODO REMOVE
+      port: 8081,
     },
     resolve: {
       alias: {
@@ -91,6 +92,27 @@ export default ({ mode }) => {
       },
       environment: 'happy-dom',
       setupFiles: ['./tests/config/config.js'],
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern', // or "modern-compiler", "legacy",
+          sassOptions: {
+            quietDeps: true,
+          },
+          additionalData: (content, filename) => {
+            // Suppress warnings for specific files or packages
+            if (/node_modules\/plyr/.test(filename)) {
+              return `
+              @import "plyr/src/sass/plyr.scss";
+              /* suppress warnings for this file */
+              $disable-import-warning: true;
+            `;
+            }
+            return content;
+          }
+        },
+      },
     },
   });
 };

@@ -110,6 +110,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../../../../src/css/main.scss';
+
 .filter-from-to {
   &:hover > .wt-label {
     color: var(--form-label--hover-color);

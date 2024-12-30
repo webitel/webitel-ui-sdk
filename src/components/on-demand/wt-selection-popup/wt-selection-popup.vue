@@ -118,7 +118,7 @@ function selectOption(option) {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../css/main.scss';
+@use '../../../css/main.scss';
 
 .wt-selection-popup {
   &__options {

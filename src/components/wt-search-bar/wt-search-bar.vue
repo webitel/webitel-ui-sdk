@@ -156,11 +156,11 @@ function updateSearchMode({ option }) {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../../src/css/main' as *;
 
 .wt-search-bar {
   cursor: text;

@@ -274,11 +274,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import './multiselect.scss';
+@use './multiselect.scss' as *;
 
 .wt-select {
   width: 100%;

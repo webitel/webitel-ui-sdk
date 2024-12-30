@@ -61,11 +61,11 @@ const sidePanelSize = computed(() => (sidePanelCollapsed.value ? ComponentSize.S
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../../src/css/main.scss';
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {

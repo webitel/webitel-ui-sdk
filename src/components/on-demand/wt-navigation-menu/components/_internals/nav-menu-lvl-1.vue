@@ -49,7 +49,7 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-@import '../../css/nav-menu';
+@use '../../css/nav-menu';
 
 .nav-menu__item {
   &--active {

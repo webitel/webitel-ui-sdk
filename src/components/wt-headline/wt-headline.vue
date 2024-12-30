@@ -21,11 +21,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../../src/css/main.scss';
 
 .wt-headline {
   display: flex;

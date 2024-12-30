@@ -1,4 +1,4 @@
-@import '../../../../css/main.scss';
+@use '../../../../../src/css/main' as *;
 
 .nav-menu {
   &__category {

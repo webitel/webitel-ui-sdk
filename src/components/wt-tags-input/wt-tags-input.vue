@@ -178,7 +178,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../wt-select/multiselect.scss';
+@use '../wt-select/multiselect.scss';
 
 .wt-tags-input {
   width: 100%;

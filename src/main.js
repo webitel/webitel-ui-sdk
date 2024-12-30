@@ -7,7 +7,11 @@ import router from './router';
 import eventBus from './scripts/eventBus';
 import './assets/icons/sprite';
 
-import './css/styleguide/fonts/_fonts.scss';
+import '@webitel/styleguide/fonts';
+
+// import './css/styleguide/fonts/_fonts.scss';
+
+
 import { wtlog } from './scripts/logger.js';
 import App from './the-app.vue';
 

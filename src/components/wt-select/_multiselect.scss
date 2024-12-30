@@ -1,4 +1,4 @@
-@import '../../../src/css/main.scss';
+@use '../../../src/css/main' as *;
 
 :deep(.multiselect) {
   position: relative;

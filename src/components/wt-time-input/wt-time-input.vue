@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../../src/css/main' as *;
 
 .wt-time-input {
   display: inline-block;
@@ -137,16 +137,16 @@ export default {
 
     .wt-time-input--invalid &,
     .wt-time-input--invalid:hover & {
-      @include wt-placeholder('error');
       color: var(--wt-text-field-error-text-color);
       border-color: var(--wt-text-field-input-border-error-color);
       outline: none; // prevent outline overlapping false color
+      @include wt-placeholder('error');
     }
 
     .wt-time-input--disabled & {
-      @include wt-placeholder('disabled');
       border-color: var(--wt-text-field-input-border-disabled-color);
       background: var(--wt-text-field-input-background-disabled-color);
+      @include wt-placeholder('disabled');
     }
   }
 }

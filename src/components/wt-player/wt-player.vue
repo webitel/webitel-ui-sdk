@@ -26,7 +26,7 @@
 
 <script>
 // import Plyr from 'plyr'; // breaks vitepress build, https://webitel.atlassian.net/browse/WTEL-5425?focusedCommentId=639144
-import 'plyr/src/sass/plyr.scss';
+// import 'plyr/src/sass/plyr.scss';
 
 export default {
   name: 'WtPlayer',
@@ -174,11 +174,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../../src/css/main' as *;
 
 .wt-player {
   @extend %typo-body-2;

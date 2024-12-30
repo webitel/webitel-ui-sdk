@@ -133,7 +133,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../../src/css/main.scss';
 
 .wt-header-actions {
   position: relative;

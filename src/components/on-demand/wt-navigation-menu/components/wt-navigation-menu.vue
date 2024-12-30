@@ -80,8 +80,9 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../css/main.scss';
-@import '../../../../css/styleguide/viewport-breakpoints/_viewport-breakpoints.scss';
+//@use 'src/css/styleguide/styleguide' as *;
+@use '../../../../../src/css/main' as *;
+//@import '../../../../css/styleguide/viewport-breakpoints/_viewport-breakpoints.scss';
 .wt-navigation-menu {
   display: flex;
   align-items: center;

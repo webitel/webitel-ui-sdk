@@ -3,8 +3,9 @@ import './css/main.scss';
 import generateInstance from './api/axios/generateInstance.js';
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
-import './css/styleguide/fonts/_fonts.scss';
+
 import './assets/icons/sprite/index.js';
+import '@webitel/styleguide/fonts';
 
 export default {
   install(app, { eventBus, router, globals = {} }) {
