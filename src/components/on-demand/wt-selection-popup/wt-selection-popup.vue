@@ -14,7 +14,7 @@
         <li
           v-for="(option, key) of options"
           :key="key"
-          :class="{'active': option.value === selected.value }"
+          :class="{ active: option.value === selected.value }"
           class="wt-selection-popup__item-wrapper"
           @click="selectOption(option)"
         >
@@ -32,7 +32,8 @@
             </h4>
             <p
               v-if="option.description"
-              class="popup-options__item-text">
+              class="popup-options__item-text"
+            >
               {{ option.description }}
             </p>
             <wt-tooltip>
@@ -73,7 +74,6 @@
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
-
   /**
    * Popup title
    */

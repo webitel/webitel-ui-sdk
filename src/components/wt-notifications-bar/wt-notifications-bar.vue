@@ -6,7 +6,7 @@
     >
       <wt-notification
         v-for="(notification, key) of notifications"
-        :key="key+notification.text"
+        :key="key + notification.text"
         :type="notification.type"
         @close="closeNotification(notification)"
       >
@@ -33,7 +33,9 @@ export default {
     if (this.$eventBus) {
       this.eventBus = this.$eventBus;
     } else {
-      loggr.warn({ entity: 'component', module: 'wt-notification-bar' })('no globally provided $eventBus found, using default webitel-ui eventBus');
+      loggr.warn({ entity: 'component', module: 'wt-notification-bar' })(
+        'no globally provided $eventBus found, using default webitel-ui eventBus',
+      );
     }
 
     this.eventBus.$on('notification', this.showNotification);

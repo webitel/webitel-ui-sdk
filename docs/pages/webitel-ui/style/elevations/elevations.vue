@@ -5,7 +5,7 @@
       <article
         v-for="(elevation, key) of elevations"
         :key="key"
-        :style="{ 'box-shadow': `var(${elevation.code})`}"
+        :style="{ 'box-shadow': `var(${elevation.code})` }"
         class="elevation-item"
       >
         <div class="elevation-item__name">
@@ -21,12 +21,11 @@
 export default {
   name: 'Elevations',
   data: () => ({
-    elevations: [...Array(10).keys()]
-      .map((i) => ({
-        name: `Elevation ${i + 1}`,
-        code: `--elevation-${i + 1}`,
-        description: '',
-      })),
+    elevations: [...Array(10).keys()].map((i) => ({
+      name: `Elevation ${i + 1}`,
+      code: `--elevation-${i + 1}`,
+      description: '',
+    })),
   }),
 };
 </script>

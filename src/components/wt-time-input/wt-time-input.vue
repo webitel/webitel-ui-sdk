@@ -29,7 +29,7 @@
         class="wt-time-input__input"
         type="number"
         @input="$emit('input', $event.target.value)"
-      >
+      />
     </div>
     <wt-input-info
       v-if="showInfo"
@@ -150,7 +150,6 @@ export default {
     }
   }
 }
-
 
 .wt-time-input__wrapper {
   position: relative;

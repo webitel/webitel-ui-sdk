@@ -135,7 +135,7 @@ export default {
 
 .filter-from-to__input-wrapper {
   &:focus-within .wt-label {
-    color: var(--form-label--active-color)
+    color: var(--form-label--active-color);
   }
 
   .filter-from-to-input {

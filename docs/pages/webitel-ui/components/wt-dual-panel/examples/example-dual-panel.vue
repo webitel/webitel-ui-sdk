@@ -1,24 +1,16 @@
 <template>
-  <wt-dual-panel
-    @update:size="size"
-  >
+  <wt-dual-panel @update:size="size">
     <template #header>
-      <wt-page-header
-        hide-primary
-      >
+      <wt-page-header hide-primary>
         <template #actions>
-          <wt-button
-            color="secondary"
-          >
+          <wt-button color="secondary">
             {{ t('reusable.edit') }}
           </wt-button>
         </template>
       </wt-page-header>
     </template>
-    <template #side>
-    </template>
-    <template #main>
-    </template>
+    <template #side> </template>
+    <template #main> </template>
   </wt-dual-panel>
 </template>
 
@@ -29,5 +21,4 @@ import { ComponentSize } from '../../../../../../src/enums/index.js';
 
 const { t } = useI18n();
 const size = ref(ComponentSize.MD);
-
 </script>

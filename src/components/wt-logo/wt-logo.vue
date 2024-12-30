@@ -15,7 +15,7 @@ const props = defineProps({
     :src="darkMode ? LogoDark : LogoLight"
     alt="Webitel"
     class="wt-logo"
-  >
+  />
 </template>
 
 <style lang="scss">

@@ -9,8 +9,12 @@ export const useCardStore = (namespace) => {
     ? namespace
     : `${namespace}/card`;
 
-  const id = computed(() => getNamespacedState(store.state, cardNamespace).itemId);
-  const itemInstance = computed(() => getNamespacedState(store.state, cardNamespace).itemInstance);
+  const id = computed(
+    () => getNamespacedState(store.state, cardNamespace).itemId,
+  );
+  const itemInstance = computed(
+    () => getNamespacedState(store.state, cardNamespace).itemInstance,
+  );
 
   function loadItem(payload) {
     return store.dispatch(`${cardNamespace}/LOAD_ITEM`, payload);

@@ -29,8 +29,7 @@
 
     <div class="table-section__table-wrapper">
       <div>
-        <wt-table-transition
-          v-if="dataList.length && !isLoading">
+        <wt-table-transition v-if="dataList.length && !isLoading">
           <wt-table
             :data="localizedDataList"
             :grid-actions="access.edit"
@@ -40,9 +39,7 @@
             @sort="sort"
           >
             <template #grantee="{ item }">
-              <role-column
-                :role="item.grantee"
-              />
+              <role-column :role="item.grantee" />
             </template>
 
             <template #read="{ item }">
@@ -77,7 +74,13 @@
             <template #actions="{ item }">
               <wt-icon-action
                 action="delete"
-                @click="changeAccessMode({ item, ruleName: 'r', mode: { id: AccessMode.FORBIDDEN }})"
+                @click="
+                  changeAccessMode({
+                    item,
+                    ruleName: 'r',
+                    mode: { id: AccessMode.FORBIDDEN },
+                  })
+                "
               />
             </template>
           </wt-table>
@@ -194,11 +197,8 @@ const accessOptions = computed(() => {
   }));
 });
 
-const changeAccessMode = (payload) => (
-  store.dispatch(`${tableNamespace}/CHANGE_ACCESS_MODE`, payload)
-);
-
+const changeAccessMode = (payload) =>
+  store.dispatch(`${tableNamespace}/CHANGE_ACCESS_MODE`, payload);
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

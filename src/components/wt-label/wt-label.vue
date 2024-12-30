@@ -7,10 +7,7 @@
     class="wt-label"
   >
     <slot />
-    <wt-hint
-      v-if="hint"
-    >{{ hint }}
-    </wt-hint>
+    <wt-hint v-if="hint">{{ hint }} </wt-hint>
   </label>
 </template>
 

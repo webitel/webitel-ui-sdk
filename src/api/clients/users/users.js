@@ -157,7 +157,10 @@ const updateUser = async ({ itemInstance, itemId: id }) => {
 };
 
 const patchUser = async ({ changes, id }) => {
-  const body = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake(['profile'])]);
+  const body = applyTransform(changes, [
+    sanitize(fieldsToSend),
+    camelToSnake(['profile']),
+  ]);
   const url = `${baseUrl}/${id}`;
   try {
     const response = await instance.patch(url, body);
@@ -168,7 +171,10 @@ const patchUser = async ({ changes, id }) => {
 };
 
 const patchUserPresence = async ({ changes, id }) => {
-  const body = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake(['profile'])]);
+  const body = applyTransform(changes, [
+    sanitize(fieldsToSend),
+    camelToSnake(['profile']),
+  ]);
   const url = `${baseUrl}/${id}/presence`;
   try {
     const response = await instance.patch(url, body);

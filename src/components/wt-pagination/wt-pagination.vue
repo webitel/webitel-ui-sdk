@@ -83,7 +83,8 @@ export default {
   },
 
   created() {
-    if (this.debounce) this.changeSize = debounce(this.changeSize, this.debounceDelay);
+    if (this.debounce)
+      this.changeSize = debounce(this.changeSize, this.debounceDelay);
   },
 
   methods: {

@@ -7,11 +7,13 @@ import ExampleInvalidInputInfo from './examples/example-invalid-input-info.vue';
 # WtInputInfo
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Input Info
+
 ::: raw
 <ExampleInputInfo/>
 :::
@@ -21,6 +23,7 @@ import ExampleInvalidInputInfo from './examples/example-invalid-input-info.vue';
 :::
 
 ## Example Invalid Input Info
+
 ::: raw
 <ExampleInvalidInputInfo/>
 :::

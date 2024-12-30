@@ -7,14 +7,14 @@
 ## Input params
 
 | Params | Description                                         |
-|--------|-----------------------------------------------------|
+| ------ | --------------------------------------------------- |
 | schema | Схема, за якою треба перевірити данні на валідність |
 | data   | Обєкт, який треба валідувати                        |
 
 ## Return
 
 | Params  | Description                         |
-|---------|-------------------------------------|
+| ------- | ----------------------------------- |
 | v$      | Обєкт з результатом валідації форми |
 | invalid | Boolean значення `v$.$invalid`      |
 
@@ -23,7 +23,7 @@
 ```js
 import { useValidate } from '@webitel/ui-sdk/src/composables/useValidate/useValidate.js';
 
-сonst
+сonst;
 schema = {
   name: {
     required: true,
@@ -39,12 +39,11 @@ schema = {
   },
 };
 
-сonst
+сonst;
 data = {
   name: 'some name',
   description: 'some description',
 };
 
 const { v$, invalid } = useValidate(schema, { data });
-
 ```

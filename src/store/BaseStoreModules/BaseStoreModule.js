@@ -26,7 +26,8 @@ export default class BaseStoreModule {
     this.actions.PATCH_ITEM = (context, { id, changes }) =>
       this._APIModule.patch({ ...context.state, id, changes });
     this.actions.UPD_ITEM = (context) => this._APIModule.update(context.state);
-    this.actions.DELETE_ITEM = (context, id) => this._APIModule.delete({ ...context.state, id });
+    this.actions.DELETE_ITEM = (context, id) =>
+      this._APIModule.delete({ ...context.state, id });
     return this;
   }
 

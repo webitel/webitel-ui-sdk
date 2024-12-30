@@ -8,7 +8,7 @@
     class="wt-switcher"
   >
     <wt-label
-      :class="{'wt-switcher__wrapper--label-left': labelLeft}"
+      :class="{ 'wt-switcher__wrapper--label-left': labelLeft }"
       :disabled="disabled"
       class="wt-switcher__wrapper"
       v-bind="labelProps"
@@ -19,7 +19,7 @@
         class="wt-switcher__input"
         type="checkbox"
         @change="inputHandler"
-      >
+      />
       <span class="wt-switcher__checkmark" />
       <!-- @slot Custom input label -->
       <slot
@@ -80,7 +80,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
 .wt-switcher {
   position: relative;
   box-sizing: border-box;

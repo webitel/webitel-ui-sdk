@@ -3,13 +3,15 @@
     <header class="start-page-card__header">
       <wt-icon
         v-if="card.disabled"
-        icon="lock" />
+        icon="lock"
+      />
       {{ card.name }}
     </header>
     <section class="start-page-card__main-section">
       <img
         :alt="card.name"
-        :src="card.image">
+        :src="card.image"
+      />
       <p class="start-page-card__description">
         {{ card.text }}
       </p>

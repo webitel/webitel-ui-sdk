@@ -1,9 +1,9 @@
 import vue from '@vitejs/plugin-vue';
-import {resolve} from 'path';
+import { resolve } from 'path';
 import checker from 'vite-plugin-checker';
-import {defineConfig, loadEnv} from 'vite';
-import {nodePolyfills} from 'vite-plugin-node-polyfills';
-import {viteStaticCopy} from 'vite-plugin-static-copy';
+import { defineConfig, loadEnv } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 
 // https://vitejs.dev/config/
@@ -38,7 +38,9 @@ export default ({ mode }) => {
       },
     },
     define: {
-      'process.env': JSON.parse(JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_')),
+      'process.env': JSON.parse(
+        JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_'),
+      ),
     },
     server: {
       // TODO REMOVE

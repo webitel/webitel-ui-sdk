@@ -11,6 +11,7 @@ import ExampleIndicatorDifferentSizes from './examples/example-indicator-differe
 <Specs />
 
 ## Example Indicator Different Colors
+
 ::: raw
 <ExampleIndicatorDifferentColors/>
 :::
@@ -20,6 +21,7 @@ import ExampleIndicatorDifferentSizes from './examples/example-indicator-differe
 :::
 
 ## Example Indicator Different Sizes
+
 ::: raw
 <ExampleIndicatorDifferentSizes/>
 :::

@@ -22,9 +22,7 @@
           class="wt-context-menu__option-wrapper"
         >
           <a
-            :class="[
-              { 'wt-context-menu__option--disabled': option.disabled },
-            ]"
+            :class="[{ 'wt-context-menu__option--disabled': option.disabled }]"
             class="wt-context-menu__option"
             href="#"
             @click.prevent="handleOptionClick({ option, index, hide })"

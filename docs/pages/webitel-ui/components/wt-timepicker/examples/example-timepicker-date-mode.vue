@@ -12,6 +12,4 @@ const value = ref(Date.now());
   value: {{ value }}
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

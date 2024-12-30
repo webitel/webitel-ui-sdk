@@ -24,7 +24,7 @@
               'wt-table-column-select__popup-list--md':
                 changeableDraft.length > 10 && changeableDraft.length <= 20,
               'wt-table-column-select__popup-list--lg':
-                changeableDraft.length > 20
+                changeableDraft.length > 20,
             }"
             class="wt-table-column-select__popup-list"
           >
@@ -44,9 +44,7 @@
         </div>
       </template>
       <template #actions>
-        <wt-button
-          @click="setShownColumns"
-        >
+        <wt-button @click="setShownColumns">
           {{ $t('reusable.add') }}
         </wt-button>
         <wt-button
@@ -109,7 +107,9 @@ export default {
   methods: {
     shownColLabel({ text, locale }) {
       if (!text && locale) {
-        return typeof locale === 'string' ? this.$t(locale) : this.$t(...locale);
+        return typeof locale === 'string'
+          ? this.$t(locale)
+          : this.$t(...locale);
       }
       return text;
     },
@@ -134,8 +134,12 @@ export default {
 @use '../../../src/css/main.scss';
 
 $list-height: 400px;
-$list-width-sm: calc(500px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
-$list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings + overflow-padding)
+$list-width-sm: calc(
+  500px - var(--spacing-xl)
+); // all popup width - (paddings + overflow-padding)
+$list-width-md: calc(
+  800px - var(--spacing-xl)
+); // all popup width - (paddings + overflow-padding)
 
 .wt-table-column-select {
   line-height: 0; // prevent 24x28 icon height :/
@@ -183,5 +187,4 @@ $list-width-md: calc(800px - var(--spacing-xl)); // all popup width - (paddings 
     margin-bottom: var(--spacing-sm);
   }
 }
-
 </style>

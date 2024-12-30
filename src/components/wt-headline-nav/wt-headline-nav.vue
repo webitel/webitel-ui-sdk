@@ -20,7 +20,8 @@
         <span
           v-else
           class="wt-headline-nav__text"
-        >{{ singlePath.name }}</span>
+          >{{ singlePath.name }}</span
+        >
       </h1>
     </div>
   </nav>

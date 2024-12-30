@@ -24,10 +24,10 @@
         type="search"
         @input="handleInput($event.target.value)"
         @keyup="handleKeyup"
-      >
+      />
       <div class="wt-search-bar__icon-controls">
         <wt-icon-btn
-          :class="{ 'hidden': !value }"
+          :class="{ hidden: !value }"
           :color="invalidColorProvider"
           class="wt-search-bar__reset-icon-btn"
           icon="close"
@@ -59,7 +59,11 @@
           <template #option="{ value, text }">
             <wt-radio
               :label="text"
-              :selected="(typeof searchMode === 'string' ? searchMode : searchMode.value) === value"
+              :selected="
+                (typeof searchMode === 'string'
+                  ? searchMode
+                  : searchMode.value) === value
+              "
               :value="true"
             />
           </template>
@@ -128,7 +132,9 @@ const { v, customValidators } = toRefs(props);
 
 const { invalid } = useValidation({ v, customValidators });
 
-const invalidColorProvider = computed(() => (invalid.value ? 'error' : 'default'));
+const invalidColorProvider = computed(() =>
+  invalid.value ? 'error' : 'default',
+);
 
 const search = debounce((value) => {
   emit('search', value);

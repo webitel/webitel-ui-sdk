@@ -19,6 +19,4 @@ const buildInfo = {
   </wt-app-header>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

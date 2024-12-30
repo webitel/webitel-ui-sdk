@@ -6,11 +6,13 @@ import ExampleCopyAction from './examples/example-copy-action.vue';
 # WtCopyAction
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Copy Action
+
 ::: raw
 <ExampleCopyAction/>
 :::
@@ -18,4 +20,3 @@ import ExampleCopyAction from './examples/example-copy-action.vue';
 ::: details Code
 <<< ./examples/example-copy-action.vue
 :::
-
