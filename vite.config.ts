@@ -43,8 +43,7 @@ export default ({ mode }) => {
       ),
     },
     server: {
-      // TODO REMOVE
-      port: 8081,
+      port: 8080,
     },
     resolve: {
       alias: {
