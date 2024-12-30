@@ -1,5 +1,8 @@
 // import mitt from "mitt";
-import { type FilterConfig, type FilterName, type IFilter, Filter, type FilterValue} from "./Filter.class.ts";
+import {Filter} from "./Filter.class.ts";
+import type {FilterConfig, FilterName, FilterValue, IFilter} from "../types/Filter.types.ts";
+import type {FiltersManagerConfig, IFiltersManager} from "../types/FiltersManager.types.ts";
+
 // import {type FilterStorage, QueryFilterStorage, BrowserFilterStorage} from "./FilterStorage.types.ts";
 
 export interface IFiltersManager {

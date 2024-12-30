@@ -1,4 +1,4 @@
-import type {FilterValue} from "./Filter.class.ts";
+import {FilterValue} from "../types/Filter.types.ts";
 
 export interface FilterStorage {
     get: (name: string) => FilterValue;

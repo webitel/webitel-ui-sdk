@@ -63,6 +63,10 @@ const selectedFilterValue: Ref<FilterSetupData> = ref(props.selected || props.op
 
 const filterValue = ref();
 
+const editMode = ref(false);
+
+const invalid = ref(false);
+
 const submit = () => {
   emit('submit', {
     name: selectedFilterValue.value.name,
@@ -70,10 +74,19 @@ const submit = () => {
   });
 };
 
-watch(selectedFilterValue, (selected) => {
-  filterValue.value = selected.defaultValue;
-}, { immediate: true });
+// if (props.options) {
+//
+// } else if (props.filter) {}
 
+watch(props.options, () => {
+  filterName.value = props.options[0]?.value;
+  filterValue.value = null;
+});
+
+watch(props.filter, () => {
+  filterName.value = props.filter.name;
+  filterValue.value = props.filter.value;
+});
 </script>
 
 <style lang="scss" scoped>

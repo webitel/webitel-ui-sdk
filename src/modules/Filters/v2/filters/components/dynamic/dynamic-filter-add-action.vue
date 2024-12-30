@@ -1,20 +1,17 @@
 <template>
-  <section class="dynamic-filter-add-action">
-    <dynamic-filter-config-view>
-      <template #activator>
-        <wt-icon-action
-          action="add"
-        />
-      </template>
+  <dynamic-filter-config-view>
+    <template #activator>
+      <wt-icon-action
+        action="add"
+      />
+    </template>
 
-      <template #content>
-        <dynamic-filter-config-form
-          :filter-options="props.filterOptions"
-          @submit="onSubmit"
-        />
-      </template>
-    </dynamic-filter-config-view>
-  </section>
+    <template #content>
+      <slot name="form">
+        filter form should be here
+      </slot>
+    </template>
+  </dynamic-filter-config-view>
 </template>
 
 <script lang="ts" setup>

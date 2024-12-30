@@ -1,6 +1,5 @@
 <template>
-  <div class="dynamic-filter-preview">
-    <dynamic-filter-config-view>
+  <dynamic-filter-config-view>
       <template #activator>
         <wt-chip>
           label
@@ -34,15 +33,12 @@
         />
       </template>
     </dynamic-filter-config-view>
-
-  </div>
 </template>
 
 <script lang="ts" setup>
 import {computed, type Ref} from 'vue';
 import WtTooltip from '../../../../../../../components/wt-tooltip/wt-tooltip.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
-import type {FilterName, IFilter} from '../../../classes/Filter.class.ts';
 import WtIconBtn from '../../../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import WtChip from '../../../../../../../components/wt-chip/wt-chip.vue';
