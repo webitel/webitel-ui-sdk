@@ -1,8 +1,6 @@
 <template>
   <section class="dynamic-filter-config-form">
-    <header>
-      Tttitleee
-    </header>
+    <header>Tttitleee</header>
     <form>
       <wt-select
         :value="filterName"
@@ -20,8 +18,8 @@
           v-bind="{
             filterName,
             filterValue,
-            onValueChange: (v) => filterValue = v,
-            onValueInvalidChange: (v) => invalid = v,
+            onValueChange: (v) => (filterValue = v),
+            onValueInvalidChange: (v) => (invalid = v),
           }"
         />
       </div>
@@ -38,10 +36,14 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, ref, watch} from "vue";
-import WtSelect from "../../../../../../../components/wt-select/wt-select.vue";
-import WtButton from "../../../../../../../components/wt-button/wt-button.vue";
-import type {FilterInitParams, FilterName, IFilter} from "../../../types/Filter.types.ts";
+import { computed, ref, watch } from 'vue';
+import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
+import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
+import type {
+  FilterInitParams,
+  FilterName,
+  IFilter,
+} from '../../../types/Filter.types.ts';
 
 interface FilterNameSelectRepresentation {
   name: string;
@@ -61,7 +63,7 @@ type Props = AddModeProps | EditModeProps;
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  submit: [FilterInitParams],
+  submit: [FilterInitParams];
 }>();
 
 const filterName = ref();
@@ -93,6 +95,4 @@ watch(props.filter, () => {
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

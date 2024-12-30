@@ -1,8 +1,6 @@
 <template>
   <div class="dynamic-filter-config-view">
-    <wt-tooltip
-      :triggers="['click']"
-    >
+    <wt-tooltip :triggers="['click']">
       <template #activator="slotScope">
         <slot
           name="activator"
@@ -25,9 +23,7 @@
  * and their styling
  */
 
-import WtTooltip from "../../../../../../../components/wt-tooltip/wt-tooltip.vue";
+import WtTooltip from '../../../../../../../components/wt-tooltip/wt-tooltip.vue';
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

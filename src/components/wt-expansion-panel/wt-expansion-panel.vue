@@ -10,7 +10,7 @@
       @keypress.enter="toggle"
     >
       <slot name="title" />
-      <div  class="wt-expansion-panel-actions">
+      <div class="wt-expansion-panel-actions">
         <slot
           name="actions"
           v-bind="{ open, opened }"

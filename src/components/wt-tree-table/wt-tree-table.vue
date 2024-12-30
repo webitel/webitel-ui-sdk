@@ -18,7 +18,10 @@
           >
             <div class="wt-tree-table-th__content">
               <div v-if="key === 0 && selectable">
-                <wt-checkbox :selected="isAllSelected" @change="selectAll" />
+                <wt-checkbox
+                  :selected="isAllSelected"
+                  @change="selectAll"
+                />
               </div>
               <div class="wt-tree-table-th__text">
                 {{ col.text }}
@@ -37,7 +40,10 @@
               />
             </div>
           </th>
-          <th v-if="gridActions" class="wt-tree-table-th__actions">
+          <th
+            v-if="gridActions"
+            class="wt-tree-table-th__actions"
+          >
             <div class="wt-tree-table-th__content">
               <slot name="actions-header" />
             </div>
@@ -58,14 +64,21 @@
           @update:selected="handleSelection($event.data, $event.select)"
         >
           <template #actions="{ item }">
-            <slot name="actions" :item="item" />
+            <slot
+              name="actions"
+              :item="item"
+            />
           </template>
           <template
             v-for="(col, headerKey) of dataHeaders"
             :key="headerKey"
             #[col.value]="{ item }"
           >
-            <slot :index="dataKey" :item="item" :name="col.value">
+            <slot
+              :index="dataKey"
+              :item="item"
+              :name="col.value"
+            >
               {{ item[col.value] }}
             </slot>
           </template>
@@ -76,11 +89,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults } from "vue";
-import { useWtTable } from "../../composables/useWtTable/useWtTable.ts";
-import { getNextSortOrder } from "../../scripts/sortQueryAdapters";
-import type { TableHeader } from "../wt-table/types/table-header.js";
-import WtTreeTableRow from "../wt-tree-table-row/wt-tree-table-row.vue";
+import { computed, withDefaults } from 'vue';
+import { useWtTable } from '../../composables/useWtTable/useWtTable.ts';
+import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
+import type { TableHeader } from '../wt-table/types/table-header.js';
+import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -117,7 +130,7 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(["sort", "update:selected"]);
+const emit = defineEmits(['sort', 'update:selected']);
 
 const checkHasChildItems = (item: Record<string, any>) => {
   return item[props.childrenProp] && Array.isArray(item[props.childrenProp]);
@@ -184,7 +197,7 @@ const isColSortable = ({ sort }: TableHeader) => {
 const sort = (col: TableHeader) => {
   if (!isColSortable(col)) return;
   const nextSort = getNextSortOrder(col.sort);
-  emit("sort", col, nextSort);
+  emit('sort', col, nextSort);
 };
 
 const changeSelectItem = (items: Record<string, any>[], selected: boolean) => {
@@ -200,7 +213,10 @@ const changeSelectItem = (items: Record<string, any>[], selected: boolean) => {
 
 const selectAll = () => {
   if (props.selected) {
-    emit("update:selected", isAllSelected.value ? [] : [...getAllNestedElements(props.data)]);
+    emit(
+      'update:selected',
+      isAllSelected.value ? [] : [...getAllNestedElements(props.data)],
+    );
   } else {
     // for backwards compatibility
 
@@ -219,10 +235,10 @@ const selectAll = () => {
 const handleSelection = (row, select) => {
   if (props.selected) {
     if (select) {
-      emit("update:selected", [...selectedElements.value, row]);
+      emit('update:selected', [...selectedElements.value, row]);
     } else {
       emit(
-        "update:selected",
+        'update:selected',
         selectedElements.value.filter((item) => item !== row),
       );
     }
@@ -234,11 +250,11 @@ const handleSelection = (row, select) => {
 </script>
 
 <style lang="scss">
-@import "./variables.scss";
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import "../../../src/css/main.scss";
+@import '../../../src/css/main.scss';
 
 .wt-tree-table {
   @extend %wt-scrollbar;

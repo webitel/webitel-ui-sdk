@@ -175,7 +175,6 @@
     "vue-tsc": "^2.1.10",
     "vuex": "^4.1.0",
     "pinia": "2.3.0"
-
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"

@@ -2,14 +2,12 @@
   <section class="dynamic-filter-preview-info">
     <header>{{ props.name }}</header>
     <div>{{ props.value }}</div>
-    <footer>
-      footer
-    </footer>
+    <footer>footer</footer>
   </section>
 </template>
 
 <script lang="ts" setup>
-import type {FilterName, FilterValue} from "../../../types/Filter.types.ts";
+import type { FilterName, FilterValue } from '../../../types/Filter.types.ts';
 
 interface Props {
   name: FilterName;

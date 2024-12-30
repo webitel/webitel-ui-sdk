@@ -163,8 +163,8 @@ import stt from './stt.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import ttsDownload from './tts-download.svg';
-import treeLine from './tree-line.svg'
-import treeCross from './tree-cross.svg'
+import treeLine from './tree-line.svg';
+import treeCross from './tree-cross.svg';
 import undo from './undo.svg';
 import unpin from './unpin.svg';
 import upload from './upload.svg';

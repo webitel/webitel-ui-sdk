@@ -1,7 +1,5 @@
 <template>
-  <div class="search-filter">
-
-  </div>
+  <div class="search-filter"></div>
 </template>
 
 <script setup lang="ts">
@@ -12,6 +10,5 @@ const emit = defineEmits([]);
 
 <style scoped lang="scss">
 .search-filter {
-
 }
 </style>

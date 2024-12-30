@@ -1,5 +1,12 @@
 export type FilterName = string;
-export type FilterValue = object | [] | string | number | boolean | undefined | null;
+export type FilterValue =
+  | object
+  | []
+  | string
+  | number
+  | boolean
+  | undefined
+  | null;
 
 export interface FilterInitParams {
   name: FilterName;
