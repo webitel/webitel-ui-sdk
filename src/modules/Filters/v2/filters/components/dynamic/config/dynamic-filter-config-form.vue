@@ -1,25 +1,34 @@
 <template>
-  <section class="dynamic-filter-setup-form">
+  <section class="dynamic-filter-config-form">
     <header>
       Tttitleee
     </header>
     <form>
       <wt-select
-        :value="selectedFilterValue"
+        :value="filterName"
         :label="'fffilter nnname'"
-        :disabled="selected"
+        :disabled="editMode"
         :options="options"
-        @input="selectedFilterValue = $event"
+        @input="filterName = $event"
       />
-      <dynamic-filter-form-value-field
-        v-if="selectedFilterValue"
-        v-model="filterValue"
-        :key="selectedFilterValue.name"
-        v-bind="selectedFilterValue"
-      />
+      <div
+        v-if="filterName"
+        class=""
+      >
+        <slot
+          name="value-input"
+          v-bind="{
+            filterName,
+            filterValue,
+            onValueChange: (v) => filterValue = v,
+            onValueInvalidChange: (v) => invalid = v,
+          }"
+        />
+      </div>
     </form>
     <footer>
       <wt-button
+        :disabled="invalid"
         @click="submit"
       >
         sssubmittt
@@ -29,38 +38,33 @@
 </template>
 
 <script lang="ts" setup>
-import {ref, type Ref, watch} from "vue";
-import DynamicFilterFormValueField from "./dynamic-filter-form-value-field.vue";
-import type {FilterSetupData} from "../../../types/FilterSetup.type.ts";
+import {computed, ref, watch} from "vue";
 import WtSelect from "../../../../../../../components/wt-select/wt-select.vue";
 import WtButton from "../../../../../../../components/wt-button/wt-button.vue";
-import type {FilterInitParams} from "../../../classes/Filter.class.ts";
+import type {FilterInitParams, FilterName, IFilter} from "../../../types/Filter.types.ts";
 
-interface PropsWithOptions {
-  options: FilterSetupData[]
+interface FilterNameSelectRepresentation {
+  name: string;
+  value: FilterName;
 }
 
-interface PropsWithSelected {
-  selected: FilterSetupData;
+interface AddModeProps {
+  options: Array<FilterNameSelectRepresentation>;
 }
 
-// one of is required
-type Props = PropsWithOptions | PropsWithSelected;
+interface EditModeProps {
+  filter: IFilter;
+}
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    options: () => [],
-  },
-);
+type Props = AddModeProps | EditModeProps;
+
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   submit: [FilterInitParams],
 }>();
 
-// TODO: fix lint err
-const selectedFilterValue: Ref<FilterSetupData> = ref(props.selected || props.options[0]);
-
+const filterName = ref();
 const filterValue = ref();
 
 const editMode = ref(false);
@@ -69,7 +73,7 @@ const invalid = ref(false);
 
 const submit = () => {
   emit('submit', {
-    name: selectedFilterValue.value.name,
+    name: filterName.value,
     value: filterValue.value,
   });
 };

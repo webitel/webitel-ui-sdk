@@ -3,7 +3,7 @@ import BaseFilterSchema from './BaseFilterSchema.js';
 export default class ApiFilterSchema extends BaseFilterSchema {
   constructor(params = {}) {
     const { value = [], defaultValue = [] } = params;
-    super({ value, defaultValue });
+    super({ value, defaultValue: initialValue });
     const {
       locale = { label: 'filter' },
       storedProp = 'id',

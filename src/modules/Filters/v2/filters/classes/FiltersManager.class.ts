@@ -5,27 +5,6 @@ import type {FiltersManagerConfig, IFiltersManager} from "../types/FiltersManage
 
 // import {type FilterStorage, QueryFilterStorage, BrowserFilterStorage} from "./FilterStorage.types.ts";
 
-export interface IFiltersManager {
-    filters: Map<FilterName, IFilter>;
-
-    get: (name: FilterName) => IFilter;
-    add: (
-        { name, value }: { name: FilterName; value: FilterValue },
-        payload?: object,
-        config?: FilterConfig,
-    ) => IFilter;
-    remove: (name: FilterName) => IFilter;
-
-    resetAll: () => void;
-    restoreAll: () => void;
-    getAllValues: () => { [name: FilterName]: FilterValue };
-}
-
-export type FiltersManagerConfig = FilterConfig & {
-    storagePrefix: string;
-    storages?: 'url' | 'browser' | null;
-};
-
 class FiltersManager implements IFiltersManager {
     // private readonly emitter = mitt();
     // private readonly storages: FilterStorage = [];
@@ -67,7 +46,13 @@ class FiltersManager implements IFiltersManager {
         return filter;
     }
 
-    remove(name: FilterName): IFilter {
+    update({ name, value }): IFilter {
+        const filter = this.filters.get(name);
+        filter.set(value);
+        return filter;
+    }
+
+    delete(name: FilterName): IFilter {
         const filter = this.filters.get(name);
         this.filters.delete(name);
         return filter;
