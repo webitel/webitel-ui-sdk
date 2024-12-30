@@ -12,7 +12,12 @@
       </div>
       <div>
         Available converters:
-        <div><b>Important: to convert complex structure like Object or Array, use obj- prefixed scripts</b></div>
+        <div>
+          <b
+            >Important: to convert complex structure like Object or Array, use
+            obj- prefixed scripts</b
+          >
+        </div>
         <ul>
           <li>snakeToCamel</li>
           <li>kebabToCamel</li>
@@ -26,10 +31,11 @@
     <article>
       <h3>Skipped keys</h3>
       <p>
-        obj- case converters have 2nd optional param, which accepts array of keys to prevent from
-        converting like:
+        obj- case converters have 2nd optional param, which accepts array of
+        keys to prevent from converting like:
         <code class="language-javascript">
-          console.log(objCamelToSnake({ doNotConvertMe: 'helloThere!' }, ['doNotConvertMe']))
+          console.log(objCamelToSnake({ doNotConvertMe: 'helloThere!' },
+          ['doNotConvertMe']))
         </code>
       </p>
     </article>
@@ -47,6 +53,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

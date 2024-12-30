@@ -14,11 +14,19 @@ import applyTransform, {
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const transcriptService = new FileTranscriptServiceApiFactory(configuration, '', instance);
+const transcriptService = new FileTranscriptServiceApiFactory(
+  configuration,
+  '',
+  instance,
+);
 
 const getTranscript = async ({ id, page = 1, size = 10000 }) => {
   try {
-    const response = await transcriptService.getFileTranscriptPhrases(id, page, size);
+    const response = await transcriptService.getFileTranscriptPhrases(
+      id,
+      page,
+      size,
+    );
     const { items } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),

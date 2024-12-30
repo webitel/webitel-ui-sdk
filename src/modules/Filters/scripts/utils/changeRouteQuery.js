@@ -4,7 +4,8 @@ const changeRouteQuery =
   (router) =>
   ({ filterQuery, value }) => {
     const name = router.currentRoute?.value?.name || router.currentRoute?.name;
-    const query = router.currentRoute?.value?.query || router.currentRoute?.query || {};
+    const query =
+      router.currentRoute?.value?.query || router.currentRoute?.query || {};
 
     if (deepEqual(query[filterQuery], value)) return;
 

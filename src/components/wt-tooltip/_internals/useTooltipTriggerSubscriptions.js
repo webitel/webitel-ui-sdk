@@ -19,7 +19,12 @@ const HIDE_EVENT_MAP = {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const useTooltipTriggerSubscriptions = ({ target, triggers, show, hide }) => {
+export const useTooltipTriggerSubscriptions = ({
+  target,
+  triggers,
+  show,
+  hide,
+}) => {
   const subscribeTriggers = () => {
     const setEventListeners = (target, triggers) => {
       triggers.forEach((trigger) => {

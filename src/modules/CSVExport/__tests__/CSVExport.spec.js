@@ -58,7 +58,10 @@ describe('CSV Export', () => {
       header: false,
       delimiter: ';',
     };
-    localStorage.setItem('csv-export-options', JSON.stringify(csvExportOptions));
+    localStorage.setItem(
+      'csv-export-options',
+      JSON.stringify(csvExportOptions),
+    );
     await wrapper.vm.exportCSV();
     expect(stringify.mock.calls.pop()[1]).toMatchObject(csvExportOptions);
   });

@@ -7,4 +7,4 @@ export const useValidate = (schema, data) => {
     v$,
     invalid: v$.value?.$invalid,
   };
-}
+};

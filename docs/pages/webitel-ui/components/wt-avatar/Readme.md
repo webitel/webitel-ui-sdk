@@ -7,11 +7,13 @@ import ExampleAvatarWithStatus from './examples/example-avatar-with-status.vue';
 # WtAvatar
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Avatar Letters
+
 ::: raw
 <ExampleAvatarLetters/>
 :::
@@ -21,6 +23,7 @@ import ExampleAvatarWithStatus from './examples/example-avatar-with-status.vue';
 :::
 
 ## Example Avatar With Status
+
 ::: raw
 <ExampleAvatarWithStatus/>
 :::
@@ -28,4 +31,3 @@ import ExampleAvatarWithStatus from './examples/example-avatar-with-status.vue';
 ::: details Code
 <<< ./examples/example-avatar-with-status.vue
 :::
-

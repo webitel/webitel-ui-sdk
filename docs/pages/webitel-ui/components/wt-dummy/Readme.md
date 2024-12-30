@@ -8,11 +8,13 @@
 > то викиньте той `wt-dummy`, і заюзайте [`wt-empty`](../wt-empty/Readme.md).
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Dummy
+
 ::: raw
 <ExampleDummy/>
 :::

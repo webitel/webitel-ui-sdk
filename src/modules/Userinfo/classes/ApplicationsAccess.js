@@ -220,7 +220,9 @@ export default class ApplicationsAccess {
   constructor({ access, value } = { value: true }) {
     /* if access, deeply merge with falsy values schema
      if no access, "not configured => full permissions" */
-    this.access = access ? ApplicationsAccess.restore(access) : applicationsAccess(value);
+    this.access = access
+      ? ApplicationsAccess.restore(access)
+      : applicationsAccess(value);
   }
 
   // minify schema for API sending

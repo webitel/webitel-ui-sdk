@@ -6,11 +6,13 @@ import ExamplePageWrapper from './examples/example-page-wrapper.vue';
 # WtPageWrapper
 
 ## Props
+
 ::: raw
 <Docs />
 :::
 
 ## Example Page Wrapper
+
 ::: raw
 <ExamplePageWrapper />
 :::

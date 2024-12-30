@@ -15,7 +15,7 @@ describe('WtNotificationsBar', () => {
     const wrapper = shallowMount(WtNotificationsBar, {
       global: { provide: { $eventBus: eventBus } },
     });
-     eventBus.$emit('notification', {
+    eventBus.$emit('notification', {
       type: 'error',
       text: 'error',
     });
