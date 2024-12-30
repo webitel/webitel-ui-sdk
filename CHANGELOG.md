@@ -1,3 +1,8 @@
+## [v24.12.33] - 2024-12-30
+### :bug: Bug Fixes
+- [`72dc591`](https://github.com/webitel/webitel-ui-sdk/commit/72dc591809131afd51323631bfe8fc809ea48296) - fix comments on wt-select after running fix lint error
+
+
 ## [v24.12.32] - 2024-12-30
 ### :sparkles: New Features
 - [`4b0b0b1`](https://github.com/webitel/webitel-ui-sdk/commit/4b0b0b1416498a72aabbb8496a32a85181798997) - update package version to 24.12.32
@@ -645,3 +650,4 @@
 [v24.12.29]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.28...v24.12.29
 [v24.12.31]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.29...v24.12.31
 [v24.12.32]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.31...v24.12.32
+[v24.12.33]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.32...v24.12.33
