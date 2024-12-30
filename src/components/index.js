@@ -55,6 +55,7 @@ import WtSwitcher from './wt-switcher/wt-switcher.vue';
 import WtTableActions from './wt-table-actions/wt-table-actions.vue';
 import WtTableColumnSelect from './wt-table-column-select/wt-table-column-select.vue';
 import WtTable from './wt-table/wt-table.vue';
+import WtTreeTable from './wt-tree-table/wt-tree-table.vue';
 import WtTabs from './wt-tabs/wt-tabs.vue';
 import WtTagsInput from './wt-tags-input/wt-tags-input.vue';
 import WtTextarea from './wt-textarea/wt-textarea.vue';
@@ -117,6 +118,7 @@ const Components = {
   WtPlayer,
   WtStatusSelect,
   WtTable,
+  WtTreeTable,
   WtTableActions,
   WtTableColumnSelect,
   WtButtonSelect,
