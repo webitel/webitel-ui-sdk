@@ -15,8 +15,12 @@ export default {
   computed: {
     filterSchema() {
       if (!this.$store)
-        throw new Error('Vuex is required for default filterSchema baseFilterMixin property');
-      return getNamespacedState(this.$store.state, this.namespace)[this.filterQuery];
+        throw new Error(
+          'Vuex is required for default filterSchema baseFilterMixin property',
+        );
+      return getNamespacedState(this.$store.state, this.namespace)[
+        this.filterQuery
+      ];
     },
     value() {
       return this.filterSchema.value;
@@ -29,7 +33,9 @@ export default {
     },
     setValue(payload) {
       if (!this.$store)
-        throw new Error('Vuex is required for default setValue() baseFilterMixin method');
+        throw new Error(
+          'Vuex is required for default setValue() baseFilterMixin method',
+        );
       return this.$store.dispatch(`${this.namespace}/SET_FILTER`, payload);
     },
   },

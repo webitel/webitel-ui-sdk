@@ -6,9 +6,11 @@ import ExampleDualPanel from './examples/example-dual-panel.vue';
 # WtDualPanel
 
 ## Specs
+
 <Specs />
 
 ## Dual Panel Example
+
 ::: raw
 <ExampleDualPanel />
 :::
@@ -16,5 +18,3 @@ import ExampleDualPanel from './examples/example-dual-panel.vue';
 ::: details Code
 <<< ./examples/example-dual-panel.vue{js}
 :::
-
-

@@ -13,6 +13,7 @@ import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 :::
 
 ## Example Textarea
+
 :::raw
 <ExampleTextarea />
 :::
@@ -22,6 +23,7 @@ import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 :::
 
 ## Example Disabled Textarea
+
 :::raw
 <ExampleDisabledTextarea />
 :::
@@ -31,6 +33,7 @@ import ExampleInvalidTextarea from './examples/example-invalid-textarea.vue';
 :::
 
 ## Example Invalid Textarea
+
 :::raw
 <ExampleInvalidTextarea />
 :::

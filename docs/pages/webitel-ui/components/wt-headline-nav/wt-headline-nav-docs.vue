@@ -1,22 +1,20 @@
 <template>
   <section>
-    <component-props
-      :properties="properties"
-    />
+    <component-props :properties="properties" />
   </section>
 </template>
 
 <script>
-  import Prism from 'prismjs';
+import Prism from 'prismjs';
 
-  export default {
-    name: 'WtHeadlineNavDocs',
-    data: () => ({
-      properties: [
-        {
-          name: 'path',
-          required: 'true',
-          description: `
+export default {
+  name: 'WtHeadlineNavDocs',
+  data: () => ({
+    properties: [
+      {
+        name: 'path',
+        required: 'true',
+        description: `
             // PATH EXAMPLE
             // default: () => [
             //   { name: 'directory' },
@@ -24,14 +22,13 @@
             //   { name: 'adm', route: '/directory/users/3' },
             // ],
           `,
-        },
-      ],
-    }),
-    mounted() {
-      Prism.highlightAll();
-    },
-  };
+      },
+    ],
+  }),
+  mounted() {
+    Prism.highlightAll();
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

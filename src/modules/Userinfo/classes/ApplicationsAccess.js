@@ -202,6 +202,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SOURCES}`,
     },
+    [CrmSections.SERVICE_CATALOGS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SERVICE_CATALOGS}`,
+    },
     [CrmSections.CONTACT_GROUPS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACT_GROUPS}`,
@@ -216,7 +220,9 @@ export default class ApplicationsAccess {
   constructor({ access, value } = { value: true }) {
     /* if access, deeply merge with falsy values schema
      if no access, "not configured => full permissions" */
-    this.access = access ? ApplicationsAccess.restore(access) : applicationsAccess(value);
+    this.access = access
+      ? ApplicationsAccess.restore(access)
+      : applicationsAccess(value);
   }
 
   // minify schema for API sending

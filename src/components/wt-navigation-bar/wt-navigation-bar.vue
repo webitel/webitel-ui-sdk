@@ -4,7 +4,7 @@
     class="wt-navigation-bar"
   >
     <wt-icon-btn
-      :class="{'active': isOpened}"
+      :class="{ active: isOpened }"
       class="wt-navigation-bar__menu-btn"
       icon="menu"
       @click="isOpened = !isOpened"
@@ -18,9 +18,11 @@
           <!--        vue cli build target lib cant handle dynamic require :( -->
           <img
             :alt="currentApp"
-            :src="darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light"
+            :src="
+              darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
+            "
             class="wt-navigation-bar__app-pic"
-          >
+          />
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
@@ -37,7 +39,10 @@
             <div v-if="!navItem.subNav">
               <div class="wt-navigation-bar__nav-item-wrapper">
                 <router-link
-                  :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === navItem.value}"
+                  :class="{
+                    'wt-navigation-bar__nav-item-link--active':
+                      currentNav.nav === navItem.value,
+                  }"
                   :to="navItem.route"
                   class="wt-navigation-bar__nav-item-link"
                   @click="close"
@@ -49,14 +54,18 @@
             <div v-else>
               <button
                 :class="{
-                  'wt-navigation-bar__nav-expansion--expanded': isExpanded(navItem),
-                  'wt-navigation-bar__nav-expansion--active': currentNav.expansion === navItem.value,
+                  'wt-navigation-bar__nav-expansion--expanded':
+                    isExpanded(navItem),
+                  'wt-navigation-bar__nav-expansion--active':
+                    currentNav.expansion === navItem.value,
                 }"
                 class="wt-navigation-bar__nav-expansion"
                 type="button"
                 @click="expand(navItem)"
               >
-                <span class="wt-navigation-bar__nav-expansion-name">{{ navItem.name || navItem.value }}</span>
+                <span class="wt-navigation-bar__nav-expansion-name">{{
+                  navItem.name || navItem.value
+                }}</span>
                 <wt-icon
                   class="wt-navigation-bar__expansion-arrow"
                   color="active"
@@ -72,7 +81,10 @@
                   >
                     <div class="wt-navigation-bar__nav-item-wrapper">
                       <router-link
-                        :class="{'wt-navigation-bar__nav-item-link--active': currentNav.nav === subNavItem.value}"
+                        :class="{
+                          'wt-navigation-bar__nav-item-link--active':
+                            currentNav.nav === subNavItem.value,
+                        }"
                         :to="nestedRoute(subNavItem, navItem)"
                         class="wt-navigation-bar__nav-item-link wt-navigation-bar__nav-item-link--subnav"
                         @click="close"
@@ -162,7 +174,8 @@ export default {
       const path = this.$route.fullPath;
       const currentNav = this.nav
         .reduce((flatNav, currentNavItem) => {
-          if (currentNavItem.subNav) return flatNav.concat(currentNavItem.subNav);
+          if (currentNavItem.subNav)
+            return flatNav.concat(currentNavItem.subNav);
           return [...flatNav, currentNavItem];
         }, [])
         .find((navItem) => path.includes(navItem.route));
@@ -177,10 +190,13 @@ export default {
   },
   methods: {
     nestedRoute(subNavItem, navItem) {
-      return navItem.route ? `${navItem.route}/${subNavItem.route}` : subNavItem.route;
+      return navItem.route
+        ? `${navItem.route}/${subNavItem.route}`
+        : subNavItem.route;
     },
     expand(navItem) {
-      this.expandedName = this.expandedName !== navItem.value ? navItem.value : '';
+      this.expandedName =
+        this.expandedName !== navItem.value ? navItem.value : '';
     },
     isExpanded(navItem) {
       return this.expandedName === navItem.value;

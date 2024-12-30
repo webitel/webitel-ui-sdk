@@ -7,17 +7,29 @@ export const useTableStore = (namespace) => {
 
   const tableNamespace = `${namespace}/table`;
 
-  const dataList = computed(() => getNamespacedState(store.state, tableNamespace).dataList);
+  const dataList = computed(
+    () => getNamespacedState(store.state, tableNamespace).dataList,
+  );
 
-  const selected = computed(() => getNamespacedState(store.state, tableNamespace).selected);
+  const selected = computed(
+    () => getNamespacedState(store.state, tableNamespace).selected,
+  );
 
-  const isLoading = computed(() => getNamespacedState(store.state, tableNamespace).isLoading);
+  const isLoading = computed(
+    () => getNamespacedState(store.state, tableNamespace).isLoading,
+  );
 
-  const headers = computed(() => getNamespacedState(store.state, tableNamespace).headers);
+  const headers = computed(
+    () => getNamespacedState(store.state, tableNamespace).headers,
+  );
 
-  const isNext = computed(() => getNamespacedState(store.state, tableNamespace).isNextPage);
+  const isNext = computed(
+    () => getNamespacedState(store.state, tableNamespace).isNextPage,
+  );
 
-  const error = computed(() => getNamespacedState(store.state, tableNamespace).errors);
+  const error = computed(
+    () => getNamespacedState(store.state, tableNamespace).errors,
+  );
 
   function loadData(payload) {
     return store.dispatch(`${tableNamespace}/LOAD_DATA_LIST`, payload);
@@ -46,6 +58,10 @@ export const useTableStore = (namespace) => {
     return store.dispatch(`${tableNamespace}/SET_SELECTED`, payload);
   }
 
+  function resetState(payload) {
+    return store.dispatch(`${tableNamespace}/RESET_TABLE_STATE`, payload);
+  }
+
   return {
     namespace: tableNamespace,
 
@@ -62,5 +78,6 @@ export const useTableStore = (namespace) => {
     deleteData,
     sort,
     setSelected,
+    resetState,
   };
 };

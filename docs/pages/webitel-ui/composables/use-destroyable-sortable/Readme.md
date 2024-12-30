@@ -16,26 +16,27 @@ Bad decision, but I haven't come up with a better one
 ## Input params
 
 | Params  | Description |
-|---------|-------------|
+| ------- | ----------- |
 | elRef   |             |
 | options |             |
 
 ## Return
 
 | Params         | Description |
-|----------------|-------------|
+| -------------- | ----------- |
 | reloadSortable |             |
 
 ## Використання
 
 ```js
 // template
-<div ref="SortableWrapper" v-if="!reloadSortable"></div>
+<div
+  ref="SortableWrapper"
+  v-if="!reloadSortable"
+></div>;
 
 // script
-import {
-  useDestroyableSortable,
-} from '@webitel/ui-sdk/src/composables/useDestroyableSortable/useDestroyableSortable';
+import { useDestroyableSortable } from '@webitel/ui-sdk/src/composables/useDestroyableSortable/useDestroyableSortable';
 
 const SortableWrapper = ref(null);
 
@@ -46,4 +47,3 @@ const { reloadSortable } = useDestroyableSortable(SortableWrapper, {
   },
 });
 ```
-

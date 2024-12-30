@@ -8,6 +8,9 @@ const colors = [
   'disabled',
   'break-out',
   'info',
+  'final-status',
+  'other-status',
+  'initial-status',
 ];
 </script>
 
@@ -20,6 +23,4 @@ const colors = [
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

@@ -1,17 +1,9 @@
 <script setup>
-const sizes = [
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl',
-  '2xl',
-  '3xl',
-];
+const sizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'];
 </script>
 
 <template>
-  <div style="display: flex; gap: 10px;">
+  <div style="display: flex; gap: 10px">
     <wt-avatar
       v-for="size in sizes"
       :key="size"
@@ -21,6 +13,4 @@ const sizes = [
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

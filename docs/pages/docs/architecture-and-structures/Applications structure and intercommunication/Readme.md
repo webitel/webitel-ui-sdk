@@ -51,6 +51,7 @@ _(на прикладі [адмінки](#admin))_
 для всіх попередніх роутів.
 
 Кожен модуль може містити в собі такі штуки (і відповідно папки), як:
+
 - `api`
 - `components`
 - `css`
@@ -69,45 +70,54 @@ _(на прикладі [адмінки](#admin))_
 
 _Note: store має бути ієрархічним, тобто, модуль-чайлд має бути так само чайлдом стор-модуля._
 
-
 ## Applications list
 
 ### Auth
+
 - repository: [web-client-auth](https://github.com/webitel/web-client-auth)
 - dev: [dev.webitel.com/app/auth](https://dev.webitel.com/app/auth)
 
 ### Admin
+
 - repository: [client](https://github.com/webitel/client)
 - dev: [dev.webitel.com](https://dev.webitel.com/)
 
 ### Workspace
+
 - repository: [cc-workslace](https://github.com/webitel/cc-workspaces)
 - dev: [dev.webitel.com/workspace](https://dev.webitel.com/workspace)
 
 ### Supervisor
+
 - repository: [cc-supervisor](https://github.com/webitel/cc-supervisor)
 - dev: [dev.webitel.com/supervisor](https://dev.webitel.com/supervisor)
 
 ### Audit
+
 - repository: [cc-quality-auditor](https://github.com/webitel/cc-quality-auditor)
 - dev: [dev.webitel.com/audit](https://dev.webitel.com/audit)
 
 ### History
+
 - repository: [cc-history](https://github.com/webitel/cc-history)
 - dev: [dev.webitel.com/history](https://dev.webitel.com/history)
 
 ### CRM
+
 - repository: [crm](https://github.com/webitel/crm)
 - dev: [dev.webitel.com/crm](https://dev.webitel.com/crm)
 
 ### Webitel UI
+
 - repository: [webitel-ui-sdk](https://github.com/webitel/webitel-ui-sdk)
 - docs: [webitel.github.io/webitel-ui-sdk](https://webitel.github.io/webitel-ui-sdk)
 
 ### Flow
+
 - repository: [webitel-flow-diagram](https://git.webitel.com/projects/CORE/repos/webitel-flow-diagram/browse)
 - dev: [dev.webitel.com/flow/:id](https://dev.webitel.com/flow/767)
 
 ### Omni-Widget
+
 - repository: [omnichannel-widget](https://github.com/webitel/omnichannel-widget)
 - dev: [tst.webitel.ua](https://tst.webitel.ua/)

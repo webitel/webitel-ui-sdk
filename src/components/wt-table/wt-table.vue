@@ -2,144 +2,144 @@
   <div class="wt-table">
     <table class="wt-table__table">
       <thead class="wt-table__head">
-      <tr
-        :style="columnsStyle"
-        class="wt-table__tr wt-table__tr__head"
-      >
-        <th
-          v-if="selectable"
-          class="wt-table__th wt-table__th--checkbox"
+        <tr
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__head"
         >
-          <wt-checkbox
-            :selected="isAllSelected"
-            @change="selectAll"
-          />
-        </th>
-        <th
-          v-for="(col, key) of dataHeaders"
-          :key="key"
-          :class="[
-              {'wt-table__th--sortable': isColSortable(col)},
+          <th
+            v-if="selectable"
+            class="wt-table__th wt-table__th--checkbox"
+          >
+            <wt-checkbox
+              :selected="isAllSelected"
+              @change="selectAll"
+            />
+          </th>
+          <th
+            v-for="(col, key) of dataHeaders"
+            :key="key"
+            :class="[
+              { 'wt-table__th--sortable': isColSortable(col) },
               `wt-table__th--sort-${col.sort}`,
             ]"
-          class="wt-table__th"
-          @click="sort(col)"
-        >
-          <div class="wt-table__th__text">
-            {{ col.text }}
-          </div>
-          <wt-icon
-            v-if="sortable"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-            icon="sort-arrow-up"
-            size="sm"
-          />
-          <wt-icon
-            v-if="sortable"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-            icon="sort-arrow-down"
-            size="sm"
-          />
-        </th>
-        <th
-          v-if="gridActions"
-          class="wt-table__th__actions"
-        >
-          <!--    @slot Table head actions row slot -->
-          <slot name="actions-header" />
-        </th>
-      </tr>
+            class="wt-table__th"
+            @click="sort(col)"
+          >
+            <div class="wt-table__th__text">
+              {{ col.text }}
+            </div>
+            <wt-icon
+              v-if="sortable"
+              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+              icon="sort-arrow-up"
+              size="sm"
+            />
+            <wt-icon
+              v-if="sortable"
+              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+              icon="sort-arrow-down"
+              size="sm"
+            />
+          </th>
+          <th
+            v-if="gridActions"
+            class="wt-table__th__actions"
+          >
+            <!--    @slot Table head actions row slot -->
+            <slot name="actions-header" />
+          </th>
+        </tr>
       </thead>
 
       <tbody class="wt-table__body">
-      <tr
-        v-for="(row, dataKey) of data"
-        :key="dataKey"
-        :class="`wt-table__tr__${row.id || dataKey}`"
-        :style="columnsStyle"
-        class="wt-table__tr wt-table__tr__body"
-      >
-        <td
-          v-if="selectable"
-          class="wt-table__td wt-table__td--checkbox"
+        <tr
+          v-for="(row, dataKey) of data"
+          :key="dataKey"
+          :class="`wt-table__tr__${row.id || dataKey}`"
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__body"
         >
-          <wt-checkbox
-            :selected="_selected.includes(row)"
-            @change="handleSelection(row, $event)"
-          />
-        </td>
+          <td
+            v-if="selectable"
+            class="wt-table__td wt-table__td--checkbox"
+          >
+            <wt-checkbox
+              :selected="_selected.includes(row)"
+              @change="handleSelection(row, $event)"
+            />
+          </td>
 
-        <td
-          v-for="(col, headerKey) of dataHeaders"
-          :key="headerKey"
-          class="wt-table__td"
-        >
-          <!--
+          <td
+            v-for="(col, headerKey) of dataHeaders"
+            :key="headerKey"
+            class="wt-table__td"
+          >
+            <!--
            @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
            @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
            -->
-          <slot
-            :index="dataKey"
-            :item="row"
-            :name="col.value"
-          >
-            <div>{{ row[col.value] }}</div>
-          </slot>
-        </td>
+            <slot
+              :index="dataKey"
+              :item="row"
+              :name="col.value"
+            >
+              <div>{{ row[col.value] }}</div>
+            </slot>
+          </td>
 
-        <td
-          v-if="gridActions"
-          class="wt-table__td__actions"
-        >
-          <!--
+          <td
+            v-if="gridActions"
+            class="wt-table__td__actions"
+          >
+            <!--
           @slot Table body actions row slot
           @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
            -->
-          <slot
-            :index="dataKey"
-            :item="row"
-            name="actions"
-          />
-        </td>
-      </tr>
+            <slot
+              :index="dataKey"
+              :item="row"
+              name="actions"
+            />
+          </td>
+        </tr>
       </tbody>
 
       <tfoot
         v-if="isTableFooter"
         class="wt-table__foot"
       >
-      <tr
-        :style="columnsStyle"
-        class="wt-table__tr wt-table__tr__foot"
-      >
-        <!--        empty checkbox column -->
-        <th
-          v-if="selectable"
-          class="wt-table__th__checkbox"
-        />
-        <td
-          v-for="(col, headerKey) of dataHeaders"
-          :key="headerKey"
-          class="wt-table__td"
+        <tr
+          :style="columnsStyle"
+          class="wt-table__tr wt-table__tr__foot"
         >
-          <!--
+          <!--        empty checkbox column -->
+          <th
+            v-if="selectable"
+            class="wt-table__th__checkbox"
+          />
+          <td
+            v-for="(col, headerKey) of dataHeaders"
+            :key="headerKey"
+            class="wt-table__td"
+          >
+            <!--
            @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
            @scope [ { "name": "header", "description": "header object" } ]
            -->
-          <slot
-            :header="col"
-            :index="headerKey"
-            :name="`${col.value}-footer`"
-          />
-        </td>
-      </tr>
+            <slot
+              :header="col"
+              :index="headerKey"
+              :name="`${col.value}-footer`"
+            />
+          </td>
+        </tr>
       </tfoot>
     </table>
   </div>
 </template>
 
 <script>
-import getNextSortOrder from './_internals/getSortOrder.js';
+import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 
 export default {
   name: 'WtTable',
@@ -229,7 +229,9 @@ export default {
     },
 
     isTableFooter() {
-      return Object.keys(this.$slots).some((slotName) => slotName.includes('-footer'));
+      return Object.keys(this.$slots).some((slotName) =>
+        slotName.includes('-footer'),
+      );
     },
   },
 

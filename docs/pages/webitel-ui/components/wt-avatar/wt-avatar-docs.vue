@@ -1,7 +1,5 @@
 <template>
-  <component-props
-    :properties="properties"
-  />
+  <component-props :properties="properties" />
   <article>
     <h2>Why to pass image itself as src prop?</h2>
     <pre>
@@ -44,7 +42,8 @@ export default {
         value: 'src',
         code: '<wt-avatar :src="pic"></wt-avatar>',
         type: 'String',
-        description: 'Avatar pic. IMPORTANT: if this pic is stored locally in project, pass to this prop only pic, imported and passed to data as property',
+        description:
+          'Avatar pic. IMPORTANT: if this pic is stored locally in project, pass to this prop only pic, imported and passed to data as property',
       },
       {
         value: 'username',
@@ -71,7 +70,9 @@ export default {
         value: 'status',
         code: '<wt-avatar :status="AbstractUserStatus.ACTIVE"></wt-avatar>',
         type: 'String <AbstractUserStatus>',
-        options: ['AbstractUserStatus enum from @webitel/ui-sdk/src/enums/AbstractUserStatus'],
+        options: [
+          'AbstractUserStatus enum from @webitel/ui-sdk/src/enums/AbstractUserStatus',
+        ],
         default: 'AbstractUserStatus.OFFLINE',
         description: 'Color of the badge',
       },

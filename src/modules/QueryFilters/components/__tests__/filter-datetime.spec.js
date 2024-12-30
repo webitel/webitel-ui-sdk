@@ -42,7 +42,9 @@ describe('DatetimeFilter Filter', () => {
     const value = Date.now();
     await router.replace({ query: { [filterQuery]: value } });
     const setValueMock = vi.fn();
-    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(setValueMock);
+    vi.spyOn(baseFilterMixin.methods, 'setValue').mockImplementationOnce(
+      setValueMock,
+    );
     shallowMount(DatetimeFilter, mountOptions);
     expect(setValueMock).toHaveBeenCalledWith({ filter: filterQuery, value });
   });

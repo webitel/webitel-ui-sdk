@@ -30,7 +30,7 @@
           @click="isOpened = !isOpened"
         >
           <wt-icon
-            :class="{'wt-button-select__select-arrow--active': isOpened}"
+            :class="{ 'wt-button-select__select-arrow--active': isOpened }"
             :color="color === 'primary' ? 'on-primary' : 'default'"
             :disabled="disabled"
             class="wt-button-select__select-arrow"
@@ -88,11 +88,11 @@ const isOpened = ref(false);
 const selectOption = ({ option, index }) => {
   emit('click:option', option, index);
   isOpened.value = false;
-}
+};
 
 const atClickaway = () => {
   isOpened.value = false;
-}
+};
 </script>
 
 <style lang="scss">
@@ -100,7 +100,6 @@ const atClickaway = () => {
 </style>
 
 <style lang="scss" scoped>
-
 .wt-button-select {
   position: relative;
   display: inline-flex;

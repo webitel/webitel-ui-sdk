@@ -29,6 +29,4 @@ const attrs = useAttrs();
 const model = defineModel({ required: true });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

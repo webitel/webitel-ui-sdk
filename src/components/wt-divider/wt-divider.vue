@@ -1,5 +1,8 @@
 <template>
-  <hr class="wt-divider" :class="`wt-divider-${variant}`">
+  <hr
+    class="wt-divider"
+    :class="`wt-divider-${variant}`"
+  />
 </template>
 
 <script>
@@ -10,7 +13,7 @@ export default {
       type: String,
       default: 'horizontal',
     },
-  }
+  },
 };
 </script>
 
@@ -19,7 +22,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-
 .wt-divider {
   display: block;
   box-sizing: border-box;

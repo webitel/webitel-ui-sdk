@@ -19,7 +19,10 @@ const PauseCauseAPIFactory = ({ instance, OpenAPIConfig }) => {
 
     const allowChange = true;
     try {
-      const response = await service.searchPauseCauseForAgent(agentId, allowChange);
+      const response = await service.searchPauseCauseForAgent(
+        agentId,
+        allowChange,
+      );
       const { items, next } = applyTransform(response.data, [
         snakeToCamel(),
         merge(getDefaultGetListResponse()),

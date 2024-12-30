@@ -6,20 +6,16 @@ import WtSaveFailedPopup from '../../../../../../../src/components/on-demand/wt-
 
 let isSaveFailedPopup = ref(false);
 function close() {
-  isSaveFailedPopup.value = false
+  isSaveFailedPopup.value = false;
 }
 </script>
 
 <template>
-  <wt-button
-    @click="isSaveFailedPopup = true"
-  >Open popup
-  </wt-button>
+  <wt-button @click="isSaveFailedPopup = true">Open popup </wt-button>
   <wt-save-failed-popup
     v-if="isSaveFailedPopup"
     @close-popup="close"
   />
 </template>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

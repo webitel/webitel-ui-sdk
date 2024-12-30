@@ -9,11 +9,13 @@ import ExampleHintedLabel from './examples/example-hinted-label.vue';
 # WtLabel
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example label
+
 ::: raw
 <ExampleLabel/>
 :::
@@ -21,7 +23,9 @@ import ExampleHintedLabel from './examples/example-hinted-label.vue';
 ::: details Code
 <<< ./examples/example-label.vue
 :::
+
 ## Error label
+
 ::: raw
 <ExampleErrorLabel/>
 :::
@@ -31,6 +35,7 @@ import ExampleHintedLabel from './examples/example-hinted-label.vue';
 :::
 
 ## Disabled label
+
 ::: raw
 <ExampleDisabledLabel/>
 :::
@@ -40,6 +45,7 @@ import ExampleHintedLabel from './examples/example-hinted-label.vue';
 :::
 
 ## Hinted label
+
 ::: raw
 <ExampleHintedLabel/>
 :::

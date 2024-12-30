@@ -5,21 +5,14 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -223,6 +216,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
         [CrmSections.SOURCES]: 'Case sources',
         [CrmSections.CONTACT_GROUPS]: 'Contact groups',
       },
@@ -297,7 +291,8 @@ export default {
     isRegExpMatched: 'Password must match the regular expression:',
     regExpValidator: 'This regular expression is not valid',
     domainValidator: 'Incorrect domain',
-    decimalValidator: 'Decimal precision should be no more than { count } places',
+    decimalValidator:
+      'Decimal precision should be no more than { count } places',
     integer: 'The field should contain only whole numbers',
   },
   webitelUI: {

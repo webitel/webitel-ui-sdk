@@ -34,16 +34,16 @@ describe('WtTagsInput', () => {
         value: [
           { label: 'Vue.js', text: 'JavaScript' },
           { label: 'Vue2.js', text: 'JavaScript' },
-          { label: 'Vue3.js', text: 'JavaScript' }
+          { label: 'Vue3.js', text: 'JavaScript' },
         ],
-        options: [
-          { label: 'Vue.js', text: 'JavaScript' }
-        ]
+        options: [{ label: 'Vue.js', text: 'JavaScript' }],
       },
     });
-    expect(wrapper.findComponent({ name: 'vue-multiselect' }).vm.$props.options.length).toEqual(3);
+    expect(
+      wrapper.findComponent({ name: 'vue-multiselect' }).vm.$props.options
+        .length,
+    ).toEqual(3);
   });
-
 
   it('in manual mode doesnt emit "input" event at native "tag" event', () => {
     const tag = '123';

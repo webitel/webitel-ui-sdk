@@ -7,8 +7,8 @@ export const tableActionsOrder = [
   IconAction.DOWNLOAD,
   IconAction.UPLOAD,
   IconAction.FILTERS,
-  IconAction.DELETE,
   IconAction.REFRESH,
+  IconAction.DELETE,
 ];
 
 // TODO

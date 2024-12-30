@@ -43,7 +43,10 @@
     </ol>
     <article>
       <h3>Wt-icon installation:</h3>
-      <p>To use icons you need to install svg-sprite-loader and configure webpack build and import the sprite itself.</p>
+      <p>
+        To use icons you need to install svg-sprite-loader and configure webpack
+        build and import the sprite itself.
+      </p>
       <ol>
         <li>
           Install sprite loader with <strong>npm</strong>:
@@ -75,26 +78,26 @@
 </template>
 
 <script>
-  import Prism from 'prismjs';
-  import 'prismjs/components/prism-bash';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-bash';
 
-  export default {
-    name: 'QuickStart',
-    mounted() {
-      Prism.highlightAll();
-    },
-  };
+export default {
+  name: 'QuickStart',
+  mounted() {
+    Prism.highlightAll();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  pre {
-    min-width: 600px;
-    width: 60%;
-    padding: 10px;
-    margin-right: 60px;
-    background: var(--contrast-color);
-    border-radius: var(--border-radius);
-    color: var(--main-color);
-    cursor: text;
-  }
+pre {
+  min-width: 600px;
+  width: 60%;
+  padding: 10px;
+  margin-right: 60px;
+  background: var(--contrast-color);
+  border-radius: var(--border-radius);
+  color: var(--main-color);
+  cursor: text;
+}
 </style>

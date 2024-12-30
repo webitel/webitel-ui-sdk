@@ -7,12 +7,12 @@ const colors = ['default', 'active', 'disabled', 'primary', 'error', 'success', 
 ## Props
 
 | Prop       | Type    | Default | Required | Code                                                | Options                                                                                                               |
-|------------|---------|---------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| icon       | String  |         | true     | `<wt-icon icon="close"></wt-icon>`                  |                                                                                                                       |             
-| size       | String  | md      |          | `<wt-icon icon="close" size="sm"></wt-icon>`        | sm, md, lg, xl                                                                                                        |             
-| color      | String  | default |          | `<wt-icon icon="close" color="success"></wt-icon>`  | default, active, disabled, primary, error, success, warning, on-dark, on-light, on-primary, info, chat, transfer, job |             
-| iconPrefix | String  | `''`    |          | `<wt-icon icon="close" icon-prefix="ws"></wt-icon>` |                                                                                                                       |             
-| disabled   | Boolean | false   |          | `<wt-icon icon="close" disabled></wt-icon>`         |                                                                                                                       |             
+| ---------- | ------- | ------- | -------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| icon       | String  |         | true     | `<wt-icon icon="close"></wt-icon>`                  |                                                                                                                       |
+| size       | String  | md      |          | `<wt-icon icon="close" size="sm"></wt-icon>`        | sm, md, lg, xl                                                                                                        |
+| color      | String  | default |          | `<wt-icon icon="close" color="success"></wt-icon>`  | default, active, disabled, primary, error, success, warning, on-dark, on-light, on-primary, info, chat, transfer, job |
+| iconPrefix | String  | `''`    |          | `<wt-icon icon="close" icon-prefix="ws"></wt-icon>` |                                                                                                                       |
+| disabled   | Boolean | false   |          | `<wt-icon icon="close" disabled></wt-icon>`         |                                                                                                                       |
 
 ### Different colors:
 
@@ -73,16 +73,17 @@ Then, these icons can be used as:
 `vite-plugin-svg-sprite` vite rule in <code>vite.config.js</code> also collects all icons from `sprite`
 directories in project and adds it to final sprite.
 
-*In fact, webitel-ui icons are added to sprite just cause they're imported from
-"sprite" directory - just in <code>node_modules</code>*
+_In fact, webitel-ui icons are added to sprite just cause they're imported from
+"sprite" directory - just in <code>node_modules</code>_
 
-For stylistic purposes, it's recommended to allocate icons in <code>src/(app?)/assets/icons/sprite/*</code>,
+For stylistic purposes, it's recommended to allocate icons in <code>src/(app?)/assets/icons/sprite/\*</code>,
 So that developers and designer could find (and then check or update) them in any project.
 
 All icons from this directory should be imported in <code>index.js</code> in this directory
 (create `index.js` if it doesn't exist).
 
 Then, `index.html` should be imported in `main.js`:
+
 <pre class="language-javascript"><code>import './assets/icons/sprite';</code></pre>
 
 And, then, if you put some new icons in this directory, and import them in `index.js`,
@@ -90,11 +91,11 @@ they automatically become available in project.
 
 ### Simple TODO:
 
-* Create directory `src/(app?)/assets/icons/sprite/` (if doesn't exists)
-* in this folder, create `index.js` (if doesn't exists)
-* Import `index.js` to `>main.js` (if doesn't exists)
-* Put icon to this directory, and import it to `index.js`
-* That's all, you're awesome!
+- Create directory `src/(app?)/assets/icons/sprite/` (if doesn't exists)
+- in this folder, create `index.js` (if doesn't exists)
+- Import `index.js` to `>main.js` (if doesn't exists)
+- Put icon to this directory, and import it to `index.js`
+- That's all, you're awesome!
 
 ## Icon sprites naming convention:
 
@@ -102,17 +103,17 @@ App-specific icons are highly recommended to be named with the prefix correspond
 
 The reason is: when you see an icon usage, you will be able to distinguish `svg` location:
 in this app, or library - and update it, if needed.
-*For example, if you want to move this icon from app to library, you just need to remove `icon-prefix` prop
-from all icon usages (and, of course, rename the icon file)*
+_For example, if you want to move this icon from app to library, you just need to remove `icon-prefix` prop
+from all icon usages (and, of course, rename the icon file)_
 
 ### Icon prefix corresponding to application:
 
-* **Webitel UI:** no prefix
-* **Admin:** `adm-`
-* **Workspace:** `ws-`
-* **Supervisor:** `sv-`
-* **History:** `hs-`
-* **Webitel CC UI:** `cc-`
+- **Webitel UI:** no prefix
+- **Admin:** `adm-`
+- **Workspace:** `ws-`
+- **Supervisor:** `sv-`
+- **History:** `hs-`
+- **Webitel CC UI:** `cc-`
 
 ## How to clean up icons before adding them to project?
 
@@ -140,10 +141,8 @@ Correct:
 
 5. **Remove** all `fill=""` with default color
 
-*Default "fill" should be cleaned up, cause Figma adds it to icon by default, but we are
+_Default "fill" should be cleaned up, cause Figma adds it to icon by default, but we are
 changing this fill in styles to suit our needs.
-But! Specific colors should stay in svg-code. (for instance, red dot in `record` icon)*
+But! Specific colors should stay in svg-code. (for instance, red dot in `record` icon)_
 
 !["fill" should be removed](./assets/cleanup-svg-fill.png)
-
-

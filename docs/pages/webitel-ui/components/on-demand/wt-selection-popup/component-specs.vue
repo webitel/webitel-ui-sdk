@@ -6,5 +6,4 @@ import Component from '../../../../../../src/components/on-demand/wt-selection-p
   <component-info :info="Component.docs" />
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

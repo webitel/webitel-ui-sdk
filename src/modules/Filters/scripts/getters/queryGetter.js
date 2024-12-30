@@ -2,7 +2,8 @@
 const queryGetter = (context) => (router) => () => {
   if (!router) throw new Error('Router is required for queryGetter!');
 
-  const query = router.currentRoute.value?.query || router.currentRoute.query || {};
+  const query =
+    router.currentRoute.value?.query || router.currentRoute.query || {};
 
   const value = query[context.name];
 

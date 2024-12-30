@@ -19,7 +19,8 @@ describe('API filter mixin', () => {
   };
 
   beforeEach(() => {
-    if (Object.keys(router.currentRoute.value.query).length) router.replace({ query: null });
+    if (Object.keys(router.currentRoute.value.query).length)
+      router.replace({ query: null });
   });
 
   it('Correctly sets value from $route query', async () => {

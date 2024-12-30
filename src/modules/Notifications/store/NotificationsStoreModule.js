@@ -45,7 +45,8 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
   getters = {
     IS_MAIN_TAB: (state) => state.thisTabId === state.currentTabId,
-    IS_SOUND_ALLOWED: (state, getters) => getters.IS_MAIN_TAB && !state.currentlyPlaying,
+    IS_SOUND_ALLOWED: (state, getters) =>
+      getters.IS_MAIN_TAB && !state.currentlyPlaying,
   };
 
   actions = {
@@ -114,9 +115,16 @@ export default class NotificationsStoreModule extends BaseStoreModule {
         context.dispatch('_REMOVE_CURRENT_TAB_ID'),
       ]),
 
-    PLAY_SOUND: async (context, { action, sound = getNotificationSound(action), volume = 1.0 }) => {
-      if (context.getters.IS_SOUND_ALLOWED && !localStorage.getItem('wtIsPlaying')) {
-        const audio = sound instanceof Audio || sound.play ? sound : new Audio(sound);
+    PLAY_SOUND: async (
+      context,
+      { action, sound = getNotificationSound(action), volume = 1.0 },
+    ) => {
+      if (
+        context.getters.IS_SOUND_ALLOWED &&
+        !localStorage.getItem('wtIsPlaying')
+      ) {
+        const audio =
+          sound instanceof Audio || sound.play ? sound : new Audio(sound);
         audio.volume = volume;
 
         audio.addEventListener(
@@ -137,7 +145,8 @@ export default class NotificationsStoreModule extends BaseStoreModule {
 
     STOP_SOUND: (context) => {
       const { currentlyPlaying } = context.state;
-      if (currentlyPlaying && currentlyPlaying instanceof Audio) currentlyPlaying.pause();
+      if (currentlyPlaying && currentlyPlaying instanceof Audio)
+        currentlyPlaying.pause();
       localStorage.removeItem('wtIsPlaying');
       context.commit('RESET_CURRENTLY_PLAYING');
     },

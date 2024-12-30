@@ -5,21 +5,14 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -222,6 +215,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакты',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервисов',
         [CrmSections.SOURCES]: 'Источники обращений',
         [CrmSections.CONTACT_GROUPS]: 'Группы контактов',
       },
@@ -295,7 +289,8 @@ export default {
     isRegExpMatched: 'Пароль должен соответствовать регулярному выражению:',
     regExpValidator: 'Не правильное регулярное выражение',
     domainValidator: 'Неправильный домен',
-    decimalValidator: 'Количество десятичных знаков не должно быть больше { count }',
+    decimalValidator:
+      'Количество десятичных знаков не должно быть больше { count }',
     integer: 'Поле должно содержать только целые числа',
   },
   webitelUI: {
@@ -409,7 +404,8 @@ export default {
       },
       statusSelectErrorPopup: {
         title: 'Внимание',
-        message: 'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
+        message:
+          'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
       },
     },
     saveFailedPopup: {
@@ -420,6 +416,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Произошла ошибка загрузки истории чата',
-    markChatProcessed: 'Не удалось переместить чат в “Закрытые”'
+    markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
   },
 };

@@ -1,8 +1,5 @@
 <script setup>
-  const sizes = [
-    'sm',
-    'md',
-  ];
+const sizes = ['sm', 'md'];
 </script>
 
 <template>
@@ -14,6 +11,4 @@
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

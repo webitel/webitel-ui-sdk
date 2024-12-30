@@ -1,4 +1,7 @@
-import { EngineRoutingSchemaType, RoutingSchemaServiceApiFactory } from 'webitel-sdk';
+import {
+  EngineRoutingSchemaType,
+  RoutingSchemaServiceApiFactory,
+} from 'webitel-sdk';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -18,7 +21,11 @@ import applyTransform, {
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const flowService = new RoutingSchemaServiceApiFactory(configuration, '', instance);
+const flowService = new RoutingSchemaServiceApiFactory(
+  configuration,
+  '',
+  instance,
+);
 
 /*
 CONVERT "SCHEMA" FIELD TO JSON TO PREVENT ITS CHANGE
@@ -39,18 +46,21 @@ const getFlowList = async (params) => {
   };
 
   if (paramsCopy.type) {
-    const _type = Array.isArray(paramsCopy.type) ? paramsCopy.type : [paramsCopy.type];
+    const _type = Array.isArray(paramsCopy.type)
+      ? paramsCopy.type
+      : [paramsCopy.type];
     if (!paramsCopy.type.includes(EngineRoutingSchemaType.Default)) {
       _type.push(EngineRoutingSchemaType.Default);
     }
     paramsCopy.type = _type;
   }
 
-  const { page, size, search, sort, fields, id, name, type, tags } = applyTransform(paramsCopy, [
-    merge(getDefaultGetParams()),
-    starToSearch('search'),
-    camelToSnake(doNotConvertKeys),
-  ]);
+  const { page, size, search, sort, fields, id, name, type, tags } =
+    applyTransform(paramsCopy, [
+      merge(getDefaultGetParams()),
+      starToSearch('search'),
+      camelToSnake(doNotConvertKeys),
+    ]);
 
   try {
     const response = await flowService.searchRoutingSchema(
@@ -107,7 +117,8 @@ const getFlow = async ({ itemId: id }) => {
 
 const preRequestHandler = (item) => ({
   ...item,
-  schema: typeof item.schema === 'string' ? JSON.parse(item.schema) : item.schema,
+  schema:
+    typeof item.schema === 'string' ? JSON.parse(item.schema) : item.schema,
 });
 
 const addFlow = async ({ itemInstance }) => {

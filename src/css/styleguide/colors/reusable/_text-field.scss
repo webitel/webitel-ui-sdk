@@ -29,9 +29,13 @@
   --wt-text-field-select-option-text-hover-color: var(--primary-on-color);
   --wt-text-field-select-option-text-selected-color: var(--primary-on-color);
 
-  --wt-text-field-select-option-wrapper-border-color: var(--dp-22-surface-color);
+  --wt-text-field-select-option-wrapper-border-color: var(
+    --dp-22-surface-color
+  );
   --wt-text-field-select-option-background-color: var(--dp-22-surface-color);
-  --wt-text-field-select-option-background-hover-color: var(--primary-light-color);
+  --wt-text-field-select-option-background-hover-color: var(
+    --primary-light-color
+  );
   --wt-text-field-select-option-background-selected-color: var(--primary-color);
 }
 

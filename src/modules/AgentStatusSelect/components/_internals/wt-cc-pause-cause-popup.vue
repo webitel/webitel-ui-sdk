@@ -11,7 +11,7 @@
       <form @submit.prevent="setPause">
         <ul>
           <li
-            v-for="(option) of pauseCause"
+            v-for="option of pauseCause"
             :key="option.id"
             class="wt-cc-pause-cause-popup-option"
           >
@@ -25,7 +25,8 @@
             <div class="wt-cc-pause-cause-popup-option__limits-wrapper">
               <span
                 :class="{
-                  'wt-cc-pause-cause-popup-option__duration--overflow': option.isOverflow,
+                  'wt-cc-pause-cause-popup-option__duration--overflow':
+                    option.isOverflow,
                 }"
               >
                 {{ option.duration }}
