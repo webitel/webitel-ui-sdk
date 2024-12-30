@@ -48,7 +48,7 @@
         v-if="!isOpened"
         #limit
       >
-        <wt-chip class="multiselect__limit"> +{{ value.length - 1 }} </wt-chip>
+        <wt-chip class="multiselect__limit"> +{{ value.length - 1 }}</wt-chip>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
@@ -376,9 +376,9 @@ export default {
     );
 
     $multiselect-limit-right-pos: calc(
-      $multiselect-clear-right-pos// clear offet from border +
-        var(--icon-md-size) // clear size
-      + var(--input-padding) // cleat-to-chip offset
+      $multiselect-clear-right-pos + /* clear offet from border */
+        var(--icon-md-size) /* clear size */ + var(--input-padding)
+        /* cleat-to-chip offset */
     );
 
     .multiselect__tags {
