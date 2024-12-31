@@ -71,6 +71,7 @@ export default {
     more: 'More',
     read: 'Read',
     create: 'Create',
+    draggable: 'Draggable',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
