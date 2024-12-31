@@ -1,3 +1,11 @@
+## [v24.12.35] - 2024-12-31
+### :sparkles: New Features
+- [`cedd5e7`](https://github.com/webitel/webitel-ui-sdk/commit/cedd5e71d1aa78124731a28db3f5a986919ba750) - wt-select useValueFromOptionsByProp [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :white_check_mark: Tests
+- [`309a6f9`](https://github.com/webitel/webitel-ui-sdk/commit/309a6f9b4426d1407f0c9b70bb6cbddb8f960e85) - fixed tests, related to wt-select useValueFromOptionsByProp [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.34] - 2024-12-31
 ### :sparkles: New Features
 - [`2d057c6`](https://github.com/webitel/webitel-ui-sdk/commit/2d057c64a444d3b76b9080fdd7967fe36f15ed97) - add draggable locale[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -657,3 +665,4 @@
 [v24.12.32]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.31...v24.12.32
 [v24.12.33]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.32...v24.12.33
 [v24.12.34]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.33...v24.12.34
+[v24.12.35]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.34...v24.12.35
