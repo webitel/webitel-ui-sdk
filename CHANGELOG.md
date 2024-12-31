@@ -1,3 +1,8 @@
+## [v24.12.34] - 2024-12-31
+### :sparkles: New Features
+- [`2d057c6`](https://github.com/webitel/webitel-ui-sdk/commit/2d057c64a444d3b76b9080fdd7967fe36f15ed97) - add draggable locale[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.33] - 2024-12-30
 ### :bug: Bug Fixes
 - [`72dc591`](https://github.com/webitel/webitel-ui-sdk/commit/72dc591809131afd51323631bfe8fc809ea48296) - fix comments on wt-select after running fix lint error
@@ -651,3 +656,4 @@
 [v24.12.31]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.29...v24.12.31
 [v24.12.32]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.31...v24.12.32
 [v24.12.33]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.32...v24.12.33
+[v24.12.34]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.33...v24.12.34
