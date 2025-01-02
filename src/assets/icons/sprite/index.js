@@ -3,6 +3,7 @@ import { objCamelToKebab } from '../../../scripts/caseConverters.js';
 import account from './account.svg';
 import adfs from './adfs.svg';
 import agent from './agent.svg';
+import api from './api.svg';
 import appNavigator from './app-navigator.svg';
 import arrange from './arrange.svg';
 import arrowDown from './arrow-down.svg';
@@ -100,6 +101,7 @@ import lock from './lock.svg';
 import logout from './logout.svg';
 import mailColor from './mail--color.svg';
 import mail from './mail.svg';
+import manual from './manual.svg';
 import menu from './menu.svg';
 import messengerCustom from './messenger-custom.svg';
 import messengerFacebookFilled from './messenger-facebook--filled.svg';
@@ -149,6 +151,7 @@ import search from './search.svg';
 import selectCustomValueEnter from './select-custom-value-enter.svg';
 import sendArrow from './send-arrow.svg';
 import settings from './settings.svg';
+import socialMedia from './social-media.svg';
 import sortArrowDown from './sort-arrow-down.svg';
 import sortArrowUp from './sort-arrow-up.svg';
 import soundOff from './sound-off.svg';
@@ -197,6 +200,7 @@ import plyrVolume from './plyr-volume.svg';
 export default objCamelToKebab({
   account,
   agent,
+  api,
   arrange,
   adfs,
   appNavigator,
@@ -287,6 +291,7 @@ export default objCamelToKebab({
   link,
   lock,
   logout,
+  manual,
   menu,
   email,
   emailInbound,
@@ -330,6 +335,7 @@ export default objCamelToKebab({
   search,
   sendArrow,
   settings,
+  socialMedia,
   sortArrowDown,
   sortArrowUp,
   soundOff,
