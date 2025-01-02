@@ -155,13 +155,13 @@ export default {
   ],
   props: {
     // vue 3
-    modelValue: {},
+    // modelValue: {},
 
     // vue 2 fallback
     value: {
-      default: (props) => {
-        return props.modelValue;
-      },
+      // default: (props) => {
+      //   return props.modelValue;
+      // },
     },
 
     multiple: {

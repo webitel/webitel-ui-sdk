@@ -3,10 +3,11 @@
     value: {{ selectedValue }}
 
     <wt-select
-      v-model="selectedValue"
+      :value="selectedValue"
       :options="options"
       track-by="value"
       use-value-from-options-by-prop="value"
+      @input="selectedValue = $event"
     />
   </div>
 </template>
