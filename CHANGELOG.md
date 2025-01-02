@@ -1,3 +1,8 @@
+## [v24.12.37] - 2025-01-02
+### :bug: Bug Fixes
+- [`f909155`](https://github.com/webitel/webitel-ui-sdk/commit/f909155cac0a29ebd30c24a22febf12ae9da311d) - wt-select value prop [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.36] - 2025-01-02
 ### :bug: Bug Fixes
 - [`3a4d3e5`](https://github.com/webitel/webitel-ui-sdk/commit/3a4d3e5fd4d999ef90a99f094791c5be11fea284) - wt-select useValueFromOptionsByProp, + docs [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -672,3 +677,4 @@
 [v24.12.34]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.33...v24.12.34
 [v24.12.35]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.34...v24.12.35
 [v24.12.36]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.35...v24.12.36
+[v24.12.37]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.36...v24.12.37
