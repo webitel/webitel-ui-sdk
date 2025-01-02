@@ -1,7 +1,7 @@
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-import checker from 'vite-plugin-checker';
 import { defineConfig, loadEnv } from 'vite';
+import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
@@ -111,7 +111,7 @@ export default ({ mode }) => {
             `;
             }
             return content;
-          }
+          },
         },
       },
     },

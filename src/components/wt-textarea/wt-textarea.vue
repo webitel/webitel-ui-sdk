@@ -23,8 +23,8 @@
     </wt-label>
     <div class="wt-textarea__wrapper">
       <textarea
-        ref="wt-textarea"
         :id="name"
+        ref="wt-textarea"
         :disabled="disabled"
         :placeholder="placeholder || label"
         :value="value"
@@ -172,7 +172,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main' as *;
+@use '../../css/main' as *;
 
 .wt-textarea {
   cursor: text;

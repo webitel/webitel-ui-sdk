@@ -71,6 +71,7 @@
 
 <script setup>
 import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
+
 import { useValidation } from '../../mixins/validationMixin/useValidation.js';
 
 /*
@@ -280,7 +281,7 @@ defineExpose({
 </style>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main' as *;
+@use '../../css/main' as *;
 
 .wt-input {
   cursor: text;

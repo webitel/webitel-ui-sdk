@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../../src/css/main.scss';
+@use '../../../css/main.scss';
 
 .filter-from-to {
   &:hover > .wt-label {

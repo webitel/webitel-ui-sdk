@@ -74,8 +74,9 @@
 </template>
 
 <script setup>
-import VueDatepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+
+import VueDatepicker from '@vuepic/vue-datepicker';
 import { computed, ref } from 'vue';
 
 const props = defineProps({
@@ -149,7 +150,7 @@ const requiredLabel = computed(() => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {

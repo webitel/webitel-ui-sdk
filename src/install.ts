@@ -1,11 +1,11 @@
 import 'vue-multiselect/dist/vue-multiselect.css';
+import '@webitel/styleguide/fonts';
 import './css/main.scss';
+import './assets/icons/sprite/index.js';
+
 import generateInstance from './api/axios/generateInstance.js';
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
-
-import './assets/icons/sprite/index.js';
-import '@webitel/styleguide/fonts';
 
 export default {
   install(app, { eventBus, router, globals = {} }) {

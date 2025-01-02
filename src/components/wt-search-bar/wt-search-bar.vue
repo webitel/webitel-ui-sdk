@@ -80,6 +80,7 @@
 
 <script setup>
 import { computed, toRefs } from 'vue';
+
 import { useValidation } from '../../mixins/validationMixin/useValidation.js';
 import debounce from '../../scripts/debounce.js';
 
@@ -166,7 +167,7 @@ function updateSearchMode({ option }) {
 </style>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main' as *;
+@use '../../css/main' as *;
 
 .wt-search-bar {
   cursor: text;

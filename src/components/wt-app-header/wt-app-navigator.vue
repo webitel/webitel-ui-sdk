@@ -54,8 +54,8 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import AdminDark from './assets/admin-dark.svg';
 import AdminLight from './assets/admin-light.svg';
 import AgentDark from './assets/agent-dark.svg';
@@ -150,7 +150,7 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-app-navigator {
   position: relative;

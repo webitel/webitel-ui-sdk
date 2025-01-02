@@ -48,6 +48,7 @@ const open = () => {
 
 <style lang="scss" scoped>
 @use '../../../../css/main.scss';
+
 .start-page-card {
   display: flex;
   flex-direction: column;

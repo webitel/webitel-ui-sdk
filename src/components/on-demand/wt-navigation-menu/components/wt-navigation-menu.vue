@@ -21,7 +21,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+
 import NavMenuLvl1 from './_internals/nav-menu-lvl-1.vue';
 import NavMenuLvl2 from './_internals/nav-menu-lvl-2.vue';
 
@@ -81,9 +82,7 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-//@use 'src/css/styleguide/styleguide' as *;
-@use '../../../../../src/css/main' as *;
-//@import '../../../../css/styleguide/viewport-breakpoints/_viewport-breakpoints.scss';
+@use '../../../../css/main' as *;
 .wt-navigation-menu {
   display: flex;
   align-items: center;

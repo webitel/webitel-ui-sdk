@@ -37,6 +37,7 @@ import {
   useFloating,
 } from '@floating-ui/vue';
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+
 import debounce from '../../scripts/debounce.js';
 import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions.js';
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
@@ -146,7 +147,7 @@ onBeforeUnmount(() => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-tooltip {
   display: inline-block;

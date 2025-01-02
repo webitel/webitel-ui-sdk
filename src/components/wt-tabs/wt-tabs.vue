@@ -87,7 +87,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-tabs {
   position: relative;

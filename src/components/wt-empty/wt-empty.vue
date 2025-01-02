@@ -130,6 +130,7 @@
 // based on https://vuetifyjs.com/en/components/empty-states/
 
 import { computed, useSlots } from 'vue';
+
 import ComponentSize from '../../enums/ComponentSize/ComponentSize.enum.js';
 import { greaterOrEqual, smallerOrEqual } from '../../scripts/compareSize.ts';
 import WtImage from '../wt-image/wt-image.vue';
@@ -250,7 +251,7 @@ const onSecondaryClick = onClick('secondary');
 </style>
 
 <style lang="scss" scoped>
-@use '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-empty {
   display: flex;
