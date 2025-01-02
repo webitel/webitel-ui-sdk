@@ -76,6 +76,8 @@
       :selected-elements="selectedElements"
       :children-prop="childrenProp"
       :nesting-level="childLevel"
+      :searched-prop="searchedProp"
+      @expanded-collapse="openCollapse"
       @update:selected="
         $emit('update:selected', {
           data: $event.data,
@@ -108,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
@@ -136,15 +138,20 @@ const props = withDefaults(
      * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
      */
     nestingLevel?: number;
+    /**
+     * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
+     */
+    searchedProp?: string;
   }>(),
   {
     selectable: false,
     gridActions: true,
     nestingLevel: 0,
+    searchedProp: 'searched',
   },
 );
 
-defineEmits(['update:selected']);
+const emit = defineEmits(['update:selected', 'expanded-collapse']);
 
 const collapsed = ref(true);
 const lineCount = computed(() => {
@@ -156,6 +163,38 @@ const childLevel = computed(() => {
 
 const isSelectedRow = computed(() => {
   return props.selectedElements.includes(props.data);
+});
+
+const openCollapse = () => {
+  collapsed.value = false;
+  emit('expanded-collapse');
+};
+
+const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
+  // Check if the object itself has searched
+  if (data[props.searchedProp] && nestedLevel) {
+    return true;
+  }
+
+  // Check if the object has children
+  if (Array.isArray(data[props.childrenProp])) {
+    // Iterate through the array
+    for (const child of data[props.childrenProp]) {
+      // Recursively check nested objects
+      if (hasSearchedElement(child, nestedLevel + 1)) {
+        return true;
+      }
+    }
+  }
+
+  // If no match is found, return false
+  return false;
+};
+
+onMounted(() => {
+  if (props.searchedProp && hasSearchedElement(props.data)) {
+    openCollapse();
+  }
 });
 </script>
 
@@ -171,10 +210,11 @@ const isSelectedRow = computed(() => {
   overflow-wrap: break-word;
 
   &__actions {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: var(--spacing-xs);
+    .wt-tree-table-td__content {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
   }
 
   &__icon-wrapper {
