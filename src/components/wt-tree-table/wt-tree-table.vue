@@ -90,6 +90,7 @@
 
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue';
+
 import { useWtTable } from '../../composables/useWtTable/useWtTable.ts';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
 import type { TableHeader } from '../wt-table/types/table-header.js';
@@ -250,11 +251,11 @@ const handleSelection = (row, select) => {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss' as *;
 
 .wt-tree-table {
   @extend %wt-scrollbar;

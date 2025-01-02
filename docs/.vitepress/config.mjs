@@ -30,6 +30,13 @@ export default defineConfig({
     ssr: {
       noExternal: ['@vuelidate/core', 'vue-multiselect', 'webitel-sdk'],
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern', // or "modern-compiler", "legacy",
+        },
+      },
+    },
     plugins: [
       nodePolyfills({
         globals: {
