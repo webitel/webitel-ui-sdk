@@ -5,7 +5,8 @@
 </template>
 
 <style scoped lang="scss">
-@import '../../../../../../src/components/wt-chip/wt-chip.scss';
+@use '../../../../../../src/components/wt-chip/wt-chip.scss';
+
 .my-own-chip {
   @extend .wt-chip;
 }

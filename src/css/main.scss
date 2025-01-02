@@ -1,7 +1,8 @@
-@import 'styleguide/styleguide';
-@import 'styleguide/display-helpers/display-helpers';
-@import 'pages/card-page';
-@import 'pages/table-page';
+@forward 'styleguide/styleguide';
+@use 'styleguide/styleguide' as *;
+@use 'pages/card-page';
+@use 'pages/table-page';
+
 
 @include wt-placeholder;
 

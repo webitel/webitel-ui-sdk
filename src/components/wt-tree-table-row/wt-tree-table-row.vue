@@ -112,6 +112,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 
+
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
 import type { TableHeader } from '../wt-table/types/table-header.ts';
@@ -199,7 +200,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss' as *;
 
 .wt-tree-table-td {
   @extend %typo-body-1;

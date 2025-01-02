@@ -21,6 +21,8 @@ export default {};
 
 <style lang="scss" scoped>
 // https://codepen.io/aaroniker/pen/omvYNZ
+@use "sass:math";
+
 .wt-loader--md {
   position: relative;
   width: var(--loader-size);
@@ -53,7 +55,7 @@ export default {};
       stroke-width: 10px;
       stroke-linejoin: round;
       stroke-linecap: round;
-      stroke-dasharray: (256 / 4 * 3) (256 / 4) (256 / 4 * 3) (256 / 4);
+      stroke-dasharray:  math.div(256, 4) * 3 math.div(256, 4) math.div(256, 4) * 3 math.div(256, 4);
       stroke-dashoffset: 0;
     }
   }

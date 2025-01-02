@@ -155,13 +155,13 @@ export default {
   ],
   props: {
     // vue 3
-    modelValue: {},
+    // modelValue: {},
 
     // vue 2 fallback
     value: {
-      default: (props) => {
-        return props.modelValue;
-      },
+      // default: (props) => {
+      //   return props.modelValue;
+      // },
     },
 
     multiple: {
@@ -284,11 +284,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import './multiselect.scss';
+@use './multiselect.scss' as *;
 
 .wt-select {
   width: 100%;

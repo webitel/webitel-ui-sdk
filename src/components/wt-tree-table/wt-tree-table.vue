@@ -257,11 +257,11 @@ const handleSelection = (row, select) => {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss' as *;
 
 .wt-tree-table {
   @extend %wt-scrollbar;

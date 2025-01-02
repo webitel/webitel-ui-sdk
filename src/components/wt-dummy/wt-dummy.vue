@@ -25,6 +25,7 @@
 
 <script setup>
 import { computed } from 'vue';
+
 import dummyDark from '../../assets/components/molecules/wt-dummy/dummyDark.svg';
 import dummyLight from '../../assets/components/molecules/wt-dummy/dummyLight.svg';
 
@@ -62,11 +63,11 @@ const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-dummy {
   display: flex;
