@@ -1,9 +1,9 @@
 import vue from '@vitejs/plugin-vue';
-import {resolve} from 'path';
+import { resolve } from 'path';
+import { defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
-import {defineConfig, loadEnv} from 'vite';
-import {nodePolyfills} from 'vite-plugin-node-polyfills';
-import {viteStaticCopy} from 'vite-plugin-static-copy';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 
 // https://vitejs.dev/config/
@@ -22,7 +22,7 @@ export default ({ mode }) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ['vue'],
+        external: ['vue', '@webitel/fonts'],
         output: {
           // Provide global variables to use in the UMD build
           // for externalized deps
@@ -38,7 +38,9 @@ export default ({ mode }) => {
       },
     },
     define: {
-      'process.env': JSON.parse(JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_')),
+      'process.env': JSON.parse(
+        JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_'),
+      ),
     },
     server: {
       port: 8080,
@@ -91,6 +93,29 @@ export default ({ mode }) => {
       },
       environment: 'happy-dom',
       setupFiles: ['./tests/config/config.js'],
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern', // or "modern-compiler", "legacy",
+          sassOptions: {
+            quietDeps: true,
+          },
+          // DETAILED ANSWER FOR THIS STRANGE STRUCTURE
+          // FOR additionalData CAN BE FOUND AT THE LINK https://webitel.atlassian.net/browse/WTEL-5778?focusedCommentId=647516
+          additionalData: (content, filename) => {
+            // Suppress warnings for specific files or packages
+            if (/node_modules\/plyr/.test(filename)) {
+              return `
+              @import "plyr/src/sass/plyr.scss";
+              /* suppress warnings for this file */
+              $disable-import-warning: true;
+            `;
+            }
+            return content;
+          },
+        },
+      },
     },
   });
 };

@@ -41,7 +41,8 @@ const queryToSortAdapter = (order) => {
   }
 };
 
-const encodeSortQuery = ({ column, order }) => `${sortToQueryAdapter(order)}${column.field}`;
+const encodeSortQuery = ({ column, order }) =>
+  `${sortToQueryAdapter(order)}${column.field}`;
 
 const decodeSortQuery = ({ value }) => {
   const sort = queryToSortAdapter(value.slice(0, 1));

@@ -1,5 +1,4 @@
 <script setup>
-
 import { ref } from 'vue';
 
 const size = ref(10);
@@ -22,6 +21,4 @@ function callAlert(value) {
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

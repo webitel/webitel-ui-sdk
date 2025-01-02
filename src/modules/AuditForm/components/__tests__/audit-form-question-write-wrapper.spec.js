@@ -25,8 +25,12 @@ describe('AuditFormQuestionWriteWrapper', () => {
         v,
       },
     });
-    wrapper.findComponent({ name: 'wt-switcher' }).vm.$emit('change', !question.required);
-    expect(wrapper.emitted()['change:question'][0][0].required).toBe(!question.required);
+    wrapper
+      .findComponent({ name: 'wt-switcher' })
+      .vm.$emit('change', !question.required);
+    expect(wrapper.emitted()['change:question'][0][0].required).toBe(
+      !question.required,
+    );
   });
   it('correctly changes question type to Score', () => {
     const question = {};
@@ -40,7 +44,9 @@ describe('AuditFormQuestionWriteWrapper', () => {
       .find('.audit-form-question-write-content-question')
       .findComponent({ name: 'wt-select' })
       .vm.$emit('input', { value: EngineAuditQuestionType.Score });
-    expect(wrapper.emitted()['change:question'][0][0]).toEqual(generateQuestionScoreSchema());
+    expect(wrapper.emitted()['change:question'][0][0]).toEqual(
+      generateQuestionScoreSchema(),
+    );
   });
   it('correctly changes question type to Options', () => {
     const question = {};
@@ -54,6 +60,8 @@ describe('AuditFormQuestionWriteWrapper', () => {
       .find('.audit-form-question-write-content-question')
       .findComponent({ name: 'wt-select' })
       .vm.$emit('input', { value: EngineAuditQuestionType.Option });
-    expect(wrapper.emitted()['change:question'][0][0]).toEqual(generateQuestionOptionsSchema());
+    expect(wrapper.emitted()['change:question'][0][0]).toEqual(
+      generateQuestionOptionsSchema(),
+    );
   });
 });

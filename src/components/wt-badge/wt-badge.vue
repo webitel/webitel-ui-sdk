@@ -9,7 +9,7 @@
       :alt="iconBadge"
       :src="iconBadgePic"
       class="wt-badge__pic"
-    >
+    />
   </aside>
 </template>
 
@@ -53,11 +53,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-
 .wt-badge {
   position: absolute;
   top: 0;

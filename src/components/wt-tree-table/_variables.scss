@@ -1,0 +1,19 @@
+:root {
+  --wt-tree-table-col-min-witdh: var(--table-col-min-width);
+
+  --wt-tree-table-head-sort-arrow-margin: var(--table-head-sort-arrow-margin);
+  --wt-tree-table-head-border: var(--table-head-border);
+
+  --wt-tree-table-min-height: var(--table-min-height);
+  --wt-tree-table-column-gap: var(--table-column-gap);
+  --wt-tree-table-row-padding: var(--table-row-padding);
+
+  --wt-tree-table-head-border-color: var(--wt-table-head-border-color);
+  --wt-tree-table-head-background-color: var(--wt-table-head-background-color);
+  --wt-tree-table-primary-color: var(--wt-table-primary-color);
+  --wt-tree-table-zebra-color: var(--wt-table-zebra-color);
+}
+
+:root.theme--dark {
+  --wt-tree-table-head-border-color: var(--wt-table-head-border-color);
+}

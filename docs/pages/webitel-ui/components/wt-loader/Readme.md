@@ -7,11 +7,13 @@ import ExampleSmLoaderDifferentColors from './examples/example-sm-loader-differe
 # WtLoader
 
 ## Props
+
 ::: raw
 <Docs/>
 :::
 
 ## Example Loader Different Sizes
+
 ::: raw
 <ExampleLoaderDifferentSizes/>
 :::
@@ -21,6 +23,7 @@ import ExampleSmLoaderDifferentColors from './examples/example-sm-loader-differe
 :::
 
 ## Example Sm Loader Different Colors
+
 ::: raw
 <ExampleSmLoaderDifferentColors/>
 :::
@@ -28,4 +31,3 @@ import ExampleSmLoaderDifferentColors from './examples/example-sm-loader-differe
 ::: details Code
 <<< ./examples/example-sm-loader-different-colors.vue
 :::
-

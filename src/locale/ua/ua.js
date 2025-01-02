@@ -72,6 +72,7 @@ export default {
     more: 'Більше',
     read: 'Читати',
     create: 'Створити',
+    draggable: 'Перетягнути',
   },
   vocabulary: {
     language: 'Мова',
@@ -289,7 +290,8 @@ export default {
     isRegExpMatched: 'Пароль має відповідати регулярному виразу:',
     regExpValidator: 'Не правильний регулярний вираз',
     domainValidator: 'Невірний домен',
-    decimalValidator: 'Кількість десяткових знаків не повинна бути більше { count }',
+    decimalValidator:
+      'Кількість десяткових знаків не повинна бути більше { count }',
     integer: 'Поле повинно містити лише цілі числа',
   },
   webitelUI: {
@@ -380,7 +382,8 @@ export default {
     },
     deleteConfirmationPopup: {
       title: 'Підтвердіть видалення',
-      askingAlert: 'Ви впевнені, що хочете видалити {subject}? Ця дія не може бути скасована.',
+      askingAlert:
+        'Ви впевнені, що хочете видалити {subject}? Ця дія не може бути скасована.',
       tableAskingAlert:
         'Ви впевнені, що хочете\n видалити {count} запис? | Ви впевнені, що хочете\n видалити {count} записів?',
       deleteAll: 'ВСІ',
@@ -402,7 +405,8 @@ export default {
       },
       statusSelectErrorPopup: {
         title: 'Увага',
-        message: 'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
+        message:
+          'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
       },
     },
     saveFailedPopup: {

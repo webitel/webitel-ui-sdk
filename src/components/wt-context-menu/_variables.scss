@@ -4,7 +4,9 @@
   --wt-context-menu-background-color: var(--content-wrapper-color);
   --wt-context-menu-option-text-color: var(--text-main-color);
   --wt-context-menu-option-background-hover-color: var(--dp-24-surface-color);
-  --wt-context-menu-option-background-disabled-color: var(--dp-14-surface-color);
+  --wt-context-menu-option-background-disabled-color: var(
+    --dp-14-surface-color
+  );
   --wt-context-menu-option-text-disabled-color: var(--grey-lighten-3);
 }
 

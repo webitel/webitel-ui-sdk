@@ -110,6 +110,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../../../css/main.scss';
+
 .filter-from-to {
   &:hover > .wt-label {
     color: var(--form-label--hover-color);
@@ -133,7 +135,7 @@ export default {
 
 .filter-from-to__input-wrapper {
   &:focus-within .wt-label {
-    color: var(--form-label--active-color)
+    color: var(--form-label--active-color);
   }
 
   .filter-from-to-input {

@@ -17,7 +17,9 @@ export default {
         if (typeof newTag === 'string') {
           return this.options.some((elem) => elem === newTag);
         }
-        return this.options.some((elem) => elem[this.trackBy] === newTag[this.trackBy]);
+        return this.options.some(
+          (elem) => elem[this.trackBy] === newTag[this.trackBy],
+        );
       };
 
       if (isTagExist(tag)) return;

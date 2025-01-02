@@ -1,5 +1,5 @@
 <script setup>
-import  { ref } from 'vue';
+import { ref } from 'vue';
 
 const tabs = [
   {
@@ -28,6 +28,4 @@ const current = ref(tabs[0]);
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

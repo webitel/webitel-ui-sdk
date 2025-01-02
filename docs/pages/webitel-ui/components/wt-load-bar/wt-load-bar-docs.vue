@@ -1,7 +1,5 @@
 <template>
-  <component-props
-    :properties="properties"
-  />
+  <component-props :properties="properties" />
 </template>
 
 <script>
@@ -32,5 +30,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

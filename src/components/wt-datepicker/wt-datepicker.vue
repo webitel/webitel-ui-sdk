@@ -46,14 +46,10 @@
         />
       </template>
       <template #arrow-left>
-        <wt-icon-btn
-          icon="arrow-left"
-        />
+        <wt-icon-btn icon="arrow-left" />
       </template>
       <template #arrow-right>
-        <wt-icon-btn
-          icon="arrow-right"
-        />
+        <wt-icon-btn icon="arrow-right" />
       </template>
       <template
         v-if="isDateTime"
@@ -78,12 +74,12 @@
 </template>
 
 <script setup>
-import VueDatepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+
+import VueDatepicker from '@vuepic/vue-datepicker';
 import { computed, ref } from 'vue';
 
 const props = defineProps({
-
   /**
    * [`'date'`, `'datetime'`]
    * */
@@ -150,11 +146,11 @@ const requiredLabel = computed(() => {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {

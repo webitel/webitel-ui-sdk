@@ -1,16 +1,8 @@
 <template>
-  <component-model
-    event="change"
-  />
-  <component-props
-    :properties="properties"
-  />
-  <component-events
-    :events="events"
-  />
-  <component-slots
-    :slots="slots"
-  />
+  <component-model event="change" />
+  <component-props :properties="properties" />
+  <component-events :events="events" />
+  <component-slots :slots="slots" />
 </template>
 
 <script>
@@ -56,7 +48,11 @@ export default {
       {
         value: 'change',
         params: [
-          { name: 'value', type: 'Boolean', description: 'Returns inverted value' },
+          {
+            name: 'value',
+            type: 'Boolean',
+            description: 'Returns inverted value',
+          },
         ],
       },
     ],
@@ -74,5 +70,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

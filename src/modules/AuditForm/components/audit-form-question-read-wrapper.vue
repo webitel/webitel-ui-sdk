@@ -76,8 +76,10 @@ const props = defineProps({
 const emit = defineEmits(['change:result', 'activate']);
 
 const QuestionTypeComponent = computed(() => {
-  if (props.question.type === EngineAuditQuestionType.Option) return AuditFormQuestionOptions;
-  if (props.question.type === EngineAuditQuestionType.Score) return AuditFormQuestionScore;
+  if (props.question.type === EngineAuditQuestionType.Option)
+    return AuditFormQuestionOptions;
+  if (props.question.type === EngineAuditQuestionType.Score)
+    return AuditFormQuestionScore;
   return null;
 });
 
