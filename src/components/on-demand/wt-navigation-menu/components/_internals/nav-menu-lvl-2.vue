@@ -28,7 +28,7 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import '../../css/nav-menu';
+@use '../../css/nav-menu';
 
 .nav-menu-lvl-2 {
   @extend %wt-scrollbar;

@@ -110,7 +110,7 @@ const height = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-image {
   display: flex;
