@@ -77,7 +77,7 @@
       :children-prop="childrenProp"
       :nesting-level="childLevel"
       :searched-prop="searchedProp"
-      @opened-collapse="openCollapse"
+      @expanded-collapse="openCollapse"
       @update:selected="
         $emit('update:selected', {
           data: $event.data,
@@ -111,7 +111,6 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-
 
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
@@ -152,7 +151,7 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(['update:selected', 'opened-collapse']);
+const emit = defineEmits(['update:selected', 'expanded-collapse']);
 
 const collapsed = ref(true);
 const lineCount = computed(() => {
@@ -168,7 +167,7 @@ const isSelectedRow = computed(() => {
 
 const openCollapse = () => {
   collapsed.value = false;
-  emit('opened-collapse');
+  emit('expanded-collapse');
 };
 
 const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
