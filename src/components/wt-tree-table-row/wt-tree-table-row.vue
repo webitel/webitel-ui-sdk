@@ -1,8 +1,18 @@
 <template>
-  <tr class="wt-tree-table-row" :class="[{ 'wt-tree-table-row--alternate': rowPosition % 2 }]">
-    <td v-for="(col, headerKey) of dataHeaders" :key="headerKey" class="wt-tree-table-td">
+  <tr
+    class="wt-tree-table-row"
+    :class="[{ 'wt-tree-table-row--alternate': rowPosition % 2 }]"
+  >
+    <td
+      v-for="(col, headerKey) of dataHeaders"
+      :key="headerKey"
+      class="wt-tree-table-td"
+    >
       <div class="wt-tree-table-td__content">
-        <div v-if="!headerKey" class="wt-tree-table-td__icon-wrapper">
+        <div
+          v-if="!headerKey"
+          class="wt-tree-table-td__icon-wrapper"
+        >
           <div
             v-for="treeLine in lineCount"
             :key="treeLine"
@@ -31,15 +41,26 @@
             @click="collapsed = !collapsed"
           />
         </div>
-        <slot :index="rowPosition" :item="data" :name="col.value">
+        <slot
+          :index="rowPosition"
+          :item="data"
+          :name="col.value"
+        >
           {{ data[col.value] }}
         </slot>
       </div>
     </td>
 
-    <td v-if="gridActions" class="wt-tree-table-td__actions">
+    <td
+      v-if="gridActions"
+      class="wt-tree-table-td__actions"
+    >
       <div class="wt-tree-table-td__content">
-        <slot :index="rowPosition" :item="data" name="actions" />
+        <slot
+          :index="rowPosition"
+          :item="data"
+          name="actions"
+        />
       </div>
     </td>
   </tr>
@@ -55,6 +76,8 @@
       :selected-elements="selectedElements"
       :children-prop="childrenProp"
       :nesting-level="childLevel"
+      :searched-prop="searchedProp"
+      @opened-collapse="openCollapse"
       @update:selected="
         $emit('update:selected', {
           data: $event.data,
@@ -62,23 +85,36 @@
         })
       "
     >
-      <template v-for="(col, headerKey) of dataHeaders" :key="headerKey" #[col.value]="{ item }">
-        <slot :index="rowPosition" :item="item" :name="col.value">
+      <template
+        v-for="(col, headerKey) of dataHeaders"
+        :key="headerKey"
+        #[col.value]="{ item }"
+      >
+        <slot
+          :index="rowPosition"
+          :item="item"
+          :name="col.value"
+        >
           <div>{{ item[col.value] }}</div>
         </slot>
       </template>
       <template #actions="{ item }">
-        <slot :index="rowPosition" :item="item" name="actions" />
+        <slot
+          :index="rowPosition"
+          :item="item"
+          name="actions"
+        />
       </template>
     </wt-tree-table-row>
   </template>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import WtCheckbox from "../wt-checkbox/wt-checkbox.vue";
-import WtIconBtn from "../wt-icon-btn/wt-icon-btn.vue";
-import type { TableHeader } from "../wt-table/types/table-header.ts";
+import { computed, onMounted, ref } from 'vue';
+
+import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
+import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
+import type { TableHeader } from '../wt-table/types/table-header.ts';
 
 const props = withDefaults(
   defineProps<{
@@ -102,15 +138,20 @@ const props = withDefaults(
      * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
      */
     nestingLevel?: number;
+    /**
+     * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
+     */
+    searchedProp?: string;
   }>(),
   {
     selectable: false,
     gridActions: true,
     nestingLevel: 0,
+    searchedProp: 'searched',
   },
 );
 
-defineEmits(["update:selected"]);
+const emit = defineEmits(['update:selected', 'opened-collapse']);
 
 const collapsed = ref(true);
 const lineCount = computed(() => {
@@ -123,10 +164,42 @@ const childLevel = computed(() => {
 const isSelectedRow = computed(() => {
   return props.selectedElements.includes(props.data);
 });
+
+const openCollapse = () => {
+  collapsed.value = false;
+  emit('opened-collapse');
+};
+
+const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
+  // Check if the object itself has searched
+  if (data[props.searchedProp] && nestedLevel) {
+    return true;
+  }
+
+  // Check if the object has children
+  if (Array.isArray(data[props.childrenProp])) {
+    // Iterate through the array
+    for (const child of data[props.childrenProp]) {
+      // Recursively check nested objects
+      if (hasSearchedElement(child, nestedLevel + 1)) {
+        return true;
+      }
+    }
+  }
+
+  // If no match is found, return false
+  return false;
+};
+
+onMounted(() => {
+  if (props.searchedProp && hasSearchedElement(props.data)) {
+    openCollapse();
+  }
+});
 </script>
 
 <style lang="scss" scoped>
-@import "../../../src/css/main.scss";
+@import '../../../src/css/main.scss';
 
 .wt-tree-table-td {
   @extend %typo-body-1;
@@ -137,10 +210,11 @@ const isSelectedRow = computed(() => {
   overflow-wrap: break-word;
 
   &__actions {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: var(--spacing-xs);
+    .wt-tree-table-td__content {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
   }
 
   &__icon-wrapper {
