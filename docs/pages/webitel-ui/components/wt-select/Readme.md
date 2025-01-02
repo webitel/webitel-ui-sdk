@@ -4,6 +4,7 @@ import ExampleMultipleSelect from './examples/example-multiple-select.vue';
 import ExampleDisabledSelect from './examples/example-disabled-select.vue';
 import ExampleInvalidSelect from './examples/example-invalid-select.vue';
 import ExampleCustomValuesSelect from './examples/example-custom-values-select.vue';
+import ExampleValueFromOptionsByPropSelect from './examples/example-value-from-options-by-prop-select.vue';
 </script>
 
 # WtSelect
@@ -100,6 +101,16 @@ import ExampleCustomValuesSelect from './examples/example-custom-values-select.v
 
 ::: details Code
 <<< ./examples/example-custom-values-select.vue
+:::
+
+## Example Select With Value From Options By Prop
+
+::: raw
+<ExampleValueFromOptionsByPropSelect/>
+:::
+
+::: details Code
+<<< ./examples/example-value-from-options-by-prop-select.vue
 :::
 
 ## How to close Select programmatically?

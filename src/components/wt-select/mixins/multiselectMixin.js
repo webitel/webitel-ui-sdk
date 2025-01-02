@@ -87,7 +87,7 @@ export default {
       if (!this.isValue) return '';
 
       if (this.useValueFromOptionsByProp) {
-        const valueFromOptions = this.cachedOptionsMap[this.useValueFromOptionsByProp];
+        const valueFromOptions = this.cachedOptionsMap[this.value];
         if (valueFromOptions) return valueFromOptions;
       }
 
