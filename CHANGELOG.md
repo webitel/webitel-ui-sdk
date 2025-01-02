@@ -1,3 +1,14 @@
+## [v24.12.39] - 2025-01-02
+### :sparkles: New Features
+- [`9195e13`](https://github.com/webitel/webitel-ui-sdk/commit/9195e1386b2b101fd2a046f2697f20f8d63c13aa) - icons for source added [WTEL-5512](https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :bug: Bug Fixes
+- [`24918a2`](https://github.com/webitel/webitel-ui-sdk/commit/24918a2c40ade634b98c80673d5767b8db9e52f9) - fixed scss deprecation warning when running lib *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`a8ec78b`](https://github.com/webitel/webitel-ui-sdk/commit/a8ec78bc0412829fe400cefaa58d84d061aef986) - merge with master [WTEL-5512](https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.37] - 2025-01-02
 ### :bug: Bug Fixes
 - [`f909155`](https://github.com/webitel/webitel-ui-sdk/commit/f909155cac0a29ebd30c24a22febf12ae9da311d) - wt-select value prop [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -678,3 +689,4 @@
 [v24.12.35]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.34...v24.12.35
 [v24.12.36]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.35...v24.12.36
 [v24.12.37]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.36...v24.12.37
+[v24.12.39]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.38...v24.12.39
