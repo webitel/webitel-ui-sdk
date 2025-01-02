@@ -101,6 +101,8 @@ export default ({ mode }) => {
           sassOptions: {
             quietDeps: true,
           },
+          // DETAILED ANSWER FOR THIS STRANGE STRUCTURE
+          // FOR additionalData CAN BE FOUND AT THE LINK https://webitel.atlassian.net/browse/WTEL-5778?focusedCommentId=647516
           additionalData: (content, filename) => {
             // Suppress warnings for specific files or packages
             if (/node_modules\/plyr/.test(filename)) {
