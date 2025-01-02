@@ -154,7 +154,15 @@ export default {
     taggableMixin,
   ],
   props: {
-    value: {},
+    // vue 3
+    // modelValue: {},
+
+    // vue 2 fallback
+    value: {
+      // default: (props) => {
+      //   return props.modelValue;
+      // },
+    },
 
     multiple: {
       type: Boolean,
@@ -184,7 +192,8 @@ export default {
   emits: [
     'reset',
     'search-change',
-    'input',
+    'input', // vue 2
+    'update:modelValue', // vue 3
     'closed',
     'custom-value', // fires when allowCustomValues and new customValue is added
   ],

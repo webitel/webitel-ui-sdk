@@ -49,9 +49,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * pass "value" prop as string, receive @input event with string,
+     * but pass options as objects and calculate value from options by this prop
+     */
+    useValueFromOptionsByProp: {
+      type: String,
+      default: '',
+    },
   },
   data: () => ({
     apiOptions: [],
+    cachedOptionsMap: {}, // is needed for props.useValueFromOptionsByProp
     isLoading: false,
     defaultOptionLabel: 'name',
 
@@ -73,9 +82,16 @@ export default {
     showIntersectionObserver() {
       return this.isApiMode && !this.isLoading && this.apiOptions.length;
     },
+    // vue-multiselect doesn't show placeholder if value is empty object
     selectValue() {
-      // vue-multiselect doesn't show placeholder if value is empty object
-      return this.isValue ? this.value : '';
+      if (!this.isValue) return '';
+
+      if (this.useValueFromOptionsByProp) {
+        const valueFromOptions = this.cachedOptionsMap[this.value];
+        if (valueFromOptions) return valueFromOptions;
+      }
+
+      return this.value;
     },
 
     selectOptions() {
@@ -139,7 +155,11 @@ export default {
     },
 
     input(value) {
-      this.$emit('input', value);
+      const emittedValue = this.useValueFromOptionsByProp
+        ? value[this.useValueFromOptionsByProp]
+        : value;
+      this.$emit('input', emittedValue); // vue 2
+      this.$emit('update:model-value', emittedValue); // vue 3
     },
 
     close(event) {
@@ -153,6 +173,16 @@ export default {
     disabled() {
       // load options if becomes enabled
       if (!this.disabled) this.fetchOptions();
+    },
+    options: {
+      handler() {
+        if (this.trackBy === null) return; // then, options are primitives
+
+        for (const opt of this.options) {
+          this.cachedOptionsMap[opt[this.useValueFromOptionsByProp || this.trackBy]] = opt;
+        }
+      },
+      immediate: true,
     },
   },
 

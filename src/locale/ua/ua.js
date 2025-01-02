@@ -72,6 +72,7 @@ export default {
     more: 'Більше',
     read: 'Читати',
     create: 'Створити',
+    draggable: 'Перетягнути',
   },
   vocabulary: {
     language: 'Мова',
