@@ -30,7 +30,9 @@ describe('WtNavigationBar', () => {
       props: { nav },
     });
     const navLinksLen = nav.filter((nav) => !nav.subNav).length;
-    expect(wrapper.findAll('.wt-navigation-bar__nav-item-link').length).toBe(navLinksLen);
+    expect(wrapper.findAll('.wt-navigation-bar__nav-item-link').length).toBe(
+      navLinksLen,
+    );
   });
 
   it('renders navigation expansions with subNav inside it', async () => {
@@ -43,7 +45,9 @@ describe('WtNavigationBar', () => {
     wrapper.find('.wt-navigation-bar__nav-expansion').trigger('click');
     await wrapper.vm.$nextTick();
     const navExpansion = nav.find((nav) => nav.subNav).subNav.length;
-    expect(wrapper.findAll('.wt-navigation-bar__nav-item-link--subnav').length).toBe(navExpansion);
+    expect(
+      wrapper.findAll('.wt-navigation-bar__nav-item-link--subnav').length,
+    ).toBe(navExpansion);
   });
 
   it('correctly computes subNav nested routes', async () => {
@@ -56,7 +60,9 @@ describe('WtNavigationBar', () => {
     await wrapper.find('.wt-navigation-bar__nav-expansion').trigger('click');
     await wrapper.vm.$nextTick();
     expect(
-      wrapper.findComponent('.wt-navigation-bar__nav-item-link--subnav').attributes('href'),
+      wrapper
+        .findComponent('.wt-navigation-bar__nav-item-link--subnav')
+        .attributes('href'),
     ).toBe('/2/3');
   });
 });

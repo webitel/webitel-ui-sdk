@@ -33,8 +33,12 @@ const store = useStore();
 
 const localSize = ref(0);
 
-const page = computed(() => store.getters[`${props.namespace}/GET_FILTER`](pageFilterName));
-const size = computed(() => store.getters[`${props.namespace}/GET_FILTER`](sizeFilterName));
+const page = computed(() =>
+  store.getters[`${props.namespace}/GET_FILTER`](pageFilterName),
+);
+const size = computed(() =>
+  store.getters[`${props.namespace}/GET_FILTER`](sizeFilterName),
+);
 
 function setFilter(payload) {
   return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
@@ -58,6 +62,4 @@ watch(
 );
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

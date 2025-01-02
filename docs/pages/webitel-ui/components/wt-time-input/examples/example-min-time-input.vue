@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 
 const value = ref(25);
-
 </script>
 
 <template>
@@ -14,6 +13,4 @@ const value = ref(25);
   />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

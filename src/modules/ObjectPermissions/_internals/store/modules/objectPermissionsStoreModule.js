@@ -40,9 +40,9 @@ const actions = {
     }
     const changes = [
       {
-      grantee: +item.grantee.id,
-      grants: want,
-      }
+        grantee: +item.grantee.id,
+        grants: want,
+      },
     ];
     try {
       await context.dispatch('PATCH_ITEM_API', {
@@ -57,9 +57,9 @@ const actions = {
     console.info(role);
     const changes = [
       {
-      grantee: +role.id,
-      grants: 'r',
-      }
+        grantee: +role.id,
+        grants: 'r',
+      },
     ];
     try {
       await context.dispatch('PATCH_ITEM_API', {
@@ -71,14 +71,10 @@ const actions = {
     }
   },
 
-  GET_LIST_API: (
-    context,
-    payload,
-  ) => context.dispatch('api/GET_OBJECT_PERMISSIONS_LIST', payload),
-  PATCH_ITEM_API: (
-    context,
-    payload,
-  ) => context.dispatch('api/PATCH_OBJECT_PERMISSIONS_ITEM', payload),
+  GET_LIST_API: (context, payload) =>
+    context.dispatch('api/GET_OBJECT_PERMISSIONS_LIST', payload),
+  PATCH_ITEM_API: (context, payload) =>
+    context.dispatch('api/PATCH_OBJECT_PERMISSIONS_ITEM', payload),
 };
 
 export default () => {

@@ -30,6 +30,13 @@ export default defineConfig({
     ssr: {
       noExternal: ['@vuelidate/core', 'vue-multiselect', 'webitel-sdk'],
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern', // or "modern-compiler", "legacy",
+        },
+      },
+    },
     plugins: [
       nodePolyfills({
         globals: {
@@ -68,7 +75,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-edit-link#site-level-config
     editLink: {
       // https://vitepress.dev/reference/runtime-api#usedata
-      pattern: 'https://github.com/webitel/webitel-ui-sdk/tree/master/docs/:path',
+      pattern:
+        'https://github.com/webitel/webitel-ui-sdk/tree/master/docs/:path',
     },
   },
 });

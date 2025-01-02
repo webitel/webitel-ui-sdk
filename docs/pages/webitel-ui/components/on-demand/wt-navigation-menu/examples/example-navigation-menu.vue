@@ -1,9 +1,11 @@
 <template>
-  <wt-navigation-menu :icons="['lookups']" :nav="navItems" />
+  <wt-navigation-menu
+    :icons="['lookups']"
+    :nav="navItems"
+  />
 </template>
 
 <script setup>
-
 const navItems = [
   {
     value: 'lookups',
@@ -24,5 +26,4 @@ const navItems = [
 ];
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

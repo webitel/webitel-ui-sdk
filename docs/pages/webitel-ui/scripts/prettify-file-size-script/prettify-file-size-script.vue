@@ -2,13 +2,15 @@
   <section class="scripts">
     <h2>prettifyFileSize</h2>
     <article class="script">
-      <p>prettifies bytes number to string size script: </p>
+      <p>prettifies bytes number to string size script:</p>
       <wt-input
         v-model="input"
-        style="max-width: 400px;"
+        style="max-width: 400px"
         label="Size"
       />
-      <div>Prettified size is: <strong>{{ output }}</strong></div>
+      <div>
+        Prettified size is: <strong>{{ output }}</strong>
+      </div>
     </article>
   </section>
 </template>
@@ -33,6 +35,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

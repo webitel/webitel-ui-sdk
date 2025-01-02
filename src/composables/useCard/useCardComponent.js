@@ -5,7 +5,8 @@ import { useRoute, useRouter } from 'vue-router';
 import { useCachedItemInstanceName } from '../useCachedItemInstanceName/useCachedItemInstanceName.js';
 
 export const useCardComponent = (params) => {
-  const { id,
+  const {
+    id,
     itemInstance,
     invalid,
 
@@ -13,7 +14,8 @@ export const useCardComponent = (params) => {
     addItem,
     updateItem,
     setId,
-    resetState } = params;
+    resetState,
+  } = params;
 
   const router = useRouter();
   const route = useRoute();
@@ -27,7 +29,9 @@ export const useCardComponent = (params) => {
   });
 
   const saveText = computed(() => {
-    return isNew.value || itemInstance.value._dirty ? t('reusable.save') : t('reusable.saved');
+    return isNew.value || itemInstance.value._dirty
+      ? t('reusable.save')
+      : t('reusable.saved');
   });
 
   const redirectToEdit = () => {
@@ -61,7 +65,7 @@ export const useCardComponent = (params) => {
     }
   }
 
-  function initialize(){
+  function initialize() {
     onMounted(() => {
       initializeCard();
     });
@@ -70,7 +74,6 @@ export const useCardComponent = (params) => {
       resetState();
     });
   }
-
 
   return {
     id,
@@ -83,7 +86,5 @@ export const useCardComponent = (params) => {
     save,
     initializeCard,
     initialize,
-  }
-}
-
-
+  };
+};

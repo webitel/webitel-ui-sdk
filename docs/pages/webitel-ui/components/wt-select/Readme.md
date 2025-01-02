@@ -4,6 +4,7 @@ import ExampleMultipleSelect from './examples/example-multiple-select.vue';
 import ExampleDisabledSelect from './examples/example-disabled-select.vue';
 import ExampleInvalidSelect from './examples/example-invalid-select.vue';
 import ExampleCustomValuesSelect from './examples/example-custom-values-select.vue';
+import ExampleValueFromOptionsByPropSelect from './examples/example-value-from-options-by-prop-select.vue';
 </script>
 
 # WtSelect
@@ -13,7 +14,7 @@ import ExampleCustomValuesSelect from './examples/example-custom-values-select.v
 ## Props
 
 | Prop              | Type     | Default     | Code                                                                       | Description                                                                                                                                                                             |
-|-------------------|----------|-------------|----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------- | -------- | ----------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | value             | Any      |             | `<wt-select :value="'my value'"></wt-select>`                              |                                                                                                                                                                                         |
 | options           | Array    | []          | `<wt-select :options="[1, 2, 3]"></wt-select>`                             |                                                                                                                                                                                         |
 | label             | String   | ''          | `<wt-select label="Label"></wt-select>`                                    |                                                                                                                                                                                         |
@@ -34,7 +35,7 @@ import ExampleCustomValuesSelect from './examples/example-custom-values-select.v
 ## Events
 
 | Value        | Params                                                                                               | Description                                                                                       |
-|--------------|------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| ------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | input        | `[{ name: 'value', type: ['String', 'Array'] }]`                                                     |                                                                                                   |
 | reset        | `[{ name: 'value', type: '[\'String\', \'Array\', \'Object\'] -- depends on value prop datatype' }]` | Emitted on "reset" icon click, along with "input" (input is emitted first) event with empty value |
 | closed       |                                                                                                      |                                                                                                   |
@@ -45,7 +46,7 @@ import ExampleCustomValuesSelect from './examples/example-custom-values-select.v
 ## Slots
 
 | Name        | Scope                                                                                                          | Description                            |
-|-------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| ----------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | label       | `[{ name: 'label' }]`                                                                                          | Custom label slot                      |
 | option      | `[{ name: 'option', description: 'option itself' },{ name: 'optionLabel', description: 'optionLabel prop' }]`  | Watch vue-multiselect option slot      |
 | singleLabel | `[{ name: 'option', description: 'option itself' },{ name: 'optionLabel', description: 'optionLabel prop' },]` | Watch vue-multiselect singleLabel slot |
@@ -102,12 +103,22 @@ import ExampleCustomValuesSelect from './examples/example-custom-values-select.v
 <<< ./examples/example-custom-values-select.vue
 :::
 
+## Example Select With Value From Options By Prop
+
+::: raw
+<ExampleValueFromOptionsByPropSelect/>
+:::
+
+::: details Code
+<<< ./examples/example-value-from-options-by-prop-select.vue
+:::
+
 ## How to close Select programmatically?
 
 [Issue](https://github.com/shentao/vue-multiselect/pull/947/files/05760bd1e92ce53353a1733aee054a996738f181)
 
 ```js
-closeSelect()
+closeSelect();
 {
   this.$refs['wt-select'].$refs['vue-multiselect'].deactivate(); // 'vue-multiselect' ref is always present
 }

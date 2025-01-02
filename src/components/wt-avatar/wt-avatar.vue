@@ -20,7 +20,7 @@
       :src="imgSrc"
       alt="avatar"
       class="wt-avatar__img"
-    >
+    />
   </div>
 </template>
 
@@ -61,7 +61,9 @@ const avatarLetters = computed(() => {
     .split(' ')
     .map((word) => word.at(0).toUpperCase())
     .join('');
-  return abbreviation.length > 2 ? abbreviation.at(0).concat(abbreviation.at(-1)) : abbreviation;
+  return abbreviation.length > 2
+    ? abbreviation.at(0).concat(abbreviation.at(-1))
+    : abbreviation;
 });
 
 const avatarLettersBackground = computed(() => {
@@ -119,11 +121,10 @@ const badgeColorVar = computed(() => {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-
 %wt-avatar-typo-xs {
   font-size: 10px;
 }

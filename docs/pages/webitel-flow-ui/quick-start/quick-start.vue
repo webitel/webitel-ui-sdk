@@ -29,20 +29,20 @@
 </template>
 
 <script>
-  export default {
-    name: 'QuickStart',
-  };
+export default {
+  name: 'QuickStart',
+};
 </script>
 
 <style lang="scss" scoped>
-  pre {
-    min-width: 600px;
-    width: 60%;
-    padding: 10px;
-    margin-right: 60px;
-    background: var(--contrast-color);
-    border-radius: var(--border-radius);
-    color: var(--main-color);
-    cursor: text;
-  }
+pre {
+  min-width: 600px;
+  width: 60%;
+  padding: 10px;
+  margin-right: 60px;
+  background: var(--contrast-color);
+  border-radius: var(--border-radius);
+  color: var(--main-color);
+  cursor: text;
+}
 </style>

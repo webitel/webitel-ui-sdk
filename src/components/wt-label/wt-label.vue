@@ -7,10 +7,7 @@
     class="wt-label"
   >
     <slot />
-    <wt-hint
-      v-if="hint"
-    >{{ hint }}
-    </wt-hint>
+    <wt-hint v-if="hint">{{ hint }} </wt-hint>
   </label>
 </template>
 
@@ -35,11 +32,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-label {
   @extend %typo-body-1;

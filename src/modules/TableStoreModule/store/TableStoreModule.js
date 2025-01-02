@@ -2,8 +2,7 @@ import {
   queryToSortAdapter,
   sortToQueryAdapter,
 } from '../../../scripts/sortQueryAdapters.js';
-import BaseStoreModule
-  from '../../../store/BaseStoreModules/BaseStoreModule.js';
+import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import FilterEvent from '../../Filters/enums/FilterEvent.enum.js';
 
 export default class TableStoreModule extends BaseStoreModule {
@@ -48,7 +47,8 @@ export default class TableStoreModule extends BaseStoreModule {
 
   actions = {
     // FIXME: maybe move to filters module?
-    SET_FILTER: (context, payload) => context.dispatch('filters/SET_FILTER', payload),
+    SET_FILTER: (context, payload) =>
+      context.dispatch('filters/SET_FILTER', payload),
 
     // FIXME: maybe move to filters module?
     ON_FILTER_EVENT: async (context, { event, payload }) => {
@@ -67,14 +67,16 @@ export default class TableStoreModule extends BaseStoreModule {
     // FIXME: maybe move to filters module?
     HANDLE_FILTERS_RESTORE: async (context, { fields, sort }) => {
       if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
-      if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
+      if (fields?.length)
+        await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
       return context.dispatch('LOAD_DATA_LIST');
     },
 
     // FIXME: maybe move to filters module?
     HANDLE_FILTER_RESET: async (context, { fields, sort }) => {
       if (sort) await context.dispatch('HANDLE_SORT_CHANGE', { value: sort });
-      if (fields?.length) await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
+      if (fields?.length)
+        await context.dispatch('HANDLE_FIELDS_CHANGE', { value: fields });
       return context.dispatch('LOAD_DATA_LIST');
     },
 
@@ -112,17 +114,19 @@ export default class TableStoreModule extends BaseStoreModule {
       const nextSort = queryToSortAdapter(value?.slice(0, 1) || '');
       const field = nextSort ? value.slice(1) : value;
 
-      const headers = context.state.headers.map(({ sort: currentSort, ...header }) => {
-        let sort;
+      const headers = context.state.headers.map(
+        ({ sort: currentSort, ...header }) => {
+          let sort;
 
-        if (field) {
-          sort = field === header.field ? nextSort : currentSort;
-        } else {
-          sort = nextSort; // null
-        }
+          if (field) {
+            sort = field === header.field ? nextSort : currentSort;
+          } else {
+            sort = nextSort; // null
+          }
 
-        return { ...header, sort };
-      });
+          return { ...header, sort };
+        },
+      );
 
       context.commit('SET', { path: 'headers', value: headers });
     },
@@ -133,10 +137,13 @@ export default class TableStoreModule extends BaseStoreModule {
 
       const params = context.getters.GET_LIST_PARAMS(query);
       try {
-        const { items = [], next = false } = await context.dispatch('api/GET_LIST', {
-          context,
-          params,
-        });
+        const { items = [], next = false } = await context.dispatch(
+          'api/GET_LIST',
+          {
+            context,
+            params,
+          },
+        );
 
         context.commit('SET', { path: 'dataList', value: items });
         context.commit('SET', { path: 'isNextPage', value: next });
@@ -159,7 +166,10 @@ export default class TableStoreModule extends BaseStoreModule {
       });
     },
 
-    PATCH_ITEM_PROPERTY: async (context, { item: _item, index, prop, value }) => {
+    PATCH_ITEM_PROPERTY: async (
+      context,
+      { item: _item, index, prop, value },
+    ) => {
       const item = _item || context.state.dataList[index];
 
       const { id, etag } = item;
@@ -198,7 +208,10 @@ export default class TableStoreModule extends BaseStoreModule {
         await context.dispatch('LOAD_DATA_LIST');
 
         /* if no items on current page after DELETE, move to prev page [WTEL-3793] */
-        if (!context.state.dataList.length && context.getters.FILTERS.page > 1) {
+        if (
+          !context.state.dataList.length &&
+          context.getters.FILTERS.page > 1
+        ) {
           await context.dispatch('SET_FILTER', {
             name: 'page',
             value: context.getters.FILTERS.page - 1,
@@ -216,7 +229,9 @@ export default class TableStoreModule extends BaseStoreModule {
     },
 
     DELETE_BULK: async (context, deleted) =>
-      Promise.allSettled(deleted.map((item) => context.dispatch('DELETE_SINGLE', item))),
+      Promise.allSettled(
+        deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
+      ),
 
     SET_SELECTED: (context, selected) => {
       context.commit('SET', { path: 'selected', value: selected });

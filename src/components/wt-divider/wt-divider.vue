@@ -1,5 +1,8 @@
 <template>
-  <hr class="wt-divider" :class="`wt-divider-${variant}`">
+  <hr
+    class="wt-divider"
+    :class="`wt-divider-${variant}`"
+  />
 </template>
 
 <script>
@@ -10,16 +13,15 @@ export default {
       type: String,
       default: 'horizontal',
     },
-  }
+  },
 };
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-
 .wt-divider {
   display: block;
   box-sizing: border-box;

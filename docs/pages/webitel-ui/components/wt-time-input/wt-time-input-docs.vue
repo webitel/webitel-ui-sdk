@@ -1,15 +1,8 @@
 <template>
-
   <component-model />
-  <component-props
-    :properties="properties"
-  />
-  <component-events
-    :events="events"
-  />
-  <component-slots
-    :slots="slots"
-  />
+  <component-props :properties="properties" />
+  <component-events :events="events" />
+  <component-slots :slots="slots" />
 </template>
 
 <script>
@@ -72,9 +65,7 @@ export default {
     events: [
       {
         value: 'input',
-        params: [
-          { name: 'value', type: 'Number' },
-        ],
+        params: [{ name: 'value', type: 'Number' }],
       },
       {
         value: 'PLUS ALL NATIVE INPUT EVENTS',
@@ -94,5 +85,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

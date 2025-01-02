@@ -14,6 +14,5 @@ import { tableActionsOrder } from '__lib__/components/wt-action-bar/WtActionBarA
 
 <style lang="scss" scoped>
 .example-table-action-bar {
-
 }
 </style>

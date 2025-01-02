@@ -1,7 +1,5 @@
 <template>
-  <component-slots
-    :slots="slots"
-  />
+  <component-slots :slots="slots" />
 </template>
 
 <script>
@@ -17,7 +15,8 @@ export default {
       },
       {
         name: 'title-wrapper',
-        description: 'headline direct child slot, but with search and actions slots available',
+        description:
+          'headline direct child slot, but with search and actions slots available',
       },
       {
         name: 'title',
@@ -39,5 +38,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

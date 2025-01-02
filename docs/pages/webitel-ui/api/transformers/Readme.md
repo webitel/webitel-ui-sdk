@@ -117,9 +117,9 @@ import { notify } from '@webitel/ui-sdk/src/api/transformers';
 // case 1
 
 const notificationCallback = ({
-                                // callback which actually emits event with received
-                                callback, 
-                              }) => {
+  // callback which actually emits event with received
+  callback,
+}) => {
   callback({ type: 'success', text: 'custom message' });
 };
 
@@ -139,11 +139,14 @@ Sanitize passed data.
 ```js
 import { sanitize } from '@webitel/ui-sdk/src/api/transformers';
 
-
 const fieldsToSend = ['field1', 'field2'];
 
 // => { field1: 'value1', field2: 'value2' }
-sanitize(fieldsToSend)({ field1: 'value1', field2: 'value2', field3: 'value3' });
+sanitize(fieldsToSend)({
+  field1: 'value1',
+  field2: 'value2',
+  field3: 'value3',
+});
 ```
 
 ## starToSearch
@@ -165,23 +168,24 @@ starToSearch('search')({ search: 'string*' });
 You can pass withContext option to pass context into transformer function as a second argument.
 
 example:
+
 ```js
 const context = {
-    value: '1'
-    // ...
-}
+  value: '1',
+  // ...
+};
 
 convert = () => {
-    return applyTransform({}, [
-      transformSchema
-    ], {
-      withContext: context,
-    })
-}
+  return applyTransform({}, [transformSchema], {
+    withContext: context,
+  });
+};
 ```
 
 How it passes context into transformer function:
+
 ```js
-transformer(result, withContext)
+transformer(result, withContext);
 ```
+
 That give you option to work with node context into transformer.

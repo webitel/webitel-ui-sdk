@@ -28,8 +28,16 @@
 </template>
 
 <script setup>
-import { autoPlacement, autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue';
+import {
+  autoPlacement,
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useFloating,
+} from '@floating-ui/vue';
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+
 import debounce from '../../scripts/debounce.js';
 import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions.js';
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
@@ -103,7 +111,11 @@ const { floatingStyles } = useFloating(activator, floating, {
   TOGGLE BECAUSE OF PERFORMANCE ISSUES, RELATED TO USAGE OF AUTO_UPDATE OF POSITIONS
   */
   whileElementsMounted: autoUpdate, // https://floating-ui.com/docs/vue#anchoring
-  middleware: [shift(), offset(4), props.placement === 'auto' ? autoPlacement() : flip()],
+  middleware: [
+    shift(),
+    offset(4),
+    props.placement === 'auto' ? autoPlacement() : flip(),
+  ],
 });
 
 useTooltipTriggerSubscriptions({
@@ -131,11 +143,11 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-tooltip {
   display: inline-block;

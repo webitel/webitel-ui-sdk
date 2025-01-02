@@ -20,7 +20,8 @@
         <span
           v-else
           class="wt-headline-nav__text"
-        >{{ singlePath.name }}</span>
+          >{{ singlePath.name }}</span
+        >
       </h1>
     </div>
   </nav>
@@ -44,11 +45,11 @@ const props = defineProps({
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-headline-nav {
   display: flex;

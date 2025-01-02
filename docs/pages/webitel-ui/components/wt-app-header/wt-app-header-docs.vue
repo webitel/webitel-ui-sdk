@@ -2,24 +2,16 @@
   <div>
     <section>
       <h2>App Header</h2>
-      <component-slots
-        :slots="headerSlots"
-      />
+      <component-slots :slots="headerSlots" />
     </section>
     <section>
       <h2>App Navigator</h2>
-      <component-props
-        :properties="appNavigatorProps"
-      />
+      <component-props :properties="appNavigatorProps" />
     </section>
     <section>
       <h2>Header Actions</h2>
-      <component-props
-        :properties="headerActionsProps"
-      />
-      <component-events
-        :events="headerActionsEvents"
-      />
+      <component-props :properties="headerActionsProps" />
+      <component-events :events="headerActionsEvents" />
     </section>
   </div>
 </template>
@@ -62,7 +54,7 @@ export default {
       },
       {
         value: 'buildInfo',
-        code: '<wt-user-actions :build-info="{ release: \'xx.xx\', build: \'yy-yy\' }"></wt-user-actions>',
+        code: "<wt-user-actions :build-info=\"{ release: 'xx.xx', build: 'yy-yy' }\"></wt-user-actions>",
         type: 'Object',
         description: `Build info object. Should have "release" and "build"
          string fields for representation.`,
@@ -85,6 +77,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

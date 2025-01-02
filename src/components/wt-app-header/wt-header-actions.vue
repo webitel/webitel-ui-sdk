@@ -4,7 +4,7 @@
       <template #activator>
         <wt-icon-btn
           v-clickaway="close"
-          :class="{'active': isOpened}"
+          :class="{ active: isOpened }"
           class="wt-header-actions__btn"
           icon="account"
           @click="isOpened = !isOpened"
@@ -22,14 +22,10 @@
           v-if="isHeader"
           class="wt-header-actions__header"
         >
-          <h3
-            class="wt-header-actions__name"
-          >
+          <h3 class="wt-header-actions__name">
             {{ userName }}
           </h3>
-          <p
-            class="wt-header-actions__account"
-          >
+          <p class="wt-header-actions__account">
             {{ userAccount }}
           </p>
         </header>
@@ -54,7 +50,9 @@
               <span>{{ $t('webitelUI.headerActions.settings') }}</span>
             </a>
           </li>
-          <li class="wt-header-actions__action wt-header-actions__action--logout">
+          <li
+            class="wt-header-actions__action wt-header-actions__action--logout"
+          >
             <a
               class="wt-header-actions__action__link"
               @click.prevent="logout"
@@ -133,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-header-actions {
   position: relative;

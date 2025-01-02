@@ -22,12 +22,8 @@
         />
       </div>
     </div>
-    <wt-expand-transition
-      v-show="opened"
-    >
-      <div
-        class="wt-expansion-panel-body"
-      >
+    <wt-expand-transition v-show="opened">
+      <div class="wt-expansion-panel-body">
         <slot />
       </div>
     </wt-expand-transition>
@@ -36,6 +32,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 
 const props = defineProps({
@@ -84,11 +81,11 @@ watch(
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-expansion-panel {
   display: flex;
@@ -121,7 +118,6 @@ watch(
 
     &--opened {
       transform: rotate(90deg);
-
     }
   }
 

@@ -47,9 +47,9 @@ describe('DeleteConfirmationPopup', () => {
         callback: vi.fn(),
       },
     });
-    expect(wrapper.find('.delete-confirmation-popup__content').text()).toContain(
-      deleteCount.toString(),
-    );
+    expect(
+      wrapper.find('.delete-confirmation-popup__content').text(),
+    ).toContain(deleteCount.toString());
   });
 
   it('yes button emitted close', async () => {

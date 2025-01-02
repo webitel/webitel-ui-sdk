@@ -1,15 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <wt-label
-    disabled
-  >
-    Disabled label
-  </wt-label>
+  <wt-label disabled> Disabled label </wt-label>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

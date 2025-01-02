@@ -16,7 +16,11 @@ import applyTransform, {
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const mediaService = new MediaFileServiceApiFactory(configuration, '', instance);
+const mediaService = new MediaFileServiceApiFactory(
+  configuration,
+  '',
+  instance,
+);
 
 const token = localStorage.getItem('access-token');
 const baseUrl = import.meta.env.VITE_API_URL;
@@ -28,7 +32,14 @@ const getMediaList = async (params) => {
   ]);
 
   try {
-    const response = await mediaService.searchMediaFile(page, size, search, sort, fields, id);
+    const response = await mediaService.searchMediaFile(
+      page,
+      size,
+      search,
+      sort,
+      fields,
+      id,
+    );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -73,7 +84,9 @@ const addMedia = async (params) => {
   formData.append('file', params.itemInstance);
   try {
     const response = await addMediaInstance.post(url, formData);
-    applyTransform(response, [notify(() => ({ type: 'success', text: 'Successfully added' }))]);
+    applyTransform(response, [
+      notify(() => ({ type: 'success', text: 'Successfully added' })),
+    ]);
     return response;
   } catch (err) {
     throw applyTransform(err, [notify]);

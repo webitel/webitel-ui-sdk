@@ -7,11 +7,11 @@ import ExampleDivider from './examples/example-divider.vue';
 ## Props
 
 | Prop    | Type     | Default    | Code                                  | Description                                         |
-|---------|----------|------------|---------------------------------------|-----------------------------------------------------|
+| ------- | -------- | ---------- | ------------------------------------- | --------------------------------------------------- |
 | variant | `string` | horizontal | `<wt-divider variant="horizontal" />` | You can pass two option `horizontal` and `vertical` |
 
-
 ## Example Divider
+
 ::: raw
 <ExampleDivider/>
 :::
@@ -19,4 +19,3 @@ import ExampleDivider from './examples/example-divider.vue';
 ::: details Code
 <<< ./examples/example-divider.vue
 :::
-

@@ -5,8 +5,9 @@
           import AgentStatus from '@webitel/ui-sdk/src/enums/AgentStatus/AgentStatus.enum';
         </code></pre>
     <p>
-      Enumerate with ONLINE ('online'), PAUSE ('pause'), OFFLINE ('offline'), BREAK_OUT ('break_out') values. Used
-      for agent status identifying and <b>recommended</b> for use in app logic
+      Enumerate with ONLINE ('online'), PAUSE ('pause'), OFFLINE ('offline'),
+      BREAK_OUT ('break_out') values. Used for agent status identifying and
+      <b>recommended</b> for use in app logic
     </p>
   </article>
   <article>
@@ -23,12 +24,8 @@
     prop="status"
     event="change"
   />
-  <component-props
-    :properties="properties"
-  />
-  <component-events
-    :events="events"
-  />
+  <component-props :properties="properties" />
+  <component-events :events="events" />
 </template>
 
 <script>
@@ -56,9 +53,10 @@ export default {
       },
       {
         value: 'options',
-        code: '<wt-status-select :options="[{ color:\'success\', text: \'Success!\', value: \'AgentStatus.ONLINE\' }]"></wt-status-select>',
+        code: "<wt-status-select :options=\"[{ color:'success', text: 'Success!', value: 'AgentStatus.ONLINE' }]\"></wt-status-select>",
         type: 'Array',
-        description: 'If passed, replaces default status-select options. Should have 3 required properties: "color", "text" and "value"',
+        description:
+          'If passed, replaces default status-select options. Should have 3 required properties: "color", "text" and "value"',
       },
     ],
     events: [
@@ -79,5 +77,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

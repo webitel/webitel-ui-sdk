@@ -28,11 +28,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-
 .wt-page-wrapper {
   display: flex;
   flex-direction: column;
@@ -58,5 +57,4 @@ export default {
   flex: 1;
   width: 100%;
 }
-
 </style>

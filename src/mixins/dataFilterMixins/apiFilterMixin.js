@@ -12,7 +12,9 @@ export default {
 
   methods: {
     async restoreValue(idList) {
-      this.value = idList?.length ? await this.fetchSelected(idList) : this.defaultValue;
+      this.value = idList?.length
+        ? await this.fetchSelected(idList)
+        : this.defaultValue;
     },
 
     async fetchSelected(idList) {

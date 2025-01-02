@@ -1,12 +1,7 @@
 <template>
-  <component-props
-    :properties="properties"
-  />
-  <component-events
-    :events="events"
-  />
+  <component-props :properties="properties" />
+  <component-events :events="events" />
 </template>
-
 
 <script>
 import Prism from 'prismjs';
@@ -41,5 +36,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -1,13 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import FilterEvent
-  from '../../../../../modules/Filters/enums/FilterEvent.enum.js';
-import FiltersStoreModule
-  from '../../../../../modules/Filters/store/FiltersStoreModule.js';
+import FilterEvent from '../../../../../modules/Filters/enums/FilterEvent.enum.js';
+import FiltersStoreModule from '../../../../../modules/Filters/store/FiltersStoreModule.js';
 import { SortSymbols } from '../../../../../scripts/sortQueryAdapters.js';
-import {
-  createTableStoreModule,
-} from '../../../helpers/createTableStoreModule.js';
+import { createTableStoreModule } from '../../../helpers/createTableStoreModule.js';
 
 describe('TableStoreModule', () => {
   it('correctly computes FIELDS getter', () => {
@@ -240,7 +236,9 @@ describe('TableStoreModule integration with FiltersStoreModule', () => {
       value: ['surname'],
     });
 
-    expect(store.getters['table/filters/GET_FILTER']('fields')).toEqual(['surname']);
+    expect(store.getters['table/filters/GET_FILTER']('fields')).toEqual([
+      'surname',
+    ]);
 
     expect(store.getters['table/FIELDS']).toEqual(['id', 'included']);
 
