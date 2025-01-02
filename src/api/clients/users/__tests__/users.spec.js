@@ -209,9 +209,7 @@ describe('UsersAPI', () => {
 
     const UsersAPI = (await import('../users.js')).default;
 
-    expect(await UsersAPI.update({ itemInstance: {}, itemId: 1 })).toEqual(
-      output,
-    );
+    expect(await UsersAPI.update({ itemInstance: {}, itemId: 1 })).toEqual(output);
   });
 
   it('correctly computes "patch" method api call', async () => {

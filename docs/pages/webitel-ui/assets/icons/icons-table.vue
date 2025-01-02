@@ -4,7 +4,7 @@
     :track-by="null"
     :value="size"
     label="Size"
-    style="width: 400px; margin-bottom: var(--spacing-md)"
+    style="width: 400px; margin-bottom: var(--spacing-md);"
     @input="size = $event"
   />
 
@@ -14,7 +14,9 @@
     :selectable="false"
   >
     <template v-slot:copy="{ item }">
-      <wt-copy-action :value="item.code" />
+      <wt-copy-action
+        :value="item.code"
+      />
     </template>
     <template v-slot:icon="{ item }">
       <wt-icon
@@ -48,4 +50,6 @@ const data = Object.keys(icons).map((icon) => ({
 const size = ref('md');
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

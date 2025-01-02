@@ -8,8 +8,8 @@
         'audit-form-question--answered': isResult,
       },
       {
-        'audit-form-question--sort-ignore': first && mode === 'fill',
-      },
+        'audit-form-question--sort-ignore': first && mode === 'fill'
+      }
     ]"
     :disable-dragging="mode === 'fill'"
     :first="first"
@@ -56,12 +56,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits([
-  'copy',
-  'delete',
-  'update:question',
-  'update:result',
-]);
+const emits = defineEmits(['copy', 'delete', 'update:question', 'update:result']);
 
 const QuestionState = {
   SAVED: 'saved',
@@ -83,8 +78,7 @@ const v$ = useVuelidate(
         }
       : {
           result: {
-            required: (value) =>
-              question.value.required ? !isEmpty(value) : true,
+            required: (value) => (question.value.required ? !isEmpty(value) : true),
           },
         },
   ),

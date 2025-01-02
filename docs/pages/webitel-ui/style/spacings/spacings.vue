@@ -11,10 +11,14 @@
         v-for="({ name, value }, key) of spacings"
         :key="key"
         class="spacing-example"
-        :class="[`spacing-example--${name}`]"
+        :class="[
+          `spacing-example--${name}`,
+        ]"
         :style="`padding: ${value}`"
       >
-        <div class="spacing-example__text">{{ name }}: {{ value }}</div>
+        <div class="spacing-example__text">
+          {{ name }}: {{ value }}
+        </div>
       </div>
     </article>
     <article
@@ -33,14 +37,11 @@ export default {
   name: 'Spacings',
   computed: {
     spacings() {
-      return ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'].map(
-        (name) => ({
+      return ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
+        .map((name) => ({
           name,
-          value: getComputedStyle(document.documentElement).getPropertyValue(
-            `--spacing-${name}`,
-          ),
-        }),
-      );
+          value: getComputedStyle(document.documentElement).getPropertyValue(`--spacing-${name}`),
+        }));
     },
     generalMd() {
       return generalMd[this.$i18n.locale] || generalMd.default;

@@ -6,13 +6,11 @@ import ExampleStatusSelect from './examples/example-status-select.vue';
 # WtStatusSelect
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example Status Select
-
 ::: raw
 <ExampleStatusSelect/>
 :::

@@ -8,13 +8,11 @@ import ExampleChipWithExtendedStyle from './examples/example-chip-with-extended-
 # WtChip
 
 ## Props
-
 ::: raw
 <Docs />
 :::
 
 ## Example Chip
-
 ::: raw
 <ExampleChip />
 :::
@@ -24,7 +22,6 @@ import ExampleChipWithExtendedStyle from './examples/example-chip-with-extended-
 :::
 
 ## Example Chip with different colors
-
 ::: raw
 <ExampleChipDifferentColors />
 :::
@@ -34,9 +31,7 @@ import ExampleChipWithExtendedStyle from './examples/example-chip-with-extended-
 :::
 
 ## Example Chip with extended style
-
 ### Chip style can be extended and re-used on any element
-
 ::: raw
 <ExampleChipWithExtendedStyle />
 :::

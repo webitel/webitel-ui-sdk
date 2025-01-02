@@ -92,14 +92,8 @@ const props = defineProps({
 const emit = defineEmits(['change:question', 'copy', 'delete']);
 
 const QuestionType = [
-  {
-    value: EngineAuditQuestionType.Option,
-    locale: 'webitelUI.auditForm.type.options',
-  },
-  {
-    value: EngineAuditQuestionType.Score,
-    locale: 'webitelUI.auditForm.type.score',
-  },
+  { value: EngineAuditQuestionType.Option, locale: 'webitelUI.auditForm.type.options' },
+  { value: EngineAuditQuestionType.Score, locale: 'webitelUI.auditForm.type.score' },
 ];
 
 const prettifiedQuestionType = computed(() =>
@@ -107,10 +101,8 @@ const prettifiedQuestionType = computed(() =>
 );
 
 const QuestionTypeComponent = computed(() => {
-  if (props.question.type === EngineAuditQuestionType.Option)
-    return AuditFormQuestionOptions;
-  if (props.question.type === EngineAuditQuestionType.Score)
-    return AuditFormQuestionScore;
+  if (props.question.type === EngineAuditQuestionType.Option) return AuditFormQuestionOptions;
+  if (props.question.type === EngineAuditQuestionType.Score) return AuditFormQuestionScore;
   return null;
 });
 
@@ -151,9 +143,7 @@ function handleQuestionTypeChange(type) {
 
 .audit-form-question-write-content-question {
   display: grid;
-  margin-right: calc(
-    24px + var(--spacing-sm)
-  ); // delete icon action for type "options"
+  margin-right: calc(24px + var(--spacing-sm)); // delete icon action for type "options"
   margin-bottom: var(--spacing-sm);
   grid-template-columns: 3fr 1fr;
   gap: var(--spacing-sm);

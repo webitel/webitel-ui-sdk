@@ -6,7 +6,7 @@
     <wt-tooltip>
       <template #activator>
         <wt-icon-btn
-          :class="{ active: isOpened }"
+          :class="{'active': isOpened}"
           class="wt-app-navigator__btn"
           icon="app-navigator"
           @click="isOpened = !isOpened"
@@ -27,7 +27,7 @@
           <li
             v-for="app of formattedApps"
             :key="app.name"
-            :class="{ active: app.currentApp }"
+            :class="{'active': app.currentApp }"
             class="wt-app-navigator__card"
           >
             <a
@@ -40,8 +40,10 @@
                 :alt="`${app.name}-pic`"
                 :src="app.img"
                 class="wt-app-navigator__card__img"
-              />
-              <p class="wt-app-navigator__card__title">
+              >
+              <p
+                class="wt-app-navigator__card__title"
+              >
                 {{ $t(`webitelUI.appNavigator.${app.name}`) }}
               </p>
             </a>
@@ -54,8 +56,8 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-
 import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+
 import AdminDark from './assets/admin-dark.svg';
 import AdminLight from './assets/admin-light.svg';
 import AgentDark from './assets/agent-dark.svg';
@@ -150,7 +152,7 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-app-navigator {
   position: relative;
@@ -198,8 +200,7 @@ function close() {
   border-color: var(--wt-app-navigator-item-border-color);
   border-radius: var(--border-radius);
 
-  &.active,
-  &:hover {
+  &.active, &:hover {
     border-color: var(--wt-app-navigator-item-border-color--hover);
   }
 }

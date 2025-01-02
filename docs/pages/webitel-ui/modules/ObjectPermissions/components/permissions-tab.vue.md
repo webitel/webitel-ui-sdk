@@ -14,6 +14,7 @@
 По-правильному, таби мають відкриватись через роутер:
 
 ```vue
+
 <template>
   <!--  ... -->
   <wt-tabs
@@ -34,25 +35,25 @@
 </template>
 
 <script setup>
-const tabs = [
-  {
-    text: t('objects.general'),
-    value: 'UsersRouteNames.GENERAL', // enum value
-    pathName: 'UsersRouteNames.GENERAL', // enum value
-  },
-  {
-    text: t('objects.permissions.permissions', 2),
-    value: 'UsersRouteNames.PERMISSIONS', // enum value
-    pathName: 'UsersRouteNames.PERMISSIONS', // enum value
-  },
-];
+  const tabs = [
+    {
+      text: t('objects.general'),
+      value: 'UsersRouteNames.GENERAL', // enum value
+      pathName: 'UsersRouteNames.GENERAL', // enum value
+    },
+    {
+      text: t('objects.permissions.permissions', 2),
+      value: 'UsersRouteNames.PERMISSIONS', // enum value
+      pathName: 'UsersRouteNames.PERMISSIONS', // enum value
+    },
+  ];
 
-// compute from route
-const currentTab = computed(() => {});
+  // compute from route
+  const currentTab = computed(() => {});
 
-const changeTab = ({ pathName }) => {
-  // change route
-};
+  const changeTab = ({ pathName }) => {
+    // change route
+  };
 </script>
 ```
 

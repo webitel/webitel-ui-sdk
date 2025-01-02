@@ -38,12 +38,14 @@
         v-bind="$attrs"
         @input="inputHandler"
         @keyup="$emit('keyup', $event)"
-      />
+      >
       <div
         ref="AfterWrapper"
         class="wt-input__after-wrapper"
       >
-        <slot name="after-input" />
+        <slot
+          name="after-input"
+        />
         <slot
           v-if="isPassword"
           name="show-password"
@@ -71,7 +73,6 @@
 
 <script setup>
 import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
-
 import { useValidation } from '../../mixins/validationMixin/useValidation.js';
 
 /*
@@ -181,10 +182,7 @@ const slots = useSlots();
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
 const { v, customValidators } = toRefs(props);
 
-const { isValidation, invalid, validationText } = useValidation({
-  v,
-  customValidators,
-});
+const { isValidation, invalid, validationText } = useValidation({ v, customValidators });
 
 // toggles password <-> text at showPassword
 const inputType = ref('');
@@ -240,9 +238,7 @@ const showPasswordIcon = computed(() => {
 });
 
 function inputHandler(event) {
-  const value = props.preventTrim
-    ? event.target.value
-    : event.target.value.trim();
+  const value = props.preventTrim ? event.target.value : event.target.value.trim();
   emit('update:modelValue', value);
   emit('input', value);
 }
@@ -256,14 +252,14 @@ function updateInputPaddings() {
   // cant test this thing cause vue test utils doesnt render elements width :/
   const afterWrapperWidth = AfterWrapper.value.offsetWidth;
   const inputEl = WtInput.value;
-  const defaultInputPadding = getComputedStyle(
-    document.documentElement,
-  ).getPropertyValue('--input-padding');
+  const defaultInputPadding = getComputedStyle(document.documentElement).getPropertyValue(
+    '--input-padding',
+  );
   if (afterWrapperWidth >= inputEl.offsetWidth) return; // fixes https://my.webitel.com/browse/WTEL-2635
   inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
 }
 
-function focus() {
+function focus () {
   WtInput.value.focus();
 }
 
@@ -277,11 +273,11 @@ defineExpose({
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@import '../../../src/css/main.scss';
 
 .wt-input {
   cursor: text;
@@ -312,16 +308,16 @@ defineExpose({
 
   .wt-input--invalid &,
   .wt-input--invalid:hover & {
+    @include wt-placeholder('error');
     color: var(--wt-text-field-error-text-color);
     border-color: var(--wt-text-field-input-border-error-color);
     outline: none; // prevent outline overlapping false color
-    @include wt-placeholder('error');
   }
 
   .wt-input--disabled & {
+    @include wt-placeholder('disabled');
     border-color: var(--wt-text-field-input-border-disabled-color);
     background: var(--wt-text-field-input-background-disabled-color);
-    @include wt-placeholder('disabled');
   }
 }
 

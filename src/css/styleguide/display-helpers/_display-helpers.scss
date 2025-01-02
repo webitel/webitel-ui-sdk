@@ -1,5 +1,4 @@
-@use '@webitel/styleguide' as *;
-//@use '../viewport-breakpoints/viewport-breakpoints' as *;
+@import '../viewport-breakpoints/viewport-breakpoints';
 
 .d-none {
   display: none;

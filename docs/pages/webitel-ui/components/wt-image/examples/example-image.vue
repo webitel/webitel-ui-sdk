@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; gap: var(--spacing-sm)">
+  <div style="display: flex; gap: var(--spacing-sm);">
     <wt-image
       :src="imageWide"
       size="lg"

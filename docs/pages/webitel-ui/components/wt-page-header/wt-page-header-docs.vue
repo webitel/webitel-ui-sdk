@@ -1,6 +1,11 @@
 <template>
-  <component-props :properties="properties" />
-  <component-slots :slots="slots" />
+  <component-props
+    :properties="properties"
+  />
+  <component-slots
+    :slots="slots"
+  />
+
 </template>
 
 <script setup>
@@ -69,4 +74,6 @@ const slots = [
 onMounted(() => Prism.highlightAll());
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

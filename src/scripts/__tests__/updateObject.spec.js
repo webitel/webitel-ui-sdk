@@ -9,15 +9,11 @@ describe('updateObject', () => {
   it('changes shallow value', () => {
     const original = { jest: 'jest' };
     const result = { jest: 'huest' };
-    expect(
-      updateObject({ obj: original, path: 'jest', value: 'huest' }),
-    ).toEqual(result);
+    expect(updateObject({ obj: original, path: 'jest', value: 'huest' })).toEqual(result);
   });
   it('changes deep value', () => {
     const original = { jest: { deep: 'jest' } };
     const result = { jest: { deep: 'huest' } };
-    expect(
-      updateObject({ obj: original, path: 'jest.deep', value: 'huest' }),
-    ).toEqual(result);
+    expect(updateObject({ obj: original, path: 'jest.deep', value: 'huest' })).toEqual(result);
   });
 });

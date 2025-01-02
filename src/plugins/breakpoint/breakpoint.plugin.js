@@ -37,8 +37,7 @@ const breakpoint = reactive({
   width: 0,
 });
 
-const getClientWidth = () =>
-  Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+const getClientWidth = () => Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
 const getClientHeight = () =>
   Math.max(document.documentElement.clientHeight, window.innerHeight || 0);

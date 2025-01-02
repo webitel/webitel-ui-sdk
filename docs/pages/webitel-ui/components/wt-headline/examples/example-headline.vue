@@ -1,15 +1,21 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
   <wt-headline>
-    <template #title> Headline </template>
+    <template #title>
+      Headline
+    </template>
     <template #search>
       <wt-search-bar />
     </template>
     <template #actions>
-      <wt-button style="margin-left: 20px"> Hello </wt-button>
+      <wt-button style="margin-left: 20px;">
+        Hello
+      </wt-button>
       <wt-button
-        style="margin-left: 20px"
+        style="margin-left: 20px;"
         color="secondary"
       >
         there!
@@ -18,4 +24,6 @@
   </wt-headline>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

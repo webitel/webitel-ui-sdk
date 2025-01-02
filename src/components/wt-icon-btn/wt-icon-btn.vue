@@ -17,18 +17,20 @@
 <script setup lang="ts">
 import WtIcon from '../wt-icon/wt-icon.vue';
 
-const { disabled = false } = defineProps<{
-  disabled?: boolean;
+const {
+  disabled = false,
+} = defineProps<{
+  disabled?: boolean
 }>();
 
 const emit = defineEmits<{
-  click: MouseEvent[];
-  mousedown: MouseEvent[];
+  click: MouseEvent[]
+  mousedown: MouseEvent[]
 }>();
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>

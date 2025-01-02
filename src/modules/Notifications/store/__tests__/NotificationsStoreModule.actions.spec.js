@@ -38,9 +38,7 @@ describe('features/notifications store: actions', () => {
 
   it('INITIALIZE action dispatches _SETUP_UNREAD_COUND_BROADCAST_LISTENING action', () => {
     notificationsModule.actions.INITIALIZE(context);
-    expect(context.dispatch.mock.calls[1][0]).toContain(
-      '_SETUP_UNREAD_COUND_BROADCAST_LISTENING',
-    );
+    expect(context.dispatch.mock.calls[1][0]).toContain('_SETUP_UNREAD_COUND_BROADCAST_LISTENING');
   });
 
   it('INITIALIZE action dispatches _SETUP_THIS_TAB_ID action', () => {
@@ -67,9 +65,7 @@ describe('features/notifications store: actions', () => {
   });
 
   it('_SETUP_UNREAD_COUND_BROADCAST_LISTENING action commits SET_BROADCAST_CHANNEL mutation', () => {
-    notificationsModule.actions._SETUP_UNREAD_COUND_BROADCAST_LISTENING(
-      context,
-    );
+    notificationsModule.actions._SETUP_UNREAD_COUND_BROADCAST_LISTENING(context);
     expect(context.commit.mock.calls[0][0]).toContain('SET_BROADCAST_CHANNEL');
   });
 
@@ -104,10 +100,7 @@ describe('features/notifications store: actions', () => {
   it('_SET_UNREAD_COUNT action commits _SET_UNREAD_COUNT mutation with count', () => {
     const unreadCount = 5;
     notificationsModule.actions._SET_UNREAD_COUNT(context, unreadCount);
-    expect(context.commit).toHaveBeenCalledWith(
-      'SET_UNREAD_COUNT',
-      unreadCount,
-    );
+    expect(context.commit).toHaveBeenCalledWith('SET_UNREAD_COUNT', unreadCount);
   });
 
   it('_RESET_UNREAD_COUNT action does not dispatch if unread count is 0', () => {

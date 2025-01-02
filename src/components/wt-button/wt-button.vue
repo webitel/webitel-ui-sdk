@@ -9,7 +9,7 @@
         'wt-button--wide': wide,
         'wt-button--disabled': disabled,
         'wt-button--loading': showLoader,
-      },
+      }
     ]"
     :disabled="disabled"
     class="wt-button"
@@ -23,7 +23,9 @@
       size="sm"
     />
     <div class="wt-button__contents">
-      <slot> no content provided </slot>
+      <slot>
+        no content provided
+      </slot>
     </div>
   </button>
 </template>
@@ -113,11 +115,11 @@ export default {
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-button {
   @extend %typo-button;
@@ -148,7 +150,7 @@ export default {
     width: 100%;
   }
 
-  &--width-by-content {
+  &--width-by-content{
     min-width: 0;
   }
 

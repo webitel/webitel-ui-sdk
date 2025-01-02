@@ -25,14 +25,3 @@ export const queryToSortAdapter = (order) => {
       return SortSymbols.NONE;
   }
 };
-
-export const getNextSortOrder = (sort) => {
-  switch (sort) {
-    case SortSymbols.ASC:
-      return SortSymbols.DESC;
-    case SortSymbols.DESC:
-      return SortSymbols.NONE;
-    default:
-      return SortSymbols.ASC;
-  }
-};

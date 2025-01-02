@@ -6,7 +6,7 @@
         :src="src || dummy"
         :width="size"
         alt="dummy-picture"
-      />
+      >
     </div>
     <p
       v-if="!hiddenText"
@@ -25,7 +25,6 @@
 
 <script setup>
 import { computed } from 'vue';
-
 import dummyDark from '../../assets/components/molecules/wt-dummy/dummyDark.svg';
 import dummyLight from '../../assets/components/molecules/wt-dummy/dummyLight.svg';
 
@@ -63,11 +62,11 @@ const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-dummy {
   display: flex;

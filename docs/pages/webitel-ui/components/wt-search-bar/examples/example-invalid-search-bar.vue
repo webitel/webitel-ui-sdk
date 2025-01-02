@@ -3,14 +3,11 @@ import { useVuelidate } from '@vuelidate/core';
 import { ref, computed } from 'vue';
 
 const value = ref('');
-const v$ = useVuelidate(
-  computed(() => ({
-    value: {
-      required: () => false,
-    },
-  })),
-  { value },
-);
+const v$ = useVuelidate(computed(() => ({
+  value: {
+    required: () => false,
+  },
+})), { value });
 
 v$.value.$touch();
 </script>
@@ -24,4 +21,6 @@ v$.value.$touch();
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

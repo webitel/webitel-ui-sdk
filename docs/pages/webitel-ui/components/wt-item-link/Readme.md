@@ -5,7 +5,6 @@ import Specs from './component-specs.vue';
 # WtItemLink
 
 ## Specs
-
 <Specs />
 
 ## Example Item Link

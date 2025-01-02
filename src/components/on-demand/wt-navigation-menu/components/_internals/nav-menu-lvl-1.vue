@@ -6,9 +6,7 @@
       class="nav-menu__option"
     >
       <button
-        :class="{
-          'nav-menu__item--selected': selected.value === category.value,
-        }"
+        :class="{ 'nav-menu__item--selected': selected.value === category.value }"
         class="nav-menu__item nav-menu__item--active"
         @click="select(category)"
       >
@@ -39,7 +37,7 @@ const props = defineProps({
   },
   icons: {
     type: Array,
-    default: () => [],
+    default: () => ([]),
   },
 });
 
@@ -51,7 +49,7 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/nav-menu';
+@import '../../css/nav-menu';
 
 .nav-menu__item {
   &--active {

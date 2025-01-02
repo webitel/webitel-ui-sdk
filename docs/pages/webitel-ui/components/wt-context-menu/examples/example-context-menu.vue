@@ -15,4 +15,6 @@ const options = [
   </wt-context-menu>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

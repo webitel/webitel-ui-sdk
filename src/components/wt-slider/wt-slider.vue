@@ -38,7 +38,7 @@ and swapping height/width of this component in order to have the correct output.
         class="wt-slider__slider"
         type="range"
         @input="inputHandler"
-      />
+      >
     </div>
   </div>
 </template>
@@ -81,8 +81,7 @@ export default {
   computed: {
     progressStyle() {
       // To achieve the correct color styling:
-      const progressPercent =
-        ((this.value - this.min) / (this.max - this.min)) * 100;
+      const progressPercent = ((this.value - this.min) / (this.max - this.min)) * 100;
       return `linear-gradient(to right, var(--wt-slider-background-completed-color) ${progressPercent}%, var(--wt-slider-background-color) 0%)`;
     },
     verticalHeight() {
@@ -99,10 +98,11 @@ export default {
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
+
 .wt-slider__wrapper {
   display: flex;
   align-items: center;

@@ -1,19 +1,14 @@
 <template>
   <article>
     <p>
-      <strong
-        >Important: player is looking for icons in {/{$baseURL}/}img/plyr.svg
-        (or /img/plyr.svg by default).</strong
-      >
-      First, download plyr.svg from
-      <a
-        href="https://github.com/webitel/webitel-ui-sdk/tree/master/public"
-        target="_blank"
-      >
-        Github</a
-      >
-      and place it in project /public folder. Then, $baseURL should be passed as
-      global variable in plugins/webitel-ui.js:
+      <strong>Important: player is looking for icons in {/{$baseURL}/}img/plyr.svg (or /img/plyr.svg by
+        default).</strong>
+      First, download plyr.svg from <a
+      href="https://github.com/webitel/webitel-ui-sdk/tree/master/public"
+      target="_blank"
+    >
+      Github</a> and place it in project /public folder.
+      Then, $baseURL should be passed as global variable in plugins/webitel-ui.js:
     </p>
     <pre><code class="language-javascript">
             const globals = {
@@ -23,8 +18,12 @@
             Vue.use(WebitelUI, { eventBus, router, globals });
       </code></pre>
   </article>
-  <component-props :properties="properties" />
-  <component-events :events="events" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -52,15 +51,13 @@ export default {
         value: 'mime',
         code: '<wt-player mime="video"></wt-player>',
         default: 'audio',
-        description:
-          'On mime type depends, wt-player will draw a video or audio component',
+        description: 'On mime type depends, wt-player will draw a video or audio component',
       },
       {
         value: 'resetOnEnd',
         code: '<wt-player reset-on-end></wt-player>',
         default: 'false',
-        description:
-          'Plyr-specific prop. Resets player position to start on file end.',
+        description: 'Plyr-specific prop. Resets player position to start on file end.',
       },
       {
         value: 'invertTime',
@@ -72,18 +69,19 @@ export default {
         value: 'resetVolume',
         code: '<wt-player reset-volume></wt-player>',
         default: 'false',
-        description:
-          'plyr is caching volume settings ("muted" too) so we could reset them at init',
+        description: 'plyr is caching volume settings ("muted" too) so we could reset them at init',
       },
       {
         value: 'download',
         code: '<wt-player :loop="false"></wt-player>',
         type: ['Boolean', 'String', 'Function'],
-        default: "(url) => url.replace('/stream', '/download')",
+        default: '(url) => url.replace(\'/stream\', \'/download\')',
         description: 'if false, no download button will be shown',
       },
     ],
-    events: [{ value: 'all native <audio> events' }],
+    events: [
+      { value: 'all native <audio> events' },
+    ],
   }),
   mounted() {
     Prism.highlightAll();
@@ -91,4 +89,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

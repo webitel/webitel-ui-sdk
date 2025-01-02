@@ -11,7 +11,9 @@
     <!--    @slot custom actions here
             @scope `{ size<ComponentSize> }`
      -->
-    <slot v-bind="{ size }" />
+    <slot
+      v-bind="{ size }"
+    />
 
     <!--    @slot May be useful to set complex component which draws the same `wt-icon-action`
             @scope `{ action<IconAction>, size<ComponentSize> }`
@@ -34,10 +36,7 @@
 import { computed } from 'vue';
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
-import {
-  tableActionsOrder,
-  sectionActionsOrder,
-} from './WtActionBarActionsOrder.js';
+import { tableActionsOrder, sectionActionsOrder } from './WtActionBarActionsOrder.js';
 
 const props = defineProps({
   /**
@@ -59,7 +58,7 @@ const props = defineProps({
   },
 
   /**
-   * Leave the default value for the mode only listed in includes prop
+  * Leave the default value for the mode only listed in includes prop
    */
 
   include: {
@@ -68,7 +67,7 @@ const props = defineProps({
   },
 
   /**
-   * Leave the default values for the mode, except for those in exclude prop
+  * Leave the default values for the mode, except for those in exclude prop
    */
 
   exclude: {
@@ -80,8 +79,7 @@ const props = defineProps({
    * Built dynamically on `disabled:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
    */
 
-  disabled: {
-    // Not implemented, but can be used to disable all actions
+  disabled: { // Not implemented, but can be used to disable all actions
     type: Boolean,
     default: false,
   },
@@ -90,23 +88,21 @@ const props = defineProps({
     acc[`disabled:${action}`] = { type: Boolean, default: false };
     return acc;
   }, {}),
+
 });
 const emit = defineEmits([
   /**
    * click:IconAction
    */
-  ...Object.values(IconAction).map((action) => `click:${action}`),
+  ...Object.values(IconAction).map((action) => `click:${action}`)
 ]);
 
 const shownActions = computed(() => {
-  const actionsOrder =
-    props.mode === 'section' ? sectionActionsOrder : tableActionsOrder;
+  const actionsOrder = props.mode === 'section' ? sectionActionsOrder : tableActionsOrder;
 
-  if (props.include.length)
-    return actionsOrder.filter((action) => props.include.includes(action));
+  if(props.include.length) return actionsOrder.filter((action) => props.include.includes(action));
 
-  if (props.exclude.length)
-    return actionsOrder.filter((action) => !props.exclude.includes(action));
+  if(props.exclude.length) return actionsOrder.filter((action) => !props.exclude.includes(action));
 
   return actionsOrder;
 });

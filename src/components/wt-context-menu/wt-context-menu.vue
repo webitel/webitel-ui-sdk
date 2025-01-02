@@ -22,7 +22,9 @@
           class="wt-context-menu__option-wrapper"
         >
           <a
-            :class="[{ 'wt-context-menu__option--disabled': option.disabled }]"
+            :class="[
+              { 'wt-context-menu__option--disabled': option.disabled },
+            ]"
             class="wt-context-menu__option"
             href="#"
             @click.prevent="handleOptionClick({ option, index, hide })"
@@ -82,11 +84,11 @@ function handleOptionClick({ option, index, hide }) {
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-context-menu {
   line-height: 0;

@@ -6,7 +6,6 @@ import ExampleIconBtn from './examples/example-icon-btn.vue';
 # WtIconBtn
 
 ## Props
-
 ::: raw
 <Docs />
 :::
@@ -14,7 +13,6 @@ import ExampleIconBtn from './examples/example-icon-btn.vue';
 ### Note: all wt=icon props are passed as "$attrs"
 
 ## Example
-
 ::: raw
 <ExampleIconBtn />
 :::

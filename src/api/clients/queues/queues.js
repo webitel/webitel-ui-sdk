@@ -68,11 +68,10 @@ const getQueuesList = async (params) => {
     priority: '0',
   };
 
-  const { page, size, search, sort, fields, id, queueType, team, tags } =
-    applyTransform(params, [
-      merge(getDefaultGetParams()),
-      starToSearch('search'),
-    ]);
+  const { page, size, search, sort, fields, id, queueType, team, tags } = applyTransform(params, [
+    merge(getDefaultGetParams()),
+    starToSearch('search'),
+  ]);
 
   try {
     const response = await queueService.searchQueue(
@@ -169,10 +168,7 @@ const updateQueue = async ({ itemInstance, itemId: id }) => {
 };
 
 const patchQueue = async ({ id, changes }) => {
-  const item = applyTransform(changes, [
-    sanitize(fieldsToSend),
-    camelToSnake(doNotConvertKeys),
-  ]);
+  const item = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake(doNotConvertKeys)]);
   try {
     const response = await queueService.patchQueue(id, item);
     return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
@@ -203,13 +199,7 @@ const getQueuesTags = async (params) => {
     camelToSnake(doNotConvertKeys),
   ]);
   try {
-    const response = await queueService.searchQueueTags(
-      page,
-      size,
-      search,
-      sort,
-      fields,
-    );
+    const response = await queueService.searchQueueTags(page, size, search, sort, fields);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(doNotConvertKeys),
       merge(getDefaultGetListResponse()),

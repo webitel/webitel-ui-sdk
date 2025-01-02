@@ -13,9 +13,9 @@
         :mode="mode"
         :question="question"
         :readonly="readonly"
-        :result="result && result[key] ? result[key] : null"
+        :result="(result && result[key]) ? result[key] : null"
         @copy="copyQuestion({ question, key })"
-        @delete="deleteQuestion({ question, key })"
+        @delete="deleteQuestion({ question, key})"
         @update:question="handleQuestionUpdate({ key, value: $event })"
         @update:result="handleResultUpdate({ key, value: $event })"
       />
@@ -34,15 +34,7 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
 import cloneDeep from 'lodash/cloneDeep.js';
-import {
-  computed,
-  nextTick,
-  onMounted,
-  reactive,
-  ref,
-  watch,
-  watchEffect,
-} from 'vue';
+import { computed, nextTick, onMounted, reactive, ref, watch, watchEffect } from 'vue';
 import WtButton from '../../../components/wt-button/wt-button.vue';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
@@ -69,11 +61,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'update:questions',
-  'update:result',
-  'update:validation',
-]);
+const emit = defineEmits(['update:questions', 'update:result', 'update:validation']);
 
 const v$ = useVuelidate();
 
@@ -131,8 +119,7 @@ function initResult() {
 function initQuestions() {
   if (props.mode === 'create' && !props.questions.length) {
     addQuestion({ question: generateQuestionSchema({ required: true }) });
-  } else if (props.questions.length)
-    auditQuestions.value.at(0).activateQuestion();
+  } else if (props.questions.length) auditQuestions.value.at(0).activateQuestion();
 }
 
 // https://my.webitel.com/browse/WTEL-3451, https://my.webitel.com/browse/WTEL-3436
@@ -141,9 +128,7 @@ async function atQuestionAdded() {
   // wait for new question to render
   await nextTick();
   const index =
-    isQuestionAdded.index && isQuestionAdded.index === 'last'
-      ? -1
-      : isQuestionAdded.index;
+    isQuestionAdded.index && isQuestionAdded.index === 'last' ? -1 : isQuestionAdded.index;
   auditQuestions.value.at(index).activateQuestion();
 
   isQuestionAdded.value = false;
@@ -162,9 +147,7 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
   },
 });
 
-watch(v$, () =>
-  emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }),
-);
+watch(v$, () => emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }));
 watchEffect(initResult);
 watch(
   () => props.questions,

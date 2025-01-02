@@ -1,7 +1,11 @@
 <template>
   <component-model />
-  <component-props :properties="properties" />
-  <component-events :events="events" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -54,22 +58,22 @@ export default {
         code: '<wt-slider vertical></wt-slider>',
         type: 'Boolean',
         default: false,
-        description:
-          'Slider is positioned vertically, from bottom to top. Important: indicate slider height',
+        description: 'Slider is positioned vertically, from bottom to top. Important: indicate slider height',
       },
       {
         value: 'height',
         code: '<wt-slider vertical :height="150"></wt-slider>',
         type: 'Number',
         default: 100,
-        description:
-          'Vertical slider height, only number - quantity of pixels is accepted',
+        description: 'Vertical slider height, only number - quantity of pixels is accepted',
       },
     ],
     events: [
       {
         value: 'input',
-        params: [{ name: 'Selected value', type: 'Number' }],
+        params: [
+          { name: 'Selected value', type: 'Number' },
+        ],
       },
     ],
   }),

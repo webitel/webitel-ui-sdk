@@ -7,7 +7,7 @@ name: Webitel UI release with docs
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   install_deps:
@@ -63,9 +63,9 @@ jobs:
 
       - name: get prevTag
         id: prevTag
-        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
-      # for release notes // why 2 changelogs? see NOTES
+# for release notes // why 2 changelogs? see NOTES
       - name: generate Release Changelog
         id: changelog
         uses: requarks/changelog-action@v1
@@ -86,20 +86,20 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: 'v${{ steps.package-version.outputs.current-version}}'
-          name: '@webitel/ui-sdk v${{ steps.package-version.outputs.current-version}}'
+          tag_name: "v${{ steps.package-version.outputs.current-version}}"
+          name: "@webitel/ui-sdk v${{ steps.package-version.outputs.current-version}}"
           body: ${{ steps.changelog.outputs.changes }}
 
-      # update tags list after prev step release, so that we fetch new tag, created by prev step
+# update tags list after prev step release, so that we fetch new tag, created by prev step
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: get newTag
         id: newTag
-        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
-      # update CHANGELOG.md file // why 2 changelogs? see NOTES
+# update CHANGELOG.md file // why 2 changelogs? see NOTES
       - name: update Release Changelog
         id: update-changelog
         uses: requarks/changelog-action@v1
@@ -181,18 +181,19 @@ jobs:
           path: docs/.vitepress/dist
 
   deploy:
-    needs: [build_docs]
-    permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
-    runs-on: ubuntu-latest
-    steps:
-      - name: setup Github Pages
-        id: setup_pages
-        uses: actions/configure-pages@v4
+      needs: [build_docs]
+      permissions:
+        pages: write      # to deploy to Pages
+        id-token: write   # to verify the deployment originates from an appropriate source
+      runs-on: ubuntu-latest
+      steps:
+        - name: setup Github Pages
+          id: setup_pages
+          uses: actions/configure-pages@v4
 
-      - name: deploy to Github Pages
-        id: deploy_pages
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: docs
+        - name: deploy to Github Pages
+          id: deploy_pages
+          uses: actions/deploy-pages@v4
+          with:
+            artifact_name: docs
+

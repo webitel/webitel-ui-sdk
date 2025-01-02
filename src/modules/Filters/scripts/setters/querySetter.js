@@ -1,7 +1,6 @@
 import changeRouteQuery from '../utils/changeRouteQuery.js';
 
-const isObject = (value) =>
-  typeof value === 'object' && !Array.isArray(value) && value !== null;
+const isObject = (value) => typeof value === 'object' && !Array.isArray(value) && value !== null;
 
 const handlePrimitive = ({ value }) => value;
 

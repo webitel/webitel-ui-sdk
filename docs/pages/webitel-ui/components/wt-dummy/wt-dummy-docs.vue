@@ -1,6 +1,10 @@
 <template>
-  <component-props :properties="properties" />
-  <component-events :events="events" />
+  <component-props
+    :properties="properties"
+  />
+  <component-events
+    :events="events"
+  />
 </template>
 
 <script>
@@ -32,8 +36,7 @@ export default {
         code: '<wt-dummy show-action></wt-dummy>',
         type: 'Boolean',
         default: false,
-        description:
-          'The prop controls the display of the button for adding new items',
+        description: 'The prop controls the display of the button for adding new items',
       },
       {
         value: 'size',

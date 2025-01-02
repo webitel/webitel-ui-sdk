@@ -11,11 +11,9 @@ import ExampleDatepickerDatetimeMode from './examples/example-datepicker-datetim
 <Specs />
 
 ## PLUS ALL VUE DATEPICKER NATIVE PROPS
-
 All passed but not declared props are passed to `<vue-datepicker>` component as attributes
 
 ## Example Datepicker
-
 ::: raw
 <ExampleDatepicker/>
 :::
@@ -25,7 +23,6 @@ All passed but not declared props are passed to `<vue-datepicker>` component as 
 :::
 
 ## Example Datepicker Datetime Mode
-
 ::: raw
 <ExampleDatepickerDatetimeMode/>
 :::
@@ -33,3 +30,4 @@ All passed but not declared props are passed to `<vue-datepicker>` component as 
 ::: details Code
 <<< ./examples/example-datepicker-datetime-mode.vue
 :::
+

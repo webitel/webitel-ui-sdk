@@ -6,13 +6,11 @@ import ExampleTableActions from './examples/example-table-actions.vue';
 # WtTableActions
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example Table Actions
-
 ::: raw
 <ExampleTableActions/>
 :::

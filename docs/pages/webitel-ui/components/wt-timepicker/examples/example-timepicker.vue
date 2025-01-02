@@ -13,4 +13,6 @@ const value = ref(332);
   <span>value: {{ value }}</span>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

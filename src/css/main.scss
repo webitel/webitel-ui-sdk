@@ -1,8 +1,7 @@
-@forward 'styleguide/styleguide';
-@use 'styleguide/styleguide' as *;
-@use 'pages/card-page';
-@use 'pages/table-page';
-
+@import 'styleguide/styleguide';
+@import 'styleguide/display-helpers/display-helpers';
+@import 'pages/card-page';
+@import 'pages/table-page';
 
 @include wt-placeholder;
 
@@ -34,13 +33,7 @@ body {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   font-weight: normal;
 }

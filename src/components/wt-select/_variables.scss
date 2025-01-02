@@ -1,12 +1,11 @@
+
 :root {
   --select-icon-top-pos: var(--spacing-xs);
   --select-chip-top-pos: var(--spacing-xs);
 
   --select-caret-right-pos: var(--input-padding);
 
-  --select-tags-border: var(
-    --input-border
-  ); // right pos = 10px spacing + clear icon size + clear offset
+  --select-tags-border: var(--input-border); // right pos = 10px spacing + clear icon size + clear offset
 
   --select-options-padding: var(--input-padding);
 }

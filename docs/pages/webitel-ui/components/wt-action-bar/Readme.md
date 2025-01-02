@@ -17,7 +17,6 @@ import ExampleDisabledTableActionBar from './examples/example-disabled-action-ba
 <Specs />
 
 ## Events
-
 Events are built dynamically on `click:[IconAction]` pattern for all available [IconActions](../../enums/IconAction/Readme.md).
 
 ## Actions Order, depending on `mode` prop

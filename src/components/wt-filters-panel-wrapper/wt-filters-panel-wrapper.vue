@@ -79,8 +79,7 @@ $filter-width: 230px;
 $filter-gap: 10px; // var(--spacing-xs)
 @function filters-width($num) {
   // 1px corrects max width
-  @return ($filter-width * $num) + $filter-gap * $num + $width-except-filters -
-    1px;
+  @return ($filter-width * $num) + $filter-gap * $num + $width-except-filters - 1px;
 }
 
 .filters-wrap {
@@ -94,7 +93,7 @@ $filter-gap: 10px; // var(--spacing-xs)
   & {
     grid-template-columns: repeat(6, 1fr);
 
-    > *:nth-child(n + 7) {
+    > *:nth-child(n+7) {
       display: none;
     }
   }
@@ -103,7 +102,7 @@ $filter-gap: 10px; // var(--spacing-xs)
     & {
       grid-template-columns: repeat(5, 1fr);
 
-      :deep(> *:nth-child(n + 6)) {
+      :deep(> *:nth-child(n+6)) {
         display: none;
       }
     }
@@ -113,7 +112,7 @@ $filter-gap: 10px; // var(--spacing-xs)
     & {
       grid-template-columns: repeat(4, 1fr);
 
-      :deep(> *:nth-child(n + 5)) {
+      :deep(> *:nth-child(n+5)) {
         display: none;
       }
     }
@@ -123,7 +122,7 @@ $filter-gap: 10px; // var(--spacing-xs)
     & {
       grid-template-columns: repeat(3, 1fr);
 
-      :deep(> *:nth-child(n + 4)) {
+      :deep(> *:nth-child(n+4)) {
         display: none;
       }
     }
@@ -133,7 +132,7 @@ $filter-gap: 10px; // var(--spacing-xs)
     & {
       grid-template-columns: repeat(2, 1fr);
 
-      :deep(> *:nth-child(n + 3)) {
+      :deep(> *:nth-child(n+3)) {
         display: none;
       }
     }
@@ -143,7 +142,7 @@ $filter-gap: 10px; // var(--spacing-xs)
     & {
       grid-template-columns: repeat(1, 1fr);
 
-      :deep(> *:nth-child(n + 2)) {
+      :deep(> *:nth-child(n+2)) {
         display: none;
       }
     }

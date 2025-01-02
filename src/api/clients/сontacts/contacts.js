@@ -29,17 +29,7 @@ const formatAccessMode = (item) => ({
 });
 
 const getList = async (params) => {
-  const fieldsToSend = [
-    'page',
-    'size',
-    'q',
-    'sort',
-    'fields',
-    'id',
-    'qin',
-    'groupId',
-    'notIdGroup',
-  ];
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'qin', 'groupId', 'notIdGroup'];
 
   if (!params.fields) {
     params.fields = [
@@ -71,7 +61,7 @@ const getList = async (params) => {
 
   let changedParams;
 
-  if (params?.search) {
+  if(params?.search) {
     changedParams = { ...params, q: params.search };
   } else if (params?.q && params?.qin) {
     changedParams = { ...params };
@@ -108,14 +98,9 @@ const getList = async (params) => {
     };
   }
 
-  const transformations = [
-    sanitize(fieldsToSend),
-    merge(getDefaultGetParams()),
-    camelToSnake(),
-  ];
+  const transformations = [sanitize(fieldsToSend), merge(getDefaultGetParams()), camelToSnake()];
 
-  const { page, size, q, sort, fields, id, qin, mode, group_id, not_id_group } =
-    applyTransform(changedParams, transformations);
+  const { page, size, q, sort, fields, id, qin, mode, group_id, not_id_group }  = applyTransform(changedParams, transformations);
 
   try {
     const response = await contactService.searchContacts(
@@ -131,16 +116,13 @@ const getList = async (params) => {
       not_id_group,
     );
 
-    const { items, next } = applyTransform(
-      { ...response.data, items: response.data.data || [] },
-      [snakeToCamel(), merge(getDefaultGetListResponse())],
-    );
+    const { items, next } = applyTransform({ ...response.data, items: response.data.data || [] }, [
+      snakeToCamel(),
+      merge(getDefaultGetListResponse()),
+    ]);
 
     return {
-      items: applyTransform(items, [
-        (items) => items?.map((item) => formatAccessMode(item)),
-        listResponseHandler,
-      ]),
+      items: applyTransform(items, [(items) => items?.map((item) => formatAccessMode(item)), listResponseHandler]),
       next,
     };
   } catch (err) {
@@ -193,17 +175,13 @@ const fieldsToSend = ['name', 'labels', 'about', 'managers', 'timezones'];
 
 const sanitizeManagers = (itemInstance) => {
   // handle many managers and even no managers field cases
-  const managers = (itemInstance.managers || []).filter(
-    ({ user } = {}) => user.id,
-  );
+  const managers = (itemInstance.managers || []).filter(({ user } = {}) => user.id);
   return { ...itemInstance, managers };
 };
 
 const sanitizeTimezones = (itemInstance) => {
   // handle many timezones and even no timezones field cases
-  const timezones = (itemInstance.timezones || []).filter(
-    ({ timezone } = {}) => timezone.id,
-  );
+  const timezones = (itemInstance.timezones || []).filter(({ timezone } = {}) => timezone.id);
   return { ...itemInstance, timezones };
 };
 
@@ -257,11 +235,10 @@ const deleteContact = async ({ id }) => {
   }
 };
 
-const getContactsLookup = (params) =>
-  getList({
-    ...params,
-    fields: params.fields || ['id', 'name'],
-  });
+const getContactsLookup = (params) => getList({
+  ...params,
+  fields: params.fields || ['id', 'name'],
+});
 
 const ContactsAPI = {
   getList,

@@ -76,7 +76,13 @@ const {
 ```js
 import { media } from '@webitel/ui-sdk/src/api/clients';
 
-const { getList, get, add, delete: _delete, getLookup } = media;
+const {
+  getList,
+  get,
+  add,
+  delete: _delete,
+  getLookup,
+} = media;
 ```
 
 ## Lists
@@ -84,7 +90,15 @@ const { getList, get, add, delete: _delete, getLookup } = media;
 ```js
 import { lists } from '@webitel/ui-sdk/src/api/clients';
 
-const { getList, get, add, patch, update, delete: _delete, getLookup } = lists;
+const {
+  getList,
+  get,
+  add,
+  patch,
+  update,
+  delete: _delete,
+  getLookup,
+} = lists;
 ```
 
 ## Gateways
@@ -104,7 +118,7 @@ const {
 ```
 
 ## Flows
-
+    
 ```js
 import { flows } from '@webitel/ui-sdk/src/api/clients';
 
@@ -116,7 +130,7 @@ const {
   update,
   delete: _delete,
   getLookup,
-
+  
   getFlowTags,
 } = flows;
 ```
@@ -171,12 +185,20 @@ const {
 } = calendars;
 ```
 
+
 ## Buckets
 
 ```js
 import { buckets } from '@webitel/ui-sdk/src/api/clients';
 
-const { getList, get, add, update, delete: _delete, getLookup } = buckets;
+const {
+  getList,
+  get,
+  add,
+  update,
+  delete: _delete,
+  getLookup,
+} = buckets;
 ```
 
 ## Agents
@@ -192,7 +214,7 @@ const {
   update,
   delete: _delete,
   getLookup,
-
+  
   getAgentHistory,
   getRegularAgentsOptions,
   getAgentUsersOptions,
@@ -205,7 +227,14 @@ const {
 ```js
 import { teams } from '@webitel/ui-sdk/src/api/clients';
 
-const { getList, get, add, update, delete: _delete, getLookup } = teams;
+const {
+  getList,
+  get,
+  add,
+  update,
+  delete: _delete,
+  getLookup,
+} = teams;
 ```
 
 ## Skills
@@ -213,5 +242,12 @@ const { getList, get, add, update, delete: _delete, getLookup } = teams;
 ```js
 import { skills } from '@webitel/ui-sdk/src/api/clients';
 
-const { getList, get, add, update, delete: _delete, getLookup } = skills;
+const {
+  getList,
+  get,
+  add,
+  update,
+  delete: _delete,
+  getLookup,
+} = skills;
 ```

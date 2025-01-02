@@ -1,6 +1,8 @@
 <template>
   <div class="permissions-role-row">
-    <wt-icon :icon="role.user ? 'user' : 'role'" />
+    <wt-icon
+      :icon="role.user ? 'user' : 'role'"
+    />
     <slot>
       {{ role.name }}
     </slot>

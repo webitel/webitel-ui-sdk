@@ -19,12 +19,8 @@ describe('WtDarkModeSwitcher', () => {
   });
 
   it('toggles dark mode class', async () => {
-    expect(
-      window.document.documentElement.classList.contains('theme--dark'),
-    ).toBe(false);
+    expect(window.document.documentElement.classList.contains('theme--dark')).toBe(false);
     await wrapper.findComponent({ name: 'wt-switcher' }).trigger('change');
-    expect(
-      window.document.documentElement.classList.contains('theme--dark'),
-    ).toBe(true);
+    expect(window.document.documentElement.classList.contains('theme--dark')).toBe(true);
   });
 });

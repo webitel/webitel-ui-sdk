@@ -1,10 +1,14 @@
 <template>
   <div
-    :class="[`wt-indicator--size-${size}`]"
+    :class="[
+      `wt-indicator--size-${size}`
+    ]"
     class="wt-indicator"
   >
     <span
-      :class="[`wt-indicator__indicator--${color}`]"
+      :class="[
+        `wt-indicator__indicator--${color}`,
+      ]"
       class="wt-indicator__indicator"
     />
     <div
@@ -63,6 +67,7 @@ export default {
     },
   },
 
+
   computed: {
     isText() {
       return this.text !== undefined && this.text !== null && this.text !== '';
@@ -72,11 +77,11 @@ export default {
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-indicator {
   display: flex;

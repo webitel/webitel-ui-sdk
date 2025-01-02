@@ -4,7 +4,7 @@ import pic from './pic.jpg';
 </script>
 
 <template>
-  <div style="display: flex; gap: 10px">
+  <div style="display: flex; gap: 10px;">
     <wt-avatar
       v-for="status in Object.values(AbstractUserStatus)"
       :key="status"
@@ -16,4 +16,6 @@ import pic from './pic.jpg';
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

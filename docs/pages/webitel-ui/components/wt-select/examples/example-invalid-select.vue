@@ -20,14 +20,11 @@ const options = [
 const value = ref(options[0]);
 const empty = ref('');
 
-const v$ = useVuelidate(
-  computed(() => ({
-    value: {
-      required: () => false,
-    },
-  })),
-  { value },
-);
+const v$ = useVuelidate(computed(() => ({
+  value: {
+    required: () => false,
+  },
+})), { value });
 
 v$.value.$touch();
 </script>
@@ -50,4 +47,6 @@ v$.value.$touch();
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

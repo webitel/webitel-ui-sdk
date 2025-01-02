@@ -1,11 +1,8 @@
 <template>
-  <div style="display: flex; gap: var(--spacing-sm); flex-wrap: nowrap">
+  <div style="display: flex; gap: var(--spacing-sm); flex-wrap: nowrap;">
     <wt-table
-      :data="sizes.map((size) => ({ size, empty: true }))"
-      :headers="[
-        { value: 'size', width: '40px' },
-        { value: 'empty', width: 'auto' },
-      ]"
+      :data="sizes.map(size => ({ size, empty: true }))"
+      :headers="[{ value: 'size', width: '40px' }, { value: 'empty', width: 'auto' }]"
       :selectable="false"
     >
       <template #empty="{ item }">
@@ -24,10 +21,15 @@
 </template>
 
 <script setup>
-const sizes = ['sm', 'md', 'lg'];
+const sizes = [
+  'sm',
+  'md',
+  'lg',
+];
 </script>
 
 <style lang="scss" scoped>
 .example-empty {
+
 }
 </style>

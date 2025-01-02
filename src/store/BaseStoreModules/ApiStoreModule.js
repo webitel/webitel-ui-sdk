@@ -1,15 +1,11 @@
 import BaseStoreModule from './BaseStoreModule.js';
 
-const getParentIdFromContext = (context) =>
-  context?.getters?.PARENT_ID || context?.state?.parentId;
+const getParentIdFromContext = (context) => context?.getters?.PARENT_ID || context?.state?.parentId;
 
 export default class ApiStoreModule extends BaseStoreModule {
   generateAPIActions(api) {
     if (!api) throw new ReferenceError('pass API module!');
-    this.actions.GET_LIST = (
-      _,
-      { context: callerContext = {}, params = {} },
-    ) => {
+    this.actions.GET_LIST = (_, { context: callerContext = {}, params = {} }) => {
       if (!api.getList) throw Error('No API "getList" method provided');
       return api.getList({
         ...callerContext.state,
@@ -18,10 +14,7 @@ export default class ApiStoreModule extends BaseStoreModule {
       });
     };
 
-    this.actions.GET_ITEM = (
-      _,
-      { context: callerContext = {}, params = {} } = {},
-    ) => {
+    this.actions.GET_ITEM = (_, { context: callerContext = {}, params = {} } = {}) => {
       if (!api.get) throw Error('No API "get" method provided');
       return api.get({
         ...callerContext.state,
@@ -30,10 +23,7 @@ export default class ApiStoreModule extends BaseStoreModule {
       });
     };
 
-    this.actions.POST_ITEM = (
-      _,
-      { context: callerContext = {}, ...rest } = {},
-    ) => {
+    this.actions.POST_ITEM = (_, { context: callerContext = {}, ...rest } = {}) => {
       if (!api.add) throw Error('No API "add" method provided');
       return api.add({
         ...callerContext.state,
@@ -42,10 +32,7 @@ export default class ApiStoreModule extends BaseStoreModule {
       });
     };
 
-    this.actions.PATCH_ITEM = (
-      _,
-      { context: callerContext = {}, id, changes, ...rest },
-    ) => {
+    this.actions.PATCH_ITEM = (_, { context: callerContext = {}, id, changes, ...rest }) => {
       if (!api.patch) throw Error('No API "patch" method provided');
       return api.patch({
         ...callerContext.state,
@@ -56,10 +43,7 @@ export default class ApiStoreModule extends BaseStoreModule {
       });
     };
 
-    this.actions.UPD_ITEM = (
-      _,
-      { context: callerContext = {}, ...rest } = {},
-    ) => {
+    this.actions.UPD_ITEM = (_, { context: callerContext = {}, ...rest } = {}) => {
       if (!api.update) throw Error('No API "update" method provided');
       return api.update({
         ...callerContext.state,
@@ -68,10 +52,7 @@ export default class ApiStoreModule extends BaseStoreModule {
       });
     };
 
-    this.actions.DELETE_ITEM = (
-      _,
-      { context: callerContext = {}, id, ...rest },
-    ) => {
+    this.actions.DELETE_ITEM = (_, { context: callerContext = {}, id, ...rest }) => {
       if (!api.delete) throw Error('No API "delete" method provided');
       return api.delete({
         ...callerContext.state,

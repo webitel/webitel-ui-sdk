@@ -1,15 +1,11 @@
+
 :root {
-  --wt-status-select-padding: 0 calc(var(--icon-size-md) + var(--spacing-xs)) 0
-    0; // reset wt-select padding, but preserve arrow icon padding
+  --wt-status-select-padding: 0 calc(var(--icon-size-md) + var(--spacing-xs)) 0 0; // reset wt-select padding, but preserve arrow icon padding
 
   --wt-status-select-option-text-color: var(--text-main-color);
   --wt-status-select-option-background-color: var(--dp-22-surface-color);
-  --wt-status-select-option-background-hover-color: var(
-    --secondary-light-color
-  );
+  --wt-status-select-option-background-hover-color: var(--secondary-light-color);
   //--wt-status-select-option-background-selected-color: var(--primary-light-color);
 
-  --wt-status-select-background-color: var(
-    --wt-status-select-option-background-color
-  );
+  --wt-status-select-background-color: var(--wt-status-select-option-background-color);
 }

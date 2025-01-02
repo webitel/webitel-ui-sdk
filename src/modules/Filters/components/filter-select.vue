@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+
 import { computed, reactive, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
@@ -33,9 +34,7 @@ const attrs = useAttrs();
 const store = useStore();
 const { t } = useI18n();
 
-const filterSchema = computed(
-  () => getNamespacedState(store.state, props.namespace)[props.filterQuery],
-);
+const filterSchema = computed(() => getNamespacedState(store.state, props.namespace)[props.filterQuery]);
 
 const trackBy = computed(() => {
   if (filterSchema.value.storedProp !== undefined) {
@@ -53,36 +52,30 @@ const trackBy = computed(() => {
   return 'id';
 });
 
-const rawValue = computed(
-  () => store.getters[`${props.namespace}/FILTER_${props.filterQuery}`],
-);
+const rawValue = computed(() => store.getters[`${props.namespace}/FILTER_${props.filterQuery}`]);
 
 const cachedSearchOpts = reactive({});
 
-const search =
-  filterSchema.value.search &&
-  (async (selectParams) => {
-    const params = {
-      ...selectParams,
-    };
+const search = filterSchema.value.search && (async (selectParams) => {
+  const params = {
+    ...selectParams,
+  };
 
-    if (trackBy.value === 'id') {
-      params.ids = Array.isArray(rawValue.value)
-        ? rawValue.value
-        : [rawValue.value];
-    }
+  if (trackBy.value === 'id') {
+    params.ids = Array.isArray(rawValue.value) ? rawValue.value : [rawValue.value];
+  }
 
-    const { items, ...rest } = await filterSchema.value.search(params);
+  const { items, ...rest } = await filterSchema.value.search(params);
 
-    items.forEach((item) => {
-      cachedSearchOpts[item.id] = item;
-    });
-
-    return {
-      items,
-      ...rest,
-    };
+  items.forEach((item) => {
+    cachedSearchOpts[item.id] = item;
   });
+
+  return {
+    items,
+    ...rest,
+  };
+});
 
 const options = computed(() => {
   const options = filterSchema.value.options;
@@ -93,14 +86,10 @@ const options = computed(() => {
 const value = computed(() => {
   if (options.value) {
     if (filterSchema.value.multiple) {
-      return options.value.filter((option) =>
-        rawValue.value.includes(option[trackBy.value]),
-      );
+      return options.value.filter((option) => rawValue.value.includes(option[trackBy.value]));
     }
 
-    return options.value.find(
-      (option) => option[trackBy.value] === rawValue.value,
-    );
+    return options.value.find((option) => option[trackBy.value] === rawValue.value);
   }
 
   if (filterSchema.value.search) {
@@ -124,4 +113,6 @@ const setValue = (value) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

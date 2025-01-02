@@ -1,10 +1,15 @@
 <template>
   <div
     v-show="wrapperShown"
-    :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
+    :class="[
+      `wt-popup--size-${size}`,
+      { 'wt-popup--overflow': overflow }
+    ]"
     class="wt-popup"
   >
-    <transition-slide :offset="[0, -1440 / 2]">
+    <transition-slide
+      :offset="[0, -1440/2]"
+    >
       <aside
         v-if="shown"
         class="wt-popup__popup"
@@ -84,11 +89,11 @@ export default {
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@import '../../../src/css/main.scss';
 
 .wt-popup {
   position: fixed;
@@ -126,6 +131,7 @@ export default {
         width: var(--wt-popup-size-lg);
       }
     }
+
   }
 }
 

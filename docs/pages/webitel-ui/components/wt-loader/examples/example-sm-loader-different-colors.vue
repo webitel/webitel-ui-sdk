@@ -1,5 +1,10 @@
 <script setup>
-const colors = ['main', 'icon', 'on-dark', 'on-light'];
+  const colors = [
+    'main',
+    'icon',
+    'on-dark',
+    'on-light',
+  ];
 </script>
 
 <template>
@@ -11,4 +16,6 @@ const colors = ['main', 'icon', 'on-dark', 'on-light'];
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

@@ -1,4 +1,5 @@
 <script setup>
+
 import { ref } from 'vue';
 
 const value1 = 'value1';
@@ -22,4 +23,6 @@ const selected = ref(value1);
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

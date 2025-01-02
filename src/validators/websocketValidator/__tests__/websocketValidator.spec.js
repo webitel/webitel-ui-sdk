@@ -20,9 +20,7 @@ describe('websocketValidator', () => {
     expect(websocketValidator('wss://example.com/ws')).toBe(true);
   });
   it('truthy case 7: dns name', () => {
-    expect(
-      websocketValidator('wss://socket.socket.com/v3/channel_123?api_key=123'),
-    ).toBe(true);
+    expect(websocketValidator('wss://socket.socket.com/v3/channel_123?api_key=123')).toBe(true);
   });
   it('falsy case 1: empty string', () => {
     expect(websocketValidator('')).toBe(false);

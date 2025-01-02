@@ -4,11 +4,7 @@ import {
   getDefaultInstance,
   getDefaultOpenAPIConfig,
 } from '../../defaults/index.js';
-import applyTransform, {
-  notify,
-  snakeToCamel,
-  merge,
-} from '../../transformers/index.js';
+import applyTransform, { notify, snakeToCamel, merge } from '../../transformers/index.js';
 import i18n from '../../../locale/i18n.js';
 
 const { t } = i18n.global;
@@ -16,11 +12,7 @@ const { t } = i18n.global;
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const contactChatService = new ContactsChatCatalogApiFactory(
-  configuration,
-  '',
-  instance,
-);
+const contactChatService = new ContactsChatCatalogApiFactory(configuration, '', instance);
 
 const getChat = async ({ contactId, chatId }) => {
   const mergeChatMessagesData = ({ messages, peers }) => {
@@ -34,10 +26,7 @@ const getChat = async ({ contactId, chatId }) => {
   };
 
   try {
-    const response = await contactChatService.getContactChatHistory(
-      contactId,
-      chatId,
-    );
+    const response = await contactChatService.getContactChatHistory(contactId, chatId);
     const { messages, peers } = applyTransform(response.data, [snakeToCamel()]);
     return {
       items: applyTransform({ messages, peers }, [mergeChatMessagesData]),
@@ -50,6 +39,7 @@ const getChat = async ({ contactId, chatId }) => {
 
 // all messages from all contacts chats
 const getAllMessages = async (params) => {
+
   const mergeMessagesData = ({ messages, peers, chats }) => {
     if (!messages) return [];
     return messages.map(({ from, chat, ...message }) => {
@@ -61,7 +51,11 @@ const getAllMessages = async (params) => {
     });
   };
 
-  const { contactId, page, size } = params;
+  const {
+    contactId,
+    page,
+    size,
+  } = params;
 
   try {
     const response = await contactChatService.getContactChatHistory2(
@@ -81,12 +75,10 @@ const getAllMessages = async (params) => {
     };
   } catch (err) {
     throw applyTransform(err, [
-      notify(({ callback }) =>
-        callback({
-          type: 'error',
-          text: t('errorNotifications.chatHistoryApi'),
-        }),
-      ),
+      notify(({ callback }) => callback({
+        type: 'error',
+        text: t('errorNotifications.chatHistoryApi'),
+      })),
     ]);
   }
 };

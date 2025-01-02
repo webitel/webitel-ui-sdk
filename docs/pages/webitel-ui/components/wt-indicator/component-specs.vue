@@ -6,4 +6,6 @@ import Component from '__lib__/components/wt-indicator/wt-indicator.vue';
   <component-info :info="Component.docs" />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

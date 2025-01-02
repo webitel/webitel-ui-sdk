@@ -24,8 +24,7 @@ export default {
         );
       } else {
         this.value =
-          this.options.find((option) => option[this.storedProp] === value) ||
-          this.defaultValue;
+          this.options.find((option) => option[this.storedProp] === value) || this.defaultValue;
       }
     },
   },

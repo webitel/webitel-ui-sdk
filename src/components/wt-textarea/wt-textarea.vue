@@ -23,8 +23,8 @@
     </wt-label>
     <div class="wt-textarea__wrapper">
       <textarea
-        :id="name"
         ref="wt-textarea"
+        :id="name"
         :disabled="disabled"
         :placeholder="placeholder || label"
         :value="value"
@@ -39,7 +39,7 @@
       >
         <slot name="after-input" />
         <wt-icon-btn
-          :class="{ hidden: !value }"
+          :class="{ 'hidden': !value }"
           :disabled="disabled"
           class="wt-textarea__reset-icon-btn"
           icon="close--filled"
@@ -127,7 +127,7 @@ export default {
     this.updateInputPaddings();
   },
   updated() {
-    if (this.autoresize && !this.value) this.resetGrow();
+    if(this.autoresize && !this.value) this.resetGrow();
   },
 
   methods: {
@@ -146,7 +146,7 @@ export default {
       const bordersSize = 2; // + 2px for height because of --rounded-action-border-size
 
       inputEl.style.height = 'auto';
-      inputEl.style.height = inputEl.scrollHeight + bordersSize + 'px';
+      inputEl.style.height = (inputEl.scrollHeight + bordersSize) + "px";
     },
 
     resetGrow() {
@@ -158,9 +158,9 @@ export default {
       // cant test this thing cause vue test utils doesnt render elements width :/
       const afterWrapperWidth = this.$refs['after-wrapper'].offsetWidth;
       const inputEl = this.$refs['wt-textarea'];
-      const defaultInputPadding = getComputedStyle(
-        document.documentElement,
-      ).getPropertyValue('--textarea-padding');
+      const defaultInputPadding = getComputedStyle(document.documentElement).getPropertyValue(
+        '--textarea-padding',
+      );
       inputEl.style.paddingRight = `calc(${defaultInputPadding} * 2 + ${afterWrapperWidth}px)`;
     },
   },
@@ -168,11 +168,11 @@ export default {
 </script>
 
 <style lang="scss">
-@use './variables.scss';
+@import './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@import '../../../src/css/main.scss';
 
 .wt-textarea {
   cursor: text;
@@ -192,6 +192,7 @@ export default {
     .wt-textarea__wrapper {
       height: 100%;
     }
+
   }
 }
 
@@ -226,10 +227,10 @@ export default {
 
   .wt-textarea--invalid &,
   .wt-textarea--invalid:hover & {
+    @include wt-placeholder('error');
     color: var(--wt-text-field-error-text-color);
     border-color: var(--wt-text-field-input-border-error-color);
     outline: none; // prevent outline overlapping false color
-    @include wt-placeholder('error');
   }
 }
 

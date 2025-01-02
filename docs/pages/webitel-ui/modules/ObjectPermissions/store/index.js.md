@@ -15,8 +15,7 @@ import { createObjectPermissionsStoreModule } from '@webitel/ui-sdk/src/modules/
 
 const permissions = createObjectPermissionsStoreModule({
   modules: {
-    table: {
-      // note: this is a table module, child of permissions module
+    table: { // note: this is a table module, child of permissions module
       getters: {
         PARENT_ID: (s, g, rootState) => rootState.directory.users.card.itemId, // required!
       },

@@ -8,13 +8,11 @@ import ExampleSwitcherLabelLeft from './examples/example-switcher-label-left.vue
 # WtSwitcher
 
 ## Props
-
 ::: raw
 <Docs/>
 :::
 
 ## Example Switcher
-
 ::: raw
 <ExampleSwitcher/>
 :::
@@ -24,7 +22,6 @@ import ExampleSwitcherLabelLeft from './examples/example-switcher-label-left.vue
 :::
 
 ## Example Disabled Switcher
-
 ::: raw
 <ExampleDisabledSwitcher/>
 :::
@@ -34,7 +31,6 @@ import ExampleSwitcherLabelLeft from './examples/example-switcher-label-left.vue
 :::
 
 ## Example Switcher with Label Left
-
 ::: raw
 <ExampleSwitcherLabelLeft/>
 :::

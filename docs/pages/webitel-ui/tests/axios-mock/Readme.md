@@ -32,7 +32,6 @@ const mock = axiosMock({
 ## vi.mock vs vi.doMock?
 
 ### tldr;
-
 `.mock` is hoisted, so it won't access any other variables,
 `.doMock` is not hoisted, so it will access other variables.
 

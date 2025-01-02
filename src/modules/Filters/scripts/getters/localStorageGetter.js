@@ -1,14 +1,10 @@
 // context === filter "this"
 const localStorageGetter = (context) => () => {
-  if (!context)
-    throw new Error('Filter context is required for localStorageGetter!');
+  if (!context) throw new Error('Filter context is required for localStorageGetter!');
 
   const key = context.localStorageKey;
 
-  if (!key)
-    throw new Error(
-      `Please provide "localStorageKey" for ${context.name} filter!`,
-    );
+  if (!key) throw new Error(`Please provide "localStorageKey" for ${context.name} filter!`);
 
   const value = localStorage.getItem(key);
   if (!value) return null;

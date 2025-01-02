@@ -7,8 +7,7 @@
       <pre><code class="language-html">&lt;p&gt;lorem ipsum dolor sit amet | truncate&lt;/p&gt;</code></pre>
       <pre><code class="language-html">&lt;p&gt;lorem ipsum dolor sit amet | truncateFromEnd&lt;/p&gt;</code></pre>
       <div>
-        Argument: string length (without dots).
-        <strong>Default value: 18</strong>;
+        Argument: string length (without dots). <strong>Default value: 18</strong>;
       </div>
       <span>truncateFromEnd is recommended for numbers.</span>
     </article>
@@ -26,4 +25,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

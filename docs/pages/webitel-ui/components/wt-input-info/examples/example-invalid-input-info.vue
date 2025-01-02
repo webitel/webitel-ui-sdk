@@ -1,7 +1,13 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
-  <wt-input-info invalid> Invalid input info </wt-input-info>
+  <wt-input-info invalid>
+    Invalid input info
+  </wt-input-info>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>

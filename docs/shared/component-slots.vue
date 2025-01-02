@@ -1,7 +1,7 @@
 <template>
   <article class="slots">
     <article class="docs-text">
-      <h2>Slots:</h2>
+      <h2>Slots: </h2>
     </article>
     <wt-table
       :data="slots"
@@ -55,4 +55,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

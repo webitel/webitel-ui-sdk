@@ -7,8 +7,7 @@ import {
 import applyTransform, {
   merge,
   notify,
-  snakeToCamel,
-  starToSearch,
+  snakeToCamel, starToSearch,
 } from '../../transformers/index.js';
 import i18n from '../../../locale/i18n.js';
 
@@ -17,14 +16,15 @@ const { t } = i18n.global;
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const agentChatsService = new AgentChatServiceApiFactory(
-  configuration,
-  '',
-  instance,
-);
+const agentChatsService = new AgentChatServiceApiFactory(configuration, '', instance);
 
 const getChatsList = async (params) => {
-  const { size, page, onlyClosed, onlyUnprocessed } = applyTransform(params, [
+  const {
+    size,
+    page,
+    onlyClosed,
+    onlyUnprocessed,
+  } = applyTransform(params, [
     merge(getDefaultGetParams()),
   ]);
 
@@ -38,7 +38,9 @@ const getChatsList = async (params) => {
       onlyClosed,
       onlyUnprocessed,
     );
-    const { items, next } = applyTransform(response.data, [snakeToCamel()]);
+    const { items, next } = applyTransform(response.data, [
+      snakeToCamel(),
+    ]);
     return {
       items,
       next,
@@ -48,19 +50,18 @@ const getChatsList = async (params) => {
   }
 };
 
-const markChatProcessed = async (chatId) => {
-  // add to chat unprocessedClose: true
+const markChatProcessed = async (chatId) => { // add to chat unprocessedClose: true
   try {
     const response = await agentChatsService.markChatProcessed(chatId);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [
+      snakeToCamel(),
+    ]);
   } catch (err) {
     throw applyTransform(err, [
-      notify(({ callback }) =>
-        callback({
-          type: 'error',
-          text: t('errorNotifications.markChatProcessed'),
-        }),
-      ),
+      notify(({ callback }) => callback({
+        type: 'error',
+        text: t('errorNotifications.markChatProcessed'),
+      })),
     ]);
   }
 };

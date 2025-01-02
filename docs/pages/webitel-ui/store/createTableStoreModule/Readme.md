@@ -4,8 +4,8 @@ This module contains the necessary tools for organizing data in a table view.
 
 **It includes:**
 
-- `createTableStoreModule`
-- `useTableStore`
+* `createTableStoreModule`
+* `useTableStore`
 
 **For integration with other store modules (like
 [API](../createApiStoreModule/Readme.md),
@@ -23,19 +23,19 @@ Vuex store module which contains all necessary logic for working with tables.
 
 It contains all required state to power a table view:
 
-- `dataList` - list of data items from the API
-- `headers` - list of table headers
-- `selected` - list of selected items from dataList (preserves original items references)
-- `error` - error response object if error during dataList fetching was occured
-- `isLoading` - boolean flag to indicate `dataList` loading state
-- `isNextPage` - boolean flag to indicate if there is more data to load
+* `dataList` - list of data items from the API
+* `headers` - list of table headers
+* `selected` - list of selected items from dataList (preserves original items references)
+* `error` - error response object if error during dataList fetching was occured
+* `isLoading` - boolean flag to indicate `dataList` loading state
+* `isNextPage` - boolean flag to indicate if there is more data to load
 
 ### Getters
 
-- `PARENT_ID` - **if table is nested, should be overriden**.
-- `REQUIRED_FIELDS` - list of fields, which should always be included in `FIELDS` getter. `['id']` by default
-- `FIELDS` - list of fields to get from API, depending on visible `headers` columns and `REQUIRED_FIELDS`
-- `GET_LIST_PARAMS`: accepts override object and returns all request filters as params
+* `PARENT_ID` - **if table is nested, should be overriden**.
+* `REQUIRED_FIELDS` - list of fields, which should always be included in `FIELDS` getter. `['id']` by default
+* `FIELDS` - list of fields to get from API, depending on visible `headers` columns and `REQUIRED_FIELDS`
+* `GET_LIST_PARAMS`: accepts override object and returns all request filters as params
   **with overrides priority**
 
 ### Actions
@@ -50,33 +50,33 @@ See source code
 
 ### Receives
 
-- `namespace` - Vuex module namespace, **without `/table` suffix**
+* `namespace` - Vuex module namespace, **without `/table` suffix**
 
 ### Returns
 
 #### Properties
 
-- `tableNamespace` - Vuex table module namespace
+* `tableNamespace` - Vuex table module namespace
 
 for others, see [store/state](#state)
 
-- `dataList`
-- `selected`
-- `isLoading`
-- `headers`
-- `isNext`
-- `error`
+* `dataList`
+* `selected`
+* `isLoading`
+* `headers`
+* `isNext`
+* `error`
 
 #### Methods
 
 see [store/actions](#actions)
 
-- `loadData`
-- `onFilterEvent`
-- `patchProperty`
-- `deleteData`
-- `sort`
-- `setSelected`
+* `loadData`
+* `onFilterEvent`
+* `patchProperty`
+* `deleteData`
+* `sort`
+* `setSelected`
 
 ## Details and design considerations
 
@@ -89,3 +89,5 @@ However, it would be great to have them injected in table store, because
 they are used together inside one table namespace.
 
 So, I've not came up with a better decision than just to left them inside TableStoreModule.
+
+

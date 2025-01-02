@@ -7,7 +7,10 @@ const autocomplete = [
   { name: 'Rails', language: 'Ruby' },
 ];
 
-const value = ref([autocomplete[0], autocomplete[1]]);
+const value = ref([
+  autocomplete[0],
+  autocomplete[1],
+]);
 </script>
 
 <template>
@@ -30,4 +33,6 @@ const value = ref([autocomplete[0], autocomplete[1]]);
   />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+</style>
