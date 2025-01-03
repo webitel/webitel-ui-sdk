@@ -1,3 +1,8 @@
+## [v24.12.41] - 2025-01-03
+### :bug: Bug Fixes
+- [`4968c67`](https://github.com/webitel/webitel-ui-sdk/commit/4968c6723bd88564fd1f6d3d0ac8beaf56789418) - rollback minus and plus icons
+
+
 ## [v24.12.40] - 2025-01-02
 ### :sparkles: New Features
 - [`5e47031`](https://github.com/webitel/webitel-ui-sdk/commit/5e47031d0b5f85acd7c52191a92e95aa6e5af4c3) - update version to 24.12.40 [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
@@ -703,3 +708,4 @@
 [v24.12.37]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.36...v24.12.37
 [v24.12.39]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.38...v24.12.39
 [v24.12.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.39...v24.12.40
+[v24.12.41]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.40...v24.12.41
