@@ -7,7 +7,13 @@
         :label="'fffilter nnname'"
         :disabled="editMode"
         :options="options"
+        use-value-from-options-by-prop="value"
         @input="filterName = $event"
+      />
+      <wt-input
+        v-model="filterLabel"
+        :label="'label goes here'"
+        @input="touchedLabel = true"
       />
       <div
         v-if="filterName"
@@ -36,9 +42,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue';
-import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
+import deepcopy from 'deep-copy';
+import { ref, watch } from 'vue';
+
 import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
+import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
+import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import type {
   FilterInitParams,
   FilterName,
@@ -67,32 +76,50 @@ const emit = defineEmits<{
 }>();
 
 const filterName = ref();
+const filterLabel = ref('');
 const filterValue = ref();
 
-const editMode = ref(false);
+// if user have not changed label yet, it will be changed with selected filterName
+const touchedLabel = ref(false);
+
+const editMode = !!props.filter;
 
 const invalid = ref(false);
 
 const submit = () => {
   emit('submit', {
     name: filterName.value,
+    label: filterLabel.value,
     value: filterValue.value,
   });
 };
 
-// if (props.options) {
-//
-// } else if (props.filter) {}
+if (props.options) {
+  watch(
+    props.options,
+    () => {
+      filterName.value = props.options[0]?.value;
+      filterValue.value = null;
 
-watch(props.options, () => {
-  filterName.value = props.options[0]?.value;
-  filterValue.value = null;
-});
+      if (!touchedLabel.value) {
+        filterLabel.value = filterName.value;
+      }
+    },
+    { immediate: true },
+  );
+}
 
-watch(props.filter, () => {
-  filterName.value = props.filter.name;
-  filterValue.value = props.filter.value;
-});
+if (props.filter) {
+  watch(
+    props.filter,
+    () => {
+      filterName.value = props.filter.name;
+      filterValue.value = deepcopy(props.filter.value);
+      filterLabel.value = props.filter.label;
+    },
+    { immediate: true },
+  );
+}
 </script>
 
 <style lang="scss" scoped></style>

@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts" setup>
-import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 import WtIconAction from '../../../../../../components/wt-icon-action/wt-icon-action.vue';
+import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 </script>
 
 <style lang="scss" scoped>

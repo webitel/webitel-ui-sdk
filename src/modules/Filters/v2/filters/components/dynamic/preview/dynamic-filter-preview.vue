@@ -2,16 +2,16 @@
   <dynamic-filter-config-view>
     <template #activator>
       <wt-chip>
-        label
+        {{ props.filter.label || props.filter.name }}
 
         <wt-tooltip>
           <template #activator>
-            <wt-icon-btn icon="info" />
+            <wt-icon-btn icon="rounded-info" />
           </template>
 
           <template #default>
             <dynamic-filter-preview-info
-              :name="props.filter.name || 'name goes here'"
+              :name="props.filter.name"
               :value="props.filter.value"
             />
           </template>
@@ -19,7 +19,7 @@
 
         <wt-icon-action
           action="delete"
-          @click="deleteFilter"
+          @mousedown.stop="deleteFilter"
         />
       </wt-chip>
     </template>
@@ -31,14 +31,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, type Ref } from 'vue';
-import WtTooltip from '../../../../../../../components/wt-tooltip/wt-tooltip.vue';
-import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
-import WtIconBtn from '../../../../../../../components/wt-icon-btn/wt-icon-btn.vue';
-import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import WtChip from '../../../../../../../components/wt-chip/wt-chip.vue';
 import WtIconAction from '../../../../../../../components/wt-icon-action/wt-icon-action.vue';
-import type { FilterName, IFilter } from '../../../types/Filter.types.ts';
+import WtIconBtn from '../../../../../../../components/wt-icon-btn/wt-icon-btn.vue';
+import WtTooltip from '../../../../../../../components/wt-tooltip/wt-tooltip.vue';
+import type { IFilter } from '../../../types/Filter.types.ts';
+import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
+import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {
   filter: IFilter;
@@ -47,11 +46,11 @@ interface Props {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'delete:filter': [];
+  'delete:filter': [IFilter];
 }>();
 
 const deleteFilter = () => {
-  emit('delete:filter');
+  emit('delete:filter', props.filter);
 };
 </script>
 

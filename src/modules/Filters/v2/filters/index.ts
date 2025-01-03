@@ -3,6 +3,7 @@ import { createFiltersManager } from './classes/FiltersManager.class';
 import type {
   FilterConfig,
   FilterInitParams,
+  FilterLabel,
   FilterName,
   FilterValue,
   IFilter,
@@ -12,14 +13,15 @@ import type {
   IFiltersManager,
 } from './types/FiltersManager.types.ts';
 
-export { Filter, createFiltersManager };
+export { createFiltersManager, Filter };
 
 export type {
   FilterConfig,
   FilterInitParams,
+  FilterLabel,
   FilterName,
+  FiltersManagerConfig,
   FilterValue,
   IFilter,
-  FiltersManagerConfig,
   IFiltersManager,
 };

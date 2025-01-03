@@ -1,5 +1,4 @@
 // import mitt from "mitt";
-import { Filter } from './Filter.class.ts';
 import type {
   FilterConfig,
   FilterName,
@@ -10,6 +9,7 @@ import type {
   FiltersManagerConfig,
   IFiltersManager,
 } from '../types/FiltersManager.types.ts';
+import { Filter } from './Filter.class.ts';
 
 // import {type FilterStorage, QueryFilterStorage, BrowserFilterStorage} from "./FilterStorage.types.ts";
 
@@ -71,7 +71,7 @@ class FiltersManager implements IFiltersManager {
   }
 
   restoreAll(): void {
-    this.filters.forEach((filter) => filter.restore());
+    // this.filters.forEach((filter) => filter.restore());
   }
 
   getAllValues(): { [name: FilterName]: FilterValue } {

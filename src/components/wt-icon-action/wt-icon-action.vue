@@ -4,7 +4,8 @@
       <wt-icon-btn
         :disabled="disabled"
         :icon="iconAction.icon"
-        @click="emit('click')"
+        @click="emit('click', $event)"
+        @mousedown="emit('mousedown', $event)"
       />
     </template>
     {{ t(iconAction.hint) }}
@@ -14,8 +15,11 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { IActionData } from './IActionData.js';
+
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
+import WtTooltip from '../wt-tooltip/wt-tooltip.vue';
+import { IActionData } from './IActionData.js';
 
 const props = defineProps({
   /**
@@ -40,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click', 'mousedown']);
 
 const { t } = useI18n();
 

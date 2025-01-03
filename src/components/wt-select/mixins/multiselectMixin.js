@@ -179,7 +179,9 @@ export default {
         if (this.trackBy === null) return; // then, options are primitives
 
         for (const opt of this.options) {
-          this.cachedOptionsMap[opt[this.useValueFromOptionsByProp || this.trackBy]] = opt;
+          this.cachedOptionsMap[
+            opt[this.useValueFromOptionsByProp || this.trackBy]
+          ] = opt;
         }
       },
       immediate: true,

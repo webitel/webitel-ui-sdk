@@ -1,4 +1,5 @@
 export type FilterName = string;
+export type FilterLabel = string;
 export type FilterValue =
   | object
   | []
@@ -11,6 +12,7 @@ export type FilterValue =
 export interface FilterInitParams {
   name: FilterName;
   value: FilterValue;
+  label?: FilterLabel;
 }
 
 export interface FilterConfig {
@@ -20,8 +22,8 @@ export interface FilterConfig {
 export interface IFilter {
   name: FilterName;
   value: FilterValue;
+  label?: FilterLabel;
   set: (value: unknown) => IFilter;
   get: () => unknown;
   reset: () => IFilter;
-  restore: () => IFilter;
 }
