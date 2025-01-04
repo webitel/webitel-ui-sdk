@@ -1,3 +1,31 @@
+## [v24.12.41] - 2025-01-03
+### :bug: Bug Fixes
+- [`4968c67`](https://github.com/webitel/webitel-ui-sdk/commit/4968c6723bd88564fd1f6d3d0ac8beaf56789418) - rollback minus and plus icons
+
+
+## [v24.12.40] - 2025-01-02
+### :sparkles: New Features
+- [`5e47031`](https://github.com/webitel/webitel-ui-sdk/commit/5e47031d0b5f85acd7c52191a92e95aa6e5af4c3) - update version to 24.12.40 [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`224d981`](https://github.com/webitel/webitel-ui-sdk/commit/224d981d2d6cee7bc1f91d40417c7440203ed4f7) - update version to 24.12.39 [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`4374a9d`](https://github.com/webitel/webitel-ui-sdk/commit/4374a9d5ab293562cc6dcd7a7a00cef83b070f4a) - update version to 24.12.36 [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`4a9f577`](https://github.com/webitel/webitel-ui-sdk/commit/4a9f577e10a5f30af9077794ca0ad7c24837bf9d) - implement handle searched element in table data, update styles for actions row [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+
+### :recycle: Refactors
+- [`ae3a4c1`](https://github.com/webitel/webitel-ui-sdk/commit/ae3a4c13e8d5a0ee9ad7ef0e459e066a619e382e) - prettier delete undo [WTEL-5512](https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`aad9c40`](https://github.com/webitel/webitel-ui-sdk/commit/aad9c4039a5e2b8637f63b75e3538949de2ee55c) - commit undo [WTEL-5512](https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v24.12.39] - 2025-01-02
+### :sparkles: New Features
+- [`9195e13`](https://github.com/webitel/webitel-ui-sdk/commit/9195e1386b2b101fd2a046f2697f20f8d63c13aa) - icons for source added [WTEL-5512](https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :bug: Bug Fixes
+- [`24918a2`](https://github.com/webitel/webitel-ui-sdk/commit/24918a2c40ade634b98c80673d5767b8db9e52f9) - fixed scss deprecation warning when running lib *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`a8ec78b`](https://github.com/webitel/webitel-ui-sdk/commit/a8ec78bc0412829fe400cefaa58d84d061aef986) - merge with master [WTEL-5512](https://webitel.atlassian.net/browse/WTEL-5512) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.37] - 2025-01-02
 
 ### :bug: Bug Fixes
@@ -687,3 +715,6 @@
 [v24.12.35]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.34...v24.12.35
 [v24.12.36]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.35...v24.12.36
 [v24.12.37]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.36...v24.12.37
+[v24.12.39]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.38...v24.12.39
+[v24.12.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.39...v24.12.40
+[v24.12.41]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.40...v24.12.41

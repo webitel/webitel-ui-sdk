@@ -61,6 +61,7 @@
           :selectable="selectable"
           :children-prop="childrenProp"
           :selected-elements="selectedElements"
+          :searched-prop="searchedProp"
           @update:selected="handleSelection($event.data, $event.select)"
         >
           <template #actions="{ item }">
@@ -123,11 +124,16 @@ const props = withDefaults(
      * 'It's a key in data object, which contains children array. '
      */
     childrenProp: string;
+    /**
+     * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
+     */
+    searchedProp?: string;
   }>(),
   {
     sortable: false,
     selectable: true,
     gridActions: true,
+    searchedProp: 'searched',
   },
 );
 
