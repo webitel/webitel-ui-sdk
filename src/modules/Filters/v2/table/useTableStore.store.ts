@@ -1,67 +1,41 @@
-import { defineStore } from 'pinia';
-import { type Ref, ref } from 'vue';
 import set from 'lodash/fp/set';
-import type { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
-import type { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
+import { defineStore, storeToRefs } from 'pinia';
+import { type Ref, ref } from 'vue';
+
 import { createTableFiltersStore } from '../filters/createTableFiltersStore.ts';
+import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
+import { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
+import {
+  PatchItemPropertyParams,
+  TableStore,
+  useTableStoreParams,
+} from '../types/tableStore.types.ts';
 
-interface ApiModulePatchParams {
-  changes: object;
-  parentId?: string | number;
-  id?: string | number;
-  etag?: string;
-}
-
-interface ApiModuleDeleteParams {
-  id: string | number;
-  parentId?: string | number;
-}
-
-interface ApiModule<Entity> {
-  getList: (params: object) => Promise<{ items: Entity[]; next: boolean }>;
-  patch: (params: ApiModulePatchParams) => Promise<Entity>;
-  delete: (params: ApiModuleDeleteParams) => Promise<Entity>;
-}
-
-interface useTableStoreParams<Entity> {
-  apiModule: ApiModule<Entity>;
-  etagMode: boolean;
-  parentId?: string;
-  deps: {
-    usePaginationStore: () => ReturnType<typeof createTablePaginationStore>;
-    useHeadersStore: () => ReturnType<typeof createTableHeadersStore>;
-  };
-}
-
-interface PatchItemPropertyParams {
-  index: number;
-  path: string;
-  value: unknown;
-}
-
-interface TableStore<Entity> {
-  dataList: Ref<Entity[]>;
-  selected: Ref<Entity[]>;
-  error: Ref<Error | null>;
-  isLoading: Ref<boolean>;
-
-  loadDataList: (query?: object) => Promise<void>;
-  patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
-  deleteEls: (deleted: Entity[]) => Promise<void>;
-}
-
-const useTableStore = <Entity extends { id: string; etag?: string }>(
+export const createTableStore = <Entity extends { id: string; etag?: string }>(
   namespace: string,
-  {
-    apiModule,
-    parentId,
-    deps: { usePaginationStore, useHeadersStore },
-  }: useTableStoreParams<Entity>,
+  { parentId, apiModule, headers }: useTableStoreParams<Entity>,
 ) => {
+  const usePaginationStore = createTablePaginationStore(namespace);
+  const useHeadersStore = createTableHeadersStore(namespace, { headers });
+  const useFiltersStore = createTableFiltersStore(namespace);
+
   return defineStore(namespace, (): TableStore<Entity> => {
     const paginationStore = usePaginationStore();
+    const { page, size, next } = storeToRefs(paginationStore);
+    const {
+      updatePage,
+      updateSize,
+      // $reset: $resetPaginationStore,
+      $patch: $patchPaginationStore,
+    } = paginationStore;
+
     const headersStore = useHeadersStore();
-    const filtersStore = createTableFiltersStore(namespace)();
+    const { headers, shownHeaders, fields, sort } = storeToRefs(headersStore);
+    const { updateSort, updateShownHeaders } = headersStore;
+
+    const filtersStore = useFiltersStore();
+    const { filtersManager } = storeToRefs(filtersStore);
+    const { addFilter, updateFilter, deleteFilter } = filtersStore;
 
     const dataList: Ref<Entity[]> = ref([]);
     const selected: Ref<Entity[]> = ref([]);
@@ -70,14 +44,14 @@ const useTableStore = <Entity extends { id: string; etag?: string }>(
 
     const loadDataList = async () => {
       isLoading.value = true;
-      paginationStore.$patch({ next: false });
+      $patchPaginationStore({ next: false });
 
       const params = {
-        ...filtersStore.filtersManager.getAllValues(), // TODO: use getter
-        page: paginationStore.page,
-        size: paginationStore.size,
-        sort: headersStore.sort,
-        fields: headersStore.fields,
+        ...filtersManager.value.getAllValues(), // TODO: use getter
+        page: page.value,
+        size: size.value,
+        sort: sort.value,
+        fields: fields.value,
         parentId,
       };
 
@@ -85,7 +59,7 @@ const useTableStore = <Entity extends { id: string; etag?: string }>(
         const { items, next } = await apiModule.getList(params);
 
         dataList.value = items;
-        paginationStore.$patch({ next });
+        $patchPaginationStore({ next });
       } catch (err) {
         error.value = err;
         throw err;
@@ -136,15 +110,30 @@ const useTableStore = <Entity extends { id: string; etag?: string }>(
       error,
       isLoading,
 
+      page,
+      size,
+      next,
+
+      headers,
+      shownHeaders,
+      fields,
+      sort,
+
+      filtersManager,
+
       loadDataList,
       patchItemProperty,
       deleteEls,
+
+      updatePage,
+      updateSize,
+
+      updateSort,
+      updateShownHeaders,
+
+      addFilter,
+      updateFilter,
+      deleteFilter,
     };
   });
-};
-
-export const createTableStore = (namespace: string, params) => {
-  const id = namespace;
-
-  return useTableStore(id, params);
 };
