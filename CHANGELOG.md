@@ -1,3 +1,9 @@
+## [v24.12.44] - 2025-01-06
+### :bug: Bug Fixes
+- [`9880b55`](https://github.com/webitel/webitel-ui-sdk/commit/9880b55fd1a317c6a392a5419946de748857a2ca) - update package version to 24.12.44
+- [`e4d75f1`](https://github.com/webitel/webitel-ui-sdk/commit/e4d75f1fc4bb971c0e123d67dd828fa083f94d0d) - implement gap for tooltip content and display flex with direction column
+
+
 ## [v24.12.41] - 2025-01-03
 ### :bug: Bug Fixes
 - [`4968c67`](https://github.com/webitel/webitel-ui-sdk/commit/4968c6723bd88564fd1f6d3d0ac8beaf56789418) - rollback minus and plus icons
@@ -709,3 +715,4 @@
 [v24.12.39]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.38...v24.12.39
 [v24.12.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.39...v24.12.40
 [v24.12.41]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.40...v24.12.41
+[v24.12.44]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.43...v24.12.44
