@@ -1,6 +1,4 @@
-enum AdminSections {
-    Queues = 'queues',
-}
+
 enum WtObject {
     Agent = 'agent',
     Queue = 'queue',
