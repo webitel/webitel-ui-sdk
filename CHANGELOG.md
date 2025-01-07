@@ -1,3 +1,8 @@
+## [v24.12.46] - 2025-01-07
+### :sparkles: New Features
+- [`f038e5f`](https://github.com/webitel/webitel-ui-sdk/commit/f038e5ff908bd11ff76b9c6b74bcd3e8e0916eb4) - cases icon added [WTEL-5325](https://webitel.atlassian.net/browse/WTEL-5325) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.44] - 2025-01-06
 ### :bug: Bug Fixes
 - [`9880b55`](https://github.com/webitel/webitel-ui-sdk/commit/9880b55fd1a317c6a392a5419946de748857a2ca) - update package version to 24.12.44
@@ -716,3 +721,4 @@
 [v24.12.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.39...v24.12.40
 [v24.12.41]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.40...v24.12.41
 [v24.12.44]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.43...v24.12.44
+[v24.12.46]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.45...v24.12.46
