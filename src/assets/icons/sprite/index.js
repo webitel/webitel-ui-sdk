@@ -39,6 +39,7 @@ import callRingingFilled from './call-ringing--filled.svg';
 import callTransfer from './call-transfer.svg';
 import callTransferFilled from './call-transfer--filled.svg';
 import caseAuthor from './case-author.svg';
+import cases from './cases.svg';
 import chat from './chat.svg';
 import chatFilled from './chat--filled.svg';
 import chatEmoji from './chat-emoji.svg';
@@ -238,6 +239,7 @@ export default objCamelToKebab({
   'call-transfer--filled': callTransferFilled,
 
   caseAuthor,
+  cases,
   chat,
   'chat--filled': chatFilled,
   chatEmoji,
