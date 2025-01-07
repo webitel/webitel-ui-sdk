@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, reactive } from 'vue';
 
+import { usePersistedStorage } from '../persist/usePersistedStorage.ts';
 import { createFiltersManager } from './classes/FiltersManager.class.ts';
 
 export const createTableFiltersStore = (namespace: string) => {
@@ -18,6 +19,16 @@ export const createTableFiltersStore = (namespace: string) => {
 
     const filtersList = computed(() => filtersManager.filters.values());
 
+    const setupPersistence  = () => {
+      const { restore: restoreFilters } = usePersistedStorage({
+        name: 'filters',
+        value: filtersManager,
+        storagePath: `${namespace}/filters`,
+      });
+
+      return restoreFilters();
+    };
+
     return {
       filtersManager,
 
@@ -26,6 +37,8 @@ export const createTableFiltersStore = (namespace: string) => {
       addFilter,
       updateFilter,
       deleteFilter,
+
+      setupPersistence,
     };
   });
 };

@@ -27,6 +27,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       updateSize,
       // $reset: $resetPaginationStore,
       $patch: $patchPaginationStore,
+      setupPersistence: setupPaginationPersistence,
     } = paginationStore;
 
     const headersStore = useHeadersStore();
@@ -35,7 +36,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
     const filtersStore = useFiltersStore();
     const { filtersManager } = storeToRefs(filtersStore);
-    const { addFilter, updateFilter, deleteFilter } = filtersStore;
+    const { addFilter, updateFilter, deleteFilter, setupPersistence: setupFiltersPersistence } = filtersStore;
 
     const dataList: Ref<Entity[]> = ref([]);
     const selected: Ref<Entity[]> = ref([]);
@@ -104,6 +105,13 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       }
     };
 
+    const initialize = () => {
+      return Promise.allSettled([
+        setupPaginationPersistence(),
+        setupFiltersPersistence(),
+      ]);
+    };
+
     return {
       dataList,
       selected,
@@ -120,6 +128,8 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       sort,
 
       filtersManager,
+
+      initialize,
 
       loadDataList,
       patchItemProperty,

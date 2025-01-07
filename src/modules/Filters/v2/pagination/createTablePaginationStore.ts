@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+import { usePersistedStorage } from '../persist/usePersistedStorage.ts';
+
 export const createTablePaginationStore = (namespace: string) => {
   const id = `${namespace}/pagination`;
 
@@ -23,6 +25,20 @@ export const createTablePaginationStore = (namespace: string) => {
       next.value = false;
     };
 
+    const setupPersistence = async () => {
+      const { restore: restorePage } = usePersistedStorage({
+        name: 'page',
+        value: page,
+      });
+
+      const { restore: restoreSize } = usePersistedStorage({
+        name: 'size',
+        value: size,
+      });
+
+      return Promise.allSettled([restorePage(), restoreSize()]);
+    };
+
     return {
       page,
       size,
@@ -30,6 +46,8 @@ export const createTablePaginationStore = (namespace: string) => {
 
       updatePage,
       updateSize,
+
+      setupPersistence,
       $reset,
     };
   });

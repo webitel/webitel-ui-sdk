@@ -26,9 +26,8 @@ export interface IFiltersManager {
   resetAll: () => void;
   restoreAll: () => void;
   getAllValues: () => { [name: FilterName]: FilterValue };
+  toString: () => string;
+  fromString: (snapshotStr: string) => void;
 }
 
-export type FiltersManagerConfig = FilterConfig & {
-  storagePrefix: string;
-  storages?: 'url' | 'browser' | null;
-};
+export type FiltersManagerConfig = FilterConfig;

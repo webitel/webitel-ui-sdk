@@ -1,4 +1,5 @@
-// import mitt from "mitt";
+import { isEmpty } from '../../../../../scripts';
+import { PersistStorableValue } from '../../persist/PersistedStorage.types.ts';
 import type {
   FilterConfig,
   FilterName,
@@ -11,34 +12,31 @@ import type {
 } from '../types/FiltersManager.types.ts';
 import { Filter } from './Filter.class.ts';
 
-// import {type FilterStorage, QueryFilterStorage, BrowserFilterStorage} from "./FilterStorage.types.ts";
+const filterLabelToSnapshotKey = (name: FilterName): string => `${name}_lbl`;
+
+const filterValueToSnapshotKey = (name: FilterName): string => `${name}_val`;
+
+const filterLabelFromSnapshotKey = (snapshotKey: string): FilterName =>
+  snapshotKey.replace('_lbl', '');
+
+const filterValueFromSnapshotKey = (snapshotKey: string): FilterName =>
+  snapshotKey.replace('_val', '');
+
+const isLabelSnapshotKey = (snapshotKey: string): boolean =>
+  snapshotKey.includes('_lbl');
+
+const isValueSnapshotKey = (snapshotKey: string): boolean =>
+  snapshotKey.includes('_val');
+
+const filterNameFromSnapshotKey = (snapshotKey: string): FilterName => {
+  if (isLabelSnapshotKey()) return filterLabelFromSnapshotKey(snapshotKey);
+  if (isValueSnapshotKey()) return filterValueFromSnapshotKey(snapshotKey);
+};
 
 class FiltersManager implements IFiltersManager {
-  // private readonly emitter = mitt();
-  // private readonly storages: FilterStorage = [];
-
   filters = new Map<FilterName, IFilter>();
 
-  constructor(private config: FiltersManagerConfig) {
-    // let storages: [];
-    // if (config.storages === null) {
-    //     storages = [];
-    // } else if (config.storages) {
-    //     storages = config.storages;
-    // } else {
-    //     storages = ['url', 'browser'];
-    // }
-    //
-    // this.storages = storages.map((storage) => {
-    //     if (storage === 'url') {
-    //         return new QueryFilterStorage();
-    //     }
-    //
-    //     if (storage === 'browser') {
-    //         return new BrowserFilterStorage({ prefix: config.storagePrefix });
-    //     }
-    // });
-  }
+  constructor(private config: FiltersManagerConfig) {}
 
   get(name: FilterName): IFilter {
     return this.filters.get(name);
@@ -70,10 +68,6 @@ class FiltersManager implements IFiltersManager {
     this.filters.forEach((filter) => filter.reset());
   }
 
-  restoreAll(): void {
-    // this.filters.forEach((filter) => filter.restore());
-  }
-
   getAllValues(): { [name: FilterName]: FilterValue } {
     const filters = [...this.filters.values()].reduce((acc, filter) => {
       acc[filter.name] = filter.get();
@@ -81,6 +75,50 @@ class FiltersManager implements IFiltersManager {
     }, {});
 
     return filters;
+  }
+
+  toString(): PersistStorableValue {
+    const filtersData = [...this.filters.values()].reduce(
+      (acc, { name, label, value }) => {
+        if (isEmpty(value)) return acc;
+
+        acc[filterValueToSnapshotKey(name)] = value;
+
+        if (label) {
+          acc[filterLabelToSnapshotKey()] = label;
+        }
+
+        return acc;
+      },
+      {},
+    );
+
+    return JSON.stringify(filtersData);
+  }
+
+  fromString(snapshotStr: PersistStorableValue): void {
+    const snapshot = JSON.parse(snapshotStr);
+
+    const filters = Object.entries(snapshot).reduce(
+      acc,
+      ([snapshotKey, snapshotValue]) => {
+        const name = filterNameFromSnapshotKey(snapshotKey);
+        const valueProp = isValueSnapshotKey(snapshotKey) ? 'value' : 'label';
+
+        if (acc[name]) {
+          acc[name][valueProp] = snapshotValue;
+        } else {
+          acc[name] = {
+            [valueProp]: snapshotValue,
+          };
+        }
+      },
+      {},
+    );
+
+    Object.entries(filters).forEach(([name, contents]) => {
+      this.add({ ...contents, name });
+    });
   }
 }
 
