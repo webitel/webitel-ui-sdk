@@ -43,6 +43,7 @@ import {
   watch,
   watchEffect,
 } from 'vue';
+
 import WtButton from '../../../components/wt-button/wt-button.vue';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
@@ -82,7 +83,7 @@ const auditQuestions = ref(null);
 const isQuestionAdded = reactive({ value: false, index: null });
 
 async function addQuestion({ index, question } = {}) {
-  const questions = [...props.questions];
+  const questions = [...(props.questions || [])];
   const newQuestion = question || generateQuestionSchema();
   if (index != null) questions.splice(index, 0, newQuestion);
   else questions.push(newQuestion);
@@ -124,12 +125,12 @@ function handleResultUpdate({ key, value }) {
 }
 
 function initResult() {
-  const result = props.questions.map(() => ({}));
+  const result = props.questions?.map(() => ({}));
   emit('update:result', result);
 }
 
 function initQuestions() {
-  if (props.mode === 'create' && !props.questions.length) {
+  if (props.mode === 'create' && !props.questions?.length) {
     addQuestion({ question: generateQuestionSchema({ required: true }) });
   } else if (props.questions.length)
     auditQuestions.value.at(0).activateQuestion();
