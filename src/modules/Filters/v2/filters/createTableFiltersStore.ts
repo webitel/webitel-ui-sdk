@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
-import { computed, reactive } from 'vue';
+import { computed, reactive,ref } from 'vue';
 
+import { PersistedStorageType } from '../persist/PersistedStorage.types.ts';
 import { usePersistedStorage } from '../persist/usePersistedStorage.ts';
 import { createFiltersManager } from './classes/FiltersManager.class.ts';
 
@@ -9,7 +10,7 @@ export const createTableFiltersStore = (namespace: string) => {
 
   return defineStore(id, () => {
     const filtersManager = reactive(
-      createFiltersManager({ storagePrefix: namespace }),
+      createFiltersManager(),
     );
 
     // wrapping filtersManager method to extend their functionality, if it will be necessary in future
@@ -23,7 +24,15 @@ export const createTableFiltersStore = (namespace: string) => {
       const { restore: restoreFilters } = usePersistedStorage({
         name: 'filters',
         value: filtersManager,
-        storagePath: `${namespace}/filters`,
+        storages: [PersistedStorageType.Route],
+        onStore: async (save, { name }) => {
+          const snapshotStr = filtersManager.toString();
+          return save({ name, value: snapshotStr });
+        },
+        onRestore: async (restore, name) => {
+          const snapshotStr = await restore(name);
+          if (snapshotStr) filtersManager.fromString(snapshotStr);
+        },
       });
 
       return restoreFilters();

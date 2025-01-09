@@ -39,7 +39,7 @@ export interface PersistedPropertyConfig {
   onRestore?: (
     restore: (name: string) => Promise<PersistableValue>,
     name: string,
-  ) => Promise<PersistableValue>;
+  ) => Promise<void>;
 }
 
 export interface PersistedStorageController {

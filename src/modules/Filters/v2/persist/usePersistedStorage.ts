@@ -1,6 +1,7 @@
 import { watch } from 'vue';
 
 import {
+  PersistableValue,
   PersistedPropertyConfig,
   PersistedStorageController,
   PersistedStorageType,
@@ -20,8 +21,21 @@ export const usePersistedStorage = ({
   let unwatch = null;
 
   const setItemFns = [];
-  const getItemFns = [];
+  const getItemFns: Array<(name: string) => Promise<PersistableValue>> = [];
   const removeItemFns = [];
+
+  const composedValueGetter = async (name: string): Promise<PersistableValue[]> => {
+    const settledResults = await Promise.allSettled(
+      getItemFns.map((getter) => getter(name))
+    );
+
+    return settledResults.reduce((acc, { status, value }) => {
+      if (status === 'fulfilled') {
+        return [...acc, value];
+      }
+      return acc;
+    }, []);
+  };
 
   const storages = Array.isArray(configStorages)
     ? configStorages
@@ -57,10 +71,15 @@ export const usePersistedStorage = ({
          wrap all setItemFns in one callback
           so that onStore is called only once on each value change
          */
-        const save = async ({ name, value }) => {
-          await Promise.allSettled(
-            setItemFns.map((setItem) => setItem({ name, value })),
-          );
+        const save = async ({ name, value: storedValue }) => {
+          // await Promise.allSettled(
+          //   setItemFns.map((setItem) => {
+          //     return setItem({ name, value: storedValue });
+          //   }),
+          // );
+          setItemFns.forEach((setter) => {
+            setter(name, storedValue);
+          });
         };
         await onStore(save, { name, value });
       } else {
@@ -72,7 +91,7 @@ export const usePersistedStorage = ({
           setter(name, storedValue);
         });
       }
-    });
+    }, { deep: true });
   };
 
   const restore = async () => {
@@ -85,32 +104,28 @@ export const usePersistedStorage = ({
          wrap all getItemFns in one callback
           so that onRestore is called only once on each value change
          */
-      const restore = async (name) => {
-        await Promise.allSettled(getItemFns.map((getItem) => getItem(name)));
-        const restoredValues = await Promise.allSettled(
-          getItemFns.map((getItem) => getItem(name)),
-        );
+      const restore = async (name: string) => {
+        const restoredValues = await composedValueGetter(name);
         /*
          not sure if value to restore should be picked automatically
           before running onRestore
          */
-        return restoredValues.find((value) => value !== null);
+        return restoredValues.find((value) => {
+          return value !== null;
+        });
       };
       await onRestore(restore, name);
     } else {
       /*
        else, perform default restoring logic
        */
-      const restoredValues = await Promise.allSettled(
-        getItemFns.map((getItem) => getItem(name)),
-      );
+      const restoredValues = await composedValueGetter(name);
       const restoredValue = restoredValues.find((value) => value !== null);
 
       if (restoredValue !== undefined) {
         value.value = restoredValue;
       }
     }
-
     /*
       start watching after restoring value to prevent restored value
        from storing again

@@ -29,8 +29,8 @@ const isValueSnapshotKey = (snapshotKey: string): boolean =>
   snapshotKey.includes('_val');
 
 const filterNameFromSnapshotKey = (snapshotKey: string): FilterName => {
-  if (isLabelSnapshotKey()) return filterLabelFromSnapshotKey(snapshotKey);
-  if (isValueSnapshotKey()) return filterValueFromSnapshotKey(snapshotKey);
+  if (isLabelSnapshotKey(snapshotKey)) return filterLabelFromSnapshotKey(snapshotKey);
+  if (isValueSnapshotKey(snapshotKey)) return filterValueFromSnapshotKey(snapshotKey);
 };
 
 class FiltersManager implements IFiltersManager {
@@ -100,8 +100,7 @@ class FiltersManager implements IFiltersManager {
     const snapshot = JSON.parse(snapshotStr);
 
     const filters = Object.entries(snapshot).reduce(
-      acc,
-      ([snapshotKey, snapshotValue]) => {
+      (acc, [snapshotKey, snapshotValue]) => {
         const name = filterNameFromSnapshotKey(snapshotKey);
         const valueProp = isValueSnapshotKey(snapshotKey) ? 'value' : 'label';
 
@@ -112,6 +111,8 @@ class FiltersManager implements IFiltersManager {
             [valueProp]: snapshotValue,
           };
         }
+
+        return acc;
       },
       {},
     );
