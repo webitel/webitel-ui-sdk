@@ -152,6 +152,7 @@ const actions = {
       context.commit('SET', { path: 'error', value: err });
       throw err;
     } finally {
+      context.commit('SET', { path: 'selected', value: [] });
       setTimeout(() => {
         context.commit('SET', { path: 'isLoading', value: false });
       }, 100); // why 1s? https://ux.stackexchange.com/a/104782
@@ -240,21 +241,10 @@ const actions = {
     context.dispatch('api/PATCH_ITEM', payload),
   DELETE_ITEM_API: (context, payload) =>
     context.dispatch('api/DELETE_ITEM', payload),
-
-  RESET_TABLE_STATE: async (context) => {
-    context.commit('RESET_TABLE_STATE');
-  },
-};
-
-const mutations = {
-  RESET_TABLE_STATE: (state) => {
-    Object.assign(state, deepCopy(state._resettable));
-  },
 };
 
 export default () => ({
   state: state(),
   getters,
   actions,
-  mutations,
 });
