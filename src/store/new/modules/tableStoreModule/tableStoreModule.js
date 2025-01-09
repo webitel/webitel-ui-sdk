@@ -148,11 +148,12 @@ const actions = {
 
       context.commit('SET', { path: 'dataList', value: items });
       context.commit('SET', { path: 'isNextPage', value: next });
+      context.commit('SET', { path: 'selected', value: [] });
     } catch (err) {
       context.commit('SET', { path: 'error', value: err });
       throw err;
     } finally {
-      context.commit('SET', { path: 'selected', value: [] });
+
       setTimeout(() => {
         context.commit('SET', { path: 'isLoading', value: false });
       }, 100); // why 1s? https://ux.stackexchange.com/a/104782
