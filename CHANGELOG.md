@@ -1,3 +1,9 @@
+## [v24.12.47] - 2025-01-09
+### :bug: Bug Fixes
+- [`dfe80e4`](https://github.com/webitel/webitel-ui-sdk/commit/dfe80e47e6ef1db31a0d913149ee966361b0d7a0) - change call reset selected value[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`23a5356`](https://github.com/webitel/webitel-ui-sdk/commit/23a5356f9f5452b498e48181d11941a6a15bedd9) - reset selected items in table[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.46] - 2025-01-07
 ### :sparkles: New Features
 - [`f038e5f`](https://github.com/webitel/webitel-ui-sdk/commit/f038e5ff908bd11ff76b9c6b74bcd3e8e0916eb4) - cases icon added [WTEL-5325](https://webitel.atlassian.net/browse/WTEL-5325) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -722,3 +728,4 @@
 [v24.12.41]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.40...v24.12.41
 [v24.12.44]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.43...v24.12.44
 [v24.12.46]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.45...v24.12.46
+[v24.12.47]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.46...v24.12.47
