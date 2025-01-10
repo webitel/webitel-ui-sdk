@@ -29,9 +29,9 @@ export const usePersistedStorage = ({
       getItemFns.map((getter) => getter(name))
     );
 
-    return settledResults.reduce((acc, { status, value }) => {
-      if (status === 'fulfilled') {
-        return [...acc, value];
+    return settledResults.reduce((acc, result) => {
+      if (result.status === 'fulfilled') {
+        return [...acc, result.value];
       }
       return acc;
     }, []);

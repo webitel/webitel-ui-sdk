@@ -9,6 +9,11 @@ export type FilterValue =
   | undefined
   | null;
 
+export interface FilterData {
+  value: FilterValue;
+  label?: FilterLabel;
+}
+
 export interface FilterInitParams {
   name: FilterName;
   value: FilterValue;

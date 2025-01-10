@@ -1,37 +1,21 @@
 import { isEmpty } from '../../../../../scripts';
-import { PersistStorableValue } from '../../persist/PersistedStorage.types.ts';
+import {
+  filterLabelToSnapshotKey,
+  filterNameFromSnapshotKey, filterValuePropFromSnapshotKey,
+  filterValueToSnapshotKey,
+} from '../scripts/utils.ts';
 import type {
   FilterConfig,
   FilterName,
   FilterValue,
   IFilter,
 } from '../types/Filter.types.ts';
+import { FilterData } from '../types/Filter.types.ts';
 import type {
   FiltersManagerConfig,
   IFiltersManager,
 } from '../types/FiltersManager.types.ts';
 import { Filter } from './Filter.class.ts';
-
-const filterLabelToSnapshotKey = (name: FilterName): string => `${name}_lbl`;
-
-const filterValueToSnapshotKey = (name: FilterName): string => `${name}_val`;
-
-const filterLabelFromSnapshotKey = (snapshotKey: string): FilterName =>
-  snapshotKey.replace('_lbl', '');
-
-const filterValueFromSnapshotKey = (snapshotKey: string): FilterName =>
-  snapshotKey.replace('_val', '');
-
-const isLabelSnapshotKey = (snapshotKey: string): boolean =>
-  snapshotKey.includes('_lbl');
-
-const isValueSnapshotKey = (snapshotKey: string): boolean =>
-  snapshotKey.includes('_val');
-
-const filterNameFromSnapshotKey = (snapshotKey: string): FilterName => {
-  if (isLabelSnapshotKey(snapshotKey)) return filterLabelFromSnapshotKey(snapshotKey);
-  if (isValueSnapshotKey(snapshotKey)) return filterValueFromSnapshotKey(snapshotKey);
-};
 
 class FiltersManager implements IFiltersManager {
   filters = new Map<FilterName, IFilter>();
@@ -77,7 +61,7 @@ class FiltersManager implements IFiltersManager {
     return filters;
   }
 
-  toString(): PersistStorableValue {
+  toString(): string {
     const filtersData = [...this.filters.values()].reduce(
       (acc, { name, label, value }) => {
         if (isEmpty(value)) return acc;
@@ -85,7 +69,7 @@ class FiltersManager implements IFiltersManager {
         acc[filterValueToSnapshotKey(name)] = value;
 
         if (label) {
-          acc[filterLabelToSnapshotKey()] = label;
+          acc[filterLabelToSnapshotKey(name)] = label;
         }
 
         return acc;
@@ -96,29 +80,33 @@ class FiltersManager implements IFiltersManager {
     return JSON.stringify(filtersData);
   }
 
-  fromString(snapshotStr: PersistStorableValue): void {
+  fromString(snapshotStr: string): void {
     const snapshot = JSON.parse(snapshotStr);
 
-    const filters = Object.entries(snapshot).reduce(
-      (acc, [snapshotKey, snapshotValue]) => {
+    /*
+    first, make transition object from snapshot,
+    because filter should bw always added with value
+     */
+    const filtersData: { FilterName: FilterData } = Object.entries(snapshot).reduce(
+      (filtersAcc, [snapshotKey, snapshotValue]) => {
         const name = filterNameFromSnapshotKey(snapshotKey);
-        const valueProp = isValueSnapshotKey(snapshotKey) ? 'value' : 'label';
+        const valueProp = filterValuePropFromSnapshotKey(snapshotKey);
 
-        if (acc[name]) {
-          acc[name][valueProp] = snapshotValue;
+        if (filtersAcc[name]) {
+          filtersAcc[name][valueProp] = snapshotValue;
         } else {
-          acc[name] = {
+          filtersAcc[name] = {
             [valueProp]: snapshotValue,
           };
         }
 
-        return acc;
+        return filtersAcc;
       },
-      {},
+      {} as { FilterName: FilterData },
     );
 
-    Object.entries(filters).forEach(([name, contents]) => {
-      this.add({ ...contents, name });
+    Object.entries(filtersData).forEach(([name, filterData]) => {
+      this.add({ ...filterData, name });
     });
   }
 }

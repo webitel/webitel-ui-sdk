@@ -1,7 +1,6 @@
 import type { Ref } from 'vue';
 
-import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
-import { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
+import { IFiltersManager } from '../filters';
 
 interface ApiModulePatchParams {
   changes: object;
@@ -22,13 +21,10 @@ interface ApiModule<Entity> {
 }
 
 export interface useTableStoreParams<Entity> {
-  apiModule: ApiModule<Entity>;
-  etagMode: boolean;
   parentId?: string;
-  deps: {
-    usePaginationStore: () => ReturnType<typeof createTablePaginationStore>;
-    useHeadersStore: () => ReturnType<typeof createTableHeadersStore>;
-  };
+  apiModule: ApiModule<Entity>;
+  headers: [];
+  // etagMode: boolean;
 }
 
 export interface PatchItemPropertyParams {
@@ -38,12 +34,42 @@ export interface PatchItemPropertyParams {
 }
 
 export interface TableStore<Entity> {
+  // tableStore
   dataList: Ref<Entity[]>;
   selected: Ref<Entity[]>;
   error: Ref<Error | null>;
   isLoading: Ref<boolean>;
 
+  // paginationStore
+  page: Ref<number>;
+  size: Ref<number>;
+  next: Ref<boolean>;
+
+  // headersStore
+  headers: Ref<[]>;
+  shownHeaders: Ref<[]>;
+  fields: Ref<[]>;
+  sort: Ref<string>;
+
+  // filtersStore
+  filtersManager: Ref<IFiltersManager>;
+
+  // tableStore
+  initialize: () => Promise<void>;
   loadDataList: (query?: object) => Promise<void>;
   patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
   deleteEls: (deleted: Entity[]) => Promise<void>;
+
+  // paginationStore
+  updatePage: (page: number) => void;
+  updateSize: (size: number) => void;
+
+  // headersStore
+  updateSort: (column: object) => void;
+  updateShownHeaders: () => void;
+
+  // filtersStore
+  addFilter: (filter: object) => void;
+  updateFilter: (filter: object) => void;
+  deleteFilter: (filter: object) => void;
 }

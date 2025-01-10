@@ -48,7 +48,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       $patchPaginationStore({ next: false });
 
       const params = {
-        ...filtersManager.value.getAllValues(), // TODO: use getter
+        ...filtersManager.value.getAllValues(),
         page: page.value,
         size: size.value,
         sort: sort.value,
@@ -105,8 +105,8 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       }
     };
 
-    const initialize = () => {
-      return Promise.allSettled([
+    const initialize = async () => {
+      await Promise.allSettled([
         setupPaginationPersistence(),
         setupFiltersPersistence(),
       ]);

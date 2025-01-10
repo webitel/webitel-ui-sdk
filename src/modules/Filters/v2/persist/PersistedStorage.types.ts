@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import { Ref, WatchOptions } from 'vue';
 
 export enum PersistedStorageType {
   LocalStorage = 'localStorage',
@@ -6,7 +6,7 @@ export enum PersistedStorageType {
 }
 
 // in route query, or in localStorage
-export type PersistStorableValue = string | string[];
+export type PersistStorableValue = string;
 
 export type PersistableValue =
   | PersistStorableValue
@@ -26,6 +26,7 @@ export interface PersistedPropertyConfig {
   storages?: PersistedStorageType | PersistedStorageType[];
   storagePath?: string;
   startWatchManually?: boolean;
+  watchConfig?: WatchOptions;
   onStore?: (
     save: ({
       name,

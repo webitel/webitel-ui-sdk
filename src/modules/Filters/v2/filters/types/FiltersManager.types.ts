@@ -24,7 +24,6 @@ export interface IFiltersManager {
   delete: (name: FilterName) => IFilter;
 
   resetAll: () => void;
-  restoreAll: () => void;
   getAllValues: () => { [name: FilterName]: FilterValue };
   toString: () => string;
   fromString: (snapshotStr: string) => void;
