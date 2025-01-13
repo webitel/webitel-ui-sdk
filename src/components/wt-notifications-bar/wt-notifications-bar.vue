@@ -64,7 +64,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 
 .wt-notifications-bar {
   @extend %wt-scrollbar;

@@ -261,7 +261,7 @@ const handleSelection = (row, select) => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-tree-table {
   @extend %wt-scrollbar;

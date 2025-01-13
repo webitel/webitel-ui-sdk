@@ -66,7 +66,7 @@ const sidePanelSize = computed(() =>
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {

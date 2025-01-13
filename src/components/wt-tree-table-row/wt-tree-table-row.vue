@@ -199,7 +199,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-tree-table-td {
   @extend %typo-body-1;

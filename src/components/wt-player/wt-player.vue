@@ -178,7 +178,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-player {
   @extend %typo-body-2;

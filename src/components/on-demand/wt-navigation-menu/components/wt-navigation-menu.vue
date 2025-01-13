@@ -82,7 +82,8 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../../css/main' as *;
+@use '../../../../css/styleguide/styleguide' as *;
+
 .wt-navigation-menu {
   display: flex;
   align-items: center;

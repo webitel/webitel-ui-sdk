@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 
 $list-height: 400px;
 $list-width-sm: calc(

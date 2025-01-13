@@ -97,23 +97,26 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern', // or "modern-compiler", "legacy",
+          api: 'modern-compiler', // or "modern-compiler", "legacy",
           sassOptions: {
             quietDeps: true,
           },
           // DETAILED ANSWER FOR THIS STRANGE STRUCTURE
           // FOR additionalData CAN BE FOUND AT THE LINK https://webitel.atlassian.net/browse/WTEL-5778?focusedCommentId=647516
-          additionalData: (content, filename) => {
-            // Suppress warnings for specific files or packages
-            if (/node_modules\/plyr/.test(filename)) {
-              return `
-              @import "plyr/src/sass/plyr.scss";
-              /* suppress warnings for this file */
-              $disable-import-warning: true;
-            `;
-            }
-            return content;
-          },
+          // additionalData: (content, filename) => {
+          //   // Suppress warnings for specific files or packages
+          //   if (/node_modules\/plyr/.test(filename)) {
+          //     return `
+          //     @import "plyr/src/sass/plyr.scss";
+          //     /* suppress warnings for this file */
+          //     $disable-import-warning: true;
+          //   `;
+          //   }
+          //   return content;
+          // },
+          additionalData: `
+            // @use 'styleguide/styleguide' as *;
+          `,
         },
       },
     },

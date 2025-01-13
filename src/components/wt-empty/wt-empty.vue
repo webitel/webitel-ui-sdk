@@ -251,7 +251,7 @@ const onSecondaryClick = onClick('secondary');
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 
 .wt-empty {
   display: flex;

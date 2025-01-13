@@ -47,7 +47,7 @@ const open = () => {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../../css/main.scss';
+@use '../../../../css/styleguide/styleguide';
 
 .start-page-card {
   display: flex;

@@ -111,7 +111,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 
 .wt-pagination {
   @extend %typo-body-1;

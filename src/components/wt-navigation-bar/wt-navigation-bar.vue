@@ -213,7 +213,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 
 .wt-navigation-bar__menu-btn {
   display: block;

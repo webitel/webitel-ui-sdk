@@ -150,7 +150,7 @@ const requiredLabel = computed(() => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {

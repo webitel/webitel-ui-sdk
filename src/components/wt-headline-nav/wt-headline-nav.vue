@@ -49,7 +49,7 @@ const props = defineProps({
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '../../css/styleguide/styleguide';
 
 .wt-headline-nav {
   display: flex;
