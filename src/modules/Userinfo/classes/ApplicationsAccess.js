@@ -1,5 +1,6 @@
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
+
 import AdminSections from '../../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections from '../../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum.js';
@@ -205,6 +206,10 @@ const applicationsAccess = (value = true) => ({
     [CrmSections.SERVICE_CATALOGS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SERVICE_CATALOGS}`,
+    },
+    [CrmSections.CLOSE_REASON_GROUPS]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CLOSE_REASON_GROUPS}`,
     },
     [CrmSections.CONTACT_GROUPS]: {
       _enabled: value,
