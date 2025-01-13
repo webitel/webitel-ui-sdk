@@ -5,7 +5,9 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import { IconAction } from '../../enums/index.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
@@ -18,6 +20,9 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    download: 'Завантажити',
+    history: 'Історія',
+    filter: 'Фільтр | Фільтри',
     total: 'Всього',
     ok: 'Ок',
     save: 'Зберегти',
@@ -347,11 +352,18 @@ export default {
       breakOut: 'Примусова перерва',
     },
     iconAction: {
-      deleteActionHint: 'Видалити',
-      editActionHint: 'Редагувати',
-      addActionHint: 'Додати',
-      historyActionHint: 'Історія',
-      downloadActionHint: 'Скачати',
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
+        [IconAction.COLUMNS]: 'Додати колонки',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+      },
     },
     errorPages: {
       goBack: 'Повернутись назад',
