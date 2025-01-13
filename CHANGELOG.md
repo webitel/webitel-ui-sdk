@@ -1,3 +1,8 @@
+## [v24.12.51] - 2025-01-13
+### :recycle: Refactors
+- [`5989104`](https://github.com/webitel/webitel-ui-sdk/commit/5989104f1fbd63238a90ec98f213d3708d01fe24) - added `wt-badge` slot as the primary usage, added backwards compatibility, + docs [WTEL-5882](https://webitel.atlassian.net/browse/WTEL-5882) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.50] - 2025-01-13
 ### :sparkles: New Features
 - [`da0c0da`](https://github.com/webitel/webitel-ui-sdk/commit/da0c0da0a8f719629f7ff7af8a302785f8e3c0be) - added `filters` and `columns` actions to `wt-icon-action.vue` [WTEL-5881](https://webitel.atlassian.net/browse/WTEL-5881) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -751,3 +756,4 @@
 [v24.12.47]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.46...v24.12.47
 [v24.12.48]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.47...v24.12.48
 [v24.12.50]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.48...v24.12.50
+[v24.12.51]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.50...v24.12.51
