@@ -89,14 +89,26 @@ export default {
       type: [String, Number],
       default: 0,
     },
+
+    /**
+     * If dateMode is true, timepicker asserts value is timestamp and displays/changes timestamp value
+     */
     dateMode: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * if passed, replaces "day", "hour", "min", "sec" with a single label + format prop value
+     */
     label: {
       type: String,
       default: '',
     },
+
+    /**
+     * Time format, can be "dd:hh:mm:ss", "hh:mm:ss", "mm:ss", "ss"
+     */
     format: {
       type: String,
       default: 'hh:mm:ss',
@@ -105,6 +117,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Object with props, passed down to wt-label as props
+     */
+
     labelProps: {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
