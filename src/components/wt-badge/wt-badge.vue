@@ -80,6 +80,7 @@ export default {
 <style lang="scss" scoped>
 .wt-badge {
   position: relative;
+  line-height: 0;
 
   &:not(.wt-badge--compat-mode) {
     width: fit-content;
