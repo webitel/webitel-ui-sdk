@@ -1,3 +1,8 @@
+## [v24.12.53] - 2025-01-13
+### :bug: Bug Fixes
+- [`c5184b4`](https://github.com/webitel/webitel-ui-sdk/commit/c5184b4a1957ddf5058bb03d51dd588e736b1419) - wt-badge line-height [WTEL-5882](https://webitel.atlassian.net/browse/WTEL-5882) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.52] - 2025-01-13
 ### :recycle: Refactors
 - [`2cffb4f`](https://github.com/webitel/webitel-ui-sdk/commit/2cffb4f09c00895e5b8302718d855cfe7021e392) - replaced "clear" icon [WTEL-5384](https://webitel.atlassian.net/browse/WTEL-5384) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -754,3 +759,4 @@
 [v24.12.50]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.48...v24.12.50
 [v24.12.51]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.50...v24.12.51
 [v24.12.52]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.51...v24.12.52
+[v24.12.53]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.52...v24.12.53
