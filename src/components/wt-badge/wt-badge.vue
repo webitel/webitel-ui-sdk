@@ -1,16 +1,26 @@
 <template>
-  <aside
-    :class="{ 'wt-badge--outside': outside }"
-    :style="{ background: `var(--${colorVariable})` }"
+  <div
+    :class="{
+      'wt-badge--outside': outside,
+      'wt-badge--compat-mode': !hasSlot,
+    }"
     class="wt-badge"
   >
-    <img
-      v-if="iconBadgePic"
-      :alt="iconBadge"
-      :src="iconBadgePic"
-      class="wt-badge__pic"
-    />
-  </aside>
+    <span
+      v-show="!hidden"
+      :style="{ background: `var(--${colorVariable})` }"
+      class="wt-badge-indicator"
+    >
+      <img
+        v-if="iconBadgePic"
+        :alt="iconBadge"
+        :src="iconBadgePic"
+        class="wt-badge-indicator__pic"
+      />
+    </span>
+
+    <slot />
+  </div>
 </template>
 
 <script>
@@ -34,6 +44,10 @@ export default {
     iconBadge: {
       type: String,
     },
+    hidden: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     iconBadgePic() {
@@ -48,6 +62,13 @@ export default {
           return null;
       }
     },
+    /*
+     compatibility with old usage, when wt-badge was just placed in a wrapper,
+     being a sibling of the badged content, not wrapping badged content itself
+     */
+    hasSlot() {
+      return !!this.$slots.default;
+    },
   },
 };
 </script>
@@ -58,21 +79,32 @@ export default {
 
 <style lang="scss" scoped>
 .wt-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: var(--wt-badge-size);
-  height: var(--wt-badge-size);
-  border-radius: 50%;
+  position: relative;
 
-  &--outside {
-    transform: translate(100%, -100%);
+  &:not(.wt-badge--compat-mode) {
+    width: fit-content;
+    height: fit-content;
   }
 
-  &__pic {
+  .wt-badge-indicator {
     position: absolute;
+    top: 0;
+    right: 0;
     width: var(--wt-badge-size);
     height: var(--wt-badge-size);
+    border-radius: 50%;
+
+    &__pic {
+      position: absolute;
+      width: var(--wt-badge-size);
+      height: var(--wt-badge-size);
+    }
+  }
+
+  &--outside {
+    .wt-badge-indicator {
+      transform: translate(100%, -100%);
+    }
   }
 }
 </style>
