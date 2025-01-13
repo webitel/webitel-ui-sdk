@@ -1,3 +1,8 @@
+## [v24.12.50] - 2025-01-13
+### :sparkles: New Features
+- [`da0c0da`](https://github.com/webitel/webitel-ui-sdk/commit/da0c0da0a8f719629f7ff7af8a302785f8e3c0be) - added `filters` and `columns` actions to `wt-icon-action.vue` [WTEL-5881](https://webitel.atlassian.net/browse/WTEL-5881) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.48] - 2025-01-10
 ### :sparkles: New Features
 - [`3e1d182`](https://github.com/webitel/webitel-ui-sdk/commit/3e1d1823f0db47bb5feb353c339b4ab7b46b66ba) - implimented version [WTEL-5712](https://webitel.atlassian.net/browse/WTEL-5712) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -736,3 +741,4 @@
 [v24.12.46]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.45...v24.12.46
 [v24.12.47]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.46...v24.12.47
 [v24.12.48]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.47...v24.12.48
+[v24.12.50]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.48...v24.12.50
