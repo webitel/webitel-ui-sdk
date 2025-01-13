@@ -18,6 +18,16 @@
     </wt-label>
     <div class="wt-timepicker__wrapper">
       <wt-time-input
+        v-if="isDay"
+        :disabled="disabled"
+        :label="labelDays"
+        :max-value="dateMode ? null : 365"
+        :v="v"
+        :value="day"
+        hide-input-info
+        @input="day = $event"
+      />
+      <wt-time-input
         v-if="isHour"
         :disabled="disabled"
         :label="labelHours"
@@ -60,6 +70,7 @@
 <script>
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
+const SEC_IN_DAY = 60 * 60 * 24;
 const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;
 
@@ -110,6 +121,9 @@ export default {
   },
 
   computed: {
+    isDay() {
+      return this.format.includes('dd');
+    },
     isHour() {
       return this.format.includes('hh');
     },
@@ -118,6 +132,10 @@ export default {
     },
     isSec() {
       return this.format.includes('ss');
+    },
+    labelDays() {
+      if (this.noLabel) return null;
+      return this.label ? null : this.$t('webitelUI.timepicker.day');
     },
     labelHours() {
       if (this.noLabel) return null;
@@ -131,11 +149,24 @@ export default {
       if (this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.sec');
     },
+    day: {
+      get() {
+        return this.dateMode
+          ? new Date(+this.value).getDay()
+          : Math.floor(this.value / SEC_IN_DAY);
+      },
+      set(value) {
+        const newValue = this.dateMode
+          ? new Date(this.value).setDate(value)
+          : this.value - this.day * SEC_IN_DAY + value * SEC_IN_DAY;
+        this.$emit('input', newValue);
+      },
+    },
     hour: {
       get() {
         return this.dateMode
           ? new Date(+this.value).getHours()
-          : Math.floor(this.value / SEC_IN_HOUR);
+          : Math.floor((this.value % SEC_IN_DAY) / SEC_IN_HOUR);
       },
       set(value) {
         const newValue = this.dateMode
