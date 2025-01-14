@@ -93,7 +93,7 @@ export default {
     channel: 'Канал',
     file: 'Файл',
     logout: 'Вийти',
-    priority: 'Приорітет',
+    priority: 'Пріоритет',
     variables: 'Змінна | Змінні',
     type: 'Тип',
     tag: 'Тег | Теги',
