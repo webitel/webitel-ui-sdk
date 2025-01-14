@@ -308,6 +308,7 @@ export default {
       variableSearchHint: 'Query format: "key=value"',
     },
     timepicker: {
+      day: 'Day:',
       hour: 'Hour:',
       min: 'Min:',
       sec: 'Sec:',

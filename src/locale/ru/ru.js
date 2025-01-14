@@ -306,6 +306,7 @@ export default {
       variableSearchHint: 'Формат запроса: "ключ=значение"',
     },
     timepicker: {
+      day: 'День:',
       hour: 'Час:',
       min: 'Мин:',
       sec: 'Сек:',
