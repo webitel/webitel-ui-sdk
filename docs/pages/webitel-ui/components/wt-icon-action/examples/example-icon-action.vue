@@ -1,5 +1,5 @@
 <script setup>
-import { IActionData } from '__lib__/components/wt-icon-action/IActionData.js';
+import { WtIconActionIconMappings } from '__lib__/components/wt-icon-action/iconMappings.js';
 import { IconAction } from '__lib__/enums/index.js';
 
 const IAMap = Object.entries(IconAction).reduce((acc, [key, value]) => {
@@ -7,7 +7,7 @@ const IAMap = Object.entries(IconAction).reduce((acc, [key, value]) => {
   return acc;
 }, {});
 
-const availableActions = Object.keys(IActionData);
+const availableActions = Object.keys(WtIconActionIconMappings);
 </script>
 
 <template>
@@ -38,4 +38,4 @@ const availableActions = Object.keys(IActionData);
   </wt-table>
 </template>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

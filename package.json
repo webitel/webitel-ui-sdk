@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.49",
+  "version": "24.12.54",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -129,7 +129,7 @@
     "plyr": "3.7.8",
     "query-string": "^9.1.1",
     "sortablejs": "^1.15.3",
-    "vue-i18n": "^9.14.1",
+    "vue-i18n": "^11.0.1",
     "vue-multiselect": "^3.1.0",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.4.5",
@@ -180,7 +180,7 @@
     "@rollup/rollup-linux-x64-gnu": "4.9.5"
   },
   "engines": {
-    "npm": "10.9.0",
-    "node": "v22.12.0"
+    "npm": "10",
+    "node": "v22"
   }
 }
