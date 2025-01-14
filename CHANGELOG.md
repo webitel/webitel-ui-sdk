@@ -1,3 +1,8 @@
+## [v24.12.55] - 2025-01-14
+### :bug: Bug Fixes
+- [`05a05b5`](https://github.com/webitel/webitel-ui-sdk/commit/05a05b5e84efc7dfb583e80b711b0aada50d06a3) - error in priority locale[WTEL-5892](https://webitel.atlassian.net/browse/WTEL-5892) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.54] - 2025-01-14
 ### :sparkles: New Features
 - [`e6ef3d5`](https://github.com/webitel/webitel-ui-sdk/commit/e6ef3d54df3abf9794b0500ac8de2889aaf2da2a) - add days in timepicker component[WTEL-5853](https://webitel.atlassian.net/browse/WTEL-5853) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -770,3 +775,4 @@
 [v24.12.52]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.51...v24.12.52
 [v24.12.53]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.52...v24.12.53
 [v24.12.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.53...v24.12.54
+[v24.12.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.54...v24.12.55
