@@ -1,3 +1,12 @@
+## [v24.12.54] - 2025-01-14
+### :sparkles: New Features
+- [`e6ef3d5`](https://github.com/webitel/webitel-ui-sdk/commit/e6ef3d54df3abf9794b0500ac8de2889aaf2da2a) - add days in timepicker component[WTEL-5853](https://webitel.atlassian.net/browse/WTEL-5853) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`1701a8b`](https://github.com/webitel/webitel-ui-sdk/commit/1701a8b14cc48cbded9ddb98b8763d15f5cf6cff) - conflict[WTEL-5853](https://webitel.atlassian.net/browse/WTEL-5853) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`4a1f187`](https://github.com/webitel/webitel-ui-sdk/commit/4a1f18761ccae15cd6fb4a45ce1669697d1d76e1) - add changes in lib[WTEL-5853](https://webitel.atlassian.net/browse/WTEL-5853) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.53] - 2025-01-13
 ### :bug: Bug Fixes
 - [`c5184b4`](https://github.com/webitel/webitel-ui-sdk/commit/c5184b4a1957ddf5058bb03d51dd588e736b1419) - wt-badge line-height [WTEL-5882](https://webitel.atlassian.net/browse/WTEL-5882) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -760,3 +769,4 @@
 [v24.12.51]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.50...v24.12.51
 [v24.12.52]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.51...v24.12.52
 [v24.12.53]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.52...v24.12.53
+[v24.12.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.53...v24.12.54
