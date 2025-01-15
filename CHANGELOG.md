@@ -1,3 +1,8 @@
+## [v24.12.56] - 2025-01-15
+### :bug: Bug Fixes
+- [`0704dba`](https://github.com/webitel/webitel-ui-sdk/commit/0704dbabee6e5321058e12b843cc53c95ca48d9a) - display select in permissions tab[WTEL-5906](https://webitel.atlassian.net/browse/WTEL-5906) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.55] - 2025-01-14
 ### :bug: Bug Fixes
 - [`05a05b5`](https://github.com/webitel/webitel-ui-sdk/commit/05a05b5e84efc7dfb583e80b711b0aada50d06a3) - error in priority locale[WTEL-5892](https://webitel.atlassian.net/browse/WTEL-5892) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -776,3 +781,4 @@
 [v24.12.53]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.52...v24.12.53
 [v24.12.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.53...v24.12.54
 [v24.12.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.54...v24.12.55
+[v24.12.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.55...v24.12.56
