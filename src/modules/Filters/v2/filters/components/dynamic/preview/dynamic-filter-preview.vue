@@ -1,27 +1,25 @@
 <template>
   <dynamic-filter-config-view>
-    <template #activator>
-      <wt-chip>
-        {{ props.filter.label || props.filter.name }}
-
-        <wt-tooltip>
-          <template #activator>
-            <wt-icon-btn icon="rounded-info" />
-          </template>
-
-          <template #default>
-            <dynamic-filter-preview-info
-              :name="props.filter.name"
-              :value="props.filter.value"
+    <template #activator="{ visible: configFormVisible }">
+      <wt-tooltip :disabled="configFormVisible">
+        <template #activator>
+          <wt-chip color="primary">
+            {{ props.filter.label || props.filter.name }}
+            <wt-icon-btn
+              icon="close--filled"
+              size="sm"
+              @mousedown.stop="deleteFilter"
             />
-          </template>
-        </wt-tooltip>
+          </wt-chip>
+        </template>
 
-        <wt-icon-action
-          action="delete"
-          @mousedown.stop="deleteFilter"
-        />
-      </wt-chip>
+        <template #default>
+          <dynamic-filter-preview-info
+            :name="props.filter.name"
+            :value="props.filter.value"
+          />
+        </template>
+      </wt-tooltip>
     </template>
 
     <template #content>
@@ -32,7 +30,6 @@
 
 <script lang="ts" setup>
 import WtChip from '../../../../../../../components/wt-chip/wt-chip.vue';
-import WtIconAction from '../../../../../../../components/wt-icon-action/wt-icon-action.vue';
 import WtIconBtn from '../../../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtTooltip from '../../../../../../../components/wt-tooltip/wt-tooltip.vue';
 import type { IFilter } from '../../../types/Filter.types.ts';
@@ -54,4 +51,11 @@ const deleteFilter = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.wt-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2xs);
+}
+</style>

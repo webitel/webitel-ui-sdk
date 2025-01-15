@@ -1,49 +1,51 @@
 <template>
-  <section class="dynamic-filter-config-form">
-    <header>Tttitleee</header>
-    <form>
-      <wt-select
-        :value="filterName"
-        :label="'fffilter nnname'"
-        :disabled="editMode"
-        :options="options"
-        use-value-from-options-by-prop="value"
-        @input="filterName = $event"
-      />
-      <wt-input
-        v-model="filterLabel"
-        :label="'label goes here'"
-        @input="touchedLabel = true"
-      />
-      <div
-        v-if="filterName"
-        class=""
-      >
-        <slot
-          name="value-input"
-          v-bind="{
-            filterName,
-            filterValue,
-            onValueChange: (v) => (filterValue = v),
-            onValueInvalidChange: (v) => (invalid = v),
-          }"
-        />
-      </div>
-    </form>
-    <footer>
+  <form class="dynamic-filter-config-form">
+    <wt-select
+      :disabled="editMode"
+      :label="t('webitelUI.filters.filterName')"
+      :options="options"
+      :value="filterName"
+      use-value-from-options-by-prop="value"
+      @input="filterName = $event"
+    />
+    <slot
+      name="value-input"
+      v-bind="{
+        filterName,
+        filterValue,
+        inputLabel: t('webitelUI.filters.filterValue'),
+        onValueChange: (v) => (filterValue = v),
+        onValueInvalidChange: (v) => (invalid = v),
+      }"
+    />
+    <wt-input
+      v-model="filterLabel"
+      :label="t('webitelUI.filters.filterLabel')"
+      @input="touchedLabel = true"
+    />
+    <footer class="dynamic-filter-config-form-footer">
       <wt-button
         :disabled="invalid"
+        wide
         @click="submit"
       >
-        sssubmittt
+        {{ t('reusable.save') }}
+      </wt-button>
+      <wt-button
+        color="secondary"
+        wide
+        @click="emit('cancel')"
+      >
+        {{ t('reusable.cancel') }}
       </wt-button>
     </footer>
-  </section>
+  </form>
 </template>
 
 <script lang="ts" setup>
 import deepcopy from 'deep-copy';
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
 import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
@@ -73,7 +75,10 @@ const props = defineProps<Props>();
 
 const emit = defineEmits<{
   submit: [FilterInitParams];
+  cancel: [];
 }>();
+
+const { t } = useI18n();
 
 const filterName = ref();
 const filterLabel = ref('');
@@ -122,4 +127,20 @@ if (props.filter) {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+$form-width: 380px;
+
+.dynamic-filter-config-form {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: $form-width;
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+}
+
+.dynamic-filter-config-form-footer {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+</style>
