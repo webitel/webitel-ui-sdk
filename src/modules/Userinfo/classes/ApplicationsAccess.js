@@ -215,6 +215,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACT_GROUPS}`,
     },
+    [CrmSections.PRIORITIES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.PRIORITIES}`,
+    },
   },
 });
 
