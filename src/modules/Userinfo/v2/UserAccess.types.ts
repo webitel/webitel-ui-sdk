@@ -1,29 +1,107 @@
-export enum AdminSections {
-  Queues = 'queues',
-  // todo
-}
-
-export enum SupervisorSections {
-  // todo
-}
-
-// todo ... app section enums
-
-export type UiSection = AdminSections | SupervisorSections; // todo
-
 export enum WtApplication {
   Supervisor = 'supervisor',
   Admin = 'admin',
-  // todo
+  Agent = 'agent',
+  Audit = 'audit',
+  History = 'history',
+  CRM = 'crm',
+  Grafana = 'grafana',
 }
+
+export enum AdminSections {
+  Users = 'users',
+  Devices = 'devices',
+  Licenses = 'licenses',
+  FlowSchemas = 'flowSchemas',
+  Dialplans = 'dialplans',
+  Gateways = 'gateways',
+  Chatplans = 'chatplans',
+  ChatGateways = 'chatGateways',
+  AgentSkills = 'agentSkills',
+  Buckets = 'buckets',
+  Lists = 'lists',
+  Locations = 'locations',
+  Calendars = 'calendars',
+  CommunicationTypes = 'communicationTypes',
+  AgentStatuses = 'agentStatuses',
+  MediaFiles = 'mediaFiles',
+  Agents = 'agents',
+  Teams = 'teams',
+  Resources = 'resources',
+  ResourceGroups = 'resourceGroups',
+  Queues = 'queues',
+  Storage = 'storage',
+  CognitiveProfiles = 'cognitiveProfiles',
+  EmailProfiles = 'emailProfiles',
+  ImportsFromCcvFromFiles = 'importsFromCcvFromFiles',
+  Triggers = 'triggers',
+  Roles = 'roles',
+  Objects = 'objects',
+  ChangeLog = 'changelog',
+  Configuration = 'configuration',
+  GlobalVariables = 'globalVariables',
+}
+
+export enum SupervisorSections {
+  Queues = 'queues',
+  Agents = 'agents',
+  ActiveCalls = 'activeCalls',
+}
+export enum AuditSections {
+  Scorecards = 'scorecards',
+}
+
+export enum CrmSections {
+  Contacts = 'contacts',
+}
+
+// no sections
+export enum HistorySections {}
+export enum AgentSections {}
+
+export type UiSection =
+  | AdminSections
+  | SupervisorSections
+  | AuditSections
+  | CrmSections
+  | HistorySections;
 
 // wt system objects
 export enum WtObject {
-  Agent = 'agent',
-  Queue = 'queue',
-  Contact = 'contact',
-  Regions = 'regions',
-  // todo
+  Licenses = 'licenses',
+  Users = 'users',
+  Devices = 'devices',
+  FlowSchemas = 'flowSchemas',
+  Dialplans = 'dialplans',
+  Gateways = 'gateways',
+  Chatplans = 'chatplans',
+  ChatGateways = 'chatGateways',
+  AgentSkills = 'agentSkills',
+  Buckets = 'buckets',
+  Lists = 'lists',
+  Locations = 'locations',
+  Calendars = 'calendars',
+  CommunicationTypes = 'communicationTypes',
+  AgentStatuses = 'agentStatuses',
+  MediaFiles = 'mediaFiles',
+  Agents = 'agents',
+  Teams = 'teams',
+  Resources = 'resources',
+  ResourceGroups = 'resourceGroups',
+  Queues = 'queues',
+  Storage = 'storage',
+  CognitiveProfiles = 'cognitiveProfiles',
+  EmailProfiles = 'emailProfiles',
+  ImportsFromCcvFromFiles = 'importsFromCcvFromFiles',
+  Triggers = 'triggers',
+  Roles = 'roles',
+  Objects = 'objects',
+  ChangeLog = 'changelog',
+  Configuration = 'configuration',
+  GlobalVariables = 'globalVariables',
+  ActiveCalls = 'activeCalls',
+  Scorecards = 'scorecards',
+  Contacts = 'contacts',
 }
 
 export enum CrudAction {
@@ -34,8 +112,15 @@ export enum CrudAction {
 }
 
 export enum SpecialGlobalAction {
-  Download = 'download',
-  // todo
+  PlaybackRecordFile = 'playbackRecordFile',
+  ManageUserLicense = 'manageUserLicense',
+  SchemeVariables = 'schemeVariables',
+  SystemSetting = 'systemSetting',
+  ManageUserRoles = 'manageUserRoles',
+  ExportDataGrid = 'exportDataGrid',
+  ViewCdrPhoneNumbers = 'viewCdrPhoneNumbers',
+  ChangeUserPassword = 'changeUserPassword',
+  EavesdropCall = 'eavesdropCall',
 }
 
 // backend, should be converted to CrudAction
@@ -43,11 +128,13 @@ export enum GlobalAccessCrudActionApiResponseItem {
   Read = 'read',
   Write = 'write',
   Delete = 'delete',
-  Create = 'create',
+  Add = 'add',
 }
 
 // received from backend
-export type GlobalAction = GlobalAccessCrudActionApiResponseItem | SpecialGlobalAction;
+export type GlobalAction =
+  | GlobalAccessCrudActionApiResponseItem
+  | SpecialGlobalAction;
 
 // received from backend
 export enum ScopeClass {
@@ -78,11 +165,14 @@ export interface CreateUserAccessStoreRawAccess {
 }
 
 export interface CreateUserAccessStoreConfig {
-  namespace: string;
+  namespace?: string;
   setupRouteGuards?: boolean;
 }
 
-export type GlobalActionAccessMap = Map<CrudAction | SpecialGlobalAction, boolean>;
+export type GlobalActionAccessMap = Map<
+  CrudAction | SpecialGlobalAction,
+  boolean
+>;
 
 export type ScopeAccessMap = Map<WtObject, Map<CrudAction, boolean>>;
 

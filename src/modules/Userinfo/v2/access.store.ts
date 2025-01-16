@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import {
   AppVisibilityMap,
@@ -15,68 +16,77 @@ import {
 } from './UserAccess.types.ts';
 import {
   castUiSectionToWtObject,
-  getWtAppByUiSection,
+  // getWtAppByUiSection,
   makeAppVisibilityMap,
   makeGlobalAccessMap,
   makeScopeAccessMap,
   makeSectionVisibilityMap,
 } from './utils.ts';
 
-export const createUserAccessStore = ({
-                                        permissions: rawGlobalAccess,
-                                        scope: rawScopeAccess,
-                                        access: rawVisibilityAccess,
-                                      }: CreateUserAccessStoreRawAccess,
-                                      {
-                                        namespace = 'userinfo',
-                                        setupRouteGuards = true,
-                                      }: CreateUserAccessStoreConfig) => {
-
+export const createUserAccessStore = (
+  app: WtApplication,
+  {
+    permissions: rawGlobalAccess,
+    scope: rawScopeAccess,
+    access: rawVisibilityAccess,
+  }: CreateUserAccessStoreRawAccess,
+  { namespace = 'userinfo', setupRouteGuards = true }: CreateUserAccessStoreConfig,
+) => {
   return defineStore(`${namespace}/access`, () => {
-    const globalAccess: GlobalActionAccessMap = makeGlobalAccessMap(rawGlobalAccess);
-    const scopeAccess: ScopeAccessMap = makeScopeAccessMap(rawScopeAccess);
-    const appVisibilityAccess: AppVisibilityMap = makeAppVisibilityMap(rawVisibilityAccess);
-    const sectionVisibilityAccess: SectionVisibilityMap = makeSectionVisibilityMap(rawVisibilityAccess);
+    const globalAccess: Ref<GlobalActionAccessMap> = ref(makeGlobalAccessMap(rawGlobalAccess));
+    const scopeAccess: Ref<ScopeAccessMap> = ref(makeScopeAccessMap(rawScopeAccess));
+    const appVisibilityAccess: Ref<AppVisibilityMap> = ref(
+      makeAppVisibilityMap(rawVisibilityAccess),
+    );
+    const sectionVisibilityAccess: Ref<SectionVisibilityMap> = ref(
+      makeSectionVisibilityMap(rawVisibilityAccess),
+    );
 
     const hasAccess = (action: CrudAction | SpecialGlobalAction, object?: WtObject) => {
-      return globalAccess.get(action) || (object && scopeAccess.get(object).get(action));
+      return (
+        globalAccess.value.get(action) ||
+        (object && scopeAccess.value.get(object).get(action as CrudAction))
+      );
     };
 
     const hasReadAccess = (object?: WtObject) => {
       return hasAccess(CrudAction.Read, object);
     };
 
-    const hasCreateAccess = () => {
-      // todo
+    const hasCreateAccess = (object?: WtObject) => {
+      return hasAccess(CrudAction.Create, object);
     };
-    const hasEditAccess = () => {
-      // todo
+    const hasEditAccess = (object?: WtObject) => {
+      return hasAccess(CrudAction.Edit, object);
     };
-    const hasDeleteAccess = () => {
-      // todo
+    const hasDeleteAccess = (object?: WtObject) => {
+      return hasAccess(CrudAction.Delete, object);
     };
 
-    const hasApplicationVisibility = (app: WtApplication) => {
-      return hasReadAccess() || appVisibilityAccess.get(app);
+    const hasApplicationVisibility = () => {
+      return hasReadAccess() || appVisibilityAccess.value.get(app);
     };
 
     const hasSectionVisibility = (section: UiSection) => {
-      const appOfSection = getWtAppByUiSection(section);
-      const objectOfSection = castUiSectionToWtObject(section);
-      return hasReadAccess() ||
+      // const appOfSection = getWtAppByUiSection(section);
+      const objectOfSection = castUiSectionToWtObject(section, app);
+      return (
+        hasReadAccess() ||
         [
-          hasApplicationVisibility(appOfSection),
+          hasApplicationVisibility(),
           hasReadAccess(objectOfSection),
-          sectionVisibilityAccess.get(section),
-        ].every((v) => v);
+          sectionVisibilityAccess.value.get(section),
+        ].every((v) => v)
+      );
     };
 
     if (setupRouteGuards) {
+      console.log('setupRouteGuards');
       const router = useRouter();
-      router.beforeEach((to, from, next) => {
+      router.beforeEach((to, _from, next) => {
         const wtObject = to.meta.WtObject;
 
-        if (wtObject && !hasSectionVisibility(wtObject)) {
+        if (wtObject && !hasSectionVisibility(wtObject as UiSection)) {
           return;
         }
 
@@ -85,11 +95,15 @@ export const createUserAccessStore = ({
     }
 
     return {
+      globalAccess,
+      scopeAccess,
+      appVisibilityAccess,
+      sectionVisibilityAccess,
+
       hasReadAccess,
       hasCreateAccess,
       hasEditAccess,
       hasDeleteAccess,
-
       hasApplicationVisibility,
       hasSectionVisibility,
     };
