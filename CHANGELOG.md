@@ -1,3 +1,8 @@
+## [v24.12.59] - 2025-01-16
+### :bug: Bug Fixes
+- [`744e1c0`](https://github.com/webitel/webitel-ui-sdk/commit/744e1c09504f9776e7d60c0bea08b1cc1b280625) - reset grantee in permissions popup[WTEL-5903](https://webitel.atlassian.net/browse/WTEL-5903) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.56] - 2025-01-15
 ### :bug: Bug Fixes
 - [`0704dba`](https://github.com/webitel/webitel-ui-sdk/commit/0704dbabee6e5321058e12b843cc53c95ca48d9a) - display select in permissions tab[WTEL-5906](https://webitel.atlassian.net/browse/WTEL-5906) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -782,3 +787,4 @@
 [v24.12.54]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.53...v24.12.54
 [v24.12.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.54...v24.12.55
 [v24.12.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.55...v24.12.56
+[v24.12.59]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.58...v24.12.59
