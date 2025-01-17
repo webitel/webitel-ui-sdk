@@ -5,7 +5,7 @@
       :label="t('webitelUI.filters.filterName')"
       :options="options"
       :value="filterName"
-      use-value-from-options-by-prop="value"
+      use-value-from-options-by-prop="id"
       @input="filterName = $event"
     />
     <slot
