@@ -1,3 +1,8 @@
+## [v24.12.61] - 2025-01-17
+### :sparkles: New Features
+- [`c074fb9`](https://github.com/webitel/webitel-ui-sdk/commit/c074fb90d58d52bc60098649c4e0429ece82de09) - added wt-select `useValueFromOptionsByProp` feature support to array values, +fixes [WTEL-5916](https://webitel.atlassian.net/browse/WTEL-5916) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.59] - 2025-01-16
 ### :bug: Bug Fixes
 - [`744e1c0`](https://github.com/webitel/webitel-ui-sdk/commit/744e1c09504f9776e7d60c0bea08b1cc1b280625) - reset grantee in permissions popup[WTEL-5903](https://webitel.atlassian.net/browse/WTEL-5903) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -788,3 +793,4 @@
 [v24.12.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.54...v24.12.55
 [v24.12.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.55...v24.12.56
 [v24.12.59]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.58...v24.12.59
+[v24.12.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.60...v24.12.61
