@@ -92,7 +92,8 @@ export default {
     channel: 'Канал',
     file: 'Файл',
     logout: 'Выйти',
-    priority: 'Приоритет',
+    priority: 'Приоритет | Приоритеты',
+    color: 'Цвет',
     variables: 'Переменная | Переменные',
     type: 'Тип',
     tag: 'Тег | Теги',
@@ -306,6 +307,7 @@ export default {
       variableSearchHint: 'Формат запроса: "ключ=значение"',
     },
     timepicker: {
+      day: 'День:',
       hour: 'Час:',
       min: 'Мин:',
       sec: 'Сек:',

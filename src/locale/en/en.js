@@ -93,7 +93,8 @@ export default {
     channel: 'Channel',
     file: 'File',
     logout: 'Logout',
-    priority: 'Priority',
+    priority: 'Priority | Priorities',
+    color: 'Color',
     variables: 'Variable | Variables',
     type: 'Type',
     tag: 'Tag | Tags',
@@ -309,6 +310,7 @@ export default {
       variableSearchHint: 'Query format: "key=value"',
     },
     timepicker: {
+      day: 'Day:',
       hour: 'Hour:',
       min: 'Min:',
       sec: 'Sec:',

@@ -27,6 +27,10 @@
     <vue-multiselect
       ref="vue-multiselect"
       :allow-empty="allowEmpty"
+      :close-on-select="
+        $attrs.closeOnSelect ||
+        !multiple /* override default vue-multiselect value */
+      "
       :disabled="disabled"
       :internal-search="!searchMethod"
       :label="selectOptionLabel"
