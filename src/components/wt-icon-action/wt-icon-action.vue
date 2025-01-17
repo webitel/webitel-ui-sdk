@@ -14,8 +14,9 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { IActionData } from './IActionData.js';
+
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { WtIconActionIconMappings } from './iconMappings.js';
 
 const props = defineProps({
   /**
@@ -45,16 +46,19 @@ const emit = defineEmits(['click']);
 const { t } = useI18n();
 
 const iconAction = computed(() => {
-  const data = IActionData[props.action];
+  const icon = WtIconActionIconMappings[props.action];
 
-  if (!data) {
+  if (!icon) {
     console.error(
       `Unknown action for wt-icon-action component: ${props.action}`,
     );
     return { icon: 'edit', hint: props.action };
   }
 
-  return data;
+  return {
+    icon,
+    hint: `webitelUI.iconAction.hints.${props.action}`,
+  };
 });
 </script>
 

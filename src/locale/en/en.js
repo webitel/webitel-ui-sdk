@@ -5,7 +5,9 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import { IconAction } from '../../enums/index.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
@@ -18,6 +20,9 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    download: 'Download',
+    history: 'History',
+    filter: ({ plural }) => plural(['Filter', 'Filters']),
     total: 'Total',
     ok: 'Ok',
     save: 'Save',
@@ -88,7 +93,8 @@ export default {
     channel: 'Channel',
     file: 'File',
     logout: 'Logout',
-    priority: 'Priority',
+    priority: 'Priority | Priorities',
+    color: 'Color',
     variables: 'Variable | Variables',
     type: 'Type',
     tag: 'Tag | Tags',
@@ -303,6 +309,7 @@ export default {
       variableSearchHint: 'Query format: "key=value"',
     },
     timepicker: {
+      day: 'Day:',
       hour: 'Hour:',
       min: 'Min:',
       sec: 'Sec:',
@@ -349,11 +356,18 @@ export default {
       breakOut: 'Break Out',
     },
     iconAction: {
-      deleteActionHint: 'Delete',
-      editActionHint: 'Edit',
-      addActionHint: 'Add',
-      historyActionHint: 'History',
-      downloadActionHint: 'Download',
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
+        [IconAction.COLUMNS]: 'Select columns',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+      },
     },
     errorPages: {
       goBack: 'Go back',

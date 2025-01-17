@@ -1,17 +1,15 @@
 <script setup>
-import Docs from './wt-badge-docs.vue';
-import ExampleBadge from './examples/example-badge.vue';
-import ExampleOutsideBadge from './examples/example-outside-badge.vue';
-import ExampleIconBadge from './examples/example-icon-badge.vue';
 </script>
 
 # WtBadge
 
-## Props
+## Specs
 
-::: raw
-<Docs/>
-:::
+<Specs />
+
+> [!WARNING]
+> Please, use this component with slot.
+> Usage without slot **is deprecated**.
 
 ## Example Badge
 
