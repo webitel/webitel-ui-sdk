@@ -24,6 +24,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import './wt-chip.scss';
-@import './variables.scss';
+@use './variables.scss';
+@use './wt-chip.scss';
 </style>

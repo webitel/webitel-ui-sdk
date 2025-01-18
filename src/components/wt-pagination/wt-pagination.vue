@@ -83,7 +83,8 @@ export default {
   },
 
   created() {
-    if (this.debounce) this.changeSize = debounce(this.changeSize, this.debounceDelay);
+    if (this.debounce)
+      this.changeSize = debounce(this.changeSize, this.debounceDelay);
   },
 
   methods: {
@@ -106,11 +107,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-pagination {
   @extend %typo-body-1;

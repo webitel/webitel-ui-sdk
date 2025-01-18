@@ -5,26 +5,24 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import { IconAction } from '../../enums/index.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    download: 'Завантажити',
+    history: 'Історія',
+    filter: 'Фільтр | Фільтри',
     total: 'Всього',
     ok: 'Ок',
     save: 'Зберегти',
@@ -78,6 +76,8 @@ export default {
     step: 'Крок { count }',
     more: 'Більше',
     read: 'Читати',
+    create: 'Створити',
+    draggable: 'Перетягнути',
   },
   vocabulary: {
     language: 'Мова',
@@ -93,7 +93,8 @@ export default {
     channel: 'Канал',
     file: 'Файл',
     logout: 'Вийти',
-    priority: 'Приорітет',
+    priority: 'Пріоритет | Пріоритети',
+    color: 'Колір',
     variables: 'Змінна | Змінні',
     type: 'Тип',
     tag: 'Тег | Теги',
@@ -221,6 +222,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакти',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервісів',
         [CrmSections.SOURCES]: 'Джерела звернень',
         [CrmSections.CONTACT_GROUPS]: 'Групи контактів',
       },
@@ -294,7 +296,8 @@ export default {
     isRegExpMatched: 'Пароль має відповідати регулярному виразу:',
     regExpValidator: 'Не правильний регулярний вираз',
     domainValidator: 'Невірний домен',
-    decimalValidator: 'Кількість десяткових знаків не повинна бути більше { count }',
+    decimalValidator:
+      'Кількість десяткових знаків не повинна бути більше { count }',
     integer: 'Поле повинно містити лише цілі числа',
   },
   webitelUI: {
@@ -304,6 +307,7 @@ export default {
       variableSearchHint: 'Формат запиту: "ключ=значення"',
     },
     timepicker: {
+      day: 'День:',
       hour: 'Год:',
       min: 'Хв:',
       sec: 'Сек:',
@@ -350,11 +354,18 @@ export default {
       breakOut: 'Примусова перерва',
     },
     iconAction: {
-      deleteActionHint: 'Видалити',
-      editActionHint: 'Редагувати',
-      addActionHint: 'Додати',
-      historyActionHint: 'Історія',
-      downloadActionHint: 'Скачати',
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
+        [IconAction.COLUMNS]: 'Додати колонки',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+      },
     },
     errorPages: {
       goBack: 'Повернутись назад',
@@ -408,7 +419,8 @@ export default {
       },
       statusSelectErrorPopup: {
         title: 'Увага',
-        message: 'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
+        message:
+          'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
       },
     },
     saveFailedPopup: {
@@ -419,6 +431,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Сталася помилка завантаження історії чату',
-    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”'
+    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”',
   },
 };

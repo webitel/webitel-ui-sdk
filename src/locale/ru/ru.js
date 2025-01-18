@@ -5,26 +5,24 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import { IconAction } from '../../enums/index.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    download: 'Скачать',
+    history: 'История',
+    filter: 'Фильтр | Фильтры',
     total: 'Всего',
     ok: 'Ок',
     save: 'Сохранить',
@@ -77,6 +75,8 @@ export default {
     step: 'Шаг { count }',
     more: 'Больше',
     read: 'Читать',
+    create: 'Создать',
+    draggable: 'Перетащить',
   },
   vocabulary: {
     language: 'Язык',
@@ -92,7 +92,8 @@ export default {
     channel: 'Канал',
     file: 'Файл',
     logout: 'Выйти',
-    priority: 'Приоритет',
+    priority: 'Приоритет | Приоритеты',
+    color: 'Цвет',
     variables: 'Переменная | Переменные',
     type: 'Тип',
     tag: 'Тег | Теги',
@@ -221,6 +222,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Контакты',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервисов',
         [CrmSections.SOURCES]: 'Источники обращений',
         [CrmSections.CONTACT_GROUPS]: 'Группы контактов',
       },
@@ -294,7 +296,8 @@ export default {
     isRegExpMatched: 'Пароль должен соответствовать регулярному выражению:',
     regExpValidator: 'Не правильное регулярное выражение',
     domainValidator: 'Неправильный домен',
-    decimalValidator: 'Количество десятичных знаков не должно быть больше { count }',
+    decimalValidator:
+      'Количество десятичных знаков не должно быть больше { count }',
     integer: 'Поле должно содержать только целые числа',
   },
   webitelUI: {
@@ -304,6 +307,7 @@ export default {
       variableSearchHint: 'Формат запроса: "ключ=значение"',
     },
     timepicker: {
+      day: 'День:',
       hour: 'Час:',
       min: 'Мин:',
       sec: 'Сек:',
@@ -350,11 +354,18 @@ export default {
       breakOut: 'Принудительный перерыв',
     },
     iconAction: {
-      deleteActionHint: 'Удалить',
-      editActionHint: 'Редактировать',
-      addActionHint: 'Добавить',
-      historyActionHint: 'История',
-      downloadActionHint: 'Скачать',
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
+        [IconAction.COLUMNS]: 'Добавить колонки',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+      },
     },
     errorPages: {
       goBack: 'Вернуться назад',
@@ -408,7 +419,8 @@ export default {
       },
       statusSelectErrorPopup: {
         title: 'Внимание',
-        message: 'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
+        message:
+          'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
       },
     },
     saveFailedPopup: {
@@ -419,6 +431,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Произошла ошибка загрузки истории чата',
-    markChatProcessed: 'Не удалось переместить чат в “Закрытые”'
+    markChatProcessed: 'Не удалось переместить чат в “Закрытые”',
   },
 };

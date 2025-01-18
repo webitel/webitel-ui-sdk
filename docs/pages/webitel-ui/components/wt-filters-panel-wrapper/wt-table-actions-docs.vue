@@ -1,10 +1,6 @@
 <template>
-  <component-events
-    :events="events"
-  />
-  <component-slots
-    :slots="slots"
-  />
+  <component-events :events="events" />
+  <component-slots :slots="slots" />
 </template>
 
 <script>
@@ -33,5 +29,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

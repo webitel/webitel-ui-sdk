@@ -2,7 +2,8 @@
   <div class="wt-start-page">
     <start-page-logo
       v-if="appLogo"
-      :logo="logo" />
+      :logo="logo"
+    />
 
     <div class="wt-start-page__wrapper">
       <start-page-card
@@ -11,7 +12,6 @@
         :card="card"
       />
     </div>
-
   </div>
 </template>
 
@@ -21,7 +21,6 @@ import StartPageCard from './start-page-card.vue';
 import StartPageLogo from './start-page-logo.vue';
 
 const props = defineProps({
-
   /** entire navigation hierarchy. Value: `{ value: string, route: string, name: string, text: string, images: object - { light: string, dark: string } }`
    **/
 

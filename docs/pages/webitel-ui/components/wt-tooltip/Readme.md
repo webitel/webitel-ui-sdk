@@ -9,7 +9,7 @@ import ExampleTooltip from './examples/example-tooltip.vue';
 ## Props
 
 | Prop            | Type    | Default                     | Code                                                     | Description                                                                                          |
-|-----------------|---------|-----------------------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| --------------- | ------- | --------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | placement       | String  | auto                        | `<wt-tooltip placement="left"></wt-tooltip>`             | see [Floating UI](https://floating-ui.com/docs/tutorial#placements) docs, + "auto" for autoPlacement |
 | popper-class    | String  |                             | `<wt-tooltip popper-class="my-class"></wt-tooltip>`      | add special class to a floating part of tooltip                                                      |
 | triggers        | Array   | ['hover', 'focus', 'touch'] | `<wt-tooltip :triggers="['click']"></wt-tooltip>`        | see [Floating Vue](https://floating-vue.starpad.dev/api/#triggers) docs                              |
@@ -20,9 +20,8 @@ import ExampleTooltip from './examples/example-tooltip.vue';
 ## Slots
 
 | Name    | Scope | Description          |
-|---------|-------|----------------------|
+| ------- | ----- | -------------------- |
 | default |       | Default content slot |
-
 
 ## Example Tooltip
 

@@ -21,9 +21,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'next',
-]);
+const emit = defineEmits(['next']);
 
 const intersectionTarget = ref(null);
 
@@ -35,11 +33,14 @@ onMounted(() => {
    * Note, observer triggers at init, so it should be used also as init function
    * however, current filters module version is initializing list by itself, so we need to refactor filters ASAP
    */
-  const { stop } = useIntersectionObserver(intersectionTarget.value, ([{ isIntersecting }]) => {
-    if (isIntersecting && props.next) {
-      emit('next');
-    }
-  });
+  const { stop } = useIntersectionObserver(
+    intersectionTarget.value,
+    ([{ isIntersecting }]) => {
+      if (isIntersecting && props.next) {
+        emit('next');
+      }
+    },
+  );
 
   stopObs = stop;
 });

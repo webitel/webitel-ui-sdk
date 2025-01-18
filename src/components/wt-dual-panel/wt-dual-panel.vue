@@ -11,9 +11,7 @@
     </div>
     <div class="wt-dual-panel__content">
       <div
-        :class="[
-        `wt-dual-panel__side-panel--${sidePanelSize}`
-      ]"
+        :class="[`wt-dual-panel__side-panel--${sidePanelSize}`]"
         class="wt-dual-panel__side-panel"
       >
         <wt-icon-action
@@ -33,7 +31,8 @@
 </template>
 
 <script setup>
-import { computed, ref, defineEmits } from 'vue';
+import { computed, defineEmits, ref } from 'vue';
+
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import { ComponentSize } from '../../enums/index.js';
 
@@ -57,15 +56,17 @@ const toggleSidePanel = () => {
   emit('update:side-panel-size', sidePanelSize.value);
 };
 
-const sidePanelSize = computed(() => (sidePanelCollapsed.value ? ComponentSize.SM : ComponentSize.MD));
+const sidePanelSize = computed(() =>
+  sidePanelCollapsed.value ? ComponentSize.SM : ComponentSize.MD,
+);
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {
@@ -91,7 +92,8 @@ $side-panel-md-width: 320px;
     flex: 1 1 auto;
   }
 
-  &__header,  &__actions-panel {
+  &__header,
+  &__actions-panel {
     flex: 0 0 auto;
   }
 

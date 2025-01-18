@@ -20,6 +20,7 @@
 1. Додати компонент таби в роутинг
 2. Додати стор таби в модулі карточки сутності, якої стосуються ці пермішени
 3. На компонент (який мав би передатися з роутингу) додати необхідні пропси.
+4. Додати в апі модуля generatePermissionsApi (див.нижче)
 
 ## Звідки береться апі?
 
@@ -35,7 +36,10 @@
 ```js
 // user module routing
 
-const PermissionsTab = () => import('@webitel/ui-sdk/src/modules/ObjectPermissions/components/permissions-tab.vue');
+const PermissionsTab = () =>
+  import(
+    '@webitel/ui-sdk/src/modules/ObjectPermissions/components/permissions-tab.vue'
+  );
 
 const UsersRoutes = [
   // ...

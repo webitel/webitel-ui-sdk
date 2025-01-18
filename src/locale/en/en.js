@@ -5,26 +5,24 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import ChatGatewayProvider
-  from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+
+import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import { IconAction } from '../../enums/index.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections
-  from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections
-  from '../../enums/WebitelApplications/AuditorSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
 import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections
-  from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications
-  from '../../enums/WebitelApplications/WebitelApplications.enum.js';
-import {
-  AccessMode,
-} from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
+import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    download: 'Download',
+    history: 'History',
+    filter: ({ plural }) => plural(['Filter', 'Filters']),
     total: 'Total',
     ok: 'Ok',
     save: 'Save',
@@ -77,6 +75,8 @@ export default {
     step: 'Step { count }',
     more: 'More',
     read: 'Read',
+    create: 'Create',
+    draggable: 'Draggable',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -93,7 +93,8 @@ export default {
     channel: 'Channel',
     file: 'File',
     logout: 'Logout',
-    priority: 'Priority',
+    priority: 'Priority | Priorities',
+    color: 'Color',
     variables: 'Variable | Variables',
     type: 'Type',
     tag: 'Tag | Tags',
@@ -222,6 +223,7 @@ export default {
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
         [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
         [CrmSections.SOURCES]: 'Case sources',
         [CrmSections.CONTACT_GROUPS]: 'Contact groups',
       },
@@ -296,7 +298,8 @@ export default {
     isRegExpMatched: 'Password must match the regular expression:',
     regExpValidator: 'This regular expression is not valid',
     domainValidator: 'Incorrect domain',
-    decimalValidator: 'Decimal precision should be no more than { count } places',
+    decimalValidator:
+      'Decimal precision should be no more than { count } places',
     integer: 'The field should contain only whole numbers',
   },
   webitelUI: {
@@ -306,6 +309,7 @@ export default {
       variableSearchHint: 'Query format: "key=value"',
     },
     timepicker: {
+      day: 'Day:',
       hour: 'Hour:',
       min: 'Min:',
       sec: 'Sec:',
@@ -352,11 +356,18 @@ export default {
       breakOut: 'Break Out',
     },
     iconAction: {
-      deleteActionHint: 'Delete',
-      editActionHint: 'Edit',
-      addActionHint: 'Add',
-      historyActionHint: 'History',
-      downloadActionHint: 'Download',
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
+        [IconAction.COLUMNS]: 'Select columns',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+      },
     },
     errorPages: {
       goBack: 'Go back',

@@ -15,11 +15,11 @@ const props = defineProps({
     :src="darkMode ? LogoDark : LogoLight"
     alt="Webitel"
     class="wt-logo"
-  >
+  />
 </template>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>

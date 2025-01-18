@@ -5,10 +5,8 @@
         :alt="errorPic.alt"
         :src="errorPic.src"
         class="wt-error-page__img"
-      >
-      <h2
-        class="wt-error-page__title"
-      >
+      />
+      <h2 class="wt-error-page__title">
         {{ errorTitle }}
       </h2>
       <p class="wt-error-page__text">

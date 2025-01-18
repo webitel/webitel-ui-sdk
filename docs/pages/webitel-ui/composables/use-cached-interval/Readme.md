@@ -6,7 +6,7 @@ We take startup time from parameter timeout, or localStorageKey, or 5 minutes by
 ## Input params
 
 | Params          | Default      | Description                                       |
-|-----------------|--------------|---------------------------------------------------|
+| --------------- | ------------ | ------------------------------------------------- |
 | timeout         | 5min         | frequency of function calls                       |
 | localStorageKey | auto-refresh | key from localStorage where the timeout is stored |
 

@@ -1,18 +1,18 @@
 <script setup>
-import Docs from './wt-badge-docs.vue';
-import ExampleBadge from './examples/example-badge.vue';
-import ExampleOutsideBadge from './examples/example-outside-badge.vue';
-import ExampleIconBadge from './examples/example-icon-badge.vue';
 </script>
 
 # WtBadge
 
-## Props
-::: raw
-<Docs/>
-:::
+## Specs
+
+<Specs />
+
+> [!WARNING]
+> Please, use this component with slot.
+> Usage without slot **is deprecated**.
 
 ## Example Badge
+
 ::: raw
 <ExampleBadge/>
 :::
@@ -22,6 +22,7 @@ import ExampleIconBadge from './examples/example-icon-badge.vue';
 :::
 
 ## Example Outside Badge
+
 ::: raw
 <ExampleOutsideBadge/>
 :::
@@ -31,6 +32,7 @@ import ExampleIconBadge from './examples/example-icon-badge.vue';
 :::
 
 ## Example Icon Badge
+
 ::: raw
 <ExampleIconBadge/>
 :::

@@ -1,8 +1,8 @@
 import { objCamelToKebab } from '../../../scripts/caseConverters.js';
-
 import account from './account.svg';
 import adfs from './adfs.svg';
 import agent from './agent.svg';
+import api from './api.svg';
 import appNavigator from './app-navigator.svg';
 import arrange from './arrange.svg';
 import arrowDown from './arrow-down.svg';
@@ -10,57 +10,57 @@ import arrowLeft from './arrow-left.svg';
 import arrowMix from './arrow-mix.svg';
 import arrowRight from './arrow-right.svg';
 import arrowUp from './arrow-up.svg';
+import assignee from './assignee.svg';
 import attach from './attach.svg';
 import attention from './attention.svg';
 import azure from './azure.svg';
 import back from './back.svg';
-import bellBadged from './bell-badged.svg';
 import bell from './bell.svg';
+import bellBadged from './bell-badged.svg';
 import bot from './bot.svg';
 import bucket from './bucket.svg';
 import calendar from './calendar.svg';
-import callFilled from './call--filled.svg';
-import callAddToFilled from './call-add-to--filled.svg';
-import callAddTo from './call-add-to.svg';
-import callDisconnectFilled from './call-disconnect--filled.svg';
-import callDisconnect from './call-disconnect.svg';
-import callEndFilled from './call-end--filled.svg';
-import callEnd from './call-end.svg';
-import callInboundFilled from './call-inbound--filled.svg';
-import callInbound from './call-inbound.svg';
-import callMissedFilled from './call-missed--filled.svg';
-import callMissed from './call-missed.svg';
-import callOutboundFilled from './call-outbound--filled.svg';
-import callOutbound from './call-outbound.svg';
-import callRingingFilled from './call-ringing--filled.svg';
-import callRinging from './call-ringing.svg';
-import callTransferFilled from './call-transfer--filled.svg';
-import callTransfer from './call-transfer.svg';
-
 import call from './call.svg';
+import callFilled from './call--filled.svg';
+import callAddTo from './call-add-to.svg';
+import callAddToFilled from './call-add-to--filled.svg';
+import callDisconnect from './call-disconnect.svg';
+import callDisconnectFilled from './call-disconnect--filled.svg';
+import callEnd from './call-end.svg';
+import callEndFilled from './call-end--filled.svg';
+import callInbound from './call-inbound.svg';
+import callInboundFilled from './call-inbound--filled.svg';
+import callMissed from './call-missed.svg';
+import callMissedFilled from './call-missed--filled.svg';
+import callOutbound from './call-outbound.svg';
+import callOutboundFilled from './call-outbound--filled.svg';
+import callRinging from './call-ringing.svg';
+import callRingingFilled from './call-ringing--filled.svg';
+import callTransfer from './call-transfer.svg';
+import callTransferFilled from './call-transfer--filled.svg';
+import caseAuthor from './case-author.svg';
+import cases from './cases.svg';
+import chat from './chat.svg';
 import chatFilled from './chat--filled.svg';
 import chatEmoji from './chat-emoji.svg';
-import chatEndFilled from './chat-end--filled.svg';
 import chatEnd from './chat-end.svg';
+import chatEndFilled from './chat-end--filled.svg';
 import chatGroup from './chat-group.svg';
 import chatJoin from './chat-join.svg';
 import chatMessageStatusRead from './chat-message-status-read.svg';
 import chatMessageStatusSent from './chat-message-status-sent.svg';
-import chatQuickResponseFilled from './chat-quick-response--filled.svg';
 import chatQuickResponse from './chat-quick-response.svg';
+import chatQuickResponseFilled from './chat-quick-response--filled.svg';
 import chatReply from './chat-reply.svg';
 import chatSend from './chat-send.svg';
-import chatTransferFilled from './chat-transfer--filled.svg';
 import chatTransfer from './chat-transfer.svg';
-
-import chat from './chat.svg';
-import checkboxCheckedFilled from './checkbox--checked--filled.svg';
-import checkboxChecked from './checkbox--checked.svg';
-
+import chatTransferFilled from './chat-transfer--filled.svg';
 import checkbox from './checkbox.svg';
+import checkboxChecked from './checkbox--checked.svg';
+import checkboxCheckedFilled from './checkbox--checked--filled.svg';
 import clear from './clear.svg';
-import closeFilled from './close--filled.svg';
 import close from './close.svg';
+import closeFilled from './close--filled.svg';
 import collapse from './collapse.svg';
 import columnSelect from './column-select.svg';
 import conference from './conference.svg';
@@ -73,9 +73,9 @@ import done from './done.svg';
 import download from './download.svg';
 import edit from './edit.svg';
 import elevenlabs from './elevenlabs.svg';
+import email from './email.svg';
 import emailInbound from './email-inbound.svg';
 import emailOutbound from './email-outbound.svg';
-import email from './email.svg';
 import expand from './expand.svg';
 import eyeClosed from './eye--closed.svg';
 import eyeOpened from './eye--opened.svg';
@@ -83,37 +83,40 @@ import filter from './filter.svg';
 import flows from './flows.svg';
 import generate from './generate.svg';
 import google from './google.svg';
+import group from './group.svg';
 import history from './history.svg';
 import hold from './hold.svg';
 import idle from './idle.svg';
+import impacted from './impacted.svg';
 import instagram from './instagram.svg';
+import job from './job.svg';
 import jobAccept from './job--accept.svg';
 import jobEnd from './job--end.svg';
-import job from './job.svg';
 import json from './json.svg';
 import link from './link.svg';
 import lock from './lock.svg';
 import logout from './logout.svg';
-import mailColor from './mail--color.svg';
 import mail from './mail.svg';
+import mailColor from './mail--color.svg';
+import manual from './manual.svg';
 import menu from './menu.svg';
 import messengerCustom from './messenger-custom.svg';
-import messengerFacebookFilled from './messenger-facebook--filled.svg';
 import messengerFacebook from './messenger-facebook.svg';
+import messengerFacebookFilled from './messenger-facebook--filled.svg';
 import messengerInfobip from './messenger-infobip.svg';
 import messengerMessenger from './messenger-messenger.svg';
-import messengerTelegramFilled from './messenger-telegram--filled.svg';
 import messengerTelegram from './messenger-telegram.svg';
-import messengerViberFilled from './messenger-viber--filled.svg';
+import messengerTelegramFilled from './messenger-telegram--filled.svg';
 import messengerViber from './messenger-viber.svg';
+import messengerViberFilled from './messenger-viber--filled.svg';
 import messengerWebChat from './messenger-web-chat.svg';
-import messengerWhatsappFilled from './messenger-whatsapp--filled.svg';
 import messengerWhatsapp from './messenger-whatsapp.svg';
+import messengerWhatsappFilled from './messenger-whatsapp--filled.svg';
 import meta from './meta.svg';
-import micMuted from './mic-muted.svg';
 import mic from './mic.svg';
-import minus from './minus.svg';
+import micMuted from './mic-muted.svg';
 import microsoft from './microsoft.svg';
+import minus from './minus.svg';
 import move from './move.svg';
 import note from './note.svg';
 import numpad from './numpad.svg';
@@ -122,55 +125,6 @@ import pause from './pause.svg';
 import pin from './pin.svg';
 import play from './play.svg';
 import plus from './plus.svg';
-import previewTagApplication from './preview-tag-application.svg';
-
-import previewTagAudio from './preview-tag-audio.svg';
-import previewTagImage from './preview-tag-image.svg';
-import previewTagVideo from './preview-tag-video.svg';
-import prompter from './prompter.svg';
-import queueMember from './queue-member.svg';
-import radioChecked from './radio--checked.svg';
-import radio from './radio.svg';
-import recOff from './rec-off.svg';
-import rec from './rec.svg';
-import redo from './redo.svg';
-import refresh from './refresh.svg';
-import role from './role.svg';
-import roundedInfo from './rounded-info.svg';
-import save from './save.svg';
-import saveAs from './save-as.svg';
-import scorecard from './scorecard.svg';
-import search from './search.svg';
-import selectCustomValueEnter from './select-custom-value-enter.svg';
-import sendArrow from './send-arrow.svg';
-import settings from './settings.svg';
-import sortArrowDown from './sort-arrow-down.svg';
-import sortArrowUp from './sort-arrow-up.svg';
-import soundOff from './sound-off.svg';
-import soundOn from './sound-on.svg';
-import starFilled from './star--filled.svg';
-import star from './star.svg';
-import stop from './stop.svg';
-import sttDownload from './stt-download.svg';
-import sttSearch from './stt-search.svg';
-import stt from './stt.svg';
-import telegramBot from './telegram-bot.svg';
-import tick from './tick.svg';
-import ttsDownload from './tts-download.svg';
-import treeLine from './tree-line.svg'
-import treeCorner from './tree-corner.svg'
-import treeCross from './tree-cross.svg'
-import undo from './undo.svg';
-import unpin from './unpin.svg';
-import upload from './upload.svg';
-import user from './user.svg';
-import variableSelect from './variable-select.svg';
-import versions from './versions.svg';
-import videoCamOff from './video-cam-off.svg';
-import videoCam from './video-cam.svg';
-import zoomIn from './zoom-in.svg';
-import zoomOut from './zoom-out.svg';
-
 import plyrAirplay from './plyr-airplay.svg';
 import plyrCaptionsOff from './plyr-captions-off.svg';
 import plyrCaptionsOn from './plyr-captions-on.svg';
@@ -188,10 +142,65 @@ import plyrRestart from './plyr-restart.svg';
 import plyrRewind from './plyr-rewind.svg';
 import plyrSettings from './plyr-settings.svg';
 import plyrVolume from './plyr-volume.svg';
+import previewTagApplication from './preview-tag-application.svg';
+import previewTagAudio from './preview-tag-audio.svg';
+import previewTagImage from './preview-tag-image.svg';
+import previewTagVideo from './preview-tag-video.svg';
+import prompter from './prompter.svg';
+import queueMember from './queue-member.svg';
+import radio from './radio.svg';
+import radioChecked from './radio--checked.svg';
+import rec from './rec.svg';
+import recOff from './rec-off.svg';
+import redo from './redo.svg';
+import refresh from './refresh.svg';
+import reporter from './reporter.svg';
+import role from './role.svg';
+import roundedInfo from './rounded-info.svg';
+import save from './save.svg';
+import saveAs from './save-as.svg';
+import scorecard from './scorecard.svg';
+import search from './search.svg';
+import selectCustomValueEnter from './select-custom-value-enter.svg';
+import sendArrow from './send-arrow.svg';
+import settings from './settings.svg';
+import socialMedia from './social-media.svg';
+import sortArrowDown from './sort-arrow-down.svg';
+import sortArrowUp from './sort-arrow-up.svg';
+import soundOff from './sound-off.svg';
+import soundOn from './sound-on.svg';
+import star from './star.svg';
+import starFilled from './star--filled.svg';
+import stop from './stop.svg';
+import stopSign from './stop-sign.svg';
+import stt from './stt.svg';
+import sttDownload from './stt-download.svg';
+import sttSearch from './stt-search.svg';
+import telegramBot from './telegram-bot.svg';
+import tick from './tick.svg';
+import treeCollapse from './tree-collapse.svg';
+import treeCross from './tree-cross.svg';
+import treeExpand from './tree-expand.svg';
+import treeLine from './tree-line.svg';
+import ttsDownload from './tts-download.svg';
+import treeLine from './tree-line.svg'
+import treeCorner from './tree-corner.svg'
+import treeCross from './tree-cross.svg'
+import undo from './undo.svg';
+import unpin from './unpin.svg';
+import upload from './upload.svg';
+import user from './user.svg';
+import variableSelect from './variable-select.svg';
+import versions from './versions.svg';
+import videoCam from './video-cam.svg';
+import videoCamOff from './video-cam-off.svg';
+import zoomIn from './zoom-in.svg';
+import zoomOut from './zoom-out.svg';
 
 export default objCamelToKebab({
   account,
   agent,
+  api,
   arrange,
   adfs,
   appNavigator,
@@ -199,6 +208,7 @@ export default objCamelToKebab({
   arrowLeft,
   arrowRight,
   arrowUp,
+  assignee,
   arrowMix,
   attach,
   attention,
@@ -231,6 +241,8 @@ export default objCamelToKebab({
   callTransfer,
   'call-transfer--filled': callTransferFilled,
 
+  caseAuthor,
+  cases,
   chat,
   'chat--filled': chatFilled,
   chatEmoji,
@@ -256,6 +268,7 @@ export default objCamelToKebab({
   clear,
   close,
   'close--filled': closeFilled,
+  minus,
   collapse,
   columnSelect,
   variableSelect,
@@ -266,6 +279,7 @@ export default objCamelToKebab({
   download,
   edit,
   elevenlabs,
+  plus,
   expand,
   'eye--closed': eyeClosed,
   'eye--opened': eyeOpened,
@@ -273,11 +287,14 @@ export default objCamelToKebab({
   flows,
   generate,
   google,
+  group,
   history,
   hold,
+  impacted,
   link,
   lock,
   logout,
+  manual,
   menu,
   email,
   emailInbound,
@@ -301,12 +318,12 @@ export default objCamelToKebab({
   micMuted,
   microsoft,
   move,
-  minus,
+  treeCollapse,
   note,
   numpad,
   pause,
   play,
-  plus,
+  treeExpand,
   prompter,
   queueMember,
   radio,
@@ -314,12 +331,14 @@ export default objCamelToKebab({
   rec,
   recOff,
   refresh,
+  reporter,
   roundedInfo,
   role,
   done,
   search,
   sendArrow,
   settings,
+  socialMedia,
   sortArrowDown,
   sortArrowUp,
   soundOff,
@@ -328,6 +347,7 @@ export default objCamelToKebab({
   star,
   'star--filled': starFilled,
   stop,
+  stopSign,
   tick,
   upload,
   user,

@@ -17,7 +17,8 @@ const convertGetterArray = (context) => (getters) => {
   const availableGetters = ['value', 'query', 'localStorage'];
 
   getters.forEach((getter) => {
-    if (!availableGetters.includes(getter)) throw new Error(`Unknown getter: ${getter}`);
+    if (!availableGetters.includes(getter))
+      throw new Error(`Unknown getter: ${getter}`);
   });
 
   const getter = ({ router }) => {
@@ -45,7 +46,8 @@ const convertGetterArray = (context) => (getters) => {
 const convertSetterArray = (context) => (setters) => {
   const availableSetters = ['value', 'query', 'localStorage'];
   setters.forEach((setter) => {
-    if (!availableSetters.includes(setter)) throw new Error(`Unknown setter: ${setter}`);
+    if (!availableSetters.includes(setter))
+      throw new Error(`Unknown setter: ${setter}`);
   });
 
   const setter = async (value, { router }) => {
@@ -63,7 +65,8 @@ const convertRestoreArray = (context) => (restores) => {
   const availableRestores = ['query', 'localStorage'];
 
   restores.forEach((restore) => {
-    if (!availableRestores.includes(restore)) throw new Error(`Unknown restore: ${restore}`);
+    if (!availableRestores.includes(restore))
+      throw new Error(`Unknown restore: ${restore}`);
   });
 
   const restore = ({ router }) => {
@@ -120,7 +123,9 @@ export default class BaseFilterSchema {
     } else if (typeof getters === 'function') {
       getter = getters(this);
     } else {
-      throw new Error('Getter should be a function or an array of available getters');
+      throw new Error(
+        'Getter should be a function or an array of available getters',
+      );
     }
 
     this.get = getter;
@@ -136,7 +141,9 @@ export default class BaseFilterSchema {
     } else if (typeof setters === 'function') {
       setter = setters(this);
     } else {
-      throw new Error('Setter should be a function or an array of available setters');
+      throw new Error(
+        'Setter should be a function or an array of available setters',
+      );
     }
 
     this.set = setter;
@@ -152,7 +159,9 @@ export default class BaseFilterSchema {
     } else if (typeof restores === 'function') {
       restore = restores(this);
     } else {
-      throw new Error('Restore should be a function or an array of available restores');
+      throw new Error(
+        'Restore should be a function or an array of available restores',
+      );
     }
 
     this.restore = restore;

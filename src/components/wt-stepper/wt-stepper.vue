@@ -1,11 +1,9 @@
 <template>
   <div class="wt-stepper">
     <div class="wt-stepper-header">
-      <div
-        class="wt-stepper-steps"
-      >
+      <div class="wt-stepper-steps">
         <div
-          v-for="({name, completed}, idx) in stepWithCompleted"
+          v-for="({ name, completed }, idx) in stepWithCompleted"
           class="wt-stepper-steps__wrapper"
         >
           <div
@@ -45,7 +43,9 @@ const props = defineProps({
   },
 });
 
-const description = computed(() => props.steps[props.activeStep - 1].description);
+const description = computed(
+  () => props.steps[props.activeStep - 1].description,
+);
 
 const stepWithCompleted = computed(() =>
   props.steps.map((item, idx) => ({
@@ -56,7 +56,7 @@ const stepWithCompleted = computed(() =>
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>

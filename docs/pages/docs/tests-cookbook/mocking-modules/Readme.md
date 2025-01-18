@@ -15,16 +15,16 @@
 ## Mock vs doMock
 
 Vitest пропонує два методи для мокання модулів:
-`mock` [(docs)](https://vitest.dev/api/vi.html#vi-mock) 
+`mock` [(docs)](https://vitest.dev/api/vi.html#vi-mock)
 та `doMock` [(docs)](https://vitest.dev/api/vi.html#vi-domock).
 
 ### Mock
 
 Різниця в тому, що `mock` мокає модуль глобально, тобто, хойстить [(hoisting)](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)
-мок наверх файла, перед імпортом. 
+мок наверх файла, перед імпортом.
 
 З одного боку, це означає, що мок працюватиме для імпортів, оголошених на початку
-файла, так як викликається перед цим імпортом. 
+файла, так як викликається перед цим імпортом.
 
 З іншого ж боку, це означає, що в цей мок не можна передати зовнішню змінну, щоб
 потім її тестувати - тому що вона, на відміну від мока, не хойститься.
@@ -46,9 +46,9 @@ Vitest пропонує два методи для мокання модулів
 ```javascript
 const request = vi.fn();
 
-vi.doMock('axios', axiosMock( { default: { request } }));
+vi.doMock('axios', axiosMock({ default: { request } }));
 
-const missedAPI = (await import ('../missed.js')).default;
+const missedAPI = (await import('../missed.js')).default;
 ```
 
 ## То що ж використовувати?
@@ -58,4 +58,3 @@ const missedAPI = (await import ('../missed.js')).default;
 
 Але, з іншого боку, так ми можемо протестити його виклик - якщо нам це потрібно.
 (Якщо не потрібно - звісно, використовуємо `mock` і не сумніваємось).
-

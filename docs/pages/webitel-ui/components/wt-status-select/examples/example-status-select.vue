@@ -8,12 +8,10 @@ const status = ref(AgentStatus.ONLINE);
 </script>
 
 <template>
-<wt-status-select
-  :status="status"
-  @change="status = $event"
-></wt-status-select>
+  <wt-status-select
+    :status="status"
+    @change="status = $event"
+  ></wt-status-select>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

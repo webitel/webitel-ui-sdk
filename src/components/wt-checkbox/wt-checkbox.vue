@@ -18,7 +18,7 @@
         class="wt-checkbox__input"
         type="checkbox"
         @change="inputHandler"
-      >
+      />
       <span class="wt-checkbox__checkmark">
         <wt-icon
           :color="iconColor"
@@ -106,11 +106,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-
 .wt-checkbox {
   box-sizing: border-box;
   width: fit-content;

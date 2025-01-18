@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{'wt-timepicker--invalid': invalid}"
+    :class="{ 'wt-timepicker--invalid': invalid }"
     class="wt-timepicker"
   >
     <wt-label
@@ -8,9 +8,25 @@
       :invalid="invalid"
       v-bind="labelProps"
     >
-      {{ `${label} (${format})` }}
+      <!-- @slot Custom input label -->
+      <slot
+        name="label"
+        v-bind="{ label }"
+      >
+        {{ requiredLabel }}
+      </slot>
     </wt-label>
     <div class="wt-timepicker__wrapper">
+      <wt-time-input
+        v-if="isDay"
+        :disabled="disabled"
+        :label="labelDays"
+        :max-value="dateMode ? null : 365"
+        :v="v"
+        :value="day"
+        hide-input-info
+        @input="day = $event"
+      />
       <wt-time-input
         v-if="isHour"
         :disabled="disabled"
@@ -54,6 +70,7 @@
 <script>
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
+const SEC_IN_DAY = 60 * 60 * 24;
 const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;
 
@@ -65,18 +82,33 @@ export default {
     event: 'input',
   },
   props: {
+    /**
+     * Time value in seconds (not milliseconds!)
+     */
     value: {
       type: [String, Number],
       default: 0,
     },
+
+    /**
+     * If dateMode is true, timepicker asserts value is timestamp and displays/changes timestamp value
+     */
     dateMode: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * if passed, replaces "day", "hour", "min", "sec" with a single label + format prop value
+     */
     label: {
       type: String,
       default: '',
     },
+
+    /**
+     * Time format, can be "dd:hh:mm:ss", "hh:mm:ss", "mm:ss", "ss"
+     */
     format: {
       type: String,
       default: 'hh:mm:ss',
@@ -85,6 +117,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Object with props, passed down to wt-label as props
+     */
+
     labelProps: {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
@@ -93,9 +130,17 @@ export default {
       type: Boolean,
       default: false,
     },
+    required: {
+      type: Boolean,
+      default: false,
+      description: 'Native input required attribute',
+    },
   },
 
   computed: {
+    isDay() {
+      return this.format.includes('dd');
+    },
     isHour() {
       return this.format.includes('hh');
     },
@@ -105,23 +150,40 @@ export default {
     isSec() {
       return this.format.includes('ss');
     },
+    labelDays() {
+      if (this.noLabel) return null;
+      return this.label ? null : this.$t('webitelUI.timepicker.day');
+    },
     labelHours() {
-      if(this.noLabel) return null;
+      if (this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.hour');
     },
     labelMin() {
-      if(this.noLabel) return null;
+      if (this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.min');
     },
     labelSec() {
-      if(this.noLabel) return null;
+      if (this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.sec');
+    },
+    day: {
+      get() {
+        return this.dateMode
+          ? new Date(+this.value).getDay()
+          : Math.floor(this.value / SEC_IN_DAY);
+      },
+      set(value) {
+        const newValue = this.dateMode
+          ? new Date(this.value).setDate(value)
+          : this.value - this.day * SEC_IN_DAY + value * SEC_IN_DAY;
+        this.$emit('input', newValue);
+      },
     },
     hour: {
       get() {
         return this.dateMode
           ? new Date(+this.value).getHours()
-          : Math.floor(this.value / SEC_IN_HOUR);
+          : Math.floor((this.value % SEC_IN_DAY) / SEC_IN_HOUR);
       },
       set(value) {
         const newValue = this.dateMode
@@ -145,7 +207,9 @@ export default {
     },
     sec: {
       get() {
-        return this.dateMode ? new Date(+this.value).getSeconds() : Math.floor(this.value % 60);
+        return this.dateMode
+          ? new Date(+this.value).getSeconds()
+          : Math.floor(this.value % 60);
       },
       set(value) {
         const newValue = this.dateMode
@@ -154,6 +218,11 @@ export default {
         this.$emit('input', newValue);
       },
     },
+    requiredLabel() {
+      return this.required
+        ? `${this.label} (${this.format})*`
+        : `${this.label} (${this.format})`;
+    },
   },
 
   methods: {},
@@ -161,11 +230,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-
 .wt-timepicker {
   display: flex;
   flex-direction: column;
@@ -183,5 +251,4 @@ export default {
     margin-right: 0;
   }
 }
-
 </style>

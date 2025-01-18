@@ -8,11 +8,13 @@ import ExampleMultipleCheckboxes from './examples/example-multiple-checkboxes.vu
 # WtCheckbox
 
 ## Props
+
 ::: raw
 <Docs />
 :::
 
 ## Example Checkbox
+
 ::: raw
 <ExampleCheckbox />
 :::
@@ -22,6 +24,7 @@ import ExampleMultipleCheckboxes from './examples/example-multiple-checkboxes.vu
 :::
 
 ## Example Disabled Checkbox
+
 ::: raw
 <ExampleDisabledCheckbox />
 :::
@@ -31,6 +34,7 @@ import ExampleMultipleCheckboxes from './examples/example-multiple-checkboxes.vu
 :::
 
 ## Example Multiple Checkboxes
+
 ::: raw
 <ExampleMultipleCheckboxes />
 :::

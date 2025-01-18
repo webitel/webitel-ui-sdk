@@ -105,7 +105,10 @@ const fieldsToSend = [
 ];
 
 const addGateway = async ({ itemInstance }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   try {
     const response = await instance.post(baseUrl, item);
     return applyTransform(response.data, [snakeToCamel()]);
@@ -114,7 +117,10 @@ const addGateway = async ({ itemInstance }) => {
   }
 };
 const updateGateway = async ({ itemInstance, itemId: id }) => {
-  const item = applyTransform(itemInstance, [sanitize(fieldsToSend), camelToSnake()]);
+  const item = applyTransform(itemInstance, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
 
   const url = `${baseUrl}/${id}`;
   try {
@@ -126,7 +132,10 @@ const updateGateway = async ({ itemInstance, itemId: id }) => {
 };
 
 const patchGateway = async ({ changes, id }) => {
-  const body = applyTransform(changes, [sanitize(fieldsToSend), camelToSnake()]);
+  const body = applyTransform(changes, [
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
   const url = `${baseUrl}/${id}`;
   try {
     const response = await instance.patch(url, body);

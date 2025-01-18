@@ -14,7 +14,7 @@
         name="label"
         v-bind="{ label }"
       >
-        {{ label }}
+        {{ requiredLabel }}
       </slot>
     </wt-label>
     <vue-datepicker
@@ -46,14 +46,10 @@
         />
       </template>
       <template #arrow-left>
-        <wt-icon-btn
-          icon="arrow-left"
-        />
+        <wt-icon-btn icon="arrow-left" />
       </template>
       <template #arrow-right>
-        <wt-icon-btn
-          icon="arrow-right"
-        />
+        <wt-icon-btn icon="arrow-right" />
       </template>
       <template
         v-if="isDateTime"
@@ -78,11 +74,16 @@
 </template>
 
 <script setup>
-import VueDatepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { ref } from 'vue';
+
+import VueDatepicker from '@vuepic/vue-datepicker';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
+  /**
+   * [`'date'`, `'datetime'`]
+   * */
+
   mode: {
     type: String,
     default: 'date',
@@ -114,9 +115,22 @@ const props = defineProps({
     type: String,
     default: 'en',
   },
+
+  /**
+   * Object with props, passed down to wt-label as props
+   */
+
   labelProps: {
     type: Object,
-    description: 'Object with props, passed down to wt-label as props',
+  },
+
+  /**
+   * Native input required attribute
+   */
+
+  required: {
+    type: Boolean,
+    default: false,
   },
 });
 const emit = defineEmits(['input']);
@@ -125,14 +139,18 @@ const isOpened = ref(false);
 const datepicker = ref(null); // template ref
 
 const isDateTime = props.mode === 'datetime';
+
+const requiredLabel = computed(() => {
+  return props.required ? `${props.label}*` : props.label;
+});
 </script>
 
 <style lang="scss">
-@import './variables.scss';
+@use './variables.scss';
 </style>
 
 <style lang="scss" scoped>
-@import '../../../src/css/main.scss';
+@use '../../css/main.scss';
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {

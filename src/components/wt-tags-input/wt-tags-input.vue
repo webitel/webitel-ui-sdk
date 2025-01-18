@@ -160,25 +160,25 @@ export default {
         return [];
       }
 
-      const newOptions = this.value.filter(valObj => {
-        return !this.options.find(option => {
-          return deepEqual(option, valObj)
+      const newOptions = this.value.filter((valObj) => {
+        return !this.options.find((option) => {
+          return deepEqual(option, valObj);
         });
       });
 
-      this.options.unshift(...newOptions)
-    }
+      this.options.unshift(...newOptions);
+    },
   },
   created() {
     if (!this.isApiMode) {
-      this.initializeOptions()
+      this.initializeOptions();
     }
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../wt-select/multiselect.scss';
+@use '../wt-select/multiselect.scss';
 
 .wt-tags-input {
   width: 100%;
@@ -195,9 +195,7 @@ export default {
 .wt-tags-input :deep(.multiselect) {
   .multiselect__tags {
     padding-right: calc(
-      var(--input-padding)
-      + var(--icon-md-size)
-      + var(--select-caret-right-pos)
+      var(--input-padding) + var(--icon-md-size) + var(--select-caret-right-pos)
     );
     padding-bottom: 0;
 

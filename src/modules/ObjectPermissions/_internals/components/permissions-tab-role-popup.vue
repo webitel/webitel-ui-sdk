@@ -7,8 +7,8 @@
 
     <wt-popup
       :shown="shown"
-      size="sm"
       overflow
+      size="sm"
       @close="close"
     >
       <template #title>
@@ -24,13 +24,13 @@
       </template>
       <template #actions>
         <wt-button @click="save(grantee)">
-          {{ t('objects.add') }}
+          {{ t('reusable.add') }}
         </wt-button>
         <wt-button
           color="secondary"
           @click="close"
         >
-          {{ t('objects.close') }}
+          {{ t('reusable.close') }}
         </wt-button>
       </template>
     </wt-popup>
@@ -61,7 +61,9 @@ const route = useRoute();
 
 const grantee = ref(null);
 
-const existingGranteesList = computed(() => getNamespacedState(store.state, props.namespace).dataList);
+const existingGranteesList = computed(
+  () => getNamespacedState(store.state, props.namespace).dataList,
+);
 
 const shown = computed(() => !!route.params.permissionId);
 
@@ -79,6 +81,8 @@ const add = () => {
 const close = () => {
   const { query, hash, name } = route;
   const { permissionId, ...params } = route.params;
+
+  grantee.value = null;
 
   return router.push({
     query,
@@ -101,7 +105,10 @@ const getAvailableGrantees = async (params) => {
   const { items, ...rest } = await loadGrantees(params);
   return {
     items: items.filter(
-      (role) => !existingGranteesList.value.some((usedRoles) => role.id === usedRoles.grantee.id),
+      (role) =>
+        !existingGranteesList.value.some(
+          (usedRoles) => role.id === usedRoles.grantee.id,
+        ),
     ),
     ...rest,
   };
@@ -111,8 +118,6 @@ const save = async (grantee) => {
   await store.dispatch(`${props.namespace}/ADD_ROLE_PERMISSIONS`, grantee);
   return close();
 };
-
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -4,11 +4,11 @@ const CrmSections = Object.freeze({
 
   // CONFIGURATION - LOOKUPS
   SLAS: 'slas',
-  SERVICE_CATALOG: 'service-catalog',
+  SERVICE_CATALOGS: 'service-catalogs',
   PRIORITIES: 'priorities',
   STATUSES: 'statuses',
   SOURCES: 'sources',
-  CLOSURE_REASONS: 'closure-reasons',
+  CLOSE_REASON_GROUPS: 'close-reason-groups',
   CONTACT_GROUPS: 'contact-groups',
   CASE_SOURCES: 'case-sources',
   CUSTOM_LOOKUPS: 'custom-lookups',
