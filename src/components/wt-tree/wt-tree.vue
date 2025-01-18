@@ -6,12 +6,12 @@
     >
       <wt-tree-line
         v-for="(item, index) in data"
+        :key="index"
         :model-value="modelValue"
         :item-label="itemLabel"
         :item-data="itemData"
-        :key="index"
         :data="item"
-        :children="children"
+        :children-prop="childrenProp"
         @update:model-value="emit('update:modelValue', $event)"
       />
     </div>
@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import deepEqual from 'deep-equal';
 import { computed } from 'vue';
+
 import WtTreeLine from '../wt-tree-line/wt-tree-line.vue';
 import { WtTreeMode } from './types/wt-tree-mode.ts';
 
@@ -73,10 +74,10 @@ const props = withDefaults(
     /**
      * You can pass the name of the property that will be used for getting children elements
      */
-    children?: string;
+    childrenProp?: string;
   }>(),
   {
-    children: 'children',
+    childrenProp: 'children',
     mode: WtTreeMode.TREE,
   },
 );
@@ -92,8 +93,8 @@ const allData = computed(() => {
   const getNestedItems = (item: any) => {
     result.push(item);
 
-    if (item[props.children]) {
-      item[props.children].forEach((child: any) => {
+    if (item[props.childrenProp]) {
+      item[props.childrenProp].forEach((child: any) => {
         getNestedItems(child);
       });
     }
@@ -120,7 +121,7 @@ const compareSelectElement = (item: any) => {
 </script>
 
 <style lang="scss">
-@import '../../css/main.scss';
+@use '../../css/main.scss' as *;
 
 .wt-tree {
   padding: var(--spacing-sm);

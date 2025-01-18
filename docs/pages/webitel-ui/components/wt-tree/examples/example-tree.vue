@@ -1,16 +1,17 @@
 <template>
   <p>Selected element: {{ selectedElement }}</p>
   <wt-tree
-      v-model="selectedElement"
-      :data="data"
-      item-label="name"
-      item-data="name"
-      children="service"
+    v-model="selectedElement"
+    :data="data"
+    item-label="name"
+    item-data="name"
+    children-prop="service"
   ></wt-tree>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+
 import WtTree from '../../../../../../src/components/wt-tree/wt-tree.vue';
 import serviceJson from './service.json';
 

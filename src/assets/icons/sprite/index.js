@@ -179,13 +179,11 @@ import sttSearch from './stt-search.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import treeCollapse from './tree-collapse.svg';
-import treeCross from './tree-cross.svg';
 import treeExpand from './tree-expand.svg';
-import treeLine from './tree-line.svg';
 import ttsDownload from './tts-download.svg';
-import treeLine from './tree-line.svg'
-import treeCorner from './tree-corner.svg'
-import treeCross from './tree-cross.svg'
+import treeLine from './tree-line.svg';
+import treeCorner from './tree-corner.svg';
+import treeCross from './tree-cross.svg';
 import undo from './undo.svg';
 import unpin from './unpin.svg';
 import upload from './upload.svg';

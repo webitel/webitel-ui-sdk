@@ -7,12 +7,13 @@
     mode="list"
     item-label="name"
     item-data="name"
-    children="service"
+    children-prop="service"
   ></wt-tree>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+
 import WtTree from '../../../../../../src/components/wt-tree/wt-tree.vue';
 import serviceJson from './service.json';
 
