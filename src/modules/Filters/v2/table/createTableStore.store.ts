@@ -1,6 +1,6 @@
 import set from 'lodash/fp/set';
 import { defineStore, storeToRefs } from 'pinia';
-import { type Ref, ref } from 'vue';
+import { type Ref, ref, watch } from 'vue';
 
 import { createTableFiltersStore } from '../filters/createTableFiltersStore.ts';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
@@ -117,6 +117,28 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
         setupPaginationPersistence(),
         setupFiltersPersistence(),
       ]);
+
+      let loadingAfterFiltersChange = false;
+
+      watch(
+        [() => filtersManager.value.getAllValues(), sort, size],
+        async () => {
+          loadingAfterFiltersChange = true;
+          updatePage(1);
+          await loadDataList();
+          loadingAfterFiltersChange = false;
+        },
+        /* filtersManager requires deep watching for its values */
+        { deep: true },
+      );
+
+      watch([page], () => {
+        if (!loadingAfterFiltersChange) {
+          return loadDataList();
+        }
+      });
+
+      return loadDataList();
     };
 
     return {
