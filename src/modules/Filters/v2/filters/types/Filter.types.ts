@@ -9,18 +9,27 @@ export type FilterValue =
   | undefined
   | null;
 
+/**
+ * represents user-input data, that should be (re)stored
+ */
 export interface FilterData {
   value: FilterValue;
   label?: FilterLabel;
 }
 
-export interface FilterInitParams {
+export interface FilterInitParams extends FilterData {
   name: FilterName;
-  value: FilterValue;
-  label?: FilterLabel;
 }
 
 export interface FilterConfig {
+  /**
+   * Perform simple type conversion on store/restore,
+   * without need to provide custom store/restore functions
+   */
+  storableType?: string;
+  /**
+   * list of persistence storages that should be used for this filter
+   */
   storage?: string[];
 }
 
@@ -28,7 +37,5 @@ export interface IFilter {
   name: FilterName;
   value: FilterValue;
   label?: FilterLabel;
-  set: (value: unknown) => IFilter;
-  get: () => unknown;
-  reset: () => IFilter;
+  set: (data: FilterData) => IFilter;
 }

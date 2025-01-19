@@ -1,5 +1,7 @@
 import type {
   FilterConfig,
+  FilterInitParams,
+  FilterLabel,
   FilterName,
   FilterValue,
   IFilter,
@@ -8,25 +10,67 @@ import type {
 export interface IFiltersManager {
   filters: Map<FilterName, IFilter>;
 
-  get: (name: FilterName) => IFilter;
-  add: (
-    { name, value }: { name: FilterName; value: FilterValue },
+  hasFilter: (name: FilterName) => boolean;
+  getFilter: (name: FilterName) => IFilter;
+  addFilter: (
+    params: FilterInitParams,
     payload?: object,
     config?: FilterConfig,
   ) => IFilter;
-  update: ({
+  updateFilter: ({
     name,
-    value,
   }: {
     name: FilterName;
-    value: FilterValue;
+    value?: FilterValue;
+    label?: FilterLabel;
   }) => IFilter;
-  delete: (name: FilterName) => IFilter;
+  deleteFilter: (name: FilterName) => IFilter;
 
-  resetAll: () => void;
-  getAllValues: () => { [name: FilterName]: FilterValue };
+  /**
+   * Converts filters data to String, that can be stored
+   */
   toString: () => string;
+
+  /**
+   * Restores filters from string
+   */
   fromString: (snapshotStr: string) => void;
+
+  /**
+   * deletes filters
+   * If include/exclude are not provided, all filters will be deleted
+   */
+  reset: ({
+    include,
+    exclude,
+  }?: {
+    include?: FilterName[];
+    exclude?: FilterName[];
+  }) => void;
+
+  /**
+   * @returns Array<FilterName>
+   */
+  getAllKeys: () => FilterName[];
+
+  /**
+   * @returns { FilterName: FilterValue }
+   */
+
+  getAllValues: () => { [name: FilterName]: FilterValue };
+  /**
+   * @returns Array<IFilter>
+   * @param include
+   * @param exclude
+   */
+
+  getFiltersList: ({
+    include,
+    exclude,
+  }?: {
+    include?: FilterName[];
+    exclude?: FilterName[];
+  }) => IFilter[];
 }
 
 export type FiltersManagerConfig = FilterConfig;

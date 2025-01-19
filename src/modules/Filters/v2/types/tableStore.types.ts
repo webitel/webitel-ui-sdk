@@ -53,6 +53,7 @@ export interface TableStore<Entity> {
 
   // filtersStore
   filtersManager: Ref<IFiltersManager>;
+  isFiltersRestoring: Ref<boolean>;
 
   // tableStore
   initialize: () => Promise<void>;
@@ -69,7 +70,8 @@ export interface TableStore<Entity> {
   updateShownHeaders: () => void;
 
   // filtersStore
-  addFilter: (filter: object) => void;
-  updateFilter: (filter: object) => void;
-  deleteFilter: (filter: object) => void;
+  hasFilter: IFiltersManager['hasFilter'];
+  addFilter: IFiltersManager['addFilter'];
+  updateFilter: IFiltersManager['updateFilter'];
+  deleteFilter: IFiltersManager['deleteFilter'];
 }

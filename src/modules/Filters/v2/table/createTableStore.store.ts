@@ -35,8 +35,15 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
     const { updateSort, updateShownHeaders } = headersStore;
 
     const filtersStore = useFiltersStore();
-    const { filtersManager } = storeToRefs(filtersStore);
-    const { addFilter, updateFilter, deleteFilter, setupPersistence: setupFiltersPersistence } = filtersStore;
+    const { filtersManager, isRestoring: isFiltersRestoring } =
+      storeToRefs(filtersStore);
+    const {
+      hasFilter,
+      addFilter,
+      updateFilter,
+      deleteFilter,
+      setupPersistence: setupFiltersPersistence,
+    } = filtersStore;
 
     const dataList: Ref<Entity[]> = ref([]);
     const selected: Ref<Entity[]> = ref([]);
@@ -128,6 +135,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       sort,
 
       filtersManager,
+      isFiltersRestoring,
 
       initialize,
 
@@ -141,6 +149,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       updateSort,
       updateShownHeaders,
 
+      hasFilter,
       addFilter,
       updateFilter,
       deleteFilter,

@@ -1,5 +1,3 @@
-import deepcopy from 'deep-copy';
-
 import type {
   FilterConfig,
   FilterInitParams,
@@ -12,9 +10,7 @@ import type {
 export class Filter implements IFilter {
   readonly name: FilterName;
   label: FilterLabel;
-
-  initialValue: FilterValue;
-  multiple?: boolean;
+  value: FilterValue;
 
   constructor(
     { name, value, label }: FilterInitParams,
@@ -24,28 +20,11 @@ export class Filter implements IFilter {
     this.name = name;
     this.value = value;
     this.label = label;
-
-    this.initialValue = deepcopy(value);
-    this.multiple = Array.isArray(value);
   }
 
-  get(): FilterValue {
-    return this.value;
-  }
-
-  reset(): IFilter {
-    this.value = deepcopy(this.initialValue);
-    return this;
-  }
-
-  restore(): IFilter {
-    return undefined;
-  }
-
-  set(value: FilterValue): IFilter {
+  set({ value, label }: { value?: FilterValue; label?: FilterLabel }): IFilter {
     this.value = value;
+    this.label = label;
     return this;
   }
-
-  value: FilterValue;
 }
