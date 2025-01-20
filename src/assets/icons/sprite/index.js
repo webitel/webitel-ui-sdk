@@ -195,6 +195,7 @@ import videoCam from './video-cam.svg';
 import videoCamOff from './video-cam-off.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
+import loadPreset from './load-preset.svg';
 
 export default objCamelToKebab({
   account,
@@ -398,4 +399,5 @@ export default objCamelToKebab({
   plyrRewind,
   plyrSettings,
   plyrVolume,
+  loadPreset,
 });
