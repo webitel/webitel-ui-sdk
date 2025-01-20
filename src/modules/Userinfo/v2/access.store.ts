@@ -30,11 +30,18 @@ export const createUserAccessStore = (
     scope: rawScopeAccess,
     access: rawVisibilityAccess,
   }: CreateUserAccessStoreRawAccess,
-  { namespace = 'userinfo', setupRouteGuards = true }: CreateUserAccessStoreConfig,
+  {
+    namespace = 'userinfo',
+    setupRouteGuards = true,
+  }: CreateUserAccessStoreConfig,
 ) => {
   return defineStore(`${namespace}/access`, () => {
-    const globalAccess: Ref<GlobalActionAccessMap> = ref(makeGlobalAccessMap(rawGlobalAccess));
-    const scopeAccess: Ref<ScopeAccessMap> = ref(makeScopeAccessMap(rawScopeAccess));
+    const globalAccess: Ref<GlobalActionAccessMap> = ref(
+      makeGlobalAccessMap(rawGlobalAccess),
+    );
+    const scopeAccess: Ref<ScopeAccessMap> = ref(
+      makeScopeAccessMap(rawScopeAccess),
+    );
     const appVisibilityAccess: Ref<AppVisibilityMap> = ref(
       makeAppVisibilityMap(rawVisibilityAccess),
     );
@@ -42,7 +49,10 @@ export const createUserAccessStore = (
       makeSectionVisibilityMap(rawVisibilityAccess),
     );
 
-    const hasAccess = (action: CrudAction | SpecialGlobalAction, object?: WtObject) => {
+    const hasAccess = (
+      action: CrudAction | SpecialGlobalAction,
+      object?: WtObject,
+    ) => {
       return (
         globalAccess.value.get(action) ||
         (object && scopeAccess.value.get(object).get(action as CrudAction))
@@ -50,6 +60,7 @@ export const createUserAccessStore = (
     };
 
     const hasReadAccess = (object?: WtObject) => {
+      console.log(object);
       return hasAccess(CrudAction.Read, object);
     };
 
@@ -69,6 +80,7 @@ export const createUserAccessStore = (
 
     const hasSectionVisibility = (section: UiSection) => {
       // const appOfSection = getWtAppByUiSection(section);
+      console.log(section);
       const objectOfSection = castUiSectionToWtObject(section, app);
       return (
         hasReadAccess() ||
@@ -84,6 +96,7 @@ export const createUserAccessStore = (
       console.log('setupRouteGuards');
       const router = useRouter();
       router.beforeEach((to, _from, next) => {
+        console.log(to);
         const wtObject = to.meta.WtObject;
 
         if (wtObject && !hasSectionVisibility(wtObject as UiSection)) {
@@ -95,15 +108,15 @@ export const createUserAccessStore = (
     }
 
     return {
-      globalAccess,
-      scopeAccess,
-      appVisibilityAccess,
-      sectionVisibilityAccess,
-
       hasReadAccess,
       hasCreateAccess,
       hasEditAccess,
       hasDeleteAccess,
+
+      globalAccess,
+      scopeAccess,
+      appVisibilityAccess,
+      sectionVisibilityAccess,
       hasApplicationVisibility,
       hasSectionVisibility,
     };

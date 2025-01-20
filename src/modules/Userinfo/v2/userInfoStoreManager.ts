@@ -1,6 +1,5 @@
 import createUserInfoStore from './userinfo.store';
 import { WtApplication } from './UserAccess.types';
-import { AxiosInstance } from 'axios';
 // Тут все якось не дуже правильно точки зору логіки....
 // Якщо викликати useUserInfo без initializeUserInfoStore - кинеться помилка - все правильно
 // Якщо викликати useUserInfo із initializeUserInfoStore - помилки не буде але в userStor не зареєструється стейт.
@@ -8,11 +7,13 @@ import { AxiosInstance } from 'axios';
 
 // TODO: З вищесказаного - потрібно переглянути логіку ініціалізації userInfo стору
 
-let useUserInfoStore: ReturnType<Awaited<ReturnType<typeof createUserInfoStore>>> | undefined;
-export const initializeUserInfoStore = async (app: WtApplication, instance: AxiosInstance) => {
+let useUserInfoStore:
+  | ReturnType<Awaited<ReturnType<typeof createUserInfoStore>>>
+  | undefined;
+export const initializeUserInfoStore = async (app: WtApplication) => {
   try {
     if (!useUserInfoStore) {
-      const userStoreFactory = await createUserInfoStore(app, instance);
+      const userStoreFactory = await createUserInfoStore(app);
       useUserInfoStore = userStoreFactory();
     }
   } catch (error) {

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { createUserAccessStore } from './access.store.js';
-import { WtApplication } from './UserAccess.types.js';
-import userinfoGenerator from '../api/userinfo.js';
-import { AxiosInstance } from 'axios';
+import instance from '../../../app/api/instance';
+import { createUserAccessStore } from './access.store';
+import { WtApplication } from './UserAccess.types';
 
+import userinfoGenerator from '@webitel/ui-sdk/src/modules/Userinfo/api/userinfo.js';
 // import ApplicationsAccess from '@webitel/ui-sdk/src/modules/Userinfo/classes/ApplicationsAccess.js';
 
 interface DefaultState {
@@ -43,7 +43,7 @@ const defaultState = (): DefaultState => ({
   expiresAt: 0,
 });
 
-export default async function createUserInfoStore(app: WtApplication, instance: AxiosInstance) {
+export default async function createUserInfoStore(app: WtApplication) {
   const userinfoAPI = userinfoGenerator(instance);
   const session = await userinfoAPI.getSession();
   const access = await userinfoAPI.getApplicationsAccess();
@@ -55,7 +55,7 @@ export default async function createUserInfoStore(app: WtApplication, instance: 
       scope: session.scope,
       access: access,
     },
-    { namespace: 'userinfo' },
+    { namespace: 'userinfo', setupRouteGuards: true },
   );
 
   const {
@@ -64,7 +64,6 @@ export default async function createUserInfoStore(app: WtApplication, instance: 
     hasEditAccess,
     hasDeleteAccess,
     hasSectionVisibility,
-    hasApplicationVisibility,
   } = useUserAccess();
 
   return defineStore('userinfo', () => {
@@ -115,7 +114,6 @@ export default async function createUserInfoStore(app: WtApplication, instance: 
       hasEditAccess,
       hasDeleteAccess,
       hasSectionVisibility,
-      hasApplicationVisibility,
     };
   });
 }
