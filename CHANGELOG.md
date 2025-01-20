@@ -1,3 +1,9 @@
+## [v24.12.63] - 2025-01-20
+### :sparkles: New Features
+- [`0e88e94`](https://github.com/webitel/webitel-ui-sdk/commit/0e88e9434ca7ed8283308c0a21e9296046777863) - props for table added to docs  [WTEL-5488](https://webitel.atlassian.net/browse/WTEL-5488) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`fe236cd`](https://github.com/webitel/webitel-ui-sdk/commit/fe236cd685cbc3bc3624d193bf745c875c476ee2) - cases icon and new prop for table added  [WTEL-5488](https://webitel.atlassian.net/browse/WTEL-5488) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.62] - 2025-01-20
 ### :sparkles: New Features
 - [`3d964e5`](https://github.com/webitel/webitel-ui-sdk/commit/3d964e55db419955998185bb045516a84f300fe9) - implement list mode for display tree data, update docs for tree component. Implement description for props [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
@@ -818,3 +824,4 @@
 [v24.12.59]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.58...v24.12.59
 [v24.12.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.60...v24.12.61
 [v24.12.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.61...v24.12.62
+[v24.12.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.62...v24.12.63
