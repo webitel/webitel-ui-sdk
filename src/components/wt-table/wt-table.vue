@@ -1,7 +1,9 @@
 <template>
   <div class="wt-table">
     <table class="wt-table__table">
-      <thead class="wt-table__head">
+      <thead
+        v-if="!headless"
+        class="wt-table__head">
         <tr
           :style="columnsStyle"
           class="wt-table__tr wt-table__tr__head"
@@ -182,6 +184,13 @@ export default {
     gridActions: {
       type: Boolean,
       default: true,
+    },
+    /**
+     * 'If true, displays table without header.'
+     */
+    headless: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['sort', 'update:selected'],
