@@ -185,6 +185,9 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     * 'If true, displays table without header.'
+     */
     headless: {
       type: Boolean,
       default: false,
