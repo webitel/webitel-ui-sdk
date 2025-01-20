@@ -5,7 +5,7 @@
     :data="data"
     item-label="name"
     item-data="name"
-    children-prop="service"
+    children-prop="services"
   ></wt-tree>
 </template>
 
@@ -13,8 +13,70 @@
 import { ref } from 'vue';
 
 import WtTree from '../../../../../../src/components/wt-tree/wt-tree.vue';
-import serviceJson from './service.json';
 
-const selectedElement = ref('another service 3');
-const data = ref(serviceJson.items);
+const selectedElement = ref('Subservice 4');
+const data = ref([
+  {
+    id: '1',
+    name: 'Catalog 1',
+    services: [],
+  },
+  {
+    id: '2',
+    name: 'Catalog 2',
+    services: [
+      {
+        id: '3',
+        name: 'Service 1',
+        services: [
+          {
+            id: '11',
+            name: 'Subservice 4',
+            searched: true,
+            services: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '4',
+    name: 'Catalog 3',
+    services: [
+      {
+        id: '5',
+        name: 'Service 1',
+        services: [
+          {
+            id: '6',
+            name: 'Subservice 1',
+            services: [],
+          },
+        ],
+      },
+      {
+        id: '7',
+        name: 'Service 2',
+        services: [
+          {
+            id: '8',
+            name: 'Subservice 2',
+            services: [],
+          },
+        ],
+      },
+      {
+        id: '9',
+        name: 'Service 3',
+        services: [
+          {
+            id: '10',
+            name: 'Subservice 3',
+            services: [],
+          },
+        ],
+      },
+    ],
+  },
+]);
 </script>

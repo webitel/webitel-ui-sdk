@@ -17,7 +17,7 @@
     </div>
     <div
       v-if="mode === WtTreeMode.LIST"
-      class="wt-tree__content__list"
+      class="wt-tree__list-content"
     >
       <span
         v-for="(item, index) in allData"
@@ -139,7 +139,7 @@ const compareSelectElement = (item: any) => {
     padding-right: var(--spacing-2xs);
   }
 
-  &__content__list {
+  &__list-content {
     @extend %wt-scrollbar;
 
     display: flex;

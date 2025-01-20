@@ -12,7 +12,7 @@
         :icon="lastChild ? 'tree-corner' : 'tree-cross'"
       />
       <wt-icon-btn
-        v-if="data[childrenProp]"
+        v-if="data[childrenProp] && data[childrenProp].length"
         :icon="collapsed ? 'plus' : 'minus'"
         @click="collapsed = !collapsed"
       />
@@ -61,11 +61,6 @@ import { computed, onMounted, ref, watch } from 'vue';
 import WtExpandTransition from '../transitions/wt-expand-transition.vue';
 import type { WtTreeNestedIcons } from './types/wt-tree-nested-icons.ts';
 
-const emit = defineEmits<{
-  (e: 'openParent'): void;
-  (e: 'update:modelValue', value: any): void;
-}>();
-
 const props = withDefaults(
   defineProps<{
     modelValue: null | any;
@@ -91,6 +86,11 @@ const props = withDefaults(
   },
 );
 
+const emit = defineEmits<{
+  (e: 'openParent'): void;
+  (e: 'update:modelValue', value: any): void;
+}>();
+
 const label = computed(() =>
   props.itemLabel ? props.data[props.itemLabel] : props.data,
 );
@@ -102,17 +102,10 @@ const displayIcons = computed(() => {
     return icons;
   }
 
-  if (props.nextElement) {
-    icons.push({
-      icon: 'tree-line',
-      hidden: false,
-    });
-  } else {
-    icons.push({
-      icon: 'tree-line',
-      hidden: true,
-    });
-  }
+  icons.push({
+    icon: 'tree-line',
+    hidden: !props.nextElement,
+  });
 
   return icons;
 });

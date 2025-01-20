@@ -1,16 +1,17 @@
 <script setup>
 import ExampleTree from './examples/example-tree.vue';
 import ExampleTreeList from './examples/example-tree-list.vue';
-import ExampleTreeBothVariant from './examples/example-tree-both-variant.vue';
 import Specs from './component-specs.vue';
 </script>
 
-# WtTable
+# WtTree
 
 ## Specs
+
 <Specs />
 
 ## Example Tree
+
 ::: raw
 <ExampleTree/>
 :::
@@ -19,20 +20,22 @@ import Specs from './component-specs.vue';
 <<< ./examples/example-tree.vue
 :::
 
-## Example Tree List
-::: raw
-<ExampleTreeList />
-:::
+[//]: # (TODO Comment because now it's doesn't need to use list but have request not to delete)
 
-::: details Code
-<<< ./examples/example-tree-list.vue
-:::
+[//]: # (## Example Tree List)
 
-## Example Tree Both Variant
-::: raw
-<ExampleTreeBothVariant />
-:::
+[//]: # ()
 
-::: details Code
-<<< ./examples/example-tree-both-variant.vue
-:::
+[//]: # (::: raw)
+
+[//]: # (<ExampleTreeList />)
+
+[//]: # (:::)
+
+[//]: # ()
+
+[//]: # (::: details Code)
+
+[//]: # (<<< ./examples/example-tree-list.vue)
+
+[//]: # (:::)
