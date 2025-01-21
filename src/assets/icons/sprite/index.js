@@ -63,6 +63,7 @@ import close from './close.svg';
 import closeFilled from './close--filled.svg';
 import collapse from './collapse.svg';
 import columnSelect from './column-select.svg';
+import comment from './comment.svg';
 import conference from './conference.svg';
 import contacts from './contacts.svg';
 import copy from './copy.svg';
@@ -179,6 +180,7 @@ import sttSearch from './stt-search.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import treeCollapse from './tree-collapse.svg';
+import treeCorner from './tree-corner.svg';
 import treeCross from './tree-cross.svg';
 import treeExpand from './tree-expand.svg';
 import treeLine from './tree-line.svg';
@@ -193,6 +195,7 @@ import videoCam from './video-cam.svg';
 import videoCamOff from './video-cam-off.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
+import loadPreset from './load-preset.svg';
 
 export default objCamelToKebab({
   account,
@@ -268,6 +271,7 @@ export default objCamelToKebab({
   minus,
   collapse,
   columnSelect,
+  comment,
   variableSelect,
   contacts,
   copy,
@@ -354,6 +358,7 @@ export default objCamelToKebab({
   zoomOut,
   ttsDownload,
   treeLine,
+  treeCorner,
   treeCross,
   stt,
   sttDownload,
@@ -394,4 +399,5 @@ export default objCamelToKebab({
   plyrRewind,
   plyrSettings,
   plyrVolume,
+  loadPreset,
 });
