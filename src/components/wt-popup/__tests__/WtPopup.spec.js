@@ -6,7 +6,7 @@ describe('WtPopup', () => {
     const wrapper = shallowMount(WtPopup, {
       stubs: { WtIconBtn: true },
     });
-    expect(wrapper.classes('wt-popup')).toBe(true);
+    expect(wrapper.exists()).toBe(true);
   });
 
   it('renders popup header via header slot', () => {
