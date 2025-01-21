@@ -34,6 +34,7 @@ const AdminSections = Object.freeze({
 
   // INTEGRATIONS
   STORAGE: 'storage', // scope: storage_profile
+  STORAGE_POLICIES: 'storage-policies', // scope: storage_policies_profile
   COGNITIVE_PROFILES: 'cognitive-profiles', // scope: cognitive_profile
   EMAIL_PROFILES: 'email-profiles', // scope: email_profile
   SINGLE_SIGN_ON: 'single-sign-on', // scope: single-sign-on

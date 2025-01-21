@@ -1,3 +1,18 @@
+## [v24.12.66] - 2025-01-21
+### :bug: Bug Fixes
+- [`23863b0`](https://github.com/webitel/webitel-ui-sdk/commit/23863b0be32becefd35c90e63ffb67dec9c16494) - grantee locales[WTEL-5909](https://webitel.atlassian.net/browse/WTEL-5909) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.65] - 2025-01-21
+### :bug: Bug Fixes
+- [`67c0176`](https://github.com/webitel/webitel-ui-sdk/commit/67c01764757af470e095f6cce5f3384eaa68f3f3) - grantee locale[WTEL-5909](https://webitel.atlassian.net/browse/WTEL-5909) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.64] - 2025-01-20
+### :sparkles: New Features
+- [`1b28420`](https://github.com/webitel/webitel-ui-sdk/commit/1b28420426d36ec82863fad40187d14b1c109cff) - load preset icon [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3751) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.63] - 2025-01-20
 ### :sparkles: New Features
 - [`0e88e94`](https://github.com/webitel/webitel-ui-sdk/commit/0e88e9434ca7ed8283308c0a21e9296046777863) - props for table added to docs  [WTEL-5488](https://webitel.atlassian.net/browse/WTEL-5488) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -825,3 +840,6 @@
 [v24.12.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.60...v24.12.61
 [v24.12.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.61...v24.12.62
 [v24.12.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.62...v24.12.63
+[v24.12.64]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.63...v24.12.64
+[v24.12.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.64...v24.12.65
+[v24.12.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.65...v24.12.66
