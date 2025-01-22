@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtTableColumnSelect from '../wt-table-column-select.vue';
 
 describe('WtTableColumnSelect', () => {
@@ -26,6 +27,6 @@ describe('WtTableColumnSelect', () => {
     });
     wrapper.findComponent({ name: 'wt-icon-btn' }).vm.$emit('click');
     await wrapper.vm.$nextTick();
-    expect(wrapper.find('.wt-table-column-select__popup').exists()).toBe(true);
+    expect(wrapper.find('.wt-popup').exists()).toBe(true);
   });
 });

@@ -10,4 +10,6 @@ const ComponentSize = Object.freeze({
   XXXL: '3xl',
 });
 
+export { ComponentSize };
+
 export default ComponentSize;

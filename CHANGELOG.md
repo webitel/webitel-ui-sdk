@@ -1,3 +1,57 @@
+## [v24.12.67] - 2025-01-21
+### :sparkles: New Features
+- [`66e81f2`](https://github.com/webitel/webitel-ui-sdk/commit/66e81f2f7ac9f1bc6d73d26d20b62274d634e92f) - wt-popup rewrite with composition api + TS, + added activator slot, + docs, + fixed tests [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.66] - 2025-01-21
+### :bug: Bug Fixes
+- [`23863b0`](https://github.com/webitel/webitel-ui-sdk/commit/23863b0be32becefd35c90e63ffb67dec9c16494) - grantee locales[WTEL-5909](https://webitel.atlassian.net/browse/WTEL-5909) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.65] - 2025-01-21
+### :bug: Bug Fixes
+- [`67c0176`](https://github.com/webitel/webitel-ui-sdk/commit/67c01764757af470e095f6cce5f3384eaa68f3f3) - grantee locale[WTEL-5909](https://webitel.atlassian.net/browse/WTEL-5909) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.64] - 2025-01-20
+### :sparkles: New Features
+- [`1b28420`](https://github.com/webitel/webitel-ui-sdk/commit/1b28420426d36ec82863fad40187d14b1c109cff) - load preset icon [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3751) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.63] - 2025-01-20
+### :sparkles: New Features
+- [`0e88e94`](https://github.com/webitel/webitel-ui-sdk/commit/0e88e9434ca7ed8283308c0a21e9296046777863) - props for table added to docs  [WTEL-5488](https://webitel.atlassian.net/browse/WTEL-5488) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`fe236cd`](https://github.com/webitel/webitel-ui-sdk/commit/fe236cd685cbc3bc3624d193bf745c875c476ee2) - cases icon and new prop for table added  [WTEL-5488](https://webitel.atlassian.net/browse/WTEL-5488) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v24.12.62] - 2025-01-20
+### :sparkles: New Features
+- [`3d964e5`](https://github.com/webitel/webitel-ui-sdk/commit/3d964e55db419955998185bb045516a84f300fe9) - implement list mode for display tree data, update docs for tree component. Implement description for props [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`b0f186b`](https://github.com/webitel/webitel-ui-sdk/commit/b0f186b635d6ad05762c48db8a2942007f65ca0f) - update formated component code [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`d751692`](https://github.com/webitel/webitel-ui-sdk/commit/d7516923032a1e996e91b24ca72684f11300629c) - implement WtTree unit test for check render [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`11154f1`](https://github.com/webitel/webitel-ui-sdk/commit/11154f1f08a4cd507a0b86d15cbfbe676a1d492e) - update package version [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`df60e44`](https://github.com/webitel/webitel-ui-sdk/commit/df60e4423adae0e12b49256b9257614d490e0a2b) - implement docs with example usage wt-tree table [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`47e6d78`](https://github.com/webitel/webitel-ui-sdk/commit/47e6d7872a346485f62400de36708dcdcde11c6c) - implement component wt-tree, update wt-tree-line, implement v-model for wt-tree and wt-tree-line. Update expansion panel add background props [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
+- [`003edb5`](https://github.com/webitel/webitel-ui-sdk/commit/003edb51b3bcfaf7cd7938943f54db85c2cf953f) - commit playground for continue work in another device [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`505414b`](https://github.com/webitel/webitel-ui-sdk/commit/505414b9dd59c2a504f2671fbbd8aaa5edb68744) - implement basic comonent wt-tree for display data with tree structure. Implement wt-tree-line, implement icons for display tree [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+
+### :bug: Bug Fixes
+- [`40f2131`](https://github.com/webitel/webitel-ui-sdk/commit/40f2131e1224939950b4ab6e621413c4ac059f72) - update example tree. Update wt-tree-line [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`7bc5413`](https://github.com/webitel/webitel-ui-sdk/commit/7bc5413c00cd959ff60527022b0d8f14c7e3be47) - add wtTree component to index js [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`0114b51`](https://github.com/webitel/webitel-ui-sdk/commit/0114b516e3160bc5a4a97ea92d3ed17741be58a5) - update package version [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`c5d75b2`](https://github.com/webitel/webitel-ui-sdk/commit/c5d75b287d6718ca895265b99c9b47e158498c27) - implement show items by searched props. Implement select [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`c148312`](https://github.com/webitel/webitel-ui-sdk/commit/c148312a54c65afa9bf1681cf746da5ec3dd8b49) - Remove hideTitle from expansion panel
+- [`7281a3d`](https://github.com/webitel/webitel-ui-sdk/commit/7281a3d39d0275767dfe41e255a0d33cf52db158) - Resolve merge conflicts
+- [`39e07d1`](https://github.com/webitel/webitel-ui-sdk/commit/39e07d1c7a332608bbc23806ac837c53a15d1a9d) - remove hide title props from wt-expansion-panel
+- [`007f277`](https://github.com/webitel/webitel-ui-sdk/commit/007f277705d12a0d1e8b6eddad8c91c43a8e3364) - update package version [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+- [`50d1793`](https://github.com/webitel/webitel-ui-sdk/commit/50d17931faba19769e756afb8de90ddbcbe8bc20) - fix code style in wt-tree and wt-tree-line components [WTEL-5598](https://webitel.atlassian.net/browse/WTEL-5598)
+
+
+## [v24.12.61] - 2025-01-17
+### :sparkles: New Features
+- [`c074fb9`](https://github.com/webitel/webitel-ui-sdk/commit/c074fb90d58d52bc60098649c4e0429ece82de09) - added wt-select `useValueFromOptionsByProp` feature support to array values, +fixes [WTEL-5916](https://webitel.atlassian.net/browse/WTEL-5916) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.59] - 2025-01-16
 ### :bug: Bug Fixes
 - [`744e1c0`](https://github.com/webitel/webitel-ui-sdk/commit/744e1c09504f9776e7d60c0bea08b1cc1b280625) - reset grantee in permissions popup[WTEL-5903](https://webitel.atlassian.net/browse/WTEL-5903) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -797,3 +851,10 @@
 [v24.12.55]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.54...v24.12.55
 [v24.12.56]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.55...v24.12.56
 [v24.12.59]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.58...v24.12.59
+[v24.12.61]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.60...v24.12.61
+[v24.12.62]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.61...v24.12.62
+[v24.12.63]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.62...v24.12.63
+[v24.12.64]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.63...v24.12.64
+[v24.12.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.64...v24.12.65
+[v24.12.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.65...v24.12.66
+[v24.12.67]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.66...v24.12.67
