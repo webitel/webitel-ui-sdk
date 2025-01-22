@@ -23,7 +23,7 @@ import { Filter } from './Filter.class.ts';
 class FiltersManager implements IFiltersManager {
   filters = new Map<FilterName, IFilter>();
 
-  constructor(private config: FiltersManagerConfig) {}
+  constructor(private config?: FiltersManagerConfig) {}
 
   hasFilter(name: FilterName): boolean {
     return this.filters.has(name);
@@ -186,7 +186,7 @@ class FiltersManager implements IFiltersManager {
 }
 
 export const createFiltersManager = (
-  config: FiltersManagerConfig,
+  config?: FiltersManagerConfig,
 ): IFiltersManager => {
   return new FiltersManager(config);
 };
