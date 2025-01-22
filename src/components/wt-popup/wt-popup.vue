@@ -1,22 +1,24 @@
 <template>
-<!--  @slot check source code for scoped bindings :( -->
-  <slot
-    class="wt-popup-activator"
-    name="activator"
-    v-bind="{
-    shown: wrapperShown,
-    size,
-    disabled,
-    open: openPopup,
-    close: closePopup,
-    toggle: togglePopup,
-  } as ActivatorSlotScope"
-  />
   <div
-    v-show="wrapperShown || isCloseAnimationPlaying"
+    v-show="showPopupComponent"
     :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
     class="wt-popup"
   >
+
+<!--    &lt;!&ndash;  @slot check source code for scoped bindings :( &ndash;&gt;-->
+<!--    <slot-->
+<!--      class="wt-popup-activator"-->
+<!--      name="activator"-->
+<!--      v-bind="{-->
+<!--    shown: wrapperShown,-->
+<!--    size,-->
+<!--    disabled,-->
+<!--    open: openPopup,-->
+<!--    close: closePopup,-->
+<!--    toggle: togglePopup,-->
+<!--  } as ActivatorSlotScope"-->
+<!--    />-->
+
     <transition-slide :offset="[0, -1440 / 2]">
       <aside
         v-if="wrapperShown"
@@ -53,7 +55,7 @@
 
 <script lang="ts" setup>
 import {TransitionSlide} from '@morev/vue-transitions';
-import {defineEmits, defineProps, ref, watch} from 'vue';
+import {computed, defineEmits, defineProps, ref, watch} from 'vue';
 
 import {ComponentSize} from "../../enums/ComponentSize/ComponentSize.enum.ts";
 
@@ -105,6 +107,7 @@ interface ActivatorSlotScope {
 const slots = defineSlots<{
   activator?: ActivatorSlotScope;
 }>();
+const activatorMode = !!slots.activator;
 
 const wrapperShown = ref(false);
 const isCloseAnimationPlaying = ref(false);
@@ -131,6 +134,10 @@ const togglePopup = () => {
   }
 };
 
+const showPopupComponent = computed(() => {
+  return wrapperShown.value || isCloseAnimationPlaying.value;
+});
+
 // overlay should be shown before popup to show animation properly
 watch(
   () => props.shown,
@@ -144,7 +151,6 @@ watch(
      * but if that's so, there's no `shown` prop => it's true by default => popup is initially shown
      * so we need to handle initial popup visibility depending on activator slot presence
      */
-    const activatorMode = !!slots.activator;
     if (activatorMode) return;
 
 
