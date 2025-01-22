@@ -1,4 +1,4 @@
-export type TableHeader = {
+export type WtTableHeader = {
   value: string;
   locale?: string | string[];
   text?: string;

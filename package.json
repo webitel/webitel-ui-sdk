@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.70",
+  "version": "24.12.71",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -156,8 +156,6 @@
     "markdown-it": "^14.1.0",
     "markdown-table": "^3.0.4",
     "path": "^0.12.7",
-    "pinia": "2.3.0",
-    "pinia-plugin-persistedstate": "^4.2.0",
     "postcss": "^8.4.49",
     "postcss-prefix-selector": "^2.1.0",
     "prettier": "^3.4.2",

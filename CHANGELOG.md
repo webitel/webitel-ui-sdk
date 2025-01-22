@@ -1,3 +1,18 @@
+## [v24.12.71] - 2025-01-22
+### :sparkles: New Features
+- [`acbd463`](https://github.com/webitel/webitel-ui-sdk/commit/acbd463ffc15ddf5319c1489c975ed67f646305c) - wt-table headers typing, api module typing [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.70] - 2025-01-22
+### :bug: Bug Fixes
+- [`5990f52`](https://github.com/webitel/webitel-ui-sdk/commit/5990f52992a1ee7b7c4760583db41be77b9ac597) - rollback activator slot for wt-popup [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.68] - 2025-01-22
+### :bug: Bug Fixes
+- [`a3114d7`](https://github.com/webitel/webitel-ui-sdk/commit/a3114d784e814bb8cbf2b7f22479e3cbc7efaf0b) - compareSize.ts script [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.67] - 2025-01-21
 ### :sparkles: New Features
 - [`66e81f2`](https://github.com/webitel/webitel-ui-sdk/commit/66e81f2f7ac9f1bc6d73d26d20b62274d634e92f) - wt-popup rewrite with composition api + TS, + added activator slot, + docs, + fixed tests [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -858,3 +873,6 @@
 [v24.12.65]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.64...v24.12.65
 [v24.12.66]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.65...v24.12.66
 [v24.12.67]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.66...v24.12.67
+[v24.12.68]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.67...v24.12.68
+[v24.12.70]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.69...v24.12.70
+[v24.12.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.70...v24.12.71
