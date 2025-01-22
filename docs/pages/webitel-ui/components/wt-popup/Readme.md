@@ -11,18 +11,25 @@ import ExamplePopupUsingVIf from './examples/example-popup-using-v-if.vue';
 
 <Specs />
 
-## Example Popup using Activator
-_Recommended_
+[//]: # (## Example Popup using Activator)
 
-::: raw
+[//]: # (_Recommended_)[]()
 
-<ExamplePopupUsingActivator />
+[//]: # ()
+[//]: # (::: raw)
 
-:::
+[//]: # ()
+[//]: # (<ExamplePopupUsingActivator />)
 
-::: details Code
-<<< ./examples/example-popup-using-activator.vue
-:::
+[//]: # ()
+[//]: # (:::)
+
+[//]: # ()
+[//]: # (::: details Code)
+
+[//]: # (<<< ./examples/example-popup-using-activator.vue)
+
+[//]: # (:::)
 
 ## Example Popup Using Shown Prop
 _Ok_
