@@ -1,12 +1,4 @@
-import ComponentSize from '../enums/ComponentSize/ComponentSize.enum.js';
-
-export enum eComponentSize {
-  XS = 'xs',
-  SM = 'sm',
-  MD = 'md',
-  LG = 'lg',
-  XL = 'xl',
-}
+import {ComponentSize} from '../enums/ComponentSize/ComponentSize.enum.ts';
 
 const numerics = Object.values(ComponentSize).reduce((nums, size, index) => {
   return {
@@ -68,8 +60,8 @@ export const greaterThen = (s1, s2) => {
  * @returns {boolean}
  */
 export const greaterOrEqual = (
-  s1: eComponentSize,
-  s2: eComponentSize,
+  s1: ComponentSize,
+  s2: ComponentSize,
 ): boolean => {
   return compareSize(s1, s2) >= 0;
 };
