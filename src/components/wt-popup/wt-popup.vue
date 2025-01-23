@@ -126,13 +126,13 @@ const closePopup = () => {
   }, 200); // 200 -> 0.2s css var(--transition); duration
 };
 
-const togglePopup = () => {
-  if (wrapperShown.value) {
-    closePopup();
-  } else {
-    openPopup();
-  }
-};
+// const togglePopup = () => {
+//   if (wrapperShown.value) {
+//     closePopup();
+//   } else {
+//     openPopup();
+//   }
+// };
 
 const showPopupComponent = computed(() => {
   return wrapperShown.value || isCloseAnimationPlaying.value;
