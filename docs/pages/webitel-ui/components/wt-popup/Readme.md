@@ -12,8 +12,6 @@ import ExamplePopupUsingVIf from './examples/example-popup-using-v-if.vue';
 
 [//]: # (## Example Popup using Activator)
 
-[//]: # (_Recommended_)[]()
-
 [//]: # ()
 [//]: # (::: raw)
 
