@@ -1,3 +1,10 @@
+## [v24.12.73] - 2025-01-24
+### :bug: Bug Fixes
+- [`89ee811`](https://github.com/webitel/webitel-ui-sdk/commit/89ee81169b328a701d88dfd169c940639ea7cc00) - dual panel scroll added [WTEL-5294](https://webitel.atlassian.net/browse/WTEL-5294) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`9272f1b`](https://github.com/webitel/webitel-ui-sdk/commit/9272f1bf1fa25040b09186acf464d0da701b94fd) - import in docs *(commit by [@Lera24](https://github.com/Lera24))*
+- [`68579a3`](https://github.com/webitel/webitel-ui-sdk/commit/68579a3ce43d7fdfcadc49aaef241e2d49097c38) - build errors[WTEL-5935](https://webitel.atlassian.net/browse/WTEL-5935) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.71] - 2025-01-22
 ### :sparkles: New Features
 - [`acbd463`](https://github.com/webitel/webitel-ui-sdk/commit/acbd463ffc15ddf5319c1489c975ed67f646305c) - wt-table headers typing, api module typing [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -867,3 +874,4 @@
 [v24.12.68]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.67...v24.12.68
 [v24.12.70]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.69...v24.12.70
 [v24.12.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.70...v24.12.71
+[v24.12.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.72...v24.12.73
