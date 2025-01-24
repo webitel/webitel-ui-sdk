@@ -1,24 +1,7 @@
 import type { Ref } from 'vue';
 
+import { ApiModule } from '../../../../api/types/ApiModule.type.ts';
 import { IFiltersManager } from '../filters';
-
-interface ApiModulePatchParams {
-  changes: object;
-  parentId?: string | number;
-  id?: string | number;
-  etag?: string;
-}
-
-interface ApiModuleDeleteParams {
-  id: string | number;
-  parentId?: string | number;
-}
-
-interface ApiModule<Entity> {
-  getList: (params: object) => Promise<{ items: Entity[]; next: boolean }>;
-  patch: (params: ApiModulePatchParams) => Promise<Entity>;
-  delete: (params: ApiModuleDeleteParams) => Promise<Entity>;
-}
 
 export interface useTableStoreParams<Entity> {
   parentId?: string;
