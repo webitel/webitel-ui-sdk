@@ -1,3 +1,9 @@
+## [v24.12.74] - 2025-01-25
+### :bug: Bug Fixes
+- [`2216f34`](https://github.com/webitel/webitel-ui-sdk/commit/2216f344e010a6e8cd7a4ca8f2ed0e562fbf80fc) - set rejected requests handle for DELETE_BULK storeTableModule action *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`07dfa6e`](https://github.com/webitel/webitel-ui-sdk/commit/07dfa6ebfce88fa68422bb24c7e2b23122650806) - error in build doc *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.73] - 2025-01-24
 ### :bug: Bug Fixes
 - [`89ee811`](https://github.com/webitel/webitel-ui-sdk/commit/89ee81169b328a701d88dfd169c940639ea7cc00) - dual panel scroll added [WTEL-5294](https://webitel.atlassian.net/browse/WTEL-5294) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -875,3 +881,4 @@
 [v24.12.70]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.69...v24.12.70
 [v24.12.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.70...v24.12.71
 [v24.12.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.72...v24.12.73
+[v24.12.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.73...v24.12.74
