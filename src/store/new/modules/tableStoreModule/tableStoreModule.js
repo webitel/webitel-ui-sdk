@@ -1,4 +1,3 @@
-import deepCopy from 'deep-copy';
 import FilterEvent from '../../../../modules/Filters/enums/FilterEvent.enum.js';
 import {
   queryToSortAdapter,
@@ -153,7 +152,6 @@ const actions = {
       context.commit('SET', { path: 'error', value: err });
       throw err;
     } finally {
-
       setTimeout(() => {
         context.commit('SET', { path: 'isLoading', value: false });
       }, 100); // why 1s? https://ux.stackexchange.com/a/104782
@@ -228,10 +226,21 @@ const actions = {
     }
   },
 
-  DELETE_BULK: async (context, deleted) =>
-    Promise.allSettled(
-      deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
-    ),
+  DELETE_BULK: async (context, deleted) => {
+    try {
+      const results = await Promise.allSettled(
+        deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
+      );
+
+      // list of rejected requests
+      const rejected = results.filter((result) => result.status === 'rejected');
+      if (rejected.length) {
+        throw rejected;
+      }
+    } catch (err) {
+      throw err;
+    }
+  },
 
   SET_SELECTED: (context, selected) => {
     context.commit('SET', { path: 'selected', value: selected });
