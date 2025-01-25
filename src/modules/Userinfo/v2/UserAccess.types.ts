@@ -1,9 +1,7 @@
-export enum AdminSections {
-  Queues = 'queues',
-  // todo
-}
+import { AdminSections, WtObject } from '../../../enums';
 
 export enum SupervisorSections {}
+
 // todo
 
 // todo ... app section enums
@@ -13,15 +11,6 @@ export type UiSection = AdminSections | SupervisorSections; // todo
 export enum WtApplication {
   Supervisor = 'supervisor',
   Admin = 'admin',
-  // todo
-}
-
-// wt system objects
-export enum WtObject {
-  Agent = 'agent',
-  Queue = 'queue',
-  Contact = 'contact',
-  Regions = 'regions',
   // todo
 }
 

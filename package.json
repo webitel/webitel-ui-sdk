@@ -16,7 +16,8 @@
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "update-node": "nvm install --lts && nvm alias default node"
+    "update-node": "nvm install --lts && nvm alias default node",
+    "i": "npm install"
   },
   "main": "./dist/@webitel/ui-sdk.mjs",
   "type": "module",
