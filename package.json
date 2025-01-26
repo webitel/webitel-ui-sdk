@@ -17,7 +17,8 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "tsc": "vue-tsc -p tsconfig.json",
-    "update-node": "nvm install --lts && nvm alias default node"
+    "update-node": "nvm install --lts && nvm alias default node",
+    "i": "npm install"
   },
   "main": "./dist/@webitel/ui-sdk.mjs",
   "type": "module",
