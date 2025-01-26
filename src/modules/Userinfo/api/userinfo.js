@@ -1,38 +1,25 @@
-import applyTransform, {
-  notify,
-  snakeToCamel,
-} from '../../../api/transformers/index.js';
+import {
+  getSession,
+  getUiVisibilityAccess,
+  logout,
+  setInstance,
+} from '../v2/api/UserinfoAPI.js';
 
-const userinfo = (instance) => ({
-  async getSession() {
-    const url = '/userinfo';
-    try {
-      const response = await instance.get(url);
-      return applyTransform(response.data, [snakeToCamel()]);
-    } catch (err) {
-      throw applyTransform(err, [notify]);
-    }
-  },
+/**
+ * @deprecated remove after v25.06 release
+ * @description
+ * backward compat
+ * */
+const userinfo = (instance) => {
+  if (instance) {
+    setInstance(instance);
+  }
 
-  async getApplicationsAccess() {
-    const url = 'role/metadata/access';
-    try {
-      const response = await instance.get(url);
-      return applyTransform(response.data, [snakeToCamel()]);
-    } catch (err) {
-      throw applyTransform(err, [notify]);
-    }
-  },
-
-  async logout() {
-    const url = '/logout';
-
-    try {
-      return await instance.post(url, {});
-    } catch (err) {
-      throw applyTransform(err, [notify]);
-    }
-  },
-});
+  return {
+    getSession,
+    logout,
+    getUiVisibilityAccess,
+  };
+};
 
 export default userinfo;

@@ -1,8 +1,13 @@
 import {
-  AppVisibilityMap,
+  AdminSections,
   CrudAction,
+  WtApplication,
+  WtObject,
+} from '../../../enums';
+import { CrudGlobalAction } from './enums';
+import type {
+  AppVisibilityMap,
   GlobalAccessApiResponseItem,
-  GlobalAccessCrudActionApiResponseItem,
   GlobalAction,
   GlobalActionAccessMap,
   ScopeAccessApiResponseItem,
@@ -10,20 +15,25 @@ import {
   SectionVisibilityMap,
   UiSection,
   VisibilityAccess,
-  WtApplication,
-  WtObject,
 } from './UserAccess.d.ts';
 
-// backend -> frontend
+/**
+ * @internal
+ * @description
+ * backend -> frontend
+ * */
 const castGlobalActionToCrudAction = (
   globalAction: GlobalAction,
 ): CrudAction | null => {
-  if (globalAction === GlobalAccessCrudActionApiResponseItem.Write) {
-    return CrudAction.Edit;
-  } else if (globalAction === GlobalAccessCrudActionApiResponseItem.Read) {
+  if (globalAction === CrudGlobalAction.Write) {
+    return CrudAction.Update;
+  } else if (globalAction === CrudGlobalAction.Read) {
     return CrudAction.Read;
+  } else if (globalAction === CrudGlobalAction.Delete) {
+    return CrudAction.Delete;
+  } else if (globalAction === CrudGlobalAction.Add) {
+    return CrudAction.Create;
   }
-  // ... todo
 
   return null;
 };
@@ -47,7 +57,7 @@ export const makeScopeAccessMap = (
         if (token === 'r') {
           return scopeObjectAccessMap.set(CrudAction.Read, true);
         } else if (token === 'w') {
-          return scopeObjectAccessMap.set(CrudAction.Edit, true);
+          return scopeObjectAccessMap.set(CrudAction.Update, true);
         } else if (token === 'd') {
           return scopeObjectAccessMap.set(CrudAction.Delete, true);
         } else if (token === 'x') {
@@ -88,7 +98,7 @@ export const castUiSectionToWtObject = (section: UiSection): WtObject => {
 
 export const getWtAppByUiSection = (section: UiSection): WtApplication => {
   // todo
-  if (AdminSections.includes(section)) {
+  if (AdminSections[section]) {
     return WtApplication.Admin;
   }
   // todo
