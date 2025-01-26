@@ -114,7 +114,7 @@ import { computed, onMounted, ref } from 'vue';
 
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
-import { WtTableHeader } from "../wt-table/types/WtTable.type.ts";
+import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 
 const props = withDefaults(
   defineProps<{
