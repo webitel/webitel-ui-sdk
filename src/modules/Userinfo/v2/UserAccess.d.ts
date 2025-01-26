@@ -1,25 +1,17 @@
-import { AdminSections, WtObject } from '../../../enums';
-
-export enum SupervisorSections {}
+import type {
+  AdminSections,
+  AuditorSections,
+  CrmSections,
+  SupervisorSections,
+  WtApplication,
+  WtObject,
+} from '../../../enums';
 
 // todo
 
 // todo ... app section enums
 
 export type UiSection = AdminSections | SupervisorSections; // todo
-
-export enum WtApplication {
-  Supervisor = 'supervisor',
-  Admin = 'admin',
-  // todo
-}
-
-export enum CrudAction {
-  Read = 'read',
-  Create = 'create',
-  Edit = 'edit',
-  Delete = 'delete',
-}
 
 export enum SpecialGlobalAction {
   Download = 'download',
