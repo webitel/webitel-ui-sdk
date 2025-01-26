@@ -131,8 +131,8 @@
 
 import { computed, useSlots } from 'vue';
 
-import ComponentSize from '../../enums/ComponentSize/ComponentSize.enum.js';
-import { greaterOrEqual, smallerOrEqual } from '../../scripts/compareSize.ts';
+import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
+import { greaterOrEqual, smallerOrEqual } from '../../scripts/compareSize';
 import WtImage from '../wt-image/wt-image.vue';
 
 const props = defineProps({

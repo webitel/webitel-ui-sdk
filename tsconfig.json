@@ -1,23 +1,31 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["ES2023", "dom"],
     "module": "esnext",
-    "allowJs": true,
+    "lib": ["esnext"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "allowJs": false,
     "skipLibCheck": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
 
     "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,
+    "noEmitOnError": false,
 
     "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
+    "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "docs/pages"]
+  "include": [
+    "src",
+    "docs/pages",
+    "node_modules/vite-plugin-checker/dist/esm/checkers/vueTsc/typescript-vue-tsc/lib/lib.dom.d.ts"
+  ],
+  "exclude": ["**/Userinfo/**"]
 }

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
+
 import {
   AppVisibilityMap,
   CreateUserAccessStoreConfig,
@@ -12,7 +13,7 @@ import {
   UiSection,
   WtApplication,
   WtObject,
-} from './UserAccess.types.ts';
+} from './UserAccess.d.ts';
 import {
   castUiSectionToWtObject,
   getWtAppByUiSection,

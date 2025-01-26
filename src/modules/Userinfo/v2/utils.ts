@@ -12,7 +12,7 @@ import {
   VisibilityAccess,
   WtApplication,
   WtObject,
-} from './UserAccess.types.ts';
+} from './UserAccess.d.ts';
 
 // backend -> frontend
 const castGlobalActionToCrudAction = (

@@ -1,4 +1,4 @@
-import { AdminSections } from '../v2/UserAccess.types.ts';
+import { AdminSections } from '../v2/UserAccess.d.ts';
 
 enum WtObject {
   Agent = 'agent',
