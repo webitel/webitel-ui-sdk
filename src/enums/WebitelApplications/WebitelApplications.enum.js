@@ -1,11 +1,13 @@
-const WebitelApplications = Object.freeze({
-  ADMIN: 'admin',
-  AGENT: 'agent',
-  SUPERVISOR: 'supervisor',
-  HISTORY: 'history',
-  AUDIT: 'audit',
-  ANALYTICS: 'grafana',
-  CRM: 'crm',
-});
+import { WtApplication } from './WtApplication';
 
-export default WebitelApplications;
+/**
+ * @deprecated
+ * default export is for backward compatibility,
+ * use ts enum instead (and don't forget to compile it)
+ */
+export default Object.fromEntries(
+  Object.entries(WtApplication).map(([key, value]) => [
+    key.toUpperCase(),
+    value,
+  ]),
+);
