@@ -1,7 +1,13 @@
-const SupervisorSections = Object.freeze({
-  QUEUES: 'queues',
-  AGENTS: 'agents',
-  ACTIVE_CALLS: 'activeCalls',
-});
+import { SupervisorSections } from './SupervisorSections';
 
-export default SupervisorSections;
+/**
+ * @deprecated
+ * default export is for backward compatibility,
+ * use ts enum instead (and don't forget to compile it)
+ */
+export default Object.fromEntries(
+  Object.entries(SupervisorSections).map(([key, value]) => [
+    key.toUpperCase(),
+    value,
+  ]),
+);
