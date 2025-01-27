@@ -1,4 +1,4 @@
-import { IconAction } from '../../enums/index.js';
+import { IconAction } from '../../enums';
 
 export const WtIconActionIconMappings = Object.freeze({
   [IconAction.ADD]: 'plus',
