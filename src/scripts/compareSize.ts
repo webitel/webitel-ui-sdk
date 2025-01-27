@@ -1,4 +1,4 @@
-import {ComponentSize} from '../enums/ComponentSize/ComponentSize.enum.ts';
+import { ComponentSize } from '../enums/ComponentSize/ComponentSize';
 
 const numerics = Object.values(ComponentSize).reduce((nums, size, index) => {
   return {

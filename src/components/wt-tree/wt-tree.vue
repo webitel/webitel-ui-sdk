@@ -1,7 +1,7 @@
 <template>
   <div class="wt-tree">
     <div
-      v-if="mode === WtTreeMode.TREE"
+      v-if="mode === WtTreeMode.Tree"
       class="wt-tree__content"
     >
       <wt-tree-line
@@ -16,7 +16,7 @@
       />
     </div>
     <div
-      v-if="mode === WtTreeMode.LIST"
+      v-if="mode === WtTreeMode.List"
       class="wt-tree__list-content"
     >
       <span
@@ -46,7 +46,7 @@ import deepEqual from 'deep-equal';
 import { computed } from 'vue';
 
 import WtTreeLine from '../wt-tree-line/wt-tree-line.vue';
-import { WtTreeMode } from './types/wt-tree-mode.ts';
+import { WtTreeMode } from './types/WtTreeMode';
 
 const props = withDefaults(
   defineProps<{
@@ -78,7 +78,7 @@ const props = withDefaults(
   }>(),
   {
     childrenProp: 'children',
-    mode: WtTreeMode.TREE,
+    mode: WtTreeMode.Tree,
   },
 );
 
