@@ -13,12 +13,11 @@ export const useCardTabs = (tabs) => {
   });
 
   function changeTab(tab) {
-    const { params, query, hash } = route;
+    const { params, hash } = route;
 
     return router.push({
       name: tab.pathName,
       params,
-      query,
       hash,
     });
   }
