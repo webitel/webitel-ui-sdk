@@ -1,3 +1,8 @@
+## [v24.12.75] - 2025-01-27
+### :bug: Bug Fixes
+- [`7ca06fc`](https://github.com/webitel/webitel-ui-sdk/commit/7ca06fcd7b917b597ac8545c8406ec5cc7329262) - reset filters in permissions[WTEL-5944](https://webitel.atlassian.net/browse/WTEL-5944) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.74] - 2025-01-25
 ### :bug: Bug Fixes
 - [`2216f34`](https://github.com/webitel/webitel-ui-sdk/commit/2216f344e010a6e8cd7a4ca8f2ed0e562fbf80fc) - set rejected requests handle for DELETE_BULK storeTableModule action *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -882,3 +887,4 @@
 [v24.12.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.70...v24.12.71
 [v24.12.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.72...v24.12.73
 [v24.12.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.73...v24.12.74
+[v24.12.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.74...v24.12.75
