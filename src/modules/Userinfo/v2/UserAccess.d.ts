@@ -2,75 +2,115 @@ import type {
   AdminSections,
   AuditorSections,
   CrmSections,
+  CrudAction,
   SupervisorSections,
   WtApplication,
   WtObject,
 } from '../../../enums';
+import { CrudGlobalAction, ScopeClass, SpecialGlobalAction } from './enums';
 
-// todo
+/**
+ * @description
+ * Represents union of all Webitel web client applications/sections
+ * */
+export type UiSection =
+  | AdminSections
+  | AuditorSections
+  | SupervisorSections
+  | CrmSections;
 
-// todo ... app section enums
+/**
+ * @internal
+ * @description Received from backend
+ * */
+export type GlobalAction = CrudGlobalAction | SpecialGlobalAction;
 
-export type UiSection = AdminSections | SupervisorSections; // todo
-
-export enum SpecialGlobalAction {
-  Download = 'download',
-  // todo
-}
-
-// backend, should be converted to CrudAction
-export enum GlobalAccessCrudActionApiResponseItem {
-  Read = 'read',
-  Write = 'write',
-  Delete = 'delete',
-  Create = 'create',
-}
-
-// received from backend
-export type GlobalAction =
-  | GlobalAccessCrudActionApiResponseItem
-  | SpecialGlobalAction;
-
-// received from backend
-export enum ScopeClass {
-  Agent = 'cc_agent',
-  Queue = 'cc_queue',
-  Dictionaries = 'dictionaries',
-  EmailProfile = 'email_profile',
-  // todo
-}
-
+/**
+ * @internal
+ * */
 export interface GlobalAccessApiResponseItem {
   id: GlobalAction;
   name: string;
   usage: string;
 }
 
+/**
+ * @internal
+ * */
 export interface ScopeAccessApiResponseItem {
   class: ScopeClass;
   access: string;
 }
 
+/**
+ * @internal
+ * @description
+ * Represents admin->permissions->roles->access.
+ * */
 export type VisibilityAccess = unknown;
 
+/**
+ * @internal
+ * @description
+ * Represents raw access data, received from backend.
+ * */
 export interface CreateUserAccessStoreRawAccess {
   permissions: GlobalAccessApiResponseItem[];
   scope: ScopeAccessApiResponseItem[];
   access: VisibilityAccess;
 }
 
+/**
+ * @internal
+ */
 export interface CreateUserAccessStoreConfig {
-  namespace: string;
-  setupRouteGuards?: boolean;
+  /**
+   * @default 'userinfo'
+   * */
+  namespace?: string;
+  /**
+   * By default, route guards are generated automatically
+   * __depending on__ {@link WtObject} enum __route__ `meta` __data__.
+   */
+  useManualRouteGuards?: boolean;
 }
 
+/**
+ * @description
+ * Map is used for quick access to user permissions
+ * */
 export type GlobalActionAccessMap = Map<
   CrudAction | SpecialGlobalAction,
   boolean
 >;
 
+/**
+ * @description
+ * Map is used for quick access to user permissions
+ * */
 export type ScopeAccessMap = Map<WtObject, Map<CrudAction, boolean>>;
 
+/**
+ * @description
+ * Map is used for quick access to user permissions
+ * */
 export type AppVisibilityMap = Map<WtApplication, boolean>;
 
+/**
+ * @description
+ * Map is used for quick access to user permissions
+ * */
 export type SectionVisibilityMap = Map<UiSection, boolean>;
+
+export interface UserAccessStore {
+  initialize: (CreateUserAccessStoreRawAccess) => void;
+  setupRouteGuards: () => void;
+
+  hasReadAccess: (object?: WtObject) => boolean;
+  hasCreateAccess: (object?: WtObject) => boolean;
+  hasUpdateAccess: (object?: WtObject) => boolean;
+  hasDeleteAccess: (object?: WtObject) => boolean;
+
+  hasApplicationVisibility: (app: WtApplication) => boolean;
+  hasSectionVisibility: (section: UiSection) => boolean;
+}
