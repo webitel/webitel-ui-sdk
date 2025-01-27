@@ -3,7 +3,7 @@ import {
   getUiVisibilityAccess,
   logout,
   setInstance,
-} from '../v2/api/UserinfoAPI.js';
+} from '../v2/api/UserinfoAPI';
 
 /**
  * @deprecated remove after v25.06 release
