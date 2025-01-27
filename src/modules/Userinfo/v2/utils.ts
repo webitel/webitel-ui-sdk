@@ -1,9 +1,15 @@
+import invert from 'lodash/fp/invert';
+
 import {
   AdminSections,
+  AuditorSections,
+  CrmSections,
   CrudAction,
+  SupervisorSections,
   WtApplication,
   WtObject,
 } from '../../../enums';
+import { _wtUiLog as wtlog } from '../../../scripts/logger';
 import { CrudGlobalAction } from './enums';
 import type {
   AppVisibilityMap,
@@ -27,11 +33,14 @@ const castGlobalActionToCrudAction = (
 ): CrudAction | null => {
   if (globalAction === CrudGlobalAction.Write) {
     return CrudAction.Update;
-  } else if (globalAction === CrudGlobalAction.Read) {
+  }
+  if (globalAction === CrudGlobalAction.Read) {
     return CrudAction.Read;
-  } else if (globalAction === CrudGlobalAction.Delete) {
+  }
+  if (globalAction === CrudGlobalAction.Delete) {
     return CrudAction.Delete;
-  } else if (globalAction === CrudGlobalAction.Add) {
+  }
+  if (globalAction === CrudGlobalAction.Add) {
     return CrudAction.Create;
   }
 
@@ -56,11 +65,14 @@ export const makeScopeAccessMap = (
       .reduce((scopeObjectAccessMap, token) => {
         if (token === 'r') {
           return scopeObjectAccessMap.set(CrudAction.Read, true);
-        } else if (token === 'w') {
+        }
+        if (token === 'w') {
           return scopeObjectAccessMap.set(CrudAction.Update, true);
-        } else if (token === 'd') {
+        }
+        if (token === 'd') {
           return scopeObjectAccessMap.set(CrudAction.Delete, true);
-        } else if (token === 'x') {
+        }
+        if (token === 'x') {
           return scopeObjectAccessMap.set(CrudAction.Create, true);
         }
       }, new Map());
@@ -80,26 +92,46 @@ export const makeAppVisibilityMap = (
 export const makeSectionVisibilityMap = (
   rawVisibility: VisibilityAccess,
 ): SectionVisibilityMap => {
-  return Object.values(rawVisibility).reduce((map, section) => {
-    if (section.startsWith('_')) return map; // skip private field
-    return map.set(section, true);
-  }, new Map());
+  const map = new Map();
+
+  Object.values(rawVisibility).forEach((appSectionsVisibility) => {
+    Object.entries(appSectionsVisibility).forEach(([section, visibility]) => {
+      if (section.startsWith('_')) return map; // skip private fields
+      map.set(section, visibility._enabled);
+    });
+  });
+
+  return map;
 };
 
-// todo
-export const castUiSectionToWtObject = (section: UiSection): WtObject => {
-  const map = {
-    ['AdminSections...']: WtObject.Agent,
-    // todo
-  };
+const WtObjectToUiSectionMap = {
+  // todo
+  [AdminSections.Users]: WtObject.User,
+  [AdminSections.Agents]: WtObject.Agent,
+};
 
-  return map[section];
+const UiSectionToWtObjectMap = invert(WtObjectToUiSectionMap);
+
+export const castUiSectionToWtObject = (section: UiSection): WtObject => {
+  return UiSectionToWtObjectMap[section];
+};
+
+export const castWtObjectToUiSection = (object: WtObject): UiSection => {
+  return WtObjectToUiSectionMap[object];
 };
 
 export const getWtAppByUiSection = (section: UiSection): WtApplication => {
-  // todo
   if (AdminSections[section]) {
     return WtApplication.Admin;
   }
-  // todo
+  if (AuditorSections[section]) {
+    return WtApplication.Audit;
+  }
+  if (CrmSections[section]) {
+    return WtApplication.Crm;
+  }
+  if (SupervisorSections[section]) {
+    return WtApplication.Supervisor;
+  }
+  wtlog.error({ module: 'modules/userinfo' })('Unknown section', section);
 };

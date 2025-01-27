@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 import { createUserAccessStore } from './accessStore';
 import { getSession, getUiVisibilityAccess } from './api/UserinfoAPI';
@@ -13,9 +14,13 @@ export const createUserinfoStore = () => {
     const accessStore = useAccessStore();
     const { initialize: initializeAccessStore } = accessStore;
 
+    const userId = ref();
+
     const initialize = async () => {
-      const { scope, permissions } = await getSession();
+      const { scope, permissions, ...userinfo } = await getSession();
       const access = await getUiVisibilityAccess();
+
+      userId.value = userinfo.userId;
 
       initializeAccessStore({
         scope,
@@ -25,6 +30,7 @@ export const createUserinfoStore = () => {
     };
 
     return {
+      userId,
       initialize,
     };
   });

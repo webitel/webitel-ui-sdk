@@ -7,7 +7,11 @@ import type {
   WtApplication,
   WtObject,
 } from '../../../enums';
-import { CrudGlobalAction, ScopeClass, SpecialGlobalAction } from './enums';
+import type {
+  CrudGlobalAction,
+  ScopeClass,
+  SpecialGlobalAction,
+} from './enums';
 
 /**
  * @description

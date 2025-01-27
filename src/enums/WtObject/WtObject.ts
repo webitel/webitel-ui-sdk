@@ -5,7 +5,8 @@ export const WtObject = {
   Agent: 'agent',
   Queue: 'queue',
   Contact: 'contact',
-  Regions: 'regions',
+  Region: 'region',
+  User: 'user',
 } as const;
 
 export type WtObject = (typeof WtObject)[keyof typeof WtObject];

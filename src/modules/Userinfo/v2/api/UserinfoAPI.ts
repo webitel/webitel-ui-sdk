@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 
 import getDefaultInstance from '../../../../api/defaults/getDefaultInstance/getDefaultInstance';
 import applyTransform, {
@@ -20,6 +20,7 @@ const setInstance = (newInstance: AxiosInstance) => {
 const getSession = async (): Promise<{
   scope: ScopeAccessApiResponseItem[];
   permissions: GlobalAccessApiResponseItem[];
+  userId: string;
 }> => {
   const url = '/userinfo';
   try {

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
 
-import { CrudAction, WtApplication, WtObject } from '../../../enums';
-import { SpecialGlobalAction } from './enums';
+import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
+import type { SpecialGlobalAction } from './enums';
 import type {
   AppVisibilityMap,
   CreateUserAccessStoreConfig,
@@ -27,6 +27,8 @@ export const createUserAccessStore = ({
   useManualRouteGuards = false,
 }: CreateUserAccessStoreConfig = {}) => {
   return defineStore(`${namespace}/access`, (): UserAccessStore => {
+    const router = useRouter();
+
     let globalAccess: GlobalActionAccessMap = new Map();
 
     let scopeAccess: ScopeAccessMap = new Map();
@@ -79,11 +81,13 @@ export const createUserAccessStore = ({
     };
 
     const setupRouteGuards = () => {
-      const router = useRouter();
       router.beforeEach((to, from, next) => {
-        const wtObject = to.meta.WtObject;
+        /**/
+        const uiSection = to.matched.findLast(
+          ({ meta }) => meta.UiSection,
+        ) as UiSection;
 
-        if (wtObject && !hasSectionVisibility(wtObject)) {
+        if (uiSection && !hasSectionVisibility(uiSection)) {
           return;
         }
 
