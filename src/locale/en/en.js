@@ -267,7 +267,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
         [AdminSections.QUEUES]: 'Queues',
         [AdminSections.STORAGE]: 'Storage',
-        [AdminSections.STORAGE_POLICIES]: 'Storage',
+        [AdminSections.STORAGE_POLICIES]: 'Storage policies',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
         [AdminSections.EMAIL_PROFILES]: 'Email profiles',
         [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
