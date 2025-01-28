@@ -82,10 +82,9 @@ export const createUserAccessStore = ({
 
     const setupRouteGuards = () => {
       router.beforeEach((to, from, next) => {
-        /**/
-        const uiSection = to.matched.findLast(
-          ({ meta }) => meta.UiSection,
-        ) as UiSection;
+        /* findLast because "matched" has top=>bottom order */
+        const uiSection = to.matched.findLast(({ meta }) => meta.UiSection)
+          ?.meta?.UiSection as UiSection;
 
         if (uiSection && !hasSectionVisibility(uiSection)) {
           return;

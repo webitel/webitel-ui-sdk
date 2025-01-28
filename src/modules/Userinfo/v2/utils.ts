@@ -106,8 +106,8 @@ export const makeSectionVisibilityMap = (
 
 const WtObjectToUiSectionMap = {
   // todo
-  [AdminSections.Users]: WtObject.User,
-  [AdminSections.Agents]: WtObject.Agent,
+  [WtObject.User]: AdminSections.Users,
+  [WtObject.Agent]: AdminSections.Agents,
 };
 
 const UiSectionToWtObjectMap = invert(WtObjectToUiSectionMap);
@@ -120,18 +120,24 @@ export const castWtObjectToUiSection = (object: WtObject): UiSection => {
   return WtObjectToUiSectionMap[object];
 };
 
+const invertedAdminSections = invert(AdminSections);
+const invertedAuditorSections = invert(AuditorSections);
+const invertedCrmSections = invert(CrmSections);
+const invertedSupervisorSections = invert(SupervisorSections);
+
 export const getWtAppByUiSection = (section: UiSection): WtApplication => {
-  if (AdminSections[section]) {
+  /* use inverted maps because UiSection is the enum value, not key */
+  if (invertedAdminSections[section]) {
     return WtApplication.Admin;
   }
-  if (AuditorSections[section]) {
+  if (invertedAuditorSections[section]) {
     return WtApplication.Audit;
   }
-  if (CrmSections[section]) {
+  if (invertedCrmSections[section]) {
     return WtApplication.Crm;
   }
-  if (SupervisorSections[section]) {
+  if (invertedSupervisorSections[section]) {
     return WtApplication.Supervisor;
   }
-  wtlog.error({ module: 'modules/userinfo' })('Unknown section', section);
+  wtlog.error({ module: 'modules/userinfo' })('Unknown section:', section);
 };

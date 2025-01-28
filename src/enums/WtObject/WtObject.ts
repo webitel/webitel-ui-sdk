@@ -7,6 +7,7 @@ export const WtObject = {
   Contact: 'contact',
   Region: 'region',
   User: 'user',
+  Resource: 'resource',
 } as const;
 
 export type WtObject = (typeof WtObject)[keyof typeof WtObject];
