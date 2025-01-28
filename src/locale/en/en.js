@@ -300,6 +300,8 @@ export default {
     domainValidator: 'Incorrect domain',
     decimalValidator:
       'Decimal precision should be no more than { count } places',
+    latinWithNumber:
+      'The code must contain only letters (A-Z, a-z) and numbers (0-9)',
     integer: 'The field should contain only whole numbers',
   },
   webitelUI: {
