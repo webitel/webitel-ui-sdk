@@ -80,6 +80,7 @@ export default {
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
+    apply: 'Apply',
     language: 'Language',
     voice: 'Voice',
     format: 'Format',
@@ -90,7 +91,7 @@ export default {
     login: 'Login',
     host: 'Host',
     time: 'Time',
-    channel: 'Channel',
+    channel: 'Channel | Channels',
     file: 'File',
     logout: 'Logout',
     priority: 'Priority | Priorities',
@@ -266,6 +267,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
         [AdminSections.QUEUES]: 'Queues',
         [AdminSections.STORAGE]: 'Storage',
+        [AdminSections.STORAGE_POLICIES]: 'Storage',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
         [AdminSections.EMAIL_PROFILES]: 'Email profiles',
         [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
