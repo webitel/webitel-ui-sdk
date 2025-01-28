@@ -1,3 +1,8 @@
+## [v24.12.77] - 2025-01-28
+### :bug: Bug Fixes
+- [`45af878`](https://github.com/webitel/webitel-ui-sdk/commit/45af87812a2e40c171e1db821ac53d016081a13a) - update version to 24.12.77
+
+
 ## [v24.12.76] - 2025-01-28
 ### :bug: Bug Fixes
 - [`7fdc34d`](https://github.com/webitel/webitel-ui-sdk/commit/7fdc34dcadd9d64e65370f9edc9f790ef0d92669) - implement locale for validation latin with number [WTEL-5989](https://webitel.atlassian.net/browse/WTEL-5989)
@@ -898,3 +903,4 @@
 [v24.12.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.73...v24.12.74
 [v24.12.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.74...v24.12.75
 [v24.12.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.75...v24.12.76
+[v24.12.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.76...v24.12.77
