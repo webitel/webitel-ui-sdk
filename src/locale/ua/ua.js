@@ -298,6 +298,8 @@ export default {
     domainValidator: 'Невірний домен',
     decimalValidator:
       'Кількість десяткових знаків не повинна бути більше { count }',
+    latinWithNumber:
+      'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9)',
     integer: 'Поле повинно містити лише цілі числа',
   },
   webitelUI: {
