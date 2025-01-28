@@ -1,3 +1,12 @@
+## [v24.12.76] - 2025-01-28
+### :bug: Bug Fixes
+- [`7fdc34d`](https://github.com/webitel/webitel-ui-sdk/commit/7fdc34dcadd9d64e65370f9edc9f790ef0d92669) - implement locale for validation latin with number [WTEL-5989](https://webitel.atlassian.net/browse/WTEL-5989)
+- [`83fc371`](https://github.com/webitel/webitel-ui-sdk/commit/83fc371de3b656ecde451a732ecad2caa6826202) - tsc issues preventing build fixed [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`be6b034`](https://github.com/webitel/webitel-ui-sdk/commit/be6b03419ee5d81ded7a207d24118ac4eefcf067) - webitel applications enums rewritten and reused as ts files [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.75] - 2025-01-27
 ### :bug: Bug Fixes
 - [`7ca06fc`](https://github.com/webitel/webitel-ui-sdk/commit/7ca06fcd7b917b597ac8545c8406ec5cc7329262) - reset filters in permissions[WTEL-5944](https://webitel.atlassian.net/browse/WTEL-5944) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -888,3 +897,4 @@
 [v24.12.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.72...v24.12.73
 [v24.12.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.73...v24.12.74
 [v24.12.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.74...v24.12.75
+[v24.12.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.75...v24.12.76

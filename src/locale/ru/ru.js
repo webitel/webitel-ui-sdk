@@ -300,6 +300,8 @@ export default {
     domainValidator: 'Неправильный домен',
     decimalValidator:
       'Количество десятичных знаков не должно быть больше { count }',
+    latinWithNumber:
+      'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9)',
     integer: 'Поле должно содержать только целые числа',
   },
   webitelUI: {
