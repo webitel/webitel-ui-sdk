@@ -6,9 +6,11 @@ import ExampleTreeTable from './examples/example-tree-table.vue';
 # WtTreeTable
 
 ## Specs
+
 <Specs />
 
 ## Tree Table
+
 ::: raw
 <ExampleTreeTable />
 :::
@@ -16,4 +18,3 @@ import ExampleTreeTable from './examples/example-tree-table.vue';
 ::: details Code
 <<< ./examples/example-tree-table.vue
 :::
-

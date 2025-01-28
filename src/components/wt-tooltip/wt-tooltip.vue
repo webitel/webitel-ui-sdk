@@ -9,7 +9,10 @@
       ref="activator"
       class="wt-tooltip__activator"
     >
-      <slot name="activator" />
+      <slot
+        name="activator"
+        v-bind="{ visible: isVisible }"
+      />
     </div>
     <wt-tooltip-floating
       v-if="isVisible"

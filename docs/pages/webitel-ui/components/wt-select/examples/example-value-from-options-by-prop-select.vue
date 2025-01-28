@@ -22,8 +22,6 @@ const options = [
 ];
 
 const selectedValue = ref('b');
-
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
