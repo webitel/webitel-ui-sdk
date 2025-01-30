@@ -1,6 +1,6 @@
 import invert from "lodash/fp/invert";
 
-import {AdminSections, AuditorSections, CrmSections, CrudAction, SupervisorSections, WtObject} from "../../../../enums";
+import { AdminSections, AuditorSections, CrmSections, CrudAction, SupervisorSections, WtApplication, WtObject } from "../../../../enums";
 import {CrudGlobalAction, ScopeClass} from "../enums";
 
 export const mapGlobalActionToCrudAction = {
@@ -39,7 +39,7 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
     [ScopeClass.Role]: [WtObject.Role],
     [ScopeClass.Contacts]: [WtObject.Contact],
 
-    // TODO need to ask about this
+    // TODO need to ask about this`
     [ScopeClass.Logger]: [],
     [ScopeClass.Calls]: [],
     [ScopeClass.RecordFile]: [],
@@ -59,10 +59,15 @@ export const mapScopeClassAccessTokenToCrudAction = {
 
 export const mapCrudActionToScopeClassAccessToken = invert(mapScopeClassAccessTokenToCrudAction);
 
+type UiSection = AdminSections | AuditorSections | CrmSections | SupervisorSections;
+export const mapWtObjectToUiSection: Record<WtApplication, Partial<Record<WtObject, UiSection>>> = {
+    // if we don`t need it we can use  Partial<Record<WtApplication, Partial<Record<WtObject, UiSection>>>>
+    [WtApplication.Agent]: {},
+    [WtApplication.History]: {},
+    [WtApplication.Analytics]: {},
 
-export const mapWtObjectToUiSection = {
     // Admin sections
-    Admin: {
+    [WtApplication.Admin]: {
         [WtObject.User]: AdminSections.Users,
         [WtObject.Agent]: AdminSections.Agents,
         [WtObject.License]: AdminSections.License,
@@ -101,12 +106,12 @@ export const mapWtObjectToUiSection = {
     },
 
     // Auditor sections
-    Auditor: {
+    [WtApplication.Audit]: {
 		    [WtObject.Scorecard]: AuditorSections.Scorecards,
     },
 
 	  // Crm sections TODO:  check  wt object
-    Crm: {
+    [WtApplication.Crm]: {
         [WtObject.Contact]: CrmSections.Contacts,
         [WtObject.Agent]: CrmSections.Cases,
         [WtObject.License]: CrmSections.Slas,
@@ -121,12 +126,11 @@ export const mapWtObjectToUiSection = {
     },
 
     // Supervisor sections
-    Supervisor: {
+    [WtApplication.Supervisor]: {
         [WtObject.Queue]: SupervisorSections.Queues,
         [WtObject.Agent]: SupervisorSections.Agents,
         [WtObject.Communication]: SupervisorSections.ActiveCalls
-    }
-
+    },
 };
 
 export const mapUiSectionToWtObject = invert(mapWtObjectToUiSection);
