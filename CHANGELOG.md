@@ -1,3 +1,8 @@
+## [v24.12.79] - 2025-01-30
+### :bug: Bug Fixes
+- [`d225fda`](https://github.com/webitel/webitel-ui-sdk/commit/d225fda3507e27966b2f13e26941d641d26bb331) - wt applications enums case conversion [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.78] - 2025-01-30
 ### :bug: Bug Fixes
 - [`df43b9f`](https://github.com/webitel/webitel-ui-sdk/commit/df43b9f4cb6fa087aee23b3a5632afc53203a600) - wt-popup overlay glitching at component init [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -911,3 +916,4 @@
 [v24.12.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.75...v24.12.76
 [v24.12.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.76...v24.12.77
 [v24.12.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.77...v24.12.78
+[v24.12.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.78...v24.12.79
