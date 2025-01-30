@@ -15,6 +15,8 @@
         "name": "typescript-plugin-css-modules"
       }
     ],
+    "declaration": true,
+    "declarationMap": true,
     "moduleResolution": "Bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -27,9 +29,8 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src",
-    "docs/pages",
-    "node_modules/vite-plugin-checker/dist/esm/checkers/vueTsc/typescript-vue-tsc/lib/lib.dom.d.ts"
+    "src/**/*.ts",
+    "docs/pages/**/*.ts"
   ],
   "exclude": [
     "**/Userinfo/**"
