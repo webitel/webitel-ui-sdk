@@ -36,6 +36,8 @@ export default {
     import: 'Импорт',
     export: 'Экспорт',
     true: 'Да',
+    title: 'Заголовок',
+    position: 'Позиция',
     delete: 'Удалить',
     search: 'Поиск',
     open: 'Открыть',

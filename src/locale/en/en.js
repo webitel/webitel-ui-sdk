@@ -36,6 +36,8 @@ export default {
     import: 'Import',
     export: 'Export',
     true: 'True',
+    title: 'Title',
+    position: 'Position',
     delete: 'Delete',
     search: 'Search',
     open: 'Open',
