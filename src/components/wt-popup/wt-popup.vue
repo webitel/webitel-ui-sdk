@@ -108,7 +108,7 @@ const slots = defineSlots<{
 }>();
 const activatorMode = !!slots.activator;
 
-const wrapperShown = ref(false);
+const wrapperShown = ref(props.shown);
 const isCloseAnimationPlaying = ref(false);
 
 const openPopup = () => {
@@ -156,7 +156,6 @@ watch(
       closePopup();
     }
   },
-  { immediate: true },
 );
 
 watch(wrapperShown, (value) => {
