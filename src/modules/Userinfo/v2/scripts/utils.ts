@@ -8,9 +8,10 @@ import {
   SupervisorSections,
   WtApplication,
   WtObject,
-} from '../../../enums';
-import { _wtUiLog as wtlog } from '../../../scripts/logger';
-import { CrudGlobalAction } from './enums';
+} from '../../../../enums';
+import { _wtUiLog as wtlog } from '../../../../scripts/logger';
+import { CrudGlobalAction } from '../enums';
+import { mapGlobalActionToCrudAction, mapScopeClassAccessTokenToCrudAction,mapScopeClassToWtObjects } from "../mappings/mappings";
 import type {
   AppVisibilityMap,
   GlobalAccessApiResponseItem,
@@ -21,7 +22,7 @@ import type {
   SectionVisibilityMap,
   UiSection,
   VisibilityAccess,
-} from './UserAccess.d.ts';
+} from '../types/UserAccess.d.ts';
 
 /**
  * @internal
@@ -31,20 +32,7 @@ import type {
 const castGlobalActionToCrudAction = (
   globalAction: GlobalAction,
 ): CrudAction | null => {
-  if (globalAction === CrudGlobalAction.Write) {
-    return CrudAction.Update;
-  }
-  if (globalAction === CrudGlobalAction.Read) {
-    return CrudAction.Read;
-  }
-  if (globalAction === CrudGlobalAction.Delete) {
-    return CrudAction.Delete;
-  }
-  if (globalAction === CrudGlobalAction.Add) {
-    return CrudAction.Create;
-  }
-
-  return null;
+    return mapGlobalActionToCrudAction[globalAction] || null;
 };
 
 export const makeGlobalAccessMap = (
@@ -59,34 +47,39 @@ export const makeGlobalAccessMap = (
 export const makeScopeAccessMap = (
   rawScope: ScopeAccessApiResponseItem[],
 ): ScopeAccessMap => {
-  return rawScope.reduce((scopeAccessMap, { class: scopeClass, access }) => {
-    const objectAccessMap = access
-      .split('')
-      .reduce((scopeObjectAccessMap, token) => {
-        if (token === 'r') {
-          return scopeObjectAccessMap.set(CrudAction.Read, true);
-        }
-        if (token === 'w') {
-          return scopeObjectAccessMap.set(CrudAction.Update, true);
-        }
-        if (token === 'd') {
-          return scopeObjectAccessMap.set(CrudAction.Delete, true);
-        }
-        if (token === 'x') {
-          return scopeObjectAccessMap.set(CrudAction.Create, true);
-        }
-      }, new Map());
+  const map = new Map();
 
-    return scopeAccessMap.set(scopeClass, objectAccessMap);
-  }, new Map());
+  rawScope.forEach(({ class: scopeClass, access: scopeAccess }) => {
+    const access = scopeAccess.split('').reduce((accessMap, token) => {
+        accessMap.set(mapScopeClassAccessTokenToCrudAction[token], true);
+        return accessMap;
+    }, new Map());
+
+    const scopeClassObjects = mapScopeClassToWtObjects[scopeClass];
+
+    if (!scopeClassObjects) {
+      wtlog.error({ module: 'modules/userinfo' })(
+        'Unknown scope class to convert to WtObject:',
+        scopeClass,
+      );
+    } else {
+      scopeClassObjects.forEach((object) => {
+        map.set(object, access);
+      });
+    }
+  });
+
+  return map;
 };
 
 export const makeAppVisibilityMap = (
   rawVisibility: VisibilityAccess,
 ): AppVisibilityMap => {
-  return Object.keys(rawVisibility).reduce((map, app) => {
-    return map.set(app, true);
-  }, new Map());
+  const map = new Map();
+  Object.entries(rawVisibility).forEach(([app, visibility]) => {
+    map.set(app, visibility._enabled);
+  });
+  return map;
 };
 
 export const makeSectionVisibilityMap = (

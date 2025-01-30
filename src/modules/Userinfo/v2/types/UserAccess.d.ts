@@ -6,12 +6,12 @@ import type {
   SupervisorSections,
   WtApplication,
   WtObject,
-} from '../../../enums';
+} from '../../../../enums';
 import type {
   CrudGlobalAction,
   ScopeClass,
   SpecialGlobalAction,
-} from './enums';
+} from '../enums';
 
 /**
  * @description

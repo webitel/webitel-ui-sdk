@@ -9,7 +9,7 @@ import type {
   GlobalAccessApiResponseItem,
   ScopeAccessApiResponseItem,
   VisibilityAccess,
-} from '../UserAccess';
+} from '../types/UserAccess';
 
 let instance = getDefaultInstance();
 

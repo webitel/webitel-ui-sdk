@@ -1,8 +1,20 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
 
-import { CrudAction, type WtApplication, type WtObject } from '../../../enums';
-import type { SpecialGlobalAction } from './enums';
+import {
+  CrudAction,
+  type WtApplication,
+  type WtObject,
+} from '../../../../enums';
+import type { SpecialGlobalAction } from '../enums';
+import {
+  castUiSectionToWtObject,
+  getWtAppByUiSection,
+  makeAppVisibilityMap,
+  makeGlobalAccessMap,
+  makeScopeAccessMap,
+  makeSectionVisibilityMap,
+} from '../scripts/utils';
 import type {
   AppVisibilityMap,
   CreateUserAccessStoreConfig,
@@ -12,15 +24,7 @@ import type {
   SectionVisibilityMap,
   UiSection,
   UserAccessStore,
-} from './UserAccess.d.ts';
-import {
-  castUiSectionToWtObject,
-  getWtAppByUiSection,
-  makeAppVisibilityMap,
-  makeGlobalAccessMap,
-  makeScopeAccessMap,
-  makeSectionVisibilityMap,
-} from './utils';
+} from '../types/UserAccess.d.ts';
 
 export const createUserAccessStore = ({
   namespace = 'userinfo',
@@ -41,10 +45,14 @@ export const createUserAccessStore = ({
       action: CrudAction | SpecialGlobalAction,
       object?: WtObject,
     ) => {
-      return (
-        globalAccess.get(action) ||
-        (object && scopeAccess.get(object).get(action))
-      );
+      const allowGlobalAccess = globalAccess.get(action);
+      if (allowGlobalAccess) return true;
+
+      const allowScopeAccess =
+        object && scopeAccess.get(object)?.get(action as CrudAction);
+      if (allowScopeAccess) return true;
+
+      return false;
     };
 
     const hasReadAccess = (object?: WtObject) => {
@@ -70,27 +78,32 @@ export const createUserAccessStore = ({
     const hasSectionVisibility = (section: UiSection) => {
       const appOfSection = getWtAppByUiSection(section);
       const objectOfSection = castUiSectionToWtObject(section);
-      return (
-        hasReadAccess() ||
-        [
-          hasApplicationVisibility(appOfSection),
-          hasReadAccess(objectOfSection),
-          sectionVisibilityAccess.get(section),
-        ].every((v) => v)
-      );
+      const hasSectionVisibilityAccess = (section: UiSection) => {
+        return sectionVisibilityAccess.get(section);
+      };
+
+      const allowGlobalAccess = hasReadAccess();
+      if (allowGlobalAccess) return true;
+
+      const allowAppVisibility = hasApplicationVisibility(appOfSection);
+      const allowObjectAccess = hasReadAccess(objectOfSection);
+      const allowSectionVisibility = hasSectionVisibilityAccess(section);
+
+      return allowAppVisibility && allowObjectAccess && allowSectionVisibility;
     };
 
     const setupRouteGuards = () => {
-      router.beforeEach((to, from, next) => {
-        /* findLast because "matched" has top=>bottom order */
-        const uiSection = to.matched.findLast(({ meta }) => meta.UiSection)
-          ?.meta?.UiSection as UiSection;
+      router.beforeEach((to) => {
+        /* find last because "matched" has top=>bottom routes order */
+        const uiSection = to.matched
+          .reverse()
+          .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection;
 
         if (uiSection && !hasSectionVisibility(uiSection)) {
-          return;
+          return false;
         }
 
-        next();
+        return true;
       });
     };
 

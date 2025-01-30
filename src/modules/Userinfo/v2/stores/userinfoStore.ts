@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+import { getSession, getUiVisibilityAccess } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
-import { getSession, getUiVisibilityAccess } from './api/UserinfoAPI';
 
 export const createUserinfoStore = () => {
   const namespace = 'userinfo';
