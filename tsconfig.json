@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
     "target": "esnext",
     "module": "esnext",
     "lib": [
@@ -9,6 +11,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": false,
+    "checkJs": false,
     "skipLibCheck": true,
     "plugins": [
       {
@@ -18,6 +21,8 @@
     "moduleResolution": "Bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
+    "declaration": true,
+    "declarationMap": true,
     "noEmit": false,
     "noEmitOnError": false,
     "strict": false,
@@ -27,11 +32,13 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src",
-    "docs/pages",
+    "src/**/*.ts",
+    "docs/pages/**/*.ts",
     "node_modules/vite-plugin-checker/dist/esm/checkers/vueTsc/typescript-vue-tsc/lib/lib.dom.d.ts"
   ],
   "exclude": [
+    "src/**/*.vue",
+    "src/**/*.js",
     "**/Userinfo/**"
   ]
 }

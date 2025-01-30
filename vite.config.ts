@@ -37,6 +37,11 @@ export default ({ mode }) => {
         },
       },
     },
+    esbuild: {
+      loader: 'ts',
+      include: [/src\/.*\.ts$/],
+      exclude: [/src\/.*\.vue$/, /src\/.*\.js$/],
+    },
     define: {
       'process.env': JSON.parse(
         JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_'),
