@@ -1,3 +1,9 @@
+## [v24.12.80] - 2025-01-30
+### :bug: Bug Fixes
+- [`2d3a8ec`](https://github.com/webitel/webitel-ui-sdk/commit/2d3a8ec3d4d76b83fb62d831235951dd783cec68) - update version to 24.12.77 [WTEL-5988](https://webitel.atlassian.net/browse/WTEL-5988)
+- [`73c61e9`](https://github.com/webitel/webitel-ui-sdk/commit/73c61e95cceb50f3cccdecc9b4cec99702894505) - docs build [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.79] - 2025-01-30
 ### :bug: Bug Fixes
 - [`d225fda`](https://github.com/webitel/webitel-ui-sdk/commit/d225fda3507e27966b2f13e26941d641d26bb331) - wt applications enums case conversion [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -917,3 +923,4 @@
 [v24.12.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.76...v24.12.77
 [v24.12.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.77...v24.12.78
 [v24.12.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.78...v24.12.79
+[v24.12.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.79...v24.12.80
