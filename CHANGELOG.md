@@ -1,3 +1,9 @@
+## [v24.12.78] - 2025-01-30
+### :bug: Bug Fixes
+- [`df43b9f`](https://github.com/webitel/webitel-ui-sdk/commit/df43b9f4cb6fa087aee23b3a5632afc53203a600) - wt-popup overlay glitching at component init [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`cf358f3`](https://github.com/webitel/webitel-ui-sdk/commit/cf358f3278d29b9af63f355cb2d93af28fb57878) - tsconfig MouseEvent [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.77] - 2025-01-28
 ### :bug: Bug Fixes
 - [`45af878`](https://github.com/webitel/webitel-ui-sdk/commit/45af87812a2e40c171e1db821ac53d016081a13a) - update version to 24.12.77
@@ -904,3 +910,4 @@
 [v24.12.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.74...v24.12.75
 [v24.12.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.75...v24.12.76
 [v24.12.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.76...v24.12.77
+[v24.12.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.77...v24.12.78
