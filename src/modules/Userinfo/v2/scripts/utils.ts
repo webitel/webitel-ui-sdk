@@ -11,7 +11,13 @@ import {
 } from '../../../../enums';
 import { _wtUiLog as wtlog } from '../../../../scripts/logger';
 import { CrudGlobalAction } from '../enums';
-import { mapGlobalActionToCrudAction, mapScopeClassAccessTokenToCrudAction,mapScopeClassToWtObjects } from "../mappings/mappings";
+import {
+  AdminSectionsValues, AuditorSectionsValues, CrmSectionsValues,
+  mapGlobalActionToCrudAction,
+  mapScopeClassAccessTokenToCrudAction,
+  mapScopeClassToWtObjects, mapUiSectionToWtObject,
+  mapWtObjectToUiSection, SupervisorSectionsValues
+} from "../mappings/mappings";
 import type {
   AppVisibilityMap,
   GlobalAccessApiResponseItem,
@@ -97,39 +103,26 @@ export const makeSectionVisibilityMap = (
   return map;
 };
 
-const WtObjectToUiSectionMap = {
-  // todo
-  [WtObject.User]: AdminSections.Users,
-  [WtObject.Agent]: AdminSections.Agents,
-};
-
-const UiSectionToWtObjectMap = invert(WtObjectToUiSectionMap);
-
 export const castUiSectionToWtObject = (section: UiSection): WtObject => {
-  return UiSectionToWtObjectMap[section];
+  return mapUiSectionToWtObject[section];
 };
 
 export const castWtObjectToUiSection = (object: WtObject): UiSection => {
-  return WtObjectToUiSectionMap[object];
+  return mapWtObjectToUiSection[object];
 };
-
-const invertedAdminSections = invert(AdminSections);
-const invertedAuditorSections = invert(AuditorSections);
-const invertedCrmSections = invert(CrmSections);
-const invertedSupervisorSections = invert(SupervisorSections);
 
 export const getWtAppByUiSection = (section: UiSection): WtApplication => {
   /* use inverted maps because UiSection is the enum value, not key */
-  if (invertedAdminSections[section]) {
+  if (AdminSectionsValues[section]) {
     return WtApplication.Admin;
   }
-  if (invertedAuditorSections[section]) {
+  if (AuditorSectionsValues[section]) {
     return WtApplication.Audit;
   }
-  if (invertedCrmSections[section]) {
+  if (CrmSectionsValues[section]) {
     return WtApplication.Crm;
   }
-  if (invertedSupervisorSections[section]) {
+  if (SupervisorSectionsValues[section]) {
     return WtApplication.Supervisor;
   }
   wtlog.error({ module: 'modules/userinfo' })('Unknown section:', section);

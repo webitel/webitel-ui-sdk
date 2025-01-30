@@ -1,6 +1,6 @@
 import invert from "lodash/fp/invert";
 
-import {CrudAction, WtObject} from "../../../../enums";
+import {AdminSections, AuditorSections, CrmSections, CrudAction, SupervisorSections, WtObject} from "../../../../enums";
 import {CrudGlobalAction, ScopeClass} from "../enums";
 
 export const mapGlobalActionToCrudAction = {
@@ -26,3 +26,18 @@ export const mapScopeClassAccessTokenToCrudAction = {
 };
 
 export const mapCrudActionToScopeClassAccessToken = invert(mapScopeClassAccessTokenToCrudAction);
+
+
+
+export const mapWtObjectToUiSection = {
+    // todo
+    [WtObject.User]: AdminSections.Users,
+    [WtObject.Agent]: AdminSections.Agents,
+};
+
+export const mapUiSectionToWtObject = invert(mapWtObjectToUiSection);
+
+export const AdminSectionsValues = invert(AdminSections);
+export const AuditorSectionsValues = invert(AuditorSections);
+export const CrmSectionsValues = invert(CrmSections);
+export const SupervisorSectionsValues = invert(SupervisorSections);
