@@ -1,3 +1,5 @@
+import upperCase from 'lodash/upperCase.js';
+
 import { AuditorSections } from './AuditorSections';
 
 /**
@@ -7,7 +9,7 @@ import { AuditorSections } from './AuditorSections';
  */
 export default Object.fromEntries(
   Object.entries(AuditorSections).map(([key, value]) => [
-    key.toUpperCase(),
+    upperCase(key).replaceAll(' ', '_'),
     value,
   ]),
 );

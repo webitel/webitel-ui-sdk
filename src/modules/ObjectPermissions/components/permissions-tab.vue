@@ -172,6 +172,7 @@ const {
 
   subscribe,
   flushSubscribers,
+  resetFilters,
 } = useTableFilters(tableNamespace);
 
 subscribe({
@@ -183,6 +184,7 @@ restoreFilters();
 
 onUnmounted(() => {
   flushSubscribers();
+  resetFilters();
 });
 
 const {
