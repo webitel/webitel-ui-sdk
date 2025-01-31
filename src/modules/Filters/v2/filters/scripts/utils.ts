@@ -1,4 +1,4 @@
-import type { FilterName } from '../types/Filter.types.ts';
+import type { FilterName } from '../types/Filter';
 
 export const filterLabelToSnapshotKey = (name: FilterName): string =>
   `${name}_lbl`;
