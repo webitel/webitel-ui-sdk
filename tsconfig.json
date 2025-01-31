@@ -27,8 +27,8 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src/enums",
-    "//docs/pages"
+    "src/**/*.ts",
+    "docs/pages/**/*.ts"
   ],
   "exclude": [
     "**/Userinfo/**"

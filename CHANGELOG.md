@@ -1,3 +1,16 @@
+## [v24.12.82] - 2025-01-31
+### :bug: Bug Fixes
+- [`47191cb`](https://github.com/webitel/webitel-ui-sdk/commit/47191cbc432711c4f360b0e9c097e5c6ae7dacd8) - update package version to 24.12.82
+- [`1eae5bb`](https://github.com/webitel/webitel-ui-sdk/commit/1eae5bb6ac07e0adfba1769a1534bdce5cae4524) - tsconfig compiler options [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`b2fcbd3`](https://github.com/webitel/webitel-ui-sdk/commit/b2fcbd340fbf378640215bd63d8d7345deef1f4a) - tsconfig compiler options [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`1e300f1`](https://github.com/webitel/webitel-ui-sdk/commit/1e300f1d211a1e0c8defa5eb8716c0186fc504d4) - update useWtTable composable [WTEL-6012](https://webitel.atlassian.net/browse/WTEL-6012)
+
+
+## [v24.12.81] - 2025-01-30
+### :sparkles: New Features
+- [`e76af42`](https://github.com/webitel/webitel-ui-sdk/commit/e76af42be4d1c29cf62c83ef7551408ff93351e5) - add clearable prop in wt-datepicker component[WTEL-5830](https://webitel.atlassian.net/browse/WTEL-5830) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.80] - 2025-01-30
 ### :bug: Bug Fixes
 - [`2d3a8ec`](https://github.com/webitel/webitel-ui-sdk/commit/2d3a8ec3d4d76b83fb62d831235951dd783cec68) - update version to 24.12.77 [WTEL-5988](https://webitel.atlassian.net/browse/WTEL-5988)
@@ -924,3 +937,5 @@
 [v24.12.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.77...v24.12.78
 [v24.12.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.78...v24.12.79
 [v24.12.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.79...v24.12.80
+[v24.12.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.80...v24.12.81
+[v24.12.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.81...v24.12.82
