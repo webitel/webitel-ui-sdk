@@ -42,7 +42,7 @@
           v-if="clearable && value"
           :color="disabled ? 'disabled' : 'default'"
           icon="close"
-          @click.stop="emit('input', null)"
+          @click="emit('input', null);"
         />
       </template>
       <template #arrow-left>
