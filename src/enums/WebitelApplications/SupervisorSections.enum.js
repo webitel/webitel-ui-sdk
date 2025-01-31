@@ -1,3 +1,5 @@
+import upperCase from 'lodash/upperCase';
+
 import { SupervisorSections } from './SupervisorSections';
 
 /**
@@ -7,7 +9,7 @@ import { SupervisorSections } from './SupervisorSections';
  */
 export default Object.fromEntries(
   Object.entries(SupervisorSections).map(([key, value]) => [
-    key.toUpperCase(),
+    upperCase(key).replaceAll(' ', '_'),
     value,
   ]),
 );

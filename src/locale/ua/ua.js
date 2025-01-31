@@ -36,6 +36,8 @@ export default {
     import: 'Імпорт',
     export: 'Експорт',
     true: 'Так',
+    title: 'Заголовок',
+    position: 'Позиція',
     delete: 'Видалити',
     search: 'Пошук',
     open: 'Відкрити',
@@ -80,6 +82,7 @@ export default {
     draggable: 'Перетягнути',
   },
   vocabulary: {
+    apply: 'Застосувати',
     language: 'Мова',
     voice: 'Голос',
     format: 'Формат',
@@ -90,7 +93,7 @@ export default {
     login: 'Логін',
     host: 'Хост',
     time: 'Час',
-    channel: 'Канал',
+    channel: 'Канал | Канали',
     file: 'Файл',
     logout: 'Вийти',
     priority: 'Пріоритет | Пріоритети',
@@ -265,6 +268,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Групи ресурсів',
         [AdminSections.QUEUES]: 'Черги',
         [AdminSections.STORAGE]: 'Сховища',
+        [AdminSections.STORAGE_POLICIES]: 'Політики збереження файлів',
         [AdminSections.COGNITIVE_PROFILES]: 'Голосові профілі',
         [AdminSections.EMAIL_PROFILES]: 'Email профілі',
         [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
@@ -298,6 +302,8 @@ export default {
     domainValidator: 'Невірний домен',
     decimalValidator:
       'Кількість десяткових знаків не повинна бути більше { count }',
+    latinWithNumber:
+      'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9)',
     integer: 'Поле повинно містити лише цілі числа',
   },
   webitelUI: {

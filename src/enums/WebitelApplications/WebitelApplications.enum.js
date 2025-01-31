@@ -1,3 +1,5 @@
+import upperCase from 'lodash/upperCase.js';
+
 import { WtApplication } from './WtApplication';
 
 /**
@@ -7,7 +9,7 @@ import { WtApplication } from './WtApplication';
  */
 export default Object.fromEntries(
   Object.entries(WtApplication).map(([key, value]) => [
-    key.toUpperCase(),
+    upperCase(key).replaceAll(' ', '_'),
     value,
   ]),
 );
