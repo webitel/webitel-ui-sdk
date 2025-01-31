@@ -14,6 +14,7 @@ export const ScopeClass = {
   Dictionaries: 'dictionaries',
   EmailProfile: 'email_profile',
 
+  Skills: 'cc_skill',
   Users: 'users',
   Devices: 'devices',
   AcrRouting: 'acr_routing',

@@ -48,4 +48,12 @@ export const WtObject = {
     ChatBot: 'chatBot',
     Cases: 'cases',
     CaseComment: 'caseComment',
+    Slas: 'slas',
+    ServiceCatalog: 'serviceCatalog',
+    CaseSource: 'caseSource',
+    CloseReasonGroup: 'closeReasonGroup',
+    Priorities: 'priorities',
+    Status: 'status',
+    Source: 'source',
+    CustomLookup: 'customLookup',
 };
