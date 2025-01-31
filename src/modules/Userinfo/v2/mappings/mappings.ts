@@ -34,6 +34,11 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
     WtObject.Bucket,
     WtObject.Communication,
     WtObject.PauseCause,
+    WtObject.CaseSource,
+    WtObject.Slas,
+    WtObject.Priorities,
+    WtObject.CloseReasonGroup,
+    WtObject.ServiceCatalog,
   ],
   [ScopeClass.List]: [WtObject.Blacklist],
   [ScopeClass.Skills]: [WtObject.Skill],
@@ -57,8 +62,8 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
   [ScopeClass.RecordFile]: [WtObject.RecordFile], // Call history
   [ScopeClass.ContactGroups]: [WtObject.ContactGroup], //CRM
   [ScopeClass.ChatBots]: [WtObject.ChatBot], // routing cht_gateway
-  [ScopeClass.Cases]: [WtObject.Cases], // CRM
-  [ScopeClass.CaseComments]: [WtObject.CaseComment],
+  [ScopeClass.Cases]: [WtObject.Cases], // CRM - Звернення окрім Коментарів
+  [ScopeClass.CaseComments]: [WtObject.CaseComment], // CRM - Коментарі до Звернення
 };
 
 export const mapScopeClassAccessTokenToCrudAction = {
