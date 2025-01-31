@@ -31,6 +31,7 @@
     "docs/pages/**/*.ts"
   ],
   "exclude": [
-    "**/Userinfo/**"
+    "**/*.spec.ts",
+    "**/*.test.ts"
   ]
 }
