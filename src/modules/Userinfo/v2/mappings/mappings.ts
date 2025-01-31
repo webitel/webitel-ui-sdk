@@ -1,13 +1,21 @@
 import invert from "lodash/fp/invert";
 
-import { AdminSections, AuditorSections, CrmSections, CrudAction, SupervisorSections, WtApplication, WtObject } from "../../../../enums";
-import {CrudGlobalAction, ScopeClass} from "../enums";
+import {
+    AdminSections,
+    AuditorSections,
+    CrmSections,
+    CrudAction,
+    SupervisorSections,
+    WtApplication,
+    WtObject,
+} from "../../../../enums";
+import { CrudGlobalAction, ScopeClass } from "../enums";
 
 export const mapGlobalActionToCrudAction = {
-  [CrudGlobalAction.Add]: CrudAction.Create,
-  [CrudGlobalAction.Read]: CrudAction.Read,
-  [CrudGlobalAction.Write]: CrudAction.Update,
-  [CrudGlobalAction.Delete]: CrudAction.Delete,
+    [CrudGlobalAction.Add]: CrudAction.Create,
+    [CrudGlobalAction.Read]: CrudAction.Read,
+    [CrudGlobalAction.Write]: CrudAction.Update,
+    [CrudGlobalAction.Delete]: CrudAction.Delete,
 };
 
 export const mapCrudActionToGlobalAction = invert(mapGlobalActionToCrudAction);
@@ -21,7 +29,18 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
     [ScopeClass.Gateways]: [WtObject.Gateway],
     [ScopeClass.AcrChatPlan]: [WtObject.Chatplan],
     [ScopeClass.Chats]: [WtObject.ChatGateway],
-    [ScopeClass.Dictionaries]: [WtObject.Skill, WtObject.Region, WtObject.Bucket, WtObject.Communication,WtObject.PauseCause],
+    [ScopeClass.Dictionaries]: [
+        WtObject.Skill,
+        WtObject.Region,
+        WtObject.Bucket,
+        WtObject.Communication,
+        WtObject.PauseCause,
+        WtObject.CaseSource,
+        WtObject.Slas,
+        WtObject.Priorities,
+        WtObject.CloseReasonGroup,
+        WtObject.ServiceCatalog,
+    ],
     [ScopeClass.List]: [WtObject.Blacklist],
     [ScopeClass.Calendars]: [WtObject.Calendar],
     [ScopeClass.MediaFile]: [WtObject.Media],
@@ -40,25 +59,33 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
     [ScopeClass.Contacts]: [WtObject.Contact],
     [ScopeClass.Logger]: [WtObject.Logger], // Change log in Admin
     [ScopeClass.Calls]: [WtObject.Call], // Call history
-    [ScopeClass.RecordFile]: [WtObject.RecordFile],// Call history
+    [ScopeClass.RecordFile]: [WtObject.RecordFile], // Call history
     [ScopeClass.ContactGroups]: [WtObject.ContactGroup], //CRM
     [ScopeClass.ChatBots]: [WtObject.ChatBot], // routing cht_gateway
-    [ScopeClass.Cases]: [WtObject.Cases], // CRM
-    [ScopeClass.CaseComments]: [WtObject.CaseComment],
+    [ScopeClass.Cases]: [WtObject.Cases], // CRM - Звернення окрім Коментарів
+    [ScopeClass.CaseComments]: [WtObject.CaseComment], // CRM - Коментарі до Звернення
 };
-
 
 export const mapScopeClassAccessTokenToCrudAction = {
-    'r': CrudAction.Read,
-    'w': CrudAction.Update,
-    'd': CrudAction.Delete,
-    'x': CrudAction.Create,
+    r: CrudAction.Read,
+    w: CrudAction.Update,
+    d: CrudAction.Delete,
+    x: CrudAction.Create,
 };
 
-export const mapCrudActionToScopeClassAccessToken = invert(mapScopeClassAccessTokenToCrudAction);
+export const mapCrudActionToScopeClassAccessToken = invert(
+    mapScopeClassAccessTokenToCrudAction,
+);
 
-type UiSection = AdminSections | AuditorSections | CrmSections | SupervisorSections;
-export const mapWtObjectToUiSection: Record<WtApplication, Partial<Record<WtObject, UiSection>>> = {
+type UiSection =
+    | AdminSections
+    | AuditorSections
+    | CrmSections
+    | SupervisorSections;
+export const mapWtObjectToUiSection: Record<
+    WtApplication,
+    Partial<Record<WtObject, UiSection>>
+> = {
     // if we don`t need empty objects we can use  Partial<Record<WtApplication, Partial<Record<WtObject, UiSection>>>>
     [WtApplication.Agent]: {},
     [WtApplication.History]: {},
@@ -105,10 +132,10 @@ export const mapWtObjectToUiSection: Record<WtApplication, Partial<Record<WtObje
 
     // Auditor sections
     [WtApplication.Audit]: {
-		    [WtObject.Scorecard]: AuditorSections.Scorecards,
+        [WtObject.Scorecard]: AuditorSections.Scorecards,
     },
 
-	  // Crm sections
+    // Crm sections
     [WtApplication.Crm]: {
         [WtObject.Contact]: CrmSections.Contacts,
         [WtObject.Cases]: CrmSections.Cases,
@@ -127,7 +154,7 @@ export const mapWtObjectToUiSection: Record<WtApplication, Partial<Record<WtObje
     [WtApplication.Supervisor]: {
         [WtObject.Queue]: SupervisorSections.Queues,
         [WtObject.Agent]: SupervisorSections.Agents,
-        [WtObject.Communication]: SupervisorSections.ActiveCalls
+        [WtObject.Communication]: SupervisorSections.ActiveCalls,
     },
 };
 
