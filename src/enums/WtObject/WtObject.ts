@@ -14,7 +14,7 @@ export const WtObject = {
   Dialplan: 'dialplan',
   Gateway: 'gateway',
   Chatplan: 'chatplan',
-  ChatGateway: 'chat-gateway',
+  ChatGateway: 'chatGateway',
   Blacklist: 'blacklist',
   Calendar: 'calendar',
   Communication: 'communication',
@@ -41,6 +41,13 @@ export const WtObject = {
   GlobalVariable: 'globalVariable',
   ActiveCall: 'activeCall',
   Scorecard: 'scorecard',
+  Logger: 'logger',
+  Call: 'call',
+  RecordFile: 'recordFile',
+  ContactGroup: 'contactGroup',
+  ChatBot: 'chatBot',
+  Cases: 'cases',
+  CaseComment: 'caseComment',
 } as const;
 
 export type WtObject = (typeof WtObject)[keyof typeof WtObject];

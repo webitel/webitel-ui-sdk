@@ -38,15 +38,13 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
     [ScopeClass.Trigger]: [WtObject.Trigger],
     [ScopeClass.Role]: [WtObject.Role],
     [ScopeClass.Contacts]: [WtObject.Contact],
-
-    // TODO need to ask about this`
-    [ScopeClass.Logger]: [],
-    [ScopeClass.Calls]: [],
-    [ScopeClass.RecordFile]: [],
-    [ScopeClass.ContactGroups]: [],
-    [ScopeClass.ChatBots]: [],
-    [ScopeClass.Cases]: [],
-    [ScopeClass.CaseComments]: [],
+    [ScopeClass.Logger]: [WtObject.Logger], // Change log in Admin
+    [ScopeClass.Calls]: [WtObject.Call], // Call history
+    [ScopeClass.RecordFile]: [WtObject.RecordFile],// Call history
+    [ScopeClass.ContactGroups]: [WtObject.ContactGroup], //CRM
+    [ScopeClass.ChatBots]: [WtObject.ChatBot], // routing cht_gateway
+    [ScopeClass.Cases]: [WtObject.Cases], // CRM
+    [ScopeClass.CaseComments]: [WtObject.CaseComment],
 };
 
 
