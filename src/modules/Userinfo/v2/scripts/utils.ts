@@ -1,23 +1,16 @@
-import invert from 'lodash/fp/invert';
-
-import {
-  AdminSections,
-  AuditorSections,
-  CrmSections,
-  CrudAction,
-  SupervisorSections,
-  WtApplication,
-  WtObject,
-} from '../../../../enums';
+import { CrudAction, WtApplication, WtObject } from '../../../../enums';
 import { _wtUiLog as wtlog } from '../../../../scripts/logger';
-import { CrudGlobalAction } from '../enums';
 import {
-  AdminSectionsValues, AuditorSectionsValues, CrmSectionsValues,
+  AdminSectionsValues,
+  AuditorSectionsValues,
+  CrmSectionsValues,
   mapGlobalActionToCrudAction,
   mapScopeClassAccessTokenToCrudAction,
-  mapScopeClassToWtObjects, mapUiSectionToWtObject,
-  mapWtObjectToUiSection, SupervisorSectionsValues
-} from "../mappings/mappings";
+  mapScopeClassToWtObjects,
+  mapUiSectionToWtObject,
+  mapWtObjectToUiSection,
+  SupervisorSectionsValues,
+} from '../mappings/mappings';
 import type {
   AppVisibilityMap,
   GlobalAccessApiResponseItem,
@@ -38,7 +31,7 @@ import type {
 const castGlobalActionToCrudAction = (
   globalAction: GlobalAction,
 ): CrudAction | null => {
-    return mapGlobalActionToCrudAction[globalAction] || null;
+  return mapGlobalActionToCrudAction[globalAction] || null;
 };
 
 export const makeGlobalAccessMap = (
@@ -57,8 +50,8 @@ export const makeScopeAccessMap = (
 
   rawScope.forEach(({ class: scopeClass, access: scopeAccess }) => {
     const access = scopeAccess.split('').reduce((accessMap, token) => {
-        accessMap.set(mapScopeClassAccessTokenToCrudAction[token], true);
-        return accessMap;
+      accessMap.set(mapScopeClassAccessTokenToCrudAction[token], true);
+      return accessMap;
     }, new Map());
 
     const scopeClassObjects = mapScopeClassToWtObjects[scopeClass];
@@ -68,6 +61,7 @@ export const makeScopeAccessMap = (
         'Unknown scope class to convert to WtObject:',
         scopeClass,
       );
+      map.set(scopeClass, access);
     } else {
       scopeClassObjects.forEach((object) => {
         map.set(object, access);
