@@ -59,7 +59,7 @@ export const mapCrudActionToScopeClassAccessToken = invert(mapScopeClassAccessTo
 
 type UiSection = AdminSections | AuditorSections | CrmSections | SupervisorSections;
 export const mapWtObjectToUiSection: Record<WtApplication, Partial<Record<WtObject, UiSection>>> = {
-    // if we don`t need it we can use  Partial<Record<WtApplication, Partial<Record<WtObject, UiSection>>>>
+    // if we don`t need empty objects we can use  Partial<Record<WtApplication, Partial<Record<WtObject, UiSection>>>>
     [WtApplication.Agent]: {},
     [WtApplication.History]: {},
     [WtApplication.Analytics]: {},
@@ -108,19 +108,19 @@ export const mapWtObjectToUiSection: Record<WtApplication, Partial<Record<WtObje
 		    [WtObject.Scorecard]: AuditorSections.Scorecards,
     },
 
-	  // Crm sections TODO:  check  wt object
+	  // Crm sections
     [WtApplication.Crm]: {
         [WtObject.Contact]: CrmSections.Contacts,
-        [WtObject.Agent]: CrmSections.Cases,
-        [WtObject.License]: CrmSections.Slas,
-        [WtObject.Device]: CrmSections.ServiceCatalogs,
-        [WtObject.Flow]: CrmSections.CaseSources,
-        [WtObject.Dialplan]: CrmSections.CloseReasonGroups,
-        [WtObject.Gateway]: CrmSections.Priorities,
-        [WtObject.Chatplan]: CrmSections.Statuses,
-        [WtObject.ChatGateway]: CrmSections.Sources,
-        [WtObject.Skill]: CrmSections.ContactGroups,
-        [WtObject.Bucket]: CrmSections.CustomLookups,
+        [WtObject.Cases]: CrmSections.Cases,
+        [WtObject.Slas]: CrmSections.Slas,
+        [WtObject.ServiceCatalog]: CrmSections.ServiceCatalogs,
+        [WtObject.CaseSource]: CrmSections.CaseSources,
+        [WtObject.CloseReasonGroup]: CrmSections.CloseReasonGroups,
+        [WtObject.Priorities]: CrmSections.Priorities,
+        [WtObject.Status]: CrmSections.Statuses,
+        [WtObject.Source]: CrmSections.Sources,
+        [WtObject.ContactGroup]: CrmSections.ContactGroups,
+        [WtObject.CustomLookup]: CrmSections.CustomLookups,
     },
 
     // Supervisor sections
