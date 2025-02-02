@@ -291,6 +291,7 @@ export default {
     macValidator: 'Should look like MAC',
     minValue: 'Value should be not less than',
     maxValue: 'Value should be not much than',
+    maxLength: 'The length should not be greater than',
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
     minLength: 'Quantity of characters should not be less than',

@@ -21,6 +21,7 @@
     <wt-input
       v-model="filterLabel"
       :label="t('webitelUI.filters.filterLabel')"
+      :v="v$"
       @input="touchedLabel = true"
     />
     <footer class="dynamic-filter-config-form-footer">
@@ -43,8 +44,10 @@
 </template>
 
 <script lang="ts" setup>
+import { useVuelidate } from '@vuelidate/core';
+import { maxLength } from '@vuelidate/validators';
 import deepcopy from 'deep-copy';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
@@ -83,6 +86,17 @@ const { t } = useI18n();
 const filterName = ref();
 const filterLabel = ref('');
 const filterValue = ref();
+
+const v$ = useVuelidate(
+  computed(() => ({
+    filterLabel: {
+      // make maxLength value by props
+      maxLength: maxLength(50),
+    },
+  })),
+  { filterLabel },
+  { $autoDirty: true },
+);
 
 // if user have not changed label yet, it will be changed with selected filterName
 const touchedLabel = ref(false);
