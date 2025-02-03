@@ -1,3 +1,8 @@
+## [v24.12.85] - 2025-02-03
+### :bug: Bug Fixes
+- [`97a6215`](https://github.com/webitel/webitel-ui-sdk/commit/97a6215daa21dce2122876df8cd8528b978eb4d0) - clear value in datepicker component[WTEL-5830](https://webitel.atlassian.net/browse/WTEL-5830) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.84] - 2025-02-03
 ### :bug: Bug Fixes
 - [`371c2a8`](https://github.com/webitel/webitel-ui-sdk/commit/371c2a8e70b0a87f2245435a99358224feff7689) - fixed wt-popup close emit *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -945,3 +950,4 @@
 [v24.12.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.80...v24.12.81
 [v24.12.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.81...v24.12.82
 [v24.12.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.83...v24.12.84
+[v24.12.85]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.84...v24.12.85
