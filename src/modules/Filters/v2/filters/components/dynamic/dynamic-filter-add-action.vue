@@ -5,7 +5,7 @@
         <p v-if="props.showLabel">
           {{ t('webitelUI.filters.addFilter') }}
         </p>
-        <wt-icon-action action="add" />
+        <wt-icon-btn icon="add-filter" />
       </div>
     </template>
 
@@ -18,7 +18,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 
-import WtIconAction from '../../../../../../components/wt-icon-action/wt-icon-action.vue';
 import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 
 interface Props {

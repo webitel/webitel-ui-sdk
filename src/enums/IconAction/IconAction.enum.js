@@ -12,6 +12,7 @@ const IconAction = Object.freeze({
   EDIT: 'edit',
   COLLAPSE: 'collapse',
   EXPAND: 'expand',
+  CLOSE: 'close',
 });
 
 export default IconAction;
