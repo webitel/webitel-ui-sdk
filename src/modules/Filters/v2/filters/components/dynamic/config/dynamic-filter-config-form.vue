@@ -8,22 +8,25 @@
       use-value-from-options-by-prop="id"
       @input="filterName = $event"
     />
+
     <slot
       name="value-input"
       v-bind="{
         filterName,
         filterValue,
+        v: v$,
         inputLabel: t('webitelUI.filters.filterValue'),
         onValueChange: (v) => (filterValue = v),
         onValueInvalidChange: (v) => (invalid = v),
       }"
     />
-    <wt-input
-      v-model="filterLabel"
-      :label="t('webitelUI.filters.filterLabel')"
-      :v="v$"
-      @input="touchedLabel = true"
+
+    <dynamic-filter-config-form-input
+      :value="filterLabel"
+      @update:value="onLabelValueUpdate"
+      @update:invalid="(v) => (invalid = v)"
     />
+
     <footer class="dynamic-filter-config-form-footer">
       <wt-button
         :disabled="invalid"
@@ -32,6 +35,7 @@
       >
         {{ t('reusable.save') }}
       </wt-button>
+
       <wt-button
         color="secondary"
         wide
@@ -45,19 +49,19 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { maxLength } from '@vuelidate/validators';
+import { maxLength, required } from '@vuelidate/validators';
 import deepcopy from 'deep-copy';
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
-import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import type {
   FilterInitParams,
   FilterName,
   IFilter,
 } from '../../../types/Filter';
+import DynamicFilterConfigFormInput from './dynamic-filter-config-form-input.vue';
 
 interface FilterNameSelectRepresentation {
   name: string;
@@ -87,23 +91,27 @@ const filterName = ref();
 const filterLabel = ref('');
 const filterValue = ref();
 
-const v$ = useVuelidate(
-  computed(() => ({
-    filterLabel: {
-      // make maxLength value by props
-      maxLength: maxLength(50),
-    },
-  })),
-  { filterLabel },
-  { $autoDirty: true },
-);
-
 // if user have not changed label yet, it will be changed with selected filterName
 const touchedLabel = ref(false);
+
+const v$ = useVuelidate(
+  computed(() => ({
+    filterValue: {
+      required,
+    },
+  })),
+  { filterValue },
+  // { $autoDirty: true },
+);
 
 const editMode = !!props.filter;
 
 const invalid = ref(false);
+
+function onLabelValueUpdate(val: string) {
+  filterLabel.value = val;
+  touchedLabel.value = true;
+}
 
 const submit = () => {
   emit('submit', {
@@ -139,6 +147,12 @@ if (props.filter) {
     { immediate: true },
   );
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    v$.value.$touch();
+  }, 3000);
+});
 </script>
 
 <style lang="scss" scoped>
