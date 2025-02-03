@@ -1,3 +1,8 @@
+## [v24.12.84] - 2025-02-03
+### :bug: Bug Fixes
+- [`371c2a8`](https://github.com/webitel/webitel-ui-sdk/commit/371c2a8e70b0a87f2245435a99358224feff7689) - fixed wt-popup close emit *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v24.12.82] - 2025-01-31
 ### :bug: Bug Fixes
 - [`47191cb`](https://github.com/webitel/webitel-ui-sdk/commit/47191cbc432711c4f360b0e9c097e5c6ae7dacd8) - update package version to 24.12.82
@@ -939,3 +944,4 @@
 [v24.12.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.79...v24.12.80
 [v24.12.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.80...v24.12.81
 [v24.12.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.81...v24.12.82
+[v24.12.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.83...v24.12.84
