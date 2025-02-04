@@ -55,7 +55,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import { WtApplication } from '../../enums';
 import AdminDark from './assets/admin-dark.svg';
 import AdminLight from './assets/admin-light.svg';
 import AgentDark from './assets/agent-dark.svg';
@@ -72,31 +72,31 @@ import SupervisorDark from './assets/supervisor-dark.svg';
 import SupervisorLight from './assets/supervisor-light.svg';
 
 const pics = {
-  [WebitelApplications.ADMIN]: {
+  [WtApplication.Admin]: {
     dark: AdminDark,
     light: AdminLight,
   },
-  [WebitelApplications.AGENT]: {
+  [WtApplication.Agent]: {
     dark: AgentDark,
     light: AgentLight,
   },
-  [WebitelApplications.ANALYTICS]: {
+  [WtApplication.Analytics]: {
     dark: AnalyticsDark,
     light: AnalyticsLight,
   },
-  [WebitelApplications.CRM]: {
+  [WtApplication.Crm]: {
     dark: CrmDark,
     light: CrmLight,
   },
-  [WebitelApplications.HISTORY]: {
+  [WtApplication.History]: {
     dark: HistoryDark,
     light: HistoryLight,
   },
-  [WebitelApplications.AUDIT]: {
+  [WtApplication.Audit]: {
     dark: AuditDark,
     light: AuditLight,
   },
-  [WebitelApplications.SUPERVISOR]: {
+  [WtApplication.Supervisor]: {
     dark: SupervisorDark,
     light: SupervisorLight,
   },
@@ -119,13 +119,13 @@ const props = defineProps({
 const isOpened = ref(false);
 
 const order = [
-  WebitelApplications.AGENT,
-  WebitelApplications.SUPERVISOR,
-  WebitelApplications.HISTORY,
-  WebitelApplications.ADMIN,
-  WebitelApplications.AUDIT,
-  WebitelApplications.CRM,
-  WebitelApplications.ANALYTICS,
+  WtApplication.Agent,
+  WtApplication.Supervisor,
+  WtApplication.History,
+  WtApplication.Admin,
+  WtApplication.Audit,
+  WtApplication.Crm,
+  WtApplication.Analytics,
 ];
 
 const formattedApps = computed(() =>
