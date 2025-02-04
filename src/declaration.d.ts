@@ -9,7 +9,7 @@ declare module '*.css' {
 }
 
 // added declare for @webitel/styleguide/fonts, because of ts error in install.ts file
-declare module "@webitel/styleguide/fonts" {
+declare module '@webitel/styleguide/fonts' {
   const content: string;
   export default content;
 }

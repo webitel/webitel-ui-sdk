@@ -14,6 +14,7 @@ import assignee from './assignee.svg';
 import attach from './attach.svg';
 import attention from './attention.svg';
 import azure from './azure.svg';
+import addFilter from './add-filter.svg';
 import back from './back.svg';
 import bell from './bell.svg';
 import bellBadged from './bell-badged.svg';
@@ -213,6 +214,7 @@ export default objCamelToKebab({
   attach,
   attention,
   azure,
+  addFilter,
   back,
   bell,
   bellBadged,

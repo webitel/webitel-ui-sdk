@@ -115,6 +115,7 @@ export default {
     messaging: 'Messaging',
     emptyResultSearch: 'Your search yielded no results',
     contact: 'Contact | Contacts',
+    column: 'Column | Columns',
   },
   // date-related texts
   date: {
@@ -373,6 +374,7 @@ export default {
         [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
       },
     },
     errorPages: {
@@ -435,6 +437,23 @@ export default {
       title: 'Save failed',
       label: 'Something went wrong, please try again',
       exportToJson: 'Export to JSON',
+    },
+    filters: {
+      addFilter: ({ linked }) => {
+        return `${linked('reusable.add')} ${linked(
+          'reusable.filter',
+        ).toLowerCase()}`;
+      },
+      filterName: ({ linked }) => {
+        // because filter select has a 'column' label now
+        return linked('vocabulary.column');
+      },
+      filterValue: ({ linked }) => {
+        return linked('vocabulary.values');
+      },
+      filterLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
     },
   },
   errorNotifications: {

@@ -18,7 +18,6 @@ const HIDE_EVENT_MAP = {
   pointer: 'pointerup',
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const useTooltipTriggerSubscriptions = ({
   target,
   triggers,
