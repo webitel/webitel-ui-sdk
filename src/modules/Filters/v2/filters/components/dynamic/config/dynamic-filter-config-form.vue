@@ -14,7 +14,6 @@
       v-bind="{
         filterName,
         filterValue,
-        v: v$,
         inputLabel: t('webitelUI.filters.filterValue'),
         onValueChange: (v) => (filterValue = v),
         onValueInvalidChange: (v) => (invalid = v),
@@ -48,10 +47,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useVuelidate } from '@vuelidate/core';
-import { maxLength, required } from '@vuelidate/validators';
 import deepcopy from 'deep-copy';
-import { computed, onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
@@ -93,16 +90,6 @@ const filterValue = ref();
 
 // if user have not changed label yet, it will be changed with selected filterName
 const touchedLabel = ref(false);
-
-const v$ = useVuelidate(
-  computed(() => ({
-    filterValue: {
-      required,
-    },
-  })),
-  { filterValue },
-  // { $autoDirty: true },
-);
 
 const editMode = !!props.filter;
 
@@ -147,12 +134,6 @@ if (props.filter) {
     { immediate: true },
   );
 }
-
-onMounted(() => {
-  setTimeout(() => {
-    v$.value.$touch();
-  }, 3000);
-});
 </script>
 
 <style lang="scss" scoped>
