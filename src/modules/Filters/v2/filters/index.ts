@@ -1,5 +1,5 @@
-import { Filter } from './classes/Filter.class.ts';
-import { createFiltersManager } from './classes/FiltersManager.class';
+import { Filter } from './classes/Filter.ts';
+import { createFiltersManager } from './classes/FiltersManager';
 import type {
   FilterConfig,
   FilterInitParams,
@@ -7,11 +7,11 @@ import type {
   FilterName,
   FilterValue,
   IFilter,
-} from './types/Filter.types.ts';
+} from './types/Filter.d.ts';
 import type {
   FiltersManagerConfig,
   IFiltersManager,
-} from './types/FiltersManager.types.ts';
+} from './types/FiltersManager.d.ts';
 
 export { createFiltersManager, Filter };
 

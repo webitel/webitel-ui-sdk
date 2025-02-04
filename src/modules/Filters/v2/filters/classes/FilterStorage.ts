@@ -1,11 +1,7 @@
-import { FilterValue } from '../types/Filter.types.ts';
+import { FilterValue } from '../types/Filter';
+import type { FilterStorageOptions } from './FilterStorageOptions';
 
-export interface FilterStorage {
-  get: (name: string) => FilterValue;
-  set: (name: string, value: FilterValue) => void;
-}
-
-export class BrowserFilterStorage implements FilterStorage {
+export class BrowserFilterStorage implements FilterStorageOptions {
   constructor(private prefix: string) {}
 
   get(name: string): FilterValue {
@@ -21,7 +17,7 @@ export class BrowserFilterStorage implements FilterStorage {
   }
 }
 
-export class QueryFilterStorage implements FilterStorage {
+export class QueryFilterStorage implements FilterStorageOptions {
   constructor(private prefix: string) {}
 
   get(name: string): FilterValue {
