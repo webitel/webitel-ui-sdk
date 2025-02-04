@@ -375,6 +375,7 @@ export default {
         [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
       },
     },
     errorPages: {

@@ -1,3 +1,33 @@
+## [v24.12.86] - 2025-02-04
+### :sparkles: New Features
+- [`58779b5`](https://github.com/webitel/webitel-ui-sdk/commit/58779b5aa82394e5b5a95e01e9e229a55a701eb6) - add new icon and new close action in icon action component[WTEL-5926](https://webitel.atlassian.net/browse/WTEL-5926) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`d6115eb`](https://github.com/webitel/webitel-ui-sdk/commit/d6115ebff7d56a117e64d74debfe2b45b50bb34e) - filters v2 loadDataList after filters change [WTEL-5923](https://webitel.atlassian.net/browse/WTEL-5923) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`cde132c`](https://github.com/webitel/webitel-ui-sdk/commit/cde132cafba0a12b2ce9f473df46c195a4e1fde5) - history searches filter, v2 filters typing and refactors [WTEL-5920](https://webitel.atlassian.net/browse/WTEL-5916) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`c0dc89d`](https://github.com/webitel/webitel-ui-sdk/commit/c0dc89de87ebc50f1f71162f83810b916a0ce6a9) - history createdAtFrom filter value field [WTEL-5916](https://webitel.atlassian.net/browse/WTEL-5916) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`17804b4`](https://github.com/webitel/webitel-ui-sdk/commit/17804b40efcc192fcb16a681741b81161c53a494) - filters persistence [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`fe0781b`](https://github.com/webitel/webitel-ui-sdk/commit/fe0781bc29cb8581ce186a05fc93320c3ebd4b5e) - dynamic filters features and fixes, made while implementing dynamic filter CRUD on history [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`d9f6f8b`](https://github.com/webitel/webitel-ui-sdk/commit/d9f6f8b91c3a7d2ca453ce72e67abe7f69e8c6be) - dynamic filter components [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`52ad3a2`](https://github.com/webitel/webitel-ui-sdk/commit/52ad3a21d78c1bd7f1dd1a7baa991627e9caff28) - dynamic filter components refactors [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`a6d0374`](https://github.com/webitel/webitel-ui-sdk/commit/a6d037430ba01ea04c9b4bd5e5a1ea3c8cd39700) - dynamic filter components [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`f13b384`](https://github.com/webitel/webitel-ui-sdk/commit/f13b38496c53605a10c57cb379d6c7dfa51a7ad7) - pinia headers store updateSort method, + refactored "sort" computed [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`3ac4c91`](https://github.com/webitel/webitel-ui-sdk/commit/3ac4c91630dbc06ad176b42920d2de2fdde49466) - pinia pagination store update page/size methods [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`93a17e4`](https://github.com/webitel/webitel-ui-sdk/commit/93a17e45e9c7d3916c99635c85446df0026e9e2f) - table filters ts classes + interfaces, table store refactors [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`732935b`](https://github.com/webitel/webitel-ui-sdk/commit/732935bebe639b3ecf2ca3590239ff868b1882d4) - preset features in progress [WTEL-3751](https://webitel.atlassian.net/browse/WTEL-3751) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`a27da65`](https://github.com/webitel/webitel-ui-sdk/commit/a27da652c681de8466f688186a0d311a3f319f8a) - rollback activator slot for wt-popup [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`779cdfc`](https://github.com/webitel/webitel-ui-sdk/commit/779cdfcaf5db08b923cafecbece0726843a2642b) - fix to prev [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`d6fb8c6`](https://github.com/webitel/webitel-ui-sdk/commit/d6fb8c62ea280108d017d59f468f082bb9dc0aa4) - history registry refactor with pinia store [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`b6a57ba`](https://github.com/webitel/webitel-ui-sdk/commit/b6a57ba2f3bfdf1d689b8c431c10620e77920c09) - history filters redesign in progress [WTEL-5925](https://webitel.atlassian.net/browse/WTEL-5925) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`6f9df26`](https://github.com/webitel/webitel-ui-sdk/commit/6f9df265cea11b7ea7791038c2aea6d577628363) - v2 filters persistence typing + other type fixes [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`073d885`](https://github.com/webitel/webitel-ui-sdk/commit/073d885c8676f4f3e7e6485955e20fb8601e200e) - implemented v2 filters persistence prototype on history [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`ddb1897`](https://github.com/webitel/webitel-ui-sdk/commit/ddb18975c24fdae035eb25889a2ea110cd41b8bf) - composed filters v2 table related stores to one [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`1b99ceb`](https://github.com/webitel/webitel-ui-sdk/commit/1b99ceb7d8b6a93a1c077a76aeee0d1177591a8b) - lint [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`949db51`](https://github.com/webitel/webitel-ui-sdk/commit/949db51c58260f76bb3b1d6d5ee86fe4c758ca0b) - small pinia table store refactors + fixes [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.85] - 2025-02-03
 ### :bug: Bug Fixes
 - [`97a6215`](https://github.com/webitel/webitel-ui-sdk/commit/97a6215daa21dce2122876df8cd8528b978eb4d0) - clear value in datepicker component[WTEL-5830](https://webitel.atlassian.net/browse/WTEL-5830) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -960,3 +990,4 @@
 [v24.12.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.81...v24.12.82
 [v24.12.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.83...v24.12.84
 [v24.12.85]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.84...v24.12.85
+[v24.12.86]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.85...v24.12.86
