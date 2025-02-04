@@ -81,7 +81,7 @@ export default ({ mode }) => {
       }),
       checker({
         typescript: false,
-        vueTsc: true,
+        vueTsc: mode !== 'production',
         // biome: true,
       }),
     ],

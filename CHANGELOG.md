@@ -235,35 +235,43 @@
 
 
 ## [v24.12.37] - 2025-01-02
-### :bug: Bug Fixes
-- [`f909155`](https://github.com/webitel/webitel-ui-sdk/commit/f909155cac0a29ebd30c24a22febf12ae9da311d) - wt-select value prop [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
 
+### :bug: Bug Fixes
+
+- [`f909155`](https://github.com/webitel/webitel-ui-sdk/commit/f909155cac0a29ebd30c24a22febf12ae9da311d) - wt-select value prop [WTEL-5622] _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ## [v24.12.36] - 2025-01-02
-### :bug: Bug Fixes
-- [`3a4d3e5`](https://github.com/webitel/webitel-ui-sdk/commit/3a4d3e5fd4d999ef90a99f094791c5be11fea284) - wt-select useValueFromOptionsByProp, + docs [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
 
+### :bug: Bug Fixes
+
+- [`3a4d3e5`](https://github.com/webitel/webitel-ui-sdk/commit/3a4d3e5fd4d999ef90a99f094791c5be11fea284) - wt-select useValueFromOptionsByProp, + docs [WTEL-5622] _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ## [v24.12.35] - 2024-12-31
+
 ### :sparkles: New Features
-- [`cedd5e7`](https://github.com/webitel/webitel-ui-sdk/commit/cedd5e71d1aa78124731a28db3f5a986919ba750) - wt-select useValueFromOptionsByProp [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+- [`cedd5e7`](https://github.com/webitel/webitel-ui-sdk/commit/cedd5e71d1aa78124731a28db3f5a986919ba750) - wt-select useValueFromOptionsByProp [WTEL-5622] _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ### :white_check_mark: Tests
-- [`309a6f9`](https://github.com/webitel/webitel-ui-sdk/commit/309a6f9b4426d1407f0c9b70bb6cbddb8f960e85) - fixed tests, related to wt-select useValueFromOptionsByProp [WTEL-5622] *(commit by [@dlohvinov](https://github.com/dlohvinov))*
 
+- [`309a6f9`](https://github.com/webitel/webitel-ui-sdk/commit/309a6f9b4426d1407f0c9b70bb6cbddb8f960e85) - fixed tests, related to wt-select useValueFromOptionsByProp [WTEL-5622] _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ## [v24.12.34] - 2024-12-31
-### :sparkles: New Features
-- [`2d057c6`](https://github.com/webitel/webitel-ui-sdk/commit/2d057c64a444d3b76b9080fdd7967fe36f15ed97) - add draggable locale[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) *(commit by [@Lera24](https://github.com/Lera24))*
 
+### :sparkles: New Features
+
+- [`2d057c6`](https://github.com/webitel/webitel-ui-sdk/commit/2d057c64a444d3b76b9080fdd7967fe36f15ed97) - add draggable locale[WTEL-4740](https://webitel.atlassian.net/browse/WTEL-4740) _(commit by [@Lera24](https://github.com/Lera24))_
 
 ## [v24.12.33] - 2024-12-30
+
 ### :bug: Bug Fixes
+
 - [`72dc591`](https://github.com/webitel/webitel-ui-sdk/commit/72dc591809131afd51323631bfe8fc809ea48296) - fix comments on wt-select after running fix lint error
 
-
 ## [v24.12.32] - 2024-12-30
+
 ### :sparkles: New Features
+
 - [`4b0b0b1`](https://github.com/webitel/webitel-ui-sdk/commit/4b0b0b1416498a72aabbb8496a32a85181798997) - update package version to 24.12.32
 - [`66362bf`](https://github.com/webitel/webitel-ui-sdk/commit/66362bf41fdd29b1a81f61e3f763d57548bce0cd) - update wt-tree-table row props declared [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
 - [`e4e58be`](https://github.com/webitel/webitel-ui-sdk/commit/e4e58bef0736f12f746b6de7e2d2cb17928ec41a) - update set key for child elements [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
@@ -281,6 +289,7 @@
 - [`2db75e3`](https://github.com/webitel/webitel-ui-sdk/commit/2db75e336f6934b63dc2edcdc61ea216e2cb0ecc) - Implement base component wt-tree-table from wt-table with mock array services
 
 ### :bug: Bug Fixes
+
 - [`e031288`](https://github.com/webitel/webitel-ui-sdk/commit/e0312883373b2ad43924b1b027be29abe2a2c414) - update package version to 24.12.30 [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
 - [`ba9049e`](https://github.com/webitel/webitel-ui-sdk/commit/ba9049e6c1dd36432b03de90f3905541da127436) - replace any type to unknown [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
 - [`a727657`](https://github.com/webitel/webitel-ui-sdk/commit/a727657a803102e7bd223e3c4d664ff6ca528aa4) - Update useTable composable [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
@@ -290,9 +299,10 @@
 - [`2957fa1`](https://github.com/webitel/webitel-ui-sdk/commit/2957fa1335d8b40f730c2010fff64e5565064dcd) - remove hide title props from wt-expansion-panel
 - [`e982b86`](https://github.com/webitel/webitel-ui-sdk/commit/e982b8607858f530174a4267dacd04ce13cacb58) - implement fixes by code styles and remove unused code [WTEL-5569](https://webitel.atlassian.net/browse/WTEL-5569)
 
-
 ## [v24.12.31] - 2024-12-27
+
 ### :sparkles: New Features
+
 - [`16a6aca`](https://github.com/webitel/webitel-ui-sdk/commit/16a6acadf46f1c16a3548e82698116dc738172bd) - update prettier config
 - [`eae9dc4`](https://github.com/webitel/webitel-ui-sdk/commit/eae9dc4be79ba6b6a9e92cf8496a4563d28791d8) - run fix eslint errors
 - [`2ca8e63`](https://github.com/webitel/webitel-ui-sdk/commit/2ca8e63b9293e7539b736827d4a5a9ad0f3b28a0) - update lint scripts
@@ -300,7 +310,6 @@
 - [`e6d2bcf`](https://github.com/webitel/webitel-ui-sdk/commit/e6d2bcf1b4bba7ae3be77649c51f67d50f13cc0f) - update package version to 24.12.30
 - [`b8c5fe2`](https://github.com/webitel/webitel-ui-sdk/commit/b8c5fe2ec60df84bcc4bc701e0fd128489681b49) - run fix eslint errors
 - [`aa7f3ab`](https://github.com/webitel/webitel-ui-sdk/commit/aa7f3ab45786b9e0f7aa7e38c9818bf9c352b502) - Implement Eslint lint and prettier configs. Remove Biome
-
 
 ## [v24.12.29] - 2024-12-18
 
