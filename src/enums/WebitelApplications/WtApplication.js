@@ -7,3 +7,4 @@ export const WtApplication = {
     Analytics: 'grafana',
     Crm: 'crm',
 };
+//# sourceMappingURL=WtApplication.js.map

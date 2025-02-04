@@ -12,3 +12,4 @@ export const CrmSections = {
     CaseSources: 'case-sources',
     CustomLookups: 'custom-lookups',
 };
+//# sourceMappingURL=CrmSections.js.map

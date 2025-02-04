@@ -117,7 +117,7 @@ export default class UserinfoStoreModule extends BaseStoreModule {
       }
 
       await context.dispatch('SET_SESSION', session);
-      const access = await userinfo.getApplicationsAccess();
+      const access = await userinfo.getUiVisibilityAccess();
       await context.dispatch(
         'SET_APPLICATIONS_ACCESS',
         new ApplicationsAccess({ access }).getAccess(),
