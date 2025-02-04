@@ -92,9 +92,9 @@
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue';
 
-import { useWtTable } from '../../composables/useWtTable/useWtTable.ts';
+import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
-import { WtTableHeader } from '../wt-table/types/WtTable.type.ts';
+import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
 
 const props = withDefaults(

@@ -54,7 +54,7 @@ import type {
   FilterInitParams,
   FilterName,
   IFilter,
-} from '../../../types/Filter.types.ts';
+} from '../../../types/Filter';
 
 interface FilterNameSelectRepresentation {
   name: string;

@@ -1,7 +1,6 @@
 <script setup>
 import Specs from './component-specs.vue';
 import ExamplePopupUsingShownProp from './examples/example-popup-using-shown-prop.vue';
-import ExamplePopupUsingActivator from './examples/example-popup-using-activator.vue';
 import ExamplePopupUsingVIf from './examples/example-popup-using-v-if.vue';
 </script>
 
@@ -12,8 +11,6 @@ import ExamplePopupUsingVIf from './examples/example-popup-using-v-if.vue';
 <Specs />
 
 [//]: # (## Example Popup using Activator)
-
-[//]: # (_Recommended_)[]()
 
 [//]: # ()
 [//]: # (::: raw)
@@ -46,9 +43,7 @@ _Ok_
 _**Deprecated**, not recommended_
 
 ::: raw
-
 <ExamplePopupUsingVIf />
-
 :::
 
 ::: details Code

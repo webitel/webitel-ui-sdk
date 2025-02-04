@@ -36,6 +36,8 @@ export default {
     import: 'Импорт',
     export: 'Экспорт',
     true: 'Да',
+    title: 'Заголовок',
+    position: 'Позиция',
     delete: 'Удалить',
     search: 'Поиск',
     open: 'Открыть',
@@ -79,6 +81,7 @@ export default {
     draggable: 'Перетащить',
   },
   vocabulary: {
+    apply: 'Применить',
     language: 'Язык',
     voice: 'Голос',
     format: 'Формат',
@@ -89,7 +92,7 @@ export default {
     login: 'Логин',
     host: 'Хост',
     time: 'Время',
-    channel: 'Канал',
+    channel: 'Канал | Каналы',
     file: 'Файл',
     logout: 'Выйти',
     priority: 'Приоритет | Приоритеты',
@@ -265,6 +268,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Группы ресурсов',
         [AdminSections.QUEUES]: 'Очереди',
         [AdminSections.STORAGE]: 'Хранилища',
+        [AdminSections.STORAGE_POLICIES]: 'Политики хранения файлов',
         [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
         [AdminSections.EMAIL_PROFILES]: 'Email профили',
         [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
@@ -298,6 +302,8 @@ export default {
     domainValidator: 'Неправильный домен',
     decimalValidator:
       'Количество десятичных знаков не должно быть больше { count }',
+    latinWithNumber:
+      'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9)',
     integer: 'Поле должно содержать только целые числа',
   },
   webitelUI: {
@@ -365,6 +371,7 @@ export default {
         [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
       },
     },
     errorPages: {
