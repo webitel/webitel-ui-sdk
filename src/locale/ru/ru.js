@@ -6,14 +6,16 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
+import {
+  AdminSections,
+  AuditorSections,
+  CrmSections,
+  IconAction,
+  QueueType,
+  SupervisorSections,
+  WtApplication,
+} from '../../enums';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import { IconAction } from '../../enums/index.js';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
@@ -213,72 +215,72 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
-    [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
-    [WebitelApplications.AUDIT]: {
+    [WtApplication.Agent]: { name: 'Agent Workspace' },
+    [WtApplication.Audit]: {
       name: 'Audit',
       sections: {
-        [AuditorSections.SCORECARDS]: 'Анкеты',
+        [AuditorSections.Scorecards]: 'Анкеты',
       },
     },
-    [WebitelApplications.CRM]: {
+    [WtApplication.Crm]: {
       name: 'CRM',
       sections: {
-        [CrmSections.CONTACTS]: 'Контакты',
-        [CrmSections.SLAS]: 'SLAS',
-        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервисов',
-        [CrmSections.SOURCES]: 'Источники обращений',
-        [CrmSections.CONTACT_GROUPS]: 'Группы контактов',
+        [CrmSections.Contacts]: 'Контакты',
+        [CrmSections.Slas]: 'SLAS',
+        [CrmSections.ServiceCatalogs]: 'Каталоги сервисов',
+        [CrmSections.Sources]: 'Источники обращений',
+        [CrmSections.ContactGroups]: 'Группы контактов',
       },
     },
-    [WebitelApplications.HISTORY]: { name: 'Call History' },
-    [WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
-    [WebitelApplications.SUPERVISOR]: {
+    [WtApplication.History]: { name: 'Call History' },
+    [WtApplication.Analytics]: { name: 'Data Visualisation Tool' },
+    [WtApplication.Supervisor]: {
       name: 'Supervisor Workspace',
       sections: {
-        [SupervisorSections.QUEUES]: 'Очереди',
-        [SupervisorSections.AGENTS]: 'Операторы',
-        [SupervisorSections.ACTIVE_CALLS]: 'Активные звонки',
+        [SupervisorSections.Queues]: 'Очереди',
+        [SupervisorSections.Agents]: 'Операторы',
+        [SupervisorSections.ActiveCalls]: 'Активные звонки',
       },
     },
-    [WebitelApplications.ADMIN]: {
+    [WtApplication.Admin]: {
       name: 'Admin',
       sections: {
-        [AdminSections.USERS]: 'Пользователи',
-        [AdminSections.LICENSE]: 'Лицензии',
-        [AdminSections.DEVICES]: 'Устройства',
-        [AdminSections.FLOW]: 'Схемы',
-        [AdminSections.DIALPLAN]: 'Исходящая маршрутизация',
-        [AdminSections.GATEWAYS]: 'Шлюзы',
-        [AdminSections.CHATPLAN]: 'Правила маршрутизации текстовых сообщений',
-        [AdminSections.CHAT_GATEWAYS]: 'Текстовые шлюзы',
-        [AdminSections.SKILLS]: 'Навыки оператора',
-        [AdminSections.BUCKETS]: 'Корзины',
-        [AdminSections.MEDIA]: 'Медиафайлы',
-        [AdminSections.SHIFT_TEMPLATES]: 'Шаблон смен',
-        [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
-        [AdminSections.WORKING_CONDITIONS]: 'Условия работы',
-        [AdminSections.BLACKLIST]: 'Cписки',
-        [AdminSections.CALENDARS]: 'Календари',
-        [AdminSections.COMMUNICATIONS]: 'Типы связи',
-        [AdminSections.REGIONS]: 'Площадки',
-        [AdminSections.PAUSE_CAUSE]: 'Статусы оператора',
-        [AdminSections.AGENTS]: 'Операторы',
-        [AdminSections.TEAMS]: 'Команды',
-        [AdminSections.RESOURCES]: 'Ресурсы',
-        [AdminSections.RESOURCE_GROUPS]: 'Группы ресурсов',
-        [AdminSections.QUEUES]: 'Очереди',
-        [AdminSections.STORAGE]: 'Хранилища',
-        [AdminSections.STORAGE_POLICIES]: 'Политики хранения файлов',
-        [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
-        [AdminSections.EMAIL_PROFILES]: 'Email профили',
-        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
-        [AdminSections.IMPORT_CSV]: 'Импорт данных из CSV файлов',
-        [AdminSections.TRIGGERS]: 'Триггеры',
-        [AdminSections.ROLES]: 'Роли',
-        [AdminSections.OBJECTS]: 'Разделы',
-        [AdminSections.CHANGELOGS]: 'Журнал изменений',
-        [AdminSections.CONFIGURATION]: 'Конфигурация',
-        [AdminSections.GLOBAL_VARIABLES]: 'Глобальные переменные',
+        [AdminSections.Users]: 'Пользователи',
+        [AdminSections.License]: 'Лицензии',
+        [AdminSections.Devices]: 'Устройства',
+        [AdminSections.Flow]: 'Схемы',
+        [AdminSections.Dialplan]: 'Исходящая маршрутизация',
+        [AdminSections.Gateways]: 'Шлюзы',
+        [AdminSections.Chatplan]: 'Правила маршрутизации текстовых сообщений',
+        [AdminSections.ChatGateways]: 'Текстовые шлюзы',
+        [AdminSections.Skills]: 'Навыки оператора',
+        [AdminSections.Buckets]: 'Корзины',
+        [AdminSections.Media]: 'Медиафайлы',
+        [AdminSections.ShiftTemplates]: 'Шаблон смен',
+        [AdminSections.PauseTemplates]: 'Шаблон пауз',
+        [AdminSections.WorkingConditions]: 'Условия работы',
+        [AdminSections.Blacklist]: 'Cписки',
+        [AdminSections.Calendars]: 'Календари',
+        [AdminSections.Regions]: 'Площадки',
+        [AdminSections.Communications]: 'Типы связи',
+        [AdminSections.PauseCause]: 'Статусы оператора',
+        [AdminSections.Agents]: 'Операторы',
+        [AdminSections.Teams]: 'Команды',
+        [AdminSections.Resources]: 'Ресурсы',
+        [AdminSections.ResourceGroups]: 'Группы ресурсов',
+        [AdminSections.Queues]: 'Очереди',
+        [AdminSections.Storage]: 'Хранилища',
+        [AdminSections.StoragePolicies]: 'Политики хранения файлов',
+        [AdminSections.CognitiveProfiles]: 'Голосовые профили',
+        [AdminSections.EmailProfiles]: 'Email профили',
+        [AdminSections.SingleSignOn]: 'Single Sign-on',
+        [AdminSections.ImportCsv]: 'Импорт данных из CSV файлов',
+        [AdminSections.Triggers]: 'Триггеры',
+        [AdminSections.Roles]: 'Роли',
+        [AdminSections.Objects]: 'Разделы',
+        [AdminSections.Changelogs]: 'Журнал изменений',
+        [AdminSections.Configuration]: 'Конфигурация',
+        [AdminSections.GlobalVariables]: 'Глобальные переменные',
       },
     },
   },

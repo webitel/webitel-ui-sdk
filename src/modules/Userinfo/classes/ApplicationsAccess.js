@@ -1,227 +1,229 @@
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 
-import AdminSections from '../../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../../enums/WebitelApplications/WebitelApplications.enum.js';
+import {
+  AdminSections,
+  AuditorSections,
+  CrmSections,
+  SupervisorSections,
+  WtApplication,
+} from '../../../enums';
 
 const applicationsAccess = (value = true) => ({
-  [WebitelApplications.AGENT]: {
+  [WtApplication.Agent]: {
     _enabled: value,
-    _locale: `WebitelApplications.${WebitelApplications.AGENT}.name`,
+    _locale: `WebitelApplications.${WtApplication.Agent}.name`,
   },
-  [WebitelApplications.HISTORY]: {
+  [WtApplication.History]: {
     _enabled: value,
-    _locale: `WebitelApplications.${WebitelApplications.HISTORY}.name`,
+    _locale: `WebitelApplications.${WtApplication.History}.name`,
   },
-  [WebitelApplications.ANALYTICS]: {
+  [WtApplication.Analytics]: {
     _enabled: value,
-    _locale: `WebitelApplications.${WebitelApplications.ANALYTICS}.name`,
+    _locale: `WebitelApplications.${WtApplication.Analytics}.name`,
   },
-  [WebitelApplications.SUPERVISOR]: {
+  [WtApplication.Supervisor]: {
     _enabled: value,
-    _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.name`,
-    [SupervisorSections.QUEUES]: {
+    _locale: `WebitelApplications.${WtApplication.Supervisor}.name`,
+    [SupervisorSections.Queues]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.sections.${SupervisorSections.QUEUES}`,
+      _locale: `WebitelApplications.${WtApplication.Supervisor}.sections.${SupervisorSections.Queues}`,
     },
-    [SupervisorSections.AGENTS]: {
+    [SupervisorSections.Agents]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.sections.${SupervisorSections.AGENTS}`,
+      _locale: `WebitelApplications.${WtApplication.Supervisor}.sections.${SupervisorSections.Agents}`,
     },
-    [SupervisorSections.ACTIVE_CALLS]: {
+    [SupervisorSections.ActiveCalls]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.SUPERVISOR}.sections.${SupervisorSections.ACTIVE_CALLS}`,
-    },
-  },
-  [WebitelApplications.ADMIN]: {
-    _enabled: value,
-    _locale: `WebitelApplications.${WebitelApplications.ADMIN}.name`,
-    [AdminSections.LICENSE]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.LICENSE}`,
-    },
-    [AdminSections.USERS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.USERS}`,
-    },
-    [AdminSections.DEVICES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.DEVICES}`,
-    },
-    [AdminSections.FLOW]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.FLOW}`,
-    },
-    [AdminSections.DIALPLAN]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.DIALPLAN}`,
-    },
-    [AdminSections.GATEWAYS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.GATEWAYS}`,
-    },
-    [AdminSections.CHATPLAN]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CHATPLAN}`,
-    },
-    [AdminSections.CHAT_GATEWAYS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CHAT_GATEWAYS}`,
-    },
-    [AdminSections.SKILLS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SKILLS}`,
-    },
-    [AdminSections.BUCKETS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.BUCKETS}`,
-    },
-    [AdminSections.BLACKLIST]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.BLACKLIST}`,
-    },
-    [AdminSections.REGIONS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.REGIONS}`,
-    },
-    [AdminSections.CALENDARS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CALENDARS}`,
-    },
-    [AdminSections.COMMUNICATIONS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.COMMUNICATIONS}`,
-    },
-    [AdminSections.PAUSE_CAUSE]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.PAUSE_CAUSE}`,
-    },
-    [AdminSections.MEDIA]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.MEDIA}`,
-    },
-    [AdminSections.SHIFT_TEMPLATES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SHIFT_TEMPLATES}`,
-    },
-    [AdminSections.PAUSE_TEMPLATES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.PAUSE_TEMPLATES}`,
-    },
-    [AdminSections.WORKING_CONDITIONS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.WORKING_CONDITIONS}`,
-    },
-    [AdminSections.AGENTS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.AGENTS}`,
-    },
-    [AdminSections.TEAMS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.TEAMS}`,
-    },
-    [AdminSections.RESOURCES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.RESOURCES}`,
-    },
-    [AdminSections.RESOURCE_GROUPS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.RESOURCE_GROUPS}`,
-    },
-    [AdminSections.QUEUES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.QUEUES}`,
-    },
-    [AdminSections.STORAGE]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.STORAGE}`,
-    },
-    [AdminSections.STORAGE_POLICIES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.STORAGE_POLICIES}`,
-    },
-    [AdminSections.COGNITIVE_PROFILES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.COGNITIVE_PROFILES}`,
-    },
-    [AdminSections.EMAIL_PROFILES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.EMAIL_PROFILES}`,
-    },
-    [AdminSections.SINGLE_SIGN_ON]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.SINGLE_SIGN_ON}`,
-    },
-    [AdminSections.IMPORT_CSV]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.IMPORT_CSV}`,
-    },
-    [AdminSections.TRIGGERS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.TRIGGERS}`,
-    },
-    [AdminSections.ROLES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.ROLES}`,
-    },
-    [AdminSections.OBJECTS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.OBJECTS}`,
-    },
-    [AdminSections.CHANGELOGS]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CHANGELOGS}`,
-    },
-    [AdminSections.CONFIGURATION]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.CONFIGURATION}`,
-    },
-    [AdminSections.GLOBAL_VARIABLES]: {
-      _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.GLOBAL_VARIABLES}`,
+      _locale: `WebitelApplications.${WtApplication.Supervisor}.sections.${SupervisorSections.ActiveCalls}`,
     },
   },
-  [WebitelApplications.AUDIT]: {
+  [WtApplication.Admin]: {
     _enabled: value,
-    _locale: `WebitelApplications.${WebitelApplications.AUDIT}.name`,
-    [AuditorSections.SCORECARDS]: {
+    _locale: `WebitelApplications.${WtApplication.Admin}.name`,
+    [AdminSections.License]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.AUDIT}.sections.${AuditorSections.SCORECARDS}`,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.License}`,
+    },
+    [AdminSections.Users]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Users}`,
+    },
+    [AdminSections.Devices]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Devices}`,
+    },
+    [AdminSections.Flow]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Flow}`,
+    },
+    [AdminSections.Dialplan]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Dialplan}`,
+    },
+    [AdminSections.Gateways]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Gateways}`,
+    },
+    [AdminSections.Chatplan]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Chatplan}`,
+    },
+    [AdminSections.ChatGateways]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.ChatGateways}`,
+    },
+    [AdminSections.Skills]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Skills}`,
+    },
+    [AdminSections.Buckets]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Buckets}`,
+    },
+    [AdminSections.Blacklist]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Blacklist}`,
+    },
+    [AdminSections.Regions]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Regions}`,
+    },
+    [AdminSections.Calendars]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Calendars}`,
+    },
+    [AdminSections.Communications]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Communications}`,
+    },
+    [AdminSections.PauseCause]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.PauseCause}`,
+    },
+    [AdminSections.Media]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Media}`,
+    },
+    [AdminSections.ShiftTemplates]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.ShiftTemplates}`,
+    },
+    [AdminSections.PauseTemplates]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.PauseTemplates}`,
+    },
+    [AdminSections.WorkingConditions]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.WorkingConditions}`,
+    },
+    [AdminSections.Agents]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Agents}`,
+    },
+    [AdminSections.Teams]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Teams}`,
+    },
+    [AdminSections.Resources]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Resources}`,
+    },
+    [AdminSections.ResourceGroups]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.ResourceGroups}`,
+    },
+    [AdminSections.Queues]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Queues}`,
+    },
+    [AdminSections.Storage]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Storage}`,
+    },
+    [AdminSections.StoragePolicies]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.StoragePolicies}`,
+    },
+    [AdminSections.CognitiveProfiles]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.CognitiveProfiles}`,
+    },
+    [AdminSections.EmailProfiles]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.EmailProfiles}`,
+    },
+    [AdminSections.SingleSignOn]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.SingleSignOn}`,
+    },
+    [AdminSections.ImportCsv]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.ImportCsv}`,
+    },
+    [AdminSections.Triggers]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Triggers}`,
+    },
+    [AdminSections.Roles]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Roles}`,
+    },
+    [AdminSections.Objects]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Objects}`,
+    },
+    [AdminSections.Changelogs]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Changelogs}`,
+    },
+    [AdminSections.Configuration]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.Configuration}`,
+    },
+    [AdminSections.GlobalVariables]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Admin}.sections.${AdminSections.GlobalVariables}`,
     },
   },
-  [WebitelApplications.CRM]: {
+  [WtApplication.Audit]: {
     _enabled: value,
-    _locale: `WebitelApplications.${WebitelApplications.CRM}.name`,
-    [CrmSections.CONTACTS]: {
+    _locale: `WebitelApplications.${WtApplication.Audit}.name`,
+    [AuditorSections.Scorecards]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACTS}`,
+      _locale: `WebitelApplications.${WtApplication.Audit}.sections.${AuditorSections.Scorecards}`,
     },
-    [CrmSections.SLAS]: {
+  },
+  [WtApplication.Crm]: {
+    _enabled: value,
+    _locale: `WebitelApplications.${WtApplication.Crm}.name`,
+    [CrmSections.Contacts]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SLAS}`,
+      _locale: `WebitelApplications.${WtApplication.Crm}.sections.${CrmSections.Contacts}`,
     },
-    [CrmSections.SOURCES]: {
+    [CrmSections.Slas]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SOURCES}`,
+      _locale: `WebitelApplications.${WtApplication.Crm}.sections.${CrmSections.Slas}`,
     },
-    [CrmSections.SERVICE_CATALOGS]: {
+    [CrmSections.Sources]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SERVICE_CATALOGS}`,
+      _locale: `WebitelApplications.${WtApplication.Crm}.sections.${CrmSections.Sources}`,
     },
-    [CrmSections.CLOSE_REASON_GROUPS]: {
+    [CrmSections.ServiceCatalogs]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CLOSE_REASON_GROUPS}`,
+      _locale: `WebitelApplications.${WtApplication.Crm}.sections.${CrmSections.ServiceCatalogs}`,
     },
-    [CrmSections.CONTACT_GROUPS]: {
+    [CrmSections.CloseReasonGroups]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACT_GROUPS}`,
+      _locale: `WebitelApplications.${WtApplication.Crm}.sections.${CrmSections.CloseReasonGroups}`,
     },
-    [CrmSections.PRIORITIES]: {
+    [CrmSections.ContactGroups]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.PRIORITIES}`,
+      _locale: `WebitelApplications.${WtApplication.Crm}.sections.${CrmSections.ContactGroups}`,
+    },
+    [CrmSections.Priorities]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WtApplication.Crm}.sections.${CrmSections.Priorities}`,
     },
   },
 });

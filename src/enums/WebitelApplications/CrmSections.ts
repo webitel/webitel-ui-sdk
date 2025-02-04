@@ -1,17 +1,27 @@
-export const CrmSections = {
-    Contacts: 'contacts',
-    Cases: 'cases',
+import { WtApplication } from './WtApplication';
 
-    // CONFIGURATION - LOOKUPS
-    Slas: 'slas',
-    ServiceCatalogs: 'service-catalogs',
-    Priorities: 'priorities',
-    Statuses: 'statuses',
-    Sources: 'sources',
-    CloseReasonGroups: 'close-reason-groups',
-    ContactGroups: 'contact-groups',
-    CaseSources: 'case-sources',
-    CustomLookups: 'custom-lookups',
+/**
+ * @augments WtApplication
+ * represents ui sections in Crm WtApplication
+ * without (!) any relation to WtObjects
+ *
+ * `WtApplication` prefix is duplicated intentionally
+ * for IDE hint previews
+ */
+export const CrmSections = {
+  Contacts: `${WtApplication.Crm}/contacts`,
+  Cases: `${WtApplication.Crm}/cases`,
+
+  // CONFIGURATION - LOOKUPS
+  Slas: `${WtApplication.Crm}/slas`,
+ServiceCatalogs: `${WtApplication.Crm}/serviceCatalogs`,
+Priorities: `${WtApplication.Crm}/priorities`,
+Statuses: `${WtApplication.Crm}/statuses`,
+Sources: `${WtApplication.Crm}/sources`,
+CloseReasonGroups: `${WtApplication.Crm}/closeReasonGroups`,
+ContactGroups: `${WtApplication.Crm}/contactGroups`,
+CaseSources: `${WtApplication.Crm}/caseSources`,
+CustomLookups: `${WtApplication.Crm}/customLookups`,
 } as const;
 
-export type CrmSections = typeof CrmSections[keyof typeof CrmSections];
+export type CrmSections = (typeof CrmSections)[keyof typeof CrmSections];

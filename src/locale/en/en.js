@@ -6,14 +6,16 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
+import {
+  AdminSections,
+  AuditorSections,
+  CrmSections,
+  IconAction,
+  QueueType,
+  SupervisorSections,
+  WtApplication,
+} from '../../enums';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import { IconAction } from '../../enums/index.js';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
@@ -215,73 +217,73 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
-    [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
-    [WebitelApplications.AUDIT]: {
+    [WtApplication.Agent]: { name: 'Agent Workspace' },
+    [WtApplication.Audit]: {
       name: 'Audit',
       sections: {
-        [AuditorSections.SCORECARDS]: 'Scorecards',
+        [AuditorSections.Scorecards]: 'Scorecards',
       },
     },
-    [WebitelApplications.CRM]: {
+    [WtApplication.Crm]: {
       name: 'CRM',
       sections: {
-        [CrmSections.CONTACTS]: 'Contacts',
-        [CrmSections.SLAS]: 'SLAS',
-        [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
-        [CrmSections.SOURCES]: 'Case sources',
-        [CrmSections.CONTACT_GROUPS]: 'Contact groups',
+        [CrmSections.Contacts]: 'Contacts',
+        [CrmSections.Slas]: 'SLAS',
+        [CrmSections.ServiceCatalogs]: 'Service catalogs',
+        [CrmSections.Sources]: 'Case sources',
+        [CrmSections.ContactGroups]: 'Contact groups',
       },
     },
-    [WebitelApplications.HISTORY]: { name: 'Call History' },
-    [WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
-    [WebitelApplications.SUPERVISOR]: {
+    [WtApplication.History]: { name: 'Call History' },
+    [WtApplication.Analytics]: { name: 'Data Visualisation Tool' },
+    [WtApplication.Supervisor]: {
       name: 'Supervisor Workspace',
       sections: {
-        [SupervisorSections.QUEUES]: 'Queues',
-        [SupervisorSections.AGENTS]: 'Agents',
-        [SupervisorSections.ACTIVE_CALLS]: 'Active calls',
+        [SupervisorSections.Queues]: 'Queues',
+        [SupervisorSections.Agents]: 'Agents',
+        [SupervisorSections.ActiveCalls]: 'Active calls',
       },
     },
-    [WebitelApplications.ADMIN]: {
+    [WtApplication.Admin]: {
       name: 'Admin',
       sections: {
-        [AdminSections.USERS]: 'Users',
-        [AdminSections.LICENSE]: 'Licenses',
-        [AdminSections.DEVICES]: 'Devices',
-        [AdminSections.FLOW]: 'Flow schemas',
-        [AdminSections.DIALPLAN]: 'Dialplans',
-        [AdminSections.GATEWAYS]: 'Gateways',
-        [AdminSections.CHATPLAN]: 'Chatplans',
-        [AdminSections.CHAT_GATEWAYS]: 'Chat gateways',
-        [AdminSections.SKILLS]: 'Agent skills',
-        [AdminSections.BUCKETS]: 'Buckets',
-        [AdminSections.MEDIA]: 'Media files',
-        [AdminSections.SHIFT_TEMPLATES]: 'Shift templates',
-        [AdminSections.PAUSE_TEMPLATES]: 'Pause templates',
-        [AdminSections.WORKING_CONDITIONS]: 'Working conditions',
-        [AdminSections.BLACKLIST]: 'Lists',
-        [AdminSections.CALENDARS]: 'Calendars',
-        [AdminSections.REGIONS]: 'Locations',
-        [AdminSections.COMMUNICATIONS]: 'Communication types',
-        [AdminSections.PAUSE_CAUSE]: 'Agent statuses',
-        [AdminSections.AGENTS]: 'Agents',
-        [AdminSections.TEAMS]: 'Teams',
-        [AdminSections.RESOURCES]: 'Resources',
-        [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
-        [AdminSections.QUEUES]: 'Queues',
-        [AdminSections.STORAGE]: 'Storage',
-        [AdminSections.STORAGE_POLICIES]: 'Storage policies',
-        [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
-        [AdminSections.EMAIL_PROFILES]: 'Email profiles',
-        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
-        [AdminSections.IMPORT_CSV]: 'Imports of CSV from file',
-        [AdminSections.TRIGGERS]: 'Triggers',
-        [AdminSections.MEDIA]: 'Media files',
-        [AdminSections.ROLES]: 'Roles',
-        [AdminSections.OBJECTS]: 'Objects',
-        [AdminSections.CHANGELOGS]: 'Change log',
-        [AdminSections.CONFIGURATION]: 'Configuration',
-        [AdminSections.GLOBAL_VARIABLES]: 'Global variables',
+        [AdminSections.Users]: 'Users',
+        [AdminSections.License]: 'Licenses',
+        [AdminSections.Devices]: 'Devices',
+        [AdminSections.Flow]: 'Flow schemas',
+        [AdminSections.Dialplan]: 'Dialplans',
+        [AdminSections.Gateways]: 'Gateways',
+        [AdminSections.Chatplan]: 'Chatplans',
+        [AdminSections.ChatGateways]: 'Chat gateways',
+        [AdminSections.Skills]: 'Agent skills',
+        [AdminSections.Buckets]: 'Buckets',
+        [AdminSections.Media]: 'Media files',
+        [AdminSections.ShiftTemplates]: 'Shift templates',
+        [AdminSections.PauseTemplates]: 'Pause templates',
+        [AdminSections.WorkingConditions]: 'Working conditions',
+        [AdminSections.Blacklist]: 'Lists',
+        [AdminSections.Calendars]: 'Calendars',
+        [AdminSections.Regions]: 'Locations',
+        [AdminSections.Communications]: 'Communication types',
+        [AdminSections.PauseCause]: 'Agent statuses',
+        [AdminSections.Agents]: 'Agents',
+        [AdminSections.Teams]: 'Teams',
+        [AdminSections.Resources]: 'Resources',
+        [AdminSections.ResourceGroups]: 'Resource groups',
+        [AdminSections.Queues]: 'Queues',
+        [AdminSections.Storage]: 'Storage',
+        [AdminSections.StoragePolicies]: 'Storage policies',
+        [AdminSections.CognitiveProfiles]: 'Cognitive profiles',
+        [AdminSections.EmailProfiles]: 'Email profiles',
+        [AdminSections.SingleSignOn]: 'Single Sign-on',
+        [AdminSections.ImportCsv]: 'Imports of CSV from file',
+        [AdminSections.Triggers]: 'Triggers',
+        [AdminSections.Media]: 'Media files',
+        [AdminSections.Roles]: 'Roles',
+        [AdminSections.Objects]: 'Objects',
+        [AdminSections.Changelogs]: 'Change log',
+        [AdminSections.Configuration]: 'Configuration',
+        [AdminSections.GlobalVariables]: 'Global variables',
       },
     },
   },
