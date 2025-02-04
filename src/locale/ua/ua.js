@@ -6,14 +6,16 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
+import {
+  AdminSections,
+  AuditorSections,
+  CrmSections,
+  IconAction,
+  QueueType,
+  SupervisorSections,
+  WtApplication,
+} from '../../enums';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import { IconAction } from '../../enums/index.js';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
@@ -213,72 +215,72 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
-    [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
-    [WebitelApplications.AUDIT]: {
+    [WtApplication.Agent]: { name: 'Agent Workspace' },
+    [WtApplication.Audit]: {
       name: 'Audit',
       sections: {
-        [AuditorSections.SCORECARDS]: 'Анкети',
+        [AuditorSections.Scorecards]: 'Анкети',
       },
     },
-    [WebitelApplications.CRM]: {
+    [WtApplication.Crm]: {
       name: 'CRM',
       sections: {
-        [CrmSections.CONTACTS]: 'Контакти',
-        [CrmSections.SLAS]: 'SLAS',
-        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервісів',
-        [CrmSections.SOURCES]: 'Джерела звернень',
-        [CrmSections.CONTACT_GROUPS]: 'Групи контактів',
+        [CrmSections.Contacts]: 'Контакти',
+        [CrmSections.Slas]: 'SLAS',
+        [CrmSections.ServiceCatalogs]: 'Каталоги сервісів',
+        [CrmSections.Sources]: 'Джерела звернень',
+        [CrmSections.ContactGroups]: 'Групи контактів',
       },
     },
-    [WebitelApplications.HISTORY]: { name: 'Call History' },
-    [WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
-    [WebitelApplications.SUPERVISOR]: {
+    [WtApplication.History]: { name: 'Call History' },
+    [WtApplication.Analytics]: { name: 'Data Visualisation Tool' },
+    [WtApplication.Supervisor]: {
       name: 'Supervisor Workspace',
       sections: {
-        [SupervisorSections.QUEUES]: 'Черги',
-        [SupervisorSections.AGENTS]: 'Оператори',
-        [SupervisorSections.ACTIVE_CALLS]: 'Активні дзвінки',
+        [SupervisorSections.Queues]: 'Черги',
+        [SupervisorSections.Agents]: 'Оператори',
+        [SupervisorSections.ActiveCalls]: 'Активні дзвінки',
       },
     },
-    [WebitelApplications.ADMIN]: {
+    [WtApplication.Admin]: {
       name: 'Admin',
       sections: {
-        [AdminSections.USERS]: 'Користувачі',
-        [AdminSections.LICENSE]: 'Ліцензії',
-        [AdminSections.DEVICES]: 'Пристрої',
-        [AdminSections.FLOW]: 'Схеми',
-        [AdminSections.DIALPLAN]: 'Правила вихідного набору',
-        [AdminSections.GATEWAYS]: 'Шлюзи',
-        [AdminSections.CHATPLAN]: 'Правила маршрутизації текстових повідомлень',
-        [AdminSections.CHAT_GATEWAYS]: 'Текстові шлюзи',
-        [AdminSections.SKILLS]: 'Навички оператора',
-        [AdminSections.BUCKETS]: 'Кошики',
-        [AdminSections.MEDIA]: 'Медіафайли',
-        [AdminSections.SHIFT_TEMPLATES]: 'Шаблон змін',
-        [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
-        [AdminSections.WORKING_CONDITIONS]: 'Умови роботи',
-        [AdminSections.BLACKLIST]: 'Cписки',
-        [AdminSections.CALENDARS]: 'Календарі',
-        [AdminSections.REGIONS]: 'Розташування',
-        [AdminSections.COMMUNICATIONS]: "Типи зв'язку",
-        [AdminSections.PAUSE_CAUSE]: 'Статуси оператора',
-        [AdminSections.AGENTS]: 'Оператори',
-        [AdminSections.TEAMS]: 'Команди',
-        [AdminSections.RESOURCES]: 'Ресурси',
-        [AdminSections.RESOURCE_GROUPS]: 'Групи ресурсів',
-        [AdminSections.QUEUES]: 'Черги',
-        [AdminSections.STORAGE]: 'Сховища',
-        [AdminSections.STORAGE_POLICIES]: 'Політики збереження файлів',
-        [AdminSections.COGNITIVE_PROFILES]: 'Голосові профілі',
-        [AdminSections.EMAIL_PROFILES]: 'Email профілі',
-        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
-        [AdminSections.IMPORT_CSV]: 'Імпорт даних з CSV файлів',
-        [AdminSections.TRIGGERS]: 'Тригери',
-        [AdminSections.ROLES]: 'Ролі',
-        [AdminSections.OBJECTS]: 'Розділи',
-        [AdminSections.CHANGELOGS]: 'Журнал змін',
-        [AdminSections.CONFIGURATION]: 'Конфігурація',
-        [AdminSections.GLOBAL_VARIABLES]: 'Глобальні змінні',
+        [AdminSections.Users]: 'Користувачі',
+        [AdminSections.License]: 'Ліцензії',
+        [AdminSections.Devices]: 'Пристрої',
+        [AdminSections.Flow]: 'Схеми',
+        [AdminSections.Dialplan]: 'Правила вихідного набору',
+        [AdminSections.Gateways]: 'Шлюзи',
+        [AdminSections.Chatplan]: 'Правила маршрутизації текстових повідомлень',
+        [AdminSections.ChatGateways]: 'Текстові шлюзи',
+        [AdminSections.Skills]: 'Навички оператора',
+        [AdminSections.Buckets]: 'Кошики',
+        [AdminSections.Media]: 'Медіафайли',
+        [AdminSections.ShiftTemplates]: 'Шаблон змін',
+        [AdminSections.PauseTemplates]: 'Шаблон пауз',
+        [AdminSections.WorkingConditions]: 'Умови роботи',
+        [AdminSections.Blacklist]: 'Cписки',
+        [AdminSections.Calendars]: 'Календарі',
+        [AdminSections.Regions]: 'Розташування',
+        [AdminSections.Communications]: "Типи зв'язку",
+        [AdminSections.PauseCause]: 'Статуси оператора',
+        [AdminSections.Agents]: 'Оператори',
+        [AdminSections.Teams]: 'Команди',
+        [AdminSections.Resources]: 'Ресурси',
+        [AdminSections.ResourceGroups]: 'Групи ресурсів',
+        [AdminSections.Queues]: 'Черги',
+        [AdminSections.Storage]: 'Сховища',
+        [AdminSections.StoragePolicies]: 'Політики збереження файлів',
+        [AdminSections.CognitiveProfiles]: 'Голосові профілі',
+        [AdminSections.EmailProfiles]: 'Email профілі',
+        [AdminSections.SingleSignOn]: 'Single Sign-on',
+        [AdminSections.ImportCsv]: 'Імпорт даних з CSV файлів',
+        [AdminSections.Triggers]: 'Тригери',
+        [AdminSections.Roles]: 'Ролі',
+        [AdminSections.Objects]: 'Розділи',
+        [AdminSections.Changelogs]: 'Журнал змін',
+        [AdminSections.Configuration]: 'Конфігурація',
+        [AdminSections.GlobalVariables]: 'Глобальні змінні',
       },
     },
   },

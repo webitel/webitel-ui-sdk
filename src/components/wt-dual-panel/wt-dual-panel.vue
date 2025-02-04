@@ -34,7 +34,7 @@
 import { computed, defineEmits, ref } from 'vue';
 
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
-import { ComponentSize } from '../../enums/index.js';
+import { ComponentSize } from '../../enums/index.ts';
 
 const props = defineProps({
   actionsPanel: {

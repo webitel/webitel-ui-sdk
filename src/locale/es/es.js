@@ -5,11 +5,16 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+
+import {
+  AdminSections,
+  AuditorSections,
+  CrmSections,
+  IconAction,
+  QueueType,
+  SupervisorSections,
+  WtApplication,
+} from '../../enums';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -142,59 +147,77 @@ export default {
     },
   },
   // describes Webitel FRONTEND applications + their navs
-  WebitelApplications: {
-    [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
-    [WebitelApplications.AUDIT]: {
-      name: 'Audit',
-      sections: {
-        [AuditorSections.SCORECARDS]: 'Formularios',
-      },
-    },
-    [WebitelApplications.HISTORY]: { name: 'Call History' },
-    [WebitelApplications.ANALYTICS]: { name: 'Data Visualisation Tool' },
-    [WebitelApplications.SUPERVISOR]: {
-      name: 'Supervisor Workspace',
-      sections: {
-        [SupervisorSections.QUEUES]: 'Colas',
-        [SupervisorSections.AGENTS]: 'Operadores',
-        [SupervisorSections.ACTIVE_CALLS]: 'Llamadas activas',
-      },
-    },
-    [WebitelApplications.ADMIN]: {
-      name: 'Admin',
-      sections: {
-        [AdminSections.USERS]: 'Usuarios',
-        [AdminSections.LICENSE]: 'Licencias',
-        [AdminSections.DEVICES]: 'Dispositivos',
-        [AdminSections.FLOW]: 'Esquemas',
-        [AdminSections.DIALPLAN]: 'Reglas de la marcación saliente',
-        [AdminSections.GATEWAYS]: 'Puertas de enlace',
-        [AdminSections.CHATPLAN]: 'Reglas de enrutamiento de mensajes de texto',
-        [AdminSections.CHAT_GATEWAYS]: 'Puertas de enlace de texto',
-        [AdminSections.SKILLS]: 'Habilidades del operador',
-        [AdminSections.BUCKETS]: 'Cestas',
-        [AdminSections.MEDIA]: 'Archivos multimedia',
-        [AdminSections.BLACKLIST]: 'Listas de llamadas',
-        [AdminSections.CALENDARS]: 'Calendarios',
-        [AdminSections.REGIONS]: 'Ubicación',
-        [AdminSections.COMMUNICATIONS]: 'Tipos de comunicación',
-        [AdminSections.PAUSE_CAUSE]: 'Estados del operador',
-        [AdminSections.AGENTS]: 'Operadores',
-        [AdminSections.TEAMS]: 'Equipos',
-        [AdminSections.RESOURCES]: 'Recursos',
-        [AdminSections.RESOURCE_GROUPS]: 'Grupos de recursos',
-        [AdminSections.QUEUES]: 'Colas',
-        [AdminSections.STORAGE]: 'Almacenamiento',
-        [AdminSections.COGNITIVE_PROFILES]: 'Perfiles de voz',
-        [AdminSections.EMAIL_PROFILES]: 'Perfiles de correo electrónico',
-        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
-        [AdminSections.IMPORT_CSV]: 'Importación de datos de archivos CSV',
-        [AdminSections.TRIGGERS]: 'Activadores',
-        [AdminSections.ROLES]: 'Funciones',
-        [AdminSections.OBJECTS]: 'Secciones',
-      },
+WebitelApplications: {
+  [WtApplication.Agent]: { name: 'Agent Workspace' },
+  [WtApplication.Audit]: {
+    name: 'Audit',
+    sections: {
+      [AuditorSections.Scorecards]: 'Formularios',
     },
   },
+  [WtApplication.Crm]: {
+    name: 'CRM',
+    sections: {
+      [CrmSections.Contacts]: 'Contacts',
+      [CrmSections.Slas]: 'SLAS',
+      [CrmSections.ServiceCatalogs]: 'Service catalogs',
+      [CrmSections.Sources]: 'Case sources',
+      [CrmSections.ContactGroups]: 'Contact groups',
+    },
+  },
+  [WtApplication.History]: { name: 'Call History' },
+  [WtApplication.Analytics]: { name: 'Data Visualisation Tool' },
+  [WtApplication.Supervisor]: {
+    name: 'Supervisor Workspace',
+    sections: {
+      [SupervisorSections.Queues]: 'Colas',
+      [SupervisorSections.Agents]: 'Operadores',
+      [SupervisorSections.ActiveCalls]: 'Active calls',
+    },
+  },
+  [WtApplication.Admin]: {
+    name: 'Admin',
+    sections: {
+      [AdminSections.Users]: 'Usuarios',
+      [AdminSections.License]: 'Licencias',
+      [AdminSections.Devices]: 'Dispositivos',
+      [AdminSections.Flow]: 'Esquemas',
+      [AdminSections.Dialplan]: 'Reglas de la marcación saliente',
+      [AdminSections.Gateways]: 'Puertas de enlace',
+      [AdminSections.Chatplan]: 'Reglas de enrutamiento de mensajes de texto',
+      [AdminSections.ChatGateways]: 'Puertas de enlace de texto',
+      [AdminSections.Skills]: 'Habilidades del operador',
+      [AdminSections.Buckets]: 'Cestas',
+      [AdminSections.Media]: 'Archivos multimedia',
+      [AdminSections.ShiftTemplates]: 'Shift templates',
+      [AdminSections.PauseTemplates]: 'Pause templates',
+      [AdminSections.WorkingConditions]: 'Working conditions',
+      [AdminSections.Blacklist]: 'Listas de llamadas',
+      [AdminSections.Calendars]: 'Calendarios',
+      [AdminSections.Regions]: 'Ubicación',
+      [AdminSections.Communications]: 'Tipos de comunicación',
+      [AdminSections.PauseCause]: 'Estados del operador',
+      [AdminSections.Agents]: 'Operadores',
+      [AdminSections.Teams]: 'Equipos',
+      [AdminSections.Resources]: 'Recursos',
+      [AdminSections.ResourceGroups]: 'Grupos de recursos',
+      [AdminSections.Queues]: 'Colas',
+      [AdminSections.Storage]: 'Almacenamiento',
+      [AdminSections.StoragePolicies]: 'Storage policies',
+      [AdminSections.CognitiveProfiles]: 'Perfiles de voz',
+      [AdminSections.EmailProfiles]: 'Perfiles de correo electrónico',
+      [AdminSections.SingleSignOn]: 'Single Sign-on',
+      [AdminSections.ImportCsv]: 'Importación de datos de archivos CSV',
+      [AdminSections.Triggers]: 'Activadores',
+      [AdminSections.Media]: 'Archivos multimedia',
+      [AdminSections.Roles]: 'Funciones',
+      [AdminSections.Objects]: 'Secciones',
+      [AdminSections.Changelogs]: 'Change log',
+      [AdminSections.Configuration]: 'Configuration',
+      [AdminSections.GlobalVariables]: 'Global variables',
+    },
+  },
+},
   validation: {
     required: 'Campo requerido',
     numeric: 'Valores numéricos requeridos',

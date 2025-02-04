@@ -17,7 +17,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { ComponentSize } from '../../../../../../src/enums/index.js';
+
+import { ComponentSize } from '../../../../../../src/enums/index.ts';
 
 const { t } = useI18n();
 const size = ref(ComponentSize.MD);

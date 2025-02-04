@@ -6,10 +6,10 @@ import IconAction from './IconAction/IconAction.enum.js';
 import QueueType from './QueueType/QueueType.enum.js';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
 import { AdminSections } from './WebitelApplications/AdminSections';
-import AuditorSections from './WebitelApplications/AuditorSections.enum.js';
-import CrmSections from './WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from './WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from './WebitelApplications/WebitelApplications.enum.js';
+import { AuditorSections } from './WebitelApplications/AuditorSections';
+import { CrmSections } from './WebitelApplications/CrmSections';
+import { SupervisorSections } from './WebitelApplications/SupervisorSections';
+import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 
 export {
@@ -24,6 +24,6 @@ export {
   QueueType,
   SupervisorSections,
   TypesExportedSettings,
-  WebitelApplications,
+  WtApplication,
   WtObject,
 };

@@ -5,11 +5,16 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+
+import {
+  AdminSections,
+  AuditorSections,
+  CrmSections,
+  IconAction,
+  QueueType,
+  SupervisorSections,
+  WtApplication,
+} from '../../enums';
 import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
@@ -163,57 +168,126 @@ export default {
       [CallDirection.Outbound]: 'Шығыс | Шығыстар',
     },
   },
-  WebitelApplications: {
-    [WebitelApplications.AGENT]: {},
-    [WebitelApplications.AUDIT]: {
-      sections: {},
-    },
-    [WebitelApplications.CRM]: {
-      sections: {
-        [CrmSections.CONTACTS]: 'Байланыстар',
-      },
-    },
-    [WebitelApplications.HISTORY]: {},
-    [WebitelApplications.ANALYTICS]: {},
-    [WebitelApplications.SUPERVISOR]: {
-      sections: {
-        [SupervisorSections.QUEUES]: 'Кезектер',
-        [SupervisorSections.AGENTS]: 'Операторлар',
-        [SupervisorSections.ACTIVE_CALLS]: 'Белсенді қоңыраулар',
-      },
-    },
-    [WebitelApplications.ADMIN]: {
-      sections: {
-        [AdminSections.USERS]: 'Пайдаланушылар',
-        [AdminSections.LICENSE]: 'Лицензиялар',
-        [AdminSections.DEVICES]: 'Құрылғылар',
-        [AdminSections.FLOW]: 'Схемалар',
-        [AdminSections.DIALPLAN]: 'Шығыс бағыттау',
-        [AdminSections.GATEWAYS]: 'Шлюздер',
-        [AdminSections.CHATPLAN]: 'Мәтіндік хабарламаны бағыттау қағидасы',
-        [AdminSections.SKILLS]: 'Оператор дағдылары',
-        [AdminSections.BUCKETS]: 'Себеттер',
-        [AdminSections.MEDIA]: 'Медиафайлдар',
-        [AdminSections.BLACKLIST]: 'Тізімдер',
-        [AdminSections.CALENDARS]: 'Күнтізбелер',
-        [AdminSections.COMMUNICATIONS]: 'Байланыс түрлері',
-        [AdminSections.REGIONS]: 'Орындар',
-        [AdminSections.PAUSE_CAUSE]: 'Оператор күйлері',
-        [AdminSections.AGENTS]: 'Операторлар',
-        [AdminSections.TEAMS]: 'Командалар',
-        [AdminSections.RESOURCES]: 'Ресурстар',
-        [AdminSections.RESOURCE_GROUPS]: 'Ресурстар топтары',
-        [AdminSections.QUEUES]: 'Кезектер',
-        [AdminSections.STORAGE]: 'Қойма',
-        [AdminSections.COGNITIVE_PROFILES]: 'Дыбыстық профильдер',
-        [AdminSections.EMAIL_PROFILES]: 'Email профильдері',
-        [AdminSections.IMPORT_CSV]: 'CSV файлдарынан деректерді импорттау',
-        [AdminSections.TRIGGERS]: 'Триггерлер',
-        [AdminSections.ROLES]: 'Рөлдер',
-        [AdminSections.OBJECTS]: 'Бөлімдер',
-      },
+WebitelApplications: {
+  [WtApplication.Agent]: { name: 'Agent Workspace' },
+  [WtApplication.Audit]: {
+    name: 'Audit',
+    sections: {
+      [AuditorSections.Scorecards]: 'Scorecards',
     },
   },
+  [WtApplication.Crm]: {
+    name: 'CRM',
+    sections: {
+      [CrmSections.Contacts]: 'Contacts',
+      [CrmSections.Slas]: 'SLAS',
+      [CrmSections.ServiceCatalogs]: 'Service catalogs',
+      [CrmSections.Sources]: 'Case sources',
+      [CrmSections.ContactGroups]: 'Contact groups',
+    },
+  },
+  [WtApplication.History]: { name: 'Call History' },
+  [WtApplication.Analytics]: { name: 'Data Visualisation Tool' },
+  [WtApplication.Supervisor]: {
+    name: 'Supervisor Workspace',
+    sections: {
+      [SupervisorSections.Queues]: 'Queues',
+      [SupervisorSections.Agents]: 'Agents',
+      [SupervisorSections.ActiveCalls]: 'Active calls',
+    },
+  },
+  [WtApplication.Admin]: {
+    name: 'Admin',
+    sections: {
+      [AdminSections.Users]: 'Users',
+      [AdminSections.License]: 'Licenses',
+      [AdminSections.Devices]: 'Devices',
+      [AdminSections.Flow]: 'Flow schemas',
+      [AdminSections.Dialplan]: 'Dialplans',
+      [AdminSections.Gateways]: 'Gateways',
+      [AdminSections.Chatplan]: 'Chatplans',
+      [AdminSections.ChatGateways]: 'Chat gateways',
+      [AdminSections.Skills]: 'Agent skills',
+      [AdminSections.Buckets]: 'Buckets',
+      [AdminSections.Media]: 'Media files',
+      [AdminSections.ShiftTemplates]: 'Shift templates',
+      [AdminSections.PauseTemplates]: 'Pause templates',
+      [AdminSections.WorkingConditions]: 'Working conditions',
+      [AdminSections.Blacklist]: 'Lists',
+      [AdminSections.Calendars]: 'Calendars',
+      [AdminSections.Regions]: 'Locations',
+      [AdminSections.Communications]: 'Communication types',
+      [AdminSections.PauseCause]: 'Agent statuses',
+      [AdminSections.Agents]: 'Agents',
+      [AdminSections.Teams]: 'Teams',
+      [AdminSections.Resources]: 'Resources',
+      [AdminSections.ResourceGroups]: 'Resource groups',
+      [AdminSections.Queues]: 'Queues',
+      [AdminSections.Storage]: 'Storage',
+      [AdminSections.StoragePolicies]: 'Storage policies',
+      [AdminSections.CognitiveProfiles]: 'Cognitive profiles',
+      [AdminSections.EmailProfiles]: 'Email profiles',
+      [AdminSections.SingleSignOn]: 'Single Sign-on',
+      [AdminSections.ImportCsv]: 'Imports of CSV from file',
+      [AdminSections.Triggers]: 'Triggers',
+      [AdminSections.Media]: 'Media files',
+      [AdminSections.Roles]: 'Roles',
+      [AdminSections.Objects]: 'Objects',
+      [AdminSections.Changelogs]: 'Change log',
+      [AdminSections.Configuration]: 'Configuration',
+      [AdminSections.GlobalVariables]: 'Global variables',
+    },
+  },
+  [WebitelApplications.AGENT]: {},
+  [WebitelApplications.AUDIT]: {
+    sections: {},
+  },
+  [WebitelApplications.CRM]: {
+    sections: {
+      [CrmSections.CONTACTS]: 'Байланыстар',
+    },
+  },
+  [WebitelApplications.HISTORY]: {},
+  [WebitelApplications.ANALYTICS]: {},
+  [WebitelApplications.SUPERVISOR]: {
+    sections: {
+      [SupervisorSections.QUEUES]: 'Кезектер',
+      [SupervisorSections.AGENTS]: 'Операторлар',
+      [SupervisorSections.ACTIVE_CALLS]: 'Белсенді қоңыраулар',
+    },
+  },
+  [WebitelApplications.ADMIN]: {
+    sections: {
+      [AdminSections.USERS]: 'Пайдаланушылар',
+      [AdminSections.LICENSE]: 'Лицензиялар',
+      [AdminSections.DEVICES]: 'Құрылғылар',
+      [AdminSections.FLOW]: 'Схемалар',
+      [AdminSections.DIALPLAN]: 'Шығыс бағыттау',
+      [AdminSections.GATEWAYS]: 'Шлюздер',
+      [AdminSections.CHATPLAN]: 'Мәтіндік хабарламаны бағыттау қағидасы',
+      [AdminSections.SKILLS]: 'Оператор дағдылары',
+      [AdminSections.BUCKETS]: 'Себеттер',
+      [AdminSections.MEDIA]: 'Медиафайлдар',
+      [AdminSections.BLACKLIST]: 'Тізімдер',
+      [AdminSections.CALENDARS]: 'Күнтізбелер',
+      [AdminSections.COMMUNICATIONS]: 'Байланыс түрлері',
+      [AdminSections.REGIONS]: 'Орындар',
+      [AdminSections.PAUSE_CAUSE]: 'Оператор күйлері',
+      [AdminSections.AGENTS]: 'Операторлар',
+      [AdminSections.TEAMS]: 'Командалар',
+      [AdminSections.RESOURCES]: 'Ресурстар',
+      [AdminSections.RESOURCE_GROUPS]: 'Ресурстар топтары',
+      [AdminSections.QUEUES]: 'Кезектер',
+      [AdminSections.STORAGE]: 'Қойма',
+      [AdminSections.COGNITIVE_PROFILES]: 'Дыбыстық профильдер',
+      [AdminSections.EMAIL_PROFILES]: 'Email профильдері',
+      [AdminSections.IMPORT_CSV]: 'CSV файлдарынан деректерді импорттау',
+      [AdminSections.TRIGGERS]: 'Триггерлер',
+      [AdminSections.ROLES]: 'Рөлдер',
+      [AdminSections.OBJECTS]: 'Бөлімдер',
+    },
+  },
+},
   validation: {
     required: 'Міндетті өріс',
     numeric: 'Сандық мәнді енгізу керек',
