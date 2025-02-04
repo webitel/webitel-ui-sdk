@@ -1,7 +1,7 @@
 <template>
   <tr
-    class="wt-tree-table-row"
     :class="[{ 'wt-tree-table-row--alternate': rowPosition % 2 }]"
+    class="wt-tree-table-row"
   >
     <td
       v-for="(col, headerKey) of dataHeaders"
@@ -69,14 +69,14 @@
     <wt-tree-table-row
       v-for="(child, index) in data[childrenProp]"
       :key="index"
-      :row-position="rowPosition"
-      :data-headers="dataHeaders"
+      :children-prop="childrenProp"
       :data="child"
+      :data-headers="dataHeaders"
+      :nesting-level="childLevel"
+      :row-position="rowPosition"
+      :searched-prop="searchedProp"
       :selectable="selectable"
       :selected-elements="selectedElements"
-      :children-prop="childrenProp"
-      :nesting-level="childLevel"
-      :searched-prop="searchedProp"
       @expanded-collapse="openCollapse"
       @update:selected="
         $emit('update:selected', {
@@ -109,11 +109,12 @@
   </template>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
 
 import WtCheckbox from '../wt-checkbox/wt-checkbox.vue';
 import WtIconBtn from '../wt-icon-btn/wt-icon-btn.vue';
+import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 
 const props = withDefaults(
   defineProps<{
@@ -131,7 +132,7 @@ const props = withDefaults(
     childrenProp: string;
     selectable?: boolean;
     selectedElements: Record<string, any>[];
-    dataHeaders: TableHeader[];
+    dataHeaders: WtTableHeader[];
     gridActions?: boolean;
     /**
      * 'It's a nesting level of row. 0 - root row, 1 - first level of nesting, etc.'
@@ -218,8 +219,8 @@ onMounted(() => {
 
   &__icon-wrapper {
     display: flex;
-    margin-right: var(--spacing-xs);
     align-items: flex-start;
+    margin-right: var(--spacing-xs);
   }
 
   &__content {

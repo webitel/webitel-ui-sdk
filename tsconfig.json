@@ -1,23 +1,36 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["ES2023", "dom"],
     "module": "esnext",
-    "allowJs": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
     "skipLibCheck": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
-
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
-
+    "noEmit": false,
+    "noEmitOnError": false,
     "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "docs/pages"]
+  "include": [
+    "src/**/*.ts",
+    "docs/pages/**/*.ts"
+  ],
+  "exclude": [
+    "**/Userinfo/**"
+  ]
 }

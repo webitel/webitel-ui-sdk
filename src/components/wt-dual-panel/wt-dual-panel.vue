@@ -89,6 +89,8 @@ $side-panel-md-width: 320px;
   }
 
   &__main {
+    @extend %wt-scrollbar;
+    overflow: auto;
     flex: 1 1 auto;
   }
 

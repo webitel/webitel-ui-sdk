@@ -19,15 +19,16 @@
       </div>
     </header>
 
-    <wt-loader v-show="isLoading" />
-
-    <wt-empty
-      v-show="showEmpty"
-      :image="imageEmpty"
-      :text="textEmpty"
-    />
-
     <div class="table-section__table-wrapper">
+
+      <wt-loader v-show="isLoading" />
+
+      <wt-empty
+        v-show="showEmpty"
+        :image="imageEmpty"
+        :text="textEmpty"
+      />
+
       <div class="table-section__visible-scroll-wrapper">
         <wt-table-transition v-if="dataList.length && !isLoading" >
           <wt-table
@@ -171,6 +172,7 @@ const {
 
   subscribe,
   flushSubscribers,
+  resetFilters,
 } = useTableFilters(tableNamespace);
 
 subscribe({
@@ -182,6 +184,7 @@ restoreFilters();
 
 onUnmounted(() => {
   flushSubscribers();
+  resetFilters();
 });
 
 const {
