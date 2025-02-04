@@ -1,3 +1,75 @@
+## [v24.12.85] - 2025-02-03
+### :bug: Bug Fixes
+- [`97a6215`](https://github.com/webitel/webitel-ui-sdk/commit/97a6215daa21dce2122876df8cd8528b978eb4d0) - clear value in datepicker component[WTEL-5830](https://webitel.atlassian.net/browse/WTEL-5830) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.84] - 2025-02-03
+### :bug: Bug Fixes
+- [`371c2a8`](https://github.com/webitel/webitel-ui-sdk/commit/371c2a8e70b0a87f2245435a99358224feff7689) - fixed wt-popup close emit *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
+## [v24.12.82] - 2025-01-31
+### :bug: Bug Fixes
+- [`47191cb`](https://github.com/webitel/webitel-ui-sdk/commit/47191cbc432711c4f360b0e9c097e5c6ae7dacd8) - update package version to 24.12.82
+- [`1eae5bb`](https://github.com/webitel/webitel-ui-sdk/commit/1eae5bb6ac07e0adfba1769a1534bdce5cae4524) - tsconfig compiler options [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`b2fcbd3`](https://github.com/webitel/webitel-ui-sdk/commit/b2fcbd340fbf378640215bd63d8d7345deef1f4a) - tsconfig compiler options [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`1e300f1`](https://github.com/webitel/webitel-ui-sdk/commit/1e300f1d211a1e0c8defa5eb8716c0186fc504d4) - update useWtTable composable [WTEL-6012](https://webitel.atlassian.net/browse/WTEL-6012)
+
+
+## [v24.12.81] - 2025-01-30
+### :sparkles: New Features
+- [`e76af42`](https://github.com/webitel/webitel-ui-sdk/commit/e76af42be4d1c29cf62c83ef7551408ff93351e5) - add clearable prop in wt-datepicker component[WTEL-5830](https://webitel.atlassian.net/browse/WTEL-5830) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.80] - 2025-01-30
+### :bug: Bug Fixes
+- [`2d3a8ec`](https://github.com/webitel/webitel-ui-sdk/commit/2d3a8ec3d4d76b83fb62d831235951dd783cec68) - update version to 24.12.77 [WTEL-5988](https://webitel.atlassian.net/browse/WTEL-5988)
+- [`73c61e9`](https://github.com/webitel/webitel-ui-sdk/commit/73c61e95cceb50f3cccdecc9b4cec99702894505) - docs build [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.79] - 2025-01-30
+### :bug: Bug Fixes
+- [`d225fda`](https://github.com/webitel/webitel-ui-sdk/commit/d225fda3507e27966b2f13e26941d641d26bb331) - wt applications enums case conversion [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.78] - 2025-01-30
+### :bug: Bug Fixes
+- [`df43b9f`](https://github.com/webitel/webitel-ui-sdk/commit/df43b9f4cb6fa087aee23b3a5632afc53203a600) - wt-popup overlay glitching at component init [WTEL-3752](https://webitel.atlassian.net/browse/WTEL-3752) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`cf358f3`](https://github.com/webitel/webitel-ui-sdk/commit/cf358f3278d29b9af63f355cb2d93af28fb57878) - tsconfig MouseEvent [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.77] - 2025-01-28
+### :bug: Bug Fixes
+- [`45af878`](https://github.com/webitel/webitel-ui-sdk/commit/45af87812a2e40c171e1db821ac53d016081a13a) - update version to 24.12.77
+
+
+## [v24.12.76] - 2025-01-28
+### :bug: Bug Fixes
+- [`7fdc34d`](https://github.com/webitel/webitel-ui-sdk/commit/7fdc34dcadd9d64e65370f9edc9f790ef0d92669) - implement locale for validation latin with number [WTEL-5989](https://webitel.atlassian.net/browse/WTEL-5989)
+- [`83fc371`](https://github.com/webitel/webitel-ui-sdk/commit/83fc371de3b656ecde451a732ecad2caa6826202) - tsc issues preventing build fixed [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`be6b034`](https://github.com/webitel/webitel-ui-sdk/commit/be6b03419ee5d81ded7a207d24118ac4eefcf067) - webitel applications enums rewritten and reused as ts files [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.75] - 2025-01-27
+### :bug: Bug Fixes
+- [`7ca06fc`](https://github.com/webitel/webitel-ui-sdk/commit/7ca06fcd7b917b597ac8545c8406ec5cc7329262) - reset filters in permissions[WTEL-5944](https://webitel.atlassian.net/browse/WTEL-5944) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.74] - 2025-01-25
+### :bug: Bug Fixes
+- [`2216f34`](https://github.com/webitel/webitel-ui-sdk/commit/2216f344e010a6e8cd7a4ca8f2ed0e562fbf80fc) - set rejected requests handle for DELETE_BULK storeTableModule action *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`07dfa6e`](https://github.com/webitel/webitel-ui-sdk/commit/07dfa6ebfce88fa68422bb24c7e2b23122650806) - error in build doc *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v24.12.73] - 2025-01-24
+### :bug: Bug Fixes
+- [`89ee811`](https://github.com/webitel/webitel-ui-sdk/commit/89ee81169b328a701d88dfd169c940639ea7cc00) - dual panel scroll added [WTEL-5294](https://webitel.atlassian.net/browse/WTEL-5294) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`9272f1b`](https://github.com/webitel/webitel-ui-sdk/commit/9272f1bf1fa25040b09186acf464d0da701b94fd) - import in docs *(commit by [@Lera24](https://github.com/Lera24))*
+- [`68579a3`](https://github.com/webitel/webitel-ui-sdk/commit/68579a3ce43d7fdfcadc49aaef241e2d49097c38) - build errors[WTEL-5935](https://webitel.atlassian.net/browse/WTEL-5935) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.71] - 2025-01-22
 ### :sparkles: New Features
 - [`acbd463`](https://github.com/webitel/webitel-ui-sdk/commit/acbd463ffc15ddf5319c1489c975ed67f646305c) - wt-table headers typing, api module typing [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -876,3 +948,15 @@
 [v24.12.68]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.67...v24.12.68
 [v24.12.70]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.69...v24.12.70
 [v24.12.71]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.70...v24.12.71
+[v24.12.73]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.72...v24.12.73
+[v24.12.74]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.73...v24.12.74
+[v24.12.75]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.74...v24.12.75
+[v24.12.76]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.75...v24.12.76
+[v24.12.77]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.76...v24.12.77
+[v24.12.78]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.77...v24.12.78
+[v24.12.79]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.78...v24.12.79
+[v24.12.80]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.79...v24.12.80
+[v24.12.81]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.80...v24.12.81
+[v24.12.82]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.81...v24.12.82
+[v24.12.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.83...v24.12.84
+[v24.12.85]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.84...v24.12.85

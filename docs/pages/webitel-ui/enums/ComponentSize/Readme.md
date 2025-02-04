@@ -9,4 +9,4 @@
 import { ComponentSize } from '@webitel/ui-sdk/enums/index.js';
 ```
 
-<<< ../../../../../src/enums/ComponentSize/ComponentSize.enum.js
+<<< ../../../../../src/enums/ComponentSize/ComponentSize.ts

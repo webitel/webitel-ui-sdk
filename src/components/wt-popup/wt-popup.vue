@@ -4,20 +4,19 @@
     :class="[`wt-popup--size-${size}`, { 'wt-popup--overflow': overflow }]"
     class="wt-popup"
   >
-
-<!--    &lt;!&ndash;  @slot check source code for scoped bindings :( &ndash;&gt;-->
-<!--    <slot-->
-<!--      class="wt-popup-activator"-->
-<!--      name="activator"-->
-<!--      v-bind="{-->
-<!--    shown: wrapperShown,-->
-<!--    size,-->
-<!--    disabled,-->
-<!--    open: openPopup,-->
-<!--    close: closePopup,-->
-<!--    toggle: togglePopup,-->
-<!--  } as ActivatorSlotScope"-->
-<!--    />-->
+    <!--    &lt;!&ndash;  @slot check source code for scoped bindings :( &ndash;&gt;-->
+    <!--    <slot-->
+    <!--      class="wt-popup-activator"-->
+    <!--      name="activator"-->
+    <!--      v-bind="{-->
+    <!--    shown: wrapperShown,-->
+    <!--    size,-->
+    <!--    disabled,-->
+    <!--    open: openPopup,-->
+    <!--    close: closePopup,-->
+    <!--    toggle: togglePopup,-->
+    <!--  } as ActivatorSlotScope"-->
+    <!--    />-->
 
     <transition-slide :offset="[0, -1440 / 2]">
       <aside
@@ -33,7 +32,7 @@
           <wt-icon-btn
             class="wt-popup__close-btn"
             icon="close"
-            @click="closePopup"
+            @click="emit('close')"
           />
         </header>
         <section
@@ -54,10 +53,10 @@
 </template>
 
 <script lang="ts" setup>
-import {TransitionSlide} from '@morev/vue-transitions';
-import {computed, defineEmits, defineProps, ref, watch} from 'vue';
+import { TransitionSlide } from '@morev/vue-transitions';
+import { computed, defineEmits, defineProps, ref, watch } from 'vue';
 
-import {ComponentSize} from "../../enums/ComponentSize/ComponentSize.enum.ts";
+import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
 
 interface Props {
   /**
@@ -80,7 +79,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  shown: true,  // TODO: change me to false after refactor
+  shown: true, // TODO: change me to false after refactor
   size: ComponentSize.MD,
   overflow: false,
   disabled: false,
@@ -109,9 +108,8 @@ const slots = defineSlots<{
 }>();
 const activatorMode = !!slots.activator;
 
-const wrapperShown = ref(false);
+const wrapperShown = ref(props.shown);
 const isCloseAnimationPlaying = ref(false);
-
 
 const openPopup = () => {
   wrapperShown.value = true;
@@ -126,13 +124,13 @@ const closePopup = () => {
   }, 200); // 200 -> 0.2s css var(--transition); duration
 };
 
-const togglePopup = () => {
-  if (wrapperShown.value) {
-    closePopup();
-  } else {
-    openPopup();
-  }
-};
+// const togglePopup = () => {
+//   if (wrapperShown.value) {
+//     closePopup();
+//   } else {
+//     openPopup();
+//   }
+// };
 
 const showPopupComponent = computed(() => {
   return wrapperShown.value || isCloseAnimationPlaying.value;
@@ -142,7 +140,6 @@ const showPopupComponent = computed(() => {
 watch(
   () => props.shown,
   (value) => {
-
     /*
      * prop shown default value =true is used to allow backwards compatibility with
      * older wt-popup API, when popup visibility was controlled simply by v-if
@@ -153,14 +150,12 @@ watch(
      */
     if (activatorMode) return;
 
-
     if (value) {
       openPopup();
     } else {
       closePopup();
     }
   },
-  {immediate: true}
 );
 
 watch(wrapperShown, (value) => {
@@ -170,7 +165,6 @@ watch(wrapperShown, (value) => {
     emit('popup:closed');
   }
 });
-
 </script>
 
 <style lang="scss">

@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.71",
+  "version": "24.12.85",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
+    "tsc": "vue-tsc -p tsconfig.json",
     "update-node": "nvm install --lts && nvm alias default node"
   },
   "main": "./dist/@webitel/ui-sdk.mjs",
