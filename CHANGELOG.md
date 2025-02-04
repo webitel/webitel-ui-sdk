@@ -1,3 +1,8 @@
+## [v24.12.88] - 2025-02-04
+### :bug: Bug Fixes
+- [`c885e14`](https://github.com/webitel/webitel-ui-sdk/commit/c885e1422e3db806bf831f9b9513fab187260072) - update display header on tree table [WTEL-6012](https://webitel.atlassian.net/browse/WTEL-6012) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v24.12.86] - 2025-02-04
 ### :sparkles: New Features
 - [`58779b5`](https://github.com/webitel/webitel-ui-sdk/commit/58779b5aa82394e5b5a95e01e9e229a55a701eb6) - add new icon and new close action in icon action component[WTEL-5926](https://webitel.atlassian.net/browse/WTEL-5926) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -991,3 +996,4 @@
 [v24.12.84]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.83...v24.12.84
 [v24.12.85]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.84...v24.12.85
 [v24.12.86]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.85...v24.12.86
+[v24.12.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.87...v24.12.88
