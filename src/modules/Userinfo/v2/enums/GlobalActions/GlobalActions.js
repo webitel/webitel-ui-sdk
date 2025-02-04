@@ -27,3 +27,4 @@ export const SpecialGlobalAction = {
     ChangeUserPassword: 'changeUserPassword',
     EavesdropCall: 'eavesdropCall',
 };
+//# sourceMappingURL=GlobalActions.js.map

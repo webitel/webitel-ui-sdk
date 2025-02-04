@@ -21,6 +21,7 @@
     "noEmit": false,
     "noEmitOnError": false,
     "strict": false,
+    "sourceMap": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,

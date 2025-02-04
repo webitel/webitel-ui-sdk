@@ -3,3 +3,4 @@ export const useAccessPiniaStoreVuexAdapter = () => {
     // const store = useStore();
     // store.dispatch('SET', { hasReadAccessFn });
 };
+//# sourceMappingURL=useAccessAdapter.js.map

@@ -55,3 +55,4 @@ export const greaterThen = (s1, s2) => {
 export const greaterOrEqual = (s1, s2) => {
     return compareSize(s1, s2) >= 0;
 };
+//# sourceMappingURL=compareSize.js.map

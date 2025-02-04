@@ -141,6 +141,7 @@
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@tsconfig/node22": "^22.0.0",
+    "@types/lodash": "^4.17.15",
     "@types/node": "^22.12.0",
     "@vitejs/plugin-vue": "^5.2.0",
     "@vitest/coverage-v8": "^2.1.5",
@@ -158,6 +159,7 @@
     "markdown-it": "^14.1.0",
     "markdown-table": "^3.0.4",
     "path": "^0.12.7",
+    "pinia": "^2.3.0",
     "postcss": "^8.4.49",
     "postcss-prefix-selector": "^2.1.0",
     "prettier": "^3.4.2",
@@ -176,8 +178,7 @@
     "vitest": "^2.1.5",
     "vue": "^3.5.13",
     "vue-tsc": "^2.1.10",
-    "vuex": "^4.1.0",
-    "pinia": "^2.3.0"
+    "vuex": "^4.1.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"

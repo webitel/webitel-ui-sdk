@@ -4,3 +4,4 @@ export const CrudAction = {
     Update: 'update',
     Delete: 'delete',
 };
+//# sourceMappingURL=CrudAction.js.map
