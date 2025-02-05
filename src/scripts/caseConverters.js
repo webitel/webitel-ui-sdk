@@ -75,3 +75,10 @@ export const objCamelToKebab = (obj, skipKeys = []) => {
     converter: camelToKebab,
   })(obj, skipKeys);
 };
+
+export const objKebabToCamel = (obj, skipKeys = []) => {
+  return convertObject({
+    self: objKebabToCamel,
+    converter: kebabToCamel,
+  })(obj, skipKeys);
+};
