@@ -1,17 +1,8 @@
 <template>
   <div class="wt-table-column-select">
-    <wt-tooltip>
-      <template #activator>
-        <wt-icon-btn
-          icon="column-select"
-          @click="openPopup"
-        />
-      </template>
-      {{ $t('webitelUI.tableColumnSelect.title') }}
-    </wt-tooltip>
     <wt-popup
-      :shown="isColumnSelectPopup"
       class="wt-table-column-select__popup"
+      v-bind="attrs"
       @close="close"
     >
       <template #title>
@@ -58,76 +49,64 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import deepCopy from 'deep-copy';
+import { ref, computed, watch, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-export default {
-  name: 'WtTableColumnSelect',
+const props = defineProps({
+  headers: {
+    type: Array,
+    required: true,
+  },
+  staticHeaders: {
+    type: Array,
+    default: () => [],
+  },
+});
 
-  model: {
-    prop: 'headers',
-    event: 'change',
-  },
-  props: {
-    headers: {
-      type: Array,
-      required: true,
-      description:
-        'Each header should have following schema: { value: String, show: Boolean, text: String }',
-    },
-    staticHeaders: {
-      type: Array,
-      default: () => [],
-      description: 'Header values to exclude from selection',
-    },
-  },
-  emits: ['change'],
-  data: () => ({
-    draft: [], // headers draft
-    isColumnSelectPopup: false,
-  }),
-  computed: {
-    changeableDraft() {
-      return this.draft
-        .filter((header) => !this.staticHeaders.includes(header.value))
-        .sort((a, b) => {
-          return this.shownColLabel(a).localeCompare(this.shownColLabel(b));
-          // sorting headers for alphabet just in popup
-        });
-    },
-  },
+const emit = defineEmits(['change']);
 
-  watch: {
-    isColumnSelectPopup: {
-      handler() {
-        this.fillHeadersDraft();
-      },
-    },
-  },
-  methods: {
-    shownColLabel({ text, locale }) {
-      if (!text && locale) {
-        return typeof locale === 'string'
-          ? this.$t(locale)
-          : this.$t(...locale);
-      }
-      return text;
-    },
-    openPopup() {
-      this.isColumnSelectPopup = true;
-    },
-    close() {
-      this.isColumnSelectPopup = false;
-    },
-    fillHeadersDraft() {
-      this.draft = deepCopy(this.headers);
-    },
-    setShownColumns() {
-      this.$emit('change', this.draft);
-      this.close();
-    },
-  },
+const draft = ref([]);
+const isColumnSelectPopup = ref(false);
+
+const { t } = useI18n();
+const attrs = useAttrs();
+
+const changeableDraft = computed(() => {
+  return draft.value
+  .filter(header => !props.staticHeaders.includes(props.headers))
+  .sort((a, b) => shownColLabel(a).localeCompare(shownColLabel(b)));
+});
+
+const shownColLabel = ({ text, locale }) => {
+  if (!text && locale) {
+    return typeof locale === 'string' ? t(locale) : t(...locale);
+  }
+  return text;
 };
+
+const openPopup = () => {
+  isColumnSelectPopup.value = true;
+};
+
+const close = () => {
+  isColumnSelectPopup.value = false;
+};
+
+const fillHeadersDraft = () => {
+  draft.value = deepCopy(props.headers);
+};
+
+const setShownColumns = () => {
+  emit('change', draft.value);
+  close();
+};
+
+watch(() => isColumnSelectPopup.value, fillHeadersDraft);
+
+onMounted(()=> fillHeadersDraft()
+);
 </script>
 
 <style lang="scss" scoped>

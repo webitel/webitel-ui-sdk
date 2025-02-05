@@ -31,7 +31,7 @@ export const createTableHeadersStore = (
         : null;
     });
 
-    const updateShownHeaders = () => {};
+    const updateShownHeaders = (value) => headers.value = value;
 
     const updateSort = (column) => {
       const getNextSortOrder = (sort) => {
