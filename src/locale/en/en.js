@@ -25,6 +25,7 @@ export default {
     filter: ({ plural }) => plural(['Filter', 'Filters']),
     total: 'Total',
     ok: 'Ok',
+    object: 'Object',
     save: 'Save',
     saveAs: 'Save as',
     saved: 'Saved',
