@@ -25,6 +25,7 @@ export default {
     filter: 'Фільтр | Фільтри',
     total: 'Всього',
     ok: 'Ок',
+    object: "Об'єкт",
     save: 'Зберегти',
     saveAs: 'Зберегти як',
     saved: 'Збережено',
