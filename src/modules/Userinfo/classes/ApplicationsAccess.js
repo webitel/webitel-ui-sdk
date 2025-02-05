@@ -9,9 +9,7 @@ import {
   SupervisorSections,
   WtApplication,
 } from '../../../enums';
-import {
-  camelToKebab,
-} from '../../../scripts';
+import { camelToKebab, kebabToCamel } from '../../../scripts';
 
 const applicationsAccess = (value = true) => {
   const access = {
@@ -233,24 +231,24 @@ const applicationsAccess = (value = true) => {
     },
   };
 
-  /*
-  * ts style enums -> pre-ts style enums:
-  * admin/cognitiveProfiles -> admin/cognitive-profiles
-  * */
-  const makeCompat = (access) => {
-    const compatAccess = deepCopy(access);
-    Object.values(WtApplication).forEach((app) => {
-      /* access object is divided by apps that wrapping their sections */
-      compatAccess[app] = mapKeys(compatAccess[app], (value, key) => {
-        return camelToKebab(key) /* admin/cognitiveProfiles -> admin/cognitive-profiles */
-        .replace(`${app}/`, ''); /* admin/cognitive-profiles -> cognitive-profiles */
-      });
-    });
+  // /*
+  // * ts style enums -> pre-ts style enums:
+  // * admin/cognitiveProfiles -> admin/cognitive-profiles
+  // * */
+  // const makeCompat = (access) => {
+  //   const compatAccess = deepCopy(access);
+  //   Object.values(WtApplication).forEach((app) => {
+  //     /* access object is divided by apps that wrapping their sections */
+  //     compatAccess[app] = mapKeys(compatAccess[app], (value, key) => {
+  //       return camelToKebab(key) /* admin/cognitiveProfiles -> admin/cognitive-profiles */
+  //       .replace(`${app}/`, ''); /* admin/cognitive-profiles -> cognitive-profiles */
+  //     });
+  //   });
+  //
+  //   return compatAccess;
+  // };
 
-    return compatAccess;
-  };
-
-  return makeCompat(access);
+  return access;
 };
 
 /**
@@ -283,7 +281,24 @@ export default class ApplicationsAccess {
 
   // restore minified schema from API response
   static restore(access) {
-    return deepmerge(applicationsAccess(false), access);
+    /*
+     * pre-ts style enums -> ts style enums:
+     * cognitive-profiles -> admin/cognitiveProfiles
+     * */
+    const makeCompat = (access) => {
+      const compatAccess = deepCopy(access);
+      Object.values(WtApplication).forEach((app) => {
+        /* access object is divided by apps that wrapping their sections */
+        compatAccess[app] = mapKeys(compatAccess[app], (value, key) => {
+          if (key.startsWith('_')) return key;
+          return `${app}/${kebabToCamel(key)}`; /* cognitive-profiles -> admin/cognitiveProfiles */
+        });
+      });
+
+      return compatAccess;
+    };
+
+    return deepmerge(applicationsAccess(false), makeCompat(access));
   }
 
   getAccess() {
