@@ -3,4 +3,3 @@ export const SupervisorSections = {
     Agents: 'agents',
     ActiveCalls: 'activeCalls',
 };
-//# sourceMappingURL=SupervisorSections.js.map

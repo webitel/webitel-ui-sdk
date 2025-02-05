@@ -14,4 +14,3 @@ import WebitelApplications from './WebitelApplications/WebitelApplications.enum.
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 export { AbstractUserStatus, AdminSections, AgentStatus, AuditorSections, ChatGatewayProvider, ComponentSize, CrmSections, CrudAction, IconAction, QueueType, SupervisorSections, TypesExportedSettings, WebitelApplications, WtApplication, WtObject, };
-//# sourceMappingURL=index.js.map

@@ -57,4 +57,3 @@ export const WtObject = {
     Source: 'source',
     CustomLookup: 'customLookup',
 };
-//# sourceMappingURL=WtObject.js.map

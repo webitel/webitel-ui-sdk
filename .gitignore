@@ -4,7 +4,6 @@ node_modules
 /docs/.vitepress/cache
 /docs/.vitepress/dist
 /coverage
-*.map
 
 # local env files
 .env.local

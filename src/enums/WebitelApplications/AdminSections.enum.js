@@ -1,4 +1,5 @@
-import { makeCompatEnum } from '../utils.js';
+import upperCase from 'lodash/upperCase.js';
+
 import { AdminSections } from './AdminSections';
 
 /**
@@ -6,5 +7,9 @@ import { AdminSections } from './AdminSections';
  * default export is for backward compatibility,
  * use ts enum instead (and don't forget to compile it)
  */
-const compatAdminSections = makeCompatEnum(AdminSections);
-export default compatAdminSections;
+export default Object.fromEntries(
+  Object.entries(AdminSections).map(([key, value]) => [
+    upperCase(key).replaceAll(' ', '_'),
+    value,
+  ]),
+);

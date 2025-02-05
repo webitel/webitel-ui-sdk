@@ -21,4 +21,3 @@ export const useWtTable = ({ headers }) => {
         tableHeaders,
     };
 };
-//# sourceMappingURL=useWtTable.js.map

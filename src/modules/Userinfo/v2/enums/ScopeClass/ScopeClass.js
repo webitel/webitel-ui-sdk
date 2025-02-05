@@ -42,4 +42,3 @@ export const ScopeClass = {
     Cases: 'cases',
     CaseComments: 'case_comments',
 };
-//# sourceMappingURL=ScopeClass.js.map

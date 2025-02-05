@@ -9,4 +9,3 @@ export const ComponentSize = {
     XXL: '2xl',
     XXXL: '3xl',
 };
-//# sourceMappingURL=ComponentSize.js.map

@@ -23,4 +23,3 @@ export default {
     },
     generateInstance,
 };
-//# sourceMappingURL=install.js.map

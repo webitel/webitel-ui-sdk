@@ -87,4 +87,3 @@ export const getWtAppByUiSection = (section) => {
   }
   wtlog.error({ module: 'modules/userinfo' })('Unknown section:', section);
 };
-//# sourceMappingURL=utils.js.map
