@@ -369,6 +369,7 @@ export default {
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
         [IconAction.COLUMNS]: 'Додати колонки',
+        [IconAction.VARIABLES]: 'Вибрати колонки зі змінними',
         [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
