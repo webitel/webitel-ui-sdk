@@ -1,3 +1,8 @@
+## [v24.12.90] - 2025-02-05
+### :sparkles: New Features
+- [`c0dc54f`](https://github.com/webitel/webitel-ui-sdk/commit/c0dc54f2cfe8669c5cc94c2c88cdd7039562d065) - add variable action in wt-action bar component[WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.89] - 2025-02-05
 ### :sparkles: New Features
 - [`964d3be`](https://github.com/webitel/webitel-ui-sdk/commit/964d3bea4b23e371f8b1a14021994bab34fd4b0a) - implement locale for object [WTEL-5991](https://webitel.atlassian.net/browse/WTEL-5991) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1003,3 +1008,4 @@
 [v24.12.86]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.85...v24.12.86
 [v24.12.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.87...v24.12.88
 [v24.12.89]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.88...v24.12.89
+[v24.12.90]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.89...v24.12.90
