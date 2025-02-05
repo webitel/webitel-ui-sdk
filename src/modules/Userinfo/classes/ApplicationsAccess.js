@@ -231,23 +231,6 @@ const applicationsAccess = (value = true) => {
     },
   };
 
-  // /*
-  // * ts style enums -> pre-ts style enums:
-  // * admin/cognitiveProfiles -> admin/cognitive-profiles
-  // * */
-  // const makeCompat = (access) => {
-  //   const compatAccess = deepCopy(access);
-  //   Object.values(WtApplication).forEach((app) => {
-  //     /* access object is divided by apps that wrapping their sections */
-  //     compatAccess[app] = mapKeys(compatAccess[app], (value, key) => {
-  //       return camelToKebab(key) /* admin/cognitiveProfiles -> admin/cognitive-profiles */
-  //       .replace(`${app}/`, ''); /* admin/cognitive-profiles -> cognitive-profiles */
-  //     });
-  //   });
-  //
-  //   return compatAccess;
-  // };
-
   return access;
 };
 
