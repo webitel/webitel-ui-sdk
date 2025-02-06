@@ -10,9 +10,15 @@ export const createUserinfoStore = () => {
     namespace,
   });
 
-  return defineStore(namespace, () => {
+  const store = defineStore(namespace, () => {
     const accessStore = useAccessStore();
-    const { initialize: initializeAccessStore } = accessStore;
+    const {
+      hasReadAccess,
+      hasCreateAccess,
+      hasUpdateAccess,
+      hasDeleteAccess,
+      initialize: initializeAccessStore,
+    } = accessStore;
 
     const userId = ref();
 
@@ -20,7 +26,7 @@ export const createUserinfoStore = () => {
       const { scope, permissions, ...userinfo } = await getSession();
       const access = await getUiVisibilityAccess();
 
-      userId.value = userinfo.userId;
+       userId.value = userinfo.userId;
 
       initializeAccessStore({
         scope,
@@ -32,6 +38,16 @@ export const createUserinfoStore = () => {
     return {
       userId,
       initialize,
+
+      hasReadAccess,
+      hasCreateAccess,
+      hasUpdateAccess,
+      hasDeleteAccess,
     };
   });
+
+  // @ts-ignore
+  window._userinfoStore = store;
+
+  return store;
 };

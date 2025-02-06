@@ -118,7 +118,7 @@ export const createUserAccessStore = ({
       sectionVisibilityAccess = makeSectionVisibilityMap(rawVisibilityAccess);
 
       if (!useManualRouteGuards) {
-        setupRouteGuards();
+        // setupRouteGuards();
       }
     };
 
