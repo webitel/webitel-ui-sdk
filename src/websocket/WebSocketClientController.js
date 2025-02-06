@@ -100,7 +100,7 @@ class WebSocketClientController {
     window.cli = cli;
     return cli;
   };
-}
+};
 
 const webSocketClientController = new WebSocketClientController();
 
