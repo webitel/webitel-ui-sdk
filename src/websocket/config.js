@@ -3,9 +3,7 @@ export const getConfig = () => {
   try {
     const CONFIG = JSON.parse(localStorage.getItem('CONFIG'));
     cliConfig = CONFIG.CLI || {};
-  } catch (error) {
-    console.error('Error retrieving CLI config from localStorage', error);
-  }
+  } catch {}
   return cliConfig;
 };
 
