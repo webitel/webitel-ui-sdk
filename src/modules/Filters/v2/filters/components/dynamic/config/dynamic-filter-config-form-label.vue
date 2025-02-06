@@ -22,8 +22,8 @@ interface Props {
 const props = defineProps<Props>();
 
 interface Emits {
-  (e: 'update:value', val: string): void;
-  (e: 'update:invalid', val: boolean): void;
+  'update:value': [string];
+  'update:invalid': [boolean];
 }
 const emit = defineEmits<Emits>();
 
