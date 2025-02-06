@@ -96,7 +96,7 @@ export const createUserAccessStore = ({
       router.beforeEach((to) => {
         /* find last because "matched" has top=>bottom routes order */
         const uiSection = to.matched
-          .reverse()
+          .toReversed()
           .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection;
 
         if (uiSection && !hasSectionVisibility(uiSection)) {
