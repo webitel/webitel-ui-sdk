@@ -146,9 +146,6 @@
 </template>
 
 <script>
-import { toRefs } from 'vue';
-
-import { useValidation } from '../../mixins/validationMixin/useValidation.js';
 import isEmpty from '../../scripts/isEmpty.js';
 import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
 import multiselectMixin from './mixins/multiselectMixin.js';
@@ -195,17 +192,7 @@ export default {
       default: false,
       description: 'See wt-tags-input "manualTagging" prop.',
     },
-
-    v: {
-      type: Object,
-    },
-
-    customValidators: {
-      type: Array,
-      default: () => [],
-    },
   },
-
   emits: [
     'reset',
     'search-change',
@@ -214,26 +201,9 @@ export default {
     'closed',
     'custom-value', // fires when allowCustomValues and new customValue is added
   ],
-
-  setup(props) {
-    const { v, customValidators } = toRefs(props);
-
-    const { isValidation, invalid, validationText } = useValidation({
-      v,
-      customValidators,
-    });
-
-    return {
-      isValidation,
-      invalid,
-      validationText,
-    };
-  },
-
   data: () => ({
     isOpened: false,
   }),
-
   computed: {
     // for taggableMixin
     taggable() {
