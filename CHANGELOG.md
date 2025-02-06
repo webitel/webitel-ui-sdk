@@ -1,3 +1,8 @@
+## [v24.12.92] - 2025-02-06
+### :recycle: Refactors
+- [`ca5e723`](https://github.com/webitel/webitel-ui-sdk/commit/ca5e7232329a0921a8435ed4c872257da4569f49) - version incremented [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.91] - 2025-02-06
 ### :sparkles: New Features
 - [`ed9cf00`](https://github.com/webitel/webitel-ui-sdk/commit/ed9cf00b84fe0909267d96d9fe0b1dc212bb2881) - websocket transferred from workspace [WTEL-5497](https://webitel.atlassian.net/browse/WTEL-5497) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -1020,3 +1025,4 @@
 [v24.12.89]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.88...v24.12.89
 [v24.12.90]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.89...v24.12.90
 [v24.12.91]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.90...v24.12.91
+[v24.12.92]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.91...v24.12.92
