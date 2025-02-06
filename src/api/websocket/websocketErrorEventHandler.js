@@ -1,5 +1,5 @@
-import i18n from '../locale/i18n.js';
-import eventBus from '../scripts/eventBus.js';
+import i18n from '../../locale/i18n.js';
+import eventBus from '../../scripts/eventBus.js';
 
 const websocketErrorEventHandler = (error) => {
   const errLocale = `error.websocket.${error.id?.replaceAll('.', '_')}`;
