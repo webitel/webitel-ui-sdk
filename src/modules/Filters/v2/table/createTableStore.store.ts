@@ -32,7 +32,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
     const headersStore = useHeadersStore();
     const { headers, shownHeaders, fields, sort } = storeToRefs(headersStore);
-    const { updateSort, updateShownHeaders } = headersStore;
+    const { updateSort, updateShownHeaders, setupPersistence: setupHeadersPersistence } = headersStore;
 
     const filtersStore = useFiltersStore();
     const { filtersManager, isRestoring: isFiltersRestoring } =
@@ -116,6 +116,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       await Promise.allSettled([
         setupPaginationPersistence(),
         setupFiltersPersistence(),
+        setupHeadersPersistence(),
       ]);
 
       let loadingAfterFiltersChange = false;
