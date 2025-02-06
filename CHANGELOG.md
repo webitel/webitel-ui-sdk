@@ -1,3 +1,13 @@
+## [v24.12.91] - 2025-02-06
+### :sparkles: New Features
+- [`ed9cf00`](https://github.com/webitel/webitel-ui-sdk/commit/ed9cf00b84fe0909267d96d9fe0b1dc212bb2881) - websocket transferred from workspace [WTEL-5497](https://webitel.atlassian.net/browse/WTEL-5497) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`fbce2fb`](https://github.com/webitel/webitel-ui-sdk/commit/fbce2fb7f85255deabe2a02774d2f07ba10ac193) - version incremented [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`e5e9a14`](https://github.com/webitel/webitel-ui-sdk/commit/e5e9a1455fc4e48c905fda0b5bd8d4c993ba4b31) - merge with master [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`5498fe6`](https://github.com/webitel/webitel-ui-sdk/commit/5498fe6248dd9c7cf19531e4e3e7ada00740e001) - config for websocket refactored [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.90] - 2025-02-05
 ### :sparkles: New Features
 - [`c0dc54f`](https://github.com/webitel/webitel-ui-sdk/commit/c0dc54f2cfe8669c5cc94c2c88cdd7039562d065) - add variable action in wt-action bar component[WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1009,3 +1019,4 @@
 [v24.12.88]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.87...v24.12.88
 [v24.12.89]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.88...v24.12.89
 [v24.12.90]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.89...v24.12.90
+[v24.12.91]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.90...v24.12.91
