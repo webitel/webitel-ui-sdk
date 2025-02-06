@@ -13,6 +13,7 @@ const IconAction = Object.freeze({
   COLLAPSE: 'collapse',
   EXPAND: 'expand',
   CLOSE: 'close',
+  VARIABLES: 'variables',
 });
 
 export default IconAction;
