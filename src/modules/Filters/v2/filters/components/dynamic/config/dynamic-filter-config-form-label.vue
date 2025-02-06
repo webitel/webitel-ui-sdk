@@ -8,13 +8,13 @@
 
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
-import { maxLength, required } from '@vuelidate/validators';
+import { maxLength } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
 
-const MAX_STRING_LENGTH = 5;
+const MAX_STRING_LENGTH = 50;
 
 interface Props {
   value: string;
@@ -43,12 +43,12 @@ const v$ = useVuelidate(
     localValue: {
       // maybe make maxLength value by props
       maxLength: maxLength(MAX_STRING_LENGTH),
-      required,
     },
   })),
   { localValue },
   { $autoDirty: true },
 );
+v$.value.$touch();
 
 watch(
   () => v$.value.$invalid,

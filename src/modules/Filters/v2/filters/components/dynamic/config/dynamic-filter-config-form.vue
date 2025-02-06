@@ -20,7 +20,7 @@
       }"
     />
 
-    <dynamic-filter-config-form-input
+    <dynamic-filter-config-form-label
       :value="filterLabel"
       @update:value="onLabelValueUpdate"
       @update:invalid="(v) => (invalid = v)"
@@ -58,7 +58,7 @@ import type {
   FilterName,
   IFilter,
 } from '../../../types/Filter';
-import DynamicFilterConfigFormInput from './dynamic-filter-config-form-input.vue';
+import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
 
 interface FilterNameSelectRepresentation {
   name: string;
@@ -95,10 +95,10 @@ const editMode = !!props.filter;
 
 const invalid = ref(false);
 
-function onLabelValueUpdate(val: string) {
+const onLabelValueUpdate = (val: string) => {
   filterLabel.value = val;
   touchedLabel.value = true;
-}
+};
 
 const submit = () => {
   emit('submit', {
