@@ -1,9 +1,9 @@
 import { markRaw, reactive, shallowReactive } from 'vue';
 import { Client } from 'webitel-sdk';
 
-import eventBus from '../scripts/eventBus.js';
-import { endpoint, getConfig } from './config';
-import websocketErrorEventHandler from './websocketErrorEventHandler';
+import eventBus from '../../scripts/eventBus.js';
+import { endpoint, getConfig } from './config.js';
+import websocketErrorEventHandler from './websocketErrorEventHandler.js';
 
 const WebSocketClientEvent = Object.freeze({
   AFTER_AUTH: 'afterAuth',
