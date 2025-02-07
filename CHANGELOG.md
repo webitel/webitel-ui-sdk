@@ -1,3 +1,32 @@
+## [v24.12.95] - 2025-02-07
+### :sparkles: New Features
+- [`7f82c8e`](https://github.com/webitel/webitel-ui-sdk/commit/7f82c8e043165fd824b201ea1b9972288d5f1076) - added validation for wt-select [WTEL-5922](https://webitel.atlassian.net/browse/WTEL-5922) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`a62b79e`](https://github.com/webitel/webitel-ui-sdk/commit/a62b79ef55178998d266310b6578ef743a9b9584) - crud action enum [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`d603d79`](https://github.com/webitel/webitel-ui-sdk/commit/d603d79d79bb474406066199b514919f7d8c71d9) - access control application access [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`a1aa50c`](https://github.com/webitel/webitel-ui-sdk/commit/a1aa50cfe8a551f65b100ee0085d80d3933b56a0) - cc_skill scope class addded [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`b67717c`](https://github.com/webitel/webitel-ui-sdk/commit/b67717c88778ef7be31bb8512103f566a9ed6cd3) - types and build fixes [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`3ccf93b`](https://github.com/webitel/webitel-ui-sdk/commit/3ccf93ba8a5d10b8facf917d9fd101641f827cee) - old userinfo module api usage [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`516a1bb`](https://github.com/webitel/webitel-ui-sdk/commit/516a1bb91cf9d714c6e184803ab2955b38671275) - enum imports [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`cfbebd9`](https://github.com/webitel/webitel-ui-sdk/commit/cfbebd9c5487f59a4f2907e1c8b65d98bfbd8525) - tsc issues preventing build fixed [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`f874024`](https://github.com/webitel/webitel-ui-sdk/commit/f874024da0fe3b90fc0531f2ae0098a97df4949b) - user access v2 for directory/users [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5922) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`ef4147a`](https://github.com/webitel/webitel-ui-sdk/commit/ef4147a8ab028d396c927332f04079c2ae72bd19) - access control composable testing and refactoring on admin/users [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`66f2707`](https://github.com/webitel/webitel-ui-sdk/commit/66f270782d0c419ba5968c1322e27fa14f26c190) - enums compatibility in progress [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`175c24f`](https://github.com/webitel/webitel-ui-sdk/commit/175c24f9a1c1302f913d1db27f63bce80ae0cca7) - compiled userinfo ts files [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`9328dc0`](https://github.com/webitel/webitel-ui-sdk/commit/9328dc0a6cc607ad7882fa58ca736f96b47169dc) - upd user access mappings file [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`0f3a0a9`](https://github.com/webitel/webitel-ui-sdk/commit/0f3a0a92325305ca5cc7b0a84866bb94d007160c) - access control refactors and fixes [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`7a9ff09`](https://github.com/webitel/webitel-ui-sdk/commit/7a9ff09042a55824c7afb93623f89802244c4f24) - access control refactors and fixes [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`a069a12`](https://github.com/webitel/webitel-ui-sdk/commit/a069a1287b09f97826ee2a6d50374dcd8bc93af1) - access control refactors and fixes [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`6877d26`](https://github.com/webitel/webitel-ui-sdk/commit/6877d26988f56a644e143916ec7487b2d75498da) - access control refactors and fixes [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`2d5225e`](https://github.com/webitel/webitel-ui-sdk/commit/2d5225e77607dc0b46927f769c6be2cc3fbb9652) - userinfo v2 module types, fixes, refactors [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`16ab095`](https://github.com/webitel/webitel-ui-sdk/commit/16ab0958704ea7663ee9c392185b0f8cf1be4b20) - webitel applications enums rewritten and reused as ts files [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`858c459`](https://github.com/webitel/webitel-ui-sdk/commit/858c4593a9bd430dd98f62fa8e768499d15a3418) - ts wt applications enums, im progress [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`e271f67`](https://github.com/webitel/webitel-ui-sdk/commit/e271f677bc41730522441f5bfbac9702e9e22d21) - permissions prototype *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.94] - 2025-02-06
 ### :recycle: Refactors
 - [`f57a4df`](https://github.com/webitel/webitel-ui-sdk/commit/f57a4df5599487ed0895d4386fcfc3160659bd7b) - websocket transferred to api folder [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -1038,3 +1067,4 @@
 [v24.12.92]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.91...v24.12.92
 [v24.12.93]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.92...v24.12.93
 [v24.12.94]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.93...v24.12.94
+[v24.12.95]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.94...v24.12.95
