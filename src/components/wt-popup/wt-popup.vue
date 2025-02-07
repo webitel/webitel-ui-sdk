@@ -32,7 +32,7 @@
           <wt-icon-btn
             class="wt-popup__close-btn"
             icon="close"
-            @click="closePopup"
+            @click="emit('close')"
           />
         </header>
         <section

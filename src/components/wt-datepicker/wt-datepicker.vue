@@ -42,7 +42,7 @@
           v-if="clearable && value"
           :color="disabled ? 'disabled' : 'default'"
           icon="close"
-          @click="emit('input', null);"
+          @click.stop="clearValue"
         />
       </template>
       <template #arrow-left>
@@ -147,6 +147,16 @@ const isDateTime = props.mode === 'datetime';
 const requiredLabel = computed(() => {
   return props.required ? `${props.label}*` : props.label;
 });
+
+const clearValue = () => {
+  emit('input', null);
+
+  if (isOpened.value) {
+    datepicker?.value.closeMenu();
+  }
+
+  isOpened.value = false;
+};
 </script>
 
 <style lang="scss">

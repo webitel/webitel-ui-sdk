@@ -11,4 +11,6 @@ export const WtIconActionIconMappings = Object.freeze({
   [IconAction.COLLAPSE]: 'collapse',
   [IconAction.FILTERS]: 'filter',
   [IconAction.COLUMNS]: 'column-select',
+  [IconAction.VARIABLES]: 'variable-select',
+  [IconAction.CLOSE]: 'close--filled',
 });

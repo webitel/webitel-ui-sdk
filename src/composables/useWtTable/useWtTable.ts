@@ -18,7 +18,7 @@ export const useWtTable = ({ headers }) => {
             text:
               typeof header.locale === 'string'
                 ? t(header.locale)
-                : t(header.locale[0], header.locale[1]),
+                : t(...header.locale),
           };
         }
         return header;
