@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 
-import WtIconAction from '../../../../../../components/wt-icon-action/wt-icon-action.vue';
+import WtIconAction from '../../../../../components/wt-icon-action/wt-icon-action.vue';
 import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 
 interface Props {

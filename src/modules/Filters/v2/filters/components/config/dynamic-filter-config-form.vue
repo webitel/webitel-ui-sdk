@@ -47,14 +47,14 @@ import deepcopy from 'deep-copy';
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
-import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
-import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
+import WtButton from '../../../../../../components/wt-button/wt-button.vue';
+import WtInput from '../../../../../../components/wt-input/wt-input.vue';
+import WtSelect from '../../../../../../components/wt-select/wt-select.vue';
 import type {
   FilterInitParams,
   FilterName,
   IFilter,
-} from '../../../types/Filter.types.ts';
+} from '../../types/Filter.types.ts';
 
 interface FilterNameSelectRepresentation {
   name: string;
