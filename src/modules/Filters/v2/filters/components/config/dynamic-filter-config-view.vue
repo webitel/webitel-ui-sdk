@@ -23,7 +23,7 @@
  * and their styling
  */
 
-import WtTooltip from '../../../../../../../components/wt-tooltip/wt-tooltip.vue';
+import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
 </script>
 
 <style lang="scss" scoped></style>
