@@ -1,3 +1,13 @@
+## [v24.12.94] - 2025-02-06
+### :recycle: Refactors
+- [`f57a4df`](https://github.com/webitel/webitel-ui-sdk/commit/f57a4df5599487ed0895d4386fcfc3160659bd7b) - websocket transferred to api folder [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v24.12.93] - 2025-02-06
+### :recycle: Refactors
+- [`f4b1d5d`](https://github.com/webitel/webitel-ui-sdk/commit/f4b1d5dc9a1f883146e200d91381cd6ad3160e8a) - package.json fixing [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v24.12.92] - 2025-02-06
 ### :recycle: Refactors
 - [`ca5e723`](https://github.com/webitel/webitel-ui-sdk/commit/ca5e7232329a0921a8435ed4c872257da4569f49) - version incremented [WTEL-5297](https://webitel.atlassian.net/browse/WTEL-5297) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -1026,3 +1036,5 @@
 [v24.12.90]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.89...v24.12.90
 [v24.12.91]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.90...v24.12.91
 [v24.12.92]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.91...v24.12.92
+[v24.12.93]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.92...v24.12.93
+[v24.12.94]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.93...v24.12.94
