@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { FilterName, FilterValue } from '../../types/Filter.types.ts';
+import type { FilterName, FilterValue } from '../../types/Filter';
 
 interface Props {
   name: FilterName;
