@@ -18,6 +18,7 @@ export const createUserinfoStore = () => {
       hasUpdateAccess,
       hasDeleteAccess,
       initialize: initializeAccessStore,
+      routeAccessGuard,
     } = accessStore;
 
     const userId = ref();
@@ -26,7 +27,7 @@ export const createUserinfoStore = () => {
       const { scope, permissions, ...userinfo } = await getSession();
       const access = await getUiVisibilityAccess();
 
-       userId.value = userinfo.userId;
+      userId.value = userinfo.userId;
 
       initializeAccessStore({
         scope,
@@ -43,6 +44,8 @@ export const createUserinfoStore = () => {
       hasCreateAccess,
       hasUpdateAccess,
       hasDeleteAccess,
+
+      routeAccessGuard,
     };
   });
 

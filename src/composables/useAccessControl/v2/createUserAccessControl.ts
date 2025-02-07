@@ -5,17 +5,17 @@ import { _wtUiLog } from '../../../scripts/logger';
 import type {
   CreateUserAccessControlComposableParams,
   UseAccessControlReturn,
-  UseUserAccessControlComposableOptions,
 } from './types/CreateUserAccessControl';
 
 export const createUserAccessControlComposable = (
   useUserinfoStore: CreateUserAccessControlComposableParams,
 ) => {
   const useUserAccessControl = (
-    options: UseUserAccessControlComposableOptions = {},
+    resource?: string,
+    // options: UseUserAccessControlComposableOptions = {},
   ): UseAccessControlReturn => {
     const route = useRoute();
-    const object = options?.resource || route?.meta?.WtObject;
+    const object = resource || route?.meta?.WtObject;
 
     const userinfoStore = useUserinfoStore();
 
@@ -24,7 +24,7 @@ export const createUserAccessControlComposable = (
         module: 'access control',
         entity: 'useUserAccessControl composable',
       })(
-        'No WtObject found in route meta or passed as { "resource" } param, cannot check access control',
+        'No WtObject found in route meta or passed as first param, cannot check access control',
       );
     }
 

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useRouter } from 'vue-router';
+import { NavigationGuard } from 'vue-router';
 
 import {
   CrudAction,
@@ -8,7 +8,6 @@ import {
 } from '../../../../enums';
 import type { SpecialGlobalAction } from '../enums';
 import {
-  castUiSectionToWtObject,
   getWtAppByUiSection,
   makeAppVisibilityMap,
   makeGlobalAccessMap,
@@ -28,11 +27,8 @@ import type {
 
 export const createUserAccessStore = ({
   namespace = 'userinfo',
-  useManualRouteGuards = false,
 }: CreateUserAccessStoreConfig = {}) => {
   return defineStore(`${namespace}/access`, (): UserAccessStore => {
-    const router = useRouter();
-
     let globalAccess: GlobalActionAccessMap = new Map();
 
     let scopeAccess: ScopeAccessMap = new Map();
@@ -75,9 +71,9 @@ export const createUserAccessStore = ({
       return hasReadAccess() || appVisibilityAccess.get(app);
     };
 
-    const hasSectionVisibility = (section: UiSection) => {
+    const hasSectionVisibility = (section: UiSection, object: WtObject) => {
       const appOfSection = getWtAppByUiSection(section);
-      const objectOfSection = castUiSectionToWtObject(section);
+      const objectOfSection = object; /*castUiSectionToWtObject(section)*/
       const hasSectionVisibilityAccess = (section: UiSection) => {
         return sectionVisibilityAccess.get(section);
       };
@@ -92,19 +88,21 @@ export const createUserAccessStore = ({
       return allowAppVisibility && allowObjectAccess && allowSectionVisibility;
     };
 
-    const setupRouteGuards = () => {
-      router.beforeEach((to) => {
-        /* find last because "matched" has top=>bottom routes order */
-        const uiSection = to.matched
-          .toReversed()
-          .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection;
+    const routeAccessGuard: NavigationGuard = (to) => {
+      /* find last because "matched" has top=>bottom routes order */
+      const uiSection = to.matched
+        .toReversed()
+        .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection;
+      /* find last because "matched" has top=>bottom routes order */
+      const wtObject = to.matched
+        .toReversed()
+        .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject;
 
-        if (uiSection && !hasSectionVisibility(uiSection)) {
-          return false;
-        }
+      if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
+        return false;
+      }
 
-        return true;
-      });
+      return true;
     };
 
     const initialize = ({
@@ -116,23 +114,17 @@ export const createUserAccessStore = ({
       scopeAccess = makeScopeAccessMap(rawScopeAccess);
       appVisibilityAccess = makeAppVisibilityMap(rawVisibilityAccess);
       sectionVisibilityAccess = makeSectionVisibilityMap(rawVisibilityAccess);
-
-      if (!useManualRouteGuards) {
-        // setupRouteGuards();
-      }
     };
 
     return {
       initialize,
-      setupRouteGuards,
 
       hasReadAccess,
       hasCreateAccess,
       hasUpdateAccess,
       hasDeleteAccess,
 
-      hasApplicationVisibility,
-      hasSectionVisibility,
+      routeAccessGuard,
     };
   });
 };

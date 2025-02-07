@@ -1,3 +1,5 @@
+import { NavigationGuard } from 'vue-router';
+
 import type {
   AdminSections,
   AuditorSections,
@@ -72,11 +74,6 @@ export interface CreateUserAccessStoreConfig {
    * @default 'userinfo'
    * */
   namespace?: string;
-  /**
-   * By default, route guards are generated automatically
-   * __depending on__ {@link WtObject} enum __route__ `meta` __data__.
-   */
-  useManualRouteGuards?: boolean;
 }
 
 /**
@@ -108,13 +105,14 @@ export type SectionVisibilityMap = Map<UiSection, boolean>;
 
 export interface UserAccessStore {
   initialize: (CreateUserAccessStoreRawAccess) => void;
-  setupRouteGuards: () => void;
 
   hasReadAccess: (object?: WtObject) => boolean;
   hasCreateAccess: (object?: WtObject) => boolean;
   hasUpdateAccess: (object?: WtObject) => boolean;
   hasDeleteAccess: (object?: WtObject) => boolean;
 
-  hasApplicationVisibility: (app: WtApplication) => boolean;
-  hasSectionVisibility: (section: UiSection) => boolean;
+  routeAccessGuard: NavigationGuard;
+
+  // hasApplicationVisibility: (app: WtApplication) => boolean;
+  // hasSectionVisibility: (section: UiSection) => boolean;
 }
