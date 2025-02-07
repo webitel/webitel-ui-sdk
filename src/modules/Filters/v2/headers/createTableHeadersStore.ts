@@ -1,5 +1,7 @@
-import { computed, ref } from "vue";
 import { defineStore } from "pinia";
+import { computed, ref } from "vue";
+
+import {WtTableHeader} from "../../../../components/wt-table/types/WtTable";
 import { sortToQueryAdapter } from "../../../../scripts";
 import { SortSymbols } from "../../../../scripts/sortQueryAdapters";
 import { usePersistedStorage } from "../persist/usePersistedStorage.ts";
@@ -36,38 +38,19 @@ export const createTableHeadersStore = (
 			headers.value = rawHeaders;
 		};
 
-		const setupPersistence = async () => {
-			const { restore: restoreHeaders } = usePersistedStorage({
-				name: "headers",
-				value: headers,
-			});
-
-			const { restore: restoreShownHeaders } = usePersistedStorage({
-				name: "shownHeaders",
-				value: shownHeaders,
-			});
-
-			const { restore: restoreFields } = usePersistedStorage({
-				name: "fields",
-				value: fields,
-			});
-
-			const { restore: restoreSort } = usePersistedStorage({
-				name: "sort",
-				value: sort,
-			});
-
-			return Promise.allSettled([
-				restoreHeaders(),
-				restoreShownHeaders(),
-				restoreFields(),
-				restoreSort(),
-			]);
-		};
-
 		const updateShownHeaders = (value) => {
 			headers.value = value;
 		};
+
+        const updateFields = (fields: string[]) => {
+          const newHeaders = headers.value.map((header: WtTableHeader) => {
+            return {
+              ...header,
+              show: fields.includes(header.field),
+            };
+          });
+          updateShownHeaders(newHeaders);
+        };
 
 		const updateSort = (column) => {
 			const getNextSortOrder = (sort) => {
@@ -111,6 +94,33 @@ export const createTableHeadersStore = (
 
 			headers.value = newHeaders;
 		};
+
+      const setupPersistence = async () => {
+        const { restore: restoreFields } = usePersistedStorage({
+          name: "fields",
+          value: fields,
+          onStore: (save, { name }) => {
+            const value = fields.value.join(',');
+            return save({ name, value })
+          },
+          onRestore: async (restore, name) => {
+            const value = await restore(name) as string;
+            if (value) {
+              return updateFields(value.split(','));
+            }
+          }
+        });
+
+        const { restore: restoreSort } = usePersistedStorage({
+          name: "sort",
+          value: sort,
+        });
+
+        return Promise.allSettled([
+          restoreFields(),
+          restoreSort(),
+        ]);
+      };
 
 		return {
 			headers,

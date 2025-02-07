@@ -122,7 +122,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       let loadingAfterFiltersChange = false;
 
       watch(
-        [() => filtersManager.value.getAllValues(), sort, size],
+        [() => filtersManager.value.getAllValues(), sort, fields, size],
         async () => {
           loadingAfterFiltersChange = true;
           updatePage(1);
