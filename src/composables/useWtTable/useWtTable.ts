@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { WtTableHeader } from '../../components/wt-table/types/WtTable.type.ts';
+import type { WtTableHeader } from '../../components/wt-table/types/WtTable.d.ts';
 
 export const useWtTable = ({ headers }) => {
   const { t } = useI18n();
@@ -18,7 +18,7 @@ export const useWtTable = ({ headers }) => {
             text:
               typeof header.locale === 'string'
                 ? t(header.locale)
-                : t(header.locale[0]),
+                : t(...header.locale),
           };
         }
         return header;

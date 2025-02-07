@@ -25,6 +25,7 @@ export default {
     filter: ({ plural }) => plural(['Filter', 'Filters']),
     total: 'Total',
     ok: 'Ok',
+    object: 'Object',
     save: 'Save',
     saveAs: 'Save as',
     saved: 'Saved',
@@ -36,6 +37,8 @@ export default {
     import: 'Import',
     export: 'Export',
     true: 'True',
+    title: 'Title',
+    position: 'Position',
     delete: 'Delete',
     search: 'Search',
     open: 'Open',
@@ -80,6 +83,7 @@ export default {
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
+    apply: 'Apply',
     language: 'Language',
     voice: 'Voice',
     format: 'Format',
@@ -90,7 +94,7 @@ export default {
     login: 'Login',
     host: 'Host',
     time: 'Time',
-    channel: 'Channel',
+    channel: 'Channel | Channels',
     file: 'File',
     logout: 'Logout',
     priority: 'Priority | Priorities',
@@ -267,6 +271,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
         [AdminSections.QUEUES]: 'Queues',
         [AdminSections.STORAGE]: 'Storage',
+        [AdminSections.STORAGE_POLICIES]: 'Storage policies',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
         [AdminSections.EMAIL_PROFILES]: 'Email profiles',
         [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
@@ -291,6 +296,7 @@ export default {
     macValidator: 'Should look like MAC',
     minValue: 'Value should be not less than',
     maxValue: 'Value should be not much than',
+    maxLength: 'The length should not be greater than',
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
     minLength: 'Quantity of characters should not be less than',
@@ -301,6 +307,8 @@ export default {
     domainValidator: 'Incorrect domain',
     decimalValidator:
       'Decimal precision should be no more than { count } places',
+    latinWithNumber:
+      'The code must contain only letters (A-Z, a-z) and numbers (0-9)',
     integer: 'The field should contain only whole numbers',
   },
   webitelUI: {
@@ -365,9 +373,11 @@ export default {
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Select columns',
+        [IconAction.VARIABLES]: 'Select variables columns',
         [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
       },
     },
     errorPages: {

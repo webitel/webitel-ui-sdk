@@ -5,7 +5,7 @@ import type {
   FilterName,
   FilterValue,
   IFilter,
-} from '../types/Filter.types.ts';
+} from '../types/Filter';
 
 export class Filter implements IFilter {
   readonly name: FilterName;

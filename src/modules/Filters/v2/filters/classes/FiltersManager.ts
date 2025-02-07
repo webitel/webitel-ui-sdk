@@ -13,12 +13,9 @@ import type {
   FilterName,
   FilterValue,
   IFilter,
-} from '../types/Filter.types.ts';
-import type {
-  FiltersManagerConfig,
-  IFiltersManager,
-} from '../types/FiltersManager.types.ts';
-import { Filter } from './Filter.class.ts';
+} from '../types/Filter';
+import { FiltersManagerConfig, IFiltersManager } from '../types/FiltersManager';
+import { Filter } from './Filter.ts';
 
 class FiltersManager implements IFiltersManager {
   filters = new Map<FilterName, IFilter>();
