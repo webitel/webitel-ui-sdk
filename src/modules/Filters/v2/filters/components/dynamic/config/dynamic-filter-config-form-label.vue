@@ -1,8 +1,9 @@
 <template>
   <wt-input
-    v-model="localValue"
+    :value="model"
     :label="t('webitelUI.filters.filterLabel')"
     :v="v$"
+    @input="model = $event"
   />
 </template>
 
@@ -16,36 +17,23 @@ import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
 
 const MAX_STRING_LENGTH = 50;
 
-interface Props {
-  value: string;
-}
-const props = defineProps<Props>();
+const model = defineModel<string>();
 
 interface Emits {
-  'update:value': [string];
   'update:invalid': [boolean];
 }
 const emit = defineEmits<Emits>();
 
 const { t } = useI18n();
 
-const localValue = computed({
-  get() {
-    return props.value;
-  },
-  set(val: string) {
-    emit('update:value', val);
-  },
-});
-
 const v$ = useVuelidate(
   computed(() => ({
-    localValue: {
+    model: {
       // maybe make maxLength value by props
       maxLength: maxLength(MAX_STRING_LENGTH),
     },
   })),
-  { localValue },
+  { model },
   { $autoDirty: true },
 );
 v$.value.$touch();
