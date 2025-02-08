@@ -99,7 +99,8 @@ export const createUserAccessStore = ({
         .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject;
 
       if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
-        return false;
+        // return false;
+        return { path: '/access-denied' };
       }
 
       return true;
