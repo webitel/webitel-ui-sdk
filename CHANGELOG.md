@@ -1,3 +1,9 @@
+## [v24.12.96] - 2025-02-08
+### :bug: Bug Fixes
+- [`3fd9d1e`](https://github.com/webitel/webitel-ui-sdk/commit/3fd9d1ea871f02265cbabe149b0c5cddd8f8962b) - access control v2 module redirct to /access-denied page on navigation guard restriction [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`975473b`](https://github.com/webitel/webitel-ui-sdk/commit/975473b69433b8d2790a92ae4fdf17ee2123012e) - accessStore.spec.ts tests [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.95] - 2025-02-07
 ### :sparkles: New Features
 - [`7f82c8e`](https://github.com/webitel/webitel-ui-sdk/commit/7f82c8e043165fd824b201ea1b9972288d5f1076) - added validation for wt-select [WTEL-5922](https://webitel.atlassian.net/browse/WTEL-5922) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -1068,3 +1074,4 @@
 [v24.12.93]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.92...v24.12.93
 [v24.12.94]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.93...v24.12.94
 [v24.12.95]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.94...v24.12.95
+[v24.12.96]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.95...v24.12.96
