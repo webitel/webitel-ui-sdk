@@ -1,6 +1,5 @@
 <template>
   <wt-select
-    v-bind="attrs"
     :clearable="false"
     :options="DirectionOptions"
     :value="model"
@@ -13,14 +12,39 @@
 </template>
 
 <script lang="ts" setup>
-import { useAttrs } from 'vue';
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import DirectionOptions from '../../../enums/DirectionOptions.enum.js';
+import { DirectionOptions } from '../../enums/direction-options';
 
 const model = defineModel<string>();
 const { t } = useI18n();
-const attrs = useAttrs();
+
+const v$ = useVuelidate(
+  computed(() => ({
+    model: {
+      required,
+    },
+  })),
+  { model },
+  { $autoDirty: true },
+);
+
+v$.value.$touch();
+
+const emit = defineEmits<{
+  'update:invalid': [boolean];
+}>();
+
+watch(
+  () => v$.value.$invalid,
+  (invalid) => {
+    emit('update:invalid', invalid);
+  },
+  { immediate: true },
+);
 </script>
 
 <style lang="scss" scoped></style>

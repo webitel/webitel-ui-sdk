@@ -10,7 +10,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { computed, watch } from 'vue';
 
-import variableSearchValidator from '../../../../../../../validators/variableSearchValidator/variableSearchValidator';
+import variableSearchValidator from '../../../../../../../validators/variableSearchValidator/variableSearchValidator.js';
 
 type ModelValue = string;
 
