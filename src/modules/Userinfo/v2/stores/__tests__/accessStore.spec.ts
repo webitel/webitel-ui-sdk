@@ -3,7 +3,7 @@ import { beforeEach, describe, expect,it } from 'vitest';
 import {createApp, h} from "vue";
 import {createRouter, createWebHistory, type Router} from "vue-router";
 
-import {AdminSections, WtApplication} from "../../../../../enums";
+import {AdminSections, WtApplication, WtObject} from "../../../../../enums";
 import {CrudGlobalAction} from "../../enums";
 import { createUserAccessStore } from '../accessStore';
 
@@ -25,6 +25,7 @@ describe('AccessStore', () => {
           name: 'users',
           component: () => h('div', 'users'),
           meta: {
+            WtObject: WtObject.User,
             UiSection: AdminSections.Users,
           },
         },
@@ -40,7 +41,8 @@ describe('AccessStore', () => {
   });
 
   it('restricts route if no access', async () => {
-    const { initialize } = useAccessStore();
+    const { initialize, routeAccessGuard } = useAccessStore();
+    router.beforeEach(routeAccessGuard);
 
     initialize({
       permissions: [],
@@ -56,7 +58,8 @@ describe('AccessStore', () => {
   });
 
   it('allows route access if has global permission', async () => {
-    const { initialize } = useAccessStore();
+    const { initialize, routeAccessGuard } = useAccessStore();
+    router.beforeEach(routeAccessGuard);
 
     initialize({
       permissions: [{ id: CrudGlobalAction.Read }],
@@ -69,7 +72,8 @@ describe('AccessStore', () => {
   });
 
   it('allows route access if has scope permission, app visibility and section visibility', async () => {
-    const { initialize } = useAccessStore();
+    const { initialize, routeAccessGuard } = useAccessStore();
+    router.beforeEach(routeAccessGuard);
 
     initialize({
       permissions: [],
@@ -89,7 +93,8 @@ describe('AccessStore', () => {
   });
 
   it('restricts route access if has scope permission, app visibility, but no section visibility', async () => {
-    const { initialize } = useAccessStore();
+    const { initialize, routeAccessGuard } = useAccessStore();
+    router.beforeEach(routeAccessGuard);
 
     initialize({
       permissions: [],
@@ -109,7 +114,8 @@ describe('AccessStore', () => {
   });
 
   it('restricts route access if has scope permission, section visibility but no app visibility', async () => {
-    const { initialize } = useAccessStore();
+    const { initialize, routeAccessGuard } = useAccessStore();
+    router.beforeEach(routeAccessGuard);
 
     initialize({
       permissions: [],
