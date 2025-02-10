@@ -34,6 +34,7 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
     WtObject.Bucket,
     WtObject.Communication,
     WtObject.PauseCause,
+    WtObject.Source,
   ],
   [ScopeClass.List]: [WtObject.Blacklist],
   [ScopeClass.Skills]: [WtObject.Skill],
