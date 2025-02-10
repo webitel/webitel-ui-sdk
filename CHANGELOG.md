@@ -1,3 +1,12 @@
+## [v24.12.97] - 2025-02-10
+### :sparkles: New Features
+- [`b4863e7`](https://github.com/webitel/webitel-ui-sdk/commit/b4863e742605f5c13a44e694545105e31316bd93) - add reset headers store[WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`638447f`](https://github.com/webitel/webitel-ui-sdk/commit/638447f8da100904b3de3c99fbe35dfa1efc4da1) - conflict[WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`483b563`](https://github.com/webitel/webitel-ui-sdk/commit/483b563c31e35f4155fbf38b177564ee1d7fbced) - update fields persistance [WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.96] - 2025-02-08
 ### :bug: Bug Fixes
 - [`3fd9d1e`](https://github.com/webitel/webitel-ui-sdk/commit/3fd9d1ea871f02265cbabe149b0c5cddd8f8962b) - access control v2 module redirct to /access-denied page on navigation guard restriction [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1075,3 +1084,4 @@
 [v24.12.94]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.93...v24.12.94
 [v24.12.95]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.94...v24.12.95
 [v24.12.96]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.95...v24.12.96
+[v24.12.97]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.96...v24.12.97
