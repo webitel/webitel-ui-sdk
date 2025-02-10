@@ -6,8 +6,8 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
+import { IconAction } from '../../enums';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import { IconAction } from '../../enums/index.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
@@ -293,6 +293,7 @@ export default {
     macValidator: 'Необходимо ввести MAC-адрес',
     minValue: 'Значение должно быть не меньше',
     maxValue: 'Значение должно быть не больше',
+    maxLength: 'Длина не должна быть больше, чем',
     sameAs: 'Неверный пароль',
     requiredArrayValue: 'Поле не должно быть пустым',
     minLength: 'Количество символов не должно быть меньше, чем',

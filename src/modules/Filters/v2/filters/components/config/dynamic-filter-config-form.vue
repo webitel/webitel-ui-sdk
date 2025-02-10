@@ -8,6 +8,7 @@
       use-value-from-options-by-prop="id"
       @input="filterName = $event"
     />
+
     <slot
       name="value-input"
       v-bind="{
@@ -18,11 +19,13 @@
         onValueInvalidChange: (v) => (invalid = v),
       }"
     />
-    <wt-input
-      v-model="filterLabel"
-      :label="t('webitelUI.filters.filterLabel')"
-      @input="touchedLabel = true"
+
+    <dynamic-filter-config-form-label
+      :value="filterLabel"
+      @update:value="onLabelValueUpdate"
+      @update:invalid="(v) => (invalid = v)"
     />
+
     <footer class="dynamic-filter-config-form-footer">
       <wt-button
         :disabled="invalid"
@@ -31,6 +34,7 @@
       >
         {{ t('reusable.save') }}
       </wt-button>
+
       <wt-button
         color="secondary"
         wide
@@ -48,13 +52,13 @@ import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
-import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import type {
   FilterInitParams,
   FilterName,
   IFilter,
 } from '../../../types/Filter';
+import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
 
 interface FilterNameSelectRepresentation {
   name: string;
@@ -90,6 +94,11 @@ const touchedLabel = ref(false);
 const editMode = !!props.filter;
 
 const invalid = ref(false);
+
+const onLabelValueUpdate = (val: string) => {
+  filterLabel.value = val;
+  touchedLabel.value = true;
+};
 
 const submit = () => {
   emit('submit', {
