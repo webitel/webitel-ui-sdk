@@ -1,3 +1,8 @@
+## [v24.12.98] - 2025-02-10
+### :bug: Bug Fixes
+- [`2fe81d3`](https://github.com/webitel/webitel-ui-sdk/commit/2fe81d321d0d7745119dcd1c1bb73753d0781d69) - case sources permissions [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.97] - 2025-02-10
 ### :sparkles: New Features
 - [`b4863e7`](https://github.com/webitel/webitel-ui-sdk/commit/b4863e742605f5c13a44e694545105e31316bd93) - add reset headers store[WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1085,3 +1090,4 @@
 [v24.12.95]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.94...v24.12.95
 [v24.12.96]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.95...v24.12.96
 [v24.12.97]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.96...v24.12.97
+[v24.12.98]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.97...v24.12.98
