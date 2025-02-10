@@ -1,42 +1,42 @@
 <template>
-  <wt-input
+  <wt-select
+    :clearable="false"
+    :options="BooleanOptions"
     :value="model"
-    :label="t('webitelUI.filters.filterLabel')"
-    :v="v$"
+    :label="t('')"
+    class="recording-filter-value-field"
+    track-by="value"
+    use-value-from-options-by-prop="value"
     @input="model = $event"
   />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { maxLength } from '@vuelidate/validators';
+import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtInput from '../../../../../../components/wt-input/wt-input.vue';
-
-const MAX_STRING_LENGTH = 50;
+import { BooleanOptions } from '../../enums/boolean-options';
 
 const model = defineModel<string>();
-
-interface Emits {
-  'update:invalid': [boolean];
-}
-const emit = defineEmits<Emits>();
-
 const { t } = useI18n();
 
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      // maybe make maxLength value by props
-      maxLength: maxLength(MAX_STRING_LENGTH),
+      required,
     },
   })),
   { model },
   { $autoDirty: true },
 );
+
 v$.value.$touch();
+
+const emit = defineEmits<{
+  'update:invalid': [boolean];
+}>();
 
 watch(
   () => v$.value.$invalid,
@@ -47,4 +47,4 @@ watch(
 );
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
