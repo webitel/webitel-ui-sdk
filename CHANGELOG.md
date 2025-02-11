@@ -1,3 +1,8 @@
+## [v24.12.100] - 2025-02-11
+### :sparkles: New Features
+- [`28e8c40`](https://github.com/webitel/webitel-ui-sdk/commit/28e8c40f6b386047a80229646806147c51a2bd68) - added cases-related lookups locales and ApplicationsAccess.js [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.99] - 2025-02-11
 ### :bug: Bug Fixes
 - [`de0cf7c`](https://github.com/webitel/webitel-ui-sdk/commit/de0cf7cda2c4b8373aa61325d6739b8585dd31e9) - added new cases-related lookups to "dictionary" access scope mappings [WTEL-6184](https://webitel.atlassian.net/browse/WTEL-6184) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1097,3 +1102,4 @@
 [v24.12.97]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.96...v24.12.97
 [v24.12.98]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.97...v24.12.98
 [v24.12.99]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.98...v24.12.99
+[v24.12.100]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.99...v24.12.100
