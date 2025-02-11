@@ -6,24 +6,21 @@
 
     <wt-divider />
 
-    <!--    TODO: how to visually represent id/value types? -->
-    <ul v-if="isArrayValue">
-      <li
-        v-for="(el, index) of value"
-        :key="index"
-      >
-        {{ el }}
-      </li>
-    </ul>
+    <component
+      :is="getFilterValueComponent(props.name)"
+      v-if="props.value"
+      :value="props.value" />
 
-    <article v-else>
-      {{ props.value }}
-    </article>
+
+<!--    <article v-else>-->
+<!--      {{ props.value }}-->
+<!--    </article>-->
   </section>
 </template>
 
 <script lang="ts" setup>
 import type { FilterName, FilterValue } from '../../types/Filter';
+import userFilterValuePreview from '../values/users/user-filter-value-preview.vue';
 
 interface Props {
   name: FilterName;
@@ -32,7 +29,13 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const isArrayValue = Array.isArray(props.value);
+const getFilterValueComponent = (filterName: FilterName) => {
+  switch (filterName) {
+    case 'user':
+      return userFilterValuePreview;
+    default:
+  }
+};
 </script>
 
 <style lang="scss" scoped>
