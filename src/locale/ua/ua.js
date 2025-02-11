@@ -225,7 +225,11 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Контакти',
-        [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.CASES]: 'Звернення',
+        [CrmSections.PRIORITIES]: 'Пріоритети',
+        [CrmSections.CLOSE_REASON_GROUPS]: 'Причини закриття',
+        [CrmSections.STATUSES]: 'Статуси',
+        [CrmSections.SLAS]: 'SLA',
         [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервісів',
         [CrmSections.SOURCES]: 'Джерела звернень',
         [CrmSections.CONTACT_GROUPS]: 'Групи контактів',

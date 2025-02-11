@@ -227,7 +227,11 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
-        [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.CASES]: 'Cases',
+        [CrmSections.PRIORITIES]: 'Priorities',
+        [CrmSections.CLOSE_REASON_GROUPS]: 'Closure reasons',
+        [CrmSections.STATUSES]: 'Statuses',
+        [CrmSections.SLAS]: 'SLA',
         [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
         [CrmSections.SOURCES]: 'Case sources',
         [CrmSections.CONTACT_GROUPS]: 'Contact groups',
