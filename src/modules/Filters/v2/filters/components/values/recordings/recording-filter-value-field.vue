@@ -3,7 +3,7 @@
     :clearable="false"
     :options="BooleanOptions"
     :value="model"
-    :label="t('')"
+    :label="t('webitelUI.filters.filterValue')"
     class="recording-filter-value-field"
     track-by="value"
     use-value-from-options-by-prop="value"

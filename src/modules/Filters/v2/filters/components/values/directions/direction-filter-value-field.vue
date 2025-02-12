@@ -3,7 +3,7 @@
     :clearable="false"
     :options="DirectionOptions"
     :value="model"
-    :label="t('vocabulary.labels', 1)"
+    :label="t('webitelUI.filters.filterValue')"
     class="direction-filter-value-field"
     track-by="value"
     use-value-from-options-by-prop="value"
@@ -17,6 +17,7 @@ import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import { DirectionOptions } from '../../enums/direction-options';
 
 const model = defineModel<string>();

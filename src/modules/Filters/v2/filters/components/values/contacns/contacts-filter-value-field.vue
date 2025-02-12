@@ -4,7 +4,6 @@
     :search-method="searchMethod"
     :value="model"
     :label="t('webitelUI.filters.filterValue')"
-    :placeholder="t('webitelUI.filters.filterValue')"
     multiple
     use-value-from-options-by-prop="id"
     class="contacts-filter-value-field"

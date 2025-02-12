@@ -1,32 +1,32 @@
 <template>
-  <wt-input
-    v-model="model"
-    :v="v$.model"
+  <wt-select
+    :clearable="false"
+    :options="BooleanOptions"
+    :value="model"
     :label="t('webitelUI.filters.filterValue')"
-    class="variables-filter-value-field"
+    class="direction-filter-value-field"
+    track-by="value"
+    use-value-from-options-by-prop="value"
+    @input="model = $event"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import variableSearchValidator from '../../../../../../../validators/variableSearchValidator/variableSearchValidator.js';
+import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
+import { BooleanOptions } from '../../enums/boolean-options';
 
-type ModelValue = string;
-
-const model = defineModel<ModelValue>();
-if (!model.value) {
-  model.value = '';
-}
-
+const model = defineModel<string>();
 const { t } = useI18n();
 
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      required: variableSearchValidator(),
+      required,
     },
   })),
   { model },
@@ -48,7 +48,4 @@ watch(
 );
 </script>
 
-<style lang="scss" scoped>
-.variables-filter-value-field {
-}
-</style>
+<style lang="scss" scoped></style>
