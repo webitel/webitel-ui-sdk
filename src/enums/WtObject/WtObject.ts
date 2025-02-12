@@ -46,7 +46,7 @@ export const WtObject = {
   RecordFile: 'recordFile',
   ContactGroup: 'contactGroup',
   ChatBot: 'chatBot',
-  Cases: 'cases',
+  Case: 'case',
   CaseComment: 'caseComment',
   Slas: 'slas',
   ServiceCatalog: 'serviceCatalog',

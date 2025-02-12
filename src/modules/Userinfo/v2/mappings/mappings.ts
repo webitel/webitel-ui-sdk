@@ -63,7 +63,7 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
   [ScopeClass.RecordFile]: [WtObject.RecordFile], // Call history
   [ScopeClass.ContactGroups]: [WtObject.ContactGroup], //CRM
   [ScopeClass.ChatBots]: [WtObject.ChatBot], // routing cht_gateway
-  [ScopeClass.Cases]: [WtObject.Cases], // CRM
+  [ScopeClass.Cases]: [WtObject.Case], // CRM
   [ScopeClass.CaseComments]: [WtObject.CaseComment],
 };
 
@@ -139,7 +139,7 @@ export const mapWtObjectToUiSection: Record<
   // Crm sections
   [WtApplication.Crm]: {
     [WtObject.Contact]: CrmSections.Contacts,
-    [WtObject.Cases]: CrmSections.Cases,
+    [WtObject.Case]: CrmSections.Cases,
     [WtObject.Slas]: CrmSections.Slas,
     [WtObject.ServiceCatalog]: CrmSections.ServiceCatalogs,
     [WtObject.CaseSource]: CrmSections.CaseSources,
