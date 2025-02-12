@@ -1,44 +1,26 @@
 <template>
   <div class="filter-from-to">
-    <div class="filter-from-to__inputs-wrapper">
-      <div class="filter-from-to__input-wrapper">
-        <wt-label
-          class="filter-from-to__input-label"
-          for="filter-from-to-from"
-        >
-          {{ t('reusable.from') }}
-        </wt-label>
+    <wt-input
+      v-model="model.from"
+      :number-max="props.numberMax"
+      :number-min="0"
+      :v="v$.model?.from"
+      :label="`${t('webitelUI.filters.filterValueFrom')}:`"
+      class="filter-from-to__input"
+      name="filter-from-to-from"
+      type="number"
+    />
 
-        <wt-input
-          v-model="model.from"
-          :number-max="props.numberMax"
-          :number-min="0"
-          :v="v$.model"
-          class="filter-from-to-input"
-          name="filter-from-to-from"
-          type="number"
-        />
-      </div>
-
-      <div class="filter-from-to__input-wrapper">
-        <wt-label
-          class="filter-from-to__input-label"
-          for="filter-from-to-to"
-        >
-          {{ t('reusable.to') }}
-        </wt-label>
-
-        <wt-input
-          v-model="model.to"
-          :number-max="props.numberMax"
-          :number-min="0"
-          :v="v$.model"
-          class="filter-from-to-input"
-          name="filter-from-to-to"
-          type="number"
-        />
-      </div>
-    </div>
+    <wt-input
+      v-model="model.to"
+      :number-max="props.numberMax"
+      :number-min="0"
+      :v="v$.model?.to"
+      :label="`${t('reusable.to').toLowerCase()}:`"
+      class="filter-from-to__input"
+      name="filter-from-to-to"
+      type="number"
+    />
   </div>
 </template>
 

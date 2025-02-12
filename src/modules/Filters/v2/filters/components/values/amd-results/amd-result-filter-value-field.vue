@@ -3,7 +3,8 @@
     :clearable="false"
     :options="AmdResultOptions"
     :value="model"
-    :label="t('')"
+    :label="t('webitelUI.filters.filterValue')"
+    :placeholder="t('webitelUI.filters.filterValue')"
     multiple
     class="amd-result-filter-value-preview"
     track-by="value"
