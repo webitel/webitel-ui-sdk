@@ -1,3 +1,8 @@
+## [v24.12.101] - 2025-02-12
+### :bug: Bug Fixes
+- [`7bc6052`](https://github.com/webitel/webitel-ui-sdk/commit/7bc6052197f4c4b9660010a00d7349708b0f680e) - access control [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.100] - 2025-02-11
 ### :sparkles: New Features
 - [`28e8c40`](https://github.com/webitel/webitel-ui-sdk/commit/28e8c40f6b386047a80229646806147c51a2bd68) - added cases-related lookups locales and ApplicationsAccess.js [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1103,3 +1108,4 @@
 [v24.12.98]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.97...v24.12.98
 [v24.12.99]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.98...v24.12.99
 [v24.12.100]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.99...v24.12.100
+[v24.12.101]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.100...v24.12.101
