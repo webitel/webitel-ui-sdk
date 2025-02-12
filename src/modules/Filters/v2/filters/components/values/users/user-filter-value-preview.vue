@@ -1,7 +1,6 @@
 <template>
   <ul
-    v-if="users"
-    class="user-filter-value-preview">
+    v-if="users">
     <li
       v-for="(user, index) of users"
       :key="index"
@@ -22,7 +21,7 @@ const props = defineProps<{
 const users = ref([]);
 
 const getUsers = async () => {
-  const { items } = await searchMethod({id: props.value, fields: ['id', 'name']});
+  const { items } = await searchMethod({id: props.value});
   users.value = items;
 };
 

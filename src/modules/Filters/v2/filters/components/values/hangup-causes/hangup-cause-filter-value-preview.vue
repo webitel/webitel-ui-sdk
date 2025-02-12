@@ -1,7 +1,19 @@
 <template>
-  <div class="hangup-cause-filter-value-preview"></div>
+  <ul>
+    <li
+      v-for="(hangupCause, index) of props.value"
+      :key="index"
+    >
+      {{ hangupCause }}
+    </li>
+  </ul>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+const props = defineProps<{
+  value: number[];
+}>();
 
-<style scoped lang="scss"></style>
+</script>
+
+<style lang="scss" scoped></style>

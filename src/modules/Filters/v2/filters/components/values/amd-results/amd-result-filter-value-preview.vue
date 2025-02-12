@@ -1,7 +1,20 @@
 <template>
-  <div class="amd-result-filter-value-preview"></div>
+  <ul>
+    <li
+      v-for="(result, index) of props.value"
+      :key="index"
+    >
+      {{ result }}
+    </li>
+  </ul>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+const props = defineProps<{
+  value: number[];
+}>();
 
-<style scoped lang="scss"></style>
+
+</script>
+
+<style lang="scss" scoped></style>

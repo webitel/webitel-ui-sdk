@@ -1,11 +1,11 @@
 <template>
   <ul
-    v-if="teams">
+    v-if="contacts">
     <li
-      v-for="(team, index) of teams"
+      v-for="(contact, index) of contacts"
       :key="index"
     >
-      {{ team.name }}
+      {{ contact.name }}
     </li>
   </ul>
 </template>
@@ -18,14 +18,14 @@ const props = defineProps<{
   value: number[];
 }>();
 
-const teams = ref([]);
+const contacts = ref([]);
 
-const getTeams = async () => {
+const getContacts = async () => {
   const { items } = await searchMethod({id: props.value});
-  teams.value = items;
+  contacts.value = items;
 };
 
-getTeams();
+getContacts();
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,18 @@
 <template>
-  <div class="tag-filter-value-preview"></div>
+  <ul>
+    <li
+      v-for="(tag, index) of value"
+      :key="index"
+    >
+      {{ tag }}
+    </li>
+  </ul>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+const props = defineProps<{
+  value: number[];
+}>();
+</script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>
