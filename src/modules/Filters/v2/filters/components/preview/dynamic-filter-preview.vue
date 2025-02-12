@@ -14,11 +14,15 @@
         </template>
 
         <template #default>
-          {{ props.filter.name }}
+          <dynamic-filter-preview-info>
+            <template #header>
+              {{ props.filter.name }}
+            </template>
 
-          <wt-divider />
-
-          <slot name="info" />
+            <template>
+              <slot name="info" />
+            </template>
+          </dynamic-filter-preview-info>
 
         </template>
       </wt-tooltip>
@@ -36,6 +40,7 @@ import WtIconBtn from '../../../../../../components/wt-icon-btn/wt-icon-btn.vue'
 import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
 import type { IFilter } from '../../types/Filter';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
+import DynamicFilterPreviewInfo from "./dynamic-filter-preview-info.vue";
 
 interface Props {
   filter: IFilter;

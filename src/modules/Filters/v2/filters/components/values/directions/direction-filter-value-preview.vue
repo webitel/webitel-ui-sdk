@@ -1,7 +1,17 @@
 <template>
-  <div class="direction-filter-value-preview"></div>
+  <div>
+    {{ t(`calls.direction.${value}`) }}
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import { useI18n } from "vue-i18n";
 
-<style scoped lang="scss"></style>
+const props = defineProps<{
+  value: number[];
+}>();
+
+const { t } = useI18n();
+</script>
+
+<style lang="scss" scoped></style>

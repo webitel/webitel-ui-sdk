@@ -1,7 +1,15 @@
 <template>
-  <div class="created-at-from-filter-value-preview"></div>
+  <div>{{date}}</div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-<style scoped lang="scss"></style>
+const props = defineProps<{
+  value: number[];
+}>();
+
+const date = ref(new Date(+props.value).toLocaleDateString());
+</script>
+
+<style lang="scss" scoped></style>

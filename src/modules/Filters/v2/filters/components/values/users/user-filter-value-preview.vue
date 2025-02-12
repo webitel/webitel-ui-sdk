@@ -30,9 +30,4 @@ getUsers();
 </script>
 
 <style lang="scss" scoped>
-.user-filter-value-preview {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
 </style>
