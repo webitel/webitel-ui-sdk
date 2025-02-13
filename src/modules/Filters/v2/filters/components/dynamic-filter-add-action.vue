@@ -9,8 +9,13 @@
       </div>
     </template>
 
-    <template #content>
-      <slot name="form"> filter form should be here</slot>
+    <template #content="slotScope">
+      <slot
+        name="form"
+        v-bind="slotScope"
+      >
+        filter form should be here
+      </slot>
     </template>
   </dynamic-filter-config-view>
 </template>
