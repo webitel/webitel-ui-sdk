@@ -3,7 +3,7 @@
     :clearable="false"
     :options="TagOptions"
     :value="model"
-    :label="t('')"
+    :label="t('webitelUI.filters.filterValue')"
     multiple
     class="tag-filter-value-field"
     track-by="value"

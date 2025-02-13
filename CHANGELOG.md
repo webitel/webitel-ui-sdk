@@ -1,3 +1,44 @@
+## [v24.12.102] - 2025-02-13
+### :bug: Bug Fixes
+- [`7636ad6`](https://github.com/webitel/webitel-ui-sdk/commit/7636ad6ed7e7d0ba6047291f196924e26a362553) - implimented version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`7c8d937`](https://github.com/webitel/webitel-ui-sdk/commit/7c8d93716ebc62794d8b2efa72673231ba99c426) - added fixedActions props to wt-table component *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
+## [v24.12.101] - 2025-02-12
+### :bug: Bug Fixes
+- [`7bc6052`](https://github.com/webitel/webitel-ui-sdk/commit/7bc6052197f4c4b9660010a00d7349708b0f680e) - access control [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.100] - 2025-02-11
+### :sparkles: New Features
+- [`28e8c40`](https://github.com/webitel/webitel-ui-sdk/commit/28e8c40f6b386047a80229646806147c51a2bd68) - added cases-related lookups locales and ApplicationsAccess.js [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.99] - 2025-02-11
+### :bug: Bug Fixes
+- [`de0cf7c`](https://github.com/webitel/webitel-ui-sdk/commit/de0cf7cda2c4b8373aa61325d6739b8585dd31e9) - added new cases-related lookups to "dictionary" access scope mappings [WTEL-6184](https://webitel.atlassian.net/browse/WTEL-6184) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.98] - 2025-02-10
+### :bug: Bug Fixes
+- [`2fe81d3`](https://github.com/webitel/webitel-ui-sdk/commit/2fe81d321d0d7745119dcd1c1bb73753d0781d69) - case sources permissions [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.97] - 2025-02-10
+### :sparkles: New Features
+- [`b4863e7`](https://github.com/webitel/webitel-ui-sdk/commit/b4863e742605f5c13a44e694545105e31316bd93) - add reset headers store[WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`638447f`](https://github.com/webitel/webitel-ui-sdk/commit/638447f8da100904b3de3c99fbe35dfa1efc4da1) - conflict[WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`483b563`](https://github.com/webitel/webitel-ui-sdk/commit/483b563c31e35f4155fbf38b177564ee1d7fbced) - update fields persistance [WTEL-5919](https://webitel.atlassian.net/browse/WTEL-5919) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.96] - 2025-02-08
+### :bug: Bug Fixes
+- [`3fd9d1e`](https://github.com/webitel/webitel-ui-sdk/commit/3fd9d1ea871f02265cbabe149b0c5cddd8f8962b) - access control v2 module redirct to /access-denied page on navigation guard restriction [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`975473b`](https://github.com/webitel/webitel-ui-sdk/commit/975473b69433b8d2790a92ae4fdf17ee2123012e) - accessStore.spec.ts tests [WTEL-5592](https://webitel.atlassian.net/browse/WTEL-5592) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.95] - 2025-02-07
 ### :sparkles: New Features
 - [`7f82c8e`](https://github.com/webitel/webitel-ui-sdk/commit/7f82c8e043165fd824b201ea1b9972288d5f1076) - added validation for wt-select [WTEL-5922](https://webitel.atlassian.net/browse/WTEL-5922) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -1068,3 +1109,10 @@
 [v24.12.93]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.92...v24.12.93
 [v24.12.94]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.93...v24.12.94
 [v24.12.95]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.94...v24.12.95
+[v24.12.96]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.95...v24.12.96
+[v24.12.97]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.96...v24.12.97
+[v24.12.98]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.97...v24.12.98
+[v24.12.99]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.98...v24.12.99
+[v24.12.100]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.99...v24.12.100
+[v24.12.101]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.100...v24.12.101
+[v24.12.102]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.101...v24.12.102

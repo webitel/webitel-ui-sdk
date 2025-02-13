@@ -1,44 +1,61 @@
 <template>
-  <div class="filter-from-to">
+  <div class="score-from-to-filter-value-field">
     <wt-input
-      v-model="model.from"
+      v-if="model"
+      :value="model.from"
       :number-max="props.numberMax"
       :number-min="0"
       :v="v$.model?.from"
       :label="`${t('webitelUI.filters.filterValueFrom')}:`"
-      class="filter-from-to__input"
-      name="filter-from-to-from"
+      :placeholder="t('webitelUI.filters.filterValue')"
+      class="score-from-to-filter-value-field__input"
+      name="score-from-to-filter-value-field-from"
       type="number"
+      @input="handleInput('from', $event)"
     />
 
     <wt-input
-      v-model="model.to"
+      v-if="model"
+      :value="model.to"
       :number-max="props.numberMax"
       :number-min="0"
       :v="v$.model?.to"
       :label="`${t('reusable.to').toLowerCase()}:`"
-      class="filter-from-to__input"
-      name="filter-from-to-to"
+      :placeholder="t('webitelUI.filters.filterValue')"
+      class="score-from-to-filter-value-field__input"
+      name="score-from-to-filter-value-field-to"
       type="number"
+      @input="handleInput('to', $event)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
+import { requiredIf } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
-  from: string;
-  to: string;
+  from: number;
+  to: number;
 };
 const model = defineModel<ModelValue>();
+if (!model.value) {
+  model.value = {
+    from: null,
+    to: null,
+  };
+}
 
-const props = defineProps<{
-  numberMax: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    numberMax: number;
+  }>(),
+  {
+    numberMax: 100,
+  },
+);
 
 const emit = defineEmits<{
   'update:invalid': [boolean];
@@ -49,19 +66,20 @@ const { t } = useI18n();
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      from: {
-        required,
-      },
-      to: {
-        required,
-      },
+      from: { requiredIf: requiredIf(() => !model.value.to) },
+      to: { requiredIf: requiredIf(() => !model.value.from) },
     },
   })),
   { model },
   { $autoDirty: true },
 );
-
 v$.value.$touch();
+
+const handleInput = (key: keyof ModelValue, value: number) => {
+  const newValue = { ...model.value };
+  newValue[key] = value;
+  model.value = newValue;
+};
 
 watch(
   () => v$.value.$invalid,
@@ -73,38 +91,9 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-.filter-from-to {
-  &:hover > .wt-label {
-    color: var(--form-label--hover-color);
-  }
-
-  &:focus-within > .wt-label {
-    color: var(--form-label--active-color);
-  }
-}
-
-.filter-from-to__inputs-wrapper,
-.filter-from-to__input-wrapper {
+.score-from-to-filter-value-field {
   display: flex;
   align-items: center;
-}
-
-.filter-from-to__input-label {
-  @extend %typo-subtitle-1;
-  margin-right: 5px;
-}
-
-.filter-from-to__input-wrapper {
-  &:focus-within .wt-label {
-    color: var(--form-label--active-color);
-  }
-
-  .filter-from-to-input {
-    width: 70px;
-  }
-
-  &:first-child {
-    margin-right: 10px;
-  }
+  grid-gap: var(--spacing-xs);
 }
 </style>

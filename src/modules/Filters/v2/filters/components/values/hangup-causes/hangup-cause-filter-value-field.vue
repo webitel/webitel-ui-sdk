@@ -3,7 +3,7 @@
     :clearable="false"
     :options="HangupCauseOptions"
     :value="model"
-    :label="t('')"
+    :label="t('webitelUI.filters.filterValue')"
     multiple
     class="hangup-cause-filter-value-preview"
     track-by="value"

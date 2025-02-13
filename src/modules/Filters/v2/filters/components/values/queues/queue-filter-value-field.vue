@@ -3,6 +3,7 @@
     :close-on-select="false"
     :search-method="searchMethod"
     :value="model"
+    :label="t('webitelUI.filters.filterValue')"
     multiple
     use-value-from-options-by-prop="id"
     class="queue-filter-value-field"
@@ -14,6 +15,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import { searchMethod } from './config.js';
@@ -25,6 +27,7 @@ const model = defineModel<ModelValue>();
 const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
+const { t } = useI18n();
 
 const v$ = useVuelidate(
   computed(() => ({
