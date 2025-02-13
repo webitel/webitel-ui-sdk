@@ -6,8 +6,8 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
+import { IconAction } from '../../enums';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import { IconAction } from '../../enums/index.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
@@ -227,7 +227,11 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
-        [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.CASES]: 'Cases',
+        [CrmSections.PRIORITIES]: 'Priorities',
+        [CrmSections.CLOSE_REASON_GROUPS]: 'Closure reasons',
+        [CrmSections.STATUSES]: 'Statuses',
+        [CrmSections.SLAS]: 'SLA',
         [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
         [CrmSections.SOURCES]: 'Case sources',
         [CrmSections.CONTACT_GROUPS]: 'Contact groups',

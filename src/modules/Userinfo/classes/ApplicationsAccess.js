@@ -199,6 +199,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACTS}`,
     },
+    [CrmSections.CASES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CASES}`,
+    },
     [CrmSections.SLAS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SLAS}`,
@@ -222,6 +226,10 @@ const applicationsAccess = (value = true) => ({
     [CrmSections.PRIORITIES]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.PRIORITIES}`,
+    },
+    [CrmSections.STATUSES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.STATUSES}`,
     },
   },
 });
