@@ -1,5 +1,5 @@
 <template>
-  <div class="direction-filter-value-preview"></div>
+  <div class="total-duration-filter-value-preview"></div>
 </template>
 
 <script setup lang="ts"></script>
