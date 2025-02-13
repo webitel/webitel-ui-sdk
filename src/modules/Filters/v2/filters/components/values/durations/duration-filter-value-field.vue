@@ -2,12 +2,14 @@
   <div class="duration-filter">
     <wt-timepicker
       v-if="model"
+      :label="t('reusable.from')"
       :value="model.from"
       format="mm:ss"
       @input="handleInput('from', $event)"
     />
     <wt-timepicker
       v-if="model"
+      :label="t('reusable.to')"
       :value="model.to"
       format="mm:ss"
       @input="handleInput('to', $event)"
@@ -16,6 +18,10 @@
 </template>
 
 <script lang="ts" setup>
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
+
 type ModelValue = {
   from: number;
   to: number;

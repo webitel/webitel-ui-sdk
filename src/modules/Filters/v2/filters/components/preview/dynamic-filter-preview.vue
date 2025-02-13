@@ -4,7 +4,7 @@
       <wt-tooltip :disabled="configFormVisible">
         <template #activator>
           <wt-chip color="primary">
-            {{ props.filter.label || props.filter.name }}
+            {{ props.filter.label || t(`webitelUI.filters.${props.filter.name}`) }}
             <wt-icon-btn
               icon="close--filled"
               size="sm"
@@ -16,7 +16,7 @@
         <template #default>
           <dynamic-filter-preview-info>
             <template #header>
-              {{ props.filter.name }}
+              {{ t(`webitelUI.filters.${props.filter.name}`) }}
             </template>
 
             <template>
@@ -41,10 +41,13 @@ import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
 import type { IFilter } from '../../types/Filter';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from "./dynamic-filter-preview-info.vue";
+import {useI18n} from "vue-i18n";
 
 interface Props {
   filter: IFilter;
 }
+
+const { t } = useI18n();
 
 const props = defineProps<Props>();
 

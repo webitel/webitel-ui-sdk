@@ -1,7 +1,17 @@
 <template>
-  <div class="direction-filter-value-preview"></div>
+  <div>{{ bool ? t('vocabulary.yes') : t('vocabulary.no') }}</div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import { useI18n } from "vue-i18n";
+import {ref} from 'vue';
 
-<style scoped lang="scss"></style>
+const props = defineProps<{
+  value: number[];
+}>();
+
+const { t } = useI18n();
+const bool= ref(JSON.parse(props.value));
+</script>
+
+<style lang="scss" scoped></style>

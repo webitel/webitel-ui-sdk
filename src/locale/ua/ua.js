@@ -145,7 +145,14 @@ export default {
     user: 'Користувач | Користувачі',
     role: 'Роль | Ролі',
     calendar: 'Календар | Календарі',
+    direction: 'Напрямок',
+    gateway: 'Шлюз | Шлюзи',
+    hangupCause: 'Причина завершення',
+    hasOption: 'Has option',
+    hasRecording: 'Запис розмови',
+    amdResult: 'AMD результат',
     queue: {
+      queue: 'Черга | Черги',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
         [QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
@@ -159,6 +166,7 @@ export default {
       },
     },
     agent: {
+      agent: 'Оператор | Оператори',
       status: {
         [AgentStatus.Online]: 'Онлайн',
         [AgentStatus.Pause]: 'Пауза',
@@ -441,6 +449,81 @@ export default {
       title: 'Помилка збереження',
       label: 'Щось пішло не так. Будь ласка, спробуйте ще раз',
       exportToJson: 'Експортувати в JSON',
+    },
+    filters: {
+      addFilter: ({ linked }) => {
+        return `${linked('reusable.add')} ${linked(
+          'reusable.filter',
+        ).toLowerCase()}`;
+      },
+      filterName: ({ linked }) => {
+        // because filter select has a 'column' label now
+        return linked('vocabulary.column');
+      },
+      filterValue: ({ linked }) => {
+        return linked('vocabulary.values');
+      },
+      filterValueFrom: ({ linked }) => {
+        const from = linked('reusable.from').toLowerCase();
+        return `${linked('vocabulary.values')} ${from}`;
+      },
+      filterLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      agent : ({ linked }) => {
+        return linked('objects.agent.agent');
+      },
+      amdResult : ({ linked }) => {
+        return linked('objects.amdResult');
+      },
+      contact : ({ linked }) => {
+        return linked('vocabulary.contact');
+      },
+      createdAtFrom : ({ linked }) => {
+        return linked('reusable.from');
+      },
+      createdAtTo : ({ linked }) => {
+        return linked('reusable.to');
+      },
+      direction : ({ linked }) => {
+        return linked('calls.direction');
+      },
+      duration : ({ linked }) => {
+        return linked('vocabulary.duration');
+      },
+      gateway : ({ linked }) => {
+        return linked('vocabulary.gateway');
+      },
+      grantee : ({ linked }) => {
+        return linked('objects.grantee');
+      },
+      hangupCause : ({ linked }) => {
+        return linked('objects.hangupCause');
+      },
+      hasOption : ({ linked }) => {
+        return linked('objects.hasOption'); ////
+      },
+      queue : ({ linked }) => {
+        return linked('objects.queue.queue');
+      },
+      recording : ({ linked }) => {
+        return linked('objects.hasRecording');
+      },
+      score : ({ linked }) => {
+        return linked('webitelUI.auditForm.score');
+      },
+      tag : ({ linked }) => {
+        return linked('vocabulary.tag');
+      },
+      team : ({ linked }) => {
+        return linked('objects.team');
+      },
+      user : ({ linked }) => {
+        return linked('objects.user');
+      },
+      variable : ({ linked }) => {
+        return linked('vocabulary.variables');
+      },
     },
   },
   errorNotifications: {
