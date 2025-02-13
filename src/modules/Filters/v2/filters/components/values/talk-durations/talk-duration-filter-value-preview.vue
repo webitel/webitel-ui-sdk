@@ -1,5 +1,5 @@
 <template>
-  <div class="duration-filter-value-preview"></div>
+  <div class="talk-duration-filter-value-preview"></div>
 </template>
 
 <script setup lang="ts"></script>
