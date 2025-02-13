@@ -1,3 +1,9 @@
+## [v24.12.102] - 2025-02-13
+### :bug: Bug Fixes
+- [`7636ad6`](https://github.com/webitel/webitel-ui-sdk/commit/7636ad6ed7e7d0ba6047291f196924e26a362553) - implimented version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`7c8d937`](https://github.com/webitel/webitel-ui-sdk/commit/7c8d93716ebc62794d8b2efa72673231ba99c426) - added fixedActions props to wt-table component *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.12.101] - 2025-02-12
 ### :bug: Bug Fixes
 - [`7bc6052`](https://github.com/webitel/webitel-ui-sdk/commit/7bc6052197f4c4b9660010a00d7349708b0f680e) - access control [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1109,3 +1115,4 @@
 [v24.12.99]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.98...v24.12.99
 [v24.12.100]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.99...v24.12.100
 [v24.12.101]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.100...v24.12.101
+[v24.12.102]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.101...v24.12.102
