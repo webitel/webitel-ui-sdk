@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
+import { requiredIf } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -48,9 +48,14 @@ if (!model.value) {
   };
 }
 
-const props = defineProps<{
-  numberMax: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    numberMax: number;
+  }>(),
+  {
+    numberMax: 100,
+  },
+);
 
 const emit = defineEmits<{
   'update:invalid': [boolean];
@@ -61,12 +66,8 @@ const { t } = useI18n();
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      from: {
-        required,
-      },
-      to: {
-        required,
-      },
+      from: { requiredIf: requiredIf(() => !model.value.to) },
+      to: { requiredIf: requiredIf(() => !model.value.from) },
     },
   })),
   { model },
