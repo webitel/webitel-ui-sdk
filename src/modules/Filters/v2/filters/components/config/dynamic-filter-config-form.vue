@@ -22,7 +22,7 @@
 
     <dynamic-filter-config-form-label
       :value="filterLabel"
-      @update:value="onLabelValueUpdate"
+      @update:model-value="onLabelValueUpdate"
       @update:invalid="(v) => (invalid = v)"
     />
 
