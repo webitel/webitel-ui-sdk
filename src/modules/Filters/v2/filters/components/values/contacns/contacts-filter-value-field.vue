@@ -6,7 +6,7 @@
     :label="t('webitelUI.filters.filterValue')"
     multiple
     use-value-from-options-by-prop="id"
-    class="user-filter-value-field"
+    class="contacts-filter-value-field"
     @input="handleInput"
   />
 </template>
@@ -54,6 +54,6 @@ const handleInput = (value: ModelValue) => {
 </script>
 
 <style lang="scss" scoped>
-.user-filter-value-field {
+.contacts-filter-value-field {
 }
 </style>

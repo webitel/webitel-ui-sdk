@@ -2,8 +2,6 @@
   <div class=""></div>
 </template>
 
-<script setup lang="ts">
-import { searchMethod } from './config.js';
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss"></style>

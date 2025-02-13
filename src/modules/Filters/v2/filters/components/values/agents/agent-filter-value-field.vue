@@ -6,7 +6,7 @@
     :label="t('webitelUI.filters.filterValue')"
     multiple
     use-value-from-options-by-prop="id"
-    class="user-filter-value-field"
+    class="agent-filter-value-field"
     @input="handleInput"
   />
 </template>
@@ -27,6 +27,7 @@ const model = defineModel<ModelValue>();
 const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
+
 const { t } = useI18n();
 
 const v$ = useVuelidate(
@@ -54,6 +55,6 @@ const handleInput = (value: ModelValue) => {
 </script>
 
 <style lang="scss" scoped>
-.user-filter-value-field {
+.agent-filter-value-field {
 }
 </style>

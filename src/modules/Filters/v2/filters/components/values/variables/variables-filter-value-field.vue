@@ -1,44 +1,43 @@
 <template>
-  <wt-select
-    :close-on-select="false"
-    :search-method="searchMethod"
-    :value="model"
+  <wt-input
+    v-model="model"
+    :v="v$.model"
     :label="t('webitelUI.filters.filterValue')"
-    multiple
-    use-value-from-options-by-prop="id"
-    class="user-filter-value-field"
-    @input="handleInput"
+    class="variables-filter-value-field"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { searchMethod } from './config.js';
+import variableSearchValidator from '../../../../../../../validators/variableSearchValidator/variableSearchValidator.js';
 
-type ModelValue = number[];
+type ModelValue = string;
 
 const model = defineModel<ModelValue>();
+if (!model.value) {
+  model.value = '';
+}
 
-const emit = defineEmits<{
-  'update:invalid': [boolean];
-}>();
 const { t } = useI18n();
 
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      required,
+      required: variableSearchValidator(),
     },
   })),
   { model },
   { $autoDirty: true },
 );
+
 v$.value.$touch();
+
+const emit = defineEmits<{
+  'update:invalid': [boolean];
+}>();
 
 watch(
   () => v$.value.$invalid,
@@ -47,13 +46,9 @@ watch(
   },
   { immediate: true },
 );
-
-const handleInput = (value: ModelValue) => {
-  model.value = value;
-};
 </script>
 
 <style lang="scss" scoped>
-.user-filter-value-field {
+.variables-filter-value-field {
 }
 </style>

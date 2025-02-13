@@ -458,8 +458,20 @@ export default {
       filterValue: ({ linked }) => {
         return linked('vocabulary.values');
       },
+      filterValueFrom: ({ linked }) => {
+        const from = linked('reusable.from').toLowerCase();
+        return `${linked('vocabulary.values')} ${from}`;
+      },
       filterLabel: ({ linked }) => {
         return linked('vocabulary.labels');
+      },
+      filterCalendarFrom: ({ linked }) => {
+        const from = linked('reusable.from').toLowerCase();
+        return `${linked('objects.calendar')} ${from}`;
+      },
+      filterCalendarTo: ({ linked }) => {
+        const to = linked('reusable.to').toLowerCase();
+        return `${linked('objects.calendar')} ${to}`;
       },
     },
   },

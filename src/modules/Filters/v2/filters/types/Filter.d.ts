@@ -21,6 +21,11 @@ export interface FilterInitParams extends FilterData {
   name: FilterName;
 }
 
+export interface FilterEnumOption {
+  locale: string;
+  value: FilterValue;
+}
+
 export interface FilterConfig {
   /**
    * Perform simple type conversion on store/restore,

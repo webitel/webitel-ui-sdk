@@ -1,4 +1,4 @@
-// import { UsersApi}
+import UsersAPI from '../../../../../../../api/clients/users/users.js';
 
 export const searchMethod = UsersAPI.getLookup;
-export const localePath = ''; /* label locale goes here */
+export const localePath = '';

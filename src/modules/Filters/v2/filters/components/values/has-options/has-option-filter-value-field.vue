@@ -1,13 +1,13 @@
 <template>
   <wt-select
-    :close-on-select="false"
-    :search-method="searchMethod"
+    :clearable="false"
+    :options="BooleanOptions"
     :value="model"
     :label="t('webitelUI.filters.filterValue')"
-    multiple
-    use-value-from-options-by-prop="id"
-    class="user-filter-value-field"
-    @input="handleInput"
+    class="direction-filter-value-field"
+    track-by="value"
+    use-value-from-options-by-prop="value"
+    @input="model = $event"
   />
 </template>
 
@@ -18,15 +18,9 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { searchMethod } from './config.js';
+import { BooleanOptions } from '../../enums/boolean-options';
 
-type ModelValue = number[];
-
-const model = defineModel<ModelValue>();
-
-const emit = defineEmits<{
-  'update:invalid': [boolean];
-}>();
+const model = defineModel<string>();
 const { t } = useI18n();
 
 const v$ = useVuelidate(
@@ -38,7 +32,12 @@ const v$ = useVuelidate(
   { model },
   { $autoDirty: true },
 );
+
 v$.value.$touch();
+
+const emit = defineEmits<{
+  'update:invalid': [boolean];
+}>();
 
 watch(
   () => v$.value.$invalid,
@@ -47,13 +46,6 @@ watch(
   },
   { immediate: true },
 );
-
-const handleInput = (value: ModelValue) => {
-  model.value = value;
-};
 </script>
 
-<style lang="scss" scoped>
-.user-filter-value-field {
-}
-</style>
+<style lang="scss" scoped></style>
