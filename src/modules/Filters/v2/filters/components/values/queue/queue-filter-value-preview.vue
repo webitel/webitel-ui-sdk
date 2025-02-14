@@ -1,11 +1,11 @@
 <template>
   <ul
-    v-if="queues">
+    v-if="localValue">
     <li
-      v-for="(queue, index) of queues"
+      v-for="({ name }, index) of localValue"
       :key="index"
     >
-      {{ queue.name }}
+      {{ name }}
     </li>
   </ul>
 </template>
@@ -18,14 +18,14 @@ const props = defineProps<{
   value: number[];
 }>();
 
-const queues = ref([]);
+const localValue = ref([]);
 
-const getQueues = async () => {
+const getLocalValue = async () => {
   const { items } = await searchMethod({id: props.value});
-  queues.value = items;
+  localValue.value = items;
 };
 
-getQueues();
+getLocalValue();
 </script>
 
 <style lang="scss" scoped>

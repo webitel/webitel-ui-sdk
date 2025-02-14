@@ -27,7 +27,7 @@ const preRequestHandler = (item) => {
 };
 
 const getRoleList = async (params) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'ids'];
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'ids'];
 
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
