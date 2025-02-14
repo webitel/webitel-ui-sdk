@@ -475,58 +475,61 @@ export default {
       filterLabel: ({ linked }) => {
         return linked('vocabulary.labels');
       },
-      agent : ({ linked }) => {
+      agent: ({ linked }) => {
         return linked('objects.agent.agent');
       },
-      amdResult : ({ linked }) => {
+      amdResult: ({ linked }) => {
         return linked('objects.amdResult');
       },
-      contact : ({ linked }) => {
+      contact: ({ linked }) => {
         return linked('vocabulary.contact');
       },
-      createdAtFrom : ({ linked }) => {
+      createdAtFrom: ({ linked }) => {
         return linked('reusable.from');
       },
-      createdAtTo : ({ linked }) => {
+      createdAtTo: ({ linked }) => {
         return linked('reusable.to');
       },
-      direction : ({ linked }) => {
-        return linked('calls.direction');
+      direction: ({ linked }) => {
+        return linked('objects.direction');
       },
-      duration : ({ linked }) => {
+      evaluation: ({ linked }) => {
+        return linked('objects.evaluation');
+      },
+      gateway: ({ linked }) => {
+        return linked('objects.gateway');
+      },
+      duration: ({ linked }) => {
         return linked('vocabulary.duration');
       },
-      gateway : ({ linked }) => {
-        return linked('vocabulary.gateway');
-      },
-      grantee : ({ linked }) => {
+      grantee: ({ linked }) => {
         return linked('objects.grantee');
       },
-      hangupCause : ({ linked }) => {
+      hangupCause: ({ linked }) => {
         return linked('objects.hangupCause');
       },
-      hasOption : ({ linked }) => {
+      hasOption: ({ linked }) => {
         return linked('objects.hasOption'); ////
       },
-      queue : ({ linked }) => {
+      queue: ({ linked }) => {
         return linked('objects.queue.queue');
       },
-      recording : ({ linked }) => {
+      recording: ({ linked }) => {
         return linked('objects.hasRecording');
       },
-      score : ({ linked }) => {
+      score: ({ linked }) => {
         return linked('webitelUI.auditForm.score');
       },
-      tag : ({ linked }) => {
+      tag: ({ linked }) => {
         return linked('vocabulary.tag');
       },
-      team : ({ linked }) => {
+      team: ({ linked }) => {
         return linked('objects.team');
       },
-      user : ({ linked }) => {
+      user: ({ linked }) => {
         return linked('objects.user');
       },
-      variable : ({ linked }) => {
+      variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
     },

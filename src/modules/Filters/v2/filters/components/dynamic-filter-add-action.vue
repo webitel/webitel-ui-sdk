@@ -36,12 +36,16 @@ const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped>
-.dynamic-filter-add-action-wrapper {
+.dynamic-filter-add-action {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  cursor: pointer;
-  gap: var(--spacing-2xs);
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    cursor: pointer;
+    gap: var(--spacing-2xs);
+  }
 }
 </style>
