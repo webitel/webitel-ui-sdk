@@ -1,15 +1,17 @@
 <template>
-  <div>{{date}}</div>
+  <div>
+    {{ t(`calls.direction.${value}`) }}
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { useI18n } from "vue-i18n";
 
 const props = defineProps<{
   value: number[];
 }>();
 
-const date = ref(new Date(+props.value).toLocaleDateString());
+const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped></style>

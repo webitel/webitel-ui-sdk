@@ -1,8 +1,8 @@
 <template>
   <wt-datepicker
     v-if="model"
+    :label="`${t('webitelUI.filters.createdAtTo')}:`"
     :value="model"
-    :label="`${t('webitelUI.filters.filterCalendarTo')}:`"
     @input="model = $event"
   />
 </template>

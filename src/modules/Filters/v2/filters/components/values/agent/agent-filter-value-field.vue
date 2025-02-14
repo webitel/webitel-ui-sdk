@@ -26,6 +26,7 @@ const model = defineModel<ModelValue>();
 const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
+
 const { t } = useI18n();
 
 const v$ = useVuelidate(

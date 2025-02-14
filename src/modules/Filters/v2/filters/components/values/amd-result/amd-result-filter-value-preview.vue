@@ -1,15 +1,20 @@
 <template>
-  <div>{{date}}</div>
+  <ul>
+    <li
+      v-for="(result, index) of props.value"
+      :key="index"
+    >
+      {{ result }}
+    </li>
+  </ul>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-
 const props = defineProps<{
   value: number[];
 }>();
 
-const date = ref(new Date(+props.value).toLocaleDateString());
+
 </script>
 
 <style lang="scss" scoped></style>
