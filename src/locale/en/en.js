@@ -153,6 +153,11 @@ export default {
     hasOption: 'Has option',
     hasRecording: 'Has recording',
     amdResult: 'AMD result',
+    evaluation: 'Evaluation',
+    ratedBy: 'Rated by',
+    talkDuration: 'Talk duration',
+    totalDuration: 'Total duration',
+    transcription: 'Transcription',
     queue: {
       queue: 'Queue | Queues',
       type: {
@@ -491,8 +496,8 @@ export default {
       direction : ({ linked }) => {
         return linked('calls.direction');
       },
-      duration : ({ linked }) => {
-        return linked('vocabulary.duration');
+      evaluation: ({ linked }) => {
+        return linked('objects.evaluation');
       },
       gateway : ({ linked }) => {
         return linked('vocabulary.gateway');
@@ -503,11 +508,11 @@ export default {
       hangupCause : ({ linked }) => {
         return linked('objects.hangupCause');
       },
-      hasOption : ({ linked }) => {
-        return linked('objects.hasOption'); ////
-      },
       queue : ({ linked }) => {
         return linked('objects.queue.queue');
+      },
+      ratedBy : ({ linked }) => {
+        return linked('objects.ratedBy');
       },
       recording : ({ linked }) => {
         return linked('objects.hasRecording');
@@ -518,8 +523,17 @@ export default {
       tag : ({ linked }) => {
         return linked('vocabulary.tag');
       },
+      talkDuration: ({ linked }) => {
+        return linked('objects.talkDuration');
+      },
       team : ({ linked }) => {
         return linked('objects.team');
+      },
+      totalDuration: ({ linked }) => {
+        return linked('objects.totalDuration');
+      },
+      transcription: ({ linked }) => {
+        return linked('objects.transcription');
       },
       user : ({ linked }) => {
         return linked('objects.user');

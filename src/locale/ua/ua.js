@@ -151,6 +151,11 @@ export default {
     hasOption: 'Has option',
     hasRecording: 'Запис розмови',
     amdResult: 'AMD результат',
+    evaluation: 'Оцінювання',
+    ratedBy: 'Оцінено ким',
+    talkDuration: 'Тривалість розмови',
+    totalDuration: 'Загальна тривалість',
+    transcription: 'Транскрипція',
     queue: {
       queue: 'Черга | Черги',
       type: {
