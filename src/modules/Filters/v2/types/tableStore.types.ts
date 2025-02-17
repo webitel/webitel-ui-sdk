@@ -41,6 +41,7 @@ export interface TableStore<Entity> {
   // tableStore
   initialize: () => Promise<void>;
   loadDataList: (query?: object) => Promise<void>;
+  updateSelected: (selected: Entity[]) => void;
   patchItemProperty: (payload: PatchItemPropertyParams) => Promise<void>;
   deleteEls: (deleted: Entity[]) => Promise<void>;
 

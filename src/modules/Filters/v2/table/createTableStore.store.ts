@@ -32,7 +32,11 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
     const headersStore = useHeadersStore();
     const { headers, shownHeaders, fields, sort } = storeToRefs(headersStore);
-    const { updateSort, updateShownHeaders, setupPersistence: setupHeadersPersistence } = headersStore;
+    const {
+      updateSort,
+      updateShownHeaders,
+      setupPersistence: setupHeadersPersistence,
+    } = headersStore;
 
     const filtersStore = useFiltersStore();
     const { filtersManager, isRestoring: isFiltersRestoring } =
@@ -67,6 +71,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
         const { items, next } = await apiModule.getList(params);
 
         dataList.value = items;
+        updateSelected([]);
         $patchPaginationStore({ next });
       } catch (err) {
         error.value = err;
@@ -74,6 +79,10 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       } finally {
         isLoading.value = false;
       }
+    };
+
+    const updateSelected = (value) => {
+      selected.value = value;
     };
 
     const patchItemProperty = async ({
@@ -163,6 +172,8 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       initialize,
 
       loadDataList,
+
+      updateSelected,
       patchItemProperty,
       deleteEls,
 
