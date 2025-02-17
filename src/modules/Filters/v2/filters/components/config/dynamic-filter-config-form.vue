@@ -5,7 +5,9 @@
       :label="t('webitelUI.filters.filterName')"
       :options="options"
       :value="filterName"
-      use-value-from-options-by-prop="id"
+      :clearable="false"
+      track-by="value"
+      use-value-from-options-by-prop="value"
       @input="onFilterNameUpdate($event)"
     />
 
