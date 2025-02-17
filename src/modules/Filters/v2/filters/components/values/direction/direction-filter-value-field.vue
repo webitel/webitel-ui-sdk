@@ -4,6 +4,7 @@
     :label="t('webitelUI.filters.filterValue')"
     :options="DirectionOptions"
     :value="model"
+    :v="v$.model"
     track-by="value"
     use-value-from-options-by-prop="value"
     @input="model = $event"

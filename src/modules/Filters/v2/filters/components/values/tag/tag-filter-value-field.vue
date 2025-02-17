@@ -4,6 +4,7 @@
     :label="t('webitelUI.filters.filterValue')"
     :options="TagOptions"
     :value="model"
+    :v="v$.model"
     multiple
     track-by="value"
     use-value-from-options-by-prop="value"

@@ -4,6 +4,7 @@
     :label="t('webitelUI.filters.filterValue')"
     :search-method="searchMethod"
     :value="model"
+    :v="v$.model"
     multiple
     use-value-from-options-by-prop="id"
     @input="handleInput"
@@ -53,5 +54,4 @@ const handleInput = (value: ModelValue) => {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -1,6 +1,7 @@
 <template>
   <has-option-filter-value-field
     :value="model"
+    :v="v$.model"
     @update:model-value="model = $event"
   />
 </template>

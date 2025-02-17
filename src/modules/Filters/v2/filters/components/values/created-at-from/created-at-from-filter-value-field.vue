@@ -2,7 +2,7 @@
   <wt-datepicker
     v-if="model"
     :value="model"
-    :label="`${t('webitelUI.filters.filterCalendarFrom')}:`"
+    :label="`${t('webitelUI.filters.createdAtFrom')}:`"
     @input="model = $event"
   />
 </template>
