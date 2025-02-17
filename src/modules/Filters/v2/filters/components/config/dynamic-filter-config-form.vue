@@ -6,7 +6,7 @@
       :options="options"
       :value="filterName"
       use-value-from-options-by-prop="id"
-      @input="filterName = $event"
+      @input="onFilterNameUpdate($event)"
     />
 
     <slot
@@ -94,6 +94,11 @@ const invalid = ref(false);
 const onLabelValueUpdate = (val: string) => {
   filterLabel.value = val;
   touchedLabel.value = true;
+};
+
+const onFilterNameUpdate = (val: string) => {
+  filterName.value = val;
+  filterValue.value = null;
 };
 
 const submit = () => {
