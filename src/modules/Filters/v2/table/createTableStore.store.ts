@@ -54,6 +54,10 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
     const error = ref(null);
     const isLoading = ref(false);
 
+    const updateSelected = (value: Entity[]) => {
+      selected.value = value;
+    };
+
     const loadDataList = async () => {
       isLoading.value = true;
       $patchPaginationStore({ next: false });
@@ -79,10 +83,6 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       } finally {
         isLoading.value = false;
       }
-    };
-
-    const updateSelected = (value) => {
-      selected.value = value;
     };
 
     const patchItemProperty = async ({

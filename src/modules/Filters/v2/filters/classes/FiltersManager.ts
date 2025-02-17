@@ -128,9 +128,9 @@ class FiltersManager implements IFiltersManager {
     include,
     exclude,
   }: {
-    include: FilterName[];
-    exclude: FilterName[];
-  }): IFilter[] {
+    include?: FilterName[];
+    exclude?: FilterName[];
+  } = {}): IFilter[] {
     const useInclude = !isEmpty(include);
     const useExclude = !isEmpty(exclude) && !useInclude;
 
