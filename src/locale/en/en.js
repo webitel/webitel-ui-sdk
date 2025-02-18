@@ -496,7 +496,7 @@ export default {
       direction: ({ linked }) => {
         return linked('objects.direction');
       },
-      evaluation: ({ linked }) => {
+      rated: ({ linked }) => {
         return linked('objects.evaluation');
       },
       gateway: ({ linked }) => {
@@ -505,7 +505,7 @@ export default {
       grantee: ({ linked }) => {
         return linked('objects.grantee');
       },
-      hangupCause: ({ linked }) => {
+      cause: ({ linked }) => {
         return linked('objects.hangupCause');
       },
       queue: ({ linked }) => {
@@ -514,25 +514,25 @@ export default {
       ratedBy: ({ linked }) => {
         return linked('objects.ratedBy');
       },
-      recording: ({ linked }) => {
+      hasFile: ({ linked }) => {
         return linked('objects.hasRecording');
       },
       score: ({ linked }) => {
         return linked('webitelUI.auditForm.score');
       },
-      tag: ({ linked }) => {
+      tags: ({ linked }) => {
         return linked('vocabulary.tag');
       },
-      talkDuration: ({ linked }) => {
+      talkSec: ({ linked }) => {
         return linked('objects.talkDuration');
       },
       team: ({ linked }) => {
         return linked('objects.team');
       },
-      totalDuration: ({ linked }) => {
+      duration: ({ linked }) => {
         return linked('objects.totalDuration');
       },
-      transcription: ({ linked }) => {
+      hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
       user: ({ linked }) => {
