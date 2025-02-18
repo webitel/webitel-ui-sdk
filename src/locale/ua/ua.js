@@ -493,19 +493,16 @@ export default {
       direction: ({ linked }) => {
         return linked('objects.direction');
       },
-      evaluation: ({ linked }) => {
+      rated: ({ linked }) => {
         return linked('objects.evaluation');
       },
       gateway: ({ linked }) => {
         return linked('objects.gateway');
       },
-      duration: ({ linked }) => {
-        return linked('vocabulary.duration');
-      },
       grantee: ({ linked }) => {
         return linked('objects.grantee');
       },
-      hangupCause: ({ linked }) => {
+      cause: ({ linked }) => {
         return linked('objects.hangupCause');
       },
       hasOption: ({ linked }) => {
@@ -514,17 +511,26 @@ export default {
       queue: ({ linked }) => {
         return linked('objects.queue.queue');
       },
-      recording: ({ linked }) => {
+      hasFile: ({ linked }) => {
         return linked('objects.hasRecording');
       },
       score: ({ linked }) => {
         return linked('webitelUI.auditForm.score');
       },
-      tag: ({ linked }) => {
+      tags: ({ linked }) => {
         return linked('vocabulary.tag');
+      },
+      talkSec: ({ linked }) => {
+        return linked('objects.talkDuration');
       },
       team: ({ linked }) => {
         return linked('objects.team');
+      },
+      duration: ({ linked }) => {
+        return linked('objects.totalDuration');
+      },
+      hasTranscription: ({ linked }) => {
+        return linked('objects.transcription');
       },
       user: ({ linked }) => {
         return linked('objects.user');
