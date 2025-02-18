@@ -45,7 +45,6 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
 */
 %wt-placeholder {
   transition: var(--transition);
-  font: inherit;
   color: var(--wt-text-field-placeholder-color);
 }
 
