@@ -115,6 +115,9 @@ export default {
     messaging: 'Повідомлення',
     emptyResultSearch: 'Пошук не дав результатів',
     contact: 'Контакт | Контакти',
+    author: 'Автор',
+    reporter: 'Ініціатор',
+    impacted: 'Впливає на',
   },
   // date-related texts
   date: {
@@ -156,6 +159,8 @@ export default {
     talkDuration: 'Тривалість розмови',
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
+    sourceCase: 'Джерело',
+    sla: 'SLA | SLAs',
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -475,67 +480,85 @@ export default {
       filterLabel: ({ linked }) => {
         return linked('vocabulary.labels');
       },
-      agent: ({ linked }) => {
+      agent : ({ linked }) => {
         return linked('objects.agent.agent');
       },
-      amdResult: ({ linked }) => {
+      amdResult : ({ linked }) => {
         return linked('objects.amdResult');
       },
-      contact: ({ linked }) => {
+      author: ({ linked }) => {
+        return linked('objects.author');
+      },
+      contact : ({ linked }) => {
         return linked('vocabulary.contact');
       },
-      createdAtFrom: ({ linked }) => {
+      createdAtFrom : ({ linked }) => {
         return linked('reusable.from');
       },
-      createdAtTo: ({ linked }) => {
+      createdAtTo : ({ linked }) => {
         return linked('reusable.to');
       },
-      direction: ({ linked }) => {
-        return linked('objects.direction');
+      direction : ({ linked }) => {
+        return linked('calls.direction');
       },
-      rated: ({ linked }) => {
+      evaluation: ({ linked }) => {
         return linked('objects.evaluation');
       },
-      gateway: ({ linked }) => {
-        return linked('objects.gateway');
+      gateway : ({ linked }) => {
+        return linked('vocabulary.gateway');
       },
-      grantee: ({ linked }) => {
+      grantee : ({ linked }) => {
         return linked('objects.grantee');
       },
-      cause: ({ linked }) => {
+      hangupCause : ({ linked }) => {
         return linked('objects.hangupCause');
       },
-      hasOption: ({ linked }) => {
-        return linked('objects.hasOption'); ////
+      impacted: ({ linked }) => {
+        return linked('vocabulary.impacted');
       },
-      queue: ({ linked }) => {
+      priority: ({ linked }) => {
+        return linked('vocabulary.priority');
+      },
+      queue : ({ linked }) => {
         return linked('objects.queue.queue');
       },
-      hasFile: ({ linked }) => {
+      ratedBy : ({ linked }) => {
+        return linked('objects.ratedBy');
+      },
+      recording : ({ linked }) => {
         return linked('objects.hasRecording');
       },
-      score: ({ linked }) => {
+      reported: ({ linked }) => {
+        return linked('vocabulary.reported');
+      },
+      score : ({ linked }) => {
         return linked('webitelUI.auditForm.score');
       },
-      tags: ({ linked }) => {
+      sla: ({ linked }) => {
+        return linked('objects.sla');
+      },
+      sourceCase: ({ linked }) => {
+        return linked('objects.sourceCase');
+      },
+      tag : ({ linked }) => {
         return linked('vocabulary.tag');
       },
-      talkSec: ({ linked }) => {
+      talkDuration: ({ linked }) => {
         return linked('objects.talkDuration');
       },
-      team: ({ linked }) => {
+      team : ({ linked }) => {
         return linked('objects.team');
       },
-      duration: ({ linked }) => {
+      totalDuration: ({ linked }) => {
         return linked('objects.totalDuration');
       },
-      hasTranscription: ({ linked }) => {
+      transcription: ({ linked }) => {
         return linked('objects.transcription');
       },
-      user: ({ linked }) => {
+      user : ({ linked }) => {
         return linked('objects.user');
       },
-      variable: ({ linked }) => {
+      variable : ({ linked }) => {
         return linked('vocabulary.variables');
       },
     },

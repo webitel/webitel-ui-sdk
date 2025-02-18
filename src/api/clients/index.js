@@ -16,6 +16,9 @@ import skills from './skills/skills.js';
 import teams from './teams/teams.js';
 import users from './users/users.js';
 import { contactChatMessagesHistory, contacts } from './сontacts/index.js';
+import caseSources from './caseSources/caseSources.js';
+import casePriorities from './casePriorities/casePriorities.js';
+import slas from './slas/slas.js';
 
 export {
   agents,
@@ -37,4 +40,7 @@ export {
   configurations,
   contacts,
   contactChatMessagesHistory,
+  caseSources,
+  casePriorities,
+  slas,
 };
