@@ -6,8 +6,9 @@ import type { createUserAccessStore } from '../../../../modules/Userinfo/v2/stor
 export type CreateUserAccessControlComposableParams =
   ReturnType<createUserAccessStore>;
 
-export type UseUserAccessControlComposableOptions = {
+export type UseUserAccessControlComposableOptions = WtObject | {
   resource?: WtObject;
+  useUpdateAccessAsAllMutableChecksSource?: boolean;
 };
 
 export interface UseAccessControlReturn {
