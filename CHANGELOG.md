@@ -1,3 +1,31 @@
+## [v24.12.115] - 2025-02-18
+### :sparkles: New Features
+- [`3f3bea2`](https://github.com/webitel/webitel-ui-sdk/commit/3f3bea2ec612c8781d4c1e6aad73b961c46faf09) - pinia tableStore updateSelected method [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`0c0ecac`](https://github.com/webitel/webitel-ui-sdk/commit/0c0ecacf3a988b64b2add2250a678adbc0272d3c) - add new previews[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`22f0be6`](https://github.com/webitel/webitel-ui-sdk/commit/22f0be63f6df14fef29a0ce3fffaaab75e4c1f58) - add new preview component[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`099d242`](https://github.com/webitel/webitel-ui-sdk/commit/099d2421bf5dbe2344833150466a31075c9323b3) - add new preview components[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`57f832a`](https://github.com/webitel/webitel-ui-sdk/commit/57f832a5e8bfb9dc5ae363297b0df29f96a75a8a) - created at/direction/duration/user/variables preview filters[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`9d26dd3`](https://github.com/webitel/webitel-ui-sdk/commit/9d26dd39a73a6745c28059be9334e080dce768f9) - add preview components in new filters[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`208cd10`](https://github.com/webitel/webitel-ui-sdk/commit/208cd10b7a5394f0f1a9e14bbdc652a8fc4c678b) - fixed placeholder font inheritance and dynamic-filter-config-form-label validation error *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`e70b891`](https://github.com/webitel/webitel-ui-sdk/commit/e70b8910fa0e10c36b7962de9e8b4766eef21bf5) - set updates for dynamic filters fields names *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`6e540ed`](https://github.com/webitel/webitel-ui-sdk/commit/6e540ed54525ffa3944fa8679ad7a07cceac67cd) - set updates for dynamic filters locales *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`6fed2de`](https://github.com/webitel/webitel-ui-sdk/commit/6fed2de41d42f108abdb01ee76217335ae5823cd) - lvl-2 entities access control update regulation [WTEL-5445](https://webitel.atlassian.net/browse/WTEL-5445) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`5f8cd45`](https://github.com/webitel/webitel-ui-sdk/commit/5f8cd4508a5a4caf1a2e63357ab5f1c8cb2e45ad) - removed font inheritance for wt-placeholder to fix style bug *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`adc4777`](https://github.com/webitel/webitel-ui-sdk/commit/adc4777b55c0eb7369844b8616a037fc1f359fb7) - filter names [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`7bcaf4b`](https://github.com/webitel/webitel-ui-sdk/commit/7bcaf4b199a78241a016633372ef06000927be3b) - small filters/v2 fixes [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`1872fb8`](https://github.com/webitel/webitel-ui-sdk/commit/1872fb8cae5a9deda0d85f6d2fb9f893c1b10294) - set fixes for dynamic filters validation *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`086bfae`](https://github.com/webitel/webitel-ui-sdk/commit/086bfaebd160b8c087a2e9a7cdf0cb3d85ffc845) - set fixes for wt-tooltip [WTEL-5916] (https://webitel.atlassian.net/browse/WTEL-5916) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`168a324`](https://github.com/webitel/webitel-ui-sdk/commit/168a3247d3e5baf450703d8afd087eff352ab1dd) - set fixes for dynamic preview components locales [WTEL-5916] (https://webitel.atlassian.net/browse/WTEL-5916) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`78f9149`](https://github.com/webitel/webitel-ui-sdk/commit/78f9149df2b3ead14299cfd3f6642cdc86888299) - import filter component[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`ba64ae2`](https://github.com/webitel/webitel-ui-sdk/commit/ba64ae2ba90b90f52a29da4e852c8dbf3fa7d805) - @24.12.106 update version[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`13ecf60`](https://github.com/webitel/webitel-ui-sdk/commit/13ecf60df89524572c546cfc49337d0a98e49db3) - after codereview[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`a84d6c6`](https://github.com/webitel/webitel-ui-sdk/commit/a84d6c6b45a02eed14ce8380dc32102c37a6f9ad) - conflict[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`b8ed014`](https://github.com/webitel/webitel-ui-sdk/commit/b8ed01446edf0446f8aa7cbb116059fa33826635) - merge changes[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`32d96b9`](https://github.com/webitel/webitel-ui-sdk/commit/32d96b9ac1e629ad62e4ceef0f4c452bd1c300bc) - conflict[WTEL-5917](https://webitel.atlassian.net/browse/WTEL-5917) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.102] - 2025-02-13
 ### :bug: Bug Fixes
 - [`7636ad6`](https://github.com/webitel/webitel-ui-sdk/commit/7636ad6ed7e7d0ba6047291f196924e26a362553) - implimented version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1116,3 +1144,4 @@
 [v24.12.100]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.99...v24.12.100
 [v24.12.101]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.100...v24.12.101
 [v24.12.102]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.101...v24.12.102
+[v24.12.115]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.102...v24.12.115
