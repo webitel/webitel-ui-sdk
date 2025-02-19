@@ -1,3 +1,7 @@
+import ActualReactionTimeFilter from './actual-reaction-time/actual-reaction-time-filter-value-field.vue';
+import ActualReactionTimeFilterPreview from './actual-reaction-time/actual-reaction-time-filter-value-preview.vue';
+import ActualResolutionTimeFilter from './actual-resolution-time/actual-resolution-time-filter-value-field.vue';
+import ActualResolutionTimeFilterPreview from './actual-resolution-time/actual-resolution-time-filter-value-preview.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
 import AmdResultFilter from './amd-result/amd-result-filter-value-field.vue';
@@ -38,10 +42,14 @@ import RatedByFilter from './rated-by/rated-by-filter-value-field.vue';
 import RatedByFilterPreview from './rated-by/rated-by-filter-value-preview.vue';
 import RatingFromToFilter from './rating/rating-from-to-filter-value-field.vue';
 import RatingFromToFilterPreview from './rating/rating-from-to-filter-value-preview.vue';
+import ReactionTimeFilter from './reaction-time/reaction-time-filter-value-field.vue';
+import ReactionTimeFilterPreview from './reaction-time/reaction-time-filter-value-preview.vue';
 import CloseReasonGroupsCaseFilter from './close-reason-groups-case/close-reason-groups-case-filter-value-field.vue';
 import CloseReasonGroupsCasePreview from './close-reason-groups-case/close-reason-groups-case-filter-value-preview.vue';
 import ReporterFilter from './reporter/reporter-filter-value-field.vue';
 import ReporterFilterPreview from './reporter/reporter-filter-value-preview.vue';
+import ResolutionTimeFilter from './resolution-time/resolution-time-filter-value-field.vue';
+import ResolutionTimeFilterPreview from './resolution-time/resolution-time-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
 import SlaFilter from './sla/sla-filter-value-field.vue';
@@ -64,6 +72,10 @@ import VariableFilter from './variable/variable-filter-value-field.vue';
 import VariableFilterPreview from './variable/variable-filter-value-preview.vue';
 
 export {
+  ActualReactionTimeFilter,
+  ActualReactionTimeFilterPreview,
+  ActualResolutionTimeFilter,
+  ActualResolutionTimeFilterPreview,
   AgentFilter,
   AgentFilterPreview,
   AmdResultFilter,
@@ -104,10 +116,14 @@ export {
   RatedFilterPreview,
   RatingFromToFilter,
   RatingFromToFilterPreview,
+  ReactionTimeFilter,
+  ReactionTimeFilterPreview,
   CloseReasonGroupsCaseFilter,
   CloseReasonGroupsCasePreview,
   ReporterFilter,
   ReporterFilterPreview,
+  ResolutionTimeFilter,
+  ResolutionTimeFilterPreview,
   ScoreFilter,
   ScoreFilterPreview,
   SlaFilter,
