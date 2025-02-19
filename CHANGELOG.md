@@ -1,3 +1,8 @@
+## [v24.12.116] - 2025-02-19
+### :recycle: Refactors
+- [`b6a89bb`](https://github.com/webitel/webitel-ui-sdk/commit/b6a89bb2a20a3f32a78fc83f8a791df18de8727f) - WtNavigationBar types [WTEL-5896](https://webitel.atlassian.net/browse/WTEL-5896) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.115] - 2025-02-18
 ### :sparkles: New Features
 - [`3f3bea2`](https://github.com/webitel/webitel-ui-sdk/commit/3f3bea2ec612c8781d4c1e6aad73b961c46faf09) - pinia tableStore updateSelected method [WTEL-5921](https://webitel.atlassian.net/browse/WTEL-5921) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1145,3 +1150,4 @@
 [v24.12.101]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.100...v24.12.101
 [v24.12.102]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.101...v24.12.102
 [v24.12.115]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.102...v24.12.115
+[v24.12.116]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.115...v24.12.116
