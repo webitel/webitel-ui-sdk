@@ -1,11 +1,11 @@
 <template>
   <form class="dynamic-filter-config-form">
     <wt-select
+      :clearable="false"
       :disabled="editMode"
       :label="t('webitelUI.filters.filterName')"
       :options="options"
       :value="filterName"
-      :clearable="false"
       track-by="value"
       use-value-from-options-by-prop="value"
       @input="onFilterNameUpdate($event)"
@@ -101,6 +101,7 @@ const onLabelValueUpdate = (val: string) => {
 const onFilterNameUpdate = (val: string) => {
   filterName.value = val;
   filterValue.value = null;
+  filterLabel.value = t(`webitelUI.filters.${val}`);
 };
 
 const submit = () => {
@@ -119,7 +120,7 @@ if (props.options) {
       filterValue.value = null;
 
       if (!touchedLabel.value) {
-        filterLabel.value = filterName.value;
+        filterLabel.value = t(`webitelUI.filters.${filterName.value}`);
       }
     },
     { immediate: true },
