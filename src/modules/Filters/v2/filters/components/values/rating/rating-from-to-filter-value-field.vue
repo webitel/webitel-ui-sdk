@@ -4,11 +4,12 @@
       v-if="model"
       :value="model.from"
       :number-min="0"
+      :number-max="numberMax"
       :v="v$.model?.from"
       :label="`${t('webitelUI.filters.filterValueFrom')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="rating-from-to-filter-value-field__input"
-      name="rating-from-to-filter-value-field-from"
+      name="rating-from"
       type="number"
       @input="handleInput('from', $event)"
     />
@@ -21,7 +22,7 @@
       :label="`${t('reusable.to').toLowerCase()}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="rating-from-to-filter-value-field__input"
-      name="rating-from-to-filter-value-field-to"
+      name="rating-to"
       type="number"
       @input="handleInput('to', $event)"
     />
@@ -30,7 +31,7 @@
 
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
-import { requiredIf } from '@vuelidate/validators';
+import { maxValue, requiredIf } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -52,10 +53,17 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
+const numberMax = computed(() =>
+  model.value.to > 0 ? model.value.to : undefined,
+);
+
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      from: { requiredIf: requiredIf(() => !model.value.to) },
+      from: {
+        requiredIf: requiredIf(() => !model.value.to),
+        maxValue: model.value?.to ? maxValue(model.value.to) : true,
+      },
       to: { requiredIf: requiredIf(() => !model.value.from) },
     },
   })),
@@ -84,5 +92,9 @@ watch(
   display: flex;
   align-items: center;
   grid-gap: var(--spacing-xs);
+
+  &__input {
+    width: 100%;
+  }
 }
 </style>
