@@ -8,7 +8,7 @@
       :value="model?.selection"
       track-by="id"
       use-value-from-options-by-prop="id"
-      @input="onSelectionUpdate($event)"
+      @input="changeSelection($event)"
     />
 
     <wt-select
@@ -20,6 +20,7 @@
       :v="v$?.model?.conditions"
       :value="model?.conditions"
       multiple
+      track-by="id"
       use-value-from-options-by-prop="id"
       @input="model.conditions = $event"
     />
@@ -48,6 +49,8 @@ const initModel = () => {
       selection: '',
       conditions: '',
     };
+  } else {
+    onSelectionUpdate(model.value.selection);
   }
 }
 onMounted(() => initModel());
@@ -56,7 +59,6 @@ const conditionList = ref([]);
 
 const onSelectionUpdate = async (val: string) => {
   model.value.selection = val;
-  model.value.conditions = '';
 
   if (val) {
     const { items } = await getConditionList();
@@ -65,6 +67,11 @@ const onSelectionUpdate = async (val: string) => {
     }
   }
 };
+
+const changeSelection = (value) => {
+  onSelectionUpdate(value);
+  model.value.conditions = '';
+}
 
 const getConditionList = async (params = undefined) => {
   return await caseStatusConditionsSearchMethod({
