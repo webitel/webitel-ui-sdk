@@ -1,10 +1,10 @@
 <template>
   <transition
     class="wt-transition"
-    :class="[`wt-transition--${durationVar}`]"
-    :mode="mode"
+    :class="[`wt-transition--${props.duration}`]"
+    :mode="props.mode"
     :appear="props.appear"
-    :name="name"
+    :name="props.name"
   >
     <slot />
   </transition>
@@ -14,7 +14,7 @@
 const props = defineProps({
   name: {
     type: String,
-    default: 'fade',
+    default: 'fade-opacity',
   },
   mode: {
     type: String,
@@ -24,7 +24,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  durationVar: {
+  duration: {
     type: String,
     default: 'sm',
   },
@@ -32,13 +32,13 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active,
-.fade-leave-active {
+.fade-opacity-enter-active,
+.fade-opacity-leave-active {
   transition: opacity;
 }
 
-.fade-enter,
-.fade-leave-to {
+.fade-opacity-enter,
+.fade-opacity-leave-to {
   opacity: 0;
 }
 
