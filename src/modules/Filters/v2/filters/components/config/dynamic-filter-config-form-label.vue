@@ -2,7 +2,7 @@
   <wt-input
     :value="model"
     :label="t('webitelUI.filters.filterLabel')"
-    :v="v$"
+    :v="v$.model"
     @input="model = $event"
   />
 </template>
