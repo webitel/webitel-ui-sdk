@@ -486,7 +486,7 @@ export default {
         return linked('objects.amdResult');
       },
       author: ({ linked }) => {
-        return linked('objects.author');
+        return linked('vocabulary.author');
       },
       cause : ({ linked }) => {
         return linked('objects.hangupCause');
