@@ -162,6 +162,11 @@ export default {
     transcription: 'Transcription',
     sourceCase: 'Source',
     sla: 'SLA | SLAs',
+    attachment: 'Attachment | Attachments',
+    rating: 'Rating',
+    assignee: 'Assignee | Assignees',
+    statusConditions: 'Status conditions',
+    reasonGroups: 'reasonGroups',
     queue: {
       queue: 'Queue | Queues',
       type: {
@@ -488,6 +493,9 @@ export default {
       amdResult : ({ linked }) => {
         return linked('objects.amdResult');
       },
+      assignee: ({ linked }) => {
+        return linked('objects.assignee');
+      },
       author: ({ linked }) => {
         return linked('vocabulary.author');
       },
@@ -512,6 +520,12 @@ export default {
       grantee : ({ linked }) => {
         return linked('objects.grantee');
       },
+      reasonGroups: ({ linked }) => {
+        return linked('objects.reasonGroups');
+      },
+      hasAttachment: ({ linked }) => {
+        return linked('objects.attachment');
+      },
       hasFile: ({ linked }) => {
         return linked('objects.hasRecording');
       },
@@ -530,6 +544,9 @@ export default {
       ratedBy : ({ linked }) => {
         return linked('objects.ratedBy');
       },
+      rating: ({ linked }) => {
+        return linked('objects.rating');
+      },
       reporter: ({ linked }) => {
         return linked('vocabulary.reporter');
       },
@@ -542,6 +559,9 @@ export default {
       sourceCase: ({ linked }) => {
         return linked('objects.sourceCase');
         },
+      statusConditions: ({ linked }) => {
+        return linked('objects.statusConditions');
+      },
       tag : ({ linked }) => {
         return linked('vocabulary.tag');
       },

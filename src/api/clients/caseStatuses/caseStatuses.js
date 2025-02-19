@@ -109,7 +109,7 @@ const getStatusesLookup = async (params) =>
     fields: params.fields || ['id', 'name'],
   });
 
-const StatusesApi = {
+const CaseStatusesApi = {
   getList: getStatusesList,
   get: getStatus,
   update: updateStatus,
@@ -118,4 +118,4 @@ const StatusesApi = {
   add: addStatus,
 };
 
-export default StatusesApi;
+export default CaseStatusesApi;

@@ -1,4 +1,4 @@
-import UsersAPI from '../../../../../../../api/clients/users/users.js';
+import ContactsAPI from '../../../../../../../api/clients/сontacts/contacts.js';
 
-export const searchMethod = UsersAPI.getLookup;
+export const searchMethod = ContactsAPI.getLookup;
 export const localePath = '';

@@ -2,35 +2,31 @@
   <div class="rating-from-to-filter-value-field">
     <wt-input
       v-if="model"
-      :value="model.from"
-      :number-min="0"
-      :v="v$.model?.from"
       :label="`${t('webitelUI.filters.filterValueFrom')}:`"
+      :number-min="0"
       :placeholder="t('webitelUI.filters.filterValue')"
-      class="rating-from-to-filter-value-field__input"
-      name="rating-from-to-filter-value-field-from"
+      :v="v$.model?.from"
+      :value="model.from"
       type="number"
       @input="handleInput('from', $event)"
     />
 
     <wt-input
       v-if="model"
-      :value="model.to"
-      :number-min="0"
-      :v="v$.model?.to"
       :label="`${t('reusable.to').toLowerCase()}:`"
+      :number-min="0"
       :placeholder="t('webitelUI.filters.filterValue')"
-      class="rating-from-to-filter-value-field__input"
-      name="rating-from-to-filter-value-field-to"
+      :v="v$.model?.to"
+      :value="model.to"
       type="number"
       @input="handleInput('to', $event)"
     />
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { requiredIf } from '@vuelidate/validators';
+import { requiredIf, maxValue } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -55,8 +51,13 @@ const { t } = useI18n();
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      from: { requiredIf: requiredIf(() => !model.value.to) },
-      to: { requiredIf: requiredIf(() => !model.value.from) },
+      from: {
+        requiredIf: requiredIf(() => !model.value.to),
+        maxValue: maxValue((model?.value?.to && model.value.from > model.value.to) ? model.value.to : Infinity),
+      },
+      to: {
+        requiredIf: requiredIf(() => !model.value.from),
+      },
     },
   })),
   { model },

@@ -38,8 +38,8 @@ import RatedByFilter from './rated-by/rated-by-filter-value-field.vue';
 import RatedByFilterPreview from './rated-by/rated-by-filter-value-preview.vue';
 import RatingFromToFilter from './rating/rating-from-to-filter-value-field.vue';
 import RatingFromToFilterPreview from './rating/rating-from-to-filter-value-preview.vue';
-import ReasonGroupsCaseFilterValueField from './reason-groups-case/reason-groups-case-filter-value-field.vue';
-import ReasonGroupsCaseFilterValueFieldPreview from './reason-groups-case/reason-groups-case-filter-value-preview.vue';
+import CloseReasonGroupsCaseFilter from './close-reason-groups-case/close-reason-groups-case-filter-value-field.vue';
+import CloseReasonGroupsCasePreview from './close-reason-groups-case/close-reason-groups-case-filter-value-preview.vue';
 import ReporterFilter from './reporter/reporter-filter-value-field.vue';
 import ReporterFilterPreview from './reporter/reporter-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
@@ -48,8 +48,8 @@ import SlaFilter from './sla/sla-filter-value-field.vue';
 import SlaFilterPreview from './sla/sla-filter-value-preview.vue';
 import SourceCaseFilter from './source-case/source-case-filter-value-field.vue';
 import SourceCaseFilterPreview from './source-case/source-case-filter-value-preview.vue';
-import StatusConditionsCaseFilter from './status-conditions-case/status-conditions-case-filter-value-field.vue';
-import StatusConditionsCaseFilterPreview from './status-conditions-case/status-conditions-case-filter-value-preview.vue';
+import StatusCaseFilter from './status-case/status-case-filter-value-field.vue';
+import StatusCasePreview from './status-case/status-case-filter-value-preview.vue';
 import TagFilter from './tag/tag-filter-value-field.vue';
 import TagFilterPreview from './tag/tag-filter-value-preview.vue';
 import TalkDuration from './talk-duration/talk-duration-filter-value-field.vue';
@@ -104,8 +104,8 @@ export {
   RatedFilterPreview,
   RatingFromToFilter,
   RatingFromToFilterPreview,
-  ReasonGroupsCaseFilterValueField,
-  ReasonGroupsCaseFilterValueFieldPreview,
+  CloseReasonGroupsCaseFilter,
+  CloseReasonGroupsCasePreview,
   ReporterFilter,
   ReporterFilterPreview,
   ScoreFilter,
@@ -114,8 +114,8 @@ export {
   SlaFilterPreview,
   SourceCaseFilter,
   SourceCaseFilterPreview,
-  StatusConditionsCaseFilter,
-  StatusConditionsCaseFilterPreview,
+  StatusCaseFilter,
+  StatusCasePreview,
   TagFilter,
   TagFilterPreview,
   TalkDuration,
