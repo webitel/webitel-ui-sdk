@@ -149,10 +149,11 @@ const deleteStatusCondition = async ({ id, parentId }) => {
 const getStatusesLookup = (params) =>
   getStatusConditionsList({
     parentId: params.parentId,
+    id: params.id,
     fields: params.fields || ['id', 'name'],
   });
 
-const StatusConditionsAPI = {
+const CaseStatusConditionsAPI = {
   getList: getStatusConditionsList,
   getLookup: getStatusesLookup,
   get: getStatusCondition,
@@ -162,4 +163,4 @@ const StatusConditionsAPI = {
   add: addStatusCondition,
 };
 
-export default StatusConditionsAPI;
+export default CaseStatusConditionsAPI;
