@@ -154,7 +154,6 @@ export default {
     hasOption: 'Has option',
     hasRecording: 'Запись разговора',
     amdResult: 'AMD результат',
-    evaluation: 'Оценивание',
     ratedBy: 'Оценено кем',
     talkDuration: 'Длительность разговора',
     totalDuration: 'Общая длительность',
@@ -489,6 +488,9 @@ export default {
       author: ({ linked }) => {
         return linked('objects.author');
       },
+      cause : ({ linked }) => {
+        return linked('objects.hangupCause');
+      },
       contact : ({ linked }) => {
         return linked('vocabulary.contact');
       },
@@ -501,22 +503,22 @@ export default {
       direction : ({ linked }) => {
         return linked('calls.direction');
       },
-      evaluation: ({ linked }) => {
-        return linked('objects.evaluation');
-      },
       gateway : ({ linked }) => {
         return linked('vocabulary.gateway');
       },
       grantee : ({ linked }) => {
         return linked('objects.grantee');
       },
-      hangupCause : ({ linked }) => {
-        return linked('objects.hangupCause');
+      hasFile: ({ linked }) => {
+        return linked('objects.hasRecording');
+      },
+      hasTranscription: ({ linked }) => {
+        return linked('objects.transcription');
       },
       impacted: ({ linked }) => {
         return linked('vocabulary.impacted');
       },
-      priority: ({ linked }) => {
+      priorityCase: ({ linked }) => {
         return linked('vocabulary.priority');
       },
       queue : ({ linked }) => {
@@ -525,11 +527,8 @@ export default {
       ratedBy : ({ linked }) => {
         return linked('objects.ratedBy');
       },
-      recording : ({ linked }) => {
-        return linked('objects.hasRecording');
-      },
-      reported: ({ linked }) => {
-        return linked('vocabulary.reported');
+      reporter: ({ linked }) => {
+        return linked('vocabulary.reporter');
       },
       score : ({ linked }) => {
         return linked('webitelUI.auditForm.score');
@@ -551,9 +550,6 @@ export default {
       },
       totalDuration: ({ linked }) => {
         return linked('objects.totalDuration');
-      },
-      transcription: ({ linked }) => {
-        return linked('objects.transcription');
       },
       user : ({ linked }) => {
         return linked('objects.user');
