@@ -1,6 +1,6 @@
 <template>
   <date-time-filter-value-field
-    :value="model"
+    :model-value="model"
     @update:model-value="model = $event"
   />
 </template>

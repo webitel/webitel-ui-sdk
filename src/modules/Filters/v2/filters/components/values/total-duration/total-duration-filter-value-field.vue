@@ -1,6 +1,6 @@
 <template>
   <duration-filter-value-field
-    :value="model"
+    :model-value="model"
     @update:model-value="model = $event"
   />
 </template>
