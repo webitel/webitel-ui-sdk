@@ -115,9 +115,6 @@ export default {
     messaging: 'Повідомлення',
     emptyResultSearch: 'Пошук не дав результатів',
     contact: 'Контакт | Контакти',
-    author: 'Автор',
-    reporter: 'Ініціатор',
-    impacted: 'Впливає на',
   },
   // date-related texts
   date: {
@@ -158,8 +155,7 @@ export default {
     talkDuration: 'Тривалість розмови',
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
-    sourceCase: 'Джерело',
-    sla: 'SLA | SLAs',
+    attachment: 'Додаток | Додатки',
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -228,6 +224,24 @@ export default {
       [CallDirection.Inbound]: 'Вхідний | Вхідні',
       [CallDirection.Outbound]: 'Вихідний | Вихідні',
     },
+  },
+  cases: {
+    status: 'Статус',
+    source: 'Джерело',
+    author: 'Автор',
+    reporter: 'Ініціатор',
+    impacted: 'Впливає на',
+    assignee: 'Виконавець',
+    group: 'Група виконавців',
+    reason: 'Причина | Причини',
+    rating: 'Оцінка',
+    service: 'Cервіси | Cервіси',
+    appliedSLA: 'Застосований SLA',
+    appliedCondition: 'Застосована умова',
+    reactionTime: 'Плановий час реакції',
+    resolutionTime: 'Плановий час вирішення',
+    actualReactionTime: 'Фактичний час реакції',
+    actualResolutionTime: 'Фактичний час вирішення',
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
@@ -479,20 +493,35 @@ export default {
       filterLabel: ({ linked }) => {
         return linked('vocabulary.labels');
       },
+      actualReactionTime: ({ linked }) => {
+        return linked('cases.actualReactionTime');
+      },
+      actualResolutionTime: ({ linked }) => {
+        return linked('cases.actualResolutionTime');
+      },
       agent : ({ linked }) => {
         return linked('objects.agent.agent');
       },
       amdResult : ({ linked }) => {
         return linked('objects.amdResult');
       },
+      assignee: ({ linked }) => {
+        return linked('cases.assignee');
+      },
       author: ({ linked }) => {
-        return linked('vocabulary.author');
+        return linked('cases.author');
       },
       cause : ({ linked }) => {
         return linked('objects.hangupCause');
       },
+      closeReasonGroupsCase: ({ linked }) => {
+        return linked('cases.reason');
+      },
       contact : ({ linked }) => {
         return linked('vocabulary.contact');
+      },
+      contactGroup: ({ linked }) => {
+        return linked('cases.group');
       },
       createdAtFrom : ({ linked }) => {
         return linked('reusable.from');
@@ -509,6 +538,9 @@ export default {
       grantee : ({ linked }) => {
         return linked('objects.grantee');
       },
+      hasAttachment: ({ linked }) => {
+        return linked('objects.attachment');
+      },
       hasFile: ({ linked }) => {
         return linked('objects.hasRecording');
       },
@@ -516,7 +548,7 @@ export default {
         return linked('objects.transcription');
       },
       impacted: ({ linked }) => {
-        return linked('vocabulary.impacted');
+        return linked('cases.impacted');
       },
       priorityCase: ({ linked }) => {
         return linked('vocabulary.priority');
@@ -524,20 +556,41 @@ export default {
       queue : ({ linked }) => {
         return linked('objects.queue.queue');
       },
+      rated: ({ linked }) => {
+        return linked('objects.rated');
+      },
       ratedBy : ({ linked }) => {
         return linked('objects.ratedBy');
       },
+      rating: ({ linked }) => {
+        return linked('cases.rating');
+      },
+      reactionTime: ({ linked }) => {
+        return linked('cases.reactionTime');
+      },
       reporter: ({ linked }) => {
-        return linked('vocabulary.reporter');
+        return linked('cases.reporter');
+      },
+      resolutionTime: ({ linked }) => {
+        return linked('cases.resolutionTime');
       },
       score : ({ linked }) => {
         return linked('webitelUI.auditForm.score');
       },
+      serviceCase: ({ linked }) => {
+        return linked('cases.service');
+      },
       sla: ({ linked }) => {
-        return linked('objects.sla');
+        return linked('cases.appliedSLA');
+      },
+      slaCondition: ({ linked }) => {
+        return linked('cases.appliedCondition');
       },
       sourceCase: ({ linked }) => {
-        return linked('objects.sourceCase');
+        return linked('cases.source');
+      },
+      statusCase: ({ linked }) => {
+        return linked('cases.status');
       },
       tag : ({ linked }) => {
         return linked('vocabulary.tag');

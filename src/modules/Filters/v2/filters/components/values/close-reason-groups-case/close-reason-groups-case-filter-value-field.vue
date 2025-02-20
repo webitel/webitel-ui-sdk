@@ -2,7 +2,7 @@
   <div>
     <wt-select
       :clearable="false"
-      :label="t('webitelUI.filters.filterValue')"
+      :label="t('cases.reason')"
       :search-method="caseCloseReasonsGroupsSearchMethod"
       :v="v$?.model?.selection"
       :value="model?.selection"

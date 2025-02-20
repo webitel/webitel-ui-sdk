@@ -14,6 +14,8 @@ import CauseFilter from './cause/cause-filter-value-field.vue';
 import CauseFilterPreview from './cause/cause-filter-value-preview.vue';
 import ContactFilter from './contact/contact-filter-value-field.vue';
 import ContactFilterPreview from './contact/contact-filter-value-preview.vue';
+import ContactGroupFilter from './contact-group/contact-group-filter-value-field.vue';
+import ContactGroupFilterPreview from './contact-group/contact-group-filter-value-preview.vue';
 import CreatedAtFromFilter from './created-at-from/created-at-from-filter-value-field.vue';
 import CreatedAtFromFilterPreview from './created-at-from/created-at-from-filter-value-preview.vue';
 import CreatedAtToFilter from './created-at-to/created-at-to-filter-value-field.vue';
@@ -52,16 +54,20 @@ import ResolutionTimeFilter from './resolution-time/resolution-time-filter-value
 import ResolutionTimeFilterPreview from './resolution-time/resolution-time-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
+import ServiceCaseFilter from './service-case/service-case-filter-value-field.vue';
+import ServiceCaseFilterPreview from './service-case/service-case-filter-value-preview.vue';
 import SlaFilter from './sla/sla-filter-value-field.vue';
 import SlaFilterPreview from './sla/sla-filter-value-preview.vue';
 import SourceCaseFilter from './source-case/source-case-filter-value-field.vue';
 import SourceCaseFilterPreview from './source-case/source-case-filter-value-preview.vue';
+import SlaConditionFilter from './sla-condition/sla-condition-filter-value-field.vue';
+import SlaConditionFilterPreview from './sla-condition/sla-condition-filter-value-preview.vue';
 import StatusCaseFilter from './status-case/status-case-filter-value-field.vue';
 import StatusCaseFilterPreview from './status-case/status-case-filter-value-preview.vue';
 import TagFilter from './tag/tag-filter-value-field.vue';
 import TagFilterPreview from './tag/tag-filter-value-preview.vue';
-import TalkDuration from './talk-duration/talk-duration-filter-value-field.vue';
-import TalkDurationPreview from './talk-duration/talk-duration-filter-value-preview.vue';
+import TalkDurationFilter from './talk-duration/talk-duration-filter-value-field.vue';
+import TalkDurationFilterPreview from './talk-duration/talk-duration-filter-value-preview.vue';
 import TeamFilter from './team/team-filter-value-field.vue';
 import TeamFilterPreview from './team/team-filter-value-preview.vue';
 import TotalDurationFilter from './total-duration/total-duration-filter-value-field.vue';
@@ -88,6 +94,8 @@ export {
   CauseFilterPreview,
   ContactFilter,
   ContactFilterPreview,
+  ContactGroupFilter,
+  ContactGroupFilterPreview,
   CreatedAtFromFilter,
   CreatedAtFromFilterPreview,
   CreatedAtToFilter,
@@ -126,16 +134,20 @@ export {
   ResolutionTimeFilterPreview,
   ScoreFilter,
   ScoreFilterPreview,
+  ServiceCaseFilter,
+  ServiceCaseFilterPreview,
   SlaFilter,
   SlaFilterPreview,
+  SlaConditionFilter,
+  SlaConditionFilterPreview,
   SourceCaseFilter,
   SourceCaseFilterPreview,
   StatusCaseFilter,
   StatusCaseFilterPreview,
   TagFilter,
   TagFilterPreview,
-  TalkDuration,
-  TalkDurationPreview,
+  TalkDurationFilter,
+  TalkDurationFilterPreview,
   TeamFilter,
   TeamFilterPreview,
   TotalDurationFilter,
