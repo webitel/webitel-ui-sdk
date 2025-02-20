@@ -23,6 +23,7 @@ import caseCloseReasonGroups from './caseCloseReasonGroups/caseCloseReasonGroups
 import caseCloseReasons from './caseCloseReasons/caseCloseReasons.js';
 import caseStatuses from './caseStatuses/caseStatuses.js';
 import caseStatusConditions from './caseStatusConditions/caseStatusConditions.js';
+import contactGroups from './contactGroups/contactGroups.js';
 
 export {
   agents,
@@ -51,4 +52,5 @@ export {
   caseCloseReasons,
   caseStatuses,
   caseStatusConditions,
+  contactGroups,
 };

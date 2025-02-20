@@ -1,31 +1,38 @@
 <template>
-  <ul v-if="localValue">
-    <li
-      v-for="({ name }, index) of localValue"
-      :key="index"
+  <div class="contact-group-filter-value-preview">
+    <p
+      v-if="props.value.unassigned"
+      class="contact-group-filter-value-preview__point"
+    >{{ t('reusable.unassigned') }}</p>
+    <ul
+      v-if="localValue"
     >
-      {{ name }}
-    </li>
-  </ul>
+      <li
+        v-for="({ name }, index) of localValue"
+        :key="index"
+      >
+        {{ name }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { WebitelContactsGroupType } from 'webitel-sdk';
 
 import { searchMethod } from './config.js';
+import {useI18n} from "vue-i18n";
 
 const props = defineProps<{
   value: number[];
 }>();
 
 const localValue = ref([]);
+const {t} = useI18n();
 
 const getLocalValue = async () => {
   const { items } = await searchMethod({
-    id: props.value,
-    type: WebitelContactsGroupType.STATIC,
-    enabled: true,
+    id: props.value.list,
   });
   localValue.value = items;
 };
@@ -33,4 +40,8 @@ const getLocalValue = async () => {
 getLocalValue();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.contact-group-filter-value-preview__point {
+  @extend %typo-subtitle-1;
+}
+</style>

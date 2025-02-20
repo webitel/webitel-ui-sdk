@@ -1,26 +1,36 @@
 <template>
+  <wt-checkbox
+    :label="t('reusable.showUnassigned')"
+    :selected="model?.unassigned"
+    @change="model.unassigned = $event"
+  />
   <wt-select
     :close-on-select="false"
     :label="t('webitelUI.filters.filterValue')"
     :search-method="searchMethod"
-    :value="model"
-    :v="v$.model"
+    :v="v$.model.list"
+    :value="model?.list"
     multiple
+    track-by="id"
     use-value-from-options-by-prop="id"
-    @input="handleInput"
+    @input="model.list = $event"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, watch } from 'vue';
+import { computed, watch, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import { searchMethod } from './config.js';
+import WtCheckbox from "../../../../../../../components/wt-checkbox/wt-checkbox.vue";
 
-type ModelValue = number[];
+type ModelValue = {
+  list: string[];
+  unassigned: boolean;
+};
 
 const model = defineModel<ModelValue>();
 
@@ -29,10 +39,20 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
+const initModel = () => {
+  if(!model.value) {
+    model.value = {
+      list: [],
+      unassigned: false,
+    };
+  }
+}
+onMounted(() => initModel());
+
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      required,
+      list: { required },
     },
   })),
   { model },
@@ -47,10 +67,6 @@ watch(
   },
   { immediate: true },
 );
-
-const handleInput = (value: ModelValue) => {
-  model.value = value;
-};
 </script>
 
 <style lang="scss" scoped></style>

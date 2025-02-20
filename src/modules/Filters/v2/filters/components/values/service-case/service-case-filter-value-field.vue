@@ -73,7 +73,7 @@ const changeSelection = (value) => {
   model.value.conditions = '';
 };
 
-const getConditionList = async (params = undefined) => {
+const getConditionList = async (params) => {
   return await servicesSearchMethod({
     parentId: model.value.selection,
     ...params,

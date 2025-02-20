@@ -121,6 +121,7 @@
     "axios": "^1.7.7",
     "clipboard-copy": "^4.0.1",
     "csv-stringify": "^5.5.3",
+    "date-fns": "^4.1.0",
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",
@@ -162,6 +163,7 @@
     "markdown-it": "^14.1.0",
     "markdown-table": "^3.0.4",
     "path": "^0.12.7",
+    "pinia": "^2.3.0",
     "postcss": "^8.4.49",
     "postcss-prefix-selector": "^2.1.0",
     "prettier": "^3.4.2",
@@ -180,8 +182,7 @@
     "vitest": "^2.1.5",
     "vue": "^3.5.13",
     "vue-tsc": "^2.1.10",
-    "vuex": "^4.1.0",
-    "pinia": "^2.3.0"
+    "vuex": "^4.1.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"

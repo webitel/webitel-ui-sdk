@@ -148,6 +148,7 @@ const deleteStatusCondition = async ({ id, parentId }) => {
 
 const getStatusesLookup = (params) =>
   getStatusConditionsList({
+    ...params,
     parentId: params.parentId,
     id: params.id,
     fields: params.fields || ['id', 'name'],

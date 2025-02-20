@@ -54,8 +54,8 @@ import ResolutionTimeFilter from './resolution-time/resolution-time-filter-value
 import ResolutionTimeFilterPreview from './resolution-time/resolution-time-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
-import ServiceCaseFilter from './service-case/service-case-filter-value-field.vue';
-import ServiceCaseFilterPreview from './service-case/service-case-filter-value-preview.vue';
+// import ServiceCaseFilter from './service-case/service-case-filter-value-field.vue';
+// import ServiceCaseFilterPreview from './service-case/service-case-filter-value-preview.vue';
 import SlaFilter from './sla/sla-filter-value-field.vue';
 import SlaFilterPreview from './sla/sla-filter-value-preview.vue';
 import SourceCaseFilter from './source-case/source-case-filter-value-field.vue';
@@ -134,8 +134,8 @@ export {
   ResolutionTimeFilterPreview,
   ScoreFilter,
   ScoreFilterPreview,
-  ServiceCaseFilter,
-  ServiceCaseFilterPreview,
+  // ServiceCaseFilter,
+  // ServiceCaseFilterPreview,
   SlaFilter,
   SlaFilterPreview,
   SlaConditionFilter,

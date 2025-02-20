@@ -4,20 +4,21 @@
       :clearable="false"
       :label="t('cases.reason')"
       :search-method="slasSearchMethod"
-      :v="v$?.model?.selection"
+      :v="v$.model.selection"
       :value="model?.selection"
       track-by="id"
       use-value-from-options-by-prop="id"
-      @input="changeSelection($event)"
+      @input="updateSelected"
     />
 
     <wt-select
       v-if="model?.selection"
+      :key="model.selection"
       :clearable="false"
-      :disabled="!model?.selection"
+      :disabled="!model.selection"
       :label="t('webitelUI.filters.filterValue')"
-      :options="conditionList"
-      :v="v$?.model?.conditions"
+      :options="getConditionList"
+      :v="v$.model.conditions"
       :value="model?.conditions"
       multiple
       track-by="id"
@@ -30,7 +31,7 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
@@ -43,43 +44,27 @@ type ModelValue = {
 const model = defineModel<ModelValue>();
 const { t } = useI18n();
 
-const initModel = () => {
-  if (!model.value) {
-    model.value = {
-      selection: '',
-      conditions: '',
-    };
-  } else {
-    onSelectionUpdate(model.value.selection);
-  }
-};
-onMounted(() => initModel());
-
-const conditionList = ref([]);
-
-const onSelectionUpdate = async (val: string) => {
-  model.value.selection = val;
-
-  if (val) {
-    const { items } = await getConditionList();
-    if (items.length) {
-      conditionList.value = items;
-    }
-  }
-};
-
-const changeSelection = (value) => {
-  onSelectionUpdate(value);
+const updateSelected = (value) => {
+  model.value.selection = value;
   model.value.conditions = '';
 };
 
-const getConditionList = async (params = undefined) => {
+const getConditionList = async (params) => {
   return await slasConditionsSearchMethod({
     parentId: model.value.selection,
     ...params,
   });
 };
 
+const initModel = () => {
+  if (!model.value) {
+    model.value = {
+      selection: '',
+      conditions: '',
+    };
+  }
+};
+onMounted(() => initModel());
 const v$ = useVuelidate(
   computed(() => ({
     model: {
@@ -91,7 +76,7 @@ const v$ = useVuelidate(
       },
     },
   })),
-  { model, conditionList },
+  { model },
   { $autoDirty: true },
 );
 

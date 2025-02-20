@@ -41,6 +41,7 @@ const getContactGroupsList = async (params) => {
     'fields',
     'type',
     'enabled',
+    'id',
   ];
   const defaultObject = {
     enabled: false,

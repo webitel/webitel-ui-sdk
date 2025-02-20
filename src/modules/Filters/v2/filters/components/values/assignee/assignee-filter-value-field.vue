@@ -1,7 +1,7 @@
 <template>
   <wt-checkbox
     :label="t('reusable.showUnassigned')"
-    :selected="model.unassigned"
+    :selected="model?.unassigned"
     @change="model.unassigned = $event"
   />
   <wt-select

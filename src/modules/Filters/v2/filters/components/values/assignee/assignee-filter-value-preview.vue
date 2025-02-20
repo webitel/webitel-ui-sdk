@@ -15,7 +15,6 @@
       </li>
     </ul>
   </div>
-
 </template>
 
 <script lang="ts" setup>
