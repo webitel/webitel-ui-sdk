@@ -1,6 +1,5 @@
 <template>
-  <ul
-    v-if="localValue">
+  <ul v-if="localValue">
     <li
       v-for="({ name }, index) of localValue"
       :key="index"
@@ -11,22 +10,28 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+
 import { caseStatusConditionsSearchMethod } from './config.js';
-import {ref} from 'vue';
 
 const props = defineProps<{
-  value: number[];
+  value: {
+    selection: string;
+    conditions: string;
+  };
 }>();
 
 const localValue = ref([]);
 
 const getLocalValue = async () => {
-  const { items } = await caseStatusConditionsSearchMethod({parentId: props.value?.selection, id: props.value?.conditions });
+  const { items } = await caseStatusConditionsSearchMethod({
+    parentId: props.value?.selection,
+    id: props.value?.conditions,
+  });
   localValue.value = items;
 };
 
 getLocalValue();
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
