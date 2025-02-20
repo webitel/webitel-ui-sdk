@@ -80,6 +80,8 @@ export default {
     read: 'Read',
     create: 'Create',
     draggable: 'Draggable',
+    unassigned: 'Unassigned',
+    showUnassigned: 'Show unassigned',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {

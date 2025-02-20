@@ -80,6 +80,8 @@ export default {
     read: 'Читать',
     create: 'Создать',
     draggable: 'Перетащить',
+    unassigned: 'Unassigned',
+    showUnassigned: 'Show unassigned',
   },
   vocabulary: {
     apply: 'Применить',

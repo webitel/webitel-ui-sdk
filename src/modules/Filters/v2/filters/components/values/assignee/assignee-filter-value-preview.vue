@@ -1,27 +1,37 @@
 <template>
-  <ul
-    v-if="localValue">
-    <li
-      v-for="({ name }, index) of localValue"
-      :key="index"
+  <div class="assignee-filter-value-preview">
+    <p
+      v-if="props.value.unassigned"
+      class="assignee-filter-value-preview__point"
+    >{{ t('reusable.unassigned') }}</p>
+    <ul
+      v-if="localValue"
     >
-      {{ name }}
-    </li>
-  </ul>
+      <li
+        v-for="({ name }, index) of localValue"
+        :key="index"
+      >
+        {{ name }}
+      </li>
+    </ul>
+  </div>
+
 </template>
 
 <script lang="ts" setup>
-import { searchMethod } from './config.js';
+import {searchMethod} from './config.js';
 import {ref} from 'vue';
+import {useI18n} from "vue-i18n";
 
 const props = defineProps<{
   value: number[];
 }>();
 
 const localValue = ref([]);
+const {t} = useI18n();
 
 const getLocalValue = async () => {
-  const { items } = await searchMethod({id: props.value});
+  const {items} = await searchMethod({id: props.value.list});
   localValue.value = items;
 };
 
@@ -29,4 +39,7 @@ getLocalValue();
 </script>
 
 <style lang="scss" scoped>
+.assignee-filter-value-preview__point {
+  @extend %typo-subtitle-1;
+}
 </style>
