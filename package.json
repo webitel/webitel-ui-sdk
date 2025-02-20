@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.118-1",
+  "version": "24.12.118-2",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -18,30 +18,26 @@
     "docs:preview": "vitepress preview docs",
     "tsc": "tsc -p tsconfig.json",
     "update-node": "nvm install --lts && nvm alias default node",
-    "i": "npm install"
+    "i": "npm install",
+    "lint:package": "publint"
   },
-  "main": "./dist/@webitel/ui-sdk.mjs",
+  "main": "./dist/ui-sdk.js",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/@webitel/ui-sdk.mjs",
-      "require": "./dist/@webitel/ui-sdk.cjs"
+      "import": "./dist/ui-sdk.js"
     },
     "./store": {
-      "import": "./src/store/new/index.js",
-      "require": "./src/store/new/index.js"
+      "import": "./src/store/new/index.js"
     },
     "./enums": {
-      "import": "./src/enums/index.js",
-      "require": "./src/enums/index.js"
+      "import": "./src/enums/index.js"
     },
     "./components": {
-      "import": "./src/components/index.js",
-      "require": "./src/components/index.js"
+      "import": "./src/components/index.js"
     },
     "./scripts": {
-      "import": "./src/scripts/index.js",
-      "require": "./src/scripts/index.js"
+      "import": "./src/scripts/index.js"
     },
     "./dist*": {
       "import": "./dist*"
@@ -162,10 +158,12 @@
     "markdown-it": "^14.1.0",
     "markdown-table": "^3.0.4",
     "path": "^0.12.7",
+    "pinia": "^2.3.0",
     "postcss": "^8.4.49",
     "postcss-prefix-selector": "^2.1.0",
     "prettier": "^3.4.2",
     "prismjs": "^1.29.0",
+    "publint": "^0.3.6",
     "sass": "^1.81.0",
     "typescript": "5.7.3",
     "typescript-eslint": "^8.22.0",
@@ -180,8 +178,7 @@
     "vitest": "^3.0.6",
     "vue": "^3.5.13",
     "vue-tsc": "^2.1.10",
-    "vuex": "^4.1.0",
-    "pinia": "^2.3.0"
+    "vuex": "^4.1.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"
