@@ -1,3 +1,10 @@
+## [v24.12.120] - 2025-02-21
+### :sparkles: New Features
+- [`ececed9`](https://github.com/webitel/webitel-ui-sdk/commit/ececed90f1e7003b586530b1bbcf887c11b6425f) - change transition duration in wt-transition.vue *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`c170db1`](https://github.com/webitel/webitel-ui-sdk/commit/c170db12438abbbf483a2b0ca48db84e372f3436) - implement version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`d74066f`](https://github.com/webitel/webitel-ui-sdk/commit/d74066ff90eee1b7f452e8a00e96003cf3ba9020) - added component for transition during replace blocks *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.12.119] - 2025-02-21
 ### :bug: Bug Fixes
 - [`8ceb167`](https://github.com/webitel/webitel-ui-sdk/commit/8ceb167057c4fbd989adf300ed0d022c1ec7356e) - packages *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1157,3 +1164,4 @@
 [v24.12.115]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.102...v24.12.115
 [v24.12.116]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.115...v24.12.116
 [v24.12.119]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.118-2...v24.12.119
+[v24.12.120]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.119...v24.12.120
