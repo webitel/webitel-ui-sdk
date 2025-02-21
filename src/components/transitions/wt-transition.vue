@@ -44,14 +44,10 @@ const props = defineProps({
 
 .wt-transition {
   &--sm {
-    transition-duration: var(
-      --transition-sm
-    ); // 0.3s // чекаю на змінну від Жені
+    transition-duration: 0.3s; // TODO: add variable
   }
   &--md {
-    transition-duration: var(
-      --transition-md
-    ); // 0.6s // чекаю на змінну від Жені
+    transition-duration: 0.6s; // TODO: add variable
   }
 }
 </style>
