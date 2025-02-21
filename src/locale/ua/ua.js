@@ -81,6 +81,8 @@ export default {
     read: 'Читати',
     create: 'Створити',
     draggable: 'Перетягнути',
+    unassigned: 'Непризначені',
+    showUnassigned: 'Показати непризначені',
   },
   vocabulary: {
     apply: 'Застосувати',
@@ -151,11 +153,11 @@ export default {
     hasOption: 'Has option',
     hasRecording: 'Запис розмови',
     amdResult: 'AMD результат',
-    evaluation: 'Оцінювання',
     ratedBy: 'Оцінено ким',
     talkDuration: 'Тривалість розмови',
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
+    attachment: 'Додаток | Додатки',
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -224,6 +226,24 @@ export default {
       [CallDirection.Inbound]: 'Вхідний | Вхідні',
       [CallDirection.Outbound]: 'Вихідний | Вихідні',
     },
+  },
+  cases: {
+    status: 'Статус',
+    source: 'Джерело',
+    author: 'Автор',
+    reporter: 'Ініціатор',
+    impacted: 'Впливає на',
+    assignee: 'Виконавець',
+    group: 'Група виконавців',
+    reason: 'Причина | Причини',
+    rating: 'Оцінка',
+    service: 'Cервіси | Cервіси',
+    appliedSLA: 'Застосований SLA',
+    appliedCondition: 'Застосована умова',
+    reactionTime: 'Плановий час реакції',
+    resolutionTime: 'Плановий час вирішення',
+    actualReactionTime: 'Фактичний час реакції',
+    actualResolutionTime: 'Фактичний час вирішення',
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
@@ -475,67 +495,121 @@ export default {
       filterLabel: ({ linked }) => {
         return linked('vocabulary.labels');
       },
-      agent: ({ linked }) => {
+      actualReactionTime: ({ linked }) => {
+        return linked('cases.actualReactionTime');
+      },
+      actualResolutionTime: ({ linked }) => {
+        return linked('cases.actualResolutionTime');
+      },
+      agent : ({ linked }) => {
         return linked('objects.agent.agent');
       },
-      amdResult: ({ linked }) => {
+      amdResult : ({ linked }) => {
         return linked('objects.amdResult');
       },
-      contact: ({ linked }) => {
-        return linked('vocabulary.contact');
+      assignee: ({ linked }) => {
+        return linked('cases.assignee');
       },
-      createdAtFrom: ({ linked }) => {
-        return linked('reusable.from');
+      author: ({ linked }) => {
+        return linked('cases.author');
       },
-      createdAtTo: ({ linked }) => {
-        return linked('reusable.to');
-      },
-      direction: ({ linked }) => {
-        return linked('objects.direction');
-      },
-      rated: ({ linked }) => {
-        return linked('objects.evaluation');
-      },
-      gateway: ({ linked }) => {
-        return linked('objects.gateway');
-      },
-      grantee: ({ linked }) => {
-        return linked('objects.grantee');
-      },
-      cause: ({ linked }) => {
+      cause : ({ linked }) => {
         return linked('objects.hangupCause');
       },
-      hasOption: ({ linked }) => {
-        return linked('objects.hasOption'); ////
+      closeReasonGroupsCase: ({ linked }) => {
+        return linked('cases.reason');
       },
-      queue: ({ linked }) => {
-        return linked('objects.queue.queue');
+      contact : ({ linked }) => {
+        return linked('vocabulary.contact');
+      },
+      contactGroup: ({ linked }) => {
+        return linked('cases.group');
+      },
+      createdAtFrom : ({ linked }) => {
+        return linked('reusable.from');
+      },
+      createdAtTo : ({ linked }) => {
+        return linked('reusable.to');
+      },
+      direction : ({ linked }) => {
+        return linked('calls.direction');
+      },
+      gateway : ({ linked }) => {
+        return linked('vocabulary.gateway');
+      },
+      grantee : ({ linked }) => {
+        return linked('objects.grantee');
+      },
+      hasAttachment: ({ linked }) => {
+        return linked('objects.attachment');
       },
       hasFile: ({ linked }) => {
         return linked('objects.hasRecording');
       },
-      score: ({ linked }) => {
-        return linked('webitelUI.auditForm.score');
-      },
-      tags: ({ linked }) => {
-        return linked('vocabulary.tag');
-      },
-      talkSec: ({ linked }) => {
-        return linked('objects.talkDuration');
-      },
-      team: ({ linked }) => {
-        return linked('objects.team');
-      },
-      duration: ({ linked }) => {
-        return linked('objects.totalDuration');
-      },
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
-      user: ({ linked }) => {
+      impacted: ({ linked }) => {
+        return linked('cases.impacted');
+      },
+      priorityCase: ({ linked }) => {
+        return linked('vocabulary.priority');
+      },
+      queue : ({ linked }) => {
+        return linked('objects.queue.queue');
+      },
+      rated: ({ linked }) => {
+        return linked('objects.rated');
+      },
+      ratedBy : ({ linked }) => {
+        return linked('objects.ratedBy');
+      },
+      rating: ({ linked }) => {
+        return linked('cases.rating');
+      },
+      reactionTime: ({ linked }) => {
+        return linked('cases.reactionTime');
+      },
+      reporter: ({ linked }) => {
+        return linked('cases.reporter');
+      },
+      resolutionTime: ({ linked }) => {
+        return linked('cases.resolutionTime');
+      },
+      score : ({ linked }) => {
+        return linked('webitelUI.auditForm.score');
+      },
+      serviceCase: ({ linked }) => {
+        return linked('cases.service');
+      },
+      sla: ({ linked }) => {
+        return linked('cases.appliedSLA');
+      },
+      slaCondition: ({ linked }) => {
+        return linked('cases.appliedCondition');
+      },
+      sourceCase: ({ linked }) => {
+        return linked('cases.source');
+      },
+      statusCase: ({ linked }) => {
+        return linked('cases.status');
+      },
+      tag : ({ linked }) => {
+        return linked('vocabulary.tag');
+      },
+      talkDuration: ({ linked }) => {
+        return linked('objects.talkDuration');
+      },
+      team : ({ linked }) => {
+        return linked('objects.team');
+      },
+      totalDuration: ({ linked }) => {
+        return linked('objects.totalDuration');
+      },
+      user : ({ linked }) => {
         return linked('objects.user');
       },
-      variable: ({ linked }) => {
+      variable : ({ linked }) => {
         return linked('vocabulary.variables');
       },
     },

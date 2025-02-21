@@ -15,7 +15,15 @@ import roles from './roles/roles.js';
 import skills from './skills/skills.js';
 import teams from './teams/teams.js';
 import users from './users/users.js';
+import caseSources from './caseSources/caseSources.js';
+import casePriorities from './casePriorities/casePriorities.js';
 import { contactChatMessagesHistory, contacts } from './сontacts/index.js';
+import slas from './slas/slas.js';
+import caseCloseReasonGroups from './caseCloseReasonGroups/caseCloseReasonGroups.js';
+import caseCloseReasons from './caseCloseReasons/caseCloseReasons.js';
+import caseStatuses from './caseStatuses/caseStatuses.js';
+import caseStatusConditions from './caseStatusConditions/caseStatusConditions.js';
+import contactGroups from './contactGroups/contactGroups.js';
 
 export {
   agents,
@@ -37,4 +45,12 @@ export {
   configurations,
   contacts,
   contactChatMessagesHistory,
+  caseSources,
+  casePriorities,
+  slas,
+  caseCloseReasonGroups,
+  caseCloseReasons,
+  caseStatuses,
+  caseStatusConditions,
+  contactGroups,
 };
