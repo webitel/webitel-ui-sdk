@@ -1,3 +1,24 @@
+## [v24.12.122] - 2025-02-21
+### :sparkles: New Features
+- [`6020e3a`](https://github.com/webitel/webitel-ui-sdk/commit/6020e3a2cc208a4694ca8e452e72e5f988c08f2f) - add new filters for cases[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`12193a1`](https://github.com/webitel/webitel-ui-sdk/commit/12193a1346d758c71fb990e19386ede441787449) - uninstall date-fns[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`04b141b`](https://github.com/webitel/webitel-ui-sdk/commit/04b141b0835d998ecd57e201446ce1245d7ec695) - package.json version[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`15da780`](https://github.com/webitel/webitel-ui-sdk/commit/15da780b1580f622a98b5e4905818f898a6017ae) - merge master[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`83caa8d`](https://github.com/webitel/webitel-ui-sdk/commit/83caa8db89103d9860bfa0247477f477add72c7c) - conflict[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`4147bfd`](https://github.com/webitel/webitel-ui-sdk/commit/4147bfd807c5d9b23e9d42d14bffe688d332edc5) - small refactor[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`bfaea31`](https://github.com/webitel/webitel-ui-sdk/commit/bfaea31af93bd97acc368881885cfc0f06433d90) - after codereview[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`3bcd98d`](https://github.com/webitel/webitel-ui-sdk/commit/3bcd98d4a0b1964ec8186381a9c0c3f0258da8d3) - display assignee filter[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`ca1fcae`](https://github.com/webitel/webitel-ui-sdk/commit/ca1fcaeb6566ff4dbceefdb8a85f25e2a1e42f7b) - filter locale and add new filters[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`51042af`](https://github.com/webitel/webitel-ui-sdk/commit/51042af166cbe764d113661f9895cff0adfe48a3) - preview filters with date[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`8a71bfe`](https://github.com/webitel/webitel-ui-sdk/commit/8a71bfe5645115feb14662184bce24e54260244c) - conflict[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`0c81d90`](https://github.com/webitel/webitel-ui-sdk/commit/0c81d90c41463ec9180ee475f53fda9011d56516) - status and close reason group filters[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`4f1b711`](https://github.com/webitel/webitel-ui-sdk/commit/4f1b711e01c334ebcb29fe9cdf4a4136676194d5) - import filters and rename api and small refactor filters[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`f019644`](https://github.com/webitel/webitel-ui-sdk/commit/f0196449b43dd2f0fca2ced5a74804985b4c53b1) - display filter label[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`52ace37`](https://github.com/webitel/webitel-ui-sdk/commit/52ace3792ddfd584663524f29f072e35e432c662) - merge vaster[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v24.12.120] - 2025-02-21
 ### :sparkles: New Features
 - [`ececed9`](https://github.com/webitel/webitel-ui-sdk/commit/ececed90f1e7003b586530b1bbcf887c11b6425f) - change transition duration in wt-transition.vue *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1165,3 +1186,4 @@
 [v24.12.116]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.115...v24.12.116
 [v24.12.119]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.118-2...v24.12.119
 [v24.12.120]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.119...v24.12.120
+[v24.12.122]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.121...v24.12.122
