@@ -2,7 +2,7 @@
   <div>
     <wt-select
       :clearable="false"
-      :label="t('cases.reason')"
+      :label="t('cases.appliedSLA')"
       :search-method="slasSearchMethod"
       :v="v$.model.selection"
       :value="model?.selection"
@@ -17,7 +17,7 @@
       :clearable="false"
       :disabled="!model.selection"
       :label="t('webitelUI.filters.filterValue')"
-      :options="getConditionList"
+      :search-method="getConditionList"
       :v="v$.model.conditions"
       :value="model?.conditions"
       multiple

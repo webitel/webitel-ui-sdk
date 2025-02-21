@@ -1,8 +1,7 @@
 <template>
-  <div class="assignee-filter-value-preview">
+  <div>
     <p
       v-if="props.value.unassigned"
-      class="assignee-filter-value-preview__point"
     >{{ t('reusable.unassigned') }}</p>
     <ul
       v-if="localValue"
@@ -38,7 +37,4 @@ getLocalValue();
 </script>
 
 <style lang="scss" scoped>
-.assignee-filter-value-preview__point {
-  @extend %typo-subtitle-1;
-}
 </style>
