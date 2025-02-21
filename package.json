@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.118-2",
+  "version": "24.12.121",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -173,7 +173,7 @@
     "vite-plugin-checker": "^0.9.0",
     "vite-plugin-node-polyfills": "^0.23.0",
     "vite-plugin-static-copy": "^2.2.0",
-    "vite-plugin-svg-sprite": "^0.6.2",
+    "vite-plugin-svg-sprite": "=0.5",
     "vite-plugin-vue-docgen": "^0.3.4",
     "vitepress": "1.6.3",
     "vitest": "^3.0.6",
@@ -183,6 +183,9 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"
+  },
+  "overrides": {
+    "vite": "^6.1.1"
   },
   "engines": {
     "npm": "10",
