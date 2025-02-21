@@ -1,6 +1,7 @@
 import WtNavigationMenu from './on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
 import WtSelectionPopup from './on-demand/wt-selection-popup/wt-selection-popup.vue';
 import WtStartPage from './on-demand/wt-start-page/components/wt-start-page.vue';
+import WtReplaceTransition from './transitions/cases/wt-replace-transition.vue';
 import WtActionBar from './wt-action-bar/wt-action-bar.vue';
 import WtAppHeader from './wt-app-header/wt-app-header.vue';
 import WtAppNavigator from './wt-app-header/wt-app-navigator.vue';
@@ -85,6 +86,7 @@ const Components = {
   WtLabel,
   WtLoader,
   WtRoundedAction,
+  WtReplaceTransition,
   WtCheckbox,
   WtDatepicker,
   WtIconBtn,
@@ -187,6 +189,7 @@ export {
   WtPopup,
   WtProgressBar,
   WtRadio,
+  WtReplaceTransition,
   WtRoundedAction,
   WtSearchBar,
   WtSelect,
