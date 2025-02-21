@@ -2,7 +2,7 @@
   <wt-input
     :value="model"
     :label="t('webitelUI.filters.filterLabel')"
-    :v="v$"
+    :v="v$.model"
     @input="model = $event"
   />
 </template>
@@ -13,7 +13,7 @@ import { maxLength } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtInput from '../../../../../../../components/wt-input/wt-input.vue';
+import WtInput from '../../../../../../components/wt-input/wt-input.vue';
 
 const MAX_STRING_LENGTH = 50;
 

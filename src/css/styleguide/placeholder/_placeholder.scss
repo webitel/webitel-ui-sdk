@@ -24,7 +24,6 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
 @mixin wt-placeholder($style: '') {
   @each $vendor in $vendors {
     @include optional-at-root(':#{$vendor}-input-placeholder') {
-      font: inherit;
       transition: var(--transition);
 
       @if ($style == 'error') {
@@ -46,7 +45,6 @@ $vendors: (':-webkit', '-moz', ':-moz', '-ms');
 */
 %wt-placeholder {
   transition: var(--transition);
-  font: inherit;
   color: var(--wt-text-field-placeholder-color);
 }
 

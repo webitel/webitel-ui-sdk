@@ -4,16 +4,18 @@ import { useRoute } from 'vue-router';
 import { _wtUiLog } from '../../../scripts/logger';
 import type {
   CreateUserAccessControlComposableParams,
-  UseAccessControlReturn,
+  UseAccessControlReturn, UseUserAccessControlComposableOptions,
 } from './types/CreateUserAccessControl';
 
 export const createUserAccessControlComposable = (
   useUserinfoStore: CreateUserAccessControlComposableParams,
 ) => {
   const useUserAccessControl = (
-    resource?: string,
-    // options: UseUserAccessControlComposableOptions = {},
+    options?: UseUserAccessControlComposableOptions,
   ): UseAccessControlReturn => {
+    const resource = typeof options === 'string' ? options: options?.resource;
+    const useUpdateAccessAsAllMutableChecksSource = options?.useUpdateAccessAsAllMutableChecksSource;
+
     const route = useRoute();
     const object = resource || route?.meta?.WtObject;
 
@@ -31,22 +33,30 @@ export const createUserAccessControlComposable = (
     const hasReadAccess = computed(() => {
       return userinfoStore.hasReadAccess(object);
     });
-    const hasCreateAccess = computed(() => {
-      return userinfoStore.hasCreateAccess(object);
-    });
     const hasUpdateAccess = computed(() => {
       return userinfoStore.hasUpdateAccess(object);
     });
+    const hasCreateAccess = computed(() => {
+      if (useUpdateAccessAsAllMutableChecksSource) return hasUpdateAccess.value;
+
+      return userinfoStore.hasCreateAccess(object);
+    });
     const hasDeleteAccess = computed(() => {
+      if (useUpdateAccessAsAllMutableChecksSource) return hasUpdateAccess.value;
+
       return userinfoStore.hasDeleteAccess(object);
     });
 
     const hasSaveActionAccess = computed(() => {
+      if (useUpdateAccessAsAllMutableChecksSource) return hasUpdateAccess.value;
+
       if (route.params.id === 'new') return hasCreateAccess.value;
       return hasUpdateAccess.value;
     });
 
     const disableUserInput = computed(() => {
+      if (useUpdateAccessAsAllMutableChecksSource) return !hasUpdateAccess.value;
+
       if (route.params.id === 'new') return !hasCreateAccess.value;
       return !hasUpdateAccess.value;
     });

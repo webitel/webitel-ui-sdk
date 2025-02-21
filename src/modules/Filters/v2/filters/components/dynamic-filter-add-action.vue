@@ -9,8 +9,13 @@
       </div>
     </template>
 
-    <template #content>
-      <slot name="form"> filter form should be here</slot>
+    <template #content="slotScope">
+      <slot
+        name="form"
+        v-bind="slotScope"
+      >
+        filter form should be here
+      </slot>
     </template>
   </dynamic-filter-config-view>
 </template>
@@ -31,12 +36,16 @@ const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped>
-.dynamic-filter-add-action-wrapper {
+.dynamic-filter-add-action {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  cursor: pointer;
-  gap: var(--spacing-2xs);
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    cursor: pointer;
+    gap: var(--spacing-2xs);
+  }
 }
 </style>

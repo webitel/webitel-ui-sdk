@@ -147,7 +147,19 @@ export default {
     role: 'Role | Roles',
     user: 'User | Users',
     calendar: 'Calendar | Calendars',
+    direction: 'Direction',
+    gateway: 'Gateway | Gateways',
+    hangupCause: 'Hangup cause',
+    hasOption: 'Has option',
+    hasRecording: 'Has recording',
+    amdResult: 'AMD result',
+    evaluation: 'Evaluation',
+    ratedBy: 'Rated by',
+    talkDuration: 'Talk duration',
+    totalDuration: 'Total duration',
+    transcription: 'Transcription',
     queue: {
+      queue: 'Queue | Queues',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
         [QueueType.OFFLINE_QUEUE]: 'Offline queue',
@@ -161,6 +173,7 @@ export default {
       },
     },
     agent: {
+      agent: 'Agent | Agents',
       status: {
         [AgentStatus.Online]: 'Online',
         [AgentStatus.Pause]: 'Pause',
@@ -458,8 +471,75 @@ export default {
       filterValue: ({ linked }) => {
         return linked('vocabulary.values');
       },
+      filterValueFrom: ({ linked }) => {
+        const from = linked('reusable.from').toLowerCase();
+        return `${linked('vocabulary.values')} ${from}`;
+      },
       filterLabel: ({ linked }) => {
         return linked('vocabulary.labels');
+      },
+      agent: ({ linked }) => {
+        return linked('objects.agent.agent');
+      },
+      amdResult: ({ linked }) => {
+        return linked('objects.amdResult');
+      },
+      contact: ({ linked }) => {
+        return linked('vocabulary.contact');
+      },
+      createdAtFrom: ({ linked }) => {
+        return linked('reusable.from');
+      },
+      createdAtTo: ({ linked }) => {
+        return linked('reusable.to');
+      },
+      direction: ({ linked }) => {
+        return linked('objects.direction');
+      },
+      rated: ({ linked }) => {
+        return linked('objects.evaluation');
+      },
+      gateway: ({ linked }) => {
+        return linked('objects.gateway');
+      },
+      grantee: ({ linked }) => {
+        return linked('objects.grantee');
+      },
+      cause: ({ linked }) => {
+        return linked('objects.hangupCause');
+      },
+      queue: ({ linked }) => {
+        return linked('objects.queue.queue');
+      },
+      ratedBy: ({ linked }) => {
+        return linked('objects.ratedBy');
+      },
+      hasFile: ({ linked }) => {
+        return linked('objects.hasRecording');
+      },
+      score: ({ linked }) => {
+        return linked('webitelUI.auditForm.score');
+      },
+      tags: ({ linked }) => {
+        return linked('vocabulary.tag');
+      },
+      talkSec: ({ linked }) => {
+        return linked('objects.talkDuration');
+      },
+      team: ({ linked }) => {
+        return linked('objects.team');
+      },
+      duration: ({ linked }) => {
+        return linked('objects.totalDuration');
+      },
+      hasTranscription: ({ linked }) => {
+        return linked('objects.transcription');
+      },
+      user: ({ linked }) => {
+        return linked('objects.user');
+      },
+      variable: ({ linked }) => {
+        return linked('vocabulary.variables');
       },
     },
   },

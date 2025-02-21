@@ -5,8 +5,10 @@
       :label="t('webitelUI.filters.filterName')"
       :options="options"
       :value="filterName"
-      use-value-from-options-by-prop="id"
-      @input="filterName = $event"
+      :clearable="false"
+      track-by="value"
+      use-value-from-options-by-prop="value"
+      @input="onFilterNameUpdate($event)"
     />
 
     <slot
@@ -22,7 +24,7 @@
 
     <dynamic-filter-config-form-label
       :value="filterLabel"
-      @update:value="onLabelValueUpdate"
+      @update:model-value="onLabelValueUpdate"
       @update:invalid="(v) => (invalid = v)"
     />
 
@@ -51,13 +53,9 @@ import deepcopy from 'deep-copy';
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtButton from '../../../../../../../components/wt-button/wt-button.vue';
-import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import type {
-  FilterInitParams,
-  FilterName,
-  IFilter,
-} from '../../../types/Filter';
+import WtButton from '../../../../../../components/wt-button/wt-button.vue';
+import WtSelect from '../../../../../../components/wt-select/wt-select.vue';
+import type { FilterInitParams, FilterName, IFilter } from '../../types/Filter';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
 
 interface FilterNameSelectRepresentation {
@@ -98,6 +96,11 @@ const invalid = ref(false);
 const onLabelValueUpdate = (val: string) => {
   filterLabel.value = val;
   touchedLabel.value = true;
+};
+
+const onFilterNameUpdate = (val: string) => {
+  filterName.value = val;
+  filterValue.value = null;
 };
 
 const submit = () => {
