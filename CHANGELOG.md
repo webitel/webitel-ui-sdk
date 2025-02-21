@@ -1,3 +1,8 @@
+## [v24.12.119] - 2025-02-21
+### :bug: Bug Fixes
+- [`8ceb167`](https://github.com/webitel/webitel-ui-sdk/commit/8ceb167057c4fbd989adf300ed0d022c1ec7356e) - packages *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.116] - 2025-02-19
 ### :recycle: Refactors
 - [`b6a89bb`](https://github.com/webitel/webitel-ui-sdk/commit/b6a89bb2a20a3f32a78fc83f8a791df18de8727f) - WtNavigationBar types [WTEL-5896](https://webitel.atlassian.net/browse/WTEL-5896) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1151,3 +1156,4 @@
 [v24.12.102]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.101...v24.12.102
 [v24.12.115]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.102...v24.12.115
 [v24.12.116]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.115...v24.12.116
+[v24.12.119]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.118-2...v24.12.119
