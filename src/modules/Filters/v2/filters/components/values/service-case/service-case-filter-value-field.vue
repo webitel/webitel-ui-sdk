@@ -1,28 +1,18 @@
 <template>
   <div>
-    <wt-select
-      :clearable="false"
-      :label="t('cases.reason')"
-      :search-method="serviceCatalogsSearchMethod"
-      :v="v$.model?.selection"
-      :value="model?.selection"
-      track-by="id"
-      use-value-from-options-by-prop="id"
-      @input="changeSelection($event)"
-    />
+    <wt-label>
+      {{ t('webitelUI.filters.filterValue') }}
+    </wt-label>
 
-    <wt-select
-      v-if="model?.selection"
-      :clearable="false"
-      :disabled="!model?.selection"
-      :label="t('webitelUI.filters.filterValue')"
-      :options="conditionList"
-      :v="v$.model?.conditions"
-      :value="model?.conditions"
+    <wt-tree
+      :model-value="model"
+      :data="catalogData"
+      item-data="id"
+      item-label="name"
+      children-prop="service"
+      class="service-case-filter-value-field"
       multiple
-      track-by="id"
-      use-value-from-options-by-prop="id"
-      @input="model.conditions = $event"
+      @update:model-value="onElementSelect($event)"
     />
   </div>
 </template>
@@ -30,55 +20,21 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
+import deepCopy from 'deep-copy';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { serviceCatalogsSearchMethod, servicesSearchMethod } from './config.js';
+import WtLabel from '../../../../../../../components/wt-label/wt-label.vue';
+import WtTree from '../../../../../../../components/wt-tree/wt-tree.vue';
+import { serviceCatalogsSearchMethod } from './config.js';
 
-type ModelValue = {
-  selection: string;
-  conditions: string;
-};
-const model = defineModel<ModelValue>();
+type ModelValue = string[];
+const model = defineModel<ModelValue>({
+  default: [],
+});
 const { t } = useI18n();
 
-const initModel = () => {
-  if (!model.value) {
-    model.value = {
-      selection: '',
-      conditions: '',
-    };
-  } else {
-    onSelectionUpdate(model.value.selection);
-  }
-};
-onMounted(() => initModel());
-
-const conditionList = ref([]);
-
-const onSelectionUpdate = async (val: string) => {
-  model.value.selection = val;
-
-  if (val) {
-    const { items } = await getConditionList();
-    if (items.length) {
-      conditionList.value = items;
-    }
-  }
-};
-
-const changeSelection = (value) => {
-  onSelectionUpdate(value);
-  model.value.conditions = '';
-};
-
-const getConditionList = async (params) => {
-  return await servicesSearchMethod({
-    parentId: model.value.selection,
-    ...params,
-  });
-};
+const catalogData = ref([]);
 
 const v$ = useVuelidate(
   computed(() => ({
@@ -91,7 +47,7 @@ const v$ = useVuelidate(
       },
     },
   })),
-  { model, conditionList },
+  { model },
   { $autoDirty: true },
 );
 
@@ -108,6 +64,42 @@ watch(
   },
   { immediate: true },
 );
+
+const loadCatalogs = async () => {
+  try {
+    // loading.value = true;
+
+    const { items } = await serviceCatalogsSearchMethod({
+      size: -1, // To get all catalogs with services we need to pass size -1
+      fields: ['id', 'name', 'closeReasonGroup', 'status', 'service'],
+      hasSubservices: true,
+    });
+
+    catalogData.value = deepCopy(items);
+  } finally {
+    // loading.value = false;
+  }
+};
+
+if (!model.value) {
+  model.value = [];
+}
+
+const onElementSelect = (val: string) => {
+  const matchIdx = model.value?.indexOf(val);
+  if (matchIdx !== -1) {
+    model.value.splice(matchIdx, 1);
+    return;
+  }
+
+  model.value.push(val);
+};
+
+onMounted(async () => await loadCatalogs());
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.service-case-filter-value-field {
+  min-height: 200px;
+}
+</style>

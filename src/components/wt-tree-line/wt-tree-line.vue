@@ -111,6 +111,10 @@ const displayIcons = computed(() => {
 });
 
 const isSelected = computed(() => {
+  if (Array.isArray(props.modelValue)) {
+    return props.modelValue.includes(props.data[props.itemData]);
+  }
+
   if (props.itemData) {
     return props.data[props.itemData] === props.modelValue;
   }
@@ -119,6 +123,11 @@ const isSelected = computed(() => {
 });
 
 const selectElement = () => {
+  if (Array.isArray(props.modelValue)) {
+    emit('update:modelValue', props.data[props.itemData]);
+    return;
+  }
+
   if (props.data[props.childrenProp]?.length) {
     return;
   }
