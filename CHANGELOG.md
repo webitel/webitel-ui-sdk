@@ -1,3 +1,8 @@
+## [v24.12.123] - 2025-02-22
+### :bug: Bug Fixes
+- [`902a027`](https://github.com/webitel/webitel-ui-sdk/commit/902a0275cfb6eedd8d5e2d81aef803533a8de7cb) - wt-indicator initial/final colors reverse [WTEL-6346](https://webitel.atlassian.net/browse/WTEL-6346) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.122] - 2025-02-21
 ### :sparkles: New Features
 - [`6020e3a`](https://github.com/webitel/webitel-ui-sdk/commit/6020e3a2cc208a4694ca8e452e72e5f988c08f2f) - add new filters for cases[WTEL-5361](https://webitel.atlassian.net/browse/WTEL-5361) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1187,3 +1192,4 @@
 [v24.12.119]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.118-2...v24.12.119
 [v24.12.120]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.119...v24.12.120
 [v24.12.122]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.121...v24.12.122
+[v24.12.123]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.122...v24.12.123
