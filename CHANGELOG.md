@@ -1,3 +1,8 @@
+## [v24.12.124] - 2025-02-23
+### :sparkles: New Features
+- [`a5ecde2`](https://github.com/webitel/webitel-ui-sdk/commit/a5ecde238135d06e6147977024589a6b72e74284) - pinia table store configuration extensions to support parentId/child relation, + etag support for deleteEls method [WTEL-6345](https://webitel.atlassian.net/browse/WTEL-6345) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.123] - 2025-02-22
 ### :bug: Bug Fixes
 - [`902a027`](https://github.com/webitel/webitel-ui-sdk/commit/902a0275cfb6eedd8d5e2d81aef803533a8de7cb) - wt-indicator initial/final colors reverse [WTEL-6346](https://webitel.atlassian.net/browse/WTEL-6346) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1193,3 +1198,4 @@
 [v24.12.120]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.119...v24.12.120
 [v24.12.122]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.121...v24.12.122
 [v24.12.123]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.122...v24.12.123
+[v24.12.124]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.123...v24.12.124
