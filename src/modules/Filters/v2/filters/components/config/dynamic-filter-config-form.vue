@@ -86,22 +86,17 @@ const filterName = ref();
 const filterLabel = ref('');
 const filterValue = ref();
 
-// if user have not changed label yet, it will be changed with selected filterName
-const touchedLabel = ref(false);
-
 const editMode = !!props.filter;
 
 const invalid = ref(false);
 
 const onLabelValueUpdate = (val: string) => {
   filterLabel.value = val;
-  touchedLabel.value = true;
 };
 
 const onFilterNameUpdate = (val: string) => {
   filterName.value = val;
   filterValue.value = null;
-  filterLabel.value = t(`webitelUI.filters.${val}`);
 };
 
 const submit = () => {
@@ -118,10 +113,6 @@ if (props.options) {
     () => {
       filterName.value = props.options[0]?.value;
       filterValue.value = null;
-
-      if (!touchedLabel.value) {
-        filterLabel.value = t(`webitelUI.filters.${filterName.value}`);
-      }
     },
     { immediate: true },
   );
@@ -148,8 +139,8 @@ $form-width: 380px;
   flex-direction: column;
   box-sizing: border-box;
   width: $form-width;
-  padding: var(--spacing-sm);
-  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) 0;
+  gap: var(--spacing-xs);
 }
 
 .dynamic-filter-config-form-footer {
