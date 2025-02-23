@@ -1,3 +1,8 @@
+## [v24.12.127] - 2025-02-23
+### :bug: Bug Fixes
+- [`2e58ef3`](https://github.com/webitel/webitel-ui-sdk/commit/2e58ef3f7facaadc051043f28679f631ac857ecc) - clear dynamic filter default label value *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.124] - 2025-02-23
 ### :sparkles: New Features
 - [`a5ecde2`](https://github.com/webitel/webitel-ui-sdk/commit/a5ecde238135d06e6147977024589a6b72e74284) - pinia table store configuration extensions to support parentId/child relation, + etag support for deleteEls method [WTEL-6345](https://webitel.atlassian.net/browse/WTEL-6345) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1199,3 +1204,4 @@
 [v24.12.122]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.121...v24.12.122
 [v24.12.123]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.122...v24.12.123
 [v24.12.124]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.123...v24.12.124
+[v24.12.127]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.126...v24.12.127
