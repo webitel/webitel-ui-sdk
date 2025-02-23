@@ -134,7 +134,7 @@ const props = defineProps({
   },
   clearable: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 });
 const emit = defineEmits(['input']);
