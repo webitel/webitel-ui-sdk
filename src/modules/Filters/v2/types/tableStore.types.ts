@@ -4,9 +4,9 @@ import { ApiModule } from '../../../../api/types/ApiModule.type.ts';
 import { IFiltersManager } from '../filters';
 
 export interface useTableStoreParams<Entity> {
-  parentId?: string;
   apiModule: ApiModule<Entity>;
   headers: [];
+  disablePersistence?: boolean | [];
   // etagMode: boolean;
 }
 

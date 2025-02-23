@@ -13,13 +13,15 @@ import {
 
 export const createTableStore = <Entity extends { id: string; etag?: string }>(
   namespace: string,
-  { parentId, apiModule, headers }: useTableStoreParams<Entity>,
+  { apiModule, headers, disablePersistence }: useTableStoreParams<Entity>,
 ) => {
   const usePaginationStore = createTablePaginationStore(namespace);
   const useHeadersStore = createTableHeadersStore(namespace, { headers });
   const useFiltersStore = createTableFiltersStore(namespace);
 
   return defineStore(namespace, (): TableStore<Entity> => {
+    const parentId = ref();
+
     const paginationStore = usePaginationStore();
     const { page, size, next } = storeToRefs(paginationStore);
     const {
@@ -68,7 +70,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
         size: size.value,
         sort: sort.value,
         fields: fields.value,
-        parentId,
+        parentId: parentId.value,
       };
 
       try {
@@ -97,7 +99,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       try {
         await apiModule.patch({
           changes,
-          parentId,
+          parentId: parentId.value,
           id: item.id,
           etag: item.etag,
         });
@@ -111,7 +113,11 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
     const deleteEls = async (_els: Entity[]) => {
       const els = Array.isArray(_els) ? _els : [_els];
       const deleteEl = (el: Entity) => {
-        return apiModule.delete({ id: el.id });
+        return apiModule.delete({
+          id: el.id,
+          etag: el.etag,
+          parentId: parentId.value,
+        });
       };
 
       try {
@@ -121,12 +127,20 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       }
     };
 
-    const initialize = async () => {
-      await Promise.allSettled([
-        setupPaginationPersistence(),
-        setupFiltersPersistence(),
-        setupHeadersPersistence(),
-      ]);
+    const initialize = async ({
+      parentId: storeParentId,
+    }: { parentId?: string | number } = {}) => {
+      if (storeParentId) {
+        parentId.value = storeParentId;
+      }
+
+      if (!disablePersistence) {
+        await Promise.allSettled([
+          setupPaginationPersistence(),
+          setupFiltersPersistence(),
+          setupHeadersPersistence(),
+        ]);
+      }
 
       let loadingAfterFiltersChange = false;
 
