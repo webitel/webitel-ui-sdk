@@ -1,3 +1,8 @@
+## [v24.12.135] - 2025-02-24
+### :bug: Bug Fixes
+- [`15c5ddd`](https://github.com/webitel/webitel-ui-sdk/commit/15c5dddea82bb57b151e5b640ddb876cfcff6cf8) - filters/v2 createdAt filters preview show time [WTEL-6307](https://webitel.atlassian.net/browse/WTEL-6307) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.134] - 2025-02-24
 ### :bug: Bug Fixes
 - [`dee93e5`](https://github.com/webitel/webitel-ui-sdk/commit/dee93e5ba9da03fb7684e2b6e48997f98f20f5c6) - filters/v2 createdAt filters datepicker datetime format [WTEL-6307](https://webitel.atlassian.net/browse/WTEL-6307) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1241,3 +1246,4 @@
 [v24.12.132]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.131...v24.12.132
 [v24.12.133]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.132...v24.12.133
 [v24.12.134]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.133...v24.12.134
+[v24.12.135]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.134...v24.12.135
