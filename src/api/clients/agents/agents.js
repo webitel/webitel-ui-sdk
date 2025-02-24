@@ -214,7 +214,7 @@ const getAgentHistory = async (params) => {
 };
 
 const getAgentUsersOptions = async (params) => {
-  const { page, size, search } = applyTransform(params, [
+  const { page, size, search, sort, fields, id } = applyTransform(params, [
     merge(getDefaultGetParams()),
     starToSearch('search'),
   ]);
