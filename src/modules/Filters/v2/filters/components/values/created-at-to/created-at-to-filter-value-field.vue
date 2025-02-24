@@ -3,6 +3,7 @@
     v-if="model"
     :label="`${t('webitelUI.filters.createdAtTo')}:`"
     :value="model"
+    mode="datetime"
     @input="model = $event"
   />
 </template>
