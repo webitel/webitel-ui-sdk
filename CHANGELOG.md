@@ -1,3 +1,8 @@
+## [v24.12.132] - 2025-02-24
+### :bug: Bug Fixes
+- [`3f09e93`](https://github.com/webitel/webitel-ui-sdk/commit/3f09e93db32f63c1ae1b5020b63e8a4e61c996d6) - cases status indicator colors [WTEL-6240](https://webitel.atlassian.net/browse/WTEL-6240) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.131] - 2025-02-24
 ### :sparkles: New Features
 - [`00fd542`](https://github.com/webitel/webitel-ui-sdk/commit/00fd54273c87ad7ba3264919664ee979e29bc1c3) - useCardComponent.js `isLoading` flag [WTEL-6240](https://webitel.atlassian.net/browse/WTEL-6240) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1223,3 +1228,4 @@
 [v24.12.129]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.128...v24.12.129
 [v24.12.130]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.129...v24.12.130
 [v24.12.131]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.130...v24.12.131
+[v24.12.132]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.131...v24.12.132
