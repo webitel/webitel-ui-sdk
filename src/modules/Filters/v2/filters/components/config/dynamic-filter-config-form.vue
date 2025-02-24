@@ -107,17 +107,6 @@ const submit = () => {
   });
 };
 
-if (props.options) {
-  watch(
-    props.options,
-    () => {
-      filterName.value = props.options[0]?.value;
-      filterValue.value = null;
-    },
-    { immediate: true },
-  );
-}
-
 if (props.filter) {
   watch(
     props.filter,
