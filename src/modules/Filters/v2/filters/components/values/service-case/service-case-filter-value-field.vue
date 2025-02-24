@@ -1,20 +1,14 @@
 <template>
-  <div>
-    <wt-label>
-      {{ t('webitelUI.filters.filterValue') }}
-    </wt-label>
-
-    <wt-tree
-      :model-value="model"
-      :data="catalogData"
-      item-data="id"
-      item-label="name"
-      children-prop="service"
-      class="service-case-filter-value-field"
-      multiple
-      @update:model-value="onElementSelect($event)"
-    />
-  </div>
+  <wt-tree
+    :model-value="model"
+    :data="catalogData"
+    item-data="id"
+    item-label="name"
+    children-prop="service"
+    class="service-case-filter-value-field"
+    multiple
+    @update:model-value="onElementSelect($event)"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -24,7 +18,6 @@ import deepCopy from 'deep-copy';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtLabel from '../../../../../../../components/wt-label/wt-label.vue';
 import WtTree from '../../../../../../../components/wt-tree/wt-tree.vue';
 import { serviceCatalogsSearchMethod } from './config.js';
 
