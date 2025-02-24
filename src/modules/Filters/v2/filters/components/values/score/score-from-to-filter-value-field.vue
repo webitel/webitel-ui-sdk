@@ -6,7 +6,7 @@
       :number-max="props.numberMax"
       :number-min="0"
       :v="v$.model?.from"
-      :label="`${t('webitelUI.filters.filterValueFrom')}:`"
+      :label="`${t('reusable.from')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
       name="score-from-to-filter-value-field-from"
@@ -20,7 +20,7 @@
       :number-max="props.numberMax"
       :number-min="0"
       :v="v$.model?.to"
-      :label="`${t('reusable.to').toLowerCase()}:`"
+      :label="`${t('reusable.to')}:`"
       :placeholder="t('webitelUI.filters.filterValue')"
       class="score-from-to-filter-value-field__input"
       name="score-from-to-filter-value-field-to"
@@ -92,8 +92,9 @@ watch(
 
 <style lang="scss" scoped>
 .score-from-to-filter-value-field {
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--spacing-xs);
 }
 </style>
