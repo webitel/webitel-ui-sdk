@@ -16,7 +16,6 @@ import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import deepCopy from 'deep-copy';
 import { computed, onMounted, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import WtTree from '../../../../../../../components/wt-tree/wt-tree.vue';
 import { serviceCatalogsSearchMethod } from './config.js';
@@ -25,7 +24,6 @@ type ModelValue = string[];
 const model = defineModel<ModelValue>({
   default: [],
 });
-const { t } = useI18n();
 
 const catalogData = ref([]);
 
@@ -93,6 +91,6 @@ onMounted(async () => await loadCatalogs());
 
 <style lang="scss" scoped>
 .service-case-filter-value-field {
-  min-height: 200px;
+  background: transparent;
 }
 </style>

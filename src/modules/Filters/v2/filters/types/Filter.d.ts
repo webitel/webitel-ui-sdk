@@ -43,4 +43,7 @@ export interface IFilter {
   value: FilterValue;
   label?: FilterLabel;
   set: (data: FilterData) => IFilter;
+  styleOptions?: {
+    size: 'xs' | 'md';
+  };
 }

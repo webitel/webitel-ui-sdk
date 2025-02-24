@@ -1,32 +1,43 @@
 <template>
-  <form class="dynamic-filter-config-form">
-    <wt-select
-      :clearable="false"
-      :disabled="editMode"
-      :label="t('webitelUI.filters.filterName')"
-      :options="options"
-      :value="filterName"
-      track-by="value"
-      use-value-from-options-by-prop="value"
-      @input="onFilterNameUpdate($event)"
-    />
+  <form
+    :class="{
+      [`dynamic-filter-config-form__${formFilterStyles}`]: true,
+    }"
+    class="dynamic-filter-config-form"
+  >
+    <div class="dynamic-filter-config-form__content">
+      <wt-select
+        :clearable="false"
+        :disabled="editMode"
+        :label="t('webitelUI.filters.filterName')"
+        :options="options"
+        :value="filterName"
+        track-by="value"
+        use-value-from-options-by-prop="value"
+        class="dynamic-filter-config-form__column-select"
+        @input="onFilterNameUpdate($event)"
+      />
 
-    <slot
-      name="value-input"
-      v-bind="{
-        filterName,
-        filterValue,
-        inputLabel: t('webitelUI.filters.filterValue'),
-        onValueChange: (v) => (filterValue = v),
-        onValueInvalidChange: (v) => (invalid = v),
-      }"
-    />
+      <div class="dynamic-filter-config-form__value-select">
+        <slot
+          name="value-input"
+          v-bind="{
+            filterName,
+            filterValue,
+            inputLabel: t('webitelUI.filters.filterValue'),
+            onValueChange: (v) => (filterValue = v),
+            onValueInvalidChange: (v) => (invalid = v),
+          }"
+        />
+      </div>
 
-    <dynamic-filter-config-form-label
-      :value="filterLabel"
-      @update:model-value="onLabelValueUpdate"
-      @update:invalid="(v) => (invalid = v)"
-    />
+      <dynamic-filter-config-form-label
+        :value="filterLabel"
+        class="dynamic-filter-config-form__label"
+        @update:model-value="onLabelValueUpdate"
+        @update:invalid="(v) => (invalid = v)"
+      />
+    </div>
 
     <footer class="dynamic-filter-config-form-footer">
       <wt-button
@@ -50,7 +61,7 @@
 
 <script lang="ts" setup>
 import deepcopy from 'deep-copy';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtButton from '../../../../../../components/wt-button/wt-button.vue';
@@ -118,22 +129,86 @@ if (props.filter) {
     { immediate: true },
   );
 }
+
+const formFilterStyles = computed(() => {
+  const DEFAULT_SIZE = 'xs';
+  if (props.filter) {
+    return props.filter?.styleOptions?.size || DEFAULT_SIZE;
+  }
+
+  if (props.options) {
+    const match = props.options?.find((el) => el.value === filterName.value);
+    return match?.styleOptions?.size || DEFAULT_SIZE;
+  }
+
+  return DEFAULT_SIZE;
+});
 </script>
 
 <style lang="scss" scoped>
-$form-width: 380px;
+$form-width-xs: 380px;
+$form-width-md: 800px;
 
 .dynamic-filter-config-form {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   box-sizing: border-box;
-  width: $form-width;
   padding: var(--spacing-xs) 0;
   gap: var(--spacing-xs);
-}
 
-.dynamic-filter-config-form-footer {
-  display: flex;
-  gap: var(--spacing-xs);
+  &__xs {
+    width: $form-width-xs;
+
+    .dynamic-filter-config-form {
+    }
+  }
+
+  &__md {
+    width: $form-width-md;
+    height: 500px;
+
+    .dynamic-filter-config-form {
+      &__content {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+          'column label'
+          'value value';
+      }
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'column'
+      'value'
+      'label';
+    height: 100%;
+    padding: var(--spacing-xs) 0;
+    grid-gap: var(--spacing-xs);
+  }
+
+  &__column-select {
+    grid-area: column;
+    height: fit-content;
+  }
+
+  &__value-select {
+    grid-area: value;
+    height: 100%;
+  }
+
+  &__label {
+    grid-area: label;
+    height: fit-content;
+  }
+
+  &-footer {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
 }
 </style>
