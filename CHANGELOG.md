@@ -1,3 +1,8 @@
+## [v24.12.131] - 2025-02-24
+### :sparkles: New Features
+- [`00fd542`](https://github.com/webitel/webitel-ui-sdk/commit/00fd54273c87ad7ba3264919664ee979e29bc1c3) - useCardComponent.js `isLoading` flag [WTEL-6240](https://webitel.atlassian.net/browse/WTEL-6240) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.130] - 2025-02-24
 ### :bug: Bug Fixes
 - [`abce6ac`](https://github.com/webitel/webitel-ui-sdk/commit/abce6acd2cc899c60d146b752addfd3d4a7c2b0a) - update locale for validation message latinWithNumber [WTEL-6251](https://webitel.atlassian.net/browse/WTEL-6251) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1217,3 +1222,4 @@
 [v24.12.127]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.126...v24.12.127
 [v24.12.129]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.128...v24.12.129
 [v24.12.130]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.129...v24.12.130
+[v24.12.131]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.130...v24.12.131
