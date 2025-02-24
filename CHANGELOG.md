@@ -1,3 +1,8 @@
+## [v24.12.130] - 2025-02-24
+### :bug: Bug Fixes
+- [`abce6ac`](https://github.com/webitel/webitel-ui-sdk/commit/abce6acd2cc899c60d146b752addfd3d4a7c2b0a) - update locale for validation message latinWithNumber [WTEL-6251](https://webitel.atlassian.net/browse/WTEL-6251) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v24.12.129] - 2025-02-24
 ### :bug: Bug Fixes
 - [`087e52b`](https://github.com/webitel/webitel-ui-sdk/commit/087e52b706e80e861482eb69384f6f8f24159e84) - filters v2 rm filtername set by default [WTEL-6310](https://webitel.atlassian.net/browse/WTEL-6310) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1211,3 +1216,4 @@
 [v24.12.124]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.123...v24.12.124
 [v24.12.127]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.126...v24.12.127
 [v24.12.129]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.128...v24.12.129
+[v24.12.130]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.129...v24.12.130
