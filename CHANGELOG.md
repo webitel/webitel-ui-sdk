@@ -1,3 +1,8 @@
+## [v24.12.136] - 2025-02-24
+### :bug: Bug Fixes
+- [`b76a25d`](https://github.com/webitel/webitel-ui-sdk/commit/b76a25d09dc70ad621fefbe0805d302b2933a309) - total duration, talk duration filters previews fixed [WTEL-6289](https://webitel.atlassian.net/browse/WTEL-6289) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.135] - 2025-02-24
 ### :bug: Bug Fixes
 - [`15c5ddd`](https://github.com/webitel/webitel-ui-sdk/commit/15c5dddea82bb57b151e5b640ddb876cfcff6cf8) - filters/v2 createdAt filters preview show time [WTEL-6307](https://webitel.atlassian.net/browse/WTEL-6307) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1247,3 +1252,4 @@
 [v24.12.133]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.132...v24.12.133
 [v24.12.134]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.133...v24.12.134
 [v24.12.135]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.134...v24.12.135
+[v24.12.136]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.135...v24.12.136
