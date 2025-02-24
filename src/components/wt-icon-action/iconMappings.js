@@ -1,7 +1,7 @@
 import { IconAction } from '../../enums';
 
 export const WtIconActionIconMappings = Object.freeze({
-  [IconAction.ADD]: 'plus',
+  [IconAction.ADD]: 'add-filter',
   [IconAction.DELETE]: 'bucket',
   [IconAction.DOWNLOAD]: 'download',
   [IconAction.EDIT]: 'edit',

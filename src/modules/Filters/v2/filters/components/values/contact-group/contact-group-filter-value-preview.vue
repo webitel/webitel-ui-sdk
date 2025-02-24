@@ -1,8 +1,7 @@
 <template>
-  <div class="contact-group-filter-value-preview">
+  <div>
     <p
       v-if="props.value.unassigned"
-      class="contact-group-filter-value-preview__point"
     >{{ t('reusable.unassigned') }}</p>
     <ul
       v-if="localValue"
@@ -41,7 +40,4 @@ getLocalValue();
 </script>
 
 <style lang="scss" scoped>
-.contact-group-filter-value-preview__point {
-  @extend %typo-subtitle-1;
-}
 </style>

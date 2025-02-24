@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.121",
+  "version": "24.12.129",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -117,7 +117,6 @@
     "axios": "^1.7.7",
     "clipboard-copy": "^4.0.1",
     "csv-stringify": "^5.5.3",
-    "date-fns": "^4.1.0",
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",

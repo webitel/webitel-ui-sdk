@@ -81,8 +81,8 @@ export default {
     read: 'Читати',
     create: 'Створити',
     draggable: 'Перетягнути',
-    unassigned: 'Unassigned',
-    showUnassigned: 'Show unassigned',
+    unassigned: 'Непризначені',
+    showUnassigned: 'Показати непризначені',
   },
   vocabulary: {
     apply: 'Застосувати',
@@ -501,10 +501,10 @@ export default {
       actualResolutionTime: ({ linked }) => {
         return linked('cases.actualResolutionTime');
       },
-      agent : ({ linked }) => {
+      agent: ({ linked }) => {
         return linked('objects.agent.agent');
       },
-      amdResult : ({ linked }) => {
+      amdResult: ({ linked }) => {
         return linked('objects.amdResult');
       },
       assignee: ({ linked }) => {
@@ -513,31 +513,31 @@ export default {
       author: ({ linked }) => {
         return linked('cases.author');
       },
-      cause : ({ linked }) => {
+      cause: ({ linked }) => {
         return linked('objects.hangupCause');
       },
       closeReasonGroupsCase: ({ linked }) => {
         return linked('cases.reason');
       },
-      contact : ({ linked }) => {
+      contact: ({ linked }) => {
         return linked('vocabulary.contact');
       },
       contactGroup: ({ linked }) => {
         return linked('cases.group');
       },
-      createdAtFrom : ({ linked }) => {
+      createdAtFrom: ({ linked }) => {
         return linked('reusable.from');
       },
-      createdAtTo : ({ linked }) => {
+      createdAtTo: ({ linked }) => {
         return linked('reusable.to');
       },
-      direction : ({ linked }) => {
-        return linked('calls.direction');
+      direction: ({ linked }) => {
+        return linked('objects.direction');
       },
-      gateway : ({ linked }) => {
-        return linked('vocabulary.gateway');
+      gateway: ({ linked }) => {
+        return linked('objects.gateway');
       },
-      grantee : ({ linked }) => {
+      grantee: ({ linked }) => {
         return linked('objects.grantee');
       },
       hasAttachment: ({ linked }) => {
@@ -555,13 +555,11 @@ export default {
       priorityCase: ({ linked }) => {
         return linked('vocabulary.priority');
       },
-      queue : ({ linked }) => {
+      queue: ({ linked }) => {
         return linked('objects.queue.queue');
       },
-      rated: ({ linked }) => {
-        return linked('objects.rated');
-      },
-      ratedBy : ({ linked }) => {
+      rated: 'Оцінені',
+      ratedBy: ({ linked }) => {
         return linked('objects.ratedBy');
       },
       rating: ({ linked }) => {
@@ -576,7 +574,7 @@ export default {
       resolutionTime: ({ linked }) => {
         return linked('cases.resolutionTime');
       },
-      score : ({ linked }) => {
+      score: ({ linked }) => {
         return linked('webitelUI.auditForm.score');
       },
       serviceCase: ({ linked }) => {
@@ -594,22 +592,22 @@ export default {
       statusCase: ({ linked }) => {
         return linked('cases.status');
       },
-      tag : ({ linked }) => {
+      tag: ({ linked }) => {
         return linked('vocabulary.tag');
       },
       talkDuration: ({ linked }) => {
         return linked('objects.talkDuration');
       },
-      team : ({ linked }) => {
+      team: ({ linked }) => {
         return linked('objects.team');
       },
       totalDuration: ({ linked }) => {
         return linked('objects.totalDuration');
       },
-      user : ({ linked }) => {
+      user: ({ linked }) => {
         return linked('objects.user');
       },
-      variable : ({ linked }) => {
+      variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
     },

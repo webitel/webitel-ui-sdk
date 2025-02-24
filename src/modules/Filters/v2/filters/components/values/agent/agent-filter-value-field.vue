@@ -39,6 +39,7 @@ const v$ = useVuelidate(
   { model },
   { $autoDirty: true },
 );
+
 v$.value.$touch();
 
 watch(
