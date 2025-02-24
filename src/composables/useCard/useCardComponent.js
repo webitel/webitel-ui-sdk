@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -22,6 +22,8 @@ export const useCardComponent = (params) => {
   const { t } = useI18n();
 
   const { name: pathName } = useCachedItemInstanceName(itemInstance);
+
+  const isLoading = ref(true);
 
   const isNew = computed(() => route.params.id === 'new');
   const disabledSave = computed(() => {
@@ -57,26 +59,26 @@ export const useCardComponent = (params) => {
 
   async function initializeCard() {
     try {
+      isLoading.value = true;
       const { id } = route.params;
       await setId(id);
       await loadItem();
-    } catch (error) {
-      console.error(error);
+    } finally {
+      isLoading.value = false;
     }
   }
 
   function initialize() {
-    onMounted(() => {
-      initializeCard();
-    });
-
     onUnmounted(() => {
       resetState();
     });
+
+    return initializeCard();
   }
 
   return {
     id,
+    isLoading,
     itemInstance,
     isNew,
     pathName,
