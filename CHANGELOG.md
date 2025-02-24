@@ -1,3 +1,8 @@
+## [v24.12.129] - 2025-02-24
+### :bug: Bug Fixes
+- [`087e52b`](https://github.com/webitel/webitel-ui-sdk/commit/087e52b706e80e861482eb69384f6f8f24159e84) - filters v2 rm filtername set by default [WTEL-6310](https://webitel.atlassian.net/browse/WTEL-6310) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.127] - 2025-02-23
 ### :bug: Bug Fixes
 - [`2e58ef3`](https://github.com/webitel/webitel-ui-sdk/commit/2e58ef3f7facaadc051043f28679f631ac857ecc) - clear dynamic filter default label value *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1205,3 +1210,4 @@
 [v24.12.123]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.122...v24.12.123
 [v24.12.124]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.123...v24.12.124
 [v24.12.127]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.126...v24.12.127
+[v24.12.129]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.128...v24.12.129
