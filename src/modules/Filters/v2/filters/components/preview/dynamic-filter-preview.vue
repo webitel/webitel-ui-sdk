@@ -4,7 +4,9 @@
       <wt-tooltip :disabled="configFormVisible">
         <template #activator>
           <wt-chip color="primary">
-            {{ props.filter.label || t(`webitelUI.filters.${props.filter.name}`) }}
+            {{
+              props.filter.label || t(`webitelUI.filters.${props.filter.name}`)
+            }}
             <wt-icon-btn
               icon="close--filled"
               size="sm"
@@ -23,25 +25,28 @@
               <slot name="info" />
             </template>
           </dynamic-filter-preview-info>
-
         </template>
       </wt-tooltip>
     </template>
 
-    <template #content>
-      <slot name="form" />
+    <template #content="slotScope">
+      <slot
+        name="form"
+        v-bind="slotScope"
+      />
     </template>
   </dynamic-filter-config-view>
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
+
 import WtChip from '../../../../../../components/wt-chip/wt-chip.vue';
 import WtIconBtn from '../../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
 import type { IFilter } from '../../types/Filter';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
-import DynamicFilterPreviewInfo from "./dynamic-filter-preview-info.vue";
-import {useI18n} from "vue-i18n";
+import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {
   filter: IFilter;
