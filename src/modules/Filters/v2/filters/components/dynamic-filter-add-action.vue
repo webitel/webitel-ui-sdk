@@ -5,7 +5,7 @@
         <p v-if="props.showLabel">
           {{ t('webitelUI.filters.addFilter') }}
         </p>
-        <wt-icon-action action="add" />
+        <wt-icon-action action="add-filter" />
       </div>
     </template>
 
