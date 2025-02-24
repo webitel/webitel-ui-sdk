@@ -1,3 +1,8 @@
+## [v24.12.133] - 2025-02-24
+### :sparkles: New Features
+- [`c64e3ea`](https://github.com/webitel/webitel-ui-sdk/commit/c64e3ea7c73234b99de8de242bb846901b97c98b) - implement slot for custom message on delete confirmation popup *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v24.12.132] - 2025-02-24
 ### :bug: Bug Fixes
 - [`3f09e93`](https://github.com/webitel/webitel-ui-sdk/commit/3f09e93db32f63c1ae1b5020b63e8a4e61c996d6) - cases status indicator colors [WTEL-6240](https://webitel.atlassian.net/browse/WTEL-6240) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1229,3 +1234,4 @@
 [v24.12.130]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.129...v24.12.130
 [v24.12.131]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.130...v24.12.131
 [v24.12.132]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.131...v24.12.132
+[v24.12.133]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.132...v24.12.133
