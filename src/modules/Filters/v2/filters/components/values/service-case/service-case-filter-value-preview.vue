@@ -1,15 +1,34 @@
 <template>
-  <div class=""></div>
+  <ul v-if="localValue">
+    <li
+      v-for="({ name }, index) of localValue"
+      :key="index"
+    >
+      {{ name }}
+    </li>
+  </ul>
 </template>
 
-<script setup lang="ts">
-interface Props {}
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-const props = defineProps<Props>();
+import { servicesSearchMethod } from './config.js';
 
-interface Emits {}
+const props = defineProps<{
+  value: number[];
+}>();
 
-const emit = defineEmits<Emits>();
+const localValue = ref([]);
+
+const getLocalValue = async () => {
+  const { items } = await servicesSearchMethod({
+    id: props.value,
+    fields: ['id', 'name'],
+  });
+  localValue.value = items;
+};
+
+getLocalValue();
 </script>
 
 <style lang="scss" scoped></style>

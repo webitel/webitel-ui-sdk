@@ -36,8 +36,8 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import ImpactedFilter from './impacted/impacted-filter-value-field.vue';
 import ImpactedFilterPreview from './impacted/impacted-filter-value-preview.vue';
-import PriorityCaseFilter from './priority-case/priority-case-filter-value-field.vue';
-import PriorityCaseFilterPreview from './priority-case/priority-case-filter-value-preview.vue';
+import CasePriorityFilter from './priority-case/priority-case-filter-value-field.vue';
+import CasePriorityFilterPreview from './priority-case/priority-case-filter-value-preview.vue';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
 import RatedFilter from './rated/rated-filter-value-field.vue';
@@ -54,16 +54,16 @@ import ResolutionTimeFilter from './resolution-time/resolution-time-filter-value
 import ResolutionTimeFilterPreview from './resolution-time/resolution-time-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
-// import ServiceCaseFilter from './service-case/service-case-filter-value-field.vue';
-// import ServiceCaseFilterPreview from './service-case/service-case-filter-value-preview.vue';
+import CaseServiceFilter from './service-case/service-case-filter-value-field.vue';
+import CaseServiceFilterPreview from './service-case/service-case-filter-value-preview.vue';
 import SlaFilter from './sla/sla-filter-value-field.vue';
 import SlaFilterPreview from './sla/sla-filter-value-preview.vue';
 import SlaConditionFilter from './sla-condition/sla-condition-filter-value-field.vue';
 import SlaConditionFilterPreview from './sla-condition/sla-condition-filter-value-preview.vue';
-import SourceCaseFilter from './source-case/source-case-filter-value-field.vue';
-import SourceCaseFilterPreview from './source-case/source-case-filter-value-preview.vue';
-import StatusCaseFilter from './status-case/status-case-filter-value-field.vue';
-import StatusCaseFilterPreview from './status-case/status-case-filter-value-preview.vue';
+import CaseSourceFilter from './source-case/source-case-filter-value-field.vue';
+import CaseSourceFilterPreview from './source-case/source-case-filter-value-preview.vue';
+import CaseStatusFilter from './status-case/status-case-filter-value-field.vue';
+import CaseStatusFilterPreview from './status-case/status-case-filter-value-preview.vue';
 import TagFilter from './tag/tag-filter-value-field.vue';
 import TagFilterPreview from './tag/tag-filter-value-preview.vue';
 import TalkDurationFilter from './talk-duration/talk-duration-filter-value-field.vue';
@@ -90,6 +90,14 @@ export {
   AssigneeFilterPreview,
   AuthorFilter,
   AuthorFilterPreview,
+  CasePriorityFilter,
+  CasePriorityFilterPreview,
+  CaseServiceFilter,
+  CaseServiceFilterPreview,
+  CaseSourceFilter,
+  CaseSourceFilterPreview,
+  CaseStatusFilter,
+  CaseStatusFilterPreview,
   CauseFilter,
   CauseFilterPreview,
   CloseReasonGroupsCaseFilter,
@@ -116,8 +124,6 @@ export {
   HasTranscriptionFilterPreview,
   ImpactedFilter,
   ImpactedFilterPreview,
-  PriorityCaseFilter,
-  PriorityCaseFilterPreview,
   QueueFilter,
   QueueFilterPreview,
   RatedByFilter,
@@ -136,14 +142,8 @@ export {
   ScoreFilterPreview,
   SlaConditionFilter,
   SlaConditionFilterPreview,
-  // ServiceCaseFilter,
-  // ServiceCaseFilterPreview,
   SlaFilter,
   SlaFilterPreview,
-  SourceCaseFilter,
-  SourceCaseFilterPreview,
-  StatusCaseFilter,
-  StatusCaseFilterPreview,
   TagFilter,
   TagFilterPreview,
   TalkDurationFilter,

@@ -12,6 +12,7 @@
         :item-data="itemData"
         :data="item"
         :children-prop="childrenProp"
+        :multiple="multiple"
         @update:model-value="emit('update:modelValue', $event)"
       />
     </div>
@@ -75,6 +76,7 @@ const props = withDefaults(
      * You can pass the name of the property that will be used for getting children elements
      */
     childrenProp?: string;
+    multiple?: boolean;
   }>(),
   {
     childrenProp: 'children',

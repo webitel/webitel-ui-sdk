@@ -20,11 +20,9 @@
     <div
       :class="{ active: isSelected }"
       class="wt-tree-line__label-wrapper"
+      @click="selectElement"
     >
-      <p
-        class="wt-tree-line__label"
-        @click="selectElement"
-      >
+      <p class="wt-tree-line__label">
         {{ label }}
       </p>
       <wt-icon
@@ -47,6 +45,7 @@
         :next-element="!!data[childrenProp][index + 1]"
         :nested-icons="displayIcons"
         :last-child="index === data[childrenProp].length - 1"
+        :multiple="multiple"
         @open-parent="onOpenParent"
         @update:model-value="emit('update:modelValue', $event)"
       />
@@ -72,6 +71,7 @@ const props = withDefaults(
     lastChild?: boolean;
     nestedIcons?: WtTreeNestedIcons[];
     nextElement?: boolean;
+    multiple?: boolean;
     /**
      * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
      */
@@ -82,6 +82,7 @@ const props = withDefaults(
     childrenProp: 'children',
     lastChild: false,
     nextElement: false,
+    multiple: false,
     searchedProp: 'searched',
   },
 );
@@ -110,7 +111,20 @@ const displayIcons = computed(() => {
   return icons;
 });
 
+const isMultipleItemsSelected = () => {
+  if (props.itemData) {
+    return props.modelValue.includes(props.data[props.itemData]);
+  }
+
+  const match = props.modelValue.find((item) => deepEqual(item, props.data));
+  return !!match;
+};
+
 const isSelected = computed(() => {
+  if (props.multiple) {
+    return isMultipleItemsSelected();
+  }
+
   if (props.itemData) {
     return props.data[props.itemData] === props.modelValue;
   }
@@ -118,7 +132,36 @@ const isSelected = computed(() => {
   return deepEqual(props.modelValue, props.data);
 });
 
+const setMultipleModelValue = () => {
+  const value = props.itemData ? props.data[props.itemData] : props.data;
+  let existingIndex;
+
+  if (props.itemData) {
+    existingIndex = props.modelValue.indexOf(props.data[props.itemData]);
+  } else {
+    existingIndex = props.modelValue.findIndex((item) =>
+      deepEqual(item, props.data),
+    );
+  }
+
+  if (existingIndex === -1) {
+    const newArray = [...props.modelValue];
+    newArray.push(value);
+    emit('update:modelValue', newArray);
+    return;
+  }
+
+  const newArray = [...props.modelValue];
+  newArray.splice(existingIndex, 1);
+  emit('update:modelValue', newArray);
+};
+
 const selectElement = () => {
+  if (props.multiple && !props.data.service) {
+    setMultipleModelValue();
+    return;
+  }
+
   if (props.data[props.childrenProp]?.length) {
     return;
   }
