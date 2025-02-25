@@ -111,16 +111,18 @@ const displayIcons = computed(() => {
   return icons;
 });
 
+const isMultipleItemsSelected = () => {
+  if (props.itemData) {
+    return props.modelValue.includes(props.data[props.itemData]);
+  }
+
+  const match = props.modelValue.find((item) => deepEqual(item, props.data));
+  return !!match;
+};
+
 const isSelected = computed(() => {
   if (props.multiple) {
-    if (props.itemData) {
-      return props.modelValue.includes(props.data[props.itemData]);
-    } else {
-      const match = props.modelValue.find((item) =>
-        deepEqual(item, props.data),
-      );
-      return !!match;
-    }
+    return isMultipleItemsSelected();
   }
 
   if (props.itemData) {
@@ -130,12 +132,33 @@ const isSelected = computed(() => {
   return deepEqual(props.modelValue, props.data);
 });
 
+const setMultipleModelValue = () => {
+  const value = props.itemData ? props.data[props.itemData] : props.data;
+  let existingIndex;
+
+  if (props.itemData) {
+    existingIndex = props.modelValue.indexOf(props.data[props.itemData]);
+  } else {
+    existingIndex = props.modelValue.findIndex((item) =>
+      deepEqual(item, props.data),
+    );
+  }
+
+  if (existingIndex === -1) {
+    const newArray = [...props.modelValue];
+    newArray.push(value);
+    emit('update:modelValue', newArray);
+    return;
+  }
+
+  const newArray = [...props.modelValue];
+  newArray.splice(existingIndex, 1);
+  emit('update:modelValue', newArray);
+};
+
 const selectElement = () => {
-  console.log(props.modelValue, ' propsmodelValue');
-  console.log(props.data, ' data');
-  if (props.multiple && props.lastChild) {
-    const value = props.itemData ? props.data[props.itemData] : props.data;
-    emit('update:modelValue', value);
+  if (props.multiple && !props.data.service) {
+    setMultipleModelValue();
     return;
   }
 

@@ -7,7 +7,7 @@
     children-prop="service"
     class="service-case-filter-value-field"
     multiple
-    @update:model-value="onElementSelect($event)"
+    @update:model-value="model = $event"
   />
 </template>
 
@@ -66,7 +66,7 @@ const loadCatalogs = async () => {
 
     catalogData.value = deepCopy(items);
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
 
@@ -74,17 +74,7 @@ if (!model.value) {
   model.value = [];
 }
 
-const onElementSelect = (val: string) => {
-  const matchIdx = model.value?.indexOf(val);
-  if (matchIdx !== -1) {
-    model.value.splice(matchIdx, 1);
-    return;
-  }
-
-  model.value.push(val);
-};
-
-onMounted(async () => await loadCatalogs());
+onMounted(loadCatalogs);
 </script>
 
 <style lang="scss">

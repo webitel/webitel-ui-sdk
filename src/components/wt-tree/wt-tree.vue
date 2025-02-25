@@ -12,7 +12,7 @@
         :item-data="itemData"
         :data="item"
         :children-prop="childrenProp"
-        :multiple="props.multiple"
+        :multiple="multiple"
         @update:model-value="emit('update:modelValue', $event)"
       />
     </div>
@@ -83,7 +83,6 @@ const props = withDefaults(
     mode: WtTreeMode.Tree,
   },
 );
-console.log(props.multiple, ' multiple ????');
 
 const emit = defineEmits<{
   (e: 'select', data: any): void;
