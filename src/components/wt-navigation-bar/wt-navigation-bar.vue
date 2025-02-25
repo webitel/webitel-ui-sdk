@@ -182,7 +182,7 @@ export default {
             return flatNav.concat(currentNavItem.subNav);
           return [...flatNav, currentNavItem];
         }, [])
-        .find((navItem) => path.includes(navItem.route));
+        .find((navItem) => path.endsWith(navItem.route));
       const currentExpansion = this.nav
         .filter((nav) => nav.subNav)
         .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
