@@ -412,6 +412,9 @@ export default {
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
         [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+        [IconAction.CLEAR]: ({ linked }) =>
+          linked('webitelUI.tableActions.filterReset'),
+        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
       },
     },
     errorPages: {
