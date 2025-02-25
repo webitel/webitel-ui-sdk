@@ -1,3 +1,9 @@
+## [v24.12.138] - 2025-02-25
+### :bug: Bug Fixes
+- [`7ad954c`](https://github.com/webitel/webitel-ui-sdk/commit/7ad954c124f0c4c612d056b3a33bb91eff4b6e03) - yes/no transcript and recording filters fix [WTEL-6286](https://webitel.atlassian.net/browse/WTEL-6286) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`7c6b085`](https://github.com/webitel/webitel-ui-sdk/commit/7c6b0851dcc98fdbe55d916cb52b129e0fb20169) - local link run dev failure *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.136] - 2025-02-24
 ### :bug: Bug Fixes
 - [`b76a25d`](https://github.com/webitel/webitel-ui-sdk/commit/b76a25d09dc70ad621fefbe0805d302b2933a309) - total duration, talk duration filters previews fixed [WTEL-6289](https://webitel.atlassian.net/browse/WTEL-6289) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1253,3 +1259,4 @@
 [v24.12.134]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.133...v24.12.134
 [v24.12.135]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.134...v24.12.135
 [v24.12.136]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.135...v24.12.136
+[v24.12.138]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.137...v24.12.138

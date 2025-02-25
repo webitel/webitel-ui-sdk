@@ -72,7 +72,7 @@ class FiltersManager implements IFiltersManager {
   toString(): string {
     const filtersData = [...this.filters.values()].reduce(
       (acc, { name, label, value }) => {
-        if (isEmpty(value)) return acc;
+        if (isEmpty(value) && value == null) return acc;
 
         acc[filterValueToSnapshotKey(name)] = value;
 

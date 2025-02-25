@@ -7,10 +7,10 @@ import { FilterEnumOption } from '../../types/Filter.js';
 export const BooleanOptions: Array<FilterEnumOption> = [
   {
     locale: 'vocabulary.yes',
-    value: true,
+    value: 'true',
   },
   {
     locale: 'vocabulary.no',
-    value: false,
+    value: 'false',
   },
 ] as const;

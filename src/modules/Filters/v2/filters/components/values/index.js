@@ -30,7 +30,7 @@ import GranteeFilter from './grantee/grantee-filter-value-field.vue';
 import GranteeFilterPreview from './grantee/grantee-filter-value-preview.vue';
 import HasAttachmentFilter from './has-attachment/has-attachment-filter-value-field.vue';
 import HasAttachmentFilterPreview from './has-attachment/has-attachment-filter-value-preview.vue';
-import HasFileFilter from './has-file/has-file-filter-value-preview.vue';
+import HasFileFilter from './has-file/has-file-filter-value-field.vue';
 import HasFileFilterPreview from './has-file/has-file-filter-value-preview.vue';
 import HasTranscriptionFilter from './has-transcription/has-transcription-filter-value-field.vue';
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';

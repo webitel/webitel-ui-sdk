@@ -8,17 +8,18 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
+import {HasFileFilterModelValue} from "./HasFileFilter";
 
-const model = defineModel<string>();
+const model = defineModel<HasFileFilterModelValue>();
 
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      required,
+      required: (v: HasFileFilterModelValue) => !(!v && v !== false),
+
     },
   })),
   { model },
