@@ -1,3 +1,8 @@
+## [v24.12.144] - 2025-02-25
+### :sparkles: New Features
+- [`7482afc`](https://github.com/webitel/webitel-ui-sdk/commit/7482afca1ed5cb9ba74e5e428d46523c596599c8) - wt-empty buttons disabled props [WTEL-6316](https://webitel.atlassian.net/browse/WTEL-6316) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.143] - 2025-02-25
 ### :bug: Bug Fixes
 - [`3fe5f0a`](https://github.com/webitel/webitel-ui-sdk/commit/3fe5f0aa8fd67f92ea521f11a343726d900b7e74) - wt-empty text locale on filters [WTEL-6316](https://webitel.atlassian.net/browse/WTEL-6316) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1284,3 +1289,4 @@
 [v24.12.141]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.140...v24.12.141
 [v24.12.142]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.141...v24.12.142
 [v24.12.143]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.142...v24.12.143
+[v24.12.144]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.143...v24.12.144
