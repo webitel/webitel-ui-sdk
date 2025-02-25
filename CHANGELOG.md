@@ -1,3 +1,8 @@
+## [v24.12.142] - 2025-02-25
+### :bug: Bug Fixes
+- [`a952e21`](https://github.com/webitel/webitel-ui-sdk/commit/a952e21c842a3e70c6f3b07825343ffa0dc0e7df) - navbar 'current' highlight computing [WTEL-6174](https://webitel.atlassian.net/browse/WTEL-6174) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.141] - 2025-02-25
 ### :bug: Bug Fixes
 - [`9dbf2a3`](https://github.com/webitel/webitel-ui-sdk/commit/9dbf2a3165a1062ced22441786eeaa469f7949b7) - "rated" filter/v2 [WTEL-6298](https://webitel.atlassian.net/browse/WTEL-6298) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1272,3 +1277,4 @@
 [v24.12.138]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.137...v24.12.138
 [v24.12.139]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.138...v24.12.139
 [v24.12.141]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.140...v24.12.141
+[v24.12.142]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.141...v24.12.142
