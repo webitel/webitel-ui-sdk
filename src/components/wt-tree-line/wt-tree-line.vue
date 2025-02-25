@@ -45,6 +45,7 @@
         :next-element="!!data[childrenProp][index + 1]"
         :nested-icons="displayIcons"
         :last-child="index === data[childrenProp].length - 1"
+        :multiple="multiple"
         @open-parent="onOpenParent"
         @update:model-value="emit('update:modelValue', $event)"
       />
@@ -70,6 +71,7 @@ const props = withDefaults(
     lastChild?: boolean;
     nestedIcons?: WtTreeNestedIcons[];
     nextElement?: boolean;
+    multiple?: boolean;
     /**
      * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
      */
@@ -80,6 +82,7 @@ const props = withDefaults(
     childrenProp: 'children',
     lastChild: false,
     nextElement: false,
+    multiple: false,
     searchedProp: 'searched',
   },
 );
@@ -109,8 +112,15 @@ const displayIcons = computed(() => {
 });
 
 const isSelected = computed(() => {
-  if (Array.isArray(props.modelValue)) {
-    return props.modelValue.includes(props.data[props.itemData]);
+  if (props.multiple) {
+    if (props.itemData) {
+      return props.modelValue.includes(props.data[props.itemData]);
+    } else {
+      const match = props.modelValue.find((item) =>
+        deepEqual(item, props.data),
+      );
+      return !!match;
+    }
   }
 
   if (props.itemData) {
@@ -121,8 +131,11 @@ const isSelected = computed(() => {
 });
 
 const selectElement = () => {
-  if (Array.isArray(props.modelValue) && props.lastChild) {
-    emit('update:modelValue', props.data[props.itemData]);
+  console.log(props.modelValue, ' propsmodelValue');
+  console.log(props.data, ' data');
+  if (props.multiple && props.lastChild) {
+    const value = props.itemData ? props.data[props.itemData] : props.data;
+    emit('update:modelValue', value);
     return;
   }
 

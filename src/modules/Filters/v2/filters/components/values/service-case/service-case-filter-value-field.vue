@@ -87,11 +87,41 @@ const onElementSelect = (val: string) => {
 onMounted(async () => await loadCatalogs());
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+$form-width: 800px;
+
 .service-case-filter-value-field {
   background: transparent;
   max-height: 350px;
   height: 100%;
   overflow-y: auto;
+  grid-area: value;
+}
+
+.dynamic-filter-config-form {
+  &:has(.service-case-filter-value-field) {
+    width: $form-width;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 64px 1fr auto;
+    grid-template-areas:
+      'column label'
+      'value value'
+      'footer footer';
+
+    .wt-select {
+      grid-area: column;
+      height: fit-content;
+    }
+
+    .wt-input {
+      grid-area: label;
+    }
+
+    .dynamic-filter-config-form-footer {
+      grid-area: footer;
+    }
+  }
 }
 </style>
