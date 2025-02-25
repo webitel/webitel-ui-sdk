@@ -461,7 +461,7 @@ export default {
     empty: {
       text: {
         empty: 'No results were found',
-        filters: 'No results for the filters',
+        filters: 'Unfortunately, no records match your criteria',
       },
     },
     agentStatusSelect: {

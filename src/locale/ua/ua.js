@@ -458,7 +458,7 @@ export default {
     empty: {
       text: {
         empty: 'Пошук не дав результату',
-        filters: 'Немає результатів за фільтрами',
+        filters: 'На жаль, жоден запис не відповідає вашим критеріям',
       },
     },
     agentStatusSelect: {
