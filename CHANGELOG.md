@@ -1,3 +1,8 @@
+## [v24.12.143] - 2025-02-25
+### :bug: Bug Fixes
+- [`3fe5f0a`](https://github.com/webitel/webitel-ui-sdk/commit/3fe5f0aa8fd67f92ea521f11a343726d900b7e74) - wt-empty text locale on filters [WTEL-6316](https://webitel.atlassian.net/browse/WTEL-6316) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.142] - 2025-02-25
 ### :bug: Bug Fixes
 - [`a952e21`](https://github.com/webitel/webitel-ui-sdk/commit/a952e21c842a3e70c6f3b07825343ffa0dc0e7df) - navbar 'current' highlight computing [WTEL-6174](https://webitel.atlassian.net/browse/WTEL-6174) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1278,3 +1283,4 @@
 [v24.12.139]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.138...v24.12.139
 [v24.12.141]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.140...v24.12.141
 [v24.12.142]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.141...v24.12.142
+[v24.12.143]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.142...v24.12.143
