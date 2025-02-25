@@ -7,25 +7,16 @@
 </template>
 
 <script lang="ts" setup>
-import { useVuelidate } from '@vuelidate/core';
-import { computed, watch } from 'vue';
+import { watch } from 'vue';
 
+import {useBooleanFilterValueValidation} from "../_shared/composables/booleanFilterToolkit";
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
-import {HasTranscriptionFilterModelValue} from "./HasTranscriptionFilter";
+import {BooleanFilterModelValue} from "../_shared/types/BooleanFilter";
 
-const model = defineModel<HasTranscriptionFilterModelValue>();
+const model = defineModel<BooleanFilterModelValue>();
 
-const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required: (v: HasTranscriptionFilterModelValue) => !(!v && v !== false),
-    },
-  })),
-  { model },
-  { $autoDirty: true },
-);
+const { v$ } = useBooleanFilterValueValidation<BooleanFilterModelValue>(model);
 
-v$.value.$touch();
 
 const emit = defineEmits<{
   'update:invalid': [boolean];

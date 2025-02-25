@@ -7,25 +7,15 @@
 </template>
 
 <script lang="ts" setup>
-import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
-import { computed, watch } from 'vue';
+import { watch } from 'vue';
 
+import {useBooleanFilterValueValidation} from "../_shared/composables/booleanFilterToolkit";
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
+import {BooleanFilterModelValue} from "../_shared/types/BooleanFilter";
 
-const model = defineModel<string>();
+const model = defineModel<BooleanFilterModelValue>();
 
-const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required,
-    },
-  })),
-  { model },
-  { $autoDirty: true },
-);
-
-v$.value.$touch();
+const { v$ } = useBooleanFilterValueValidation<BooleanFilterModelValue>(model);
 
 const emit = defineEmits<{
   'update:invalid': [boolean];

@@ -3,17 +3,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import {usePrettifyBooleanValuePreview} from "../_shared/composables/booleanFilterToolkit";
 
 const props = defineProps<{
   value: boolean;
 }>();
-const { t } = useI18n();
 
-const localeValue = computed(() => {
-  return props.value ? t('vocabulary.yes') : t('vocabulary.no');
-});
+const {
+  localeValue,
+} = usePrettifyBooleanValuePreview(props.value);
 </script>
 
 <style lang="scss" scoped></style>

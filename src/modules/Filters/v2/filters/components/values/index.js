@@ -32,6 +32,8 @@ import HasAttachmentFilter from './has-attachment/has-attachment-filter-value-fi
 import HasAttachmentFilterPreview from './has-attachment/has-attachment-filter-value-preview.vue';
 import HasFileFilter from './has-file/has-file-filter-value-field.vue';
 import HasFileFilterPreview from './has-file/has-file-filter-value-preview.vue';
+import HasRatingFilterValueField from './has-rating/has-rating-filter-value-field.vue';
+import HasRatingFilterValuePreview from './has-rating/has-rating-filter-value-preview.vue';
 import HasTranscriptionFilter from './has-transcription/has-transcription-filter-value-field.vue';
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import ImpactedFilter from './impacted/impacted-filter-value-field.vue';
@@ -40,8 +42,6 @@ import CasePriorityFilter from './priority-case/priority-case-filter-value-field
 import CasePriorityFilterPreview from './priority-case/priority-case-filter-value-preview.vue';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
-import RatedFilter from './rated/rated-filter-value-field.vue';
-import RatedFilterPreview from './rated/rated-filter-value-preview.vue';
 import RatedByFilter from './rated-by/rated-by-filter-value-field.vue';
 import RatedByFilterPreview from './rated-by/rated-by-filter-value-preview.vue';
 import RatingFromToFilter from './rating/rating-from-to-filter-value-field.vue';
@@ -120,6 +120,8 @@ export {
   HasAttachmentFilterPreview,
   HasFileFilter,
   HasFileFilterPreview,
+  HasRatingFilterValueField,
+  HasRatingFilterValuePreview,
   HasTranscriptionFilter,
   HasTranscriptionFilterPreview,
   ImpactedFilter,
@@ -128,8 +130,6 @@ export {
   QueueFilterPreview,
   RatedByFilter,
   RatedByFilterPreview,
-  RatedFilter,
-  RatedFilterPreview,
   RatingFromToFilter,
   RatingFromToFilterPreview,
   ReactionTimeFilter,
