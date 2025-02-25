@@ -20,11 +20,9 @@
     <div
       :class="{ active: isSelected }"
       class="wt-tree-line__label-wrapper"
+      @click="selectElement"
     >
-      <p
-        class="wt-tree-line__label"
-        @click="selectElement"
-      >
+      <p class="wt-tree-line__label">
         {{ label }}
       </p>
       <wt-icon
@@ -123,7 +121,7 @@ const isSelected = computed(() => {
 });
 
 const selectElement = () => {
-  if (Array.isArray(props.modelValue)) {
+  if (Array.isArray(props.modelValue) && props.lastChild) {
     emit('update:modelValue', props.data[props.itemData]);
     return;
   }

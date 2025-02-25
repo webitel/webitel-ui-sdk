@@ -18,7 +18,7 @@ import deepCopy from 'deep-copy';
 import { computed, onMounted, ref, watch } from 'vue';
 
 import WtTree from '../../../../../../../components/wt-tree/wt-tree.vue';
-import { serviceCatalogsSearchMethod } from './config.js';
+import { searchMethod } from './config.js';
 
 type ModelValue = string[];
 const model = defineModel<ModelValue>({
@@ -58,17 +58,15 @@ watch(
 
 const loadCatalogs = async () => {
   try {
-    // loading.value = true;
-
-    const { items } = await serviceCatalogsSearchMethod({
+    const { items } = await searchMethod({
       size: -1, // To get all catalogs with services we need to pass size -1
       fields: ['id', 'name', 'closeReasonGroup', 'status', 'service'],
       hasSubservices: true,
     });
 
     catalogData.value = deepCopy(items);
-  } finally {
-    // loading.value = false;
+  } catch (err) {
+    console.error(err);
   }
 };
 
@@ -92,5 +90,8 @@ onMounted(async () => await loadCatalogs());
 <style lang="scss" scoped>
 .service-case-filter-value-field {
   background: transparent;
+  max-height: 350px;
+  height: 100%;
+  overflow-y: auto;
 }
 </style>
