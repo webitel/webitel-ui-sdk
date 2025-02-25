@@ -12,10 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
 import deepCopy from 'deep-copy';
-import { computed, onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 
 import WtTree from '../../../../../../../components/wt-tree/wt-tree.vue';
 import { searchMethod } from './config.js';
@@ -26,35 +24,6 @@ const model = defineModel<ModelValue>({
 });
 
 const catalogData = ref([]);
-
-const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      selection: {
-        required,
-      },
-      conditions: {
-        required,
-      },
-    },
-  })),
-  { model },
-  { $autoDirty: true },
-);
-
-v$.value.$touch();
-
-const emit = defineEmits<{
-  'update:invalid': [boolean];
-}>();
-
-watch(
-  () => v$.value.$invalid,
-  (invalid) => {
-    emit('update:invalid', invalid);
-  },
-  { immediate: true },
-);
 
 const loadCatalogs = async () => {
   const { items } = await searchMethod({
