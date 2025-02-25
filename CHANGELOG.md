@@ -1,3 +1,38 @@
+## [v24.12.136] - 2025-02-24
+### :bug: Bug Fixes
+- [`b76a25d`](https://github.com/webitel/webitel-ui-sdk/commit/b76a25d09dc70ad621fefbe0805d302b2933a309) - total duration, talk duration filters previews fixed [WTEL-6289](https://webitel.atlassian.net/browse/WTEL-6289) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.135] - 2025-02-24
+### :bug: Bug Fixes
+- [`15c5ddd`](https://github.com/webitel/webitel-ui-sdk/commit/15c5dddea82bb57b151e5b640ddb876cfcff6cf8) - filters/v2 createdAt filters preview show time [WTEL-6307](https://webitel.atlassian.net/browse/WTEL-6307) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.134] - 2025-02-24
+### :bug: Bug Fixes
+- [`dee93e5`](https://github.com/webitel/webitel-ui-sdk/commit/dee93e5ba9da03fb7684e2b6e48997f98f20f5c6) - filters/v2 createdAt filters datepicker datetime format [WTEL-6307](https://webitel.atlassian.net/browse/WTEL-6307) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.133] - 2025-02-24
+### :sparkles: New Features
+- [`c64e3ea`](https://github.com/webitel/webitel-ui-sdk/commit/c64e3ea7c73234b99de8de242bb846901b97c98b) - implement slot for custom message on delete confirmation popup *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
+## [v24.12.132] - 2025-02-24
+### :bug: Bug Fixes
+- [`3f09e93`](https://github.com/webitel/webitel-ui-sdk/commit/3f09e93db32f63c1ae1b5020b63e8a4e61c996d6) - cases status indicator colors [WTEL-6240](https://webitel.atlassian.net/browse/WTEL-6240) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.131] - 2025-02-24
+### :sparkles: New Features
+- [`00fd542`](https://github.com/webitel/webitel-ui-sdk/commit/00fd54273c87ad7ba3264919664ee979e29bc1c3) - useCardComponent.js `isLoading` flag [WTEL-6240](https://webitel.atlassian.net/browse/WTEL-6240) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v24.12.130] - 2025-02-24
+### :bug: Bug Fixes
+- [`abce6ac`](https://github.com/webitel/webitel-ui-sdk/commit/abce6acd2cc899c60d146b752addfd3d4a7c2b0a) - update locale for validation message latinWithNumber [WTEL-6251](https://webitel.atlassian.net/browse/WTEL-6251) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v24.12.129] - 2025-02-24
 ### :bug: Bug Fixes
 - [`087e52b`](https://github.com/webitel/webitel-ui-sdk/commit/087e52b706e80e861482eb69384f6f8f24159e84) - filters v2 rm filtername set by default [WTEL-6310](https://webitel.atlassian.net/browse/WTEL-6310) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1211,3 +1246,10 @@
 [v24.12.124]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.123...v24.12.124
 [v24.12.127]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.126...v24.12.127
 [v24.12.129]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.128...v24.12.129
+[v24.12.130]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.129...v24.12.130
+[v24.12.131]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.130...v24.12.131
+[v24.12.132]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.131...v24.12.132
+[v24.12.133]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.132...v24.12.133
+[v24.12.134]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.133...v24.12.134
+[v24.12.135]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.134...v24.12.135
+[v24.12.136]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.135...v24.12.136

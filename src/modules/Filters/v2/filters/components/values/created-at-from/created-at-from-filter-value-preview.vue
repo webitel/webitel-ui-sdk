@@ -9,7 +9,7 @@ const props = defineProps<{
   value: number[];
 }>();
 
-const date = ref(new Date(+props.value).toLocaleDateString());
+const date = ref(new Date(+props.value).toLocaleString());
 </script>
 
 <style lang="scss" scoped></style>

@@ -342,7 +342,7 @@ export default {
     decimalValidator:
       'Кількість десяткових знаків не повинна бути більше { count }',
     latinWithNumber:
-      'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9)',
+      'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9) і починатися з літери',
     integer: 'Поле повинно містити лише цілі числа',
   },
   webitelUI: {
@@ -412,6 +412,9 @@ export default {
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
         [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+        [IconAction.CLEAR]: ({ linked }) =>
+          linked('webitelUI.tableActions.filterReset'),
+        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
       },
     },
     errorPages: {

@@ -1,4 +1,5 @@
 import { AgentServiceApiFactory } from 'webitel-sdk';
+
 import convertDuration from '../../../scripts/convertDuration.js';
 import {
   getDefaultGetListResponse,
@@ -47,10 +48,7 @@ const getAgentsList = async (params) => {
     notTeamId,
     supervisorId,
     notSkillId,
-  } = applyTransform(params, [
-    merge(getDefaultGetParams()),
-    starToSearch('search'),
-  ]);
+  } = applyTransform(params, [merge(getDefaultGetParams())]);
 
   try {
     const response = await agentService.searchAgent(

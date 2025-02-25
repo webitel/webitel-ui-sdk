@@ -345,7 +345,7 @@ export default {
     decimalValidator:
       'Decimal precision should be no more than { count } places',
     latinWithNumber:
-      'The code must contain only letters (A-Z, a-z) and numbers (0-9)',
+      'The code must contain only letters (A-Z, a-z) and numbers (0-9), and must start with a letter',
     integer: 'The field should contain only whole numbers',
   },
   webitelUI: {
@@ -415,6 +415,9 @@ export default {
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
         [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+        [IconAction.CLEAR]: ({ linked }) =>
+          linked('webitelUI.tableActions.filterReset'),
+        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
       },
     },
     errorPages: {

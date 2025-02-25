@@ -342,7 +342,7 @@ export default {
     decimalValidator:
       'Количество десятичных знаков не должно быть больше { count }',
     latinWithNumber:
-      'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9)',
+      'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9) и начинатся с буквы',
     integer: 'Поле должно содержать только целые числа',
   },
   webitelUI: {
@@ -412,6 +412,9 @@ export default {
         [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
         [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
         [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+        [IconAction.CLEAR]: ({ linked }) =>
+          linked('webitelUI.tableActions.filterReset'),
+        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
       },
     },
     errorPages: {

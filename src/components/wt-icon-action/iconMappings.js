@@ -1,7 +1,7 @@
 import { IconAction } from '../../enums';
 
 export const WtIconActionIconMappings = Object.freeze({
-  [IconAction.ADD]: 'add-filter',
+  [IconAction.ADD]: 'plus',
   [IconAction.DELETE]: 'bucket',
   [IconAction.DOWNLOAD]: 'download',
   [IconAction.EDIT]: 'edit',
@@ -13,4 +13,6 @@ export const WtIconActionIconMappings = Object.freeze({
   [IconAction.COLUMNS]: 'column-select',
   [IconAction.VARIABLES]: 'variable-select',
   [IconAction.CLOSE]: 'close--filled',
+  [IconAction.CLEAR]: 'clear',
+  [IconAction.ADD_FILTER]: 'add-filter',
 });

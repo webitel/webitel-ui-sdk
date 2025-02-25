@@ -7,13 +7,9 @@
 
 <script lang="ts" setup>
 import DurationFilterValueField from '../_shared/durations/duration-filter-value-field.vue';
+import type {TalkDurationFilterModelValue} from "./TalkDurationFilter.d.ts";
 
-type ModelValue = {
-  from: number;
-  to: number;
-};
-
-const model = defineModel<ModelValue>();
+const model = defineModel<TalkDurationFilterModelValue>();
 </script>
 
 <style lang="scss" scoped></style>
