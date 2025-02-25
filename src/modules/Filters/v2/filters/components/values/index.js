@@ -12,6 +12,8 @@ import AuthorFilter from './author/author-filter-value-field.vue';
 import AuthorFilterPreview from './author/author-filter-value-preview.vue';
 import CauseFilter from './cause/cause-filter-value-field.vue';
 import CauseFilterPreview from './cause/cause-filter-value-preview.vue';
+import CloseReasonGroupsCaseFilter from './close-reason-groups-case/close-reason-groups-case-filter-value-field.vue';
+import CloseReasonGroupsCaseFilterPreview from './close-reason-groups-case/close-reason-groups-case-filter-value-preview.vue';
 import ContactFilter from './contact/contact-filter-value-field.vue';
 import ContactFilterPreview from './contact/contact-filter-value-preview.vue';
 import ContactGroupFilter from './contact-group/contact-group-filter-value-field.vue';
@@ -28,7 +30,7 @@ import GranteeFilter from './grantee/grantee-filter-value-field.vue';
 import GranteeFilterPreview from './grantee/grantee-filter-value-preview.vue';
 import HasAttachmentFilter from './has-attachment/has-attachment-filter-value-field.vue';
 import HasAttachmentFilterPreview from './has-attachment/has-attachment-filter-value-preview.vue';
-import HasFileFilter from './has-file/has-file-filter-value-preview.vue';
+import HasFileFilter from './has-file/has-file-filter-value-field.vue';
 import HasFileFilterPreview from './has-file/has-file-filter-value-preview.vue';
 import HasTranscriptionFilter from './has-transcription/has-transcription-filter-value-field.vue';
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
@@ -46,8 +48,6 @@ import RatingFromToFilter from './rating/rating-from-to-filter-value-field.vue';
 import RatingFromToFilterPreview from './rating/rating-from-to-filter-value-preview.vue';
 import ReactionTimeFilter from './reaction-time/reaction-time-filter-value-field.vue';
 import ReactionTimeFilterPreview from './reaction-time/reaction-time-filter-value-preview.vue';
-import CloseReasonGroupsCaseFilter from './close-reason-groups-case/close-reason-groups-case-filter-value-field.vue';
-import CloseReasonGroupsCaseFilterPreview from './close-reason-groups-case/close-reason-groups-case-filter-value-preview.vue';
 import ReporterFilter from './reporter/reporter-filter-value-field.vue';
 import ReporterFilterPreview from './reporter/reporter-filter-value-preview.vue';
 import ResolutionTimeFilter from './resolution-time/resolution-time-filter-value-field.vue';
@@ -58,10 +58,10 @@ import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
 // import ServiceCaseFilterPreview from './service-case/service-case-filter-value-preview.vue';
 import SlaFilter from './sla/sla-filter-value-field.vue';
 import SlaFilterPreview from './sla/sla-filter-value-preview.vue';
-import SourceCaseFilter from './source-case/source-case-filter-value-field.vue';
-import SourceCaseFilterPreview from './source-case/source-case-filter-value-preview.vue';
 import SlaConditionFilter from './sla-condition/sla-condition-filter-value-field.vue';
 import SlaConditionFilterPreview from './sla-condition/sla-condition-filter-value-preview.vue';
+import SourceCaseFilter from './source-case/source-case-filter-value-field.vue';
+import SourceCaseFilterPreview from './source-case/source-case-filter-value-preview.vue';
 import StatusCaseFilter from './status-case/status-case-filter-value-field.vue';
 import StatusCaseFilterPreview from './status-case/status-case-filter-value-preview.vue';
 import TagFilter from './tag/tag-filter-value-field.vue';
@@ -92,6 +92,8 @@ export {
   AuthorFilterPreview,
   CauseFilter,
   CauseFilterPreview,
+  CloseReasonGroupsCaseFilter,
+  CloseReasonGroupsCaseFilterPreview,
   ContactFilter,
   ContactFilterPreview,
   ContactGroupFilter,
@@ -126,20 +128,18 @@ export {
   RatingFromToFilterPreview,
   ReactionTimeFilter,
   ReactionTimeFilterPreview,
-  CloseReasonGroupsCaseFilter,
-  CloseReasonGroupsCaseFilterPreview,
   ReporterFilter,
   ReporterFilterPreview,
   ResolutionTimeFilter,
   ResolutionTimeFilterPreview,
   ScoreFilter,
   ScoreFilterPreview,
+  SlaConditionFilter,
+  SlaConditionFilterPreview,
   // ServiceCaseFilter,
   // ServiceCaseFilterPreview,
   SlaFilter,
   SlaFilterPreview,
-  SlaConditionFilter,
-  SlaConditionFilterPreview,
   SourceCaseFilter,
   SourceCaseFilterPreview,
   StatusCaseFilter,
