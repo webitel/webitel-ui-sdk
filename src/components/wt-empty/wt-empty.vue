@@ -98,6 +98,7 @@
           <wt-button
             v-if="primaryActionText"
             :size="buttonSize"
+            :disabled="disabledPrimaryAction"
             color="primary"
             @click="() => onPrimaryClick()"
           >
@@ -115,6 +116,7 @@
           <wt-button
             v-if="secondaryActionText"
             :size="buttonSize"
+            :disabled="disabledSecondaryAction"
             color="secondary"
             @click="() => onSecondaryClick()"
           >
@@ -182,6 +184,22 @@ const props = defineProps({
   secondaryActionText: {
     type: [String, null],
     default: '',
+  },
+
+  /**
+   * disable primary action button while still showing its text. useful for access control
+   */
+  disabledPrimaryAction: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * disable primary action button while still showing its text. useful for access control
+   */
+  disabledSecondaryAction: {
+    type: Boolean,
+    default: false,
   },
 });
 
