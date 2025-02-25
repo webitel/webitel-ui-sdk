@@ -1,3 +1,8 @@
+## [v24.12.141] - 2025-02-25
+### :bug: Bug Fixes
+- [`9dbf2a3`](https://github.com/webitel/webitel-ui-sdk/commit/9dbf2a3165a1062ced22441786eeaa469f7949b7) - "rated" filter/v2 [WTEL-6298](https://webitel.atlassian.net/browse/WTEL-6298) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.139] - 2025-02-25
 ### :sparkles: New Features
 - [`c84ef09`](https://github.com/webitel/webitel-ui-sdk/commit/c84ef09648e7f69694ed50bceb5a14eafed1811d) - dynamic-filter-preview.vue "dummy" prop, fixed FiltersManager.ts reset method [WTEL-6308](https://webitel.atlassian.net/browse/WTEL-6308) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1266,3 +1271,4 @@
 [v24.12.136]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.135...v24.12.136
 [v24.12.138]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.137...v24.12.138
 [v24.12.139]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.138...v24.12.139
+[v24.12.141]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.140...v24.12.141
