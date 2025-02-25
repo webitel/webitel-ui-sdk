@@ -153,9 +153,9 @@ class FiltersManager implements IFiltersManager {
     include,
     exclude,
   }: {
-    include: FilterName[];
-    exclude: FilterName[];
-  }): void {
+    include?: FilterName[];
+    exclude?: FilterName[];
+  } = {}): void {
     const useInclude = !isEmpty(include);
     const useExclude = !isEmpty(exclude) && !useInclude;
 
@@ -173,7 +173,7 @@ class FiltersManager implements IFiltersManager {
 
     if (useExclude) {
       this.filters.forEach((_, filterName) => {
-        if (exclude.includes(filterName)) {
+        if (!exclude.includes(filterName)) {
           this.filters.delete(filterName);
         }
       });

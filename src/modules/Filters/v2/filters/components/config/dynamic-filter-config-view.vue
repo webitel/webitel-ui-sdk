@@ -1,6 +1,9 @@
 <template>
   <div class="dynamic-filter-config-view">
-    <wt-tooltip :triggers="['click']">
+    <wt-tooltip
+      :triggers="['click']"
+      :disabled="props.disabled"
+    >
       <template #activator="slotScope">
         <slot
           name="activator"
@@ -24,6 +27,12 @@
  */
 
 import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
+
+interface Props {
+  disabled?: boolean;
+}
+
+const props = defineProps<Props>();
 </script>
 
 <style lang="scss" scoped></style>

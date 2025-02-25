@@ -1,13 +1,14 @@
 <template>
-  <dynamic-filter-config-view>
+  <dynamic-filter-config-view
+    :disabled="dummy"
+  >
     <template #activator="{ visible: configFormVisible }">
       <wt-tooltip :disabled="configFormVisible">
         <template #activator>
           <wt-chip color="primary">
-            {{
-              props.filter.label || t(`webitelUI.filters.${props.filter.name}`)
-            }}
+            {{ filter.label || t(`webitelUI.filters.${filter.name}`) }}
             <wt-icon-btn
+              v-if="!dummy"
               icon="close--filled"
               size="sm"
               @mousedown.stop="deleteFilter"
@@ -44,12 +45,13 @@ import { useI18n } from 'vue-i18n';
 import WtChip from '../../../../../../components/wt-chip/wt-chip.vue';
 import WtIconBtn from '../../../../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
-import type { IFilter } from '../../types/Filter';
+import type {IFilter} from '../../types/Filter';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {
   filter: IFilter;
+  dummy?: boolean;
 }
 
 const { t } = useI18n();
