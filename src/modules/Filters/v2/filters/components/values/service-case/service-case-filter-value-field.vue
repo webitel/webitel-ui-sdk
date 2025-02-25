@@ -57,17 +57,13 @@ watch(
 );
 
 const loadCatalogs = async () => {
-  try {
-    const { items } = await searchMethod({
-      size: -1, // To get all catalogs with services we need to pass size -1
-      fields: ['id', 'name', 'closeReasonGroup', 'status', 'service'],
-      hasSubservices: true,
-    });
+  const { items } = await searchMethod({
+    size: -1, // To get all catalogs with services we need to pass size -1
+    fields: ['id', 'name', 'closeReasonGroup', 'status', 'service'],
+    hasSubservices: true,
+  });
 
-    catalogData.value = deepCopy(items);
-  } catch (err) {
-    throw err;
-  }
+  catalogData.value = deepCopy(items);
 };
 
 if (!model.value) {
