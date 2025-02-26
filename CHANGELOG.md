@@ -1,3 +1,8 @@
+## [v24.12.158] - 2025-02-26
+### :bug: Bug Fixes
+- [`868902e`](https://github.com/webitel/webitel-ui-sdk/commit/868902e185e8864c5da3afe3666a20b0f917a6fa) - add-filter.svg fill color cleanup [WTEL-6302](https://webitel.atlassian.net/browse/WTEL-6302) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.157] - 2025-02-26
 ### :bug: Bug Fixes
 - [`695bc24`](https://github.com/webitel/webitel-ui-sdk/commit/695bc240f88e55bbf57b53e6d56af6e225f253b5) - update version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1356,3 +1361,4 @@
 [v24.12.155]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.154...v24.12.155
 [v24.12.156]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.155...v24.12.156
 [v24.12.157]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.156...v24.12.157
+[v24.12.158]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.157...v24.12.158
