@@ -1,3 +1,9 @@
+## [v24.12.151] - 2025-02-26
+### :bug: Bug Fixes
+- [`117d4e9`](https://github.com/webitel/webitel-ui-sdk/commit/117d4e9ba35dcd89648faee1cb3faba605c0ed09) - vocabulary.column locale translations [WTEL-6361](https://webitel.atlassian.net/browse/WTEL-6361) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`3017e24`](https://github.com/webitel/webitel-ui-sdk/commit/3017e24c83574ee2d29ece0bcc1c1c116de1ac69) - vocabulary.column locale translations [WTEL-6361](https://webitel.atlassian.net/browse/WTEL-6361) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.149] - 2025-02-26
 ### :bug: Bug Fixes
 - [`da65f12`](https://github.com/webitel/webitel-ui-sdk/commit/da65f1279ead60945f3b7da31bcda5192be92cba) - pagination store page/size type coercion after refresh [WTEL-6313](https://webitel.atlassian.net/browse/WTEL-6313) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1315,3 +1321,4 @@
 [v24.12.147]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.146...v24.12.147
 [v24.12.148]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.147...v24.12.148
 [v24.12.149]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.148...v24.12.149
+[v24.12.151]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.149...v24.12.151
