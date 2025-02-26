@@ -482,7 +482,8 @@ export default {
       exportToJson: 'Export to JSON',
     },
     filters: {
-      predefinedLabels: {  /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
+      predefinedLabels: {
+        /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
         createdAt: {
           startOfToday: 'From the start of today',
         },
@@ -598,7 +599,7 @@ export default {
         return linked('cases.appliedCondition');
       },
       source: ({ linked }) => {
-        return linked('s.source');
+        return linked('cases.source');
       },
       status: ({ linked }) => {
         return linked('cases.status');
