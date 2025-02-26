@@ -2,7 +2,7 @@
   <div class="rating-from-to-filter-value-field">
     <wt-input
       v-if="model"
-      :label="`${t('webitelUI.filters.filterValueFrom')}:`"
+      :label="`${t('reusable.from')}:`"
       :number-min="0"
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="v$.model?.from"
@@ -14,7 +14,7 @@
 
     <wt-input
       v-if="model"
-      :label="`${t('reusable.to').toLowerCase()}:`"
+      :label="`${t('reusable.to')}:`"
       :number-min="0"
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="v$.model?.to"
