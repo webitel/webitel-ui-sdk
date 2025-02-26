@@ -97,6 +97,7 @@ const onLabelValueUpdate = (val: string) => {
 const onFilterNameUpdate = (val: string) => {
   filterName.value = val;
   filterValue.value = null;
+  invalid.value = false;
 };
 
 const submit = () => {
