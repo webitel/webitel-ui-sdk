@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.155",
+  "version": "24.12.156",
   "private": false,
   "scripts": {
     "dev": "vite",
