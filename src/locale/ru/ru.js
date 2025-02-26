@@ -480,6 +480,11 @@ export default {
       exportToJson: 'Экспортировать в JSON',
     },
     filters: {
+      predefinedLabels: {
+        createdAt: {
+          startOfToday: 'С начала дня',
+        },
+      },
       addFilter: ({ linked }) => {
         return `${linked('reusable.add')} ${linked(
           'reusable.filter',

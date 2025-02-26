@@ -482,6 +482,11 @@ export default {
       exportToJson: 'Export to JSON',
     },
     filters: {
+      predefinedLabels: {
+        createdAt: {
+          startOfToday: 'From the start of today',
+        },
+      },
       addFilter: ({ linked }) => {
         return `${linked('reusable.add')} a ${linked(
           'reusable.filter',
