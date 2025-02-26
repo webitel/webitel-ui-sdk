@@ -1,3 +1,9 @@
+## [v24.12.159] - 2025-02-26
+### :bug: Bug Fixes
+- [`81b5716`](https://github.com/webitel/webitel-ui-sdk/commit/81b5716978271ad3b606744bbdf7afb55777a8da) - remove test text from template *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`5d611df`](https://github.com/webitel/webitel-ui-sdk/commit/5d611dff1e5d2e0dce4cbe663397a38ffeb7b9cd) - reset filter config form validation on filter name update *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.12.158] - 2025-02-26
 ### :bug: Bug Fixes
 - [`868902e`](https://github.com/webitel/webitel-ui-sdk/commit/868902e185e8864c5da3afe3666a20b0f917a6fa) - add-filter.svg fill color cleanup [WTEL-6302](https://webitel.atlassian.net/browse/WTEL-6302) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1362,3 +1368,4 @@
 [v24.12.156]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.155...v24.12.156
 [v24.12.157]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.156...v24.12.157
 [v24.12.158]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.157...v24.12.158
+[v24.12.159]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.158...v24.12.159
