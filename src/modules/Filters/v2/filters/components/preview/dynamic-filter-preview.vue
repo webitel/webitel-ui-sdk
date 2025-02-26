@@ -11,6 +11,7 @@
               v-if="!dummy"
               icon="close--filled"
               size="sm"
+              color="on-primary"
               @mousedown.stop="deleteFilter"
             />
           </wt-chip>
