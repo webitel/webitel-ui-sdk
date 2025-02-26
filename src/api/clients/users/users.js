@@ -32,6 +32,7 @@ const fieldsToSend = [
   'profile',
   'email',
   'contact',
+  'chatName',
 ];
 
 const getUsersList = async (params) => {
