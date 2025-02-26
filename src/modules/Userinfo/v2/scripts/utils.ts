@@ -76,6 +76,8 @@ export const makeAppVisibilityMap = (
   rawVisibility: VisibilityAccess,
 ): AppVisibilityMap => {
   const map = new Map();
+  if (!rawVisibility) return map;
+
   Object.entries(rawVisibility).forEach(([app, visibility]) => {
     map.set(app, visibility._enabled);
   });
@@ -86,6 +88,8 @@ export const makeSectionVisibilityMap = (
   rawVisibility: VisibilityAccess,
 ): SectionVisibilityMap => {
   const map = new Map();
+
+  if (!rawVisibility) return map;
 
   Object.values(rawVisibility).forEach((appSectionsVisibility) => {
     Object.entries(appSectionsVisibility).forEach(([section, visibility]) => {
