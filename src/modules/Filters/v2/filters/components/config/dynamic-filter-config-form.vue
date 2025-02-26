@@ -1,5 +1,6 @@
 <template>
   <form class="dynamic-filter-config-form">
+    2222
     <wt-select
       :clearable="false"
       :disabled="editMode"
@@ -97,6 +98,7 @@ const onLabelValueUpdate = (val: string) => {
 const onFilterNameUpdate = (val: string) => {
   filterName.value = val;
   filterValue.value = null;
+  invalid.value = false;
 };
 
 const submit = () => {
