@@ -460,7 +460,7 @@ export default {
     },
     empty: {
       text: {
-        empty: 'No results were found',
+        empty: 'There are no records yet',
         filters: 'Unfortunately, no records match your criteria',
       },
     },
