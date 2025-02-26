@@ -1,4 +1,4 @@
-ximport {
+import {
   AgentStatus,
   CallDirection,
   ChannelState,
