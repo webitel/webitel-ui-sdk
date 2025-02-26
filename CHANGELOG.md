@@ -1,3 +1,8 @@
+## [v24.12.162] - 2025-02-26
+### :bug: Bug Fixes
+- [`28e7ba1`](https://github.com/webitel/webitel-ui-sdk/commit/28e7ba1335c45e5a9f5fe0d99050ccea9c78f696) - case-related filter locales [WTEL-6387](https://webitel.atlassian.net/browse/WTEL-6387) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.161] - 2025-02-26
 ### :bug: Bug Fixes
 - [`e37dbdf`](https://github.com/webitel/webitel-ui-sdk/commit/e37dbdf14dd90647672c01f9e68a11a372f548c1) - wt-tree-table.vue selectAll checkbox [WTEL-6385](https://webitel.atlassian.net/browse/WTEL-6385) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1375,3 +1380,4 @@
 [v24.12.158]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.157...v24.12.158
 [v24.12.159]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.158...v24.12.159
 [v24.12.161]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.160...v24.12.161
+[v24.12.162]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.161...v24.12.162
