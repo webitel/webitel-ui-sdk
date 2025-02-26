@@ -2,6 +2,7 @@
   <form class="dynamic-filter-config-form">
     <wt-select
       :clearable="false"
+      :disabled="editMode"
       :label="t('webitelUI.filters.filterName')"
       :options="options"
       :value="filterName"
@@ -84,6 +85,8 @@ const { t } = useI18n();
 const filterName = ref();
 const filterLabel = ref('');
 const filterValue = ref();
+
+const editMode = !!props.filter;
 
 const invalid = ref(false);
 
