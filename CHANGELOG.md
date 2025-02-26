@@ -1,3 +1,11 @@
+## [v24.12.153] - 2025-02-26
+### :sparkles: New Features
+- [`37d358c`](https://github.com/webitel/webitel-ui-sdk/commit/37d358c5a69914625321c5b856ff9e5876e6bec2) - start of today predefined filter [WTEL-6308](https://webitel.atlassian.net/browse/WTEL-6308) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`5431a8a`](https://github.com/webitel/webitel-ui-sdk/commit/5431a8aed61133d8f38ca8355d0a084083c167f6) - access control app visibility access null value erorr handling *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.152] - 2025-02-26
 ### :sparkles: New Features
 - [`58be895`](https://github.com/webitel/webitel-ui-sdk/commit/58be895872e6f88dc1117e2d482479aa9f1dca35) - start of today predefined filter label locale [WTEL-6308](https://webitel.atlassian.net/browse/WTEL-6308) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1328,3 +1336,4 @@
 [v24.12.149]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.148...v24.12.149
 [v24.12.151]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.149...v24.12.151
 [v24.12.152]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.151...v24.12.152
+[v24.12.153]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.152...v24.12.153
