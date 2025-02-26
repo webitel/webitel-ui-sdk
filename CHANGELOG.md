@@ -1,3 +1,8 @@
+## [v24.12.156] - 2025-02-26
+### :bug: Bug Fixes
+- [`ad9935b`](https://github.com/webitel/webitel-ui-sdk/commit/ad9935b95f6c92b0f7d0052a95aae702711e8c98) - wt-empty "empty" locale [WTEL-5741](https://webitel.atlassian.net/browse/WTEL-5741) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.155] - 2025-02-26
 ### :bug: Bug Fixes
 - [`3892811`](https://github.com/webitel/webitel-ui-sdk/commit/389281117acdcaf4f37bb0a57b0daaca119b7104) - filter/v2 preview chip "delete" icon color *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1343,3 +1348,4 @@
 [v24.12.152]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.151...v24.12.152
 [v24.12.153]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.152...v24.12.153
 [v24.12.155]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.154...v24.12.155
+[v24.12.156]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.155...v24.12.156
