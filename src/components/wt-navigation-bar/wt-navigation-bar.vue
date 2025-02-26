@@ -170,7 +170,7 @@ export default {
     },
     logoRoute: {
       type: String,
-      required: true,
+      default: '',
     }
   },
   data: () => ({
