@@ -47,8 +47,8 @@ export const useTableEmpty = (
       empty: t('webitelUI.empty.text.empty'),
     },
     primaryActionText: {
-      filters: t('reusable.add'),
-      error: t('reusable.add'),
+      filters: '',
+      error: '',
       empty: t('reusable.add'),
     },
     secondaryActionText: {

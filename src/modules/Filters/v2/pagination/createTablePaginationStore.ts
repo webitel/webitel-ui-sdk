@@ -31,7 +31,8 @@ export const createTablePaginationStore = (namespace: string) => {
         value: page,
         onRestore: async (restore, name) => {
           const value = await restore(name);
-          page.value = +value;
+          const numValue = +value;
+          if (numValue) page.value = numValue;
         },
       });
 
@@ -40,7 +41,8 @@ export const createTablePaginationStore = (namespace: string) => {
         value: size,
         onRestore: async (restore, name) => {
           const value = await restore(name);
-          size.value = +value;
+          const numValue = +value;
+          if (numValue) size.value = numValue;
         },
       });
 
