@@ -17,7 +17,10 @@
             @click="sort(col)"
           >
             <div class="wt-tree-table-th__content">
-              <div v-if="key === 0 && selectable">
+              <div
+                v-if="key === 0 && selectable"
+                @click.stop
+              >
                 <wt-checkbox
                   :selected="isAllSelected"
                   @change="selectAll"
@@ -90,10 +93,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults } from 'vue';
+import {computed, withDefaults} from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
+import { WtCheckbox } from '../index';
 import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
 
