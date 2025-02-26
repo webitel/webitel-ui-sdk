@@ -51,7 +51,7 @@ import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {
   filter: IFilter;
-  dummy?: boolean;
+  dummy?: boolean; /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
 }
 
 const { t } = useI18n();

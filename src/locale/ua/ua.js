@@ -480,7 +480,7 @@ export default {
       exportToJson: 'Експортувати в JSON',
     },
     filters: {
-      predefinedLabels: {
+      predefinedLabels: { /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
         createdAt: {
           startOfToday: 'Від початку дня',
         },
