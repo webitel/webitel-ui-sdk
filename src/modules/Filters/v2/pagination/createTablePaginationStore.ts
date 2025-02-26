@@ -25,15 +25,23 @@ export const createTablePaginationStore = (namespace: string) => {
       next.value = false;
     };
 
-    const setupPersistence = async () => {
+    const setupPersistence = () => {
       const { restore: restorePage } = usePersistedStorage({
         name: 'page',
         value: page,
+        onRestore: async (restore, name) => {
+          const value = await restore(name);
+          page.value = +value;
+        },
       });
 
       const { restore: restoreSize } = usePersistedStorage({
         name: 'size',
         value: size,
+        onRestore: async (restore, name) => {
+          const value = await restore(name);
+          size.value = +value;
+        },
       });
 
       return Promise.allSettled([restorePage(), restoreSize()]);
