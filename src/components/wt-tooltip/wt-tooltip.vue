@@ -17,7 +17,7 @@
     <wt-tooltip-floating
       v-if="isVisible"
       ref="floating"
-      v-clickaway="hideTooltip"
+      v-clickaway="onClickAwayAction"
       :class="[popperClass]"
       :style="floatingStyles"
       :triggers="popperTriggers"
@@ -71,6 +71,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disableClickAway: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['update:visible']);
@@ -99,6 +103,14 @@ const hideTooltip = (event = {}) => {
   isVisible.value = false;
   emitVisibilityChange();
   removeScrollListener();
+};
+
+const onClickAwayAction = (event = {}) => {
+  if (props.disableClickAway) {
+    return;
+  }
+
+  hideTooltip(event);
 };
 
 const setScrollListener = () => {
