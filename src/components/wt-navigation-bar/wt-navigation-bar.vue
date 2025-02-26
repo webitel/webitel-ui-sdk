@@ -16,13 +16,15 @@
       >
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
-          <img
-            :alt="currentApp"
-            :src="
-              darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
-            "
-            class="wt-navigation-bar__app-pic"
-          />
+          <router-link :to="logoRoute">
+            <img
+              :alt="currentApp"
+              :src="
+                darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
+              "
+              class="wt-navigation-bar__app-pic"
+            />
+          </router-link>
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
@@ -166,6 +168,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    logoRoute: {
+      type: String,
+      default: '',
+    }
   },
   data: () => ({
     isOpened: false,
