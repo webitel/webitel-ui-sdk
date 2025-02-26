@@ -7,7 +7,7 @@
     :v="v$.model"
     @input="model = $event"
     @search="handleSearch"
-    @update:search-mode="emit('update:search-mode', $event.value)"
+    @update:search-mode="onSearchModeChange($event.value)"
   >
     <template
       v-if="props.showTextSearchIcon"
@@ -51,6 +51,11 @@ const v$ = useVuelidate(
   { model },
   { $autoDirty: true },
 );
+
+const onSearchModeChange = (value: string) => {
+  emit('update:search-mode', value);
+  model.value = '';
+};
 
 const handleSearch = () => {
   emit('handle-search', model.value);
