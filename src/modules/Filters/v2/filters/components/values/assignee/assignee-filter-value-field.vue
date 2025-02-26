@@ -21,12 +21,12 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
-import { computed, watch, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import WtCheckbox from '../../../../../../../components/wt-checkbox/wt-checkbox.vue';
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import { searchMethod } from './config.js';
-import WtCheckbox from "../../../../../../../components/wt-checkbox/wt-checkbox.vue";
 
 type ModelValue = {
   list: string[];
@@ -41,20 +41,20 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const initModel = () => {
-  if(!model.value) {
+  if (!model.value) {
     model.value = {
       list: [],
       unassigned: false,
     };
   }
-}
+};
 onMounted(() => initModel());
 
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      list: { requiredIf: requiredIf(() => !model.value.unassigned) },
-      unassigned: { required: requiredIf(() => !model.value.list.length)},
+      list: { required: requiredIf(() => !model.value.unassigned) },
+      unassigned: { required: requiredIf(() => !model.value.list.length) },
     },
   })),
   { model },
