@@ -1,3 +1,8 @@
+## [v24.12.147] - 2025-02-26
+### :bug: Bug Fixes
+- [`3e4ff20`](https://github.com/webitel/webitel-ui-sdk/commit/3e4ff20264821c67b6258693e55afb10bc22db7b) - update styleguide sdk *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.12.146] - 2025-02-26
 ### :sparkles: New Features
 - [`ac2db27`](https://github.com/webitel/webitel-ui-sdk/commit/ac2db27a87db22d637db6cd5ede4dbae74d5c9b2) - implimented version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1297,3 +1302,4 @@
 [v24.12.143]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.142...v24.12.143
 [v24.12.144]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.143...v24.12.144
 [v24.12.146]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.145...v24.12.146
+[v24.12.147]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.146...v24.12.147
