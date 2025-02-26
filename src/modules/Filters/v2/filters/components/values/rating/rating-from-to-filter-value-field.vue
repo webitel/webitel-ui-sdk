@@ -7,6 +7,7 @@
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="v$.model?.from"
       :value="model.from"
+      class="rating-from-to-filter-value-field__input"
       type="number"
       @input="handleInput('from', $event)"
     />
@@ -18,6 +19,7 @@
       :placeholder="t('webitelUI.filters.filterValue')"
       :v="v$.model?.to"
       :value="model.to"
+      class="rating-from-to-filter-value-field__input"
       type="number"
       @input="handleInput('to', $event)"
     />
@@ -26,9 +28,11 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import { requiredIf, maxValue } from '@vuelidate/validators';
+import { maxValue, requiredIf } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import { WtInput } from '../../../../../../../components';
 
 type ModelValue = {
   from: number;
@@ -52,11 +56,15 @@ const v$ = useVuelidate(
   computed(() => ({
     model: {
       from: {
-        requiredIf: requiredIf(() => !model.value.to),
-        maxValue: maxValue((model?.value?.to && model.value.from > model.value.to) ? model.value.to : Infinity),
+        required: requiredIf(() => !model.value.to),
+        maxValue: maxValue(
+          model?.value?.to && model.value.from > model.value.to
+            ? model.value.to
+            : Infinity,
+        ),
       },
       to: {
-        requiredIf: requiredIf(() => !model.value.from),
+        required: requiredIf(() => !model.value.from),
       },
     },
   })),
@@ -85,5 +93,9 @@ watch(
   display: flex;
   align-items: center;
   grid-gap: var(--spacing-xs);
+
+  &__input {
+    flex: 1;
+  }
 }
 </style>

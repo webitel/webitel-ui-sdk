@@ -53,7 +53,7 @@ onMounted(() => initModel());
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      list: { requiredIf: requiredIf(() => !model.value.unassigned) },
+      list: { required: requiredIf(() => !model.value.unassigned) },
       unassigned: { required: requiredIf(() => !model.value.list.length) },
     },
   })),

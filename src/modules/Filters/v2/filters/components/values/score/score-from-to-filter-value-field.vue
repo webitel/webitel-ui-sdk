@@ -66,8 +66,8 @@ const { t } = useI18n();
 const v$ = useVuelidate(
   computed(() => ({
     model: {
-      from: { requiredIf: requiredIf(() => !model.value.to) },
-      to: { requiredIf: requiredIf(() => !model.value.from) },
+      from: { required: requiredIf(() => !model.value.to) },
+      to: { required: requiredIf(() => !model.value.from) },
     },
   })),
   { model },
