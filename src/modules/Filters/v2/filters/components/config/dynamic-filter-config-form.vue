@@ -1,6 +1,5 @@
 <template>
   <form class="dynamic-filter-config-form">
-    2222
     <wt-select
       :clearable="false"
       :disabled="editMode"
