@@ -86,6 +86,7 @@ export default {
   vocabulary: {
     apply: 'Применить',
     language: 'Язык',
+    column: 'Колонка',
     voice: 'Голос',
     format: 'Формат',
     text: 'Текст',

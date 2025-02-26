@@ -1,4 +1,4 @@
-import {
+ximport {
   AgentStatus,
   CallDirection,
   ChannelState,
@@ -91,6 +91,7 @@ export default {
     format: 'Формат',
     text: 'Текст',
     yes: 'Так',
+    column: 'Колонка',
     no: 'Ні',
     description: 'Опис',
     login: 'Логін',
