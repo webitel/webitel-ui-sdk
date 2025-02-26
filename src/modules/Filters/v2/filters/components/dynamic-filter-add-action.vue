@@ -1,5 +1,8 @@
 <template>
-  <dynamic-filter-config-view class="dynamic-filter-add-action">
+  <dynamic-filter-config-view
+    disable-click-away
+    class="dynamic-filter-add-action"
+  >
     <template #activator>
       <div class="dynamic-filter-add-action-wrapper">
         <p v-if="props.showLabel">

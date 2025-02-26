@@ -3,6 +3,7 @@
     <wt-tooltip
       :triggers="['click']"
       :disabled="props.disabled"
+      :disable-click-away="props.disableClickAway"
     >
       <template #activator="slotScope">
         <slot
@@ -30,6 +31,7 @@ import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
 
 interface Props {
   disabled?: boolean;
+  disableClickAway?: boolean;
 }
 
 const props = defineProps<Props>();
