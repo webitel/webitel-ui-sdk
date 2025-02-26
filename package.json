@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.146",
+  "version": "24.12.147",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -113,7 +113,7 @@
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^11.2.0",
-    "@webitel/styleguide": "^24.12.18",
+    "@webitel/styleguide": "^24.12.22",
     "autosize": "^6.0.1",
     "axios": "^1.7.7",
     "clipboard-copy": "^4.0.1",
