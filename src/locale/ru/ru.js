@@ -525,7 +525,7 @@ export default {
       cause: ({ linked }) => {
         return linked('objects.hangupCause');
       },
-      closeReasonGroupsCase: ({ linked }) => {
+      closeReasonGroups: ({ linked }) => {
         return linked('cases.reason');
       },
       contact: ({ linked }) => {
@@ -561,7 +561,7 @@ export default {
       impacted: ({ linked }) => {
         return linked('cases.impacted');
       },
-      priorityCase: ({ linked }) => {
+      priority: ({ linked }) => {
         return linked('vocabulary.priority');
       },
       queue: ({ linked }) => {
@@ -586,7 +586,7 @@ export default {
       score: ({ linked }) => {
         return linked('webitelUI.auditForm.score');
       },
-      serviceCase: ({ linked }) => {
+      service: ({ linked }) => {
         return linked('cases.service');
       },
       sla: ({ linked }) => {
@@ -595,10 +595,10 @@ export default {
       slaCondition: ({ linked }) => {
         return linked('cases.appliedCondition');
       },
-      sourceCase: ({ linked }) => {
+      source: ({ linked }) => {
         return linked('cases.source');
       },
-      statusCase: ({ linked }) => {
+      status: ({ linked }) => {
         return linked('cases.status');
       },
       tag: ({ linked }) => {
