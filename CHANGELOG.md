@@ -1,3 +1,8 @@
+## [v24.12.152] - 2025-02-26
+### :sparkles: New Features
+- [`58be895`](https://github.com/webitel/webitel-ui-sdk/commit/58be895872e6f88dc1117e2d482479aa9f1dca35) - start of today predefined filter label locale [WTEL-6308](https://webitel.atlassian.net/browse/WTEL-6308) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v24.12.151] - 2025-02-26
 ### :bug: Bug Fixes
 - [`117d4e9`](https://github.com/webitel/webitel-ui-sdk/commit/117d4e9ba35dcd89648faee1cb3faba605c0ed09) - vocabulary.column locale translations [WTEL-6361](https://webitel.atlassian.net/browse/WTEL-6361) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1322,3 +1327,4 @@
 [v24.12.148]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.147...v24.12.148
 [v24.12.149]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.148...v24.12.149
 [v24.12.151]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.149...v24.12.151
+[v24.12.152]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.151...v24.12.152
