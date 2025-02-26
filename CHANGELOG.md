@@ -1,3 +1,9 @@
+## [v24.12.157] - 2025-02-26
+### :bug: Bug Fixes
+- [`695bc24`](https://github.com/webitel/webitel-ui-sdk/commit/695bc240f88e55bbf57b53e6d56af6e225f253b5) - update version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`a18c989`](https://github.com/webitel/webitel-ui-sdk/commit/a18c989afde11c69959c162454b3c66a759e59b7) - fixed validation logic in some filter value fields *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v24.12.156] - 2025-02-26
 ### :bug: Bug Fixes
 - [`ad9935b`](https://github.com/webitel/webitel-ui-sdk/commit/ad9935b95f6c92b0f7d0052a95aae702711e8c98) - wt-empty "empty" locale [WTEL-5741](https://webitel.atlassian.net/browse/WTEL-5741) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1349,3 +1355,4 @@
 [v24.12.153]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.152...v24.12.153
 [v24.12.155]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.154...v24.12.155
 [v24.12.156]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.155...v24.12.156
+[v24.12.157]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.156...v24.12.157
