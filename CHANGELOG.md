@@ -1,3 +1,10 @@
+## [v25.04.0] - 2025-02-27
+### :sparkles: New Features
+- [`70693e6`](https://github.com/webitel/webitel-ui-sdk/commit/70693e6e82d552902a12770b7761e8e0e9f17419) - update package version to 25.04.0 *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+- [`58f3804`](https://github.com/webitel/webitel-ui-sdk/commit/58f38045e48b99844176c935e15bbf4964604e79) - update package version to 25.04 *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+- [`282811a`](https://github.com/webitel/webitel-ui-sdk/commit/282811aeb17d0edd64365cdbf791c368ebdb3d06) - update package version to 25.02.0 *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v24.12.166] - 2025-02-27
 ### :sparkles: New Features
 - [`49a0833`](https://github.com/webitel/webitel-ui-sdk/commit/49a0833fd0c60f51680edf79de322d195547f182) - add chatName prop to fields to send [WTEL-6145]
@@ -1391,3 +1398,4 @@
 [v24.12.161]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.160...v24.12.161
 [v24.12.162]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.161...v24.12.162
 [v24.12.166]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.165...v24.12.166
+[v25.04.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.166...v25.04.0
