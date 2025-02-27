@@ -1,3 +1,12 @@
+## [v24.12.166] - 2025-02-27
+### :sparkles: New Features
+- [`49a0833`](https://github.com/webitel/webitel-ui-sdk/commit/49a0833fd0c60f51680edf79de322d195547f182) - add chatName prop to fields to send [WTEL-6145]
+- [`d178278`](https://github.com/webitel/webitel-ui-sdk/commit/d1782786f6a7f67b7d85cd9ce639e26f26edb9d4) - add clickable app logo support [WTEL-6160]
+
+### :bug: Bug Fixes
+- [`c507b75`](https://github.com/webitel/webitel-ui-sdk/commit/c507b75773e861580e4178731426b5ef8c8effc3) - disable route props  requirement [WTEL-6160]
+
+
 ## [v24.12.162] - 2025-02-26
 ### :bug: Bug Fixes
 - [`28e7ba1`](https://github.com/webitel/webitel-ui-sdk/commit/28e7ba1335c45e5a9f5fe0d99050ccea9c78f696) - case-related filter locales [WTEL-6387](https://webitel.atlassian.net/browse/WTEL-6387) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1381,3 +1390,4 @@
 [v24.12.159]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.158...v24.12.159
 [v24.12.161]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.160...v24.12.161
 [v24.12.162]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.161...v24.12.162
+[v24.12.166]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.165...v24.12.166
