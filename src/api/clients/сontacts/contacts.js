@@ -64,6 +64,7 @@ const getList = async (params) => {
       name: item.name.commonName,
       managers: item.managers ? [...item.managers.data] : [],
       labels: item.labels ? [...item.labels.data] : [],
+      groups: getGroupsFromResponse(item),
       variables: item.variables ? [...item.variables.data] : [],
       timezones: item.timezones ? [...item.timezones.data] : [],
       phones: item.phones ? [...item.phones.data] : [],
@@ -167,14 +168,11 @@ const get = async ({ itemId: id }) => {
 
   const defaultObject = {};
   const itemResponseHandler = (item) => {
-    const groups = item.groups
-      ? [...item.groups.data.map((el) => el.group)]
-      : [];
     return {
       ...item,
       name: item.name.commonName,
       labels: item.labels ? [...item.labels.data] : [],
-      groups,
+      groups: getGroupsFromResponse(item),
       managers: item.managers ? [...item.managers.data] : [],
       timezones: item.timezones ? [...item.timezones.data] : [],
       variables: item.variables ? [...item.variables.data] : [],
@@ -226,6 +224,10 @@ const preRequestHandler = (item) => {
     commonName: copy.name,
   };
   return copy;
+};
+
+const getGroupsFromResponse = (item) => {
+  return item.groups ? [...item.groups.data.map((el) => el.group)] : [];
 };
 
 const add = async ({ itemInstance }) => {
