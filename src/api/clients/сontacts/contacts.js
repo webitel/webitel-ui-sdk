@@ -1,5 +1,6 @@
-import { ContactsApiFactory } from 'webitel-sdk';
 import deepCopy from 'deep-copy';
+import { ContactsApiFactory } from 'webitel-sdk';
+
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -153,6 +154,7 @@ const get = async ({ itemId: id }) => {
     'name',
     'about',
     'labels',
+    'groups',
     'etag',
     'mode',
     'managers',
@@ -165,10 +167,14 @@ const get = async ({ itemId: id }) => {
 
   const defaultObject = {};
   const itemResponseHandler = (item) => {
+    const groups = item.groups
+      ? [...item.groups.data.map((el) => el.group)]
+      : [];
     return {
       ...item,
       name: item.name.commonName,
       labels: item.labels ? [...item.labels.data] : [],
+      groups,
       managers: item.managers ? [...item.managers.data] : [],
       timezones: item.timezones ? [...item.timezones.data] : [],
       variables: item.variables ? [...item.variables.data] : [],
@@ -189,7 +195,14 @@ const get = async ({ itemId: id }) => {
   }
 };
 
-const fieldsToSend = ['name', 'labels', 'about', 'managers', 'timezones'];
+const fieldsToSend = [
+  'name',
+  'labels',
+  'about',
+  'managers',
+  'timezones',
+  'groups',
+];
 
 const sanitizeManagers = (itemInstance) => {
   // handle many managers and even no managers field cases
