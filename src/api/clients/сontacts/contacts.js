@@ -218,6 +218,12 @@ const sanitizeTimezones = (itemInstance) => {
   return { ...itemInstance, timezones };
 };
 
+const sanitizeGroups = (itemInstance) => {
+  // handle many groups and even no groups field cases
+  const groups = (itemInstance.groups || []).map((item) => ({ group: item }));
+  return { ...itemInstance, groups };
+};
+
 const preRequestHandler = (item) => {
   const copy = deepCopy(item);
   copy.name = {
@@ -235,6 +241,7 @@ const add = async ({ itemInstance }) => {
     preRequestHandler,
     sanitizeManagers,
     sanitizeTimezones,
+    sanitizeGroups,
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);
@@ -252,6 +259,7 @@ const update = async ({ itemInstance }) => {
     preRequestHandler,
     sanitizeManagers,
     sanitizeTimezones,
+    sanitizeGroups,
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);
