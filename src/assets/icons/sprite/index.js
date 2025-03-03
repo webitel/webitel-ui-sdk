@@ -1,5 +1,6 @@
 import { objCamelToKebab } from '../../../scripts/caseConverters.js';
 import account from './account.svg';
+import addFilter from './add-filter.svg';
 import adfs from './adfs.svg';
 import agent from './agent.svg';
 import api from './api.svg';
@@ -14,7 +15,6 @@ import assignee from './assignee.svg';
 import attach from './attach.svg';
 import attention from './attention.svg';
 import azure from './azure.svg';
-import addFilter from './add-filter.svg';
 import back from './back.svg';
 import bell from './bell.svg';
 import bellBadged from './bell-badged.svg';
@@ -96,6 +96,7 @@ import jobAccept from './job--accept.svg';
 import jobEnd from './job--end.svg';
 import json from './json.svg';
 import link from './link.svg';
+import loadPreset from './load-preset.svg';
 import lock from './lock.svg';
 import logout from './logout.svg';
 import mail from './mail.svg';
@@ -194,9 +195,9 @@ import variableSelect from './variable-select.svg';
 import versions from './versions.svg';
 import videoCam from './video-cam.svg';
 import videoCamOff from './video-cam-off.svg';
+import webitelLogo from './webitel-logo.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
-import loadPreset from './load-preset.svg';
 
 export default objCamelToKebab({
   account,
@@ -378,6 +379,8 @@ export default objCamelToKebab({
   saveAs,
   undo,
   versions,
+
+  webitelLogo,
 
   previewTagAudio,
   previewTagVideo,

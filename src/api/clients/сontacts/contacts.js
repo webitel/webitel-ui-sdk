@@ -1,5 +1,6 @@
-import { ContactsApiFactory } from 'webitel-sdk';
 import deepCopy from 'deep-copy';
+import { ContactsApiFactory } from 'webitel-sdk';
+
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -63,6 +64,7 @@ const getList = async (params) => {
       name: item.name.commonName,
       managers: item.managers ? [...item.managers.data] : [],
       labels: item.labels ? [...item.labels.data] : [],
+      groups: getGroupsFromResponse(item),
       variables: item.variables ? [...item.variables.data] : [],
       timezones: item.timezones ? [...item.timezones.data] : [],
       phones: item.phones ? [...item.phones.data] : [],
@@ -153,6 +155,7 @@ const get = async ({ itemId: id }) => {
     'name',
     'about',
     'labels',
+    'groups',
     'etag',
     'mode',
     'managers',
@@ -169,6 +172,7 @@ const get = async ({ itemId: id }) => {
       ...item,
       name: item.name.commonName,
       labels: item.labels ? [...item.labels.data] : [],
+      groups: getGroupsFromResponse(item),
       managers: item.managers ? [...item.managers.data] : [],
       timezones: item.timezones ? [...item.timezones.data] : [],
       variables: item.variables ? [...item.variables.data] : [],
@@ -189,7 +193,14 @@ const get = async ({ itemId: id }) => {
   }
 };
 
-const fieldsToSend = ['name', 'labels', 'about', 'managers', 'timezones'];
+const fieldsToSend = [
+  'name',
+  'labels',
+  'about',
+  'managers',
+  'timezones',
+  'groups',
+];
 
 const sanitizeManagers = (itemInstance) => {
   // handle many managers and even no managers field cases
@@ -207,6 +218,12 @@ const sanitizeTimezones = (itemInstance) => {
   return { ...itemInstance, timezones };
 };
 
+const sanitizeGroups = (itemInstance) => {
+  // handle many groups and even no groups field cases
+  const groups = (itemInstance.groups || []).map((item) => ({ group: item }));
+  return { ...itemInstance, groups };
+};
+
 const preRequestHandler = (item) => {
   const copy = deepCopy(item);
   copy.name = {
@@ -215,11 +232,16 @@ const preRequestHandler = (item) => {
   return copy;
 };
 
+const getGroupsFromResponse = (item) => {
+  return item.groups ? [...item.groups.data.map((el) => el.group)] : [];
+};
+
 const add = async ({ itemInstance }) => {
   const item = applyTransform(itemInstance, [
     preRequestHandler,
     sanitizeManagers,
     sanitizeTimezones,
+    sanitizeGroups,
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);
@@ -237,6 +259,7 @@ const update = async ({ itemInstance }) => {
     preRequestHandler,
     sanitizeManagers,
     sanitizeTimezones,
+    sanitizeGroups,
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);
