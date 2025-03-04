@@ -3,14 +3,15 @@ import { defineConfig } from 'orval';
 export default defineConfig({
   main: {
     input: {
-      target: './openapi_with_validations.yaml',
+      target:
+        'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
     },
     // input: 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
     output: {
       target: './src/api/orval',
       client: 'axios',
       mode: 'tags-split',
-      // schemas: './_schemas',
+      schemas: './_schemas',
       override: {
         // requestOptions: { smth11: 'smth' },
         operationName: ({ operationId: operationName}) => {
@@ -35,9 +36,10 @@ export default defineConfig({
         //   console.info(JSON.stringify(options, null, 2));
         //   return options;
         },
-      },
     },
+
     hooks: {
       // afterAllFilesWrite: 'prettier --write',
     },
+  },
 });
