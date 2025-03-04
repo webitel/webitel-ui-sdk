@@ -2,20 +2,26 @@
 import LogoDark from './assets/logo-dark.svg';
 import LogoLight from './assets/logo-light.svg';
 
-const props = defineProps({
+defineProps({
   darkMode: {
     type: Boolean,
     default: false,
+  },
+  logoRoute: {
+    type: String,
+    default: '',
   },
 });
 </script>
 
 <template>
-  <img
-    :src="darkMode ? LogoDark : LogoLight"
-    alt="Webitel"
-    class="wt-logo"
-  />
+  <router-link :to="logoRoute">
+    <img
+      :src="darkMode ? LogoDark : LogoLight"
+      alt="Webitel"
+      class="wt-logo"
+    />
+  </router-link>
 </template>
 
 <style lang="scss">
@@ -26,5 +32,6 @@ const props = defineProps({
 .wt-logo {
   width: var(--wt-logo-width);
   height: var(--wt-logo-height);
+  display: block;
 }
 </style>
