@@ -1,10 +1,10 @@
 <template>
   <wt-search-bar
+    :hint="multisearch && currentSearchMode.hint"
     :search-mode="multisearch && filterName"
     :search-mode-options="multisearch && searchModeOpts"
-    :hint="multisearch && currentSearchMode.hint"
-    :value="localValue"
     :v="multisearch && v$"
+    :value="localValue"
     class="filter-search"
     @input="localValue = $event"
     @search="setValue({ name: filterName, value: localValue })"
@@ -38,13 +38,15 @@ const props = defineProps({
 });
 
 const store = useStore();
+const emit = defineEmits(['search']);
 
 function getValue(filter) {
   return store.getters[`${props.namespace}/GET_FILTER`](filter);
 }
 
 function setValue(payload) {
-  return store.dispatch(`${props.namespace}/SET_FILTER`, payload);
+  store.dispatch(`${props.namespace}/SET_FILTER`, payload);
+  emit('search', localValue);
 }
 
 const filterName = ref(
