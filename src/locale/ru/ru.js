@@ -483,6 +483,7 @@ export default {
       predefinedLabels: {  /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
         createdAt: {
           startOfToday: 'С начала дня',
+          startOfMonth: 'С начала этого месяца',
         },
       },
       addFilter: ({ linked }) => {
