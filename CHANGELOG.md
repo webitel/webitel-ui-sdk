@@ -1,3 +1,11 @@
+## [v25.04.2] - 2025-03-05
+### :sparkles: New Features
+- [`e74e2e7`](https://github.com/webitel/webitel-ui-sdk/commit/e74e2e746b3d51353e4313d67a268bab4f8d80b4) - orval config [WTEL-6396](https://webitel.atlassian.net/browse/WTEL-6396) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`c3bba2e`](https://github.com/webitel/webitel-ui-sdk/commit/c3bba2e196376f06e4434da9e9ee8c2403aedcff) - orval config fix [WTEL-6396](https://webitel.atlassian.net/browse/WTEL-6396) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.04.0] - 2025-02-27
 ### :sparkles: New Features
 - [`70693e6`](https://github.com/webitel/webitel-ui-sdk/commit/70693e6e82d552902a12770b7761e8e0e9f17419) - update package version to 25.04.0 *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1399,3 +1407,4 @@
 [v24.12.162]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.161...v24.12.162
 [v24.12.166]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.165...v24.12.166
 [v25.04.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.166...v25.04.0
+[v25.04.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.1...v25.04.2
