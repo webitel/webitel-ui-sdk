@@ -8,13 +8,13 @@
         {{ t('access.operations') }}
       </h3>
       <div class="table-title__actions-wrap">
-        <wt-action-bar
-          :include="[IconAction.REFRESH]"
-          @click:refresh="loadData"
-        />
         <role-popup
           v-if="props.access.add"
           :namespace="tableNamespace"
+        />
+        <wt-action-bar
+          :include="[IconAction.REFRESH]"
+          @click:refresh="loadData"
         />
       </div>
     </header>
