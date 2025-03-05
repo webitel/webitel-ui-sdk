@@ -23,7 +23,7 @@
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
       :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
-      :placeholder="label || placeholder"
+      :placeholder="placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')"
       auto-apply
       class="wt-datepicker__datepicker"
       v-bind="{ ...$attrs, ...$props }"
