@@ -89,7 +89,7 @@ export const useTableEmpty = (
     if (filters?.value) {
       const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
       const filtersApplied = Object.entries(filters.value).some(
-        ([filterValue, filterName]) =>
+        ([filterName,filterValue]) =>
           !isEmpty(filterValue) && !uncheckedFilters.includes(filterName),
       );
       if (filtersApplied) return EmptyCause.FILTERS;
