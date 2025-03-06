@@ -7,7 +7,7 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  logoRoute: {
+  logoHref: {
     type: String,
     default: '',
   },
@@ -15,13 +15,13 @@ defineProps({
 </script>
 
 <template>
-  <router-link :to="logoRoute">
+  <a :href="logoHref">
     <img
       :src="darkMode ? LogoDark : LogoLight"
       alt="Webitel"
       class="wt-logo"
     />
-  </router-link>
+  </a>
 </template>
 
 <style lang="scss">
