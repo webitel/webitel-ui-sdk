@@ -4,7 +4,6 @@
     :search-mode="props.searchMode"
     :search-mode-options="searchModeOptions"
     :value="model"
-    :v="v$.model"
     @input="model = $event"
     @search="handleSearch"
     @update:search-mode="onSearchModeChange($event.value)"
@@ -19,8 +18,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useVuelidate } from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -41,16 +38,6 @@ const emit = defineEmits<{
 }>();
 
 const { t } = useI18n();
-
-const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required,
-    },
-  })),
-  { model },
-  { $autoDirty: true },
-);
 
 const onSearchModeChange = (value: string) => {
   emit('update:search-mode', value);
