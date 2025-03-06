@@ -36,6 +36,7 @@
         :value="hour"
         hide-input-info
         @input="hour = $event"
+        @blur="onHoursBlurEvent"
       />
       <wt-time-input
         v-if="isMin"
@@ -225,7 +226,18 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    onHoursBlurEvent() {
+      const newValue = this.dateMode
+        ? new Date(this.value).setHours(this.hour)
+        : this.value - this.hour * SEC_IN_HOUR + this.hour * SEC_IN_HOUR;
+
+      this.$emit('input', 0);
+      this.$nextTick(() => {
+        this.$emit('input', newValue);
+      });
+    },
+  },
 };
 </script>
 
