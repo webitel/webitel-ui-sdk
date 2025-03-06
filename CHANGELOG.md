@@ -1,3 +1,11 @@
+## [v25.04.6] - 2025-03-06
+### :sparkles: New Features
+- [`e6f722c`](https://github.com/webitel/webitel-ui-sdk/commit/e6f722cf41ec81ed5e67765574c38f9842134aa8) - orval config updates, added zod as project dep [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`4eadd0b`](https://github.com/webitel/webitel-ui-sdk/commit/4eadd0b1d0de93bfe536d9ba7180889f037c8197) - link to company logo [WTEL-6423]
+
+
 ## [v25.04.2] - 2025-03-05
 ### :sparkles: New Features
 - [`e74e2e7`](https://github.com/webitel/webitel-ui-sdk/commit/e74e2e746b3d51353e4313d67a268bab4f8d80b4) - orval config [WTEL-6396](https://webitel.atlassian.net/browse/WTEL-6396) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1408,3 +1416,4 @@
 [v24.12.166]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.165...v24.12.166
 [v25.04.0]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.166...v25.04.0
 [v25.04.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.1...v25.04.2
+[v25.04.6]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.5...v25.04.6
