@@ -1,8 +1,10 @@
 <script setup>
+import { computed } from 'vue';
+
 import LogoDark from './assets/logo-dark.svg';
 import LogoLight from './assets/logo-light.svg';
 
-defineProps({
+const props = defineProps({
   darkMode: {
     type: Boolean,
     default: false,
@@ -11,17 +13,35 @@ defineProps({
     type: String,
     default: '',
   },
+  logoRoute: {
+    type: String,
+    default: '',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
+const href = computed(() => props.logoHref || import.meta.env.VITE_START_PAGE_URL);
+const logoSrc = props.darkMode ? LogoDark : LogoLight;
+
+const linkComponent = props.disabled
+  ? 'span'
+  : props.logoRoute
+    ? 'router-link'
+    : 'a';
+
+const linkAttrs = props.disabled
+  ? {}
+  : props.logoRoute
+    ? { to: props.logoRoute }
+    : { href: href.value };
 </script>
 
 <template>
-  <a :href="logoHref">
-    <img
-      :src="darkMode ? LogoDark : LogoLight"
-      alt="Webitel"
-      class="wt-logo"
-    />
-  </a>
+  <component :is="linkComponent" v-bind="linkAttrs">
+    <img :src="logoSrc" alt="Webitel" class="wt-logo" />
+  </component>
 </template>
 
 <style lang="scss">
