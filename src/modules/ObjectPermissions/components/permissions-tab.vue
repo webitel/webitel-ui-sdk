@@ -21,16 +21,18 @@
 
     <div class="table-section__table-wrapper">
 
-      <wt-loader v-show="isLoading" />
-
       <wt-empty
         v-show="showEmpty"
         :image="imageEmpty"
         :text="textEmpty"
       />
 
-      <div class="table-section__visible-scroll-wrapper">
-        <wt-table-transition v-if="dataList.length && !isLoading" >
+      <wt-loader v-show="isLoading" />
+
+      <div
+        v-if="dataList.length && !isLoading"
+        class="table-section__visible-scroll-wrapper">
+
           <wt-table
             :data="localizedDataList"
             :grid-actions="access.edit"
@@ -85,7 +87,6 @@
               />
             </template>
           </wt-table>
-        </wt-table-transition>
       </div>
       <filter-pagination
         :namespace="filtersNamespace"
