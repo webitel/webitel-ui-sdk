@@ -1,3 +1,8 @@
+## [v25.04.9] - 2025-03-06
+### :bug: Bug Fixes
+- [`3164801`](https://github.com/webitel/webitel-ui-sdk/commit/3164801012f3db2fe14f66d25bc63ebbd21802f8) - added scss variables to duration in wt-transition.vue *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v25.04.7] - 2025-03-06
 ### :bug: Bug Fixes
 - [`7a6059f`](https://github.com/webitel/webitel-ui-sdk/commit/7a6059f2662154c4d50cf4eb2b49440aa44b8da7) - display loader in permissions tab component[WTEL-5935](https://webitel.atlassian.net/browse/WTEL-5935) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1423,3 +1428,4 @@
 [v25.04.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.1...v25.04.2
 [v25.04.6]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.5...v25.04.6
 [v25.04.7]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.6...v25.04.7
+[v25.04.9]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.8...v25.04.9
