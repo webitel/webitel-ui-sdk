@@ -28,7 +28,7 @@
         :value="value"
         class="wt-time-input__input"
         type="number"
-        @input="$emit('input', $event.target.value)"
+        v-on="listeners"
       />
     </div>
     <wt-input-info
@@ -105,6 +105,12 @@ export default {
     },
     showInfo() {
       return this.isValidation && !this.hideInputInfo;
+    },
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: (event) => this.$emit('input', event.target.value),
+      };
     },
   },
 };
