@@ -1,3 +1,8 @@
+## [v25.04.10] - 2025-03-06
+### :bug: Bug Fixes
+- [`dbc0a66`](https://github.com/webitel/webitel-ui-sdk/commit/dbc0a66fa301c1bf59a34ad7b5e1982fe93c361e) - change default duration in wt-replace-transition.vue *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v25.04.9] - 2025-03-06
 ### :bug: Bug Fixes
 - [`3164801`](https://github.com/webitel/webitel-ui-sdk/commit/3164801012f3db2fe14f66d25bc63ebbd21802f8) - added scss variables to duration in wt-transition.vue *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1429,3 +1434,4 @@
 [v25.04.6]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.5...v25.04.6
 [v25.04.7]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.6...v25.04.7
 [v25.04.9]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.8...v25.04.9
+[v25.04.10]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.9...v25.04.10
