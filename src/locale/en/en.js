@@ -486,6 +486,7 @@ export default {
         /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
         createdAt: {
           startOfToday: 'From the start of today',
+          startOfMonth: 'From this month',
         },
       },
       addFilter: ({ linked }) => {
