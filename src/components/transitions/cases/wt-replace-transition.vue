@@ -24,7 +24,7 @@ const props = defineProps({
   },
   duration: {
     type: String,
-    default: 'sm',
+    default: 'fast',
   },
   appear: {
     type: Boolean,
