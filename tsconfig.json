@@ -27,11 +27,12 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src/**/*.ts",
+    "src/api/orval/webitelAPI.schemas.ts",
     "docs/pages/**/*.ts"
   ],
   "exclude": [
     "**/*.spec.ts",
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "src/!(api)/**/*.ts"
   ]
 }

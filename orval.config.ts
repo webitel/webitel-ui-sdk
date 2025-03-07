@@ -10,6 +10,18 @@ export default defineConfig({
       target: './src/api/orval',
       client: 'axios',
       mode: 'tags-split',
+      indexFiles: true,
+      docs: {
+        configPath: './typedoc.config.mjs'
+      },
+      /*docs: {
+        theme: 'default',
+        out: './src/api/orval/_docs-html',
+        disableSources: true,
+        entryPoints: ['./src/api/orval/webitelAPI.schemas.ts'],
+        exclude: ['**!/main.ts']
+        // entryPoints: ['**!/api/orval/!**!/!*.ts'],
+      },*/
       // schemas: './src/api/schemas',
       override: {
         operationName: ({operationId: operationName}) => {
@@ -55,7 +67,6 @@ export default defineConfig({
       // schemas: './src/api/schemas',
       override: {
         zod: {
-          default: true,
           coerce: {
             response: [ 'boolean'],
             query: ['string', 'number', 'boolean', 'bigint', 'date'],
@@ -90,5 +101,20 @@ export default defineConfig({
     hooks: {
       // afterAllFilesWrite: 'prettier --write',
     },
-  }
+  },
+  /*'docs-html': {
+    input: {
+      target: 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
+    },
+    output: {
+      // target: './src/api/orval/_docs',
+      docs: {
+        theme: 'default',
+        out: './_docs-html',
+        disableSources: true,
+        // entryPoints: '',
+        entryPoints: ['./src/api/orval/webitelAPI.schemas.ts'],
+      },
+    },
+  },*/
 });
