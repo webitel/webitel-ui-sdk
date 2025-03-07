@@ -1,3 +1,8 @@
+## [v25.04.11] - 2025-03-07
+### :bug: Bug Fixes
+- [`e9e2a49`](https://github.com/webitel/webitel-ui-sdk/commit/e9e2a4934ece0975736d02c5845ba1385266cc97) - invalid style in wt-time-input[WTEL-5893](https://webitel.atlassian.net/browse/WTEL-5893) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.04.10] - 2025-03-06
 ### :bug: Bug Fixes
 - [`dbc0a66`](https://github.com/webitel/webitel-ui-sdk/commit/dbc0a66fa301c1bf59a34ad7b5e1982fe93c361e) - change default duration in wt-replace-transition.vue *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1435,3 +1440,4 @@
 [v25.04.7]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.6...v25.04.7
 [v25.04.9]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.8...v25.04.9
 [v25.04.10]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.9...v25.04.10
+[v25.04.11]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.10...v25.04.11
