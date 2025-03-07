@@ -4,7 +4,8 @@ export default defineConfig({
   main: {
     input: {
       target:
-        'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
+        // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
+        './engine.swagger.json',
     },
     output: {
       target: './src/api/orval',
@@ -58,7 +59,7 @@ export default defineConfig({
     input: {
       target:
         // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-        './openapiv2.json',
+        './engine.swagger.json',
     },
     output: {
       target: './src/api/orval/_zod',
