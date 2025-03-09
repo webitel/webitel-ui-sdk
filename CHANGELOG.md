@@ -1,3 +1,8 @@
+## [v25.04.12] - 2025-03-09
+### :bug: Bug Fixes
+- [`4ab8d5b`](https://github.com/webitel/webitel-ui-sdk/commit/4ab8d5b1d2e3f23c695ff57fd47951b091320d1b) - replace router-link by anchor [WTEL-6423]
+
+
 ## [v25.04.11] - 2025-03-07
 ### :bug: Bug Fixes
 - [`e9e2a49`](https://github.com/webitel/webitel-ui-sdk/commit/e9e2a4934ece0975736d02c5845ba1385266cc97) - invalid style in wt-time-input[WTEL-5893](https://webitel.atlassian.net/browse/WTEL-5893) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1441,3 +1446,4 @@
 [v25.04.9]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.8...v25.04.9
 [v25.04.10]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.9...v25.04.10
 [v25.04.11]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.10...v25.04.11
+[v25.04.12]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.11...v25.04.12
