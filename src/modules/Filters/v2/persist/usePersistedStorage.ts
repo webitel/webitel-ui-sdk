@@ -24,9 +24,11 @@ export const usePersistedStorage = ({
   const getItemFns: Array<(name: string) => Promise<PersistableValue>> = [];
   const removeItemFns = [];
 
-  const composedValueGetter = async (name: string): Promise<PersistableValue[]> => {
+  const composedValueGetter = async (
+    name: string,
+  ): Promise<PersistableValue[]> => {
     const settledResults = await Promise.allSettled(
-      getItemFns.map((getter) => getter(name))
+      getItemFns.map((getter) => getter(name)),
     );
 
     return settledResults.reduce((acc, result) => {
@@ -61,32 +63,36 @@ export const usePersistedStorage = ({
   }
 
   const startWatch = () => {
-    unwatch = watch(value, async () => {
-      /*
+    unwatch = watch(
+      value,
+      async () => {
+        /*
        if onStore callback is provided,
         call custom logic for storing value
        */
-      if (onStore) {
-        /*
+        if (onStore) {
+          /*
          wrap all setItemFns in one callback
           so that onStore is called only once on each value change
          */
-        const save = async ({ name, value: storedValue }) => {
+          const save = async ({ name, value: storedValue }) => {
+            setItemFns.forEach((setter) => {
+              setter(name, storedValue);
+            });
+          };
+          await onStore(save, { name, value });
+        } else {
+          /*
+       else, perform default storing logic
+       */
+          const storedValue = value.value;
           setItemFns.forEach((setter) => {
             setter(name, storedValue);
           });
-        };
-        await onStore(save, { name, value });
-      } else {
-        /*
-       else, perform default storing logic
-       */
-        const storedValue = value.value;
-        setItemFns.forEach((setter) => {
-          setter(name, storedValue);
-        });
-      }
-    }, { deep: true });
+        }
+      },
+      { deep: true },
+    );
   };
 
   const restore = async () => {
@@ -106,7 +112,7 @@ export const usePersistedStorage = ({
           before running onRestore
          */
         return restoredValues.find((value) => {
-          return value !== null;
+          return value != null;
         });
       };
       await onRestore(restore, name);
