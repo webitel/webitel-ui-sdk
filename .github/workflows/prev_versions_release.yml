@@ -1,0 +1,136 @@
+# NOTES:
+# generating changelog for release is performed twice because first changelog generates for release notes,
+# so it runs before release step, and second changelog generates for updating CHANGELOG.md file, so it runs after release step.
+# if i'd try to generate changelog once, changes will be marked as "master" branch changes, cause there's no new tag yet.
+
+name: Webitel UI release with docs
+
+on:
+  push:
+    branches: [ v*.* ]
+
+jobs:
+  install_deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache_node_modules
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          check-latest: true
+
+      - name: Install dependencies
+        if: steps.cache_node_modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+  test:
+    needs: [install_deps]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          check-latest: true
+
+      - run: npm run test:unit
+
+  release:
+    needs: [install_deps, test]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: get prevTag
+        id: prevTag
+        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+
+      # for release notes // why 2 changelogs? see NOTES
+      - name: generate Release Changelog
+        id: changelog
+        uses: requarks/changelog-action@v1
+        continue-on-error: true
+        with:
+          writeToFile: false
+          reverseOrder: true
+          excludeTypes: build
+          token: ${{ github.token }}
+          fromTag: ${{ github.ref_name }}
+          toTag: ${{ steps.prevTag.outputs.tag }}
+
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: 'v${{ steps.package-version.outputs.current-version}}'
+          name: '@webitel/ui-sdk v${{ steps.package-version.outputs.current-version}}'
+          body: ${{ steps.changelog.outputs.changes }}
+
+      # update tags list after prev step release, so that we fetch new tag, created by prev step
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: get newTag
+        id: newTag
+        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+
+  publish:
+    needs: [release]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          check-latest: true
+          registry-url: https://registry.npmjs.org
+
+      - name: Check publish status
+        id: check_publish
+        uses: tehpsalmist/npm-publish-status-action@v1
+
+      - name: Publish release
+        id: publish_release
+        if: ${{ steps.check_publish.outputs.exists == '0' }}
+
+        run: |
+          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
+          npm run build
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          npm publish --access public
+
+      - name: Report publish status
+        if: ${{ steps.check_publish.outputs.exists == '1' }}
+        run: echo "Package already published"
