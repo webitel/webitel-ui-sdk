@@ -1,3 +1,8 @@
+## [v25.04.14] - 2025-03-10
+### :sparkles: New Features
+- [`bd9e451`](https://github.com/webitel/webitel-ui-sdk/commit/bd9e451f45556392cee7c827e0f125e58c2bea73) - lib publish for versions branches *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.04.12] - 2025-03-09
 ### :bug: Bug Fixes
 - [`4ab8d5b`](https://github.com/webitel/webitel-ui-sdk/commit/4ab8d5b1d2e3f23c695ff57fd47951b091320d1b) - replace router-link by anchor [WTEL-6423]
@@ -1447,3 +1452,4 @@
 [v25.04.10]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.9...v25.04.10
 [v25.04.11]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.10...v25.04.11
 [v25.04.12]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.11...v25.04.12
+[v25.04.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.169...v25.04.14
