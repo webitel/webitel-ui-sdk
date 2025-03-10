@@ -26,7 +26,7 @@ const props = defineProps({
   },
   duration: {
     type: String,
-    default: 'sm',
+    default: 'fast',
   },
 });
 </script>
@@ -43,11 +43,14 @@ const props = defineProps({
 }
 
 .wt-transition {
-  &--sm {
-    transition-duration: 0.3s; // TODO: add variable
+  &--fast {
+    transition-duration: var(--transition-fast);
   }
-  &--md {
-    transition-duration: 0.6s; // TODO: add variable
+  &--normal {
+    transition-duration: var(--transition-normal);
+  }
+  &--slow {
+    transition-duration: var(--transition-slow);
   }
 }
 </style>
