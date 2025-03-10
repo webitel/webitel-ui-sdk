@@ -12,10 +12,7 @@ import { useRoutePersistedStorage } from './useRoutePersistedStorage.ts';
 export const usePersistedStorage = ({
   name,
   value,
-  storages: configStorages = [
-    PersistedStorageType.Route,
-    PersistedStorageType.LocalStorage,
-  ],
+  storages: configStorages = [PersistedStorageType.Route],
   storagePath,
   startWatchManually = false,
   onStore,
@@ -115,7 +112,7 @@ export const usePersistedStorage = ({
           before running onRestore
          */
         return restoredValues.find((value) => {
-          return value !== null;
+          return value !== null && value !== undefined;
         });
       };
       await onRestore(restore, name);
