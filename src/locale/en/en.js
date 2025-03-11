@@ -153,7 +153,7 @@ export default {
     gateway: 'Gateway | Gateways',
     hangupCause: 'Hangup cause',
     hasOption: 'Has option',
-    hasRecording: 'Has recording',
+    hasRecording: 'Recording',
     amdResult: 'AMD result',
     ratedBy: 'Rated by',
     talkDuration: 'Talk duration',
