@@ -103,6 +103,7 @@ export const createTableHeadersStore = (
           PersistedStorageType.LocalStorage,
           PersistedStorageType.Route,
         ],
+        storagePath: id,
         onStore: (save, { name }) => {
           const value = fields.value.join(',');
           return save({ name, value });
