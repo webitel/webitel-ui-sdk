@@ -21,7 +21,10 @@
           size="sm"
           @click="toggleSidePanel"
         />
-        <slot name="side-panel" />
+        <slot
+          v-if="!sidePanelCollapsed"
+          name="side-panel"
+        />
       </div>
       <div class="wt-dual-panel__main">
         <slot name="main" />
@@ -46,7 +49,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:size']);
+const emit = defineEmits(['update:side-panel-size']);
 
 const sidePanelCollapsed = ref(false);
 
