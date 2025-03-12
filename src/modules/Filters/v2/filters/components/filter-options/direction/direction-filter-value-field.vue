@@ -2,10 +2,9 @@
   <wt-select
     :clearable="false"
     :label="t('webitelUI.filters.filterValue')"
-    :options="HangupCauseOptions"
+    :options="DirectionOptions"
     :value="model"
     :v="v$.model"
-    multiple
     track-by="value"
     use-value-from-options-by-prop="value"
     @input="model = $event"
@@ -19,7 +18,7 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { HangupCauseOptions } from '../../enums/hangup-cause-options';
+import { DirectionOptions } from '../../../enums/direction-options';
 
 const model = defineModel<string>();
 const { t } = useI18n();

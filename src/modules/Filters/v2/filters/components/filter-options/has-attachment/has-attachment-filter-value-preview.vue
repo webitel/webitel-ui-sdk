@@ -6,7 +6,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { BooleanOptions } from '../../enums/boolean-options';
+import { BooleanOptions } from '../../../enums/boolean-options';
 
 const props = defineProps<{
   value: boolean;
