@@ -1,3 +1,8 @@
+## [v25.04.20] - 2025-03-12
+### :sparkles: New Features
+- [`da418a6`](https://github.com/webitel/webitel-ui-sdk/commit/da418a6886246400cd5d71fc06846d654e03b9d2) - filter presets moved to webitel-ui *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.04.19] - 2025-03-12
 ### :bug: Bug Fixes
 - [`e5ea00c`](https://github.com/webitel/webitel-ui-sdk/commit/e5ea00c3649212b321e4785ac59d53769cd5977e) - fixed bugs (WTEL-6290, WTEL-6299, WTEL-6466) [WTEL-6290](https://webitel.atlassian.net/browse/WTEL-6290) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -1462,3 +1467,4 @@
 [v25.04.12]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.11...v25.04.12
 [v25.04.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.169...v25.04.14
 [v25.04.19]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.170...v25.04.19
+[v25.04.20]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.19...v25.04.20
