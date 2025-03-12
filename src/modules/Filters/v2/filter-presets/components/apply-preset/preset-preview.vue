@@ -138,7 +138,7 @@ const v$ = useVuelidate(computed(() => {
   return {
     name: {
       required,
-      alreadyExists: () => !nameAlreadyExistsError.value,
+      nameAlreadyInUse: () => !nameAlreadyExistsError.value,
     },
   };
 }), editDraft, {$autoDirty: true});
