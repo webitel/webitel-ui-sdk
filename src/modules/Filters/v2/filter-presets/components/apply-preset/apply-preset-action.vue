@@ -35,7 +35,7 @@
               :preset="preset"
               @preset:select="selectedPreset = preset"
               @preset:update="updatePreset"
-              @preset:delete="() => deleteEls([preset])"
+              @preset:delete="() => deletePreset(preset)"
             />
           </section>
 <!--            TODO: infinite scroll -->
@@ -158,12 +158,24 @@ const updatePreset = async ({preset, onSuccess, onFailure}) => {
       item: { ...preset, section: props.namespace },
       id: preset.id,
     });
+    eventBus.$emit('notification', {
+      type: 'success',
+      text: t('webitelUI.filters.presets.notifications.success.update'),
+    });
     onSuccess();
     return loadDataList();
   } catch (err) {
     onFailure(err);
     throw err;
   }
+};
+
+const deletePreset = async (preset) => {
+  await deleteEls([preset.id]);
+  eventBus.$emit('notification', {
+    type: 'success',
+    text: t('webitelUI.filters.presets.notifications.success.delete'),
+  });
 };
 </script>
 

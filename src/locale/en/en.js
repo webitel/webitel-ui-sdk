@@ -630,7 +630,33 @@ export default {
         preset: 'Preset | Presets',
         overwritePresetTitle: 'A preset with this name already exists',
         overwritePresetText: 'A preset with this name already exists. Do you want to replace it?',
+        notifications: {
+          success: {
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
       },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ entity }) => `The ${entity} was updated`,
+      create: ({ entity }) => `The ${entity} was saved`,
+      delete: ({ entity }) => `The ${entity} was deleted`,
     },
   },
   errorNotifications: {

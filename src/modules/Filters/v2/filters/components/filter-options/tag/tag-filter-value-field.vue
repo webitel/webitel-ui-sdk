@@ -2,9 +2,10 @@
   <wt-select
     :clearable="false"
     :label="t('webitelUI.filters.filterValue')"
-    :options="DirectionOptions"
+    :options="TagOptions"
     :value="model"
     :v="v$.model"
+    multiple
     track-by="value"
     use-value-from-options-by-prop="value"
     @input="model = $event"
@@ -18,7 +19,7 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { DirectionOptions } from '../../enums/direction-options';
+import { TagOptions } from '../../../enums/tag-options';
 
 const model = defineModel<string>();
 const { t } = useI18n();

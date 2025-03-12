@@ -13,7 +13,7 @@
         >
           <template #info>
             <component
-              :is="getFilterFieldComponent(filter.name, 'previewField')"
+              :is="FilterOptionToPreviewComponentMap[filter.name]"
               :value="filter.value"
             >
             </component>
@@ -27,12 +27,14 @@
 
 <script setup lang="ts">
 import {useI18n} from "vue-i18n";
-import DynamicFilterPreview
-  from "../../../filters/components/preview/dynamic-filter-preview.vue";
+
+import { WtLabel } from '../../../../../../components/index';
+import type {IFilter} from "../../../filters";
 import DynamicFilterPanelWrapper
   from "../../../filters/components/dynamic-filter-panel-wrapper.vue";
-import type {IFilter} from "../../../filters/types/Filter.d.ts";
-import {getFilterFieldComponent} from "../../../filters/components/values/filterComponentsMap";
+import { FilterOptionToPreviewComponentMap} from "../../../filters/components/filter-options";
+import DynamicFilterPreview
+  from "../../../filters/components/preview/dynamic-filter-preview.vue";
 
 type Props = {
   filters: IFilter[];
@@ -45,7 +47,4 @@ const { t } = useI18n();
 </script>
 
 <style scoped lang="scss">
-.preset-filters-preview {
-
-}
 </style>

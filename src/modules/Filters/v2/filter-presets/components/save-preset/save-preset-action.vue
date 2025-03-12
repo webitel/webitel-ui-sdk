@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, ref, type Ref} from 'vue';
+import {computed, inject, ref, type Ref} from 'vue';
 import {EnginePresetQuery} from "webitel-sdk";
 import { WtIconBtn } from '../../../../../../components/index';
 import {addPreset, getPresetList, updatePreset} from '../../api/PresetQuery.api.ts';
@@ -40,6 +40,8 @@ const props = defineProps<{
   namespace: string;
   filtersManager: IFiltersManager;
 }>();
+
+const eventBus = inject('$eventBus');
 
 /**
  * disable "save" btn if there's nothing to save
@@ -61,6 +63,12 @@ const presetToOverwriteWith: Ref<EnginePresetQuery | null> = ref(null);
 const handlePresetSubmit = async (preset: EnginePresetQuery, { onCompleted }: SubmitConfig) => {
   try {
     await addPreset({ preset, namespace: props.namespace });
+
+    eventBus.$emit('notification', {
+      type: 'success',
+      text: t('webitelUI.filters.presets.notifications.success.update'),
+    });
+
     showSaveForm.value = false;
   } catch (err) {
     if (err?.status === 409) {
@@ -86,6 +94,11 @@ const handlePresetOverwriteConfirmation = async ({ onCompleted }: SubmitConfig) 
       item: {
         ...presetToOverwriteWith.value,
       },
+    });
+
+    eventBus.$emit('notification', {
+      type: 'success',
+      text: t('webitelUI.filters.presets.notifications.success.update'),
     });
 
     presetToOverwriteWith.value = null;
