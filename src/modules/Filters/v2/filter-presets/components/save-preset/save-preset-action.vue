@@ -25,13 +25,15 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, inject, ref, type Ref} from 'vue';
+import {computed, inject, type Ref,ref} from 'vue';
+import {useI18n} from "vue-i18n";
 import {EnginePresetQuery} from "webitel-sdk";
+
 import { WtIconBtn } from '../../../../../../components/index';
-import {addPreset, getPresetList, updatePreset} from '../../api/PresetQuery.api.ts';
-import SavePresetPopup, {SubmitConfig} from "./save-preset-popup.vue";
-import OverwritePresetPopup from "./overwrite-preset-popup.vue";
 import {IFiltersManager} from "../../../filters/index";
+import {addPreset, getPresetList, updatePreset} from '../../api/PresetQuery.api.ts';
+import OverwritePresetPopup from "./overwrite-preset-popup.vue";
+import SavePresetPopup, {SubmitConfig} from "./save-preset-popup.vue";
 
 const props = defineProps<{
   /**
@@ -42,6 +44,8 @@ const props = defineProps<{
 }>();
 
 const eventBus = inject('$eventBus');
+
+const { t } = useI18n();
 
 /**
  * disable "save" btn if there's nothing to save
@@ -65,8 +69,9 @@ const handlePresetSubmit = async (preset: EnginePresetQuery, { onCompleted }: Su
     await addPreset({ preset, namespace: props.namespace });
 
     eventBus.$emit('notification', {
-      type: 'success',
-      text: t('webitelUI.filters.presets.notifications.success.update'),
+      type: 'success',  text: t('systemNotifications.success.create', {
+        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+      }),
     });
 
     showSaveForm.value = false;
@@ -97,8 +102,9 @@ const handlePresetOverwriteConfirmation = async ({ onCompleted }: SubmitConfig) 
     });
 
     eventBus.$emit('notification', {
-      type: 'success',
-      text: t('webitelUI.filters.presets.notifications.success.update'),
+      type: 'success',  text: t('systemNotifications.success.update', {
+        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+      }),
     });
 
     presetToOverwriteWith.value = null;

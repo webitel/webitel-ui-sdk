@@ -633,6 +633,7 @@ export default {
         overwritePresetText: 'A preset with this name already exists. Do you want to replace it?',
         notifications: {
           success: {
+            /* suka ebuchij linked(,param) ne praciuje */
             update: ({ linked }) => {
               return linked('systemNotifications.success.update', {
                 entity: linked('filters.presets.preset'),
@@ -655,9 +656,9 @@ export default {
   },
   systemNotifications: {
     success: {
-      update: ({ entity }) => `The ${entity} was updated`,
-      create: ({ entity }) => `The ${entity} was saved`,
-      delete: ({ entity }) => `The ${entity} was deleted`,
+      update: ({ named }) => `The ${named('entity')} was updated`,
+      create: ({ named }) => `The ${named('entity')} was saved`,
+      delete: ({ named }) => `The ${named('entity')} was deleted`,
     },
   },
   errorNotifications: {

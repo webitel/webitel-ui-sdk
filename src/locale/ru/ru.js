@@ -652,9 +652,9 @@ export default {
   },
   systemNotifications: {
     success: {
-      update: ({ entity }) => `${entity} был обновлён`,
-      create: ({ entity }) => `The ${entity} был сохранён`,
-      delete: ({ entity }) => `The ${entity} был удалён`,
+      update: ({ named }) => `${named('entity')} был обновлён`,
+      create: ({ named }) => `${named('entity')} был сохранён`,
+      delete: ({ named }) => `${named('entity')} был удалён`,
     },
   },
   errorNotifications: {

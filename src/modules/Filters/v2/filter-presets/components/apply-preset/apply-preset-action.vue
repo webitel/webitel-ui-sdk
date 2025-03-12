@@ -66,10 +66,11 @@
 </template>
 
 <script lang="ts" setup>
+import {type StoreDefinition, storeToRefs } from "pinia";
 import {computed, inject, ref, watch} from "vue";
 import {useI18n} from "vue-i18n";
-import {type StoreDefinition, storeToRefs } from "pinia";
-import {WtButton, WtIconBtn, WtPopup, WtSearchBar, WtEmpty} from "../../../../../../components/index";
+
+import {WtButton, WtEmpty,WtIconBtn, WtPopup, WtSearchBar} from "../../../../../../components/index";
 import {useTableEmpty} from "../../../../../TableComponentModule/composables/useTableEmpty";
 import PresetQueryAPI from '../../api/PresetQuery.api.ts';
 import PresetPreview from "./preset-preview.vue";
@@ -160,7 +161,9 @@ const updatePreset = async ({preset, onSuccess, onFailure}) => {
     });
     eventBus.$emit('notification', {
       type: 'success',
-      text: t('webitelUI.filters.presets.notifications.success.update'),
+      text: t('systemNotifications.success.update', {
+        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+      }),
     });
     onSuccess();
     return loadDataList();
@@ -174,7 +177,9 @@ const deletePreset = async (preset) => {
   await deleteEls([preset.id]);
   eventBus.$emit('notification', {
     type: 'success',
-    text: t('webitelUI.filters.presets.notifications.success.delete'),
+    text: t('systemNotifications.success.delete', {
+      entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+    }),
   });
 };
 </script>
