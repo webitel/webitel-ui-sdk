@@ -13,6 +13,8 @@ export const WtIconActionIconMappings = Object.freeze({
   [IconAction.COLUMNS]: 'column-select',
   [IconAction.VARIABLES]: 'variable-select',
   [IconAction.CLOSE]: 'close--filled',
+  [IconAction.CANCEL]: 'close',
   [IconAction.CLEAR]: 'clear',
   [IconAction.ADD_FILTER]: 'add-filter',
+  [IconAction.SAVE]: 'save',
 });

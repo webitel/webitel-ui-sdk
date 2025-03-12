@@ -4,7 +4,8 @@
       <wt-icon-btn
         :disabled="disabled"
         :icon="iconAction.icon"
-        @click="emit('click')"
+        @click="emit('click', $event)"
+        @mousedown="emit('mousedown', $event)"
       />
     </template>
     {{ t(iconAction.hint) }}
@@ -33,6 +34,8 @@ const props = defineProps({
         IconAction.HISTORY,
         IconAction.DOWNLOAD,
         IconAction.REFRESH,
+        IconAction.SAVE,
+        IconAction.CANCEL,
       ]).includes(v),
   },
   disabled: {
@@ -41,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click', 'mousedown']);
 
 const { t } = useI18n();
 
