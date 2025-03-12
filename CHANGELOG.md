@@ -1,3 +1,8 @@
+## [v25.04.27] - 2025-03-12
+### :bug: Bug Fixes
+- [`2b30202`](https://github.com/webitel/webitel-ui-sdk/commit/2b302029f9591955d76ee83470f5a14ca66ff712) - dual panel view fixed [WTEL-6111](https://webitel.atlassian.net/browse/WTEL-6111) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v25.04.26] - 2025-03-12
 ### :bug: Bug Fixes
 - [`3af41bd`](https://github.com/webitel/webitel-ui-sdk/commit/3af41bdd2f5d874e1cf3261eccf826128b680315) - preset validation nameAlreadyInUse *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1492,3 +1497,4 @@
 [v25.04.24]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.23...v25.04.24
 [v25.04.25]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.24...v25.04.25
 [v25.04.26]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.25...v25.04.26
+[v25.04.27]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.26...v25.04.27
