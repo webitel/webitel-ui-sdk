@@ -5,7 +5,7 @@ export default defineConfig({
     input: {
       target:
         // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-        './engine.swagger.json',
+        '../protos/swagger/engine.swagger.json',
     },
     output: {
       target: './src/api/orval',
@@ -59,7 +59,7 @@ export default defineConfig({
     input: {
       target:
         // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-        './engine.swagger.json',
+          '../protos/swagger/engine.swagger.json',
     },
     output: {
       target: './src/api/orval/_zod',
@@ -68,10 +68,17 @@ export default defineConfig({
       // schemas: './src/api/schemas',
       override: {
         zod: {
-          coerce: {
-            response: [ 'boolean'],
-            query: ['string', 'number', 'boolean', 'bigint', 'date'],
+          generate: {
+            response: true,
+            query: false,
+            header: false,
+            param: false,
+            body: true,
           },
+          // coerce: {
+          //   response: [ 'boolean'],
+          //   query: ['string', 'number', 'boolean', 'bigint', 'date'],
+          // },
         },
         operationName: ({operationId: operationName}) => {
           // console.info(operationName);
@@ -102,7 +109,7 @@ export default defineConfig({
     hooks: {
       // afterAllFilesWrite: 'prettier --write',
     },
-  },
+  }
   /*'docs-html': {
     input: {
       target: 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
