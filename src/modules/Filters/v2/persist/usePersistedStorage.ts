@@ -106,7 +106,7 @@ export const usePersistedStorage = ({
           before running onRestore
          */
         return restoredValues.find((value) => {
-          return value !== null;
+          return value != null;
         });
       };
       await onRestore(restore, name);
