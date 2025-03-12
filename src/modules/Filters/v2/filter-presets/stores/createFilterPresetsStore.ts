@@ -1,5 +1,5 @@
 import { EnginePresetQuery } from 'webitel-sdk';
-import { createTableStore } from 'src/modules/Filters/v2/table/createTableStore.store.ts';
+import { createTableStore } from '../../table/createTableStore.store.ts';
 import PresetQueryAPI from "../api/PresetQuery.api.ts";
 import { headers } from "./headers/headers.ts";
 

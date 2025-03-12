@@ -41,7 +41,7 @@ import {
   UserFilterPreview,
   VariableFilter,
   VariableFilterPreview,
-} from '../index';
+} from './index';
 import {Component} from "vue";
 import type {FilterName} from "../../../index";
 
