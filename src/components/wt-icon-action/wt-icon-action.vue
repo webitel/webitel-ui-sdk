@@ -4,6 +4,7 @@
       <wt-icon-btn
         :disabled="disabled"
         :icon="iconAction.icon"
+        :size="size"
         @click="emit('click', $event)"
         @mousedown="emit('mousedown', $event)"
       />
@@ -42,6 +43,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  size: {
+    type: String,
+    default: 'md',
+    required: false,
+  }
 });
 
 const emit = defineEmits(['click', 'mousedown']);
