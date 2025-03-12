@@ -62,6 +62,9 @@ export function useValidation({
         validationText =
           v.value.regex?.$message ||
           `${t('validation.isRegExpMatched')} ${v.value.regex?.$params?.regex}`;
+      else if (v.value.nameAlreadyInUse.$invalid) {
+        validationText = t('validation.nameAlreadyInUse');
+      }
     }
 
     if (customValidators?.value) {

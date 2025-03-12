@@ -2,7 +2,7 @@
   <wt-select
     :clearable="false"
     :label="t('webitelUI.filters.filterValue')"
-    :options="TagOptions"
+    :options="HangupCauseOptions"
     :value="model"
     :v="v$.model"
     multiple
@@ -19,7 +19,7 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { TagOptions } from '../../enums/tag-options';
+import { HangupCauseOptions } from '../../../enums/hangup-cause-options';
 
 const model = defineModel<string>();
 const { t } = useI18n();

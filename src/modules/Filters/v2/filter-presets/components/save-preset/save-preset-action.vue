@@ -25,13 +25,15 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, ref, type Ref} from 'vue';
+import {computed, inject, type Ref,ref} from 'vue';
+import {useI18n} from "vue-i18n";
 import {EnginePresetQuery} from "webitel-sdk";
+
 import { WtIconBtn } from '../../../../../../components/index';
-import {addPreset, getPresetList, updatePreset} from '../../api/PresetQuery.api.ts';
-import SavePresetPopup, {SubmitConfig} from "./save-preset-popup.vue";
-import OverwritePresetPopup from "./overwrite-preset-popup.vue";
 import {IFiltersManager} from "../../../filters/index";
+import {addPreset, getPresetList, updatePreset} from '../../api/PresetQuery.api.ts';
+import OverwritePresetPopup from "./overwrite-preset-popup.vue";
+import SavePresetPopup, {SubmitConfig} from "./save-preset-popup.vue";
 
 const props = defineProps<{
   /**
@@ -40,6 +42,10 @@ const props = defineProps<{
   namespace: string;
   filtersManager: IFiltersManager;
 }>();
+
+const eventBus = inject('$eventBus');
+
+const { t } = useI18n();
 
 /**
  * disable "save" btn if there's nothing to save
@@ -61,6 +67,13 @@ const presetToOverwriteWith: Ref<EnginePresetQuery | null> = ref(null);
 const handlePresetSubmit = async (preset: EnginePresetQuery, { onCompleted }: SubmitConfig) => {
   try {
     await addPreset({ preset, namespace: props.namespace });
+
+    eventBus.$emit('notification', {
+      type: 'success',  text: t('systemNotifications.success.create', {
+        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+      }),
+    });
+
     showSaveForm.value = false;
   } catch (err) {
     if (err?.status === 409) {
@@ -86,6 +99,12 @@ const handlePresetOverwriteConfirmation = async ({ onCompleted }: SubmitConfig) 
       item: {
         ...presetToOverwriteWith.value,
       },
+    });
+
+    eventBus.$emit('notification', {
+      type: 'success',  text: t('systemNotifications.success.update', {
+        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+      }),
     });
 
     presetToOverwriteWith.value = null;

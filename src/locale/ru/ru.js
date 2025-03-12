@@ -628,7 +628,33 @@ export default {
         preset: 'Пресет | Пресеты',
         overwritePresetTitle: 'Пресет с таким названием уже существует',
         overwritePresetText: 'Пресет с таким названием уже существует. Хотите его заменить?',
+        notifications: {
+          success: {
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
       },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `${named('entity')} был обновлён`,
+      create: ({ named }) => `${named('entity')} был сохранён`,
+      delete: ({ named }) => `${named('entity')} был удалён`,
     },
   },
   errorNotifications: {
