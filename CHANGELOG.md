@@ -1,3 +1,8 @@
+## [v25.04.22] - 2025-03-12
+### :bug: Bug Fixes
+- [`ca3f67b`](https://github.com/webitel/webitel-ui-sdk/commit/ca3f67bb7dd81785ff76df902fc742322005f1d8) - presets imports *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.04.20] - 2025-03-12
 ### :sparkles: New Features
 - [`da418a6`](https://github.com/webitel/webitel-ui-sdk/commit/da418a6886246400cd5d71fc06846d654e03b9d2) - filter presets moved to webitel-ui *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1468,3 +1473,4 @@
 [v25.04.14]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.169...v25.04.14
 [v25.04.19]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.170...v25.04.19
 [v25.04.20]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.19...v25.04.20
+[v25.04.22]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.20...v25.04.22
