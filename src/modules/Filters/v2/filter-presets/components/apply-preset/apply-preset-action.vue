@@ -10,7 +10,7 @@
       @close="showPresetsList = false"
     >
       <template #title>
-        {{ `${t('vocabulary.apply')} ${t('filters.preset.preset').toLowerCase()}` }}
+        {{ `${t('vocabulary.apply')} ${t('webitelUI.filters.presets.preset').toLowerCase()}` }}
       </template>
 
       <template #main>

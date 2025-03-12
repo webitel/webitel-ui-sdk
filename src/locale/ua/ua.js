@@ -20,6 +20,7 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    replace: 'Замінити',
     download: 'Завантажити',
     history: 'Історія',
     filter: 'Фільтр | Фільтри',
@@ -345,6 +346,7 @@ export default {
     latinWithNumber:
       'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9) і починатися з літери',
     integer: 'Поле повинно містити лише цілі числа',
+    nameAlreadyInUse: 'Така назва вже використовується',
   },
   webitelUI: {
     searchBar: {
@@ -621,6 +623,11 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      presets: {
+        preset: 'Пресет | Пресети',
+        overwritePresetTitle: 'Пресет з такою назвою вже існує',
+        overwritePresetText: 'Пресет з такою назвою вже існує. Бажаєте його замінити?',
       },
     },
   },

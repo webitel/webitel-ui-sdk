@@ -4,16 +4,18 @@
     @close="emit('close')"
   >
     <template #title>
-      {{ t('validations.alreadyExists', { field: t('reusable.name') }) }}
+      {{ t('webitelUI.filters.presets.overwritePresetTitle') }}
     </template>
-    <template #main> some nice text goes here {{ t('') }} </template>
+    <template #main>
+      {{ t('webitelUI.filters.presets.overwritePresetText') }}
+    </template>
     <template #actions>
       <wt-button
         color="error"
         :loading="isSaving"
         @click="confirm"
       >
-        {{ t('reusable.overwrite') }}
+        {{ t('reusable.replace') }}
       </wt-button>
       <wt-button
         color="secondary"

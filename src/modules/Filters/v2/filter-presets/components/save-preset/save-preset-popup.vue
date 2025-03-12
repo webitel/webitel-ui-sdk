@@ -4,7 +4,7 @@
     @close="emit('close')"
   >
     <template #title>
-      {{ `${t('reusable.save')} ${t('filters.preset.preset').toLowerCase()}` }}
+      {{ `${t('reusable.save')} ${t('webitelUI.filters.presets.preset').toLowerCase()}` }}
     </template>
 
     <template #main>
