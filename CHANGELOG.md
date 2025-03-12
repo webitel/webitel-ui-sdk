@@ -1,3 +1,8 @@
+## [v25.04.26] - 2025-03-12
+### :bug: Bug Fixes
+- [`3af41bd`](https://github.com/webitel/webitel-ui-sdk/commit/3af41bdd2f5d874e1cf3261eccf826128b680315) - preset validation nameAlreadyInUse *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.04.25] - 2025-03-12
 ### :sparkles: New Features
 - [`64a6c49`](https://github.com/webitel/webitel-ui-sdk/commit/64a6c49feb216dbaf401f7ad01523eb719469a96) - presets locales *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1486,3 +1491,4 @@
 [v25.04.22]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.20...v25.04.22
 [v25.04.24]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.23...v25.04.24
 [v25.04.25]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.24...v25.04.25
+[v25.04.26]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.25...v25.04.26
