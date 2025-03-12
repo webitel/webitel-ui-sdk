@@ -272,6 +272,7 @@ const onSecondaryClick = onClick('secondary');
 @use '../../css/main.scss';
 
 .wt-empty {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   flex-direction: column;
