@@ -1,3 +1,9 @@
+## [v25.4.28] - 2025-03-12
+### :recycle: Refactors
+- [`1043b5a`](https://github.com/webitel/webitel-ui-sdk/commit/1043b5a341f20c11b9bd3c25218bfafdfb78a39e) - small fixes and refactors [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`9dcc9ab`](https://github.com/webitel/webitel-ui-sdk/commit/9dcc9abd9fd55186d3057bfee01f46ba0110e4ee) - filter options *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.04.27] - 2025-03-12
 ### :bug: Bug Fixes
 - [`2b30202`](https://github.com/webitel/webitel-ui-sdk/commit/2b302029f9591955d76ee83470f5a14ca66ff712) - dual panel view fixed [WTEL-6111](https://webitel.atlassian.net/browse/WTEL-6111) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -1498,3 +1504,4 @@
 [v25.04.25]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.24...v25.04.25
 [v25.04.26]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.25...v25.04.26
 [v25.04.27]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.26...v25.04.27
+[v25.4.28]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.27...v25.4.28
