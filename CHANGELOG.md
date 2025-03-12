@@ -1,3 +1,8 @@
+## [v25.04.25] - 2025-03-12
+### :sparkles: New Features
+- [`64a6c49`](https://github.com/webitel/webitel-ui-sdk/commit/64a6c49feb216dbaf401f7ad01523eb719469a96) - presets locales *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.04.24] - 2025-03-12
 ### :bug: Bug Fixes
 - [`f4d0bba`](https://github.com/webitel/webitel-ui-sdk/commit/f4d0bbabfa7198381f7014bf1b1a2d68ca422011) - skipIf transformer payload *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1480,3 +1485,4 @@
 [v25.04.20]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.19...v25.04.20
 [v25.04.22]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.20...v25.04.22
 [v25.04.24]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.23...v25.04.24
+[v25.04.25]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.24...v25.04.25
