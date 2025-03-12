@@ -20,6 +20,7 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    replace: 'Replace',
     download: 'Download',
     history: 'History',
     filter: ({ plural }) => plural(['Filter', 'Filters']),
@@ -347,6 +348,7 @@ export default {
     latinWithNumber:
       'The code must contain only letters (A-Z, a-z) and numbers (0-9), and must start with a letter',
     integer: 'The field should contain only whole numbers',
+    nameAlreadyInUse: 'This name is already in use',
   },
   webitelUI: {
     searchBar: {
@@ -623,6 +625,11 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      presets: {
+        preset: 'Preset | Presets',
+        overwritePresetTitle: 'A preset with this name already exists',
+        overwritePresetText: 'A preset with this name already exists. Do you want to replace it?',
       },
     },
   },
