@@ -626,8 +626,8 @@ export default {
       },
       presets: {
         preset: 'Пресет | Пресети',
-        overwritePresetTitle: 'Пресет з такою назвою вже існує',
-        overwritePresetText: 'Пресет з такою назвою вже існує. Бажаєте його замінити?',
+        overwritePresetTitle: 'Пресет з такою назвою вже існує.',
+        overwritePresetText: 'Бажаєте його замінити?',
         notifications: {
           success: {
             update: ({ linked }) => {

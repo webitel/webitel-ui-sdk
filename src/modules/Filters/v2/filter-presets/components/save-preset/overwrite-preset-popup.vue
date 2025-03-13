@@ -4,10 +4,15 @@
     @close="emit('close')"
   >
     <template #title>
-      {{ t('webitelUI.filters.presets.overwritePresetTitle') }}
+      {{ `${t('reusable.save')} ${t('webitelUI.filters.presets.preset').toLowerCase()}` }}
     </template>
     <template #main>
-      {{ t('webitelUI.filters.presets.overwritePresetText') }}
+      <p class="overwrite-preset-popup-text">
+        {{ t('webitelUI.filters.presets.overwritePresetTitle') }}
+      </p>
+      <p class="overwrite-preset-popup-text">
+        {{ t('webitelUI.filters.presets.overwritePresetText') }}
+      </p>
     </template>
     <template #actions>
       <wt-button
@@ -29,6 +34,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+
 import { WtPopup } from '../../../../../../components/index';
 import { SubmitConfig } from './save-preset-popup.vue';
 
@@ -50,6 +56,7 @@ const confirm = () => {
 </script>
 
 <style scoped lang="scss">
-.overwrite-preset-popup {
+.overwrite-preset-popup-text {
+  text-align: center;
 }
 </style>
