@@ -1,8 +1,8 @@
 <template>
   <div class="save-preset-action">
-    <wt-icon-btn
+    <wt-icon-action
+      :action="IconAction.SAVE_PRESET"
       :disabled="disableAction"
-      icon="save"
       @click="showSaveForm = true"
     />
 
@@ -30,10 +30,11 @@ import {computed, inject, type Ref,ref} from 'vue';
 import {useI18n} from "vue-i18n";
 import {EnginePresetQuery} from "webitel-sdk";
 
-import { WtIconBtn } from '../../../../../../components/index';
+import { WtIconAction } from '../../../../../../components/index';
 import {IFiltersManager} from "../../../filters/index";
 import {addPreset, getPresetList, updatePreset} from '../../api/PresetQuery.api.ts';
 import OverwritePresetPopup from "./overwrite-preset-popup.vue";
+import { IconAction } from "../../../../../../enums";
 import SavePresetPopup, {SubmitConfig} from "./save-preset-popup.vue";
 
 const props = defineProps<{

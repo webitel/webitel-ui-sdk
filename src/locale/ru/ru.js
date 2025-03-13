@@ -420,6 +420,12 @@ export default {
         [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
         [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
         [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
       },
     },
     errorPages: {

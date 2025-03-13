@@ -1,7 +1,7 @@
 <template>
   <div class="apply-preset-action">
-    <wt-icon-btn
-      icon="load-preset"
+    <wt-icon-action
+      :action="IconAction.APPLY_PRESET"
       @click="showPresetsList = true"
     />
     <wt-popup
@@ -70,8 +70,9 @@ import {type StoreDefinition, storeToRefs } from "pinia";
 import {computed, inject, ref, watch} from "vue";
 import {useI18n} from "vue-i18n";
 
-import {WtButton, WtEmpty,WtIconBtn, WtPopup, WtSearchBar} from "../../../../../../components/index";
+import {WtButton, WtEmpty, WtPopup, WtSearchBar, WtIconAction} from "../../../../../../components/index";
 import {useTableEmpty} from "../../../../../TableComponentModule/composables/useTableEmpty";
+import { IconAction } from "../../../../../../enums";
 import PresetQueryAPI from '../../api/PresetQuery.api.ts';
 import PresetPreview from "./preset-preview.vue";
 import {EnginePresetQuery} from "webitel-sdk";

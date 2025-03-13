@@ -17,4 +17,6 @@ export const WtIconActionIconMappings = Object.freeze({
   [IconAction.CLEAR]: 'clear',
   [IconAction.ADD_FILTER]: 'add-filter',
   [IconAction.SAVE]: 'save',
+  [IconAction.SAVE_PRESET]: 'save',
+  [IconAction.APPLY_PRESET]: 'load-preset',
 });
