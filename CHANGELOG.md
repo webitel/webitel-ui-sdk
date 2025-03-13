@@ -1,3 +1,12 @@
+## [v25.4.30] - 2025-03-13
+### :bug: Bug Fixes
+- [`99bfb3d`](https://github.com/webitel/webitel-ui-sdk/commit/99bfb3d356db3156027c19ecb66d37792154445e) - delete console.log[WTEL-6487](https://webitel.atlassian.net/browse/WTEL-6487) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`cab2fe1`](https://github.com/webitel/webitel-ui-sdk/commit/cab2fe1a0c60c435f101e18e35d1cf4d6c559661) - small refactor filters[WTEL-6487](https://webitel.atlassian.net/browse/WTEL-6487) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`eeb5b74`](https://github.com/webitel/webitel-ui-sdk/commit/eeb5b74366ea6982c4fe5c4043122714c026fedd) - preset overwrite popup texts [WTEL-6498](https://webitel.atlassian.net/browse/WTEL-6498) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`040e19d`](https://github.com/webitel/webitel-ui-sdk/commit/040e19d26d3cc5583975f2847f9bb6e368bc00fa) - preset overwrite namespace issue [WTEL-6499](https://webitel.atlassian.net/browse/WTEL-6499) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`f5408e0`](https://github.com/webitel/webitel-ui-sdk/commit/f5408e0764e4dadf15dc36c9a2a834c6a13724c4) - delete preset and locale fixes *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.28] - 2025-03-12
 ### :recycle: Refactors
 - [`1043b5a`](https://github.com/webitel/webitel-ui-sdk/commit/1043b5a341f20c11b9bd3c25218bfafdfb78a39e) - small fixes and refactors [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1505,3 +1514,4 @@
 [v25.04.26]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.25...v25.04.26
 [v25.04.27]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.26...v25.04.27
 [v25.4.28]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.27...v25.4.28
+[v25.4.30]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.29...v25.4.30
