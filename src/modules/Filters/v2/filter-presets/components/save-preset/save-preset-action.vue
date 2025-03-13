@@ -11,6 +11,7 @@
       v-show="!presetToOverwriteWith /* on 'overwrite preset' popup hide this popup, but don't reset it*/"
       :shown="true /* coz visibility is controlled by v-if*/"
       :filters-manager="props.filtersManager"
+      :namespace="namespace"
       @submit="handlePresetSubmit"
       @close="showSaveForm = false"
     />
@@ -99,6 +100,7 @@ const handlePresetOverwriteConfirmation = async ({ onCompleted }: SubmitConfig) 
       item: {
         ...presetToOverwriteWith.value,
       },
+      namespace: props.namespace,
     });
 
     eventBus.$emit('notification', {
