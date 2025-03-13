@@ -21,7 +21,6 @@ const props = defineProps<{
 const localValue = ref([]);
 
 const getLocalValue = async () => {
-  console.log(props.value);
   const { items } = await caseCloseReasonsSearchMethod({
     parentId: props.value?.selection,
     id: props.value?.conditions });
