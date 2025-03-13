@@ -70,7 +70,7 @@ const handlePresetSubmit = async (preset: EnginePresetQuery, { onCompleted }: Su
 
     eventBus.$emit('notification', {
       type: 'success',  text: t('systemNotifications.success.create', {
-        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+        entity: t('webitelUI.filters.presets.preset'),
       }),
     });
 
@@ -103,7 +103,7 @@ const handlePresetOverwriteConfirmation = async ({ onCompleted }: SubmitConfig) 
 
     eventBus.$emit('notification', {
       type: 'success',  text: t('systemNotifications.success.update', {
-        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+        entity: t('webitelUI.filters.presets.preset'),
       }),
     });
 

@@ -74,6 +74,7 @@ import {WtButton, WtEmpty,WtIconBtn, WtPopup, WtSearchBar} from "../../../../../
 import {useTableEmpty} from "../../../../../TableComponentModule/composables/useTableEmpty";
 import PresetQueryAPI from '../../api/PresetQuery.api.ts';
 import PresetPreview from "./preset-preview.vue";
+import {EnginePresetQuery} from "webitel-sdk";
 
 const props = defineProps<{
   /**
@@ -162,7 +163,7 @@ const updatePreset = async ({preset, onSuccess, onFailure}) => {
     eventBus.$emit('notification', {
       type: 'success',
       text: t('systemNotifications.success.update', {
-        entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+        entity: t('webitelUI.filters.presets.preset'),
       }),
     });
     onSuccess();
@@ -173,12 +174,12 @@ const updatePreset = async ({preset, onSuccess, onFailure}) => {
   }
 };
 
-const deletePreset = async (preset) => {
-  await deleteEls([preset.id]);
+const deletePreset = async (preset: EnginePresetQuery) => {
+  await deleteEls([preset]);
   eventBus.$emit('notification', {
     type: 'success',
     text: t('systemNotifications.success.delete', {
-      entity: t('webitelUI.filters.presets.preset').toLowerCase(),
+      entity: t('webitelUI.filters.presets.preset'),
     }),
   });
 };

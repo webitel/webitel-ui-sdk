@@ -656,9 +656,9 @@ export default {
   },
   systemNotifications: {
     success: {
-      update: ({ named }) => `The ${named('entity')} was updated`,
-      create: ({ named }) => `The ${named('entity')} was saved`,
-      delete: ({ named }) => `The ${named('entity')} was deleted`,
+      update: ({ named }) => `The ${named('entity').toLowerCase()} was updated`,
+      create: ({ named }) => `The ${named('entity').toLowerCase()} was saved`,
+      delete: ({ named }) => `The ${named('entity').toLowerCase()} was deleted`,
     },
   },
   errorNotifications: {
