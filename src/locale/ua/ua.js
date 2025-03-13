@@ -159,7 +159,7 @@ export default {
     talkDuration: 'Тривалість розмови',
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
-    attachment: 'Додаток | Додатки',
+    attachment: 'Вкладення | Вкладення',
     queue: {
       queue: 'Черга | Черги',
       type: {
