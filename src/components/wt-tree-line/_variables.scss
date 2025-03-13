@@ -1,0 +1,21 @@
+
+:root {
+  --wt-tree-item-active: var(--primary-light-color);
+  --wt-tree-item-active-on: var(--grey-darken-4);
+
+  --wt-tree-item: var(--primary-light-color);
+  --wt-tree-item-on: var(--grey-darken-1);
+
+  --wt-tree-item-hover: var(--dp-24-surface-color);
+  --wt-tree-item-hover-on: var(--grey-darken-1);
+}
+
+:root.theme--dark {
+  --wt-tree-item-active: var(--primary-light-color);
+  --wt-tree-item-active-on: var(--grey-lighten-4);
+
+  --wt-tree-item: var(--primary-light-color);
+  --wt-tree-item-on: var(--grey-lighten-3);
+
+  --wt-tree-item-hover-on: var(--grey-lighten-3);
+}

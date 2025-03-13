@@ -13,7 +13,9 @@
           icon="attention"
         />
         <p class="delete-confirmation-popup__message">
-          {{ deleteMessage }}
+          <slot name="deleteMessage">
+            {{ deleteMessage }}
+          </slot>
         </p>
       </div>
     </template>

@@ -139,6 +139,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.STORAGE}`,
     },
+    [AdminSections.STORAGE_POLICIES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.STORAGE_POLICIES}`,
+    },
     [AdminSections.COGNITIVE_PROFILES]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.ADMIN}.sections.${AdminSections.COGNITIVE_PROFILES}`,
@@ -195,6 +199,10 @@ const applicationsAccess = (value = true) => ({
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACTS}`,
     },
+    [CrmSections.CASES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CASES}`,
+    },
     [CrmSections.SLAS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.SLAS}`,
@@ -214,6 +222,14 @@ const applicationsAccess = (value = true) => ({
     [CrmSections.CONTACT_GROUPS]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.CONTACT_GROUPS}`,
+    },
+    [CrmSections.PRIORITIES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.PRIORITIES}`,
+    },
+    [CrmSections.STATUSES]: {
+      _enabled: value,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSections.STATUSES}`,
     },
   },
 });

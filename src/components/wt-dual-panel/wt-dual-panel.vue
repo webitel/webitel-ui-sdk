@@ -21,7 +21,10 @@
           size="sm"
           @click="toggleSidePanel"
         />
-        <slot name="side-panel" />
+        <slot
+          v-if="!sidePanelCollapsed"
+          name="side-panel"
+        />
       </div>
       <div class="wt-dual-panel__main">
         <slot name="main" />
@@ -33,8 +36,7 @@
 <script setup>
 import { computed, defineEmits, ref } from 'vue';
 
-import IconAction from '../../enums/IconAction/IconAction.enum.js';
-import { ComponentSize } from '../../enums/index.js';
+import { ComponentSize, IconAction } from '../../enums';
 
 const props = defineProps({
   actionsPanel: {
@@ -47,7 +49,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:size']);
+const emit = defineEmits(['update:side-panel-size']);
 
 const sidePanelCollapsed = ref(false);
 
@@ -89,6 +91,8 @@ $side-panel-md-width: 320px;
   }
 
   &__main {
+    @extend %wt-scrollbar;
+    overflow: auto;
     flex: 1 1 auto;
   }
 

@@ -4,7 +4,9 @@
       <wt-icon-btn
         :disabled="disabled"
         :icon="iconAction.icon"
-        @click="emit('click')"
+        :size="size"
+        @click="emit('click', $event)"
+        @mousedown="emit('mousedown', $event)"
       />
     </template>
     {{ t(iconAction.hint) }}
@@ -14,8 +16,9 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { IActionData } from './IActionData.js';
+
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
+import { WtIconActionIconMappings } from './iconMappings.js';
 
 const props = defineProps({
   /**
@@ -32,29 +35,39 @@ const props = defineProps({
         IconAction.HISTORY,
         IconAction.DOWNLOAD,
         IconAction.REFRESH,
+        IconAction.SAVE,
+        IconAction.CANCEL,
       ]).includes(v),
   },
   disabled: {
     type: Boolean,
     default: false,
   },
+  size: {
+    type: String,
+    default: 'md',
+    required: false,
+  }
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click', 'mousedown']);
 
 const { t } = useI18n();
 
 const iconAction = computed(() => {
-  const data = IActionData[props.action];
+  const icon = WtIconActionIconMappings[props.action];
 
-  if (!data) {
+  if (!icon) {
     console.error(
       `Unknown action for wt-icon-action component: ${props.action}`,
     );
     return { icon: 'edit', hint: props.action };
   }
 
-  return data;
+  return {
+    icon,
+    hint: `webitelUI.iconAction.hints.${props.action}`,
+  };
 });
 </script>
 

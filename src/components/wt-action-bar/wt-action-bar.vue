@@ -14,17 +14,17 @@
     <slot v-bind="{ size }" />
 
     <!--    @slot May be useful to set complex component which draws the same `wt-icon-action`
-            @scope `{ action<IconAction>, size<ComponentSize> }`
+            @scope `{ action<IconAction>, size<ComponentSize>, onClick: () => emit('click:[action]') }`
       -->
     <slot
       v-for="action in shownActions"
       :name="action"
-      v-bind="{ action, size }"
+      v-bind="{ action, size, onClick: () => handleActionClick(action) }"
     >
       <wt-icon-action
         :action="action"
         :disabled="props[`disabled:${action}`]"
-        @click="emit(`click:${action}`)"
+        @click="handleActionClick(action)"
       />
     </slot>
   </div>
@@ -32,11 +32,12 @@
 
 <script setup>
 import { computed } from 'vue';
+
 import IconAction from '../../enums/IconAction/IconAction.enum.js';
 import WtIconAction from '../wt-icon-action/wt-icon-action.vue';
 import {
-  tableActionsOrder,
   sectionActionsOrder,
+  tableActionsOrder,
 } from './WtActionBarActionsOrder.js';
 
 const props = defineProps({
@@ -110,6 +111,10 @@ const shownActions = computed(() => {
 
   return actionsOrder;
 });
+
+const handleActionClick = (action) => {
+  emit(`click:${action}`);
+};
 </script>
 
 <style lang="scss" scoped>

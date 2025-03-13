@@ -18,6 +18,16 @@
     </wt-label>
     <div class="wt-timepicker__wrapper">
       <wt-time-input
+        v-if="isDay"
+        :disabled="disabled"
+        :label="labelDays"
+        :max-value="dateMode ? null : 365"
+        :v="v"
+        :value="day"
+        hide-input-info
+        @input="day = $event"
+      />
+      <wt-time-input
         v-if="isHour"
         :disabled="disabled"
         :label="labelHours"
@@ -26,6 +36,7 @@
         :value="hour"
         hide-input-info
         @input="hour = $event"
+        @blur="onHoursBlurEvent"
       />
       <wt-time-input
         v-if="isMin"
@@ -60,6 +71,7 @@
 <script>
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
+const SEC_IN_DAY = 60 * 60 * 24;
 const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;
 
@@ -78,14 +90,26 @@ export default {
       type: [String, Number],
       default: 0,
     },
+
+    /**
+     * If dateMode is true, timepicker asserts value is timestamp and displays/changes timestamp value
+     */
     dateMode: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * if passed, replaces "day", "hour", "min", "sec" with a single label + format prop value
+     */
     label: {
       type: String,
       default: '',
     },
+
+    /**
+     * Time format, can be "dd:hh:mm:ss", "hh:mm:ss", "mm:ss", "ss"
+     */
     format: {
       type: String,
       default: 'hh:mm:ss',
@@ -94,6 +118,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Object with props, passed down to wt-label as props
+     */
+
     labelProps: {
       type: Object,
       description: 'Object with props, passed down to wt-label as props',
@@ -110,6 +139,9 @@ export default {
   },
 
   computed: {
+    isDay() {
+      return this.format.includes('dd');
+    },
     isHour() {
       return this.format.includes('hh');
     },
@@ -118,6 +150,10 @@ export default {
     },
     isSec() {
       return this.format.includes('ss');
+    },
+    labelDays() {
+      if (this.noLabel) return null;
+      return this.label ? null : this.$t('webitelUI.timepicker.day');
     },
     labelHours() {
       if (this.noLabel) return null;
@@ -131,11 +167,24 @@ export default {
       if (this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.sec');
     },
+    day: {
+      get() {
+        return this.dateMode
+          ? new Date(+this.value).getDay()
+          : Math.floor(this.value / SEC_IN_DAY);
+      },
+      set(value) {
+        const newValue = this.dateMode
+          ? new Date(this.value).setDate(value)
+          : this.value - this.day * SEC_IN_DAY + value * SEC_IN_DAY;
+        this.$emit('input', newValue);
+      },
+    },
     hour: {
       get() {
         return this.dateMode
           ? new Date(+this.value).getHours()
-          : Math.floor(this.value / SEC_IN_HOUR);
+          : Math.floor((this.value % SEC_IN_DAY) / SEC_IN_HOUR);
       },
       set(value) {
         const newValue = this.dateMode
@@ -177,7 +226,18 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    onHoursBlurEvent() {
+      const newValue = this.dateMode
+        ? new Date(this.value).setHours(this.hour)
+        : this.value - this.hour * SEC_IN_HOUR + this.hour * SEC_IN_HOUR;
+
+      this.$emit('input', 0);
+      this.$nextTick(() => {
+        this.$emit('input', newValue);
+      });
+    },
+  },
 };
 </script>
 

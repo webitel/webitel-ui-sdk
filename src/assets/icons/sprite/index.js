@@ -1,5 +1,6 @@
 import { objCamelToKebab } from '../../../scripts/caseConverters.js';
 import account from './account.svg';
+import addFilter from './add-filter.svg';
 import adfs from './adfs.svg';
 import agent from './agent.svg';
 import api from './api.svg';
@@ -63,6 +64,7 @@ import close from './close.svg';
 import closeFilled from './close--filled.svg';
 import collapse from './collapse.svg';
 import columnSelect from './column-select.svg';
+import comment from './comment.svg';
 import conference from './conference.svg';
 import contacts from './contacts.svg';
 import copy from './copy.svg';
@@ -94,6 +96,7 @@ import jobAccept from './job--accept.svg';
 import jobEnd from './job--end.svg';
 import json from './json.svg';
 import link from './link.svg';
+import loadPreset from './load-preset.svg';
 import lock from './lock.svg';
 import logout from './logout.svg';
 import mail from './mail.svg';
@@ -179,6 +182,7 @@ import sttSearch from './stt-search.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import treeCollapse from './tree-collapse.svg';
+import treeCorner from './tree-corner.svg';
 import treeCross from './tree-cross.svg';
 import treeExpand from './tree-expand.svg';
 import treeLine from './tree-line.svg';
@@ -191,6 +195,7 @@ import variableSelect from './variable-select.svg';
 import versions from './versions.svg';
 import videoCam from './video-cam.svg';
 import videoCamOff from './video-cam-off.svg';
+import webitelLogo from './webitel-logo.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
 
@@ -210,6 +215,7 @@ export default objCamelToKebab({
   attach,
   attention,
   azure,
+  addFilter,
   back,
   bell,
   bellBadged,
@@ -268,6 +274,7 @@ export default objCamelToKebab({
   minus,
   collapse,
   columnSelect,
+  comment,
   variableSelect,
   contacts,
   copy,
@@ -354,6 +361,7 @@ export default objCamelToKebab({
   zoomOut,
   ttsDownload,
   treeLine,
+  treeCorner,
   treeCross,
   stt,
   sttDownload,
@@ -371,6 +379,8 @@ export default objCamelToKebab({
   saveAs,
   undo,
   versions,
+
+  webitelLogo,
 
   previewTagAudio,
   previewTagVideo,
@@ -394,4 +404,5 @@ export default objCamelToKebab({
   plyrRewind,
   plyrSettings,
   plyrVolume,
+  loadPreset,
 });

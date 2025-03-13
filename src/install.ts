@@ -1,5 +1,6 @@
 import 'vue-multiselect/dist/vue-multiselect.css';
 import '@webitel/styleguide/fonts';
+import 'plyr/src/sass/plyr.scss';
 import './css/main.scss';
 import './assets/icons/sprite/index.js';
 

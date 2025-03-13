@@ -5,6 +5,8 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+
+import { IconAction } from '../../enums';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
@@ -18,8 +20,13 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    replace: 'Replace',
+    download: 'Download',
+    history: 'History',
+    filter: ({ plural }) => plural(['Filter', 'Filters']),
     total: 'Total',
     ok: 'Ok',
+    object: 'Object',
     save: 'Save',
     saveAs: 'Save as',
     saved: 'Saved',
@@ -31,6 +38,8 @@ export default {
     import: 'Import',
     export: 'Export',
     true: 'True',
+    title: 'Title',
+    position: 'Position',
     delete: 'Delete',
     search: 'Search',
     open: 'Open',
@@ -72,9 +81,12 @@ export default {
     read: 'Read',
     create: 'Create',
     draggable: 'Draggable',
+    unassigned: 'Unassigned',
+    showUnassigned: 'Show unassigned',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
+    apply: 'Apply',
     language: 'Language',
     voice: 'Voice',
     format: 'Format',
@@ -85,10 +97,11 @@ export default {
     login: 'Login',
     host: 'Host',
     time: 'Time',
-    channel: 'Channel',
+    channel: 'Channel | Channels',
     file: 'File',
     logout: 'Logout',
-    priority: 'Priority',
+    priority: 'Priority | Priorities',
+    color: 'Color',
     variables: 'Variable | Variables',
     type: 'Type',
     tag: 'Tag | Tags',
@@ -106,6 +119,7 @@ export default {
     messaging: 'Messaging',
     emptyResultSearch: 'Your search yielded no results',
     contact: 'Contact | Contacts',
+    column: 'Column | Columns',
   },
   // date-related texts
   date: {
@@ -136,7 +150,19 @@ export default {
     role: 'Role | Roles',
     user: 'User | Users',
     calendar: 'Calendar | Calendars',
+    direction: 'Direction',
+    gateway: 'Gateway | Gateways',
+    hangupCause: 'Hangup cause',
+    hasOption: 'Has option',
+    hasRecording: 'Recording',
+    amdResult: 'AMD result',
+    ratedBy: 'Rated by',
+    talkDuration: 'Talk duration',
+    totalDuration: 'Total duration',
+    transcription: 'Transcription',
+    attachment: 'Attachment | Attachments',
     queue: {
+      queue: 'Queue | Queues',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
         [QueueType.OFFLINE_QUEUE]: 'Offline queue',
@@ -150,6 +176,7 @@ export default {
       },
     },
     agent: {
+      agent: 'Agent | Agents',
       status: {
         [AgentStatus.Online]: 'Online',
         [AgentStatus.Pause]: 'Pause',
@@ -203,6 +230,24 @@ export default {
       [CallDirection.Outbound]: 'Outbound',
     },
   },
+  cases: {
+    status: 'Status',
+    source: 'Source',
+    author: 'Author',
+    reporter: 'Reporter',
+    impacted: 'Impacted',
+    assignee: 'Assignee',
+    group: 'Group',
+    reason: 'Reason | Reasons',
+    rating: 'Rating',
+    service: 'Service | Services',
+    appliedSLA: 'Applied SLA',
+    appliedCondition: 'Applied condition',
+    reactionTime: 'Reaction time',
+    resolutionTime: 'Resolution time',
+    actualReactionTime: 'Actual reaction time',
+    actualResolutionTime: 'Actual resolution time',
+  },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
@@ -216,7 +261,11 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Contacts',
-        [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.CASES]: 'Cases',
+        [CrmSections.PRIORITIES]: 'Priorities',
+        [CrmSections.CLOSE_REASON_GROUPS]: 'Closure reasons',
+        [CrmSections.STATUSES]: 'Statuses',
+        [CrmSections.SLAS]: 'SLA',
         [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
         [CrmSections.SOURCES]: 'Case sources',
         [CrmSections.CONTACT_GROUPS]: 'Contact groups',
@@ -260,6 +309,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
         [AdminSections.QUEUES]: 'Queues',
         [AdminSections.STORAGE]: 'Storage',
+        [AdminSections.STORAGE_POLICIES]: 'Storage policies',
         [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
         [AdminSections.EMAIL_PROFILES]: 'Email profiles',
         [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
@@ -284,6 +334,7 @@ export default {
     macValidator: 'Should look like MAC',
     minValue: 'Value should be not less than',
     maxValue: 'Value should be not much than',
+    maxLength: 'The length should not be greater than',
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
     minLength: 'Quantity of characters should not be less than',
@@ -294,7 +345,10 @@ export default {
     domainValidator: 'Incorrect domain',
     decimalValidator:
       'Decimal precision should be no more than { count } places',
+    latinWithNumber:
+      'The code must contain only letters (A-Z, a-z) and numbers (0-9), and must start with a letter',
     integer: 'The field should contain only whole numbers',
+    nameAlreadyInUse: 'This name is already in use',
   },
   webitelUI: {
     searchBar: {
@@ -303,6 +357,7 @@ export default {
       variableSearchHint: 'Query format: "key=value"',
     },
     timepicker: {
+      day: 'Day:',
       hour: 'Hour:',
       min: 'Min:',
       sec: 'Sec:',
@@ -349,11 +404,25 @@ export default {
       breakOut: 'Break Out',
     },
     iconAction: {
-      deleteActionHint: 'Delete',
-      editActionHint: 'Edit',
-      addActionHint: 'Add',
-      historyActionHint: 'History',
-      downloadActionHint: 'Download',
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
+        [IconAction.COLUMNS]: 'Select columns',
+        [IconAction.VARIABLES]: 'Select variables columns',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+        [IconAction.CLEAR]: ({ linked }) =>
+          linked('webitelUI.tableActions.filterReset'),
+        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
+        [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
+        [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+      },
     },
     errorPages: {
       goBack: 'Go back',
@@ -395,8 +464,8 @@ export default {
     },
     empty: {
       text: {
-        empty: 'No results were found',
-        filters: 'No results for the filters',
+        empty: 'There are no records yet',
+        filters: 'Unfortunately, no records match your criteria',
       },
     },
     agentStatusSelect: {
@@ -415,6 +484,181 @@ export default {
       title: 'Save failed',
       label: 'Something went wrong, please try again',
       exportToJson: 'Export to JSON',
+    },
+    filters: {
+      predefinedLabels: {
+        /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
+        createdAt: {
+          startOfToday: 'From the start of today',
+          startOfMonth: 'From this month',
+        },
+      },
+      addFilter: ({ linked }) => {
+        return `${linked('reusable.add')} a ${linked(
+          'reusable.filter',
+        ).toLowerCase()}`;
+      },
+      filterName: ({ linked }) => {
+        // because filter select has a 'column' label now
+        return linked('vocabulary.column');
+      },
+      filterValue: ({ linked }) => {
+        return linked('vocabulary.values');
+      },
+      filterValueFrom: ({ linked }) => {
+        const from = linked('reusable.from').toLowerCase();
+        return `${linked('vocabulary.values')} ${from}`;
+      },
+      filterLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      actualReactionTime: ({ linked }) => {
+        return linked('cases.actualReactionTime');
+      },
+      actualResolutionTime: ({ linked }) => {
+        return linked('cases.actualResolutionTime');
+      },
+      agent: ({ linked }) => {
+        return linked('objects.agent.agent');
+      },
+      amdResult: ({ linked }) => {
+        return linked('objects.amdResult');
+      },
+      assignee: ({ linked }) => {
+        return linked('cases.assignee');
+      },
+      author: ({ linked }) => {
+        return linked('cases.author');
+      },
+      cause: ({ linked }) => {
+        return linked('objects.hangupCause');
+      },
+      closeReasonGroups: ({ linked }) => {
+        return linked('cases.reason');
+      },
+      contact: ({ linked }) => {
+        return linked('vocabulary.contact');
+      },
+      contactGroup: ({ linked }) => {
+        return linked('cases.group');
+      },
+      createdAtFrom: ({ linked }) => {
+        return linked('reusable.from');
+      },
+      createdAtTo: ({ linked }) => {
+        return linked('reusable.to');
+      },
+      direction: ({ linked }) => {
+        return linked('objects.direction');
+      },
+      gateway: ({ linked }) => {
+        return linked('objects.gateway');
+      },
+      grantee: ({ linked }) => {
+        return linked('objects.grantee');
+      },
+      hasAttachment: ({ linked }) => {
+        return linked('objects.attachment');
+      },
+      hasFile: ({ linked }) => {
+        return linked('objects.hasRecording');
+      },
+      hasTranscription: ({ linked }) => {
+        return linked('objects.transcription');
+      },
+      impacted: ({ linked }) => {
+        return linked('cases.impacted');
+      },
+      priority: ({ linked }) => {
+        return linked('vocabulary.priority');
+      },
+      queue: ({ linked }) => {
+        return linked('objects.queue.queue');
+      },
+      rated: 'Rated',
+      ratedBy: ({ linked }) => {
+        return linked('objects.ratedBy');
+      },
+      rating: ({ linked }) => {
+        return linked('cases.rating');
+      },
+      reactionTime: ({ linked }) => {
+        return linked('cases.reactionTime');
+      },
+      reporter: ({ linked }) => {
+        return linked('cases.reporter');
+      },
+      resolutionTime: ({ linked }) => {
+        return linked('cases.resolutionTime');
+      },
+      score: ({ linked }) => {
+        return linked('webitelUI.auditForm.score');
+      },
+      service: ({ linked }) => {
+        return linked('cases.service');
+      },
+      sla: ({ linked }) => {
+        return linked('cases.appliedSLA');
+      },
+      slaCondition: ({ linked }) => {
+        return linked('cases.appliedCondition');
+      },
+      source: ({ linked }) => {
+        return linked('cases.source');
+      },
+      status: ({ linked }) => {
+        return linked('cases.status');
+      },
+      tag: ({ linked }) => {
+        return linked('vocabulary.tag');
+      },
+      talkDuration: ({ linked }) => {
+        return linked('objects.talkDuration');
+      },
+      team: ({ linked }) => {
+        return linked('objects.team');
+      },
+      totalDuration: ({ linked }) => {
+        return linked('objects.totalDuration');
+      },
+      user: ({ linked }) => {
+        return linked('objects.user');
+      },
+      variable: ({ linked }) => {
+        return linked('vocabulary.variables');
+      },
+      presets: {
+        preset: 'Preset | Presets',
+        overwritePresetTitle: 'A preset with this name already exists.',
+        overwritePresetText: 'Do you want to replace it?',
+        notifications: {
+          success: {
+            /* suka ebuchij linked(,param) ne praciuje */
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
+      },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `The ${named('entity').toLowerCase()} was updated`,
+      create: ({ named }) => `The ${named('entity').toLowerCase()} was saved`,
+      delete: ({ named }) => `The ${named('entity').toLowerCase()} was deleted`,
     },
   },
   errorNotifications: {

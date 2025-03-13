@@ -1,11 +1,15 @@
-const WebitelApplications = Object.freeze({
-  ADMIN: 'admin',
-  AGENT: 'agent',
-  SUPERVISOR: 'supervisor',
-  HISTORY: 'history',
-  AUDIT: 'audit',
-  ANALYTICS: 'grafana',
-  CRM: 'crm',
-});
+import upperCase from 'lodash/upperCase.js';
 
-export default WebitelApplications;
+import { WtApplication } from './WtApplication';
+
+/**
+ * @deprecated
+ * default export is for backward compatibility,
+ * use ts enum instead (and don't forget to compile it)
+ */
+export default Object.fromEntries(
+  Object.entries(WtApplication).map(([key, value]) => [
+    upperCase(key).replaceAll(' ', '_'),
+    value,
+  ]),
+);

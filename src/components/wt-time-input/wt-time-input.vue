@@ -28,7 +28,7 @@
         :value="value"
         class="wt-time-input__input"
         type="number"
-        @input="$emit('input', $event.target.value)"
+        v-on="listeners"
       />
     </div>
     <wt-input-info
@@ -106,6 +106,12 @@ export default {
     showInfo() {
       return this.isValidation && !this.hideInputInfo;
     },
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: (event) => this.$emit('input', event.target.value),
+      };
+    },
   },
 };
 </script>
@@ -134,20 +140,20 @@ export default {
     border-color: var(--wt-text-field-input-border-color);
     border-radius: var(--border-radius);
     background: transparent;
+  }
 
-    .wt-time-input--invalid &,
-    .wt-time-input--invalid:hover & {
-      color: var(--wt-text-field-error-text-color);
-      border-color: var(--wt-text-field-input-border-error-color);
-      outline: none; // prevent outline overlapping false color
-      @include wt-placeholder('error');
-    }
+  &.wt-time-input--invalid .wt-time-input__input,
+  &.wt-time-input--invalid:hover .wt-time-input__input {
+    color: var(--wt-text-field-error-text-color);
+    border-color: var(--wt-text-field-input-border-error-color);
+    outline: none; // prevent outline overlapping false color
+    @include wt-placeholder('error');
+  }
 
-    .wt-time-input--disabled & {
-      border-color: var(--wt-text-field-input-border-disabled-color);
-      background: var(--wt-text-field-input-background-disabled-color);
-      @include wt-placeholder('disabled');
-    }
+  &.wt-time-input--disabled .wt-time-input__input {
+    border-color: var(--wt-text-field-input-border-disabled-color);
+    background: var(--wt-text-field-input-background-disabled-color);
+    @include wt-placeholder('disabled');
   }
 }
 

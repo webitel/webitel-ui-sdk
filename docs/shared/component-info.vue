@@ -5,6 +5,7 @@ import { computed } from 'vue';
 
 const md = mdInit({
   linkify: true,
+  html: true,
 });
 
 const props = defineProps({
@@ -15,8 +16,6 @@ const props = defineProps({
 });
 
 const calcDefaultValue = (defaultValue) => {
-  console.info(defaultValue);
-
   if (!defaultValue) {
     return ' - ';
   }
@@ -52,6 +51,7 @@ const result = computed(() => {
         ({ name, type, required, defaultValue, description, tags }) => {
           const _name = `\`${name}\``;
           const _type = `\`${type.name.split('|')}\``;
+          const _description = description?.replaceAll('\n', '<br>');
 
           const _defaultValue = calcDefaultValue(defaultValue);
 
@@ -70,7 +70,7 @@ const result = computed(() => {
             _required,
             _type,
             _defaultValue,
-            description,
+            _description,
             example,
             deprecated,
           ];
@@ -117,7 +117,11 @@ const result = computed(() => {
 </script>
 
 <template>
-  <div v-html="result" />
+  <div class="component-info" v-html="result" />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.component-info td {
+  white-space: nowrap;
+}
+</style>

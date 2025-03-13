@@ -17,7 +17,10 @@
             @click="sort(col)"
           >
             <div class="wt-tree-table-th__content">
-              <div v-if="key === 0 && selectable">
+              <div
+                v-if="key === 0 && selectable"
+                @click.stop
+              >
                 <wt-checkbox
                   :selected="isAllSelected"
                   @change="selectAll"
@@ -90,11 +93,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults } from 'vue';
+import {computed, withDefaults} from 'vue';
 
-import { useWtTable } from '../../composables/useWtTable/useWtTable.ts';
+import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
-import type { TableHeader } from '../wt-table/types/table-header.js';
+import { WtCheckbox } from '../index';
+import type { WtTableHeader } from '../wt-table/types/WtTable.d.ts';
 import WtTreeTableRow from '../wt-tree-table-row/wt-tree-table-row.vue';
 
 const props = withDefaults(
@@ -102,7 +106,7 @@ const props = withDefaults(
     /**
      * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
      */
-    headers: TableHeader[];
+    headers: WtTableHeader[];
     /**
      * 'List of data, represented by table. '
      */
@@ -193,7 +197,7 @@ const { tableHeaders: dataHeaders } = useWtTable({
   headers: props.headers,
 });
 
-const isColSortable = ({ sort }: TableHeader) => {
+const isColSortable = ({ sort }: WtTableHeader) => {
   /*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
         strict check for  === undefined is used because col.sort = null is sort order too (actualu, without sort)
         so we need to check if this property is present
@@ -201,7 +205,7 @@ const isColSortable = ({ sort }: TableHeader) => {
   return props.sortable && sort !== undefined;
 };
 
-const sort = (col: TableHeader) => {
+const sort = (col: WtTableHeader) => {
   if (!isColSortable(col)) return;
   const nextSort = getNextSortOrder(col.sort);
   emit('sort', col, nextSort);

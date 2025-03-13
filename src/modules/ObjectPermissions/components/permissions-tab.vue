@@ -8,28 +8,31 @@
         {{ t('access.operations') }}
       </h3>
       <div class="table-title__actions-wrap">
-        <wt-action-bar
-          :include="[IconAction.REFRESH]"
-          @click:refresh="loadData"
-        />
         <role-popup
           v-if="props.access.add"
           :namespace="tableNamespace"
         />
+        <wt-action-bar
+          :include="[IconAction.REFRESH]"
+          @click:refresh="loadData"
+        />
       </div>
     </header>
 
-    <wt-loader v-show="isLoading" />
-
-    <wt-empty
-      v-show="showEmpty"
-      :image="imageEmpty"
-      :text="textEmpty"
-    />
-
     <div class="table-section__table-wrapper">
-      <div>
-        <wt-table-transition v-if="dataList.length && !isLoading">
+
+      <wt-empty
+        v-show="showEmpty"
+        :image="imageEmpty"
+        :text="textEmpty"
+      />
+
+      <wt-loader v-show="isLoading" />
+
+      <div
+        v-if="dataList.length && !isLoading"
+        class="table-section__visible-scroll-wrapper">
+
           <wt-table
             :data="localizedDataList"
             :grid-actions="access.edit"
@@ -84,7 +87,6 @@
               />
             </template>
           </wt-table>
-        </wt-table-transition>
       </div>
       <filter-pagination
         :namespace="filtersNamespace"
@@ -172,6 +174,7 @@ const {
 
   subscribe,
   flushSubscribers,
+  resetFilters,
 } = useTableFilters(tableNamespace);
 
 subscribe({
@@ -183,6 +186,7 @@ restoreFilters();
 
 onUnmounted(() => {
   flushSubscribers();
+  resetFilters();
 });
 
 const {

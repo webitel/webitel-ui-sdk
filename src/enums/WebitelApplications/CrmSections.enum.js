@@ -1,17 +1,14 @@
-const CrmSections = Object.freeze({
-  CONTACTS: 'contacts',
-  CASES: 'cases',
+import upperCase from 'lodash/upperCase.js';
 
-  // CONFIGURATION - LOOKUPS
-  SLAS: 'slas',
-  SERVICE_CATALOGS: 'service-catalogs',
-  PRIORITIES: 'priorities',
-  STATUSES: 'statuses',
-  SOURCES: 'sources',
-  CLOSE_REASON_GROUPS: 'close-reason-groups',
-  CONTACT_GROUPS: 'contact-groups',
-  CASE_SOURCES: 'case-sources',
-  CUSTOM_LOOKUPS: 'custom-lookups',
-});
+import { CrmSections } from './CrmSections';
 
-export default CrmSections;
+/**
+ * @deprecated
+ * default export is for backward compatibility,
+ * use ts enum instead (and don't forget to compile it)
+ */
+export default Object.fromEntries(
+  Object.entries(CrmSections).map(([key, value]) => [
+    upperCase(key).replaceAll(' ', '_'),
+    value]),
+);

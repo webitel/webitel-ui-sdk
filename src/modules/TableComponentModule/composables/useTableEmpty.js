@@ -47,8 +47,8 @@ export const useTableEmpty = (
       empty: t('webitelUI.empty.text.empty'),
     },
     primaryActionText: {
-      filters: t('reusable.add'),
-      error: t('reusable.add'),
+      filters: '',
+      error: '',
       empty: t('reusable.add'),
     },
     secondaryActionText: {
@@ -89,7 +89,7 @@ export const useTableEmpty = (
     if (filters?.value) {
       const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
       const filtersApplied = Object.entries(filters.value).some(
-        ([filterValue, filterName]) =>
+        ([filterName,filterValue]) =>
           !isEmpty(filterValue) && !uncheckedFilters.includes(filterName),
       );
       if (filtersApplied) return EmptyCause.FILTERS;

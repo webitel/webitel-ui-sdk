@@ -39,6 +39,8 @@ export function useValidation({
         validationText = `${t('validation.minValue')} ${v.value.minValue.$params.min}`;
       else if (v.value.maxValue?.$invalid)
         validationText = `${t('validation.maxValue')} ${v.value.maxValue.$params.max}`;
+      else if (v.value.maxLength?.$invalid)
+        validationText = `${t('validation.maxLength')} ${v.value.maxLength.$params.max}`;
       else if (v.value.sipAccountValidator?.$invalid)
         validationText = t('validation.sipAccountValidator');
       else if (v.value.minLength?.$invalid)
@@ -60,6 +62,9 @@ export function useValidation({
         validationText =
           v.value.regex?.$message ||
           `${t('validation.isRegExpMatched')} ${v.value.regex?.$params?.regex}`;
+      else if (v.value.nameAlreadyInUse.$invalid) {
+        validationText = t('validation.nameAlreadyInUse');
+      }
     }
 
     if (customValidators?.value) {

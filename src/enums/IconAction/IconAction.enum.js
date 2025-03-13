@@ -12,6 +12,12 @@ const IconAction = Object.freeze({
   EDIT: 'edit',
   COLLAPSE: 'collapse',
   EXPAND: 'expand',
+  CLOSE: 'close',
+  CANCEL: 'cancel',
+  VARIABLES: 'variables',
+  CLEAR: 'clear',
+  ADD_FILTER: 'add-filter',
+  SAVE: 'save',
 });
 
 export default IconAction;

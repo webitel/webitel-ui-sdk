@@ -9,12 +9,15 @@
       ref="activator"
       class="wt-tooltip__activator"
     >
-      <slot name="activator" />
+      <slot
+        name="activator"
+        v-bind="{ visible: isVisible }"
+      />
     </div>
     <wt-tooltip-floating
       v-if="isVisible"
       ref="floating"
-      v-clickaway="hideTooltip"
+      v-clickaway="onClickAwayAction"
       :class="[popperClass]"
       :style="floatingStyles"
       :triggers="popperTriggers"
@@ -22,7 +25,9 @@
       @hide="hideTooltip"
       @show="showTooltip"
     >
-      <slot v-bind="{ hide: hideTooltip }" />
+      <div ref="floatingChild">
+        <slot v-bind="{ hide: hideTooltip }" />
+      </div>
     </wt-tooltip-floating>
   </div>
 </template>
@@ -36,9 +41,8 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/vue';
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue';
 
-import debounce from '../../scripts/debounce.js';
 import { useTooltipTriggerSubscriptions } from './_internals/useTooltipTriggerSubscriptions.js';
 import WtTooltipFloating from './_internals/wt-tooltip-floating.vue';
 
@@ -67,12 +71,17 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disableClickAway: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['update:visible']);
 
-const activator = ref(null);
-const floating = ref(null);
+const activator = useTemplateRef('activator');
+const floating = useTemplateRef('floating');
+const floatingChild = useTemplateRef('floatingChild');
 const isVisible = ref(props.visible);
 
 const emitVisibilityChange = () => {
@@ -88,10 +97,20 @@ const showTooltip = (event = {}) => {
 };
 
 const hideTooltip = (event = {}) => {
-  if (!isVisible.value || event.usedByTooltip) return;
+  const contains = floatingChild.value?.contains(event.target);
+  if (!isVisible.value || event.usedByTooltip || contains) return;
+
   isVisible.value = false;
   emitVisibilityChange();
   removeScrollListener();
+};
+
+const onClickAwayAction = (event = {}) => {
+  if (props.disableClickAway) {
+    return;
+  }
+
+  hideTooltip(event);
 };
 
 const setScrollListener = () => {

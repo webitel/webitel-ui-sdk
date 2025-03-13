@@ -98,6 +98,7 @@
           <wt-button
             v-if="primaryActionText"
             :size="buttonSize"
+            :disabled="disabledPrimaryAction"
             color="primary"
             @click="() => onPrimaryClick()"
           >
@@ -115,6 +116,7 @@
           <wt-button
             v-if="secondaryActionText"
             :size="buttonSize"
+            :disabled="disabledSecondaryAction"
             color="secondary"
             @click="() => onSecondaryClick()"
           >
@@ -131,8 +133,8 @@
 
 import { computed, useSlots } from 'vue';
 
-import ComponentSize from '../../enums/ComponentSize/ComponentSize.enum.js';
-import { greaterOrEqual, smallerOrEqual } from '../../scripts/compareSize.ts';
+import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
+import { greaterOrEqual, smallerOrEqual } from '../../scripts/compareSize';
 import WtImage from '../wt-image/wt-image.vue';
 
 const props = defineProps({
@@ -182,6 +184,22 @@ const props = defineProps({
   secondaryActionText: {
     type: [String, null],
     default: '',
+  },
+
+  /**
+   * disable primary action button while still showing its text. useful for access control
+   */
+  disabledPrimaryAction: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * disable primary action button while still showing its text. useful for access control
+   */
+  disabledSecondaryAction: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -254,6 +272,7 @@ const onSecondaryClick = onClick('secondary');
 @use '../../css/styleguide/styleguide';
 
 .wt-empty {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   flex-direction: column;

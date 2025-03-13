@@ -1,5 +1,6 @@
 import VueMultiselect from 'vue-multiselect';
 import { ObserveVisibility } from 'vue-observe-visibility';
+
 import validationMixin from '../../../mixins/validationMixin/validationMixin.js';
 import debounce from '../../../scripts/debounce.js';
 import isEmpty from '../../../scripts/isEmpty.js';
@@ -82,16 +83,34 @@ export default {
     showIntersectionObserver() {
       return this.isApiMode && !this.isLoading && this.apiOptions.length;
     },
-    // vue-multiselect doesn't show placeholder if value is empty object
     selectValue() {
+      /* vue-multiselect doesn't show placeholder if value is empty object */
       if (!this.isValue) return '';
 
-      if (this.useValueFromOptionsByProp) {
-        const valueFromOptions = this.cachedOptionsMap[this.value];
-        if (valueFromOptions) return valueFromOptions;
+      let returnedValue = this.value;
+
+      /*
+      coerce single value to array, if it was passed with `multiple` prop
+      by dev mistake or internal error
+       */
+      if (this.multiple && !Array.isArray(returnedValue)) {
+        console.warn(
+          'wt-select: value prop should be an array when using multiple mode',
+        );
+        returnedValue = [returnedValue];
       }
 
-      return this.value;
+      if (this.useValueFromOptionsByProp) {
+        if (this.multiple) {
+          returnedValue = returnedValue.map(
+            (item) => this.cachedOptionsMap[item] || item,
+          );
+        } else {
+          returnedValue = this.cachedOptionsMap[returnedValue] || returnedValue;
+        }
+      }
+
+      return returnedValue;
     },
 
     selectOptions() {
@@ -155,9 +174,16 @@ export default {
     },
 
     input(value) {
-      const emittedValue = this.useValueFromOptionsByProp
-        ? value[this.useValueFromOptionsByProp]
-        : value;
+      let emittedValue = value;
+      if (this.useValueFromOptionsByProp) {
+        if (this.multiple) {
+          emittedValue = value.map(
+            (item) => item[this.useValueFromOptionsByProp],
+          );
+        } else {
+          emittedValue = value[this.useValueFromOptionsByProp];
+        }
+      }
       this.$emit('input', emittedValue); // vue 2
       this.$emit('update:model-value', emittedValue); // vue 3
     },
@@ -174,12 +200,46 @@ export default {
       // load options if becomes enabled
       if (!this.disabled) this.fetchOptions();
     },
-    options: {
+    selectOptions: {
       handler() {
         if (this.trackBy === null) return; // then, options are primitives
 
-        for (const opt of this.options) {
-          this.cachedOptionsMap[opt[this.useValueFromOptionsByProp || this.trackBy]] = opt;
+        for (const opt of this.selectOptions) {
+          this.cachedOptionsMap[
+            opt[this.useValueFromOptionsByProp || this.trackBy]
+          ] = opt;
+        }
+      },
+      immediate: true,
+    },
+    value: {
+      async handler() {
+        /*
+        use case: select api option while using `useValueFromOptionsByProp` prop,
+        then, refresh page and restore selected id. but it may not be in options list,
+
+        when using api-fetched options, selected value, tracked by id,
+         may be not in returned options list,
+        so its necessary to fetch those values separately
+         */
+        if (this.useValueFromOptionsByProp && this.isApiMode) {
+          const valuesArr = Array.isArray(this.value)
+            ? this.value
+            : [this.value];
+          const uncachedValues = valuesArr.filter(() => {
+            return !this.cachedOptionsMap[this.value];
+          });
+
+          if (uncachedValues.length) {
+            const { items } = await this.searchMethod({
+              id: uncachedValues,
+              size: uncachedValues.length,
+            });
+            items.forEach((item) => {
+              this.cachedOptionsMap[item[this.useValueFromOptionsByProp]] =
+                item;
+            });
+          }
         }
       },
       immediate: true,

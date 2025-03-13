@@ -16,13 +16,15 @@
       >
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
-          <img
-            :alt="currentApp"
-            :src="
-              darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
-            "
-            class="wt-navigation-bar__app-pic"
-          />
+          <router-link :to="logoRoute">
+            <img
+              :alt="currentApp"
+              :src="
+                darkMode ? appLogo[currentApp].dark : appLogo[currentApp].light
+              "
+              class="wt-navigation-bar__app-pic"
+            />
+          </router-link>
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
@@ -103,7 +105,7 @@
   </aside>
 </template>
 
-<script>
+<script lang="ts">
 import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
 import ExpandTransition from '../transitions/wt-expand-transition.vue';
 import AdminDark from './assets/dark/app-logo-dark-admin.svg';
@@ -118,6 +120,7 @@ import CrmLight from './assets/light/app-logo-light-crm.svg';
 import HistoryLight from './assets/light/app-logo-light-history.svg';
 import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
 import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
+import { WtNavigationBarNavItem } from "./types/WtNavigationBar";
 
 const appLogo = {
   [WebitelApplications.SUPERVISOR]: {
@@ -154,6 +157,9 @@ export default {
       type: String,
       default: 'admin',
     },
+    /**
+     * @type {WtNavigationBarNavItem[]}
+     */
     nav: {
       type: Array,
       default: () => [],
@@ -162,6 +168,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    logoRoute: {
+      type: String,
+      default: '',
+    }
   },
   data: () => ({
     isOpened: false,
@@ -178,7 +188,7 @@ export default {
             return flatNav.concat(currentNavItem.subNav);
           return [...flatNav, currentNavItem];
         }, [])
-        .find((navItem) => path.includes(navItem.route));
+        .find((navItem) => path.endsWith(navItem.route));
       const currentExpansion = this.nav
         .filter((nav) => nav.subNav)
         .find((nav) => nav.subNav.indexOf(currentNav) !== -1);

@@ -23,7 +23,7 @@
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
       :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
-      :placeholder="label || placeholder"
+      :placeholder="placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')"
       auto-apply
       class="wt-datepicker__datepicker"
       v-bind="{ ...$attrs, ...$props }"
@@ -38,11 +38,11 @@
         />
       </template>
       <template #clear-icon>
-        <wt-icon
-          :class="{ 'wt-datepicker__open-arrow--opened': isOpened }"
+        <wt-icon-btn
+          v-if="clearable && value"
           :color="disabled ? 'disabled' : 'default'"
-          class="wt-datepicker__open-arrow"
-          icon="arrow-down"
+          icon="close"
+          @click.stop="clearValue"
         />
       </template>
       <template #arrow-left>
@@ -132,6 +132,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  clearable: {
+    type: Boolean,
+    default: false,
+  },
 });
 const emit = defineEmits(['input']);
 
@@ -143,6 +147,16 @@ const isDateTime = props.mode === 'datetime';
 const requiredLabel = computed(() => {
   return props.required ? `${props.label}*` : props.label;
 });
+
+const clearValue = () => {
+  emit('input', null);
+
+  if (isOpened.value) {
+    datepicker?.value.closeMenu();
+  }
+
+  isOpened.value = false;
+};
 </script>
 
 <style lang="scss">
@@ -248,14 +262,6 @@ const requiredLabel = computed(() => {
 
   .wt-time-input {
     flex-grow: 1;
-  }
-}
-
-.wt-datepicker__open-arrow {
-  transition: var(--transition);
-
-  &--opened {
-    transform: rotate(180deg);
   }
 }
 </style>

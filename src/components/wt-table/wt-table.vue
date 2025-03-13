@@ -1,7 +1,13 @@
 <template>
   <div class="wt-table">
-    <table class="wt-table__table">
-      <thead class="wt-table__head">
+    <table
+      class="wt-table__table"
+      :class="{ 'wt-table__table--fixed-actions': fixedActions }"
+    >
+      <thead
+        v-if="!headless"
+        class="wt-table__head"
+      >
         <tr
           :style="columnsStyle"
           class="wt-table__tr wt-table__tr__head"
@@ -183,6 +189,20 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     * 'If true, 3 icon actions in the last column have position:sticky and fixed on the right'
+     */
+    fixedActions: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * 'If true, displays table without header.'
+     */
+    headless: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['sort', 'update:selected'],
 
@@ -307,6 +327,24 @@ export default {
 .wt-table__table {
   width: 100%;
   border-collapse: collapse;
+
+  &--fixed-actions {
+    // make action icons fixed to right
+
+    .wt-table__tr {
+      .wt-table__td__actions {
+        position: sticky;
+        right: 0;
+        background: var(--content-wrapper-color);
+      }
+
+      &:nth-child(2n) {
+        .wt-table__td__actions {
+          background: var(--wt-table-zebra-color);
+        }
+      }
+    }
+  }
 }
 
 .wt-table__tr {

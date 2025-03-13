@@ -82,6 +82,8 @@ const close = () => {
   const { query, hash, name } = route;
   const { permissionId, ...params } = route.params;
 
+  grantee.value = null;
+
   return router.push({
     query,
     hash,

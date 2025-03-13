@@ -5,6 +5,8 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+
+import { IconAction } from '../../enums';
 import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import QueueType from '../../enums/QueueType/QueueType.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
@@ -18,8 +20,13 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    replace: 'Заменить',
+    download: 'Скачать',
+    history: 'История',
+    filter: 'Фильтр | Фильтры',
     total: 'Всего',
     ok: 'Ок',
+    object: 'Объект',
     save: 'Сохранить',
     saveAs: 'Сохранить как',
     saved: 'Сохранено',
@@ -31,6 +38,8 @@ export default {
     import: 'Импорт',
     export: 'Экспорт',
     true: 'Да',
+    title: 'Заголовок',
+    position: 'Позиция',
     delete: 'Удалить',
     search: 'Поиск',
     open: 'Открыть',
@@ -72,9 +81,13 @@ export default {
     read: 'Читать',
     create: 'Создать',
     draggable: 'Перетащить',
+    unassigned: 'Неназначенные',
+    showUnassigned: 'Показать неназначенные',
   },
   vocabulary: {
+    apply: 'Применить',
     language: 'Язык',
+    column: 'Колонка',
     voice: 'Голос',
     format: 'Формат',
     text: 'Текст',
@@ -84,10 +97,11 @@ export default {
     login: 'Логин',
     host: 'Хост',
     time: 'Время',
-    channel: 'Канал',
+    channel: 'Канал | Каналы',
     file: 'Файл',
     logout: 'Выйти',
-    priority: 'Приоритет',
+    priority: 'Приоритет | Приоритеты',
+    color: 'Цвет',
     variables: 'Переменная | Переменные',
     type: 'Тип',
     tag: 'Тег | Теги',
@@ -130,12 +144,24 @@ export default {
     auditor: 'Аудитор | Аудиторы',
     region: 'Регион | Регионы',
     communicationType: 'Тип связи | Типы связи',
-    grantee: 'Получатель | Получатели',
+    grantee: 'Владелец прав | Владельцы прав',
     grantor: 'Праводатель | Праводатели',
     user: 'Пользователь | Пользователи',
     role: 'Роль | Роли',
     calendar: 'Календарь | Календари',
+    direction: 'Направление',
+    gateway: 'Шлюз | Шлюзы',
+    hangupCause: 'Причина окончания',
+    hasOption: 'Has option',
+    hasRecording: 'Запись разговора',
+    amdResult: 'AMD результат',
+    ratedBy: 'Оценено кем',
+    talkDuration: 'Длительность разговора',
+    totalDuration: 'Общая длительность',
+    transcription: 'Транскрипция',
+    attachment: 'Вложение | Вложения',
     queue: {
+      queue: 'Очередь | Очереди',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Входящая очередь',
         [QueueType.OFFLINE_QUEUE]: 'Оффлайн очередь',
@@ -149,6 +175,7 @@ export default {
       },
     },
     agent: {
+      agent: 'Оператор | Операторы',
       status: {
         [AgentStatus.Online]: 'Онлайн',
         [AgentStatus.Pause]: 'Пауза',
@@ -196,6 +223,24 @@ export default {
       [ChannelType.Job]: 'Задача',
     },
   },
+  cases: {
+    status: 'Статус',
+    source: 'Источник',
+    author: 'Автор',
+    reporter: 'Инициатор',
+    impacted: 'Влияет на',
+    assignee: 'Исполнитель',
+    group: 'Группа исполнителей',
+    reason: 'Причина | Причины',
+    rating: 'Оценка',
+    service: 'Сервисы | Сервисы',
+    appliedSLA: 'Примененный SLA',
+    appliedCondition: 'Примененное условие',
+    reactionTime: 'Плановое время реакции',
+    resolutionTime: 'Плановое время решения',
+    actualReactionTime: 'Фактическое время реакции',
+    actualResolutionTime: 'Фактическое время решения',
+  },
   calls: {
     direction: {
       [CallDirection.Inbound]: 'Входящий | Входящие',
@@ -215,7 +260,11 @@ export default {
       name: 'CRM',
       sections: {
         [CrmSections.CONTACTS]: 'Контакты',
-        [CrmSections.SLAS]: 'SLAS',
+        [CrmSections.CASES]: 'Обращения',
+        [CrmSections.PRIORITIES]: 'Приоритеты',
+        [CrmSections.CLOSE_REASON_GROUPS]: 'Причины закрытия',
+        [CrmSections.STATUSES]: 'Статусы',
+        [CrmSections.SLAS]: 'SLA',
         [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервисов',
         [CrmSections.SOURCES]: 'Источники обращений',
         [CrmSections.CONTACT_GROUPS]: 'Группы контактов',
@@ -259,6 +308,7 @@ export default {
         [AdminSections.RESOURCE_GROUPS]: 'Группы ресурсов',
         [AdminSections.QUEUES]: 'Очереди',
         [AdminSections.STORAGE]: 'Хранилища',
+        [AdminSections.STORAGE_POLICIES]: 'Политики хранения файлов',
         [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
         [AdminSections.EMAIL_PROFILES]: 'Email профили',
         [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
@@ -282,6 +332,7 @@ export default {
     macValidator: 'Необходимо ввести MAC-адрес',
     minValue: 'Значение должно быть не меньше',
     maxValue: 'Значение должно быть не больше',
+    maxLength: 'Длина не должна быть больше, чем',
     sameAs: 'Неверный пароль',
     requiredArrayValue: 'Поле не должно быть пустым',
     minLength: 'Количество символов не должно быть меньше, чем',
@@ -292,7 +343,10 @@ export default {
     domainValidator: 'Неправильный домен',
     decimalValidator:
       'Количество десятичных знаков не должно быть больше { count }',
+    latinWithNumber:
+      'Код должен содержать только буквы (A-Z, a-z) и цифры (0-9) и начинатся с буквы',
     integer: 'Поле должно содержать только целые числа',
+    nameAlreadyInUse: 'Это название уже используется',
   },
   webitelUI: {
     searchBar: {
@@ -301,6 +355,7 @@ export default {
       variableSearchHint: 'Формат запроса: "ключ=значение"',
     },
     timepicker: {
+      day: 'День:',
       hour: 'Час:',
       min: 'Мин:',
       sec: 'Сек:',
@@ -347,11 +402,25 @@ export default {
       breakOut: 'Принудительный перерыв',
     },
     iconAction: {
-      deleteActionHint: 'Удалить',
-      editActionHint: 'Редактировать',
-      addActionHint: 'Добавить',
-      historyActionHint: 'История',
-      downloadActionHint: 'Скачать',
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
+        [IconAction.COLUMNS]: 'Добавить колонки',
+        [IconAction.VARIABLES]: 'Выбрать колонки с переменными',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+        [IconAction.CLEAR]: ({ linked }) =>
+          linked('webitelUI.tableActions.filterReset'),
+        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
+        [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
+        [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+      },
     },
     errorPages: {
       goBack: 'Вернуться назад',
@@ -393,8 +462,8 @@ export default {
     },
     empty: {
       text: {
-        empty: 'Поиск не дал результата',
-        filters: 'Нет результатов по фильтрам',
+        empty: 'Записи в разделе еще не созданы',
+        filters: 'К сожалению, ни одна запись не соответствует вашим критериям',
       },
     },
     agentStatusSelect: {
@@ -413,6 +482,179 @@ export default {
       title: 'Ошибка сохранения',
       label: 'Что-то пошло не так. Пожалуйста, попробуйте еще раз',
       exportToJson: 'Экспортировать в JSON',
+    },
+    filters: {
+      predefinedLabels: {  /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
+        createdAt: {
+          startOfToday: 'С начала дня',
+          startOfMonth: 'С начала этого месяца',
+        },
+      },
+      addFilter: ({ linked }) => {
+        return `${linked('reusable.add')} ${linked(
+          'reusable.filter',
+        ).toLowerCase()}`;
+      },
+      filterName: ({ linked }) => {
+        // because filter select has a 'column' label now
+        return linked('vocabulary.column');
+      },
+      filterValue: ({ linked }) => {
+        return linked('vocabulary.values');
+      },
+      filterValueFrom: ({ linked }) => {
+        const from = linked('reusable.from').toLowerCase();
+        return `${linked('vocabulary.values')} ${from}`;
+      },
+      filterLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      actualReactionTime: ({ linked }) => {
+        return linked('cases.actualReactionTime');
+      },
+      actualResolutionTime: ({ linked }) => {
+        return linked('cases.actualResolutionTime');
+      },
+      agent: ({ linked }) => {
+        return linked('objects.agent.agent');
+      },
+      amdResult: ({ linked }) => {
+        return linked('objects.amdResult');
+      },
+      assignee: ({ linked }) => {
+        return linked('cases.assignee');
+      },
+      author: ({ linked }) => {
+        return linked('cases.author');
+      },
+      cause: ({ linked }) => {
+        return linked('objects.hangupCause');
+      },
+      closeReasonGroups: ({ linked }) => {
+        return linked('cases.reason');
+      },
+      contact: ({ linked }) => {
+        return linked('vocabulary.contact');
+      },
+      contactGroup: ({ linked }) => {
+        return linked('cases.group');
+      },
+      createdAtFrom: ({ linked }) => {
+        return linked('reusable.from');
+      },
+      createdAtTo: ({ linked }) => {
+        return linked('reusable.to');
+      },
+      direction: ({ linked }) => {
+        return linked('objects.direction');
+      },
+      gateway: ({ linked }) => {
+        return linked('objects.gateway');
+      },
+      grantee: ({ linked }) => {
+        return linked('objects.grantee');
+      },
+      hasAttachment: ({ linked }) => {
+        return linked('objects.attachment');
+      },
+      hasFile: ({ linked }) => {
+        return linked('objects.hasRecording');
+      },
+      hasTranscription: ({ linked }) => {
+        return linked('objects.transcription');
+      },
+      impacted: ({ linked }) => {
+        return linked('cases.impacted');
+      },
+      priority: ({ linked }) => {
+        return linked('vocabulary.priority');
+      },
+      queue: ({ linked }) => {
+        return linked('objects.queue.queue');
+      },
+      rated: 'Оценены',
+      ratedBy: ({ linked }) => {
+        return linked('objects.ratedBy');
+      },
+      rating: ({ linked }) => {
+        return linked('cases.rating');
+      },
+      reactionTime: ({ linked }) => {
+        return linked('cases.reactionTime');
+      },
+      reporter: ({ linked }) => {
+        return linked('cases.reporter');
+      },
+      resolutionTime: ({ linked }) => {
+        return linked('cases.resolutionTime');
+      },
+      score: ({ linked }) => {
+        return linked('webitelUI.auditForm.score');
+      },
+      service: ({ linked }) => {
+        return linked('cases.service');
+      },
+      sla: ({ linked }) => {
+        return linked('cases.appliedSLA');
+      },
+      slaCondition: ({ linked }) => {
+        return linked('cases.appliedCondition');
+      },
+      source: ({ linked }) => {
+        return linked('cases.source');
+      },
+      status: ({ linked }) => {
+        return linked('cases.status');
+      },
+      tag: ({ linked }) => {
+        return linked('vocabulary.tag');
+      },
+      talkDuration: ({ linked }) => {
+        return linked('objects.talkDuration');
+      },
+      team: ({ linked }) => {
+        return linked('objects.team');
+      },
+      totalDuration: ({ linked }) => {
+        return linked('objects.totalDuration');
+      },
+      user: ({ linked }) => {
+        return linked('objects.user');
+      },
+      variable: ({ linked }) => {
+        return linked('vocabulary.variables');
+      },
+      presets: {
+        preset: 'Пресет | Пресеты',
+        overwritePresetTitle: 'Пресет с таким названием уже существует.',
+        overwritePresetText: 'Хотите его заменить?',
+        notifications: {
+          success: {
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
+      },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `${named('entity')} был обновлён`,
+      create: ({ named }) => `${named('entity')} был сохранён`,
+      delete: ({ named }) => `${named('entity')} был удалён`,
     },
   },
   errorNotifications: {
