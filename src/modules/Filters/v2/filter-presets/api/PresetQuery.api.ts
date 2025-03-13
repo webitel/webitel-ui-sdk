@@ -86,8 +86,14 @@ const addPreset = async ({
   }
 };
 
-const updatePreset = async ({ item: itemInstance, id }) => {
-  const item = applyTransform(itemInstance, [camelToSnake()]);
+const updatePreset = async ({ item: itemInstance, id, namespace }) => {
+  const item = applyTransform(itemInstance, [
+    camelToSnake(),
+    (item) => {
+      item.preset.namespace = namespace;
+      return item;
+    },
+  ]);
   try {
     const response = await service.updatePresetQuery(id, item);
     return applyTransform(response.data, [snakeToCamel()]);
@@ -112,6 +118,6 @@ const PresetQueryAPI = {
   delete: deletePreset,
 };
 
-export { addPreset, deletePreset,getPresetList, updatePreset };
+export { addPreset, deletePreset, getPresetList, updatePreset };
 
 export default PresetQueryAPI;
