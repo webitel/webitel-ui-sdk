@@ -5,6 +5,8 @@ node_modules
 /docs/.vitepress/dist
 /coverage
 
+/src/api/orval
+
 # local env files
 .env.local
 .env.*.local
