@@ -628,8 +628,8 @@ export default {
       },
       presets: {
         preset: 'Preset | Presets',
-        overwritePresetTitle: 'A preset with this name already exists',
-        overwritePresetText: 'A preset with this name already exists. Do you want to replace it?',
+        overwritePresetTitle: 'A preset with this name already exists.',
+        overwritePresetText: 'Do you want to replace it?',
         notifications: {
           success: {
             /* suka ebuchij linked(,param) ne praciuje */
