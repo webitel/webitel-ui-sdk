@@ -167,7 +167,7 @@ const updatePreset = async ({preset, onSuccess, onFailure}) => {
     await PresetQueryAPI.update({
       item: { ...preset },
       id: preset.id,
-      namespace: preset.namespace,
+      namespace: props.namespace,
     });
     eventBus.$emit('notification', {
       type: 'success',
