@@ -126,16 +126,6 @@ const {
 
 filtersManager.value.addFilter({name: 'presetNamespace', value: props.namespace});
 
-watch(showPresetsList, () => {
-  initialize();
-
-  watch(showPresetsList, (value) => {
-    if (value) {
-      loadDataList();
-    }
-  });
-}, {once: true});
-
 const search = computed({
   get: () => {
     return filtersManager.value.getFilter('search')?.value || '';
@@ -144,6 +134,17 @@ const search = computed({
     filtersManager.value.addFilter({name: 'search', value});
   }
 });
+
+watch(showPresetsList, () => {
+  initialize();
+
+  watch(showPresetsList, (value) => {
+    if (value) {
+      search.value = '';
+      loadDataList();
+    }
+  });
+}, {once: true});
 
 const selectedPreset = ref();
 
