@@ -67,7 +67,7 @@
 
 <script lang="ts" setup>
 import {type StoreDefinition, storeToRefs } from "pinia";
-import {computed, inject, ref, watch} from "vue";
+import {computed, inject, ref, watch, onUnmounted} from "vue";
 import {useI18n} from "vue-i18n";
 
 import {WtButton, WtEmpty, WtPopup, WtSearchBar, WtIconAction} from "../../../../../../components/index";
@@ -144,7 +144,10 @@ watch(showPresetsList, () => {
   watch(showPresetsList, (value) => {
     if (value) {
       search.value = '';
-      loadDataList();
+      /* search.value reset causes re-fetch as filter change, so
+      loadDataList() is commented.
+      TODO: implement ability to set filters "silently" and refactor this code */
+      // loadDataList();
     }
   });
 }, {once: true});
