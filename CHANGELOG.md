@@ -1,3 +1,8 @@
+## [v25.4.33] - 2025-03-14
+### :bug: Bug Fixes
+- [`2c54d26`](https://github.com/webitel/webitel-ui-sdk/commit/2c54d2690a26d091cb835ad3f0b609745f7a734d) - "description" locale usage in presets *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.32] - 2025-03-14
 ### :bug: Bug Fixes
 - [`1379b0e`](https://github.com/webitel/webitel-ui-sdk/commit/1379b0e09d87948a3438c519757eb394f3e56fcd) - presets-related fixes, bump ver *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1526,3 +1531,4 @@
 [v25.4.28]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.27...v25.4.28
 [v25.4.30]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.29...v25.4.30
 [v25.4.32]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.31...v25.4.32
+[v25.4.33]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.32...v25.4.33
