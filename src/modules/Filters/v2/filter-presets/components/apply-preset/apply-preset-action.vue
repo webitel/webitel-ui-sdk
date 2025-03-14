@@ -28,9 +28,9 @@
 
           <section class="available-presets-list">
             <preset-preview
-              v-for="(preset, index) of dataList"
+              v-for="(preset) of dataList"
               :key="preset.id"
-              :collapsed="!!index"
+              collapsed
               :is-selected="preset === selectedPreset"
               :preset="preset"
               @preset:select="selectedPreset = preset"
