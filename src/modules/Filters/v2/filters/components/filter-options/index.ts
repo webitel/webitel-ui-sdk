@@ -1,3 +1,5 @@
+import type {Component} from "vue";
+
 import ActualReactionTimeFilter from './actual-reaction-time/actual-reaction-time-filter-value-field.vue';
 import ActualReactionTimeFilterPreview from './actual-reaction-time/actual-reaction-time-filter-value-preview.vue';
 import ActualResolutionTimeFilter from './actual-resolution-time/actual-resolution-time-filter-value-field.vue';
@@ -24,6 +26,7 @@ import CreatedAtToFilter from './created-at-to/created-at-to-filter-value-field.
 import CreatedAtToFilterPreview from './created-at-to/created-at-to-filter-value-preview.vue';
 import DirectionFilter from './direction/direction-filter-value-field.vue';
 import DirectionFilterPreview from './direction/direction-filter-value-preview.vue';
+import {FilterOption} from "../../enums/FilterOption";
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
 import GranteeFilter from './grantee/grantee-filter-value-field.vue';
@@ -156,4 +159,88 @@ export {
   UserFilterPreview,
   VariableFilter,
   VariableFilterPreview,
+};
+
+export const FilterOptionToValueComponentMap: Record<FilterOption, Component> = {
+  [FilterOption.Agent]: AgentFilter,
+  [FilterOption.AmdResult]: AmdResultFilter,
+  [FilterOption.Contact]: ContactFilter,
+  [FilterOption.Direction]: DirectionFilter,
+  [FilterOption.Rated]: HasRatingFilterValueField,
+  [FilterOption.Gateway]: GatewayFilter,
+  [FilterOption.Grantee]: GranteeFilter,
+  [FilterOption.Cause]: CauseFilter,
+  [FilterOption.Queue]: QueueFilter,
+  [FilterOption.RatedBy]: RatedByFilter,
+  [FilterOption.HasFile]: HasFileFilter,
+  [FilterOption.Score]: ScoreFilter,
+  [FilterOption.Tag]: TagFilter,
+  [FilterOption.TalkDuration]: TalkDurationFilter,
+  [FilterOption.Team]: TeamFilter,
+  [FilterOption.TotalDuration]: TotalDurationFilter,
+  [FilterOption.HasTranscription]: HasTranscriptionFilter,
+  [FilterOption.User]: UserFilter,
+  [FilterOption.Variable]: VariableFilter,
+  [FilterOption.CreatedAtFrom]: CreatedAtFromFilter,
+  [FilterOption.CreatedAtTo]: CreatedAtToFilter,
+  [FilterOption.Status]: CaseStatusFilter,
+  [FilterOption.Source]: CaseSourceFilter,
+  [FilterOption.Service]: CaseServiceFilter,
+  [FilterOption.Author]: AuthorFilter,
+  [FilterOption.Reporter]: ReporterFilter,
+  [FilterOption.Impacted]: ImpactedFilter,
+  [FilterOption.Assignee]: AssigneeFilter,
+  [FilterOption.ContactGroup]: ContactGroupFilter,
+  [FilterOption.Priority]: CasePriorityFilter,
+  [FilterOption.CloseReasonGroups]: CloseReasonGroupsCaseFilter,
+  [FilterOption.Rating]: RatingFromToFilter,
+  [FilterOption.Sla]: SlaFilter,
+  [FilterOption.SlaCondition]: SlaConditionFilter,
+  [FilterOption.ReactionTime]: ReactionTimeFilter,
+  [FilterOption.ResolutionTime]: ResolutionTimeFilter,
+  [FilterOption.ActualReactionTime]: ActualReactionTimeFilter,
+  [FilterOption.ActualResolutionTime]: ActualResolutionTimeFilter,
+  [FilterOption.HasAttachment]: HasAttachmentFilter,
+};
+
+export const FilterOptionToPreviewComponentMap: Record<FilterOption, Component> = {
+  [FilterOption.Agent]: AgentFilterPreview,
+  [FilterOption.AmdResult]: AmdResultFilterPreview,
+  [FilterOption.Contact]: ContactFilterPreview,
+  [FilterOption.Direction]: DirectionFilterPreview,
+  [FilterOption.Rated]: HasRatingFilterValuePreview,
+  [FilterOption.Gateway]: GatewayFilterPreview,
+  [FilterOption.Grantee]: GranteeFilterPreview,
+  [FilterOption.Cause]: CauseFilterPreview,
+  [FilterOption.Queue]: QueueFilterPreview,
+  [FilterOption.RatedBy]: RatedByFilterPreview,
+  [FilterOption.HasFile]: HasFileFilterPreview,
+  [FilterOption.Score]: ScoreFilterPreview,
+  [FilterOption.Tag]: TagFilterPreview,
+  [FilterOption.TalkDuration]: TalkDurationFilterPreview,
+  [FilterOption.Team]: TeamFilterPreview,
+  [FilterOption.TotalDuration]: TotalDurationFilterPreview,
+  [FilterOption.HasTranscription]: HasTranscriptionFilterPreview,
+  [FilterOption.User]: UserFilterPreview,
+  [FilterOption.Variable]: VariableFilterPreview,
+  [FilterOption.CreatedAtFrom]: CreatedAtFromFilterPreview,
+  [FilterOption.CreatedAtTo]: CreatedAtToFilterPreview,
+  [FilterOption.Status]: CaseStatusFilterPreview,
+  [FilterOption.Source]: CaseSourceFilterPreview,
+  [FilterOption.Service]: CaseServiceFilterPreview,
+  [FilterOption.Author]: AuthorFilterPreview,
+  [FilterOption.Reporter]: ReporterFilterPreview,
+  [FilterOption.Impacted]: ImpactedFilterPreview,
+  [FilterOption.Assignee]: AssigneeFilterPreview,
+  [FilterOption.ContactGroup]: ContactGroupFilterPreview,
+  [FilterOption.Priority]: CasePriorityFilterPreview,
+  [FilterOption.CloseReasonGroups]: CloseReasonGroupsCaseFilterPreview,
+  [FilterOption.Rating]: RatingFromToFilterPreview,
+  [FilterOption.Sla]: SlaFilterPreview,
+  [FilterOption.SlaCondition]: SlaConditionFilterPreview,
+  [FilterOption.ReactionTime]: ReactionTimeFilterPreview,
+  [FilterOption.ResolutionTime]: ResolutionTimeFilterPreview,
+  [FilterOption.ActualReactionTime]: ActualReactionTimeFilterPreview,
+  [FilterOption.ActualResolutionTime]: ActualResolutionTimeFilterPreview,
+  [FilterOption.HasAttachment]: HasAttachmentFilterPreview,
 };

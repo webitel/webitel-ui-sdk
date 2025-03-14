@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "24.12.171",
+  "version": "24.12.172",
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -20,7 +20,8 @@
     "link": "npm link",
     "update-node": "nvm install --lts && nvm alias default node",
     "i": "npm install",
-    "lint:package": "publint"
+    "lint:package": "publint",
+    "orval": "orval"
   },
   "main": "./dist/ui-sdk.js",
   "type": "module",
@@ -113,11 +114,12 @@
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^11.2.0",
-    "@webitel/styleguide": "^24.12.22",
+    "@webitel/styleguide": "^24.12.25",
     "autosize": "^6.0.1",
     "axios": "^1.7.7",
     "clipboard-copy": "^4.0.1",
     "csv-stringify": "^5.5.3",
+    "date-fns": "^4.1.0",
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",
@@ -138,7 +140,7 @@
     "vue-router": "^4.4.5",
     "webitel-sdk": "^24.10.29",
     "xlsx": "^0.18.5",
-    "date-fns": "^4.1.0"
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
@@ -159,6 +161,7 @@
     "happy-dom": "^15.11.6",
     "markdown-it": "^14.1.0",
     "markdown-table": "^3.0.4",
+    "orval": "^7.6.0",
     "path": "^0.12.7",
     "pinia": "^2.3.0",
     "postcss": "^8.4.49",

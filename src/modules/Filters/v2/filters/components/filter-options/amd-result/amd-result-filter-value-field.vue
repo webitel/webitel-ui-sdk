@@ -19,7 +19,7 @@ import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { AmdResultOptions } from '../../enums/amd-result-options';
+import { AmdResultOptions } from '../../../enums/amd-result-options';
 
 const model = defineModel<string>();
 const { t } = useI18n();

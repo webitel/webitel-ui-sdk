@@ -20,6 +20,7 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    replace: 'Замінити',
     download: 'Завантажити',
     history: 'Історія',
     filter: 'Фільтр | Фільтри',
@@ -345,6 +346,7 @@ export default {
     latinWithNumber:
       'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9) і починатися з літери',
     integer: 'Поле повинно містити лише цілі числа',
+    nameAlreadyInUse: 'Така назва вже використовується',
   },
   webitelUI: {
     searchBar: {
@@ -418,6 +420,12 @@ export default {
         [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
         [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
         [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
       },
     },
     errorPages: {
@@ -460,7 +468,7 @@ export default {
     },
     empty: {
       text: {
-        empty: 'Записи у розділі ще не створені',
+        empty: 'Записи ще не створені',
         filters: 'На жаль, жоден запис не відповідає вашим критеріям',
       },
     },
@@ -621,6 +629,37 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      presets: {
+        preset: 'Пресет | Пресети',
+        overwritePresetTitle: 'Пресет з такою назвою вже існує.',
+        overwritePresetText: 'Бажаєте його замінити?',
+        notifications: {
+          success: {
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
+      },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `${named('entity')} було оновлено`,
+      create: ({ named }) => `${named('entity')} було збережено`,
+      delete: ({ named }) => `${named('entity')} було видалено`,
     },
   },
   errorNotifications: {

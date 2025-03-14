@@ -20,6 +20,7 @@ import { snakeToCamel } from '../../scripts/caseConverters.js';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    replace: 'Replace',
     download: 'Download',
     history: 'History',
     filter: ({ plural }) => plural(['Filter', 'Filters']),
@@ -347,6 +348,7 @@ export default {
     latinWithNumber:
       'The code must contain only letters (A-Z, a-z) and numbers (0-9), and must start with a letter',
     integer: 'The field should contain only whole numbers',
+    nameAlreadyInUse: 'This name is already in use',
   },
   webitelUI: {
     searchBar: {
@@ -420,6 +422,12 @@ export default {
         [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
         [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
         [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
       },
     },
     errorPages: {
@@ -624,6 +632,38 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      presets: {
+        preset: 'Preset | Presets',
+        overwritePresetTitle: 'A preset with this name already exists.',
+        overwritePresetText: 'Do you want to replace it?',
+        notifications: {
+          success: {
+            /* suka ebuchij linked(,param) ne praciuje */
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
+      },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `The ${named('entity').toLowerCase()} was updated`,
+      create: ({ named }) => `The ${named('entity').toLowerCase()} was saved`,
+      delete: ({ named }) => `The ${named('entity').toLowerCase()} was deleted`,
     },
   },
   errorNotifications: {
