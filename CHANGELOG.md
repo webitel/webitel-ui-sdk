@@ -1,3 +1,13 @@
+## [v25.4.32] - 2025-03-14
+### :bug: Bug Fixes
+- [`1379b0e`](https://github.com/webitel/webitel-ui-sdk/commit/1379b0e09d87948a3438c519757eb394f3e56fcd) - presets-related fixes, bump ver *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`b461165`](https://github.com/webitel/webitel-ui-sdk/commit/b461165ca7e74379ef05be6e1a16a71ba61e57b5) - save-preset-popup.vue description to filters gap *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`7576bff`](https://github.com/webitel/webitel-ui-sdk/commit/7576bff790ec36cac11ed446557c8d9a3fec9ee2) - collapse all presets in apply-preset-action.vue by default *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`9b7ee65`](https://github.com/webitel/webitel-ui-sdk/commit/9b7ee6540f35645b6ca12347537a168249d66a27) - duplicated presets list load after re-opening apply-preset-action.vue *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`89a1111`](https://github.com/webitel/webitel-ui-sdk/commit/89a11118ae007eb56af44930c92925ef57a71f94) - rm word "section" in ru, ua wt-empty.vue "empty" locales *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`5848b86`](https://github.com/webitel/webitel-ui-sdk/commit/5848b866e483a22d1f50fed067c25f76ea289841) - presets popups styles, dynamic-filter-panel-wrapper.vue size prop, wt-label.vue typo and paddings changed *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.30] - 2025-03-13
 ### :bug: Bug Fixes
 - [`99bfb3d`](https://github.com/webitel/webitel-ui-sdk/commit/99bfb3d356db3156027c19ecb66d37792154445e) - delete console.log[WTEL-6487](https://webitel.atlassian.net/browse/WTEL-6487) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1515,3 +1525,4 @@
 [v25.04.27]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.26...v25.04.27
 [v25.4.28]: https://github.com/webitel/webitel-ui-sdk/compare/v25.04.27...v25.4.28
 [v25.4.30]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.29...v25.4.30
+[v25.4.32]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.31...v25.4.32
