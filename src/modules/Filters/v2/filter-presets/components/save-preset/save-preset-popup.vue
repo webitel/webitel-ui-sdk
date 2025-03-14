@@ -118,6 +118,7 @@ const save = () => {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 .save-preset-filters-preview-wrapper {
