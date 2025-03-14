@@ -10,7 +10,9 @@
       @close="showPresetsList = false"
     >
       <template #title>
-        {{ `${t('vocabulary.apply')} ${t('webitelUI.filters.presets.preset').toLowerCase()}` }}
+        {{
+          `${t('vocabulary.apply')} ${t('webitelUI.filters.presets.preset').toLowerCase()}`
+        }}
       </template>
 
       <template #main>
@@ -38,12 +40,12 @@
               @preset:delete="() => deletePreset(preset)"
             />
           </section>
-<!--            TODO: infinite scroll -->
-<!--          <wt-intersection-observer-->
-<!--            :loading="isLoading"-->
-<!--            :next="false"-->
-<!--            @next="updatePage(page + 1)"-->
-<!--          />-->
+          <!--            TODO: infinite scroll -->
+          <!--          <wt-intersection-observer-->
+          <!--            :loading="isLoading"-->
+          <!--            :next="false"-->
+          <!--            @next="updatePage(page + 1)"-->
+          <!--          />-->
         </section>
       </template>
 
@@ -66,15 +68,21 @@
 </template>
 
 <script lang="ts" setup>
-import {type StoreDefinition, storeToRefs } from "pinia";
-import {computed, inject, ref, watch} from "vue";
-import {useI18n} from "vue-i18n";
+import { type StoreDefinition, storeToRefs } from 'pinia';
+import { computed, inject, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { EnginePresetQuery } from 'webitel-sdk';
 
-import {WtButton, WtEmpty,WtIconBtn, WtPopup, WtSearchBar} from "../../../../../../components/index";
-import {useTableEmpty} from "../../../../../TableComponentModule/composables/useTableEmpty";
+import {
+  WtButton,
+  WtEmpty,
+  WtIconBtn,
+  WtPopup,
+  WtSearchBar,
+} from '../../../../../../components/index';
+import { useTableEmpty } from '../../../../../TableComponentModule/composables/useTableEmpty';
 import PresetQueryAPI from '../../api/PresetQuery.api.ts';
-import PresetPreview from "./preset-preview.vue";
-import {EnginePresetQuery} from "webitel-sdk";
+import PresetPreview from './preset-preview.vue';
 
 const props = defineProps<{
   /**
@@ -90,25 +98,15 @@ const emit = defineEmits<{
 
 const eventBus = inject('$eventBus');
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 const showPresetsList = ref(false);
 
 const presetsStore = props.usePresetsStore();
-const {
-  dataList,
-  error,
-  isLoading,
-  filtersManager,
-  page,
-} = storeToRefs(presetsStore);
+const { dataList, error, isLoading, filtersManager, page } =
+  storeToRefs(presetsStore);
 
-const {
-  loadDataList,
-  initialize,
-  updateSize,
-  deleteEls,
-} = presetsStore;
+const { loadDataList, initialize, updateSize, deleteEls } = presetsStore;
 
 updateSize(1000);
 
@@ -123,38 +121,46 @@ const {
   filters: computed(() => filtersManager.value.getAllValues()),
 });
 
-filtersManager.value.addFilter({name: 'presetNamespace', value: props.namespace});
+filtersManager.value.addFilter({
+  name: 'presetNamespace',
+  value: props.namespace,
+});
 
-watch(showPresetsList, () => {
-  initialize();
+watch(
+  showPresetsList,
+  () => {
+    initialize();
 
-  watch(showPresetsList, (value) => {
-    if (value) {
-      loadDataList();
-    }
-  });
-}, {once: true});
+    watch(showPresetsList, (value) => {
+      if (value) {
+        loadDataList();
+      }
+    });
+  },
+  { once: true },
+);
 
 const search = computed({
   get: () => {
     return filtersManager.value.getFilter('search')?.value || '';
   },
   set: (value) => {
-    filtersManager.value.addFilter({name: 'search', value});
-  }
+    filtersManager.value.addFilter({ name: 'search', value });
+  },
 });
 
 const selectedPreset = ref();
 
 const applySelectedPreset = () => {
-  const filtersSnapshot = selectedPreset.value.preset['filtersManager.toString'];
+  const filtersSnapshot =
+    selectedPreset.value.preset['filtersManager.toString'];
   emit('apply', filtersSnapshot);
 
   selectedPreset.value = null;
   showPresetsList.value = false;
 };
 
-const updatePreset = async ({preset, onSuccess, onFailure}) => {
+const updatePreset = async ({ preset, onSuccess, onFailure }) => {
   try {
     await PresetQueryAPI.update({
       item: { ...preset, section: props.namespace },
@@ -186,6 +192,8 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/scroll' as *;
+
 .apply-preset-action .wt-popup {
   :deep(.wt-popup__popup) {
     height: 480px;

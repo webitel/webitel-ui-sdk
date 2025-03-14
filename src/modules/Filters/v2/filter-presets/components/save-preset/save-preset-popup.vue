@@ -4,7 +4,9 @@
     @close="emit('close')"
   >
     <template #title>
-      {{ `${t('reusable.save')} ${t('webitelUI.filters.presets.preset').toLowerCase()}` }}
+      {{
+        `${t('reusable.save')} ${t('webitelUI.filters.presets.preset').toLowerCase()}`
+      }}
     </template>
 
     <template #main>
@@ -22,9 +24,7 @@
         />
       </form>
 
-      <preset-filters-preview
-        :filters="appliedFilters"
-      />
+      <preset-filters-preview :filters="appliedFilters" />
     </template>
 
     <template #actions>
@@ -46,16 +46,17 @@
 </template>
 
 <script setup lang="ts">
-import {computed, reactive, ref} from "vue";
-import {useI18n} from "vue-i18n";
-import {useVuelidate} from "@vuelidate/core";
-import {required} from "@vuelidate/validators";
-import {EnginePresetQuery} from "webitel-sdk";
-import type {IFiltersManager} from "../../../index";
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { computed, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { EnginePresetQuery } from 'webitel-sdk';
+
 import { WtPopup } from '../../../../../../components/index';
-import PresetDescriptionField from "../_shared/input-fields/preset-description-field.vue";
-import PresetFiltersPreview from "../_shared/preset-filters-preview.vue";
-import PresetNameField from "../_shared/input-fields/preset-name-field.vue";
+import type { IFiltersManager } from '../../../index';
+import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
+import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
+import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
 
 export type SubmitConfig = {
   onSuccess?: () => void;
@@ -72,7 +73,7 @@ const emit = defineEmits<{
   close: [];
 }>();
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 const isSaving = ref(false);
 
@@ -81,13 +82,17 @@ const presetForm = reactive({
   description: '',
 });
 
-const v$ = useVuelidate(computed(() => {
-  return {
-    name: {
-      required,
-    },
-  };
-}), presetForm, {$autoDirty: true});
+const v$ = useVuelidate(
+  computed(() => {
+    return {
+      name: {
+        required,
+      },
+    };
+  }),
+  presetForm,
+  { $autoDirty: true },
+);
 v$.value.$touch();
 
 const appliedFilters = computed(() => {
@@ -110,10 +115,11 @@ const save = () => {
     },
   });
 };
-
 </script>
 
 <style scoped lang="scss">
+@use '@webitel/styleguide/scroll' as *;
+
 .save-preset-form {
   display: flex;
   flex-direction: column;
