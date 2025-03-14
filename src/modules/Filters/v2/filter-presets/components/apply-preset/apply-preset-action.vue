@@ -112,18 +112,6 @@ const {
 } = presetsStore;
 
 updateSize(1000);
-
-const {
-  showEmpty,
-  image: imageEmpty,
-  text: textEmpty,
-} = useTableEmpty({
-  dataList,
-  isLoading,
-  error,
-  filters: computed(() => filtersManager.value.getAllValues()),
-});
-
 filtersManager.value.addFilter({name: 'presetNamespace', value: props.namespace});
 
 const search = computed({
@@ -133,6 +121,21 @@ const search = computed({
   set: (value) => {
     filtersManager.value.addFilter({name: 'search', value});
   }
+});
+
+const {
+  showEmpty,
+  image: imageEmpty,
+  text: textEmpty,
+} = useTableEmpty({
+  dataList,
+  isLoading,
+  error,
+  filters: computed(() => {
+    return {
+      search: search.value,
+    };
+  }),
 });
 
 watch(showPresetsList, () => {
@@ -159,8 +162,9 @@ const applySelectedPreset = () => {
 const updatePreset = async ({preset, onSuccess, onFailure}) => {
   try {
     await PresetQueryAPI.update({
-      item: { ...preset, section: props.namespace },
+      item: { ...preset },
       id: preset.id,
+      namespace: preset.namespace,
     });
     eventBus.$emit('notification', {
       type: 'success',
