@@ -39,13 +39,14 @@ export default {
 @use '../../css/main.scss';
 
 .wt-label {
-  @extend %typo-body-1;
+  @extend %typo-subtitle-2;
 
   display: flex;
   align-items: center;
   cursor: text;
   transition: var(--transition);
   color: var(--wt-label-color);
+  padding: var(--wt-label-padding);
 
   &--invalid {
     color: var(--wt-label-error-color);

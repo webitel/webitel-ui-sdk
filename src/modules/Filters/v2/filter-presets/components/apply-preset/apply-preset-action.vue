@@ -6,7 +6,7 @@
     />
     <wt-popup
       :shown="showPresetsList"
-      size="sm"
+      size="md"
       @close="showPresetsList = false"
     >
       <template #title>
