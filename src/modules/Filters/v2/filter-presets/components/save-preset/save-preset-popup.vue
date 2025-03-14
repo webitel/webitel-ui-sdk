@@ -1,6 +1,6 @@
 <template>
   <wt-popup
-    size="sm"
+    size="md"
     @close="emit('close')"
   >
     <template #title>
