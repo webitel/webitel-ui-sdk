@@ -1,4 +1,4 @@
-import { FilterValue } from '../types/Filter';
+import type { FilterValue } from '../types/Filter';
 import type { FilterStorageOptions } from './FilterStorageOptions';
 
 export class BrowserFilterStorage implements FilterStorageOptions {

@@ -49,7 +49,7 @@ const props = defineProps({
     type: String,
     default: 'md',
     required: false,
-  }
+  },
 });
 
 const emit = defineEmits(['click', 'mousedown']);

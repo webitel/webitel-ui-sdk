@@ -4,7 +4,7 @@ import { computed, reactive, ref } from 'vue';
 import { PersistedStorageType } from '../persist/PersistedStorage.types.ts';
 import { usePersistedStorage } from '../persist/usePersistedStorage.ts';
 import { createFiltersManager } from './classes/FiltersManager.ts';
-import { FiltersManagerConfig } from './types/FiltersManager';
+import type { FiltersManagerConfig } from './types/FiltersManager';
 
 export const createTableFiltersStore = (
   namespace: string,

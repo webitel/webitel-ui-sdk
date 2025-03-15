@@ -60,7 +60,7 @@ const v$ = useVuelidate(
         maxValue: maxValue(
           model?.value?.to && model.value.from > model.value.to
             ? model.value.to
-            : Infinity,
+            : Number.POSITIVE_INFINITY,
         ),
       },
       to: {

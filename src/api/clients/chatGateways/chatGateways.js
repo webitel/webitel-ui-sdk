@@ -68,7 +68,7 @@ const webchatRequestConverter = (data) => {
   if (copy.metadata.captcha.enabled) {
     copy.metadata.captcha = JSON.stringify(data.metadata.captcha);
   } else {
-    delete copy.metadata.captcha;
+    copy.metadata.captcha = undefined;
   }
   copy.metadata._btnCodeDirty = data.metadata._btnCodeDirty.toString();
   return copy;
@@ -84,9 +84,9 @@ const messengerRequestConverter = (data) => {
 const viberRequestConverter = (item) => {
   const copy = deepCopy(item);
   copy.metadata['btn.back.color'] = item.metadata.btnBackColor;
-  delete copy.metadata.btnBackColor;
+  copy.metadata.btnBackColor = undefined;
   copy.metadata['btn.font.color'] = item.metadata.btnFontColor;
-  delete copy.metadata.btnFontColor;
+  copy.metadata.btnFontColor = undefined;
   return copy;
 };
 

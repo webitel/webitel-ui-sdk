@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   value: number[];

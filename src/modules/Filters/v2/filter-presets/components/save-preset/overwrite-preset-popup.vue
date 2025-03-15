@@ -36,7 +36,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { WtPopup } from '../../../../../../components/index';
-import { SubmitConfig } from './save-preset-popup.vue';
+import type { SubmitConfig } from './save-preset-popup.vue';
 
 const emit = defineEmits<{
   confirm: [SubmitConfig];

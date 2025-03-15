@@ -34,12 +34,7 @@ export default {
         size: 5000,
       };
       if (this.isAnySelected) params.id = this.selectedIds;
-
-      try {
-        await this.XLSExport.export(params);
-      } catch (err) {
-        throw err;
-      }
+      await this.XLSExport.export(params);
     },
   },
 };

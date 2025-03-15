@@ -14,7 +14,10 @@ import type {
   FilterValue,
   IFilter,
 } from '../types/Filter';
-import { FiltersManagerConfig, IFiltersManager } from '../types/FiltersManager';
+import type {
+  FiltersManagerConfig,
+  IFiltersManager,
+} from '../types/FiltersManager';
 import { Filter } from './Filter.ts';
 
 class FiltersManager implements IFiltersManager {
@@ -141,7 +144,8 @@ class FiltersManager implements IFiltersManager {
     return [...this.filters.values()].filter(({ name }) => {
       if (useInclude) {
         return include.includes(name);
-      } else if (useExclude) {
+      }
+      if (useExclude) {
         return !exclude.includes(name);
       }
 

@@ -14,7 +14,9 @@ const props = defineProps<{
 const { t } = useI18n();
 
 const localeValue = computed(() => {
-  const match = BooleanOptions.find((el) => el.value === props.value.toString());
+  const match = BooleanOptions.find(
+    (el) => el.value === props.value.toString(),
+  );
   return match ? t(match.locale) : '';
 });
 </script>

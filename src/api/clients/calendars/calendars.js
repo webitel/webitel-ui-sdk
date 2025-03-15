@@ -114,10 +114,10 @@ const fieldsToSend = [
 
 const preRequestHandler = (item) => {
   const copy = deepCopy(item);
-  delete copy.timezone.offset;
+  copy.timezone.offset = undefined;
   if (!copy.expires) {
-    delete copy.startAt;
-    delete copy.endAt;
+    copy.startAt = undefined;
+    copy.endAt = undefined;
   }
 
   copy.accepts = copy.accepts.map((accept) => ({

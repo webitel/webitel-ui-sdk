@@ -1,4 +1,5 @@
 import { ContactsChatCatalogApiFactory } from 'webitel-sdk';
+import i18n from '../../../locale/i18n.js';
 import {
   getDefaultGetListResponse,
   getDefaultInstance,
@@ -9,7 +10,6 @@ import applyTransform, {
   snakeToCamel,
   merge,
 } from '../../transformers/index.js';
-import i18n from '../../../locale/i18n.js';
 
 const { t } = i18n.global;
 

@@ -76,28 +76,38 @@
 </template>
 
 <script lang="ts" setup>
-import {EnginePresetQuery} from "webitel-sdk";
-import {computed, ref} from "vue";
-import {useVuelidate} from "@vuelidate/core";
-import {required} from "@vuelidate/validators";
-import {AxiosError} from "axios";
-import {WtExpansionPanel, WtIconAction, WtRadio} from "../../../../../../components/index";
-import {createFiltersManager} from "../../../filters/index";
-import PresetFiltersPreview from "../_shared/preset-filters-preview.vue";
-import PresetNameField from "../_shared/input-fields/preset-name-field.vue";
-import PresetDescriptionField from "../_shared/input-fields/preset-description-field.vue";
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import type { AxiosError } from 'axios';
+import { computed, ref } from 'vue';
+import type { EnginePresetQuery } from 'webitel-sdk';
+import {
+  WtExpansionPanel,
+  WtIconAction,
+  WtRadio,
+} from '../../../../../../components/index';
+import { createFiltersManager } from '../../../filters/index';
+import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
+import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
+import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
 
 type Props = {
   preset: EnginePresetQuery;
   isSelected: boolean;
   collapsed: boolean;
-}
+};
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
   'preset:select': [EnginePresetQuery];
-  'preset:update': [{ preset: EnginePresetQuery, onSuccess: () => void, onFailure: (err: AxiosError) => void }];
+  'preset:update': [
+    {
+      preset: EnginePresetQuery;
+      onSuccess: () => void;
+      onFailure: (err: AxiosError) => void;
+    },
+  ];
   'preset:delete': [EnginePresetQuery];
 }>();
 
@@ -134,17 +144,21 @@ const fillDraft = () => {
 
 fillDraft();
 
-const v$ = useVuelidate(computed(() => {
-  return {
-    name: {
-      required,
-      nameAlreadyInUse: () => !nameAlreadyExistsError.value,
-    },
-  };
-}), editDraft, {$autoDirty: true});
+const v$ = useVuelidate(
+  computed(() => {
+    return {
+      name: {
+        required,
+        nameAlreadyInUse: () => !nameAlreadyExistsError.value,
+      },
+    };
+  }),
+  editDraft,
+  { $autoDirty: true },
+);
 v$.value.$touch();
 
-const startEdit = ({open: openExpansion}) => {
+const startEdit = ({ open: openExpansion }) => {
   openExpansion();
   editMode.value = true;
 };

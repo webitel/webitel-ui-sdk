@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { searchMethod } from './config.js';
-import {ref} from 'vue';
 
 const props = defineProps<{
   value: number[];
@@ -21,7 +21,7 @@ const props = defineProps<{
 const localValue = ref([]);
 
 const getLocalValue = async () => {
-  const { items } = await searchMethod({id: props.value});
+  const { items } = await searchMethod({ id: props.value });
   localValue.value = items;
 };
 

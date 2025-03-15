@@ -22,7 +22,9 @@ const props = defineProps({
     default: false,
   },
 });
-const href = computed(() => props.logoHref || import.meta.env.VITE_START_PAGE_URL);
+const href = computed(
+  () => props.logoHref || import.meta.env.VITE_START_PAGE_URL,
+);
 const logoSrc = props.darkMode ? LogoDark : LogoLight;
 
 const linkComponent = props.disabled

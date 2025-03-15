@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
-import { WtTableHeader } from '../../../../components/wt-table/types/WtTable';
+import type { WtTableHeader } from '../../../../components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '../../../../scripts';
 import { SortSymbols } from '../../../../scripts/sortQueryAdapters';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';

@@ -1,11 +1,11 @@
 import { CallActions, ChatActions, JobState } from 'webitel-sdk';
 import i18n from '../../../locale/i18n.js';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
-import triggerSound from '../assets/audio/triggerSound.js';
 import endChatSound from '../assets/audio/end-chat.wav';
 import newChatSound from '../assets/audio/new-chat.wav';
 import newMessageSound from '../assets/audio/new-message.wav';
 import ringingSound from '../assets/audio/ringing.mp3';
+import triggerSound from '../assets/audio/triggerSound.js';
 import notificationIcon from '../assets/img/notification-icon.png';
 
 const NOTIFICATION_VISIBLE_INTERVAL = 2000;

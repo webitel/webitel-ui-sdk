@@ -19,15 +19,15 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+import { useI18n } from 'vue-i18n';
 import { searchMethod } from './config.js';
-import {useI18n} from "vue-i18n";
 
 const props = defineProps<{
   value: number[];
 }>();
 
 const localValue = ref([]);
-const {t} = useI18n();
+const { t } = useI18n();
 
 const getLocalValue = async () => {
   const { items } = await searchMethod({

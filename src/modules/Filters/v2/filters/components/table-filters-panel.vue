@@ -68,7 +68,7 @@ import DynamicFilterConfigForm from './config/dynamic-filter-config-form.vue';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
 
-interface Props {}
+type Props = {};
 
 const props = defineProps<Props>();
 

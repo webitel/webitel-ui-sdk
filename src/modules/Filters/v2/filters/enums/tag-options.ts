@@ -1,4 +1,4 @@
-import { FilterEnumOption } from '../types/Filter';
+import type { FilterEnumOption } from '../types/Filter';
 
 export const TagOptions: Array<FilterEnumOption> = [
   {

@@ -28,15 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
 import { WtLabel } from '../../../../../../components/index';
-import type {IFilter} from "../../../filters";
-import DynamicFilterPanelWrapper
-  from "../../../filters/components/dynamic-filter-panel-wrapper.vue";
-import { FilterOptionToPreviewComponentMap} from "../../../filters/components/filter-options";
-import DynamicFilterPreview
-  from "../../../filters/components/preview/dynamic-filter-preview.vue";
+import type { IFilter } from '../../../filters';
+import DynamicFilterPanelWrapper from '../../../filters/components/dynamic-filter-panel-wrapper.vue';
+import { FilterOptionToPreviewComponentMap } from '../../../filters/components/filter-options';
+import DynamicFilterPreview from '../../../filters/components/preview/dynamic-filter-preview.vue';
 
 type Props = {
   filters: IFilter[];
@@ -45,7 +43,6 @@ type Props = {
 const props = defineProps<Props>();
 
 const { t } = useI18n();
-
 </script>
 
 <style scoped lang="scss">

@@ -1,3 +1,4 @@
+import { PrioritiesApiFactory } from 'webitel-sdk';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -12,7 +13,6 @@ import applyTransform, {
   snakeToCamel,
   starToSearch,
 } from '../../transformers/index.js';
-import {PrioritiesApiFactory} from 'webitel-sdk';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -22,7 +22,17 @@ const priorityService = new PrioritiesApiFactory(configuration, '', instance);
 const fieldsToSend = ['name', 'description', 'color'];
 
 const getPrioritiesList = async (params) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'notInSla', 'inSla', 'inSlaCond'];
+  const fieldsToSend = [
+    'page',
+    'size',
+    'q',
+    'sort',
+    'fields',
+    'id',
+    'notInSla',
+    'inSla',
+    'inSlaCond',
+  ];
   const {
     page,
     size,
@@ -125,6 +135,6 @@ const CasePrioritiesAPI = {
   getLookup: getConditionsLookup,
   delete: deletePriority,
   add: addPriority,
-}
+};
 
 export default CasePrioritiesAPI;

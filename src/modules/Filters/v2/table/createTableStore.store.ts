@@ -5,7 +5,7 @@ import { type Ref, ref, watch } from 'vue';
 import { createTableFiltersStore } from '../filters/createTableFiltersStore.ts';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
-import {
+import type {
   PatchItemPropertyParams,
   TableStore,
   useTableStoreParams,

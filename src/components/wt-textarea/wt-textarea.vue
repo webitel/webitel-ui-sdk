@@ -146,7 +146,7 @@ export default {
       const bordersSize = 2; // + 2px for height because of --rounded-action-border-size
 
       inputEl.style.height = 'auto';
-      inputEl.style.height = inputEl.scrollHeight + bordersSize + 'px';
+      inputEl.style.height = `${inputEl.scrollHeight + bordersSize}px`;
     },
 
     resetGrow() {

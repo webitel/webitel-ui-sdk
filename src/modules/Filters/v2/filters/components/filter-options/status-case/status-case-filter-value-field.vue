@@ -31,11 +31,14 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import {computed, onMounted, watch} from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
-import { caseStatusesSearchMethod, caseStatusConditionsSearchMethod } from './config.js';
+import {
+  caseStatusConditionsSearchMethod,
+  caseStatusesSearchMethod,
+} from './config.js';
 
 type ModelValue = {
   selection: string;
@@ -57,13 +60,13 @@ const getConditionList = (params) => {
 };
 
 const initModel = () => {
-  if(!model.value) {
+  if (!model.value) {
     model.value = {
       selection: '',
       conditions: '',
     };
   }
-}
+};
 onMounted(() => initModel());
 
 const v$ = useVuelidate(

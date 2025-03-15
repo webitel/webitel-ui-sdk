@@ -26,16 +26,20 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, inject, type Ref,ref} from 'vue';
-import {useI18n} from "vue-i18n";
-import {EnginePresetQuery} from "webitel-sdk";
+import { type Ref, computed, inject, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import type { EnginePresetQuery } from 'webitel-sdk';
 
 import { WtIconAction } from '../../../../../../components/index';
-import {IFiltersManager} from "../../../filters/index";
-import {addPreset, getPresetList, updatePreset} from '../../api/PresetQuery.api.ts';
-import OverwritePresetPopup from "./overwrite-preset-popup.vue";
-import { IconAction } from "../../../../../../enums";
-import SavePresetPopup, {SubmitConfig} from "./save-preset-popup.vue";
+import { IconAction } from '../../../../../../enums';
+import type { IFiltersManager } from '../../../filters/index';
+import {
+  addPreset,
+  getPresetList,
+  updatePreset,
+} from '../../api/PresetQuery.api.ts';
+import OverwritePresetPopup from './overwrite-preset-popup.vue';
+import SavePresetPopup, { type SubmitConfig } from './save-preset-popup.vue';
 
 const props = defineProps<{
   /**
@@ -66,12 +70,16 @@ const showSaveForm = ref(false);
  */
 const presetToOverwriteWith: Ref<EnginePresetQuery | null> = ref(null);
 
-const handlePresetSubmit = async (preset: EnginePresetQuery, { onCompleted }: SubmitConfig) => {
+const handlePresetSubmit = async (
+  preset: EnginePresetQuery,
+  { onCompleted }: SubmitConfig,
+) => {
   try {
     await addPreset({ preset, namespace: props.namespace });
 
     eventBus.$emit('notification', {
-      type: 'success',  text: t('systemNotifications.success.create', {
+      type: 'success',
+      text: t('systemNotifications.success.create', {
         entity: t('webitelUI.filters.presets.preset'),
       }),
     });
@@ -87,15 +95,20 @@ const handlePresetSubmit = async (preset: EnginePresetQuery, { onCompleted }: Su
   }
 };
 
-const handlePresetOverwriteConfirmation = async ({ onCompleted }: SubmitConfig) => {
+const handlePresetOverwriteConfirmation = async ({
+  onCompleted,
+}: SubmitConfig) => {
   try {
-    const {items} = await getPresetList({
-      search: presetToOverwriteWith.value.name,
-      presetNamespace: props.namespace,
-    }, {
-      transformers: {useStarToSearch: false},
-    });
-    const {id: existingPresetId} = items[0];
+    const { items } = await getPresetList(
+      {
+        search: presetToOverwriteWith.value.name,
+        presetNamespace: props.namespace,
+      },
+      {
+        transformers: { useStarToSearch: false },
+      },
+    );
+    const { id: existingPresetId } = items[0];
     await updatePreset({
       id: existingPresetId,
       item: {
@@ -105,7 +118,8 @@ const handlePresetOverwriteConfirmation = async ({ onCompleted }: SubmitConfig) 
     });
 
     eventBus.$emit('notification', {
-      type: 'success',  text: t('systemNotifications.success.update', {
+      type: 'success',
+      text: t('systemNotifications.success.update', {
         entity: t('webitelUI.filters.presets.preset'),
       }),
     });

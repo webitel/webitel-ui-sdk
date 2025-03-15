@@ -1,9 +1,9 @@
 import { watch } from 'vue';
 
 import {
-  PersistableValue,
-  PersistedPropertyConfig,
-  PersistedStorageController,
+  type PersistableValue,
+  type PersistedPropertyConfig,
+  type PersistedStorageController,
   PersistedStorageType,
 } from './PersistedStorage.types.ts';
 import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage.ts';
@@ -140,7 +140,7 @@ export const usePersistedStorage = ({
     await Promise.all(removeItemFns.map((removeItem) => removeItem(name)));
   };
 
-  const endWatch = () => unwatch && unwatch();
+  const endWatch = () => unwatch?.();
 
   return {
     watch: startWatch,

@@ -202,8 +202,6 @@ const actions = {
     }
     try {
       await context.dispatch(action, deleted);
-    } catch (err) {
-      throw err;
     } finally {
       await context.dispatch('LOAD_DATA_LIST');
       await context.dispatch('SET_SELECTED', []);
@@ -219,26 +217,18 @@ const actions = {
   },
 
   DELETE_SINGLE: async (context, { id, etag }) => {
-    try {
-      await context.dispatch('DELETE_ITEM_API', { context, id, etag });
-    } catch (err) {
-      throw err;
-    }
+    await context.dispatch('DELETE_ITEM_API', { context, id, etag });
   },
 
   DELETE_BULK: async (context, deleted) => {
-    try {
-      const results = await Promise.allSettled(
-        deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
-      );
+    const results = await Promise.allSettled(
+      deleted.map((item) => context.dispatch('DELETE_SINGLE', item)),
+    );
 
-      // list of rejected requests
-      const rejected = results.filter((result) => result.status === 'rejected');
-      if (rejected.length) {
-        throw rejected;
-      }
-    } catch (err) {
-      throw err;
+    // list of rejected requests
+    const rejected = results.filter((result) => result.status === 'rejected');
+    if (rejected.length) {
+      throw rejected;
     }
   },
 

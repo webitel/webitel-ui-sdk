@@ -17,19 +17,19 @@
 </template>
 
 <script lang="ts" setup>
-import {searchMethod} from './config.js';
-import {ref} from 'vue';
-import {useI18n} from "vue-i18n";
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { searchMethod } from './config.js';
 
 const props = defineProps<{
   value: number[];
 }>();
 
 const localValue = ref([]);
-const {t} = useI18n();
+const { t } = useI18n();
 
 const getLocalValue = async () => {
-  const {items} = await searchMethod({id: props.value.list});
+  const { items } = await searchMethod({ id: props.value.list });
   localValue.value = items;
 };
 

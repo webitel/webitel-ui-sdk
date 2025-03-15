@@ -1,10 +1,10 @@
-import {createPinia, setActivePinia, type StoreDefinition} from 'pinia';
-import { beforeEach, describe, expect,it } from 'vitest';
-import {createApp, h} from "vue";
-import {createRouter, createWebHistory, type Router} from "vue-router";
+import { type StoreDefinition, createPinia, setActivePinia } from 'pinia';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { createApp, h } from 'vue';
+import { type Router, createRouter, createWebHistory } from 'vue-router';
 
-import {AdminSections, WtApplication, WtObject} from "../../../../../enums";
-import {CrudGlobalAction} from "../../enums";
+import { AdminSections, WtApplication, WtObject } from '../../../../../enums';
+import { CrudGlobalAction } from '../../enums';
 import { createUserAccessStore } from '../accessStore';
 
 describe('AccessStore', () => {
@@ -35,7 +35,7 @@ describe('AccessStore', () => {
     const pinia = createPinia();
     const app = createApp({});
     app.use(router);
-    app.use(pinia)
+    app.use(pinia);
     setActivePinia(pinia);
     useAccessStore = createUserAccessStore();
   });
@@ -81,9 +81,9 @@ describe('AccessStore', () => {
       access: {
         [WtApplication.Admin]: {
           _enabled: true,
-            [AdminSections.Users]: {
-                _enabled: true,
-            },
+          [AdminSections.Users]: {
+            _enabled: true,
+          },
         },
       },
     });
@@ -102,9 +102,9 @@ describe('AccessStore', () => {
       access: {
         [WtApplication.Admin]: {
           _enabled: true,
-            [AdminSections.Users]: {
-                _enabled: false,
-            },
+          [AdminSections.Users]: {
+            _enabled: false,
+          },
         },
       },
     });
@@ -123,9 +123,9 @@ describe('AccessStore', () => {
       access: {
         [WtApplication.Admin]: {
           _enabled: false,
-            [AdminSections.Users]: {
-                _enabled: true,
-            },
+          [AdminSections.Users]: {
+            _enabled: true,
+          },
         },
       },
     });

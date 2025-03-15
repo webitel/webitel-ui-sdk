@@ -118,8 +118,6 @@ export default class FilesExport {
       const file = await this._generateZip(zip);
       await this._saveZip(file);
       this.resetProgress();
-    } catch (err) {
-      throw err;
     } finally {
       this.isLoading = false;
     }

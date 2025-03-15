@@ -4,7 +4,8 @@ import { useRoute } from 'vue-router';
 import { _wtUiLog } from '../../../scripts/logger';
 import type {
   CreateUserAccessControlComposableParams,
-  UseAccessControlReturn, UseUserAccessControlComposableOptions,
+  UseAccessControlReturn,
+  UseUserAccessControlComposableOptions,
 } from './types/CreateUserAccessControl';
 
 export const createUserAccessControlComposable = (
@@ -13,8 +14,9 @@ export const createUserAccessControlComposable = (
   const useUserAccessControl = (
     options?: UseUserAccessControlComposableOptions,
   ): UseAccessControlReturn => {
-    const resource = typeof options === 'string' ? options: options?.resource;
-    const useUpdateAccessAsAllMutableChecksSource = options?.useUpdateAccessAsAllMutableChecksSource;
+    const resource = typeof options === 'string' ? options : options?.resource;
+    const useUpdateAccessAsAllMutableChecksSource =
+      options?.useUpdateAccessAsAllMutableChecksSource;
 
     const route = useRoute();
     const object = resource || route?.meta?.WtObject;
@@ -55,7 +57,8 @@ export const createUserAccessControlComposable = (
     });
 
     const disableUserInput = computed(() => {
-      if (useUpdateAccessAsAllMutableChecksSource) return !hasUpdateAccess.value;
+      if (useUpdateAccessAsAllMutableChecksSource)
+        return !hasUpdateAccess.value;
 
       if (route.params.id === 'new') return !hasCreateAccess.value;
       return !hasUpdateAccess.value;

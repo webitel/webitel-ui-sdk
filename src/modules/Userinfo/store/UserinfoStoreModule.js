@@ -133,23 +133,15 @@ export default class UserinfoStoreModule extends BaseStoreModule {
         roles: [],
         license: [],
       };
-
-      try {
-        await context.dispatch('RESET_STATE');
-        const session = { ...defaultSession, ..._session };
-        const scope = await context.dispatch(
-          'CONVERT_USER_SCOPE',
-          session.scope,
-        );
-        const permissions = await context.dispatch(
-          'CONVERT_USER_PERMISSIONS',
-          session.permissions,
-        );
-        context.commit('SET_SESSION', { ...session, scope, permissions });
-        await context.dispatch('SET_LOADING', false);
-      } catch (err) {
-        throw err;
-      }
+      await context.dispatch('RESET_STATE');
+      const session = { ...defaultSession, ..._session };
+      const scope = await context.dispatch('CONVERT_USER_SCOPE', session.scope);
+      const permissions = await context.dispatch(
+        'CONVERT_USER_PERMISSIONS',
+        session.permissions,
+      );
+      context.commit('SET_SESSION', { ...session, scope, permissions });
+      await context.dispatch('SET_LOADING', false);
     },
 
     LOGOUT: async (

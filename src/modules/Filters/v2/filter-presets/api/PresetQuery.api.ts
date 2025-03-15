@@ -1,6 +1,6 @@
 import {
-  EngineCreatePresetQueryRequest,
-  EnginePresetQuery,
+  type EngineCreatePresetQueryRequest,
+  type EnginePresetQuery,
   PresetQueryServiceApiFactory,
 } from 'webitel-sdk';
 

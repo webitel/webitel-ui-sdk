@@ -1,8 +1,9 @@
 import { AgentChatServiceApiFactory } from 'webitel-sdk';
+import i18n from '../../../locale/i18n.js';
 import {
+  getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-  getDefaultGetParams,
 } from '../../defaults/index.js';
 import applyTransform, {
   merge,
@@ -10,7 +11,6 @@ import applyTransform, {
   snakeToCamel,
   starToSearch,
 } from '../../transformers/index.js';
-import i18n from '../../../locale/i18n.js';
 
 const { t } = i18n.global;
 

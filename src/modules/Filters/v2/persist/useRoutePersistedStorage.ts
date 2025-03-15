@@ -1,6 +1,6 @@
 import { useRoute, useRouter } from 'vue-router';
 
-import { StorageLike } from './PersistedStorage.types.ts';
+import type { StorageLike } from './PersistedStorage.types.ts';
 
 export const useRoutePersistedStorage = (): StorageLike => {
   const router = useRouter();

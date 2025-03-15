@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, withDefaults} from 'vue';
+import { computed, withDefaults } from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';

@@ -1,4 +1,4 @@
-import { NavigationGuard } from 'vue-router';
+import type { NavigationGuard } from 'vue-router';
 
 import type {
   AdminSections,

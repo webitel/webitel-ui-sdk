@@ -11,7 +11,7 @@ import { watch } from 'vue';
 
 import { useBooleanFilterValueValidation } from '../_shared/composables/booleanFilterToolkit';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
-import {BooleanFilterModelValue} from "../_shared/types/BooleanFilter";
+import type { BooleanFilterModelValue } from '../_shared/types/BooleanFilter';
 
 const model = defineModel<BooleanFilterModelValue>();
 

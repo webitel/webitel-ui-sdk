@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts" setup>
-import { caseCloseReasonsSearchMethod } from './config'
-import {ref} from 'vue';
+import { ref } from 'vue';
+import { caseCloseReasonsSearchMethod } from './config';
 
 const props = defineProps<{
   value: number[];
@@ -23,7 +23,8 @@ const localValue = ref([]);
 const getLocalValue = async () => {
   const { items } = await caseCloseReasonsSearchMethod({
     parentId: props.value?.selection,
-    id: props.value?.conditions });
+    id: props.value?.conditions,
+  });
   localValue.value = items;
 };
 

@@ -1,15 +1,19 @@
-import { CrudAction, WtApplication, WtObject } from '../../../../enums';
+import {
+  type CrudAction,
+  WtApplication,
+  type WtObject,
+} from '../../../../enums';
 import { _wtUiLog as wtlog } from '../../../../scripts/logger';
 import {
   AdminSectionsValues,
   AuditorSectionsValues,
   CrmSectionsValues,
+  SupervisorSectionsValues,
   mapGlobalActionToCrudAction,
   mapScopeClassAccessTokenToCrudAction,
   mapScopeClassToWtObjects,
   mapUiSectionToWtObject,
   mapWtObjectToUiSection,
-  SupervisorSectionsValues,
 } from '../mappings/mappings';
 import type {
   AppVisibilityMap,

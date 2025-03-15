@@ -110,11 +110,11 @@ const getUser = async ({ itemId: id }) => {
 
 const preRequestHandler = (item) => {
   const copy = deepCopy(item);
-  if (item.device && !item.device.id) delete copy.device;
+  if (item.device && !item.device.id) copy.device = undefined;
 
-  if (copy.roles) copy.roles.forEach((copy) => delete copy.text);
+  if (copy.roles) copy.roles.forEach((copy) => (copy.text = undefined));
 
-  if (copy.devices) copy.devices.forEach((copy) => delete copy.text);
+  if (copy.devices) copy.devices.forEach((copy) => (copy.text = undefined));
   if (copy.license) {
     copy.license = copy.license.map((copy) => ({ id: copy.id }));
   }

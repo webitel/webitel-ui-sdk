@@ -1,4 +1,4 @@
-import { Ref, WatchOptions } from 'vue';
+import type { Ref, WatchOptions } from 'vue';
 
 export enum PersistedStorageType {
   LocalStorage = 'localStorage',

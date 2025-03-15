@@ -16,11 +16,14 @@
 <script setup lang="ts">
 import { ComponentSize } from '../../../../../enums';
 
-const props = withDefaults(defineProps<{
-  size?: ComponentSize;
-}>(), {
-  size: ComponentSize.MD,
-});
+const props = withDefaults(
+  defineProps<{
+    size?: ComponentSize;
+  }>(),
+  {
+    size: ComponentSize.MD,
+  },
+);
 </script>
 
 <style lang="scss" scoped>

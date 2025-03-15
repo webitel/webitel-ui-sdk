@@ -1,4 +1,4 @@
 export interface WtTreeNestedIcons {
-    icon: string;
-    hidden: boolean;
+  icon: string;
+  hidden: boolean;
 }

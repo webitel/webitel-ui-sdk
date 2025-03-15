@@ -202,8 +202,6 @@ export default class TableStoreModule extends BaseStoreModule {
       }
       try {
         await context.dispatch(action, deleted);
-      } catch (err) {
-        throw err;
       } finally {
         await context.dispatch('LOAD_DATA_LIST');
 
@@ -221,11 +219,7 @@ export default class TableStoreModule extends BaseStoreModule {
     },
 
     DELETE_SINGLE: async (context, { id, etag }) => {
-      try {
-        await context.dispatch('api/DELETE_ITEM', { context, id, etag });
-      } catch (err) {
-        throw err;
-      }
+      await context.dispatch('api/DELETE_ITEM', { context, id, etag });
     },
 
     DELETE_BULK: async (context, deleted) =>

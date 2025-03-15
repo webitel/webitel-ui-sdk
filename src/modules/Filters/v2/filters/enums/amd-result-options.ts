@@ -1,4 +1,4 @@
-import { FilterInitParams } from '../types/Filter';
+import type { FilterInitParams } from '../types/Filter';
 
 /**
  * AMD Result to filter

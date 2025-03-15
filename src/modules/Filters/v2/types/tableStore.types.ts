@@ -1,7 +1,7 @@
 import type { Ref } from 'vue';
 
-import { ApiModule } from '../../../../api/types/ApiModule.type.ts';
-import { IFiltersManager } from '../filters';
+import type { ApiModule } from '../../../../api/types/ApiModule.type.ts';
+import type { IFiltersManager } from '../filters';
 
 export interface useTableStoreParams<Entity> {
   apiModule: ApiModule<Entity>;

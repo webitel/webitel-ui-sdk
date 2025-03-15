@@ -35,12 +35,7 @@ export default {
         size: 5000,
       };
       if (this.isAnySelected) params.id = this.selectedIds;
-
-      try {
-        await this.CSVExport.export(params);
-      } catch (err) {
-        throw err;
-      }
+      await this.CSVExport.export(params);
     },
   },
 };

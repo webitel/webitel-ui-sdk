@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import {endOfToday, startOfToday} from 'date-fns';
-import {useI18n} from 'vue-i18n';
-import {onMounted} from 'vue';
+import { endOfToday, startOfToday } from 'date-fns';
+import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
   from: number;
@@ -29,15 +29,18 @@ type ModelValue = {
 };
 
 const model = defineModel<ModelValue>();
-const {t} = useI18n();
+const { t } = useI18n();
 
 const handleInput = (key: keyof ModelValue, value: number) => {
-  model.value = { ...model.value, [key]: value};
+  model.value = { ...model.value, [key]: value };
 };
 
 const initModel = () => {
   if (!model.value) {
-    model.value = {from: startOfToday().getTime(), to: endOfToday().getTime()};
+    model.value = {
+      from: startOfToday().getTime(),
+      to: endOfToday().getTime(),
+    };
   }
 };
 

@@ -19,10 +19,10 @@
 </template>
 
 <script lang="ts" setup>
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
-import {useFromToSecToPreviewTime} from "../_shared/composables/useFromToSecToPreviewTime";
-import type {TalkDurationFilterModelValue} from "../talk-duration/TalkDurationFilter";
+import { useFromToSecToPreviewTime } from '../_shared/composables/useFromToSecToPreviewTime';
+import type { TalkDurationFilterModelValue } from '../talk-duration/TalkDurationFilter';
 
 const props = defineProps<{
   value: TalkDurationFilterModelValue;
@@ -30,10 +30,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const {
-  from,
-  to,
-} = useFromToSecToPreviewTime(props.value);
+const { from, to } = useFromToSecToPreviewTime(props.value);
 </script>
 
 <style lang="scss" scoped>
