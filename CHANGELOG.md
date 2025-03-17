@@ -1,3 +1,10 @@
+## [v25.4.34] - 2025-03-17
+### :bug: Bug Fixes
+- [`fc8e40a`](https://github.com/webitel/webitel-ui-sdk/commit/fc8e40a42db817aa24d57977d80afced0b85653d) - bump version [WTEL-6494](https://webitel.atlassian.net/browse/WTEL-6494) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`3df6b60`](https://github.com/webitel/webitel-ui-sdk/commit/3df6b60d0cdc4c0c951380d4c6495d21faf7729f) - cleanup styles duplicates, increase styles performance, reduced built css file size (WTEL-6290, WTEL-6494, WTEL-6466) [WTEL-6290](https://webitel.atlassian.net/browse/WTEL-6494) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`366aa44`](https://github.com/webitel/webitel-ui-sdk/commit/366aa442e7dd1aaab4316da04a3f78b120f9194b) - cleanup styles duplicates and increase styles performance (WTEL-6290, WTEL-6494, WTEL-6466) [WTEL-6290](https://webitel.atlassian.net/browse/WTEL-6494) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v25.4.33] - 2025-03-14
 ### :bug: Bug Fixes
 - [`2c54d26`](https://github.com/webitel/webitel-ui-sdk/commit/2c54d2690a26d091cb835ad3f0b609745f7a734d) - "description" locale usage in presets *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1532,3 +1539,4 @@
 [v25.4.30]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.29...v25.4.30
 [v25.4.32]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.31...v25.4.32
 [v25.4.33]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.32...v25.4.33
+[v25.4.34]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.172...v25.4.34
