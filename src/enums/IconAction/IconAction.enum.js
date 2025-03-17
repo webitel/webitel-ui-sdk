@@ -18,6 +18,8 @@ const IconAction = Object.freeze({
   CLEAR: 'clear',
   ADD_FILTER: 'add-filter',
   SAVE: 'save',
+  SAVE_PRESET: 'save-preset',
+  APPLY_PRESET: 'apply-preset',
 });
 
 export default IconAction;

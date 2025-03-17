@@ -1,18 +1,16 @@
 <template>
   <div class="apply-preset-action">
-    <wt-icon-btn
-      icon="load-preset"
+    <wt-icon-action
+      :action="IconAction.APPLY_PRESET"
       @click="showPresetsList = true"
     />
     <wt-popup
       :shown="showPresetsList"
-      size="sm"
+      size="md"
       @close="showPresetsList = false"
     >
       <template #title>
-        {{
-          `${t('vocabulary.apply')} ${t('webitelUI.filters.presets.preset').toLowerCase()}`
-        }}
+        {{ `${t('vocabulary.apply')} ${t('webitelUI.filters.presets.preset').toLowerCase()}` }}
       </template>
 
       <template #main>
@@ -30,9 +28,9 @@
 
           <section class="available-presets-list">
             <preset-preview
-              v-for="(preset, index) of dataList"
+              v-for="(preset) of dataList"
               :key="preset.id"
-              :collapsed="!!index"
+              collapsed
               :is-selected="preset === selectedPreset"
               :preset="preset"
               @preset:select="selectedPreset = preset"
@@ -40,12 +38,12 @@
               @preset:delete="() => deletePreset(preset)"
             />
           </section>
-          <!--            TODO: infinite scroll -->
-          <!--          <wt-intersection-observer-->
-          <!--            :loading="isLoading"-->
-          <!--            :next="false"-->
-          <!--            @next="updatePage(page + 1)"-->
-          <!--          />-->
+<!--            TODO: infinite scroll -->
+<!--          <wt-intersection-observer-->
+<!--            :loading="isLoading"-->
+<!--            :next="false"-->
+<!--            @next="updatePage(page + 1)"-->
+<!--          />-->
         </section>
       </template>
 
@@ -68,21 +66,16 @@
 </template>
 
 <script lang="ts" setup>
-import { type StoreDefinition, storeToRefs } from 'pinia';
-import { computed, inject, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { EnginePresetQuery } from 'webitel-sdk';
+import {type StoreDefinition, storeToRefs } from "pinia";
+import {computed, inject, ref, watch, onUnmounted} from "vue";
+import {useI18n} from "vue-i18n";
 
-import {
-  WtButton,
-  WtEmpty,
-  WtIconBtn,
-  WtPopup,
-  WtSearchBar,
-} from '../../../../../../components/index';
-import { useTableEmpty } from '../../../../../TableComponentModule/composables/useTableEmpty';
+import {WtButton, WtEmpty, WtPopup, WtSearchBar, WtIconAction} from "../../../../../../components/index";
+import {useTableEmpty} from "../../../../../TableComponentModule/composables/useTableEmpty";
+import { IconAction } from "../../../../../../enums";
 import PresetQueryAPI from '../../api/PresetQuery.api.ts';
-import PresetPreview from './preset-preview.vue';
+import PresetPreview from "./preset-preview.vue";
+import {EnginePresetQuery} from "webitel-sdk";
 
 const props = defineProps<{
   /**
@@ -98,17 +91,37 @@ const emit = defineEmits<{
 
 const eventBus = inject('$eventBus');
 
-const { t } = useI18n();
+const {t} = useI18n();
 
 const showPresetsList = ref(false);
 
 const presetsStore = props.usePresetsStore();
-const { dataList, error, isLoading, filtersManager, page } =
-  storeToRefs(presetsStore);
+const {
+  dataList,
+  error,
+  isLoading,
+  filtersManager,
+  page,
+} = storeToRefs(presetsStore);
 
-const { loadDataList, initialize, updateSize, deleteEls } = presetsStore;
+const {
+  loadDataList,
+  initialize,
+  updateSize,
+  deleteEls,
+} = presetsStore;
 
 updateSize(1000);
+filtersManager.value.addFilter({name: 'presetNamespace', value: props.namespace});
+
+const search = computed({
+  get: () => {
+    return filtersManager.value.getFilter('search')?.value || '';
+  },
+  set: (value) => {
+    filtersManager.value.addFilter({name: 'search', value});
+  }
+});
 
 const {
   showEmpty,
@@ -118,53 +131,43 @@ const {
   dataList,
   isLoading,
   error,
-  filters: computed(() => filtersManager.value.getAllValues()),
+  filters: computed(() => {
+    return {
+      search: search.value,
+    };
+  }),
 });
 
-filtersManager.value.addFilter({
-  name: 'presetNamespace',
-  value: props.namespace,
-});
+watch(showPresetsList, () => {
+  initialize();
 
-watch(
-  showPresetsList,
-  () => {
-    initialize();
-
-    watch(showPresetsList, (value) => {
-      if (value) {
-        loadDataList();
-      }
-    });
-  },
-  { once: true },
-);
-
-const search = computed({
-  get: () => {
-    return filtersManager.value.getFilter('search')?.value || '';
-  },
-  set: (value) => {
-    filtersManager.value.addFilter({ name: 'search', value });
-  },
-});
+  watch(showPresetsList, (value) => {
+    if (value) {
+      search.value = '';
+      /* search.value reset causes re-fetch as filter change, so
+      loadDataList() is commented.
+      TODO: implement ability to set filters "silently" and refactor this code */
+      // loadDataList();
+    }
+  });
+}, {once: true});
 
 const selectedPreset = ref();
 
 const applySelectedPreset = () => {
-  const filtersSnapshot =
-    selectedPreset.value.preset['filtersManager.toString'];
+  const filtersSnapshot = selectedPreset.value.preset['filtersManager.toString'];
   emit('apply', filtersSnapshot);
 
   selectedPreset.value = null;
   showPresetsList.value = false;
 };
 
-const updatePreset = async ({ preset, onSuccess, onFailure }) => {
+const updatePreset = async ({preset, onSuccess, onFailure}) => {
   try {
     await PresetQueryAPI.update({
-      item: { ...preset, section: props.namespace },
+      item: { ...preset },
       id: preset.id,
+      namespace: preset.namespace,
     });
     eventBus.$emit('notification', {
       type: 'success',

@@ -1,4 +1,6 @@
 :root {
+  --wt-label-padding: var(--spacing-2xs) var(--spacing-xs);
+
   --wt-label-color: var(--text-main-color);
   --wt-label-error-color: var(--text-error-color);
   --wt-label-disabled-color: var(--text-disabled-color);

@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { caseCloseReasonsGroupsSearchMethod } from './config'
+import { caseCloseReasonsSearchMethod } from './config'
 import {ref} from 'vue';
 
 const props = defineProps<{
@@ -21,7 +21,9 @@ const props = defineProps<{
 const localValue = ref([]);
 
 const getLocalValue = async () => {
-  const { items } = await caseCloseReasonsGroupsSearchMethod({parentId: props.value?.selection, id: props.value?.conditions });
+  const { items } = await caseCloseReasonsSearchMethod({
+    parentId: props.value?.selection,
+    id: props.value?.conditions });
   localValue.value = items;
 };
 

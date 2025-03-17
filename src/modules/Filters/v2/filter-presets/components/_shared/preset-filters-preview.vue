@@ -3,7 +3,9 @@
     <wt-label>
       {{ t('webitelUI.filters.filterName') }}
     </wt-label>
-    <dynamic-filter-panel-wrapper>
+    <dynamic-filter-panel-wrapper
+      size="sm"
+    >
       <template #filters>
         <dynamic-filter-preview
           v-for="(filter) of props.filters"

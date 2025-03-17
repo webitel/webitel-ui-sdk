@@ -420,6 +420,12 @@ export default {
         [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
         [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
         [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
       },
     },
     errorPages: {
@@ -462,7 +468,7 @@ export default {
     },
     empty: {
       text: {
-        empty: 'Записи в разделе еще не созданы',
+        empty: 'Записи еще не созданы',
         filters: 'К сожалению, ни одна запись не соответствует вашим критериям',
       },
     },

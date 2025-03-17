@@ -1,6 +1,6 @@
 <template>
   <wt-popup
-    size="sm"
+    size="md"
     @close="emit('close')"
   >
     <template #title>
@@ -124,6 +124,7 @@ const save = () => {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 .save-preset-filters-preview-wrapper {

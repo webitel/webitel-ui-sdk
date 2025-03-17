@@ -3,7 +3,7 @@
     v-if="props.previewMode && model"
   >
     <wt-label>
-      {{ t('reusable.description') }}
+      {{ t('vocabulary.description') }}
     </wt-label>
     <p>
       {{ model }}
@@ -13,7 +13,7 @@
   <wt-textarea
     v-if="!props.previewMode"
     :value="model"
-    :label="t('reusable.description')"
+    :label="t('vocabulary.description')"
     @input="model = $event"
   />
 </template>

@@ -159,7 +159,7 @@ export default {
     talkDuration: 'Тривалість розмови',
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
-    attachment: 'Додаток | Додатки',
+    attachment: 'Вкладення | Вкладення',
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -420,6 +420,12 @@ export default {
         [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
         [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
         [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
       },
     },
     errorPages: {
@@ -462,7 +468,7 @@ export default {
     },
     empty: {
       text: {
-        empty: 'Записи у розділі ще не створені',
+        empty: 'Записи ще не створені',
         filters: 'На жаль, жоден запис не відповідає вашим критеріям',
       },
     },
