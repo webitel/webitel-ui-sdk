@@ -23,7 +23,9 @@
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
       :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
-      :placeholder="placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')"
+      :placeholder="
+        placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')
+      "
       auto-apply
       class="wt-datepicker__datepicker"
       v-bind="{ ...$attrs, ...$props }"
@@ -164,7 +166,7 @@ const clearValue = () => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {

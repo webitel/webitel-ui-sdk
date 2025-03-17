@@ -97,7 +97,7 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern-compiler', // or "modern-compiler", "legacy",
+          api: 'modern-compiler', // "modern", "modern-compiler", "legacy",
         },
       },
     },

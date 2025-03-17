@@ -226,7 +226,7 @@ watch(
 </script>
 
 <style lang="scss">
-@use '../../css/main.scss' as *;
+@use '@webitel/styleguide/typography' as *;
 @use './variables.scss' as *;
 
 .wt-tree-line {

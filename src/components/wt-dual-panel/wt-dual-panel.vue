@@ -68,7 +68,7 @@ const sidePanelSize = computed(() =>
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/scroll' as *;
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {

@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .filter-from-to {
   &:hover > .wt-label {

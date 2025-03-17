@@ -29,6 +29,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 @use '../../css/nav-menu';
+@use '@webitel/styleguide/scroll' as *;
 
 .nav-menu-lvl-2 {
   @extend %wt-scrollbar;

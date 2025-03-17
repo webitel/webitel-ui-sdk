@@ -82,7 +82,9 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../../css/main' as *;
+@use '@webitel/styleguide/viewport-breakpoints' as *;
+@use '@webitel/styleguide/scroll' as *;
+
 .wt-navigation-menu {
   display: flex;
   align-items: center;

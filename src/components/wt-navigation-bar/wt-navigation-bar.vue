@@ -120,7 +120,7 @@ import CrmLight from './assets/light/app-logo-light-crm.svg';
 import HistoryLight from './assets/light/app-logo-light-history.svg';
 import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
 import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
-import { WtNavigationBarNavItem } from "./types/WtNavigationBar";
+import { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
 const appLogo = {
   [WebitelApplications.SUPERVISOR]: {
@@ -171,7 +171,7 @@ export default {
     logoRoute: {
       type: String,
       default: '',
-    }
+    },
   },
   data: () => ({
     isOpened: false,
@@ -223,7 +223,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-navigation-bar__menu-btn {
   display: block;

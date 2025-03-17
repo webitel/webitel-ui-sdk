@@ -100,14 +100,15 @@
 import { computed, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
+
+import IconAction from '../../../enums/IconAction/IconAction.enum.js';
+import { useTableEmpty } from '../../../modules/TableComponentModule/composables/useTableEmpty.js';
 import { useTableStore } from '../../../store/new/index.js';
 import FilterPagination from '../../Filters/components/filter-pagination.vue';
 import { useTableFilters } from '../../Filters/composables/useTableFilters.js';
 import RoleColumn from '../_internals/components/permissions-role-row.vue';
 import RolePopup from '../_internals/components/permissions-tab-role-popup.vue';
 import { AccessMode } from '../_internals/enums/AccessMode.enum.js';
-import IconAction from '../../../enums/IconAction/IconAction.enum.js';
-import { useTableEmpty } from '../../../modules/TableComponentModule/composables/useTableEmpty.js';
 
 const props = defineProps({
   /**
@@ -205,4 +206,6 @@ const changeAccessMode = (payload) =>
   store.dispatch(`${tableNamespace}/CHANGE_ACCESS_MODE`, payload);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use '../../../css/pages/table-page';
+</style>

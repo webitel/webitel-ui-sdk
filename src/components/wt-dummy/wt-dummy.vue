@@ -67,7 +67,7 @@ const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-dummy {
   display: flex;

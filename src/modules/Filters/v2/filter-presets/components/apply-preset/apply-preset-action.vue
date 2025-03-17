@@ -195,6 +195,8 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/scroll' as *;
+
 .apply-preset-action .wt-popup {
   :deep(.wt-popup__popup) {
     height: 480px;
