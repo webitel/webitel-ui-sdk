@@ -87,7 +87,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/styleguide/styleguide';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-tabs {
   position: relative;

@@ -111,7 +111,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/styleguide/styleguide';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-pagination {
   @extend %typo-body-1;

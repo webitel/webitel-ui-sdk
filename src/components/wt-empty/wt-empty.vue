@@ -269,7 +269,7 @@ const onSecondaryClick = onClick('secondary');
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/styleguide/styleguide';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-empty {
   box-sizing: border-box;

@@ -150,7 +150,8 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/styleguide/styleguide';
+@use '@webitel/styleguide/scroll' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .wt-app-navigator {
   position: relative;

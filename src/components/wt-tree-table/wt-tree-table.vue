@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, withDefaults} from 'vue';
+import { computed, withDefaults } from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
@@ -265,7 +265,8 @@ const handleSelection = (row, select) => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/styleguide/styleguide' as *;
+@use '@webitel/styleguide/typography' as *;
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-tree-table {
   @extend %wt-scrollbar;

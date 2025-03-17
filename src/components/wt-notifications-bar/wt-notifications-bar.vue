@@ -64,7 +64,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/styleguide/styleguide';
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-notifications-bar {
   @extend %wt-scrollbar;
