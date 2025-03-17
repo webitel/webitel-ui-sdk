@@ -123,7 +123,7 @@ const compareSelectElement = (item: any) => {
 </script>
 
 <style lang="scss">
-@use '../../css/main.scss' as *;
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-tree {
   padding: var(--spacing-sm);

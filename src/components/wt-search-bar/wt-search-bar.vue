@@ -167,7 +167,7 @@ function updateSearchMode({ option }) {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-search-bar {
   cursor: text;

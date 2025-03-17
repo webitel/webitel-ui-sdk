@@ -172,7 +172,8 @@ watch(wrapperShown, (value) => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-popup {
   position: fixed;

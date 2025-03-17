@@ -117,7 +117,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-time-input {
   display: inline-block;

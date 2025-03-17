@@ -281,7 +281,7 @@ defineExpose({
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-input {
   cursor: text;

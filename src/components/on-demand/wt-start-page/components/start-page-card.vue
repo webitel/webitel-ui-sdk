@@ -47,7 +47,7 @@ const open = () => {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .start-page-card {
   display: flex;

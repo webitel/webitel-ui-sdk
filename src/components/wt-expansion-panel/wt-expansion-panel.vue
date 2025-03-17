@@ -85,7 +85,7 @@ watch(
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-expansion-panel {
   display: flex;
