@@ -21,7 +21,7 @@ const instance = getDefaultInstance();
 const baseUrl = '/sip/gateways';
 
 const getGatewayList = async (params) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'ids'];
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
 
   const defaultObject = {
     name: '',

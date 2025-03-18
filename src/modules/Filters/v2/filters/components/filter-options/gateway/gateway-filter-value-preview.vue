@@ -21,7 +21,7 @@ const props = defineProps<{
 const localValue = ref([]);
 
 const getLocalValue = async () => {
-  const { items } = await searchMethod({ids: props.value});
+  const { items } = await searchMethod({id: props.value});
   localValue.value = items;
 };
 
