@@ -1,3 +1,8 @@
+## [v25.4.36] - 2025-03-18
+### :bug: Bug Fixes
+- [`7c73c7a`](https://github.com/webitel/webitel-ui-sdk/commit/7c73c7a694497215da434186619ac4b4bb693766) - param in gateway[WTEL-6296](https://webitel.atlassian.net/browse/WTEL-6296) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.4.34] - 2025-03-17
 ### :bug: Bug Fixes
 - [`fc8e40a`](https://github.com/webitel/webitel-ui-sdk/commit/fc8e40a42db817aa24d57977d80afced0b85653d) - bump version [WTEL-6494](https://webitel.atlassian.net/browse/WTEL-6494) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -1540,3 +1545,4 @@
 [v25.4.32]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.31...v25.4.32
 [v25.4.33]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.32...v25.4.33
 [v25.4.34]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.172...v25.4.34
+[v25.4.36]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.35...v25.4.36
