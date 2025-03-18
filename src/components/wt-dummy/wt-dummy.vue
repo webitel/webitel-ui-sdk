@@ -71,11 +71,11 @@ const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 
 .wt-dummy {
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   gap: var(--spacing-sm);
+  text-align: center;
 
   &__img {
     width: 200px;

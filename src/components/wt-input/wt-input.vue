@@ -1,10 +1,10 @@
 <template>
   <div
+    class="wt-input"
     :class="{
       'wt-input--disabled': disabled,
       'wt-input--invalid': invalid,
     }"
-    class="wt-input"
   >
     <wt-label
       v-if="hasLabel"
@@ -32,9 +32,9 @@
         :max="numberMax"
         :min="numberMin"
         :placeholder="placeholder || label"
+        class="wt-input__input"
         :type="inputType"
         :value="inputValue"
-        class="wt-input__input"
         v-bind="$attrs"
         @input="inputHandler"
         @keyup="$emit('keyup', $event)"
@@ -300,21 +300,21 @@ defineExpose({
   @include wt-placeholder;
 
   display: block;
-  box-sizing: border-box;
-  width: 100%;
-  padding: var(--input-padding);
   transition: var(--transition);
-  color: var(--wt-text-field-text-color);
+  box-sizing: border-box;
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
   background: transparent;
+  padding: var(--input-padding);
+  width: 100%;
+  color: var(--wt-text-field-text-color);
 
   .wt-input--invalid &,
   .wt-input--invalid:hover & {
-    color: var(--wt-text-field-error-text-color);
-    border-color: var(--wt-text-field-input-border-error-color);
     outline: none; // prevent outline overlapping false color
+    border-color: var(--wt-text-field-input-border-error-color);
+    color: var(--wt-text-field-error-text-color);
     @include wt-placeholder('error');
   }
 
@@ -326,13 +326,13 @@ defineExpose({
 }
 
 .wt-input__after-wrapper {
+  display: flex;
   position: absolute;
   top: 50%;
   right: var(--input-icon-margin);
-  display: flex;
   align-items: center;
+  gap: var(--input-after-wrapper-gap);
   transform: translateY(-50%);
   pointer-events: auto; // override --disabled p-events none
-  gap: var(--input-after-wrapper-gap);
 }
 </style>

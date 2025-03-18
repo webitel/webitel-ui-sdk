@@ -93,8 +93,8 @@ watch(
 <style lang="scss" scoped>
 .score-from-to-filter-value-field {
   display: grid;
-  align-items: center;
   grid-template-columns: repeat(2, 1fr);
+  align-items: center;
   grid-gap: var(--spacing-xs);
 }
 </style>

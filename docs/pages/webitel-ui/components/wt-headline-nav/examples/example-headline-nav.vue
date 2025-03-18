@@ -10,7 +10,7 @@
         route: 'https://dev.webitel.com/contact-center/queues',
       },
     ]"
-  ></wt-headline-nav>
+  />
 </template>
 
 <style lang="scss" scoped></style>

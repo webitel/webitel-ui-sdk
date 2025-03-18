@@ -114,8 +114,8 @@ const height = computed(() => {
 
 .wt-image {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   &__img {
     max-width: 100%;

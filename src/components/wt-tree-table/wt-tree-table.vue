@@ -281,8 +281,8 @@ const handleSelection = (row, select) => {
 }
 
 .wt-tree-table-wrapper {
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 
   .wt-tree-table-tr-wrapper {
     background: var(--wt-tree-table-primary-color);
@@ -296,16 +296,16 @@ const handleSelection = (row, select) => {
 .wt-tree-table-th,
 .wt-tree-table-td {
   @extend %typo-body-1;
+  padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
-  padding: var(--spacing-xs);
   word-break: break-all;
   overflow-wrap: break-word;
 
   &__actions {
     display: flex;
-    align-items: flex-start;
     justify-content: flex-end;
+    align-items: flex-start;
     gap: var(--spacing-xs);
   }
 

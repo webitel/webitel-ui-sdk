@@ -91,9 +91,9 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
+    border-radius: 50%;
     width: var(--wt-badge-size);
     height: var(--wt-badge-size);
-    border-radius: 50%;
 
     &__pic {
       position: absolute;

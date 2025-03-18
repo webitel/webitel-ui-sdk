@@ -5,7 +5,7 @@
       label="Textarea"
       name="label-textarea"
       @input="handler"
-    ></wt-textarea>
+    />
   </div>
 </template>
 

@@ -5,7 +5,7 @@
     label="Invalid textarea"
     name="invalid-textarea"
     @input="handler"
-  ></wt-textarea>
+  />
 </template>
 
 <script setup>

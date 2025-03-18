@@ -7,7 +7,7 @@ name: Webitel UI release with docs
 
 on:
   push:
-    branches: [ v*.* ]
+    branches: [v*.*]
 
 jobs:
   install_deps:

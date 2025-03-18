@@ -61,9 +61,7 @@
             @update:model-value="nameAlreadyExistsError = false"
           />
 
-          <preset-filters-preview
-            :filters="presetFilters"
-          />
+          <preset-filters-preview :filters="presetFilters" />
 
           <preset-description-field
             v-model:model-value="editDraft.description"
@@ -76,28 +74,38 @@
 </template>
 
 <script lang="ts" setup>
-import {EnginePresetQuery} from "webitel-sdk";
-import {computed, ref} from "vue";
-import {useVuelidate} from "@vuelidate/core";
-import {required} from "@vuelidate/validators";
-import {AxiosError} from "axios";
-import {WtExpansionPanel, WtIconAction, WtRadio} from "../../../../../../components/index";
-import {createFiltersManager} from "../../../filters/index";
-import PresetFiltersPreview from "../_shared/preset-filters-preview.vue";
-import PresetNameField from "../_shared/input-fields/preset-name-field.vue";
-import PresetDescriptionField from "../_shared/input-fields/preset-description-field.vue";
+import { EnginePresetQuery } from 'webitel-sdk';
+import { computed, ref } from 'vue';
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { AxiosError } from 'axios';
+import {
+  WtExpansionPanel,
+  WtIconAction,
+  WtRadio,
+} from '../../../../../../components/index';
+import { createFiltersManager } from '../../../filters/index';
+import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
+import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
+import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 
 type Props = {
   preset: EnginePresetQuery;
   isSelected: boolean;
   collapsed: boolean;
-}
+};
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
   'preset:select': [EnginePresetQuery];
-  'preset:update': [{ preset: EnginePresetQuery, onSuccess: () => void, onFailure: (err: AxiosError) => void }];
+  'preset:update': [
+    {
+      preset: EnginePresetQuery;
+      onSuccess: () => void;
+      onFailure: (err: AxiosError) => void;
+    },
+  ];
   'preset:delete': [EnginePresetQuery];
 }>();
 
@@ -134,17 +142,21 @@ const fillDraft = () => {
 
 fillDraft();
 
-const v$ = useVuelidate(computed(() => {
-  return {
-    name: {
-      required,
-      nameAlreadyInUse: () => !nameAlreadyExistsError.value,
-    },
-  };
-}), editDraft, {$autoDirty: true});
+const v$ = useVuelidate(
+  computed(() => {
+    return {
+      name: {
+        required,
+        nameAlreadyInUse: () => !nameAlreadyExistsError.value,
+      },
+    };
+  }),
+  editDraft,
+  { $autoDirty: true },
+);
 v$.value.$touch();
 
-const startEdit = ({open: openExpansion}) => {
+const startEdit = ({ open: openExpansion }) => {
   openExpansion();
   editMode.value = true;
 };
@@ -177,15 +189,15 @@ const submitEdit = () => {
 <style lang="scss" scoped>
 .preset-preview-title-wrapper {
   display: flex;
-  min-width: 0;
   gap: var(--spacing-xs);
+  min-width: 0;
 }
 
 .preset-preview-name {
-  overflow: hidden;
   flex: 1 1 0;
-  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .preset-preview-content {

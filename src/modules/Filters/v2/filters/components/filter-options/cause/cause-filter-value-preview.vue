@@ -13,7 +13,6 @@
 const props = defineProps<{
   value: number[];
 }>();
-
 </script>
 
 <style lang="scss" scoped></style>

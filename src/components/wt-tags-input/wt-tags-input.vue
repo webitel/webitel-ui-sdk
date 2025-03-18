@@ -146,6 +146,11 @@ export default {
 
     multiple: true,
   }),
+  created() {
+    if (!this.isApiMode) {
+      this.initializeOptions();
+    }
+  },
   methods: {
     getTagOptionLabel({ optionLabel, option }) {
       /*
@@ -168,11 +173,6 @@ export default {
 
       this.options.unshift(...newOptions);
     },
-  },
-  created() {
-    if (!this.isApiMode) {
-      this.initializeOptions();
-    }
   },
 };
 </script>
@@ -206,12 +206,12 @@ export default {
 
     .multiselect__custom-tag {
       display: flex;
-      align-items: center;
       flex-wrap: nowrap;
-      max-width: 100%;
-      margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0; // border bottom
-      word-break: break-all;
+      align-items: center;
       gap: var(--spacing-xs);
+      margin: 0 var(--spacing-xs) calc(var(--spacing-xs) - 1px) 0; // border bottom
+      max-width: 100%;
+      word-break: break-all;
     }
   }
 

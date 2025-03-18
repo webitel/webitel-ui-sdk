@@ -13,16 +13,16 @@
     :headers="headers"
     :selectable="false"
   >
-    <template v-slot:copy="{ item }">
+    <template #copy="{ item }">
       <wt-copy-action :value="item.code" />
     </template>
-    <template v-slot:icon="{ item }">
+    <template #icon="{ item }">
       <wt-icon
         :icon="item.icon"
         :size="size"
       />
     </template>
-    <template v-slot:code="{ item }">
+    <template #code="{ item }">
       <code>{{ item.code }}</code>
     </template>
   </wt-table>

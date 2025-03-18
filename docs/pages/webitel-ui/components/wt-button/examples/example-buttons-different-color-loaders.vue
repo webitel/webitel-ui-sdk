@@ -4,42 +4,49 @@
   <div
     style="display: grid; grid-template-columns: 140px; gap: var(--spacing-xs)"
   >
-    <wt-button loading>Primary</wt-button>
+    <wt-button loading> Primary </wt-button>
     <wt-button
       color="secondary"
       loading
-      >Secondary</wt-button
     >
+      Secondary
+    </wt-button>
     <wt-button
       disabled
       loading
-      >Disabled</wt-button
     >
+      Disabled
+    </wt-button>
     <wt-button
       color="success"
       loading
-      >Success</wt-button
     >
+      Success
+    </wt-button>
     <wt-button
       color="error"
       loading
-      >Error</wt-button
     >
+      Error
+    </wt-button>
     <wt-button
       color="transfer"
       loading
-      >Transfer</wt-button
     >
+      Transfer
+    </wt-button>
     <wt-button
       color="job"
       loading
-      >Job</wt-button
     >
+      Job
+    </wt-button>
     <wt-button
       color="info"
       loading
-      >info</wt-button
     >
+      info
+    </wt-button>
   </div>
 </template>
 

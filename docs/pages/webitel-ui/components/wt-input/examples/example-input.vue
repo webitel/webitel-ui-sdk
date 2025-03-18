@@ -5,7 +5,7 @@
       label="Input"
       name="label-input"
       @input="handler"
-    ></wt-input>
+    />
   </div>
 </template>
 

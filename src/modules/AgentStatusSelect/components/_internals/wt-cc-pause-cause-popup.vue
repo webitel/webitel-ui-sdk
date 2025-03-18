@@ -106,8 +106,8 @@ function setPause() {
 <style lang="scss" scoped>
 .wt-cc-pause-cause-popup-option {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   &:not(:last-child) {
     margin-bottom: var(--spacing-sm);

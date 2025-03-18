@@ -100,9 +100,9 @@ function handleOptionClick({ option, index, hide }) {
   @extend %typo-body-2;
   z-index: 1;
   transition: var(--transition);
+  box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
   background-color: var(--wt-context-menu-background-color);
-  box-shadow: var(--box-shadow);
 }
 
 .wt-context-menu__option-wrapper {
@@ -121,9 +121,9 @@ function handleOptionClick({ option, index, hide }) {
 
 .wt-context-menu__option {
   display: block;
-  padding: var(--wt-context-menu-option-padding);
-  cursor: pointer;
   transition: var(--transition);
+  cursor: pointer;
+  padding: var(--wt-context-menu-option-padding);
   color: var(--wt-context-menu-option-text-color);
 
   &:hover {
@@ -131,9 +131,9 @@ function handleOptionClick({ option, index, hide }) {
   }
 
   &--disabled {
+    background-color: var(--wt-context-menu-option-background-disabled-color);
     pointer-events: none;
     color: var(--wt-context-menu-option-text-disabled-color);
-    background-color: var(--wt-context-menu-option-background-disabled-color);
   }
 }
 </style>

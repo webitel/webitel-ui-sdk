@@ -5,10 +5,7 @@ import WtPopup from '../../../../../../src/components/wt-popup/wt-popup.vue';
 <template>
   <wt-popup>
     <template #activator="{ open }">
-      <wt-button
-        @click="open"
-      >activator
-      </wt-button>
+      <wt-button @click="open"> activator </wt-button>
     </template>
     <template #header>
       <h2>Popup header</h2>

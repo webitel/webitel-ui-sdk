@@ -4,7 +4,9 @@
     @close="emit('close')"
   >
     <template #title>
-      {{ `${t('reusable.save')} ${t('webitelUI.filters.presets.preset').toLowerCase()}` }}
+      {{
+        `${t('reusable.save')} ${t('webitelUI.filters.presets.preset').toLowerCase()}`
+      }}
     </template>
     <template #main>
       <p class="overwrite-preset-popup-text">

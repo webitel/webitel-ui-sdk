@@ -1,11 +1,7 @@
 <template>
   <div>
-    <p
-      v-if="props.value.unassigned"
-    >{{ t('reusable.unassigned') }}</p>
-    <ul
-      v-if="localValue"
-    >
+    <p v-if="props.value.unassigned">{{ t('reusable.unassigned') }}</p>
+    <ul v-if="localValue">
       <li
         v-for="({ name }, index) of localValue"
         :key="index"
@@ -20,14 +16,14 @@
 import { ref } from 'vue';
 
 import { searchMethod } from './config.js';
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   value: number[];
 }>();
 
 const localValue = ref([]);
-const {t} = useI18n();
+const { t } = useI18n();
 
 const getLocalValue = async () => {
   const { items } = await searchMethod({
@@ -39,5 +35,4 @@ const getLocalValue = async () => {
 getLocalValue();
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

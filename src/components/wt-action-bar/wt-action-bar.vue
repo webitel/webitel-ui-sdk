@@ -120,8 +120,8 @@ const handleActionClick = (action) => {
 <style lang="scss" scoped>
 .wt-action-bar {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: var(--spacing-xs);
 }
 </style>

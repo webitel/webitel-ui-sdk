@@ -203,9 +203,9 @@ onMounted(() => {
 
 .wt-tree-table-td {
   @extend %typo-body-1;
+  padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
-  padding: var(--spacing-xs);
   word-break: break-all;
   overflow-wrap: break-word;
 

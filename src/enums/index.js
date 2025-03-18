@@ -13,4 +13,20 @@ import { SupervisorSections } from './WebitelApplications/SupervisorSections';
 import WebitelApplications from './WebitelApplications/WebitelApplications.enum.js';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
-export { AbstractUserStatus, AdminSections, AgentStatus, AuditorSections, ChatGatewayProvider, ComponentSize, CrmSections, CrudAction, IconAction, QueueType, SupervisorSections, TypesExportedSettings, WebitelApplications, WtApplication, WtObject, };
+export {
+  AbstractUserStatus,
+  AdminSections,
+  AgentStatus,
+  AuditorSections,
+  ChatGatewayProvider,
+  ComponentSize,
+  CrmSections,
+  CrudAction,
+  IconAction,
+  QueueType,
+  SupervisorSections,
+  TypesExportedSettings,
+  WebitelApplications,
+  WtApplication,
+  WtObject,
+};

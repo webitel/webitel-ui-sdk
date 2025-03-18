@@ -1,3 +1,3 @@
 export const AuditorSections = {
-    Scorecards: 'scorecards',
+  Scorecards: 'scorecards',
 };

@@ -9,8 +9,8 @@
         </template>
       </wt-page-header>
     </template>
-    <template #side></template>
-    <template #main></template>
+    <template #side />
+    <template #main />
   </wt-dual-panel>
 </template>
 

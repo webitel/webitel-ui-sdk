@@ -11,7 +11,7 @@ function close() {
 </script>
 
 <template>
-  <wt-button @click="isSaveFailedPopup = true">Open popup </wt-button>
+  <wt-button @click="isSaveFailedPopup = true"> Open popup </wt-button>
   <wt-save-failed-popup
     v-if="isSaveFailedPopup"
     @close-popup="close"

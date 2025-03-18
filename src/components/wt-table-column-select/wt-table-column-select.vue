@@ -157,26 +157,26 @@ $list-width-md: calc(
   &__popup-list {
     @extend %wt-scrollbar;
     display: flex;
-    overflow-x: hidden;
     flex-direction: column;
     flex-wrap: wrap;
     width: $list-width-sm;
     max-height: $list-height;
+    overflow-x: hidden;
 
     // for 10-30 items
     &--md {
       display: block;
-      width: $list-width-md;
       column-count: 2;
+      width: $list-width-md;
     }
 
     // for 30+ items
     &--lg {
       display: block;
-      overflow-y: auto;
+      column-count: 3;
       width: $list-width-md;
       max-height: none;
-      column-count: 3;
+      overflow-y: auto;
     }
   }
 

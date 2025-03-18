@@ -1,15 +1,16 @@
+/// <reference types="vitest/config" />
 import vue from '@vitejs/plugin-vue';
+import { globbySync } from 'globby';
 import { resolve } from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 
 // https://vitejs.dev/config/
-export default ({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
-
+export default (/*{ mode }*/) => {
   return defineConfig({
     build: {
       lib: {
@@ -37,13 +38,15 @@ export default ({ mode }) => {
         },
       },
     },
-    define: {
-      'process.env': JSON.parse(
-        JSON.stringify(env).replaceAll('VITE_', 'VUE_APP_'),
-      ),
-    },
     server: {
       port: 8080,
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler', // or "modern-compiler", "legacy",
+        },
+      },
     },
     resolve: {
       alias: {
@@ -84,22 +87,27 @@ export default ({ mode }) => {
         vueTsc: false,
         // biome: true,
       }),
+      AutoImport({
+        include: [...globbySync('*.{ts,js,vue}')],
+        imports: {
+          vue: [
+            'ref',
+            'reactive',
+            'computed',
+            'watch',
+            'watchEffect',
+            'onMounted',
+            'onUnmounted',
+          ],
+          'vue-i18n': ['useI18n'],
+          'vue-router': ['useRouter', 'useRoute'],
+        },
+      }),
     ],
     test: {
       globals: true,
-      coverage: {
-        enabled: false,
-        reporter: 'json',
-      },
       environment: 'happy-dom',
       setupFiles: ['./tests/config/config.js'],
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler', // "modern", "modern-compiler", "legacy",
-        },
-      },
     },
   });
 };

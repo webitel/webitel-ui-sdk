@@ -6,7 +6,7 @@
     item-label="name"
     item-data="name"
     children-prop="services"
-  ></wt-tree>
+  />
 </template>
 
 <script setup>

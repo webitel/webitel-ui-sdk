@@ -46,24 +46,24 @@ onMounted(loadCatalogs);
 $form-width: 800px;
 
 .service-case-filter-value-field {
-  background: transparent;
-  max-height: 350px;
-  height: 100%;
-  overflow-y: auto;
   grid-area: value;
+  background: transparent;
+  height: 100%;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
 .dynamic-filter-config-form {
   &:has(.service-case-filter-value-field) {
-    width: $form-width;
-    height: 500px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 64px 1fr auto;
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       'column label'
       'value value'
       'footer footer';
+    width: $form-width;
+    height: 500px;
 
     .wt-select {
       grid-area: column;

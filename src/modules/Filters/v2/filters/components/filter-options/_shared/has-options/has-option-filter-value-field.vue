@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, useAttrs} from 'vue';
+import { computed, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../../components/wt-select/wt-select.vue';
@@ -27,7 +27,7 @@ const { t } = useI18n();
 
 const strModel = computed({
   get: () => {
-    return typeof model.value === "boolean" ? String(model.value) : model.value;
+    return typeof model.value === 'boolean' ? String(model.value) : model.value;
   },
   set: (value: string) => {
     model.value = value === 'true';

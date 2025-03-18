@@ -117,7 +117,10 @@ const result = computed(() => {
 </script>
 
 <template>
-  <div class="component-info" v-html="result" />
+  <div
+    class="component-info"
+    v-html="result"
+  />
 </template>
 
 <style lang="scss">

@@ -31,7 +31,7 @@ const callback = async () => {
 
 <template>
   <div style="display: flex; gap: var(--spacing-xs)">
-    <wt-button @click="isShowDialog = true">Show dialog</wt-button>
+    <wt-button @click="isShowDialog = true"> Show dialog </wt-button>
     <wt-input
       :value="deleteCount"
       @input="deleteCount = $event"
@@ -40,7 +40,7 @@ const callback = async () => {
   <wt-confirm-dialog
     :shown="isShowDialog"
     :title="$t('webitelUI.deleteConfirmationPopup.title')"
-    :deleteMessage="deleteMessage"
+    :delete-message="deleteMessage"
     :callback="callback"
     @close="isShowDialog = false"
   >

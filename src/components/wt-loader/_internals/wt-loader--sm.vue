@@ -33,9 +33,9 @@ export default {
   height: 24px;
 
   svg {
+    animation: rotate 1.5s linear infinite;
     width: 100%;
     height: 100%;
-    animation: rotate 1.5s linear infinite;
   }
 
   circle {

@@ -6,7 +6,7 @@ const isPopup = ref(false);
 </script>
 
 <template>
-  <wt-button @click="isPopup = !isPopup">Toggle v-if popup </wt-button>
+  <wt-button @click="isPopup = !isPopup"> Toggle v-if popup </wt-button>
   <wt-popup
     v-if="isPopup"
     @close="isPopup = false"

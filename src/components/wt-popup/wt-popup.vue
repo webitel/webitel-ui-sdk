@@ -176,15 +176,15 @@ watch(wrapperShown, (value) => {
 @use '@webitel/styleguide/scroll' as *;
 
 .wt-popup {
+  display: flex;
   position: fixed;
-  z-index: var(--popup-wrapper-z-index);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  z-index: var(--popup-wrapper-z-index);
   background: var(--wt-popup-shadow-color);
 
   &--size {
@@ -215,29 +215,29 @@ watch(wrapperShown, (value) => {
 }
 
 .wt-popup__popup {
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  max-height: var(--popup-max-height);
+  gap: var(--popup-sections-gap);
+  z-index: 1;
   margin: var(--popup-padding);
-  padding: var(--popup-padding);
+  box-shadow: var(--elevation-10);
   border-radius: var(--border-radius);
   background: var(--wt-popup-background-color);
-  box-shadow: var(--elevation-10);
-  gap: var(--popup-sections-gap);
+  padding: var(--popup-padding);
+  max-height: var(--popup-max-height);
 }
 
 .wt-popup__header {
   @extend %typo-subtitle-1;
-  position: relative;
   display: flex;
-  align-items: center;
+  position: relative;
   justify-content: space-between;
-  padding: var(--popup-header-padding);
-  color: var(--wt-popup-header-text-color);
+  align-items: center;
+  gap: var(--popup-header-padding);
   border-radius: var(--border-radius);
   background: var(--wt-popup-header-background-color);
-  gap: var(--popup-header-padding);
+  padding: var(--popup-header-padding);
+  color: var(--wt-popup-header-text-color);
 
   .wt-popup__title {
     flex-grow: 1;
@@ -252,18 +252,18 @@ watch(wrapperShown, (value) => {
 .wt-popup__main {
   @extend %wt-scrollbar;
   @extend %typo-body-1;
-  overflow-y: auto;
   flex-grow: 1;
-  min-height: 0;
   padding-right: var(--popup-main-section-padding-right);
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .wt-popup__actions {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: var(--popup-actions-padding);
+  align-items: center;
   gap: var(--popup-actions-padding);
+  padding: var(--popup-actions-padding);
 }
 
 .wt-popup--overflow {
@@ -272,8 +272,8 @@ watch(wrapperShown, (value) => {
   }
 
   .wt-popup__main {
-    overflow: visible;
     padding-right: 0;
+    overflow: visible;
   }
 }
 </style>

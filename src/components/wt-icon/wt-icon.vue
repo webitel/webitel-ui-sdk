@@ -68,17 +68,17 @@ const iconName = computed(() => {
 <style lang="scss" scoped>
 .wt-icon {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   transition: var(--transition);
 }
 
 /*svg instead of .icon to override styles by .icon-icon-name-size without any other seelectors*/
 svg {
   display: block;
+  transition: var(--transition);
   width: 100%;
   height: 100%;
-  transition: var(--transition);
   stroke-width: 0;
   fill: var(--icon-color);
 }

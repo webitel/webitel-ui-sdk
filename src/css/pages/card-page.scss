@@ -10,25 +10,25 @@
 
   &-tabs {
     display: flex;
-    flex-direction: column;
     flex-grow: 1;
+    flex-direction: column;
     gap: var(--spacing-sm);
 
     &__tab {
       display: flex;
-      flex-direction: column;
       flex-grow: 1;
-      min-height: 0;
+      flex-direction: column;
       gap: var(--spacing-sm);
+      min-height: 0;
     }
   }
 
   &-header {
-    position: relative;
     display: flex;
-    align-items: center;
+    position: relative;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     margin: var(--spacing-sm) 0;
 
     &__title {
@@ -48,9 +48,9 @@
 
   &-input-grid {
     display: grid;
-    align-items: flex-start;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(auto, auto);
+    align-items: flex-start;
     grid-column-gap: var(--spacing-sm);
     grid-row-gap: var(--spacing-sm);
 

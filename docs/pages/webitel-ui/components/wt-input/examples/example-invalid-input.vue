@@ -4,7 +4,7 @@
     :v="v$"
     label="Invalid input"
     name="invalid-input"
-  ></wt-input>
+  />
 </template>
 
 <script setup>

@@ -20,22 +20,13 @@ import Specs from './component-specs.vue';
 <<< ./examples/example-tree.vue
 :::
 
-[//]: # (TODO Comment because now it's doesn't need to use list but have request not to delete)
-
-[//]: # (## Example Tree List)
-
-[//]: # ()
-
-[//]: # (::: raw)
-
-[//]: # (<ExampleTreeList />)
-
-[//]: # (:::)
-
-[//]: # ()
-
-[//]: # (::: details Code)
-
-[//]: # (<<< ./examples/example-tree-list.vue)
-
-[//]: # (:::)
+[//]: # "TODO Comment because now it's doesn't need to use list but have request not to delete"
+[//]: # '## Example Tree List'
+[//]: #
+[//]: # '::: raw'
+[//]: # '<ExampleTreeList />'
+[//]: # ':::'
+[//]: #
+[//]: # '::: details Code'
+[//]: # '<<< ./examples/example-tree-list.vue'
+[//]: # ':::'

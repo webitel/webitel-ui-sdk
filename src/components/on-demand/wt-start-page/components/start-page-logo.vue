@@ -16,8 +16,8 @@ const props = defineProps({
 <style lang="scss" scoped>
 .start-page-logo {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   min-height: 200px;
 }
 </style>

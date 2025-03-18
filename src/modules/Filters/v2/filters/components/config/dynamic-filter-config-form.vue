@@ -127,10 +127,10 @@ $form-width: 380px;
 .dynamic-filter-config-form {
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  width: $form-width;
-  padding: var(--spacing-xs) 0;
   gap: var(--spacing-xs);
+  box-sizing: border-box;
+  padding: var(--spacing-xs) 0;
+  width: $form-width;
 }
 
 .dynamic-filter-config-form-footer {

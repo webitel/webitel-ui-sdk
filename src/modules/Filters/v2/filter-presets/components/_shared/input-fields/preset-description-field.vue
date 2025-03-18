@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="props.previewMode && model"
-  >
+  <div v-if="props.previewMode && model">
     <wt-label>
       {{ t('vocabulary.description') }}
     </wt-label>
@@ -19,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 import { WtTextarea, WtLabel } from '../../../../../../../components/index';
 
 const model = defineModel<string>();
@@ -31,6 +29,4 @@ const props = defineProps<{
 const { t } = useI18n();
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
