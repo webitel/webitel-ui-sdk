@@ -1,3 +1,17 @@
+## [v25.4.38] - 2025-03-18
+### :sparkles: New Features
+- [`d7e3989`](https://github.com/webitel/webitel-ui-sdk/commit/d7e39894bbc86f358148fc8b7c629d7ce85cb6ad) - added husky to project, added pre-commit linting hook [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`32fb157`](https://github.com/webitel/webitel-ui-sdk/commit/32fb1574bba557b8473a03385624c1cd0171ff6d) - eslint+prettier additional configs [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`c39ad3c`](https://github.com/webitel/webitel-ui-sdk/commit/c39ad3cb972fac34717f51de1854196ee79204a1) - added user field for contacts api get request [WTEL-6457](https://webitel.atlassian.net/browse/WTEL-6457) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`8628c60`](https://github.com/webitel/webitel-ui-sdk/commit/8628c60f55f067c2e5f471843acb757992d1af98) - docs build / added `?` operator to `nameAlreadyInUse` validation check [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`d88c606`](https://github.com/webitel/webitel-ui-sdk/commit/d88c60628fc732c155a663e213be9d76bc1f4bb3) - autoimport plugin import [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`c380e96`](https://github.com/webitel/webitel-ui-sdk/commit/c380e96ad2cfce48d77e315dd61aa9949eef7ffc) - run eslint+prettier formatting on project [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.37] - 2025-03-18
 ### :bug: Bug Fixes
 - [`8417416`](https://github.com/webitel/webitel-ui-sdk/commit/84174164a9c2b27191900724a737b20ff2b466c5) - wt-label typo + paddings reverted [WTEL-6529](https://webitel.atlassian.net/browse/WTEL-6529) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1684,3 +1698,4 @@
 [v25.4.34]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.172...v25.4.34
 [v25.4.36]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.35...v25.4.36
 [v25.4.37]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.36...v25.4.37
+[v25.4.38]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.37...v25.4.38
