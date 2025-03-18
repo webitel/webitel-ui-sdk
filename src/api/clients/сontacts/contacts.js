@@ -164,6 +164,7 @@ const get = async ({ itemId: id }) => {
     'phones',
     'emails',
     'imclients',
+    'user',
   ];
 
   const defaultObject = {};
