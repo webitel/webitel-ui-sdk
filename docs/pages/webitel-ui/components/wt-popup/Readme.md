@@ -10,25 +10,20 @@ import ExamplePopupUsingVIf from './examples/example-popup-using-v-if.vue';
 
 <Specs />
 
-[//]: # (## Example Popup using Activator)
-
-[//]: # ()
-[//]: # (::: raw)
-
-[//]: # ()
-[//]: # (<ExamplePopupUsingActivator />)
-
-[//]: # ()
-[//]: # (:::)
-
-[//]: # ()
-[//]: # (::: details Code)
-
-[//]: # (<<< ./examples/example-popup-using-activator.vue)
-
-[//]: # (:::)
+[//]: # '## Example Popup using Activator'
+[//]: #
+[//]: # '::: raw'
+[//]: #
+[//]: # '<ExamplePopupUsingActivator />'
+[//]: #
+[//]: # ':::'
+[//]: #
+[//]: # '::: details Code'
+[//]: # '<<< ./examples/example-popup-using-activator.vue'
+[//]: # ':::'
 
 ## Example Popup Using Shown Prop
+
 _Ok_
 
 ::: raw
@@ -39,7 +34,8 @@ _Ok_
 <<< ./examples/example-popup-using-shown-prop.vue
 :::
 
-## Example Popup using v-if 
+## Example Popup using v-if
+
 _**Deprecated**, not recommended_
 
 ::: raw
@@ -49,4 +45,3 @@ _**Deprecated**, not recommended_
 ::: details Code
 <<< ./examples/example-popup-using-v-if.vue
 :::
-

@@ -7,7 +7,7 @@
     name="disabled-input"
     type="password"
     @input="handler"
-  ></wt-input>
+  />
 </template>
 
 <script setup>

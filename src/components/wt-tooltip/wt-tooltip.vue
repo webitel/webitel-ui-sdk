@@ -178,15 +178,15 @@ onBeforeUnmount(() => {
 
   .wt-tooltip-floating {
     @extend %typo-body-2;
-    z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
-    padding: var(--spacing-2xs) var(--spacing-xs);
-    color: var(--wt-tooltip-text-color);
+    z-index: 1000;
+    box-shadow: var(--elevation-10);
     border-radius: var(--border-radius);
     background: var(--wt-tooltip-background-color);
-    box-shadow: var(--elevation-10);
+    padding: var(--spacing-2xs) var(--spacing-xs);
+    color: var(--wt-tooltip-text-color);
   }
 }
 </style>

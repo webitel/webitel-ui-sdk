@@ -16,8 +16,9 @@ const colors = [
       v-for="color of colors"
       :key="color"
       :color="color"
-      >{{ color }}</wt-chip
     >
+      {{ color }}
+    </wt-chip>
   </div>
 </template>
 

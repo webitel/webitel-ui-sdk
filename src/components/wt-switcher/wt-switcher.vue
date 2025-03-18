@@ -91,8 +91,8 @@ export default {
 }
 
 .wt-switcher__wrapper {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
   cursor: pointer;
   user-select: none;
@@ -103,8 +103,8 @@ export default {
 }
 
 .wt-switcher__label {
-  margin-left: var(--switcher-icon-margin);
   transition: var(--transition);
+  margin-left: var(--switcher-icon-margin);
 
   .wt-switcher__wrapper--label-left & {
     margin-right: var(--switcher-icon-margin);
@@ -114,30 +114,30 @@ export default {
 
 .wt-switcher__input {
   position: absolute;
+  opacity: 0;
   width: 0;
   height: 0;
   pointer-events: none;
-  opacity: 0;
 }
 
 .wt-switcher__checkmark {
-  position: relative;
   display: block;
+  position: relative;
   flex: 0 0 var(--switcher-width);
-  width: var(--switcher-width);
-  height: var(--switcher-height);
   transition: var(--transition);
   border-radius: var(--switcher-border-radius);
+  width: var(--switcher-width);
+  height: var(--switcher-height);
 
   &:before {
     position: absolute;
     bottom: var(--switcher-cicle-margin);
     left: var(--switcher-cicle-margin);
+    transition: var(--transition);
+    border-radius: 50%;
     width: var(--switcher-cicle-size);
     height: var(--switcher-cicle-size);
     content: '';
-    transition: var(--transition);
-    border-radius: 50%;
   }
 }
 

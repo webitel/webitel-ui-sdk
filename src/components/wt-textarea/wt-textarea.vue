@@ -184,9 +184,9 @@ export default {
 
   &--autoresize {
     .wt-textarea__textarea {
+      transition: none;
       min-height: auto;
       max-height: 100%;
-      transition: none;
     }
 
     .wt-textarea__wrapper {
@@ -205,17 +205,17 @@ export default {
   @include wt-placeholder;
 
   display: block;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: var(--textarea-min-height);
-  padding: var(--textarea-padding);
-  resize: none;
   transition: var(--transition);
-  color: var(--wt-text-field-text-color);
+  box-sizing: border-box;
   border: var(--input-border);
   border-color: var(--wt-text-field-input-border-color);
   border-radius: var(--border-radius);
   background: transparent;
+  padding: var(--textarea-padding);
+  width: 100%;
+  min-height: var(--textarea-min-height);
+  resize: none;
+  color: var(--wt-text-field-text-color);
 
   .wt-textarea--disabled & {
     @include wt-placeholder('disabled');
@@ -226,20 +226,20 @@ export default {
 
   .wt-textarea--invalid &,
   .wt-textarea--invalid:hover & {
-    color: var(--wt-text-field-error-text-color);
-    border-color: var(--wt-text-field-input-border-error-color);
     outline: none; // prevent outline overlapping false color
+    border-color: var(--wt-text-field-input-border-error-color);
+    color: var(--wt-text-field-error-text-color);
     @include wt-placeholder('error');
   }
 }
 
 .wt-textarea__after-wrapper {
+  display: flex;
   position: absolute;
   top: var(--input-icon-margin);
   right: var(--input-icon-margin);
-  display: flex;
   align-items: center;
-  pointer-events: auto; // override --disabled p-events none
   gap: var(--input-after-wrapper-gap);
+  pointer-events: auto; // override --disabled p-events none
 }
 </style>

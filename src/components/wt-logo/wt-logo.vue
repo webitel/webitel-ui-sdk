@@ -22,7 +22,9 @@ const props = defineProps({
     default: false,
   },
 });
-const href = computed(() => props.logoHref || import.meta.env.VITE_START_PAGE_URL);
+const href = computed(
+  () => props.logoHref || import.meta.env.VITE_START_PAGE_URL,
+);
 const logoSrc = props.darkMode ? LogoDark : LogoLight;
 
 const linkComponent = props.disabled
@@ -39,8 +41,15 @@ const linkAttrs = props.disabled
 </script>
 
 <template>
-  <component :is="linkComponent" v-bind="linkAttrs">
-    <img :src="logoSrc" alt="Webitel" class="wt-logo" />
+  <component
+    :is="linkComponent"
+    v-bind="linkAttrs"
+  >
+    <img
+      :src="logoSrc"
+      alt="Webitel"
+      class="wt-logo"
+    />
   </component>
 </template>
 
@@ -50,8 +59,8 @@ const linkAttrs = props.disabled
 
 <style lang="scss" scoped>
 .wt-logo {
+  display: block;
   width: var(--wt-logo-width);
   height: var(--wt-logo-height);
-  display: block;
 }
 </style>

@@ -91,13 +91,13 @@ export default {
 
 <style lang="scss" scoped>
 pre {
-  min-width: 600px;
-  width: 60%;
-  padding: 10px;
-  margin-right: 60px;
-  background: var(--contrast-color);
-  border-radius: var(--border-radius);
-  color: var(--main-color);
   cursor: text;
+  margin-right: 60px;
+  border-radius: var(--border-radius);
+  background: var(--contrast-color);
+  padding: 10px;
+  width: 60%;
+  min-width: 600px;
+  color: var(--main-color);
 }
 </style>

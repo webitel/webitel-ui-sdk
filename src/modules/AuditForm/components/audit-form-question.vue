@@ -122,10 +122,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .audit-form-question {
-  padding: var(--spacing-sm);
+  box-shadow: var(--elevation-1);
   border-radius: var(--border-radius);
   background: var(--dp-22-surface-color);
-  box-shadow: var(--elevation-1);
+  padding: var(--spacing-sm);
 
   // override audit-form-question-read-wrapper specificity for hover
   &.audit-form-question--answered {

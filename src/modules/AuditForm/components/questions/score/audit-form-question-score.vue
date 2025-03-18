@@ -115,9 +115,9 @@ onMounted(() => v$.value.$touch());
 <style lang="scss" scoped>
 .audit-form-question-score-write {
   display: grid;
-  margin-right: calc(var(--spacing-sm) + 24px); // icon offset
   grid-template-columns: 100px 100px;
   gap: var(--spacing-sm);
+  margin-right: calc(var(--spacing-sm) + 24px); // icon offset
 }
 
 .audit-form-question-score-read {

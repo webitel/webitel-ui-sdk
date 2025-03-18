@@ -43,8 +43,8 @@ export default {
 
   display: flex;
   align-items: center;
-  cursor: text;
   transition: var(--transition);
+  cursor: text;
   color: var(--wt-label-color);
   //padding: var(--wt-label-padding);
 

@@ -75,8 +75,8 @@ const deleteMessage = computed(() => {
 <style scoped>
 .delete-confirmation-popup__content {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   gap: var(--spacing-sm);
 }
 

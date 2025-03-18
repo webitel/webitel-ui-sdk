@@ -240,11 +240,11 @@ watch(
   &__label-wrapper {
     display: flex;
     align-items: center;
-    cursor: pointer;
-    padding: 0 var(--spacing-2xs);
-    border-radius: var(--border-radius);
-    color: var(--wt-tree-item-on);
     transition: var(--transition);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    padding: 0 var(--spacing-2xs);
+    color: var(--wt-tree-item-on);
 
     &:hover {
       background: var(--wt-tree-item-hover);

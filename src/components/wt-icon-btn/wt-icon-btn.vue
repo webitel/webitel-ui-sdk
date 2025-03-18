@@ -33,8 +33,8 @@ const emit = defineEmits<{
 
 <style lang="scss" scoped>
 .wt-icon-btn {
-  position: relative;
   display: block;
+  position: relative;
   width: fit-content;
   line-height: 0;
 

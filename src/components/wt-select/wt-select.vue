@@ -52,7 +52,7 @@
         v-if="!isOpened"
         #limit
       >
-        <wt-chip class="multiselect__limit"> +{{ value.length - 1 }}</wt-chip>
+        <wt-chip class="multiselect__limit"> +{{ value.length - 1 }} </wt-chip>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
@@ -304,10 +304,10 @@ export default {
   .multiselect__single-label {
     // text overflow 3 dots
     display: block;
-    overflow: hidden;
     max-width: 100%;
-    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

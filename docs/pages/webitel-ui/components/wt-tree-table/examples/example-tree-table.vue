@@ -5,8 +5,7 @@
     children-prop="service"
     selectable
     sortable
-  >
-  </wt-tree-table>
+  />
 </template>
 
 <script setup>

@@ -25,22 +25,22 @@ export default {};
 
 .wt-loader--md {
   position: relative;
+  margin: auto;
   width: var(--loader-size);
   height: var(--loader-size);
-  margin: auto;
 
   &:before {
+    display: block;
     position: absolute;
     top: 37px;
     left: 19px;
-    display: block;
-    width: var(--loader-dot-size);
-    height: var(--loader-dot-size);
-    content: '';
     transform: translate(-18px, -18px);
     animation: dotRect var(--loader-animation-duration) linear infinite;
     border-radius: 50%;
     background: var(--wt-loader-md-point-color);
+    width: var(--loader-dot-size);
+    height: var(--loader-dot-size);
+    content: '';
   }
 
   .wt-loader--md__svg {

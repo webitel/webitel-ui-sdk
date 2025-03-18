@@ -134,14 +134,14 @@ function handleQuestionTypeChange(type) {
 .audit-form-question.audit-form-question-write {
   display: flex;
   flex-direction: column;
-  box-shadow: var(--elevation-3);
   gap: var(--spacing-sm);
+  box-shadow: var(--elevation-3);
 }
 
 .audit-form-question-write-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   &__actions {
     display: flex;
@@ -151,11 +151,11 @@ function handleQuestionTypeChange(type) {
 
 .audit-form-question-write-content-question {
   display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--spacing-sm);
   margin-right: calc(
     24px + var(--spacing-sm)
   ); // delete icon action for type "options"
   margin-bottom: var(--spacing-sm);
-  grid-template-columns: 3fr 1fr;
-  gap: var(--spacing-sm);
 }
 </style>

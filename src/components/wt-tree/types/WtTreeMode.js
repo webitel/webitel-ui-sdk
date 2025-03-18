@@ -1,4 +1,4 @@
 export const WtTreeMode = {
-    Tree: 'tree',
-    List: 'list',
+  Tree: 'tree',
+  List: 'list',
 };

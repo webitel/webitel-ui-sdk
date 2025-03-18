@@ -1,6 +1,5 @@
 <template>
-  <ul
-    v-if="localValue">
+  <ul v-if="localValue">
     <li
       v-for="({ name }, index) of localValue"
       :key="index"
@@ -12,7 +11,7 @@
 
 <script lang="ts" setup>
 import { searchMethod } from './config.js';
-import {ref} from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
   value: number[];
@@ -21,12 +20,11 @@ const props = defineProps<{
 const localValue = ref([]);
 
 const getLocalValue = async () => {
-  const { items } = await searchMethod({ids: props.value});
+  const { items } = await searchMethod({ ids: props.value });
   localValue.value = items;
 };
 
 getLocalValue();
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

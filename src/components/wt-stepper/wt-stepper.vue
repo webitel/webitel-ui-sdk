@@ -67,8 +67,8 @@ const stepWithCompleted = computed(() =>
 .wt-stepper-header {
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--spacing-lg);
   gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
 }
 
 .wt-stepper-steps {
@@ -81,8 +81,8 @@ const stepWithCompleted = computed(() =>
 
   &__divider {
     flex: 1 1 auto;
-    height: 1px;
     background: var(--wt-stepper-divider-background-color);
+    height: 1px;
 
     &--completed {
       background-color: var(--wt-stepper-divider-background-completed-color);

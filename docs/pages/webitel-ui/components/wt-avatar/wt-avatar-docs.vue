@@ -87,7 +87,7 @@ export default {
 <style lang="scss" scoped>
 .avatars-row {
   display: flex;
-  gap: var(--spacing-sm);
   flex-wrap: nowrap;
+  gap: var(--spacing-sm);
 }
 </style>

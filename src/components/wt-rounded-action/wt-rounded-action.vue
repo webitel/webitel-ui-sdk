@@ -92,14 +92,14 @@ const iColor = computed(() => {
 <style lang="scss" scoped>
 .wt-rounded-action {
   display: block;
-  width: fit-content;
-  padding: var(--rounded-action-padding);
   transition: var(--transition);
-  line-height: 0;
   border: var(--rounded-action-border-size) solid;
   border-color: var(--rounded-action-bg-color);
   border-radius: var(--border-radius);
   background: var(--rounded-action-bg-color);
+  padding: var(--rounded-action-padding);
+  width: fit-content;
+  line-height: 0;
 
   &:hover {
     border-color: var(--rounded-action-bg-hover-color);

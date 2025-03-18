@@ -26,7 +26,7 @@
     <template #actions>
       <slot
         name="actions"
-        :isDeleting="isDeleting"
+        :is-deleting="isDeleting"
         :confirm="confirm"
         :close="close"
       >
@@ -96,8 +96,8 @@ async function confirm() {
 <style scoped>
 .wt-confirm-dialog__content {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   gap: var(--spacing-sm);
 }
 

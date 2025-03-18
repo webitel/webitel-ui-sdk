@@ -256,8 +256,8 @@ export default {
 }
 
 .wt-time-input {
-  width: var(--timepicker-input-width);
   margin-right: var(--timepicker-input-margin);
+  width: var(--timepicker-input-width);
 
   &:last-child {
     margin-right: 0;

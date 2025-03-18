@@ -174,8 +174,8 @@ function updateSearchMode({ option }) {
 
   &.wt-search-bar--invalid {
     .wt-search-bar__wrapper {
-      border-color: var(--wt-text-field-input-border-error-color);
       outline: none; // prevent outline overlapping false color
+      border-color: var(--wt-text-field-input-border-error-color);
     }
 
     .wt-search-bar__input {
@@ -187,11 +187,11 @@ function updateSearchMode({ option }) {
   .wt-search-bar__wrapper {
     display: flex;
     align-items: center;
-    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
+    gap: var(--spacing-xs);
     border: var(--input-border);
     border-color: var(--wt-text-field-input-border-color);
     border-radius: var(--border-radius);
-    gap: var(--spacing-xs);
+    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
   }
 
   .wt-search-bar__search-icon {
@@ -200,8 +200,8 @@ function updateSearchMode({ option }) {
 
   .wt-search-bar__reset-icon-btn {
     .wt-search-bar:not(:focus-within) & {
-      pointer-events: none;
       opacity: 0;
+      pointer-events: none;
     }
   }
 
@@ -210,14 +210,14 @@ function updateSearchMode({ option }) {
     @include wt-placeholder;
 
     display: block;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 0;
     transition: var(--transition);
-    color: var(--wt-text-field-text-color);
-    border: none;
+    box-sizing: border-box;
     outline: none;
+    border: none;
     background: transparent;
+    padding: 0;
+    width: 100%;
+    color: var(--wt-text-field-text-color);
   }
 
   /* clears the 'X' from Internet Explorer */

@@ -29,13 +29,13 @@ export default {
 
 .wt-headline {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  gap: var(--headline-nav-gap);
   box-sizing: border-box;
-  min-height: var(--headline-min-height);
   border-radius: var(--border-radius);
   background: var(--wt-headline-background-color);
-  gap: var(--headline-nav-gap);
+  min-height: var(--headline-min-height);
 }
 
 .wt-headline__title {
@@ -44,8 +44,8 @@ export default {
 }
 
 .wt-headline__actions-wrapper {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
 }
 </style>

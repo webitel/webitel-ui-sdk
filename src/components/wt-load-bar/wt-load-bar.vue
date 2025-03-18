@@ -39,19 +39,19 @@ export default {
 .wt-load-bar {
   position: relative;
   box-sizing: border-box;
-  width: 100%;
-  padding: var(--load-bar-padding);
-  line-height: 0;
   border: 1px solid var(--wt-load-bar-progress-color);
   border-radius: var(--border-radius);
+  padding: var(--load-bar-padding);
+  width: 100%;
+  line-height: 0;
 }
 
 .wt-load-bar__progress {
   display: inline-block;
-  height: var(--load-bar-height);
   transition: var(--transition);
+  will-change: width;
   border-radius: var(--load-bar-border-radius);
   background: var(--wt-load-bar-progress-color);
-  will-change: width;
+  height: var(--load-bar-height);
 }
 </style>

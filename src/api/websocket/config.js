@@ -8,8 +8,9 @@ export const getConfig = () => {
 };
 
 const { hostname, protocol } = window.location;
-const origin = (`${protocol}//${hostname}`).replace(/^http/, 'ws');
+const origin = `${protocol}//${hostname}`.replace(/^http/, 'ws');
 
-export const endpoint = import.meta.env.MODE === 'production'
-  ? `${origin}/ws`
-  : 'wss://dev.webitel.com/ws';
+export const endpoint =
+  import.meta.env.MODE === 'production'
+    ? `${origin}/ws`
+    : 'wss://dev.webitel.com/ws';

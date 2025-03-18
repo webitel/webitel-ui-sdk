@@ -9,13 +9,13 @@
       wide
       icon="call"
       color="secondary"
-    ></wt-rounded-action>
+    />
     <wt-rounded-action
       wide
       rounded
       icon="call"
       color="secondary"
-    ></wt-rounded-action>
+    />
   </div>
 </template>
 

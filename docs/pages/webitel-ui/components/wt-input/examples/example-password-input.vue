@@ -5,7 +5,7 @@
     label="Password"
     name="password-input"
     type="password"
-  ></wt-input>
+  />
 </template>
 
 <script setup>

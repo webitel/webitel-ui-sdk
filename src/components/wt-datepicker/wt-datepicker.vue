@@ -207,11 +207,11 @@ const clearValue = () => {
 
   .dp__menu {
     box-sizing: border-box;
+    box-shadow: var(--elevation-10);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs);
     width: 196px;
     min-width: 196px;
-    padding: var(--spacing-xs);
-    border-radius: var(--border-radius);
-    box-shadow: var(--elevation-10);
   }
 
   .dp__calendar_wrap {
@@ -259,8 +259,8 @@ const clearValue = () => {
 .datepicker__timepicker {
   display: flex;
   align-items: center;
-  margin-top: var(--spacing-xs);
   gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
 
   .wt-time-input {
     flex-grow: 1;

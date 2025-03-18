@@ -46,9 +46,9 @@ export default {
 }
 
 .border-radius-item {
-  padding: 10px;
-  background: var(--main-color);
   border: 2px solid var(--accent-color);
+  background: var(--main-color);
+  padding: 10px;
 
   &__name {
     @extend %typo-subtitle-2;

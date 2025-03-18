@@ -44,11 +44,11 @@ const { t } = useI18n();
 
   &-wrapper {
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: fit-content;
-    cursor: pointer;
+    align-items: center;
     gap: var(--spacing-2xs);
+    cursor: pointer;
+    width: fit-content;
   }
 }
 </style>

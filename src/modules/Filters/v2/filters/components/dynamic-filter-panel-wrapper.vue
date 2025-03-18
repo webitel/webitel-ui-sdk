@@ -16,19 +16,22 @@
 <script setup lang="ts">
 import { ComponentSize } from '../../../../../enums';
 
-const props = withDefaults(defineProps<{
-  size?: ComponentSize;
-}>(), {
-  size: ComponentSize.MD,
-});
+const props = withDefaults(
+  defineProps<{
+    size?: ComponentSize;
+  }>(),
+  {
+    size: ComponentSize.MD,
+  },
+);
 </script>
 
 <style lang="scss" scoped>
 .dynamic-filter-panel-wrapper {
   display: grid;
   grid-gap: var(--spacing-sm);
-  align-items: center;
   grid-template-columns: 1fr auto;
+  align-items: center;
 }
 
 .dynamic-filter-panel-wrapper__filters {
@@ -46,7 +49,7 @@ const props = withDefaults(defineProps<{
 .dynamic-filter-panel-wrapper {
   &--sm {
     .dynamic-filter-panel-wrapper__filters,
-    .dynamic-filter-panel-wrapper__actions, {
+    .dynamic-filter-panel-wrapper__actions {
       grid-gap: var(--spacing-xs);
     }
   }

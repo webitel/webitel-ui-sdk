@@ -94,18 +94,18 @@ watch(
   .wt-expansion-panel-header {
     @extend %typo-subtitle-1;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-2xs) var(--spacing-xs);
+    align-items: center;
     cursor: pointer;
-    color: var(--wt-expansion-panel-header-title-color);
     border-radius: var(--spacing-2xs);
     background-color: var(--wt-expansion-panel-header-background-color);
+    padding: var(--spacing-2xs) var(--spacing-xs);
+    color: var(--wt-expansion-panel-header-title-color);
   }
 
   .wt-expansion-panel-body {
-    color: var(--wt-expansion-panel-content-text-color);
     background-color: var(--wt-expansion-panel-content-background-color);
+    color: var(--wt-expansion-panel-content-text-color);
   }
 
   .wt-expansion-panel-actions {

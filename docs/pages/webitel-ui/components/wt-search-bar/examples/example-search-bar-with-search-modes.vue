@@ -22,8 +22,8 @@ const searchMode = ref(searchModeOptions[0]);
     :value="value"
     placeholder="Search"
     hint="I have search modes!"
-    :searchMode="searchMode"
-    :searchModeOptions="searchModeOptions"
+    :search-mode="searchMode"
+    :search-mode-options="searchModeOptions"
     @input="value = $event"
     @change:search-mode="searchMode = $event"
   />

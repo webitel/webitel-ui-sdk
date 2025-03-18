@@ -30,8 +30,8 @@ export default {
 
 .wt-input-info {
   @extend %typo-caption;
-  min-height: var(--input-info-min-height);
   margin-top: var(--input-info-margin);
+  min-height: var(--input-info-min-height);
   color: var(--wt-helper-text-color);
 
   &--invalid {

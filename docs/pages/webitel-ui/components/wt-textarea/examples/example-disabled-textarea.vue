@@ -5,7 +5,7 @@
     label="Disabled"
     name="disabled-textarea"
     @input="handler"
-  ></wt-textarea>
+  />
 </template>
 
 <script setup>

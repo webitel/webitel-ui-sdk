@@ -376,9 +376,9 @@ const palette = [
 }
 
 .color-preview {
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
   width: 120px;
   height: 40px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--elevation-10);
 }
 </style>

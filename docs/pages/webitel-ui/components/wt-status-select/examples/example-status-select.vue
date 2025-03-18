@@ -11,7 +11,7 @@ const status = ref(AgentStatus.ONLINE);
   <wt-status-select
     :status="status"
     @change="status = $event"
-  ></wt-status-select>
+  />
 </template>
 
 <style scoped lang="scss"></style>

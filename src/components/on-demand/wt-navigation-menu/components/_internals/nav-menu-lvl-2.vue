@@ -36,8 +36,8 @@ const props = defineProps({
   overflow-y: auto;
 
   .nav-menu-lvl-2__indicator {
-    position: relative;
     display: block;
+    position: relative;
     width: var(--spacing-md);
     height: var(--spacing-md);
 
@@ -45,12 +45,12 @@ const props = defineProps({
       position: absolute;
       top: 50%;
       left: 50%;
-      width: var(--spacing-2xs);
-      height: var(--spacing-2xs);
-      content: '';
       transform: translate(-50%, -50%);
       border-radius: 50%;
       background: var(--text-main-color);
+      width: var(--spacing-2xs);
+      height: var(--spacing-2xs);
+      content: '';
     }
   }
 

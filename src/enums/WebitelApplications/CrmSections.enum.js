@@ -10,5 +10,6 @@ import { CrmSections } from './CrmSections';
 export default Object.fromEntries(
   Object.entries(CrmSections).map(([key, value]) => [
     upperCase(key).replaceAll(' ', '_'),
-    value]),
+    value,
+  ]),
 );

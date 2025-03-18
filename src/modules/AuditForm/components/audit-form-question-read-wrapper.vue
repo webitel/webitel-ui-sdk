@@ -88,12 +88,12 @@ const isResult = computed(() => !isEmpty(props.result));
 
 <style lang="scss" scoped>
 .audit-form-question-read {
-  position: relative;
   display: flex;
+  position: relative;
   flex-direction: column;
+  gap: var(--spacing-sm);
   transition: var(--transition);
   border: 1px solid transparent;
-  gap: var(--spacing-sm);
 
   &:not(.audit-form-question-read--readonly) {
     &:hover,
@@ -128,8 +128,8 @@ const isResult = computed(() => !isEmpty(props.result));
 }
 
 .audit-form-question--clear {
-  margin-top: var(--spacing-sm);
   cursor: pointer;
+  margin-top: var(--spacing-sm);
   color: var(--info-color);
 }
 </style>

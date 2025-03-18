@@ -12,7 +12,7 @@ export default defineConfig({
       mode: 'tags-split',
       // schemas: './src/api/schemas',
       override: {
-        operationName: ({operationId: operationName}) => {
+        operationName: ({ operationId: operationName }) => {
           // console.info(operationName);
           if (operationName.includes('Search')) {
             return 'getList';
@@ -57,11 +57,11 @@ export default defineConfig({
         zod: {
           default: true,
           coerce: {
-            response: [ 'boolean'],
+            response: ['boolean'],
             query: ['string', 'number', 'boolean', 'bigint', 'date'],
           },
         },
-        operationName: ({operationId: operationName}) => {
+        operationName: ({ operationId: operationName }) => {
           // console.info(operationName);
           if (operationName.includes('Search')) {
             return 'getList';
@@ -90,5 +90,5 @@ export default defineConfig({
     hooks: {
       // afterAllFilesWrite: 'prettier --write',
     },
-  }
+  },
 });

@@ -63,12 +63,12 @@ function select(category) {
   }
 
   &--selected {
-    color: var(--primary-on-color);
     background: var(--primary-color);
+    color: var(--primary-on-color);
 
     &:hover {
-      color: var(--primary-on-color);
       background: var(--primary-color);
+      color: var(--primary-on-color);
     }
   }
 }

@@ -54,8 +54,8 @@ const props = defineProps({
 .wt-headline-nav {
   display: flex;
   align-items: center;
-  max-width: 100%;
   gap: var(--headline-nav-gap);
+  max-width: 100%;
 }
 
 .wt-headline-nav__wrapper {
@@ -66,19 +66,19 @@ const props = defineProps({
 
 .wt-headline-nav__indicator {
   display: flex;
-  align-items: center;
   flex-shrink: 0;
   justify-content: center;
+  align-items: center;
   width: var(--icon-md-size);
   height: var(--icon-md-size);
 
   &:before {
     display: block;
+    border-radius: 50%;
+    background: var(--headline-nav-indicator-color);
     width: var(--headline-nav-indicator-size);
     height: var(--headline-nav-indicator-size);
     content: '';
-    border-radius: 50%;
-    background: var(--headline-nav-indicator-color);
   }
 }
 

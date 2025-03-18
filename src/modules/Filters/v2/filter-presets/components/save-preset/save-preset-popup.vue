@@ -129,8 +129,8 @@ const save = () => {
 
 .save-preset-filters-preview-wrapper {
   @extend %wt-scrollbar;
-  overflow-y: auto;
-  max-height: 140px;
   margin-top: var(--spacing-sm);
+  max-height: 140px;
+  overflow-y: auto;
 }
 </style>

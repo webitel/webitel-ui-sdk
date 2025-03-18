@@ -90,8 +90,8 @@ export default {
 @use '@webitel/styleguide/typography' as *;
 
 .wt-tabs {
-  position: relative;
   display: flex;
+  position: relative;
   flex-wrap: nowrap;
   gap: var(--tab-gap);
 
@@ -105,36 +105,36 @@ export default {
 
 .wt-tab {
   @extend %typo-body-1;
+  display: inline-block;
   position: relative;
   z-index: var(--tab-z-index);
-  display: inline-block;
-  padding-bottom: var(--tab-padding);
-  cursor: pointer;
   transition: var(--transition);
-  color: var(--wt-tabs-text-color);
+  cursor: pointer;
+  outline: none;
   border: none;
   border-bottom: var(--tab-border);
   border-bottom-color: transparent;
-  outline: none;
   background: transparent;
+  padding-bottom: var(--tab-padding);
+  color: var(--wt-tabs-text-color);
 
   &:hover,
   &:focus {
-    color: var(--wt-tabs-text-hover-color);
     border-bottom-color: var(--wt-tabs-underline-active-color);
+    color: var(--wt-tabs-text-hover-color);
   }
 
   &.wt-tab--highlight {
-    color: var(--wt-tabs-text-active-color);
     border-bottom-color: var(--wt-tabs-underline-active-color);
+    color: var(--wt-tabs-text-active-color);
   }
 
   //// disables bold font resize on hover
   &:after {
     display: block;
     visibility: hidden;
-    overflow: hidden;
     height: 0;
+    overflow: hidden;
     content: attr(value);
     font-weight: bold;
   }

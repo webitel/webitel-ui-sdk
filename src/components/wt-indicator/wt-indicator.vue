@@ -90,11 +90,11 @@ export default {
 }
 
 .wt-indicator__indicator {
-  min-width: var(--wt-indicator-dot-size);
-  height: var(--wt-indicator-dot-size);
   margin: var(--wt-indicator-dot-offset);
   border-radius: 50%;
   background: var(--wt-indicator-disabled-color);
+  min-width: var(--wt-indicator-dot-size);
+  height: var(--wt-indicator-dot-size);
 
   &--primary {
     background: var(--wt-indicator-primary-color);

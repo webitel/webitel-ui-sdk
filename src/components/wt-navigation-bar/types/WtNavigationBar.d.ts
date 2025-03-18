@@ -1,18 +1,17 @@
 export interface WtNavigationBarExpansionNavItem {
-    subNav: WtNavigationBarNavItem[];
+  subNav: WtNavigationBarNavItem[];
 }
 
 export interface WtNavigationBarRouteNavItem {
-    route: string;
+  route: string;
 }
 
 export type WtNavigationBarNavItem = {
-    value: string;
+  value: string;
 
-    /**
-     * Represents nav item text in menu
-     * @default WtNavigationBarNavItem.value
-     */
-    name?: string;
+  /**
+   * Represents nav item text in menu
+   * @default WtNavigationBarNavItem.value
+   */
+  name?: string;
 } & (WtNavigationBarRouteNavItem | WtNavigationBarExpansionNavItem);
-

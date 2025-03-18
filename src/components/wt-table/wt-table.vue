@@ -326,8 +326,8 @@ export default {
 }
 
 .wt-table__table {
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 
   &--fixed-actions {
     // make action icons fixed to right
@@ -350,10 +350,10 @@ export default {
 
 .wt-table__tr {
   display: grid;
-  padding: var(--table-row-padding);
+  grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
   transition: var(--transition);
   background: var(--wt-table-primary-color);
-  grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
+  padding: var(--table-row-padding);
   grid-column-gap: var(--table-column-gap);
 
   &:nth-child(2n) {
@@ -373,18 +373,18 @@ export default {
   @extend %typo-body-1;
   display: flex;
   align-items: center;
+  padding: 0;
   width: 100%;
   max-width: 100%;
   height: fit-content;
   min-height: var(--table-min-height);
-  padding: 0;
   word-break: break-all;
   overflow-wrap: break-word;
 
   &__actions {
     display: flex;
-    align-items: flex-start;
     justify-content: flex-end;
+    align-items: flex-start;
     gap: var(--spacing-xs);
   }
 }

@@ -55,22 +55,22 @@ export default {
 .wt-progress-bar {
   position: relative;
   box-sizing: border-box;
-  width: 100%;
-  padding: var(--wt-progress-bar-padding);
-  line-height: 0;
+  box-shadow: var(--elevation-1);
   border-radius: var(--border-radius);
   background: var(--wt-progress-bar-background-color);
-  box-shadow: var(--elevation-1);
+  padding: var(--wt-progress-bar-padding);
+  width: 100%;
+  line-height: 0;
 }
 
 .wt-progress-bar__progress {
   display: inline-block;
-  height: var(--wt-progress-bar-height);
   transition: var(--transition);
+  will-change: width;
   border-radius: var(--wt-progress-bar-border-radius) 0 0
     var(--wt-progress-bar-border-radius);
   background: var(--wt-progress-bar-background-primary-color);
-  will-change: width;
+  height: var(--wt-progress-bar-height);
 }
 
 .wt-progress-bar--primary .wt-progress-bar__progress {
