@@ -85,7 +85,7 @@
            @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
            -->
             <slot
-              v-if="isNotEmptyValue(row[col.value])"
+              v-if="isValueNotEmptyMap.get(`${dataKey}-${col.value}`)"
               :index="dataKey"
               :item="row"
               :name="col.value"
@@ -216,6 +216,19 @@ export default {
   data: () => ({}),
 
   computed: {
+    isValueNotEmptyMap() {
+      const result = new Map();
+
+      this.dataHeaders.forEach((col) => {
+        this.data.forEach((row, dataKey) => {
+          const value = row[col.value];
+          const isNotEmpty = value?.length || (typeof value === "object" && !isEmpty(value));
+          result.set(`${dataKey}-${col.value}`, !!isNotEmpty);
+        });
+      });
+
+      return result;
+    },
     _selected() {
       // _isSelected for backwards compatibility
       return this.selected || this.data.filter((item) => item._isSelected);
@@ -263,9 +276,6 @@ export default {
   },
 
   methods: {
-    isNotEmptyValue(value) {
-      return value?.length || typeof value === 'object' && !isEmpty(value);
-    },
     sort(col) {
       if (!this.isColSortable(col)) return;
       const nextSort = getNextSortOrder(col.sort);
