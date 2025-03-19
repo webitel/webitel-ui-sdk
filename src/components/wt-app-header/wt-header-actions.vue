@@ -108,7 +108,12 @@ export default {
       return this.user.preferredUsername || this.user.account;
     },
     buildVersion() {
-      return `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
+      let buildString = '';
+      buildString = `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
+      if (this.buildInfo.timestamp) {
+        buildString += `, ${new Date(this.buildInfo.timestamp).toLocaleString()}`;
+      }
+      return buildString;
     },
   },
 
