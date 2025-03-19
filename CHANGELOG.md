@@ -1,3 +1,8 @@
+## [v25.4.39] - 2025-03-19
+### :sparkles: New Features
+- [`c96c7b1`](https://github.com/webitel/webitel-ui-sdk/commit/c96c7b1c599f7e8ce9ab0db2e2d9b889d4432c21) - added timestamp to buildVersion info [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.38] - 2025-03-18
 ### :sparkles: New Features
 - [`d7e3989`](https://github.com/webitel/webitel-ui-sdk/commit/d7e39894bbc86f358148fc8b7c629d7ce85cb6ad) - added husky to project, added pre-commit linting hook [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1699,3 +1704,4 @@
 [v25.4.36]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.35...v25.4.36
 [v25.4.37]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.36...v25.4.37
 [v25.4.38]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.37...v25.4.38
+[v25.4.39]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.38...v25.4.39
