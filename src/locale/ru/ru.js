@@ -230,7 +230,7 @@ export default {
     reporter: 'Инициатор',
     impacted: 'Влияет на',
     assignee: 'Исполнитель',
-    group: 'Группа исполнителей',
+    groupPerformers: 'Группа исполнителей',
     reason: 'Причина | Причины',
     rating: 'Оценка',
     service: 'Сервисы | Сервисы',
@@ -544,7 +544,7 @@ export default {
         return linked('vocabulary.contact');
       },
       contactGroup: ({ linked }) => {
-        return linked('cases.group');
+        return linked('cases.groupPerformers');
       },
       createdAtFrom: ({ linked }) => {
         return linked('reusable.from');

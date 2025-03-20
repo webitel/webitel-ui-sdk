@@ -237,7 +237,7 @@ export default {
     reporter: 'Reporter',
     impacted: 'Impacted',
     assignee: 'Assignee',
-    group: 'Group',
+    groupPerformers: 'Group',
     reason: 'Reason | Reasons',
     rating: 'Rating',
     service: 'Service | Services',
@@ -546,7 +546,7 @@ export default {
         return linked('vocabulary.contact');
       },
       contactGroup: ({ linked }) => {
-        return linked('cases.group');
+        return linked('cases.groupPerformers');
       },
       createdAtFrom: ({ linked }) => {
         return linked('reusable.from');
