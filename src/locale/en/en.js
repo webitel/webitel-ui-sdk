@@ -83,6 +83,7 @@ export default {
     draggable: 'Draggable',
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
+    group: 'Group',
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {

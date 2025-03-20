@@ -84,6 +84,7 @@ export default {
     draggable: 'Перетягнути',
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
+    group: 'Група',
   },
   vocabulary: {
     apply: 'Застосувати',

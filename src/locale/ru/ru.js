@@ -83,6 +83,7 @@ export default {
     draggable: 'Перетащить',
     unassigned: 'Неназначенные',
     showUnassigned: 'Показать неназначенные',
+    group: 'Группа',
   },
   vocabulary: {
     apply: 'Применить',
