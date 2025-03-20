@@ -121,7 +121,7 @@ const actions = {
         if (field) {
           sort = field === header.field ? nextSort : currentSort;
         } else {
-          sort = nextSort; // null
+          sort = currentSort !== undefined ? nextSort : currentSort; // null
         }
 
         return { ...header, sort };
@@ -203,6 +203,7 @@ const actions = {
     try {
       await context.dispatch(action, deleted);
     } catch (err) {
+      console.error(err);
       throw err;
     } finally {
       await context.dispatch('LOAD_DATA_LIST');
@@ -222,6 +223,7 @@ const actions = {
     try {
       await context.dispatch('DELETE_ITEM_API', { context, id, etag });
     } catch (err) {
+      console.error(err);
       throw err;
     }
   },
@@ -238,6 +240,7 @@ const actions = {
         throw rejected;
       }
     } catch (err) {
+      console.error(err);
       throw err;
     }
   },
