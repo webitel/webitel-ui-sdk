@@ -1,3 +1,9 @@
+## [v25.4.40] - 2025-03-21
+### :bug: Bug Fixes
+- [`3436353`](https://github.com/webitel/webitel-ui-sdk/commit/3436353d2b81e1b9d0cb6e023efaeb04ec158ab1) - rewrite cases group locale key [WTEL-6461](https://webitel.atlassian.net/browse/WTEL-6461) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`0de4c2f`](https://github.com/webitel/webitel-ui-sdk/commit/0de4c2f36f16a140296f52682d015e713906436e) - rewrite cases group locale key [WTEL-6461](https://webitel.atlassian.net/browse/WTEL-6461) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v25.4.39] - 2025-03-19
 ### :sparkles: New Features
 - [`c96c7b1`](https://github.com/webitel/webitel-ui-sdk/commit/c96c7b1c599f7e8ce9ab0db2e2d9b889d4432c21) - added timestamp to buildVersion info [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1705,3 +1711,4 @@
 [v25.4.37]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.36...v25.4.37
 [v25.4.38]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.37...v25.4.38
 [v25.4.39]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.38...v25.4.39
+[v25.4.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.174...v25.4.40
