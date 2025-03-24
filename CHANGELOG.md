@@ -1,3 +1,9 @@
+## [v25.4.41] - 2025-03-24
+### :sparkles: New Features
+- [`ef5b450`](https://github.com/webitel/webitel-ui-sdk/commit/ef5b450be4452e61e3b68cf95bde258081bcee58) - remove extension on imports [WTEL-6221](https://webitel.atlassian.net/browse/WTEL-6221) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+- [`69f0149`](https://github.com/webitel/webitel-ui-sdk/commit/69f01499175f48fccdde09d408e45c824b2fb6c5) - implement api for objects [WTEL-6221](https://webitel.atlassian.net/browse/WTEL-6221) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.40] - 2025-03-21
 ### :bug: Bug Fixes
 - [`3436353`](https://github.com/webitel/webitel-ui-sdk/commit/3436353d2b81e1b9d0cb6e023efaeb04ec158ab1) - rewrite cases group locale key [WTEL-6461](https://webitel.atlassian.net/browse/WTEL-6461) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -1712,3 +1718,4 @@
 [v25.4.38]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.37...v25.4.38
 [v25.4.39]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.38...v25.4.39
 [v25.4.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.174...v25.4.40
+[v25.4.41]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.40...v25.4.41
