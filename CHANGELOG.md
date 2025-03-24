@@ -1,3 +1,8 @@
+## [v25.4.42] - 2025-03-24
+### :bug: Bug Fixes
+- [`632db57`](https://github.com/webitel/webitel-ui-sdk/commit/632db5753cc2cda932a6599a3a081b32e698db50) - tag filter preview locales [WTEL-6569](https://webitel.atlassian.net/browse/WTEL-6569) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.41] - 2025-03-24
 ### :sparkles: New Features
 - [`ef5b450`](https://github.com/webitel/webitel-ui-sdk/commit/ef5b450be4452e61e3b68cf95bde258081bcee58) - remove extension on imports [WTEL-6221](https://webitel.atlassian.net/browse/WTEL-6221) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1719,3 +1724,4 @@
 [v25.4.39]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.38...v25.4.39
 [v25.4.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.174...v25.4.40
 [v25.4.41]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.40...v25.4.41
+[v25.4.42]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.41...v25.4.42
