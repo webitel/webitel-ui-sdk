@@ -5,7 +5,7 @@ import {
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults/index.js';
+} from '../../defaults/index';
 import applyTransform, {
   camelToSnake,
   generateUrl,
@@ -14,7 +14,7 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers/index.js';
+} from '../../transformers/index';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
