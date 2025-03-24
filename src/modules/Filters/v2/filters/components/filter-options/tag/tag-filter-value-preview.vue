@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li
-      v-for="(tag, index) of value"
+      v-for="(tag, index) of tags"
       :key="index"
     >
       {{ tag }}
@@ -10,9 +10,29 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+import { TagOptions } from '../../../enums/tag-options';
+
 const props = defineProps<{
-  value: number[];
+  value: string[];
 }>();
+
+const { t } = useI18n();
+
+const tags = computed(() => {
+  const tagLocaleMap = TagOptions.reduce((acc, option) => {
+    return {
+      ...acc,
+      [option.value]: option.locale,
+    };
+  }, {});
+
+  return props.value.map((tag) => {
+    return t(tagLocaleMap[tag]) || tag;
+  });
+});
 </script>
 
 <style lang="scss" scoped></style>
