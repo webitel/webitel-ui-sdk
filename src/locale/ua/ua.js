@@ -84,6 +84,7 @@ export default {
     draggable: 'Перетягнути',
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
+    group: 'Група',
   },
   vocabulary: {
     apply: 'Застосувати',
@@ -236,7 +237,7 @@ export default {
     reporter: 'Ініціатор',
     impacted: 'Впливає на',
     assignee: 'Виконавець',
-    group: 'Група виконавців',
+    groupPerformers: 'Група виконавців',
     reason: 'Причина | Причини',
     rating: 'Оцінка',
     service: 'Cервіси | Cервіси',
@@ -544,7 +545,7 @@ export default {
         return linked('vocabulary.contact');
       },
       contactGroup: ({ linked }) => {
-        return linked('cases.group');
+        return linked('cases.groupPerformers');
       },
       createdAtFrom: ({ linked }) => {
         return linked('reusable.from');
