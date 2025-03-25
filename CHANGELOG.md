@@ -1,3 +1,8 @@
+## [v25.4.45] - 2025-03-25
+### :sparkles: New Features
+- [`24dee74`](https://github.com/webitel/webitel-ui-sdk/commit/24dee74ce7ce7860bf7291b014d8047071af1368) - add to skip key custom on get contacts *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.44] - 2025-03-25
 ### :sparkles: New Features
 - [`24ef8da`](https://github.com/webitel/webitel-ui-sdk/commit/24ef8da29627e2e6ac2533ca086af813d783aca7) - update contacts api response transform rule *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1737,3 +1742,4 @@
 [v25.4.42]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.41...v25.4.42
 [v25.4.43]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.175...v25.4.43
 [v25.4.44]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.43...v25.4.44
+[v25.4.45]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.44...v25.4.45
