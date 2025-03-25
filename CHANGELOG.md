@@ -1,3 +1,27 @@
+## [v25.4.45] - 2025-03-25
+
+### :sparkles: New Features
+
+- [`24dee74`](https://github.com/webitel/webitel-ui-sdk/commit/24dee74ce7ce7860bf7291b014d8047071af1368) - add to skip key custom on get contacts _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
+
+## [v25.4.44] - 2025-03-25
+
+### :sparkles: New Features
+
+- [`24ef8da`](https://github.com/webitel/webitel-ui-sdk/commit/24ef8da29627e2e6ac2533ca086af813d783aca7) - update contacts api response transform rule _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
+
+## [v25.4.43] - 2025-03-25
+
+### :sparkles: New Features
+
+- [`62a4c55`](https://github.com/webitel/webitel-ui-sdk/commit/62a4c55c84919d03fd44240cd7bc3014724d4c72) - update contacts api _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
+
+## [v25.4.42] - 2025-03-24
+
+### :bug: Bug Fixes
+
+- [`632db57`](https://github.com/webitel/webitel-ui-sdk/commit/632db5753cc2cda932a6599a3a081b32e698db50) - tag filter preview locales [WTEL-6569](https://webitel.atlassian.net/browse/WTEL-6569) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
+
 ## [v25.4.41] - 2025-03-24
 
 ### :sparkles: New Features
@@ -1726,3 +1750,7 @@
 [v25.4.39]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.38...v25.4.39
 [v25.4.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.174...v25.4.40
 [v25.4.41]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.40...v25.4.41
+[v25.4.42]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.41...v25.4.42
+[v25.4.43]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.175...v25.4.43
+[v25.4.44]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.43...v25.4.44
+[v25.4.45]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.44...v25.4.45

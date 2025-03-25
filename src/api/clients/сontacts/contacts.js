@@ -135,7 +135,7 @@ const getList = async (params) => {
 
     const { items, next } = applyTransform(
       { ...response.data, items: response.data.data || [] },
-      [snakeToCamel(), merge(getDefaultGetListResponse())],
+      [snakeToCamel(['custom']), merge(getDefaultGetListResponse())],
     );
 
     return {
@@ -165,6 +165,7 @@ const get = async ({ itemId: id }) => {
     'emails',
     'imclients',
     'user',
+    'custom',
   ];
 
   const defaultObject = {};
@@ -184,7 +185,7 @@ const get = async ({ itemId: id }) => {
   try {
     const response = await contactService.locateContact(id, fields);
     return applyTransform(response.data, [
-      snakeToCamel(),
+      snakeToCamel(['custom']),
       merge(defaultObject),
       itemResponseHandler,
       formatAccessMode,
@@ -201,6 +202,7 @@ const fieldsToSend = [
   'managers',
   'timezones',
   'groups',
+  'custom',
 ];
 
 const sanitizeManagers = (itemInstance) => {
@@ -244,11 +246,11 @@ const add = async ({ itemInstance }) => {
     sanitizeTimezones,
     sanitizeGroups,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    camelToSnake(['custom']),
   ]);
   try {
     const response = await contactService.createContact(item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [snakeToCamel(['custom'])]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -262,11 +264,11 @@ const update = async ({ itemInstance }) => {
     sanitizeTimezones,
     sanitizeGroups,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    camelToSnake(['custom']),
   ]);
   try {
     const response = await contactService.updateContact(etag, item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [snakeToCamel(['custom'])]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
