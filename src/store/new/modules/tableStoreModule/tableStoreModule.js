@@ -121,7 +121,7 @@ const actions = {
         if (field) {
           sort = field === header.field ? nextSort : currentSort;
         } else {
-          sort = currentSort !== undefined ? nextSort : currentSort; // null
+          sort = nextSort; // null
         }
 
         return { ...header, sort };
