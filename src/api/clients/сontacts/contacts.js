@@ -165,6 +165,7 @@ const get = async ({ itemId: id }) => {
     'emails',
     'imclients',
     'user',
+    'custom',
   ];
 
   const defaultObject = {};
@@ -201,6 +202,7 @@ const fieldsToSend = [
   'managers',
   'timezones',
   'groups',
+  'custom',
 ];
 
 const sanitizeManagers = (itemInstance) => {
@@ -244,7 +246,7 @@ const add = async ({ itemInstance }) => {
     sanitizeTimezones,
     sanitizeGroups,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    camelToSnake(['custom']),
   ]);
   try {
     const response = await contactService.createContact(item);
@@ -262,7 +264,7 @@ const update = async ({ itemInstance }) => {
     sanitizeTimezones,
     sanitizeGroups,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    camelToSnake(['custom']),
   ]);
   try {
     const response = await contactService.updateContact(etag, item);
