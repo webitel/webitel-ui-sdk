@@ -1,3 +1,8 @@
+## [v25.4.44] - 2025-03-25
+### :sparkles: New Features
+- [`24ef8da`](https://github.com/webitel/webitel-ui-sdk/commit/24ef8da29627e2e6ac2533ca086af813d783aca7) - update contacts api response transform rule *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.43] - 2025-03-25
 ### :sparkles: New Features
 - [`62a4c55`](https://github.com/webitel/webitel-ui-sdk/commit/62a4c55c84919d03fd44240cd7bc3014724d4c72) - update contacts api *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1731,3 +1736,4 @@
 [v25.4.41]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.40...v25.4.41
 [v25.4.42]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.41...v25.4.42
 [v25.4.43]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.175...v25.4.43
+[v25.4.44]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.43...v25.4.44
