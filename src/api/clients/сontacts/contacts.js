@@ -250,7 +250,7 @@ const add = async ({ itemInstance }) => {
   ]);
   try {
     const response = await contactService.createContact(item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [snakeToCamel(['custom'])]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -268,7 +268,7 @@ const update = async ({ itemInstance }) => {
   ]);
   try {
     const response = await contactService.updateContact(etag, item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [snakeToCamel(['custom'])]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
