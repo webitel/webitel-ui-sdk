@@ -135,7 +135,7 @@ const getList = async (params) => {
 
     const { items, next } = applyTransform(
       { ...response.data, items: response.data.data || [] },
-      [snakeToCamel(), merge(getDefaultGetListResponse())],
+      [snakeToCamel(['custom']), merge(getDefaultGetListResponse())],
     );
 
     return {
@@ -185,7 +185,7 @@ const get = async ({ itemId: id }) => {
   try {
     const response = await contactService.locateContact(id, fields);
     return applyTransform(response.data, [
-      snakeToCamel(),
+      snakeToCamel(['custom']),
       merge(defaultObject),
       itemResponseHandler,
       formatAccessMode,
