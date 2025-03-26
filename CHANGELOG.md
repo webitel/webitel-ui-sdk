@@ -1,3 +1,8 @@
+## [v25.4.46] - 2025-03-26
+### :bug: Bug Fixes
+- [`c294007`](https://github.com/webitel/webitel-ui-sdk/commit/c2940074fabe2636382eb35d6500d88dfe05cc74) - table sort when currentSort was undefined [WTEL-6531](https://webitel.atlassian.net/browse/WTEL-6531) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v25.4.45] - 2025-03-25
 
 ### :sparkles: New Features
@@ -1754,3 +1759,4 @@
 [v25.4.43]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.175...v25.4.43
 [v25.4.44]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.43...v25.4.44
 [v25.4.45]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.44...v25.4.45
+[v25.4.46]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.45...v25.4.46
