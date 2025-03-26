@@ -1,3 +1,8 @@
+## [v25.4.47] - 2025-03-26
+### :recycle: Refactors
+- [`18f5441`](https://github.com/webitel/webitel-ui-sdk/commit/18f5441587fea2d1f1238c91cdc487aa83917404) - locale for url validation changed [WTEL-6255](https://webitel.atlassian.net/browse/WTEL-6255) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v25.4.46] - 2025-03-26
 ### :bug: Bug Fixes
 - [`c294007`](https://github.com/webitel/webitel-ui-sdk/commit/c2940074fabe2636382eb35d6500d88dfe05cc74) - table sort when currentSort was undefined [WTEL-6531](https://webitel.atlassian.net/browse/WTEL-6531) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -1760,3 +1765,4 @@
 [v25.4.44]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.43...v25.4.44
 [v25.4.45]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.44...v25.4.45
 [v25.4.46]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.45...v25.4.46
+[v25.4.47]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.46...v25.4.47
