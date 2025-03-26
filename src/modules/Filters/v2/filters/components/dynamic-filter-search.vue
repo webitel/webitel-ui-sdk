@@ -29,7 +29,7 @@ const model = defineModel<ModelValue>();
 const props = defineProps<{
   searchMode: string;
   searchModeOptions: Record<string, string>;
-  showTextSearchIcon: boolean;
+  showTextSearchIcon?: boolean;
 }>();
 
 const emit = defineEmits<{
