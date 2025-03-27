@@ -37,12 +37,6 @@ export default typescriptEslint.config(
       },
     },
     rules: {
-      'vue/block-order': [
-        'error',
-        {
-          order: [['script', 'template'], 'style'],
-        },
-      ],
       'no-console': ['error', { allow: ['warn', 'error'] }],
       'vue/html-self-closing': [
         'error',
