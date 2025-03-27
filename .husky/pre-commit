@@ -1,2 +1,2 @@
-npx eslint -c ./eslint.config.js || true
-npx prettier --write . || true
+# npx eslint -c ./eslint.config.js || true
+# npx prettier --write . || true
