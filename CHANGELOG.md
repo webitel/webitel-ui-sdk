@@ -1,44 +1,80 @@
-## [v25.4.42] - 2025-03-24
-### :bug: Bug Fixes
-- [`632db57`](https://github.com/webitel/webitel-ui-sdk/commit/632db5753cc2cda932a6599a3a081b32e698db50) - tag filter preview locales [WTEL-6569](https://webitel.atlassian.net/browse/WTEL-6569) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+## [v25.4.47] - 2025-03-26
+### :recycle: Refactors
+- [`18f5441`](https://github.com/webitel/webitel-ui-sdk/commit/18f5441587fea2d1f1238c91cdc487aa83917404) - locale for url validation changed [WTEL-6255](https://webitel.atlassian.net/browse/WTEL-6255) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
 
+
+## [v25.4.46] - 2025-03-26
+### :bug: Bug Fixes
+- [`c294007`](https://github.com/webitel/webitel-ui-sdk/commit/c2940074fabe2636382eb35d6500d88dfe05cc74) - table sort when currentSort was undefined [WTEL-6531](https://webitel.atlassian.net/browse/WTEL-6531) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
+## [v25.4.45] - 2025-03-25
+
+### :sparkles: New Features
+
+- [`24dee74`](https://github.com/webitel/webitel-ui-sdk/commit/24dee74ce7ce7860bf7291b014d8047071af1368) - add to skip key custom on get contacts _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
+
+## [v25.4.44] - 2025-03-25
+
+### :sparkles: New Features
+
+- [`24ef8da`](https://github.com/webitel/webitel-ui-sdk/commit/24ef8da29627e2e6ac2533ca086af813d783aca7) - update contacts api response transform rule _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
+
+## [v25.4.43] - 2025-03-25
+
+### :sparkles: New Features
+
+- [`62a4c55`](https://github.com/webitel/webitel-ui-sdk/commit/62a4c55c84919d03fd44240cd7bc3014724d4c72) - update contacts api _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
+
+## [v25.4.42] - 2025-03-24
+
+### :bug: Bug Fixes
+
+- [`632db57`](https://github.com/webitel/webitel-ui-sdk/commit/632db5753cc2cda932a6599a3a081b32e698db50) - tag filter preview locales [WTEL-6569](https://webitel.atlassian.net/browse/WTEL-6569) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ## [v25.4.41] - 2025-03-24
-### :sparkles: New Features
-- [`ef5b450`](https://github.com/webitel/webitel-ui-sdk/commit/ef5b450be4452e61e3b68cf95bde258081bcee58) - remove extension on imports [WTEL-6221](https://webitel.atlassian.net/browse/WTEL-6221) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
-- [`69f0149`](https://github.com/webitel/webitel-ui-sdk/commit/69f01499175f48fccdde09d408e45c824b2fb6c5) - implement api for objects [WTEL-6221](https://webitel.atlassian.net/browse/WTEL-6221) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
 
+### :sparkles: New Features
+
+- [`ef5b450`](https://github.com/webitel/webitel-ui-sdk/commit/ef5b450be4452e61e3b68cf95bde258081bcee58) - remove extension on imports [WTEL-6221](https://webitel.atlassian.net/browse/WTEL-6221) _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
+- [`69f0149`](https://github.com/webitel/webitel-ui-sdk/commit/69f01499175f48fccdde09d408e45c824b2fb6c5) - implement api for objects [WTEL-6221](https://webitel.atlassian.net/browse/WTEL-6221) _(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))_
 
 ## [v25.4.40] - 2025-03-21
-### :bug: Bug Fixes
-- [`3436353`](https://github.com/webitel/webitel-ui-sdk/commit/3436353d2b81e1b9d0cb6e023efaeb04ec158ab1) - rewrite cases group locale key [WTEL-6461](https://webitel.atlassian.net/browse/WTEL-6461) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
-- [`0de4c2f`](https://github.com/webitel/webitel-ui-sdk/commit/0de4c2f36f16a140296f52682d015e713906436e) - rewrite cases group locale key [WTEL-6461](https://webitel.atlassian.net/browse/WTEL-6461) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
 
+### :bug: Bug Fixes
+
+- [`3436353`](https://github.com/webitel/webitel-ui-sdk/commit/3436353d2b81e1b9d0cb6e023efaeb04ec158ab1) - rewrite cases group locale key [WTEL-6461](https://webitel.atlassian.net/browse/WTEL-6461) _(commit by [@plnnsimon](https://github.com/plnnsimon))_
+- [`0de4c2f`](https://github.com/webitel/webitel-ui-sdk/commit/0de4c2f36f16a140296f52682d015e713906436e) - rewrite cases group locale key [WTEL-6461](https://webitel.atlassian.net/browse/WTEL-6461) _(commit by [@plnnsimon](https://github.com/plnnsimon))_
 
 ## [v25.4.39] - 2025-03-19
-### :sparkles: New Features
-- [`c96c7b1`](https://github.com/webitel/webitel-ui-sdk/commit/c96c7b1c599f7e8ce9ab0db2e2d9b889d4432c21) - added timestamp to buildVersion info [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
 
+### :sparkles: New Features
+
+- [`c96c7b1`](https://github.com/webitel/webitel-ui-sdk/commit/c96c7b1c599f7e8ce9ab0db2e2d9b889d4432c21) - added timestamp to buildVersion info [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ## [v25.4.38] - 2025-03-18
+
 ### :sparkles: New Features
-- [`d7e3989`](https://github.com/webitel/webitel-ui-sdk/commit/d7e39894bbc86f358148fc8b7c629d7ce85cb6ad) - added husky to project, added pre-commit linting hook [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
-- [`32fb157`](https://github.com/webitel/webitel-ui-sdk/commit/32fb1574bba557b8473a03385624c1cd0171ff6d) - eslint+prettier additional configs [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+- [`d7e3989`](https://github.com/webitel/webitel-ui-sdk/commit/d7e39894bbc86f358148fc8b7c629d7ce85cb6ad) - added husky to project, added pre-commit linting hook [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
+- [`32fb157`](https://github.com/webitel/webitel-ui-sdk/commit/32fb1574bba557b8473a03385624c1cd0171ff6d) - eslint+prettier additional configs [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ### :bug: Bug Fixes
-- [`c39ad3c`](https://github.com/webitel/webitel-ui-sdk/commit/c39ad3cb972fac34717f51de1854196ee79204a1) - added user field for contacts api get request [WTEL-6457](https://webitel.atlassian.net/browse/WTEL-6457) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
-- [`8628c60`](https://github.com/webitel/webitel-ui-sdk/commit/8628c60f55f067c2e5f471843acb757992d1af98) - docs build / added `?` operator to `nameAlreadyInUse` validation check [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
-- [`d88c606`](https://github.com/webitel/webitel-ui-sdk/commit/d88c60628fc732c155a663e213be9d76bc1f4bb3) - autoimport plugin import [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+- [`c39ad3c`](https://github.com/webitel/webitel-ui-sdk/commit/c39ad3cb972fac34717f51de1854196ee79204a1) - added user field for contacts api get request [WTEL-6457](https://webitel.atlassian.net/browse/WTEL-6457) _(commit by [@plnnsimon](https://github.com/plnnsimon))_
+- [`8628c60`](https://github.com/webitel/webitel-ui-sdk/commit/8628c60f55f067c2e5f471843acb757992d1af98) - docs build / added `?` operator to `nameAlreadyInUse` validation check [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
+- [`d88c606`](https://github.com/webitel/webitel-ui-sdk/commit/d88c60628fc732c155a663e213be9d76bc1f4bb3) - autoimport plugin import [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ### :recycle: Refactors
-- [`c380e96`](https://github.com/webitel/webitel-ui-sdk/commit/c380e96ad2cfce48d77e315dd61aa9949eef7ffc) - run eslint+prettier formatting on project [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
 
+- [`c380e96`](https://github.com/webitel/webitel-ui-sdk/commit/c380e96ad2cfce48d77e315dd61aa9949eef7ffc) - run eslint+prettier formatting on project [WTEL-6537](https://webitel.atlassian.net/browse/WTEL-6537) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ## [v25.4.37] - 2025-03-18
-### :bug: Bug Fixes
-- [`8417416`](https://github.com/webitel/webitel-ui-sdk/commit/84174164a9c2b27191900724a737b20ff2b466c5) - wt-label typo + paddings reverted [WTEL-6529](https://webitel.atlassian.net/browse/WTEL-6529) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
-- [`ba1babb`](https://github.com/webitel/webitel-ui-sdk/commit/ba1babb299a9fbc42198de97783c3ad6a1b5d38f) - wt-label typo + paddings reverted [WTEL-6529](https://webitel.atlassian.net/browse/WTEL-6529) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
 
+### :bug: Bug Fixes
+
+- [`8417416`](https://github.com/webitel/webitel-ui-sdk/commit/84174164a9c2b27191900724a737b20ff2b466c5) - wt-label typo + paddings reverted [WTEL-6529](https://webitel.atlassian.net/browse/WTEL-6529) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
+- [`ba1babb`](https://github.com/webitel/webitel-ui-sdk/commit/ba1babb299a9fbc42198de97783c3ad6a1b5d38f) - wt-label typo + paddings reverted [WTEL-6529](https://webitel.atlassian.net/browse/WTEL-6529) _(commit by [@dlohvinov](https://github.com/dlohvinov))_
 
 ## [v25.4.36] - 2025-03-18
 
@@ -1725,3 +1761,8 @@
 [v25.4.40]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.174...v25.4.40
 [v25.4.41]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.40...v25.4.41
 [v25.4.42]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.41...v25.4.42
+[v25.4.43]: https://github.com/webitel/webitel-ui-sdk/compare/v24.12.175...v25.4.43
+[v25.4.44]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.43...v25.4.44
+[v25.4.45]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.44...v25.4.45
+[v25.4.46]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.45...v25.4.46
+[v25.4.47]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.46...v25.4.47

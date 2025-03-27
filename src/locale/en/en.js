@@ -339,7 +339,7 @@ export default {
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
     minLength: 'Quantity of characters should not be less than',
-    url: 'Should look like url',
+    url: 'Should look like URL',
     websocketValidator: 'Should look like WebSocket url',
     isRegExpMatched: 'Password must match the regular expression:',
     regExpValidator: 'This regular expression is not valid',
