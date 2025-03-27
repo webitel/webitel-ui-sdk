@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtExpansionPanel from '../wt-expansion-panel.vue';
 
 describe('WtExpansionPanel', () => {

@@ -1,4 +1,5 @@
 import { computed } from 'vue';
+
 import convertDuration from '../../scripts/convertDuration.js';
 
 const prettifyPauseCauseDuration = (min) => {

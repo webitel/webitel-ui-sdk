@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n';
+
 import en from './en/en.js';
 import es from './es/es.js';
 import kz from './kz/kz.js';

@@ -1,3 +1,5 @@
+import { PrioritiesApiFactory } from 'webitel-sdk';
+
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -12,7 +14,6 @@ import applyTransform, {
   snakeToCamel,
   starToSearch,
 } from '../../transformers/index.js';
-import { PrioritiesApiFactory } from 'webitel-sdk';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

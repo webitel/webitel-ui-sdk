@@ -1,5 +1,6 @@
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
+
 import ChatGatewayProvider from '../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import {
   getDefaultGetListResponse,

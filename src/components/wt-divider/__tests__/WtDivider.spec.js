@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtDivider from '../wt-divider.vue';
 
 describe('WtDivider', () => {

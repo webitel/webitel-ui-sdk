@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtDummy from '../wt-dummy.vue';
 
 describe('WtDummy', () => {

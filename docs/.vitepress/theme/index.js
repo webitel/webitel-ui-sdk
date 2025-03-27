@@ -1,17 +1,19 @@
 // .vitepress/theme/index.js
+import 'prismjs/themes/prism.min.css';
+import '__lib__/assets/icons/sprite';
+import './main.scss';
+
+import WebitelUI from '__lib__/install.ts';
+import i18n from '__lib__/locale/i18n';
 import DefaultTheme from 'vitepress/theme';
 import {
   createMemoryHistory,
   createRouter,
   createWebHistory,
 } from 'vue-router';
-import 'prismjs/themes/prism.min.css';
-import WebitelUI from '__lib__/install.ts';
-import i18n from '__lib__/locale/i18n';
+
 import sharedComponents from '../../shared';
-import '__lib__/assets/icons/sprite';
 import Layout from './Layout.vue';
-import './main.scss';
 
 const router = createRouter({
   history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),

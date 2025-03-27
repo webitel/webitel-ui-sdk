@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import AuditFormQuestion from '../audit-form-question.vue';
 
 describe('AuditFormQuestion', () => {

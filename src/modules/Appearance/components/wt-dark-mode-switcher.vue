@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+
 import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 

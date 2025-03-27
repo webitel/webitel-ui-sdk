@@ -61,7 +61,7 @@ const result = computed(() => {
               ({ description }) => `\`\`\`${description} \`\`\``,
             );
 
-          const deprecated = !!tags?.deprecated ? '❗️' : '';
+          const deprecated = tags?.deprecated ? '❗️' : '';
 
           const _required = required ? '✅' : '';
 

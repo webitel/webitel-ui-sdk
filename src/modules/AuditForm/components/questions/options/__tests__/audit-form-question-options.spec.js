@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import AuditFormQuestionOptions from '../audit-form-question-options.vue';
 
 describe('AuditFormQuestionOptions', () => {

@@ -18,7 +18,8 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { WtTextarea, WtLabel } from '../../../../../../../components/index';
+
+import { WtLabel,WtTextarea } from '../../../../../../../components/index';
 
 const model = defineModel<string>();
 

@@ -17,6 +17,7 @@
 
 <script setup>
 import { computed } from 'vue';
+
 import StartPageCard from './start-page-card.vue';
 import StartPageLogo from './start-page-logo.vue';
 

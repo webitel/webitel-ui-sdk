@@ -1,5 +1,6 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+
 import getNamespacedState from '../../../helpers/getNamespacedState.js';
 
 export const useCardStore = (namespace) => {

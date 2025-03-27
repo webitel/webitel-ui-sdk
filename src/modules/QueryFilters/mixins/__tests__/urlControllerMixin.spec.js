@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
+
 import _urlControllerMixin from '../_urlControllerMixin/_urlControllerMixin.js';
 
 const router = createRouter({

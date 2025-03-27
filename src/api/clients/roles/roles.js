@@ -1,4 +1,5 @@
 import deepCopy from 'deep-copy';
+
 import ApplicationsAccess from '../../../modules/Userinfo/classes/ApplicationsAccess.js';
 import {
   getDefaultGetListResponse,

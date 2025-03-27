@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtIntersectionObserver from '../wt-intersection-observer.vue';
 
 describe('WtIntersectionObserver', () => {

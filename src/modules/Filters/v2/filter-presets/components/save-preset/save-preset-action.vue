@@ -35,6 +35,7 @@ import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import { WtIconAction } from '../../../../../../components/index';
+import { IconAction } from '../../../../../../enums';
 import { IFiltersManager } from '../../../filters/index';
 import {
   addPreset,
@@ -42,7 +43,6 @@ import {
   updatePreset,
 } from '../../api/PresetQuery.api.ts';
 import OverwritePresetPopup from './overwrite-preset-popup.vue';
-import { IconAction } from '../../../../../../enums';
 import SavePresetPopup, { SubmitConfig } from './save-preset-popup.vue';
 
 const props = defineProps<{

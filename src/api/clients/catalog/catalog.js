@@ -1,4 +1,5 @@
 import { CatalogApiFactory } from 'webitel-sdk';
+
 import {
   getDefaultInstance,
   getDefaultOpenAPIConfig,

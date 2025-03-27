@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtPageWrapper from '../wt-page-wrapper.vue';
 
 describe('WtPageWrapper', () => {

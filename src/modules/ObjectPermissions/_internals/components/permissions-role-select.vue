@@ -22,6 +22,7 @@
 
 <script setup>
 import { useAttrs } from 'vue';
+
 import RoleRow from './permissions-role-row.vue';
 
 const attrs = useAttrs();

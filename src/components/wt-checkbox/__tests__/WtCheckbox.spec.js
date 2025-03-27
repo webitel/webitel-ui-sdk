@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtIcon from '../../wt-icon/wt-icon.vue';
 import WtLabel from '../../wt-label/wt-label.vue';
 import WtCheckbox from '../wt-checkbox.vue';

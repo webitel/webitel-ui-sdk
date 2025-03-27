@@ -1,5 +1,6 @@
 import type { Component } from 'vue';
 
+import { FilterOption } from '../../enums/FilterOption';
 import ActualReactionTimeFilter from './actual-reaction-time/actual-reaction-time-filter-value-field.vue';
 import ActualReactionTimeFilterPreview from './actual-reaction-time/actual-reaction-time-filter-value-preview.vue';
 import ActualResolutionTimeFilter from './actual-resolution-time/actual-resolution-time-filter-value-field.vue';
@@ -26,7 +27,6 @@ import CreatedAtToFilter from './created-at-to/created-at-to-filter-value-field.
 import CreatedAtToFilterPreview from './created-at-to/created-at-to-filter-value-preview.vue';
 import DirectionFilter from './direction/direction-filter-value-field.vue';
 import DirectionFilterPreview from './direction/direction-filter-value-preview.vue';
-import { FilterOption } from '../../enums/FilterOption';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
 import GranteeFilter from './grantee/grantee-filter-value-field.vue';

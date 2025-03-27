@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtContextMenu from '../wt-context-menu.vue';
 
 describe('WtContextMenu', () => {

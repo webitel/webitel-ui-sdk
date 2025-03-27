@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import ExpandTransition from '../wt-expand-transition.vue';
 
 describe('ExpandTransition', () => {

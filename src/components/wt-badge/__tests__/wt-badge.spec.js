@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtBadge from '../wt-badge.vue';
 
 describe('WtBadge', () => {

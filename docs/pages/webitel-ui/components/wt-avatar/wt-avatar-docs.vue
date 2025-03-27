@@ -29,6 +29,7 @@
 
 <script>
 import Prism from 'prismjs';
+
 import AbstractUserStatus from '../../../../../src/enums/AbstractUserStatus/AbstractUserStatus.enum';
 import pic from './examples/pic.jpg';
 

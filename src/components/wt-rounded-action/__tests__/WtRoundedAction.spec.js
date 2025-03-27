@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtRoundedAction from '../wt-rounded-action.vue';
 
 describe('WtRoundedAction', () => {

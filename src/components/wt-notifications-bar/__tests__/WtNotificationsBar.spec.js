@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import eventBus from '../../../scripts/eventBus.js';
 import WtNotification from '../../wt-notification/wt-notification.vue';
 import WtNotificationsBar from '../wt-notifications-bar.vue';

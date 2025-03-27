@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import AuditFormQuestionScore from '../audit-form-question-score.vue';
 
 describe('AuditFormQuestionScore', () => {

@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtLabel from '../../wt-label/wt-label.vue';
 import WtInput from '../wt-input.vue';
 

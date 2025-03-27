@@ -20,8 +20,9 @@
 
 <script setup>
 import Prism from 'prismjs';
-import WtCcAgentStatusTimers from '../../../../../src/components/on-demand/wt-cc-agent-status-timers/wt-cc-agent-status-timers.vue';
 import { onMounted } from 'vue';
+
+import WtCcAgentStatusTimers from '../../../../../src/components/on-demand/wt-cc-agent-status-timers/wt-cc-agent-status-timers.vue';
 
 const properties = [
   {

@@ -9,6 +9,7 @@
 
 <script>
 import Prism from 'prismjs';
+
 import notificationsMd from './md';
 
 export default {

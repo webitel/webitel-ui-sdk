@@ -1,4 +1,5 @@
 import deepCopy from 'deep-copy';
+
 import { AccessMode } from '../../enums/AccessMode.enum.js';
 import generateFilters from '../../modules/filters/store/filters.store.js';
 import headers from './headers.js';

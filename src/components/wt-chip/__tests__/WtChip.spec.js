@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtChip from '../wt-chip.vue';
 
 describe('WtChip', () => {

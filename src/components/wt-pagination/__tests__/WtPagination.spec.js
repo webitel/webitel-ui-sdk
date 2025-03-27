@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtPagination from '../wt-pagination.vue';
 
 describe('WtPagination', () => {

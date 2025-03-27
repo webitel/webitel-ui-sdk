@@ -8,8 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
 import { Validation } from '@vuelidate/core';
+import { useI18n } from 'vue-i18n';
+
 import { WtInput } from '../../../../../../../components/index';
 
 type ModelValue = string;

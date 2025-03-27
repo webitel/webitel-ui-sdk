@@ -1,4 +1,5 @@
 import { CommunicationTypeServiceApiFactory } from 'webitel-sdk';
+
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,

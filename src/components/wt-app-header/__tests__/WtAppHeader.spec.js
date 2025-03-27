@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtAppHeader from '../wt-app-header.vue';
 
 describe('WtAppHeader', () => {

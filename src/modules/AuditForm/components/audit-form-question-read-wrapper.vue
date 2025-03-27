@@ -45,6 +45,7 @@
 <script setup>
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
+
 import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import isEmpty from '../../../scripts/isEmpty.js';
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';

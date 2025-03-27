@@ -42,6 +42,7 @@ import { computed, ref, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+
 import RolesAPI from '../../../../api/clients/roles/roles.js';
 import getNamespacedState from '../../../../store/helpers/getNamespacedState.js';
 import PermissionsRoleSelect from './permissions-role-select.vue';

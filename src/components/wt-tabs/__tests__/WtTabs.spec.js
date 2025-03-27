@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtTabs from '../wt-tabs.vue';
 
 const tabs = [{ value: 'tab1', text: 'default' }];

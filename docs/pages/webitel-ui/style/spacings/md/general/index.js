@@ -1,5 +1,5 @@
-import ua from './general.ua.md';
 import en from './general.en.md';
+import ua from './general.ua.md';
 
 export default {
   ru: ua,

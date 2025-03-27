@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+
 import WtPopup from '../../../../../../src/components/wt-popup/wt-popup.vue';
 
 const isPopup = ref(false);

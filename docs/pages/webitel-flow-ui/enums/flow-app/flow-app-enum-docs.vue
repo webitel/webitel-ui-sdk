@@ -14,6 +14,7 @@
 
 <script>
 import FlowApp from '@webitel/flow-ui-sdk/src/enums/FlowApp.enum';
+
 import enumReducer from '../../../webitel-ui/enums/_internals/enumReducer';
 
 export default {

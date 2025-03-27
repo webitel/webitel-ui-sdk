@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils';
+
 import WtActionBar from '../wt-action-bar.vue';
 
 describe('WtActionBar', () => {

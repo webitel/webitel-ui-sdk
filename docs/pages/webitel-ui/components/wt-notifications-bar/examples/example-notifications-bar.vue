@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, provide } from 'vue';
+
 import eventBus from '../../../../../../src/scripts/eventBus';
 
 provide('$eventBus', eventBus);

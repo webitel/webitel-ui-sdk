@@ -36,8 +36,8 @@ import { useI18n } from 'vue-i18n';
 
 import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import {
-  caseCloseReasonsSearchMethod,
   caseCloseReasonsGroupsSearchMethod,
+  caseCloseReasonsSearchMethod,
 } from './config.js';
 
 type ModelValue = {

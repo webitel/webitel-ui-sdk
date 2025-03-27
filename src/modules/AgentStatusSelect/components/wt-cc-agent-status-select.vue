@@ -24,6 +24,7 @@
 import { ref } from 'vue';
 import { useStore } from 'vuex';
 import { PauseNotAllowedError } from 'webitel-sdk';
+
 import AgentStatus from '../../../enums/AgentStatus/AgentStatus.enum.js';
 import AgentStatusAPIFactory from '../api/agent-status.js';
 import PauseCauseAPIFactory from '../api/pause-cause.js';

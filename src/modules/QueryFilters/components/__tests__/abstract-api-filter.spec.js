@@ -1,6 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
+
 import ApiFilterSchema from '../../classes/ApiFilterSchema.js';
 import AbstractApiFilter from '../abstract-api-filter.vue';
 

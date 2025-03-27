@@ -69,21 +69,21 @@
 
 <script lang="ts" setup>
 import { type StoreDefinition, storeToRefs } from 'pinia';
-import { computed, inject, ref, watch, onUnmounted } from 'vue';
+import { computed, inject, onUnmounted,ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { EnginePresetQuery } from 'webitel-sdk';
 
 import {
   WtButton,
   WtEmpty,
+  WtIconAction,
   WtPopup,
   WtSearchBar,
-  WtIconAction,
 } from '../../../../../../components/index';
-import { useTableEmpty } from '../../../../../TableComponentModule/composables/useTableEmpty';
 import { IconAction } from '../../../../../../enums';
+import { useTableEmpty } from '../../../../../TableComponentModule/composables/useTableEmpty';
 import PresetQueryAPI from '../../api/PresetQuery.api.ts';
 import PresetPreview from './preset-preview.vue';
-import { EnginePresetQuery } from 'webitel-sdk';
 
 const props = defineProps<{
   /**

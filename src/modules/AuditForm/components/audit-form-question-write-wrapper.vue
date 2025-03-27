@@ -63,15 +63,14 @@ import cloneDeep from 'lodash/cloneDeep.js';
 import set from 'lodash/set.js';
 import { computed } from 'vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
+
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../components/wt-input/wt-input.vue';
 import WtSelect from '../../../components/wt-select/wt-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';
 import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema.js';
-
 import { generateQuestionScoreSchema } from '../schemas/AuditFormQuestionScoreSchema.js';
-
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
 

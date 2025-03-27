@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+
 import AppearanceStoreModule from '../AppearanceStoreModule.js';
 
 describe('AppearanceStoreModule', () => {

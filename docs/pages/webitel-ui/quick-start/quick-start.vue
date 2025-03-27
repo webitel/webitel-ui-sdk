@@ -78,8 +78,9 @@
 </template>
 
 <script>
-import Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
+
+import Prism from 'prismjs';
 
 export default {
   name: 'QuickStart',

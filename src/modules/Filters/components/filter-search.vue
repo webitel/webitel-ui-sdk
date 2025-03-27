@@ -16,6 +16,7 @@
 import { useVuelidate } from '@vuelidate/core';
 import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
+
 import FilterEvent from '../enums/FilterEvent.enum.js';
 
 const props = defineProps({

@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import ErrorPage from '../wt-error-page.vue';
 
 describe('Error Page', () => {

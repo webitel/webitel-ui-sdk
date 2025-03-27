@@ -20,8 +20,8 @@
 
 <script lang="ts" setup>
 import { endOfToday, startOfToday } from 'date-fns';
-import { useI18n } from 'vue-i18n';
 import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 type ModelValue = {
   from: number;

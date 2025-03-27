@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
+
 import enumFilterMixin from '../enumFilterMixin.js';
 
 const options = [

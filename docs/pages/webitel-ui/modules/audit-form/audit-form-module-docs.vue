@@ -54,8 +54,9 @@ import AuditForm from '@webitel/ui-sdk/src/modules/AuditForm/components/audit-fo
 <script setup>
 import Prism from 'prismjs';
 import { onMounted, ref } from 'vue';
-import AuditForm from '../../../../../src/modules/AuditForm/components/audit-form.vue';
 import { EngineAuditQuestionType } from 'webitel-sdk';
+
+import AuditForm from '../../../../../src/modules/AuditForm/components/audit-form.vue';
 import ComponentProps from '../../../../shared/component-props.vue';
 
 const auditQuestions = ref([

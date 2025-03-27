@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Prism from 'prismjs';
 import prettifyFileSize from '@webitel/ui-sdk/src/scripts/prettifyFileSize';
+import Prism from 'prismjs';
 
 export default {
   name: 'PrettifyFileSizeScriptDocs',

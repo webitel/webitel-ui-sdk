@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtProgressBar from '../wt-progress-bar.vue';
 
 describe('WtProgressBar', () => {

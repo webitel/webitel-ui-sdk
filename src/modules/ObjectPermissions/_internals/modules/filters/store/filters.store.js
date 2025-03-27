@@ -1,4 +1,5 @@
 import deepCopy from 'deep-copy';
+
 import FiltersStoreModule from '../../../../../Filters/store/FiltersStoreModule';
 
 const filtersList = [

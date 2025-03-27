@@ -10,8 +10,9 @@
 </template>
 
 <script lang="ts" setup>
-import { caseCloseReasonsSearchMethod } from './config';
 import { ref } from 'vue';
+
+import { caseCloseReasonsSearchMethod } from './config';
 
 const props = defineProps<{
   value: number[];
