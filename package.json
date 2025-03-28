@@ -194,9 +194,5 @@
   "engines": {
     "npm": "10",
     "node": "v22"
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
   }
 }
