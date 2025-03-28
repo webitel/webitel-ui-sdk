@@ -9,7 +9,7 @@
     "test:unit": "vitest",
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
-    "lint:fix": "prettier --write --check ./src && eslint --fix ./src",
+    "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
     "orval": "orval",
