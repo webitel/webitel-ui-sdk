@@ -1,27 +1,27 @@
 <template>
-  <section class="the-history-filters">
     <dynamic-filter-panel-wrapper>
       <template #filters>
         <!--        WTF? -  /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */ -->
-        <dynamic-filter-preview
-          v-if="!hasCreatedAtFromFilter"
-          :filter="defaultCreatedAtFromFilterDataPreview"
-          dummy
-        >
-          <template #info>
-            <component
-              :is="FilterOptionToPreviewComponentMap[FilterOption.CreatedAtFrom]"
-              :value="defaultCreatedAtFromFilterDataPreview.value"
-            />
-          </template>
-        </dynamic-filter-preview>
+              <!--TODO-->
+        <!--        <dynamic-filter-preview-->
+<!--          v-if="!hasCreatedAtFromFilter"-->
+<!--          :filter="defaultCreatedAtFromFilterDataPreview"-->
+<!--          dummy-->
+<!--        >-->
+<!--          <template #info>-->
+<!--            <component-->
+<!--              :is="FilterOptionToPreviewComponentMap[FilterOption.CreatedAtFrom]"-->
+<!--              :value="defaultCreatedAtFromFilterDataPreview.value"-->
+<!--            />-->
+<!--          </template>-->
+<!--        </dynamic-filter-preview>-->
 
         <dynamic-filter-preview
           v-for="(filter) of appliedFilters"
           :key="filter.name"
           :filter="filter"
           disable-click-away
-          @delete:filter="deleteAppliedFilter($event.name)"
+          @delete:filter="deleteFilter(filter)"
         >
           <template #form="{ hide }">
             <dynamic-filter-config-form
@@ -82,8 +82,9 @@
         />
 
         <save-preset-action
+          v-if="enablePresets"
           :namespace="namespace"
-          :filters-manager="filtersManager"
+          :filters-manager="props.filtersManager"
         />
 
         <wt-icon-action
@@ -97,31 +98,66 @@
         />
       </template>
     </dynamic-filter-panel-wrapper>
-  </section>
 </template>
 
 <script lang="ts" setup>
+import { WtIconAction } from '@webitel/ui-sdk/components';
+import { computed } from 'vue';
+
+import {ApplyPresetAction,SavePresetAction} from "../../filter-presets";
 import { FilterOption } from "../enums/FilterOption";
 import {IFilter} from "../types/Filter";
+import {IFiltersManager} from "../types/FiltersManager";
 import DynamicFilterConfigForm from './config/dynamic-filter-config-form.vue';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
+import DynamicFilterPanelWrapper from "./dynamic-filter-panel-wrapper.vue";
+import {FilterOptionToPreviewComponentMap} from "./filter-options";
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
 
 type Props = {
   filterOptions: FilterOption[];
-  filtersList: IFilter[];
-  presetNamespace: string;
+  /**
+   * Looks like a anti-pattern, but save-preset component needs to
+   */
+  filtersManager: IFiltersManager;
+  /**
+   *
+   */
+  excludedFilters?: FilterOption[];
+  presetNamespace?: string;
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'add:filter': [];
-  'update:filter': [];
-  'delete:filter': [];
-  'reset:filters': [];
+  'filter:add': [];
+  'filter:update': [];
+  'filter:delete': [];
+  'filter:reset-all': [];
+  'preset:add': [];
+
+  'a'
   hide: [];
 }>();
+
+const availableFilterOptions = computed(() => {
+  return props.filterOptions.filter((opt) => {
+    return opt;
+    // return !props.filtersManager.appliedFilters.some((filter) => {
+    //   return filter.name === opt.name;
+    // });
+  })
+});
+
+const enablePresets = computed(() => !!props.presetNamespace);
+
+const deleteFilter = (filter: IFilter) => {
+  emit('delete:filter', filter);
+};
+
+const resetFilters = () => {
+  emit('reset:filters');
+};
 </script>
 
 <style scoped></style>
