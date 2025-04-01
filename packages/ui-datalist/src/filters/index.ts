@@ -1,5 +1,6 @@
 import { Filter } from './classes/Filter.ts';
 import { createFiltersManager } from './classes/FiltersManager';
+import TableFiltersPanelComponent from './components/table-filters-panel.vue';
 import { FilterOption } from './enums/FilterOption';
 import type {
   FilterConfig,
@@ -14,7 +15,12 @@ import type {
   IFiltersManager,
 } from './types/FiltersManager.d.ts';
 
-export { createFiltersManager, Filter, FilterOption };
+export {
+  createFiltersManager,
+  Filter,
+  FilterOption,
+  TableFiltersPanelComponent,
+};
 
 export type {
   FilterConfig,
