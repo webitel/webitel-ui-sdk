@@ -28,4 +28,4 @@ const getLocalValue = async () => {
 getLocalValue();
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { WtLabel, WtTextarea } from '@webitel/ui-sdk/src/components/index';
+import { WtLabel, WtTextarea } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
 const model = defineModel<string>();
@@ -29,4 +29,4 @@ const props = defineProps<{
 const { t } = useI18n();
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

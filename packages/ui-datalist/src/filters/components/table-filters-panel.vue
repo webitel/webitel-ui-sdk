@@ -80,4 +80,4 @@ import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
 // }>();
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

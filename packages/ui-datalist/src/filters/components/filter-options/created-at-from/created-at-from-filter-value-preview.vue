@@ -12,4 +12,4 @@ const props = defineProps<{
 const date = ref(new Date(+props.value).toLocaleString());
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

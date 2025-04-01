@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { Validation } from '@vuelidate/core';
-import { WtInput } from '@webitel/ui-sdk/src/components/index';
+import { WtInput } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
 type ModelValue = string;
@@ -25,4 +25,4 @@ const props = defineProps<Props>();
 const { t } = useI18n();
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

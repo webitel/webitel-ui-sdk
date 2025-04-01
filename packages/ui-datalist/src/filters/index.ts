@@ -1,5 +1,6 @@
 import { Filter } from './classes/Filter.ts';
 import { createFiltersManager } from './classes/FiltersManager';
+import { FilterOption } from './enums/FilterOption';
 import type {
   FilterConfig,
   FilterInitParams,
@@ -13,7 +14,7 @@ import type {
   IFiltersManager,
 } from './types/FiltersManager.d.ts';
 
-export { createFiltersManager, Filter };
+export { createFiltersManager, Filter, FilterOption };
 
 export type {
   FilterConfig,

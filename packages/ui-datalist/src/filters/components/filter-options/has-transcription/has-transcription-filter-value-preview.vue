@@ -12,4 +12,4 @@ const props = defineProps<{
 const { localeValue } = usePrettifyBooleanValuePreview(props.value);
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

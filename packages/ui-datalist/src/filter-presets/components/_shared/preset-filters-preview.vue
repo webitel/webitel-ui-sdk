@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { WtLabel } from '@webitel/ui-sdk/src/components/index';
+import { WtLabel } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
 import type { IFilter } from '../../../filters';
@@ -42,4 +42,4 @@ const props = defineProps<Props>();
 const { t } = useI18n();
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

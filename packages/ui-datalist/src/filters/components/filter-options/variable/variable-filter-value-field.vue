@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
-import variableSearchValidator from '@webitel/ui-sdk/src/validators/variableSearchValidator/variableSearchValidator';
+import variableSearchValidator from '@webitel/ui-sdk/validators/variableSearchValidator/variableSearchValidator';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -46,4 +46,4 @@ watch(
 );
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

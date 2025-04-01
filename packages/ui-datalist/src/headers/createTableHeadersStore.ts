@@ -1,6 +1,6 @@
-import { WtTableHeader } from '@webitel/ui-sdk/src/components/wt-table/types/WtTable';
-import { sortToQueryAdapter } from '@webitel/ui-sdk/src/scripts';
-import { SortSymbols } from '@webitel/ui-sdk/src/scripts/sortQueryAdapters';
+import { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
+import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
+import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 

@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtPopup } from '@webitel/ui-sdk/src/components/index';
+import { WtPopup } from '@webitel/ui-sdk/components';
 import { computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';

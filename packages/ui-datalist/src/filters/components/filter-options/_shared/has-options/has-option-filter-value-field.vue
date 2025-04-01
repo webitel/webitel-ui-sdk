@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { WtSelect } from '@webitel/ui-sdk/src/components/index';
+import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -35,4 +35,4 @@ const strModel = computed({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

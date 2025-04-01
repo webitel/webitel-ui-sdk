@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { WtTree } from '@webitel/ui-sdk/src/components/index';
+import { WtTree } from '@webitel/ui-sdk/components';
 import deepCopy from 'deep-copy';
 import { onMounted, ref } from 'vue';
 

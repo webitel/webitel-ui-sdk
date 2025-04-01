@@ -27,7 +27,7 @@
  * and their styling
  */
 
-import WtTooltip from '@webitel/ui-sdk/src/components/index';
+import WtTooltip from '@webitel/ui-sdk/components';
 
 interface Props {
   disabled?: boolean;
@@ -37,4 +37,4 @@ interface Props {
 const props = defineProps<Props>();
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

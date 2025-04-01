@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { WtSearchBar } from '@webitel/ui-sdk/src/components/index';
+import { WtSearchBar } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -57,4 +57,4 @@ const searchModeOptions = computed(() =>
 );
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

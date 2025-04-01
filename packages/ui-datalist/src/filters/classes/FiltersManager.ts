@@ -1,4 +1,4 @@
-import { isEmpty } from '@webitel/ui-sdk/src/scripts';
+import { isEmpty } from '@webitel/ui-sdk/scripts';
 
 import {
   filterLabelToSnapshotKey,

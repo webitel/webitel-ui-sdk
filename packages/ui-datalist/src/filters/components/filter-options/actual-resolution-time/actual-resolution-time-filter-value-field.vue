@@ -15,4 +15,4 @@ type ModelValue = {
 const model = defineModel<ModelValue>();
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -74,9 +74,9 @@ import {
   WtIconAction,
   WtPopup,
   WtSearchBar,
-} from '@webitel/ui-sdk/src/components/index';
-import { IconAction } from '@webitel/ui-sdk/src/enums';
-import { useTableEmpty } from '@webitel/ui-sdk/src/TableComponentModule/composables/useTableEmpty';
+} from '@webitel/ui-sdk/components';
+import { IconAction } from '@webitel/ui-sdk/enums';
+import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
 import { type StoreDefinition, storeToRefs } from 'pinia';
 import { computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';

@@ -39,9 +39,9 @@
 </template>
 
 <script lang="ts" setup>
-import { WtChip } from '@webitel/ui-sdk/src/components/index';
-import { WtIconBtn } from '@webitel/ui-sdk/src/components/index';
-import { WtTooltip } from '@webitel/ui-sdk/src/components/index';
+import { WtChip } from '@webitel/ui-sdk/components';
+import { WtIconBtn } from '@webitel/ui-sdk/components';
+import { WtTooltip } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
 import type { IFilter } from '../../types/Filter';

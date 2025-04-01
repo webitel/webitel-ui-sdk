@@ -14,4 +14,4 @@ const props = defineProps<{
 const { t } = useI18n();
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -5,83 +5,78 @@
   "scripts": {
     "dev": "npm run docs:dev",
     "build": "vite build",
-    "publish-lib": "npm run build && npm publish --access public",
     "test:unit": "vitest",
+
+    "publish-lib": "npm run build && npm publish --access public",
+
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
+
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
+
     "orval": "orval",
     "tsc": "tsc -p tsconfig.json",
+
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
     "utils:i": "npm install",
+
     "prepare": "husky && husky install"
   },
   "main": "./dist/ui-sdk.js",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/ui-sdk.js"
-    },
-    "./store": {
-      "import": "./src/store/new/index.js"
-    },
-    "./enums": {
-      "import": "./src/enums/index.js"
-    },
-    "./components": {
-      "import": "./src/components/index.js"
-    },
-    "./scripts": {
-      "import": "./src/scripts/index.js"
-    },
-    "./dist*": {
-      "import": "./dist*"
-    },
-    "./src/api*": {
-      "import": "./src/api*"
-    },
-    "./src/locale*": {
-      "import": "./src/locale*"
-    },
-    "./src/composables*": {
-      "import": "./src/composables*"
-    },
-    "./src/css*": {
-      "import": "./src/css*"
-    },
-    "./src/components*": {
-      "import": "./src/components*"
-    },
-    "./src/directives*": {
-      "import": "./src/directives*"
-    },
-    "./src/enums*": {
-      "import": "./src/enums*"
-    },
-    "./src/mixins*": {
-      "import": "./src/mixins*"
-    },
-    "./src/scripts*": {
-      "import": "./src/scripts*"
-    },
-    "./src/validators*": {
-      "import": "./src/validators*"
-    },
-    "./src/modules*": {
-      "import": "./src/modules*"
-    },
-    "./src/plugins*": {
-      "import": "./src/plugins*"
-    },
-    "./src/store*": {
-      "import": "./src/store*"
-    },
-    "./src/tests*": {
-      "import": "./src/tests*"
-    }
+    ".": "./dist/ui-sdk.js",
+
+    "./store": "./src/store/new/index.js",
+    "./store*":  "./src/store*",
+    "./src/store*":  "./src/store*",
+
+    "./enums": "./src/enums/index.js",
+    "./enums*":  "./src/enums*",
+    "./src/enums*":  "./src/enums*",
+
+    "./components": "./src/components/index.js",
+    "./components*":  "./src/components*",
+    "./src/components*":  "./src/components*",
+
+    "./scripts":  "./src/scripts/index.js",
+    "./scripts*":  "./src/scripts*",
+    "./src/scripts*":  "./src/scripts*",
+
+    "./api*":  "./src/api*",
+    "./src/api*":  "./src/api*",
+
+    "./locale*":  "./src/locale*",
+    "./src/locale*":  "./src/locale*",
+
+    "./composables*":  "./src/composables*",
+    "./src/composables*":  "./src/composables*",
+
+    "./css*":  "./src/css*",
+    "./src/css*":  "./src/css*",
+
+    "./directives*":  "./src/directives*",
+    "./src/directives*":  "./src/directives*",
+
+    "./mixins*":  "./src/mixins*",
+    "./src/mixins*":  "./src/mixins*",
+
+    "./validators*":  "./src/validators*",
+    "./src/validators*":  "./src/validators*",
+
+    "./modules*":  "./src/modules*",
+    "./src/modules*":  "./src/modules*",
+
+    "./plugins*":  "./src/plugins*",
+    "./src/plugins*":  "./src/plugins*",
+
+    "./tests*":  "./src/tests*",
+    "./src/tests*":  "./src/tests*",
+
+    "./dist*":  "./dist*"
   },
   "files": [
     "dist/*",

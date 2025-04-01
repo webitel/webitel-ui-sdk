@@ -7,6 +7,7 @@
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
     "utils:i": "npm i",
+    "utils:link": "npm link",
     "utils:publish": "npm publish --access public"
   },
   "type": "module",
@@ -16,15 +17,9 @@
     "../../"
   ],
   "exports": {
-    ".": {
-      "import": "./src/index.ts"
-    },
-    "./filters": {
-      "import": "./src/filters/index.ts"
-    },
-    "./presets": {
-      "import": "./src/filter-presets/index.ts"
-    }
+    ".": "./src/index.ts",
+    "./filters": "./src/filters/index.ts",
+    "./presets": "./src/filter-presets/index.ts"
   },
   "files": [
     "src/*",

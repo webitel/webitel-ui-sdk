@@ -3,7 +3,7 @@ import {
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '@webitel/ui-sdk/src/api/defaults/index';
+} from '@webitel/ui-sdk/api/defaults';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -11,7 +11,7 @@ import applyTransform, {
   skipIf,
   snakeToCamel,
   starToSearch,
-} from '@webitel/ui-sdk/src/api/transformers/index';
+} from '@webitel/ui-sdk/api/transformers';
 import {
   EngineCreatePresetQueryRequest,
   EnginePresetQuery,
