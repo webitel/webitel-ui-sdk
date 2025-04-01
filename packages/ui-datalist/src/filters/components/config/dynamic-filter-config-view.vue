@@ -27,7 +27,7 @@
  * and their styling
  */
 
-import WtTooltip from '../../../../../../components/wt-tooltip/wt-tooltip.vue';
+import WtTooltip from '@webitel/ui-sdk/src/components/index';
 
 interface Props {
   disabled?: boolean;

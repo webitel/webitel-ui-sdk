@@ -68,20 +68,16 @@ import DynamicFilterConfigForm from './config/dynamic-filter-config-form.vue';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
 
-interface Props {}
+// interface Props {}
+// const props = defineProps<Props>();
 
-const props = defineProps<Props>();
-
-const emit = defineEmits<{
-  'add:filter': [];
-  'update:filter': [];
-  'delete:filter': [];
-  'reset:filters': [];
-  hide: [];
-}>();
+// const emit = defineEmits<{
+//   'add:filter': [];
+//   'update:filter': [];
+//   'delete:filter': [];
+//   'reset:filters': [];
+//   hide: [];
+// }>();
 </script>
 
-<style lang="scss" scoped>
-.table-filters-panel {
-}
-</style>
+<style lang="scss" scoped></style>

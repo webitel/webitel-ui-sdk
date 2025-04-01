@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ t(`calls.direction.${value}`) }}
+    {{ t(`calls.direction.${props.value}`) }}
   </div>
 </template>
 

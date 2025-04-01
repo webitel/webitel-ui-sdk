@@ -76,16 +76,16 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { AxiosError } from 'axios';
-import { computed, ref } from 'vue';
-import { EnginePresetQuery } from 'webitel-sdk';
-
 import {
   WtExpansionPanel,
   WtIconAction,
   WtRadio,
-} from '../../../../../../components/index';
-import { createFiltersManager } from '../../../filters/index';
+} from '@webitel/ui-sdk/src/components/index';
+import { createFiltersManager } from '@webitel/ui-sdk/src/filters/index';
+import { AxiosError } from 'axios';
+import { computed, ref } from 'vue';
+import { EnginePresetQuery } from 'webitel-sdk';
+
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';

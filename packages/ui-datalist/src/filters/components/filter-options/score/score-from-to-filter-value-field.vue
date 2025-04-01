@@ -50,7 +50,7 @@ if (!model.value) {
 
 const props = withDefaults(
   defineProps<{
-    numberMax: number;
+    numberMax?: number;
   }>(),
   {
     numberMax: 100,

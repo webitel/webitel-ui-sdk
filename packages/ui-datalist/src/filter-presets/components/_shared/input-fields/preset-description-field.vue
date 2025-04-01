@@ -17,9 +17,8 @@
 </template>
 
 <script setup lang="ts">
+import { WtLabel, WtTextarea } from '@webitel/ui-sdk/src/components/index';
 import { useI18n } from 'vue-i18n';
-
-import { WtLabel,WtTextarea } from '../../../../../../../components/index';
 
 const model = defineModel<string>();
 

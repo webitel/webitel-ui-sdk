@@ -49,12 +49,11 @@
 </template>
 
 <script lang="ts" setup>
+import { WtButton, WtSelect } from '@webitel/ui-sdk/src/components/index';
 import deepcopy from 'deep-copy';
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtButton from '../../../../../../components/wt-button/wt-button.vue';
-import WtSelect from '../../../../../../components/wt-select/wt-select.vue';
 import type { FilterInitParams, FilterName, IFilter } from '../../types/Filter';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
 

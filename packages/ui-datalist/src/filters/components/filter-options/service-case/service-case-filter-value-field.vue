@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts" setup>
+import { WtTree } from '@webitel/ui-sdk/src/components/index';
 import deepCopy from 'deep-copy';
 import { onMounted, ref } from 'vue';
 
-import WtTree from '../../../../../../../components/wt-tree/wt-tree.vue';
 import { searchMethod } from './config.js';
 
 type ModelValue = string[];

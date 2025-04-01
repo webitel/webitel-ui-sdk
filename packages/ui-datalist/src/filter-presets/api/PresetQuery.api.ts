@@ -1,15 +1,9 @@
 import {
-  EngineCreatePresetQueryRequest,
-  EnginePresetQuery,
-  PresetQueryServiceApiFactory,
-} from 'webitel-sdk';
-
-import {
   getDefaultGetListResponse,
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../../../../api/defaults/index';
+} from '@webitel/ui-sdk/src/api/defaults/index';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -17,7 +11,12 @@ import applyTransform, {
   skipIf,
   snakeToCamel,
   starToSearch,
-} from '../../../../../api/transformers/index';
+} from '@webitel/ui-sdk/src/api/transformers/index';
+import {
+  EngineCreatePresetQueryRequest,
+  EnginePresetQuery,
+  PresetQueryServiceApiFactory,
+} from 'webitel-sdk';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

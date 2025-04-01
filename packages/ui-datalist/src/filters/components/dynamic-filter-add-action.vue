@@ -24,9 +24,9 @@
 </template>
 
 <script lang="ts" setup>
+import { WtIconAction } from '@webitel/ui-sdk/src/components/index';
 import { useI18n } from 'vue-i18n';
 
-import WtIconAction from '../../../../../components/wt-icon-action/wt-icon-action.vue';
 import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 
 interface Props {

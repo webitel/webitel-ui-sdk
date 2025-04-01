@@ -1,5 +1,5 @@
-import CaseStatusConditionsAPI from '../../../../../../../api/clients/caseStatusConditions/caseStatusConditions.js';
-import CaseStatusesApi from '../../../../../../../api/clients/caseStatuses/caseStatuses.js';
+import CaseStatusConditionsAPI from '@webitel/ui-sdk/src/api/clients/caseStatusConditions/caseStatusConditions';
+import CaseStatusesApi from '@webitel/ui-sdk/src/api/clients/caseStatuses/caseStatuses';
 
 export const caseStatusesSearchMethod = CaseStatusesApi.getLookup;
 export const caseStatusConditionsSearchMethod =

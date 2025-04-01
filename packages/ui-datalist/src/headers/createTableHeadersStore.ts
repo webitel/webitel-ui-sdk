@@ -1,9 +1,9 @@
+import { WtTableHeader } from '@webitel/ui-sdk/src/components/wt-table/types/WtTable';
+import { sortToQueryAdapter } from '@webitel/ui-sdk/src/scripts';
+import { SortSymbols } from '@webitel/ui-sdk/src/scripts/sortQueryAdapters';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
-import { WtTableHeader } from '../../../../components/wt-table/types/WtTable';
-import { sortToQueryAdapter } from '../../../../scripts';
-import { SortSymbols } from '../../../../scripts/sortQueryAdapters';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
 import { usePersistedStorage } from '../persist/usePersistedStorage.ts';
 

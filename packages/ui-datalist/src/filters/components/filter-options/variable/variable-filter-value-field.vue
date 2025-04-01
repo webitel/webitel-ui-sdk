@@ -8,10 +8,9 @@
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
+import variableSearchValidator from '@webitel/ui-sdk/src/validators/variableSearchValidator/variableSearchValidator';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import variableSearchValidator from '../../../../../../../validators/variableSearchValidator/variableSearchValidator.js';
 
 type ModelValue = string;
 

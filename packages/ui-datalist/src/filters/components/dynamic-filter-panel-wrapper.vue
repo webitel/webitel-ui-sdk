@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentSize } from '../../../../../enums';
+import { ComponentSize } from '@webitel/ui-sdk/src/enums/index';
 
 const props = withDefaults(
   defineProps<{

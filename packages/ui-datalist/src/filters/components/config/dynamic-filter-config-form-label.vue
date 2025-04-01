@@ -10,10 +10,9 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
 import { maxLength } from '@vuelidate/validators';
+import WtInput from '@webitel/ui-sdk/src/components/wt-input/wt-input.vue';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import WtInput from '../../../../../../components/wt-input/wt-input.vue';
 
 const MAX_STRING_LENGTH = 50;
 

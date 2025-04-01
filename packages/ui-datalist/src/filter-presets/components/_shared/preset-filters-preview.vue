@@ -25,9 +25,9 @@
 </template>
 
 <script setup lang="ts">
+import { WtLabel } from '@webitel/ui-sdk/src/components/index';
 import { useI18n } from 'vue-i18n';
 
-import { WtLabel } from '../../../../../../components/index';
 import type { IFilter } from '../../../filters';
 import DynamicFilterPanelWrapper from '../../../filters/components/dynamic-filter-panel-wrapper.vue';
 import { FilterOptionToPreviewComponentMap } from '../../../filters/components/filter-options';

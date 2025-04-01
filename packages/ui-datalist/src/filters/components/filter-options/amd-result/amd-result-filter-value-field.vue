@@ -15,10 +15,10 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
+import { WtSelect } from '@webitel/ui-sdk/src/components/index';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import { AmdResultOptions } from '../../../enums/amd-result-options';
 
 const model = defineModel<string>();

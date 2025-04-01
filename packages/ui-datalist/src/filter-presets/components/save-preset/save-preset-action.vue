@@ -30,12 +30,12 @@
 </template>
 
 <script lang="ts" setup>
+import { WtIconAction } from '@webitel/ui-sdk/src/components/index';
+import { IconAction } from '@webitel/ui-sdk/src/enums';
 import { computed, inject, type Ref, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import { WtIconAction } from '../../../../../../components/index';
-import { IconAction } from '../../../../../../enums';
 import { IFiltersManager } from '../../../filters/index';
 import {
   addPreset,

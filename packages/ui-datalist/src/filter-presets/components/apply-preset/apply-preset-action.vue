@@ -68,20 +68,20 @@
 </template>
 
 <script lang="ts" setup>
-import { type StoreDefinition, storeToRefs } from 'pinia';
-import { computed, inject, onUnmounted,ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { EnginePresetQuery } from 'webitel-sdk';
-
 import {
   WtButton,
   WtEmpty,
   WtIconAction,
   WtPopup,
   WtSearchBar,
-} from '../../../../../../components/index';
-import { IconAction } from '../../../../../../enums';
-import { useTableEmpty } from '../../../../../TableComponentModule/composables/useTableEmpty';
+} from '@webitel/ui-sdk/src/components/index';
+import { IconAction } from '@webitel/ui-sdk/src/enums';
+import { useTableEmpty } from '@webitel/ui-sdk/src/TableComponentModule/composables/useTableEmpty';
+import { type StoreDefinition, storeToRefs } from 'pinia';
+import { computed, inject, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { EnginePresetQuery } from 'webitel-sdk';
+
 import PresetQueryAPI from '../../api/PresetQuery.api.ts';
 import PresetPreview from './preset-preview.vue';
 
@@ -104,7 +104,7 @@ const { t } = useI18n();
 const showPresetsList = ref(false);
 
 const presetsStore = props.usePresetsStore();
-const { dataList, error, isLoading, filtersManager, page } =
+const { dataList, error, isLoading, filtersManager } =
   storeToRefs(presetsStore);
 
 const { loadDataList, initialize, updateSize, deleteEls } = presetsStore;

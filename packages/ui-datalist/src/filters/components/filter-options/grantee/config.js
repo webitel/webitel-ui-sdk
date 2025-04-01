@@ -1,4 +1,4 @@
-import RolesAPI from '../../../../../../../api/clients/roles/roles.js';
+import RolesAPI from '@webitel/ui-sdk/src/api/clients/roles/roles';
 
 export const searchMethod = RolesAPI.getLookup;
 export const localePath = '';

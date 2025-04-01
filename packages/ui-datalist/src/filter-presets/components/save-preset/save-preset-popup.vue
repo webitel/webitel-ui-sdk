@@ -48,11 +48,11 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
+import { WtPopup } from '@webitel/ui-sdk/src/components/index';
 import { computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import { WtPopup } from '../../../../../../components/index';
 import type { IFiltersManager } from '../../../index';
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';

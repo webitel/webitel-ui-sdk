@@ -21,11 +21,10 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { requiredIf } from '@vuelidate/validators';
+import { WtCheckbox, WtSelect } from '@webitel/ui-sdk/src/components/index';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtCheckbox from '../../../../../../../components/wt-checkbox/wt-checkbox.vue';
-import WtSelect from '../../../../../../../components/wt-select/wt-select.vue';
 import { searchMethod } from './config.js';
 
 type ModelValue = {

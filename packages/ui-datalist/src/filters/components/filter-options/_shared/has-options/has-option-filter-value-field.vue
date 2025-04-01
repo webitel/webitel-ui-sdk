@@ -13,10 +13,10 @@
 </template>
 
 <script lang="ts" setup>
+import { WtSelect } from '@webitel/ui-sdk/src/components/index';
 import { computed, useAttrs } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import WtSelect from '../../../../../../../../components/wt-select/wt-select.vue';
 import { BooleanOptions } from '../../../../enums/boolean-options';
 
 const model = defineModel<boolean | null>();

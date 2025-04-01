@@ -29,10 +29,9 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { maxValue, requiredIf } from '@vuelidate/validators';
+import { WtInput } from '@webitel/ui-sdk/src/components/index';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import { WtInput } from '../../../../../../../components';
 
 type ModelValue = {
   from: number;

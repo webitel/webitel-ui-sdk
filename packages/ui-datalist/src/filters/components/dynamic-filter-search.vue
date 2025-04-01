@@ -18,10 +18,9 @@
 </template>
 
 <script lang="ts" setup>
+import { WtSearchBar } from '@webitel/ui-sdk/src/components/index';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import WtSearchBar from '../../../../../components/wt-search-bar/wt-search-bar.vue';
 
 type ModelValue = string;
 const model = defineModel<ModelValue>();
