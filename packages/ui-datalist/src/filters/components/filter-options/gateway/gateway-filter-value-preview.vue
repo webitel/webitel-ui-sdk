@@ -1,31 +1,19 @@
 <template>
-  <ul v-if="localValue">
-    <li
-      v-for="({ name }, index) of localValue"
-      :key="index"
-    >
-      {{ name }}
-    </li>
-  </ul>
+  <lookup-filter-value-preview
+    v-bind="props"
+  />
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-
-import { searchMethod } from './config.js';
+import LookupFilterValuePreview
+  from "../_shared/lookup-filter-preview/lookup-filter-value-preview.vue";
 
 const props = defineProps<{
-  value: number[];
+  /**
+   * would be great to use generated type for this
+  * */
+  value: Record<string, unknown>[];
 }>();
-
-const localValue = ref([]);
-
-const getLocalValue = async () => {
-  const { items } = await searchMethod({ id: props.value });
-  localValue.value = items;
-};
-
-getLocalValue();
 </script>
 
 <style scoped></style>
