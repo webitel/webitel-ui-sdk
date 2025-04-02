@@ -10,15 +10,7 @@
           :key="filter.name"
           :filter="filter"
           dummy
-        >
-          <template #info>
-            <component
-              :is="FilterOptionToPreviewComponentMap[filter.name]"
-              :value="filter.value"
-            >
-            </component>
-          </template>
-        </dynamic-filter-preview>
+        />
       </template>
     </dynamic-filter-panel-wrapper>
   </div>
@@ -30,7 +22,6 @@ import { useI18n } from 'vue-i18n';
 
 import type { IFilter } from '../../../filters';
 import DynamicFilterPanelWrapper from '../../../filters/components/dynamic-filter-panel-wrapper.vue';
-import { FilterOptionToPreviewComponentMap } from '../../../filters/components/filter-options';
 import DynamicFilterPreview from '../../../filters/components/preview/dynamic-filter-preview.vue';
 
 type Props = {
