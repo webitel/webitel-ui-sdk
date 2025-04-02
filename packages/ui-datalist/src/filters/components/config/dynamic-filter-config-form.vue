@@ -58,13 +58,17 @@
 </template>
 
 <script lang="ts" setup>
-import {WtButton, WtSelect} from '@webitel/ui-sdk/components';
+import { WtButton, WtSelect } from '@webitel/ui-sdk/components';
 import deepcopy from 'deep-copy';
-import {computed, ref, watch} from 'vue';
-import {useI18n} from 'vue-i18n';
+import { computed, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import type {FilterInitParams, FilterNameSelectRepresentation, IFilter} from '../../types/Filter';
-import {FilterOptionToValueComponentMap} from "../filter-options";
+import type {
+  FilterInitParams,
+  FilterNameSelectRepresentation,
+  IFilter,
+} from '../../types/Filter';
+import { FilterOptionToValueComponentMap } from '../filter-options';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
 
 interface AddModeProps {
@@ -84,7 +88,7 @@ const emit = defineEmits<{
   cancel: [];
 }>();
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 const filterName = ref();
 const filterLabel = ref('');
@@ -132,7 +136,7 @@ if (props.filter) {
       filterValue.value = deepcopy(props.filter.value);
       filterLabel.value = props.filter.label;
     },
-    {immediate: true},
+    { immediate: true },
   );
 }
 </script>

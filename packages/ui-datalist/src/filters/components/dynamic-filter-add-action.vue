@@ -20,7 +20,10 @@
         <dynamic-filter-config-form
           :options="props.filterOptions"
           @cancel="() => tooltipSlotScope.hide()"
-          @submit="(payload) => submitFilterChange(payload, { hide: tooltipSlotScope.hide })"
+          @submit="
+            (payload) =>
+              submitFilterChange(payload, { hide: tooltipSlotScope.hide })
+          "
         />
       </slot>
     </template>
@@ -31,8 +34,11 @@
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
-import type {FilterInitParams, FilterNameSelectRepresentation} from "../types/Filter";
-import DynamicFilterConfigForm from "./config/dynamic-filter-config-form.vue";
+import type {
+  FilterInitParams,
+  FilterNameSelectRepresentation,
+} from '../types/Filter';
+import DynamicFilterConfigForm from './config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 
 interface Props {

@@ -55,10 +55,10 @@ import { WtIconBtn } from '@webitel/ui-sdk/components';
 import { WtTooltip } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
-import type {FilterInitParams, IFilter} from '../../types/Filter';
-import DynamicFilterConfigForm from "../config/dynamic-filter-config-form.vue";
+import type { FilterInitParams, IFilter } from '../../types/Filter';
+import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
-import {FilterOptionToPreviewComponentMap} from "../filter-options";
+import { FilterOptionToPreviewComponentMap } from '../filter-options';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {

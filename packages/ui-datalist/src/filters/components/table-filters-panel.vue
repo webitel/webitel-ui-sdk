@@ -1,75 +1,75 @@
 <template>
-    <dynamic-filter-panel-wrapper>
-      <template #filters>
-        <!--        WTF? -  /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */ -->
-              <!--TODO-->
-        <!--        <dynamic-filter-preview-->
-<!--          v-if="!hasCreatedAtFromFilter"-->
-<!--          :filter="defaultCreatedAtFromFilterDataPreview"-->
-<!--          dummy-->
-<!--        >-->
-<!--          <template #info>-->
-<!--            <component-->
-<!--              :is="FilterOptionToPreviewComponentMap[FilterOption.CreatedAtFrom]"-->
-<!--              :value="defaultCreatedAtFromFilterDataPreview.value"-->
-<!--            />-->
-<!--          </template>-->
-<!--        </dynamic-filter-preview>-->
+  <dynamic-filter-panel-wrapper>
+    <template #filters>
+      <!--        WTF? -  /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */ -->
+      <!--TODO-->
+      <!--        <dynamic-filter-preview-->
+      <!--          v-if="!hasCreatedAtFromFilter"-->
+      <!--          :filter="defaultCreatedAtFromFilterDataPreview"-->
+      <!--          dummy-->
+      <!--        >-->
+      <!--          <template #info>-->
+      <!--            <component-->
+      <!--              :is="FilterOptionToPreviewComponentMap[FilterOption.CreatedAtFrom]"-->
+      <!--              :value="defaultCreatedAtFromFilterDataPreview.value"-->
+      <!--            />-->
+      <!--          </template>-->
+      <!--        </dynamic-filter-preview>-->
 
-        <dynamic-filter-preview
-          v-for="(filter) of appliedFilters"
-          :key="filter.name"
-          :filter="filter"
-          disable-click-away
-          @update:filter="emit('filter:update', $event)"
-          @delete:filter="emit('filter:delete', filter)"
-        />
+      <dynamic-filter-preview
+        v-for="filter of appliedFilters"
+        :key="filter.name"
+        :filter="filter"
+        disable-click-away
+        @update:filter="emit('filter:update', $event)"
+        @delete:filter="emit('filter:delete', filter)"
+      />
 
-        <dynamic-filter-add-action
-          :show-label="!appliedFilters.length"
-          :filter-options="availableFilterOptions"
-          @add:filter="emit('filter:add', $event)"
-        />
-      </template>
+      <dynamic-filter-add-action
+        :show-label="!appliedFilters.length"
+        :filter-options="availableFilterOptions"
+        @add:filter="emit('filter:add', $event)"
+      />
+    </template>
 
-      <template #actions>
-        <apply-preset-action
-          :namespace="props.presetNamespace"
-          :use-presets-store="props.usePresetsStore"
-          @apply="emit('preset:apply', $event)"
-        />
+    <template #actions>
+      <apply-preset-action
+        :namespace="props.presetNamespace"
+        :use-presets-store="props.usePresetsStore"
+        @apply="emit('preset:apply', $event)"
+      />
 
-        <save-preset-action
-          v-if="enablePresets"
-          :namespace="props.presetNamespace"
-          :filters-manager="props.filtersManager"
-        />
+      <save-preset-action
+        v-if="enablePresets"
+        :namespace="props.presetNamespace"
+        :filters-manager="props.filtersManager"
+      />
 
-        <wt-icon-action
-          action="clear"
-          @click="emit('filter:reset-all')"
-        />
+      <wt-icon-action
+        action="clear"
+        @click="emit('filter:reset-all')"
+      />
 
-        <wt-icon-action
-          action="close"
-          @click="emit('hide')"
-        />
-      </template>
-    </dynamic-filter-panel-wrapper>
+      <wt-icon-action
+        action="close"
+        @click="emit('hide')"
+      />
+    </template>
+  </dynamic-filter-panel-wrapper>
 </template>
 
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
-import {Store} from "pinia";
+import { Store } from 'pinia';
 import { computed } from 'vue';
-import {useI18n} from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
-import {ApplyPresetAction,SavePresetAction} from "../../filter-presets";
-import { FilterOption } from "../enums/FilterOption";
-import {FilterData, IFilter} from "../types/Filter";
-import {IFiltersManager} from "../types/FiltersManager";
+import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
+import { FilterOption } from '../enums/FilterOption';
+import { FilterData, IFilter } from '../types/Filter';
+import { IFiltersManager } from '../types/FiltersManager';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
-import DynamicFilterPanelWrapper from "./dynamic-filter-panel-wrapper.vue";
+import DynamicFilterPanelWrapper from './dynamic-filter-panel-wrapper.vue';
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
 
 type Props = {
@@ -101,7 +101,7 @@ type Props = {
    * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
    */
   usePresetsStore: Store;
-}
+};
 
 const props = defineProps<Props>();
 
@@ -139,14 +139,16 @@ const appliedFilters = computed(() => {
  * available filters to add, with appliedFilters excluded
  */
 const availableFilterOptions = computed(() => {
-  return props.filterOptions.filter((opt) => {
-    return appliedFilters.value.every((filter) => {
-      return filter.name !== opt;
-    });
-  }).map((opt) => ({
-    name: t(`webitelUI.filters.${opt}`),
-    value: opt,
-  }));
+  return props.filterOptions
+    .filter((opt) => {
+      return appliedFilters.value.every((filter) => {
+        return filter.name !== opt;
+      });
+    })
+    .map((opt) => ({
+      name: t(`webitelUI.filters.${opt}`),
+      value: opt,
+    }));
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
