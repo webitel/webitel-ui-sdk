@@ -55,7 +55,7 @@ class FiltersManager implements IFiltersManager {
     return filter;
   }
 
-  deleteFilter(name: FilterName): IFilter {
+  deleteFilter({ name }: IFilter): IFilter {
     const filter = this.filters.get(name);
     this.filters.delete(name);
     return filter;

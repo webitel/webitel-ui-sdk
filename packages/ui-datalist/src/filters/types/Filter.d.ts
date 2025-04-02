@@ -44,3 +44,8 @@ export interface IFilter {
   label?: FilterLabel;
   set: (data: FilterData) => IFilter;
 }
+
+export interface FilterNameSelectRepresentation {
+  name: string;
+  value: FilterName;
+}
