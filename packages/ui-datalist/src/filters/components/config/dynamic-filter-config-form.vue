@@ -16,11 +16,20 @@
       v-bind="{
         filterName,
         filterValue,
-        inputLabel: t('webitelUI.filters.filterValue'),
-        onValueChange: (v) => (filterValue = v),
-        onValueInvalidChange: (v) => (invalid = v),
+        inputLabel: valueInputLabelText,
+        onValueChange,
+        onValueInvalidChange,
       }"
-    />
+    >
+      <component
+        :is="FilterOptionToValueComponentMap[filterName]"
+        :key="filterName"
+        :model-value="filterValue"
+        :label="valueInputLabelText"
+        @update:model-value="onValueChange"
+        @update:invalid="onValueInvalidChange"
+      />
+    </slot>
 
     <dynamic-filter-config-form-label
       :value="filterLabel"
@@ -49,18 +58,14 @@
 </template>
 
 <script lang="ts" setup>
-import { WtButton, WtSelect } from '@webitel/ui-sdk/components';
+import {WtButton, WtSelect} from '@webitel/ui-sdk/components';
 import deepcopy from 'deep-copy';
-import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import {computed, ref, watch} from 'vue';
+import {useI18n} from 'vue-i18n';
 
-import type { FilterInitParams, FilterName, IFilter } from '../../types/Filter';
+import type {FilterInitParams, FilterNameSelectRepresentation, IFilter} from '../../types/Filter';
+import {FilterOptionToValueComponentMap} from "../filter-options";
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
-
-interface FilterNameSelectRepresentation {
-  name: string;
-  value: FilterName;
-}
 
 interface AddModeProps {
   options: Array<FilterNameSelectRepresentation>;
@@ -79,7 +84,7 @@ const emit = defineEmits<{
   cancel: [];
 }>();
 
-const { t } = useI18n();
+const {t} = useI18n();
 
 const filterName = ref();
 const filterLabel = ref('');
@@ -88,6 +93,18 @@ const filterValue = ref();
 const editMode = !!props.filter;
 
 const invalid = ref(false);
+
+const onValueChange = (v) => {
+  filterValue.value = v;
+};
+
+const onValueInvalidChange = (v) => {
+  invalid.value = v;
+};
+
+const valueInputLabelText = computed(() => {
+  return t('webitelUI.filters.filterValue');
+});
 
 const onLabelValueUpdate = (val: string) => {
   filterLabel.value = val;
@@ -115,7 +132,7 @@ if (props.filter) {
       filterValue.value = deepcopy(props.filter.value);
       filterLabel.value = props.filter.label;
     },
-    { immediate: true },
+    {immediate: true},
   );
 }
 </script>

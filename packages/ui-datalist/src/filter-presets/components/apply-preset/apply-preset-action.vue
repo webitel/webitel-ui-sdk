@@ -77,7 +77,7 @@ import {
 } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
-import { type StoreDefinition, storeToRefs } from 'pinia';
+import { type Store, storeToRefs } from 'pinia';
 import { computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
@@ -90,7 +90,7 @@ const props = defineProps<{
    * presets "section" namespace
    */
   namespace: string;
-  usePresetsStore: StoreDefinition;
+  usePresetsStore: Store;
 }>();
 
 const emit = defineEmits<{

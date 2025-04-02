@@ -21,75 +21,33 @@
           :key="filter.name"
           :filter="filter"
           disable-click-away
-          @delete:filter="deleteFilter(filter)"
-        >
-          <template #form="{ hide }">
-            <dynamic-filter-config-form
-              :options="getAppliedFiltersOptions(filter)"
-              :filter="filter"
-              @cancel="() => hide()"
-              @submit="(data) => setFilterWrapperAction(data, updateAppliedFilter, hide)"
-            >
-              <template #value-input="{ filterName, filterValue, onValueChange, onValueInvalidChange }">
-                <component
-                  :is="FilterOptionToValueComponentMap[filterName]"
-                  :key="filterName"
-                  :model-value="filterValue"
-                  @update:model-value="onValueChange"
-                  @update:invalid="onValueInvalidChange"
-                />
-              </template>
-            </dynamic-filter-config-form>
-          </template>
-
-          <template #info>
-            <component
-              :is="FilterOptionToPreviewComponentMap[filter.name]"
-              :value="filter.value"
-            >
-            </component>
-          </template>
-        </dynamic-filter-preview>
+          @update:filter="emit('filter:update', $event)"
+          @delete:filter="emit('filter:delete', filter)"
+        />
 
         <dynamic-filter-add-action
           :show-label="!appliedFilters.length"
-        >
-          <template #form="{ hide }">
-            <dynamic-filter-config-form
-              :options="unappliedFilters"
-              @cancel="() => hide()"
-              @submit="(data) => setFilterWrapperAction(data, applyFilter, hide)"
-            >
-              <template #value-input="{ filterName, filterValue, onValueChange, onValueInvalidChange }">
-                <component
-                  :is="FilterOptionToValueComponentMap[filterName]"
-                  :key="filterName"
-                  :model-value="filterValue"
-                  @update:model-value="onValueChange"
-                  @update:invalid="onValueInvalidChange"
-                />
-              </template>
-            </dynamic-filter-config-form>
-          </template>
-        </dynamic-filter-add-action>
+          :filter-options="availableFilterOptions"
+          @add:filter="emit('filter:add', $event)"
+        />
       </template>
 
       <template #actions>
         <apply-preset-action
-          :namespace="namespace"
-          :use-presets-store="createFilterPresetsStore(namespace)"
-          @apply="applyPreset"
+          :namespace="props.presetNamespace"
+          :use-presets-store="props.usePresetsStore"
+          @apply="emit('preset:apply', $event)"
         />
 
         <save-preset-action
           v-if="enablePresets"
-          :namespace="namespace"
+          :namespace="props.presetNamespace"
           :filters-manager="props.filtersManager"
         />
 
         <wt-icon-action
           action="clear"
-          @click="resetFilters"
+          @click="emit('filter:reset-all')"
         />
 
         <wt-icon-action
@@ -102,62 +60,96 @@
 
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
+import {Store} from "pinia";
 import { computed } from 'vue';
+import {useI18n} from "vue-i18n";
 
 import {ApplyPresetAction,SavePresetAction} from "../../filter-presets";
 import { FilterOption } from "../enums/FilterOption";
-import {IFilter} from "../types/Filter";
+import {FilterData, IFilter} from "../types/Filter";
 import {IFiltersManager} from "../types/FiltersManager";
-import DynamicFilterConfigForm from './config/dynamic-filter-config-form.vue';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
 import DynamicFilterPanelWrapper from "./dynamic-filter-panel-wrapper.vue";
-import {FilterOptionToPreviewComponentMap} from "./filter-options";
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
 
 type Props = {
+  /**
+   * @description
+   * available filter options to set
+   */
   filterOptions: FilterOption[];
   /**
-   * Looks like a anti-pattern, but save-preset component needs to
+   * @description
+   * Looks like a anti-pattern, but save-preset.vue component needs filterManager
    */
   filtersManager: IFiltersManager;
   /**
-   *
+   * @description
+   * QueryPreset "section" field
    */
-  excludedFilters?: FilterOption[];
   presetNamespace?: string;
+  /**
+   * @author @dlohvinov
+   *
+   * @description
+   * table store for operating with presets as dataList.
+   * Seems to me like a bad idea, because apply-preset should not store
+   * any data in a specific store – component state should be enough.
+   * However as for now, there's no composable implementing this logic,
+   * so store is used instead.
+   *
+   * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
+   */
+  usePresetsStore: Store;
 }
 
 const props = defineProps<Props>();
 
+/**
+ * @author @dlohvinov
+ *
+ * @description
+ * There are 2 reasons to use `add`/`update`/`delete` events
+ * instead of mutate `props.filtersManager` directly:
+ * 1. It's possible to add some custom logic on those event in parent component/store
+ * 2. filtersManager shouldn't be passed here, it seems to me like an anti-pattern
+ */
 const emit = defineEmits<{
-  'filter:add': [];
-  'filter:update': [];
-  'filter:delete': [];
+  'filter:add': [FilterData];
+  'filter:update': [FilterData];
+  'filter:delete': [IFilter];
   'filter:reset-all': [];
-  'preset:add': [];
-
-  'a'
+  /**
+   * string == filtersManager.toString() snapshot
+   */
+  'preset:apply': [string];
   hide: [];
 }>();
 
+const { t } = useI18n();
+
+const appliedFilters = computed(() => {
+  return props.filtersManager.getFiltersList({
+    include: props.filterOptions,
+  });
+});
+
+/**
+ * @description
+ * available filters to add, with appliedFilters excluded
+ */
 const availableFilterOptions = computed(() => {
   return props.filterOptions.filter((opt) => {
-    return opt;
-    // return !props.filtersManager.appliedFilters.some((filter) => {
-    //   return filter.name === opt.name;
-    // });
-  })
+    return appliedFilters.value.every((filter) => {
+      return filter.name !== opt;
+    });
+  }).map((opt) => ({
+    name: t(`webitelUI.filters.${opt}`),
+    value: opt,
+  }));
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
-
-const deleteFilter = (filter: IFilter) => {
-  emit('delete:filter', filter);
-};
-
-const resetFilters = () => {
-  emit('reset:filters');
-};
 </script>
 
 <style scoped></style>

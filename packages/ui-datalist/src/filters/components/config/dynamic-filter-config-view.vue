@@ -8,13 +8,13 @@
       <template #activator="slotScope">
         <slot
           name="activator"
-          v-bind="slotScope"
+          v-bind="{ tooltipSlotScope: slotScope }"
         />
       </template>
       <template #default="slotScope">
         <slot
           name="content"
-          v-bind="slotScope"
+          v-bind="{ tooltipSlotScope: slotScope }"
         />
       </template>
     </wt-tooltip>
@@ -27,7 +27,7 @@
  * and their styling
  */
 
-import WtTooltip from '@webitel/ui-sdk/components';
+import { WtTooltip } from '@webitel/ui-sdk/components';
 
 interface Props {
   disabled?: boolean;

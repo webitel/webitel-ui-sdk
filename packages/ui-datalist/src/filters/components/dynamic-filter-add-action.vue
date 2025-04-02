@@ -12,12 +12,16 @@
       </div>
     </template>
 
-    <template #content="slotScope">
+    <template #content="{ tooltipSlotScope }">
       <slot
         name="form"
-        v-bind="slotScope"
+        v-bind="{ tooltipSlotScope }"
       >
-        filter form should be here
+        <dynamic-filter-config-form
+          :options="props.filterOptions"
+          @cancel="() => tooltipSlotScope.hide()"
+          @submit="(payload) => submitFilterChange(payload, { hide: tooltipSlotScope.hide })"
+        />
       </slot>
     </template>
   </dynamic-filter-config-view>
@@ -27,15 +31,27 @@
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
+import type {FilterInitParams, FilterNameSelectRepresentation} from "../types/Filter";
+import DynamicFilterConfigForm from "./config/dynamic-filter-config-form.vue";
 import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 
 interface Props {
+  filterOptions: FilterNameSelectRepresentation[];
   showLabel?: boolean;
 }
 
 const props = defineProps<Props>();
 
 const { t } = useI18n();
+
+const emit = defineEmits<{
+  'add:filter': [FilterInitParams];
+}>();
+
+const submitFilterChange = (payload: FilterInitParams, { hide }) => {
+  emit('add:filter', payload);
+  hide();
+};
 </script>
 
 <style lang="scss" scoped>
