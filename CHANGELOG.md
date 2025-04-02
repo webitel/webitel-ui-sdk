@@ -1,3 +1,28 @@
+## [v25.4.48] - 2025-04-02
+### :sparkles: New Features
+- [`9225a8f`](https://github.com/webitel/webitel-ui-sdk/commit/9225a8f6f24a3397d5295313b8170b70ad2925c3) - added readme file to @webitel/ui-datalist npm pckg [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`db1cdf4`](https://github.com/webitel/webitel-ui-sdk/commit/db1cdf49372e8de131d9e0cd5ef567e4faeab092) - @webitel/ui-datalist npm pckg [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`310e4d6`](https://github.com/webitel/webitel-ui-sdk/commit/310e4d645d26b176121e5063cfe80c2a1d1c0090) - eslint+prettier, + reformatting [WTEL-6536](https://webitel.atlassian.net/browse/WTEL-6536) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`53ee405`](https://github.com/webitel/webitel-ui-sdk/commit/53ee40541333e565222a7cd828386b3c3f3a36ad) - eslint+prettier, + reformatting [WTEL-6536](https://webitel.atlassian.net/browse/WTEL-6536) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`02680c3`](https://github.com/webitel/webitel-ui-sdk/commit/02680c3d56ca632e4f492b96950de8800c181606) - webitel-ui entry points update [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`8446027`](https://github.com/webitel/webitel-ui-sdk/commit/8446027ac981b6ad4ba02b10d62e16bb144e3695) - ui-datalist package @webitel/ui-sdk import fixes from relative paths to package [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`4d80543`](https://github.com/webitel/webitel-ui-sdk/commit/4d80543cc9b8850460ca8d71e458545eec700b16) - linting scope [WTEL-6536](https://webitel.atlassian.net/browse/WTEL-6536) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`50ed7b2`](https://github.com/webitel/webitel-ui-sdk/commit/50ed7b21e6ced1c4c3a82137298e21f1040b1b24) - pre-commit hook upd test commit [WTEL-6536](https://webitel.atlassian.net/browse/WTEL-6536) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`5168ceb`](https://github.com/webitel/webitel-ui-sdk/commit/5168ceb270a957c9565f50156517f66b628881d2) - pre-commit hook upd test commit [WTEL-6536](https://webitel.atlassian.net/browse/WTEL-6536) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`9dbb623`](https://github.com/webitel/webitel-ui-sdk/commit/9dbb62349d1dcebc4fd567c00b92d02d8f0ff0d0) - ran reformat code [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`56c65f3`](https://github.com/webitel/webitel-ui-sdk/commit/56c65f39f0a38d9160aae99df3bcb100963b4360) - filters panel moved to ui-datalist pckg [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`ee07c7c`](https://github.com/webitel/webitel-ui-sdk/commit/ee07c7c64d90f5026cf6683e120f79637648b729) - rfactoring filters panel in progress [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`e0d1370`](https://github.com/webitel/webitel-ui-sdk/commit/e0d1370f1e4ad8d25395fc9b4a1697791e8af063) - moving filters panel to lib in progress [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`460dc66`](https://github.com/webitel/webitel-ui-sdk/commit/460dc66cb9e412280cb218b6c007499c7ba65a45) - ui-sdk package.json exports, lang=sass removed from ui-datalist [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`77a9b08`](https://github.com/webitel/webitel-ui-sdk/commit/77a9b087dc998954d513930c8f42c446dd1af502) - ui-sdk package.json exports, lang=sass removed from ui-datalist [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`86e7add`](https://github.com/webitel/webitel-ui-sdk/commit/86e7add3c2c060857b9286ac29b3a71a8c9eac6e) - run project linting + code reformatting [WTEL-6536](https://webitel.atlassian.net/browse/WTEL-6536) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`3983732`](https://github.com/webitel/webitel-ui-sdk/commit/39837327e5b07f3ed8aa07a9b062128ff54adee9) - eslint config updates [WTEL-6536](https://webitel.atlassian.net/browse/WTEL-6536) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.47] - 2025-03-26
 
 ### :recycle: Refactors
@@ -1768,3 +1793,4 @@
 [v25.4.45]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.44...v25.4.45
 [v25.4.46]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.45...v25.4.46
 [v25.4.47]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.46...v25.4.47
+[v25.4.48]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.47...v25.4.48
