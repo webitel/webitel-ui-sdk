@@ -3,5 +3,5 @@ export const DatalistStoreProviderType = {
   Pinia: 'pinia',
 } as const;
 
-export type StoreProvider =
+export type DatalistStoreProviderType =
   (typeof DatalistStoreProviderType)[keyof typeof DatalistStoreProviderType];

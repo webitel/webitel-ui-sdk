@@ -1,216 +1,209 @@
 import set from 'lodash/set';
-import { defineStore as definePiniaStore, storeToRefs } from 'pinia';
 import { type Ref, ref, watch } from 'vue';
 
+import {
+  createDatalistStore,
+  makeThisToRefs,
+} from '../_shared/createDatalistStore';
 import { createTableFiltersStore } from '../filters/createTableFiltersStore.ts';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
-import { DatalistStoreProviderType } from '../types/StoreProvider';
 import {
   PatchItemPropertyParams,
-  TableStore,
   useTableStoreConfig,
 } from '../types/tableStore.types.ts';
 
-const useTableStore =
-  (namespace: string, config: useTableStoreConfig<>) => () => {
-    const usePaginationStore = createTablePaginationStore(namespace);
-    const useHeadersStore = createTableHeadersStore(namespace, { headers });
-    const useFiltersStore = createTableFiltersStore(namespace);
+const tableStoreBody =
+  <Entity>(namespace: string, config: useTableStoreConfig<Entity>) =>
+  () => {
+    const usePaginationStore = createTablePaginationStore(namespace, config);
+    const useHeadersStore = createTableHeadersStore(namespace, config);
+    const useFiltersStore = createTableFiltersStore(namespace, config);
 
-    return defineStore(namespace, (): TableStore<Entity> => {
-      const parentId = ref();
+    const thisToRefs = makeThisToRefs(config.storeType);
 
-      const paginationStore = usePaginationStore();
-      const { page, size, next } = storeToRefs(paginationStore);
-      const {
-        updatePage,
-        updateSize,
-        // $reset: $resetPaginationStore,
-        $patch: $patchPaginationStore,
-        setupPersistence: setupPaginationPersistence,
-      } = paginationStore;
+    const parentId = ref();
 
-      const headersStore = useHeadersStore();
-      const { headers, shownHeaders, fields, sort } = storeToRefs(headersStore);
-      const {
-        updateSort,
-        updateShownHeaders,
-        setupPersistence: setupHeadersPersistence,
-      } = headersStore;
+    const paginationStore = usePaginationStore();
+    const { page, size, next } = thisToRefs(paginationStore);
+    const {
+      updatePage,
+      updateSize,
+      // $reset: $resetPaginationStore,
+      $patch: $patchPaginationStore,
+      setupPersistence: setupPaginationPersistence,
+    } = paginationStore;
 
-      const filtersStore = useFiltersStore();
-      const { filtersManager, isRestoring: isFiltersRestoring } =
-        storeToRefs(filtersStore);
-      const {
-        hasFilter,
-        addFilter,
-        updateFilter,
-        deleteFilter,
-        setupPersistence: setupFiltersPersistence,
-      } = filtersStore;
+    const headersStore = useHeadersStore();
+    const { headers, shownHeaders, fields, sort } = thisToRefs(headersStore);
+    const {
+      updateSort,
+      updateShownHeaders,
+      setupPersistence: setupHeadersPersistence,
+    } = headersStore;
 
-      const dataList: Ref<Entity[]> = ref([]);
-      const selected: Ref<Entity[]> = ref([]);
-      const error = ref(null);
-      const isLoading = ref(false);
+    const filtersStore = useFiltersStore();
+    const { filtersManager, isRestoring: isFiltersRestoring } =
+      thisToRefs(filtersStore);
+    const {
+      hasFilter,
+      addFilter,
+      updateFilter,
+      deleteFilter,
+      setupPersistence: setupFiltersPersistence,
+    } = filtersStore;
 
-      const updateSelected = (value: Entity[]) => {
-        selected.value = value;
+    const dataList: Ref<Entity[]> = ref([]);
+    const selected: Ref<Entity[]> = ref([]);
+    const error = ref(null);
+    const isLoading = ref(false);
+
+    const updateSelected = (value: Entity[]) => {
+      selected.value = value;
+    };
+
+    const loadDataList = async () => {
+      isLoading.value = true;
+      $patchPaginationStore({ next: false });
+
+      const params = {
+        ...filtersManager.value.getAllValues(),
+        page: page.value,
+        size: size.value,
+        sort: sort.value,
+        fields: fields.value,
+        parentId: parentId.value,
       };
 
-      const loadDataList = async () => {
-        isLoading.value = true;
-        $patchPaginationStore({ next: false });
+      try {
+        const { items, next } = await apiModule.getList(params);
 
-        const params = {
-          ...filtersManager.value.getAllValues(),
-          page: page.value,
-          size: size.value,
-          sort: sort.value,
-          fields: fields.value,
+        dataList.value = items;
+        updateSelected([]);
+        $patchPaginationStore({ next });
+      } catch (err) {
+        error.value = err;
+        throw err;
+      } finally {
+        isLoading.value = false;
+      }
+    };
+
+    const patchItemProperty = async ({
+      index,
+      path,
+      value,
+    }: PatchItemPropertyParams) => {
+      const item = dataList.value[index];
+      const changes = {};
+      set(path, value, changes);
+
+      try {
+        await apiModule.patch({
+          changes,
           parentId: parentId.value,
-        };
-
-        try {
-          const { items, next } = await apiModule.getList(params);
-
-          dataList.value = items;
-          updateSelected([]);
-          $patchPaginationStore({ next });
-        } catch (err) {
-          error.value = err;
-          throw err;
-        } finally {
-          isLoading.value = false;
-        }
-      };
-
-      const patchItemProperty = async ({
-        index,
-        path,
-        value,
-      }: PatchItemPropertyParams) => {
-        const item = dataList.value[index];
-        const changes = {};
-        set(path, value, changes);
-
-        try {
-          await apiModule.patch({
-            changes,
-            parentId: parentId.value,
-            id: item.id,
-            etag: item.etag,
-          });
-          set(path, value, item);
-        } catch (err) {
-          await loadDataList();
-          throw err;
-        }
-      };
-
-      const deleteEls = async (_els: Entity[]) => {
-        const els = Array.isArray(_els) ? _els : [_els];
-        const deleteEl = (el: Entity) => {
-          return apiModule.delete({
-            id: el.id,
-            etag: el.etag,
-            parentId: parentId.value,
-          });
-        };
-
-        try {
-          await Promise.all(els.map(deleteEl));
-        } finally {
-          await loadDataList();
-        }
-      };
-
-      const initialize = async ({
-        parentId: storeParentId,
-      }: { parentId?: string | number } = {}) => {
-        if (storeParentId) {
-          parentId.value = storeParentId;
-        }
-
-        if (!disablePersistence) {
-          await Promise.allSettled([
-            setupPaginationPersistence(),
-            setupFiltersPersistence(),
-            setupHeadersPersistence(),
-          ]);
-        }
-
-        let loadingAfterFiltersChange = false;
-
-        watch(
-          [() => filtersManager.value.getAllValues(), sort, fields, size],
-          async () => {
-            loadingAfterFiltersChange = true;
-            updatePage(1);
-            await loadDataList();
-            loadingAfterFiltersChange = false;
-          },
-          /* filtersManager requires deep watching for its values */
-          { deep: true },
-        );
-
-        watch([page], () => {
-          if (!loadingAfterFiltersChange) {
-            return loadDataList();
-          }
+          id: item.id,
+          etag: item.etag,
         });
+        set(path, value, item);
+      } catch (err) {
+        await loadDataList();
+        throw err;
+      }
+    };
 
-        return loadDataList();
+    const deleteEls = async (_els: Entity[]) => {
+      const els = Array.isArray(_els) ? _els : [_els];
+      const deleteEl = (el: Entity) => {
+        return apiModule.delete({
+          id: el.id,
+          etag: el.etag,
+          parentId: parentId.value,
+        });
       };
 
-      return {
-        dataList,
-        selected,
-        error,
-        isLoading,
+      try {
+        await Promise.all(els.map(deleteEl));
+      } finally {
+        await loadDataList();
+      }
+    };
 
-        page,
-        size,
-        next,
+    const initialize = async ({
+      parentId: storeParentId,
+    }: { parentId?: string | number } = {}) => {
+      if (storeParentId) {
+        parentId.value = storeParentId;
+      }
 
-        headers,
-        shownHeaders,
-        fields,
-        sort,
+      if (!disablePersistence) {
+        await Promise.allSettled([
+          setupPaginationPersistence(),
+          setupFiltersPersistence(),
+          setupHeadersPersistence(),
+        ]);
+      }
 
-        filtersManager,
-        isFiltersRestoring,
+      let loadingAfterFiltersChange = false;
 
-        initialize,
+      watch(
+        [() => filtersManager.value.getAllValues(), sort, fields, size],
+        async () => {
+          loadingAfterFiltersChange = true;
+          updatePage(1);
+          await loadDataList();
+          loadingAfterFiltersChange = false;
+        },
+        /* filtersManager requires deep watching for its values */
+        { deep: true },
+      );
 
-        loadDataList,
+      watch([page], () => {
+        if (!loadingAfterFiltersChange) {
+          return loadDataList();
+        }
+      });
 
-        updateSelected,
-        patchItemProperty,
-        deleteEls,
+      return loadDataList();
+    };
 
-        updatePage,
-        updateSize,
+    return {
+      dataList,
+      selected,
+      error,
+      isLoading,
 
-        updateSort,
-        updateShownHeaders,
+      page,
+      size,
+      next,
 
-        hasFilter,
-        addFilter,
-        updateFilter,
-        deleteFilter,
-      };
-    });
+      headers,
+      shownHeaders,
+      fields,
+      sort,
+
+      filtersManager,
+      isFiltersRestoring,
+
+      initialize,
+
+      loadDataList,
+
+      updateSelected,
+      patchItemProperty,
+      deleteEls,
+
+      updatePage,
+      updateSize,
+
+      updateSort,
+      updateShownHeaders,
+
+      hasFilter,
+      addFilter,
+      updateFilter,
+      deleteFilter,
+    };
   };
 
-export const createTableStore = <Entity extends { id: string; etag?: string }>(
-  namespace: string,
-  config: useTableStoreConfig<Entity>,
-): TableStore<Entity> => {
-  if (config?.storeType === DatalistStoreProviderType.Composable) {
-    return useTableStore(namespace, config);
-  }
-
-  return definePiniaStore(namespace, useTableStore(namespace, config))();
-};
+export const createTableStore = createDatalistStore(tableStoreBody);
