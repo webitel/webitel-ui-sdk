@@ -2,10 +2,10 @@
   <wt-search-bar
     :placeholder="t('reusable.search')"
     :search-mode="currentSearchMode"
-    :search-mode-options="searchModeOpts"
-    :hint="multisearch && currentSearchMode?.hint"
+    :search-mode-options="props.searchModeOptions"
+    :hint="currentSearchMode?.hint"
     :value="model"
-    :v="multisearch && v$"
+    :v="validationExists && v$"
     @input="model = $event"
     @search="handleSearch"
     @update:search-mode="onSearchModeChange($event.value)"
@@ -30,14 +30,12 @@ import {FilterSearch} from '../index';
 type ModelValue = string;
 const model = defineModel<ModelValue>();
 
-type SearchModeOptions = FilterSearch[] | Record<string, string>
+type SearchModeOptions = FilterSearch[]
 
 const props = defineProps<{
   searchMode: string;
   searchModeOptions: SearchModeOptions;
   showTextSearchIcon?: boolean;
-  name?: string;
-  multisearch?: boolean
 }>();
 
 const emit = defineEmits<{
@@ -47,25 +45,14 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const searchModeOpts = computed<FilterSearch[]>(() => {
-  if (props.multisearch && props.searchModeOptions.length) {
-    return props.searchModeOptions
-  }
-
-  return Object.values(props.searchModeOptions).map((mode) => {
-    return {
-      value: mode,
-      text: t(`filters.search.${mode}`),
-    };
-  })
-});
-
 const currentSearchMode = computed(() =>
-  searchModeOpts.value.find(({ value }) => value === props.searchMode),
+  props.searchModeOptions.find(({ value }) => value === props.searchMode),
 );
 
+const validationExists = computed(() => props.searchModeOptions.find((el) => el.v))
+
 const v$ =
-  props.multisearch &&
+  validationExists.value &&
   useVuelidate(
     computed(() => {
       return {
