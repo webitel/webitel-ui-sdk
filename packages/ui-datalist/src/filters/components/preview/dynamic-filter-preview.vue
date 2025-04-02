@@ -86,10 +86,6 @@ const deleteFilter = () => {
   emit('delete:filter', props.filter);
 };
 
-const submit = (filter: FilterData) => {
-  emit('update:filter', filter);
-};
-
 const localValue = ref();
 
 /**
@@ -111,6 +107,12 @@ const fillLocalValue = async (filter = props.filter) => {
   } else {
     localValue.value = filterValue;
   }
+};
+
+const submit = (filter: IFilter, { hide }) => {
+  emit('update:filter', filter);
+  fillLocalValue(filter);
+  hide();
 };
 </script>
 
