@@ -20,6 +20,7 @@
         v-for="filter of appliedFilters"
         :key="filter.name"
         :filter="filter"
+        :filter-options="localizedFilterOptions /* for form component to localize selected filter name value */"
         disable-click-away
         @update:filter="emit('filter:update', $event)"
         @delete:filter="emit('filter:delete', filter)"
@@ -43,6 +44,7 @@
         v-if="enablePresets"
         :namespace="props.presetNamespace"
         :filters-manager="props.filtersManager"
+        :filter-options="props.filterOptions"
       />
 
       <wt-icon-action
@@ -80,7 +82,8 @@ type Props = {
   filterOptions: FilterOption[];
   /**
    * @description
-   * Looks like a anti-pattern, but save-preset.vue component needs filterManager
+   * create local filters manager from snapshot
+   * inside save-preset.vue
    */
   filtersManager: IFiltersManager;
   /**
@@ -134,21 +137,23 @@ const appliedFilters = computed(() => {
   });
 });
 
+const localizedFilterOptions = computed(() => {
+  return props.filterOptions.map((opt) => ({
+    name: t(`webitelUI.filters.${opt}`),
+    value: opt,
+  }));
+});
+
 /**
  * @description
  * available filters to add, with appliedFilters excluded
  */
 const availableFilterOptions = computed(() => {
-  return props.filterOptions
-    .filter((opt) => {
+  return localizedFilterOptions.value.filter(({ value: opt }) => {
       return appliedFilters.value.every((filter) => {
         return filter.name !== opt;
       });
-    })
-    .map((opt) => ({
-      name: t(`webitelUI.filters.${opt}`),
-      value: opt,
-    }));
+    });
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);

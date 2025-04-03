@@ -14,7 +14,7 @@
         !presetToOverwriteWith /* on 'overwrite preset' popup hide this popup, but don't reset it*/
       "
       :shown="true /* coz visibility is controlled by v-if*/"
-      :filters-manager="props.filtersManager"
+      :filters-manager="localFiltersManager"
       :namespace="namespace"
       @submit="handlePresetSubmit"
       @close="showSaveForm = false"
@@ -32,11 +32,11 @@
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
-import { computed, inject, type Ref, ref } from 'vue';
+import {computed, inject, reactive, type Ref, ref, watch} from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import { IFiltersManager } from '../../../filters';
+import {createFiltersManager, FilterOption, IFiltersManager} from '../../../filters';
 import {
   addPreset,
   getPresetList,
@@ -47,13 +47,30 @@ import SavePresetPopup, { SubmitConfig } from './save-preset-popup.vue';
 
 const props = defineProps<{
   /**
+   * @description
    * presets "section" namespace
    */
   namespace: string;
+  /**
+   * @author @dlohvinov
+   * serves as a source for local filters manager
+   */
   filtersManager: IFiltersManager;
+  /**
+   * @description
+   * Is needed for preset to exclude filter values, not related to filters panel
+   */
+  filterOptions: FilterOption[];
 }>();
 
 const eventBus = inject('$eventBus');
+
+const localFiltersManager = reactive(createFiltersManager());
+
+watch(props.filtersManager, () => {
+  localFiltersManager.reset();
+  localFiltersManager.fromString(props.filtersManager.toString({ include: props.filterOptions }));
+}, { immediate: true });
 
 const { t } = useI18n();
 
@@ -61,7 +78,7 @@ const { t } = useI18n();
  * disable "save" btn if there's nothing to save
  * */
 const disableAction = computed(() => {
-  return !props.filtersManager.getAllKeys().length;
+  return !localFiltersManager.getAllKeys().length;
 });
 
 /**

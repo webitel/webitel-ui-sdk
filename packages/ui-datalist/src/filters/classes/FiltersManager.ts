@@ -70,8 +70,14 @@ class FiltersManager implements IFiltersManager {
     return filters;
   }
 
-  toString(): string {
-    const filtersData = [...this.filters.values()].reduce(
+  toString({
+    include,
+    exclude,
+  }: {
+    include?: FilterName[];
+    exclude?: FilterName[];
+  } = {}): string {
+    const filtersData = this.getFiltersList({ include, exclude }).reduce(
       (acc, { name, label, value }) => {
         if (isEmpty(value) && value == null) return acc;
 

@@ -49,6 +49,7 @@
       >
         <dynamic-filter-config-form
           :filter="props.filter"
+          :options="filterOptions"
           @cancel="() => tooltipSlotScope.hide()"
           @submit="(payload) => submit(payload, { hide: tooltipSlotScope.hide })"
         />
@@ -62,6 +63,7 @@ import { WtChip, WtIconBtn, WtLoader, WtTooltip } from '@webitel/ui-sdk/componen
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import type {FilterOption} from "../../enums/FilterOption";
 import type {FilterData, IFilter} from '../../types/Filter';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
@@ -70,6 +72,11 @@ import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {
   filter: IFilter;
+  /**
+   * @description
+   * is needed for form component to localize selected filter name value
+   */
+  filterOptions: FilterOption[];
   dummy?: boolean /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */;
 }
 
