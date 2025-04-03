@@ -1,4 +1,4 @@
-import ServiceCatalogsAPI from '../../../../../../../api/clients/caseServiceCatalogs/service-catalogs.js';
+import ServiceCatalogsAPI from '../../../../../../../api/clients/caseServiceCatalogs/serviceCatalogs.js';
 import ServicesAPI from '../../../../../../../api/clients/caseServices/services.js';
 
 export const searchMethod = ServiceCatalogsAPI.getList;
