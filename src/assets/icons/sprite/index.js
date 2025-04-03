@@ -188,6 +188,7 @@ import treeExpand from './tree-expand.svg';
 import treeLine from './tree-line.svg';
 import ttsDownload from './tts-download.svg';
 import undo from './undo.svg';
+import union from './union.svg';
 import unpin from './unpin.svg';
 import upload from './upload.svg';
 import user from './user.svg';
@@ -355,6 +356,7 @@ export default objCamelToKebab({
   tick,
   upload,
   user,
+  union,
   videoCamOff,
   videoCam,
   zoomIn,

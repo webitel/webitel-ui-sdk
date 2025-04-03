@@ -241,6 +241,7 @@ export default {
     reason: 'Причина | Причини',
     rating: 'Оцінка',
     service: 'Cервіси | Cервіси',
+    selectAService: 'Вибрати сервіс',
     appliedSLA: 'Застосований SLA',
     appliedCondition: 'Застосована умова',
     reactionTime: 'Плановий час реакції',

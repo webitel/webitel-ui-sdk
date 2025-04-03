@@ -242,6 +242,7 @@ export default {
     reason: 'Reason | Reasons',
     rating: 'Rating',
     service: 'Service | Services',
+    selectAService: 'Select a service',
     appliedSLA: 'Applied SLA',
     appliedCondition: 'Applied condition',
     reactionTime: 'Reaction time',
