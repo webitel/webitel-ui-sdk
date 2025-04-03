@@ -1,7 +1,10 @@
 <template>
   <dynamic-filter-config-view :disabled="dummy">
     <template #activator="{ visible: configFormVisible }">
-      <wt-tooltip :disabled="configFormVisible">
+      <wt-tooltip
+        :disabled="configFormVisible"
+        @update:visible="!localValue && fillLocalValue()"
+      >
         <template #activator>
           <wt-chip color="primary">
             {{ filter.label || t(`webitelUI.filters.${filter.name}`) }}
@@ -23,9 +26,14 @@
 
             <template #default>
               <slot name="info">
+                <wt-loader
+                  v-if="!localValue"
+                  size="sm"
+                />
                 <component
                   :is="FilterOptionToPreviewComponentMap[filter.name]"
-                  :value="filter.value"
+                  v-else
+                  :value="localValue"
                 />
               </slot>
             </template>
@@ -34,15 +42,15 @@
       </wt-tooltip>
     </template>
 
-    <template #content="slotScope">
+    <template #content="{ tooltipSlotScope }">
       <slot
         name="form"
-        v-bind="slotScope"
+        v-bind="{ tooltipSlotScope }"
       >
         <dynamic-filter-config-form
-          :filter="filter"
-          @cancel="() => slotScope.hide()"
-          @submit="(payload) => submitFilterChange(payload) && slotScope.hide()"
+          :filter="props.filter"
+          @cancel="() => tooltipSlotScope.hide()"
+          @submit="(payload) => submit(payload, { hide: tooltipSlotScope.hide })"
         />
       </slot>
     </template>
@@ -50,15 +58,14 @@
 </template>
 
 <script lang="ts" setup>
-import { WtChip } from '@webitel/ui-sdk/components';
-import { WtIconBtn } from '@webitel/ui-sdk/components';
-import { WtTooltip } from '@webitel/ui-sdk/components';
+import { WtChip, WtIconBtn, WtLoader, WtTooltip } from '@webitel/ui-sdk/components';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { FilterInitParams, IFilter } from '../../types/Filter';
+import type {FilterData, IFilter} from '../../types/Filter';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
-import { FilterOptionToPreviewComponentMap } from '../filter-options';
+import { FilterOptionToApiSearchMethodMap,FilterOptionToPreviewComponentMap } from '../filter-options';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {
@@ -71,7 +78,7 @@ const { t } = useI18n();
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  'update:filter': [IFilter];
+  'update:filter': [FilterData];
   'delete:filter': [IFilter];
 }>();
 
@@ -79,8 +86,33 @@ const deleteFilter = () => {
   emit('delete:filter', props.filter);
 };
 
-const submitFilterChange = (filter: FilterInitParams) => {
+const localValue = ref();
+
+/**
+ * @author @dlohvinov
+ *
+ * @description
+ * loading filters preview data -> main preview component
+ * instead of tooltip-components to avoid api requests spam
+ */
+const fillLocalValue = async (filter = props.filter) => {
+  const filterName = props.filter.name;
+  const filterValue = filter.value;
+
+  const valueSearchMethod = FilterOptionToApiSearchMethodMap[filterName];
+
+  if (valueSearchMethod) {
+    const { items } = await valueSearchMethod({ id: filterValue });
+    localValue.value = items;
+  } else {
+    localValue.value = filterValue;
+  }
+};
+
+const submit = (filter: IFilter, { hide }) => {
   emit('update:filter', filter);
+  fillLocalValue(filter);
+  hide();
 };
 </script>
 
@@ -90,5 +122,9 @@ const submitFilterChange = (filter: FilterInitParams) => {
   justify-content: center;
   align-items: center;
   gap: var(--spacing-2xs);
+}
+
+.wt-loader {
+  margin: auto;
 }
 </style>

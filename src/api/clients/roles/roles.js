@@ -32,6 +32,10 @@ const getRoleList = async (params) => {
 
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
+    (params) => {
+      params.ids = params.ids || params.id; // accept either ids or id as param
+      return params;
+    },
     starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),

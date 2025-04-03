@@ -18,6 +18,7 @@
 @use '@webitel/styleguide/typography' as *;
 
 .dynamic-filter-preview-info {
+  min-width: 60px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);

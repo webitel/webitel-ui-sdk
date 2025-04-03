@@ -20,10 +20,7 @@
         <dynamic-filter-config-form
           :options="props.filterOptions"
           @cancel="() => tooltipSlotScope.hide()"
-          @submit="
-            (payload) =>
-              submitFilterChange(payload, { hide: tooltipSlotScope.hide })
-          "
+          @submit="(payload) => submit(payload, { hide: tooltipSlotScope.hide })"
         />
       </slot>
     </template>
@@ -31,8 +28,8 @@
 </template>
 
 <script lang="ts" setup>
-import { WtIconAction } from '@webitel/ui-sdk/components';
-import { useI18n } from 'vue-i18n';
+import {WtIconAction} from '@webitel/ui-sdk/components';
+import {useI18n} from 'vue-i18n';
 
 import type {
   FilterInitParams,
@@ -48,13 +45,13 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const { t } = useI18n();
+const {t} = useI18n();
 
 const emit = defineEmits<{
   'add:filter': [FilterInitParams];
 }>();
 
-const submitFilterChange = (payload: FilterInitParams, { hide }) => {
+const submit = (payload: FilterInitParams, {hide}) => {
   emit('add:filter', payload);
   hide();
 };

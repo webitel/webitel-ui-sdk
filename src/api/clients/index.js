@@ -5,6 +5,7 @@ import calendars from './calendars/calendars.js';
 import caseCloseReasonGroups from './caseCloseReasonGroups/caseCloseReasonGroups.js';
 import caseCloseReasons from './caseCloseReasons/caseCloseReasons.js';
 import casePriorities from './casePriorities/casePriorities.js';
+import caseServiceCatalogs from './caseServiceCatalogs/serviceCatalogs.js';
 import caseSources from './caseSources/caseSources.js';
 import caseStatusConditions from './caseStatusConditions/caseStatusConditions.js';
 import caseStatuses from './caseStatuses/caseStatuses.js';
@@ -34,6 +35,7 @@ export {
   caseCloseReasonGroups,
   caseCloseReasons,
   casePriorities,
+  caseServiceCatalogs,
   caseSources,
   caseStatusConditions,
   caseStatuses,
