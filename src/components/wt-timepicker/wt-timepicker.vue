@@ -17,16 +17,19 @@
       </slot>
     </wt-label>
     <div class="wt-timepicker__wrapper">
-      <wt-time-input
-        v-if="isDay"
-        :disabled="disabled"
-        :label="labelDays"
-        :max-value="dateMode ? null : 365"
-        :v="v"
-        :value="day"
-        hide-input-info
-        @input="day = $event"
-      />
+
+<!--      [https://webitel.atlassian.net/browse/WTEL-6651]-->
+
+<!--      <wt-time-input-->
+<!--        v-if="isDay"-->
+<!--        :disabled="disabled"-->
+<!--        :label="labelDays"-->
+<!--        :max-value="dateMode ? null : 365"-->
+<!--        :v="v"-->
+<!--        :value="day"-->
+<!--        hide-input-info-->
+<!--        @input="day = $event"-->
+<!--      />-->
       <wt-time-input
         v-if="isHour"
         :disabled="disabled"
@@ -35,8 +38,8 @@
         :v="v"
         :value="hour"
         hide-input-info
-        @input="hour = $event"
         @blur="onHoursBlurEvent"
+        @input="hour = $event"
       />
       <wt-time-input
         v-if="isMin"
@@ -71,7 +74,7 @@
 <script>
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
 
-const SEC_IN_DAY = 60 * 60 * 24;
+// const SEC_IN_DAY = 60 * 60 * 24;
 const SEC_IN_HOUR = 60 * 60;
 const SEC_IN_MIN = 60;
 
@@ -108,7 +111,7 @@ export default {
     },
 
     /**
-     * Time format, can be "dd:hh:mm:ss", "hh:mm:ss", "mm:ss", "ss"
+     * Time format, can be "hh:mm:ss", "mm:ss", "ss"
      */
     format: {
       type: String,
@@ -139,9 +142,9 @@ export default {
   },
 
   computed: {
-    isDay() {
-      return this.format.includes('dd');
-    },
+    // isDay() {
+    //   return this.format.includes('dd');
+    // },
     isHour() {
       return this.format.includes('hh');
     },
@@ -151,10 +154,10 @@ export default {
     isSec() {
       return this.format.includes('ss');
     },
-    labelDays() {
-      if (this.noLabel) return null;
-      return this.label ? null : this.$t('webitelUI.timepicker.day');
-    },
+    // labelDays() {
+    //   if (this.noLabel) return null;
+    //   return this.label ? null : this.$t('webitelUI.timepicker.day');
+    // },
     labelHours() {
       if (this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.hour');
@@ -167,24 +170,29 @@ export default {
       if (this.noLabel) return null;
       return this.label ? null : this.$t('webitelUI.timepicker.sec');
     },
-    day: {
-      get() {
-        return this.dateMode
-          ? new Date(+this.value).getDay()
-          : Math.floor(this.value / SEC_IN_DAY);
-      },
-      set(value) {
-        const newValue = this.dateMode
-          ? new Date(this.value).setDate(value)
-          : this.value - this.day * SEC_IN_DAY + value * SEC_IN_DAY;
-        this.$emit('input', newValue);
-      },
-    },
+
+    // https://webitel.atlassian.net/browse/WTEL-6651?focusedCommentId=664296
+    // There is no need to enter days at the moment, but functionality is reserved for future
+
+    // day: {
+    //   get() {
+    //     return this.dateMode
+    //       ? new Date(+this.value).getDay()
+    //       : Math.floor(this.value / SEC_IN_DAY);
+    //   },
+    //   set(value) {
+    //     const newValue = this.dateMode
+    //       ? new Date(this.value).setDate(value)
+    //       : this.value - this.day * SEC_IN_DAY + value * SEC_IN_DAY;
+    //     this.$emit('input', newValue);
+    //   },
+    // },
     hour: {
       get() {
         return this.dateMode
           ? new Date(+this.value).getHours()
-          : Math.floor((this.value % SEC_IN_DAY) / SEC_IN_HOUR);
+          : Math.floor(this.value / SEC_IN_HOUR);
+    //      : Math.floor((this.value % SEC_IN_DAY) / SEC_IN_HOUR);
       },
       set(value) {
         const newValue = this.dateMode
@@ -256,8 +264,8 @@ export default {
 }
 
 .wt-time-input {
-  margin-right: var(--timepicker-input-margin);
   width: var(--timepicker-input-width);
+  margin-right: var(--timepicker-input-margin);
 
   &:last-child {
     margin-right: 0;

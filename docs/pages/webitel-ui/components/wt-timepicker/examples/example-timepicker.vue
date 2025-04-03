@@ -7,7 +7,7 @@ const value = ref(332);
 <template>
   <wt-timepicker
     :value="value"
-    format="dd:hh:mm:ss"
+    format="hh:mm:ss"
     label="Timepicker"
     @input="value = $event"
   />
