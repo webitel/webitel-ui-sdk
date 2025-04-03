@@ -1,3 +1,9 @@
+## [v25.4.51] - 2025-04-03
+### :bug: Bug Fixes
+- [`c87b176`](https://github.com/webitel/webitel-ui-sdk/commit/c87b1768de47753ceeb18045a200ded352b8405b) - delete enter days in timepicker component[WTEL-6651](https://webitel.atlassian.net/browse/WTEL-6651) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`63fdd4f`](https://github.com/webitel/webitel-ui-sdk/commit/63fdd4fefde4435afb886d1c1cb6517516fdcd86) - ui-datalist/ rm searchbar-related filters from presets [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.49] - 2025-04-03
 ### :bug: Bug Fixes
 - [`0de05f6`](https://github.com/webitel/webitel-ui-sdk/commit/0de05f6be3d3c0b4132ec61d193b7fedaac3c056) - ui-datalist/ filter update [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1807,3 +1813,4 @@
 [v25.4.47]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.46...v25.4.47
 [v25.4.48]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.47...v25.4.48
 [v25.4.49]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.48...v25.4.49
+[v25.4.51]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.50...v25.4.51
