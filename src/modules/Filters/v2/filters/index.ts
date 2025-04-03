@@ -8,6 +8,7 @@ import type {
   FilterValue,
   IFilter,
 } from './types/Filter.d.ts';
+import { FilterSearch } from './types/FilterSearch';
 import type {
   FiltersManagerConfig,
   IFiltersManager,
@@ -20,6 +21,7 @@ export type {
   FilterInitParams,
   FilterLabel,
   FilterName,
+  FilterSearch,
   FiltersManagerConfig,
   FilterValue,
   IFilter,
