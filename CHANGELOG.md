@@ -1,3 +1,15 @@
+## [v25.4.49] - 2025-04-03
+### :bug: Bug Fixes
+- [`0de05f6`](https://github.com/webitel/webitel-ui-sdk/commit/0de05f6be3d3c0b4132ec61d193b7fedaac3c056) - ui-datalist/ filter update [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`255de8e`](https://github.com/webitel/webitel-ui-sdk/commit/255de8ea22aa57e0393b00f3932913aca2b58d50) - ui-datalist/ filter presets previews for api lookups not showing [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`2756d86`](https://github.com/webitel/webitel-ui-sdk/commit/2756d8672357c584b0c1fe46be73b4471159b4e8) - change version *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`08d51e2`](https://github.com/webitel/webitel-ui-sdk/commit/08d51e25a98c9bd4773727613a07c0c5927a1d5b) - change service catalogs file name on camelCase, export service catalogs from clients, refactor clients/index.js file with prettier *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+- [`e078867`](https://github.com/webitel/webitel-ui-sdk/commit/e078867ed7e9fd394ef6fb563324b8c5a281c702) - ui-datalist FiltersManager.ts deleteFilter fn param [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`e7d3173`](https://github.com/webitel/webitel-ui-sdk/commit/e7d31737483defc8a7c500053ea67506137842df) - ui-datalist/ loading filters preview data -> main preview component instead of tooltip-components to avoid api requests spam [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.48] - 2025-04-02
 ### :sparkles: New Features
 - [`9225a8f`](https://github.com/webitel/webitel-ui-sdk/commit/9225a8f6f24a3397d5295313b8170b70ad2925c3) - added readme file to @webitel/ui-datalist npm pckg [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1794,3 +1806,4 @@
 [v25.4.46]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.45...v25.4.46
 [v25.4.47]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.46...v25.4.47
 [v25.4.48]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.47...v25.4.48
+[v25.4.49]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.48...v25.4.49
