@@ -1,3 +1,8 @@
+## [v25.4.52] - 2025-04-03
+### :sparkles: New Features
+- [`8497209`](https://github.com/webitel/webitel-ui-sdk/commit/8497209e0a720302242feaf5a2038248f4f0727f) - added new locale and new icon for postprocessing form *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v25.4.51] - 2025-04-03
 ### :bug: Bug Fixes
 - [`c87b176`](https://github.com/webitel/webitel-ui-sdk/commit/c87b1768de47753ceeb18045a200ded352b8405b) - delete enter days in timepicker component[WTEL-6651](https://webitel.atlassian.net/browse/WTEL-6651) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1814,3 +1819,4 @@
 [v25.4.48]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.47...v25.4.48
 [v25.4.49]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.48...v25.4.49
 [v25.4.51]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.50...v25.4.51
+[v25.4.52]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.51...v25.4.52
