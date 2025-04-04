@@ -1,3 +1,16 @@
+## [v25.4.55] - 2025-04-04
+### :sparkles: New Features
+- [`76a9a60`](https://github.com/webitel/webitel-ui-sdk/commit/76a9a6021b5a9445d8c7f2d0fd140b78184d53cd) - ui-datalist/ manual publish workflow added [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`d7aea92`](https://github.com/webitel/webitel-ui-sdk/commit/d7aea929656aab94013fba46e4a02f08d4faf91a) - ui-sdk, ui-datalist/ reformat code and bump vers [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`53f8cb9`](https://github.com/webitel/webitel-ui-sdk/commit/53f8cb9b0d812ebb79736a39cff0ae95908b08c5) - ui-datalist/ yml name fix [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`3b43d9f`](https://github.com/webitel/webitel-ui-sdk/commit/3b43d9f27c2c8600e3960aa99236c0aae3e55b2d) - ui-datalist/ yml fix in manual publish workflow [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`a0b62c4`](https://github.com/webitel/webitel-ui-sdk/commit/a0b62c47ae6ac1a3bfe0c76a916bda5031e5a461) - ui-datalist/ yml fix in manual publish workflow [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`43d5315`](https://github.com/webitel/webitel-ui-sdk/commit/43d53153bdfcffbbb20dd3aa624a25f894d7edcc) - ui-datalist/ yml fix in manual publish workflow [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`616414d`](https://github.com/webitel/webitel-ui-sdk/commit/616414dfc5b5ec8d439452bc9a2e16c93c538d55) - ui-datalist/ filters and presets small fixes after refactor [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.54] - 2025-04-04
 ### :sparkles: New Features
 - [`72696d7`](https://github.com/webitel/webitel-ui-sdk/commit/72696d7f7a14603530974892730d1468a5a38d7d) - ui-datalist/ createdAt filter [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1838,3 +1851,4 @@
 [v25.4.52]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.51...v25.4.52
 [v25.4.53]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.52...v25.4.53
 [v25.4.54]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.53...v25.4.54
+[v25.4.55]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.54...v25.4.55
