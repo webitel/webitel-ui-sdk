@@ -18,6 +18,7 @@ export const FilterOption = {
   HasTranscription: 'hasTranscription',
   User: 'user',
   Variable: 'variable',
+  CreatedAt: 'createdAt',
   CreatedAtFrom: 'createdAtFrom',
   CreatedAtTo: 'createdAtTo',
   Status: 'status',

@@ -29,7 +29,8 @@
   "peerDependencies": {
     "vue": "^3.5",
     "axios": "^1",
-    "pinia": "^3.x"
+    "pinia": "^3.x",
+    "date-fns": "^4"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",

@@ -21,28 +21,26 @@
 
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
-    "utils:i": "npm install",
-
-    "prepare": "husky && husky install"
+    "utils:i": "npm install"
   },
   "main": "./dist/ui-sdk.js",
   "type": "module",
   "exports": {
     ".": "./dist/ui-sdk.js",
 
-    "./store": "./src/store/new/index.js",
+    "./store": "./src/store/new/index",
     "./store*":  "./src/store*",
     "./src/store*":  "./src/store*",
 
-    "./enums": "./src/enums/index.js",
+    "./enums": "./src/enums/index",
     "./enums*":  "./src/enums*",
     "./src/enums*":  "./src/enums*",
 
-    "./components": "./src/components/index.js",
+    "./components": "./src/components/index",
     "./components*":  "./src/components*",
     "./src/components*":  "./src/components*",
 
-    "./scripts":  "./src/scripts/index.js",
+    "./scripts":  "./src/scripts/index",
     "./scripts*":  "./src/scripts*",
     "./src/scripts*":  "./src/scripts*",
 

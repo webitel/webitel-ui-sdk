@@ -6,16 +6,19 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
-import { IconAction } from '../../enums';
-import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import {
+  SupervisorSections,
+  WebitelApplications,
+  CrmSections,
+  AuditorSections,
+  AdminSections,
+  QueueType,
+  IconAction,
+  RelativeDatetimeValue,
+  ChatGatewayProvider,
+} from '../../enums';
+import { snakeToCamel } from '../../scripts';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
-import { snakeToCamel } from '../../scripts/caseConverters.js';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
@@ -62,7 +65,7 @@ export default {
     retry: 'Retry',
     downloadAll: 'Download all',
     warning: 'Warning',
-    doNotSave: "Don't save",
+    doNotSave: 'Don\'t save',
     required: 'Required',
     copy: 'Copy',
     new: 'New',
@@ -425,10 +428,12 @@ export default {
         [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
         [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
         [IconAction.SAVE_PRESET]: ({ linked }) => {
-          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset')
+          .toLowerCase()}`;
         },
         [IconAction.APPLY_PRESET]: ({ linked }) => {
-          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset')
+          .toLowerCase()}`;
         },
       },
     },
@@ -439,8 +444,8 @@ export default {
         text: 'Sorry, you have not enough privileges to see this page.',
       },
       page404: {
-        title: "Looks like you're lost",
-        text: "Sorry, we can't find the page you want.",
+        title: 'Looks like you\'re lost',
+        text: 'Sorry, we can\'t find the page you want.',
       },
     },
     copyAction: {
@@ -494,12 +499,11 @@ export default {
       exportToJson: 'Export to JSON',
     },
     filters: {
-      predefinedLabels: {
-        /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
-        createdAt: {
-          startOfToday: 'From the start of today',
-          startOfMonth: 'From this month',
-        },
+      datetime: {
+        [RelativeDatetimeValue.Today]: 'Today',
+        [RelativeDatetimeValue.ThisWeek]: 'This week',
+        [RelativeDatetimeValue.ThisMonth]: 'This month',
+        [RelativeDatetimeValue.Custom]: 'Custom date range',
       },
       addFilter: ({ linked }) => {
         return `${linked('reusable.add')} a ${linked(
@@ -549,6 +553,9 @@ export default {
       },
       contactGroup: ({ linked }) => {
         return linked('cases.groupPerformers');
+      },
+      createdAt: ({ linked }) => {
+        return linked('reusable.createdAt');
       },
       createdAtFrom: ({ linked }) => {
         return linked('reusable.from');

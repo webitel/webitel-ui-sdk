@@ -26,6 +26,8 @@ import ContactFilterPreview from './contact/contact-filter-value-preview.vue';
 import { searchMethod as contactGroupSearchMethod } from './contact-group/config';
 import ContactGroupFilter from './contact-group/contact-group-filter-value-field.vue';
 import ContactGroupFilterPreview from './contact-group/contact-group-filter-value-preview.vue';
+import CreatedAtFilterValueField from './created-at/created-at-filter-value-field.vue';
+import CreatedAtFilterPreview from './created-at/created-at-filter-value-preview.vue';
 import CreatedAtFromFilter from './created-at-from/created-at-from-filter-value-field.vue';
 import CreatedAtFromFilterPreview from './created-at-from/created-at-from-filter-value-preview.vue';
 import CreatedAtToFilter from './created-at-to/created-at-to-filter-value-field.vue';
@@ -126,6 +128,7 @@ export {
   ContactFilterPreview,
   ContactGroupFilter,
   ContactGroupFilterPreview,
+  CreatedAtFilterValueField,
   CreatedAtFromFilter,
   CreatedAtFromFilterPreview,
   CreatedAtToFilter,
@@ -199,6 +202,7 @@ export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
     [FilterOption.HasTranscription]: HasTranscriptionFilter,
     [FilterOption.User]: UserFilter,
     [FilterOption.Variable]: VariableFilter,
+    [FilterOption.CreatedAt]: CreatedAtFilterValueField,
     [FilterOption.CreatedAtFrom]: CreatedAtFromFilter,
     [FilterOption.CreatedAtTo]: CreatedAtToFilter,
     [FilterOption.Status]: CaseStatusFilter,
@@ -225,6 +229,7 @@ export const FilterOptionToPreviewComponentMap: Record<
   FilterOption,
   Component
 > = {
+  [FilterOption.CreatedAt]: CreatedAtFilterPreview,
   [FilterOption.Agent]: AgentFilterPreview,
   [FilterOption.AmdResult]: AmdResultFilterPreview,
   [FilterOption.Contact]: ContactFilterPreview,

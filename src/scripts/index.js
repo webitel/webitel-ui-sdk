@@ -21,6 +21,10 @@ import debounce from './debounce.js';
 import eventBus from './eventBus.js';
 import isEmpty from './isEmpty.js';
 import { wtlog } from './logger.js';
+import {
+  isRelativeDatetimeValue,
+  normalizeToTimestamp,
+} from './normalizeDatetime';
 import prettifyFileSize from './prettifyFileSize.js';
 import prettifyTime from './prettifyTime.js';
 import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator.js';
@@ -38,8 +42,10 @@ export {
   debounce,
   eventBus,
   isEmpty,
+  isRelativeDatetimeValue,
   kebabToCamel,
   kebabToSnake,
+  normalizeToTimestamp,
   objCamelToKebab,
   objCamelToSnake,
   objSnakeToCamel,

@@ -6,16 +6,19 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
-import { IconAction } from '../../enums';
-import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import {
+  AdminSections,
+  AuditorSections,
+  ChatGatewayProvider,
+  CrmSections,
+  IconAction,
+  QueueType,
+  RelativeDatetimeValue,
+  SupervisorSections,
+  WebitelApplications,
+} from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
-import { snakeToCamel } from '../../scripts/caseConverters.js';
+import { snakeToCamel } from '../../scripts';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
@@ -492,12 +495,11 @@ export default {
       exportToJson: 'Експортувати в JSON',
     },
     filters: {
-      predefinedLabels: {
-        /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
-        createdAt: {
-          startOfToday: 'Від початку дня',
-          startOfMonth: 'Від початку місяця',
-        },
+      datetime: {
+        [RelativeDatetimeValue.Today]: 'Сьогодні',
+        [RelativeDatetimeValue.ThisWeek]: 'Цей тиждень',
+        [RelativeDatetimeValue.ThisMonth]: 'Цей місяць',
+        [RelativeDatetimeValue.Custom]: 'Власний діапазон дат',
       },
       addFilter: ({ linked }) => {
         return `${linked('reusable.add')} ${linked(
@@ -547,6 +549,9 @@ export default {
       },
       contactGroup: ({ linked }) => {
         return linked('cases.groupPerformers');
+      },
+      createdAt: ({ linked }) => {
+        return linked('reusable.createdAt');
       },
       createdAtFrom: ({ linked }) => {
         return linked('reusable.from');
