@@ -12,7 +12,6 @@ import applyTransform, {
   notify,
   sanitize,
   snakeToCamel,
-  starToSearch,
 } from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
@@ -27,7 +26,6 @@ const getStatusesList = async (params) => {
 
   const { page, size, fields, sort, id, q } = applyTransform(params, [
     merge(getDefaultGetParams()),
-    starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),
