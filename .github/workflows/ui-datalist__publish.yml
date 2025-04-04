@@ -58,7 +58,6 @@ jobs:
       - name: Publish release
         id: publish_release
         if: ${{ steps.check_publish.outputs.exists == '0' }}
-
         run: |
           echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
 #          npm run build
