@@ -1,26 +1,11 @@
 <template>
   <dynamic-filter-panel-wrapper>
     <template #filters>
-      <!--        WTF? -  /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */ -->
-      <!--TODO-->
-      <!--        <dynamic-filter-preview-->
-      <!--          v-if="!hasCreatedAtFromFilter"-->
-      <!--          :filter="defaultCreatedAtFromFilterDataPreview"-->
-      <!--          dummy-->
-      <!--        >-->
-      <!--          <template #info>-->
-      <!--            <component-->
-      <!--              :is="FilterOptionToPreviewComponentMap[FilterOption.CreatedAtFrom]"-->
-      <!--              :value="defaultCreatedAtFromFilterDataPreview.value"-->
-      <!--            />-->
-      <!--          </template>-->
-      <!--        </dynamic-filter-preview>-->
-
       <dynamic-filter-preview
         v-for="filter of appliedFilters"
         :key="filter.name"
         :filter="filter"
-        :filter-options="localizedFilterOptions /* for form component to localize selected filter name value */"
+        :filter-options="localizedFilterOptions"
         disable-click-away
         @update:filter="emit('filter:update', $event)"
         @delete:filter="emit('filter:delete', filter)"
@@ -133,15 +118,24 @@ const { t } = useI18n();
 
 const appliedFilters = computed(() => {
   return props.filtersManager.getFiltersList({
-    include: props.filterOptions,
+    include: props.filterOptions.map((opt) => {
+      return opt.value || opt;
+    }),
   });
 });
 
 const localizedFilterOptions = computed(() => {
-  return props.filterOptions.map((opt) => ({
-    name: t(`webitelUI.filters.${opt}`),
-    value: opt,
-  }));
+  return props.filterOptions.map((opt) => {
+    const isExtended = typeof opt !== 'string';
+
+    const name = isExtended
+      ? t(`webitelUI.filters.${opt.value}`)
+      : t(`webitelUI.filters.${opt}`);
+
+    return isExtended
+      ? { name, ...opt }
+      : { name, value: opt };
+  });
 });
 
 /**

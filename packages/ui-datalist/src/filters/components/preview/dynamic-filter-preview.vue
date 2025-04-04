@@ -9,7 +9,7 @@
           <wt-chip color="primary">
             {{ filter.label || t(`webitelUI.filters.${filter.name}`) }}
             <wt-icon-btn
-              v-if="!dummy"
+              v-if="!filterConfig.notDeletable"
               icon="close--filled"
               size="sm"
               color="on-primary"
@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import { WtChip, WtIconBtn, WtLoader, WtTooltip } from '@webitel/ui-sdk/components';
-import { ref } from 'vue';
+import { computed,ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type {FilterOption} from "../../enums/FilterOption";
@@ -74,7 +74,8 @@ interface Props {
   filter: IFilter;
   /**
    * @description
-   * is needed for form component to localize selected filter name value
+   * is needed for form component to localize selected filter name value and/or
+   * pass filter options configs
    */
   filterOptions: FilterOption[];
   dummy?: boolean /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */;
@@ -89,9 +90,13 @@ const emit = defineEmits<{
   'delete:filter': [IFilter];
 }>();
 
-const deleteFilter = () => {
-  emit('delete:filter', props.filter);
-};
+const filterConfig = computed(() => {
+  const thisFilterOption = props.filterOptions.find((option) => {
+    return option.value === props.filter.name;
+  });
+
+  return thisFilterOption;
+});
 
 const localValue = ref();
 
@@ -120,6 +125,10 @@ const submit = (filter: IFilter, { hide }) => {
   emit('update:filter', filter);
   fillLocalValue(filter);
   hide();
+};
+
+const deleteFilter = () => {
+  emit('delete:filter', props.filter);
 };
 </script>
 

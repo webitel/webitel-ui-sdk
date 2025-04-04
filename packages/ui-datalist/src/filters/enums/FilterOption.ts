@@ -1,3 +1,5 @@
+import type { FilterName } from '../types/Filter';
+
 export const FilterOption = {
   Agent: 'agent',
   AmdResult: 'amdResult',
@@ -39,6 +41,13 @@ export const FilterOption = {
   ActualReactionTime: 'actualReactionTime',
   ActualResolutionTime: 'actualResolutionTime',
   HasAttachment: 'hasAttachment',
-} as const;
+} as FilterName;
 
-export type FilterOption = (typeof FilterOption)[keyof typeof FilterOption];
+type SimpleFilterOption = (typeof FilterOption)[keyof typeof FilterOption];
+
+type ExtendedFilterOption = {
+  name: FilterOption;
+  notDeletable?: boolean;
+};
+
+export type FilterOption = SimpleFilterOption | ExtendedFilterOption;
