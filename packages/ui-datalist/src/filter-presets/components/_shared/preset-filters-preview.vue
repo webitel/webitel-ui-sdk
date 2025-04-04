@@ -9,7 +9,7 @@
           v-for="filter of props.filters"
           :key="filter.name"
           :filter="filter"
-          dummy
+          readonly
         />
       </template>
     </dynamic-filter-panel-wrapper>

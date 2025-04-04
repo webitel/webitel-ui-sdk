@@ -22,6 +22,7 @@
       <apply-preset-action
         :namespace="props.presetNamespace"
         :use-presets-store="props.usePresetsStore"
+        :filter-options="props.filterOptions"
         @apply="emit('preset:apply', $event)"
       />
 

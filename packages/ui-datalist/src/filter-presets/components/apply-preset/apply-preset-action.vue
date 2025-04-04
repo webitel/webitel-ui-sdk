@@ -91,6 +91,11 @@ const props = defineProps<{
    */
   namespace: string;
   usePresetsStore: Store;
+  /**
+   * @description
+   * Is needed for preset to exclude filter values, not related to filters panel
+   */
+  filterOptions: FilterOption[];
 }>();
 
 const emit = defineEmits<{

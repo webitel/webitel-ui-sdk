@@ -1,5 +1,5 @@
 <template>
-  <dynamic-filter-config-view :disabled="dummy">
+  <dynamic-filter-config-view :disabled="readonly">
     <template #activator="{ visible: configFormVisible }">
       <wt-tooltip
         :disabled="configFormVisible"
@@ -9,7 +9,7 @@
           <wt-chip color="primary">
             {{ filter.label || t(`webitelUI.filters.${filter.name}`) }}
             <wt-icon-btn
-              v-if="!filterConfig.notDeletable"
+              v-if="!filterConfig.notDeletable && !readonly"
               icon="close--filled"
               size="sm"
               color="on-primary"
@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import { WtChip, WtIconBtn, WtLoader, WtTooltip } from '@webitel/ui-sdk/components';
-import { computed,ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import type {FilterOption} from "../../enums/FilterOption";
@@ -78,7 +78,7 @@ interface Props {
    * pass filter options configs
    */
   filterOptions: FilterOption[];
-  dummy?: boolean /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */;
+  readonly?: boolean;
 }
 
 const { t } = useI18n();
@@ -91,9 +91,9 @@ const emit = defineEmits<{
 }>();
 
 const filterConfig = computed(() => {
-  const thisFilterOption = props.filterOptions.find((option) => {
+  const thisFilterOption = props.filterOptions?.find((option) => {
     return option.value === props.filter.name;
-  });
+  }) || {};
 
   return thisFilterOption;
 });
