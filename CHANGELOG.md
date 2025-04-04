@@ -1,3 +1,11 @@
+## [v25.4.54] - 2025-04-04
+### :sparkles: New Features
+- [`72696d7`](https://github.com/webitel/webitel-ui-sdk/commit/72696d7f7a14603530974892730d1468a5a38d7d) - ui-datalist/ createdAt filter [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`ed8b07e`](https://github.com/webitel/webitel-ui-sdk/commit/ed8b07efd0217c04c2dc8dab14e45404a71dface) - implement locale for list, contact and case [WTEL-6611](https://webitel.atlassian.net/browse/WTEL-6611) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.53] - 2025-04-04
 ### :sparkles: New Features
 - [`d91de3c`](https://github.com/webitel/webitel-ui-sdk/commit/d91de3ce5cd6d6001519569a7f09ce50fe664219) - ui-datalist/ createdAt filter [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1829,3 +1837,4 @@
 [v25.4.51]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.50...v25.4.51
 [v25.4.52]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.51...v25.4.52
 [v25.4.53]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.52...v25.4.53
+[v25.4.54]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.53...v25.4.54
