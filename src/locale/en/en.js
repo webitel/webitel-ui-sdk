@@ -7,18 +7,18 @@ import {
 } from 'webitel-sdk';
 
 import {
+  AdminSections,
+  AuditorSections,
+  ChatGatewayProvider,
+  CrmSections,
+  IconAction,
+  QueueType,
+  RelativeDatetimeValue,
   SupervisorSections,
   WebitelApplications,
-  CrmSections,
-  AuditorSections,
-  AdminSections,
-  QueueType,
-  IconAction,
-  RelativeDatetimeValue,
-  ChatGatewayProvider,
 } from '../../enums';
-import { snakeToCamel } from '../../scripts';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
+import { snakeToCamel } from '../../scripts';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements

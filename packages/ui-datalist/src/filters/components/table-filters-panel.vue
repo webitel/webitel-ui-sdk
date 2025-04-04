@@ -133,9 +133,7 @@ const localizedFilterOptions = computed(() => {
       ? t(`webitelUI.filters.${opt.value}`)
       : t(`webitelUI.filters.${opt}`);
 
-    return isExtended
-      ? { name, ...opt }
-      : { name, value: opt };
+    return isExtended ? { name, ...opt } : { name, value: opt };
   });
 });
 
@@ -145,10 +143,10 @@ const localizedFilterOptions = computed(() => {
  */
 const availableFilterOptions = computed(() => {
   return localizedFilterOptions.value.filter(({ value: opt }) => {
-      return appliedFilters.value.every((filter) => {
-        return filter.name !== opt;
-      });
+    return appliedFilters.value.every((filter) => {
+      return filter.name !== opt;
     });
+  });
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);

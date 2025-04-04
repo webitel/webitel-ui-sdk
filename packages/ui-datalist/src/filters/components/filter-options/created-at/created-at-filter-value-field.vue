@@ -1,7 +1,7 @@
 <template>
   <div class="created-at-filter-value-field">
     <wt-radio
-      v-for="(value) of radioOpts"
+      v-for="value of radioOpts"
       :key="value"
       v-model="selectedRadioValue"
       :label="t(`webitelUI.filters.datetime.${value}`)"
@@ -27,14 +27,16 @@
 
 <script lang="ts" setup>
 import { WtRadio } from '@webitel/ui-sdk/components';
-import {RelativeDatetimeValue} from "@webitel/ui-sdk/enums";
-import {endOfToday, startOfToday} from 'date-fns';
-import {computed, ref} from "vue";
-import {useI18n} from 'vue-i18n';
+import { RelativeDatetimeValue } from '@webitel/ui-sdk/enums';
+import { endOfToday, startOfToday } from 'date-fns';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-const model = defineModel<RelativeDatetimeValue | { 'from': number, 'to': number }>();
+const model = defineModel<
+  RelativeDatetimeValue | { from: number; to: number }
+>();
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 const radioOpts = [
   RelativeDatetimeValue.Today,
@@ -46,13 +48,15 @@ const radioOpts = [
 const selectedRadioValue = ref();
 
 const initialize = () => {
-  if (!model.value) { /* initialize */
+  if (!model.value) {
+    /* initialize */
     selectedRadioValue.value = radioOpts[0];
     model.value = selectedRadioValue.value;
-  }
-  else if (typeof model.value === 'string') { /* RelativeDatetimeValue */
+  } else if (typeof model.value === 'string') {
+    /* RelativeDatetimeValue */
     selectedRadioValue.value = model.value;
-  } else { /* { from, to } */
+  } else {
+    /* { from, to } */
     selectedRadioValue.value = RelativeDatetimeValue.Custom;
   }
 };
@@ -76,7 +80,7 @@ const handleRadioChange = (value: RelativeDatetimeValue) => {
 
 const changeAbsoluteValue = (value: number, prop: 'from' | 'to') => {
   const newModelValue = {
-    ...model.value as { 'from': number, 'to': number },
+    ...(model.value as { from: number; to: number }),
     [prop]: value,
   };
 

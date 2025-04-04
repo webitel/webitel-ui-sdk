@@ -51,7 +51,9 @@
           :filter="props.filter"
           :options="filterOptions"
           @cancel="() => tooltipSlotScope.hide()"
-          @submit="(payload) => submit(payload, { hide: tooltipSlotScope.hide })"
+          @submit="
+            (payload) => submit(payload, { hide: tooltipSlotScope.hide })
+          "
         />
       </slot>
     </template>
@@ -59,15 +61,23 @@
 </template>
 
 <script lang="ts" setup>
-import { WtChip, WtIconBtn, WtLoader, WtTooltip } from '@webitel/ui-sdk/components';
+import {
+  WtChip,
+  WtIconBtn,
+  WtLoader,
+  WtTooltip,
+} from '@webitel/ui-sdk/components';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type {FilterOption} from "../../enums/FilterOption";
-import type {FilterData, IFilter} from '../../types/Filter';
+import type { FilterOption } from '../../enums/FilterOption';
+import type { FilterData, IFilter } from '../../types/Filter';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
-import { FilterOptionToApiSearchMethodMap,FilterOptionToPreviewComponentMap } from '../filter-options';
+import {
+  FilterOptionToApiSearchMethodMap,
+  FilterOptionToPreviewComponentMap,
+} from '../filter-options';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {
@@ -91,9 +101,10 @@ const emit = defineEmits<{
 }>();
 
 const filterConfig = computed(() => {
-  const thisFilterOption = props.filterOptions?.find((option) => {
-    return option.value === props.filter.name;
-  }) || {};
+  const thisFilterOption =
+    props.filterOptions?.find((option) => {
+      return option.value === props.filter.name;
+    }) || {};
 
   return thisFilterOption;
 });

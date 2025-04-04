@@ -32,11 +32,15 @@
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { IconAction } from '@webitel/ui-sdk/enums';
-import {computed, inject, reactive, type Ref, ref, watch} from 'vue';
+import { computed, inject, reactive, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import {createFiltersManager, FilterOption, IFiltersManager} from '../../../filters';
+import {
+  createFiltersManager,
+  FilterOption,
+  IFiltersManager,
+} from '../../../filters';
 import {
   addPreset,
   getPresetList,
@@ -67,10 +71,16 @@ const eventBus = inject('$eventBus');
 
 const localFiltersManager = reactive(createFiltersManager());
 
-watch(props.filtersManager, () => {
-  localFiltersManager.reset();
-  localFiltersManager.fromString(props.filtersManager.toString({ include: props.filterOptions }));
-}, { immediate: true });
+watch(
+  props.filtersManager,
+  () => {
+    localFiltersManager.reset();
+    localFiltersManager.fromString(
+      props.filtersManager.toString({ include: props.filterOptions }),
+    );
+  },
+  { immediate: true },
+);
 
 const { t } = useI18n();
 
