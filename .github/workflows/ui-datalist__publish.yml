@@ -1,4 +1,4 @@
-name: "@webitel/ui-datalist publish"
+name: webitel ui-datalist pckg publish"
 
 on:
 #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
@@ -58,9 +58,9 @@ jobs:
       - name: Publish release
         id: publish_release
         if: ${{ steps.check_publish.outputs.exists == '0' }}
+
         run: |
           echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
-#          npm run build
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm publish --access public
 
