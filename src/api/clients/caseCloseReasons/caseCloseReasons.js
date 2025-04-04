@@ -12,7 +12,6 @@ import applyTransform, {
   notify,
   sanitize,
   snakeToCamel,
-  starToSearch,
 } from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
@@ -31,7 +30,6 @@ const getCloseReasonsList = async ({ parentId, ...rest }) => {
 
   const { page, size, fields, sort, id, q } = applyTransform(rest, [
     merge(getDefaultGetParams()),
-    starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),
