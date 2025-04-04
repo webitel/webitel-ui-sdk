@@ -1,3 +1,11 @@
+## [v25.4.53] - 2025-04-04
+### :sparkles: New Features
+- [`d91de3c`](https://github.com/webitel/webitel-ui-sdk/commit/d91de3ce5cd6d6001519569a7f09ce50fe664219) - ui-datalist/ createdAt filter [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`202b03a`](https://github.com/webitel/webitel-ui-sdk/commit/202b03ae2f5d8e0bacfa8bacb4999946a824ac4b) - search in api[WTEL-6567](https://webitel.atlassian.net/browse/WTEL-6567) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.4.52] - 2025-04-03
 ### :sparkles: New Features
 - [`8497209`](https://github.com/webitel/webitel-ui-sdk/commit/8497209e0a720302242feaf5a2038248f4f0727f) - added new locale and new icon for postprocessing form *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1820,3 +1828,4 @@
 [v25.4.49]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.48...v25.4.49
 [v25.4.51]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.50...v25.4.51
 [v25.4.52]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.51...v25.4.52
+[v25.4.53]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.52...v25.4.53
