@@ -12,12 +12,18 @@
 
 <script lang="ts" setup>
 import { WtSearchBar } from '@webitel/ui-sdk/components';
-import {computed, type Ref, ref,watch, type WatchHandle} from 'vue';
+import {computed, type Ref, ref,watch} from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {FilterInitParams, FilterName} from "../../types/Filter";
 import {IFiltersManager} from "../../types/FiltersManager";
 import type { DynamicFilterSearchSearchModeOption } from './types/DynamicFilterSearch';
+
+/**
+ * @description
+ * default search name is used when there are no search modes
+ */
+const defaultSearchName = 'search';
 
 const props = defineProps<{
   filtersManager: IFiltersManager;
@@ -53,7 +59,10 @@ const hasSearchModes = computed(() => {
   return props.searchModeOptions && props.searchModeOptions.length > 0;
 });
 
-const defaultSearchName = 'search';
+if (hasSearchModes.value) {
+  searchMode.value = props.searchModeOptions[0].value;
+}
+
 const currentSearchName = computed(() => {
   if (hasSearchModes.value) {
     return searchMode.value;
@@ -61,16 +70,6 @@ const currentSearchName = computed(() => {
 
   return defaultSearchName;
 });
-
-const updateSearchMode = (nextSearchMode: DynamicFilterSearchSearchModeOption) => {
-  if (hasFilter(currentSearchName.value)) {
-    deleteFilter({
-      name: currentSearchName.value,
-    });
-  }
-  searchMode.value = nextSearchMode.value;
-  localSearchValue.value = '';
-};
 
 const handleSearch = (value = localSearchValue.value) => {
   if (hasFilter(currentSearchName.value)) {
@@ -86,10 +85,21 @@ const handleSearch = (value = localSearchValue.value) => {
   }
 };
 
-let unwatchSearchMode: WatchHandle;
+const updateSearchMode = (nextSearchMode: DynamicFilterSearchSearchModeOption) => {
+  if (hasFilter(currentSearchName.value)) {
+    deleteFilter({
+      name: currentSearchName.value,
+    });
+  }
+  searchMode.value = nextSearchMode.value;
+  localSearchValue.value = '';
+};
 
-watch(
-  props.isFiltersRestoring,
+/**
+ * @description
+ * Restoring search value after filters were restored
+ */
+watch(() => props.isFiltersRestoring,
   (next) => {
     if (next) return;
 
@@ -106,21 +116,7 @@ watch(
         break;
       }
     }
-
-    /**
-     * start watching for searchMode change
-     * only after initial searchMode restoration
-     */
-    if (unwatchSearchMode) {
-      unwatchSearchMode();
-    }
-
-    unwatchSearchMode = watch(searchMode, (_, prevSearchMode) => {
-      deleteFilter({ name: prevSearchMode });
-      localSearchValue.value = '';
-    });
   },
-  { immediate: true },
 );
 </script>
 
