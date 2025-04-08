@@ -9,4 +9,9 @@ export type WtSearchBarSearchModeOption<ModeType> = {
    * unique identifier of the search mode
    */
   value: ModeType | string;
+  /**
+   * @description
+   * should default search icon should be replaced?
+   */
+  icon?: string;
 };
