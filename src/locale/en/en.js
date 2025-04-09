@@ -83,6 +83,7 @@ export default {
     more: 'More',
     read: 'Read',
     create: 'Create',
+    update: 'Update',
     draggable: 'Draggable',
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',

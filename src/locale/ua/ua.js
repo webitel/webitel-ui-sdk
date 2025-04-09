@@ -84,6 +84,7 @@ export default {
     more: 'Більше',
     read: 'Читати',
     create: 'Створити',
+    update: 'Оновити',
     draggable: 'Перетягнути',
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
