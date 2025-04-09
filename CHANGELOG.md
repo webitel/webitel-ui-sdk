@@ -1,3 +1,8 @@
+## [v25.4.58] - 2025-04-09
+### :sparkles: New Features
+- [`bef3102`](https://github.com/webitel/webitel-ui-sdk/commit/bef3102568fff67993263737e02422edc8dc2354) - new icon updateCalls added [WTEL-3345](https://webitel.atlassian.net/browse/WTEL-3345) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v25.4.57] - 2025-04-09
 ### :sparkles: New Features
 - [`07693a3`](https://github.com/webitel/webitel-ui-sdk/commit/07693a34f61725156c95ff293de1680ae1958b62) - version incremented [WTEL-6260](https://webitel.atlassian.net/browse/WTEL-6260) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -1870,3 +1875,4 @@
 [v25.4.55]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.54...v25.4.55
 [v25.4.56]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.55...v25.4.56
 [v25.4.57]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.56...v25.4.57
+[v25.4.58]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.57...v25.4.58
