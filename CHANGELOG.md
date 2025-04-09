@@ -1,3 +1,13 @@
+## [v25.4.56] - 2025-04-09
+### :bug: Bug Fixes
+- [`3f8acab`](https://github.com/webitel/webitel-ui-sdk/commit/3f8acaba6ae6b998d4c84bf2ef3a22970aa6966b) - ui-sdk/ WtSearchBar.d.ts Search Mode type fix [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`14d7193`](https://github.com/webitel/webitel-ui-sdk/commit/14d71934e6a2e931a1c35c1f3a74b712d53cd86d) - ui-sdk/ rm filters/v2 folder [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`d2b849c`](https://github.com/webitel/webitel-ui-sdk/commit/d2b849ca6fe7ae7e7af1e2601a845ea009dfec58) - ui-datalist/ small dynamic-filter-search.vue refactors and fixes [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`f174732`](https://github.com/webitel/webitel-ui-sdk/commit/f1747323c2725634f303be6186893a2d15408e00) - ui-datalist/ moving search filter to lib [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.55] - 2025-04-04
 ### :sparkles: New Features
 - [`76a9a60`](https://github.com/webitel/webitel-ui-sdk/commit/76a9a6021b5a9445d8c7f2d0fd140b78184d53cd) - ui-datalist/ manual publish workflow added [WTEL-6512](https://webitel.atlassian.net/browse/WTEL-6512) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1852,3 +1862,4 @@
 [v25.4.53]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.52...v25.4.53
 [v25.4.54]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.53...v25.4.54
 [v25.4.55]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.54...v25.4.55
+[v25.4.56]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.55...v25.4.56
