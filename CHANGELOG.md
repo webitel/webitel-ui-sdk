@@ -1,3 +1,9 @@
+## [v25.4.57] - 2025-04-09
+### :sparkles: New Features
+- [`07693a3`](https://github.com/webitel/webitel-ui-sdk/commit/07693a34f61725156c95ff293de1680ae1958b62) - version incremented [WTEL-6260](https://webitel.atlassian.net/browse/WTEL-6260) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`44d8ad6`](https://github.com/webitel/webitel-ui-sdk/commit/44d8ad65e25ef944d7eb74dfd62e226fd028108c) - locale for update added [WTEL-6260](https://webitel.atlassian.net/browse/WTEL-6260) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v25.4.56] - 2025-04-09
 ### :bug: Bug Fixes
 - [`3f8acab`](https://github.com/webitel/webitel-ui-sdk/commit/3f8acaba6ae6b998d4c84bf2ef3a22970aa6966b) - ui-sdk/ WtSearchBar.d.ts Search Mode type fix [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1863,3 +1869,4 @@
 [v25.4.54]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.53...v25.4.54
 [v25.4.55]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.54...v25.4.55
 [v25.4.56]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.55...v25.4.56
+[v25.4.57]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.56...v25.4.57
