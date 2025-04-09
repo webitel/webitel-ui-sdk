@@ -8,12 +8,12 @@
     <div class="wt-search-bar__wrapper">
       <div class="wt-search-bar__search-icon">
         <slot
-          :invalid="invalid"
+          v-bind="{ invalid, searchMode }"
           name="search-icon"
         >
           <wt-icon
             :color="invalidColorProvider"
-            icon="search"
+            :icon="searchMode?.icon || 'search'"
           />
         </slot>
       </div>
@@ -78,7 +78,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed, toRefs } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation.js';
@@ -118,16 +118,29 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'input',
-  'search',
-  'enter',
-  'update:search-mode',
+const emit = defineEmits<{
+  /**
+   * @param value - search-bar value
+   */
+  input: [string];
+  /**
+   * @param value - search-bar value
+   */
+  search: [string];
+  /**
+   * @param value - search-bar value
+   */
+  enter: [string];
+  /**
+   * @param option - selected search mode
+   */
+  'update:search-mode': [string | object];
   /**
    * @deprecated
+   * @param option - selected search mode
    */
-  'change:search-mode',
-]);
+  'change:search-mode': [string | object];
+}>();
 
 const { v, customValidators } = toRefs(props);
 

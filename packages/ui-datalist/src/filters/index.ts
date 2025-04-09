@@ -1,6 +1,6 @@
 import { Filter } from './classes/Filter.ts';
 import { createFiltersManager } from './classes/FiltersManager';
-import DynamicFilterSearchComponent from './components/dynamic-filter-search.vue';
+import DynamicFilterSearchComponent from './components/search-bar/dynamic-filter-search.vue';
 import TableFiltersPanelComponent from './components/table-filters-panel.vue';
 import { FilterOption } from './enums/FilterOption';
 import type {
