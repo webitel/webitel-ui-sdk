@@ -1,3 +1,8 @@
+## [v25.4.59] - 2025-04-09
+### :recycle: Refactors
+- [`684efa9`](https://github.com/webitel/webitel-ui-sdk/commit/684efa96e24821573afa43c6fbbf68ddf41f311d) - filter options naming refactors and preview api response refactor [WTEL-6522](https://webitel.atlassian.net/browse/WTEL-6522) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.58] - 2025-04-09
 ### :sparkles: New Features
 - [`bef3102`](https://github.com/webitel/webitel-ui-sdk/commit/bef3102568fff67993263737e02422edc8dc2354) - new icon updateCalls added [WTEL-3345](https://webitel.atlassian.net/browse/WTEL-3345) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -1876,3 +1881,4 @@
 [v25.4.56]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.55...v25.4.56
 [v25.4.57]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.56...v25.4.57
 [v25.4.58]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.57...v25.4.58
+[v25.4.59]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.58...v25.4.59
