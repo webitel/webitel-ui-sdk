@@ -83,6 +83,7 @@ export default {
     more: 'Больше',
     read: 'Читать',
     create: 'Создать',
+    update: 'Обновить',
     draggable: 'Перетащить',
     unassigned: 'Неназначенные',
     showUnassigned: 'Показать неназначенные',
