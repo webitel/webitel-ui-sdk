@@ -68,6 +68,7 @@ import comment from './comment.svg';
 import conference from './conference.svg';
 import contacts from './contacts.svg';
 import copy from './copy.svg';
+import updateCalls from './update-calls.svg';
 import customChatGateway from './custom-chat-gateway.svg';
 import darkMode from './dark-mode.svg';
 import docs from './docs.svg';
@@ -244,6 +245,7 @@ export default objCamelToKebab({
   'call-ringing--filled': callRingingFilled,
   callTransfer,
   'call-transfer--filled': callTransferFilled,
+  updateCalls,
 
   caseAuthor,
   cases,
