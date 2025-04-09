@@ -1,25 +1,54 @@
 import type { Component } from 'vue';
 
-import { FilterOption } from '../../enums/FilterOption';
-import ActualReactionTimeFilter from './actual-reaction-time/actual-reaction-time-filter-value-field.vue';
-import ActualReactionTimeFilterPreview from './actual-reaction-time/actual-reaction-time-filter-value-preview.vue';
-import ActualResolutionTimeFilter from './actual-resolution-time/actual-resolution-time-filter-value-field.vue';
-import ActualResolutionTimeFilterPreview from './actual-resolution-time/actual-resolution-time-filter-value-preview.vue';
+import { FilterOption, FilterOptionName } from '../../enums/FilterOption';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
 import { searchMethod as agentSearchMethod } from './agent/config';
 import AmdResultFilter from './amd-result/amd-result-filter-value-field.vue';
 import AmdResultFilterPreview from './amd-result/amd-result-filter-value-preview.vue';
-import AssigneeFilter from './assignee/assignee-filter-value-field.vue';
-import AssigneeFilterPreview from './assignee/assignee-filter-value-preview.vue';
-import { searchMethod as assigneeSearchMethod } from './assignee/config';
-import AuthorFilter from './author/author-filter-value-field.vue';
-import AuthorFilterPreview from './author/author-filter-value-preview.vue';
-import { searchMethod as authorSearchMethod } from './author/config';
-import CauseFilter from './cause/cause-filter-value-field.vue';
-import CauseFilterPreview from './cause/cause-filter-value-preview.vue';
-import CloseReasonGroupsCaseFilter from './close-reason-groups-case/close-reason-groups-case-filter-value-field.vue';
-import CloseReasonGroupsCaseFilterPreview from './close-reason-groups-case/close-reason-groups-case-filter-value-preview.vue';
+import CallDirectionFilterValueField from './call-direction/call-direction-filter-value-field.vue';
+import CallDirectionFilterValuePreview from './call-direction/call-direction-filter-value-preview.vue';
+import CaseActualReactionTimeFilterValueField from './case-actual-reaction-time/case-actual-reaction-time-filter-value-field.vue';
+import CaseActualReactionTimeFilterValuePreview from './case-actual-reaction-time/case-actual-reaction-time-filter-value-preview.vue';
+import CaseActualResolutionTimeFilterValueField from './case-actual-resolution-time/case-actual-resolution-time-filter-value-field.vue';
+import CaseActualResolutionTimeFilterValuePreview from './case-actual-resolution-time/case-actual-resolution-time-filter-value-preview.vue';
+import CaseAssigneeFilterValueField from './case-assignee/case-assignee-filter-value-field.vue';
+import CaseAssigneeFilterValuePreview from './case-assignee/case-assignee-filter-value-preview.vue';
+import { searchMethod as caseAssigneeSearchMethod } from './case-assignee/config';
+import CaseAuthorFilterValueField from './case-author/case-author-filter-value-field.vue';
+import CaseAuthorFilterValuePreview from './case-author/case-author-filter-value-preview.vue';
+import { searchMethod as caseAuthorSearchMethod } from './case-author/config';
+import CaseCloseReasonGroupsFilterValueField from './case-close-reason-groups/case-close-reason-groups-filter-value-field.vue';
+import CaseCloseReasonGroupsFilterValuePreview from './case-close-reason-groups/case-close-reason-groups-filter-value-preview.vue';
+import { caseCloseReasonsSearchMethod } from './case-close-reason-groups/config';
+import CaseImpactedFilterValueField from './case-impacted/case-impacted-filter-value-field.vue';
+import CaseImpactedFilterValuePreview from './case-impacted/case-impacted-filter-value-preview.vue';
+import { searchMethod as caseImpactedSearchMethod } from './case-impacted/config';
+import CasePriorityFilterValueField from './case-priority/case-priority-filter-value-field.vue';
+import CasePriorityFilterValuePreview from './case-priority/case-priority-filter-value-preview.vue';
+import { searchMethod as casePrioritySearchMethod } from './case-priority/config';
+import CaseReactionTimeFilterValueField from './case-reaction-time/case-reaction-time-filter-value-field.vue';
+import CaseReactionTimeFilterValuePreview from './case-reaction-time/case-reaction-time-filter-value-preview.vue';
+import CaseReporterFilterValueField from './case-reporter/case-reporter-filter-value-field.vue';
+import CaseReporterFilterValuePreview from './case-reporter/case-reporter-filter-value-preview.vue';
+import { searchMethod as caseReporterSearchMethod } from './case-reporter/config';
+import CaseResolutionTimeFilterValueField from './case-resolution-time/case-resolution-time-filter-value-field.vue';
+import CaseResolutionTimeFilterValuePreview from './case-resolution-time/case-resolution-time-filter-value-preview.vue';
+import CaseServiceFilterValueField from './case-service/case-service-filter-value-field.vue';
+import CaseServiceFilterValuePreview from './case-service/case-service-filter-value-preview.vue';
+import { servicesSearchMethod } from './case-service/config';
+import CaseSlaFilterValueField from './case-sla/case-sla-filter-value-field.vue';
+import CaseSlaFilterValuePreview from './case-sla/case-sla-filter-value-preview.vue';
+import { searchMethod as caseSlaSearchMethod } from './case-sla/config';
+import CaseSlaConditionFilterValueField from './case-sla-condition/case-sla-condition-filter-value-field.vue';
+import CaseSlaConditionFilterValuePreview from './case-sla-condition/case-sla-condition-filter-value-preview.vue';
+import { slasConditionsSearchMethod } from './case-sla-condition/config';
+import CaseSourceFilterValueField from './case-source/case-source-filter-value-field.vue';
+import CaseSourceFilterValuePreview from './case-source/case-source-filter-value-preview.vue';
+import { searchMethod as caseSourceSearchMethod } from './case-source/config';
+import CaseStatusFilterValueField from './case-status/case-status-filter-value-field.vue';
+import CaseStatusFilterValuePreview from './case-status/case-status-filter-value-preview.vue';
+import { caseStatusConditionsSearchMethod } from './case-status/config';
 import { searchMethod as contactSearchMethod } from './contact/config';
 import ContactFilter from './contact/contact-filter-value-field.vue';
 import ContactFilterPreview from './contact/contact-filter-value-preview.vue';
@@ -32,14 +61,14 @@ import CreatedAtFromFilter from './created-at-from/created-at-from-filter-value-
 import CreatedAtFromFilterPreview from './created-at-from/created-at-from-filter-value-preview.vue';
 import CreatedAtToFilter from './created-at-to/created-at-to-filter-value-field.vue';
 import CreatedAtToFilterPreview from './created-at-to/created-at-to-filter-value-preview.vue';
-import DirectionFilter from './direction/direction-filter-value-field.vue';
-import DirectionFilterPreview from './direction/direction-filter-value-preview.vue';
 import { searchMethod as gatewaySearchMethod } from './gateway/config';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
 import { searchMethod as granteeSearchMethod } from './grantee/config';
 import GranteeFilter from './grantee/grantee-filter-value-field.vue';
 import GranteeFilterPreview from './grantee/grantee-filter-value-preview.vue';
+import HangupCauseFilterValueField from './hangup-cause/hangup-cause-filter-value-field.vue';
+import HangupCauseFilterValuePreview from './hangup-cause/hangup-cause-filter-value-preview.vue';
 import HasAttachmentFilter from './has-attachment/has-attachment-filter-value-field.vue';
 import HasAttachmentFilterPreview from './has-attachment/has-attachment-filter-value-preview.vue';
 import HasFileFilter from './has-file/has-file-filter-value-field.vue';
@@ -48,12 +77,6 @@ import HasRatingFilterValueField from './has-rating/has-rating-filter-value-fiel
 import HasRatingFilterValuePreview from './has-rating/has-rating-filter-value-preview.vue';
 import HasTranscriptionFilter from './has-transcription/has-transcription-filter-value-field.vue';
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
-import { searchMethod as impactedSearchMethod } from './impacted/config';
-import ImpactedFilter from './impacted/impacted-filter-value-field.vue';
-import ImpactedFilterPreview from './impacted/impacted-filter-value-preview.vue';
-import { searchMethod as priorityCaseSearchMethod } from './priority-case/config';
-import CasePriorityFilter from './priority-case/priority-case-filter-value-field.vue';
-import CasePriorityFilterPreview from './priority-case/priority-case-filter-value-preview.vue';
 import { searchMethod as queueSearchMethod } from './queue/config';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
@@ -62,28 +85,8 @@ import RatedByFilter from './rated-by/rated-by-filter-value-field.vue';
 import RatedByFilterPreview from './rated-by/rated-by-filter-value-preview.vue';
 import RatingFromToFilter from './rating/rating-from-to-filter-value-field.vue';
 import RatingFromToFilterPreview from './rating/rating-from-to-filter-value-preview.vue';
-import ReactionTimeFilter from './reaction-time/reaction-time-filter-value-field.vue';
-import ReactionTimeFilterPreview from './reaction-time/reaction-time-filter-value-preview.vue';
-import { searchMethod as reporterSearchMethod } from './reporter/config';
-import ReporterFilter from './reporter/reporter-filter-value-field.vue';
-import ReporterFilterPreview from './reporter/reporter-filter-value-preview.vue';
-import ResolutionTimeFilter from './resolution-time/resolution-time-filter-value-field.vue';
-import ResolutionTimeFilterPreview from './resolution-time/resolution-time-filter-value-preview.vue';
 import ScoreFilter from './score/score-from-to-filter-value-field.vue';
 import ScoreFilterPreview from './score/score-from-to-filter-value-preview.vue';
-import { searchMethod as serviceCaseSearchMethod } from './service-case/config';
-import CaseServiceFilter from './service-case/service-case-filter-value-field.vue';
-import CaseServiceFilterPreview from './service-case/service-case-filter-value-preview.vue';
-import { searchMethod as slaSearchMethod } from './sla/config';
-import SlaFilter from './sla/sla-filter-value-field.vue';
-import SlaFilterPreview from './sla/sla-filter-value-preview.vue';
-import SlaConditionFilter from './sla-condition/sla-condition-filter-value-field.vue';
-import SlaConditionFilterPreview from './sla-condition/sla-condition-filter-value-preview.vue';
-import { searchMethod as sourceCaseSearchMethod } from './source-case/config';
-import CaseSourceFilter from './source-case/source-case-filter-value-field.vue';
-import CaseSourceFilterPreview from './source-case/source-case-filter-value-preview.vue';
-import CaseStatusFilter from './status-case/status-case-filter-value-field.vue';
-import CaseStatusFilterPreview from './status-case/status-case-filter-value-preview.vue';
 import TagFilter from './tag/tag-filter-value-field.vue';
 import TagFilterPreview from './tag/tag-filter-value-preview.vue';
 import TalkDurationFilter from './talk-duration/talk-duration-filter-value-field.vue';
@@ -100,30 +103,42 @@ import VariableFilter from './variable/variable-filter-value-field.vue';
 import VariableFilterPreview from './variable/variable-filter-value-preview.vue';
 
 export {
-  ActualReactionTimeFilter,
-  ActualReactionTimeFilterPreview,
-  ActualResolutionTimeFilter,
-  ActualResolutionTimeFilterPreview,
   AgentFilter,
   AgentFilterPreview,
   AmdResultFilter,
   AmdResultFilterPreview,
-  AssigneeFilter,
-  AssigneeFilterPreview,
-  AuthorFilter,
-  AuthorFilterPreview,
-  CasePriorityFilter,
-  CasePriorityFilterPreview,
-  CaseServiceFilter,
-  CaseServiceFilterPreview,
-  CaseSourceFilter,
-  CaseSourceFilterPreview,
-  CaseStatusFilter,
-  CaseStatusFilterPreview,
-  CauseFilter,
-  CauseFilterPreview,
-  CloseReasonGroupsCaseFilter,
-  CloseReasonGroupsCaseFilterPreview,
+  CallDirectionFilterValueField,
+  CallDirectionFilterValuePreview,
+  CaseActualReactionTimeFilterValueField,
+  CaseActualReactionTimeFilterValuePreview,
+  CaseActualResolutionTimeFilterValueField,
+  CaseActualResolutionTimeFilterValuePreview,
+  CaseAssigneeFilterValueField,
+  CaseAssigneeFilterValuePreview,
+  CaseAuthorFilterValueField,
+  CaseAuthorFilterValuePreview,
+  CaseCloseReasonGroupsFilterValueField,
+  CaseCloseReasonGroupsFilterValuePreview,
+  CaseImpactedFilterValueField,
+  CaseImpactedFilterValuePreview,
+  CasePriorityFilterValueField,
+  CasePriorityFilterValuePreview,
+  CaseReactionTimeFilterValueField,
+  CaseReactionTimeFilterValuePreview,
+  CaseReporterFilterValueField,
+  CaseReporterFilterValuePreview,
+  CaseResolutionTimeFilterValueField,
+  CaseResolutionTimeFilterValuePreview,
+  CaseServiceFilterValueField,
+  CaseServiceFilterValuePreview,
+  CaseSlaConditionFilterValueField,
+  CaseSlaConditionFilterValuePreview,
+  CaseSlaFilterValueField,
+  CaseSlaFilterValuePreview,
+  CaseSourceFilterValueField,
+  CaseSourceFilterValuePreview,
+  CaseStatusFilterValueField,
+  CaseStatusFilterValuePreview,
   ContactFilter,
   ContactFilterPreview,
   ContactGroupFilter,
@@ -133,12 +148,12 @@ export {
   CreatedAtFromFilterPreview,
   CreatedAtToFilter,
   CreatedAtToFilterPreview,
-  DirectionFilter,
-  DirectionFilterPreview,
   GatewayFilter,
   GatewayFilterPreview,
   GranteeFilter,
   GranteeFilterPreview,
+  HangupCauseFilterValueField,
+  HangupCauseFilterValuePreview,
   HasAttachmentFilter,
   HasAttachmentFilterPreview,
   HasFileFilter,
@@ -147,26 +162,14 @@ export {
   HasRatingFilterValuePreview,
   HasTranscriptionFilter,
   HasTranscriptionFilterPreview,
-  ImpactedFilter,
-  ImpactedFilterPreview,
   QueueFilter,
   QueueFilterPreview,
   RatedByFilter,
   RatedByFilterPreview,
   RatingFromToFilter,
   RatingFromToFilterPreview,
-  ReactionTimeFilter,
-  ReactionTimeFilterPreview,
-  ReporterFilter,
-  ReporterFilterPreview,
-  ResolutionTimeFilter,
-  ResolutionTimeFilterPreview,
   ScoreFilter,
   ScoreFilterPreview,
-  SlaConditionFilter,
-  SlaConditionFilterPreview,
-  SlaFilter,
-  SlaFilterPreview,
   TagFilter,
   TagFilterPreview,
   TalkDurationFilter,
@@ -181,63 +184,65 @@ export {
   VariableFilterPreview,
 };
 
-export const FilterOptionToValueComponentMap: Record<FilterOption, Component> =
-  {
-    [FilterOption.Agent]: AgentFilter,
-    [FilterOption.AmdResult]: AmdResultFilter,
-    [FilterOption.Contact]: ContactFilter,
-    [FilterOption.Direction]: DirectionFilter,
-    [FilterOption.Rated]: HasRatingFilterValueField,
-    [FilterOption.Gateway]: GatewayFilter,
-    [FilterOption.Grantee]: GranteeFilter,
-    [FilterOption.Cause]: CauseFilter,
-    [FilterOption.Queue]: QueueFilter,
-    [FilterOption.RatedBy]: RatedByFilter,
-    [FilterOption.HasFile]: HasFileFilter,
-    [FilterOption.Score]: ScoreFilter,
-    [FilterOption.Tag]: TagFilter,
-    [FilterOption.TalkDuration]: TalkDurationFilter,
-    [FilterOption.Team]: TeamFilter,
-    [FilterOption.TotalDuration]: TotalDurationFilter,
-    [FilterOption.HasTranscription]: HasTranscriptionFilter,
-    [FilterOption.User]: UserFilter,
-    [FilterOption.Variable]: VariableFilter,
-    [FilterOption.CreatedAt]: CreatedAtFilterValueField,
-    [FilterOption.CreatedAtFrom]: CreatedAtFromFilter,
-    [FilterOption.CreatedAtTo]: CreatedAtToFilter,
-    [FilterOption.Status]: CaseStatusFilter,
-    [FilterOption.Source]: CaseSourceFilter,
-    [FilterOption.Service]: CaseServiceFilter,
-    [FilterOption.Author]: AuthorFilter,
-    [FilterOption.Reporter]: ReporterFilter,
-    [FilterOption.Impacted]: ImpactedFilter,
-    [FilterOption.Assignee]: AssigneeFilter,
-    [FilterOption.ContactGroup]: ContactGroupFilter,
-    [FilterOption.Priority]: CasePriorityFilter,
-    [FilterOption.CloseReasonGroups]: CloseReasonGroupsCaseFilter,
-    [FilterOption.Rating]: RatingFromToFilter,
-    [FilterOption.Sla]: SlaFilter,
-    [FilterOption.SlaCondition]: SlaConditionFilter,
-    [FilterOption.ReactionTime]: ReactionTimeFilter,
-    [FilterOption.ResolutionTime]: ResolutionTimeFilter,
-    [FilterOption.ActualReactionTime]: ActualReactionTimeFilter,
-    [FilterOption.ActualResolutionTime]: ActualResolutionTimeFilter,
-    [FilterOption.HasAttachment]: HasAttachmentFilter,
-  };
+export const FilterOptionToValueComponentMap: Record<
+  FilterOptionName,
+  Component
+> = {
+  [FilterOption.Agent]: AgentFilter,
+  [FilterOption.AmdResult]: AmdResultFilter,
+  [FilterOption.Contact]: ContactFilter,
+  [FilterOption.Direction]: CallDirectionFilterValueField,
+  [FilterOption.Rated]: HasRatingFilterValueField,
+  [FilterOption.Gateway]: GatewayFilter,
+  [FilterOption.Grantee]: GranteeFilter,
+  [FilterOption.Cause]: HangupCauseFilterValueField,
+  [FilterOption.Queue]: QueueFilter,
+  [FilterOption.RatedBy]: RatedByFilter,
+  [FilterOption.HasFile]: HasFileFilter,
+  [FilterOption.Score]: ScoreFilter,
+  [FilterOption.Tag]: TagFilter,
+  [FilterOption.TalkDuration]: TalkDurationFilter,
+  [FilterOption.Team]: TeamFilter,
+  [FilterOption.TotalDuration]: TotalDurationFilter,
+  [FilterOption.HasTranscription]: HasTranscriptionFilter,
+  [FilterOption.User]: UserFilter,
+  [FilterOption.Variable]: VariableFilter,
+  [FilterOption.CreatedAt]: CreatedAtFilterValueField,
+  [FilterOption.CreatedAtFrom]: CreatedAtFromFilter,
+  [FilterOption.CreatedAtTo]: CreatedAtToFilter,
+  [FilterOption.Status]: CaseStatusFilterValueField,
+  [FilterOption.Source]: CaseSourceFilterValueField,
+  [FilterOption.Service]: CaseServiceFilterValueField,
+  [FilterOption.Author]: CaseAuthorFilterValueField,
+  [FilterOption.Reporter]: CaseReporterFilterValueField,
+  [FilterOption.Impacted]: CaseImpactedFilterValueField,
+  [FilterOption.Assignee]: CaseAssigneeFilterValueField,
+  [FilterOption.ContactGroup]: ContactGroupFilter,
+  [FilterOption.Priority]: CasePriorityFilterValueField,
+  [FilterOption.CloseReasonGroups]: CaseCloseReasonGroupsFilterValueField,
+  [FilterOption.Rating]: RatingFromToFilter,
+  [FilterOption.Sla]: CaseSlaFilterValueField,
+  [FilterOption.SlaCondition]: CaseSlaConditionFilterValueField,
+  [FilterOption.ReactionTime]: CaseReactionTimeFilterValueField,
+  [FilterOption.ResolutionTime]: CaseResolutionTimeFilterValueField,
+  [FilterOption.ActualReactionTime]: CaseActualReactionTimeFilterValueField,
+  [FilterOption.ActualResolutionTime]: CaseActualResolutionTimeFilterValueField,
+  [FilterOption.HasAttachment]: HasAttachmentFilter,
+};
 
 export const FilterOptionToPreviewComponentMap: Record<
-  FilterOption,
+  FilterOptionName,
   Component
 > = {
   [FilterOption.CreatedAt]: CreatedAtFilterPreview,
   [FilterOption.Agent]: AgentFilterPreview,
   [FilterOption.AmdResult]: AmdResultFilterPreview,
   [FilterOption.Contact]: ContactFilterPreview,
-  [FilterOption.Direction]: DirectionFilterPreview,
+  [FilterOption.Direction]: CallDirectionFilterValuePreview,
   [FilterOption.Rated]: HasRatingFilterValuePreview,
   [FilterOption.Gateway]: GatewayFilterPreview,
   [FilterOption.Grantee]: GranteeFilterPreview,
-  [FilterOption.Cause]: CauseFilterPreview,
+  [FilterOption.Cause]: HangupCauseFilterValuePreview,
   [FilterOption.Queue]: QueueFilterPreview,
   [FilterOption.RatedBy]: RatedByFilterPreview,
   [FilterOption.HasFile]: HasFileFilterPreview,
@@ -251,28 +256,29 @@ export const FilterOptionToPreviewComponentMap: Record<
   [FilterOption.Variable]: VariableFilterPreview,
   [FilterOption.CreatedAtFrom]: CreatedAtFromFilterPreview,
   [FilterOption.CreatedAtTo]: CreatedAtToFilterPreview,
-  [FilterOption.Status]: CaseStatusFilterPreview,
-  [FilterOption.Source]: CaseSourceFilterPreview,
-  [FilterOption.Service]: CaseServiceFilterPreview,
-  [FilterOption.Author]: AuthorFilterPreview,
-  [FilterOption.Reporter]: ReporterFilterPreview,
-  [FilterOption.Impacted]: ImpactedFilterPreview,
-  [FilterOption.Assignee]: AssigneeFilterPreview,
+  [FilterOption.Status]: CaseStatusFilterValuePreview,
+  [FilterOption.Source]: CaseSourceFilterValuePreview,
+  [FilterOption.Service]: CaseServiceFilterValuePreview,
+  [FilterOption.Author]: CaseAuthorFilterValuePreview,
+  [FilterOption.Reporter]: CaseReporterFilterValuePreview,
+  [FilterOption.Impacted]: CaseImpactedFilterValuePreview,
+  [FilterOption.Assignee]: CaseAssigneeFilterValuePreview,
   [FilterOption.ContactGroup]: ContactGroupFilterPreview,
-  [FilterOption.Priority]: CasePriorityFilterPreview,
-  [FilterOption.CloseReasonGroups]: CloseReasonGroupsCaseFilterPreview,
+  [FilterOption.Priority]: CasePriorityFilterValuePreview,
+  [FilterOption.CloseReasonGroups]: CaseCloseReasonGroupsFilterValuePreview,
   [FilterOption.Rating]: RatingFromToFilterPreview,
-  [FilterOption.Sla]: SlaFilterPreview,
-  [FilterOption.SlaCondition]: SlaConditionFilterPreview,
-  [FilterOption.ReactionTime]: ReactionTimeFilterPreview,
-  [FilterOption.ResolutionTime]: ResolutionTimeFilterPreview,
-  [FilterOption.ActualReactionTime]: ActualReactionTimeFilterPreview,
-  [FilterOption.ActualResolutionTime]: ActualResolutionTimeFilterPreview,
+  [FilterOption.Sla]: CaseSlaFilterValuePreview,
+  [FilterOption.SlaCondition]: CaseSlaConditionFilterValuePreview,
+  [FilterOption.ReactionTime]: CaseReactionTimeFilterValuePreview,
+  [FilterOption.ResolutionTime]: CaseResolutionTimeFilterValuePreview,
+  [FilterOption.ActualReactionTime]: CaseActualReactionTimeFilterValuePreview,
+  [FilterOption.ActualResolutionTime]:
+    CaseActualResolutionTimeFilterValuePreview,
   [FilterOption.HasAttachment]: HasAttachmentFilterPreview,
 };
 
-export const FilterOptionToApiSearchMethodMap: Record<
-  FilterOption,
+export const FilterOptionToPreviewApiSearchMethodMap: Record<
+  FilterOptionName,
   (unknown) => { items }
 > = {
   [FilterOption.Agent]: agentSearchMethod,
@@ -280,16 +286,45 @@ export const FilterOptionToApiSearchMethodMap: Record<
   [FilterOption.Grantee]: granteeSearchMethod,
   [FilterOption.Queue]: queueSearchMethod,
   [FilterOption.RatedBy]: ratedBySearchMethod,
-  [FilterOption.Reporter]: reporterSearchMethod,
-  [FilterOption.Sla]: slaSearchMethod,
-  [FilterOption.Service]: serviceCaseSearchMethod,
-  [FilterOption.Source]: sourceCaseSearchMethod,
+  [FilterOption.Reporter]: caseReporterSearchMethod,
+  [FilterOption.Sla]: caseSlaSearchMethod,
+  [FilterOption.Service]: servicesSearchMethod,
+  [FilterOption.Source]: caseSourceSearchMethod,
+  [FilterOption.Status]: ({ id: value }) =>
+    caseStatusConditionsSearchMethod({
+      parentId: value?.selection,
+      id: value?.conditions,
+    }),
   [FilterOption.User]: userSearchMethod,
-  [FilterOption.ContactGroup]: contactGroupSearchMethod,
-  [FilterOption.Assignee]: assigneeSearchMethod,
-  [FilterOption.Author]: authorSearchMethod,
-  [FilterOption.Priority]: priorityCaseSearchMethod,
-  [FilterOption.Impacted]: impactedSearchMethod,
+  [FilterOption.ContactGroup]: ({ id: value }, ...rest) => {
+    return contactGroupSearchMethod({
+      id: value.list,
+      ...rest,
+    });
+  },
+  [FilterOption.Assignee]: ({ id: value }, ...rest) => {
+    return caseAssigneeSearchMethod({
+      id: value.list,
+      ...rest,
+    });
+  },
+  [FilterOption.Author]: caseAuthorSearchMethod,
+  [FilterOption.Priority]: casePrioritySearchMethod,
+  [FilterOption.Impacted]: caseImpactedSearchMethod,
   [FilterOption.Contact]: contactSearchMethod,
   [FilterOption.Team]: teamSearchMethod,
+  [FilterOption.CloseReasonGroups]: ({ id: value, ...rest }) => {
+    return caseCloseReasonsSearchMethod({
+      parentId: value?.selection,
+      id: value?.conditions,
+      ...rest,
+    });
+  },
+  [FilterOption.SlaCondition]: ({ id: value, ...rest }) => {
+    return slasConditionsSearchMethod({
+      parentId: value?.selection,
+      id: value?.conditions,
+      ...rest,
+    });
+  },
 };

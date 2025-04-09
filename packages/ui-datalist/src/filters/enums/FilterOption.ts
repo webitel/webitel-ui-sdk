@@ -41,13 +41,13 @@ export const FilterOption = {
   ActualReactionTime: 'actualReactionTime',
   ActualResolutionTime: 'actualResolutionTime',
   HasAttachment: 'hasAttachment',
-} as FilterName;
+} as const satisfies FilterName;
 
-type SimpleFilterOption = (typeof FilterOption)[keyof typeof FilterOption];
+export type FilterOptionName = (typeof FilterOption)[keyof typeof FilterOption];
 
 type ExtendedFilterOption = {
   name: FilterOption;
   notDeletable?: boolean;
 };
 
-export type FilterOption = SimpleFilterOption | ExtendedFilterOption;
+export type FilterOption = FilterOptionName | ExtendedFilterOption;

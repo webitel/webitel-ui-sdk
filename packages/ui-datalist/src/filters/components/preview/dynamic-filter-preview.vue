@@ -34,6 +34,7 @@
                   :is="FilterOptionToPreviewComponentMap[filter.name]"
                   v-else
                   :value="localValue"
+                  :filter="props.filter"
                 />
               </slot>
             </template>
@@ -75,7 +76,7 @@ import type { FilterData, IFilter } from '../../types/Filter';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import {
-  FilterOptionToApiSearchMethodMap,
+  FilterOptionToPreviewApiSearchMethodMap,
   FilterOptionToPreviewComponentMap,
 } from '../filter-options';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
@@ -122,7 +123,7 @@ const fillLocalValue = async (filter = props.filter) => {
   const filterName = props.filter.name;
   const filterValue = filter.value;
 
-  const valueSearchMethod = FilterOptionToApiSearchMethodMap[filterName];
+  const valueSearchMethod = FilterOptionToPreviewApiSearchMethodMap[filterName];
 
   if (valueSearchMethod) {
     const { items } = await valueSearchMethod({ id: filterValue });

@@ -162,6 +162,12 @@ const deleteService = async ({ id }) => {
   }
 };
 
+const getServicesLookup = async (params) =>
+  getServicesList({
+    ...params,
+    fields: params.fields || ['id', 'name'],
+  });
+
 const ServicesAPI = {
   getList: getServicesList,
   get: getService,
@@ -169,6 +175,7 @@ const ServicesAPI = {
   update: updateService,
   patch: patchService,
   delete: deleteService,
+  getLookup: getServicesLookup,
 };
 
 export default ServicesAPI;
