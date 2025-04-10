@@ -7,16 +7,16 @@ import {
 } from 'webitel-sdk';
 
 import {
-  AdminSections,
   AuditorSections,
   ChatGatewayProvider,
-  CrmSections,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
   SupervisorSections,
   WebitelApplications,
 } from '../../enums';
+import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
+import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
 
