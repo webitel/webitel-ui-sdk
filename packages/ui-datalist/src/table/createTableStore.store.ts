@@ -1,29 +1,31 @@
-import set from 'lodash/fp/set';
-import { defineStore, storeToRefs } from 'pinia';
+import set from 'lodash/set';
 import { type Ref, ref, watch } from 'vue';
 
+import {
+  createDatalistStore,
+  makeThisToRefs,
+} from '../_shared/createDatalistStore';
 import { createTableFiltersStore } from '../filters/createTableFiltersStore.ts';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
 import {
   PatchItemPropertyParams,
-  TableStore,
-  useTableStoreParams,
+  useTableStoreConfig,
 } from '../types/tableStore.types.ts';
 
-export const createTableStore = <Entity extends { id: string; etag?: string }>(
-  namespace: string,
-  { apiModule, headers, disablePersistence }: useTableStoreParams<Entity>,
-) => {
-  const usePaginationStore = createTablePaginationStore(namespace);
-  const useHeadersStore = createTableHeadersStore(namespace, { headers });
-  const useFiltersStore = createTableFiltersStore(namespace);
+const tableStoreBody =
+  <Entity>(namespace: string, config: useTableStoreConfig<Entity>) =>
+  () => {
+    const usePaginationStore = createTablePaginationStore(namespace, config);
+    const useHeadersStore = createTableHeadersStore(namespace, config);
+    const useFiltersStore = createTableFiltersStore(namespace, config);
 
-  return defineStore(namespace, (): TableStore<Entity> => {
+    const thisToRefs = makeThisToRefs(config.storeType);
+
     const parentId = ref();
 
     const paginationStore = usePaginationStore();
-    const { page, size, next } = storeToRefs(paginationStore);
+    const { page, size, next } = thisToRefs(paginationStore);
     const {
       updatePage,
       updateSize,
@@ -33,7 +35,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
     } = paginationStore;
 
     const headersStore = useHeadersStore();
-    const { headers, shownHeaders, fields, sort } = storeToRefs(headersStore);
+    const { headers, shownHeaders, fields, sort } = thisToRefs(headersStore);
     const {
       updateSort,
       updateShownHeaders,
@@ -42,7 +44,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
     const filtersStore = useFiltersStore();
     const { filtersManager, isRestoring: isFiltersRestoring } =
-      storeToRefs(filtersStore);
+      thisToRefs(filtersStore);
     const {
       hasFilter,
       addFilter,
@@ -202,5 +204,6 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       updateFilter,
       deleteFilter,
     };
-  });
-};
+  };
+
+export const createTableStore = createDatalistStore(tableStoreBody);
