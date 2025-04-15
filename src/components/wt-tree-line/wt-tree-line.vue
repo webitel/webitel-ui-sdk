@@ -163,6 +163,7 @@ const selectElement = () => {
   }
 
   if (props.data[props.childrenProp]?.length) {
+    collapsed.value = !collapsed.value;
     return;
   }
 
