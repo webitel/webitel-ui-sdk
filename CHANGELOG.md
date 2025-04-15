@@ -1,3 +1,8 @@
+## [v25.4.62] - 2025-04-15
+### :sparkles: New Features
+- [`cfd2a1e`](https://github.com/webitel/webitel-ui-sdk/commit/cfd2a1ed1f9090ab36ee28bf61cf4e9cd7991695) - implement locale for list, contact and case [WTEL-6370](https://webitel.atlassian.net/browse/WTEL-6370) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.60] - 2025-04-10
 ### :bug: Bug Fixes
 - [`52238a0`](https://github.com/webitel/webitel-ui-sdk/commit/52238a012ec712064a342d011e1614cb3b47656c) - locale in navigation[WTEL-6674](https://webitel.atlassian.net/browse/WTEL-6674) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -1891,3 +1896,4 @@
 [v25.4.58]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.57...v25.4.58
 [v25.4.59]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.58...v25.4.59
 [v25.4.60]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.59...v25.4.60
+[v25.4.62]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.61...v25.4.62
