@@ -169,6 +169,7 @@ export default {
     totalDuration: 'Total duration',
     transcription: 'Transcription',
     attachment: 'Attachment | Attachments',
+    manager: 'Owner | Owners',
     queue: {
       queue: 'Queue | Queues',
       type: {
@@ -585,8 +586,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
+      hasUser: ({ linked }) => {
+        return linked('objects.user');
+      },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
+      },
+      label: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      owner: ({ linked }) => {
+        return linked('objects.manager');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');

@@ -41,6 +41,9 @@ export const FilterOption = {
   CaseActualReactionTime: 'actualReactionTime',
   CaseActualResolutionTime: 'actualResolutionTime',
   HasAttachment: 'hasAttachment',
+  HasUser: 'hasUser',
+  ContactLabel: 'label',
+  ContactOwner: 'owner',
 } as const satisfies FilterName;
 
 export type FilterOptionName = (typeof FilterOption)[keyof typeof FilterOption];

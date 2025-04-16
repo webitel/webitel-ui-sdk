@@ -10,9 +10,9 @@
             {{ filter.label || t(`webitelUI.filters.${filter.name}`) }}
             <wt-icon-btn
               v-if="!filterConfig.notDeletable && !readonly"
+              color="on-primary"
               icon="close--filled"
               size="sm"
-              color="on-primary"
               @mousedown.stop="deleteFilter"
             />
           </wt-chip>
@@ -33,8 +33,8 @@
                 <component
                   :is="FilterOptionToPreviewComponentMap[filter.name]"
                   v-else
-                  :value="localValue"
                   :filter="props.filter"
+                  :value="localValue"
                 />
               </slot>
             </template>
@@ -123,6 +123,11 @@ const fillLocalValue = async (filter = props.filter) => {
   const filterName = props.filter.name;
   const filterValue = filter.value;
 
+  // дописати комент
+  if(filterName === FilterOption.ContactLabel) {
+    return localValue.value = filterValue;
+  }
+
   const valueSearchMethod = FilterOptionToPreviewApiSearchMethodMap[filterName];
 
   if (valueSearchMethod) {
@@ -147,8 +152,8 @@ const deleteFilter = () => {
 <style lang="scss" scoped>
 .wt-chip {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-2xs);
 }
 

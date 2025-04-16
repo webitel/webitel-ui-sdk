@@ -77,6 +77,14 @@ import HasRatingFilterValueField from './has-rating/has-rating-filter-value-fiel
 import HasRatingFilterValuePreview from './has-rating/has-rating-filter-value-preview.vue';
 import HasTranscriptionFilter from './has-transcription/has-transcription-filter-value-field.vue';
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
+import HasUserFilter from './has-user/has-user-filter-value-field.vue';
+import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
+import { searchMethod as contactLabelSearchMethod } from './contact-label/config';
+import ContactLabelFilter from './contact-label/contact-label-filter-value-field.vue';
+import ContactLabelFilterPreview from './contact-label/contact-label-filter-value-preview.vue';
+import { searchMethod as contactOwnerSearchMethod } from './contact-owner/config';
+import ContactOwnerFilter from "./contact-owner/contact-owner-filter-value-field.vue";
+import ContactOwnerFilterPreview from "./contact-owner/contact-owner-filter-value-preview.vue";
 import { searchMethod as queueSearchMethod } from './queue/config';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
@@ -162,6 +170,12 @@ export {
   HasRatingFilterValuePreview,
   HasTranscriptionFilter,
   HasTranscriptionFilterPreview,
+  HasUserFilter,
+  HasUserFilterPreview,
+  ContactLabelFilter,
+  ContactLabelFilterPreview,
+  ContactOwnerFilter,
+  ContactOwnerFilterPreview,
   QueueFilter,
   QueueFilterPreview,
   RatedByFilter,
@@ -205,6 +219,9 @@ export const FilterOptionToValueComponentMap: Record<
   [FilterOption.Team]: TeamFilter,
   [FilterOption.TotalDuration]: TotalDurationFilter,
   [FilterOption.HasTranscription]: HasTranscriptionFilter,
+  [FilterOption.HasUser]: HasUserFilter,
+  [FilterOption.ContactLabel]: ContactLabelFilter,
+  [FilterOption.ContactOwner]: ContactOwnerFilter,
   [FilterOption.User]: UserFilter,
   [FilterOption.Variable]: VariableFilter,
   [FilterOption.CreatedAt]: CreatedAtFilterValueField,
@@ -253,6 +270,9 @@ export const FilterOptionToPreviewComponentMap: Record<
   [FilterOption.Team]: TeamFilterPreview,
   [FilterOption.TotalDuration]: TotalDurationFilterPreview,
   [FilterOption.HasTranscription]: HasTranscriptionFilterPreview,
+  [FilterOption.HasUser]: HasUserFilterPreview,
+  [FilterOption.ContactLabel]: ContactLabelFilterPreview,
+  [FilterOption.ContactOwner]: ContactOwnerFilterPreview,
   [FilterOption.User]: UserFilterPreview,
   [FilterOption.Variable]: VariableFilterPreview,
   [FilterOption.CreatedAtFrom]: CreatedAtFromFilterPreview,
@@ -292,6 +312,8 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
   [FilterOption.CaseSla]: caseSlaSearchMethod,
   [FilterOption.CaseService]: servicesSearchMethod,
   [FilterOption.CaseSource]: caseSourceSearchMethod,
+  [FilterOption.ContactLabel]: contactLabelSearchMethod,
+  [FilterOption.ContactOwner]: contactOwnerSearchMethod,
   [FilterOption.CaseStatus]: ({ id: value }) =>
     caseStatusConditionsSearchMethod({
       parentId: value?.selection,

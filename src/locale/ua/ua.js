@@ -168,6 +168,7 @@ export default {
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
     attachment: 'Вкладення | Вкладення',
+    manager: 'Власник | Власники',
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -581,8 +582,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
+      hasUser: ({ linked }) => {
+        return linked('objects.user');
+      },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
+      },
+      label: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      owner: ({ linked }) => {
+        return linked('objects.manager');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');
