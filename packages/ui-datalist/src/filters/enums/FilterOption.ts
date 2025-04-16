@@ -1,3 +1,5 @@
+import { WebitelProtoDataField } from 'webitel-sdk';
+
 import type { FilterName } from '../types/Filter';
 
 export const FilterOption = {
@@ -46,8 +48,9 @@ export const FilterOption = {
 export type FilterOptionName = (typeof FilterOption)[keyof typeof FilterOption];
 
 type ExtendedFilterOption = {
-  name: FilterOption;
+  name: FilterOptionName;
   notDeletable?: boolean;
+  extensionField?: WebitelProtoDataField;
 };
 
 export type FilterOption = FilterOptionName | ExtendedFilterOption;

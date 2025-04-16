@@ -22,7 +22,7 @@
       <apply-preset-action
         :namespace="props.presetNamespace"
         :use-presets-store="props.usePresetsStore"
-        :filter-options="props.filterOptions"
+        :filter-options="filterOptions"
         @apply="emit('preset:apply', $event)"
       />
 
@@ -30,7 +30,7 @@
         v-if="enablePresets"
         :namespace="props.presetNamespace"
         :filters-manager="props.filtersManager"
-        :filter-options="props.filterOptions"
+        :filter-options="filterOptions"
       />
 
       <wt-icon-action
@@ -51,6 +51,7 @@ import { WtIconAction } from '@webitel/ui-sdk/components';
 import { Store } from 'pinia';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import {WebitelProtoDataField} from "webitel-sdk";
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import { FilterOption } from '../enums/FilterOption';
@@ -73,6 +74,18 @@ type Props = {
    */
   filtersManager: IFiltersManager;
   /**
+   * @author @dlohvinov
+   *
+   * @implements
+   * [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702)
+   *
+   * @description
+   * Decided to pass fields as a prop instead of converting them to
+   * Props.filterOptions, because this functionality can be expanded to many
+   * filter panels
+   */
+  filterableExtensionFields?: WebitelProtoDataField[];
+  /**
    * @description
    * QueryPreset "section" field
    */
@@ -89,7 +102,7 @@ type Props = {
    *
    * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
    */
-  usePresetsStore: Store;
+  usePresetsStore?: Store;
 };
 
 const props = defineProps<Props>();
@@ -117,16 +130,29 @@ const emit = defineEmits<{
 
 const { t } = useI18n();
 
-const appliedFilters = computed(() => {
-  return props.filtersManager.getFiltersList({
-    include: props.filterOptions.map((opt) => {
-      return opt.value || opt;
-    }),
+const extensionFieldsFilterOptions = computed(() => {
+  if (!props.filterableExtensionFields) {
+    return [];
+  }
+
+  return props.filterableExtensionFields.map((field: WebitelProtoDataField): FilterOption => {
+    return {
+      name: field.name,
+      value: field.id,
+      extensionField: field,
+    };
   });
 });
 
+const filterOptions = computed(() => {
+  return [
+    ...props.filterOptions,
+    ...extensionFieldsFilterOptions.value,
+  ];
+});
+
 const localizedFilterOptions = computed(() => {
-  return props.filterOptions.map((opt) => {
+  return filterOptions.value.map((opt) => {
     const isExtended = typeof opt !== 'string';
 
     const name = isExtended
@@ -134,6 +160,14 @@ const localizedFilterOptions = computed(() => {
       : t(`webitelUI.filters.${opt}`);
 
     return isExtended ? { name, ...opt } : { name, value: opt };
+  });
+});
+
+const appliedFilters = computed(() => {
+  return props.filtersManager.getFiltersList({
+    include: filterOptions.value.map((opt) => {
+      return opt.value || opt;
+    }),
   });
 });
 

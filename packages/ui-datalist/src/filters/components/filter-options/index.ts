@@ -1,6 +1,7 @@
 import type { Component } from 'vue';
 
 import { FilterOption, FilterOptionName } from '../../enums/FilterOption';
+import TypeExtensionFilterValueField from './_custom/type-extension-filter-value-field.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
 import { searchMethod as agentSearchMethod } from './agent/config';
@@ -178,6 +179,7 @@ export {
   TeamFilterPreview,
   TotalDurationFilter,
   TotalDurationFilterPreview,
+  TypeExtensionFilterValueField,
   UserFilter,
   UserFilterPreview,
   VariableFilter,

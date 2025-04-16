@@ -68,11 +68,11 @@ import {
   WtLoader,
   WtTooltip,
 } from '@webitel/ui-sdk/components';
-import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import {computed, ref} from 'vue';
+import {useI18n} from 'vue-i18n';
 
-import type { FilterOption } from '../../enums/FilterOption';
-import type { FilterData, IFilter } from '../../types/Filter';
+import type {FilterOption} from '../../enums/FilterOption';
+import type {FilterData, IFilter} from '../../types/Filter';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import {
@@ -80,6 +80,7 @@ import {
   FilterOptionToPreviewComponentMap,
 } from '../filter-options';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
+import {searchMethod as extensionFieldSearchMethod} from "../filter-options/_custom/config";
 
 interface Props {
   filter: IFilter;
@@ -92,14 +93,14 @@ interface Props {
   readonly?: boolean;
 }
 
-const { t } = useI18n();
-
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
   'update:filter': [FilterData];
   'delete:filter': [IFilter];
 }>();
+
+const {t} = useI18n();
 
 const filterConfig = computed(() => {
   const thisFilterOption =
@@ -123,17 +124,34 @@ const fillLocalValue = async (filter = props.filter) => {
   const filterName = props.filter.name;
   const filterValue = filter.value;
 
+
+  if (filterConfig.value.extensionField) {
+    const {items} = await extensionFieldSearchMethod({id: filterValue}, {
+      filterName,
+      filterValue,
+      filterConfig: filterConfig.value,
+    });
+    localValue.value = items;
+    return;
+  }
+
   const valueSearchMethod = FilterOptionToPreviewApiSearchMethodMap[filterName];
 
   if (valueSearchMethod) {
-    const { items } = await valueSearchMethod({ id: filterValue });
+    const {items} = await valueSearchMethod({id: filterValue}, {
+      filterName,
+      filterValue,
+      filterConfig: filterConfig.value,
+    });
     localValue.value = items;
-  } else {
-    localValue.value = filterValue;
+
+    return;
   }
+
+  localValue.value = filterValue;
 };
 
-const submit = (filter: IFilter, { hide }) => {
+const submit = (filter: IFilter, {hide}) => {
   emit('update:filter', filter);
   fillLocalValue(filter);
   hide();

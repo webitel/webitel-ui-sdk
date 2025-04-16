@@ -4,7 +4,7 @@
       :clearable="false"
       :disabled="editMode"
       :label="t('webitelUI.filters.filterName')"
-      :options="options"
+      :options="props.options"
       :value="filterName"
       track-by="value"
       use-value-from-options-by-prop="value"
@@ -21,11 +21,13 @@
         onValueInvalidChange,
       }"
     >
-      <component
-        :is="FilterOptionToValueComponentMap[filterName]"
+      <dynamic-filter-config-form-value-input
+        v-if="filterName"
         :key="filterName"
-        :model-value="filterValue"
+        :filter-name="filterName"
+        :filter-option="selectedFilterOption"
         :label="valueInputLabelText"
+        :model-value="filterValue"
         @update:model-value="onValueChange"
         @update:invalid="onValueInvalidChange"
       />
@@ -68,20 +70,13 @@ import type {
   FilterNameSelectRepresentation,
   IFilter,
 } from '../../types/Filter';
-import { FilterOptionToValueComponentMap } from '../filter-options';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
+import DynamicFilterConfigFormValueInput from "./dynamic-filter-config-form-value-input.vue";
 
-interface AddModeProps {
+const props = defineProps<{
   options: Array<FilterNameSelectRepresentation>;
-}
-
-interface EditModeProps {
-  filter: IFilter;
-}
-
-type Props = AddModeProps | EditModeProps;
-
-const props = defineProps<Props>();
+  filter?: IFilter;
+}>();
 
 const emit = defineEmits<{
   submit: [FilterInitParams];
@@ -97,6 +92,10 @@ const filterValue = ref();
 const editMode = !!props.filter;
 
 const invalid = ref(false);
+
+const selectedFilterOption = computed(() => {
+  return props.options.find((option) => option.value === filterName.value);
+});
 
 const onValueChange = (v) => {
   filterValue.value = v;
