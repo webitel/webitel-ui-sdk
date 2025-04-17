@@ -7,6 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": false,
     "skipLibCheck": true,
+    "listEmittedFiles": true,
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
@@ -15,7 +16,7 @@
     "moduleResolution": "Bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": false,
+    "noEmit": true,
     "noEmitOnError": false,
     "strict": false,
     "noUnusedLocals": true,

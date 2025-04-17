@@ -3,6 +3,7 @@
   "version": "1.0.9",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
+    "build:types": "vue-tsc -p ./tsconfig.build.json",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
@@ -12,14 +13,14 @@
   },
   "type": "module",
   "main": "./src/index.ts",
-  "types": "./src/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "workspaces": [
     "../../"
   ],
   "exports": {
     ".": "./src/index.ts",
-    "./filters": "./src/filters/index.ts",
-    "./presets": "./src/filter-presets/index.ts"
+    "./filters": "./src/modules/filters/index.ts",
+    "./presets": "./src/modules/filter-presets/index.ts"
   },
   "files": [
     "src/*",
@@ -35,7 +36,8 @@
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@webitel/ui-sdk": "^25.4.59"
+    "@webitel/ui-sdk": "^25.4.59",
+    "@webitel/styleguide": "^24.12.26"
   },
   "devDependencies": {
     "vue-tsc": "^2.2.8",

@@ -6,6 +6,7 @@
     "dev": "npm run docs:dev",
     "build": "vite build",
     "test:unit": "vitest",
+    "build:types": "vue-tsc -p ./tsconfig.build.json",
     "publish-lib": "npm run build && npm publish --access public",
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
@@ -13,13 +14,13 @@
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
     "orval": "orval",
-    "tsc": "tsc -p tsconfig.json",
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
     "utils:i": "npm install"
   },
   "main": "./dist/ui-sdk.js",
   "type": "module",
+  "types": "./dist/types",
   "exports": {
     ".": "./dist/ui-sdk.js",
     "./store": "./src/store/new/index",
