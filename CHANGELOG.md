@@ -1,3 +1,8 @@
+## [v25.4.64] - 2025-04-17
+### :sparkles: New Features
+- [`85d254a`](https://github.com/webitel/webitel-ui-sdk/commit/85d254a5405dddd5ffd92466af85badfd3505fb0) - update styles for wt tree table [WTEL-6440](https://webitel.atlassian.net/browse/WTEL-6440) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.62] - 2025-04-15
 ### :sparkles: New Features
 - [`cfd2a1e`](https://github.com/webitel/webitel-ui-sdk/commit/cfd2a1ed1f9090ab36ee28bf61cf4e9cd7991695) - implement locale for list, contact and case [WTEL-6370](https://webitel.atlassian.net/browse/WTEL-6370) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1897,3 +1902,4 @@
 [v25.4.59]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.58...v25.4.59
 [v25.4.60]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.59...v25.4.60
 [v25.4.62]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.61...v25.4.62
+[v25.4.64]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.63...v25.4.64
