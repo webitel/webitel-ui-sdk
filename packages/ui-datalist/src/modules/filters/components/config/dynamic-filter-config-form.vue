@@ -4,7 +4,7 @@
       :clearable="false"
       :disabled="editMode"
       :label="t('webitelUI.filters.filterName')"
-      :options="filterOptions"
+      :options="filterConfigOptions"
       option-label="label"
       :value="filterName"
       track-by="name"
@@ -22,10 +22,11 @@
         onValueInvalidChange,
       }"
     >
-      <component
-        :is="FilterOptionToValueComponentMap[filterName]"
+      <dynamic-filter-config-form-value-input
+        v-if="filterName"
         :key="filterName"
         :model-value="filterValue"
+        :filter-config="selectedFilterConfig"
         :label="valueInputLabelText"
         @update:model-value="onValueChange"
         @update:invalid="onValueInvalidChange"
@@ -66,8 +67,8 @@ import { useI18n } from 'vue-i18n';
 
 import {FilterInitParams, IFilter} from "../../classes/Filter";
 import {BaseFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
-import { FilterOptionToValueComponentMap } from '../../modules/filterConfig/components';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
+import DynamicFilterConfigFormValueInput from "./dynamic-filter-config-form-value-input.vue";
 
 const props = defineProps<{
   /**
@@ -102,12 +103,22 @@ const editMode = !!props.filter;
 
 const invalid = ref(false);
 
-const filterOptions = computed(() => {
+const filterConfigOptions = computed(() => {
   if (props.filterConfig) {
     return [props.filterConfig];
   }
 
   return props.filterConfigs;
+});
+
+const selectedFilterConfig = computed(() => {
+  if (props.filterConfig) {
+    return props.filterConfig;
+  }
+
+  return filterConfigOptions.value.find((filterConfig) => {
+    return filterConfig.name === filterName.value;
+  });
 });
 
 const onValueChange = (v) => {
