@@ -116,11 +116,12 @@ const emit = defineEmits<{
 }>();
 
 const filtersManager = computed(() => {
-  const snapshot = props.preset?.preset?.['filtersManager.toString'];
-  if (!snapshot) return [];
-
   const filtersManager = createFiltersManager();
-  filtersManager.fromString(snapshot);
+
+  const snapshot = props.preset?.preset?.['filtersManager.toString'];
+  if (snapshot) {
+    filtersManager.fromString(snapshot);
+  }
 
   return filtersManager;
 });

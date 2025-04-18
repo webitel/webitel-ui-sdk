@@ -10,7 +10,12 @@ export class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
   valueInputComponent = CaseAssigneeFilterValueField;
   valuePreviewComponent = CaseAssigneeFilterValuePreview;
 
-  searchRecords = ContactsAPI.getLookup;
+  searchRecords(params, { filterValue }) {
+    return ContactsAPI.getLookup({
+      ...params,
+      id: filterValue.list,
+    });
+  }
 }
 
 export const makeCaseAssigneeFilterConfig = () =>

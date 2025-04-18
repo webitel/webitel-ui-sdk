@@ -16,9 +16,6 @@ import {
   CaseAssigneeFilterConfig,
   makeCaseAssigneeFilterConfig,
 } from './case-assignee';
-import CaseAssigneeFilterValueField from './case-assignee/case-assignee-filter-value-field.vue';
-import CaseAssigneeFilterValuePreview from './case-assignee/case-assignee-filter-value-preview.vue';
-import { searchMethod as caseAssigneeSearchMethod } from './case-assignee/config';
 import CaseAuthorFilterValueField from './case-author/case-author-filter-value-field.vue';
 import CaseAuthorFilterValuePreview from './case-author/case-author-filter-value-preview.vue';
 import { searchMethod as caseAuthorSearchMethod } from './case-author/config';
@@ -117,8 +114,6 @@ export {
   CaseActualReactionTimeFilterValuePreview,
   CaseActualResolutionTimeFilterValueField,
   CaseActualResolutionTimeFilterValuePreview,
-  CaseAssigneeFilterValueField,
-  CaseAssigneeFilterValuePreview,
   CaseAuthorFilterValueField,
   CaseAuthorFilterValuePreview,
   CaseCloseReasonGroupsFilterValueField,
@@ -220,7 +215,6 @@ export const FilterOptionToValueComponentMap: Record<
   [FilterOption.CaseAuthor]: CaseAuthorFilterValueField,
   [FilterOption.CaseReporter]: CaseReporterFilterValueField,
   [FilterOption.CaseImpacted]: CaseImpactedFilterValueField,
-  [FilterOption.CaseAssignee]: CaseAssigneeFilterValueField,
   [FilterOption.ContactGroup]: ContactGroupFilter,
   [FilterOption.CasePriority]: CasePriorityFilterValueField,
   [FilterOption.CaseCloseReasonGroups]: CaseCloseReasonGroupsFilterValueField,
@@ -267,7 +261,6 @@ export const FilterOptionToPreviewComponentMap: Record<
   [FilterOption.CaseAuthor]: CaseAuthorFilterValuePreview,
   [FilterOption.CaseReporter]: CaseReporterFilterValuePreview,
   [FilterOption.CaseImpacted]: CaseImpactedFilterValuePreview,
-  [FilterOption.CaseAssignee]: CaseAssigneeFilterValuePreview,
   [FilterOption.ContactGroup]: ContactGroupFilterPreview,
   [FilterOption.CasePriority]: CasePriorityFilterValuePreview,
   [FilterOption.CaseCloseReasonGroups]: CaseCloseReasonGroupsFilterValuePreview,
@@ -304,12 +297,6 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
   [FilterOption.User]: userSearchMethod,
   [FilterOption.ContactGroup]: ({ id: value }, ...rest) => {
     return contactGroupSearchMethod({
-      id: value.list,
-      ...rest,
-    });
-  },
-  [FilterOption.CaseAssignee]: ({ id: value }, ...rest) => {
-    return caseAssigneeSearchMethod({
       id: value.list,
       ...rest,
     });
