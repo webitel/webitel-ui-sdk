@@ -1,39 +1,26 @@
 <template>
   <component
-    :is="valueComponent"
+    :is="props.filterConfig.valueInputComponent"
     v-model:model-value="filterValue"
     :label="label"
-    :filter-option="props.filterOption"
+    :filter-config="props.filterConfig"
     @update:invalid="emit('update:invalid', $event)"
   />
 </template>
 
 <script setup lang="ts">
-import {computed} from "vue";
-
-import {FilterOption} from "../../enums/FilterOption";
-import {FilterName} from "../../types/Filter";
-import {FilterOptionToValueComponentMap, TypeExtensionFilterValueField} from "../filter-options";
+import {TFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
 
 const filterValue = defineModel<unknown>();
 
 const props = defineProps<{
-  filterName: FilterName;
-  filterOption: FilterOption;
+  filterConfig: TFilterConfig;
   label?: string;
 }>();
 
 const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
-
-const valueComponent = computed(() => {
-  if (props.filterOption?.extensionField) {
-    return TypeExtensionFilterValueField;
-  }
-
-  return FilterOptionToValueComponentMap[props.filterName];
-});
 </script>
 
 <style scoped>

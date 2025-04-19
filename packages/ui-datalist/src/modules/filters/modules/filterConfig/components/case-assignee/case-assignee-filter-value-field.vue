@@ -41,6 +41,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
+
 const { t } = useI18n();
 
 const initModel = () => {

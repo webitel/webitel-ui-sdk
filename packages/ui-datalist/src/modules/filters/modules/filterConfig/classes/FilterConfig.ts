@@ -4,6 +4,7 @@ import { MessageResolver } from 'vue-i18n';
 import { FilterName, FilterValue } from '../../../classes/Filter';
 import {
   FilterOptionToFilterConfigClassMap,
+  FilterOptionToPreviewComponentMap,
   FilterOptionToValueComponentMap,
 } from '../components';
 import { FilterOption } from '../enums/FilterOption';
@@ -64,14 +65,19 @@ export class FilterConfig implements BaseFilterConfig {
   }
 }
 
-export class WtSysTypeFilterConfig
+/**
+ * @author @dlohvinov
+ *
+ * @description
+ * "abstract" class is used to support default config fields for all WtSysTypeFilterConfig
+ * classes in future
+ */
+export abstract class WtSysTypeFilterConfig
   extends FilterConfig
   implements IWtSysTypeFilterConfig
 {
-  name: FilterName;
-  searchRecords: (
-    params: unknown,
-  ) => Promise<{ items: unknown[]; next?: boolean }>;
+  abstract name;
+  abstract searchRecords;
 }
 
 export const createFilterConfig = ({
@@ -98,6 +104,6 @@ export const createFilterConfig = ({
   return new FilterConfig({
     name: filterOption,
     valueInputComponent: FilterOptionToValueComponentMap[filterOption],
-    previewComponent: FilterOptionToValueComponentMap[filterOption],
+    valuePreviewComponent: FilterOptionToPreviewComponentMap[filterOption],
   });
 };

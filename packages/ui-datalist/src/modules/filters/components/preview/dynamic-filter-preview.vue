@@ -31,7 +31,7 @@
                   size="sm"
                 />
                 <component
-                  :is="FilterOptionToPreviewComponentMap[filter.name]"
+                  :is="filterConfig.valuePreviewComponent"
                   v-else
                   :value="localValue"
                   :filter="props.filter"

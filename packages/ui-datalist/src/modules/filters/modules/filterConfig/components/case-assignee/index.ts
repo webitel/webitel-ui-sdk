@@ -10,10 +10,15 @@ export class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
   valueInputComponent = CaseAssigneeFilterValueField;
   valuePreviewComponent = CaseAssigneeFilterValuePreview;
 
-  searchRecords(params, { filterValue }) {
+  searchRecords(
+    params: object,
+    { filterValue } = {},
+  ): Promise<{ items: unknown[]; next?: boolean }> {
+    const id = params.id?.list || params.id || filterValue?.list;
+
     return ContactsAPI.getLookup({
       ...params,
-      id: filterValue.list,
+      id,
     });
   }
 }

@@ -51,11 +51,13 @@
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { Store } from 'pinia';
 import {computed} from 'vue';
+import {WebitelProtoDataField} from "webitel-sdk";
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import {FilterData, IFilter} from "../classes/Filter";
 import {IFiltersManager} from "../classes/FiltersManager";
 import {useFilterConfigsToolkit} from "../composables/useFilterConfigsToolkit";
+import {TFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
 import DynamicFilterPanelWrapper from './dynamic-filter-panel-wrapper.vue';
@@ -66,13 +68,25 @@ type Props = {
    * @description
    * available filter options to set
    */
-  filterOptions: FilterOption[];
+  filterOptions: (FilterOption | TFilterConfig)[];
   /**
    * @description
    * create local filters manager from snapshot
    * inside save-preset.vue
    */
   filtersManager: IFiltersManager;
+  /**
+   * @author @dlohvinov
+   *
+   * @implements
+   * [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702)
+   *
+   * @description
+   * Decided to pass fields as a prop instead of converting them to
+   * Props.filterOptions, because this functionality can be expanded to many
+   * filter panels
+   */
+  filterableExtensionFields?: WebitelProtoDataField[];
   /**
    * @description
    * QueryPreset "section" field
