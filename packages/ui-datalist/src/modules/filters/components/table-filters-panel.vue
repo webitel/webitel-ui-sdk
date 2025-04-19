@@ -139,6 +139,7 @@ const {
 } = useFilterConfigsToolkit({
   filterOptions: props.filterOptions,
   filtersManager: props.filtersManager,
+  filterableExtensionFields: props.filterableExtensionFields,
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);

@@ -5,7 +5,7 @@ import { FilterOption } from '../../enums/FilterOption';
 import CaseAssigneeFilterValueField from './case-assignee-filter-value-field.vue';
 import CaseAssigneeFilterValuePreview from './case-assignee-filter-value-preview.vue';
 
-export class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
+class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
   readonly name = FilterOption.CaseAssignee;
   valueInputComponent = CaseAssigneeFilterValueField;
   valuePreviewComponent = CaseAssigneeFilterValuePreview;
@@ -14,7 +14,10 @@ export class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
     params: object,
     { filterValue } = {},
   ): Promise<{ items: unknown[]; next?: boolean }> {
-    const id = params.id?.list || params.id || filterValue?.list;
+    const id =
+      params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
+      params.id /* wt-select options loadings */ ||
+      filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
 
     return ContactsAPI.getLookup({
       ...params,
@@ -23,5 +26,5 @@ export class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
   }
 }
 
-export const makeCaseAssigneeFilterConfig = () =>
+export const createCaseAssigneeFilterConfig = () =>
   new CaseAssigneeFilterConfig();

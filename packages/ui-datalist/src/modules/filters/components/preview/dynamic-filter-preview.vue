@@ -76,7 +76,6 @@ import {FilterData, IFilter} from "../../classes/Filter";
 import {TFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
 import {
   FilterOptionToPreviewApiSearchMethodMap,
-  FilterOptionToPreviewComponentMap,
 } from '../../modules/filterConfig/components';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';

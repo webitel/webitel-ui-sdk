@@ -41,4 +41,13 @@ export const FilterOption = {
   HasAttachment: 'hasAttachment',
 } as const;
 
-export type FilterOption = (typeof FilterOption)[keyof typeof FilterOption];
+/**
+ *
+ * @description
+ * any custom lookup fields or type extensions
+ */
+export type CustomFilterOption = string;
+
+export type FilterOption =
+  | (typeof FilterOption)[keyof typeof FilterOption]
+  | CustomFilterOption;

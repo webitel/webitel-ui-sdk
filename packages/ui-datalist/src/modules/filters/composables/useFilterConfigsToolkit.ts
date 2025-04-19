@@ -1,5 +1,6 @@
 import { computed, ComputedRef } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { FilterName, IFilter } from '../classes/Filter';
 import { IFiltersManager } from '../classes/FiltersManager';
@@ -8,6 +9,7 @@ import {
   createFilterConfig,
   FilterConfig,
 } from '../modules/filterConfig/classes/FilterConfig';
+import { createTypeExtensionFilterConfig } from '../modules/filterConfig/components/_custom';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 
 export type FilterConfigToolkit = {
@@ -35,37 +37,58 @@ export type FilterConfigToolkit = {
 export type FilterConfigToolkitParams = {
   filterOptions: (FilterOption | BaseFilterConfig)[];
   filtersManager: IFiltersManager;
+  filterableExtensionFields: WebitelProtoDataField[];
 };
 
 export const useFilterConfigsToolkit = ({
   filterOptions,
   filtersManager,
+  filterableExtensionFields = [],
 }: FilterConfigToolkitParams): FilterConfigToolkit => {
   const { t } = useI18n();
 
   const filterConfigs = computed(() => {
-    return filterOptions
-      .map((opt) => {
-        if (opt instanceof FilterConfig) {
-          return opt;
-        }
+    return (
+      filterOptions
+        /**
+         * make filterConfigs from standard filterOptions
+         */
+        .map((opt) => {
+          if (opt instanceof FilterConfig) {
+            return opt;
+          }
 
-        if (typeof opt === 'string') {
-          return createFilterConfig({ filterOption: opt });
-        }
+          if (typeof opt === 'string') {
+            return createFilterConfig({ filterOption: opt });
+          }
 
-        return new FilterConfig({
-          ...opt,
-          name: opt.name,
-        });
-      })
-      .map((filterConfig) => {
-        if (!filterConfig.label) {
-          filterConfig.label = t(`webitelUI.filters.${filterConfig.name}`);
-        }
+          return new FilterConfig({
+            ...opt,
+            name: opt.name,
+          });
+        })
+        /**
+         * localize
+         */
+        .map((filterConfig) => {
+          if (!filterConfig.label) {
+            filterConfig.label = t(`webitelUI.filters.${filterConfig.name}`);
+          }
 
-        return filterConfig;
-      });
+          return filterConfig;
+        })
+        /**
+         * add filterConfigs for extension fields
+         */
+        .concat(
+          filterableExtensionFields.map((field: WebitelProtoDataField) => {
+            return createTypeExtensionFilterConfig(
+              { name: field.name },
+              { field },
+            );
+          }),
+        )
+    );
   });
 
   const filtersIncluded = computed(() => {

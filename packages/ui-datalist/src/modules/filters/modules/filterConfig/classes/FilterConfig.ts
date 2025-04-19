@@ -3,7 +3,7 @@ import { MessageResolver } from 'vue-i18n';
 
 import { FilterName, FilterValue } from '../../../classes/Filter';
 import {
-  FilterOptionToFilterConfigClassMap,
+  FilterOptionToFilterConfigCreatorMap,
   FilterOptionToPreviewComponentMap,
   FilterOptionToValueComponentMap,
 } from '../components';
@@ -85,10 +85,10 @@ export const createFilterConfig = ({
 }: {
   filterOption: FilterOption;
 }): BaseFilterConfig => {
-  const filterConfigClass = FilterOptionToFilterConfigClassMap[filterOption];
+  const filterConfigClass = FilterOptionToFilterConfigCreatorMap[filterOption];
 
   if (filterConfigClass) {
-    return new filterConfigClass();
+    return filterConfigClass();
   }
 
   // throw new Error(

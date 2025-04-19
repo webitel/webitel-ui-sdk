@@ -1,6 +1,10 @@
 import type { Component } from 'vue';
 
-import { FilterOption, FilterOptionName } from '../enums/FilterOption';
+import {
+  CustomFilterOption,
+  FilterOption,
+  FilterOptionName,
+} from '../enums/FilterOption';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
 import { searchMethod as agentSearchMethod } from './agent/config';
@@ -12,10 +16,7 @@ import CaseActualReactionTimeFilterValueField from './case-actual-reaction-time/
 import CaseActualReactionTimeFilterValuePreview from './case-actual-reaction-time/case-actual-reaction-time-filter-value-preview.vue';
 import CaseActualResolutionTimeFilterValueField from './case-actual-resolution-time/case-actual-resolution-time-filter-value-field.vue';
 import CaseActualResolutionTimeFilterValuePreview from './case-actual-resolution-time/case-actual-resolution-time-filter-value-preview.vue';
-import {
-  CaseAssigneeFilterConfig,
-  makeCaseAssigneeFilterConfig,
-} from './case-assignee';
+import { createCaseAssigneeFilterConfig } from './case-assignee';
 import CaseAuthorFilterValueField from './case-author/case-author-filter-value-field.vue';
 import CaseAuthorFilterValuePreview from './case-author/case-author-filter-value-preview.vue';
 import { searchMethod as caseAuthorSearchMethod } from './case-author/config';
@@ -322,6 +323,6 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
   },
 };
 
-export const FilterOptionToFilterConfigClassMap = {
-  [FilterOption.CaseAssignee]: CaseAssigneeFilterConfig,
+export const FilterOptionToFilterConfigCreatorMap = {
+  [FilterOption.CaseAssignee]: createCaseAssigneeFilterConfig,
 };
