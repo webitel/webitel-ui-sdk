@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: cd packages/ui-datalist #!
+      # - run: cd packages/ui-datalist #!
 
 #      - uses: actions/cache@v3
 #        with:
@@ -60,6 +60,7 @@ jobs:
         # if: ${{ steps.check_publish.outputs.exists == '0' }}
 
         run: |
+          cd packages/ui-datalist
           echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm publish --access public
