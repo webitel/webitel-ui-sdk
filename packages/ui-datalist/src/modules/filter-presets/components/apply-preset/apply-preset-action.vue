@@ -32,10 +32,10 @@
             <preset-preview
               v-for="preset of dataList"
               :key="preset.id"
-              collapsed
+              :filter-configs="props.filterConfigs"
               :is-selected="preset === selectedPreset"
               :preset="preset"
-              :filter-configs="props.filterConfigs"
+              collapsed
               @preset:select="selectedPreset = preset"
               @preset:update="updatePreset"
               @preset:delete="() => deletePreset(preset)"
@@ -176,7 +176,7 @@ const updatePreset = async ({ preset, onSuccess, onFailure }) => {
     await PresetQueryAPI.update({
       item: { ...preset },
       id: preset.id,
-      namespace: preset.namespace,
+      namespace: preset.preset?.namespace,
     });
     eventBus.$emit('notification', {
       type: 'success',
@@ -215,8 +215,8 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 .apply-preset-main-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
   height: 100%;
+  gap: var(--spacing-xs);
 
   .wt-empty {
     flex-grow: 1;
@@ -228,10 +228,10 @@ const deletePreset = async (preset: EnginePresetQuery) => {
   @extend %wt-scrollbar;
 
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  max-height: 400px;
   overflow-y: auto;
+  flex-direction: column;
+  max-height: 400px;
+  gap: var(--spacing-xs);
   scrollbar-gutter: stable;
 }
 </style>
