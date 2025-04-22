@@ -1,6 +1,6 @@
 <template>
   <section class="wt-dual-panel">
-    <div class="wt-dual-panel__header">
+    <div v-if="!hideHeader" class="wt-dual-panel__header">
       <slot name="header" />
     </div>
     <div
@@ -39,6 +39,10 @@ import { computed, defineEmits, ref } from 'vue';
 import { ComponentSize, IconAction } from '../../enums';
 
 const props = defineProps({
+  hideHeader: {
+    type: Boolean,
+    default: false,
+  },
   actionsPanel: {
     type: Boolean,
     default: true,
