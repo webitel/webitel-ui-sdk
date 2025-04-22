@@ -10,9 +10,9 @@
             {{ filter.label || filterConfig.label }}
             <wt-icon-btn
               v-if="!filterConfig.notDeletable && !readonly"
+              color="on-primary"
               icon="close--filled"
               size="sm"
-              color="on-primary"
               @mousedown.stop="deleteFilter"
             />
           </wt-chip>
@@ -27,7 +27,7 @@
             <template #default>
               <slot name="info">
                 <wt-loader
-                  v-if="!localValue"
+                  v-if="!isRenderPreview"
                   size="sm"
                 />
                 <component
@@ -133,6 +133,10 @@ const fillLocalValue = async (filter = props.filter) => {
     localValue.value = filterValue;
   }
 };
+
+// [https://webitel.atlassian.net/browse/WTEL-6732]
+// if type filter is boolean and value = false, need display preview
+const isRenderPreview = computed(() => localValue.value === false || localValue.value);
 
 const submit = (filter: IFilter, { hide }) => {
   emit('update:filter', filter);

@@ -270,6 +270,7 @@ const handleSelection = (row, select) => {
 
 .wt-tree-table {
   @extend %wt-scrollbar;
+  max-height: 100%;
   overflow: auto;
 
   &-head {
