@@ -69,7 +69,7 @@ import {
   WtLoader,
   WtTooltip,
 } from '@webitel/ui-sdk/components';
-import { ref } from 'vue';
+import { computed,ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {FilterData, IFilter} from "../../classes/Filter";
