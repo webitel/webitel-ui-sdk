@@ -104,6 +104,30 @@ const addStaticContactGroup = async ({ itemInstance }) => {
   }
 };
 
+const addContactsToGroup = async ({ contactIds, id }) => {
+  try {
+    const response = await contactGroupsService.addContactsToGroup(
+      id,
+      contactIds,
+    );
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
+const removeContactsFromGroup = async ({ id, contactIds }) => {
+  try {
+    const response = await contactGroupsService.removeContactsFromGroup(
+      id,
+      contactIds,
+    );
+    return applyTransform(response.data, []);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
 const updateStaticContactGroup = async ({ itemInstance, itemId: id }) => {
   const item = applyTransform(itemInstance, [
     camelToSnake(),
@@ -155,6 +179,8 @@ const ContactGroupsAPI = {
   patch: patchStaticContactGroup,
   delete: deleteStaticContactGroup,
   getLookup,
+  addContactsToGroup,
+  removeContactsFromGroup,
 
   ...generatePermissionsApi(baseUrl),
 };
