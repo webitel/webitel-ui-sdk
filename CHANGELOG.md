@@ -1,3 +1,23 @@
+## [v25.4.69] - 2025-04-22
+### :sparkles: New Features
+- [`44c5a72`](https://github.com/webitel/webitel-ui-sdk/commit/44c5a7284a134c25bcf7c6a212993401052e2fc6) - add on-demand/WtTypeExtensionValueInput.vue, WtTypeExtensionFieldKind.ts enum and update related imports [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`21ccd9b`](https://github.com/webitel/webitel-ui-sdk/commit/21ccd9b92a8078af63bedfb8386c7599d733d268) - ui-datalist/ written base code for extension fields filter config [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`5c7db3f`](https://github.com/webitel/webitel-ui-sdk/commit/5c7db3fabb4cfcdf1e7558a1f04d8e6e2023bba3) - ui-datalist/ filter case-assignee FilterConfig [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`6d6506a`](https://github.com/webitel/webitel-ui-sdk/commit/6d6506ab35b3e0db7ebc6b06b42c74d160b6cedf) - ui-datalist/ filter config form value input wrapper for all value-input components [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`e239cc8`](https://github.com/webitel/webitel-ui-sdk/commit/e239cc892c4535550a9da9886b96fc93a9f9b121) - ui-sdk/ sysTypes.ts and typeExtensions.ts api [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`5f304fb`](https://github.com/webitel/webitel-ui-sdk/commit/5f304fb6e29ee69b92d2879f7993cbe90fd873fd) - ui-datalist/ case assignee filter config in progress [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`33e8e29`](https://github.com/webitel/webitel-ui-sdk/commit/33e8e294af0b3e117f2e22c036953df6da98ce54) - ui-datalist filter configs + related refactors [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`bda38b1`](https://github.com/webitel/webitel-ui-sdk/commit/bda38b1713e3921396f1283b37e5a5ba53794c4f) - gh release workflow [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`cd62cfe`](https://github.com/webitel/webitel-ui-sdk/commit/cd62cfe72c6a671198a2d79acba214eb03bbc095) - save preset in filters[WTEL-6739](https://webitel.atlassian.net/browse/WTEL-6739) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`399ee8a`](https://github.com/webitel/webitel-ui-sdk/commit/399ee8a0b4f96c600a26c93fd7f7e33be67d27f8) - update @webitel/ui-sdk to version 25.4.66 and refactor component usage[WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`2368684`](https://github.com/webitel/webitel-ui-sdk/commit/236868467f9f1ca30d3cbe42aa5f5c734d74a067) - gh workflows [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`6977767`](https://github.com/webitel/webitel-ui-sdk/commit/6977767f2e67eb1e450e5b6fe0a0b554b278c426) - update filter configuration handling and improve component integration[WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.65] - 2025-04-22
 ### :sparkles: New Features
 - [`39c20ad`](https://github.com/webitel/webitel-ui-sdk/commit/39c20ad07cee89d0c332851f41c20acce2b78c2a) - add new icon *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
@@ -1913,3 +1933,4 @@
 [v25.4.62]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.61...v25.4.62
 [v25.4.64]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.63...v25.4.64
 [v25.4.65]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.64...v25.4.65
+[v25.4.69]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.65...v25.4.69
