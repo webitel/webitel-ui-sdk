@@ -13,6 +13,15 @@
         @input="model = $event"
       />
     </template>
+    <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
+      <wt-select
+        v-bind="defaultProps"
+        :value="model ?? [] /* so that component won't break when model is nullish at init */"
+        :search-method="(...params) => props.filterConfig.searchRecords(...params)"
+        use-value-from-options-by-prop="id"
+        @input="model = $event"
+      />
+    </template>
   </wt-type-extension-value-input>
 </template>
 

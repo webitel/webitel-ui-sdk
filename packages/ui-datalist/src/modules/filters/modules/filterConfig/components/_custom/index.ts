@@ -1,4 +1,5 @@
 import { sysTypes } from '@webitel/ui-sdk/api/clients/index';
+import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { FilterConfig } from '../../classes/FilterConfig';
@@ -61,7 +62,9 @@ export const createTypeExtensionFilterConfig = (
   { field }: { field: WebitelProtoDataField },
 ) => {
   switch (field.kind) {
-    case 'lookup':
+    case WtTypeExtensionFieldKind.Select:
+      return new TypeExtensionWtSysTypeFieldFilterConfig(name, { field });
+    case WtTypeExtensionFieldKind.Multiselect:
       return new TypeExtensionWtSysTypeFieldFilterConfig(name, { field });
     default:
       return new TypeExtensionFilterConfig(name, { field });

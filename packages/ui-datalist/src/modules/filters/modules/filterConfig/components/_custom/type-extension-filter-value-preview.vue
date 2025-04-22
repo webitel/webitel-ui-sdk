@@ -20,7 +20,6 @@ import { ITypeExtensionFilterConfig } from './index';
 const props = defineProps<DynamicFilterPreviewComponentProps & { filterConfig: ITypeExtensionFilterConfig }>();
 
 const showLookupValuePreview = computed(() => {
-  console.info(WtTypeExtensionFieldKind.Multiselect, WtTypeExtensionFieldKind.Select, props.filterConfig.field.kind);
   return [WtTypeExtensionFieldKind.Multiselect, WtTypeExtensionFieldKind.Select]
     .includes(props.filterConfig.field.kind);
 });
