@@ -180,6 +180,7 @@ import stopSign from './stop-sign.svg';
 import stt from './stt.svg';
 import sttDownload from './stt-download.svg';
 import sttSearch from './stt-search.svg';
+import table from './table.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import treeCollapse from './tree-collapse.svg';
@@ -330,6 +331,7 @@ export default objCamelToKebab({
   numpad,
   pause,
   play,
+  table,
   treeExpand,
   prompter,
   queueMember,
