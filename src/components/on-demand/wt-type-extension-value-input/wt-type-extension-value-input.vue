@@ -66,8 +66,8 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
-import { getSysTypeRecordsLookup } from "../../../../../../../../../src/api/clients/wtTypes/sysTypes/sysTypes";
-import { ExtensionFieldType as FieldType } from "./FieldType";
+import { getSysTypeRecordsLookup } from "../../../api/clients/wtTypes/sysTypes/sysTypes";
+import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
 
 // TODO: move to api file, mb? 🤔
 //  Number for convert time from seconds to milliseconds, when send to backend and display on frontend

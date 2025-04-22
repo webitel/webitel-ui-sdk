@@ -3,7 +3,7 @@
  * @description Enumerates (ONLY!) the types of field type.
  */
 
-export const ExtensionFieldType = {
+export const WtTypeExtensionFieldKind = {
   Text: 'string',
   Number: 'int32',
   Select: 'lookup',
@@ -13,4 +13,4 @@ export const ExtensionFieldType = {
 } as const;
 
 export type ExtensionFieldType =
-  (typeof ExtensionFieldType)[keyof typeof ExtensionFieldType];
+  (typeof WtTypeExtensionFieldKind)[keyof typeof WtTypeExtensionFieldKind];
