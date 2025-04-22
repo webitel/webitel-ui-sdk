@@ -4,6 +4,11 @@
     v-model:model-value="model"
     :field="props.filterConfig.field"
   >
+    <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
+      <has-option-filter-value-field
+        v-model:model-value="model"
+      />
+    </template>
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-select
         v-bind="defaultProps"
@@ -32,6 +37,7 @@ import { WtSelect, WtTypeExtensionValueInput } from '@webitel/ui-sdk/components'
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
 import {computed, useAttrs, watch} from "vue";
 
+import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 import {ITypeExtensionFilterConfig} from "./index";
 
 const model = defineModel<unknown>();

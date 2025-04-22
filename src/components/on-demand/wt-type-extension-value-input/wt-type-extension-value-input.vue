@@ -12,12 +12,17 @@
     type="number"
     @input="setValue"
   />
-  <wt-switcher
+  <slot
     v-else-if="field.kind === FieldType.Boolean"
-    v-bind="sharedChildrenProps"
-    :value="value"
-    @change="setValue"
-  />
+    :name="FieldType.Boolean"
+    :default-props="{ ...sharedChildrenProps }"
+  >
+    <wt-switcher
+      v-bind="sharedChildrenProps"
+      :value="value"
+      @change="setValue"
+    />
+  </slot>
   <slot
     v-else-if="field.kind === FieldType.Select"
     :name="FieldType.Select"
