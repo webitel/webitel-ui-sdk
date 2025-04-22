@@ -4,9 +4,9 @@ import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { FilterName, IFilter } from '../classes/Filter';
 import { IFiltersManager } from '../classes/FiltersManager';
+import { createFilterConfig } from '../modules/filterConfig/classes/createFilterConfig';
 import {
   BaseFilterConfig,
-  createFilterConfig,
   FilterConfig,
 } from '../modules/filterConfig/classes/FilterConfig';
 import { createTypeExtensionFilterConfig } from '../modules/filterConfig/components/_custom';
