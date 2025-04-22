@@ -59,10 +59,6 @@ import ContactGroupFilter from './contact-group/contact-group-filter-value-field
 import ContactGroupFilterPreview from './contact-group/contact-group-filter-value-preview.vue';
 import CreatedAtFilterValueField from './created-at/created-at-filter-value-field.vue';
 import CreatedAtFilterPreview from './created-at/created-at-filter-value-preview.vue';
-import CreatedAtFromFilter from './created-at-from/created-at-from-filter-value-field.vue';
-import CreatedAtFromFilterPreview from './created-at-from/created-at-from-filter-value-preview.vue';
-import CreatedAtToFilter from './created-at-to/created-at-to-filter-value-field.vue';
-import CreatedAtToFilterPreview from './created-at-to/created-at-to-filter-value-preview.vue';
 import { searchMethod as gatewaySearchMethod } from './gateway/config';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
@@ -144,10 +140,6 @@ export {
   ContactGroupFilter,
   ContactGroupFilterPreview,
   CreatedAtFilterValueField,
-  CreatedAtFromFilter,
-  CreatedAtFromFilterPreview,
-  CreatedAtToFilter,
-  CreatedAtToFilterPreview,
   GatewayFilter,
   GatewayFilterPreview,
   GranteeFilter,
@@ -208,8 +200,6 @@ export const FilterOptionToValueComponentMap: Record<
   [FilterOption.User]: UserFilter,
   [FilterOption.Variable]: VariableFilter,
   [FilterOption.CreatedAt]: CreatedAtFilterValueField,
-  [FilterOption.CreatedAtFrom]: CreatedAtFromFilter,
-  [FilterOption.CreatedAtTo]: CreatedAtToFilter,
   [FilterOption.CaseStatus]: CaseStatusFilterValueField,
   [FilterOption.CaseSource]: CaseSourceFilterValueField,
   [FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -254,8 +244,6 @@ export const FilterOptionToPreviewComponentMap: Record<
   [FilterOption.HasTranscription]: HasTranscriptionFilterPreview,
   [FilterOption.User]: UserFilterPreview,
   [FilterOption.Variable]: VariableFilterPreview,
-  [FilterOption.CreatedAtFrom]: CreatedAtFromFilterPreview,
-  [FilterOption.CreatedAtTo]: CreatedAtToFilterPreview,
   [FilterOption.CaseStatus]: CaseStatusFilterValuePreview,
   [FilterOption.CaseSource]: CaseSourceFilterValuePreview,
   [FilterOption.CaseService]: CaseServiceFilterValuePreview,

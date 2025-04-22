@@ -19,8 +19,6 @@ export const FilterOption = {
   User: 'user',
   Variable: 'variable',
   CreatedAt: 'createdAt',
-  CreatedAtFrom: 'createdAtFrom',
-  CreatedAtTo: 'createdAtTo',
   CaseStatus: 'status',
   CaseSource: 'source',
   CaseService: 'service',
