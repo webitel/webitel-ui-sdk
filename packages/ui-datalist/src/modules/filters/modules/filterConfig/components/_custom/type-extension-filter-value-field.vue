@@ -1,5 +1,5 @@
 <template>
-  <type-extension-value-field
+  <wt-type-extension-value-input
     v-bind="attrs"
     v-model:model-value="model"
     :field="props.filterConfig.field"
@@ -13,19 +13,17 @@
         @input="model = $event"
       />
     </template>
-  </type-extension-value-field>
+  </wt-type-extension-value-input>
 </template>
 
 <script setup lang="ts">
 import {useVuelidate} from "@vuelidate/core";
 import {required} from "@vuelidate/validators";
-import { WtSelect } from '@webitel/ui-sdk/components';
+import { WtSelect, WtTypeExtensionValueInput } from '@webitel/ui-sdk/components';
+import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
 import {computed, useAttrs, watch} from "vue";
 
-// DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
-import { ExtensionFieldType } from "./FieldType";
 import {ITypeExtensionFilterConfig} from "./index";
-import TypeExtensionValueField from "./type-extension-value-field.vue";
 
 const model = defineModel<unknown>();
 
