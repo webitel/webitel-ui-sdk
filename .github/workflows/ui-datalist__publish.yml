@@ -10,39 +10,12 @@ jobs:
 #  install_deps:
 #    runs-on: ubuntu-latest
 #    steps:
-#      - uses: actions/checkout@v4
-#
-#      - run: cd packages/ui-datalist #!
-#
-#      - name: Cache node_modules
-#        uses: actions/cache@v4
-#        id: cache_node_modules
-#        with:
-#          path: node_modules
-#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-#
-#      - name: Use Node.js
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: lts/*
-#          check-latest: true
-#
-#      - name: Install dependencies
-#        if: steps.cache_node_modules.outputs.cache-hit != 'true'
-#        run: npm ci
 
   publish:
 #    needs: [install_deps]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # - run: cd packages/ui-datalist #!
-
-#      - uses: actions/cache@v3
-#        with:
-#          path: node_modules
-#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Use Node.js
         uses: actions/setup-node@v4
