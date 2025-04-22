@@ -4,7 +4,7 @@
     v-model:model-value="model"
     :field="props.filterConfig.field"
   >
-    <template #[ExtensionFieldType.Select]="{ defaultProps }">
+    <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-select
         v-bind="defaultProps"
         :value="model ?? [] /* so that component won't break when model is nullish at init */"

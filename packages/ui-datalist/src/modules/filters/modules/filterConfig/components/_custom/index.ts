@@ -1,13 +1,13 @@
 import { sysTypes } from '@webitel/ui-sdk/api/clients/index';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
+import { FilterConfig } from '../../classes/FilterConfig';
+import { CustomFilterOption } from '../../enums/FilterOption';
 import {
   BaseFilterConfig,
-  FilterConfig,
   FilterConfigBaseParams,
   IWtSysTypeFilterConfig,
-} from '../../classes/FilterConfig';
-import { CustomFilterOption } from '../../enums/FilterOption';
+} from '../../types/FilterConfig';
 import TypeExtensionFilterValueField from './type-extension-filter-value-field.vue';
 import TypeExtensionFilterValuePreview from './type-extension-filter-value-preview.vue';
 
