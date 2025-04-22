@@ -25,6 +25,8 @@ import skills from './skills/skills.js';
 import slas from './slas/slas.js';
 import teams from './teams/teams.js';
 import users from './users/users.js';
+import sysTypes from './wtTypes/sysTypes/sysTypes';
+import typeExtensions from './wtTypes/typeExtensions/typeExtensions';
 import { contactChatMessagesHistory, contacts } from './сontacts/index.js';
 
 export {
@@ -55,6 +57,8 @@ export {
   roles,
   skills,
   slas,
+  sysTypes,
   teams,
+  typeExtensions,
   users,
 };
