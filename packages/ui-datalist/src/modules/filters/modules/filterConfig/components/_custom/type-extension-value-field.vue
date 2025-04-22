@@ -18,8 +18,16 @@
     :value="value"
     @change="setValue"
   />
-  <wt-select
+  <slot
     v-else-if="field.kind === FieldType.Select"
+    :name="FieldType.Select"
+    :default-props="{
+        ...sharedChildrenProps,
+        ...selectProps,
+        value,
+      }"
+  >
+  <wt-select
     v-bind="sharedChildrenProps"
     :value="value"
     :search-method="loadLookupList(field.lookup)"
@@ -27,16 +35,22 @@
     clearable
     @input="selectElement"
   />
-  <wt-select
+  </slot>
+  <slot
     v-else-if="field.kind === FieldType.Multiselect"
-    v-bind="sharedChildrenProps"
-    :value="value"
-    :search-method="loadLookupList(field.lookup)"
-    track-by="id"
-    clearable
-    multiple
-    @input="selectElements"
-  />
+    :name="FieldType.Multiselect"
+    :default-props="{
+      ...sharedChildrenProps,
+      ...multiselectProps,
+      value,
+    }"
+  >
+    <wt-select
+      v-bind="{ ...sharedChildrenProps, ...multiselectProps }"
+      :value="value"
+      @input="selectElements"
+    />
+  </slot>
   <wt-datepicker
     v-else-if="field.kind === FieldType.Calendar"
     v-bind="sharedChildrenProps"
@@ -88,6 +102,23 @@ const sharedChildrenProps = computed(() => ({
   label: label.value,
   required: isRequired.value,
   v: props.v,
+}));
+
+/**
+ * @author @dlohvinov
+ *
+ * props as computed is needed to pass it either
+ * to slot and to default in-slot component
+ */
+const selectProps = computed(() => ({
+  clearable: true,
+  trackBy: 'id',
+  searchMethod: () => loadLookupList(props.field.lookup),
+}));
+
+const multiselectProps = computed(() => ({
+  ...selectProps.value,
+  multiple: true,
 }));
 
 const setValue = (value) => {

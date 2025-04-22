@@ -1,6 +1,6 @@
 <template>
   <div class="type-extension-filter-value-preview">
-
+213
   </div>
 </template>
 

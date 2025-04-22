@@ -1,22 +1,38 @@
 import { sysTypes } from '@webitel/ui-sdk/api/clients/index';
+import { WebitelProtoDataField } from 'webitel-sdk';
 
 import {
+  BaseFilterConfig,
   FilterConfig,
   FilterConfigBaseParams,
   IWtSysTypeFilterConfig,
-  TFilterConfig,
 } from '../../classes/FilterConfig';
 import { CustomFilterOption } from '../../enums/FilterOption';
 import TypeExtensionFilterValueField from './type-extension-filter-value-field.vue';
 import TypeExtensionFilterValuePreview from './type-extension-filter-value-preview.vue';
 
-class TypeExtensionFilterConfig extends FilterConfig {
-  constructor({ name }: FilterConfigBaseParams) {
+export interface ITypeExtensionFilterConfig extends BaseFilterConfig {
+  readonly field: WebitelProtoDataField;
+}
+
+class TypeExtensionFilterConfig
+  extends FilterConfig
+  implements ITypeExtensionFilterConfig
+{
+  readonly field: WebitelProtoDataField;
+
+  constructor(
+    { name }: FilterConfigBaseParams,
+    { field }: { field: WebitelProtoDataField },
+  ) {
     super({
       name,
       valueInputComponent: TypeExtensionFilterValueField,
       valuePreviewComponent: TypeExtensionFilterValuePreview,
     });
+
+    this.label = field.name;
+    this.field = field;
   }
 }
 
@@ -26,18 +42,15 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 {
   searchRecords(
     { id: filterValue, ...rest },
-    {
-      // filterName,
-      // filterValue,
-      filterConfig,
-    }: {
-      filterName: FilterName;
-      filterConfig: TFilterConfig;
-    },
+    // {
+    //   filterValue,
+    // }: {
+    //   filterValue: unknown;
+    // },
   ): Promise<{ items: unknown[]; next?: boolean }> {
-    return sysTypes.extensionFieldSearchMethod({
+    return sysTypes.getLookup({
       ...rest,
-      ...filterConfig.entensionField.lookup,
+      ...this.field.lookup,
       id: filterValue,
     });
   }
@@ -45,9 +58,12 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 
 export const createTypeExtensionFilterConfig = (
   name: CustomFilterOption,
-  { field },
+  { field }: { field: WebitelProtoDataField },
 ) => {
-  switch (field) {
+  switch (field.kind) {
+    case 'lookup':
+      return new TypeExtensionWtSysTypeFieldFilterConfig(name, { field });
     default:
+      return new TypeExtensionFilterConfig(name, { field });
   }
 };

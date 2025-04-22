@@ -7,7 +7,7 @@
       >
         <template #activator>
           <wt-chip color="primary">
-            {{ filter.label || t(`webitelUI.filters.${filter.name}`) }}
+            {{ filter.label || filterConfig.label }}
             <wt-icon-btn
               v-if="!filterConfig.notDeletable && !readonly"
               icon="close--filled"
@@ -21,7 +21,7 @@
         <template #default>
           <dynamic-filter-preview-info>
             <template #header>
-              {{ t(`webitelUI.filters.${props.filter.name}`) }}
+              {{ filterConfig.label }}
             </template>
 
             <template #default>
@@ -51,7 +51,7 @@
       >
         <dynamic-filter-config-form
           :filter="props.filter"
-          :options="filterOptions"
+          :filter-config="filterConfig"
           @cancel="() => tooltipSlotScope.hide()"
           @submit="
             (payload) => submit(payload, { hide: tooltipSlotScope.hide })
@@ -113,8 +113,14 @@ const fillLocalValue = async (filter = props.filter) => {
   const filterName = props.filter.name;
   const filterValue = filter.value;
 
-  const valueSearchMethod = props.filterConfig.searchRecords
-    /* compat */ || FilterOptionToPreviewApiSearchMethodMap[filterName];
+  let valueSearchMethod;
+
+  if (props.filterConfig.searchRecords) {
+    /* arrow fn here preserves filterConfig class "this" */
+    valueSearchMethod = (...params) => props.filterConfig.searchRecords(...params)
+  } else {
+    valueSearchMethod = /* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
+  }
 
   if (valueSearchMethod) {
     const { items } = await valueSearchMethod({ id: filterValue }, {

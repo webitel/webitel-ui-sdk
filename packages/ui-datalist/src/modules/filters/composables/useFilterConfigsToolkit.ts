@@ -83,7 +83,7 @@ export const useFilterConfigsToolkit = ({
         .concat(
           filterableExtensionFields.map((field: WebitelProtoDataField) => {
             return createTypeExtensionFilterConfig(
-              { name: field.name },
+              { name: field.id },
               { field },
             );
           }),
