@@ -108,6 +108,10 @@ const getList = async (params) => {
       q: searchValue || '',
       qin: searchKey || '',
     };
+
+    if (params.parentId) {
+      changedParams.groupId = [params.parentId];
+    }
   }
 
   const transformations = [
@@ -129,8 +133,8 @@ const getList = async (params) => {
       id,
       qin,
       mode,
-      group_id,
       not_id_group,
+      group_id,
     );
 
     const { items, next } = applyTransform(
