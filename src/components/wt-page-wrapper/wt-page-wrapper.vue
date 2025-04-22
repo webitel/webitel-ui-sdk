@@ -1,6 +1,6 @@
 <template>
   <section class="wt-page-wrapper">
-    <div class="wt-page-wrapper__header">
+    <div v-if="!hideHeader" class="wt-page-wrapper__header">
       <slot name="header" />
     </div>
     <div
@@ -19,6 +19,10 @@
 export default {
   name: 'WtPageWrapper',
   props: {
+    hideHeader: {
+      type: Boolean,
+      default: false,
+    },
     actionsPanel: {
       type: Boolean,
       default: true,
