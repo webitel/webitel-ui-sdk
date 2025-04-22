@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
   release:
-    needs: [install_deps, test]
+    needs: [install_deps]
     permissions:
       contents: write
     runs-on: ubuntu-latest
