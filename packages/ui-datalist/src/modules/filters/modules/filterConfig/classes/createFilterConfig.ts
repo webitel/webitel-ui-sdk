@@ -3,7 +3,6 @@ import {
   FilterOptionToPreviewComponentMap,
   FilterOptionToValueComponentMap,
 } from '../components';
-import { FilterOption } from '../enums/FilterOption';
 import {
   BaseFilterConfig,
   FilterConfig,
@@ -14,7 +13,7 @@ export const createFilterConfig = ({
   name,
 }: Partial<FilterConfigBaseParams> &
   Pick<FilterConfigBaseParams, 'name'>): BaseFilterConfig => {
-  const filterConfigClass = FilterOptionToFilterConfigCreatorMap[filterOption];
+  const filterConfigClass = FilterOptionToFilterConfigCreatorMap[name];
 
   if (filterConfigClass) {
     return filterConfigClass();
@@ -24,8 +23,8 @@ export const createFilterConfig = ({
    * @author @dlohvinov
    * */
   return new FilterConfig({
-    name: filterOption,
-    valueInputComponent: FilterOptionToValueComponentMap[filterOption],
-    valuePreviewComponent: FilterOptionToPreviewComponentMap[filterOption],
+    name,
+    valueInputComponent: FilterOptionToValueComponentMap[name],
+    valuePreviewComponent: FilterOptionToPreviewComponentMap[name],
   });
 };
