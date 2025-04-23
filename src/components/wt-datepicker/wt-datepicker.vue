@@ -2,12 +2,14 @@
   <div
     :class="{
       'wt-datepicker--disabled': disabled,
+      'wt-datepicker--invalid': invalid,
     }"
     class="wt-datepicker"
   >
     <wt-label
       :disabled="disabled"
       v-bind="labelProps"
+      :invalid="invalid"
     >
       <!-- @slot Custom input label -->
       <slot
@@ -72,6 +74,12 @@
         </div>
       </template>
     </vue-datepicker>
+    <wt-input-info
+      v-if="isValidation"
+      :invalid="invalid"
+    >
+      {{ validationText }}
+    </wt-input-info>
   </div>
 </template>
 
@@ -79,7 +87,10 @@
 import '@vuepic/vue-datepicker/dist/main.css';
 
 import VueDatepicker from '@vuepic/vue-datepicker';
-import { computed, ref } from 'vue';
+import { computed, ref, toRefs } from 'vue';
+
+import { useValidation } from '../../mixins/validationMixin/useValidation.js';
+import WtInputInfo from '../wt-input-info/wt-input-info.vue';
 
 const props = defineProps({
   /**
@@ -134,6 +145,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
+  // validation rules
+  // TODO: move to separate file to make it reusable
+  v: {
+    type: Object,
+  },
   clearable: {
     type: Boolean,
     default: false,
@@ -148,6 +165,14 @@ const isDateTime = props.mode === 'datetime';
 
 const requiredLabel = computed(() => {
   return props.required ? `${props.label}*` : props.label;
+});
+
+// https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
+const { v, customValidators } = toRefs(props);
+
+const { isValidation, invalid, validationText } = useValidation({
+  v,
+  customValidators,
 });
 
 const clearValue = () => {
@@ -255,6 +280,27 @@ const clearValue = () => {
     gap: var(--spacing-xs);
   }
 }
+
+.wt-datepicker--invalid :deep(.dp__main) {
+  .dp__input {
+    outline: none; // prevent outline overlapping false color
+    border-color: var(--wt-text-field-input-border-error-color);
+    color: var(--wt-text-field-error-text-color);
+  }
+
+  .dp__input_icon {
+    --icon-color: var(--wt-text-field-input-border-error-color);
+  }
+}
+
+// Invalid styles
+//.wt-datepicker--invalid &,
+//.wt-datepicker--invalid:hover & {
+//  outline: none; // prevent outline overlapping false color
+//  border-color: var(--wt-text-field-input-border-error-color);
+//  color: var(--wt-text-field-error-text-color);
+//  @include wt-placeholder('error');
+//}
 
 .datepicker__timepicker {
   display: flex;
