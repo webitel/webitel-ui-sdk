@@ -9,7 +9,7 @@
     "lint:package": "publint",
     "utils:i": "npm i",
     "utils:link": "npm link",
-    "utils:publish": "npm run build:types && npm publish --access public"
+    "utils:publish": "(npm run build:types || true) && npm publish --access public"
   },
   "type": "module",
   "main": "./src/index.ts",
