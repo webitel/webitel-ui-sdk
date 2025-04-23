@@ -293,15 +293,6 @@ const clearValue = () => {
   }
 }
 
-// Invalid styles
-//.wt-datepicker--invalid &,
-//.wt-datepicker--invalid:hover & {
-//  outline: none; // prevent outline overlapping false color
-//  border-color: var(--wt-text-field-input-border-error-color);
-//  color: var(--wt-text-field-error-text-color);
-//  @include wt-placeholder('error');
-//}
-
 .datepicker__timepicker {
   display: flex;
   align-items: center;
