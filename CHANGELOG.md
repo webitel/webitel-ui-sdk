@@ -1,3 +1,16 @@
+## [v25.4.70] - 2025-04-23
+### :sparkles: New Features
+- [`287b34c`](https://github.com/webitel/webitel-ui-sdk/commit/287b34c6b65c817a50caadfe9e025201d95f6671) - remove comment into styles [WTEL-6389](https://webitel.atlassian.net/browse/WTEL-6389) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+- [`d9edade`](https://github.com/webitel/webitel-ui-sdk/commit/d9edadeb59775a42b7d30d54efc44d26ee3ef5f4) - implement validation for datepicker component [WTEL-6389](https://webitel.atlassian.net/browse/WTEL-6389) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+- [`6314b8f`](https://github.com/webitel/webitel-ui-sdk/commit/6314b8f4e9566a1e9cf29bd1f3667ac8fddd2cd0) - type extension filter preview for datetime kind [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`5d72440`](https://github.com/webitel/webitel-ui-sdk/commit/5d72440fa3e89770f33cebf8db70aa6bdac4728f) - type extension filter preview for bool kind [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`714470b`](https://github.com/webitel/webitel-ui-sdk/commit/714470bbdc697bcfa656d899bb68e575fd738eac) - type extension filter preview for multiselect kind [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`3f01c6e`](https://github.com/webitel/webitel-ui-sdk/commit/3f01c6e0c00f7106e3c6ecf7b2c7dd14219f832b) - type extension filter preview for select kind [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`675aa3f`](https://github.com/webitel/webitel-ui-sdk/commit/675aa3f30b31b9f4badd1662962038dafa6e7b25) - FilterConfig.ts circular deps issue [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.69] - 2025-04-22
 ### :sparkles: New Features
 - [`44c5a72`](https://github.com/webitel/webitel-ui-sdk/commit/44c5a7284a134c25bcf7c6a212993401052e2fc6) - add on-demand/WtTypeExtensionValueInput.vue, WtTypeExtensionFieldKind.ts enum and update related imports [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1934,3 +1947,4 @@
 [v25.4.64]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.63...v25.4.64
 [v25.4.65]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.64...v25.4.65
 [v25.4.69]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.65...v25.4.69
+[v25.4.70]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.69...v25.4.70
