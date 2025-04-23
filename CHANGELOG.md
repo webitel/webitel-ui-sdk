@@ -1,3 +1,8 @@
+## [v25.4.71] - 2025-04-23
+### :sparkles: New Features
+- [`32eadb0`](https://github.com/webitel/webitel-ui-sdk/commit/32eadb01325a0ea6c07f3fdec4814817cd980694) - update package version to 25.4.71 [WTEL-6389](https://webitel.atlassian.net/browse/WTEL-6389) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.70] - 2025-04-23
 ### :sparkles: New Features
 - [`287b34c`](https://github.com/webitel/webitel-ui-sdk/commit/287b34c6b65c817a50caadfe9e025201d95f6671) - remove comment into styles [WTEL-6389](https://webitel.atlassian.net/browse/WTEL-6389) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1948,3 +1953,4 @@
 [v25.4.65]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.64...v25.4.65
 [v25.4.69]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.65...v25.4.69
 [v25.4.70]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.69...v25.4.70
+[v25.4.71]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.70...v25.4.71
