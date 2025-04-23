@@ -59,7 +59,7 @@ export const useFilterConfigsToolkit = ({
           }
 
           if (typeof opt === 'string') {
-            return createFilterConfig({ filterOption: opt });
+            return createFilterConfig({ name: opt });
           }
 
           return new FilterConfig({

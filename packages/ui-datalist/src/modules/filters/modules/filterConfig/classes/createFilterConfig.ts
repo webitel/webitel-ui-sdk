@@ -4,28 +4,24 @@ import {
   FilterOptionToValueComponentMap,
 } from '../components';
 import { FilterOption } from '../enums/FilterOption';
-import { BaseFilterConfig, FilterConfig } from './FilterConfig';
+import {
+  BaseFilterConfig,
+  FilterConfig,
+  FilterConfigBaseParams,
+} from './FilterConfig';
 
 export const createFilterConfig = ({
-  filterOption,
-}: {
-  filterOption: FilterOption;
-}): BaseFilterConfig => {
+  name,
+}: Partial<FilterConfigBaseParams> &
+  Pick<FilterConfigBaseParams, 'name'>): BaseFilterConfig => {
   const filterConfigClass = FilterOptionToFilterConfigCreatorMap[filterOption];
 
   if (filterConfigClass) {
     return filterConfigClass();
   }
 
-  // throw new Error(
-  //   `Filter config class not found for this filter option: ${filterOption}`,
-  // );
-
   /**
    * @author @dlohvinov
-   *
-   * @deprecated
-   * compat. should be removed with FilterOption to Component maps
    * */
   return new FilterConfig({
     name: filterOption,

@@ -26,7 +26,7 @@ export interface FilterEnumOption {
   value: FilterValue;
 }
 
-export interface FilterConfig {
+export interface FilterInstanceConfig {
   /**
    * Perform simple type conversion on store/restore,
    * without need to provide custom store/restore functions
@@ -53,7 +53,7 @@ export class Filter implements IFilter {
   constructor(
     { name, value, label }: FilterInitParams,
     public payload: object | undefined,
-    public config: FilterConfig,
+    public config: FilterInstanceConfig,
   ) {
     this.name = name;
     this.value = value;

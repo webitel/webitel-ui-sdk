@@ -1,19 +1,21 @@
 import {
   Filter,
-  FilterConfig,
   FilterInitParams,
-  FilterLabel, FilterName,
+  FilterInstanceConfig,
+  FilterLabel,
+  FilterName,
   FilterValue,
-  IFilter
+  IFilter,
 } from './classes/Filter';
 import {
   createFiltersManager,
   FiltersManagerConfig,
-  IFiltersManager
+  IFiltersManager,
 } from './classes/FiltersManager';
 import DynamicFilterSearchComponent from './components/search-bar/dynamic-filter-search.vue';
 import TableFiltersPanelComponent from './components/table-filters-panel.vue';
 import { FilterOption } from './modules/filterConfig/enums/FilterOption';
+export * from './modules/filterConfig';
 
 export {
   createFiltersManager,
@@ -24,8 +26,8 @@ export {
 };
 
 export type {
-  FilterConfig,
   FilterInitParams,
+  FilterInstanceConfig,
   FilterLabel,
   FilterName,
   FiltersManagerConfig,

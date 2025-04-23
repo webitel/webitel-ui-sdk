@@ -10,9 +10,8 @@
 import { watch } from 'vue';
 
 import { useBooleanFilterValueValidation } from '../../composables/booleanFilterToolkit';
-import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
-
 import {BooleanFilterModelValue} from "../../enums/options/BooleanFilterOptions";
+import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 
 const model = defineModel<BooleanFilterModelValue>();
 

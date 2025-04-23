@@ -8,9 +8,9 @@ import {
 } from '../scripts/utils';
 import {
   Filter,
-  FilterConfig,
   FilterData,
   FilterInitParams,
+  FilterInstanceConfig,
   FilterLabel,
   FilterName,
   FilterValue,
@@ -25,7 +25,7 @@ export interface IFiltersManager {
   addFilter: (
     params: FilterInitParams,
     payload?: object,
-    config?: FilterConfig,
+    config?: FilterInstanceConfig,
   ) => IFilter;
   updateFilter: ({
     name,
@@ -83,7 +83,7 @@ export interface IFiltersManager {
   }) => IFilter[];
 }
 
-export type FiltersManagerConfig = FilterConfig;
+export type FiltersManagerConfig = FilterInstanceConfig;
 
 class FiltersManager implements IFiltersManager {
   filters = new Map<FilterName, IFilter>();
@@ -101,7 +101,7 @@ class FiltersManager implements IFiltersManager {
   addFilter(
     filterInitParams: FilterInitParams,
     payload?: object,
-    config?: FilterConfig,
+    config?: FilterInstanceConfig,
   ): IFilter {
     const filter = new Filter(filterInitParams, payload, config || this.config);
     this.filters.set(filterInitParams.name, filter);

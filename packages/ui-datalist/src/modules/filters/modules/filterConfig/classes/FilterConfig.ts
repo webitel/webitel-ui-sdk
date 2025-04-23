@@ -46,6 +46,7 @@ export class FilterConfig implements BaseFilterConfig {
   valueInputComponent: Component;
   valuePreviewComponent: Component;
   label?: ReturnType<MessageResolver> | string;
+  notDeletable?: boolean;
 
   constructor({
     name,

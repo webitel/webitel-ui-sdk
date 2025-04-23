@@ -2,7 +2,6 @@ import { useVuelidate } from '@vuelidate/core';
 import { computed, ModelRef, type Reactive, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-
 import {BooleanFilterModelValue} from "../enums/options/BooleanFilterOptions";
 
 export const usePrettifyBooleanValuePreview = (

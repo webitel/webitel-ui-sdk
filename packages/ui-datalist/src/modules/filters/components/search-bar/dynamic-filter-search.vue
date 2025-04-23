@@ -15,9 +15,9 @@ import { WtSearchBar } from '@webitel/ui-sdk/components';
 import {computed, type Ref, ref,watch} from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import type { DynamicFilterSearchSearchModeOption } from './types/DynamicFilterSearch';
 import {FilterInitParams, FilterName} from "../../classes/Filter";
 import {IFiltersManager} from "../../classes/FiltersManager";
+import type { DynamicFilterSearchSearchModeOption } from './types/DynamicFilterSearch';
 
 /**
  * @description
