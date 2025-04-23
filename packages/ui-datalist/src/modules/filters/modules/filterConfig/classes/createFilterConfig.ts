@@ -9,22 +9,22 @@ import {
   FilterConfigBaseParams,
 } from './FilterConfig';
 
-export const createFilterConfig = ({
-  name,
-}: Partial<FilterConfigBaseParams> &
-  Pick<FilterConfigBaseParams, 'name'>): BaseFilterConfig => {
+export const createFilterConfig = (
+  params: BaseFilterConfigParams &
+    Required<BaseFilterConfig, 'name'> &
+    Record<string, unknown>,
+): BaseFilterConfig => {
+  const { name } = params;
+
   const filterConfigClass = FilterOptionToFilterConfigCreatorMap[name];
 
   if (filterConfigClass) {
-    return filterConfigClass();
+    return filterConfigClass(params);
   }
 
-  /**
-   * @author @dlohvinov
-   * */
   return new FilterConfig({
-    name,
     valueInputComponent: FilterOptionToValueComponentMap[name],
     valuePreviewComponent: FilterOptionToPreviewComponentMap[name],
+    ...params,
   });
 };

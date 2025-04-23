@@ -73,7 +73,7 @@ import { computed,ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {FilterData, IFilter} from "../../classes/Filter";
-import {TFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
 import {
   FilterOptionToPreviewApiSearchMethodMap,
 } from '../../modules/filterConfig/components';
@@ -87,7 +87,7 @@ interface Props {
    * @description
    * this filter config
    */
-  filterConfig: TFilterConfig;
+  filterConfig: AnyFilterConfig;
   readonly?: boolean;
 }
 

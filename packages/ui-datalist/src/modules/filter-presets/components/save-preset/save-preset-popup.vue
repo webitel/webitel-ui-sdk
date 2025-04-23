@@ -57,7 +57,7 @@ import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import type { IFiltersManager } from '../../../filters';
-import {TFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
@@ -74,7 +74,7 @@ const props = defineProps<{
    * is needed here for `.toString()`
    */
   filtersManager: IFiltersManager;
-  filterConfigs: TFilterConfig[];
+  filterConfigs: AnyFilterConfig[];
 }>();
 
 const emit = defineEmits<{

@@ -25,11 +25,11 @@ import type {IFiltersManager} from '../../../filters';
 import DynamicFilterPanelWrapper from '../../../filters/components/dynamic-filter-panel-wrapper.vue';
 import DynamicFilterPreview from '../../../filters/components/preview/dynamic-filter-preview.vue';
 import { useFilterConfigsToolkit } from "../../../filters/composables/useFilterConfigsToolkit";
-import {TFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
 
 const props = defineProps<{
   filtersManager: IFiltersManager;
-  filterConfigs: TFilterConfig[];
+  filterConfigs: AnyFilterConfig[];
 }>();
 
 const { t } = useI18n();

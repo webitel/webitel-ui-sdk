@@ -9,12 +9,12 @@
 </template>
 
 <script setup lang="ts">
-import {TFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
 
 const filterValue = defineModel<unknown>();
 
 const props = defineProps<{
-  filterConfig: TFilterConfig;
+  filterConfig: AnyFilterConfig;
   label?: string;
 }>();
 

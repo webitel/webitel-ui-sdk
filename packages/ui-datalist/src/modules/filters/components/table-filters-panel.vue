@@ -57,7 +57,7 @@ import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
 import {FilterData, IFilter} from "../classes/Filter";
 import {IFiltersManager} from "../classes/FiltersManager";
 import {useFilterConfigsToolkit} from "../composables/useFilterConfigsToolkit";
-import {TFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
 import DynamicFilterPanelWrapper from './dynamic-filter-panel-wrapper.vue';
@@ -68,7 +68,7 @@ type Props = {
    * @description
    * available filter options to set
    */
-  filterOptions: (FilterOption | TFilterConfig)[];
+  filterOptions: (FilterOption | AnyFilterConfig)[];
   /**
    * @description
    * create local filters manager from snapshot

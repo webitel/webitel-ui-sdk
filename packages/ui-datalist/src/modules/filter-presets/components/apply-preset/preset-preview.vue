@@ -89,7 +89,7 @@ import { computed, ref } from 'vue';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import { createFiltersManager } from '../../../filters';
-import {TFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
@@ -98,7 +98,7 @@ type Props = {
   preset: EnginePresetQuery;
   isSelected: boolean;
   collapsed: boolean;
-  filterConfigs: TFilterConfig[];
+  filterConfigs: AnyFilterConfig[];
 };
 
 const props = defineProps<Props>();

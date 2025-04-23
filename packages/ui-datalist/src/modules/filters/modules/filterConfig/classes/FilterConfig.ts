@@ -8,12 +8,14 @@ export interface BaseFilterConfig {
   valueInputComponent: Component;
   valuePreviewComponent: Component;
   label?: ReturnType<MessageResolver> | string;
+  notDeletable?: boolean;
 }
 
 export type FilterConfigBaseParams = {
   name?: FilterName;
   valueInputComponent?: Component;
   valuePreviewComponent?: Component;
+  notDeletable?: boolean;
 };
 
 export interface IWtSysTypeFilterConfig extends BaseFilterConfig {
@@ -39,24 +41,26 @@ export type FilterConfigSearchMethodParams = [
   },
 ];
 
-export type TFilterConfig = IWtSysTypeFilterConfig | BaseFilterConfig;
+export type AnyFilterConfig = IWtSysTypeFilterConfig | BaseFilterConfig;
 
 export class FilterConfig implements BaseFilterConfig {
   name: FilterName;
   valueInputComponent: Component;
   valuePreviewComponent: Component;
   label?: ReturnType<MessageResolver> | string;
-  notDeletable?: boolean;
+  notDeletable: boolean;
 
   constructor({
     name,
     valueInputComponent,
     valuePreviewComponent,
+    notDeletable,
   }: FilterConfigBaseParams = {}) {
     if (name) this.name = name;
     if (valueInputComponent) this.valueInputComponent = valueInputComponent;
     if (valuePreviewComponent)
       this.valuePreviewComponent = valuePreviewComponent;
+    this.notDeletable = !!notDeletable;
   }
 }
 

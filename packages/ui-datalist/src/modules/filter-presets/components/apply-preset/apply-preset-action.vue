@@ -83,7 +83,7 @@ import { computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import {TFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
 import PresetQueryAPI from '../../api/PresetQuery.ts';
 import PresetPreview from './preset-preview.vue';
 
@@ -93,7 +93,7 @@ const props = defineProps<{
    */
   namespace: string;
   usePresetsStore: Store;
-  filterConfigs: TFilterConfig[];
+  filterConfigs: AnyFilterConfig[];
 }>();
 
 const emit = defineEmits<{

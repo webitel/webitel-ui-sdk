@@ -41,7 +41,7 @@ import {
   createFiltersManager, FilterName,
   IFiltersManager,
 } from '../../../filters';
-import {TFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
 import {
   addPreset,
   getPresetList,
@@ -66,7 +66,7 @@ const props = defineProps<{
    * include in preset only filter values related to filters panel
    */
   filtersIncluded: FilterName[];
-  filterConfigs: TFilterConfig[];
+  filterConfigs: AnyFilterConfig[];
 }>();
 
 const eventBus = inject('$eventBus');
