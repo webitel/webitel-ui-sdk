@@ -14,6 +14,7 @@
         :question="question"
         :readonly="readonly"
         :result="result && result[key] ? result[key] : null"
+        :show-question-comment="showQuestionComment"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key })"
         @update:question="handleQuestionUpdate({ key, value: $event })"
@@ -63,6 +64,10 @@ const props = defineProps({
   },
   result: {
     type: Array,
+  },
+  showQuestionComment: {
+    type: Boolean,
+    default: false,
   },
   readonly: {
     type: Boolean,
@@ -125,6 +130,7 @@ function handleResultUpdate({ key, value }) {
 }
 
 function initResult() {
+  if (props.result?.length) return;       // ← prevents wiping the real data
   const result = props.questions?.map(() => ({}));
   emit('update:result', result);
 }
