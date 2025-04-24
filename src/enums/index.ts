@@ -14,6 +14,7 @@ import { SupervisorSections } from './WebitelApplications/SupervisorSections';
 import WebitelApplications from './WebitelApplications/WebitelApplications.enum.js';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
+import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
 
 export {
   AbstractUserStatus,
@@ -32,4 +33,5 @@ export {
   WebitelApplications,
   WtApplication,
   WtObject,
+  WtTypeExtensionFieldKind,
 };

@@ -32,27 +32,8 @@ jobs:
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm ci
 
-  test:
-    needs: [install_deps]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          check-latest: true
-
-      - run: npm run test:unit
-
   release:
-    needs: [install_deps, test]
+    needs: [install_deps]
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -117,42 +98,6 @@ jobs:
           commit_message: autoupdate changelog
           file_pattern: 'CHANGELOG.md'
           push_options: --force
-
-  publish:
-    needs: [release]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          check-latest: true
-          registry-url: https://registry.npmjs.org
-
-      - name: Check publish status
-        id: check_publish
-        uses: tehpsalmist/npm-publish-status-action@v1
-
-      - name: Publish release
-        id: publish_release
-        if: ${{ steps.check_publish.outputs.exists == '0' }}
-
-        run: |
-          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
-          npm run build
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-          npm publish --access public
-
-      - name: Report publish status
-        if: ${{ steps.check_publish.outputs.exists == '1' }}
-        run: echo "Package already published"
 
   build_docs:
     needs: [release]

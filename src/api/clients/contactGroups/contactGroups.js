@@ -50,7 +50,6 @@ const getContactGroupsList = async (params) => {
   const { page, size, fields, sort, id, q, name, type, enabled } =
     applyTransform(params, [
       merge(getDefaultGetParams()),
-      starToSearch('search'),
       (params) => ({ ...params, q: params.search }),
       sanitize(fieldsToSend),
       camelToSnake(),
@@ -99,6 +98,30 @@ const addStaticContactGroup = async ({ itemInstance }) => {
   try {
     const response = await contactGroupsService.createGroup(item);
     return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
+const addContactsToGroup = async ({ contactIds, id }) => {
+  try {
+    const response = await contactGroupsService.addContactsToGroup(
+      id,
+      contactIds,
+    );
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
+const removeContactsFromGroup = async ({ id, contactIds }) => {
+  try {
+    const response = await contactGroupsService.removeContactsFromGroup(
+      id,
+      contactIds,
+    );
+    return applyTransform(response.data, []);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -155,6 +178,8 @@ const ContactGroupsAPI = {
   patch: patchStaticContactGroup,
   delete: deleteStaticContactGroup,
   getLookup,
+  addContactsToGroup,
+  removeContactsFromGroup,
 
   ...generatePermissionsApi(baseUrl),
 };

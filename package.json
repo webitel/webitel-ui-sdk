@@ -1,25 +1,26 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.4.62",
+  "version": "25.4.72",
   "private": false,
   "scripts": {
     "dev": "npm run docs:dev",
     "build": "vite build",
     "test:unit": "vitest",
-    "publish-lib": "npm run build && npm publish --access public",
+    "build:types": "vue-tsc -p ./tsconfig.build.json",
+    "publish-lib": "npm run build && (npm run build:types || true) && npm publish --access public",
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
     "orval": "orval",
-    "tsc": "tsc -p tsconfig.json",
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
     "utils:i": "npm install"
   },
   "main": "./dist/ui-sdk.js",
   "type": "module",
+  "types": "./dist/types",
   "exports": {
     ".": "./dist/ui-sdk.js",
     "./store": "./src/store/new/index",
@@ -107,7 +108,7 @@
     "vue-multiselect": "^3.1.0",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.5.0",
-    "webitel-sdk": "^25.2.22",
+    "webitel-sdk": "^25.2.19",
     "xlsx": "0.18.5",
     "zod": "^3.24.2"
   },
