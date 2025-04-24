@@ -12,29 +12,30 @@
       />
 
       <dynamic-filter-add-action
-        :show-label="!appliedFilters.length"
         :filter-configs="unAppliedFiltersConfigs"
+        :show-label="!appliedFilters.length"
         @add:filter="emit('filter:add', $event)"
       />
     </template>
 
     <template #actions>
       <apply-preset-action
+        :filter-configs="filterConfigs"
         :namespace="props.presetNamespace"
         :use-presets-store="props.usePresetsStore"
-        :filter-configs="filterConfigs"
         @apply="emit('preset:apply', $event)"
       />
 
       <save-preset-action
         v-if="enablePresets"
-        :namespace="props.presetNamespace"
-        :filters-manager="props.filtersManager"
-        :filters-included="filtersIncluded"
         :filter-configs="filterConfigs"
+        :filters-included="filtersIncluded"
+        :filters-manager="props.filtersManager"
+        :namespace="props.presetNamespace"
       />
 
       <wt-icon-action
+        :disabled="!props.filtersManager.filters.size"
         action="clear"
         @click="emit('filter:reset-all')"
       />
