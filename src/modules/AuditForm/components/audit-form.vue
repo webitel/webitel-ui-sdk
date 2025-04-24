@@ -130,7 +130,7 @@ function handleResultUpdate({ key, value }) {
 }
 
 function initResult() {
-  if (props.result?.length) return;       // ← prevents wiping the real data
+  if (props.result?.length) return;
   const result = props.questions?.map(() => ({}));
   emit('update:result', result);
 }
