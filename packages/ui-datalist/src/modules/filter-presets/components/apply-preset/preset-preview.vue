@@ -41,7 +41,7 @@
 
         <wt-icon-action
           v-if="editMode"
-          :disabled="v$.$invalid"
+          :disabled="v$.$invalid || !editing"
           action="save"
           @click.stop="submitEdit"
         />
@@ -58,17 +58,18 @@
             v-if="editMode"
             v-model:model-value="editDraft.name"
             :v="v$.name"
-            @update:model-value="nameAlreadyExistsError = false"
+            @update:model-value="updatePresetName"
           />
 
           <preset-filters-preview
-            :filters-manager="filtersManager"
             :filter-configs="props.filterConfigs"
+            :filters-manager="filtersManager"
           />
 
           <preset-description-field
             v-model:model-value="editDraft.description"
             :preview-mode="!editMode"
+            @update:model-value="editing = true"
           />
         </div>
       </template>
@@ -129,7 +130,7 @@ const filtersManager = computed(() => {
 const editMode = ref(false);
 
 /**
- *  updating request in progress flag
+ *  analogue _durty param in itemInstance
  *  */
 const editing = ref(false);
 
@@ -169,7 +170,6 @@ const startEdit = ({ open: openExpansion }) => {
 };
 
 const clearEdit = () => {
-  editing.value = false;
   editMode.value = false;
 };
 
@@ -191,26 +191,31 @@ const submitEdit = () => {
     onFailure,
   });
 };
+
+const updatePresetName = () => {
+  nameAlreadyExistsError.value = false;
+  editing.value = true;
+};
 </script>
 
 <style lang="scss" scoped>
 .preset-preview-title-wrapper {
   display: flex;
-  gap: var(--spacing-xs);
   min-width: 0;
+  gap: var(--spacing-xs);
 }
 
 .preset-preview-name {
-  flex: 1 1 0;
   overflow: hidden;
-  text-overflow: ellipsis;
+  flex: 1 1 0;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .preset-preview-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
   padding: var(--spacing-xs);
+  gap: var(--spacing-xs);
 }
 </style>
