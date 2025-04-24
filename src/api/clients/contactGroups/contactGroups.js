@@ -50,7 +50,6 @@ const getContactGroupsList = async (params) => {
   const { page, size, fields, sort, id, q, name, type, enabled } =
     applyTransform(params, [
       merge(getDefaultGetParams()),
-      starToSearch('search'),
       (params) => ({ ...params, q: params.search }),
       sanitize(fieldsToSend),
       camelToSnake(),
