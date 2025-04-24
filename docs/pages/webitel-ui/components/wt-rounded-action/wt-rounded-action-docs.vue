@@ -33,6 +33,11 @@ export default {
         type: 'String',
       },
       {
+        value: 'iconPrefix',
+        code: '<wt-rounded-action icon-prefix="ws"></wt-rounded-action>',
+        type: 'String',
+      },
+      {
         value: 'iconColor',
         code: '<wt-rounded-action icon-color="secondary-50"></wt-rounded-action>',
         type: 'String',
