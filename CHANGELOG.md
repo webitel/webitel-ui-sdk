@@ -1,3 +1,23 @@
+## [v25.4.72] - 2025-04-24
+### :sparkles: New Features
+- [`45a29d2`](https://github.com/webitel/webitel-ui-sdk/commit/45a29d2bf3bda1ff9024f5099e9f337187721548) - cases extension filters [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`d3a7981`](https://github.com/webitel/webitel-ui-sdk/commit/d3a79818cc571a0686a46b90be7a89764053de47) - cases extension filters [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`91e464c`](https://github.com/webitel/webitel-ui-sdk/commit/91e464caa705022c793f080af49810ad3548373d) - search in contactGroupAPI[WTEL-6677](https://webitel.atlassian.net/browse/WTEL-6677) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`a179346`](https://github.com/webitel/webitel-ui-sdk/commit/a179346a6948a5191c09f699a196231dc5fd589e) - disabled action in presets[WTEl-6740](https://webitel.atlassian.net/browse/WTEL-6740) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`efc12f3`](https://github.com/webitel/webitel-ui-sdk/commit/efc12f3743ebb8308ce31f6dc278da2b171620a0) - restored filter.notDeletable functionality *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`82d2a39`](https://github.com/webitel/webitel-ui-sdk/commit/82d2a395635db38a36398b2f7b0b1564bf07babb) - correct filter configuration mapping by using name instead of filterOption *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`8fee296`](https://github.com/webitel/webitel-ui-sdk/commit/8fee2966eb417a74371ce72d7a506aa26b2d1285) - update publish script to prevent failure on type build *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`5431482`](https://github.com/webitel/webitel-ui-sdk/commit/543148271daf2eb89b5d5b68c998f5a780a4f316) - rename TFilterConfig to AnyFilterConfig and update related usages, restored filter.notDeletable functionality *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`55f5597`](https://github.com/webitel/webitel-ui-sdk/commit/55f5597861e4865055b35a9c3333b0fc06b0da51) - update filter configuration and import statements [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :wrench: Chores
+- [`0becffd`](https://github.com/webitel/webitel-ui-sdk/commit/0becffd5a67ad277374bf862c36347e9172657bc) - bump ui-datalist version to 1.0.16 *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.71] - 2025-04-23
 ### :sparkles: New Features
 - [`32eadb0`](https://github.com/webitel/webitel-ui-sdk/commit/32eadb01325a0ea6c07f3fdec4814817cd980694) - update package version to 25.4.71 [WTEL-6389](https://webitel.atlassian.net/browse/WTEL-6389) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -1954,3 +1974,4 @@
 [v25.4.69]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.65...v25.4.69
 [v25.4.70]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.69...v25.4.70
 [v25.4.71]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.70...v25.4.71
+[v25.4.72]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.71...v25.4.72
