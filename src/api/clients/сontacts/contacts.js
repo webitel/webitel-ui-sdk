@@ -38,8 +38,11 @@ const getList = async (params) => {
     'fields',
     'id',
     'qin',
-    'groupId',
     'notIdGroup',
+    'group',
+    'owner',
+    'label',
+    'user',
   ];
 
   if (!params.fields) {
@@ -112,6 +115,10 @@ const getList = async (params) => {
     if (params.parentId) {
       changedParams.groupId = [params.parentId];
     }
+
+    if(params.hasOwnProperty('hasUser')) {
+      changedParams.user = params.hasUser;
+    }
   }
 
   const transformations = [
@@ -120,7 +127,7 @@ const getList = async (params) => {
     camelToSnake(),
   ];
 
-  const { page, size, q, sort, fields, id, qin, mode, group_id, not_id_group } =
+  const { page, size, q, sort, fields, id, qin, mode, group, not_id_group, owner, label, user } =
     applyTransform(changedParams, transformations);
 
   try {
@@ -134,7 +141,10 @@ const getList = async (params) => {
       qin,
       mode,
       not_id_group,
-      group_id,
+      group,
+      owner,
+      label,
+      user,
     );
 
     const { items, next } = applyTransform(

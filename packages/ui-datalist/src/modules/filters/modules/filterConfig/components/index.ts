@@ -77,10 +77,10 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
-import { searchMethod as contactLabelSearchMethod } from './contact-label/config';
 import ContactLabelFilter from './contact-label/contact-label-filter-value-field.vue';
 import ContactLabelFilterPreview from './contact-label/contact-label-filter-value-preview.vue';
-import { searchMethod as contactOwnerSearchMethod } from './contact-owner/config';
+import { createContactLabelFilterConfig } from './contact-label';
+import { createContactOwnerFilterConfig } from './contact-owner'
 import ContactOwnerFilter from "./contact-owner/contact-owner-filter-value-field.vue";
 import ContactOwnerFilterPreview from "./contact-owner/contact-owner-filter-value-preview.vue";
 import { searchMethod as queueSearchMethod } from './queue/config';
@@ -298,8 +298,7 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
   [FilterOption.CaseSla]: caseSlaSearchMethod,
   [FilterOption.CaseService]: servicesSearchMethod,
   [FilterOption.CaseSource]: caseSourceSearchMethod,
-  [FilterOption.ContactLabel]: contactLabelSearchMethod,
-  [FilterOption.ContactOwner]: contactOwnerSearchMethod,
+  [FilterOption.ContactOwner]: createContactOwnerFilterConfig,
   [FilterOption.CaseStatus]: ({ id: value }) =>
     caseStatusConditionsSearchMethod({
       parentId: value?.selection,
@@ -335,4 +334,6 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
 
 export const FilterOptionToFilterConfigCreatorMap = {
   [FilterOption.CaseAssignee]: createCaseAssigneeFilterConfig,
+  [FilterOption.ContactLabel]: createContactLabelFilterConfig,
+  [FilterOption.ContactOwner]: createContactOwnerFilterConfig,
 };

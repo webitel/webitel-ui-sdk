@@ -2,7 +2,7 @@
   <wt-select
     :close-on-select="false"
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="searchMethod"
+    :search-method="props.filterConfig.searchRecords"
     :v="v$.model"
     :value="model"
     multiple
@@ -18,7 +18,11 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { searchMethod } from './config.js';
+import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+
+const props = defineProps<{
+  filterConfig: WtSysTypeFilterConfig;
+}>();
 
 type ModelValue = number[];
 

@@ -10,12 +10,14 @@
 </template>
 
 <script lang="ts" setup>
-defineProps<{
+const props = defineProps<{
   /**
-   * would be great to use a type for this
+   * would be great to use generated type for this
    * */
   value: Record<string, unknown>[];
 }>();
+
+console.log(props.value);
 </script>
 
 <style scoped></style>

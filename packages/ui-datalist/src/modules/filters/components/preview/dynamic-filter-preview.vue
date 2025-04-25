@@ -33,9 +33,9 @@
                 <component
                   :is="filterConfig.valuePreviewComponent"
                   v-else
-                  :value="localValue"
                   :filter="props.filter"
                   :filter-config="filterConfig"
+                  :value="localValue"
                 />
               </slot>
             </template>
@@ -80,6 +80,7 @@ import {
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
+import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
 
 interface Props {
   filter: IFilter;
@@ -122,6 +123,10 @@ const fillLocalValue = async (filter = props.filter) => {
     valueSearchMethod = /* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
   }
 
+  if(filterName === FilterOption.ContactLabel) {
+    return localValue.value = filterValue;
+  }
+
   if (valueSearchMethod) {
     const { items } = await valueSearchMethod({ id: filterValue }, {
       filterValue,
@@ -152,8 +157,8 @@ const deleteFilter = () => {
 <style lang="scss" scoped>
 .wt-chip {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-2xs);
 }
 

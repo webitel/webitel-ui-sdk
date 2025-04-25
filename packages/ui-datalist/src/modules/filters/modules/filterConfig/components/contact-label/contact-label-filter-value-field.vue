@@ -1,7 +1,7 @@
 <template>
   <wt-tags-input
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="searchMethod"
+    :search-method="props.filterConfig.searchRecords"
     :v="v$.model"
     :value="model"
     option-label="label"
@@ -16,7 +16,11 @@ import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { searchMethod } from './config.js';
+import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+
+const props = defineProps<{
+  filterConfig: WtSysTypeFilterConfig;
+}>();
 
 type ModelValue = number[];
 

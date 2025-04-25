@@ -28,6 +28,7 @@ import users from './users/users.js';
 import sysTypes from './wtTypes/sysTypes/sysTypes';
 import typeExtensions from './wtTypes/typeExtensions/typeExtensions';
 import { contactChatMessagesHistory, contacts } from './сontacts/index.js';
+import labels from './labels/labels.js';
 
 export {
   agentChats,
@@ -61,4 +62,5 @@ export {
   teams,
   typeExtensions,
   users,
+  labels,
 };
