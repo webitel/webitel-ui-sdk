@@ -77,10 +77,10 @@ import {AnyFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
 import {
   FilterOptionToPreviewApiSearchMethodMap,
 } from '../../modules/filterConfig/components';
+import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
-import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
 
 interface Props {
   filter: IFilter;
@@ -129,7 +129,7 @@ const fillLocalValue = async (filter = props.filter) => {
 
   if (valueSearchMethod) {
     const { items } = await valueSearchMethod({ id: filterValue }, {
-      filterValue,
+      filterValue, // тому що тут, в превʼю, передається цей 2й параметр і фільтрВелью. а в селекті ні
       filterName,
       filterConfig: props.filterConfig,
     });

@@ -14,15 +14,9 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
     params: object,
     { filterValue } = {},
   ): Promise<{ items: unknown[]; next?: boolean }> {
-    const id =
-      params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
-      params.id /* wt-select options loadings */ ||
-      filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
+    if (params.filterValue) return filterValue;
 
-    return contactLabels.getLookup({
-      ...params,
-      id,
-    });
+    return contactLabels.getLookup(params);
   }
 }
 
