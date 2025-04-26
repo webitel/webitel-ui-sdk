@@ -14,10 +14,7 @@ class ContactOwnerFilterConfig extends WtSysTypeFilterConfig {
     params: object,
     { filterValue } = {},
   ): Promise<{ items: unknown[]; next?: boolean }> {
-    const id =
-      params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
-      params.id /* wt-select options loadings */ ||
-      filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
+    const id = params.id?.list;
 
     return UsersAPI.getLookup({
       ...params,
@@ -26,5 +23,5 @@ class ContactOwnerFilterConfig extends WtSysTypeFilterConfig {
   }
 }
 
-export const createContactOwnerFilterConfig = () =>
-  new ContactOwnerFilterConfig();
+export const createContactOwnerFilterConfig = (params) =>
+  new ContactOwnerFilterConfig(params);

@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { FilterOption } from '../../../packages/ui-datalist/src/modules/filters/modules/filterConfig/enums/FilterOption';
 
 import {
   AuditorSections,
@@ -168,7 +169,7 @@ export default {
     totalDuration: 'Общая длительность',
     transcription: 'Транскрипция',
     attachment: 'Вложение | Вложения',
-    manager: 'Владелец | Владельцы',
+    owner: 'Владелец | Владельцы',
     queue: {
       queue: 'Очередь | Очереди',
       type: {
@@ -552,7 +553,7 @@ export default {
       contact: ({ linked }) => {
         return linked('vocabulary.contact');
       },
-      contactGroup: ({ linked }) => {
+      [FilterOption.ContactGroup]: ({ linked }) => {
         return linked('cases.groupPerformers');
       },
       createdAt: ({ linked }) => {
@@ -582,17 +583,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
-      hasUser: ({ linked }) => {
+      [FilterOption.HasUser]: ({ linked }) => {
         return linked('objects.user');
       },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
       },
-      label: ({ linked }) => {
+      [FilterOption.ContactLabel]: ({ linked }) => {
         return linked('vocabulary.labels');
       },
-      owner: ({ linked }) => {
-        return linked('objects.manager');
+      [FilterOption.ContactOwner]: ({ linked }) => {
+        return linked('objects.owner');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');

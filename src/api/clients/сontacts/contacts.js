@@ -116,8 +116,18 @@ const getList = async (params) => {
       changedParams.groupId = [params.parentId];
     }
 
-    if(params.hasOwnProperty('hasUser')) {
+    if(params.hasUser != null) {
       changedParams.user = params.hasUser;
+    }
+
+    if(params.contactGroup) {
+      changedParams.group = [...params.contactGroup.list];
+    }
+    if(params.contactLabel) {
+      changedParams.label = params.contactLabel.map(item => item.label);
+    }
+    if(params.contactOwner) {
+      changedParams.owner = params.contactOwner;
     }
   }
 
@@ -127,7 +137,7 @@ const getList = async (params) => {
     camelToSnake(),
   ];
 
-  const { page, size, q, sort, fields, id, qin, mode, group, not_id_group, owner, label, user } =
+  const { page, size, q, sort, fields, id, qin, mode, group_id, group, not_id_group, owner, label, user } =
     applyTransform(changedParams, transformations);
 
   try {

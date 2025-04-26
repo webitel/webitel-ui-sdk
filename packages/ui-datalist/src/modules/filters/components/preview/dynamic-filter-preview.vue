@@ -123,10 +123,6 @@ const fillLocalValue = async (filter = props.filter) => {
     valueSearchMethod = /* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
   }
 
-  if(filterName === FilterOption.ContactLabel) {
-    return localValue.value = filterValue;
-  }
-
   if (valueSearchMethod) {
     const { items } = await valueSearchMethod({ id: filterValue }, {
       filterValue,

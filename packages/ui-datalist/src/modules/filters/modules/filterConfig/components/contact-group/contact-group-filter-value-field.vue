@@ -2,7 +2,7 @@
   <wt-select
     :close-on-select="false"
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="searchMethod"
+    :search-method="props.filterConfig.searchRecords"
     :v="v$.model.list"
     :value="model?.list"
     multiple
@@ -11,6 +11,7 @@
     @input="model.list = $event"
   />
   <wt-checkbox
+    v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
     :v="v$.model.unassigned"
@@ -26,7 +27,11 @@ import { WtCheckbox } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { searchMethod } from './config.js';
+import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+
+const props = defineProps<{
+  filterConfig: WtSysTypeFilterConfig;
+}>();
 
 type ModelValue = {
   list: string[];
@@ -54,7 +59,7 @@ const v$ = useVuelidate(
   computed(() => ({
     model: {
       list: { required: requiredIf(() => !model.value.unassigned) },
-      unassigned: { required: requiredIf(() => !model.value.list.length) },
+      unassigned: { required: requiredIf(() => props.filterConfig?.hideUnassigned && !model.value.list.length) },
     },
   })),
   { model },

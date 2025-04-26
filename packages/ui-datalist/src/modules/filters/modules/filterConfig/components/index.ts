@@ -54,7 +54,6 @@ import { caseStatusConditionsSearchMethod } from './case-status/config';
 import { searchMethod as contactSearchMethod } from './contact/config';
 import ContactFilter from './contact/contact-filter-value-field.vue';
 import ContactFilterPreview from './contact/contact-filter-value-preview.vue';
-import { searchMethod as contactGroupSearchMethod } from './contact-group/config';
 import ContactGroupFilter from './contact-group/contact-group-filter-value-field.vue';
 import ContactGroupFilterPreview from './contact-group/contact-group-filter-value-preview.vue';
 import CreatedAtFilterValueField from './created-at/created-at-filter-value-field.vue';
@@ -81,6 +80,7 @@ import ContactLabelFilter from './contact-label/contact-label-filter-value-field
 import ContactLabelFilterPreview from './contact-label/contact-label-filter-value-preview.vue';
 import { createContactLabelFilterConfig } from './contact-label';
 import { createContactOwnerFilterConfig } from './contact-owner'
+import { createContactGroupFilterConfig } from './contact-group';
 import ContactOwnerFilter from "./contact-owner/contact-owner-filter-value-field.vue";
 import ContactOwnerFilterPreview from "./contact-owner/contact-owner-filter-value-preview.vue";
 import { searchMethod as queueSearchMethod } from './queue/config';
@@ -212,8 +212,6 @@ export const FilterOptionToValueComponentMap: Record<
   [FilterOption.TotalDuration]: TotalDurationFilter,
   [FilterOption.HasTranscription]: HasTranscriptionFilter,
   [FilterOption.HasUser]: HasUserFilter,
-  [FilterOption.ContactLabel]: ContactLabelFilter,
-  [FilterOption.ContactOwner]: ContactOwnerFilter,
   [FilterOption.User]: UserFilter,
   [FilterOption.Variable]: VariableFilter,
   [FilterOption.CreatedAt]: CreatedAtFilterValueField,
@@ -223,7 +221,6 @@ export const FilterOptionToValueComponentMap: Record<
   [FilterOption.CaseAuthor]: CaseAuthorFilterValueField,
   [FilterOption.CaseReporter]: CaseReporterFilterValueField,
   [FilterOption.CaseImpacted]: CaseImpactedFilterValueField,
-  [FilterOption.ContactGroup]: ContactGroupFilter,
   [FilterOption.CasePriority]: CasePriorityFilterValueField,
   [FilterOption.CaseCloseReasonGroups]: CaseCloseReasonGroupsFilterValueField,
   [FilterOption.Rating]: RatingFromToFilter,
@@ -260,8 +257,6 @@ export const FilterOptionToPreviewComponentMap: Record<
   [FilterOption.TotalDuration]: TotalDurationFilterPreview,
   [FilterOption.HasTranscription]: HasTranscriptionFilterPreview,
   [FilterOption.HasUser]: HasUserFilterPreview,
-  [FilterOption.ContactLabel]: ContactLabelFilterPreview,
-  [FilterOption.ContactOwner]: ContactOwnerFilterPreview,
   [FilterOption.User]: UserFilterPreview,
   [FilterOption.Variable]: VariableFilterPreview,
   [FilterOption.CaseStatus]: CaseStatusFilterValuePreview,
@@ -270,7 +265,6 @@ export const FilterOptionToPreviewComponentMap: Record<
   [FilterOption.CaseAuthor]: CaseAuthorFilterValuePreview,
   [FilterOption.CaseReporter]: CaseReporterFilterValuePreview,
   [FilterOption.CaseImpacted]: CaseImpactedFilterValuePreview,
-  [FilterOption.ContactGroup]: ContactGroupFilterPreview,
   [FilterOption.CasePriority]: CasePriorityFilterValuePreview,
   [FilterOption.CaseCloseReasonGroups]: CaseCloseReasonGroupsFilterValuePreview,
   [FilterOption.Rating]: RatingFromToFilterPreview,
@@ -298,19 +292,12 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
   [FilterOption.CaseSla]: caseSlaSearchMethod,
   [FilterOption.CaseService]: servicesSearchMethod,
   [FilterOption.CaseSource]: caseSourceSearchMethod,
-  [FilterOption.ContactOwner]: createContactOwnerFilterConfig,
   [FilterOption.CaseStatus]: ({ id: value }) =>
     caseStatusConditionsSearchMethod({
       parentId: value?.selection,
       id: value?.conditions,
     }),
   [FilterOption.User]: userSearchMethod,
-  [FilterOption.ContactGroup]: ({ id: value }, ...rest) => {
-    return contactGroupSearchMethod({
-      id: value.list,
-      ...rest,
-    });
-  },
   [FilterOption.CaseAuthor]: caseAuthorSearchMethod,
   [FilterOption.CasePriority]: casePrioritySearchMethod,
   [FilterOption.CaseImpacted]: caseImpactedSearchMethod,
@@ -336,4 +323,5 @@ export const FilterOptionToFilterConfigCreatorMap = {
   [FilterOption.CaseAssignee]: createCaseAssigneeFilterConfig,
   [FilterOption.ContactLabel]: createContactLabelFilterConfig,
   [FilterOption.ContactOwner]: createContactOwnerFilterConfig,
+  [FilterOption.ContactGroup]: createContactGroupFilterConfig,
 };
