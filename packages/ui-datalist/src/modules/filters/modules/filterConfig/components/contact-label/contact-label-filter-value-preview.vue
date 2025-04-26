@@ -17,7 +17,6 @@ const props = defineProps<{
   value: Record<string, unknown>[];
 }>();
 
-console.log(props.value);
 </script>
 
 <style scoped></style>
