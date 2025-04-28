@@ -5,7 +5,6 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import { FilterOption } from '../../../packages/ui-datalist/src/modules/filters/modules/filterConfig/enums/FilterOption';
 
 import {
   AuditorSections,
@@ -553,7 +552,7 @@ export default {
       contact: ({ linked }) => {
         return linked('vocabulary.contact');
       },
-      [FilterOption.ContactGroup]: ({ linked }) => {
+      contactGroup: ({ linked }) => {
         return linked('cases.groupPerformers');
       },
       createdAt: ({ linked }) => {
@@ -583,16 +582,16 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
-      [FilterOption.HasUser]: ({ linked }) => {
+      hasUser: ({ linked }) => {
         return linked('objects.user');
       },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
       },
-      [FilterOption.ContactLabel]: ({ linked }) => {
+      contactLabel: ({ linked }) => {
         return linked('vocabulary.labels');
       },
-      [FilterOption.ContactOwner]: ({ linked }) => {
+      contactOwner: ({ linked }) => {
         return linked('objects.owner');
       },
       priority: ({ linked }) => {
