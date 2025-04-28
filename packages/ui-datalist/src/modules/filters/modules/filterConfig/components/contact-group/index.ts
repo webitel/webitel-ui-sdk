@@ -22,10 +22,10 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
     params: object,
     { filterValue } = {},
   ): Promise<{ items: unknown[]; next?: boolean }> {
-    const id =
-      params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
-      params.id /* wt-select options loadings */ ||
-      filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
+    const id = params.id?.list?.length ? params.id?.list : (params.id || filterValue?.list);
+      // params.id?.list /* general logic from dynamic-filter-preview.vue*/
+      // params.id /* wt-select options loadings */
+      // filterValue?.list; /* newest and coolest, but not implemented on all filters 🥲 */
 
     return contactGroups.getLookup({
       ...params,

@@ -11,15 +11,9 @@ class ContactOwnerFilterConfig extends WtSysTypeFilterConfig {
   valuePreviewComponent = ContactOwnerFilterValuePreview;
 
   searchRecords(
-    params: object,
-    { filterValue } = {},
+    params: object
   ): Promise<{ items: unknown[]; next?: boolean }> {
-    const id = params.id?.list;
-
-    return UsersAPI.getLookup({
-      ...params,
-      id,
-    });
+    return UsersAPI.getLookup(params);
   }
 }
 

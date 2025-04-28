@@ -14,6 +14,11 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
     params: object,
     { filterValue } = {},
   ): Promise<{ items: unknown[]; next?: boolean }> {
+
+  // @author @Lera24
+    // [WTEl-6410](https://webitel.atlassian.net/browse/WTEL-6410)
+  //   For label preview component no need to call the API, so we return filterValue back to the searchRecords method and display it
+
     if (filterValue) return { items: filterValue }
 
     return contactLabels.getLookup(params);
