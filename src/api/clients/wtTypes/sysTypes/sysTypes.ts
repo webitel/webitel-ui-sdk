@@ -19,7 +19,10 @@ const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
     (params) => ({ ...params, q: params.search }),
-    (params) => ({ ...params, ids: params.id }),
+    (params) => ({
+      ...params,
+      ids: params.id /* https://webitel.atlassian.net/browse/WTEL-6788 */,
+    }),
     sanitize(fieldsToSend),
     camelToSnake(),
     generateUrl(path),
