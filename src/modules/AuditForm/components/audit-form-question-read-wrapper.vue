@@ -39,6 +39,12 @@
         {{ $t('webitelUI.auditForm.clearSelection') }}
       </div>
     </section>
+    <wt-input
+      v-if="showQuestionComment && !readonly"
+      v-model="comment"
+      class="audit-form-question-comment"
+      :label="$t('webitelUI.auditForm.comment')"
+    />
   </article>
 </template>
 
@@ -50,6 +56,7 @@ import WtIcon from '../../../components/wt-icon/wt-icon.vue';
 import isEmpty from '../../../scripts/isEmpty.js';
 import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
 import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
+import { WtInput } from '../../../components/index.js';
 
 const props = defineProps({
   question: {
@@ -72,9 +79,21 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showQuestionComment: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['change:result', 'activate']);
+
+const comment = computed({
+  get: () => props.result?.comment ?? '',
+  set: (v) => {
+    const next = { ...(props.result || {}), comment: v };
+    emit('change:result', next);
+  },
+});
 
 const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Option)
