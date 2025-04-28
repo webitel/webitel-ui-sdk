@@ -32,7 +32,6 @@ import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
 const props = defineProps<{
   filterConfig: WtSysTypeFilterConfig;
 }>();
-
 type ModelValue = {
   list: string[];
   unassigned: boolean;
