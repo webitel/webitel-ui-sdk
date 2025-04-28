@@ -13,74 +13,111 @@
         :mode="mode"
         :question="question"
         :readonly="readonly"
-        :result="result && result[key] ? result[key] : null"
+        :answer="answers && answers[key] ? answers[key] : null"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key })"
         @update:question="handleQuestionUpdate({ key, value: $event })"
-        @update:result="handleResultUpdate({ key, value: $event })"
+        @update:answer="handleAnswerUpdate({ key, value: $event })"
       />
     </div>
-    <wt-button
-      v-if="mode === 'create' && !readonly"
-      :disabled="isInvalidForm"
-      class="audit-form__add-button"
-      @click="addQuestion"
-    >
-      {{ $t('webitelUI.auditForm.addQuestion') }}
-    </wt-button>
+    <footer class="audit-form-footer">
+      <template
+        v-if="mode === 'fill'"
+      >
+        <wt-button
+          :disabled="isInvalidForm"
+          @click="saveEvaluation"
+        >
+          {{ t('reusable.save') }}
+        </wt-button>
+        <wt-button
+          color="secondary"
+          @click="cancelEvaluation"
+        >
+          {{ t('reusable.cancel') }}
+        </wt-button>
+      </template>
+
+
+      <wt-button
+        v-else-if="mode === 'create' && !readonly"
+        class="audit-form-footer-create-question-action"
+        :disabled="isInvalidForm"
+        @click="addQuestion"
+      >
+        {{ t('webitelUI.auditForm.addQuestion') }}
+      </wt-button>
+    </footer>
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import cloneDeep from 'lodash/cloneDeep.js';
 import {
   computed,
   nextTick,
   onMounted,
+  provide,
   reactive,
-  ref,
+  useTemplateRef,
   watch,
-  watchEffect,
 } from 'vue';
+import { useI18n } from 'vue-i18n';
+import {EngineAuditRate,EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
 
 import WtButton from '../../../components/wt-button/wt-button.vue';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
 import AuditFormQuestion from './audit-form-question.vue';
 
-const props = defineProps({
-  mode: {
-    type: String,
-    required: true,
-    /*
-     * Available options: ['create', 'fill']
-     *  */
-  },
-  questions: {
-    type: Array,
-    required: true,
-  },
-  result: {
-    type: Array,
-  },
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
-});
+const answersModel = defineModel<EngineQuestionAnswer[]>('answers');
+
+/**
+ * todo: rename to questionsModel and use instead of 'update:questions' event
+ */
+const questions = defineModel<EngineQuestion[]>('questions', {});
+
+const AuditFormMode = {
+  Create: 'create',
+  Fill: 'fill',
+} as const;
+
+type AuditFormMode = typeof AuditFormMode[keyof typeof AuditFormMode];
+
+const props = defineProps<{
+  mode: AuditFormMode;
+  readonly?: boolean;
+  /**
+   * @readonly
+   * @description
+   * Source of info about existing evaluation result, if any
+   */
+  evaluationResult?: EngineAuditRate;
+}>();
 
 const emit = defineEmits([
+  /**
+   * todo: remove and use questions model
+   */
   'update:questions',
-  'update:result',
   'update:validation',
+  'save:evaluation',
+  'cancel:evaluation',
 ]);
 
+const { t } = useI18n();
 const v$ = useVuelidate();
 
-const isInvalidForm = computed(() => !!v$.value.$errors.length);
-const auditQuestions = ref(null);
+const auditQuestions = useTemplateRef('auditQuestions');
 const isQuestionAdded = reactive({ value: false, index: null });
+const isEditingAnswers = computed(() => {
+  return props.evaluationResult?.id;
+});
+
+provide('isEditingAnswers', isEditingAnswers);
+
+const isInvalidForm = computed(() => !!v$.value.$errors.length);
 
 async function addQuestion({ index, question } = {}) {
   const questions = [...(props.questions || [])];
@@ -118,22 +155,31 @@ function changeQuestionsOrder({ oldIndex, newIndex }) {
   emit('update:questions', questions);
 }
 
-function handleResultUpdate({ key, value }) {
-  const result = [...props.result];
-  result[key] = value;
-  emit('update:result', result);
+function handleAnswerUpdate({ key, value }) {
+  const answer = [...answersModel.value];
+  answer[key] = value;
+  answersModel.value = answer;
 }
 
-function initResult() {
-  const result = props.questions?.map(() => ({}));
-  emit('update:result', result);
+function initAnswers() {
+  if (!answersModel.value || !answersModel.value.length) {
+    answersModel.value = props.questions.map(() => ({}));
+  }
 }
 
 function initQuestions() {
-  if (props.mode === 'create' && !props.questions?.length) {
+  if (!props.questions?.length) {
     addQuestion({ question: generateQuestionSchema({ required: true }) });
   } else if (props.questions.length)
     auditQuestions.value.at(0).activateQuestion();
+}
+
+function saveEvaluation() {
+  emit('save:evaluation');
+}
+
+function cancelEvaluation() {
+  emit('cancel:evaluation');
 }
 
 // https://my.webitel.com/browse/WTEL-3451, https://my.webitel.com/browse/WTEL-3436
@@ -151,7 +197,7 @@ async function atQuestionAdded() {
   isQuestionAdded.index = null;
 }
 
-const sortableWrapper = ref(null);
+const sortableWrapper = useTemplateRef('sortableWrapper');
 
 const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
   handle: '.audit-form-question-read__drag-icon',
@@ -166,7 +212,7 @@ const { reloadSortable } = useDestroyableSortable(sortableWrapper, {
 watch(v$, () =>
   emit('update:validation', { invalid: isInvalidForm.value, v$: v$.value }),
 );
-watchEffect(initResult);
+
 watch(
   () => props.questions,
   () => {
@@ -176,7 +222,11 @@ watch(
 );
 
 onMounted(() => {
-  initQuestions();
+  if (props.mode === AuditFormMode.Create) {
+    initQuestions();
+  } else if (props.mode === AuditFormMode.Fill) {
+    initAnswers();
+  }
 });
 </script>
 
@@ -191,7 +241,13 @@ onMounted(() => {
   }
 }
 
-.audit-form__add-button {
+.audit-form-footer {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.audit-form-footer-create-question-action {
   align-self: flex-end;
 }
 </style>
