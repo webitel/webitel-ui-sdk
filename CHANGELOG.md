@@ -1,3 +1,8 @@
+## [v25.4.78] - 2025-04-28
+### :bug: Bug Fixes
+- [`f8af07e`](https://github.com/webitel/webitel-ui-sdk/commit/f8af07e48a987090ddc0f33a1c6ca68540456a42) - made wt-chip clickable when select is disabled [WTEL-6814](https://webitel.atlassian.net/browse/WTEL-6814) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v25.4.77] - 2025-04-28
 ### :bug: Bug Fixes
 - [`895e032`](https://github.com/webitel/webitel-ui-sdk/commit/895e032b26e0f4187879260d902263b01d09cd03) - Sections locale keys [WTEL-6758](https://webitel.atlassian.net/browse/WTEL-6758) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2029,3 +2034,4 @@
 [v25.4.75]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.74...v25.4.75
 [v25.4.76]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.75...v25.4.76
 [v25.4.77]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.76...v25.4.77
+[v25.4.78]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.77...v25.4.78
