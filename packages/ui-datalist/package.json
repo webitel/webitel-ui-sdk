@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-datalist",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
     "build:types": "vue-tsc -p ./tsconfig.build.json",
@@ -20,7 +20,7 @@
   "exports": {
     ".": {
       "import": "./src/index.ts",
-        "types": "./types/index.d.ts"
+      "types": "./types/index.d.ts"
     },
     "./filters": {
       "import": "./src/modules/filters/index.ts",
@@ -38,32 +38,22 @@
     "CHANGELOG.md"
   ],
   "peerDependencies": {
-    "vue": "^3.5",
     "axios": "^1",
+    "date-fns": "^4",
     "pinia": "^3.x",
-    "date-fns": "^4"
+    "vue": "^3.5"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@webitel/ui-sdk": "^25.4.70",
-    "@webitel/styleguide": "^24.12.26"
+    "@webitel/styleguide": "^24.12.26",
+    "@webitel/ui-sdk": "^25.4.74"
   },
   "devDependencies": {
-    "vue-tsc": "^2.2.8",
-    "vite-plugin-checker": "^0.9.0",
-    "sass": "^1.85.1",
-    "typescript": "5.8.2",
-    "typescript-eslint": "^8.26.1",
-    "typescript-plugin-css-modules": "^5.1.0",
-    "unplugin-auto-import": "^19.1.1",
-    "publint": "^0.3.9",
-    "vite": "^6.2.4",
     "@eslint/js": "^9.22.0",
-    "prettier": "^3.5.3",
-    "prettier-plugin-css-order": "^2.1.2",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
+    "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
@@ -72,7 +62,17 @@
     "globals": "^16.0.0",
     "globby": "^14.1.0",
     "lint-staged": "^15.5.0",
-    "@vitejs/plugin-vue": "^5.2.3"
+    "prettier": "^3.5.3",
+    "prettier-plugin-css-order": "^2.1.2",
+    "publint": "^0.3.9",
+    "sass": "^1.85.1",
+    "typescript": "5.8.2",
+    "typescript-eslint": "^8.26.1",
+    "typescript-plugin-css-modules": "^5.1.0",
+    "unplugin-auto-import": "^19.1.1",
+    "vite": "^6.2.4",
+    "vite-plugin-checker": "^0.9.0",
+    "vue-tsc": "^2.2.8"
   },
   "engines": {
     "npm": "10",
