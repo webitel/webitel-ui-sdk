@@ -1,3 +1,12 @@
+## [v25.4.77] - 2025-04-28
+### :bug: Bug Fixes
+- [`895e032`](https://github.com/webitel/webitel-ui-sdk/commit/895e032b26e0f4187879260d902263b01d09cd03) - Sections locale keys [WTEL-6758](https://webitel.atlassian.net/browse/WTEL-6758) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`dceac3c`](https://github.com/webitel/webitel-ui-sdk/commit/dceac3c926a51d35edc6b2c0150ce7e7fe88d386) - add comment for clarity on id parameter transformation *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :wrench: Chores
+- [`2c20f16`](https://github.com/webitel/webitel-ui-sdk/commit/2c20f166db8e24a876d4b9170815330318d83a4f) - bump version to 1.0.24 and update @webitel/ui-sdk to 25.4.76 *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.76] - 2025-04-28
 ### :bug: Bug Fixes
 - [`57b0ec0`](https://github.com/webitel/webitel-ui-sdk/commit/57b0ec0e4de78e6fc3d9c79bb87bf44f710b066e) - add 'ids' parameter to sysTypeRecordsList for improved query handling [WTEL-6788](https://webitel.atlassian.net/browse/WTEL-6788) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2019,3 +2028,4 @@
 [v25.4.74]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.73...v25.4.74
 [v25.4.75]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.74...v25.4.75
 [v25.4.76]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.75...v25.4.76
+[v25.4.77]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.76...v25.4.77
