@@ -19,7 +19,7 @@
     </template>
 
     <template #actions>
-      <div v-if="enablePresets">
+      <template v-if="enablePresets">
         <apply-preset-action
           :filter-configs="filterConfigs"
           :namespace="props.presetNamespace"
@@ -33,8 +33,7 @@
           :filters-manager="props.filtersManager"
           :namespace="props.presetNamespace"
         />
-
-      </div>
+      </template>
 
       <wt-icon-action
         :disabled="!props.filtersManager.filters.size"
