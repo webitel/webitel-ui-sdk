@@ -1,3 +1,10 @@
+## [v25.4.79] - 2025-04-28
+### :bug: Bug Fixes
+- [`5b7789b`](https://github.com/webitel/webitel-ui-sdk/commit/5b7789b013b27cd8912e9259cd785f5b42c8416f) - set fixes for contacts get list API method [WTEL-6807](https://webitel.atlassian.net/browse/WTEL-6807) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`6f7541a`](https://github.com/webitel/webitel-ui-sdk/commit/6f7541a18f9828b7f43788fa09c7eec62b8133a7) - contact group filter[WTEL-6819](https://webitel.atlassian.net/browse/WTEL-6819) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`d174bbb`](https://github.com/webitel/webitel-ui-sdk/commit/d174bbbeed93b3e9b3e33141fd72cb9803afc431) - update template structure in table-filters-panel and correct value assignment in the-history-filters [WTEL-6758](https://webitel.atlassian.net/browse/WTEL-6758) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.78] - 2025-04-28
 ### :bug: Bug Fixes
 - [`f8af07e`](https://github.com/webitel/webitel-ui-sdk/commit/f8af07e48a987090ddc0f33a1c6ca68540456a42) - made wt-chip clickable when select is disabled [WTEL-6814](https://webitel.atlassian.net/browse/WTEL-6814) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -2035,3 +2042,4 @@
 [v25.4.76]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.75...v25.4.76
 [v25.4.77]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.76...v25.4.77
 [v25.4.78]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.77...v25.4.78
+[v25.4.79]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.78...v25.4.79
