@@ -1,5 +1,6 @@
 import { sysTypes } from '@webitel/ui-sdk/api/clients/index';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
+import get from 'lodash/get';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { FilterConfig } from '../../classes/FilterConfig';
@@ -41,7 +42,7 @@ class TypeExtensionWtSysTypeFieldFilterConfig
   extends TypeExtensionFilterConfig
   implements IWtSysTypeFilterConfig
 {
-  searchRecords(
+  async searchRecords(
     { id: filterValue, ...rest },
     // {
     //   filterValue,
@@ -49,11 +50,32 @@ class TypeExtensionWtSysTypeFieldFilterConfig
     //   filterValue: unknown;
     // },
   ): Promise<{ items: unknown[]; next?: boolean }> {
-    return sysTypes.getLookup({
+    const { items, ...restResponse } = await sysTypes.getLookup({
       ...rest,
       ...this.field.lookup,
       id: filterValue,
     });
+
+    /**
+     * @author @dlohvinov
+     *
+     * [WTEL-6787](https://webitel.atlassian.net/browse/WTEL-6787)
+     *
+     * name from display is get here instead of wt-select props because it's
+     * much simplier than configuring wt-select, but still this code is still
+     * isolated enough.
+     *
+     * for instance, contacts:
+     * display=name.common_name
+     * objects=[{ name: { common_name: 'str' } }]
+     */
+    return {
+      items: items.map((item) => ({
+        ...item,
+        name: get(item, this.field.lookup.display),
+      })),
+      ...restResponse,
+    };
   }
 }
 
