@@ -112,23 +112,23 @@ const getList = async (params) => {
       qin: searchKey || '',
     };
 
-    if (params.parentId) {
-      changedParams.groupId = [params.parentId];
-    }
-
-    if(params.hasUser != null) {
+    if (params.hasUser != null) {
       changedParams.user = params.hasUser;
     }
 
-    if(params.contactGroup) {
+    if (params.contactGroup) {
       changedParams.group = [...params.contactGroup.list];
     }
-    if(params.contactLabel) {
-      changedParams.label = params.contactLabel.map(item => item.label);
+    if (params.contactLabel) {
+      changedParams.label = params.contactLabel.map((item) => item.label);
     }
-    if(params.contactOwner) {
+    if (params.contactOwner) {
       changedParams.owner = params.contactOwner;
     }
+  }
+
+  if (params.parentId) {
+    changedParams.group = [params.parentId];
   }
 
   const transformations = [
@@ -137,8 +137,22 @@ const getList = async (params) => {
     camelToSnake(),
   ];
 
-  const { page, size, q, sort, fields, id, qin, mode, group_id, group, not_id_group, owner, label, user } =
-    applyTransform(changedParams, transformations);
+  const {
+    page,
+    size,
+    q,
+    sort,
+    fields,
+    id,
+    qin,
+    mode,
+    group_id,
+    group,
+    not_id_group,
+    owner,
+    label,
+    user,
+  } = applyTransform(changedParams, transformations);
 
   try {
     const response = await contactService.searchContacts(
