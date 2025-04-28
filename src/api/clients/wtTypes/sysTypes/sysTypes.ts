@@ -14,11 +14,12 @@ import applyTransform, {
 const instance = getDefaultInstance();
 
 const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'ids'];
 
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
     (params) => ({ ...params, q: params.search }),
+    (params) => ({ ...params, ids: params.id }),
     sanitize(fieldsToSend),
     camelToSnake(),
     generateUrl(path),
