@@ -1,3 +1,14 @@
+## [v25.4.73] - 2025-04-24
+### :sparkles: New Features
+- [`31667c2`](https://github.com/webitel/webitel-ui-sdk/commit/31667c2a12f8bb2c7be6ce70b0a0d50848c489f2) - add type extension and case assignee filter configurations *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :bug: Bug Fixes
+- [`c0ac8e2`](https://github.com/webitel/webitel-ui-sdk/commit/c0ac8e2d67a3d446805642dc29aff55b6c54dee9) - add iconPrefix prop to rounded-action *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+### :wrench: Chores
+- [`552c70f`](https://github.com/webitel/webitel-ui-sdk/commit/552c70f04647aeca1358218454591013d4535268) - bump ui-datalist version to 1.0.19 *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.72] - 2025-04-24
 ### :sparkles: New Features
 - [`45a29d2`](https://github.com/webitel/webitel-ui-sdk/commit/45a29d2bf3bda1ff9024f5099e9f337187721548) - cases extension filters [WTEL-6702](https://webitel.atlassian.net/browse/WTEL-6702) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1975,3 +1986,4 @@
 [v25.4.70]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.69...v25.4.70
 [v25.4.71]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.70...v25.4.71
 [v25.4.72]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.71...v25.4.72
+[v25.4.73]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.72...v25.4.73
