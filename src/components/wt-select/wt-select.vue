@@ -315,6 +315,13 @@ export default {
   min-width: 0;
 }
 
+/*
+ * @author: Oleksandr Palonnyi
+ *
+ * [WTEL-6814](https://webitel.atlassian.net/browse/WTEL-6814)
+ *
+ * added pointer-events: auto; to have access to multiselect__limit when select is disabled.
+*/
 .multiselect__limit {
   pointer-events: auto;
 }
