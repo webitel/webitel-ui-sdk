@@ -1,6 +1,6 @@
 import { contactGroups } from '@webitel/ui-sdk/api/clients/index';
 
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { WtSysTypeFilterConfig, IWtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactGroupFilterValueField from './contact-group-filter-value-field.vue';
 import ContactGroupFilterValuePreview from './contact-group-filter-value-preview.vue';
@@ -9,6 +9,14 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
   readonly name = FilterOption.ContactGroup;
   valueInputComponent = ContactGroupFilterValueField;
   valuePreviewComponent = ContactGroupFilterValuePreview;
+  hideUnassigned?: boolean;
+
+  constructor(params: { hideUnassigned?: boolean } = {}) {
+    super(params);
+    if ('hideUnassigned' in params) {
+      this.hideUnassigned = params.hideUnassigned;
+    }
+  }
 
   searchRecords(
     params: object,
@@ -28,3 +36,7 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 
 export const createContactGroupFilterConfig = (params) =>
   new ContactGroupFilterConfig(params);
+
+export interface IContactGroupFilterConfig extends IWtSysTypeFilterConfig {
+  hideUnassigned?: boolean;
+}

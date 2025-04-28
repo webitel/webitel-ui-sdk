@@ -18,10 +18,6 @@ export type FilterConfigBaseParams = {
   notDeletable?: boolean;
 };
 
-export type FilterConfigContactGroupParams = FilterConfigBaseParams & {
-  hideUnassigned?: boolean;
-};
-
 export interface IWtSysTypeFilterConfig extends BaseFilterConfig {
   searchRecords: (
     params: FilterConfigSearchMethodParams,
@@ -53,25 +49,19 @@ export class FilterConfig implements BaseFilterConfig {
   valuePreviewComponent: Component;
   label?: ReturnType<MessageResolver> | string;
   notDeletable: boolean;
-  hideUnassigned?: boolean;
 
-  constructor(params: FilterConfigBaseParams | FilterConfigContactGroupParams = {}) {
-    const {
-      name,
-      valueInputComponent,
-      valuePreviewComponent,
-      notDeletable,
-    } = params;
+  constructor({
+                name,
+                valueInputComponent,
+                valuePreviewComponent,
+                notDeletable,
+              }: FilterConfigBaseParams = {}) {
 
     if (name) this.name = name;
     if (valueInputComponent) this.valueInputComponent = valueInputComponent;
     if (valuePreviewComponent)
       this.valuePreviewComponent = valuePreviewComponent;
     this.notDeletable = !!notDeletable;
-
-    if ('hideUnassigned' in params) {
-      this.hideUnassigned = params.hideUnassigned;
-    }
   }
 }
 

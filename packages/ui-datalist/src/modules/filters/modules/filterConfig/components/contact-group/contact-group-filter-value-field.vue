@@ -26,11 +26,10 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { WtCheckbox } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-
-import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+import { IContactGroupFilterConfig } from './index';
 
 const props = defineProps<{
-  filterConfig: WtSysTypeFilterConfig;
+  filterConfig: IContactGroupFilterConfig;
 }>();
 type ModelValue = {
   list: string[];
