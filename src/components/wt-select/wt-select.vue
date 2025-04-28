@@ -52,7 +52,23 @@
         v-if="!isOpened"
         #limit
       >
-        <wt-chip class="multiselect__limit"> +{{ value.length - 1 }} </wt-chip>
+        <wt-tooltip
+          :triggers="['click']"
+          class="multiselect__limit"
+        >
+          <template #activator>
+            <wt-chip> +{{ value.length - 1 }}</wt-chip>
+          </template>
+
+          <div>
+            <p
+              v-for="(option, idx) of value.slice(1)"
+              :key="idx"
+            >
+              {{ getOptionLabel({ option, optionLabel }) }}
+            </p>
+          </div>
+        </wt-tooltip>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->
@@ -299,6 +315,10 @@ export default {
   min-width: 0;
 }
 
+.multiselect__limit {
+  pointer-events: auto;
+}
+
 :deep(.multiselect) {
   .multiselect__custom-tag,
   .multiselect__single-label {
@@ -326,11 +346,11 @@ export default {
   :deep(.multiselect) {
     .multiselect__tags {
       padding: var(--input-padding)
-        calc(
-          var(--input-padding) + var(--icon-md-size) +
-            var(--select-caret-right-pos)
-        )
-        var(--input-padding) var(--input-padding);
+      calc(
+        var(--input-padding) + var(--icon-md-size) +
+        var(--select-caret-right-pos)
+      )
+      var(--input-padding) var(--input-padding);
     }
   }
 }
@@ -390,8 +410,8 @@ export default {
 
     $multiselect-limit-right-pos: calc(
       $multiselect-clear-right-pos + /* clear offet from border */
-        var(--icon-md-size) /* clear size */ + var(--input-padding)
-        /* cleat-to-chip offset */
+      var(--icon-md-size) /* clear size */ + var(--input-padding)
+      /* cleat-to-chip offset */
     );
 
     .multiselect__tags {
