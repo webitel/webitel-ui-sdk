@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import { FilterOption } from '../../../packages/ui-datalist/src/modules/filters/modules/filterConfig/enums/FilterOption';
 
 import {
   AuditorSections,
@@ -168,6 +169,7 @@ export default {
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
     attachment: 'Вкладення | Вкладення',
+    owner: 'Власник | Власники',
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -551,7 +553,7 @@ export default {
       contact: ({ linked }) => {
         return linked('vocabulary.contact');
       },
-      contactGroup: ({ linked }) => {
+      [FilterOption.ContactGroup]: ({ linked }) => {
         return linked('cases.groupPerformers');
       },
       createdAt: ({ linked }) => {
@@ -581,8 +583,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
+      [FilterOption.HasUser]: ({ linked }) => {
+        return linked('objects.user');
+      },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
+      },
+      [FilterOption.ContactLabel]: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      [FilterOption.ContactOwner]: ({ linked }) => {
+        return linked('objects.owner');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');

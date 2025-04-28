@@ -27,6 +27,8 @@ export const FilterOption = {
   CaseImpacted: 'impacted',
   CaseAssignee: 'assignee',
   ContactGroup: 'contactGroup',
+  ContactLabel: 'contactLabel',
+  ContactOwner: 'contactOwner',
   CasePriority: 'priority',
   CaseCloseReasonGroups: 'closeReasonGroups',
   Rating: 'rating',
@@ -37,6 +39,7 @@ export const FilterOption = {
   CaseActualReactionTime: 'actualReactionTime',
   CaseActualResolutionTime: 'actualResolutionTime',
   HasAttachment: 'hasAttachment',
+  HasUser: 'hasUser',
 } as const;
 
 /**

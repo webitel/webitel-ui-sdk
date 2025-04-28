@@ -19,6 +19,7 @@ import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import { FilterOption } from '../../../packages/ui-datalist/src/modules/filters/modules/filterConfig/enums/FilterOption';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
@@ -169,6 +170,7 @@ export default {
     totalDuration: 'Total duration',
     transcription: 'Transcription',
     attachment: 'Attachment | Attachments',
+    owner: 'Owner | Owners',
     queue: {
       queue: 'Queue | Queues',
       type: {
@@ -555,7 +557,7 @@ export default {
       contact: ({ linked }) => {
         return linked('vocabulary.contact');
       },
-      contactGroup: ({ linked }) => {
+      [FilterOption.ContactGroup]: ({ linked }) => {
         return linked('cases.groupPerformers');
       },
       createdAt: ({ linked }) => {
@@ -585,8 +587,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
+      [FilterOption.HasUser]: ({ linked }) => {
+        return linked('objects.user');
+      },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
+      },
+      [FilterOption.ContactLabel]: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      [FilterOption.ContactOwner]: ({ linked }) => {
+        return linked('objects.owner');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');
