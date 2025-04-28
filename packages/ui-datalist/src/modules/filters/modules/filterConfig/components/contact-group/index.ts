@@ -30,6 +30,7 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
     return contactGroups.getLookup({
       ...params,
       id,
+      type: 'STATIC',
     });
   }
 }
