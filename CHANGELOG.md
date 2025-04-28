@@ -1,3 +1,9 @@
+## [v25.4.75] - 2025-04-28
+### :bug: Bug Fixes
+- [`d207244`](https://github.com/webitel/webitel-ui-sdk/commit/d207244427760698e2b20394d5f17463cf78d9b7) - import errors in locale[WTEL-4610](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`9358ff8`](https://github.com/webitel/webitel-ui-sdk/commit/9358ff8d1b6d469c64270fde866d5417f074315a) - webitel/ui-sdk version update[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.4.74] - 2025-04-28
 ### :sparkles: New Features
 - [`412e739`](https://github.com/webitel/webitel-ui-sdk/commit/412e739dd3b9e56dd44a6f9f9848ae36f5b33348) - ui-datalist/filters/custom: simplify name retrieval in searchRecords using lodash.get [https://webitel.atlassian.net/browse/WTEL-6787](https://webitel.atlassian.net/browse/WTEL-6787) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2006,3 +2012,4 @@
 [v25.4.72]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.71...v25.4.72
 [v25.4.73]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.72...v25.4.73
 [v25.4.74]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.73...v25.4.74
+[v25.4.75]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.74...v25.4.75
