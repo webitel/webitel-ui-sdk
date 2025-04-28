@@ -1,3 +1,8 @@
+## [v25.4.76] - 2025-04-28
+### :bug: Bug Fixes
+- [`57b0ec0`](https://github.com/webitel/webitel-ui-sdk/commit/57b0ec0e4de78e6fc3d9c79bb87bf44f710b066e) - add 'ids' parameter to sysTypeRecordsList for improved query handling [WTEL-6788](https://webitel.atlassian.net/browse/WTEL-6788) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.75] - 2025-04-28
 ### :bug: Bug Fixes
 - [`d207244`](https://github.com/webitel/webitel-ui-sdk/commit/d207244427760698e2b20394d5f17463cf78d9b7) - import errors in locale[WTEL-4610](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -2013,3 +2018,4 @@
 [v25.4.73]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.72...v25.4.73
 [v25.4.74]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.73...v25.4.74
 [v25.4.75]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.74...v25.4.75
+[v25.4.76]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.75...v25.4.76
