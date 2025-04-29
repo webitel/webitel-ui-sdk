@@ -1,8 +1,8 @@
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import { createTableStore } from '../../table/createTableStore.store.ts';
-import PresetQueryAPI from '../api/PresetQuery.ts';
-import { headers } from './headers/headers.ts';
+import { createTableStore } from '../../table/createTableStore';
+import PresetQueryAPI from '../api/PresetQuery';
+import { headers } from './headers/headers';
 
 export const createFilterPresetsStore = (namespace = 'presets') => {
   const presetsNamespace = namespace.endsWith('presets')

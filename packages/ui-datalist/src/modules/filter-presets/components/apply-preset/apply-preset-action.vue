@@ -83,7 +83,7 @@ import { computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import { AnyFilterConfig } from '../../../filters';
 import PresetQueryAPI from '../../api/PresetQuery.ts';
 import PresetPreview from './preset-preview.vue';
 
@@ -215,8 +215,8 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 .apply-preset-main-content {
   display: flex;
   flex-direction: column;
-  height: 100%;
   gap: var(--spacing-xs);
+  height: 100%;
 
   .wt-empty {
     flex-grow: 1;
@@ -228,10 +228,10 @@ const deletePreset = async (preset: EnginePresetQuery) => {
   @extend %wt-scrollbar;
 
   display: flex;
-  overflow-y: auto;
   flex-direction: column;
-  max-height: 400px;
   gap: var(--spacing-xs);
+  max-height: 400px;
+  overflow-y: auto;
   scrollbar-gutter: stable;
 }
 </style>

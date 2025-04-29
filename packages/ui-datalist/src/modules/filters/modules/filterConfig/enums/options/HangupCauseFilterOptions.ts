@@ -1,4 +1,4 @@
-import {FilterInitParams} from "../../../../classes/Filter";
+import { FilterInitParams } from '../../../../types/Filters.types';
 
 /**
  * Hangup causes to filter

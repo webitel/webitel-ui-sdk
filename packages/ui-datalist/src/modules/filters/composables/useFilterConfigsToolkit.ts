@@ -2,15 +2,18 @@ import { computed, ComputedRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
-import { FilterName, IFilter } from '../classes/Filter';
-import { IFiltersManager } from '../classes/FiltersManager';
-import { createFilterConfig } from '../modules/filterConfig/classes/createFilterConfig';
 import {
-  BaseFilterConfig,
+  createFilterConfig,
   FilterConfig,
 } from '../modules/filterConfig/classes/FilterConfig';
 import { createTypeExtensionFilterConfig } from '../modules/filterConfig/components/_custom';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
+import {
+  BaseFilterConfig,
+  FilterName,
+  IFilter,
+  IFiltersManager,
+} from '../types/Filters.types';
 
 export type FilterConfigToolkit = {
   filterConfigs: ComputedRef<BaseFilterConfig[]>;

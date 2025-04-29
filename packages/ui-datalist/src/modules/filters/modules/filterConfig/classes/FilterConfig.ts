@@ -1,47 +1,17 @@
 import { Component } from 'vue';
 import { MessageResolver } from 'vue-i18n';
 
-import { FilterName, FilterValue } from '../../../classes/Filter';
-
-export interface BaseFilterConfig {
-  name: FilterName;
-  valueInputComponent: Component;
-  valuePreviewComponent: Component;
-  label?: ReturnType<MessageResolver> | string;
-  notDeletable?: boolean;
-}
-
-export type FilterConfigBaseParams = {
-  name?: FilterName;
-  valueInputComponent?: Component;
-  valuePreviewComponent?: Component;
-  notDeletable?: boolean;
-};
-
-export interface IWtSysTypeFilterConfig extends BaseFilterConfig {
-  searchRecords: (
-    params: FilterConfigSearchMethodParams,
-  ) => Promise<{ items: unknown[]; next?: boolean }>;
-}
-
-export type FilterConfigSearchMethodParams = [
-  /**
-   * @description
-   * any request-related data
-   */
-  unknown,
-  /**
-   * @description
-   * filter-related data
-   */
-  {
-    filterName: FilterName;
-    filterValue: FilterValue;
-    filterConfig: BaseFilterConfig;
-  },
-];
-
-export type AnyFilterConfig = IWtSysTypeFilterConfig | BaseFilterConfig;
+import {
+  BaseFilterConfig,
+  FilterConfigBaseParams,
+  FilterName,
+  IWtSysTypeFilterConfig,
+} from '../../../types/Filters.types';
+import {
+  FilterOptionToFilterConfigCreatorMap,
+  FilterOptionToPreviewComponentMap,
+  FilterOptionToValueComponentMap,
+} from '../components';
 
 export class FilterConfig implements BaseFilterConfig {
   name: FilterName;
@@ -51,12 +21,11 @@ export class FilterConfig implements BaseFilterConfig {
   notDeletable: boolean;
 
   constructor({
-                name,
-                valueInputComponent,
-                valuePreviewComponent,
-                notDeletable,
-              }: FilterConfigBaseParams = {}) {
-
+    name,
+    valueInputComponent,
+    valuePreviewComponent,
+    notDeletable,
+  }: FilterConfigBaseParams = {}) {
     if (name) this.name = name;
     if (valueInputComponent) this.valueInputComponent = valueInputComponent;
     if (valuePreviewComponent)
@@ -79,3 +48,23 @@ export abstract class WtSysTypeFilterConfig
   abstract name;
   abstract searchRecords;
 }
+
+export const createFilterConfig = (
+  params: FilterConfigBaseParams &
+    Required<BaseFilterConfig['name']> &
+    Record<string, unknown>,
+): BaseFilterConfig => {
+  const { name } = params;
+
+  const filterConfigClass = FilterOptionToFilterConfigCreatorMap[name];
+
+  if (filterConfigClass) {
+    return filterConfigClass(params);
+  }
+
+  return new FilterConfig({
+    valueInputComponent: FilterOptionToValueComponentMap[name],
+    valuePreviewComponent: FilterOptionToPreviewComponentMap[name],
+    ...params,
+  });
+};

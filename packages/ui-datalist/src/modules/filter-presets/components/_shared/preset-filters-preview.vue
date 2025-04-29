@@ -6,7 +6,10 @@
     <dynamic-filter-panel-wrapper size="sm">
       <template #filters>
         <dynamic-filter-preview
-          v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
+          v-for="{
+            filter,
+            filterConfig,
+          } of appliedFilterToFilterConfigMappings"
           :key="filter.name"
           :filter="filter"
           :filter-config="filterConfig"
@@ -21,11 +24,10 @@
 import { WtLabel } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
-import type {IFiltersManager} from '../../../filters';
+import type { AnyFilterConfig, IFiltersManager } from '../../../filters';
 import DynamicFilterPanelWrapper from '../../../filters/components/dynamic-filter-panel-wrapper.vue';
 import DynamicFilterPreview from '../../../filters/components/preview/dynamic-filter-preview.vue';
-import { useFilterConfigsToolkit } from "../../../filters/composables/useFilterConfigsToolkit";
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import { useFilterConfigsToolkit } from '../../../filters/composables/useFilterConfigsToolkit';
 
 const props = defineProps<{
   filtersManager: IFiltersManager;
@@ -34,9 +36,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 
-const {
-  appliedFilterToFilterConfigMappings,
-} = useFilterConfigsToolkit({
+const { appliedFilterToFilterConfigMappings } = useFilterConfigsToolkit({
   filterOptions: props.filterConfigs,
   filtersManager: props.filtersManager,
 });

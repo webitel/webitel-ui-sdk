@@ -27,6 +27,11 @@
         @input="model = $event"
       />
     </template>
+    <template #[WtTypeExtensionFieldKind.Calendar]>
+      <date-time-filter-value-field
+        v-model:model-value="model"
+      />
+    </template>
   </wt-type-extension-value-input>
 </template>
 
@@ -37,6 +42,7 @@ import { WtSelect, WtTypeExtensionValueInput } from '@webitel/ui-sdk/components'
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
 import {computed, useAttrs, watch} from "vue";
 
+import DateTimeFilterValueField from '../_shared/date-time-filter/date-time-filter-value-field.vue';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 import {ITypeExtensionFilterConfig} from "./index";
 

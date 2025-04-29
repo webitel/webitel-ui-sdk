@@ -1,68 +1,62 @@
-export type FilterName = string;
-export type FilterLabel = string;
-export type FilterValue =
-  | object
-  | []
-  | string
-  | number
-  | boolean
-  | undefined
-  | null;
-
-/**
- * represents user-input data, that should be (re)stored
- */
-export interface FilterData {
-  value: FilterValue;
-  label?: FilterLabel;
-}
-
-export interface FilterInitParams extends FilterData {
-  name: FilterName;
-}
-
-export interface FilterEnumOption {
-  locale: string;
-  value: FilterValue;
-}
-
-export interface FilterInstanceConfig {
-  /**
-   * Perform simple type conversion on store/restore,
-   * without need to provide custom store/restore functions
-   */
-  storableType?: string;
-  /**
-   * list of persistence storages that should be used for this filter
-   */
-  storage?: string[];
-}
-
-export interface IFilter {
-  name: FilterName;
-  value: FilterValue;
-  label?: FilterLabel;
-  set: (data: FilterData) => IFilter;
-}
+import { FilterValueConsumer } from '../enums/FilterValueConsumer';
+import {
+  AnyFilterConfig,
+  FilterInitParams,
+  FilterLabel,
+  FilterName,
+  FilterValue,
+  IFilter,
+  IFilterTransformer,
+  IFilterTransformerReturnType,
+} from '../types/Filters.types';
 
 export class Filter implements IFilter {
   readonly name: FilterName;
   label: FilterLabel;
   value: FilterValue;
+  config: AnyFilterConfig;
+  transformer: IFilterTransformer;
 
   constructor(
-    { name, value, label }: FilterInitParams,
+    { name, value, label, config }: FilterInitParams,
     public payload: object | undefined,
-    public config: FilterInstanceConfig,
   ) {
     this.name = name;
     this.value = value;
     this.label = label;
+    this.config = config;
   }
 
   set({ value, label }: { value?: FilterValue; label?: FilterLabel }): IFilter {
     this.value = value;
     this.label = label;
     return this;
+  }
+
+  get(
+    params: {
+      consumer?: FilterValueConsumer;
+    } = {},
+  ): IFilterTransformerReturnType | FilterValue {
+    if (!params.consumer) {
+      return this.value;
+    }
+
+    if (params.consumer) {
+      if (
+        params.consumer === FilterValueConsumer.API &&
+        this.config?.transformer.transformToApi
+      ) {
+        return this.config.transformer.transformToApi(this);
+      }
+
+      console.warn(
+        `Warning: FilterTransformer for filter is not provided
+         or there is no transformer method to transform value for this consumer
+         , returning its value`,
+        this,
+      );
+      return this.value;
+    }
   }
 }

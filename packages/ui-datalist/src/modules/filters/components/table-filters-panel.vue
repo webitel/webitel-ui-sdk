@@ -2,7 +2,7 @@
   <dynamic-filter-panel-wrapper>
     <template #filters>
       <dynamic-filter-preview
-        v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
+        v-for="{ filter, filterConfig } of appliedFilterToFilterConfigMappings"
         :key="filter.name"
         :filter="filter"
         :filter-config="filterConfig"
@@ -52,15 +52,18 @@
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { Store } from 'pinia';
-import {computed} from 'vue';
-import {WebitelProtoDataField} from "webitel-sdk";
+import { computed } from 'vue';
+import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
-import {FilterData, IFilter} from "../classes/Filter";
-import {IFiltersManager} from "../classes/FiltersManager";
-import {useFilterConfigsToolkit} from "../composables/useFilterConfigsToolkit";
-import {AnyFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
+import { useFilterConfigsToolkit } from '../composables/useFilterConfigsToolkit';
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
+import {
+  AnyFilterConfig,
+  FilterData,
+  IFilter,
+  IFiltersManager,
+} from '../types/Filters.types';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
 import DynamicFilterPanelWrapper from './dynamic-filter-panel-wrapper.vue';
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
