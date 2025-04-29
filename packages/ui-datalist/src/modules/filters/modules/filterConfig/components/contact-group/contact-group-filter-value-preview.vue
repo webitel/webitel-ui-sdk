@@ -31,6 +31,7 @@ const shownValue = computed(() => {
   }
   return shownValue;
 });
+console.log('shownValue', shownValue.value);
 </script>
 
 <style scoped></style>
