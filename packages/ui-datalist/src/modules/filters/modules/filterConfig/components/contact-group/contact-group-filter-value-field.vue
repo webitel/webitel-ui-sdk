@@ -36,6 +36,8 @@ type ModelValue = {
   unassigned: boolean;
 };
 
+console.log('filterConfig', props.filterConfig);
+
 const model = defineModel<ModelValue>();
 
 const emit = defineEmits<{
