@@ -1,3 +1,8 @@
+## [v25.6.0] - 2025-04-29
+### :sparkles: New Features
+- [`19c7e10`](https://github.com/webitel/webitel-ui-sdk/commit/19c7e10b970b1c4ea3a91afb31eda6f26332bdcd) - update package version to 25.06.0 *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
 ## [v25.4.79] - 2025-04-28
 ### :bug: Bug Fixes
 - [`5b7789b`](https://github.com/webitel/webitel-ui-sdk/commit/5b7789b013b27cd8912e9259cd785f5b42c8416f) - set fixes for contacts get list API method [WTEL-6807](https://webitel.atlassian.net/browse/WTEL-6807) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -2043,3 +2048,4 @@
 [v25.4.77]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.76...v25.4.77
 [v25.4.78]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.77...v25.4.78
 [v25.4.79]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.78...v25.4.79
+[v25.6.0]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.79...v25.6.0
