@@ -149,7 +149,12 @@
         v-if="showIntersectionObserver"
         #afterList
       >
-        <div v-observe-visibility="handleAfterListIntersect" />
+<!--        @author @Lera24-->
+<!--        [WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818)-->
+<!--        When changing the page scale, vue-observe-visibility works unstable and does not see the changes. -->
+<!--        The minimum height ensures additional data loading if the search method is used-->
+
+        <div v-observe-visibility="handleAfterListIntersect" style="height: 1px"/>
       </template>
     </vue-multiselect>
     <wt-input-info
@@ -331,10 +336,10 @@ export default {
   .multiselect__single-label {
     // text overflow 3 dots
     display: block;
-    max-width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
+    max-width: 100%;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
@@ -352,12 +357,10 @@ export default {
   // all is fine
   :deep(.multiselect) {
     .multiselect__tags {
-      padding: var(--input-padding)
-      calc(
+      padding: var(--input-padding) calc(
         var(--input-padding) + var(--icon-md-size) +
         var(--select-caret-right-pos)
-      )
-      var(--input-padding) var(--input-padding);
+      ) var(--input-padding) var(--input-padding);
     }
   }
 }
@@ -366,14 +369,14 @@ export default {
 .wt-select.wt-select--multiple:not(.wt-select--clearable) {
   :deep(.multiselect) {
     $multiselect-limit-right-pos: calc(
-      var(--select-caret-right-pos) // caret offet from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
 
     .multiselect__tags {
       padding-right: calc(
-        $multiselect-limit-right-pos + 50px // chip
+        $multiselect-limit-right-pos + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
     }
@@ -388,14 +391,14 @@ export default {
 .wt-select.wt-select--clearable:not(.wt-select--multiple) {
   :deep(.multiselect) {
     $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos) // caret offset from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offset from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
 
     .multiselect__tags {
       padding-right: calc(
-        $multiselect-clear-right-pos + var(--icon-md-size) // clear
+        $multiselect-clear-right-pos + var(--icon-md-size)// clear
         + var(--input-padding) // clear-to-content offset
       );
     }
@@ -410,20 +413,18 @@ export default {
 .wt-select.wt-select--multiple.wt-select--clearable {
   :deep(.multiselect) {
     $multiselect-clear-right-pos: calc(
-      var(--select-caret-right-pos) // caret offet from border
-      + var(--icon-md-size) // caret size
+      var(--select-caret-right-pos)// caret offet from border
+      + var(--icon-md-size)// caret size
       + var(--input-padding) // caret-to-chip offset
     );
 
     $multiselect-limit-right-pos: calc(
-      $multiselect-clear-right-pos + /* clear offet from border */
-      var(--icon-md-size) /* clear size */ + var(--input-padding)
-      /* cleat-to-chip offset */
+      $multiselect-clear-right-pos + /* clear offet from border */var(--icon-md-size)/* clear size */ + var(--input-padding) /* cleat-to-chip offset */
     );
 
     .multiselect__tags {
       padding-right: calc(
-        $multiselect-limit-right-pos + 50px // chip
+        $multiselect-limit-right-pos + 50px// chip
         + var(--input-padding) // chip-to-content offset
       );
     }
