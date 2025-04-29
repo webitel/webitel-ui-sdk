@@ -1,3 +1,8 @@
+## [v25.6.1] - 2025-04-29
+### :bug: Bug Fixes
+- [`11d2b45`](https://github.com/webitel/webitel-ui-sdk/commit/11d2b455a549ddcaaf6bdc9ef3554ca7cccd2aaf) - observe in wt-select component[WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.6.0] - 2025-04-29
 ### :sparkles: New Features
 - [`19c7e10`](https://github.com/webitel/webitel-ui-sdk/commit/19c7e10b970b1c4ea3a91afb31eda6f26332bdcd) - update package version to 25.06.0 *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
@@ -2049,3 +2054,4 @@
 [v25.4.78]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.77...v25.4.78
 [v25.4.79]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.78...v25.4.79
 [v25.6.0]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.79...v25.6.0
+[v25.6.1]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.0...v25.6.1
