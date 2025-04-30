@@ -1,3 +1,13 @@
+## [v25.6.2] - 2025-04-30
+### :sparkles: New Features
+- [`a9bf2d2`](https://github.com/webitel/webitel-ui-sdk/commit/a9bf2d2a52a8e429334306d408ab3f7b40dfb37b) - changed icon name [WTEL-6809](https://webitel.atlassian.net/browse/WTEL-6809) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`612c126`](https://github.com/webitel/webitel-ui-sdk/commit/612c12641a9e77f5776b54892868314e50d4a763) - added new icon for action bar [WTEL-6809](https://webitel.atlassian.net/browse/WTEL-6809) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+### :bug: Bug Fixes
+- [`7adf4a2`](https://github.com/webitel/webitel-ui-sdk/commit/7adf4a267a089969b9bef4c4f0cc1d8543ac3c3f) - contact group[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`da3c052`](https://github.com/webitel/webitel-ui-sdk/commit/da3c052719c5d7bdd775642004502bee6ba88fbc) - contact group filter[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.6.1] - 2025-04-29
 ### :bug: Bug Fixes
 - [`11d2b45`](https://github.com/webitel/webitel-ui-sdk/commit/11d2b455a549ddcaaf6bdc9ef3554ca7cccd2aaf) - observe in wt-select component[WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818) *(commit by [@Lera24](https://github.com/Lera24))*
@@ -2055,3 +2065,4 @@
 [v25.4.79]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.78...v25.4.79
 [v25.6.0]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.79...v25.6.0
 [v25.6.1]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.0...v25.6.1
+[v25.6.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.1...v25.6.2
