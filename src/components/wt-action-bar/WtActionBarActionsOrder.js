@@ -10,7 +10,7 @@ export const tableActionsOrder = [
   IconAction.FILTERS,
   IconAction.REFRESH,
   IconAction.DELETE,
-  IconAction.ADD_USER,
+  IconAction.ADD_CONTACT,
 ];
 
 // TODO

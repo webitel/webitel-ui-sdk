@@ -442,7 +442,7 @@ export default {
             'webitelUI.filters.presets.preset',
           ).toLowerCase()}`;
         },
-        [IconAction.ADD_USER]: ({ linked }) => {
+        [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
       },
