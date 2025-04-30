@@ -436,6 +436,9 @@ export default {
         [IconAction.APPLY_PRESET]: ({ linked }) => {
           return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
         },
+        [IconAction.ADD_USER]: ({ linked }) => {
+          return `${linked('reusable.add')} контакты`;
+        },
       },
     },
     errorPages: {

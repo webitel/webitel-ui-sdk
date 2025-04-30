@@ -1,6 +1,7 @@
 import { objCamelToKebab } from '../../../scripts/caseConverters.js';
 import account from './account.svg';
 import addFilter from './add-filter.svg';
+import addUser from './add-user.svg';
 import adfs from './adfs.svg';
 import agent from './agent.svg';
 import api from './api.svg';
@@ -68,7 +69,6 @@ import comment from './comment.svg';
 import conference from './conference.svg';
 import contacts from './contacts.svg';
 import copy from './copy.svg';
-import updateCalls from './update-calls.svg';
 import customChatGateway from './custom-chat-gateway.svg';
 import darkMode from './dark-mode.svg';
 import docs from './docs.svg';
@@ -192,6 +192,7 @@ import ttsDownload from './tts-download.svg';
 import undo from './undo.svg';
 import union from './union.svg';
 import unpin from './unpin.svg';
+import updateCalls from './update-calls.svg';
 import upload from './upload.svg';
 import user from './user.svg';
 import variableSelect from './variable-select.svg';
@@ -219,6 +220,7 @@ export default objCamelToKebab({
   attention,
   azure,
   addFilter,
+  addUser,
   back,
   bell,
   bellBadged,
