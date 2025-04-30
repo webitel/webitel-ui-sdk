@@ -19,4 +19,5 @@ export const WtIconActionIconMappings = Object.freeze({
   [IconAction.SAVE]: 'save',
   [IconAction.SAVE_PRESET]: 'save',
   [IconAction.APPLY_PRESET]: 'load-preset',
+  [IconAction.ADD_CONTACT]: 'add-contact',
 });
