@@ -18,7 +18,9 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 ) => {
   const usePaginationStore = createTablePaginationStore(namespace);
   const useHeadersStore = createTableHeadersStore(namespace, { headers });
-  const useFiltersStore = createTableFiltersStore(namespace);
+  const useFiltersStore = createTableFiltersStore(namespace, {
+    filtersManagerConfig: {},
+  });
 
   return defineStore(namespace, (): TableStore<Entity> => {
     const parentId = ref();

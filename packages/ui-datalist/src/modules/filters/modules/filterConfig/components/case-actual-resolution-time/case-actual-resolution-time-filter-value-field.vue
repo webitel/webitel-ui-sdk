@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import DateTimeFilterValueField from '../_shared/date-time-filter/date-time-filter-value-field.vue';
+import DateTimeFilterValueField from '../_shared/date-time-filter/date-time-range/date-time-filter-value-field.vue';
 
 type ModelValue = {
   from: number;

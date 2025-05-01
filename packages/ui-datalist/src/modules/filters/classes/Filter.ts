@@ -45,7 +45,7 @@ export class Filter implements IFilter {
     if (params.consumer) {
       if (
         params.consumer === FilterValueConsumer.API &&
-        this.config?.transformer.transformToApi
+        this.config?.transformer?.transformToApi
       ) {
         return this.config.transformer.transformToApi(this);
       }

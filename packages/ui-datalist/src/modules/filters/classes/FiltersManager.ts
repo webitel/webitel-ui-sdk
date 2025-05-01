@@ -8,6 +8,7 @@ import {
   filterValueToSnapshotKey,
 } from '../scripts/utils';
 import {
+  AnyFilterConfig,
   FilterData,
   FilterInitParams,
   FilterLabel,
@@ -22,6 +23,7 @@ import { Filter } from './Filter';
 
 class FiltersManager implements IFiltersManager {
   filters = new Map<FilterName, IFilter>();
+  filterConfigs = new Map<FilterName, AnyFilterConfig>();
 
   constructor(private config?: FiltersManagerConfig) {}
 
@@ -34,7 +36,11 @@ class FiltersManager implements IFiltersManager {
   }
 
   addFilter(filterInitParams: FilterInitParams, payload?: object): IFilter {
-    const filter = new Filter(filterInitParams, payload);
+    const filterConfig = this.filterConfigs.get(filterInitParams.name);
+    const filter = new Filter(
+      { ...filterInitParams, config: filterConfig },
+      payload,
+    );
     this.filters.set(filterInitParams.name, filter);
     return filter;
   }
@@ -57,6 +63,12 @@ class FiltersManager implements IFiltersManager {
     const filter = this.filters.get(name);
     this.filters.delete(name);
     return filter;
+  }
+
+  setFilterConfigs(configs: AnyFilterConfig[]): void {
+    configs.forEach((config) => {
+      this.filterConfigs.set(config.name, config);
+    });
   }
 
   toString({

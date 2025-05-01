@@ -8,7 +8,10 @@ import { FiltersManagerConfig } from './types/Filters.types';
 
 export const createTableFiltersStore = (
   namespace: string,
-  config?: { filtersManagerConfig: FiltersManagerConfig },
+  config?: {
+    // filtersStoreConfig: ?? – implement if will be needed
+    filtersManagerConfig: FiltersManagerConfig;
+  },
 ) => {
   const id = `${namespace}/filters`;
 

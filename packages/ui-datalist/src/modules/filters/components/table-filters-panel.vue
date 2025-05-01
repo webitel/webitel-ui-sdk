@@ -147,6 +147,8 @@ const {
   filterableExtensionFields: props.filterableExtensionFields,
 });
 
+props.filtersManager.setFilterConfigs(filterConfigs.value);
+
 const enablePresets = computed(() => !!props.presetNamespace);
 </script>
 

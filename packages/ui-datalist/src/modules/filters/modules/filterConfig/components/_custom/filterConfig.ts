@@ -97,7 +97,7 @@ class TypeExtensionWtSysTypeFieldFilterConfig
 }
 
 class TypeExtensionDateTimeFieldFilterConfig extends TypeExtensionFilterConfig {
-  transformer = DateTimeFilterTransformer;
+  transformer = new DateTimeFilterTransformer();
 }
 
 export const createTypeExtensionFilterConfig = (

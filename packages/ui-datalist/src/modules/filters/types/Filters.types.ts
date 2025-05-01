@@ -39,18 +39,6 @@ export interface FilterEnumOption {
   value: FilterValue;
 }
 
-export interface FilterInstanceConfig {
-  /**
-   * Perform simple type conversion on store/restore,
-   * without need to provide custom store/restore functions
-   */
-  storableType?: string;
-  /**
-   * list of persistence storages that should be used for this filter
-   */
-  storage?: string[];
-}
-
 export interface IFilter {
   name: FilterName;
   value: FilterValue;
@@ -100,7 +88,14 @@ export type FilterConfigBaseParams = {
   name?: FilterName;
   valueInputComponent?: Component;
   valuePreviewComponent?: Component;
-  notDeletable?: boolean;
+  /**
+   * @author @dlohvinov
+   *
+   * @description
+   * default filter value to set automatically ai init and to reset to
+   * for example, "createdAt" filter in history app
+   */
+  default?: FilterValue;
 };
 
 export interface IWtSysTypeFilterConfig extends BaseFilterConfig {
@@ -139,14 +134,11 @@ export type FiltersManagerFiltersSpecifierOptions = {
 
 export interface IFiltersManager {
   filters: Map<FilterName, IFilter>;
+  filterConfigs: Map<FilterName, AnyFilterConfig>;
 
   hasFilter: (name: FilterName) => boolean;
   getFilter: (name: FilterName) => IFilter;
-  addFilter: (
-    params: FilterInitParams,
-    payload?: object,
-    config?: FilterInstanceConfig,
-  ) => IFilter;
+  addFilter: (params: FilterInitParams, payload?: object) => IFilter;
   updateFilter: ({
     name,
   }: {
