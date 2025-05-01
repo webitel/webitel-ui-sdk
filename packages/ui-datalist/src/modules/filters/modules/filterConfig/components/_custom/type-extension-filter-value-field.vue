@@ -5,15 +5,18 @@
     :field="props.filterConfig.field"
   >
     <template #[WtTypeExtensionFieldKind.Boolean]="{ defaultProps }">
-      <has-option-filter-value-field
-        v-model:model-value="model"
-      />
+      <has-option-filter-value-field v-model:model-value="model" />
     </template>
     <template #[WtTypeExtensionFieldKind.Select]="{ defaultProps }">
       <wt-select
         v-bind="defaultProps"
-        :value="model ?? [] /* so that component won't break when model is nullish at init */"
-        :search-method="(...params) => props.filterConfig.searchRecords(...params)"
+        :value="
+          model ??
+          [] /* so that component won't break when model is nullish at init */
+        "
+        :search-method="
+          (...params) => props.filterConfig.searchRecords(...params)
+        "
         use-value-from-options-by-prop="id"
         @input="model = $event"
       />
@@ -21,24 +24,36 @@
     <template #[WtTypeExtensionFieldKind.Multiselect]="{ defaultProps }">
       <wt-select
         v-bind="defaultProps"
-        :value="model ?? [] /* so that component won't break when model is nullish at init */"
-        :search-method="(...params) => props.filterConfig.searchRecords(...params)"
+        :value="
+          model ??
+          [] /* so that component won't break when model is nullish at init */
+        "
+        :search-method="
+          (...params) => props.filterConfig.searchRecords(...params)
+        "
         use-value-from-options-by-prop="id"
         @input="model = $event"
       />
+    </template>
+    <template #[WtTypeExtensionFieldKind.Calendar]>
+      <date-time-options-filter-value-field v-model:model-value="model" />
     </template>
   </wt-type-extension-value-input>
 </template>
 
 <script setup lang="ts">
-import {useVuelidate} from "@vuelidate/core";
-import {required} from "@vuelidate/validators";
-import { WtSelect, WtTypeExtensionValueInput } from '@webitel/ui-sdk/components';
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import {
+  WtSelect,
+  WtTypeExtensionValueInput,
+} from '@webitel/ui-sdk/components';
 import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums'; // DO NOT REMOVE THIS IMPORT!! : Webstorm lies you, import is used for dynamic slot computation
-import {computed, useAttrs, watch} from "vue";
+import { computed, useAttrs, watch } from 'vue';
 
+import DateTimeOptionsFilterValueField from '../_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
-import {ITypeExtensionFilterConfig} from "./index";
+import { ITypeExtensionFilterConfig } from './index';
 
 const model = defineModel<unknown>();
 
@@ -71,6 +86,4 @@ watch(
 );
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
