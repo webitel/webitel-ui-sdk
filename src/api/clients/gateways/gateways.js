@@ -21,7 +21,7 @@ const instance = getDefaultInstance();
 const baseUrl = '/sip/gateways';
 
 const getGatewayList = async (params) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'name'];
 
   const defaultObject = {
     name: '',
@@ -32,6 +32,7 @@ const getGatewayList = async (params) => {
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
     starToSearch('search'),
+    starToSearch('name'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),

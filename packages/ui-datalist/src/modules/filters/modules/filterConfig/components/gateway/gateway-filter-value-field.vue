@@ -2,9 +2,9 @@
   <wt-select
     :close-on-select="false"
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="searchMethod"
-    :value="model"
+    :search-method="searchGateway"
     :v="v$.model"
+    :value="model"
     multiple
     use-value-from-options-by-prop="id"
     @input="handleInput"
@@ -39,6 +39,10 @@ const v$ = useVuelidate(
   { $autoDirty: true },
 );
 v$.value.$touch();
+
+const searchGateway = async (params) => {
+  return params.search ? await searchMethod({ name: params.search }) : await searchMethod(params);
+};
 
 watch(
   () => v$.value.$invalid,
