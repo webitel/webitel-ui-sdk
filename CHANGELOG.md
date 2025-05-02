@@ -1,3 +1,8 @@
+## [v25.6.3] - 2025-05-02
+### :sparkles: New Features
+- [`6b26b8e`](https://github.com/webitel/webitel-ui-sdk/commit/6b26b8e95506c68bfb3836f50843c88139ee4244) - cases extension fields filters datetime range [WTEL-6789](https://webitel.atlassian.net/browse/WTEL-6789) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.6.2] - 2025-04-30
 ### :sparkles: New Features
 - [`a9bf2d2`](https://github.com/webitel/webitel-ui-sdk/commit/a9bf2d2a52a8e429334306d408ab3f7b40dfb37b) - changed icon name [WTEL-6809](https://webitel.atlassian.net/browse/WTEL-6809) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -2066,3 +2071,4 @@
 [v25.6.0]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.79...v25.6.0
 [v25.6.1]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.0...v25.6.1
 [v25.6.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.1...v25.6.2
+[v25.6.3]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.2...v25.6.3
