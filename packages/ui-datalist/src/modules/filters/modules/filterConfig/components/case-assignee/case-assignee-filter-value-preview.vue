@@ -3,16 +3,16 @@
 </template>
 
 <script lang="ts" setup>
-import {computed} from "vue";
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { WebitelContactsContact } from 'webitel-sdk';
 
-import {IFilter} from "../../../../classes/Filter";
+import { IFilter } from '../../../../types/Filters.types';
 import LookupFilterValuePreview from '../_shared/lookup-filter-preview/lookup-filter-value-preview.vue';
 
 const props = defineProps<{
   value: WebitelContactsContact[];
-  filter: IFilter,
+  filter: IFilter;
 }>();
 
 const { t } = useI18n();

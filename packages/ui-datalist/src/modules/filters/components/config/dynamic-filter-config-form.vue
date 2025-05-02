@@ -65,10 +65,13 @@ import deepcopy from 'deep-copy';
 import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {FilterInitParams, IFilter} from "../../classes/Filter";
-import {BaseFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
+import {
+  BaseFilterConfig,
+  FilterInitParams,
+  IFilter,
+} from '../../types/Filters.types';
 import DynamicFilterConfigFormLabel from './dynamic-filter-config-form-label.vue';
-import DynamicFilterConfigFormValueInput from "./dynamic-filter-config-form-value-input.vue";
+import DynamicFilterConfigFormValueInput from './dynamic-filter-config-form-value-input.vue';
 
 const props = defineProps<{
   /**

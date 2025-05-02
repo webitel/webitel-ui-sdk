@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import {AnyFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
+import { AnyFilterConfig } from '../../types/Filters.types';
 
 const filterValue = defineModel<unknown>();
 
@@ -23,5 +23,4 @@ const emit = defineEmits<{
 }>();
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

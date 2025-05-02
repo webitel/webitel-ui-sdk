@@ -33,8 +33,7 @@
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { useI18n } from 'vue-i18n';
 
-import {FilterInitParams} from "../classes/Filter";
-import {BaseFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
+import { BaseFilterConfig, FilterInitParams } from '../types/Filters.types';
 import DynamicFilterConfigForm from './config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
 

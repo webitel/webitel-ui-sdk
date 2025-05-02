@@ -1,15 +1,16 @@
-import set from 'lodash/fp/set';
+import set from 'lodash/set';
 import { defineStore, storeToRefs } from 'pinia';
 import { type Ref, ref, watch } from 'vue';
 
-import { createTableFiltersStore } from '../filters/createTableFiltersStore.ts';
-import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
-import { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
+import { createTableFiltersStore } from '../filters/createTableFiltersStore';
+import { FilterValueConsumer } from '../filters/enums/FilterValueConsumer';
+import { createTableHeadersStore } from '../headers/createTableHeadersStore';
+import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
 import {
   PatchItemPropertyParams,
   TableStore,
   useTableStoreParams,
-} from '../types/tableStore.types.ts';
+} from '../types/tableStore.types';
 
 export const createTableStore = <Entity extends { id: string; etag?: string }>(
   namespace: string,
@@ -17,7 +18,9 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 ) => {
   const usePaginationStore = createTablePaginationStore(namespace);
   const useHeadersStore = createTableHeadersStore(namespace, { headers });
-  const useFiltersStore = createTableFiltersStore(namespace);
+  const useFiltersStore = createTableFiltersStore(namespace, {
+    filtersManagerConfig: {},
+  });
 
   return defineStore(namespace, (): TableStore<Entity> => {
     const parentId = ref();
@@ -65,7 +68,9 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       $patchPaginationStore({ next: false });
 
       const params = {
-        ...filtersManager.value.getAllValues(),
+        ...filtersManager.value.getValues({
+          consumer: FilterValueConsumer.API,
+        }),
         page: page.value,
         size: size.value,
         sort: sort.value,

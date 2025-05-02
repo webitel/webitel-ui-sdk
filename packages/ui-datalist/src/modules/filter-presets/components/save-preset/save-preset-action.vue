@@ -38,15 +38,12 @@ import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
 import {
-  createFiltersManager, FilterName,
+  AnyFilterConfig,
+  createFiltersManager,
+  FilterName,
   IFiltersManager,
 } from '../../../filters';
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
-import {
-  addPreset,
-  getPresetList,
-  updatePreset,
-} from '../../api/PresetQuery';
+import { addPreset, getPresetList, updatePreset } from '../../api/PresetQuery';
 import OverwritePresetPopup from './overwrite-preset-popup.vue';
 import SavePresetPopup, { SubmitConfig } from './save-preset-popup.vue';
 

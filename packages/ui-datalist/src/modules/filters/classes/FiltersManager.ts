@@ -1,5 +1,6 @@
 import { isEmpty } from '@webitel/ui-sdk/scripts';
 
+import { FilterValueConsumer } from '../enums/FilterValueConsumer';
 import {
   filterLabelToSnapshotKey,
   filterNameFromSnapshotKey,
@@ -7,86 +8,22 @@ import {
   filterValueToSnapshotKey,
 } from '../scripts/utils';
 import {
-  Filter,
+  AnyFilterConfig,
   FilterData,
   FilterInitParams,
-  FilterInstanceConfig,
   FilterLabel,
   FilterName,
+  FiltersManagerConfig,
+  FiltersManagerFiltersSpecifierOptions,
   FilterValue,
   IFilter,
-} from './Filter';
-
-export interface IFiltersManager {
-  filters: Map<FilterName, IFilter>;
-
-  hasFilter: (name: FilterName) => boolean;
-  getFilter: (name: FilterName) => IFilter;
-  addFilter: (
-    params: FilterInitParams,
-    payload?: object,
-    config?: FilterInstanceConfig,
-  ) => IFilter;
-  updateFilter: ({
-    name,
-  }: {
-    name: FilterName;
-    value?: FilterValue;
-    label?: FilterLabel;
-  }) => IFilter;
-  deleteFilter: (name: FilterName) => IFilter;
-
-  /**
-   * Converts filters data to String, that can be stored
-   */
-  toString: () => string;
-
-  /**
-   * Restores filters from string
-   */
-  fromString: (snapshotStr: string) => void;
-
-  /**
-   * deletes filters
-   * If include/exclude are not provided, all filters will be deleted
-   */
-  reset: ({
-    include,
-    exclude,
-  }?: {
-    include?: FilterName[];
-    exclude?: FilterName[];
-  }) => void;
-
-  /**
-   * @returns Array<FilterName>
-   */
-  getAllKeys: () => FilterName[];
-
-  /**
-   * @returns { FilterName: FilterValue }
-   */
-
-  getAllValues: () => { [name: FilterName]: FilterValue };
-  /**
-   * @returns Array<IFilter>
-   * @param include
-   * @param exclude
-   */
-
-  getFiltersList: ({
-    include,
-    exclude,
-  }?: {
-    include?: FilterName[];
-    exclude?: FilterName[];
-  }) => IFilter[];
-}
-
-export type FiltersManagerConfig = FilterInstanceConfig;
+  IFiltersManager,
+} from '../types/Filters.types';
+import { Filter } from './Filter';
 
 class FiltersManager implements IFiltersManager {
   filters = new Map<FilterName, IFilter>();
+  filterConfigs = new Map<FilterName, AnyFilterConfig>();
 
   constructor(private config?: FiltersManagerConfig) {}
 
@@ -98,12 +35,12 @@ class FiltersManager implements IFiltersManager {
     return this.filters.get(name);
   }
 
-  addFilter(
-    filterInitParams: FilterInitParams,
-    payload?: object,
-    config?: FilterInstanceConfig,
-  ): IFilter {
-    const filter = new Filter(filterInitParams, payload, config || this.config);
+  addFilter(filterInitParams: FilterInitParams, payload?: object): IFilter {
+    const filterConfig = this.filterConfigs.get(filterInitParams.name);
+    const filter = new Filter(
+      { ...filterInitParams, config: filterConfig },
+      payload,
+    );
     this.filters.set(filterInitParams.name, filter);
     return filter;
   }
@@ -128,13 +65,10 @@ class FiltersManager implements IFiltersManager {
     return filter;
   }
 
-  getAllValues(): { [name: FilterName]: FilterValue } {
-    const filters = [...this.filters.values()].reduce((acc, filter) => {
-      acc[filter.name] = filter.value;
-      return acc;
-    }, {});
-
-    return filters;
+  setFilterConfigs(configs: AnyFilterConfig[]): void {
+    configs.forEach((config) => {
+      this.filterConfigs.set(config.name, config);
+    });
   }
 
   toString({
@@ -253,6 +187,23 @@ class FiltersManager implements IFiltersManager {
       });
       return;
     }
+  }
+
+  getValues(
+    params?: {
+      consumer?: FilterValueConsumer;
+    } & FiltersManagerFiltersSpecifierOptions,
+  ) {
+    const filters = [...this.filters.values()].reduce((acc, filter) => {
+      acc[filter.name] = filter.get({ consumer: params?.consumer });
+      return acc;
+    }, {});
+
+    return filters;
+  }
+
+  getAllValues(): { [name: FilterName]: FilterValue } {
+    return this.getValues();
   }
 }
 

@@ -89,8 +89,7 @@ import { AxiosError } from 'axios';
 import { computed, ref } from 'vue';
 import { EnginePresetQuery } from 'webitel-sdk';
 
-import { createFiltersManager } from '../../../filters';
-import {AnyFilterConfig} from "../../../filters/modules/filterConfig/classes/FilterConfig";
+import { AnyFilterConfig, createFiltersManager } from '../../../filters';
 import PresetDescriptionField from '../_shared/input-fields/preset-description-field.vue';
 import PresetNameField from '../_shared/input-fields/preset-name-field.vue';
 import PresetFiltersPreview from '../_shared/preset-filters-preview.vue';
@@ -201,21 +200,21 @@ const updatePresetName = () => {
 <style lang="scss" scoped>
 .preset-preview-title-wrapper {
   display: flex;
-  min-width: 0;
   gap: var(--spacing-xs);
+  min-width: 0;
 }
 
 .preset-preview-name {
-  overflow: hidden;
   flex: 1 1 0;
-  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .preset-preview-content {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-xs);
   gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
 }
 </style>

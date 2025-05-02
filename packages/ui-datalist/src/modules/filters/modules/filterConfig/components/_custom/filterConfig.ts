@@ -3,20 +3,31 @@ import { WtTypeExtensionFieldKind } from '@webitel/ui-sdk/enums';
 import get from 'lodash/get';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
-import { FilterConfig } from '../../classes/FilterConfig';
-import { CustomFilterOption } from '../../enums/FilterOption';
 import {
   BaseFilterConfig,
   FilterConfigBaseParams,
   IWtSysTypeFilterConfig,
-} from '../../types/FilterConfig';
+} from '../../../../types/Filters.types';
+import { FilterConfig } from '../../classes/FilterConfig';
+import { CustomFilterOption } from '../../enums/FilterOption';
+import { DateTimeFilterTransformer } from '../_shared/date-time-filter/DateTimeFilterTransformer';
 import TypeExtensionFilterValueField from './type-extension-filter-value-field.vue';
 import TypeExtensionFilterValuePreview from './type-extension-filter-value-preview.vue';
 
+/**
+ * @description
+ * TypeExtension filter configs should have "field" property
+ * which defines its type
+ */
 export interface ITypeExtensionFilterConfig extends BaseFilterConfig {
   readonly field: WebitelProtoDataField;
 }
 
+/**
+ * @internal
+ * @description
+ * base class for all Type Extension/Custom Lookup filters
+ */
 class TypeExtensionFilterConfig
   extends FilterConfig
   implements ITypeExtensionFilterConfig
@@ -38,6 +49,12 @@ class TypeExtensionFilterConfig
   }
 }
 
+/**
+ * @internal
+ * @description
+ * class for fields which are referencing to other system types (i.e. WtSysType)
+ * designed to be represented as select/multiselect with external api options
+ */
 class TypeExtensionWtSysTypeFieldFilterConfig
   extends TypeExtensionFilterConfig
   implements IWtSysTypeFilterConfig
@@ -79,21 +96,27 @@ class TypeExtensionWtSysTypeFieldFilterConfig
   }
 }
 
-export type {
-  TypeExtensionFilterConfig,
-  TypeExtensionWtSysTypeFieldFilterConfig,
-};
+class TypeExtensionDateTimeFieldFilterConfig extends TypeExtensionFilterConfig {
+  transformer = new DateTimeFilterTransformer();
+}
 
 export const createTypeExtensionFilterConfig = (
-  name: CustomFilterOption,
+  params: FilterConfigBaseParams,
   { field }: { field: WebitelProtoDataField },
 ) => {
   switch (field.kind) {
     case WtTypeExtensionFieldKind.Select:
-      return new TypeExtensionWtSysTypeFieldFilterConfig(name, { field });
+      return new TypeExtensionWtSysTypeFieldFilterConfig(params, { field });
     case WtTypeExtensionFieldKind.Multiselect:
-      return new TypeExtensionWtSysTypeFieldFilterConfig(name, { field });
+      return new TypeExtensionWtSysTypeFieldFilterConfig(params, { field });
+    case WtTypeExtensionFieldKind.Calendar:
+      return new TypeExtensionDateTimeFieldFilterConfig(params, { field });
     default:
-      return new TypeExtensionFilterConfig(name, { field });
+      return new TypeExtensionFilterConfig(params, { field });
   }
+};
+
+export type {
+  TypeExtensionFilterConfig,
+  TypeExtensionWtSysTypeFieldFilterConfig,
 };

@@ -1,16 +1,17 @@
 import { defineStore } from 'pinia';
 import { computed, reactive, ref } from 'vue';
 
-import { PersistedStorageType } from '../persist/PersistedStorage.types.ts';
-import { usePersistedStorage } from '../persist/usePersistedStorage.ts';
-import {
-  createFiltersManager,
-  FiltersManagerConfig,
-} from './classes/FiltersManager.ts';
+import { PersistedStorageType } from '../persist/PersistedStorage.types';
+import { usePersistedStorage } from '../persist/usePersistedStorage';
+import { createFiltersManager } from './classes/FiltersManager';
+import { FiltersManagerConfig } from './types/Filters.types';
 
 export const createTableFiltersStore = (
   namespace: string,
-  config?: { filtersManagerConfig: FiltersManagerConfig },
+  config?: {
+    // filtersStoreConfig: ?? – implement if will be needed
+    filtersManagerConfig: FiltersManagerConfig;
+  },
 ) => {
   const id = `${namespace}/filters`;
 
