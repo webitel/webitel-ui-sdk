@@ -190,7 +190,11 @@ class FiltersManager implements IFiltersManager {
     );
 
     Object.entries(filtersData).forEach(([name, filterData]) => {
-      this.addFilter({ ...filterData, name });
+      if (this.hasFilter(name)) {
+        this.updateFilter({ name, ...filterData });
+      } else {
+        this.addFilter({ ...filterData, name });
+      }
     });
   }
 
