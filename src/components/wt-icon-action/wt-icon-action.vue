@@ -39,6 +39,7 @@ const props = defineProps({
         IconAction.CANCEL,
         IconAction.SAVE_PRESET,
         IconAction.APPLY_PRESET,
+        IconAction.ADD_CONTACT,
       ]).includes(v),
   },
   disabled: {

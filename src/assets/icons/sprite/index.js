@@ -1,5 +1,6 @@
 import { objCamelToKebab } from '../../../scripts/caseConverters.js';
 import account from './account.svg';
+import addContact from './add-contact.svg';
 import addFilter from './add-filter.svg';
 import adfs from './adfs.svg';
 import agent from './agent.svg';
@@ -219,6 +220,7 @@ export default objCamelToKebab({
   attention,
   azure,
   addFilter,
+  addContact,
   back,
   bell,
   bellBadged,
