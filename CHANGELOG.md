@@ -1,3 +1,9 @@
+## [v25.6.5] - 2025-05-05
+### :bug: Bug Fixes
+- [`39d99ac`](https://github.com/webitel/webitel-ui-sdk/commit/39d99ac3629658df76536b9d8e6026cb5747d9e1) - fixed styles for select tags line-height [WTEL-6360](https://webitel.atlassian.net/browse/WTEL-6360) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`5472694`](https://github.com/webitel/webitel-ui-sdk/commit/5472694abf7343a0b6045a15a42b047943be40ba) - assignee preview filter[WTEL-6848](https://webitel.atlassian.net/browse/WTEL-6848) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.6.4] - 2025-05-05
 ### :bug: Bug Fixes
 - [`0d83490`](https://github.com/webitel/webitel-ui-sdk/commit/0d8349063f82859dcb867c2ebca2608724bf13b3) - "stucking" filter preview local values after preset application [WTEL-6821](https://webitel.atlassian.net/browse/WTEL-6821) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2079,3 +2085,4 @@
 [v25.6.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.1...v25.6.2
 [v25.6.3]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.2...v25.6.3
 [v25.6.4]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.3...v25.6.4
+[v25.6.5]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.4...v25.6.5
