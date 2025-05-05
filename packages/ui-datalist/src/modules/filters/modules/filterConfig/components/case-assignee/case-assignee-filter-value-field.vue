@@ -25,7 +25,8 @@ import { WtCheckbox, WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+import { CaseAssigneeFilterConfig } from "./index";
+
 
 type ModelValue = {
   list: string[];
@@ -35,7 +36,7 @@ type ModelValue = {
 const model = defineModel<ModelValue>();
 
 const props = defineProps<{
-  filterConfig: WtSysTypeFilterConfig;
+  filterConfig: CaseAssigneeFilterConfig;
 }>();
 
 const emit = defineEmits<{
