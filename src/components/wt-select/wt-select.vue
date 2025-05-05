@@ -335,6 +335,7 @@ export default {
   .multiselect__custom-tag,
   .multiselect__single-label {
     // text overflow 3 dots
+    @extend %typo-body-1;
     display: block;
     overflow: hidden;
     max-width: 100%;
