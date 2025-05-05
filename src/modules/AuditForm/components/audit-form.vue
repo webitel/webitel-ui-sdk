@@ -10,9 +10,7 @@
         :key="key"
         ref="auditQuestions"
         :first="key === 0"
-        :mode="mode"
         :question="question"
-        :readonly="readonly"
         :answer="answers && answers[key] ? answers[key] : null"
         @copy="copyQuestion({ question, key })"
         @delete="deleteQuestion({ question, key })"
@@ -20,34 +18,13 @@
         @update:answer="handleAnswerUpdate({ key, value: $event })"
       />
     </div>
-    <footer class="audit-form-footer">
-      <template
-        v-if="mode === 'fill'"
-      >
-        <wt-button
-          :disabled="isInvalidForm"
-          @click="saveEvaluation"
-        >
-          {{ t('reusable.save') }}
-        </wt-button>
-        <wt-button
-          color="secondary"
-          @click="cancelEvaluation"
-        >
-          {{ t('reusable.cancel') }}
-        </wt-button>
-      </template>
 
-
-      <wt-button
-        v-else-if="mode === 'create' && !readonly"
-        class="audit-form-footer-create-question-action"
-        :disabled="isInvalidForm"
-        @click="addQuestion"
-      >
-        {{ t('webitelUI.auditForm.addQuestion') }}
-      </wt-button>
-    </footer>
+    <audit-form-footer
+      :invalid="isInvalidForm"
+      @fill:save="saveEvaluation"
+      @fill:cancel="cancelEvaluation"
+      @create:add="addQuestion"
+    />
   </section>
 </template>
 
@@ -63,13 +40,12 @@ import {
   useTemplateRef,
   watch,
 } from 'vue';
-import { useI18n } from 'vue-i18n';
 import {EngineAuditRate,EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
 
-import WtButton from '../../../components/wt-button/wt-button.vue';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
 import AuditFormQuestion from './audit-form-question.vue';
+import AuditFormFooter from "./form/form-footer/audit-form-footer.vue";
 
 const answersModel = defineModel<EngineQuestionAnswer[]>('answers');
 
@@ -106,7 +82,6 @@ const emit = defineEmits([
   'cancel:evaluation',
 ]);
 
-const { t } = useI18n();
 const v$ = useVuelidate();
 
 const auditQuestions = useTemplateRef('auditQuestions');
@@ -115,6 +90,8 @@ const isEditingAnswers = computed(() => {
   return props.evaluationResult?.id;
 });
 
+provide('readonly', props.readonly);
+provide('mode', props.mode);
 provide('isEditingAnswers', isEditingAnswers);
 
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
@@ -239,15 +216,5 @@ onMounted(() => {
   &__sortable-wrapper {
     display: contents;
   }
-}
-
-.audit-form-footer {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-sm);
-}
-
-.audit-form-footer-create-question-action {
-  align-self: flex-end;
 }
 </style>
