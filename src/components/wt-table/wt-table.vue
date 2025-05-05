@@ -8,137 +8,137 @@
         v-if="!headless"
         class="wt-table__head"
       >
-        <tr
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__head"
+      <tr
+        :style="columnsStyle"
+        class="wt-table__tr wt-table__tr__head"
+      >
+        <th
+          v-if="selectable"
+          class="wt-table__th wt-table__th--checkbox"
         >
-          <th
-            v-if="selectable"
-            class="wt-table__th wt-table__th--checkbox"
-          >
-            <wt-checkbox
-              :selected="isAllSelected"
-              @change="selectAll"
-            />
-          </th>
-          <th
-            v-for="(col, key) of dataHeaders"
-            :key="key"
-            :class="[
+          <wt-checkbox
+            :selected="isAllSelected"
+            @change="selectAll"
+          />
+        </th>
+        <th
+          v-for="(col, key) of dataHeaders"
+          :key="key"
+          :class="[
               { 'wt-table__th--sortable': isColSortable(col) },
               `wt-table__th--sort-${col.sort}`,
             ]"
-            class="wt-table__th"
-            @click="sort(col)"
-          >
-            <div class="wt-table__th__text">
-              {{ col.text }}
-            </div>
-            <wt-icon
-              v-if="sortable"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-              icon="sort-arrow-up"
-              size="sm"
-            />
-            <wt-icon
-              v-if="sortable"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-              icon="sort-arrow-down"
-              size="sm"
-            />
-          </th>
-          <th
-            v-if="gridActions"
-            class="wt-table__th__actions"
-          >
-            <!--    @slot Table head actions row slot -->
-            <slot name="actions-header" />
-          </th>
-        </tr>
+          class="wt-table__th"
+          @click="sort(col)"
+        >
+          <div class="wt-table__th__text">
+            {{ col.text }}
+          </div>
+          <wt-icon
+            v-if="sortable"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+            icon="sort-arrow-up"
+            size="sm"
+          />
+          <wt-icon
+            v-if="sortable"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+            icon="sort-arrow-down"
+            size="sm"
+          />
+        </th>
+        <th
+          v-if="gridActions"
+          class="wt-table__th__actions"
+        >
+          <!--    @slot Table head actions row slot -->
+          <slot name="actions-header" />
+        </th>
+      </tr>
       </thead>
 
       <tbody class="wt-table__body">
-        <tr
-          v-for="(row, dataKey) of data"
-          :key="dataKey"
-          :class="`wt-table__tr__${row.id || dataKey}`"
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__body"
+      <tr
+        v-for="(row, dataKey) of data"
+        :key="dataKey"
+        :class="`wt-table__tr__${row.id || dataKey}`"
+        :style="columnsStyle"
+        class="wt-table__tr wt-table__tr__body"
+      >
+        <td
+          v-if="selectable"
+          class="wt-table__td wt-table__td--checkbox"
         >
-          <td
-            v-if="selectable"
-            class="wt-table__td wt-table__td--checkbox"
-          >
-            <wt-checkbox
-              :selected="_selected.includes(row)"
-              @change="handleSelection(row, $event)"
-            />
-          </td>
+          <wt-checkbox
+            :selected="hasSelected(row)"
+            @change="handleSelection(row, $event)"
+          />
+        </td>
 
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
+        <td
+          v-for="(col, headerKey) of dataHeaders"
+          :key="headerKey"
+          class="wt-table__td"
+        >
+          <!--
+         @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
+         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
+         -->
+          <slot
+            :index="dataKey"
+            :item="row"
+            :name="col.value"
           >
-            <!--
-           @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
-           @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-           -->
-            <slot
-              :index="dataKey"
-              :item="row"
-              :name="col.value"
-            >
-              <div>{{ row[col.value] }}</div>
-            </slot>
-          </td>
+            <div>{{ row[col.value] }}</div>
+          </slot>
+        </td>
 
-          <td
-            v-if="gridActions"
-            class="wt-table__td__actions"
-          >
-            <!--
-          @slot Table body actions row slot
-          @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-           -->
-            <slot
-              :index="dataKey"
-              :item="row"
-              name="actions"
-            />
-          </td>
-        </tr>
+        <td
+          v-if="gridActions"
+          class="wt-table__td__actions"
+        >
+          <!--
+        @slot Table body actions row slot
+        @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
+         -->
+          <slot
+            :index="dataKey"
+            :item="row"
+            name="actions"
+          />
+        </td>
+      </tr>
       </tbody>
 
       <tfoot
         v-if="isTableFooter"
         class="wt-table__foot"
       >
-        <tr
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__foot"
+      <tr
+        :style="columnsStyle"
+        class="wt-table__tr wt-table__tr__foot"
+      >
+        <!--        empty checkbox column -->
+        <th
+          v-if="selectable"
+          class="wt-table__th__checkbox"
+        />
+        <td
+          v-for="(col, headerKey) of dataHeaders"
+          :key="headerKey"
+          class="wt-table__td"
         >
-          <!--        empty checkbox column -->
-          <th
-            v-if="selectable"
-            class="wt-table__th__checkbox"
+          <!--
+         @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
+         @scope [ { "name": "header", "description": "header object" } ]
+         -->
+          <slot
+            :header="col"
+            :index="headerKey"
+            :name="`${col.value}-footer`"
           />
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
-          >
-            <!--
-           @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
-           @scope [ { "name": "header", "description": "header object" } ]
-           -->
-            <slot
-              :header="col"
-              :index="headerKey"
-              :name="`${col.value}-footer`"
-            />
-          </td>
-        </tr>
+        </td>
+      </tr>
       </tfoot>
     </table>
   </div>
@@ -268,6 +268,10 @@ export default {
     */
       return this.sortable && sort !== undefined;
     },
+    hasSelected(row) {
+      // fix for correct form selected object https://webitel.atlassian.net/browse/WTEL-6607
+      return this._selected.some((item) => item.id === row.id) || this._selected.includes(row);
+    },
     selectAll() {
       if (this.selected) {
         if (this.isAllSelected) {
@@ -300,7 +304,14 @@ export default {
         } else {
           this.$emit(
             'update:selected',
-            this._selected.filter((item) => item !== row),
+            this._selected.filter((item) => {
+              // fix for correct form selected object https://webitel.atlassian.net/browse/WTEL-6607
+              if (typeof item === 'object' && typeof row === 'object') {
+                return (item?.id !== row?.id);
+              } else {
+                return item !== row;
+              }
+            }),
           );
         }
       } else {
