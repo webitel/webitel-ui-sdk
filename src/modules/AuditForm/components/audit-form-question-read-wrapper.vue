@@ -1,7 +1,7 @@
 <template>
   <article
     :class="{
-      'audit-form-question-read--filled': isResult && result.score != null,
+      'audit-form-question-read--filled': isAnswer && answerModel.score != null,
       'audit-form-question-read--readonly': readonly,
     }"
     class="audit-form-question-read"
@@ -26,55 +26,58 @@
     <section class="audit-form-question-read-content">
       <component
         :is="QuestionTypeComponent"
+        v-model:answer="answerModel"
         :question="question"
-        :result="result"
+        :result="answerModel /* compat, should use 'answer' */"
         mode="read"
-        @change:result="!readonly && emit('change:result', $event)"
+        @change:result="updateAnswer  /* compat, should use 'answer' */"
       />
       <div
-        v-show="isResult"
+        v-show="isAnswer"
         class="audit-form-question--clear"
-        @click="emit('change:result', {})"
+        @click="resetAnswer"
       >
         {{ $t('webitelUI.auditForm.clearSelection') }}
       </div>
+      {{ answerModel}}
+      <wt-input
+        v-if="answerModel"
+        v-model="answerModel.comment"
+      />
     </section>
+
+    <template v-if="answerModel.updatedBy">
+      <wt-divider />
+      <audit-form-answer-editing-info
+        :answer="answerModel"
+      />
+    </template>
   </article>
 </template>
 
-<script setup>
-import { computed } from 'vue';
-import { EngineAuditQuestionType } from 'webitel-sdk';
+<script lang="ts" setup>
+import { computed, inject } from 'vue';
+import {EngineAuditQuestionType, EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
 
-import WtIcon from '../../../components/wt-icon/wt-icon.vue';
+import { WtDivider,WtIcon, WtInput } from '../../../components';
 import isEmpty from '../../../scripts/isEmpty.js';
-import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
-import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
+import AuditFormAnswerEditingInfo from "./form-answers/answer-editing-info/audit-form-answer-editing-info.vue";
+import AuditFormQuestionOptions from './form-questions/options/audit-form-question-options.vue';
+import AuditFormQuestionScore from './form-questions/score/audit-form-question-score.vue';
 
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true,
-  },
-  result: {
-    type: [Object, null],
-    required: true,
-  },
-  disableDragging: {
-    type: Boolean,
-    default: false,
-  },
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
-  first: {
-    type: Boolean,
-    default: false,
-  },
-});
+const readonly = inject('readonly');
 
-const emit = defineEmits(['change:result', 'activate']);
+const answerModel = defineModel<EngineQuestionAnswer>('answer');
+
+const props = defineProps<{
+  question: EngineQuestion;
+  disableDragging?: boolean;
+  first?: boolean;
+}>();
+
+const emit = defineEmits<{
+  'activate': [];
+}>();
 
 const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Option)
@@ -84,7 +87,22 @@ const QuestionTypeComponent = computed(() => {
   return null;
 });
 
-const isResult = computed(() => !isEmpty(props.result));
+const isAnswer = computed(() => !isEmpty(answerModel.value));
+
+const updateAnswer = (value: EngineQuestionAnswer) => {
+  if (readonly.value) return; // if ... then in preview mode
+
+  // coz only some properties of answer may be patched
+  const newAnswer = Object.assign(answerModel.value, value);
+  answerModel.value = newAnswer;
+};
+
+const resetAnswer = () => {
+  answerModel.value = {
+    ...answerModel.value,
+    score: null, // reset only score field
+  };
+};
 </script>
 
 <style lang="scss" scoped>

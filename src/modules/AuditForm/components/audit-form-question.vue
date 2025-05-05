@@ -5,7 +5,7 @@
     :class="[
       `audit-form-question--mode-${mode}`,
       {
-        'audit-form-question--answered': isResult,
+        'audit-form-question--answered': isAnswer,
       },
       {
         'audit-form-question--sort-ignore': first && mode === 'fill',
@@ -15,54 +15,47 @@
     :first="first"
     :question="question"
     :readonly="readonly"
-    :result="result"
+    :result="answer /* compat, should be ':answer' */"
+    :answer="answer"
     :v="v$"
     class="audit-form-question"
     @activate="activateQuestion"
     @copy="emits('copy')"
     @delete="emits('delete')"
     @change:question="emits('update:question', $event)"
-    @change:result="emits('update:result', $event)"
+    @change:result="emit('update:answer', $event) /* compat, should be ':answer' */"
+    @change:answer="emit('update:answer', $event)"
   />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, onMounted, ref, toRefs } from 'vue';
+import { computed, inject,onMounted, ref, toRefs } from 'vue';
+import { EngineQuestion, EngineQuestionAnswer } from "webitel-sdk";
 
 import vClickaway from '../../../directives/clickaway/clickaway.js';
 import isEmpty from '../../../scripts/isEmpty.js';
 import QuestionRead from './audit-form-question-read-wrapper.vue';
 import QuestionWrite from './audit-form-question-write-wrapper.vue';
 
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true,
-  },
-  result: {
-    type: Object,
-  },
-  mode: {
-    type: String,
-  },
-  first: {
-    type: Boolean,
-    default: false,
-  },
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
+const mode = inject('mode');
+const readonly = inject('readonly');
+
+const props = withDefaults(defineProps<{
+  question: EngineQuestion;
+  answer: EngineQuestionAnswer | null;
+  first?: boolean;
+}>(), {
+  first: false,
 });
 
-const emits = defineEmits([
-  'copy',
-  'delete',
-  'update:question',
-  'update:result',
-]);
+const emit = defineEmits<{
+  'copy': [unknown]; // todo
+  'delete': [unknown]; // todo
+  'update:question': [unknown]; // todo
+  'update:answer': [unknown]; // todo
+}>();
 
 const QuestionState = {
   SAVED: 'saved',
@@ -72,7 +65,7 @@ const QuestionState = {
 const state = ref(QuestionState.SAVED);
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
-const { question, result } = toRefs(props);
+const { question, answer } = toRefs(props);
 
 const v$ = useVuelidate(
   computed(() =>
@@ -83,13 +76,13 @@ const v$ = useVuelidate(
           },
         }
       : {
-          result: {
+          answer: {
             required: (value) =>
               question.value.required ? !isEmpty(value) : true,
           },
         },
   ),
-  { question, result },
+  { question, answer },
   { $autoDirty: true },
 );
 
@@ -102,7 +95,7 @@ const component = computed(() => {
   return QuestionRead;
 });
 
-const isResult = computed(() => !isEmpty(props.result));
+const isAnswer = computed(() => !isEmpty(props.answer));
 
 function saveQuestion() {
   state.value = QuestionState.SAVED;
