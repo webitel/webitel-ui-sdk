@@ -1,3 +1,9 @@
+## [v25.6.4] - 2025-05-05
+### :bug: Bug Fixes
+- [`0d83490`](https://github.com/webitel/webitel-ui-sdk/commit/0d8349063f82859dcb867c2ebca2608724bf13b3) - "stucking" filter preview local values after preset application [WTEL-6821](https://webitel.atlassian.net/browse/WTEL-6821) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`9fbbdbf`](https://github.com/webitel/webitel-ui-sdk/commit/9fbbdbf4b46f9183976d773fc28c9e9a6a26c083) - search in gateways filter[WTEL-6835](https://webitel.atlassian.net/browse/WTEL-6835) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
 ## [v25.6.3] - 2025-05-02
 ### :sparkles: New Features
 - [`6b26b8e`](https://github.com/webitel/webitel-ui-sdk/commit/6b26b8e95506c68bfb3836f50843c88139ee4244) - cases extension fields filters datetime range [WTEL-6789](https://webitel.atlassian.net/browse/WTEL-6789) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2072,3 +2078,4 @@
 [v25.6.1]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.0...v25.6.1
 [v25.6.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.1...v25.6.2
 [v25.6.3]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.2...v25.6.3
+[v25.6.4]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.3...v25.6.4
