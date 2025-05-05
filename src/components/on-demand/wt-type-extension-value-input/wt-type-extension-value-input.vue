@@ -56,13 +56,22 @@
       @input="selectElements"
     />
   </slot>
-  <wt-datepicker
+  <slot
     v-else-if="field.kind === FieldType.Calendar"
-    v-bind="sharedChildrenProps"
-    :value="value * DatetimeConversionModifier"
-    mode="datetime"
-    @input="setValue(+$event / DatetimeConversionModifier)"
-  />
+    :name="FieldType.Calendar"
+    :default-props="{
+      ...sharedChildrenProps,
+      value,
+    }"
+    :conversion-modifier="DatetimeConversionModifier"
+  >
+    <wt-datepicker
+      v-bind="sharedChildrenProps"
+      :value="value * DatetimeConversionModifier"
+      mode="datetime"
+      @input="setValue(+$event / DatetimeConversionModifier)"
+    />
+  </slot>
 </template>
 
 <script lang="ts" setup>
