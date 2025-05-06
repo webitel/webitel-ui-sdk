@@ -19,6 +19,12 @@
       />
     </div>
 
+    <wt-textarea
+      v-model="resultCommentModel"
+      class="call-evaluation-form__comment"
+      :label="$t('registry.call.evaluation.comment') /*TODO: move locale to lib */"
+    />
+
     <audit-form-footer
       :invalid="isInvalidForm"
       @fill:save="saveEvaluation"
@@ -40,8 +46,9 @@ import {
   useTemplateRef,
   watch,
 } from 'vue';
-import {EngineAuditRate,EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
+import {EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
 
+import { WtTextarea } from '../../../components';
 import { useDestroyableSortable } from '../../../composables/useDestroyableSortable/useDestroyableSortable.js';
 import { generateQuestionSchema } from '../schemas/AuditFormQuestionSchema.js';
 import AuditFormQuestion from './audit-form-question.vue';
@@ -53,6 +60,7 @@ const answersModel = defineModel<EngineQuestionAnswer[]>('answers');
  * todo: rename to questionsModel and use instead of 'update:questions' event
  */
 const questions = defineModel<EngineQuestion[]>('questions', {});
+const resultCommentModel = defineModel<string>('resultComment');
 
 const AuditFormMode = {
   Create: 'create',
@@ -64,12 +72,6 @@ type AuditFormMode = typeof AuditFormMode[keyof typeof AuditFormMode];
 const props = defineProps<{
   mode: AuditFormMode;
   readonly?: boolean;
-  /**
-   * @readonly
-   * @description
-   * Source of info about existing evaluation result, if any
-   */
-  evaluationResult?: EngineAuditRate;
 }>();
 
 const emit = defineEmits([
@@ -86,13 +88,9 @@ const v$ = useVuelidate();
 
 const auditQuestions = useTemplateRef('auditQuestions');
 const isQuestionAdded = reactive({ value: false, index: null });
-const isEditingAnswers = computed(() => {
-  return props.evaluationResult?.id;
-});
 
 provide('readonly', props.readonly);
 provide('mode', props.mode);
-provide('isEditingAnswers', isEditingAnswers);
 
 const isInvalidForm = computed(() => !!v$.value.$errors.length);
 

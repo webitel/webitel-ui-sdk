@@ -20,11 +20,11 @@
     :v="v$"
     class="audit-form-question"
     @activate="activateQuestion"
-    @copy="emits('copy')"
-    @delete="emits('delete')"
-    @change:question="emits('update:question', $event)"
+    @copy="emit('copy')"
+    @delete="emit('delete')"
+    @change:question="emit('update:question', $event)"
     @change:result="emit('update:answer', $event) /* compat, should be ':answer' */"
-    @change:answer="emit('update:answer', $event)"
+    @update:answer="emit('update:answer', $event)"
   />
 </template>
 
@@ -51,8 +51,8 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-  'copy': [unknown]; // todo
-  'delete': [unknown]; // todo
+  'copy': [];
+  'delete': [];
   'update:question': [unknown]; // todo
   'update:answer': [unknown]; // todo
 }>();
@@ -77,8 +77,14 @@ const v$ = useVuelidate(
         }
       : {
           answer: {
-            required: (value) =>
-              question.value.required ? !isEmpty(value) : true,
+            required: (value) => {
+              // if not required, no need to validate
+              if (!props.question.required) return true;
+
+              if (value && value?.score != null) {
+                return true;
+              }
+            },
           },
         },
   ),

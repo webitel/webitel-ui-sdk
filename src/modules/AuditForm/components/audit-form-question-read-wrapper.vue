@@ -41,12 +41,12 @@
       </div>
       {{ answerModel}}
       <wt-input
-        v-if="answerModel"
+        v-if="true /*answerModel?.createdAt*/"
         v-model="answerModel.comment"
       />
     </section>
 
-    <template v-if="answerModel.updatedBy">
+    <template v-if="answerModel?.updatedAt">
       <wt-divider />
       <audit-form-answer-editing-info
         :answer="answerModel"
@@ -67,7 +67,7 @@ import AuditFormQuestionScore from './form-questions/score/audit-form-question-s
 
 const readonly = inject('readonly');
 
-const answerModel = defineModel<EngineQuestionAnswer>('answer');
+const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
 const props = defineProps<{
   question: EngineQuestion;

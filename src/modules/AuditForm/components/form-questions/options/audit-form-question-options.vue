@@ -29,7 +29,7 @@
         v-for="opt of question.options"
         :key="opt.score + opt.name"
         :label="opt.name"
-        :selected="answerModel.score"
+        :selected="answerModel?.score"
         :value="opt.score"
         @input="updateAnswer"
       />
@@ -47,7 +47,7 @@ import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema.
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 
 const questionModel = defineModel<EngineQuestion>('question');
-const answerModel = defineModel<EngineQuestionAnswer>('answer');
+const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
 const props = defineProps<{
   /**
