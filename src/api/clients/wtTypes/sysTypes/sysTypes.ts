@@ -9,6 +9,7 @@ import applyTransform, {
   merge,
   notify,
   sanitize,
+  starToSearch,
 } from '../../../transformers';
 
 const instance = getDefaultInstance();
@@ -18,6 +19,7 @@ const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
 
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
+    starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     (params) => ({
       ...params,
