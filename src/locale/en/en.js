@@ -88,6 +88,9 @@ export default {
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
     group: 'Group',
+    updatedBy: (/*{ named }*/) => {
+      return 'Edited';
+    },
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {

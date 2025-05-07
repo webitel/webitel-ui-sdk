@@ -88,6 +88,9 @@ export default {
     unassigned: 'Неназначенные',
     showUnassigned: 'Показать неназначенные',
     group: 'Группа',
+    updatedBy: (/*{ named }*/) => {
+      return 'Редактировано';
+    },
   },
   vocabulary: {
     apply: 'Применить',

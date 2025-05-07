@@ -89,6 +89,9 @@ export default {
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
     group: 'Група',
+    updatedBy: (/*{ named }*/) => {
+      return 'Редаговано';
+    },
   },
   vocabulary: {
     apply: 'Застосувати',
