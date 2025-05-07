@@ -1,3 +1,8 @@
+## [v25.6.6] - 2025-05-07
+### :bug: Bug Fixes
+- [`0c370cd`](https://github.com/webitel/webitel-ui-sdk/commit/0c370cdfe2543d6fc41c38650bbd4455b263b942) - fixed search for get sys type records list [WTEL-6851](https://webitel.atlassian.net/browse/WTEL-6851) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v25.6.5] - 2025-05-05
 ### :bug: Bug Fixes
 - [`39d99ac`](https://github.com/webitel/webitel-ui-sdk/commit/39d99ac3629658df76536b9d8e6026cb5747d9e1) - fixed styles for select tags line-height [WTEL-6360](https://webitel.atlassian.net/browse/WTEL-6360) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -2086,3 +2091,4 @@
 [v25.6.3]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.2...v25.6.3
 [v25.6.4]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.3...v25.6.4
 [v25.6.5]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.4...v25.6.5
+[v25.6.6]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.5...v25.6.6
