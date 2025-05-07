@@ -15,8 +15,8 @@ import {
   SupervisorSections,
   WebitelApplications,
 } from '../../enums';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
 
@@ -65,7 +65,7 @@ export default {
     retry: 'Retry',
     downloadAll: 'Download all',
     warning: 'Warning',
-    doNotSave: 'Don\'t save',
+    doNotSave: "Don't save",
     required: 'Required',
     copy: 'Copy',
     new: 'New',
@@ -88,6 +88,9 @@ export default {
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
     group: 'Group',
+    updatedBy: (/*{ named }*/) => {
+      return 'Edited';
+    },
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -432,12 +435,14 @@ export default {
         [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
         [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
         [IconAction.SAVE_PRESET]: ({ linked }) => {
-          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset')
-          .toLowerCase()}`;
+          return `${linked('reusable.save')} ${linked(
+            'webitelUI.filters.presets.preset',
+          ).toLowerCase()}`;
         },
         [IconAction.APPLY_PRESET]: ({ linked }) => {
-          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset')
-          .toLowerCase()}`;
+          return `${linked('vocabulary.apply')} ${linked(
+            'webitelUI.filters.presets.preset',
+          ).toLowerCase()}`;
         },
       },
     },
@@ -448,8 +453,8 @@ export default {
         text: 'Sorry, you have not enough privileges to see this page.',
       },
       page404: {
-        title: 'Looks like you\'re lost',
-        text: 'Sorry, we can\'t find the page you want.',
+        title: "Looks like you're lost",
+        text: "Sorry, we can't find the page you want.",
       },
     },
     copyAction: {

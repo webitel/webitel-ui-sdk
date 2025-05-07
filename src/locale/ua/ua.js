@@ -15,8 +15,8 @@ import {
   SupervisorSections,
   WebitelApplications,
 } from '../../enums';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
+import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
 
@@ -89,6 +89,9 @@ export default {
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
     group: 'Група',
+    updatedBy: (/*{ named }*/) => {
+      return 'Редаговано';
+    },
   },
   vocabulary: {
     apply: 'Застосувати',
