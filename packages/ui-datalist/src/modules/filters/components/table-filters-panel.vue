@@ -19,20 +19,21 @@
     </template>
 
     <template #actions>
-      <apply-preset-action
-        :filter-configs="filterConfigs"
-        :namespace="props.presetNamespace"
-        :use-presets-store="props.usePresetsStore"
-        @apply="emit('preset:apply', $event)"
-      />
+      <template v-if="enablePresets">
+        <apply-preset-action
+          :filter-configs="filterConfigs"
+          :namespace="props.presetNamespace"
+          :use-presets-store="props.usePresetsStore"
+          @apply="emit('preset:apply', $event)"
+        />
 
-      <save-preset-action
-        v-if="enablePresets"
-        :filter-configs="filterConfigs"
-        :filters-included="filtersIncluded"
-        :filters-manager="props.filtersManager"
-        :namespace="props.presetNamespace"
-      />
+        <save-preset-action
+          :filter-configs="filterConfigs"
+          :filters-included="filtersIncluded"
+          :filters-manager="props.filtersManager"
+          :namespace="props.presetNamespace"
+        />
+      </template>
 
       <wt-icon-action
         :disabled="!props.filtersManager.filters.size"

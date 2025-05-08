@@ -51,11 +51,12 @@ export class FilterConfig implements BaseFilterConfig {
   notDeletable: boolean;
 
   constructor({
-    name,
-    valueInputComponent,
-    valuePreviewComponent,
-    notDeletable,
-  }: FilterConfigBaseParams = {}) {
+                name,
+                valueInputComponent,
+                valuePreviewComponent,
+                notDeletable,
+              }: FilterConfigBaseParams = {}) {
+
     if (name) this.name = name;
     if (valueInputComponent) this.valueInputComponent = valueInputComponent;
     if (valuePreviewComponent)

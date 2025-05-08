@@ -7,16 +7,16 @@ import {
 } from 'webitel-sdk';
 
 import {
+  AdminSections,
   AuditorSections,
   ChatGatewayProvider,
+  CrmSections,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
   SupervisorSections,
   WebitelApplications,
 } from '../../enums';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
 
@@ -172,6 +172,7 @@ export default {
     totalDuration: 'Общая длительность',
     transcription: 'Транскрипция',
     attachment: 'Вложение | Вложения',
+    owner: 'Владелец | Владельцы',
     queue: {
       queue: 'Очередь | Очереди',
       type: {
@@ -266,21 +267,21 @@ export default {
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
       sections: {
-        [AuditorSections.SCORECARDS]: 'Анкеты',
+        [AuditorSections.Scorecards]: 'Анкеты',
       },
     },
     [WebitelApplications.CRM]: {
       name: 'CRM',
       sections: {
-        [CrmSections.CONTACTS]: 'Контакты',
-        [CrmSections.CASES]: 'Обращения',
-        [CrmSections.PRIORITIES]: 'Приоритеты',
-        [CrmSections.CLOSE_REASON_GROUPS]: 'Причины закрытия',
-        [CrmSections.STATUSES]: 'Статусы',
-        [CrmSections.SLAS]: 'SLA',
-        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервисов',
-        [CrmSections.SOURCES]: 'Источники обращений',
-        [CrmSections.CONTACT_GROUPS]: 'Группы контактов',
+        [CrmSections.Contacts]: 'Контакты',
+        [CrmSections.Cases]: 'Обращения',
+        [CrmSections.Priorities]: 'Приоритеты',
+        [CrmSections.CloseReasonGroups]: 'Причины закрытия',
+        [CrmSections.Statuses]: 'Статусы',
+        [CrmSections.Slas]: 'SLA',
+        [CrmSections.ServiceCatalogs]: 'Каталоги сервисов',
+        [CrmSections.Sources]: 'Источники обращений',
+        [CrmSections.ContactGroups]: 'Группы контактов',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
@@ -288,50 +289,50 @@ export default {
     [WebitelApplications.SUPERVISOR]: {
       name: 'Supervisor Workspace',
       sections: {
-        [SupervisorSections.QUEUES]: 'Очереди',
-        [SupervisorSections.AGENTS]: 'Операторы',
-        [SupervisorSections.ACTIVE_CALLS]: 'Активные звонки',
+        [SupervisorSections.Queues]: 'Очереди',
+        [SupervisorSections.Agents]: 'Операторы',
+        [SupervisorSections.ActiveCalls]: 'Активные звонки',
       },
     },
     [WebitelApplications.ADMIN]: {
       name: 'Admin',
       sections: {
-        [AdminSections.USERS]: 'Пользователи',
-        [AdminSections.LICENSE]: 'Лицензии',
-        [AdminSections.DEVICES]: 'Устройства',
-        [AdminSections.FLOW]: 'Схемы',
-        [AdminSections.DIALPLAN]: 'Исходящая маршрутизация',
-        [AdminSections.GATEWAYS]: 'Шлюзы',
-        [AdminSections.CHATPLAN]: 'Правила маршрутизации текстовых сообщений',
-        [AdminSections.CHAT_GATEWAYS]: 'Текстовые шлюзы',
-        [AdminSections.SKILLS]: 'Навыки оператора',
-        [AdminSections.BUCKETS]: 'Корзины',
-        [AdminSections.MEDIA]: 'Медиафайлы',
-        [AdminSections.SHIFT_TEMPLATES]: 'Шаблон смен',
-        [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
-        [AdminSections.WORKING_CONDITIONS]: 'Условия работы',
-        [AdminSections.BLACKLIST]: 'Cписки',
-        [AdminSections.CALENDARS]: 'Календари',
-        [AdminSections.COMMUNICATIONS]: 'Типы связи',
-        [AdminSections.REGIONS]: 'Площадки',
-        [AdminSections.PAUSE_CAUSE]: 'Статусы оператора',
-        [AdminSections.AGENTS]: 'Операторы',
-        [AdminSections.TEAMS]: 'Команды',
-        [AdminSections.RESOURCES]: 'Ресурсы',
-        [AdminSections.RESOURCE_GROUPS]: 'Группы ресурсов',
-        [AdminSections.QUEUES]: 'Очереди',
-        [AdminSections.STORAGE]: 'Хранилища',
-        [AdminSections.STORAGE_POLICIES]: 'Политики хранения файлов',
-        [AdminSections.COGNITIVE_PROFILES]: 'Голосовые профили',
-        [AdminSections.EMAIL_PROFILES]: 'Email профили',
-        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
-        [AdminSections.IMPORT_CSV]: 'Импорт данных из CSV файлов',
-        [AdminSections.TRIGGERS]: 'Триггеры',
-        [AdminSections.ROLES]: 'Роли',
-        [AdminSections.OBJECTS]: 'Разделы',
-        [AdminSections.CHANGELOGS]: 'Журнал изменений',
-        [AdminSections.CONFIGURATION]: 'Конфигурация',
-        [AdminSections.GLOBAL_VARIABLES]: 'Глобальные переменные',
+        [AdminSections.Users]: 'Пользователи',
+        [AdminSections.License]: 'Лицензии',
+        [AdminSections.Devices]: 'Устройства',
+        [AdminSections.Flow]: 'Схемы',
+        [AdminSections.Dialplan]: 'Исходящая маршрутизация',
+        [AdminSections.Gateways]: 'Шлюзы',
+        [AdminSections.Chatplan]: 'Правила маршрутизации текстовых сообщений',
+        [AdminSections.ChatGateways]: 'Текстовые шлюзы',
+        [AdminSections.Skills]: 'Навыки оператора',
+        [AdminSections.Buckets]: 'Корзины',
+        [AdminSections.Media]: 'Медиафайлы',
+        [AdminSections.ShiftTemplates]: 'Шаблон смен',
+        [AdminSections.PauseTemplates]: 'Шаблон пауз',
+        [AdminSections.WorkingConditions]: 'Условия работы',
+        [AdminSections.Blacklist]: 'Cписки',
+        [AdminSections.Calendars]: 'Календари',
+        [AdminSections.Communications]: 'Типы связи',
+        [AdminSections.Regions]: 'Площадки',
+        [AdminSections.PauseCause]: 'Статусы оператора',
+        [AdminSections.Agents]: 'Операторы',
+        [AdminSections.Teams]: 'Команды',
+        [AdminSections.Resources]: 'Ресурсы',
+        [AdminSections.ResourceGroups]: 'Группы ресурсов',
+        [AdminSections.Queues]: 'Очереди',
+        [AdminSections.Storage]: 'Хранилища',
+        [AdminSections.StoragePolicies]: 'Политики хранения файлов',
+        [AdminSections.CognitiveProfiles]: 'Голосовые профили',
+        [AdminSections.EmailProfiles]: 'Email профили',
+        [AdminSections.SingleSignOn]: 'Single Sign-on',
+        [AdminSections.ImportCsv]: 'Импорт данных из CSV файлов',
+        [AdminSections.Triggers]: 'Триггеры',
+        [AdminSections.Roles]: 'Роли',
+        [AdminSections.Objects]: 'Разделы',
+        [AdminSections.Changelogs]: 'Журнал изменений',
+        [AdminSections.Configuration]: 'Конфигурация',
+        [AdminSections.GlobalVariables]: 'Глобальные переменные',
       },
     },
   },
@@ -438,6 +439,9 @@ export default {
         },
         [IconAction.APPLY_PRESET]: ({ linked }) => {
           return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.ADD_CONTACT]: ({ linked }) => {
+          return `${linked('reusable.add')} контакты`;
         },
       },
     },
@@ -585,8 +589,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
+      hasUser: ({ linked }) => {
+        return linked('objects.user');
+      },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
+      },
+      contactLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      contactOwner: ({ linked }) => {
+        return linked('objects.owner');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');

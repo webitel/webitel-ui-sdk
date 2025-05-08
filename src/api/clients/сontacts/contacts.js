@@ -38,8 +38,11 @@ const getList = async (params) => {
     'fields',
     'id',
     'qin',
-    'groupId',
     'notIdGroup',
+    'group',
+    'owner',
+    'label',
+    'user',
   ];
 
   if (!params.fields) {
@@ -109,9 +112,23 @@ const getList = async (params) => {
       qin: searchKey || '',
     };
 
-    if (params.parentId) {
-      changedParams.groupId = [params.parentId];
+    if (params.hasUser != null) {
+      changedParams.user = params.hasUser;
     }
+
+    if (params.contactGroup) {
+      changedParams.group = [...params.contactGroup.list];
+    }
+    if (params.contactLabel) {
+      changedParams.label = params.contactLabel.map((item) => item.label);
+    }
+    if (params.contactOwner) {
+      changedParams.owner = params.contactOwner;
+    }
+  }
+
+  if (params.parentId) {
+    changedParams.group = [params.parentId];
   }
 
   const transformations = [
@@ -120,8 +137,22 @@ const getList = async (params) => {
     camelToSnake(),
   ];
 
-  const { page, size, q, sort, fields, id, qin, mode, group_id, not_id_group } =
-    applyTransform(changedParams, transformations);
+  const {
+    page,
+    size,
+    q,
+    sort,
+    fields,
+    id,
+    qin,
+    mode,
+    group_id,
+    group,
+    not_id_group,
+    owner,
+    label,
+    user,
+  } = applyTransform(changedParams, transformations);
 
   try {
     const response = await contactService.searchContacts(
@@ -134,7 +165,10 @@ const getList = async (params) => {
       qin,
       mode,
       not_id_group,
-      group_id,
+      group,
+      owner,
+      label,
+      user,
     );
 
     const { items, next } = applyTransform(

@@ -14,6 +14,7 @@ class CaseAssigneeFilterConfig extends WtSysTypeFilterConfig {
     params: object,
     { filterValue } = {},
   ): Promise<{ items: unknown[]; next?: boolean }> {
+    if (filterValue?.unassigned && !filterValue.list.length) return { items: [] };
     const id =
       params.id?.list /* general logic from dynamic-filter-preview.vue*/ ||
       params.id /* wt-select options loadings */ ||

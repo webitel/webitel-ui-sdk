@@ -33,9 +33,9 @@
                 <component
                   :is="filterConfig.valuePreviewComponent"
                   v-else
-                  :value="localValue"
                   :filter="props.filter"
                   :filter-config="filterConfig"
+                  :value="localValue"
                 />
               </slot>
             </template>
@@ -69,14 +69,13 @@ import {
   WtLoader,
   WtTooltip,
 } from '@webitel/ui-sdk/components';
-import { computed,ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {FilterData, IFilter} from "../../classes/Filter";
-import {AnyFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
-import {
-  FilterOptionToPreviewApiSearchMethodMap,
-} from '../../modules/filterConfig/components';
+import { FilterData, IFilter } from '../../classes/Filter';
+import { AnyFilterConfig } from '../../modules/filterConfig/classes/FilterConfig';
+import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
+import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
@@ -117,30 +116,46 @@ const fillLocalValue = async (filter = props.filter) => {
 
   if (props.filterConfig.searchRecords) {
     /* arrow fn here preserves filterConfig class "this" */
-    valueSearchMethod = (...params) => props.filterConfig.searchRecords(...params)
+    valueSearchMethod = (...params) =>
+      props.filterConfig.searchRecords(...params);
   } else {
-    valueSearchMethod = /* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
+    valueSearchMethod =
+      /* compat */ FilterOptionToPreviewApiSearchMethodMap[filterName];
   }
 
   if (valueSearchMethod) {
-    const { items } = await valueSearchMethod({ id: filterValue }, {
-      filterValue,
-      filterName,
-      filterConfig: props.filterConfig,
-    });
+    const { items } = await valueSearchMethod(
+      { id: filterValue },
+      {
+        filterValue,
+        filterName,
+        filterConfig: props.filterConfig,
+      },
+    );
     localValue.value = items;
   } else {
     localValue.value = filterValue;
   }
 };
 
+watch(
+  () => props.filter.value,
+  () => {
+    fillLocalValue(props.filter);
+  },
+  {
+    immediate: true,
+  },
+);
+
 // [https://webitel.atlassian.net/browse/WTEL-6732]
 // if type filter is boolean and value = false, need display preview
-const isRenderPreview = computed(() => localValue.value === false || localValue.value);
+const isRenderPreview = computed(
+  () => localValue.value === false || localValue.value,
+);
 
 const submit = (filter: IFilter, { hide }) => {
   emit('update:filter', filter);
-  fillLocalValue(filter);
   hide();
 };
 

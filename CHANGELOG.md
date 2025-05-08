@@ -1,3 +1,95 @@
+## [v25.6.6] - 2025-05-07
+### :bug: Bug Fixes
+- [`0c370cd`](https://github.com/webitel/webitel-ui-sdk/commit/0c370cdfe2543d6fc41c38650bbd4455b263b942) - fixed search for get sys type records list [WTEL-6851](https://webitel.atlassian.net/browse/WTEL-6851) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
+## [v25.6.5] - 2025-05-05
+### :bug: Bug Fixes
+- [`39d99ac`](https://github.com/webitel/webitel-ui-sdk/commit/39d99ac3629658df76536b9d8e6026cb5747d9e1) - fixed styles for select tags line-height [WTEL-6360](https://webitel.atlassian.net/browse/WTEL-6360) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`5472694`](https://github.com/webitel/webitel-ui-sdk/commit/5472694abf7343a0b6045a15a42b047943be40ba) - assignee preview filter[WTEL-6848](https://webitel.atlassian.net/browse/WTEL-6848) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v25.6.4] - 2025-05-05
+### :bug: Bug Fixes
+- [`0d83490`](https://github.com/webitel/webitel-ui-sdk/commit/0d8349063f82859dcb867c2ebca2608724bf13b3) - "stucking" filter preview local values after preset application [WTEL-6821](https://webitel.atlassian.net/browse/WTEL-6821) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`9fbbdbf`](https://github.com/webitel/webitel-ui-sdk/commit/9fbbdbf4b46f9183976d773fc28c9e9a6a26c083) - search in gateways filter[WTEL-6835](https://webitel.atlassian.net/browse/WTEL-6835) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v25.6.3] - 2025-05-02
+### :sparkles: New Features
+- [`6b26b8e`](https://github.com/webitel/webitel-ui-sdk/commit/6b26b8e95506c68bfb3836f50843c88139ee4244) - cases extension fields filters datetime range [WTEL-6789](https://webitel.atlassian.net/browse/WTEL-6789) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v25.6.2] - 2025-04-30
+### :sparkles: New Features
+- [`a9bf2d2`](https://github.com/webitel/webitel-ui-sdk/commit/a9bf2d2a52a8e429334306d408ab3f7b40dfb37b) - changed icon name [WTEL-6809](https://webitel.atlassian.net/browse/WTEL-6809) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`612c126`](https://github.com/webitel/webitel-ui-sdk/commit/612c12641a9e77f5776b54892868314e50d4a763) - added new icon for action bar [WTEL-6809](https://webitel.atlassian.net/browse/WTEL-6809) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+### :bug: Bug Fixes
+- [`7adf4a2`](https://github.com/webitel/webitel-ui-sdk/commit/7adf4a267a089969b9bef4c4f0cc1d8543ac3c3f) - contact group[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`da3c052`](https://github.com/webitel/webitel-ui-sdk/commit/da3c052719c5d7bdd775642004502bee6ba88fbc) - contact group filter[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v25.6.1] - 2025-04-29
+### :bug: Bug Fixes
+- [`11d2b45`](https://github.com/webitel/webitel-ui-sdk/commit/11d2b455a549ddcaaf6bdc9ef3554ca7cccd2aaf) - observe in wt-select component[WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v25.6.0] - 2025-04-29
+### :sparkles: New Features
+- [`19c7e10`](https://github.com/webitel/webitel-ui-sdk/commit/19c7e10b970b1c4ea3a91afb31eda6f26332bdcd) - update package version to 25.06.0 *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+
+
+## [v25.4.79] - 2025-04-28
+### :bug: Bug Fixes
+- [`5b7789b`](https://github.com/webitel/webitel-ui-sdk/commit/5b7789b013b27cd8912e9259cd785f5b42c8416f) - set fixes for contacts get list API method [WTEL-6807](https://webitel.atlassian.net/browse/WTEL-6807) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+- [`6f7541a`](https://github.com/webitel/webitel-ui-sdk/commit/6f7541a18f9828b7f43788fa09c7eec62b8133a7) - contact group filter[WTEL-6819](https://webitel.atlassian.net/browse/WTEL-6819) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`d174bbb`](https://github.com/webitel/webitel-ui-sdk/commit/d174bbbeed93b3e9b3e33141fd72cb9803afc431) - update template structure in table-filters-panel and correct value assignment in the-history-filters [WTEL-6758](https://webitel.atlassian.net/browse/WTEL-6758) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v25.4.78] - 2025-04-28
+### :bug: Bug Fixes
+- [`f8af07e`](https://github.com/webitel/webitel-ui-sdk/commit/f8af07e48a987090ddc0f33a1c6ca68540456a42) - made wt-chip clickable when select is disabled [WTEL-6814](https://webitel.atlassian.net/browse/WTEL-6814) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
+## [v25.4.77] - 2025-04-28
+### :bug: Bug Fixes
+- [`895e032`](https://github.com/webitel/webitel-ui-sdk/commit/895e032b26e0f4187879260d902263b01d09cd03) - Sections locale keys [WTEL-6758](https://webitel.atlassian.net/browse/WTEL-6758) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`dceac3c`](https://github.com/webitel/webitel-ui-sdk/commit/dceac3c926a51d35edc6b2c0150ce7e7fe88d386) - add comment for clarity on id parameter transformation *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :wrench: Chores
+- [`2c20f16`](https://github.com/webitel/webitel-ui-sdk/commit/2c20f166db8e24a876d4b9170815330318d83a4f) - bump version to 1.0.24 and update @webitel/ui-sdk to 25.4.76 *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v25.4.76] - 2025-04-28
+### :bug: Bug Fixes
+- [`57b0ec0`](https://github.com/webitel/webitel-ui-sdk/commit/57b0ec0e4de78e6fc3d9c79bb87bf44f710b066e) - add 'ids' parameter to sysTypeRecordsList for improved query handling [WTEL-6788](https://webitel.atlassian.net/browse/WTEL-6788) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
+## [v25.4.75] - 2025-04-28
+### :bug: Bug Fixes
+- [`d207244`](https://github.com/webitel/webitel-ui-sdk/commit/d207244427760698e2b20394d5f17463cf78d9b7) - import errors in locale[WTEL-4610](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`9358ff8`](https://github.com/webitel/webitel-ui-sdk/commit/9358ff8d1b6d469c64270fde866d5417f074315a) - webitel/ui-sdk version update[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+
+
+## [v25.4.74] - 2025-04-28
+### :sparkles: New Features
+- [`412e739`](https://github.com/webitel/webitel-ui-sdk/commit/412e739dd3b9e56dd44a6f9f9848ae36f5b33348) - ui-datalist/filters/custom: simplify name retrieval in searchRecords using lodash.get [https://webitel.atlassian.net/browse/WTEL-6787](https://webitel.atlassian.net/browse/WTEL-6787) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`c32196b`](https://github.com/webitel/webitel-ui-sdk/commit/c32196ba6a63167c714c2ac38d3ebf452c72d9d2) - add contacts filters[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :bug: Bug Fixes
+- [`d5c2414`](https://github.com/webitel/webitel-ui-sdk/commit/d5c2414b00730ebca5a2c7064d92d12c59e40ff6) - merge master *(commit by [@Lera24](https://github.com/Lera24))*
+- [`0b2e6ec`](https://github.com/webitel/webitel-ui-sdk/commit/0b2e6eca97f9df96fcde9e5eb6fa076b2e4b78ad) - contact group class [WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`bf5ec5f`](https://github.com/webitel/webitel-ui-sdk/commit/bf5ec5fd453525637624b0e72532716ff0e02fcb) - add new type ts[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`90af640`](https://github.com/webitel/webitel-ui-sdk/commit/90af6406e952e540868a73dd72cf8a218181b8c5) - delete console.log[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`4941305`](https://github.com/webitel/webitel-ui-sdk/commit/49413051ac055e211a737cac59a36c9ab6df7cc3) - after code review[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`6ee2156`](https://github.com/webitel/webitel-ui-sdk/commit/6ee2156513b47b74abf0572891b1b237d78c33e3) - small refactor[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+- [`88285eb`](https://github.com/webitel/webitel-ui-sdk/commit/88285eb22bbeacb84c02235fb83214809b8d5200) - conflict[WTEL-6410](https://webitel.atlassian.net/browse/WTEL-6410) *(commit by [@Lera24](https://github.com/Lera24))*
+
+### :wrench: Chores
+- [`e22cd75`](https://github.com/webitel/webitel-ui-sdk/commit/e22cd751edd85be79e8317f6d77a2eb2b1751b4c) - update @webitel/ui-datalist to version 1.0.20 [https://webitel.atlassian.net/browse/WTEL-6787](https://webitel.atlassian.net/browse/WTEL-6787) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.4.73] - 2025-04-24
 ### :sparkles: New Features
 - [`31667c2`](https://github.com/webitel/webitel-ui-sdk/commit/31667c2a12f8bb2c7be6ce70b0a0d50848c489f2) - add type extension and case assignee filter configurations *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -1987,3 +2079,16 @@
 [v25.4.71]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.70...v25.4.71
 [v25.4.72]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.71...v25.4.72
 [v25.4.73]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.72...v25.4.73
+[v25.4.74]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.73...v25.4.74
+[v25.4.75]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.74...v25.4.75
+[v25.4.76]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.75...v25.4.76
+[v25.4.77]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.76...v25.4.77
+[v25.4.78]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.77...v25.4.78
+[v25.4.79]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.78...v25.4.79
+[v25.6.0]: https://github.com/webitel/webitel-ui-sdk/compare/v25.4.79...v25.6.0
+[v25.6.1]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.0...v25.6.1
+[v25.6.2]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.1...v25.6.2
+[v25.6.3]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.2...v25.6.3
+[v25.6.4]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.3...v25.6.4
+[v25.6.5]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.4...v25.6.5
+[v25.6.6]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.5...v25.6.6

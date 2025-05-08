@@ -1,12 +1,11 @@
 <template>
-  <wt-select
-    :close-on-select="false"
+  <wt-tags-input
     :label="t('webitelUI.filters.filterValue')"
-    :search-method="searchGateway"
+    :search-method="props.filterConfig.searchRecords"
     :v="v$.model"
     :value="model"
-    multiple
-    use-value-from-options-by-prop="id"
+    option-label="label"
+    track-by="label"
     @input="handleInput"
   />
 </template>
@@ -14,11 +13,14 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { searchMethod } from './config.js';
+import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+
+const props = defineProps<{
+  filterConfig: WtSysTypeFilterConfig;
+}>();
 
 type ModelValue = number[];
 
@@ -39,10 +41,6 @@ const v$ = useVuelidate(
   { $autoDirty: true },
 );
 v$.value.$touch();
-
-const searchGateway = async (params) => {
-  return params.search ? await searchMethod({ name: params.search }) : await searchMethod(params);
-};
 
 watch(
   () => v$.value.$invalid,

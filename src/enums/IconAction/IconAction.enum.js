@@ -20,6 +20,7 @@ const IconAction = Object.freeze({
   SAVE: 'save',
   SAVE_PRESET: 'save-preset',
   APPLY_PRESET: 'apply-preset',
+  ADD_CONTACT: 'add-contact',
 });
 
 export default IconAction;

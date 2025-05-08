@@ -9,16 +9,22 @@ import applyTransform, {
   merge,
   notify,
   sanitize,
+  starToSearch,
 } from '../../../transformers';
 
 const instance = getDefaultInstance();
 
 const getSysTypeRecordsList = async ({ path, display, primary, ...params }) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id', 'ids'];
 
   const url = applyTransform(params, [
     merge(getDefaultGetParams()),
+    starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
+    (params) => ({
+      ...params,
+      ids: params.id /* https://webitel.atlassian.net/browse/WTEL-6788 */,
+    }),
     sanitize(fieldsToSend),
     camelToSnake(),
     generateUrl(path),
