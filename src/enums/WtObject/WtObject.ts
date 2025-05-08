@@ -56,6 +56,8 @@ export const WtObject = {
   Status: 'status',
   Source: 'source',
   CustomLookup: 'customLookup',
+  AuditForm: 'auditForm',
+  AuditRating: 'auditRating',
 } as const;
 
 export type WtObject = (typeof WtObject)[keyof typeof WtObject];

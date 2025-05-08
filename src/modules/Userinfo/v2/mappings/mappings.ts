@@ -65,6 +65,8 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
   [ScopeClass.ChatBots]: [WtObject.ChatBot], // routing cht_gateway
   [ScopeClass.Cases]: [WtObject.Case], // CRM
   [ScopeClass.CaseComments]: [WtObject.CaseComment],
+  [ScopeClass.AuditForm]: [WtObject.AuditForm],
+  [ScopeClass.AuditRating]: [WtObject.AuditRating],
 };
 
 export const mapScopeClassAccessTokenToCrudAction = {

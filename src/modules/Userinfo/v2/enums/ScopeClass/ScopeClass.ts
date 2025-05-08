@@ -42,6 +42,8 @@ export const ScopeClass = {
   ChatBots: 'chat_bots',
   Cases: 'cases',
   CaseComments: 'case_comments',
+  AuditForm: 'cc_audit_form',
+  AuditRating: 'rating',
 } as const;
 
 export type ScopeClass = (typeof ScopeClass)[keyof typeof ScopeClass];

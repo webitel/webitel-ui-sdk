@@ -5,7 +5,7 @@
       class="audit-form-question-options-write"
     >
       <options-write-row
-        v-for="(option, key) of question.options"
+        v-for="(option, key) of questionModel.options"
         :key="key"
         :first="key === 0"
         :option="option"
@@ -26,56 +26,62 @@
       class="audit-form-question-options-read"
     >
       <wt-radio
-        v-for="opt of question.options"
+        v-for="opt of questionModel.options"
         :key="opt.score + opt.name"
         :label="opt.name"
-        :selected="result"
-        :value="opt"
-        @input="emit('change:result', $event)"
+        :selected="answerModel?.score"
+        :value="opt.score"
+        @input="updateAnswer"
       />
     </div>
     <div v-else>Unknown mode: {{ mode }}</div>
   </article>
 </template>
 
-<script setup>
-import WtButton from '../../../../../components/wt-button/wt-button.vue';
-import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
+<script lang="ts" setup>
+import {EngineQuestion, EngineQuestionAnswer} from "webitel-sdk";
+
+import { WtButton, WtRadio } from '../../../../../components';
 import updateObject from '../../../../../scripts/updateObject.js';
 import { generateOption } from '../../../schemas/AuditFormQuestionOptionsSchema.js';
 import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true,
-  },
-  result: {
-    type: Object,
-  },
-  mode: {
-    // options: ['read', 'write']
-    type: String,
-    default: 'read',
-  },
-});
+const questionModel = defineModel<EngineQuestion>('question');
+const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
-const emit = defineEmits(['change:question', 'change:result']);
+const props = defineProps<{
+  /**
+   * question mode, NOT audit form mode
+   */
+  mode: 'read' | 'write';
+}>();
 
 function updateQuestion({ path, value }) {
-  emit('change:question', updateObject({ obj: props.question, path, value }));
+  questionModel.value = updateObject({
+    obj: questionModel.value,
+    path,
+    value,
+  });
 }
 
 function addQuestionOption() {
-  const options = [...props.question.options, generateOption()];
+  const options = [...questionModel.value.options, generateOption()];
   return updateQuestion({ path: 'options', value: options });
 }
 
 function deleteQuestionOption({ key }) {
-  const options = [...props.question.options];
+  const options = [...questionModel.value.options];
   options.splice(key, 1);
   return updateQuestion({ path: 'options', value: options });
 }
+
+function updateAnswer(score) {
+  answerModel.value = answerModel.value ? {
+    ...answerModel.value,
+    score,
+  } : { score };
+}
+
 </script>
 
 <style lang="scss" scoped>

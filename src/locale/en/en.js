@@ -23,6 +23,7 @@ import { snakeToCamel } from '../../scripts';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    comment: 'Comment',
     replace: 'Replace',
     download: 'Download',
     history: 'History',
@@ -88,6 +89,9 @@ export default {
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
     group: 'Group',
+    updatedBy: (/*{ named }*/) => {
+      return 'Edited';
+    },
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
