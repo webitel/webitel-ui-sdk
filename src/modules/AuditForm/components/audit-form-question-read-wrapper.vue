@@ -37,12 +37,12 @@
         class="audit-form-question--clear"
         @click="resetAnswer"
       >
-        {{ $t('webitelUI.auditForm.clearSelection') }}
+        {{ t('webitelUI.auditForm.clearSelection') }}
       </div>
-      {{ answerModel}}
       <wt-input
-        v-if="true /*answerModel?.createdAt*/"
+        v-if="answerModel?.createdAt"
         v-model="answerModel.comment"
+        :label="t('reusable.comment')"
       />
     </section>
 
@@ -57,6 +57,7 @@
 
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
+import {useI18n} from "vue-i18n";
 import {EngineAuditQuestionType, EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
 
 import { WtDivider,WtIcon, WtInput } from '../../../components';
@@ -78,6 +79,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   'activate': [];
 }>();
+
+const { t } = useI18n();
 
 const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Option)
@@ -144,6 +147,12 @@ const resetAnswer = () => {
       color: var(--error-color);
     }
   }
+}
+
+.audit-form-question-read-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
 .audit-form-question--clear {
