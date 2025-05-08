@@ -22,7 +22,8 @@
     @activate="activateQuestion"
     @copy="emit('copy')"
     @delete="emit('delete')"
-    @change:question="emit('update:question', $event)"
+    @change:question="emit('update:question', $event) /* compat, should be removed */"
+    @update:question="emit('update:question', $event)"
     @change:result="emit('update:answer', $event) /* compat, should be ':answer' */"
     @update:answer="emit('update:answer', $event)"
   />
@@ -69,7 +70,7 @@ const { question, answer } = toRefs(props);
 
 const v$ = useVuelidate(
   computed(() =>
-    props.mode === 'create'
+    mode === 'create'
       ? {
           question: {
             question: { required },
@@ -93,8 +94,8 @@ const v$ = useVuelidate(
 );
 
 const component = computed(() => {
-  if (props.readonly) return QuestionRead;
-  if (props.mode === 'create') {
+  if (readonly) return QuestionRead;
+  if (mode === 'create') {
     if (state.value === QuestionState.SAVED) return QuestionRead;
     return QuestionWrite;
   }
@@ -108,7 +109,7 @@ function saveQuestion() {
 }
 
 function activateQuestion() {
-  if (props.mode !== 'create') return;
+  if (mode !== 'create') return;
   state.value = QuestionState.EDIT;
 }
 

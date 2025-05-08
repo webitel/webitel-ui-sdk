@@ -48,7 +48,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['change:option', 'delete']);
+const emit = defineEmits(['update:option', 'delete']);
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { option } = toRefs(props);

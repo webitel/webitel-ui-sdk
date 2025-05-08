@@ -5,7 +5,7 @@
       class="audit-form-question-options-write"
     >
       <options-write-row
-        v-for="(option, key) of question.options"
+        v-for="(option, key) of questionModel.options"
         :key="key"
         :first="key === 0"
         :option="option"
@@ -26,7 +26,7 @@
       class="audit-form-question-options-read"
     >
       <wt-radio
-        v-for="opt of question.options"
+        v-for="opt of questionModel.options"
         :key="opt.score + opt.name"
         :label="opt.name"
         :selected="answerModel?.score"
@@ -65,12 +65,12 @@ function updateQuestion({ path, value }) {
 }
 
 function addQuestionOption() {
-  const options = [...props.question.options, generateOption()];
+  const options = [...questionModel.value.options, generateOption()];
   return updateQuestion({ path: 'options', value: options });
 }
 
 function deleteQuestionOption({ key }) {
-  const options = [...props.question.options];
+  const options = [...questionModel.value.options];
   options.splice(key, 1);
   return updateQuestion({ path: 'options', value: options });
 }
