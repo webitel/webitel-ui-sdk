@@ -1,3 +1,16 @@
+## [v25.6.7] - 2025-05-08
+### :sparkles: New Features
+- [`cf7f6a7`](https://github.com/webitel/webitel-ui-sdk/commit/cf7f6a7b15d03779422f0b07ca4a5cc3a6f1acbd) - enhance audit-form components with improved styling and layout [WTEL-5679](https://webitel.atlassian.net/browse/WTEL-5679) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`4adcd22`](https://github.com/webitel/webitel-ui-sdk/commit/4adcd2287c9cafb043350107b7fb8b9981b15abc) - small audit form result ui improvements and fixes [WTEL-5679](https://webitel.atlassian.net/browse/WTEL-5679) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`5cf68bf`](https://github.com/webitel/webitel-ui-sdk/commit/5cf68bff9e9601955ad55430de5bdcdf48bde59d) - implemented audit form crud, still needs refactors and minor fixes [WTEL-5679](https://webitel.atlassian.net/browse/WTEL-5679) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`8dca647`](https://github.com/webitel/webitel-ui-sdk/commit/8dca647d49a8124f837502d1423483c06b45e24d) - audit form editing in progress [WTEL-5679](https://webitel.atlassian.net/browse/WTEL-5679) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`d739383`](https://github.com/webitel/webitel-ui-sdk/commit/d739383afbfd47ec5bfeb2431ae97393921ae758) - refactors and fixes to use audit-form in auditor app [WTEL-5679](https://webitel.atlassian.net/browse/WTEL-5679) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`0723bf0`](https://github.com/webitel/webitel-ui-sdk/commit/0723bf0229d6981a3f272261a6b7fd178481d758) - audit-related values added WtObject and ScopeClass enums [WTEL-5679](https://webitel.atlassian.net/browse/WTEL-5679) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`4fc05fe`](https://github.com/webitel/webitel-ui-sdk/commit/4fc05feff5253e44eb57b4d7a5e8bcab98a0bc49) - audit form refactors [WTEL-5679](https://webitel.atlassian.net/browse/WTEL-5679) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.6.6] - 2025-05-07
 ### :bug: Bug Fixes
 - [`0c370cd`](https://github.com/webitel/webitel-ui-sdk/commit/0c370cdfe2543d6fc41c38650bbd4455b263b942) - fixed search for get sys type records list [WTEL-6851](https://webitel.atlassian.net/browse/WTEL-6851) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -2092,3 +2105,4 @@
 [v25.6.4]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.3...v25.6.4
 [v25.6.5]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.4...v25.6.5
 [v25.6.6]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.5...v25.6.6
+[v25.6.7]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.6...v25.6.7
