@@ -2,20 +2,21 @@
   <section class="audit-form-answer-editing-info">
     <header class="audit-form-answer-editing-info-header">
       <span>{{ t('reusable.updatedBy') }}</span>
-      <a :href="updatedByLink">{{ answer.updatedBy.name }}</a>
+      <span>{{ answer.updatedBy.name }}</span>
       <span>{{ updateTime }}</span>
     </header>
     <p
-      v-if="answer.comment"
+      v-if="initialComment"
+      ref="answer-editing-comment"
       class="audit-form-answer-editing-info-comment"
       :class="{
         'audit-form-answer-editing-info-comment--collapsed': collapsed,
       }"
     >
-      {{ answer.comment }} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores atque consectetur deserunt dolores id illum, ipsa molestiae nihil nostrum officia quam quasi quo quod recusandae soluta tempore temporibus ut.
+      {{ initialComment }}
     </p>
     <footer
-      v-if="collapsed"
+      v-if="collapsed && isCommentClamped"
       class="audit-form-answer-editing-info-footer"
     >
       <button
@@ -30,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, ref, useTemplateRef } from "vue";
 import { useI18n } from 'vue-i18n';
 import {EngineQuestionAnswer} from "webitel-sdk";
 
@@ -41,16 +42,21 @@ const props = withDefaults(defineProps<{
   collapsible: false,
 });
 
+const commentElRef = useTemplateRef('answer-editing-comment');
+
 const collapsed = ref(props.collapsible);
 
 const { t } = useI18n();
+
+const initialComment = props.answer.comment; /* prevent editing-info change if comment is changing  */
 
 const updateTime = computed(() => {
   return new Date(+props.answer.updatedAt).toLocaleString();
 });
 
-const updatedByLink = computed(() => {
-  return null;
+const isCommentClamped = props.collapsible && computed(() => {
+  // https://stackoverflow.com/a/67455839
+  return commentElRef.value?.clientHeight !== commentElRef.value?.scrollHeight;
 });
 
 </script>

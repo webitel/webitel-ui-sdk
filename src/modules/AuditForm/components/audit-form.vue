@@ -22,7 +22,7 @@
     <wt-textarea
       v-model="resultCommentModel"
       class="call-evaluation-form__comment"
-      :label="$t('registry.call.evaluation.comment') /*TODO: move locale to lib */"
+      :label="$t('reusable.comment')"
     />
 
     <audit-form-footer

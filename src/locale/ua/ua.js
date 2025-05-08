@@ -23,6 +23,7 @@ import { snakeToCamel } from '../../scripts';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    comment: 'Коментар',
     replace: 'Замінити',
     download: 'Завантажити',
     history: 'Історія',
