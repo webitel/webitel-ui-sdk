@@ -1,6 +1,8 @@
 <template>
   <component
     :is="component"
+    v-model:question="questionModel"
+    v-model:answer="answerModel"
     v-clickaway="saveQuestion"
     :class="[
       `audit-form-question--mode-${mode}`,
@@ -13,26 +15,19 @@
     ]"
     :disable-dragging="mode === 'fill'"
     :first="first"
-    :question="question"
     :readonly="readonly"
-    :result="answer /* compat, should be ':answer' */"
-    :answer="answer"
     :v="v$"
     class="audit-form-question"
     @activate="activateQuestion"
     @copy="emit('copy')"
     @delete="emit('delete')"
-    @change:question="emit('update:question', $event) /* compat, should be removed */"
-    @update:question="emit('update:question', $event)"
-    @change:result="emit('update:answer', $event) /* compat, should be ':answer' */"
-    @update:answer="emit('update:answer', $event)"
   />
 </template>
 
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, inject,onMounted, ref, toRefs } from 'vue';
+import { computed, inject,onMounted, ref } from 'vue';
 import { EngineQuestion, EngineQuestionAnswer } from "webitel-sdk";
 
 import vClickaway from '../../../directives/clickaway/clickaway.js';
@@ -43,9 +38,10 @@ import QuestionWrite from './audit-form-question-write-wrapper.vue';
 const mode = inject('mode');
 const readonly = inject('readonly');
 
-const props = withDefaults(defineProps<{
-  question: EngineQuestion;
-  answer: EngineQuestionAnswer | null;
+const questionModel = defineModel<EngineQuestion>('question');
+const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
+
+withDefaults(defineProps<{
   first?: boolean;
 }>(), {
   first: false,
@@ -54,8 +50,6 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{
   'copy': [];
   'delete': [];
-  'update:question': [unknown]; // todo
-  'update:answer': [unknown]; // todo
 }>();
 
 const QuestionState = {
@@ -64,9 +58,6 @@ const QuestionState = {
 };
 
 const state = ref(QuestionState.SAVED);
-
-// is needed for useVuelidate, because props.question/props.result isn't reactive
-const { question, answer } = toRefs(props);
 
 const v$ = useVuelidate(
   computed(() =>
@@ -80,7 +71,7 @@ const v$ = useVuelidate(
           answer: {
             required: (value) => {
               // if not required, no need to validate
-              if (!props.question.required) return true;
+              if (!questionModel.value.required) return true;
 
               if (value && value?.score != null) {
                 return true;
@@ -89,7 +80,7 @@ const v$ = useVuelidate(
           },
         },
   ),
-  { question, answer },
+  { question: questionModel, answer: answerModel },
   { $autoDirty: true },
 );
 
@@ -102,7 +93,7 @@ const component = computed(() => {
   return QuestionRead;
 });
 
-const isAnswer = computed(() => !isEmpty(props.answer));
+const isAnswer = computed(() => !isEmpty(answerModel.value));
 
 function saveQuestion() {
   state.value = QuestionState.SAVED;
