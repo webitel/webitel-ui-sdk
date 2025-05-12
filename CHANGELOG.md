@@ -1,3 +1,8 @@
+## [v25.6.9] - 2025-05-12
+### :bug: Bug Fixes
+- [`1504d46`](https://github.com/webitel/webitel-ui-sdk/commit/1504d466a1aba4f4e4848e6e43a6800277a8893a) - answers edit fixes [WTEL-6876](https://webitel.atlassian.net/browse/WTEL-6876) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.6.8] - 2025-05-12
 ### :bug: Bug Fixes
 - [`7872386`](https://github.com/webitel/webitel-ui-sdk/commit/78723867f12069376e0c6232c7b59e727359ef23) - small audit fixes [WTEL-6873](https://webitel.atlassian.net/browse/WTEL-6873)[WTEL-6875](https://webitel.atlassian.net/browse/WTEL-6875)[WTEL-6876](https://webitel.atlassian.net/browse/WTEL-6876)[WTEL-6879](https://webitel.atlassian.net/browse/WTEL-6879)[WTEL-6880](https://webitel.atlassian.net/browse/WTEL-6880) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2112,3 +2117,4 @@
 [v25.6.6]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.5...v25.6.6
 [v25.6.7]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.6...v25.6.7
 [v25.6.8]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.7...v25.6.8
+[v25.6.9]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.8...v25.6.9
