@@ -95,7 +95,7 @@ const updateAnswer = (value: EngineQuestionAnswer) => {
   if (readonly.value) return; // if ... then in preview mode
 
   // coz only some properties of answer may be patched
-  const newAnswer = { ...answerModel.value, value };
+  const newAnswer = { ...answerModel.value, ...value };
   answerModel.value = newAnswer;
 };
 
