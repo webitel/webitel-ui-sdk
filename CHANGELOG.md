@@ -1,3 +1,8 @@
+## [v25.6.10] - 2025-05-12
+### :bug: Bug Fixes
+- [`a5c4a57`](https://github.com/webitel/webitel-ui-sdk/commit/a5c4a575f54a78a3807c53669dba492889fe7933) - audit form answer comment [WTEL-6876](https://webitel.atlassian.net/browse/WTEL-6876) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.6.9] - 2025-05-12
 ### :bug: Bug Fixes
 - [`1504d46`](https://github.com/webitel/webitel-ui-sdk/commit/1504d466a1aba4f4e4848e6e43a6800277a8893a) - answers edit fixes [WTEL-6876](https://webitel.atlassian.net/browse/WTEL-6876) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2118,3 +2123,4 @@
 [v25.6.7]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.6...v25.6.7
 [v25.6.8]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.7...v25.6.8
 [v25.6.9]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.8...v25.6.9
+[v25.6.10]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.9...v25.6.10
