@@ -30,34 +30,33 @@
       class="audit-form-question-score-read"
     >
       <wt-radio
-        v-for="value of scoreRange"
-        :key="value"
-        :label="`${value}`"
-        :selected="isResult ? result.score : null"
-        :value="value"
-        @input="emit('change:result', { score: value })"
+        v-for="score of scoreRange"
+        :key="score"
+        :label="`${score}`"
+        :selected="answerModel?.score"
+        :value="score"
+        @input="updateAnswer"
       />
     </div>
   </article>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { integer, maxValue, minValue, required } from '@vuelidate/validators';
 import { computed, onMounted, toRefs } from 'vue';
+import { EngineQuestionAnswer } from 'webitel-sdk';
 
 import WtInput from '../../../../../components/wt-input/wt-input.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
-import isEmpty from '../../../../../scripts/isEmpty.js';
 import updateObject from '../../../../../scripts/updateObject.js';
+
+const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
 const props = defineProps({
   question: {
     type: Object,
     required: true,
-  },
-  result: {
-    type: Object,
   },
   mode: {
     // options: ['read', 'write']
@@ -66,7 +65,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['change:question', 'change:result']);
+const emit = defineEmits(['change:question']);
 
 // is needed for useVuelidate, because props.question/props.result isn't reactive
 const { question } = toRefs(props);
@@ -103,7 +102,12 @@ const scoreRange = computed(() => {
   return result;
 });
 
-const isResult = computed(() => !isEmpty(props.result));
+function updateAnswer(score) {
+  answerModel.value = answerModel.value ? {
+    ...answerModel.value,
+    score,
+  } : { score };
+}
 
 function updateQuestion({ path, value }) {
   emit('change:question', updateObject({ obj: props.question, path, value }));
