@@ -1,3 +1,8 @@
+## [v25.6.12] - 2025-05-12
+### :sparkles: New Features
+- [`5dff95a`](https://github.com/webitel/webitel-ui-sdk/commit/5dff95af18314681fa30a08fa112eecc8f760c80) - added portal icon [WTEL-6785](https://webitel.atlassian.net/browse/WTEL-6785) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v25.6.11] - 2025-05-12
 ### :sparkles: New Features
 - [`fabd8e9`](https://github.com/webitel/webitel-ui-sdk/commit/fabd8e9d3aa19bfa106c1d26f796369d53902cc3) - audit-form hide-comment [WTEL-6874](https://webitel.atlassian.net/browse/WTEL-6874) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2130,3 +2135,4 @@
 [v25.6.9]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.8...v25.6.9
 [v25.6.10]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.9...v25.6.10
 [v25.6.11]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.10...v25.6.11
+[v25.6.12]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.11...v25.6.12
