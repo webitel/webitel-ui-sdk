@@ -49,6 +49,7 @@
       <wt-divider />
       <audit-form-answer-editing-info
         :answer="answerModel"
+        hide-comment
       />
     </template>
   </article>
