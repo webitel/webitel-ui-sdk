@@ -4,7 +4,7 @@
       v-if="mode === 'fill'"
     >
       <wt-button
-        :disabled="props.invalid"
+        :disabled="props.invalid || disabledSave"
         @click="emit('fill:save')"
       >
         {{ t('reusable.save') }}
@@ -40,6 +40,7 @@ const readonly = inject('readonly');
 
 const props = defineProps<{
   invalid: boolean;
+  disabledSave?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -60,6 +61,6 @@ const { t } = useI18n();
 }
 
 .audit-form-footer-create-question-action {
-  align-self: flex-end;
+  margin-left: auto;
 }
 </style>

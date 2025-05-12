@@ -20,13 +20,16 @@
     </div>
 
     <wt-textarea
-      v-model="resultCommentModel"
+      v-if="mode === AuditFormMode.Fill"
+      :value="resultCommentModel"
       class="call-evaluation-form__comment"
       :label="$t('reusable.comment')"
+      @input="handleResultCommentUpdate"
     />
 
     <audit-form-footer
       :invalid="isInvalidForm"
+      :disabled-save="!isAnswersTouched"
       @fill:save="saveEvaluation"
       @fill:cancel="cancelEvaluation"
       @create:add="addQuestion"
@@ -43,6 +46,7 @@ import {
   onMounted,
   provide,
   reactive,
+  ref,
   useTemplateRef,
   watch,
 } from 'vue';
@@ -89,6 +93,8 @@ const v$ = useVuelidate();
 const auditQuestions = useTemplateRef('auditQuestions');
 const isQuestionAdded = reactive({ value: false, index: null });
 
+const isAnswersTouched = ref(false);
+
 provide('readonly', props.readonly);
 provide('mode', props.mode);
 
@@ -101,7 +107,7 @@ async function addQuestion({ index, question } = {}) {
   else questions.push(newQuestion);
   isQuestionAdded.value = true;
   isQuestionAdded.index = index || 'last';
-  await emit('update:questions', questions);
+  emit('update:questions', questions);
 }
 
 function handleQuestionUpdate({ key, value }) {
@@ -134,6 +140,8 @@ function handleAnswerUpdate({ key, value }) {
   const answer = [...answersModel.value];
   answer[key] = value;
   answersModel.value = answer;
+
+  isAnswersTouched.value = true;
 }
 
 function initAnswers() {
@@ -170,6 +178,11 @@ async function atQuestionAdded() {
 
   isQuestionAdded.value = false;
   isQuestionAdded.index = null;
+}
+
+function handleResultCommentUpdate(value) {
+  resultCommentModel.value = value;
+  isAnswersTouched.value = true;
 }
 
 const sortableWrapper = useTemplateRef('sortableWrapper');
