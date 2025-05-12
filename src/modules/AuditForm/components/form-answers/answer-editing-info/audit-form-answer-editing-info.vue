@@ -6,7 +6,7 @@
       <span>{{ updateTime }}</span>
     </header>
     <p
-      v-if="initialComment"
+      v-if="!hideComment && initialComment"
       ref="answer-editing-comment"
       class="audit-form-answer-editing-info-comment"
       :class="{
@@ -38,8 +38,10 @@ import {EngineQuestionAnswer} from "webitel-sdk";
 const props = withDefaults(defineProps<{
   answer: EngineQuestionAnswer;
   collapsible?: boolean;
+  hideComment?: boolean;
 }>(), {
   collapsible: false,
+  hideComment: false,
 });
 
 const commentElRef = useTemplateRef('answer-editing-comment');
