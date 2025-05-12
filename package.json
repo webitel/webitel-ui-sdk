@@ -16,7 +16,7 @@
     "orval": "orval",
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
-    "utils:i": "npm install"
+    "utils:i": "npm install --install-links"
   },
   "main": "./dist/ui-sdk.js",
   "type": "module",
@@ -108,7 +108,7 @@
     "vue-multiselect": "^3.1.0",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.5.0",
-    "webitel-sdk": "^25.2.19",
+    "webitel-sdk": "^25.4.3",
     "xlsx": "0.18.5",
     "zod": "^3.24.2"
   },
