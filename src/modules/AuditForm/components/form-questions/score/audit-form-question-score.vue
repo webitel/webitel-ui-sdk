@@ -44,31 +44,23 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { integer, maxValue, minValue, required } from '@vuelidate/validators';
-import { computed, onMounted, toRefs } from 'vue';
-import { EngineQuestionAnswer } from 'webitel-sdk';
+import { computed, onMounted } from 'vue';
+import {EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
 
 import WtInput from '../../../../../components/wt-input/wt-input.vue';
 import WtRadio from '../../../../../components/wt-radio/wt-radio.vue';
 import updateObject from '../../../../../scripts/updateObject.js';
 
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
+const questionModel = defineModel<EngineQuestion>('question');
 
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true,
-  },
+defineProps({
   mode: {
     // options: ['read', 'write']
     type: String,
     default: 'read',
   },
 });
-
-const emit = defineEmits(['change:question']);
-
-// is needed for useVuelidate, because props.question/props.result isn't reactive
-const { question } = toRefs(props);
 
 const v$ = useVuelidate(
   computed(() => ({
@@ -80,25 +72,25 @@ const v$ = useVuelidate(
         integer,
       },
       max: {
-        minValue: minValue(props.question.min ? props.question.min : 1),
+        minValue: minValue(questionModel.value.min ? questionModel.value.min : 1),
         maxValue: maxValue(10),
         required,
         integer,
       },
     },
   })),
-  { question },
+  { question: questionModel },
   { $autoDirty: true },
 );
 
 const scoreRange = computed(() => {
-  if (props.question.min > props.question.max) return [];
+  if (questionModel.value.min > questionModel.value.max) return [];
   const result = [];
-  let i = +props.question.min;
+  let i = +questionModel.value.min;
   do {
     result.push(i);
     i += 1;
-  } while (i <= props.question.max);
+  } while (i <= questionModel.value.max);
   return result;
 });
 
@@ -110,7 +102,7 @@ function updateAnswer(score) {
 }
 
 function updateQuestion({ path, value }) {
-  emit('change:question', updateObject({ obj: props.question, path, value }));
+  questionModel.value = updateObject({ obj: questionModel.value, path, value });
 }
 
 // init validation
