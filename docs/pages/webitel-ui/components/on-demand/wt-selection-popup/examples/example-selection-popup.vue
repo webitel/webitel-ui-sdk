@@ -1,6 +1,6 @@
 <template>
   <div>
-    <wt-button @click="isShownPopup = true">Open popup </wt-button>
+    <wt-button @click="isShownPopup = true"> Open popup </wt-button>
     <wt-selection-popup
       :options="options"
       :selected="selected"
@@ -15,8 +15,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue';
 import WtSelectionPopup from '@webitel/ui-sdk/src/components/on-demand/wt-selection-popup/wt-selection-popup.vue';
+import { computed,onMounted, ref } from 'vue';
 
 const selected = ref(null);
 const isShownPopup = ref(false);

@@ -120,7 +120,7 @@ import CrmLight from './assets/light/app-logo-light-crm.svg';
 import HistoryLight from './assets/light/app-logo-light-history.svg';
 import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
 import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
-import { WtNavigationBarNavItem } from "./types/WtNavigationBar";
+import { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
 const appLogo = {
   [WebitelApplications.SUPERVISOR]: {
@@ -171,7 +171,7 @@ export default {
     logoRoute: {
       type: String,
       default: '',
-    }
+    },
   },
   data: () => ({
     isOpened: false,
@@ -223,7 +223,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-navigation-bar__menu-btn {
   display: block;
@@ -233,30 +234,30 @@ export default {
 .wt-navigation-bar__nav {
   @extend %wt-scrollbar;
   position: fixed;
-  z-index: var(--wt-navigation-bar-z-index);
   top: 0;
   bottom: 0;
   left: 0;
-  overflow: auto;
-  width: var(--wt-navigation-bar-width);
-  padding: var(--wt-navigation-bar-padding);
+  z-index: var(--wt-navigation-bar-z-index);
+  box-shadow: var(--elevation-10);
   border-radius: var(--border-radius);
   background: var(--wt-navigation-bar-background-color);
-  box-shadow: var(--elevation-10);
+  padding: var(--wt-navigation-bar-padding);
+  width: var(--wt-navigation-bar-width);
+  overflow: auto;
 
   // expand animation optimization
   * {
     transform: translateZ(0);
-    will-change: height;
-    backface-visibility: hidden;
     perspective: 1000px;
+    backface-visibility: hidden;
+    will-change: height;
   }
 }
 
 .wt-navigation-bar__nav-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: var(--wt-navigation-bar-header-padding);
 }
 
@@ -268,8 +269,8 @@ export default {
 .wt-navigation-bar__nav-item-link {
   @extend %typo-body-1;
   display: block;
-  padding: var(--wt-navigation-bar-link-padding);
   transition: var(--transition);
+  padding: var(--wt-navigation-bar-link-padding);
   word-wrap: break-word;
   color: var(--wt-navigation-bar-option-text-color);
 
@@ -278,33 +279,33 @@ export default {
   }
 
   &.wt-navigation-bar__nav-item-link--active {
-    color: var(--wt-navigation-bar-option-text-active-color);
     background: var(--wt-navigation-bar-option-background-active-color);
+    color: var(--wt-navigation-bar-option-text-active-color);
   }
 }
 
 .wt-navigation-bar__nav-expansion {
   @extend %typo-subtitle-1;
-  position: relative;
   display: flex;
-  align-items: center;
+  position: relative;
   justify-content: space-between;
-  width: 100%;
-  padding: var(--wt-navigation-bar-link-padding);
-  color: var(--wt-navigation-bar-option-text-color);
+  align-items: center;
   outline: none;
+  padding: var(--wt-navigation-bar-link-padding);
+  width: 100%;
+  color: var(--wt-navigation-bar-option-text-color);
 
   &:before {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
-    width: var(--wt-navigation-bar-active-expansion-flag-width);
-    content: '';
-    transition: var(--transition);
     opacity: 0;
+    transition: var(--transition);
     border-radius: var(--border-radius);
     background: var(--wt-navigation-bar-expansion-ribbon-color);
+    width: var(--wt-navigation-bar-active-expansion-flag-width);
+    content: '';
   }
 
   .wt-navigation-bar__expansion-arrow {

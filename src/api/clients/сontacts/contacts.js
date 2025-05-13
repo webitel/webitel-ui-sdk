@@ -38,8 +38,11 @@ const getList = async (params) => {
     'fields',
     'id',
     'qin',
-    'groupId',
     'notIdGroup',
+    'group',
+    'owner',
+    'label',
+    'user',
   ];
 
   if (!params.fields) {
@@ -108,6 +111,24 @@ const getList = async (params) => {
       q: searchValue || '',
       qin: searchKey || '',
     };
+
+    if (params.hasUser != null) {
+      changedParams.user = params.hasUser;
+    }
+
+    if (params.contactGroup) {
+      changedParams.group = [...params.contactGroup.list];
+    }
+    if (params.contactLabel) {
+      changedParams.label = params.contactLabel.map((item) => item.label);
+    }
+    if (params.contactOwner) {
+      changedParams.owner = params.contactOwner;
+    }
+  }
+
+  if (params.parentId) {
+    changedParams.group = [params.parentId];
   }
 
   const transformations = [
@@ -116,8 +137,22 @@ const getList = async (params) => {
     camelToSnake(),
   ];
 
-  const { page, size, q, sort, fields, id, qin, mode, group_id, not_id_group } =
-    applyTransform(changedParams, transformations);
+  const {
+    page,
+    size,
+    q,
+    sort,
+    fields,
+    id,
+    qin,
+    mode,
+    group_id,
+    group,
+    not_id_group,
+    owner,
+    label,
+    user,
+  } = applyTransform(changedParams, transformations);
 
   try {
     const response = await contactService.searchContacts(
@@ -129,13 +164,16 @@ const getList = async (params) => {
       id,
       qin,
       mode,
-      group_id,
       not_id_group,
+      group,
+      owner,
+      label,
+      user,
     );
 
     const { items, next } = applyTransform(
       { ...response.data, items: response.data.data || [] },
-      [snakeToCamel(), merge(getDefaultGetListResponse())],
+      [snakeToCamel(['custom']), merge(getDefaultGetListResponse())],
     );
 
     return {
@@ -164,6 +202,8 @@ const get = async ({ itemId: id }) => {
     'phones',
     'emails',
     'imclients',
+    'user',
+    'custom',
   ];
 
   const defaultObject = {};
@@ -183,7 +223,7 @@ const get = async ({ itemId: id }) => {
   try {
     const response = await contactService.locateContact(id, fields);
     return applyTransform(response.data, [
-      snakeToCamel(),
+      snakeToCamel(['custom']),
       merge(defaultObject),
       itemResponseHandler,
       formatAccessMode,
@@ -200,6 +240,7 @@ const fieldsToSend = [
   'managers',
   'timezones',
   'groups',
+  'custom',
 ];
 
 const sanitizeManagers = (itemInstance) => {
@@ -243,11 +284,11 @@ const add = async ({ itemInstance }) => {
     sanitizeTimezones,
     sanitizeGroups,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    camelToSnake(['custom']),
   ]);
   try {
     const response = await contactService.createContact(item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [snakeToCamel(['custom'])]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -261,11 +302,11 @@ const update = async ({ itemInstance }) => {
     sanitizeTimezones,
     sanitizeGroups,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    camelToSnake(['custom']),
   ]);
   try {
     const response = await contactService.updateContact(etag, item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [snakeToCamel(['custom'])]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }

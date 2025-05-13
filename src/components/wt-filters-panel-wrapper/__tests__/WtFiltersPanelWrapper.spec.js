@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import FiltersPanelWrapper from '../wt-filters-panel-wrapper.vue';
 
 describe('Filters Panel Wrapper', () => {

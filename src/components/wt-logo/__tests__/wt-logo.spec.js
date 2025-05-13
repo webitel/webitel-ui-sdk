@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtLogo from '../wt-logo.vue';
 
 describe('WtLogo', () => {

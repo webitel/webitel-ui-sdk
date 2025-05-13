@@ -1,4 +1,5 @@
-import contacts from './contacts.js';
 import contactChatMessagesHistory from './contactChatMessagesHistory.js';
+import contacts from './contacts.js';
+import ContactsSearchMode from './enums/ContactsSearchMode.js';
 
-export { contacts, contactChatMessagesHistory };
+export { contactChatMessagesHistory, contacts, ContactsSearchMode };

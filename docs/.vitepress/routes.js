@@ -218,4 +218,4 @@ const generateNav = (navbarNav) => {
 const sidebar = generateSidebar(sidebarNav);
 const nav = generateNav(navbarNav);
 
-export { sidebar, nav };
+export { nav, sidebar };

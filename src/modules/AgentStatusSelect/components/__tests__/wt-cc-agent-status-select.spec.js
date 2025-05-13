@@ -1,5 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import { createStore } from 'vuex';
+
 import AgentStatus from '../../../../enums/AgentStatus/AgentStatus.enum.js';
 import * as AgentStatusAPIFactory from '../../api/agent-status.js';
 import * as PauseCauseAPIFactory from '../../api/pause-cause.js';

@@ -4,12 +4,12 @@
     :v="v$"
     label="Invalid input"
     name="invalid-input"
-  ></wt-input>
+  />
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
+import { computed,ref } from 'vue';
 
 const value = ref('invalid value');
 

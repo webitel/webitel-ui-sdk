@@ -5,6 +5,10 @@ node_modules
 /docs/.vitepress/dist
 /coverage
 
+/src/api/orval
+
+/packages/ui-datalist/types
+
 # local env files
 .env.local
 .env.*.local
@@ -24,3 +28,4 @@ yarn-error.log*
 *.sw?
 
 vite.config.*.timestamp*
+.eslintcache

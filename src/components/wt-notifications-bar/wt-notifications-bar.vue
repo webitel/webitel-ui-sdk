@@ -64,18 +64,18 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-notifications-bar {
   @extend %wt-scrollbar;
 
   position: fixed;
-  z-index: var(--notifications-bar-z-index);
   top: var(--notifications-bar-corner-margin);
   right: var(--notifications-bar-corner-margin);
+  z-index: var(--notifications-bar-z-index);
+  max-height: var(--notifications-bar-max-height);
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: var(--notifications-bar-max-height);
 
   .wt-notification {
     margin: var(--notifications-bar-notifications-margin);

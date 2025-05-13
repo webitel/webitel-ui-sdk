@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtPopup from '../wt-popup.vue';
 
 describe('WtPopup', () => {

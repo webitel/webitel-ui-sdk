@@ -57,8 +57,8 @@ export default {
 <style lang="scss" scoped>
 .flow-save-filed-popup__wrapper {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   text-align: center;
 
   .wt-icon {

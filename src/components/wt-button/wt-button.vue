@@ -1,5 +1,7 @@
 <template>
   <button
+    type="button"
+    :disabled="disabled"
     :class="[
       colorClass,
       `wt-button--size-${size}`,
@@ -11,9 +13,7 @@
         'wt-button--loading': showLoader,
       },
     ]"
-    :disabled="disabled"
     class="wt-button"
-    type="button"
     @click="$emit('click', $event)"
   >
     <!--  Show loader and button contents at the same time to prevent width shift if content > min-width of button -->
@@ -23,7 +23,7 @@
       size="sm"
     />
     <div class="wt-button__contents">
-      <slot> no content provided </slot>
+      <slot> no content provided</slot>
     </div>
   </button>
 </template>
@@ -117,21 +117,21 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-button {
-  @extend %typo-button;
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
-  min-width: var(--btn-min-width);
-  padding: var(--btn-padding);
   cursor: pointer;
+  background-clip: padding-box;
+  @extend %typo-button;
+  display: inline-block;
+  position: relative;
   transition: var(--transition);
-  color: var(--btn-primary-text-color);
+  box-sizing: border-box;
   border-radius: var(--border-radius);
   background-color: var(--btn-primary-color);
-  background-clip: padding-box;
+  padding: var(--btn-padding);
+  min-width: var(--btn-min-width);
+  color: var(--btn-primary-text-color);
 
   &__contents {
     display: contents;
@@ -181,8 +181,8 @@ export default {
   }
 
   &.secondary {
-    color: var(--btn-secondary-text-color);
     background-color: var(--btn-secondary-color);
+    color: var(--btn-secondary-text-color);
 
     &:hover,
     &:active {
@@ -191,8 +191,8 @@ export default {
   }
 
   &.success {
-    color: var(--btn-success-text-color);
     background-color: var(--btn-success-color);
+    color: var(--btn-success-text-color);
 
     &:hover,
     &:active {
@@ -201,8 +201,8 @@ export default {
   }
 
   &.info {
-    color: var(--btn-info-text-color);
     background-color: var(--btn-info-color);
+    color: var(--btn-info-text-color);
 
     &:hover,
     &:active {
@@ -211,8 +211,8 @@ export default {
   }
 
   &.job {
-    color: var(--btn-job-text-color);
     background-color: var(--btn-job-color);
+    color: var(--btn-job-text-color);
 
     &:hover,
     &:active {
@@ -221,8 +221,8 @@ export default {
   }
 
   &.transfer {
-    color: var(--btn-transfer-text-color);
     background-color: var(--btn-transfer-color);
+    color: var(--btn-transfer-text-color);
 
     &:hover,
     &:active {
@@ -231,8 +231,8 @@ export default {
   }
 
   &.error {
-    color: var(--btn-error-text-color);
     background-color: var(--btn-error-color);
+    color: var(--btn-error-text-color);
 
     &:hover,
     &:active {
@@ -242,10 +242,10 @@ export default {
 
   &.wt-button--disabled {
     cursor: auto;
+    box-shadow: none;
+    background-color: var(--btn-disabled-color);
     pointer-events: none;
     color: var(--btn-disabled-text-color);
-    background-color: var(--btn-disabled-color);
-    box-shadow: none;
   }
 
   .wt-loader {

@@ -7,12 +7,12 @@
 </template>
 
 <script setup>
-import StartLogoLight from '../assets/start-page-logo-light.svg';
-import StartLogoDark from '../assets/start-page-logo-dark.svg';
-import ConfigurationLight from '../assets/configuration-section-light.svg';
 import ConfigurationDark from '../assets/configuration-section-dark.svg';
-import ContactsLight from '../assets/contacts-section-light.svg';
+import ConfigurationLight from '../assets/configuration-section-light.svg';
 import ContactsDark from '../assets/contacts-section-dark.svg';
+import ContactsLight from '../assets/contacts-section-light.svg';
+import StartLogoDark from '../assets/start-page-logo-dark.svg';
+import StartLogoLight from '../assets/start-page-logo-light.svg';
 
 const logo = {
   light: StartLogoLight,

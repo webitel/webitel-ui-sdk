@@ -17,6 +17,7 @@
 
 <script setup>
 import { computed } from 'vue';
+
 import StartPageCard from './start-page-card.vue';
 import StartPageLogo from './start-page-logo.vue';
 
@@ -52,11 +53,11 @@ const navCards = computed(() => {
 <style scoped>
 .wt-start-page__wrapper {
   display: grid;
+  grid-template-columns: repeat(auto-fit, 264px);
   justify-content: center;
   box-sizing: border-box;
-  min-width: 264px;
   padding: var(--spacing-sm);
-  grid-template-columns: repeat(auto-fit, 264px);
+  min-width: 264px;
   grid-gap: var(--spacing-sm);
 }
 </style>

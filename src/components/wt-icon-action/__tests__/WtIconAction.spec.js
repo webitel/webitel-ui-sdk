@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtIconAction from '../wt-icon-action.vue';
 
 describe('WtIconAction', () => {

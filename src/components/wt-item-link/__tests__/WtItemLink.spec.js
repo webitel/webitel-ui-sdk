@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtItemLink from '../wt-item-link.vue';
 
 describe('WtItemLink', () => {

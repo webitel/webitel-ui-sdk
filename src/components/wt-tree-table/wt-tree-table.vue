@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, withDefaults} from 'vue';
+import { computed, withDefaults } from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
@@ -265,10 +265,12 @@ const handleSelection = (row, select) => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss' as *;
+@use '@webitel/styleguide/typography' as *;
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-tree-table {
   @extend %wt-scrollbar;
+  max-height: 100%;
   overflow: auto;
 
   &-head {
@@ -280,8 +282,8 @@ const handleSelection = (row, select) => {
 }
 
 .wt-tree-table-wrapper {
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 
   .wt-tree-table-tr-wrapper {
     background: var(--wt-tree-table-primary-color);
@@ -295,16 +297,16 @@ const handleSelection = (row, select) => {
 .wt-tree-table-th,
 .wt-tree-table-td {
   @extend %typo-body-1;
+  padding: var(--spacing-xs);
   height: fit-content;
   min-height: var(--wt-tree-table-min-height);
-  padding: var(--spacing-xs);
   word-break: break-all;
   overflow-wrap: break-word;
 
   &__actions {
     display: flex;
-    align-items: flex-start;
     justify-content: flex-end;
+    align-items: flex-start;
     gap: var(--spacing-xs);
   }
 

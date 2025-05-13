@@ -38,9 +38,9 @@ export default {
 }
 
 .elevation-item {
-  padding: 10px;
   border-radius: var(--border-radius);
   background: var(--main-color);
+  padding: 10px;
 
   &__name {
     @extend %typo-subtitle-1;

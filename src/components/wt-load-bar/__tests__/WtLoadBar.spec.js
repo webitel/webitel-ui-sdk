@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtLoadBar from '../wt-load-bar.vue';
 
 describe('WtLoadBar', () => {

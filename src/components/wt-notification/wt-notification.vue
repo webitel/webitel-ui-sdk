@@ -51,23 +51,23 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-notification {
   @extend %typo-body-1;
-  position: relative;
 
   display: flex;
+  position: relative;
   align-items: flex-start;
+  cursor: pointer;
+  box-shadow: var(--elevation-1);
+  border-radius: var(--border-radius);
+  background: var(--wt-notification-bg-color);
+  padding: var(--wt-notification-padding);
   width: fit-content;
   min-width: var(--wt-notification-min-width);
   max-width: var(--wt-notification-max-width);
-  padding: var(--wt-notification-padding);
-  cursor: pointer;
   color: var(--wt-notification-text-color);
-  border-radius: var(--border-radius);
-  background: var(--wt-notification-bg-color);
-  box-shadow: var(--elevation-1);
 }
 
 .wt-notification__icon {
@@ -76,8 +76,8 @@ export default {
 }
 
 .wt-notification__text {
-  align-self: center;
   flex-grow: 1;
+  align-self: center;
   margin: 0;
 }
 </style>

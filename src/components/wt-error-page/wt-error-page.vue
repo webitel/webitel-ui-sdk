@@ -73,17 +73,17 @@ export default {
 <style lang="scss" scoped>
 .wt-error-page {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   box-sizing: border-box;
+  background: var(--wt-error-page-background-color);
+  padding: 90px;
   min-width: 100vw;
   min-height: 100vh;
-  padding: 90px;
-  background: var(--wt-error-page-background-color);
 
   &__wrapper {
-    text-align: center;
     color: var(--wt-error-page-text-color);
+    text-align: center;
   }
 
   &__img {

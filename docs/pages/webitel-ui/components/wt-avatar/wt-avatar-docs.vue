@@ -29,6 +29,7 @@
 
 <script>
 import Prism from 'prismjs';
+
 import AbstractUserStatus from '../../../../../src/enums/AbstractUserStatus/AbstractUserStatus.enum';
 import pic from './examples/pic.jpg';
 
@@ -87,7 +88,7 @@ export default {
 <style lang="scss" scoped>
 .avatars-row {
   display: flex;
-  gap: var(--spacing-sm);
   flex-wrap: nowrap;
+  gap: var(--spacing-sm);
 }
 </style>

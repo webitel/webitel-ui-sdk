@@ -16,11 +16,22 @@ export default typescriptEslint.config(
     plugins: {
       'simple-import-sort': simpleImportSort,
     },
-    files: ['**/*.{ts,js,vue}'],
+    files: ['**/*.{ts,js,vue,css,scss}'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...[
+          'ref',
+          'reactive',
+          'watch',
+          'watchEffect',
+          'computed',
+          'onMounted',
+          'onUnmounted',
+        ].reduce((acc, key) => ({ ...acc, [key]: 'readonly' }), {}),
+      },
       parserOptions: {
         parser: typescriptEslint.parser,
       },

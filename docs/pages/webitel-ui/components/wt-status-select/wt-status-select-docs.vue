@@ -30,6 +30,7 @@
 
 <script>
 import Prism from 'prismjs';
+
 import AgentStatus from '../../../../../src/enums/AgentStatus/AgentStatus.enum';
 
 export default {

@@ -2,11 +2,12 @@ import deepmerge from 'deepmerge';
 import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
+
 import { isEmpty } from '../../../scripts/index.js';
-import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
-import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
 import EmptyFiltersDark from '../_internals/assets/empty-filters-dark.svg';
 import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
+import EmptyTableDark from '../_internals/assets/empty-table-dark.svg';
+import EmptyTableLight from '../_internals/assets/empty-table-light.svg';
 
 export const useTableEmpty = (
   { dataList, filters, error, isLoading },
@@ -89,7 +90,7 @@ export const useTableEmpty = (
     if (filters?.value) {
       const uncheckedFilters = ['page', 'size', 'sort', 'fields'];
       const filtersApplied = Object.entries(filters.value).some(
-        ([filterName,filterValue]) =>
+        ([filterName, filterValue]) =>
           !isEmpty(filterValue) && !uncheckedFilters.includes(filterName),
       );
       if (filtersApplied) return EmptyCause.FILTERS;

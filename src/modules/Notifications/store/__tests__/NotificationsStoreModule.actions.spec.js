@@ -1,6 +1,7 @@
+import '../../../../../tests/mocks/broadcastChannelMock';
+
 import audio from '../../assets/audio/new-message.wav';
 import NotificationsStoreModule from '../NotificationsStoreModule';
-import '../../../../../tests/mocks/broadcastChannelMock';
 
 const notificationsModule = new NotificationsStoreModule().getModule();
 

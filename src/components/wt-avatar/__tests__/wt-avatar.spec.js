@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtAvatar from '../wt-avatar.vue';
 
 describe('WtAvatar', () => {

@@ -2,12 +2,14 @@
   <div
     :class="{
       'wt-datepicker--disabled': disabled,
+      'wt-datepicker--invalid': invalid,
     }"
     class="wt-datepicker"
   >
     <wt-label
       :disabled="disabled"
       v-bind="labelProps"
+      :invalid="invalid"
     >
       <!-- @slot Custom input label -->
       <slot
@@ -23,7 +25,9 @@
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
       :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
       :model-value="+value"
-      :placeholder="placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')"
+      :placeholder="
+        placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')
+      "
       auto-apply
       class="wt-datepicker__datepicker"
       v-bind="{ ...$attrs, ...$props }"
@@ -70,6 +74,12 @@
         </div>
       </template>
     </vue-datepicker>
+    <wt-input-info
+      v-if="isValidation"
+      :invalid="invalid"
+    >
+      {{ validationText }}
+    </wt-input-info>
   </div>
 </template>
 
@@ -77,7 +87,10 @@
 import '@vuepic/vue-datepicker/dist/main.css';
 
 import VueDatepicker from '@vuepic/vue-datepicker';
-import { computed, ref } from 'vue';
+import { computed, ref, toRefs } from 'vue';
+
+import { useValidation } from '../../mixins/validationMixin/useValidation.js';
+import WtInputInfo from '../wt-input-info/wt-input-info.vue';
 
 const props = defineProps({
   /**
@@ -132,6 +145,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
+  // validation rules
+  // TODO: move to separate file to make it reusable
+  v: {
+    type: Object,
+  },
   clearable: {
     type: Boolean,
     default: false,
@@ -146,6 +165,14 @@ const isDateTime = props.mode === 'datetime';
 
 const requiredLabel = computed(() => {
   return props.required ? `${props.label}*` : props.label;
+});
+
+// https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
+const { v, customValidators } = toRefs(props);
+
+const { isValidation, invalid, validationText } = useValidation({
+  v,
+  customValidators,
 });
 
 const clearValue = () => {
@@ -164,7 +191,7 @@ const clearValue = () => {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-datepicker :deep(.dp__main) {
   .dp__input_icon {
@@ -205,11 +232,11 @@ const clearValue = () => {
 
   .dp__menu {
     box-sizing: border-box;
+    box-shadow: var(--elevation-10);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs);
     width: 196px;
     min-width: 196px;
-    padding: var(--spacing-xs);
-    border-radius: var(--border-radius);
-    box-shadow: var(--elevation-10);
   }
 
   .dp__calendar_wrap {
@@ -254,11 +281,23 @@ const clearValue = () => {
   }
 }
 
+.wt-datepicker--invalid :deep(.dp__main) {
+  .dp__input {
+    outline: none; // prevent outline overlapping false color
+    border-color: var(--wt-text-field-input-border-error-color);
+    color: var(--wt-text-field-error-text-color);
+  }
+
+  .dp__input_icon {
+    --icon-color: var(--wt-text-field-input-border-error-color);
+  }
+}
+
 .datepicker__timepicker {
   display: flex;
   align-items: center;
-  margin-top: var(--spacing-xs);
   gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
 
   .wt-time-input {
     flex-grow: 1;

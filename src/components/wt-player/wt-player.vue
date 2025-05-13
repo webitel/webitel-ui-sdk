@@ -178,7 +178,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .wt-player {
   @extend %typo-body-2;
@@ -201,9 +201,9 @@ export default {
   }
 
   :deep(.plyr) {
-    max-width: 100%; // prevents <video> container overflow
-    border-radius: var(--border-radius);
     box-shadow: var(--elevation-10);
+    border-radius: var(--border-radius);
+    max-width: 100%; // prevents <video> container overflow
 
     .plyr__controls > .plyr__control,
     .plyr__controls > .plyr__controls__item > .plyr__control {
@@ -229,11 +229,11 @@ export default {
       cursor: pointer;
 
       &::-webkit-slider-thumb {
+        -webkit-appearance: none;
         transition: var(--transition);
         border: var(--wt-slider-border);
         border-radius: var(--wt-slider-pointer-radius);
         background: var(--wt-slider-pointer-background-color);
-        -webkit-appearance: none;
       }
 
       &::-webkit-slider-runnable-track {
@@ -241,14 +241,14 @@ export default {
       }
 
       &::-moz-range-thumb {
-        width: var(--wt-slider-pointer-size);
-        height: var(--wt-slider-pointer-size);
+        -moz-appearance: none;
         transition: var(--transition);
         border: var(--wt-slider-border);
         border-color: var(--wt-slider-pointer-border-color);
         border-radius: var(--wt-slider-pointer-radius);
         background: var(--wt-slider-pointer-background-color);
-        -moz-appearance: none;
+        width: var(--wt-slider-pointer-size);
+        height: var(--wt-slider-pointer-size);
       }
 
       &::-moz-range-track {

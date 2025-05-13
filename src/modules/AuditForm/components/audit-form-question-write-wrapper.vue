@@ -50,36 +50,32 @@
       </div>
       <component
         :is="QuestionTypeComponent"
-        :question="question"
+        v-model:question="questionModel"
         mode="write"
-        @change:question="emit('change:question', $event)"
       />
     </section>
   </article>
 </template>
 
-<script setup>
-import cloneDeep from 'lodash/cloneDeep.js';
-import set from 'lodash/set.js';
+<script lang="ts" setup>
+import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
-import { EngineAuditQuestionType } from 'webitel-sdk';
+import { EngineAuditQuestionType, EngineQuestion } from 'webitel-sdk';
+
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
 import WtInput from '../../../components/wt-input/wt-input.vue';
 import WtSelect from '../../../components/wt-select/wt-select.vue';
 import WtSwitcher from '../../../components/wt-switcher/wt-switcher.vue';
 import WtTooltip from '../../../components/wt-tooltip/wt-tooltip.vue';
+import {updateObject} from '../../../scripts';
 import { generateQuestionOptionsSchema } from '../schemas/AuditFormQuestionOptionsSchema.js';
-
 import { generateQuestionScoreSchema } from '../schemas/AuditFormQuestionScoreSchema.js';
+import AuditFormQuestionOptions from './form-questions/options/audit-form-question-options.vue';
+import AuditFormQuestionScore from './form-questions/score/audit-form-question-score.vue';
 
-import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
-import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
+const questionModel = defineModel<EngineQuestion>('question');
 
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true,
-  },
+defineProps({
   first: {
     type: Boolean,
     default: false,
@@ -89,7 +85,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['change:question', 'copy', 'delete']);
+const emit = defineEmits(['copy', 'delete']);
 
 const QuestionType = [
   {
@@ -103,30 +99,29 @@ const QuestionType = [
 ];
 
 const prettifiedQuestionType = computed(() =>
-  QuestionType.find(({ value }) => value === props.question.type),
+  QuestionType.find(({ value }) => value === questionModel.value.type),
 );
 
 const QuestionTypeComponent = computed(() => {
-  if (props.question.type === EngineAuditQuestionType.Option)
+  if (questionModel.value.type === EngineAuditQuestionType.Option)
     return AuditFormQuestionOptions;
-  if (props.question.type === EngineAuditQuestionType.Score)
+  if (questionModel.value.type === EngineAuditQuestionType.Score)
     return AuditFormQuestionScore;
   return null;
 });
 
 function updateQuestion({ path, value }) {
-  const question = set(cloneDeep(props.question), path, value);
-  emit('change:question', question);
+  questionModel.value = updateObject({ obj: questionModel.value, path, value });
 }
 
 function handleQuestionTypeChange(type) {
-  const question = cloneDeep(props.question);
+  const question = cloneDeep(questionModel.value);
   if (type === EngineAuditQuestionType.Option) {
     Object.assign(question, generateQuestionOptionsSchema());
   } else if (type === EngineAuditQuestionType.Score) {
     Object.assign(question, generateQuestionScoreSchema());
   }
-  emit('change:question', question);
+  questionModel.value = question;
 }
 </script>
 
@@ -134,14 +129,14 @@ function handleQuestionTypeChange(type) {
 .audit-form-question.audit-form-question-write {
   display: flex;
   flex-direction: column;
-  box-shadow: var(--elevation-3);
   gap: var(--spacing-sm);
+  box-shadow: var(--elevation-3);
 }
 
 .audit-form-question-write-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   &__actions {
     display: flex;
@@ -151,11 +146,11 @@ function handleQuestionTypeChange(type) {
 
 .audit-form-question-write-content-question {
   display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--spacing-sm);
   margin-right: calc(
     24px + var(--spacing-sm)
   ); // delete icon action for type "options"
   margin-bottom: var(--spacing-sm);
-  grid-template-columns: 3fr 1fr;
-  gap: var(--spacing-sm);
 }
 </style>

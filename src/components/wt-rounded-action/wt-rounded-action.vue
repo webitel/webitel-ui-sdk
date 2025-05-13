@@ -20,6 +20,7 @@
       v-else
       :color="iColor"
       :icon="icon"
+      :icon-prefix="iconPrefix"
       :size="size"
     />
   </button>
@@ -32,6 +33,14 @@ const props = defineProps({
   icon: {
     type: String,
     required: true,
+  },
+  /**
+   * inserts icon name prefix between "icon" and actual icon name ("icon" prop).
+   * Useful for library icons extension with project-level icons with this prefix in name
+   */
+  iconPrefix: {
+    type: String,
+    default: '',
   },
   /**
    * @values 'primary', 'secondary', 'success', 'error', 'transfer'
@@ -92,14 +101,14 @@ const iColor = computed(() => {
 <style lang="scss" scoped>
 .wt-rounded-action {
   display: block;
-  width: fit-content;
-  padding: var(--rounded-action-padding);
   transition: var(--transition);
-  line-height: 0;
   border: var(--rounded-action-border-size) solid;
   border-color: var(--rounded-action-bg-color);
   border-radius: var(--border-radius);
   background: var(--rounded-action-bg-color);
+  padding: var(--rounded-action-padding);
+  width: fit-content;
+  line-height: 0;
 
   &:hover {
     border-color: var(--rounded-action-bg-hover-color);

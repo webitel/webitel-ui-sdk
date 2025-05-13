@@ -34,80 +34,55 @@
           "id": "31",
           "name": "Upd child name",
           "root_id": "30",
-          "sla": {
-          },
-          "group": {
-          },
-          "assignee": {
-          },
-          "created_by": {
-          },
-          "updated_by": {
-          },
+          "sla": {},
+          "group": {},
+          "assignee": {},
+          "created_by": {},
+          "updated_by": {},
           "catalog_id": "30",
           "service": [
             {
               "id": "38",
               "name": "3rd",
               "root_id": "31",
-              "sla": {
-              },
-              "group": {
-              },
-              "assignee": {
-              },
-              "created_by": {
-              },
-              "updated_by": {
-              },
+              "sla": {},
+              "group": {},
+              "assignee": {},
+              "created_by": {},
+              "updated_by": {},
               "catalog_id": "30",
               "service": [
                 {
                   "id": "39",
                   "name": "4th",
                   "root_id": "38",
-                  "sla": {
-                  },
-                  "group": {
-                  },
-                  "assignee": {
-                  },
-                  "created_by": {
-                  },
-                  "updated_by": {
-                  },
+                  "sla": {},
+                  "group": {},
+                  "assignee": {},
+                  "created_by": {},
+                  "updated_by": {},
                   "catalog_id": "30",
                   "service": [
                     {
                       "id": "40",
                       "name": "name update for service",
                       "root_id": "39",
-                      "sla": {
-                      },
-                      "group": {
-                      },
-                      "assignee": {
-                      },
-                      "created_by": {
-                      },
-                      "updated_by": {
-                      },
+                      "sla": {},
+                      "group": {},
+                      "assignee": {},
+                      "created_by": {},
+                      "updated_by": {},
                       "catalog_id": "30",
                       "service": [
                         {
                           "id": "41",
                           "name": "6th level",
                           "root_id": "40",
-                          "sla": {
-                          },
-                          "group": {
-                          },
-                          "assignee": {
-                          },
-                          "created_by": {
-                          },
-                          "updated_by": {
-                          },
+                          "sla": {},
+                          "group": {},
+                          "assignee": {},
+                          "created_by": {},
+                          "updated_by": {},
                           "catalog_id": "30"
                         }
                       ]
@@ -122,32 +97,22 @@
           "id": "34",
           "name": "new test 3",
           "root_id": "30",
-          "sla": {
-          },
-          "group": {
-          },
-          "assignee": {
-          },
-          "created_by": {
-          },
-          "updated_by": {
-          },
+          "sla": {},
+          "group": {},
+          "assignee": {},
+          "created_by": {},
+          "updated_by": {},
           "catalog_id": "30",
           "service": [
             {
               "id": "51",
               "name": "new test 6",
               "root_id": "34",
-              "sla": {
-              },
-              "group": {
-              },
-              "assignee": {
-              },
-              "created_by": {
-              },
-              "updated_by": {
-              },
+              "sla": {},
+              "group": {},
+              "assignee": {},
+              "created_by": {},
+              "updated_by": {},
               "catalog_id": "30",
               "searched": true,
               "service": [
@@ -155,16 +120,11 @@
                   "id": "54",
                   "name": "new test 8",
                   "root_id": "51",
-                  "sla": {
-                  },
-                  "group": {
-                  },
-                  "assignee": {
-                  },
-                  "created_by": {
-                  },
-                  "updated_by": {
-                  },
+                  "sla": {},
+                  "group": {},
+                  "assignee": {},
+                  "created_by": {},
+                  "updated_by": {},
                   "catalog_id": "30"
                 }
               ]
@@ -173,16 +133,11 @@
               "id": "52",
               "name": "new test 7",
               "root_id": "34",
-              "sla": {
-              },
-              "group": {
-              },
-              "assignee": {
-              },
-              "created_by": {
-              },
-              "updated_by": {
-              },
+              "sla": {},
+              "group": {},
+              "assignee": {},
+              "created_by": {},
+              "updated_by": {},
               "catalog_id": "30"
             }
           ]
@@ -191,16 +146,11 @@
           "id": "32",
           "name": "new test",
           "root_id": "30",
-          "sla": {
-          },
-          "group": {
-          },
-          "assignee": {
-          },
-          "created_by": {
-          },
-          "updated_by": {
-          },
+          "sla": {},
+          "group": {},
+          "assignee": {},
+          "created_by": {},
+          "updated_by": {},
           "catalog_id": "30"
         }
       ]
@@ -239,64 +189,44 @@
           "name": "another service",
           "root_id": "36",
           "searched": true,
-          "sla": {
-          },
-          "group": {
-          },
-          "assignee": {
-          },
-          "created_by": {
-          },
-          "updated_by": {
-          },
+          "sla": {},
+          "group": {},
+          "assignee": {},
+          "created_by": {},
+          "updated_by": {},
           "catalog_id": "36",
           "service": [
             {
               "id": "43",
               "name": "another service 2",
               "root_id": "42",
-              "sla": {
-              },
-              "group": {
-              },
-              "assignee": {
-              },
-              "created_by": {
-              },
-              "updated_by": {
-              },
+              "sla": {},
+              "group": {},
+              "assignee": {},
+              "created_by": {},
+              "updated_by": {},
               "catalog_id": "36",
               "service": [
                 {
                   "id": "44",
                   "name": "another service 3",
                   "root_id": "43",
-                  "sla": {
-                  },
-                  "group": {
-                  },
-                  "assignee": {
-                  },
-                  "created_by": {
-                  },
-                  "updated_by": {
-                  },
+                  "sla": {},
+                  "group": {},
+                  "assignee": {},
+                  "created_by": {},
+                  "updated_by": {},
                   "catalog_id": "36",
                   "service": [
                     {
                       "id": "33",
                       "name": "new test 2",
                       "root_id": "44",
-                      "sla": {
-                      },
-                      "group": {
-                      },
-                      "assignee": {
-                      },
-                      "created_by": {
-                      },
-                      "updated_by": {
-                      },
+                      "sla": {},
+                      "group": {},
+                      "assignee": {},
+                      "created_by": {},
+                      "updated_by": {},
                       "catalog_id": "36"
                     }
                   ]

@@ -1,9 +1,9 @@
-@use '../../../../css/main' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .nav-menu {
   &__category {
-    height: 100%;
     border-radius: var(--border-radius);
+    height: 100%;
   }
 
   &__option {
@@ -16,14 +16,14 @@
     @extend %typo-body-1;
     display: flex;
     align-items: center;
+    transition: var(--transition);
     box-sizing: border-box;
+    border-radius: var(--border-radius);
+    padding: 18px 20px;
     width: 100%;
     min-height: var(--button-min-height);
-    padding: 18px 20px;
-    transition: var(--transition);
-    text-align: left;
     color: var(--text-main-color);
-    border-radius: var(--border-radius);
+    text-align: left;
 
     .wt-icon {
       margin-right: var(--spacing-xs);

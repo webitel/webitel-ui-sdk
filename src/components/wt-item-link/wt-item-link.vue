@@ -79,8 +79,8 @@ const to = computed(
   align-items: center;
 
   :not(&--invisible) {
-    cursor: pointer;
     transition: var(--transition);
+    cursor: pointer;
     color: var(--wt-item-link-text-color);
 
     &:hover {

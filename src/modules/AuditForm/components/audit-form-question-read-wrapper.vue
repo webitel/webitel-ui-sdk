@@ -1,7 +1,7 @@
 <template>
   <article
     :class="{
-      'audit-form-question-read--filled': isResult && result.score != null,
+      'audit-form-question-read--filled': isAnswer && answerModel.score != null,
       'audit-form-question-read--readonly': readonly,
     }"
     class="audit-form-question-read"
@@ -26,54 +26,61 @@
     <section class="audit-form-question-read-content">
       <component
         :is="QuestionTypeComponent"
+        v-model:answer="answerModel"
         :question="question"
-        :result="result"
         mode="read"
-        @change:result="!readonly && emit('change:result', $event)"
       />
       <div
-        v-show="isResult"
+        v-show="isAnswer"
         class="audit-form-question--clear"
-        @click="emit('change:result', {})"
+        @click="resetAnswer"
       >
-        {{ $t('webitelUI.auditForm.clearSelection') }}
+        {{ t('webitelUI.auditForm.clearSelection') }}
       </div>
+      <wt-input
+        v-if="answerModel?.createdAt"
+        :model-value="answerModel.comment"
+        :label="t('reusable.comment')"
+        @update:model-value="updateAnswer({ comment: $event })"
+      />
     </section>
+
+    <template v-if="answerModel?.updatedAt">
+      <wt-divider />
+      <audit-form-answer-editing-info
+        :answer="answerModel"
+        hide-comment
+      />
+    </template>
   </article>
 </template>
 
-<script setup>
-import { computed } from 'vue';
-import { EngineAuditQuestionType } from 'webitel-sdk';
-import WtIcon from '../../../components/wt-icon/wt-icon.vue';
+<script lang="ts" setup>
+import { computed, inject } from 'vue';
+import {useI18n} from "vue-i18n";
+import {EngineAuditQuestionType, EngineQuestion, EngineQuestionAnswer} from 'webitel-sdk';
+
+import { WtDivider,WtIcon, WtInput } from '../../../components';
 import isEmpty from '../../../scripts/isEmpty.js';
-import AuditFormQuestionOptions from './questions/options/audit-form-question-options.vue';
-import AuditFormQuestionScore from './questions/score/audit-form-question-score.vue';
+import AuditFormAnswerEditingInfo from "./form-answers/answer-editing-info/audit-form-answer-editing-info.vue";
+import AuditFormQuestionOptions from './form-questions/options/audit-form-question-options.vue';
+import AuditFormQuestionScore from './form-questions/score/audit-form-question-score.vue';
 
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true,
-  },
-  result: {
-    type: [Object, null],
-    required: true,
-  },
-  disableDragging: {
-    type: Boolean,
-    default: false,
-  },
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
-  first: {
-    type: Boolean,
-    default: false,
-  },
-});
+const readonly = inject('readonly');
 
-const emit = defineEmits(['change:result', 'activate']);
+const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
+
+const props = defineProps<{
+  question: EngineQuestion;
+  disableDragging?: boolean;
+  first?: boolean;
+}>();
+
+const emit = defineEmits<{
+  'activate': [];
+}>();
+
+const { t } = useI18n();
 
 const QuestionTypeComponent = computed(() => {
   if (props.question.type === EngineAuditQuestionType.Option)
@@ -83,17 +90,32 @@ const QuestionTypeComponent = computed(() => {
   return null;
 });
 
-const isResult = computed(() => !isEmpty(props.result));
+const isAnswer = computed(() => !isEmpty(answerModel.value));
+
+const updateAnswer = (value: EngineQuestionAnswer) => {
+  if (readonly.value) return; // if ... then in preview mode
+
+  // coz only some properties of answer may be patched
+  const newAnswer = { ...answerModel.value, ...value };
+  answerModel.value = newAnswer;
+};
+
+const resetAnswer = () => {
+  answerModel.value = {
+    ...answerModel.value,
+    score: null, // reset only score field
+  };
+};
 </script>
 
 <style lang="scss" scoped>
 .audit-form-question-read {
-  position: relative;
   display: flex;
+  position: relative;
   flex-direction: column;
+  gap: var(--spacing-sm);
   transition: var(--transition);
   border: 1px solid transparent;
-  gap: var(--spacing-sm);
 
   &:not(.audit-form-question-read--readonly) {
     &:hover,
@@ -127,9 +149,15 @@ const isResult = computed(() => !isEmpty(props.result));
   }
 }
 
+.audit-form-question-read-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
 .audit-form-question--clear {
-  margin-top: var(--spacing-sm);
   cursor: pointer;
+  margin-top: var(--spacing-sm);
   color: var(--info-color);
 }
 </style>

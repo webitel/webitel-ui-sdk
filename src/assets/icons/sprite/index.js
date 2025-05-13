@@ -1,5 +1,6 @@
 import { objCamelToKebab } from '../../../scripts/caseConverters.js';
 import account from './account.svg';
+import addContact from './add-contact.svg';
 import addFilter from './add-filter.svg';
 import adfs from './adfs.svg';
 import agent from './agent.svg';
@@ -145,6 +146,7 @@ import plyrRestart from './plyr-restart.svg';
 import plyrRewind from './plyr-rewind.svg';
 import plyrSettings from './plyr-settings.svg';
 import plyrVolume from './plyr-volume.svg';
+import portal from './portal.svg';
 import previewTagApplication from './preview-tag-application.svg';
 import previewTagAudio from './preview-tag-audio.svg';
 import previewTagImage from './preview-tag-image.svg';
@@ -179,6 +181,7 @@ import stopSign from './stop-sign.svg';
 import stt from './stt.svg';
 import sttDownload from './stt-download.svg';
 import sttSearch from './stt-search.svg';
+import table from './table.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
 import treeCollapse from './tree-collapse.svg';
@@ -188,7 +191,9 @@ import treeExpand from './tree-expand.svg';
 import treeLine from './tree-line.svg';
 import ttsDownload from './tts-download.svg';
 import undo from './undo.svg';
+import union from './union.svg';
 import unpin from './unpin.svg';
+import updateCalls from './update-calls.svg';
 import upload from './upload.svg';
 import user from './user.svg';
 import variableSelect from './variable-select.svg';
@@ -216,6 +221,7 @@ export default objCamelToKebab({
   attention,
   azure,
   addFilter,
+  addContact,
   back,
   bell,
   bellBadged,
@@ -243,6 +249,7 @@ export default objCamelToKebab({
   'call-ringing--filled': callRingingFilled,
   callTransfer,
   'call-transfer--filled': callTransferFilled,
+  updateCalls,
 
   caseAuthor,
   cases,
@@ -327,6 +334,7 @@ export default objCamelToKebab({
   numpad,
   pause,
   play,
+  table,
   treeExpand,
   prompter,
   queueMember,
@@ -355,6 +363,7 @@ export default objCamelToKebab({
   tick,
   upload,
   user,
+  union,
   videoCamOff,
   videoCam,
   zoomIn,
@@ -381,6 +390,8 @@ export default objCamelToKebab({
   versions,
 
   webitelLogo,
+
+  portal,
 
   previewTagAudio,
   previewTagVideo,

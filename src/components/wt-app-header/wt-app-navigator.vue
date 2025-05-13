@@ -150,13 +150,14 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/scroll' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .wt-app-navigator {
-  position: relative;
-  z-index: var(--wt-app-header-content-z-index);
   display: flex;
+  position: relative;
   align-items: center;
+  z-index: var(--wt-app-header-content-z-index);
 }
 
 // dropdown part
@@ -165,14 +166,14 @@ function close() {
   position: absolute;
   top: 100%; // icon
   right: 0;
-  overflow: auto;
-  max-height: var(--wt-app-navigator-max-height);
-  margin-top: var(--wt-app-header-content-panel-margin);
-  padding: var(--wt-app-header-content-gap);
   transition: var(--transition);
+  margin-top: var(--wt-app-header-content-panel-margin);
+  box-shadow: var(--elevation-10);
   border-radius: var(--border-radius);
   background: var(--wt-app-header-content-bg-color);
-  box-shadow: var(--elevation-10);
+  padding: var(--wt-app-header-content-gap);
+  max-height: var(--wt-app-navigator-max-height);
+  overflow: auto;
 }
 
 .wt-app-navigator__nav-title {
@@ -190,13 +191,13 @@ function close() {
 }
 
 .wt-app-navigator__card {
-  box-sizing: border-box;
-  width: var(--wt-app-navigator-item-width);
-  height: var(--wt-app-navigator-item-height);
   transition: var(--transition);
+  box-sizing: border-box;
   border: var(--wt-app-navigator-item-border);
   border-color: var(--wt-app-navigator-item-border-color);
   border-radius: var(--border-radius);
+  width: var(--wt-app-navigator-item-width);
+  height: var(--wt-app-navigator-item-height);
 
   &.active,
   &:hover {
@@ -209,24 +210,24 @@ function close() {
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
   box-sizing: border-box;
+  padding: var(--wt-app-navigator-item-padding);
   width: 100%;
   height: 100%;
-  padding: var(--wt-app-navigator-item-padding);
-  cursor: pointer;
 }
 
 // img inside a
 .wt-app-navigator__card__img {
+  margin: auto;
   width: var(--wt-app-navigator-item-pic-size);
   height: var(--wt-app-navigator-item-pic-size);
-  margin: auto;
 }
 
 // app title
 .wt-app-navigator__card__title {
   @extend %typo-overline;
-  text-align: center;
   color: var(--text-main-color);
+  text-align: center;
 }
 </style>

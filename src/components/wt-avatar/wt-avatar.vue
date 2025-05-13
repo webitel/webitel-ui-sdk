@@ -26,6 +26,7 @@
 
 <script setup>
 import { computed } from 'vue';
+
 import defaultAvatar from '../../assets/components/atoms/wt-avatar/default-avatar.svg';
 import AbstractUserStatus from '../../enums/AbstractUserStatus/AbstractUserStatus.enum.js';
 
@@ -151,24 +152,24 @@ const badgeColorVar = computed(() => {
 
 .wt-avatar {
   position: relative;
+  border-radius: 50%;
   width: var(--wt-avatar-size);
   height: var(--wt-avatar-size);
   user-select: none;
-  border-radius: 50%;
 
   &__letters {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     height: 100%;
     color: var(--wt-avatar-text-color);
-    border-radius: 50%;
   }
 
   &__img {
+    border-radius: 50%;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
   }
 
   &--size-xs {

@@ -118,7 +118,7 @@ function selectOption(option) {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-selection-popup {
   &__options {
@@ -128,14 +128,14 @@ function selectOption(option) {
   }
 
   &__item-wrapper {
-    position: relative;
     display: flex;
+    position: relative;
     align-items: center;
-    padding: var(--spacing-xs);
-    cursor: pointer;
     transition: var(--transition);
+    cursor: pointer;
     border: 1px solid var(--text-main-color);
     border-radius: var(--border-radius);
+    padding: var(--spacing-xs);
 
     &:hover,
     &.active {

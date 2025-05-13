@@ -34,7 +34,8 @@ class WebSocketClientController {
   }
 
   addEventListener(event, callback) {
-    if (Array.isArray(callback)) this._on[event] = this._on[event].concat(callback);
+    if (Array.isArray(callback))
+      this._on[event] = this._on[event].concat(callback);
     else this._on[event].push(callback);
   }
 
@@ -62,12 +63,16 @@ class WebSocketClientController {
     cli.callStore = reactive(cli.callStore);
 
     this._on[WebSocketClientEvent.AFTER_AUTH].forEach((callback) => callback());
-    this._on[WebSocketClientEvent.ERROR].forEach((callback) => cli.on('error', callback));
-    cli.on(`show_message`, e => eventBus.$emit('notification', {
-      type: e.type,
-      text: e.message,
-      timeout: e.timeout,
-    }));
+    this._on[WebSocketClientEvent.ERROR].forEach((callback) =>
+      cli.on('error', callback),
+    );
+    cli.on(`show_message`, (e) =>
+      eventBus.$emit('notification', {
+        type: e.type,
+        text: e.message,
+        timeout: e.timeout,
+      }),
+    );
 
     await cli.connect();
 
@@ -84,23 +89,25 @@ class WebSocketClientController {
         resolve();
       }, 5000);
 
-      const markUa = () => cli.phone?.ua && (cli.phone.ua = markRaw(cli.phone.ua));
+      const markUa = () =>
+        cli.phone?.ua && (cli.phone.ua = markRaw(cli.phone.ua));
 
       if (cli.phone?.ua) {
         markUa();
         clearTimeout(timeout);
         resolve();
-      } else cli.on('phone_connected', () => {
-        markUa();
-        clearTimeout(timeout);
-        resolve();
-      });
+      } else
+        cli.on('phone_connected', () => {
+          markUa();
+          clearTimeout(timeout);
+          resolve();
+        });
     });
 
     window.cli = cli;
     return cli;
   };
-};
+}
 
 const webSocketClientController = new WebSocketClientController();
 

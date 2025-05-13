@@ -82,12 +82,14 @@ function select(category) {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../../css/main' as *;
+@use '@webitel/styleguide/viewport-breakpoints' as *;
+@use '@webitel/styleguide/scroll' as *;
+
 .wt-navigation-menu {
   display: flex;
-  align-items: center;
   flex-grow: 1;
   justify-content: center;
+  align-items: center;
   height: 100%;
 
   --button-min-height: 60px;
@@ -109,14 +111,14 @@ function select(category) {
   &__wrapper {
     @extend %wt-scrollbar;
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     box-sizing: border-box;
-    width: var(--wrapper-width);
-    height: var(--wrapper-height);
     margin: auto;
-    padding: var(--spacing-sm);
     border-radius: var(--spacing-xs);
     background: var(--content-wrapper-color);
-    grid-template-columns: repeat(2, 1fr);
+    padding: var(--spacing-sm);
+    width: var(--wrapper-width);
+    height: var(--wrapper-height);
     grid-gap: var(--spacing-sm);
 
     @media only screen and (max-width: $viewport-xs) {

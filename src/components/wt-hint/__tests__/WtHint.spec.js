@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtHint from '../wt-hint.vue';
 
 describe('WtHint', () => {

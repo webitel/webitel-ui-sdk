@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtPageHeader from '../wt-page-header.vue';
 
 describe('WtPageHeader', () => {

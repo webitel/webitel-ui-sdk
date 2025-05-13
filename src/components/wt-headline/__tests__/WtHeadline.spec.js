@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtHeadline from '../wt-headline.vue';
 
 describe('WtHeadline', () => {

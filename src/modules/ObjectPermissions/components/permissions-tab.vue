@@ -20,7 +20,6 @@
     </header>
 
     <div class="table-section__table-wrapper">
-
       <wt-empty
         v-show="showEmpty"
         :image="imageEmpty"
@@ -31,62 +30,62 @@
 
       <div
         v-if="dataList.length && !isLoading"
-        class="table-section__visible-scroll-wrapper">
+        class="table-section__visible-scroll-wrapper"
+      >
+        <wt-table
+          :data="localizedDataList"
+          :grid-actions="access.edit"
+          :headers="headers"
+          :selectable="false"
+          sortable
+          @sort="sort"
+        >
+          <template #grantee="{ item }">
+            <role-column :role="item.grantee" />
+          </template>
 
-          <wt-table
-            :data="localizedDataList"
-            :grid-actions="access.edit"
-            :headers="headers"
-            :selectable="false"
-            sortable
-            @sort="sort"
-          >
-            <template #grantee="{ item }">
-              <role-column :role="item.grantee" />
-            </template>
+          <template #read="{ item }">
+            <wt-select
+              :clearable="false"
+              :disabled="!access.edit"
+              :options="accessOptions"
+              :value="item.access.r"
+              @input="changeAccessMode({ item, ruleName: 'r', mode: $event })"
+            />
+          </template>
 
-            <template #read="{ item }">
-              <wt-select
-                :clearable="false"
-                :disabled="!access.edit"
-                :options="accessOptions"
-                :value="item.access.r"
-                @input="changeAccessMode({ item, ruleName: 'r', mode: $event })"
-              />
-            </template>
+          <template #edit="{ item }">
+            <wt-select
+              :clearable="false"
+              :disabled="!access.edit"
+              :options="accessOptions"
+              :value="item.access.w"
+              @input="changeAccessMode({ item, ruleName: 'w', mode: $event })"
+            />
+          </template>
 
-            <template #edit="{ item }">
-              <wt-select
-                :clearable="false"
-                :disabled="!access.edit"
-                :options="accessOptions"
-                :value="item.access.w"
-                @input="changeAccessMode({ item, ruleName: 'w', mode: $event })"
-              />
-            </template>
-
-            <template #delete="{ item }">
-              <wt-select
-                :clearable="false"
-                :disabled="!access.edit"
-                :options="accessOptions"
-                :value="item.access.d"
-                @input="changeAccessMode({ item, ruleName: 'd', mode: $event })"
-              />
-            </template>
-            <template #actions="{ item }">
-              <wt-icon-action
-                action="delete"
-                @click="
-                  changeAccessMode({
-                    item,
-                    ruleName: 'r',
-                    mode: { id: AccessMode.FORBIDDEN },
-                  })
-                "
-              />
-            </template>
-          </wt-table>
+          <template #delete="{ item }">
+            <wt-select
+              :clearable="false"
+              :disabled="!access.edit"
+              :options="accessOptions"
+              :value="item.access.d"
+              @input="changeAccessMode({ item, ruleName: 'd', mode: $event })"
+            />
+          </template>
+          <template #actions="{ item }">
+            <wt-icon-action
+              action="delete"
+              @click="
+                changeAccessMode({
+                  item,
+                  ruleName: 'r',
+                  mode: { id: AccessMode.FORBIDDEN },
+                })
+              "
+            />
+          </template>
+        </wt-table>
       </div>
       <filter-pagination
         :namespace="filtersNamespace"
@@ -100,14 +99,15 @@
 import { computed, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
+
+import IconAction from '../../../enums/IconAction/IconAction.enum.js';
+import { useTableEmpty } from '../../../modules/TableComponentModule/composables/useTableEmpty.js';
 import { useTableStore } from '../../../store/new/index.js';
 import FilterPagination from '../../Filters/components/filter-pagination.vue';
 import { useTableFilters } from '../../Filters/composables/useTableFilters.js';
 import RoleColumn from '../_internals/components/permissions-role-row.vue';
 import RolePopup from '../_internals/components/permissions-tab-role-popup.vue';
 import { AccessMode } from '../_internals/enums/AccessMode.enum.js';
-import IconAction from '../../../enums/IconAction/IconAction.enum.js';
-import { useTableEmpty } from '../../../modules/TableComponentModule/composables/useTableEmpty.js';
 
 const props = defineProps({
   /**
@@ -205,4 +205,6 @@ const changeAccessMode = (payload) =>
   store.dispatch(`${tableNamespace}/CHANGE_ACCESS_MODE`, payload);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use '../../../css/pages/table-page';
+</style>

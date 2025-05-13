@@ -6,20 +6,25 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
-import { IconAction } from '../../enums';
-import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import {
+  AdminSections,
+  AuditorSections,
+  ChatGatewayProvider,
+  CrmSections,
+  IconAction,
+  QueueType,
+  RelativeDatetimeValue,
+  SupervisorSections,
+  WebitelApplications,
+} from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
-import { snakeToCamel } from '../../scripts/caseConverters.js';
+import { snakeToCamel } from '../../scripts';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    comment: 'Comment',
+    replace: 'Replace',
     download: 'Download',
     history: 'History',
     filter: ({ plural }) => plural(['Filter', 'Filters']),
@@ -79,9 +84,14 @@ export default {
     more: 'More',
     read: 'Read',
     create: 'Create',
+    update: 'Update',
     draggable: 'Draggable',
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
+    group: 'Group',
+    updatedBy: (/*{ named }*/) => {
+      return 'Edited';
+    },
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
   vocabulary: {
@@ -148,18 +158,22 @@ export default {
     grantor: 'Grantor | Grantors',
     role: 'Role | Roles',
     user: 'User | Users',
+    list: 'List | Lists',
+    contact: 'Contact | Contacts',
+    case: 'Case | Cases',
     calendar: 'Calendar | Calendars',
     direction: 'Direction',
     gateway: 'Gateway | Gateways',
     hangupCause: 'Hangup cause',
     hasOption: 'Has option',
-    hasRecording: 'Has recording',
+    hasRecording: 'Recording',
     amdResult: 'AMD result',
     ratedBy: 'Rated by',
     talkDuration: 'Talk duration',
     totalDuration: 'Total duration',
     transcription: 'Transcription',
     attachment: 'Attachment | Attachments',
+    owner: 'Owner | Owners',
     queue: {
       queue: 'Queue | Queues',
       type: {
@@ -236,10 +250,11 @@ export default {
     reporter: 'Reporter',
     impacted: 'Impacted',
     assignee: 'Assignee',
-    group: 'Group',
+    groupPerformers: 'Group',
     reason: 'Reason | Reasons',
     rating: 'Rating',
     service: 'Service | Services',
+    selectAService: 'Select a service',
     appliedSLA: 'Applied SLA',
     appliedCondition: 'Applied condition',
     reactionTime: 'Reaction time',
@@ -253,21 +268,21 @@ export default {
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
       sections: {
-        [AuditorSections.SCORECARDS]: 'Scorecards',
+        [AuditorSections.Scorecards]: 'Scorecards',
       },
     },
     [WebitelApplications.CRM]: {
       name: 'CRM',
       sections: {
-        [CrmSections.CONTACTS]: 'Contacts',
-        [CrmSections.CASES]: 'Cases',
-        [CrmSections.PRIORITIES]: 'Priorities',
-        [CrmSections.CLOSE_REASON_GROUPS]: 'Closure reasons',
-        [CrmSections.STATUSES]: 'Statuses',
-        [CrmSections.SLAS]: 'SLA',
-        [CrmSections.SERVICE_CATALOGS]: 'Service catalogs',
-        [CrmSections.SOURCES]: 'Case sources',
-        [CrmSections.CONTACT_GROUPS]: 'Contact groups',
+        [CrmSections.Contacts]: 'Contacts',
+        [CrmSections.Cases]: 'Cases',
+        [CrmSections.Priorities]: 'Priorities',
+        [CrmSections.CloseReasonGroups]: 'Closure reasons',
+        [CrmSections.Statuses]: 'Statuses',
+        [CrmSections.Slas]: 'SLA',
+        [CrmSections.ServiceCatalogs]: 'Service catalogs',
+        [CrmSections.Sources]: 'Case sources',
+        [CrmSections.ContactGroups]: 'Contact groups',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
@@ -275,51 +290,51 @@ export default {
     [WebitelApplications.SUPERVISOR]: {
       name: 'Supervisor Workspace',
       sections: {
-        [SupervisorSections.QUEUES]: 'Queues',
-        [SupervisorSections.AGENTS]: 'Agents',
-        [SupervisorSections.ACTIVE_CALLS]: 'Active calls',
+        [SupervisorSections.Queues]: 'Queues',
+        [SupervisorSections.Agents]: 'Agents',
+        [SupervisorSections.ActiveCalls]: 'Active calls',
       },
     },
     [WebitelApplications.ADMIN]: {
       name: 'Admin',
       sections: {
-        [AdminSections.USERS]: 'Users',
-        [AdminSections.LICENSE]: 'Licenses',
-        [AdminSections.DEVICES]: 'Devices',
-        [AdminSections.FLOW]: 'Flow schemas',
-        [AdminSections.DIALPLAN]: 'Dialplans',
-        [AdminSections.GATEWAYS]: 'Gateways',
-        [AdminSections.CHATPLAN]: 'Chatplans',
-        [AdminSections.CHAT_GATEWAYS]: 'Chat gateways',
-        [AdminSections.SKILLS]: 'Agent skills',
-        [AdminSections.BUCKETS]: 'Buckets',
-        [AdminSections.MEDIA]: 'Media files',
-        [AdminSections.SHIFT_TEMPLATES]: 'Shift templates',
-        [AdminSections.PAUSE_TEMPLATES]: 'Pause templates',
-        [AdminSections.WORKING_CONDITIONS]: 'Working conditions',
-        [AdminSections.BLACKLIST]: 'Lists',
-        [AdminSections.CALENDARS]: 'Calendars',
-        [AdminSections.REGIONS]: 'Locations',
-        [AdminSections.COMMUNICATIONS]: 'Communication types',
-        [AdminSections.PAUSE_CAUSE]: 'Agent statuses',
-        [AdminSections.AGENTS]: 'Agents',
-        [AdminSections.TEAMS]: 'Teams',
-        [AdminSections.RESOURCES]: 'Resources',
-        [AdminSections.RESOURCE_GROUPS]: 'Resource groups',
-        [AdminSections.QUEUES]: 'Queues',
-        [AdminSections.STORAGE]: 'Storage',
-        [AdminSections.STORAGE_POLICIES]: 'Storage policies',
-        [AdminSections.COGNITIVE_PROFILES]: 'Cognitive profiles',
-        [AdminSections.EMAIL_PROFILES]: 'Email profiles',
-        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
-        [AdminSections.IMPORT_CSV]: 'Imports of CSV from file',
-        [AdminSections.TRIGGERS]: 'Triggers',
-        [AdminSections.MEDIA]: 'Media files',
-        [AdminSections.ROLES]: 'Roles',
-        [AdminSections.OBJECTS]: 'Objects',
-        [AdminSections.CHANGELOGS]: 'Change log',
-        [AdminSections.CONFIGURATION]: 'Configuration',
-        [AdminSections.GLOBAL_VARIABLES]: 'Global variables',
+        [AdminSections.Users]: 'Users',
+        [AdminSections.License]: 'Licenses',
+        [AdminSections.Devices]: 'Devices',
+        [AdminSections.Flow]: 'Flow schemas',
+        [AdminSections.Dialplan]: 'Dialplans',
+        [AdminSections.Gateways]: 'Gateways',
+        [AdminSections.Chatplan]: 'Chatplans',
+        [AdminSections.ChatGateways]: 'Chat gateways',
+        [AdminSections.Skills]: 'Agent skills',
+        [AdminSections.Buckets]: 'Buckets',
+        [AdminSections.Media]: 'Media files',
+        [AdminSections.ShiftTemplates]: 'Shift templates',
+        [AdminSections.PauseTemplates]: 'Pause templates',
+        [AdminSections.WorkingConditions]: 'Working conditions',
+        [AdminSections.Blacklist]: 'Lists',
+        [AdminSections.Calendars]: 'Calendars',
+        [AdminSections.Regions]: 'Locations',
+        [AdminSections.Communications]: 'Communication types',
+        [AdminSections.PauseCause]: 'Agent statuses',
+        [AdminSections.Agents]: 'Agents',
+        [AdminSections.Teams]: 'Teams',
+        [AdminSections.Resources]: 'Resources',
+        [AdminSections.ResourceGroups]: 'Resource groups',
+        [AdminSections.Queues]: 'Queues',
+        [AdminSections.Storage]: 'Storage',
+        [AdminSections.StoragePolicies]: 'Storage policies',
+        [AdminSections.CognitiveProfiles]: 'Cognitive profiles',
+        [AdminSections.EmailProfiles]: 'Email profiles',
+        [AdminSections.SingleSignOn]: 'Single Sign-on',
+        [AdminSections.ImportCsv]: 'Imports of CSV from file',
+        [AdminSections.Triggers]: 'Triggers',
+        [AdminSections.Media]: 'Media files',
+        [AdminSections.Roles]: 'Roles',
+        [AdminSections.Objects]: 'Objects',
+        [AdminSections.Changelogs]: 'Change log',
+        [AdminSections.Configuration]: 'Configuration',
+        [AdminSections.GlobalVariables]: 'Global variables',
       },
     },
   },
@@ -337,7 +352,7 @@ export default {
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
     minLength: 'Quantity of characters should not be less than',
-    url: 'Should look like url',
+    url: 'Should look like URL',
     websocketValidator: 'Should look like WebSocket url',
     isRegExpMatched: 'Password must match the regular expression:',
     regExpValidator: 'This regular expression is not valid',
@@ -347,6 +362,7 @@ export default {
     latinWithNumber:
       'The code must contain only letters (A-Z, a-z) and numbers (0-9), and must start with a letter',
     integer: 'The field should contain only whole numbers',
+    nameAlreadyInUse: 'This name is already in use',
   },
   webitelUI: {
     searchBar: {
@@ -418,6 +434,21 @@ export default {
         [IconAction.CLEAR]: ({ linked }) =>
           linked('webitelUI.tableActions.filterReset'),
         [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
+        [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
+        [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked(
+            'webitelUI.filters.presets.preset',
+          ).toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked(
+            'webitelUI.filters.presets.preset',
+          ).toLowerCase()}`;
+        },
+        [IconAction.ADD_CONTACT]: ({ linked }) => {
+          return `${linked('reusable.add')} contacts`;
+        },
       },
     },
     errorPages: {
@@ -482,12 +513,11 @@ export default {
       exportToJson: 'Export to JSON',
     },
     filters: {
-      predefinedLabels: {
-        /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
-        createdAt: {
-          startOfToday: 'From the start of today',
-          startOfMonth: 'From this month',
-        },
+      datetime: {
+        [RelativeDatetimeValue.Today]: 'Today',
+        [RelativeDatetimeValue.ThisWeek]: 'This week',
+        [RelativeDatetimeValue.ThisMonth]: 'This month',
+        [RelativeDatetimeValue.Custom]: 'Custom date range',
       },
       addFilter: ({ linked }) => {
         return `${linked('reusable.add')} a ${linked(
@@ -536,7 +566,10 @@ export default {
         return linked('vocabulary.contact');
       },
       contactGroup: ({ linked }) => {
-        return linked('cases.group');
+        return linked('cases.groupPerformers');
+      },
+      createdAt: ({ linked }) => {
+        return linked('reusable.createdAt');
       },
       createdAtFrom: ({ linked }) => {
         return linked('reusable.from');
@@ -562,8 +595,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
+      hasUser: ({ linked }) => {
+        return linked('objects.user');
+      },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
+      },
+      contactLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      contactOwner: ({ linked }) => {
+        return linked('objects.owner');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');
@@ -623,6 +665,38 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      presets: {
+        preset: 'Preset | Presets',
+        overwritePresetTitle: 'A preset with this name already exists.',
+        overwritePresetText: 'Do you want to replace it?',
+        notifications: {
+          success: {
+            /* suka ebuchij linked(,param) ne praciuje */
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
+      },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `The ${named('entity').toLowerCase()} was updated`,
+      create: ({ named }) => `The ${named('entity').toLowerCase()} was saved`,
+      delete: ({ named }) => `The ${named('entity').toLowerCase()} was deleted`,
     },
   },
   errorNotifications: {

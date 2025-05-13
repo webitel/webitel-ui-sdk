@@ -6,10 +6,10 @@ const colors = ['primary', 'secondary', 'success', 'error', 'warning'];
   <div style="display: flex; flex-direction: column; gap: 10px">
     <wt-progress-bar
       v-for="color of colors"
+      :key="color"
       :max="100"
       :value="75"
       :color="color"
-      :key="color"
     />
   </div>
 </template>

@@ -1,5 +1,4 @@
 const prettifyFileSize = (size) => {
-  // eslint-disable-next-line no-param-reassign
   if (typeof size === 'string') size = +size;
   if (!size) return '0';
   const k = 1024;

@@ -36,16 +36,17 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-label {
   @extend %typo-body-1;
 
   display: flex;
   align-items: center;
-  cursor: text;
   transition: var(--transition);
+  cursor: text;
   color: var(--wt-label-color);
+  //padding: var(--wt-label-padding);
 
   &--invalid {
     color: var(--wt-label-error-color);

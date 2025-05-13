@@ -6,18 +6,21 @@ import merge from './merge/merge.transformer.js';
 import mergeEach from './mergeEach/mergeEach.transformer.js';
 import notify from './notify/notify.transformer.js';
 import sanitize from './sanitize/sanitize.transformer.js';
+import { skipIf } from './skipIf/skipIf';
 import snakeToCamel from './snakeToCamel/snakeToCamel.transformer.js';
 import starToSearch from './starToSearch/starToSearch.transformer.js';
 
-export default applyTransform;
 export {
+  camelToSnake,
+  generateUrl,
   log,
   merge,
-  notify,
-  starToSearch,
-  camelToSnake,
-  snakeToCamel,
-  sanitize,
-  generateUrl,
   mergeEach,
+  notify,
+  sanitize,
+  skipIf,
+  snakeToCamel,
+  starToSearch,
 };
+
+export default applyTransform;

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
+
 import { SortSymbols } from '../../../../scripts/sortQueryAdapters.js';
 import FilterEvent from '../../../Filters/enums/FilterEvent.enum.js';
 import FiltersStoreModule from '../../../Filters/store/FiltersStoreModule.js';

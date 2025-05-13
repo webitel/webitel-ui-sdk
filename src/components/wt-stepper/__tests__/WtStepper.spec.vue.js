@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtStepper from '../wt-stepper.vue';
 
 describe('WtStepper', () => {

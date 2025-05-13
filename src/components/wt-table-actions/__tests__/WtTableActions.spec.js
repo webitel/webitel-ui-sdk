@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtTableActions from '../wt-table-actions.vue';
 
 describe('WtTableActions', () => {

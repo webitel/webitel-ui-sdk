@@ -67,15 +67,15 @@ const dummy = computed(() => (props.darkMode ? dummyDark : dummyLight));
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-dummy {
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   gap: var(--spacing-sm);
+  text-align: center;
 
   &__img {
     width: 200px;

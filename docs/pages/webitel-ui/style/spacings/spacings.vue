@@ -61,8 +61,8 @@ export default {
     margin: var(--spacing-3xl) 0;
   }
   .spacing-example {
-    background: var(--transfer-color);
     margin-bottom: var(--spacing-3xl);
+    background: var(--transfer-color);
 
     &__text {
       background: var(--main-color);

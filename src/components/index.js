@@ -1,6 +1,7 @@
 import WtNavigationMenu from './on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
 import WtSelectionPopup from './on-demand/wt-selection-popup/wt-selection-popup.vue';
 import WtStartPage from './on-demand/wt-start-page/components/wt-start-page.vue';
+import WtTypeExtensionValueInput from './on-demand/wt-type-extension-value-input/wt-type-extension-value-input.vue';
 import WtReplaceTransition from './transitions/cases/wt-replace-transition.vue';
 import WtActionBar from './wt-action-bar/wt-action-bar.vue';
 import WtAppHeader from './wt-app-header/wt-app-header.vue';
@@ -210,6 +211,7 @@ export {
   WtTooltip,
   WtTree,
   WtTreeTable,
+  WtTypeExtensionValueInput,
 };
 
 export default Components;

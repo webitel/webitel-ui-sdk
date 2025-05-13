@@ -114,8 +114,8 @@ export default {
 <style lang="scss" scoped>
 .typo__family {
   margin-bottom: 10px;
-  padding: 10px;
   border-bottom: 1px solid black;
+  padding: 10px;
 
   .typo__family-heading {
     margin-bottom: 10px;

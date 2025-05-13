@@ -1,11 +1,13 @@
 <template>
   <component
     :is="component"
+    v-model:question="questionModel"
+    v-model:answer="answerModel"
     v-clickaway="saveQuestion"
     :class="[
       `audit-form-question--mode-${mode}`,
       {
-        'audit-form-question--answered': isResult,
+        'audit-form-question--answered': isAnswer,
       },
       {
         'audit-form-question--sort-ignore': first && mode === 'fill',
@@ -13,55 +15,42 @@
     ]"
     :disable-dragging="mode === 'fill'"
     :first="first"
-    :question="question"
     :readonly="readonly"
-    :result="result"
     :v="v$"
     class="audit-form-question"
     @activate="activateQuestion"
-    @copy="emits('copy')"
-    @delete="emits('delete')"
-    @change:question="emits('update:question', $event)"
-    @change:result="emits('update:result', $event)"
+    @copy="emit('copy')"
+    @delete="emit('delete')"
   />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, onMounted, ref, toRefs } from 'vue';
+import { computed, inject,onMounted, ref } from 'vue';
+import { EngineQuestion, EngineQuestionAnswer } from "webitel-sdk";
+
 import vClickaway from '../../../directives/clickaway/clickaway.js';
 import isEmpty from '../../../scripts/isEmpty.js';
 import QuestionRead from './audit-form-question-read-wrapper.vue';
 import QuestionWrite from './audit-form-question-write-wrapper.vue';
 
-const props = defineProps({
-  question: {
-    type: Object,
-    required: true,
-  },
-  result: {
-    type: Object,
-  },
-  mode: {
-    type: String,
-  },
-  first: {
-    type: Boolean,
-    default: false,
-  },
-  readonly: {
-    type: Boolean,
-    default: false,
-  },
+const mode = inject('mode');
+const readonly = inject('readonly');
+
+const questionModel = defineModel<EngineQuestion>('question');
+const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
+
+withDefaults(defineProps<{
+  first?: boolean;
+}>(), {
+  first: false,
 });
 
-const emits = defineEmits([
-  'copy',
-  'delete',
-  'update:question',
-  'update:result',
-]);
+const emit = defineEmits<{
+  'copy': [];
+  'delete': [];
+}>();
 
 const QuestionState = {
   SAVED: 'saved',
@@ -70,45 +59,48 @@ const QuestionState = {
 
 const state = ref(QuestionState.SAVED);
 
-// is needed for useVuelidate, because props.question/props.result isn't reactive
-const { question, result } = toRefs(props);
-
 const v$ = useVuelidate(
   computed(() =>
-    props.mode === 'create'
+    mode === 'create'
       ? {
           question: {
             question: { required },
           },
         }
       : {
-          result: {
-            required: (value) =>
-              question.value.required ? !isEmpty(value) : true,
+          answer: {
+            required: (value) => {
+              // if not required, no need to validate
+              if (!questionModel.value.required) return true;
+
+              if (value && value?.score != null) {
+                return true;
+              }
+            },
           },
         },
   ),
-  { question, result },
+  { question: questionModel, answer: answerModel },
   { $autoDirty: true },
 );
 
 const component = computed(() => {
-  if (props.readonly) return QuestionRead;
-  if (props.mode === 'create') {
+  if (readonly) return QuestionRead;
+  if (mode === 'create') {
     if (state.value === QuestionState.SAVED) return QuestionRead;
     return QuestionWrite;
   }
   return QuestionRead;
 });
 
-const isResult = computed(() => !isEmpty(props.result));
+const isAnswer = computed(() => !isEmpty(answerModel.value));
 
 function saveQuestion() {
   state.value = QuestionState.SAVED;
 }
 
 function activateQuestion() {
-  if (props.mode !== 'create') return;
+  if (mode !== 'create') return;
   state.value = QuestionState.EDIT;
 }
 
@@ -122,10 +114,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .audit-form-question {
-  padding: var(--spacing-sm);
+  box-shadow: var(--elevation-1);
   border-radius: var(--border-radius);
   background: var(--dp-22-surface-color);
-  box-shadow: var(--elevation-1);
+  padding: var(--spacing-sm);
 
   // override audit-form-question-read-wrapper specificity for hover
   &.audit-form-question--answered {

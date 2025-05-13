@@ -1,5 +1,6 @@
 import deepCopy from 'deep-copy';
 import { QueueServiceApiFactory } from 'webitel-sdk';
+
 import isEmpty from '../../../scripts/isEmpty.js';
 import {
   getDefaultGetListResponse,

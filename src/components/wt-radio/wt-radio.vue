@@ -104,25 +104,25 @@ export default {
 }
 
 .wt-radio__wrapper {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
   cursor: pointer;
   user-select: none;
 }
 
 .wt-radio__label {
-  margin-left: var(--radio-icon-margin);
   transition: var(--transition);
+  margin-left: var(--radio-icon-margin);
 }
 
 /* Hide the browser's default radio button */
 .wt-radio__input {
   position: absolute;
+  opacity: 0;
   width: 0;
   height: 0;
   pointer-events: none;
-  opacity: 0;
 }
 
 .wt-radio__icon {

@@ -18,6 +18,7 @@
 
 <script>
 import Prism from 'prismjs';
+
 import WebitelApplications from '../../../../../src/enums/WebitelApplications/WebitelApplications.enum';
 
 export default {

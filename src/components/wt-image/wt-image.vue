@@ -110,12 +110,12 @@ const height = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+//@use '../../css/styleguide/styleguide';
 
 .wt-image {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   &__img {
     max-width: 100%;

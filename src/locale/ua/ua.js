@@ -6,20 +6,25 @@ import {
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
 
-import { IconAction } from '../../enums';
-import ChatGatewayProvider from '../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.js';
-import QueueType from '../../enums/QueueType/QueueType.enum.js';
-import AdminSections from '../../enums/WebitelApplications/AdminSections.enum.js';
-import AuditorSections from '../../enums/WebitelApplications/AuditorSections.enum.js';
-import CrmSections from '../../enums/WebitelApplications/CrmSections.enum.js';
-import SupervisorSections from '../../enums/WebitelApplications/SupervisorSections.enum.js';
-import WebitelApplications from '../../enums/WebitelApplications/WebitelApplications.enum.js';
+import {
+  AdminSections,
+  AuditorSections,
+  ChatGatewayProvider,
+  CrmSections,
+  IconAction,
+  QueueType,
+  RelativeDatetimeValue,
+  SupervisorSections,
+  WebitelApplications,
+} from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
-import { snakeToCamel } from '../../scripts/caseConverters.js';
+import { snakeToCamel } from '../../scripts';
 
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
+    comment: 'Коментар',
+    replace: 'Замінити',
     download: 'Завантажити',
     history: 'Історія',
     filter: 'Фільтр | Фільтри',
@@ -80,9 +85,14 @@ export default {
     more: 'Більше',
     read: 'Читати',
     create: 'Створити',
+    update: 'Оновити',
     draggable: 'Перетягнути',
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
+    group: 'Група',
+    updatedBy: (/*{ named }*/) => {
+      return 'Редаговано';
+    },
   },
   vocabulary: {
     apply: 'Застосувати',
@@ -146,6 +156,9 @@ export default {
     grantee: 'Власник прав | Власники прав',
     grantor: 'Надавач | Надавачі',
     user: 'Користувач | Користувачі',
+    list: 'Список | Списки',
+    contact: 'Контакт | Контакти',
+    case: 'Звернення | Звернення',
     role: 'Роль | Ролі',
     calendar: 'Календар | Календарі',
     direction: 'Напрямок',
@@ -158,7 +171,8 @@ export default {
     talkDuration: 'Тривалість розмови',
     totalDuration: 'Загальна тривалість',
     transcription: 'Транскрипція',
-    attachment: 'Додаток | Додатки',
+    attachment: 'Вкладення | Вкладення',
+    owner: 'Власник | Власники',
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -235,10 +249,11 @@ export default {
     reporter: 'Ініціатор',
     impacted: 'Впливає на',
     assignee: 'Виконавець',
-    group: 'Група виконавців',
+    groupPerformers: 'Група виконавців',
     reason: 'Причина | Причини',
     rating: 'Оцінка',
     service: 'Cервіси | Cервіси',
+    selectAService: 'Вибрати сервіс',
     appliedSLA: 'Застосований SLA',
     appliedCondition: 'Застосована умова',
     reactionTime: 'Плановий час реакції',
@@ -252,21 +267,21 @@ export default {
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
       sections: {
-        [AuditorSections.SCORECARDS]: 'Анкети',
+        [AuditorSections.Scorecards]: 'Анкети',
       },
     },
     [WebitelApplications.CRM]: {
       name: 'CRM',
       sections: {
-        [CrmSections.CONTACTS]: 'Контакти',
-        [CrmSections.CASES]: 'Звернення',
-        [CrmSections.PRIORITIES]: 'Пріоритети',
-        [CrmSections.CLOSE_REASON_GROUPS]: 'Причини закриття',
-        [CrmSections.STATUSES]: 'Статуси',
-        [CrmSections.SLAS]: 'SLA',
-        [CrmSections.SERVICE_CATALOGS]: 'Каталоги сервісів',
-        [CrmSections.SOURCES]: 'Джерела звернень',
-        [CrmSections.CONTACT_GROUPS]: 'Групи контактів',
+        [CrmSections.Contacts]: 'Контакти',
+        [CrmSections.Cases]: 'Звернення',
+        [CrmSections.Priorities]: 'Пріоритети',
+        [CrmSections.CloseReasonGroups]: 'Причини закриття',
+        [CrmSections.Statuses]: 'Статуси',
+        [CrmSections.Slas]: 'SLA',
+        [CrmSections.ServiceCatalogs]: 'Каталоги сервісів',
+        [CrmSections.Sources]: 'Джерела звернень',
+        [CrmSections.ContactGroups]: 'Групи контактів',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },
@@ -274,50 +289,50 @@ export default {
     [WebitelApplications.SUPERVISOR]: {
       name: 'Supervisor Workspace',
       sections: {
-        [SupervisorSections.QUEUES]: 'Черги',
-        [SupervisorSections.AGENTS]: 'Оператори',
-        [SupervisorSections.ACTIVE_CALLS]: 'Активні дзвінки',
+        [SupervisorSections.Queues]: 'Черги',
+        [SupervisorSections.Agents]: 'Оператори',
+        [SupervisorSections.ActiveCalls]: 'Активні дзвінки',
       },
     },
     [WebitelApplications.ADMIN]: {
       name: 'Admin',
       sections: {
-        [AdminSections.USERS]: 'Користувачі',
-        [AdminSections.LICENSE]: 'Ліцензії',
-        [AdminSections.DEVICES]: 'Пристрої',
-        [AdminSections.FLOW]: 'Схеми',
-        [AdminSections.DIALPLAN]: 'Правила вихідного набору',
-        [AdminSections.GATEWAYS]: 'Шлюзи',
-        [AdminSections.CHATPLAN]: 'Правила маршрутизації текстових повідомлень',
-        [AdminSections.CHAT_GATEWAYS]: 'Текстові шлюзи',
-        [AdminSections.SKILLS]: 'Навички оператора',
-        [AdminSections.BUCKETS]: 'Кошики',
-        [AdminSections.MEDIA]: 'Медіафайли',
-        [AdminSections.SHIFT_TEMPLATES]: 'Шаблон змін',
-        [AdminSections.PAUSE_TEMPLATES]: 'Шаблон пауз',
-        [AdminSections.WORKING_CONDITIONS]: 'Умови роботи',
-        [AdminSections.BLACKLIST]: 'Cписки',
-        [AdminSections.CALENDARS]: 'Календарі',
-        [AdminSections.REGIONS]: 'Розташування',
-        [AdminSections.COMMUNICATIONS]: "Типи зв'язку",
-        [AdminSections.PAUSE_CAUSE]: 'Статуси оператора',
-        [AdminSections.AGENTS]: 'Оператори',
-        [AdminSections.TEAMS]: 'Команди',
-        [AdminSections.RESOURCES]: 'Ресурси',
-        [AdminSections.RESOURCE_GROUPS]: 'Групи ресурсів',
-        [AdminSections.QUEUES]: 'Черги',
-        [AdminSections.STORAGE]: 'Сховища',
-        [AdminSections.STORAGE_POLICIES]: 'Політики збереження файлів',
-        [AdminSections.COGNITIVE_PROFILES]: 'Голосові профілі',
-        [AdminSections.EMAIL_PROFILES]: 'Email профілі',
-        [AdminSections.SINGLE_SIGN_ON]: 'Single Sign-on',
-        [AdminSections.IMPORT_CSV]: 'Імпорт даних з CSV файлів',
-        [AdminSections.TRIGGERS]: 'Тригери',
-        [AdminSections.ROLES]: 'Ролі',
-        [AdminSections.OBJECTS]: 'Розділи',
-        [AdminSections.CHANGELOGS]: 'Журнал змін',
-        [AdminSections.CONFIGURATION]: 'Конфігурація',
-        [AdminSections.GLOBAL_VARIABLES]: 'Глобальні змінні',
+        [AdminSections.Users]: 'Користувачі',
+        [AdminSections.License]: 'Ліцензії',
+        [AdminSections.Devices]: 'Пристрої',
+        [AdminSections.Flow]: 'Схеми',
+        [AdminSections.Dialplan]: 'Правила вихідного набору',
+        [AdminSections.Gateways]: 'Шлюзи',
+        [AdminSections.Chatplan]: 'Правила маршрутизації текстових повідомлень',
+        [AdminSections.ChatGateways]: 'Текстові шлюзи',
+        [AdminSections.Skills]: 'Навички оператора',
+        [AdminSections.Buckets]: 'Кошики',
+        [AdminSections.Media]: 'Медіафайли',
+        [AdminSections.ShiftTemplates]: 'Шаблон змін',
+        [AdminSections.PauseTemplates]: 'Шаблон пауз',
+        [AdminSections.WorkingConditions]: 'Умови роботи',
+        [AdminSections.Blacklist]: 'Cписки',
+        [AdminSections.Calendars]: 'Календарі',
+        [AdminSections.Regions]: 'Розташування',
+        [AdminSections.Communications]: "Типи зв'язку",
+        [AdminSections.PauseCause]: 'Статуси оператора',
+        [AdminSections.Agents]: 'Оператори',
+        [AdminSections.Teams]: 'Команди',
+        [AdminSections.Resources]: 'Ресурси',
+        [AdminSections.ResourceGroups]: 'Групи ресурсів',
+        [AdminSections.Queues]: 'Черги',
+        [AdminSections.Storage]: 'Сховища',
+        [AdminSections.StoragePolicies]: 'Політики збереження файлів',
+        [AdminSections.CognitiveProfiles]: 'Голосові профілі',
+        [AdminSections.EmailProfiles]: 'Email профілі',
+        [AdminSections.SingleSignOn]: 'Single Sign-on',
+        [AdminSections.ImportCsv]: 'Імпорт даних з CSV файлів',
+        [AdminSections.Triggers]: 'Тригери',
+        [AdminSections.Roles]: 'Ролі',
+        [AdminSections.Objects]: 'Розділи',
+        [AdminSections.Changelogs]: 'Журнал змін',
+        [AdminSections.Configuration]: 'Конфігурація',
+        [AdminSections.GlobalVariables]: 'Глобальні змінні',
       },
     },
   },
@@ -335,7 +350,7 @@ export default {
     sameAs: 'Неправильний пароль',
     requiredArrayValue: 'Поле не повинно бути пустим',
     minLength: 'Кількість символів повинна бути не меншою, ніж',
-    url: 'Необхідно ввести правильну url-адресу',
+    url: 'Необхідно ввести правильну URL-адресу',
     websocketValidator: 'Необхідно ввести правильну WebSocket url-адресу',
     isRegExpMatched: 'Пароль має відповідати регулярному виразу:',
     regExpValidator: 'Не правильний регулярний вираз',
@@ -345,6 +360,7 @@ export default {
     latinWithNumber:
       'Код повинен містити лише літери (A-Z, a-z) та цифри (0-9) і починатися з літери',
     integer: 'Поле повинно містити лише цілі числа',
+    nameAlreadyInUse: 'Така назва вже використовується',
   },
   webitelUI: {
     searchBar: {
@@ -416,6 +432,17 @@ export default {
         [IconAction.CLEAR]: ({ linked }) =>
           linked('webitelUI.tableActions.filterReset'),
         [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
+        [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
+        [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked('webitelUI.filters.presets.preset').toLowerCase()}`;
+        },
+        [IconAction.ADD_CONTACT]: ({ linked }) => {
+          return `${linked('reusable.add')} контакти`;
+        },
       },
     },
     errorPages: {
@@ -458,7 +485,7 @@ export default {
     },
     empty: {
       text: {
-        empty: 'Записи у розділі ще не створені',
+        empty: 'Записи ще не створені',
         filters: 'На жаль, жоден запис не відповідає вашим критеріям',
       },
     },
@@ -480,11 +507,11 @@ export default {
       exportToJson: 'Експортувати в JSON',
     },
     filters: {
-      predefinedLabels: { /* https://webitel.atlassian.net/browse/WTEL-6308?focusedCommentId=657415 */
-        createdAt: {
-          startOfToday: 'Від початку дня',
-          startOfMonth: 'Від початку місяця',
-        },
+      datetime: {
+        [RelativeDatetimeValue.Today]: 'Сьогодні',
+        [RelativeDatetimeValue.ThisWeek]: 'Цей тиждень',
+        [RelativeDatetimeValue.ThisMonth]: 'Цей місяць',
+        [RelativeDatetimeValue.Custom]: 'Власний діапазон дат',
       },
       addFilter: ({ linked }) => {
         return `${linked('reusable.add')} ${linked(
@@ -533,7 +560,10 @@ export default {
         return linked('vocabulary.contact');
       },
       contactGroup: ({ linked }) => {
-        return linked('cases.group');
+        return linked('cases.groupPerformers');
+      },
+      createdAt: ({ linked }) => {
+        return linked('reusable.createdAt');
       },
       createdAtFrom: ({ linked }) => {
         return linked('reusable.from');
@@ -559,8 +589,17 @@ export default {
       hasTranscription: ({ linked }) => {
         return linked('objects.transcription');
       },
+      hasUser: ({ linked }) => {
+        return linked('objects.user');
+      },
       impacted: ({ linked }) => {
         return linked('cases.impacted');
+      },
+      contactLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      contactOwner: ({ linked }) => {
+        return linked('objects.owner');
       },
       priority: ({ linked }) => {
         return linked('vocabulary.priority');
@@ -620,6 +659,37 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      presets: {
+        preset: 'Пресет | Пресети',
+        overwritePresetTitle: 'Пресет з такою назвою вже існує.',
+        overwritePresetText: 'Бажаєте його замінити?',
+        notifications: {
+          success: {
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
+      },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `${named('entity')} було оновлено`,
+      create: ({ named }) => `${named('entity')} було збережено`,
+      delete: ({ named }) => `${named('entity')} було видалено`,
     },
   },
   errorNotifications: {

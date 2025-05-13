@@ -120,8 +120,8 @@ export default {
 }
 
 .wt-checkbox__wrapper {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
   user-select: none;
 
@@ -131,18 +131,18 @@ export default {
 }
 
 .wt-checkbox__label {
-  margin-left: var(--checkbox-icon-margin);
-  cursor: pointer;
   transition: var(--transition);
+  cursor: pointer;
+  margin-left: var(--checkbox-icon-margin);
 }
 
 /* Hide the browser's default checkbox */
 .wt-checkbox__input {
   position: absolute;
+  opacity: 0;
   width: 0;
   height: 0;
   pointer-events: none;
-  opacity: 0;
 }
 
 .wt-checkbox:hover {

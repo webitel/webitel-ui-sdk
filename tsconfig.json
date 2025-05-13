@@ -2,14 +2,12 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": false,
     "skipLibCheck": true,
+    "listEmittedFiles": true,
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
@@ -18,7 +16,7 @@
     "moduleResolution": "Bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": false,
+    "noEmit": true,
     "noEmitOnError": false,
     "strict": false,
     "noUnusedLocals": true,
@@ -26,13 +24,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": [
-    "src/api/orval/webitelAPI.schemas.ts",
-    "docs/pages/**/*.ts"
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts",
-    "src/!(api)/**/*.ts"
-  ]
+  "include": ["src/**/*.ts", "docs/pages/**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
 }

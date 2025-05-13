@@ -1,7 +1,7 @@
 @forward 'styleguide/styleguide';
 @use 'styleguide/styleguide' as *;
-@use 'pages/card-page';
 @use 'pages/table-page';
+@use 'pages/card-page';
 
 @include wt-placeholder;
 
@@ -21,10 +21,14 @@ html {
 
 body {
   @extend %typo-body-1;
+  margin: 0;
 
   height: 100%;
   min-height: 100%;
-  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .theme--dark {
@@ -52,26 +56,26 @@ ul {
 }
 
 iframe {
-  border: none;
   outline: none;
+  border: none;
 }
 
 button {
-  padding: 0;
   cursor: pointer;
-  border: none;
   outline-color: #000;
+  border: none;
   background: transparent;
+  padding: 0;
 }
 
 a {
-  text-decoration: none;
   color: #000;
+  text-decoration: none;
 }
 
 .hidden {
-  pointer-events: none;
   opacity: 0;
+  pointer-events: none;
 }
 
 // https://github.com/Akryum/floating-vue/issues/488

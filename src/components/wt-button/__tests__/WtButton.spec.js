@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtLoader from '../../wt-loader/wt-loader.vue';
 import WtButton from '../wt-button.vue';
 

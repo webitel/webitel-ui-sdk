@@ -1,4 +1,5 @@
 import mitt from 'mitt';
+
 import isEmpty from '../../../scripts/isEmpty.js';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
 import BaseFilterSchema from '../classes/BaseFilterSchema.js';

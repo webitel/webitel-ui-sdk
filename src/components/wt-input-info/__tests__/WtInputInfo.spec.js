@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtInputInfo from '../wt-input-info.vue';
 
 describe('WtInputInfo', () => {

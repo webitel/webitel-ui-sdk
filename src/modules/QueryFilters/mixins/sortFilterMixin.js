@@ -1,6 +1,6 @@
 import {
-  SortSymbols,
   queryToSortAdapter,
+  SortSymbols,
   sortToQueryAdapter,
 } from '../../../scripts/sortQueryAdapters.js';
 import baseFilterMixin from './baseFilterMixin/baseFilterMixin.js';

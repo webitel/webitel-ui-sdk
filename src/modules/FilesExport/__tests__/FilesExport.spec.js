@@ -1,9 +1,11 @@
+import '../../../../tests/mocks/localStorageMock';
+
 import { shallowMount } from '@vue/test-utils';
 import * as fileSaver from 'file-saver-es';
 import jszip from 'jszip';
 import jszipUtils from 'jszip-utils';
+
 import FilesExportMixin from '../mixins/exportFilesMixin.js';
-import '../../../../tests/mocks/localStorageMock';
 
 vi.mock('jszip');
 vi.mock('jszip-utils');

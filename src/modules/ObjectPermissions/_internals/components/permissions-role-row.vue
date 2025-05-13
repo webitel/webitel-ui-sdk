@@ -19,8 +19,8 @@ const props = defineProps({
 <style lang="scss" scoped>
 .permissions-role-row {
   display: grid;
-  align-items: center;
   grid-template-columns: var(--icon-md-size) 1fr;
+  align-items: center;
   gap: var(--spacing-sm);
 }
 </style>

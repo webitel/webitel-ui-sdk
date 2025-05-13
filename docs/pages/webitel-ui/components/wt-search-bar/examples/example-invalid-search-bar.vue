@@ -1,6 +1,6 @@
 <script setup>
 import { useVuelidate } from '@vuelidate/core';
-import { ref, computed } from 'vue';
+import { computed,ref } from 'vue';
 
 const value = ref('');
 const v$ = useVuelidate(

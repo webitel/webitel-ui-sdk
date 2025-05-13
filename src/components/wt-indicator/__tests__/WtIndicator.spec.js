@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtIndicator from '../wt-indicator.vue';
 
 describe('WtIndicator', () => {

@@ -108,7 +108,12 @@ export default {
       return this.user.preferredUsername || this.user.account;
     },
     buildVersion() {
-      return `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
+      let buildString = '';
+      buildString = `${this.$t('webitelUI.headerActions.buildVersion')}: v${this.buildInfo.release}-${this.buildInfo.build}`;
+      if (this.buildInfo.timestamp) {
+        buildString += `, ${new Date(this.buildInfo.timestamp).toLocaleString()}`;
+      }
+      return buildString;
     },
   },
 
@@ -131,41 +136,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-header-actions {
-  position: relative;
-  z-index: var(--wt-app-header-content-z-index);
   display: flex;
+  position: relative;
   align-items: center;
+  z-index: var(--wt-app-header-content-z-index);
 }
 
 .wt-header-actions__panel-wrapper {
+  display: flex;
   position: absolute;
   top: 100%; // icon
   right: 0;
-  display: flex;
   flex-direction: column;
-  min-width: var(--wt-header-actions-min-width);
-  margin-top: var(--wt-app-header-content-panel-margin);
-  padding: var(--wt-header-actions-padding);
+  gap: var(--wt-header-actions-content-sections-gap);
   transition: var(--transition);
+  margin-top: var(--wt-app-header-content-panel-margin);
+  box-shadow: var(--elevation-10);
   border-radius: var(--border-radius);
   background: var(--wt-app-header-content-bg-color);
-  box-shadow: var(--elevation-10);
-  gap: var(--wt-header-actions-content-sections-gap);
+  padding: var(--wt-header-actions-padding);
+  min-width: var(--wt-header-actions-min-width);
 }
 
 .wt-header-actions__name {
   @extend %typo-subtitle-1;
-  white-space: nowrap;
   color: var(--text-main-color);
+  white-space: nowrap;
 }
 
 .wt-header-actions__account {
   @extend %typo-body-1;
-  white-space: nowrap;
   color: var(--text-main-color);
+  white-space: nowrap;
 }
 
 .wt-header-actions__action {
@@ -180,9 +185,9 @@ export default {
     @extend %typo-body-1;
     display: flex;
     align-items: center;
-    width: 100%;
-    padding: var(--wt-header-actions-action-link-padding);
     cursor: pointer;
+    padding: var(--wt-header-actions-action-link-padding);
+    width: 100%;
     color: var(--text-main-color);
 
     .wt-icon {
@@ -197,7 +202,7 @@ export default {
 
 .wt-header-actions__build__version {
   @extend %typo-caption;
-  white-space: nowrap;
   color: var(--text-main-color);
+  white-space: nowrap;
 }
 </style>

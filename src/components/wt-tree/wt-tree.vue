@@ -123,12 +123,12 @@ const compareSelectElement = (item: any) => {
 </script>
 
 <style lang="scss">
-@use '../../css/main.scss' as *;
+@use '@webitel/styleguide/scroll' as *;
 
 .wt-tree {
-  padding: var(--spacing-sm);
-  background: var(--content-wrapper-color);
   border-radius: var(--border-radius);
+  background: var(--content-wrapper-color);
+  padding: var(--spacing-sm);
   overflow: auto;
 
   &__content {
@@ -136,9 +136,9 @@ const compareSelectElement = (item: any) => {
 
     display: flex;
     flex-direction: column;
-    overflow: auto;
-    height: 100%;
     padding-right: var(--spacing-2xs);
+    height: 100%;
+    overflow: auto;
   }
 
   &__list-content {
@@ -146,21 +146,21 @@ const compareSelectElement = (item: any) => {
 
     display: flex;
     flex-direction: column;
-    padding-right: var(--spacing-2xs);
-    gap: var(--spacing-xs);
-    overflow: auto;
     align-items: flex-start;
+    gap: var(--spacing-xs);
+    padding-right: var(--spacing-2xs);
     height: 100%;
+    overflow: auto;
   }
 
   &__label-wrapper {
     display: flex;
     align-items: center;
-    cursor: pointer;
-    padding: 0 var(--spacing-2xs);
-    border-radius: var(--border-radius);
-    color: var(--wt-tree-item-on);
     transition: var(--transition);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    padding: 0 var(--spacing-2xs);
+    color: var(--wt-tree-item-on);
 
     &:hover {
       background: var(--wt-tree-item-hover);

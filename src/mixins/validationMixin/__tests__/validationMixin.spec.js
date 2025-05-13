@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import validationMixin from '../validationMixin.js';
 
 describe('Validation mixin', () => {

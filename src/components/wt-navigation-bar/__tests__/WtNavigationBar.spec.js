@@ -1,5 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import { createRouter, createWebHistory } from 'vue-router';
+
 import WtNavigationBar from '../wt-navigation-bar.vue';
 
 const nav = [

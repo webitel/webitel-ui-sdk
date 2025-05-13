@@ -47,30 +47,30 @@ const open = () => {
 </script>
 
 <style lang="scss" scoped>
-@use '../../../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .start-page-card {
   display: flex;
   flex-direction: column;
-  width: 264px;
-  padding: var(--spacing-xs);
-  color: var(--text-main-color);
+  gap: var(--spacing-xs);
   border-radius: var(--border-radius);
   background-color: var(--content-wrapper-color);
-  gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  width: 264px;
+  color: var(--text-main-color);
 
   &__header {
     @extend %typo-heading-4;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
   }
 
   &__description {
     @extend %typo-body-1;
     display: -webkit-box;
-    overflow: hidden;
     height: 78px; //in order to cut text after 3rd line:
+    overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;

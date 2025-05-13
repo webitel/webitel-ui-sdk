@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtCcPauseCausePopup from '../_internals/wt-cc-pause-cause-popup.vue';
 
 describe('Pause cause popup', () => {

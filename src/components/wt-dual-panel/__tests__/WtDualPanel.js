@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtDualPanel from '../wt-dual-panel.vue';
 
 describe('WtDualPanel', () => {

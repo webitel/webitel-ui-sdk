@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtCheckbox from '../../wt-checkbox/wt-checkbox.vue';
 import WtTable from '../wt-table.vue';
 

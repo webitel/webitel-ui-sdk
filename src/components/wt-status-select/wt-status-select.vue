@@ -115,10 +115,10 @@ export default {
     min-height: 0;
 
     .multiselect__tags {
-      min-height: 0;
-      padding: var(--wt-status-select-padding);
       border: none;
       background: var(--wt-status-select-background-color);
+      padding: var(--wt-status-select-padding);
+      min-height: 0;
     }
 
     .multiselect__select {
@@ -131,10 +131,10 @@ export default {
       background: transparent;
 
       .multiselect__option {
-        min-height: 0;
-        padding: 0;
-        color: var(--wt-status-select-option-text-color);
         background: var(--wt-status-select-option-background-color);
+        padding: 0;
+        min-height: 0;
+        color: var(--wt-status-select-option-text-color);
       }
 
       .multiselect__option--highlight {

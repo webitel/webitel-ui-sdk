@@ -61,7 +61,7 @@ const result = computed(() => {
               ({ description }) => `\`\`\`${description} \`\`\``,
             );
 
-          const deprecated = !!tags?.deprecated ? '❗️' : '';
+          const deprecated = tags?.deprecated ? '❗️' : '';
 
           const _required = required ? '✅' : '';
 
@@ -117,7 +117,10 @@ const result = computed(() => {
 </script>
 
 <template>
-  <div class="component-info" v-html="result" />
+  <div
+    class="component-info"
+    v-html="result"
+  />
 </template>
 
 <style lang="scss">

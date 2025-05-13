@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtHeaderActions from '../wt-header-actions.vue';
 
 describe('WtHeaderActions', () => {

@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtLabel from '../wt-label.vue';
 
 describe('WtLabel', () => {

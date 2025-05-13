@@ -9,6 +9,7 @@
 
 <script>
 import FlowTypeApplications from '@webitel/flow-ui-sdk/src/lookups/FlowTypeApplications.lookup';
+
 import enumReducer from '../../../webitel-ui/enums/_internals/enumReducer';
 
 export default {

@@ -8,12 +8,12 @@
     <div class="wt-search-bar__wrapper">
       <div class="wt-search-bar__search-icon">
         <slot
-          :invalid="invalid"
+          v-bind="{ invalid, searchMode }"
           name="search-icon"
         >
           <wt-icon
             :color="invalidColorProvider"
-            icon="search"
+            :icon="searchMode?.icon || 'search'"
           />
         </slot>
       </div>
@@ -78,7 +78,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed, toRefs } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation.js';
@@ -118,16 +118,29 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'input',
-  'search',
-  'enter',
-  'update:search-mode',
+const emit = defineEmits<{
+  /**
+   * @param value - search-bar value
+   */
+  input: [string];
+  /**
+   * @param value - search-bar value
+   */
+  search: [string];
+  /**
+   * @param value - search-bar value
+   */
+  enter: [string];
+  /**
+   * @param option - selected search mode
+   */
+  'update:search-mode': [string | object];
   /**
    * @deprecated
+   * @param option - selected search mode
    */
-  'change:search-mode',
-]);
+  'change:search-mode': [string | object];
+}>();
 
 const { v, customValidators } = toRefs(props);
 
@@ -167,15 +180,15 @@ function updateSearchMode({ option }) {
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-search-bar {
   cursor: text;
 
   &.wt-search-bar--invalid {
     .wt-search-bar__wrapper {
-      border-color: var(--wt-text-field-input-border-error-color);
       outline: none; // prevent outline overlapping false color
+      border-color: var(--wt-text-field-input-border-error-color);
     }
 
     .wt-search-bar__input {
@@ -187,11 +200,11 @@ function updateSearchMode({ option }) {
   .wt-search-bar__wrapper {
     display: flex;
     align-items: center;
-    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
+    gap: var(--spacing-xs);
     border: var(--input-border);
     border-color: var(--wt-text-field-input-border-color);
     border-radius: var(--border-radius);
-    gap: var(--spacing-xs);
+    padding: calc(var(--spacing-xs) - 1px) var(--spacing-xs);
   }
 
   .wt-search-bar__search-icon {
@@ -200,8 +213,8 @@ function updateSearchMode({ option }) {
 
   .wt-search-bar__reset-icon-btn {
     .wt-search-bar:not(:focus-within) & {
-      pointer-events: none;
       opacity: 0;
+      pointer-events: none;
     }
   }
 
@@ -210,14 +223,14 @@ function updateSearchMode({ option }) {
     @include wt-placeholder;
 
     display: block;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 0;
     transition: var(--transition);
-    color: var(--wt-text-field-text-color);
-    border: none;
+    box-sizing: border-box;
     outline: none;
+    border: none;
     background: transparent;
+    padding: 0;
+    width: 100%;
+    color: var(--wt-text-field-text-color);
   }
 
   /* clears the 'X' from Internet Explorer */

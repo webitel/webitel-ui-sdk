@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { ref } from 'vue';
+
 import { useValidation } from '../../../mixins/validationMixin/useValidation.js';
 import WtSearchBar from '../wt-search-bar.vue';
 

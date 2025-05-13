@@ -1,6 +1,6 @@
 <template>
   <section class="wt-dual-panel">
-    <div class="wt-dual-panel__header">
+    <div v-if="!hideHeader" class="wt-dual-panel__header">
       <slot name="header" />
     </div>
     <div
@@ -21,7 +21,10 @@
           size="sm"
           @click="toggleSidePanel"
         />
-        <slot name="side-panel" />
+        <slot
+          v-if="!sidePanelCollapsed"
+          name="side-panel"
+        />
       </div>
       <div class="wt-dual-panel__main">
         <slot name="main" />
@@ -36,6 +39,10 @@ import { computed, defineEmits, ref } from 'vue';
 import { ComponentSize, IconAction } from '../../enums';
 
 const props = defineProps({
+  hideHeader: {
+    type: Boolean,
+    default: false,
+  },
   actionsPanel: {
     type: Boolean,
     default: true,
@@ -46,7 +53,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:size']);
+const emit = defineEmits(['update:side-panel-size']);
 
 const sidePanelCollapsed = ref(false);
 
@@ -65,32 +72,32 @@ const sidePanelSize = computed(() =>
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/scroll' as *;
 $side-panel-md-width: 320px;
 
 .wt-dual-panel {
   display: flex;
   flex-direction: column;
+  gap: var(--wt-dual-panel-section-gap);
   box-sizing: border-box;
+  background: var(--wt-dual-panel-background-color);
+  padding: var(--wt-dual-panel-padding);
   max-width: 100%;
   height: 100%;
-  padding: var(--wt-dual-panel-padding);
-  background: var(--wt-dual-panel-background-color);
-  gap: var(--wt-dual-panel-section-gap);
 
   &__header,
   &__actions-panel,
   &__main {
     box-sizing: border-box;
-    padding: var(--wt-dual-panel-section-padding);
     border-radius: var(--border-radius);
     background: var(--wt-dual-panel-content-wrapper-color);
+    padding: var(--wt-dual-panel-section-padding);
   }
 
   &__main {
     @extend %wt-scrollbar;
-    overflow: auto;
     flex: 1 1 auto;
+    overflow: auto;
   }
 
   &__header,
@@ -101,21 +108,21 @@ $side-panel-md-width: 320px;
   &__content {
     display: flex;
     flex-grow: 1;
-    min-height: 0;
     gap: var(--spacing-sm);
+    min-height: 0;
   }
 
   &__side-panel {
     @extend %wt-scrollbar;
-    overflow: auto;
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    padding: var(--wt-dual-panel-section-padding);
-    transition: var(--transition);
-    background: var(--wt-dual-panel-content-wrapper-color);
-    will-change: width;
     gap: var(--wt-dual-panel-section-gap);
+    transition: var(--transition);
+    will-change: width;
+    background: var(--wt-dual-panel-content-wrapper-color);
+    padding: var(--wt-dual-panel-section-padding);
+    min-width: 0;
+    overflow: auto;
 
     &--md {
       flex: 0 0 $side-panel-md-width;

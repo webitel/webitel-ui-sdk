@@ -1,63 +1,67 @@
+import {
+  camelToKebab,
+  camelToSnake,
+  kebabToCamel,
+  kebabToSnake,
+  objCamelToKebab,
+  objCamelToSnake,
+  objSnakeToCamel,
+  snakeToCamel,
+  snakeToKebab,
+} from './caseConverters.js';
+import {
+  compareSize,
+  greaterOrEqual as sizeGreaterOrEqual,
+  greaterThen as sizeGreaterThen,
+  smallerOrEqual as sizeSmallerOrEqual,
+  smallerThen as sizeSmallerThen,
+} from './compareSize.ts';
 import convertDuration from './convertDuration.js';
 import debounce from './debounce.js';
 import eventBus from './eventBus.js';
 import isEmpty from './isEmpty.js';
+import { wtlog } from './logger.js';
+import {
+  isRelativeDatetimeValue,
+  normalizeToTimestamp,
+} from './normalizeDatetime';
 import prettifyFileSize from './prettifyFileSize.js';
 import prettifyTime from './prettifyTime.js';
 import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator.js';
 import saveAsJSON from './saveAsJSON.js';
-import { wtlog } from './logger.js';
-import { sortToQueryAdapter, queryToSortAdapter } from './sortQueryAdapters.js';
+import { queryToSortAdapter, sortToQueryAdapter } from './sortQueryAdapters.js';
 import updateObject from './updateObject.js';
-import {
-  compareSize,
-  smallerOrEqual as sizeSmallerOrEqual,
-  greaterOrEqual as sizeGreaterOrEqual,
-  smallerThen as sizeSmallerThen,
-  greaterThen as sizeGreaterThen,
-} from './compareSize.ts';
-import {
-  camelToSnake,
-  camelToKebab,
-  snakeToCamel,
-  snakeToKebab,
-  kebabToCamel,
-  kebabToSnake,
-  objSnakeToCamel,
-  objCamelToSnake,
-  objCamelToKebab,
-} from './caseConverters.js';
 
 export {
-  // sortQueryAdapters.js
-  sortToQueryAdapter,
-  queryToSortAdapter,
-  updateObject,
-  preventHiddenPageCallsDecorator,
-  saveAsJSON,
-  prettifyTime,
-  prettifyFileSize,
+  camelToKebab,
+  // caseConverters.js
+  camelToSnake,
+  // compareSize.js
+  compareSize,
+  convertDuration,
   debounce,
   eventBus,
   isEmpty,
-  convertDuration,
-  wtlog,
-
-  // compareSize.js
-  compareSize,
-  sizeSmallerOrEqual,
-  sizeGreaterOrEqual,
-  sizeSmallerThen,
-  sizeGreaterThen,
-
-  // caseConverters.js
-  camelToSnake,
-  camelToKebab,
-  snakeToCamel,
-  snakeToKebab,
+  isRelativeDatetimeValue,
   kebabToCamel,
   kebabToSnake,
-  objSnakeToCamel,
-  objCamelToSnake,
+  normalizeToTimestamp,
   objCamelToKebab,
+  objCamelToSnake,
+  objSnakeToCamel,
+  prettifyFileSize,
+  prettifyTime,
+  preventHiddenPageCallsDecorator,
+  queryToSortAdapter,
+  saveAsJSON,
+  sizeGreaterOrEqual,
+  sizeGreaterThen,
+  sizeSmallerOrEqual,
+  sizeSmallerThen,
+  snakeToCamel,
+  snakeToKebab,
+  // sortQueryAdapters.js
+  sortToQueryAdapter,
+  updateObject,
+  wtlog,
 };

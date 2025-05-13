@@ -12,7 +12,6 @@ import applyTransform, {
   notify,
   sanitize,
   snakeToCamel,
-  starToSearch,
 } from '../../transformers/index.js';
 
 const instance = getDefaultInstance();
@@ -55,7 +54,6 @@ const getConditionsList = async ({ parentId, ...rest }) => {
     priority_id: priorityId,
   } = applyTransform(rest, [
     merge(getDefaultGetParams()),
-    starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),

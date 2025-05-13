@@ -117,7 +117,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../../css/main' as *;
+@use '../../css/styleguide/styleguide' as *;
 
 .wt-time-input {
   display: inline-block;
@@ -131,29 +131,29 @@ export default {
     @extend %typo-body-1;
 
     display: block;
-    box-sizing: border-box;
-    width: 100%;
-    padding: var(--input-padding);
     transition: var(--transition);
-    color: var(--wt-text-field-text-color);
+    box-sizing: border-box;
     border: var(--input-border);
     border-color: var(--wt-text-field-input-border-color);
     border-radius: var(--border-radius);
     background: transparent;
+    padding: var(--input-padding);
+    width: 100%;
+    color: var(--wt-text-field-text-color);
+  }
 
-    .wt-time-input--invalid &,
-    .wt-time-input--invalid:hover & {
-      color: var(--wt-text-field-error-text-color);
-      border-color: var(--wt-text-field-input-border-error-color);
-      outline: none; // prevent outline overlapping false color
-      @include wt-placeholder('error');
-    }
+  &.wt-time-input--invalid .wt-time-input__input,
+  &.wt-time-input--invalid:hover .wt-time-input__input {
+    outline: none; // prevent outline overlapping false color
+    border-color: var(--wt-text-field-input-border-error-color);
+    color: var(--wt-text-field-error-text-color);
+    @include wt-placeholder('error');
+  }
 
-    .wt-time-input--disabled & {
-      border-color: var(--wt-text-field-input-border-disabled-color);
-      background: var(--wt-text-field-input-background-disabled-color);
-      @include wt-placeholder('disabled');
-    }
+  &.wt-time-input--disabled .wt-time-input__input {
+    border-color: var(--wt-text-field-input-border-disabled-color);
+    background: var(--wt-text-field-input-background-disabled-color);
+    @include wt-placeholder('disabled');
   }
 }
 

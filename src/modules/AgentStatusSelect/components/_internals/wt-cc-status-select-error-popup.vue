@@ -47,9 +47,9 @@ function close() {
 <style lang="scss" scoped>
 .wt-cc-status-select-error-popup__main-wrapper {
   display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: var(--spacing-sm);
 }
 </style>

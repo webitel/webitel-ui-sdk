@@ -1,46 +1,46 @@
-@use '../../css/main' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .wt-chip {
   @extend %typo-body-2;
 
   display: inline-block;
-  padding: var(--chip-padding);
-  color: var(--wt-chip-main-text-color);
   border-radius: var(--chip-border-radius);
   background: var(--wt-chip-main-background-color);
+  padding: var(--chip-padding);
+  color: var(--wt-chip-main-text-color);
 
   &--main-color {
-    color: var(--wt-chip-main-text-color);
     background: var(--wt-chip-main-background-color);
+    color: var(--wt-chip-main-text-color);
   }
 
   &--primary-color {
-    color: var(--wt-chip-primary-text-color);
     background: var(--wt-chip-primary-background-color);
+    color: var(--wt-chip-primary-text-color);
   }
 
   &--secondary-color {
-    color: var(--wt-chip-secondary-text-color);
     background: var(--wt-chip-secondary-background-color);
+    color: var(--wt-chip-secondary-text-color);
   }
 
   &--success-color {
-    color: var(--wt-chip-success-text-color);
     background: var(--wt-chip-success-background-color);
+    color: var(--wt-chip-success-text-color);
   }
 
   &--warning-color {
-    color: var(--wt-chip-warning-text-color);
     background: var(--wt-chip-warning-background-color);
+    color: var(--wt-chip-warning-text-color);
   }
 
   &--error-color {
-    color: var(--wt-chip-error-text-color);
     background: var(--wt-chip-error-background-color);
+    color: var(--wt-chip-error-text-color);
   }
 
   &--transfer-color {
-    color: var(--wt-chip-transfer-text-color);
     background: var(--wt-chip-transfer-background-color);
+    color: var(--wt-chip-transfer-text-color);
   }
 }

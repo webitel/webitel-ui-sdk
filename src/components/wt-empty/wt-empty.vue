@@ -75,7 +75,7 @@
     <!--         @slot custom content, between text and actions
                 @scope `{ size }`
      -->
-    <slot v-bind="{ size }"></slot>
+    <slot v-bind="{ size }" />
 
     <div
       v-if="showActions"
@@ -269,21 +269,22 @@ const onSecondaryClick = onClick('secondary');
 </style>
 
 <style lang="scss" scoped>
-@use '../../css/main.scss';
+@use '@webitel/styleguide/typography' as *;
 
 .wt-empty {
   display: flex;
-  align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  box-sizing: border-box;
+  margin: auto;
+  padding: var(--spacing-md);
   width: var(--wt-empty-width);
   min-width: var(--wt-empty-min-width);
   max-width: var(--wt-empty-max-width);
-  margin: auto;
-  padding: var(--spacing-md);
   text-align: center;
-  gap: var(--spacing-md);
 
   &__info {
     display: flex;
@@ -317,8 +318,8 @@ const onSecondaryClick = onClick('secondary');
 
   &--size {
     &-sm.wt-empty {
-      padding: var(--spacing-sm);
       gap: var(--spacing-sm);
+      padding: var(--spacing-sm);
 
       &__headline {
         @extend %typo-heading-4;
@@ -334,8 +335,8 @@ const onSecondaryClick = onClick('secondary');
     }
 
     &-md.wt-empty {
-      padding: var(--spacing-md);
       gap: var(--spacing-md);
+      padding: var(--spacing-md);
 
       &__headline {
         @extend %typo-heading-4;
@@ -351,8 +352,8 @@ const onSecondaryClick = onClick('secondary');
     }
 
     &-lg.wt-empty {
-      padding: var(--spacing-lg);
       gap: var(--spacing-lg);
+      padding: var(--spacing-lg);
 
       &__headline {
         @extend %typo-heading-4;

@@ -1,4 +1,5 @@
 import { mount, shallowMount } from '@vue/test-utils';
+
 import WtSelectButton from '../wt-button-select.vue';
 
 // helps to mock @floating-ui/vue autoUpdate method

@@ -6,7 +6,7 @@ const callAlert = () => window.alert('wt-icon-btn clicked');
   <wt-icon-btn
     icon="edit"
     @click="callAlert"
-  ></wt-icon-btn>
+  />
 </template>
 
 <style lang="scss" scoped></style>

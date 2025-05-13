@@ -1,3 +1,5 @@
+import { SourcesApiFactory } from 'webitel-sdk';
+
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -10,10 +12,7 @@ import applyTransform, {
   notify,
   sanitize,
   snakeToCamel,
-  starToSearch,
 } from '../../transformers/index.js';
-
-import { SourcesApiFactory } from 'webitel-sdk';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -32,17 +31,8 @@ const getSourcesList = async (params) => {
     }));
   };
 
-  const {
-    page,
-    size,
-    fields,
-    sort,
-    id,
-    q,
-    type,
-  } = applyTransform(params, [
+  const { page, size, fields, sort, id, q, type } = applyTransform(params, [
     merge(getDefaultGetParams()),
-    starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),
@@ -57,7 +47,7 @@ const getSourcesList = async (params) => {
       id,
       q,
       type,
-    )
+    );
     const { items, next } = applyTransform(response.data, [
       merge(getDefaultGetListResponse()),
     ]);
@@ -75,10 +65,7 @@ const getSource = async ({ itemId: id }) => {
 
   try {
     const response = await sourceService.locateSource(id);
-    return applyTransform(response.data, [
-      snakeToCamel(),
-      itemResponseHandler,
-    ]);
+    return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -91,9 +78,7 @@ const addSource = async ({ itemInstance }) => {
   ]);
   try {
     const response = await sourceService.createSource(item);
-    return applyTransform(response.data, [
-      snakeToCamel()
-    ]);
+    return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -102,7 +87,8 @@ const addSource = async ({ itemInstance }) => {
 const updateSource = async ({ itemInstance, itemId: id }) => {
   const item = applyTransform(itemInstance, [
     camelToSnake(),
-    sanitize(fieldsToSend)]);
+    sanitize(fieldsToSend),
+  ]);
 
   try {
     const response = await sourceService.updateSource(id, item);
@@ -121,10 +107,11 @@ const deleteSource = async ({ id }) => {
   }
 };
 
-const getLookup = (params) => getSourcesList({
-  ...params,
-  fields: params.fields || ['id', 'name', 'type'],
-});
+const getLookup = (params) =>
+  getSourcesList({
+    ...params,
+    fields: params.fields || ['id', 'name', 'type'],
+  });
 
 const CaseSourcesAPI = {
   getList: getSourcesList,
@@ -132,7 +119,7 @@ const CaseSourcesAPI = {
   add: addSource,
   update: updateSource,
   delete: deleteSource,
-  getLookup
-}
+  getLookup,
+};
 
 export default CaseSourcesAPI;

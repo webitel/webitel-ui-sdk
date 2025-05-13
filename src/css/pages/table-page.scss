@@ -1,4 +1,4 @@
-@use '../styleguide/styleguide' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .table-page {
   &.wt-page-wrapper {
@@ -27,14 +27,14 @@
       flex: 1 1 100%;
       flex-direction: column;
       justify-content: space-between;
+      gap: var(--spacing-sm);
       width: 100%;
       min-height: 0;
-      gap: var(--spacing-sm);
 
       .wt-table__head {
         position: sticky;
-        z-index: 1;
         top: 0;
+        z-index: 1;
       }
 
       .wt-pagination {
@@ -43,8 +43,8 @@
     }
 
     &__visible-scroll-wrapper {
-      overflow: visible;
       height: 100%;
+      overflow: visible;
 
       .wt-table {
         overflow: visible;
@@ -53,11 +53,11 @@
   }
 
   .table-title {
-    position: relative;
     display: flex;
-    align-items: center;
+    position: relative;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     margin: var(--spacing-sm) 0;
 
     &__title {

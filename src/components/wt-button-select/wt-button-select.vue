@@ -101,20 +101,20 @@ const atClickaway = () => {
 
 <style lang="scss" scoped>
 .wt-button-select {
-  position: relative;
   display: inline-flex;
+  position: relative;
   align-items: center;
   gap: var(--button-select-buttons-gap);
 
   .wt-button-select__button {
-    padding: var(--button-select-button-padding);
     border-radius: var(--border-radius) 0 0 var(--border-radius);
+    padding: var(--button-select-button-padding);
   }
 
   .wt-button-select__select-btn {
-    min-width: auto;
-    padding: var(--button-select-icon-button-padding);
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    padding: var(--button-select-icon-button-padding);
+    min-width: auto;
 
     // OPEN AND SHUT ARROW
     .wt-button-select__select-arrow {

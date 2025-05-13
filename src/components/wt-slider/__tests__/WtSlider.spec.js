@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+
 import WtSlider from '../wt-slider.vue';
 
 describe('WtSlider', () => {
