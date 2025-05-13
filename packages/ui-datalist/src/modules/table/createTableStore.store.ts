@@ -87,6 +87,33 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       }
     };
 
+    const infiniteLoadDataList = async () => {
+      isLoading.value = true;
+      $patchPaginationStore({ next: false });
+      page.value += 1;
+
+      const params = {
+        ...filtersManager.value.getAllValues(),
+        page: page.value,
+        size: size.value,
+        sort: sort.value,
+        fields: fields.value,
+        parentId: parentId.value,
+      };
+
+      try {
+        const { items, next } = await apiModule.getList(params);
+
+        dataList.value = [...dataList.value, ...items];
+        $patchPaginationStore({ next });
+      } catch (err) {
+        error.value = err;
+        throw err;
+      } finally {
+        isLoading.value = false;
+      }
+    };
+
     const patchItemProperty = async ({
       index,
       path,
@@ -201,6 +228,8 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       addFilter,
       updateFilter,
       deleteFilter,
+
+      infiniteLoadDataList,
     };
   });
 };
