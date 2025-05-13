@@ -1,3 +1,8 @@
+## [v25.6.14] - 2025-05-13
+### :sparkles: New Features
+- [`e5ae856`](https://github.com/webitel/webitel-ui-sdk/commit/e5ae8560d249c53d6dc74be6c7e61f824cf853d7) - added portal gateway protocol [WTEL-6785](https://webitel.atlassian.net/browse/WTEL-6785) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
+
+
 ## [v25.6.13] - 2025-05-12
 ### :bug: Bug Fixes
 - [`f22d14a`](https://github.com/webitel/webitel-ui-sdk/commit/f22d14a38b67347d0b263fae6fc78e2c92da1a77) - audit form v-models [WTEL-6894](https://webitel.atlassian.net/browse/WTEL-6894) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
@@ -2142,3 +2147,4 @@
 [v25.6.11]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.10...v25.6.11
 [v25.6.12]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.11...v25.6.12
 [v25.6.13]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.12...v25.6.13
+[v25.6.14]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.13...v25.6.14
