@@ -1,10 +1,10 @@
+import Button from 'primevue/button';
 import PrimeVue from 'primevue/config';
 
-import WebitelTheme from './webitel-theme.js';
+import WebitelTheme from './theme/webitel-theme.js';
 
 const initPrimevue = (app) => {
   app.use(PrimeVue, {
-    prefix: 'p',
     theme: {
       preset: WebitelTheme,
       options: {
@@ -12,6 +12,8 @@ const initPrimevue = (app) => {
       },
     },
   });
+
+  app.component('PButton', Button);
 };
 
 export default initPrimevue;

@@ -1,8 +1,9 @@
 <template>
-  <button
-    type="button"
-    :disabled="disabled"
-    :class="[
+  <div>
+    <button
+      type="button"
+      :disabled="disabled"
+      :class="[
       colorClass,
       `wt-button--size-${size}`,
       {
@@ -13,20 +14,30 @@
         'wt-button--loading': showLoader,
       },
     ]"
-    class="wt-button"
-    @click="$emit('click', $event)"
-  >
-    <!--  Show loader and button contents at the same time to prevent width shift if content > min-width of button -->
-    <wt-loader
-      v-if="showLoader"
-      :color="loaderColor"
-      size="sm"
-    />
-    <div class="wt-button__contents">
-      <slot> no content provided</slot>
-    </div>
-  </button>
+      class="wt-button"
+      @click="$emit('click', $event)"
+    >
+      <!--  Show loader and button contents at the same time to prevent width shift if content > min-width of button -->
+      <wt-loader
+        v-if="showLoader"
+        :color="loaderColor"
+        size="sm"
+      />
+      <div class="wt-button__contents">
+        <slot> no content provided</slot>
+      </div>
+    </button>
+    <p-button>
+      <div class="wt-button__contents">
+        <slot> no content provided</slot>
+      </div>
+    </p-button>
+  </div>
 </template>
+
+<script setup>
+import PButton from 'primevue/button';
+</script>
 
 <script>
 export default {
