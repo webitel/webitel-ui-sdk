@@ -1,7 +1,7 @@
 const palette = {
   // LIGHTNESS
   lightness: {
-    light: {
+    lighten: {
       1: '60%',
       2: '70%',
       3: '80%',
@@ -94,7 +94,7 @@ const palette = {
   red: {
     lighten: {
       1: 'hsla({hue.red},{saturation.lighten.1},{lightness.lighten.1},1)',
-      2: 'hsla({hue.red},{saturation.lighten.2},{lightness.lighten.2},1)',
+      2: 'hsla({hue.red},90%,{lightness.lighten.2},1)',
       3: 'hsla({hue.red},{saturation.lighten.3},{lightness.lighten.3},1)',
       4: 'hsla({hue.red},{saturation.lighten.4},{lightness.lighten.4},1)',
       5: 'hsla({hue.red},{saturation.lighten.5},{lightness.lighten.5},1)',

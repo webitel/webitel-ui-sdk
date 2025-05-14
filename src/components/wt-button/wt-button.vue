@@ -1,33 +1,24 @@
 <template>
   <div>
-    <button
-      type="button"
+    <p-button
+      v-bind="$attrs"
+      :severity="color"
       :disabled="disabled"
-      :class="[
-      colorClass,
-      `wt-button--size-${size}`,
-      {
-        'wt-button--width-by-content': widthByContent,
-        'wt-button--contains-icon': containsIcon,
-        'wt-button--wide': wide,
-        'wt-button--disabled': disabled,
-        'wt-button--loading': showLoader,
-      },
-    ]"
-      class="wt-button"
+      :loading="showLoader"
+      :size="primevueSizeMap[size]"
+      :class="{
+        'p-button--width-by-content': widthByContent,
+        'p-button--contains-icon': containsIcon,
+        'p-button--wide': wide,
+        'p-button--loading': showLoader,
+      }"
       @click="$emit('click', $event)"
     >
-      <!--  Show loader and button contents at the same time to prevent width shift if content > min-width of button -->
       <wt-loader
         v-if="showLoader"
         :color="loaderColor"
         size="sm"
       />
-      <div class="wt-button__contents">
-        <slot> no content provided</slot>
-      </div>
-    </button>
-    <p-button>
       <div class="wt-button__contents">
         <slot> no content provided</slot>
       </div>
@@ -37,6 +28,11 @@
 
 <script setup>
 import PButton from 'primevue/button';
+
+const primevueSizeMap = {
+  sm: 'small',
+  md: 'medium',
+};
 </script>
 
 <script>
