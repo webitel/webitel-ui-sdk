@@ -1,34 +1,30 @@
 <template>
-  <div>
-    <p-button
-      v-bind="$attrs"
-      :severity="color"
-      :disabled="disabled"
-      :loading="showLoader"
-      :size="primevueSizeMap[size]"
-      :class="{
+  <p-button
+    v-bind="$attrs"
+    :severity="color"
+    :disabled="disabled"
+    :loading="showLoader"
+    :size="primevueSizeMap[size]"
+    :class="{
         'p-button--width-by-content': widthByContent,
         'p-button--contains-icon': containsIcon,
         'p-button--wide': wide,
         'p-button--loading': showLoader,
       }"
-      @click="$emit('click', $event)"
-    >
-      <wt-loader
-        v-if="showLoader"
-        :color="loaderColor"
-        size="sm"
-      />
-      <div class="wt-button__contents">
-        <slot> no content provided</slot>
-      </div>
-    </p-button>
-  </div>
+    @click.prevent="clickButton"
+  >
+    <wt-loader
+      v-if="showLoader"
+      :color="loaderColor"
+      size="sm"
+    />
+    <div class="wt-button__contents">
+      <slot> no content provided</slot>
+    </div>
+  </p-button>
 </template>
 
 <script setup>
-import PButton from 'primevue/button';
-
 const primevueSizeMap = {
   sm: 'small',
   md: 'medium',
@@ -114,6 +110,11 @@ export default {
           }, 1000); // why 1s? https://ux.stackexchange.com/a/104782
         }
       },
+    },
+  },
+  methods: {
+    clickButton(event) {
+      this.$emit('click', event);
     },
   },
 };
