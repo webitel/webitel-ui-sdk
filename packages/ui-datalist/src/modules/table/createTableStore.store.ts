@@ -60,7 +60,8 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       selected.value = value;
     };
 
-    const loadDataList = async () => {
+    const loadDataList = async (mode: 'default' | 'infinity') => {
+      if (isLoading.value) return;
       isLoading.value = true;
       $patchPaginationStore({ next: false });
 
@@ -76,8 +77,12 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       try {
         const { items, next } = await apiModule.getList(params);
 
-        dataList.value = items;
-        updateSelected([]);
+        if(mode === 'infinity') {
+          dataList.value.push(...items);
+        } else {
+          dataList.value = items;
+          updateSelected([]);
+         }
         $patchPaginationStore({ next });
       } catch (err) {
         error.value = err;
