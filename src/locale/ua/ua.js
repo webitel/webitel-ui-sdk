@@ -128,7 +128,6 @@ export default {
     messaging: 'Повідомлення',
     emptyResultSearch: 'Пошук не дав результатів',
     contact: 'Контакт | Контакти',
-    notification: 'Сповіщення',
   },
   // date-related texts
   date: {

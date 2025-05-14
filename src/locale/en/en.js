@@ -129,7 +129,6 @@ export default {
     emptyResultSearch: 'Your search yielded no results',
     contact: 'Contact | Contacts',
     column: 'Column | Columns',
-    notification: 'Notification | Notifications',
   },
   // date-related texts
   date: {
