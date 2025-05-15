@@ -201,6 +201,8 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       addFilter,
       updateFilter,
       deleteFilter,
+
+      apiModule,
     };
   });
 };
