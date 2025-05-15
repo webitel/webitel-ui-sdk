@@ -114,6 +114,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@faker-js/faker": "^9.7.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
     "@vitejs/plugin-vue": "^5.2.3",
@@ -132,6 +133,7 @@
     "lint-staged": "^15.5.0",
     "markdown-it": "^14.1.0",
     "markdown-table": "^3.0.4",
+    "msw": "^2.8.2",
     "orval": "^7.6.0",
     "path": "^0.12.7",
     "pinia": "^3.0.1",
