@@ -23,12 +23,13 @@ export default (/*{ mode }*/) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ['vue'],
+        external: ['vue', 'primevue'],
         output: {
           // Provide global variables to use in the UMD build
           // for externalized deps
           globals: {
             vue: 'Vue',
+            primevue: 'PrimeVue',
           },
           // https://github.com/vitejs/vite/issues/4863#issuecomment-1005451468
           assetFileNames: (assetInfo) => {
