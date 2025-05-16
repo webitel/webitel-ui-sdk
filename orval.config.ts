@@ -9,81 +9,37 @@ import {
 } from '@orval/axios';
 import { defineConfig } from 'orval';
 
-const sharedOutputTarget = './src/api/orval';
+const outputWorkspace = './src/api/orval';
+const outputTarget = '';
+const inputTarget = '../protos/gennn/engine/swagger/openapi.yaml';
 const sharedGenFileExtension = 'gen.ts';
+
+const runFormatterCLICommand = 'true';
+// 'npx biome check --write --unsafe'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
 
 export default defineConfig({
   main: {
     input: {
       target:
         // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-        '../protos/swagger/cases.swagger.json',
+        inputTarget,
     },
     output: {
-      target: sharedOutputTarget,
-      fileExtension: `.${sharedGenFileExtension}`,
+      workspace: outputWorkspace,
+      target: outputTarget,
+      fileExtension: `.api.${sharedGenFileExtension}`,
       // client: 'axios',
       client: axiosClient,
       mock: true,
       mode: 'tags-split',
       clean: true,
-      namingConvention: 'camelCase',
       indexFiles: true,
-      schemas: './src/api/orval/_schemas',
+      schemas: '_models',
       docs: {
-        configPath: './typedoc.config.mjs',
+        configPath: 'typedoc.config.mjs',
       },
-      /*docs: {
-        theme: 'default',
-        out: './src/api/orval/_docs-html',
-        disableSources: true,
-        entryPoints: ['./src/api/orval/webitelAPI.schemas.ts'],
-        exclude: ['**!/main.ts']
-        // entryPoints: ['**!/api/orval/!**!/!*.ts'],
-      },*/
-      // schemas: './src/api/schemas',
       override: {
-        // mutator: {
-        // path: './src/api/utilz/withValidation.ts',
-        // name: 'withValidation',
-        // },
-        // requestOptions: true,
-        // transformer: (verb) => {
-        //   const mutatedVerb = { ...verb };
-        //   // Add operationId to the config
-        //   if (mutatedVerb.request?.implementation) {
-        //     mutatedVerb.request.implementation =
-        //       mutatedVerb.request.implementation.replace(
-        //         /({[^}]+})/,
-        //         `{ ...($1), __operationId: '${verb.operationId}' }`,
-        //       );
-        //   }
-        //   return mutatedVerb;
-        // },
-        // transformer: (verb) => {
-        //   console.info(JSON.stringify(verb, null, 2));
-        //   console.info('\n\n\n\n\n');
-        //   return verb;
-        // },
-        // operationName: ({operationId: operationName}) => {
-        //   // console.info(operationName);
-        //   if (operationName.includes('Search')) {
-        //     return 'getList';
-        //   } else if (operationName.includes('Read')) {
-        //     return 'get';
-        //   } else if (operationName.includes('Create')) {
-        //     return 'add';
-        //   } else if (operationName.includes('Update')) {
-        //     return 'update';
-        //   } else if (operationName.includes('Delete')) {
-        //     return 'delete';
-        //   } else if (operationName.includes('Patch')) {
-        //     return 'patch';
-        //   }
-        //
-        //   return operationName;
-        // },
-        // NOTE: Use this to debug transformed options
+        // Use this to view transformed options formatting
         // transformer: (options: GeneratorVerbOptions): GeneratorVerbOptions => {
         //   console.info(JSON.stringify(options, null, 2));
         //   return options;
@@ -92,17 +48,18 @@ export default defineConfig({
     },
 
     hooks: {
-      // afterAllFilesWrite: 'prettier --write',
+      afterAllFilesWrite: runFormatterCLICommand,
     },
   },
   zod: {
     input: {
       target:
         // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-        '../protos/swagger/cases.swagger.json',
+        inputTarget,
     },
     output: {
-      target: sharedOutputTarget,
+      workspace: outputWorkspace,
+      target: outputTarget,
       fileExtension: `.zod.${sharedGenFileExtension}`,
       client: 'zod',
       mode: 'tags-split',
@@ -110,10 +67,10 @@ export default defineConfig({
       override: {
         zod: {
           generate: {
-            response: true,
-            query: false,
-            header: false,
-            param: false,
+            response: true, // minimum required, least is optional, hai bude
+            query: true,
+            header: true,
+            param: true,
             body: true,
           },
           // coerce: {
@@ -121,51 +78,13 @@ export default defineConfig({
           //   query: ['string', 'number', 'boolean', 'bigint', 'date'],
           // },
         },
-        // operationName: ({ operationId: operationName }) => {
-        //   // console.info(operationName);
-        //   if (operationName.includes('Search')) {
-        //     return 'getList';
-        //   } else if (operationName.includes('Read')) {
-        //     return 'get';
-        //   } else if (operationName.includes('Create')) {
-        //     return 'add';
-        //   } else if (operationName.includes('Update')) {
-        //     return 'update';
-        //   } else if (operationName.includes('Delete')) {
-        //     return 'delete';
-        //   } else if (operationName.includes('Patch')) {
-        //     return 'patch';
-        //   }
-        //
-        //   return operationName;
-        // },
-        // NOTE: Use this to debug transformed options
-        // transformer: (options: GeneratorVerbOptions): GeneratorVerbOptions => {
-        //   console.info(JSON.stringify(options, null, 2));
-        //   return options;
-        // },
       },
     },
 
     hooks: {
-      // afterAllFilesWrite: 'prettier --write',
+      afterAllFilesWrite: runFormatterCLICommand,
     },
   },
-  /*'docs-html': {
-    input: {
-      target: 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-    },
-    output: {
-      // target: './src/api/orval/_docs',
-      docs: {
-        theme: 'default',
-        out: './_docs-html',
-        disableSources: true,
-        // entryPoints: '',
-        entryPoints: ['./src/api/orval/webitelAPI.schemas.ts'],
-      },
-    },
-  },*/
 });
 
 function axiosClient() {
@@ -216,9 +135,15 @@ function axiosClient() {
             //   values: true,
             //   syntheticDefaultImport: true,
             // },
-            { name: 'AxiosRequestConfig' },
-            { name: 'AxiosResponse' },
-            { name: 'CreateAxiosDefaults' },
+            {
+              name: 'AxiosRequestConfig',
+            },
+            {
+              name: 'AxiosResponse',
+            },
+            {
+              name: 'CreateAxiosDefaults',
+            },
           ],
           dependency: 'axios',
         },
@@ -247,7 +172,6 @@ function axiosClient() {
       return `
 
             // --- header start
-             import { validateResponse } from '../utils/validate-response';
             // ${'JSON.stringify(params, null, 2)'}
               import * as veees from './${params.tag}.zod.gen';
             ${generateAxiosHeader(params)}
@@ -263,9 +187,6 @@ function axiosClient() {
     },
     footer: (params) => `
             // --- footer start
-            
-            const getList = ${JSON.stringify(params, null, 2)};
-            
             ${generateAxiosFooter(params)}
             // --- footer end
           `,
@@ -276,49 +197,5 @@ function axiosClient() {
             // --- title end
 
           `,
-    // extraFiles: () => `
-    //
-    //   // --- extraFiles start
-    //   ${axiosBuilder.extraFiles}
-    //   // --- extraFiles end
-    //
-    // `,
-
-    // ...axiosBuilder,
-    // dependencies: () => {
-    // return [
-    //   {
-    //     exports: [
-    //       {
-    //         name: 'Axios',
-    //         default: true,
-    //         values: true,
-    //         syntheticDefaultImport: true,
-    //       },
-    //       { name: 'AxiosRequestConfig' },
-    //       { name: 'AxiosResponse' },
-    //       { name: 'CreateAxiosDefaults' },
-    //     ],
-    //     dependency: 'axios',
-    //   },
-    // ];
-    // },
-    // header: () => {
-    //   //             return `
-    //   // export const createApiClient = (config?: CreateAxiosDefaults) => {
-    //   //   const axios = Axios.create(config);
-    //   //
-    //   // `;
-    // },
-    // footer: (params) => {
-    //   const result = generateAxiosFooter(params);
-    //   return result.replace(
-    //     /return {(.+?)}/,
-    //     (_, captured) => `return {${captured}, axios}`,
-    //   );
-    // },
   };
-  // const axiosBuilder = builder({ type: 'axios-functions' })();
-  //
-  // return axiosBuilder;
 }
