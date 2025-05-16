@@ -107,7 +107,7 @@ export const createUserAccessStore = ({
     };
 
 
-    const hasSpecialGlobalAction = (id: SpecialGlobalAction): boolean => {
+    const hasSpecialGlobalActionAccess = (id: SpecialGlobalAction): boolean => {
       return !!globalAccess.get(id);
     };
 
@@ -131,7 +131,7 @@ export const createUserAccessStore = ({
       hasDeleteAccess,
 
       routeAccessGuard,
-      hasSpecialGlobalAction,
+      hasSpecialGlobalActionAccess,
     };
   });
 };
