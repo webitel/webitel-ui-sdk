@@ -24,11 +24,14 @@ import type {
   UiSection,
   UserAccessStore,
 } from '../types/UserAccess.d.ts';
+import { RolePermissionId } from '../../../../enums/RolePermissions/RolePermissions';
 
 export const createUserAccessStore = ({
   namespace = 'userinfo',
 }: CreateUserAccessStoreConfig = {}) => {
   return defineStore(`${namespace}/access`, (): UserAccessStore => {
+    let rolePermissions = new Set<string>();
+
     let globalAccess: GlobalActionAccessMap = new Map();
 
     let scopeAccess: ScopeAccessMap = new Map();
@@ -106,11 +109,16 @@ export const createUserAccessStore = ({
       return true;
     };
 
+    function isRolePermissionGranted(id: RolePermissionId): boolean {
+      return rolePermissions.has(id);
+    }
+
     const initialize = ({
       permissions: rawGlobalAccess,
       scope: rawScopeAccess,
       access: rawVisibilityAccess,
     }: CreateUserAccessStoreRawAccess) => {
+      rolePermissions = new Set(rawGlobalAccess.map((permission) => permission.id));
       globalAccess = makeGlobalAccessMap(rawGlobalAccess);
       scopeAccess = makeScopeAccessMap(rawScopeAccess);
       appVisibilityAccess = makeAppVisibilityMap(rawVisibilityAccess);
@@ -126,6 +134,7 @@ export const createUserAccessStore = ({
       hasDeleteAccess,
 
       routeAccessGuard,
+      isRolePermissionGranted,
     };
   });
 };
