@@ -19,7 +19,7 @@ export const createUserinfoStore = () => {
       hasDeleteAccess,
       initialize: initializeAccessStore,
       routeAccessGuard,
-      isRolePermissionGranted,
+      hasRolePermissionAccess,
     } = accessStore;
 
     const userId = ref();
@@ -47,7 +47,7 @@ export const createUserinfoStore = () => {
       hasDeleteAccess,
 
       routeAccessGuard,
-      isRolePermissionGranted,
+      hasRolePermissionAccess,
     };
   });
 
