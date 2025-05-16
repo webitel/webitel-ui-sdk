@@ -11,7 +11,8 @@ import { defineConfig } from 'orval';
 
 const outputWorkspace = './src/api/orval';
 const outputTarget = '';
-const inputTarget = '../protos/gennn/engine/swagger/openapi.yaml';
+// const inputTarget = '../protos/gen/engine/swagger/v3/openapi.yaml';
+const inputTarget = './formatted-openapi.yaml';
 const sharedGenFileExtension = 'gen.ts';
 
 const runFormatterCLICommand = 'true';
@@ -23,6 +24,7 @@ export default defineConfig({
       target:
         // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
         inputTarget,
+      override: {},
     },
     output: {
       workspace: outputWorkspace,
