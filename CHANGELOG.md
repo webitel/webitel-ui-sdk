@@ -1,3 +1,8 @@
+## [v25.6.15] - 2025-05-14
+### :sparkles: New Features
+- [`bcaec52`](https://github.com/webitel/webitel-ui-sdk/commit/bcaec52fd8cb9dcbf230de597fb911ba677ae086) - add locale for notification [WTEL-6860](https://webitel.atlassian.net/browse/WTEL-6860) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v25.6.14] - 2025-05-13
 ### :sparkles: New Features
 - [`e5ae856`](https://github.com/webitel/webitel-ui-sdk/commit/e5ae8560d249c53d6dc74be6c7e61f824cf853d7) - added portal gateway protocol [WTEL-6785](https://webitel.atlassian.net/browse/WTEL-6785) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -2148,3 +2153,4 @@
 [v25.6.12]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.11...v25.6.12
 [v25.6.13]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.12...v25.6.13
 [v25.6.14]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.13...v25.6.14
+[v25.6.15]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.14...v25.6.15
