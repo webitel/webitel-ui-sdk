@@ -9,6 +9,7 @@ import type {
   WtApplication,
   WtObject,
 } from '../../../../enums';
+import { RolePermissionId } from '../../../../enums/RolePermissions/RolePermissions';
 import type {
   CrudGlobalAction,
   ScopeClass,
@@ -112,6 +113,8 @@ export interface UserAccessStore {
   hasDeleteAccess: (object?: WtObject) => boolean;
 
   routeAccessGuard: NavigationGuard;
+
+  isRolePermissionGranted: (id: RolePermissionId) => boolean;
 
   // hasApplicationVisibility: (app: WtApplication) => boolean;
   // hasSectionVisibility: (section: UiSection) => boolean;
