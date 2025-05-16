@@ -106,6 +106,11 @@ export const createUserAccessStore = ({
       return true;
     };
 
+
+    const hasSpecialGlobalActionAccess = (id: SpecialGlobalAction): boolean => {
+      return !!globalAccess.get(id);
+    };
+
     const initialize = ({
       permissions: rawGlobalAccess,
       scope: rawScopeAccess,
@@ -126,6 +131,7 @@ export const createUserAccessStore = ({
       hasDeleteAccess,
 
       routeAccessGuard,
+      hasSpecialGlobalActionAccess,
     };
   });
 };
