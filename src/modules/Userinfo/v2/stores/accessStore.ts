@@ -6,7 +6,7 @@ import {
   type WtApplication,
   type WtObject,
 } from '../../../../enums';
-import type { RolePermissionsId, SpecialGlobalAction } from '../enums';
+import type { SpecialGlobalAction } from '../enums';
 import {
   getWtAppByUiSection,
   makeAppVisibilityMap,
@@ -107,7 +107,7 @@ export const createUserAccessStore = ({
     };
 
 
-    const hasRolePermissionAccess = (id: RolePermissionsId): boolean => {
+    const hasRolePermissionAccess = (id: SpecialGlobalAction): boolean => {
       return Boolean(globalAccess.get(id));
     };
 
