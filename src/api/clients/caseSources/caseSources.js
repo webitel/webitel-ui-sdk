@@ -6,6 +6,8 @@ import {
   getDefaultInstance,
   getDefaultOpenAPIConfig,
 } from '../../defaults/index.js';
+import { getSources } from '../../orval/sources/sources.gen';
+import { listSourcesResponse } from '../../orval/sources/sources.zod.gen';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -14,10 +16,8 @@ import applyTransform, {
   snakeToCamel,
 } from '../../transformers/index.js';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const sourceService = new SourcesApiFactory(configuration, '', instance);
+const sourceService = getSources();
+// const sourceService = new SourcesApiFactory(configuration, '', instance);
 
 const fieldsToSend = ['name', 'description', 'type'];
 
