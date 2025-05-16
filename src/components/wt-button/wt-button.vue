@@ -5,7 +5,7 @@
     :disabled="disabled"
     :loading="showLoader"
     :size="primevueSizeMap[size]"
-    class="wt-button"
+    class="wt-button mt-2"
     :class="{
         'p-button--width-by-content': widthByContent,
         'p-button--contains-icon': containsIcon,

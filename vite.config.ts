@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import { globbySync } from 'globby';
 import { resolve } from 'path';
@@ -55,6 +56,7 @@ export default (/*{ mode }*/) => {
       },
     },
     plugins: [
+      tailwindcss(),
       vue({
         template: {
           compilerOptions: {
@@ -88,6 +90,7 @@ export default (/*{ mode }*/) => {
         vueTsc: false,
         // biome: true,
       }),
+
       AutoImport({
         include: [...globbySync('*.{ts,js,vue}')],
         imports: {

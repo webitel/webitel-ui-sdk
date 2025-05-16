@@ -2,6 +2,7 @@ import 'vue-multiselect/dist/vue-multiselect.css';
 import '@webitel/styleguide/fonts';
 import 'plyr/src/sass/plyr.scss';
 import './css/main.scss';
+import './css/tailwind.css';
 import './assets/icons/sprite/index.js';
 
 import generateInstance from './api/axios/generateInstance.js';

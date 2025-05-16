@@ -1,9 +1,10 @@
 import PButton from 'primevue/button';
 import PrimeVue from 'primevue/config';
+import PInputText from 'primevue/inputtext';
 
 import WebitelTheme from './theme/webitel-theme.js';
 
-const changeComponentCompactMode = (component) => {
+const changeCompact = (component) => {
   component.compatConfig = { MODE: 3 };
 
   return component;
@@ -19,7 +20,8 @@ const initPrimevue = (app) => {
     },
   });
 
-  app.component('PButton', changeComponentCompactMode(PButton));
+  app.component('PButton', changeCompact(PButton));
+  app.component('PInputText', changeCompact(PInputText));
 };
 
 export default initPrimevue;
