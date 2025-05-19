@@ -25,70 +25,54 @@
   </p-button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, defineEmits, defineProps, ref, watch } from 'vue';
 
+import { ButtonColor,ComponentSize } from '../../enums';
+
 const primevueSizeMap = {
-  sm: 'small',
-  md: 'medium',
+  [ComponentSize.SM]: 'small',
+  [ComponentSize.MD]: 'medium',
 };
 
-const props = defineProps({
+const props = withDefaults(defineProps<{
   /**
    * @values 'primary', 'secondary', 'success', 'error', 'transfer', 'job', 'info'
    * @example <wt-button color="success"></wt-button>
    */
-  color: {
-    type: String,
-    default: 'primary',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
+  color?: ButtonColor;
+  disabled?: boolean;
+  loading?: boolean;
   /**
    * @values 'sm', 'md'
    * @example <wt-button size="sm"></wt-button>
    */
-  size: {
-    type: String,
-    default: 'md',
-  },
+  size?: ComponentSize;
   /**
    * Stretches button to all available width
    */
-  wide: {
-    type: Boolean,
-    default: false,
-  },
+  wide?: boolean;
   /**
    * Shrinks button to content width
    */
-  widthByContent: {
-    type: Boolean,
-    default: false,
-  },
+  widthByContent?: boolean;
   /**
    * sets wt-button line-height to 0 to prevent height changing: [stack overflow](https://stackoverflow.com/a/11126701)
    */
-  containsIcon: {
-    type: Boolean,
-    default: false,
-  },
+  containsIcon?: boolean;
+}>(), {
+  color: ButtonColor.PRIMARY,
+  disabled: false,
+  loading: false,
+  size: ComponentSize.MD,
+  wide: false,
+  widthByContent: false,
+  containsIcon: false,
 });
 
 const emit = defineEmits(['click']);
 
 const showLoader = ref(false);
-
-const colorClass = computed(() => {
-  if (!props.disabled) return `${props.color}`;
-  return '';
-});
 
 const loaderColor = computed(() => {
   return 'on-dark';
@@ -106,6 +90,8 @@ watch(
         showLoader.value = value;
       }, 1000); // why 1s? https://ux.stackexchange.com/a/104782
     }
+  }, {
+    immediate: true,
   },
 );
 </script>

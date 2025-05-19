@@ -13,6 +13,10 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 
 <Specs />
 
+## Primevue docs
+
+[PrimevueButton](https://primevue.org/button/)
+
 ## Button
 
 ::: raw
