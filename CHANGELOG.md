@@ -1,3 +1,8 @@
+## [v25.6.17] - 2025-05-19
+### :recycle: Refactors
+- [`5e9f56c`](https://github.com/webitel/webitel-ui-sdk/commit/5e9f56c28cee3e0cf4bc1f1f6097a7efdeeaa19c) - update package versions to 25.6.16 and 25.6.17 [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
 ## [v25.6.16] - 2025-05-16
 ### :sparkles: New Features
 - [`34690f0`](https://github.com/webitel/webitel-ui-sdk/commit/34690f06a47f2f4e0bc6e69b2cddb423cf51b119) - new method for permissions added permission added [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -2168,3 +2173,4 @@
 [v25.6.14]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.13...v25.6.14
 [v25.6.15]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.14...v25.6.15
 [v25.6.16]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.15...v25.6.16
+[v25.6.17]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.16...v25.6.17
