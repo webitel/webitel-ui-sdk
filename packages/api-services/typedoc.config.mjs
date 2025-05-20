@@ -1,10 +1,9 @@
 /** @type {Partial<import('typedoc').TypeDocOptions>} */
 const config = {
-  entryPoints: ['./src/api/orval/**/*.ts'],
+  entryPoints: ['./src/gen/**/*.ts'],
   theme: 'html',
-  out: './src/api/orval/_docs',
+  out: './src/gen/_docs',
   disableSources: true,
-  exclude: ['./src/main.ts'],
   skipErrorChecking: true,
   plugin: ['typedoc-plugin-markdown', 'typedoc-github-wiki-theme'],
 };

@@ -1,6 +1,6 @@
 {
   "casingSet": {
-      "parameters": "camelCase",
+      "parametersQuery": "camelCase",
       "properties": "camelCase"
   }
 }

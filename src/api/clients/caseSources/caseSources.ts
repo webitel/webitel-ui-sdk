@@ -1,45 +1,36 @@
-import { SourcesApiFactory } from 'webitel-sdk';
+import {
+  createSourceBody,
+  getSources,
+  listSourcesQueryParams,
+  updateSourceBody,
+} from '@webitel/api-services/gen';
 
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
-  getDefaultInstance,
-  getDefaultOpenAPIConfig,
-} from '../../defaults/index.js';
-import { getSources } from '../../orval/sources/sources.gen';
-import { listSourcesResponse } from '../../orval/sources/sources.zod.gen';
+} from '../../defaults/index';
+import { getFieldsToSendFromZodSchema } from '../../orval-utils/utils';
 import applyTransform, {
   camelToSnake,
   merge,
   notify,
   sanitize,
   snakeToCamel,
-} from '../../transformers/index.js';
+} from '../../transformers/index';
 
 const sourceService = getSources();
-// const sourceService = new SourcesApiFactory(configuration, '', instance);
-
-const fieldsToSend = ['name', 'description', 'type'];
 
 const getSourcesList = async (params) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
-
-  const listResponseHandler = (items) => {
-    return items.map((item) => ({
-      ...item,
-      type: item.type?.toLowerCase(),
-    }));
-  };
+  const fieldsToSend = getFieldsToSendFromZodSchema(listSourcesQueryParams);
 
   const { page, size, fields, sort, id, q, type } = applyTransform(params, [
     merge(getDefaultGetParams()),
-    (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);
 
   try {
-    const response = await sourceService.listSources(
+    const response = await sourceService.listSources({
       page,
       size,
       fields,
@@ -47,12 +38,12 @@ const getSourcesList = async (params) => {
       id,
       q,
       type,
-    );
+    });
     const { items, next } = applyTransform(response.data, [
       merge(getDefaultGetListResponse()),
     ]);
     return {
-      items: applyTransform(items, [listResponseHandler]),
+      items: applyTransform(items, []),
       next,
     };
   } catch (err) {
@@ -61,7 +52,7 @@ const getSourcesList = async (params) => {
 };
 
 const getSource = async ({ itemId: id }) => {
-  const itemResponseHandler = (item) => item.source;
+  const itemResponseHandler = (item) => item.source; // TODO wtf??
 
   try {
     const response = await sourceService.locateSource(id);
@@ -73,7 +64,7 @@ const getSource = async ({ itemId: id }) => {
 
 const addSource = async ({ itemInstance }) => {
   const item = applyTransform(itemInstance, [
-    sanitize(fieldsToSend),
+    sanitize(getFieldsToSendFromZodSchema(createSourceBody)),
     camelToSnake(),
   ]);
   try {
@@ -87,7 +78,7 @@ const addSource = async ({ itemInstance }) => {
 const updateSource = async ({ itemInstance, itemId: id }) => {
   const item = applyTransform(itemInstance, [
     camelToSnake(),
-    sanitize(fieldsToSend),
+    sanitize(updateSourceBody),
   ]);
 
   try {
