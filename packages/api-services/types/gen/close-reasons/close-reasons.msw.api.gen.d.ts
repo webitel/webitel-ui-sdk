@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { CasesCloseReason, CasesCloseReasonList, CasesLocateCloseReasonResponse } from '.././_models';
+export declare const getListCloseReasonsResponseMock: (overrideResponse?: Partial<CasesCloseReasonList>) => CasesCloseReasonList;
+export declare const getCreateCloseReasonResponseMock: (overrideResponse?: Partial<CasesCloseReason>) => CasesCloseReason;
+export declare const getDeleteCloseReasonResponseMock: (overrideResponse?: Partial<CasesCloseReason>) => CasesCloseReason;
+export declare const getLocateCloseReasonResponseMock: (overrideResponse?: Partial<CasesLocateCloseReasonResponse>) => CasesLocateCloseReasonResponse;
+export declare const getUpdateCloseReason2ResponseMock: (overrideResponse?: Partial<CasesCloseReason>) => CasesCloseReason;
+export declare const getUpdateCloseReasonResponseMock: (overrideResponse?: Partial<CasesCloseReason>) => CasesCloseReason;
+export declare const getListCloseReasonsMockHandler: (overrideResponse?: CasesCloseReasonList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesCloseReasonList> | CasesCloseReasonList)) => import("msw").HttpHandler;
+export declare const getCreateCloseReasonMockHandler: (overrideResponse?: CasesCloseReason | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<CasesCloseReason> | CasesCloseReason)) => import("msw").HttpHandler;
+export declare const getDeleteCloseReasonMockHandler: (overrideResponse?: CasesCloseReason | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesCloseReason> | CasesCloseReason)) => import("msw").HttpHandler;
+export declare const getLocateCloseReasonMockHandler: (overrideResponse?: CasesLocateCloseReasonResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesLocateCloseReasonResponse> | CasesLocateCloseReasonResponse)) => import("msw").HttpHandler;
+export declare const getUpdateCloseReason2MockHandler: (overrideResponse?: CasesCloseReason | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<CasesCloseReason> | CasesCloseReason)) => import("msw").HttpHandler;
+export declare const getUpdateCloseReasonMockHandler: (overrideResponse?: CasesCloseReason | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<CasesCloseReason> | CasesCloseReason)) => import("msw").HttpHandler;
+export declare const getCloseReasonsMock: () => import("msw").HttpHandler[];

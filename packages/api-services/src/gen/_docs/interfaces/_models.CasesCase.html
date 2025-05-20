@@ -1,0 +1,275 @@
+[@webitel/api-services](../index.html) / [\_models](../modules/_models.html) / CasesCase
+
+# Interface: CasesCase
+
+Message representing a case.
+
+## Properties
+
+### assignee?
+
+> `optional` **assignee**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Assignee responsible for resolving the case.
+
+***
+
+### author?
+
+> `optional` **author**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Author or reporter of the case.
+
+***
+
+### close?
+
+> `optional` **close**: [`CasesCloseInfo`](../wiki/_models.CasesCloseInfo.html)
+
+Close information (if applicable).
+
+***
+
+### closeReasonGroup?
+
+> `optional` **closeReasonGroup**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Close reason group, immutable once set.
+
+***
+
+### comments?
+
+> `optional` **comments**: [`CasesCaseCommentList`](../wiki/_models.CasesCaseCommentList.html)
+
+List of comments on the case.
+
+***
+
+### contactInfo?
+
+> `optional` **contactInfo**: `string`
+
+Contact information for the case.
+
+***
+
+### createdAt?
+
+> `optional` **createdAt**: `string`
+
+Creation timestamp (in milliseconds since Unix epoch).
+
+***
+
+### createdBy?
+
+> `optional` **createdBy**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Creator of the case.
+
+***
+
+### description?
+
+> `optional` **description**: `string`
+
+Detailed description of the case.
+
+***
+
+### etag?
+
+> `optional` **etag**: `string`
+
+Unique etag identifier.
+
+***
+
+### files?
+
+> `optional` **files**: [`CasesCaseFileList`](../wiki/_models.CasesCaseFileList.html)
+
+List of attached files.
+
+***
+
+### group?
+
+> `optional` **group**: [`GeneralExtendedLookup`](../wiki/_models.GeneralExtendedLookup.html)
+
+Group associated with the case.
+
+***
+
+### id?
+
+> `optional` **id**: `string`
+
+Unique case ID.
+
+***
+
+### impacted?
+
+> `optional` **impacted**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Impacted contact (defaults to reporter if null).
+
+***
+
+### links?
+
+> `optional` **links**: [`CasesCaseLinkList`](../wiki/_models.CasesCaseLinkList.html)
+
+List of attached links.
+
+***
+
+### name?
+
+> `optional` **name**: `string`
+
+Name of the case (may serve as an ID in docs).
+
+***
+
+### plannedReactionAt?
+
+> `optional` **plannedReactionAt**: `string`
+
+Planned reaction time (in milliseconds).
+
+***
+
+### plannedResolveAt?
+
+> `optional` **plannedResolveAt**: `string`
+
+Planned resolution time (in milliseconds).
+
+***
+
+### priority?
+
+> `optional` **priority**: [`CasesPriority`](../wiki/_models.CasesPriority.html)
+
+Priority level of the case.
+
+***
+
+### rate?
+
+> `optional` **rate**: [`CasesRateInfo`](../wiki/_models.CasesRateInfo.html)
+
+Rating information.
+
+***
+
+### related?
+
+> `optional` **related**: [`CasesRelatedCaseList`](../wiki/_models.CasesRelatedCaseList.html)
+
+List of related cases.
+
+***
+
+### reporter?
+
+> `optional` **reporter**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Reporter of the issue (null if anonymous).
+
+***
+
+### roleIds?
+
+> `optional` **roleIds**: `string`[]
+
+***
+
+### service?
+
+> `optional` **service**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Service associated with the case.
+
+***
+
+### sla?
+
+> `optional` **sla**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+SLA associated with the case.
+
+***
+
+### slaCondition?
+
+> `optional` **slaCondition**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+List of SLA conditions.
+
+***
+
+### source?
+
+> `optional` **source**: [`CasesSourceTypeLookup`](../wiki/_models.CasesSourceTypeLookup.html)
+
+Source of the case.
+
+***
+
+### status?
+
+> `optional` **status**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Current status of the case.
+
+***
+
+### statusCondition?
+
+> `optional` **statusCondition**: [`CasesStatusCondition`](../wiki/_models.CasesStatusCondition.html)
+
+Status condition from status lookup.
+
+***
+
+### subject?
+
+> `optional` **subject**: `string`
+
+Subject of the case.
+
+***
+
+### timing?
+
+> `optional` **timing**: [`CasesTimingInfo`](../wiki/_models.CasesTimingInfo.html)
+
+SLA timing details.
+
+***
+
+### updatedAt?
+
+> `optional` **updatedAt**: `string`
+
+Last update timestamp (in milliseconds since Unix epoch).
+
+***
+
+### updatedBy?
+
+> `optional` **updatedBy**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Last updater of the case.
+
+***
+
+### ver?
+
+> `optional` **ver**: `number`
+
+Version number of the case.

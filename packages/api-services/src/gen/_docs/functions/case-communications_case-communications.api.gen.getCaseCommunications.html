@@ -1,0 +1,99 @@
+[@webitel/api-services](../index.html) / [case-communications/case-communications.api.gen](../modules/case-communications_case-communications.api.gen.html) / getCaseCommunications
+
+# Function: getCaseCommunications()
+
+> **getCaseCommunications**(): `object`
+
+## Returns
+
+### linkCommunication()
+
+> **linkCommunication**: \<`TData`\>(`caseEtag`, `casesInputCaseCommunication`, `params?`, `options?`) => `Promise`\<`TData`\>
+
+#### Type Parameters
+
+##### TData
+
+`TData` = `AxiosResponse`\<[`CasesLinkCommunicationResponse`](../interfaces/_models.CasesLinkCommunicationResponse.html), `any`\>
+
+#### Parameters
+
+##### caseEtag
+
+`string`
+
+##### casesInputCaseCommunication
+
+[`CasesInputCaseCommunication`](../interfaces/_models.CasesInputCaseCommunication.html)
+
+##### params?
+
+[`LinkCommunicationParams`](../types/_models.LinkCommunicationParams.html)
+
+##### options?
+
+`AxiosRequestConfig`
+
+#### Returns
+
+`Promise`\<`TData`\>
+
+### listCommunications()
+
+> **listCommunications**: \<`TData`\>(`caseEtag`, `params?`, `options?`) => `Promise`\<`TData`\>
+
+#### Type Parameters
+
+##### TData
+
+`TData` = `AxiosResponse`\<[`CasesListCommunicationsResponse`](../interfaces/_models.CasesListCommunicationsResponse.html), `any`\>
+
+#### Parameters
+
+##### caseEtag
+
+`string`
+
+##### params?
+
+[`ListCommunicationsParams`](../types/_models.ListCommunicationsParams.html)
+
+##### options?
+
+`AxiosRequestConfig`
+
+#### Returns
+
+`Promise`\<`TData`\>
+
+### unlinkCommunication()
+
+> **unlinkCommunication**: \<`TData`\>(`caseEtag`, `id`, `params?`, `options?`) => `Promise`\<`TData`\>
+
+#### Type Parameters
+
+##### TData
+
+`TData` = `AxiosResponse`\<[`CasesUnlinkCommunicationResponse`](../interfaces/_models.CasesUnlinkCommunicationResponse.html), `any`\>
+
+#### Parameters
+
+##### caseEtag
+
+`string`
+
+##### id
+
+`string`
+
+##### params?
+
+[`UnlinkCommunicationParams`](../types/_models.UnlinkCommunicationParams.html)
+
+##### options?
+
+`AxiosRequestConfig`
+
+#### Returns
+
+`Promise`\<`TData`\>

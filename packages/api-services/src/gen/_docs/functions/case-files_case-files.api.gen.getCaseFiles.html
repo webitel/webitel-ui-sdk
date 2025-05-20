@@ -1,0 +1,63 @@
+[@webitel/api-services](../index.html) / [case-files/case-files.api.gen](../modules/case-files_case-files.api.gen.html) / getCaseFiles
+
+# Function: getCaseFiles()
+
+> **getCaseFiles**(): `object`
+
+## Returns
+
+### deleteFile()
+
+> **deleteFile**: \<`TData`\>(`caseEtag`, `id`, `options?`) => `Promise`\<`TData`\>
+
+#### Type Parameters
+
+##### TData
+
+`TData` = `AxiosResponse`\<[`CasesFile`](../interfaces/_models.CasesFile.html), `any`\>
+
+#### Parameters
+
+##### caseEtag
+
+`string`
+
+##### id
+
+`string`
+
+##### options?
+
+`AxiosRequestConfig`
+
+#### Returns
+
+`Promise`\<`TData`\>
+
+### listFiles()
+
+> **listFiles**: \<`TData`\>(`caseEtag`, `params?`, `options?`) => `Promise`\<`TData`\>
+
+#### Type Parameters
+
+##### TData
+
+`TData` = `AxiosResponse`\<[`CasesCaseFileList`](../interfaces/_models.CasesCaseFileList.html), `any`\>
+
+#### Parameters
+
+##### caseEtag
+
+`string`
+
+##### params?
+
+[`ListFilesParams`](../types/_models.ListFilesParams.html)
+
+##### options?
+
+`AxiosRequestConfig`
+
+#### Returns
+
+`Promise`\<`TData`\>

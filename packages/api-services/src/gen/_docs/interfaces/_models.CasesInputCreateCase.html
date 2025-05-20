@@ -1,0 +1,133 @@
+[@webitel/api-services](../index.html) / [\_models](../modules/_models.html) / CasesInputCreateCase
+
+# Interface: CasesInputCreateCase
+
+Input structure for creating a new case.
+
+## Properties
+
+### assignee?
+
+> `optional` **assignee**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Optional assignee ID.
+
+***
+
+### close?
+
+> `optional` **close**: [`CasesCreateCaseCloseInput`](../wiki/_models.CasesCreateCaseCloseInput.html)
+
+Optional close information.
+
+***
+
+### closeReasonGroup?
+
+> `optional` **closeReasonGroup**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Optional close reason.
+
+***
+
+### contactInfo?
+
+> `optional` **contactInfo**: `string`
+
+Optional contact information.
+
+***
+
+### description?
+
+> `optional` **description**: `string`
+
+Optional description of the case.
+
+***
+
+### group?
+
+> `optional` **group**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Optional group ID.
+
+***
+
+### impacted?
+
+> `optional` **impacted**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Required impacted user ID (default: reporter).
+
+***
+
+### links?
+
+> `optional` **links**: [`CasesInputCaseLink`](../wiki/_models.CasesInputCaseLink.html)[]
+
+List of links attached to the case.
+
+***
+
+### priority?
+
+> `optional` **priority**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Optional priority level.
+
+***
+
+### rate?
+
+> `optional` **rate**: [`CasesRateInfo`](../wiki/_models.CasesRateInfo.html)
+
+API-only rating information.
+
+***
+
+### related?
+
+> `optional` **related**: [`CasesCreateCaseRelatedCaseInput`](../wiki/_models.CasesCreateCaseRelatedCaseInput.html)[]
+
+List of related cases.
+
+***
+
+### reporter?
+
+> `optional` **reporter**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Required reporter ID (if empty, anonymous contact).
+
+***
+
+### service?
+
+> `optional` **service**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Service ID (affects many other readonly fields).
+
+***
+
+### source?
+
+> `optional` **source**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Source of the case.
+
+***
+
+### status?
+
+> `optional` **status**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+Initial case status (default from lookup or UI).
+
+***
+
+### subject?
+
+> `optional` **subject**: `string`
+
+Required subject of the case.

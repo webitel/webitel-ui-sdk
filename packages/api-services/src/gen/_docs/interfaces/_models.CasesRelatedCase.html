@@ -1,0 +1,85 @@
+[@webitel/api-services](../index.html) / [\_models](../modules/_models.html) / CasesRelatedCase
+
+# Interface: CasesRelatedCase
+
+Represents a related case with its relationship details.
+
+## Properties
+
+### createdAt?
+
+> `optional` **createdAt**: `string`
+
+Timestamp (in milliseconds) of when the relation was created.
+
+***
+
+### createdBy?
+
+> `optional` **createdBy**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+User who created the relation.
+
+***
+
+### etag?
+
+> `optional` **etag**: `string`
+
+Etag for the related case entity.
+
+***
+
+### id?
+
+> `optional` **id**: `string`
+
+Unique identifier for the related case.
+
+***
+
+### primaryCase?
+
+> `optional` **primaryCase**: [`CasesRelatedCaseLookup`](../wiki/_models.CasesRelatedCaseLookup.html)
+
+Primary case details.
+
+***
+
+### relatedCase?
+
+> `optional` **relatedCase**: [`CasesRelatedCaseLookup`](../wiki/_models.CasesRelatedCaseLookup.html)
+
+Related case details.
+
+***
+
+### relationType?
+
+> `optional` **relationType**: [`CasesRelationType`](../types/_models.CasesRelationType.html)
+
+Relation type between cases.
+
+***
+
+### updatedAt?
+
+> `optional` **updatedAt**: `string`
+
+Timestamp (in milliseconds) of the last update.
+
+***
+
+### updatedBy?
+
+> `optional` **updatedBy**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+
+User who last updated the relation.
+
+***
+
+### ver?
+
+> `optional` **ver**: `number`
+
+Version number of the related case, used for concurrency control.
