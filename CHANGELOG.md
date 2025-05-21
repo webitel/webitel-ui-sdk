@@ -1,3 +1,26 @@
+## [v25.6.17] - 2025-05-19
+### :recycle: Refactors
+- [`5e9f56c`](https://github.com/webitel/webitel-ui-sdk/commit/5e9f56c28cee3e0cf4bc1f1f6097a7efdeeaa19c) - update package versions to 25.6.16 and 25.6.17 [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v25.6.16] - 2025-05-16
+### :sparkles: New Features
+- [`34690f0`](https://github.com/webitel/webitel-ui-sdk/commit/34690f06a47f2f4e0bc6e69b2cddb423cf51b119) - new method for permissions added permission added [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+### :recycle: Refactors
+- [`8ea620e`](https://github.com/webitel/webitel-ui-sdk/commit/8ea620e3df81a3c8d613d6943bb42b33c75c6ca3) - code review refactor [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`7cf5626`](https://github.com/webitel/webitel-ui-sdk/commit/7cf5626ce5a53ebbb5a39d7696c6c29484d7fc62) - code review refactor [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`3ea12dd`](https://github.com/webitel/webitel-ui-sdk/commit/3ea12dd998957d2593f24a9a6a48114875477bd5) - code review refactor [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`b1d0c07`](https://github.com/webitel/webitel-ui-sdk/commit/b1d0c07d2cfeda62e5f4eec9ca52dc7e48a6bd49) - code review refactor [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`a50a114`](https://github.com/webitel/webitel-ui-sdk/commit/a50a114a1fe9b58497bf4daf1696c4b4bd1489c9) - code review refactor [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+- [`d101aed`](https://github.com/webitel/webitel-ui-sdk/commit/d101aedbc5fb6540d81c26c27785b1d6211b4375) - merge with master and increment version [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
+
+
+## [v25.6.15] - 2025-05-14
+### :sparkles: New Features
+- [`bcaec52`](https://github.com/webitel/webitel-ui-sdk/commit/bcaec52fd8cb9dcbf230de597fb911ba677ae086) - add locale for notification [WTEL-6860](https://webitel.atlassian.net/browse/WTEL-6860) *(commit by [@liza-pohranichna](https://github.com/liza-pohranichna))*
+
+
 ## [v25.6.14] - 2025-05-13
 ### :sparkles: New Features
 - [`e5ae856`](https://github.com/webitel/webitel-ui-sdk/commit/e5ae8560d249c53d6dc74be6c7e61f824cf853d7) - added portal gateway protocol [WTEL-6785](https://webitel.atlassian.net/browse/WTEL-6785) *(commit by [@plnnsimon](https://github.com/plnnsimon))*
@@ -2148,3 +2171,6 @@
 [v25.6.12]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.11...v25.6.12
 [v25.6.13]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.12...v25.6.13
 [v25.6.14]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.13...v25.6.14
+[v25.6.15]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.14...v25.6.15
+[v25.6.16]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.15...v25.6.16
+[v25.6.17]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.16...v25.6.17

@@ -21,15 +21,18 @@ export type CrudGlobalAction =
  * like downloading files or exporting data
  * */
 export const SpecialGlobalAction = {
-  PlaybackRecordFile: 'playbackRecordFile',
-  ManageUserLicense: 'manageUserLicense',
-  SchemeVariables: 'schemeVariables',
-  SystemSetting: 'systemSetting',
-  ManageUserRoles: 'manageUserRoles',
-  ExportDataGrid: 'exportDataGrid',
-  ViewCdrPhoneNumbers: 'viewCdrPhoneNumbers',
-  ChangeUserPassword: 'changeUserPassword',
-  EavesdropCall: 'eavesdropCall',
+  PlaybackRecordFile: 'playback_record_file',
+  ResetActiveAttempts: 'reset_active_attempts',
+  TimeLimitedRecordFile: 'time_limited_record_file',
+  ManageUserLicense: 'manage_user_license',
+  SchemeVariables: 'scheme_variables',
+  SystemSetting: 'system_setting',
+  ManageUserRoles: 'manage_user_roles',
+  ExportDataGrid: 'export_data_grid',
+  LimitWorkspaceContacts: 'limit_workspace_contacts',
+  ViewCdrPhoneNumbers: 'view_cdr_phone_numbers',
+  ChangeUserPassword: 'change_user_password',
+  EavesdropCall: 'eavesdrop_call',
 } as const;
 
 export type SpecialGlobalAction =
