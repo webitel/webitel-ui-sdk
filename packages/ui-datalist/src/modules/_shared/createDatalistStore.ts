@@ -54,7 +54,6 @@ export const makeThisToRefs = <T>(
 
 export function applyPatch<T extends object>(
   store: T,
-  // patch: Partial<T> | ((state: T) => void),
   patch: Patch,
   storeType: DatalistStoreProviderType,
 ) {
