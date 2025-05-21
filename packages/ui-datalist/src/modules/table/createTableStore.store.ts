@@ -18,7 +18,9 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 ) => {
   const { apiModule, headers, disablePersistence, storeType } = config;
   const usePaginationStore = createTablePaginationStore(namespace, config);
-  const useHeadersStore = createTableHeadersStore(namespace, { headers });
+  const useHeadersStore = createTableHeadersStore(namespace, config, {
+    headers,
+  });
   const useFiltersStore = createTableFiltersStore(namespace);
 
   return defineStore(namespace, (): TableStore<Entity> => {
@@ -38,7 +40,9 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
     } = paginationStore;
 
     const headersStore = useHeadersStore();
-    const { headers, shownHeaders, fields, sort } = storeToRefs(headersStore);
+    const { headers, shownHeaders, fields, sort } = makeThisToRefs<
+      typeof headersStore
+    >(headersStore, storeType);
     const {
       updateSort,
       updateShownHeaders,
