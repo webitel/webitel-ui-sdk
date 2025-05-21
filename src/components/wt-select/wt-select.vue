@@ -149,12 +149,12 @@
         v-if="showIntersectionObserver"
         #afterList
       >
-<!--        @author @Lera24-->
-<!--        [WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818)-->
-<!--        When changing the page scale, vue-observe-visibility works unstable and does not see the changes. -->
-<!--        The minimum height ensures additional data loading if the search method is used-->
+        <!--        @author @Lera24-->
+        <!--        [WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818)-->
+        <!--        When changing the page scale, vue-observe-visibility works unstable and does not see the changes. -->
+        <!--        The minimum height ensures additional data loading if the search method is used-->
 
-        <div v-observe-visibility="handleAfterListIntersect" style="height: 1px"/>
+        <div v-observe-visibility="handleAfterListIntersect" style="height: 1px" />
       </template>
     </vue-multiselect>
     <wt-input-info
@@ -224,6 +224,7 @@ export default {
   ],
   data: () => ({
     isOpened: false,
+    items: [],
   }),
   computed: {
     // for taggableMixin
@@ -268,6 +269,10 @@ export default {
     async handleCustomValue(value) {
       // https://webitel.atlassian.net/browse/WTEL-3181
       this.tag(value);
+    },
+    async search(event) {
+      console.log('event.query', event.query);
+      this.items = [...this.optionsWithCustomValues];
     },
     // for taggableMixin functionality
     async handleCustomValueArrowInput(toggle) {

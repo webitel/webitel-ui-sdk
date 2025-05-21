@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 
+import wtSelectV2 from '../../../../../../src/components/wt-select/wt-select-v2.vue';
+
 const options = [
   { name: 'Vue.js1', language: 'JavaScript' },
   { name: 'Adonis2', language: 'JavaScript' },
@@ -28,7 +30,20 @@ const empty = ref('');
     track-by="name"
     @input="value = $event"
   />
+  <wt-select-v2
+    :value="value"
+    :options="options"
+    label="Select"
+    track-by="name"
+    @input="value = $event"
+  />
   <wt-select
+    :value="empty"
+    :options="options"
+    label="Select"
+    track-by="name"
+  />
+  <wt-select-v2
     :value="empty"
     :options="options"
     label="Select"
