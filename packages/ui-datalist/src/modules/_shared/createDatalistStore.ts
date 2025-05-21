@@ -14,91 +14,98 @@ import {
 } from 'vue';
 
 import {
+  CreateDatalistStoreParams,
+  ExtractedRefs,
+  Identifiable,
+  Patch,
+  PatchableStore,
+  PatchableStoreFactory,
+  StoreInstance,
+} from '../types/createDatalistStore.types';
+import {
   DatalistStoreProvider,
   DatalistStoreProviderType,
 } from '../types/StoreProvider';
-import { useTableStoreConfig } from '../types/tableStore.types';
 
-type Patch = object | Ref;
+const defaultStoreType = DatalistStoreProvider.Pinia;
 
-type Identifiable = { id: string; etag?: string };
-
-type StoreConfig<T extends Identifiable> = useTableStoreConfig<T> & {
-  storeType?: DatalistStoreProviderType;
-};
-
-type StoreBody<T, G extends Identifiable> = (
-  namespace: string,
-  config: StoreConfig<G>,
-) => T;
-
-interface CreateDatalistStoreParams<T, G extends Identifiable> {
-  namespace: string;
-  config: StoreConfig<G>;
-  storeBody: StoreBody<T, G>;
-}
-
-type PatchableStore<T> = T & {
-  patch: (val: Patch) => void;
-};
-type PatchableStoreFactory<T> = () => PatchableStore<T>;
-
-const defaultStoreType = DatalistStoreProvider.Composable;
-
-export const makeThisToRefs = <T>(
-  store: T,
+/**
+ * makeThisToRefs converts a store object into a set of reactive references (toRefs),
+ * using Pinia's storeToRefs if it's a Pinia store, or Vue's toRefs for composable stores.
+ * */
+export const makeThisToRefs = <StoreBody>(
+  store: StoreBody,
   storeType: DatalistStoreProviderType,
-): T extends StoreGeneric ? typeof piniaStoreToRefs<T> : ToRefs<T> => {
+): ExtractedRefs<StoreBody> | ToRefs<StoreBody> => {
   const thisStoreType = storeType || defaultStoreType;
 
   if (thisStoreType === DatalistStoreProvider.Pinia) {
-    return piniaStoreToRefs(store as StoreGeneric);
+    return piniaStoreToRefs(store as StoreGeneric) as ExtractedRefs<StoreBody>;
   }
-  return composableStoreToRefs(store as object);
+
+  return composableStoreToRefs(store as object) as ToRefs<StoreBody>;
 };
 
-export function applyPatch<T extends object>(
-  store: T,
+/**
+ * applyStorePatch is used to apply a substitute for pinia's $patch method and use it in both situations.
+ * */
+export function applyStorePatch<StoreBody extends StoreInstance>(
+  store: StoreBody | Store,
   patch: Patch,
   storeType: DatalistStoreProviderType,
 ) {
   if (storeType === DatalistStoreProvider.Pinia) {
     (store as Store).$patch?.(patch);
-  } else {
-    for (const key in patch) {
-      const value = patch[key];
-      const target = store[key];
+    return;
+  }
 
-      if (isRef(target)) {
-        target.value = isRef(value) ? unref(value) : value;
-      } else {
-        (store as T)[key] = isRef(value) ? value : ref(value);
-      }
+  for (const key of Object.keys(patch)) {
+    const value = patch[key];
+    const target = store[key];
+
+    if (isRef(target)) {
+      (target as Ref<unknown>).value = isRef(value) ? unref(value) : value;
+    } else {
+      (store as Record<string, unknown>)[key] = isRef(value)
+        ? value
+        : ref(value);
     }
   }
 }
 
-export const createDatalistStore = <T, G extends Identifiable>({
+export const createDatalistStore = <
+  StoreBody extends StoreInstance,
+  G extends Identifiable,
+>({
   config,
   namespace,
   storeBody,
-}: CreateDatalistStoreParams<T, G>): PatchableStoreFactory<T> => {
+}: CreateDatalistStoreParams<
+  StoreBody,
+  G
+>): PatchableStoreFactory<StoreBody> => {
   const thisStoreType = config.storeType || defaultStoreType;
 
   const storeFactory = storeBody(namespace, {
     ...config,
     storeType: thisStoreType,
-  }) as PatchableStore<T>;
-
-  storeFactory.patch = (val: Patch) =>
-    applyPatch(storeFactory, val, thisStoreType);
+  }) as PatchableStore<StoreBody>;
 
   if (thisStoreType === DatalistStoreProvider.Composable) {
+    storeFactory.storePatch = (val: Patch) =>
+      applyStorePatch(storeFactory, val, thisStoreType);
     return () => storeFactory;
   }
 
   if (thisStoreType === DatalistStoreProvider.Pinia) {
-    return definePiniaStore(namespace, () => storeFactory);
+    const piniaStore = definePiniaStore(namespace, () => storeFactory);
+
+    return () => {
+      const instance = piniaStore() as PatchableStore<StoreBody>;
+      instance.storePatch = (val: Patch) =>
+        applyStorePatch(instance, val, thisStoreType);
+      return instance;
+    };
   }
 
   throw new Error(`Unsupported store type: ${thisStoreType}`);

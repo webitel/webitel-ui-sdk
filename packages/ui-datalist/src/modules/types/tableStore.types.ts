@@ -1,4 +1,4 @@
-import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type.ts';
+import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import type { Ref } from 'vue';
 
 import { IFiltersManager } from '../filters';

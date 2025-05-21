@@ -2,7 +2,7 @@ import set from 'lodash/fp/set';
 import { defineStore, storeToRefs } from 'pinia';
 import { type Ref, ref, watch } from 'vue';
 
-import { applyPatch, makeThisToRefs } from '../_shared/createDatalistStore';
+import { makeThisToRefs } from '../_shared/createDatalistStore';
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
@@ -33,7 +33,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       updatePage,
       updateSize,
       // $reset: $resetPaginationStore,
-      patch: paginationPatch,
+      storePatch: paginationPatch,
       setupPersistence: setupPaginationPersistence,
     } = paginationStore;
 
