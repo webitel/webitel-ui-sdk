@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { CasesCaseLink, CasesCaseLinkList } from '.././_models';
+export declare const getListLinksResponseMock: (overrideResponse?: Partial<CasesCaseLinkList>) => CasesCaseLinkList;
+export declare const getCreateLinkResponseMock: (overrideResponse?: Partial<CasesCaseLink>) => CasesCaseLink;
+export declare const getDeleteLinkResponseMock: (overrideResponse?: Partial<CasesCaseLink>) => CasesCaseLink;
+export declare const getLocateLinkResponseMock: (overrideResponse?: Partial<CasesCaseLink>) => CasesCaseLink;
+export declare const getUpdateLink2ResponseMock: (overrideResponse?: Partial<CasesCaseLink>) => CasesCaseLink;
+export declare const getUpdateLinkResponseMock: (overrideResponse?: Partial<CasesCaseLink>) => CasesCaseLink;
+export declare const getListLinksMockHandler: (overrideResponse?: CasesCaseLinkList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesCaseLinkList> | CasesCaseLinkList)) => import("msw").HttpHandler;
+export declare const getCreateLinkMockHandler: (overrideResponse?: CasesCaseLink | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<CasesCaseLink> | CasesCaseLink)) => import("msw").HttpHandler;
+export declare const getDeleteLinkMockHandler: (overrideResponse?: CasesCaseLink | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesCaseLink> | CasesCaseLink)) => import("msw").HttpHandler;
+export declare const getLocateLinkMockHandler: (overrideResponse?: CasesCaseLink | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesCaseLink> | CasesCaseLink)) => import("msw").HttpHandler;
+export declare const getUpdateLink2MockHandler: (overrideResponse?: CasesCaseLink | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<CasesCaseLink> | CasesCaseLink)) => import("msw").HttpHandler;
+export declare const getUpdateLinkMockHandler: (overrideResponse?: CasesCaseLink | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<CasesCaseLink> | CasesCaseLink)) => import("msw").HttpHandler;
+export declare const getCaseLinksMock: () => import("msw").HttpHandler[];

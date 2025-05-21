@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { CasesLocateSLAResponse, CasesSLA, CasesSLAList } from '.././_models';
+export declare const getListSLAsResponseMock: (overrideResponse?: Partial<CasesSLAList>) => CasesSLAList;
+export declare const getCreateSLAResponseMock: (overrideResponse?: Partial<CasesSLA>) => CasesSLA;
+export declare const getDeleteSLAResponseMock: (overrideResponse?: Partial<CasesSLA>) => CasesSLA;
+export declare const getLocateSLAResponseMock: (overrideResponse?: Partial<CasesLocateSLAResponse>) => CasesLocateSLAResponse;
+export declare const getUpdateSLA2ResponseMock: (overrideResponse?: Partial<CasesSLA>) => CasesSLA;
+export declare const getUpdateSLAResponseMock: (overrideResponse?: Partial<CasesSLA>) => CasesSLA;
+export declare const getListSLAsMockHandler: (overrideResponse?: CasesSLAList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesSLAList> | CasesSLAList)) => import("msw").HttpHandler;
+export declare const getCreateSLAMockHandler: (overrideResponse?: CasesSLA | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<CasesSLA> | CasesSLA)) => import("msw").HttpHandler;
+export declare const getDeleteSLAMockHandler: (overrideResponse?: CasesSLA | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesSLA> | CasesSLA)) => import("msw").HttpHandler;
+export declare const getLocateSLAMockHandler: (overrideResponse?: CasesLocateSLAResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesLocateSLAResponse> | CasesLocateSLAResponse)) => import("msw").HttpHandler;
+export declare const getUpdateSLA2MockHandler: (overrideResponse?: CasesSLA | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<CasesSLA> | CasesSLA)) => import("msw").HttpHandler;
+export declare const getUpdateSLAMockHandler: (overrideResponse?: CasesSLA | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<CasesSLA> | CasesSLA)) => import("msw").HttpHandler;
+export declare const getSlasMock: () => import("msw").HttpHandler[];

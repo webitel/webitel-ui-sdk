@@ -12,24 +12,25 @@
 
 <script lang="ts" setup>
 import { WtSearchBar } from '@webitel/ui-sdk/components';
-import {computed, type Ref, ref,watch} from 'vue';
+import { computed, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {FilterInitParams, FilterName} from "../../classes/Filter";
-import {IFiltersManager} from "../../classes/FiltersManager";
+import { FilterInitParams, FilterName } from '../../classes/Filter';
+import { IFiltersManager } from '../../classes/FiltersManager';
 import type { DynamicFilterSearchSearchModeOption } from './types/DynamicFilterSearch';
-
-/**
- * @description
- * default search name is used when there are no search modes
- */
-const defaultSearchName = 'search';
 
 const props = defineProps<{
   filtersManager: IFiltersManager;
   searchModeOptions?: DynamicFilterSearchSearchModeOption[];
   isFiltersRestoring?: boolean;
+  /**
+   * @description
+   * default search name is used when there are no search modes
+   */
+  singleSearchName?: string;
 }>();
+
+const defaultSearchName = props.singleSearchName || 'search';
 
 const emit = defineEmits<{
   'filter:add': [FilterInitParams];
@@ -85,7 +86,9 @@ const handleSearch = (value = localSearchValue.value) => {
   }
 };
 
-const updateSearchMode = (nextSearchMode: DynamicFilterSearchSearchModeOption) => {
+const updateSearchMode = (
+  nextSearchMode: DynamicFilterSearchSearchModeOption,
+) => {
   if (hasFilter(currentSearchName.value)) {
     deleteFilter({
       name: currentSearchName.value,
@@ -99,7 +102,8 @@ const updateSearchMode = (nextSearchMode: DynamicFilterSearchSearchModeOption) =
  * @description
  * Restoring search value after filters were restored
  */
-watch(() => props.isFiltersRestoring,
+watch(
+  () => props.isFiltersRestoring,
   (next) => {
     if (next) return;
 

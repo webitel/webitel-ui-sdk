@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { CasesLocateServiceResponse, CasesService, CasesServiceList } from '.././_models';
+export declare const getListServicesResponseMock: (overrideResponse?: Partial<CasesServiceList>) => CasesServiceList;
+export declare const getCreateServiceResponseMock: (overrideResponse?: Partial<CasesService>) => CasesService;
+export declare const getDeleteServiceResponseMock: (overrideResponse?: Partial<CasesServiceList>) => CasesServiceList;
+export declare const getLocateServiceResponseMock: (overrideResponse?: Partial<CasesLocateServiceResponse>) => CasesLocateServiceResponse;
+export declare const getUpdateService2ResponseMock: (overrideResponse?: Partial<CasesService>) => CasesService;
+export declare const getUpdateServiceResponseMock: (overrideResponse?: Partial<CasesService>) => CasesService;
+export declare const getListServicesMockHandler: (overrideResponse?: CasesServiceList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesServiceList> | CasesServiceList)) => import("msw").HttpHandler;
+export declare const getCreateServiceMockHandler: (overrideResponse?: CasesService | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<CasesService> | CasesService)) => import("msw").HttpHandler;
+export declare const getDeleteServiceMockHandler: (overrideResponse?: CasesServiceList | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesServiceList> | CasesServiceList)) => import("msw").HttpHandler;
+export declare const getLocateServiceMockHandler: (overrideResponse?: CasesLocateServiceResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesLocateServiceResponse> | CasesLocateServiceResponse)) => import("msw").HttpHandler;
+export declare const getUpdateService2MockHandler: (overrideResponse?: CasesService | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<CasesService> | CasesService)) => import("msw").HttpHandler;
+export declare const getUpdateServiceMockHandler: (overrideResponse?: CasesService | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<CasesService> | CasesService)) => import("msw").HttpHandler;
+export declare const getServicesMock: () => import("msw").HttpHandler[];
