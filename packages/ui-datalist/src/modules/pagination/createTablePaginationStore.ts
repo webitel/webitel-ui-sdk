@@ -4,7 +4,7 @@ import { createDatalistStore } from '../_shared/createDatalistStore';
 import { usePersistedStorage } from '../persist/usePersistedStorage';
 import { useTableStoreConfig } from '../types/tableStore.types';
 
-export const tablePaginationBody = () => {
+export const tablePaginationStoreBody = () => {
   const page = ref(1);
   const size = ref(10);
   const next = ref(false);
@@ -66,7 +66,7 @@ export const createTablePaginationStore = <Entity>(
 ) => {
   const id = `${namespace}/pagination`;
   return createDatalistStore({
-    storeBody: tablePaginationBody,
+    storeBody: tablePaginationStoreBody,
     namespace: id,
     config,
   });

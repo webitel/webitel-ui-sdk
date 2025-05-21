@@ -4,18 +4,10 @@ import {
   StoreGeneric,
   storeToRefs as piniaStoreToRefs,
 } from 'pinia';
-import {
-  isRef,
-  Ref,
-  ref,
-  ToRefs,
-  toRefs as composableStoreToRefs,
-  unref,
-} from 'vue';
+import { isRef, Ref, ref, toRefs as composableStoreToRefs, unref } from 'vue';
 
 import {
   CreateDatalistStoreParams,
-  ExtractedRefs,
   Identifiable,
   Patch,
   PatchableStore,
@@ -33,27 +25,29 @@ const defaultStoreType = DatalistStoreProvider.Pinia;
  * makeThisToRefs converts a store object into a set of reactive references (toRefs),
  * using Pinia's storeToRefs if it's a Pinia store, or Vue's toRefs for composable stores.
  * */
-export const makeThisToRefs = <StoreBody>(
+export const makeThisToRefs = <StoreBody extends object>(
   store: StoreBody,
   storeType: DatalistStoreProviderType,
-): ExtractedRefs<StoreBody> | ToRefs<StoreBody> => {
+): StoreBody => {
   const thisStoreType = storeType || defaultStoreType;
 
   if (thisStoreType === DatalistStoreProvider.Pinia) {
-    return piniaStoreToRefs(store as StoreGeneric) as ExtractedRefs<StoreBody>;
+    return piniaStoreToRefs(store as StoreGeneric) as StoreBody;
   }
 
-  return composableStoreToRefs(store as object) as ToRefs<StoreBody>;
+  return composableStoreToRefs(store) as StoreBody;
 };
 
 /**
- * applyStorePatch is used to apply a substitute for pinia's $patch method and use it in both situations.
+ * in some situations when we used pinia's store, we used $patch method, to set changes for store data.
+ * but in composable store we don't have this method.
+ * So, applyStorePatch is used to apply a replacement for the $patch method in pinia and use it in both situations.
  * */
-export function applyStorePatch<StoreBody extends StoreInstance>(
+const applyStorePatch = <StoreBody extends StoreInstance>(
   store: StoreBody | Store,
   patch: Patch,
   storeType: DatalistStoreProviderType,
-) {
+) => {
   if (storeType === DatalistStoreProvider.Pinia) {
     (store as Store).$patch?.(patch);
     return;
@@ -71,7 +65,7 @@ export function applyStorePatch<StoreBody extends StoreInstance>(
         : ref(value);
     }
   }
-}
+};
 
 export const createDatalistStore = <
   StoreBody extends StoreInstance,
