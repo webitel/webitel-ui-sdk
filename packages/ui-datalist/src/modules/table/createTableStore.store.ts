@@ -33,6 +33,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       updatePage,
       updateSize,
       // $reset: $resetPaginationStore,
+      patch: paginationPatch,
       setupPersistence: setupPaginationPersistence,
     } = paginationStore;
 
@@ -66,7 +67,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
     const loadDataList = async () => {
       isLoading.value = true;
-      applyPatch(paginationStore, { next: false }, storeType);
+      paginationPatch({ next: false });
 
       const params = {
         ...filtersManager.value.getAllValues(),
@@ -82,7 +83,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
         dataList.value = items;
         updateSelected([]);
-        applyPatch(paginationStore, { next }, storeType);
+        paginationPatch({ next });
       } catch (err) {
         error.value = err;
         throw err;

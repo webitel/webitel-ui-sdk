@@ -38,6 +38,11 @@ interface CreateDatalistStoreParams<T, G extends Identifiable> {
   storeBody: StoreBody<T, G>;
 }
 
+type PatchableStore<T> = T & {
+  patch: (val: Patch) => void;
+};
+type PatchableStoreFactory<T> = () => PatchableStore<T>;
+
 const defaultStoreType = DatalistStoreProvider.Composable;
 
 export const makeThisToRefs = <T>(
@@ -77,13 +82,16 @@ export const createDatalistStore = <T, G extends Identifiable>({
   config,
   namespace,
   storeBody,
-}: CreateDatalistStoreParams<T, G>): (() => T) => {
+}: CreateDatalistStoreParams<T, G>): PatchableStoreFactory<T> => {
   const thisStoreType = config.storeType || defaultStoreType;
 
   const storeFactory = storeBody(namespace, {
     ...config,
     storeType: thisStoreType,
-  });
+  }) as PatchableStore<T>;
+
+  storeFactory.patch = (val: Patch) =>
+    applyPatch(storeFactory, val, thisStoreType);
 
   if (thisStoreType === DatalistStoreProvider.Composable) {
     return () => storeFactory;
