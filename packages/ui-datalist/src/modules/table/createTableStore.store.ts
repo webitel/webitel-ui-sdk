@@ -2,20 +2,22 @@ import set from 'lodash/fp/set';
 import { defineStore, storeToRefs } from 'pinia';
 import { type Ref, ref, watch } from 'vue';
 
-import { createTableFiltersStore } from '../filters/createTableFiltersStore.ts';
-import { createTableHeadersStore } from '../headers/createTableHeadersStore.ts';
-import { createTablePaginationStore } from '../pagination/createTablePaginationStore.ts';
+import { applyPatch, makeThisToRefs } from '../_shared/createDatalistStore';
+import { createTableFiltersStore } from '../filters/createTableFiltersStore';
+import { createTableHeadersStore } from '../headers/createTableHeadersStore';
+import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
 import {
   PatchItemPropertyParams,
   TableStore,
-  useTableStoreParams,
-} from '../types/tableStore.types.ts';
+  useTableStoreConfig,
+} from '../types/tableStore.types';
 
 export const createTableStore = <Entity extends { id: string; etag?: string }>(
   namespace: string,
-  { apiModule, headers, disablePersistence }: useTableStoreParams<Entity>,
+  config: useTableStoreConfig<Entity>,
 ) => {
-  const usePaginationStore = createTablePaginationStore(namespace);
+  const { apiModule, headers, disablePersistence, storeType } = config;
+  const usePaginationStore = createTablePaginationStore(namespace, config);
   const useHeadersStore = createTableHeadersStore(namespace, { headers });
   const useFiltersStore = createTableFiltersStore(namespace);
 
@@ -23,12 +25,14 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
     const parentId = ref();
 
     const paginationStore = usePaginationStore();
-    const { page, size, next } = storeToRefs(paginationStore);
+    const { page, size, next } = makeThisToRefs<typeof paginationStore>(
+      paginationStore,
+      storeType,
+    );
     const {
       updatePage,
       updateSize,
       // $reset: $resetPaginationStore,
-      $patch: $patchPaginationStore,
       setupPersistence: setupPaginationPersistence,
     } = paginationStore;
 
@@ -62,7 +66,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
     const loadDataList = async () => {
       isLoading.value = true;
-      $patchPaginationStore({ next: false });
+      applyPatch(paginationStore, { next: false }, storeType);
 
       const params = {
         ...filtersManager.value.getAllValues(),
@@ -78,7 +82,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
         dataList.value = items;
         updateSelected([]);
-        $patchPaginationStore({ next });
+        applyPatch(paginationStore, { next }, storeType);
       } catch (err) {
         error.value = err;
         throw err;

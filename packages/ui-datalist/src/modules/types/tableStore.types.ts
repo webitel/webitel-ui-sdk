@@ -2,11 +2,13 @@ import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type.ts';
 import type { Ref } from 'vue';
 
 import { IFiltersManager } from '../filters';
+import { DatalistStoreProviderType } from './StoreProvider';
 
-export interface useTableStoreParams<Entity> {
+export interface useTableStoreConfig<Entity> {
   apiModule: ApiModule<Entity>;
   headers: [];
   disablePersistence?: boolean | [];
+  storeType?: DatalistStoreProviderType;
   // etagMode: boolean;
 }
 
