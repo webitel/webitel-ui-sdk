@@ -1,24 +1,24 @@
 [@webitel/api-services](../index.html) / [case-timeline/case-timeline.api.gen](../modules/case-timeline_case-timeline.api.gen.html) / getCaseTimeline
 
-# Function: getCaseTimeline()
+# kind_function: getCaseTimeline()
 
-> **getCaseTimeline**(): `object`
+> **getCaseTimeline**(): `{ getTimeline: (caseId: string, params?: GetTimelineParams, options?: AxiosRequestConfig) => Promise<TData>; getTimelineCounter: (caseId: string, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
-`object`
+`{ getTimeline: (caseId: string, params?: GetTimelineParams, options?: AxiosRequestConfig) => Promise<TData>; getTimelineCounter: (caseId: string, options?: AxiosRequestConfig) => Promise<TData> }`
 
 ### getTimeline()
 
-> **getTimeline**: \<`TData`\>(`caseId`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **getTimeline**: `(caseId: string, params?: GetTimelineParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesGetTimelineResponse`](../interfaces/_models.CasesGetTimelineResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesGetTimelineResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseId
 
@@ -26,27 +26,27 @@
 
 ##### params?
 
-[`GetTimelineParams`](../types/_models.GetTimelineParams.html)
+`GetTimelineParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### getTimelineCounter()
 
-> **getTimelineCounter**: \<`TData`\>(`caseId`, `options?`) => `Promise`\<`TData`\>
+> **getTimelineCounter**: `(caseId: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesGetTimelineCounterResponse`](../interfaces/_models.CasesGetTimelineCounterResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesGetTimelineCounterResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseId
 
@@ -56,6 +56,6 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

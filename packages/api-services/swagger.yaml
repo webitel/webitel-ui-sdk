@@ -6115,12 +6115,8 @@ components:
           title: Unique identifier of the source
           type: string
         name:
-          default: '1'
-          description: progressive_count desc
-          example: 100
-          maximum: 100
-          minimum: 1
-          title: progressive_count title
+          description: Case Source description goes here
+          title: Case Source name goes here
           type: string
         type:
           $ref: '#/components/schemas/casesSourceType'
@@ -6132,6 +6128,8 @@ components:
         updated_by:
           $ref: '#/components/schemas/generalLookup'
           title: UpdatedBy user of the source
+      required:
+        - 'true'
       type: object
     casesSourceList:
       description: A list of sources.

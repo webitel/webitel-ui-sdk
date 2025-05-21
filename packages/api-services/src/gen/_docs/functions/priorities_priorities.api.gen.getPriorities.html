@@ -1,50 +1,50 @@
 [@webitel/api-services](../index.html) / [priorities/priorities.api.gen](../modules/priorities_priorities.api.gen.html) / getPriorities
 
-# Function: getPriorities()
+# kind_function: getPriorities()
 
-> **getPriorities**(): `object`
+> **getPriorities**(): `{ createPriority: (casesInputPriorityBody: CasesInputPriority, params?: CreatePriorityParams, options?: AxiosRequestConfig) => Promise<TData>; deletePriority: (id: string, options?: AxiosRequestConfig) => Promise<TData>; listPriorities: (params?: ListPrioritiesParams, options?: AxiosRequestConfig) => Promise<TData>; locatePriority: (id: string, params?: LocatePriorityParams, options?: AxiosRequestConfig) => Promise<TData>; updatePriority: (id: string, casesInputPriority: CasesInputPriority, params?: UpdatePriorityParams, options?: AxiosRequestConfig) => Promise<TData>; updatePriority2: (id: string, casesInputPriority: CasesInputPriority, params?: UpdatePriority2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createPriority()
 
-> **createPriority**: \<`TData`\>(`casesInputPriorityBody`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createPriority**: `(casesInputPriorityBody: CasesInputPriority, params?: CreatePriorityParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesPriority`](../interfaces/_models.CasesPriority.html), `any`\>
+`TData` = `AxiosResponse<CasesPriority, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### casesInputPriorityBody
 
-[`CasesInputPriority`](../interfaces/_models.CasesInputPriority.html)
+`CasesInputPriority`
 
 ##### params?
 
-[`CreatePriorityParams`](../types/_models.CreatePriorityParams.html)
+`CreatePriorityParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deletePriority()
 
-> **deletePriority**: \<`TData`\>(`id`, `options?`) => `Promise`\<`TData`\>
+> **deletePriority**: `(id: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesPriority`](../interfaces/_models.CasesPriority.html), `any`\>
+`TData` = `AxiosResponse<CasesPriority, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -54,45 +54,45 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listPriorities()
 
-> **listPriorities**: \<`TData`\>(`params?`, `options?`) => `Promise`\<`TData`\>
+> **listPriorities**: `(params?: ListPrioritiesParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesPriorityList`](../interfaces/_models.CasesPriorityList.html), `any`\>
+`TData` = `AxiosResponse<CasesPriorityList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### params?
 
-[`ListPrioritiesParams`](../types/_models.ListPrioritiesParams.html)
+`ListPrioritiesParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locatePriority()
 
-> **locatePriority**: \<`TData`\>(`id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locatePriority**: `(id: string, params?: LocatePriorityParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocatePriorityResponse`](../interfaces/_models.CasesLocatePriorityResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocatePriorityResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -100,27 +100,27 @@
 
 ##### params?
 
-[`LocatePriorityParams`](../types/_models.LocatePriorityParams.html)
+`LocatePriorityParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updatePriority()
 
-> **updatePriority**: \<`TData`\>(`id`, `casesInputPriority`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updatePriority**: `(id: string, casesInputPriority: CasesInputPriority, params?: UpdatePriorityParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesPriority`](../interfaces/_models.CasesPriority.html), `any`\>
+`TData` = `AxiosResponse<CasesPriority, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -128,31 +128,31 @@
 
 ##### casesInputPriority
 
-[`CasesInputPriority`](../interfaces/_models.CasesInputPriority.html)
+`CasesInputPriority`
 
 ##### params?
 
-[`UpdatePriorityParams`](../types/_models.UpdatePriorityParams.html)
+`UpdatePriorityParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updatePriority2()
 
-> **updatePriority2**: \<`TData`\>(`id`, `casesInputPriority`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updatePriority2**: `(id: string, casesInputPriority: CasesInputPriority, params?: UpdatePriority2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesPriority`](../interfaces/_models.CasesPriority.html), `any`\>
+`TData` = `AxiosResponse<CasesPriority, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -160,16 +160,16 @@
 
 ##### casesInputPriority
 
-[`CasesInputPriority`](../interfaces/_models.CasesInputPriority.html)
+`CasesInputPriority`
 
 ##### params?
 
-[`UpdatePriority2Params`](../types/_models.UpdatePriority2Params.html)
+`UpdatePriority2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

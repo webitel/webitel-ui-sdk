@@ -1,22 +1,22 @@
 [@webitel/api-services](../index.html) / [slaconditions/slaconditions.api.gen](../modules/slaconditions_slaconditions.api.gen.html) / getSlaconditions
 
-# Function: getSlaconditions()
+# kind_function: getSlaconditions()
 
-> **getSlaconditions**(): `object`
+> **getSlaconditions**(): `{ createSLACondition: (slaId: string, casesInputSLACondition: CasesInputSLACondition, params?: CreateSLAConditionParams, options?: AxiosRequestConfig) => Promise<TData>; deleteSLACondition: (slaId: string, id: string, options?: AxiosRequestConfig) => Promise<TData>; listSLAConditions: (slaId: string, params?: ListSLAConditionsParams, options?: AxiosRequestConfig) => Promise<TData>; locateSLACondition: (slaId: string, id: string, params?: LocateSLAConditionParams, options?: AxiosRequestConfig) => Promise<TData>; updateSLACondition: (slaId: string, id: string, casesInputSLACondition: CasesInputSLACondition, params?: UpdateSLAConditionParams, options?: AxiosRequestConfig) => Promise<TData>; updateSLACondition2: (slaId: string, id: string, casesInputSLACondition: CasesInputSLACondition, params?: UpdateSLACondition2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createSLACondition()
 
-> **createSLACondition**: \<`TData`\>(`slaId`, `casesInputSLACondition`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createSLACondition**: `(slaId: string, casesInputSLACondition: CasesInputSLACondition, params?: CreateSLAConditionParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSLACondition`](../interfaces/_models.CasesSLACondition.html), `any`\>
+`TData` = `AxiosResponse<CasesSLACondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### slaId
 
@@ -24,31 +24,31 @@
 
 ##### casesInputSLACondition
 
-[`CasesInputSLACondition`](../interfaces/_models.CasesInputSLACondition.html)
+`CasesInputSLACondition`
 
 ##### params?
 
-[`CreateSLAConditionParams`](../types/_models.CreateSLAConditionParams.html)
+`CreateSLAConditionParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteSLACondition()
 
-> **deleteSLACondition**: \<`TData`\>(`slaId`, `id`, `options?`) => `Promise`\<`TData`\>
+> **deleteSLACondition**: `(slaId: string, id: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSLACondition`](../interfaces/_models.CasesSLACondition.html), `any`\>
+`TData` = `AxiosResponse<CasesSLACondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### slaId
 
@@ -62,21 +62,21 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listSLAConditions()
 
-> **listSLAConditions**: \<`TData`\>(`slaId`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **listSLAConditions**: `(slaId: string, params?: ListSLAConditionsParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSLAConditionList`](../interfaces/_models.CasesSLAConditionList.html), `any`\>
+`TData` = `AxiosResponse<CasesSLAConditionList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### slaId
 
@@ -84,27 +84,27 @@
 
 ##### params?
 
-[`ListSLAConditionsParams`](../types/_models.ListSLAConditionsParams.html)
+`ListSLAConditionsParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateSLACondition()
 
-> **locateSLACondition**: \<`TData`\>(`slaId`, `id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateSLACondition**: `(slaId: string, id: string, params?: LocateSLAConditionParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocateSLAConditionResponse`](../interfaces/_models.CasesLocateSLAConditionResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocateSLAConditionResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### slaId
 
@@ -116,27 +116,27 @@
 
 ##### params?
 
-[`LocateSLAConditionParams`](../types/_models.LocateSLAConditionParams.html)
+`LocateSLAConditionParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateSLACondition()
 
-> **updateSLACondition**: \<`TData`\>(`slaId`, `id`, `casesInputSLACondition`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateSLACondition**: `(slaId: string, id: string, casesInputSLACondition: CasesInputSLACondition, params?: UpdateSLAConditionParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSLACondition`](../interfaces/_models.CasesSLACondition.html), `any`\>
+`TData` = `AxiosResponse<CasesSLACondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### slaId
 
@@ -148,31 +148,31 @@
 
 ##### casesInputSLACondition
 
-[`CasesInputSLACondition`](../interfaces/_models.CasesInputSLACondition.html)
+`CasesInputSLACondition`
 
 ##### params?
 
-[`UpdateSLAConditionParams`](../types/_models.UpdateSLAConditionParams.html)
+`UpdateSLAConditionParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateSLACondition2()
 
-> **updateSLACondition2**: \<`TData`\>(`slaId`, `id`, `casesInputSLACondition`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateSLACondition2**: `(slaId: string, id: string, casesInputSLACondition: CasesInputSLACondition, params?: UpdateSLACondition2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSLACondition`](../interfaces/_models.CasesSLACondition.html), `any`\>
+`TData` = `AxiosResponse<CasesSLACondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### slaId
 
@@ -184,16 +184,16 @@
 
 ##### casesInputSLACondition
 
-[`CasesInputSLACondition`](../interfaces/_models.CasesInputSLACondition.html)
+`CasesInputSLACondition`
 
 ##### params?
 
-[`UpdateSLACondition2Params`](../types/_models.UpdateSLACondition2Params.html)
+`UpdateSLACondition2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

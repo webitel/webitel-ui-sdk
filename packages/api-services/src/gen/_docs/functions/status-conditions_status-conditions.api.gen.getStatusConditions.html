@@ -1,22 +1,22 @@
 [@webitel/api-services](../index.html) / [status-conditions/status-conditions.api.gen](../modules/status-conditions_status-conditions.api.gen.html) / getStatusConditions
 
-# Function: getStatusConditions()
+# kind_function: getStatusConditions()
 
-> **getStatusConditions**(): `object`
+> **getStatusConditions**(): `{ createStatusCondition: (statusId: string, casesInputCreateStatusCondition: CasesInputCreateStatusCondition, params?: CreateStatusConditionParams, options?: AxiosRequestConfig) => Promise<TData>; deleteStatusCondition: (statusId: string, id: string, options?: AxiosRequestConfig) => Promise<TData>; listStatusConditions: (statusId: string, params?: ListStatusConditionsParams, options?: AxiosRequestConfig) => Promise<TData>; locateStatusCondition: (statusId: string, id: string, params?: LocateStatusConditionParams, options?: AxiosRequestConfig) => Promise<TData>; updateStatusCondition: (statusId: string, id: string, casesInputStatusCondition: CasesInputStatusCondition, params?: UpdateStatusConditionParams, options?: AxiosRequestConfig) => Promise<TData>; updateStatusCondition2: (statusId: string, id: string, casesInputStatusCondition: CasesInputStatusCondition, params?: UpdateStatusCondition2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createStatusCondition()
 
-> **createStatusCondition**: \<`TData`\>(`statusId`, `casesInputCreateStatusCondition`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createStatusCondition**: `(statusId: string, casesInputCreateStatusCondition: CasesInputCreateStatusCondition, params?: CreateStatusConditionParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesStatusCondition`](../interfaces/_models.CasesStatusCondition.html), `any`\>
+`TData` = `AxiosResponse<CasesStatusCondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### statusId
 
@@ -24,31 +24,31 @@
 
 ##### casesInputCreateStatusCondition
 
-[`CasesInputCreateStatusCondition`](../interfaces/_models.CasesInputCreateStatusCondition.html)
+`CasesInputCreateStatusCondition`
 
 ##### params?
 
-[`CreateStatusConditionParams`](../types/_models.CreateStatusConditionParams.html)
+`CreateStatusConditionParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteStatusCondition()
 
-> **deleteStatusCondition**: \<`TData`\>(`statusId`, `id`, `options?`) => `Promise`\<`TData`\>
+> **deleteStatusCondition**: `(statusId: string, id: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesStatusCondition`](../interfaces/_models.CasesStatusCondition.html), `any`\>
+`TData` = `AxiosResponse<CasesStatusCondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### statusId
 
@@ -62,21 +62,21 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listStatusConditions()
 
-> **listStatusConditions**: \<`TData`\>(`statusId`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **listStatusConditions**: `(statusId: string, params?: ListStatusConditionsParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesStatusConditionList`](../interfaces/_models.CasesStatusConditionList.html), `any`\>
+`TData` = `AxiosResponse<CasesStatusConditionList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### statusId
 
@@ -84,27 +84,27 @@
 
 ##### params?
 
-[`ListStatusConditionsParams`](../types/_models.ListStatusConditionsParams.html)
+`ListStatusConditionsParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateStatusCondition()
 
-> **locateStatusCondition**: \<`TData`\>(`statusId`, `id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateStatusCondition**: `(statusId: string, id: string, params?: LocateStatusConditionParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocateStatusConditionResponse`](../interfaces/_models.CasesLocateStatusConditionResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocateStatusConditionResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### statusId
 
@@ -116,27 +116,27 @@
 
 ##### params?
 
-[`LocateStatusConditionParams`](../types/_models.LocateStatusConditionParams.html)
+`LocateStatusConditionParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateStatusCondition()
 
-> **updateStatusCondition**: \<`TData`\>(`statusId`, `id`, `casesInputStatusCondition`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateStatusCondition**: `(statusId: string, id: string, casesInputStatusCondition: CasesInputStatusCondition, params?: UpdateStatusConditionParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesStatusCondition`](../interfaces/_models.CasesStatusCondition.html), `any`\>
+`TData` = `AxiosResponse<CasesStatusCondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### statusId
 
@@ -148,31 +148,31 @@
 
 ##### casesInputStatusCondition
 
-[`CasesInputStatusCondition`](../interfaces/_models.CasesInputStatusCondition.html)
+`CasesInputStatusCondition`
 
 ##### params?
 
-[`UpdateStatusConditionParams`](../types/_models.UpdateStatusConditionParams.html)
+`UpdateStatusConditionParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateStatusCondition2()
 
-> **updateStatusCondition2**: \<`TData`\>(`statusId`, `id`, `casesInputStatusCondition`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateStatusCondition2**: `(statusId: string, id: string, casesInputStatusCondition: CasesInputStatusCondition, params?: UpdateStatusCondition2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesStatusCondition`](../interfaces/_models.CasesStatusCondition.html), `any`\>
+`TData` = `AxiosResponse<CasesStatusCondition, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### statusId
 
@@ -184,16 +184,16 @@
 
 ##### casesInputStatusCondition
 
-[`CasesInputStatusCondition`](../interfaces/_models.CasesInputStatusCondition.html)
+`CasesInputStatusCondition`
 
 ##### params?
 
-[`UpdateStatusCondition2Params`](../types/_models.UpdateStatusCondition2Params.html)
+`UpdateStatusCondition2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

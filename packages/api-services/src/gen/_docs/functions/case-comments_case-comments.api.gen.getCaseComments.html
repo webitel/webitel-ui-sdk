@@ -1,22 +1,22 @@
 [@webitel/api-services](../index.html) / [case-comments/case-comments.api.gen](../modules/case-comments_case-comments.api.gen.html) / getCaseComments
 
-# Function: getCaseComments()
+# kind_function: getCaseComments()
 
-> **getCaseComments**(): `object`
+> **getCaseComments**(): `{ deleteComment: (etag: string, params?: DeleteCommentParams, options?: AxiosRequestConfig) => Promise<TData>; listComments: (caseEtag: string, params?: ListCommentsParams, options?: AxiosRequestConfig) => Promise<TData>; locateComment: (etag: string, params?: LocateCommentParams, options?: AxiosRequestConfig) => Promise<TData>; publishComment: (caseEtag: string, casesInputCaseComment: CasesInputCaseComment, params?: PublishCommentParams, options?: AxiosRequestConfig) => Promise<TData>; updateComment: (updateCommentBody: UpdateCommentBody, params?: UpdateCommentParams, options?: AxiosRequestConfig) => Promise<TData>; updateComment2: (updateComment2Body: UpdateComment2Body, params?: UpdateComment2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### deleteComment()
 
-> **deleteComment**: \<`TData`\>(`etag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **deleteComment**: `(etag: string, params?: DeleteCommentParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseComment`](../interfaces/_models.CasesCaseComment.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseComment, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### etag
 
@@ -24,27 +24,27 @@
 
 ##### params?
 
-[`DeleteCommentParams`](../types/_models.DeleteCommentParams.html)
+`DeleteCommentParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listComments()
 
-> **listComments**: \<`TData`\>(`caseEtag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **listComments**: `(caseEtag: string, params?: ListCommentsParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseCommentList`](../interfaces/_models.CasesCaseCommentList.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseCommentList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -52,27 +52,27 @@
 
 ##### params?
 
-[`ListCommentsParams`](../types/_models.ListCommentsParams.html)
+`ListCommentsParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateComment()
 
-> **locateComment**: \<`TData`\>(`etag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateComment**: `(etag: string, params?: LocateCommentParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseComment`](../interfaces/_models.CasesCaseComment.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseComment, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### etag
 
@@ -80,27 +80,27 @@
 
 ##### params?
 
-[`LocateCommentParams`](../types/_models.LocateCommentParams.html)
+`LocateCommentParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### publishComment()
 
-> **publishComment**: \<`TData`\>(`caseEtag`, `casesInputCaseComment`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **publishComment**: `(caseEtag: string, casesInputCaseComment: CasesInputCaseComment, params?: PublishCommentParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseComment`](../interfaces/_models.CasesCaseComment.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseComment, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -108,72 +108,72 @@
 
 ##### casesInputCaseComment
 
-[`CasesInputCaseComment`](../interfaces/_models.CasesInputCaseComment.html)
+`CasesInputCaseComment`
 
 ##### params?
 
-[`PublishCommentParams`](../types/_models.PublishCommentParams.html)
+`PublishCommentParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateComment()
 
-> **updateComment**: \<`TData`\>(`updateCommentBody`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateComment**: `(updateCommentBody: UpdateCommentBody, params?: UpdateCommentParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseComment`](../interfaces/_models.CasesCaseComment.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseComment, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### updateCommentBody
 
-[`UpdateCommentBody`](../types/_models.UpdateCommentBody.html)
+`UpdateCommentBody`
 
 ##### params?
 
-[`UpdateCommentParams`](../types/_models.UpdateCommentParams.html)
+`UpdateCommentParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateComment2()
 
-> **updateComment2**: \<`TData`\>(`updateComment2Body`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateComment2**: `(updateComment2Body: UpdateComment2Body, params?: UpdateComment2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseComment`](../interfaces/_models.CasesCaseComment.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseComment, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### updateComment2Body
 
-[`UpdateComment2Body`](../types/_models.UpdateComment2Body.html)
+`UpdateComment2Body`
 
 ##### params?
 
-[`UpdateComment2Params`](../types/_models.UpdateComment2Params.html)
+`UpdateComment2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

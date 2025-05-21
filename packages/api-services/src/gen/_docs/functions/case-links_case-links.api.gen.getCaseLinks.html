@@ -1,22 +1,22 @@
 [@webitel/api-services](../index.html) / [case-links/case-links.api.gen](../modules/case-links_case-links.api.gen.html) / getCaseLinks
 
-# Function: getCaseLinks()
+# kind_function: getCaseLinks()
 
-> **getCaseLinks**(): `object`
+> **getCaseLinks**(): `{ createLink: (caseEtag: string, params?: CreateLinkParams, options?: AxiosRequestConfig) => Promise<TData>; deleteLink: (caseEtag: string, etag: string, options?: AxiosRequestConfig) => Promise<TData>; listLinks: (caseEtag: string, params?: ListLinksParams, options?: AxiosRequestConfig) => Promise<TData>; locateLink: (caseEtag: string, etag: string, params?: LocateLinkParams, options?: AxiosRequestConfig) => Promise<TData>; updateLink: (caseEtag: string, updateLinkBody: UpdateLinkBody, params?: UpdateLinkParams, options?: AxiosRequestConfig) => Promise<TData>; updateLink2: (caseEtag: string, updateLink2Body: UpdateLink2Body, params?: UpdateLink2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createLink()
 
-> **createLink**: \<`TData`\>(`caseEtag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createLink**: `(caseEtag: string, params?: CreateLinkParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseLink`](../interfaces/_models.CasesCaseLink.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseLink, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -24,27 +24,27 @@
 
 ##### params?
 
-[`CreateLinkParams`](../types/_models.CreateLinkParams.html)
+`CreateLinkParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteLink()
 
-> **deleteLink**: \<`TData`\>(`caseEtag`, `etag`, `options?`) => `Promise`\<`TData`\>
+> **deleteLink**: `(caseEtag: string, etag: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseLink`](../interfaces/_models.CasesCaseLink.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseLink, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -58,21 +58,21 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listLinks()
 
-> **listLinks**: \<`TData`\>(`caseEtag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **listLinks**: `(caseEtag: string, params?: ListLinksParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseLinkList`](../interfaces/_models.CasesCaseLinkList.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseLinkList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -80,27 +80,27 @@
 
 ##### params?
 
-[`ListLinksParams`](../types/_models.ListLinksParams.html)
+`ListLinksParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateLink()
 
-> **locateLink**: \<`TData`\>(`caseEtag`, `etag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateLink**: `(caseEtag: string, etag: string, params?: LocateLinkParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseLink`](../interfaces/_models.CasesCaseLink.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseLink, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -112,27 +112,27 @@
 
 ##### params?
 
-[`LocateLinkParams`](../types/_models.LocateLinkParams.html)
+`LocateLinkParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateLink()
 
-> **updateLink**: \<`TData`\>(`caseEtag`, `updateLinkBody`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateLink**: `(caseEtag: string, updateLinkBody: UpdateLinkBody, params?: UpdateLinkParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseLink`](../interfaces/_models.CasesCaseLink.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseLink, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -140,31 +140,31 @@
 
 ##### updateLinkBody
 
-[`UpdateLinkBody`](../types/_models.UpdateLinkBody.html)
+`UpdateLinkBody`
 
 ##### params?
 
-[`UpdateLinkParams`](../types/_models.UpdateLinkParams.html)
+`UpdateLinkParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateLink2()
 
-> **updateLink2**: \<`TData`\>(`caseEtag`, `updateLink2Body`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateLink2**: `(caseEtag: string, updateLink2Body: UpdateLink2Body, params?: UpdateLink2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseLink`](../interfaces/_models.CasesCaseLink.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseLink, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -172,16 +172,16 @@
 
 ##### updateLink2Body
 
-[`UpdateLink2Body`](../types/_models.UpdateLink2Body.html)
+`UpdateLink2Body`
 
 ##### params?
 
-[`UpdateLink2Params`](../types/_models.UpdateLink2Params.html)
+`UpdateLink2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

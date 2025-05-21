@@ -1,6 +1,6 @@
 [@webitel/api-services](../index.html) / [\_models](../modules/_models.html) / CasesCase
 
-# Interface: CasesCase
+# kind_interface: CasesCase
 
 Message representing a case.
 
@@ -8,7 +8,7 @@ Message representing a case.
 
 ### assignee?
 
-> `optional` **assignee**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **assignee**: `GeneralLookup`
 
 Assignee responsible for resolving the case.
 
@@ -16,7 +16,7 @@ Assignee responsible for resolving the case.
 
 ### author?
 
-> `optional` **author**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **author**: `GeneralLookup`
 
 Author or reporter of the case.
 
@@ -24,7 +24,7 @@ Author or reporter of the case.
 
 ### close?
 
-> `optional` **close**: [`CasesCloseInfo`](../wiki/_models.CasesCloseInfo.html)
+> `optional` **close**: `CasesCloseInfo`
 
 Close information (if applicable).
 
@@ -32,7 +32,7 @@ Close information (if applicable).
 
 ### closeReasonGroup?
 
-> `optional` **closeReasonGroup**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **closeReasonGroup**: `GeneralLookup`
 
 Close reason group, immutable once set.
 
@@ -40,7 +40,7 @@ Close reason group, immutable once set.
 
 ### comments?
 
-> `optional` **comments**: [`CasesCaseCommentList`](../wiki/_models.CasesCaseCommentList.html)
+> `optional` **comments**: `CasesCaseCommentList`
 
 List of comments on the case.
 
@@ -64,7 +64,7 @@ Creation timestamp (in milliseconds since Unix epoch).
 
 ### createdBy?
 
-> `optional` **createdBy**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **createdBy**: `GeneralLookup`
 
 Creator of the case.
 
@@ -88,7 +88,7 @@ Unique etag identifier.
 
 ### files?
 
-> `optional` **files**: [`CasesCaseFileList`](../wiki/_models.CasesCaseFileList.html)
+> `optional` **files**: `CasesCaseFileList`
 
 List of attached files.
 
@@ -96,7 +96,7 @@ List of attached files.
 
 ### group?
 
-> `optional` **group**: [`GeneralExtendedLookup`](../wiki/_models.GeneralExtendedLookup.html)
+> `optional` **group**: `GeneralExtendedLookup`
 
 Group associated with the case.
 
@@ -112,7 +112,7 @@ Unique case ID.
 
 ### impacted?
 
-> `optional` **impacted**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **impacted**: `GeneralLookup`
 
 Impacted contact (defaults to reporter if null).
 
@@ -120,7 +120,7 @@ Impacted contact (defaults to reporter if null).
 
 ### links?
 
-> `optional` **links**: [`CasesCaseLinkList`](../wiki/_models.CasesCaseLinkList.html)
+> `optional` **links**: `CasesCaseLinkList`
 
 List of attached links.
 
@@ -152,7 +152,7 @@ Planned resolution time (in milliseconds).
 
 ### priority?
 
-> `optional` **priority**: [`CasesPriority`](../wiki/_models.CasesPriority.html)
+> `optional` **priority**: `CasesPriority`
 
 Priority level of the case.
 
@@ -160,7 +160,7 @@ Priority level of the case.
 
 ### rate?
 
-> `optional` **rate**: [`CasesRateInfo`](../wiki/_models.CasesRateInfo.html)
+> `optional` **rate**: `CasesRateInfo`
 
 Rating information.
 
@@ -168,7 +168,7 @@ Rating information.
 
 ### related?
 
-> `optional` **related**: [`CasesRelatedCaseList`](../wiki/_models.CasesRelatedCaseList.html)
+> `optional` **related**: `CasesRelatedCaseList`
 
 List of related cases.
 
@@ -176,7 +176,7 @@ List of related cases.
 
 ### reporter?
 
-> `optional` **reporter**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **reporter**: `GeneralLookup`
 
 Reporter of the issue (null if anonymous).
 
@@ -184,13 +184,13 @@ Reporter of the issue (null if anonymous).
 
 ### roleIds?
 
-> `optional` **roleIds**: `string`[]
+> `optional` **roleIds**: `string[]`
 
 ***
 
 ### service?
 
-> `optional` **service**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **service**: `GeneralLookup`
 
 Service associated with the case.
 
@@ -198,7 +198,7 @@ Service associated with the case.
 
 ### sla?
 
-> `optional` **sla**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **sla**: `GeneralLookup`
 
 SLA associated with the case.
 
@@ -206,7 +206,7 @@ SLA associated with the case.
 
 ### slaCondition?
 
-> `optional` **slaCondition**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **slaCondition**: `GeneralLookup`
 
 List of SLA conditions.
 
@@ -214,7 +214,7 @@ List of SLA conditions.
 
 ### source?
 
-> `optional` **source**: [`CasesSourceTypeLookup`](../wiki/_models.CasesSourceTypeLookup.html)
+> `optional` **source**: `CasesSourceTypeLookup`
 
 Source of the case.
 
@@ -222,7 +222,7 @@ Source of the case.
 
 ### status?
 
-> `optional` **status**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **status**: `GeneralLookup`
 
 Current status of the case.
 
@@ -230,7 +230,7 @@ Current status of the case.
 
 ### statusCondition?
 
-> `optional` **statusCondition**: [`CasesStatusCondition`](../wiki/_models.CasesStatusCondition.html)
+> `optional` **statusCondition**: `CasesStatusCondition`
 
 Status condition from status lookup.
 
@@ -246,7 +246,7 @@ Subject of the case.
 
 ### timing?
 
-> `optional` **timing**: [`CasesTimingInfo`](../wiki/_models.CasesTimingInfo.html)
+> `optional` **timing**: `CasesTimingInfo`
 
 SLA timing details.
 
@@ -262,7 +262,7 @@ Last update timestamp (in milliseconds since Unix epoch).
 
 ### updatedBy?
 
-> `optional` **updatedBy**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **updatedBy**: `GeneralLookup`
 
 Last updater of the case.
 

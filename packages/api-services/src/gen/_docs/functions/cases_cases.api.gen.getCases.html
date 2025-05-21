@@ -1,50 +1,50 @@
 [@webitel/api-services](../index.html) / [cases/cases.api.gen](../modules/cases_cases.api.gen.html) / getCases
 
-# Function: getCases()
+# kind_function: getCases()
 
-> **getCases**(): `object`
+> **getCases**(): `{ createCase: (casesInputCreateCase: CasesInputCreateCase, params?: CreateCaseParams, options?: AxiosRequestConfig) => Promise<TData>; deleteCase: (etag: string, params?: DeleteCaseParams, options?: AxiosRequestConfig) => Promise<TData>; locateCase: (etag: string, params?: LocateCaseParams, options?: AxiosRequestConfig) => Promise<TData>; searchCases: (params?: SearchCasesParams, options?: AxiosRequestConfig) => Promise<TData>; searchCases2: (contactId: string, params?: SearchCases2Params, options?: AxiosRequestConfig) => Promise<TData>; updateCase: (updateCaseBody: UpdateCaseBody, params?: UpdateCaseParams, options?: AxiosRequestConfig) => Promise<TData>; updateCase2: (updateCase2Body: UpdateCase2Body, params?: UpdateCase2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createCase()
 
-> **createCase**: \<`TData`\>(`casesInputCreateCase`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createCase**: `(casesInputCreateCase: CasesInputCreateCase, params?: CreateCaseParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCase`](../interfaces/_models.CasesCase.html), `any`\>
+`TData` = `AxiosResponse<CasesCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### casesInputCreateCase
 
-[`CasesInputCreateCase`](../interfaces/_models.CasesInputCreateCase.html)
+`CasesInputCreateCase`
 
 ##### params?
 
-[`CreateCaseParams`](../types/_models.CreateCaseParams.html)
+`CreateCaseParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteCase()
 
-> **deleteCase**: \<`TData`\>(`etag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **deleteCase**: `(etag: string, params?: DeleteCaseParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCase`](../interfaces/_models.CasesCase.html), `any`\>
+`TData` = `AxiosResponse<CasesCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### etag
 
@@ -52,27 +52,27 @@
 
 ##### params?
 
-[`DeleteCaseParams`](../types/_models.DeleteCaseParams.html)
+`DeleteCaseParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateCase()
 
-> **locateCase**: \<`TData`\>(`etag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateCase**: `(etag: string, params?: LocateCaseParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCase`](../interfaces/_models.CasesCase.html), `any`\>
+`TData` = `AxiosResponse<CasesCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### etag
 
@@ -80,51 +80,51 @@
 
 ##### params?
 
-[`LocateCaseParams`](../types/_models.LocateCaseParams.html)
+`LocateCaseParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### searchCases()
 
-> **searchCases**: \<`TData`\>(`params?`, `options?`) => `Promise`\<`TData`\>
+> **searchCases**: `(params?: SearchCasesParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseList`](../interfaces/_models.CasesCaseList.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### params?
 
-[`SearchCasesParams`](../types/_models.SearchCasesParams.html)
+`SearchCasesParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### searchCases2()
 
-> **searchCases2**: \<`TData`\>(`contactId`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **searchCases2**: `(contactId: string, params?: SearchCases2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseList`](../interfaces/_models.CasesCaseList.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### contactId
 
@@ -132,68 +132,68 @@
 
 ##### params?
 
-[`SearchCases2Params`](../types/_models.SearchCases2Params.html)
+`SearchCases2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateCase()
 
-> **updateCase**: \<`TData`\>(`updateCaseBody`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateCase**: `(updateCaseBody: UpdateCaseBody, params?: UpdateCaseParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCase`](../interfaces/_models.CasesCase.html), `any`\>
+`TData` = `AxiosResponse<CasesCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### updateCaseBody
 
-[`UpdateCaseBody`](../types/_models.UpdateCaseBody.html)
+`UpdateCaseBody`
 
 ##### params?
 
-[`UpdateCaseParams`](../types/_models.UpdateCaseParams.html)
+`UpdateCaseParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateCase2()
 
-> **updateCase2**: \<`TData`\>(`updateCase2Body`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateCase2**: `(updateCase2Body: UpdateCase2Body, params?: UpdateCase2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCase`](../interfaces/_models.CasesCase.html), `any`\>
+`TData` = `AxiosResponse<CasesCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### updateCase2Body
 
-[`UpdateCase2Body`](../types/_models.UpdateCase2Body.html)
+`UpdateCase2Body`
 
 ##### params?
 
-[`UpdateCase2Params`](../types/_models.UpdateCase2Params.html)
+`UpdateCase2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

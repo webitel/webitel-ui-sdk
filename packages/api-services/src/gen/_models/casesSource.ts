@@ -15,11 +15,7 @@ export interface CasesSource {
 	createdBy?: GeneralLookup;
 	description?: string;
 	id?: string;
-	/**
-	 * progressive_count desc
-	 * @minimum 1
-	 * @maximum 100
-	 */
+	/** Case Source description goes here */
 	name?: string;
 	type?: CasesSourceType;
 	updatedAt?: string;

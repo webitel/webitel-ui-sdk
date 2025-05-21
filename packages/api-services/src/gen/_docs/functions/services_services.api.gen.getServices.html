@@ -1,98 +1,98 @@
 [@webitel/api-services](../index.html) / [services/services.api.gen](../modules/services_services.api.gen.html) / getServices
 
-# Function: getServices()
+# kind_function: getServices()
 
-> **getServices**(): `object`
+> **getServices**(): `{ createService: (casesInputCreateService: CasesInputCreateService, params?: CreateServiceParams, options?: AxiosRequestConfig) => Promise<TData>; deleteService: (id: string[], options?: AxiosRequestConfig) => Promise<TData>; listServices: (params?: ListServicesParams, options?: AxiosRequestConfig) => Promise<TData>; locateService: (id: string, params?: LocateServiceParams, options?: AxiosRequestConfig) => Promise<TData>; updateService: (id: string, casesInputService: CasesInputService, params?: UpdateServiceParams, options?: AxiosRequestConfig) => Promise<TData>; updateService2: (id: string, casesInputService: CasesInputService, params?: UpdateService2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createService()
 
-> **createService**: \<`TData`\>(`casesInputCreateService`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createService**: `(casesInputCreateService: CasesInputCreateService, params?: CreateServiceParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesService`](../interfaces/_models.CasesService.html), `any`\>
+`TData` = `AxiosResponse<CasesService, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### casesInputCreateService
 
-[`CasesInputCreateService`](../interfaces/_models.CasesInputCreateService.html)
+`CasesInputCreateService`
 
 ##### params?
 
-[`CreateServiceParams`](../types/_models.CreateServiceParams.html)
+`CreateServiceParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteService()
 
-> **deleteService**: \<`TData`\>(`id`, `options?`) => `Promise`\<`TData`\>
+> **deleteService**: `(id: string[], options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesServiceList`](../interfaces/_models.CasesServiceList.html), `any`\>
+`TData` = `AxiosResponse<CasesServiceList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
-`string`[]
+`string[]`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listServices()
 
-> **listServices**: \<`TData`\>(`params?`, `options?`) => `Promise`\<`TData`\>
+> **listServices**: `(params?: ListServicesParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesServiceList`](../interfaces/_models.CasesServiceList.html), `any`\>
+`TData` = `AxiosResponse<CasesServiceList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### params?
 
-[`ListServicesParams`](../types/_models.ListServicesParams.html)
+`ListServicesParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateService()
 
-> **locateService**: \<`TData`\>(`id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateService**: `(id: string, params?: LocateServiceParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocateServiceResponse`](../interfaces/_models.CasesLocateServiceResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocateServiceResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -100,27 +100,27 @@
 
 ##### params?
 
-[`LocateServiceParams`](../types/_models.LocateServiceParams.html)
+`LocateServiceParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateService()
 
-> **updateService**: \<`TData`\>(`id`, `casesInputService`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateService**: `(id: string, casesInputService: CasesInputService, params?: UpdateServiceParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesService`](../interfaces/_models.CasesService.html), `any`\>
+`TData` = `AxiosResponse<CasesService, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -128,31 +128,31 @@
 
 ##### casesInputService
 
-[`CasesInputService`](../interfaces/_models.CasesInputService.html)
+`CasesInputService`
 
 ##### params?
 
-[`UpdateServiceParams`](../types/_models.UpdateServiceParams.html)
+`UpdateServiceParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateService2()
 
-> **updateService2**: \<`TData`\>(`id`, `casesInputService`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateService2**: `(id: string, casesInputService: CasesInputService, params?: UpdateService2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesService`](../interfaces/_models.CasesService.html), `any`\>
+`TData` = `AxiosResponse<CasesService, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -160,16 +160,16 @@
 
 ##### casesInputService
 
-[`CasesInputService`](../interfaces/_models.CasesInputService.html)
+`CasesInputService`
 
 ##### params?
 
-[`UpdateService2Params`](../types/_models.UpdateService2Params.html)
+`UpdateService2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

@@ -1,50 +1,50 @@
 [@webitel/api-services](../index.html) / [sources/sources.api.gen](../modules/sources_sources.api.gen.html) / getSources
 
-# Function: getSources()
+# kind_function: getSources()
 
-> **getSources**(): `object`
+> **getSources**(): `{ createSource: (casesInputSourceBody: CasesInputSource, params?: CreateSourceParams, options?: AxiosRequestConfig) => Promise<TData>; deleteSource: (id: string, options?: AxiosRequestConfig) => Promise<TData>; listSources: (params?: ListSourcesParams, options?: AxiosRequestConfig) => Promise<TData>; locateSource: (id: string, params?: LocateSourceParams, options?: AxiosRequestConfig) => Promise<TData>; updateSource: (id: string, casesInputSource: CasesInputSource, params?: UpdateSourceParams, options?: AxiosRequestConfig) => Promise<TData>; updateSource2: (id: string, casesInputSource: CasesInputSource, params?: UpdateSource2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createSource()
 
-> **createSource**: \<`TData`\>(`casesInputSourceBody`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createSource**: `(casesInputSourceBody: CasesInputSource, params?: CreateSourceParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSource`](../interfaces/_models.CasesSource.html), `any`\>
+`TData` = `AxiosResponse<CasesSource, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### casesInputSourceBody
 
-[`CasesInputSource`](../interfaces/_models.CasesInputSource.html)
+`CasesInputSource`
 
 ##### params?
 
-[`CreateSourceParams`](../types/_models.CreateSourceParams.html)
+`CreateSourceParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteSource()
 
-> **deleteSource**: \<`TData`\>(`id`, `options?`) => `Promise`\<`TData`\>
+> **deleteSource**: `(id: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSource`](../interfaces/_models.CasesSource.html), `any`\>
+`TData` = `AxiosResponse<CasesSource, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -54,45 +54,45 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listSources()
 
-> **listSources**: \<`TData`\>(`params?`, `options?`) => `Promise`\<`TData`\>
+> **listSources**: `(params?: ListSourcesParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSourceList`](../interfaces/_models.CasesSourceList.html), `any`\>
+`TData` = `AxiosResponse<CasesSourceList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### params?
 
-[`ListSourcesParams`](../types/_models.ListSourcesParams.html)
+`ListSourcesParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateSource()
 
-> **locateSource**: \<`TData`\>(`id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateSource**: `(id: string, params?: LocateSourceParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocateSourceResponse`](../interfaces/_models.CasesLocateSourceResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocateSourceResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -100,27 +100,27 @@
 
 ##### params?
 
-[`LocateSourceParams`](../types/_models.LocateSourceParams.html)
+`LocateSourceParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateSource()
 
-> **updateSource**: \<`TData`\>(`id`, `casesInputSource`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateSource**: `(id: string, casesInputSource: CasesInputSource, params?: UpdateSourceParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSource`](../interfaces/_models.CasesSource.html), `any`\>
+`TData` = `AxiosResponse<CasesSource, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -128,31 +128,31 @@
 
 ##### casesInputSource
 
-[`CasesInputSource`](../interfaces/_models.CasesInputSource.html)
+`CasesInputSource`
 
 ##### params?
 
-[`UpdateSourceParams`](../types/_models.UpdateSourceParams.html)
+`UpdateSourceParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateSource2()
 
-> **updateSource2**: \<`TData`\>(`id`, `casesInputSource`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateSource2**: `(id: string, casesInputSource: CasesInputSource, params?: UpdateSource2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesSource`](../interfaces/_models.CasesSource.html), `any`\>
+`TData` = `AxiosResponse<CasesSource, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -160,16 +160,16 @@
 
 ##### casesInputSource
 
-[`CasesInputSource`](../interfaces/_models.CasesInputSource.html)
+`CasesInputSource`
 
 ##### params?
 
-[`UpdateSource2Params`](../types/_models.UpdateSource2Params.html)
+`UpdateSource2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

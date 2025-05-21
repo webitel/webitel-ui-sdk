@@ -1,6 +1,6 @@
 [@webitel/api-services](../index.html) / [\_models](../modules/_models.html) / CasesInputCreateCase
 
-# Interface: CasesInputCreateCase
+# kind_interface: CasesInputCreateCase
 
 Input structure for creating a new case.
 
@@ -8,7 +8,7 @@ Input structure for creating a new case.
 
 ### assignee?
 
-> `optional` **assignee**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **assignee**: `GeneralLookup`
 
 Optional assignee ID.
 
@@ -16,7 +16,7 @@ Optional assignee ID.
 
 ### close?
 
-> `optional` **close**: [`CasesCreateCaseCloseInput`](../wiki/_models.CasesCreateCaseCloseInput.html)
+> `optional` **close**: `CasesCreateCaseCloseInput`
 
 Optional close information.
 
@@ -24,7 +24,7 @@ Optional close information.
 
 ### closeReasonGroup?
 
-> `optional` **closeReasonGroup**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **closeReasonGroup**: `GeneralLookup`
 
 Optional close reason.
 
@@ -48,7 +48,7 @@ Optional description of the case.
 
 ### group?
 
-> `optional` **group**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **group**: `GeneralLookup`
 
 Optional group ID.
 
@@ -56,7 +56,7 @@ Optional group ID.
 
 ### impacted?
 
-> `optional` **impacted**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **impacted**: `GeneralLookup`
 
 Required impacted user ID (default: reporter).
 
@@ -64,7 +64,7 @@ Required impacted user ID (default: reporter).
 
 ### links?
 
-> `optional` **links**: [`CasesInputCaseLink`](../wiki/_models.CasesInputCaseLink.html)[]
+> `optional` **links**: `CasesInputCaseLink[]`
 
 List of links attached to the case.
 
@@ -72,7 +72,7 @@ List of links attached to the case.
 
 ### priority?
 
-> `optional` **priority**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **priority**: `GeneralLookup`
 
 Optional priority level.
 
@@ -80,7 +80,7 @@ Optional priority level.
 
 ### rate?
 
-> `optional` **rate**: [`CasesRateInfo`](../wiki/_models.CasesRateInfo.html)
+> `optional` **rate**: `CasesRateInfo`
 
 API-only rating information.
 
@@ -88,7 +88,7 @@ API-only rating information.
 
 ### related?
 
-> `optional` **related**: [`CasesCreateCaseRelatedCaseInput`](../wiki/_models.CasesCreateCaseRelatedCaseInput.html)[]
+> `optional` **related**: `CasesCreateCaseRelatedCaseInput[]`
 
 List of related cases.
 
@@ -96,7 +96,7 @@ List of related cases.
 
 ### reporter?
 
-> `optional` **reporter**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **reporter**: `GeneralLookup`
 
 Required reporter ID (if empty, anonymous contact).
 
@@ -104,7 +104,7 @@ Required reporter ID (if empty, anonymous contact).
 
 ### service?
 
-> `optional` **service**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **service**: `GeneralLookup`
 
 Service ID (affects many other readonly fields).
 
@@ -112,7 +112,7 @@ Service ID (affects many other readonly fields).
 
 ### source?
 
-> `optional` **source**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **source**: `GeneralLookup`
 
 Source of the case.
 
@@ -120,7 +120,7 @@ Source of the case.
 
 ### status?
 
-> `optional` **status**: [`GeneralLookup`](../wiki/_models.GeneralLookup.html)
+> `optional` **status**: `GeneralLookup`
 
 Initial case status (default from lookup or UI).
 

@@ -1,98 +1,98 @@
 [@webitel/api-services](../index.html) / [catalogs/catalogs.api.gen](../modules/catalogs_catalogs.api.gen.html) / getCatalogs
 
-# Function: getCatalogs()
+# kind_function: getCatalogs()
 
-> **getCatalogs**(): `object`
+> **getCatalogs**(): `{ createCatalog: (casesInputCatalog: CasesInputCatalog, params?: CreateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>; deleteCatalog: (id: string[], options?: AxiosRequestConfig) => Promise<TData>; listCatalogs: (params?: ListCatalogsParams, options?: AxiosRequestConfig) => Promise<TData>; locateCatalog: (id: string, params?: LocateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>; updateCatalog: (id: string, casesInputCatalog: CasesInputCatalog, params?: UpdateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>; updateCatalog2: (id: string, casesInputCatalog: CasesInputCatalog, params?: UpdateCatalog2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createCatalog()
 
-> **createCatalog**: \<`TData`\>(`casesInputCatalog`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createCatalog**: `(casesInputCatalog: CasesInputCatalog, params?: CreateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCatalog`](../interfaces/_models.CasesCatalog.html), `any`\>
+`TData` = `AxiosResponse<CasesCatalog, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### casesInputCatalog
 
-[`CasesInputCatalog`](../interfaces/_models.CasesInputCatalog.html)
+`CasesInputCatalog`
 
 ##### params?
 
-[`CreateCatalogParams`](../types/_models.CreateCatalogParams.html)
+`CreateCatalogParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteCatalog()
 
-> **deleteCatalog**: \<`TData`\>(`id`, `options?`) => `Promise`\<`TData`\>
+> **deleteCatalog**: `(id: string[], options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCatalogList`](../interfaces/_models.CasesCatalogList.html), `any`\>
+`TData` = `AxiosResponse<CasesCatalogList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
-`string`[]
+`string[]`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listCatalogs()
 
-> **listCatalogs**: \<`TData`\>(`params?`, `options?`) => `Promise`\<`TData`\>
+> **listCatalogs**: `(params?: ListCatalogsParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCatalogList`](../interfaces/_models.CasesCatalogList.html), `any`\>
+`TData` = `AxiosResponse<CasesCatalogList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### params?
 
-[`ListCatalogsParams`](../types/_models.ListCatalogsParams.html)
+`ListCatalogsParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateCatalog()
 
-> **locateCatalog**: \<`TData`\>(`id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateCatalog**: `(id: string, params?: LocateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocateCatalogResponse`](../interfaces/_models.CasesLocateCatalogResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocateCatalogResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -100,27 +100,27 @@
 
 ##### params?
 
-[`LocateCatalogParams`](../types/_models.LocateCatalogParams.html)
+`LocateCatalogParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateCatalog()
 
-> **updateCatalog**: \<`TData`\>(`id`, `casesInputCatalog`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateCatalog**: `(id: string, casesInputCatalog: CasesInputCatalog, params?: UpdateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCatalog`](../interfaces/_models.CasesCatalog.html), `any`\>
+`TData` = `AxiosResponse<CasesCatalog, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -128,31 +128,31 @@
 
 ##### casesInputCatalog
 
-[`CasesInputCatalog`](../interfaces/_models.CasesInputCatalog.html)
+`CasesInputCatalog`
 
 ##### params?
 
-[`UpdateCatalogParams`](../types/_models.UpdateCatalogParams.html)
+`UpdateCatalogParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateCatalog2()
 
-> **updateCatalog2**: \<`TData`\>(`id`, `casesInputCatalog`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateCatalog2**: `(id: string, casesInputCatalog: CasesInputCatalog, params?: UpdateCatalog2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCatalog`](../interfaces/_models.CasesCatalog.html), `any`\>
+`TData` = `AxiosResponse<CasesCatalog, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -160,16 +160,16 @@
 
 ##### casesInputCatalog
 
-[`CasesInputCatalog`](../interfaces/_models.CasesInputCatalog.html)
+`CasesInputCatalog`
 
 ##### params?
 
-[`UpdateCatalog2Params`](../types/_models.UpdateCatalog2Params.html)
+`UpdateCatalog2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

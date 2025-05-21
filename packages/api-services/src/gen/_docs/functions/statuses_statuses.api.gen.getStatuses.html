@@ -1,50 +1,50 @@
 [@webitel/api-services](../index.html) / [statuses/statuses.api.gen](../modules/statuses_statuses.api.gen.html) / getStatuses
 
-# Function: getStatuses()
+# kind_function: getStatuses()
 
-> **getStatuses**(): `object`
+> **getStatuses**(): `{ createStatus: (casesInputStatusBody: CasesInputStatus, params?: CreateStatusParams, options?: AxiosRequestConfig) => Promise<TData>; deleteStatus: (id: string, options?: AxiosRequestConfig) => Promise<TData>; listStatuses: (params?: ListStatusesParams, options?: AxiosRequestConfig) => Promise<TData>; locateStatus: (id: string, params?: LocateStatusParams, options?: AxiosRequestConfig) => Promise<TData>; updateStatus: (id: string, casesInputStatus: CasesInputStatus, params?: UpdateStatusParams, options?: AxiosRequestConfig) => Promise<TData>; updateStatus2: (id: string, casesInputStatus: CasesInputStatus, params?: UpdateStatus2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createStatus()
 
-> **createStatus**: \<`TData`\>(`casesInputStatusBody`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createStatus**: `(casesInputStatusBody: CasesInputStatus, params?: CreateStatusParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`WebitelcasesStatus`](../interfaces/_models.WebitelcasesStatus.html), `any`\>
+`TData` = `AxiosResponse<WebitelcasesStatus, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### casesInputStatusBody
 
-[`CasesInputStatus`](../interfaces/_models.CasesInputStatus.html)
+`CasesInputStatus`
 
 ##### params?
 
-[`CreateStatusParams`](../types/_models.CreateStatusParams.html)
+`CreateStatusParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteStatus()
 
-> **deleteStatus**: \<`TData`\>(`id`, `options?`) => `Promise`\<`TData`\>
+> **deleteStatus**: `(id: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`WebitelcasesStatus`](../interfaces/_models.WebitelcasesStatus.html), `any`\>
+`TData` = `AxiosResponse<WebitelcasesStatus, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -54,45 +54,45 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listStatuses()
 
-> **listStatuses**: \<`TData`\>(`params?`, `options?`) => `Promise`\<`TData`\>
+> **listStatuses**: `(params?: ListStatusesParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesStatusList`](../interfaces/_models.CasesStatusList.html), `any`\>
+`TData` = `AxiosResponse<CasesStatusList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### params?
 
-[`ListStatusesParams`](../types/_models.ListStatusesParams.html)
+`ListStatusesParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateStatus()
 
-> **locateStatus**: \<`TData`\>(`id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateStatus**: `(id: string, params?: LocateStatusParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocateStatusResponse`](../interfaces/_models.CasesLocateStatusResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocateStatusResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -100,27 +100,27 @@
 
 ##### params?
 
-[`LocateStatusParams`](../types/_models.LocateStatusParams.html)
+`LocateStatusParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateStatus()
 
-> **updateStatus**: \<`TData`\>(`id`, `casesInputStatus`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateStatus**: `(id: string, casesInputStatus: CasesInputStatus, params?: UpdateStatusParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`WebitelcasesStatus`](../interfaces/_models.WebitelcasesStatus.html), `any`\>
+`TData` = `AxiosResponse<WebitelcasesStatus, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -128,31 +128,31 @@
 
 ##### casesInputStatus
 
-[`CasesInputStatus`](../interfaces/_models.CasesInputStatus.html)
+`CasesInputStatus`
 
 ##### params?
 
-[`UpdateStatusParams`](../types/_models.UpdateStatusParams.html)
+`UpdateStatusParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateStatus2()
 
-> **updateStatus2**: \<`TData`\>(`id`, `casesInputStatus`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateStatus2**: `(id: string, casesInputStatus: CasesInputStatus, params?: UpdateStatus2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`WebitelcasesStatus`](../interfaces/_models.WebitelcasesStatus.html), `any`\>
+`TData` = `AxiosResponse<WebitelcasesStatus, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### id
 
@@ -160,16 +160,16 @@
 
 ##### casesInputStatus
 
-[`CasesInputStatus`](../interfaces/_models.CasesInputStatus.html)
+`CasesInputStatus`
 
 ##### params?
 
-[`UpdateStatus2Params`](../types/_models.UpdateStatus2Params.html)
+`UpdateStatus2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

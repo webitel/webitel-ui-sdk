@@ -1,22 +1,22 @@
 [@webitel/api-services](../index.html) / [case-files/case-files.api.gen](../modules/case-files_case-files.api.gen.html) / getCaseFiles
 
-# Function: getCaseFiles()
+# kind_function: getCaseFiles()
 
-> **getCaseFiles**(): `object`
+> **getCaseFiles**(): `{ deleteFile: (caseEtag: string, id: string, options?: AxiosRequestConfig) => Promise<TData>; listFiles: (caseEtag: string, params?: ListFilesParams, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### deleteFile()
 
-> **deleteFile**: \<`TData`\>(`caseEtag`, `id`, `options?`) => `Promise`\<`TData`\>
+> **deleteFile**: `(caseEtag: string, id: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesFile`](../interfaces/_models.CasesFile.html), `any`\>
+`TData` = `AxiosResponse<CasesFile, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -30,21 +30,21 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listFiles()
 
-> **listFiles**: \<`TData`\>(`caseEtag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **listFiles**: `(caseEtag: string, params?: ListFilesParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCaseFileList`](../interfaces/_models.CasesCaseFileList.html), `any`\>
+`TData` = `AxiosResponse<CasesCaseFileList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### caseEtag
 
@@ -52,12 +52,12 @@
 
 ##### params?
 
-[`ListFilesParams`](../types/_models.ListFilesParams.html)
+`ListFilesParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

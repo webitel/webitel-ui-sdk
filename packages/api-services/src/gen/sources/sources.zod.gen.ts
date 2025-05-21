@@ -51,8 +51,6 @@ export const listSourcesQueryParams = zod.object({
 		),
 });
 
-export const listSourcesResponseItemsItemNameDefault = '1';
-export const listSourcesResponseItemsItemNameMax = 100;
 export const listSourcesResponseItemsItemTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const listSourcesResponse = zod
@@ -72,10 +70,8 @@ export const listSourcesResponse = zod
 						id: zod.string().optional(),
 						name: zod
 							.string()
-							.min(1)
-							.max(listSourcesResponseItemsItemNameMax)
-							.default(listSourcesResponseItemsItemNameDefault)
-							.describe('progressive_count desc'),
+							.optional()
+							.describe('Case Source description goes here'),
 						type: zod
 							.enum([
 								'TYPE_UNSPECIFIED',
@@ -141,8 +137,6 @@ export const createSourceBody = zod.object({
 		),
 });
 
-export const createSourceResponseNameDefault = '1';
-export const createSourceResponseNameMax = 100;
 export const createSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const createSourceResponse = zod
@@ -156,12 +150,7 @@ export const createSourceResponse = zod
 			.optional(),
 		description: zod.string().optional(),
 		id: zod.string().optional(),
-		name: zod
-			.string()
-			.min(1)
-			.max(createSourceResponseNameMax)
-			.default(createSourceResponseNameDefault)
-			.describe('progressive_count desc'),
+		name: zod.string().optional().describe('Case Source description goes here'),
 		type: zod
 			.enum([
 				'TYPE_UNSPECIFIED',
@@ -193,8 +182,6 @@ export const deleteSourceParams = zod.object({
 	id: zod.string().describe('The unique ID of the source to delete.'),
 });
 
-export const deleteSourceResponseNameDefault = '1';
-export const deleteSourceResponseNameMax = 100;
 export const deleteSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const deleteSourceResponse = zod
@@ -208,12 +195,7 @@ export const deleteSourceResponse = zod
 			.optional(),
 		description: zod.string().optional(),
 		id: zod.string().optional(),
-		name: zod
-			.string()
-			.min(1)
-			.max(deleteSourceResponseNameMax)
-			.default(deleteSourceResponseNameDefault)
-			.describe('progressive_count desc'),
+		name: zod.string().optional().describe('Case Source description goes here'),
 		type: zod
 			.enum([
 				'TYPE_UNSPECIFIED',
@@ -252,8 +234,6 @@ export const locateSourceQueryParams = zod.object({
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const locateSourceResponseSourceNameDefault = '1';
-export const locateSourceResponseSourceNameMax = 100;
 export const locateSourceResponseSourceTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const locateSourceResponse = zod
@@ -271,10 +251,8 @@ export const locateSourceResponse = zod
 				id: zod.string().optional(),
 				name: zod
 					.string()
-					.min(1)
-					.max(locateSourceResponseSourceNameMax)
-					.default(locateSourceResponseSourceNameDefault)
-					.describe('progressive_count desc'),
+					.optional()
+					.describe('Case Source description goes here'),
 				type: zod
 					.enum([
 						'TYPE_UNSPECIFIED',
@@ -337,8 +315,6 @@ export const updateSource2Body = zod.object({
 		),
 });
 
-export const updateSource2ResponseNameDefault = '1';
-export const updateSource2ResponseNameMax = 100;
 export const updateSource2ResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSource2Response = zod
@@ -352,12 +328,7 @@ export const updateSource2Response = zod
 			.optional(),
 		description: zod.string().optional(),
 		id: zod.string().optional(),
-		name: zod
-			.string()
-			.min(1)
-			.max(updateSource2ResponseNameMax)
-			.default(updateSource2ResponseNameDefault)
-			.describe('progressive_count desc'),
+		name: zod.string().optional().describe('Case Source description goes here'),
 		type: zod
 			.enum([
 				'TYPE_UNSPECIFIED',
@@ -417,8 +388,6 @@ export const updateSourceBody = zod.object({
 		),
 });
 
-export const updateSourceResponseNameDefault = '1';
-export const updateSourceResponseNameMax = 100;
 export const updateSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSourceResponse = zod
@@ -432,12 +401,7 @@ export const updateSourceResponse = zod
 			.optional(),
 		description: zod.string().optional(),
 		id: zod.string().optional(),
-		name: zod
-			.string()
-			.min(1)
-			.max(updateSourceResponseNameMax)
-			.default(updateSourceResponseNameDefault)
-			.describe('progressive_count desc'),
+		name: zod.string().optional().describe('Case Source description goes here'),
 		type: zod
 			.enum([
 				'TYPE_UNSPECIFIED',

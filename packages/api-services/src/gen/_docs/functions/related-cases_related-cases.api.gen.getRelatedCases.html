@@ -1,22 +1,22 @@
 [@webitel/api-services](../index.html) / [related-cases/related-cases.api.gen](../modules/related-cases_related-cases.api.gen.html) / getRelatedCases
 
-# Function: getRelatedCases()
+# kind_function: getRelatedCases()
 
-> **getRelatedCases**(): `object`
+> **getRelatedCases**(): `{ createRelatedCase: (primaryCaseEtag: string, casesCreateInputRelatedCase: CasesCreateInputRelatedCase, params?: CreateRelatedCaseParams, options?: AxiosRequestConfig) => Promise<TData>; deleteRelatedCase: (etag: string, options?: AxiosRequestConfig) => Promise<TData>; listRelatedCases: (primaryCaseEtag: string, params?: ListRelatedCasesParams, options?: AxiosRequestConfig) => Promise<TData>; locateRelatedCase: (primaryCaseEtag: string, etag: string, params?: LocateRelatedCaseParams, options?: AxiosRequestConfig) => Promise<TData>; updateRelatedCase: (etag: string, updateRelatedCaseBody: UpdateRelatedCaseBody, params?: UpdateRelatedCaseParams, options?: AxiosRequestConfig) => Promise<TData>; updateRelatedCase2: (etag: string, updateRelatedCase2Body: UpdateRelatedCase2Body, params?: UpdateRelatedCase2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createRelatedCase()
 
-> **createRelatedCase**: \<`TData`\>(`primaryCaseEtag`, `casesCreateInputRelatedCase`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createRelatedCase**: `(primaryCaseEtag: string, casesCreateInputRelatedCase: CasesCreateInputRelatedCase, params?: CreateRelatedCaseParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesRelatedCase`](../interfaces/_models.CasesRelatedCase.html), `any`\>
+`TData` = `AxiosResponse<CasesRelatedCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### primaryCaseEtag
 
@@ -24,31 +24,31 @@
 
 ##### casesCreateInputRelatedCase
 
-[`CasesCreateInputRelatedCase`](../interfaces/_models.CasesCreateInputRelatedCase.html)
+`CasesCreateInputRelatedCase`
 
 ##### params?
 
-[`CreateRelatedCaseParams`](../types/_models.CreateRelatedCaseParams.html)
+`CreateRelatedCaseParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteRelatedCase()
 
-> **deleteRelatedCase**: \<`TData`\>(`etag`, `options?`) => `Promise`\<`TData`\>
+> **deleteRelatedCase**: `(etag: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesRelatedCase`](../interfaces/_models.CasesRelatedCase.html), `any`\>
+`TData` = `AxiosResponse<CasesRelatedCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### etag
 
@@ -58,21 +58,21 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listRelatedCases()
 
-> **listRelatedCases**: \<`TData`\>(`primaryCaseEtag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **listRelatedCases**: `(primaryCaseEtag: string, params?: ListRelatedCasesParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesRelatedCaseList`](../interfaces/_models.CasesRelatedCaseList.html), `any`\>
+`TData` = `AxiosResponse<CasesRelatedCaseList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### primaryCaseEtag
 
@@ -80,27 +80,27 @@
 
 ##### params?
 
-[`ListRelatedCasesParams`](../types/_models.ListRelatedCasesParams.html)
+`ListRelatedCasesParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateRelatedCase()
 
-> **locateRelatedCase**: \<`TData`\>(`primaryCaseEtag`, `etag`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateRelatedCase**: `(primaryCaseEtag: string, etag: string, params?: LocateRelatedCaseParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesRelatedCase`](../interfaces/_models.CasesRelatedCase.html), `any`\>
+`TData` = `AxiosResponse<CasesRelatedCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### primaryCaseEtag
 
@@ -112,27 +112,27 @@
 
 ##### params?
 
-[`LocateRelatedCaseParams`](../types/_models.LocateRelatedCaseParams.html)
+`LocateRelatedCaseParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateRelatedCase()
 
-> **updateRelatedCase**: \<`TData`\>(`etag`, `updateRelatedCaseBody`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateRelatedCase**: `(etag: string, updateRelatedCaseBody: UpdateRelatedCaseBody, params?: UpdateRelatedCaseParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesRelatedCase`](../interfaces/_models.CasesRelatedCase.html), `any`\>
+`TData` = `AxiosResponse<CasesRelatedCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### etag
 
@@ -140,31 +140,31 @@
 
 ##### updateRelatedCaseBody
 
-[`UpdateRelatedCaseBody`](../types/_models.UpdateRelatedCaseBody.html)
+`UpdateRelatedCaseBody`
 
 ##### params?
 
-[`UpdateRelatedCaseParams`](../types/_models.UpdateRelatedCaseParams.html)
+`UpdateRelatedCaseParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateRelatedCase2()
 
-> **updateRelatedCase2**: \<`TData`\>(`etag`, `updateRelatedCase2Body`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateRelatedCase2**: `(etag: string, updateRelatedCase2Body: UpdateRelatedCase2Body, params?: UpdateRelatedCase2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesRelatedCase`](../interfaces/_models.CasesRelatedCase.html), `any`\>
+`TData` = `AxiosResponse<CasesRelatedCase, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### etag
 
@@ -172,16 +172,16 @@
 
 ##### updateRelatedCase2Body
 
-[`UpdateRelatedCase2Body`](../types/_models.UpdateRelatedCase2Body.html)
+`UpdateRelatedCase2Body`
 
 ##### params?
 
-[`UpdateRelatedCase2Params`](../types/_models.UpdateRelatedCase2Params.html)
+`UpdateRelatedCase2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`

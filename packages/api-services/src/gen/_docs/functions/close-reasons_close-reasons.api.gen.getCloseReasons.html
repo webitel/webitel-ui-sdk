@@ -1,22 +1,22 @@
 [@webitel/api-services](../index.html) / [close-reasons/close-reasons.api.gen](../modules/close-reasons_close-reasons.api.gen.html) / getCloseReasons
 
-# Function: getCloseReasons()
+# kind_function: getCloseReasons()
 
-> **getCloseReasons**(): `object`
+> **getCloseReasons**(): `{ createCloseReason: (closeReasonGroupId: string, casesInputCloseReason: CasesInputCloseReason, params?: CreateCloseReasonParams, options?: AxiosRequestConfig) => Promise<TData>; deleteCloseReason: (closeReasonGroupId: string, id: string, options?: AxiosRequestConfig) => Promise<TData>; listCloseReasons: (closeReasonGroupId: string, params?: ListCloseReasonsParams, options?: AxiosRequestConfig) => Promise<TData>; locateCloseReason: (closeReasonGroupId: string, id: string, params?: LocateCloseReasonParams, options?: AxiosRequestConfig) => Promise<TData>; updateCloseReason: (closeReasonGroupId: string, id: string, casesInputCloseReason: CasesInputCloseReason, params?: UpdateCloseReasonParams, options?: AxiosRequestConfig) => Promise<TData>; updateCloseReason2: (closeReasonGroupId: string, id: string, casesInputCloseReason: CasesInputCloseReason, params?: UpdateCloseReason2Params, options?: AxiosRequestConfig) => Promise<TData> }`
 
-## Returns
+## theme_returns
 
 ### createCloseReason()
 
-> **createCloseReason**: \<`TData`\>(`closeReasonGroupId`, `casesInputCloseReason`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **createCloseReason**: `(closeReasonGroupId: string, casesInputCloseReason: CasesInputCloseReason, params?: CreateCloseReasonParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCloseReason`](../interfaces/_models.CasesCloseReason.html), `any`\>
+`TData` = `AxiosResponse<CasesCloseReason, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### closeReasonGroupId
 
@@ -24,31 +24,31 @@
 
 ##### casesInputCloseReason
 
-[`CasesInputCloseReason`](../interfaces/_models.CasesInputCloseReason.html)
+`CasesInputCloseReason`
 
 ##### params?
 
-[`CreateCloseReasonParams`](../types/_models.CreateCloseReasonParams.html)
+`CreateCloseReasonParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### deleteCloseReason()
 
-> **deleteCloseReason**: \<`TData`\>(`closeReasonGroupId`, `id`, `options?`) => `Promise`\<`TData`\>
+> **deleteCloseReason**: `(closeReasonGroupId: string, id: string, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCloseReason`](../interfaces/_models.CasesCloseReason.html), `any`\>
+`TData` = `AxiosResponse<CasesCloseReason, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### closeReasonGroupId
 
@@ -62,21 +62,21 @@
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### listCloseReasons()
 
-> **listCloseReasons**: \<`TData`\>(`closeReasonGroupId`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **listCloseReasons**: `(closeReasonGroupId: string, params?: ListCloseReasonsParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCloseReasonList`](../interfaces/_models.CasesCloseReasonList.html), `any`\>
+`TData` = `AxiosResponse<CasesCloseReasonList, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### closeReasonGroupId
 
@@ -84,27 +84,27 @@
 
 ##### params?
 
-[`ListCloseReasonsParams`](../types/_models.ListCloseReasonsParams.html)
+`ListCloseReasonsParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### locateCloseReason()
 
-> **locateCloseReason**: \<`TData`\>(`closeReasonGroupId`, `id`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **locateCloseReason**: `(closeReasonGroupId: string, id: string, params?: LocateCloseReasonParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesLocateCloseReasonResponse`](../interfaces/_models.CasesLocateCloseReasonResponse.html), `any`\>
+`TData` = `AxiosResponse<CasesLocateCloseReasonResponse, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### closeReasonGroupId
 
@@ -116,27 +116,27 @@
 
 ##### params?
 
-[`LocateCloseReasonParams`](../types/_models.LocateCloseReasonParams.html)
+`LocateCloseReasonParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateCloseReason()
 
-> **updateCloseReason**: \<`TData`\>(`closeReasonGroupId`, `id`, `casesInputCloseReason`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateCloseReason**: `(closeReasonGroupId: string, id: string, casesInputCloseReason: CasesInputCloseReason, params?: UpdateCloseReasonParams, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCloseReason`](../interfaces/_models.CasesCloseReason.html), `any`\>
+`TData` = `AxiosResponse<CasesCloseReason, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### closeReasonGroupId
 
@@ -148,31 +148,31 @@
 
 ##### casesInputCloseReason
 
-[`CasesInputCloseReason`](../interfaces/_models.CasesInputCloseReason.html)
+`CasesInputCloseReason`
 
 ##### params?
 
-[`UpdateCloseReasonParams`](../types/_models.UpdateCloseReasonParams.html)
+`UpdateCloseReasonParams`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
 
 ### updateCloseReason2()
 
-> **updateCloseReason2**: \<`TData`\>(`closeReasonGroupId`, `id`, `casesInputCloseReason`, `params?`, `options?`) => `Promise`\<`TData`\>
+> **updateCloseReason2**: `(closeReasonGroupId: string, id: string, casesInputCloseReason: CasesInputCloseReason, params?: UpdateCloseReason2Params, options?: AxiosRequestConfig) => Promise<TData>`
 
-#### Type Parameters
+#### kind_plural_type_parameter
 
 ##### TData
 
-`TData` = `AxiosResponse`\<[`CasesCloseReason`](../interfaces/_models.CasesCloseReason.html), `any`\>
+`TData` = `AxiosResponse<CasesCloseReason, any>`
 
-#### Parameters
+#### kind_plural_parameter
 
 ##### closeReasonGroupId
 
@@ -184,16 +184,16 @@
 
 ##### casesInputCloseReason
 
-[`CasesInputCloseReason`](../interfaces/_models.CasesInputCloseReason.html)
+`CasesInputCloseReason`
 
 ##### params?
 
-[`UpdateCloseReason2Params`](../types/_models.UpdateCloseReason2Params.html)
+`UpdateCloseReason2Params`
 
 ##### options?
 
 `AxiosRequestConfig`
 
-#### Returns
+#### theme_returns
 
-`Promise`\<`TData`\>
+`Promise<TData>`
