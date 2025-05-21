@@ -1,6 +1,6 @@
 import { labels as contactLabels } from '@webitel/ui-sdk/api/clients/index';
 
-import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { IWtSysTypeFilterConfig, WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactLabelFilterValueField from './contact-label-filter-value-field.vue';
 import ContactLabelFilterValuePreview from './contact-label-filter-value-preview.vue';
@@ -9,6 +9,14 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
   readonly name = FilterOption.ContactLabel;
   valueInputComponent = ContactLabelFilterValueField;
   valuePreviewComponent = ContactLabelFilterValuePreview;
+  noValidation?: boolean;
+
+  constructor(params: { noValidation?: boolean } = {}) {
+    super(params);
+    if('noValidation' in params) {
+      this.noValidation = params.noValidation;
+    }
+  }
 
   searchRecords(
     params: object,
@@ -27,3 +35,7 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 
 export const createContactLabelFilterConfig = (params) =>
   new ContactLabelFilterConfig(params);
+
+export interface IContactLabelFilterConfig extends IWtSysTypeFilterConfig {
+  noValidation?: boolean;
+}

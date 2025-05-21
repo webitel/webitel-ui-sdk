@@ -118,11 +118,19 @@ export const useFilterConfigsToolkit = ({
       {},
     );
 
-    return appliedFilters.value.map((filter) => {
-      return {
-        filter,
-        filterConfig: filterNameToFilterConfigMap[filter.name],
-      };
+    return filterOptions.map((filter) => {
+      if (typeof filter === 'object') {
+        return {
+          filter: filter.name,
+          filterConfig: filterNameToFilterConfigMap[filter.name],
+        };
+      } else {
+        return {
+          filter,
+          filterConfig: filterNameToFilterConfigMap[filter],
+        };
+      }
+
     });
   });
 
