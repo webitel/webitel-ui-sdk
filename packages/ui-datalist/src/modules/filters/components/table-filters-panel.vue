@@ -1,8 +1,9 @@
 <template>
-  <dynamic-filter-panel-wrapper>
+  <dynamic-filter-panel-wrapper :class="{ 'dynamic-filter-panel-wrapper__static': static }">
     <template #filters>
-      <dynamic-filter-preview
-        v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
+      <component
+        :is="static ? 'dynamic-filter-preview-new' : 'dynamic-filter-preview'"
+        v-for="({ filter, filterConfig }) in appliedFilterToFilterConfigMappings"
         :key="filter.name"
         :filter="filter"
         :filter-config="filterConfig"
@@ -10,8 +11,18 @@
         @update:filter="emit('filter:update', $event)"
         @delete:filter="emit('filter:delete', filter)"
       />
+<!--      <dynamic-filter-preview-->
+<!--        v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"-->
+<!--        :key="filter.name"-->
+<!--        :filter="filter"-->
+<!--        :filter-config="filterConfig"-->
+<!--        disable-click-away-->
+<!--        @update:filter="emit('filter:update', $event)"-->
+<!--        @delete:filter="emit('filter:delete', filter)"-->
+<!--      />-->
 
       <dynamic-filter-add-action
+        v-if="!static"
         :filter-configs="unAppliedFiltersConfigs"
         :show-label="!appliedFilters.length"
         @add:filter="emit('filter:add', $event)"
@@ -36,12 +47,13 @@
       </template>
 
       <wt-icon-action
-        :disabled="!props.filtersManager.filters.size"
+        :disabled="!availableResetAllFilters"
         action="clear"
         @click="emit('filter:reset-all')"
       />
 
       <wt-icon-action
+        v-if="!static"
         action="close"
         @click="emit('hide')"
       />
@@ -107,6 +119,7 @@ type Props = {
    * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
    */
   usePresetsStore?: Store;
+  static: boolean;
 };
 
 const props = defineProps<Props>();
@@ -145,6 +158,32 @@ const {
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
+
+const hasAnyFilterValue = computed(() => {
+  return [...props.filtersManager.filters.values()].some(
+    (filter: any) => filter?.value !== undefined
+  )
+})
+
+const availableResetAllFilters = computed(() => {
+  return props.static ? hasAnyFilterValue : props.filtersManager.filters.size;
+})
 </script>
 
-<style scoped></style>
+<style scoped>
+.dynamic-filter-panel-wrapper__static {
+  :deep(.dynamic-filter-panel-wrapper) {
+    align-items: center;
+  }
+
+  :deep(.dynamic-filter-panel-wrapper__filters) {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-gap: var(--spacing-xs);
+  }
+
+  :deep(.dynamic-filter-config-form) {
+    width: 100%;
+  }
+}
+</style>

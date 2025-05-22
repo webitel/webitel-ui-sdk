@@ -1,13 +1,14 @@
 <template>
   <wt-select
-    v-bind="attrs"
-    :clearable="false"
+    :clearable="clearable"
+    :label="!hideLabel && t('webitelUI.filters.filterValue')"
     :options="BooleanOptions"
+    :placeholder="placeholder"
     :value="strModel"
-    :label="t('webitelUI.filters.filterValue')"
     class="has-option-filter-value-field"
     track-by="value"
     use-value-from-options-by-prop="value"
+    v-bind="attrs"
     @input="strModel = $event"
   />
 </template>
@@ -20,6 +21,12 @@ import { useI18n } from 'vue-i18n';
 import { BooleanOptions } from '../../../enums/options/BooleanFilterOptions';
 
 const model = defineModel<boolean | null>();
+
+const props = defineProps<{
+  placeholder: string;
+  clearable: boolean;
+  hideLabel: boolean;
+}>();
 
 const attrs = useAttrs();
 
