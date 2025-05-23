@@ -15,15 +15,11 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
 
   constructor(params: { hideUnassigned?: boolean, noValidation?: boolean, hideLabel?: boolean  } = {}) {
     super(params);
-    if ('hideUnassigned' in params) {
-      this.hideUnassigned = params.hideUnassigned;
-    }
-    if('noValidation' in params) {
-      this.noValidation = params.noValidation;
-    }
-    if('hideLabel' in params) {
-      this.hideLabel = params.hideLabel;
-    }
+    ['hideUnassigned', 'noValidation', 'hideLabel'].forEach((key) => {
+      if (key in params) {
+        this[key] = params[key];
+      }
+    });
   }
 
   searchRecords(

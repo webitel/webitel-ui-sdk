@@ -10,20 +10,16 @@ class HasUserFilterConfig extends WtSysTypeFilterConfig {
   valueInputComponent = HasUserFilterValueField;
   valuePreviewComponent = HasUserFilterValuePreview;
   noValidation?: boolean;
-  clearable?: boolean;
+  notDeletable: boolean;
   hideLabel?: boolean;
 
-  constructor(params: { noValidation?: boolean, clearable?: boolean, hideLabel?: boolean; } = {}) {
+  constructor(params: { noValidation?: boolean, notDeletable?: boolean, hideLabel?: boolean; } = {}) {
     super(params);
-    if ('noValidation' in params) {
-      this.noValidation = params.noValidation;
-    }
-    if('clearable' in params) {
-      this.clearable = params.clearable;
-    }
-    if('hideLabel' in params) {
-      this.hideLabel = params.hideLabel;
-    }
+    ['noValidation', 'notDeletable', 'hideLabel'].forEach((key) => {
+      if (key in params) {
+        this[key] = params[key];
+      }
+    });
   }
 }
 
@@ -32,6 +28,6 @@ export const createHasUserFilterConfig = (params) =>
 
 export interface IHasUserFilterConfig extends IWtSysTypeFilterConfig {
   noValidation?: boolean;
-  clearable?: boolean;
+  notDeletable?: boolean;
   hideLabel?: boolean;
 }

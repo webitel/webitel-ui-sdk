@@ -37,7 +37,7 @@ const strModel = computed({
     return typeof model.value === 'boolean' ? String(model.value) : model.value;
   },
   set: (value: string) => {
-    model.value = value === 'true';
+    model.value = value === 'true' ? true : value === 'false' ? false : null;
   },
 });
 </script>

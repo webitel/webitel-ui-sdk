@@ -1,6 +1,6 @@
 <template>
   <has-option-filter-value-field
-    :clearable="filterConfig.clearable"
+    :clearable="!filterConfig.notDeletable"
     :hide-label="filterConfig.hideLabel"
     :model-value="model"
     :placeholder="filterConfig.label"

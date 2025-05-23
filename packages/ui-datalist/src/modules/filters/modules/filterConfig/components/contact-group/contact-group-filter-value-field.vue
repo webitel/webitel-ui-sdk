@@ -9,7 +9,7 @@
     multiple
     track-by="id"
     use-value-from-options-by-prop="id"
-    @input="model.list = $event; emit('test', model)"
+    @input="inputModelList"
   />
   <wt-checkbox
     v-if="!props.filterConfig?.hideUnassigned"
@@ -41,7 +41,6 @@ const model = defineModel<ModelValue>();
 
 const emit = defineEmits<{
   'update:invalid': [boolean];
-  'test': object,
 }>();
 const { t } = useI18n();
 
@@ -54,6 +53,13 @@ const initModel = () => {
   }
 };
 onMounted(() => initModel());
+
+const inputModelList = (event) => {
+  model.value = {
+    ...model.value,
+    list: event,
+  };
+};
 
 const v$ = computed(() => {
   if (props.filterConfig?.noValidation) return null;

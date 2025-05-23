@@ -13,7 +13,7 @@ import {
 
 export const createTableStore = <Entity extends { id: string; etag?: string }>(
   namespace: string,
-  { apiModule, headers, disablePersistence }: useTableStoreParams<Entity>,
+  { apiModule, headers, disablePersistence, filterMode = 'dynamic' }: useTableStoreParams<Entity>,
 ) => {
   const usePaginationStore = createTablePaginationStore(namespace);
   const useHeadersStore = createTableHeadersStore(namespace, { headers });
@@ -182,6 +182,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
       filtersManager,
       isFiltersRestoring,
+      filterMode,
 
       initialize,
 

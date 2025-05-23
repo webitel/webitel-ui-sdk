@@ -14,12 +14,11 @@ class ContactLabelFilterConfig extends WtSysTypeFilterConfig {
 
   constructor(params: { noValidation?: boolean, hideLabel?: boolean } = {}) {
     super(params);
-    if('noValidation' in params) {
-      this.noValidation = params.noValidation;
-    }
-    if('hideLabel' in params) {
-      this.hideLabel = params.hideLabel;
-    }
+    ['noValidation', 'hideLabel'].forEach((key) => {
+      if (key in params) {
+        this[key] = params[key];
+      }
+    });
   }
 
   searchRecords(
