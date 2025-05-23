@@ -1,8 +1,9 @@
 <template>
-  <dynamic-filter-panel-wrapper>
+  <dynamic-filter-panel-wrapper
+    :class="{ 'dynamic-filter-panel-wrapper__static': isStaticMode }">
     <template #filters>
       <dynamic-filter-preview
-        v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
+        v-for="({ filter, filterConfig }) in appliedFilterToFilterConfigMappings"
         :key="filter.name"
         :filter="filter"
         :filter-config="filterConfig"
@@ -12,6 +13,7 @@
       />
 
       <dynamic-filter-add-action
+        v-if="!isStaticMode"
         :filter-configs="unAppliedFiltersConfigs"
         :show-label="!appliedFilters.length"
         @add:filter="emit('filter:add', $event)"
@@ -36,12 +38,13 @@
       </template>
 
       <wt-icon-action
-        :disabled="!props.filtersManager.filters.size"
+        :disabled="disableResetAllFilters"
         action="clear"
         @click="emit('filter:reset-all')"
       />
 
       <wt-icon-action
+        v-if="!isStaticMode"
         action="close"
         @click="emit('hide')"
       />
@@ -52,7 +55,7 @@
 <script lang="ts" setup>
 import { WtIconAction } from '@webitel/ui-sdk/components';
 import { Store } from 'pinia';
-import {computed} from 'vue';
+import { computed, inject } from 'vue';
 import {WebitelProtoDataField} from "webitel-sdk";
 
 import { ApplyPresetAction, SavePresetAction } from '../../filter-presets';
@@ -110,6 +113,7 @@ type Props = {
 };
 
 const props = defineProps<Props>();
+const isStaticMode = inject('isStaticMode');
 
 /**
  * @author @dlohvinov
@@ -145,6 +149,43 @@ const {
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
+
+const hasAnyFilterValue = computed(() => {
+  return [...props.filtersManager.filters.values()].some(({value}: any) => {
+
+    if (Array.isArray(value)) {
+      return value.length > 0;
+    }
+
+    if (typeof value?.list === 'object' && value?.list !== null) {
+      return Object.keys(value?.list).length > 0;
+    }
+
+    return !!value;
+  });
+});
+
+const disableResetAllFilters = computed(() => {
+  return isStaticMode?.value ? !hasAnyFilterValue.value : !props.filtersManager.filters.size;
+});
 </script>
 
-<style scoped></style>
+<style>
+.dynamic-filter-panel-wrapper__static {
+  .dynamic-filter-panel-wrapper {
+    align-items: center;
+  }
+  .dynamic-filter-panel-wrapper__filters {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-gap: var(--spacing-xs);
+  }
+
+  .dynamic-filter-config-view {
+    flex: 1;
+  }
+  .dynamic-filter-config-form {
+    width: 100%;
+  }
+}
+</style>

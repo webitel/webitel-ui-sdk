@@ -1,9 +1,14 @@
 <template>
   <div class="dynamic-filter-config-view">
+    <template v-if="isStaticMode">
+      <slot name="content" />
+    </template>
+
     <wt-tooltip
-      :triggers="['click']"
-      :disabled="props.disabled"
+      v-else
       :disable-click-away="props.disableClickAway"
+      :disabled="props.disabled"
+      :triggers="['click']"
     >
       <template #activator="slotScope">
         <slot
@@ -28,6 +33,7 @@
  */
 
 import { WtTooltip } from '@webitel/ui-sdk/components';
+import { inject } from 'vue';
 
 interface Props {
   disabled?: boolean;
@@ -35,6 +41,9 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const isStaticMode = inject('isStaticMode');
+
 </script>
 
 <style scoped></style>

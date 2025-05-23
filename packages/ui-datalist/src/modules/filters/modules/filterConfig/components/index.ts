@@ -76,6 +76,7 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
+import { createHasUserFilterConfig } from './has-user';
 import ContactLabelFilter from './contact-label/contact-label-filter-value-field.vue';
 import ContactLabelFilterPreview from './contact-label/contact-label-filter-value-preview.vue';
 import { createContactLabelFilterConfig } from './contact-label';
@@ -324,4 +325,5 @@ export const FilterOptionToFilterConfigCreatorMap = {
   [FilterOption.ContactLabel]: createContactLabelFilterConfig,
   [FilterOption.ContactOwner]: createContactOwnerFilterConfig,
   [FilterOption.ContactGroup]: createContactGroupFilterConfig,
+  [FilterOption.HasUser]: createHasUserFilterConfig,
 };

@@ -45,20 +45,18 @@
     </template>
 
     <template #content="{ tooltipSlotScope }">
-      <slot
-        name="form"
-        v-bind="{ tooltipSlotScope }"
-      >
-        <dynamic-filter-config-form
-          :filter="props.filter"
-          :filter-config="filterConfig"
-          @cancel="() => tooltipSlotScope.hide()"
-          @submit="
-            (payload) => submit(payload, { hide: tooltipSlotScope.hide })
-          "
-        />
-      </slot>
-    </template>
+        <slot
+          name="form"
+          v-bind="{ tooltipSlotScope }"
+        >
+          <dynamic-filter-config-form
+            :filter="props.filter"
+            :filter-config="filterConfig"
+            @cancel="() => tooltipSlotScope.hide()"
+            @submit="(payload) => submit(payload, isStaticMode ? {} : { hide: tooltipSlotScope.hide })"
+          />
+        </slot>
+      </template>
   </dynamic-filter-config-view>
 </template>
 
@@ -69,13 +67,12 @@ import {
   WtLoader,
   WtTooltip,
 } from '@webitel/ui-sdk/components';
-import { computed, ref, watch } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { FilterData, IFilter } from '../../classes/Filter';
 import { AnyFilterConfig } from '../../modules/filterConfig/classes/FilterConfig';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
-import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
 import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
@@ -93,6 +90,8 @@ interface Props {
 const { t } = useI18n();
 
 const props = defineProps<Props>();
+
+const isStaticMode = inject('isStaticMode');
 
 const emit = defineEmits<{
   'update:filter': [FilterData];
@@ -154,9 +153,9 @@ const isRenderPreview = computed(
   () => localValue.value === false || localValue.value,
 );
 
-const submit = (filter: IFilter, { hide }) => {
+const submit = (filter: IFilter, payload?: { hide?: () => void }) => {
   emit('update:filter', filter);
-  hide();
+  if(!isStaticMode?.value) payload.hide();
 };
 
 const deleteFilter = () => {
@@ -167,8 +166,8 @@ const deleteFilter = () => {
 <style lang="scss" scoped>
 .wt-chip {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-2xs);
 }
 
