@@ -51,18 +51,22 @@ export const createDatalistStore = <
 >): PatchableStoreFactory<StoreBody> => {
   const thisStoreType = config.storeType || defaultStoreType;
 
-  const storeFactory = storeBody({
-    ...config,
-    storeType: thisStoreType,
-  }) as PatchableStore<StoreBody>;
-
   if (thisStoreType === DatalistStoreProvider.Composable) {
+    const storeFactory = storeBody({
+      ...config,
+      storeType: thisStoreType,
+    }) as PatchableStore<StoreBody>;
     storeFactory.$patch = (val: Patch) => applyStorePatch(storeFactory, val);
     return () => storeFactory;
   }
 
   if (thisStoreType === DatalistStoreProvider.Pinia) {
-    return definePiniaStore(namespace, () => storeFactory);
+    return definePiniaStore(namespace, () =>
+      storeBody({
+        ...config,
+        storeType: thisStoreType,
+      }),
+    );
   }
 
   throw new Error(`Unsupported store type: ${thisStoreType}`);

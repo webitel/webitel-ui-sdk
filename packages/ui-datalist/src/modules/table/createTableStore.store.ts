@@ -17,32 +17,24 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   namespace: string,
   config: useTableStoreConfig<Entity>,
 ) => {
-  const { apiModule, headers: rowHeaders, disablePersistence } = config;
-  const usePaginationStore = createTablePaginationStore(namespace, {
-    ...config,
-    storeType: 'composable',
+  const {
+    apiModule,
+    headers: rowHeaders,
+    disablePersistence,
+    storeType,
+  } = config;
+  const usePaginationStore = createTablePaginationStore(namespace, config);
+  const useHeadersStore = createTableHeadersStore(namespace, config, {
+    headers: rowHeaders,
   });
-  const useHeadersStore = createTableHeadersStore(
-    namespace,
-    {
-      ...config,
-      storeType: 'composable',
-    },
-    {
-      headers: rowHeaders,
-    },
-  );
-  const useFiltersStore = createTableFiltersStore(namespace, {
-    ...config,
-    storeType: 'composable',
-  });
+  const useFiltersStore = createTableFiltersStore(namespace, config);
 
   const parentId = ref();
 
   const paginationStore = usePaginationStore();
   const { page, size, next } = makeThisToRefs<typeof paginationStore>(
     paginationStore,
-    'composable',
+    storeType,
   );
   const {
     updatePage,
@@ -55,7 +47,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   const headersStore = useHeadersStore();
   const { headers, shownHeaders, fields, sort } = makeThisToRefs<
     typeof headersStore
-  >(headersStore, 'composable');
+  >(headersStore, storeType);
   const {
     updateSort,
     updateShownHeaders,
@@ -65,7 +57,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   const filtersStore = useFiltersStore();
   const { filtersManager, isRestoring: isFiltersRestoring } = makeThisToRefs<
     typeof filtersStore
-  >(filtersStore, 'composable');
+  >(filtersStore, storeType);
   const {
     hasFilter,
     addFilter,
