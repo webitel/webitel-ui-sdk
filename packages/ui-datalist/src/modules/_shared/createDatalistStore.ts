@@ -4,7 +4,14 @@ import {
   StoreGeneric,
   storeToRefs as piniaStoreToRefs,
 } from 'pinia';
-import { isRef, Ref, ref, toRefs as composableStoreToRefs, unref } from 'vue';
+import {
+  isRef,
+  Ref,
+  ref,
+  ToRefs,
+  toRefs as composableStoreToRefs,
+  unref,
+} from 'vue';
 
 import {
   CreateDatalistStoreParams,
@@ -28,20 +35,19 @@ const defaultStoreType = DatalistStoreProvider.Pinia;
 export const makeThisToRefs = <StoreBody extends object>(
   store: StoreBody,
   storeType: DatalistStoreProviderType,
-): StoreBody => {
+): ToRefs<StoreBody> => {
   const thisStoreType = storeType || defaultStoreType;
 
   if (thisStoreType === DatalistStoreProvider.Pinia) {
-    return piniaStoreToRefs(store as StoreGeneric) as StoreBody;
+    return piniaStoreToRefs(store as StoreGeneric) as ToRefs<StoreBody>;
   }
 
-  return composableStoreToRefs(store) as StoreBody;
+  return composableStoreToRefs(store) as ToRefs<StoreBody>;
 };
 
 /**
- * in some situations when we used pinia's store, we used $patch method, to set changes for store data.
- * but in composable store we don't have this method.
- * So, applyStorePatch is used to apply a replacement for the $patch method in pinia and use it in both situations.
+ * applyStorePatch is used to replace the $patch method,
+ * that is available in pinia, but not available in the composable stores.
  * */
 const applyStorePatch = <StoreBody extends StoreInstance>(
   store: StoreBody | Store,
