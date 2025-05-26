@@ -86,11 +86,8 @@ export const createTableFiltersStore = <Entity>(
 ) => {
   const id = `${namespace}/filters`;
   return createDatalistStore({
-    storeBody: () =>
-      tableFiltersStoreBody({
-        filtersManagerConfig: config.filtersManagerConfig,
-      }),
-    namespace: id,
+    storeBody: tableFiltersStoreBody,
     config,
+    namespace: id,
   });
 };

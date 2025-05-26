@@ -10,7 +10,6 @@ import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
 import {
   PatchItemPropertyParams,
-  TableStore,
   useTableStoreConfig,
 } from '../types/tableStore.types';
 
@@ -18,12 +17,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   namespace: string,
   config: useTableStoreConfig<Entity>,
 ) => {
-  const {
-    apiModule,
-    headers: rowHeaders,
-    disablePersistence,
-    storeType,
-  } = config;
+  const { apiModule, headers: rowHeaders, disablePersistence } = config;
   const usePaginationStore = createTablePaginationStore(namespace, {
     ...config,
     storeType: 'composable',
@@ -54,7 +48,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updatePage,
     updateSize,
     // $reset: $resetPaginationStore,
-    storePatch: $patchPaginationStore,
+    $patch: $patchPaginationStore,
     setupPersistence: setupPaginationPersistence,
   } = paginationStore;
 
@@ -242,9 +236,4 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
     namespace,
     config,
   });
-  // return definePiniaStore(namespace, () => createDatalistStore({
-  //   storeBody: () => tableStoreBody(namespace, config),
-  //   namespace,
-  //   config,
-  // }))
 };
