@@ -76,8 +76,8 @@ import { FilterData, IFilter } from '../../classes/Filter';
 import { AnyFilterConfig } from '../../modules/filterConfig/classes/FilterConfig';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
 import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
-import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
-import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
+import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
+import DynamicFilterConfigView from '../config/dynamic-view/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 interface Props {

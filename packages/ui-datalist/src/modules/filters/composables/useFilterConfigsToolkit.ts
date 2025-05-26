@@ -91,6 +91,14 @@ export const useFilterConfigsToolkit = ({
     );
   });
 
+  const staticViewFilterConfigs = computed(() => {
+    return filterConfigs.value.filter(({ staticView }) => !!staticView);
+  });
+
+  const dynamicViewFilterConfigs = computed(() => {
+    return filterConfigs.value.filter(({ staticView }) => !staticView);
+  });
+
   const filtersIncluded = computed(() => {
     return filterConfigs.value.map(({ name }) => name);
   });
@@ -126,11 +134,23 @@ export const useFilterConfigsToolkit = ({
     });
   });
 
+  const staticViewFilterToFilterConfigMappings = computed(() => {
+    return staticViewFilterConfigs.value.map((filterConfig) => {
+      return {
+        filter: filtersManager.getFilter(filterConfig.name),
+        filterConfig,
+      }
+      });
+    });
+
   return {
     filterConfigs,
+    staticViewFilterConfigs,
+    dynamicViewFilterConfigs,
     filtersIncluded,
     appliedFilters,
     appliedFilterToFilterConfigMappings,
+    staticViewFilterToFilterConfigMappings,
     unAppliedFiltersConfigs,
   };
 };

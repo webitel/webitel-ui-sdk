@@ -35,8 +35,8 @@ import { useI18n } from 'vue-i18n';
 
 import {FilterInitParams} from "../classes/Filter";
 import {BaseFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
-import DynamicFilterConfigForm from './config/dynamic-filter-config-form.vue';
-import DynamicFilterConfigView from './config/dynamic-filter-config-view.vue';
+import DynamicFilterConfigForm from './config/dynamic-view/dynamic-filter-config-form.vue';
+import DynamicFilterConfigView from './config/dynamic-view/dynamic-filter-config-view.vue';
 
 interface Props {
   filterConfigs: BaseFilterConfig[];

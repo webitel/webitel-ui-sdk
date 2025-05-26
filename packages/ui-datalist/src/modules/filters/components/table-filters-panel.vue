@@ -1,6 +1,16 @@
 <template>
   <dynamic-filter-panel-wrapper>
     <template #filters>
+      <static-filter-field
+        v-for="({ filter, filterConfig }) in staticViewFilterToFilterConfigMappings"
+        :key="filterConfig.name"
+        :filter-config="filterConfig"
+        :filter="filter"
+        @add:filter="emit('filter:add', $event)"
+        @update:filter="emit('filter:update', $event)"
+        @delete:filter="emit('filter:delete', filter)"
+      />
+
       <dynamic-filter-preview
         v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
         :key="filter.name"
@@ -61,6 +71,7 @@ import {IFiltersManager} from "../classes/FiltersManager";
 import {useFilterConfigsToolkit} from "../composables/useFilterConfigsToolkit";
 import {AnyFilterConfig} from "../modules/filterConfig/classes/FilterConfig";
 import { FilterOption } from '../modules/filterConfig/enums/FilterOption';
+import StaticFilterField from './config/static-view/static-filter-field.vue';
 import DynamicFilterAddAction from './dynamic-filter-add-action.vue';
 import DynamicFilterPanelWrapper from './dynamic-filter-panel-wrapper.vue';
 import DynamicFilterPreview from './preview/dynamic-filter-preview.vue';
@@ -134,6 +145,9 @@ const emit = defineEmits<{
 
 const {
   filterConfigs,
+  staticViewFilterConfigs,
+  dynamicViewFilterConfigs,
+  staticViewFilterToFilterConfigMappings,
   filtersIncluded,
   appliedFilters,
   appliedFilterToFilterConfigMappings,
