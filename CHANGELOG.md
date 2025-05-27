@@ -1,3 +1,20 @@
+## [v25.6.18] - 2025-05-27
+### :sparkles: New Features
+- [`a5ff89d`](https://github.com/webitel/webitel-ui-sdk/commit/a5ff89d29fd0db74454defae934775b7763af7f4) - update display wt-tree-table-row [WTEL-6859](https://webitel.atlassian.net/browse/WTEL-6859) *(commit by [@stanislav-kozak](https://github.com/stanislav-kozak))*
+- [`c87969d`](https://github.com/webitel/webitel-ui-sdk/commit/c87969d193a153c02b9e52f04e97f7bbc6a151fd) - api services generated files and configs moved to new package, ui-sdk package cleanup [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`7a9be6d`](https://github.com/webitel/webitel-ui-sdk/commit/7a9be6dd25eb1ff96923bf863a81a619b318b478) - setup openapi-format case conversion of api schema [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`0231674`](https://github.com/webitel/webitel-ui-sdk/commit/02316745e0c8a29e8b96d2ec64d7144a3c5cdb88) - orval custom axios client generation [WTEL-6876](https://webitel.atlassian.net/browse/WTEL-6876) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`a487feb`](https://github.com/webitel/webitel-ui-sdk/commit/a487febf59c168141e68bc9b053771a653950a4f) - orval config updates, added zod as project dep [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :recycle: Refactors
+- [`0f5af2c`](https://github.com/webitel/webitel-ui-sdk/commit/0f5af2cdd30e182dafe0d44ccfb164bca38a492c) - orval.config.ts cleanups and refactors [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+### :wrench: Chores
+- [`786ce61`](https://github.com/webitel/webitel-ui-sdk/commit/786ce618d62f0806e7b1a36844a6846a6c0503c9) - api-services/ rm docs generated files [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`d7ec8a6`](https://github.com/webitel/webitel-ui-sdk/commit/d7ec8a61a2d175cd91986f8b20f082b7fbbb32d7) - api-services/ pushed generated files [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+- [`41d2c0c`](https://github.com/webitel/webitel-ui-sdk/commit/41d2c0c842380020e688a74026855d2650978c70) - api-services/ pushed generated files [WTEL-6397](https://webitel.atlassian.net/browse/WTEL-6397) *(commit by [@dlohvinov](https://github.com/dlohvinov))*
+
+
 ## [v25.6.17] - 2025-05-19
 ### :recycle: Refactors
 - [`5e9f56c`](https://github.com/webitel/webitel-ui-sdk/commit/5e9f56c28cee3e0cf4bc1f1f6097a7efdeeaa19c) - update package versions to 25.6.16 and 25.6.17 [WTEL-6827](https://webitel.atlassian.net/browse/WTEL-6827) *(commit by [@VladimirBeria](https://github.com/VladimirBeria))*
@@ -2174,3 +2191,4 @@
 [v25.6.15]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.14...v25.6.15
 [v25.6.16]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.15...v25.6.16
 [v25.6.17]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.16...v25.6.17
+[v25.6.18]: https://github.com/webitel/webitel-ui-sdk/compare/v25.6.17...v25.6.18
