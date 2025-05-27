@@ -29,6 +29,5 @@ jobs:
         run: |
           cd packages/api-services
           npm ci
-          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm run make-all
