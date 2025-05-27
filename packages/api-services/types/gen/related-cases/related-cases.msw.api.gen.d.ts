@@ -1,15 +1,15 @@
 import { http } from 'msw';
 import type { CasesRelatedCase, CasesRelatedCaseList } from '.././_models';
-export declare const getDeleteRelatedCaseResponseMock: (overrideResponse?: Partial<CasesRelatedCase>) => CasesRelatedCase;
 export declare const getUpdateRelatedCase2ResponseMock: (overrideResponse?: Partial<CasesRelatedCase>) => CasesRelatedCase;
 export declare const getUpdateRelatedCaseResponseMock: (overrideResponse?: Partial<CasesRelatedCase>) => CasesRelatedCase;
 export declare const getListRelatedCasesResponseMock: (overrideResponse?: Partial<CasesRelatedCaseList>) => CasesRelatedCaseList;
 export declare const getCreateRelatedCaseResponseMock: (overrideResponse?: Partial<CasesRelatedCase>) => CasesRelatedCase;
+export declare const getDeleteRelatedCaseResponseMock: (overrideResponse?: Partial<CasesRelatedCase>) => CasesRelatedCase;
 export declare const getLocateRelatedCaseResponseMock: (overrideResponse?: Partial<CasesRelatedCase>) => CasesRelatedCase;
-export declare const getDeleteRelatedCaseMockHandler: (overrideResponse?: CasesRelatedCase | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesRelatedCase> | CasesRelatedCase)) => import("msw").HttpHandler;
 export declare const getUpdateRelatedCase2MockHandler: (overrideResponse?: CasesRelatedCase | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<CasesRelatedCase> | CasesRelatedCase)) => import("msw").HttpHandler;
 export declare const getUpdateRelatedCaseMockHandler: (overrideResponse?: CasesRelatedCase | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<CasesRelatedCase> | CasesRelatedCase)) => import("msw").HttpHandler;
 export declare const getListRelatedCasesMockHandler: (overrideResponse?: CasesRelatedCaseList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesRelatedCaseList> | CasesRelatedCaseList)) => import("msw").HttpHandler;
 export declare const getCreateRelatedCaseMockHandler: (overrideResponse?: CasesRelatedCase | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<CasesRelatedCase> | CasesRelatedCase)) => import("msw").HttpHandler;
+export declare const getDeleteRelatedCaseMockHandler: (overrideResponse?: CasesRelatedCase | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesRelatedCase> | CasesRelatedCase)) => import("msw").HttpHandler;
 export declare const getLocateRelatedCaseMockHandler: (overrideResponse?: CasesRelatedCase | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesRelatedCase> | CasesRelatedCase)) => import("msw").HttpHandler;
 export declare const getRelatedCasesMock: () => import("msw").HttpHandler[];
