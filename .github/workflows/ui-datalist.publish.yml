@@ -33,8 +33,8 @@ jobs:
         # if: ${{ steps.check_publish.outputs.exists == '0' }}
 
         run: |
-          npm i --install-links
           cd packages/ui-datalist
+          npm i --install-links
           echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm run utils:publish
