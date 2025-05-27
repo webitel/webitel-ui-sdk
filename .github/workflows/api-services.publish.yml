@@ -31,3 +31,6 @@ jobs:
           cd packages/api-services
           npm ci
           npm run make-all
+
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5
