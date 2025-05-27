@@ -1,12 +1,13 @@
 <template>
   <form class="dynamic-filter-config-form">
     <wt-select
+      v-if="!isStaticMode"
       :clearable="false"
       :disabled="editMode"
       :label="t('webitelUI.filters.filterName')"
       :options="filterConfigOptions"
-      option-label="label"
       :value="filterName"
+      option-label="label"
       track-by="name"
       use-value-from-options-by-prop="name"
       @input="onFilterNameUpdate($event)"
@@ -23,23 +24,27 @@
       }"
     >
       <dynamic-filter-config-form-value-input
-        v-if="filterName"
+        v-if="isStaticMode ? true : filterName"
         :key="filterName"
-        :model-value="filterValue"
         :filter-config="selectedFilterConfig"
         :label="valueInputLabelText"
+        :model-value="filterValue"
+        @submit="submit"
         @update:model-value="onValueChange"
         @update:invalid="onValueInvalidChange"
       />
     </slot>
 
     <dynamic-filter-config-form-label
+      v-if="!isStaticMode"
       :value="filterLabel"
       @update:model-value="onLabelValueUpdate"
       @update:invalid="(v) => (invalid = v)"
     />
 
-    <footer class="dynamic-filter-config-form-footer">
+    <footer
+      v-if="!isStaticMode"
+      class="dynamic-filter-config-form-footer">
       <wt-button
         :disabled="invalid"
         wide
@@ -62,7 +67,7 @@
 <script lang="ts" setup>
 import { WtButton, WtSelect } from '@webitel/ui-sdk/components';
 import deepcopy from 'deep-copy';
-import { computed, ref, watch } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import {FilterInitParams, IFilter} from "../../classes/Filter";
@@ -102,6 +107,8 @@ const filterValue = ref();
 const editMode = !!props.filter;
 
 const invalid = ref(false);
+
+const isStaticMode = inject('isStaticMode');
 
 const filterConfigOptions = computed(() => {
   if (props.filterConfig) {
@@ -153,7 +160,7 @@ const submit = () => {
 
 if (props.filter) {
   watch(
-    props.filter,
+    () => props.filter.value,
     () => {
       filterName.value = props.filter.name;
       filterValue.value = deepcopy(props.filter.value);
@@ -170,10 +177,10 @@ $form-width: 380px;
 .dynamic-filter-config-form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
   box-sizing: border-box;
-  padding: var(--spacing-xs) 0;
   width: $form-width;
+  padding: var(--spacing-xs) 0;
+  gap: var(--spacing-xs);
 }
 
 .dynamic-filter-config-form-footer {

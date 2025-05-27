@@ -1,13 +1,14 @@
 <template>
   <wt-select
-    v-bind="attrs"
-    :clearable="false"
+    :clearable="clearable"
+    :label="!hideLabel && t('webitelUI.filters.filterValue')"
     :options="BooleanOptions"
+    :placeholder="placeholder"
     :value="strModel"
-    :label="t('webitelUI.filters.filterValue')"
     class="has-option-filter-value-field"
     track-by="value"
     use-value-from-options-by-prop="value"
+    v-bind="attrs"
     @input="strModel = $event"
   />
 </template>
@@ -21,6 +22,12 @@ import { BooleanOptions } from '../../../enums/options/BooleanFilterOptions';
 
 const model = defineModel<boolean | null>();
 
+const props = defineProps<{
+  placeholder: string;
+  clearable: boolean;
+  hideLabel: boolean;
+}>();
+
 const attrs = useAttrs();
 
 const { t } = useI18n();
@@ -30,7 +37,7 @@ const strModel = computed({
     return typeof model.value === 'boolean' ? String(model.value) : model.value;
   },
   set: (value: string) => {
-    model.value = value === 'true';
+    model.value = value === 'true' ? true : value === 'false' ? false : null;
   },
 });
 </script>

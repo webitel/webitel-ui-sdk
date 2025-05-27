@@ -10,12 +10,16 @@ class ContactGroupFilterConfig extends WtSysTypeFilterConfig {
   valueInputComponent = ContactGroupFilterValueField;
   valuePreviewComponent = ContactGroupFilterValuePreview;
   hideUnassigned?: boolean;
+  noValidation?: boolean;
+  hideLabel?: boolean;
 
-  constructor(params: { hideUnassigned?: boolean } = {}) {
+  constructor(params: { hideUnassigned?: boolean, noValidation?: boolean, hideLabel?: boolean  } = {}) {
     super(params);
-    if ('hideUnassigned' in params) {
-      this.hideUnassigned = params.hideUnassigned;
-    }
+    ['hideUnassigned', 'noValidation', 'hideLabel'].forEach((key) => {
+      if (key in params) {
+        this[key] = params[key];
+      }
+    });
   }
 
   searchRecords(
@@ -40,4 +44,6 @@ export const createContactGroupFilterConfig = (params) =>
 
 export interface IContactGroupFilterConfig extends IWtSysTypeFilterConfig {
   hideUnassigned?: boolean;
+  noValidation?: boolean;
+  hideLabel?: boolean;
 }

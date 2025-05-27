@@ -1,20 +1,21 @@
 <template>
   <wt-select
     :close-on-select="false"
-    :label="t('webitelUI.filters.filterValue')"
+    :label="!filterConfig.hideLabel && t('webitelUI.filters.filterValue')"
+    :placeholder="filterConfig.hideLabel && filterConfig.label"
     :search-method="props.filterConfig.searchRecords"
-    :v="v$.model.list"
+    :v="v$?.model.list"
     :value="model?.list"
     multiple
     track-by="id"
     use-value-from-options-by-prop="id"
-    @input="model.list = $event"
+    @input="inputModelList"
   />
   <wt-checkbox
     v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
-    :v="v$.model.unassigned"
+    :v="v$?.model.unassigned"
     @change="model.unassigned = $event"
   />
 </template>
@@ -53,22 +54,43 @@ const initModel = () => {
 };
 onMounted(() => initModel());
 
-const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      list: { required: requiredIf(() => !model.value.unassigned) },
-      unassigned: { required: requiredIf(() => props.filterConfig?.hideUnassigned && !model.value.list.length) },
-    },
-  })),
-  { model },
-  { $autoDirty: true },
-);
-v$.value.$touch();
+const inputModelList = (event) => {
+  model.value = {
+    ...model.value,
+    list: event,
+  };
+};
+
+const v$ = computed(() => {
+  if (props.filterConfig?.noValidation) return null;
+  return useVuelidate(
+    computed(() => ({
+      model: {
+        list: { required: requiredIf(() => !model.value.unassigned) },
+        unassigned: {
+          required: requiredIf(() =>
+            props.filterConfig?.hideUnassigned && !model.value.list.length
+          ),
+        },
+      },
+    })),
+    { model },
+    { $autoDirty: true }
+  );
+});
+watch(
+  v$,
+  (v) => {
+    if (v) v.value.$touch();
+  },
+  { immediate: true });
 
 watch(
-  () => v$.value.$invalid,
+  () => v$?.value?.$invalid,
   (invalid) => {
-    emit('update:invalid', invalid);
+    if (v$?.value) {
+      emit('update:invalid', invalid);
+    }
   },
   { immediate: true },
 );

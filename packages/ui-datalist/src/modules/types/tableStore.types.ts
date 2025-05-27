@@ -7,6 +7,7 @@ export interface useTableStoreParams<Entity> {
   apiModule: ApiModule<Entity>;
   headers: [];
   disablePersistence?: boolean | [];
+  filterMode?: 'static' | 'dynamic';
   // etagMode: boolean;
 }
 
@@ -37,6 +38,7 @@ export interface TableStore<Entity> {
   // filtersStore
   filtersManager: Ref<IFiltersManager>;
   isFiltersRestoring: Ref<boolean>;
+  filterMode: string;
 
   // tableStore
   initialize: () => Promise<void>;
