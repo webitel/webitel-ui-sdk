@@ -45,12 +45,11 @@
     "zod": "^4.0.0-beta.20250505T195954"
   },
   "devDependencies": {
-    "webitel-sdk": "^25.4.3",
-    "vue-tsc": "^2.2.10",
     "@biomejs/biome": "1.9.4",
     "@faker-js/faker": "^9.7.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
+    "api-spec-converter": "^0.0.3",
     "globby": "^14.1.0",
     "husky": "^9.1.7",
     "msw": "^2.8.2",
@@ -59,9 +58,10 @@
     "path": "^0.12.7",
     "publint": "^0.3.9",
     "typedoc": "^0.28.4",
-    "api-spec-converter": "^2.12.0",
     "typedoc-github-wiki-theme": "^2.1.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "vue-tsc": "^2.2.10",
+    "webitel-sdk": "^25.4.3"
   },
   "engines": {
     "npm": "10",
