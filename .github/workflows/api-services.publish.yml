@@ -27,7 +27,8 @@ jobs:
         id: publish_release
 
         run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           cd packages/api-services
           npm ci
-          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+#          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm run make-all
