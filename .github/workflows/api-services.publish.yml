@@ -4,11 +4,6 @@ on:
 #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
   workflow_dispatch:
 
-#  ATTENTION! deps install is currently not needed because package is publishing as is, without build
-
-#  install_deps:
-#    runs-on: ubuntu-latest
-#    steps:
 jobs:
   publish:
     permissions:
