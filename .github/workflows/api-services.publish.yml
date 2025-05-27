@@ -30,5 +30,4 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           cd packages/api-services
           npm ci
-#          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm run make-all
