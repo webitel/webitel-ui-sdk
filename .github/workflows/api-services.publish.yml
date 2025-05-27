@@ -1,4 +1,4 @@
-name: webitel api-services pckg publish
+name: webitel api-services pkg publish
 
 on:
 #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
