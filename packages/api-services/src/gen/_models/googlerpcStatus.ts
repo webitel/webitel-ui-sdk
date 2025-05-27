@@ -4,10 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { GoogleProtobufAny } from './googleProtobufAny';
+import type { ProtobufAny } from './protobufAny';
 
-export interface GoogleRpcStatus {
+export interface GooglerpcStatus {
 	code?: number;
-	details?: GoogleProtobufAny[];
+	details?: ProtobufAny[];
 	message?: string;
 }
