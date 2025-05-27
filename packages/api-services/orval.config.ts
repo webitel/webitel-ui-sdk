@@ -9,18 +9,23 @@ import { defineConfig } from 'orval';
 const outputWorkspace = './src/gen';
 const outputTarget = '';
 const inputTarget = './formatted-openapi.yaml';
+// const inputTarget = 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json';
 const sharedGenFileExtension = 'gen.ts';
 
 const runFormatterCLICommand =
+  // 'true';
   'npx biome check --write --unsafe'; /* coz prettier doenst work 🤷🤷‍🤷‍♀️ */
 
 export default defineConfig({
   main: {
     input: {
-      target:
-        // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-        inputTarget,
-      override: {},
+      target: inputTarget,
+      // override: {
+      //   transformer: (openAPIObject) => {
+      //     console.info(JSON.stringify(openAPIObject, null, 2));
+      //     return openAPIObject;
+      //   },
+      // },
     },
     output: {
       workspace: outputWorkspace,
@@ -51,9 +56,7 @@ export default defineConfig({
   },
   zod: {
     input: {
-      target:
-        // 'https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json',
-        inputTarget,
+      target: inputTarget,
     },
     output: {
       workspace: outputWorkspace,

@@ -5,9 +5,10 @@
   "scripts": {
     "gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:cleanup",
     "publish-lib": "(npm run build:types || true) && npm publish --access public",
-    "gen:api:convert-openapi": "api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/engine.swagger.json > swagger.yaml",
+    "gen:api:convert-openapi": "api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
+    "gen:api:convert-openapi--tst": "api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml ../../../protos/swagger/cases.swagger.json > swagger.yaml",
     "gen:api:format-openapi": "openapi-format swagger.yaml -o formatted-openapi.yaml",
-    "gen:api:cleanup": "rm formatted-openapi.yaml",
+    "gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
     "orval": "orval",
     "lint:package": "publint",
