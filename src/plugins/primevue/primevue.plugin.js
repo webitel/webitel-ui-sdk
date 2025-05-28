@@ -2,6 +2,7 @@ import PAutoComplete from 'primevue/autocomplete';
 import PButton from 'primevue/button';
 import PrimeVue from 'primevue/config';
 import PInputText from 'primevue/inputtext';
+import Tooltip from 'primevue/tooltip';
 
 import WebitelTheme from './theme/webitel-theme.js';
 
@@ -24,6 +25,8 @@ const initPrimevue = (app) => {
   app.component('PButton', changeComponentCompatMode(PButton));
   app.component('PAutoComplete', changeComponentCompatMode(PAutoComplete));
   app.component('PInputText', changeComponentCompatMode(PInputText));
+
+  app.directive('tooltip', Tooltip);
 };
 
 export default initPrimevue;
