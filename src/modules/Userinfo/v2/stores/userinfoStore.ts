@@ -19,6 +19,7 @@ export const createUserinfoStore = () => {
       hasDeleteAccess,
       initialize: initializeAccessStore,
       routeAccessGuard,
+      hasSpecialGlobalActionAccess,
     } = accessStore;
 
     const userId = ref();
@@ -46,6 +47,7 @@ export const createUserinfoStore = () => {
       hasDeleteAccess,
 
       routeAccessGuard,
+      hasSpecialGlobalActionAccess,
     };
   });
 

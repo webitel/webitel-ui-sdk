@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { CasesLocateStatusConditionResponse, CasesStatusCondition, CasesStatusConditionList } from '.././_models';
+export declare const getListStatusConditionsResponseMock: (overrideResponse?: Partial<CasesStatusConditionList>) => CasesStatusConditionList;
+export declare const getCreateStatusConditionResponseMock: (overrideResponse?: Partial<CasesStatusCondition>) => CasesStatusCondition;
+export declare const getDeleteStatusConditionResponseMock: (overrideResponse?: Partial<CasesStatusCondition>) => CasesStatusCondition;
+export declare const getLocateStatusConditionResponseMock: (overrideResponse?: Partial<CasesLocateStatusConditionResponse>) => CasesLocateStatusConditionResponse;
+export declare const getUpdateStatusCondition2ResponseMock: (overrideResponse?: Partial<CasesStatusCondition>) => CasesStatusCondition;
+export declare const getUpdateStatusConditionResponseMock: (overrideResponse?: Partial<CasesStatusCondition>) => CasesStatusCondition;
+export declare const getListStatusConditionsMockHandler: (overrideResponse?: CasesStatusConditionList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesStatusConditionList> | CasesStatusConditionList)) => import("msw").HttpHandler;
+export declare const getCreateStatusConditionMockHandler: (overrideResponse?: CasesStatusCondition | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<CasesStatusCondition> | CasesStatusCondition)) => import("msw").HttpHandler;
+export declare const getDeleteStatusConditionMockHandler: (overrideResponse?: CasesStatusCondition | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesStatusCondition> | CasesStatusCondition)) => import("msw").HttpHandler;
+export declare const getLocateStatusConditionMockHandler: (overrideResponse?: CasesLocateStatusConditionResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesLocateStatusConditionResponse> | CasesLocateStatusConditionResponse)) => import("msw").HttpHandler;
+export declare const getUpdateStatusCondition2MockHandler: (overrideResponse?: CasesStatusCondition | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<CasesStatusCondition> | CasesStatusCondition)) => import("msw").HttpHandler;
+export declare const getUpdateStatusConditionMockHandler: (overrideResponse?: CasesStatusCondition | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<CasesStatusCondition> | CasesStatusCondition)) => import("msw").HttpHandler;
+export declare const getStatusConditionsMock: () => import("msw").HttpHandler[];

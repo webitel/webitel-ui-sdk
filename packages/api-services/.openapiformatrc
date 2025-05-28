@@ -1,0 +1,9 @@
+{
+  "casingSet": {
+      "parametersQuery": "camelCase",
+      "properties": "camelCase",
+  },
+  "filterSet": {
+    "tags": ["Roles", "UserSettings"]
+  }
+}

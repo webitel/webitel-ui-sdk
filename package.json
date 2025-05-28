@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.6.15",
+  "version": "25.6.18",
   "private": false,
   "scripts": {
     "dev": "npm run docs:dev",
@@ -13,11 +13,13 @@
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
-    "orval": "orval",
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
-    "utils:i": "npm install --install-links"
+    "utils:i": "npm install"
   },
+  "workspaces": [
+    "./packages/api-services"
+  ],
   "main": "./dist/ui-sdk.js",
   "type": "module",
   "types": "./dist/types",
@@ -84,6 +86,7 @@
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^13.0.0",
+    "@webitel/api-services": "^0.0.2",
     "@webitel/styleguide": "^24.12.26",
     "autosize": "^6.0.1",
     "axios": "^1.8.3",
@@ -110,7 +113,7 @@
     "vue-router": "^4.5.0",
     "webitel-sdk": "^25.4.3",
     "xlsx": "0.18.5",
-    "zod": "^3.24.2"
+    "zod": "^4.0.0-beta.20250505T195954"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
@@ -132,7 +135,6 @@
     "lint-staged": "^15.5.0",
     "markdown-it": "^14.1.0",
     "markdown-table": "^3.0.4",
-    "orval": "^7.6.0",
     "path": "^0.12.7",
     "pinia": "^3.0.1",
     "postcss": "^8.5.3",
@@ -142,6 +144,7 @@
     "prismjs": "^1.30.0",
     "publint": "^0.3.9",
     "sass": "^1.85.1",
+    "typedoc-github-wiki-theme": "^2.1.0",
     "typescript": "5.8.2",
     "typescript-eslint": "^8.26.1",
     "typescript-plugin-css-modules": "^5.1.0",

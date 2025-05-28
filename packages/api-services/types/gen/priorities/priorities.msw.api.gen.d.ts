@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { CasesLocatePriorityResponse, CasesPriority, CasesPriorityList } from '.././_models';
+export declare const getListPrioritiesResponseMock: (overrideResponse?: Partial<CasesPriorityList>) => CasesPriorityList;
+export declare const getCreatePriorityResponseMock: (overrideResponse?: Partial<CasesPriority>) => CasesPriority;
+export declare const getDeletePriorityResponseMock: (overrideResponse?: Partial<CasesPriority>) => CasesPriority;
+export declare const getLocatePriorityResponseMock: (overrideResponse?: Partial<CasesLocatePriorityResponse>) => CasesLocatePriorityResponse;
+export declare const getUpdatePriority2ResponseMock: (overrideResponse?: Partial<CasesPriority>) => CasesPriority;
+export declare const getUpdatePriorityResponseMock: (overrideResponse?: Partial<CasesPriority>) => CasesPriority;
+export declare const getListPrioritiesMockHandler: (overrideResponse?: CasesPriorityList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesPriorityList> | CasesPriorityList)) => import("msw").HttpHandler;
+export declare const getCreatePriorityMockHandler: (overrideResponse?: CasesPriority | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<CasesPriority> | CasesPriority)) => import("msw").HttpHandler;
+export declare const getDeletePriorityMockHandler: (overrideResponse?: CasesPriority | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<CasesPriority> | CasesPriority)) => import("msw").HttpHandler;
+export declare const getLocatePriorityMockHandler: (overrideResponse?: CasesLocatePriorityResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<CasesLocatePriorityResponse> | CasesLocatePriorityResponse)) => import("msw").HttpHandler;
+export declare const getUpdatePriority2MockHandler: (overrideResponse?: CasesPriority | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<CasesPriority> | CasesPriority)) => import("msw").HttpHandler;
+export declare const getUpdatePriorityMockHandler: (overrideResponse?: CasesPriority | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<CasesPriority> | CasesPriority)) => import("msw").HttpHandler;
+export declare const getPrioritiesMock: () => import("msw").HttpHandler[];

@@ -1,4 +1,4 @@
-name: webitel ui-sdk pckg publish
+name: webitel ui-sdk pkg publish
 
 on:
   #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
