@@ -9,7 +9,7 @@ import {
   getDefaultGetListResponse,
   getDefaultGetParams,
 } from '../../defaults/index';
-import { getFieldsToSendFromZodSchema } from '../../orval-utils/utils';
+import { getFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import applyTransform, {
   camelToSnake,
   merge,

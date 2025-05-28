@@ -17,15 +17,15 @@
   },
   "type": "module",
   "exports": {
-    "gen": {
+    "./gen": {
       "import": "./src/gen/index.ts",
       "types": "./types/gen/index.d.ts"
     },
-    "gen/utils": {
+    "./gen/utils": {
       "import": "./src/utils/gen/index.ts",
       "types": "./types/utils/gen/index.d.ts"
     },
-    "gen/models": {
+    "./gen/models": {
       "import": "./src/gen/_models/index.ts",
       "types": "./types/gen/_models/index.d.ts"
     }
