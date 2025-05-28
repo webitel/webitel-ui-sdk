@@ -4,7 +4,7 @@
     :search-mode="searchMode"
     :search-mode-options="searchModeOptions"
     :value="localSearchValue"
-    @input="localSearchValue = $event"
+    @input="inputValue"
     @search="handleSearch"
     @update:search-mode="updateSearchMode"
   />
@@ -28,6 +28,7 @@ const props = defineProps<{
    * default search name is used when there are no search modes
    */
   singleSearchName?: string;
+  value?: string;
 }>();
 
 const defaultSearchName = props.singleSearchName || 'search';
@@ -41,7 +42,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const searchMode: Ref<FilterName> = ref();
-const localSearchValue = ref('');
+const localSearchValue = computed(() => props?.value || '');
 
 const hasFilter = (filterName = searchMode.value) => {
   return props.filtersManager.filters.has(filterName);
@@ -72,17 +73,32 @@ const currentSearchName = computed(() => {
   return defaultSearchName;
 });
 
+const inputValue = (value: string) => {
+  localSearchValue.value = value;
+
+  if (value === '') {
+    if (hasFilter(currentSearchName.value)) {
+      deleteFilter({
+        name: currentSearchName.value,
+      });
+    }
+    return;
+  }
+};
+
 const handleSearch = (value = localSearchValue.value) => {
-  if (hasFilter(currentSearchName.value)) {
-    updateFilter({
-      name: currentSearchName.value,
-      value,
-    });
-  } else {
-    addFilter({
-      name: currentSearchName.value,
-      value,
-    });
+  if(value) {
+    if (hasFilter(currentSearchName.value)) {
+      updateFilter({
+        name: currentSearchName.value,
+        value,
+      });
+    } else {
+      addFilter({
+        name: currentSearchName.value,
+        value,
+      });
+    }
   }
 };
 

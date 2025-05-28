@@ -38,12 +38,13 @@ export type FilterConfigToolkitParams = {
   filterOptions: (FilterOption | BaseFilterConfig)[];
   filtersManager: IFiltersManager;
   filterableExtensionFields: WebitelProtoDataField[];
+  staticMode?: boolean;
 };
 
 export const useFilterConfigsToolkit = ({
   filterOptions,
   filtersManager,
-  filterableExtensionFields = [],
+  filterableExtensionFields = [], staticMode = false,
 }: FilterConfigToolkitParams): FilterConfigToolkit => {
   const { t } = useI18n();
 
@@ -91,14 +92,6 @@ export const useFilterConfigsToolkit = ({
     );
   });
 
-  const staticViewFilterConfigs = computed(() => {
-    return filterConfigs.value.filter(({ staticView }) => !!staticView);
-  });
-
-  const dynamicViewFilterConfigs = computed(() => {
-    return filterConfigs.value.filter(({ staticView }) => !staticView);
-  });
-
   const filtersIncluded = computed(() => {
     return filterConfigs.value.map(({ name }) => name);
   });
@@ -135,18 +128,18 @@ export const useFilterConfigsToolkit = ({
   });
 
   const staticViewFilterToFilterConfigMappings = computed(() => {
-    return staticViewFilterConfigs.value.map((filterConfig) => {
-      return {
-        filter: filtersManager.getFilter(filterConfig.name),
-        filterConfig,
-      }
+    if(staticMode) {
+      return filterConfigs.value.map((filterConfig) => {
+        return {
+          filter: filtersManager.getFilter(filterConfig.name),
+          filterConfig,
+        }
       });
-    });
+    }
+  });
 
   return {
     filterConfigs,
-    staticViewFilterConfigs,
-    dynamicViewFilterConfigs,
     filtersIncluded,
     appliedFilters,
     appliedFilterToFilterConfigMappings,

@@ -1,20 +1,21 @@
 <template>
   <wt-select
     :close-on-select="false"
-    :label="t('webitelUI.filters.filterValue')"
+    :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
-    :v="v$.model.list"
+    :v="v$?.model.list"
     :value="model?.list"
     multiple
     track-by="id"
     use-value-from-options-by-prop="id"
-    @input="model.list = $event"
+    v-bind="$attrs"
+    @input="inputModelList"
   />
   <wt-checkbox
     v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
-    :v="v$.model.unassigned"
+    :v="v$?.model.unassigned"
     @change="model.unassigned = $event"
   />
 </template>
@@ -30,7 +31,10 @@ import { IContactGroupFilterConfig } from './index';
 
 const props = defineProps<{
   filterConfig: IContactGroupFilterConfig;
+  disableValidation?: boolean;
+  hideLabel?: boolean;
 }>();
+
 type ModelValue = {
   list: string[];
   unassigned: boolean;
@@ -43,35 +47,40 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const initModel = () => {
-  if (!model.value) {
-    model.value = {
-      list: [],
-      unassigned: false,
-    };
-  }
-};
-onMounted(() => initModel());
+const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'))
 
-const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      list: { required: requiredIf(() => !model.value.unassigned) },
-      unassigned: { required: requiredIf(() => props.filterConfig?.hideUnassigned && !model.value.list.length) },
-    },
-  })),
-  { model },
-  { $autoDirty: true },
-);
-v$.value.$touch();
+const inputModelList = (event) => {
+  model.value = {
+    ...model.value,
+    list: event,
+  };
+};
+const v$ = computed(() => {
+  if (props.disableValidation) return null;
+  return useVuelidate(
+    computed(() => ({
+      model: {
+        list: { required: requiredIf(() => !model.value.unassigned) },
+        unassigned: {
+          required: requiredIf(() =>
+            props.filterConfig?.hideUnassigned && !model.value.list.length
+          ),
+        },
+      },
+    })),
+    { model },
+    { $autoDirty: true }
+  );
+});
 
 watch(
-  () => v$.value.$invalid,
+  () => v$?.value?.$invalid,
   (invalid) => {
-    emit('update:invalid', invalid);
+    if (v$?.value) {
+      emit('update:invalid', invalid);
+    }
   },
-  { immediate: true },
-);
+  { immediate: true });
 </script>
 
 <style scoped></style>

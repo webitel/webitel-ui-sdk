@@ -1,31 +1,34 @@
 <template>
+  <div :class="{ 'table-filters-panel__static': staticMode }">
   <dynamic-filter-panel-wrapper>
     <template #filters>
       <static-filter-field
         v-for="({ filter, filterConfig }) in staticViewFilterToFilterConfigMappings"
         :key="filterConfig.name"
-        :filter-config="filterConfig"
         :filter="filter"
+        :filter-config="filterConfig"
         @add:filter="emit('filter:add', $event)"
         @update:filter="emit('filter:update', $event)"
         @delete:filter="emit('filter:delete', filter)"
       />
 
-      <dynamic-filter-preview
-        v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
-        :key="filter.name"
-        :filter="filter"
-        :filter-config="filterConfig"
-        disable-click-away
-        @update:filter="emit('filter:update', $event)"
-        @delete:filter="emit('filter:delete', filter)"
-      />
+      <div v-if="!staticMode">
+        <dynamic-filter-preview
+          v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
+          :key="filter.name"
+          :filter="filter"
+          :filter-config="filterConfig"
+          disable-click-away
+          @update:filter="emit('filter:update', $event)"
+          @delete:filter="emit('filter:delete', filter)"
+        />
 
-      <dynamic-filter-add-action
-        :filter-configs="unAppliedFiltersConfigs"
-        :show-label="!appliedFilters.length"
-        @add:filter="emit('filter:add', $event)"
-      />
+        <dynamic-filter-add-action
+          :filter-configs="unAppliedFiltersConfigs"
+          :show-label="!appliedFilters.length"
+          @add:filter="emit('filter:add', $event)"
+        />
+      </div>
     </template>
 
     <template #actions>
@@ -52,11 +55,13 @@
       />
 
       <wt-icon-action
+        v-if="!staticMode"
         action="close"
         @click="emit('hide')"
       />
     </template>
   </dynamic-filter-panel-wrapper>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -118,6 +123,7 @@ type Props = {
    * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
    */
   usePresetsStore?: Store;
+  staticMode?: boolean;
 };
 
 const props = defineProps<Props>();
@@ -145,8 +151,6 @@ const emit = defineEmits<{
 
 const {
   filterConfigs,
-  staticViewFilterConfigs,
-  dynamicViewFilterConfigs,
   staticViewFilterToFilterConfigMappings,
   filtersIncluded,
   appliedFilters,
@@ -156,9 +160,24 @@ const {
   filterOptions: props.filterOptions,
   filtersManager: props.filtersManager,
   filterableExtensionFields: props.filterableExtensionFields,
+  staticMode: props.staticMode,
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
 </script>
 
-<style scoped></style>
+<style>
+.table-filters-panel__static {
+  width: 100%;
+  margin-bottom: var(--spacing-xs);
+
+  .dynamic-filter-panel-wrapper {
+    align-items: center;
+  }
+  .dynamic-filter-panel-wrapper__filters {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-gap: var(--spacing-xs);
+  }
+}
+</style>
