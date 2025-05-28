@@ -17812,7 +17812,8 @@ components:
       default: empty_trigger_object
       enum:
         - empty_trigger_object
-        - case
+        - cases
+        - case_files
       type: string
     engine.TriggerService.CreateTriggerJobBody:
       properties:
