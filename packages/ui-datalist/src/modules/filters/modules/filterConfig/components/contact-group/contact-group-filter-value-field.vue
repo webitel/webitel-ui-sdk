@@ -9,7 +9,7 @@
     track-by="id"
     use-value-from-options-by-prop="id"
     v-bind="$attrs"
-    @input="inputModelList"
+    @input="changeListValue"
   />
   <wt-checkbox
     v-if="!props.filterConfig?.hideUnassigned"
@@ -49,7 +49,7 @@ const { t } = useI18n();
 
 const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'))
 
-const inputModelList = (event) => {
+const changeListValue = (event) => {
   model.value = {
     ...model.value,
     list: event,

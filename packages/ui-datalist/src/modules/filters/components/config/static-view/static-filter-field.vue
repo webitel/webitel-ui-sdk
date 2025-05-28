@@ -15,10 +15,20 @@
 <script lang="ts" setup>
 import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-
 import { FilterData, FilterInitParams, IFilter } from '../../../classes/Filter';
 import { AnyFilterConfig } from '../../../modules/filterConfig';
+
+/* Author @Lera24
+Static filters
+https://webitel.atlassian.net/browse/WTEL-6934
+Example - section CRM / lookups Contact groups / Contacts tab / Adding contacts popup (click on the "+" button)
+
+This type of filters includes:
+
+1 - displaying all filters on the screen (in dynamic - only when selecting a value)
+2 - no validation, because filters are optional (disable-validation flag)
+3 - no label, because different ui representation (hide-label flag)
+4 - request API goes after each value is selected */
 
 const props = defineProps<{
   filter: IFilter;
@@ -36,9 +46,7 @@ const emit = defineEmits<{
   'delete:filter': [IFilter];
 }>();
 
-const { t } = useI18n();
-
-const filterValue = computed(() => props.filter?.value || null);
+const filterValue = computed(() => props.filter?.value);
 
 const onValueChange = (value) => {
   const condition =
@@ -46,7 +54,7 @@ const onValueChange = (value) => {
     (isEmpty(value) && typeof value !== 'boolean');
 
   if (condition) {
-    emit('delete:filter', props.filter);
+    return emit('delete:filter', props.filter);
   }
 
     if (isEmpty(filterValue.value)) {

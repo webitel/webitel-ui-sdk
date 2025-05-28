@@ -128,14 +128,19 @@ export const useFilterConfigsToolkit = ({
   });
 
   const staticViewFilterToFilterConfigMappings = computed(() => {
-    if(staticMode) {
+    // Author @Lera24
+    // https://webitel.atlassian.net/browse/WTEL-6934
+    //
+    // Static (staticViewFilterToFilterConfigMappings computed) filters built use configs all filters installed, without values.
+    //
+    // Dynamic (appliedFilterToFilterConfigMappings computed) filters built using filters whose have been defined
+
       return filterConfigs.value.map((filterConfig) => {
         return {
           filter: filtersManager.getFilter(filterConfig.name),
           filterConfig,
         }
       });
-    }
   });
 
   return {

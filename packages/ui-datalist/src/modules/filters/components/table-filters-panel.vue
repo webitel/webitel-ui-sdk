@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'table-filters-panel__static': staticMode }">
+  <div :class="{ 'table-filters-panel--static': staticMode }">
   <dynamic-filter-panel-wrapper>
     <template #filters>
       <static-filter-field
@@ -123,6 +123,12 @@ type Props = {
    * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
    */
   usePresetsStore?: Store;
+
+  /**
+   * @author @Lera24
+   * @description
+   * If true, filters are considered static (for more details see static-filter-field.vue)
+   */
   staticMode?: boolean;
 };
 
@@ -167,7 +173,7 @@ const enablePresets = computed(() => !!props.presetNamespace);
 </script>
 
 <style>
-.table-filters-panel__static {
+.table-filters-panel--static {
   width: 100%;
   margin-bottom: var(--spacing-xs);
 
