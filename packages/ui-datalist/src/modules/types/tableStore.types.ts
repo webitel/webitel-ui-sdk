@@ -1,12 +1,15 @@
-import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type.ts';
+import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import type { Ref } from 'vue';
 
+import { WtTableHeader } from '../../../../../src/components/wt-table/types/WtTable';
 import { IFiltersManager } from '../filters';
+import { DatalistStoreProviderType } from './StoreProvider';
 
-export interface useTableStoreParams<Entity> {
+export interface useTableStoreConfig<Entity> {
   apiModule: ApiModule<Entity>;
-  headers: [];
+  headers: WtTableHeader[];
   disablePersistence?: boolean | [];
+  storeType?: DatalistStoreProviderType;
   // etagMode: boolean;
 }
 
