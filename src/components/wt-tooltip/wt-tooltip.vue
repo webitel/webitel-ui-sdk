@@ -6,7 +6,7 @@
     class="wt-tooltip"
   >
     <div
-      v-tooltip[right].html="{
+      v-tooltip.right.hover.html="{
       value: tooltipText,
       }">Example
     </div>
