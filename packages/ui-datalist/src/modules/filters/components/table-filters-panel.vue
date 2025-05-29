@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'table-filters-panel--static': staticMode }">
+  <div :class="{ 'table-filters-panel--static-wrapper': staticMode }">
   <dynamic-filter-panel-wrapper>
     <template #filters>
       <div v-if="staticMode" class="table-filters-panel--static-filters">
@@ -176,7 +176,7 @@ const enablePresets = computed(() => !!props.presetNamespace);
 </script>
 
 <style>
-.table-filters-panel--static {
+.table-filters-panel--static-wrapper {
   width: 100%;
   margin-bottom: var(--spacing-xs);
 
