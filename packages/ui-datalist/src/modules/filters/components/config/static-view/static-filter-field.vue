@@ -2,11 +2,11 @@
   <div class="static-filter-field">
     <component
       :is="filterConfig.valueInputComponent"
+      :disable-validation="true /*for static filters validation is not needed (different presentation with dynamic filters)*/"
       :filter-config="filterConfig"
+      :hide-label="true /*for static filters need to hide label and display placeholder (different presentation with dynamic filters)*/"
       :model-value="filterValue"
       :placeholder="filterConfig.label"
-      disable-validation
-      hide-label
       @update:model-value="onValueChange"
     />
   </div>
@@ -20,15 +20,8 @@ import { AnyFilterConfig } from '../../../modules/filterConfig';
 
 /* Author @Lera24
 Static filters
-https://webitel.atlassian.net/browse/WTEL-6934
-Example - section CRM / lookups Contact groups / Contacts tab / Adding contacts popup (click on the "+" button)
-
-This type of filters includes:
-
-1 - displaying all filters on the screen (in dynamic - only when selecting a value)
-2 - no validation, because filters are optional (disable-validation flag)
-3 - no label, because different ui representation (hide-label flag)
-4 - request API goes after each value is selected */
+Description - https://webitel.atlassian.net/browse/WTEL-6934
+Example - section CRM / lookups Contact groups / Contacts tab / Adding contacts popup (click on the "+" button) */
 
 const props = defineProps<{
   filter: IFilter;

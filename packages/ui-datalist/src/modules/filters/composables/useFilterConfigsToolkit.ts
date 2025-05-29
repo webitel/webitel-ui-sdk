@@ -131,9 +131,11 @@ export const useFilterConfigsToolkit = ({
     // Author @Lera24
     // https://webitel.atlassian.net/browse/WTEL-6934
     //
-    // Static (staticViewFilterToFilterConfigMappings computed) filters built use configs all filters installed, without values.
+    // Static (computed staticViewFilterToFilterConfigMappings) filters
+    // use all page filters passed in filterOptions for configuration, without values
     //
-    // Dynamic (appliedFilterToFilterConfigMappings computed) filters built using filters whose have been defined
+    // Dynamic (computed applyFilterToFilterConfigMappings) filters consist of a configuration
+    // of filters for which a value has already been defined
 
       return filterConfigs.value.map((filterConfig) => {
         return {

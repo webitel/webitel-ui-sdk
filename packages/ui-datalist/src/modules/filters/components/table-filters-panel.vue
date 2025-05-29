@@ -127,7 +127,8 @@ type Props = {
   /**
    * @author @Lera24
    * @description
-   * If true, filters are considered static (for more details see static-filter-field.vue)
+   * Static view filter rendering mode. With it, filters are drawn immediately when the form is opened
+   * https://webitel.atlassian.net/browse/WTEL-6934
    */
   staticMode?: boolean;
 };
