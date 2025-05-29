@@ -1,3 +1,5 @@
+import { AnyFilterConfig } from '../modules/filterConfig';
+
 export type FilterName = string;
 export type FilterLabel = string;
 export type FilterValue =
@@ -43,6 +45,30 @@ export interface IFilter {
   value: FilterValue;
   label?: FilterLabel;
   set: (data: FilterData) => IFilter;
+}
+
+export interface FilterEmits {
+  'update:filter': [FilterData];
+  'delete:filter': [IFilter];
+}
+
+export interface StaticFilterEmits extends FilterEmits {
+  'add:filter': [FilterInitParams];
+}
+
+export interface DynamicFilterEmits extends FilterEmits {
+}
+
+export interface FilterProps {
+  filter: IFilter;
+  filterConfig: AnyFilterConfig;
+}
+
+export interface StaticFilterProps extends FilterProps {
+}
+
+export interface DynamicFilterProps extends FilterProps {
+  readonly?: boolean;
 }
 
 export class Filter implements IFilter {

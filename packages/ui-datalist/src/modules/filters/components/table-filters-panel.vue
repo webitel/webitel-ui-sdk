@@ -2,17 +2,19 @@
   <div :class="{ 'table-filters-panel--static': staticMode }">
   <dynamic-filter-panel-wrapper>
     <template #filters>
-      <static-filter-field
-        v-for="({ filter, filterConfig }) in staticViewFilterToFilterConfigMappings"
-        :key="filterConfig.name"
-        :filter="filter"
-        :filter-config="filterConfig"
-        @add:filter="emit('filter:add', $event)"
-        @update:filter="emit('filter:update', $event)"
-        @delete:filter="emit('filter:delete', filter)"
-      />
+      <div v-if="staticMode" class="table-filters-panel--static-filters">
+        <static-filter-field
+          v-for="({ filter, filterConfig }) in staticViewFilterToFilterConfigMappings"
+          :key="filterConfig.name"
+          :filter="filter"
+          :filter-config="filterConfig"
+          @add:filter="emit('filter:add', $event)"
+          @update:filter="emit('filter:update', $event)"
+          @delete:filter="emit('filter:delete', filter)"
+        />
+      </div>
 
-      <div v-if="!staticMode">
+      <div v-else class="table-filters-panel--dynamic-filters">
         <dynamic-filter-preview
           v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
           :key="filter.name"
@@ -128,7 +130,7 @@ type Props = {
    * @author @Lera24
    * @description
    * Static view filter rendering mode. With it, filters are drawn immediately when the form is opened
-   * https://webitel.atlassian.net/browse/WTEL-6934
+   * [https://webitel.atlassian.net/browse/WTEL-6934]
    */
   staticMode?: boolean;
 };
@@ -186,5 +188,14 @@ const enablePresets = computed(() => !!props.presetNamespace);
     flex-wrap: nowrap;
     grid-gap: var(--spacing-xs);
   }
+}
+.table-filters-panel--dynamic-filters {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.table-filters-panel--static-filters {
+  display: contents;
+  gap: var(--spacing-sm);
 }
 </style>

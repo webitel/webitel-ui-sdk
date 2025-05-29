@@ -15,29 +15,16 @@
 <script lang="ts" setup>
 import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
-import { FilterData, FilterInitParams, IFilter } from '../../../classes/Filter';
-import { AnyFilterConfig } from '../../../modules/filterConfig';
+import { StaticFilterEmits, StaticFilterProps } from '../../../classes/Filter';
 
 /* Author @Lera24
 Static filters
-Description - https://webitel.atlassian.net/browse/WTEL-6934
+Description - [https://webitel.atlassian.net/browse/WTEL-6934]
 Example - section CRM / lookups Contact groups / Contacts tab / Adding contacts popup (click on the "+" button) */
 
-const props = defineProps<{
-  filter: IFilter;
-  /**
-   * @description
-   * this filter config
-   */
-  filterConfig: AnyFilterConfig;
-}>();
+const props = defineProps<StaticFilterProps>();
 
-
-const emit = defineEmits<{
-  'add:filter': [FilterInitParams];
-  'update:filter': [FilterData];
-  'delete:filter': [IFilter];
-}>();
+const emit = defineEmits<StaticFilterEmits>();
 
 const filterValue = computed(() => props.filter?.value);
 

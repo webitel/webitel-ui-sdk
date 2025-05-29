@@ -129,7 +129,7 @@ export const useFilterConfigsToolkit = ({
 
   const staticViewFilterToFilterConfigMappings = computed(() => {
     // Author @Lera24
-    // https://webitel.atlassian.net/browse/WTEL-6934
+    // [https://webitel.atlassian.net/browse/WTEL-6934]
     //
     // Static (computed staticViewFilterToFilterConfigMappings) filters
     // use all page filters passed in filterOptions for configuration, without values
