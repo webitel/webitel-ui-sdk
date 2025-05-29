@@ -50,10 +50,15 @@ const { t } = useI18n();
 const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'))
 
 const changeListValue = (event) => {
-  model.value = {
-    ...model.value,
-    list: event,
-  };
+  if(!event.length && !model.value.unassigned) {
+
+    return model.value = {}
+  } else {
+    model.value = {
+      ...model.value,
+      list: event,
+    };
+  }
 };
 const v$ = computed(() => {
   if (props.disableValidation) return null;

@@ -178,7 +178,6 @@ const enablePresets = computed(() => !!props.presetNamespace);
 <style>
 .table-filters-panel--static-wrapper {
   width: 100%;
-  margin-bottom: var(--spacing-xs);
 
   .dynamic-filter-panel-wrapper {
     align-items: center;

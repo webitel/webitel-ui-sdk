@@ -71,7 +71,8 @@ import {
 } from '@webitel/ui-sdk/components';
 import { computed, ref, watch } from 'vue';
 
-import { DynamicFilterEmits, DynamicFilterProps, IFilter } from '../../classes/Filter';
+import { IFilter } from '../../classes/Filter';
+import { DynamicFilterProps, DynamicFilterEmits } from '../types/Filter.types';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-view/dynamic-filter-config-view.vue';
