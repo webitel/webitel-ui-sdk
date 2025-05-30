@@ -13,7 +13,7 @@ import {
 
 export const createTableStore = <Entity extends { id: string; etag?: string }>(
   namespace: string,
-  { apiModule, headers, disablePersistence }: useTableStoreParams<Entity>,
+  { apiModule, headers, disablePersistence, infiniteDataLoad }: useTableStoreParams<Entity>,
 ) => {
   const usePaginationStore = createTablePaginationStore(namespace);
   const useHeadersStore = createTableHeadersStore(namespace, { headers });
@@ -78,6 +78,33 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
 
         dataList.value = items;
         updateSelected([]);
+        $patchPaginationStore({ next });
+      } catch (err) {
+        error.value = err;
+        throw err;
+      } finally {
+        isLoading.value = false;
+      }
+    };
+
+    const infiniteLoadDataList = async () => {
+      isLoading.value = true;
+      $patchPaginationStore({ next: false });
+      updatePage(page.value + 1);
+
+      const params = {
+        ...filtersManager.value.getAllValues(),
+        page: page.value,
+        size: size.value,
+        sort: sort.value,
+        fields: fields.value,
+        parentId: parentId.value,
+      };
+
+      try {
+        const { items, next } = await apiModule.getList(params);
+
+        dataList.value.push(...items);
         $patchPaginationStore({ next });
       } catch (err) {
         error.value = err;
@@ -157,11 +184,10 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       );
 
       watch([page], () => {
-        if (!loadingAfterFiltersChange) {
+        if (!loadingAfterFiltersChange && !infiniteDataLoad) {
           return loadDataList();
         }
       });
-
       return loadDataList();
     };
 
@@ -186,6 +212,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       initialize,
 
       loadDataList,
+      infiniteLoadDataList,
 
       updateSelected,
       patchItemProperty,

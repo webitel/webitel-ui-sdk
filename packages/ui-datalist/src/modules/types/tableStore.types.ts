@@ -7,6 +7,7 @@ export interface useTableStoreParams<Entity> {
   apiModule: ApiModule<Entity>;
   headers: [];
   disablePersistence?: boolean | [];
+  infiniteDataLoad?: boolean;
   // etagMode: boolean;
 }
 
