@@ -1,71 +1,56 @@
 <template>
-  <!--  TODO: maybe this wrapper is not needed here? -->
   <div class="static-filter-field">
     <component
       :is="filterConfig.valueInputComponent"
-      :model-value="filterValue"
+      :disable-validation="true /*for static filters validation is not needed (different presentation with dynamic filters)*/"
       :filter-config="filterConfig"
-      :label="labelText"
-      :disable:validation="true /* coz staticView filter is always present */"
+      :hide-label="true /*for static filters need to hide label and display placeholder (different presentation with dynamic filters)*/"
+      :model-value="filterValue"
+      :placeholder="filterConfig.label"
       @update:model-value="onValueChange"
     />
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { StaticFilterEmits, StaticFilterProps } from '../../types/Filter.types';
 
-import { FilterData, FilterInitParams, IFilter } from '../../../classes/Filter';
-import { AnyFilterConfig } from '../../../modules/filterConfig';
+/* Author @Lera24
+Static filters
+Description - [https://webitel.atlassian.net/browse/WTEL-6934]
+Example - section CRM / lookups Contact groups / Contacts tab / Adding contacts popup (click on the "+" button) */
 
-const props = defineProps<{
-  filter: IFilter; // TODO: share me from dynamic-filter-preview.vue
-  /**
-   * @description
-   * this filter config
-   */
-  filterConfig: AnyFilterConfig; // TODO: share me from dynamic-filter-preview.vue
-}>();
+const props = defineProps<StaticFilterProps>();
 
-
-const emit = defineEmits<{
-  'add:filter': [FilterInitParams]; // TODO: share me from dynamic-filter-add-action.vue
-  'update:filter': [FilterData]; // TODO: share me from dynamic-filter-preview.vue
-  'delete:filter': [IFilter]; // TODO: share me from dynamic-filter-preview.vue
-}>();
-
-const { t } = useI18n();
+const emit = defineEmits<StaticFilterEmits>();
 
 const filterValue = computed(() => props.filter?.value);
 
-const labelText = computed(() => {
-  return t('name me from filterConfig.name');
-});
-
 const onValueChange = (value) => {
-  if (isEmpty(value)) {
-    return emit('delete:filter', props.filter);
-  }
+    if (isEmpty(value) && typeof value !== 'boolean') {
+      return emit('delete:filter', props.filter);
+    }
 
-  if (isEmpty(filterValue.value)) {
-    return emit('add:filter', {
-      name: props.filterConfig.name,
+    if (isEmpty(filterValue.value)) {
+      return emit('add:filter', {
+        name: props.filterConfig.name,
+        value,
+      });
+    }
+
+    emit('update:filter', {
+      ...props.filter,
       value,
     });
   }
-
-  emit('update:filter', {
-    ...props.filter,
-    value,
-  });
-};
+;
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .static-filter-field {
-
+  flex: 1;
 }
 </style>

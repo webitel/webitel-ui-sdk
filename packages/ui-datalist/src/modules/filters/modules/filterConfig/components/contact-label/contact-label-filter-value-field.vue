@@ -1,11 +1,13 @@
 <template>
-  <wt-tags-input
-    :label="t('webitelUI.filters.filterValue')"
+  <wt-select
+    :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
-    :v="v$.model"
+    :v="v$?.model"
     :value="model"
+    multiple
     option-label="label"
     track-by="label"
+    v-bind="$attrs"
     @input="handleInput"
   />
 </template>
@@ -15,11 +17,14 @@ import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { WtSelect } from '@webitel/ui-sdk/components';
 
 import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
 
 const props = defineProps<{
   filterConfig: WtSysTypeFilterConfig;
+  disableValidation?: boolean;
+  hideLabel?: boolean;
 }>();
 
 type ModelValue = number[];
@@ -31,24 +36,33 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const v$ = useVuelidate(
-  computed(() => ({
-    model: {
-      required,
-    },
-  })),
-  { model },
-  { $autoDirty: true },
-);
-v$.value.$touch();
+const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'))
+
+const v$ = computed(() => {
+  if (props?.disableValidation) return null;
+  return useVuelidate(
+    computed(() => ({
+      model: { required },
+    })),
+    { model },
+    { $autoDirty: true }
+  );
+});
+watch(
+  v$,
+  (v) => {
+    if (v) v.value.$touch();
+  },
+  { immediate: true });
 
 watch(
-  () => v$.value.$invalid,
+  () => v$?.value?.$invalid,
   (invalid) => {
-    emit('update:invalid', invalid);
+    if (v$?.value) {
+      emit('update:invalid', invalid);
+    }
   },
-  { immediate: true },
-);
+  { immediate: true });
 
 const handleInput = (value: ModelValue) => {
   model.value = value;

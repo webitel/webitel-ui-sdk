@@ -1,3 +1,5 @@
+import { AnyFilterConfig } from '../modules/filterConfig';
+
 export type FilterName = string;
 export type FilterLabel = string;
 export type FilterValue =

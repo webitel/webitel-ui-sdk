@@ -1,31 +1,36 @@
 <template>
+  <div :class="{ 'table-filters-panel--static-wrapper': staticMode }">
   <dynamic-filter-panel-wrapper>
     <template #filters>
-      <static-filter-field
-        v-for="({ filter, filterConfig }) in staticViewFilterToFilterConfigMappings"
-        :key="filterConfig.name"
-        :filter-config="filterConfig"
-        :filter="filter"
-        @add:filter="emit('filter:add', $event)"
-        @update:filter="emit('filter:update', $event)"
-        @delete:filter="emit('filter:delete', filter)"
-      />
+      <div v-if="staticMode" class="table-filters-panel--static-filters">
+        <static-filter-field
+          v-for="({ filter, filterConfig }) in staticViewFilterToFilterConfigMappings"
+          :key="filterConfig.name"
+          :filter="filter"
+          :filter-config="filterConfig"
+          @add:filter="emit('filter:add', $event)"
+          @update:filter="emit('filter:update', $event)"
+          @delete:filter="emit('filter:delete', filter)"
+        />
+      </div>
 
-      <dynamic-filter-preview
-        v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
-        :key="filter.name"
-        :filter="filter"
-        :filter-config="filterConfig"
-        disable-click-away
-        @update:filter="emit('filter:update', $event)"
-        @delete:filter="emit('filter:delete', filter)"
-      />
+      <div v-else class="table-filters-panel--dynamic-filters">
+        <dynamic-filter-preview
+          v-for="({ filter, filterConfig }) of appliedFilterToFilterConfigMappings"
+          :key="filter.name"
+          :filter="filter"
+          :filter-config="filterConfig"
+          disable-click-away
+          @update:filter="emit('filter:update', $event)"
+          @delete:filter="emit('filter:delete', filter)"
+        />
 
-      <dynamic-filter-add-action
-        :filter-configs="unAppliedFiltersConfigs"
-        :show-label="!appliedFilters.length"
-        @add:filter="emit('filter:add', $event)"
-      />
+        <dynamic-filter-add-action
+          :filter-configs="unAppliedFiltersConfigs"
+          :show-label="!appliedFilters.length"
+          @add:filter="emit('filter:add', $event)"
+        />
+      </div>
     </template>
 
     <template #actions>
@@ -52,11 +57,13 @@
       />
 
       <wt-icon-action
+        v-if="!staticMode"
         action="close"
         @click="emit('hide')"
       />
     </template>
   </dynamic-filter-panel-wrapper>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -118,6 +125,14 @@ type Props = {
    * TODO: https://github.com/webitel/webitel-ui-sdk/pull/551
    */
   usePresetsStore?: Store;
+
+  /**
+   * @author @Lera24
+   * @description
+   * Static view filter rendering mode. With it, filters are drawn immediately when the form is opened
+   * [https://webitel.atlassian.net/browse/WTEL-6934]
+   */
+  staticMode?: boolean;
 };
 
 const props = defineProps<Props>();
@@ -145,8 +160,6 @@ const emit = defineEmits<{
 
 const {
   filterConfigs,
-  staticViewFilterConfigs,
-  dynamicViewFilterConfigs,
   staticViewFilterToFilterConfigMappings,
   filtersIncluded,
   appliedFilters,
@@ -156,9 +169,32 @@ const {
   filterOptions: props.filterOptions,
   filtersManager: props.filtersManager,
   filterableExtensionFields: props.filterableExtensionFields,
+  staticMode: props.staticMode,
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
 </script>
 
-<style scoped></style>
+<style>
+.table-filters-panel--static-wrapper {
+  width: 100%;
+
+  .dynamic-filter-panel-wrapper {
+    align-items: center;
+  }
+  .dynamic-filter-panel-wrapper__filters {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-gap: var(--spacing-xs);
+  }
+}
+.table-filters-panel--dynamic-filters {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.table-filters-panel--static-filters {
+  display: contents;
+  gap: var(--spacing-sm);
+}
+</style>
