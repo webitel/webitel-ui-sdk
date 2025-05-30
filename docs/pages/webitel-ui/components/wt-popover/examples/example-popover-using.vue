@@ -4,19 +4,19 @@
     <wt-popover ref="popover">
       <div class="flex flex-col gap-2">
         Example popover using
-        <wt-button>Button</wt-button>
+        <wt-button @click="toggleInsert">Button</wt-button>
       </div>
     </wt-popover>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { useTemplateRef } from 'vue';
 
 import WtButton from '../../../../../../src/components/wt-button/wt-button.vue';
 import WtPopover from '../../../../../../src/components/wt-popover/wt-popover.vue';
 
-const popover = ref();
+const popover = useTemplateRef('popover');
 
 const toggle = (event) => {
   popover.value.toggle(event);

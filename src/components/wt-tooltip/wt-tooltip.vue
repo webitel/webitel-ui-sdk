@@ -6,15 +6,9 @@
     class="wt-tooltip"
   >
     <div
-      v-tooltip.right.hover.html="{
-      value: tooltipText,
-      }">Example
-    </div>
-    <div
       ref="activator"
       class="wt-tooltip__activator"
     >
-
       <slot
         name="activator"
         v-bind="{ visible: isVisible }"
@@ -32,8 +26,6 @@
       @show="showTooltip"
     >
       <div ref="floatingChild">
-
-
         <slot v-bind="{ hide: hideTooltip }" />
       </div>
     </wt-tooltip-floating>
@@ -83,14 +75,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  title: {
-    type: String,
-    default: '',
-  },
-  direction: {
-    type: String,
-    default: 'top',
-  },
 });
 
 const emit = defineEmits(['update:visible']);
@@ -99,26 +83,6 @@ const activator = useTemplateRef('activator');
 const floating = useTemplateRef('floating');
 const floatingChild = useTemplateRef('floatingChild');
 const isVisible = ref(props.visible);
-
-const tooltipText = ref('');
-
-const slots = defineSlots();
-
-function extractTextFromVNodes(vnodes) {
-  return vnodes
-    .map((vnode) => {
-      if (typeof vnode.children === 'string') {
-        return vnode.children;
-      } else if (Array.isArray(vnode.children)) {
-        return extractTextFromVNodes(vnode.children);
-      } else if (typeof vnode.children === 'function') {
-        return extractTextFromVNodes([vnode.children()]);
-      }
-      return '';
-    })
-    .flat()
-    .join('');
-}
 
 const emitVisibilityChange = () => {
   emit('update:visible', isVisible.value);
@@ -190,13 +154,6 @@ watch(
 
 onMounted(() => {
   if (props.visible) showTooltip();
-
-  // extract default slot content
-  const vnodes = slots.default?.({
-    hide: () => {
-    },
-  }) || [];
-  tooltipText.value = props.title || extractTextFromVNodes(vnodes);
 });
 
 onBeforeUnmount(() => {

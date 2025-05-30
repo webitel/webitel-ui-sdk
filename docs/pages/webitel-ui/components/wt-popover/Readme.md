@@ -1,13 +1,12 @@
 <script setup>
-import Specs from './component-specs.vue';
 import ExamplePopoverUsing from './examples/example-popover-using.vue';
 </script>
 
 # WtPopover
 
-## Specs
+## Primevue docs
 
-<Specs />
+[PrimevuePopover](https://primevue.org/popover/)
 
 ## Example Popover Using
 
