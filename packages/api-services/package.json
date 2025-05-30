@@ -1,13 +1,15 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.2",
+  "version": "0.0.14",
   "private": false,
   "scripts": {
+    "make-all": "npm run gen:api && npm version patch && npm run publish-lib",
     "gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:cleanup",
     "publish-lib": "(npm run build:types || true) && npm publish --access public",
-    "gen:api:convert-openapi": "api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml ../../../protos/swagger/cases.swagger.json > swagger.yaml",
-    "gen:api:format-openapi": "openapi-format swagger.yaml -o formatted-openapi.yaml",
-    "gen:api:cleanup": "rm formatted-openapi.yaml",
+    "gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
+    "gen:api:convert-openapi--tst": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml ../../../protos/swagger/cases.swagger.json > swagger.yaml",
+    "gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
+    "gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
     "orval": "orval",
     "lint:package": "publint",
@@ -15,15 +17,15 @@
   },
   "type": "module",
   "exports": {
-    "gen": {
+    "./gen": {
       "import": "./src/gen/index.ts",
       "types": "./types/gen/index.d.ts"
     },
-    "gen/utils": {
+    "./gen/utils": {
       "import": "./src/utils/gen/index.ts",
       "types": "./types/utils/gen/index.d.ts"
     },
-    "gen/models": {
+    "./gen/models": {
       "import": "./src/gen/_models/index.ts",
       "types": "./types/gen/_models/index.d.ts"
     }
@@ -43,22 +45,23 @@
     "zod": "^4.0.0-beta.20250505T195954"
   },
   "devDependencies": {
-    "webitel-sdk": "^25.4.3",
-    "vue-tsc": "^2.2.10",
     "@biomejs/biome": "1.9.4",
-    "@faker-js/faker": "^9.7.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
     "globby": "^14.1.0",
     "husky": "^9.1.7",
-    "msw": "^2.8.2",
-    "openapi-format": "^1.26.0",
     "orval": "^7.9.0",
     "path": "^0.12.7",
     "publint": "^0.3.9",
     "typedoc": "^0.28.4",
     "typedoc-github-wiki-theme": "^2.1.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "vue-tsc": "^2.2.10",
+    "webitel-sdk": "^25.4.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "msw": "^2.8.2"
   },
   "engines": {
     "npm": "10",
