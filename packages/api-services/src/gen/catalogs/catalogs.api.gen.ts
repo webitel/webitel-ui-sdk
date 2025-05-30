@@ -9,15 +9,15 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesCatalog,
-	CasesCatalogList,
-	CasesInputCatalog,
-	CasesLocateCatalogResponse,
 	CreateCatalogParams,
 	ListCatalogsParams,
 	LocateCatalogParams,
 	UpdateCatalog2Params,
 	UpdateCatalogParams,
+	WebitelCasesCatalog,
+	WebitelCasesCatalogList,
+	WebitelCasesInputCatalog,
+	WebitelCasesLocateCatalogResponse,
 } from '.././_models';
 
 // --- header start
@@ -31,7 +31,7 @@ export const // --- title start
 			/**
 			 * @summary Retrieve a list of catalogs or search catalogs
 			 */
-			const listCatalogs = <TData = AxiosResponse<CasesCatalogList>>(
+			const listCatalogs = <TData = AxiosResponse<WebitelCasesCatalogList>>(
 				params?: ListCatalogsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -43,12 +43,12 @@ export const // --- title start
 			/**
 			 * @summary Create a new catalog
 			 */
-			const createCatalog = <TData = AxiosResponse<CasesCatalog>>(
-				casesInputCatalog: CasesInputCatalog,
+			const createCatalog = <TData = AxiosResponse<WebitelCasesCatalog>>(
+				webitelCasesInputCatalog: WebitelCasesInputCatalog,
 				params?: CreateCatalogParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post('/cases/catalogs', casesInputCatalog, {
+				return axios.post('/cases/catalogs', webitelCasesInputCatalog, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -56,7 +56,7 @@ export const // --- title start
 			/**
 			 * @summary Delete a catalog
 			 */
-			const deleteCatalog = <TData = AxiosResponse<CasesCatalogList>>(
+			const deleteCatalog = <TData = AxiosResponse<WebitelCasesCatalogList>>(
 				id: string[],
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -65,7 +65,9 @@ export const // --- title start
 			/**
 			 * @summary Locate a catalog by ID
 			 */
-			const locateCatalog = <TData = AxiosResponse<CasesLocateCatalogResponse>>(
+			const locateCatalog = <
+				TData = AxiosResponse<WebitelCasesLocateCatalogResponse>,
+			>(
 				id: string,
 				params?: LocateCatalogParams,
 				options?: AxiosRequestConfig,
@@ -78,13 +80,13 @@ export const // --- title start
 			/**
 			 * @summary Update an existing catalog
 			 */
-			const updateCatalog2 = <TData = AxiosResponse<CasesCatalog>>(
+			const updateCatalog2 = <TData = AxiosResponse<WebitelCasesCatalog>>(
 				id: string,
-				casesInputCatalog: CasesInputCatalog,
+				webitelCasesInputCatalog: WebitelCasesInputCatalog,
 				params?: UpdateCatalog2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch(`/cases/catalogs/${id}`, casesInputCatalog, {
+				return axios.patch(`/cases/catalogs/${id}`, webitelCasesInputCatalog, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -92,13 +94,13 @@ export const // --- title start
 			/**
 			 * @summary Update an existing catalog
 			 */
-			const updateCatalog = <TData = AxiosResponse<CasesCatalog>>(
+			const updateCatalog = <TData = AxiosResponse<WebitelCasesCatalog>>(
 				id: string,
-				casesInputCatalog: CasesInputCatalog,
+				webitelCasesInputCatalog: WebitelCasesInputCatalog,
 				params?: UpdateCatalogParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(`/cases/catalogs/${id}`, casesInputCatalog, {
+				return axios.put(`/cases/catalogs/${id}`, webitelCasesInputCatalog, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -114,11 +116,12 @@ export const // --- title start
 				updateCatalog,
 			};
 		};
-export type ListCatalogsResult = AxiosResponse<CasesCatalogList>;
-export type CreateCatalogResult = AxiosResponse<CasesCatalog>;
-export type DeleteCatalogResult = AxiosResponse<CasesCatalogList>;
-export type LocateCatalogResult = AxiosResponse<CasesLocateCatalogResponse>;
-export type UpdateCatalog2Result = AxiosResponse<CasesCatalog>;
-export type UpdateCatalogResult = AxiosResponse<CasesCatalog>;
+export type ListCatalogsResult = AxiosResponse<WebitelCasesCatalogList>;
+export type CreateCatalogResult = AxiosResponse<WebitelCasesCatalog>;
+export type DeleteCatalogResult = AxiosResponse<WebitelCasesCatalogList>;
+export type LocateCatalogResult =
+	AxiosResponse<WebitelCasesLocateCatalogResponse>;
+export type UpdateCatalog2Result = AxiosResponse<WebitelCasesCatalog>;
+export type UpdateCatalogResult = AxiosResponse<WebitelCasesCatalog>;
 
 // --- footer end

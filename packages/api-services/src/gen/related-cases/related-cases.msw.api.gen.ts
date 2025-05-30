@@ -8,12 +8,15 @@ import { faker } from '@faker-js/faker';
 
 import { http, HttpResponse, delay } from 'msw';
 
-import { CasesRelationType } from '.././_models';
-import type { CasesRelatedCase, CasesRelatedCaseList } from '.././_models';
+import { WebitelCasesRelationType } from '.././_models';
+import type {
+	WebitelCasesRelatedCase,
+	WebitelCasesRelatedCaseList,
+} from '.././_models';
 
 export const getUpdateRelatedCase2ResponseMock = (
-	overrideResponse: Partial<CasesRelatedCase> = {},
-): CasesRelatedCase => ({
+	overrideResponse: Partial<WebitelCasesRelatedCase> = {},
+): WebitelCasesRelatedCase => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -68,7 +71,7 @@ export const getUpdateRelatedCase2ResponseMock = (
 		undefined,
 	]),
 	relationType: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesRelationType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesRelationType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -93,8 +96,8 @@ export const getUpdateRelatedCase2ResponseMock = (
 });
 
 export const getUpdateRelatedCaseResponseMock = (
-	overrideResponse: Partial<CasesRelatedCase> = {},
-): CasesRelatedCase => ({
+	overrideResponse: Partial<WebitelCasesRelatedCase> = {},
+): WebitelCasesRelatedCase => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -149,7 +152,7 @@ export const getUpdateRelatedCaseResponseMock = (
 		undefined,
 	]),
 	relationType: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesRelationType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesRelationType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -174,8 +177,8 @@ export const getUpdateRelatedCaseResponseMock = (
 });
 
 export const getListRelatedCasesResponseMock = (
-	overrideResponse: Partial<CasesRelatedCaseList> = {},
-): CasesRelatedCaseList => ({
+	overrideResponse: Partial<WebitelCasesRelatedCaseList> = {},
+): WebitelCasesRelatedCaseList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -247,7 +250,7 @@ export const getListRelatedCasesResponseMock = (
 				undefined,
 			]),
 			relationType: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(CasesRelationType)),
+				faker.helpers.arrayElement(Object.values(WebitelCasesRelationType)),
 				undefined,
 			]),
 			updatedAt: faker.helpers.arrayElement([
@@ -280,8 +283,8 @@ export const getListRelatedCasesResponseMock = (
 });
 
 export const getCreateRelatedCaseResponseMock = (
-	overrideResponse: Partial<CasesRelatedCase> = {},
-): CasesRelatedCase => ({
+	overrideResponse: Partial<WebitelCasesRelatedCase> = {},
+): WebitelCasesRelatedCase => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -336,7 +339,7 @@ export const getCreateRelatedCaseResponseMock = (
 		undefined,
 	]),
 	relationType: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesRelationType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesRelationType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -361,8 +364,8 @@ export const getCreateRelatedCaseResponseMock = (
 });
 
 export const getDeleteRelatedCaseResponseMock = (
-	overrideResponse: Partial<CasesRelatedCase> = {},
-): CasesRelatedCase => ({
+	overrideResponse: Partial<WebitelCasesRelatedCase> = {},
+): WebitelCasesRelatedCase => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -417,7 +420,7 @@ export const getDeleteRelatedCaseResponseMock = (
 		undefined,
 	]),
 	relationType: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesRelationType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesRelationType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -442,8 +445,8 @@ export const getDeleteRelatedCaseResponseMock = (
 });
 
 export const getLocateRelatedCaseResponseMock = (
-	overrideResponse: Partial<CasesRelatedCase> = {},
-): CasesRelatedCase => ({
+	overrideResponse: Partial<WebitelCasesRelatedCase> = {},
+): WebitelCasesRelatedCase => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -498,7 +501,7 @@ export const getLocateRelatedCaseResponseMock = (
 		undefined,
 	]),
 	relationType: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesRelationType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesRelationType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -524,10 +527,10 @@ export const getLocateRelatedCaseResponseMock = (
 
 export const getUpdateRelatedCase2MockHandler = (
 	overrideResponse?:
-		| CasesRelatedCase
+		| WebitelCasesRelatedCase
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<CasesRelatedCase> | CasesRelatedCase),
+		  ) => Promise<WebitelCasesRelatedCase> | WebitelCasesRelatedCase),
 ) => {
 	return http.patch(
 		'*/cases/input.primary_case.id}/related/:etag',
@@ -550,10 +553,10 @@ export const getUpdateRelatedCase2MockHandler = (
 
 export const getUpdateRelatedCaseMockHandler = (
 	overrideResponse?:
-		| CasesRelatedCase
+		| WebitelCasesRelatedCase
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<CasesRelatedCase> | CasesRelatedCase),
+		  ) => Promise<WebitelCasesRelatedCase> | WebitelCasesRelatedCase),
 ) => {
 	return http.put(
 		'*/cases/input.primary_case.id}/related/:etag',
@@ -576,10 +579,10 @@ export const getUpdateRelatedCaseMockHandler = (
 
 export const getListRelatedCasesMockHandler = (
 	overrideResponse?:
-		| CasesRelatedCaseList
+		| WebitelCasesRelatedCaseList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesRelatedCaseList> | CasesRelatedCaseList),
+		  ) => Promise<WebitelCasesRelatedCaseList> | WebitelCasesRelatedCaseList),
 ) => {
 	return http.get('*/cases/:primaryCaseEtag/related', async (info) => {
 		await delay(1000);
@@ -599,10 +602,10 @@ export const getListRelatedCasesMockHandler = (
 
 export const getCreateRelatedCaseMockHandler = (
 	overrideResponse?:
-		| CasesRelatedCase
+		| WebitelCasesRelatedCase
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<CasesRelatedCase> | CasesRelatedCase),
+		  ) => Promise<WebitelCasesRelatedCase> | WebitelCasesRelatedCase),
 ) => {
 	return http.post('*/cases/:primaryCaseEtag/related', async (info) => {
 		await delay(1000);
@@ -622,10 +625,10 @@ export const getCreateRelatedCaseMockHandler = (
 
 export const getDeleteRelatedCaseMockHandler = (
 	overrideResponse?:
-		| CasesRelatedCase
+		| WebitelCasesRelatedCase
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<CasesRelatedCase> | CasesRelatedCase),
+		  ) => Promise<WebitelCasesRelatedCase> | WebitelCasesRelatedCase),
 ) => {
 	return http.delete('*/cases/:primaryCaseEtag/related/:etag', async (info) => {
 		await delay(1000);
@@ -645,10 +648,10 @@ export const getDeleteRelatedCaseMockHandler = (
 
 export const getLocateRelatedCaseMockHandler = (
 	overrideResponse?:
-		| CasesRelatedCase
+		| WebitelCasesRelatedCase
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesRelatedCase> | CasesRelatedCase),
+		  ) => Promise<WebitelCasesRelatedCase> | WebitelCasesRelatedCase),
 ) => {
 	return http.get('*/cases/:primaryCaseEtag/related/:etag', async (info) => {
 		await delay(1000);

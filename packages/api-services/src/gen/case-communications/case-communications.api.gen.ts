@@ -9,13 +9,13 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesInputCaseCommunication,
-	CasesLinkCommunicationResponse,
-	CasesListCommunicationsResponse,
-	CasesUnlinkCommunicationResponse,
 	LinkCommunicationParams,
 	ListCommunicationsParams,
 	UnlinkCommunicationParams,
+	WebitelCasesInputCaseCommunication,
+	WebitelCasesLinkCommunicationResponse,
+	WebitelCasesListCommunicationsResponse,
+	WebitelCasesUnlinkCommunicationResponse,
 } from '.././_models';
 
 // --- header start
@@ -31,7 +31,7 @@ export const // --- title start
 Currently a feature for future development.
  */
 			const listCommunications = <
-				TData = AxiosResponse<CasesListCommunicationsResponse>,
+				TData = AxiosResponse<WebitelCasesListCommunicationsResponse>,
 			>(
 				caseEtag: string,
 				params?: ListCommunicationsParams,
@@ -46,16 +46,16 @@ Currently a feature for future development.
 			 * @summary Links a communication to a specific case.
 			 */
 			const linkCommunication = <
-				TData = AxiosResponse<CasesLinkCommunicationResponse>,
+				TData = AxiosResponse<WebitelCasesLinkCommunicationResponse>,
 			>(
 				caseEtag: string,
-				casesInputCaseCommunication: CasesInputCaseCommunication,
+				webitelCasesInputCaseCommunication: WebitelCasesInputCaseCommunication,
 				params?: LinkCommunicationParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/cases/${caseEtag}/communication`,
-					casesInputCaseCommunication,
+					webitelCasesInputCaseCommunication,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -66,7 +66,7 @@ Currently a feature for future development.
 			 * @summary Unlinks a communication from a specific case.
 			 */
 			const unlinkCommunication = <
-				TData = AxiosResponse<CasesUnlinkCommunicationResponse>,
+				TData = AxiosResponse<WebitelCasesUnlinkCommunicationResponse>,
 			>(
 				caseEtag: string,
 				id: string,
@@ -83,10 +83,10 @@ Currently a feature for future development.
 			return { listCommunications, linkCommunication, unlinkCommunication };
 		};
 export type ListCommunicationsResult =
-	AxiosResponse<CasesListCommunicationsResponse>;
+	AxiosResponse<WebitelCasesListCommunicationsResponse>;
 export type LinkCommunicationResult =
-	AxiosResponse<CasesLinkCommunicationResponse>;
+	AxiosResponse<WebitelCasesLinkCommunicationResponse>;
 export type UnlinkCommunicationResult =
-	AxiosResponse<CasesUnlinkCommunicationResponse>;
+	AxiosResponse<WebitelCasesUnlinkCommunicationResponse>;
 
 // --- footer end

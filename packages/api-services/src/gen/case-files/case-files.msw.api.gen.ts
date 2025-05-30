@@ -8,11 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { http, HttpResponse, delay } from 'msw';
 
-import type { CasesCaseFileList, CasesFile } from '.././_models';
+import type { WebitelCasesCaseFileList, WebitelCasesFile } from '.././_models';
 
 export const getListFilesResponseMock = (
-	overrideResponse: Partial<CasesCaseFileList> = {},
-): CasesCaseFileList => ({
+	overrideResponse: Partial<WebitelCasesCaseFileList> = {},
+): WebitelCasesCaseFileList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -65,8 +65,8 @@ export const getListFilesResponseMock = (
 });
 
 export const getDeleteFileResponseMock = (
-	overrideResponse: Partial<CasesFile> = {},
-): CasesFile => ({
+	overrideResponse: Partial<WebitelCasesFile> = {},
+): WebitelCasesFile => ({
 	author: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -107,10 +107,10 @@ export const getDeleteFileResponseMock = (
 
 export const getListFilesMockHandler = (
 	overrideResponse?:
-		| CasesCaseFileList
+		| WebitelCasesCaseFileList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesCaseFileList> | CasesCaseFileList),
+		  ) => Promise<WebitelCasesCaseFileList> | WebitelCasesCaseFileList),
 ) => {
 	return http.get('*/cases/:caseEtag/files', async (info) => {
 		await delay(1000);
@@ -130,10 +130,10 @@ export const getListFilesMockHandler = (
 
 export const getDeleteFileMockHandler = (
 	overrideResponse?:
-		| CasesFile
+		| WebitelCasesFile
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<CasesFile> | CasesFile),
+		  ) => Promise<WebitelCasesFile> | WebitelCasesFile),
 ) => {
 	return http.delete('*/cases/:caseEtag/files/:id', async (info) => {
 		await delay(1000);

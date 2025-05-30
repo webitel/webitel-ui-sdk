@@ -9,16 +9,16 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesInputCreateService,
-	CasesInputService,
-	CasesLocateServiceResponse,
-	CasesService,
-	CasesServiceList,
 	CreateServiceParams,
 	ListServicesParams,
 	LocateServiceParams,
 	UpdateService2Params,
 	UpdateServiceParams,
+	WebitelCasesInputCreateService,
+	WebitelCasesInputService,
+	WebitelCasesLocateServiceResponse,
+	WebitelCasesService,
+	WebitelCasesServiceList,
 } from '.././_models';
 
 // --- header start
@@ -32,7 +32,7 @@ export const // --- title start
 			/**
 			 * @summary Retrieve a list of services or search services within a catalog
 			 */
-			const listServices = <TData = AxiosResponse<CasesServiceList>>(
+			const listServices = <TData = AxiosResponse<WebitelCasesServiceList>>(
 				params?: ListServicesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -44,12 +44,12 @@ export const // --- title start
 			/**
 			 * @summary Create a new service within a catalog
 			 */
-			const createService = <TData = AxiosResponse<CasesService>>(
-				casesInputCreateService: CasesInputCreateService,
+			const createService = <TData = AxiosResponse<WebitelCasesService>>(
+				webitelCasesInputCreateService: WebitelCasesInputCreateService,
 				params?: CreateServiceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post('/cases/services', casesInputCreateService, {
+				return axios.post('/cases/services', webitelCasesInputCreateService, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -57,7 +57,7 @@ export const // --- title start
 			/**
 			 * @summary Delete a service
 			 */
-			const deleteService = <TData = AxiosResponse<CasesServiceList>>(
+			const deleteService = <TData = AxiosResponse<WebitelCasesServiceList>>(
 				id: string[],
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -66,7 +66,9 @@ export const // --- title start
 			/**
 			 * @summary Locate a service by ID
 			 */
-			const locateService = <TData = AxiosResponse<CasesLocateServiceResponse>>(
+			const locateService = <
+				TData = AxiosResponse<WebitelCasesLocateServiceResponse>,
+			>(
 				id: string,
 				params?: LocateServiceParams,
 				options?: AxiosRequestConfig,
@@ -79,13 +81,13 @@ export const // --- title start
 			/**
 			 * @summary Update an existing service
 			 */
-			const updateService2 = <TData = AxiosResponse<CasesService>>(
+			const updateService2 = <TData = AxiosResponse<WebitelCasesService>>(
 				id: string,
-				casesInputService: CasesInputService,
+				webitelCasesInputService: WebitelCasesInputService,
 				params?: UpdateService2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch(`/cases/services/${id}`, casesInputService, {
+				return axios.patch(`/cases/services/${id}`, webitelCasesInputService, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -93,13 +95,13 @@ export const // --- title start
 			/**
 			 * @summary Update an existing service
 			 */
-			const updateService = <TData = AxiosResponse<CasesService>>(
+			const updateService = <TData = AxiosResponse<WebitelCasesService>>(
 				id: string,
-				casesInputService: CasesInputService,
+				webitelCasesInputService: WebitelCasesInputService,
 				params?: UpdateServiceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(`/cases/services/${id}`, casesInputService, {
+				return axios.put(`/cases/services/${id}`, webitelCasesInputService, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -115,11 +117,12 @@ export const // --- title start
 				updateService,
 			};
 		};
-export type ListServicesResult = AxiosResponse<CasesServiceList>;
-export type CreateServiceResult = AxiosResponse<CasesService>;
-export type DeleteServiceResult = AxiosResponse<CasesServiceList>;
-export type LocateServiceResult = AxiosResponse<CasesLocateServiceResponse>;
-export type UpdateService2Result = AxiosResponse<CasesService>;
-export type UpdateServiceResult = AxiosResponse<CasesService>;
+export type ListServicesResult = AxiosResponse<WebitelCasesServiceList>;
+export type CreateServiceResult = AxiosResponse<WebitelCasesService>;
+export type DeleteServiceResult = AxiosResponse<WebitelCasesServiceList>;
+export type LocateServiceResult =
+	AxiosResponse<WebitelCasesLocateServiceResponse>;
+export type UpdateService2Result = AxiosResponse<WebitelCasesService>;
+export type UpdateServiceResult = AxiosResponse<WebitelCasesService>;
 
 // --- footer end

@@ -1,17 +1,17 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
-import type { CasesCatalog, CasesCatalogList, CasesInputCatalog, CasesLocateCatalogResponse, CreateCatalogParams, ListCatalogsParams, LocateCatalogParams, UpdateCatalog2Params, UpdateCatalogParams } from '.././_models';
+import type { CreateCatalogParams, ListCatalogsParams, LocateCatalogParams, UpdateCatalog2Params, UpdateCatalogParams, WebitelCasesCatalog, WebitelCasesCatalogList, WebitelCasesInputCatalog, WebitelCasesLocateCatalogResponse } from '.././_models';
 export declare const // --- title start
 getCatalogs: () => {
-    listCatalogs: <TData = AxiosResponse<CasesCatalogList, any>>(params?: ListCatalogsParams, options?: AxiosRequestConfig) => Promise<TData>;
-    createCatalog: <TData = AxiosResponse<CasesCatalog, any>>(casesInputCatalog: CasesInputCatalog, params?: CreateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>;
-    deleteCatalog: <TData = AxiosResponse<CasesCatalogList, any>>(id: string[], options?: AxiosRequestConfig) => Promise<TData>;
-    locateCatalog: <TData = AxiosResponse<CasesLocateCatalogResponse, any>>(id: string, params?: LocateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>;
-    updateCatalog2: <TData = AxiosResponse<CasesCatalog, any>>(id: string, casesInputCatalog: CasesInputCatalog, params?: UpdateCatalog2Params, options?: AxiosRequestConfig) => Promise<TData>;
-    updateCatalog: <TData = AxiosResponse<CasesCatalog, any>>(id: string, casesInputCatalog: CasesInputCatalog, params?: UpdateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>;
+    listCatalogs: <TData = AxiosResponse<WebitelCasesCatalogList, any>>(params?: ListCatalogsParams, options?: AxiosRequestConfig) => Promise<TData>;
+    createCatalog: <TData = AxiosResponse<WebitelCasesCatalog, any>>(webitelCasesInputCatalog: WebitelCasesInputCatalog, params?: CreateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>;
+    deleteCatalog: <TData = AxiosResponse<WebitelCasesCatalogList, any>>(id: string[], options?: AxiosRequestConfig) => Promise<TData>;
+    locateCatalog: <TData = AxiosResponse<WebitelCasesLocateCatalogResponse, any>>(id: string, params?: LocateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>;
+    updateCatalog2: <TData = AxiosResponse<WebitelCasesCatalog, any>>(id: string, webitelCasesInputCatalog: WebitelCasesInputCatalog, params?: UpdateCatalog2Params, options?: AxiosRequestConfig) => Promise<TData>;
+    updateCatalog: <TData = AxiosResponse<WebitelCasesCatalog, any>>(id: string, webitelCasesInputCatalog: WebitelCasesInputCatalog, params?: UpdateCatalogParams, options?: AxiosRequestConfig) => Promise<TData>;
 };
-export type ListCatalogsResult = AxiosResponse<CasesCatalogList>;
-export type CreateCatalogResult = AxiosResponse<CasesCatalog>;
-export type DeleteCatalogResult = AxiosResponse<CasesCatalogList>;
-export type LocateCatalogResult = AxiosResponse<CasesLocateCatalogResponse>;
-export type UpdateCatalog2Result = AxiosResponse<CasesCatalog>;
-export type UpdateCatalogResult = AxiosResponse<CasesCatalog>;
+export type ListCatalogsResult = AxiosResponse<WebitelCasesCatalogList>;
+export type CreateCatalogResult = AxiosResponse<WebitelCasesCatalog>;
+export type DeleteCatalogResult = AxiosResponse<WebitelCasesCatalogList>;
+export type LocateCatalogResult = AxiosResponse<WebitelCasesLocateCatalogResponse>;
+export type UpdateCatalog2Result = AxiosResponse<WebitelCasesCatalog>;
+export type UpdateCatalogResult = AxiosResponse<WebitelCasesCatalog>;

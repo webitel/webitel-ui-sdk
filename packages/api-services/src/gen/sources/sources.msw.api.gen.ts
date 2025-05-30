@@ -8,16 +8,16 @@ import { faker } from '@faker-js/faker';
 
 import { http, HttpResponse, delay } from 'msw';
 
-import { CasesSourceType } from '.././_models';
+import { WebitelCasesSourceType } from '.././_models';
 import type {
-	CasesLocateSourceResponse,
-	CasesSource,
-	CasesSourceList,
+	WebitelCasesLocateSourceResponse,
+	WebitelCasesSource,
+	WebitelCasesSourceList,
 } from '.././_models';
 
 export const getListSourcesResponseMock = (
-	overrideResponse: Partial<CasesSourceList> = {},
-): CasesSourceList => ({
+	overrideResponse: Partial<WebitelCasesSourceList> = {},
+): WebitelCasesSourceList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -47,7 +47,7 @@ export const getListSourcesResponseMock = (
 			]),
 			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 			type: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(CasesSourceType)),
+				faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 				undefined,
 			]),
 			updatedAt: faker.helpers.arrayElement([
@@ -76,8 +76,8 @@ export const getListSourcesResponseMock = (
 });
 
 export const getCreateSourceResponseMock = (
-	overrideResponse: Partial<CasesSource> = {},
-): CasesSource => ({
+	overrideResponse: Partial<WebitelCasesSource> = {},
+): WebitelCasesSource => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -99,7 +99,7 @@ export const getCreateSourceResponseMock = (
 	]),
 	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesSourceType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -120,8 +120,8 @@ export const getCreateSourceResponseMock = (
 });
 
 export const getDeleteSourceResponseMock = (
-	overrideResponse: Partial<CasesSource> = {},
-): CasesSource => ({
+	overrideResponse: Partial<WebitelCasesSource> = {},
+): WebitelCasesSource => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -143,7 +143,7 @@ export const getDeleteSourceResponseMock = (
 	]),
 	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesSourceType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -164,8 +164,8 @@ export const getDeleteSourceResponseMock = (
 });
 
 export const getLocateSourceResponseMock = (
-	overrideResponse: Partial<CasesLocateSourceResponse> = {},
-): CasesLocateSourceResponse => ({
+	overrideResponse: Partial<WebitelCasesLocateSourceResponse> = {},
+): WebitelCasesLocateSourceResponse => ({
 	source: faker.helpers.arrayElement([
 		{
 			createdAt: faker.helpers.arrayElement([
@@ -192,7 +192,7 @@ export const getLocateSourceResponseMock = (
 			]),
 			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 			type: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(CasesSourceType)),
+				faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 				undefined,
 			]),
 			updatedAt: faker.helpers.arrayElement([
@@ -216,8 +216,8 @@ export const getLocateSourceResponseMock = (
 });
 
 export const getUpdateSource2ResponseMock = (
-	overrideResponse: Partial<CasesSource> = {},
-): CasesSource => ({
+	overrideResponse: Partial<WebitelCasesSource> = {},
+): WebitelCasesSource => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -239,7 +239,7 @@ export const getUpdateSource2ResponseMock = (
 	]),
 	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesSourceType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -260,8 +260,8 @@ export const getUpdateSource2ResponseMock = (
 });
 
 export const getUpdateSourceResponseMock = (
-	overrideResponse: Partial<CasesSource> = {},
-): CasesSource => ({
+	overrideResponse: Partial<WebitelCasesSource> = {},
+): WebitelCasesSource => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -283,7 +283,7 @@ export const getUpdateSourceResponseMock = (
 	]),
 	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(CasesSourceType)),
+		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 		undefined,
 	]),
 	updatedAt: faker.helpers.arrayElement([
@@ -305,10 +305,10 @@ export const getUpdateSourceResponseMock = (
 
 export const getListSourcesMockHandler = (
 	overrideResponse?:
-		| CasesSourceList
+		| WebitelCasesSourceList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesSourceList> | CasesSourceList),
+		  ) => Promise<WebitelCasesSourceList> | WebitelCasesSourceList),
 ) => {
 	return http.get('*/cases/sources', async (info) => {
 		await delay(1000);
@@ -328,10 +328,10 @@ export const getListSourcesMockHandler = (
 
 export const getCreateSourceMockHandler = (
 	overrideResponse?:
-		| CasesSource
+		| WebitelCasesSource
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<CasesSource> | CasesSource),
+		  ) => Promise<WebitelCasesSource> | WebitelCasesSource),
 ) => {
 	return http.post('*/cases/sources', async (info) => {
 		await delay(1000);
@@ -351,10 +351,10 @@ export const getCreateSourceMockHandler = (
 
 export const getDeleteSourceMockHandler = (
 	overrideResponse?:
-		| CasesSource
+		| WebitelCasesSource
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<CasesSource> | CasesSource),
+		  ) => Promise<WebitelCasesSource> | WebitelCasesSource),
 ) => {
 	return http.delete('*/cases/sources/:id', async (info) => {
 		await delay(1000);
@@ -374,10 +374,12 @@ export const getDeleteSourceMockHandler = (
 
 export const getLocateSourceMockHandler = (
 	overrideResponse?:
-		| CasesLocateSourceResponse
+		| WebitelCasesLocateSourceResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesLocateSourceResponse> | CasesLocateSourceResponse),
+		  ) =>
+				| Promise<WebitelCasesLocateSourceResponse>
+				| WebitelCasesLocateSourceResponse),
 ) => {
 	return http.get('*/cases/sources/:id', async (info) => {
 		await delay(1000);
@@ -397,10 +399,10 @@ export const getLocateSourceMockHandler = (
 
 export const getUpdateSource2MockHandler = (
 	overrideResponse?:
-		| CasesSource
+		| WebitelCasesSource
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<CasesSource> | CasesSource),
+		  ) => Promise<WebitelCasesSource> | WebitelCasesSource),
 ) => {
 	return http.patch('*/cases/sources/:id', async (info) => {
 		await delay(1000);
@@ -420,10 +422,10 @@ export const getUpdateSource2MockHandler = (
 
 export const getUpdateSourceMockHandler = (
 	overrideResponse?:
-		| CasesSource
+		| WebitelCasesSource
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<CasesSource> | CasesSource),
+		  ) => Promise<WebitelCasesSource> | WebitelCasesSource),
 ) => {
 	return http.put('*/cases/sources/:id', async (info) => {
 		await delay(1000);

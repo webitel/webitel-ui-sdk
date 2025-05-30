@@ -172,6 +172,7 @@ export const searchCasesResponse = zod
 							.object({})
 							.optional()
 							.describe('Custom data extension fields ..'),
+						dc: zod.string().optional(),
 						description: zod
 							.string()
 							.optional()
@@ -811,6 +812,7 @@ export const createCaseResponse = zod
 			.object({})
 			.optional()
 			.describe('Custom data extension fields ..'),
+		dc: zod.string().optional(),
 		description: zod
 			.string()
 			.optional()
@@ -1282,6 +1284,7 @@ export const deleteCaseResponse = zod
 			.object({})
 			.optional()
 			.describe('Custom data extension fields ..'),
+		dc: zod.string().optional(),
 		description: zod
 			.string()
 			.optional()
@@ -1753,6 +1756,7 @@ export const locateCaseResponse = zod
 			.object({})
 			.optional()
 			.describe('Custom data extension fields ..'),
+		dc: zod.string().optional(),
 		description: zod
 			.string()
 			.optional()
@@ -2322,6 +2326,7 @@ export const updateCase2Response = zod
 			.object({})
 			.optional()
 			.describe('Custom data extension fields ..'),
+		dc: zod.string().optional(),
 		description: zod
 			.string()
 			.optional()
@@ -2893,6 +2898,7 @@ export const updateCaseResponse = zod
 			.object({})
 			.optional()
 			.describe('Custom data extension fields ..'),
+		dc: zod.string().optional(),
 		description: zod
 			.string()
 			.optional()
@@ -3387,6 +3393,7 @@ export const searchCases2Response = zod
 							.object({})
 							.optional()
 							.describe('Custom data extension fields ..'),
+						dc: zod.string().optional(),
 						description: zod
 							.string()
 							.optional()

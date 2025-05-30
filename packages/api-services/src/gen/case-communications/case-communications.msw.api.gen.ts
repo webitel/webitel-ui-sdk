@@ -9,14 +9,14 @@ import { faker } from '@faker-js/faker';
 import { http, HttpResponse, delay } from 'msw';
 
 import type {
-	CasesLinkCommunicationResponse,
-	CasesListCommunicationsResponse,
-	CasesUnlinkCommunicationResponse,
+	WebitelCasesLinkCommunicationResponse,
+	WebitelCasesListCommunicationsResponse,
+	WebitelCasesUnlinkCommunicationResponse,
 } from '.././_models';
 
 export const getListCommunicationsResponseMock = (
-	overrideResponse: Partial<CasesListCommunicationsResponse> = {},
-): CasesListCommunicationsResponse => ({
+	overrideResponse: Partial<WebitelCasesListCommunicationsResponse> = {},
+): WebitelCasesListCommunicationsResponse => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -57,8 +57,8 @@ export const getListCommunicationsResponseMock = (
 });
 
 export const getLinkCommunicationResponseMock = (
-	overrideResponse: Partial<CasesLinkCommunicationResponse> = {},
-): CasesLinkCommunicationResponse => ({
+	overrideResponse: Partial<WebitelCasesLinkCommunicationResponse> = {},
+): WebitelCasesLinkCommunicationResponse => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -94,8 +94,8 @@ export const getLinkCommunicationResponseMock = (
 });
 
 export const getUnlinkCommunicationResponseMock = (
-	overrideResponse: Partial<CasesUnlinkCommunicationResponse> = {},
-): CasesUnlinkCommunicationResponse => ({
+	overrideResponse: Partial<WebitelCasesUnlinkCommunicationResponse> = {},
+): WebitelCasesUnlinkCommunicationResponse => ({
 	affected: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -105,12 +105,12 @@ export const getUnlinkCommunicationResponseMock = (
 
 export const getListCommunicationsMockHandler = (
 	overrideResponse?:
-		| CasesListCommunicationsResponse
+		| WebitelCasesListCommunicationsResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<CasesListCommunicationsResponse>
-				| CasesListCommunicationsResponse),
+				| Promise<WebitelCasesListCommunicationsResponse>
+				| WebitelCasesListCommunicationsResponse),
 ) => {
 	return http.get('*/cases/:caseEtag/communication', async (info) => {
 		await delay(1000);
@@ -130,12 +130,12 @@ export const getListCommunicationsMockHandler = (
 
 export const getLinkCommunicationMockHandler = (
 	overrideResponse?:
-		| CasesLinkCommunicationResponse
+		| WebitelCasesLinkCommunicationResponse
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
 		  ) =>
-				| Promise<CasesLinkCommunicationResponse>
-				| CasesLinkCommunicationResponse),
+				| Promise<WebitelCasesLinkCommunicationResponse>
+				| WebitelCasesLinkCommunicationResponse),
 ) => {
 	return http.post('*/cases/:caseEtag/communication', async (info) => {
 		await delay(1000);
@@ -155,12 +155,12 @@ export const getLinkCommunicationMockHandler = (
 
 export const getUnlinkCommunicationMockHandler = (
 	overrideResponse?:
-		| CasesUnlinkCommunicationResponse
+		| WebitelCasesUnlinkCommunicationResponse
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
 		  ) =>
-				| Promise<CasesUnlinkCommunicationResponse>
-				| CasesUnlinkCommunicationResponse),
+				| Promise<WebitelCasesUnlinkCommunicationResponse>
+				| WebitelCasesUnlinkCommunicationResponse),
 ) => {
 	return http.delete('*/cases/:caseEtag/communication/:id', async (info) => {
 		await delay(1000);

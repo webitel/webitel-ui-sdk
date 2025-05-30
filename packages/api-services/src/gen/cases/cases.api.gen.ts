@@ -9,9 +9,6 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesCase,
-	CasesCaseList,
-	CasesInputCreateCase,
 	CreateCaseParams,
 	DeleteCaseParams,
 	LocateCaseParams,
@@ -21,6 +18,9 @@ import type {
 	UpdateCase2Params,
 	UpdateCaseBody,
 	UpdateCaseParams,
+	WebitelCasesCase,
+	WebitelCasesCaseList,
+	WebitelCasesInputCreateCase,
 } from '.././_models';
 
 // --- header start
@@ -34,7 +34,7 @@ export const // --- title start
 			/**
 			 * @summary RPC method for searching cases.
 			 */
-			const searchCases = <TData = AxiosResponse<CasesCaseList>>(
+			const searchCases = <TData = AxiosResponse<WebitelCasesCaseList>>(
 				params?: SearchCasesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -46,12 +46,12 @@ export const // --- title start
 			/**
 			 * @summary RPC method for creating a new case.
 			 */
-			const createCase = <TData = AxiosResponse<CasesCase>>(
-				casesInputCreateCase: CasesInputCreateCase,
+			const createCase = <TData = AxiosResponse<WebitelCasesCase>>(
+				webitelCasesInputCreateCase: WebitelCasesInputCreateCase,
 				params?: CreateCaseParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post('/cases', casesInputCreateCase, {
+				return axios.post('/cases', webitelCasesInputCreateCase, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -59,7 +59,7 @@ export const // --- title start
 			/**
 			 * @summary RPC method for deleting an existing case by its etag.
 			 */
-			const deleteCase = <TData = AxiosResponse<CasesCase>>(
+			const deleteCase = <TData = AxiosResponse<WebitelCasesCase>>(
 				etag: string,
 				params?: DeleteCaseParams,
 				options?: AxiosRequestConfig,
@@ -72,7 +72,7 @@ export const // --- title start
 			/**
 			 * @summary RPC method to retrieve a specific case by its etag identifier.
 			 */
-			const locateCase = <TData = AxiosResponse<CasesCase>>(
+			const locateCase = <TData = AxiosResponse<WebitelCasesCase>>(
 				etag: string,
 				params?: LocateCaseParams,
 				options?: AxiosRequestConfig,
@@ -85,7 +85,7 @@ export const // --- title start
 			/**
 			 * @summary RPC method for updating an existing case.
 			 */
-			const updateCase2 = <TData = AxiosResponse<CasesCase>>(
+			const updateCase2 = <TData = AxiosResponse<WebitelCasesCase>>(
 				updateCase2Body: UpdateCase2Body,
 				params?: UpdateCase2Params,
 				options?: AxiosRequestConfig,
@@ -98,7 +98,7 @@ export const // --- title start
 			/**
 			 * @summary RPC method for updating an existing case.
 			 */
-			const updateCase = <TData = AxiosResponse<CasesCase>>(
+			const updateCase = <TData = AxiosResponse<WebitelCasesCase>>(
 				updateCaseBody: UpdateCaseBody,
 				params?: UpdateCaseParams,
 				options?: AxiosRequestConfig,
@@ -111,7 +111,7 @@ export const // --- title start
 			/**
 			 * @summary RPC method for searching cases.
 			 */
-			const searchCases2 = <TData = AxiosResponse<CasesCaseList>>(
+			const searchCases2 = <TData = AxiosResponse<WebitelCasesCaseList>>(
 				contactId: string,
 				params?: SearchCases2Params,
 				options?: AxiosRequestConfig,
@@ -133,12 +133,12 @@ export const // --- title start
 				searchCases2,
 			};
 		};
-export type SearchCasesResult = AxiosResponse<CasesCaseList>;
-export type CreateCaseResult = AxiosResponse<CasesCase>;
-export type DeleteCaseResult = AxiosResponse<CasesCase>;
-export type LocateCaseResult = AxiosResponse<CasesCase>;
-export type UpdateCase2Result = AxiosResponse<CasesCase>;
-export type UpdateCaseResult = AxiosResponse<CasesCase>;
-export type SearchCases2Result = AxiosResponse<CasesCaseList>;
+export type SearchCasesResult = AxiosResponse<WebitelCasesCaseList>;
+export type CreateCaseResult = AxiosResponse<WebitelCasesCase>;
+export type DeleteCaseResult = AxiosResponse<WebitelCasesCase>;
+export type LocateCaseResult = AxiosResponse<WebitelCasesCase>;
+export type UpdateCase2Result = AxiosResponse<WebitelCasesCase>;
+export type UpdateCaseResult = AxiosResponse<WebitelCasesCase>;
+export type SearchCases2Result = AxiosResponse<WebitelCasesCaseList>;
 
 // --- footer end

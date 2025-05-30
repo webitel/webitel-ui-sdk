@@ -9,16 +9,16 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesInputCreateStatusCondition,
-	CasesInputStatusCondition,
-	CasesLocateStatusConditionResponse,
-	CasesStatusCondition,
-	CasesStatusConditionList,
 	CreateStatusConditionParams,
 	ListStatusConditionsParams,
 	LocateStatusConditionParams,
 	UpdateStatusCondition2Params,
 	UpdateStatusConditionParams,
+	WebitelCasesInputCreateStatusCondition,
+	WebitelCasesInputStatusCondition,
+	WebitelCasesLocateStatusConditionResponse,
+	WebitelCasesStatusCondition,
+	WebitelCasesStatusConditionList,
 } from '.././_models';
 
 // --- header start
@@ -33,7 +33,7 @@ export const // --- title start
 			 * @summary Retrieve a list of statuses or search status conditions
 			 */
 			const listStatusConditions = <
-				TData = AxiosResponse<CasesStatusConditionList>,
+				TData = AxiosResponse<WebitelCasesStatusConditionList>,
 			>(
 				statusId: string,
 				params?: ListStatusConditionsParams,
@@ -48,16 +48,16 @@ export const // --- title start
 			 * @summary Create a new status condition
 			 */
 			const createStatusCondition = <
-				TData = AxiosResponse<CasesStatusCondition>,
+				TData = AxiosResponse<WebitelCasesStatusCondition>,
 			>(
 				statusId: string,
-				casesInputCreateStatusCondition: CasesInputCreateStatusCondition,
+				webitelCasesInputCreateStatusCondition: WebitelCasesInputCreateStatusCondition,
 				params?: CreateStatusConditionParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/statuses/${statusId}/status`,
-					casesInputCreateStatusCondition,
+					webitelCasesInputCreateStatusCondition,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -68,7 +68,7 @@ export const // --- title start
 			 * @summary Delete a status condition
 			 */
 			const deleteStatusCondition = <
-				TData = AxiosResponse<CasesStatusCondition>,
+				TData = AxiosResponse<WebitelCasesStatusCondition>,
 			>(
 				statusId: string,
 				id: string,
@@ -80,7 +80,7 @@ export const // --- title start
 			 * @summary Locate a status condition by ID
 			 */
 			const locateStatusCondition = <
-				TData = AxiosResponse<CasesLocateStatusConditionResponse>,
+				TData = AxiosResponse<WebitelCasesLocateStatusConditionResponse>,
 			>(
 				statusId: string,
 				id: string,
@@ -96,17 +96,17 @@ export const // --- title start
 			 * @summary Update an existing status condition
 			 */
 			const updateStatusCondition2 = <
-				TData = AxiosResponse<CasesStatusCondition>,
+				TData = AxiosResponse<WebitelCasesStatusCondition>,
 			>(
 				statusId: string,
 				id: string,
-				casesInputStatusCondition: CasesInputStatusCondition,
+				webitelCasesInputStatusCondition: WebitelCasesInputStatusCondition,
 				params?: UpdateStatusCondition2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/statuses/${statusId}/status/${id}`,
-					casesInputStatusCondition,
+					webitelCasesInputStatusCondition,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -117,17 +117,17 @@ export const // --- title start
 			 * @summary Update an existing status condition
 			 */
 			const updateStatusCondition = <
-				TData = AxiosResponse<CasesStatusCondition>,
+				TData = AxiosResponse<WebitelCasesStatusCondition>,
 			>(
 				statusId: string,
 				id: string,
-				casesInputStatusCondition: CasesInputStatusCondition,
+				webitelCasesInputStatusCondition: WebitelCasesInputStatusCondition,
 				params?: UpdateStatusConditionParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/statuses/${statusId}/status/${id}`,
-					casesInputStatusCondition,
+					webitelCasesInputStatusCondition,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -146,12 +146,16 @@ export const // --- title start
 			};
 		};
 export type ListStatusConditionsResult =
-	AxiosResponse<CasesStatusConditionList>;
-export type CreateStatusConditionResult = AxiosResponse<CasesStatusCondition>;
-export type DeleteStatusConditionResult = AxiosResponse<CasesStatusCondition>;
+	AxiosResponse<WebitelCasesStatusConditionList>;
+export type CreateStatusConditionResult =
+	AxiosResponse<WebitelCasesStatusCondition>;
+export type DeleteStatusConditionResult =
+	AxiosResponse<WebitelCasesStatusCondition>;
 export type LocateStatusConditionResult =
-	AxiosResponse<CasesLocateStatusConditionResponse>;
-export type UpdateStatusCondition2Result = AxiosResponse<CasesStatusCondition>;
-export type UpdateStatusConditionResult = AxiosResponse<CasesStatusCondition>;
+	AxiosResponse<WebitelCasesLocateStatusConditionResponse>;
+export type UpdateStatusCondition2Result =
+	AxiosResponse<WebitelCasesStatusCondition>;
+export type UpdateStatusConditionResult =
+	AxiosResponse<WebitelCasesStatusCondition>;
 
 // --- footer end

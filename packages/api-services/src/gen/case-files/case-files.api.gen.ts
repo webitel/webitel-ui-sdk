@@ -9,9 +9,9 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesCaseFileList,
-	CasesFile,
 	ListFilesParams,
+	WebitelCasesCaseFileList,
+	WebitelCasesFile,
 } from '.././_models';
 
 // --- header start
@@ -25,7 +25,7 @@ export const // --- title start
 			/**
 			 * @summary Retrieve a list of files associated with a case
 			 */
-			const listFiles = <TData = AxiosResponse<CasesCaseFileList>>(
+			const listFiles = <TData = AxiosResponse<WebitelCasesCaseFileList>>(
 				caseEtag: string,
 				params?: ListFilesParams,
 				options?: AxiosRequestConfig,
@@ -38,7 +38,7 @@ export const // --- title start
 			/**
 			 * @summary Delete a file
 			 */
-			const deleteFile = <TData = AxiosResponse<CasesFile>>(
+			const deleteFile = <TData = AxiosResponse<WebitelCasesFile>>(
 				caseEtag: string,
 				id: string,
 				options?: AxiosRequestConfig,
@@ -49,7 +49,7 @@ export const // --- title start
 			// --- footer start
 			return { listFiles, deleteFile };
 		};
-export type ListFilesResult = AxiosResponse<CasesCaseFileList>;
-export type DeleteFileResult = AxiosResponse<CasesFile>;
+export type ListFilesResult = AxiosResponse<WebitelCasesCaseFileList>;
+export type DeleteFileResult = AxiosResponse<WebitelCasesFile>;
 
 // --- footer end

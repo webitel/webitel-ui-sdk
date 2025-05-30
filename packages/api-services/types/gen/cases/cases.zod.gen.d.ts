@@ -74,6 +74,7 @@ export declare const searchCasesResponse: zod.ZodObject<{
             name: zod.ZodOptional<zod.ZodString>;
         }, {}, {}>>;
         custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+        dc: zod.ZodOptional<zod.ZodString>;
         description: zod.ZodOptional<zod.ZodString>;
         differenceInReaction: zod.ZodOptional<zod.ZodString>;
         differenceInResolve: zod.ZodOptional<zod.ZodString>;
@@ -410,6 +411,7 @@ export declare const createCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
     }, {}, {}>>;
     custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
     differenceInResolve: zod.ZodOptional<zod.ZodString>;
@@ -663,6 +665,7 @@ export declare const deleteCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
     }, {}, {}>>;
     custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
     differenceInResolve: zod.ZodOptional<zod.ZodString>;
@@ -916,6 +919,7 @@ export declare const locateCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
     }, {}, {}>>;
     custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
     differenceInResolve: zod.ZodOptional<zod.ZodString>;
@@ -1237,6 +1241,7 @@ export declare const updateCase2Response: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
     }, {}, {}>>;
     custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
     differenceInResolve: zod.ZodOptional<zod.ZodString>;
@@ -1558,6 +1563,7 @@ export declare const updateCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
     }, {}, {}>>;
     custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
     differenceInResolve: zod.ZodOptional<zod.ZodString>;
@@ -1818,6 +1824,7 @@ export declare const searchCases2Response: zod.ZodObject<{
             name: zod.ZodOptional<zod.ZodString>;
         }, {}, {}>>;
         custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+        dc: zod.ZodOptional<zod.ZodString>;
         description: zod.ZodOptional<zod.ZodString>;
         differenceInReaction: zod.ZodOptional<zod.ZodString>;
         differenceInResolve: zod.ZodOptional<zod.ZodString>;

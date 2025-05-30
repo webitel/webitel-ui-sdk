@@ -9,8 +9,6 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesCaseLink,
-	CasesCaseLinkList,
 	CreateLinkParams,
 	ListLinksParams,
 	LocateLinkParams,
@@ -18,6 +16,8 @@ import type {
 	UpdateLink2Params,
 	UpdateLinkBody,
 	UpdateLinkParams,
+	WebitelCasesCaseLink,
+	WebitelCasesCaseLinkList,
 } from '.././_models';
 
 // --- header start
@@ -31,7 +31,7 @@ export const // --- title start
 			/**
 			 * @summary With Case
 			 */
-			const listLinks = <TData = AxiosResponse<CasesCaseLinkList>>(
+			const listLinks = <TData = AxiosResponse<WebitelCasesCaseLinkList>>(
 				caseEtag: string,
 				params?: ListLinksParams,
 				options?: AxiosRequestConfig,
@@ -41,7 +41,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const createLink = <TData = AxiosResponse<CasesCaseLink>>(
+			const createLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
 				caseEtag: string,
 				params?: CreateLinkParams,
 				options?: AxiosRequestConfig,
@@ -51,14 +51,14 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const deleteLink = <TData = AxiosResponse<CasesCaseLink>>(
+			const deleteLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
 				caseEtag: string,
 				etag: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/cases/${caseEtag}/links/${etag}`, options);
 			};
-			const locateLink = <TData = AxiosResponse<CasesCaseLink>>(
+			const locateLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
 				caseEtag: string,
 				etag: string,
 				params?: LocateLinkParams,
@@ -69,7 +69,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const updateLink2 = <TData = AxiosResponse<CasesCaseLink>>(
+			const updateLink2 = <TData = AxiosResponse<WebitelCasesCaseLink>>(
 				caseEtag: string,
 				updateLink2Body: UpdateLink2Body,
 				params?: UpdateLink2Params,
@@ -84,7 +84,7 @@ export const // --- title start
 					},
 				);
 			};
-			const updateLink = <TData = AxiosResponse<CasesCaseLink>>(
+			const updateLink = <TData = AxiosResponse<WebitelCasesCaseLink>>(
 				caseEtag: string,
 				updateLinkBody: UpdateLinkBody,
 				params?: UpdateLinkParams,
@@ -110,11 +110,11 @@ export const // --- title start
 				updateLink,
 			};
 		};
-export type ListLinksResult = AxiosResponse<CasesCaseLinkList>;
-export type CreateLinkResult = AxiosResponse<CasesCaseLink>;
-export type DeleteLinkResult = AxiosResponse<CasesCaseLink>;
-export type LocateLinkResult = AxiosResponse<CasesCaseLink>;
-export type UpdateLink2Result = AxiosResponse<CasesCaseLink>;
-export type UpdateLinkResult = AxiosResponse<CasesCaseLink>;
+export type ListLinksResult = AxiosResponse<WebitelCasesCaseLinkList>;
+export type CreateLinkResult = AxiosResponse<WebitelCasesCaseLink>;
+export type DeleteLinkResult = AxiosResponse<WebitelCasesCaseLink>;
+export type LocateLinkResult = AxiosResponse<WebitelCasesCaseLink>;
+export type UpdateLink2Result = AxiosResponse<WebitelCasesCaseLink>;
+export type UpdateLinkResult = AxiosResponse<WebitelCasesCaseLink>;
 
 // --- footer end

@@ -9,14 +9,14 @@ import { faker } from '@faker-js/faker';
 import { http, HttpResponse, delay } from 'msw';
 
 import type {
-	CasesLocateSLAConditionResponse,
-	CasesSLACondition,
-	CasesSLAConditionList,
+	WebitelCasesLocateSLAConditionResponse,
+	WebitelCasesSLACondition,
+	WebitelCasesSLAConditionList,
 } from '.././_models';
 
 export const getCreateSLAConditionResponseMock = (
-	overrideResponse: Partial<CasesSLACondition> = {},
-): CasesSLACondition => ({
+	overrideResponse: Partial<WebitelCasesSLACondition> = {},
+): WebitelCasesSLACondition => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -79,8 +79,8 @@ export const getCreateSLAConditionResponseMock = (
 });
 
 export const getDeleteSLAConditionResponseMock = (
-	overrideResponse: Partial<CasesSLACondition> = {},
-): CasesSLACondition => ({
+	overrideResponse: Partial<WebitelCasesSLACondition> = {},
+): WebitelCasesSLACondition => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -143,8 +143,8 @@ export const getDeleteSLAConditionResponseMock = (
 });
 
 export const getLocateSLAConditionResponseMock = (
-	overrideResponse: Partial<CasesLocateSLAConditionResponse> = {},
-): CasesLocateSLAConditionResponse => ({
+	overrideResponse: Partial<WebitelCasesLocateSLAConditionResponse> = {},
+): WebitelCasesLocateSLAConditionResponse => ({
 	slaCondition: faker.helpers.arrayElement([
 		{
 			createdAt: faker.helpers.arrayElement([
@@ -212,8 +212,8 @@ export const getLocateSLAConditionResponseMock = (
 });
 
 export const getUpdateSLACondition2ResponseMock = (
-	overrideResponse: Partial<CasesSLACondition> = {},
-): CasesSLACondition => ({
+	overrideResponse: Partial<WebitelCasesSLACondition> = {},
+): WebitelCasesSLACondition => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -276,8 +276,8 @@ export const getUpdateSLACondition2ResponseMock = (
 });
 
 export const getUpdateSLAConditionResponseMock = (
-	overrideResponse: Partial<CasesSLACondition> = {},
-): CasesSLACondition => ({
+	overrideResponse: Partial<WebitelCasesSLACondition> = {},
+): WebitelCasesSLACondition => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -340,8 +340,8 @@ export const getUpdateSLAConditionResponseMock = (
 });
 
 export const getListSLAConditionsResponseMock = (
-	overrideResponse: Partial<CasesSLAConditionList> = {},
-): CasesSLAConditionList => ({
+	overrideResponse: Partial<WebitelCasesSLAConditionList> = {},
+): WebitelCasesSLAConditionList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -418,10 +418,10 @@ export const getListSLAConditionsResponseMock = (
 
 export const getCreateSLAConditionMockHandler = (
 	overrideResponse?:
-		| CasesSLACondition
+		| WebitelCasesSLACondition
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<CasesSLACondition> | CasesSLACondition),
+		  ) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition),
 ) => {
 	return http.post('*/slas/:slaId/sla_condition', async (info) => {
 		await delay(1000);
@@ -441,10 +441,10 @@ export const getCreateSLAConditionMockHandler = (
 
 export const getDeleteSLAConditionMockHandler = (
 	overrideResponse?:
-		| CasesSLACondition
+		| WebitelCasesSLACondition
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<CasesSLACondition> | CasesSLACondition),
+		  ) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition),
 ) => {
 	return http.delete('*/slas/:slaId/sla_condition/:id', async (info) => {
 		await delay(1000);
@@ -464,12 +464,12 @@ export const getDeleteSLAConditionMockHandler = (
 
 export const getLocateSLAConditionMockHandler = (
 	overrideResponse?:
-		| CasesLocateSLAConditionResponse
+		| WebitelCasesLocateSLAConditionResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<CasesLocateSLAConditionResponse>
-				| CasesLocateSLAConditionResponse),
+				| Promise<WebitelCasesLocateSLAConditionResponse>
+				| WebitelCasesLocateSLAConditionResponse),
 ) => {
 	return http.get('*/slas/:slaId/sla_condition/:id', async (info) => {
 		await delay(1000);
@@ -489,10 +489,10 @@ export const getLocateSLAConditionMockHandler = (
 
 export const getUpdateSLACondition2MockHandler = (
 	overrideResponse?:
-		| CasesSLACondition
+		| WebitelCasesSLACondition
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<CasesSLACondition> | CasesSLACondition),
+		  ) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition),
 ) => {
 	return http.patch('*/slas/:slaId/sla_condition/:id', async (info) => {
 		await delay(1000);
@@ -512,10 +512,10 @@ export const getUpdateSLACondition2MockHandler = (
 
 export const getUpdateSLAConditionMockHandler = (
 	overrideResponse?:
-		| CasesSLACondition
+		| WebitelCasesSLACondition
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<CasesSLACondition> | CasesSLACondition),
+		  ) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition),
 ) => {
 	return http.put('*/slas/:slaId/sla_condition/:id', async (info) => {
 		await delay(1000);
@@ -535,10 +535,12 @@ export const getUpdateSLAConditionMockHandler = (
 
 export const getListSLAConditionsMockHandler = (
 	overrideResponse?:
-		| CasesSLAConditionList
+		| WebitelCasesSLAConditionList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesSLAConditionList> | CasesSLAConditionList),
+		  ) =>
+				| Promise<WebitelCasesSLAConditionList>
+				| WebitelCasesSLAConditionList),
 ) => {
 	return http.get('*/slas/:slaId/sla_conditions', async (info) => {
 		await delay(1000);

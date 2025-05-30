@@ -8,11 +8,14 @@ import { faker } from '@faker-js/faker';
 
 import { http, HttpResponse, delay } from 'msw';
 
-import type { CasesCaseLink, CasesCaseLinkList } from '.././_models';
+import type {
+	WebitelCasesCaseLink,
+	WebitelCasesCaseLinkList,
+} from '.././_models';
 
 export const getListLinksResponseMock = (
-	overrideResponse: Partial<CasesCaseLinkList> = {},
-): CasesCaseLinkList => ({
+	overrideResponse: Partial<WebitelCasesCaseLinkList> = {},
+): WebitelCasesCaseLinkList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -79,8 +82,8 @@ export const getListLinksResponseMock = (
 });
 
 export const getCreateLinkResponseMock = (
-	overrideResponse: Partial<CasesCaseLink> = {},
-): CasesCaseLink => ({
+	overrideResponse: Partial<WebitelCasesCaseLink> = {},
+): WebitelCasesCaseLink => ({
 	author: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -134,8 +137,8 @@ export const getCreateLinkResponseMock = (
 });
 
 export const getDeleteLinkResponseMock = (
-	overrideResponse: Partial<CasesCaseLink> = {},
-): CasesCaseLink => ({
+	overrideResponse: Partial<WebitelCasesCaseLink> = {},
+): WebitelCasesCaseLink => ({
 	author: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -189,8 +192,8 @@ export const getDeleteLinkResponseMock = (
 });
 
 export const getLocateLinkResponseMock = (
-	overrideResponse: Partial<CasesCaseLink> = {},
-): CasesCaseLink => ({
+	overrideResponse: Partial<WebitelCasesCaseLink> = {},
+): WebitelCasesCaseLink => ({
 	author: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -244,8 +247,8 @@ export const getLocateLinkResponseMock = (
 });
 
 export const getUpdateLink2ResponseMock = (
-	overrideResponse: Partial<CasesCaseLink> = {},
-): CasesCaseLink => ({
+	overrideResponse: Partial<WebitelCasesCaseLink> = {},
+): WebitelCasesCaseLink => ({
 	author: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -299,8 +302,8 @@ export const getUpdateLink2ResponseMock = (
 });
 
 export const getUpdateLinkResponseMock = (
-	overrideResponse: Partial<CasesCaseLink> = {},
-): CasesCaseLink => ({
+	overrideResponse: Partial<WebitelCasesCaseLink> = {},
+): WebitelCasesCaseLink => ({
 	author: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -355,10 +358,10 @@ export const getUpdateLinkResponseMock = (
 
 export const getListLinksMockHandler = (
 	overrideResponse?:
-		| CasesCaseLinkList
+		| WebitelCasesCaseLinkList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesCaseLinkList> | CasesCaseLinkList),
+		  ) => Promise<WebitelCasesCaseLinkList> | WebitelCasesCaseLinkList),
 ) => {
 	return http.get('*/cases/:caseEtag/links', async (info) => {
 		await delay(1000);
@@ -378,10 +381,10 @@ export const getListLinksMockHandler = (
 
 export const getCreateLinkMockHandler = (
 	overrideResponse?:
-		| CasesCaseLink
+		| WebitelCasesCaseLink
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<CasesCaseLink> | CasesCaseLink),
+		  ) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink),
 ) => {
 	return http.post('*/cases/:caseEtag/links', async (info) => {
 		await delay(1000);
@@ -401,10 +404,10 @@ export const getCreateLinkMockHandler = (
 
 export const getDeleteLinkMockHandler = (
 	overrideResponse?:
-		| CasesCaseLink
+		| WebitelCasesCaseLink
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<CasesCaseLink> | CasesCaseLink),
+		  ) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink),
 ) => {
 	return http.delete('*/cases/:caseEtag/links/:etag', async (info) => {
 		await delay(1000);
@@ -424,10 +427,10 @@ export const getDeleteLinkMockHandler = (
 
 export const getLocateLinkMockHandler = (
 	overrideResponse?:
-		| CasesCaseLink
+		| WebitelCasesCaseLink
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesCaseLink> | CasesCaseLink),
+		  ) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink),
 ) => {
 	return http.get('*/cases/:caseEtag/links/:etag', async (info) => {
 		await delay(1000);
@@ -447,10 +450,10 @@ export const getLocateLinkMockHandler = (
 
 export const getUpdateLink2MockHandler = (
 	overrideResponse?:
-		| CasesCaseLink
+		| WebitelCasesCaseLink
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<CasesCaseLink> | CasesCaseLink),
+		  ) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink),
 ) => {
 	return http.patch('*/cases/:caseEtag/links/input.etag}', async (info) => {
 		await delay(1000);
@@ -470,10 +473,10 @@ export const getUpdateLink2MockHandler = (
 
 export const getUpdateLinkMockHandler = (
 	overrideResponse?:
-		| CasesCaseLink
+		| WebitelCasesCaseLink
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<CasesCaseLink> | CasesCaseLink),
+		  ) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink),
 ) => {
 	return http.put('*/cases/:caseEtag/links/input.etag}', async (info) => {
 		await delay(1000);

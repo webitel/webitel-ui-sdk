@@ -8,15 +8,15 @@ import { faker } from '@faker-js/faker';
 
 import { http, HttpResponse, delay } from 'msw';
 
-import { CasesCaseTimelineEventType } from '.././_models';
+import { WebitelCasesCaseTimelineEventType } from '.././_models';
 import type {
-	CasesGetTimelineCounterResponse,
-	CasesGetTimelineResponse,
+	WebitelCasesGetTimelineCounterResponse,
+	WebitelCasesGetTimelineResponse,
 } from '.././_models';
 
 export const getGetTimelineResponseMock = (
-	overrideResponse: Partial<CasesGetTimelineResponse> = {},
-): CasesGetTimelineResponse => ({
+	overrideResponse: Partial<WebitelCasesGetTimelineResponse> = {},
+): WebitelCasesGetTimelineResponse => ({
 	days: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -397,7 +397,7 @@ export const getGetTimelineResponseMock = (
 					]),
 					type: faker.helpers.arrayElement([
 						faker.helpers.arrayElement(
-							Object.values(CasesCaseTimelineEventType),
+							Object.values(WebitelCasesCaseTimelineEventType),
 						),
 						undefined,
 					]),
@@ -416,8 +416,8 @@ export const getGetTimelineResponseMock = (
 });
 
 export const getGetTimelineCounterResponseMock = (
-	overrideResponse: Partial<CasesGetTimelineCounterResponse> = {},
-): CasesGetTimelineCounterResponse => ({
+	overrideResponse: Partial<WebitelCasesGetTimelineCounterResponse> = {},
+): WebitelCasesGetTimelineCounterResponse => ({
 	callsCount: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined }),
 		undefined,
@@ -443,10 +443,12 @@ export const getGetTimelineCounterResponseMock = (
 
 export const getGetTimelineMockHandler = (
 	overrideResponse?:
-		| CasesGetTimelineResponse
+		| WebitelCasesGetTimelineResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesGetTimelineResponse> | CasesGetTimelineResponse),
+		  ) =>
+				| Promise<WebitelCasesGetTimelineResponse>
+				| WebitelCasesGetTimelineResponse),
 ) => {
 	return http.get('*/cases/:caseId/timeline', async (info) => {
 		await delay(1000);
@@ -466,12 +468,12 @@ export const getGetTimelineMockHandler = (
 
 export const getGetTimelineCounterMockHandler = (
 	overrideResponse?:
-		| CasesGetTimelineCounterResponse
+		| WebitelCasesGetTimelineCounterResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<CasesGetTimelineCounterResponse>
-				| CasesGetTimelineCounterResponse),
+				| Promise<WebitelCasesGetTimelineCounterResponse>
+				| WebitelCasesGetTimelineCounterResponse),
 ) => {
 	return http.get('*/cases/:caseId/timeline/counter', async (info) => {
 		await delay(1000);

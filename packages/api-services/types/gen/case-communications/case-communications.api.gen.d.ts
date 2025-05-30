@@ -1,11 +1,11 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
-import type { CasesInputCaseCommunication, CasesLinkCommunicationResponse, CasesListCommunicationsResponse, CasesUnlinkCommunicationResponse, LinkCommunicationParams, ListCommunicationsParams, UnlinkCommunicationParams } from '.././_models';
+import type { LinkCommunicationParams, ListCommunicationsParams, UnlinkCommunicationParams, WebitelCasesInputCaseCommunication, WebitelCasesLinkCommunicationResponse, WebitelCasesListCommunicationsResponse, WebitelCasesUnlinkCommunicationResponse } from '.././_models';
 export declare const // --- title start
 getCaseCommunications: () => {
-    listCommunications: <TData = AxiosResponse<CasesListCommunicationsResponse, any>>(caseEtag: string, params?: ListCommunicationsParams, options?: AxiosRequestConfig) => Promise<TData>;
-    linkCommunication: <TData = AxiosResponse<CasesLinkCommunicationResponse, any>>(caseEtag: string, casesInputCaseCommunication: CasesInputCaseCommunication, params?: LinkCommunicationParams, options?: AxiosRequestConfig) => Promise<TData>;
-    unlinkCommunication: <TData = AxiosResponse<CasesUnlinkCommunicationResponse, any>>(caseEtag: string, id: string, params?: UnlinkCommunicationParams, options?: AxiosRequestConfig) => Promise<TData>;
+    listCommunications: <TData = AxiosResponse<WebitelCasesListCommunicationsResponse, any>>(caseEtag: string, params?: ListCommunicationsParams, options?: AxiosRequestConfig) => Promise<TData>;
+    linkCommunication: <TData = AxiosResponse<WebitelCasesLinkCommunicationResponse, any>>(caseEtag: string, webitelCasesInputCaseCommunication: WebitelCasesInputCaseCommunication, params?: LinkCommunicationParams, options?: AxiosRequestConfig) => Promise<TData>;
+    unlinkCommunication: <TData = AxiosResponse<WebitelCasesUnlinkCommunicationResponse, any>>(caseEtag: string, id: string, params?: UnlinkCommunicationParams, options?: AxiosRequestConfig) => Promise<TData>;
 };
-export type ListCommunicationsResult = AxiosResponse<CasesListCommunicationsResponse>;
-export type LinkCommunicationResult = AxiosResponse<CasesLinkCommunicationResponse>;
-export type UnlinkCommunicationResult = AxiosResponse<CasesUnlinkCommunicationResponse>;
+export type ListCommunicationsResult = AxiosResponse<WebitelCasesListCommunicationsResponse>;
+export type LinkCommunicationResult = AxiosResponse<WebitelCasesLinkCommunicationResponse>;
+export type UnlinkCommunicationResult = AxiosResponse<WebitelCasesUnlinkCommunicationResponse>;

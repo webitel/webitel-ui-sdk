@@ -9,14 +9,14 @@ import { faker } from '@faker-js/faker';
 import { http, HttpResponse, delay } from 'msw';
 
 import type {
-	CasesCatalog,
-	CasesCatalogList,
-	CasesLocateCatalogResponse,
+	WebitelCasesCatalog,
+	WebitelCasesCatalogList,
+	WebitelCasesLocateCatalogResponse,
 } from '.././_models';
 
 export const getListCatalogsResponseMock = (
-	overrideResponse: Partial<CasesCatalogList> = {},
-): CasesCatalogList => ({
+	overrideResponse: Partial<WebitelCasesCatalogList> = {},
+): WebitelCasesCatalogList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -246,8 +246,8 @@ export const getListCatalogsResponseMock = (
 });
 
 export const getCreateCatalogResponseMock = (
-	overrideResponse: Partial<CasesCatalog> = {},
-): CasesCatalog => ({
+	overrideResponse: Partial<WebitelCasesCatalog> = {},
+): WebitelCasesCatalog => ({
 	closeReasonGroup: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -437,8 +437,8 @@ export const getCreateCatalogResponseMock = (
 });
 
 export const getDeleteCatalogResponseMock = (
-	overrideResponse: Partial<CasesCatalogList> = {},
-): CasesCatalogList => ({
+	overrideResponse: Partial<WebitelCasesCatalogList> = {},
+): WebitelCasesCatalogList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -668,8 +668,8 @@ export const getDeleteCatalogResponseMock = (
 });
 
 export const getLocateCatalogResponseMock = (
-	overrideResponse: Partial<CasesLocateCatalogResponse> = {},
-): CasesLocateCatalogResponse => ({
+	overrideResponse: Partial<WebitelCasesLocateCatalogResponse> = {},
+): WebitelCasesLocateCatalogResponse => ({
 	catalog: faker.helpers.arrayElement([
 		{
 			closeReasonGroup: faker.helpers.arrayElement([
@@ -891,8 +891,8 @@ export const getLocateCatalogResponseMock = (
 });
 
 export const getUpdateCatalog2ResponseMock = (
-	overrideResponse: Partial<CasesCatalog> = {},
-): CasesCatalog => ({
+	overrideResponse: Partial<WebitelCasesCatalog> = {},
+): WebitelCasesCatalog => ({
 	closeReasonGroup: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -1082,8 +1082,8 @@ export const getUpdateCatalog2ResponseMock = (
 });
 
 export const getUpdateCatalogResponseMock = (
-	overrideResponse: Partial<CasesCatalog> = {},
-): CasesCatalog => ({
+	overrideResponse: Partial<WebitelCasesCatalog> = {},
+): WebitelCasesCatalog => ({
 	closeReasonGroup: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -1274,10 +1274,10 @@ export const getUpdateCatalogResponseMock = (
 
 export const getListCatalogsMockHandler = (
 	overrideResponse?:
-		| CasesCatalogList
+		| WebitelCasesCatalogList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesCatalogList> | CasesCatalogList),
+		  ) => Promise<WebitelCasesCatalogList> | WebitelCasesCatalogList),
 ) => {
 	return http.get('*/cases/catalogs', async (info) => {
 		await delay(1000);
@@ -1297,10 +1297,10 @@ export const getListCatalogsMockHandler = (
 
 export const getCreateCatalogMockHandler = (
 	overrideResponse?:
-		| CasesCatalog
+		| WebitelCasesCatalog
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<CasesCatalog> | CasesCatalog),
+		  ) => Promise<WebitelCasesCatalog> | WebitelCasesCatalog),
 ) => {
 	return http.post('*/cases/catalogs', async (info) => {
 		await delay(1000);
@@ -1320,10 +1320,10 @@ export const getCreateCatalogMockHandler = (
 
 export const getDeleteCatalogMockHandler = (
 	overrideResponse?:
-		| CasesCatalogList
+		| WebitelCasesCatalogList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<CasesCatalogList> | CasesCatalogList),
+		  ) => Promise<WebitelCasesCatalogList> | WebitelCasesCatalogList),
 ) => {
 	return http.delete('*/cases/catalogs/:id', async (info) => {
 		await delay(1000);
@@ -1343,10 +1343,12 @@ export const getDeleteCatalogMockHandler = (
 
 export const getLocateCatalogMockHandler = (
 	overrideResponse?:
-		| CasesLocateCatalogResponse
+		| WebitelCasesLocateCatalogResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesLocateCatalogResponse> | CasesLocateCatalogResponse),
+		  ) =>
+				| Promise<WebitelCasesLocateCatalogResponse>
+				| WebitelCasesLocateCatalogResponse),
 ) => {
 	return http.get('*/cases/catalogs/:id', async (info) => {
 		await delay(1000);
@@ -1366,10 +1368,10 @@ export const getLocateCatalogMockHandler = (
 
 export const getUpdateCatalog2MockHandler = (
 	overrideResponse?:
-		| CasesCatalog
+		| WebitelCasesCatalog
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<CasesCatalog> | CasesCatalog),
+		  ) => Promise<WebitelCasesCatalog> | WebitelCasesCatalog),
 ) => {
 	return http.patch('*/cases/catalogs/:id', async (info) => {
 		await delay(1000);
@@ -1389,10 +1391,10 @@ export const getUpdateCatalog2MockHandler = (
 
 export const getUpdateCatalogMockHandler = (
 	overrideResponse?:
-		| CasesCatalog
+		| WebitelCasesCatalog
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<CasesCatalog> | CasesCatalog),
+		  ) => Promise<WebitelCasesCatalog> | WebitelCasesCatalog),
 ) => {
 	return http.put('*/cases/catalogs/:id', async (info) => {
 		await delay(1000);

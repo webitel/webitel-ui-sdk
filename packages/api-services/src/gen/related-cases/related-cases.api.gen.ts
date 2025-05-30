@@ -9,9 +9,6 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesCreateInputRelatedCase,
-	CasesRelatedCase,
-	CasesRelatedCaseList,
 	CreateRelatedCaseParams,
 	ListRelatedCasesParams,
 	LocateRelatedCaseParams,
@@ -19,6 +16,9 @@ import type {
 	UpdateRelatedCase2Params,
 	UpdateRelatedCaseBody,
 	UpdateRelatedCaseParams,
+	WebitelCasesCreateInputRelatedCase,
+	WebitelCasesRelatedCase,
+	WebitelCasesRelatedCaseList,
 } from '.././_models';
 
 // --- header start
@@ -32,7 +32,9 @@ export const // --- title start
 			/**
 			 * @summary Update an existing related case
 			 */
-			const updateRelatedCase2 = <TData = AxiosResponse<CasesRelatedCase>>(
+			const updateRelatedCase2 = <
+				TData = AxiosResponse<WebitelCasesRelatedCase>,
+			>(
 				etag: string,
 				updateRelatedCase2Body: UpdateRelatedCase2Body,
 				params?: UpdateRelatedCase2Params,
@@ -50,7 +52,9 @@ export const // --- title start
 			/**
 			 * @summary Update an existing related case
 			 */
-			const updateRelatedCase = <TData = AxiosResponse<CasesRelatedCase>>(
+			const updateRelatedCase = <
+				TData = AxiosResponse<WebitelCasesRelatedCase>,
+			>(
 				etag: string,
 				updateRelatedCaseBody: UpdateRelatedCaseBody,
 				params?: UpdateRelatedCaseParams,
@@ -68,7 +72,9 @@ export const // --- title start
 			/**
 			 * @summary List all related cases for a specific case
 			 */
-			const listRelatedCases = <TData = AxiosResponse<CasesRelatedCaseList>>(
+			const listRelatedCases = <
+				TData = AxiosResponse<WebitelCasesRelatedCaseList>,
+			>(
 				primaryCaseEtag: string,
 				params?: ListRelatedCasesParams,
 				options?: AxiosRequestConfig,
@@ -81,15 +87,17 @@ export const // --- title start
 			/**
 			 * @summary Create a new related case
 			 */
-			const createRelatedCase = <TData = AxiosResponse<CasesRelatedCase>>(
+			const createRelatedCase = <
+				TData = AxiosResponse<WebitelCasesRelatedCase>,
+			>(
 				primaryCaseEtag: string,
-				casesCreateInputRelatedCase: CasesCreateInputRelatedCase,
+				webitelCasesCreateInputRelatedCase: WebitelCasesCreateInputRelatedCase,
 				params?: CreateRelatedCaseParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/cases/${primaryCaseEtag}/related`,
-					casesCreateInputRelatedCase,
+					webitelCasesCreateInputRelatedCase,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -99,7 +107,9 @@ export const // --- title start
 			/**
 			 * @summary Delete a specific related case
 			 */
-			const deleteRelatedCase = <TData = AxiosResponse<CasesRelatedCase>>(
+			const deleteRelatedCase = <
+				TData = AxiosResponse<WebitelCasesRelatedCase>,
+			>(
 				primaryCaseEtag: string,
 				etag: string,
 				options?: AxiosRequestConfig,
@@ -112,7 +122,9 @@ export const // --- title start
 			/**
 			 * @summary Retrieve a specific related case by ID
 			 */
-			const locateRelatedCase = <TData = AxiosResponse<CasesRelatedCase>>(
+			const locateRelatedCase = <
+				TData = AxiosResponse<WebitelCasesRelatedCase>,
+			>(
 				primaryCaseEtag: string,
 				etag: string,
 				params?: LocateRelatedCaseParams,
@@ -134,11 +146,11 @@ export const // --- title start
 				locateRelatedCase,
 			};
 		};
-export type UpdateRelatedCase2Result = AxiosResponse<CasesRelatedCase>;
-export type UpdateRelatedCaseResult = AxiosResponse<CasesRelatedCase>;
-export type ListRelatedCasesResult = AxiosResponse<CasesRelatedCaseList>;
-export type CreateRelatedCaseResult = AxiosResponse<CasesRelatedCase>;
-export type DeleteRelatedCaseResult = AxiosResponse<CasesRelatedCase>;
-export type LocateRelatedCaseResult = AxiosResponse<CasesRelatedCase>;
+export type UpdateRelatedCase2Result = AxiosResponse<WebitelCasesRelatedCase>;
+export type UpdateRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>;
+export type ListRelatedCasesResult = AxiosResponse<WebitelCasesRelatedCaseList>;
+export type CreateRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>;
+export type DeleteRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>;
+export type LocateRelatedCaseResult = AxiosResponse<WebitelCasesRelatedCase>;
 
 // --- footer end

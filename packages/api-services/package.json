@@ -1,6 +1,6 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.10",
+  "version": "0.0.14",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && npm run publish-lib",
@@ -46,12 +46,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@faker-js/faker": "^9.7.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
     "globby": "^14.1.0",
     "husky": "^9.1.7",
-    "msw": "^2.8.2",
     "orval": "^7.9.0",
     "path": "^0.12.7",
     "publint": "^0.3.9",
@@ -60,6 +58,10 @@
     "typescript": "5.8.2",
     "vue-tsc": "^2.2.10",
     "webitel-sdk": "^25.4.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "msw": "^2.8.2"
   },
   "engines": {
     "npm": "10",

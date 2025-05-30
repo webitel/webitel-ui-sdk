@@ -9,14 +9,14 @@ import { faker } from '@faker-js/faker';
 import { http, HttpResponse, delay } from 'msw';
 
 import type {
-	CasesLocateServiceResponse,
-	CasesService,
-	CasesServiceList,
+	WebitelCasesLocateServiceResponse,
+	WebitelCasesService,
+	WebitelCasesServiceList,
 } from '.././_models';
 
 export const getListServicesResponseMock = (
-	overrideResponse: Partial<CasesServiceList> = {},
-): CasesServiceList => ({
+	overrideResponse: Partial<WebitelCasesServiceList> = {},
+): WebitelCasesServiceList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -117,8 +117,8 @@ export const getListServicesResponseMock = (
 });
 
 export const getCreateServiceResponseMock = (
-	overrideResponse: Partial<CasesService> = {},
-): CasesService => ({
+	overrideResponse: Partial<WebitelCasesService> = {},
+): WebitelCasesService => ({
 	assignee: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -290,8 +290,8 @@ export const getCreateServiceResponseMock = (
 });
 
 export const getDeleteServiceResponseMock = (
-	overrideResponse: Partial<CasesServiceList> = {},
-): CasesServiceList => ({
+	overrideResponse: Partial<WebitelCasesServiceList> = {},
+): WebitelCasesServiceList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -392,8 +392,8 @@ export const getDeleteServiceResponseMock = (
 });
 
 export const getLocateServiceResponseMock = (
-	overrideResponse: Partial<CasesLocateServiceResponse> = {},
-): CasesLocateServiceResponse => ({
+	overrideResponse: Partial<WebitelCasesLocateServiceResponse> = {},
+): WebitelCasesLocateServiceResponse => ({
 	service: faker.helpers.arrayElement([
 		{
 			assignee: faker.helpers.arrayElement([
@@ -486,8 +486,8 @@ export const getLocateServiceResponseMock = (
 });
 
 export const getUpdateService2ResponseMock = (
-	overrideResponse: Partial<CasesService> = {},
-): CasesService => ({
+	overrideResponse: Partial<WebitelCasesService> = {},
+): WebitelCasesService => ({
 	assignee: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -659,8 +659,8 @@ export const getUpdateService2ResponseMock = (
 });
 
 export const getUpdateServiceResponseMock = (
-	overrideResponse: Partial<CasesService> = {},
-): CasesService => ({
+	overrideResponse: Partial<WebitelCasesService> = {},
+): WebitelCasesService => ({
 	assignee: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -833,10 +833,10 @@ export const getUpdateServiceResponseMock = (
 
 export const getListServicesMockHandler = (
 	overrideResponse?:
-		| CasesServiceList
+		| WebitelCasesServiceList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesServiceList> | CasesServiceList),
+		  ) => Promise<WebitelCasesServiceList> | WebitelCasesServiceList),
 ) => {
 	return http.get('*/cases/services', async (info) => {
 		await delay(1000);
@@ -856,10 +856,10 @@ export const getListServicesMockHandler = (
 
 export const getCreateServiceMockHandler = (
 	overrideResponse?:
-		| CasesService
+		| WebitelCasesService
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<CasesService> | CasesService),
+		  ) => Promise<WebitelCasesService> | WebitelCasesService),
 ) => {
 	return http.post('*/cases/services', async (info) => {
 		await delay(1000);
@@ -879,10 +879,10 @@ export const getCreateServiceMockHandler = (
 
 export const getDeleteServiceMockHandler = (
 	overrideResponse?:
-		| CasesServiceList
+		| WebitelCasesServiceList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<CasesServiceList> | CasesServiceList),
+		  ) => Promise<WebitelCasesServiceList> | WebitelCasesServiceList),
 ) => {
 	return http.delete('*/cases/services/:id', async (info) => {
 		await delay(1000);
@@ -902,10 +902,12 @@ export const getDeleteServiceMockHandler = (
 
 export const getLocateServiceMockHandler = (
 	overrideResponse?:
-		| CasesLocateServiceResponse
+		| WebitelCasesLocateServiceResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<CasesLocateServiceResponse> | CasesLocateServiceResponse),
+		  ) =>
+				| Promise<WebitelCasesLocateServiceResponse>
+				| WebitelCasesLocateServiceResponse),
 ) => {
 	return http.get('*/cases/services/:id', async (info) => {
 		await delay(1000);
@@ -925,10 +927,10 @@ export const getLocateServiceMockHandler = (
 
 export const getUpdateService2MockHandler = (
 	overrideResponse?:
-		| CasesService
+		| WebitelCasesService
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<CasesService> | CasesService),
+		  ) => Promise<WebitelCasesService> | WebitelCasesService),
 ) => {
 	return http.patch('*/cases/services/:id', async (info) => {
 		await delay(1000);
@@ -948,10 +950,10 @@ export const getUpdateService2MockHandler = (
 
 export const getUpdateServiceMockHandler = (
 	overrideResponse?:
-		| CasesService
+		| WebitelCasesService
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<CasesService> | CasesService),
+		  ) => Promise<WebitelCasesService> | WebitelCasesService),
 ) => {
 	return http.put('*/cases/services/:id', async (info) => {
 		await delay(1000);

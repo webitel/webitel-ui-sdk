@@ -9,16 +9,16 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CasesInputSLA,
-	CasesInputSLABody,
-	CasesLocateSLAResponse,
-	CasesSLA,
-	CasesSLAList,
 	CreateSLAParams,
 	ListSLAsParams,
 	LocateSLAParams,
 	UpdateSLA2Params,
 	UpdateSLAParams,
+	WebitelCasesInputSLA,
+	WebitelCasesInputSLABody,
+	WebitelCasesLocateSLAResponse,
+	WebitelCasesSLA,
+	WebitelCasesSLAList,
 } from '.././_models';
 
 // --- header start
@@ -32,7 +32,7 @@ export const // --- title start
 			/**
 			 * @summary Retrieve a list of SLAs or search SLA conditions
 			 */
-			const listSLAs = <TData = AxiosResponse<CasesSLAList>>(
+			const listSLAs = <TData = AxiosResponse<WebitelCasesSLAList>>(
 				params?: ListSLAsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -44,12 +44,12 @@ export const // --- title start
 			/**
 			 * @summary Create a new SLA
 			 */
-			const createSLA = <TData = AxiosResponse<CasesSLA>>(
-				casesInputSLABody: CasesInputSLABody,
+			const createSLA = <TData = AxiosResponse<WebitelCasesSLA>>(
+				webitelCasesInputSLABody: WebitelCasesInputSLABody,
 				params?: CreateSLAParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post('/cases/slas', casesInputSLABody, {
+				return axios.post('/cases/slas', webitelCasesInputSLABody, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -57,7 +57,7 @@ export const // --- title start
 			/**
 			 * @summary Delete an SLA
 			 */
-			const deleteSLA = <TData = AxiosResponse<CasesSLA>>(
+			const deleteSLA = <TData = AxiosResponse<WebitelCasesSLA>>(
 				id: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -66,7 +66,7 @@ export const // --- title start
 			/**
 			 * @summary Locate an SLA by ID
 			 */
-			const locateSLA = <TData = AxiosResponse<CasesLocateSLAResponse>>(
+			const locateSLA = <TData = AxiosResponse<WebitelCasesLocateSLAResponse>>(
 				id: string,
 				params?: LocateSLAParams,
 				options?: AxiosRequestConfig,
@@ -79,13 +79,13 @@ export const // --- title start
 			/**
 			 * @summary Update an existing SLA
 			 */
-			const updateSLA2 = <TData = AxiosResponse<CasesSLA>>(
+			const updateSLA2 = <TData = AxiosResponse<WebitelCasesSLA>>(
 				id: string,
-				casesInputSLA: CasesInputSLA,
+				webitelCasesInputSLA: WebitelCasesInputSLA,
 				params?: UpdateSLA2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch(`/cases/slas/${id}`, casesInputSLA, {
+				return axios.patch(`/cases/slas/${id}`, webitelCasesInputSLA, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -93,13 +93,13 @@ export const // --- title start
 			/**
 			 * @summary Update an existing SLA
 			 */
-			const updateSLA = <TData = AxiosResponse<CasesSLA>>(
+			const updateSLA = <TData = AxiosResponse<WebitelCasesSLA>>(
 				id: string,
-				casesInputSLA: CasesInputSLA,
+				webitelCasesInputSLA: WebitelCasesInputSLA,
 				params?: UpdateSLAParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(`/cases/slas/${id}`, casesInputSLA, {
+				return axios.put(`/cases/slas/${id}`, webitelCasesInputSLA, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -115,11 +115,11 @@ export const // --- title start
 				updateSLA,
 			};
 		};
-export type ListSLAsResult = AxiosResponse<CasesSLAList>;
-export type CreateSLAResult = AxiosResponse<CasesSLA>;
-export type DeleteSLAResult = AxiosResponse<CasesSLA>;
-export type LocateSLAResult = AxiosResponse<CasesLocateSLAResponse>;
-export type UpdateSLA2Result = AxiosResponse<CasesSLA>;
-export type UpdateSLAResult = AxiosResponse<CasesSLA>;
+export type ListSLAsResult = AxiosResponse<WebitelCasesSLAList>;
+export type CreateSLAResult = AxiosResponse<WebitelCasesSLA>;
+export type DeleteSLAResult = AxiosResponse<WebitelCasesSLA>;
+export type LocateSLAResult = AxiosResponse<WebitelCasesLocateSLAResponse>;
+export type UpdateSLA2Result = AxiosResponse<WebitelCasesSLA>;
+export type UpdateSLAResult = AxiosResponse<WebitelCasesSLA>;
 
 // --- footer end
