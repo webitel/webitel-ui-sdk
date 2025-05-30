@@ -38,12 +38,13 @@ export type FilterConfigToolkitParams = {
   filterOptions: (FilterOption | BaseFilterConfig)[];
   filtersManager: IFiltersManager;
   filterableExtensionFields: WebitelProtoDataField[];
+  staticMode?: boolean;
 };
 
 export const useFilterConfigsToolkit = ({
   filterOptions,
   filtersManager,
-  filterableExtensionFields = [],
+  filterableExtensionFields = [], staticMode = false,
 }: FilterConfigToolkitParams): FilterConfigToolkit => {
   const { t } = useI18n();
 
@@ -126,11 +127,30 @@ export const useFilterConfigsToolkit = ({
     });
   });
 
+  const staticViewFilterToFilterConfigMappings = computed(() => {
+    // Author @Lera24
+    // [https://webitel.atlassian.net/browse/WTEL-6934]
+    //
+    // Static (computed staticViewFilterToFilterConfigMappings) filters
+    // use all page filters passed in filterOptions for configuration, without values
+    //
+    // Dynamic (computed applyFilterToFilterConfigMappings) filters consist of a configuration
+    // of filters for which a value has already been defined
+
+      return filterConfigs.value.map((filterConfig) => {
+        return {
+          filter: filtersManager.getFilter(filterConfig.name),
+          filterConfig,
+        }
+      });
+  });
+
   return {
     filterConfigs,
     filtersIncluded,
     appliedFilters,
     appliedFilterToFilterConfigMappings,
+    staticViewFilterToFilterConfigMappings,
     unAppliedFiltersConfigs,
   };
 };

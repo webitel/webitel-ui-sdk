@@ -10,6 +10,7 @@ export interface useTableStoreConfig<Entity> {
   headers: WtTableHeader[];
   disablePersistence?: boolean | [];
   storeType?: DatalistStoreProviderType;
+  isAppendDataList?: boolean;
   // etagMode: boolean;
 }
 

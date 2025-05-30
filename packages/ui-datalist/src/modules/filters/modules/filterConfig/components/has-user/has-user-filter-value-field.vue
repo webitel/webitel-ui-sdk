@@ -1,7 +1,8 @@
 <template>
   <has-option-filter-value-field
     :model-value="model"
-    :v="v$.model"
+    :v="v$?.model"
+    hide-label
     @update:model-value="model = $event"
   />
 </template>
@@ -12,22 +13,33 @@ import { watch } from 'vue';
 import { useBooleanFilterValueValidation } from '../../composables/booleanFilterToolkit';
 import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 import {BooleanFilterModelValue} from "../../enums/options/BooleanFilterOptions";
+import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+
+const props = defineProps<{
+  filterConfig: WtSysTypeFilterConfig;
+  disableValidation?: boolean;
+  hideLabel?: boolean;
+}>();
 
 const model = defineModel<BooleanFilterModelValue>();
 
-const { v$ } = useBooleanFilterValueValidation<BooleanFilterModelValue>(model);
+let v$: ReturnType<typeof useBooleanFilterValueValidation>['v$'] | null = null;
+if (!props.disableValidation) {
+  ({ v$ } = useBooleanFilterValueValidation(model));
+}
 
 const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
 
 watch(
-  () => v$.value.$invalid,
+  () => v$?.value?.$invalid,
   (invalid) => {
-    emit('update:invalid', invalid);
+    if (v$?.value) {
+      emit('update:invalid', invalid);
+    }
   },
-  { immediate: true },
-);
+  { immediate: true });
 </script>
 
 <style scoped></style>
