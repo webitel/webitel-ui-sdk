@@ -13,7 +13,7 @@ import {
 
 export const createTableStore = <Entity extends { id: string; etag?: string }>(
   namespace: string,
-  { apiModule, headers, disablePersistence, infiniteDataLoad }: useTableStoreParams<Entity>,
+  { apiModule, headers, disablePersistence, enableInfiniteScroll }: useTableStoreParams<Entity>,
 ) => {
   const usePaginationStore = createTablePaginationStore(namespace);
   const useHeadersStore = createTableHeadersStore(namespace, { headers });
@@ -60,18 +60,20 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       selected.value = value;
     };
 
-    const loadDataList = async () => {
-      isLoading.value = true;
-      $patchPaginationStore({ next: false });
-
-      const params = {
+    const getLoadDataParams = () => ({
         ...filtersManager.value.getAllValues(),
         page: page.value,
         size: size.value,
         sort: sort.value,
         fields: fields.value,
         parentId: parentId.value,
-      };
+    });
+
+    const loadDataList = async () => {
+      isLoading.value = true;
+      $patchPaginationStore({ next: false });
+
+      const params = getLoadDataParams();
 
       try {
         const { items, next } = await apiModule.getList(params);
@@ -92,14 +94,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       $patchPaginationStore({ next: false });
       updatePage(page.value + 1);
 
-      const params = {
-        ...filtersManager.value.getAllValues(),
-        page: page.value,
-        size: size.value,
-        sort: sort.value,
-        fields: fields.value,
-        parentId: parentId.value,
-      };
+      const params = getLoadDataParams();
 
       try {
         const { items, next } = await apiModule.getList(params);
@@ -184,7 +179,7 @@ export const createTableStore = <Entity extends { id: string; etag?: string }>(
       );
 
       watch([page], () => {
-        if (!loadingAfterFiltersChange && !infiniteDataLoad) {
+        if (!loadingAfterFiltersChange && !enableInfiniteScroll) {
           return loadDataList();
         }
       });
