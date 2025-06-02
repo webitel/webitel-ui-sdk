@@ -1,0 +1,51 @@
+name: make docs
+
+on:
+  #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
+  workflow_dispatch:
+
+jobs:
+  build_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          check-latest: true
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build docs
+        run: npm run docs:build
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: docs
+          path: docs/.vitepress/dist
+
+  deploy_docs:
+    needs: [build_docs]
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup Github Pages
+        id: setup_pages
+        uses: actions/configure-pages@v4
+
+      - name: deploy to Github Pages
+        id: deploy_pages
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: docs
