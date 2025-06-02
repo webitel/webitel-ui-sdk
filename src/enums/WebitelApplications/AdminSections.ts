@@ -41,6 +41,7 @@ export const AdminSections = {
   Triggers: 'triggers',
   Users: 'users',
   WorkingConditions: 'working-conditions',
+  QuickReplies: 'quick-replies',
 } as const;
 
 export type AdminSections = (typeof AdminSections)[keyof typeof AdminSections];
