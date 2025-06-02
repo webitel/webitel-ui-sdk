@@ -10,8 +10,8 @@ export type WfmAbsenceType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WfmAbsenceType = {
-	ABSENCE_TYPE_UNSPECIFIED: 'ABSENCE_TYPE_UNSPECIFIED',
-	ABSENCE_TYPE_DAYOFF: 'ABSENCE_TYPE_DAYOFF',
-	ABSENCE_TYPE_VACATION: 'ABSENCE_TYPE_VACATION',
-	ABSENCE_TYPE_SICKDAY: 'ABSENCE_TYPE_SICKDAY',
+	AbsenceTypeUnspecified: 'ABSENCE_TYPE_UNSPECIFIED',
+	AbsenceTypeDayoff: 'ABSENCE_TYPE_DAYOFF',
+	AbsenceTypeVacation: 'ABSENCE_TYPE_VACATION',
+	AbsenceTypeSickday: 'ABSENCE_TYPE_SICKDAY',
 } as const;

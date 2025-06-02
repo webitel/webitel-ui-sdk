@@ -13,14 +13,14 @@ export type WebitelCasesRelationType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelCasesRelationType = {
-	RELATION_TYPE_UNSPECIFIED: 'RELATION_TYPE_UNSPECIFIED',
-	DUPLICATES: 'DUPLICATES',
-	IS_DUPLICATED_BY: 'IS_DUPLICATED_BY',
-	BLOCKS: 'BLOCKS',
-	IS_BLOCKED_BY: 'IS_BLOCKED_BY',
-	CAUSES: 'CAUSES',
-	IS_CAUSED_BY: 'IS_CAUSED_BY',
-	IS_CHILD_OF: 'IS_CHILD_OF',
-	IS_PARENT_OF: 'IS_PARENT_OF',
-	RELATES_TO: 'RELATES_TO',
+	RelationTypeUnspecified: 'RELATION_TYPE_UNSPECIFIED',
+	Duplicates: 'DUPLICATES',
+	IsDuplicatedBy: 'IS_DUPLICATED_BY',
+	Blocks: 'BLOCKS',
+	IsBlockedBy: 'IS_BLOCKED_BY',
+	Causes: 'CAUSES',
+	IsCausedBy: 'IS_CAUSED_BY',
+	IsChildOf: 'IS_CHILD_OF',
+	IsParentOf: 'IS_PARENT_OF',
+	RelatesTo: 'RELATES_TO',
 } as const;

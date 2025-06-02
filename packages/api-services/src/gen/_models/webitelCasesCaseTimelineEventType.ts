@@ -10,7 +10,7 @@ export type WebitelCasesCaseTimelineEventType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelCasesCaseTimelineEventType = {
-	chat: 'chat',
-	call: 'call',
-	email: 'email',
+	Chat: 'chat',
+	Call: 'call',
+	Email: 'email',
 } as const;

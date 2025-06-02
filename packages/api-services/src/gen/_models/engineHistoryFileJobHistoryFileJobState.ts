@@ -10,8 +10,8 @@ export type EngineHistoryFileJobHistoryFileJobState =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineHistoryFileJobHistoryFileJobState = {
-	idle: 'idle',
-	active: 'active',
-	finished: 'finished',
-	error: 'error',
+	Idle: 'idle',
+	Active: 'active',
+	Finished: 'finished',
+	Error: 'error',
 } as const;

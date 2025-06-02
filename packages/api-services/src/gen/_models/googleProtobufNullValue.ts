@@ -18,5 +18,5 @@ export type GoogleProtobufNullValue =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GoogleProtobufNullValue = {
-	NULL_VALUE: 'NULL_VALUE',
+	NullValue: 'NULL_VALUE',
 } as const;

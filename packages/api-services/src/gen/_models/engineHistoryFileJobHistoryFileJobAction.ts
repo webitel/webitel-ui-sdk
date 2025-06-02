@@ -10,7 +10,7 @@ export type EngineHistoryFileJobHistoryFileJobAction =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineHistoryFileJobHistoryFileJobAction = {
-	undefined: 'undefined',
-	STT: 'STT',
-	delete: 'delete',
+	Undefined: 'undefined',
+	Stt: 'STT',
+	Delete: 'delete',
 } as const;

@@ -21,11 +21,11 @@ export type WebitelCasesSourceType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelCasesSourceType = {
-	TYPE_UNSPECIFIED: 'TYPE_UNSPECIFIED',
-	CALL: 'CALL',
-	CHAT: 'CHAT',
-	SOCIAL_MEDIA: 'SOCIAL_MEDIA',
-	EMAIL: 'EMAIL',
-	API: 'API',
-	MANUAL: 'MANUAL',
+	TypeUnspecified: 'TYPE_UNSPECIFIED',
+	Call: 'CALL',
+	Chat: 'CHAT',
+	SocialMedia: 'SOCIAL_MEDIA',
+	Email: 'EMAIL',
+	Api: 'API',
+	Manual: 'MANUAL',
 } as const;

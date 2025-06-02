@@ -10,9 +10,9 @@ export type EngineRoutingSchemaType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineRoutingSchemaType = {
-	default: 'default',
-	voice: 'voice',
-	chat: 'chat',
-	processing: 'processing',
-	service: 'service',
+	Default: 'default',
+	Voice: 'voice',
+	Chat: 'chat',
+	Processing: 'processing',
+	Service: 'service',
 } as const;

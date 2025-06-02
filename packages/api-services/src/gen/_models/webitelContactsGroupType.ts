@@ -15,7 +15,7 @@ export type WebitelContactsGroupType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelContactsGroupType = {
-	GROUP_TYPE_UNSPECIFIED: 'GROUP_TYPE_UNSPECIFIED',
-	STATIC: 'STATIC',
-	DYNAMIC: 'DYNAMIC',
+	GroupTypeUnspecified: 'GROUP_TYPE_UNSPECIFIED',
+	Static: 'STATIC',
+	Dynamic: 'DYNAMIC',
 } as const;

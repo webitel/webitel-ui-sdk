@@ -10,8 +10,8 @@ export type EngineTriggerJobState =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTriggerJobState = {
-	idle: 'idle',
-	active: 'active',
-	done: 'done',
-	error: 'error',
+	Idle: 'idle',
+	Active: 'active',
+	Done: 'done',
+	Error: 'error',
 } as const;

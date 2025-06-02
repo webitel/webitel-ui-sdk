@@ -10,7 +10,7 @@ export type EngineTriggerType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTriggerType = {
-	default_trigger_type: 'default_trigger_type',
-	cron: 'cron',
-	event: 'event',
+	DefaultTriggerType: 'default_trigger_type',
+	Cron: 'cron',
+	Event: 'event',
 } as const;

@@ -16,8 +16,8 @@ export type WebitelChatMessageButtonRequest =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelChatMessageButtonRequest = {
-	phone: 'phone',
-	email: 'email',
-	contact: 'contact',
-	location: 'location',
+	Phone: 'phone',
+	Email: 'email',
+	Contact: 'contact',
+	Location: 'location',
 } as const;

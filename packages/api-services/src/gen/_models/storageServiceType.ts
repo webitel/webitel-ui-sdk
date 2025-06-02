@@ -11,6 +11,6 @@ export type StorageServiceType =
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const StorageServiceType = {
 	DefaultService: 'DefaultService',
-	STT: 'STT',
-	TTS: 'TTS',
+	Stt: 'STT',
+	Tts: 'TTS',
 } as const;

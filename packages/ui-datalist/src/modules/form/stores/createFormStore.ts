@@ -1,8 +1,8 @@
-import { ref } from 'vue';
-import { useRegleSchema, RegleSchemaBehaviourOptions } from '@regle/schemas';
+import { RegleSchemaBehaviourOptions,useRegleSchema } from '@regle/schemas';
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 export const createFormStore = <Entity = object>({
   namespace,
@@ -73,7 +73,7 @@ export const createFormStore = <Entity = object>({
       itemInstance?: Entity;
       itemId?: string | number;
       parentId?: string | number;
-    }) => {
+    } = {}) => {
       if (initialParentId) {
         parentId.value = initialParentId;
       }
@@ -102,6 +102,7 @@ export const createFormStore = <Entity = object>({
       error,
 
       initialize,
+      saveItem,
     };
   });
 };

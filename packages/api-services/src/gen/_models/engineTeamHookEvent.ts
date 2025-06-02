@@ -10,6 +10,6 @@ export type EngineTeamHookEvent =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTeamHookEvent = {
-	teamHookEventUndefined: 'teamHookEventUndefined',
-	agent_status: 'agent_status',
+	TeamHookEventUndefined: 'teamHookEventUndefined',
+	AgentStatus: 'agent_status',
 } as const;

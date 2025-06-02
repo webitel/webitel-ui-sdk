@@ -10,7 +10,7 @@ export type EngineTriggerObjectType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTriggerObjectType = {
-	empty_trigger_object: 'empty_trigger_object',
-	cases: 'cases',
-	case_files: 'case_files',
+	EmptyTriggerObject: 'empty_trigger_object',
+	Cases: 'cases',
+	CaseFiles: 'case_files',
 } as const;

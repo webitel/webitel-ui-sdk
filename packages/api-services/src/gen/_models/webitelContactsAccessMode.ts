@@ -10,7 +10,7 @@ export type WebitelContactsAccessMode =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelContactsAccessMode = {
-	READ: 'READ',
-	WRITE: 'WRITE',
-	DELETE: 'DELETE',
+	Read: 'READ',
+	Write: 'WRITE',
+	Delete: 'DELETE',
 } as const;

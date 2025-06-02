@@ -10,8 +10,8 @@ export type EngineAuditQuestionType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineAuditQuestionType = {
-	question_default: 'question_default',
-	question_score: 'question_score',
-	question_option: 'question_option',
-	question_yes: 'question_yes',
+	QuestionDefault: 'question_default',
+	QuestionScore: 'question_score',
+	QuestionOption: 'question_option',
+	QuestionYes: 'question_yes',
 } as const;

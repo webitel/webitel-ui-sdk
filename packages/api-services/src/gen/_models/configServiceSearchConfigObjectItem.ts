@@ -25,4 +25,5 @@ export const ConfigServiceSearchConfigObjectItem = {
 	contacts: 'contacts',
 	cc_list_number: 'cc_list_number',
 	case_comments: 'case_comments',
+	record_file: 'record_file',
 } as const;

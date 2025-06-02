@@ -9,9 +9,9 @@ export type LoggerAction = (typeof LoggerAction)[keyof typeof LoggerAction];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const LoggerAction = {
-	default_no_action: 'default_no_action',
-	create: 'create',
-	update: 'update',
-	read: 'read',
-	delete: 'delete',
+	DefaultNoAction: 'default_no_action',
+	Create: 'create',
+	Update: 'update',
+	Read: 'read',
+	Delete: 'delete',
 } as const;

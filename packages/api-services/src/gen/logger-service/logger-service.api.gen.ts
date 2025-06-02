@@ -79,7 +79,8 @@ export const // --- title start
 					| 'cases'
 					| 'contacts'
 					| 'cc_list_number'
-					| 'case_comments',
+					| 'case_comments'
+					| 'record_file',
 				recordId: number,
 				params?: LoggerServiceSearchLogByRecordIdParams,
 				options?: AxiosRequestConfig,

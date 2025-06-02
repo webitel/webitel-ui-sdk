@@ -10,9 +10,9 @@ export type EngineTriggerEventType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EngineTriggerEventType = {
-	empty_trigger_event: 'empty_trigger_event',
-	create: 'create',
-	update: 'update',
-	remove: 'remove',
-	resolution_time: 'resolution_time',
+	EmptyTriggerEvent: 'empty_trigger_event',
+	Create: 'create',
+	Update: 'update',
+	Remove: 'remove',
+	ResolutionTime: 'resolution_time',
 } as const;

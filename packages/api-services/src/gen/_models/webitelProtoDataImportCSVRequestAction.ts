@@ -10,6 +10,6 @@ export type WebitelProtoDataImportCSVRequestAction =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WebitelProtoDataImportCSVRequestAction = {
-	continue: 'continue',
-	break: 'break',
+	Continue: 'continue',
+	Break: 'break',
 } as const;

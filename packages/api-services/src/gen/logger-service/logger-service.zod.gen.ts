@@ -150,6 +150,7 @@ export const loggerServiceSearchLogByRecordIdParams = zod.object({
 			'contacts',
 			'cc_list_number',
 			'case_comments',
+			'record_file',
 		])
 		.describe('SPECIFIC filter'),
 	record_id: zod.number().describe('REQUIRED filter'),

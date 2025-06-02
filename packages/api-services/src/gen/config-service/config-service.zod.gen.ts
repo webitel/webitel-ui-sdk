@@ -51,6 +51,7 @@ export const configServiceSearchConfigQueryParams = zod.object({
 				'contacts',
 				'cc_list_number',
 				'case_comments',
+				'record_file',
 			]),
 		)
 		.optional()
