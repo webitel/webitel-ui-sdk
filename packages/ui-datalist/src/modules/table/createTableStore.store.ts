@@ -22,6 +22,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     headers: rowHeaders,
     disablePersistence,
     storeType,
+    isAppendDataList
   } = config;
   const usePaginationStore = createTablePaginationStore(namespace, config);
   const useHeadersStore = createTableHeadersStore(namespace, config, {
@@ -75,24 +76,46 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     selected.value = value;
   };
 
+  const getLoadDataParams = () => ({
+    ...filtersManager.value.getAllValues(),
+    page: page.value,
+    size: size.value,
+    sort: sort.value,
+    fields: fields.value,
+    parentId: parentId.value,
+  });
+
   const loadDataList = async () => {
     isLoading.value = true;
     $patchPaginationStore({ next: false });
 
-    const params = {
-      ...filtersManager.value.getAllValues(),
-      page: page.value,
-      size: size.value,
-      sort: sort.value,
-      fields: fields.value,
-      parentId: parentId.value,
-    };
+    const params = getLoadDataParams();
 
     try {
       const { items, next } = await apiModule.getList(params);
 
       dataList.value = items;
       updateSelected([]);
+      $patchPaginationStore({ next });
+    } catch (err) {
+      error.value = err;
+      throw err;
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
+  const appendToDataList = async () => {
+    isLoading.value = true;
+    $patchPaginationStore({ next: false });
+    updatePage(page.value + 1);
+
+    const params = getLoadDataParams();
+
+    try {
+      const { items, next } = await apiModule.getList(params);
+
+      dataList.value.push(...items);
       $patchPaginationStore({ next });
     } catch (err) {
       error.value = err;
@@ -172,7 +195,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     );
 
     watch([page], () => {
-      if (!loadingAfterFiltersChange) {
+      if (!loadingAfterFiltersChange && !isAppendDataList) {
         return loadDataList();
       }
     });
@@ -201,6 +224,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     initialize,
 
     loadDataList,
+    appendToDataList,
 
     updateSelected,
     patchItemProperty,

@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import {AnyFilterConfig} from "../../modules/filterConfig/classes/FilterConfig";
+import {AnyFilterConfig} from "../../../modules/filterConfig/classes/FilterConfig";
 
 const filterValue = defineModel<unknown>();
 

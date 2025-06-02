@@ -48,6 +48,7 @@ export class FilterConfig implements BaseFilterConfig {
   valueInputComponent: Component;
   valuePreviewComponent: Component;
   label?: ReturnType<MessageResolver> | string;
+  staticView?: boolean;
   notDeletable: boolean;
 
   constructor({
@@ -55,6 +56,7 @@ export class FilterConfig implements BaseFilterConfig {
                 valueInputComponent,
                 valuePreviewComponent,
                 notDeletable,
+    staticView,
               }: FilterConfigBaseParams = {}) {
 
     if (name) this.name = name;
@@ -62,6 +64,7 @@ export class FilterConfig implements BaseFilterConfig {
     if (valuePreviewComponent)
       this.valuePreviewComponent = valuePreviewComponent;
     this.notDeletable = !!notDeletable;
+    if (staticView) this.staticView = staticView;
   }
 }
 
