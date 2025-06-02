@@ -334,6 +334,7 @@ export default {
         [AdminSections.Changelogs]: 'Журнал изменений',
         [AdminSections.Configuration]: 'Конфигурация',
         [AdminSections.GlobalVariables]: 'Глобальные переменные',
+        [AdminSections.QuickReplies]: 'Быстрые ответы',
       },
     },
   },

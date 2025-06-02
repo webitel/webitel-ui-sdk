@@ -336,6 +336,7 @@ export default {
         [AdminSections.Changelogs]: 'Change log',
         [AdminSections.Configuration]: 'Configuration',
         [AdminSections.GlobalVariables]: 'Global variables',
+        [AdminSections.QuickReplies]: 'Quick replies',
       },
     },
   },

@@ -131,6 +131,7 @@ export const mapWtObjectToUiSection: Record<
     [WtObject.PauseTemplate]: AdminSections.PauseTemplates,
     [WtObject.WorkingCondition]: AdminSections.WorkingConditions,
     [WtObject.Member]: AdminSections.Members,
+    [WtObject.QuickReply]: AdminSections.QuickReplies,
   },
 
   // Auditor sections
