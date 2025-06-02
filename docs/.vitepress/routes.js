@@ -40,6 +40,23 @@ const sidebarNav = [
     collapsed: true,
   },
   {
+    text: '@webitel/api-services',
+    items: [
+      {
+        text: 'index',
+        items: useDocsPattern('api-services/index.md'),
+      },
+      {
+        text: 'Introduction and Usage',
+        items: useDocsPattern('api-services/introduction-and-usage/index.md'),
+      },
+      // {
+      //   text: 'gen/api',
+      // },
+    ],
+    collapsed: false,
+  },
+  {
     text: 'API Tools',
     items: useDocsPattern('webitel-ui/api/**/*.md'),
     collapsed: true,
