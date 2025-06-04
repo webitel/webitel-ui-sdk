@@ -4,16 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { LoggerServiceSearchLogByConfigIdActionItem } from './loggerServiceSearchLogByConfigIdActionItem';
+import type { SearchLogByConfigIdActionItem } from './searchLogByConfigIdActionItem';
 
-export type LoggerServiceSearchLogByConfigIdParams = {
+export type SearchLogByConfigIdParams = {
 	page?: number;
 	size?: number;
 	q?: string;
 	sort?: string;
 	fields?: string[];
 	userId?: string[];
-	action?: LoggerServiceSearchLogByConfigIdActionItem[];
+	action?: SearchLogByConfigIdActionItem[];
 	userIp?: string;
 	dateFrom?: string;
 	dateTo?: string;

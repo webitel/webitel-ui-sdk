@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type ConfigServiceReadSystemObjectsParams = {
-	includeExisting?: boolean;
-};
+export interface LoggerRecord {
+	id?: string;
+	name?: string;
+}

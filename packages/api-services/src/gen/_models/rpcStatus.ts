@@ -6,9 +6,8 @@
  */
 import type { ProtobufAny } from './protobufAny';
 
-export interface RuntimeError {
+export interface RpcStatus {
 	code?: number;
 	details?: ProtobufAny[];
-	error?: string;
 	message?: string;
 }

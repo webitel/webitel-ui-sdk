@@ -9,12 +9,10 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	LoggerDeleteConfigLogsRequest,
-	LoggerDeleteConfigLogsResponse,
 	LoggerLogs,
-	LoggerServiceSearchLogByConfigIdParams,
-	LoggerServiceSearchLogByRecordIdParams,
-	LoggerServiceSearchLogByUserIdParams,
+	SearchLogByConfigIdParams,
+	SearchLogByRecordIdParams,
+	SearchLogByUserIdParams,
 } from '.././_models';
 
 // --- header start
@@ -25,23 +23,9 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const loggerServiceDeleteConfigLogs = <
-				TData = AxiosResponse<LoggerDeleteConfigLogsResponse>,
-			>(
-				configId: string,
-				loggerDeleteConfigLogsRequest: LoggerDeleteConfigLogsRequest,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/logger/config/${configId}/logs`, {
-					data: loggerDeleteConfigLogsRequest,
-					...options,
-				});
-			};
-			const loggerServiceSearchLogByConfigId = <
-				TData = AxiosResponse<LoggerLogs>,
-			>(
+			const searchLogByConfigId = <TData = AxiosResponse<LoggerLogs>>(
 				configId: number,
-				params?: LoggerServiceSearchLogByConfigIdParams,
+				params?: SearchLogByConfigIdParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/logger/config/${configId}/logs`, {
@@ -49,11 +33,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const loggerServiceSearchLogByUserId = <
-				TData = AxiosResponse<LoggerLogs>,
-			>(
+			const searchLogByUserId = <TData = AxiosResponse<LoggerLogs>>(
 				userId: number,
-				params?: LoggerServiceSearchLogByUserIdParams,
+				params?: SearchLogByUserIdParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/logger/user/${userId}/logs`, {
@@ -61,9 +43,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const loggerServiceSearchLogByRecordId = <
-				TData = AxiosResponse<LoggerLogs>,
-			>(
+			const searchLogByRecordId = <TData = AxiosResponse<LoggerLogs>>(
 				object:
 					| 'cc_queue'
 					| 'schema'
@@ -82,7 +62,7 @@ export const // --- title start
 					| 'case_comments'
 					| 'record_file',
 				recordId: number,
-				params?: LoggerServiceSearchLogByRecordIdParams,
+				params?: SearchLogByRecordIdParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/logger/${object}/record/${recordId}/logs`, {
@@ -92,17 +72,10 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return {
-				loggerServiceDeleteConfigLogs,
-				loggerServiceSearchLogByConfigId,
-				loggerServiceSearchLogByUserId,
-				loggerServiceSearchLogByRecordId,
-			};
+			return { searchLogByConfigId, searchLogByUserId, searchLogByRecordId };
 		};
-export type LoggerServiceDeleteConfigLogsResult =
-	AxiosResponse<LoggerDeleteConfigLogsResponse>;
-export type LoggerServiceSearchLogByConfigIdResult = AxiosResponse<LoggerLogs>;
-export type LoggerServiceSearchLogByUserIdResult = AxiosResponse<LoggerLogs>;
-export type LoggerServiceSearchLogByRecordIdResult = AxiosResponse<LoggerLogs>;
+export type SearchLogByConfigIdResult = AxiosResponse<LoggerLogs>;
+export type SearchLogByUserIdResult = AxiosResponse<LoggerLogs>;
+export type SearchLogByRecordIdResult = AxiosResponse<LoggerLogs>;
 
 // --- footer end

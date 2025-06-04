@@ -5,6 +5,8 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface LoggerDeleteConfigBulkRequest {
-	ids?: number[];
+export interface FtsSearchData {
+	id?: string;
+	objectName?: string;
+	text?: string;
 }

@@ -4,16 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ConfigServiceSearchConfigObjectItem } from './configServiceSearchConfigObjectItem';
+import type { SearchConfigObjectItem } from './searchConfigObjectItem';
 
-export type ConfigServiceSearchConfigParams = {
+export type SearchConfigParams = {
 	page?: number;
 	size?: number;
 	q?: string;
 	sort?: string;
 	fields?: string[];
 	/**
-	 * NOT USED.
+	 * NOT USED
 	 */
-	object?: ConfigServiceSearchConfigObjectItem[];
+	object?: SearchConfigObjectItem[];
 };

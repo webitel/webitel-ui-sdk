@@ -6,24 +6,11 @@
  */
 import { z as zod } from 'zod';
 
-export const loggerServiceDeleteConfigLogsParams = zod.object({
-	config_id: zod.string().describe('Required'),
-});
-
-export const loggerServiceDeleteConfigLogsBody = zod.object({
-	configId: zod.string().optional(),
-	olderThan: zod.string().optional(),
-});
-
-export const loggerServiceDeleteConfigLogsResponse = zod.object({
-	processed: zod.string().optional(),
-});
-
-export const loggerServiceSearchLogByConfigIdParams = zod.object({
+export const searchLogByConfigIdParams = zod.object({
 	config_id: zod.number(),
 });
 
-export const loggerServiceSearchLogByConfigIdQueryParams = zod.object({
+export const searchLogByConfigIdQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -40,7 +27,7 @@ export const loggerServiceSearchLogByConfigIdQueryParams = zod.object({
 	dateTo: zod.string().optional(),
 });
 
-export const loggerServiceSearchLogByConfigIdResponse = zod.object({
+export const searchLogByConfigIdResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -57,7 +44,7 @@ export const loggerServiceSearchLogByConfigIdResponse = zod.object({
 					.optional(),
 				record: zod
 					.object({
-						id: zod.number().optional(),
+						id: zod.string().optional(),
 						name: zod.string().optional(),
 					})
 					.optional(),
@@ -75,29 +62,29 @@ export const loggerServiceSearchLogByConfigIdResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const loggerServiceSearchLogByUserIdParams = zod.object({
+export const searchLogByUserIdParams = zod.object({
 	user_id: zod.number().describe('REQUIRED filter'),
 });
 
-export const loggerServiceSearchLogByUserIdQueryParams = zod.object({
+export const searchLogByUserIdQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
-	objectId: zod.array(zod.string()).optional().describe('SPECIFIC filter.'),
+	objectId: zod.array(zod.string()).optional().describe('SPECIFIC filter'),
 	action: zod
 		.array(
 			zod.enum(['default_no_action', 'create', 'update', 'read', 'delete']),
 		)
 		.optional()
-		.describe('GENERAL filters.'),
+		.describe('GENERAL filters'),
 	userIp: zod.string().optional(),
 	dateFrom: zod.string().optional(),
 	dateTo: zod.string().optional(),
 });
 
-export const loggerServiceSearchLogByUserIdResponse = zod.object({
+export const searchLogByUserIdResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -114,7 +101,7 @@ export const loggerServiceSearchLogByUserIdResponse = zod.object({
 					.optional(),
 				record: zod
 					.object({
-						id: zod.number().optional(),
+						id: zod.string().optional(),
 						name: zod.string().optional(),
 					})
 					.optional(),
@@ -132,7 +119,7 @@ export const loggerServiceSearchLogByUserIdResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const loggerServiceSearchLogByRecordIdParams = zod.object({
+export const searchLogByRecordIdParams = zod.object({
 	object: zod
 		.enum([
 			'cc_queue',
@@ -156,7 +143,7 @@ export const loggerServiceSearchLogByRecordIdParams = zod.object({
 	record_id: zod.number().describe('REQUIRED filter'),
 });
 
-export const loggerServiceSearchLogByRecordIdQueryParams = zod.object({
+export const searchLogByRecordIdQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -167,14 +154,14 @@ export const loggerServiceSearchLogByRecordIdQueryParams = zod.object({
 			zod.enum(['default_no_action', 'create', 'update', 'read', 'delete']),
 		)
 		.optional()
-		.describe('GENERAL filters.'),
+		.describe('GENERAL filters'),
 	userId: zod.array(zod.string()).optional(),
 	userIp: zod.string().optional(),
 	dateFrom: zod.string().optional(),
 	dateTo: zod.string().optional(),
 });
 
-export const loggerServiceSearchLogByRecordIdResponse = zod.object({
+export const searchLogByRecordIdResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -191,7 +178,7 @@ export const loggerServiceSearchLogByRecordIdResponse = zod.object({
 					.optional(),
 				record: zod
 					.object({
-						id: zod.number().optional(),
+						id: zod.string().optional(),
 						name: zod.string().optional(),
 					})
 					.optional(),

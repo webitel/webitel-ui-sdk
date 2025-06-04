@@ -5,6 +5,5 @@
  * OpenAPI spec version: 24.04.0
  */
 export interface ProtobufAny {
-    typeUrl?: string;
-    value?: string;
+    '@type'?: string;
 }
