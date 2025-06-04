@@ -1,5 +1,13 @@
 import z from 'zod';
 
+/**
+* @description
+* only depth=1 fields will be returned
+* */
+export const getShallowFieldsToSendFromZodSchema = (schema: z.ZodTypeAny): string[] => {
+  return schema.keyof().options;
+};
+
 /*
   copy-pasted and renamed
   from https://github.com/colinhacks/zod/discussions/2134#discussioncomment-5194111
