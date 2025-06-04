@@ -29,6 +29,7 @@
         :placeholder="placeholder || label"
         :value="value"
         rows="1"
+        :readonly="readonly"
         class="wt-textarea__textarea"
         v-on="listeners"
         @input="autoGrow"
@@ -83,6 +84,14 @@ export default {
      */
     placeholder: {
       type: String,
+    },
+    /**
+     * Native textarea disabled attribute
+     */
+    readonly: {
+      type: Boolean,
+      default: false,
+      description: 'Native textarea readonly attribute',
     },
     /**
      * Native textarea disabled attribute
