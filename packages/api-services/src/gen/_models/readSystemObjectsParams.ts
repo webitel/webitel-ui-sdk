@@ -5,7 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface LoggerDeleteConfigLogsRequest {
-	configId?: string;
-	olderThan?: string;
-}
+export type ReadSystemObjectsParams = {
+	includeExisting?: boolean;
+};

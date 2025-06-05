@@ -15,7 +15,7 @@ import type {
 	LoggerSystemObjects,
 } from '.././_models';
 
-export const getConfigServiceReadSystemObjectsResponseMock = (
+export const getReadSystemObjectsResponseMock = (
 	overrideResponse: Partial<LoggerSystemObjects> = {},
 ): LoggerSystemObjects => ({
 	items: faker.helpers.arrayElement([
@@ -34,10 +34,7 @@ export const getConfigServiceReadSystemObjectsResponseMock = (
 	...overrideResponse,
 });
 
-export const getConfigServiceDeleteConfigBulkResponseMock =
-	(): LoggerEmpty => ({});
-
-export const getConfigServiceSearchConfigResponseMock = (
+export const getSearchConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfigs> = {},
 ): LoggerConfigs => ({
 	items: faker.helpers.arrayElement([
@@ -101,7 +98,7 @@ export const getConfigServiceSearchConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getConfigServiceCreateConfigResponseMock = (
+export const getCreateConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -146,9 +143,9 @@ export const getConfigServiceCreateConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getConfigServiceDeleteConfigResponseMock = (): LoggerEmpty => ({});
+export const getDeleteConfigResponseMock = (): LoggerEmpty => ({});
 
-export const getConfigServiceReadConfigResponseMock = (
+export const getReadConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -193,7 +190,7 @@ export const getConfigServiceReadConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getConfigServicePatchConfigResponseMock = (
+export const getPatchConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -238,7 +235,7 @@ export const getConfigServicePatchConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getConfigServiceUpdateConfigResponseMock = (
+export const getUpdateConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -283,7 +280,7 @@ export const getConfigServiceUpdateConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getConfigServiceReadSystemObjectsMockHandler = (
+export const getReadSystemObjectsMockHandler = (
 	overrideResponse?:
 		| LoggerSystemObjects
 		| ((
@@ -299,37 +296,14 @@ export const getConfigServiceReadSystemObjectsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getConfigServiceReadSystemObjectsResponseMock(),
+					: getReadSystemObjectsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getConfigServiceDeleteConfigBulkMockHandler = (
-	overrideResponse?:
-		| LoggerEmpty
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<LoggerEmpty> | LoggerEmpty),
-) => {
-	return http.delete('*/logger/config', async (info) => {
-		await delay(1000);
-
-		return new HttpResponse(
-			JSON.stringify(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getConfigServiceDeleteConfigBulkResponseMock(),
-			),
-			{ status: 200, headers: { 'Content-Type': 'application/json' } },
-		);
-	});
-};
-
-export const getConfigServiceSearchConfigMockHandler = (
+export const getSearchConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfigs
 		| ((
@@ -345,14 +319,14 @@ export const getConfigServiceSearchConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getConfigServiceSearchConfigResponseMock(),
+					: getSearchConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getConfigServiceCreateConfigMockHandler = (
+export const getCreateConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -368,14 +342,14 @@ export const getConfigServiceCreateConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getConfigServiceCreateConfigResponseMock(),
+					: getCreateConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getConfigServiceDeleteConfigMockHandler = (
+export const getDeleteConfigMockHandler = (
 	overrideResponse?:
 		| LoggerEmpty
 		| ((
@@ -391,14 +365,14 @@ export const getConfigServiceDeleteConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getConfigServiceDeleteConfigResponseMock(),
+					: getDeleteConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getConfigServiceReadConfigMockHandler = (
+export const getReadConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -414,14 +388,14 @@ export const getConfigServiceReadConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getConfigServiceReadConfigResponseMock(),
+					: getReadConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getConfigServicePatchConfigMockHandler = (
+export const getPatchConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -437,14 +411,14 @@ export const getConfigServicePatchConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getConfigServicePatchConfigResponseMock(),
+					: getPatchConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getConfigServiceUpdateConfigMockHandler = (
+export const getUpdateConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -460,19 +434,18 @@ export const getConfigServiceUpdateConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getConfigServiceUpdateConfigResponseMock(),
+					: getUpdateConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getConfigServiceMock = () => [
-	getConfigServiceReadSystemObjectsMockHandler(),
-	getConfigServiceDeleteConfigBulkMockHandler(),
-	getConfigServiceSearchConfigMockHandler(),
-	getConfigServiceCreateConfigMockHandler(),
-	getConfigServiceDeleteConfigMockHandler(),
-	getConfigServiceReadConfigMockHandler(),
-	getConfigServicePatchConfigMockHandler(),
-	getConfigServiceUpdateConfigMockHandler(),
+	getReadSystemObjectsMockHandler(),
+	getSearchConfigMockHandler(),
+	getCreateConfigMockHandler(),
+	getDeleteConfigMockHandler(),
+	getReadConfigMockHandler(),
+	getPatchConfigMockHandler(),
+	getUpdateConfigMockHandler(),
 ];

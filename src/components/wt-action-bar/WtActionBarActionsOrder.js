@@ -2,6 +2,7 @@ import IconAction from '../../enums/IconAction/IconAction.enum.js';
 
 export const tableActionsOrder = [
   IconAction.ADD,
+  IconAction.ADD_CONTACT,
   IconAction.COPY,
   IconAction.DOWNLOAD,
   IconAction.UPLOAD,
@@ -10,7 +11,6 @@ export const tableActionsOrder = [
   IconAction.FILTERS,
   IconAction.REFRESH,
   IconAction.DELETE,
-  IconAction.ADD_CONTACT,
 ];
 
 // TODO

@@ -6,11 +6,11 @@
  */
 import { z as zod } from 'zod';
 
-export const configServiceReadSystemObjectsQueryParams = zod.object({
+export const readSystemObjectsQueryParams = zod.object({
 	includeExisting: zod.boolean().optional(),
 });
 
-export const configServiceReadSystemObjectsResponse = zod.object({
+export const readSystemObjectsResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -21,13 +21,7 @@ export const configServiceReadSystemObjectsResponse = zod.object({
 		.optional(),
 });
 
-export const configServiceDeleteConfigBulkBody = zod.object({
-	ids: zod.array(zod.number()).optional(),
-});
-
-export const configServiceDeleteConfigBulkResponse = zod.object({});
-
-export const configServiceSearchConfigQueryParams = zod.object({
+export const searchConfigQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -55,10 +49,10 @@ export const configServiceSearchConfigQueryParams = zod.object({
 			]),
 		)
 		.optional()
-		.describe('NOT USED.'),
+		.describe('NOT USED'),
 });
 
-export const configServiceSearchConfigResponse = zod.object({
+export const searchConfigResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -88,7 +82,7 @@ export const configServiceSearchConfigResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const configServiceCreateConfigBody = zod.object({
+export const createConfigBody = zod.object({
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
@@ -107,39 +101,7 @@ export const configServiceCreateConfigBody = zod.object({
 		.optional(),
 });
 
-export const configServiceCreateConfigResponse = zod.object({
-	daysToStore: zod.number().optional(),
-	description: zod.string().optional(),
-	enabled: zod.boolean().optional(),
-	id: zod.number().optional(),
-	logsCount: zod.string().optional(),
-	logsSize: zod.string().optional(),
-	object: zod
-		.object({
-			id: zod.number().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-	period: zod.number().optional(),
-	storage: zod
-		.object({
-			id: zod.number().optional(),
-			name: zod.string().optional(),
-		})
-		.optional(),
-});
-
-export const configServiceDeleteConfigParams = zod.object({
-	config_id: zod.number(),
-});
-
-export const configServiceDeleteConfigResponse = zod.object({});
-
-export const configServiceReadConfigParams = zod.object({
-	config_id: zod.number(),
-});
-
-export const configServiceReadConfigResponse = zod.object({
+export const createConfigResponse = zod.object({
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
@@ -161,12 +123,43 @@ export const configServiceReadConfigResponse = zod.object({
 		.optional(),
 });
 
-export const configServicePatchConfigParams = zod.object({
+export const deleteConfigParams = zod.object({
 	config_id: zod.number(),
 });
 
-export const configServicePatchConfigBody = zod.object({
-	configId: zod.number().optional(),
+export const deleteConfigResponse = zod.object({});
+
+export const readConfigParams = zod.object({
+	config_id: zod.number().describe('int32 domainId = 8;'),
+});
+
+export const readConfigResponse = zod.object({
+	daysToStore: zod.number().optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.number().optional(),
+	logsCount: zod.string().optional(),
+	logsSize: zod.string().optional(),
+	object: zod
+		.object({
+			id: zod.number().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	period: zod.number().optional(),
+	storage: zod
+		.object({
+			id: zod.number().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
+
+export const patchConfigParams = zod.object({
+	config_id: zod.number(),
+});
+
+export const patchConfigBody = zod.object({
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
@@ -180,7 +173,7 @@ export const configServicePatchConfigBody = zod.object({
 		.optional(),
 });
 
-export const configServicePatchConfigResponse = zod.object({
+export const patchConfigResponse = zod.object({
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
@@ -202,12 +195,11 @@ export const configServicePatchConfigResponse = zod.object({
 		.optional(),
 });
 
-export const configServiceUpdateConfigParams = zod.object({
+export const updateConfigParams = zod.object({
 	config_id: zod.number(),
 });
 
-export const configServiceUpdateConfigBody = zod.object({
-	configId: zod.number().optional(),
+export const updateConfigBody = zod.object({
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
@@ -220,7 +212,7 @@ export const configServiceUpdateConfigBody = zod.object({
 		.optional(),
 });
 
-export const configServiceUpdateConfigResponse = zod.object({
+export const updateConfigResponse = zod.object({
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),

@@ -8,19 +8,9 @@ import { faker } from '@faker-js/faker';
 
 import { http, HttpResponse, delay } from 'msw';
 
-import type { LoggerDeleteConfigLogsResponse, LoggerLogs } from '.././_models';
+import type { LoggerLogs } from '.././_models';
 
-export const getLoggerServiceDeleteConfigLogsResponseMock = (
-	overrideResponse: Partial<LoggerDeleteConfigLogsResponse> = {},
-): LoggerDeleteConfigLogsResponse => ({
-	processed: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
-
-export const getLoggerServiceSearchLogByConfigIdResponseMock = (
+export const getSearchLogByConfigIdResponseMock = (
 	overrideResponse: Partial<LoggerLogs> = {},
 ): LoggerLogs => ({
 	items: faker.helpers.arrayElement([
@@ -54,10 +44,7 @@ export const getLoggerServiceSearchLogByConfigIdResponseMock = (
 			]),
 			record: faker.helpers.arrayElement([
 				{
-					id: faker.helpers.arrayElement([
-						faker.number.int({ min: undefined, max: undefined }),
-						undefined,
-					]),
+					id: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 					name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 				},
 				undefined,
@@ -84,7 +71,7 @@ export const getLoggerServiceSearchLogByConfigIdResponseMock = (
 	...overrideResponse,
 });
 
-export const getLoggerServiceSearchLogByUserIdResponseMock = (
+export const getSearchLogByUserIdResponseMock = (
 	overrideResponse: Partial<LoggerLogs> = {},
 ): LoggerLogs => ({
 	items: faker.helpers.arrayElement([
@@ -118,10 +105,7 @@ export const getLoggerServiceSearchLogByUserIdResponseMock = (
 			]),
 			record: faker.helpers.arrayElement([
 				{
-					id: faker.helpers.arrayElement([
-						faker.number.int({ min: undefined, max: undefined }),
-						undefined,
-					]),
+					id: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 					name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 				},
 				undefined,
@@ -148,7 +132,7 @@ export const getLoggerServiceSearchLogByUserIdResponseMock = (
 	...overrideResponse,
 });
 
-export const getLoggerServiceSearchLogByRecordIdResponseMock = (
+export const getSearchLogByRecordIdResponseMock = (
 	overrideResponse: Partial<LoggerLogs> = {},
 ): LoggerLogs => ({
 	items: faker.helpers.arrayElement([
@@ -182,10 +166,7 @@ export const getLoggerServiceSearchLogByRecordIdResponseMock = (
 			]),
 			record: faker.helpers.arrayElement([
 				{
-					id: faker.helpers.arrayElement([
-						faker.number.int({ min: undefined, max: undefined }),
-						undefined,
-					]),
+					id: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 					name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
 				},
 				undefined,
@@ -212,32 +193,7 @@ export const getLoggerServiceSearchLogByRecordIdResponseMock = (
 	...overrideResponse,
 });
 
-export const getLoggerServiceDeleteConfigLogsMockHandler = (
-	overrideResponse?:
-		| LoggerDeleteConfigLogsResponse
-		| ((
-				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) =>
-				| Promise<LoggerDeleteConfigLogsResponse>
-				| LoggerDeleteConfigLogsResponse),
-) => {
-	return http.delete('*/logger/config/:configId/logs', async (info) => {
-		await delay(1000);
-
-		return new HttpResponse(
-			JSON.stringify(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getLoggerServiceDeleteConfigLogsResponseMock(),
-			),
-			{ status: 200, headers: { 'Content-Type': 'application/json' } },
-		);
-	});
-};
-
-export const getLoggerServiceSearchLogByConfigIdMockHandler = (
+export const getSearchLogByConfigIdMockHandler = (
 	overrideResponse?:
 		| LoggerLogs
 		| ((
@@ -253,14 +209,14 @@ export const getLoggerServiceSearchLogByConfigIdMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLoggerServiceSearchLogByConfigIdResponseMock(),
+					: getSearchLogByConfigIdResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLoggerServiceSearchLogByUserIdMockHandler = (
+export const getSearchLogByUserIdMockHandler = (
 	overrideResponse?:
 		| LoggerLogs
 		| ((
@@ -276,14 +232,14 @@ export const getLoggerServiceSearchLogByUserIdMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLoggerServiceSearchLogByUserIdResponseMock(),
+					: getSearchLogByUserIdResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLoggerServiceSearchLogByRecordIdMockHandler = (
+export const getSearchLogByRecordIdMockHandler = (
 	overrideResponse?:
 		| LoggerLogs
 		| ((
@@ -299,15 +255,14 @@ export const getLoggerServiceSearchLogByRecordIdMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLoggerServiceSearchLogByRecordIdResponseMock(),
+					: getSearchLogByRecordIdResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getLoggerServiceMock = () => [
-	getLoggerServiceDeleteConfigLogsMockHandler(),
-	getLoggerServiceSearchLogByConfigIdMockHandler(),
-	getLoggerServiceSearchLogByUserIdMockHandler(),
-	getLoggerServiceSearchLogByRecordIdMockHandler(),
+	getSearchLogByConfigIdMockHandler(),
+	getSearchLogByUserIdMockHandler(),
+	getSearchLogByRecordIdMockHandler(),
 ];

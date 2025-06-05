@@ -5,6 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { LoggerLookup } from './loggerLookup';
+import type { LoggerRecord } from './loggerRecord';
 
 export interface LoggerLog {
 	action?: string;
@@ -13,7 +14,7 @@ export interface LoggerLog {
 	id?: number;
 	newState?: string;
 	object?: LoggerLookup;
-	record?: LoggerLookup;
+	record?: LoggerRecord;
 	user?: LoggerLookup;
 	userIp?: string;
 }
