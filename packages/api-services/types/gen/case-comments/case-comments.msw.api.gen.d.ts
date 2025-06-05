@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesCaseComment, WebitelCasesCaseCommentList } from '.././_models';
+export declare const getDeleteCommentResponseMock: (overrideResponse?: Partial<WebitelCasesCaseComment>) => WebitelCasesCaseComment;
+export declare const getLocateCommentResponseMock: (overrideResponse?: Partial<WebitelCasesCaseComment>) => WebitelCasesCaseComment;
+export declare const getUpdateComment2ResponseMock: (overrideResponse?: Partial<WebitelCasesCaseComment>) => WebitelCasesCaseComment;
+export declare const getUpdateCommentResponseMock: (overrideResponse?: Partial<WebitelCasesCaseComment>) => WebitelCasesCaseComment;
+export declare const getListCommentsResponseMock: (overrideResponse?: Partial<WebitelCasesCaseCommentList>) => WebitelCasesCaseCommentList;
+export declare const getPublishCommentResponseMock: (overrideResponse?: Partial<WebitelCasesCaseComment>) => WebitelCasesCaseComment;
+export declare const getDeleteCommentMockHandler: (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment)) => import("msw").HttpHandler;
+export declare const getLocateCommentMockHandler: (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment)) => import("msw").HttpHandler;
+export declare const getUpdateComment2MockHandler: (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment)) => import("msw").HttpHandler;
+export declare const getUpdateCommentMockHandler: (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment)) => import("msw").HttpHandler;
+export declare const getListCommentsMockHandler: (overrideResponse?: WebitelCasesCaseCommentList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCaseCommentList> | WebitelCasesCaseCommentList)) => import("msw").HttpHandler;
+export declare const getPublishCommentMockHandler: (overrideResponse?: WebitelCasesCaseComment | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesCaseComment> | WebitelCasesCaseComment)) => import("msw").HttpHandler;
+export declare const getCaseCommentsMock: () => import("msw").HttpHandler[];

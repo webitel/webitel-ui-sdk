@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesLocateStatusResponse, WebitelCasesStatus, WebitelCasesStatusList } from '.././_models';
+export declare const getListStatusesResponseMock: (overrideResponse?: Partial<WebitelCasesStatusList>) => WebitelCasesStatusList;
+export declare const getCreateStatusResponseMock: (overrideResponse?: Partial<WebitelCasesStatus>) => WebitelCasesStatus;
+export declare const getDeleteStatusResponseMock: (overrideResponse?: Partial<WebitelCasesStatus>) => WebitelCasesStatus;
+export declare const getLocateStatusResponseMock: (overrideResponse?: Partial<WebitelCasesLocateStatusResponse>) => WebitelCasesLocateStatusResponse;
+export declare const getUpdateStatus2ResponseMock: (overrideResponse?: Partial<WebitelCasesStatus>) => WebitelCasesStatus;
+export declare const getUpdateStatusResponseMock: (overrideResponse?: Partial<WebitelCasesStatus>) => WebitelCasesStatus;
+export declare const getListStatusesMockHandler: (overrideResponse?: WebitelCasesStatusList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesStatusList> | WebitelCasesStatusList)) => import("msw").HttpHandler;
+export declare const getCreateStatusMockHandler: (overrideResponse?: WebitelCasesStatus | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesStatus> | WebitelCasesStatus)) => import("msw").HttpHandler;
+export declare const getDeleteStatusMockHandler: (overrideResponse?: WebitelCasesStatus | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesStatus> | WebitelCasesStatus)) => import("msw").HttpHandler;
+export declare const getLocateStatusMockHandler: (overrideResponse?: WebitelCasesLocateStatusResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesLocateStatusResponse> | WebitelCasesLocateStatusResponse)) => import("msw").HttpHandler;
+export declare const getUpdateStatus2MockHandler: (overrideResponse?: WebitelCasesStatus | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesStatus> | WebitelCasesStatus)) => import("msw").HttpHandler;
+export declare const getUpdateStatusMockHandler: (overrideResponse?: WebitelCasesStatus | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesStatus> | WebitelCasesStatus)) => import("msw").HttpHandler;
+export declare const getStatusesMock: () => import("msw").HttpHandler[];

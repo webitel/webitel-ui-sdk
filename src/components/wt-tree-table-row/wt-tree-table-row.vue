@@ -18,13 +18,6 @@
             :key="treeLine"
             class="wt-tree-table-row__tree-space"
           ></div>
-          <!-- This two empty icons need to create space for nested elements -->
-          <wt-icon-btn
-            v-if="!data[childrenProp] && nestingLevel"
-            :class="{ hidden: !data[childrenProp] }"
-            :icon="collapsed ? 'tree-expand' : 'tree-collapse'"
-            @click="collapsed = !collapsed"
-          />
           <wt-checkbox
             v-if="selectable"
             :selected="isSelectedRow"

@@ -4,7 +4,7 @@
     :search-mode="searchMode"
     :search-mode-options="searchModeOptions"
     :value="localSearchValue"
-    @input="localSearchValue = $event"
+    @input="inputValue"
     @search="handleSearch"
     @update:search-mode="updateSearchMode"
   />
@@ -12,24 +12,26 @@
 
 <script lang="ts" setup>
 import { WtSearchBar } from '@webitel/ui-sdk/components';
-import {computed, type Ref, ref,watch} from 'vue';
+import { computed, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import {FilterInitParams, FilterName} from "../../classes/Filter";
-import {IFiltersManager} from "../../classes/FiltersManager";
+import { FilterInitParams, FilterName } from '../../classes/Filter';
+import { IFiltersManager } from '../../classes/FiltersManager';
 import type { DynamicFilterSearchSearchModeOption } from './types/DynamicFilterSearch';
-
-/**
- * @description
- * default search name is used when there are no search modes
- */
-const defaultSearchName = 'search';
 
 const props = defineProps<{
   filtersManager: IFiltersManager;
   searchModeOptions?: DynamicFilterSearchSearchModeOption[];
   isFiltersRestoring?: boolean;
+  /**
+   * @description
+   * default search name is used when there are no search modes
+   */
+  singleSearchName?: string;
+  value?: string;
 }>();
+
+const defaultSearchName = props.singleSearchName || 'search';
 
 const emit = defineEmits<{
   'filter:add': [FilterInitParams];
@@ -40,7 +42,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const searchMode: Ref<FilterName> = ref();
-const localSearchValue = ref('');
+const localSearchValue = computed(() => props?.value || '');
 
 const hasFilter = (filterName = searchMode.value) => {
   return props.filtersManager.filters.has(filterName);
@@ -71,21 +73,38 @@ const currentSearchName = computed(() => {
   return defaultSearchName;
 });
 
-const handleSearch = (value = localSearchValue.value) => {
-  if (hasFilter(currentSearchName.value)) {
-    updateFilter({
-      name: currentSearchName.value,
-      value,
-    });
-  } else {
-    addFilter({
-      name: currentSearchName.value,
-      value,
-    });
+const inputValue = (value: string) => {
+  localSearchValue.value = value;
+
+  if (value === '') {
+    if (hasFilter(currentSearchName.value)) {
+      deleteFilter({
+        name: currentSearchName.value,
+      });
+    }
+    return;
   }
 };
 
-const updateSearchMode = (nextSearchMode: DynamicFilterSearchSearchModeOption) => {
+const handleSearch = (value = localSearchValue.value) => {
+  if(value) {
+    if (hasFilter(currentSearchName.value)) {
+      updateFilter({
+        name: currentSearchName.value,
+        value,
+      });
+    } else {
+      addFilter({
+        name: currentSearchName.value,
+        value,
+      });
+    }
+  }
+};
+
+const updateSearchMode = (
+  nextSearchMode: DynamicFilterSearchSearchModeOption,
+) => {
   if (hasFilter(currentSearchName.value)) {
     deleteFilter({
       name: currentSearchName.value,
@@ -99,7 +118,8 @@ const updateSearchMode = (nextSearchMode: DynamicFilterSearchSearchModeOption) =
  * @description
  * Restoring search value after filters were restored
  */
-watch(() => props.isFiltersRestoring,
+watch(
+  () => props.isFiltersRestoring,
   (next) => {
     if (next) return;
 

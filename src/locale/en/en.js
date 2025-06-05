@@ -129,6 +129,7 @@ export default {
     emptyResultSearch: 'Your search yielded no results',
     contact: 'Contact | Contacts',
     column: 'Column | Columns',
+    notification: 'Notification | Notifications',
   },
   // date-related texts
   date: {
@@ -335,6 +336,7 @@ export default {
         [AdminSections.Changelogs]: 'Change log',
         [AdminSections.Configuration]: 'Configuration',
         [AdminSections.GlobalVariables]: 'Global variables',
+        [AdminSections.QuickReplies]: 'Quick replies',
       },
     },
   },

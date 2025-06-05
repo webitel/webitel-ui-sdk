@@ -6,6 +6,9 @@ import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
 import { nav, sidebar } from './routes.js';
+import { Window } from 'happy-dom';
+
+global.localStorage = new Window().localStorage; // coz vitepress ssr doesn't have localStorage
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

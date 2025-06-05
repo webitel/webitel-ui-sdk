@@ -28,9 +28,7 @@
         :is="QuestionTypeComponent"
         v-model:answer="answerModel"
         :question="question"
-        :result="answerModel /* compat, should use 'answer' */"
         mode="read"
-        @change:result="updateAnswer  /* compat, should use 'answer' */"
       />
       <div
         v-show="isAnswer"
@@ -41,8 +39,9 @@
       </div>
       <wt-input
         v-if="answerModel?.createdAt"
-        v-model="answerModel.comment"
+        :model-value="answerModel.comment"
         :label="t('reusable.comment')"
+        @update:model-value="updateAnswer({ comment: $event })"
       />
     </section>
 
@@ -50,6 +49,7 @@
       <wt-divider />
       <audit-form-answer-editing-info
         :answer="answerModel"
+        hide-comment
       />
     </template>
   </article>
@@ -96,7 +96,7 @@ const updateAnswer = (value: EngineQuestionAnswer) => {
   if (readonly.value) return; // if ... then in preview mode
 
   // coz only some properties of answer may be patched
-  const newAnswer = Object.assign(answerModel.value, value);
+  const newAnswer = { ...answerModel.value, ...value };
   answerModel.value = newAnswer;
 };
 

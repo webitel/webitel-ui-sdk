@@ -128,6 +128,7 @@ export default {
     messaging: 'Сообщения',
     emptyResultSearch: 'Поиск не дал результатов',
     contact: 'Контакт | Контакты',
+    notification: 'Уведомление | Уведомления',
   },
   // date-related texts
   date: {
@@ -333,6 +334,7 @@ export default {
         [AdminSections.Changelogs]: 'Журнал изменений',
         [AdminSections.Configuration]: 'Конфигурация',
         [AdminSections.GlobalVariables]: 'Глобальные переменные',
+        [AdminSections.QuickReplies]: 'Быстрые ответы',
       },
     },
   },

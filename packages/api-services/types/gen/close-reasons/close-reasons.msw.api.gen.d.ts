@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesCloseReason, WebitelCasesCloseReasonList, WebitelCasesLocateCloseReasonResponse } from '.././_models';
+export declare const getListCloseReasonsResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReasonList>) => WebitelCasesCloseReasonList;
+export declare const getCreateCloseReasonResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReason>) => WebitelCasesCloseReason;
+export declare const getDeleteCloseReasonResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReason>) => WebitelCasesCloseReason;
+export declare const getLocateCloseReasonResponseMock: (overrideResponse?: Partial<WebitelCasesLocateCloseReasonResponse>) => WebitelCasesLocateCloseReasonResponse;
+export declare const getUpdateCloseReason2ResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReason>) => WebitelCasesCloseReason;
+export declare const getUpdateCloseReasonResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReason>) => WebitelCasesCloseReason;
+export declare const getListCloseReasonsMockHandler: (overrideResponse?: WebitelCasesCloseReasonList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCloseReasonList> | WebitelCasesCloseReasonList)) => import("msw").HttpHandler;
+export declare const getCreateCloseReasonMockHandler: (overrideResponse?: WebitelCasesCloseReason | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesCloseReason> | WebitelCasesCloseReason)) => import("msw").HttpHandler;
+export declare const getDeleteCloseReasonMockHandler: (overrideResponse?: WebitelCasesCloseReason | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesCloseReason> | WebitelCasesCloseReason)) => import("msw").HttpHandler;
+export declare const getLocateCloseReasonMockHandler: (overrideResponse?: WebitelCasesLocateCloseReasonResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesLocateCloseReasonResponse> | WebitelCasesLocateCloseReasonResponse)) => import("msw").HttpHandler;
+export declare const getUpdateCloseReason2MockHandler: (overrideResponse?: WebitelCasesCloseReason | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesCloseReason> | WebitelCasesCloseReason)) => import("msw").HttpHandler;
+export declare const getUpdateCloseReasonMockHandler: (overrideResponse?: WebitelCasesCloseReason | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesCloseReason> | WebitelCasesCloseReason)) => import("msw").HttpHandler;
+export declare const getCloseReasonsMock: () => import("msw").HttpHandler[];

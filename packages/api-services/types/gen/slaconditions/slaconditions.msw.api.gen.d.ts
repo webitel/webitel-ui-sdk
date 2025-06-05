@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesLocateSLAConditionResponse, WebitelCasesSLACondition, WebitelCasesSLAConditionList } from '.././_models';
+export declare const getCreateSLAConditionResponseMock: (overrideResponse?: Partial<WebitelCasesSLACondition>) => WebitelCasesSLACondition;
+export declare const getDeleteSLAConditionResponseMock: (overrideResponse?: Partial<WebitelCasesSLACondition>) => WebitelCasesSLACondition;
+export declare const getLocateSLAConditionResponseMock: (overrideResponse?: Partial<WebitelCasesLocateSLAConditionResponse>) => WebitelCasesLocateSLAConditionResponse;
+export declare const getUpdateSLACondition2ResponseMock: (overrideResponse?: Partial<WebitelCasesSLACondition>) => WebitelCasesSLACondition;
+export declare const getUpdateSLAConditionResponseMock: (overrideResponse?: Partial<WebitelCasesSLACondition>) => WebitelCasesSLACondition;
+export declare const getListSLAConditionsResponseMock: (overrideResponse?: Partial<WebitelCasesSLAConditionList>) => WebitelCasesSLAConditionList;
+export declare const getCreateSLAConditionMockHandler: (overrideResponse?: WebitelCasesSLACondition | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition)) => import("msw").HttpHandler;
+export declare const getDeleteSLAConditionMockHandler: (overrideResponse?: WebitelCasesSLACondition | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition)) => import("msw").HttpHandler;
+export declare const getLocateSLAConditionMockHandler: (overrideResponse?: WebitelCasesLocateSLAConditionResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesLocateSLAConditionResponse> | WebitelCasesLocateSLAConditionResponse)) => import("msw").HttpHandler;
+export declare const getUpdateSLACondition2MockHandler: (overrideResponse?: WebitelCasesSLACondition | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition)) => import("msw").HttpHandler;
+export declare const getUpdateSLAConditionMockHandler: (overrideResponse?: WebitelCasesSLACondition | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesSLACondition> | WebitelCasesSLACondition)) => import("msw").HttpHandler;
+export declare const getListSLAConditionsMockHandler: (overrideResponse?: WebitelCasesSLAConditionList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesSLAConditionList> | WebitelCasesSLAConditionList)) => import("msw").HttpHandler;
+export declare const getSlaconditionsMock: () => import("msw").HttpHandler[];

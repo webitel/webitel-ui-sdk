@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesCaseLink, WebitelCasesCaseLinkList } from '.././_models';
+export declare const getListLinksResponseMock: (overrideResponse?: Partial<WebitelCasesCaseLinkList>) => WebitelCasesCaseLinkList;
+export declare const getCreateLinkResponseMock: (overrideResponse?: Partial<WebitelCasesCaseLink>) => WebitelCasesCaseLink;
+export declare const getDeleteLinkResponseMock: (overrideResponse?: Partial<WebitelCasesCaseLink>) => WebitelCasesCaseLink;
+export declare const getLocateLinkResponseMock: (overrideResponse?: Partial<WebitelCasesCaseLink>) => WebitelCasesCaseLink;
+export declare const getUpdateLink2ResponseMock: (overrideResponse?: Partial<WebitelCasesCaseLink>) => WebitelCasesCaseLink;
+export declare const getUpdateLinkResponseMock: (overrideResponse?: Partial<WebitelCasesCaseLink>) => WebitelCasesCaseLink;
+export declare const getListLinksMockHandler: (overrideResponse?: WebitelCasesCaseLinkList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCaseLinkList> | WebitelCasesCaseLinkList)) => import("msw").HttpHandler;
+export declare const getCreateLinkMockHandler: (overrideResponse?: WebitelCasesCaseLink | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink)) => import("msw").HttpHandler;
+export declare const getDeleteLinkMockHandler: (overrideResponse?: WebitelCasesCaseLink | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink)) => import("msw").HttpHandler;
+export declare const getLocateLinkMockHandler: (overrideResponse?: WebitelCasesCaseLink | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink)) => import("msw").HttpHandler;
+export declare const getUpdateLink2MockHandler: (overrideResponse?: WebitelCasesCaseLink | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink)) => import("msw").HttpHandler;
+export declare const getUpdateLinkMockHandler: (overrideResponse?: WebitelCasesCaseLink | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesCaseLink> | WebitelCasesCaseLink)) => import("msw").HttpHandler;
+export declare const getCaseLinksMock: () => import("msw").HttpHandler[];

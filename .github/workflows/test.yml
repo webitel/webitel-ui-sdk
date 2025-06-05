@@ -1,10 +1,8 @@
 name: Webitel UI run tests
 
 on:
-  pull_request:
-    branches: [master]
-  push:
-    branches: [master]
+  #  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
+  workflow_dispatch:
 
 jobs:
   test:

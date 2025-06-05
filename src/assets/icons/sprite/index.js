@@ -146,6 +146,7 @@ import plyrRestart from './plyr-restart.svg';
 import plyrRewind from './plyr-rewind.svg';
 import plyrSettings from './plyr-settings.svg';
 import plyrVolume from './plyr-volume.svg';
+import portal from './portal.svg';
 import previewTagApplication from './preview-tag-application.svg';
 import previewTagAudio from './preview-tag-audio.svg';
 import previewTagImage from './preview-tag-image.svg';
@@ -389,6 +390,8 @@ export default objCamelToKebab({
   versions,
 
   webitelLogo,
+
+  portal,
 
   previewTagAudio,
   previewTagVideo,

@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesLocatePriorityResponse, WebitelCasesPriority, WebitelCasesPriorityList } from '.././_models';
+export declare const getListPrioritiesResponseMock: (overrideResponse?: Partial<WebitelCasesPriorityList>) => WebitelCasesPriorityList;
+export declare const getCreatePriorityResponseMock: (overrideResponse?: Partial<WebitelCasesPriority>) => WebitelCasesPriority;
+export declare const getDeletePriorityResponseMock: (overrideResponse?: Partial<WebitelCasesPriority>) => WebitelCasesPriority;
+export declare const getLocatePriorityResponseMock: (overrideResponse?: Partial<WebitelCasesLocatePriorityResponse>) => WebitelCasesLocatePriorityResponse;
+export declare const getUpdatePriority2ResponseMock: (overrideResponse?: Partial<WebitelCasesPriority>) => WebitelCasesPriority;
+export declare const getUpdatePriorityResponseMock: (overrideResponse?: Partial<WebitelCasesPriority>) => WebitelCasesPriority;
+export declare const getListPrioritiesMockHandler: (overrideResponse?: WebitelCasesPriorityList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesPriorityList> | WebitelCasesPriorityList)) => import("msw").HttpHandler;
+export declare const getCreatePriorityMockHandler: (overrideResponse?: WebitelCasesPriority | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesPriority> | WebitelCasesPriority)) => import("msw").HttpHandler;
+export declare const getDeletePriorityMockHandler: (overrideResponse?: WebitelCasesPriority | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesPriority> | WebitelCasesPriority)) => import("msw").HttpHandler;
+export declare const getLocatePriorityMockHandler: (overrideResponse?: WebitelCasesLocatePriorityResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesLocatePriorityResponse> | WebitelCasesLocatePriorityResponse)) => import("msw").HttpHandler;
+export declare const getUpdatePriority2MockHandler: (overrideResponse?: WebitelCasesPriority | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesPriority> | WebitelCasesPriority)) => import("msw").HttpHandler;
+export declare const getUpdatePriorityMockHandler: (overrideResponse?: WebitelCasesPriority | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesPriority> | WebitelCasesPriority)) => import("msw").HttpHandler;
+export declare const getPrioritiesMock: () => import("msw").HttpHandler[];

@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesLocateSLAResponse, WebitelCasesSLA, WebitelCasesSLAList } from '.././_models';
+export declare const getListSLAsResponseMock: (overrideResponse?: Partial<WebitelCasesSLAList>) => WebitelCasesSLAList;
+export declare const getCreateSLAResponseMock: (overrideResponse?: Partial<WebitelCasesSLA>) => WebitelCasesSLA;
+export declare const getDeleteSLAResponseMock: (overrideResponse?: Partial<WebitelCasesSLA>) => WebitelCasesSLA;
+export declare const getLocateSLAResponseMock: (overrideResponse?: Partial<WebitelCasesLocateSLAResponse>) => WebitelCasesLocateSLAResponse;
+export declare const getUpdateSLA2ResponseMock: (overrideResponse?: Partial<WebitelCasesSLA>) => WebitelCasesSLA;
+export declare const getUpdateSLAResponseMock: (overrideResponse?: Partial<WebitelCasesSLA>) => WebitelCasesSLA;
+export declare const getListSLAsMockHandler: (overrideResponse?: WebitelCasesSLAList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesSLAList> | WebitelCasesSLAList)) => import("msw").HttpHandler;
+export declare const getCreateSLAMockHandler: (overrideResponse?: WebitelCasesSLA | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesSLA> | WebitelCasesSLA)) => import("msw").HttpHandler;
+export declare const getDeleteSLAMockHandler: (overrideResponse?: WebitelCasesSLA | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesSLA> | WebitelCasesSLA)) => import("msw").HttpHandler;
+export declare const getLocateSLAMockHandler: (overrideResponse?: WebitelCasesLocateSLAResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesLocateSLAResponse> | WebitelCasesLocateSLAResponse)) => import("msw").HttpHandler;
+export declare const getUpdateSLA2MockHandler: (overrideResponse?: WebitelCasesSLA | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesSLA> | WebitelCasesSLA)) => import("msw").HttpHandler;
+export declare const getUpdateSLAMockHandler: (overrideResponse?: WebitelCasesSLA | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesSLA> | WebitelCasesSLA)) => import("msw").HttpHandler;
+export declare const getSlasMock: () => import("msw").HttpHandler[];

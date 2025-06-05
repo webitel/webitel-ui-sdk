@@ -1,0 +1,15 @@
+import { http } from 'msw';
+import type { WebitelCasesCloseReasonGroup, WebitelCasesCloseReasonGroupList, WebitelCasesLocateCloseReasonGroupResponse } from '.././_models';
+export declare const getListCloseReasonGroupsResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReasonGroupList>) => WebitelCasesCloseReasonGroupList;
+export declare const getCreateCloseReasonGroupResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReasonGroup>) => WebitelCasesCloseReasonGroup;
+export declare const getDeleteCloseReasonGroupResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReasonGroup>) => WebitelCasesCloseReasonGroup;
+export declare const getLocateCloseReasonGroupResponseMock: (overrideResponse?: Partial<WebitelCasesLocateCloseReasonGroupResponse>) => WebitelCasesLocateCloseReasonGroupResponse;
+export declare const getUpdateCloseReasonGroup2ResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReasonGroup>) => WebitelCasesCloseReasonGroup;
+export declare const getUpdateCloseReasonGroupResponseMock: (overrideResponse?: Partial<WebitelCasesCloseReasonGroup>) => WebitelCasesCloseReasonGroup;
+export declare const getListCloseReasonGroupsMockHandler: (overrideResponse?: WebitelCasesCloseReasonGroupList | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesCloseReasonGroupList> | WebitelCasesCloseReasonGroupList)) => import("msw").HttpHandler;
+export declare const getCreateCloseReasonGroupMockHandler: (overrideResponse?: WebitelCasesCloseReasonGroup | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<WebitelCasesCloseReasonGroup> | WebitelCasesCloseReasonGroup)) => import("msw").HttpHandler;
+export declare const getDeleteCloseReasonGroupMockHandler: (overrideResponse?: WebitelCasesCloseReasonGroup | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<WebitelCasesCloseReasonGroup> | WebitelCasesCloseReasonGroup)) => import("msw").HttpHandler;
+export declare const getLocateCloseReasonGroupMockHandler: (overrideResponse?: WebitelCasesLocateCloseReasonGroupResponse | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<WebitelCasesLocateCloseReasonGroupResponse> | WebitelCasesLocateCloseReasonGroupResponse)) => import("msw").HttpHandler;
+export declare const getUpdateCloseReasonGroup2MockHandler: (overrideResponse?: WebitelCasesCloseReasonGroup | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<WebitelCasesCloseReasonGroup> | WebitelCasesCloseReasonGroup)) => import("msw").HttpHandler;
+export declare const getUpdateCloseReasonGroupMockHandler: (overrideResponse?: WebitelCasesCloseReasonGroup | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<WebitelCasesCloseReasonGroup> | WebitelCasesCloseReasonGroup)) => import("msw").HttpHandler;
+export declare const getCloseReasonGroupsMock: () => import("msw").HttpHandler[];

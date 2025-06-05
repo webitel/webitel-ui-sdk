@@ -64,7 +64,6 @@ export default {
     state: 'Стан',
     refresh: 'Оновити',
     retry: 'Повторити',
-    reset: 'Скинути',
     downloadAll: 'Завантажити все',
     warning: 'Попередження',
     doNotSave: 'Не зберігати',
@@ -119,6 +118,7 @@ export default {
     values: 'Значення | Значення',
     keys: 'Ключ | Ключі',
     duration: 'Тривалість',
+    reset: 'Скинути',
     errors: 'Помилка | Помилки',
     labels: 'Мітка | Мітки',
     permissions: 'Дозвіл | Дозволи',
@@ -128,6 +128,7 @@ export default {
     messaging: 'Повідомлення',
     emptyResultSearch: 'Пошук не дав результатів',
     contact: 'Контакт | Контакти',
+    notification: 'Сповіщення',
   },
   // date-related texts
   date: {
@@ -333,6 +334,7 @@ export default {
         [AdminSections.Changelogs]: 'Журнал змін',
         [AdminSections.Configuration]: 'Конфігурація',
         [AdminSections.GlobalVariables]: 'Глобальні змінні',
+        [AdminSections.QuickReplies]: 'Швидкі відповіді',
       },
     },
   },

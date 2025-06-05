@@ -49,7 +49,7 @@ import OptionsWriteRow from './audit-form-question-options-write-row.vue';
 const questionModel = defineModel<EngineQuestion>('question');
 const answerModel = defineModel<EngineQuestionAnswer | null>('answer');
 
-const props = defineProps<{
+defineProps<{
   /**
    * question mode, NOT audit form mode
    */

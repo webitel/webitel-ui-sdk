@@ -1,13 +1,21 @@
+
+# all packages
+/packages/**/node_modules
+
+# ui-datalist pckg
+/packages/ui-datalist/types
+
+# api-services pckg
+/packages/api-services/types
+/packages/api-services/src/gen/_docs
+
+# misc
 .DS_Store
 node_modules
 /dist
 /docs/.vitepress/cache
 /docs/.vitepress/dist
 /coverage
-
-/src/api/orval
-
-/packages/ui-datalist/types
 
 # local env files
 .env.local

@@ -70,34 +70,17 @@ import {
   WtTooltip,
 } from '@webitel/ui-sdk/components';
 import { computed, ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
 
-import { FilterData, IFilter } from '../../classes/Filter';
-import { AnyFilterConfig } from '../../modules/filterConfig/classes/FilterConfig';
+import { IFilter } from '../../classes/Filter';
+import { DynamicFilterProps, DynamicFilterEmits } from '../types/Filter.types';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
-import { FilterOption } from '../../modules/filterConfig/enums/FilterOption';
-import DynamicFilterConfigForm from '../config/dynamic-filter-config-form.vue';
-import DynamicFilterConfigView from '../config/dynamic-filter-config-view.vue';
+import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
+import DynamicFilterConfigView from '../config/dynamic-view/dynamic-filter-config-view.vue';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
-interface Props {
-  filter: IFilter;
-  /**
-   * @description
-   * this filter config
-   */
-  filterConfig: AnyFilterConfig;
-  readonly?: boolean;
-}
+const props = defineProps<DynamicFilterProps>();
 
-const { t } = useI18n();
-
-const props = defineProps<Props>();
-
-const emit = defineEmits<{
-  'update:filter': [FilterData];
-  'delete:filter': [IFilter];
-}>();
+const emit = defineEmits<DynamicFilterEmits>();
 
 const localValue = ref();
 
@@ -167,8 +150,8 @@ const deleteFilter = () => {
 <style lang="scss" scoped>
 .wt-chip {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-2xs);
 }
 

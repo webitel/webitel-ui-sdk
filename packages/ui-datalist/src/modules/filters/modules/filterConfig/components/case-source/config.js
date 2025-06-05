@@ -1,3 +1,3 @@
-import CaseSourcesAPI from '@webitel/ui-sdk/api/clients/caseSources/caseSources';
+import { caseSources } from '@webitel/ui-sdk/api/clients/index';
 
-export const searchMethod = CaseSourcesAPI.getLookup;
+export const searchMethod = caseSources.getLookup;
