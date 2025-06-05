@@ -1,23 +1,23 @@
 import {
-  RegleSchema
+  RegleSchema,
 } from '@regle/schemas';
-import { computed } from 'vue';
+import { computed, Ref } from 'vue';
 
 export const useValidation = <TState, TSchema>({
         validationSchema,
                               }: {
-  validationSchema: RegleSchema<TState, TSchema>,
+  validationSchema: Ref<RegleSchema<TState, TSchema>>,
 }) => {
   const disabledSave = computed(() => {
-    return validationSchema.r$.$error;
+    return validationSchema.value.r$.$error;
   });
 
   const isEdited = computed(() => {
-    return validationSchema.r$.$anyEdited;
+    return validationSchema.value.r$.$anyEdited;
   });
 
   const touch = () => {
-    validationSchema.r$.$touch();
+    validationSchema.value.r$.$touch();
   };
 
   const checkIfInvalid = () => {
