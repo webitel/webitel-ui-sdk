@@ -8,6 +8,7 @@ import { createApp } from 'vue';
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
 import i18n from './locale/i18n';
+import initPrimevue from './plugins/primevue/primevue.plugin.js';
 import router from './router';
 import eventBus from './scripts/eventBus';
 import App from './the-app.vue';
@@ -21,5 +22,7 @@ Object.keys(Components).forEach((name) => {
 Object.keys(Directives).forEach((name) => {
   app.directive(name, Directives[name]);
 });
+
+initPrimevue(app);
 
 app.mount('#app');

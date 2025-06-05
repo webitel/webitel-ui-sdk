@@ -4,6 +4,7 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
+import tailwindcss from '@tailwindcss/vite';
 import { nav, sidebar } from './routes.js';
 import { Window } from 'happy-dom';
 
@@ -49,6 +50,7 @@ export default defineConfig({
       createSvgSpritePlugin({
         include: '**/sprite/*.svg',
       }),
+      tailwindcss(),
       (() => {
         const docgen = vueDocgenPlugin({
           include: globbySync(['src/**/*.vue']),
