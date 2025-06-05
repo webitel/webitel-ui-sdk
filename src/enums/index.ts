@@ -1,5 +1,6 @@
 import AbstractUserStatus from './AbstractUserStatus/AbstractUserStatus.enum.js';
 import AgentStatus from './AgentStatus/AgentStatus.enum.js';
+import { ButtonColor } from './ButtonColor/ButtonColor';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
@@ -21,6 +22,7 @@ export {
   AdminSections,
   AgentStatus,
   AuditorSections,
+  ButtonColor,
   ChatGatewayProvider,
   ComponentSize,
   CrmSections,

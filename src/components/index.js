@@ -47,6 +47,7 @@ import WtPageHeader from './wt-page-header/wt-page-header.vue';
 import WtPageWrapper from './wt-page-wrapper/wt-page-wrapper.vue';
 import WtPagination from './wt-pagination/wt-pagination.vue';
 import WtPlayer from './wt-player/wt-player.vue';
+import WtPopover from './wt-popover/wt-popover.vue';
 import WtPopup from './wt-popup/wt-popup.vue';
 import WtProgressBar from './wt-progress-bar/wt-progress-bar.vue';
 import WtRadio from './wt-radio/wt-radio.vue';
@@ -120,6 +121,7 @@ const Components = {
   WtDualPanel,
   WtPagination,
   WtPlayer,
+  WtPopover,
   WtStatusSelect,
   WtTable,
   WtTree,
@@ -187,6 +189,7 @@ export {
   WtPageWrapper,
   WtPagination,
   WtPlayer,
+  WtPopover,
   WtPopup,
   WtProgressBar,
   WtRadio,

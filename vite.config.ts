@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import { globbySync } from 'globby';
 import { resolve } from 'path';
@@ -23,12 +24,13 @@ export default (/*{ mode }*/) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ['vue'],
+        external: ['vue', 'primevue'],
         output: {
           // Provide global variables to use in the UMD build
           // for externalized deps
           globals: {
             vue: 'Vue',
+            primevue: 'PrimeVue',
           },
           // https://github.com/vitejs/vite/issues/4863#issuecomment-1005451468
           assetFileNames: (assetInfo) => {
@@ -54,6 +56,7 @@ export default (/*{ mode }*/) => {
       },
     },
     plugins: [
+      tailwindcss(),
       vue({
         template: {
           compilerOptions: {
@@ -87,6 +90,7 @@ export default (/*{ mode }*/) => {
         vueTsc: false,
         // biome: true,
       }),
+
       AutoImport({
         include: [...globbySync('*.{ts,js,vue}')],
         imports: {
