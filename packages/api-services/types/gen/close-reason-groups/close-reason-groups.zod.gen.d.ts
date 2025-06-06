@@ -11,18 +11,38 @@ import { z as zod } from 'zod';
 export declare const listCloseReasonGroupsQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    id: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     q: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listCloseReasonGroupsResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -30,27 +50,113 @@ export declare const listCloseReasonGroupsResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+    next?: boolean;
+    page?: number;
+}, {
+    items?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+    next?: boolean;
+    page?: number;
+}>;
 /**
  * @summary Create a new close reason group
  */
 export declare const createCloseReasonGroupQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const createCloseReasonGroupBody: zod.ZodObject<{
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+}, {
+    name?: string;
+    description?: string;
+}>;
 export declare const createCloseReasonGroupResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -58,20 +164,64 @@ export declare const createCloseReasonGroupResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 /**
  * @summary Delete a close reason group
  */
 export declare const deleteCloseReasonGroupParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const deleteCloseReasonGroupResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -79,24 +229,72 @@ export declare const deleteCloseReasonGroupResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 /**
  * @summary Locate a close reason group by ID
  */
 export declare const locateCloseReasonGroupParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const locateCloseReasonGroupQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateCloseReasonGroupResponse: zod.ZodObject<{
     closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -104,28 +302,114 @@ export declare const locateCloseReasonGroupResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
-}, {}, {}>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    closeReasonGroup?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    };
+}, {
+    closeReasonGroup?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    };
+}>;
 /**
  * @summary Update an existing close reason group
  */
 export declare const updateCloseReasonGroup2Params: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateCloseReasonGroup2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateCloseReasonGroup2Body: zod.ZodObject<{
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+}, {
+    name?: string;
+    description?: string;
+}>;
 export declare const updateCloseReasonGroup2Response: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -133,27 +417,81 @@ export declare const updateCloseReasonGroup2Response: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 /**
  * @summary Update an existing close reason group
  */
 export declare const updateCloseReasonGroupParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateCloseReasonGroupQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateCloseReasonGroupBody: zod.ZodObject<{
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+}, {
+    name?: string;
+    description?: string;
+}>;
 export declare const updateCloseReasonGroupResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -161,5 +499,39 @@ export declare const updateCloseReasonGroupResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;

@@ -11,43 +11,90 @@ import { z as zod } from 'zod';
 export declare const updateRelatedCase2Params: zod.ZodObject<{
     'input.primary_case.id': zod.ZodString;
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+    'input.primary_case.id'?: string;
+}, {
+    etag?: string;
+    'input.primary_case.id'?: string;
+}>;
 export declare const updateRelatedCase2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateRelatedCase2BodyRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const updateRelatedCase2Body: zod.ZodObject<{
     primaryCase: zod.ZodOptional<zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+    }, {
+        name?: string;
+    }>>;
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    primaryCase?: {
+        name?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    primaryCase?: {
+        name?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateRelatedCase2ResponseRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const updateRelatedCase2Response: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -57,7 +104,21 @@ export declare const updateRelatedCase2Response: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }>>;
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         color: zod.ZodOptional<zod.ZodString>;
         etag: zod.ZodOptional<zod.ZodString>;
@@ -65,69 +126,187 @@ export declare const updateRelatedCase2Response: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}>;
 /**
  * @summary Update an existing related case
  */
 export declare const updateRelatedCaseParams: zod.ZodObject<{
     'input.primary_case.id': zod.ZodString;
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+    'input.primary_case.id'?: string;
+}, {
+    etag?: string;
+    'input.primary_case.id'?: string;
+}>;
 export declare const updateRelatedCaseQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateRelatedCaseBodyRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const updateRelatedCaseBody: zod.ZodObject<{
     primaryCase: zod.ZodOptional<zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+    }, {
+        name?: string;
+    }>>;
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    primaryCase?: {
+        name?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    primaryCase?: {
+        name?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateRelatedCaseResponseRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const updateRelatedCaseResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -137,7 +316,21 @@ export declare const updateRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }>>;
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         color: zod.ZodOptional<zod.ZodString>;
         etag: zod.ZodOptional<zod.ZodString>;
@@ -145,40 +338,129 @@ export declare const updateRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}>;
 /**
  * @summary List all related cases for a specific case
  */
 export declare const listRelatedCasesParams: zod.ZodObject<{
     primary_case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    primary_case_etag?: string;
+}, {
+    primary_case_etag?: string;
+}>;
 export declare const listRelatedCasesQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     q: zod.ZodOptional<zod.ZodString>;
     sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listRelatedCasesResponseDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const listRelatedCasesResponse: zod.ZodObject<{
     data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
@@ -186,7 +468,13 @@ export declare const listRelatedCasesResponse: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         etag: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -196,7 +484,21 @@ export declare const listRelatedCasesResponse: zod.ZodObject<{
             name: zod.ZodOptional<zod.ZodString>;
             subject: zod.ZodOptional<zod.ZodString>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        }, {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        }>>;
         relatedCase: zod.ZodOptional<zod.ZodObject<{
             color: zod.ZodOptional<zod.ZodString>;
             etag: zod.ZodOptional<zod.ZodString>;
@@ -204,68 +506,244 @@ export declare const listRelatedCasesResponse: zod.ZodObject<{
             name: zod.ZodOptional<zod.ZodString>;
             subject: zod.ZodOptional<zod.ZodString>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>;
-        relationType: zod.ZodDefault<zod.ZodEnum<{
-            RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-            DUPLICATES: "DUPLICATES";
-            IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-            BLOCKS: "BLOCKS";
-            IS_BLOCKED_BY: "IS_BLOCKED_BY";
-            CAUSES: "CAUSES";
-            IS_CAUSED_BY: "IS_CAUSED_BY";
-            IS_CHILD_OF: "IS_CHILD_OF";
-            IS_PARENT_OF: "IS_PARENT_OF";
-            RELATES_TO: "RELATES_TO";
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        }, {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
         }>>;
+        relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+        primaryCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relatedCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    }, {
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+        primaryCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relatedCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    next?: boolean;
+    page?: string;
+    data?: {
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+        primaryCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relatedCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    }[];
+}, {
+    next?: boolean;
+    page?: string;
+    data?: {
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+        primaryCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relatedCase?: {
+            name?: string;
+            id?: string;
+            etag?: string;
+            subject?: string;
+            ver?: number;
+            color?: string;
+        };
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    }[];
+}>;
 /**
  * @summary Create a new related case
  */
 export declare const createRelatedCaseParams: zod.ZodObject<{
     primary_case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    primary_case_etag?: string;
+}, {
+    primary_case_etag?: string;
+}>;
 export declare const createRelatedCaseQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const createRelatedCaseBodyRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const createRelatedCaseBody: zod.ZodObject<{
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    relatedCase?: {
+        name?: string;
+        id?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    relatedCase?: {
+        name?: string;
+        id?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const createRelatedCaseResponseRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const createRelatedCaseResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -275,7 +753,21 @@ export declare const createRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }>>;
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         color: zod.ZodOptional<zod.ZodString>;
         etag: zod.ZodOptional<zod.ZodString>;
@@ -283,40 +775,123 @@ export declare const createRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}>;
 /**
  * @summary Delete a specific related case
  */
 export declare const deleteRelatedCaseParams: zod.ZodObject<{
     primary_case_etag: zod.ZodString;
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+    primary_case_etag?: string;
+}, {
+    etag?: string;
+    primary_case_etag?: string;
+}>;
 export declare const deleteRelatedCaseResponseRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const deleteRelatedCaseResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -326,7 +901,21 @@ export declare const deleteRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }>>;
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         color: zod.ZodOptional<zod.ZodString>;
         etag: zod.ZodOptional<zod.ZodString>;
@@ -334,43 +923,130 @@ export declare const deleteRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}>;
 /**
  * @summary Retrieve a specific related case by ID
  */
 export declare const locateRelatedCaseParams: zod.ZodObject<{
     primary_case_etag: zod.ZodString;
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+    primary_case_etag?: string;
+}, {
+    etag?: string;
+    primary_case_etag?: string;
+}>;
 export declare const locateRelatedCaseQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateRelatedCaseResponseRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const locateRelatedCaseResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -380,7 +1056,21 @@ export declare const locateRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }>>;
     relatedCase: zod.ZodOptional<zod.ZodObject<{
         color: zod.ZodOptional<zod.ZodString>;
         etag: zod.ZodOptional<zod.ZodString>;
@@ -388,23 +1078,94 @@ export declare const locateRelatedCaseResponse: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
         subject: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>;
-    relationType: zod.ZodDefault<zod.ZodEnum<{
-        RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-        DUPLICATES: "DUPLICATES";
-        IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-        BLOCKS: "BLOCKS";
-        IS_BLOCKED_BY: "IS_BLOCKED_BY";
-        CAUSES: "CAUSES";
-        IS_CAUSED_BY: "IS_CAUSED_BY";
-        IS_CHILD_OF: "IS_CHILD_OF";
-        IS_PARENT_OF: "IS_PARENT_OF";
-        RELATES_TO: "RELATES_TO";
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    }, {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
     }>>;
+    relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}, {
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+    primaryCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relatedCase?: {
+        name?: string;
+        id?: string;
+        etag?: string;
+        subject?: string;
+        ver?: number;
+        color?: string;
+    };
+    relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+}>;

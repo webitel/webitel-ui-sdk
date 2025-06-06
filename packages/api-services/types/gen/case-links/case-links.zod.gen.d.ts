@@ -10,26 +10,56 @@ import { z as zod } from 'zod';
  */
 export declare const listLinksParams: zod.ZodObject<{
     case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_etag?: string;
+}, {
+    case_etag?: string;
+}>;
 export declare const listLinksQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     q: zod.ZodOptional<zod.ZodString>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listLinksResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         author: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         etag: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -37,34 +67,158 @@ export declare const listLinksResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         url: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+    }, {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+    }[];
+    next?: boolean;
+    page?: string;
+}, {
+    items?: {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        ver?: number;
+    }[];
+    next?: boolean;
+    page?: string;
+}>;
 export declare const createLinkParams: zod.ZodObject<{
     case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_etag?: string;
+}, {
+    case_etag?: string;
+}>;
 export declare const createLinkQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     inputEtag: zod.ZodOptional<zod.ZodString>;
     inputUrl: zod.ZodOptional<zod.ZodString>;
     inputName: zod.ZodOptional<zod.ZodString>;
     inputUserIdId: zod.ZodOptional<zod.ZodString>;
     inputUserIdName: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+    inputEtag?: string;
+    inputUrl?: string;
+    inputName?: string;
+    inputUserIdId?: string;
+    inputUserIdName?: string;
+}, {
+    fields?: string[];
+    inputEtag?: string;
+    inputUrl?: string;
+    inputName?: string;
+    inputUserIdId?: string;
+    inputUserIdName?: string;
+}>;
 export declare const createLinkResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -72,24 +226,88 @@ export declare const createLinkResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     url: zod.ZodOptional<zod.ZodString>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}>;
 export declare const deleteLinkParams: zod.ZodObject<{
     case_etag: zod.ZodString;
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+    case_etag?: string;
+}, {
+    etag?: string;
+    case_etag?: string;
+}>;
 export declare const deleteLinkResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -97,27 +315,95 @@ export declare const deleteLinkResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     url: zod.ZodOptional<zod.ZodString>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}>;
 export declare const locateLinkParams: zod.ZodObject<{
     case_etag: zod.ZodString;
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+    case_etag?: string;
+}, {
+    etag?: string;
+    case_etag?: string;
+}>;
 export declare const locateLinkQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateLinkResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -125,35 +411,123 @@ export declare const locateLinkResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     url: zod.ZodOptional<zod.ZodString>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}>;
 export declare const updateLink2Params: zod.ZodObject<{
     case_etag: zod.ZodString;
     'input.etag': zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    'input.etag'?: string;
+    case_etag?: string;
+}, {
+    'input.etag'?: string;
+    case_etag?: string;
+}>;
 export declare const updateLink2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateLink2Body: zod.ZodObject<{
     name: zod.ZodOptional<zod.ZodString>;
     url: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    url?: string;
+    name?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateLink2Response: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -161,35 +535,123 @@ export declare const updateLink2Response: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     url: zod.ZodOptional<zod.ZodString>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}>;
 export declare const updateLinkParams: zod.ZodObject<{
     case_etag: zod.ZodString;
     'input.etag': zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    'input.etag'?: string;
+    case_etag?: string;
+}, {
+    'input.etag'?: string;
+    case_etag?: string;
+}>;
 export declare const updateLinkQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateLinkBody: zod.ZodObject<{
     name: zod.ZodOptional<zod.ZodString>;
     url: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    url?: string;
+    name?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateLinkResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -197,7 +659,53 @@ export declare const updateLinkResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     url: zod.ZodOptional<zod.ZodString>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    ver?: number;
+}>;

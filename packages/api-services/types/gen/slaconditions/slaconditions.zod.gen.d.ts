@@ -10,31 +10,73 @@ import { z as zod } from 'zod';
  */
 export declare const createSLAConditionParams: zod.ZodObject<{
     sla_id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    sla_id?: string;
+}, {
+    sla_id?: string;
+}>;
 export declare const createSLAConditionQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const createSLAConditionBody: zod.ZodObject<{
     name: zod.ZodOptional<zod.ZodString>;
     priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>, "many">>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+}, {
+    name?: string;
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+}>;
 export declare const createSLAConditionResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>, "many">>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
     slaId: zod.ZodOptional<zod.ZodString>;
@@ -42,27 +84,91 @@ export declare const createSLAConditionResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}>;
 /**
  * @summary Delete an SLACondition
  */
 export declare const deleteSLAConditionParams: zod.ZodObject<{
     sla_id: zod.ZodString;
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+    sla_id?: string;
+}, {
+    id?: string;
+    sla_id?: string;
+}>;
 export declare const deleteSLAConditionResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>, "many">>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
     slaId: zod.ZodOptional<zod.ZodString>;
@@ -70,31 +176,99 @@ export declare const deleteSLAConditionResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}>;
 /**
  * @summary Locate an SLACondition by ID
  */
 export declare const locateSLAConditionParams: zod.ZodObject<{
     sla_id: zod.ZodString;
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+    sla_id?: string;
+}, {
+    id?: string;
+    sla_id?: string;
+}>;
 export declare const locateSLAConditionQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateSLAConditionResponse: zod.ZodObject<{
     slaCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>, "many">>;
         reactionTime: zod.ZodOptional<zod.ZodString>;
         resolutionTime: zod.ZodOptional<zod.ZodString>;
         slaId: zod.ZodOptional<zod.ZodString>;
@@ -102,40 +276,174 @@ export declare const locateSLAConditionResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
-}, {}, {}>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    slaCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    };
+}, {
+    slaCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    };
+}>;
 /**
  * @summary Update an existing SLACondition
  */
 export declare const updateSLACondition2Params: zod.ZodObject<{
     sla_id: zod.ZodString;
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+    sla_id?: string;
+}, {
+    id?: string;
+    sla_id?: string;
+}>;
 export declare const updateSLACondition2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateSLACondition2Body: zod.ZodObject<{
     name: zod.ZodOptional<zod.ZodString>;
     priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>, "many">>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+}, {
+    name?: string;
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+}>;
 export declare const updateSLACondition2Response: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>, "many">>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
     slaId: zod.ZodOptional<zod.ZodString>;
@@ -143,39 +451,129 @@ export declare const updateSLACondition2Response: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}>;
 /**
  * @summary Update an existing SLACondition
  */
 export declare const updateSLAConditionParams: zod.ZodObject<{
     sla_id: zod.ZodString;
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+    sla_id?: string;
+}, {
+    id?: string;
+    sla_id?: string;
+}>;
 export declare const updateSLAConditionQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateSLAConditionBody: zod.ZodObject<{
     name: zod.ZodOptional<zod.ZodString>;
     priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>, "many">>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+}, {
+    name?: string;
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+}>;
 export declare const updateSLAConditionResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>, "many">>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
     slaId: zod.ZodOptional<zod.ZodString>;
@@ -183,37 +581,117 @@ export declare const updateSLAConditionResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    priorities?: {
+        name?: string;
+        id?: string;
+    }[];
+    slaId?: string;
+}>;
 /**
  * @summary Retrieve a list of SLAConditions or search SLACondition conditions
  */
 export declare const listSLAConditionsParams: zod.ZodObject<{
     sla_id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    sla_id?: string;
+}, {
+    sla_id?: string;
+}>;
 export declare const listSLAConditionsQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    id: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     q: zod.ZodOptional<zod.ZodString>;
     slaConditionId: zod.ZodOptional<zod.ZodString>;
     priorityId: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+    slaConditionId?: string;
+    priorityId?: string;
+}, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+    slaConditionId?: string;
+    priorityId?: string;
+}>;
 export declare const listSLAConditionsResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         priorities: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>, "many">>;
         reactionTime: zod.ZodOptional<zod.ZodString>;
         resolutionTime: zod.ZodOptional<zod.ZodString>;
         slaId: zod.ZodOptional<zod.ZodString>;
@@ -221,8 +699,102 @@ export declare const listSLAConditionsResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}, {
+    items?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        priorities?: {
+            name?: string;
+            id?: string;
+        }[];
+        slaId?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}>;

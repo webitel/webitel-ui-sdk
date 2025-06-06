@@ -11,22 +11,48 @@ import { z as zod } from 'zod';
 export declare const listSLAsQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    id: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     q: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listSLAsResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         calendar: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -36,41 +62,187 @@ export declare const listSLAsResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         validFrom: zod.ZodOptional<zod.ZodString>;
         validTo: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}, {
+    items?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}>;
 /**
  * @summary Create a new SLA
  */
 export declare const createSLAQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const createSLABody: zod.ZodObject<{
     calendar: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
     validFrom: zod.ZodOptional<zod.ZodString>;
     validTo: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}, {
+    name?: string;
+    description?: string;
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}>;
 export declare const createSLAResponse: zod.ZodObject<{
     calendar: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -80,26 +252,92 @@ export declare const createSLAResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     validFrom: zod.ZodOptional<zod.ZodString>;
     validTo: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}>;
 /**
  * @summary Delete an SLA
  */
 export declare const deleteSLAParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const deleteSLAResponse: zod.ZodObject<{
     calendar: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -109,30 +347,100 @@ export declare const deleteSLAResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     validFrom: zod.ZodOptional<zod.ZodString>;
     validTo: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}>;
 /**
  * @summary Locate an SLA by ID
  */
 export declare const locateSLAParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const locateSLAQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateSLAResponse: zod.ZodObject<{
     sla: zod.ZodOptional<zod.ZodObject<{
         calendar: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -142,42 +450,188 @@ export declare const locateSLAResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         validFrom: zod.ZodOptional<zod.ZodString>;
         validTo: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    sla?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    };
+}, {
+    sla?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        calendar?: {
+            name?: string;
+            id?: string;
+        };
+        reactionTime?: string;
+        resolutionTime?: string;
+        validFrom?: string;
+        validTo?: string;
+    };
+}>;
 /**
  * @summary Update an existing SLA
  */
 export declare const updateSLA2Params: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateSLA2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateSLA2Body: zod.ZodObject<{
     calendar: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
     validFrom: zod.ZodOptional<zod.ZodString>;
     validTo: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}, {
+    name?: string;
+    description?: string;
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}>;
 export declare const updateSLA2Response: zod.ZodObject<{
     calendar: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -187,41 +641,139 @@ export declare const updateSLA2Response: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     validFrom: zod.ZodOptional<zod.ZodString>;
     validTo: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}>;
 /**
  * @summary Update an existing SLA
  */
 export declare const updateSLAParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateSLAQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateSLABody: zod.ZodObject<{
     calendar: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     reactionTime: zod.ZodOptional<zod.ZodString>;
     resolutionTime: zod.ZodOptional<zod.ZodString>;
     validFrom: zod.ZodOptional<zod.ZodString>;
     validTo: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}, {
+    name?: string;
+    description?: string;
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}>;
 export declare const updateSLAResponse: zod.ZodObject<{
     calendar: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
@@ -231,7 +783,57 @@ export declare const updateSLAResponse: zod.ZodObject<{
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     validFrom: zod.ZodOptional<zod.ZodString>;
     validTo: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}, {
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    calendar?: {
+        name?: string;
+        id?: string;
+    };
+    reactionTime?: string;
+    resolutionTime?: string;
+    validFrom?: string;
+    validTo?: string;
+}>;

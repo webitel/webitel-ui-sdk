@@ -10,55 +10,201 @@ import { z as zod } from 'zod';
  */
 export declare const listFilesParams: zod.ZodObject<{
     case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_etag?: string;
+}, {
+    case_etag?: string;
+}>;
 export declare const listFilesQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     q: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listFilesResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         author: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         mime: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         size: zod.ZodOptional<zod.ZodString>;
         url: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        mime?: string;
+        size?: string;
+    }, {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        mime?: string;
+        size?: string;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        mime?: string;
+        size?: string;
+    }[];
+    next?: boolean;
+    page?: string;
+}, {
+    items?: {
+        url?: string;
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        mime?: string;
+        size?: string;
+    }[];
+    next?: boolean;
+    page?: string;
+}>;
 /**
  * @summary Delete a file
  */
 export declare const deleteFileParams: zod.ZodObject<{
     case_etag: zod.ZodString;
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+    case_etag?: string;
+}, {
+    id?: string;
+    case_etag?: string;
+}>;
 export declare const deleteFileResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     mime: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     size: zod.ZodOptional<zod.ZodString>;
     url: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    mime?: string;
+    size?: string;
+}, {
+    url?: string;
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    mime?: string;
+    size?: string;
+}>;

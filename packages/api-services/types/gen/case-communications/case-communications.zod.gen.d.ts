@@ -11,66 +11,218 @@ Currently a feature for future development.
  */
 export declare const listCommunicationsParams: zod.ZodObject<{
     case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_etag?: string;
+}, {
+    case_etag?: string;
+}>;
 export declare const listCommunicationsQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     q: zod.ZodOptional<zod.ZodString>;
     size: zod.ZodOptional<zod.ZodNumber>;
     page: zod.ZodOptional<zod.ZodNumber>;
     sort: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listCommunicationsResponse: zod.ZodObject<{
     data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         communicationId: zod.ZodOptional<zod.ZodString>;
         communicationType: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         etag: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }, {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    next?: boolean;
+    page?: number;
+    data?: {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+}, {
+    next?: boolean;
+    page?: number;
+    data?: {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+}>;
 /**
  * @summary Links a communication to a specific case.
  */
 export declare const linkCommunicationParams: zod.ZodObject<{
     case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_etag?: string;
+}, {
+    case_etag?: string;
+}>;
 export declare const linkCommunicationQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const linkCommunicationBody: zod.ZodObject<{
     communicationId: zod.ZodOptional<zod.ZodString>;
     communicationType: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    communicationId?: string;
+    communicationType?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    communicationId?: string;
+    communicationType?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const linkCommunicationResponse: zod.ZodObject<{
     data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         communicationId: zod.ZodOptional<zod.ZodString>;
         communicationType: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         etag: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }, {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }>, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    data?: {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+}, {
+    data?: {
+        id?: string;
+        etag?: string;
+        ver?: number;
+        communicationId?: string;
+        communicationType?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+}>;
 /**
  * @summary Unlinks a communication from a specific case.
  */
 export declare const unlinkCommunicationParams: zod.ZodObject<{
     case_etag: zod.ZodString;
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+    case_etag?: string;
+}, {
+    id?: string;
+    case_etag?: string;
+}>;
 export declare const unlinkCommunicationQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const unlinkCommunicationResponse: zod.ZodObject<{
     affected: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    affected?: string;
+}, {
+    affected?: string;
+}>;

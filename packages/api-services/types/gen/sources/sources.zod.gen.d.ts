@@ -11,20 +11,28 @@ import { z as zod } from 'zod';
 export declare const listSourcesQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    id: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     q: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>>;
-}, {}, {}>;
+    type: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    type?: ("TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL")[];
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    type?: ("TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL")[];
+    id?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listSourcesResponseItemsItemTypeDefault = "TYPE_UNSPECIFIED";
 export declare const listSourcesResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
@@ -32,113 +40,269 @@ export declare const listSourcesResponse: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
+        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+    next?: boolean;
+    page?: number;
+}, {
+    items?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+    next?: boolean;
+    page?: number;
+}>;
 /**
  * @summary Create a new source
  */
 export declare const createSourceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const createSourceBodyTypeDefault = "TYPE_UNSPECIFIED";
 export declare const createSourceBody: zod.ZodObject<{
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>;
-}, {}, {}>;
+    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+}, "strip", zod.ZodTypeAny, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    description?: string;
+}, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    description?: string;
+}>;
 export declare const createSourceResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const createSourceResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>;
+    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 /**
  * @summary Delete a source
  */
 export declare const deleteSourceParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const deleteSourceResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const deleteSourceResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>;
+    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 /**
  * @summary Locate a source by ID
  */
 export declare const locateSourceParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const locateSourceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateSourceResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const locateSourceResponse: zod.ZodObject<{
     source: zod.ZodOptional<zod.ZodObject<{
@@ -146,119 +310,271 @@ export declare const locateSourceResponse: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
+        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
-}, {}, {}>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    };
+}, {
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+    };
+}>;
 /**
  * @summary Update an existing source
  */
 export declare const updateSource2Params: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateSource2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateSource2BodyTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSource2Body: zod.ZodObject<{
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>;
-}, {}, {}>;
+    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+}, "strip", zod.ZodTypeAny, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    description?: string;
+}, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    description?: string;
+}>;
 export declare const updateSource2ResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSource2Response: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>;
+    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 /**
  * @summary Update an existing source
  */
 export declare const updateSourceParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateSourceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateSourceBodyTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSourceBody: zod.ZodObject<{
     description: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>;
-}, {}, {}>;
+    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+}, "strip", zod.ZodTypeAny, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    description?: string;
+}, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    description?: string;
+}>;
 export declare const updateSourceResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSourceResponse: zod.ZodObject<{
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<{
-        TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-        CALL: "CALL";
-        CHAT: "CHAT";
-        SOCIAL_MEDIA: "SOCIAL_MEDIA";
-        EMAIL: "EMAIL";
-        API: "API";
-        MANUAL: "MANUAL";
-    }>>;
+    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+}>;

@@ -10,227 +10,779 @@ import { z as zod } from 'zod';
  */
 export declare const deleteCommentParams: zod.ZodObject<{
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+}, {
+    etag?: string;
+}>;
 export declare const deleteCommentQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const deleteCommentResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     canEdit: zod.ZodOptional<zod.ZodBoolean>;
     caseId: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     edited: zod.ZodOptional<zod.ZodBoolean>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     text: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}>;
 /**
  * @summary Retrieve a specific comment by its etag
  */
 export declare const locateCommentParams: zod.ZodObject<{
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+}, {
+    etag?: string;
+}>;
 export declare const locateCommentQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateCommentResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     canEdit: zod.ZodOptional<zod.ZodBoolean>;
     caseId: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     edited: zod.ZodOptional<zod.ZodBoolean>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     text: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}>;
 /**
  * @summary Update a specific comment by its etag
  */
 export declare const updateComment2Params: zod.ZodObject<{
     'input.etag': zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    'input.etag'?: string;
+}, {
+    'input.etag'?: string;
+}>;
 export declare const updateComment2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateComment2Body: zod.ZodObject<{
     text: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    text?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateComment2Response: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     canEdit: zod.ZodOptional<zod.ZodBoolean>;
     caseId: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     edited: zod.ZodOptional<zod.ZodBoolean>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     text: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}>;
 /**
  * @summary Update a specific comment by its etag
  */
 export declare const updateCommentParams: zod.ZodObject<{
     'input.etag': zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    'input.etag'?: string;
+}, {
+    'input.etag'?: string;
+}>;
 export declare const updateCommentQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateCommentBody: zod.ZodObject<{
     text: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    text?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateCommentResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     canEdit: zod.ZodOptional<zod.ZodBoolean>;
     caseId: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     edited: zod.ZodOptional<zod.ZodBoolean>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     text: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}>;
 /**
  * @summary Retrieve a list of comments associated with a specific case
  */
 export declare const listCommentsParams: zod.ZodObject<{
     case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_etag?: string;
+}, {
+    case_etag?: string;
+}>;
 export declare const listCommentsQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     q: zod.ZodOptional<zod.ZodString>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listCommentsResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         author: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         canEdit: zod.ZodOptional<zod.ZodBoolean>;
         caseId: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         edited: zod.ZodOptional<zod.ZodBoolean>;
         etag: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
-        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
         text: zod.ZodOptional<zod.ZodString>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        text?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        roleIds?: string[];
+        ver?: number;
+        canEdit?: boolean;
+        caseId?: string;
+        edited?: boolean;
+    }, {
+        text?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        roleIds?: string[];
+        ver?: number;
+        canEdit?: boolean;
+        caseId?: string;
+        edited?: boolean;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        text?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        roleIds?: string[];
+        ver?: number;
+        canEdit?: boolean;
+        caseId?: string;
+        edited?: boolean;
+    }[];
+    next?: boolean;
+    page?: string;
+}, {
+    items?: {
+        text?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        etag?: string;
+        roleIds?: string[];
+        ver?: number;
+        canEdit?: boolean;
+        caseId?: string;
+        edited?: boolean;
+    }[];
+    next?: boolean;
+    page?: string;
+}>;
 /**
  * @summary Publish comment into a specific case
  */
 export declare const publishCommentParams: zod.ZodObject<{
     case_etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_etag?: string;
+}, {
+    case_etag?: string;
+}>;
 export declare const publishCommentQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const publishCommentBody: zod.ZodObject<{
     etag: zod.ZodOptional<zod.ZodString>;
     text: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    etag?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    text?: string;
+    etag?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const publishCommentResponse: zod.ZodObject<{
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     canEdit: zod.ZodOptional<zod.ZodBoolean>;
     caseId: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     edited: zod.ZodOptional<zod.ZodBoolean>;
     etag: zod.ZodOptional<zod.ZodString>;
     id: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     text: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}, {
+    text?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    etag?: string;
+    roleIds?: string[];
+    ver?: number;
+    canEdit?: boolean;
+    caseId?: string;
+    edited?: boolean;
+}>;

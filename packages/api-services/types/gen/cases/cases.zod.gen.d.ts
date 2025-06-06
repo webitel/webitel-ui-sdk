@@ -12,12 +12,30 @@ export declare const searchCasesQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     q: zod.ZodOptional<zod.ZodString>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    filters: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+    filters: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     contactId: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+    contactId?: string;
+    filters?: string[];
+}, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+    contactId?: string;
+    filters?: string[];
+}>;
 export declare const searchCasesResponseItemsItemRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const searchCasesResponseItemsItemSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const searchCasesResponse: zod.ZodObject<{
@@ -25,55 +43,203 @@ export declare const searchCasesResponse: zod.ZodObject<{
         assignee: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         author: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         closeReason: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         closeResult: zod.ZodOptional<zod.ZodString>;
         comments: zod.ZodOptional<zod.ZodObject<{
             items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
                 author: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 canEdit: zod.ZodOptional<zod.ZodBoolean>;
                 caseId: zod.ZodOptional<zod.ZodString>;
                 createdAt: zod.ZodOptional<zod.ZodString>;
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 edited: zod.ZodOptional<zod.ZodBoolean>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
-                roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+                roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
                 text: zod.ZodOptional<zod.ZodString>;
                 updatedAt: zod.ZodOptional<zod.ZodString>;
                 updatedBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }, {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        }, {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        }>>;
         contactInfo: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-        custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+        custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
         dc: zod.ZodOptional<zod.ZodString>;
         description: zod.ZodOptional<zod.ZodString>;
         differenceInReaction: zod.ZodOptional<zod.ZodString>;
@@ -84,42 +250,148 @@ export declare const searchCasesResponse: zod.ZodObject<{
                 author: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 createdAt: zod.ZodOptional<zod.ZodString>;
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 id: zod.ZodOptional<zod.ZodString>;
                 mime: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
                 size: zod.ZodOptional<zod.ZodString>;
                 url: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        }, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        }>>;
         group: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             type: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         impacted: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         links: zod.ZodOptional<zod.ZodObject<{
             items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
                 author: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 createdAt: zod.ZodOptional<zod.ZodString>;
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
@@ -127,13 +399,107 @@ export declare const searchCasesResponse: zod.ZodObject<{
                 updatedBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 url: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        }, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        }>>;
         name: zod.ZodOptional<zod.ZodString>;
         plannedReactionAt: zod.ZodOptional<zod.ZodString>;
         plannedResolveAt: zod.ZodOptional<zod.ZodString>;
@@ -143,7 +509,13 @@ export declare const searchCasesResponse: zod.ZodObject<{
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             description: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
@@ -151,8 +523,44 @@ export declare const searchCasesResponse: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
-        }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        }, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        }>>;
         rating: zod.ZodOptional<zod.ZodString>;
         ratingComment: zod.ZodOptional<zod.ZodString>;
         reactedAt: zod.ZodOptional<zod.ZodString>;
@@ -162,7 +570,13 @@ export declare const searchCasesResponse: zod.ZodObject<{
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
                 primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -172,7 +586,21 @@ export declare const searchCasesResponse: zod.ZodObject<{
                     name: zod.ZodOptional<zod.ZodString>;
                     subject: zod.ZodOptional<zod.ZodString>;
                     ver: zod.ZodOptional<zod.ZodNumber>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                }>>;
                 relatedCase: zod.ZodOptional<zod.ZodObject<{
                     color: zod.ZodOptional<zod.ZodString>;
                     etag: zod.ZodOptional<zod.ZodString>;
@@ -180,70 +608,247 @@ export declare const searchCasesResponse: zod.ZodObject<{
                     name: zod.ZodOptional<zod.ZodString>;
                     subject: zod.ZodOptional<zod.ZodString>;
                     ver: zod.ZodOptional<zod.ZodNumber>;
-                }, {}, {}>>;
-                relationType: zod.ZodDefault<zod.ZodEnum<{
-                    RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                    DUPLICATES: "DUPLICATES";
-                    IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                    BLOCKS: "BLOCKS";
-                    IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                    CAUSES: "CAUSES";
-                    IS_CAUSED_BY: "IS_CAUSED_BY";
-                    IS_CHILD_OF: "IS_CHILD_OF";
-                    IS_PARENT_OF: "IS_PARENT_OF";
-                    RELATES_TO: "RELATES_TO";
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
                 }>>;
+                relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
                 updatedAt: zod.ZodOptional<zod.ZodString>;
                 updatedBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }, {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        }, {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        }>>;
         reporter: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         resolvedAt: zod.ZodOptional<zod.ZodString>;
-        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
         service: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         sla: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         slaCondition: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         source: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodDefault<zod.ZodEnum<{
-                TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-                CALL: "CALL";
-                CHAT: "CHAT";
-                SOCIAL_MEDIA: "SOCIAL_MEDIA";
-                EMAIL: "EMAIL";
-                API: "API";
-                MANUAL: "MANUAL";
-            }>>;
-        }, {}, {}>>;
+            type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+        }, "strip", zod.ZodTypeAny, {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        }, {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        }>>;
         status: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         statusCondition: zod.ZodOptional<zod.ZodObject<{
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             description: zod.ZodOptional<zod.ZodString>;
             final: zod.ZodOptional<zod.ZodBoolean>;
             id: zod.ZodOptional<zod.ZodString>;
@@ -254,51 +859,1031 @@ export declare const searchCasesResponse: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
-        }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        }, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        }>>;
         subject: zod.ZodOptional<zod.ZodString>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }, {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }[];
+    next?: boolean;
+    page?: string;
+}, {
+    items?: {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }[];
+    next?: boolean;
+    page?: string;
+}>;
 /**
  * @summary RPC method for creating a new case.
  */
 export declare const createCaseQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const createCaseBodyRelatedItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const createCaseBody: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     description: zod.ZodOptional<zod.ZodString>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     links: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         etag: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -306,111 +1891,460 @@ export declare const createCaseBody: zod.ZodObject<{
         userId: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        url?: string;
+        name?: string;
+        etag?: string;
+        userId?: {
+            name?: string;
+            id?: string;
+        };
+    }, {
+        url?: string;
+        name?: string;
+        etag?: string;
+        userId?: {
+            name?: string;
+            id?: string;
+        };
+    }>, "many">>;
     priority: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     related: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         etag: zod.ZodOptional<zod.ZodString>;
         relatedTo: zod.ZodOptional<zod.ZodString>;
-        relationType: zod.ZodDefault<zod.ZodEnum<{
-            RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-            DUPLICATES: "DUPLICATES";
-            IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-            BLOCKS: "BLOCKS";
-            IS_BLOCKED_BY: "IS_BLOCKED_BY";
-            CAUSES: "CAUSES";
-            IS_CAUSED_BY: "IS_CAUSED_BY";
-            IS_CHILD_OF: "IS_CHILD_OF";
-            IS_PARENT_OF: "IS_PARENT_OF";
-            RELATES_TO: "RELATES_TO";
-        }>>;
-    }, {}, {}>>>;
+        relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
+    }, "strip", zod.ZodTypeAny, {
+        etag?: string;
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        relatedTo?: string;
+    }, {
+        etag?: string;
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        relatedTo?: string;
+    }>, "many">>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    priority?: {
+        name?: string;
+        id?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    contactInfo?: string;
+    custom?: {};
+    group?: {
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        url?: string;
+        name?: string;
+        etag?: string;
+        userId?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+    rating?: string;
+    ratingComment?: string;
+    related?: {
+        etag?: string;
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        relatedTo?: string;
+    }[];
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        id?: string;
+    };
+    subject?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    priority?: {
+        name?: string;
+        id?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    contactInfo?: string;
+    custom?: {};
+    group?: {
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        url?: string;
+        name?: string;
+        etag?: string;
+        userId?: {
+            name?: string;
+            id?: string;
+        };
+    }[];
+    rating?: string;
+    ratingComment?: string;
+    related?: {
+        etag?: string;
+        relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        relatedTo?: string;
+    }[];
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        id?: string;
+    };
+    subject?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const createCaseResponseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const createCaseResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const createCaseResponse: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     comments: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             canEdit: zod.ZodOptional<zod.ZodBoolean>;
             caseId: zod.ZodOptional<zod.ZodString>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             edited: zod.ZodOptional<zod.ZodBoolean>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
-            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
             text: zod.ZodOptional<zod.ZodString>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
@@ -421,42 +2355,148 @@ export declare const createCaseResponse: zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             id: zod.ZodOptional<zod.ZodString>;
             mime: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             size: zod.ZodOptional<zod.ZodString>;
             url: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     links: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
@@ -464,13 +2504,107 @@ export declare const createCaseResponse: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             url: zod.ZodOptional<zod.ZodString>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     plannedReactionAt: zod.ZodOptional<zod.ZodString>;
     plannedResolveAt: zod.ZodOptional<zod.ZodString>;
@@ -480,7 +2614,13 @@ export declare const createCaseResponse: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -488,8 +2628,44 @@ export declare const createCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     reactedAt: zod.ZodOptional<zod.ZodString>;
@@ -499,7 +2675,13 @@ export declare const createCaseResponse: zod.ZodObject<{
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -509,7 +2691,21 @@ export declare const createCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }>>;
             relatedCase: zod.ZodOptional<zod.ZodObject<{
                 color: zod.ZodOptional<zod.ZodString>;
                 etag: zod.ZodOptional<zod.ZodString>;
@@ -517,70 +2713,247 @@ export declare const createCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
-            relationType: zod.ZodDefault<zod.ZodEnum<{
-                RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                DUPLICATES: "DUPLICATES";
-                IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                BLOCKS: "BLOCKS";
-                IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                CAUSES: "CAUSES";
-                IS_CAUSED_BY: "IS_CAUSED_BY";
-                IS_CHILD_OF: "IS_CHILD_OF";
-                IS_PARENT_OF: "IS_PARENT_OF";
-                RELATES_TO: "RELATES_TO";
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
             }>>;
+            relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }>>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     resolvedAt: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     slaCondition: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
-    }, {}, {}>>;
+        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         final: zod.ZodOptional<zod.ZodBoolean>;
         id: zod.ZodOptional<zod.ZodString>;
@@ -591,80 +2964,728 @@ export declare const createCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}>;
 /**
  * @summary RPC method for deleting an existing case by its etag.
  */
 export declare const deleteCaseParams: zod.ZodObject<{
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+}, {
+    etag?: string;
+}>;
 export declare const deleteCaseQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const deleteCaseResponseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const deleteCaseResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const deleteCaseResponse: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     comments: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             canEdit: zod.ZodOptional<zod.ZodBoolean>;
             caseId: zod.ZodOptional<zod.ZodString>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             edited: zod.ZodOptional<zod.ZodBoolean>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
-            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
             text: zod.ZodOptional<zod.ZodString>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
@@ -675,42 +3696,148 @@ export declare const deleteCaseResponse: zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             id: zod.ZodOptional<zod.ZodString>;
             mime: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             size: zod.ZodOptional<zod.ZodString>;
             url: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     links: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
@@ -718,13 +3845,107 @@ export declare const deleteCaseResponse: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             url: zod.ZodOptional<zod.ZodString>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     plannedReactionAt: zod.ZodOptional<zod.ZodString>;
     plannedResolveAt: zod.ZodOptional<zod.ZodString>;
@@ -734,7 +3955,13 @@ export declare const deleteCaseResponse: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -742,8 +3969,44 @@ export declare const deleteCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     reactedAt: zod.ZodOptional<zod.ZodString>;
@@ -753,7 +4016,13 @@ export declare const deleteCaseResponse: zod.ZodObject<{
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -763,7 +4032,21 @@ export declare const deleteCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }>>;
             relatedCase: zod.ZodOptional<zod.ZodObject<{
                 color: zod.ZodOptional<zod.ZodString>;
                 etag: zod.ZodOptional<zod.ZodString>;
@@ -771,70 +4054,247 @@ export declare const deleteCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
-            relationType: zod.ZodDefault<zod.ZodEnum<{
-                RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                DUPLICATES: "DUPLICATES";
-                IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                BLOCKS: "BLOCKS";
-                IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                CAUSES: "CAUSES";
-                IS_CAUSED_BY: "IS_CAUSED_BY";
-                IS_CHILD_OF: "IS_CHILD_OF";
-                IS_PARENT_OF: "IS_PARENT_OF";
-                RELATES_TO: "RELATES_TO";
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
             }>>;
+            relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }>>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     resolvedAt: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     slaCondition: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
-    }, {}, {}>>;
+        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         final: zod.ZodOptional<zod.ZodBoolean>;
         id: zod.ZodOptional<zod.ZodString>;
@@ -845,80 +4305,728 @@ export declare const deleteCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}>;
 /**
  * @summary RPC method to retrieve a specific case by its etag identifier.
  */
 export declare const locateCaseParams: zod.ZodObject<{
     etag: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    etag?: string;
+}, {
+    etag?: string;
+}>;
 export declare const locateCaseQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateCaseResponseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const locateCaseResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const locateCaseResponse: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     comments: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             canEdit: zod.ZodOptional<zod.ZodBoolean>;
             caseId: zod.ZodOptional<zod.ZodString>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             edited: zod.ZodOptional<zod.ZodBoolean>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
-            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
             text: zod.ZodOptional<zod.ZodString>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
@@ -929,42 +5037,148 @@ export declare const locateCaseResponse: zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             id: zod.ZodOptional<zod.ZodString>;
             mime: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             size: zod.ZodOptional<zod.ZodString>;
             url: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     links: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
@@ -972,13 +5186,107 @@ export declare const locateCaseResponse: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             url: zod.ZodOptional<zod.ZodString>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     plannedReactionAt: zod.ZodOptional<zod.ZodString>;
     plannedResolveAt: zod.ZodOptional<zod.ZodString>;
@@ -988,7 +5296,13 @@ export declare const locateCaseResponse: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -996,8 +5310,44 @@ export declare const locateCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     reactedAt: zod.ZodOptional<zod.ZodString>;
@@ -1007,7 +5357,13 @@ export declare const locateCaseResponse: zod.ZodObject<{
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -1017,7 +5373,21 @@ export declare const locateCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }>>;
             relatedCase: zod.ZodOptional<zod.ZodObject<{
                 color: zod.ZodOptional<zod.ZodString>;
                 etag: zod.ZodOptional<zod.ZodString>;
@@ -1025,70 +5395,247 @@ export declare const locateCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
-            relationType: zod.ZodDefault<zod.ZodEnum<{
-                RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                DUPLICATES: "DUPLICATES";
-                IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                BLOCKS: "BLOCKS";
-                IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                CAUSES: "CAUSES";
-                IS_CAUSED_BY: "IS_CAUSED_BY";
-                IS_CHILD_OF: "IS_CHILD_OF";
-                IS_PARENT_OF: "IS_PARENT_OF";
-                RELATES_TO: "RELATES_TO";
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
             }>>;
+            relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }>>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     resolvedAt: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     slaCondition: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
-    }, {}, {}>>;
+        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         final: zod.ZodOptional<zod.ZodBoolean>;
         id: zod.ZodOptional<zod.ZodString>;
@@ -1099,75 +5646,637 @@ export declare const locateCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}>;
 /**
  * @summary RPC method for updating an existing case.
  */
 export declare const updateCase2Params: zod.ZodObject<{
     'input.etag': zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    'input.etag'?: string;
+}, {
+    'input.etag'?: string;
+}>;
 export declare const updateCase2QueryParams: zod.ZodObject<{
-    xJsonMask: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    xJsonMask: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+    xJsonMask?: string[];
+}, {
+    fields?: string[];
+    xJsonMask?: string[];
+}>;
 export declare const updateCase2Body: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     description: zod.ZodOptional<zod.ZodString>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     priority: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         final: zod.ZodOptional<zod.ZodBoolean>;
         id: zod.ZodOptional<zod.ZodString>;
@@ -1178,69 +6287,395 @@ export declare const updateCase2Body: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    priority?: {
+        name?: string;
+        id?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    contactInfo?: string;
+    custom?: {};
+    group?: {
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    rating?: string;
+    ratingComment?: string;
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    priority?: {
+        name?: string;
+        id?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    contactInfo?: string;
+    custom?: {};
+    group?: {
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    rating?: string;
+    ratingComment?: string;
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateCase2ResponseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const updateCase2ResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateCase2Response: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     comments: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             canEdit: zod.ZodOptional<zod.ZodBoolean>;
             caseId: zod.ZodOptional<zod.ZodString>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             edited: zod.ZodOptional<zod.ZodBoolean>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
-            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
             text: zod.ZodOptional<zod.ZodString>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
@@ -1251,42 +6686,148 @@ export declare const updateCase2Response: zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             id: zod.ZodOptional<zod.ZodString>;
             mime: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             size: zod.ZodOptional<zod.ZodString>;
             url: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     links: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
@@ -1294,13 +6835,107 @@ export declare const updateCase2Response: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             url: zod.ZodOptional<zod.ZodString>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     plannedReactionAt: zod.ZodOptional<zod.ZodString>;
     plannedResolveAt: zod.ZodOptional<zod.ZodString>;
@@ -1310,7 +6945,13 @@ export declare const updateCase2Response: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -1318,8 +6959,44 @@ export declare const updateCase2Response: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     reactedAt: zod.ZodOptional<zod.ZodString>;
@@ -1329,7 +7006,13 @@ export declare const updateCase2Response: zod.ZodObject<{
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -1339,7 +7022,21 @@ export declare const updateCase2Response: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }>>;
             relatedCase: zod.ZodOptional<zod.ZodObject<{
                 color: zod.ZodOptional<zod.ZodString>;
                 etag: zod.ZodOptional<zod.ZodString>;
@@ -1347,70 +7044,247 @@ export declare const updateCase2Response: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
-            relationType: zod.ZodDefault<zod.ZodEnum<{
-                RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                DUPLICATES: "DUPLICATES";
-                IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                BLOCKS: "BLOCKS";
-                IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                CAUSES: "CAUSES";
-                IS_CAUSED_BY: "IS_CAUSED_BY";
-                IS_CHILD_OF: "IS_CHILD_OF";
-                IS_PARENT_OF: "IS_PARENT_OF";
-                RELATES_TO: "RELATES_TO";
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
             }>>;
+            relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }>>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     resolvedAt: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     slaCondition: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
-    }, {}, {}>>;
+        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         final: zod.ZodOptional<zod.ZodBoolean>;
         id: zod.ZodOptional<zod.ZodString>;
@@ -1421,75 +7295,637 @@ export declare const updateCase2Response: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}>;
 /**
  * @summary RPC method for updating an existing case.
  */
 export declare const updateCaseParams: zod.ZodObject<{
     'input.etag': zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    'input.etag'?: string;
+}, {
+    'input.etag'?: string;
+}>;
 export declare const updateCaseQueryParams: zod.ZodObject<{
-    xJsonMask: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    xJsonMask: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+    xJsonMask?: string[];
+}, {
+    fields?: string[];
+    xJsonMask?: string[];
+}>;
 export declare const updateCaseBody: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     description: zod.ZodOptional<zod.ZodString>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     priority: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         final: zod.ZodOptional<zod.ZodBoolean>;
         id: zod.ZodOptional<zod.ZodString>;
@@ -1500,69 +7936,395 @@ export declare const updateCaseBody: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     userId: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    priority?: {
+        name?: string;
+        id?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    contactInfo?: string;
+    custom?: {};
+    group?: {
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    rating?: string;
+    ratingComment?: string;
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    priority?: {
+        name?: string;
+        id?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    contactInfo?: string;
+    custom?: {};
+    group?: {
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    rating?: string;
+    ratingComment?: string;
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    userId?: {
+        name?: string;
+        id?: string;
+    };
+}>;
 export declare const updateCaseResponseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const updateCaseResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateCaseResponse: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     author: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReason: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     closeResult: zod.ZodOptional<zod.ZodString>;
     comments: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             canEdit: zod.ZodOptional<zod.ZodBoolean>;
             caseId: zod.ZodOptional<zod.ZodString>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             edited: zod.ZodOptional<zod.ZodBoolean>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
-            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
             text: zod.ZodOptional<zod.ZodString>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }, {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     contactInfo: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+    custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
     dc: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
     differenceInReaction: zod.ZodOptional<zod.ZodString>;
@@ -1573,42 +8335,148 @@ export declare const updateCaseResponse: zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             id: zod.ZodOptional<zod.ZodString>;
             mime: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             size: zod.ZodOptional<zod.ZodString>;
             url: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     impacted: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     links: zod.ZodOptional<zod.ZodObject<{
         items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
             author: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
@@ -1616,13 +8484,107 @@ export declare const updateCaseResponse: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             url: zod.ZodOptional<zod.ZodString>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }, {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }, {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     plannedReactionAt: zod.ZodOptional<zod.ZodString>;
     plannedResolveAt: zod.ZodOptional<zod.ZodString>;
@@ -1632,7 +8594,13 @@ export declare const updateCaseResponse: zod.ZodObject<{
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
@@ -1640,8 +8608,44 @@ export declare const updateCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    }>>;
     rating: zod.ZodOptional<zod.ZodString>;
     ratingComment: zod.ZodOptional<zod.ZodString>;
     reactedAt: zod.ZodOptional<zod.ZodString>;
@@ -1651,7 +8655,13 @@ export declare const updateCaseResponse: zod.ZodObject<{
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             etag: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -1661,7 +8671,21 @@ export declare const updateCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }>>;
             relatedCase: zod.ZodOptional<zod.ZodObject<{
                 color: zod.ZodOptional<zod.ZodString>;
                 etag: zod.ZodOptional<zod.ZodString>;
@@ -1669,70 +8693,247 @@ export declare const updateCaseResponse: zod.ZodObject<{
                 name: zod.ZodOptional<zod.ZodString>;
                 subject: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>;
-            relationType: zod.ZodDefault<zod.ZodEnum<{
-                RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                DUPLICATES: "DUPLICATES";
-                IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                BLOCKS: "BLOCKS";
-                IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                CAUSES: "CAUSES";
-                IS_CAUSED_BY: "IS_CAUSED_BY";
-                IS_CHILD_OF: "IS_CHILD_OF";
-                IS_PARENT_OF: "IS_PARENT_OF";
-                RELATES_TO: "RELATES_TO";
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            }, {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
             }>>;
+            relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             ver: zod.ZodOptional<zod.ZodNumber>;
-        }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }, {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }>, "many">>;
         next: zod.ZodOptional<zod.ZodBoolean>;
         page: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }, {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    }>>;
     reporter: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     resolvedAt: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     service: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     slaCondition: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     source: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
-    }, {}, {}>>;
+        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }, {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    }>>;
     status: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     statusCondition: zod.ZodOptional<zod.ZodObject<{
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         final: zod.ZodOptional<zod.ZodBoolean>;
         id: zod.ZodOptional<zod.ZodString>;
@@ -1743,31 +8944,543 @@ export declare const updateCaseResponse: zod.ZodObject<{
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }, {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    }>>;
     subject: zod.ZodOptional<zod.ZodString>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     ver: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}, {
+    service?: {
+        name?: string;
+        id?: string;
+    };
+    status?: {
+        name?: string;
+        id?: string;
+    };
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    priority?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        color?: string;
+    };
+    files?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            mime?: string;
+            size?: string;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    author?: {
+        name?: string;
+        id?: string;
+    };
+    closeReason?: {
+        name?: string;
+        id?: string;
+    };
+    closeReasonGroup?: {
+        name?: string;
+        id?: string;
+    };
+    closeResult?: string;
+    comments?: {
+        items?: {
+            text?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            roleIds?: string[];
+            ver?: number;
+            canEdit?: boolean;
+            caseId?: string;
+            edited?: boolean;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    contactInfo?: string;
+    custom?: {};
+    dc?: string;
+    differenceInReaction?: string;
+    differenceInResolve?: string;
+    etag?: string;
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    impacted?: {
+        name?: string;
+        id?: string;
+    };
+    links?: {
+        items?: {
+            url?: string;
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            author?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+        }[];
+        next?: boolean;
+        page?: string;
+    };
+    plannedReactionAt?: string;
+    plannedResolveAt?: string;
+    rating?: string;
+    ratingComment?: string;
+    reactedAt?: string;
+    related?: {
+        next?: boolean;
+        page?: string;
+        data?: {
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            etag?: string;
+            ver?: number;
+            primaryCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relatedCase?: {
+                name?: string;
+                id?: string;
+                etag?: string;
+                subject?: string;
+                ver?: number;
+                color?: string;
+            };
+            relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+        }[];
+    };
+    reporter?: {
+        name?: string;
+        id?: string;
+    };
+    resolvedAt?: string;
+    roleIds?: string[];
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    slaCondition?: {
+        name?: string;
+        id?: string;
+    };
+    source?: {
+        type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+        name?: string;
+        id?: string;
+    };
+    statusCondition?: {
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        final?: boolean;
+        initial?: boolean;
+        statusId?: string;
+    };
+    subject?: string;
+    ver?: number;
+}>;
 /**
  * @summary RPC method for searching cases.
  */
 export declare const searchCases2Params: zod.ZodObject<{
     contact_id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    contact_id?: string;
+}, {
+    contact_id?: string;
+}>;
 export declare const searchCases2QueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     q: zod.ZodOptional<zod.ZodString>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    filters: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+    filters: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+    filters?: string[];
+}, {
+    page?: number;
+    sort?: string;
+    ids?: string[];
+    size?: number;
+    fields?: string[];
+    q?: string;
+    filters?: string[];
+}>;
 export declare const searchCases2ResponseItemsItemRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
 export declare const searchCases2ResponseItemsItemSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const searchCases2Response: zod.ZodObject<{
@@ -1775,55 +9488,203 @@ export declare const searchCases2Response: zod.ZodObject<{
         assignee: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         author: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         closeReason: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         closeResult: zod.ZodOptional<zod.ZodString>;
         comments: zod.ZodOptional<zod.ZodObject<{
             items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
                 author: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 canEdit: zod.ZodOptional<zod.ZodBoolean>;
                 caseId: zod.ZodOptional<zod.ZodString>;
                 createdAt: zod.ZodOptional<zod.ZodString>;
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 edited: zod.ZodOptional<zod.ZodBoolean>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
-                roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+                roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
                 text: zod.ZodOptional<zod.ZodString>;
                 updatedAt: zod.ZodOptional<zod.ZodString>;
                 updatedBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }, {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        }, {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        }>>;
         contactInfo: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-        custom: zod.ZodOptional<zod.ZodObject<{}, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+        custom: zod.ZodOptional<zod.ZodObject<{}, "strip", zod.ZodTypeAny, {}, {}>>;
         dc: zod.ZodOptional<zod.ZodString>;
         description: zod.ZodOptional<zod.ZodString>;
         differenceInReaction: zod.ZodOptional<zod.ZodString>;
@@ -1834,42 +9695,148 @@ export declare const searchCases2Response: zod.ZodObject<{
                 author: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 createdAt: zod.ZodOptional<zod.ZodString>;
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 id: zod.ZodOptional<zod.ZodString>;
                 mime: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
                 size: zod.ZodOptional<zod.ZodString>;
                 url: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        }, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        }>>;
         group: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             type: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         impacted: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         links: zod.ZodOptional<zod.ZodObject<{
             items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
                 author: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 createdAt: zod.ZodOptional<zod.ZodString>;
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
@@ -1877,13 +9844,107 @@ export declare const searchCases2Response: zod.ZodObject<{
                 updatedBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 url: zod.ZodOptional<zod.ZodString>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }, {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        }, {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        }>>;
         name: zod.ZodOptional<zod.ZodString>;
         plannedReactionAt: zod.ZodOptional<zod.ZodString>;
         plannedResolveAt: zod.ZodOptional<zod.ZodString>;
@@ -1893,7 +9954,13 @@ export declare const searchCases2Response: zod.ZodObject<{
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             description: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
@@ -1901,8 +9968,44 @@ export declare const searchCases2Response: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
-        }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        }, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        }>>;
         rating: zod.ZodOptional<zod.ZodString>;
         ratingComment: zod.ZodOptional<zod.ZodString>;
         reactedAt: zod.ZodOptional<zod.ZodString>;
@@ -1912,7 +10015,13 @@ export declare const searchCases2Response: zod.ZodObject<{
                 createdBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
                 primaryCase: zod.ZodOptional<zod.ZodObject<{
@@ -1922,7 +10031,21 @@ export declare const searchCases2Response: zod.ZodObject<{
                     name: zod.ZodOptional<zod.ZodString>;
                     subject: zod.ZodOptional<zod.ZodString>;
                     ver: zod.ZodOptional<zod.ZodNumber>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                }>>;
                 relatedCase: zod.ZodOptional<zod.ZodObject<{
                     color: zod.ZodOptional<zod.ZodString>;
                     etag: zod.ZodOptional<zod.ZodString>;
@@ -1930,70 +10053,247 @@ export declare const searchCases2Response: zod.ZodObject<{
                     name: zod.ZodOptional<zod.ZodString>;
                     subject: zod.ZodOptional<zod.ZodString>;
                     ver: zod.ZodOptional<zod.ZodNumber>;
-                }, {}, {}>>;
-                relationType: zod.ZodDefault<zod.ZodEnum<{
-                    RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                    DUPLICATES: "DUPLICATES";
-                    IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                    BLOCKS: "BLOCKS";
-                    IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                    CAUSES: "CAUSES";
-                    IS_CAUSED_BY: "IS_CAUSED_BY";
-                    IS_CHILD_OF: "IS_CHILD_OF";
-                    IS_PARENT_OF: "IS_PARENT_OF";
-                    RELATES_TO: "RELATES_TO";
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
                 }>>;
+                relationType: zod.ZodDefault<zod.ZodEnum<["RELATION_TYPE_UNSPECIFIED", "DUPLICATES", "IS_DUPLICATED_BY", "BLOCKS", "IS_BLOCKED_BY", "CAUSES", "IS_CAUSED_BY", "IS_CHILD_OF", "IS_PARENT_OF", "RELATES_TO"]>>;
                 updatedAt: zod.ZodOptional<zod.ZodString>;
                 updatedBy: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, {}, {}>>>;
+            }, "strip", zod.ZodTypeAny, {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }, {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }>, "many">>;
             next: zod.ZodOptional<zod.ZodBoolean>;
             page: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        }, {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        }>>;
         reporter: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         resolvedAt: zod.ZodOptional<zod.ZodString>;
-        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
         service: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         sla: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         slaCondition: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         source: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-            type: zod.ZodDefault<zod.ZodEnum<{
-                TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-                CALL: "CALL";
-                CHAT: "CHAT";
-                SOCIAL_MEDIA: "SOCIAL_MEDIA";
-                EMAIL: "EMAIL";
-                API: "API";
-                MANUAL: "MANUAL";
-            }>>;
-        }, {}, {}>>;
+            type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+        }, "strip", zod.ZodTypeAny, {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        }, {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        }>>;
         status: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         statusCondition: zod.ZodOptional<zod.ZodObject<{
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
             description: zod.ZodOptional<zod.ZodString>;
             final: zod.ZodOptional<zod.ZodBoolean>;
             id: zod.ZodOptional<zod.ZodString>;
@@ -2004,16 +10304,962 @@ export declare const searchCases2Response: zod.ZodObject<{
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-            }, {}, {}>>;
-        }, {}, {}>>;
+            }, "strip", zod.ZodTypeAny, {
+                name?: string;
+                id?: string;
+            }, {
+                name?: string;
+                id?: string;
+            }>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        }, {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        }>>;
         subject: zod.ZodOptional<zod.ZodString>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         ver: zod.ZodOptional<zod.ZodNumber>;
-    }, {}, {}>>>;
+    }, "strip", zod.ZodTypeAny, {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }, {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }[];
+    next?: boolean;
+    page?: string;
+}, {
+    items?: {
+        service?: {
+            name?: string;
+            id?: string;
+        };
+        status?: {
+            name?: string;
+            id?: string;
+        };
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        priority?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            color?: string;
+        };
+        files?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                mime?: string;
+                size?: string;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        author?: {
+            name?: string;
+            id?: string;
+        };
+        closeReason?: {
+            name?: string;
+            id?: string;
+        };
+        closeReasonGroup?: {
+            name?: string;
+            id?: string;
+        };
+        closeResult?: string;
+        comments?: {
+            items?: {
+                text?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                roleIds?: string[];
+                ver?: number;
+                canEdit?: boolean;
+                caseId?: string;
+                edited?: boolean;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        contactInfo?: string;
+        custom?: {};
+        dc?: string;
+        differenceInReaction?: string;
+        differenceInResolve?: string;
+        etag?: string;
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        impacted?: {
+            name?: string;
+            id?: string;
+        };
+        links?: {
+            items?: {
+                url?: string;
+                name?: string;
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                author?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+            }[];
+            next?: boolean;
+            page?: string;
+        };
+        plannedReactionAt?: string;
+        plannedResolveAt?: string;
+        rating?: string;
+        ratingComment?: string;
+        reactedAt?: string;
+        related?: {
+            next?: boolean;
+            page?: string;
+            data?: {
+                createdAt?: string;
+                createdBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                id?: string;
+                updatedAt?: string;
+                updatedBy?: {
+                    name?: string;
+                    id?: string;
+                };
+                etag?: string;
+                ver?: number;
+                primaryCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relatedCase?: {
+                    name?: string;
+                    id?: string;
+                    etag?: string;
+                    subject?: string;
+                    ver?: number;
+                    color?: string;
+                };
+                relationType?: "RELATION_TYPE_UNSPECIFIED" | "DUPLICATES" | "IS_DUPLICATED_BY" | "BLOCKS" | "IS_BLOCKED_BY" | "CAUSES" | "IS_CAUSED_BY" | "IS_CHILD_OF" | "IS_PARENT_OF" | "RELATES_TO";
+            }[];
+        };
+        reporter?: {
+            name?: string;
+            id?: string;
+        };
+        resolvedAt?: string;
+        roleIds?: string[];
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        slaCondition?: {
+            name?: string;
+            id?: string;
+        };
+        source?: {
+            type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
+            name?: string;
+            id?: string;
+        };
+        statusCondition?: {
+            name?: string;
+            createdAt?: string;
+            createdBy?: {
+                name?: string;
+                id?: string;
+            };
+            description?: string;
+            id?: string;
+            updatedAt?: string;
+            updatedBy?: {
+                name?: string;
+                id?: string;
+            };
+            final?: boolean;
+            initial?: boolean;
+            statusId?: string;
+        };
+        subject?: string;
+        ver?: number;
+    }[];
+    next?: boolean;
+    page?: string;
+}>;

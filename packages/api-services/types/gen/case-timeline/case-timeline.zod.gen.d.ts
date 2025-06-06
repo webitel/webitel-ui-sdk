@@ -7,22 +7,42 @@
 import { z as zod } from 'zod';
 export declare const getTimelineParams: zod.ZodObject<{
     case_id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_id?: string;
+}, {
+    case_id?: string;
+}>;
 export declare const getTimelineQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     q: zod.ZodOptional<zod.ZodString>;
     sort: zod.ZodOptional<zod.ZodString>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+    ids: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     dateFrom: zod.ZodOptional<zod.ZodString>;
     dateTo: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<{
-        chat: "chat";
-        call: "call";
-        email: "email";
-    }>>>;
-}, {}, {}>;
+    type: zod.ZodOptional<zod.ZodArray<zod.ZodEnum<["chat", "call", "email"]>, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    type?: ("chat" | "call" | "email")[];
+    ids?: string[];
+    size?: number;
+    dateFrom?: string;
+    dateTo?: string;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    type?: ("chat" | "call" | "email")[];
+    ids?: string[];
+    size?: number;
+    dateFrom?: string;
+    dateTo?: string;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const getTimelineResponseDaysItemItemsItemTypeDefault = "chat";
 export declare const getTimelineResponse: zod.ZodObject<{
     days: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
@@ -41,15 +61,41 @@ export declare const getTimelineResponse: zod.ZodObject<{
                     size: zod.ZodOptional<zod.ZodString>;
                     startAt: zod.ZodOptional<zod.ZodString>;
                     stopAt: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }>, "many">>;
                 flowScheme: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 gateway: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 id: zod.ZodOptional<zod.ZodString>;
                 isDetailed: zod.ZodOptional<zod.ZodBoolean>;
                 isInbound: zod.ZodOptional<zod.ZodBoolean>;
@@ -57,33 +103,159 @@ export declare const getTimelineResponse: zod.ZodObject<{
                 participants: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>, "many">>;
                 queue: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 totalDuration: zod.ZodOptional<zod.ZodString>;
                 transcripts: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
                     file: zod.ZodOptional<zod.ZodObject<{
                         id: zod.ZodOptional<zod.ZodString>;
                         name: zod.ZodOptional<zod.ZodString>;
-                    }, {}, {}>>;
+                    }, "strip", zod.ZodTypeAny, {
+                        name?: string;
+                        id?: string;
+                    }, {
+                        name?: string;
+                        id?: string;
+                    }>>;
                     id: zod.ZodOptional<zod.ZodString>;
                     locale: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>>;
-            }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }, {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }>, "many">>;
+            }, "strip", zod.ZodTypeAny, {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            }, {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            }>>;
             chat: zod.ZodOptional<zod.ZodObject<{
                 closedAt: zod.ZodOptional<zod.ZodString>;
                 duration: zod.ZodOptional<zod.ZodString>;
                 flowScheme: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 gateway: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
                     type: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                }, {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                }>>;
                 id: zod.ZodOptional<zod.ZodString>;
                 isDetailed: zod.ZodOptional<zod.ZodBoolean>;
                 isInbound: zod.ZodOptional<zod.ZodBoolean>;
@@ -91,12 +263,72 @@ export declare const getTimelineResponse: zod.ZodObject<{
                 participants: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>, "many">>;
                 queue: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
-            }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
+            }, "strip", zod.ZodTypeAny, {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            }, {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            }>>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             email: zod.ZodOptional<zod.ZodObject<{
                 attachments: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
@@ -105,10 +337,22 @@ export declare const getTimelineResponse: zod.ZodObject<{
                     name: zod.ZodOptional<zod.ZodString>;
                     size: zod.ZodOptional<zod.ZodString>;
                     url: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>>;
+                }, "strip", zod.ZodTypeAny, {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }, {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }>, "many">>;
                 body: zod.ZodOptional<zod.ZodString>;
-                cc: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-                from: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+                cc: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+                from: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
                 html: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
                 isDetailed: zod.ZodOptional<zod.ZodBoolean>;
@@ -116,32 +360,716 @@ export declare const getTimelineResponse: zod.ZodObject<{
                 owner: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
                 profile: zod.ZodOptional<zod.ZodObject<{
                     id: zod.ZodOptional<zod.ZodString>;
                     name: zod.ZodOptional<zod.ZodString>;
-                }, {}, {}>>;
-                sender: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+                }, "strip", zod.ZodTypeAny, {
+                    name?: string;
+                    id?: string;
+                }, {
+                    name?: string;
+                    id?: string;
+                }>>;
+                sender: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
                 subject: zod.ZodOptional<zod.ZodString>;
-                to: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-            }, {}, {}>>;
-            type: zod.ZodDefault<zod.ZodEnum<{
-                chat: "chat";
-                call: "call";
-                email: "email";
+                to: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+            }, "strip", zod.ZodTypeAny, {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
+            }, {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
             }>>;
-        }, {}, {}>>>;
-    }, {}, {}>>>;
+            type: zod.ZodDefault<zod.ZodEnum<["chat", "call", "email"]>>;
+        }, "strip", zod.ZodTypeAny, {
+            chat?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            };
+            call?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            };
+            email?: {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
+            };
+            type?: "chat" | "call" | "email";
+            createdAt?: string;
+        }, {
+            chat?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            };
+            call?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            };
+            email?: {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
+            };
+            type?: "chat" | "call" | "email";
+            createdAt?: string;
+        }>, "many">>;
+    }, "strip", zod.ZodTypeAny, {
+        items?: {
+            chat?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            };
+            call?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            };
+            email?: {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
+            };
+            type?: "chat" | "call" | "email";
+            createdAt?: string;
+        }[];
+        callsCount?: string;
+        chatsCount?: string;
+        emailsCount?: string;
+        dayTimestamp?: string;
+    }, {
+        items?: {
+            chat?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            };
+            call?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            };
+            email?: {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
+            };
+            type?: "chat" | "call" | "email";
+            createdAt?: string;
+        }[];
+        callsCount?: string;
+        chatsCount?: string;
+        emailsCount?: string;
+        dayTimestamp?: string;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    next?: boolean;
+    page?: number;
+    days?: {
+        items?: {
+            chat?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            };
+            call?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            };
+            email?: {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
+            };
+            type?: "chat" | "call" | "email";
+            createdAt?: string;
+        }[];
+        callsCount?: string;
+        chatsCount?: string;
+        emailsCount?: string;
+        dayTimestamp?: string;
+    }[];
+}, {
+    next?: boolean;
+    page?: number;
+    days?: {
+        items?: {
+            chat?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    type?: string;
+                    name?: string;
+                    id?: string;
+                };
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+            };
+            call?: {
+                duration?: string;
+                id?: string;
+                queue?: {
+                    name?: string;
+                    id?: string;
+                };
+                gateway?: {
+                    name?: string;
+                    id?: string;
+                };
+                files?: {
+                    name?: string;
+                    id?: string;
+                    startAt?: string;
+                    size?: string;
+                    mimeType?: string;
+                    stopAt?: string;
+                }[];
+                transcripts?: {
+                    id?: string;
+                    file?: {
+                        name?: string;
+                        id?: string;
+                    };
+                    locale?: string;
+                }[];
+                closedAt?: string;
+                flowScheme?: {
+                    name?: string;
+                    id?: string;
+                };
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                isMissed?: boolean;
+                participants?: {
+                    name?: string;
+                    id?: string;
+                }[];
+                totalDuration?: string;
+            };
+            email?: {
+                body?: string;
+                id?: string;
+                from?: string[];
+                to?: string[];
+                subject?: string;
+                profile?: {
+                    name?: string;
+                    id?: string;
+                };
+                sender?: string[];
+                isDetailed?: boolean;
+                isInbound?: boolean;
+                attachments?: {
+                    url?: string;
+                    name?: string;
+                    id?: string;
+                    mime?: string;
+                    size?: string;
+                }[];
+                cc?: string[];
+                html?: string;
+                owner?: {
+                    name?: string;
+                    id?: string;
+                };
+            };
+            type?: "chat" | "call" | "email";
+            createdAt?: string;
+        }[];
+        callsCount?: string;
+        chatsCount?: string;
+        emailsCount?: string;
+        dayTimestamp?: string;
+    }[];
+}>;
 export declare const getTimelineCounterParams: zod.ZodObject<{
     case_id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    case_id?: string;
+}, {
+    case_id?: string;
+}>;
 export declare const getTimelineCounterResponse: zod.ZodObject<{
     callsCount: zod.ZodOptional<zod.ZodString>;
     chatsCount: zod.ZodOptional<zod.ZodString>;
     dateFrom: zod.ZodOptional<zod.ZodString>;
     dateTo: zod.ZodOptional<zod.ZodString>;
     emailsCount: zod.ZodOptional<zod.ZodString>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    callsCount?: string;
+    chatsCount?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    emailsCount?: string;
+}, {
+    callsCount?: string;
+    chatsCount?: string;
+    dateFrom?: string;
+    dateTo?: string;
+    emailsCount?: string;
+}>;

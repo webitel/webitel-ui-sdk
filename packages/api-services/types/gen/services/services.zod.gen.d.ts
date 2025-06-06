@@ -12,61 +12,261 @@ export declare const listServicesQueryParams: zod.ZodObject<{
     page: zod.ZodOptional<zod.ZodNumber>;
     size: zod.ZodOptional<zod.ZodNumber>;
     sort: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+    id: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
     q: zod.ZodOptional<zod.ZodString>;
     rootId: zod.ZodOptional<zod.ZodString>;
     state: zod.ZodOptional<zod.ZodBoolean>;
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    state?: boolean;
+    rootId?: string;
+    size?: number;
+    fields?: string[];
+    q?: string;
+}, {
+    page?: number;
+    sort?: string;
+    id?: string[];
+    state?: boolean;
+    rootId?: string;
+    size?: number;
+    fields?: string[];
+    q?: string;
+}>;
 export declare const listServicesResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         assignee: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         catalogId: zod.ZodOptional<zod.ZodString>;
         code: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         group: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             type: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         rootId: zod.ZodOptional<zod.ZodString>;
         searched: zod.ZodOptional<zod.ZodBoolean>;
-        service: zod.ZodOptional<zod.ZodArray<zod.ZodAny>>;
+        service: zod.ZodOptional<zod.ZodArray<zod.ZodAny, "many">>;
         sla: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         state: zod.ZodOptional<zod.ZodBoolean>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }, {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}, {
+    items?: {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}>;
 /**
  * @summary Create a new service within a catalog
  */
 export declare const createServiceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const createServiceBody: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     catalogId: zod.ZodOptional<zod.ZodString>;
     code: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
@@ -74,152 +274,670 @@ export declare const createServiceBody: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     rootId: zod.ZodOptional<zod.ZodString>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     state: zod.ZodOptional<zod.ZodBoolean>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    catalogId?: string;
+    rootId?: string;
+}, {
+    name?: string;
+    description?: string;
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    catalogId?: string;
+    rootId?: string;
+}>;
 export declare const createServiceResponse: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     catalogId: zod.ZodOptional<zod.ZodString>;
     code: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     rootId: zod.ZodOptional<zod.ZodString>;
     searched: zod.ZodOptional<zod.ZodBoolean>;
-    service: zod.ZodOptional<zod.ZodArray<zod.ZodAny>>;
+    service: zod.ZodOptional<zod.ZodArray<zod.ZodAny, "many">>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     state: zod.ZodOptional<zod.ZodBoolean>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    service?: any[];
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    searched?: boolean;
+    catalogId?: string;
+    rootId?: string;
+}, {
+    service?: any[];
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    searched?: boolean;
+    catalogId?: string;
+    rootId?: string;
+}>;
 /**
  * @summary Delete a service
  */
 export declare const deleteServiceParams: zod.ZodObject<{
-    id: zod.ZodArray<zod.ZodString>;
-}, {}, {}>;
+    id: zod.ZodArray<zod.ZodString, "many">;
+}, "strip", zod.ZodTypeAny, {
+    id?: string[];
+}, {
+    id?: string[];
+}>;
 export declare const deleteServiceResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
         assignee: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         catalogId: zod.ZodOptional<zod.ZodString>;
         code: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         group: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             type: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         rootId: zod.ZodOptional<zod.ZodString>;
         searched: zod.ZodOptional<zod.ZodBoolean>;
-        service: zod.ZodOptional<zod.ZodArray<zod.ZodAny>>;
+        service: zod.ZodOptional<zod.ZodArray<zod.ZodAny, "many">>;
         sla: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         state: zod.ZodOptional<zod.ZodBoolean>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }, {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }>, "many">>;
     next: zod.ZodOptional<zod.ZodBoolean>;
     page: zod.ZodOptional<zod.ZodNumber>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    items?: {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}, {
+    items?: {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }[];
+    next?: boolean;
+    page?: number;
+}>;
 /**
  * @summary Locate a service by ID
  */
 export declare const locateServiceParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const locateServiceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const locateServiceResponse: zod.ZodObject<{
     service: zod.ZodOptional<zod.ZodObject<{
         assignee: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         catalogId: zod.ZodOptional<zod.ZodString>;
         code: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         description: zod.ZodOptional<zod.ZodString>;
         group: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
             type: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }, {
+            type?: string;
+            name?: string;
+            id?: string;
+        }>>;
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         rootId: zod.ZodOptional<zod.ZodString>;
         searched: zod.ZodOptional<zod.ZodBoolean>;
-        service: zod.ZodOptional<zod.ZodArray<zod.ZodAny>>;
+        service: zod.ZodOptional<zod.ZodArray<zod.ZodAny, "many">>;
         sla: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
         state: zod.ZodOptional<zod.ZodBoolean>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-        }, {}, {}>>;
-    }, {}, {}>>;
-}, {}, {}>;
+        }, "strip", zod.ZodTypeAny, {
+            name?: string;
+            id?: string;
+        }, {
+            name?: string;
+            id?: string;
+        }>>;
+    }, "strip", zod.ZodTypeAny, {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }, {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    service?: {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    };
+}, {
+    service?: {
+        service?: any[];
+        name?: string;
+        createdAt?: string;
+        createdBy?: {
+            name?: string;
+            id?: string;
+        };
+        description?: string;
+        id?: string;
+        updatedAt?: string;
+        updatedBy?: {
+            name?: string;
+            id?: string;
+        };
+        code?: string;
+        state?: boolean;
+        assignee?: {
+            name?: string;
+            id?: string;
+        };
+        group?: {
+            type?: string;
+            name?: string;
+            id?: string;
+        };
+        sla?: {
+            name?: string;
+            id?: string;
+        };
+        searched?: boolean;
+        catalogId?: string;
+        rootId?: string;
+    };
+}>;
 /**
  * @summary Update an existing service
  */
 export declare const updateService2Params: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateService2QueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateService2Body: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     catalogId: zod.ZodOptional<zod.ZodString>;
     code: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
@@ -227,63 +945,229 @@ export declare const updateService2Body: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     rootId: zod.ZodOptional<zod.ZodString>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     state: zod.ZodOptional<zod.ZodBoolean>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    catalogId?: string;
+    rootId?: string;
+}, {
+    name?: string;
+    description?: string;
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    catalogId?: string;
+    rootId?: string;
+}>;
 export declare const updateService2Response: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     catalogId: zod.ZodOptional<zod.ZodString>;
     code: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     rootId: zod.ZodOptional<zod.ZodString>;
     searched: zod.ZodOptional<zod.ZodBoolean>;
-    service: zod.ZodOptional<zod.ZodArray<zod.ZodAny>>;
+    service: zod.ZodOptional<zod.ZodArray<zod.ZodAny, "many">>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     state: zod.ZodOptional<zod.ZodBoolean>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    service?: any[];
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    searched?: boolean;
+    catalogId?: string;
+    rootId?: string;
+}, {
+    service?: any[];
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    searched?: boolean;
+    catalogId?: string;
+    rootId?: string;
+}>;
 /**
  * @summary Update an existing service
  */
 export declare const updateServiceParams: zod.ZodObject<{
     id: zod.ZodString;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    id?: string;
+}, {
+    id?: string;
+}>;
 export declare const updateServiceQueryParams: zod.ZodObject<{
-    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-}, {}, {}>;
+    fields: zod.ZodOptional<zod.ZodArray<zod.ZodString, "many">>;
+}, "strip", zod.ZodTypeAny, {
+    fields?: string[];
+}, {
+    fields?: string[];
+}>;
 export declare const updateServiceBody: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     catalogId: zod.ZodOptional<zod.ZodString>;
     code: zod.ZodOptional<zod.ZodString>;
     description: zod.ZodOptional<zod.ZodString>;
@@ -291,46 +1175,198 @@ export declare const updateServiceBody: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     name: zod.ZodOptional<zod.ZodString>;
     rootId: zod.ZodOptional<zod.ZodString>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     state: zod.ZodOptional<zod.ZodBoolean>;
-}, {}, {}>;
+}, "strip", zod.ZodTypeAny, {
+    name?: string;
+    description?: string;
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    catalogId?: string;
+    rootId?: string;
+}, {
+    name?: string;
+    description?: string;
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    catalogId?: string;
+    rootId?: string;
+}>;
 export declare const updateServiceResponse: zod.ZodObject<{
     assignee: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     catalogId: zod.ZodOptional<zod.ZodString>;
     code: zod.ZodOptional<zod.ZodString>;
     createdAt: zod.ZodOptional<zod.ZodString>;
     createdBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     description: zod.ZodOptional<zod.ZodString>;
     group: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
         type: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }, {
+        type?: string;
+        name?: string;
+        id?: string;
+    }>>;
     id: zod.ZodOptional<zod.ZodString>;
     name: zod.ZodOptional<zod.ZodString>;
     rootId: zod.ZodOptional<zod.ZodString>;
     searched: zod.ZodOptional<zod.ZodBoolean>;
-    service: zod.ZodOptional<zod.ZodArray<zod.ZodAny>>;
+    service: zod.ZodOptional<zod.ZodArray<zod.ZodAny, "many">>;
     sla: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
     state: zod.ZodOptional<zod.ZodBoolean>;
     updatedAt: zod.ZodOptional<zod.ZodString>;
     updatedBy: zod.ZodOptional<zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
-    }, {}, {}>>;
-}, {}, {}>;
+    }, "strip", zod.ZodTypeAny, {
+        name?: string;
+        id?: string;
+    }, {
+        name?: string;
+        id?: string;
+    }>>;
+}, "strip", zod.ZodTypeAny, {
+    service?: any[];
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    searched?: boolean;
+    catalogId?: string;
+    rootId?: string;
+}, {
+    service?: any[];
+    name?: string;
+    createdAt?: string;
+    createdBy?: {
+        name?: string;
+        id?: string;
+    };
+    description?: string;
+    id?: string;
+    updatedAt?: string;
+    updatedBy?: {
+        name?: string;
+        id?: string;
+    };
+    code?: string;
+    state?: boolean;
+    assignee?: {
+        name?: string;
+        id?: string;
+    };
+    group?: {
+        type?: string;
+        name?: string;
+        id?: string;
+    };
+    sla?: {
+        name?: string;
+        id?: string;
+    };
+    searched?: boolean;
+    catalogId?: string;
+    rootId?: string;
+}>;
