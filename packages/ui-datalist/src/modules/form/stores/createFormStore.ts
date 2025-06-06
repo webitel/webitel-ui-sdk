@@ -33,7 +33,7 @@ export const createFormStore = <Entity = object>({
       validationSchema.value = useRegleSchema(
         itemInstance,
         standardValidationSchema,
-        validationSchemaOptions,
+        { ...validationSchemaOptions, autoDirty: false },
       );
     }
 
