@@ -29,6 +29,7 @@ import users from './users/users';
 import sysTypes from './wtTypes/sysTypes/sysTypes';
 import typeExtensions from './wtTypes/typeExtensions/typeExtensions';
 import { contactChatMessagesHistory, contacts } from './сontacts/index';
+import quickReplies from './quickReplies/quickReplies';
 
 export {
   agentChats,
@@ -63,4 +64,5 @@ export {
   teams,
   typeExtensions,
   users,
+  quickReplies,
 };
