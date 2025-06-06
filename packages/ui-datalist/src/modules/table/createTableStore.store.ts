@@ -148,7 +148,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     }
   };
 
-  const deleteEls = async (_els: Entity[]) => {
+  const deleteEls = async (_els: Entity[], { skipReload = false } = {}) => {
     const els = Array.isArray(_els) ? _els : [_els];
     const deleteEl = (el: Entity) => {
       return apiModule.delete({
@@ -161,7 +161,9 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     try {
       await Promise.all(els.map(deleteEl));
     } finally {
-      await loadDataList();
+      if(!skipReload) {
+        await loadDataList();
+      }
     }
   };
 
