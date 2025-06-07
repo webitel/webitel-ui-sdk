@@ -30,9 +30,9 @@
       "import": "./src/modules/filter-presets/index.ts",
       "types": "./types/filter-presets/index.d.ts"
     },
-    "./form": {
-      "import": "./src/modules/form/index.ts",
-      "types": "./types/form/index.d.ts"
+    "./card": {
+      "import": "./src/modules/card/index.ts",
+      "types": "./types/card/index.d.ts"
     }
   },
   "files": [

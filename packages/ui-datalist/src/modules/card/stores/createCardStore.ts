@@ -1,10 +1,18 @@
+import {RegleBehaviourOptions} from "@regle/core";
 import { RegleSchemaBehaviourOptions,useRegleSchema } from '@regle/schemas';
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const createFormStore = <Entity = object>({
+const defaultRegleValidationOptions: RegleSchemaBehaviourOptions & RegleBehaviourOptions = {
+  autoDirty: false, // make calc erros only on $validate() fn (btn click)
+  syncState: {
+    onValidate: true, // make zod defaults fill state
+  },
+};
+
+export const createCardStore = <Entity = object>({
   namespace,
   apiModule,
   standardValidationSchema,
@@ -16,12 +24,12 @@ export const createFormStore = <Entity = object>({
   validationSchemaOptions?: RegleSchemaBehaviourOptions;
 }) => {
   return defineStore(namespace, () => {
-    // form data vars
+    // card data vars
     const parentId = ref<string | number | null>();
     const itemId = ref<string | number | null>();
-    const itemInstance = ref<Entity>({} as Entity); // mb rename to formData? – in case of multiple stores for 1 main item instance
+    const itemInstance = ref<Entity>({} as Entity);
 
-    // form state vars
+    // card state vars
     const validationSchema = ref();
 
     // processing progress vars
@@ -33,7 +41,7 @@ export const createFormStore = <Entity = object>({
       validationSchema.value = useRegleSchema(
         itemInstance,
         standardValidationSchema,
-        { ...validationSchemaOptions, autoDirty: false },
+        { ...defaultRegleValidationOptions, ...validationSchemaOptions },
       );
     }
 

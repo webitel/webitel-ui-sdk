@@ -1,7 +1,7 @@
 import { refDebounced } from '@vueuse/core';
-import { Ref, computed, MaybeRef } from 'vue';
+import { Ref } from 'vue';
 
-export const useFormComponent = ({
+export const useCardComponent = ({
   checkIfInvalid,
   isLoading,
   saveItem,
