@@ -191,6 +191,7 @@ const enablePresets = computed(() => !!props.presetNamespace);
 .table-filters-panel--dynamic-filters {
   display: flex;
   gap: var(--spacing-sm);
+  flex-wrap: wrap;
 }
 
 .table-filters-panel--static-filters {
