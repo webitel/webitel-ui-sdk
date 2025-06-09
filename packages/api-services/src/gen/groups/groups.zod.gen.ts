@@ -335,20 +335,22 @@ export const groupsCreateGroupResponse = zod.object({
 });
 
 /**
- * @summary Remove contacts from a group
+ * @summary Attach contacts to multiple groups
  */
-export const groupsRemoveContactsFromGroupParams = zod.object({
-	group_id: zod.string().describe('The unique ID of the group.'),
-});
+export const groupsAddContactsToGroupsBody = zod
+	.object({
+		contactIds: zod
+			.array(zod.string())
+			.optional()
+			.describe('List of contact IDs to add to the group.'),
+		groupIds: zod
+			.array(zod.string())
+			.optional()
+			.describe('The unique ID of the group.'),
+	})
+	.describe('Request message for adding contacts to a group.');
 
-export const groupsRemoveContactsFromGroupQueryParams = zod.object({
-	contactIds: zod
-		.array(zod.string())
-		.optional()
-		.describe('List of contact IDs to remove from the group.'),
-});
-
-export const groupsRemoveContactsFromGroupResponse = zod
+export const groupsAddContactsToGroupsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -1696,20 +1698,20 @@ export const groupsRemoveContactsFromGroupResponse = zod
 	.describe('Contact dataset.');
 
 /**
- * @summary Add contacts to a group
+ * @summary Remove contacts from a group
  */
-export const groupsAddContactsToGroupParams = zod.object({
+export const groupsRemoveContactsFromGroupParams = zod.object({
 	group_id: zod.string().describe('The unique ID of the group.'),
 });
 
-export const groupsAddContactsToGroupQueryParams = zod.object({
+export const groupsRemoveContactsFromGroupQueryParams = zod.object({
 	contactIds: zod
 		.array(zod.string())
 		.optional()
-		.describe('List of contact IDs to add to the group.'),
+		.describe('List of contact IDs to remove from the group.'),
 });
 
-export const groupsAddContactsToGroupResponse = zod
+export const groupsRemoveContactsFromGroupResponse = zod
 	.object({
 		data: zod
 			.array(

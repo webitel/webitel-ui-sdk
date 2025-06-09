@@ -9,10 +9,10 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	GroupsAddContactsToGroupParams,
 	GroupsListGroupsParams,
 	GroupsLocateGroupParams,
 	GroupsRemoveContactsFromGroupParams,
+	WebitelContactsAddContactsToGroupRequest,
 	WebitelContactsContactList,
 	WebitelContactsCreateGroupRequest,
 	WebitelContactsGroup,
@@ -57,6 +57,21 @@ export const // --- title start
 				);
 			};
 			/**
+			 * @summary Attach contacts to multiple groups
+			 */
+			const groupsAddContactsToGroups = <
+				TData = AxiosResponse<WebitelContactsContactList>,
+			>(
+				webitelContactsAddContactsToGroupRequest: WebitelContactsAddContactsToGroupRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.post(
+					'/contacts/groups/contacts:attach',
+					webitelContactsAddContactsToGroupRequest,
+					options,
+				);
+			};
+			/**
 			 * @summary Remove contacts from a group
 			 */
 			const groupsRemoveContactsFromGroup = <
@@ -67,21 +82,6 @@ export const // --- title start
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/groups/${groupId}/contact`, {
-					...options,
-					params: { ...params, ...options?.params },
-				});
-			};
-			/**
-			 * @summary Add contacts to a group
-			 */
-			const groupsAddContactsToGroup = <
-				TData = AxiosResponse<WebitelContactsContactList>,
-			>(
-				groupId: string,
-				params?: GroupsAddContactsToGroupParams,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.post(`/contacts/groups/${groupId}/contact`, undefined, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -143,8 +143,8 @@ export const // --- title start
 			return {
 				groupsListGroups,
 				groupsCreateGroup,
+				groupsAddContactsToGroups,
 				groupsRemoveContactsFromGroup,
-				groupsAddContactsToGroup,
 				groupsDeleteGroup,
 				groupsLocateGroup,
 				groupsUpdateGroup2,
@@ -153,9 +153,9 @@ export const // --- title start
 		};
 export type GroupsListGroupsResult = AxiosResponse<WebitelContactsGroupList>;
 export type GroupsCreateGroupResult = AxiosResponse<WebitelContactsGroup>;
-export type GroupsRemoveContactsFromGroupResult =
+export type GroupsAddContactsToGroupsResult =
 	AxiosResponse<WebitelContactsContactList>;
-export type GroupsAddContactsToGroupResult =
+export type GroupsRemoveContactsFromGroupResult =
 	AxiosResponse<WebitelContactsContactList>;
 export type GroupsDeleteGroupResult = AxiosResponse<WebitelContactsGroup>;
 export type GroupsLocateGroupResult =
