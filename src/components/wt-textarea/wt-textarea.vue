@@ -28,7 +28,7 @@
         :disabled="disabled"
         :placeholder="placeholder || label"
         :value="value"
-        rows="1"
+        :rows="rows"
         :readonly="readonly"
         class="wt-textarea__textarea"
         v-on="listeners"
@@ -107,6 +107,14 @@ export default {
     name: {
       type: String,
       default: '',
+    },
+    /**
+     * Number of rows in textarea
+     */
+    rows: {
+      type: Number,
+      default: 1,
+      description: 'Number of rows for textarea',
     },
     labelProps: {
       type: Object,
