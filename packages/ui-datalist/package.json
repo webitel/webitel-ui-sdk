@@ -53,7 +53,8 @@
     "@vuelidate/validators": "^2.0.4",
     "@webitel/styleguide": "^24.12.26",
     "@webitel/ui-sdk": "^25.6.27",
-    "zod": "^3.25.55"
+    "zod": "^3.25.55",
+    "@vueuse/core": "^13.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

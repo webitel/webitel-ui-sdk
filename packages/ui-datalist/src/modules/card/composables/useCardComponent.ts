@@ -1,15 +1,15 @@
 import { refDebounced } from '@vueuse/core';
-import { Ref } from 'vue';
+import {computed,MaybeRef, Ref} from 'vue';
 
 export const useCardComponent = ({
   checkIfInvalid,
   isLoading,
   saveItem,
-  // itemId, // todo: is really needed?
+  itemId,
 }: {
   checkIfInvalid?: () => boolean;
   isLoading?: Ref<boolean>;
-  // itemId?: MaybeRef<string | number>; // todo: is really needed?
+  itemId?: MaybeRef<string | number>;
   saveItem: () => Promise<unknown>;
 }) => {
   const debouncedIsLoading = refDebounced(isLoading, 300);
@@ -19,8 +19,11 @@ export const useCardComponent = ({
     return saveItem();
   };
 
+  const isNew = computed(() => !itemId.value);
+
   return {
     debouncedIsLoading,
+    isNew,
     save,
   };
 };
