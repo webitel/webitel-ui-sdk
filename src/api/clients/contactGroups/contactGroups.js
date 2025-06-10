@@ -105,7 +105,6 @@ const addStaticContactGroup = async ({ itemInstance }) => {
 
 const addContactsToGroups = async ({ contactIds, groupIds }) => {
   try {
-    console.log(contactGroupsService, ' contactGroupsService');
     const response = await contactGroupsService.addContactsToGroups({
       groupIds,
       contactIds,
