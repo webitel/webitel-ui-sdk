@@ -43,7 +43,13 @@ export const searchTriggerResponse = zod.object({
 				id: zod.number().optional(),
 				name: zod.string().optional(),
 				object: zod
-					.enum(['empty_trigger_object', 'cases', 'case_files'])
+					.enum([
+						'empty_trigger_object',
+						'cases',
+						'case_files',
+						'case_comments',
+						'case_links',
+					])
 					.default(searchTriggerResponseItemsItemObjectDefault),
 				schema: zod
 					.object({
@@ -90,7 +96,13 @@ export const createTriggerBody = zod.object({
 	expression: zod.string().optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(createTriggerBodyObjectDefault),
 	schema: zod
 		.object({
@@ -131,7 +143,13 @@ export const createTriggerResponse = zod.object({
 	id: zod.number().optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(createTriggerResponseObjectDefault),
 	schema: zod
 		.object({
@@ -179,7 +197,13 @@ export const deleteTriggerResponse = zod.object({
 	id: zod.number().optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(deleteTriggerResponseObjectDefault),
 	schema: zod
 		.object({
@@ -227,7 +251,13 @@ export const readTriggerResponse = zod.object({
 	id: zod.number().optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(readTriggerResponseObjectDefault),
 	schema: zod
 		.object({
@@ -272,7 +302,13 @@ export const patchTriggerBody = zod.object({
 	fields: zod.array(zod.string()).optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(patchTriggerBodyObjectDefault),
 	schema: zod
 		.object({
@@ -313,7 +349,13 @@ export const patchTriggerResponse = zod.object({
 	id: zod.number().optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(patchTriggerResponseObjectDefault),
 	schema: zod
 		.object({
@@ -360,7 +402,13 @@ export const updateTriggerBody = zod.object({
 	expression: zod.string().optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(updateTriggerBodyObjectDefault),
 	schema: zod
 		.object({
@@ -401,7 +449,13 @@ export const updateTriggerResponse = zod.object({
 	id: zod.number().optional(),
 	name: zod.string().optional(),
 	object: zod
-		.enum(['empty_trigger_object', 'cases', 'case_files'])
+		.enum([
+			'empty_trigger_object',
+			'cases',
+			'case_files',
+			'case_comments',
+			'case_links',
+		])
 		.default(updateTriggerResponseObjectDefault),
 	schema: zod
 		.object({
