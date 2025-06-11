@@ -28,7 +28,6 @@ const props = defineProps<{
    * default search name is used when there are no search modes
    */
   singleSearchName?: string;
-  value?: string;
 }>();
 
 const defaultSearchName = props.singleSearchName || 'search';
@@ -42,7 +41,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const searchMode: Ref<FilterName> = ref();
-const localSearchValue = computed(() => props?.value || '');
+const localSearchValue = ref('');
 
 const hasFilter = (filterName = searchMode.value) => {
   return props.filtersManager.filters.has(filterName);
