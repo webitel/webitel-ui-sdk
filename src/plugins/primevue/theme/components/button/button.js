@@ -1,79 +1,4 @@
-const lightTheme = {
-  primary: {
-    color: '{primary-on-color}',
-    activeColor: '{primary-on-color}',
-    hoverColor: '{primary-on-color}',
-
-    background: '{primary-color}',
-    activeBackground: '{primary-hover-color}',
-    hoverBackground: '{primary-hover-color}',
-  },
-
-  secondary: {
-    color: '{grey.darken.4}',
-    activeColor: '{grey.darken.4}',
-    hoverColor: '{grey.darken.4}',
-
-    background: '{dp-surface-color.10}',
-    activeBackground: '{dp-surface-color.14}',
-    hoverBackground: '{dp-surface-color.14}',
-  },
-
-  success: {
-    color: '{grey.lighten.5}',
-    activeColor: '{grey.lighten.5}',
-    hoverColor: '{grey.lighten.5}',
-
-    background: '{success-color}',
-    activeBackground: '{success-hover-color}',
-    hoverBackground: '{success-hover-color}',
-  },
-
-  info: {
-    color: '{grey.lighten.5}',
-    activeColor: '{grey.lighten.5}',
-    hoverColor: '{grey.lighten.5}',
-
-    background: '{info-color}',
-    activeBackground: '{info-hover-color}',
-    hoverBackground: '{info-hover-color}',
-  },
-
-  job: {
-    color: '{grey.lighten.5}',
-    activeColor: '{grey.lighten.5}',
-    hoverColor: '{grey.lighten.5}',
-
-    background: '{job-color}',
-    activeBackground: '{job-hover-color}',
-    hoverBackground: '{job-hover-color}',
-  },
-
-  error: {
-    color: '{grey.lighten.5}',
-    activeColor: '{grey.lighten.5}',
-    hoverColor: '{grey.lighten.5}',
-
-    background: '{error-color}',
-    activeBackground: '{error-hover-color}',
-    hoverBackground: '{error-hover-color}',
-  },
-
-  transfer: {
-    color: '{transfer-on-color}',
-    activeColor: '{transfer-on-color}',
-    hoverColor: '{transfer-on-color}',
-
-    background: '{transfer-color}',
-    activeBackground: '{transfer-hover-color}',
-    hoverBackground: '{transfer-hover-color}',
-  },
-
-  disabled: {
-    color: '{grey.darken.1}',
-    background: '{dp-surface-color.16}',
-  },
-};
+import { ButtonScheme } from '@webitel/styleguide/component-schemes';
 
 const generateCustomColorCss = ({ colorName, dt }) => `
         .p-button-${colorName} {
@@ -91,27 +16,8 @@ const generateCustomColorCss = ({ colorName, dt }) => `
 `;
 
 const button = {
-  border: {
-    radius: '4px',
-  },
-
-  padding: {
-    x: '{spacings.sm}',
-    y: '{spacings.xs}',
-  },
-
-  sm: {
-    padding: {
-      x: '{spacings.xs}',
-      y: '{spacings.2xs}',
-    },
-  },
-
-  colorScheme: {
-    light: {
-      ...lightTheme,
-    },
-  },
+  ...ButtonScheme.sizes,
+  colorScheme: ButtonScheme.colorScheme,
 
   extend: {
     transfer: {
@@ -148,7 +54,6 @@ const button = {
             font-size: 12px;
             line-height: 24px;
             font-family: "Montserrat", monospace;
-            border: none;
             text-transform: uppercase;
         }
         .p-button.p-button--width-by-content {
