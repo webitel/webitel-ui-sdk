@@ -106,21 +106,19 @@ export const createCardStore = <Entity = object>({
     };
 
     return {
-      // parentId,
-      // itemId,
-      // originalItemInstance,
-      // draftItemInstance,
+      parentId,
+      itemId,
+      originalItemInstance,
+      draftItemInstance,
 
-      // validationSchema,
+      validationSchema,
 
-      isLoading: false,
-      // smthG: (s: State) => 1, // just example
-      //   smthA: (s: State) => 'smth',
-      // isSaving,
-      // error,
+      isLoading,
+      isSaving,
+      error,
 
-      // initialize,
-      // saveItem,
+      initialize,
+      saveItem,
     };
   });
 };
