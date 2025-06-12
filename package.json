@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.6.28",
+  "version": "25.6.37",
   "private": false,
   "scripts": {
     "dev": "npm run docs:dev",
@@ -88,7 +88,7 @@
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^13.0.0",
-    "@webitel/api-services": "^0.0.17",
+    "@webitel/api-services": "^0.0.19",
     "@webitel/styleguide": "^24.12.26",
     "autosize": "^6.0.1",
     "axios": "^1.8.3",
@@ -115,7 +115,7 @@
     "vue-multiselect": "^3.1.0",
     "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue-router": "^4.5.0",
-    "webitel-sdk": "^25.4.3",
+    "webitel-sdk": "^25.5.4",
     "xlsx": "0.18.5",
     "zod": "^3.25.55"
   },

@@ -217,7 +217,7 @@ export const getGroupsCreateGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getGroupsRemoveContactsFromGroupResponseMock = (
+export const getGroupsAddContactsToGroupsResponseMock = (
 	overrideResponse: Partial<WebitelContactsContactList> = {},
 ): WebitelContactsContactList => ({
 	data: faker.helpers.arrayElement([
@@ -1386,7 +1386,7 @@ export const getGroupsRemoveContactsFromGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getGroupsAddContactsToGroupResponseMock = (
+export const getGroupsRemoveContactsFromGroupResponseMock = (
 	overrideResponse: Partial<WebitelContactsContactList> = {},
 ): WebitelContactsContactList => ({
 	data: faker.helpers.arrayElement([
@@ -2958,6 +2958,29 @@ export const getGroupsCreateGroupMockHandler = (
 	});
 };
 
+export const getGroupsAddContactsToGroupsMockHandler = (
+	overrideResponse?:
+		| WebitelContactsContactList
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) => Promise<WebitelContactsContactList> | WebitelContactsContactList),
+) => {
+	return http.post('*/contacts/groups/contacts:attach', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getGroupsAddContactsToGroupsResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
 export const getGroupsRemoveContactsFromGroupMockHandler = (
 	overrideResponse?:
 		| WebitelContactsContactList
@@ -2975,29 +2998,6 @@ export const getGroupsRemoveContactsFromGroupMockHandler = (
 						? await overrideResponse(info)
 						: overrideResponse
 					: getGroupsRemoveContactsFromGroupResponseMock(),
-			),
-			{ status: 200, headers: { 'Content-Type': 'application/json' } },
-		);
-	});
-};
-
-export const getGroupsAddContactsToGroupMockHandler = (
-	overrideResponse?:
-		| WebitelContactsContactList
-		| ((
-				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsContactList> | WebitelContactsContactList),
-) => {
-	return http.post('*/contacts/groups/:groupId/contact', async (info) => {
-		await delay(1000);
-
-		return new HttpResponse(
-			JSON.stringify(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getGroupsAddContactsToGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -3100,8 +3100,8 @@ export const getGroupsUpdateGroupMockHandler = (
 export const getGroupsMock = () => [
 	getGroupsListGroupsMockHandler(),
 	getGroupsCreateGroupMockHandler(),
+	getGroupsAddContactsToGroupsMockHandler(),
 	getGroupsRemoveContactsFromGroupMockHandler(),
-	getGroupsAddContactsToGroupMockHandler(),
 	getGroupsDeleteGroupMockHandler(),
 	getGroupsLocateGroupMockHandler(),
 	getGroupsUpdateGroup2MockHandler(),

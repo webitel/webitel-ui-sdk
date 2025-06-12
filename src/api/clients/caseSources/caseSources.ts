@@ -9,7 +9,7 @@ import {
   getDefaultGetListResponse,
   getDefaultGetParams,
 } from '../../defaults/index';
-import { getFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import {getFieldsToSendFromZodSchema, getShallowFieldsToSendFromZodSchema} from '@webitel/api-services/gen/utils';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -21,7 +21,7 @@ import applyTransform, {
 const sourceService = getSources();
 
 const getSourcesList = async (params) => {
-  const fieldsToSend = getFieldsToSendFromZodSchema(listSourcesQueryParams);
+  const fieldsToSend = getShallowFieldsToSendFromZodSchema(listSourcesQueryParams);
 
   const { page, size, fields, sort, id, q, type } = applyTransform(params, [
     merge(getDefaultGetParams()),
