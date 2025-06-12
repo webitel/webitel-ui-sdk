@@ -33,11 +33,15 @@ export declare const listSourcesQueryParams: zod.ZodObject<{
     fields?: string[];
     q?: string;
 }>;
+export declare const listSourcesResponseItemsItemDescriptionMax = 500;
+export declare const listSourcesResponseItemsItemNameMin = 3;
+export declare const listSourcesResponseItemsItemNameMax = 100;
+export declare const listSourcesResponseItemsItemNameRegExp: RegExp;
 export declare const listSourcesResponseItemsItemTypeDefault = "TYPE_UNSPECIFIED";
 export declare const listSourcesResponse: zod.ZodObject<{
     items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
+        createdAt: zod.ZodString;
+        createdBy: zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, "strip", zod.ZodTypeAny, {
@@ -46,13 +50,13 @@ export declare const listSourcesResponse: zod.ZodObject<{
         }, {
             name?: string;
             id?: string;
-        }>>;
+        }>;
         description: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
+        id: zod.ZodString;
+        name: zod.ZodString;
+        type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
+        updatedAt: zod.ZodString;
+        updatedBy: zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, "strip", zod.ZodTypeAny, {
@@ -61,7 +65,7 @@ export declare const listSourcesResponse: zod.ZodObject<{
         }, {
             name?: string;
             id?: string;
-        }>>;
+        }>;
     }, "strip", zod.ZodTypeAny, {
         type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
         name?: string;
@@ -144,11 +148,21 @@ export declare const createSourceQueryParams: zod.ZodObject<{
 }, {
     fields?: string[];
 }>;
+export declare const createSourceBodyDefault: {
+    name: string;
+    type: string;
+};
+export declare const createSourceBodyDescriptionDefault = "No description provided";
+export declare const createSourceBodyDescriptionMax = 500;
+export declare const createSourceBodyNameDefault = "New Source";
+export declare const createSourceBodyNameMin = 2;
+export declare const createSourceBodyNameMax = 100;
+export declare const createSourceBodyNameRegExp: RegExp;
 export declare const createSourceBodyTypeDefault = "TYPE_UNSPECIFIED";
 export declare const createSourceBody: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    description: zod.ZodDefault<zod.ZodString>;
+    name: zod.ZodString;
+    type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
 }, "strip", zod.ZodTypeAny, {
     type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
     name?: string;
@@ -158,10 +172,14 @@ export declare const createSourceBody: zod.ZodObject<{
     name?: string;
     description?: string;
 }>;
+export declare const createSourceResponseDescriptionMax = 500;
+export declare const createSourceResponseNameMin = 3;
+export declare const createSourceResponseNameMax = 100;
+export declare const createSourceResponseNameRegExp: RegExp;
 export declare const createSourceResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const createSourceResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
+    createdAt: zod.ZodString;
+    createdBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -170,13 +188,13 @@ export declare const createSourceResponse: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
     description: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
+    id: zod.ZodString;
+    name: zod.ZodString;
+    type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
+    updatedAt: zod.ZodString;
+    updatedBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -185,7 +203,7 @@ export declare const createSourceResponse: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
 }, "strip", zod.ZodTypeAny, {
     type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
     name?: string;
@@ -227,10 +245,14 @@ export declare const deleteSourceParams: zod.ZodObject<{
 }, {
     id?: string;
 }>;
+export declare const deleteSourceResponseDescriptionMax = 500;
+export declare const deleteSourceResponseNameMin = 3;
+export declare const deleteSourceResponseNameMax = 100;
+export declare const deleteSourceResponseNameRegExp: RegExp;
 export declare const deleteSourceResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const deleteSourceResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
+    createdAt: zod.ZodString;
+    createdBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -239,13 +261,13 @@ export declare const deleteSourceResponse: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
     description: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
+    id: zod.ZodString;
+    name: zod.ZodString;
+    type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
+    updatedAt: zod.ZodString;
+    updatedBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -254,7 +276,7 @@ export declare const deleteSourceResponse: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
 }, "strip", zod.ZodTypeAny, {
     type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
     name?: string;
@@ -303,11 +325,15 @@ export declare const locateSourceQueryParams: zod.ZodObject<{
 }, {
     fields?: string[];
 }>;
+export declare const locateSourceResponseSourceDescriptionMax = 500;
+export declare const locateSourceResponseSourceNameMin = 3;
+export declare const locateSourceResponseSourceNameMax = 100;
+export declare const locateSourceResponseSourceNameRegExp: RegExp;
 export declare const locateSourceResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const locateSourceResponse: zod.ZodObject<{
     source: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
+        createdAt: zod.ZodString;
+        createdBy: zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, "strip", zod.ZodTypeAny, {
@@ -316,13 +342,13 @@ export declare const locateSourceResponse: zod.ZodObject<{
         }, {
             name?: string;
             id?: string;
-        }>>;
+        }>;
         description: zod.ZodOptional<zod.ZodString>;
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
+        id: zod.ZodString;
+        name: zod.ZodString;
+        type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
+        updatedAt: zod.ZodString;
+        updatedBy: zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, "strip", zod.ZodTypeAny, {
@@ -331,7 +357,7 @@ export declare const locateSourceResponse: zod.ZodObject<{
         }, {
             name?: string;
             id?: string;
-        }>>;
+        }>;
     }, "strip", zod.ZodTypeAny, {
         type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
         name?: string;
@@ -415,11 +441,21 @@ export declare const updateSource2QueryParams: zod.ZodObject<{
 }, {
     fields?: string[];
 }>;
+export declare const updateSource2BodyDefault: {
+    name: string;
+    type: string;
+};
+export declare const updateSource2BodyDescriptionDefault = "No description provided";
+export declare const updateSource2BodyDescriptionMax = 500;
+export declare const updateSource2BodyNameDefault = "New Source";
+export declare const updateSource2BodyNameMin = 2;
+export declare const updateSource2BodyNameMax = 100;
+export declare const updateSource2BodyNameRegExp: RegExp;
 export declare const updateSource2BodyTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSource2Body: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    description: zod.ZodDefault<zod.ZodString>;
+    name: zod.ZodString;
+    type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
 }, "strip", zod.ZodTypeAny, {
     type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
     name?: string;
@@ -429,10 +465,14 @@ export declare const updateSource2Body: zod.ZodObject<{
     name?: string;
     description?: string;
 }>;
+export declare const updateSource2ResponseDescriptionMax = 500;
+export declare const updateSource2ResponseNameMin = 3;
+export declare const updateSource2ResponseNameMax = 100;
+export declare const updateSource2ResponseNameRegExp: RegExp;
 export declare const updateSource2ResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSource2Response: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
+    createdAt: zod.ZodString;
+    createdBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -441,13 +481,13 @@ export declare const updateSource2Response: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
     description: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
+    id: zod.ZodString;
+    name: zod.ZodString;
+    type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
+    updatedAt: zod.ZodString;
+    updatedBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -456,7 +496,7 @@ export declare const updateSource2Response: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
 }, "strip", zod.ZodTypeAny, {
     type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
     name?: string;
@@ -505,11 +545,21 @@ export declare const updateSourceQueryParams: zod.ZodObject<{
 }, {
     fields?: string[];
 }>;
+export declare const updateSourceBodyDefault: {
+    name: string;
+    type: string;
+};
+export declare const updateSourceBodyDescriptionDefault = "No description provided";
+export declare const updateSourceBodyDescriptionMax = 500;
+export declare const updateSourceBodyNameDefault = "New Source";
+export declare const updateSourceBodyNameMin = 2;
+export declare const updateSourceBodyNameMax = 100;
+export declare const updateSourceBodyNameRegExp: RegExp;
 export declare const updateSourceBodyTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSourceBody: zod.ZodObject<{
-    description: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
+    description: zod.ZodDefault<zod.ZodString>;
+    name: zod.ZodString;
+    type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
 }, "strip", zod.ZodTypeAny, {
     type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
     name?: string;
@@ -519,10 +569,14 @@ export declare const updateSourceBody: zod.ZodObject<{
     name?: string;
     description?: string;
 }>;
+export declare const updateSourceResponseDescriptionMax = 500;
+export declare const updateSourceResponseNameMin = 3;
+export declare const updateSourceResponseNameMax = 100;
+export declare const updateSourceResponseNameRegExp: RegExp;
 export declare const updateSourceResponseTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateSourceResponse: zod.ZodObject<{
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
+    createdAt: zod.ZodString;
+    createdBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -531,13 +585,13 @@ export declare const updateSourceResponse: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
     description: zod.ZodOptional<zod.ZodString>;
-    id: zod.ZodOptional<zod.ZodString>;
-    name: zod.ZodOptional<zod.ZodString>;
-    type: zod.ZodDefault<zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
+    id: zod.ZodString;
+    name: zod.ZodString;
+    type: zod.ZodEnum<["TYPE_UNSPECIFIED", "CALL", "CHAT", "SOCIAL_MEDIA", "EMAIL", "API", "MANUAL"]>;
+    updatedAt: zod.ZodString;
+    updatedBy: zod.ZodObject<{
         id: zod.ZodOptional<zod.ZodString>;
         name: zod.ZodOptional<zod.ZodString>;
     }, "strip", zod.ZodTypeAny, {
@@ -546,7 +600,7 @@ export declare const updateSourceResponse: zod.ZodObject<{
     }, {
         name?: string;
         id?: string;
-    }>>;
+    }>;
 }, "strip", zod.ZodTypeAny, {
     type?: "TYPE_UNSPECIFIED" | "CALL" | "CHAT" | "SOCIAL_MEDIA" | "EMAIL" | "API" | "MANUAL";
     name?: string;
