@@ -63,13 +63,12 @@
       ...sharedChildrenProps,
       value,
     }"
-    :conversion-modifier="DatetimeConversionModifier"
   >
     <wt-datepicker
       v-bind="sharedChildrenProps"
-      :value="value * DatetimeConversionModifier"
+      :value="value"
       mode="datetime"
-      @input="setValue(+$event / DatetimeConversionModifier)"
+      @input="setValue"
     />
   </slot>
 </template>
@@ -82,10 +81,6 @@ import { WebitelProtoDataField } from 'webitel-sdk';
 
 import { getSysTypeRecordsLookup } from "../../../api/clients/wtTypes/sysTypes/sysTypes";
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
-
-// TODO: move to api file, mb? 🤔
-//  Number for convert time from seconds to milliseconds, when send to backend and display on frontend
-const DatetimeConversionModifier = 1000;
 
 const model = defineModel<unknown>();
 
