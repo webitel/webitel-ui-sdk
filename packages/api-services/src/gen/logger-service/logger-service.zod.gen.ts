@@ -6,11 +6,11 @@
  */
 import { z as zod } from 'zod';
 
-export const searchLogByConfigIdParams = zod.object({
+export const loggerServiceSearchLogByConfigIdParams = zod.object({
 	config_id: zod.number(),
 });
 
-export const searchLogByConfigIdQueryParams = zod.object({
+export const loggerServiceSearchLogByConfigIdQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -27,7 +27,7 @@ export const searchLogByConfigIdQueryParams = zod.object({
 	dateTo: zod.string().optional(),
 });
 
-export const searchLogByConfigIdResponse = zod.object({
+export const loggerServiceSearchLogByConfigIdResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -62,29 +62,29 @@ export const searchLogByConfigIdResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const searchLogByUserIdParams = zod.object({
+export const loggerServiceSearchLogByUserIdParams = zod.object({
 	user_id: zod.number().describe('REQUIRED filter'),
 });
 
-export const searchLogByUserIdQueryParams = zod.object({
+export const loggerServiceSearchLogByUserIdQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
-	objectId: zod.array(zod.string()).optional().describe('SPECIFIC filter'),
+	objectId: zod.array(zod.string()).optional().describe('SPECIFIC filter.'),
 	action: zod
 		.array(
 			zod.enum(['default_no_action', 'create', 'update', 'read', 'delete']),
 		)
 		.optional()
-		.describe('GENERAL filters'),
+		.describe('GENERAL filters.'),
 	userIp: zod.string().optional(),
 	dateFrom: zod.string().optional(),
 	dateTo: zod.string().optional(),
 });
 
-export const searchLogByUserIdResponse = zod.object({
+export const loggerServiceSearchLogByUserIdResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -119,7 +119,7 @@ export const searchLogByUserIdResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const searchLogByRecordIdParams = zod.object({
+export const loggerServiceSearchLogByRecordIdParams = zod.object({
 	object: zod
 		.enum([
 			'cc_queue',
@@ -143,7 +143,7 @@ export const searchLogByRecordIdParams = zod.object({
 	record_id: zod.number().describe('REQUIRED filter'),
 });
 
-export const searchLogByRecordIdQueryParams = zod.object({
+export const loggerServiceSearchLogByRecordIdQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -154,14 +154,14 @@ export const searchLogByRecordIdQueryParams = zod.object({
 			zod.enum(['default_no_action', 'create', 'update', 'read', 'delete']),
 		)
 		.optional()
-		.describe('GENERAL filters'),
+		.describe('GENERAL filters.'),
 	userId: zod.array(zod.string()).optional(),
 	userIp: zod.string().optional(),
 	dateFrom: zod.string().optional(),
 	dateTo: zod.string().optional(),
 });
 
-export const searchLogByRecordIdResponse = zod.object({
+export const loggerServiceSearchLogByRecordIdResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({

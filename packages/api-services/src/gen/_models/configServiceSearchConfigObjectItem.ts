@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchConfigObjectItem =
-	(typeof SearchConfigObjectItem)[keyof typeof SearchConfigObjectItem];
+export type ConfigServiceSearchConfigObjectItem =
+	(typeof ConfigServiceSearchConfigObjectItem)[keyof typeof ConfigServiceSearchConfigObjectItem];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const SearchConfigObjectItem = {
+export const ConfigServiceSearchConfigObjectItem = {
 	cc_queue: 'cc_queue',
 	schema: 'schema',
 	users: 'users',

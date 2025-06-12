@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchLogByRecordIdActionItem =
-	(typeof SearchLogByRecordIdActionItem)[keyof typeof SearchLogByRecordIdActionItem];
+export type LoggerServiceSearchLogByUserIdActionItem =
+	(typeof LoggerServiceSearchLogByUserIdActionItem)[keyof typeof LoggerServiceSearchLogByUserIdActionItem];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const SearchLogByRecordIdActionItem = {
+export const LoggerServiceSearchLogByUserIdActionItem = {
 	default_no_action: 'default_no_action',
 	create: 'create',
 	update: 'update',

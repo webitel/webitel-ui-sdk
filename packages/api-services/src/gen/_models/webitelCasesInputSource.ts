@@ -6,11 +6,22 @@
  */
 import type { WebitelCasesSourceType } from './webitelCasesSourceType';
 
+/**
+ * The data structure representing a source
+ */
 export interface WebitelCasesInputSource {
-	/** The description of the source. */
+	/**
+	 * A short description of the source
+	 * @maxLength 500
+	 */
 	description?: string;
-	/** The name of the source. */
-	name?: string;
-	/** The source type of the source. */
-	type?: WebitelCasesSourceType;
+	/**
+	 * The name of the source
+	 * @minLength 2
+	 * @maxLength 100
+	 * @pattern ^[a-zA-Z0-9_\- ]+$
+	 */
+	name: string;
+	/** The type of the source */
+	type: WebitelCasesSourceType;
 }

@@ -15,7 +15,7 @@ import type {
 	LoggerSystemObjects,
 } from '.././_models';
 
-export const getReadSystemObjectsResponseMock = (
+export const getConfigServiceReadSystemObjectsResponseMock = (
 	overrideResponse: Partial<LoggerSystemObjects> = {},
 ): LoggerSystemObjects => ({
 	items: faker.helpers.arrayElement([
@@ -34,7 +34,7 @@ export const getReadSystemObjectsResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchConfigResponseMock = (
+export const getConfigServiceSearchConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfigs> = {},
 ): LoggerConfigs => ({
 	items: faker.helpers.arrayElement([
@@ -98,7 +98,7 @@ export const getSearchConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getCreateConfigResponseMock = (
+export const getConfigServiceCreateConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -143,9 +143,9 @@ export const getCreateConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteConfigResponseMock = (): LoggerEmpty => ({});
+export const getConfigServiceDeleteConfigResponseMock = (): LoggerEmpty => ({});
 
-export const getReadConfigResponseMock = (
+export const getConfigServiceReadConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -190,7 +190,7 @@ export const getReadConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getPatchConfigResponseMock = (
+export const getConfigServicePatchConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -235,7 +235,7 @@ export const getPatchConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getUpdateConfigResponseMock = (
+export const getConfigServiceUpdateConfigResponseMock = (
 	overrideResponse: Partial<LoggerConfig> = {},
 ): LoggerConfig => ({
 	daysToStore: faker.helpers.arrayElement([
@@ -280,7 +280,7 @@ export const getUpdateConfigResponseMock = (
 	...overrideResponse,
 });
 
-export const getReadSystemObjectsMockHandler = (
+export const getConfigServiceReadSystemObjectsMockHandler = (
 	overrideResponse?:
 		| LoggerSystemObjects
 		| ((
@@ -296,14 +296,14 @@ export const getReadSystemObjectsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getReadSystemObjectsResponseMock(),
+					: getConfigServiceReadSystemObjectsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getSearchConfigMockHandler = (
+export const getConfigServiceSearchConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfigs
 		| ((
@@ -319,14 +319,14 @@ export const getSearchConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchConfigResponseMock(),
+					: getConfigServiceSearchConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCreateConfigMockHandler = (
+export const getConfigServiceCreateConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -342,14 +342,14 @@ export const getCreateConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCreateConfigResponseMock(),
+					: getConfigServiceCreateConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDeleteConfigMockHandler = (
+export const getConfigServiceDeleteConfigMockHandler = (
 	overrideResponse?:
 		| LoggerEmpty
 		| ((
@@ -365,14 +365,14 @@ export const getDeleteConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDeleteConfigResponseMock(),
+					: getConfigServiceDeleteConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getReadConfigMockHandler = (
+export const getConfigServiceReadConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -388,14 +388,14 @@ export const getReadConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getReadConfigResponseMock(),
+					: getConfigServiceReadConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPatchConfigMockHandler = (
+export const getConfigServicePatchConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -411,14 +411,14 @@ export const getPatchConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPatchConfigResponseMock(),
+					: getConfigServicePatchConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUpdateConfigMockHandler = (
+export const getConfigServiceUpdateConfigMockHandler = (
 	overrideResponse?:
 		| LoggerConfig
 		| ((
@@ -434,18 +434,18 @@ export const getUpdateConfigMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUpdateConfigResponseMock(),
+					: getConfigServiceUpdateConfigResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getConfigServiceMock = () => [
-	getReadSystemObjectsMockHandler(),
-	getSearchConfigMockHandler(),
-	getCreateConfigMockHandler(),
-	getDeleteConfigMockHandler(),
-	getReadConfigMockHandler(),
-	getPatchConfigMockHandler(),
-	getUpdateConfigMockHandler(),
+	getConfigServiceReadSystemObjectsMockHandler(),
+	getConfigServiceSearchConfigMockHandler(),
+	getConfigServiceCreateConfigMockHandler(),
+	getConfigServiceDeleteConfigMockHandler(),
+	getConfigServiceReadConfigMockHandler(),
+	getConfigServicePatchConfigMockHandler(),
+	getConfigServiceUpdateConfigMockHandler(),
 ];

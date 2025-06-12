@@ -5,5 +5,10 @@
  * OpenAPI spec version: 24.04.0
  */
 export type CreateSourceParams = {
+    /**
+ * Optional list of specific fields to return after creation
+
+Specific fields to include in response
+ */
     fields?: string[];
 };
