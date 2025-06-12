@@ -15,7 +15,6 @@ import type {
 	UpdateSource2Params,
 	UpdateSourceParams,
 	WebitelCasesInputSource,
-	WebitelCasesInputSourceBody,
 	WebitelCasesLocateSourceResponse,
 	WebitelCasesSource,
 	WebitelCasesSourceList,
@@ -45,11 +44,11 @@ export const // --- title start
 			 * @summary Create a new source
 			 */
 			const createSource = <TData = AxiosResponse<WebitelCasesSource>>(
-				webitelCasesInputSourceBody: WebitelCasesInputSourceBody,
+				webitelCasesInputSource: WebitelCasesInputSource,
 				params?: CreateSourceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post('/cases/sources', webitelCasesInputSourceBody, {
+				return axios.post('/cases/sources', webitelCasesInputSource, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
