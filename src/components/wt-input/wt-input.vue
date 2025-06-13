@@ -43,7 +43,7 @@
         ref="AfterWrapper"
         class="wt-input__after-wrapper"
       >
-        <slot name="after-input" />
+        <slot name="after-input"/>
         <slot
           v-if="isPassword"
           name="show-password"
@@ -69,121 +69,64 @@
   </div>
 </template>
 
-<script setup>
-import { computed, onMounted, ref, toRefs, useSlots } from 'vue';
+<script lang="ts" setup>
+import type {RegleFieldStatus} from '@regle/core';
+import {computed, onMounted, ref, toRefs, useSlots} from 'vue';
 
-import { useValidation } from '../../mixins/validationMixin/useValidation.js';
+import {
+  useValidation
+} from '../../mixins/validationMixin/useValidation';
 
 /*
  * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
  * TWO PROPS: VALUE AND MODELVALUE, AND 2 EVENTS: @UPDATE:MODELVALUE AND @INPUT
  * */
-const props = defineProps({
-  value: {
-    type: [String, Number],
-  },
-  /**
-   * Current input modelValue (`v-model`)
-   */
-  modelValue: {
-    type: [String, Number],
-  },
-  /**
-   * Form input label
-   */
-  label: {
-    type: String,
-    default: '',
-  },
-  /**
-   * Form input placeholder
-   */
-  placeholder: {
-    type: String,
-  },
-  /**
-   * Form input name
-   */
-  name: {
-    type: String,
-    default: '',
-  },
-  /**
-   * Form input type
-   */
-  type: {
-    type: String,
-    default: 'text',
-  },
-  /**
-   * Native input required attribute
-   */
-  required: {
-    type: Boolean,
-    default: false,
-    description: 'Native input required attribute',
-  },
-  /**
-   * Native input disabled attribute
-   */
-  disabled: {
-    type: Boolean,
-    default: false,
-    description: 'Native input disabled attribute',
-  },
-  /**
-   * Status of show password icon display
-   */
-  hasShowPassword: {
-    type: Boolean,
-    default: false,
-  },
-
-  /**
-   * Native number input restrictions
-   */
-  numberMin: {
-    type: Number,
-    default: 0,
-  },
-
-  /**
-   * Native number input restrictions
-   */
-  numberMax: {
-    type: Number,
-  },
-
-  labelProps: {
-    type: Object,
-    description: 'Object with props, passed down to wt-label as props',
-  },
-
-  preventTrim: {
-    type: Boolean,
-    default: false,
-  },
-
-  // validation rules
-  // TODO: move to separate file to make it reusable
-  v: {
-    type: Object,
-  },
-  customValidators: {
-    type: Array,
-    default: () => [],
-  },
+const props = withDefaults(defineProps<{
+  value?: string | number;
+  modelValue?: string | number;
+  label?: string;
+  placeholder?: string;
+  name?: string;
+  type?: string;
+  required?: boolean;
+  disabled?: boolean;
+  hasShowPassword?: boolean;
+  numberMin?: number;
+  numberMax?: number;
+  labelProps?: Record<string, unknown>;
+  preventTrim?: boolean;
+  v?: Record<string, unknown>;
+  regleValidation?: RegleFieldStatus<string>;
+  customValidators?: unknown[];
+}>(), {
+  label: '',
+  name: '',
+  type: 'text',
+  required: false,
+  disabled: false,
+  hasShowPassword: false,
+  numberMin: 0,
+  preventTrim: false,
+  v: null,
+  regleValidation: null,
+  customValidators: () => [],
 });
+
 const emit = defineEmits(['update:modelValue', 'input', 'keyup']);
 
 const slots = useSlots();
 
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
-const { v, customValidators } = toRefs(props);
+const {v, customValidators, regleValidation } = toRefs(props);
 
-const { isValidation, invalid, validationText } = useValidation({
+const {
+  isValidation,
+  invalid,
+  validationText,
+} = useValidation({
   v,
   customValidators,
+  regleValidation,
 });
 
 // toggles password <-> text at showPassword

@@ -1,10 +1,16 @@
-import { computed, isReactive } from 'vue';
+import {computed, isReactive, Ref} from 'vue';
 import { useI18n } from 'vue-i18n';
+import type { Validation } from '@vuelidate/core';
 
-export function useValidation({
-  v: inputV,
+export type UseFieldValidationParams = {
+  field: Ref<Validation>;
+  customValidators?: Array<object>;
+};
+
+export const useFieldValidation = ({
+  field: inputV,
   customValidators: inputCustomValidators,
-}) {
+}: UseFieldValidationParams) => {
   const { t } = useI18n();
 
   // support vue options api, where v is a reactive, not ref
@@ -82,4 +88,6 @@ export function useValidation({
     invalid,
     validationText,
   };
-}
+};
+
+export const useVuelidateFieldValidation = useFieldValidation;

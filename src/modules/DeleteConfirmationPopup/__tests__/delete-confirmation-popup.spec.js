@@ -1,7 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import { ref } from 'vue';
 
-import { useValidation } from '../../../mixins/validationMixin/useValidation.js';
+import { useValidation } from '../../../mixins/validationMixin/useValidation';
 import DeleteConfirmationPopup from '../components/delete-confirmation-popup.vue';
 
 vi.mock('../../../mixins/validationMixin/useValidation.js');

@@ -81,7 +81,7 @@
 <script lang="ts" setup>
 import { computed, toRefs } from 'vue';
 
-import { useValidation } from '../../mixins/validationMixin/useValidation.js';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import debounce from '../../scripts/debounce.js';
 
 const props = defineProps({

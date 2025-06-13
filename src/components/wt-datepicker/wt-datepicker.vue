@@ -89,7 +89,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import VueDatepicker from '@vuepic/vue-datepicker';
 import { computed, ref, toRefs } from 'vue';
 
-import { useValidation } from '../../mixins/validationMixin/useValidation.js';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import WtInputInfo from '../wt-input-info/wt-input-info.vue';
 
 const props = defineProps({
