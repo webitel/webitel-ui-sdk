@@ -1,5 +1,5 @@
 import type { RegleFieldStatus } from '@regle/core';
-import { computed, ComputedRef, Ref, toRef } from 'vue';
+import { computed, ComputedRef, Ref } from 'vue';
 
 export type UseFieldValidationParams = {
   field: Ref<RegleFieldStatus<string>>;
@@ -13,7 +13,6 @@ export type UseFieldValidationReturn = {
 export const useFieldValidation = ({
   field: fieldRef,
 }: UseFieldValidationParams): UseFieldValidationReturn => {
-  // const fieldRef = toRef(field);
 
   const invalid = computed(() => {
     return fieldRef.value.$error;
@@ -28,5 +27,3 @@ export const useFieldValidation = ({
     validationText,
   };
 };
-
-export const useRegleFieldValidation = useFieldValidation;

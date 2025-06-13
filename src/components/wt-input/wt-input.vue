@@ -70,13 +70,12 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, ref, toRef, toRefs, useSlots} from 'vue';
 import type {RegleFieldStatus} from '@regle/core';
+import {computed, onMounted, ref, toRef, toRefs, useSlots} from 'vue';
 
 import {
-  useValidation as useVuelidateValidation
-} from '../../mixins/validationMixin/useValidation.js';
-import {useRegleFieldValidation} from "../../mixins/validationMixin/useRegleValidation";
+  useValidation
+} from '../../mixins/validationMixin/useValidation';
 
 /*
  * IMPORTANT: WT-INPUT SHOULD SUPPORT VUE 3 AND VUE 2 V-MODEL INTERFACES SO THAT THERE'S
@@ -118,34 +117,16 @@ const emit = defineEmits(['update:modelValue', 'input', 'keyup']);
 const slots = useSlots();
 
 // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
-const {v, customValidators} = toRefs(props);
+const {v, customValidators, regleValidation } = toRefs(props);
 
 const {
-  isValidation: isVuelidateValidation,
-  invalid: vuelidateInvalid,
-  validationText: vuelidateValidationText,
-} = useVuelidateValidation({
+  isValidation,
+  invalid,
+  validationText,
+} = useValidation({
   v,
   customValidators,
-});
-
-const {
-  invalid: regleInvalid,
-  validationText: regleValidationText,
-} = useRegleFieldValidation({
-  field: toRef(props, 'regleValidation'),
-});
-
-const isValidation = computed(() => {
-  return !!props.regleValidation || isVuelidateValidation.value;
-});
-
-const invalid = computed(() => {
-  return props.regleValidation ? regleInvalid.value : vuelidateInvalid.value;
-});
-
-const validationText = computed(() => {
-  return regleValidationText.value || vuelidateValidationText.value;
+  regleValidation,
 });
 
 // toggles password <-> text at showPassword

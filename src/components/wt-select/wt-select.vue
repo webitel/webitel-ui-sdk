@@ -167,6 +167,7 @@
 </template>
 
 <script>
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import isEmpty from '../../scripts/isEmpty.js';
 import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
 import multiselectMixin from './mixins/multiselectMixin.js';
@@ -213,6 +214,10 @@ export default {
       default: false,
       description: 'See wt-tags-input "manualTagging" prop.',
     },
+    regleValidation: {
+      type: Object,
+      default: null,
+    },
   },
   emits: [
     'reset',
@@ -222,6 +227,9 @@ export default {
     'closed',
     'custom-value', // fires when allowCustomValues and new customValue is added
   ],
+  setup: () => {
+    const {} = useValidation();
+  },
   data: () => ({
     isOpened: false,
     items: [],
