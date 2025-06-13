@@ -1,30 +1,32 @@
 <template>
-  <wt-loader-sm
-    v-if="size === 'sm'"
+  <wt-loader-bigger
+    v-if="size === 'md'"
     :color="color"
     class="wt-loader"
   />
-  <wt-loader-md
-    v-else-if="size === 'md'"
+<!--  why? to avoid copy-past component for 'sm' and 'xs' sises -->
+  <wt-loader-smaller
+    v-else
     class="wt-loader"
+    :size="size"
   />
 </template>
 
 <script>
-import WtLoaderMd from './_internals/wt-loader--md.vue';
-import WtLoaderSm from './_internals/wt-loader--sm.vue';
+import WtLoaderBigger from './_internals/wt-loader-bigger.vue';
+import WtLoaderSmaller from './_internals/wt-loader-smaller.vue';
 
 export default {
   name: 'WtLoader',
   components: {
-    WtLoaderSm,
-    WtLoaderMd,
+    WtLoaderSmaller,
+    WtLoaderBigger,
   },
   props: {
     size: {
       type: String,
       default: 'md',
-      description: '["sm", "md"]',
+      description: '["xs", "sm", "md"]',
     },
     color: {
       type: String,

@@ -1,11 +1,11 @@
 <template>
-  <div class="wt-loader wt-loader--md">
+  <div class="wt-loader-bigger wt-loader-bigger--md">
     <svg
-      class="wt-loader--md__svg"
+      class="wt-loader-bigger--md__svg"
       viewBox="0 0 80 80"
     >
       <rect
-        class="wt-loader--md__svg__rect"
+        class="wt-loader-bigger--md__svg__rect"
         height="64"
         width="64"
         x="8"
@@ -23,7 +23,7 @@ export default {};
 // https://codepen.io/aaroniker/pen/omvYNZ
 @use 'sass:math';
 
-.wt-loader--md {
+.wt-loader-bigger--md {
   position: relative;
   margin: auto;
   width: var(--loader-size);
@@ -43,7 +43,7 @@ export default {};
     content: '';
   }
 
-  .wt-loader--md__svg {
+  .wt-loader-bigger--md__svg {
     display: block;
     width: 100%;
     height: 100%;
