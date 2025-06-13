@@ -1,12 +1,12 @@
-import { computed, isReactive } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed } from 'vue';
+
 import {
-  UseFieldValidationParams as UseRegleFieldValidationParams,
   useFieldValidation as useRegleFieldValidation,
+  UseFieldValidationParams as UseRegleFieldValidationParams,
 } from "./regle/useRegleValidation";
 import {
-  UseFieldValidationParams as UseVuelidateFieldValidationParams,
   useFieldValidation as useVuelidateValidation,
+  UseFieldValidationParams as UseVuelidateFieldValidationParams,
 } from "./vuelidate/useVuelidateValidation";
 
 type CompatVuelidateParams = {

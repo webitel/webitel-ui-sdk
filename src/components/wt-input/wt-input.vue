@@ -71,7 +71,7 @@
 
 <script lang="ts" setup>
 import type {RegleFieldStatus} from '@regle/core';
-import {computed, onMounted, ref, toRef, toRefs, useSlots} from 'vue';
+import {computed, onMounted, ref, toRefs, useSlots} from 'vue';
 
 import {
   useValidation
