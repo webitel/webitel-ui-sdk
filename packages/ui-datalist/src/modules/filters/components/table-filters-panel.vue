@@ -51,7 +51,7 @@
       </template>
 
       <wt-icon-action
-        :disabled="!props.filtersManager.filters.size"
+        :disabled="!listSelectedFilters.length"
         action="clear"
         @click="emit('filter:reset-all')"
       />
@@ -173,6 +173,7 @@ const {
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
+const listSelectedFilters = computed(() => props.filtersManager.getFiltersList({ exclude: ['search'] }));
 </script>
 
 <style>
