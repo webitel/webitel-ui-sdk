@@ -36,7 +36,7 @@ export const useValidation = ({
   });
 
   const isRegleValidation = computed(() => {
-    return !!regleValidation.value;
+    return !!regleValidation?.value;
   });
 
   const isValidation = computed(() => {

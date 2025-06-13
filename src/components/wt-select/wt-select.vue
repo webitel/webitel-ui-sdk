@@ -215,6 +215,10 @@ export default {
       default: false,
       description: 'See wt-tags-input "manualTagging" prop.',
     },
+    v: {
+      type: Object,
+      default: null,
+    },
     regleValidation: {
       type: Object,
       default: null,
