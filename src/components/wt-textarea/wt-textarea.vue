@@ -10,6 +10,7 @@
     <wt-label
       :disabled="disabled"
       :for="name"
+      :required="required"
       :invalid="invalid"
       v-bind="labelProps"
     >
@@ -18,7 +19,7 @@
         name="label"
         v-bind="{ label }"
       >
-        {{ requiredLabel }}
+        {{ label }}
       </slot>
     </wt-label>
     <div class="wt-textarea__wrapper">
@@ -60,10 +61,14 @@
 
 <script>
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
+import { WtLabel } from '../index';
 
 export default {
   name: 'WtTextarea',
   mixins: [validationMixin],
+  components: {
+    WtLabel,
+  },
   props: {
     /**
      * Current textarea value (`v-model`)
@@ -101,6 +106,10 @@ export default {
       default: false,
       description: 'Native textarea disabled attribute',
     },
+    required: {
+      type: Boolean,
+      default: false,
+    },
     /**
      * textarea name
      */
@@ -134,10 +143,6 @@ export default {
         input: (event) => this.$emit('input', event.target.value),
         keypress: (event) => this.handleKeypress(event),
       };
-    },
-
-    requiredLabel() {
-      return this.required ? `${this.label}*` : this.label;
     },
   },
   mounted() {
