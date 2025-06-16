@@ -1,6 +1,6 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && npm run publish-lib",
@@ -20,6 +20,10 @@
     "./gen": {
       "import": "./src/gen/index.ts",
       "types": "./types/gen/index.d.ts"
+    },
+    "./utils": {
+      "import": "./src/utils/index.ts",
+      "types": "./types/utils/index.d.ts"
     },
     "./gen/utils": {
       "import": "./src/utils/gen/index.ts",
@@ -45,14 +49,14 @@
     "zod": "^3.25.55"
   },
   "devDependencies": {
-    "change-case": "^5.4.4",
-    "is-json": "^2.0.1",
     "@biomejs/biome": "1.9.4",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
+    "change-case": "^5.4.4",
     "globby": "^14.1.0",
     "husky": "^9.1.7",
-    "orval": "^7.9.0",
+    "is-json": "^2.0.1",
+    "orval": "^7.10.0",
     "path": "^0.12.7",
     "publint": "^0.3.9",
     "typedoc": "^0.28.4",
