@@ -1,9 +1,11 @@
 import {RegleBehaviourOptions} from "@regle/core";
-import { RegleSchemaBehaviourOptions,useRegleSchema } from '@regle/schemas';
+import { RegleSchemaBehaviourOptions, useRegleSchema } from '@regle/schemas';
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import { defineStore } from 'pinia';
-import {ref, watch, toRaw} from 'vue';
+import {ref, toRaw,watch} from 'vue';
+import { z } from 'zod/v4';
+window.z = z;
 
 const defaultRegleValidationOptions: RegleSchemaBehaviourOptions & RegleBehaviourOptions = {
   autoDirty: false, // compute errors only on $validate() fn (btn click)
@@ -83,8 +85,9 @@ export const createCardStore = <Entity = object>({
       if (itemId.value) {
         await loadItem();
       } else {
-        // todo: fill with defaults from zod schema
-        draftItemInstance.value = {} as Entity;
+        window.zSchema = standardValidationSchema; // for debugging purposes
+        window.draft = draftItemInstance.value; // for debugging purposes
+        draftItemInstance.value = await standardValidationSchema.catch(({ value }) => value).parse(draftItemInstance.value);
       }
     };
 
@@ -99,7 +102,7 @@ export const createCardStore = <Entity = object>({
         parentId.value = initialParentId;
       }
 
-      if (initialItemId) {
+      if (initialItemId && initialItemId !== 'new') {
         itemId.value = initialItemId;
       }
 
