@@ -10,7 +10,7 @@ import { http, HttpResponse, delay } from 'msw';
 
 import type { LoggerLogs } from '.././_models';
 
-export const getSearchLogByConfigIdResponseMock = (
+export const getLoggerServiceSearchLogByConfigIdResponseMock = (
 	overrideResponse: Partial<LoggerLogs> = {},
 ): LoggerLogs => ({
 	items: faker.helpers.arrayElement([
@@ -71,7 +71,7 @@ export const getSearchLogByConfigIdResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchLogByUserIdResponseMock = (
+export const getLoggerServiceSearchLogByUserIdResponseMock = (
 	overrideResponse: Partial<LoggerLogs> = {},
 ): LoggerLogs => ({
 	items: faker.helpers.arrayElement([
@@ -132,7 +132,7 @@ export const getSearchLogByUserIdResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchLogByRecordIdResponseMock = (
+export const getLoggerServiceSearchLogByRecordIdResponseMock = (
 	overrideResponse: Partial<LoggerLogs> = {},
 ): LoggerLogs => ({
 	items: faker.helpers.arrayElement([
@@ -193,7 +193,7 @@ export const getSearchLogByRecordIdResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchLogByConfigIdMockHandler = (
+export const getLoggerServiceSearchLogByConfigIdMockHandler = (
 	overrideResponse?:
 		| LoggerLogs
 		| ((
@@ -209,14 +209,14 @@ export const getSearchLogByConfigIdMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchLogByConfigIdResponseMock(),
+					: getLoggerServiceSearchLogByConfigIdResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getSearchLogByUserIdMockHandler = (
+export const getLoggerServiceSearchLogByUserIdMockHandler = (
 	overrideResponse?:
 		| LoggerLogs
 		| ((
@@ -232,14 +232,14 @@ export const getSearchLogByUserIdMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchLogByUserIdResponseMock(),
+					: getLoggerServiceSearchLogByUserIdResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getSearchLogByRecordIdMockHandler = (
+export const getLoggerServiceSearchLogByRecordIdMockHandler = (
 	overrideResponse?:
 		| LoggerLogs
 		| ((
@@ -255,14 +255,14 @@ export const getSearchLogByRecordIdMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchLogByRecordIdResponseMock(),
+					: getLoggerServiceSearchLogByRecordIdResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getLoggerServiceMock = () => [
-	getSearchLogByConfigIdMockHandler(),
-	getSearchLogByUserIdMockHandler(),
-	getSearchLogByRecordIdMockHandler(),
+	getLoggerServiceSearchLogByConfigIdMockHandler(),
+	getLoggerServiceSearchLogByUserIdMockHandler(),
+	getLoggerServiceSearchLogByRecordIdMockHandler(),
 ];

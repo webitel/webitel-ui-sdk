@@ -23,47 +23,29 @@ export const getListSourcesResponseMock = (
 			{ length: faker.number.int({ min: 1, max: 10 }) },
 			(_, i) => i + 1,
 		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.number.int({ min: undefined, max: undefined }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-				},
-				undefined,
-			]),
+			createdAt: faker.number.int({ min: undefined, max: undefined }),
+			createdBy: {
+				id: faker.helpers.arrayElement([
+					faker.number.int({ min: undefined, max: undefined }),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+			},
 			description: faker.helpers.arrayElement([
 				faker.string.alpha(20),
 				undefined,
 			]),
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-			type: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.number.int({ min: undefined, max: undefined }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-				},
-				undefined,
-			]),
+			id: faker.number.int({ min: undefined, max: undefined }),
+			name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+			type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
+			updatedAt: faker.number.int({ min: undefined, max: undefined }),
+			updatedBy: {
+				id: faker.helpers.arrayElement([
+					faker.number.int({ min: undefined, max: undefined }),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+			},
 		})),
 		undefined,
 	]),
@@ -78,88 +60,52 @@ export const getListSourcesResponseMock = (
 export const getCreateSourceResponseMock = (
 	overrideResponse: Partial<WebitelCasesSource> = {},
 ): WebitelCasesSource => ({
-	createdAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	createdAt: faker.number.int({ min: undefined, max: undefined }),
+	createdBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	description: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	id: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	id: faker.number.int({ min: undefined, max: undefined }),
+	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
+	updatedAt: faker.number.int({ min: undefined, max: undefined }),
+	updatedBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	...overrideResponse,
 });
 
 export const getDeleteSourceResponseMock = (
 	overrideResponse: Partial<WebitelCasesSource> = {},
 ): WebitelCasesSource => ({
-	createdAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	createdAt: faker.number.int({ min: undefined, max: undefined }),
+	createdBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	description: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	id: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	id: faker.number.int({ min: undefined, max: undefined }),
+	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
+	updatedAt: faker.number.int({ min: undefined, max: undefined }),
+	updatedBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	...overrideResponse,
 });
 
@@ -168,47 +114,29 @@ export const getLocateSourceResponseMock = (
 ): WebitelCasesLocateSourceResponse => ({
 	source: faker.helpers.arrayElement([
 		{
-			createdAt: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.number.int({ min: undefined, max: undefined }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-				},
-				undefined,
-			]),
+			createdAt: faker.number.int({ min: undefined, max: undefined }),
+			createdBy: {
+				id: faker.helpers.arrayElement([
+					faker.number.int({ min: undefined, max: undefined }),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+			},
 			description: faker.helpers.arrayElement([
 				faker.string.alpha(20),
 				undefined,
 			]),
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-			type: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.number.int({ min: undefined, max: undefined }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-				},
-				undefined,
-			]),
+			id: faker.number.int({ min: undefined, max: undefined }),
+			name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+			type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
+			updatedAt: faker.number.int({ min: undefined, max: undefined }),
+			updatedBy: {
+				id: faker.helpers.arrayElement([
+					faker.number.int({ min: undefined, max: undefined }),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+			},
 		},
 		undefined,
 	]),
@@ -218,88 +146,52 @@ export const getLocateSourceResponseMock = (
 export const getUpdateSource2ResponseMock = (
 	overrideResponse: Partial<WebitelCasesSource> = {},
 ): WebitelCasesSource => ({
-	createdAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	createdAt: faker.number.int({ min: undefined, max: undefined }),
+	createdBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	description: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	id: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	id: faker.number.int({ min: undefined, max: undefined }),
+	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
+	updatedAt: faker.number.int({ min: undefined, max: undefined }),
+	updatedBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	...overrideResponse,
 });
 
 export const getUpdateSourceResponseMock = (
 	overrideResponse: Partial<WebitelCasesSource> = {},
 ): WebitelCasesSource => ({
-	createdAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	createdAt: faker.number.int({ min: undefined, max: undefined }),
+	createdBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	description: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	id: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-	type: faker.helpers.arrayElement([
-		faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.number.int({ min: undefined, max: undefined }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
-		},
-		undefined,
-	]),
+	id: faker.number.int({ min: undefined, max: undefined }),
+	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
+	updatedAt: faker.number.int({ min: undefined, max: undefined }),
+	updatedBy: {
+		id: faker.helpers.arrayElement([
+			faker.number.int({ min: undefined, max: undefined }),
+			undefined,
+		]),
+		name: faker.helpers.arrayElement([faker.string.alpha(20), undefined]),
+	},
 	...overrideResponse,
 });
 

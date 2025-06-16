@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-datalist",
-  "version": "1.0.43",
+  "version": "1.0.45",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
     "build:types": "vue-tsc -p ./tsconfig.build.json",
@@ -52,7 +52,7 @@
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "@webitel/styleguide": "^24.12.26",
-    "@webitel/ui-sdk": "^25.6.35",
+    "@webitel/ui-sdk": "^25.6.37",
     "zod": "^3.25.55"
   },
   "devDependencies": {

@@ -6,11 +6,11 @@
  */
 import type { LoggerLookup } from './loggerLookup';
 
-export interface ConfigServicePatchConfigBody {
+export interface LoggerUpdateConfigRequest {
+	configId?: number;
 	daysToStore?: number;
 	description?: string;
 	enabled?: boolean;
-	fields?: string[];
 	period?: number;
 	storage?: LoggerLookup;
 }
