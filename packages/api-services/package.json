@@ -7,7 +7,6 @@
     "gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:typedoc && npm run gen:api:cleanup",
     "publish-lib": "(npm run build:types || true) && npm publish --access public",
     "gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
-    "gen:api:convert-openapi--": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml ../../../protos/swagger/cases.swagger.json > swagger.yaml",
     "gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
     "gen:api:typedoc": "npx typedoc",
     "gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",

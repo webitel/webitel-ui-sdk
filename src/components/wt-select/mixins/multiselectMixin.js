@@ -7,7 +7,7 @@ import isEmpty from '../../../scripts/isEmpty.js';
 import labelUsageMixin from '../../wt-label/mixins/labelUsageMixin.js';
 
 export default {
-  mixins: [validationMixin, labelUsageMixin],
+  mixins: [labelUsageMixin],
   directives: { ObserveVisibility },
   components: {
     VueMultiselect,
