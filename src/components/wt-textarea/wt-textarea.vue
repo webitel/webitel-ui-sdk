@@ -61,14 +61,14 @@
 
 <script>
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
-import { WtLabel } from '../index';
+import WtLabel from '../wt-label/wt-label.vue';
 
 export default {
   name: 'WtTextarea',
-  mixins: [validationMixin],
   components: {
     WtLabel,
   },
+  mixins: [validationMixin],
   props: {
     /**
      * Current textarea value (`v-model`)
