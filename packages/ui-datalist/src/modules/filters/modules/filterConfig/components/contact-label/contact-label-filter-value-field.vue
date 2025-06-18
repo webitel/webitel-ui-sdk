@@ -2,7 +2,7 @@
   <wt-select
     :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
-    :v="v$?.model"
+    :v="!disableValidation && v$?.model"
     :value="model"
     multiple
     option-label="label"
@@ -15,11 +15,11 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, watch } from 'vue';
+import { computed, watch, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { WtSelect } from '@webitel/ui-sdk/components';
 
-import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 const props = defineProps<{
   filterConfig: WtSysTypeFilterConfig;
@@ -36,24 +36,21 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'))
+const labelValue = computed(() => props?.hideLabel ? null : t('webitelUI.filters.filterValue'));
 
-const v$ = computed(() => {
-  if (props?.disableValidation) return null;
-  return useVuelidate(
-    computed(() => ({
-      model: { required },
-    })),
-    { model },
-    { $autoDirty: true }
-  );
+const v$ = useVuelidate(
+  computed(() => ({
+    model: {
+      required,
+    },
+  })),
+  { model },
+  { $autoDirty: true },
+);
+
+onMounted(() => {
+  if (!props?.disableValidation) v$.value.$touch();
 });
-watch(
-  v$,
-  (v) => {
-    if (v) v.value.$touch();
-  },
-  { immediate: true });
 
 watch(
   () => v$?.value?.$invalid,

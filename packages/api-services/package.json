@@ -1,13 +1,12 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.14",
+  "version": "0.0.22",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && npm run publish-lib",
     "gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:typedoc && npm run gen:api:cleanup",
     "publish-lib": "(npm run build:types || true) && npm publish --access public",
     "gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
-    "gen:api:convert-openapi--": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml ../../../protos/swagger/cases.swagger.json > swagger.yaml",
     "gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
     "gen:api:typedoc": "npx typedoc",
     "gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
@@ -21,6 +20,10 @@
     "./gen": {
       "import": "./src/gen/index.ts",
       "types": "./types/gen/index.d.ts"
+    },
+    "./utils": {
+      "import": "./src/utils/index.ts",
+      "types": "./types/utils/index.d.ts"
     },
     "./gen/utils": {
       "import": "./src/utils/gen/index.ts",
@@ -43,17 +46,17 @@
     "deepmerge": "^4.3.1",
     "lodash-es": "^4.17.21",
     "query-string": "^9.1.1",
-    "zod": "^4.0.0-beta.20250505T195954"
+    "zod": "^3.25.55"
   },
   "devDependencies": {
-    "change-case": "^5.4.4",
-    "is-json": "^2.0.1",
     "@biomejs/biome": "1.9.4",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
+    "change-case": "^5.4.4",
     "globby": "^14.1.0",
     "husky": "^9.1.7",
-    "orval": "^7.9.0",
+    "is-json": "^2.0.1",
+    "orval": "^7.10.0",
     "path": "^0.12.7",
     "publint": "^0.3.9",
     "typedoc": "^0.28.4",

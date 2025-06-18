@@ -10,6 +10,7 @@
     <wt-label
       :disabled="disabled"
       :for="name"
+      :required="required"
       :invalid="invalid"
       v-bind="labelProps"
     >
@@ -18,7 +19,7 @@
         name="label"
         v-bind="{ label }"
       >
-        {{ requiredLabel }}
+        {{ label }}
       </slot>
     </wt-label>
     <div class="wt-textarea__wrapper">
@@ -28,7 +29,8 @@
         :disabled="disabled"
         :placeholder="placeholder || label"
         :value="value"
-        rows="1"
+        :rows="rows"
+        :readonly="readonly"
         class="wt-textarea__textarea"
         v-on="listeners"
         @input="autoGrow"
@@ -59,10 +61,14 @@
 
 <script>
 import validationMixin from '../../mixins/validationMixin/validationMixin.js';
+import { WtLabel } from '../index';
 
 export default {
   name: 'WtTextarea',
   mixins: [validationMixin],
+  components: {
+    WtLabel,
+  },
   props: {
     /**
      * Current textarea value (`v-model`)
@@ -87,10 +93,22 @@ export default {
     /**
      * Native textarea disabled attribute
      */
+    readonly: {
+      type: Boolean,
+      default: false,
+      description: 'Native textarea readonly attribute',
+    },
+    /**
+     * Native textarea disabled attribute
+     */
     disabled: {
       type: Boolean,
       default: false,
       description: 'Native textarea disabled attribute',
+    },
+    required: {
+      type: Boolean,
+      default: false,
     },
     /**
      * textarea name
@@ -98,6 +116,14 @@ export default {
     name: {
       type: String,
       default: '',
+    },
+    /**
+     * Number of rows in textarea
+     */
+    rows: {
+      type: Number,
+      default: 1,
+      description: 'Number of rows for textarea',
     },
     labelProps: {
       type: Object,
@@ -117,10 +143,6 @@ export default {
         input: (event) => this.$emit('input', event.target.value),
         keypress: (event) => this.handleKeypress(event),
       };
-    },
-
-    requiredLabel() {
-      return this.required ? `${this.label}*` : this.label;
     },
   },
   mounted() {

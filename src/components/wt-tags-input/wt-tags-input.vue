@@ -103,6 +103,7 @@
 
 <script>
 import deepEqual from 'deep-equal';
+import validationMixin from '../../mixins/validationMixin/validationMixin';
 
 import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
 import taggableMixin from './mixin/taggableMixin.js';
@@ -110,6 +111,7 @@ import taggableMixin from './mixin/taggableMixin.js';
 export default {
   name: 'WtTagsInput',
   mixins: [
+    validationMixin,
     multiselectMixin,
     // taggableMixin is used to add custom select values, see [https://my.webitel.com/browse/WTEL-3181
     taggableMixin,

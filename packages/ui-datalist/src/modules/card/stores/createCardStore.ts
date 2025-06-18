@@ -1,10 +1,21 @@
-import { RegleSchemaBehaviourOptions,useRegleSchema } from '@regle/schemas';
+import { RegleBehaviourOptions } from '@regle/core';
+import { RegleSchemaBehaviourOptions, useRegleSchema } from '@regle/schemas';
 import type { StandardSchemaV1 } from '@standard-schema/spec';
+import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
 import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, toRaw, watch } from 'vue';
+import { z } from 'zod/v4';
 
-export const createFormStore = <Entity = object>({
+const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
+  RegleBehaviourOptions = {
+  autoDirty: false, // compute errors only on $validate() fn (btn click)
+  syncState: {
+    onValidate: true, // make zod defaults fill state
+  },
+};
+
+export const createCardStore = <Entity = object>({
   namespace,
   apiModule,
   standardValidationSchema,
@@ -16,12 +27,25 @@ export const createFormStore = <Entity = object>({
   validationSchemaOptions?: RegleSchemaBehaviourOptions;
 }) => {
   return defineStore(namespace, () => {
-    // form data vars
+    // card data vars
     const parentId = ref<string | number | null>();
     const itemId = ref<string | number | null>();
-    const itemInstance = ref<Entity>({} as Entity); // mb rename to formData? – in case of multiple stores for 1 main item instance
 
-    // form state vars
+    // readonly, state on backend
+    const originalItemInstance = ref<Readonly<Entity>>({} as Entity);
+
+    // draft, changeable using ui controls, but not saved yet
+    const draftItemInstance = ref<Entity>({} as Entity);
+
+    /**
+     * sync draft to original, after original changes
+     * NOTE! it's only 1 way binding
+     */
+    watch(originalItemInstance, (value) => {
+      draftItemInstance.value = structuredClone(toRaw(value));
+    });
+
+    // card state vars
     const validationSchema = ref();
 
     // processing progress vars
@@ -31,22 +55,20 @@ export const createFormStore = <Entity = object>({
 
     if (standardValidationSchema) {
       validationSchema.value = useRegleSchema(
-        itemInstance,
+        draftItemInstance,
         standardValidationSchema,
-        validationSchemaOptions,
+        { ...defaultRegleValidationOptions, ...validationSchemaOptions },
       );
     }
 
     const loadItem = async () => {
       isLoading.value = true;
       try {
-        const loadedItemInstance = await apiModule.get({
+        originalItemInstance.value = await apiModule.get({
           id: itemId.value,
           itemId: itemId.value, // compat, use "id" instead
           parentId: parentId.value,
         });
-
-        itemInstance.value = loadedItemInstance;
       } catch (err) {
         error.value = err;
       } finally {
@@ -59,18 +81,19 @@ export const createFormStore = <Entity = object>({
     const initializeItemInstance = async () => {
       if (itemId.value) {
         await loadItem();
+      } else if (standardValidationSchema) {
+        draftItemInstance.value = await getDefaultsFromZodSchema(
+          standardValidationSchema, // fixme: type
+        );
       } else {
-        // todo: fill with defaults from zod schema
-        itemInstance.value = {} as Entity;
+        draftItemInstance.value = {} as Entity;
       }
     };
 
     const initialize = ({
-      itemInstance: initialItemInstance,
       itemId: initialItemId,
       parentId: initialParentId,
     }: {
-      itemInstance?: Entity;
       itemId?: string | number;
       parentId?: string | number;
     } = {}) => {
@@ -78,22 +101,20 @@ export const createFormStore = <Entity = object>({
         parentId.value = initialParentId;
       }
 
-      if (initialItemId) {
+      if (initialItemId && initialItemId !== 'new') {
         itemId.value = initialItemId;
       }
-
-      if (initialItemInstance) {
-        itemInstance.value = initialItemInstance;
-      } else {
-      } // todo: ??
 
       return initializeItemInstance();
     };
 
+    const $reset = () => {};
+
     return {
       parentId,
       itemId,
-      itemInstance,
+      originalItemInstance,
+      draftItemInstance,
 
       validationSchema,
 
@@ -103,6 +124,7 @@ export const createFormStore = <Entity = object>({
 
       initialize,
       saveItem,
+      $reset,
     };
   });
 };
