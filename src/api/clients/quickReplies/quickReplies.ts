@@ -1,15 +1,9 @@
-import {
-  createQuickReplyBody,
-  getQuickRepliesService,
-  searchQuickRepliesQueryParams,
-  updateQuickReplyBody,
-} from '@webitel/api-services/gen';
+import { getQuickRepliesService } from '@webitel/api-services/gen';
 
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
 } from '../../defaults/index';
-import { getFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -20,8 +14,16 @@ import applyTransform, {
 
 const quickReplyService = getQuickRepliesService();
 
+const fieldsToSend = [
+  'name',
+  'queues',
+  'article',
+  'teams',
+  'text',
+];
+
 const getQuickRepliesList = async (params) => {
-  const fieldsToSend = getFieldsToSendFromZodSchema(searchQuickRepliesQueryParams);
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
 
   const { page, size, fields, sort, id, q } = applyTransform(params, [
     merge(getDefaultGetParams()),
@@ -63,7 +65,7 @@ const getQuickReply = async ({ itemId: id }) => {
 
 const addQuickReply= async ({ itemInstance }) => {
   const item = applyTransform(itemInstance, [
-    sanitize(getFieldsToSendFromZodSchema(createQuickReplyBody)),
+    sanitize(fieldsToSend),
     camelToSnake(),
   ]);
   try {
@@ -78,7 +80,7 @@ const addQuickReply= async ({ itemInstance }) => {
 const updateQuickReply = async ({ itemInstance, itemId: id }) => {
   const item = applyTransform(itemInstance, [
     camelToSnake(),
-    sanitize(getFieldsToSendFromZodSchema(updateQuickReplyBody)),
+    sanitize(fieldsToSend),
   ]);
 
   try {
