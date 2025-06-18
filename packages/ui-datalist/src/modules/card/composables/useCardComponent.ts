@@ -1,21 +1,24 @@
+import { RegleSchemaResult } from '@regle/schemas';
 import { refDebounced } from '@vueuse/core';
-import {computed,MaybeRef, Ref} from 'vue';
+import {computed, Ref} from 'vue';
 
 export const useCardComponent = ({
-  checkIfInvalid,
+  validate,
   isLoading,
   saveItem,
   itemId,
 }: {
-  checkIfInvalid?: () => boolean;
+  validate?: () => Promise<RegleSchemaResult<unknown>>;
   isLoading?: Ref<boolean>;
-  itemId?: MaybeRef<string | number>;
+  itemId?: Ref<string | number>;
   saveItem: () => Promise<unknown>;
 }) => {
   const debouncedIsLoading = refDebounced(isLoading, 300);
 
-  const save = () => {
-    if (checkIfInvalid && !checkIfInvalid()) return;
+  const save = async () => {
+    const hasErrors = await validate();
+    if (hasErrors) return;
+
     return saveItem();
   };
 

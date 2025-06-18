@@ -3,15 +3,15 @@ import { useI18n } from 'vue-i18n';
 
 export const useItemCardSaveText = ({
   isNew,
-  isEdited,
+  isAnyFieldEdited,
                                     }: {
   isNew: Ref<boolean>;
-  isEdited: Ref<boolean>;
+  isAnyFieldEdited: Ref<boolean>;
 }) => {
   const { t } = useI18n();
 
   const saveText = computed(() => {
-    return isNew.value || isEdited.value
+    return isNew.value || isAnyFieldEdited.value
       ? t('reusable.save')
       : t('reusable.saved');
   });
