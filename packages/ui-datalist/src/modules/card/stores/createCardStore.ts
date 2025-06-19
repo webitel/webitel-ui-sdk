@@ -1,6 +1,5 @@
 import { RegleBehaviourOptions } from '@regle/core';
 import { RegleSchemaBehaviourOptions, useRegleSchema } from '@regle/schemas';
-import type { StandardSchemaV1 } from '@standard-schema/spec';
 import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
 import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
 import { defineStore } from 'pinia';
@@ -23,7 +22,7 @@ export const createCardStore = <Entity = object>({
 }: {
   namespace: string;
   apiModule: ApiModule<Entity>;
-  standardValidationSchema?: StandardSchemaV1 | null;
+  standardValidationSchema?: z.ZodType | null;
   validationSchemaOptions?: RegleSchemaBehaviourOptions;
 }) => {
   return defineStore(namespace, () => {
@@ -83,7 +82,8 @@ export const createCardStore = <Entity = object>({
         await loadItem();
       } else if (standardValidationSchema) {
         draftItemInstance.value = await getDefaultsFromZodSchema(
-          standardValidationSchema, // fixme: type
+          standardValidationSchema,
+          draftItemInstance.value,
         );
       } else {
         draftItemInstance.value = {} as Entity;
