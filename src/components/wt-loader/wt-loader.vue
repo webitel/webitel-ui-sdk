@@ -4,7 +4,6 @@
     :color="color"
     class="wt-loader"
   />
-<!--  why? to avoid copy-past component for 'sm' and 'xs' sises -->
   <wt-loader-smaller
     v-else
     class="wt-loader"
