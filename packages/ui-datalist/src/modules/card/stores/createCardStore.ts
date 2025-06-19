@@ -1,10 +1,13 @@
 import { RegleBehaviourOptions } from '@regle/core';
 import { RegleSchemaBehaviourOptions, useRegleSchema } from '@regle/schemas';
 import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
-import { ApiModule } from '@webitel/ui-sdk/api/types/ApiModule.type';
+// @ts-ignore
+import { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { defineStore } from 'pinia';
 import { ref, toRaw, watch } from 'vue';
 import { z } from 'zod/v4';
+
+import { CardItemId, CardParentId } from '../types/CardStore.types';
 
 const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
   RegleBehaviourOptions = {
@@ -27,8 +30,8 @@ export const createCardStore = <Entity = object>({
 }) => {
   return defineStore(namespace, () => {
     // card data vars
-    const parentId = ref<string | number | null>();
-    const itemId = ref<string | number | null>();
+    const parentId = ref<CardItemId>();
+    const itemId = ref<CardParentId>();
 
     // readonly, state on backend
     const originalItemInstance = ref<Readonly<Entity>>({} as Entity);
@@ -75,7 +78,53 @@ export const createCardStore = <Entity = object>({
       }
     };
 
-    const saveItem = async () => {};
+    const createItem = ({
+      data,
+      parentId,
+    }: {
+      data: Entity;
+      parentId?: string | number | null;
+    }) => {
+      return apiModule.add({
+        itemInstance: data,
+        parentId,
+      });
+    };
+    const updateItem = ({
+      data,
+      itemId,
+      parentId,
+    }: {
+      data: Entity;
+      itemId: string | number | null;
+      parentId?: string | number | null;
+    }) => {
+      return apiModule.update({
+        itemInstance: data,
+        itemId,
+        parentId,
+      });
+    };
+
+    const saveItem = async (draft: Entity) => {
+      let responseItem: Entity; // use response after add/update instead of sending "get" request
+
+      if (itemId.value) {
+        responseItem = await updateItem({
+          data: draft,
+          itemId: itemId.value,
+          parentId: parentId.value,
+        });
+      } else {
+        responseItem = await createItem({
+          data: draft,
+          parentId: parentId.value,
+        });
+      }
+
+      originalItemInstance.value = responseItem;
+      itemId.value = responseItem.id;
+    };
 
     const initializeItemInstance = async () => {
       if (itemId.value) {
@@ -108,7 +157,16 @@ export const createCardStore = <Entity = object>({
       return initializeItemInstance();
     };
 
-    const $reset = () => {};
+    const $reset = () => {
+      itemId.value = null;
+      parentId.value = null;
+
+      originalItemInstance.value = {} as Entity;
+
+      isLoading.value = false;
+      isSaving.value = false;
+      error.value = null;
+    };
 
     return {
       parentId,
