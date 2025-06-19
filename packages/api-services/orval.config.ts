@@ -4,9 +4,13 @@ import {
   generateAxiosHeader,
   generateAxiosTitle,
 } from '@orval/axios';
-import { defineConfig } from 'orval';
+import {
+  builder as zodBuilder,
+  getZodDependencies,
+} from '@orval/zod';
 import { pascalCase as pascal } from 'change-case';
 import isJson from 'is-json';
+import { defineConfig } from 'orval';
 
 const outputWorkspace = './src/gen';
 const outputTarget = '';
@@ -95,7 +99,7 @@ export default defineConfig({
       workspace: outputWorkspace,
       target: outputTarget,
       fileExtension: `.zod.${sharedGenFileExtension}`,
-      client: 'zod',
+      client: zodClient,
       mode: 'tags-split',
       indexFiles: true,
       schemas: '_models',
@@ -171,5 +175,25 @@ function axiosClient() {
             ${generateAxiosTitle(title)}
             // --- title end
           `,
+  };
+}
+
+// rm me when will be officially supported: https://github.com/orval-labs/orval/issues/2091
+function zodClient() {
+  const zBuilder = zodBuilder()();
+  const deps = getZodDependencies().map((dep) => {
+    if (dep.dependency === 'zod') {
+      return {
+        ...dep,
+        dependency: 'zod/v4', // make import {} from 'zod' -> import {} from 'zod/v4'
+      };
+    }
+
+    return dep;
+  });
+
+  return {
+    ...zBuilder,
+    dependencies: () => deps,
   };
 }

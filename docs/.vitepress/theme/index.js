@@ -12,6 +12,7 @@ import {
   createWebHistory,
 } from 'vue-router';
 
+import initPrimevue from '../../../src/plugins/primevue/primevue.plugin.js';
 import sharedComponents from '../../shared';
 import Layout from './Layout.vue';
 
@@ -27,6 +28,7 @@ export default {
   enhanceApp({ app }) {
     app.use(i18n);
     app.use(router); // for wt-navigation-bar docs
+    initPrimevue(app);
     WebitelUI.install(app, {});
     Object.keys(sharedComponents).forEach((name) => {
       app.component(name, sharedComponents[name]);

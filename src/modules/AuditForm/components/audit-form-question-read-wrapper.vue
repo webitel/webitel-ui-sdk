@@ -141,6 +141,8 @@ const resetAnswer = () => {
 }
 
 .audit-form-question-read-text {
+  overflow-wrap: anywhere; // break words in text with no spaces, but preserve words if text has spaces
+
   &--required {
     &:after {
       content: '*';

@@ -1,3 +1,4 @@
+import addQueryParamsToUrl from './addQueryParamsToUrl/addQueryParamsToUrl.transformer.js';
 import applyTransform from './applyTransform.js';
 import camelToSnake from './camelToSnake/camelToSnake.transformer.js';
 import generateUrl from './generateUrl/generateUrl.transformer.js';
@@ -11,6 +12,7 @@ import snakeToCamel from './snakeToCamel/snakeToCamel.transformer.js';
 import starToSearch from './starToSearch/starToSearch.transformer.js';
 
 export {
+  addQueryParamsToUrl,
   camelToSnake,
   generateUrl,
   log,

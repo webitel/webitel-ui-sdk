@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 
+import wtSelectV2 from '../../../../../../src/components/wt-select/wt-select-v2.vue';
+
 const options = [
   { id: 'Vue.js1', name: 'JavaScript' },
   { id: 'Adonis2', name: 'JavaScript' },
@@ -23,6 +25,16 @@ const singleValue = ref('');
 <template>
   <div>
     <wt-select
+      :options="options"
+      :value="multipleValue"
+      allow-custom-values
+      label="Custom Values in Multiple Select"
+      multiple
+      track-by="id"
+      @input="multipleValue = $event"
+    />
+
+    <wt-select-v2
       :options="options"
       :value="multipleValue"
       allow-custom-values

@@ -50,6 +50,20 @@ const base = '/base';
 generateUrl(base)({ q1: 'v1', q2: 'v2' });
 ```
 
+## addQueryParamsToUrl
+
+Add query parameters to the URL.
+
+```js
+import { addQueryParamsToUrl } from '@webitel/ui-sdk/src/api/transformers';
+
+const url = 'api_url/base?page=1&page=2';
+const queryArray = ['q=test*', 'user_id=2'];
+
+// => api_url/base?page=1&page=2&q=test*&user_id=2
+addQueryParamsToUrl(queryArray)(url);
+```
+
 ## log
 
 Log passed data.

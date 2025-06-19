@@ -3,6 +3,7 @@
     :class="{
       'wt-label--invalid': invalid,
       'wt-label--disabled': disabled,
+      'wt-label--required': required,
     }"
     class="wt-label"
   >
@@ -11,24 +12,13 @@
   </label>
 </template>
 
-<script>
-export default {
-  name: 'WtLabel',
-  props: {
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    invalid: {
-      type: Boolean,
-      default: false,
-    },
-    hint: {
-      type: String,
-      description: 'Adds hint icon + tooltip with text, passed as "hint" prop',
-    },
-  },
-};
+<script lang="ts" setup>
+defineProps<{
+  disabled?: boolean;
+  invalid?: boolean;
+  required?: boolean;
+  hint?: string;
+}>();
 </script>
 
 <style lang="scss">
@@ -54,6 +44,12 @@ export default {
 
   &--disabled {
     color: var(--wt-label-disabled-color);
+  }
+
+  &--required {
+    &::after {
+      content: '*';
+    }
   }
 }
 

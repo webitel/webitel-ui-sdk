@@ -3,7 +3,7 @@
     :close-on-select="false"
     :label="labelValue"
     :search-method="props.filterConfig.searchRecords"
-    :v="v$?.model.list"
+    :v="!disableValidation && v$?.model?.list"
     :value="model?.list"
     multiple
     track-by="id"
@@ -15,7 +15,7 @@
     v-if="!props.filterConfig?.hideUnassigned"
     :label="t('reusable.showUnassigned')"
     :selected="model?.unassigned"
-    :v="v$?.model.unassigned"
+    :v="!disableValidation && v$?.model?.unassigned"
     @change="model.unassigned = $event"
   />
 </template>
@@ -60,9 +60,7 @@ const changeListValue = (event) => {
     };
   }
 };
-const v$ = computed(() => {
-  if (props.disableValidation) return null;
-  return useVuelidate(
+const v$ =  useVuelidate(
     computed(() => ({
       model: {
         list: { required: requiredIf(() => !model.value.unassigned) },
@@ -75,7 +73,10 @@ const v$ = computed(() => {
     })),
     { model },
     { $autoDirty: true }
-  );
+);
+
+onMounted(() => {
+  if(!props?.disableValidation) v$.value.$touch();
 });
 
 watch(

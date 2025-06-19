@@ -149,12 +149,12 @@
         v-if="showIntersectionObserver"
         #afterList
       >
-<!--        @author @Lera24-->
-<!--        [WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818)-->
-<!--        When changing the page scale, vue-observe-visibility works unstable and does not see the changes. -->
-<!--        The minimum height ensures additional data loading if the search method is used-->
+        <!--        @author @Lera24-->
+        <!--        [WTEL-6818](https://webitel.atlassian.net/browse/WTEL-6818)-->
+        <!--        When changing the page scale, vue-observe-visibility works unstable and does not see the changes. -->
+        <!--        The minimum height ensures additional data loading if the search method is used-->
 
-        <div v-observe-visibility="handleAfterListIntersect" style="height: 1px"/>
+        <div v-observe-visibility="handleAfterListIntersect" style="height: 1px" />
       </template>
     </vue-multiselect>
     <wt-input-info
@@ -167,6 +167,8 @@
 </template>
 
 <script>
+import { toRefs } from 'vue';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import isEmpty from '../../scripts/isEmpty.js';
 import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
 import multiselectMixin from './mixins/multiselectMixin.js';
@@ -213,6 +215,14 @@ export default {
       default: false,
       description: 'See wt-tags-input "manualTagging" prop.',
     },
+    v: {
+      type: Object,
+      default: null,
+    },
+    regleValidation: {
+      type: Object,
+      default: null,
+    },
   },
   emits: [
     'reset',
@@ -222,8 +232,28 @@ export default {
     'closed',
     'custom-value', // fires when allowCustomValues and new customValue is added
   ],
+  setup: (props/*, ctx*/) => {
+    // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
+    const {v, customValidators, regleValidation } = toRefs(props);
+    const {
+      isValidation,
+      invalid,
+      validationText,
+    } = useValidation({
+      v,
+      customValidators,
+      regleValidation,
+    });
+
+    return {
+      isValidation,
+      invalid,
+      validationText,
+    };
+  },
   data: () => ({
     isOpened: false,
+    items: [],
   }),
   computed: {
     // for taggableMixin
@@ -268,6 +298,10 @@ export default {
     async handleCustomValue(value) {
       // https://webitel.atlassian.net/browse/WTEL-3181
       this.tag(value);
+    },
+    async search(event) {
+      console.log('event.query', event.query);
+      this.items = [...this.optionsWithCustomValues];
     },
     // for taggableMixin functionality
     async handleCustomValueArrowInput(toggle) {
