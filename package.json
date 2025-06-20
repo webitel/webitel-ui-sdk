@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.8.7",
+  "version": "25.8.8",
   "private": false,
   "scripts": {
     "dev": "npm run docs:dev",
@@ -36,7 +36,7 @@
     "src/enums/*",
     "src/mixins/*",
     "src/scripts/*",
-    "src/validations/vuelidate/validators/*",
+    "src/validations/*",
     "src/modules/*",
     "src/plugins/*",
     "src/store/*",
