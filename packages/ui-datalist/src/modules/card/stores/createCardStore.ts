@@ -24,8 +24,8 @@ export const createCardStore = <Entity = object>({
   validationSchemaOptions,
 }: {
   namespace: string;
+  standardValidationSchema: z.ZodType;
   apiModule: ApiModule<Entity>;
-  standardValidationSchema?: z.ZodType | null;
   validationSchemaOptions?: RegleSchemaBehaviourOptions;
 }) => {
   return defineStore(namespace, () => {
@@ -55,13 +55,13 @@ export const createCardStore = <Entity = object>({
     const isSaving = ref(false);
     const error = ref(null); // if needed
 
-    if (standardValidationSchema) {
+
       validationSchema.value = useRegleSchema(
         draftItemInstance,
         standardValidationSchema,
         { ...defaultRegleValidationOptions, ...validationSchemaOptions },
       );
-    }
+
 
     const loadItem = async () => {
       isLoading.value = true;
@@ -73,6 +73,7 @@ export const createCardStore = <Entity = object>({
         });
       } catch (err) {
         error.value = err;
+        throw err;
       } finally {
         isLoading.value = false;
       }
@@ -162,6 +163,8 @@ export const createCardStore = <Entity = object>({
       parentId.value = null;
 
       originalItemInstance.value = {} as Entity;
+
+      validationSchema.value.r$.$reset();
 
       isLoading.value = false;
       isSaving.value = false;
