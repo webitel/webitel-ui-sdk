@@ -353,7 +353,14 @@ export default {
     maxLength: 'The length should not be greater than',
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
-    minLength: 'Quantity of characters should not be less than',
+    minLength: ({ named }) => {
+      let text = 'The length should not be less than';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+
+      return text;
+    },
     url: 'Should look like URL',
     websocketValidator: 'Should look like WebSocket url',
     isRegExpMatched: 'Password must match the regular expression:',

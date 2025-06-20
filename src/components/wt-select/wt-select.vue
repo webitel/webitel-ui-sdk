@@ -167,6 +167,8 @@
 </template>
 
 <script>
+import { toRefs } from 'vue';
+import { useValidation } from '../../mixins/validationMixin/useValidation';
 import isEmpty from '../../scripts/isEmpty.js';
 import taggableMixin from '../wt-tags-input/mixin/taggableMixin.js';
 import multiselectMixin from './mixins/multiselectMixin.js';
@@ -213,6 +215,14 @@ export default {
       default: false,
       description: 'See wt-tags-input "manualTagging" prop.',
     },
+    v: {
+      type: Object,
+      default: null,
+    },
+    regleValidation: {
+      type: Object,
+      default: null,
+    },
   },
   emits: [
     'reset',
@@ -222,6 +232,25 @@ export default {
     'closed',
     'custom-value', // fires when allowCustomValues and new customValue is added
   ],
+  setup: (props/*, ctx*/) => {
+    // https://stackoverflow.com/questions/72408463/use-props-in-composables-vue3
+    const {v, customValidators, regleValidation } = toRefs(props);
+    const {
+      isValidation,
+      invalid,
+      validationText,
+    } = useValidation({
+      v,
+      customValidators,
+      regleValidation,
+    });
+
+    return {
+      isValidation,
+      invalid,
+      validationText,
+    };
+  },
   data: () => ({
     isOpened: false,
     items: [],

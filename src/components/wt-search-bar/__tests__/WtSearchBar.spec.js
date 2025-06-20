@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import { ref } from 'vue';
 
-import { useValidation } from '../../../mixins/validationMixin/useValidation.js';
+import { useValidation } from '../../../mixins/validationMixin/useValidation';
 import WtSearchBar from '../wt-search-bar.vue';
 
 vi.mock('../../../mixins/validationMixin/useValidation');
