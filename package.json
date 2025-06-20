@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.8.6",
+  "version": "25.8.7",
   "private": false,
   "scripts": {
     "dev": "npm run docs:dev",
@@ -53,7 +53,7 @@
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^13.0.0",
-    "@webitel/api-services": "^0.0.22",
+    "@webitel/api-services": "^0.0.24",
     "@webitel/styleguide": "^24.12.26",
     "autosize": "^6.0.1",
     "axios": "^1.8.3",
@@ -161,7 +161,7 @@
       },
       "./enums": {
         "types": "./types/enums/index.d.ts",
-        "import": "./src/enums/index.js"
+        "import": "./src/enums/index.ts"
       },
       "./enums*": {
         "types": "./types/enums*",
@@ -210,6 +210,10 @@
       "./src/locale*": {
         "types": "./types/locale*",
         "import": "./src/locale*"
+      },
+      "./composables": {
+        "types": "./types/composables/index.d.ts",
+        "import": "./src/composables/index.ts"
       },
       "./composables*": {
         "types": "./types/composables*",
