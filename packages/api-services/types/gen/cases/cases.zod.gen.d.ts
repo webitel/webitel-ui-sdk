@@ -1186,250 +1186,257 @@ export declare const updateCase2Body: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
     }, zod.core.$strip>>;
 }, zod.core.$strip>;
-export declare const updateCase2ResponseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
-export declare const updateCase2ResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
+export declare const updateCase2ResponseCaseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
+export declare const updateCase2ResponseCaseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateCase2Response: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    author: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    closeReason: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    closeResult: zod.ZodOptional<zod.ZodString>;
-    comments: zod.ZodOptional<zod.ZodObject<{
-        items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            author: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            canEdit: zod.ZodOptional<zod.ZodBoolean>;
-            caseId: zod.ZodOptional<zod.ZodString>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            edited: zod.ZodOptional<zod.ZodBoolean>;
-            etag: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-            text: zod.ZodOptional<zod.ZodString>;
-            updatedAt: zod.ZodOptional<zod.ZodString>;
-            updatedBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            ver: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    contactInfo: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, zod.core.$strip>>;
-    dc: zod.ZodOptional<zod.ZodString>;
-    description: zod.ZodOptional<zod.ZodString>;
-    differenceInReaction: zod.ZodOptional<zod.ZodString>;
-    differenceInResolve: zod.ZodOptional<zod.ZodString>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    files: zod.ZodOptional<zod.ZodObject<{
-        items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            author: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            id: zod.ZodOptional<zod.ZodString>;
-            mime: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            size: zod.ZodOptional<zod.ZodString>;
-            url: zod.ZodOptional<zod.ZodString>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    impacted: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    links: zod.ZodOptional<zod.ZodObject<{
-        items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            author: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            etag: zod.ZodOptional<zod.ZodString>;
+    case: zod.ZodOptional<zod.ZodObject<{
+        assignee: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-            updatedAt: zod.ZodOptional<zod.ZodString>;
-            updatedBy: zod.ZodOptional<zod.ZodObject<{
+        }, zod.core.$strip>>;
+        author: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        closeReason: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        closeResult: zod.ZodOptional<zod.ZodString>;
+        comments: zod.ZodOptional<zod.ZodObject<{
+            items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                author: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                canEdit: zod.ZodOptional<zod.ZodBoolean>;
+                caseId: zod.ZodOptional<zod.ZodString>;
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                edited: zod.ZodOptional<zod.ZodBoolean>;
+                etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            url: zod.ZodOptional<zod.ZodString>;
-            ver: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    plannedReactionAt: zod.ZodOptional<zod.ZodString>;
-    plannedResolveAt: zod.ZodOptional<zod.ZodString>;
-    priority: zod.ZodOptional<zod.ZodObject<{
-        color: zod.ZodOptional<zod.ZodString>;
+                roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+                text: zod.ZodOptional<zod.ZodString>;
+                updatedAt: zod.ZodOptional<zod.ZodString>;
+                updatedBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                ver: zod.ZodOptional<zod.ZodNumber>;
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        contactInfo: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
+        custom: zod.ZodOptional<zod.ZodObject<{}, zod.core.$strip>>;
+        dc: zod.ZodOptional<zod.ZodString>;
         description: zod.ZodOptional<zod.ZodString>;
+        differenceInReaction: zod.ZodOptional<zod.ZodString>;
+        differenceInResolve: zod.ZodOptional<zod.ZodString>;
+        etag: zod.ZodOptional<zod.ZodString>;
+        files: zod.ZodOptional<zod.ZodObject<{
+            items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                author: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                id: zod.ZodOptional<zod.ZodString>;
+                mime: zod.ZodOptional<zod.ZodString>;
+                name: zod.ZodOptional<zod.ZodString>;
+                size: zod.ZodOptional<zod.ZodString>;
+                url: zod.ZodOptional<zod.ZodString>;
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        group: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+            type: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
         id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
+        impacted: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
-    }, zod.core.$strip>>;
-    rating: zod.ZodOptional<zod.ZodString>;
-    ratingComment: zod.ZodOptional<zod.ZodString>;
-    reactedAt: zod.ZodOptional<zod.ZodString>;
-    related: zod.ZodOptional<zod.ZodObject<{
-        data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+        links: zod.ZodOptional<zod.ZodObject<{
+            items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                author: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                etag: zod.ZodOptional<zod.ZodString>;
+                id: zod.ZodOptional<zod.ZodString>;
+                name: zod.ZodOptional<zod.ZodString>;
+                updatedAt: zod.ZodOptional<zod.ZodString>;
+                updatedBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                url: zod.ZodOptional<zod.ZodString>;
+                ver: zod.ZodOptional<zod.ZodNumber>;
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        name: zod.ZodOptional<zod.ZodString>;
+        plannedReactionAt: zod.ZodOptional<zod.ZodString>;
+        plannedResolveAt: zod.ZodOptional<zod.ZodString>;
+        priority: zod.ZodOptional<zod.ZodObject<{
+            color: zod.ZodOptional<zod.ZodString>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
             }, zod.core.$strip>>;
-            etag: zod.ZodOptional<zod.ZodString>;
+            description: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
-            primaryCase: zod.ZodOptional<zod.ZodObject<{
-                color: zod.ZodOptional<zod.ZodString>;
-                etag: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+            updatedAt: zod.ZodOptional<zod.ZodString>;
+            updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-                subject: zod.ZodOptional<zod.ZodString>;
-                ver: zod.ZodOptional<zod.ZodNumber>;
             }, zod.core.$strip>>;
-            relatedCase: zod.ZodOptional<zod.ZodObject<{
-                color: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        rating: zod.ZodOptional<zod.ZodString>;
+        ratingComment: zod.ZodOptional<zod.ZodString>;
+        reactedAt: zod.ZodOptional<zod.ZodString>;
+        related: zod.ZodOptional<zod.ZodObject<{
+            data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                subject: zod.ZodOptional<zod.ZodString>;
+                primaryCase: zod.ZodOptional<zod.ZodObject<{
+                    color: zod.ZodOptional<zod.ZodString>;
+                    etag: zod.ZodOptional<zod.ZodString>;
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                    subject: zod.ZodOptional<zod.ZodString>;
+                    ver: zod.ZodOptional<zod.ZodNumber>;
+                }, zod.core.$strip>>;
+                relatedCase: zod.ZodOptional<zod.ZodObject<{
+                    color: zod.ZodOptional<zod.ZodString>;
+                    etag: zod.ZodOptional<zod.ZodString>;
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                    subject: zod.ZodOptional<zod.ZodString>;
+                    ver: zod.ZodOptional<zod.ZodNumber>;
+                }, zod.core.$strip>>;
+                relationType: zod.ZodDefault<zod.ZodEnum<{
+                    RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
+                    DUPLICATES: "DUPLICATES";
+                    IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
+                    BLOCKS: "BLOCKS";
+                    IS_BLOCKED_BY: "IS_BLOCKED_BY";
+                    CAUSES: "CAUSES";
+                    IS_CAUSED_BY: "IS_CAUSED_BY";
+                    IS_CHILD_OF: "IS_CHILD_OF";
+                    IS_PARENT_OF: "IS_PARENT_OF";
+                    RELATES_TO: "RELATES_TO";
+                }>>;
+                updatedAt: zod.ZodOptional<zod.ZodString>;
+                updatedBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, zod.core.$strip>>;
-            relationType: zod.ZodDefault<zod.ZodEnum<{
-                RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                DUPLICATES: "DUPLICATES";
-                IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                BLOCKS: "BLOCKS";
-                IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                CAUSES: "CAUSES";
-                IS_CAUSED_BY: "IS_CAUSED_BY";
-                IS_CHILD_OF: "IS_CHILD_OF";
-                IS_PARENT_OF: "IS_PARENT_OF";
-                RELATES_TO: "RELATES_TO";
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        reporter: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        resolvedAt: zod.ZodOptional<zod.ZodString>;
+        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+        service: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        sla: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        slaCondition: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        source: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+            type: zod.ZodDefault<zod.ZodEnum<{
+                TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
+                CALL: "CALL";
+                CHAT: "CHAT";
+                SOCIAL_MEDIA: "SOCIAL_MEDIA";
+                EMAIL: "EMAIL";
+                API: "API";
+                MANUAL: "MANUAL";
             }>>;
+        }, zod.core.$strip>>;
+        status: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        statusCondition: zod.ZodOptional<zod.ZodObject<{
+            createdAt: zod.ZodOptional<zod.ZodString>;
+            createdBy: zod.ZodOptional<zod.ZodObject<{
+                id: zod.ZodOptional<zod.ZodString>;
+                name: zod.ZodOptional<zod.ZodString>;
+            }, zod.core.$strip>>;
+            description: zod.ZodOptional<zod.ZodString>;
+            final: zod.ZodOptional<zod.ZodBoolean>;
+            id: zod.ZodOptional<zod.ZodString>;
+            initial: zod.ZodOptional<zod.ZodBoolean>;
+            name: zod.ZodOptional<zod.ZodString>;
+            statusId: zod.ZodOptional<zod.ZodString>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
             }, zod.core.$strip>>;
-            ver: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    reporter: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    resolvedAt: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    service: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    slaCondition: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    source: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
-    }, zod.core.$strip>>;
-    status: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    statusCondition: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        final: zod.ZodOptional<zod.ZodBoolean>;
-        id: zod.ZodOptional<zod.ZodString>;
-        initial: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        statusId: zod.ZodOptional<zod.ZodString>;
+        subject: zod.ZodOptional<zod.ZodString>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
+        ver: zod.ZodOptional<zod.ZodNumber>;
     }, zod.core.$strip>>;
-    subject: zod.ZodOptional<zod.ZodString>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
+    changes: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+        field: zod.ZodOptional<zod.ZodString>;
+        newValue: zod.ZodOptional<zod.ZodAny>;
+        oldValue: zod.ZodOptional<zod.ZodAny>;
+    }, zod.core.$strip>>>;
 }, zod.core.$strip>;
 /**
  * @summary RPC method for updating an existing case.
@@ -1508,250 +1515,257 @@ export declare const updateCaseBody: zod.ZodObject<{
         name: zod.ZodOptional<zod.ZodString>;
     }, zod.core.$strip>>;
 }, zod.core.$strip>;
-export declare const updateCaseResponseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
-export declare const updateCaseResponseSourceTypeDefault = "TYPE_UNSPECIFIED";
+export declare const updateCaseResponseCaseRelatedDataItemRelationTypeDefault = "RELATION_TYPE_UNSPECIFIED";
+export declare const updateCaseResponseCaseSourceTypeDefault = "TYPE_UNSPECIFIED";
 export declare const updateCaseResponse: zod.ZodObject<{
-    assignee: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    author: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    closeReason: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    closeResult: zod.ZodOptional<zod.ZodString>;
-    comments: zod.ZodOptional<zod.ZodObject<{
-        items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            author: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            canEdit: zod.ZodOptional<zod.ZodBoolean>;
-            caseId: zod.ZodOptional<zod.ZodString>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            edited: zod.ZodOptional<zod.ZodBoolean>;
-            etag: zod.ZodOptional<zod.ZodString>;
-            id: zod.ZodOptional<zod.ZodString>;
-            roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-            text: zod.ZodOptional<zod.ZodString>;
-            updatedAt: zod.ZodOptional<zod.ZodString>;
-            updatedBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            ver: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    contactInfo: zod.ZodOptional<zod.ZodString>;
-    createdAt: zod.ZodOptional<zod.ZodString>;
-    createdBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    custom: zod.ZodOptional<zod.ZodObject<{}, zod.core.$strip>>;
-    dc: zod.ZodOptional<zod.ZodString>;
-    description: zod.ZodOptional<zod.ZodString>;
-    differenceInReaction: zod.ZodOptional<zod.ZodString>;
-    differenceInResolve: zod.ZodOptional<zod.ZodString>;
-    etag: zod.ZodOptional<zod.ZodString>;
-    files: zod.ZodOptional<zod.ZodObject<{
-        items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            author: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            id: zod.ZodOptional<zod.ZodString>;
-            mime: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
-            size: zod.ZodOptional<zod.ZodString>;
-            url: zod.ZodOptional<zod.ZodString>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    group: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    id: zod.ZodOptional<zod.ZodString>;
-    impacted: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    links: zod.ZodOptional<zod.ZodObject<{
-        items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
-            author: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            createdAt: zod.ZodOptional<zod.ZodString>;
-            createdBy: zod.ZodOptional<zod.ZodObject<{
-                id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            etag: zod.ZodOptional<zod.ZodString>;
+    case: zod.ZodOptional<zod.ZodObject<{
+        assignee: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
-            updatedAt: zod.ZodOptional<zod.ZodString>;
-            updatedBy: zod.ZodOptional<zod.ZodObject<{
+        }, zod.core.$strip>>;
+        author: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        closeReason: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        closeReasonGroup: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        closeResult: zod.ZodOptional<zod.ZodString>;
+        comments: zod.ZodOptional<zod.ZodObject<{
+            items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                author: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                canEdit: zod.ZodOptional<zod.ZodBoolean>;
+                caseId: zod.ZodOptional<zod.ZodString>;
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                edited: zod.ZodOptional<zod.ZodBoolean>;
+                etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-            }, zod.core.$strip>>;
-            url: zod.ZodOptional<zod.ZodString>;
-            ver: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    name: zod.ZodOptional<zod.ZodString>;
-    plannedReactionAt: zod.ZodOptional<zod.ZodString>;
-    plannedResolveAt: zod.ZodOptional<zod.ZodString>;
-    priority: zod.ZodOptional<zod.ZodObject<{
-        color: zod.ZodOptional<zod.ZodString>;
+                roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+                text: zod.ZodOptional<zod.ZodString>;
+                updatedAt: zod.ZodOptional<zod.ZodString>;
+                updatedBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                ver: zod.ZodOptional<zod.ZodNumber>;
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        contactInfo: zod.ZodOptional<zod.ZodString>;
         createdAt: zod.ZodOptional<zod.ZodString>;
         createdBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
+        custom: zod.ZodOptional<zod.ZodObject<{}, zod.core.$strip>>;
+        dc: zod.ZodOptional<zod.ZodString>;
         description: zod.ZodOptional<zod.ZodString>;
+        differenceInReaction: zod.ZodOptional<zod.ZodString>;
+        differenceInResolve: zod.ZodOptional<zod.ZodString>;
+        etag: zod.ZodOptional<zod.ZodString>;
+        files: zod.ZodOptional<zod.ZodObject<{
+            items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                author: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                id: zod.ZodOptional<zod.ZodString>;
+                mime: zod.ZodOptional<zod.ZodString>;
+                name: zod.ZodOptional<zod.ZodString>;
+                size: zod.ZodOptional<zod.ZodString>;
+                url: zod.ZodOptional<zod.ZodString>;
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        group: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+            type: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
         id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        updatedAt: zod.ZodOptional<zod.ZodString>;
-        updatedBy: zod.ZodOptional<zod.ZodObject<{
+        impacted: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
-    }, zod.core.$strip>>;
-    rating: zod.ZodOptional<zod.ZodString>;
-    ratingComment: zod.ZodOptional<zod.ZodString>;
-    reactedAt: zod.ZodOptional<zod.ZodString>;
-    related: zod.ZodOptional<zod.ZodObject<{
-        data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+        links: zod.ZodOptional<zod.ZodObject<{
+            items: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                author: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                etag: zod.ZodOptional<zod.ZodString>;
+                id: zod.ZodOptional<zod.ZodString>;
+                name: zod.ZodOptional<zod.ZodString>;
+                updatedAt: zod.ZodOptional<zod.ZodString>;
+                updatedBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
+                url: zod.ZodOptional<zod.ZodString>;
+                ver: zod.ZodOptional<zod.ZodNumber>;
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        name: zod.ZodOptional<zod.ZodString>;
+        plannedReactionAt: zod.ZodOptional<zod.ZodString>;
+        plannedResolveAt: zod.ZodOptional<zod.ZodString>;
+        priority: zod.ZodOptional<zod.ZodObject<{
+            color: zod.ZodOptional<zod.ZodString>;
             createdAt: zod.ZodOptional<zod.ZodString>;
             createdBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
             }, zod.core.$strip>>;
-            etag: zod.ZodOptional<zod.ZodString>;
+            description: zod.ZodOptional<zod.ZodString>;
             id: zod.ZodOptional<zod.ZodString>;
-            primaryCase: zod.ZodOptional<zod.ZodObject<{
-                color: zod.ZodOptional<zod.ZodString>;
-                etag: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+            updatedAt: zod.ZodOptional<zod.ZodString>;
+            updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
-                subject: zod.ZodOptional<zod.ZodString>;
-                ver: zod.ZodOptional<zod.ZodNumber>;
             }, zod.core.$strip>>;
-            relatedCase: zod.ZodOptional<zod.ZodObject<{
-                color: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        rating: zod.ZodOptional<zod.ZodString>;
+        ratingComment: zod.ZodOptional<zod.ZodString>;
+        reactedAt: zod.ZodOptional<zod.ZodString>;
+        related: zod.ZodOptional<zod.ZodObject<{
+            data: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+                createdAt: zod.ZodOptional<zod.ZodString>;
+                createdBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
                 etag: zod.ZodOptional<zod.ZodString>;
                 id: zod.ZodOptional<zod.ZodString>;
-                name: zod.ZodOptional<zod.ZodString>;
-                subject: zod.ZodOptional<zod.ZodString>;
+                primaryCase: zod.ZodOptional<zod.ZodObject<{
+                    color: zod.ZodOptional<zod.ZodString>;
+                    etag: zod.ZodOptional<zod.ZodString>;
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                    subject: zod.ZodOptional<zod.ZodString>;
+                    ver: zod.ZodOptional<zod.ZodNumber>;
+                }, zod.core.$strip>>;
+                relatedCase: zod.ZodOptional<zod.ZodObject<{
+                    color: zod.ZodOptional<zod.ZodString>;
+                    etag: zod.ZodOptional<zod.ZodString>;
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                    subject: zod.ZodOptional<zod.ZodString>;
+                    ver: zod.ZodOptional<zod.ZodNumber>;
+                }, zod.core.$strip>>;
+                relationType: zod.ZodDefault<zod.ZodEnum<{
+                    RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
+                    DUPLICATES: "DUPLICATES";
+                    IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
+                    BLOCKS: "BLOCKS";
+                    IS_BLOCKED_BY: "IS_BLOCKED_BY";
+                    CAUSES: "CAUSES";
+                    IS_CAUSED_BY: "IS_CAUSED_BY";
+                    IS_CHILD_OF: "IS_CHILD_OF";
+                    IS_PARENT_OF: "IS_PARENT_OF";
+                    RELATES_TO: "RELATES_TO";
+                }>>;
+                updatedAt: zod.ZodOptional<zod.ZodString>;
+                updatedBy: zod.ZodOptional<zod.ZodObject<{
+                    id: zod.ZodOptional<zod.ZodString>;
+                    name: zod.ZodOptional<zod.ZodString>;
+                }, zod.core.$strip>>;
                 ver: zod.ZodOptional<zod.ZodNumber>;
-            }, zod.core.$strip>>;
-            relationType: zod.ZodDefault<zod.ZodEnum<{
-                RELATION_TYPE_UNSPECIFIED: "RELATION_TYPE_UNSPECIFIED";
-                DUPLICATES: "DUPLICATES";
-                IS_DUPLICATED_BY: "IS_DUPLICATED_BY";
-                BLOCKS: "BLOCKS";
-                IS_BLOCKED_BY: "IS_BLOCKED_BY";
-                CAUSES: "CAUSES";
-                IS_CAUSED_BY: "IS_CAUSED_BY";
-                IS_CHILD_OF: "IS_CHILD_OF";
-                IS_PARENT_OF: "IS_PARENT_OF";
-                RELATES_TO: "RELATES_TO";
+            }, zod.core.$strip>>>;
+            next: zod.ZodOptional<zod.ZodBoolean>;
+            page: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        reporter: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        resolvedAt: zod.ZodOptional<zod.ZodString>;
+        roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
+        service: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        sla: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        slaCondition: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        source: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+            type: zod.ZodDefault<zod.ZodEnum<{
+                TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
+                CALL: "CALL";
+                CHAT: "CHAT";
+                SOCIAL_MEDIA: "SOCIAL_MEDIA";
+                EMAIL: "EMAIL";
+                API: "API";
+                MANUAL: "MANUAL";
             }>>;
+        }, zod.core.$strip>>;
+        status: zod.ZodOptional<zod.ZodObject<{
+            id: zod.ZodOptional<zod.ZodString>;
+            name: zod.ZodOptional<zod.ZodString>;
+        }, zod.core.$strip>>;
+        statusCondition: zod.ZodOptional<zod.ZodObject<{
+            createdAt: zod.ZodOptional<zod.ZodString>;
+            createdBy: zod.ZodOptional<zod.ZodObject<{
+                id: zod.ZodOptional<zod.ZodString>;
+                name: zod.ZodOptional<zod.ZodString>;
+            }, zod.core.$strip>>;
+            description: zod.ZodOptional<zod.ZodString>;
+            final: zod.ZodOptional<zod.ZodBoolean>;
+            id: zod.ZodOptional<zod.ZodString>;
+            initial: zod.ZodOptional<zod.ZodBoolean>;
+            name: zod.ZodOptional<zod.ZodString>;
+            statusId: zod.ZodOptional<zod.ZodString>;
             updatedAt: zod.ZodOptional<zod.ZodString>;
             updatedBy: zod.ZodOptional<zod.ZodObject<{
                 id: zod.ZodOptional<zod.ZodString>;
                 name: zod.ZodOptional<zod.ZodString>;
             }, zod.core.$strip>>;
-            ver: zod.ZodOptional<zod.ZodNumber>;
-        }, zod.core.$strip>>>;
-        next: zod.ZodOptional<zod.ZodBoolean>;
-        page: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    reporter: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    resolvedAt: zod.ZodOptional<zod.ZodString>;
-    roleIds: zod.ZodOptional<zod.ZodArray<zod.ZodString>>;
-    service: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    sla: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    slaCondition: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    source: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-        type: zod.ZodDefault<zod.ZodEnum<{
-            TYPE_UNSPECIFIED: "TYPE_UNSPECIFIED";
-            CALL: "CALL";
-            CHAT: "CHAT";
-            SOCIAL_MEDIA: "SOCIAL_MEDIA";
-            EMAIL: "EMAIL";
-            API: "API";
-            MANUAL: "MANUAL";
-        }>>;
-    }, zod.core.$strip>>;
-    status: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    statusCondition: zod.ZodOptional<zod.ZodObject<{
-        createdAt: zod.ZodOptional<zod.ZodString>;
-        createdBy: zod.ZodOptional<zod.ZodObject<{
-            id: zod.ZodOptional<zod.ZodString>;
-            name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
-        description: zod.ZodOptional<zod.ZodString>;
-        final: zod.ZodOptional<zod.ZodBoolean>;
-        id: zod.ZodOptional<zod.ZodString>;
-        initial: zod.ZodOptional<zod.ZodBoolean>;
-        name: zod.ZodOptional<zod.ZodString>;
-        statusId: zod.ZodOptional<zod.ZodString>;
+        subject: zod.ZodOptional<zod.ZodString>;
         updatedAt: zod.ZodOptional<zod.ZodString>;
         updatedBy: zod.ZodOptional<zod.ZodObject<{
             id: zod.ZodOptional<zod.ZodString>;
             name: zod.ZodOptional<zod.ZodString>;
         }, zod.core.$strip>>;
+        ver: zod.ZodOptional<zod.ZodNumber>;
     }, zod.core.$strip>>;
-    subject: zod.ZodOptional<zod.ZodString>;
-    updatedAt: zod.ZodOptional<zod.ZodString>;
-    updatedBy: zod.ZodOptional<zod.ZodObject<{
-        id: zod.ZodOptional<zod.ZodString>;
-        name: zod.ZodOptional<zod.ZodString>;
-    }, zod.core.$strip>>;
-    ver: zod.ZodOptional<zod.ZodNumber>;
+    changes: zod.ZodOptional<zod.ZodArray<zod.ZodObject<{
+        field: zod.ZodOptional<zod.ZodString>;
+        newValue: zod.ZodOptional<zod.ZodAny>;
+        oldValue: zod.ZodOptional<zod.ZodAny>;
+    }, zod.core.$strip>>>;
 }, zod.core.$strip>;
 /**
  * @summary RPC method for searching cases.
