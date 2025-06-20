@@ -13,7 +13,7 @@
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
-    "lint:types": "npx --yes @arethetypeswrong/cli --pack . --ignore-rules false-cjs cjs-resolves-to-esm -f json",
+    "lint:types": "npx --yes @arethetypeswrong/cli --pack . --ignore-rules false-cjs cjs-resolves-to-esm",
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
     "utils:i": "npm install"
