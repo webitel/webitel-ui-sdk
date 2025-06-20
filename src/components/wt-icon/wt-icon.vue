@@ -8,13 +8,15 @@
     class="wt-icon"
   >
     <svg class="wt-icon__icon">
-      <use :xlink:href="iconName" />
+      <use :xlink:href="xlinkHref" />
     </svg>
   </i>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
+
+import { injectIconToSprite } from '../../scripts/svg-sprite.js';
 
 const props = defineProps({
   /**
@@ -54,10 +56,14 @@ const props = defineProps({
   },
 });
 
-const iconName = computed(() => {
-  let name = '#';
-  if (props.iconPrefix) name += `${props.iconPrefix}-`;
-  return `${name}${props.icon}`;
+const iconId = computed(() =>
+  props.iconPrefix ? `${props.iconPrefix}-${props.icon}` : props.icon,
+);
+
+const xlinkHref = computed(() => `#${iconId.value}`);
+
+onMounted(() => {
+  injectIconToSprite(iconId.value);
 });
 </script>
 
