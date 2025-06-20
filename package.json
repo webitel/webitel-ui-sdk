@@ -13,6 +13,7 @@
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
+    "lint:types": "npx --yes @arethetypeswrong/cli --pack . --ignore-rules false-cjs cjs-resolves-to-esm -f json",
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
     "utils:i": "npm install"
@@ -22,9 +23,9 @@
   ],
   "main": "./dist/ui-sdk.js",
   "type": "module",
-  "types": "./dist/types",
   "files": [
     "dist/*",
+    "types/*",
     "src/api/*",
     "src/assets/*",
     "src/locale/*",
@@ -142,40 +143,142 @@
     "node": "v22"
   },
   "exports": {
-    ".": "./dist/ui-sdk.js",
-    "./store": "./src/store/new/index",
-    "./store*": "./src/store*",
-    "./src/store*": "./src/store*",
-    "./enums": "./src/enums/index",
-    "./enums*": "./src/enums*",
-    "./src/enums*": "./src/enums*",
-    "./components": "./src/components/index",
-    "./components*": "./src/components*",
-    "./src/components*": "./src/components*",
-    "./scripts": "./src/scripts/index",
-    "./scripts*": "./src/scripts*",
-    "./src/scripts*": "./src/scripts*",
-    "./api*": "./src/api*",
-    "./src/api*": "./src/api*",
-    "./locale*": "./src/locale*",
-    "./src/locale*": "./src/locale*",
-    "./composables*": "./src/composables*",
-    "./src/composables*": "./src/composables*",
-    "./css*": "./src/css*",
-    "./src/css*": "./src/css*",
-    "./directives*": "./src/directives*",
-    "./src/directives*": "./src/directives*",
-    "./mixins*": "./src/mixins*",
-    "./src/mixins*": "./src/mixins*",
-    "./validations": "./src/validations/index",
-    "./validators*": "./src/validations/vuelidate/validators*",
-    "./src/validators*": "./src/validations/vuelidate/validators*",
-    "./modules*": "./src/modules*",
-    "./src/modules*": "./src/modules*",
-    "./plugins*": "./src/plugins*",
-    "./src/plugins*": "./src/plugins*",
-    "./tests*": "./src/tests*",
-    "./src/tests*": "./src/tests*",
-    "./dist*": "./dist*"
+    ".": {
+      "types": "./types/install.d.ts",
+      "import": "./dist/ui-sdk.js"
+    },
+    "./store": {
+        "types": "./types/store/new/index.d.ts",
+        "import": "./src/store/new/index.js"
+      },
+      "./store*": {
+        "types": "./types/store*",
+        "import": "./src/store*"
+      },
+      "./src/store*": {
+        "types": "./types/store*",
+        "import": "./src/store*"
+      },
+      "./enums": {
+        "types": "./types/enums/index.d.ts",
+        "import": "./src/enums/index.js"
+      },
+      "./enums*": {
+        "types": "./types/enums*",
+        "import": "./src/enums*"
+      },
+      "./src/enums*": {
+        "types": "./types/enums*",
+        "import": "./src/enums*"
+      },
+      "./components": {
+        "types": "./types/components/index.d.ts",
+        "import": "./src/components/index.js"
+      },
+      "./components*": {
+        "types": "./types/components*",
+        "import": "./src/components*"
+      },
+      "./src/components*": {
+        "types": "./types/components*",
+        "import": "./src/components*"
+      },
+      "./scripts": {
+        "types": "./types/scripts/index.d.ts",
+        "import": "./src/scripts/index.js"
+      },
+      "./scripts*": {
+        "types": "./types/scripts*",
+        "import": "./src/scripts*"
+      },
+      "./src/scripts*": {
+        "types": "./types/scripts*",
+        "import": "./src/scripts*"
+      },
+      "./api*": {
+        "types": "./types/api*",
+        "import": "./src/api*"
+      },
+      "./src/api*": {
+        "types": "./types/api*",
+        "import": "./src/api*"
+      },
+      "./locale*": {
+        "types": "./types/locale*",
+        "import": "./src/locale*"
+      },
+      "./src/locale*": {
+        "types": "./types/locale*",
+        "import": "./src/locale*"
+      },
+      "./composables*": {
+        "types": "./types/composables*",
+        "import": "./src/composables*"
+      },
+      "./src/composables*": {
+        "types": "./types/composables*",
+        "import": "./src/composables*"
+      },
+      "./css*": {
+        "import": "./src/css*"
+      },
+      "./src/css*": {
+        "import": "./src/css*"
+      },
+      "./directives*": {
+        "types": "./types/directives*",
+        "import": "./src/directives*"
+      },
+      "./src/directives*": {
+        "types": "./types/directives*",
+        "import": "./src/directives*"
+      },
+      "./mixins*": {
+        "types": "./types/mixins*",
+        "import": "./src/mixins*"
+      },
+      "./src/mixins*": {
+        "types": "./types/mixins*",
+        "import": "./src/mixins*"
+      },
+      "./validations": {
+        "types": "./types/validations/index.d.ts",
+        "import": "./src/validations/index.ts"
+      },
+      "./validators*": {
+        "types": "./types/validations/vuelidate/validators*",
+        "import": "./src/validations/vuelidate/validators*"
+      },
+      "./src/validators*": {
+        "types": "./types/validations/vuelidate/validators*",
+        "import": "./src/validations/vuelidate/validators*"
+      },
+      "./modules*": {
+        "types": "./types/modules*",
+        "import": "./src/modules*"
+      },
+      "./src/modules*": {
+        "types": "./types/modules*",
+        "import": "./src/modules*"
+      },
+      "./plugins*": {
+        "types": "./types/plugins*",
+        "import": "./src/plugins*"
+      },
+      "./src/plugins*": {
+        "types": "./types/plugins*",
+        "import": "./src/plugins*"
+      },
+      "./tests*": {
+        "types": "./types/tests*",
+        "import": "./src/tests*"
+      },
+      "./src/tests*": {
+        "types": "./types/tests*",
+        "import": "./src/tests*"
+      },
+      "./dist*": {
+        "import": "./dist*"
+      }
   }
 }
