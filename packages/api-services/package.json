@@ -1,6 +1,6 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && npm run publish-lib",
@@ -11,27 +11,32 @@
     "gen:api:typedoc": "npx typedoc",
     "gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
+    "format:all": "npx biome check --write --unsafe ./src",
     "orval": "orval",
     "lint:package": "publint",
     "utils:i": "npm i"
   },
   "type": "module",
   "exports": {
+    "./api": {
+      "types": "./types/api/index.d.ts",
+      "import": "./src/api/index.ts"
+    },
     "./gen": {
-      "import": "./src/gen/index.ts",
-      "types": "./types/gen/index.d.ts"
+      "types": "./types/gen/index.d.ts",
+      "import": "./src/gen/index.ts"
     },
     "./utils": {
-      "import": "./src/utils/index.ts",
-      "types": "./types/utils/index.d.ts"
+      "types": "./types/utils/index.d.ts",
+      "import": "./src/utils/index.ts"
     },
     "./gen/utils": {
-      "import": "./src/utils/gen/index.ts",
-      "types": "./types/utils/gen/index.d.ts"
+      "types": "./types/utils/gen/index.d.ts",
+      "import": "./src/utils/gen/index.ts"
     },
     "./gen/models": {
-      "import": "./src/gen/_models/index.ts",
-      "types": "./types/gen/_models/index.d.ts"
+      "types": "./types/gen/_models/index.d.ts",
+      "import": "./src/gen/_models/index.ts"
     }
   },
   "files": [
@@ -40,7 +45,6 @@
     "CHANGELOG.md"
   ],
   "peerDependencies": {
-    "axios": "^1.8.3",
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",
@@ -49,9 +53,10 @@
     "zod": "^3.25.55"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.0.4",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
+    "axios": "^1.10.0",
     "change-case": "^5.4.4",
     "globby": "^14.1.0",
     "husky": "^9.1.7",

@@ -9,6 +9,8 @@
 /packages/api-services/types
 /packages/api-services/src/gen/_docs
 
+/types
+
 # misc
 .DS_Store
 node_modules

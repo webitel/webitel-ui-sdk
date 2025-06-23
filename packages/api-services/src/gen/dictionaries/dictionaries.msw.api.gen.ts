@@ -6,9 +6,7 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WebitelProtoDataTypeKind } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	DictionariesCreateData200,
 	DictionariesLocateData200,
@@ -18,6 +16,7 @@ import type {
 	WebitelProtoDataStruct,
 	WebitelProtoDataStructList,
 } from '.././_models';
+import { WebitelProtoDataTypeKind } from '.././_models';
 
 export const getDictionariesDeleteDataResponseMock = (
 	overrideResponse: Partial<WebitelProtoDataDataset> = {},

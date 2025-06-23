@@ -31,7 +31,7 @@ export const contactsChatCatalogGetContactChatHistory2QueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'This is a request variable of the map type. The query format is "map_name[key]=value", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age["bob"]=18',
+			'This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18',
 		),
 });
 
@@ -420,7 +420,7 @@ export const contactsChatCatalogGetContactChatHistoryQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'This is a request variable of the map type. The query format is "map_name[key]=value", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age["bob"]=18',
+			'This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18',
 		),
 });
 

@@ -7,10 +7,15 @@ export * from './gen';
  * @description
  * Get default value for schema. Could be anything: object with default fields values, or primitive.
  */
-export const getDefaultsFromZodSchema = (schema: z.ZodType, value?: unknown): unknown => {
-    return schema
-        /* zod validates passed value and throws err before returning defaults,
+export const getDefaultsFromZodSchema = (
+	schema: z.ZodType,
+	value?: unknown,
+): unknown => {
+	return (
+		schema
+			/* zod validates passed value and throws err before returning defaults,
         so we should skip error throwing and return value instead */
-        .catch(({ value: validatedValue }) => validatedValue)
-        .parse(value);
+			.catch(({ value: validatedValue }) => validatedValue)
+			.parse(value)
+	);
 };

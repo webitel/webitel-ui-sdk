@@ -6,13 +6,12 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { EngineCommunicationChannels } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	EngineCommunicationType,
 	EngineListCommunicationType,
 } from '.././_models';
+import { EngineCommunicationChannels } from '.././_models';
 
 export const getSearchCommunicationTypeResponseMock = (
 	overrideResponse: Partial<EngineListCommunicationType> = {},

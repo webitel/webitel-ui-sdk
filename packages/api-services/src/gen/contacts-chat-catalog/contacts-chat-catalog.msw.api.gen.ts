@@ -6,10 +6,9 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WebitelChatMessageButtonRequest } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type { WebitelChatGetContactChatHistoryResponse } from '.././_models';
+import { WebitelChatMessageButtonRequest } from '.././_models';
 
 export const getContactsChatCatalogGetContactChatHistory2ResponseMock = (
 	overrideResponse: Partial<WebitelChatGetContactChatHistoryResponse> = {},

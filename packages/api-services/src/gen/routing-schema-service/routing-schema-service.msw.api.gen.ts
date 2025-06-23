@@ -6,14 +6,13 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { EngineRoutingSchemaType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	EngineListRoutingSchema,
 	EngineListRoutingSchemaTags,
 	EngineRoutingSchema,
 } from '.././_models';
+import { EngineRoutingSchemaType } from '.././_models';
 
 export const getSearchRoutingSchemaResponseMock = (
 	overrideResponse: Partial<EngineListRoutingSchema> = {},

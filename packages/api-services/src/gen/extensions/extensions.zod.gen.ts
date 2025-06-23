@@ -221,7 +221,7 @@ export const extensionsDeleteType2Response = zod
 													.string()
 													.optional()
 													.describe(
-														'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+														'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 													),
 												primary: zod
 													.string()
@@ -412,13 +412,13 @@ export const extensionsSearchTypeQueryParams = zod.object({
 		.array(zod.string().regex(extensionsSearchTypeQuerySortItemRegExp))
 		.optional()
 		.describe(
-			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = "-" / "!"\nASC    = [ "+" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
+			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
 		),
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( "," field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= "{" fields "}"\nfuncs  ::= *( func )\nfunc   ::= "." name "(" [ args ] ")"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"\nDIGIT    = %x30-39            ; "0"-"9"\nUSCORE   = %x5F ; underscore  ; "_"\n```',
+			'Fields [Q]uery to build result dataset record.\n```\nfields ::= field [ *( \",\" field ) ]\nfield  ::= name [ *( func ) ] [ inner ]\ninner  ::= \"{\" fields \"}\"\nfuncs  ::= *( func )\nfunc   ::= \".\" name \"(\" [ args ] \")\"\nname   ::= ALPHA / DIGIT / USCORE\n\nALPHA    = %x41-5A / %x61-7A  ; \"A\"-\"Z\" / \"a\"-\"z\"\nDIGIT    = %x30-39            ; \"0\"-\"9\"\nUSCORE   = %x5F ; underscore  ; \"_\"\n```',
 		),
 	q: zod
 		.string()
@@ -634,7 +634,7 @@ export const extensionsSearchTypeResponse = zod
 													.string()
 													.optional()
 													.describe(
-														'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+														'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 													),
 												primary: zod
 													.string()
@@ -1021,7 +1021,7 @@ export const extensionsDeleteTypeResponse = zod
 													.string()
 													.optional()
 													.describe(
-														'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+														'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 													),
 												primary: zod
 													.string()
@@ -1365,7 +1365,7 @@ export const extensionsLocateTypeResponse = zod
 									.string()
 									.optional()
 									.describe(
-										'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+										'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 									),
 								primary: zod
 									.string()
@@ -1660,7 +1660,7 @@ export const extensionsCreateTypeBody = zod.object({
 								.string()
 								.optional()
 								.describe(
-									'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+									'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 								),
 							primary: zod
 								.string()
@@ -1922,7 +1922,7 @@ export const extensionsCreateTypeResponse = zod
 									.string()
 									.optional()
 									.describe(
-										'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+										'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 									),
 								primary: zod
 									.string()
@@ -2213,7 +2213,7 @@ export const extensionsUpdateTypeBody = zod.object({
 								.string()
 								.optional()
 								.describe(
-									'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+									'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 								),
 							primary: zod
 								.string()
@@ -2475,7 +2475,7 @@ export const extensionsUpdateTypeResponse = zod
 									.string()
 									.optional()
 									.describe(
-										'[Required]. Reference dataset relative path\ne.g.: "contacts", "dictionaries/cities".\n(lookup).{`type`} value relation.',
+										'[Required]. Reference dataset relative path\ne.g.: \"contacts\", \"dictionaries/cities\".\n(lookup).{`type`} value relation.',
 									),
 								primary: zod
 									.string()

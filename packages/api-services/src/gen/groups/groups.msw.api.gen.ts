@@ -6,15 +6,14 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WebitelContactsGroupType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WebitelContactsContactList,
 	WebitelContactsGroup,
 	WebitelContactsGroupList,
 	WebitelContactsLocateGroupResponse,
 } from '.././_models';
+import { WebitelContactsGroupType } from '.././_models';
 
 export const getGroupsListGroupsResponseMock = (
 	overrideResponse: Partial<WebitelContactsGroupList> = {},
