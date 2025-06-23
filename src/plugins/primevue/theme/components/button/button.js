@@ -53,6 +53,7 @@ const button = {
             font-weight: 600;
             font-size: 12px;
             line-height: 24px;
+            border: none;
             font-family: "Montserrat", monospace;
             text-transform: uppercase;
         }

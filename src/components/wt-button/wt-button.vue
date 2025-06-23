@@ -1,6 +1,6 @@
 <template>
   <p-button
-    v-bind="$attrs"
+    v-bind="attrs"
     :severity="color"
     :disabled="disabled"
     :loading="showLoader"
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import type { ButtonProps } from 'primevue';
-import { computed, defineEmits, defineProps, ref, watch } from 'vue';
+import {computed, defineEmits, defineProps, ref, useAttrs, watch} from 'vue';
 
 import { ButtonColor,ComponentSize } from '../../enums';
 
@@ -57,6 +57,8 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
 });
 
 const emit = defineEmits(['click']);
+
+const attrs = useAttrs();
 
 const showLoader = ref(false);
 
