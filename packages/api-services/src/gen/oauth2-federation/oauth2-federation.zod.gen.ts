@@ -23,7 +23,7 @@ export const oAuth2FederationSearchOAuthServiceQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	id: zod
 		.array(zod.string())
 		.optional()
@@ -417,7 +417,7 @@ export const oAuth2FederationLocateOAuthServiceQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	q: zod.string().optional().describe('term-of-search: lookup[name]'),
 	name: zod
 		.string()

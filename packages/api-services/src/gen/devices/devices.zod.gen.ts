@@ -77,7 +77,7 @@ export const devicesSearchDeviceQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	ids: zod
 		.array(zod.string())
 		.optional()
