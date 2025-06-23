@@ -6,15 +6,14 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { StorageUploadFileChannel } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	StorageFilePolicy,
 	StorageFilePolicyApplyResponse,
 	StorageListFilePolicies,
 	StorageMovePositionFilePolicyResponse,
 } from '.././_models';
+import { StorageUploadFileChannel } from '.././_models';
 
 export const getFilePoliciesServiceSearchFilePoliciesResponseMock = (
 	overrideResponse: Partial<StorageListFilePolicies> = {},

@@ -6,14 +6,13 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { EngineSystemSettingName } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	EngineListAvailableSystemSetting,
 	EngineListSystemSetting,
 	EngineSystemSetting,
 } from '.././_models';
+import { EngineSystemSettingName } from '.././_models';
 
 export const getSearchSystemSettingResponseMock = (
 	overrideResponse: Partial<EngineListSystemSetting> = {},

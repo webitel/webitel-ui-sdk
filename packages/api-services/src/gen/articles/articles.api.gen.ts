@@ -9,8 +9,8 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ArticlesArticleVersionsListParams,
 	ArticlesArticlesAttachmentListParams,
+	ArticlesArticleVersionsListParams,
 	ArticlesCreateArticleParams,
 	ArticlesDeleteArticleParams,
 	ArticlesListArticles2Params,

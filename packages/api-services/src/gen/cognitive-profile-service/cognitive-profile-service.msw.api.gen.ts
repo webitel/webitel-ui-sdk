@@ -6,14 +6,13 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { StorageProviderType, StorageServiceType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	StorageCognitiveProfile,
 	StorageListCognitiveProfile,
 	StorageListCognitiveProfileVoices,
 } from '.././_models';
+import { StorageProviderType, StorageServiceType } from '.././_models';
 
 export const getCognitiveProfileServiceSearchCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageListCognitiveProfile> = {},

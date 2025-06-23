@@ -6,14 +6,13 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { StorageUploadFileChannel } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	StorageDeleteFilesResponse,
 	StorageListFile,
 	StorageUploadP2PVideoResponse,
 } from '.././_models';
+import { StorageUploadFileChannel } from '.././_models';
 
 export const getFileServiceDeleteFilesResponseMock =
 	(): StorageDeleteFilesResponse => ({});

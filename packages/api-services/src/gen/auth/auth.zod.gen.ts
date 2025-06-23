@@ -44,7 +44,7 @@ export const authSignupResponse = zod.object({
 				.string()
 				.optional()
 				.describe(
-					'OPTIONAL, if identical to the scope requested by the client;\notherwise, REQUIRED. The scope of the access token.\nrepeated string scope = 5 [ json_name = "scope" ];\nREQUIRED if the "state" parameter was present in the client\nauthorization request. The exact value received from the client.',
+					'OPTIONAL, if identical to the scope requested by the client;\notherwise, REQUIRED. The scope of the access token.\nrepeated string scope = 5 [ json_name = \"scope\" ];\nREQUIRED if the \"state\" parameter was present in the client\nauthorization request. The exact value received from the client.',
 				),
 			tokenType: zod
 				.string()

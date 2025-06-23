@@ -6,9 +6,7 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WfmWorkingScheduleState } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WfmCreateWorkingScheduleResponse,
 	WfmDeleteWorkingScheduleResponse,
@@ -19,6 +17,7 @@ import type {
 	WfmUpdateWorkingScheduleRemoveAgentResponse,
 	WfmUpdateWorkingScheduleResponse,
 } from '.././_models';
+import { WfmWorkingScheduleState } from '.././_models';
 
 export const getWorkingScheduleServiceSearchWorkingScheduleResponseMock = (
 	overrideResponse: Partial<WfmSearchWorkingScheduleResponse> = {},

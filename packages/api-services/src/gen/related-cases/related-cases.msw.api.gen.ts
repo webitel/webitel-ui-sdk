@@ -6,13 +6,12 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WebitelCasesRelationType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WebitelCasesRelatedCase,
 	WebitelCasesRelatedCaseList,
 } from '.././_models';
+import { WebitelCasesRelationType } from '.././_models';
 
 export const getUpdateRelatedCase2ResponseMock = (
 	overrideResponse: Partial<WebitelCasesRelatedCase> = {},
