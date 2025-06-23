@@ -82,9 +82,6 @@ export default (/*{ mode }*/) => {
           Buffer: true, // can also be 'build', 'dev', or false
         },
       }),
-      createSvgSpritePlugin({
-        include: '**/sprite/*.svg',
-      }),
       checker({
         typescript: false,
         vueTsc: false,

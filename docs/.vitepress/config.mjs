@@ -47,9 +47,9 @@ export default defineConfig({
           process: true,
         },
       }),
-      createSvgSpritePlugin({
-        include: '**/sprite/*.svg',
-      }),
+      // createSvgSpritePlugin({
+      //   include: '**/sprite/*.svg',
+      // }),
       tailwindcss(),
       (() => {
         const docgen = vueDocgenPlugin({
