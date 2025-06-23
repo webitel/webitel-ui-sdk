@@ -1,5 +1,5 @@
 import addQueryParamsToUrl from './addQueryParamsToUrl/addQueryParamsToUrl.transformer';
-import applyTransform from './applyTransform';
+import { applyTransform } from './applyTransform';
 import camelToSnake from './camelToSnake/camelToSnake.transformer';
 import generateUrl from './generateUrl/generateUrl.transformer';
 import log from './log/log.transformer';
@@ -12,17 +12,16 @@ import snakeToCamel from './snakeToCamel/snakeToCamel.transformer';
 import starToSearch from './starToSearch/starToSearch.transformer';
 
 export {
-  addQueryParamsToUrl,
-  camelToSnake,
-  generateUrl,
-  log,
-  merge,
-  mergeEach,
-  notify,
-  sanitize,
-  skipIf,
-  snakeToCamel,
-  starToSearch,
+	addQueryParamsToUrl,
+	applyTransform,
+	camelToSnake,
+	generateUrl,
+	log,
+	merge,
+	mergeEach,
+	notify,
+	sanitize,
+	skipIf,
+	snakeToCamel,
+	starToSearch,
 };
-
-export default applyTransform;

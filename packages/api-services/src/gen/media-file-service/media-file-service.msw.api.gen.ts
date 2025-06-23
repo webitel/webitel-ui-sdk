@@ -6,7 +6,7 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
 import type { StorageListMedia, StorageMediaFile } from '.././_models';
 

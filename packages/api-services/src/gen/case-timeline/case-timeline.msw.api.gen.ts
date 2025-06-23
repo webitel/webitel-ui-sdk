@@ -6,13 +6,12 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WebitelCasesCaseTimelineEventType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WebitelCasesGetTimelineCounterResponse,
 	WebitelCasesGetTimelineResponse,
 } from '.././_models';
+import { WebitelCasesCaseTimelineEventType } from '.././_models';
 
 export const getGetTimelineResponseMock = (
 	overrideResponse: Partial<WebitelCasesGetTimelineResponse> = {},

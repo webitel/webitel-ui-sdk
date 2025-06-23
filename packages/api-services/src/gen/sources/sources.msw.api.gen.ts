@@ -6,14 +6,13 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WebitelCasesSourceType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WebitelCasesLocateSourceResponse,
 	WebitelCasesSource,
 	WebitelCasesSourceList,
 } from '.././_models';
+import { WebitelCasesSourceType } from '.././_models';
 
 export const getListSourcesResponseMock = (
 	overrideResponse: Partial<WebitelCasesSourceList> = {},

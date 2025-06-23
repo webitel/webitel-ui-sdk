@@ -21,6 +21,7 @@ import lists from './lists/blacklists';
 import media from './media/media';
 import object from './object/object';
 import queues from './queues/queues';
+import quickReplies from './quickReplies/quickReplies';
 import roles from './roles/roles';
 import skills from './skills/skills';
 import slas from './slas/slas';
@@ -29,40 +30,39 @@ import users from './users/users';
 import sysTypes from './wtTypes/sysTypes/sysTypes';
 import typeExtensions from './wtTypes/typeExtensions/typeExtensions';
 import { contactChatMessagesHistory, contacts } from './сontacts/index';
-import quickReplies from './quickReplies/quickReplies';
 
 export {
-  agentChats,
-  agents,
-  buckets,
-  calendars,
-  caseCloseReasonGroups,
-  caseCloseReasons,
-  casePriorities,
-  caseServiceCatalogs,
-  caseSources,
-  caseStatusConditions,
-  caseStatuses,
-  catalog,
-  chatGateways,
-  communications,
-  configurations,
-  contactChatMessagesHistory,
-  contactGroups,
-  contacts,
-  flows,
-  gateways,
-  labels,
-  lists,
-  media,
-  object,
-  queues,
-  quickReplies,
-  roles,
-  skills,
-  slas,
-  sysTypes,
-  teams,
-  typeExtensions,
-  users,
+	agentChats,
+	agents,
+	buckets,
+	calendars,
+	caseCloseReasonGroups,
+	caseCloseReasons,
+	casePriorities,
+	caseServiceCatalogs,
+	caseSources,
+	caseStatusConditions,
+	caseStatuses,
+	catalog,
+	chatGateways,
+	communications,
+	configurations,
+	contactChatMessagesHistory,
+	contactGroups,
+	contacts,
+	flows,
+	gateways,
+	labels,
+	lists,
+	media,
+	object,
+	queues,
+	quickReplies,
+	roles,
+	skills,
+	slas,
+	sysTypes,
+	teams,
+	typeExtensions,
+	users,
 };

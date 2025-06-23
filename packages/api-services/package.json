@@ -11,6 +11,7 @@
     "gen:api:typedoc": "npx typedoc",
     "gen:api:cleanup": "rm swagger.yaml formatted-openapi.yaml",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
+    "format:all": "npx biome check --write --unsafe ./src",
     "orval": "orval",
     "lint:package": "publint",
     "utils:i": "npm i"
@@ -52,7 +53,7 @@
     "zod": "^3.25.55"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.0.4",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
     "axios": "^1.10.0",

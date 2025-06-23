@@ -6,13 +6,12 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WebitelChatButtonRequest } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WebitelChatGetAgentChatsResponse,
 	WebitelChatMarkChatProcessedResponse,
 } from '.././_models';
+import { WebitelChatButtonRequest } from '.././_models';
 
 export const getAgentChatServiceGetAgentChatsResponseMock = (
 	overrideResponse: Partial<WebitelChatGetAgentChatsResponse> = {},
