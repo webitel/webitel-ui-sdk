@@ -6,7 +6,7 @@ Abstacting from specific naming of entity, which status is being represented .Al
 component .
 
 ```js
-import { AbstractUserStatus } from '@webitel/ui-sdk/enums/index.js';
+import { AbstractUserStatus } from '@webitel/ui-sdk/enums';
 ```
 
 <<< ../../../../../src/enums/AbstractUserStatus/AbstractUserStatus.enum.js
