@@ -1,12 +1,12 @@
 import { AgentServiceApiFactory } from 'webitel-sdk';
 
-import convertDuration from '../../../scripts/convertDuration.ts';
+import convertDuration from '../../../scripts/convertDuration';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults/index.ts';
+} from '../../defaults/index';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -14,7 +14,7 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers/index.ts';
+} from '../../transformers/index';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

@@ -5,7 +5,7 @@ import {
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults/index.ts';
+} from '../../defaults/index';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -14,8 +14,8 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers/index.ts';
-import { generatePermissionsApi } from '../_shared/generatePermissionsApi.ts';
+} from '../../transformers/index';
+import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

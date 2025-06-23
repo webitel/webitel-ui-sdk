@@ -1,5 +1,5 @@
-import contactChatMessagesHistory from './contactChatMessagesHistory.ts';
-import contacts from './contacts.ts';
-import ContactsSearchMode from './enums/ContactsSearchMode.ts';
+import contactChatMessagesHistory from './contactChatMessagesHistory';
+import contacts from './contacts';
+import ContactsSearchMode from './enums/ContactsSearchMode';
 
 export { contactChatMessagesHistory, contacts, ContactsSearchMode };

@@ -1,7 +1,7 @@
 import qs from 'qs';
-import generateInstance from '../../axios/generateInstance.ts';
-import updateTokenInterceptor from '../../interceptors/request/updateToken.interceptor.ts';
-import handleUnauthorizedInterceptor from '../../interceptors/response/handleUnauthorized.interceptor.ts';
+import generateInstance from '../../axios/generateInstance';
+import updateTokenInterceptor from '../../interceptors/request/updateToken.interceptor';
+import handleUnauthorizedInterceptor from '../../interceptors/response/handleUnauthorized.interceptor';
 
 const getDefaultInstance = () => {
   return generateInstance({

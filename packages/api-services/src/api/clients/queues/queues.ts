@@ -1,13 +1,13 @@
 import deepCopy from 'deep-copy';
 import { QueueServiceApiFactory } from 'webitel-sdk';
 
-import isEmpty from '../../../scripts/isEmpty.ts';
+import isEmpty from '../../../scripts/isEmpty';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults/index.ts';
+} from '../../defaults/index';
 import applyTransform, {
   camelToSnake,
   merge,
@@ -16,8 +16,8 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers/index.ts';
-import processing from './defaults/processing.ts';
+} from '../../transformers/index';
+import processing from './defaults/processing';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

@@ -6,15 +6,15 @@ import {
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults/index.ts';
+} from '../../defaults/index';
 import applyTransform, {
   camelToSnake,
   merge,
   notify,
   sanitize,
   snakeToCamel,
-} from '../../transformers/index.ts';
-import ContactsSearchMode from './enums/ContactsSearchMode.ts';
+} from '../../transformers/index';
+import ContactsSearchMode from './enums/ContactsSearchMode';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

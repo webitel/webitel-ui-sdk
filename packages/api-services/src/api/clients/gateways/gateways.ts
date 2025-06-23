@@ -2,7 +2,7 @@ import {
   getDefaultGetListResponse,
   getDefaultGetParams,
   getDefaultInstance,
-} from '../../defaults/index.ts';
+} from '../../defaults/index';
 import applyTransform, {
   camelToSnake,
   generateUrl,
@@ -12,9 +12,9 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers/index.ts';
-import registerGateway from './defaults/registerGateway.ts';
-import trunkingGateway from './defaults/trunkingGateway.ts';
+} from '../../transformers/index';
+import registerGateway from './defaults/registerGateway';
+import trunkingGateway from './defaults/trunkingGateway';
 
 const instance = getDefaultInstance();
 

@@ -17,21 +17,25 @@
   },
   "type": "module",
   "exports": {
+    "./api": {
+      "types": "./types/api/index.d.ts",
+      "import": "./src/api/index.ts"
+    },
     "./gen": {
-      "import": "./src/gen/index.ts",
-      "types": "./types/gen/index.d.ts"
+      "types": "./types/gen/index.d.ts",
+      "import": "./src/gen/index.ts"
     },
     "./utils": {
-      "import": "./src/utils/index.ts",
-      "types": "./types/utils/index.d.ts"
+      "types": "./types/utils/index.d.ts",
+      "import": "./src/utils/index.ts"
     },
     "./gen/utils": {
-      "import": "./src/utils/gen/index.ts",
-      "types": "./types/utils/gen/index.d.ts"
+      "types": "./types/utils/gen/index.d.ts",
+      "import": "./src/utils/gen/index.ts"
     },
     "./gen/models": {
-      "import": "./src/gen/_models/index.ts",
-      "types": "./types/gen/_models/index.d.ts"
+      "types": "./types/gen/_models/index.d.ts",
+      "import": "./src/gen/_models/index.ts"
     }
   },
   "files": [

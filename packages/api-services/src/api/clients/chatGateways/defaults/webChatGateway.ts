@@ -1,6 +1,6 @@
-import ChatGatewayProvider from '../../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum.ts';
-import defaultChatGateway from '../defaults/defaultChatGateway.ts';
-import WebchatAlternativeChannel from '../enums/WebchatAlternativeChannel.enum.ts';
+import ChatGatewayProvider from '../../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum';
+import defaultChatGateway from '../defaults/defaultChatGateway';
+import WebchatAlternativeChannel from '../enums/WebchatAlternativeChannel.enum';
 
 const webChatGateway = (_btnCodeDirty = false) => ({
   ...defaultChatGateway(),

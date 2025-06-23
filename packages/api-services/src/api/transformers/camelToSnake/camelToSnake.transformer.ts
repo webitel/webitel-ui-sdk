@@ -1,4 +1,4 @@
-import { objCamelToSnake } from '../../../scripts/caseConverters.ts';
+import { objCamelToSnake } from '../../../scripts/caseConverters';
 
 const camelToSnakeTransformer = (skipKeys) => (obj) =>
   objCamelToSnake(obj, skipKeys);

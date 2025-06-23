@@ -1,7 +1,7 @@
-import getDefaultGetListResponse from './getDefaultGetListResponse/getDefaultGetListResponse.ts';
-import getDefaultGetParams from './getDefaultGetParams/getDefaultGetParams.ts';
-import getDefaultInstance from './getDefaultInstance/getDefaultInstance.ts';
-import getDefaultOpenAPIConfig from './getDefaultOpenAPIConfig/getDefaultOpenAPIConfig.ts';
+import getDefaultGetListResponse from './getDefaultGetListResponse/getDefaultGetListResponse';
+import getDefaultGetParams from './getDefaultGetParams/getDefaultGetParams';
+import getDefaultInstance from './getDefaultInstance/getDefaultInstance';
+import getDefaultOpenAPIConfig from './getDefaultOpenAPIConfig/getDefaultOpenAPIConfig';
 
 export {
   getDefaultGetListResponse,

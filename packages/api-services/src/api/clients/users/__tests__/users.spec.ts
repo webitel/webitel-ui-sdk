@@ -1,4 +1,4 @@
-import axiosMock from '../../../../tests/mocks/axiosMock.ts';
+import axiosMock from '../../../../tests/mocks/axiosMock';
 
 const instanceMock = axiosMock()().default;
 

@@ -1,11 +1,11 @@
 import deepCopy from 'deep-copy';
 
-import ApplicationsAccess from '../../../modules/Userinfo/classes/ApplicationsAccess.ts';
+import ApplicationsAccess from '../../../modules/Userinfo/classes/ApplicationsAccess';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
   getDefaultInstance,
-} from '../../defaults/index.ts';
+} from '../../defaults/index';
 import applyTransform, {
   camelToSnake,
   generateUrl,
@@ -14,7 +14,7 @@ import applyTransform, {
   sanitize,
   snakeToCamel,
   starToSearch,
-} from '../../transformers/index.ts';
+} from '../../transformers/index';
 
 const instance = getDefaultInstance();
 

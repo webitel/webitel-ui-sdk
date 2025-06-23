@@ -1,4 +1,4 @@
-import defaultGateway from './defaultGateway.ts';
+import defaultGateway from './defaultGateway';
 
 const trunkingGateway = () => ({
   ...defaultGateway(),
