@@ -13,6 +13,8 @@ import type {
 	StorageDeleteFilesRequest,
 	StorageDeleteFilesResponse,
 	StorageListFile,
+	StorageUploadP2PVideoRequest,
+	StorageUploadP2PVideoResponse,
 } from '.././_models';
 
 // --- header start
@@ -43,12 +45,30 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
+			const fileServiceUploadP2PVideo = <
+				TData = AxiosResponse<StorageUploadP2PVideoResponse>,
+			>(
+				storageUploadP2PVideoRequest: StorageUploadP2PVideoRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.post(
+					'/storage/p2p/upload/video',
+					storageUploadP2PVideoRequest,
+					options,
+				);
+			};
 
 			// --- footer start
-			return { fileServiceDeleteFiles, fileServiceSearchFiles };
+			return {
+				fileServiceDeleteFiles,
+				fileServiceSearchFiles,
+				fileServiceUploadP2PVideo,
+			};
 		};
 export type FileServiceDeleteFilesResult =
 	AxiosResponse<StorageDeleteFilesResponse>;
 export type FileServiceSearchFilesResult = AxiosResponse<StorageListFile>;
+export type FileServiceUploadP2PVideoResult =
+	AxiosResponse<StorageUploadP2PVideoResponse>;
 
 // --- footer end

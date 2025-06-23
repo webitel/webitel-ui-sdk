@@ -18,4 +18,6 @@ export const FileServiceSearchFilesChannelItem = {
 	MediaChannel: 'MediaChannel',
 	KnowledgebaseChannel: 'KnowledgebaseChannel',
 	CasesChannel: 'CasesChannel',
+	ScreenshotChannel: 'ScreenshotChannel',
+	ScreenSharingChannel: 'ScreenSharingChannel',
 } as const;

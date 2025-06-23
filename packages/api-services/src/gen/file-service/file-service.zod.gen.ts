@@ -34,6 +34,8 @@ export const fileServiceSearchFilesQueryParams = zod.object({
 				'MediaChannel',
 				'KnowledgebaseChannel',
 				'CasesChannel',
+				'ScreenshotChannel',
+				'ScreenSharingChannel',
 			]),
 		)
 		.optional(),
@@ -58,6 +60,8 @@ export const fileServiceSearchFilesResponse = zod.object({
 						'MediaChannel',
 						'KnowledgebaseChannel',
 						'CasesChannel',
+						'ScreenshotChannel',
+						'ScreenSharingChannel',
 					])
 					.default(fileServiceSearchFilesResponseItemsItemChannelDefault),
 				id: zod.string().optional(),
@@ -87,4 +91,24 @@ export const fileServiceSearchFilesResponse = zod.object({
 		)
 		.optional(),
 	next: zod.boolean().optional(),
+});
+
+export const fileServiceUploadP2PVideoBody = zod.object({
+	iceServers: zod
+		.array(
+			zod.object({
+				credential: zod.string().optional(),
+				credentialType: zod.number().optional(),
+				urls: zod.array(zod.string()).optional(),
+				username: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	name: zod.string().optional(),
+	sdpOffer: zod.string().optional(),
+	uuid: zod.string().optional(),
+});
+
+export const fileServiceUploadP2PVideoResponse = zod.object({
+	sdpAnswer: zod.string().optional(),
 });

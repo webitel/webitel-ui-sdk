@@ -5,6 +5,7 @@
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationDir": "types",
+    "rootDir": "./src",
     "noEmit": false,
   }
 }
