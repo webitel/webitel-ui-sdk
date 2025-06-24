@@ -23,7 +23,6 @@ jobs:
         id: publish_release
 
         run: |
-          echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm ci
           npm run make-all
