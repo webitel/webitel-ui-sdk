@@ -1,7 +1,7 @@
 import { ExtensionsApiFactory, type WebitelProtoDataStruct } from 'webitel-sdk';
 
 import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../../defaults';
-import applyTransform, {
+import { applyTransform, 
 	camelToSnake,
 	notify,
 	sanitize,
@@ -106,7 +106,7 @@ const updateTypeExtension = async ({ itemInstance, itemId: typeRepo }) => {
 	}
 };
 
-export const WtTypeExtensionApi = {
+export const WtTypeExtensionAPI = {
 	getList: getTypeExtension,
 	add: addTypeExtension,
 	update: updateTypeExtension,

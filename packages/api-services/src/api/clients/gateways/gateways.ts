@@ -2,8 +2,8 @@ import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import { applyTransform, 
 	camelToSnake,
 	generateUrl,
 	merge,
@@ -12,7 +12,7 @@ import applyTransform, {
 	sanitize,
 	snakeToCamel,
 	starToSearch,
-} from '../../transformers/index';
+} from '../../transformers';
 import registerGateway from './defaults/registerGateway';
 import trunkingGateway from './defaults/trunkingGateway';
 

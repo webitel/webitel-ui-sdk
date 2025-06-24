@@ -1,6 +1,6 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.24",
+  "version": "0.0.27",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && npm run publish-lib",
@@ -18,13 +18,13 @@
   },
   "type": "module",
   "exports": {
-    "./api": {
-      "types": "./types/api/index.d.ts",
-      "import": "./src/api/index.ts"
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.ts"
     },
     "./gen": {
-      "types": "./types/gen/index.d.ts",
-      "import": "./src/gen/index.ts"
+      "import": "./src/gen/index.ts",
+      "types": "./types/gen/index.d.ts"
     },
     "./utils": {
       "types": "./types/utils/index.d.ts",
@@ -34,9 +34,9 @@
       "types": "./types/utils/gen/index.d.ts",
       "import": "./src/utils/gen/index.ts"
     },
-    "./gen/models": {
-      "types": "./types/gen/_models/index.d.ts",
-      "import": "./src/gen/_models/index.ts"
+    "./api": {
+      "import": "./src/api/index.ts",
+      "types": "./types/api/index.d.ts"
     }
   },
   "files": [
@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.7.0",
+    "lodash": "^4.17.21",
     "msw": "^2.8.2"
   },
   "engines": {

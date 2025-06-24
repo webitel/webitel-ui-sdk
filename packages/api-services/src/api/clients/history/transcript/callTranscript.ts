@@ -4,18 +4,19 @@ import {
   getDefaultGetListResponse,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults/index.js';
-import applyTransform, {
+} from '../../../defaults';
+import {
+  applyTransform,
   camelToSnake,
   merge,
   notify,
   snakeToCamel,
-} from '../../transformers/index.js';
+} from '../../../transformers';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
-const transcriptService = new FileTranscriptServiceApiFactory(
+const transcriptService = FileTranscriptServiceApiFactory(
   configuration,
   '',
   instance,
@@ -71,10 +72,8 @@ const deleteTranscript = async (item) => {
   }
 };
 
-const CallTranscriptAPI = {
+export const CallTranscriptAPI = {
   create: createTranscript,
   get: getTranscript,
   delete: deleteTranscript,
 };
-
-export default CallTranscriptAPI;

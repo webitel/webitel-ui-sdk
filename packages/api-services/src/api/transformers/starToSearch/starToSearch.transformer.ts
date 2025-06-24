@@ -1,7 +1,5 @@
 import deepcopy from 'deep-copy';
-import get from 'lodash/get';
-
-import updateObject from '../../../scripts/updateObject';
+import { get, set } from 'lodash-es';
 
 const starToSearchTransformer =
 	(path = 'search') =>
@@ -9,7 +7,7 @@ const starToSearchTransformer =
 		const copy = deepcopy(params);
 		const value = get(copy, path);
 		if (!value || value.slice(-1) === '*') return copy;
-		return updateObject({ obj: copy, path, value: `${value}*` });
+		return set(copy, path, `${value}*`);
 	};
 
 export default starToSearchTransformer;

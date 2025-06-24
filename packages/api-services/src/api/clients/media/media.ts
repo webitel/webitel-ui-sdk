@@ -6,13 +6,13 @@ import {
 	getDefaultGetParams,
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import { applyTransform, 
 	merge,
 	notify,
 	snakeToCamel,
 	starToSearch,
-} from '../../transformers/index';
+} from '../../transformers';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

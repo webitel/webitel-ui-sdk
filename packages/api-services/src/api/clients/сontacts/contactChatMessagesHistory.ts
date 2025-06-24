@@ -1,18 +1,15 @@
 import { ContactsChatCatalogApiFactory } from 'webitel-sdk';
 
-import i18n from '../../../locale/i18n';
 import {
 	getDefaultGetListResponse,
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import { applyTransform, 
 	merge,
 	notify,
 	snakeToCamel,
-} from '../../transformers/index';
-
-const { t } = i18n.global;
+} from '../../transformers';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -85,7 +82,7 @@ const getAllMessages = async (params) => {
 			notify(({ callback }) =>
 				callback({
 					type: 'error',
-					text: t('errorNotifications.chatHistoryApi'),
+					text: 'errorNotifications.chatHistoryApi',
 				}),
 			),
 		]);

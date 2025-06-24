@@ -1,18 +1,15 @@
 import { AgentChatServiceApiFactory } from 'webitel-sdk';
 
-import i18n from '../../../locale/i18n';
 import {
 	getDefaultGetParams,
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import { applyTransform, 
 	merge,
 	notify,
 	snakeToCamel,
-} from '../../transformers/index';
-
-const { t } = i18n.global;
+} from '../../transformers';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -58,7 +55,7 @@ const markChatProcessed = async (chatId) => {
 			notify(({ callback }) =>
 				callback({
 					type: 'error',
-					text: t('errorNotifications.markChatProcessed'),
+					text: 'errorNotifications.markChatProcessed',
 				}),
 			),
 		]);

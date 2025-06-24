@@ -1,24 +1,31 @@
 import {
-	createSourceBody,
+	// createSourceBody,
 	getSources,
-	listSourcesQueryParams,
-	updateSourceBody,
+	// listSourcesQueryParams,
+	// updateSourceBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import { applyTransform,
 	camelToSnake,
 	merge,
 	notify,
 	sanitize,
 	snakeToCamel,
-} from '../../transformers/index';
+} from '../../transformers';
 
 const sourceService = getSources();
+
+// let sourceService;
+//
+// (async () => {
+//   const { getSources } = await import('@webitel/api-services/gen');
+//   sourceService = getSources();
+// })();
 
 const getSourcesList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(

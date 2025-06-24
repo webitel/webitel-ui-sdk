@@ -1,12 +1,11 @@
-import { AgentServiceApiFactory } from 'webitel-sdk';
-
-import { getDefaultGetListResponse } from '../../../api/defaults/index.js';
+import { getDefaultGetListResponse } from '@webitel/api-services/api';
 import applyTransform, {
   merge,
   mergeEach,
   notify,
   snakeToCamel,
-} from '../../../api/transformers/index.js';
+} from '@webitel/api-services/api';
+import { AgentServiceApiFactory } from 'webitel-sdk';
 
 const PauseCauseAPIFactory = ({ instance, OpenAPIConfig }) => {
   const service = new AgentServiceApiFactory(OpenAPIConfig, '', instance);

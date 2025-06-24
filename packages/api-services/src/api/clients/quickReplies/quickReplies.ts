@@ -3,14 +3,14 @@ import { getQuickRepliesService } from '@webitel/api-services/gen';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import { applyTransform, 
 	camelToSnake,
 	merge,
 	notify,
 	sanitize,
 	snakeToCamel,
-} from '../../transformers/index';
+} from '../../transformers';
 
 const quickReplyService = getQuickRepliesService();
 
