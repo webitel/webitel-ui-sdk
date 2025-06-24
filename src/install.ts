@@ -5,7 +5,7 @@ import './css/main.scss';
 import './css/tailwind.css';
 import './assets/icons/sprite/index.js';
 
-import { generateInstance } from '@webitel/api-services/api';
+import { generateInstance } from '@webitel/api-services/api/axios';
 
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
