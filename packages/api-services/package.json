@@ -39,8 +39,16 @@
       "import": "./src/utils/gen/index.ts"
     },
     "./api": {
-      "types": "./types/api/index.d.ts",
-      "import": "./src/api/index.ts"
+      "types": "./types/api/clients/index.d.ts",
+      "import": "./src/api/clients/index.ts"
+    },
+    "./api/defaults": {
+      "types": "./types/api/defaults/index.d.ts",
+      "import": "./src/api/defaults/index.ts"
+    },
+    "./api/transformers": {
+      "types": "./types/api/transformers/index.d.ts",
+      "import": "./src/api/transformers/index.ts"
     }
   },
   "files": [

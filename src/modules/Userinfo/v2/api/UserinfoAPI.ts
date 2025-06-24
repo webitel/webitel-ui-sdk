@@ -1,10 +1,10 @@
-import { getDefaultInstance } from '@webitel/api-services/api';
+import { getDefaultInstance } from '@webitel/api-services/api/defaults';
 import {
   applyTransform,
   merge,
   notify,
   snakeToCamel,
-} from '@webitel/api-services/api';
+} from '@webitel/api-services/api/transformers';
 import type { AxiosInstance } from 'axios';
 
 import type {
