@@ -88,6 +88,10 @@
     "./api/transformers": {
       "types": "./types/api/transformers/index.d.ts",
       "import": "./src/api/transformers/index.ts"
+    },
+    "./api/axios": {
+      "types": "./types/api/axios/index.d.ts",
+      "import": "./src/api/axios/index.ts"
     }
   }
 }
