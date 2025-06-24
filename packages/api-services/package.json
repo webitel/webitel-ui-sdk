@@ -23,8 +23,12 @@
       "import": "./src/index.ts"
     },
     "./gen": {
-      "import": "./src/gen/index.ts",
-      "types": "./types/gen/index.d.ts"
+      "types": "./types/gen/index.d.ts",
+      "import": "./src/gen/index.ts"
+    },
+    "./gen/models": {
+      "types": "./types/gen/_models/index.d.ts",
+      "import": "./src/gen/_models/index.ts"
     },
     "./utils": {
       "types": "./types/utils/index.d.ts",
@@ -35,8 +39,8 @@
       "import": "./src/utils/gen/index.ts"
     },
     "./api": {
-      "import": "./src/api/index.ts",
-      "types": "./types/api/index.d.ts"
+      "types": "./types/api/index.d.ts",
+      "import": "./src/api/index.ts"
     }
   },
   "files": [

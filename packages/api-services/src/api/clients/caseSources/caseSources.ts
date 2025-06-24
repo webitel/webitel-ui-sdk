@@ -1,8 +1,8 @@
 import {
-	// createSourceBody,
+	createSourceBody,
 	getSources,
-	// listSourcesQueryParams,
-	// updateSourceBody,
+	listSourcesQueryParams,
+	updateSourceBody,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -18,15 +18,6 @@ import { applyTransform,
 	snakeToCamel,
 } from '../../transformers';
 
-const sourceService = getSources();
-
-// let sourceService;
-//
-// (async () => {
-//   const { getSources } = await import('@webitel/api-services/gen');
-//   sourceService = getSources();
-// })();
-
 const getSourcesList = async (params) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		listSourcesQueryParams,
@@ -39,7 +30,7 @@ const getSourcesList = async (params) => {
 	]);
 
 	try {
-		const response = await sourceService.listSources({
+		const response = await getSources().listSources({
 			page,
 			size,
 			fields,
@@ -64,7 +55,7 @@ const getSource = async ({ itemId: id }) => {
 	const itemResponseHandler = (item) => item.source; // TODO wtf??
 
 	try {
-		const response = await sourceService.locateSource(id);
+		const response = await getSources().locateSource(id);
 		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -77,7 +68,7 @@ const addSource = async ({ itemInstance }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await sourceService.createSource(item);
+		const response = await getSources().createSource(item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -91,7 +82,7 @@ const updateSource = async ({ itemInstance, itemId: id }) => {
 	]);
 
 	try {
-		const response = await sourceService.updateSource(id, item);
+		const response = await getSources().updateSource(id, item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -100,7 +91,7 @@ const updateSource = async ({ itemInstance, itemId: id }) => {
 
 const deleteSource = async ({ id }) => {
 	try {
-		const response = await sourceService.deleteSource(id);
+		const response = await getSources().deleteSource(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
