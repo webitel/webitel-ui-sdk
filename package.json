@@ -3,7 +3,7 @@
   "version": "25.8.8",
   "private": false,
   "scripts": {
-    "make-all": "npm run build && npm version patch && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",
+    "make-all": "npm version patch && npm run build && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",
     "dev": "npm run docs:dev",
     "build": "vite build",
     "test:unit": "vitest",
