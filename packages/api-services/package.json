@@ -17,6 +17,45 @@
     "utils:i": "npm i"
   },
   "type": "module",
+  "files": [
+    "src/*",
+    "types/*",
+    "CHANGELOG.md"
+  ],
+  "peerDependencies": {
+    "deep-copy": "^1.4.2",
+    "deep-equal": "^2.2.3",
+    "deepmerge": "^4.3.1",
+    "query-string": "^9.1.1",
+    "zod": "^3.25.55"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.4",
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.13.10",
+    "axios": "^1.10.0",
+    "change-case": "^5.4.4",
+    "globby": "^14.1.0",
+    "husky": "^9.1.7",
+    "is-json": "^2.0.1",
+    "orval": "^7.10.0",
+    "path": "^0.12.7",
+    "publint": "^0.3.9",
+    "typedoc": "^0.28.4",
+    "typedoc-github-wiki-theme": "^2.1.0",
+    "typescript": "5.8.2",
+    "vue-tsc": "^2.2.10",
+    "webitel-sdk": "^25.4.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "lodash-es": "^4.17.21",
+    "msw": "^2.8.2"
+  },
+  "engines": {
+    "npm": "10",
+    "node": "v22"
+  },
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
@@ -50,45 +89,5 @@
       "types": "./types/api/transformers/index.d.ts",
       "import": "./src/api/transformers/index.ts"
     }
-  },
-  "files": [
-    "src/*",
-    "types/*",
-    "CHANGELOG.md"
-  ],
-  "peerDependencies": {
-    "deep-copy": "^1.4.2",
-    "deep-equal": "^2.2.3",
-    "deepmerge": "^4.3.1",
-    "lodash-es": "^4.17.21",
-    "query-string": "^9.1.1",
-    "zod": "^3.25.55"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "2.0.4",
-    "@tsconfig/node22": "^22.0.0",
-    "@types/node": "^22.13.10",
-    "axios": "^1.10.0",
-    "change-case": "^5.4.4",
-    "globby": "^14.1.0",
-    "husky": "^9.1.7",
-    "is-json": "^2.0.1",
-    "orval": "^7.10.0",
-    "path": "^0.12.7",
-    "publint": "^0.3.9",
-    "typedoc": "^0.28.4",
-    "typedoc-github-wiki-theme": "^2.1.0",
-    "typescript": "5.8.2",
-    "vue-tsc": "^2.2.10",
-    "webitel-sdk": "^25.4.3"
-  },
-  "dependencies": {
-    "@faker-js/faker": "^9.7.0",
-    "lodash": "^4.17.21",
-    "msw": "^2.8.2"
-  },
-  "engines": {
-    "npm": "10",
-    "node": "v22"
   }
 }
