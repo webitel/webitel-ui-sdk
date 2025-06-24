@@ -38,7 +38,7 @@ export const getListSourcesResponseMock = (
 				undefined,
 			]),
 			id: faker.string.alpha({ length: { min: 10, max: 20 } }),
-			name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+			name: faker.string.alpha({ length: { min: 3, max: 100 } }),
 			type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 			updatedAt: faker.string.alpha({ length: { min: 10, max: 20 } }),
 			updatedBy: {
@@ -81,7 +81,7 @@ export const getCreateSourceResponseMock = (
 		undefined,
 	]),
 	id: faker.string.alpha({ length: { min: 10, max: 20 } }),
-	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	name: faker.string.alpha({ length: { min: 3, max: 100 } }),
 	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 	updatedAt: faker.string.alpha({ length: { min: 10, max: 20 } }),
 	updatedBy: {
@@ -116,7 +116,7 @@ export const getDeleteSourceResponseMock = (
 		undefined,
 	]),
 	id: faker.string.alpha({ length: { min: 10, max: 20 } }),
-	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	name: faker.string.alpha({ length: { min: 3, max: 100 } }),
 	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 	updatedAt: faker.string.alpha({ length: { min: 10, max: 20 } }),
 	updatedBy: {
@@ -153,7 +153,7 @@ export const getLocateSourceResponseMock = (
 				undefined,
 			]),
 			id: faker.string.alpha({ length: { min: 10, max: 20 } }),
-			name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+			name: faker.string.alpha({ length: { min: 3, max: 100 } }),
 			type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 			updatedAt: faker.string.alpha({ length: { min: 10, max: 20 } }),
 			updatedBy: {
@@ -191,7 +191,7 @@ export const getUpdateSource2ResponseMock = (
 		undefined,
 	]),
 	id: faker.string.alpha({ length: { min: 10, max: 20 } }),
-	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	name: faker.string.alpha({ length: { min: 3, max: 100 } }),
 	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 	updatedAt: faker.string.alpha({ length: { min: 10, max: 20 } }),
 	updatedBy: {
@@ -226,7 +226,7 @@ export const getUpdateSourceResponseMock = (
 		undefined,
 	]),
 	id: faker.string.alpha({ length: { min: 10, max: 20 } }),
-	name: faker.helpers.fromRegExp('^[a-zA-Z0-9_-s]+$'),
+	name: faker.string.alpha({ length: { min: 3, max: 100 } }),
 	type: faker.helpers.arrayElement(Object.values(WebitelCasesSourceType)),
 	updatedAt: faker.string.alpha({ length: { min: 10, max: 20 } }),
 	updatedBy: {

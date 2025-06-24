@@ -55,8 +55,6 @@ export const listSourcesResponseItemsItemDescriptionMax = 500;
 export const listSourcesResponseItemsItemNameMin = 3;
 
 export const listSourcesResponseItemsItemNameMax = 100;
-
-export const listSourcesResponseItemsItemNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const listSourcesResponseItemsItemTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const listSourcesResponse = zod
@@ -90,7 +88,6 @@ export const listSourcesResponse = zod
 							.string()
 							.min(listSourcesResponseItemsItemNameMin)
 							.max(listSourcesResponseItemsItemNameMax)
-							.regex(listSourcesResponseItemsItemNameRegExp)
 							.describe('A unique, descriptive name for the source.'),
 						type: zod
 							.enum([
@@ -146,8 +143,6 @@ export const createSourceBodyNameDefault = 'New Source';
 export const createSourceBodyNameMin = 2;
 
 export const createSourceBodyNameMax = 100;
-
-export const createSourceBodyNameRegExp = /^[a-zA-Z0-9_\- ]+$/;
 export const createSourceBodyTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const createSourceBody = zod
@@ -161,7 +156,6 @@ export const createSourceBody = zod
 			.string()
 			.min(createSourceBodyNameMin)
 			.max(createSourceBodyNameMax)
-			.regex(createSourceBodyNameRegExp)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -183,8 +177,6 @@ export const createSourceResponseDescriptionMax = 500;
 export const createSourceResponseNameMin = 3;
 
 export const createSourceResponseNameMax = 100;
-
-export const createSourceResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const createSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const createSourceResponse = zod
@@ -208,7 +200,6 @@ export const createSourceResponse = zod
 			.string()
 			.min(createSourceResponseNameMin)
 			.max(createSourceResponseNameMax)
-			.regex(createSourceResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([
@@ -244,8 +235,6 @@ export const deleteSourceResponseDescriptionMax = 500;
 export const deleteSourceResponseNameMin = 3;
 
 export const deleteSourceResponseNameMax = 100;
-
-export const deleteSourceResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const deleteSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const deleteSourceResponse = zod
@@ -269,7 +258,6 @@ export const deleteSourceResponse = zod
 			.string()
 			.min(deleteSourceResponseNameMin)
 			.max(deleteSourceResponseNameMax)
-			.regex(deleteSourceResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([
@@ -312,8 +300,6 @@ export const locateSourceResponseSourceDescriptionMax = 500;
 export const locateSourceResponseSourceNameMin = 3;
 
 export const locateSourceResponseSourceNameMax = 100;
-
-export const locateSourceResponseSourceNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const locateSourceResponseSourceTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const locateSourceResponse = zod
@@ -341,7 +327,6 @@ export const locateSourceResponse = zod
 					.string()
 					.min(locateSourceResponseSourceNameMin)
 					.max(locateSourceResponseSourceNameMax)
-					.regex(locateSourceResponseSourceNameRegExp)
 					.describe('A unique, descriptive name for the source.'),
 				type: zod
 					.enum([
@@ -390,8 +375,6 @@ export const updateSource2BodyNameDefault = 'New Source';
 export const updateSource2BodyNameMin = 2;
 
 export const updateSource2BodyNameMax = 100;
-
-export const updateSource2BodyNameRegExp = /^[a-zA-Z0-9_\- ]+$/;
 export const updateSource2BodyTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSource2Body = zod
@@ -405,7 +388,6 @@ export const updateSource2Body = zod
 			.string()
 			.min(updateSource2BodyNameMin)
 			.max(updateSource2BodyNameMax)
-			.regex(updateSource2BodyNameRegExp)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -427,8 +409,6 @@ export const updateSource2ResponseDescriptionMax = 500;
 export const updateSource2ResponseNameMin = 3;
 
 export const updateSource2ResponseNameMax = 100;
-
-export const updateSource2ResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const updateSource2ResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSource2Response = zod
@@ -452,7 +432,6 @@ export const updateSource2Response = zod
 			.string()
 			.min(updateSource2ResponseNameMin)
 			.max(updateSource2ResponseNameMax)
-			.regex(updateSource2ResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([
@@ -495,8 +474,6 @@ export const updateSourceBodyNameDefault = 'New Source';
 export const updateSourceBodyNameMin = 2;
 
 export const updateSourceBodyNameMax = 100;
-
-export const updateSourceBodyNameRegExp = /^[a-zA-Z0-9_\- ]+$/;
 export const updateSourceBodyTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSourceBody = zod
@@ -510,7 +487,6 @@ export const updateSourceBody = zod
 			.string()
 			.min(updateSourceBodyNameMin)
 			.max(updateSourceBodyNameMax)
-			.regex(updateSourceBodyNameRegExp)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -532,8 +508,6 @@ export const updateSourceResponseDescriptionMax = 500;
 export const updateSourceResponseNameMin = 3;
 
 export const updateSourceResponseNameMax = 100;
-
-export const updateSourceResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const updateSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSourceResponse = zod
@@ -557,7 +531,6 @@ export const updateSourceResponse = zod
 			.string()
 			.min(updateSourceResponseNameMin)
 			.max(updateSourceResponseNameMax)
-			.regex(updateSourceResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([

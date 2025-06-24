@@ -4,8 +4,9 @@ import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import {
+	applyTransform,
 	camelToSnake,
 	generateUrl,
 	merge,
@@ -13,7 +14,7 @@ import applyTransform, {
 	notify,
 	sanitize,
 	snakeToCamel,
-} from '../../transformers/index';
+} from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 
 const instance = getDefaultInstance();

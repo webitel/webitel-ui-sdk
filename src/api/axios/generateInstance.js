@@ -1,30 +1,4 @@
-import axios from 'axios';
+import { generateInstance } from '@webitel/api-services/src/api/axios';
 
-// 'X-Webitel-Access' ~ 'X-Access-Token'
-const generateInstance = ({ interceptors, baseURL, ...rest } = {}) => {
-  const instance = axios.create({
-    baseURL,
-    headers: {
-      'X-Webitel-Access': localStorage.getItem('access-token') || '',
-    },
-    ...rest,
-  });
-
-  if (interceptors) {
-    const { request, response } = interceptors;
-    if (request) {
-      request.forEach((interceptor) =>
-        instance.interceptors.request.use(...interceptor),
-      );
-    }
-    if (response) {
-      response.forEach((interceptor) =>
-        instance.interceptors.response.use(...interceptor),
-      );
-    }
-  }
-
-  return instance;
-};
-
+// todo: replace imports of this file with source file, rm this file
 export default generateInstance;

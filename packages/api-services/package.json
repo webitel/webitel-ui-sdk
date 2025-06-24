@@ -1,11 +1,11 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.24",
+  "version": "0.0.28",
   "private": false,
   "scripts": {
-    "make-all": "npm run gen:api && npm version patch && npm run publish-lib",
+    "make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true) && npm run publish-lib",
     "gen:api": "npm run gen:api:convert-openapi && npm run gen:api:format-openapi && orval && npm run gen:api:typedoc && npm run gen:api:cleanup",
-    "publish-lib": "(npm run build:types || true) && npm publish --access public",
+    "publish-lib": "npm publish --access public",
     "gen:api:convert-openapi": "npx api-spec-converter --from=swagger_2 --to=openapi_3 --syntax=yaml https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json > swagger.yaml",
     "gen:api:format-openapi": "npx openapi-format swagger.yaml -o formatted-openapi.yaml",
     "gen:api:typedoc": "npx typedoc",
@@ -17,28 +17,6 @@
     "utils:i": "npm i"
   },
   "type": "module",
-  "exports": {
-    "./api": {
-      "types": "./types/api/index.d.ts",
-      "import": "./src/api/index.ts"
-    },
-    "./gen": {
-      "types": "./types/gen/index.d.ts",
-      "import": "./src/gen/index.ts"
-    },
-    "./utils": {
-      "types": "./types/utils/index.d.ts",
-      "import": "./src/utils/index.ts"
-    },
-    "./gen/utils": {
-      "types": "./types/utils/gen/index.d.ts",
-      "import": "./src/utils/gen/index.ts"
-    },
-    "./gen/models": {
-      "types": "./types/gen/_models/index.d.ts",
-      "import": "./src/gen/_models/index.ts"
-    }
-  },
   "files": [
     "src/*",
     "types/*",
@@ -48,7 +26,6 @@
     "deep-copy": "^1.4.2",
     "deep-equal": "^2.2.3",
     "deepmerge": "^4.3.1",
-    "lodash-es": "^4.17.21",
     "query-string": "^9.1.1",
     "zod": "^3.25.55"
   },
@@ -72,10 +49,49 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.7.0",
+    "lodash-es": "^4.17.21",
     "msw": "^2.8.2"
   },
   "engines": {
     "npm": "10",
     "node": "v22"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.ts"
+    },
+    "./gen": {
+      "types": "./types/gen/index.d.ts",
+      "import": "./src/gen/index.ts"
+    },
+    "./gen/models": {
+      "types": "./types/gen/_models/index.d.ts",
+      "import": "./src/gen/_models/index.ts"
+    },
+    "./utils": {
+      "types": "./types/utils/index.d.ts",
+      "import": "./src/utils/index.ts"
+    },
+    "./gen/utils": {
+      "types": "./types/utils/gen/index.d.ts",
+      "import": "./src/utils/gen/index.ts"
+    },
+    "./api": {
+      "types": "./types/api/clients/index.d.ts",
+      "import": "./src/api/clients/index.ts"
+    },
+    "./api/defaults": {
+      "types": "./types/api/defaults/index.d.ts",
+      "import": "./src/api/defaults/index.ts"
+    },
+    "./api/transformers": {
+      "types": "./types/api/transformers/index.d.ts",
+      "import": "./src/api/transformers/index.ts"
+    },
+    "./api/axios": {
+      "types": "./types/api/axios/index.d.ts",
+      "import": "./src/api/axios/index.ts"
+    }
   }
 }

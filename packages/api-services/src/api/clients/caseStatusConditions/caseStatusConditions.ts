@@ -5,14 +5,15 @@ import {
 	getDefaultGetParams,
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import {
+	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
 	sanitize,
 	snakeToCamel,
-} from '../../transformers/index';
+} from '../../transformers';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -25,7 +26,7 @@ const statusConditionsService = StatusConditionsApiFactory(
 
 const fieldsToSend = ['name', 'description'];
 
-const getStatusConditionsList = async ({ parentId, ...rest }) => {
+const getStatusConditionsList = async ({ statusId, parentId, ...rest }) => {
 	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
 
 	const { page, size, fields, sort, id, q } = applyTransform(rest, [
@@ -37,7 +38,7 @@ const getStatusConditionsList = async ({ parentId, ...rest }) => {
 
 	try {
 		const response = await statusConditionsService.listStatusConditions(
-			parentId,
+			statusId || parentId,
 			page,
 			size,
 			fields,
