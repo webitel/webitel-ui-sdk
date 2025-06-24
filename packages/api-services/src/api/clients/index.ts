@@ -1,3 +1,4 @@
+export * from './_shared/generatePermissionsApi';
 export * from './agents/agentChats';
 // export * from './agents/agents'; fixme: file imports
 export * from './buckets/buckets';
@@ -16,6 +17,7 @@ export * from './configurations/configurations';
 export * from './contactGroups/contactGroups';
 export * from './flows/flow';
 export * from './gateways/gateways';
+export * from './history/transcript/callTranscript';
 export * from './labels/labels';
 export * from './lists/blacklists';
 export * from './media/media';
@@ -30,5 +32,3 @@ export * from './users/users';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';
-export * from './_shared/generatePermissionsApi';
-export * from './history/transcript/callTranscript';

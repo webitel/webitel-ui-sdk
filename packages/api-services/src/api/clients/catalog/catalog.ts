@@ -1,10 +1,7 @@
 import { CatalogApiFactory } from 'webitel-sdk';
 
-import {
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
-import { applyTransform,  notify, snakeToCamel } from '../../transformers';
+import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../defaults';
+import { applyTransform, notify, snakeToCamel } from '../../transformers';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

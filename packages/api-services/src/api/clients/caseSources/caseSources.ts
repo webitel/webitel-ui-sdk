@@ -6,11 +6,9 @@ import {
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-} from '../../defaults';
-import { applyTransform,
+	applyTransform,
 	camelToSnake,
 	merge,
 	notify,

@@ -6,7 +6,8 @@ import {
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
 } from '../../defaults';
-import { applyTransform, 
+import {
+	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
@@ -58,20 +59,18 @@ const getCatalogsList = async (params) => {
 		'sort',
 		'fields',
 		'id',
-    'state',
+		'state',
 		'hasSubservices',
 	];
 
-	const { page, size, fields, sort, id, q, state, has_subservices } = applyTransform(
-		params,
-		[
+	const { page, size, fields, sort, id, q, state, has_subservices } =
+		applyTransform(params, [
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
 			(params) => ({ ...params, q: params.search }),
 			sanitize(fieldsToSend),
 			camelToSnake(),
-		],
-	);
+		]);
 	try {
 		const response = await catalogsService.listCatalogs(
 			page,

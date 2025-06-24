@@ -6,7 +6,8 @@ import {
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
 } from '../../defaults';
-import { applyTransform, 
+import {
+	applyTransform,
 	camelToSnake,
 	merge,
 	mergeEach,
@@ -30,10 +31,10 @@ const getCommunicationsList = async (params) => {
 		default: false,
 	};
 
-	const { page, size, search, sort, fields, id, channel } = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		starToSearch('search'),
-	]);
+	const { page, size, search, sort, fields, id, channel } = applyTransform(
+		params,
+		[merge(getDefaultGetParams()), starToSearch('search')],
+	);
 
 	try {
 		const response = await communicationService.searchCommunicationType(
@@ -43,7 +44,7 @@ const getCommunicationsList = async (params) => {
 			sort,
 			fields,
 			id,
-      channel,
+			channel,
 		);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),

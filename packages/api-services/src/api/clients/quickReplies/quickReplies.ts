@@ -1,10 +1,8 @@
 import { getQuickRepliesService } from '@webitel/api-services/gen';
 
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-} from '../../defaults';
-import { applyTransform, 
+	applyTransform,
 	camelToSnake,
 	merge,
 	notify,

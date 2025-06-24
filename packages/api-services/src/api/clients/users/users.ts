@@ -5,7 +5,8 @@ import {
 	getDefaultGetParams,
 	getDefaultInstance,
 } from '../../defaults';
-import { applyTransform, 
+import {
+	applyTransform,
 	camelToSnake,
 	generateUrl,
 	merge,

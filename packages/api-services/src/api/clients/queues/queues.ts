@@ -8,7 +8,8 @@ import {
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
 } from '../../defaults';
-import { applyTransform, 
+import {
+	applyTransform,
 	camelToSnake,
 	merge,
 	mergeEach,

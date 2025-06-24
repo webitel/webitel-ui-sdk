@@ -1,7 +1,8 @@
 import { ExtensionsApiFactory, type WebitelProtoDataStruct } from 'webitel-sdk';
 
 import { getDefaultInstance, getDefaultOpenAPIConfig } from '../../../defaults';
-import { applyTransform, 
+import {
+	applyTransform,
 	camelToSnake,
 	notify,
 	sanitize,

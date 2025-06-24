@@ -5,7 +5,8 @@ import {
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
 } from '../../defaults';
-import { applyTransform, 
+import {
+	applyTransform,
 	merge,
 	notify,
 	snakeToCamel,
