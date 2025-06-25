@@ -67,12 +67,37 @@ API defaults: default axios instance, default getList response, etc
 import { getDefaultInstance } from '@webitel/api-services/api/defaults';
 ```
 
+## Usage
+
+### API Mocks
+
+Useful for parallel development, testing, and debugging.
+Calling a mock returns fake generated data, without sending a request to the server.
+
+```ts
+import { getSources } from '@webitel/api-services/gen';
+
+const searchSources = getSources().listSources();
+```
+->
+
+```ts
+import { getListSourcesResponseMock } from '@webitel/api-services/gen';
+```
+
 ## FAQ
 
-### Q: How to generate API:
+### Q: How to generate API?
 
-Run [this](https://github.com/webitel/webitel-ui-sdk/actions/workflows/api-services.publish.yml)
+A: Run [this](https://github.com/webitel/webitel-ui-sdk/actions/workflows/api-services.publish.yml)
 **manual** workflow.
+
+### Q: generating source?
+A: `https://raw.githubusercontent.com/webitel/protos/main/swagger/api.json`
+
+### Q: Versioning?
+A: Automated version patching on each action run.
+minor/major version bump is manual, if needed.
 
 ## Related links:
 
