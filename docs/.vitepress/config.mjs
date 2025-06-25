@@ -5,7 +5,7 @@ import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
-import { nav, sidebar } from './routes.js';
+import { nav, sidebar } from './routes/routes.ts';
 import { Window } from 'happy-dom';
 
 global.localStorage = new Window().localStorage; // coz vitepress ssr doesn't have localStorage
