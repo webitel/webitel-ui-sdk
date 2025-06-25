@@ -17,8 +17,11 @@ API clients – self-written api wrappers on top of gen services.
 ### `@webitel/api-services/gen`
 
 ```ts
+// zod, services, msw
 import {
-    // zod, services, msw
+    createSourceBody, // zod
+    getSources, // api service
+    getListSourcesResponseMock, // mock
 } from '@webitel/api-services/gen';
 ```
 
