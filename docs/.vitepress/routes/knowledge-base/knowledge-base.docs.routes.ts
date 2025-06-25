@@ -31,6 +31,38 @@ export const knowledgeBaseRoutes = [
             ),
           },
           {
+            text: 'Code Style',
+            collapsed: true,
+            items: [
+                {
+                  text: 'index',
+                    link: resolveKnowledgeBaseLinkDoc('code-style/index.md'),
+                },
+              {
+                text: 'CSS',
+                link: resolveKnowledgeBaseLinkDoc('code-style/css/index.md'),
+              },
+              {
+                text: 'Inspiration Sources',
+                link: resolveKnowledgeBaseLinkDoc('code-style/inspirations/index.md'),
+              },
+              {
+                text: 'Linting and Formatting',
+                link: resolveKnowledgeBaseLinkDoc('code-style/linting-and-reformatting/index.md'),
+              },
+            ],
+          },
+          {
+            text: 'Namings',
+            collapsed: true,
+            items: resolveKnowledgeBaseDocItems('namings/**/*.md'),
+          },
+          {
+            text: 'Onboarding',
+            collapsed: true,
+            items: resolveKnowledgeBaseDocItems('onboarding/**/*.md'),
+          },
+          {
             text: 'How To',
             collapsed: true,
             items: resolveKnowledgeBaseDocItems('how-to/**/*.md'),
