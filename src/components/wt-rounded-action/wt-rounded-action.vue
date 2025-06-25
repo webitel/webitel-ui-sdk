@@ -6,6 +6,7 @@
       { 'wt-rounded-action--disabled': disabled },
       { 'wt-rounded-action--rounded': rounded },
       { 'wt-rounded-action--wide': wide },
+      { 'wt-button--loading': showLoader },
     ]"
     class="wt-rounded-action"
     type="button"
@@ -126,6 +127,10 @@ watch(() => props.loading, (value) => {
   &:hover {
     border-color: var(--rounded-action-bg-hover-color);
     background: var(--rounded-action-bg-hover-color);
+  }
+
+  &--loading {
+    pointer-events: none;
   }
 
   &--wide {
