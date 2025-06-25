@@ -27,9 +27,10 @@ export default defineConfig({
   lastUpdated: true,
   vite: {
     resolve: {
-      alias: [
-        { find: '__lib__', replacement: path.resolve(__dirname, '../../src') },
-      ],
+      alias: {
+        '__lib__': path.resolve(__dirname, '../../src'),
+        '@aliasedDeps/api-services/axios': path.resolve(__dirname, './aliases/axios'),
+      },
     },
     ssr: {
       noExternal: ['@vuelidate/core', 'vue-multiselect', 'webitel-sdk'],

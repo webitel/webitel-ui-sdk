@@ -2,8 +2,16 @@ import { globbySync } from 'globby';
 import isObject from 'lodash/isObject';
 import path from 'path';
 
+const baseUrl = 'pages';
+
+// "items" with array of resolved docs
 const useDocsPattern = (patterns) => {
-  return globbySync(patterns, { cwd: path.resolve(__dirname, '../pages/') });
+  return globbySync(patterns, { cwd: path.resolve(__dirname, `../${baseUrl}/`) });
+};
+
+// direct link to 1 md doc
+const useLinkToDoc = (path) => {
+  return `/${baseUrl}/${path}`;
 };
 
 const navbarNav = [
@@ -19,6 +27,42 @@ const navbarNav = [
 ];
 
 const sidebarNav = [
+
+  {
+    text: '@webitel/api-services',
+    items: [
+      {
+        text: 'Package Contents',
+        link: useLinkToDoc('api-services/contents/index.md'),
+        // link: useDocsPattern('api-services/contents/index.md').at(0),
+      },
+      // {
+      //   text: 'index',
+      //   items: useDocsPattern('api-services/index.md'),
+      // },
+      {
+        text: 'Usage',
+        items: [
+          {
+            text: 'index',
+            link: useLinkToDoc('api-services/usage/index.md'),
+          },
+          {
+            text: 'Migration from webitel-sdk',
+            link: useLinkToDoc('api-services/usage/general/index.md'),
+          },
+          {
+            text: 'Migration from @webitel/ui-sdk/api',
+            link: useLinkToDoc('api-services/usage/migration/index.md'),
+          },
+        ],
+      },
+      // {
+      //   text: 'gen/api',
+      // },
+    ],
+    collapsed: false,
+  },
   {
     text: 'FAQ',
     items: useDocsPattern('docs/faq/**/*.md'),
@@ -38,23 +82,6 @@ const sidebarNav = [
     text: 'How To',
     items: useDocsPattern('docs/how-to/**/*.md'),
     collapsed: true,
-  },
-  {
-    text: '@webitel/api-services',
-    items: [
-      {
-        text: 'index',
-        items: useDocsPattern('api-services/index.md'),
-      },
-      {
-        text: 'Introduction and Usage',
-        items: useDocsPattern('api-services/introduction-and-usage/index.md'),
-      },
-      // {
-      //   text: 'gen/api',
-      // },
-    ],
-    collapsed: false,
   },
   {
     text: 'API Tools',

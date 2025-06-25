@@ -1,9 +1,6 @@
-# Introduction and Usage
+# Usage
 
 _author: @dlohvinov_
-
-## Introduction
-`// TODO`
 
 ## Usage differences & Migration from `webitel-sdk`
 
@@ -145,9 +142,6 @@ const response = await sourceService.listSources({ // Увага!! `(param1, par
     // ...
     });
 ```
-#### Використовуємо валідації **за призначенням**
-
-**Поки що ні**. Тут все по-старому, але чекаєм на апдейти.
 
 ### Використання типів
 **Strongly recommended**. Використовуйте, не соромтесь 🙂

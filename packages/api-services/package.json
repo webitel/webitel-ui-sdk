@@ -20,6 +20,7 @@
   "files": [
     "src/*",
     "types/*",
+    "Readme.md",
     "CHANGELOG.md"
   ],
   "peerDependencies": {
