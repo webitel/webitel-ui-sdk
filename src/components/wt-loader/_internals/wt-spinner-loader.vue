@@ -2,8 +2,11 @@
 
 <template>
   <div
-    :class="`wt-loader--sm--${color}`"
-    class="wt-loader--sm"
+    :class="[
+      `wt-spinner-loader--${color}`,
+      `wt-spinner-loader--${size}`,
+    ]"
+    class="wt-spinner-loader"
   >
     <svg viewBox="0 0 24 24">
       <circle
@@ -23,14 +26,26 @@ export default {
       default: 'main',
       description: '["main", "icon", "on-dark", "on-light"]',
     },
+    size: {
+      type: String,
+      default: 'sm',
+      description: '["xs", "sm"]',
+    }
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.wt-loader--sm {
-  width: 24px;
-  height: 24px;
+.wt-spinner-loader {
+  &--xs {
+    width: var(--icon-sm-size);
+    height: var(--icon-sm-size);
+  }
+
+  &--sm {
+    width: var(--icon-md-size);
+    height: var(--icon-md-size);
+  }
 
   svg {
     animation: rotate 1.5s linear infinite;

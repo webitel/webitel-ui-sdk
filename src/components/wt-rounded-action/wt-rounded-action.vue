@@ -12,9 +12,9 @@
     @click="emit('click', $event)"
   >
     <wt-loader
-      v-if="loading"
+      v-if="showLoader"
       color="main"
-      size="sm"
+      :size="loaderSize"
     />
     <wt-icon
       v-else
@@ -82,7 +82,9 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(['click']);
+const showLoader = ref(false);
 
+const loaderSize = computed(() => props.size === 'sm' ? 'xs' : 'sm'); // for matching wt-loader sizes with wt-rounded-action sizes
 const iColor = computed(() => {
   if (props.disabled) return 'disabled';
   switch (props.color) {
@@ -92,6 +94,17 @@ const iColor = computed(() => {
       return props.color;
   }
 });
+
+watch(() => props.loading, (value) => {
+  if (value) {
+    showLoader.value = true;
+  } else {
+    setTimeout(() => {
+      showLoader.value = value;
+    }, 1000); // why 1s? https://ux.stackexchange.com/a/104782
+  }
+}, { immediate: true });
+
 </script>
 
 <style lang="scss">
