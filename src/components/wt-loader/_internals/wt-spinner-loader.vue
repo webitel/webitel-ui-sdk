@@ -3,10 +3,10 @@
 <template>
   <div
     :class="[
-      `wt-loader-smaller--${color}`,
-      `wt-loader-smaller--${size}`,
+      `wt-spinner-loader--${color}`,
+      `wt-spinner-loader--${size}`,
     ]"
-    class="wt-loader-smaller"
+    class="wt-spinner-loader"
   >
     <svg viewBox="0 0 24 24">
       <circle
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wt-loader-smaller {
+.wt-spinner-loader {
   &--xs {
     width: var(--icon-sm-size);
     height: var(--icon-sm-size);
