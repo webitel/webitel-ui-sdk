@@ -4,7 +4,7 @@ Prerequisites:
 
 [Mocking modules](../mocking-modules/Readme)
 
-[Test utils / axiosMock](../../../webitel-ui/tests/axios-mock/Readme)
+[Test utils / axiosMock](../../../ui-sdk/tests/axios-mock/Readme)
 
 ## Що ми тестуємо?
 

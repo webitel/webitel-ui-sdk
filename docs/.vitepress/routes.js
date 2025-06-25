@@ -18,11 +18,11 @@ const navbarNav = [
   { text: 'Home', link: '/' },
   {
     text: 'Changelog',
-    items: useDocsPattern('webitel-ui/changelog.md'),
+    items: useDocsPattern('ui-sdk/changelog.md'),
   },
   {
     text: 'icons',
-    items: useDocsPattern('webitel-ui/assets/icons/**/*.md'),
+    items: useDocsPattern('ui-sdk/assets/icons/**/*.md'),
   },
 ];
 
@@ -70,7 +70,7 @@ const sidebarNav = [
   },
   {
     text: 'Changelog',
-    items: useDocsPattern('webitel-ui/changelog.md'),
+    items: useDocsPattern('ui-sdk/changelog.md'),
     // collapsed: false,
   },
   {
@@ -85,56 +85,56 @@ const sidebarNav = [
   },
   {
     text: 'API Tools',
-    items: useDocsPattern('webitel-ui/api/**/*.md'),
+    items: useDocsPattern('ui-sdk/api/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Locale',
-    items: useDocsPattern('webitel-ui/locale/**/*.md'),
+    items: useDocsPattern('ui-sdk/locale/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Assets',
-    items: useDocsPattern('webitel-ui/assets/**/*.md'),
+    items: useDocsPattern('ui-sdk/assets/**/*.md'),
     collapsed: false,
   },
   {
     text: 'CSS',
-    items: useDocsPattern('webitel-ui/css/**/*.md'),
+    items: useDocsPattern('ui-sdk/css/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Components',
-    items: useDocsPattern('webitel-ui/components/**/*.md'),
+    items: useDocsPattern('ui-sdk/components/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Components/on-demand',
-    items: useDocsPattern('webitel-ui/components/on-demand/**/*.md'),
+    items: useDocsPattern('ui-sdk/components/on-demand/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Composables',
-    items: useDocsPattern('webitel-ui/composables/**/*.md'),
+    items: useDocsPattern('ui-sdk/composables/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Enums',
     items: [
-      ...useDocsPattern('webitel-ui/enums/index.md'),
+      ...useDocsPattern('ui-sdk/enums/index.md'),
       {
         text: 'Non-cathegorized',
         collapsed: false,
         items: useDocsPattern([
-          'webitel-ui/enums/**/*.md',
-          '!webitel-ui/enums/index.md',
-          '!webitel-ui/enums/WebitelApplications/*.md',
+          'ui-sdk/enums/**/*.md',
+          '!ui-sdk/enums/index.md',
+          '!ui-sdk/enums/WebitelApplications/*.md',
         ]),
       },
       {
         text: 'WebitelApplications',
         collapsed: false,
-        items: useDocsPattern('webitel-ui/enums/WebitelApplications/*.md'),
+        items: useDocsPattern('ui-sdk/enums/WebitelApplications/*.md'),
       },
     ],
     collapsed: true,
@@ -143,25 +143,25 @@ const sidebarNav = [
     text: 'Modules',
     items: [
       ...useDocsPattern([
-        'webitel-ui/modules/**/*.md',
-        '!webitel-ui/modules/ObjectPermissions',
-        '!webitel-ui/modules/TableComponentModule',
+        'ui-sdk/modules/**/*.md',
+        '!ui-sdk/modules/ObjectPermissions',
+        '!ui-sdk/modules/TableComponentModule',
       ]),
       {
         text: 'Module: Object Permissions',
         collapsed: true,
         items: [
-          ...useDocsPattern(['webitel-ui/modules/ObjectPermissions/index.md']),
+          ...useDocsPattern(['ui-sdk/modules/ObjectPermissions/index.md']),
           {
             text: 'Components',
             items: useDocsPattern([
-              'webitel-ui/modules/ObjectPermissions/components/**/*.md',
+              'ui-sdk/modules/ObjectPermissions/components/**/*.md',
             ]),
           },
           {
             text: 'Store',
             items: useDocsPattern([
-              'webitel-ui/modules/ObjectPermissions/store/**/*.md',
+              'ui-sdk/modules/ObjectPermissions/store/**/*.md',
             ]),
           },
         ],
@@ -170,11 +170,11 @@ const sidebarNav = [
         text: 'Module: Table Component Module',
         collapsed: true,
         items: [
-          ...useDocsPattern('webitel-ui/modules/TableComponentModule/index.md'),
+          ...useDocsPattern('ui-sdk/modules/TableComponentModule/index.md'),
           {
             text: 'Composables',
             items: useDocsPattern(
-              'webitel-ui/modules/TableComponentModule/composables/**/*.md',
+              'ui-sdk/modules/TableComponentModule/composables/**/*.md',
             ),
           },
         ],
@@ -185,27 +185,27 @@ const sidebarNav = [
   {
     text: 'Scripts',
     items: [
-      ...useDocsPattern('webitel-ui/scripts/index.md'),
+      ...useDocsPattern('ui-sdk/scripts/index.md'),
       ...useDocsPattern([
-        'webitel-ui/scripts/**/*.md',
-        '!webitel-ui/scripts/index.md',
+        'ui-sdk/scripts/**/*.md',
+        '!ui-sdk/scripts/index.md',
       ]),
     ],
     collapsed: true,
   },
   {
     text: 'Store',
-    items: useDocsPattern('webitel-ui/store/**/*.md'),
+    items: useDocsPattern('ui-sdk/store/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Test utils and Mocks',
-    items: useDocsPattern('webitel-ui/tests/**/*.md'),
+    items: useDocsPattern('ui-sdk/tests/**/*.md'),
     collapsed: true,
   },
   {
     text: 'Validators',
-    items: useDocsPattern('webitel-ui/validators/**/*.md'),
+    items: useDocsPattern('ui-sdk/validators/**/*.md'),
     collapsed: true,
   },
   {
