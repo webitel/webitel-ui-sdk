@@ -6,7 +6,7 @@ import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-} from '../../defaults/index';
+} from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -16,7 +16,7 @@ import {
 	sanitize,
 	snakeToCamel,
 	starToSearch,
-} from '../../transformers/index';
+} from '../../transformers';
 import { webChatGateway } from './defaults/webChatGateway';
 
 const instance = getDefaultInstance();

@@ -24,7 +24,7 @@ export default (/*{ mode }*/) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ['vue', 'primevue'],
+        external: ['vue', 'primevue', '@aliasedDeps/api-services/axios'],
         output: {
           // Provide global variables to use in the UMD build
           // for externalized deps

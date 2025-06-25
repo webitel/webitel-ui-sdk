@@ -103,8 +103,8 @@
 
 <script>
 import deepEqual from 'deep-equal';
-import validationMixin from '../../mixins/validationMixin/validationMixin';
 
+import validationMixin from '../../mixins/validationMixin/validationMixin';
 import multiselectMixin from '../wt-select/mixins/multiselectMixin.js';
 import taggableMixin from './mixin/taggableMixin.js';
 

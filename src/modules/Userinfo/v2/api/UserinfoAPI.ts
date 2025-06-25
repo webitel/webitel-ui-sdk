@@ -1,11 +1,12 @@
-import type { AxiosInstance } from 'axios';
-
-import getDefaultInstance from '../../../../api/defaults/getDefaultInstance/getDefaultInstance';
-import applyTransform, {
+import { getDefaultInstance } from '@webitel/api-services/api/defaults';
+import {
+  applyTransform,
   merge,
   notify,
   snakeToCamel,
-} from '../../../../api/transformers/index.js';
+} from '@webitel/api-services/api/transformers';
+import type { AxiosInstance } from 'axios';
+
 import type {
   GlobalAccessApiResponseItem,
   ScopeAccessApiResponseItem,

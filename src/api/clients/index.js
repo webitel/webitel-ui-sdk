@@ -21,6 +21,7 @@ import lists from './lists/blacklists';
 import media from './media/media';
 import object from './object/object';
 import queues from './queues/queues';
+import quickReplies from './quickReplies/quickReplies';
 import roles from './roles/roles';
 import skills from './skills/skills';
 import slas from './slas/slas';
@@ -29,7 +30,6 @@ import users from './users/users';
 import sysTypes from './wtTypes/sysTypes/sysTypes';
 import typeExtensions from './wtTypes/typeExtensions/typeExtensions';
 import { contactChatMessagesHistory, contacts } from './сontacts/index';
-import quickReplies from './quickReplies/quickReplies';
 
 export {
   agentChats,
@@ -57,6 +57,7 @@ export {
   media,
   object,
   queues,
+  quickReplies,
   roles,
   skills,
   slas,
@@ -64,5 +65,4 @@ export {
   teams,
   typeExtensions,
   users,
-  quickReplies,
 };

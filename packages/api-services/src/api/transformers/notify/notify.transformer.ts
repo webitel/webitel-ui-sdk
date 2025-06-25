@@ -1,4 +1,4 @@
-import eventBus from '../../../scripts/eventBus';
+import { config as apiServicesConfig } from '../../../config/config';
 
 const notifyTransformer = (notificationObject) => {
 	/*
@@ -10,7 +10,7 @@ const notifyTransformer = (notificationObject) => {
     so, create a callback which will send notification with params, passed to it
      */
 		const callback = ({ type, text }) =>
-			eventBus.$emit('notification', {
+			apiServicesConfig.eventBus.$emit('notification', {
 				type,
 				text,
 			});
@@ -25,7 +25,7 @@ const notifyTransformer = (notificationObject) => {
 		};
 	}
 	if (notificationObject instanceof Error) {
-		eventBus.$emit('notification', {
+		apiServicesConfig.eventBus?.$emit('notification', {
 			type: 'error',
 			text:
 				notificationObject.response?.data?.detail ||

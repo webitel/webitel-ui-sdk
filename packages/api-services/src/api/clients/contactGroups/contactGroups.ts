@@ -5,15 +5,16 @@ import {
 	getDefaultGetParams,
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import {
+	applyTransform,
 	camelToSnake,
 	merge,
 	mergeEach,
 	notify,
 	sanitize,
 	snakeToCamel,
-} from '../../transformers/index';
+} from '../../transformers';
 import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
 
 const instance = getDefaultInstance();

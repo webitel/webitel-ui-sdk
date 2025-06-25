@@ -5,15 +5,16 @@ import {
 	getDefaultGetParams,
 	getDefaultInstance,
 	getDefaultOpenAPIConfig,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import {
+	applyTransform,
 	camelToSnake,
 	merge,
 	notify,
 	sanitize,
 	snakeToCamel,
 	starToSearch,
-} from '../../transformers/index';
+} from '../../transformers';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -58,19 +59,18 @@ const getCatalogsList = async (params) => {
 		'sort',
 		'fields',
 		'id',
+		'state',
 		'hasSubservices',
 	];
 
-	const { page, size, fields, sort, id, q, has_subservices } = applyTransform(
-		params,
-		[
+	const { page, size, fields, sort, id, q, state, has_subservices } =
+		applyTransform(params, [
 			merge(getDefaultGetParams()),
 			starToSearch('search'),
 			(params) => ({ ...params, q: params.search }),
 			sanitize(fieldsToSend),
 			camelToSnake(),
-		],
-	);
+		]);
 	try {
 		const response = await catalogsService.listCatalogs(
 			page,
@@ -79,7 +79,7 @@ const getCatalogsList = async (params) => {
 			sort,
 			id,
 			q,
-			true,
+			state,
 			'100', // Implemented depth 100 for load all subservices in one request
 			servicesFieldsToSend,
 			has_subservices,
