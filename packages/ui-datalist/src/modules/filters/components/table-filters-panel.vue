@@ -51,7 +51,7 @@
       </template>
 
       <wt-icon-action
-        :disabled="!listSelectedFilters.length"
+        :disabled="!listSelectedFilters.size"
         action="clear"
         @click="emit('filter:reset-all')"
       />
@@ -173,7 +173,14 @@ const {
 });
 
 const enablePresets = computed(() => !!props.presetNamespace);
-const listSelectedFilters = computed(() => props.filtersManager.getFiltersList({ exclude: ['search'] }));
+
+/** @author @Lera24
+https://webitel.atlassian.net/browse/WTEL-7014
+Clear filters button should be active only if filters are defined in the table-filter-panel. Excluding the search filter
+**/
+
+const listSelectedFilters = computed(()=>
+  new Map([...props.filtersManager.filters].filter(([key]) => props.filterOptions.includes(key))));
 </script>
 
 <style>
