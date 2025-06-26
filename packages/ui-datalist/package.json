@@ -1,15 +1,16 @@
 {
   "name": "@webitel/ui-datalist",
-  "version": "1.0.48",
+  "version": "1.0.51",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
+    "make-all": "npm version patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
     "utils:i": "npm i",
     "utils:link": "npm link",
-    "utils:publish": "(npm run build:types || true) && npm publish --access public"
+    "utils:publish": "npm publish --access public"
   },
   "type": "module",
   "main": "./src/index.ts",
@@ -80,23 +81,22 @@
   ],
   "author": "webitel",
   "license": "ISC",
-
   "exports": {
-   ".": {
-     "types": "./types/index.d.ts",
-     "import": "./src/index.ts"
-   },
-   "./filters": {
-     "types": "./types/modules/filters/index.d.ts",
-     "import": "./src/modules/filters/index.ts"
-   },
-   "./presets": {
-     "types": "./types/modules/filter-presets/index.d.ts",
-     "import": "./src/modules/filter-presets/index.ts"
-   },
-   "./card": {
-     "types": "./types/modules/card/index.d.ts",
-     "import": "./src/modules/card/index.ts"
-   }
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.ts"
+    },
+    "./filters": {
+      "types": "./types/modules/filters/index.d.ts",
+      "import": "./src/modules/filters/index.ts"
+    },
+    "./presets": {
+      "types": "./types/modules/filter-presets/index.d.ts",
+      "import": "./src/modules/filter-presets/index.ts"
+    },
+    "./card": {
+      "types": "./types/modules/card/index.d.ts",
+      "import": "./src/modules/card/index.ts"
+    }
   }
 }

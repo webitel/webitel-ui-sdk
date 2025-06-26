@@ -12,7 +12,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import WtTree from '../../../../../../src/components/wt-tree/wt-tree.vue';
+import { WtTree }from '@webitel/ui-sdk/components';
 
 const selectedElement = ref('Subservice 4');
 const data = ref([

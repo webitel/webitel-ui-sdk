@@ -1,9 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-// IMPORT ME FROM:
-// import AgentStatus from '@webitel/ui-sdk/src/enums/AgentStatus/AgentStatus.enum';
-import AgentStatus from '../../../../../../src/enums/AgentStatus/AgentStatus.enum';
+import { AgentStatus } from'@webitel/ui-sdk/enums';
 
 const status = ref(AgentStatus.ONLINE);
 </script>

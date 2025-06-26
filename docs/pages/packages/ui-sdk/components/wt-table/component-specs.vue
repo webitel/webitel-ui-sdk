@@ -1,5 +1,5 @@
 <script setup>
-import WtTable from '../../../../../src/components/wt-table/wt-table.vue';
+import { WtTable } from '@webitel/ui-sdk/components';
 </script>
 
 <template>

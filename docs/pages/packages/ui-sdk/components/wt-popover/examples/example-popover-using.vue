@@ -13,8 +13,7 @@
 <script setup>
 import { useTemplateRef } from 'vue';
 
-import WtButton from '../../../../../../src/components/wt-button/wt-button.vue';
-import WtPopover from '../../../../../../src/components/wt-popover/wt-popover.vue';
+import { WtButton, WtPopover } from '@webitel/ui-sdk/components';
 
 const popover = useTemplateRef('popover');
 

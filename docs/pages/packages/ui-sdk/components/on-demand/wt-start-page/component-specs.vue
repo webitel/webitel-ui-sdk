@@ -1,5 +1,5 @@
 <script setup>
-import Component from '../../../../../../src/components/on-demand/wt-start-page/components/wt-start-page.vue';
+import Component from '__lib__/components/on-demand/wt-start-page/components/wt-start-page.vue';
 </script>
 
 <template>

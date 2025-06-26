@@ -1,5 +1,5 @@
 <script setup>
-import WtItemLink from '../../../../../src/components/wt-item-link/wt-item-link.vue';
+import { WtItemLink } from'@webitel/ui-sdk/components';
 </script>
 
 <template>

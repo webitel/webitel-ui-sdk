@@ -1,5 +1,5 @@
 <script setup>
-import WebitelApplications from '../../../../../../src/enums/WebitelApplications/WebitelApplications.enum';
+import { WebitelApplications } from '@webitel/ui-sdk/enums';
 
 const apps = [
   { name: WebitelApplications.AGENT, href: 'https://example.com' },

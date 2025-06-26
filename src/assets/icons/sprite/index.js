@@ -153,6 +153,7 @@ import previewTagImage from './preview-tag-image.svg';
 import previewTagVideo from './preview-tag-video.svg';
 import prompter from './prompter.svg';
 import queueMember from './queue-member.svg';
+import quickReplies from './quick-replies.svg';
 import radio from './radio.svg';
 import radioChecked from './radio--checked.svg';
 import rec from './rec.svg';
@@ -416,4 +417,5 @@ export default objCamelToKebab({
   plyrSettings,
   plyrVolume,
   loadPreset,
+  quickReplies,
 });

@@ -1,5 +1,5 @@
 <script setup>
-import WtConfirmDialog from '../../../../../src/components/wt-confirm-dialog/wt-confirm-dialog.vue';
+import { WtConfirmDialog } from '@webitel/ui-sdk/components';
 </script>
 
 <template>

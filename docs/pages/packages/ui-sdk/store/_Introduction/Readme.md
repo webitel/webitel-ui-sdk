@@ -117,7 +117,7 @@ const createCustomStoreModule = (modules) => {
 ### Типовий розділ
 
 - Робите складний розділ з таблицею та карточкою сутності? Вам треба майже все, дивіться
-  [how to: Integration between store modules](../../../../knowledge-base/how-to/Integration%20between%20store%20modules/Readme.md).
+  [how to: Integration between store modules](../../../../knowledge-base/how-to/Integration-between-store-modules/Readme.md).
 
 ### Тільки табличка
 

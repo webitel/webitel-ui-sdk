@@ -1,5 +1,5 @@
 <script setup>
-import WtBadge from '../../../../../src/components/wt-badge/wt-badge.vue';
+import { WtBadge } from '@webitel/ui-sdk/components';
 </script>
 
 <template>

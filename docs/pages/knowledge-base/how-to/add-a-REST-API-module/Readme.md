@@ -9,15 +9,15 @@
 А також пасувало би почитати про тулзи, які ми використовуватимемо:
 
 - [Axios](https://axios-http.com/docs/intro)
-- Наша обгортка над axios: [api/axios](../../../ui-sdk/api/axios/Readme.md)
-- Набір вже готових, дефолтних клієнтів-модулів для певних ендпоінтів: [api/clients](../../../ui-sdk/api/clients/Readme.md)
-- Дефолтні, реюзабельні штуки для роботи з апі: [api/defaults](../../../ui-sdk/api/defaults/Readme.md)
-- axios interceptors: [api/interceptors](../../../ui-sdk/api/interceptors/Readme.md)
-- Трансформери для даних: [api/transformers](../../../ui-sdk/api/transformers/Readme.md)
+- Наша обгортка над axios: [api/axios](../../../packages/ui-sdk/api/axios/Readme.md)
+- Набір вже готових, дефолтних клієнтів-модулів для певних ендпоінтів: [api/clients](../../../packages/ui-sdk/api/clients/Readme.md)
+- Дефолтні, реюзабельні штуки для роботи з апі: [api/defaults](../../../packages/ui-sdk/api/defaults/Readme.md)
+- axios interceptors: [api/interceptors](../../../packages/ui-sdk/api/interceptors/Readme.md)
+- Трансформери для даних: [api/transformers](../../../packages/ui-sdk/api/transformers/Readme.md)
 
 ### REST API Module Interface
 
-**Обовʼязково, подивіться у секцію Interface [api/clients](../../../ui-sdk/api/clients/Readme.md#interface).**
+**Обовʼязково, подивіться у секцію Interface [api/clients](../../../packages/ui-sdk/api/clients/Readme.md#interface).**
 
 ## Як додати Webitel SDK Endpoint модуль?
 

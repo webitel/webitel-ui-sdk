@@ -5,14 +5,9 @@ on:
   workflow_dispatch:
 
 jobs:
-#  ATTENTION! deps install is currently not needed because package is publishing as is, without build
-
-#  install_deps:
-#    runs-on: ubuntu-latest
-#    steps:
-
   publish:
-#    needs: [install_deps]
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,21 +19,16 @@ jobs:
           check-latest: true
           registry-url: https://registry.npmjs.org
 
-      # - name: Check publish status
-      #   id: check_publish
-      #   uses: tehpsalmist/npm-publish-status-action@v1 #works ONLY FOR ROOT-lvl package
-
       - name: Publish release
         id: publish_release
         # if: ${{ steps.check_publish.outputs.exists == '0' }}
 
         run: |
-          npm i --install-links
-          cd packages/ui-datalist
           echo "Publishing release, ${{ steps.check_publish.outputs.exists }}"
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-          npm run utils:publish
+          cd packages/ui-datalist
+          npm ci
+          npm run make-all
 
-      # - name: Report publish status
-      #   if: ${{ steps.check_publish.outputs.exists == '1' }}
-      #   run: echo "Package already published"
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5

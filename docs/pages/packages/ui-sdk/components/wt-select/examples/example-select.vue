@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import wtSelectV2 from '../../../../../../src/components/wt-select/wt-select-v2.vue';
+import wtSelectV2 from '../../../../../../../src/components/wt-select/wt-select-v2.vue';
 
 const options = [
   { name: 'Vue.js1', language: 'JavaScript' },

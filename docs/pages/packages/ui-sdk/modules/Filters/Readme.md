@@ -39,7 +39,7 @@
 
 ### Як працювали попередні фільтри?
 
-[Детально, QueryFilters](<../query-filters%20(old)/Readme.md>)
+[Детально, QueryFilters](<../query-filters/Readme.md>)
 
 ## Як працюють нові фільтри?
 

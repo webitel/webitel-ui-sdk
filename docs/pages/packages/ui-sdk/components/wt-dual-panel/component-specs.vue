@@ -1,5 +1,5 @@
 <script setup>
-import WtDualPanel from '../../../../../src/components/wt-dual-panel/wt-dual-panel.vue';
+import { WtDualPanel } from '@webitel/ui-sdk/components';
 </script>
 
 <template>

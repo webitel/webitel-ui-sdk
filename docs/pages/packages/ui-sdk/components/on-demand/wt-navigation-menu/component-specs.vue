@@ -1,5 +1,5 @@
 <script setup>
-import Component from '../../../../../../src/components/on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
+import Component from '__lib__/components/on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
 </script>
 
 <template>
