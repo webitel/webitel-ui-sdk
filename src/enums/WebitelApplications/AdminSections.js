@@ -41,4 +41,5 @@ export const AdminSections = {
   Triggers: 'triggers',
   Users: 'users',
   WorkingConditions: 'working-conditions',
+  QuickReplies: 'quick-replies',
 };
