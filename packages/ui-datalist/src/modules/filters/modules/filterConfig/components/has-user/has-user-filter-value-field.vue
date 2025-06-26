@@ -10,10 +10,10 @@
 <script lang="ts" setup>
 import { watch } from 'vue';
 
-import { useBooleanFilterValueValidation } from '../../composables/booleanFilterToolkit';
-import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
-import {BooleanFilterModelValue} from "../../enums/options/BooleanFilterOptions";
 import {WtSysTypeFilterConfig} from "../../classes/FilterConfig";
+import { useBooleanFilterValueValidation } from '../../composables/booleanFilterToolkit';
+import {BooleanFilterModelValue} from "../../enums/options/BooleanFilterOptions";
+import HasOptionFilterValueField from '../_shared/has-options/has-option-filter-value-field.vue';
 
 const props = defineProps<{
   filterConfig: WtSysTypeFilterConfig;

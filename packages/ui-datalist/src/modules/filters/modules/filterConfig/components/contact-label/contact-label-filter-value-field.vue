@@ -15,9 +15,9 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { computed, watch, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { WtSelect } from '@webitel/ui-sdk/components';
+import { computed, onMounted,watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
