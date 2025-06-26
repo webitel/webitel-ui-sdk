@@ -31,7 +31,7 @@
 <script>
 import Prism from 'prismjs';
 
-import AgentStatus from '../../../../../src/enums/AgentStatus/AgentStatus.enum';
+import { AgentStatus } from'@webitel/ui-sdk/enums';
 
 export default {
   name: 'WtStatusSelectDocs',

@@ -101,7 +101,7 @@
 * [table-page](css/table-page/table-page.css.md)
 
 ## Directives
-* [Clickaway Directive](directives/clickaway-directive/index.md)
+* Clickaway Directive
 
 ## [Enums](enums/index.md)
 * [AbstractUserStatus](enums/AbstractUserStatus/Readme.md)
@@ -137,9 +137,7 @@
 * [TableComponentModule](modules/TableComponentModule/index.md)
 
 ## Plugins
-* [Plugins Docs](plugins/plugins-docs.vue)
-
-## [Quick Start](quick-start/index.md)
+* Plugins Docs
 
 ## [Scripts](scripts/index.md)
 

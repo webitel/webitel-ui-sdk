@@ -1,9 +1,9 @@
 <script setup>
-import Component from '../../../../../src/components/wt-popup/wt-popup.vue';
+import { WtPopup } from '@webitel/ui-sdk/components';
 </script>
 
 <template>
-  <component-info :info="Component.docs" />
+  <component-info :info="WtPopup.docs" />
 </template>
 
 <style scoped lang="scss"></style>

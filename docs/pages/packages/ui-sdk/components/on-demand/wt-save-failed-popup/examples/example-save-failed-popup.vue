@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import WtSaveFailedPopup from '../../../../../../../src/components/on-demand/wt-save-failed-popup/wt-save-failed-popup.vue';
+import WtSaveFailedPopup from '../../../../../../../../src/components/on-demand/wt-save-failed-popup/wt-save-failed-popup.vue';
 // correct way to import popup
 // import WtSaveFailedPopup from '@webitel/ui-sdk/src/components/on-demand/wt-save-failed-popup/wt-save-failed-popup.vue';
 

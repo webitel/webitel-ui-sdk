@@ -1,5 +1,5 @@
 <script setup>
-import Component from '../../../../../../src/components/on-demand/wt-selection-popup/wt-selection-popup.vue';
+import Component from '__lib__/components/on-demand/wt-selection-popup/wt-selection-popup.vue';
 </script>
 
 <template>

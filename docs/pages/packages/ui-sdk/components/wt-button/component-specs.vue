@@ -1,5 +1,5 @@
 <script setup>
-import WtButton from '../../../../../src/components/wt-button/wt-button.vue';
+import { WtButton } from '@webitel/ui-sdk/components';
 </script>
 
 <template>

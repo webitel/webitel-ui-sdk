@@ -18,8 +18,7 @@
 
 <script>
 import Prism from 'prismjs';
-
-import WebitelApplications from '../../../../../src/enums/WebitelApplications/WebitelApplications.enum';
+import { WebitelApplications } from '@webitel/ui-sdk/enums';
 
 export default {
   name: 'WtAppHeaderDocs',

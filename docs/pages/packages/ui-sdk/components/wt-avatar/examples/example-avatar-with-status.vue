@@ -1,5 +1,5 @@
 <script setup>
-import AbstractUserStatus from '../../../../../../src/enums/AbstractUserStatus/AbstractUserStatus.enum';
+import { AbstractUserStatus } from '@webitel/ui-sdk/enums';
 import pic from './pic.jpg';
 </script>
 

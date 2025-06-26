@@ -14,7 +14,7 @@
 <script setup>
 import { ref } from 'vue';
 
-import WtTree from '../../../../../../src/components/wt-tree/wt-tree.vue';
+import { WtTree } from '@webitel/ui-sdk/components';
 import serviceJson from './service.json';
 
 const selectedElement = ref('another service 3');

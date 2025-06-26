@@ -18,7 +18,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { ComponentSize } from '../../../../../../src/enums/index.ts';
+import { ComponentSize } from '@webitel/ui-sdk/enums';;
 
 const { t } = useI18n();
 const size = ref(ComponentSize.MD);

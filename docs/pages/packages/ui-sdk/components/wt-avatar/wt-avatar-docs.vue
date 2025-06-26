@@ -30,7 +30,7 @@
 <script>
 import Prism from 'prismjs';
 
-import AbstractUserStatus from '../../../../../src/enums/AbstractUserStatus/AbstractUserStatus.enum';
+import { AbstractUserStatus } from '@webitel/ui-sdk/enums';;
 import pic from './examples/pic.jpg';
 
 export default {

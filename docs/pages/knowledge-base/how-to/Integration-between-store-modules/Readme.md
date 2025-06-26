@@ -2,20 +2,20 @@
 
 ## Prerequisites
 
-- [Store Introduction](../../../ui-sdk/store/_Introduction/Readme.md)
-- [createTableStoreModule](../../../ui-sdk/store/createTableStoreModule/Readme.md)
-- [createCardStoreModule](../../../ui-sdk/store/createCardStoreModule/Readme.md)
-- [createApiStoreModule](../../../ui-sdk/store/createApiStoreModule/Readme.md)
-- [modules/Filters](../../../ui-sdk/modules/Filters/Readme.md)
+- [Store Introduction](../../../packages/ui-sdk/store/_Introduction/Readme.md)
+- [createTableStoreModule](../../../packages/ui-sdk/store/createTableStoreModule/Readme.md)
+- [createCardStoreModule](../../../packages/ui-sdk/store/createCardStoreModule/Readme.md)
+- [createApiStoreModule](../../../packages/ui-sdk/store/createApiStoreModule/Readme.md)
+- [modules/Filters](../../../packages/ui-sdk/modules/Filters/Readme.md)
 
 ## Опис
 
 Стор однієї сутності зазвичай складається з кількох (стор) компонентів:
 
-1. табличка [createTableStoreModule](../../../ui-sdk/store/createTableStoreModule/Readme.md)
-2. карточка [createCardStoreModule](../../../ui-sdk/store/createCardStoreModule/Readme.md)
-3. фільтри [modules/Filters](../../../ui-sdk/modules/Filters/Readme.md)
-4. апішки [createApiStoreModule](../../../ui-sdk/store/createApiStoreModule/Readme.md)
+1. табличка [createTableStoreModule](../../../packages/ui-sdk/store/createTableStoreModule/Readme.md)
+2. карточка [createCardStoreModule](../../../packages/ui-sdk/store/createCardStoreModule/Readme.md)
+3. фільтри [modules/Filters](../../../packages/ui-sdk/modules/Filters/Readme.md)
+4. апішки [createApiStoreModule](../../../packages/ui-sdk/store/createApiStoreModule/Readme.md)
 
 По суті, всі вони потрібні для повноцінної репрезентації сутності в інтерфейсі,
 але, втім, вони достатньо різні, щоб розділити їх одне від одного на окремі модулі.
@@ -25,7 +25,7 @@
 Складаються вони за ось таким форматом, в програмі-максимум:
 
 1. У нас є базовий стор модуль, скажімо, `contacts.store.js`.
-2. Він є інстансом `BaseStoreModule` [дока](../../../ui-sdk/store/createBaseStoreModule/Readme.md), та включає в
+2. Він є інстансом `BaseStoreModule` [дока](../../../packages/ui-sdk/store/createBaseStoreModule/Readme.md), та включає в
    себе,
    як чайлдів, стор таблички, і стор карточки.
 3. І стор таблички, і стор карточки, містять в собі стор апішок для комунікації з бекендом.

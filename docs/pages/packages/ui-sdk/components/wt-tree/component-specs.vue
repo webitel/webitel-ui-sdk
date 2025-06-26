@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import WtTree from '../../../../../src/components/wt-tree/wt-tree.vue';
+import { WtTree } from '@webitel/ui-sdk/components';
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import WtPopup from '../../../../../../src/components/wt-popup/wt-popup.vue';
+import { WtPopup } from '@webitel/ui-sdk/components';
 </script>
 
 <template>
