@@ -1,5 +1,12 @@
 # `@webitel/api-services` Usage
 
-## [General Usage, new features](general/index.md)
+## TLDR;
 
-## [Differences, migration from `@webitel/ui-sdk/api`](migration/index.md)
+* [All-together usage example](tldr-usage/index.md)
+
+## Details
+
+* [General Usage, new features](general/index.md)
+
+* [Differences, migration from `@webitel/ui-sdk/api`](migration/index.md)
+

@@ -24,6 +24,10 @@ export const apiServicesRoutes = [{
           link: resolveLink('usage/index.md'),
         },
         {
+          text: 'TLDR; Usage Example',
+          link: resolveLink('usage/tldr-usage/index.md'),
+        },
+        {
           text: 'Migration from webitel-sdk',
           link: resolveLink('usage/general/index.md'),
         },
