@@ -1,12 +1,4 @@
-## Status
-
-<!--- **READY/WIP/HOLD** --->
-
-**READY/WIP/HOLD**
-
 ## Description
-
-// Skip
 
 ## Related Tasks
 
@@ -20,7 +12,3 @@
 
 - [ ] Implementation
 - [ ] Documentation
-
-## Steps to Test or Reproduce
-
-// Skip
