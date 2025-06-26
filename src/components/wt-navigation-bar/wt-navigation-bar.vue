@@ -183,45 +183,22 @@ export default {
   }),
 
   computed: {
-    // currentNav() {
-    //   const path = this.$route.fullPath;
-    //   const a = this.nav
-    //     .reduce((flatNav, currentNavItem) => {
-    //       if (currentNavItem.subNav)
-    //         return flatNav.concat(currentNavItem.subNav);
-    //       return [...flatNav, currentNavItem];
-    //     }, [])
-    //   console.log(this.$route, ' this.$route')
-    //   console.log(a, ' AAAAAAAAAAAAAAAAAAAAA')
-    //   console.log(this.nav, ' this.nav')
-    //   const currentNav = a.find((navItem) => path.endsWith(navItem.route));
-    //   const currentExpansion = this.nav
-    //     .filter((nav) => nav.subNav)
-    //     .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
-    //   return {
-    //     nav: currentNav?.value,
-    //     expansion: currentExpansion?.value,
-    //   };
-    // },
     currentNav() {
-      const splitPath = this.$route.path.split('/'); // i.e., "/directory/license/all"
+      const pathSegments = this.$route.path.split('/').filter(Boolean);
 
-      // flatten nav with subNav if needed (your structure suggests it might be nested)
       const flatNav = this.nav.flatMap(item => item.subNav ?? [item]);
-      console.log(flatNav, ' flatNav')
 
-      // Find the first nav item where `route` is part of the current path
-      const currentNavItem = flatNav.find((navItem) =>
-        splitPath.find((item) => item === navItem.route)
-      );
+      const navMap = new Map(flatNav.map(item => [item.value, item]));
 
-      // If you want to support expansion logic (i.e., group detection)
+      const matchingSegment = pathSegments.find(segment => navMap.has(segment));
+      const currentNav = navMap.get(matchingSegment);
+
       const currentExpansion = this.nav.find(nav =>
-        nav.subNav?.some(sub => sub === currentNavItem)
+        nav.subNav?.includes(currentNav)
       );
 
       return {
-        nav: currentNavItem?.value,
+        nav: currentNav?.value,
         expansion: currentExpansion?.value,
       };
     }
