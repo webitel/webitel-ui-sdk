@@ -3,7 +3,7 @@
   "version": "1.0.48",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
-    "make-all": "npm verion patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish"
+    "make-all": "npm verion patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
