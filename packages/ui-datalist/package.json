@@ -3,13 +3,14 @@
   "version": "1.0.48",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
+    "make-all": "npm verion patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish"
     "build:types": "vue-tsc -p ./tsconfig.build.json",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
     "utils:i": "npm i",
     "utils:link": "npm link",
-    "utils:publish": "(npm run build:types || true) && npm publish --access public"
+    "utils:publish": "npm publish --access public",
   },
   "type": "module",
   "main": "./src/index.ts",
