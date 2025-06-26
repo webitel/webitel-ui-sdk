@@ -10,7 +10,7 @@
     "lint:package": "publint",
     "utils:i": "npm i",
     "utils:link": "npm link",
-    "utils:publish": "npm publish --access public",
+    "utils:publish": "npm publish --access public"
   },
   "type": "module",
   "main": "./src/index.ts",
