@@ -1,13 +1,14 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.8.8",
+  "version": "25.8.16",
   "private": false,
   "scripts": {
+    "make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",
     "dev": "npm run docs:dev",
     "build": "vite build",
     "test:unit": "vitest",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
-    "publish-lib": "npm run build && (npm run build:types || true) && npm publish --access public",
+    "publish-lib": " npm publish --access public",
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
@@ -53,7 +54,7 @@
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^13.0.0",
-    "@webitel/api-services": "^0.0.24",
+    "@webitel/api-services": "^0.0.28",
     "@webitel/styleguide": "^24.12.29",
     "autosize": "^6.0.1",
     "axios": "^1.8.3",
@@ -148,141 +149,141 @@
       "import": "./dist/ui-sdk.js"
     },
     "./store": {
-        "types": "./types/store/new/index.d.ts",
-        "import": "./src/store/new/index.js"
-      },
-      "./store*": {
-        "types": "./types/store*",
-        "import": "./src/store*"
-      },
-      "./src/store*": {
-        "types": "./types/store*",
-        "import": "./src/store*"
-      },
-      "./enums": {
-        "types": "./types/enums/index.d.ts",
-        "import": "./src/enums/index.ts"
-      },
-      "./enums*": {
-        "types": "./types/enums*",
-        "import": "./src/enums*"
-      },
-      "./src/enums*": {
-        "types": "./types/enums*",
-        "import": "./src/enums*"
-      },
-      "./components": {
-        "types": "./types/components/index.d.ts",
-        "import": "./src/components/index.js"
-      },
-      "./components*": {
-        "types": "./types/components*",
-        "import": "./src/components*"
-      },
-      "./src/components*": {
-        "types": "./types/components*",
-        "import": "./src/components*"
-      },
-      "./scripts": {
-        "types": "./types/scripts/index.d.ts",
-        "import": "./src/scripts/index.js"
-      },
-      "./scripts*": {
-        "types": "./types/scripts*",
-        "import": "./src/scripts*"
-      },
-      "./src/scripts*": {
-        "types": "./types/scripts*",
-        "import": "./src/scripts*"
-      },
-      "./api*": {
-        "types": "./types/api*",
-        "import": "./src/api*"
-      },
-      "./src/api*": {
-        "types": "./types/api*",
-        "import": "./src/api*"
-      },
-      "./locale*": {
-        "types": "./types/locale*",
-        "import": "./src/locale*"
-      },
-      "./src/locale*": {
-        "types": "./types/locale*",
-        "import": "./src/locale*"
-      },
-      "./composables": {
-        "types": "./types/composables/index.d.ts",
-        "import": "./src/composables/index.ts"
-      },
-      "./composables*": {
-        "types": "./types/composables*",
-        "import": "./src/composables*"
-      },
-      "./src/composables*": {
-        "types": "./types/composables*",
-        "import": "./src/composables*"
-      },
-      "./css*": {
-        "import": "./src/css*"
-      },
-      "./src/css*": {
-        "import": "./src/css*"
-      },
-      "./directives*": {
-        "types": "./types/directives*",
-        "import": "./src/directives*"
-      },
-      "./src/directives*": {
-        "types": "./types/directives*",
-        "import": "./src/directives*"
-      },
-      "./mixins*": {
-        "types": "./types/mixins*",
-        "import": "./src/mixins*"
-      },
-      "./src/mixins*": {
-        "types": "./types/mixins*",
-        "import": "./src/mixins*"
-      },
-      "./validations": {
-        "types": "./types/validations/index.d.ts",
-        "import": "./src/validations/index.ts"
-      },
-      "./validators*": {
-        "types": "./types/validations/vuelidate/validators*",
-        "import": "./src/validations/vuelidate/validators*"
-      },
-      "./src/validators*": {
-        "types": "./types/validations/vuelidate/validators*",
-        "import": "./src/validations/vuelidate/validators*"
-      },
-      "./modules*": {
-        "types": "./types/modules*",
-        "import": "./src/modules*"
-      },
-      "./src/modules*": {
-        "types": "./types/modules*",
-        "import": "./src/modules*"
-      },
-      "./plugins*": {
-        "types": "./types/plugins*",
-        "import": "./src/plugins*"
-      },
-      "./src/plugins*": {
-        "types": "./types/plugins*",
-        "import": "./src/plugins*"
-      },
-      "./tests*": {
-        "types": "./types/tests*",
-        "import": "./src/tests*"
-      },
-      "./src/tests*": {
-        "types": "./types/tests*",
-        "import": "./src/tests*"
-      },
-      "./dist*": {
-        "import": "./dist*"
-      }
+      "types": "./types/store/new/index.d.ts",
+      "import": "./src/store/new/index.js"
+    },
+    "./store*": {
+      "types": "./types/store*",
+      "import": "./src/store*"
+    },
+    "./src/store*": {
+      "types": "./types/store*",
+      "import": "./src/store*"
+    },
+    "./enums": {
+      "types": "./types/enums/index.d.ts",
+      "import": "./src/enums/index.ts"
+    },
+    "./enums*": {
+      "types": "./types/enums*",
+      "import": "./src/enums*"
+    },
+    "./src/enums*": {
+      "types": "./types/enums*",
+      "import": "./src/enums*"
+    },
+    "./components": {
+      "types": "./types/components/index.d.ts",
+      "import": "./src/components/index.js"
+    },
+    "./components*": {
+      "types": "./types/components*",
+      "import": "./src/components*"
+    },
+    "./src/components*": {
+      "types": "./types/components*",
+      "import": "./src/components*"
+    },
+    "./scripts": {
+      "types": "./types/scripts/index.d.ts",
+      "import": "./src/scripts/index.js"
+    },
+    "./scripts*": {
+      "types": "./types/scripts*",
+      "import": "./src/scripts*"
+    },
+    "./src/scripts*": {
+      "types": "./types/scripts*",
+      "import": "./src/scripts*"
+    },
+    "./api*": {
+      "types": "./types/api*",
+      "import": "./src/api*"
+    },
+    "./src/api*": {
+      "types": "./types/api*",
+      "import": "./src/api*"
+    },
+    "./locale*": {
+      "types": "./types/locale*",
+      "import": "./src/locale*"
+    },
+    "./src/locale*": {
+      "types": "./types/locale*",
+      "import": "./src/locale*"
+    },
+    "./composables": {
+      "types": "./types/composables/index.d.ts",
+      "import": "./src/composables/index.ts"
+    },
+    "./composables*": {
+      "types": "./types/composables*",
+      "import": "./src/composables*"
+    },
+    "./src/composables*": {
+      "types": "./types/composables*",
+      "import": "./src/composables*"
+    },
+    "./css*": {
+      "import": "./src/css*"
+    },
+    "./src/css*": {
+      "import": "./src/css*"
+    },
+    "./directives*": {
+      "types": "./types/directives*",
+      "import": "./src/directives*"
+    },
+    "./src/directives*": {
+      "types": "./types/directives*",
+      "import": "./src/directives*"
+    },
+    "./mixins*": {
+      "types": "./types/mixins*",
+      "import": "./src/mixins*"
+    },
+    "./src/mixins*": {
+      "types": "./types/mixins*",
+      "import": "./src/mixins*"
+    },
+    "./validations": {
+      "types": "./types/validations/index.d.ts",
+      "import": "./src/validations/index.ts"
+    },
+    "./validators*": {
+      "types": "./types/validations/vuelidate/validators*",
+      "import": "./src/validations/vuelidate/validators*"
+    },
+    "./src/validators*": {
+      "types": "./types/validations/vuelidate/validators*",
+      "import": "./src/validations/vuelidate/validators*"
+    },
+    "./modules*": {
+      "types": "./types/modules*",
+      "import": "./src/modules*"
+    },
+    "./src/modules*": {
+      "types": "./types/modules*",
+      "import": "./src/modules*"
+    },
+    "./plugins*": {
+      "types": "./types/plugins*",
+      "import": "./src/plugins*"
+    },
+    "./src/plugins*": {
+      "types": "./types/plugins*",
+      "import": "./src/plugins*"
+    },
+    "./tests*": {
+      "types": "./types/tests*",
+      "import": "./src/tests*"
+    },
+    "./src/tests*": {
+      "types": "./types/tests*",
+      "import": "./src/tests*"
+    },
+    "./dist*": {
+      "import": "./dist*"
+    }
   }
 }

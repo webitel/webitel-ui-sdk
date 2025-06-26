@@ -5,8 +5,9 @@ import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
 	getDefaultInstance,
-} from '../../defaults/index';
-import applyTransform, {
+} from '../../defaults';
+import {
+	applyTransform,
 	camelToSnake,
 	generateUrl,
 	merge,
@@ -14,7 +15,7 @@ import applyTransform, {
 	sanitize,
 	snakeToCamel,
 	starToSearch,
-} from '../../transformers/index';
+} from '../../transformers';
 
 const instance = getDefaultInstance();
 

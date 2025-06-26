@@ -16,7 +16,10 @@
       >
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
-          <router-link :to="logoRoute">
+          <router-link
+            :to="logoRoute"
+            @click="close"
+          >
             <img
               :alt="currentApp"
               :src="
@@ -28,7 +31,7 @@
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
-            @click="isOpened = false"
+            @click="close"
           />
         </header>
         <wt-divider />

@@ -12,27 +12,26 @@ import type { WebitelCasesSourceType } from './webitelCasesSourceType';
  */
 export interface WebitelCasesSource {
 	/** Unix timestamp representing when the source was created. */
-	readonly createdAt: string;
+	createdAt: string;
 	/** Reference to the user who originally created this source. */
-	readonly createdBy: GeneralLookup;
+	createdBy: GeneralLookup;
 	/**
 	 * An optional longer explanation of the source's purpose.
 	 * @maxLength 500
 	 */
 	description?: string;
 	/** Unique identifier for the source, generated automatically. */
-	readonly id: string;
+	id: string;
 	/**
 	 * A unique, descriptive name for the source.
 	 * @minLength 3
 	 * @maxLength 100
-	 * @pattern ^[a-zA-Z0-9_\-\s]+$
 	 */
 	name: string;
 	/** The type of data source represented by this entry. */
 	type: WebitelCasesSourceType;
 	/** Unix timestamp representing the most recent update. */
-	readonly updatedAt: string;
+	updatedAt: string;
 	/** Reference to the user who most recently modified this source. */
-	readonly updatedBy: GeneralLookup;
+	updatedBy: GeneralLookup;
 }

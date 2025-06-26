@@ -1,2 +1,2 @@
-export * from './gen';
-export * from './utils/gen';
+export type { ApiServicesConfig } from './config/config';
+export { setConfig } from './config/config';

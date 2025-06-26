@@ -1,2 +1,2 @@
 // Export request interceptors
-export { default as updateTokenInterceptor } from './updateToken.interceptor';
+export { updateTokenInterceptor } from './updateToken.interceptor';

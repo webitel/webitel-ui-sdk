@@ -19,7 +19,6 @@ export interface WebitelCasesInputSource {
 	 * The name of the source
 	 * @minLength 2
 	 * @maxLength 100
-	 * @pattern ^[a-zA-Z0-9_\- ]+$
 	 */
 	name: string;
 	/** The type of the source */

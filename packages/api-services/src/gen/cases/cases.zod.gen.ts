@@ -533,6 +533,12 @@ export const createCaseQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('List of fields to include in the response.'),
+	disableTrigger: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether to disable the trigger after the application execution.\nDefault is false (trigger **will** be executed).\nSet to true to explicitly prevent the trigger from running (e.g., when called from another trigger or internal flow).\nто\n[WTEL-7055]',
+		),
 });
 
 export const createCaseBodyRelatedItemRelationTypeDefault =
@@ -2100,6 +2106,12 @@ export const updateCase2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('List of fields to include in the response.'),
+	disableTrigger: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether to disable the trigger after the application execution.\nDefault is false (trigger **will** be executed).\nSet to true to explicitly prevent the trigger from running (e.g., when called from another trigger or internal flow).\n\n[WTEL-7055]',
+		),
 });
 
 export const updateCase2Body = zod.object({
@@ -2688,6 +2700,12 @@ export const updateCaseQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('List of fields to include in the response.'),
+	disableTrigger: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether to disable the trigger after the application execution.\nDefault is false (trigger **will** be executed).\nSet to true to explicitly prevent the trigger from running (e.g., when called from another trigger or internal flow).\n\n[WTEL-7055]',
+		),
 });
 
 export const updateCaseBody = zod.object({

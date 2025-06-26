@@ -1,5 +1,3 @@
-import contactChatMessagesHistory from './contactChatMessagesHistory';
-import contacts from './contacts';
-import ContactsSearchMode from './enums/ContactsSearchMode';
-
-export { contactChatMessagesHistory, contacts, ContactsSearchMode };
+export * from './contactChatMessagesHistory';
+export * from './contacts';
+export * from './enums/ContactsSearchMode';

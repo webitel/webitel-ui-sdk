@@ -5,7 +5,7 @@ import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
 import vueDocgenPlugin from 'vite-plugin-vue-docgen';
 import { defineConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
-import { nav, sidebar } from './routes.js';
+import { nav, sidebar } from './routes/routes.ts';
 import { Window } from 'happy-dom';
 
 global.localStorage = new Window().localStorage; // coz vitepress ssr doesn't have localStorage
@@ -27,9 +27,10 @@ export default defineConfig({
   lastUpdated: true,
   vite: {
     resolve: {
-      alias: [
-        { find: '__lib__', replacement: path.resolve(__dirname, '../../src') },
-      ],
+      alias: {
+        '__lib__': path.resolve(__dirname, '../../src'),
+        '@aliasedDeps/api-services/axios': path.resolve(__dirname, './aliases/axios'),
+      },
     },
     ssr: {
       noExternal: ['@vuelidate/core', 'vue-multiselect', 'webitel-sdk'],

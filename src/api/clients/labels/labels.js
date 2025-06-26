@@ -1,3 +1,5 @@
+import { LabelsApiFactory } from 'webitel-sdk';
+
 import {
   getDefaultGetParams,
   getDefaultInstance, getDefaultOpenAPIConfig,
@@ -10,7 +12,6 @@ import applyTransform, {
   snakeToCamel,
   starToSearch,
 } from '../../transformers/index';
-import { LabelsApiFactory } from 'webitel-sdk';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
