@@ -1,30 +1,31 @@
 <template>
-  <wt-loader-sm
-    v-if="size === 'sm'"
+  <wt-brand-loader
+    v-if="size === 'md'"
     :color="color"
     class="wt-loader"
   />
-  <wt-loader-md
-    v-else-if="size === 'md'"
+  <wt-spinner-loader
+    v-else
     class="wt-loader"
+    :size="size"
   />
 </template>
 
 <script>
-import WtLoaderMd from './_internals/wt-loader--md.vue';
-import WtLoaderSm from './_internals/wt-loader--sm.vue';
+import WtBrandLoader from './_internals/wt-brand-loader.vue';
+import WtSpinnerLoader from './_internals/wt-spinner-loader.vue';
 
 export default {
   name: 'WtLoader',
   components: {
-    WtLoaderSm,
-    WtLoaderMd,
+    WtBrandLoader,
+    WtSpinnerLoader,
   },
   props: {
     size: {
       type: String,
       default: 'md',
-      description: '["sm", "md"]',
+      description: '["xs", "sm", "md"]',
     },
     color: {
       type: String,
