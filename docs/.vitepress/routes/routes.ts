@@ -1,18 +1,22 @@
 import isObject from 'lodash/isObject';
-import { apiServicesRoutes, apiServicesIndexRoute, } from "./packages/api-services.docs.routes";
-import {knowledgeBaseRoutes, knowledgeBaseIndexRoute } from "./knowledge-base/knowledge-base.docs.routes";
-import { uiSdkRoutes, uiSdkIndexRoute } from "./packages/ui-sdk.docs.routes";
+
+import {knowledgeBaseIndexRoute,knowledgeBaseRoutes } from "./knowledge-base/knowledge-base.docs.routes";
+import { apiServicesIndexRoute,apiServicesRoutes,  } from "./packages/api-services.docs.routes";
+import { uiDatalistIndexRoute, uiDatalistRoutes } from './packages/ui-datalist.docs.routes';
+import { uiSdkIndexRoute,uiSdkRoutes } from "./packages/ui-sdk.docs.routes";
 
 const navbarNav = [
   { text: 'Home', link: '/' },
   { text: 'Knowledge Base', link: knowledgeBaseIndexRoute.link },
   { text: '@webitel/api-services', link: apiServicesIndexRoute.link },
+  { text: '@webitel/ui-datalist', link: uiDatalistIndexRoute.link },
   { text: '@webitel/ui-sdk', link: uiSdkIndexRoute.link },
 ];
 
 const sidebarNav = [
   ...knowledgeBaseRoutes,
   ...apiServicesRoutes,
+  ...uiDatalistRoutes,
   ...uiSdkRoutes,
 ];
 
