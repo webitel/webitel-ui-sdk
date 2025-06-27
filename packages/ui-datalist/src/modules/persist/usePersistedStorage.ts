@@ -5,9 +5,9 @@ import {
   PersistedPropertyConfig,
   PersistedStorageController,
   PersistedStorageType,
-} from './PersistedStorage.types.ts';
-import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage.ts';
-import { useRoutePersistedStorage } from './useRoutePersistedStorage.ts';
+} from './PersistedStorage.types';
+import { useLocalStoragePersistedStorage } from './useLocalStoragePersistedStorage';
+import { useRoutePersistedStorage } from './useRoutePersistedStorage';
 
 export const usePersistedStorage = ({
   name,

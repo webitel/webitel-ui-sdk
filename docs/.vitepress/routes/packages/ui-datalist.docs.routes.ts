@@ -16,5 +16,41 @@ export const uiDatalistRoutes = [{
       text: 'Package Contents',
       link: resolveLink('contents/index.md'),
     },
+    {
+      text: 'Shared Modules',
+      collapsed: true,
+      items: [
+        {
+          text: 'index',
+          link: resolveLink('shared/index.md'),
+        },
+        {
+          text: 'Stores persistence',
+          link: resolveLink('shared/persist/index.md'),
+        },
+        {
+          text: 'Store types',
+          link: resolveLink('shared/store-types/index.md'),
+        },
+      ],
+    },
+    {
+      text: 'Table Tools',
+      collapsed: true,
+      items: [
+        {
+          text: 'index',
+          link: resolveLink('table-tools/index.md'),
+        },
+        {
+          text: 'Table Module',
+          link: resolveLink('table-tools/table/index.md'),
+        },
+        {
+          text: 'Page, Headers, Filters',
+          link: resolveLink('table-tools/table-deps/index.md'),
+        },
+      ],
+    },
   ],
 }];
