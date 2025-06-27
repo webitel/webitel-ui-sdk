@@ -22,3 +22,22 @@
   Наприклад, `hotfix/hotfix-name`.
 - `refactor/` - гілки для рефакторингів, наприклад, `refactor/refactor-name`.
 - `test/` - гілки для тестів, наприклад, `test/test-name`.
+
+## `/WTEL/` префікси для бренчів
+
+Для зручності відстеження задач у Jira,
+до назви гілки додається ідентифікатор задачі у форматі WTEL-XXXX після префіксу типу (feat/, fix/ тощо).
+Це дозволяє легко ідентифікувати звʼязок між гілкою та відповідною задачею.
+
+> Приклади: 
+
+- `feat/`     - feat/WTEL-7623/add-new-table-section
+
+- `fix/`      - fix/WTEL-7610/fix-overlapping-modal
+
+- `hotfix/`   - hotfix/WTEL-7655/fix-crash-on-save
+
+- `refactor/` - refactor/WTEL-7630/optimize-table-component
+
+- `test/`     - test/WTEL-7641/add-integration-tests
+
