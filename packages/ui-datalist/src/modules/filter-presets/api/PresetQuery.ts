@@ -46,16 +46,14 @@ const getPresetList = async (params, config: GetPresetListRequestConfig) => {
       sort || '-created_at',
       fields || ['id', 'name', 'preset', 'description'],
       id,
+      [presetNamespace],
     );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
     ]);
     return {
-      items: applyTransform(items, [
-        (items) =>
-          items.filter(({ preset }) => preset.namespace === presetNamespace),
-      ]),
+      items,
       next,
     };
   } catch (err) {
