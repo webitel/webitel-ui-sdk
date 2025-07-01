@@ -8,7 +8,7 @@ import {
 	notify,
 	sanitize,
 	snakeToCamel,
-  starToSearch,
+	starToSearch,
 } from '../../transformers';
 
 const fieldsToSend = ['name', 'queues', 'article', 'teams', 'text'];
@@ -20,7 +20,7 @@ const getQuickRepliesList = async (params) => {
 		merge(getDefaultGetParams()),
 		(params) => ({ ...params, q: params.search }),
 		sanitize(fieldsToSend),
-    starToSearch('q'),
+		starToSearch('q'),
 		camelToSnake(),
 	]);
 

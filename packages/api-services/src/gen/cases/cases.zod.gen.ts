@@ -12,7 +12,7 @@ import { z as zod } from 'zod/v4';
 export const searchCasesQueryParams = zod.object({
 	page: zod.number().optional().describe('Page number for pagination.'),
 	size: zod.number().optional().describe('Number of results per page.'),
-	q: zod.string().optional().describe('Query string for searching cases.'),
+	q: zod.string().optional().describe('General query string.'),
 	ids: zod
 		.array(zod.string())
 		.optional()
@@ -30,6 +30,23 @@ export const searchCasesQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('Contact ID for filtering cases.'),
+	queryTargetFull: zod
+		.boolean()
+		.optional()
+		.describe('Search everywhere (no restrictions)'),
+	queryTargetSubject: zod
+		.boolean()
+		.optional()
+		.describe('Search in case subject.'),
+	queryTargetName: zod
+		.boolean()
+		.optional()
+		.describe('Search in case name or number.'),
+	queryTargetContactInfo: zod
+		.boolean()
+		.optional()
+		.describe("Search in contact's email, phone, etc."),
+	queryTargetId: zod.boolean().optional().describe('Search in case id'),
 });
 
 export const searchCasesResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -3288,7 +3305,7 @@ export const searchCases2Params = zod.object({
 export const searchCases2QueryParams = zod.object({
 	page: zod.number().optional().describe('Page number for pagination.'),
 	size: zod.number().optional().describe('Number of results per page.'),
-	q: zod.string().optional().describe('Query string for searching cases.'),
+	q: zod.string().optional().describe('General query string.'),
 	ids: zod
 		.array(zod.string())
 		.optional()
@@ -3302,6 +3319,23 @@ export const searchCases2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Key-value pairs for additional filtering.'),
+	queryTargetFull: zod
+		.boolean()
+		.optional()
+		.describe('Search everywhere (no restrictions)'),
+	queryTargetSubject: zod
+		.boolean()
+		.optional()
+		.describe('Search in case subject.'),
+	queryTargetName: zod
+		.boolean()
+		.optional()
+		.describe('Search in case name or number.'),
+	queryTargetContactInfo: zod
+		.boolean()
+		.optional()
+		.describe("Search in contact's email, phone, etc."),
+	queryTargetId: zod.boolean().optional().describe('Search in case id'),
 });
 
 export const searchCases2ResponseItemsItemRelatedDataItemRelationTypeDefault =

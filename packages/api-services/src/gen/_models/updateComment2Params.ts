@@ -10,4 +10,8 @@ export type UpdateComment2Params = {
 	 * Fields to include in the response.
 	 */
 	fields?: string[];
+	/**
+	 * Optional updating timestamp. If not set, will be set default(current) time.
+	 */
+	updatedAt?: string;
 };

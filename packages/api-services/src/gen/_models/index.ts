@@ -1115,6 +1115,7 @@ export * from './webitelCasesCaseFileList';
 export * from './webitelCasesCaseLink';
 export * from './webitelCasesCaseLinkList';
 export * from './webitelCasesCaseList';
+export * from './webitelCasesCaseQueryTarget';
 export * from './webitelCasesCaseTimelineEventType';
 export * from './webitelCasesCatalog';
 export * from './webitelCasesCatalogList';
