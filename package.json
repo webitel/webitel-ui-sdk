@@ -55,7 +55,7 @@
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^13.0.0",
     "@webitel/api-services": "^0.0.30",
-    "@webitel/styleguide": "^24.12.40",
+    "@webitel/styleguide": "^24.12.41",
     "autosize": "^6.0.1",
     "axios": "^1.8.3",
     "clipboard-copy": "^4.0.1",
