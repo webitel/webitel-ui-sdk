@@ -56,30 +56,19 @@ const props = defineProps({
 }
 
 // slide-up
-.wt-transition--fast .fade-slide-up-enter-active,
-.wt-transition--fast .fade-slide-up-leave-active {
-  transition: transform var(--transition-fast) ease, opacity var(--transition-fast) ease;
-}
-
-.wt-transition--normal .fade-slide-up-enter-active,
-.wt-transition--normal .fade-slide-up-leave-active {
-  transition: transform var(--transition-normal) ease, opacity var(--transition-normal) ease;
-}
-
-.wt-transition--slow .fade-slide-up-enter-active,
-.wt-transition--slow .fade-slide-up-leave-active {
-  transition: transform var(--transition-slow) ease, opacity var(--transition-slow) ease;
+.fade-slide-up-enter-active,
+.fade-slide-up-leave-active {
+  transition-timing-function: ease;
+  transition-property: transform;
 }
 
 .fade-slide-up-enter-from,
 .fade-slide-up-leave-to {
   transform: translateY(100%);
-  opacity: 0;
 }
 
 .fade-slide-up-enter-to,
 .fade-slide-up-leave-from {
   transform: translateY(0);
-  opacity: 1;
 }
 </style>
