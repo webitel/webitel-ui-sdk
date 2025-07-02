@@ -158,6 +158,12 @@ export const updateComment2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Fields to include in the response.'),
+	updatedAt: zod
+		.string()
+		.optional()
+		.describe(
+			'Optional updating timestamp. If not set, will be set default(current) time.',
+		),
 });
 
 export const updateComment2Body = zod.object({
@@ -238,6 +244,12 @@ export const updateCommentQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Fields to include in the response.'),
+	updatedAt: zod
+		.string()
+		.optional()
+		.describe(
+			'Optional updating timestamp. If not set, will be set default(current) time.',
+		),
 });
 
 export const updateCommentBody = zod.object({
@@ -422,6 +434,12 @@ export const publishCommentQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Result fields to include in the response.'),
+	createdAt: zod
+		.string()
+		.optional()
+		.describe(
+			'Optional creation timestamp. If not set, will be set default(current) time.',
+		),
 });
 
 export const publishCommentBody = zod

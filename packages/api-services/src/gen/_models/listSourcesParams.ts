@@ -8,20 +8,24 @@ import type { ListSourcesTypeItem } from './listSourcesTypeItem';
 
 export type ListSourcesParams = {
 	/**
-	 * Page number of result dataset records. offset = (page*size)
-	 */
+ * Page number of result dataset records. offset = (page * size)
+Default: 0
+ */
 	page?: number;
 	/**
-	 * Size count of records on result page. limit = (size++)
-	 */
+ * Size count of records on result page. limit = (size++)
+Default: 25
+ */
 	size?: number;
 	/**
-	 * Fields to be retrieved as a result.
-	 */
+ * Fields to be retrieved as a result.
+Default: [] (all fields)
+ */
 	fields?: string[];
 	/**
-	 * Sort the result according to fields.
-	 */
+ * Sort the result according to fields.
+Default: "id:desc"
+ */
 	sort?: string;
 	/**
 	 * Filter by unique IDs.
@@ -29,9 +33,9 @@ export type ListSourcesParams = {
 	id?: string[];
 	/**
  * Search query string for filtering by name. Supports:
-- Wildcards (*) for substring matching
-- Placeholder (?) for single character substitution
-- Exact match for full names
+- Wildcards (*)
+- Placeholder (?)
+- Exact match
  */
 	q?: string;
 	/**

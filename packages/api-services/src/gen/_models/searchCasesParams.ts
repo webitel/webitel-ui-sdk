@@ -15,7 +15,7 @@ export type SearchCasesParams = {
 	 */
 	size?: number;
 	/**
-	 * Query string for searching cases.
+	 * General query string.
 	 */
 	q?: string;
 	/**
@@ -38,4 +38,24 @@ export type SearchCasesParams = {
 	 * Contact ID for filtering cases.
 	 */
 	contactId?: string;
+	/**
+	 * Search everywhere (no restrictions)
+	 */
+	queryTargetFull?: boolean;
+	/**
+	 * Search in case subject.
+	 */
+	queryTargetSubject?: boolean;
+	/**
+	 * Search in case name or number.
+	 */
+	queryTargetName?: boolean;
+	/**
+	 * Search in contact's email, phone, etc.
+	 */
+	queryTargetContactInfo?: boolean;
+	/**
+	 * Search in case id
+	 */
+	queryTargetId?: boolean;
 };

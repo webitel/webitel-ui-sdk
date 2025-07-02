@@ -9,29 +9,37 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Retrieve a list of sources or search sources
  */
+export const listSourcesQueryPageDefault = '1';
+export const listSourcesQuerySizeDefault = '20';
+export const listSourcesQuerySortDefault = 'name:desc';
+
 export const listSourcesQueryParams = zod.object({
 	page: zod
 		.number()
-		.optional()
-		.describe('Page number of result dataset records. offset = (page*size)'),
+		.default(listSourcesQueryPageDefault)
+		.describe(
+			'Page number of result dataset records. offset = (page * size)\nDefault: 0',
+		),
 	size: zod
 		.number()
-		.optional()
-		.describe('Size count of records on result page. limit = (size++)'),
+		.default(listSourcesQuerySizeDefault)
+		.describe(
+			'Size count of records on result page. limit = (size++)\nDefault: 25',
+		),
 	fields: zod
 		.array(zod.string())
 		.optional()
-		.describe('Fields to be retrieved as a result.'),
+		.describe('Fields to be retrieved as a result.\nDefault: [] (all fields)'),
 	sort: zod
 		.string()
-		.optional()
-		.describe('Sort the result according to fields.'),
+		.default(listSourcesQuerySortDefault)
+		.describe('Sort the result according to fields.\nDefault: \"id:desc\"'),
 	id: zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
 	q: zod
 		.string()
 		.optional()
 		.describe(
-			'Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names',
+			'Search query string for filtering by name. Supports:\n- Wildcards (*)\n- Placeholder (?)\n- Exact match',
 		),
 	type: zod
 		.array(
@@ -137,7 +145,6 @@ export const createSourceQueryParams = zod.object({
 });
 
 export const createSourceBodyDefault = { name: 'Default Source', type: 'CALL' };
-export const createSourceBodyDescriptionDefault = 'No description provided';
 export const createSourceBodyDescriptionMax = 500;
 export const createSourceBodyNameDefault = 'New Source';
 export const createSourceBodyNameMin = 2;
@@ -150,7 +157,7 @@ export const createSourceBody = zod
 		description: zod
 			.string()
 			.max(createSourceBodyDescriptionMax)
-			.default(createSourceBodyDescriptionDefault)
+			.optional()
 			.describe('A short description of the source'),
 		name: zod
 			.string()
@@ -369,7 +376,6 @@ export const updateSource2BodyDefault = {
 	name: 'Default Source',
 	type: 'CALL',
 };
-export const updateSource2BodyDescriptionDefault = 'No description provided';
 export const updateSource2BodyDescriptionMax = 500;
 export const updateSource2BodyNameDefault = 'New Source';
 export const updateSource2BodyNameMin = 2;
@@ -382,7 +388,7 @@ export const updateSource2Body = zod
 		description: zod
 			.string()
 			.max(updateSource2BodyDescriptionMax)
-			.default(updateSource2BodyDescriptionDefault)
+			.optional()
 			.describe('A short description of the source'),
 		name: zod
 			.string()
@@ -468,7 +474,6 @@ export const updateSourceQueryParams = zod.object({
 });
 
 export const updateSourceBodyDefault = { name: 'Default Source', type: 'CALL' };
-export const updateSourceBodyDescriptionDefault = 'No description provided';
 export const updateSourceBodyDescriptionMax = 500;
 export const updateSourceBodyNameDefault = 'New Source';
 export const updateSourceBodyNameMin = 2;
@@ -481,7 +486,7 @@ export const updateSourceBody = zod
 		description: zod
 			.string()
 			.max(updateSourceBodyDescriptionMax)
-			.default(updateSourceBodyDescriptionDefault)
+			.optional()
 			.describe('A short description of the source'),
 		name: zod
 			.string()

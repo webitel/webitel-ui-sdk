@@ -10,4 +10,8 @@ export type PublishCommentParams = {
 	 * Result fields to include in the response.
 	 */
 	fields?: string[];
+	/**
+	 * Optional creation timestamp. If not set, will be set default(current) time.
+	 */
+	createdAt?: string;
 };
