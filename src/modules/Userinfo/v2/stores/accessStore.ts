@@ -26,15 +26,12 @@ import type {
 } from '../types/UserAccess.d.ts';
 
 export const createUserAccessStore = ({
-  namespace = 'userinfo',
-}: CreateUserAccessStoreConfig = {}) => {
+                                        namespace = 'userinfo',
+                                      }: CreateUserAccessStoreConfig = {}) => {
   return defineStore(`${namespace}/access`, (): UserAccessStore => {
     let globalAccess: GlobalActionAccessMap = new Map();
-
     let scopeAccess: ScopeAccessMap = new Map();
-
     let appVisibilityAccess: AppVisibilityMap = new Map();
-
     let sectionVisibilityAccess: SectionVisibilityMap = new Map();
 
     const hasAccess = (
@@ -78,8 +75,8 @@ export const createUserAccessStore = ({
         return sectionVisibilityAccess.get(section);
       };
 
-      const allowGlobalAccess = hasReadAccess();
-      if (allowGlobalAccess) return true;
+      // const allowGlobalAccess = hasReadAccess();
+      // if (allowGlobalAccess) return true;
 
       const allowAppVisibility = hasApplicationVisibility(appOfSection);
       const allowObjectAccess = hasReadAccess(objectOfSection);
@@ -89,17 +86,25 @@ export const createUserAccessStore = ({
     };
 
     const routeAccessGuard: NavigationGuard = (to) => {
-      /* find last because "matched" has top=>bottom routes order */
-      const uiSection = to.matched
+      const matchedRoute = to.matched
         .toReversed()
-        .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection;
-      /* find last because "matched" has top=>bottom routes order */
+        .find(({ meta }) => meta.UiSection || meta.paramForSectionName);
+
       const wtObject = to.matched
         .toReversed()
         .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject;
+      if (!matchedRoute) {
+        return true;
+      }
 
-      if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
-        // return false;
+      const { meta } = matchedRoute;
+
+      const sectionParamName = meta.paramForSectionName as string | undefined;
+      const uiSection = sectionParamName
+        ? (to.params[sectionParamName] as UiSection)
+        : (meta.UiSection as UiSection);
+
+      if (!hasSectionVisibility(uiSection, wtObject) || !uiSection) {
         return { path: '/access-denied' };
       }
 

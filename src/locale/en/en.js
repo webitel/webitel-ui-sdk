@@ -277,6 +277,7 @@ export default {
       sections: {
         [CrmSections.Contacts]: 'Contacts',
         [CrmSections.Cases]: 'Cases',
+        [CrmSections.CrmConfiguration]: 'Configuration',
         [CrmSections.Priorities]: 'Priorities',
         [CrmSections.CloseReasonGroups]: 'Closure reasons',
         [CrmSections.Statuses]: 'Statuses',
@@ -284,6 +285,8 @@ export default {
         [CrmSections.ServiceCatalogs]: 'Service catalogs',
         [CrmSections.Sources]: 'Case sources',
         [CrmSections.ContactGroups]: 'Contact groups',
+        [CrmSections.SectionCustomization]: 'Section customization',
+        [CrmSections.CustomLookups]: 'Custom lookups',
       },
     },
     [WebitelApplications.HISTORY]: { name: 'Call History' },

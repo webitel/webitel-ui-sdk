@@ -143,6 +143,7 @@ export const mapWtObjectToUiSection: Record<
   [WtApplication.Crm]: {
     [WtObject.Contact]: CrmSections.Contacts,
     [WtObject.Case]: CrmSections.Cases,
+    [WtObject.CrmConfiguration]: CrmSections.CrmConfiguration,
     [WtObject.Slas]: CrmSections.Slas,
     [WtObject.ServiceCatalog]: CrmSections.ServiceCatalogs,
     [WtObject.CaseSource]: CrmSections.CaseSources,
@@ -151,7 +152,8 @@ export const mapWtObjectToUiSection: Record<
     [WtObject.Status]: CrmSections.Statuses,
     [WtObject.Source]: CrmSections.Sources,
     [WtObject.ContactGroup]: CrmSections.ContactGroups,
-    [WtObject.CustomLookup]: CrmSections.CustomLookups,
+    [WtObject.SectionCustomization]: CrmSections.SectionCustomization,
+    [WtObject.CustomLookups]: CrmSections.CustomLookups,
   },
 
   // Supervisor sections

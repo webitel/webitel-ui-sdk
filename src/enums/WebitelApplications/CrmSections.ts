@@ -1,6 +1,7 @@
 export const CrmSections = {
   Contacts: 'contacts',
   Cases: 'cases',
+  CrmConfiguration: 'crm-configuration',
 
   // CONFIGURATION - LOOKUPS
   Slas: 'slas',
@@ -11,6 +12,9 @@ export const CrmSections = {
   CloseReasonGroups: 'close-reason-groups',
   ContactGroups: 'contact-groups',
   CaseSources: 'case-sources',
+
+  // CUSTOMIZATION
+  SectionCustomization: 'section-customization',
   CustomLookups: 'custom-lookups',
 } as const;
 
