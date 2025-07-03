@@ -6,10 +6,13 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
+import { delay, HttpResponse, http } from 'msw';
+import type {
+	StorageDeleteFilesResponse,
+	StorageListFile,
+	StorageUploadP2PVideoResponse,
+} from '.././_models';
 import { StorageUploadFileChannel } from '.././_models';
-import type { StorageDeleteFilesResponse, StorageListFile } from '.././_models';
 
 export const getFileServiceDeleteFilesResponseMock =
 	(): StorageDeleteFilesResponse => ({});
@@ -103,6 +106,16 @@ export const getFileServiceSearchFilesResponseMock = (
 	...overrideResponse,
 });
 
+export const getFileServiceUploadP2PVideoResponseMock = (
+	overrideResponse: Partial<StorageUploadP2PVideoResponse> = {},
+): StorageUploadP2PVideoResponse => ({
+	sdpAnswer: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getFileServiceDeleteFilesMockHandler = (
 	overrideResponse?:
 		| StorageDeleteFilesResponse
@@ -148,7 +161,33 @@ export const getFileServiceSearchFilesMockHandler = (
 		);
 	});
 };
+
+export const getFileServiceUploadP2PVideoMockHandler = (
+	overrideResponse?:
+		| StorageUploadP2PVideoResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<StorageUploadP2PVideoResponse>
+				| StorageUploadP2PVideoResponse),
+) => {
+	return http.post('*/storage/p2p/upload/video', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getFileServiceUploadP2PVideoResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
 export const getFileServiceMock = () => [
 	getFileServiceDeleteFilesMockHandler(),
 	getFileServiceSearchFilesMockHandler(),
+	getFileServiceUploadP2PVideoMockHandler(),
 ];

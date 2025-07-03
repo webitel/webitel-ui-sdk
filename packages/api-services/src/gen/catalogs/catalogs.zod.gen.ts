@@ -16,7 +16,7 @@ export const listCatalogsQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields to be retrieved as a result.\nIf the user passes "-" as the value for fields,\nit will retrieve all available fields for each catalog.',
+			'Fields to be retrieved as a result.\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog.',
 		),
 	sort: zod.string().optional().describe('Sorting options by fields'),
 	id: zod
@@ -43,7 +43,7 @@ export const listCatalogsQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields to be retrieved as a result for [SUBSERVICES].\nIf the user passes "-" as the value for fields,\nit will retrieve all available fields for each catalog subservices.',
+			'Fields to be retrieved as a result for [SUBSERVICES].\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog subservices.',
 		),
 	hasSubservices: zod
 		.boolean()
@@ -456,13 +456,13 @@ export const locateCatalogQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields to be retrieved as a result.\nIf the user passes "-" as the value for fields,\nit will retrieve all available fields for each catalog.',
+			'Fields to be retrieved as a result.\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog.',
 		),
 	subFields: zod
 		.array(zod.string())
 		.optional()
 		.describe(
-			'Fields to be retrieved as a result for [SUBSERVICES].\nIf the user passes "-" as the value for fields,\nit will retrieve all available fields for each catalog subservices.',
+			'Fields to be retrieved as a result for [SUBSERVICES].\nIf the user passes \"-\" as the value for fields,\nit will retrieve all available fields for each catalog subservices.',
 		),
 });
 

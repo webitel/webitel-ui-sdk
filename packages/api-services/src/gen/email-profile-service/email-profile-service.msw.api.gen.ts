@@ -6,9 +6,7 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { EngineEmailAuthType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	EngineEmailProfile,
 	EngineListEmailProfile,
@@ -16,6 +14,7 @@ import type {
 	EngineLogoutEmailProfileResponse,
 	EngineTestEmailProfileResponse,
 } from '.././_models';
+import { EngineEmailAuthType } from '.././_models';
 
 export const getSearchEmailProfileResponseMock = (
 	overrideResponse: Partial<EngineListEmailProfile> = {},

@@ -1,18 +1,20 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.8.3",
+  "version": "25.8.23",
   "private": false,
   "scripts": {
+    "make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",
     "dev": "npm run docs:dev",
     "build": "vite build",
     "test:unit": "vitest",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
-    "publish-lib": "npm run build && (npm run build:types || true) && npm publish --access public",
+    "publish-lib": " npm publish --access public",
     "docs:dev": "vitepress dev docs --port 8080",
     "docs:build": "vitepress build docs",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
+    "lint:types": "npx --yes @arethetypeswrong/cli --pack . --ignore-rules false-cjs cjs-resolves-to-esm",
     "utils:link": "npm link",
     "utils:update-node": "nvm install --lts && nvm alias default node",
     "utils:i": "npm install"
@@ -22,45 +24,9 @@
   ],
   "main": "./dist/ui-sdk.js",
   "type": "module",
-  "types": "./dist/types",
-  "exports": {
-    ".": "./dist/ui-sdk.js",
-    "./store": "./src/store/new/index",
-    "./store*": "./src/store*",
-    "./src/store*": "./src/store*",
-    "./enums": "./src/enums/index",
-    "./enums*": "./src/enums*",
-    "./src/enums*": "./src/enums*",
-    "./components": "./src/components/index",
-    "./components*": "./src/components*",
-    "./src/components*": "./src/components*",
-    "./scripts": "./src/scripts/index",
-    "./scripts*": "./src/scripts*",
-    "./src/scripts*": "./src/scripts*",
-    "./api*": "./src/api*",
-    "./src/api*": "./src/api*",
-    "./locale*": "./src/locale*",
-    "./src/locale*": "./src/locale*",
-    "./composables*": "./src/composables*",
-    "./src/composables*": "./src/composables*",
-    "./css*": "./src/css*",
-    "./src/css*": "./src/css*",
-    "./directives*": "./src/directives*",
-    "./src/directives*": "./src/directives*",
-    "./mixins*": "./src/mixins*",
-    "./src/mixins*": "./src/mixins*",
-    "./validators*": "./src/validators*",
-    "./src/validators*": "./src/validators*",
-    "./modules*": "./src/modules*",
-    "./src/modules*": "./src/modules*",
-    "./plugins*": "./src/plugins*",
-    "./src/plugins*": "./src/plugins*",
-    "./tests*": "./src/tests*",
-    "./src/tests*": "./src/tests*",
-    "./dist*": "./dist*"
-  },
   "files": [
     "dist/*",
+    "types/*",
     "src/api/*",
     "src/assets/*",
     "src/locale/*",
@@ -71,7 +37,7 @@
     "src/enums/*",
     "src/mixins/*",
     "src/scripts/*",
-    "src/validators/*",
+    "src/validations/*",
     "src/modules/*",
     "src/plugins/*",
     "src/store/*",
@@ -88,8 +54,8 @@
     "@vuelidate/validators": "^2.0.4",
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^13.0.0",
-    "@webitel/api-services": "^0.0.19",
-    "@webitel/styleguide": "^24.12.26",
+    "@webitel/api-services": "^0.0.30",
+    "@webitel/styleguide": "^24.12.40",
     "autosize": "^6.0.1",
     "axios": "^1.8.3",
     "clipboard-copy": "^4.0.1",
@@ -121,6 +87,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@regle/core": "^1.3.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.10",
     "@vitejs/plugin-vue": "^5.2.3",
@@ -129,7 +96,6 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.22.0",
-    "@regle/core": "^1.3.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vue": "^10.0.0",
@@ -176,5 +142,148 @@
   "engines": {
     "npm": "10",
     "node": "v22"
+  },
+  "exports": {
+    ".": {
+      "types": "./types/install.d.ts",
+      "import": "./dist/ui-sdk.js"
+    },
+    "./store": {
+      "types": "./types/store/new/index.d.ts",
+      "import": "./src/store/new/index.js"
+    },
+    "./store*": {
+      "types": "./types/store*",
+      "import": "./src/store*"
+    },
+    "./src/store*": {
+      "types": "./types/store*",
+      "import": "./src/store*"
+    },
+    "./enums": {
+      "types": "./types/enums/index.d.ts",
+      "import": "./src/enums/index.ts"
+    },
+    "./enums*": {
+      "types": "./types/enums*",
+      "import": "./src/enums*"
+    },
+    "./src/enums*": {
+      "types": "./types/enums*",
+      "import": "./src/enums*"
+    },
+    "./components": {
+      "types": "./types/components/index.d.ts",
+      "import": "./src/components/index.js"
+    },
+    "./components*": {
+      "types": "./types/components*",
+      "import": "./src/components*"
+    },
+    "./src/components*": {
+      "types": "./types/components*",
+      "import": "./src/components*"
+    },
+    "./scripts": {
+      "types": "./types/scripts/index.d.ts",
+      "import": "./src/scripts/index.js"
+    },
+    "./scripts*": {
+      "types": "./types/scripts*",
+      "import": "./src/scripts*"
+    },
+    "./src/scripts*": {
+      "types": "./types/scripts*",
+      "import": "./src/scripts*"
+    },
+    "./api*": {
+      "types": "./types/api*",
+      "import": "./src/api*"
+    },
+    "./src/api*": {
+      "types": "./types/api*",
+      "import": "./src/api*"
+    },
+    "./locale*": {
+      "types": "./types/locale*",
+      "import": "./src/locale*"
+    },
+    "./src/locale*": {
+      "types": "./types/locale*",
+      "import": "./src/locale*"
+    },
+    "./composables": {
+      "types": "./types/composables/index.d.ts",
+      "import": "./src/composables/index.ts"
+    },
+    "./composables*": {
+      "types": "./types/composables*",
+      "import": "./src/composables*"
+    },
+    "./src/composables*": {
+      "types": "./types/composables*",
+      "import": "./src/composables*"
+    },
+    "./css*": {
+      "import": "./src/css*"
+    },
+    "./src/css*": {
+      "import": "./src/css*"
+    },
+    "./directives*": {
+      "types": "./types/directives*",
+      "import": "./src/directives*"
+    },
+    "./src/directives*": {
+      "types": "./types/directives*",
+      "import": "./src/directives*"
+    },
+    "./mixins*": {
+      "types": "./types/mixins*",
+      "import": "./src/mixins*"
+    },
+    "./src/mixins*": {
+      "types": "./types/mixins*",
+      "import": "./src/mixins*"
+    },
+    "./validations": {
+      "types": "./types/validations/index.d.ts",
+      "import": "./src/validations/index.ts"
+    },
+    "./validators*": {
+      "types": "./types/validations/vuelidate/validators*",
+      "import": "./src/validations/vuelidate/validators*"
+    },
+    "./src/validators*": {
+      "types": "./types/validations/vuelidate/validators*",
+      "import": "./src/validations/vuelidate/validators*"
+    },
+    "./modules*": {
+      "types": "./types/modules*",
+      "import": "./src/modules*"
+    },
+    "./src/modules*": {
+      "types": "./types/modules*",
+      "import": "./src/modules*"
+    },
+    "./plugins*": {
+      "types": "./types/plugins*",
+      "import": "./src/plugins*"
+    },
+    "./src/plugins*": {
+      "types": "./types/plugins*",
+      "import": "./src/plugins*"
+    },
+    "./tests*": {
+      "types": "./types/tests*",
+      "import": "./src/tests*"
+    },
+    "./src/tests*": {
+      "types": "./types/tests*",
+      "import": "./src/tests*"
+    },
+    "./dist*": {
+      "import": "./dist*"
+    }
   }
 }

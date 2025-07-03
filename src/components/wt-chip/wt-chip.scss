@@ -8,6 +8,7 @@
   background: var(--wt-chip-main-background-color);
   padding: var(--chip-padding);
   color: var(--wt-chip-main-text-color);
+  white-space: nowrap;
 
   &--main-color {
     background: var(--wt-chip-main-background-color);

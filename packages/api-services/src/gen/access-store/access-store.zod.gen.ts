@@ -42,7 +42,7 @@ export const accessStoreListDefaultAccessQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	size: zod.number().optional().describe('pagedResultsControl\n\ndefault: 16'),
 	page: zod.number().optional().describe('default: 1'),
 });
@@ -185,7 +185,7 @@ export const accessStoreListObjectAccessQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	size: zod.number().optional().describe('pagedResultsControl\n\ndefault: 16'),
 	page: zod.number().optional().describe('default: 1'),
 });

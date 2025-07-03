@@ -72,10 +72,10 @@ import {
 import { computed, ref, watch } from 'vue';
 
 import { IFilter } from '../../classes/Filter';
-import { DynamicFilterProps, DynamicFilterEmits } from '../types/Filter.types';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
 import DynamicFilterConfigForm from '../config/dynamic-view/dynamic-filter-config-form.vue';
 import DynamicFilterConfigView from '../config/dynamic-view/dynamic-filter-config-view.vue';
+import { DynamicFilterEmits,DynamicFilterProps } from '../types/Filter.types';
 import DynamicFilterPreviewInfo from './dynamic-filter-preview-info.vue';
 
 const props = defineProps<DynamicFilterProps>();

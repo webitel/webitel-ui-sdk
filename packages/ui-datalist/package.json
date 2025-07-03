@@ -1,40 +1,24 @@
 {
   "name": "@webitel/ui-datalist",
-  "version": "1.0.47",
+  "version": "1.0.52",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
+    "make-all": "npm version patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
     "lint:fix": "eslint --fix ./src && prettier --write --check ./src",
     "lint:fix-staged": "npx lint-staged",
     "lint:package": "publint",
     "utils:i": "npm i",
     "utils:link": "npm link",
-    "utils:publish": "(npm run build:types || true) && npm publish --access public"
+    "utils:publish": "npm publish --access public"
   },
   "type": "module",
   "main": "./src/index.ts",
   "types": "./types/index.d.ts",
   "workspaces": [
-    "../../"
+    "../../",
+    "../api-services"
   ],
-  "exports": {
-    ".": {
-      "import": "./src/index.ts",
-      "types": "./types/index.d.ts"
-    },
-    "./filters": {
-      "import": "./src/modules/filters/index.ts",
-      "types": "./types/filters/index.d.ts"
-    },
-    "./presets": {
-      "import": "./src/modules/filter-presets/index.ts",
-      "types": "./types/filter-presets/index.d.ts"
-    },
-    "./card": {
-      "import": "./src/modules/card/index.ts",
-      "types": "./types/card/index.d.ts"
-    }
-  },
   "files": [
     "src/*",
     "types/",
@@ -52,7 +36,8 @@
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "@webitel/styleguide": "^24.12.26",
-    "@webitel/ui-sdk": "^25.6.37",
+    "@webitel/ui-sdk": "^25.8.7",
+    "@webitel/api-services": "^0.0.24",
     "zod": "^3.25.55",
     "@vueuse/core": "^13.3.0"
   },
@@ -95,5 +80,23 @@
     "webitel-ui"
   ],
   "author": "webitel",
-  "license": "ISC"
+  "license": "ISC",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/index.ts"
+    },
+    "./filters": {
+      "types": "./types/modules/filters/index.d.ts",
+      "import": "./src/modules/filters/index.ts"
+    },
+    "./presets": {
+      "types": "./types/modules/filter-presets/index.d.ts",
+      "import": "./src/modules/filter-presets/index.ts"
+    },
+    "./card": {
+      "types": "./types/modules/card/index.d.ts",
+      "import": "./src/modules/card/index.ts"
+    }
+  }
 }

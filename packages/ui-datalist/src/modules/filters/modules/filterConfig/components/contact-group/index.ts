@@ -1,6 +1,6 @@
 import { contactGroups } from '@webitel/ui-sdk/api/clients/index';
 
-import { WtSysTypeFilterConfig, IWtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { IWtSysTypeFilterConfig,WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
 import ContactGroupFilterValueField from './contact-group-filter-value-field.vue';
 import ContactGroupFilterValuePreview from './contact-group-filter-value-preview.vue';

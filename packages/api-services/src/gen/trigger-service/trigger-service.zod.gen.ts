@@ -49,6 +49,7 @@ export const searchTriggerResponse = zod.object({
 						'case_files',
 						'case_comments',
 						'case_links',
+						'related_cases',
 					])
 					.default(searchTriggerResponseItemsItemObjectDefault),
 				schema: zod
@@ -102,6 +103,7 @@ export const createTriggerBody = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(createTriggerBodyObjectDefault),
 	schema: zod
@@ -149,6 +151,7 @@ export const createTriggerResponse = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(createTriggerResponseObjectDefault),
 	schema: zod
@@ -203,6 +206,7 @@ export const deleteTriggerResponse = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(deleteTriggerResponseObjectDefault),
 	schema: zod
@@ -257,6 +261,7 @@ export const readTriggerResponse = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(readTriggerResponseObjectDefault),
 	schema: zod
@@ -308,6 +313,7 @@ export const patchTriggerBody = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(patchTriggerBodyObjectDefault),
 	schema: zod
@@ -355,6 +361,7 @@ export const patchTriggerResponse = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(patchTriggerResponseObjectDefault),
 	schema: zod
@@ -408,6 +415,7 @@ export const updateTriggerBody = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(updateTriggerBodyObjectDefault),
 	schema: zod
@@ -455,6 +463,7 @@ export const updateTriggerResponse = zod.object({
 			'case_files',
 			'case_comments',
 			'case_links',
+			'related_cases',
 		])
 		.default(updateTriggerResponseObjectDefault),
 	schema: zod

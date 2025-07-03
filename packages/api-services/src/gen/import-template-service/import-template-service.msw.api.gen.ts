@@ -6,13 +6,12 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { StorageImportSourceType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	StorageImportTemplate,
 	StorageListImportTemplate,
 } from '.././_models';
+import { StorageImportSourceType } from '.././_models';
 
 export const getImportTemplateServiceSearchImportTemplateResponseMock = (
 	overrideResponse: Partial<StorageListImportTemplate> = {},

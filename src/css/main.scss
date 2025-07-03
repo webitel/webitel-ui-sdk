@@ -61,10 +61,14 @@ iframe {
   border: none;
 }
 
-button {
+//@author @Oleksandr Palonnyi
+//[WTEL-6985]-(https://webitel.atlassian.net/browse/WTEL-6985)
+//:not(.wt-button) is added because of wt-button uses primevue component
+//that confilcts with the default button styles
+
+button:not(.wt-button) {
   cursor: pointer;
   outline-color: #000;
-  border: none;
   background: transparent;
   padding: 0;
 }

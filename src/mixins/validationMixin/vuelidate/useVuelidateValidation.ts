@@ -1,6 +1,6 @@
+import type { Validation } from '@vuelidate/core';
 import {computed, isReactive, Ref} from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { Validation } from '@vuelidate/core';
 
 export type UseFieldValidationParams = {
   field: Ref<Validation>;

@@ -17,7 +17,7 @@ export const permissionsGetPermissionsQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('sort: "field" asc; "!field" desc'),
+		.describe('sort: \"field\" asc; \"!field\" desc'),
 	page: zod.number().optional().describe('page number'),
 	size: zod.number().optional().describe('page size'),
 });

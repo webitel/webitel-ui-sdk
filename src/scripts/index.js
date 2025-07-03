@@ -34,9 +34,7 @@ import updateObject from './updateObject.js';
 
 export {
   camelToKebab,
-  // caseConverters.js
   camelToSnake,
-  // compareSize.js
   compareSize,
   convertDuration,
   debounce,

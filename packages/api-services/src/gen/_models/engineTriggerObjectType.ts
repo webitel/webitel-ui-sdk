@@ -15,4 +15,5 @@ export const EngineTriggerObjectType = {
 	CaseFiles: 'case_files',
 	CaseComments: 'case_comments',
 	CaseLinks: 'case_links',
+	RelatedCases: 'related_cases',
 } as const;

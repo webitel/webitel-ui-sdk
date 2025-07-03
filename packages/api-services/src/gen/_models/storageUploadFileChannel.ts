@@ -18,4 +18,6 @@ export const StorageUploadFileChannel = {
 	MediaChannel: 'MediaChannel',
 	KnowledgebaseChannel: 'KnowledgebaseChannel',
 	CasesChannel: 'CasesChannel',
+	ScreenshotChannel: 'ScreenshotChannel',
+	ScreenSharingChannel: 'ScreenSharingChannel',
 } as const;

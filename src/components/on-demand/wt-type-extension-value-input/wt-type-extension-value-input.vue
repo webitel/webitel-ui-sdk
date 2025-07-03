@@ -74,12 +74,12 @@
 </template>
 
 <script lang="ts" setup>
+import { SysTypesAPI } from "@webitel/api-services/api";
 import { WtDatepicker, WtInput,WtSelect, WtSwitcher } from '@webitel/ui-sdk/components';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { WebitelProtoDataField } from 'webitel-sdk';
 
-import { getSysTypeRecordsLookup } from "../../../api/clients/wtTypes/sysTypes/sysTypes";
 import { WtTypeExtensionFieldKind as FieldType } from '../../../enums';
 
 const model = defineModel<unknown>();
@@ -136,7 +136,7 @@ const setValue = (value) => {
 
 const loadLookupList = ({ path, display, primary }) => {
   return (params) => {
-    return getSysTypeRecordsLookup({
+    return SysTypesAPI.getSysTypeRecordsLookup({
       ...params,
       path,
       display,

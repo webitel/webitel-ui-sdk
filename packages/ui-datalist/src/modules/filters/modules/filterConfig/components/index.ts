@@ -54,8 +54,15 @@ import { caseStatusConditionsSearchMethod } from './case-status/config';
 import { searchMethod as contactSearchMethod } from './contact/config';
 import ContactFilter from './contact/contact-filter-value-field.vue';
 import ContactFilterPreview from './contact/contact-filter-value-preview.vue';
+import { createContactGroupFilterConfig } from './contact-group';
 import ContactGroupFilter from './contact-group/contact-group-filter-value-field.vue';
 import ContactGroupFilterPreview from './contact-group/contact-group-filter-value-preview.vue';
+import { createContactLabelFilterConfig } from './contact-label';
+import ContactLabelFilter from './contact-label/contact-label-filter-value-field.vue';
+import ContactLabelFilterPreview from './contact-label/contact-label-filter-value-preview.vue';
+import { createContactOwnerFilterConfig } from './contact-owner'
+import ContactOwnerFilter from "./contact-owner/contact-owner-filter-value-field.vue";
+import ContactOwnerFilterPreview from "./contact-owner/contact-owner-filter-value-preview.vue";
 import CreatedAtFilterValueField from './created-at/created-at-filter-value-field.vue';
 import CreatedAtFilterPreview from './created-at/created-at-filter-value-preview.vue';
 import { searchMethod as gatewaySearchMethod } from './gateway/config';
@@ -76,13 +83,6 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
-import ContactLabelFilter from './contact-label/contact-label-filter-value-field.vue';
-import ContactLabelFilterPreview from './contact-label/contact-label-filter-value-preview.vue';
-import { createContactLabelFilterConfig } from './contact-label';
-import { createContactOwnerFilterConfig } from './contact-owner'
-import { createContactGroupFilterConfig } from './contact-group';
-import ContactOwnerFilter from "./contact-owner/contact-owner-filter-value-field.vue";
-import ContactOwnerFilterPreview from "./contact-owner/contact-owner-filter-value-preview.vue";
 import { searchMethod as queueSearchMethod } from './queue/config';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
@@ -147,6 +147,10 @@ export {
   ContactFilterPreview,
   ContactGroupFilter,
   ContactGroupFilterPreview,
+  ContactLabelFilter,
+  ContactLabelFilterPreview,
+  ContactOwnerFilter,
+  ContactOwnerFilterPreview,
   CreatedAtFilterValueField,
   GatewayFilter,
   GatewayFilterPreview,
@@ -164,10 +168,6 @@ export {
   HasTranscriptionFilterPreview,
   HasUserFilter,
   HasUserFilterPreview,
-  ContactLabelFilter,
-  ContactLabelFilterPreview,
-  ContactOwnerFilter,
-  ContactOwnerFilterPreview,
   QueueFilter,
   QueueFilterPreview,
   RatedByFilter,

@@ -6,19 +6,18 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import {
-	EngineTriggerEventType,
-	EngineTriggerJobState,
-	EngineTriggerObjectType,
-	EngineTriggerType,
-} from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	EngineListTrigger,
 	EngineListTriggerJob,
 	EngineTrigger,
 	EngineTriggerJob,
+} from '.././_models';
+import {
+	EngineTriggerEventType,
+	EngineTriggerJobState,
+	EngineTriggerObjectType,
+	EngineTriggerType,
 } from '.././_models';
 
 export const getSearchTriggerResponseMock = (

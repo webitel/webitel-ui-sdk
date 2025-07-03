@@ -16,7 +16,10 @@
       >
         <header class="wt-navigation-bar__nav-header">
           <!--        vue cli build target lib cant handle dynamic require :( -->
-          <router-link :to="logoRoute">
+          <router-link
+            :to="logoRoute"
+            @click="close"
+          >
             <img
               :alt="currentApp"
               :src="
@@ -28,7 +31,7 @@
           <wt-icon-btn
             class="wt-navigation-bar__nav-close"
             icon="close"
-            @click="isOpened = false"
+            @click="close"
           />
         </header>
         <wt-divider />
@@ -181,22 +184,24 @@ export default {
 
   computed: {
     currentNav() {
-      const path = this.$route.fullPath;
-      const currentNav = this.nav
-        .reduce((flatNav, currentNavItem) => {
-          if (currentNavItem.subNav)
-            return flatNav.concat(currentNavItem.subNav);
-          return [...flatNav, currentNavItem];
-        }, [])
-        .find((navItem) => path.endsWith(navItem.route));
-      const currentExpansion = this.nav
-        .filter((nav) => nav.subNav)
-        .find((nav) => nav.subNav.indexOf(currentNav) !== -1);
+      const pathSegments = this.$route.path.split('/').filter(Boolean);
+
+      const flatNav = this.nav.flatMap(item => item.subNav ?? [item]);
+
+      const navMap = new Map(flatNav.map(item => [item.value, item]));
+
+      const matchingSegment = pathSegments.find(segment => navMap.has(segment));
+      const currentNav = navMap.get(matchingSegment);
+
+      const currentExpansion = this.nav.find(nav =>
+        nav.subNav?.includes(currentNav)
+      );
+
       return {
         nav: currentNav?.value,
         expansion: currentExpansion?.value,
       };
-    },
+    }
   },
   methods: {
     nestedRoute(subNavItem, navItem) {

@@ -221,7 +221,7 @@ export const customersLicenseUsageQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	userId: zod.string().optional().describe('identifier'),
 	userName: zod.string().optional().describe('display name'),
 	domainId: zod.string().optional().describe('identifier'),
@@ -396,7 +396,7 @@ export const customersLicenseUsage2QueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	userId: zod.string().optional().describe('identifier'),
 	userName: zod.string().optional().describe('display name'),
 	domainId: zod.string().optional().describe('identifier'),
@@ -468,7 +468,7 @@ export const customersLicenseUsage3QueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	userId: zod.string().optional().describe('identifier'),
 	userName: zod.string().optional().describe('display name'),
 	domainId: zod.string().optional().describe('identifier'),
@@ -546,7 +546,7 @@ export const customersLicenseUsersQueryParams = zod.object({
 	sort: zod
 		.array(zod.string())
 		.optional()
-		.describe('e.g.: "updated_at" - ASC; "!updated_at" - DESC;'),
+		.describe('e.g.: \"updated_at\" - ASC; \"!updated_at\" - DESC;'),
 	q: zod.string().optional().describe('filter: term of search (username)'),
 });
 

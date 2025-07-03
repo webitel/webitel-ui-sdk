@@ -6,15 +6,15 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
+import { delay, HttpResponse, http } from 'msw';
 
 import type {
 	ApiLDAPCatalog,
+	ApiLDAProcess,
+	ApiLDAProcessResponse,
 	ApiLDAPSearchResponse,
 	ApiLDAPTemplate,
 	ApiLDAPTemplateResponse,
-	ApiLDAProcess,
-	ApiLDAProcessResponse,
 	ApiSearchLDAPResponse,
 } from '.././_models';
 

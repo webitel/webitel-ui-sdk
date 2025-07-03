@@ -1,4 +1,5 @@
 import qs from 'qs';
+
 import generateInstance from '../../axios/generateInstance.js';
 import updateTokenInterceptor from '../../interceptors/request/updateToken.interceptor.js';
 import handleUnauthorizedInterceptor from '../../interceptors/response/handleUnauthorized.interceptor.js';

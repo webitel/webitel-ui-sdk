@@ -6,13 +6,12 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WfmAbsenceType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WfmCreateAgentsWorkingScheduleShiftsResponse,
 	WfmSearchAgentsWorkingScheduleResponse,
 } from '.././_models';
+import { WfmAbsenceType } from '.././_models';
 
 export const getAgentWorkingScheduleServiceSearchAgentsWorkingScheduleResponseMock =
 	(

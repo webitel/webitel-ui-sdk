@@ -12,7 +12,7 @@ import { z as zod } from 'zod/v4';
 export const searchCasesQueryParams = zod.object({
 	page: zod.number().optional().describe('Page number for pagination.'),
 	size: zod.number().optional().describe('Number of results per page.'),
-	q: zod.string().optional().describe('Query string for searching cases.'),
+	q: zod.string().optional().describe('General query string.'),
 	ids: zod
 		.array(zod.string())
 		.optional()
@@ -30,6 +30,23 @@ export const searchCasesQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('Contact ID for filtering cases.'),
+	queryTargetFull: zod
+		.boolean()
+		.optional()
+		.describe('Search everywhere (no restrictions)'),
+	queryTargetSubject: zod
+		.boolean()
+		.optional()
+		.describe('Search in case subject.'),
+	queryTargetName: zod
+		.boolean()
+		.optional()
+		.describe('Search in case name or number.'),
+	queryTargetContactInfo: zod
+		.boolean()
+		.optional()
+		.describe("Search in contact's email, phone, etc."),
+	queryTargetId: zod.boolean().optional().describe('Search in case id'),
 });
 
 export const searchCasesResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -533,6 +550,12 @@ export const createCaseQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('List of fields to include in the response.'),
+	disableTrigger: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether to disable the trigger after the application execution.\nDefault is false (trigger **will** be executed).\nSet to true to explicitly prevent the trigger from running (e.g., when called from another trigger or internal flow).\nто\n[WTEL-7055]',
+		),
 });
 
 export const createCaseBodyRelatedItemRelationTypeDefault =
@@ -2100,6 +2123,12 @@ export const updateCase2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('List of fields to include in the response.'),
+	disableTrigger: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether to disable the trigger after the application execution.\nDefault is false (trigger **will** be executed).\nSet to true to explicitly prevent the trigger from running (e.g., when called from another trigger or internal flow).\n\n[WTEL-7055]',
+		),
 });
 
 export const updateCase2Body = zod.object({
@@ -2196,465 +2225,481 @@ export const updateCase2Body = zod.object({
 		.optional(),
 });
 
-export const updateCase2ResponseRelatedDataItemRelationTypeDefault =
+export const updateCase2ResponseCaseRelatedDataItemRelationTypeDefault =
 	'RELATION_TYPE_UNSPECIFIED';
-export const updateCase2ResponseSourceTypeDefault = 'TYPE_UNSPECIFIED';
+export const updateCase2ResponseCaseSourceTypeDefault = 'TYPE_UNSPECIFIED';
 
-export const updateCase2Response = zod
-	.object({
-		assignee: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		author: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		closeReason: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		closeReasonGroup: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		closeResult: zod.string().optional(),
-		comments: zod
-			.object({
-				items: zod
-					.array(
-						zod
-							.object({
+export const updateCase2Response = zod.object({
+	case: zod
+		.object({
+			assignee: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			author: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			closeReason: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			closeReasonGroup: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			closeResult: zod.string().optional(),
+			comments: zod
+				.object({
+					items: zod
+						.array(
+							zod
+								.object({
+									author: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									canEdit: zod
+										.boolean()
+										.optional()
+										.describe(
+											'Indicates if the comment can be edited by current user.',
+										),
+									caseId: zod
+										.string()
+										.optional()
+										.describe('Optional relation to the associated case.'),
+									createdAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of when the comment was created.',
+										),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									edited: zod
+										.boolean()
+										.optional()
+										.describe(
+											'Indicates if the comment was edited; true if created_at < updated_at.',
+										),
+									etag: zod.string().optional(),
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Main identifier for read, update, and delete operations.',
+										),
+									roleIds: zod.array(zod.string()).optional(),
+									text: zod
+										.string()
+										.optional()
+										.describe('The content of the comment.'),
+									updatedAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of the last update.',
+										),
+									updatedBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									ver: zod
+										.number()
+										.optional()
+										.describe(
+											'Version number of the comment, used for concurrency control.',
+										),
+								})
+								.describe('Represents a comment associated with a case.'),
+						)
+						.optional()
+						.describe('List of comments on the current page.'),
+					next: zod
+						.boolean()
+						.optional()
+						.describe('Flag to indicate if more pages are available.'),
+					page: zod.string().optional().describe('Current page number.'),
+				})
+				.optional()
+				.describe('Contains a paginated list of comments.'),
+			contactInfo: zod
+				.string()
+				.optional()
+				.describe('Contact information for the case.'),
+			createdAt: zod
+				.string()
+				.optional()
+				.describe('Creation timestamp (in milliseconds since Unix epoch).'),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			custom: zod
+				.object({})
+				.optional()
+				.describe('Custom data extension fields ..'),
+			dc: zod.string().optional(),
+			description: zod
+				.string()
+				.optional()
+				.describe('Detailed description of the case.'),
+			differenceInReaction: zod.string().optional(),
+			differenceInResolve: zod.string().optional(),
+			etag: zod.string().optional().describe('Unique etag identifier.'),
+			files: zod
+				.object({
+					items: zod
+						.array(
+							zod
+								.object({
+									author: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									createdAt: zod
+										.string()
+										.optional()
+										.describe('Creation timestamp in Unix milliseconds.'),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									id: zod.string().optional().describe('Storage file ID.'),
+									mime: zod
+										.string()
+										.optional()
+										.describe('MIME type of the file.'),
+									name: zod.string().optional().describe('File name.'),
+									size: zod.string().optional().describe('File size in bytes.'),
+									url: zod.string().optional(),
+								})
+								.describe('Metadata for a file associated with a case.'),
+						)
+						.optional()
+						.describe('List of case files.'),
+					next: zod
+						.boolean()
+						.optional()
+						.describe('Indicator if there is a next page.'),
+					page: zod.string().optional().describe('Current page number.'),
+				})
+				.optional()
+				.describe('Contains a list of case files with pagination.'),
+			group: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					type: zod.string().optional(),
+				})
+				.optional(),
+			id: zod.string().optional().describe('Unique case ID.'),
+			impacted: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			links: zod
+				.object({
+					items: zod
+						.array(
+							zod.object({
 								author: zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
 									})
 									.optional(),
-								canEdit: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates if the comment can be edited by current user.',
-									),
-								caseId: zod
-									.string()
-									.optional()
-									.describe('Optional relation to the associated case.'),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp (in milliseconds) of when the comment was created.',
-									),
+								createdAt: zod.string().optional(),
 								createdBy: zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
 									})
 									.optional(),
-								edited: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates if the comment was edited; true if created_at < updated_at.',
-									),
 								etag: zod.string().optional(),
-								id: zod
-									.string()
-									.optional()
-									.describe(
-										'Main identifier for read, update, and delete operations.',
-									),
-								roleIds: zod.array(zod.string()).optional(),
-								text: zod
-									.string()
-									.optional()
-									.describe('The content of the comment.'),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe('Timestamp (in milliseconds) of the last update.'),
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+								updatedAt: zod.string().optional(),
 								updatedBy: zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
 									})
 									.optional(),
-								ver: zod
-									.number()
-									.optional()
-									.describe(
-										'Version number of the comment, used for concurrency control.',
-									),
-							})
-							.describe('Represents a comment associated with a case.'),
-					)
-					.optional()
-					.describe('List of comments on the current page.'),
-				next: zod
-					.boolean()
-					.optional()
-					.describe('Flag to indicate if more pages are available.'),
-				page: zod.string().optional().describe('Current page number.'),
-			})
-			.optional()
-			.describe('Contains a paginated list of comments.'),
-		contactInfo: zod
-			.string()
-			.optional()
-			.describe('Contact information for the case.'),
-		createdAt: zod
-			.string()
-			.optional()
-			.describe('Creation timestamp (in milliseconds since Unix epoch).'),
-		createdBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		custom: zod
-			.object({})
-			.optional()
-			.describe('Custom data extension fields ..'),
-		dc: zod.string().optional(),
-		description: zod
-			.string()
-			.optional()
-			.describe('Detailed description of the case.'),
-		differenceInReaction: zod.string().optional(),
-		differenceInResolve: zod.string().optional(),
-		etag: zod.string().optional().describe('Unique etag identifier.'),
-		files: zod
-			.object({
-				items: zod
-					.array(
-						zod
-							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe('Creation timestamp in Unix milliseconds.'),
-								createdBy: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								id: zod.string().optional().describe('Storage file ID.'),
-								mime: zod
-									.string()
-									.optional()
-									.describe('MIME type of the file.'),
-								name: zod.string().optional().describe('File name.'),
-								size: zod.string().optional().describe('File size in bytes.'),
 								url: zod.string().optional(),
-							})
-							.describe('Metadata for a file associated with a case.'),
-					)
-					.optional()
-					.describe('List of case files.'),
-				next: zod
-					.boolean()
-					.optional()
-					.describe('Indicator if there is a next page.'),
-				page: zod.string().optional().describe('Current page number.'),
-			})
-			.optional()
-			.describe('Contains a list of case files with pagination.'),
-		group: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-				type: zod.string().optional(),
-			})
-			.optional(),
-		id: zod.string().optional().describe('Unique case ID.'),
-		impacted: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		links: zod
-			.object({
-				items: zod
-					.array(
-						zod.object({
-							author: zod
-								.object({
-									id: zod.string().optional(),
-									name: zod.string().optional(),
-								})
-								.optional(),
-							createdAt: zod.string().optional(),
-							createdBy: zod
-								.object({
-									id: zod.string().optional(),
-									name: zod.string().optional(),
-								})
-								.optional(),
-							etag: zod.string().optional(),
+								ver: zod.number().optional(),
+							}),
+						)
+						.optional(),
+					next: zod.boolean().optional(),
+					page: zod.string().optional(),
+				})
+				.optional(),
+			name: zod
+				.string()
+				.optional()
+				.describe('Name of the case (may serve as an ID in docs).'),
+			plannedReactionAt: zod
+				.string()
+				.optional()
+				.describe('Planned reaction time (in milliseconds).'),
+			plannedResolveAt: zod
+				.string()
+				.optional()
+				.describe('Planned resolution time (in milliseconds).'),
+			priority: zod
+				.object({
+					color: zod.string().optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
 							id: zod.string().optional(),
 							name: zod.string().optional(),
-							updatedAt: zod.string().optional(),
-							updatedBy: zod
+						})
+						.optional(),
+					description: zod.string().optional(),
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+				})
+				.optional(),
+			rating: zod.string().optional(),
+			ratingComment: zod.string().optional(),
+			reactedAt: zod.string().optional(),
+			related: zod
+				.object({
+					data: zod
+						.array(
+							zod
 								.object({
-									id: zod.string().optional(),
-									name: zod.string().optional(),
+									createdAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of when the relation was created.',
+										),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									etag: zod
+										.string()
+										.optional()
+										.describe('Etag for the related case entity.'),
+									id: zod
+										.string()
+										.optional()
+										.describe('Unique identifier for the related case.'),
+									primaryCase: zod
+										.object({
+											color: zod.string().optional(),
+											etag: zod.string().optional(),
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+											subject: zod.string().optional(),
+											ver: zod.number().optional(),
+										})
+										.optional()
+										.describe(
+											'RelatedCaseLookup is created specifically to include the subject field.',
+										),
+									relatedCase: zod
+										.object({
+											color: zod.string().optional(),
+											etag: zod.string().optional(),
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+											subject: zod.string().optional(),
+											ver: zod.number().optional(),
+										})
+										.optional()
+										.describe(
+											'RelatedCaseLookup is created specifically to include the subject field.',
+										),
+									relationType: zod
+										.enum([
+											'RELATION_TYPE_UNSPECIFIED',
+											'DUPLICATES',
+											'IS_DUPLICATED_BY',
+											'BLOCKS',
+											'IS_BLOCKED_BY',
+											'CAUSES',
+											'IS_CAUSED_BY',
+											'IS_CHILD_OF',
+											'IS_PARENT_OF',
+											'RELATES_TO',
+										])
+										.default(
+											updateCase2ResponseCaseRelatedDataItemRelationTypeDefault,
+										)
+										.describe('Enum for relation types between cases.'),
+									updatedAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of the last update.',
+										),
+									updatedBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									ver: zod
+										.number()
+										.optional()
+										.describe(
+											'Version number of the related case, used for concurrency control.',
+										),
 								})
-								.optional(),
-							url: zod.string().optional(),
-							ver: zod.number().optional(),
-						}),
-					)
-					.optional(),
-				next: zod.boolean().optional(),
-				page: zod.string().optional(),
-			})
-			.optional(),
-		name: zod
-			.string()
-			.optional()
-			.describe('Name of the case (may serve as an ID in docs).'),
-		plannedReactionAt: zod
-			.string()
-			.optional()
-			.describe('Planned reaction time (in milliseconds).'),
-		plannedResolveAt: zod
-			.string()
-			.optional()
-			.describe('Planned resolution time (in milliseconds).'),
-		priority: zod
-			.object({
-				color: zod.string().optional(),
-				createdAt: zod.string().optional(),
-				createdBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				description: zod.string().optional(),
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-				updatedBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-			})
-			.optional(),
-		rating: zod.string().optional(),
-		ratingComment: zod.string().optional(),
-		reactedAt: zod.string().optional(),
-		related: zod
-			.object({
-				data: zod
-					.array(
-						zod
-							.object({
-								createdAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp (in milliseconds) of when the relation was created.',
-									),
-								createdBy: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								etag: zod
-									.string()
-									.optional()
-									.describe('Etag for the related case entity.'),
-								id: zod
-									.string()
-									.optional()
-									.describe('Unique identifier for the related case.'),
-								primaryCase: zod
-									.object({
-										color: zod.string().optional(),
-										etag: zod.string().optional(),
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-										subject: zod.string().optional(),
-										ver: zod.number().optional(),
-									})
-									.optional()
-									.describe(
-										'RelatedCaseLookup is created specifically to include the subject field.',
-									),
-								relatedCase: zod
-									.object({
-										color: zod.string().optional(),
-										etag: zod.string().optional(),
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-										subject: zod.string().optional(),
-										ver: zod.number().optional(),
-									})
-									.optional()
-									.describe(
-										'RelatedCaseLookup is created specifically to include the subject field.',
-									),
-								relationType: zod
-									.enum([
-										'RELATION_TYPE_UNSPECIFIED',
-										'DUPLICATES',
-										'IS_DUPLICATED_BY',
-										'BLOCKS',
-										'IS_BLOCKED_BY',
-										'CAUSES',
-										'IS_CAUSED_BY',
-										'IS_CHILD_OF',
-										'IS_PARENT_OF',
-										'RELATES_TO',
-									])
-									.default(
-										updateCase2ResponseRelatedDataItemRelationTypeDefault,
-									)
-									.describe('Enum for relation types between cases.'),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe('Timestamp (in milliseconds) of the last update.'),
-								updatedBy: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								ver: zod
-									.number()
-									.optional()
-									.describe(
-										'Version number of the related case, used for concurrency control.',
-									),
-							})
-							.describe(
-								'Represents a related case with its relationship details.',
-							),
-					)
-					.optional()
-					.describe('List of related cases on the current page.'),
-				next: zod
-					.boolean()
-					.optional()
-					.describe('Flag to indicate if more pages are available.'),
-				page: zod.string().optional().describe('Current page number.'),
-			})
-			.optional()
-			.describe('Paginated list of related cases.'),
-		reporter: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		resolvedAt: zod.string().optional(),
-		roleIds: zod.array(zod.string()).optional(),
-		service: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		sla: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		slaCondition: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		source: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-				type: zod
-					.enum([
-						'TYPE_UNSPECIFIED',
-						'CALL',
-						'CHAT',
-						'SOCIAL_MEDIA',
-						'EMAIL',
-						'API',
-						'MANUAL',
-					])
-					.default(updateCase2ResponseSourceTypeDefault)
-					.describe(
-						'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
-					),
-			})
-			.optional(),
-		status: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		statusCondition: zod
-			.object({
-				createdAt: zod.string().optional(),
-				createdBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				description: zod.string().optional(),
-				final: zod.boolean().optional(),
-				id: zod.string().optional(),
-				initial: zod.boolean().optional(),
-				name: zod.string().optional(),
-				statusId: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-				updatedBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-			})
-			.optional(),
-		subject: zod.string().optional().describe('Subject of the case.'),
-		updatedAt: zod
-			.string()
-			.optional()
-			.describe('Last update timestamp (in milliseconds since Unix epoch).'),
-		updatedBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		ver: zod.number().optional().describe('Version number of the case.'),
-	})
-	.describe('Message representing a case.');
+								.describe(
+									'Represents a related case with its relationship details.',
+								),
+						)
+						.optional()
+						.describe('List of related cases on the current page.'),
+					next: zod
+						.boolean()
+						.optional()
+						.describe('Flag to indicate if more pages are available.'),
+					page: zod.string().optional().describe('Current page number.'),
+				})
+				.optional()
+				.describe('Paginated list of related cases.'),
+			reporter: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			resolvedAt: zod.string().optional(),
+			roleIds: zod.array(zod.string()).optional(),
+			service: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			sla: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			slaCondition: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			source: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					type: zod
+						.enum([
+							'TYPE_UNSPECIFIED',
+							'CALL',
+							'CHAT',
+							'SOCIAL_MEDIA',
+							'EMAIL',
+							'API',
+							'MANUAL',
+						])
+						.default(updateCase2ResponseCaseSourceTypeDefault)
+						.describe(
+							'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+						),
+				})
+				.optional(),
+			status: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			statusCondition: zod
+				.object({
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					final: zod.boolean().optional(),
+					id: zod.string().optional(),
+					initial: zod.boolean().optional(),
+					name: zod.string().optional(),
+					statusId: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+				})
+				.optional(),
+			subject: zod.string().optional().describe('Subject of the case.'),
+			updatedAt: zod
+				.string()
+				.optional()
+				.describe('Last update timestamp (in milliseconds since Unix epoch).'),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			ver: zod.number().optional().describe('Version number of the case.'),
+		})
+		.optional()
+		.describe('Message representing a case.'),
+	changes: zod
+		.array(
+			zod.object({
+				field: zod.string().optional(),
+				newValue: zod.any().optional(),
+				oldValue: zod.any().optional(),
+			}),
+		)
+		.optional(),
+});
 
 /**
  * @summary RPC method for updating an existing case.
@@ -2672,6 +2717,12 @@ export const updateCaseQueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('List of fields to include in the response.'),
+	disableTrigger: zod
+		.boolean()
+		.optional()
+		.describe(
+			'Indicates whether to disable the trigger after the application execution.\nDefault is false (trigger **will** be executed).\nSet to true to explicitly prevent the trigger from running (e.g., when called from another trigger or internal flow).\n\n[WTEL-7055]',
+		),
 });
 
 export const updateCaseBody = zod.object({
@@ -2768,463 +2819,481 @@ export const updateCaseBody = zod.object({
 		.optional(),
 });
 
-export const updateCaseResponseRelatedDataItemRelationTypeDefault =
+export const updateCaseResponseCaseRelatedDataItemRelationTypeDefault =
 	'RELATION_TYPE_UNSPECIFIED';
-export const updateCaseResponseSourceTypeDefault = 'TYPE_UNSPECIFIED';
+export const updateCaseResponseCaseSourceTypeDefault = 'TYPE_UNSPECIFIED';
 
-export const updateCaseResponse = zod
-	.object({
-		assignee: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		author: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		closeReason: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		closeReasonGroup: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		closeResult: zod.string().optional(),
-		comments: zod
-			.object({
-				items: zod
-					.array(
-						zod
-							.object({
+export const updateCaseResponse = zod.object({
+	case: zod
+		.object({
+			assignee: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			author: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			closeReason: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			closeReasonGroup: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			closeResult: zod.string().optional(),
+			comments: zod
+				.object({
+					items: zod
+						.array(
+							zod
+								.object({
+									author: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									canEdit: zod
+										.boolean()
+										.optional()
+										.describe(
+											'Indicates if the comment can be edited by current user.',
+										),
+									caseId: zod
+										.string()
+										.optional()
+										.describe('Optional relation to the associated case.'),
+									createdAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of when the comment was created.',
+										),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									edited: zod
+										.boolean()
+										.optional()
+										.describe(
+											'Indicates if the comment was edited; true if created_at < updated_at.',
+										),
+									etag: zod.string().optional(),
+									id: zod
+										.string()
+										.optional()
+										.describe(
+											'Main identifier for read, update, and delete operations.',
+										),
+									roleIds: zod.array(zod.string()).optional(),
+									text: zod
+										.string()
+										.optional()
+										.describe('The content of the comment.'),
+									updatedAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of the last update.',
+										),
+									updatedBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									ver: zod
+										.number()
+										.optional()
+										.describe(
+											'Version number of the comment, used for concurrency control.',
+										),
+								})
+								.describe('Represents a comment associated with a case.'),
+						)
+						.optional()
+						.describe('List of comments on the current page.'),
+					next: zod
+						.boolean()
+						.optional()
+						.describe('Flag to indicate if more pages are available.'),
+					page: zod.string().optional().describe('Current page number.'),
+				})
+				.optional()
+				.describe('Contains a paginated list of comments.'),
+			contactInfo: zod
+				.string()
+				.optional()
+				.describe('Contact information for the case.'),
+			createdAt: zod
+				.string()
+				.optional()
+				.describe('Creation timestamp (in milliseconds since Unix epoch).'),
+			createdBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			custom: zod
+				.object({})
+				.optional()
+				.describe('Custom data extension fields ..'),
+			dc: zod.string().optional(),
+			description: zod
+				.string()
+				.optional()
+				.describe('Detailed description of the case.'),
+			differenceInReaction: zod.string().optional(),
+			differenceInResolve: zod.string().optional(),
+			etag: zod.string().optional().describe('Unique etag identifier.'),
+			files: zod
+				.object({
+					items: zod
+						.array(
+							zod
+								.object({
+									author: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									createdAt: zod
+										.string()
+										.optional()
+										.describe('Creation timestamp in Unix milliseconds.'),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									id: zod.string().optional().describe('Storage file ID.'),
+									mime: zod
+										.string()
+										.optional()
+										.describe('MIME type of the file.'),
+									name: zod.string().optional().describe('File name.'),
+									size: zod.string().optional().describe('File size in bytes.'),
+									url: zod.string().optional(),
+								})
+								.describe('Metadata for a file associated with a case.'),
+						)
+						.optional()
+						.describe('List of case files.'),
+					next: zod
+						.boolean()
+						.optional()
+						.describe('Indicator if there is a next page.'),
+					page: zod.string().optional().describe('Current page number.'),
+				})
+				.optional()
+				.describe('Contains a list of case files with pagination.'),
+			group: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					type: zod.string().optional(),
+				})
+				.optional(),
+			id: zod.string().optional().describe('Unique case ID.'),
+			impacted: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			links: zod
+				.object({
+					items: zod
+						.array(
+							zod.object({
 								author: zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
 									})
 									.optional(),
-								canEdit: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates if the comment can be edited by current user.',
-									),
-								caseId: zod
-									.string()
-									.optional()
-									.describe('Optional relation to the associated case.'),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp (in milliseconds) of when the comment was created.',
-									),
+								createdAt: zod.string().optional(),
 								createdBy: zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
 									})
 									.optional(),
-								edited: zod
-									.boolean()
-									.optional()
-									.describe(
-										'Indicates if the comment was edited; true if created_at < updated_at.',
-									),
 								etag: zod.string().optional(),
-								id: zod
-									.string()
-									.optional()
-									.describe(
-										'Main identifier for read, update, and delete operations.',
-									),
-								roleIds: zod.array(zod.string()).optional(),
-								text: zod
-									.string()
-									.optional()
-									.describe('The content of the comment.'),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe('Timestamp (in milliseconds) of the last update.'),
+								id: zod.string().optional(),
+								name: zod.string().optional(),
+								updatedAt: zod.string().optional(),
 								updatedBy: zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
 									})
 									.optional(),
-								ver: zod
-									.number()
-									.optional()
-									.describe(
-										'Version number of the comment, used for concurrency control.',
-									),
-							})
-							.describe('Represents a comment associated with a case.'),
-					)
-					.optional()
-					.describe('List of comments on the current page.'),
-				next: zod
-					.boolean()
-					.optional()
-					.describe('Flag to indicate if more pages are available.'),
-				page: zod.string().optional().describe('Current page number.'),
-			})
-			.optional()
-			.describe('Contains a paginated list of comments.'),
-		contactInfo: zod
-			.string()
-			.optional()
-			.describe('Contact information for the case.'),
-		createdAt: zod
-			.string()
-			.optional()
-			.describe('Creation timestamp (in milliseconds since Unix epoch).'),
-		createdBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		custom: zod
-			.object({})
-			.optional()
-			.describe('Custom data extension fields ..'),
-		dc: zod.string().optional(),
-		description: zod
-			.string()
-			.optional()
-			.describe('Detailed description of the case.'),
-		differenceInReaction: zod.string().optional(),
-		differenceInResolve: zod.string().optional(),
-		etag: zod.string().optional().describe('Unique etag identifier.'),
-		files: zod
-			.object({
-				items: zod
-					.array(
-						zod
-							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								createdAt: zod
-									.string()
-									.optional()
-									.describe('Creation timestamp in Unix milliseconds.'),
-								createdBy: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								id: zod.string().optional().describe('Storage file ID.'),
-								mime: zod
-									.string()
-									.optional()
-									.describe('MIME type of the file.'),
-								name: zod.string().optional().describe('File name.'),
-								size: zod.string().optional().describe('File size in bytes.'),
 								url: zod.string().optional(),
-							})
-							.describe('Metadata for a file associated with a case.'),
-					)
-					.optional()
-					.describe('List of case files.'),
-				next: zod
-					.boolean()
-					.optional()
-					.describe('Indicator if there is a next page.'),
-				page: zod.string().optional().describe('Current page number.'),
-			})
-			.optional()
-			.describe('Contains a list of case files with pagination.'),
-		group: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-				type: zod.string().optional(),
-			})
-			.optional(),
-		id: zod.string().optional().describe('Unique case ID.'),
-		impacted: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		links: zod
-			.object({
-				items: zod
-					.array(
-						zod.object({
-							author: zod
-								.object({
-									id: zod.string().optional(),
-									name: zod.string().optional(),
-								})
-								.optional(),
-							createdAt: zod.string().optional(),
-							createdBy: zod
-								.object({
-									id: zod.string().optional(),
-									name: zod.string().optional(),
-								})
-								.optional(),
-							etag: zod.string().optional(),
+								ver: zod.number().optional(),
+							}),
+						)
+						.optional(),
+					next: zod.boolean().optional(),
+					page: zod.string().optional(),
+				})
+				.optional(),
+			name: zod
+				.string()
+				.optional()
+				.describe('Name of the case (may serve as an ID in docs).'),
+			plannedReactionAt: zod
+				.string()
+				.optional()
+				.describe('Planned reaction time (in milliseconds).'),
+			plannedResolveAt: zod
+				.string()
+				.optional()
+				.describe('Planned resolution time (in milliseconds).'),
+			priority: zod
+				.object({
+					color: zod.string().optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
 							id: zod.string().optional(),
 							name: zod.string().optional(),
-							updatedAt: zod.string().optional(),
-							updatedBy: zod
+						})
+						.optional(),
+					description: zod.string().optional(),
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+				})
+				.optional(),
+			rating: zod.string().optional(),
+			ratingComment: zod.string().optional(),
+			reactedAt: zod.string().optional(),
+			related: zod
+				.object({
+					data: zod
+						.array(
+							zod
 								.object({
-									id: zod.string().optional(),
-									name: zod.string().optional(),
+									createdAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of when the relation was created.',
+										),
+									createdBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									etag: zod
+										.string()
+										.optional()
+										.describe('Etag for the related case entity.'),
+									id: zod
+										.string()
+										.optional()
+										.describe('Unique identifier for the related case.'),
+									primaryCase: zod
+										.object({
+											color: zod.string().optional(),
+											etag: zod.string().optional(),
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+											subject: zod.string().optional(),
+											ver: zod.number().optional(),
+										})
+										.optional()
+										.describe(
+											'RelatedCaseLookup is created specifically to include the subject field.',
+										),
+									relatedCase: zod
+										.object({
+											color: zod.string().optional(),
+											etag: zod.string().optional(),
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+											subject: zod.string().optional(),
+											ver: zod.number().optional(),
+										})
+										.optional()
+										.describe(
+											'RelatedCaseLookup is created specifically to include the subject field.',
+										),
+									relationType: zod
+										.enum([
+											'RELATION_TYPE_UNSPECIFIED',
+											'DUPLICATES',
+											'IS_DUPLICATED_BY',
+											'BLOCKS',
+											'IS_BLOCKED_BY',
+											'CAUSES',
+											'IS_CAUSED_BY',
+											'IS_CHILD_OF',
+											'IS_PARENT_OF',
+											'RELATES_TO',
+										])
+										.default(
+											updateCaseResponseCaseRelatedDataItemRelationTypeDefault,
+										)
+										.describe('Enum for relation types between cases.'),
+									updatedAt: zod
+										.string()
+										.optional()
+										.describe(
+											'Timestamp (in milliseconds) of the last update.',
+										),
+									updatedBy: zod
+										.object({
+											id: zod.string().optional(),
+											name: zod.string().optional(),
+										})
+										.optional(),
+									ver: zod
+										.number()
+										.optional()
+										.describe(
+											'Version number of the related case, used for concurrency control.',
+										),
 								})
-								.optional(),
-							url: zod.string().optional(),
-							ver: zod.number().optional(),
-						}),
-					)
-					.optional(),
-				next: zod.boolean().optional(),
-				page: zod.string().optional(),
-			})
-			.optional(),
-		name: zod
-			.string()
-			.optional()
-			.describe('Name of the case (may serve as an ID in docs).'),
-		plannedReactionAt: zod
-			.string()
-			.optional()
-			.describe('Planned reaction time (in milliseconds).'),
-		plannedResolveAt: zod
-			.string()
-			.optional()
-			.describe('Planned resolution time (in milliseconds).'),
-		priority: zod
-			.object({
-				color: zod.string().optional(),
-				createdAt: zod.string().optional(),
-				createdBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				description: zod.string().optional(),
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-				updatedBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-			})
-			.optional(),
-		rating: zod.string().optional(),
-		ratingComment: zod.string().optional(),
-		reactedAt: zod.string().optional(),
-		related: zod
-			.object({
-				data: zod
-					.array(
-						zod
-							.object({
-								createdAt: zod
-									.string()
-									.optional()
-									.describe(
-										'Timestamp (in milliseconds) of when the relation was created.',
-									),
-								createdBy: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								etag: zod
-									.string()
-									.optional()
-									.describe('Etag for the related case entity.'),
-								id: zod
-									.string()
-									.optional()
-									.describe('Unique identifier for the related case.'),
-								primaryCase: zod
-									.object({
-										color: zod.string().optional(),
-										etag: zod.string().optional(),
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-										subject: zod.string().optional(),
-										ver: zod.number().optional(),
-									})
-									.optional()
-									.describe(
-										'RelatedCaseLookup is created specifically to include the subject field.',
-									),
-								relatedCase: zod
-									.object({
-										color: zod.string().optional(),
-										etag: zod.string().optional(),
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-										subject: zod.string().optional(),
-										ver: zod.number().optional(),
-									})
-									.optional()
-									.describe(
-										'RelatedCaseLookup is created specifically to include the subject field.',
-									),
-								relationType: zod
-									.enum([
-										'RELATION_TYPE_UNSPECIFIED',
-										'DUPLICATES',
-										'IS_DUPLICATED_BY',
-										'BLOCKS',
-										'IS_BLOCKED_BY',
-										'CAUSES',
-										'IS_CAUSED_BY',
-										'IS_CHILD_OF',
-										'IS_PARENT_OF',
-										'RELATES_TO',
-									])
-									.default(updateCaseResponseRelatedDataItemRelationTypeDefault)
-									.describe('Enum for relation types between cases.'),
-								updatedAt: zod
-									.string()
-									.optional()
-									.describe('Timestamp (in milliseconds) of the last update.'),
-								updatedBy: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
-								ver: zod
-									.number()
-									.optional()
-									.describe(
-										'Version number of the related case, used for concurrency control.',
-									),
-							})
-							.describe(
-								'Represents a related case with its relationship details.',
-							),
-					)
-					.optional()
-					.describe('List of related cases on the current page.'),
-				next: zod
-					.boolean()
-					.optional()
-					.describe('Flag to indicate if more pages are available.'),
-				page: zod.string().optional().describe('Current page number.'),
-			})
-			.optional()
-			.describe('Paginated list of related cases.'),
-		reporter: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		resolvedAt: zod.string().optional(),
-		roleIds: zod.array(zod.string()).optional(),
-		service: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		sla: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		slaCondition: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		source: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-				type: zod
-					.enum([
-						'TYPE_UNSPECIFIED',
-						'CALL',
-						'CHAT',
-						'SOCIAL_MEDIA',
-						'EMAIL',
-						'API',
-						'MANUAL',
-					])
-					.default(updateCaseResponseSourceTypeDefault)
-					.describe(
-						'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
-					),
-			})
-			.optional(),
-		status: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		statusCondition: zod
-			.object({
-				createdAt: zod.string().optional(),
-				createdBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-				description: zod.string().optional(),
-				final: zod.boolean().optional(),
-				id: zod.string().optional(),
-				initial: zod.boolean().optional(),
-				name: zod.string().optional(),
-				statusId: zod.string().optional(),
-				updatedAt: zod.string().optional(),
-				updatedBy: zod
-					.object({
-						id: zod.string().optional(),
-						name: zod.string().optional(),
-					})
-					.optional(),
-			})
-			.optional(),
-		subject: zod.string().optional().describe('Subject of the case.'),
-		updatedAt: zod
-			.string()
-			.optional()
-			.describe('Last update timestamp (in milliseconds since Unix epoch).'),
-		updatedBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		ver: zod.number().optional().describe('Version number of the case.'),
-	})
-	.describe('Message representing a case.');
+								.describe(
+									'Represents a related case with its relationship details.',
+								),
+						)
+						.optional()
+						.describe('List of related cases on the current page.'),
+					next: zod
+						.boolean()
+						.optional()
+						.describe('Flag to indicate if more pages are available.'),
+					page: zod.string().optional().describe('Current page number.'),
+				})
+				.optional()
+				.describe('Paginated list of related cases.'),
+			reporter: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			resolvedAt: zod.string().optional(),
+			roleIds: zod.array(zod.string()).optional(),
+			service: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			sla: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			slaCondition: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			source: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+					type: zod
+						.enum([
+							'TYPE_UNSPECIFIED',
+							'CALL',
+							'CHAT',
+							'SOCIAL_MEDIA',
+							'EMAIL',
+							'API',
+							'MANUAL',
+						])
+						.default(updateCaseResponseCaseSourceTypeDefault)
+						.describe(
+							'Represents a source type for the source entity.\n\n - TYPE_UNSPECIFIED: Unspecified source type.\n - CALL: Phone call source type.\n - CHAT: Chat source type.\n - SOCIAL_MEDIA: Social media source type.\n - EMAIL: Email source type.\n - API: API source type.\n - MANUAL: Manual source type.',
+						),
+				})
+				.optional(),
+			status: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			statusCondition: zod
+				.object({
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					final: zod.boolean().optional(),
+					id: zod.string().optional(),
+					initial: zod.boolean().optional(),
+					name: zod.string().optional(),
+					statusId: zod.string().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+				})
+				.optional(),
+			subject: zod.string().optional().describe('Subject of the case.'),
+			updatedAt: zod
+				.string()
+				.optional()
+				.describe('Last update timestamp (in milliseconds since Unix epoch).'),
+			updatedBy: zod
+				.object({
+					id: zod.string().optional(),
+					name: zod.string().optional(),
+				})
+				.optional(),
+			ver: zod.number().optional().describe('Version number of the case.'),
+		})
+		.optional()
+		.describe('Message representing a case.'),
+	changes: zod
+		.array(
+			zod.object({
+				field: zod.string().optional(),
+				newValue: zod.any().optional(),
+				oldValue: zod.any().optional(),
+			}),
+		)
+		.optional(),
+});
 
 /**
  * @summary RPC method for searching cases.
@@ -3236,7 +3305,7 @@ export const searchCases2Params = zod.object({
 export const searchCases2QueryParams = zod.object({
 	page: zod.number().optional().describe('Page number for pagination.'),
 	size: zod.number().optional().describe('Number of results per page.'),
-	q: zod.string().optional().describe('Query string for searching cases.'),
+	q: zod.string().optional().describe('General query string.'),
 	ids: zod
 		.array(zod.string())
 		.optional()
@@ -3250,6 +3319,23 @@ export const searchCases2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Key-value pairs for additional filtering.'),
+	queryTargetFull: zod
+		.boolean()
+		.optional()
+		.describe('Search everywhere (no restrictions)'),
+	queryTargetSubject: zod
+		.boolean()
+		.optional()
+		.describe('Search in case subject.'),
+	queryTargetName: zod
+		.boolean()
+		.optional()
+		.describe('Search in case name or number.'),
+	queryTargetContactInfo: zod
+		.boolean()
+		.optional()
+		.describe("Search in contact's email, phone, etc."),
+	queryTargetId: zod.boolean().optional().describe('Search in case id'),
 });
 
 export const searchCases2ResponseItemsItemRelatedDataItemRelationTypeDefault =

@@ -6,9 +6,7 @@
  */
 import { faker } from '@faker-js/faker';
 
-import { http, HttpResponse, delay } from 'msw';
-
-import { WfmAbsenceType } from '.././_models';
+import { delay, HttpResponse, http } from 'msw';
 import type {
 	WfmCreateAgentAbsenceResponse,
 	WfmCreateAgentsAbsencesResponse,
@@ -18,6 +16,7 @@ import type {
 	WfmSearchAgentsAbsencesResponse,
 	WfmUpdateAgentAbsenceResponse,
 } from '.././_models';
+import { WfmAbsenceType } from '.././_models';
 
 export const getAgentAbsenceServiceSearchAgentsAbsencesResponseMock = (
 	overrideResponse: Partial<WfmSearchAgentsAbsencesResponse> = {},

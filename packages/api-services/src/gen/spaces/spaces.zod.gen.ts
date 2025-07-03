@@ -47,7 +47,7 @@ export const spacesListSpacesQueryParams = zod.object({
 		.array(zod.string().regex(spacesListSpacesQuerySortItemRegExp))
 		.optional()
 		.describe(
-			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = "-" / "!"\nASC    = [ "+" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `state`',
+			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `state`',
 		),
 	fields: zod.array(zod.string()).optional(),
 	id: zod

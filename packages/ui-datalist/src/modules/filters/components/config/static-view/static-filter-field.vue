@@ -15,6 +15,7 @@
 <script lang="ts" setup>
 import { isEmpty } from '@webitel/ui-sdk/scripts';
 import { computed } from 'vue';
+
 import { StaticFilterEmits, StaticFilterProps } from '../../types/Filter.types';
 
 /* Author @Lera24

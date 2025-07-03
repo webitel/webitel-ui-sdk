@@ -9,29 +9,37 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Retrieve a list of sources or search sources
  */
+export const listSourcesQueryPageDefault = '1';
+export const listSourcesQuerySizeDefault = '20';
+export const listSourcesQuerySortDefault = 'name:desc';
+
 export const listSourcesQueryParams = zod.object({
 	page: zod
 		.number()
-		.optional()
-		.describe('Page number of result dataset records. offset = (page*size)'),
+		.default(listSourcesQueryPageDefault)
+		.describe(
+			'Page number of result dataset records. offset = (page * size)\nDefault: 0',
+		),
 	size: zod
 		.number()
-		.optional()
-		.describe('Size count of records on result page. limit = (size++)'),
+		.default(listSourcesQuerySizeDefault)
+		.describe(
+			'Size count of records on result page. limit = (size++)\nDefault: 25',
+		),
 	fields: zod
 		.array(zod.string())
 		.optional()
-		.describe('Fields to be retrieved as a result.'),
+		.describe('Fields to be retrieved as a result.\nDefault: [] (all fields)'),
 	sort: zod
 		.string()
-		.optional()
-		.describe('Sort the result according to fields.'),
+		.default(listSourcesQuerySortDefault)
+		.describe('Sort the result according to fields.\nDefault: \"id:desc\"'),
 	id: zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
 	q: zod
 		.string()
 		.optional()
 		.describe(
-			'Search query string for filtering by name. Supports:\n- Wildcards (*) for substring matching\n- Placeholder (?) for single character substitution\n- Exact match for full names',
+			'Search query string for filtering by name. Supports:\n- Wildcards (*)\n- Placeholder (?)\n- Exact match',
 		),
 	type: zod
 		.array(
@@ -55,8 +63,6 @@ export const listSourcesResponseItemsItemDescriptionMax = 500;
 export const listSourcesResponseItemsItemNameMin = 3;
 
 export const listSourcesResponseItemsItemNameMax = 100;
-
-export const listSourcesResponseItemsItemNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const listSourcesResponseItemsItemTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const listSourcesResponse = zod
@@ -90,7 +96,6 @@ export const listSourcesResponse = zod
 							.string()
 							.min(listSourcesResponseItemsItemNameMin)
 							.max(listSourcesResponseItemsItemNameMax)
-							.regex(listSourcesResponseItemsItemNameRegExp)
 							.describe('A unique, descriptive name for the source.'),
 						type: zod
 							.enum([
@@ -140,14 +145,11 @@ export const createSourceQueryParams = zod.object({
 });
 
 export const createSourceBodyDefault = { name: 'Default Source', type: 'CALL' };
-export const createSourceBodyDescriptionDefault = 'No description provided';
 export const createSourceBodyDescriptionMax = 500;
 export const createSourceBodyNameDefault = 'New Source';
 export const createSourceBodyNameMin = 2;
 
 export const createSourceBodyNameMax = 100;
-
-export const createSourceBodyNameRegExp = /^[a-zA-Z0-9_\- ]+$/;
 export const createSourceBodyTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const createSourceBody = zod
@@ -155,13 +157,12 @@ export const createSourceBody = zod
 		description: zod
 			.string()
 			.max(createSourceBodyDescriptionMax)
-			.default(createSourceBodyDescriptionDefault)
+			.optional()
 			.describe('A short description of the source'),
 		name: zod
 			.string()
 			.min(createSourceBodyNameMin)
 			.max(createSourceBodyNameMax)
-			.regex(createSourceBodyNameRegExp)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -183,8 +184,6 @@ export const createSourceResponseDescriptionMax = 500;
 export const createSourceResponseNameMin = 3;
 
 export const createSourceResponseNameMax = 100;
-
-export const createSourceResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const createSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const createSourceResponse = zod
@@ -208,7 +207,6 @@ export const createSourceResponse = zod
 			.string()
 			.min(createSourceResponseNameMin)
 			.max(createSourceResponseNameMax)
-			.regex(createSourceResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([
@@ -244,8 +242,6 @@ export const deleteSourceResponseDescriptionMax = 500;
 export const deleteSourceResponseNameMin = 3;
 
 export const deleteSourceResponseNameMax = 100;
-
-export const deleteSourceResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const deleteSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const deleteSourceResponse = zod
@@ -269,7 +265,6 @@ export const deleteSourceResponse = zod
 			.string()
 			.min(deleteSourceResponseNameMin)
 			.max(deleteSourceResponseNameMax)
-			.regex(deleteSourceResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([
@@ -312,8 +307,6 @@ export const locateSourceResponseSourceDescriptionMax = 500;
 export const locateSourceResponseSourceNameMin = 3;
 
 export const locateSourceResponseSourceNameMax = 100;
-
-export const locateSourceResponseSourceNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const locateSourceResponseSourceTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const locateSourceResponse = zod
@@ -341,7 +334,6 @@ export const locateSourceResponse = zod
 					.string()
 					.min(locateSourceResponseSourceNameMin)
 					.max(locateSourceResponseSourceNameMax)
-					.regex(locateSourceResponseSourceNameRegExp)
 					.describe('A unique, descriptive name for the source.'),
 				type: zod
 					.enum([
@@ -384,14 +376,11 @@ export const updateSource2BodyDefault = {
 	name: 'Default Source',
 	type: 'CALL',
 };
-export const updateSource2BodyDescriptionDefault = 'No description provided';
 export const updateSource2BodyDescriptionMax = 500;
 export const updateSource2BodyNameDefault = 'New Source';
 export const updateSource2BodyNameMin = 2;
 
 export const updateSource2BodyNameMax = 100;
-
-export const updateSource2BodyNameRegExp = /^[a-zA-Z0-9_\- ]+$/;
 export const updateSource2BodyTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSource2Body = zod
@@ -399,13 +388,12 @@ export const updateSource2Body = zod
 		description: zod
 			.string()
 			.max(updateSource2BodyDescriptionMax)
-			.default(updateSource2BodyDescriptionDefault)
+			.optional()
 			.describe('A short description of the source'),
 		name: zod
 			.string()
 			.min(updateSource2BodyNameMin)
 			.max(updateSource2BodyNameMax)
-			.regex(updateSource2BodyNameRegExp)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -427,8 +415,6 @@ export const updateSource2ResponseDescriptionMax = 500;
 export const updateSource2ResponseNameMin = 3;
 
 export const updateSource2ResponseNameMax = 100;
-
-export const updateSource2ResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const updateSource2ResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSource2Response = zod
@@ -452,7 +438,6 @@ export const updateSource2Response = zod
 			.string()
 			.min(updateSource2ResponseNameMin)
 			.max(updateSource2ResponseNameMax)
-			.regex(updateSource2ResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([
@@ -489,14 +474,11 @@ export const updateSourceQueryParams = zod.object({
 });
 
 export const updateSourceBodyDefault = { name: 'Default Source', type: 'CALL' };
-export const updateSourceBodyDescriptionDefault = 'No description provided';
 export const updateSourceBodyDescriptionMax = 500;
 export const updateSourceBodyNameDefault = 'New Source';
 export const updateSourceBodyNameMin = 2;
 
 export const updateSourceBodyNameMax = 100;
-
-export const updateSourceBodyNameRegExp = /^[a-zA-Z0-9_\- ]+$/;
 export const updateSourceBodyTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSourceBody = zod
@@ -504,13 +486,12 @@ export const updateSourceBody = zod
 		description: zod
 			.string()
 			.max(updateSourceBodyDescriptionMax)
-			.default(updateSourceBodyDescriptionDefault)
+			.optional()
 			.describe('A short description of the source'),
 		name: zod
 			.string()
 			.min(updateSourceBodyNameMin)
 			.max(updateSourceBodyNameMax)
-			.regex(updateSourceBodyNameRegExp)
 			.describe('The name of the source'),
 		type: zod
 			.enum([
@@ -532,8 +513,6 @@ export const updateSourceResponseDescriptionMax = 500;
 export const updateSourceResponseNameMin = 3;
 
 export const updateSourceResponseNameMax = 100;
-
-export const updateSourceResponseNameRegExp = /^[a-zA-Z0-9_\-\s]+$/;
 export const updateSourceResponseTypeDefault = 'TYPE_UNSPECIFIED';
 
 export const updateSourceResponse = zod
@@ -557,7 +536,6 @@ export const updateSourceResponse = zod
 			.string()
 			.min(updateSourceResponseNameMin)
 			.max(updateSourceResponseNameMax)
-			.regex(updateSourceResponseNameRegExp)
 			.describe('A unique, descriptive name for the source.'),
 		type: zod
 			.enum([

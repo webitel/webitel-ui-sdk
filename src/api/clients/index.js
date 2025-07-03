@@ -21,6 +21,7 @@ import lists from './lists/blacklists';
 import media from './media/media';
 import object from './object/object';
 import queues from './queues/queues';
+import quickReplies from './quickReplies/quickReplies';
 import roles from './roles/roles';
 import skills from './skills/skills';
 import slas from './slas/slas';
@@ -56,6 +57,7 @@ export {
   media,
   object,
   queues,
+  quickReplies,
   roles,
   skills,
   slas,

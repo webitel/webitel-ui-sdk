@@ -18,7 +18,7 @@ export const usersReadUser2Response = zod.object({
 				.string()
 				.optional()
 				.describe(
-					'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+					'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 				),
 			contact: zod
 				.object({
@@ -151,7 +151,7 @@ export const usersDeleteUsers2Response = zod.object({
 						.string()
 						.optional()
 						.describe(
-							'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+							'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 						),
 					contact: zod
 						.object({
@@ -332,7 +332,7 @@ export const usersSearchUsersResponse = zod.object({
 						.string()
 						.optional()
 						.describe(
-							'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+							'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 						),
 					contact: zod
 						.object({
@@ -462,7 +462,7 @@ export const usersCreateUserBody = zod.object({
 				.string()
 				.optional()
 				.describe(
-					'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+					'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 				),
 			contact: zod
 				.object({
@@ -586,7 +586,7 @@ export const usersCreateUserResponse = zod.object({
 				.string()
 				.optional()
 				.describe(
-					'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+					'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 				),
 			contact: zod
 				.object({
@@ -742,7 +742,7 @@ export const usersSearchUsers2Response = zod.object({
 						.string()
 						.optional()
 						.describe(
-							'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+							'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 						),
 					contact: zod
 						.object({
@@ -885,7 +885,7 @@ export const usersDeleteUsersResponse = zod.object({
 						.string()
 						.optional()
 						.describe(
-							'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+							'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 						),
 					contact: zod
 						.object({
@@ -1019,7 +1019,7 @@ export const usersReadUserResponse = zod.object({
 				.string()
 				.optional()
 				.describe(
-					'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+					'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 				),
 			contact: zod
 				.object({
@@ -1156,7 +1156,7 @@ export const usersUpdateUser2Body = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+			'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 		),
 	contact: zod
 		.object({
@@ -1274,7 +1274,7 @@ export const usersUpdateUser2Response = zod
 			.string()
 			.optional()
 			.describe(
-				'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+				'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 			),
 		contact: zod
 			.object({
@@ -1401,7 +1401,7 @@ export const usersUpdateUserBody = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+			'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 		),
 	contact: zod
 		.object({
@@ -1519,7 +1519,7 @@ export const usersUpdateUserResponse = zod
 			.string()
 			.optional()
 			.describe(
-				'The "chat_name" field is used to store the name displayed externally on the platform.\nFor example, "chat_name" is shown when an agent connects to chats with clients.',
+				'The \"chat_name\" field is used to store the name displayed externally on the platform.\nFor example, \"chat_name\" is shown when an agent connects to chats with clients.',
 			),
 		contact: zod
 			.object({
