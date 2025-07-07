@@ -26,8 +26,8 @@ import type {
 } from '../types/UserAccess.d.ts';
 
 export const createUserAccessStore = ({
-                                        namespace = 'userinfo',
-                                      }: CreateUserAccessStoreConfig = {}) => {
+  namespace = 'userinfo',
+}: CreateUserAccessStoreConfig = {}) => {
   return defineStore(`${namespace}/access`, (): UserAccessStore => {
     let globalAccess: GlobalActionAccessMap = new Map();
     let scopeAccess: ScopeAccessMap = new Map();
@@ -75,17 +75,23 @@ export const createUserAccessStore = ({
         return sectionVisibilityAccess.get(section);
       };
 
-      // const allowGlobalAccess = hasReadAccess();
-      // if (allowGlobalAccess) return true;
-
+      // Condition 1: Check for application-level visibility.
       const allowAppVisibility = hasApplicationVisibility(appOfSection);
+      // Condition 2: Check for 'Read (Select)' access on the specific object.
       const allowObjectAccess = hasReadAccess(objectOfSection);
+      // Condition 3: Check for direct visibility grant for the section itself.
       const allowSectionVisibility = hasSectionVisibilityAccess(section);
 
+      // The user must satisfy all three conditions to see the section.
       return allowAppVisibility && allowObjectAccess && allowSectionVisibility;
     };
 
+     // A Vue Router navigation guard that protects routes based on section visibility.
+     // It inspects the route's metadata to find the required UI section
+     // and checks for access using `hasSectionVisibility`.
+     // If access is denied, it redirects to the '/access-denied' page.
     const routeAccessGuard: NavigationGuard = (to) => {
+      // Find the first matched route (from child to parent) that has section metadata.
       const matchedRoute = to.matched
         .toReversed()
         .find(({ meta }) => meta.UiSection || meta.paramForSectionName);
@@ -93,25 +99,27 @@ export const createUserAccessStore = ({
       const wtObject = to.matched
         .toReversed()
         .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject;
+      // If no route has section metadata, access is not restricted by this guard.
       if (!matchedRoute) {
         return true;
       }
 
       const { meta } = matchedRoute;
 
+      // Determine the UI section from route metadata, supporting dynamic sections from params.
       const sectionParamName = meta.paramForSectionName as string | undefined;
       const uiSection = sectionParamName
         ? (to.params[sectionParamName] as UiSection)
         : (meta.UiSection as UiSection);
 
+      // Check for permission. If the user doesn't have visibility or the section is invalid, deny access.
       if (!hasSectionVisibility(uiSection, wtObject) || !uiSection) {
         return { path: '/access-denied' };
       }
 
+      // If all checks pass, allow navigation.
       return true;
     };
-
-
     const hasSpecialGlobalActionAccess = (id: SpecialGlobalAction): boolean => {
       return !!globalAccess.get(id);
     };
