@@ -90,7 +90,7 @@ export const createUserAccessStore = ({
       // Find the first matched route (from child to parent) that has section metadata.
       const matchedRoute = to.matched
         .toReversed()
-        .find(({ meta }) => meta.UiSection || meta.paramForSectionName);
+        .find(({ meta }) => meta.UiSection || meta.routeParamForSectionName);
 
       const wtObject = to.matched
         .toReversed()
@@ -103,7 +103,7 @@ export const createUserAccessStore = ({
       const { meta } = matchedRoute;
 
       // Determine the UI section from route metadata, supporting dynamic sections from params.
-      const sectionParamName = meta.paramForSectionName as string | undefined;
+      const sectionParamName = meta.routeParamForSectionName as string | undefined;
       const uiSection = sectionParamName
         ? (to.params[sectionParamName] as UiSection)
         : (meta.UiSection as UiSection);
