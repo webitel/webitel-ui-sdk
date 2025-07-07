@@ -51,7 +51,6 @@ export const WtObject = {
   Slas: 'slas',
   ServiceCatalog: 'serviceCatalog',
   CaseSource: 'caseSource',
-  CrmConfiguration: 'crmConfiguration',
   CloseReasonGroup: 'closeReasonGroup',
   Priorities: 'priorities',
   Status: 'status',
