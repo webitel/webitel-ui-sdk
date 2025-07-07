@@ -75,14 +75,10 @@ export const createUserAccessStore = ({
         return sectionVisibilityAccess.get(section);
       };
 
-      // Condition 1: Check for application-level visibility.
       const allowAppVisibility = hasApplicationVisibility(appOfSection);
-      // Condition 2: Check for 'Read (Select)' access on the specific object.
       const allowObjectAccess = hasReadAccess(objectOfSection);
-      // Condition 3: Check for direct visibility grant for the section itself.
       const allowSectionVisibility = hasSectionVisibilityAccess(section);
 
-      // The user must satisfy all three conditions to see the section.
       return allowAppVisibility && allowObjectAccess && allowSectionVisibility;
     };
 
