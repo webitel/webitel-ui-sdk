@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.8.21",
+  "version": "25.8.23",
   "private": false,
   "scripts": {
     "make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",

@@ -215,6 +215,10 @@ export default {
       [ChatGatewayProvider.INFOBIP]: 'Infobip',
       [ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
     },
+    quickReplies: {
+      quickReplies: 'Швидка відповідь | Швидкі відповіді',
+      quickRepliesEmpty: 'Ще немає швидких відповідей',
+    },
   },
   channel: {
     state: {

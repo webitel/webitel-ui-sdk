@@ -1,8 +1,10 @@
 <template>
   <wt-transition
-    class="wt-replace-transition"
-    :duration="props.duration"
+    :appear="appear"
+    :duration="duration"
+    :mode="mode"
     :name="transitionName"
+    class="wt-replace-transition"
   >
     <template #default>
       <slot />
@@ -16,11 +18,12 @@ import { computed } from 'vue';
 import WtTransition from '../wt-transition.vue';
 
 const props = defineProps({
-  // can choose replace pattern [opacity, slide ets]
+  // can choose replace pattern [opacity, slide-up ets]
   // ATTENTION!! need to add another names(patterns) to <wt-transition/>, now we have fade-opacity only
   pattern: {
     type: String,
     default: 'opacity',
+    options: ['opacity', 'slide-up'],
   },
   duration: {
     type: String,
@@ -29,6 +32,10 @@ const props = defineProps({
   appear: {
     type: Boolean,
     default: false,
+  },
+  mode: {
+    type: String,
+    default: 'out-in',
   },
 });
 
