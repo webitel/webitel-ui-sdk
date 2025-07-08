@@ -1,7 +1,7 @@
 export const CrmSections = {
   Contacts: 'contacts',
   Cases: 'cases',
-  CrmConfiguration: 'crm-configuration',
+  Configuration: 'crm-configuration',
 
   // CONFIGURATION - LOOKUPS
   Slas: 'slas',

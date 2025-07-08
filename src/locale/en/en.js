@@ -281,7 +281,7 @@ export default {
       sections: {
         [CrmSections.Contacts]: 'Contacts',
         [CrmSections.Cases]: 'Cases',
-        [CrmSections.CrmConfiguration]: 'Configuration',
+        [CrmSections.Configuration]: 'Configuration',
         [CrmSections.Priorities]: 'Priorities',
         [CrmSections.CloseReasonGroups]: 'Closure reasons',
         [CrmSections.Statuses]: 'Statuses',
