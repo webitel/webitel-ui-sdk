@@ -14,15 +14,17 @@ const apps = [
 
 <template>
   <wt-app-header>
-    <wt-app-navigator
-      current-app="admin"
-      :apps="apps"
-      dark-mode
-    />
-    <wt-app-navigator
-      current-app="admin"
-      :apps="apps"
-    />
+    <template #end>
+      <wt-app-navigator
+        current-app="admin"
+        :apps="apps"
+        dark-mode
+      />
+      <wt-app-navigator
+        current-app="admin"
+        :apps="apps"
+      />
+    </template>
   </wt-app-header>
 </template>
 
