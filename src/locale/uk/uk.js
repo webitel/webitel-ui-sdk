@@ -55,7 +55,7 @@ export default {
       en: 'English',
       es: 'Español',
       ru: 'Русский',
-      ua: 'Українська',
+      uk: 'Українська',
       kz: 'Қазақ',
     },
     from: 'Від',
@@ -700,6 +700,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Сталася помилка завантаження історії чату',
-    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”',
+    markChatProcessed: 'Не вдалося перемістити чат у "Закриті"',
   },
 };
