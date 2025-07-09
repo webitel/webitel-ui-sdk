@@ -39,7 +39,7 @@ export default {
       en: 'English',
       es: 'Español',
       ru: 'Орысша',
-      ua: 'Українська',
+      uk: 'Українська',
       kz: 'Қазақ',
     },
     from: 'Бастап',
