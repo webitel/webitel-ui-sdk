@@ -4,13 +4,13 @@ import en from './en/en.js';
 import es from './es/es.js';
 import kz from './kz/kz.js';
 import ru from './ru/ru.js';
-import ua from './ua/ua.js';
+import uk from './uk/uk.js';
 
 const messages = {
   en,
   es,
   ru,
-  ua,
+  uk,
   kz,
 };
 
