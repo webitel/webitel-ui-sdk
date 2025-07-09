@@ -1,4 +1,5 @@
-import qs from 'qs';
+import * as qs from 'qs-esm';
+
 import { generateInstance } from '../../axios/generateInstance';
 import { updateTokenInterceptor } from '../../interceptors/request/updateToken.interceptor';
 import { handleUnauthorizedInterceptor } from '../../interceptors/response/handleUnauthorized.interceptor';
