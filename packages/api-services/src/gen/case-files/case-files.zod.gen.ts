@@ -33,12 +33,6 @@ export const listFilesResponse = zod
 			.array(
 				zod
 					.object({
-						author: zod
-							.object({
-								id: zod.string().optional(),
-								name: zod.string().optional(),
-							})
-							.optional(),
 						createdAt: zod
 							.string()
 							.optional()
@@ -47,6 +41,7 @@ export const listFilesResponse = zod
 							.object({
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+								type: zod.string().optional(),
 							})
 							.optional(),
 						id: zod.string().optional().describe('Storage file ID.'),
@@ -77,12 +72,6 @@ export const deleteFileParams = zod.object({
 
 export const deleteFileResponse = zod
 	.object({
-		author: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
 		createdAt: zod
 			.string()
 			.optional()
@@ -91,6 +80,7 @@ export const deleteFileResponse = zod
 			.object({
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				type: zod.string().optional(),
 			})
 			.optional(),
 		id: zod.string().optional().describe('Storage file ID.'),

@@ -30,23 +30,10 @@ export const searchCasesQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('Contact ID for filtering cases.'),
-	queryTargetFull: zod
-		.boolean()
+	qin: zod
+		.string()
 		.optional()
-		.describe('Search everywhere (no restrictions)'),
-	queryTargetSubject: zod
-		.boolean()
-		.optional()
-		.describe('Search in case subject.'),
-	queryTargetName: zod
-		.boolean()
-		.optional()
-		.describe('Search in case name or number.'),
-	queryTargetContactInfo: zod
-		.boolean()
-		.optional()
-		.describe("Search in contact's email, phone, etc."),
-	queryTargetId: zod.boolean().optional().describe('Search in case id'),
+		.describe("Specify which fields to apply 'q' to."),
 });
 
 export const searchCasesResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -203,12 +190,6 @@ export const searchCasesResponse = zod
 									.array(
 										zod
 											.object({
-												author: zod
-													.object({
-														id: zod.string().optional(),
-														name: zod.string().optional(),
-													})
-													.optional(),
 												createdAt: zod
 													.string()
 													.optional()
@@ -217,6 +198,7 @@ export const searchCasesResponse = zod
 													.object({
 														id: zod.string().optional(),
 														name: zod.string().optional(),
+														type: zod.string().optional(),
 													})
 													.optional(),
 												id: zod
@@ -849,12 +831,6 @@ export const createCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -863,6 +839,7 @@ export const createCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -1321,12 +1298,6 @@ export const deleteCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -1335,6 +1306,7 @@ export const deleteCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -1793,12 +1765,6 @@ export const locateCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -1807,6 +1773,7 @@ export const locateCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -2372,12 +2339,6 @@ export const updateCase2Response = zod.object({
 						.array(
 							zod
 								.object({
-									author: zod
-										.object({
-											id: zod.string().optional(),
-											name: zod.string().optional(),
-										})
-										.optional(),
 									createdAt: zod
 										.string()
 										.optional()
@@ -2386,6 +2347,7 @@ export const updateCase2Response = zod.object({
 										.object({
 											id: zod.string().optional(),
 											name: zod.string().optional(),
+											type: zod.string().optional(),
 										})
 										.optional(),
 									id: zod.string().optional().describe('Storage file ID.'),
@@ -2966,12 +2928,6 @@ export const updateCaseResponse = zod.object({
 						.array(
 							zod
 								.object({
-									author: zod
-										.object({
-											id: zod.string().optional(),
-											name: zod.string().optional(),
-										})
-										.optional(),
 									createdAt: zod
 										.string()
 										.optional()
@@ -2980,6 +2936,7 @@ export const updateCaseResponse = zod.object({
 										.object({
 											id: zod.string().optional(),
 											name: zod.string().optional(),
+											type: zod.string().optional(),
 										})
 										.optional(),
 									id: zod.string().optional().describe('Storage file ID.'),
@@ -3319,23 +3276,10 @@ export const searchCases2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Key-value pairs for additional filtering.'),
-	queryTargetFull: zod
-		.boolean()
+	qin: zod
+		.string()
 		.optional()
-		.describe('Search everywhere (no restrictions)'),
-	queryTargetSubject: zod
-		.boolean()
-		.optional()
-		.describe('Search in case subject.'),
-	queryTargetName: zod
-		.boolean()
-		.optional()
-		.describe('Search in case name or number.'),
-	queryTargetContactInfo: zod
-		.boolean()
-		.optional()
-		.describe("Search in contact's email, phone, etc."),
-	queryTargetId: zod.boolean().optional().describe('Search in case id'),
+		.describe("Specify which fields to apply 'q' to."),
 });
 
 export const searchCases2ResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -3493,12 +3437,6 @@ export const searchCases2Response = zod
 									.array(
 										zod
 											.object({
-												author: zod
-													.object({
-														id: zod.string().optional(),
-														name: zod.string().optional(),
-													})
-													.optional(),
 												createdAt: zod
 													.string()
 													.optional()
@@ -3507,6 +3445,7 @@ export const searchCases2Response = zod
 													.object({
 														id: zod.string().optional(),
 														name: zod.string().optional(),
+														type: zod.string().optional(),
 													})
 													.optional(),
 												id: zod

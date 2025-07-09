@@ -21,6 +21,8 @@ Name will be name of the gateway. */
 	/** Unique ID of the latest version of the update.
 This ID changes after any update to the underlying value(s). */
 	etag?: string;
+	/** External user id. */
+	externalId?: string;
 	/** The unique ID of the association. Never changes. */
 	id?: string;
 	/** Protocol used to connect the IM client. */

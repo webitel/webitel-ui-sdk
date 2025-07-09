@@ -1,4 +1,4 @@
-import qs from 'query-string';
+import qs from 'qs';
 
 const generateUrlTransformer = (baseUrl) => (params) => {
 	const stringifyOptions = {
