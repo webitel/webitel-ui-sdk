@@ -152,7 +152,7 @@ export const mapWtObjectToUiSection: Record<
     [WtObject.Status]: CrmSections.Statuses,
     [WtObject.Source]: CrmSections.Sources,
     [WtObject.ContactGroup]: CrmSections.ContactGroups,
-    [WtObject.SectionCustomization]: CrmSections.SectionCustomization,
+    [WtObject.WtTypeExtensions]: CrmSections.SectionCustomization,
     [WtObject.CustomLookups]: CrmSections.CustomLookups,
   },
 
