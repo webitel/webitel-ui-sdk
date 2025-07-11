@@ -1,4 +1,4 @@
-import qs from 'qs';
+import * as qs from 'qs-esm';
 
 import generateInstance from '../../axios/generateInstance.js';
 import updateTokenInterceptor from '../../interceptors/request/updateToken.interceptor.js';

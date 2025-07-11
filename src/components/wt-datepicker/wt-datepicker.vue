@@ -23,7 +23,7 @@
       ref="datepicker"
       :close-on-auto-apply="false"
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
-      :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
+      :locale="$i18n.locale"
       :model-value="+value"
       :placeholder="
         placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')

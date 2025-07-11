@@ -39,7 +39,7 @@ export default {
       en: 'English',
       es: 'Español',
       ru: 'Орысша',
-      ua: 'Українська',
+      uk: 'Українська',
       kz: 'Қазақ',
     },
     from: 'Бастап',
@@ -252,6 +252,13 @@ export default {
     },
     appNavigator: {
       title: 'Webitel қосымшалары',
+      admin: 'Әкімші',
+      agent: 'Оператор',
+      supervisor: 'Супервизор',
+      audit: 'Аудит',
+      history: 'Тарих',
+      grafana: 'Grafana',
+      crm: 'CRM',
     },
     headerActions: {
       account: 'Аккаунт',
@@ -323,6 +330,35 @@ export default {
         min: 'Мин',
         unlimited: 'Лимитсіз',
       },
+      statusSelectErrorPopup: {
+        title: 'Назар аударыңыз',
+        message:
+          'Үзіліс алатын операторлар шегі асып кетті. Үзіліс қазір қол жетімді емес.',
+      },
     },
+    saveFailedPopup: {
+      title: 'Сақтау сәтсіз аяқталды',
+      label: 'Бірдеңе дұрыс болмады, қайталап көріңіз',
+      exportToJson: 'JSON-ға экспорттау',
+    },
+    filters: {
+      datetime: {
+        today: 'Бүгін',
+        thisWeek: 'Осы апта',
+        thisMonth: 'Осы ай',
+        custom: 'Арнайы күн аралығы',
+      },
+    },
+  },
+  systemNotifications: {
+    success: {
+      update: ({ named }) => `${named('entity')} жаңартылды`,
+      create: ({ named }) => `${named('entity')} сақталды`,
+      delete: ({ named }) => `${named('entity')} жойылды`,
+    },
+  },
+  errorNotifications: {
+    chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
+    markChatProcessed: 'Чатты "Жабық" күйіне ауыстыру сәтсіз аяқталды',
   },
 };
