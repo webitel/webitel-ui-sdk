@@ -55,7 +55,7 @@ export default {
       en: 'English',
       es: 'Español',
       ru: 'Русский',
-      ua: 'Українська',
+      uk: 'Українська',
       kz: 'Қазақ',
     },
     from: 'Від',
@@ -214,6 +214,10 @@ export default {
       [ChatGatewayProvider.WEBCHAT]: 'Web chat',
       [ChatGatewayProvider.INFOBIP]: 'Infobip',
       [ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+    },
+    quickReplies: {
+      quickReplies: 'Швидка відповідь | Швидкі відповіді',
+      quickRepliesEmpty: 'Ще немає швидких відповідей',
     },
   },
   channel: {
@@ -696,6 +700,6 @@ export default {
   },
   errorNotifications: {
     chatHistoryApi: 'Сталася помилка завантаження історії чату',
-    markChatProcessed: 'Не вдалося перемістити чат у “Закриті”',
+    markChatProcessed: 'Не вдалося перемістити чат у "Закриті"',
   },
 };

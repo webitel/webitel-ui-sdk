@@ -15,7 +15,7 @@ export type SearchCases2Params = {
 	 */
 	size?: number;
 	/**
-	 * Query string for searching cases.
+	 * General query string.
 	 */
 	q?: string;
 	/**
@@ -34,4 +34,8 @@ export type SearchCases2Params = {
 	 * Key-value pairs for additional filtering.
 	 */
 	filters?: string[];
+	/**
+	 * Specify which fields to apply 'q' to.
+	 */
+	qin?: string;
 };

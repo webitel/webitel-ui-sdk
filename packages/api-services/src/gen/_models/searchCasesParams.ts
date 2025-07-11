@@ -15,7 +15,7 @@ export type SearchCasesParams = {
 	 */
 	size?: number;
 	/**
-	 * Query string for searching cases.
+	 * General query string.
 	 */
 	q?: string;
 	/**
@@ -38,4 +38,8 @@ export type SearchCasesParams = {
 	 * Contact ID for filtering cases.
 	 */
 	contactId?: string;
+	/**
+	 * Specify which fields to apply 'q' to.
+	 */
+	qin?: string;
 };

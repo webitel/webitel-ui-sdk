@@ -55,7 +55,7 @@ export default {
       en: 'English',
       es: 'Español',
       ru: 'Русский',
-      ua: 'Українська',
+      uk: 'Українська',
       kz: 'Қазақ',
     },
     from: 'От',
@@ -214,6 +214,10 @@ export default {
       [ChatGatewayProvider.WEBCHAT]: 'Web chat',
       [ChatGatewayProvider.INFOBIP]: 'Infobip',
       [ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+    },
+    quickReplies: {
+      quickReplies: 'Быстрый ответ | Быстрые ответы',
+      quickRepliesEmpty: 'Еще нет быстрых ответов',
     },
   },
   channel: {

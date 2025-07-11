@@ -75,8 +75,8 @@ const addSource = async ({ itemInstance }) => {
 
 const updateSource = async ({ itemInstance, itemId: id }) => {
 	const item = applyTransform(itemInstance, [
-    sanitize(getShallowFieldsToSendFromZodSchema(updateSourceBody)),
-    camelToSnake(),
+		sanitize(getShallowFieldsToSendFromZodSchema(updateSourceBody)),
+		camelToSnake(),
 	]);
 
 	try {

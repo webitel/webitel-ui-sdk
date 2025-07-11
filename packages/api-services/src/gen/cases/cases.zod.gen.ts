@@ -12,7 +12,7 @@ import { z as zod } from 'zod/v4';
 export const searchCasesQueryParams = zod.object({
 	page: zod.number().optional().describe('Page number for pagination.'),
 	size: zod.number().optional().describe('Number of results per page.'),
-	q: zod.string().optional().describe('Query string for searching cases.'),
+	q: zod.string().optional().describe('General query string.'),
 	ids: zod
 		.array(zod.string())
 		.optional()
@@ -30,6 +30,10 @@ export const searchCasesQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('Contact ID for filtering cases.'),
+	qin: zod
+		.string()
+		.optional()
+		.describe("Specify which fields to apply 'q' to."),
 });
 
 export const searchCasesResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -186,12 +190,6 @@ export const searchCasesResponse = zod
 									.array(
 										zod
 											.object({
-												author: zod
-													.object({
-														id: zod.string().optional(),
-														name: zod.string().optional(),
-													})
-													.optional(),
 												createdAt: zod
 													.string()
 													.optional()
@@ -200,6 +198,7 @@ export const searchCasesResponse = zod
 													.object({
 														id: zod.string().optional(),
 														name: zod.string().optional(),
+														type: zod.string().optional(),
 													})
 													.optional(),
 												id: zod
@@ -832,12 +831,6 @@ export const createCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -846,6 +839,7 @@ export const createCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -1304,12 +1298,6 @@ export const deleteCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -1318,6 +1306,7 @@ export const deleteCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -1776,12 +1765,6 @@ export const locateCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -1790,6 +1773,7 @@ export const locateCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -2355,12 +2339,6 @@ export const updateCase2Response = zod.object({
 						.array(
 							zod
 								.object({
-									author: zod
-										.object({
-											id: zod.string().optional(),
-											name: zod.string().optional(),
-										})
-										.optional(),
 									createdAt: zod
 										.string()
 										.optional()
@@ -2369,6 +2347,7 @@ export const updateCase2Response = zod.object({
 										.object({
 											id: zod.string().optional(),
 											name: zod.string().optional(),
+											type: zod.string().optional(),
 										})
 										.optional(),
 									id: zod.string().optional().describe('Storage file ID.'),
@@ -2949,12 +2928,6 @@ export const updateCaseResponse = zod.object({
 						.array(
 							zod
 								.object({
-									author: zod
-										.object({
-											id: zod.string().optional(),
-											name: zod.string().optional(),
-										})
-										.optional(),
 									createdAt: zod
 										.string()
 										.optional()
@@ -2963,6 +2936,7 @@ export const updateCaseResponse = zod.object({
 										.object({
 											id: zod.string().optional(),
 											name: zod.string().optional(),
+											type: zod.string().optional(),
 										})
 										.optional(),
 									id: zod.string().optional().describe('Storage file ID.'),
@@ -3288,7 +3262,7 @@ export const searchCases2Params = zod.object({
 export const searchCases2QueryParams = zod.object({
 	page: zod.number().optional().describe('Page number for pagination.'),
 	size: zod.number().optional().describe('Number of results per page.'),
-	q: zod.string().optional().describe('Query string for searching cases.'),
+	q: zod.string().optional().describe('General query string.'),
 	ids: zod
 		.array(zod.string())
 		.optional()
@@ -3302,6 +3276,10 @@ export const searchCases2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Key-value pairs for additional filtering.'),
+	qin: zod
+		.string()
+		.optional()
+		.describe("Specify which fields to apply 'q' to."),
 });
 
 export const searchCases2ResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -3459,12 +3437,6 @@ export const searchCases2Response = zod
 									.array(
 										zod
 											.object({
-												author: zod
-													.object({
-														id: zod.string().optional(),
-														name: zod.string().optional(),
-													})
-													.optional(),
 												createdAt: zod
 													.string()
 													.optional()
@@ -3473,6 +3445,7 @@ export const searchCases2Response = zod
 													.object({
 														id: zod.string().optional(),
 														name: zod.string().optional(),
+														type: zod.string().optional(),
 													})
 													.optional(),
 												id: zod

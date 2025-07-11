@@ -1,4 +1,4 @@
-import qs from 'query-string';
+import * as qs from 'qs-esm';
 
 const generateUrlTransformer = (baseUrl) => (params) => {
 	const stringifyOptions = {
