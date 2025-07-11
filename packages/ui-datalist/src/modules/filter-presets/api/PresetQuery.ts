@@ -37,7 +37,6 @@ const getPresetList = async (params, config: GetPresetListRequestConfig) => {
       merge(getDefaultGetParams()),
       (params) => (useStarToSearch ? starToSearch('search')(params) : params),
     ]);
-
   try {
     const response = await service.searchPresetQuery(
       page,
@@ -72,6 +71,7 @@ const addPreset = async ({
     camelToSnake(),
     (item) => {
       item.preset.namespace = namespace;
+      item.section = namespace;
       return item;
     },
   ]);
@@ -88,6 +88,7 @@ const updatePreset = async ({ item: itemInstance, id, namespace }) => {
     camelToSnake(),
     (item) => {
       item.preset.namespace = namespace;
+      item.section = namespace;
       return item;
     },
   ]);
