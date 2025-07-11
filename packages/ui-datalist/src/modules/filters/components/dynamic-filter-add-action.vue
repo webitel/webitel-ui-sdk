@@ -3,8 +3,8 @@
     disable-click-away
     class="dynamic-filter-add-action"
   >
-    <template #activator>
-      <div class="dynamic-filter-add-action-wrapper">
+    <template #activator="{toggle}">
+      <div class="dynamic-filter-add-action-wrapper" @click="toggle">
         <p v-if="props.showLabel">
           {{ t('webitelUI.filters.addFilter') }}
         </p>
@@ -12,16 +12,13 @@
       </div>
     </template>
 
-    <template #content="{ tooltipSlotScope }">
-      <slot
-        name="form"
-        v-bind="{ tooltipSlotScope }"
-      >
+    <template #content="{ hide }">
+      <slot name="form">
         <dynamic-filter-config-form
           :filter-configs="props.filterConfigs"
-          @cancel="() => tooltipSlotScope.hide()"
+          @cancel="hide"
           @submit="
-            (payload) => submit(payload, { hide: tooltipSlotScope.hide })
+            (payload) => submit(payload, { hide })
           "
         />
       </slot>
