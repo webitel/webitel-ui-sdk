@@ -1,11 +1,9 @@
 /// <reference types="vitest/config" />
-import { PrimeVueResolver } from '@primevue/auto-import-resolver';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import { globbySync } from 'globby';
 import { resolve } from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
@@ -108,10 +106,6 @@ export default (/*{ mode }*/) => {
           'vue-i18n': ['useI18n'],
           'vue-router': ['useRouter', 'useRoute'],
         },
-      }),
-
-      Components({
-        resolvers: [PrimeVueResolver()],
       }),
     ],
     test: {
