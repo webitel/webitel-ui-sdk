@@ -22,5 +22,6 @@ export interface WebitelCasesFile {
 	name?: string;
 	/** File size in bytes. */
 	size?: string;
+	source?: string;
 	url?: string;
 }

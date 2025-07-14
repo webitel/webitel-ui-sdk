@@ -48,6 +48,7 @@ export const listFilesResponse = zod
 						mime: zod.string().optional().describe('MIME type of the file.'),
 						name: zod.string().optional().describe('File name.'),
 						size: zod.string().optional().describe('File size in bytes.'),
+						source: zod.string().optional(),
 						url: zod.string().optional(),
 					})
 					.describe('Metadata for a file associated with a case.'),
@@ -87,6 +88,7 @@ export const deleteFileResponse = zod
 		mime: zod.string().optional().describe('MIME type of the file.'),
 		name: zod.string().optional().describe('File name.'),
 		size: zod.string().optional().describe('File size in bytes.'),
+		source: zod.string().optional(),
 		url: zod.string().optional(),
 	})
 	.describe('Metadata for a file associated with a case.');

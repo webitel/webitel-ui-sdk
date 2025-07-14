@@ -34,4 +34,7 @@ export const SearchSystemSettingNameItem = {
 	task_end_push_notification: 'task_end_push_notification',
 	push_notification_timeout: 'push_notification_timeout',
 	labels_to_limit_contacts: 'labels_to_limit_contacts',
+	autolink_mail_to_contact: 'autolink_mail_to_contact',
+	new_message_sound_notification: 'new_message_sound_notification',
+	new_chat_sound_notification: 'new_chat_sound_notification',
 } as const;

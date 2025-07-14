@@ -273,6 +273,10 @@ export const getSearchCasesResponseMock = (
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
 							]),
+							source: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
 							url: faker.helpers.arrayElement([
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
@@ -1084,6 +1088,10 @@ export const getCreateCaseResponseMock = (
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
+					source: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					url: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
@@ -1869,6 +1877,10 @@ export const getDeleteCaseResponseMock = (
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
+					source: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					url: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
@@ -2651,6 +2663,10 @@ export const getLocateCaseResponseMock = (
 						undefined,
 					]),
 					size: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					source: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
@@ -3443,6 +3459,10 @@ export const getUpdateCase2ResponseMock = (
 								undefined,
 							]),
 							size: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+							source: faker.helpers.arrayElement([
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
 							]),
@@ -4273,6 +4293,10 @@ export const getUpdateCaseResponseMock = (
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
 							]),
+							source: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
 							url: faker.helpers.arrayElement([
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
@@ -5100,6 +5124,10 @@ export const getSearchCases2ResponseMock = (
 								undefined,
 							]),
 							size: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+							source: faker.helpers.arrayElement([
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
 							]),

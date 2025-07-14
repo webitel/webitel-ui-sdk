@@ -39,6 +39,9 @@ export const searchSystemSettingQueryParams = zod.object({
 				'task_end_push_notification',
 				'push_notification_timeout',
 				'labels_to_limit_contacts',
+				'autolink_mail_to_contact',
+				'new_message_sound_notification',
+				'new_chat_sound_notification',
 			]),
 		)
 		.optional()
@@ -79,6 +82,9 @@ export const searchSystemSettingResponse = zod.object({
 						'task_end_push_notification',
 						'push_notification_timeout',
 						'labels_to_limit_contacts',
+						'autolink_mail_to_contact',
+						'new_message_sound_notification',
+						'new_chat_sound_notification',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -116,6 +122,9 @@ export const createSystemSettingBody = zod.object({
 			'task_end_push_notification',
 			'push_notification_timeout',
 			'labels_to_limit_contacts',
+			'autolink_mail_to_contact',
+			'new_message_sound_notification',
+			'new_chat_sound_notification',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -151,6 +160,9 @@ export const createSystemSettingResponse = zod.object({
 			'task_end_push_notification',
 			'push_notification_timeout',
 			'labels_to_limit_contacts',
+			'autolink_mail_to_contact',
+			'new_message_sound_notification',
+			'new_chat_sound_notification',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -209,6 +221,9 @@ export const deleteSystemSettingResponse = zod.object({
 			'task_end_push_notification',
 			'push_notification_timeout',
 			'labels_to_limit_contacts',
+			'autolink_mail_to_contact',
+			'new_message_sound_notification',
+			'new_chat_sound_notification',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -248,6 +263,9 @@ export const readSystemSettingResponse = zod.object({
 			'task_end_push_notification',
 			'push_notification_timeout',
 			'labels_to_limit_contacts',
+			'autolink_mail_to_contact',
+			'new_message_sound_notification',
+			'new_chat_sound_notification',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -291,6 +309,9 @@ export const patchSystemSettingResponse = zod.object({
 			'task_end_push_notification',
 			'push_notification_timeout',
 			'labels_to_limit_contacts',
+			'autolink_mail_to_contact',
+			'new_message_sound_notification',
+			'new_chat_sound_notification',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -332,6 +353,9 @@ export const updateSystemSettingResponse = zod.object({
 			'task_end_push_notification',
 			'push_notification_timeout',
 			'labels_to_limit_contacts',
+			'autolink_mail_to_contact',
+			'new_message_sound_notification',
+			'new_chat_sound_notification',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

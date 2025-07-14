@@ -214,6 +214,7 @@ export const searchCasesResponse = zod
 													.string()
 													.optional()
 													.describe('File size in bytes.'),
+												source: zod.string().optional(),
 												url: zod.string().optional(),
 											})
 											.describe('Metadata for a file associated with a case.'),
@@ -849,6 +850,7 @@ export const createCaseResponse = zod
 									.describe('MIME type of the file.'),
 								name: zod.string().optional().describe('File name.'),
 								size: zod.string().optional().describe('File size in bytes.'),
+								source: zod.string().optional(),
 								url: zod.string().optional(),
 							})
 							.describe('Metadata for a file associated with a case.'),
@@ -1316,6 +1318,7 @@ export const deleteCaseResponse = zod
 									.describe('MIME type of the file.'),
 								name: zod.string().optional().describe('File name.'),
 								size: zod.string().optional().describe('File size in bytes.'),
+								source: zod.string().optional(),
 								url: zod.string().optional(),
 							})
 							.describe('Metadata for a file associated with a case.'),
@@ -1783,6 +1786,7 @@ export const locateCaseResponse = zod
 									.describe('MIME type of the file.'),
 								name: zod.string().optional().describe('File name.'),
 								size: zod.string().optional().describe('File size in bytes.'),
+								source: zod.string().optional(),
 								url: zod.string().optional(),
 							})
 							.describe('Metadata for a file associated with a case.'),
@@ -2357,6 +2361,7 @@ export const updateCase2Response = zod.object({
 										.describe('MIME type of the file.'),
 									name: zod.string().optional().describe('File name.'),
 									size: zod.string().optional().describe('File size in bytes.'),
+									source: zod.string().optional(),
 									url: zod.string().optional(),
 								})
 								.describe('Metadata for a file associated with a case.'),
@@ -2946,6 +2951,7 @@ export const updateCaseResponse = zod.object({
 										.describe('MIME type of the file.'),
 									name: zod.string().optional().describe('File name.'),
 									size: zod.string().optional().describe('File size in bytes.'),
+									source: zod.string().optional(),
 									url: zod.string().optional(),
 								})
 								.describe('Metadata for a file associated with a case.'),
@@ -3461,6 +3467,7 @@ export const searchCases2Response = zod
 													.string()
 													.optional()
 													.describe('File size in bytes.'),
+												source: zod.string().optional(),
 												url: zod.string().optional(),
 											})
 											.describe('Metadata for a file associated with a case.'),

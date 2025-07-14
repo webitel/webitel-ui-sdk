@@ -10,18 +10,18 @@ import { handleUnauthorizedInterceptor } from '../../interceptors/response/handl
  * @returns Configured Axios instance
  */
 export const getDefaultInstance = () => {
-  const stringifyOptions = {
-    arrayFormat: 'repeat',
-  };
+	const stringifyOptions = {
+		arrayFormat: 'repeat',
+	};
 
-  return generateInstance({
-    interceptors: {
-      request: [updateTokenInterceptor],
-      response: [handleUnauthorizedInterceptor],
-    },
-    baseURL: import.meta.env.VITE_API_URL,
-    paramsSerializer: (params) => {
-      return qs.stringify(params, stringifyOptions as IStringifyOptions);
-    },
-  });
+	return generateInstance({
+		interceptors: {
+			request: [updateTokenInterceptor],
+			response: [handleUnauthorizedInterceptor],
+		},
+		baseURL: import.meta.env.VITE_API_URL,
+		paramsSerializer: (params) => {
+			return qs.stringify(params, stringifyOptions as IStringifyOptions);
+		},
+	});
 };
