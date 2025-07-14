@@ -1,21 +1,24 @@
 <template>
   <dynamic-filter-config-view :disabled="readonly">
-    <template #activator="{ visible: configFormVisible }">
+    <template #activator="{ disabled: configFormVisible, toggle }">
       <wt-tooltip
         :disabled="configFormVisible"
         @update:visible="!localValue && fillLocalValue()"
+        @click="toggle"
       >
         <template #activator>
-          <wt-chip color="primary">
-            {{ filter.label || filterConfig.label }}
-            <wt-icon-btn
-              v-if="!filterConfig.notDeletable && !readonly"
-              color="on-primary"
-              icon="close--filled"
-              size="sm"
-              @mousedown.stop="deleteFilter"
-            />
-          </wt-chip>
+          <div @click="toggle">
+            <wt-chip color="primary">
+              {{ filter.label || filterConfig.label }}
+              <wt-icon-btn
+                v-if="!filterConfig.notDeletable && !readonly"
+                color="on-primary"
+                icon="close--filled"
+                size="sm"
+                @mousedown.stop="deleteFilter"
+              />
+            </wt-chip>
+          </div>
         </template>
 
         <template #default>
@@ -44,17 +47,17 @@
       </wt-tooltip>
     </template>
 
-    <template #content="{ tooltipSlotScope }">
+    <template #content="{ hide }">
       <slot
         name="form"
-        v-bind="{ tooltipSlotScope }"
+        v-bind="{ hide }"
       >
         <dynamic-filter-config-form
           :filter="props.filter"
           :filter-config="filterConfig"
-          @cancel="() => tooltipSlotScope.hide()"
+          @cancel="hide"
           @submit="
-            (payload) => submit(payload, { hide: tooltipSlotScope.hide })
+            (payload) => submit(payload, { hide })
           "
         />
       </slot>
