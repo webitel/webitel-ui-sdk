@@ -4,6 +4,7 @@ const generateUrlTransformer = (baseUrl) => (params) => {
   const stringifyOptions = {
     skipEmptyString: true,
     skipNull: true,
+    arrayFormat: 'repeat',
   };
 
   const url = `${baseUrl}?${qs.stringify(params, stringifyOptions)}`;
