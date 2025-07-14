@@ -5,6 +5,10 @@ import updateTokenInterceptor from '../../interceptors/request/updateToken.inter
 import handleUnauthorizedInterceptor from '../../interceptors/response/handleUnauthorized.interceptor.js';
 
 const getDefaultInstance = () => {
+  const stringifyOptions = {
+    arrayFormat: 'repeat',
+  };
+
   return generateInstance({
     interceptors: {
       request: [updateTokenInterceptor],
@@ -12,7 +16,7 @@ const getDefaultInstance = () => {
     },
     baseURL: import.meta.env.VITE_API_URL,
     paramsSerializer: (params) => {
-      return qs.stringify(params);
+      return qs.stringify(params, stringifyOptions);
     },
   });
 };
