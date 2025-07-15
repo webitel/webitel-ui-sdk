@@ -434,7 +434,6 @@ export default {
         },
       },
     },
-  },
   systemNotifications: {
     success: {
       update: ({ named }) => `${named('entity').toLowerCase()} жаңартылды`,
