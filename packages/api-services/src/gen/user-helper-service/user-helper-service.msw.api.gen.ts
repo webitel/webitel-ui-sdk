@@ -11,6 +11,7 @@ import { delay, HttpResponse, http } from 'msw';
 import type {
 	EngineActivityWorkspaceWidgetResponse,
 	EngineDefaultDeviceConfigResponse,
+	EngineListOpenedWebSocket,
 } from '.././_models';
 
 export const getDefaultDeviceConfigResponseMock = (
@@ -187,6 +188,53 @@ export const getActivityWorkspaceWidgetResponseMock = (
 	...overrideResponse,
 });
 
+export const getOpenedWebSocketsResponseMock = (
+	overrideResponse: Partial<EngineListOpenedWebSocket> = {},
+): EngineListOpenedWebSocket => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			client: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			createdAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			duration: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			ip: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			pong: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			updatedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			userAgent: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	...overrideResponse,
+});
+
 export const getDefaultDeviceConfigMockHandler = (
 	overrideResponse?:
 		| EngineDefaultDeviceConfigResponse
@@ -236,7 +284,31 @@ export const getActivityWorkspaceWidgetMockHandler = (
 		);
 	});
 };
+
+export const getOpenedWebSocketsMockHandler = (
+	overrideResponse?:
+		| EngineListOpenedWebSocket
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<EngineListOpenedWebSocket> | EngineListOpenedWebSocket),
+) => {
+	return http.get('*/user/:userId/websockets', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getOpenedWebSocketsResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
 export const getUserHelperServiceMock = () => [
 	getDefaultDeviceConfigMockHandler(),
 	getActivityWorkspaceWidgetMockHandler(),
+	getOpenedWebSocketsMockHandler(),
 ];

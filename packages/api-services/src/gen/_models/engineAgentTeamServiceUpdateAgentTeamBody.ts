@@ -16,6 +16,7 @@ export interface EngineAgentTeamServiceUpdateAgentTeamBody {
 	maxNoAnswer?: number;
 	name?: string;
 	noAnswerDelayTime?: number;
+	screenControl?: boolean;
 	strategy?: string;
 	taskAcceptTimeout?: number;
 	wrapUpTime?: number;

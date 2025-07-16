@@ -16,6 +16,7 @@ export interface EngineAgentServicePatchAgentBody {
 	isSupervisor?: boolean;
 	progressiveCount?: number;
 	region?: EngineLookup;
+	screenControl?: boolean;
 	supervisor?: EngineLookup[];
 	team?: EngineLookup;
 	user?: EngineLookup;

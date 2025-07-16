@@ -17,6 +17,7 @@ export interface EngineAgentTeam {
 	maxNoAnswer?: number;
 	name?: string;
 	noAnswerDelayTime?: number;
+	screenControl?: boolean;
 	strategy?: string;
 	taskAcceptTimeout?: number;
 	updatedAt?: string;

@@ -13,6 +13,7 @@ import type { WebitelCasesCaseFileList } from './webitelCasesCaseFileList';
 import type { WebitelCasesCaseLinkList } from './webitelCasesCaseLinkList';
 import type { WebitelCasesPriority } from './webitelCasesPriority';
 import type { WebitelCasesRelatedCaseList } from './webitelCasesRelatedCaseList';
+import type { WebitelCasesService } from './webitelCasesService';
 import type { WebitelCasesSourceTypeLookup } from './webitelCasesSourceTypeLookup';
 import type { WebitelCasesStatusCondition } from './webitelCasesStatusCondition';
 
@@ -73,7 +74,7 @@ export interface WebitelCasesCase {
 	resolvedAt?: string;
 	roleIds?: string[];
 	/** Service associated with the case. */
-	service?: GeneralLookup;
+	service?: WebitelCasesService;
 	/** SLA associated with the case. */
 	sla?: GeneralLookup;
 	/** List of SLA conditions. */
