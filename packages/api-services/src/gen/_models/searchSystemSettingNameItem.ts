@@ -37,4 +37,5 @@ export const SearchSystemSettingNameItem = {
 	autolink_mail_to_contact: 'autolink_mail_to_contact',
 	new_message_sound_notification: 'new_message_sound_notification',
 	new_chat_sound_notification: 'new_chat_sound_notification',
+	screenshot_interval: 'screenshot_interval',
 } as const;

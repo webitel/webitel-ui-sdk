@@ -42,6 +42,7 @@ export const searchSystemSettingQueryParams = zod.object({
 				'autolink_mail_to_contact',
 				'new_message_sound_notification',
 				'new_chat_sound_notification',
+				'screenshot_interval',
 			]),
 		)
 		.optional()
@@ -85,6 +86,7 @@ export const searchSystemSettingResponse = zod.object({
 						'autolink_mail_to_contact',
 						'new_message_sound_notification',
 						'new_chat_sound_notification',
+						'screenshot_interval',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -125,6 +127,7 @@ export const createSystemSettingBody = zod.object({
 			'autolink_mail_to_contact',
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
+			'screenshot_interval',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -163,6 +166,7 @@ export const createSystemSettingResponse = zod.object({
 			'autolink_mail_to_contact',
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
+			'screenshot_interval',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -224,6 +228,7 @@ export const deleteSystemSettingResponse = zod.object({
 			'autolink_mail_to_contact',
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
+			'screenshot_interval',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -266,6 +271,7 @@ export const readSystemSettingResponse = zod.object({
 			'autolink_mail_to_contact',
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
+			'screenshot_interval',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -312,6 +318,7 @@ export const patchSystemSettingResponse = zod.object({
 			'autolink_mail_to_contact',
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
+			'screenshot_interval',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -356,6 +363,7 @@ export const updateSystemSettingResponse = zod.object({
 			'autolink_mail_to_contact',
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
+			'screenshot_interval',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

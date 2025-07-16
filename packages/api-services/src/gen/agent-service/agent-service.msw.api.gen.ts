@@ -41,6 +41,10 @@ export const getSearchAgentResponseMock = (
 				).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
 				undefined,
 			]),
+			allowSetScreenControl: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			auditor: faker.helpers.arrayElement([
 				Array.from(
 					{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -147,6 +151,10 @@ export const getSearchAgentResponseMock = (
 				},
 				undefined,
 			]),
+			screenControl: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			skills: faker.helpers.arrayElement([
 				Array.from(
 					{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -236,6 +244,10 @@ export const getCreateAgentResponseMock = (
 			{ length: faker.number.int({ min: 1, max: 10 }) },
 			(_, i) => i + 1,
 		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
+		undefined,
+	]),
+	allowSetScreenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	auditor: faker.helpers.arrayElement([
@@ -334,6 +346,10 @@ export const getCreateAgentResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	skills: faker.helpers.arrayElement([
@@ -1262,6 +1278,10 @@ export const getDeleteAgentResponseMock = (
 		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
 		undefined,
 	]),
+	allowSetScreenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
 	auditor: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1358,6 +1378,10 @@ export const getDeleteAgentResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	skills: faker.helpers.arrayElement([
@@ -1443,6 +1467,10 @@ export const getReadAgentResponseMock = (
 		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
 		undefined,
 	]),
+	allowSetScreenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
 	auditor: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1539,6 +1567,10 @@ export const getReadAgentResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	skills: faker.helpers.arrayElement([
@@ -1624,6 +1656,10 @@ export const getPatchAgentResponseMock = (
 		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
 		undefined,
 	]),
+	allowSetScreenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
 	auditor: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1720,6 +1756,10 @@ export const getPatchAgentResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	skills: faker.helpers.arrayElement([
@@ -1805,6 +1845,10 @@ export const getUpdateAgentResponseMock = (
 		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
 		undefined,
 	]),
+	allowSetScreenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
 	auditor: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1901,6 +1945,10 @@ export const getUpdateAgentResponseMock = (
 				undefined,
 			]),
 		},
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	skills: faker.helpers.arrayElement([

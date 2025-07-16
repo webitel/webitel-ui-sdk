@@ -429,8 +429,48 @@ export const searchCasesResponse = zod
 						roleIds: zod.array(zod.string()).optional(),
 						service: zod
 							.object({
+								assignee: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								catalogId: zod.string().optional(),
+								code: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								createdBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								description: zod.string().optional(),
+								group: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										type: zod.string().optional(),
+									})
+									.optional(),
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+								rootId: zod.string().optional(),
+								searched: zod.boolean().optional(),
+								service: zod.array(zod.any()).optional(),
+								sla: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								state: zod.boolean().optional(),
+								updatedAt: zod.string().optional(),
+								updatedBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
 							})
 							.optional(),
 						sla: zod
@@ -1061,8 +1101,48 @@ export const createCaseResponse = zod
 		roleIds: zod.array(zod.string()).optional(),
 		service: zod
 			.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				catalogId: zod.string().optional(),
+				code: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				group: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						type: zod.string().optional(),
+					})
+					.optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				rootId: zod.string().optional(),
+				searched: zod.boolean().optional(),
+				service: zod.array(zod.any()).optional(),
+				sla: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.boolean().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
 			})
 			.optional(),
 		sla: zod
@@ -1529,8 +1609,48 @@ export const deleteCaseResponse = zod
 		roleIds: zod.array(zod.string()).optional(),
 		service: zod
 			.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				catalogId: zod.string().optional(),
+				code: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				group: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						type: zod.string().optional(),
+					})
+					.optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				rootId: zod.string().optional(),
+				searched: zod.boolean().optional(),
+				service: zod.array(zod.any()).optional(),
+				sla: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.boolean().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
 			})
 			.optional(),
 		sla: zod
@@ -1997,8 +2117,48 @@ export const locateCaseResponse = zod
 		roleIds: zod.array(zod.string()).optional(),
 		service: zod
 			.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				catalogId: zod.string().optional(),
+				code: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				group: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						type: zod.string().optional(),
+					})
+					.optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				rootId: zod.string().optional(),
+				searched: zod.boolean().optional(),
+				service: zod.array(zod.any()).optional(),
+				sla: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.boolean().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
 			})
 			.optional(),
 		sla: zod
@@ -2576,8 +2736,48 @@ export const updateCase2Response = zod.object({
 			roleIds: zod.array(zod.string()).optional(),
 			service: zod
 				.object({
+					assignee: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					catalogId: zod.string().optional(),
+					code: zod.string().optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					group: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							type: zod.string().optional(),
+						})
+						.optional(),
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+					rootId: zod.string().optional(),
+					searched: zod.boolean().optional(),
+					service: zod.array(zod.any()).optional(),
+					sla: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					state: zod.boolean().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
 				})
 				.optional(),
 			sla: zod
@@ -3166,8 +3366,48 @@ export const updateCaseResponse = zod.object({
 			roleIds: zod.array(zod.string()).optional(),
 			service: zod
 				.object({
+					assignee: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					catalogId: zod.string().optional(),
+					code: zod.string().optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					group: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							type: zod.string().optional(),
+						})
+						.optional(),
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+					rootId: zod.string().optional(),
+					searched: zod.boolean().optional(),
+					service: zod.array(zod.any()).optional(),
+					sla: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					state: zod.boolean().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
 				})
 				.optional(),
 			sla: zod
@@ -3682,8 +3922,48 @@ export const searchCases2Response = zod
 						roleIds: zod.array(zod.string()).optional(),
 						service: zod
 							.object({
+								assignee: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								catalogId: zod.string().optional(),
+								code: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								createdBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								description: zod.string().optional(),
+								group: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										type: zod.string().optional(),
+									})
+									.optional(),
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+								rootId: zod.string().optional(),
+								searched: zod.boolean().optional(),
+								service: zod.array(zod.any()).optional(),
+								sla: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								state: zod.boolean().optional(),
+								updatedAt: zod.string().optional(),
+								updatedBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
 							})
 							.optional(),
 						sla: zod

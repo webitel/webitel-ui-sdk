@@ -36,6 +36,7 @@ export const searchAgentResponse = zod.object({
 		.array(
 			zod.object({
 				allowChannels: zod.array(zod.string()).optional(),
+				allowSetScreenControl: zod.boolean().optional(),
 				auditor: zod
 					.array(
 						zod.object({
@@ -74,6 +75,7 @@ export const searchAgentResponse = zod.object({
 						name: zod.string().optional(),
 					})
 					.optional(),
+				screenControl: zod.boolean().optional(),
 				skills: zod
 					.array(
 						zod.object({
@@ -141,6 +143,7 @@ export const createAgentBody = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
@@ -166,6 +169,7 @@ export const createAgentBody = zod.object({
 
 export const createAgentResponse = zod.object({
 	allowChannels: zod.array(zod.string()).optional(),
+	allowSetScreenControl: zod.boolean().optional(),
 	auditor: zod
 		.array(
 			zod.object({
@@ -204,6 +208,7 @@ export const createAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	skills: zod
 		.array(
 			zod.object({
@@ -632,6 +637,7 @@ export const deleteAgentQueryParams = zod.object({
 
 export const deleteAgentResponse = zod.object({
 	allowChannels: zod.array(zod.string()).optional(),
+	allowSetScreenControl: zod.boolean().optional(),
 	auditor: zod
 		.array(
 			zod.object({
@@ -670,6 +676,7 @@ export const deleteAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	skills: zod
 		.array(
 			zod.object({
@@ -716,6 +723,7 @@ export const readAgentQueryParams = zod.object({
 
 export const readAgentResponse = zod.object({
 	allowChannels: zod.array(zod.string()).optional(),
+	allowSetScreenControl: zod.boolean().optional(),
 	auditor: zod
 		.array(
 			zod.object({
@@ -754,6 +762,7 @@ export const readAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	skills: zod
 		.array(
 			zod.object({
@@ -821,6 +830,7 @@ export const patchAgentBody = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
@@ -845,6 +855,7 @@ export const patchAgentBody = zod.object({
 
 export const patchAgentResponse = zod.object({
 	allowChannels: zod.array(zod.string()).optional(),
+	allowSetScreenControl: zod.boolean().optional(),
 	auditor: zod
 		.array(
 			zod.object({
@@ -883,6 +894,7 @@ export const patchAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	skills: zod
 		.array(
 			zod.object({
@@ -950,6 +962,7 @@ export const updateAgentBody = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	supervisor: zod
 		.array(
 			zod.object({
@@ -975,6 +988,7 @@ export const updateAgentBody = zod.object({
 
 export const updateAgentResponse = zod.object({
 	allowChannels: zod.array(zod.string()).optional(),
+	allowSetScreenControl: zod.boolean().optional(),
 	auditor: zod
 		.array(
 			zod.object({
@@ -1013,6 +1027,7 @@ export const updateAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	screenControl: zod.boolean().optional(),
 	skills: zod
 		.array(
 			zod.object({
