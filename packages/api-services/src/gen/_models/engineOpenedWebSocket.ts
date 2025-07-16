@@ -6,7 +6,7 @@
  */
 
 export interface EngineOpenedWebSocket {
-	client?: string;
+	applicationName?: string;
 	createdAt?: string;
 	duration?: string;
 	id?: string;
@@ -14,4 +14,5 @@ export interface EngineOpenedWebSocket {
 	pong?: string;
 	updatedAt?: string;
 	userAgent?: string;
+	ver?: string;
 }
