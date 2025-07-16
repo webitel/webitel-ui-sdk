@@ -1,3 +1,10 @@
+import {
+  createSourceBody,
+
+  listSourcesQueryParams,
+  updateSourceBody,
+} from '@webitel/api-services/gen';
+import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import deepCopy from 'deep-copy';
 import { RolesApiFactory } from 'webitel-sdk';
 
@@ -23,8 +30,6 @@ const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const rolesApiFactory = RolesApiFactory(configuration, '', instance);
-
-const doNotConvertKeys = [''];
 const fieldsToSend = ['name', 'description', 'permissions', 'metadata'];
 
 const preRequestHandler = (item) => {
@@ -34,7 +39,9 @@ const preRequestHandler = (item) => {
 };
 
 const getRoleList = async (params) => {
-  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+  const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+    listSourcesQueryParams,
+  );
 
   const { page, size, q, sort, name, fields, id, userId, userName } =
     applyTransform(params, [
@@ -42,12 +49,12 @@ const getRoleList = async (params) => {
       starToSearch('search'),
       (params) => ({ ...params, q: params.search }),
       sanitize(fieldsToSend),
-      camelToSnake(doNotConvertKeys),
+      camelToSnake(),
     ]);
 
   try {
-    const response = await rolesApiFactory.searchRoles(
-      [id],
+    const response = await getSources().listSources({
+      ids: [id],
       name,
       userId,
       userName,
@@ -56,9 +63,12 @@ const getRoleList = async (params) => {
       sort,
       page,
       size,
+    })
+    const response = await rolesApiFactory.searchRoles(
+      ,
     );
     const { items, next } = applyTransform(response.data, [
-      snakeToCamel(doNotConvertKeys),
+      snakeToCamel(),
       merge(getDefaultGetListResponse()),
     ]);
     return {
@@ -89,7 +99,7 @@ const getRole = async ({ itemId: id }) => {
   try {
     const response = await rolesApiFactory.readRole(id, fieldsToSend);
     return applyTransform(response.data, [
-      snakeToCamel(doNotConvertKeys),
+      snakeToCamel(),
       merge(defaultObject),
       itemResponseHandler,
     ]);
@@ -102,11 +112,11 @@ const addRole = async ({ itemInstance }) => {
   const item = applyTransform(itemInstance, [
     preRequestHandler,
     sanitize(fieldsToSend),
-    camelToSnake(doNotConvertKeys),
+    camelToSnake(),
   ]);
   try {
     const response = await rolesApiFactory.createRole(item);
-    return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
+    return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -116,12 +126,12 @@ const updateRole = async ({ itemInstance, itemId: id }) => {
   const item = applyTransform(itemInstance, [
     preRequestHandler,
     sanitize(fieldsToSend),
-    camelToSnake(doNotConvertKeys),
+    camelToSnake(),
   ]);
 
   try {
     const response = await rolesApiFactory.updateRole(id, item);
-    return applyTransform(response.data, [snakeToCamel(doNotConvertKeys)]);
+    return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -152,13 +162,13 @@ const getPermissionsOptions = async (params) => {
     starToSearch('search'),
     (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
-    camelToSnake(doNotConvertKeys),
+    camelToSnake(),
     generateUrl(PERMISSIONS_LIST_URL),
   ]);
   try {
     const response = await instance.get(url);
     const { items, next } = applyTransform(response.data, [
-      snakeToCamel(doNotConvertKeys),
+      snakeToCamel(),
       merge(getDefaultGetListResponse()),
     ]);
     return {
