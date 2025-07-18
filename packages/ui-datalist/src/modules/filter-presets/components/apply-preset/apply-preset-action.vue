@@ -204,9 +204,9 @@ const deletePreset = async (preset: EnginePresetQuery) => {
 };
 
 onMounted(async () => {
-  await setupPresetPersistence()
-  if (preset.value) {
-    emit('apply', preset.value)
+  await setupPresetPersistence();
+  if (currentPreset.value) {
+    emit('apply', currentPreset.value)
   }
 })
 </script>

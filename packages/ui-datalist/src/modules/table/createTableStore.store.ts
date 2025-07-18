@@ -1,4 +1,3 @@
-import debounce from '@webitel/ui-sdk/src/scripts/debounce';
 import set from 'lodash/fp/set';
 import { type Ref, ref, watch } from 'vue';
 
@@ -9,8 +8,6 @@ import {
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
-import { PersistedStorageType } from '../persist/PersistedStorage.types';
-import { usePersistedStorage } from '../persist/usePersistedStorage';
 import {
   PatchItemPropertyParams,
   useTableStoreConfig,
@@ -88,7 +85,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     parentId: parentId.value,
   });
 
-  const loadDataList = debounce(async () => {
+  const loadDataList = async () => {
     isLoading.value = true;
     $patchPaginationStore({ next: false });
 
@@ -106,7 +103,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     } finally {
       isLoading.value = false;
     }
-  });
+  };
 
   const appendToDataList = async () => {
     isLoading.value = true;
@@ -168,25 +165,6 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     }
   };
 
-  const preset = ref(null);
-
-  const setupPresetPersistence = async () => {
-    const { restore: restorePreset } = usePersistedStorage({
-      name: 'preset',
-      value: preset,
-      storages: [PersistedStorageType.LocalStorage],
-      storagePath: namespace,
-      onStore: (save, { name }) => {
-        const value = preset.value;
-        return save({ name, value });
-      },
-      onRestore: async (restore, name) => {
-        preset.value = (await restore(name)) as string;
-      },
-    });
-    await restorePreset();
-  };
-
   const initialize = async ({
     parentId: storeParentId,
   }: { parentId?: string | number } = {}) => {
@@ -242,7 +220,6 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
 
     filtersManager,
     isFiltersRestoring,
-    preset,
 
     initialize,
 
@@ -263,8 +240,6 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     addFilter,
     updateFilter,
     deleteFilter,
-
-    setupPresetPersistence,
   };
 };
 
