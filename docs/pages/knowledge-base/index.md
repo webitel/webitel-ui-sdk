@@ -23,7 +23,6 @@
 * [Add docs section](how-to/add-docs-section/Readme.md)
 * [Estimate a task](how-to/estimate-a-task/Readme.md)
 * [Hotfix](how-to/hotfix/index.md)
-* [Make fix in release](how-to/make-fix-in-release/Readme.md)
 * [Integration between store modules](how-to/Integration-between-store-modules/Readme.md)
 * [Manual testing proposals](how-to/manual-testing-proposals/Readme.md)
 * [Typical Workspace queue cases](how-to/typical-workspace-queue-cases/Readme.md)

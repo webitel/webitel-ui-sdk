@@ -24,6 +24,15 @@ export const knowledgeBaseRoutes = [
         collapsed: true,
         items: [
           {
+            text: 'General',
+            items: [
+              {
+                text: 'Code Base Deprecation Info',
+                link: resolveKnowledgeBaseLinkDoc('general/code-base-deprecation-info/index.md'),
+              },
+            ],
+          },
+          {
             text: 'Architecture, Structures, Design, etc',
             collapsed: true,
             items: resolveKnowledgeBaseDocItems(
