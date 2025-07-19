@@ -4,7 +4,7 @@
 
 Говоримо про практику? - Не забуваєм про теорію.
 
-[Backend API Communication](../../architecture-and-structures/Backend%20API%20communication/Readme.md)
+[Backend API Communication](../../architecture-and-structure/Backend%20API%20communication/Readme.md)
 
 А також пасувало би почитати про тулзи, які ми використовуватимемо:
 

@@ -9,11 +9,16 @@
 
 * [FAQ](faq/Readme.md)
 
+## Projects structure
+* [Applications Structure](projects-structure/app-structure/Readme.md)
+* [Applications List](projects-structure/applications-list/Readme.md)
+* [Webitel Packages](projects-structure/webitel-packages/Readme.md)
+
 ## Architecture and Structure
 
-* [Applications Structure and Intercommunication](architecture-and-structures/Applications%20structure%20and%20intercommunication/Readme.md)
-* [Backend API communication](architecture-and-structures/Backend%20API%20communication/Readme.md)
-* [Filters-preserving routing](architecture-and-structures/Filters-preserving%20routing/Readme.md)
+* [Applications Structure and Intercommunication](architecture-and-structure/Applications%20structure%20and%20intercommunication/Readme.md)
+* [Backend API communication](architecture-and-structure/Backend%20API%20communication/Readme.md)
+* [Filters-preserving routing](architecture-and-structure/Filters-preserving%20routing/Readme.md)
 
 ## Code Style
 

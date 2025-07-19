@@ -34,6 +34,27 @@ export const knowledgeBaseRoutes = [
                 text: 'Branching',
                 link: resolveKnowledgeBaseLinkDoc('general/branching/Readme.md'),
               },
+              {
+                text: 'Client-Server Communication',
+                link: resolveKnowledgeBaseLinkDoc('general/client-server-communication/Readme.md'),
+              },
+            ],
+          },
+          {
+            text: 'Projects structure',
+            items: [
+              {
+                text: 'App Structure',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/app-structure/Readme.md'),
+              },
+              {
+                text: 'Applications List',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/applications-list/Readme.md'),
+              },
+              {
+                text: 'Webitel packages',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/webitel-packages/Readme.md'),
+              },
             ],
           },
           {
