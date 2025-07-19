@@ -16,7 +16,7 @@ export const knowledgeBaseRoutes = [
       knowledgeBaseIndexRoute,
       {
         text: 'FAQ',
-        items: resolveKnowledgeBaseDocItems('faq/**/*.md'),
+        link: resolveKnowledgeBaseLinkDoc('faq/Readme.md'),
         collapsed: true,
       },
       {
@@ -28,7 +28,11 @@ export const knowledgeBaseRoutes = [
             items: [
               {
                 text: 'Code Base Deprecation Info',
-                link: resolveKnowledgeBaseLinkDoc('general/code-base-deprecation-info/index.md'),
+                link: resolveKnowledgeBaseLinkDoc('general/code-base-deprecation-info/Readme.md'),
+              },
+              {
+                text: 'Branching',
+                link: resolveKnowledgeBaseLinkDoc('general/branching/Readme.md'),
               },
             ],
           },

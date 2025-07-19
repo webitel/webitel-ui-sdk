@@ -1,9 +1,13 @@
 # Knowledge Base index page
 
+## General
+
+* [Code Base Deprecation Info](general/code-base-deprecation-info/Readme)
+* [Branching](general/branching/Readme)
+
 ## FAQ
 
-* [FAQ](faq/faq/Readme.md)
-* [Branching](faq/branching/Readme.md)
+* [FAQ](faq/Readme.md)
 
 ## Architecture and Structure
 
