@@ -35,5 +35,5 @@
 * [WtTypes](namings/wt-types/WtTypes)
 
 ## Tests Cookbook
-* [Mocking modules](tests-cookbook/mocking-modules/Readme.md)
-* [Testing REST API](tests-cookbook/testing-REST-API/Readme.md)
+* [Mocking modules](testing-cookbook/mocking-modules/Readme.md)
+* [Testing REST API](testing-cookbook/testing-REST-API/Readme.md)

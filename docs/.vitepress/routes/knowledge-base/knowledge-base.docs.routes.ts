@@ -113,9 +113,9 @@ export const knowledgeBaseRoutes = [
             ],
           },
           {
-            text: 'Tests Cookbook',
+            text: '📜 | Testing Cookbook',
             collapsed: true,
-            items: resolveKnowledgeBaseDocItems('tests-cookbook/**/*.md'),
+            items: resolveKnowledgeBaseDocItems('testing-cookbook/**/*.md'),
           },
         ],
       },
