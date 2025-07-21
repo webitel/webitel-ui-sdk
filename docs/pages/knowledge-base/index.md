@@ -22,13 +22,11 @@
 
 ## How-to Guides
 
-* [Add a REST API module](how-to/add-rest-api-module/Readme.md)
-* [Add docs section](how-to/add-docs-page/Readme.md)
 * [Estimate a task](how-to/estimate-task/Readme.md)
-* [Hotfix](how-to/make-hotfix/Readme)
-* [Integration between store modules](how-to/Integration-between-store-modules/Readme.md)
-* [Manual testing proposals](how-to/manual-testing-proposals/Readme.md)
-* [Typical Workspace queue cases](how-to/setup-workspace-app-entities/Readme.md)
+* [Make a Hotfix](how-to/make-hotfix/Readme)
+* [Add new docs page](how-to/add-docs-page/Readme.md)
+* [Setup Workspace app](how-to/setup-workspace-app-entities/Readme.md)
+* [Archive 📜 | Add a REST API module](how-to/add-rest-api-module/Readme.md)
 
 ## Namings
 
