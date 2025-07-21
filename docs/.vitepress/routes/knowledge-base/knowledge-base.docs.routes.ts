@@ -91,14 +91,25 @@ export const knowledgeBaseRoutes = [
             collapsed: true,
             items: [
               {
+                text: 'Estimate a task',
+                link: resolveKnowledgeBaseLinkDoc('how-to/estimate-task/Readme.md'),
+              },
+              {
+                text: 'Make a hotfix',
+                link: resolveKnowledgeBaseLinkDoc('how-to/make-hotfix/Readme.md'),
+              },
+              {
                 text: 'Add new docs page',
                 link: resolveKnowledgeBaseLinkDoc('how-to/add-docs-page/Readme.md'),
+              },
+              {
+                text: 'Setup Workspace app',
+                link: resolveKnowledgeBaseLinkDoc('how-to/setup-workspace-app-entities/Readme.md'),
               },
               {
                 text: '📜 | Add REST API module',
                 link: resolveKnowledgeBaseLinkDoc('how-to/add-rest-api-module/Readme.md'),
               },
-                ...resolveKnowledgeBaseDocItems('how-to/**/*.md')
             ],
           },
           {
