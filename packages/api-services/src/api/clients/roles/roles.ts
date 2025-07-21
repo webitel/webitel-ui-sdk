@@ -1,14 +1,12 @@
-import {
-  createSourceBody,
-
-  listSourcesQueryParams,
-  updateSourceBody,
-} from '@webitel/api-services/gen';
-import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 import deepCopy from 'deep-copy';
 import { RolesApiFactory } from 'webitel-sdk';
 
-import ApplicationsAccess from '../../../../../../src/modules/Userinfo/classes/ApplicationsAccess.js';
+/**
+ * @author @Oleksandr Palonnyi
+ *
+ * TODO refactor ApplicationsAccess path for @Volodymyr Dekhtyaruk
+ * */
+import ApplicationsAccess from '../../../../../../src/modules/Userinfo/classes/ApplicationsAccess';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -30,6 +28,7 @@ const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
 
 const rolesApiFactory = RolesApiFactory(configuration, '', instance);
+
 const fieldsToSend = ['name', 'description', 'permissions', 'metadata'];
 
 const preRequestHandler = (item) => {
@@ -39,9 +38,7 @@ const preRequestHandler = (item) => {
 };
 
 const getRoleList = async (params) => {
-  const fieldsToSend = getShallowFieldsToSendFromZodSchema(
-    listSourcesQueryParams,
-  );
+  const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
 
   const { page, size, q, sort, name, fields, id, userId, userName } =
     applyTransform(params, [
@@ -53,8 +50,8 @@ const getRoleList = async (params) => {
     ]);
 
   try {
-    const response = await getSources().listSources({
-      ids: [id],
+    const response = await rolesApiFactory.searchRoles(
+      [id],
       name,
       userId,
       userName,
@@ -63,9 +60,6 @@ const getRoleList = async (params) => {
       sort,
       page,
       size,
-    })
-    const response = await rolesApiFactory.searchRoles(
-      ,
     );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
