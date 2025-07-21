@@ -14,12 +14,6 @@
 * [Applications List](projects-structure/applications-list/Readme.md)
 * [Webitel Packages](projects-structure/webitel-packages/Readme.md)
 
-## Architecture and Structure
-
-* [Applications Structure and Intercommunication](architecture-and-structure/Applications%20structure%20and%20intercommunication/Readme.md)
-* [Backend API communication](architecture-and-structure/Backend%20API%20communication/Readme.md)
-* [Filters-preserving routing](architecture-and-structure/Filters-preserving%20routing/Readme.md)
-
 ## Code Style
 
 * [CSS](code-style/css/index.md)
@@ -39,9 +33,6 @@
 ## Namings
 
 * [WtTypes](namings/wt-types/WtTypes)
-
-## Onboarding
-* [Onboarding checklist](onboarding/checklist.md)
 
 ## Tests Cookbook
 * [Mocking modules](tests-cookbook/mocking-modules/Readme.md)

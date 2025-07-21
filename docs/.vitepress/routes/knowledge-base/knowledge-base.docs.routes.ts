@@ -35,7 +35,7 @@ export const knowledgeBaseRoutes = [
                 link: resolveKnowledgeBaseLinkDoc('general/branching/Readme.md'),
               },
               {
-                text: 'Client-Server Communication',
+                text: '📜 | Client-Server Communication',
                 link: resolveKnowledgeBaseLinkDoc('general/client-server-communication/Readme.md'),
               },
             ],
@@ -56,13 +56,6 @@ export const knowledgeBaseRoutes = [
                 link: resolveKnowledgeBaseLinkDoc('projects-structure/webitel-packages/Readme.md'),
               },
             ],
-          },
-          {
-            text: 'Architecture, Structures, Design, etc',
-            collapsed: true,
-            items: resolveKnowledgeBaseDocItems(
-              'architecture-and-structures/**/*.md',
-            ),
           },
           {
             text: 'Code Style',
@@ -90,11 +83,6 @@ export const knowledgeBaseRoutes = [
             text: 'Namings',
             collapsed: true,
             items: resolveKnowledgeBaseDocItems('namings/**/*.md'),
-          },
-          {
-            text: 'Onboarding',
-            collapsed: true,
-            items: resolveKnowledgeBaseDocItems('onboarding/**/*.md'),
           },
           {
             text: 'How To',
