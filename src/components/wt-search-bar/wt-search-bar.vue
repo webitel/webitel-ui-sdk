@@ -46,15 +46,11 @@
           @click="updateSearchMode"
         >
           <template #activator>
-            <wt-tooltip>
-              <template #activator>
-                <wt-icon-btn
-                  :color="invalid ? 'error' : 'default'"
-                  icon="filter"
-                />
-              </template>
-              {{ $t('webitelUI.searchBar.settingsHint') }}
-            </wt-tooltip>
+            <wt-icon-btn
+              v-tooltip="$t('webitelUI.searchBar.settingsHint')"
+              :color="invalid ? 'error' : 'default'"
+              icon="filter"
+            />
           </template>
           <template #option="{ value, text }">
             <wt-radio

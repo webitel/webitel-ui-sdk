@@ -14,16 +14,13 @@
       type="number"
       @input="emit('update:option', { name: option.name, score: $event })"
     />
-    <wt-tooltip class="audit-form-question-options-write-row__tooltip">
-      <template #activator>
-        <wt-icon-btn
-          :disabled="first"
-          icon="bucket"
-          @click="emit('delete')"
-        />
-      </template>
-      {{ $t('reusable.delete') }}
-    </wt-tooltip>
+
+    <wt-icon-btn
+      v-tooltip="$t('reusable.delete')"
+      :disabled="first"
+      icon="bucket"
+      @click="emit('delete')"
+    />
   </div>
 </template>
 

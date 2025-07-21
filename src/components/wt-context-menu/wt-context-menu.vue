@@ -1,46 +1,51 @@
 <template>
-  <wt-tooltip
-    :triggers="tooltipTriggers"
-    :visible="visible"
-    :disabled="disabled"
-    class="wt-context-menu"
-    placement="bottom-end"
-    popper-class="wt-context-menu__floating-wrapper"
-    @update:visible="visible = $event"
-  >
-    <template #activator>
-      <slot name="activator" />
-    </template>
-    <template #default="{ hide }">
-      <ul
-        :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
-        class="wt-context-menu__menu"
-      >
-        <li
-          v-for="(option, index) of options"
-          :key="index"
-          class="wt-context-menu__option-wrapper"
+  <div class="wt-context-menu">
+    <slot
+      name="activator"
+      v-bind="{ toggle }"
+    />
+
+    <wt-popover
+      ref="popover"
+      :visible="visible"
+      :disabled="disabled"
+      unstyled
+      placement="bottom-end"
+      class="wt-context-menu__floating-wrapper"
+    >
+      <template #default>
+        <ul
+          :style="`width: ${width}; min-width: ${minWidth}; max-width: ${maxWidth};`"
+          class="wt-context-menu__menu"
         >
-          <a
-            :class="[{ 'wt-context-menu__option--disabled': option.disabled }]"
-            class="wt-context-menu__option"
-            href="#"
-            @click.prevent="handleOptionClick({ option, index, hide })"
+          <li
+            v-for="(option, index) of options"
+            :key="index"
+            class="wt-context-menu__option-wrapper"
           >
-            <slot
-              name="option"
-              v-bind="option"
+            <a
+              :class="[{ 'wt-context-menu__option--disabled': option.disabled }]"
+              class="wt-context-menu__option"
+              href="#"
+              @click.prevent="handleOptionClick({ option, index, hide })"
             >
-              {{ option.text || option }}
-            </slot>
-          </a>
-        </li>
-      </ul>
-    </template>
-  </wt-tooltip>
+              <slot
+                name="option"
+                v-bind="option"
+              >
+                {{ option.text || option }}
+              </slot>
+            </a>
+          </li>
+        </ul>
+      </template>
+    </wt-popover>
+  </div>
 </template>
 
 <script setup>
+import {useTemplateRef} from "vue";
+
 const props = defineProps({
   options: {
     type: Array,
@@ -74,11 +79,20 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['click', 'update:visible']);
+const popover = useTemplateRef('popover');
 
 function handleOptionClick({ option, index, hide }) {
   emit('click', { option, index });
   hide();
 }
+
+const toggle = (event) => {
+  popover.value.toggle(event);
+};
+
+const hide = () => {
+  popover.value.hide()
+};
 </script>
 
 <style lang="scss">

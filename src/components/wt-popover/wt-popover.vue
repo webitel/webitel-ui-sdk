@@ -10,6 +10,7 @@
     :pt="pt"
     :pt-options="ptOptions"
     :close-on-escape="closeOnEscape"
+    :unstyled="unstyled"
     v-on="attrs"
   >
     <slot />
@@ -32,6 +33,7 @@ withDefaults(defineProps<PopoverProps>(), {
   pt: null,
   ptOptions: null,
   closeOnEscape: true,
+  unstyled: false
 });
 defineEmits<PopoverEmitsOptions>();
 
