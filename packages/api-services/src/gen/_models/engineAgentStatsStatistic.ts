@@ -12,6 +12,7 @@ export interface EngineAgentStatsStatistic {
 	auditor?: EngineLookup[];
 	callTime?: string;
 	chatCount?: number;
+	descTrack?: boolean;
 	extension?: string;
 	handles?: number;
 	maxBridgedAt?: string;

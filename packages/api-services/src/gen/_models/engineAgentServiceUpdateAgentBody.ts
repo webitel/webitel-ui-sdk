@@ -16,6 +16,7 @@ export interface EngineAgentServiceUpdateAgentBody {
 	isSupervisor?: boolean;
 	progressiveCount?: number;
 	region?: EngineLookup;
+	screenControl?: boolean;
 	supervisor?: EngineLookup[];
 	taskCount?: number;
 	team?: EngineLookup;

@@ -95,6 +95,10 @@ export const getSearchAgentTeamResponseMock = (
 				}),
 				undefined,
 			]),
+			screenControl: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			strategy: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
@@ -190,6 +194,10 @@ export const getCreateAgentTeamResponseMock = (
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
 		undefined,
 	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
 	strategy: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -271,6 +279,10 @@ export const getDeleteAgentTeamResponseMock = (
 	]),
 	noAnswerDelayTime: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	strategy: faker.helpers.arrayElement([
@@ -356,6 +368,10 @@ export const getReadAgentTeamResponseMock = (
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
 		undefined,
 	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
 	strategy: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -437,6 +453,10 @@ export const getUpdateAgentTeamResponseMock = (
 	]),
 	noAnswerDelayTime: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	strategy: faker.helpers.arrayElement([

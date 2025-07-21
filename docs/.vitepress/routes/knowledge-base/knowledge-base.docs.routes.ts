@@ -16,7 +16,7 @@ export const knowledgeBaseRoutes = [
       knowledgeBaseIndexRoute,
       {
         text: 'FAQ',
-        items: resolveKnowledgeBaseDocItems('faq/**/*.md'),
+        link: resolveKnowledgeBaseLinkDoc('faq/Readme.md'),
         collapsed: true,
       },
       {
@@ -24,11 +24,38 @@ export const knowledgeBaseRoutes = [
         collapsed: true,
         items: [
           {
-            text: 'Architecture, Structures, Design, etc',
-            collapsed: true,
-            items: resolveKnowledgeBaseDocItems(
-              'architecture-and-structures/**/*.md',
-            ),
+            text: 'General',
+            items: [
+              {
+                text: 'Code Base Deprecation Info',
+                link: resolveKnowledgeBaseLinkDoc('general/code-base-deprecation-info/Readme.md'),
+              },
+              {
+                text: 'Branching',
+                link: resolveKnowledgeBaseLinkDoc('general/branching/Readme.md'),
+              },
+              {
+                text: '📜 | Client-Server Communication',
+                link: resolveKnowledgeBaseLinkDoc('general/client-server-communication/Readme.md'),
+              },
+            ],
+          },
+          {
+            text: 'Projects structure',
+            items: [
+              {
+                text: 'App Structure',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/app-structure/Readme.md'),
+              },
+              {
+                text: 'Applications List',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/applications-list/Readme.md'),
+              },
+              {
+                text: 'Webitel packages',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/webitel-packages/Readme.md'),
+              },
+            ],
           },
           {
             text: 'Code Style',
@@ -56,11 +83,6 @@ export const knowledgeBaseRoutes = [
             text: 'Namings',
             collapsed: true,
             items: resolveKnowledgeBaseDocItems('namings/**/*.md'),
-          },
-          {
-            text: 'Onboarding',
-            collapsed: true,
-            items: resolveKnowledgeBaseDocItems('onboarding/**/*.md'),
           },
           {
             text: 'How To',

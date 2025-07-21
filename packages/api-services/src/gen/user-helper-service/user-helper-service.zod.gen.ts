@@ -65,3 +65,34 @@ export const activityWorkspaceWidgetResponse = zod.object({
 	utilization: zod.number().optional(),
 	voiceMail: zod.number().optional(),
 });
+
+export const openedWebSocketsParams = zod.object({
+	user_id: zod.array(zod.string()).min(1),
+});
+
+export const openedWebSocketsQueryParams = zod.object({
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+});
+
+export const openedWebSocketsResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				applicationName: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				duration: zod.string().optional(),
+				id: zod.string().optional(),
+				ip: zod.string().optional(),
+				pong: zod.string().optional(),
+				updatedAt: zod.string().optional(),
+				userAgent: zod.string().optional(),
+				ver: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});

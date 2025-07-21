@@ -12,6 +12,8 @@ import type {
 	ActivityWorkspaceWidgetParams,
 	EngineActivityWorkspaceWidgetResponse,
 	EngineDefaultDeviceConfigResponse,
+	EngineListOpenedWebSocket,
+	OpenedWebSocketsParams,
 } from '.././_models';
 
 // --- header start
@@ -41,13 +43,26 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
+			const openedWebSockets = <
+				TData = AxiosResponse<EngineListOpenedWebSocket>,
+			>(
+				userId: string[],
+				params?: OpenedWebSocketsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/user/${userId}/websockets`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
 
 			// --- footer start
-			return { defaultDeviceConfig, activityWorkspaceWidget };
+			return { defaultDeviceConfig, activityWorkspaceWidget, openedWebSockets };
 		};
 export type DefaultDeviceConfigResult =
 	AxiosResponse<EngineDefaultDeviceConfigResponse>;
 export type ActivityWorkspaceWidgetResult =
 	AxiosResponse<EngineActivityWorkspaceWidgetResponse>;
+export type OpenedWebSocketsResult = AxiosResponse<EngineListOpenedWebSocket>;
 
 // --- footer end

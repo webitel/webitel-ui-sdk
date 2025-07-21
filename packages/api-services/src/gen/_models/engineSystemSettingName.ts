@@ -34,4 +34,8 @@ export const EngineSystemSettingName = {
 	TaskEndPushNotification: 'task_end_push_notification',
 	PushNotificationTimeout: 'push_notification_timeout',
 	LabelsToLimitContacts: 'labels_to_limit_contacts',
+	AutolinkMailToContact: 'autolink_mail_to_contact',
+	NewMessageSoundNotification: 'new_message_sound_notification',
+	NewChatSoundNotification: 'new_chat_sound_notification',
+	ScreenshotInterval: 'screenshot_interval',
 } as const;

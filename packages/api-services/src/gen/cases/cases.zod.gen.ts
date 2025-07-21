@@ -30,23 +30,10 @@ export const searchCasesQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe('Contact ID for filtering cases.'),
-	queryTargetFull: zod
-		.boolean()
+	qin: zod
+		.string()
 		.optional()
-		.describe('Search everywhere (no restrictions)'),
-	queryTargetSubject: zod
-		.boolean()
-		.optional()
-		.describe('Search in case subject.'),
-	queryTargetName: zod
-		.boolean()
-		.optional()
-		.describe('Search in case name or number.'),
-	queryTargetContactInfo: zod
-		.boolean()
-		.optional()
-		.describe("Search in contact's email, phone, etc."),
-	queryTargetId: zod.boolean().optional().describe('Search in case id'),
+		.describe("Specify which fields to apply 'q' to."),
 });
 
 export const searchCasesResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -203,12 +190,6 @@ export const searchCasesResponse = zod
 									.array(
 										zod
 											.object({
-												author: zod
-													.object({
-														id: zod.string().optional(),
-														name: zod.string().optional(),
-													})
-													.optional(),
 												createdAt: zod
 													.string()
 													.optional()
@@ -217,6 +198,7 @@ export const searchCasesResponse = zod
 													.object({
 														id: zod.string().optional(),
 														name: zod.string().optional(),
+														type: zod.string().optional(),
 													})
 													.optional(),
 												id: zod
@@ -232,6 +214,7 @@ export const searchCasesResponse = zod
 													.string()
 													.optional()
 													.describe('File size in bytes.'),
+												source: zod.string().optional(),
 												url: zod.string().optional(),
 											})
 											.describe('Metadata for a file associated with a case.'),
@@ -446,8 +429,48 @@ export const searchCasesResponse = zod
 						roleIds: zod.array(zod.string()).optional(),
 						service: zod
 							.object({
+								assignee: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								catalogId: zod.string().optional(),
+								code: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								createdBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								description: zod.string().optional(),
+								group: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										type: zod.string().optional(),
+									})
+									.optional(),
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+								rootId: zod.string().optional(),
+								searched: zod.boolean().optional(),
+								service: zod.array(zod.any()).optional(),
+								sla: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								state: zod.boolean().optional(),
+								updatedAt: zod.string().optional(),
+								updatedBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
 							})
 							.optional(),
 						sla: zod
@@ -849,12 +872,6 @@ export const createCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -863,6 +880,7 @@ export const createCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -872,6 +890,7 @@ export const createCaseResponse = zod
 									.describe('MIME type of the file.'),
 								name: zod.string().optional().describe('File name.'),
 								size: zod.string().optional().describe('File size in bytes.'),
+								source: zod.string().optional(),
 								url: zod.string().optional(),
 							})
 							.describe('Metadata for a file associated with a case.'),
@@ -1082,8 +1101,48 @@ export const createCaseResponse = zod
 		roleIds: zod.array(zod.string()).optional(),
 		service: zod
 			.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				catalogId: zod.string().optional(),
+				code: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				group: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						type: zod.string().optional(),
+					})
+					.optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				rootId: zod.string().optional(),
+				searched: zod.boolean().optional(),
+				service: zod.array(zod.any()).optional(),
+				sla: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.boolean().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
 			})
 			.optional(),
 		sla: zod
@@ -1321,12 +1380,6 @@ export const deleteCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -1335,6 +1388,7 @@ export const deleteCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -1344,6 +1398,7 @@ export const deleteCaseResponse = zod
 									.describe('MIME type of the file.'),
 								name: zod.string().optional().describe('File name.'),
 								size: zod.string().optional().describe('File size in bytes.'),
+								source: zod.string().optional(),
 								url: zod.string().optional(),
 							})
 							.describe('Metadata for a file associated with a case.'),
@@ -1554,8 +1609,48 @@ export const deleteCaseResponse = zod
 		roleIds: zod.array(zod.string()).optional(),
 		service: zod
 			.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				catalogId: zod.string().optional(),
+				code: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				group: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						type: zod.string().optional(),
+					})
+					.optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				rootId: zod.string().optional(),
+				searched: zod.boolean().optional(),
+				service: zod.array(zod.any()).optional(),
+				sla: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.boolean().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
 			})
 			.optional(),
 		sla: zod
@@ -1793,12 +1888,6 @@ export const locateCaseResponse = zod
 					.array(
 						zod
 							.object({
-								author: zod
-									.object({
-										id: zod.string().optional(),
-										name: zod.string().optional(),
-									})
-									.optional(),
 								createdAt: zod
 									.string()
 									.optional()
@@ -1807,6 +1896,7 @@ export const locateCaseResponse = zod
 									.object({
 										id: zod.string().optional(),
 										name: zod.string().optional(),
+										type: zod.string().optional(),
 									})
 									.optional(),
 								id: zod.string().optional().describe('Storage file ID.'),
@@ -1816,6 +1906,7 @@ export const locateCaseResponse = zod
 									.describe('MIME type of the file.'),
 								name: zod.string().optional().describe('File name.'),
 								size: zod.string().optional().describe('File size in bytes.'),
+								source: zod.string().optional(),
 								url: zod.string().optional(),
 							})
 							.describe('Metadata for a file associated with a case.'),
@@ -2026,8 +2117,48 @@ export const locateCaseResponse = zod
 		roleIds: zod.array(zod.string()).optional(),
 		service: zod
 			.object({
+				assignee: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				catalogId: zod.string().optional(),
+				code: zod.string().optional(),
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				description: zod.string().optional(),
+				group: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+						type: zod.string().optional(),
+					})
+					.optional(),
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				rootId: zod.string().optional(),
+				searched: zod.boolean().optional(),
+				service: zod.array(zod.any()).optional(),
+				sla: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				state: zod.boolean().optional(),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
 			})
 			.optional(),
 		sla: zod
@@ -2372,12 +2503,6 @@ export const updateCase2Response = zod.object({
 						.array(
 							zod
 								.object({
-									author: zod
-										.object({
-											id: zod.string().optional(),
-											name: zod.string().optional(),
-										})
-										.optional(),
 									createdAt: zod
 										.string()
 										.optional()
@@ -2386,6 +2511,7 @@ export const updateCase2Response = zod.object({
 										.object({
 											id: zod.string().optional(),
 											name: zod.string().optional(),
+											type: zod.string().optional(),
 										})
 										.optional(),
 									id: zod.string().optional().describe('Storage file ID.'),
@@ -2395,6 +2521,7 @@ export const updateCase2Response = zod.object({
 										.describe('MIME type of the file.'),
 									name: zod.string().optional().describe('File name.'),
 									size: zod.string().optional().describe('File size in bytes.'),
+									source: zod.string().optional(),
 									url: zod.string().optional(),
 								})
 								.describe('Metadata for a file associated with a case.'),
@@ -2609,8 +2736,48 @@ export const updateCase2Response = zod.object({
 			roleIds: zod.array(zod.string()).optional(),
 			service: zod
 				.object({
+					assignee: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					catalogId: zod.string().optional(),
+					code: zod.string().optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					group: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							type: zod.string().optional(),
+						})
+						.optional(),
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+					rootId: zod.string().optional(),
+					searched: zod.boolean().optional(),
+					service: zod.array(zod.any()).optional(),
+					sla: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					state: zod.boolean().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
 				})
 				.optional(),
 			sla: zod
@@ -2966,12 +3133,6 @@ export const updateCaseResponse = zod.object({
 						.array(
 							zod
 								.object({
-									author: zod
-										.object({
-											id: zod.string().optional(),
-											name: zod.string().optional(),
-										})
-										.optional(),
 									createdAt: zod
 										.string()
 										.optional()
@@ -2980,6 +3141,7 @@ export const updateCaseResponse = zod.object({
 										.object({
 											id: zod.string().optional(),
 											name: zod.string().optional(),
+											type: zod.string().optional(),
 										})
 										.optional(),
 									id: zod.string().optional().describe('Storage file ID.'),
@@ -2989,6 +3151,7 @@ export const updateCaseResponse = zod.object({
 										.describe('MIME type of the file.'),
 									name: zod.string().optional().describe('File name.'),
 									size: zod.string().optional().describe('File size in bytes.'),
+									source: zod.string().optional(),
 									url: zod.string().optional(),
 								})
 								.describe('Metadata for a file associated with a case.'),
@@ -3203,8 +3366,48 @@ export const updateCaseResponse = zod.object({
 			roleIds: zod.array(zod.string()).optional(),
 			service: zod
 				.object({
+					assignee: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					catalogId: zod.string().optional(),
+					code: zod.string().optional(),
+					createdAt: zod.string().optional(),
+					createdBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					description: zod.string().optional(),
+					group: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+							type: zod.string().optional(),
+						})
+						.optional(),
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+					rootId: zod.string().optional(),
+					searched: zod.boolean().optional(),
+					service: zod.array(zod.any()).optional(),
+					sla: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
+					state: zod.boolean().optional(),
+					updatedAt: zod.string().optional(),
+					updatedBy: zod
+						.object({
+							id: zod.string().optional(),
+							name: zod.string().optional(),
+						})
+						.optional(),
 				})
 				.optional(),
 			sla: zod
@@ -3319,23 +3522,10 @@ export const searchCases2QueryParams = zod.object({
 		.array(zod.string())
 		.optional()
 		.describe('Key-value pairs for additional filtering.'),
-	queryTargetFull: zod
-		.boolean()
+	qin: zod
+		.string()
 		.optional()
-		.describe('Search everywhere (no restrictions)'),
-	queryTargetSubject: zod
-		.boolean()
-		.optional()
-		.describe('Search in case subject.'),
-	queryTargetName: zod
-		.boolean()
-		.optional()
-		.describe('Search in case name or number.'),
-	queryTargetContactInfo: zod
-		.boolean()
-		.optional()
-		.describe("Search in contact's email, phone, etc."),
-	queryTargetId: zod.boolean().optional().describe('Search in case id'),
+		.describe("Specify which fields to apply 'q' to."),
 });
 
 export const searchCases2ResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -3493,12 +3683,6 @@ export const searchCases2Response = zod
 									.array(
 										zod
 											.object({
-												author: zod
-													.object({
-														id: zod.string().optional(),
-														name: zod.string().optional(),
-													})
-													.optional(),
 												createdAt: zod
 													.string()
 													.optional()
@@ -3507,6 +3691,7 @@ export const searchCases2Response = zod
 													.object({
 														id: zod.string().optional(),
 														name: zod.string().optional(),
+														type: zod.string().optional(),
 													})
 													.optional(),
 												id: zod
@@ -3522,6 +3707,7 @@ export const searchCases2Response = zod
 													.string()
 													.optional()
 													.describe('File size in bytes.'),
+												source: zod.string().optional(),
 												url: zod.string().optional(),
 											})
 											.describe('Metadata for a file associated with a case.'),
@@ -3736,8 +3922,48 @@ export const searchCases2Response = zod
 						roleIds: zod.array(zod.string()).optional(),
 						service: zod
 							.object({
+								assignee: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								catalogId: zod.string().optional(),
+								code: zod.string().optional(),
+								createdAt: zod.string().optional(),
+								createdBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								description: zod.string().optional(),
+								group: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+										type: zod.string().optional(),
+									})
+									.optional(),
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+								rootId: zod.string().optional(),
+								searched: zod.boolean().optional(),
+								service: zod.array(zod.any()).optional(),
+								sla: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
+								state: zod.boolean().optional(),
+								updatedAt: zod.string().optional(),
+								updatedBy: zod
+									.object({
+										id: zod.string().optional(),
+										name: zod.string().optional(),
+									})
+									.optional(),
 							})
 							.optional(),
 						sla: zod

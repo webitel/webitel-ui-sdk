@@ -33,12 +33,6 @@ export const listFilesResponse = zod
 			.array(
 				zod
 					.object({
-						author: zod
-							.object({
-								id: zod.string().optional(),
-								name: zod.string().optional(),
-							})
-							.optional(),
 						createdAt: zod
 							.string()
 							.optional()
@@ -47,12 +41,14 @@ export const listFilesResponse = zod
 							.object({
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+								type: zod.string().optional(),
 							})
 							.optional(),
 						id: zod.string().optional().describe('Storage file ID.'),
 						mime: zod.string().optional().describe('MIME type of the file.'),
 						name: zod.string().optional().describe('File name.'),
 						size: zod.string().optional().describe('File size in bytes.'),
+						source: zod.string().optional(),
 						url: zod.string().optional(),
 					})
 					.describe('Metadata for a file associated with a case.'),
@@ -77,12 +73,6 @@ export const deleteFileParams = zod.object({
 
 export const deleteFileResponse = zod
 	.object({
-		author: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
 		createdAt: zod
 			.string()
 			.optional()
@@ -91,12 +81,14 @@ export const deleteFileResponse = zod
 			.object({
 				id: zod.string().optional(),
 				name: zod.string().optional(),
+				type: zod.string().optional(),
 			})
 			.optional(),
 		id: zod.string().optional().describe('Storage file ID.'),
 		mime: zod.string().optional().describe('MIME type of the file.'),
 		name: zod.string().optional().describe('File name.'),
 		size: zod.string().optional().describe('File size in bytes.'),
+		source: zod.string().optional(),
 		url: zod.string().optional(),
 	})
 	.describe('Metadata for a file associated with a case.');

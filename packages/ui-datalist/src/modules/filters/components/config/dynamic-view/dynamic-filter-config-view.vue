@@ -1,23 +1,18 @@
 <template>
   <div class="dynamic-filter-config-view">
-    <wt-tooltip
-      :triggers="['click']"
-      :disabled="props.disabled"
-      :disable-click-away="props.disableClickAway"
-    >
-      <template #activator="slotScope">
-        <slot
-          name="activator"
-          v-bind="{ tooltipSlotScope: slotScope }"
-        />
-      </template>
-      <template #default="slotScope">
+    <slot
+      name="activator"
+      v-bind="{ toggle, disabled: props.disabled }"
+    />
+
+    <wt-popover ref="popover">
+      <template #default>
         <slot
           name="content"
-          v-bind="{ tooltipSlotScope: slotScope }"
+          v-bind="{ hide }"
         />
       </template>
-    </wt-tooltip>
+    </wt-popover>
   </div>
 </template>
 
@@ -26,8 +21,8 @@
  * this component should only be used for config view representation: tooltip/popup/etc,
  * and their styling
  */
-
-import { WtTooltip } from '@webitel/ui-sdk/components';
+import { WtPopover } from '@webitel/ui-sdk/components';
+import {useTemplateRef} from "vue";
 
 interface Props {
   disabled?: boolean;
@@ -35,6 +30,16 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const popover = useTemplateRef('popover');
+
+const toggle = (event) => {
+  popover.value.toggle(event);
+};
+
+const hide = () => {
+  popover.value.hide()
+};
 </script>
 
 <style scoped></style>

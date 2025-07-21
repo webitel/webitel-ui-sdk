@@ -1,3 +1,0 @@
-# Onboarding чек-ліст
-
-TODO...

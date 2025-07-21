@@ -55,7 +55,7 @@ export default {
       en: 'English',
       es: 'Español',
       ru: 'Русский',
-      ua: 'Українська',
+      uk: 'Українська',
       kz: 'Қазақ',
     },
     from: 'От',

@@ -1,5 +1,5 @@
 <template>
-  <popover
+  <p-popover
     ref="innerPopover"
     v-bind="attrs"
     :append-to="appendTo"
@@ -13,12 +13,11 @@
     v-on="attrs"
   >
     <slot />
-  </popover>
+  </p-popover>
 </template>
 
 <script setup lang="ts">
 import { PopoverEmitsOptions, PopoverProps } from 'primevue';
-import Popover from 'primevue/popover';
 import { defineExpose, useAttrs, useTemplateRef } from 'vue';
 
 const attrs = useAttrs();

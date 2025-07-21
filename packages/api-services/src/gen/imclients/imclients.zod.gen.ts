@@ -95,6 +95,7 @@ export const iMClientsListIMClientsResponse = zod.object({
 						.describe(
 							'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
 						),
+					externalId: zod.string().optional().describe('External user id.'),
 					id: zod
 						.string()
 						.optional()
