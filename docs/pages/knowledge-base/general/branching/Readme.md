@@ -9,7 +9,7 @@
 
 Далі, по бренчах:
 
-![branching](./assets/Webitel%20branching_page-0001.jpg)
+![branching](./assets/branching-pic.jpg)
 
 ## Основні
 
