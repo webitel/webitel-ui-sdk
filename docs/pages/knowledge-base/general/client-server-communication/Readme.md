@@ -68,4 +68,4 @@ service.searchSmth(page, size, search);
 
 ## А як додать апішку-то?
 
-А це описано ось [тут](../../how-to/add-a-REST-API-module/Readme.md)
+А це описано ось [тут](../../how-to/add-rest-api-module/Readme.md)

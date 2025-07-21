@@ -22,8 +22,8 @@
 
 ## How-to Guides
 
-* [Add a REST API module](how-to/add-a-REST-API-module/Readme.md)
-* [Add docs section](how-to/add-docs-section/Readme.md)
+* [Add a REST API module](how-to/add-rest-api-module/Readme.md)
+* [Add docs section](how-to/add-docs-page/Readme.md)
 * [Estimate a task](how-to/estimate-a-task/Readme.md)
 * [Hotfix](how-to/hotfix/index.md)
 * [Integration between store modules](how-to/Integration-between-store-modules/Readme.md)

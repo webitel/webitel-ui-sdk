@@ -25,6 +25,7 @@ export const knowledgeBaseRoutes = [
         items: [
           {
             text: 'General',
+            collapsed: false,
             items: [
               {
                 text: 'Code Base Deprecation Info',
@@ -42,6 +43,7 @@ export const knowledgeBaseRoutes = [
           },
           {
             text: 'Projects structure',
+            collapsed: true,
             items: [
               {
                 text: 'App Structure',
@@ -87,7 +89,17 @@ export const knowledgeBaseRoutes = [
           {
             text: 'How To',
             collapsed: true,
-            items: resolveKnowledgeBaseDocItems('how-to/**/*.md'),
+            items: [
+              {
+                text: 'Add new docs page',
+                link: resolveKnowledgeBaseLinkDoc('how-to/add-docs-page/Readme.md'),
+              },
+              {
+                text: '📜 | Add REST API module',
+                link: resolveKnowledgeBaseLinkDoc('how-to/add-rest-api-module/Readme.md'),
+              },
+                ...resolveKnowledgeBaseDocItems('how-to/**/*.md')
+            ],
           },
           {
             text: 'Tests Cookbook',
