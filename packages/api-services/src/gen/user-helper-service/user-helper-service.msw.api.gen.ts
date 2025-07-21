@@ -196,7 +196,7 @@ export const getOpenedWebSocketsResponseMock = (
 			{ length: faker.number.int({ min: 1, max: 10 }) },
 			(_, i) => i + 1,
 		).map(() => ({
-			client: faker.helpers.arrayElement([
+			applicationName: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
@@ -225,6 +225,10 @@ export const getOpenedWebSocketsResponseMock = (
 				undefined,
 			]),
 			userAgent: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			ver: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),

@@ -317,6 +317,7 @@ export const searchAgentStatusStatisticResponse = zod.object({
 					.optional(),
 				callTime: zod.string().optional(),
 				chatCount: zod.number().optional(),
+				descTrack: zod.boolean().optional(),
 				extension: zod.string().optional(),
 				handles: zod.number().optional(),
 				maxBridgedAt: zod.string().optional(),
@@ -394,6 +395,7 @@ export const searchAgentStatusStatisticItemResponse = zod.object({
 		)
 		.optional(),
 	chatCount: zod.number().optional(),
+	descTrack: zod.boolean().optional(),
 	extension: zod.string().optional(),
 	name: zod.string().optional(),
 	offline: zod.string().optional(),

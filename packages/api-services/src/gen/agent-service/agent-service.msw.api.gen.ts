@@ -612,6 +612,10 @@ export const getSearchAgentStatusStatisticResponseMock = (
 				}),
 				undefined,
 			]),
+			descTrack: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			extension: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
@@ -800,6 +804,7 @@ export const getSearchAgentStatusStatisticItemResponseMock = (
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
 		undefined,
 	]),
+	descTrack: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
 	extension: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,

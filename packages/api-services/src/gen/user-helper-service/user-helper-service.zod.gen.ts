@@ -82,7 +82,7 @@ export const openedWebSocketsResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
-				client: zod.string().optional(),
+				applicationName: zod.string().optional(),
 				createdAt: zod.string().optional(),
 				duration: zod.string().optional(),
 				id: zod.string().optional(),
@@ -90,6 +90,7 @@ export const openedWebSocketsResponse = zod.object({
 				pong: zod.string().optional(),
 				updatedAt: zod.string().optional(),
 				userAgent: zod.string().optional(),
+				ver: zod.string().optional(),
 			}),
 		)
 		.optional(),

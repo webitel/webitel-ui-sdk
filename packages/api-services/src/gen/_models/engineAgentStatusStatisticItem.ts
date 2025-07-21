@@ -10,6 +10,7 @@ export interface EngineAgentStatusStatisticItem {
 	agentId?: number;
 	auditor?: EngineLookup[];
 	chatCount?: number;
+	descTrack?: boolean;
 	extension?: string;
 	name?: string;
 	offline?: string;
