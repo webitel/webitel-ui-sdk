@@ -22,18 +22,16 @@
 
 ## How-to Guides
 
-* [Add a REST API module](how-to/add-a-REST-API-module/Readme.md)
-* [Add docs section](how-to/add-docs-section/Readme.md)
-* [Estimate a task](how-to/estimate-a-task/Readme.md)
-* [Hotfix](how-to/hotfix/index.md)
-* [Integration between store modules](how-to/Integration-between-store-modules/Readme.md)
-* [Manual testing proposals](how-to/manual-testing-proposals/Readme.md)
-* [Typical Workspace queue cases](how-to/typical-workspace-queue-cases/Readme.md)
+* [Estimate a task](how-to/estimate-task/Readme.md)
+* [Make a Hotfix](how-to/make-hotfix/Readme)
+* [Add new docs page](how-to/add-docs-page/Readme.md)
+* [Setup Workspace app](how-to/setup-workspace-app-entities/Readme.md)
+* [Archive 📜 | Add a REST API module](how-to/add-rest-api-module/Readme.md)
 
 ## Namings
 
 * [WtTypes](namings/wt-types/WtTypes)
 
 ## Tests Cookbook
-* [Mocking modules](tests-cookbook/mocking-modules/Readme.md)
-* [Testing REST API](tests-cookbook/testing-REST-API/Readme.md)
+* [Mocking modules](testing-cookbook/mocking-modules/Readme.md)
+* [Testing REST API](testing-cookbook/testing-REST-API/Readme.md)

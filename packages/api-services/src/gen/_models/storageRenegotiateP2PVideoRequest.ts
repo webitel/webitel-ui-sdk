@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface StorageUploadP2PVideoResponse {
+export interface StorageRenegotiateP2PVideoRequest {
 	id?: string;
-	sdpAnswer?: string;
+	sdpOffer?: string;
 }

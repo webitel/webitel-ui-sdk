@@ -30,6 +30,10 @@
 > **Увага!** Ліби одна до одної лінкуються завжди, за допомогою `package.json`.
 > [`workspaces`](https://docs.npmjs.com/cli/v9/using-npm/workspaces).
 
+## Як паблішити
+
+Використовуйте **мануальні** [**відповідні** Github Actions](https://github.com/webitel/webitel-ui-sdk/actions). 
+
 ## FAQ
 
 ### Чому `@webitel/ui-sdk` такий великий?

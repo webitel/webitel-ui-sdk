@@ -25,6 +25,7 @@ export const knowledgeBaseRoutes = [
         items: [
           {
             text: 'General',
+            collapsed: false,
             items: [
               {
                 text: 'Code Base Deprecation Info',
@@ -42,6 +43,7 @@ export const knowledgeBaseRoutes = [
           },
           {
             text: 'Projects structure',
+            collapsed: true,
             items: [
               {
                 text: 'App Structure',
@@ -87,12 +89,33 @@ export const knowledgeBaseRoutes = [
           {
             text: 'How To',
             collapsed: true,
-            items: resolveKnowledgeBaseDocItems('how-to/**/*.md'),
+            items: [
+              {
+                text: 'Estimate a task',
+                link: resolveKnowledgeBaseLinkDoc('how-to/estimate-task/Readme.md'),
+              },
+              {
+                text: 'Make a hotfix',
+                link: resolveKnowledgeBaseLinkDoc('how-to/make-hotfix/Readme.md'),
+              },
+              {
+                text: 'Add new docs page',
+                link: resolveKnowledgeBaseLinkDoc('how-to/add-docs-page/Readme.md'),
+              },
+              {
+                text: 'Setup Workspace app',
+                link: resolveKnowledgeBaseLinkDoc('how-to/setup-workspace-app-entities/Readme.md'),
+              },
+              {
+                text: '📜 | Add REST API module',
+                link: resolveKnowledgeBaseLinkDoc('how-to/add-rest-api-module/Readme.md'),
+              },
+            ],
           },
           {
-            text: 'Tests Cookbook',
+            text: '📜 | Testing Cookbook',
             collapsed: true,
-            items: resolveKnowledgeBaseDocItems('tests-cookbook/**/*.md'),
+            items: resolveKnowledgeBaseDocItems('testing-cookbook/**/*.md'),
           },
         ],
       },

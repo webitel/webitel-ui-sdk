@@ -1,5 +1,11 @@
 # Adding REST API module
 
+> [!WARNING]
+> **Deprecation warning!**
+>
+> 📜 **Архівна стаття**.
+> Використовуйте [`@webitel/api-services`](../../../packages/api-services/index.md).
+
 ## Prerequisites
 
 Говоримо про практику? - Не забуваєм про теорію.
