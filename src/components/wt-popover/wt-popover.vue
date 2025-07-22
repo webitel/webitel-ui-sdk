@@ -1,20 +1,24 @@
 <template>
-  <p-popover
-    ref="innerPopover"
-    v-bind="attrs"
-    :append-to="appendTo"
-    :base-z-index="baseZIndex"
-    :auto-z-index="autoZIndex"
-    :breakpoints="breakpoints"
-    :dt="dt"
-    :pt="pt"
-    :pt-options="ptOptions"
-    :close-on-escape="closeOnEscape"
-    :unstyled="unstyled"
-    v-on="attrs"
-  >
-    <slot />
-  </p-popover>
+  <div>
+    <slot name="activator" v-bind="{ show, toggle, hide }" />
+
+    <p-popover
+      ref="innerPopover"
+      v-bind="attrs"
+      :append-to="appendTo"
+      :base-z-index="baseZIndex"
+      :auto-z-index="autoZIndex"
+      :breakpoints="breakpoints"
+      :dt="dt"
+      :pt="pt"
+      :pt-options="ptOptions"
+      :close-on-escape="closeOnEscape"
+      :unstyled="unstyled"
+      v-on="attrs"
+    >
+      <slot name="default" v-bind="{ hide, toggle }" />
+    </p-popover>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -37,10 +41,22 @@ withDefaults(defineProps<PopoverProps>(), {
 });
 defineEmits<PopoverEmitsOptions>();
 
+const toggle = (event?: Event) => {
+  innerPopover.value?.toggle(event);
+};
+
+const show = (event?: Event) => {
+  innerPopover.value?.show(event);
+};
+
+const hide = (event?: Event) => {
+  innerPopover.value?.hide(event);
+};
+
 // Expose useful Popover methods
 defineExpose({
-  toggle: (...args) => innerPopover.value?.toggle?.(...args),
-  show: (...args) => innerPopover.value?.show?.(...args),
-  hide: (...args) => innerPopover.value?.hide?.(...args),
+  toggle,
+  show,
+  hide,
 });
 </script>

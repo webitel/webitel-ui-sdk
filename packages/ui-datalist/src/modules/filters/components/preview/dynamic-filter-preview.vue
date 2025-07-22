@@ -2,20 +2,25 @@
   <dynamic-filter-config-view :disabled="readonly">
     <template #activator="{ toggle }">
       <div @click="toggle">
-        <div @pointerenter="toggleCheapPopover" @pointerleave="hideCheapPopover">
-          <wt-chip color="primary">
-            {{ filter.label || filterConfig.label }}
-            <wt-icon-btn
-              v-if="!filterConfig.notDeletable && !readonly"
-              color="on-primary"
-              icon="close--filled"
-              size="sm"
-              @mousedown.stop="deleteFilter"
-            />
-          </wt-chip>
-        </div>
+        <wt-popover>
+          <template #activator="{ show: showCheapPopoverCb, hide: hideCheapPopover }">
+            <div
+              @pointerenter="(event) => showCheapPopover(event, showCheapPopoverCb)"
+              @pointerleave="hideCheapPopover"
+            >
+              <wt-chip color="primary">
+                {{ filter.label || filterConfig.label }}
+                <wt-icon-btn
+                  v-if="!filterConfig.notDeletable && !readonly"
+                  color="on-primary"
+                  icon="close--filled"
+                  size="sm"
+                  @mousedown.stop="deleteFilter"
+                />
+              </wt-chip>
+            </div>
+          </template>
 
-        <wt-popover ref="wtCheapPopover">
           <template #default>
             <dynamic-filter-preview-info>
               <template #header>
@@ -82,18 +87,13 @@ const props = defineProps<DynamicFilterProps>();
 const emit = defineEmits<DynamicFilterEmits>();
 
 const localValue = ref();
-const wtCheapPopover = useTemplateRef('wtCheapPopover')
 
-const toggleCheapPopover = (event) => {
+const showCheapPopover = (event, showPopoverCb: (event) => void) => {
   if (!localValue.value) {
     fillLocalValue()
   }
 
-  wtCheapPopover.value.show(event);
-};
-
-const hideCheapPopover = () => {
-  wtCheapPopover.value.hide()
+  showPopoverCb(event);
 };
 
 /**

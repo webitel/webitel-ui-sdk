@@ -1,3 +1,4 @@
+import WtDisplayChipItems from './on-demand/wt-display-chip-items/wt-display-chip-items.vue';
 import WtNavigationMenu from './on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
 import WtSelectionPopup from './on-demand/wt-selection-popup/wt-selection-popup.vue';
 import WtStartPage from './on-demand/wt-start-page/components/wt-start-page.vue';
@@ -141,6 +142,7 @@ const Components = {
   WtNavigationMenu,
   WtStartPage,
   WtSelectionPopup,
+  WtDisplayChipItems,
 };
 
 export {
@@ -157,6 +159,7 @@ export {
   WtContextMenu,
   WtCopyAction,
   WtDatepicker,
+  WtDisplayChipItems,
   WtDivider,
   WtDualPanel,
   WtDummy,
