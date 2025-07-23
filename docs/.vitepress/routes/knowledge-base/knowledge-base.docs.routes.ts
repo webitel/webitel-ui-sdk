@@ -16,7 +16,7 @@ export const knowledgeBaseRoutes = [
       knowledgeBaseIndexRoute,
       {
         text: 'FAQ',
-        items: resolveKnowledgeBaseDocItems('faq/**/*.md'),
+        link: resolveKnowledgeBaseLinkDoc('faq/Readme.md'),
         collapsed: true,
       },
       {
@@ -24,11 +24,40 @@ export const knowledgeBaseRoutes = [
         collapsed: true,
         items: [
           {
-            text: 'Architecture, Structures, Design, etc',
+            text: 'General',
+            collapsed: false,
+            items: [
+              {
+                text: 'Code Base Deprecation Info',
+                link: resolveKnowledgeBaseLinkDoc('general/code-base-deprecation-info/Readme.md'),
+              },
+              {
+                text: 'Branching',
+                link: resolveKnowledgeBaseLinkDoc('general/branching/Readme.md'),
+              },
+              {
+                text: '📜 | Client-Server Communication',
+                link: resolveKnowledgeBaseLinkDoc('general/client-server-communication/Readme.md'),
+              },
+            ],
+          },
+          {
+            text: 'Projects structure',
             collapsed: true,
-            items: resolveKnowledgeBaseDocItems(
-              'architecture-and-structures/**/*.md',
-            ),
+            items: [
+              {
+                text: 'App Structure',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/app-structure/Readme.md'),
+              },
+              {
+                text: 'Applications List',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/applications-list/Readme.md'),
+              },
+              {
+                text: 'Webitel packages',
+                link: resolveKnowledgeBaseLinkDoc('projects-structure/webitel-packages/Readme.md'),
+              },
+            ],
           },
           {
             text: 'Code Style',
@@ -58,19 +87,35 @@ export const knowledgeBaseRoutes = [
             items: resolveKnowledgeBaseDocItems('namings/**/*.md'),
           },
           {
-            text: 'Onboarding',
-            collapsed: true,
-            items: resolveKnowledgeBaseDocItems('onboarding/**/*.md'),
-          },
-          {
             text: 'How To',
             collapsed: true,
-            items: resolveKnowledgeBaseDocItems('how-to/**/*.md'),
+            items: [
+              {
+                text: 'Estimate a task',
+                link: resolveKnowledgeBaseLinkDoc('how-to/estimate-task/Readme.md'),
+              },
+              {
+                text: 'Make a hotfix',
+                link: resolveKnowledgeBaseLinkDoc('how-to/make-hotfix/Readme.md'),
+              },
+              {
+                text: 'Add new docs page',
+                link: resolveKnowledgeBaseLinkDoc('how-to/add-docs-page/Readme.md'),
+              },
+              {
+                text: 'Setup Workspace app',
+                link: resolveKnowledgeBaseLinkDoc('how-to/setup-workspace-app-entities/Readme.md'),
+              },
+              {
+                text: '📜 | Add REST API module',
+                link: resolveKnowledgeBaseLinkDoc('how-to/add-rest-api-module/Readme.md'),
+              },
+            ],
           },
           {
-            text: 'Tests Cookbook',
+            text: '📜 | Testing Cookbook',
             collapsed: true,
-            items: resolveKnowledgeBaseDocItems('tests-cookbook/**/*.md'),
+            items: resolveKnowledgeBaseDocItems('testing-cookbook/**/*.md'),
           },
         ],
       },
