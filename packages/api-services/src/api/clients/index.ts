@@ -24,7 +24,6 @@ export * from './media/media';
 export * from './object/object';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
-export * from './roles/roles';
 export * from './skills/skills';
 export * from './slas/slas';
 export * from './teams/teams';

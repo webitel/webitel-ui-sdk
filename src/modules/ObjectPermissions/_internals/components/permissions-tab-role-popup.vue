@@ -95,7 +95,7 @@ const close = () => {
 
 const loadGrantees = (params) => {
   const fields = ['name', 'id', 'user'];
-  return RolesAPI.getExtendedRoles({
+  return RolesAPI.getList({
     ...params,
     fields,
   });
