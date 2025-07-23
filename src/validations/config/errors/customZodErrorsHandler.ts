@@ -22,17 +22,34 @@ export const customZodErrorsHandler =
         return t('validation.required');
       };
 
+      // if empty, show "required" error
       if (isEmpty(issue.input) as boolean) {
         return showRequiredMsg();
       }
 
-      return t('validation.minLength', {
+      // if str, show "length" error
+      if (issue.origin === 'string') {
+        return t('validation.minLength', {
+          min: issue.minimum,
+        });
+      }
+
+      // else, show "value" error
+      return t('validation.minValue', {
         min: issue.minimum,
       });
     }
 
     function handleTooBig(issue: z.core.$ZodIssueTooBig) {
-      return t('validation.maxLength', {
+        // if string, show "length" error
+        if (issue.origin === 'string') {
+            return t('validation.maxLength', {
+                max: issue.maximum,
+            });
+        }
+
+        // else, show "value" error
+      return t('validation.maxValue', {
         max: issue.maximum,
       });
     }
