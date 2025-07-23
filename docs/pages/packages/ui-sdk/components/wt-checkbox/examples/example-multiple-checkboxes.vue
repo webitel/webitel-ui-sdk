@@ -14,7 +14,7 @@ const selectedList = ref([options[0]]);
   />
   <wt-checkbox
     :selected="selectedList"
-    :value="options[2]"
+    :value="options[1]"
     label="Multiple checkbox 2"
     @change="selectedList = $event"
   />

@@ -1,107 +1,79 @@
 <template>
-  <div
-    :class="{
-      'wt-checkbox--active': isChecked,
-      'wt-checkbox--disabled': disabled,
-    }"
-    class="wt-checkbox"
+  <div 
+    class="wt-checkbox__wrapper"
+    v-bind="attrs"
+    @click="inputHandler"
   >
-    <wt-label
+    <p-checkbox
+      v-model="_selected"
       :disabled="disabled"
-      class="wt-checkbox__wrapper"
-      v-bind="labelProps"
+      :value="value"
+      :binary="isSingle"
+      @click.stop
+    />
+    <!-- @slot Custom label markup -->
+    <slot
+      name="label"
+      v-bind="{ label, isChecked, disabled }"
     >
-      <input
-        :checked="isChecked"
-        :disabled="disabled"
-        :value="value"
-        class="wt-checkbox__input"
-        type="checkbox"
-        @change="inputHandler"
-      />
-      <span class="wt-checkbox__checkmark">
-        <wt-icon
-          :color="iconColor"
-          :icon="checkboxIcon"
-        />
-      </span>
-      <!-- @slot Custom label markup -->
-      <slot
-        name="label"
-        v-bind="{ label, isChecked, disabled }"
+      <div
+        v-if="label"
+        class="wt-checkbox__label"
       >
-        <div
-          v-if="label"
-          class="wt-checkbox__label"
-        >
-          {{ label }}
-        </div>
-      </slot>
-    </wt-label>
+        {{ label }}
+      </div>
+    </slot>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'WtCheckbox',
-  model: {
-    prop: 'selected',
-    event: 'change',
-  },
-  props: {
-    value: {
-      type: [String, Boolean],
-      default: '',
-    },
-    selected: {
-      type: [Array, Boolean],
-      default: () => [],
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    labelProps: {
-      type: Object,
-      description: 'Object with props, passed down to wt-label as props',
-    },
-  },
-  emits: ['change'],
-  computed: {
-    isChecked() {
-      if (typeof this.selected === 'boolean') {
-        return this.selected;
-      }
-      return this.selected.includes(this.value);
-    },
-    checkboxIcon() {
-      return this.isChecked ? 'checkbox--checked' : 'checkbox';
-    },
-    iconColor() {
-      if (this.disabled) return 'disabled';
-      if (this.isChecked) return 'active';
-      return null;
-    },
-  },
-  methods: {
-    inputHandler() {
-      if (typeof this.selected === 'boolean') {
-        this.$emit('change', !this.selected);
-      } else {
-        let selected = [...this.selected];
-        if (selected.includes(this.value)) {
-          selected = selected.filter((value) => value !== this.value);
-        } else {
-          selected.push(this.value);
-        }
-        this.$emit('change', selected);
-      }
-    },
-  },
+<script setup lang="ts">
+import type { CheckboxProps } from 'primevue/checkbox';
+import { computed, defineEmits, defineProps, useAttrs } from 'vue';
+
+interface WtCheckboxProps extends CheckboxProps {
+  value?: string | boolean;
+  selected?: boolean | string[];
+  label?: string;
+  disabled?: boolean;
+}
+
+const props = withDefaults(defineProps<WtCheckboxProps>(), {
+  value: '',
+  selected: () => [],
+  label: '',
+  disabled: false,
+});
+
+const emit = defineEmits(['change']);
+
+const attrs = useAttrs();
+
+const _selected = computed({
+  get: () => props.selected,
+  set: () => inputHandler(),
+});
+
+const isSingle = computed(() => typeof props.selected === 'boolean');
+
+const isChecked = computed(() => {
+  if (isSingle.value) {
+    return props.selected;
+  }
+  return props.selected.includes(props.value);
+});
+
+const inputHandler = () => {
+  if (isSingle.value) {
+    emit('change', !props.selected);
+  } else {
+    let selected = [...props.selected];
+    if (selected.includes(props.value)) {
+      selected = selected.filter((value) => value !== props.value);
+    } else {
+      selected.push(props.value);
+    }
+    emit('change', selected);
+  }
 };
 </script>
 
@@ -110,48 +82,16 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-.wt-checkbox {
-  box-sizing: border-box;
-  width: fit-content;
-
-  .wt-label {
-    cursor: pointer;
-  }
-}
-
 .wt-checkbox__wrapper {
   display: flex;
   position: relative;
   align-items: center;
   user-select: none;
-
-  .wt-checkbox__checkmark {
-    line-height: 0; // prevent icon height >> content
-  }
 }
 
 .wt-checkbox__label {
   transition: var(--transition);
   cursor: pointer;
   margin-left: var(--checkbox-icon-margin);
-}
-
-/* Hide the browser's default checkbox */
-.wt-checkbox__input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
-.wt-checkbox:hover {
-  :deep(.wt-icon__icon) {
-    fill: var(--icon-active-color);
-  }
-}
-
-.wt-checkbox--disabled {
-  pointer-events: none;
 }
 </style>
