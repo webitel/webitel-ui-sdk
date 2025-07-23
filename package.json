@@ -208,6 +208,10 @@
       "types": "./types/locale*",
       "import": "./src/locale*"
     },
+    "./locale": {
+      "types": "./types/locale/index.d.ts",
+      "import": "./src/locale/index.ts"
+    },
     "./src/locale*": {
       "types": "./types/locale*",
       "import": "./src/locale*"
