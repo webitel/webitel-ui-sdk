@@ -1,7 +1,6 @@
 import { RegleBehaviourOptions } from '@regle/core';
 import { RegleSchemaBehaviourOptions, useRegleSchema } from '@regle/schemas';
 import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
-// @ts-ignore
 import { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { defineStore } from 'pinia';
 import { ref, toRaw, watch } from 'vue';
