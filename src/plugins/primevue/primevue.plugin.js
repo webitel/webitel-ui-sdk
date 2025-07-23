@@ -1,5 +1,6 @@
 import PAutoComplete from 'primevue/autocomplete';
 import PButton from 'primevue/button';
+import PChip from 'primevue/chip';
 import PrimeVue from 'primevue/config';
 import PInputText from 'primevue/inputtext';
 import PPopover from 'primevue/popover';
@@ -27,6 +28,7 @@ const initPrimevue = (app) => {
   app.component('PAutoComplete', changeComponentCompatMode(PAutoComplete));
   app.component('PInputText', changeComponentCompatMode(PInputText));
   app.component('PPopover', changeComponentCompatMode(PPopover));
+  app.component('PChip', changeComponentCompatMode(PChip));
 
   app.directive('tooltip', Tooltip);
 };

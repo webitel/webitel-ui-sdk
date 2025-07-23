@@ -1,26 +1,24 @@
 <template>
-  <span
+  <p-chip
     :class="`wt-chip--${color}-color`"
-    class="wt-chip"
+    :removable="removable"
   >
     <slot />
-  </span>
+  </p-chip>
 </template>
 
-<script>
-export default {
-  name: 'WtChip',
-  props: {
-    /**
-     * The color of the chip
-     * @values main, primary, secondary, success, warning, error, transfer
-     */
-    color: {
-      type: String,
-      default: 'main',
-    },
-  },
-};
+<script setup lang="ts">
+import type { ChipProps } from 'primevue/chip';
+import { defineProps, withDefaults  } from 'vue';
+
+interface WtProps extends ChipProps {
+  color?: 'main' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transfer';
+}
+
+withDefaults(defineProps<WtProps>(), {
+  color: 'main',
+  removable: false,
+});
 </script>
 
 <style lang="scss">
