@@ -23,11 +23,11 @@ export const messages = {
 export {
   en,
   es,
-  ru,
-  ro,
-  uk,
   kz,
   pl,
+  ro,
+  ru,
+  uk,
   uz,
   vi,
 };
