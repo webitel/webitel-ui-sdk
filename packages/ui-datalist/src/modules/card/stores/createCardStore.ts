@@ -10,7 +10,7 @@ import { CardItemId, CardParentId } from '../types/CardStore.types';
 
 const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
   RegleBehaviourOptions = {
-  autoDirty: false, // compute errors only on $validate() fn (btn click)
+  autoDirty: true, // compute errors only on $validate() fn (btn click)
   syncState: {
     onValidate: true, // make zod defaults fill state
   },
