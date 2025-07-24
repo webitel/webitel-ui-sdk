@@ -1,11 +1,10 @@
 <template>
   <div 
-    class="wt-checkbox__wrapper"
-    v-bind="attrs"
+    class="wt-checkbox"
     @click="inputHandler"
   >
     <p-checkbox
-      v-model="_selected"
+      v-model="model"
       :disabled="disabled"
       :value="value"
       :binary="isSingle"
@@ -28,51 +27,41 @@
 
 <script setup lang="ts">
 import type { CheckboxProps } from 'primevue/checkbox';
-import { computed, defineEmits, defineProps, useAttrs } from 'vue';
+import { computed, defineModel, defineProps } from 'vue';
 
 interface WtCheckboxProps extends CheckboxProps {
   value?: string | boolean;
-  selected?: boolean | string[];
   label?: string;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<WtCheckboxProps>(), {
   value: '',
-  selected: () => [],
   label: '',
   disabled: false,
 });
 
-const emit = defineEmits(['change']);
+const model = defineModel<boolean | string[]>({required: true});
 
-const attrs = useAttrs();
-
-const _selected = computed({
-  get: () => props.selected,
-  set: () => inputHandler(),
-});
-
-const isSingle = computed(() => typeof props.selected === 'boolean');
+const isSingle = computed(() => typeof model.value === 'boolean');
 
 const isChecked = computed(() => {
   if (isSingle.value) {
-    return props.selected;
+    return model.value;
   }
-  return props.selected.includes(props.value);
+  return model.value.includes(props.value);
 });
 
 const inputHandler = () => {
   if (isSingle.value) {
-    emit('change', !props.selected);
+    model.value = !model.value;
   } else {
-    let selected = [...props.selected];
+    const selected = [...model.value];
     if (selected.includes(props.value)) {
-      selected = selected.filter((value) => value !== props.value);
+      model.value = selected.filter((value) => value !== props.value);
     } else {
-      selected.push(props.value);
+      model.value.push(props.value);
     }
-    emit('change', selected);
   }
 };
 </script>
@@ -82,7 +71,7 @@ const inputHandler = () => {
 </style>
 
 <style lang="scss" scoped>
-.wt-checkbox__wrapper {
+.wt-checkbox {
   display: flex;
   position: relative;
   align-items: center;
