@@ -1,27 +1,32 @@
 <template>
   <div 
     class="wt-checkbox"
-    @click="inputHandler"
   >
     <p-checkbox
       v-model="model"
+      :input-id="checkboxId"
       :disabled="disabled"
       :value="value"
       :binary="isSingle"
-      @click.stop
+      @change="inputHandler"
     />
-    <!-- @slot Custom label markup -->
-    <slot
-      name="label"
-      v-bind="{ label, isChecked, disabled }"
+    <wt-label 
+      v-if="label"
+      :for="checkboxId"
+      :disabled="disabled"
     >
-      <div
-        v-if="label"
-        class="wt-checkbox__label"
+      <!-- @slot Custom label markup -->
+      <slot
+        name="label"
+        v-bind="{ label, isChecked, disabled }"
       >
-        {{ label }}
-      </div>
-    </slot>
+        <div
+          class="wt-checkbox__label"
+        >
+          {{ label }}
+        </div>
+      </slot>
+    </wt-label>
   </div>
 </template>
 
@@ -42,6 +47,8 @@ const props = withDefaults(defineProps<WtCheckboxProps>(), {
 });
 
 const model = defineModel<boolean | string[]>({required: true});
+
+const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
 const isSingle = computed(() => typeof model.value === 'boolean');
 
