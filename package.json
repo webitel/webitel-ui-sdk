@@ -37,6 +37,7 @@
     "src/enums/*",
     "src/mixins/*",
     "src/scripts/*",
+    "src/utils/*",
     "src/validations/*",
     "src/modules/*",
     "src/plugins/*",
@@ -195,6 +196,14 @@
     "./src/scripts*": {
       "types": "./types/scripts*",
       "import": "./src/scripts*"
+    },
+    "./utils*": {
+      "types": "./types/utils*",
+      "import": "./src/utils*"
+    },
+    "./utils": {
+      "types": "./types/utils/index.d.ts",
+      "import": "./src/utils/index.ts"
     },
     "./api*": {
       "types": "./types/api*",
