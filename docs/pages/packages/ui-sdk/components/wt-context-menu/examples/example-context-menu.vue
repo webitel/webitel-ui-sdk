@@ -8,7 +8,7 @@ const options = [
 </script>
 
 <template>
-  <wt-context-menu :visible="false" disabled :options="options">
+  <wt-context-menu :options="options">
     <template #activator="{ toggle }">
       <wt-button @click="toggle">Open</wt-button>
     </template>
