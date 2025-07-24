@@ -33,6 +33,7 @@ export const SpecialGlobalAction = {
   ViewCdrPhoneNumbers: 'view_cdr_phone_numbers',
   ChangeUserPassword: 'change_user_password',
   EavesdropCall: 'eavesdrop_call',
+  ControlAgentScreen: 'control_agent_screen',
 } as const;
 
 export type SpecialGlobalAction =
