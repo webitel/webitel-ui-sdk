@@ -1,0 +1,1 @@
+# [Regle](https://reglejs.dev/) частина валідацій [card](../../card/Readme.md) модуля.
