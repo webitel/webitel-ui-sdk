@@ -348,19 +348,36 @@ export default {
     sipAccountValidator: 'Debe parecer una cuenta SIP',
     ipValidator: 'Debe parecer una IPv4',
     macValidator: 'Debe parecer una MAC',
-    minValue: 'El valor no debe ser menor que',
-    maxValue: 'El valor no debe ser mayor que',
-    maxLength: 'La longitud no debe ser mayor que',
-    sameAs: 'Contraseña incorrecta',
-    requiredArrayValue: 'El arreglo no debe estar vacío',
+    minValue: ({ named }) => {
+      let text = 'El valor no debe ser menor que';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'El valor no debe ser mayor que';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
     minLength: ({ named }) => {
       let text = 'La longitud no debe ser menor que';
       if (named('min')) {
         text += ` ${named('min')}`;
       }
-
       return text;
     },
+    maxLength: ({ named }) => {
+      let text = 'La longitud no debe ser mayor que';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    sameAs: 'Contraseña incorrecta',
+    requiredArrayValue: 'El arreglo no debe estar vacío',
     url: 'Debe parecer una URL',
     websocketValidator: 'Debe parecer una URL de WebSocket',
     isRegExpMatched: 'La contraseña debe coincidir con la expresión regular:',

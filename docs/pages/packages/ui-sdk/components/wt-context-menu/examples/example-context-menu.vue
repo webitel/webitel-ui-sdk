@@ -9,8 +9,8 @@ const options = [
 
 <template>
   <wt-context-menu :options="options">
-    <template #activator>
-      <wt-button>Open</wt-button>
+    <template #activator="{ toggle }">
+      <wt-button @click="toggle">Open</wt-button>
     </template>
   </wt-context-menu>
 </template>

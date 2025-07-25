@@ -353,19 +353,36 @@ export default {
     sipAccountValidator: "SIP akkaunt ko'rinishida bo'lishi kerak",
     ipValidator: "IPv4 ko'rinishida bo'lishi kerak",
     macValidator: "MAC ko'rinishida bo'lishi kerak",
-    minValue: "Qiymat dan kam bo'lmasligi kerak",
-    maxValue: "Qiymat dan ko'p bo'lmasligi kerak",
-    maxLength: "Uzunlik dan ko'p bo'lmasligi kerak",
-    sameAs: "Noto'g'ri parol",
-    requiredArrayValue: "Massiv bo'sh bo'lmasligi kerak",
+    minValue: ({ named }) => {
+      let text = "Qiymat dan kam bo'lmasligi kerak";
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = "Qiymat dan ko'p bo'lmasligi kerak";
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
     minLength: ({ named }) => {
       let text = "Uzunlik dan kam bo'lmasligi kerak";
       if (named('min')) {
         text += ` ${named('min')}`;
       }
-
       return text;
     },
+    maxLength: ({ named }) => {
+      let text = "Uzunlik dan ko'p bo'lmasligi kerak";
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    sameAs: "Noto'g'ri parol",
+    requiredArrayValue: "Massiv bo'sh bo'lmasligi kerak",
     url: "URL ko'rinishida bo'lishi kerak",
     websocketValidator: "WebSocket url ko'rinishida bo'lishi kerak",
     isRegExpMatched: 'Parol quyidagi formatga mos kelishi kerak:',

@@ -8,7 +8,8 @@
     class="wt-label"
   >
     <slot />
-    <wt-hint v-if="hint">{{ hint }} </wt-hint>
+
+    <div v-if="hint" v-tooltip="hint" />
   </label>
 </template>
 

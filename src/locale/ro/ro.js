@@ -352,19 +352,36 @@ export default {
     sipAccountValidator: 'Trebuie să arate ca un cont SIP',
     ipValidator: 'Trebuie să arate ca un IPv4',
     macValidator: 'Trebuie să arate ca un MAC',
-    minValue: 'Valoarea nu trebuie să fie mai mică decât',
-    maxValue: 'Valoarea nu trebuie să fie mai mare decât',
-    maxLength: 'Lungimea nu trebuie să fie mai mare de',
-    sameAs: 'Parolă incorectă',
-    requiredArrayValue: 'Matricea nu trebuie să fie goală',
+    minValue: ({ named }) => {
+      let text = 'Valoarea nu trebuie să fie mai mică decât';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'Valoarea nu trebuie să fie mai mare decât';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
     minLength: ({ named }) => {
       let text = 'Lungimea nu trebuie să fie mai mică de';
       if (named('min')) {
         text += ` ${named('min')}`;
       }
-
       return text;
     },
+    maxLength: ({ named }) => {
+      let text = 'Lungimea nu trebuie să fie mai mare de';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    sameAs: 'Parolă incorectă',
+    requiredArrayValue: 'Matricea nu trebuie să fie goală',
     url: 'Trebuie să arate ca un URL',
     websocketValidator: 'Trebuie să arate ca un URL WebSocket',
     isRegExpMatched: 'Parola trebuie să se potrivească cu expresia regulată:',
