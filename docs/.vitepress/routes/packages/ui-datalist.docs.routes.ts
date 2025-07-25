@@ -94,6 +94,10 @@ export const uiDatalistRoutes = [{
               text: 'Zod',
               link: resolveLink('card-tools/validations/zod/Readme.md'),
             },
+            {
+              text: 'Usage',
+                link: resolveLink('card-tools/validations/usage/Readme.md'),
+            },
           ],
         },
       ],
