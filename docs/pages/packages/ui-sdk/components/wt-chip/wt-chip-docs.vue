@@ -27,6 +27,13 @@ export default {
         default: 'main',
         description: '"main" and "outline" are chip-specific colors',
       },
+      {
+        value: 'removable',
+        code: '<wt-chip removable></wt-chip>',
+        type: 'Boolean',
+        default: 'false',
+        description: 'Removes chip',
+      },
     ],
   }),
   mounted() {
