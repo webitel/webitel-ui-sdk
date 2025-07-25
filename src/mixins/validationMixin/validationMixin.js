@@ -32,13 +32,15 @@ export default {
         else if (this.v.macValidator?.$invalid)
           validationText = this.$t('validation.macValidator');
         else if (this.v.minValue?.$invalid)
-          validationText = `${this.$t('validation.minValue')} ${this.v.minValue.$params.min}`;
+          validationText = this.$t('validation.minValue', { min: this.v.minValue.$params.min });
         else if (this.v.maxValue?.$invalid)
-          validationText = `${this.$t('validation.maxValue')} ${this.v.maxValue.$params.max}`;
+          validationText = this.$t('validation.maxValue', { max: this.v.maxValue.$params.max });
         else if (this.v.sipAccountValidator?.$invalid)
           validationText = this.$t('validation.sipAccountValidator');
         else if (this.v.minLength?.$invalid)
-          validationText = `${this.$t('validation.minLength')} ${this.v.minLength.$params.min}`;
+          validationText = this.$t('validation.minLength', { min: this.v.minLength.$params.min });
+        else if (this.v.maxLength?.$invalid)
+          validationText = this.$t('validation.maxLength', { max: this.v.maxLength.$params.max });
         else if (this.v.url?.$invalid)
           validationText = `${this.$t('validation.url')}`;
         else if (this.v.regExpValidator?.$invalid)

@@ -1,61 +1,49 @@
 <template>
   <aside class="wt-table-actions">
     <slot />
-    <wt-tooltip v-if="isImport">
-      <template #activator>
-        <wt-icon-btn
-          icon="download"
-          @click="$emit('input', 'import')"
-        />
-      </template>
-      {{ $t('reusable.import') }}
-    </wt-tooltip>
-    <wt-tooltip v-if="isExport">
-      <template #activator>
-        <wt-icon-btn
-          icon="upload"
-          @click="$emit('input', 'export')"
-        />
-      </template>
-      {{ $t('reusable.export') }}
-    </wt-tooltip>
-    <wt-tooltip v-if="isFilterReset">
-      <template #activator>
-        <wt-icon-btn
-          icon="clear"
-          @click="$emit('input', 'filterReset')"
-        />
-      </template>
-      {{ $t('webitelUI.tableActions.filterReset') }}
-    </wt-tooltip>
-    <wt-tooltip v-if="isColumnSelect">
-      <template #activator>
-        <wt-icon-btn
-          icon="column-select"
-          @click="$emit('input', 'columnSelect')"
-        />
-      </template>
-      {{ $t('webitelUI.tableActions.columnSelect') }}
-    </wt-tooltip>
-    <wt-tooltip v-if="isRefresh">
-      <template #activator>
-        <wt-icon-btn
-          icon="refresh"
-          @click="$emit('input', 'refresh')"
-        />
-      </template>
-      {{ $t('webitelUI.tableActions.refreshTable') }}
-    </wt-tooltip>
-    <wt-tooltip v-if="isSettings">
-      <template #activator>
-        <wt-icon-btn
-          :class="{ active: isSettingsActive }"
-          icon="filter"
-          @click="$emit('input', 'settings')"
-        />
-      </template>
-      {{ $t('webitelUI.tableActions.expandFilters') }}
-    </wt-tooltip>
+
+    <wt-icon-btn
+      v-if="isImport"
+      v-tooltip="$t('reusable.import')"
+      icon="download"
+      @click="$emit('input', 'import')"
+    />
+
+    <wt-icon-btn
+      v-if="isExport"
+      v-tooltip="$t('reusable.export')"
+      icon="upload"
+      @click="$emit('input', 'export')"
+    />
+
+    <wt-icon-btn
+      v-if="isFilterReset"
+      v-tooltip="$t('webitelUI.tableActions.filterReset')"
+      icon="clear"
+      @click="$emit('input', 'filterReset')"
+    />
+
+    <wt-icon-btn
+      v-if="isColumnSelect"
+      v-tooltip="$t('webitelUI.tableActions.columnSelect')"
+      icon="column-select"
+      @click="$emit('input', 'columnSelect')"
+    />
+
+    <wt-icon-btn
+      v-if="isRefresh"
+      v-tooltip="$t('webitelUI.tableActions.refreshTable')"
+      icon="refresh"
+      @click="$emit('input', 'refresh')"
+    />
+
+    <wt-icon-btn
+      v-if="isSettings"
+      v-tooltip="$t('webitelUI.tableActions.expandFilters')"
+      :class="{ active: isSettingsActive }"
+      icon="filter"
+      @click="$emit('input', 'settings')"
+    />
   </aside>
 </template>
 

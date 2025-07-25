@@ -8,25 +8,18 @@
         @change="updateQuestion({ path: 'required', value: $event })"
       />
       <div class="audit-form-question-write-header__actions">
-        <wt-tooltip>
-          <template #activator>
-            <wt-icon-btn
-              icon="copy"
-              @click="emit('copy')"
-            />
-          </template>
-          {{ $t('reusable.copy') }}
-        </wt-tooltip>
-        <wt-tooltip>
-          <template #activator>
-            <wt-icon-btn
-              :disabled="first"
-              icon="bucket"
-              @click="emit('delete')"
-            />
-          </template>
-          {{ $t('reusable.delete') }}
-        </wt-tooltip>
+        <wt-icon-btn
+          v-tooltip="t('reusable.copy')"
+          icon="copy"
+          @click="emit('copy')"
+        />
+
+        <wt-icon-btn
+          v-tooltip="$t('reusable.delete')"
+          :disabled="first"
+          icon="bucket"
+          @click="emit('delete')"
+        />
       </div>
     </header>
     <section class="audit-form-question-write-content">

@@ -1,7 +1,6 @@
 import { RegleBehaviourOptions } from '@regle/core';
 import { RegleSchemaBehaviourOptions, useRegleSchema } from '@regle/schemas';
 import { getDefaultsFromZodSchema } from '@webitel/api-services/utils';
-// @ts-ignore
 import { ApiModule } from '@webitel/ui-sdk/src/api/types/ApiModule';
 import { defineStore } from 'pinia';
 import { ref, toRaw, watch } from 'vue';
@@ -11,7 +10,7 @@ import { CardItemId, CardParentId } from '../types/CardStore.types';
 
 const defaultRegleValidationOptions: RegleSchemaBehaviourOptions &
   RegleBehaviourOptions = {
-  autoDirty: false, // compute errors only on $validate() fn (btn click)
+  autoDirty: true, // compute errors only on $validate() fn (btn click)
   syncState: {
     onValidate: true, // make zod defaults fill state
   },
