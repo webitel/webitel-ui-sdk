@@ -22,7 +22,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     headers: rowHeaders,
     disablePersistence,
     storeType,
-    isAppendDataList
+    isAppendDataList,
   } = config;
   const usePaginationStore = createTablePaginationStore(namespace, config);
   const useHeadersStore = createTableHeadersStore(namespace, config, {
