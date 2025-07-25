@@ -1,6 +1,6 @@
 <template>
   <p-chip
-    :class="`wt-chip--${color}-color`"
+    :class="`p-chip-${color}`"
     :removable="removable"
   >
     <slot />

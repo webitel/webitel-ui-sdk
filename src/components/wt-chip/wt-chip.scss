@@ -11,37 +11,37 @@
   white-space: nowrap;
 
   &--main-color {
-    background: var(--wt-chip-main-background-color) !important;
-    color: var(--wt-chip-main-text-color) !important;
+    background: var(--wt-chip-main-background-color);
+    color: var(--wt-chip-main-text-color);
   }
 
   &--primary-color {
-    background: var(--wt-chip-primary-background-color) !important;
-    color: var(--wt-chip-primary-text-color) !important;
+    background: var(--wt-chip-primary-background-color);
+    color: var(--wt-chip-primary-text-color);
   }
 
   &--secondary-color {
-    background: var(--wt-chip-secondary-background-color) !important;
-    color: var(--wt-chip-secondary-text-color) !important;
+    background: var(--wt-chip-secondary-background-color);
+    color: var(--wt-chip-secondary-text-color);
   }
 
   &--success-color {
-    background: var(--wt-chip-success-background-color) !important;
-    color: var(--wt-chip-success-text-color) !important;
+    background: var(--wt-chip-success-background-color);
+    color: var(--wt-chip-success-text-color);
   }
 
   &--warning-color {
-    background: var(--wt-chip-warning-background-color) !important;
-    color: var(--wt-chip-warning-text-color) !important;
+    background: var(--wt-chip-warning-background-color);
+    color: var(--wt-chip-warning-text-color);
   }
 
   &--error-color {
-    background: var(--wt-chip-error-background-color) !important;
-    color: var(--wt-chip-error-text-color) !important;
+    background: var(--wt-chip-error-background-color);
+    color: var(--wt-chip-error-text-color);
   }
 
   &--transfer-color {
-    background: var(--wt-chip-transfer-background-color) !important;
-    color: var(--wt-chip-transfer-text-color) !important;
+    background: var(--wt-chip-transfer-background-color);
+    color: var(--wt-chip-transfer-text-color);
   }
 }
