@@ -246,9 +246,9 @@ const applicationsAccess = (value = true) => ({
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSectionsNew.Statuses}`,
     },
 
-    [CrmSections.SECTION_CUSTOMIZATION]: {
+    [CrmSections.TYPES_EXTENSIONS_CUSTOMIZATION]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSectionsNew.SectionCustomization}`,
+      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSectionsNew.TypesExtensionsCustomization}`,
     },
     [CrmSections.CUSTOM_LOOKUPS]: {
       _enabled: value,

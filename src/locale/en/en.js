@@ -289,7 +289,7 @@ export default {
         [CrmSections.ServiceCatalogs]: 'Service catalogs',
         [CrmSections.Sources]: 'Case sources',
         [CrmSections.ContactGroups]: 'Contact groups',
-        [CrmSections.SectionCustomization]: 'Section customization',
+        [CrmSections.TypesExtensionsCustomization]: 'Case and contacts customization',
         [CrmSections.CustomLookups]: 'Custom lookups',
       },
     },

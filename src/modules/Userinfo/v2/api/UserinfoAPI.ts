@@ -45,7 +45,7 @@ const getUiVisibilityAccess = async (): Promise<VisibilityAccess> => {
   const url = 'role/metadata/access';
   try {
     const response = await instance.get(url);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, []);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }

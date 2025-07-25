@@ -14,6 +14,6 @@ export const CrmSections = {
   CaseSources: 'case-sources',
 
   // CUSTOMIZATION
-  SectionCustomization: 'section-customization',
+  TypesExtensionsCustomization: 'types-extensions-customization',
   CustomLookups: 'custom-lookups',
 };

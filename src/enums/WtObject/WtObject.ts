@@ -55,7 +55,7 @@ export const WtObject = {
   Priorities: 'priorities',
   Status: 'status',
   Source: 'source',
-  WtTypeExtensions: 'wtTypeExtensions',
+  TypesExtensionsCustomization: 'typesExtensionsCustomization',
   CustomLookups: 'customLookups',
   AuditForm: 'auditForm',
   AuditRating: 'auditRating',
