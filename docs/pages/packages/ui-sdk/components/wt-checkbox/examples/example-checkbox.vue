@@ -6,9 +6,8 @@ const selected = ref(false);
 
 <template>
   <wt-checkbox
-    :selected="selected"
+    v-model="selected"
     label="Checkbox"
-    @change="selected = $event"
   />
 </template>
 
