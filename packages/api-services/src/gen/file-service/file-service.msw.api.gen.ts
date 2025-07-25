@@ -10,6 +10,8 @@ import { delay, HttpResponse, http } from 'msw';
 import type {
 	StorageDeleteFilesResponse,
 	StorageListFile,
+	StorageRenegotiateP2PVideoResponse,
+	StorageStopP2PVideoResponse,
 	StorageUploadP2PVideoResponse,
 } from '.././_models';
 import { StorageUploadFileChannel } from '.././_models';
@@ -109,6 +111,23 @@ export const getFileServiceSearchFilesResponseMock = (
 export const getFileServiceUploadP2PVideoResponseMock = (
 	overrideResponse: Partial<StorageUploadP2PVideoResponse> = {},
 ): StorageUploadP2PVideoResponse => ({
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	sdpAnswer: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getFileServiceStopP2PVideoResponseMock =
+	(): StorageStopP2PVideoResponse => ({});
+
+export const getFileServiceRenegotiateP2PVideoResponseMock = (
+	overrideResponse: Partial<StorageRenegotiateP2PVideoResponse> = {},
+): StorageRenegotiateP2PVideoResponse => ({
 	sdpAnswer: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -171,7 +190,7 @@ export const getFileServiceUploadP2PVideoMockHandler = (
 				| Promise<StorageUploadP2PVideoResponse>
 				| StorageUploadP2PVideoResponse),
 ) => {
-	return http.post('*/storage/p2p/upload/video', async (info) => {
+	return http.post('*/storage/p2p/video', async (info) => {
 		await delay(1000);
 
 		return new HttpResponse(
@@ -186,8 +205,58 @@ export const getFileServiceUploadP2PVideoMockHandler = (
 		);
 	});
 };
+
+export const getFileServiceStopP2PVideoMockHandler = (
+	overrideResponse?:
+		| StorageStopP2PVideoResponse
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<StorageStopP2PVideoResponse> | StorageStopP2PVideoResponse),
+) => {
+	return http.delete('*/storage/p2p/video/:id', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getFileServiceStopP2PVideoResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getFileServiceRenegotiateP2PVideoMockHandler = (
+	overrideResponse?:
+		| StorageRenegotiateP2PVideoResponse
+		| ((
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
+		  ) =>
+				| Promise<StorageRenegotiateP2PVideoResponse>
+				| StorageRenegotiateP2PVideoResponse),
+) => {
+	return http.put('*/storage/p2p/video/:id', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getFileServiceRenegotiateP2PVideoResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
 export const getFileServiceMock = () => [
 	getFileServiceDeleteFilesMockHandler(),
 	getFileServiceSearchFilesMockHandler(),
 	getFileServiceUploadP2PVideoMockHandler(),
+	getFileServiceStopP2PVideoMockHandler(),
+	getFileServiceRenegotiateP2PVideoMockHandler(),
 ];

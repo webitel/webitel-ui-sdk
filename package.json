@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.8.29",
+  "version": "25.8.33",
   "private": false,
   "scripts": {
     "make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",
@@ -37,6 +37,7 @@
     "src/enums/*",
     "src/mixins/*",
     "src/scripts/*",
+    "src/utils/*",
     "src/validations/*",
     "src/modules/*",
     "src/plugins/*",
@@ -196,6 +197,14 @@
       "types": "./types/scripts*",
       "import": "./src/scripts*"
     },
+    "./utils*": {
+      "types": "./types/utils*",
+      "import": "./src/utils*"
+    },
+    "./utils": {
+      "types": "./types/utils/index.d.ts",
+      "import": "./src/utils/index.ts"
+    },
     "./api*": {
       "types": "./types/api*",
       "import": "./src/api*"
@@ -207,6 +216,10 @@
     "./locale*": {
       "types": "./types/locale*",
       "import": "./src/locale*"
+    },
+    "./locale": {
+      "types": "./types/locale/index.d.ts",
+      "import": "./src/locale/index.ts"
     },
     "./src/locale*": {
       "types": "./types/locale*",

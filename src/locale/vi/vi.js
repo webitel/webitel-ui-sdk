@@ -354,19 +354,36 @@ export default {
     sipAccountValidator: 'Phải là tài khoản SIP',
     ipValidator: 'Phải là IPv4',
     macValidator: 'Phải là MAC',
-    minValue: 'Giá trị không được nhỏ hơn',
-    maxValue: 'Giá trị không được lớn hơn',
-    maxLength: 'Độ dài không được lớn hơn',
-    sameAs: 'Mật khẩu không đúng',
-    requiredArrayValue: 'Mảng không được để trống',
+    minValue: ({ named }) => {
+      let text = 'Giá trị không được nhỏ hơn';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'Giá trị không được lớn hơn';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
     minLength: ({ named }) => {
       let text = 'Độ dài không được nhỏ hơn';
       if (named('min')) {
         text += ` ${named('min')}`;
       }
-
       return text;
     },
+    maxLength: ({ named }) => {
+      let text = 'Độ dài không được lớn hơn';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    sameAs: 'Mật khẩu không đúng',
+    requiredArrayValue: 'Mảng không được để trống',
     url: 'Phải là URL',
     websocketValidator: 'Phải là URL WebSocket',
     isRegExpMatched: 'Mật khẩu phải khớp với biểu thức chính quy:',

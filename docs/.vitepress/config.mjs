@@ -12,7 +12,7 @@ global.localStorage = new Window().localStorage; // coz vitepress ssr doesn't ha
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Webitel UI',
+  title: '@webitel/ui',
   description: 'Webitel UI docs',
   base: '/webitel-ui-sdk/',
   head: [
@@ -20,7 +20,7 @@ export default defineConfig({
       'link',
       {
         rel: 'icon',
-        href: 'data:image/svg+xml,<svg xmlns="%22http://www.w3.org/2000/svg%22" viewBox="%220" 0 100 100%22><text y="%22.9em%22" font-size="%2290%22">💅</text></svg>',
+        href: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🧑‍💻 </text></svg>',
       },
     ],
   ],
@@ -76,6 +76,10 @@ export default defineConfig({
       {
         icon: 'github',
         link: 'https://github.com/webitel/webitel-ui-sdk',
+      },
+      {
+        icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📖</text></svg>' },
+        link: 'https://github.com/webitel/webitel-ui-sdk/tree/master/docs',
       },
     ],
     // https://vitepress.dev/reference/default-theme-edit-link#site-level-config

@@ -12,7 +12,7 @@ This module contains the necessary tools for organizing data in a table view.
 [Card](../createCardStoreModule/Readme.md),
 [Filters](../../modules/Filters/Readme.md),
 Store Modules)
-see [how-to](../../../../knowledge-base/how-to/Integration-between-store-modules/Readme.md) page docs.**
+see [how-to](../Integration-between-store-modules/Readme.md) page docs.**
 
 ## `createTableStoreModule`
 

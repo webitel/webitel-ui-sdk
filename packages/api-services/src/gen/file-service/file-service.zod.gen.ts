@@ -110,5 +110,29 @@ export const fileServiceUploadP2PVideoBody = zod.object({
 });
 
 export const fileServiceUploadP2PVideoResponse = zod.object({
+	id: zod.string().optional(),
+	sdpAnswer: zod.string().optional(),
+});
+
+export const fileServiceStopP2PVideoParams = zod.object({
+	id: zod.string(),
+});
+
+export const fileServiceStopP2PVideoBody = zod.object({
+	id: zod.string().optional(),
+});
+
+export const fileServiceStopP2PVideoResponse = zod.object({});
+
+export const fileServiceRenegotiateP2PVideoParams = zod.object({
+	id: zod.string(),
+});
+
+export const fileServiceRenegotiateP2PVideoBody = zod.object({
+	id: zod.string().optional(),
+	sdpOffer: zod.string().optional(),
+});
+
+export const fileServiceRenegotiateP2PVideoResponse = zod.object({
 	sdpAnswer: zod.string().optional(),
 });

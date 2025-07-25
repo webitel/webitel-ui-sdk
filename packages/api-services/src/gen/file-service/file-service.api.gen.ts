@@ -13,6 +13,10 @@ import type {
 	StorageDeleteFilesRequest,
 	StorageDeleteFilesResponse,
 	StorageListFile,
+	StorageRenegotiateP2PVideoRequest,
+	StorageRenegotiateP2PVideoResponse,
+	StorageStopP2PVideoRequest,
+	StorageStopP2PVideoResponse,
 	StorageUploadP2PVideoRequest,
 	StorageUploadP2PVideoResponse,
 } from '.././_models';
@@ -52,8 +56,33 @@ export const // --- title start
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
-					'/storage/p2p/upload/video',
+					'/storage/p2p/video',
 					storageUploadP2PVideoRequest,
+					options,
+				);
+			};
+			const fileServiceStopP2PVideo = <
+				TData = AxiosResponse<StorageStopP2PVideoResponse>,
+			>(
+				id: string,
+				storageStopP2PVideoRequest: StorageStopP2PVideoRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/storage/p2p/video/${id}`, {
+					data: storageStopP2PVideoRequest,
+					...options,
+				});
+			};
+			const fileServiceRenegotiateP2PVideo = <
+				TData = AxiosResponse<StorageRenegotiateP2PVideoResponse>,
+			>(
+				id: string,
+				storageRenegotiateP2PVideoRequest: StorageRenegotiateP2PVideoRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.put(
+					`/storage/p2p/video/${id}`,
+					storageRenegotiateP2PVideoRequest,
 					options,
 				);
 			};
@@ -63,6 +92,8 @@ export const // --- title start
 				fileServiceDeleteFiles,
 				fileServiceSearchFiles,
 				fileServiceUploadP2PVideo,
+				fileServiceStopP2PVideo,
+				fileServiceRenegotiateP2PVideo,
 			};
 		};
 export type FileServiceDeleteFilesResult =
@@ -70,5 +101,9 @@ export type FileServiceDeleteFilesResult =
 export type FileServiceSearchFilesResult = AxiosResponse<StorageListFile>;
 export type FileServiceUploadP2PVideoResult =
 	AxiosResponse<StorageUploadP2PVideoResponse>;
+export type FileServiceStopP2PVideoResult =
+	AxiosResponse<StorageStopP2PVideoResponse>;
+export type FileServiceRenegotiateP2PVideoResult =
+	AxiosResponse<StorageRenegotiateP2PVideoResponse>;
 
 // --- footer end

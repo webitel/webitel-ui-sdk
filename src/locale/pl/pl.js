@@ -352,19 +352,36 @@ export default {
     sipAccountValidator: 'Powinno wyglądać jak konto SIP',
     ipValidator: 'Powinno wyglądać jak IPv4',
     macValidator: 'Powinno wyglądać jak MAC',
-    minValue: 'Wartość nie powinna być mniejsza niż',
-    maxValue: 'Wartość nie powinna być większa niż',
-    maxLength: 'Długość nie powinna być większa niż',
-    sameAs: 'Nieprawidłowe hasło',
-    requiredArrayValue: 'Tablica nie powinna być pusta',
+    minValue: ({ named }) => {
+      let text = 'Wartość nie powinna być mniejsza niż';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'Wartość nie powinna być większa niż';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
     minLength: ({ named }) => {
       let text = 'Długość nie powinna być mniejsza niż';
       if (named('min')) {
         text += ` ${named('min')}`;
       }
-
       return text;
     },
+    maxLength: ({ named }) => {
+      let text = 'Długość nie powinna być większa niż';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    sameAs: 'Nieprawidłowe hasło',
+    requiredArrayValue: 'Tablica nie powinna być pusta',
     url: 'Powinno wyglądać jak URL',
     websocketValidator: 'Powinno wyglądać jak URL WebSocket',
     isRegExpMatched: 'Hasło musi pasować do wyrażenia regularnego:',

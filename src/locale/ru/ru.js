@@ -350,12 +350,36 @@ export default {
     sipAccountValidator: 'Необходимо ввести SIP-аккаунт',
     ipValidator: 'Необходимо ввести IPv4',
     macValidator: 'Необходимо ввести MAC-адрес',
-    minValue: 'Значение должно быть не меньше',
-    maxValue: 'Значение должно быть не больше',
-    maxLength: 'Длина не должна быть больше, чем',
+    minValue: ({ named }) => {
+      let text = 'Значение должно быть не меньше';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'Значение должно быть не больше';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    maxLength: ({ named }) => {
+      let text = 'Длина не должна быть больше, чем';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
     sameAs: 'Неверный пароль',
     requiredArrayValue: 'Поле не должно быть пустым',
-    minLength: 'Количество символов не должно быть меньше, чем',
+    minLength: ({ named }) => {
+      let text = 'Количество символов не должно быть меньше, чем';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
     url: 'Необходимо ввести корректный URL-адрес',
     websocketValidator: 'Необходимо ввести корректный WebSocket url-адрес',
     isRegExpMatched: 'Пароль должен соответствовать регулярному выражению:',

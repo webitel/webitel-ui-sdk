@@ -13,6 +13,10 @@ export const apiServicesRoutes = [{
   items: [
     apiServicesIndexRoute,
     {
+      text: 'Introduction',
+      link: resolveLink('intro/index.md'),
+    },
+    {
       text: 'Package Contents',
       link: resolveLink('contents/index.md'),
     },
@@ -29,11 +33,11 @@ export const apiServicesRoutes = [{
         },
         {
           text: 'Migration from webitel-sdk',
-          link: resolveLink('usage/general/index.md'),
+          link: resolveLink('usage/migration/webitel-sdk/index.md'),
         },
         {
           text: 'Migration from @webitel/ui-sdk/api',
-          link: resolveLink('usage/migration/index.md'),
+          link: resolveLink('usage/migration/ui-sdk/index.md'),
         },
       ],
     },

@@ -6,5 +6,6 @@
  */
 
 export interface StorageUploadP2PVideoResponse {
+	id?: string;
 	sdpAnswer?: string;
 }

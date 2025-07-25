@@ -1,14 +1,11 @@
 <template>
   <div class="wt-table-column-select">
-    <wt-tooltip>
-      <template #activator>
-        <wt-icon-btn
-          icon="column-select"
-          @click="openPopup"
-        />
-      </template>
-      {{ $t('webitelUI.tableColumnSelect.title') }}
-    </wt-tooltip>
+    <wt-icon-btn
+      v-tooltip="$t('webitelUI.tableColumnSelect.title')"
+      icon="column-select"
+      @click="openPopup"
+    />
+
     <wt-popup
       :shown="isColumnSelectPopup"
       class="wt-table-column-select__popup"

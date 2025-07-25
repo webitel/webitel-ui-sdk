@@ -352,15 +352,36 @@ export default {
     sipAccountValidator: 'Should look like SIP account',
     ipValidator: 'Should look like IPv4',
     macValidator: 'Should look like MAC',
-    minValue: 'Value should be not less than',
-    maxValue: 'Value should be not much than',
-    maxLength: 'The length should not be greater than',
     sameAs: 'Incorrect password',
     requiredArrayValue: 'Array should not be empty',
+    minValue: ({ named }) => {
+      let text = 'Value should be not less than';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'Value should be not greater than';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    
     minLength: ({ named }) => {
       let text = 'The length should not be less than';
       if (named('min')) {
         text += ` ${named('min')}`;
+      }
+
+      return text;
+    },
+    maxLength: ({ named }) => {
+      let text = 'The length should not be greater than';
+      if (named('max')) {
+        text += ` ${named('max')}`;
       }
 
       return text;
