@@ -4,15 +4,15 @@ const tooltip = {
   ...TooltipScheme.sizes,
   colorScheme: TooltipScheme.colorScheme,
 
-  css: () => `
+  css: ({ dt }) => `
       .p-tooltip-text {
           white-space: pre-line;
           word-break: normal;
-          background: var(--p-tooltip-background);
-          color: var(--p-tooltip-color);
-          padding: var(--p-tooltip-padding);
-          box-shadow: var(--p-tooltip-shadow);
-          border-radius: var(--p-tooltip-border-radius);
+          background: ${dt(`tooltip.background`)};
+          color: ${dt('tooltip.color')};
+          padding: ${dt('tooltip.padding')};
+          box-shadow: ${dt('tooltip.shadow')};
+          border-radius: ${dt('tooltip.border.radius')};
       }
   `,
 };
