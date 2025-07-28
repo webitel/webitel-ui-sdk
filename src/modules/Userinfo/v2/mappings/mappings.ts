@@ -143,7 +143,6 @@ export const mapWtObjectToUiSection: Record<
   [WtApplication.Crm]: {
     [WtObject.Contact]: CrmSections.Contacts,
     [WtObject.Case]: CrmSections.Cases,
-    [WtObject.Configuration]: CrmSections.Configuration,
     [WtObject.Slas]: CrmSections.Slas,
     [WtObject.ServiceCatalog]: CrmSections.ServiceCatalogs,
     [WtObject.CaseSource]: CrmSections.CaseSources,

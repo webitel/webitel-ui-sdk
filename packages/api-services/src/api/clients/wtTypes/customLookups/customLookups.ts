@@ -5,7 +5,7 @@ import {
   getDefaultGetParams,
   getDefaultInstance,
   getDefaultOpenAPIConfig,
-} from '../../defaults';
+} from '../../../defaults';
 import {
   applyTransform,
   camelToSnake,
@@ -14,8 +14,8 @@ import {
   sanitize,
   snakeToCamel,
   starToSearch
-} from '../../transformers';
-import { generatePermissionsApi } from '../_shared/generatePermissionsApi';
+} from '../../../transformers';
+import { generatePermissionsApi } from '../../_shared/generatePermissionsApi';
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();

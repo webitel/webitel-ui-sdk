@@ -1,19 +1,19 @@
 export const CrmSections = {
-  Contacts: 'contacts',
-  Cases: 'cases',
+  Contacts: 'crm/contacts',
+  Cases: 'crm/cases',
   Configuration: 'crm/configuration',
 
   // CONFIGURATION - LOOKUPS
-  Slas: 'slas',
-  ServiceCatalogs: 'service-catalogs',
-  Priorities: 'priorities',
-  Statuses: 'statuses',
-  Sources: 'sources',
-  CloseReasonGroups: 'close-reason-groups',
-  ContactGroups: 'contact-groups',
-  CaseSources: 'case-sources',
+  Slas: 'crm/slas',
+  ServiceCatalogs: 'crm/service-catalogs',
+  Priorities: 'crm/priorities',
+  Statuses: 'crm/statuses',
+  Sources: 'crm/sources',
+  CloseReasonGroups: 'crm/close-reason-groups',
+  ContactGroups: 'crm/contact-groups',
+  CaseSources: 'crm/case-sources',
 
   // CUSTOMIZATION
-  TypesExtensionsCustomization: 'types-extensions-customization',
-  CustomLookups: 'custom-lookups',
+  TypesExtensionsCustomization: 'crm/types-extensions-customization',
+  CustomLookups: 'crm/custom-lookups',
 };

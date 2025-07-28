@@ -32,4 +32,3 @@ export * from './users/users';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';
-export * from './customLookups/customLookups';
