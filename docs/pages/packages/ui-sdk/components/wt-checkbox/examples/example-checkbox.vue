@@ -6,7 +6,7 @@ const selected = ref(false);
 
 <template>
   <wt-checkbox
-    v-model="selected"
+    v-model:selected="selected"
     label="Checkbox"
   />
 </template>
