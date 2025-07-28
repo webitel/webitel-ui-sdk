@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<WtCheckboxProps>(), {
   disabled: false,
 });
 
-const model = defineModel<boolean | string[]>({required: true});
+const model = defineModel<boolean | string[]>('show', {required: true});
 
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
