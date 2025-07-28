@@ -8,7 +8,6 @@
       :disabled="disabled"
       :value="value"
       :binary="isSingle"
-      @change="inputHandler"
     />
     <wt-label 
       v-if="label"
@@ -46,7 +45,7 @@ const props = withDefaults(defineProps<WtCheckboxProps>(), {
   disabled: false,
 });
 
-const model = defineModel<boolean | string[]>('show', {required: true});
+const model = defineModel<boolean | string[]>('selected', {required: true});
 
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
@@ -58,19 +57,6 @@ const isChecked = computed(() => {
   }
   return model.value.includes(props.value);
 });
-
-const inputHandler = () => {
-  if (isSingle.value) {
-    model.value = !model.value;
-  } else {
-    const selected = [...model.value];
-    if (selected.includes(props.value)) {
-      model.value = selected.filter((value) => value !== props.value);
-    } else {
-      model.value.push(props.value);
-    }
-  }
-};
 </script>
 
 <style lang="scss">
