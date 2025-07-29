@@ -203,9 +203,11 @@ const deletePreset = async (preset: EnginePresetQuery) => {
   });
 };
 
-const setMatchedPreset = async () => {
-  if (!currentPresetId.value) return;
-  const presetData = await PresetQueryAPI.get({ id: currentPresetId.value })
+const restorePresetById = async () => {
+  const id = currentPresetId.value;
+  if (!id) return;
+
+  const presetData = await PresetQueryAPI.get({ id });
   const filters = presetData?.preset?.['filtersManager.toString'];
 
   if (filters) emit('apply', filters);
@@ -213,7 +215,7 @@ const setMatchedPreset = async () => {
 
 onMounted(async () => {
   await setupPresetPersistence();
-  await setMatchedPreset()
+  await restorePresetById()
 })
 </script>
 
