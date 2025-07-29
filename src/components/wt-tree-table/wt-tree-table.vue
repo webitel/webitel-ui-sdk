@@ -23,7 +23,7 @@
               >
                 <wt-checkbox
                   :selected="isAllSelected"
-                  @change="selectAll"
+                  @update:selected="selectAll"
                 />
               </div>
               <div class="wt-tree-table-th__text">
