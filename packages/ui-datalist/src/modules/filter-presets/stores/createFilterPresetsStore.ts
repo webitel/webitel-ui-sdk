@@ -12,21 +12,21 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
     ? namespace
     : `${namespace}/presets`;
 
-  const preset = ref(null);
+  const presetId = ref(null);
 
   const setupPresetPersistence = async () => {
     const { restore: restorePreset } = usePersistedStorage({
       name: 'preset',
-      value: preset,
+      value: presetId,
       storages: [PersistedStorageType.LocalStorage],
       storagePath: presetsNamespace,
       onStore: (save, { name }) => {
-        const value = preset.value;
+        const value = presetId.value;
         return save({ name, value });
       },
       onRestore: async (restore, name) => {
         const value = await restore(name);
-        preset.value = Number(value);
+        presetId.value = Number(value);
       },
     });
     await restorePreset();
@@ -41,7 +41,7 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
   return {
     ...tableStore,
 
-    preset,
+    presetId,
     setupPresetPersistence,
   };
 };

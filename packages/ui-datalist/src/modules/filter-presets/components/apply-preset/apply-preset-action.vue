@@ -107,7 +107,7 @@ const { t } = useI18n();
 const showPresetsList = ref(false);
 
 const presetsStore = props.usePresetsStore();
-const { dataList, error, isLoading, filtersManager, preset: currentPresetId } =
+const { dataList, error, isLoading, filtersManager, presetId } =
   storeToRefs(presetsStore);
 
 const { loadDataList, initialize, updateSize, deleteEls, setupPresetPersistence } = presetsStore;
@@ -166,7 +166,7 @@ const applySelectedPreset = () => {
   const filtersSnapshot =
     selectedPreset.value.preset['filtersManager.toString'];
   emit('apply', filtersSnapshot);
-  currentPresetId.value = selectedPreset.value.id
+  presetId.value = selectedPreset.value.id
 
   selectedPreset.value = null;
   showPresetsList.value = false;
@@ -203,10 +203,8 @@ const deletePreset = async (preset: EnginePresetQuery) => {
   });
 };
 
-const restorePresetById = async () => {
-  const id = currentPresetId.value;
+const restorePresetById = async (id: number | null) => {
   if (!id) return;
-
   const presetData = await PresetQueryAPI.get({ id });
   const filters = presetData?.preset?.['filtersManager.toString'];
 
@@ -215,7 +213,7 @@ const restorePresetById = async () => {
 
 onMounted(async () => {
   await setupPresetPersistence();
-  await restorePresetById()
+  await restorePresetById(presetId.value)
 })
 </script>
 
