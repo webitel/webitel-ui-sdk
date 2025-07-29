@@ -52,23 +52,24 @@
         v-if="!isOpened"
         #limit
       >
-        <wt-tooltip
-          :triggers="['click']"
-          class="multiselect__limit"
-        >
-          <template #activator>
-            <wt-chip> +{{ value.length - 1 }}</wt-chip>
+        <wt-popover class="multiselect__limit">
+          <template #activator="{ toggle }">
+            <div @click.stop.prevent="toggle">
+              <wt-chip> +{{ value.length - 1 }}</wt-chip>
+            </div>
           </template>
 
-          <div>
-            <p
-              v-for="(option, idx) of value.slice(1)"
-              :key="idx"
-            >
-              {{ getOptionLabel({ option, optionLabel }) }}
-            </p>
-          </div>
-        </wt-tooltip>
+          <template #default>
+            <div>
+              <p
+                v-for="(option, idx) of value.slice(1)"
+                :key="idx"
+              >
+                {{ getOptionLabel({ option, optionLabel }) }}
+              </p>
+            </div>
+          </template>
+        </wt-popover>
       </template>
 
       <!--      Slot that is used for all selected options (tags)-->

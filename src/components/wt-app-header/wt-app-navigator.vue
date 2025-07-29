@@ -3,17 +3,13 @@
     v-clickaway="close"
     class="wt-app-navigator"
   >
-    <wt-tooltip>
-      <template #activator>
-        <wt-icon-btn
-          :class="{ active: isOpened }"
-          class="wt-app-navigator__btn"
-          icon="app-navigator"
-          @click="isOpened = !isOpened"
-        />
-      </template>
-      {{ $t('webitelUI.appNavigator.title') }}
-    </wt-tooltip>
+    <wt-icon-btn
+      v-tooltip="$t('webitelUI.appNavigator.title')"
+      :class="{ active: isOpened }"
+      class="wt-app-navigator__btn"
+      icon="app-navigator"
+      @click="isOpened = !isOpened"
+    />
 
     <transition name="fade">
       <nav

@@ -131,309 +131,339 @@ export default {
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
   },
-    appNavigator: {
-      title: 'Webitel қосымшалары',
-      admin: 'Әкімші',
-      agent: 'Агент',
-      supervisor: 'Бақылаушы',
-      audit: 'Тексеру',
-      history: 'Тарих',
-      grafana: 'Графана',
-      crm: 'CRM',
-    },
-    headerActions: {
-      account: 'Аккаунт',
-      docs: 'Құжаттар',
-      settings: 'Параметрлер',
-      logout: 'Шығу',
-      buildVersion: 'Құрылым нұсқасы',
-    },
-    tableActions: {
-      filterReset: 'Сүзгілерді қалпына келтіру',
-      columnSelect: 'Бағандарды таңдау',
-      refreshTable: 'Кестені жаңарту',
-      expandFilters: 'Сүзгілерді кеңейту',
-    },
-    tableColumnSelect: {
-      title: 'Көрінетін бағандарды таңдаңыз',
-    },
-    statusSelect: {
-      online: 'Желіде',
-      pause: 'Кідіріс',
-      offline: 'Желіден тыс',
-      breakOut: 'Үзіліс',
-    },
-    iconAction: {
-      hints: {
-        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
-        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
-        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
-        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
-        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
-        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
-        [IconAction.COLUMNS]: 'Бағандарды таңдау',
-        [IconAction.VARIABLES]: 'Айнымалы бағандарды таңдау',
-        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
-        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
-        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
-        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
-        [IconAction.CLEAR]: ({ linked }) =>
-          linked('webitelUI.tableActions.filterReset'),
-        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
-        [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
-        [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
-        [IconAction.SAVE_PRESET]: ({ linked }) => {
-          return `${linked('reusable.save')} ${linked(
-            'webitelUI.filters.presets.preset',
-          ).toLowerCase()}`;
-        },
-        [IconAction.APPLY_PRESET]: ({ linked }) => {
-          return `${linked('vocabulary.apply')} ${linked(
-            'webitelUI.filters.presets.preset',
-          ).toLowerCase()}`;
-        },
-        [IconAction.ADD_CONTACT]: ({ linked }) => {
-          return `${linked('reusable.add')} контактілер`;
-        },
+  appNavigator: {
+    title: 'Webitel қосымшалары',
+    admin: 'Әкімші',
+    agent: 'Агент',
+    supervisor: 'Бақылаушы',
+    audit: 'Тексеру',
+    history: 'Тарих',
+    grafana: 'Графана',
+    crm: 'CRM',
+  },
+  headerActions: {
+    account: 'Аккаунт',
+    docs: 'Құжаттар',
+    settings: 'Параметрлер',
+    logout: 'Шығу',
+    buildVersion: 'Құрылым нұсқасы',
+  },
+  tableActions: {
+    filterReset: 'Сүзгілерді қалпына келтіру',
+    columnSelect: 'Бағандарды таңдау',
+    refreshTable: 'Кестені жаңарту',
+    expandFilters: 'Сүзгілерді кеңейту',
+  },
+  tableColumnSelect: {
+    title: 'Көрінетін бағандарды таңдаңыз',
+  },
+  statusSelect: {
+    online: 'Желіде',
+    pause: 'Кідіріс',
+    offline: 'Желіден тыс',
+    breakOut: 'Үзіліс',
+  },
+  iconAction: {
+    hints: {
+      [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+      [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+      [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+      [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+      [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+      [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
+      [IconAction.COLUMNS]: 'Бағандарды таңдау',
+      [IconAction.VARIABLES]: 'Айнымалы бағандарды таңдау',
+      [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+      [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+      [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+      [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+      [IconAction.CLEAR]: ({ linked }) =>
+        linked('webitelUI.tableActions.filterReset'),
+      [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
+      [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
+      [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+      [IconAction.SAVE_PRESET]: ({ linked }) => {
+        return `${linked('reusable.save')} ${linked(
+          'webitelUI.filters.presets.preset',
+        ).toLowerCase()}`;
+      },
+      [IconAction.APPLY_PRESET]: ({ linked }) => {
+        return `${linked('vocabulary.apply')} ${linked(
+          'webitelUI.filters.presets.preset',
+        ).toLowerCase()}`;
+      },
+      [IconAction.ADD_CONTACT]: ({ linked }) => {
+        return `${linked('reusable.add')} контактілер`;
       },
     },
-    errorPages: {
-      goBack: 'Артқа қайту',
-      page403: {
-        title: 'Рұқсат жоқ',
-        text: 'Кешіріңіз, бұл бетті көру үшін рұқсатыңыз жеткіліксіз.',
-      },
-      page404: {
-        title: 'Сіз адасып қалған сияқтысыз',
-        text: 'Кешіріңіз, сіз іздеген бетті таба алмадық.',
-      },
+  },
+  errorPages: {
+    goBack: 'Артқа қайту',
+    page403: {
+      title: 'Рұқсат жоқ',
+      text: 'Кешіріңіз, бұл бетті көру үшін рұқсатыңыз жеткіліксіз.',
     },
-    copyAction: {
-      copy: 'Көшіру',
-      copied: 'Буферге көшірілді!',
+    page404: {
+      title: 'Сіз адасып қалған сияқтысыз',
+      text: 'Кешіріңіз, сіз іздеген бетті таба алмадық.',
     },
-    auditForm: {
-      question: 'Критерий',
-      option: 'Нұсқа | Нұсқалар',
-      score: 'Ұпай | Ұпайлар',
-      addQuestion: 'Критерий қосу',
-      answerType: 'Жауап түрі',
-      type: {
-        options: 'Нұсқалар',
-        score: 'Ұпай',
-      },
-      clearSelection: 'Таңдауды тазарту',
+  },
+  copyAction: {
+    copy: 'Көшіру',
+    copied: 'Буферге көшірілді!',
+  },
+  auditForm: {
+    question: 'Критерий',
+    option: 'Нұсқа | Нұсқалар',
+    score: 'Ұпай | Ұпайлар',
+    addQuestion: 'Критерий қосу',
+    answerType: 'Жауап түрі',
+    type: {
+      options: 'Нұсқалар',
+      score: 'Ұпай',
     },
-    deleteConfirmationPopup: {
-      title: 'Жоюды растау',
-      askingAlert:
-        '{subject} жойғыңыз келетініне сенімдісіз бе? Бұл әрекетті қайтару мүмкін емес.',
-      tableAskingAlert:
-        '{count} жазбаны жойғыңыз келетініне сенімдісіз бе? | {count} жазбаны жойғыңыз келетініне сенімдісіз бе?',
-      deleteAll: 'БАРЛЫҒЫ',
+    clearSelection: 'Таңдауды тазарту',
+  },
+  deleteConfirmationPopup: {
+    title: 'Жоюды растау',
+    askingAlert:
+      '{subject} жойғыңыз келетініне сенімдісіз бе? Бұл әрекетті қайтару мүмкін емес.',
+    tableAskingAlert:
+      '{count} жазбаны жойғыңыз келетініне сенімдісіз бе? | {count} жазбаны жойғыңыз келетініне сенімдісіз бе?',
+    deleteAll: 'БАРЛЫҒЫ',
+  },
+  dummy: {
+    text: 'Әзірге жазбалар жоқ',
+  },
+  empty: {
+    text: {
+      empty: 'Әзірге жазбалар жоқ',
+      filters:
+        'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
     },
-    dummy: {
-      text: 'Әзірге жазбалар жоқ',
+  },
+  agentStatusSelect: {
+    pauseCausePopup: {
+      title: 'Кідіріс себебін таңдаңыз',
+      min: 'Мин',
+      unlimited: 'Шексіз',
     },
-    empty: {
-      text: {
-        empty: 'Әзірге жазбалар жоқ',
-        filters:
-          'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
-      },
+    statusSelectErrorPopup: {
+      title: 'Назар аударыңыз',
+      message:
+        'Агенттердің кідіріске шығу шегі асып кетті. Қазір кідіріске шығу мүмкін емес.',
     },
-    agentStatusSelect: {
-      pauseCausePopup: {
-        title: 'Кідіріс себебін таңдаңыз',
-        min: 'Мин',
-        unlimited: 'Шексіз',
-      },
-      statusSelectErrorPopup: {
-        title: 'Назар аударыңыз',
-        message:
-          'Агенттердің кідіріске шығу шегі асып кетті. Қазір кідіріске шығу мүмкін емес.',
-      },
+  },
+  saveFailedPopup: {
+    title: 'Сақтау сәтсіз аяқталды',
+    label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
+    exportToJson: 'JSON форматында экспорттау',
+  },
+  filters: {
+    datetime: {
+      [RelativeDatetimeValue.Today]: 'Бүгін',
+      [RelativeDatetimeValue.ThisWeek]: 'Осы апта',
+      [RelativeDatetimeValue.ThisMonth]: 'Осы ай',
+      [RelativeDatetimeValue.Custom]: 'Таңдамалы күн аралығы',
     },
-    saveFailedPopup: {
-      title: 'Сақтау сәтсіз аяқталды',
-      label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
-      exportToJson: 'JSON форматында экспорттау',
+    addFilter: ({ linked }) => {
+      return `${linked('reusable.add')} сүзгі`;
     },
-    filters: {
-      datetime: {
-        [RelativeDatetimeValue.Today]: 'Бүгін',
-        [RelativeDatetimeValue.ThisWeek]: 'Осы апта',
-        [RelativeDatetimeValue.ThisMonth]: 'Осы ай',
-        [RelativeDatetimeValue.Custom]: 'Таңдамалы күн аралығы',
-      },
-      addFilter: ({ linked }) => {
-        return `${linked('reusable.add')} сүзгі`;
-      },
-      filterName: ({ linked }) => {
-        return linked('vocabulary.column');
-      },
-      filterValue: ({ linked }) => {
-        return linked('vocabulary.values');
-      },
-      filterValueFrom: ({ linked }) => {
-        const from = linked('reusable.from').toLowerCase();
-        return `${linked('vocabulary.values')} ${from}`;
-      },
-      filterLabel: ({ linked }) => {
-        return linked('vocabulary.labels');
-      },
-      actualReactionTime: ({ linked }) => {
-        return linked('cases.actualReactionTime');
-      },
-      actualResolutionTime: ({ linked }) => {
-        return linked('cases.actualResolutionTime');
-      },
-      agent: ({ linked }) => {
-        return linked('objects.agent.agent');
-      },
-      amdResult: ({ linked }) => {
-        return linked('objects.amdResult');
-      },
-      assignee: ({ linked }) => {
-        return linked('cases.assignee');
-      },
-      author: ({ linked }) => {
-        return linked('cases.author');
-      },
-      cause: ({ linked }) => {
-        return linked('objects.hangupCause');
-      },
-      closeReasonGroups: ({ linked }) => {
-        return linked('cases.reason');
-      },
-      contact: ({ linked }) => {
-        return linked('vocabulary.contact');
-      },
-      contactGroup: ({ linked }) => {
-        return linked('cases.groupPerformers');
-      },
-      createdAt: ({ linked }) => {
-        return linked('reusable.createdAt');
-      },
-      createdAtFrom: ({ linked }) => {
-        return linked('reusable.from');
-      },
-      createdAtTo: ({ linked }) => {
-        return linked('reusable.to');
-      },
-      direction: ({ linked }) => {
-        return linked('objects.direction');
-      },
-      gateway: ({ linked }) => {
-        return linked('objects.gateway');
-      },
-      grantee: ({ linked }) => {
-        return linked('objects.grantee');
-      },
-      hasAttachment: ({ linked }) => {
-        return linked('objects.attachment');
-      },
-      hasFile: ({ linked }) => {
-        return linked('objects.hasRecording');
-      },
-      hasTranscription: ({ linked }) => {
-        return linked('objects.transcription');
-      },
-      hasUser: ({ linked }) => {
-        return linked('objects.user');
-      },
-      impacted: ({ linked }) => {
-        return linked('cases.impacted');
-      },
-      contactLabel: ({ linked }) => {
-        return linked('vocabulary.labels');
-      },
-      contactOwner: ({ linked }) => {
-        return linked('objects.owner');
-      },
-      priority: ({ linked }) => {
-        return linked('vocabulary.priority');
-      },
-      queue: ({ linked }) => {
-        return linked('objects.queue.queue');
-      },
-      rated: 'Бағаланған',
-      ratedBy: ({ linked }) => {
-        return linked('objects.ratedBy');
-      },
-      rating: ({ linked }) => {
-        return linked('cases.rating');
-      },
-      reactionTime: ({ linked }) => {
-        return linked('cases.reactionTime');
-      },
-      reporter: ({ linked }) => {
-        return linked('cases.reporter');
-      },
-      resolutionTime: ({ linked }) => {
-        return linked('cases.resolutionTime');
-      },
-      score: ({ linked }) => {
-        return linked('webitelUI.auditForm.score');
-      },
-      service: ({ linked }) => {
-        return linked('cases.service');
-      },
-      sla: ({ linked }) => {
-        return linked('cases.appliedSLA');
-      },
-      slaCondition: ({ linked }) => {
-        return linked('cases.appliedCondition');
-      },
-      source: ({ linked }) => {
-        return linked('cases.source');
-      },
-      status: ({ linked }) => {
-        return linked('cases.status');
-      },
-      tag: ({ linked }) => {
-        return linked('vocabulary.tag');
-      },
-      talkDuration: ({ linked }) => {
-        return linked('objects.talkDuration');
-      },
-      team: ({ linked }) => {
-        return linked('objects.team');
-      },
-      totalDuration: ({ linked }) => {
-        return linked('objects.totalDuration');
-      },
-      user: ({ linked }) => {
-        return linked('objects.user');
-      },
-      variable: ({ linked }) => {
-        return linked('vocabulary.variables');
-      },
-      presets: {
-        preset: 'Алдын ала орнату | Алдын ала орнатулар',
-        overwritePresetTitle: 'Бұл атаумен алдын ала орнату бар.',
-        overwritePresetText: 'Оны ауыстырғыңыз келе ме?',
-        notifications: {
-          success: {
-            update: ({ linked }) => {
-              return linked('systemNotifications.success.update', {
-                entity: linked('filters.presets.preset'),
-              });
-            },
-            create: ({ linked }) => {
-              return linked('systemNotifications.success.create', {
-                entity: linked('filters.presets.preset'),
-              });
-            },
-            delete: ({ linked }) => {
-              return linked('systemNotifications.success.delete', {
-                entity: linked('filters.presets.preset'),
-              });
-            },
+    filterName: ({ linked }) => {
+      return linked('vocabulary.column');
+    },
+    filterValue: ({ linked }) => {
+      return linked('vocabulary.values');
+    },
+    filterValueFrom: ({ linked }) => {
+      const from = linked('reusable.from').toLowerCase();
+      return `${linked('vocabulary.values')} ${from}`;
+    },
+    filterLabel: ({ linked }) => {
+      return linked('vocabulary.labels');
+    },
+    actualReactionTime: ({ linked }) => {
+      return linked('cases.actualReactionTime');
+    },
+    actualResolutionTime: ({ linked }) => {
+      return linked('cases.actualResolutionTime');
+    },
+    agent: ({ linked }) => {
+      return linked('objects.agent.agent');
+    },
+    amdResult: ({ linked }) => {
+      return linked('objects.amdResult');
+    },
+    assignee: ({ linked }) => {
+      return linked('cases.assignee');
+    },
+    author: ({ linked }) => {
+      return linked('cases.author');
+    },
+    cause: ({ linked }) => {
+      return linked('objects.hangupCause');
+    },
+    closeReasonGroups: ({ linked }) => {
+      return linked('cases.reason');
+    },
+    contact: ({ linked }) => {
+      return linked('vocabulary.contact');
+    },
+    contactGroup: ({ linked }) => {
+      return linked('cases.groupPerformers');
+    },
+    createdAt: ({ linked }) => {
+      return linked('reusable.createdAt');
+    },
+    createdAtFrom: ({ linked }) => {
+      return linked('reusable.from');
+    },
+    createdAtTo: ({ linked }) => {
+      return linked('reusable.to');
+    },
+    direction: ({ linked }) => {
+      return linked('objects.direction');
+    },
+    gateway: ({ linked }) => {
+      return linked('objects.gateway');
+    },
+    grantee: ({ linked }) => {
+      return linked('objects.grantee');
+    },
+    hasAttachment: ({ linked }) => {
+      return linked('objects.attachment');
+    },
+    hasFile: ({ linked }) => {
+      return linked('objects.hasRecording');
+    },
+    hasTranscription: ({ linked }) => {
+      return linked('objects.transcription');
+    },
+    hasUser: ({ linked }) => {
+      return linked('objects.user');
+    },
+    impacted: ({ linked }) => {
+      return linked('cases.impacted');
+    },
+    contactLabel: ({ linked }) => {
+      return linked('vocabulary.labels');
+    },
+    contactOwner: ({ linked }) => {
+      return linked('objects.owner');
+    },
+    priority: ({ linked }) => {
+      return linked('vocabulary.priority');
+    },
+    queue: ({ linked }) => {
+      return linked('objects.queue.queue');
+    },
+    rated: 'Бағаланған',
+    ratedBy: ({ linked }) => {
+      return linked('objects.ratedBy');
+    },
+    rating: ({ linked }) => {
+      return linked('cases.rating');
+    },
+    reactionTime: ({ linked }) => {
+      return linked('cases.reactionTime');
+    },
+    reporter: ({ linked }) => {
+      return linked('cases.reporter');
+    },
+    resolutionTime: ({ linked }) => {
+      return linked('cases.resolutionTime');
+    },
+    score: ({ linked }) => {
+      return linked('webitelUI.auditForm.score');
+    },
+    service: ({ linked }) => {
+      return linked('cases.service');
+    },
+    sla: ({ linked }) => {
+      return linked('cases.appliedSLA');
+    },
+    slaCondition: ({ linked }) => {
+      return linked('cases.appliedCondition');
+    },
+    source: ({ linked }) => {
+      return linked('cases.source');
+    },
+    status: ({ linked }) => {
+      return linked('cases.status');
+    },
+    tag: ({ linked }) => {
+      return linked('vocabulary.tag');
+    },
+    talkDuration: ({ linked }) => {
+      return linked('objects.talkDuration');
+    },
+    team: ({ linked }) => {
+      return linked('objects.team');
+    },
+    totalDuration: ({ linked }) => {
+      return linked('objects.totalDuration');
+    },
+    user: ({ linked }) => {
+      return linked('objects.user');
+    },
+    variable: ({ linked }) => {
+      return linked('vocabulary.variables');
+    },
+    presets: {
+      preset: 'Алдын ала орнату | Алдын ала орнатулар',
+      overwritePresetTitle: 'Бұл атаумен алдын ала орнату бар.',
+      overwritePresetText: 'Оны ауыстырғыңыз келе ме?',
+      notifications: {
+        success: {
+          update: ({ linked }) => {
+            return linked('systemNotifications.success.update', {
+              entity: linked('filters.presets.preset'),
+            });
+          },
+          create: ({ linked }) => {
+            return linked('systemNotifications.success.create', {
+              entity: linked('filters.presets.preset'),
+            });
+          },
+          delete: ({ linked }) => {
+            return linked('systemNotifications.success.delete', {
+              entity: linked('filters.presets.preset'),
+            });
           },
         },
       },
     },
+  },
+  validation: {
+    minValue: ({ named }) => {
+      let text = 'Мәні кем болмауы керек';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'Мәні артық болмауы керек';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    minLength: ({ named }) => {
+      let text = 'Ұзындығы кем болмауы керек';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxLength: ({ named }) => {
+      let text = 'Ұзындығы артық болмауы керек';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+  },
   systemNotifications: {
     success: {
       update: ({ named }) => `${named('entity').toLowerCase()} жаңартылды`,

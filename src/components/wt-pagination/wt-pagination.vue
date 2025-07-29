@@ -14,28 +14,21 @@
       />
     </div>
     <div class="wt-pagination__page-controls">
-      <wt-tooltip>
-        <template #activator>
-          <wt-icon-btn
-            :disabled="!prev"
-            class="wt-pagination__page-control"
-            icon="arrow-left"
-            @click="goPrev"
-          />
-        </template>
-        {{ $t('webitelUI.pagination.prev') }}
-      </wt-tooltip>
-      <wt-tooltip>
-        <template #activator>
-          <wt-icon-btn
-            :disabled="!next"
-            class="wt-pagination__page-control"
-            icon="arrow-right"
-            @click="goNext"
-          />
-        </template>
-        {{ $t('webitelUI.pagination.next') }}
-      </wt-tooltip>
+      <wt-icon-btn
+        v-tooltip="$t('webitelUI.pagination.prev')"
+        :disabled="!prev"
+        class="wt-pagination__page-control"
+        icon="arrow-left"
+        @click="goPrev"
+      />
+
+      <wt-icon-btn
+        v-tooltip="$t('webitelUI.pagination.next')"
+        :disabled="!next"
+        class="wt-pagination__page-control"
+        icon="arrow-right"
+        @click="goNext"
+      />
     </div>
   </footer>
 </template>
