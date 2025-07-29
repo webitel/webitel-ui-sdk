@@ -25,7 +25,8 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
         return save({ name, value });
       },
       onRestore: async (restore, name) => {
-        preset.value = (await restore(name)) as string;
+        const value = await restore(name);
+        preset.value = Number(value);
       },
     });
     await restorePreset();
