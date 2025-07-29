@@ -60,6 +60,15 @@ const getPresetList = async (params, config: GetPresetListRequestConfig) => {
   }
 };
 
+const getPreset = async ({ id }) => {
+  try {
+    const response = await service.readPresetQuery(id);
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
 const addPreset = async ({
   preset,
   namespace,
@@ -111,6 +120,7 @@ const deletePreset = async ({ id }) => {
 
 const PresetQueryAPI = {
   getList: getPresetList,
+  get: getPreset,
   add: addPreset,
   update: updatePreset,
   delete: deletePreset,
