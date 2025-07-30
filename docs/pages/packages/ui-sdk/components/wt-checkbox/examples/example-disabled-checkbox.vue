@@ -6,7 +6,7 @@ const selected = ref(true);
 
 <template>
   <wt-checkbox
-    :selected="selected"
+    v-model:selected="selected"
     label="Checkbox"
     disabled
   />

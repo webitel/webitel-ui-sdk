@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-sdk",
-  "version": "25.8.37",
+  "version": "25.8.39",
   "private": false,
   "scripts": {
     "make-all": "npm version patch --git-tag-version false && npm run build && (npm run build:types || true) && (npm run lint:fix || true) && npm run publish-lib",
@@ -56,7 +56,7 @@
     "@vuepic/vue-datepicker": "^4.5.1",
     "@vueuse/components": "^13.0.0",
     "@webitel/api-services": "^0.0.33",
-    "@webitel/styleguide": "^24.12.44",
+    "@webitel/styleguide": "^24.12.47",
     "autosize": "^6.0.1",
     "axios": "^1.8.3",
     "clipboard-copy": "^4.0.1",

@@ -21,7 +21,7 @@
           <wt-checkbox
             v-if="selectable"
             :selected="isSelectedRow"
-            @change="
+            @update:selected="
               $emit('update:selected', {
                 data,
                 select: $event,
