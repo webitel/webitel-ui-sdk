@@ -8,7 +8,16 @@
       :disabled="disabled"
       :value="value"
       :binary="isSingle"
-    />
+    >
+      <template #icon>
+        <span class="wt-checkbox__checkmark">
+          <wt-icon
+            :color="iconColor"
+            :icon="checkboxIcon"
+          />
+        </span>
+      </template>
+    </p-checkbox>
     <wt-label 
       v-if="label"
       :for="checkboxId"
@@ -57,6 +66,16 @@ const isChecked = computed(() => {
   }
   return model.value.includes(props.value);
 });
+
+const checkboxIcon = computed(() => {
+  return isChecked.value ? 'tick' : '';
+})
+
+const iconColor = computed(() => {
+  if (props.disabled) return 'disabled';
+  if (isChecked.value) return 'active';
+  return null;
+})
 </script>
 
 <style lang="scss">
@@ -69,6 +88,10 @@ const isChecked = computed(() => {
   position: relative;
   align-items: center;
   user-select: none;
+}
+
+.wt-checkbox__checkmark {
+  display: inline-flex
 }
 
 .wt-checkbox__label {
