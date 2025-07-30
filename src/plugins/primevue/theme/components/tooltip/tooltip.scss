@@ -1,0 +1,5 @@
+@use '@webitel/styleguide/typography' as *;
+
+.p-tooltip-text {
+  @extend %typo-body-2;
+}
