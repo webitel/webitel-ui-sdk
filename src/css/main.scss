@@ -1,5 +1,6 @@
 @forward 'styleguide/styleguide';
 @use 'styleguide/styleguide' as *;
+@use '../plugins/primevue/primevue' as *;
 @use 'pages/table-page';
 @use 'pages/card-page';
 
