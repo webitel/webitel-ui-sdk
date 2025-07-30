@@ -27,7 +27,7 @@ export default {
     },
     label() {
       return Array.isArray(this.locale.label)
-        ? this.$tc(...this.locale.label)
+        ? this.$t(...this.locale.label)
         : this.$t(this.locale.label);
     },
     localizedOptions() {
@@ -36,7 +36,7 @@ export default {
         return this.options.map((opt) => ({
           ...opt,
           name: Array.isArray(opt.locale)
-            ? this.$tc(...opt.locale)
+            ? this.$t(...opt.locale)
             : this.$t(opt.locale),
         }));
       }
