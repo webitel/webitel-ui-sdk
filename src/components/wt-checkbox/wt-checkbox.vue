@@ -14,6 +14,7 @@
           <wt-icon
             :color="iconColor"
             :icon="checkboxIcon"
+            style="width: 14px; height: 14px;"
           />
         </span>
       </template>
