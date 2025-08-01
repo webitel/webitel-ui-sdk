@@ -14,7 +14,6 @@
           <wt-icon
             :color="iconColor"
             :icon="checkboxIcon"
-            style="width: 14px; height: 14px;"
           />
         </span>
       </template>
@@ -92,7 +91,7 @@ const iconColor = computed(() => {
 }
 
 .wt-checkbox__checkmark {
-  display: inline-flex
+  display: inline-flex;
 }
 
 .wt-checkbox__label {
