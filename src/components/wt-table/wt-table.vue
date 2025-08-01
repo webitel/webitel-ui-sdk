@@ -1,315 +1,303 @@
 <template>
-  <div class="wt-table">
-    <table
-      class="wt-table__table"
-      :class="{ 'wt-table__table--fixed-actions': fixedActions }"
+  <div
+    class="wt-table"
+  >
+    <p-table 
+      ref="tableRef"
+      :value="data"
+      :show-headers="!headless"
+      striped-rows
+      :table-style="`min-width: ${totalTableWidth}px;`"
+      lazy
+      @sort="sort"
     >
-      <thead
-        v-if="!headless"
-        class="wt-table__head"
+      <p-column
+        v-if="selectable"
+        style="width: 39px;"
       >
-        <tr
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__head"
+        <template #header>
+          <wt-checkbox
+            :selected="isAllSelected"
+            @update:selected="selectAll"
+          />
+        </template>
+
+        <template #body="{ data: row }">
+          <wt-checkbox
+            v-if="row"
+            :selected="_selected.includes(row)"
+            @update:selected="handleSelection(row, $event)"
+          />
+        </template>
+      </p-column>
+      <p-column 
+        v-for="(col, idx) of dataHeaders"
+        :key="idx"
+        :field="col.value"
+        :header="col.text"
+        :sortable="isColSortable(col)"
+        :style="columnStyle(col)"
+      >
+        <template #body="{ data: row, index }">
+          <!--
+          @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
+          @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
+          -->
+          <slot
+            v-if="row"
+            :index="index"
+            :item="row"
+            :name="col.value"
+          >{{ row[col.value] }}</slot>
+        </template>
+        <template #sorticon>
+          <wt-icon
+            v-if="col.sort === 'asc'"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+            icon="sort-arrow-up"
+            size="sm"
+          />
+          <wt-icon
+            v-else-if="col.sort === 'desc'"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+            icon="sort-arrow-down"
+            size="sm"
+          />
+        </template>
+        <template
+          v-if="isTableFooter" 
+          #footer
         >
-          <th
-            v-if="selectable"
-            class="wt-table__th wt-table__th--checkbox"
-          >
-            <wt-checkbox
-              :selected="isAllSelected"
-              @update:selected="selectAll"
-            />
-          </th>
-          <th
-            v-for="(col, key) of dataHeaders"
-            :key="key"
-            :class="[
-              { 'wt-table__th--sortable': isColSortable(col) },
-              `wt-table__th--sort-${col.sort}`,
-            ]"
-            class="wt-table__th"
-            @click="sort(col)"
-          >
-            <div class="wt-table__th__text">
-              {{ col.text }}
-            </div>
-            <wt-icon
-              v-if="sortable"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-              icon="sort-arrow-up"
-              size="sm"
-            />
-            <wt-icon
-              v-if="sortable"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-              icon="sort-arrow-down"
-              size="sm"
-            />
-          </th>
-          <th
-            v-if="gridActions"
-            class="wt-table__th__actions"
-          >
-            <!--    @slot Table head actions row slot -->
-            <slot name="actions-header" />
-          </th>
-        </tr>
-      </thead>
-
-      <tbody class="wt-table__body">
-        <tr
-          v-for="(row, dataKey) of data"
-          :key="dataKey"
-          :class="`wt-table__tr__${row.id || dataKey}`"
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__body"
-        >
-          <td
-            v-if="selectable"
-            class="wt-table__td wt-table__td--checkbox"
-          >
-            <wt-checkbox
-              :selected="_selected.includes(row)"
-              @update:selected="handleSelection(row, $event)"
-            />
-          </td>
-
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
-          >
-            <!--
-           @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
-           @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-           -->
-            <slot
-              :index="dataKey"
-              :item="row"
-              :name="col.value"
-            >
-              <div>{{ row[col.value] }}</div>
-            </slot>
-          </td>
-
-          <td
-            v-if="gridActions"
-            class="wt-table__td__actions"
-          >
-            <!--
+          <!--
+          @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
+          @scope [ { "name": "header", "description": "header object" } ]
+          -->
+          <slot :name="`${col.value}-footer`" />
+        </template>
+      </p-column>
+      <p-column
+        v-if="gridActions"
+        style="width: 112px;"
+        :frozen="fixedActions"
+        align-frozen="right"
+      >
+        <template #header>
+          <!--    @slot Table head actions row slot -->
+          <slot name="actions-header" />
+        </template>
+        <template #body="{data: actionsData, index}">
+          <!--
           @slot Table body actions row slot
           @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-           -->
-            <slot
-              :index="dataKey"
-              :item="row"
+          -->
+          <div class="wt-table__td__actions">
+            <wt-icon-btn
+              v-if="movable"
+              v-tooltip="$t('iconHints.draggable')"
+              class="sortable-btn"
+              icon="move"
+            />
+            <slot 
+              v-if="actionsData"
               name="actions"
+              :index="index" 
+              :item="actionsData"
             />
-          </td>
-        </tr>
-      </tbody>
-
-      <tfoot
-        v-if="isTableFooter"
-        class="wt-table__foot"
-      >
-        <tr
-          :style="columnsStyle"
-          class="wt-table__tr wt-table__tr__foot"
-        >
-          <!--        empty checkbox column -->
-          <th
-            v-if="selectable"
-            class="wt-table__th__checkbox"
-          />
-          <td
-            v-for="(col, headerKey) of dataHeaders"
-            :key="headerKey"
-            class="wt-table__td"
-          >
-            <!--
-           @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
-           @scope [ { "name": "header", "description": "header object" } ]
-           -->
-            <slot
-              :header="col"
-              :index="headerKey"
-              :name="`${col.value}-footer`"
-            />
-          </td>
-        </tr>
-      </tfoot>
-    </table>
+          </div>
+        </template>
+      </p-column>
+    </p-table>
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, defineProps, ref, withDefaults, useSlots } from 'vue';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { useI18n } from 'vue-i18n';
+import { useSortableTable, type SortableTableOptions } from '../../composables/useWtTable/useSortableTable.js';
 
-export default {
-  name: 'WtTable',
-  props: {
-    /**
-     * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
-     */
-    headers: {
-      type: Array,
-      default: () => [],
-    },
-    /**
-     * 'List of data, represented by table. '
-     */
-    data: {
-      type: Array,
-      default: () => [],
-    },
-    /**
-     * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
-     */
-    sortable: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
-     */
-    selectable: {
-      type: Boolean,
-      default: true,
-    },
-    selected: {
-      type: Array,
-      // no default! because we need to know if it's passed or not
-    },
-    /**
-     * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
-     */
-    gridActions: {
-      type: Boolean,
-      default: true,
-    },
-    /**
-     * 'If true, 3 icon actions in the last column have position:sticky and fixed on the right'
-     */
-    fixedActions: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * 'If true, displays table without header.'
-     */
-    headless: {
-      type: Boolean,
-      default: false,
-    },
+export interface Props {
+  /**
+   * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
+   */
+  headers?: Array<unknown>;
+  /**
+   * 'List of data, represented by table. '
+   */
+  data?: Array<unknown>;
+  /**
+   * 'If true, draws sorting arrows and sends sorting events at header click. Draws a sorting arrow by "sort": "asc"/"desc" header value. '
+   */
+  sortable?: boolean;
+  /**
+   * 'If true, draws row selection checkboxes. Checkbox toggles data object _isSelected property. It's IMPORTANT to set this property before sending data to table. '
+   */
+  selectable?: boolean;
+  selected?: Array<unknown>;
+  /**
+   * 'If true, reserves space for 3 icon actions in the last column. Accessible by "actions" slot. '
+   */
+  gridActions?: boolean;
+  /**
+   * 'If true, 3 icon actions in the last column have position:sticky and fixed on the right'
+   */
+  fixedActions?: boolean;
+  /**
+   * 'If true, displays table without header.'
+   */
+  headless?: boolean;
+  /**
+   * 'If true, allows to reorder rows.'
+   */
+  movable?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  headers: () => [],
+  data: () => [],
+  sortable: false,
+  selectable: true,
+  gridActions: true,
+  fixedActions: false,
+  headless: false,
+  movable: false,
+});
+
+const { t } = useI18n();
+
+const slots = useSlots();
+
+const emit = defineEmits(['sort', 'update:selected', 'reorder']);
+
+const tableRef = ref(null);
+
+const sortableOptions: SortableTableOptions = {
+  tableRef,
+  enabled: props.movable,
+  sortableConfig: {
+    animation: 200,
+    ghostClass: 'custom-ghost'
   },
-  emits: ['sort', 'update:selected'],
+  onReorder: ({ oldIndex, newIndex }) => {
+    emit('reorder', { oldIndex, newIndex })
+    initializeSortable()
+  }
+}
 
-  data: () => ({}),
+const { initializeSortable } = useSortableTable(sortableOptions)
 
-  computed: {
-    _selected() {
-      // _isSelected for backwards compatibility
-      return this.selected || this.data.filter((item) => item._isSelected);
-    },
+const _selected = computed(() => {
+  // _isSelected for backwards compatibility
+  return props.selectable 
+         ? props.selected || props.data.filter(item => item._isSelected)
+         : [];
+});
 
-    isAllSelected() {
-      return this._selected.length === this.data.length && this.data.length > 0;
-    },
+const dataHeaders = computed(() => {
+  return props.headers
+    .filter(header => header.show === undefined || header.show)
+    .map(header => {
+      if (!header.text && header.locale) {
+        return {
+          ...header,
+          text: typeof header.locale === 'string' ? t(header.locale) : t(...header.locale),
+        };
+      }
+      return header;
+    });
+});
 
-    dataHeaders() {
-      return this.headers
-        .filter((header) => header.show === undefined || header.show)
-        .map((header) => {
-          if (!header.text && header.locale) {
-            return {
-              ...header,
-              text:
-                typeof header.locale === 'string'
-                  ? this.$t(header.locale)
-                  : this.$t(...header.locale),
-            };
-          }
-          return header;
-        });
-    },
+const columnStyle = (col) => {
+  if (col.width) {
+    return {
+      width: col.width,
+      minWidth: col.width,
+      maxWidth: col.width,
+    };
+  }
+}
 
-    columnsStyle() {
-      let gridTemplateColumns = '';
-      if (this.selectable) gridTemplateColumns += '24px '; // checkbox
+const totalTableWidth = computed(() => {
+  const baseWidth = 140
 
-      const defaultColumnWidth = 'minmax(140px, 1fr)';
-      this.dataHeaders.forEach((header) => {
-        gridTemplateColumns += ` ${(header.width || defaultColumnWidth).trim()}`;
-      });
+  let totalWidth = dataHeaders.value.reduce((sum, col) => {
+    return sum + (parseInt(col.width) || baseWidth);
+  }, 0);
 
-      if (this.gridActions) gridTemplateColumns += ` ${'112px'}`; // actions
-      return `grid-template-columns: ${gridTemplateColumns}`;
-    },
+  if (props.selectable) {
+    totalWidth += 39
+  }
+  if (props.gridActions) {
+    totalWidth += 112
+  }
 
-    isTableFooter() {
-      return Object.keys(this.$slots).some((slotName) =>
-        slotName.includes('-footer'),
-      );
-    },
-  },
+  return totalWidth
+});
 
-  methods: {
-    sort(col) {
-      if (!this.isColSortable(col)) return;
-      const nextSort = getNextSortOrder(col.sort);
-      this.$emit('sort', col, nextSort);
-    },
-    isColSortable({ sort }) {
-      /*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
+const isTableFooter = computed(() => {
+  return Object.keys(slots).some(slotName => slotName.includes('-footer'));
+});
+
+const isAllSelected = computed(() => {
+  return _selected.value.length === props.data.length && props.data.length > 0;
+})
+
+const sort = ({sortField}) => {
+  const col = dataHeaders.value.find(header => header.value === sortField)
+  if (!isColSortable(col)) return;
+  const nextSort = getNextSortOrder(col.sort);
+  emit('sort', col, nextSort);
+}
+
+const isColSortable = ({ sort }) => {
+  /*       --sortable = sortable && col.sort === undefined cause there may be some columns we don't want to sort
             strict check for  === undefined is used because col.sort = null is sort order too (actualu, without sort)
             so we need to check if this property is present
     */
-      return this.sortable && sort !== undefined;
-    },
-    selectAll() {
-      if (this.selected) {
-        if (this.isAllSelected) {
-          this.$emit('update:selected', []);
-        } else {
-          this.$emit('update:selected', [...this.data]);
-        }
-      } else {
-        // for backwards compatibility
+  return props.sortable && sort !== undefined;
+}
 
-        // https://webitel.atlassian.net/browse/WTEL-4634
-        // Value for _isSelected must be assigned explicitly.
-        // Because allSelected recomputes after each change
+const selectAll = () => {
+  if (props.selected) {
+    if (isAllSelected.value) {
+      emit('update:selected', []);
+    } else {
+      emit('update:selected', [...props.data]);
+    }
+  } else {
+    // for backwards compatibility
 
-        if (this.isAllSelected) {
-          this.data.forEach((item) => {
-            item._isSelected = false;
-          });
-        } else {
-          this.data.forEach((item) => {
-            item._isSelected = true;
-          });
-        }
-      }
-    },
-    handleSelection(row, select) {
-      if (this.selected) {
-        if (select) {
-          this.$emit('update:selected', [...this._selected, row]);
-        } else {
-          this.$emit(
-            'update:selected',
-            this._selected.filter((item) => item !== row),
-          );
-        }
-      } else {
-        // for backwards compatibility
-        row._isSelected = !row._isSelected;
-      }
-    },
-  },
-};
+    // https://webitel.atlassian.net/browse/WTEL-4634
+    // Value for _isSelected must be assigned explicitly.
+    // Because allSelected recomputes after each change
+
+    if (isAllSelected.value) {
+      props.data.forEach((item) => {
+        item._isSelected = false;
+      });
+    } else {
+      props.data.forEach((item) => {
+        item._isSelected = true;
+      });
+    }
+  }
+}
+
+const handleSelection = (row, select) => {
+  if (props.selected) {
+    if (select) {
+      emit('update:selected', [..._selected.value, row]);
+    } else {
+      emit(
+        'update:selected',
+        _selected.value.filter((item) => item !== row),
+      );
+    }
+  } else {
+    // for backwards compatibility
+    row._isSelected = !row._isSelected;
+  }
+}
 </script>
 
 <style lang="scss">
@@ -417,5 +405,10 @@ export default {
 .wt-table__foot {
   border-color: var(--wt-table-head-border-color);
   border-top: var(--wt-table-head-border-color);
+}
+
+// Sortable styles
+:deep(.sortable-swap-highlight) {
+  background: var(--primary-color) !important;
 }
 </style>
