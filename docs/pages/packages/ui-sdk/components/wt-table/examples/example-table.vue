@@ -65,9 +65,6 @@ const sort = (col, sortValue) => {
     sortable
     @sort="sort"
   >
-    <template #name="{ item }">
-      {{ item.h1 }}
-    </template>
   </wt-table>
 </template>
 
