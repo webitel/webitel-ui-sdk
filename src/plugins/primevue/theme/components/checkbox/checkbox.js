@@ -7,6 +7,8 @@ const checkbox = {
   css: ({ dt }) => `
         .p-checkbox-box .wt-icon__icon {
             fill: ${dt('checkbox.icon.color')};
+            width: ${dt('checkbox.icon.size')};
+            height: ${dt('checkbox.icon.size')};
         }
 
         .p-checkbox-box .wt-icon--color-active .wt-icon__icon {
