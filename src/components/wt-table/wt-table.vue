@@ -10,7 +10,17 @@
       :table-style="`min-width: ${totalTableWidth}px;`"
       lazy
       @sort="sort"
+      @row-reorder="({dragIndex, dropIndex}) => emit('reorder', { oldIndex: dragIndex, newIndex: dropIndex })"
     >
+      <p-column
+        v-if="movable"
+        style="width: 39px;"
+        row-reorder
+      >
+        <template #rowreordericon>
+          <wt-icon icon="move" data-pc-section="reorderablerowhandle" />
+        </template>
+      </p-column>
       <p-column
         v-if="selectable"
         style="width: 39px;"
@@ -91,12 +101,12 @@
           @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
           -->
           <div class="wt-table__td__actions">
-            <wt-icon-btn
+            <!-- <wt-icon-btn
               v-if="movable"
               v-tooltip="$t('iconHints.draggable')"
               class="sortable-btn"
               icon="move"
-            />
+            /> -->
             <slot 
               v-if="actionsData"
               name="actions"
@@ -114,7 +124,7 @@
 import { computed, defineProps, ref, withDefaults, useSlots } from 'vue';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useI18n } from 'vue-i18n';
-import { useSortableTable, type SortableTableOptions } from '../../composables/useWtTable/useSortableTable.js';
+// import { useSortableTable, type SortableTableOptions } from '../../composables/useWtTable/useSortableTable.js';
 
 export interface Props {
   /**
@@ -171,20 +181,20 @@ const emit = defineEmits(['sort', 'update:selected', 'reorder']);
 
 const tableRef = ref(null);
 
-const sortableOptions: SortableTableOptions = {
-  tableRef,
-  enabled: props.movable,
-  sortableConfig: {
-    animation: 200,
-    ghostClass: 'custom-ghost'
-  },
-  onReorder: ({ oldIndex, newIndex }) => {
-    emit('reorder', { oldIndex, newIndex })
-    initializeSortable()
-  }
-}
+// const sortableOptions: SortableTableOptions = {
+//   tableRef,
+//   enabled: props.movable,
+//   sortableConfig: {
+//     animation: 200,
+//     ghostClass: 'custom-ghost'
+//   },
+//   onReorder: ({ oldIndex, newIndex }) => {
+//     emit('reorder', { oldIndex, newIndex })
+//     initializeSortable()
+//   }
+// }
 
-const { initializeSortable } = useSortableTable(sortableOptions)
+// const { initializeSortable } = useSortableTable(sortableOptions)
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
