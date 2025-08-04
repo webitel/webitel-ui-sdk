@@ -1,4 +1,4 @@
-import { CallActions, ChatActions, JobState } from 'webitel-sdk';
+import { CallActions, ChannelState, ChatActions, JobState } from 'webitel-sdk';
 
 import i18n from '../../../locale/i18n.js';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
@@ -18,7 +18,7 @@ const getNotificationSound = (action) => {
     case JobState.Distribute:
       return new Audio(newTask);
     case JobState.Closed:
-    case 'wrap_time':
+    case ChannelState.WrapTime:
       return new Audio(endTask);
     case ChatActions.Message:
       return new Audio(newMessageSound);
