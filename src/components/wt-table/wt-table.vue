@@ -234,6 +234,9 @@ const totalTableWidth = computed(() => {
     return sum + (parseInt(col.width) || baseWidth);
   }, 0);
 
+  if (props.movable) {
+    totalWidth += 39
+  }
   if (props.selectable) {
     totalWidth += 39
   }
