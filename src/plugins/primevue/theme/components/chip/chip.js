@@ -5,6 +5,10 @@ const generateCustomColorCss = ({ colorName, dt }) => `
             background: ${dt(`chip.${colorName}.background`)};
             color: ${dt(`chip.${colorName}.color`)};
         }
+
+        .p-chip-${colorName} svg {
+            color: ${dt(`chip.${colorName}.iconColor`)};
+        }
 `;
 
 const chip = {
