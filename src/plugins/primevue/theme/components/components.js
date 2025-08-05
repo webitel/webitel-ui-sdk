@@ -1,6 +1,7 @@
 import autocomplete from './autocomplete/autocomplete.js';
 import button from './button/button.js';
 import chip from './chip/chip.js';
+import checkbox from './checkbox/checkbox.js';
 import popover from './popover/popover.js';
 import tooltip from './tooltip/tooltip.js';
 
@@ -10,6 +11,7 @@ const components = {
   popover,
   tooltip,
   chip,
+  checkbox,
 };
 
 export default components;

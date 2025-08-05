@@ -1,17 +1,17 @@
 <template>
   <p-button
-    v-bind="attrs"
-    :severity="color"
-    :disabled="disabled"
-    :loading="showLoader"
-    :size="primevueSizeMap[size]"
-    class="wt-button"
     :class="{
         'p-button--width-by-content': widthByContent,
         'p-button--contains-icon': containsIcon,
         'p-button--wide': wide,
         'p-button--loading': showLoader,
       }"
+    :disabled="disabled"
+    :loading="showLoader"
+    :severity="color"
+    :size="primevueSizeMap[size]"
+    class="wt-button"
+    v-bind="attrs"
     @click.prevent="emit('click', $event)"
   >
     <wt-loader
@@ -25,7 +25,7 @@
   </p-button>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
 import {computed, defineEmits, defineProps, ref, useAttrs, watch} from 'vue';
 
@@ -83,3 +83,9 @@ watch(
   },
 );
 </script>
+
+<style lang="scss">
+.wt-button__contents {
+  display: contents;
+}
+</style>

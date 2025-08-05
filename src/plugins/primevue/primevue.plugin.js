@@ -1,5 +1,6 @@
 import PAutoComplete from 'primevue/autocomplete';
 import PButton from 'primevue/button';
+import PCheckbox from 'primevue/checkbox';
 import PChip from 'primevue/chip';
 import PrimeVue from 'primevue/config';
 import PInputText from 'primevue/inputtext';
@@ -28,6 +29,7 @@ const initPrimevue = (app) => {
   app.component('PAutoComplete', changeComponentCompatMode(PAutoComplete));
   app.component('PInputText', changeComponentCompatMode(PInputText));
   app.component('PPopover', changeComponentCompatMode(PPopover));
+  app.component('PCheckbox', changeComponentCompatMode(PCheckbox));
   app.component('PChip', changeComponentCompatMode(PChip));
 
   app.directive('tooltip', Tooltip);

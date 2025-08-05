@@ -71,7 +71,7 @@ const getContactGroupsList = async (params) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, [mergeEach(defaultObject)]),
+			items: applyTransform(items, [mergeEach(defaultObject), snakeToCamel()]),
 			next,
 		};
 	} catch (err) {

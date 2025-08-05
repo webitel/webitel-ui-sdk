@@ -1,30 +1,36 @@
-import { CallActions, ChatActions, JobState } from 'webitel-sdk';
+import { CallActions, ChannelState, ChatActions, JobState } from 'webitel-sdk';
 
 import i18n from '../../../locale/i18n.js';
 import BaseStoreModule from '../../../store/BaseStoreModules/BaseStoreModule.js';
-import endChatSound from '../assets/audio/end-chat.wav';
-import newChatSound from '../assets/audio/new-chat.wav';
-import newMessageSound from '../assets/audio/new-message.wav';
+import endChatSound from '../assets/audio/chat-end.wav';
+import newChatSound from '../assets/audio/chat-new.wav';
+import newMessageSound from '../assets/audio/chat-new-message.wav';
+import endCallSound from '../assets/audio/end-call.wav';
 import ringingSound from '../assets/audio/ringing.mp3';
-import triggerSound from '../assets/audio/triggerSound.js';
+import endTask from '../assets/audio/task-end.wav';
+import newTask from '../assets/audio/task-new.wav';
 import notificationIcon from '../assets/img/notification-icon.png';
 
 const NOTIFICATION_VISIBLE_INTERVAL = 2000;
 
 const getNotificationSound = (action) => {
   switch (action) {
-    case ChatActions.UserInvite:
     case JobState.Distribute:
-      return new Audio(newChatSound);
+      return new Audio(newTask);
+    case JobState.Closed:
+    case ChannelState.WrapTime:
+      return new Audio(endTask);
     case ChatActions.Message:
       return new Audio(newMessageSound);
+    case ChatActions.UserInvite:
+      return new Audio(newChatSound);
     case ChatActions.Close:
       return new Audio(endChatSound);
     case CallActions.Ringing:
       // default call ringtone sound
       return new Audio(ringingSound);
     case CallActions.Hangup:
-      return triggerSound();
+      return new Audio(endCallSound);
     default:
       return false;
   }
@@ -161,7 +167,7 @@ export default class NotificationsStoreModule extends BaseStoreModule {
         interval = NOTIFICATION_VISIBLE_INTERVAL,
       },
     ) => {
-      const notification = new Notification(text, { icon });
+      const notification = new Notification(text, { icon, silent: true });
 
       notification.addEventListener(
         'click',
