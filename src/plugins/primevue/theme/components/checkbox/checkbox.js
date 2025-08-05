@@ -5,6 +5,13 @@ const checkbox = {
   colorScheme: CheckboxScheme.colorScheme,
 
   css: ({ dt }) => `
+        .p-checkbox {
+          width: 24px;
+          height: 24px;
+          align-items: center;
+          justify-content: center;
+        }
+
         .p-checkbox-box .wt-icon__icon {
             color: ${dt('checkbox.icon.color')};
             width: ${dt('checkbox.icon.size')};
