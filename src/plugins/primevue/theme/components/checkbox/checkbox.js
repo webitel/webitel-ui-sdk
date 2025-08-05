@@ -6,8 +6,8 @@ const checkbox = {
 
   css: ({ dt }) => `
         .p-checkbox {
-          width: 24px;
-          height: 24px;
+          width: ${dt('checkbox.root.wrapperWidth')};
+          height: ${dt('checkbox.root.wrapperHeight')};
           align-items: center;
           justify-content: center;
         }
