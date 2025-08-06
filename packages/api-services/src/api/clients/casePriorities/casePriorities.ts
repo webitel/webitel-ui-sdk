@@ -15,7 +15,11 @@ import {
 	snakeToCamel,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
+import { listPrioritiesQueryParams } from '@webitel/api-services/gen';
+
+const instance = getDefaultInstance({
+  zodSchema: listPrioritiesQueryParams,
+});
 const configuration = getDefaultOpenAPIConfig();
 
 const priorityService = PrioritiesApiFactory(configuration, '', instance);
@@ -34,21 +38,21 @@ const getPrioritiesList = async (params) => {
 		'inSla',
 		'inSlaCond',
 	];
-	const {
-		page,
-		size,
-		fields,
-		sort,
-		id,
-		q,
-		not_in_sla: notInSla,
-		in_sla_cond: inSlaCond,
-	} = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
+  const {
+    page,
+    size,
+    fields,
+    sort,
+    id,
+    q,
+    not_in_sla: notInSla,
+    in_sla_cond: inSlaCond,
+  } = applyTransform(params, [
+    merge(getDefaultGetParams()),
+    (params) => ({ ...params, q: params.search }),
+    sanitize(fieldsToSend),
+    camelToSnake(),
+  ]);
 	try {
 		const response = await priorityService.listPriorities(
 			page,
@@ -57,7 +61,7 @@ const getPrioritiesList = async (params) => {
 			sort,
 			id,
 			q,
-			notInSla,
+      notInSla,
 			inSlaCond,
 		);
 		const { items, next } = applyTransform(response.data, [
