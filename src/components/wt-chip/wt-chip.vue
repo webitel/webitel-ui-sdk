@@ -5,7 +5,7 @@
   >
     <slot />
     <template #removeicon>
-      <wt-icon-btn class="wt-chip__close-icon" icon="close--filled" />
+      <wt-icon class="wt-chip__close-icon" icon="close--filled" />
     </template>
   </p-chip>
 </template>
@@ -27,4 +27,8 @@ withDefaults(defineProps<WtProps>(), {
 <style lang="scss">
 @use './variables.scss';
 @use './wt-chip.scss';
+
+.wt-chip__close-icon {
+  cursor: pointer;
+}
 </style>

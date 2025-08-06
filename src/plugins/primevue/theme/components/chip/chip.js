@@ -6,10 +6,17 @@ const generateCustomColorCss = ({ colorName, dt }) => `
             color: ${dt(`chip.${colorName}.color`)};
         }
 
+        .p-chip .wt-icon {
+            width: ${dt(`chip.removeIcon.size`)};
+            height: ${dt(`chip.removeIcon.size`)};
+        }
+
         .p-chip-${colorName} .wt-icon .wt-icon__icon {
             fill: ${dt(`chip.${colorName}.iconColor`)};
-            width: ${dt(`chip.icon.size`)};
-            height: ${dt(`chip.icon.size`)};
+        }
+
+        .p-chip .wt-icon:hover .wt-icon__icon {
+            fill: ${dt(`chip.removeIcon.hoverColor`)};
         }
 `;
 
