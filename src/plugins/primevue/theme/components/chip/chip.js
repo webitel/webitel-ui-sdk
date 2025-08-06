@@ -15,8 +15,8 @@ const generateCustomColorCss = ({ colorName, dt }) => `
             fill: ${dt(`chip.${colorName}.iconColor`)};
         }
 
-        .p-chip .wt-icon:hover .wt-icon__icon {
-            fill: ${dt(`chip.removeIcon.hoverColor`)};
+        .p-chip-${colorName} .wt-icon:hover .wt-icon__icon {
+            fill: ${dt(`chip.${colorName}.iconHoverColor`)};
         }
 `;
 
