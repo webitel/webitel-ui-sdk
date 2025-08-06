@@ -107,7 +107,7 @@ export default {
     host: 'Хост',
     time: 'Время',
     channel: 'Канал | Каналы',
-    file: 'Файл',
+    file: 'Файл | Файлы',
     logout: 'Выйти',
     priority: 'Приоритет | Приоритеты',
     color: 'Цвет',

@@ -107,7 +107,7 @@ export default {
     host: 'Хост',
     time: 'Уақыт',
     channel: 'Канал | Каналдар',
-    file: 'Файл',
+    file: 'Файл | файлдар',
     logout: 'Шығу',
     priority: 'Басымдық | Басымдықтар',
     color: 'Түс',

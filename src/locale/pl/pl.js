@@ -107,7 +107,7 @@ export default {
     host: 'Host',
     time: 'Czas',
     channel: 'Kanał | Kanały',
-    file: 'Plik',
+    file: 'Plik | Akta',
     logout: 'Wyloguj',
     priority: 'Priorytet | Priorytety',
     color: 'Kolor',
