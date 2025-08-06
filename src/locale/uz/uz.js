@@ -108,6 +108,7 @@ export default {
     time: 'Vaqt',
     channel: 'Kanal | Kanallar',
     file: 'Fayl',
+    files: 'Fayllar',
     logout: 'Chiqish',
     priority: 'Muhimlik | Muhimliklar',
     color: 'Rang',

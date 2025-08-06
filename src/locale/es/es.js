@@ -106,6 +106,7 @@ export default {
     time: 'Tiempo',
     channel: 'Canal | Canales',
     file: 'Archivo',
+    files: 'Archivos',
     logout: 'Cerrar sesión',
     priority: 'Prioridad | Prioridades',
     color: 'Color',

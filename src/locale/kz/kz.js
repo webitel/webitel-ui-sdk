@@ -108,6 +108,7 @@ export default {
     time: 'Уақыт',
     channel: 'Канал | Каналдар',
     file: 'Файл',
+    files: 'файлдар',
     logout: 'Шығу',
     priority: 'Басымдық | Басымдықтар',
     color: 'Түс',

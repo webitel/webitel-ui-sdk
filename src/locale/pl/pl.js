@@ -108,6 +108,7 @@ export default {
     time: 'Czas',
     channel: 'Kanał | Kanały',
     file: 'Plik',
+    files: 'Akta',
     logout: 'Wyloguj',
     priority: 'Priorytet | Priorytety',
     color: 'Kolor',

@@ -108,6 +108,7 @@ export default {
     time: 'Thời gian',
     channel: 'Kênh | Các kênh',
     file: 'Tệp',
+    files: 'Tập',
     logout: 'Đăng xuất',
     priority: 'Mức độ ưu tiên | Mức độ ưu tiên',
     color: 'Màu sắc',

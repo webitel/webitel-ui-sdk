@@ -108,6 +108,7 @@ export default {
     time: 'Время',
     channel: 'Канал | Каналы',
     file: 'Файл',
+    files: 'Файлы',
     logout: 'Выйти',
     priority: 'Приоритет | Приоритеты',
     color: 'Цвет',

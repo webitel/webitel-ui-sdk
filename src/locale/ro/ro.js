@@ -108,6 +108,7 @@ export default {
     time: 'Timp',
     channel: 'Canal | Canale',
     file: 'Fișier',
+    files: 'Fișiere',
     logout: 'Deconectare',
     priority: 'Prioritate | Priorități',
     color: 'Culoare',
