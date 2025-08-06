@@ -1,26 +1,35 @@
 import { camelToSnake } from '../../../utils';
 import { getFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils'
+import { get, set } from 'lodash-es';
 
 export const transformRequestCaseInterceptor = [
-  (config) => {
-  if(!config) return;
+ (config) => {
+  const { zodSchema } = config.meta || {};
 
-  const schema = config.meta?.zodSchema;
+  if (!zodSchema) return config;
 
-  if (schema) {
-    const allowedFields = getFieldsToSendFromZodSchema(schema);
+  const fields = getFieldsToSendFromZodSchema(zodSchema);
 
-    if (config.params) {
-      const newParams = {};
-      for (const key of Object.keys(config.params)) {
-        if (allowedFields.includes(key)) {
-          newParams[camelToSnake(key)] = config.params[key];
-        } else {
-          newParams[key] = config.params[key];
-        }
+  const convert = (obj) => {
+    const newObj = {};
+    for (const field of fields) {
+      const val = get(obj, field);
+      if (val !== undefined) {
+        set(newObj, camelToSnakePath(field), val);
       }
-      config.params = newParams;
     }
+    return newObj;
+  };
+
+  const camelToSnakePath = (path: string) =>
+    path.split('.').map(camelToSnake).join('.');
+
+  if (config.data) {
+    config.data = convert(config.data);
+  }
+
+  if (config.params) {
+    config.params = convert(config.params);
   }
 
   return config;
