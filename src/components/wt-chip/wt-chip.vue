@@ -4,6 +4,9 @@
     :removable="removable"
   >
     <slot />
+    <template #removeicon>
+      <wt-icon-btn class="wt-chip__close-icon" icon="close--filled" />
+    </template>
   </p-chip>
 </template>
 

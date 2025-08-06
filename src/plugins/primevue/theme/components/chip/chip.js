@@ -6,8 +6,10 @@ const generateCustomColorCss = ({ colorName, dt }) => `
             color: ${dt(`chip.${colorName}.color`)};
         }
 
-        .p-chip-${colorName} svg {
-            color: ${dt(`chip.${colorName}.iconColor`)};
+        .p-chip-${colorName} .wt-icon .wt-icon__icon {
+            fill: ${dt(`chip.${colorName}.iconColor`)};
+            width: ${dt(`chip.icon.size`)};
+            height: ${dt(`chip.icon.size`)};
         }
 `;
 
