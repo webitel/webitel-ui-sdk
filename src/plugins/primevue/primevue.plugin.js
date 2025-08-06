@@ -4,6 +4,7 @@ import PCheckbox from 'primevue/checkbox';
 import PrimeVue from 'primevue/config';
 import PInputText from 'primevue/inputtext';
 import PPopover from 'primevue/popover';
+import PRadio from 'primevue/radiobutton';
 import Tooltip from 'primevue/tooltip';
 
 import WebitelTheme from './theme/webitel-theme.js';
@@ -29,6 +30,7 @@ const initPrimevue = (app) => {
   app.component('PInputText', changeComponentCompatMode(PInputText));
   app.component('PPopover', changeComponentCompatMode(PPopover));
   app.component('PCheckbox', changeComponentCompatMode(PCheckbox));
+  app.component('PRadio', changeComponentCompatMode(PRadio));
 
   app.directive('tooltip', Tooltip);
 };
