@@ -1,0 +1,9 @@
+@use '@webitel/styleguide/typography' as *;
+
+.wt-headline-nav__text {
+  @extend %typo-body-2;
+}
+
+.wt-headline-nav__text--last {
+  font-weight: 600;
+}
