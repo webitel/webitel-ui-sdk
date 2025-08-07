@@ -14,12 +14,14 @@
 import type { ChipProps } from 'primevue/chip';
 import { defineProps, withDefaults  } from 'vue';
 
+import { ChipColor } from '../../enums'
+
 interface WtProps extends ChipProps {
-  color?: 'main' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transfer';
+  color?: ChipColor;
 }
 
 withDefaults(defineProps<WtProps>(), {
-  color: 'main',
+  color: ChipColor.MAIN,
   removable: false,
 });
 </script>

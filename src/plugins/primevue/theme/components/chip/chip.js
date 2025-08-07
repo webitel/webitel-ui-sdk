@@ -6,11 +6,6 @@ const generateCustomColorCss = ({ colorName, dt }) => `
             color: ${dt(`chip.${colorName}.color`)};
         }
 
-        .p-chip .wt-icon {
-            width: ${dt(`chip.removeIcon.size`)};
-            height: ${dt(`chip.removeIcon.size`)};
-        }
-
         .p-chip-${colorName} .wt-icon .wt-icon__icon {
             fill: ${dt(`chip.${colorName}.iconColor`)};
         }
@@ -34,6 +29,11 @@ const chip = {
         ${generateCustomColorCss({ colorName: 'warning', dt })}
         ${generateCustomColorCss({ colorName: 'error', dt })}
         ${generateCustomColorCss({ colorName: 'transfer', dt })}
+
+        .p-chip .wt-icon {
+            width: ${dt(`chip.removeIcon.size`)};
+            height: ${dt(`chip.removeIcon.size`)};
+        }
         `,
 };
 
