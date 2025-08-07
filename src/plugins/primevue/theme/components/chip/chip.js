@@ -30,6 +30,10 @@ const chip = {
         ${generateCustomColorCss({ colorName: 'error', dt })}
         ${generateCustomColorCss({ colorName: 'transfer', dt })}
 
+        .p-chip {
+            white-space: nowrap;
+        }
+
         .p-chip .wt-icon {
             width: ${dt(`chip.removeIcon.size`)};
             height: ${dt(`chip.removeIcon.size`)};
