@@ -38,7 +38,7 @@
         <apply-preset-action
           :filter-configs="filterConfigs"
           :namespace="props.presetNamespace"
-          :use-presets-store="props.usePresetsStore"
+          :presets-store="presetStore"
           @apply="emit('preset:apply', $event)"
         />
 
@@ -53,7 +53,7 @@
       <wt-icon-action
         :disabled="!listSelectedFilters.size"
         action="clear"
-        @click="emit('filter:reset-all')"
+        @click="handleResetFilters"
       />
 
       <wt-icon-action
@@ -181,6 +181,15 @@ Clear filters button should be active only if filters are defined in the table-f
 
 const listSelectedFilters = computed(()=>
   new Map([...props.filtersManager.filters].filter(([key]) => props.filterOptions.includes(key))));
+
+const presetStore = props.usePresetsStore();
+
+const handleResetFilters = () => {
+  emit('filter:reset-all')
+  if (presetStore) {
+    presetStore.resetPreset()
+  }
+}
 </script>
 
 <style>
