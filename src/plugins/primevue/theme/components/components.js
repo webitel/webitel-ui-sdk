@@ -3,6 +3,7 @@ import button from './button/button.js';
 import checkbox from './checkbox/checkbox.js';
 import chip from './chip/chip.js';
 import popover from './popover/popover.js';
+import switcher from './switcher/switcher.js';
 import tooltip from './tooltip/tooltip.js';
 
 const components = {
@@ -12,6 +13,7 @@ const components = {
   tooltip,
   chip,
   checkbox,
+  toggleswitch: switcher
 };
 
 export default components;

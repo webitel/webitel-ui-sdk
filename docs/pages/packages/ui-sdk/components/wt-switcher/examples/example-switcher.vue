@@ -6,9 +6,8 @@ const value = ref(false);
 
 <template>
   <wt-switcher
-    :value="value"
+    v-model="value"
     label="Switcher"
-    @change="value = $event"
   />
 </template>
 

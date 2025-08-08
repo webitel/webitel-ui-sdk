@@ -4,8 +4,8 @@
       <wt-switcher
         :disabled="first"
         :label="$t('reusable.required')"
-        :value="question.required"
-        @change="updateQuestion({ path: 'required', value: $event })"
+        :model-value="question.required"
+        @update:model-value="updateQuestion({ path: 'required', value: $event })"
       />
       <div class="audit-form-question-write-header__actions">
         <wt-icon-btn

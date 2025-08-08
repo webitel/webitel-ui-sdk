@@ -5,6 +5,7 @@ import PChip from 'primevue/chip';
 import PrimeVue from 'primevue/config';
 import PInputText from 'primevue/inputtext';
 import PPopover from 'primevue/popover';
+import PToggleSwitch from 'primevue/toggleswitch';
 import Tooltip from 'primevue/tooltip';
 
 import WebitelTheme from './theme/webitel-theme.js';
@@ -31,6 +32,7 @@ const initPrimevue = (app) => {
   app.component('PPopover', changeComponentCompatMode(PPopover));
   app.component('PCheckbox', changeComponentCompatMode(PCheckbox));
   app.component('PChip', changeComponentCompatMode(PChip));
+  app.component('PToggleSwitch', changeComponentCompatMode(PToggleSwitch));
 
   app.directive('tooltip', Tooltip);
 };
