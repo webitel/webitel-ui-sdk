@@ -1,6 +1,6 @@
 <template>
   <p-chip
-    :class="`p-chip-${color}`"
+    :class="`wt-chip p-chip-${color}`"
     :removable="removable"
   >
     <slot />
@@ -27,9 +27,6 @@ withDefaults(defineProps<WtProps>(), {
 </script>
 
 <style lang="scss">
-@use './variables.scss';
-@use './wt-chip.scss';
-
 .wt-chip__close-icon {
   cursor: pointer;
 }
