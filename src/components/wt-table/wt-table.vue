@@ -1,8 +1,8 @@
 <template>
   <div class="wt-table">
     <table
-      class="wt-table__table"
       :class="{ 'wt-table__table--fixed-actions': fixedActions }"
+      class="wt-table__table"
     >
       <thead
         v-if="!headless"
@@ -59,7 +59,7 @@
 
       <tbody class="wt-table__body">
         <tr
-          v-for="(row, dataKey) of data"
+          v-for="(row, dataKey) of dataList"
           :key="dataKey"
           :class="`wt-table__tr__${row.id || dataKey}`"
           :style="columnsStyle"
@@ -146,6 +146,7 @@
 
 <script>
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { isEmpty } from '../../scripts/index.js';
 
 export default {
   name: 'WtTable',
@@ -215,7 +216,19 @@ export default {
     },
 
     isAllSelected() {
-      return this._selected.length === this.data.length && this.data.length > 0;
+      return this._selected.length === this.dataList.length && this.dataList.length > 0;
+    },
+
+    dataList() {
+      return this.data.map(item => ({
+        ...item,
+        ...Object.fromEntries(this.dataHeaders.map(header => [
+          header.value,
+          item[header.value] !== undefined && !(Array.isArray(item[header.value]) && !isEmpty(item[header.value]))
+            ? item[header.value]
+            : '-'
+        ]))
+      }));
     },
 
     dataHeaders() {
@@ -273,7 +286,7 @@ export default {
         if (this.isAllSelected) {
           this.$emit('update:selected', []);
         } else {
-          this.$emit('update:selected', [...this.data]);
+          this.$emit('update:selected', [...this.dataList]);
         }
       } else {
         // for backwards compatibility
@@ -283,11 +296,11 @@ export default {
         // Because allSelected recomputes after each change
 
         if (this.isAllSelected) {
-          this.data.forEach((item) => {
+          this.dataList.forEach((item) => {
             item._isSelected = false;
           });
         } else {
-          this.data.forEach((item) => {
+          this.dataList.forEach((item) => {
             item._isSelected = true;
           });
         }
@@ -309,6 +322,10 @@ export default {
       }
     },
   },
+  mounted() {
+    console.log(this.dataHeaders);
+    console.log(this.data);
+  }
 };
 </script>
 
