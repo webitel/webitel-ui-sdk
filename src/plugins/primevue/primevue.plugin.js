@@ -3,6 +3,7 @@ import PButton from 'primevue/button';
 import PCheckbox from 'primevue/checkbox';
 import PChip from 'primevue/chip';
 import PrimeVue from 'primevue/config';
+import PDivider from 'primevue/divider';
 import PInputText from 'primevue/inputtext';
 import PPopover from 'primevue/popover';
 import Tooltip from 'primevue/tooltip';
@@ -31,6 +32,7 @@ const initPrimevue = (app) => {
   app.component('PPopover', changeComponentCompatMode(PPopover));
   app.component('PCheckbox', changeComponentCompatMode(PCheckbox));
   app.component('PChip', changeComponentCompatMode(PChip));
+  app.component('PDivider', changeComponentCompatMode(PDivider));
 
   app.directive('tooltip', Tooltip);
 };
