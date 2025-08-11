@@ -16,7 +16,7 @@ export default {
     properties: [
       {
         value: 'value',
-        code: '<wt-slider :value="value"></wt-slider>',
+        code: '<wt-slider :model-value="value"></wt-slider>',
         type: 'Number',
         default: 0,
         description: 'Actual slider value',
