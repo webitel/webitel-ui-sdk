@@ -3,7 +3,7 @@
     <wt-radio
       v-for="value of radioOpts"
       :key="value"
-      v-model:selected="selectedRadioValue"
+      :selected="selectedRadioValue"
       :label="t(`webitelUI.filters.datetime.${value}`)"
       :value="value"
       @update:selected="handleRadioChange"
