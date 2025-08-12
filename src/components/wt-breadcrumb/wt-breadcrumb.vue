@@ -6,22 +6,22 @@
       <router-link
         v-if="item?.route"
         :to="item?.route"
-        class="wt-headline-nav__text"
-        :class="{ 'wt-headline-nav__text--last': item == lastItem }"
+        class="wt-breadcrumb__text"
+        :class="{ 'wt-breadcrumb__text--last': item == lastItem }"
       >
         {{ item?.name }}
       </router-link>
       <span
         v-else
-        class="wt-headline-nav__text"
-        :class="{ 'wt-headline-nav__text--last': item == lastItem }"
+        class="wt-breadcrumb__text"
+        :class="{ 'wt-breadcrumb__text--last': item == lastItem }"
       >
         {{ item?.name }}
       </span>
     </template>
     <template #separator>
       <wt-icon
-        icon="arrow-right"
+        icon="bread-crumbs"
       />
     </template>
   </p-breadcrumb>
@@ -31,11 +31,11 @@
 import type { BreadcrumbProps } from 'primevue';
 import { computed } from 'vue';
 
-interface HeadlineNavProps extends BreadcrumbProps {
+interface Props extends BreadcrumbProps {
   path?: Array<{ name: string; route?: string | object }>;
 }
 
-const props = defineProps<HeadlineNavProps>();
+const props = defineProps<Props>();
 
 const lastItem = computed(() => props?.path?.[props.path.length - 1]);
 </script>

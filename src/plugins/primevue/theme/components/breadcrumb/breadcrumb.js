@@ -6,7 +6,7 @@ const breadcrumb = {
 
 
   css: ({ dt }) => `
-    .p-breadcrumb .p-breadcrumb-list .p-breadcrumb-item .wt-headline-nav__text {
+    .p-breadcrumb .p-breadcrumb-list .p-breadcrumb-item .wt-breadcrumb__text {
         color: ${dt(`breadcrumb.item.color`)};
     }
 
