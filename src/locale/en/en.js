@@ -107,7 +107,7 @@ export default {
     host: 'Host',
     time: 'Time',
     channel: 'Channel | Channels',
-    file: 'File',
+    file: 'File | Files',
     logout: 'Logout',
     priority: 'Priority | Priorities',
     color: 'Color',
@@ -372,7 +372,7 @@ export default {
       }
       return text;
     },
-    
+
     minLength: ({ named }) => {
       let text = 'The length should not be less than';
       if (named('min')) {

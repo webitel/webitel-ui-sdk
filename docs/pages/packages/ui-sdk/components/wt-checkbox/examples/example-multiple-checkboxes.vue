@@ -7,16 +7,14 @@ const selectedList = ref([options[0]]);
 
 <template>
   <wt-checkbox
-    :selected="selectedList"
+    v-model:selected="selectedList"
     :value="options[0]"
     label="Multiple checkbox 1"
-    @change="selectedList = $event"
   />
   <wt-checkbox
-    :selected="selectedList"
-    :value="options[2]"
+    v-model:selected="selectedList"
+    :value="options[1]"
     label="Multiple checkbox 2"
-    @change="selectedList = $event"
   />
 </template>
 

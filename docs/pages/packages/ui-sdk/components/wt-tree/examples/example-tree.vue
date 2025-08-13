@@ -10,9 +10,8 @@
 </template>
 
 <script setup>
+import { WtTree } from '@webitel/ui-sdk/components';
 import { ref } from 'vue';
-
-import { WtTree }from '@webitel/ui-sdk/components';
 
 const selectedElement = ref('Subservice 4');
 const data = ref([
@@ -45,7 +44,7 @@ const data = ref([
     services: [
       {
         id: '5',
-        name: 'Service 1',
+        name: 'Service 2',
         services: [
           {
             id: '6',
@@ -56,7 +55,7 @@ const data = ref([
       },
       {
         id: '7',
-        name: 'Service 2',
+        name: 'Service 3',
         services: [
           {
             id: '8',
@@ -67,7 +66,7 @@ const data = ref([
       },
       {
         id: '9',
-        name: 'Service 3',
+        name: 'Service 4',
         services: [
           {
             id: '10',

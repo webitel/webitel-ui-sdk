@@ -34,7 +34,7 @@
               <wt-checkbox
                 :label="shownColLabel(column)"
                 :selected="column.show"
-                @change="column.show = $event"
+                @update:selected="column.show = $event"
               />
             </li>
           </ul>

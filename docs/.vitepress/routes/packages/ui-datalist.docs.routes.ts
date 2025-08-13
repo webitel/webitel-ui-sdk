@@ -69,12 +69,16 @@ export const uiDatalistRoutes = [{
               link: resolveLink('card-tools/card/Readme.md'),
             },
             {
+              text: 'Card Composables',
+              link: resolveLink('card-tools/card/composables/Readme.md'),
+            },
+            {
               text: 'Card Store',
               link: resolveLink('card-tools/card/stores/Readme.md'),
             },
             {
-              text: 'Card Composables',
-              link: resolveLink('card-tools/card/composables/Readme.md'),
+              text: 'Usage',
+                link: resolveLink('card-tools/card/usage/Readme.md'),
             },
           ],
         },
@@ -93,6 +97,10 @@ export const uiDatalistRoutes = [{
             {
               text: 'Zod',
               link: resolveLink('card-tools/validations/zod/Readme.md'),
+            },
+            {
+              text: 'Usage',
+                link: resolveLink('card-tools/validations/usage/Readme.md'),
             },
           ],
         },

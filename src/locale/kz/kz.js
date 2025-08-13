@@ -23,13 +23,13 @@ import { snakeToCamel } from '../../scripts';
 export default {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
-    comment: 'Түсініктеме',
+    comment: 'Пікір',
     replace: 'Ауыстыру',
     download: 'Жүктеу',
     history: 'Тарих',
     filter: ({ plural }) => plural(['Сүзгі', 'Сүзгілер']),
     total: 'Барлығы',
-    ok: 'ОК',
+    ok: 'Жарайды',
     object: 'Объект',
     save: 'Сақтау',
     saveAs: 'Басқаша сақтау',
@@ -38,19 +38,19 @@ export default {
     start: 'Бастау',
     close: 'Жабу',
     add: 'Қосу',
-    cancel: 'Болдырмау',
-    import: 'Импорттау',
-    export: 'Экспорттау',
+    cancel: 'Бас тарту',
+    import: 'Импорт',
+    export: 'Экспорт',
     true: 'Иә',
-    title: 'Атауы',
+    title: 'Тақырып',
     position: 'Позиция',
     delete: 'Жою',
     search: 'Іздеу',
     open: 'Ашу',
-    name: 'Атауы',
-    expand: 'Жаю',
-    collapse: 'Жию',
-    generate: 'Генерациялау',
+    name: 'Атау',
+    expand: 'Кеңейту',
+    collapse: 'Жігу',
+    generate: 'Жасау',
     lang: {
       en: 'English',
       es: 'Español',
@@ -60,7 +60,7 @@ export default {
     },
     from: 'Бастап',
     to: 'Дейін',
-    tts: 'Мәтіннен сөзге',
+    tts: 'Мәтін-дауыс',
     state: 'Күй',
     refresh: 'Жаңарту',
     retry: 'Қайталау',
@@ -71,7 +71,7 @@ export default {
     copy: 'Көшіру',
     new: 'Жаңа',
     createdAt: 'Құрылған күні',
-    createdBy: 'Құрған',
+    createdBy: 'Құрушы',
     modifiedAt: 'Өзгертілген күні',
     modifiedBy: 'Өзгерткен',
     general: 'Жалпы',
@@ -81,16 +81,16 @@ export default {
     edit: 'Өңдеу',
     back: 'Артқа',
     step: 'Қадам { count }',
-    more: 'Тағы',
+    more: 'Көбірек',
     read: 'Оқу',
     create: 'Құру',
     update: 'Жаңарту',
-    draggable: 'Жылжымалы',
+    draggable: 'Сүйретілетін',
     unassigned: 'Тағайындалмаған',
     showUnassigned: 'Тағайындалмағандарды көрсету',
     group: 'Топ',
     updatedBy: (/*{ named }*/) => {
-      return 'Өзгертілген';
+      return 'Өңделген';
     },
   },
   // yak zhe ya zaebalsya povtoriaty odni i ti sami slova!!!!
@@ -106,13 +106,13 @@ export default {
     login: 'Кіру',
     host: 'Хост',
     time: 'Уақыт',
-    channel: 'Арна | Арналар',
-    file: 'Файл',
+    channel: 'Канал | Каналдар',
+    file: 'Файл | файлдар',
     logout: 'Шығу',
-    priority: 'Басымдылық | Басымдылықтар',
+    priority: 'Басымдық | Басымдықтар',
     color: 'Түс',
     variables: 'Айнымалы | Айнымалылар',
-    type: 'Түрі',
+    type: 'Түр',
     tag: 'Тег | Тегтер',
     output: 'Шығыс | Шығыстар',
     values: 'Мән | Мәндер',
@@ -123,7 +123,7 @@ export default {
     labels: 'Белгі | Белгілер',
     permissions: 'Рұқсат | Рұқсаттар',
     options: 'Опция | Опциялар',
-    emails: 'Email | Emails',
+    emails: 'Email | Email-дер',
     phones: 'Телефон | Телефондар',
     messaging: 'Хабарлама',
     emptyResultSearch: 'Іздеу нәтижесі табылмады',
@@ -131,310 +131,229 @@ export default {
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
   },
-  appNavigator: {
-    title: 'Webitel қосымшалары',
-    admin: 'Әкімші',
-    agent: 'Агент',
-    supervisor: 'Бақылаушы',
-    audit: 'Тексеру',
-    history: 'Тарих',
-    grafana: 'Графана',
-    crm: 'CRM',
+  // date-related texts
+  date: {
+    sec: 'Сек',
+    timezone: 'Уақыт белдеуі | Уақыт белдеулері',
   },
-  headerActions: {
-    account: 'Аккаунт',
-    docs: 'Құжаттар',
-    settings: 'Параметрлер',
-    logout: 'Шығу',
-    buildVersion: 'Құрылым нұсқасы',
-  },
-  tableActions: {
-    filterReset: 'Сүзгілерді қалпына келтіру',
-    columnSelect: 'Бағандарды таңдау',
-    refreshTable: 'Кестені жаңарту',
-    expandFilters: 'Сүзгілерді кеңейту',
-  },
-  tableColumnSelect: {
-    title: 'Көрінетін бағандарды таңдаңыз',
-  },
-  statusSelect: {
-    online: 'Желіде',
-    pause: 'Кідіріс',
-    offline: 'Желіден тыс',
-    breakOut: 'Үзіліс',
-  },
-  iconAction: {
-    hints: {
-      [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
-      [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
-      [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
-      [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
-      [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
-      [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
-      [IconAction.COLUMNS]: 'Бағандарды таңдау',
-      [IconAction.VARIABLES]: 'Айнымалы бағандарды таңдау',
-      [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
-      [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
-      [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
-      [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
-      [IconAction.CLEAR]: ({ linked }) =>
-        linked('webitelUI.tableActions.filterReset'),
-      [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
-      [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
-      [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
-      [IconAction.SAVE_PRESET]: ({ linked }) => {
-        return `${linked('reusable.save')} ${linked(
-          'webitelUI.filters.presets.preset',
-        ).toLowerCase()}`;
-      },
-      [IconAction.APPLY_PRESET]: ({ linked }) => {
-        return `${linked('vocabulary.apply')} ${linked(
-          'webitelUI.filters.presets.preset',
-        ).toLowerCase()}`;
-      },
-      [IconAction.ADD_CONTACT]: ({ linked }) => {
-        return `${linked('reusable.add')} контактілер`;
-      },
+  // locales, related to user access, permissions, etc.
+  access: {
+    ObAC: 'Операциялар арқылы басқарылады',
+    RbAC: 'Жазбалар арқылы басқарылады',
+    operations: 'Операциялар',
+    rbacDefault: 'Жазбаға негізделген рұқсаттың әдепкі баптауы',
+    accessMode: {
+      [AccessMode.FORBIDDEN]: 'Тыйым салынған',
+      [AccessMode.ALLOW]: 'Рұқсат ету',
+      [AccessMode.MANAGE]: 'Тапсырумен рұқсат ету',
     },
   },
-  errorPages: {
-    goBack: 'Артқа қайту',
-    page403: {
-      title: 'Рұқсат жоқ',
-      text: 'Кешіріңіз, бұл бетті көру үшін рұқсатыңыз жеткіліксіз.',
+  // describes Webitel system entities
+  objects: {
+    team: 'Топ | Топтар',
+    supervisor: 'Супервайзер | Супервайзерлер',
+    auditor: 'Аудитор | Аудиторлар',
+    region: 'Аймақ | Аймақтар',
+    communicationType: 'Байланыс түрі | Байланыс түрлері',
+    grantee: 'Тапсырылған | Тапсырылғандар',
+    grantor: 'Тапсырушы | Тапсырушылар',
+    role: 'Рөл | Рөлдер',
+    user: 'Пайдаланушы | Пайдаланушылар',
+    list: 'Тізім | Тізімдер',
+    contact: 'Байланыс | Байланыстар',
+    case: 'Іс | Істер',
+    calendar: 'Күнтізбе | Күнтізбелер',
+    direction: 'Бағыт',
+    gateway: 'Шлюз | Шлюздер',
+    hangupCause: 'Қоңырауды тоқтату себебі',
+    hasOption: 'Опциясы бар',
+    hasRecording: 'Жазу',
+    amdResult: 'AMD нәтижесі',
+    ratedBy: 'Бағалаған',
+    talkDuration: 'Сөйлесу уақыты',
+    totalDuration: 'Жалпы уақыт',
+    transcription: 'Транскрипция',
+    attachment: 'Тіркеме | Тіркемелер',
+    owner: 'Ие | Иелер',
+    queue: {
+      queue: 'Кезек | Кезектер',
+      type: {
+        [QueueType.INBOUND_QUEUE]: 'Кіріс кезегі',
+        [QueueType.OFFLINE_QUEUE]: 'Офлайн кезегі',
+        [QueueType.OUTBOUND_IVR_QUEUE]: 'Шығыс IVR кезегі',
+        [QueueType.PREDICTIVE_DIALER]: 'Болжамды дәйек',
+        [QueueType.PROGRESSIVE_DIALER]: 'Прогрессивті дәйек',
+        [QueueType.PREVIEW_DIALER]: 'Алдын ала қарау дәйегі',
+        [QueueType.CHAT_INBOUND_QUEUE]: 'Чат кезегі',
+        [QueueType.INBOUND_JOB_QUEUE]: 'Кіріс тапсырма кезегі',
+        [QueueType.OUTBOUND_JOB_QUEUE]: 'Шығыс тапсырма кезегі',
+      },
     },
-    page404: {
-      title: 'Сіз адасып қалған сияқтысыз',
-      text: 'Кешіріңіз, сіз іздеген бетті таба алмадық.',
+    agent: {
+      agent: 'Оператор | Операторлар',
+      status: {
+        [AgentStatus.Online]: 'Онлайн',
+        [AgentStatus.Pause]: 'Пауза',
+        [AgentStatus.Offline]: 'Офлайн',
+        [snakeToCamel(AgentStatus.BreakOut)]: 'Принудительный перерыв',
+      },
+    },
+    flow: {
+      name: 'Ағын схемасы | Ағын схемалары',
+      type: {
+        [EngineRoutingSchemaType.Chat]: 'Чат',
+        [EngineRoutingSchemaType.Voice]: 'Дауыс',
+        [EngineRoutingSchemaType.Service]: 'Қызмет',
+        [EngineRoutingSchemaType.Processing]: 'Пішіндер',
+      },
+    },
+    messengers: {
+      [ChatGatewayProvider.TELEGRAM_BOT]: 'Telegram Bot',
+      [ChatGatewayProvider.TELEGRAM_APP]: 'Telegram App',
+      [ChatGatewayProvider.MESSENGER]: 'Meta',
+      [ChatGatewayProvider.VIBER]: 'Viber',
+      [ChatGatewayProvider.WEBCHAT]: 'Web chat',
+      [ChatGatewayProvider.INFOBIP]: 'Infobip',
+      [ChatGatewayProvider.CUSTOM]: 'Custom Chat Gateway',
+    },
+    quickReplies: {
+      quickReplies: 'Жылдам жауап | Жылдам жауаптар',
+      quickRepliesEmpty: 'Жылдам жауаптар әлі жоқ',
     },
   },
-  copyAction: {
-    copy: 'Көшіру',
-    copied: 'Буферге көшірілді!',
-  },
-  auditForm: {
-    question: 'Критерий',
-    option: 'Нұсқа | Нұсқалар',
-    score: 'Ұпай | Ұпайлар',
-    addQuestion: 'Критерий қосу',
-    answerType: 'Жауап түрі',
+  channel: {
+    state: {
+      [ChannelState.Waiting]: 'Күту',
+      [ChannelState.Distribute]: 'Тарату',
+      [ChannelState.Offering]: 'Ұсыну',
+      [ChannelState.Answered]: 'Жауап берілді',
+      [ChannelState.Active]: 'Белсенді',
+      [ChannelState.Bridged]: 'Қосылды',
+      [ChannelState.Hold]: 'Ұстап тұру',
+      [ChannelState.Missed]: 'Жіберіп алды',
+      [snakeToCamel(ChannelState.WrapTime)]: 'Орау уақыты',
+      [ChannelState.Processing]: 'Өңдеу',
+      [ChannelState.Transfer]: 'Ауыстыру',
+    },
     type: {
-      options: 'Нұсқалар',
-      score: 'Ұпай',
-    },
-    clearSelection: 'Таңдауды тазарту',
-  },
-  deleteConfirmationPopup: {
-    title: 'Жоюды растау',
-    askingAlert:
-      '{subject} жойғыңыз келетініне сенімдісіз бе? Бұл әрекетті қайтару мүмкін емес.',
-    tableAskingAlert:
-      '{count} жазбаны жойғыңыз келетініне сенімдісіз бе? | {count} жазбаны жойғыңыз келетініне сенімдісіз бе?',
-    deleteAll: 'БАРЛЫҒЫ',
-  },
-  dummy: {
-    text: 'Әзірге жазбалар жоқ',
-  },
-  empty: {
-    text: {
-      empty: 'Әзірге жазбалар жоқ',
-      filters:
-        'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
+      [ChannelType.Call]: 'Қоңырау',
+      [ChannelType.Email]: 'Email',
+      [ChannelType.Chat]: 'Чат',
+      [ChannelType.Job]: 'Тапсырма',
     },
   },
-  agentStatusSelect: {
-    pauseCausePopup: {
-      title: 'Кідіріс себебін таңдаңыз',
-      min: 'Мин',
-      unlimited: 'Шексіз',
-    },
-    statusSelectErrorPopup: {
-      title: 'Назар аударыңыз',
-      message:
-        'Агенттердің кідіріске шығу шегі асып кетті. Қазір кідіріске шығу мүмкін емес.',
+  calls: {
+    direction: {
+      [CallDirection.Inbound]: 'Кіріс',
+      [CallDirection.Outbound]: 'Шығыс',
     },
   },
-  saveFailedPopup: {
-    title: 'Сақтау сәтсіз аяқталды',
-    label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
-    exportToJson: 'JSON форматында экспорттау',
+  cases: {
+    status: 'Мәртебе',
+    source: 'Көз',
+    author: 'Автор',
+    reporter: 'Есеп беруші',
+    impacted: 'Әсер еткен',
+    assignee: 'Тапсырылған',
+    groupPerformers: 'Топ',
+    reason: 'Себеп | Себептер',
+    rating: 'Бағалау',
+    service: 'Қызмет | Қызметтер',
+    selectAService: 'Қызметті таңдаңыз',
+    appliedSLA: 'Қолданылған SLA',
+    appliedCondition: 'Қолданылған шарт',
+    reactionTime: 'Реакция уақыты',
+    resolutionTime: 'Шешу уақыты',
+    actualReactionTime: 'Нақты реакция уақыты',
+    actualResolutionTime: 'Нақты шешу уақыты',
   },
-  filters: {
-    datetime: {
-      [RelativeDatetimeValue.Today]: 'Бүгін',
-      [RelativeDatetimeValue.ThisWeek]: 'Осы апта',
-      [RelativeDatetimeValue.ThisMonth]: 'Осы ай',
-      [RelativeDatetimeValue.Custom]: 'Таңдамалы күн аралығы',
+  // describes Webitel FRONTEND applications + their navs
+  WebitelApplications: {
+    [WebitelApplications.AGENT]: { name: 'Оператор жұмыс орны' },
+    [WebitelApplications.AUDIT]: {
+      name: 'Аудит',
+      sections: {
+        [AuditorSections.Scorecards]: 'Бағалау карточкалары',
+      },
     },
-    addFilter: ({ linked }) => {
-      return `${linked('reusable.add')} сүзгі`;
+    [WebitelApplications.CRM]: {
+      name: 'CRM',
+      sections: {
+        [CrmSections.Contacts]: 'Байланыстар',
+        [CrmSections.Cases]: 'Істер',
+        [CrmSections.Priorities]: 'Басымдықтар',
+        [CrmSections.CloseReasonGroups]: 'Жабу себептері',
+        [CrmSections.Statuses]: 'Мәртебелер',
+        [CrmSections.Slas]: 'SLA',
+        [CrmSections.ServiceCatalogs]: 'Қызмет каталогтары',
+        [CrmSections.Sources]: 'Іс көздері',
+        [CrmSections.ContactGroups]: 'Байланыс топтары',
+      },
     },
-    filterName: ({ linked }) => {
-      return linked('vocabulary.column');
+    [WebitelApplications.HISTORY]: { name: 'Қоңырау тарихы' },
+    [WebitelApplications.ANALYTICS]: { name: 'Деректерді көрсету құралы' },
+    [WebitelApplications.SUPERVISOR]: {
+      name: 'Супервайзер жұмыс орны',
+      sections: {
+        [SupervisorSections.Queues]: 'Кезектер',
+        [SupervisorSections.Agents]: 'Операторлар',
+        [SupervisorSections.ActiveCalls]: 'Белсенді қоңыраулар',
+      },
     },
-    filterValue: ({ linked }) => {
-      return linked('vocabulary.values');
-    },
-    filterValueFrom: ({ linked }) => {
-      const from = linked('reusable.from').toLowerCase();
-      return `${linked('vocabulary.values')} ${from}`;
-    },
-    filterLabel: ({ linked }) => {
-      return linked('vocabulary.labels');
-    },
-    actualReactionTime: ({ linked }) => {
-      return linked('cases.actualReactionTime');
-    },
-    actualResolutionTime: ({ linked }) => {
-      return linked('cases.actualResolutionTime');
-    },
-    agent: ({ linked }) => {
-      return linked('objects.agent.agent');
-    },
-    amdResult: ({ linked }) => {
-      return linked('objects.amdResult');
-    },
-    assignee: ({ linked }) => {
-      return linked('cases.assignee');
-    },
-    author: ({ linked }) => {
-      return linked('cases.author');
-    },
-    cause: ({ linked }) => {
-      return linked('objects.hangupCause');
-    },
-    closeReasonGroups: ({ linked }) => {
-      return linked('cases.reason');
-    },
-    contact: ({ linked }) => {
-      return linked('vocabulary.contact');
-    },
-    contactGroup: ({ linked }) => {
-      return linked('cases.groupPerformers');
-    },
-    createdAt: ({ linked }) => {
-      return linked('reusable.createdAt');
-    },
-    createdAtFrom: ({ linked }) => {
-      return linked('reusable.from');
-    },
-    createdAtTo: ({ linked }) => {
-      return linked('reusable.to');
-    },
-    direction: ({ linked }) => {
-      return linked('objects.direction');
-    },
-    gateway: ({ linked }) => {
-      return linked('objects.gateway');
-    },
-    grantee: ({ linked }) => {
-      return linked('objects.grantee');
-    },
-    hasAttachment: ({ linked }) => {
-      return linked('objects.attachment');
-    },
-    hasFile: ({ linked }) => {
-      return linked('objects.hasRecording');
-    },
-    hasTranscription: ({ linked }) => {
-      return linked('objects.transcription');
-    },
-    hasUser: ({ linked }) => {
-      return linked('objects.user');
-    },
-    impacted: ({ linked }) => {
-      return linked('cases.impacted');
-    },
-    contactLabel: ({ linked }) => {
-      return linked('vocabulary.labels');
-    },
-    contactOwner: ({ linked }) => {
-      return linked('objects.owner');
-    },
-    priority: ({ linked }) => {
-      return linked('vocabulary.priority');
-    },
-    queue: ({ linked }) => {
-      return linked('objects.queue.queue');
-    },
-    rated: 'Бағаланған',
-    ratedBy: ({ linked }) => {
-      return linked('objects.ratedBy');
-    },
-    rating: ({ linked }) => {
-      return linked('cases.rating');
-    },
-    reactionTime: ({ linked }) => {
-      return linked('cases.reactionTime');
-    },
-    reporter: ({ linked }) => {
-      return linked('cases.reporter');
-    },
-    resolutionTime: ({ linked }) => {
-      return linked('cases.resolutionTime');
-    },
-    score: ({ linked }) => {
-      return linked('webitelUI.auditForm.score');
-    },
-    service: ({ linked }) => {
-      return linked('cases.service');
-    },
-    sla: ({ linked }) => {
-      return linked('cases.appliedSLA');
-    },
-    slaCondition: ({ linked }) => {
-      return linked('cases.appliedCondition');
-    },
-    source: ({ linked }) => {
-      return linked('cases.source');
-    },
-    status: ({ linked }) => {
-      return linked('cases.status');
-    },
-    tag: ({ linked }) => {
-      return linked('vocabulary.tag');
-    },
-    talkDuration: ({ linked }) => {
-      return linked('objects.talkDuration');
-    },
-    team: ({ linked }) => {
-      return linked('objects.team');
-    },
-    totalDuration: ({ linked }) => {
-      return linked('objects.totalDuration');
-    },
-    user: ({ linked }) => {
-      return linked('objects.user');
-    },
-    variable: ({ linked }) => {
-      return linked('vocabulary.variables');
-    },
-    presets: {
-      preset: 'Алдын ала орнату | Алдын ала орнатулар',
-      overwritePresetTitle: 'Бұл атаумен алдын ала орнату бар.',
-      overwritePresetText: 'Оны ауыстырғыңыз келе ме?',
-      notifications: {
-        success: {
-          update: ({ linked }) => {
-            return linked('systemNotifications.success.update', {
-              entity: linked('filters.presets.preset'),
-            });
-          },
-          create: ({ linked }) => {
-            return linked('systemNotifications.success.create', {
-              entity: linked('filters.presets.preset'),
-            });
-          },
-          delete: ({ linked }) => {
-            return linked('systemNotifications.success.delete', {
-              entity: linked('filters.presets.preset'),
-            });
-          },
-        },
+    [WebitelApplications.ADMIN]: {
+      name: 'Әкімші',
+      sections: {
+        [AdminSections.Users]: 'Пайдаланушылар',
+        [AdminSections.License]: 'Лицензиялар',
+        [AdminSections.Devices]: 'Құрылғылар',
+        [AdminSections.Flow]: 'Ағын схемалары',
+        [AdminSections.Dialplan]: 'Диалпландар',
+        [AdminSections.Gateways]: 'Шлюздер',
+        [AdminSections.Chatplan]: 'Чатпландар',
+        [AdminSections.ChatGateways]: 'Чат шлюздері',
+        [AdminSections.Skills]: 'Оператор дағдылары',
+        [AdminSections.Buckets]: 'Шелектер',
+        [AdminSections.Media]: 'Медиа файлдары',
+        [AdminSections.ShiftTemplates]: 'Ауысым үлгілері',
+        [AdminSections.PauseTemplates]: 'Пауза үлгілері',
+        [AdminSections.WorkingConditions]: 'Жұмыс шарттары',
+        [AdminSections.Blacklist]: 'Тізімдер',
+        [AdminSections.Calendars]: 'Күнтізбелер',
+        [AdminSections.Regions]: 'Орналасулар',
+        [AdminSections.Communications]: 'Байланыс түрлері',
+        [AdminSections.PauseCause]: 'Оператор мәртебелері',
+        [AdminSections.Agents]: 'Операторлар',
+        [AdminSections.Teams]: 'Топтар',
+        [AdminSections.Resources]: 'Ресурстар',
+        [AdminSections.ResourceGroups]: 'Ресурс топтары',
+        [AdminSections.Queues]: 'Кезектер',
+        [AdminSections.Storage]: 'Сақтау',
+        [AdminSections.StoragePolicies]: 'Сақтау саясаттары',
+        [AdminSections.CognitiveProfiles]: 'Когнитивті профильдер',
+        [AdminSections.EmailProfiles]: 'Email профильдері',
+        [AdminSections.SingleSignOn]: 'Бір рет кіру',
+        [AdminSections.ImportCsv]: 'CSV файлдан импорт',
+        [AdminSections.Triggers]: 'Триггерлер',
+        [AdminSections.Media]: 'Медиа файлдары',
+        [AdminSections.Roles]: 'Рөлдер',
+        [AdminSections.Objects]: 'Объектілер',
+        [AdminSections.Changelogs]: 'Өзгеріс журналы',
+        [AdminSections.Configuration]: 'Конфигурация',
+        [AdminSections.GlobalVariables]: 'Жалпы айнымалылар',
+        [AdminSections.QuickReplies]: 'Жылдам жауаптар',
       },
     },
   },
   validation: {
+    required: 'Өріс міндетті',
+    numeric: 'Сандық болуы керек',
+    email: 'Email сияқты болуы керек',
+    gatewayHostValidator: 'IPv4 немесе FQDN сияқты болуы керек',
+    sipAccountValidator: 'SIP есеп сияқты болуы керек',
+    ipValidator: 'IPv4 сияқты болуы керек',
+    macValidator: 'MAC сияқты болуы керек',
+    sameAs: 'Қате құпия сөз',
+    requiredArrayValue: 'Массив бос болмауы керек',
     minValue: ({ named }) => {
       let text = 'Мәні кем болмауы керек';
       if (named('min')) {
@@ -462,6 +381,342 @@ export default {
         text += ` ${named('max')}`;
       }
       return text;
+    },
+    url: 'URL сияқты болуы керек',
+    websocketValidator: 'WebSocket url сияқты болуы керек',
+    isRegExpMatched: 'Құпия сөз тұрақты өрнекке сәйкес болуы керек:',
+    regExpValidator: 'Бұл тұрақты өрнек жарамсыз',
+    domainValidator: 'Қате домен',
+    decimalValidator: 'Ондық дәлдік { count } таңбадан артық болмауы керек',
+    latinWithNumber: 'Код тек әріптерден (A-Z, a-z) және сандардан (0-9) тұруы керек және әріптен басталуы керек',
+    integer: 'Өріс тек бүтін сандарды қамтуы керек',
+    nameAlreadyInUse: 'Бұл атау қолданыста',
+  },
+  webitelUI: {
+    searchBar: {
+      placeholder: 'Іздеу',
+      settingsHint: 'Іздеу режимі',
+      variableSearchHint: 'Сұрау форматы: "кілт=мән"',
+    },
+    timepicker: {
+      day: 'Күн:',
+      hour: 'Сағат:',
+      min: 'Мин:',
+      sec: 'Сек:',
+    },
+    datetimepicker: {
+      lastHour: 'Соңғы сағат',
+      lastDay: 'Соңғы күн',
+    },
+    pagination: {
+      sizeText: 'Бетке жолдар:',
+      prev: 'Алдыңғы',
+      next: 'Келесі',
+    },
+    appNavigator: {
+      title: 'Webitel қосымшалары',
+      admin: 'Әкімші',
+      agent: 'Оператор',
+      supervisor: 'Супервайзер',
+      audit: 'Аудит',
+      history: 'Тарих',
+      grafana: 'Grafana',
+      crm: 'CRM',
+    },
+    headerActions: {
+      account: 'Есеп',
+      docs: 'Құжаттар',
+      settings: 'Баптаулар',
+      logout: 'Шығу',
+      buildVersion: 'Жоба нұсқасы',
+    },
+    tableActions: {
+      filterReset: 'Сүзгілерді қалпына келтіру',
+      columnSelect: 'Бағандарды таңдау',
+      refreshTable: 'Кестені жаңарту',
+      expandFilters: 'Сүзгілерді кеңейту',
+    },
+    tableColumnSelect: {
+      title: 'Көрінетін бағандарды таңдау',
+    },
+    statusSelect: {
+      online: 'Онлайн',
+      pause: 'Пауза',
+      offline: 'Офлайн',
+      breakOut: 'Принудительный перерыв',
+    },
+    iconAction: {
+      hints: {
+        [IconAction.DELETE]: ({ linked }) => linked('reusable.delete'),
+        [IconAction.EDIT]: ({ linked }) => linked('reusable.edit'),
+        [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
+        [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
+        [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
+        [IconAction.COLUMNS]: 'Бағандарды таңдау',
+        [IconAction.VARIABLES]: 'Айнымалы бағандарды таңдау',
+        [IconAction.REFRESH]: ({ linked }) => linked('reusable.refresh'),
+        [IconAction.EXPAND]: ({ linked }) => linked('reusable.expand'),
+        [IconAction.COLLAPSE]: ({ linked }) => linked('reusable.collapse'),
+        [IconAction.CLOSE]: ({ linked }) => linked('reusable.close'),
+        [IconAction.CLEAR]: ({ linked }) =>
+          linked('webitelUI.tableActions.filterReset'),
+        [IconAction.ADD_FILTER]: ({ linked }) => linked('reusable.add'),
+        [IconAction.SAVE]: ({ linked }) => linked('reusable.save'),
+        [IconAction.CANCEL]: ({ linked }) => linked('reusable.cancel'),
+        [IconAction.SAVE_PRESET]: ({ linked }) => {
+          return `${linked('reusable.save')} ${linked(
+            'webitelUI.filters.presets.preset',
+          ).toLowerCase()}`;
+        },
+        [IconAction.APPLY_PRESET]: ({ linked }) => {
+          return `${linked('vocabulary.apply')} ${linked(
+            'webitelUI.filters.presets.preset',
+          ).toLowerCase()}`;
+        },
+        [IconAction.ADD_CONTACT]: ({ linked }) => {
+          return `${linked('reusable.add')} contacts`;
+        },
+      },
+    },
+    errorPages: {
+      goBack: 'Артқа қайту',
+      page403: {
+        title: 'Рұқсат жоқ',
+        text: 'Кешіріңіз, бұл бетті көруге жеткілікті құқықтарыңыз жоқ.',
+      },
+      page404: {
+        title: 'Сіз адасып кеткен сияқтысыз',
+        text: 'Кешіріңіз, сіз іздеген бетті таба алмаймыз.',
+      },
+    },
+    copyAction: {
+      copy: 'Көшіру',
+      copied: 'Буферге көшірілді!',
+    },
+    auditForm: {
+      question: 'Критерий',
+      option: 'Опция | Опциялар',
+      score: 'Баға | Бағалар',
+      addQuestion: 'Критерий қосу',
+      answerType: 'Жауап түрі',
+      type: {
+        options: 'Опциялар',
+        score: 'Баға',
+      },
+      clearSelection: 'Таңдауды тазалау',
+    },
+    deleteConfirmationPopup: {
+      title: 'Жоюды растау',
+      askingAlert:
+        'Сіз шынымен {subject} жойғыңыз келетініне сенімдісіз бе? Бұл әрекетті қайтару мүмкін емес.',
+      tableAskingAlert:
+        'Сіз шынымен {count} жазбаны жойғыңыз келетініне сенімдісіз бе? | Сіз шынымен {count} жазбаны жойғыңыз келетініне сенімдісіз бе?',
+      deleteAll: 'БАРЛЫҒЫ',
+    },
+    dummy: {
+      text: 'Әзірге жазбалар жоқ',
+    },
+    empty: {
+      text: {
+        empty: 'Әзірге жазбалар жоқ',
+        filters: 'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
+      },
+    },
+    agentStatusSelect: {
+      pauseCausePopup: {
+        title: 'Пауза себебін таңдау',
+        min: 'Мин',
+        unlimited: 'Шексіз',
+      },
+      statusSelectErrorPopup: {
+        title: 'Назар аударыңыз',
+        message:
+          'Операторлардың паузаға шығу шегі асып кетті. Қазір пауза мүмкін емес.',
+      },
+    },
+    saveFailedPopup: {
+      title: 'Сақтау сәтсіз',
+      label: 'Бір нәрсе дұрыс болмады, қайталап көріңіз',
+      exportToJson: 'JSON форматында экспорттау',
+    },
+    filters: {
+      datetime: {
+        [RelativeDatetimeValue.Today]: 'Бүгін',
+        [RelativeDatetimeValue.ThisWeek]: 'Осы апта',
+        [RelativeDatetimeValue.ThisMonth]: 'Осы ай',
+        [RelativeDatetimeValue.Custom]: 'Жеке күн аралығы',
+      },
+      addFilter: ({ linked }) => {
+        return `${linked('reusable.add')} ${linked(
+          'reusable.filter',
+        ).toLowerCase()}`;
+      },
+      filterName: ({ linked }) => {
+        // because filter select has a 'column' label now
+        return linked('vocabulary.column');
+      },
+      filterValue: ({ linked }) => {
+        return linked('vocabulary.values');
+      },
+      filterValueFrom: ({ linked }) => {
+        const from = linked('reusable.from').toLowerCase();
+        return `${linked('vocabulary.values')} ${from}`;
+      },
+      filterLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      actualReactionTime: ({ linked }) => {
+        return linked('cases.actualReactionTime');
+      },
+      actualResolutionTime: ({ linked }) => {
+        return linked('cases.actualResolutionTime');
+      },
+      agent: ({ linked }) => {
+        return linked('objects.agent.agent');
+      },
+      amdResult: ({ linked }) => {
+        return linked('objects.amdResult');
+      },
+      assignee: ({ linked }) => {
+        return linked('cases.assignee');
+      },
+      author: ({ linked }) => {
+        return linked('cases.author');
+      },
+      cause: ({ linked }) => {
+        return linked('objects.hangupCause');
+      },
+      closeReasonGroups: ({ linked }) => {
+        return linked('cases.reason');
+      },
+      contact: ({ linked }) => {
+        return linked('vocabulary.contact');
+      },
+      contactGroup: ({ linked }) => {
+        return linked('cases.groupPerformers');
+      },
+      createdAt: ({ linked }) => {
+        return linked('reusable.createdAt');
+      },
+      createdAtFrom: ({ linked }) => {
+        return linked('reusable.from');
+      },
+      createdAtTo: ({ linked }) => {
+        return linked('reusable.to');
+      },
+      direction: ({ linked }) => {
+        return linked('objects.direction');
+      },
+      gateway: ({ linked }) => {
+        return linked('objects.gateway');
+      },
+      grantee: ({ linked }) => {
+        return linked('objects.grantee');
+      },
+      hasAttachment: ({ linked }) => {
+        return linked('objects.attachment');
+      },
+      hasFile: ({ linked }) => {
+        return linked('objects.hasRecording');
+      },
+      hasTranscription: ({ linked }) => {
+        return linked('objects.transcription');
+      },
+      hasUser: ({ linked }) => {
+        return linked('objects.user');
+      },
+      impacted: ({ linked }) => {
+        return linked('cases.impacted');
+      },
+      contactLabel: ({ linked }) => {
+        return linked('vocabulary.labels');
+      },
+      contactOwner: ({ linked }) => {
+        return linked('objects.owner');
+      },
+      priority: ({ linked }) => {
+        return linked('vocabulary.priority');
+      },
+      queue: ({ linked }) => {
+        return linked('objects.queue.queue');
+      },
+      rated: 'Бағалалған',
+      ratedBy: ({ linked }) => {
+        return linked('objects.ratedBy');
+      },
+      rating: ({ linked }) => {
+        return linked('cases.rating');
+      },
+      reactionTime: ({ linked }) => {
+        return linked('cases.reactionTime');
+      },
+      reporter: ({ linked }) => {
+        return linked('cases.reporter');
+      },
+      resolutionTime: ({ linked }) => {
+        return linked('cases.resolutionTime');
+      },
+      score: ({ linked }) => {
+        return linked('webitelUI.auditForm.score');
+      },
+      service: ({ linked }) => {
+        return linked('cases.service');
+      },
+      sla: ({ linked }) => {
+        return linked('cases.appliedSLA');
+      },
+      slaCondition: ({ linked }) => {
+        return linked('cases.appliedCondition');
+      },
+      source: ({ linked }) => {
+        return linked('cases.source');
+      },
+      status: ({ linked }) => {
+        return linked('cases.status');
+      },
+      tag: ({ linked }) => {
+        return linked('vocabulary.tag');
+      },
+      talkDuration: ({ linked }) => {
+        return linked('objects.talkDuration');
+      },
+      team: ({ linked }) => {
+        return linked('objects.team');
+      },
+      totalDuration: ({ linked }) => {
+        return linked('objects.totalDuration');
+      },
+      user: ({ linked }) => {
+        return linked('objects.user');
+      },
+      variable: ({ linked }) => {
+        return linked('vocabulary.variables');
+      },
+      presets: {
+        preset: 'Алдын ала орнату | Алдын ала орнатулар',
+        overwritePresetTitle: 'Бұл атаумен алдын ала орнату бар.',
+        overwritePresetText: 'Оны ауыстырғыңыз келе ме?',
+        notifications: {
+          success: {
+            update: ({ linked }) => {
+              return linked('systemNotifications.success.update', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            create: ({ linked }) => {
+              return linked('systemNotifications.success.create', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+            delete: ({ linked }) => {
+              return linked('systemNotifications.success.delete', {
+                entity: linked('filters.presets.preset'),
+              });
+            },
+          },
+        },
+      },
     },
   },
   systemNotifications: {
