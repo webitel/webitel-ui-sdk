@@ -9,7 +9,7 @@
   >
     <slot />
 
-    <div v-if="hint" v-tooltip="hint" />
+    <wt-hint v-if="hint">{{ hint }} </wt-hint>
   </label>
 </template>
 
@@ -34,8 +34,8 @@ defineProps<{
 
   display: flex;
   align-items: center;
-  transition: var(--transition);
   cursor: text;
+  transition: var(--transition);
   color: var(--wt-label-color);
   //padding: var(--wt-label-padding);
 
