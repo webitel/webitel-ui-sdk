@@ -9,7 +9,6 @@
       :value="value"
     />
     <wt-label 
-      v-if="label"
       :for="radioId"
       :disabled="disabled"
     >
@@ -19,6 +18,7 @@
         v-bind="{ label, isChecked, disabled }"
       >
         <div
+          v-if="label"
           class="wt-radio__label"
         >
           {{ label }}
@@ -32,7 +32,7 @@
 import type { RadioButtonProps } from 'primevue/radiobutton';
 import { computed, defineModel, defineProps } from 'vue';
 
-interface WtRadioProps extends RadioButtonProps {
+interface Props extends RadioButtonProps {
   // value, set by radio
   value: string | number | boolean | object;
   label?: string;
@@ -41,7 +41,7 @@ interface WtRadioProps extends RadioButtonProps {
   outline?: boolean;
 }
 
-const props = withDefaults(defineProps<WtRadioProps>(), {
+const props = withDefaults(defineProps<Props>(), {
   label: '',
   required: false,
   disabled: false,
