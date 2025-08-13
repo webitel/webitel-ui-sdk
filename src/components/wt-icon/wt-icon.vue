@@ -14,14 +14,17 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import { ComponentSize } from '../../enums/ComponentSize/ComponentSize';
+import { IconColor } from '../../enums/IconColor/IconColor';
+
 interface Props {
   /**
    * Icon name
    * @example '<wt-icon icon="close"></wt-icon>'
    */
   icon: string;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  color?: 'default' | 'active' | 'disabled' | 'primary' | 'error' | 'success' | 'warning' | 'on-dark' | 'on-light' | 'on-primary' | 'info' | 'chat' | 'transfer' | 'job';
+  size?: ComponentSize;
+  color?: IconColor;
   /**
    * inserts icon name prefix between "icon" and actual icon name ("icon" prop).
    * Useful for library icons extension with project-level icons with this prefix in name
@@ -31,8 +34,8 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: 'md',
-  color: 'default',
+  size: ComponentSize.MD,
+  color: IconColor.DEFAULT,
   iconPrefix: '',
   disabled: false,
 });
