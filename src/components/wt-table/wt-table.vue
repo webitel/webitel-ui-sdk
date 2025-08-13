@@ -124,13 +124,14 @@
 import { computed, defineProps, ref, withDefaults, useSlots } from 'vue';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useI18n } from 'vue-i18n';
+import type { WtTableHeader } from './types/WtTable.js';
 // import { useSortableTable, type SortableTableOptions } from '../../composables/useWtTable/useSortableTable.js';
 
 export interface Props {
   /**
-   * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets minmax(150px, 1fr). '
+   * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
    */
-  headers?: Array<unknown>;
+  headers?: WtTableHeader[];
   /**
    * 'List of data, represented by table. '
    */
@@ -221,8 +222,6 @@ const columnStyle = (col) => {
   if (col.width) {
     return {
       width: col.width,
-      minWidth: col.width,
-      maxWidth: col.width,
     };
   }
 }
