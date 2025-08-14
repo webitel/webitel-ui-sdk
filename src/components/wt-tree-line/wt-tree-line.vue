@@ -47,6 +47,7 @@
         :nested-icons="displayIcons"
         :last-child="index === data[childrenProp].length - 1"
         :multiple="multiple"
+        :allow-parent="allowParent"
         @open-parent="onOpenParent"
         @update:model-value="emit('update:modelValue', $event)"
       />
@@ -74,6 +75,7 @@ const props = withDefaults(
     nestedIcons?: WtTreeNestedIcons[];
     nextElement?: boolean;
     multiple?: boolean;
+    allowParent?: boolean;
     /**
      * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
      */
@@ -86,6 +88,7 @@ const props = withDefaults(
     nextElement: false,
     selectedParent: false,
     multiple: false,
+    allowParent: false,
     searchedProp: 'searched',
   },
 );
@@ -171,6 +174,18 @@ const setMultipleModelValue = () => {
 const selectElement = () => {
   if (props.multiple && !props.data.service) {
     setMultipleModelValue();
+    return;
+  }
+
+  if (props.allowParent) {
+    return emit(
+      'update:modelValue',
+      props.itemData ? props.data[props.itemData] : props.data,
+    );
+  }
+
+  if (props.data[props.childrenProp]?.length) {
+    collapsed.value = !collapsed.value;
     return;
   }
 
