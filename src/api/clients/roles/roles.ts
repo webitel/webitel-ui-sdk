@@ -90,7 +90,6 @@ const getRole = async ({ itemId: id }) => {
   try {
     const response = await rolesApiFactory.readRole(id, fieldsToSend);
     return applyTransform(response.data, [
-      snakeToCamel(),
       merge(defaultObject),
       itemResponseHandler,
     ]);
@@ -107,7 +106,7 @@ const addRole = async ({ itemInstance }) => {
   ]);
   try {
     const response = await rolesApiFactory.createRole(item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, []);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -122,7 +121,7 @@ const updateRole = async ({ itemInstance, itemId: id }) => {
 
   try {
     const response = await rolesApiFactory.updateRole(id, item);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, []);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }

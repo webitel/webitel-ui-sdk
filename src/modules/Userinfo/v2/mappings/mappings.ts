@@ -151,7 +151,8 @@ export const mapWtObjectToUiSection: Record<
     [WtObject.Status]: CrmSections.Statuses,
     [WtObject.Source]: CrmSections.Sources,
     [WtObject.ContactGroup]: CrmSections.ContactGroups,
-    [WtObject.CustomLookup]: CrmSections.CustomLookups,
+    [WtObject.TypesExtensionsCustomization]: CrmSections.TypesExtensionsCustomization,
+    [WtObject.CustomLookups]: CrmSections.CustomLookups,
   },
 
   // Supervisor sections
