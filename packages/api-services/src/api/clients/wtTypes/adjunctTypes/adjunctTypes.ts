@@ -1,55 +1,49 @@
-import get from 'lodash/get';
-import {
-  getDictionaries,
-} from '@webitel/api-services/gen';
+import { getDictionaries } from '@webitel/api-services/gen';
 
 import {
-    getDefaultGetListResponse,
-    getDefaultGetParams,
-  } from '../../../defaults';
-  import {
-    applyTransform,
-    camelToSnake,
-    generateUrl,
-    merge,
-    notify,
-    sanitize,
-    snakeToCamel,
-    starToSearch,
-  } from '../../../transformers';
-  
-  
-  const getAdjunctTypesList = async ({ repo, ...params }) => {
-    const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
-  
-    const { page, size, fields, sort, id, q } = applyTransform(params, [
-      merge(getDefaultGetParams()),
-      starToSearch('search'),
-      (params) => ({ ...params, q: params.search }),
-      sanitize(fieldsToSend),
-      camelToSnake(),
-    ]);
-    try {
-      const response = await getDictionaries().dictionariesSearchType({
-        page,
-        size,
-        sort,
-        fields,
-        q,
-        id,
-      });
-      const { data, next } = applyTransform(response.data, [
-        merge(getDefaultGetListResponse()),
-      ]);
-      return {
-        items: applyTransform(data, []),
-        next,
-      };
-    } catch (err) {
-      throw applyTransform(err, [notify]);
-    }
-  };
-  
+	getDefaultGetListResponse,
+	getDefaultGetParams,
+} from '../../../defaults';
+import {
+	applyTransform,
+	camelToSnake,
+	merge,
+	notify,
+	sanitize,
+	starToSearch,
+} from '../../../transformers';
+
+const getAdjunctTypesList = async ({ repo, ...params }) => {
+	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+
+	const { page, size, fields, sort, id, q } = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		(params) => ({ ...params, q: params.search }),
+		sanitize(fieldsToSend),
+		camelToSnake(),
+	]);
+	try {
+		const response = await getDictionaries().dictionariesSearchType({
+			page,
+			size,
+			sort,
+			fields,
+			q,
+			id,
+		});
+		const { data, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(data, []),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
 //   const getCustomLookupRecord = async ({ itemId: id, repo }) => {
 //     try {
 //       const response = await dictionariesService.locateData(repo, id);
@@ -58,7 +52,7 @@ import {
 //       throw applyTransform(err, [notify]);
 //     }
 //   };
-  
+
 //   const addCustomLookupRecord = async ({ itemInstance, fieldsToSend, repo }) => {
 //     const item = applyTransform(itemInstance, [
 //       camelToSnake(),
@@ -71,7 +65,7 @@ import {
 //       throw applyTransform(err, [notify]);
 //     }
 //   };
-  
+
 //   const updateCustomLookupRecord = async ({
 //     itemInstance,
 //     fieldsToSend,
@@ -89,7 +83,7 @@ import {
 //       throw applyTransform(err, [notify]);
 //     }
 //   };
-  
+
 //   const deleteCustomLookupRecord = async ({ repo, id }) => {
 //     try {
 //       const response = await dictionariesService.deleteData2(repo, id);
@@ -98,7 +92,7 @@ import {
 //       throw applyTransform(err, [notify]);
 //     }
 //   };
-  
+
 //   const transformItemsForSelect =
 //     ({ primary, display }) =>
 //     (items) => {
@@ -107,7 +101,7 @@ import {
 //         name: get(item, display.split('.')),
 //       }));
 //     };
-  
+
 //   // In this method we are using the same API as in getCustomLookupRecords,
 //   // but we are using different parameters, so we need to create a new method where we can pass the type of the lookup where type is path to api
 //   // for example: 'cities' has type 'dictionary/cities'
@@ -118,7 +112,7 @@ import {
 //     ...params
 //   }) => {
 //     const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
-  
+
 //     const url = applyTransform(params, [
 //       merge(getDefaultGetParams()),
 //       starToSearch('search'),
@@ -132,7 +126,7 @@ import {
 //       const { data, items, next } = applyTransform(response.data, [
 //         merge(getDefaultGetListResponse()),
 //       ]);
-  
+
 //       return {
 //         // Some endpoints return data, some return items so we need to check for both of them
 //         items:
@@ -145,22 +139,21 @@ import {
 //       throw applyTransform(err, [notify]);
 //     }
 //   };
-  
+
 //   const CustomLookupApi = {
 //     getList: getCustomLookupRecords,
 //     get: getCustomLookupRecord,
 //     add: addCustomLookupRecord,
 //     update: updateCustomLookupRecord,
 //     delete: deleteCustomLookupRecord,
-  
+
 //     getLookup: getCustomLookupRecordsLookup,
 //   };
-  
+
 //   export default CustomLookupApi;
-  
 
 export const AdjunctTypesAPI = {
-    getList: getAdjunctTypesList,
+	getList: getAdjunctTypesList,
 };
 
 /**
