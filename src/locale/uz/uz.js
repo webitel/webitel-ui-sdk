@@ -107,7 +107,7 @@ export default {
     host: 'Host',
     time: 'Vaqt',
     channel: 'Kanal | Kanallar',
-    file: 'Fayl',
+    file: 'Fayl | Fayllar',
     logout: 'Chiqish',
     priority: 'Muhimlik | Muhimliklar',
     color: 'Rang',

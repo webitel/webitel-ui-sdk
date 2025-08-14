@@ -105,7 +105,7 @@ export default {
     host: 'Host',
     time: 'Tiempo',
     channel: 'Canal | Canales',
-    file: 'Archivo',
+    file: 'Archivo | Archivos',
     logout: 'Cerrar sesión',
     priority: 'Prioridad | Prioridades',
     color: 'Color',

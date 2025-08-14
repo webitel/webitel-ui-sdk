@@ -105,6 +105,8 @@ function setPause() {
 </script>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .wt-cc-pause-cause-popup-option {
   display: flex;
   justify-content: space-between;

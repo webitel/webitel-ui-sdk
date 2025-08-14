@@ -45,13 +45,15 @@
           :options="searchModeOptions"
           @click="updateSearchMode"
         >
-          <template #activator>
+          <template #activator="{ toggle }">
             <wt-icon-btn
               v-tooltip="$t('webitelUI.searchBar.settingsHint')"
               :color="invalid ? 'error' : 'default'"
               icon="filter"
+              @click="toggle"
             />
           </template>
+
           <template #option="{ value, text }">
             <wt-radio
               :label="text"

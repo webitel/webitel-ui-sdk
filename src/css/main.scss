@@ -1,5 +1,6 @@
 @forward 'styleguide/styleguide';
 @use 'styleguide/styleguide' as *;
+@use '../plugins/primevue/primevue' as *;
 @use 'pages/table-page';
 @use 'pages/card-page';
 
@@ -17,7 +18,7 @@
 
 html {
   height: 100%;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 body {
