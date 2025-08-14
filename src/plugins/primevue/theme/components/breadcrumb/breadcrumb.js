@@ -15,11 +15,11 @@ const breadcrumb = {
         height: ${dt(`breadcrumb.separator.size`)};
     }
 
-    .p-breadcrumb .p-breadcrumb-list .p-breadcrumb-separator .wt-icon svg {
+    .p-breadcrumb .p-breadcrumb-list .p-breadcrumb-separator .wt-icon {
         fill: ${dt(`breadcrumb.separator.color`)};
     }
 
-    .p-breadcrumb .p-breadcrumb-list .p-breadcrumb-separator:has(+ .p-breadcrumb-item:last-child) .wt-icon svg {
+    .p-breadcrumb .p-breadcrumb-list .p-breadcrumb-separator:has(+ .p-breadcrumb-item:last-child) .wt-icon {
         fill: ${dt(`breadcrumb.separator.lastItemColor`)};
     }
   `,
