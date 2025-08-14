@@ -6,7 +6,10 @@
     :min="min"
     :step="step"
     :orientation="orientation"
-    :style="{ height: vertical ? `${height}px` : '' }"
+    :style="{ 
+      height: vertical ? `${height}px` : '',
+      width: !vertical && width ? `${width}px` : '',
+     }"
   />
   
 </template>
@@ -22,6 +25,7 @@ interface Props extends SliderProps{
   max?: number;
   step?: number;
   height?: number;
+  width?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -31,6 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   max: 100,
   step: 1,
   height: 100,
+  width: undefined,
 });
 
 const model = defineModel<number>();
