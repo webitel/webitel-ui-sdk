@@ -29,6 +29,7 @@ export * from './skills/skills';
 export * from './slas/slas';
 export * from './teams/teams';
 export * from './users/users';
+export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';

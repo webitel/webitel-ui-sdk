@@ -38,7 +38,7 @@ const emit = defineEmits<{
   width: fit-content;
   line-height: 0;
 
-  &:hover .wt-icon--color-default :deep(.wt-icon__icon) {
+  &:hover .wt-icon--color-default {
     fill: var(--icon-btn-hover-color);
   }
 
