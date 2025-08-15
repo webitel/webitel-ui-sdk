@@ -14,6 +14,9 @@ import {
 	sanitize,
 	snakeToCamel,
 } from '../../transformers';
+import { getFieldsToSendFromZodSchema } from "@webitel/api-services/gen/utils";
+import { listPrioritiesQueryParams } from '@webitel/api-services/gen';
+import { selectiveCamelToSnake } from "../../transformers/selectiveCamelToSnake";
 
 const instance = getDefaultInstance();
 const configuration = getDefaultOpenAPIConfig();
@@ -23,32 +26,36 @@ const priorityService = PrioritiesApiFactory(configuration, '', instance);
 const fieldsToSend = ['name', 'description', 'color'];
 
 const getPrioritiesList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'notInSla',
-		'inSla',
-		'inSlaCond',
-	];
-	const {
-		page,
-		size,
-		fields,
-		sort,
-		id,
-		q,
-		not_in_sla: notInSla,
-		in_sla_cond: inSlaCond,
-	} = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
-		sanitize(fieldsToSend),
-		camelToSnake(),
-	]);
+	const allowedKeys = getFieldsToSendFromZodSchema(listPrioritiesQueryParams);
+
+  const fieldsToSend = [
+    'page',
+    'size',
+    'q',
+    'sort',
+    'fields',
+    'id',
+    'notInSla',
+    'inSla',
+    'inSlaCond',
+  ];
+
+  const {
+    page,
+    size,
+    fields,
+    sort,
+    id,
+    q,
+    not_in_sla: notInSla,
+    in_sla_cond: inSlaCond,
+  } = applyTransform(params, [
+    merge(getDefaultGetParams()),
+    (params) => ({ ...params, q: params.search }),
+    sanitize(fieldsToSend),
+    (params) => selectiveCamelToSnake(params, allowedKeys),
+  ]);
+
 	try {
 		const response = await priorityService.listPriorities(
 			page,
