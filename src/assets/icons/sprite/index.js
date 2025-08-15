@@ -60,6 +60,7 @@ import chatTransferFilled from './chat-transfer--filled.svg';
 import checkbox from './checkbox.svg';
 import checkboxChecked from './checkbox--checked.svg';
 import checkboxCheckedFilled from './checkbox--checked--filled.svg';
+import checkboxTick from './checkbox-tick.svg';
 import clear from './clear.svg';
 import close from './close.svg';
 import closeFilled from './close--filled.svg';
@@ -418,4 +419,5 @@ export default objCamelToKebab({
   plyrVolume,
   loadPreset,
   quickReplies,
+  checkboxTick,
 });

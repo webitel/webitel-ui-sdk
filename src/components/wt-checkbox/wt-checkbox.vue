@@ -68,7 +68,7 @@ const isChecked = computed(() => {
 });
 
 const checkboxIcon = computed(() => {
-  return isChecked.value ? 'tick' : '';
+  return isChecked.value ? 'checkbox-tick' : '';
 })
 
 const iconColor = computed(() => {
