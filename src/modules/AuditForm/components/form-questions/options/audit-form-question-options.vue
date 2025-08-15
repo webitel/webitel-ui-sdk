@@ -31,7 +31,7 @@
         :label="opt.name"
         :selected="answerModel?.score"
         :value="opt.score"
-        @input="updateAnswer"
+        @update:selected="updateAnswer"
       />
     </div>
     <div v-else>Unknown mode: {{ mode }}</div>

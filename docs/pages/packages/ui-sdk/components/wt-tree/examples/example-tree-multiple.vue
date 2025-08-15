@@ -5,8 +5,8 @@
     :data="data"
     item-label="name"
     item-data="name"
+    multiple
     children-prop="services"
-    allow-parent
   />
 </template>
 
@@ -14,7 +14,7 @@
 import { WtTree } from '@webitel/ui-sdk/components';
 import { ref } from 'vue';
 
-const selectedElement = ref('Subservice 4');
+const selectedElement = ref(['Subservice 4']);
 const data = ref([
   {
     id: '1',

@@ -1,5 +1,6 @@
 <script setup>
 import ExampleTree from './examples/example-tree.vue';
+import ExampleTreeMultiple from './examples/example-tree-multiple.vue';
 import ExampleTreeList from './examples/example-tree-list.vue';
 import Specs from './component-specs.vue';
 </script>
@@ -18,6 +19,16 @@ import Specs from './component-specs.vue';
 
 ::: details Code
 <<< ./examples/example-tree.vue
+:::
+
+## Example Multiple Tree
+
+::: raw
+<ExampleTreeMultiple />
+:::
+
+::: details Code
+<<< ./examples/example-tree-multiple.vue
 :::
 
 [//]: # "TODO Comment because now it's doesn't need to use list but have request not to delete"

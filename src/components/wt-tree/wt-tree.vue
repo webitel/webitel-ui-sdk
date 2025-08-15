@@ -13,6 +13,7 @@
         :data="item"
         :children-prop="childrenProp"
         :multiple="multiple"
+        :allow-parent="allowParent"
         @update:model-value="emit('update:modelValue', $event)"
       />
     </div>
@@ -77,10 +78,12 @@ const props = withDefaults(
      */
     childrenProp?: string;
     multiple?: boolean;
+    allowParent?: boolean
   }>(),
   {
     childrenProp: 'children',
     mode: WtTreeMode.Tree,
+    allowParent: false,
   },
 );
 

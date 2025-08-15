@@ -20,7 +20,7 @@
               :selected="selected.id"
               :value="option.id"
               class="wt-cc-pause-cause-popup-option__radio"
-              @input="select(option)"
+              @update:selected="select(option)"
             />
             <div class="wt-cc-pause-cause-popup-option__limits-wrapper">
               <span
