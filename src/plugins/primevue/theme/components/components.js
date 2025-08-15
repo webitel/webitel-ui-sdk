@@ -1,4 +1,5 @@
 import autocomplete from './autocomplete/autocomplete.js';
+import breadcrumb from './breadcrumb/breadcrumb.js';
 import button from './button/button.js';
 import checkbox from './checkbox/checkbox.js';
 import chip from './chip/chip.js';
@@ -15,6 +16,7 @@ const components = {
   tooltip,
   chip,
   checkbox,
+  breadcrumb,
   slider,
   divider,
   radiobutton: radio,
