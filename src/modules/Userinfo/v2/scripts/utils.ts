@@ -125,6 +125,6 @@ export const getWtAppByUiSection = (section: UiSection): WtApplication => {
   }
 
   // then => custom lookup
-  console.info(`Havent found app for section: ${section}, fallback to crm`);
+  // console.info(`Havent found app for section: ${section}, fallback to crm`);
   return WtApplication.Crm;
 };
