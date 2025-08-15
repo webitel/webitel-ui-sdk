@@ -20,14 +20,14 @@
       :tooltip-triggers="[]"
       @click="selectOption"
     >
-      <template #activator>
+      <template #activator="{ toggle, show }">
         <wt-button
           :color="color"
           :disabled="disabled"
           :loading="false"
           class="wt-button-select__select-btn"
           v-bind="$attrs"
-          @click="isOpened = !isOpened"
+          @click="toggleContextMenu(toggle, $event)"
         >
           <wt-icon
             :class="{ 'wt-button-select__select-arrow--active': isOpened }"
@@ -92,6 +92,11 @@ const selectOption = ({ option, index }) => {
 
 const atClickaway = () => {
   isOpened.value = false;
+};
+
+const toggleContextMenu = (toggle, e) => {
+  isOpened.value = !isOpened.value;
+  toggle(e)
 };
 </script>
 
