@@ -84,6 +84,7 @@ import expand from './expand.svg';
 import eyeClosed from './eye--closed.svg';
 import eyeOpened from './eye--opened.svg';
 import falseIc from './false-ic.svg';
+import file from './file.svg';
 import filter from './filter.svg';
 import flows from './flows.svg';
 import generate from './generate.svg';
@@ -207,7 +208,6 @@ import videoCamOff from './video-cam-off.svg';
 import webitelLogo from './webitel-logo.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
-import file from './file.svg';
 
 export default objCamelToKebab({
   account,
