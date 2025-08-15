@@ -18,7 +18,7 @@
       />
     </div>
     <div
-      :class="{ active: isSelected }"
+      :class="{ active: displayActiveState }"
       class="wt-tree-line__label-wrapper"
       @click="selectElement"
     >
@@ -26,7 +26,7 @@
         {{ label }}
       </p>
       <wt-icon
-        v-if="isSelected"
+        v-if="displayActiveState"
         icon="chat-message-status-sent"
       />
     </div>
@@ -42,10 +42,12 @@
         :item-label="itemLabel"
         :item-data="itemData"
         :nested-level="nestedLevel + 1"
+        :selected-parent="isSelected || selectedParent"
         :next-element="!!data[childrenProp][index + 1]"
         :nested-icons="displayIcons"
         :last-child="index === data[childrenProp].length - 1"
         :multiple="multiple"
+        :allow-parent="allowParent"
         @open-parent="onOpenParent"
         @update:model-value="emit('update:modelValue', $event)"
       />
@@ -69,9 +71,11 @@ const props = withDefaults(
     childrenProp?: string;
     nestedLevel?: number;
     lastChild?: boolean;
+    selectedParent?: boolean;
     nestedIcons?: WtTreeNestedIcons[];
     nextElement?: boolean;
     multiple?: boolean;
+    allowParent?: boolean;
     /**
      * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
      */
@@ -82,7 +86,9 @@ const props = withDefaults(
     childrenProp: 'children',
     lastChild: false,
     nextElement: false,
+    selectedParent: false,
     multiple: false,
+    allowParent: false,
     searchedProp: 'searched',
   },
 );
@@ -132,6 +138,15 @@ const isSelected = computed(() => {
   return deepEqual(props.modelValue, props.data);
 });
 
+const displayActiveState = computed(() => {
+  if (props.multiple) {
+    return isSelected.value;
+  }
+
+  return isSelected.value || props.selectedParent;
+});
+
+
 const setMultipleModelValue = () => {
   const value = props.itemData ? props.data[props.itemData] : props.data;
   let existingIndex;
@@ -160,6 +175,13 @@ const selectElement = () => {
   if (props.multiple && !props.data.service) {
     setMultipleModelValue();
     return;
+  }
+
+  if (props.allowParent) {
+    return emit(
+      'update:modelValue',
+      props.itemData ? props.data[props.itemData] : props.data,
+    );
   }
 
   if (props.data[props.childrenProp]?.length) {
