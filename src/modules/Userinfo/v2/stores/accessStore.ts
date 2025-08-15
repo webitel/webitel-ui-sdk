@@ -87,13 +87,22 @@ export const createUserAccessStore = ({
 
     const routeAccessGuard: NavigationGuard = (to) => {
       /* find last because "matched" has top=>bottom routes order */
-      const uiSection = to.matched
+      let uiSection = to.matched
         .toReversed()
-        .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection;
+        .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection | ((RouteLocationNormalized) => UiSection);
       /* find last because "matched" has top=>bottom routes order */
-      const wtObject = to.matched
+      let wtObject = to.matched
         .toReversed()
-        .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject;
+        .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject | ((RouteLocationNormalized) => WtObject);
+
+        // if, then compute fn
+        if (typeof uiSection === 'function') {
+          uiSection = uiSection(to);
+        }
+        // if, then compute fn
+        if (typeof wtObject === 'function') {
+          wtObject = wtObject(to);
+        }
 
       if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
         // return false;

@@ -123,5 +123,8 @@ export const getWtAppByUiSection = (section: UiSection): WtApplication => {
   if (SupervisorSectionsValues[section]) {
     return WtApplication.Supervisor;
   }
-  wtlog.error({ module: 'modules/userinfo' })('Unknown section:', section);
+
+  // then => custom lookup
+  console.info(`Havent found app for section: ${section}, fallback to crm`);
+  return WtApplication.Crm;
 };
