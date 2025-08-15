@@ -2,7 +2,6 @@
 import Docs from './wt-chip-docs.vue';
 import ExampleChip from './examples/example-chip.vue';
 import ExampleChipDifferentColors from './examples/example-chip-different-colors.vue';
-import ExampleChipWithExtendedStyle from './examples/example-chip-with-extended-style.vue';
 import ExampleChipRemovable from './examples/example-chip-removable.vue'
 </script>
 
@@ -42,16 +41,4 @@ import ExampleChipRemovable from './examples/example-chip-removable.vue'
 
 ::: details Code
 <<< ./examples/example-chip-removable.vue
-:::
-
-## Example Chip with extended style
-
-### Chip style can be extended and re-used on any element
-
-::: raw
-<ExampleChipWithExtendedStyle />
-:::
-
-::: details Code
-<<< ./examples/example-chip-with-extended-style.vue
 :::

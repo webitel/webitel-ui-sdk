@@ -469,6 +469,7 @@ export * from './engineForAgentPauseCauseList';
 export * from './engineHangupCallResponse';
 export * from './engineHistoryCall';
 export * from './engineHistoryCallBlindTransfer';
+export * from './engineHistoryCallCallForm';
 export * from './engineHistoryCallVariables';
 export * from './engineHistoryFileJob';
 export * from './engineHistoryFileJobHistoryFileJobAction';
