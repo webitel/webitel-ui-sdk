@@ -15,7 +15,7 @@
             <wt-radio
               :selected="isSelected"
               :value="true"
-              @input="emit('preset:select', preset)"
+              @update:selected="emit('preset:select', preset)"
             />
           </div>
           <p

@@ -1,20 +1,20 @@
 <template>
-  <hr
-    class="wt-divider"
-    :class="`wt-divider-${variant}`"
+  <p-divider
+    :layout="variant"
   />
 </template>
 
-<script>
-export default {
-  name: 'WtDivider',
-  props: {
-    variant: {
-      type: String,
-      default: 'horizontal',
-    },
-  },
-};
+<script setup lang="ts">
+import type { DividerProps } from 'primevue';
+import { defineProps, withDefaults } from 'vue';
+
+interface Props extends DividerProps {
+  variant?: 'horizontal' | 'vertical';
+}
+
+withDefaults(defineProps<Props>(), {
+  variant: 'horizontal',
+});
 </script>
 
 <style lang="scss">
