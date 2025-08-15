@@ -2,6 +2,7 @@
   <div
     v-clickaway="atClickaway"
     class="wt-button-select"
+    ref="buttonSelect"
   >
     <wt-button
       :color="color"
@@ -84,6 +85,7 @@ const emit = defineEmits([
 ]);
 
 const isOpened = ref(false);
+const buttonSelect = ref(null);
 
 const selectOption = ({ option, index }) => {
   emit('click:option', option, index);
@@ -96,7 +98,7 @@ const atClickaway = () => {
 
 const toggleContextMenu = (toggle, e) => {
   isOpened.value = !isOpened.value;
-  toggle(e)
+  toggle(e, buttonSelect.value)
 };
 </script>
 
