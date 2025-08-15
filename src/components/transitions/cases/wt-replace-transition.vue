@@ -1,9 +1,9 @@
 <template>
   <wt-transition
-    :appear="appear"
-    :duration="duration"
-    :mode="mode"
     :name="transitionName"
+    :appear="props.appear"
+    :duration="props.duration"
+    :mode="props.mode"
     class="wt-replace-transition"
   >
     <template #default>
@@ -19,7 +19,6 @@ import WtTransition from '../wt-transition.vue';
 
 const props = defineProps({
   // can choose replace pattern [opacity, slide-up ets]
-  // ATTENTION!! need to add another names(patterns) to <wt-transition/>, now we have fade-opacity only
   pattern: {
     type: String,
     default: 'opacity',

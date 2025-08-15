@@ -831,6 +831,10 @@ export const getSearchHistoryCallResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
+			destinationName: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
 			direction: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
@@ -914,6 +918,31 @@ export const getSearchHistoryCallResponseMock = (
 						faker.helpers.arrayElement(
 							Object.values(EngineHistoryFileJobHistoryFileJobState),
 						),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			forms: faker.helpers.arrayElement([
+				Array.from(
+					{ length: faker.number.int({ min: 1, max: 10 }) },
+					(_, i) => i + 1,
+				).map(() => ({
+					agent: faker.helpers.arrayElement([
+						{
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					reportingAt: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
 				})),
@@ -1512,6 +1541,10 @@ export const getSearchHistoryCallPostResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
+			destinationName: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
 			direction: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
@@ -1595,6 +1628,31 @@ export const getSearchHistoryCallPostResponseMock = (
 						faker.helpers.arrayElement(
 							Object.values(EngineHistoryFileJobHistoryFileJobState),
 						),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			forms: faker.helpers.arrayElement([
+				Array.from(
+					{ length: faker.number.int({ min: 1, max: 10 }) },
+					(_, i) => i + 1,
+				).map(() => ({
+					agent: faker.helpers.arrayElement([
+						{
+							id: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+							name: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					reportingAt: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
 				})),
@@ -2392,6 +2450,10 @@ export const getPatchHistoryCallResponseMock = (
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),
+	destinationName: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
 	direction: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -2471,6 +2533,31 @@ export const getPatchHistoryCallResponseMock = (
 				faker.helpers.arrayElement(
 					Object.values(EngineHistoryFileJobHistoryFileJobState),
 				),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	forms: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			agent: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			reportingAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
 		})),

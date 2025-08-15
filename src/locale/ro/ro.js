@@ -107,7 +107,7 @@ export default {
     host: 'Gazdă',
     time: 'Timp',
     channel: 'Canal | Canale',
-    file: 'Fișier',
+    file: 'Fișier | Fișiere',
     logout: 'Deconectare',
     priority: 'Prioritate | Priorități',
     color: 'Culoare',

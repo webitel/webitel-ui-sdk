@@ -524,6 +524,7 @@ export const searchHistoryCallResponse = zod.object({
 					.optional(),
 				createdAt: zod.string().optional(),
 				destination: zod.string().optional(),
+				destinationName: zod.string().optional(),
 				direction: zod.string().optional(),
 				display: zod.string().optional(),
 				duration: zod.number().optional(),
@@ -557,6 +558,19 @@ export const searchHistoryCallResponse = zod.object({
 								.default(
 									searchHistoryCallResponseItemsItemFilesJobItemStateDefault,
 								),
+						}),
+					)
+					.optional(),
+				forms: zod
+					.array(
+						zod.object({
+							agent: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							reportingAt: zod.string().optional(),
 						}),
 					)
 					.optional(),
@@ -856,6 +870,7 @@ export const searchHistoryCallPostResponse = zod.object({
 					.optional(),
 				createdAt: zod.string().optional(),
 				destination: zod.string().optional(),
+				destinationName: zod.string().optional(),
 				direction: zod.string().optional(),
 				display: zod.string().optional(),
 				duration: zod.number().optional(),
@@ -889,6 +904,19 @@ export const searchHistoryCallPostResponse = zod.object({
 								.default(
 									searchHistoryCallPostResponseItemsItemFilesJobItemStateDefault,
 								),
+						}),
+					)
+					.optional(),
+				forms: zod
+					.array(
+						zod.object({
+							agent: zod
+								.object({
+									id: zod.string().optional(),
+									name: zod.string().optional(),
+								})
+								.optional(),
+							reportingAt: zod.string().optional(),
 						}),
 					)
 					.optional(),
@@ -1298,6 +1326,7 @@ export const patchHistoryCallResponse = zod.object({
 		.optional(),
 	createdAt: zod.string().optional(),
 	destination: zod.string().optional(),
+	destinationName: zod.string().optional(),
 	direction: zod.string().optional(),
 	display: zod.string().optional(),
 	duration: zod.number().optional(),
@@ -1327,6 +1356,19 @@ export const patchHistoryCallResponse = zod.object({
 				state: zod
 					.enum(['idle', 'active', 'finished', 'error'])
 					.default(patchHistoryCallResponseFilesJobItemStateDefault),
+			}),
+		)
+		.optional(),
+	forms: zod
+		.array(
+			zod.object({
+				agent: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				reportingAt: zod.string().optional(),
 			}),
 		)
 		.optional(),
