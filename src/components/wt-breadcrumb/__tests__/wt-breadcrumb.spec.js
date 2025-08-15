@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
 
-import WtHeadlineNav from '../wt-headline-nav.vue';
+import WtBreadcrumb from '../wt-breadcrumb.vue';
 
-describe('WtHeadlineNav', () => {
+describe('WtBreadcrumb', () => {
   it('renders a component', () => {
-    const wrapper = shallowMount(WtHeadlineNav, {
+    const wrapper = shallowMount(WtBreadcrumb, {
       props: {
         path: [],
       },

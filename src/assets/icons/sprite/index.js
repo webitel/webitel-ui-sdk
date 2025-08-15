@@ -20,6 +20,7 @@ import back from './back.svg';
 import bell from './bell.svg';
 import bellBadged from './bell-badged.svg';
 import bot from './bot.svg';
+import breadCrumbs from './bread-crumbs.svg';
 import bucket from './bucket.svg';
 import calendar from './calendar.svg';
 import call from './call.svg';
@@ -227,6 +228,7 @@ export default objCamelToKebab({
   bell,
   bellBadged,
   bucket,
+  breadCrumbs,
   bot,
   calendar,
   darkMode,

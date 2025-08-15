@@ -6,11 +6,10 @@ const number = ref(70);
 
 <template>
   <wt-slider
-    :value="number"
+    v-model="number"
     :min="0"
     :max="100"
     :step="1"
-    @input="number = $event"
   />
 </template>
 
