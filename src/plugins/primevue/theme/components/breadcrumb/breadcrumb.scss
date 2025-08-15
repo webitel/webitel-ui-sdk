@@ -1,0 +1,9 @@
+@use '@webitel/styleguide/typography' as *;
+
+.wt-breadcrumb__text {
+  @extend %typo-body-1;
+}
+
+.wt-breadcrumb__text--last {
+  font-weight: 600;
+}

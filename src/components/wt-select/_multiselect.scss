@@ -103,7 +103,7 @@
 }
 
 :deep(.multiselect--active) {
-  .multiselect__select.multiselect__arrow .wt-icon__icon {
+  .multiselect__select.multiselect__arrow .wt-icon {
     fill: var(--icon-active-color);
   }
 

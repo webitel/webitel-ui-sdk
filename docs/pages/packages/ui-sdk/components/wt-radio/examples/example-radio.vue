@@ -9,16 +9,14 @@ const selected = ref(value1);
 
 <template>
   <wt-radio
-    :selected="selected"
+    v-model:selected="selected"
     :value="value1"
     label="Radio 1"
-    @input="selected = $event"
   />
   <wt-radio
-    :selected="selected"
+    v-model:selected="selected"
     :value="value2"
     label="Radio 2"
-    @input="selected = $event"
   />
 </template>
 

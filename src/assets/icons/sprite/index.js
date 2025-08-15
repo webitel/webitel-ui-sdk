@@ -20,6 +20,7 @@ import back from './back.svg';
 import bell from './bell.svg';
 import bellBadged from './bell-badged.svg';
 import bot from './bot.svg';
+import breadCrumbs from './bread-crumbs.svg';
 import bucket from './bucket.svg';
 import calendar from './calendar.svg';
 import call from './call.svg';
@@ -204,6 +205,7 @@ import videoCamOff from './video-cam-off.svg';
 import webitelLogo from './webitel-logo.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
+import file from './file.svg';
 
 export default objCamelToKebab({
   account,
@@ -227,6 +229,7 @@ export default objCamelToKebab({
   bell,
   bellBadged,
   bucket,
+  breadCrumbs,
   bot,
   calendar,
   darkMode,
@@ -418,4 +421,5 @@ export default objCamelToKebab({
   plyrVolume,
   loadPreset,
   quickReplies,
+  file,
 });

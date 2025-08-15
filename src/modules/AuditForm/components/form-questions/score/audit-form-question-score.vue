@@ -35,7 +35,7 @@
         :label="`${score}`"
         :selected="answerModel?.score"
         :value="score"
-        @input="updateAnswer"
+        @update:selected="updateAnswer"
       />
     </div>
   </article>

@@ -68,7 +68,7 @@ export const createUserAccessStore = ({
     };
 
     const hasApplicationVisibility = (app: WtApplication) => {
-      return hasReadAccess() || appVisibilityAccess.get(app);
+      return appVisibilityAccess.get(app);
     };
 
     const hasSectionVisibility = (section: UiSection, object: WtObject) => {
@@ -77,9 +77,6 @@ export const createUserAccessStore = ({
       const hasSectionVisibilityAccess = (section: UiSection) => {
         return sectionVisibilityAccess.get(section);
       };
-
-      const allowGlobalAccess = hasReadAccess();
-      if (allowGlobalAccess) return true;
 
       const allowAppVisibility = hasApplicationVisibility(appOfSection);
       const allowObjectAccess = hasReadAccess(objectOfSection);
