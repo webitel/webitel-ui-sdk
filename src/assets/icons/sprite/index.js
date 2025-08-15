@@ -205,6 +205,7 @@ import videoCamOff from './video-cam-off.svg';
 import webitelLogo from './webitel-logo.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
+import file from './file.svg';
 
 export default objCamelToKebab({
   account,
@@ -420,4 +421,5 @@ export default objCamelToKebab({
   plyrVolume,
   loadPreset,
   quickReplies,
+  file,
 });
