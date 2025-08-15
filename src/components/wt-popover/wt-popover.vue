@@ -41,12 +41,12 @@ withDefaults(defineProps<PopoverProps>(), {
 });
 defineEmits<PopoverEmitsOptions>();
 
-const toggle = (event?: Event) => {
-  innerPopover.value?.toggle(event);
+const toggle = (event?: Event, target?: HTMLElement | null | undefined) => {
+  innerPopover.value?.toggle(event, target ?? undefined);
 };
 
-const show = (event?: Event) => {
-  innerPopover.value?.show(event);
+const show = (event?: Event, target?: HTMLElement | null | undefined) => {
+  innerPopover.value?.show(event, target ?? undefined);
 };
 
 const hide = (event?: Event) => {
