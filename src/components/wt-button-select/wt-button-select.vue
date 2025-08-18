@@ -1,8 +1,8 @@
 <template>
   <div
+    ref="buttonSelect"
     v-clickaway="atClickaway"
     class="wt-button-select"
-    ref="buttonSelect"
   >
     <wt-button
       :color="color"
