@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="buttonSelect"
     v-clickaway="atClickaway"
     class="wt-button-select"
   >
@@ -43,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 const props = defineProps({
   /**
@@ -84,6 +85,7 @@ const emit = defineEmits([
 ]);
 
 const isOpened = ref(false);
+const buttonSelect = useTemplateRef('buttonSelect');
 
 const selectOption = ({ option, index }) => {
   emit('click:option', option, index);
@@ -96,7 +98,10 @@ const atClickaway = () => {
 
 const toggleContextMenu = (toggle, e) => {
   isOpened.value = !isOpened.value;
-  toggle(e)
+  // The menu is positioned relative to `buttonSelect` (reference button).
+  // If not provided, it defaults to centering on the trigger button (`e`).
+  // https://webitel.atlassian.net/browse/WTEL-7349
+  toggle(e, buttonSelect.value)
 };
 </script>
 
