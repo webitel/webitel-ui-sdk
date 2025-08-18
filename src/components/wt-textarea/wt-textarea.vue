@@ -21,14 +21,16 @@
       <p-textarea
         :id="name"
         v-model="model"
-        :disabled="disabled"
         :placeholder="placeholder || label"
-        :rows="rows"
-        :readonly="readonly"
-        :auto-resize="autoresize"
         :invalid="invalid"
+        :disabled="disabled"
+        :rows="rows"
+        :autoresize="autoresize"
+        :readonly="readonly"
         class="wt-textarea__textarea"
-        v-on="listeners"
+        @paste="emit('paste', $event)"
+        @keydown="handleKeypress"
+        @blur="emit('blur')"
       />
     </div>
     <wt-input-info
@@ -41,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineModel } from 'vue';
+import { defineModel } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -94,18 +96,15 @@ const props = withDefaults(defineProps<Props>(), {
 
 const model = defineModel<string>();
 
-const emit = defineEmits(['enter']);
+const emit = defineEmits(['enter', 'paste', 'blur', 'keydown']);
 
 const { isValidation, invalid, validationText } = useValidation({
   v: props.v,
   customValidators: props.customValidators,
 } as any);
 
-const listeners = computed(() => ({
-  keypress: (event: KeyboardEvent) => handleKeypress(event),
-}));
-
 const handleKeypress = (event: KeyboardEvent) => {
+  emit('keydown', event);
   if (!props.autoresize) return;
 
   if (event.key === 'Enter' && !event.shiftKey) {
