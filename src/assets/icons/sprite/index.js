@@ -85,6 +85,7 @@ import expand from './expand.svg';
 import eyeClosed from './eye--closed.svg';
 import eyeOpened from './eye--opened.svg';
 import falseIc from './false-ic.svg';
+import fileColor from './file--color.svg';
 import file from './file.svg';
 import filter from './filter.svg';
 import flows from './flows.svg';
@@ -428,4 +429,5 @@ export default objCamelToKebab({
   quickReplies,
   checkboxTick,
   file,
+  'file--color': fileColor,
 });
