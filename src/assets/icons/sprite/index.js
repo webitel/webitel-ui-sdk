@@ -83,6 +83,8 @@ import emailOutbound from './email-outbound.svg';
 import expand from './expand.svg';
 import eyeClosed from './eye--closed.svg';
 import eyeOpened from './eye--opened.svg';
+import falseIc from './false-ic.svg';
+import file from './file.svg';
 import filter from './filter.svg';
 import flows from './flows.svg';
 import generate from './generate.svg';
@@ -191,6 +193,7 @@ import treeCorner from './tree-corner.svg';
 import treeCross from './tree-cross.svg';
 import treeExpand from './tree-expand.svg';
 import treeLine from './tree-line.svg';
+import trueIc from './true-ic.svg';
 import ttsDownload from './tts-download.svg';
 import undo from './undo.svg';
 import union from './union.svg';
@@ -299,6 +302,7 @@ export default objCamelToKebab({
   'eye--opened': eyeOpened,
   filter,
   flows,
+  falseIc,
   generate,
   google,
   group,
@@ -375,6 +379,7 @@ export default objCamelToKebab({
   treeLine,
   treeCorner,
   treeCross,
+  trueIc,
   stt,
   sttDownload,
   sttSearch,
@@ -420,4 +425,5 @@ export default objCamelToKebab({
   plyrVolume,
   loadPreset,
   quickReplies,
+  file,
 });
