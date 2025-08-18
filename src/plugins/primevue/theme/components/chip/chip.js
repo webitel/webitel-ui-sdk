@@ -32,6 +32,8 @@ const chip = {
 
         .p-chip {
             white-space: nowrap;
+            min-width: 40px;
+            justify-content: center;
         }
 
         .p-chip .wt-icon {
