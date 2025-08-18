@@ -61,7 +61,7 @@ const displayList = computed(() => {
 <style lang="scss" scoped>
 .wt-display-chip-items {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: var(--spacing-xs);
 }
 </style>

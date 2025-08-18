@@ -241,7 +241,7 @@ const setMultipleModelValue = () => {
 };
 
 const selectElement = () => {
-  if (props.multiple && !props.data?.service) {
+  if (props.multiple) {
     if (props.data[props.childrenProp]?.length) {
       setMultipleModelValueWithTree();
     } else {
@@ -250,7 +250,7 @@ const selectElement = () => {
     return;
   }
 
-  if (props.allowParent) {
+  if (props.allowParent && !props.data[props.childrenProp]) {
     return emit(
       'update:modelValue',
       props.itemData ? props.data[props.itemData] : props.data,

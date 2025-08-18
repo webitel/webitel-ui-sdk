@@ -19,4 +19,10 @@
   --player-close-icon-transform-translate-x: var(--spacing-md);
   // "-1 * var" for use the negative value of a variable
   --player-close-icon-transform-translate-y: calc(-1 * var(--spacing-md));
+
+  --wt-slider-border: 1px solid var(--secondary-color);
+  --wt-slider-pointer-radius: 50%;
+  --wt-slider-pointer-background-color: var(--dp-24-surface-color);
+  --wt-slider-pointer-border-color: var(--dp-10-surface-color);
+  --wt-slider-pointer-size: 16px;
 }
