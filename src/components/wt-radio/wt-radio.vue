@@ -1,26 +1,18 @@
 <template>
-  <div
-    :class="{
-      'wt-radio--active': isChecked,
-      'wt-radio--outline': outline,
-      'wt-radio--disabled': disabled,
-    }"
+  <div 
     class="wt-radio"
   >
-    <wt-label class="wt-radio__wrapper">
-      <input
-        :checked="isChecked"
-        :disabled="disabled"
-        :value="value"
-        class="wt-radio__input"
-        type="radio"
-        @input="inputHandler"
-      />
-      <wt-icon
-        :icon="radioIcon"
-        class="wt-radio__icon"
-      />
-      <!-- @slot Custom input label -->
+    <p-radio
+      v-model="model"
+      :input-id="radioId"
+      :disabled="disabled"
+      :value="value"
+    />
+    <wt-label 
+      :for="radioId"
+      :disabled="disabled"
+    >
+      <!-- @slot Custom label markup -->
       <slot
         name="label"
         v-bind="{ label, isChecked, disabled }"
@@ -36,56 +28,33 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'WtRadio',
-  model: {
-    prop: 'selected',
-    event: 'input',
-  },
-  props: {
-    // value, set by radio
-    value: {
-      type: [String, Number, Boolean, Object],
-      default: '',
-    },
-    // currently selected value
-    selected: {
-      type: [String, Number, Boolean, Object],
-      default: '',
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    required: {
-      type: Boolean,
-      default: false,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    outline: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['input'],
-  computed: {
-    isChecked() {
-      return this.value === this.selected;
-    },
-    radioIcon() {
-      return this.isChecked ? 'radio--checked' : 'radio';
-    },
-  },
-  methods: {
-    inputHandler() {
-      this.$emit('input', this.value);
-    },
-  },
-};
+<script setup lang="ts">
+import type { RadioButtonProps } from 'primevue/radiobutton';
+import { computed, defineModel, defineProps } from 'vue';
+
+interface Props extends RadioButtonProps {
+  // value, set by radio
+  value: string | number | boolean | object;
+  label?: string;
+  required?: boolean;
+  disabled?: boolean;
+  outline?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  label: '',
+  required: false,
+  disabled: false,
+  outline: false,
+});
+
+const model = defineModel<string | number | boolean | object>('selected', {required: true});
+
+const radioId = `radio-${Math.random().toString(36).slice(2, 11)}`;
+
+const isChecked = computed(() => {
+  return props.value === model.value;
+});
 </script>
 
 <style lang="scss">
@@ -93,59 +62,18 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-/* Customize the label (the container) */
 .wt-radio {
   box-sizing: border-box;
   width: fit-content;
-
-  .wt-label {
-    cursor: pointer;
-  }
-}
-
-.wt-radio__wrapper {
   display: flex;
   position: relative;
   align-items: center;
-  cursor: pointer;
   user-select: none;
 }
 
 .wt-radio__label {
   transition: var(--transition);
+  cursor: pointer;
   margin-left: var(--radio-icon-margin);
-}
-
-/* Hide the browser's default radio button */
-.wt-radio__input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
-.wt-radio__icon {
-  flex: 0 0 var(--icon-md-size);
-}
-
-.wt-radio:hover {
-  :deep(.wt-icon) {
-    fill: var(--icon-btn-hover-color);
-  }
-}
-
-.wt-radio--active {
-  :deep(.wt-icon) {
-    fill: var(--icon-active-color);
-  }
-}
-
-.wt-radio--disabled {
-  pointer-events: none;
-
-  :deep(.wt-icon) {
-    fill: var(--icon-disabled-color);
-  }
 }
 </style>

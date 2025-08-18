@@ -378,6 +378,15 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
+  .multiselect__option {
+    white-space: normal; // https://webitel.atlassian.net/browse/WTEL-7400
+    word-break: break-all;
+  }
+
+  .multiselect__content {
+    width: 100%; // https://webitel.atlassian.net/browse/WTEL-7400
+  }
 }
 
 :deep(.multiselect--active) {

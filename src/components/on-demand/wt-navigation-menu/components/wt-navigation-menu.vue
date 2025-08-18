@@ -44,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const selected = ref({});
+const selectedId = ref({});
 
 const categories = computed(() => {
   return props.nav.map((navItem) => ({
@@ -55,6 +55,7 @@ const categories = computed(() => {
 
 const subcategories = computed(() => {
   if (!selected.value.subNav) return [];
+
   return selected.value.subNav.map((subNav) => {
     const route = selected.value.route
       ? `${selected.value.route}/${subNav.route}`
@@ -68,16 +69,12 @@ const subcategories = computed(() => {
   });
 });
 
-onMounted(() => {
-  initSelected();
+const selected = computed(() => {
+  return props.nav.find((category) => category.value === selectedId.value) || props.nav[0];
 });
 
-function initSelected() {
-  select(categories.value[0]);
-}
-
 function select(category) {
-  selected.value = category;
+  selectedId.value = category.value;
 }
 </script>
 
@@ -94,10 +91,7 @@ function select(category) {
 
   --button-min-height: 60px;
   --wrapper-width: 60%;
-  --wrapper-height: calc(
-    var(--spacing-sm) * 2 + var(--button-min-height) * 7 + var(--spacing-2xs) *
-      6
-  );
+  --wrapper-height: calc(var(--spacing-sm) * 2 + var(--button-min-height) * 7 + var(--spacing-2xs) * 6);
 
   @media only screen and (max-width: $viewport-sm) {
     --wrapper-width: 80%;
