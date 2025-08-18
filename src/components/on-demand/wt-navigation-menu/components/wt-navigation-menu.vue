@@ -1,21 +1,10 @@
 <template>
   <section class="wt-navigation-menu">
     <article class="wt-navigation-menu__wrapper">
-      <nav-menu-lvl-1
-        :categories="categories"
-        :icons="icons"
-        :selected="selected"
-        @select="select"
-      >
-        <nav-menu-lvl-2
-          :categories="subcategories"
-          class="wt-navigation-menu__categories--display"
-        />
+      <nav-menu-lvl-1 :categories="categoriesArray" :icons="icons" :selected="selected" @select="select">
+        <nav-menu-lvl-2 :categories="activeSubcategories" class="wt-navigation-menu__categories--display" />
       </nav-menu-lvl-1>
-      <nav-menu-lvl-2
-        :categories="subcategories"
-        class="wt-navigation-menu__categories--hidden"
-      />
+      <nav-menu-lvl-2 :categories="activeSubcategories" class="wt-navigation-menu__categories--hidden" />
     </article>
   </section>
 </template>
@@ -44,33 +33,59 @@ const props = defineProps({
   },
 });
 
-const selectedId = ref({});
+const selectedId = ref('');
 
+// Create a map of categories by their value/id
 const categories = computed(() => {
-  return props.nav.map((navItem) => ({
-    ...navItem,
-    name: navItem.name,
-  }));
+  const categoryMap = new Map();
+  props.nav.forEach((navItem) => {
+    categoryMap.set(navItem.value, {
+      ...navItem,
+      name: navItem.name,
+    });
+  });
+  return categoryMap;
 });
 
+// Create a map of subcategories by parent category id
 const subcategories = computed(() => {
-  if (!selected.value.subNav) return [];
+  const subcategoryMap = new Map();
+  props.nav.forEach((navItem) => {
+    if (navItem.subNav) {
+      const subNavWithRoutes = navItem.subNav.map((subNav) => {
+        const route = navItem.route
+          ? `${navItem.route}/${subNav.route}`
+          : subNav.route;
+        return {
+          ...subNav,
+          name: subNav.name,
+          route,
+        };
+      });
+      subcategoryMap.set(navItem.value, subNavWithRoutes);
+    } else {
+      subcategoryMap.set(navItem.value, []);
+    }
+  });
+  return subcategoryMap;
+});
 
-  return selected.value.subNav.map((subNav) => {
-    const route = selected.value.route
-      ? `${selected.value.route}/${subNav.route}`
-      : subNav.route;
-    const name = subNav.name;
-    return {
-      ...subNav,
-      name,
-      route,
-    };
+// Array of categories for the lvl-1 component (filtered to exclude empty categories)
+const categoriesArray = computed(() => {
+  return Array.from(categories.value.values()).filter((category) => {
+    const subcats = subcategories.value.get(category.value);
+    return subcats && subcats.length > 0;
   });
 });
 
+// Active subcategories based on selectedId
+const activeSubcategories = computed(() => {
+  return subcategories.value.get(selected.value?.value) || [];
+});
+
+// Selected category based on selectedId
 const selected = computed(() => {
-  return props.nav.find((category) => category.value === selectedId.value) || props.nav[0];
+  return categories.value.get(selectedId.value) || categoriesArray.value[0];
 });
 
 function select(category) {
