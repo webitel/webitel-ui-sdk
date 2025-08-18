@@ -11,10 +11,10 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
-  CrmSections as CrmSectionsNew,
   SupervisorSections,
   WebitelApplications,
 } from '../../enums';
