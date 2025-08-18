@@ -85,6 +85,8 @@
 
 <script setup>
 import '@vuepic/vue-datepicker/dist/main.css';
+import { useWindowFocus } from '@vueuse/core'
+import { watch } from 'vue'
 
 import VueDatepicker from '@vuepic/vue-datepicker';
 import { computed, ref, toRefs } from 'vue';
@@ -161,6 +163,8 @@ const emit = defineEmits(['input']);
 const isOpened = ref(false);
 const datepicker = ref(null); // template ref
 
+const winFocused = useWindowFocus()
+
 const isDateTime = props.mode === 'datetime';
 
 const requiredLabel = computed(() => {
@@ -178,12 +182,23 @@ const { isValidation, invalid, validationText } = useValidation({
 const clearValue = () => {
   emit('input', null);
 
+  closePicker()
+};
+
+const closePicker = () => {
   if (isOpened.value) {
     datepicker?.value.closeMenu();
   }
 
   isOpened.value = false;
-};
+}
+
+// close picker when window loses focus(when clicking to iframe)
+// https://webitel.atlassian.net/browse/WTEL-5794
+watch(winFocused, (focused) => {
+  if (!focused && isOpened.value) closePicker()
+})
+
 </script>
 
 <style lang="scss">
