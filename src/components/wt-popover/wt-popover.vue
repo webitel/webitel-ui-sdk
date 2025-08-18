@@ -41,12 +41,16 @@ withDefaults(defineProps<PopoverProps>(), {
 });
 defineEmits<PopoverEmitsOptions>();
 
-const toggle = (event?: Event) => {
-  innerPopover.value?.toggle(event);
+const toggle = (event?: Event, target?: HTMLElement | null | undefined) => {
+  innerPopover.value?.toggle(event, target ?? undefined);
 };
 
-const show = (event?: Event) => {
-  innerPopover.value?.show(event);
+const show = (event?: Event, target?: HTMLElement | null | undefined) => {
+  // Opens the popover.
+  // `target` is the element the popover will be positioned relative to.
+  // If not provided, the popover will be positioned relative to the `activator` slot element by default.
+  //https://webitel.atlassian.net/browse/WTEL-7349
+  innerPopover.value?.show(event, target ?? undefined);
 };
 
 const hide = (event?: Event) => {
