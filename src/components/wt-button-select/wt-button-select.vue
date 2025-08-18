@@ -98,6 +98,9 @@ const atClickaway = () => {
 
 const toggleContextMenu = (toggle, e) => {
   isOpened.value = !isOpened.value;
+  // The menu is positioned relative to `buttonSelect` (reference button).
+  // If not provided, it defaults to centering on the trigger button (`e`).
+  // https://webitel.atlassian.net/browse/WTEL-7349
   toggle(e, buttonSelect.value)
 };
 </script>
