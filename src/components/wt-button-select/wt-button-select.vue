@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 const props = defineProps({
   /**
@@ -85,7 +85,7 @@ const emit = defineEmits([
 ]);
 
 const isOpened = ref(false);
-const buttonSelect = ref(null);
+const buttonSelect = useTemplateRef('buttonSelect');
 
 const selectOption = ({ option, index }) => {
   emit('click:option', option, index);
