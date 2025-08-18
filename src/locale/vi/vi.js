@@ -16,6 +16,7 @@ import {
   RelativeDatetimeValue,
   SupervisorSections,
   WebitelApplications,
+  CrmSections as CrmSectionsNew,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -175,6 +176,12 @@ export default {
     transcription: 'Bản ghi',
     attachment: 'Tệp đính kèm | Các tệp đính kèm',
     owner: 'Chủ sở hữu | Các chủ sở hữu',
+    customization: {
+      customization: 'Tùy chỉnh | Các tùy chỉnh',
+    },
+    customLookup: {
+      customLookup: 'Tùy chỉnh | Các tùy chỉnh',
+    },
     queue: {
       queue: 'Hàng chờ | Hàng chờ',
       type: {
@@ -269,6 +276,18 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.customLookup'),
+        },
+      },
+    },
     [WebitelApplications.AGENT]: {
       name: 'Không gian làm việc của tổng đài viên',
     },

@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import NavMenuLvl1 from './_internals/nav-menu-lvl-1.vue';
 import NavMenuLvl2 from './_internals/nav-menu-lvl-2.vue';

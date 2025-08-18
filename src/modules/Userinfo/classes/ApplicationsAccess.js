@@ -243,15 +243,15 @@ const applicationsAccess = (value = true) => ({
     },
     [CrmSectionsNew.CasesExtensions]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSectionsNew.CasesExtensions}`,
+      _locale: `WebitelApplications.overrideApplicationsAccess.${WebitelApplications.CRM}.sections.${CrmSectionsNew.CasesExtensions}`,
     },
     [CrmSectionsNew.ContactsExtensions]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSectionsNew.ContactsExtensions}`,
+      _locale: `WebitelApplications.overrideApplicationsAccess.${WebitelApplications.CRM}.sections.${CrmSectionsNew.ContactsExtensions}`,
     },
     [CrmSectionsNew.CustomLookups]: {
       _enabled: value,
-      _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSectionsNew.CustomLookups}`,
+      _locale: `WebitelApplications.overrideApplicationsAccess.${WebitelApplications.CRM}.sections.${CrmSectionsNew.CustomLookups}`,
     },
   },
 });

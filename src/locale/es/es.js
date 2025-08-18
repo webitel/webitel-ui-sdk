@@ -14,6 +14,7 @@ import {
   IconAction,
   QueueType,
   RelativeDatetimeValue,
+  CrmSections as CrmSectionsNew,
   SupervisorSections,
   WebitelApplications,
 } from '../../enums';
@@ -157,6 +158,9 @@ export default {
     list: 'Lista | Listas',
     contact: 'Contacto | Contactos',
     case: 'Caso | Casos',
+    customLookup: {
+      customLookup: 'Búsqueda personalizada | Búsquedas personalizadas',
+    },
     calendar: 'Calendario | Calendarios',
     direction: 'Dirección',
     gateway: 'Gateway | Gateways',
@@ -170,6 +174,9 @@ export default {
     transcription: 'Transcripción',
     attachment: 'Adjunto | Adjuntos',
     owner: 'Propietario | Propietarios',
+    customization: {
+      customization: 'Personalización | Personalizaciones',
+    },
     queue: {
       queue: 'Cola | Colas',
       type: {
@@ -263,6 +270,18 @@ export default {
     actualResolutionTime: 'Tiempo de resolución real',
   },
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.customLookup'),
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Espacio de trabajo del agente' },
     [WebitelApplications.AUDIT]: {
       name: 'Auditoría',

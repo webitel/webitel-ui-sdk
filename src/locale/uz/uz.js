@@ -16,6 +16,7 @@ import {
   RelativeDatetimeValue,
   SupervisorSections,
   WebitelApplications,
+  CrmSections as CrmSectionsNew,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -175,6 +176,12 @@ export default {
     transcription: 'Transkriptsiya',
     attachment: 'Ilova | Ilovalar',
     owner: 'Egasi | Egalari',
+    customization: {
+      customization: 'Maxsuslash | Maxsuslashlar',
+    },
+    customLookup: {
+      customLookup: 'Maxsuslash | Maxsuslashlar',
+    },
     queue: {
       queue: 'Navbat | Navbatlar',
       type: {
@@ -268,6 +275,18 @@ export default {
     actualResolutionTime: 'Haqiqiy hal qilish vaqti',
   },
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.customLookup'),
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent ish joyi' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',

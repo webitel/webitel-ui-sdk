@@ -16,6 +16,7 @@ import {
   RelativeDatetimeValue,
   SupervisorSections,
   WebitelApplications,
+  CrmSections as CrmSectionsNew,
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
@@ -175,6 +176,12 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Тіркеме | Тіркемелер',
     owner: 'Ие | Иелер',
+    customization: {
+      customization: 'Жекелендіру | Жекелендірулер',
+    },
+    customLookup: {
+      customLookup: 'Жекелендіру | Жекелендірулер',
+    },
     queue: {
       queue: 'Кезек | Кезектер',
       type: {
@@ -269,6 +276,18 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') + ': ' + linked('objects.customLookup'),
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Оператор жұмыс орны' },
     [WebitelApplications.AUDIT]: {
       name: 'Аудит',
