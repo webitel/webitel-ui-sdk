@@ -85,7 +85,7 @@ import expand from './expand.svg';
 import eyeClosed from './eye--closed.svg';
 import eyeOpened from './eye--opened.svg';
 import falseIc from './false-ic.svg';
-import file from './file.svg';
+import log from './log.svg';
 import filter from './filter.svg';
 import flows from './flows.svg';
 import generate from './generate.svg';
@@ -427,5 +427,5 @@ export default objCamelToKebab({
   loadPreset,
   quickReplies,
   checkboxTick,
-  file,
+  log,
 });
