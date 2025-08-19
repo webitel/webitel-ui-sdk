@@ -25,7 +25,7 @@
         :invalid="invalid"
         :disabled="disabled"
         :rows="rows"
-        :autoresize="autoresize"
+        :auto-resize="autoresize"
         :readonly="readonly"
         class="wt-textarea__textarea"
         @paste="emit('paste', $event)"
@@ -120,6 +120,10 @@ const handleKeypress = (event: KeyboardEvent) => {
 
 <style lang="scss" scoped>
 @use '../../css/styleguide/styleguide' as *;
+
+.wt-textarea__wrapper {
+  height: 100%;
+}
 
 .wt-textarea__textarea {
   @extend %typo-body-1;

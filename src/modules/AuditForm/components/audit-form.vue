@@ -21,10 +21,10 @@
 
     <wt-textarea
       v-if="mode === AuditFormMode.Fill"
-      :value="resultCommentModel"
+      :model-value="resultCommentModel"
       class="call-evaluation-form__comment"
       :label="$t('reusable.comment')"
-      @input="handleResultCommentUpdate"
+      @update:model-value="handleResultCommentUpdate"
     />
 
     <audit-form-footer

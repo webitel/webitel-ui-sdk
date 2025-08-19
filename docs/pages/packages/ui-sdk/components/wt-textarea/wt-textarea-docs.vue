@@ -15,7 +15,7 @@ export default {
     properties: [
       {
         value: 'value',
-        code: '<wt-textarea :value="value"></wt-textarea>',
+        code: '<wt-textarea v-model="value"></wt-textarea>',
         type: 'String',
         default: '',
       },
