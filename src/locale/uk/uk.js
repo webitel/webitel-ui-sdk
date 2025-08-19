@@ -290,7 +290,7 @@ export default {
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
             linked('objects.customization.customization') +
             ': ' +
-            linked('objects.customLookup.customLookup'),
+            'Користувацькі довідники', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
         },
       },
     },

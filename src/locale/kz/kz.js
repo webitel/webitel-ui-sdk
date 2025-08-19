@@ -290,8 +290,7 @@ export default {
             linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
             linked('objects.customization.customization') +
-            ': ' +
-            linked('objects.customLookup.customLookup'),
+            ': Жекелендірулер', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
         },
       },
     },
