@@ -130,6 +130,7 @@ export default {
     emptyResultSearch: 'Поиск не дал результатов',
     contact: 'Контакт | Контакты',
     notification: 'Уведомление | Уведомления',
+    screencast: 'Запись экрана',
   },
   // date-related texts
   date: {
@@ -179,7 +180,8 @@ export default {
       customization: 'Персонализация | Персонализации',
     },
     customLookup: {
-      customLookup: 'Пользовательский справочник | Пользовательские справочники',
+      customLookup:
+        'Пользовательский справочник | Пользовательские справочники',
     },
     queue: {
       queue: 'Очередь | Очереди',
@@ -279,11 +281,17 @@ export default {
       [WebitelApplications.CRM]: {
         sections: {
           [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.case'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
           [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.contact'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.customLookup'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.customLookup'),
         },
       },
     },

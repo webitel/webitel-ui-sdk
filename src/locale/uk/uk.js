@@ -130,6 +130,7 @@ export default {
     emptyResultSearch: 'Пошук не дав результатів',
     contact: 'Контакт | Контакти',
     notification: 'Сповіщення',
+    screencast: 'Запис екрану',
   },
   // date-related texts
   date: {
@@ -279,11 +280,17 @@ export default {
       [WebitelApplications.CRM]: {
         sections: {
           [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.case'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
           [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.contact'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.customLookup'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.customLookup'),
         },
       },
     },
