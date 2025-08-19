@@ -290,7 +290,7 @@ export default {
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
             linked('objects.customization.customization') +
             ': ' +
-            linked('objects.customLookup'),
+            linked('objects.customLookup.customLookup'),
         },
       },
     },
