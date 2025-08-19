@@ -116,5 +116,5 @@ export interface UserAccessStore {
   hasSpecialGlobalActionAccess: (id: SpecialGlobalAction) => boolean;
 
   // hasApplicationVisibility: (app: WtApplication) => boolean;
-  // hasSectionVisibility: (section: UiSection) => boolean;
+  hasSectionVisibility: (section: UiSection, object: WtObject) => boolean;
 }

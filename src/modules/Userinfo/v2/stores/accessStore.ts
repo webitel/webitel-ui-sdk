@@ -135,6 +135,7 @@ export const createUserAccessStore = ({
       hasCreateAccess,
       hasUpdateAccess,
       hasDeleteAccess,
+      hasSectionVisibility,
 
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
