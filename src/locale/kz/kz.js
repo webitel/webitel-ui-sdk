@@ -131,6 +131,7 @@ export default {
     contact: 'Байланыс | Байланыстар',
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
+    screencast: 'Экран жазбасы',
   },
   // date-related texts
   date: {
@@ -280,11 +281,17 @@ export default {
       [WebitelApplications.CRM]: {
         sections: {
           [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.case'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
           [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.contact'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
-            linked('objects.customization.customization') + ': ' + linked('objects.customLookup'),
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.customLookup'),
         },
       },
     },
@@ -407,7 +414,8 @@ export default {
     regExpValidator: 'Бұл тұрақты өрнек жарамсыз',
     domainValidator: 'Қате домен',
     decimalValidator: 'Ондық дәлдік { count } таңбадан артық болмауы керек',
-    latinWithNumber: 'Код тек әріптерден (A-Z, a-z) және сандардан (0-9) тұруы керек және әріптен басталуы керек',
+    latinWithNumber:
+      'Код тек әріптерден (A-Z, a-z) және сандардан (0-9) тұруы керек және әріптен басталуы керек',
     integer: 'Өріс тек бүтін сандарды қамтуы керек',
     nameAlreadyInUse: 'Бұл атау қолданыста',
   },
@@ -539,7 +547,8 @@ export default {
     empty: {
       text: {
         empty: 'Әзірге жазбалар жоқ',
-        filters: 'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
+        filters:
+          'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
       },
     },
     agentStatusSelect: {
