@@ -2,7 +2,7 @@
 
 <template>
   <wt-slider
-    :value="70"
+    :model-value="70"
     :min="0"
     :max="100"
     :step="1"

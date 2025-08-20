@@ -123,6 +123,7 @@ watch(() => props.loading, (value) => {
   padding: var(--rounded-action-padding);
   width: fit-content;
   line-height: 0;
+  cursor: pointer;
 
   &:hover {
     border-color: var(--rounded-action-bg-hover-color);

@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <wt-headline-nav
+  <wt-breadcrumb
     :path="[
       { name: 'Admin' },
       { name: 'Contact-center' },

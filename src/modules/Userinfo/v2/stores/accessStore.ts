@@ -68,7 +68,7 @@ export const createUserAccessStore = ({
     };
 
     const hasApplicationVisibility = (app: WtApplication) => {
-      return hasReadAccess() || appVisibilityAccess.get(app);
+      return appVisibilityAccess.get(app);
     };
 
     const hasSectionVisibility = (section: UiSection, object: WtObject) => {
@@ -77,9 +77,6 @@ export const createUserAccessStore = ({
       const hasSectionVisibilityAccess = (section: UiSection) => {
         return sectionVisibilityAccess.get(section);
       };
-
-      const allowGlobalAccess = hasReadAccess();
-      if (allowGlobalAccess) return true;
 
       const allowAppVisibility = hasApplicationVisibility(appOfSection);
       const allowObjectAccess = hasReadAccess(objectOfSection);
@@ -90,13 +87,22 @@ export const createUserAccessStore = ({
 
     const routeAccessGuard: NavigationGuard = (to) => {
       /* find last because "matched" has top=>bottom routes order */
-      const uiSection = to.matched
+      let uiSection = to.matched
         .toReversed()
-        .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection;
+        .find(({ meta }) => meta.UiSection)?.meta?.UiSection as UiSection | ((RouteLocationNormalized) => UiSection);
       /* find last because "matched" has top=>bottom routes order */
-      const wtObject = to.matched
+      let wtObject = to.matched
         .toReversed()
-        .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject;
+        .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject | ((RouteLocationNormalized) => WtObject);
+
+        // if, then compute fn
+        if (typeof uiSection === 'function') {
+          uiSection = uiSection(to);
+        }
+        // if, then compute fn
+        if (typeof wtObject === 'function') {
+          wtObject = wtObject(to);
+        }
 
       if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
         // return false;
@@ -129,6 +135,7 @@ export const createUserAccessStore = ({
       hasCreateAccess,
       hasUpdateAccess,
       hasDeleteAccess,
+      hasSectionVisibility,
 
       routeAccessGuard,
       hasSpecialGlobalActionAccess,

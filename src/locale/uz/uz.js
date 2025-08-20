@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -107,7 +108,7 @@ export default {
     host: 'Host',
     time: 'Vaqt',
     channel: 'Kanal | Kanallar',
-    file: 'Fayl',
+    file: 'Fayl | Fayllar',
     logout: 'Chiqish',
     priority: 'Muhimlik | Muhimliklar',
     color: 'Rang',
@@ -130,6 +131,7 @@ export default {
     contact: 'Kontakt | Kontaktlar',
     column: 'Ustun | Ustunlar',
     notification: 'Bildirishnoma | Bildirishnomalar',
+    screencast: 'Ekran yozuvi',
   },
   // date-related texts
   date: {
@@ -175,6 +177,12 @@ export default {
     transcription: 'Transkriptsiya',
     attachment: 'Ilova | Ilovalar',
     owner: 'Egasi | Egalari',
+    customization: {
+      customization: 'Maxsuslash | Maxsuslashlar',
+    },
+    customLookup: {
+      customLookup: 'Maxsuslash | Maxsuslashlar',
+    },
     queue: {
       queue: 'Navbat | Navbatlar',
       type: {
@@ -268,6 +276,24 @@ export default {
     actualResolutionTime: 'Haqiqiy hal qilish vaqti',
   },
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Maxsuslashlar', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent ish joyi' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',

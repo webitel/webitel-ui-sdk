@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -105,7 +106,7 @@ export default {
     host: 'Host',
     time: 'Tiempo',
     channel: 'Canal | Canales',
-    file: 'Archivo',
+    file: 'Archivo | Archivos',
     logout: 'Cerrar sesión',
     priority: 'Prioridad | Prioridades',
     color: 'Color',
@@ -128,6 +129,7 @@ export default {
     contact: 'Contacto | Contactos',
     column: 'Columna | Columnas',
     notification: 'Notificación | Notificaciones',
+    screencast: 'Videotutorial de pantalla',
   },
   date: {
     sec: 'Seg',
@@ -157,6 +159,9 @@ export default {
     list: 'Lista | Listas',
     contact: 'Contacto | Contactos',
     case: 'Caso | Casos',
+    customLookup: {
+      customLookup: 'Búsqueda personalizada | Búsquedas personalizadas',
+    },
     calendar: 'Calendario | Calendarios',
     direction: 'Dirección',
     gateway: 'Gateway | Gateways',
@@ -170,6 +175,9 @@ export default {
     transcription: 'Transcripción',
     attachment: 'Adjunto | Adjuntos',
     owner: 'Propietario | Propietarios',
+    customization: {
+      customization: 'Personalización | Personalizaciones',
+    },
     queue: {
       queue: 'Cola | Colas',
       type: {
@@ -263,6 +271,23 @@ export default {
     actualResolutionTime: 'Tiempo de resolución real',
   },
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': Búsquedas personalizadas', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Espacio de trabajo del agente' },
     [WebitelApplications.AUDIT]: {
       name: 'Auditoría',

@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -107,7 +108,7 @@ export default {
     host: 'Host',
     time: 'Czas',
     channel: 'Kanał | Kanały',
-    file: 'Plik',
+    file: 'Plik | Akta',
     logout: 'Wyloguj',
     priority: 'Priorytet | Priorytety',
     color: 'Kolor',
@@ -130,6 +131,7 @@ export default {
     contact: 'Kontakt | Kontakty',
     column: 'Kolumna | Kolumny',
     notification: 'Powiadomienie | Powiadomienia',
+    screencast: 'Nagranie ekranu',
   },
   // date-related texts
   date: {
@@ -175,6 +177,12 @@ export default {
     transcription: 'Transkrypcja',
     attachment: 'Załącznik | Załączniki',
     owner: 'Właściciel | Właściciele',
+    customization: {
+      customization: 'Dostosowanie | Dostosowania',
+    },
+    customLookup: {
+      customLookup: 'Dostosowanie | Dostosowania',
+    },
     queue: {
       queue: 'Kolejka | Kolejki',
       type: {
@@ -269,6 +277,23 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Panel Agenta' },
     [WebitelApplications.AUDIT]: {
       name: 'Audyt',

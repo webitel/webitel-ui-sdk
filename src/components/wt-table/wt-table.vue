@@ -395,7 +395,7 @@ export default {
   &--sortable {
     cursor: pointer;
 
-    &:hover :deep(.wt-icon__icon) {
+    &:hover :deep(.wt-icon) {
       fill: var(--icon-active-color);
     }
   }

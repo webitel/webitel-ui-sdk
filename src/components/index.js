@@ -10,6 +10,7 @@ import WtAppNavigator from './wt-app-header/wt-app-navigator.vue';
 import WtHeaderActions from './wt-app-header/wt-header-actions.vue';
 import WtAvatar from './wt-avatar/wt-avatar.vue';
 import WtBadge from './wt-badge/wt-badge.vue';
+import WtBreadcrumb from './wt-breadcrumb/wt-breadcrumb.vue';
 import WtButton from './wt-button/wt-button.vue';
 import WtButtonSelect from './wt-button-select/wt-button-select.vue';
 import WtCheckbox from './wt-checkbox/wt-checkbox.vue';
@@ -26,7 +27,6 @@ import WtErrorPage from './wt-error-page/wt-error-page.vue';
 import WtExpansionPanel from './wt-expansion-panel/wt-expansion-panel.vue';
 import WtFiltersPanelWrapper from './wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue';
 import WtHeadline from './wt-headline/wt-headline.vue';
-import WtHeadlineNav from './wt-headline-nav/wt-headline-nav.vue';
 import WtHint from './wt-hint/wt-hint.vue';
 import WtIcon from './wt-icon/wt-icon.vue';
 import WtIconAction from './wt-icon-action/wt-icon-action.vue';
@@ -111,7 +111,7 @@ const Components = {
   WtTextarea,
   WtAppHeader,
   WtHeadline,
-  WtHeadlineNav,
+  WtBreadcrumb,
   WtNavigationBar,
   WtAppNavigator,
   WtFiltersPanelWrapper,
@@ -151,6 +151,7 @@ export {
   WtAppNavigator,
   WtAvatar,
   WtBadge,
+  WtBreadcrumb,
   WtButton,
   WtButtonSelect,
   WtCheckbox,
@@ -169,7 +170,6 @@ export {
   WtFiltersPanelWrapper,
   WtHeaderActions,
   WtHeadline,
-  WtHeadlineNav,
   WtHint,
   WtIcon,
   WtIconAction,
