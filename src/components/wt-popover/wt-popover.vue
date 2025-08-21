@@ -27,7 +27,6 @@ import { defineExpose, useAttrs, useTemplateRef } from 'vue';
 
 const attrs = useAttrs();
 const innerPopover = useTemplateRef('innerPopover');
-
 withDefaults(defineProps<PopoverProps>(), {
   appendTo: 'body',
   baseZIndex: 0,
