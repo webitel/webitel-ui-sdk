@@ -3,17 +3,19 @@
     class="wt-table"
   >
     <p-table 
-      ref="tableRef"
+      ref="table"
       :value="data"
       :show-headers="!headless"
-      striped-rows
       :table-style="`min-width: ${totalTableWidth}px;`"
+      :row-class="rowClass"
       lazy
+      scrollable
+      removable-sort
       @sort="sort"
-      @row-reorder="({dragIndex, dropIndex}) => emit('reorder', { oldIndex: dragIndex, newIndex: dropIndex })"
+      @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
     >
       <p-column
-        v-if="movable"
+        v-if="rowReorder"
         style="width: 39px;"
         row-reorder
       >
@@ -47,6 +49,7 @@
         :header="col.text"
         :sortable="isColSortable(col)"
         :style="columnStyle(col)"
+        :hidden="isColumnHidden(col)"
       >
         <template #body="{ data: row, index }">
           <!--
@@ -102,7 +105,7 @@
           -->
           <div class="wt-table__td__actions">
             <!-- <wt-icon-btn
-              v-if="movable"
+              v-if="rowReorder"
               v-tooltip="$t('iconHints.draggable')"
               class="sortable-btn"
               icon="move"
@@ -121,7 +124,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, ref, withDefaults, useSlots } from 'vue';
+import { computed, defineProps, ref, withDefaults, useTemplateRef, useSlots } from 'vue';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useI18n } from 'vue-i18n';
 import type { WtTableHeader } from './types/WtTable.js';
@@ -160,7 +163,8 @@ export interface Props {
   /**
    * 'If true, allows to reorder rows.'
    */
-  movable?: boolean;
+  rowReorder?: boolean;
+  rowClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -171,20 +175,21 @@ const props = withDefaults(defineProps<Props>(), {
   gridActions: true,
   fixedActions: false,
   headless: false,
-  movable: false,
+  rowReorder: false,
+  rowClass: '',
 });
 
 const { t } = useI18n();
 
 const slots = useSlots();
 
-const emit = defineEmits(['sort', 'update:selected', 'reorder']);
+const emit = defineEmits(['sort', 'update:selected', 'reorder:row']);
 
-const tableRef = ref(null);
+const table = useTemplateRef('table');
 
 // const sortableOptions: SortableTableOptions = {
-//   tableRef,
-//   enabled: props.movable,
+//   table,
+//   enabled: props.rowReorder,
 //   sortableConfig: {
 //     animation: 200,
 //     ghostClass: 'custom-ghost'
@@ -206,7 +211,6 @@ const _selected = computed(() => {
 
 const dataHeaders = computed(() => {
   return props.headers
-    .filter(header => header.show === undefined || header.show)
     .map(header => {
       if (!header.text && header.locale) {
         return {
@@ -217,6 +221,10 @@ const dataHeaders = computed(() => {
       return header;
     });
 });
+
+const isColumnHidden = (col) => {
+  return col.show === false
+}
 
 const columnStyle = (col) => {
   if (col.width) {
@@ -233,7 +241,7 @@ const totalTableWidth = computed(() => {
     return sum + (parseInt(col.width) || baseWidth);
   }, 0);
 
-  if (props.movable) {
+  if (props.rowReorder) {
     totalWidth += 39
   }
   if (props.selectable) {
@@ -317,7 +325,6 @@ const handleSelection = (row, select) => {
 </style>
 
 <style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
 @use '@webitel/styleguide/scroll' as *;
 
 .wt-table {
@@ -325,102 +332,10 @@ const handleSelection = (row, select) => {
   overflow: auto;
 }
 
-.wt-table__table {
-  border-collapse: collapse;
-  width: 100%;
-
-  &--fixed-actions {
-    // make action icons fixed to right
-
-    .wt-table__tr {
-      .wt-table__td__actions {
-        position: sticky;
-        right: 0;
-        background: var(--content-wrapper-color);
-      }
-
-      &:nth-child(2n) {
-        .wt-table__td__actions {
-          background: var(--wt-table-zebra-color);
-        }
-      }
-    }
-  }
-}
-
-.wt-table__tr {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, var(--table-col-min-width));
-  transition: var(--transition);
-  background: var(--wt-table-primary-color);
-  padding: var(--table-row-padding);
-  grid-column-gap: var(--table-column-gap);
-
-  &:nth-child(2n) {
-    background: var(--wt-table-zebra-color);
-  }
-}
-
-.wt-table__tr__head {
-  border: var(--table-head-border);
-  border-color: var(--wt-table-head-border-color);
-  border-radius: var(--border-radius);
-  background: var(--wt-table-head-background-color);
-}
-
-.wt-table__th,
-.wt-table__td {
-  @extend %typo-body-1;
+.wt-table__td__actions {
   display: flex;
-  align-items: center;
-  padding: 0;
-  width: 100%;
-  max-width: 100%;
-  height: fit-content;
-  min-height: var(--table-min-height);
-  word-break: break-all;
-  overflow-wrap: break-word;
-
-  &__actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: var(--spacing-xs);
-  }
-}
-
-.wt-table__th {
-  font-weight: normal;
-
-  &--sortable {
-    cursor: pointer;
-
-    &:hover :deep(.wt-icon__icon) {
-      fill: var(--icon-active-color);
-    }
-  }
-
-  .wt-table__th__sort-arrow {
-    display: none;
-    margin-left: var(--table-head-sort-arrow-margin);
-  }
-
-  &--sort-asc .wt-table__th__sort-arrow--asc {
-    display: block;
-  }
-
-  &--sort-desc .wt-table__th__sort-arrow--desc {
-    display: block;
-  }
-}
-
-.wt-table__foot {
-  border-color: var(--wt-table-head-border-color);
-  border-top: var(--wt-table-head-border-color);
-}
-
-// Sortable styles
-:deep(.sortable-swap-highlight) {
-  background: var(--primary-color) !important;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
 }
 </style>
