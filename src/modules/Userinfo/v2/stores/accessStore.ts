@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { NavigationGuard } from 'vue-router';
+import { ref } from 'vue';
 
 import {
   CrudAction,
@@ -29,23 +30,23 @@ export const createUserAccessStore = ({
   namespace = 'userinfo',
 }: CreateUserAccessStoreConfig = {}) => {
   return defineStore(`${namespace}/access`, (): UserAccessStore => {
-    let globalAccess: GlobalActionAccessMap = new Map();
+    const globalAccess = ref<GlobalActionAccessMap>(new Map());
 
-    let scopeAccess: ScopeAccessMap = new Map();
+    const scopeAccess = ref<ScopeAccessMap>(new Map());
 
-    let appVisibilityAccess: AppVisibilityMap = new Map();
+    const appVisibilityAccess = ref<AppVisibilityMap>(new Map());
 
-    let sectionVisibilityAccess: SectionVisibilityMap = new Map();
+    const sectionVisibilityAccess = ref<SectionVisibilityMap>(new Map());
 
     const hasAccess = (
       action: CrudAction | SpecialGlobalAction,
       object?: WtObject,
     ) => {
-      const allowGlobalAccess = globalAccess.get(action);
+      const allowGlobalAccess = globalAccess.value.get(action);
       if (allowGlobalAccess) return true;
 
       const allowScopeAccess =
-        object && scopeAccess.get(object)?.get(action as CrudAction);
+        object && scopeAccess.value.get(object)?.get(action as CrudAction);
       if (allowScopeAccess) return true;
 
       return false;
@@ -68,14 +69,14 @@ export const createUserAccessStore = ({
     };
 
     const hasApplicationVisibility = (app: WtApplication) => {
-      return appVisibilityAccess.get(app);
+      return appVisibilityAccess.value.get(app);
     };
 
     const hasSectionVisibility = (section: UiSection, object: WtObject) => {
       const appOfSection = getWtAppByUiSection(section);
       const objectOfSection = object; /*castUiSectionToWtObject(section)*/
       const hasSectionVisibilityAccess = (section: UiSection) => {
-        return sectionVisibilityAccess.get(section);
+        return sectionVisibilityAccess.value.get(section);
       };
 
       const allowAppVisibility = hasApplicationVisibility(appOfSection);
@@ -95,14 +96,14 @@ export const createUserAccessStore = ({
         .toReversed()
         .find(({ meta }) => meta.UiSection)?.meta?.WtObject as WtObject | ((RouteLocationNormalized) => WtObject);
 
-        // if, then compute fn
-        if (typeof uiSection === 'function') {
-          uiSection = uiSection(to);
-        }
-        // if, then compute fn
-        if (typeof wtObject === 'function') {
-          wtObject = wtObject(to);
-        }
+      // if, then compute fn
+      if (typeof uiSection === 'function') {
+        uiSection = uiSection(to);
+      }
+      // if, then compute fn
+      if (typeof wtObject === 'function') {
+        wtObject = wtObject(to);
+      }
 
       if (uiSection && !hasSectionVisibility(uiSection, wtObject)) {
         // return false;
@@ -114,7 +115,7 @@ export const createUserAccessStore = ({
 
 
     const hasSpecialGlobalActionAccess = (id: SpecialGlobalAction): boolean => {
-      return !!globalAccess.get(id);
+      return !!globalAccess.value.get(id);
     };
 
     const initialize = ({
@@ -122,10 +123,10 @@ export const createUserAccessStore = ({
       scope: rawScopeAccess,
       access: rawVisibilityAccess,
     }: CreateUserAccessStoreRawAccess) => {
-      globalAccess = makeGlobalAccessMap(rawGlobalAccess);
-      scopeAccess = makeScopeAccessMap(rawScopeAccess);
-      appVisibilityAccess = makeAppVisibilityMap(rawVisibilityAccess);
-      sectionVisibilityAccess = makeSectionVisibilityMap(rawVisibilityAccess);
+      globalAccess.value = makeGlobalAccessMap(rawGlobalAccess);
+      scopeAccess.value = makeScopeAccessMap(rawScopeAccess);
+      appVisibilityAccess.value = makeAppVisibilityMap(rawVisibilityAccess);
+      sectionVisibilityAccess.value = makeSectionVisibilityMap(rawVisibilityAccess);
     };
 
     return {
@@ -139,6 +140,15 @@ export const createUserAccessStore = ({
 
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
+
+      /**
+       * @internal
+       * for pinia devtools debug
+      */
+      globalAccess,
+      scopeAccess,
+      appVisibilityAccess,
+      sectionVisibilityAccess,
     };
   });
 };

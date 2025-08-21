@@ -117,4 +117,28 @@ export interface UserAccessStore {
 
   // hasApplicationVisibility: (app: WtApplication) => boolean;
   hasSectionVisibility: (section: UiSection, object: WtObject) => boolean;
+
+  /**
+   * @internal
+   * for pinia devtools debug
+   */
+  globalAccess: GlobalActionAccessMap;
+
+  /**
+   * @internal
+   * for pinia devtools debug
+   */
+  scopeAccess: ScopeAccessMap;
+
+  /**
+   * @internal
+   * for pinia devtools debug
+   */
+  appVisibilityAccess: AppVisibilityMap;
+  
+  /**
+   * @internal
+   * for pinia devtools debug
+   */
+  sectionVisibilityAccess: SectionVisibilityMap;
 }
