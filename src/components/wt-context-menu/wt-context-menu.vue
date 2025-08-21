@@ -3,6 +3,7 @@
     <wt-popover
       :visible="visible"
       :disabled="disabled"
+      :pt="pt"
       unstyled
       placement="bottom-end"
       class="wt-context-menu__floating-wrapper"
@@ -70,6 +71,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  pt: {
+    type: Object,
+    default: () => null,
   },
   tooltipTriggers: {
     type: Array,
