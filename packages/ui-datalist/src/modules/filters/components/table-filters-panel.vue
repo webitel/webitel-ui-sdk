@@ -182,7 +182,7 @@ Clear filters button should be active only if filters are defined in the table-f
 const listSelectedFilters = computed(()=>
   new Map([...props.filtersManager.filters].filter(([key]) => props.filterOptions.includes(key))));
 
-const presetStore = props.usePresetsStore();
+const presetStore = props.usePresetsStore ? props.usePresetsStore() : null
 
 const handleResetFilters = () => {
   emit('filter:reset-all')
