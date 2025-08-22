@@ -1,8 +1,8 @@
 <template>
   <div class="wt-table">
     <table
-      class="wt-table__table"
       :class="{ 'wt-table__table--fixed-actions': fixedActions }"
+      class="wt-table__table"
     >
       <thead
         v-if="!headless"
@@ -85,12 +85,14 @@
            @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
            -->
             <slot
+              v-if="isNotEmptyValue(row[col.value])"
               :index="dataKey"
               :item="row"
               :name="col.value"
             >
               <div>{{ row[col.value] }}</div>
             </slot>
+            <span v-else>{{ defaultEmptyValue }}</span>
           </td>
 
           <td
@@ -146,6 +148,7 @@
 
 <script>
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { isEmpty } from '../../scripts/index.js';
 
 export default {
   name: 'WtTable',
@@ -203,6 +206,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    defaultEmptyValue: {
+      type: String,
+      default: '-',
+    }
   },
   emits: ['sort', 'update:selected'],
 
@@ -256,6 +263,9 @@ export default {
   },
 
   methods: {
+    isNotEmptyValue(value) {
+      return value?.length || typeof value === 'object' && !isEmpty(value);
+    },
     sort(col) {
       if (!this.isColSortable(col)) return;
       const nextSort = getNextSortOrder(col.sort);
