@@ -8,6 +8,7 @@
       :show-headers="!headless"
       :table-style="`min-width: ${totalTableWidth}px;`"
       :row-class="rowClass"
+      :row-style="rowStyle"
       lazy
       scrollable
       removable-sort
@@ -164,7 +165,8 @@ export interface Props {
    * 'If true, allows to reorder rows.'
    */
   rowReorder?: boolean;
-  rowClass?: string
+  rowClass?: () => string;
+  rowStyle?: () => { [key: string]: string };
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -176,7 +178,8 @@ const props = withDefaults(defineProps<Props>(), {
   fixedActions: false,
   headless: false,
   rowReorder: false,
-  rowClass: '',
+  rowClass: () => '',
+  rowStyle: () => ({}),
 });
 
 const { t } = useI18n();
