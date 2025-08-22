@@ -13,7 +13,9 @@ import {
 	starToSearch,
 } from '../../../transformers';
 
-const getAdjunctTypesList = async ({ repo, ...params }) => {
+const getAdjunctTypesList = async ({ repo, ...params }, {
+	silent = false,
+} = {}) => {
 	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
@@ -40,6 +42,8 @@ const getAdjunctTypesList = async ({ repo, ...params }) => {
 			next,
 		};
 	} catch (err) {
+		if (silent) throw err; // dont show error if has no access to custom types
+
 		throw applyTransform(err, [notify]);
 	}
 };
