@@ -9,6 +9,8 @@
       :table-style="`min-width: ${totalTableWidth}px;`"
       :row-class="rowClass"
       :row-style="rowStyle"
+      :resizable-columns="resizableColumns"
+      :show-gridlines="resizableColumns"
       lazy
       scrollable
       removable-sort
@@ -167,6 +169,10 @@ export interface Props {
   rowReorder?: boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
+  /**
+   * 'If true, allows to resize columns.'
+   */
+  resizableColumns?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
