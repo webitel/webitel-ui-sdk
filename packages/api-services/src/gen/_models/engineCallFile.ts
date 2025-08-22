@@ -11,5 +11,6 @@ export interface EngineCallFile {
 	name?: string;
 	size?: string;
 	startAt?: string;
+	startRecord?: string;
 	stopAt?: string;
 }

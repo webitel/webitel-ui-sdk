@@ -880,6 +880,10 @@ export const getSearchHistoryCallResponseMock = (
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
+					startRecord: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					stopAt: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
@@ -1587,6 +1591,10 @@ export const getSearchHistoryCallPostResponseMock = (
 						undefined,
 					]),
 					startAt: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					startRecord: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
@@ -2492,6 +2500,10 @@ export const getPatchHistoryCallResponseMock = (
 				undefined,
 			]),
 			startAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			startRecord: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),

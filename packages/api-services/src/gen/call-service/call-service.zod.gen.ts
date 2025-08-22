@@ -537,6 +537,7 @@ export const searchHistoryCallResponse = zod.object({
 							name: zod.string().optional(),
 							size: zod.string().optional(),
 							startAt: zod.string().optional(),
+							startRecord: zod.string().optional(),
 							stopAt: zod.string().optional(),
 						}),
 					)
@@ -883,6 +884,7 @@ export const searchHistoryCallPostResponse = zod.object({
 							name: zod.string().optional(),
 							size: zod.string().optional(),
 							startAt: zod.string().optional(),
+							startRecord: zod.string().optional(),
 							stopAt: zod.string().optional(),
 						}),
 					)
@@ -1339,6 +1341,7 @@ export const patchHistoryCallResponse = zod.object({
 				name: zod.string().optional(),
 				size: zod.string().optional(),
 				startAt: zod.string().optional(),
+				startRecord: zod.string().optional(),
 				stopAt: zod.string().optional(),
 			}),
 		)

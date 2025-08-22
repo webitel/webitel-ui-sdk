@@ -13,9 +13,10 @@ import {
 	starToSearch,
 } from '../../../transformers';
 
-const getAdjunctTypesList = async ({ repo, ...params }, {
-	silent = false,
-} = {}) => {
+const getAdjunctTypesList = async (
+	{ repo, ...params },
+	{ silent = false } = {},
+) => {
 	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
