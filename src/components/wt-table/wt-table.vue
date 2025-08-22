@@ -4,6 +4,7 @@
   >
     <p-table 
       ref="table"
+      v-model:expanded-rows="expandedRows"
       :value="data"
       :show-headers="!headless"
       :table-style="`min-width: ${totalTableWidth}px;`"
@@ -43,6 +44,9 @@
           />
         </template>
       </p-column>
+      <p-column 
+        v-if="rowExpansion"
+        expander />
       <p-column 
         v-for="(col, idx) of dataHeaders"
         :key="idx"
@@ -89,6 +93,14 @@
           <slot :name="`${col.value}-footer`" />
         </template>
       </p-column>
+      <template #expansion="{ data: row, index }">
+        <slot
+          v-if="row"
+          name="expansion"
+          :index="index"
+          :item="row"
+        />
+      </template>
       <p-column
         v-if="gridActions"
         style="width: 112px;"
@@ -165,6 +177,10 @@ export interface Props {
    * 'If true, allows to reorder rows.'
    */
   rowReorder?: boolean;
+  /**
+   * 'If true, allows to expand rows.'
+   */
+  rowExpansion?: boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
 }
@@ -189,6 +205,7 @@ const slots = useSlots();
 const emit = defineEmits(['sort', 'update:selected', 'reorder:row']);
 
 const table = useTemplateRef('table');
+const expandedRows = ref([]);
 
 // const sortableOptions: SortableTableOptions = {
 //   table,
