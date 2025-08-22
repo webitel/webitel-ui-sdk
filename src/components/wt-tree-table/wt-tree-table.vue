@@ -23,7 +23,7 @@
               >
                 <wt-checkbox
                   :selected="isAllSelected"
-                  @change="selectAll"
+                  @update:selected="selectAll"
                 />
               </div>
               <div class="wt-tree-table-th__text">
@@ -326,7 +326,7 @@ const handleSelection = (row, select) => {
   &--sortable {
     cursor: pointer;
 
-    &:hover :deep .wt-icon__icon {
+    &:hover :deep .wt-icon {
       fill: var(--icon-active-color);
     }
   }

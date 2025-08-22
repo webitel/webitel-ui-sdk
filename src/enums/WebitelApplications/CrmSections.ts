@@ -11,6 +11,10 @@ export const CrmSections = {
   CloseReasonGroups: 'close-reason-groups',
   ContactGroups: 'contact-groups',
   CaseSources: 'case-sources',
+
+  // CUSTOMIZATION
+  CasesExtensions: 'ext-cases',
+  ContactsExtensions: 'ext-contacts',
   CustomLookups: 'custom-lookups',
 } as const;
 

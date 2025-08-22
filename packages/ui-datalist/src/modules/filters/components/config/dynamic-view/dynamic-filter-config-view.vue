@@ -1,23 +1,20 @@
 <template>
   <div class="dynamic-filter-config-view">
-    <wt-tooltip
-      :triggers="['click']"
-      :disabled="props.disabled"
-      :disable-click-away="props.disableClickAway"
-    >
-      <template #activator="slotScope">
+    <wt-popover>
+      <template #activator="{ toggle }">
         <slot
           name="activator"
-          v-bind="{ tooltipSlotScope: slotScope }"
+          v-bind="{ toggle, disabled: props.disabled }"
         />
       </template>
-      <template #default="slotScope">
+
+      <template #default="{ hide }">
         <slot
           name="content"
-          v-bind="{ tooltipSlotScope: slotScope }"
+          v-bind="{ hide }"
         />
       </template>
-    </wt-tooltip>
+    </wt-popover>
   </div>
 </template>
 
@@ -26,8 +23,7 @@
  * this component should only be used for config view representation: tooltip/popup/etc,
  * and their styling
  */
-
-import { WtTooltip } from '@webitel/ui-sdk/components';
+import { WtPopover } from '@webitel/ui-sdk/components';
 
 interface Props {
   disabled?: boolean;

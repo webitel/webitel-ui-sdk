@@ -5,7 +5,7 @@ import { z } from 'zod/v4';
  * only depth=1 fields will be returned
  * */
 export const getShallowFieldsToSendFromZodSchema = (
-	schema: z.ZodTypeAny,
+	schema: z.ZodObject,
 ): string[] => {
 	return schema.keyof().options;
 };
@@ -16,7 +16,7 @@ export const getShallowFieldsToSendFromZodSchema = (
  */
 
 // get zod object keys recursively
-export const getFieldsToSendFromZodSchema = <T extends z.ZodTypeAny>(
+export const getFieldsToSendFromZodSchema = <T extends z.ZodObject>(
 	schema: T,
 ): string[] => {
 	// make sure schema is not null or undefined

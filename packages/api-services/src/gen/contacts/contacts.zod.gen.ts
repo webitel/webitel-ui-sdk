@@ -576,6 +576,10 @@ export const contactsSearchContactsResponse = zod
 													.describe(
 														'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
 													),
+												externalId: zod
+													.string()
+													.optional()
+													.describe('External user id.'),
 												id: zod
 													.string()
 													.optional()
@@ -2271,6 +2275,10 @@ export const contactsCreateContactResponse = zod
 									.describe(
 										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
 									),
+								externalId: zod
+									.string()
+									.optional()
+									.describe('External user id.'),
 								id: zod
 									.string()
 									.optional()
@@ -3549,6 +3557,10 @@ export const contactsDeleteContactResponse = zod
 									.describe(
 										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
 									),
+								externalId: zod
+									.string()
+									.optional()
+									.describe('External user id.'),
 								id: zod
 									.string()
 									.optional()
@@ -4839,6 +4851,10 @@ export const contactsLocateContactResponse = zod
 									.describe(
 										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
 									),
+								externalId: zod
+									.string()
+									.optional()
+									.describe('External user id.'),
 								id: zod
 									.string()
 									.optional()
@@ -6472,6 +6488,10 @@ export const contactsUpdateContactResponse = zod
 									.describe(
 										'Unique ID of the latest version of the update.\nThis ID changes after any update to the underlying value(s).',
 									),
+								externalId: zod
+									.string()
+									.optional()
+									.describe('External user id.'),
 								id: zod
 									.string()
 									.optional()

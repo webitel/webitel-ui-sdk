@@ -1,40 +1,34 @@
-# Knowledge Base index page
+# Knowledge Base
+
+Документація, стандарти, структура проектів та корисні гайди для Webitel Frontend.
+
+## General
+- [Code Base Deprecation Info](general/code-base-deprecation-info/Readme): Інформація про застарілі частини коду.
+- [Branching](general/branching/Readme): Гайд по гілкуванню у репозиторіях.
 
 ## FAQ
+- [FAQ](faq/Readme.md): Відповіді на часті питання.
 
-* [FAQ](faq/faq/Readme.md)
-* [Branching](faq/branching/Readme.md)
-
-## Architecture and Structure
-
-* [Applications Structure and Intercommunication](architecture-and-structures/Applications%20structure%20and%20intercommunication/Readme.md)
-* [Backend API communication](architecture-and-structures/Backend%20API%20communication/Readme.md)
-* [Filters-preserving routing](architecture-and-structures/Filters-preserving%20routing/Readme.md)
+## Projects Structure
+- [Applications Structure](projects-structure/app-structure/Readme.md): Опис структури застосунків.
+- [Applications List](projects-structure/applications-list/Readme.md): Список застосунків Webitel.
+- [Webitel Packages](projects-structure/webitel-packages/Readme.md): Огляд пакетів Webitel.
 
 ## Code Style
-
-* [CSS](code-style/css/index.md)
-* [Inspiration Sources](code-style/inspirations/index.md)
-* [Linting and Reformatting](code-style/linting-and-reformatting/index.md)
+- [CSS](code-style/css/index.md): Стандарти для CSS.
+- [Inspiration Sources](code-style/inspirations/index.md): Джерела натхнення для стилю коду.
+- [Linting and Reformatting](code-style/linting-and-reformatting/index.md): Лінтинг та автоформатування.
 
 ## How-to Guides
-
-* [Add a REST API module](how-to/add-a-REST-API-module/Readme.md)
-* [Add docs section](how-to/add-docs-section/Readme.md)
-* [Estimate a task](how-to/estimate-a-task/Readme.md)
-* [Hotfix](how-to/hotfix/index.md)
-* [Make fix in release](how-to/make-fix-in-release/Readme.md)
-* [Integration between store modules](how-to/Integration-between-store-modules/Readme.md)
-* [Manual testing proposals](how-to/manual-testing-proposals/Readme.md)
-* [Typical Workspace queue cases](how-to/typical-workspace-queue-cases/Readme.md)
+- [Estimate a task](how-to/estimate-task/Readme.md): Як оцінити задачу.
+- [Make a Hotfix](how-to/make-hotfix/Readme): Як зробити хотфікс.
+- [Add new docs page](how-to/add-docs-page/Readme.md): Додати нову сторінку документації.
+- [Setup Workspace app](how-to/setup-workspace-app-entities/Readme.md): Налаштування Workspace app.
+- [Archive 📜 | Add a REST API module](how-to/add-rest-api-module/Readme.md): Додати REST API модуль (архів).
 
 ## Namings
-
-* [WtTypes](namings/wt-types/WtTypes)
-
-## Onboarding
-* [Onboarding checklist](onboarding/checklist.md)
+- [WtTypes](namings/wt-types/WtTypes): Стандарти іменування типів.
 
 ## Tests Cookbook
-* [Mocking modules](tests-cookbook/mocking-modules/Readme.md)
-* [Testing REST API](tests-cookbook/testing-REST-API/Readme.md)
+- [Mocking modules](testing-cookbook/mocking-modules/Readme.md): Моки для модулів.
+- [Testing REST API](testing-cookbook/testing-REST-API/Readme.md): Тестування REST API.

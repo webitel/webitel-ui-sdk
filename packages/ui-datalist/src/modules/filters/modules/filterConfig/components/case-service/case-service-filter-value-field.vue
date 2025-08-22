@@ -7,6 +7,7 @@
     children-prop="service"
     class="service-case-filter-value-field"
     multiple
+    allow-parent
     @update:model-value="model = $event"
   />
 </template>

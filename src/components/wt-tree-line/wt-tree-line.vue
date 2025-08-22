@@ -18,7 +18,7 @@
       />
     </div>
     <div
-      :class="{ active: isSelected }"
+      :class="{ active: displayActiveState }"
       class="wt-tree-line__label-wrapper"
       @click="selectElement"
     >
@@ -26,7 +26,7 @@
         {{ label }}
       </p>
       <wt-icon
-        v-if="isSelected"
+        v-if="displayActiveState"
         icon="chat-message-status-sent"
       />
     </div>
@@ -42,10 +42,13 @@
         :item-label="itemLabel"
         :item-data="itemData"
         :nested-level="nestedLevel + 1"
+        :selected-parent="isSelected || selectedParent"
         :next-element="!!data[childrenProp][index + 1]"
         :nested-icons="displayIcons"
         :last-child="index === data[childrenProp].length - 1"
         :multiple="multiple"
+        :allow-parent="allowParent"
+        :root-data="rootData || data"
         @open-parent="onOpenParent"
         @update:model-value="emit('update:modelValue', $event)"
       />
@@ -62,27 +65,32 @@ import type { WtTreeNestedIcons } from './types/wt-tree-nested-icons.ts';
 
 const props = withDefaults(
   defineProps<{
-    modelValue: null | any;
-    data: any;
+    modelValue: null | unknown | unknown[];
+    data: unknown;
     itemLabel?: string | undefined;
     itemData?: string | undefined;
     childrenProp?: string;
     nestedLevel?: number;
     lastChild?: boolean;
+    selectedParent?: boolean;
     nestedIcons?: WtTreeNestedIcons[];
     nextElement?: boolean;
     multiple?: boolean;
+    allowParent?: boolean;
     /**
      * 'It's a key in data object, which contains field what display searched elements. By this field, table will be opened to elements with this field value. '
      */
     searchedProp?: string;
+    rootData?: unknown;
   }>(),
   {
     nestedLevel: 0,
     childrenProp: 'children',
     lastChild: false,
     nextElement: false,
+    selectedParent: false,
     multiple: false,
+    allowParent: false,
     searchedProp: 'searched',
   },
 );
@@ -112,6 +120,10 @@ const displayIcons = computed(() => {
 });
 
 const isMultipleItemsSelected = () => {
+  if (!Array.isArray(props.modelValue)) {
+    return false;
+  }
+
   if (props.itemData) {
     return props.modelValue.includes(props.data[props.itemData]);
   }
@@ -131,6 +143,78 @@ const isSelected = computed(() => {
 
   return deepEqual(props.modelValue, props.data);
 });
+
+const displayActiveState = computed(() => {
+  if (props.multiple) {
+    return isSelected.value;
+  }
+
+  return isSelected.value || props.selectedParent;
+});
+
+
+const toggleSelectionWithChildren = (node: unknown, select: boolean, result: unknown[]) => {
+  const value = props.itemData ? node[props.itemData] : node;
+
+  if (select) {
+    if (!result.some((item) => deepEqual(item, value))) {
+      result.push(value);
+    }
+  } else {
+    const index = result.findIndex((item) => deepEqual(item, value));
+    if (index !== -1) {
+      result.splice(index, 1);
+    }
+  }
+
+  if (node && Array.isArray(node[props.childrenProp]) && node[props.childrenProp].length) {
+    for (const child of node[props.childrenProp]) {
+      toggleSelectionWithChildren(child, select, result);
+    }
+  }
+};
+
+const deselectParents = (node: unknown, root: unknown, result: unknown[]) => {
+  const findAndDeselect = (current: unknown, parent: unknown | null): boolean => {
+    if (current === node) {
+      if (parent) {
+        const parentValue = props.itemData ? parent[props.itemData] : parent;
+        const index = result.findIndex((item) => deepEqual(item, parentValue));
+        if (index !== -1) {
+          result.splice(index, 1);
+        }
+      }
+      return true;
+    }
+
+    if (current && Array.isArray(current[props.childrenProp]) && current[props.childrenProp].length) {
+      for (const child of current[props.childrenProp]) {
+        if (findAndDeselect(child, current)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  };
+
+  findAndDeselect(root, null);
+};
+
+const setMultipleModelValueWithTree = () => {
+  const isAlreadySelected = isSelected.value;
+  const newArray = [...props.modelValue];
+
+  // Toggle current node + children
+  toggleSelectionWithChildren(props.data, !isAlreadySelected, newArray);
+
+  if (isAlreadySelected) {
+    // If deselecting, also deselect parents
+    deselectParents(props.data, props.rootData, newArray);
+  }
+
+  emit('update:modelValue', newArray);
+};
 
 const setMultipleModelValue = () => {
   const value = props.itemData ? props.data[props.itemData] : props.data;
@@ -157,9 +241,20 @@ const setMultipleModelValue = () => {
 };
 
 const selectElement = () => {
-  if (props.multiple && !props.data.service) {
-    setMultipleModelValue();
+  if (props.multiple) {
+    if (props.data[props.childrenProp]?.length) {
+      setMultipleModelValueWithTree();
+    } else {
+      setMultipleModelValue();
+    }
     return;
+  }
+
+  if (props.allowParent && !props.data[props.childrenProp]) {
+    return emit(
+      'update:modelValue',
+      props.itemData ? props.data[props.itemData] : props.data,
+    );
   }
 
   if (props.data[props.childrenProp]?.length) {
@@ -185,7 +280,7 @@ const onOpenParent = () => {
   openParent();
 };
 
-const hasSearchedElement = (data: Record<string, any>, nestedLevel = 0) => {
+const hasSearchedElement = (data: Record<string, unknown>, nestedLevel = 0) => {
   // Check if the object itself has searched
   if (data[props.searchedProp] && nestedLevel) {
     return true;

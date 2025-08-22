@@ -1,4 +1,6 @@
-import qs from 'qs';
+import type { IStringifyOptions } from 'qs-esm';
+import * as qs from 'qs-esm';
+
 import { generateInstance } from '../../axios/generateInstance';
 import { updateTokenInterceptor } from '../../interceptors/request/updateToken.interceptor';
 import { handleUnauthorizedInterceptor } from '../../interceptors/response/handleUnauthorized.interceptor';
@@ -8,6 +10,10 @@ import { handleUnauthorizedInterceptor } from '../../interceptors/response/handl
  * @returns Configured Axios instance
  */
 export const getDefaultInstance = () => {
+	const stringifyOptions = {
+		arrayFormat: 'repeat',
+	};
+
 	return generateInstance({
 		interceptors: {
 			request: [updateTokenInterceptor],
@@ -15,7 +21,7 @@ export const getDefaultInstance = () => {
 		},
 		baseURL: import.meta.env.VITE_API_URL,
 		paramsSerializer: (params) => {
-			return qs.stringify(params);
+			return qs.stringify(params, stringifyOptions as IStringifyOptions);
 		},
 	});
 };

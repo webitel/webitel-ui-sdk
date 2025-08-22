@@ -6,7 +6,7 @@
 
 ## Details
 
-* [General Usage, new features](general/index.md)
+* [General Usage, new features](migration/webitel-sdk/index.md)
 
-* [Differences, migration from `@webitel/ui-sdk/api`](migration/index.md)
+* [Differences, migration from `@webitel/ui-sdk/api`](migration/ui-sdk/index.md)
 

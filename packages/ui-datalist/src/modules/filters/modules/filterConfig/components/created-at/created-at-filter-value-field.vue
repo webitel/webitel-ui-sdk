@@ -3,10 +3,10 @@
     <wt-radio
       v-for="value of radioOpts"
       :key="value"
-      v-model="selectedRadioValue"
+      :selected="selectedRadioValue"
       :label="t(`webitelUI.filters.datetime.${value}`)"
       :value="value"
-      @input="handleRadioChange"
+      @update:selected="handleRadioChange"
     />
     <wt-datepicker
       v-if="showDatepickers"
@@ -68,6 +68,7 @@ const showDatepickers = computed(() => {
 });
 
 const handleRadioChange = (value: RelativeDatetimeValue) => {
+  selectedRadioValue.value = value;
   if (value === RelativeDatetimeValue.Custom) {
     model.value = {
       from: startOfToday().getTime(),

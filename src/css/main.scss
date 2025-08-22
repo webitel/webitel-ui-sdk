@@ -1,5 +1,6 @@
 @forward 'styleguide/styleguide';
 @use 'styleguide/styleguide' as *;
+@use '../plugins/primevue/primevue' as *;
 @use 'pages/table-page';
 @use 'pages/card-page';
 
@@ -17,7 +18,7 @@
 
 html {
   height: 100%;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 body {
@@ -59,18 +60,6 @@ ul {
 iframe {
   outline: none;
   border: none;
-}
-
-//@author @Oleksandr Palonnyi
-//[WTEL-6985]-(https://webitel.atlassian.net/browse/WTEL-6985)
-//:not(.wt-button) is added because of wt-button uses primevue component
-//that confilcts with the default button styles
-
-button:not(.wt-button) {
-  cursor: pointer;
-  outline-color: #000;
-  background: transparent;
-  padding: 0;
 }
 
 a {

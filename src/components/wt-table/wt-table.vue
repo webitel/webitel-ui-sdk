@@ -18,7 +18,7 @@
           >
             <wt-checkbox
               :selected="isAllSelected"
-              @change="selectAll"
+              @update:selected="selectAll"
             />
           </th>
           <th
@@ -71,7 +71,7 @@
           >
             <wt-checkbox
               :selected="_selected.includes(row)"
-              @change="handleSelection(row, $event)"
+              @update:selected="handleSelection(row, $event)"
             />
           </td>
 
@@ -395,7 +395,7 @@ export default {
   &--sortable {
     cursor: pointer;
 
-    &:hover :deep(.wt-icon__icon) {
+    &:hover :deep(.wt-icon) {
       fill: var(--icon-active-color);
     }
   }

@@ -1,5 +1,5 @@
 import type { Validation } from '@vuelidate/core';
-import {computed, isReactive, Ref} from 'vue';
+import { computed, isReactive, Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export type UseFieldValidationParams = {
@@ -42,15 +42,15 @@ export const useFieldValidation = ({
       else if (v.value.macValidator?.$invalid)
         validationText = t('validation.macValidator');
       else if (v.value.minValue?.$invalid)
-        validationText = `${t('validation.minValue')} ${v.value.minValue.$params.min}`;
+        validationText = t('validation.minValue', { min: v.value.minValue.$params.min });
       else if (v.value.maxValue?.$invalid)
-        validationText = `${t('validation.maxValue')} ${v.value.maxValue.$params.max}`;
+        validationText = t('validation.maxValue', { max: v.value.maxValue.$params.max });
       else if (v.value.maxLength?.$invalid)
-        validationText = `${t('validation.maxLength')} ${v.value.maxLength.$params.max}`;
+        validationText = t('validation.maxLength', { max: v.value.maxLength.$params.max });
       else if (v.value.sipAccountValidator?.$invalid)
         validationText = t('validation.sipAccountValidator');
       else if (v.value.minLength?.$invalid)
-        validationText = `${t('validation.minLength')} ${v.value.minLength.$params.min}`;
+        validationText = t('validation.minLength', { min: v.value.minLength.$params.min });
       else if (v.value.url?.$invalid) validationText = `${t('validation.url')}`;
       else if (v.value.regExpValidator?.$invalid)
         validationText = `${t('validation.regExpValidator')}`;

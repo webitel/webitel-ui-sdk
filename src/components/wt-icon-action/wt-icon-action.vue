@@ -1,16 +1,12 @@
 <template>
-  <wt-tooltip>
-    <template #activator>
-      <wt-icon-btn
-        :disabled="disabled"
-        :icon="iconAction.icon"
-        :size="size"
-        @click="emit('click', $event)"
-        @mousedown="emit('mousedown', $event)"
-      />
-    </template>
-    {{ t(iconAction.hint) }}
-  </wt-tooltip>
+  <wt-icon-btn
+    v-tooltip="t(iconAction.hint)"
+    :disabled="disabled"
+    :icon="iconAction.icon"
+    :size="size"
+    @click="emit('click', $event)"
+    @mousedown="emit('mousedown', $event)"
+  />
 </template>
 
 <script setup>

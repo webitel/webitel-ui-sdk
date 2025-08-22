@@ -24,11 +24,12 @@ export * from './media/media';
 export * from './object/object';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
-// export * from './roles/roles'; // fixme: file imports
+// export * from './roles/roles'; fixme: ApplicationAccess import
 export * from './skills/skills';
 export * from './slas/slas';
 export * from './teams/teams';
 export * from './users/users';
+export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';

@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -55,7 +56,7 @@ export default {
       en: 'English',
       es: 'Español',
       ru: 'Русский',
-      ua: 'Українська',
+      uk: 'Українська',
       kz: 'Қазақ',
     },
     from: 'От',
@@ -107,7 +108,7 @@ export default {
     host: 'Хост',
     time: 'Время',
     channel: 'Канал | Каналы',
-    file: 'Файл',
+    file: 'Файл | Файлы',
     logout: 'Выйти',
     priority: 'Приоритет | Приоритеты',
     color: 'Цвет',
@@ -129,6 +130,7 @@ export default {
     emptyResultSearch: 'Поиск не дал результатов',
     contact: 'Контакт | Контакты',
     notification: 'Уведомление | Уведомления',
+    screencast: 'Запись экрана',
   },
   // date-related texts
   date: {
@@ -174,6 +176,13 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Вложение | Вложения',
     owner: 'Владелец | Владельцы',
+    customization: {
+      customization: 'Персонализация | Персонализации',
+    },
+    customLookup: {
+      customLookup:
+        'Пользовательский справочник | Пользовательские справочники',
+    },
     queue: {
       queue: 'Очередь | Очереди',
       type: {
@@ -268,6 +277,24 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Пользовательские справочники', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
@@ -350,12 +377,36 @@ export default {
     sipAccountValidator: 'Необходимо ввести SIP-аккаунт',
     ipValidator: 'Необходимо ввести IPv4',
     macValidator: 'Необходимо ввести MAC-адрес',
-    minValue: 'Значение должно быть не меньше',
-    maxValue: 'Значение должно быть не больше',
-    maxLength: 'Длина не должна быть больше, чем',
+    minValue: ({ named }) => {
+      let text = 'Значение должно быть не меньше';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
+    maxValue: ({ named }) => {
+      let text = 'Значение должно быть не больше';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
+    maxLength: ({ named }) => {
+      let text = 'Длина не должна быть больше, чем';
+      if (named('max')) {
+        text += ` ${named('max')}`;
+      }
+      return text;
+    },
     sameAs: 'Неверный пароль',
     requiredArrayValue: 'Поле не должно быть пустым',
-    minLength: 'Количество символов не должно быть меньше, чем',
+    minLength: ({ named }) => {
+      let text = 'Количество символов не должно быть меньше, чем';
+      if (named('min')) {
+        text += ` ${named('min')}`;
+      }
+      return text;
+    },
     url: 'Необходимо ввести корректный URL-адрес',
     websocketValidator: 'Необходимо ввести корректный WebSocket url-адрес',
     isRegExpMatched: 'Пароль должен соответствовать регулярному выражению:',

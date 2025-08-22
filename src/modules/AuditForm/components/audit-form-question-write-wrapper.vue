@@ -3,36 +3,29 @@
     <header class="audit-form-question-write-header">
       <wt-switcher
         :disabled="first"
-        :label="$t('reusable.required')"
+        :label="t('reusable.required')"
         :value="question.required"
         @change="updateQuestion({ path: 'required', value: $event })"
       />
       <div class="audit-form-question-write-header__actions">
-        <wt-tooltip>
-          <template #activator>
-            <wt-icon-btn
-              icon="copy"
-              @click="emit('copy')"
-            />
-          </template>
-          {{ $t('reusable.copy') }}
-        </wt-tooltip>
-        <wt-tooltip>
-          <template #activator>
-            <wt-icon-btn
-              :disabled="first"
-              icon="bucket"
-              @click="emit('delete')"
-            />
-          </template>
-          {{ $t('reusable.delete') }}
-        </wt-tooltip>
+        <wt-icon-btn
+          v-tooltip="t('reusable.copy')"
+          icon="copy"
+          @click="emit('copy')"
+        />
+
+        <wt-icon-btn
+          v-tooltip="t('reusable.delete')"
+          :disabled="first"
+          icon="bucket"
+          @click="emit('delete')"
+        />
       </div>
     </header>
     <section class="audit-form-question-write-content">
       <div class="audit-form-question-write-content-question">
         <wt-input
-          :label="$t('webitelUI.auditForm.question')"
+          :label="t('webitelUI.auditForm.question')"
           :v="v.question.question"
           :value="question.question"
           prevent-trim
@@ -41,7 +34,7 @@
         />
         <wt-select
           :clearable="false"
-          :label="$t('webitelUI.auditForm.answerType')"
+          :label="t('webitelUI.auditForm.answerType')"
           :options="QuestionType"
           :value="prettifiedQuestionType"
           track-by="value"
@@ -60,6 +53,7 @@
 <script lang="ts" setup>
 import cloneDeep from 'lodash/cloneDeep';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { EngineAuditQuestionType, EngineQuestion } from 'webitel-sdk';
 
 import WtIconBtn from '../../../components/wt-icon-btn/wt-icon-btn.vue';
@@ -86,6 +80,8 @@ defineProps({
 });
 
 const emit = defineEmits(['copy', 'delete']);
+
+const { t } = useI18n();
 
 const QuestionType = [
   {

@@ -1,10 +1,10 @@
 <template>
   <transition
-    :appear="appear"
-    :class="[`wt-transition--${duration}`]"
-    :mode="mode"
-    :name="name"
+    :name="props.name"
+    :appear="props.appear"
+    :mode="props.mode"
     class="wt-transition"
+    :class="[`wt-transition--${props.duration}`]"
   >
     <slot />
   </transition>
@@ -32,17 +32,10 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.wt-transition {
-  &--fast {
-    transition-duration: var(--transition-fast);
-  }
-  &--normal {
-    transition-duration: var(--transition-normal);
-  }
-  &--slow {
-    transition-duration: var(--transition-slow);
-  }
-}
+/*
+* Transition classes, what based at transition name (.fade-opacity, .fade-slide ets)
+* need to be pleased BEFORE classic classes (.wt-transition ets)
+**/
 
 // opacity
 .fade-opacity-enter-active,
@@ -70,5 +63,17 @@ const props = defineProps({
 .fade-slide-up-enter-to,
 .fade-slide-up-leave-from {
   transform: translateY(0);
+}
+
+.wt-transition {
+  &--fast {
+    transition-duration: var(--transition-fast);
+  }
+  &--normal {
+    transition-duration: var(--transition-normal);
+  }
+  &--slow {
+    transition-duration: var(--transition-slow);
+  }
 }
 </style>

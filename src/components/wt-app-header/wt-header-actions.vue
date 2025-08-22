@@ -1,17 +1,13 @@
 <template>
   <div class="wt-header-actions">
-    <wt-tooltip>
-      <template #activator>
-        <wt-icon-btn
-          v-clickaway="close"
-          :class="{ active: isOpened }"
-          class="wt-header-actions__btn"
-          icon="account"
-          @click="isOpened = !isOpened"
-        />
-      </template>
-      {{ $t('webitelUI.headerActions.account') }}
-    </wt-tooltip>
+    <wt-icon-btn
+      v-clickaway="close"
+      v-tooltip="$t('webitelUI.headerActions.account')"
+      :class="{ active: isOpened }"
+      class="wt-header-actions__btn"
+      icon="account"
+      @click="isOpened = !isOpened"
+    />
 
     <transition name="fade">
       <section

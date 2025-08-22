@@ -1,60 +1,64 @@
 <template>
   <dynamic-filter-config-view :disabled="readonly">
-    <template #activator="{ visible: configFormVisible }">
-      <wt-tooltip
-        :disabled="configFormVisible"
-        @update:visible="!localValue && fillLocalValue()"
-      >
-        <template #activator>
-          <wt-chip color="primary">
-            {{ filter.label || filterConfig.label }}
-            <wt-icon-btn
-              v-if="!filterConfig.notDeletable && !readonly"
-              color="on-primary"
-              icon="close--filled"
-              size="sm"
-              @mousedown.stop="deleteFilter"
-            />
-          </wt-chip>
-        </template>
-
-        <template #default>
-          <dynamic-filter-preview-info>
-            <template #header>
-              {{ filterConfig.label }}
-            </template>
-
-            <template #default>
-              <slot name="info">
-                <wt-loader
-                  v-if="!isRenderPreview"
+    <template #activator="{ toggle }">
+      <div @click="toggle">
+        <wt-popover>
+          <template #activator="{ show: showCheapPopoverCb, hide: hideCheapPopover }">
+            <div
+              @pointerenter="(event) => showCheapPopover(event, showCheapPopoverCb)"
+              @pointerleave="hideCheapPopover"
+            >
+              <wt-chip color="primary">
+                {{ filter.label || filterConfig.label }}
+                <wt-icon-btn
+                  v-if="!filterConfig.notDeletable && !readonly"
+                  color="on-primary"
+                  icon="close--filled"
                   size="sm"
+                  @mousedown.stop="deleteFilter"
                 />
-                <component
-                  :is="filterConfig.valuePreviewComponent"
-                  v-else
-                  :filter="props.filter"
-                  :filter-config="filterConfig"
-                  :value="localValue"
-                />
-              </slot>
-            </template>
-          </dynamic-filter-preview-info>
-        </template>
-      </wt-tooltip>
+              </wt-chip>
+            </div>
+          </template>
+
+          <template #default>
+            <dynamic-filter-preview-info>
+              <template #header>
+                {{ filterConfig.label }}
+              </template>
+
+              <template #default>
+                <slot name="info">
+                  <wt-loader
+                    v-if="!isRenderPreview"
+                    size="sm"
+                  />
+                  <component
+                    :is="filterConfig.valuePreviewComponent"
+                    v-else
+                    :filter="props.filter"
+                    :filter-config="filterConfig"
+                    :value="localValue"
+                  />
+                </slot>
+              </template>
+            </dynamic-filter-preview-info>
+          </template>
+        </wt-popover>
+      </div>
     </template>
 
-    <template #content="{ tooltipSlotScope }">
+    <template #content="{ hide }">
       <slot
         name="form"
-        v-bind="{ tooltipSlotScope }"
+        v-bind="{ hide }"
       >
         <dynamic-filter-config-form
           :filter="props.filter"
           :filter-config="filterConfig"
-          @cancel="() => tooltipSlotScope.hide()"
+          @cancel="hide"
           @submit="
-            (payload) => submit(payload, { hide: tooltipSlotScope.hide })
+            (payload) => submit(payload, { hide })
           "
         />
       </slot>
@@ -67,9 +71,9 @@ import {
   WtChip,
   WtIconBtn,
   WtLoader,
-  WtTooltip,
+  WtPopover,
 } from '@webitel/ui-sdk/components';
-import { computed, ref, watch } from 'vue';
+import {computed, ref, useTemplateRef, watch} from 'vue';
 
 import { IFilter } from '../../classes/Filter';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
@@ -83,6 +87,14 @@ const props = defineProps<DynamicFilterProps>();
 const emit = defineEmits<DynamicFilterEmits>();
 
 const localValue = ref();
+
+const showCheapPopover = (event, showPopoverCb: (event) => void) => {
+  if (!localValue.value) {
+    fillLocalValue()
+  }
+
+  showPopoverCb(event);
+};
 
 /**
  * @author @dlohvinov

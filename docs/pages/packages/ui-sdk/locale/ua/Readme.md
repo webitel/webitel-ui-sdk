@@ -1,1 +1,1 @@
-<<< ../../../../../../src/locale/ua/ua.js
+<<< ../../../../../../src/locale/uk/uk.js

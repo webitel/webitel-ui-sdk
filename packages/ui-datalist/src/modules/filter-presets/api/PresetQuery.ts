@@ -37,7 +37,6 @@ const getPresetList = async (params, config: GetPresetListRequestConfig) => {
       merge(getDefaultGetParams()),
       (params) => (useStarToSearch ? starToSearch('search')(params) : params),
     ]);
-
   try {
     const response = await service.searchPresetQuery(
       page,
@@ -46,18 +45,25 @@ const getPresetList = async (params, config: GetPresetListRequestConfig) => {
       sort || '-created_at',
       fields || ['id', 'name', 'preset', 'description'],
       id,
+      [presetNamespace],
     );
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
     ]);
     return {
-      items: applyTransform(items, [
-        (items) =>
-          items.filter(({ preset }) => preset.namespace === presetNamespace),
-      ]),
+      items,
       next,
     };
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
+const getPreset = async ({ id }) => {
+  try {
+    const response = await service.readPresetQuery(id);
+    return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -74,6 +80,7 @@ const addPreset = async ({
     camelToSnake(),
     (item) => {
       item.preset.namespace = namespace;
+      item.section = namespace;
       return item;
     },
   ]);
@@ -90,6 +97,7 @@ const updatePreset = async ({ item: itemInstance, id, namespace }) => {
     camelToSnake(),
     (item) => {
       item.preset.namespace = namespace;
+      item.section = namespace;
       return item;
     },
   ]);
@@ -112,6 +120,7 @@ const deletePreset = async ({ id }) => {
 
 const PresetQueryAPI = {
   getList: getPresetList,
+  get: getPreset,
   add: addPreset,
   update: updatePreset,
   delete: deletePreset,

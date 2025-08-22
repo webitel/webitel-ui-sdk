@@ -467,6 +467,10 @@ export const getContactsSearchContactsResponseMock = (
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
 							]),
+							externalId: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
 							id: faker.helpers.arrayElement([
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
 								undefined,
@@ -1770,6 +1774,10 @@ export const getContactsCreateContactResponseMock = (
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
+					externalId: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					id: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
@@ -3034,6 +3042,10 @@ export const getContactsDeleteContactResponseMock = (
 						undefined,
 					]),
 					etag: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					externalId: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
@@ -4304,6 +4316,10 @@ export const getContactsLocateContactResponseMock = (
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
+					externalId: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					id: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
@@ -5568,6 +5584,10 @@ export const getContactsUpdateContactResponseMock = (
 						undefined,
 					]),
 					etag: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					externalId: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),

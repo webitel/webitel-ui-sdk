@@ -15,28 +15,34 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed } from 'vue';
 
 import StartPageCard from './start-page-card.vue';
 import StartPageLogo from './start-page-logo.vue';
 
-const props = defineProps({
-  /** entire navigation hierarchy. Value: `{ value: string, route: string, name: string, text: string, images: object - { light: string, dark: string } }`
-   **/
+interface NavCard {
+  value: string;
+  route: string;
+  name: string;
+  text: string;
+  disabled: boolean;
+  images: {
+    light: string;
+    dark: string;
+  };
+}
 
-  nav: {
-    type: Array,
-    required: true,
-  },
-  appLogo: {
-    type: Object,
-  },
-  darkMode: {
-    type: Boolean,
-    default: false,
-  },
-});
+interface AppLogo {
+  light: string;
+  dark: string;
+}
+
+const props = defineProps<{
+  nav: NavCard[];
+  appLogo: AppLogo;
+  darkMode?: boolean;
+}>();
 
 const logo = computed(() => {
   return props.darkMode ? props.appLogo.dark : props.appLogo.light;

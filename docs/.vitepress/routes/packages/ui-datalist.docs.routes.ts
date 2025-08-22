@@ -52,5 +52,59 @@ export const uiDatalistRoutes = [{
         },
       ],
     },
+    {
+      text: 'Card Tools',
+      collapsed: true,
+      items: [
+        {
+          text: 'index',
+          link: resolveLink('card-tools/index.md'),
+        },
+        {
+          text: 'Card Module',
+          collapsed: true,
+          items: [
+            {
+              text: 'main',
+              link: resolveLink('card-tools/card/Readme.md'),
+            },
+            {
+              text: 'Card Composables',
+              link: resolveLink('card-tools/card/composables/Readme.md'),
+            },
+            {
+              text: 'Card Store',
+              link: resolveLink('card-tools/card/stores/Readme.md'),
+            },
+            {
+              text: 'Usage',
+                link: resolveLink('card-tools/card/usage/Readme.md'),
+            },
+          ],
+        },
+        {
+          text: 'Validation',
+          collapsed: true,
+          items: [
+            {
+              text: 'main',
+              link: resolveLink('card-tools/validations/Readme.md'),
+            },
+            {
+              text: 'Regle',
+              link: resolveLink('card-tools/validations/regle/Readme.md'),
+            },
+            {
+              text: 'Zod',
+              link: resolveLink('card-tools/validations/zod/Readme.md'),
+            },
+            {
+              text: 'Usage',
+                link: resolveLink('card-tools/validations/usage/Readme.md'),
+            },
+          ],
+        },
+      ],
+    },
   ],
 }];

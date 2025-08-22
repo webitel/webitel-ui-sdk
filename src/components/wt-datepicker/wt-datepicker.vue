@@ -23,7 +23,7 @@
       ref="datepicker"
       :close-on-auto-apply="false"
       :format="isDateTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'"
-      :locale="$i18n.locale === 'ua' ? 'uk' : $i18n.locale"
+      :locale="$i18n.locale"
       :model-value="+value"
       :placeholder="
         placeholder || (isDateTime ? '00/00/00 00:00' : '00/00/0000')
@@ -87,6 +87,8 @@
 import '@vuepic/vue-datepicker/dist/main.css';
 
 import VueDatepicker from '@vuepic/vue-datepicker';
+import { useWindowFocus } from '@vueuse/core'
+import { watch } from 'vue'
 import { computed, ref, toRefs } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
@@ -161,6 +163,8 @@ const emit = defineEmits(['input']);
 const isOpened = ref(false);
 const datepicker = ref(null); // template ref
 
+const winFocused = useWindowFocus()
+
 const isDateTime = props.mode === 'datetime';
 
 const requiredLabel = computed(() => {
@@ -178,12 +182,23 @@ const { isValidation, invalid, validationText } = useValidation({
 const clearValue = () => {
   emit('input', null);
 
+  closePicker()
+};
+
+const closePicker = () => {
   if (isOpened.value) {
     datepicker?.value.closeMenu();
   }
 
   isOpened.value = false;
-};
+}
+
+// close picker when window loses focus(when clicking to iframe)
+// https://webitel.atlassian.net/browse/WTEL-5794
+watch(winFocused, (focused) => {
+  if (!focused && isOpened.value) closePicker()
+})
+
 </script>
 
 <style lang="scss">

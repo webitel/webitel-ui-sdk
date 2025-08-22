@@ -4,17 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { GeneralLookup } from './generalLookup';
+import type { GeneralExtendedLookup } from './generalExtendedLookup';
 
 /**
  * Metadata for a file associated with a case.
  */
 export interface WebitelCasesFile {
-	author?: GeneralLookup;
 	/** Creation timestamp in Unix milliseconds. */
 	createdAt?: string;
 	/** Creator of the file. */
-	createdBy?: GeneralLookup;
+	createdBy?: GeneralExtendedLookup;
 	/** Storage file ID. */
 	id?: string;
 	/** MIME type of the file. */
@@ -23,5 +22,6 @@ export interface WebitelCasesFile {
 	name?: string;
 	/** File size in bytes. */
 	size?: string;
+	source?: string;
 	url?: string;
 }

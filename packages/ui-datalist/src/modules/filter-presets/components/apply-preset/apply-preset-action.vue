@@ -79,7 +79,7 @@ import {
 import { IconAction } from '@webitel/ui-sdk/enums';
 import { useTableEmpty } from '@webitel/ui-sdk/modules/TableComponentModule/composables/useTableEmpty';
 import { type Store, storeToRefs } from 'pinia';
-import { computed, inject, ref, watch } from 'vue';
+import {computed, inject, onMounted, ref, watch} from 'vue';
 import { useI18n } from 'vue-i18n';
 import { EnginePresetQuery } from 'webitel-sdk';
 
@@ -92,7 +92,7 @@ const props = defineProps<{
    * presets "section" namespace
    */
   namespace: string;
-  usePresetsStore: Store;
+  presetsStore: () => Store;
   filterConfigs: AnyFilterConfig[];
 }>();
 
@@ -106,11 +106,11 @@ const { t } = useI18n();
 
 const showPresetsList = ref(false);
 
-const presetsStore = props.usePresetsStore();
-const { dataList, error, isLoading, filtersManager } =
+const presetsStore = props.presetsStore;
+const { dataList, error, isLoading, filtersManager, presetId } =
   storeToRefs(presetsStore);
 
-const { loadDataList, initialize, updateSize, deleteEls } = presetsStore;
+const { loadDataList, initialize, updateSize, deleteEls, setupPresetPersistence } = presetsStore;
 
 updateSize(1000);
 filtersManager.value.addFilter({
@@ -166,6 +166,7 @@ const applySelectedPreset = () => {
   const filtersSnapshot =
     selectedPreset.value.preset['filtersManager.toString'];
   emit('apply', filtersSnapshot);
+  presetId.value = selectedPreset.value.id
 
   selectedPreset.value = null;
   showPresetsList.value = false;
@@ -201,6 +202,19 @@ const deletePreset = async (preset: EnginePresetQuery) => {
     }),
   });
 };
+
+const restorePresetById = async (id: number | null) => {
+  if (!id) return;
+  const presetData = await PresetQueryAPI.get({ id });
+  const filters = presetData?.preset?.['filtersManager.toString'];
+
+  if (filters) emit('apply', filters);
+}
+
+onMounted(async () => {
+  await setupPresetPersistence();
+  await restorePresetById(presetId.value)
+})
 </script>
 
 <style lang="scss" scoped>

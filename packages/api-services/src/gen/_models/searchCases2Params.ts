@@ -35,23 +35,7 @@ export type SearchCases2Params = {
 	 */
 	filters?: string[];
 	/**
-	 * Search everywhere (no restrictions)
+	 * Specify which fields to apply 'q' to.
 	 */
-	queryTargetFull?: boolean;
-	/**
-	 * Search in case subject.
-	 */
-	queryTargetSubject?: boolean;
-	/**
-	 * Search in case name or number.
-	 */
-	queryTargetName?: boolean;
-	/**
-	 * Search in contact's email, phone, etc.
-	 */
-	queryTargetContactInfo?: boolean;
-	/**
-	 * Search in case id
-	 */
-	queryTargetId?: boolean;
+	qin?: string;
 };

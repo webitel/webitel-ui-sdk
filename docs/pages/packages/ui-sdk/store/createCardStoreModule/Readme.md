@@ -80,7 +80,7 @@ const {
 ## Як користуватись
 
 В деталях, дивіться `createApiStoreModule` [дока](../createApiStoreModule/Readme.md),
-i [доку](../../../../knowledge-base/how-to/Integration-between-store-modules/Readme.md) про інтеграцію стор модулів.
+i [доку](../Integration-between-store-modules/Readme.md) про інтеграцію стор модулів.
 
 ### Store
 

@@ -10,6 +10,7 @@ import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgent {
 	allowChannels?: string[];
+	allowSetScreenControl?: boolean;
 	auditor?: EngineLookup[];
 	channel?: EngineAgentChannel[];
 	chatCount?: number;
@@ -22,6 +23,7 @@ export interface EngineAgent {
 	name?: string;
 	progressiveCount?: number;
 	region?: EngineLookup;
+	screenControl?: boolean;
 	skills?: EngineLookup[];
 	status?: string;
 	statusDuration?: string;
