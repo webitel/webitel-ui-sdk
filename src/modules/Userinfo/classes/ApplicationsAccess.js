@@ -1,6 +1,6 @@
+import { AdjunctTypesAPI as CustomTypesAPI } from '@webitel/api-services/api';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
-import { AdjunctTypesAPI as CustomTypesAPI } from '@webitel/api-services/api';
 
 import {
   AdminSections as AdminSectionsNew,
