@@ -1,6 +1,6 @@
 import PAutoComplete from 'primevue/autocomplete';
-import PBreadcrumb from 'primevue/breadcrumb';
 import PAvatar from 'primevue/avatar';
+import PBreadcrumb from 'primevue/breadcrumb';
 import PButton from 'primevue/button';
 import PCheckbox from 'primevue/checkbox';
 import PChip from 'primevue/chip';
@@ -9,9 +9,9 @@ import PDivider from 'primevue/divider';
 import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
 import PPopover from 'primevue/popover';
-import PToolbar from 'primevue/toolbar';
 import PRadio from 'primevue/radiobutton';
-import PSlider from 'primevue/slider'
+import PSlider from 'primevue/slider';
+import PToolbar from 'primevue/toolbar';
 import Tooltip from 'primevue/tooltip';
 
 import WebitelTheme from './theme/webitel-theme.js';
