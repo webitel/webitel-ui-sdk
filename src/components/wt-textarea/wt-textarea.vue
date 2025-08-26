@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="textarea-wrapper"
     class="wt-textarea"
   >
     <wt-label
@@ -30,6 +31,7 @@
         class="wt-textarea__textarea"
         @paste="emit('paste', $event)"
         @keydown="handleKeypress"
+        @input="handleInput"
         @blur="emit('blur')"
       />
     </div>
@@ -43,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineModel } from 'vue';
+import { defineModel, onMounted, useTemplateRef } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -96,6 +98,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const model = defineModel<string>();
 
+const textareaWrapperRef = useTemplateRef('textarea-wrapper');
+
 const emit = defineEmits(['enter', 'paste', 'blur', 'keydown']);
 
 const { isValidation, invalid, validationText } = useValidation({
@@ -112,6 +116,29 @@ const handleKeypress = (event: KeyboardEvent) => {
     event.preventDefault();
   }
 };
+
+const handleInput = () => {
+  checkTextareaHeight();
+};
+
+/**
+ * @author YeHlukhov
+ * 
+ * Primevue by default shows scrollbar for autoresize textarea with overflow: auto,
+ * so this function checks textarea height and adds/removes wt-hidden-scrollbar class
+ */
+const checkTextareaHeight = async () => {
+  if (!props.autoresize) return;
+  if (textareaWrapperRef.value?.scrollHeight > textareaWrapperRef.value?.clientHeight) {
+    textareaWrapperRef.value?.classList.remove('wt-hidden-scrollbar');
+  } else {
+    textareaWrapperRef.value?.classList.add('wt-hidden-scrollbar');
+  }
+};
+
+onMounted(() => {
+  checkTextareaHeight()
+})
 </script>
 
 <style lang="scss">
@@ -133,5 +160,9 @@ const handleKeypress = (event: KeyboardEvent) => {
   box-sizing: border-box;
   width: 100%;
   resize: none;
+}
+
+.wt-hidden-scrollbar textarea::-webkit-scrollbar {
+  display: none;
 }
 </style>
