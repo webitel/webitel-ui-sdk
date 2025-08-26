@@ -1,6 +1,6 @@
 <template>
   <div class="dynamic-filter-config-view">
-    <wt-popover>
+    <wt-popover :disabled="props.disabled">
       <template #activator="{ toggle }">
         <slot
           name="activator"
