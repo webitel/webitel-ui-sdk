@@ -58,7 +58,7 @@ const model = defineModel<boolean | string[]>('selected', {required: true});
 
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
-const isSingle = computed(() => typeof model.value === 'boolean');
+const isSingle = computed(() => !Array.isArray(model.value));
 
 const isChecked = computed(() => {
   if (isSingle.value) {
