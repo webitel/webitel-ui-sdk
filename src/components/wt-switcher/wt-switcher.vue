@@ -33,7 +33,6 @@
 import { ToggleSwitchProps } from 'primevue/toggleswitch';
 import { defineModel, defineProps, withDefaults } from 'vue';
 
-
 interface LabelProps {
   [key: string]: any;
 }
@@ -49,6 +48,7 @@ withDefaults(defineProps<Props>(), {
   label: '',
   labelLeft: false,
   disabled: false,
+  labelProps: () => ({}),
 });
 
 const model = defineModel<boolean>();
