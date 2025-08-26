@@ -118,10 +118,9 @@ export default class UserinfoStoreModule extends BaseStoreModule {
 
       await context.dispatch('SET_SESSION', session);
       const access = await userinfo.getUiVisibilityAccess();
-      const fullAccess = await ApplicationsAccess.restore(access);
       await context.dispatch(
         'SET_APPLICATIONS_ACCESS',
-        fullAccess,
+        new ApplicationsAccess({ access }).getAccess(),
       );
       await context.dispatch('AFTER_OPEN_SESSION_HOOK');
     },
