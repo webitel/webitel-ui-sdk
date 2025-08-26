@@ -7,6 +7,7 @@ import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
+import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import QueueType from './QueueType/QueueType.enum.js';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
@@ -32,6 +33,7 @@ export {
   CrudAction,
   IconAction,
   IconColor,
+  ProcessingTableColumnType,
   QueueType,
   RelativeDatetimeValue,
   SupervisorSections,
