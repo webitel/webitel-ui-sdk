@@ -13,6 +13,7 @@ const avatar = {
   colorScheme: AvatarScheme.colorScheme,
 
   css: ({ dt }) => `
+        ${generateCustomColorCss({ size: '2xs', dt })}
         ${generateCustomColorCss({ size: 'xs', dt })}
         ${generateCustomColorCss({ size: 'sm', dt })}
         ${generateCustomColorCss({ size: 'md', dt })}
