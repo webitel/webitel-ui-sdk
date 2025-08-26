@@ -2,7 +2,7 @@
   <dynamic-filter-config-view :disabled="readonly">
     <template #activator="{ toggle }">
       <div @click="toggle">
-        <wt-popover>
+        <wt-popover :disabled="readonly">
           <template #activator="{ show: showCheapPopoverCb, hide: hideCheapPopover }">
             <div
               @pointerenter="(event) => showCheapPopover(event, showCheapPopoverCb)"
@@ -73,7 +73,7 @@ import {
   WtLoader,
   WtPopover,
 } from '@webitel/ui-sdk/components';
-import {computed, ref, useTemplateRef, watch} from 'vue';
+import {computed, ref, watch} from 'vue';
 
 import { IFilter } from '../../classes/Filter';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
@@ -89,6 +89,8 @@ const emit = defineEmits<DynamicFilterEmits>();
 const localValue = ref();
 
 const showCheapPopover = (event, showPopoverCb: (event) => void) => {
+  if (props.readonly) return;
+
   if (!localValue.value) {
     fillLocalValue()
   }
