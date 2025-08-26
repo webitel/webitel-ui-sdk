@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { NavigationGuard } from 'vue-router';
 import { ref } from 'vue';
+import { NavigationGuard } from 'vue-router';
 
 import {
   CrudAction,
