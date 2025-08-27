@@ -31,8 +31,8 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
         newValue = defaultValue;
       context.commit('SET_FILTER', { filter, value: newValue });
     },
-    RESET_FILTERS: (context) => {
-      context.commit('RESET_FILTERS');
+    RESET_FILTERS: (context, payload) => {
+      context.commit('RESET_FILTERS', payload);
     },
   };
 
@@ -40,9 +40,11 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
     SET_FILTER: (state, { filter, value }) => {
       state[filter].value = value;
     },
-    RESET_FILTERS: (state) => {
+    RESET_FILTERS: (state, excludeKeys = []) => {
       Object.keys(state).forEach((filter) => {
-        state[filter].value = state[filter].defaultValue;
+        if (!excludeKeys.includes(filter)) {
+          state[filter].value = state[filter].defaultValue;
+        }
       });
     },
   };
