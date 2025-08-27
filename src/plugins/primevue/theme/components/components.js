@@ -17,7 +17,7 @@ const components = {
   tooltip,
   chip,
   checkbox,
-  toggleswitch: switcher
+  toggleswitch: switcher,
   breadcrumb,
   slider,
   divider,
