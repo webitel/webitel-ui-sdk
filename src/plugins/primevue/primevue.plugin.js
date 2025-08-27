@@ -7,9 +7,9 @@ import PrimeVue from 'primevue/config';
 import PDivider from 'primevue/divider';
 import PInputText from 'primevue/inputtext';
 import PPopover from 'primevue/popover';
-import PToggleSwitch from 'primevue/toggleswitch';
 import PRadio from 'primevue/radiobutton';
 import PSlider from 'primevue/slider'
+import PToggleSwitch from 'primevue/toggleswitch';
 import Tooltip from 'primevue/tooltip';
 
 import WebitelTheme from './theme/webitel-theme.js';
