@@ -1,7 +1,7 @@
 # `UseCachedItemInstanceName`
 
 Композібл для кеширування імені екземпляра об'єкта `itemInstance`.
-Використовується здебільшого в компоненті [wt-headline-nav](../../components/wt-headline-nav/Readme.md), де
+Використовується здебільшого в компоненті [wt-breadcrumb](../../components/wt-breadcrumb/Readme.md), де
 відображається ім'я об'єкта і оновлюється тільки після збереження змін.
 Зараз композібл викликається у середині [useCardComponent](../use-card-component/Readme.md)
 
@@ -22,7 +22,7 @@
 
 ```js
 <template>
-  <wt-headline-nav :path="path" />
+  <wt-breadcrumb :path="path" />
 </template>;
 
 import { useCachedItemInstanceName } from '../useCachedItemInstanceName/useCachedItemInstanceName.js';

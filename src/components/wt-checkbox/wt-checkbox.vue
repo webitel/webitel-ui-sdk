@@ -1,13 +1,13 @@
 <template>
-  <div 
+  <div
     class="wt-checkbox"
   >
     <p-checkbox
       v-model="model"
-      :input-id="checkboxId"
-      :disabled="disabled"
-      :value="value"
       :binary="isSingle"
+      :disabled="disabled"
+      :input-id="checkboxId"
+      :value="value"
     >
       <template #icon>
         <span class="wt-checkbox__checkmark">
@@ -18,10 +18,9 @@
         </span>
       </template>
     </p-checkbox>
-    <wt-label 
-      v-if="label"
-      :for="checkboxId"
+    <wt-label
       :disabled="disabled"
+      :for="checkboxId"
     >
       <!-- @slot Custom label markup -->
       <slot
@@ -29,6 +28,7 @@
         v-bind="{ label, isChecked, disabled }"
       >
         <div
+          v-if="label"
           class="wt-checkbox__label"
         >
           {{ label }}
@@ -38,7 +38,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { CheckboxProps } from 'primevue/checkbox';
 import { computed, defineModel, defineProps } from 'vue';
 
@@ -58,7 +58,7 @@ const model = defineModel<boolean | string[]>('selected', {required: true});
 
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
-const isSingle = computed(() => typeof model.value === 'boolean');
+const isSingle = computed(() => !Array.isArray(model.value));
 
 const isChecked = computed(() => {
   if (isSingle.value) {
@@ -68,7 +68,7 @@ const isChecked = computed(() => {
 });
 
 const checkboxIcon = computed(() => {
-  return isChecked.value ? 'tick' : '';
+  return isChecked.value ? 'checkbox-tick' : '';
 })
 
 const iconColor = computed(() => {
@@ -84,8 +84,8 @@ const iconColor = computed(() => {
 
 <style lang="scss" scoped>
 .wt-checkbox {
-  display: flex;
   position: relative;
+  display: flex;
   align-items: center;
   user-select: none;
 }
@@ -95,8 +95,8 @@ const iconColor = computed(() => {
 }
 
 .wt-checkbox__label {
-  transition: var(--transition);
-  cursor: pointer;
   margin-left: var(--checkbox-icon-margin);
+  cursor: pointer;
+  transition: var(--transition);
 }
 </style>

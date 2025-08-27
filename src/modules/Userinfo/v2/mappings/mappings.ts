@@ -67,6 +67,7 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
   [ScopeClass.CaseComments]: [WtObject.CaseComment],
   [ScopeClass.AuditForm]: [WtObject.AuditForm],
   [ScopeClass.AuditRating]: [WtObject.AuditRating],
+  [ScopeClass.Custom]: [WtObject.CustomLookup],
 };
 
 export const mapScopeClassAccessTokenToCrudAction = {

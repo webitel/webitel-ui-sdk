@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -130,6 +131,7 @@ export default {
     contact: 'Байланыс | Байланыстар',
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
+    screencast: 'Экран жазбасы',
   },
   // date-related texts
   date: {
@@ -175,6 +177,12 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Тіркеме | Тіркемелер',
     owner: 'Ие | Иелер',
+    customization: {
+      customization: 'Жекелендіру | Жекелендірулер',
+    },
+    customLookup: {
+      customLookup: 'Жекелендіру | Жекелендірулер',
+    },
     queue: {
       queue: 'Кезек | Кезектер',
       type: {
@@ -269,6 +277,23 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': Жекелендірулер', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Оператор жұмыс орны' },
     [WebitelApplications.AUDIT]: {
       name: 'Аудит',
@@ -388,7 +413,8 @@ export default {
     regExpValidator: 'Бұл тұрақты өрнек жарамсыз',
     domainValidator: 'Қате домен',
     decimalValidator: 'Ондық дәлдік { count } таңбадан артық болмауы керек',
-    latinWithNumber: 'Код тек әріптерден (A-Z, a-z) және сандардан (0-9) тұруы керек және әріптен басталуы керек',
+    latinWithNumber:
+      'Код тек әріптерден (A-Z, a-z) және сандардан (0-9) тұруы керек және әріптен басталуы керек',
     integer: 'Өріс тек бүтін сандарды қамтуы керек',
     nameAlreadyInUse: 'Бұл атау қолданыста',
   },
@@ -520,7 +546,8 @@ export default {
     empty: {
       text: {
         empty: 'Әзірге жазбалар жоқ',
-        filters: 'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
+        filters:
+          'Өкінішке орай, сіздің критерийлеріңізге сәйкес жазбалар табылмады',
       },
     },
     agentStatusSelect: {

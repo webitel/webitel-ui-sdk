@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -129,6 +130,7 @@ export default {
     emptyResultSearch: 'Пошук не дав результатів',
     contact: 'Контакт | Контакти',
     notification: 'Сповіщення',
+    screencast: 'Запис екрану',
   },
   // date-related texts
   date: {
@@ -174,6 +176,12 @@ export default {
     transcription: 'Транскрипція',
     attachment: 'Вкладення | Вкладення',
     owner: 'Власник | Власники',
+    customization: {
+      customization: 'Персоналізація | Персоналізації',
+    },
+    customLookup: {
+      customLookup: 'Користувацький довідник | Користувацькі довідники',
+    },
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -268,6 +276,24 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Користувацькі довідники', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',

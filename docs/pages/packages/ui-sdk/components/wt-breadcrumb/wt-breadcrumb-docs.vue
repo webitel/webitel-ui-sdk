@@ -8,7 +8,7 @@
 import Prism from 'prismjs';
 
 export default {
-  name: 'WtHeadlineNavDocs',
+  name: 'WtBreadcrumbDocs',
   data: () => ({
     properties: [
       {

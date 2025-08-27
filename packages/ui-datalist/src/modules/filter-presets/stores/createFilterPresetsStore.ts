@@ -15,13 +15,16 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
   const presetId = ref(null);
 
   const setupPresetPersistence = async () => {
-    const { restore: restorePreset } = usePersistedStorage({
+    const { restore: restorePreset, reset } = usePersistedStorage({
       name: 'preset',
       value: presetId,
       storages: [PersistedStorageType.LocalStorage],
       storagePath: presetsNamespace,
       onStore: (save, { name }) => {
         const value = presetId.value;
+        if (!value) {
+          return reset();
+        }
         return save({ name, value });
       },
       onRestore: async (restore, name) => {
@@ -38,11 +41,16 @@ export const filterPresetsStoreBody = (namespace = 'presets') => {
     disablePersistence: true,
   });
 
+  const resetPreset = () => {
+    presetId.value = null;
+  };
+
   return {
     ...tableStore,
 
     presetId,
     setupPresetPersistence,
+    resetPreset,
   };
 };
 

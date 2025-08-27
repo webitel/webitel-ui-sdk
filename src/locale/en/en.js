@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -130,6 +131,7 @@ export default {
     contact: 'Contact | Contacts',
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
+    screencast: 'Screencast',
   },
   // date-related texts
   date: {
@@ -162,6 +164,9 @@ export default {
     list: 'List | Lists',
     contact: 'Contact | Contacts',
     case: 'Case | Cases',
+    customLookup: {
+      customLookup: 'Custom lookup | Custom lookups',
+    },
     calendar: 'Calendar | Calendars',
     direction: 'Direction',
     gateway: 'Gateway | Gateways',
@@ -175,6 +180,9 @@ export default {
     transcription: 'Transcription',
     attachment: 'Attachment | Attachments',
     owner: 'Owner | Owners',
+    customization: {
+      customization: 'Customization | Customizations',
+    },
     queue: {
       queue: 'Queue | Queues',
       type: {
@@ -269,6 +277,23 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': Custom lookups', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',

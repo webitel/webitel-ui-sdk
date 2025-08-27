@@ -44,6 +44,7 @@ export const ScopeClass = {
   CaseComments: 'case_comments',
   AuditForm: 'cc_audit_form',
   AuditRating: 'rating',
+  Custom: 'custom',
 } as const;
 
 export type ScopeClass = (typeof ScopeClass)[keyof typeof ScopeClass];

@@ -20,6 +20,7 @@ import back from './back.svg';
 import bell from './bell.svg';
 import bellBadged from './bell-badged.svg';
 import bot from './bot.svg';
+import breadCrumbs from './bread-crumbs.svg';
 import bucket from './bucket.svg';
 import calendar from './calendar.svg';
 import call from './call.svg';
@@ -60,6 +61,7 @@ import chatTransferFilled from './chat-transfer--filled.svg';
 import checkbox from './checkbox.svg';
 import checkboxChecked from './checkbox--checked.svg';
 import checkboxCheckedFilled from './checkbox--checked--filled.svg';
+import checkboxTick from './checkbox-tick.svg';
 import clear from './clear.svg';
 import close from './close.svg';
 import closeFilled from './close--filled.svg';
@@ -82,6 +84,7 @@ import emailOutbound from './email-outbound.svg';
 import expand from './expand.svg';
 import eyeClosed from './eye--closed.svg';
 import eyeOpened from './eye--opened.svg';
+import falseIc from './false-ic.svg';
 import filter from './filter.svg';
 import flows from './flows.svg';
 import generate from './generate.svg';
@@ -99,6 +102,7 @@ import json from './json.svg';
 import link from './link.svg';
 import loadPreset from './load-preset.svg';
 import lock from './lock.svg';
+import log from './log.svg';
 import logout from './logout.svg';
 import mail from './mail.svg';
 import mailColor from './mail--color.svg';
@@ -190,6 +194,7 @@ import treeCorner from './tree-corner.svg';
 import treeCross from './tree-cross.svg';
 import treeExpand from './tree-expand.svg';
 import treeLine from './tree-line.svg';
+import trueIc from './true-ic.svg';
 import ttsDownload from './tts-download.svg';
 import undo from './undo.svg';
 import union from './union.svg';
@@ -227,6 +232,7 @@ export default objCamelToKebab({
   bell,
   bellBadged,
   bucket,
+  breadCrumbs,
   bot,
   calendar,
   darkMode,
@@ -297,6 +303,7 @@ export default objCamelToKebab({
   'eye--opened': eyeOpened,
   filter,
   flows,
+  falseIc,
   generate,
   google,
   group,
@@ -373,6 +380,7 @@ export default objCamelToKebab({
   treeLine,
   treeCorner,
   treeCross,
+  trueIc,
   stt,
   sttDownload,
   sttSearch,
@@ -418,4 +426,6 @@ export default objCamelToKebab({
   plyrVolume,
   loadPreset,
   quickReplies,
+  checkboxTick,
+  log,
 });
