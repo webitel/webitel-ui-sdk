@@ -6,10 +6,9 @@ const value = ref(false);
 
 <template>
   <wt-switcher
-    :value="value"
+    v-model="value"
     label="Label Left Switcher"
     label-left
-    @change="value = $event"
   />
 </template>
 

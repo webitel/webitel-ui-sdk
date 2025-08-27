@@ -7,6 +7,7 @@ import PrimeVue from 'primevue/config';
 import PDivider from 'primevue/divider';
 import PInputText from 'primevue/inputtext';
 import PPopover from 'primevue/popover';
+import PToggleSwitch from 'primevue/toggleswitch';
 import PRadio from 'primevue/radiobutton';
 import PSlider from 'primevue/slider'
 import Tooltip from 'primevue/tooltip';
@@ -36,6 +37,7 @@ const initPrimevue = (app) => {
   app.component('PCheckbox', changeComponentCompatMode(PCheckbox));
   app.component('PRadio', changeComponentCompatMode(PRadio));
   app.component('PChip', changeComponentCompatMode(PChip));
+  app.component('PToggleSwitch', changeComponentCompatMode(PToggleSwitch));
   app.component('PBreadcrumb', changeComponentCompatMode(PBreadcrumb));
   app.component('PSlider', changeComponentCompatMode(PSlider));
   app.component('PDivider', changeComponentCompatMode(PDivider));

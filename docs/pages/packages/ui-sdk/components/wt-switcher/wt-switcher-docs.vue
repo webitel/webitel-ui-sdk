@@ -15,7 +15,7 @@ export default {
     properties: [
       {
         value: 'value',
-        code: '<wt-switcher :value="value"></wt-switcher>',
+        code: '<wt-switcher v-model="value"></wt-switcher>',
         type: 'Boolean',
         default: 'false',
       },
