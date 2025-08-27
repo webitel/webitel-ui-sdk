@@ -1,127 +1,132 @@
 <template>
-  <div
+  <p-table 
+    ref="table"
     class="wt-table"
+    :value="data"
+    :show-headers="!headless"
+    :table-style="`min-width: ${totalTableWidth}px;`"
+    :row-class="rowClass"
+    :row-style="rowStyle"
+    lazy
+    scrollable
+    @sort="sort"
+    @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
-    <p-table 
-      ref="table"
-      :value="data"
-      :show-headers="!headless"
-      :table-style="`min-width: ${totalTableWidth}px;`"
-      :row-class="rowClass"
-      :row-style="rowStyle"
-      lazy
-      scrollable
-      removable-sort
-      @sort="sort"
-      @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
+    <p-column
+      v-if="rowReorder"
+      style="width: 39px;"
+      row-reorder
     >
-      <p-column
-        v-if="rowReorder"
-        style="width: 39px;"
-        row-reorder
-      >
-        <template #rowreordericon>
-          <wt-icon icon="move" data-pc-section="reorderablerowhandle" />
-        </template>
-      </p-column>
-      <p-column
-        v-if="selectable"
-        style="width: 39px;"
-      >
-        <template #header>
-          <wt-checkbox
-            :selected="isAllSelected"
-            @update:selected="selectAll"
-          />
-        </template>
+      <template #rowreordericon>
+        <wt-icon icon="move" data-pc-section="reorderablerowhandle" />
+      </template>
+    </p-column>
+    <p-column
+      v-if="selectable"
+      style="width: 39px;"
+    >
+      <template #header>
+        <wt-checkbox
+          :selected="isAllSelected"
+          @update:selected="selectAll"
+        />
+      </template>
 
-        <template #body="{ data: row }">
-          <wt-checkbox
-            v-if="row"
-            :selected="_selected.includes(row)"
-            @update:selected="handleSelection(row, $event)"
-          />
-        </template>
-      </p-column>
-      <p-column 
-        v-for="(col, idx) of dataHeaders"
-        :key="idx"
-        :field="col.value"
-        :header="col.text"
-        :sortable="isColSortable(col)"
-        :style="columnStyle(col)"
-        :hidden="isColumnHidden(col)"
+      <template #body="{ data: row }">
+        <!-- check if row exists to prevent rendering errors -->
+        <wt-checkbox
+          v-if="row"
+          :selected="_selected.includes(row)"
+          @update:selected="handleSelection(row, $event)"
+        />
+      </template>
+    </p-column>
+    <p-column 
+      v-for="(col, idx) of dataHeaders"
+      :key="idx"
+      :field="col.value"
+      :header="col.text"
+      :sortable="isColSortable(col)"
+      :style="columnStyle(col)"
+      :hidden="isColumnHidden(col)"
+    >
+      <template #body="{ data: row, index }">
+        <!--
+        @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
+        @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
+        -->
+        <!-- check if row exists to prevent rendering errors -->
+        <slot
+          v-if="row"
+          :index="index"
+          :item="row"
+          :name="col.value"
+        >{{ row[col.value] }}</slot>
+      </template>
+      <template #sorticon>
+        <wt-icon
+          v-if="col.sort === 'asc'"
+          class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+          icon="sort-arrow-up"
+          size="sm"
+        />
+        <wt-icon
+          v-else-if="col.sort === 'desc'"
+          class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+          icon="sort-arrow-down"
+          size="sm"
+        />
+      </template>
+      <template
+        v-if="isTableColumnFooters" 
+        #footer
       >
-        <template #body="{ data: row, index }">
-          <!--
-          @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
-          @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-          -->
-          <slot
-            v-if="row"
-            :index="index"
-            :item="row"
-            :name="col.value"
-          >{{ row[col.value] }}</slot>
-        </template>
-        <template #sorticon>
-          <wt-icon
-            v-if="col.sort === 'asc'"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-            icon="sort-arrow-up"
-            size="sm"
+        <!--
+        @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
+        @scope [ { "name": "header", "description": "header object" } ]
+        -->
+        <slot :name="`${col.value}-footer`" />
+      </template>
+    </p-column>
+    <p-column
+      v-if="gridActions"
+      style="width: 112px;"
+      :frozen="fixedActions"
+      align-frozen="right"
+    >
+      <template #header>
+        <!--    @slot Table head actions row slot -->
+        <slot name="actions-header" />
+      </template>
+      <template #body="{data: actionsData, index}">
+        <!--
+        @slot Table body actions row slot
+        @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
+        -->
+        <div class="wt-table__td__actions">
+          <!-- <wt-icon-btn
+            v-if="rowReorder"
+            v-tooltip="$t('iconHints.draggable')"
+            class="sortable-btn"
+            icon="move"
+          /> -->
+          <!-- check if row exists to prevent rendering errors -->
+          <slot 
+            v-if="actionsData"
+            name="actions"
+            :index="index" 
+            :item="actionsData"
           />
-          <wt-icon
-            v-else-if="col.sort === 'desc'"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-            icon="sort-arrow-down"
-            size="sm"
-          />
-        </template>
-        <template
-          v-if="isTableFooter" 
-          #footer
-        >
-          <!--
-          @slot Add your custom aggregations for column in table footer. Table footer is rendered conditionally depending on templates with "-footer" name
-          @scope [ { "name": "header", "description": "header object" } ]
-          -->
-          <slot :name="`${col.value}-footer`" />
-        </template>
-      </p-column>
-      <p-column
-        v-if="gridActions"
-        style="width: 112px;"
-        :frozen="fixedActions"
-        align-frozen="right"
-      >
-        <template #header>
-          <!--    @slot Table head actions row slot -->
-          <slot name="actions-header" />
-        </template>
-        <template #body="{data: actionsData, index}">
-          <!--
-          @slot Table body actions row slot
-          @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
-          -->
-          <div class="wt-table__td__actions">
-            <!-- <wt-icon-btn
-              v-if="rowReorder"
-              v-tooltip="$t('iconHints.draggable')"
-              class="sortable-btn"
-              icon="move"
-            /> -->
-            <slot 
-              v-if="actionsData"
-              name="actions"
-              :index="index" 
-              :item="actionsData"
-            />
-          </div>
-        </template>
-      </p-column>
-    </p-table>
-  </div>
+        </div>
+      </template>
+    </p-column>
+    <template
+      v-if="isTableFooter"
+      #footer
+    >
+      <slot name="footer" />
+    </template>
+  </p-table>
 </template>
 
 <script setup lang="ts">
@@ -257,8 +262,12 @@ const totalTableWidth = computed(() => {
   return totalWidth
 });
 
-const isTableFooter = computed(() => {
+const isTableColumnFooters = computed(() => {
   return Object.keys(slots).some(slotName => slotName.includes('-footer'));
+});
+
+const isTableFooter = computed(() => {
+  return Object.keys(slots).some(slotName => slotName === 'footer');
 });
 
 const isAllSelected = computed(() => {
