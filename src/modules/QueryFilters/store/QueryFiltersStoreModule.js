@@ -40,7 +40,7 @@ export default class QueryFiltersStoreModule extends BaseStoreModule {
     SET_FILTER: (state, { filter, value }) => {
       state[filter].value = value;
     },
-    RESET_FILTERS: (state, excludeKeys = []) => {
+    RESET_FILTERS: (state, { excludeKeys }) => {
       Object.keys(state).forEach((filter) => {
         if (!excludeKeys.includes(filter)) {
           state[filter].value = state[filter].defaultValue;
