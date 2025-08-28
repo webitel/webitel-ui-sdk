@@ -67,6 +67,17 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     setupPersistence: setupFiltersPersistence,
   } = filtersStore;
 
+  /**
+   * @internal
+   * @description
+   * This flag is used to check if the store is set up.
+   * It is used to prevent multiple setup calls.
+   * 
+   * @link
+   * https://webitel.atlassian.net/browse/WTEL-7495
+   */
+  const isStoreSetUp = ref(false);
+
   const dataList: Ref<Entity[]> = ref([]);
   const selected: Ref<Entity[]> = ref([]);
   const error = ref(null);
@@ -165,13 +176,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     }
   };
 
-  const initialize = async ({
-    parentId: storeParentId,
-  }: { parentId?: string | number } = {}) => {
-    if (storeParentId) {
-      parentId.value = storeParentId;
-    }
-
+  const setupStore = async () => {
     if (!disablePersistence) {
       await Promise.allSettled([
         setupPaginationPersistence(),
@@ -200,10 +205,26 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       }
     });
 
+    isStoreSetUp.value = true;
+  };
+
+  const initialize = async ({
+    parentId: storeParentId,
+  }: { parentId?: string | number } = {}) => {
+    if (storeParentId) {
+      parentId.value = storeParentId;
+    }
+
+    if (!isStoreSetUp.value) {
+      await setupStore();
+    }
+
     return loadDataList();
   };
 
   return {
+    isStoreSetUp, // internal export for pinia devtools
+
     dataList,
     selected,
     error,
