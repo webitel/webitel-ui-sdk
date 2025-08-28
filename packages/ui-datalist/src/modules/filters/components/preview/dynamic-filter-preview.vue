@@ -2,7 +2,7 @@
   <dynamic-filter-config-view :disabled="readonly">
     <template #activator="{ toggle }">
       <div @click="toggle">
-        <wt-popover :disabled="readonly">
+        <wt-popover>
           <template #activator="{ show: showChipPopoverCb, hide: hideChipPopover }">
             <div
               @pointerenter="(event) => showChipPopover(event, showChipPopoverCb)"
@@ -89,8 +89,6 @@ const emit = defineEmits<DynamicFilterEmits>();
 const localValue = ref();
 
 const showChipPopover = (event, showPopoverCb: (event) => void) => {
-  if (props.readonly) return;
-
   if (!localValue.value) {
     fillLocalValue()
   }
