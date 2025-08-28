@@ -177,6 +177,10 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   };
 
   const setupStore = async () => {
+    if (isStoreSetUp.value) {
+      return;
+    }
+
     if (!disablePersistence) {
       await Promise.allSettled([
         setupPaginationPersistence(),
@@ -215,9 +219,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
       parentId.value = storeParentId;
     }
 
-    if (!isStoreSetUp.value) {
-      await setupStore();
-    }
+    await setupStore();
 
     return loadDataList();
   };
@@ -242,7 +244,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     filtersManager,
     isFiltersRestoring,
 
-    initialize,
+    setupStore, // only setup, no data loading
+    initialize, // setup + load data
 
     loadDataList,
     appendToDataList,
