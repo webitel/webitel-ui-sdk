@@ -6,28 +6,28 @@
       {{ displayText(firstItemName) }}
     </slot>
 
-      <wt-popover>
-        <template #activator="{ toggle }">
-          <slot name="activator" :toggle="toggle">
-            <div v-if="displayList.length" @click="toggle">
-              <wt-chip>
-                +{{ displayList.length }}
-              </wt-chip>
-            </div>
-          </slot>
-        </template>
+    <wt-popover>
+      <template #activator="{ toggle }">
+        <slot name="activator" :toggle="toggle">
+          <div v-if="displayList.length" @click="toggle">
+            <wt-chip>
+              +{{ displayList.length }}
+            </wt-chip>
+          </div>
+        </slot>
+      </template>
 
-        <template #default>
-          <slot name="items" :items="displayList">
-            <div
-              v-for="({ name, id }) of displayList"
-              :key="id"
-            >
-              {{ name }}
-            </div>
-          </slot>
-        </template>
-      </wt-popover>
+      <template #default>
+        <slot name="items" :items="displayList">
+          <div
+            v-for="({ name, id }) of displayList"
+            :key="id"
+          >
+            {{ name }}
+          </div>
+        </slot>
+      </template>
+    </wt-popover>
   </div>
 </template>
 
