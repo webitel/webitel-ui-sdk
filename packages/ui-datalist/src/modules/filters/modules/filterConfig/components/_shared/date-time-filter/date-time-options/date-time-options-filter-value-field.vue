@@ -68,6 +68,7 @@ const showDatepickers = computed(() => {
 });
 
 const handleRadioChange = (value: RelativeDatetimeValue) => {
+  selectedRadioValue.value = value;
   if (value === RelativeDatetimeValue.Custom) {
     model.value = {
       from: startOfToday().getTime(),
