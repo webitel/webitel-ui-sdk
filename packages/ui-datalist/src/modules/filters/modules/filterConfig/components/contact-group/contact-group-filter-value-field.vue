@@ -87,6 +87,7 @@ const initModel = () => {
 
 onMounted(() => {
   if(!props?.disableValidation) v$.value.$touch();
+
   initModel();
 });
 
