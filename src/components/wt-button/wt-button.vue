@@ -1,15 +1,18 @@
 <template>
   <p-button
     :class="{
-        'p-button--width-by-content': widthByContent,
-        'p-button--contains-icon': containsIcon,
+        'p-button--width-by-content': widthByContent || icon,
         'p-button--wide': wide,
         'p-button--loading': showLoader,
+        'p-button--icon': icon,
+        [ `p-button--icon-${getVariant}` ]: icon,
       }"
     :disabled="disabled"
     :loading="showLoader"
     :severity="color"
     :size="primevueSizeMap[size]"
+    :rounded="rounded"
+    :variant="getVariant"
     class="wt-button"
     v-bind="attrs"
     @click.prevent="emit('click', $event)"
@@ -20,7 +23,13 @@
       size="sm"
     />
     <div class="wt-button__contents">
-      <slot> no content provided</slot>
+      <slot v-if="!icon"> no content provided</slot>
+      <wt-icon
+        v-else
+        :icon="icon"
+        :icon-prefix="iconPrefix"
+        :size="size"
+      />
     </div>
   </p-button>
 </template>
@@ -43,7 +52,10 @@ interface WtButtonProps extends  /* @vue-ignore */ ButtonProps {
   size?: ComponentSize;
   wide?: boolean;
   widthByContent?: boolean;
-  containsIcon?: boolean;
+  icon?: string;
+  iconPrefix?: string;
+  rounded?: boolean;
+  iconActive?: boolean;
 }
 
 const props = withDefaults(defineProps<WtButtonProps>(), {
@@ -53,7 +65,10 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
   size: ComponentSize.MD,
   wide: false,
   widthByContent: false,
-  containsIcon: false,
+  icon: '',
+  iconPrefix: '',
+  rounded: false,
+  iconActive: false,
 });
 
 const emit = defineEmits(['click']);
@@ -67,6 +82,10 @@ const loaderColor = computed(() => {
   // if (['success', 'transfer', 'error', 'job'].includes(props.color)) return 'on-dark';
   // return 'on-light';
 });
+
+const getVariant = computed(() => {
+  return (props.icon && !props.iconActive) ? 'outlined' : 'active'
+})
 
 watch(
   () => props.loading,
