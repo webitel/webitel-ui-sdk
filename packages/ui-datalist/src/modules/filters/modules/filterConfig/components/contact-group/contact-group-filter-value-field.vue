@@ -76,8 +76,18 @@ const v$ =  useVuelidate(
     { $autoDirty: true }
 );
 
+const initModel = () => {
+  if (!model.value) {
+    model.value = {
+      list: [],
+      unassigned: null,
+    };
+  }
+};
+
 onMounted(() => {
   if(!props?.disableValidation) v$.value.$touch();
+  initModel();
 });
 
 watch(

@@ -179,10 +179,12 @@ https://webitel.atlassian.net/browse/WTEL-7014
 Clear filters button should be active only if filters are defined in the table-filter-panel. Excluding the search filter
 **/
 
-const listSelectedFilters = computed(()=>
-  new Map([...props.filtersManager.filters].filter(([key]) => props.filterOptions.includes(key))));
+const listSelectedFilters = computed(()=> {
+  const filterOptionsKeys = props.filterOptions.map(filter => typeof filter === 'string' ? filter : filter.name);
+  return new Map([...props.filtersManager.filters].filter(([key]) => filterOptionsKeys.includes(key)));
+});
 
-const presetStore = props.usePresetsStore ? props.usePresetsStore() : null
+const presetStore = props.usePresetsStore ? props.usePresetsStore() : null;
 
 const handleResetFilters = () => {
   emit('filter:reset-all')
@@ -207,8 +209,8 @@ const handleResetFilters = () => {
 }
 .table-filters-panel--dynamic-filters {
   display: flex;
-  gap: var(--spacing-sm);
   flex-wrap: wrap;
+  gap: var(--spacing-sm);
 }
 
 .table-filters-panel--static-filters {
