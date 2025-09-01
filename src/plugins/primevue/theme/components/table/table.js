@@ -7,10 +7,6 @@ const table = {
   // Rewrite the default table styles in the theme here:
   // For customize the table styles you need write css styles for classes
   css: () => `
-        .p-datatable-table {
-            table-layout: fixed;
-        }
-
         .p-datatable-table-container {
           overflow: visible !important;
           width: 100%;

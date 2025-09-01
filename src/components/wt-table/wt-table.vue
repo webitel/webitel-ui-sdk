@@ -4,7 +4,6 @@
     class="wt-table"
     :value="data"
     :show-headers="!headless"
-    :table-style="`min-width: ${totalTableWidth}px;`"
     :row-class="rowClass"
     :row-style="rowStyle"
     lazy
@@ -14,7 +13,6 @@
   >
     <p-column
       v-if="rowReorder"
-      style="width: 39px;"
       row-reorder
     >
       <template #rowreordericon>
@@ -23,7 +21,6 @@
     </p-column>
     <p-column
       v-if="selectable"
-      style="width: 39px;"
     >
       <template #header>
         <wt-checkbox
@@ -47,7 +44,6 @@
       :field="col.value"
       :header="col.text"
       :sortable="isColSortable(col)"
-      :style="columnStyle(col)"
       :hidden="isColumnHidden(col)"
     >
       <template #body="{ data: row, index }">
@@ -56,12 +52,16 @@
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
         -->
         <!-- check if row exists to prevent rendering errors -->
-        <slot
-          v-if="row"
-          :index="index"
-          :item="row"
-          :name="col.value"
-        >{{ row[col.value] }}</slot>
+        <div 
+          :style="columnStyle(col)"
+        >
+          <slot
+            v-if="row"
+            :index="index"
+            :item="row"
+            :name="col.value"
+          >{{ row[col.value] }}</slot>
+        </div>
       </template>
       <template #sorticon>
         <wt-icon
@@ -235,32 +235,12 @@ const isColumnHidden = (col) => {
 }
 
 const columnStyle = (col) => {
-  if (col.width) {
-    return {
-      width: col.width,
-    };
-  }
-}
-
-const totalTableWidth = computed(() => {
   const baseWidth = 140
 
-  let totalWidth = dataHeaders.value.reduce((sum, col) => {
-    return sum + (parseInt(col.width) || baseWidth);
-  }, 0);
-
-  if (props.rowReorder) {
-    totalWidth += 39
+  return {
+    width: col.width || `${baseWidth}px`
   }
-  if (props.selectable) {
-    totalWidth += 39
-  }
-  if (props.gridActions) {
-    totalWidth += 112
-  }
-
-  return totalWidth
-});
+}
 
 const isTableColumnFooters = computed(() => {
   return Object.keys(slots).some(slotName => slotName.includes('-footer'));
