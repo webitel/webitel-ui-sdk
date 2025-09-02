@@ -14,6 +14,7 @@
     <p-column
       v-if="rowReorder"
       row-reorder
+      header-style="width: 1%;"
     >
       <template #rowreordericon>
         <wt-icon icon="move" data-pc-section="reorderablerowhandle" />
@@ -21,6 +22,7 @@
     </p-column>
     <p-column
       v-if="selectable"
+      header-style="width: 1%;"
     >
       <template #header>
         <wt-checkbox
@@ -240,7 +242,7 @@ const columnStyle = (col) => {
   const baseWidth = 140
 
   return {
-    width: col.width || `${baseWidth}px`
+    width: col.width || `${baseWidth}px`,
   }
 }
 
