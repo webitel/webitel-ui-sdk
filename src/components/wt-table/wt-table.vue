@@ -51,10 +51,11 @@
         @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
         -->
-        <!-- check if row exists to prevent rendering errors -->
         <div 
           :style="columnStyle(col)"
         >
+          <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading) 
+               this guard prevents rendering errors and keeps the table stable -->
           <slot
             v-if="row"
             :index="index"
@@ -130,13 +131,14 @@
 </template>
 
 <script setup lang="ts">
+import type { DataTableProps } from 'primevue';
 import { computed, defineProps, ref, withDefaults, useTemplateRef, useSlots } from 'vue';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useI18n } from 'vue-i18n';
-import type { WtTableHeader } from './types/WtTable.js';
+import type { WtTableHeader } from './types/WtTable';
 // import { useSortableTable, type SortableTableOptions } from '../../composables/useWtTable/useSortableTable.js';
 
-export interface Props {
+interface Props extends DataTableProps{
   /**
    * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
    */
