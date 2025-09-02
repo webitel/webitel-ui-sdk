@@ -1,5 +1,7 @@
+import deepCopy from 'deep-copy';
 import { RolesApiFactory } from 'webitel-sdk';
 
+import ApplicationsAccess from '../../../modules/Userinfo/classes/ApplicationsAccess.js';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
@@ -22,6 +24,12 @@ const configuration = getDefaultOpenAPIConfig();
 const rolesApiFactory = RolesApiFactory(configuration, '', instance);
 
 const fieldsToSend = ['name', 'description', 'permissions', 'metadata'];
+
+const preRequestHandler = (item) => {
+  const copy = deepCopy(item);
+  copy.metadata.access = ApplicationsAccess.minify(copy.metadata.access);
+  return copy;
+};
 
 const getRoleList = async (params) => {
   const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
@@ -71,11 +79,20 @@ const getRole = async ({ itemId: id }) => {
     metadata: {},
   };
 
+  const itemResponseHandler = (response) => {
+    const copy = deepCopy(response);
+    copy.metadata.access = new ApplicationsAccess({
+      access: copy.metadata.access,
+    }).getAccess();
+    return copy;
+  };
+
   try {
     const response = await rolesApiFactory.readRole(id, fieldsToSend);
     return applyTransform(response.data, [
       // snakeToCamel(), // prevent role "access" custom lookups from being converted to camelCase
       merge(defaultObject),
+      itemResponseHandler,
     ]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -84,6 +101,7 @@ const getRole = async ({ itemId: id }) => {
 
 const addRole = async ({ itemInstance }) => {
   const item = applyTransform(itemInstance, [
+    preRequestHandler,
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);
@@ -99,6 +117,7 @@ const addRole = async ({ itemInstance }) => {
 
 const updateRole = async ({ itemInstance, itemId: id }) => {
   const item = applyTransform(itemInstance, [
+    preRequestHandler,
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);

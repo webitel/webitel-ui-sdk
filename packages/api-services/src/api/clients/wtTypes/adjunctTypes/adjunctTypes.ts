@@ -43,8 +43,6 @@ const getAdjunctTypesList = async (
 			next,
 		};
 	} catch (err) {
-		if (silent) throw err; // dont show error if has no access to custom types
-
 		throw applyTransform(err, [notify]);
 	}
 };

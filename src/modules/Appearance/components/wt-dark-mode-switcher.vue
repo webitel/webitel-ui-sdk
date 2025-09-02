@@ -55,8 +55,8 @@ if (cachedTheme) {
   <div class="wt-dark-mode-switcher">
     <wt-icon icon="dark-mode" />
     <wt-switcher
-      :value="mode === 'dark'"
-      @change="toggleDarkMode"
+      :model-value="mode === 'dark'"
+      @update:model-value="toggleDarkMode"
     />
   </div>
 </template>

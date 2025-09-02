@@ -19,8 +19,8 @@
   >
     <wt-switcher
       v-bind="sharedChildrenProps"
-      :value="value"
-      @change="setValue"
+      :model-value="value"
+      @update:model-value="setValue"
     />
   </slot>
   <slot

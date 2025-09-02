@@ -8,7 +8,8 @@ import divider from './divider/divider.js';
 import menubar from './menubar/menubar.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
-import slider from './slider/slider.js';
+import slider from './slider/slider.js'
+import switcher from './switcher/switcher.js';
 import toolbar from './toolbar/toolbar.js';
 import tooltip from './tooltip/tooltip.js';
 
@@ -19,6 +20,7 @@ const components = {
   button,
   chip,
   checkbox,
+  toggleswitch: switcher,
   divider,
   menubar,
   popover,
