@@ -25,6 +25,7 @@
 - [Add new docs page](how-to/add-docs-page/Readme.md): Додати нову сторінку документації.
 - [Setup Workspace app](how-to/setup-workspace-app-entities/Readme.md): Налаштування Workspace app.
 - [Archive 📜 | Add a REST API module](how-to/add-rest-api-module/Readme.md): Додати REST API модуль (архів).
+- [Rules for sending code to GIT](how-to/rules-sending-code-to-git/Readme.md): Правила відправки коду на GIT.
 
 ## Namings
 - [WtTypes](namings/wt-types/WtTypes): Стандарти іменування типів.
