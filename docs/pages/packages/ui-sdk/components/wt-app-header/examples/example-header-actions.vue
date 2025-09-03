@@ -12,10 +12,12 @@ const buildInfo = {
 
 <template>
   <wt-app-header>
-    <wt-header-actions
-      :user="user"
-      :build-info="buildInfo"
-    />
+    <template #end>
+      <wt-header-actions
+        :user="user"
+        :build-info="buildInfo"
+      />
+    </template>
   </wt-app-header>
 </template>
 
