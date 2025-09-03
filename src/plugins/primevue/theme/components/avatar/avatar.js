@@ -1,6 +1,6 @@
 import { AvatarScheme } from '@webitel/styleguide/component-schemes';
 
-const generateCustomColorCss = ({ size, dt }) => `
+const generateCustomSizeCss = ({ size, dt }) => `
         .p-avatar-${size} {
             width: ${dt(`avatar-${size}-width`)};
             height: ${dt(`avatar-${size}-width`)};
@@ -13,12 +13,12 @@ const avatar = {
   colorScheme: AvatarScheme.colorScheme,
 
   css: ({ dt }) => `
-        ${generateCustomColorCss({ size: '2xs', dt })}
-        ${generateCustomColorCss({ size: 'xs', dt })}
-        ${generateCustomColorCss({ size: 'sm', dt })}
-        ${generateCustomColorCss({ size: 'md', dt })}
-        ${generateCustomColorCss({ size: '2xl', dt })}
-        ${generateCustomColorCss({ size: '3xl', dt })}
+        ${generateCustomSizeCss({ size: '2xs', dt })}
+        ${generateCustomSizeCss({ size: 'xs', dt })}
+        ${generateCustomSizeCss({ size: 'sm', dt })}
+        ${generateCustomSizeCss({ size: 'md', dt })}
+        ${generateCustomSizeCss({ size: '2xl', dt })}
+        ${generateCustomSizeCss({ size: '3xl', dt })}
         
         .p-avatar {
           display: block;
