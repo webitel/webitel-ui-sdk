@@ -107,12 +107,6 @@
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
         -->
         <div class="wt-table__td__actions">
-          <!-- <wt-icon-btn
-            v-if="rowReorder"
-            v-tooltip="$t('iconHints.draggable')"
-            class="sortable-btn"
-            icon="move"
-          /> -->
           <!-- check if row exists to prevent rendering errors -->
           <slot 
             v-if="actionsData"
@@ -138,7 +132,6 @@ import { computed, defineProps, ref, withDefaults, useTemplateRef, useSlots } fr
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import { useI18n } from 'vue-i18n';
 import type { WtTableHeader } from './types/WtTable';
-// import { useSortableTable, type SortableTableOptions } from '../../composables/useWtTable/useSortableTable.js';
 
 interface Props extends DataTableProps{
   /**
@@ -198,21 +191,6 @@ const slots = useSlots();
 const emit = defineEmits(['sort', 'update:selected', 'reorder:row']);
 
 const table = useTemplateRef('table');
-
-// const sortableOptions: SortableTableOptions = {
-//   table,
-//   enabled: props.rowReorder,
-//   sortableConfig: {
-//     animation: 200,
-//     ghostClass: 'custom-ghost'
-//   },
-//   onReorder: ({ oldIndex, newIndex }) => {
-//     emit('reorder', { oldIndex, newIndex })
-//     initializeSortable()
-//   }
-// }
-
-// const { initializeSortable } = useSortableTable(sortableOptions)
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
