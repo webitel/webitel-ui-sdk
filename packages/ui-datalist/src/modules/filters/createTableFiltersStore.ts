@@ -60,7 +60,9 @@ export const tableFiltersStoreBody = (config?: {
       },
     });
 
-    return restoreFilters();
+
+
+    return Promise.allSettled([restoreFilters()]);
   };
 
   return {

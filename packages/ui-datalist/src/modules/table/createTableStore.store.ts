@@ -12,6 +12,7 @@ import {
   PatchItemPropertyParams,
   useTableStoreConfig,
 } from '../types/tableStore.types';
+import { createSearchFiltersStore } from '../filters/createSearchFiltersStore';
 
 export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   namespace: string,
@@ -29,7 +30,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     headers: rowHeaders,
   });
   const useFiltersStore = createTableFiltersStore(namespace, config);
-
+  const useSearchFiltersStore = createSearchFiltersStore(namespace, config);
   const parentId = ref();
 
   const paginationStore = usePaginationStore();
@@ -56,6 +57,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = headersStore;
 
   const filtersStore = useFiltersStore();
+  const searchFiltersStore = useSearchFiltersStore();
   const { filtersManager, isRestoring: isFiltersRestoring } = makeThisToRefs<
     typeof filtersStore
   >(filtersStore, storeType);
@@ -67,12 +69,14 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     setupPersistence: setupFiltersPersistence,
   } = filtersStore;
 
+  const {setupPersistence: setupSearchPersistence, search, updateSearch } = searchFiltersStore;
+
   /**
    * @internal
    * @description
    * This flag is used to check if the store is set up.
    * It is used to prevent multiple setup calls.
-   * 
+   *
    * @link
    * https://webitel.atlassian.net/browse/WTEL-7495
    */
@@ -186,6 +190,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
         setupPaginationPersistence(),
         setupFiltersPersistence(),
         setupHeadersPersistence(),
+        setupSearchPersistence(),
       ]);
     }
 
@@ -235,6 +240,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     page,
     size,
     next,
+    search,
 
     headers,
     shownHeaders,
@@ -246,6 +252,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
 
     setupStore, // only setup, no data loading
     initialize, // setup + load data
+    updateSearch,
 
     loadDataList,
     appendToDataList,

@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { WtSearchBar } from '@webitel/ui-sdk/components';
-import { computed, type Ref, ref, watch } from 'vue';
+import { computed, onMounted, type Ref, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { FilterInitParams, FilterName } from '../../classes/Filter';
@@ -36,6 +36,7 @@ const emit = defineEmits<{
   'filter:add': [FilterInitParams];
   'filter:update': [FilterInitParams];
   'filter:delete': [{ name: FilterName }];
+  change: string;
 }>();
 
 const { t } = useI18n();
@@ -109,9 +110,22 @@ const updateSearchMode = (
       name: currentSearchName.value,
     });
   }
+  console.log('nextSearchMode', nextSearchMode);
   searchMode.value = nextSearchMode.value;
   localSearchValue.value = '';
+  emit('change', nextSearchMode.value);
 };
+
+const updateLocalSearchValue = (option) => {
+  if (hasFilter(option)) {
+    searchMode.value = option;
+    localSearchValue.value = props.filtersManager.filters.get(option).value;
+  }
+}
+
+const initCurrentValue = () => {
+  props.searchModeOptions.forEach(mode => updateLocalSearchValue(mode.value));
+}
 
 /**
  * @description
@@ -128,15 +142,13 @@ watch(
     }
 
     for (const mode of searchModes) {
-      if (hasFilter(mode)) {
-        searchMode.value = mode;
-        localSearchValue.value = props.filtersManager.filters.get(mode).value;
-
-        break;
-      }
+      updateLocalSearchValue(mode);
+      break;
     }
   },
 );
+
+onMounted(() => initCurrentValue());
 </script>
 
 <style scoped></style>
