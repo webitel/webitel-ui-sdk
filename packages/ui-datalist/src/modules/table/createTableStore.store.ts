@@ -8,6 +8,7 @@ import {
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
+import { createSearchModeStore } from '../search-mode/createSearchModeStore';
 import {
   PatchItemPropertyParams,
   useTableStoreConfig,
@@ -29,6 +30,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     headers: rowHeaders,
   });
   const useFiltersStore = createTableFiltersStore(namespace, config);
+  const useSearchModeStore = createSearchModeStore(namespace, config);
 
   const parentId = ref();
 
@@ -67,12 +69,16 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     setupPersistence: setupFiltersPersistence,
   } = filtersStore;
 
+  const searchModeStore = useSearchModeStore();
+  const { searchMode } = makeThisToRefs<typeof searchModeStore>(searchModeStore, storeType);
+
+  const { setupPersistence: setupSearchModePersistence, updateSearchMode } = searchModeStore;
   /**
    * @internal
    * @description
    * This flag is used to check if the store is set up.
    * It is used to prevent multiple setup calls.
-   * 
+   *
    * @link
    * https://webitel.atlassian.net/browse/WTEL-7495
    */
@@ -186,6 +192,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
         setupPaginationPersistence(),
         setupFiltersPersistence(),
         setupHeadersPersistence(),
+        setupSearchModePersistence(),
       ]);
     }
 
@@ -240,6 +247,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     shownHeaders,
     fields,
     sort,
+    searchMode,
 
     filtersManager,
     isFiltersRestoring,
@@ -253,6 +261,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updateSelected,
     patchItemProperty,
     deleteEls,
+
+    updateSearchMode,
 
     updatePage,
     updateSize,

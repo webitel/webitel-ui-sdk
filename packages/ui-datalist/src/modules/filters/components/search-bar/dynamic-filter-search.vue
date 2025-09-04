@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { WtSearchBar } from '@webitel/ui-sdk/components';
-import { computed, type Ref, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { FilterInitParams, FilterName } from '../../classes/Filter';
@@ -28,6 +28,7 @@ const props = defineProps<{
    * default search name is used when there are no search modes
    */
   singleSearchName?: string;
+  searchMode?: string;
 }>();
 
 const defaultSearchName = props.singleSearchName || 'search';
@@ -36,14 +37,14 @@ const emit = defineEmits<{
   'filter:add': [FilterInitParams];
   'filter:update': [FilterInitParams];
   'filter:delete': [{ name: FilterName }];
+  'update:search-mode': string;
 }>();
 
 const { t } = useI18n();
 
-const searchMode: Ref<FilterName> = ref();
 const localSearchValue = ref('');
 
-const hasFilter = (filterName = searchMode.value) => {
+const hasFilter = (filterName = props.searchMode) => {
   return props.filtersManager.filters.has(filterName);
 };
 const addFilter = (filterInitParams: FilterInitParams) => {
@@ -56,17 +57,22 @@ const deleteFilter = ({ name }: { name: FilterName }) => {
   return emit('filter:delete', { name });
 };
 
+const updateSearchModeValue = (mode: string) => {
+  return emit('update:search-mode', mode);
+}
+
+const updateLocalSearchValue = (value: string) => {
+  return localSearchValue.value = props.filtersManager.filters.get(value)?.value;
+}
+
 const hasSearchModes = computed(() => {
   return props.searchModeOptions && props.searchModeOptions.length > 0;
 });
 
-if (hasSearchModes.value) {
-  searchMode.value = props.searchModeOptions[0].value;
-}
 
 const currentSearchName = computed(() => {
   if (hasSearchModes.value) {
-    return searchMode.value;
+    return props.searchMode;
   }
 
   return defaultSearchName;
@@ -109,9 +115,16 @@ const updateSearchMode = (
       name: currentSearchName.value,
     });
   }
-  searchMode.value = nextSearchMode.value;
   localSearchValue.value = '';
+  updateSearchModeValue(nextSearchMode.value);
 };
+
+const initialize = () => {
+  if (hasSearchModes.value && !props.searchMode) {
+    updateSearchModeValue(props.searchModeOptions[0].value);
+    updateLocalSearchValue(props.searchMode);
+  }
+}
 
 /**
  * @description
@@ -124,19 +137,21 @@ watch(
 
     let searchModes = [defaultSearchName];
     if (hasSearchModes.value) {
-      searchModes = props.searchModeOptions?.map((option) => option.value);
+      updateSearchModeValue(props.searchModeOptions?.map((option) => option.value));
     }
 
     for (const mode of searchModes) {
       if (hasFilter(mode)) {
-        searchMode.value = mode;
-        localSearchValue.value = props.filtersManager.filters.get(mode).value;
+        updateSearchModeValue(mode);
+        updateLocalSearchValue(mode);
 
         break;
       }
     }
   },
 );
+
+onMounted(() => initialize());
 </script>
 
 <style scoped></style>
