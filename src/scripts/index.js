@@ -29,7 +29,7 @@ import prettifyFileSize from './prettifyFileSize.js';
 import prettifyTime from './prettifyTime.js';
 import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator.js';
 import saveAsJSON from './saveAsJSON.js';
-import { queryToSortAdapter, sortToQueryAdapter } from './sortQueryAdapters.js';
+import { queryToSortAdapter, sortToQueryAdapter, getNextSortOrder } from './sortQueryAdapters.js';
 import updateObject from './updateObject.js';
 
 export {
@@ -62,4 +62,5 @@ export {
   sortToQueryAdapter,
   updateObject,
   wtlog,
+  getNextSortOrder,
 };
