@@ -25,12 +25,8 @@ export default {
   data: () => ({
     headerSlots: [
       {
-        name: 'start',
-        description: 'Custom start template.',
-      },
-      {
-        name: 'end',
-        description: 'Custom end template.',
+        name: 'default',
+        description: 'Default slot',
       },
     ],
     appNavigatorProps: [
