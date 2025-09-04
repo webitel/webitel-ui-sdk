@@ -1,27 +1,26 @@
 <template>
-  <div
-    :class="[`wt-avatar--size-${size}`]"
+  <PAvatar
+    :class="[ `p-avatar-${props.size}` ]"
+    :shape="props.shape"
+    :label="avatarLetters"
+    :style="{ background: `var(${avatarLettersBackground})` }"
     class="wt-avatar"
   >
-    <wt-badge
-      v-if="badge"
-      :color-variable="badgeColorVar"
-      :icon-badge="isBadge ? props.status : null"
-    />
-    <div
-      v-if="isLetterAvatar"
-      :style="{ background: `var(${avatarLettersBackground})` }"
-      class="wt-avatar__letters"
-    >
-      {{ avatarLetters }}
-    </div>
-    <img
-      v-else
-      :src="imgSrc"
-      alt="avatar"
-      class="wt-avatar__img"
-    />
-  </div>
+    <template #default>
+      <wt-badge
+        v-if="badge"
+        :color-variable="badgeColorVar"
+        :icon-badge="isBadge ? props.status : null"
+      />
+
+      <img
+        v-if="!isLetterAvatar"
+        :src="imgSrc"
+        alt="avatar"
+        class="wt-avatar__img"
+      />
+    </template>
+  </PAvatar>
 </template>
 
 <script setup>
@@ -52,6 +51,11 @@ const props = defineProps({
     options: AbstractUserStatus,
     default: AbstractUserStatus.OFFLINE,
   },
+  shape: {
+    type: String,
+    default: 'circle',
+    options: ['circle', 'square'],
+  }
 });
 
 const isLetterAvatar = computed(() => !props.src && props.username);
@@ -68,26 +72,29 @@ const avatarLetters = computed(() => {
 });
 
 const avatarLettersBackground = computed(() => {
+  if (!avatarLetters.value) {
+    return ''
+  }
   // en.concat(uk)
   const letterList = [
-    { letters: 'AB'.concat('АБВ'), color: '--wt-avatar-letters-p1-color' },
-    { letters: 'CD'.concat('ГҐД'), color: '--wt-avatar-letters-p2-color' },
-    { letters: 'EF'.concat('ЕЄЖ'), color: '--wt-avatar-letters-p3-color' },
-    { letters: 'GH'.concat('ЗИІ'), color: '--wt-avatar-letters-p4-color' },
-    { letters: 'IJ'.concat('ЇЙК'), color: '--wt-avatar-letters-p5-color' },
-    { letters: 'KL'.concat('ЛМН'), color: '--wt-avatar-letters-p6-color' },
-    { letters: 'MN'.concat('ОПР'), color: '--wt-avatar-letters-p7-color' },
-    { letters: 'OP'.concat('СТУ'), color: '--wt-avatar-letters-p8-color' },
-    { letters: 'QR'.concat('ФХЦ'), color: '--wt-avatar-letters-p9-color' },
-    { letters: 'ST'.concat('ЧШЩ'), color: '--wt-avatar-letters-p10-color' },
-    { letters: 'UV'.concat('ЬЮЯ'), color: '--wt-avatar-letters-p11-color' },
-    { letters: 'WX'.concat(''), color: '--wt-avatar-letters-p12-color' },
-    { letters: 'YZ'.concat(''), color: '--wt-avatar-letters-p13-color' },
+    { letters: 'AB'.concat('АБВ'), color: '--p-avatar-letters-p1-color' },
+    { letters: 'CD'.concat('ГҐД'), color: '--p-avatar-letters-p2-color' },
+    { letters: 'EF'.concat('ЕЄЖ'), color: '--p-avatar-letters-p3-color' },
+    { letters: 'GH'.concat('ЗИІ'), color: '--p-avatar-letters-p4-color' },
+    { letters: 'IJ'.concat('ЇЙК'), color: '--p-avatar-letters-p5-color' },
+    { letters: 'KL'.concat('ЛМН'), color: '--p-avatar-letters-p6-color' },
+    { letters: 'MN'.concat('ОПР'), color: '--p-avatar-letters-p7-color' },
+    { letters: 'OP'.concat('СТУ'), color: '--p-avatar-letters-p8-color' },
+    { letters: 'QR'.concat('ФХЦ'), color: '--p-avatar-letters-p9-color' },
+    { letters: 'ST'.concat('ЧШЩ'), color: '--p-avatar-letters-p10-color' },
+    { letters: 'UV'.concat('ЬЮЯ'), color: '--p-avatar-letters-p11-color' },
+    { letters: 'WX'.concat(''), color: '--p-avatar-letters-p12-color' },
+    { letters: 'YZ'.concat(''), color: '--p-avatar-letters-p13-color' },
   ];
   const searchedLetter = letterList.find(({ letters }) =>
     letters.includes(avatarLetters.value.at(0).toUpperCase()),
   );
-  return searchedLetter?.color || '--wt-avatar-letters-p1-color';
+  return searchedLetter?.color || '--p-avatar-letters-p1-color';
 });
 
 const imgSrc = computed(() => props.src || defaultAvatar);
@@ -126,35 +133,8 @@ const badgeColorVar = computed(() => {
 </style>
 
 <style lang="scss" scoped>
-%wt-avatar-typo-xs {
-  font-size: 10px;
-}
-
-%wt-avatar-typo-sm {
-  font-size: 12px;
-}
-
-%wt-avatar-typo-md {
-  font-size: 14px;
-}
-
-%wt-avatar-typo-lg {
-  font-size: 20px;
-}
-
-%wt-avatar-typo-2xl {
-  font-size: 36px;
-}
-
-%wt-avatar-typo-3xl {
-  font-size: 48px;
-}
-
 .wt-avatar {
   position: relative;
-  border-radius: 50%;
-  width: var(--wt-avatar-size);
-  height: var(--wt-avatar-size);
   user-select: none;
 
   &__letters {
@@ -163,6 +143,7 @@ const badgeColorVar = computed(() => {
     align-items: center;
     border-radius: 50%;
     height: 100%;
+    width: 100%;
     color: var(--wt-avatar-text-color);
   }
 
@@ -170,47 +151,6 @@ const badgeColorVar = computed(() => {
     border-radius: 50%;
     width: 100%;
     height: 100%;
-  }
-
-  &--size-xs {
-    @extend %wt-avatar-typo-xs;
-    width: var(--wt-avatar-size--size-xs);
-    height: var(--wt-avatar-size--size-xs);
-  }
-
-  &--size-sm {
-    @extend %wt-avatar-typo-sm;
-    width: var(--wt-avatar-size--size-sm);
-    height: var(--wt-avatar-size--size-sm);
-  }
-
-  &--size-md {
-    @extend %wt-avatar-typo-md;
-    width: var(--wt-avatar-size--size-md);
-    height: var(--wt-avatar-size--size-md);
-  }
-
-  &--size-lg {
-    @extend %wt-avatar-typo-lg;
-    width: var(--wt-avatar-size--size-lg);
-    height: var(--wt-avatar-size--size-lg);
-  }
-
-  &--size-xl {
-    width: var(--wt-avatar-size--size-xl);
-    height: var(--wt-avatar-size--size-xl);
-  }
-
-  &--size-2xl {
-    @extend %wt-avatar-typo-2xl;
-    width: var(--wt-avatar-size--size-2xl);
-    height: var(--wt-avatar-size--size-2xl);
-  }
-
-  &--size-3xl {
-    @extend %wt-avatar-typo-3xl;
-    width: var(--wt-avatar-size--size-3xl);
-    height: var(--wt-avatar-size--size-3xl);
   }
 }
 </style>

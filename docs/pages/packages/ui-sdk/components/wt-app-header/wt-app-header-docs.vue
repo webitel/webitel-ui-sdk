@@ -17,16 +17,20 @@
 </template>
 
 <script>
-import Prism from 'prismjs';
 import { WebitelApplications } from '@webitel/ui-sdk/enums';
+import Prism from 'prismjs';
 
 export default {
   name: 'WtAppHeaderDocs',
   data: () => ({
     headerSlots: [
       {
-        name: 'default',
-        description: 'Default slot',
+        name: 'start',
+        description: 'Custom start template.',
+      },
+      {
+        name: 'end',
+        description: 'Custom end template.',
       },
     ],
     appNavigatorProps: [

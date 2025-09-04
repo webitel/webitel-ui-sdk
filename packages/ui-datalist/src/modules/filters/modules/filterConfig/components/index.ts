@@ -5,6 +5,8 @@ import {
   FilterOption,
   FilterOptionName,
 } from '../enums/FilterOption';
+import DateTimeOptionsFilterValueField from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-field.vue';
+import DateTimeOptionsFilterValuePreview from './_shared/date-time-filter/date-time-options/date-time-options-filter-value-preview.vue';
 import AgentFilter from './agent/agent-filter-value-field.vue';
 import AgentFilterPreview from './agent/agent-filter-value-preview.vue';
 import { searchMethod as agentSearchMethod } from './agent/config';
@@ -60,11 +62,9 @@ import ContactGroupFilterPreview from './contact-group/contact-group-filter-valu
 import { createContactLabelFilterConfig } from './contact-label';
 import ContactLabelFilter from './contact-label/contact-label-filter-value-field.vue';
 import ContactLabelFilterPreview from './contact-label/contact-label-filter-value-preview.vue';
-import { createContactOwnerFilterConfig } from './contact-owner'
-import ContactOwnerFilter from "./contact-owner/contact-owner-filter-value-field.vue";
-import ContactOwnerFilterPreview from "./contact-owner/contact-owner-filter-value-preview.vue";
-import CreatedAtFilterValueField from './created-at/created-at-filter-value-field.vue';
-import CreatedAtFilterPreview from './created-at/created-at-filter-value-preview.vue';
+import { createContactOwnerFilterConfig } from './contact-owner';
+import ContactOwnerFilter from './contact-owner/contact-owner-filter-value-field.vue';
+import ContactOwnerFilterPreview from './contact-owner/contact-owner-filter-value-preview.vue';
 import { searchMethod as gatewaySearchMethod } from './gateway/config';
 import GatewayFilter from './gateway/gateway-filter-value-field.vue';
 import GatewayFilterPreview from './gateway/gateway-filter-value-preview.vue';
@@ -151,7 +151,7 @@ export {
   ContactLabelFilterPreview,
   ContactOwnerFilter,
   ContactOwnerFilterPreview,
-  CreatedAtFilterValueField,
+  DateTimeOptionsFilterValueField,
   GatewayFilter,
   GatewayFilterPreview,
   GranteeFilter,
@@ -214,7 +214,7 @@ export const FilterOptionToValueComponentMap: Record<
   [FilterOption.HasUser]: HasUserFilter,
   [FilterOption.User]: UserFilter,
   [FilterOption.Variable]: VariableFilter,
-  [FilterOption.CreatedAt]: CreatedAtFilterValueField,
+  [FilterOption.CreatedAt]: DateTimeOptionsFilterValueField,
   [FilterOption.CaseStatus]: CaseStatusFilterValueField,
   [FilterOption.CaseSource]: CaseSourceFilterValueField,
   [FilterOption.CaseService]: CaseServiceFilterValueField,
@@ -238,7 +238,7 @@ export const FilterOptionToPreviewComponentMap: Record<
   FilterOptionName,
   Component
 > = {
-  [FilterOption.CreatedAt]: CreatedAtFilterPreview,
+  [FilterOption.CreatedAt]: DateTimeOptionsFilterValuePreview,
   [FilterOption.Agent]: AgentFilterPreview,
   [FilterOption.AmdResult]: AmdResultFilterPreview,
   [FilterOption.Contact]: ContactFilterPreview,

@@ -13,6 +13,16 @@ import ExampleSwitcherLabelLeft from './examples/example-switcher-label-left.vue
 <Docs/>
 :::
 
+:::warning Important
+In `cc-history`, `cc-quality-auditor`, `cc-supervisor`, `cc-workspaces`, `client`, `crm`, use `v-model:model-value` instead of the standard `v-model`, because of compat vue 2 different behavior
+:::
+
+:::tip
+✅ Correct: `<wt-switcher v-model:model-value="value" />` 
+
+❌ Incorrect: `<wt-switcher v-model="value" />`
+:::
+
 ## Example Switcher
 
 ::: raw

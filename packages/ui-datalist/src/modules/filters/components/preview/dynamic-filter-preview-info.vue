@@ -24,7 +24,7 @@
   min-width: 60px;
 
   &__header {
-    @extend %typo-subtitle-1;
+    @extend %typo-body-2-bold;
   }
 
   &__body {
