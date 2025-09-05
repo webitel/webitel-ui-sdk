@@ -8,11 +8,13 @@
     :row-style="rowStyle"
     lazy
     scrollable
+    scroll-height="flex"
     @sort="sort"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
     <p-column
       v-if="rowReorder"
+      column-key="row-reorder"
       row-reorder
       header-style="width: 1%;"
     >
@@ -22,6 +24,7 @@
     </p-column>
     <p-column
       v-if="selectable"
+      column-key="row-select"
       header-style="width: 1%;"
     >
       <template #header>
@@ -42,12 +45,18 @@
     </p-column>
     <p-column 
       v-for="(col, idx) of dataHeaders"
-      :key="idx"
-      :field="col.value"
-      :header="col.text"
+      :key="col.value"
+      :column-key="col.field"
+      :field="col.field"
       :sortable="isColSortable(col)"
       :hidden="isColumnHidden(col)"
     >
+      <template #header>
+        <div style="width: 0;" class="wt-table__th__content">
+          {{ col.text }}
+        </div>
+      </template>
+
       <template #body="{ data: row, index }">
         <!--
         @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
@@ -55,6 +64,7 @@
         -->
         <div 
           :style="columnStyle(col)"
+          class="wt-table__td__content"
         >
           <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading) 
                this guard prevents rendering errors and keeps the table stable -->
@@ -93,6 +103,7 @@
     </p-column>
     <p-column
       v-if="gridActions"
+      column-key="row-actions"
       style="width: 112px;"
       :frozen="fixedActions"
       align-frozen="right"
@@ -220,7 +231,7 @@ const columnStyle = (col) => {
   const baseWidth = 140
 
   return {
-    width: col.width || `${baseWidth}px`,
+    minWidth: col.width || `${baseWidth}px`,
   }
 }
 
@@ -300,10 +311,24 @@ const handleSelection = (row, select) => {
 
 <style lang="scss" scoped>
 @use '@webitel/styleguide/scroll' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .wt-table {
   @extend %wt-scrollbar;
   overflow: auto;
+}
+
+.wt-table :deep(.p-datatable-table-container) {
+  @extend %wt-scrollbar;
+}
+
+.wt-table__th__content {
+  @extend %typo-body-1-bold;
+  white-space: nowrap;
+}
+
+.wt-table__td__content {
+  @extend %typo-body-1;
 }
 
 .wt-table__td__actions {

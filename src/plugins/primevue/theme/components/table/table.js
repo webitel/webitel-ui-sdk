@@ -8,7 +8,6 @@ const table = {
   // For customize the table styles you need write css styles for classes
   css: () => `
         .p-datatable-table-container {
-          overflow: visible !important;
           width: 100%;
         }
 
