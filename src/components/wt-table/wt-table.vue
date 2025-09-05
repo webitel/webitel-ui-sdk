@@ -143,9 +143,10 @@
 
 <script setup lang="ts">
 import type { DataTableProps } from 'primevue';
-import { computed, defineProps, ref, withDefaults, useTemplateRef, useSlots } from 'vue';
-import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
+
+import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
 
 interface Props extends DataTableProps{
