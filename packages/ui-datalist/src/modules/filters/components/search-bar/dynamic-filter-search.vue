@@ -61,8 +61,8 @@ const updateSearchModeValue = (mode: string) => {
   return emit('update:search-mode', mode);
 }
 
-const updateLocalSearchValue = (value: string) => {
-  return localSearchValue.value = props.filtersManager.filters.get(value)?.value;
+const restoreLocalSearchValue = (searchMode: string) => {
+  return localSearchValue.value = props.filtersManager.filters.get(searchMode)?.value;
 }
 
 const hasSearchModes = computed(() => {
@@ -122,9 +122,16 @@ const updateSearchMode = (
 const initialize = () => {
   if (hasSearchModes.value && !props.searchMode) {
     updateSearchModeValue(props.searchModeOptions[0].value);
-    updateLocalSearchValue(props.searchMode);
+    restoreLocalSearchValue(props.searchMode);
   }
 }
+/**
+ * @description
+ * Initializing search mode (if there are search modes)
+ * and localSearchValue at teh first load
+ */
+
+initialize();
 
 /**
  * @description
@@ -143,7 +150,7 @@ watch(
     for (const mode of searchModes) {
       if (hasFilter(mode)) {
         updateSearchModeValue(mode);
-        updateLocalSearchValue(mode);
+        restoreLocalSearchValue(mode);
 
         break;
       }
@@ -151,7 +158,6 @@ watch(
   },
 );
 
-onMounted(() => initialize());
 </script>
 
 <style scoped></style>

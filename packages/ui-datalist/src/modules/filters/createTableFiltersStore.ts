@@ -11,13 +11,19 @@ import {
 
 export const tableFiltersStoreBody = (config?: {
   filtersManagerConfig: FiltersManagerConfig;
-}) => {
+}, namespace) => {
   const filtersManager = reactive(
     createFiltersManager(config?.filtersManagerConfig),
   );
 
   /* for watchers in filter components */
   const isRestoring = ref(false);
+
+  const searchMode = ref('');
+
+  const updateSearchMode = (newSearch: string) => {
+    searchMode.value = newSearch;
+  };
 
   /*
    wrapping filtersManager methods to extend their functionality
@@ -60,12 +66,28 @@ export const tableFiltersStoreBody = (config?: {
       },
     });
 
-    return restoreFilters();
+    const { restore: restoreSearchMode } = usePersistedStorage({
+      name: 'searchMode',
+      value: searchMode,
+      storages: [PersistedStorageType.LocalStorage],
+      storagePath: namespace,
+
+      onStore: async (save, { name }) => {
+        return save({ name, value: searchMode.value });
+      },
+      onRestore: async (restore, name) => {
+        const value = await restore(name);
+        if (value) searchMode.value = value as string;
+      },
+    });
+
+    return Promise.all([restoreFilters(), restoreSearchMode()]);
   };
 
   return {
     filtersManager,
     isRestoring,
+    searchMode,
 
     filtersList,
 
@@ -73,6 +95,8 @@ export const tableFiltersStoreBody = (config?: {
     addFilter,
     updateFilter,
     deleteFilter,
+
+    updateSearchMode,
 
     setupPersistence,
   };
@@ -86,7 +110,7 @@ export const createTableFiltersStore = <Entity>(
 ) => {
   const id = `${namespace}/filters`;
   return createDatalistStore({
-    storeBody: tableFiltersStoreBody,
+    storeBody: () => tableFiltersStoreBody(config, namespace),
     config,
     namespace: id,
   });

@@ -8,7 +8,6 @@ import {
 import { createTableFiltersStore } from '../filters/createTableFiltersStore';
 import { createTableHeadersStore } from '../headers/createTableHeadersStore';
 import { createTablePaginationStore } from '../pagination/createTablePaginationStore';
-import { createSearchModeStore } from '../search-mode/createSearchModeStore';
 import {
   PatchItemPropertyParams,
   useTableStoreConfig,
@@ -30,7 +29,6 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     headers: rowHeaders,
   });
   const useFiltersStore = createTableFiltersStore(namespace, config);
-  const useSearchModeStore = createSearchModeStore(namespace, config);
 
   const parentId = ref();
 
@@ -58,7 +56,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = headersStore;
 
   const filtersStore = useFiltersStore();
-  const { filtersManager, isRestoring: isFiltersRestoring } = makeThisToRefs<
+  const { filtersManager, isRestoring: isFiltersRestoring, searchMode } = makeThisToRefs<
     typeof filtersStore
   >(filtersStore, storeType);
   const {
@@ -67,12 +65,9 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updateFilter,
     deleteFilter,
     setupPersistence: setupFiltersPersistence,
+    updateSearchMode,
   } = filtersStore;
 
-  const searchModeStore = useSearchModeStore();
-  const { searchMode } = makeThisToRefs<typeof searchModeStore>(searchModeStore, storeType);
-
-  const { setupPersistence: setupSearchModePersistence, updateSearchMode } = searchModeStore;
   /**
    * @internal
    * @description
@@ -192,7 +187,6 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
         setupPaginationPersistence(),
         setupFiltersPersistence(),
         setupHeadersPersistence(),
-        setupSearchModePersistence(),
       ]);
     }
 
