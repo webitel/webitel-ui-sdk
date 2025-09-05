@@ -1,8 +1,8 @@
 <template>
   <div class="wt-table">
     <table
-      class="wt-table__table"
       :class="{ 'wt-table__table--fixed-actions': fixedActions }"
+      class="wt-table__table"
     >
       <thead
         v-if="!headless"
@@ -85,12 +85,14 @@
            @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
            -->
             <slot
+              v-if="isValueNotEmptyMap.get(`${dataKey}-${col.value}`)"
               :index="dataKey"
               :item="row"
               :name="col.value"
             >
               <div>{{ row[col.value] }}</div>
             </slot>
+            <span v-else>{{ defaultEmptyValue }}</span>
           </td>
 
           <td
@@ -146,6 +148,7 @@
 
 <script>
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
+import { isEmpty } from '../../scripts/index.js';
 
 export default {
   name: 'WtTable',
@@ -203,12 +206,29 @@ export default {
       type: Boolean,
       default: false,
     },
+    defaultEmptyValue: {
+      type: String,
+      default: '-',
+    }
   },
   emits: ['sort', 'update:selected'],
 
   data: () => ({}),
 
   computed: {
+    isValueNotEmptyMap() {
+      const result = new Map();
+
+      this.dataHeaders.forEach((col) => {
+        this.data.forEach((row, dataKey) => {
+          const value = row[col.value];
+          const isNotEmpty = value?.length || (typeof value === "object" && !isEmpty(value));
+          result.set(`${dataKey}-${col.value}`, !!isNotEmpty);
+        });
+      });
+
+      return result;
+    },
     _selected() {
       // _isSelected for backwards compatibility
       return this.selected || this.data.filter((item) => item._isSelected);
