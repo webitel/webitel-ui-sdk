@@ -18,8 +18,12 @@
       row-reorder
       header-style="width: 1%;"
     >
-      <template #rowreordericon>
-        <wt-icon icon="move" data-pc-section="reorderablerowhandle" />
+      <template #body="{ data: row }">
+        <wt-icon
+          v-if="!isRowReorderDisabled(row)"
+          icon="move" 
+          data-pc-section="reorderablerowhandle" 
+        />
       </template>
     </p-column>
     <p-column
@@ -178,6 +182,10 @@ interface Props extends DataTableProps{
    * 'If true, allows to reorder rows.'
    */
   rowReorder?: boolean;
+  /**
+   * 'If true, restrict sprecific row reorder.'
+   */
+  isRowReorderDisabled?: (row) => boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
 }
@@ -191,6 +199,7 @@ const props = withDefaults(defineProps<Props>(), {
   fixedActions: false,
   headless: false,
   rowReorder: false,
+  isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
 });

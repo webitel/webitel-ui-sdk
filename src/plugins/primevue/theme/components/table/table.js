@@ -15,6 +15,10 @@ const table = {
             word-break: break-all;
             overflow-wrap: break-word;
         }
+
+        .p-datatable-thead > tr > th {
+            overflow: hidden;
+        }
         `,
 };
 
