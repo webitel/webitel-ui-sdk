@@ -92,7 +92,7 @@ const props = defineProps<{
    * presets "section" namespace
    */
   namespace: string;
-  usePresetsStore: Store;
+  presetsStore: () => Store;
   filterConfigs: AnyFilterConfig[];
 }>();
 
@@ -106,7 +106,7 @@ const { t } = useI18n();
 
 const showPresetsList = ref(false);
 
-const presetsStore = props.usePresetsStore();
+const presetsStore = props.presetsStore;
 const { dataList, error, isLoading, filtersManager, presetId } =
   storeToRefs(presetsStore);
 

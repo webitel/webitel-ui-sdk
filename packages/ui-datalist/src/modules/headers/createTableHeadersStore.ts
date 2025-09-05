@@ -53,7 +53,16 @@ export const tableHeadersStoreBody = ({
         show: fields.includes(header.field),
       };
     });
-    updateShownHeaders(newHeaders);
+
+    const customFields = fields.filter((field) => !headers.value.some((header) => header.field === field));
+// debugger
+    const customFieldHeaders = customFields.map((field) => ({
+      show: true,
+      field,
+      shouldBeInitialized: true,
+    }));
+// debugger
+    updateShownHeaders([...newHeaders, ...customFieldHeaders]);
   };
 
   const updateSort = (column) => {

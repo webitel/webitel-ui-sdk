@@ -20,7 +20,7 @@
   background: var(--wt-app-header-background);
   padding: var(--wt-app-header-padding);
   min-height: var(
-    --wt-app-header-min-height
+      --wt-app-header-min-height
   ); // fixed height because anything can be put inside slot, so padding won't work properly
 }
 </style>

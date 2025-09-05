@@ -25,10 +25,13 @@
 import { PopoverEmitsOptions, PopoverProps } from 'primevue';
 import { defineExpose, useAttrs, useTemplateRef } from 'vue';
 
+interface Props extends PopoverProps {
+  disabled?: boolean;
+}
+
 const attrs = useAttrs();
 const innerPopover = useTemplateRef('innerPopover');
-
-withDefaults(defineProps<PopoverProps>(), {
+const props = withDefaults(defineProps<Props>(), {
   appendTo: 'body',
   baseZIndex: 0,
   autoZIndex: true,
@@ -37,16 +40,24 @@ withDefaults(defineProps<PopoverProps>(), {
   pt: null,
   ptOptions: null,
   closeOnEscape: true,
-  unstyled: false
+  unstyled: false,
+  disabled: false
 });
 defineEmits<PopoverEmitsOptions>();
 
-const toggle = (event?: Event) => {
-  innerPopover.value?.toggle(event);
+const toggle = (event?: Event, target?: HTMLElement | null | undefined) => {
+  if (props.disabled) return;
+
+  innerPopover.value?.toggle(event, target ?? undefined);
 };
 
-const show = (event?: Event) => {
-  innerPopover.value?.show(event);
+const show = (event?: Event, target?: HTMLElement | null | undefined) => {
+  if (props.disabled) return;
+  // Opens the popover.
+  // `target` is the element the popover will be positioned relative to.
+  // If not provided, the popover will be positioned relative to the `activator` slot element by default.
+  //https://webitel.atlassian.net/browse/WTEL-7349
+  innerPopover.value?.show(event, target ?? undefined);
 };
 
 const hide = (event?: Event) => {

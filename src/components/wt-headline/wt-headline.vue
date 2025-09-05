@@ -31,7 +31,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--headline-nav-gap);
+  gap: var(--breadcrumb-gap);
   box-sizing: border-box;
   border-radius: var(--border-radius);
   background: var(--wt-headline-background-color);

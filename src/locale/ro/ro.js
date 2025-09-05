@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -107,7 +108,7 @@ export default {
     host: 'Gazdă',
     time: 'Timp',
     channel: 'Canal | Canale',
-    file: 'Fișier',
+    file: 'Fișier | Fișiere',
     logout: 'Deconectare',
     priority: 'Prioritate | Priorități',
     color: 'Culoare',
@@ -130,6 +131,7 @@ export default {
     contact: 'Contact | Contacte',
     column: 'Coloană | Coloane',
     notification: 'Notificare | Notificări',
+    screencast: 'Înregistrare ecran',
   },
   // date-related texts
   date: {
@@ -175,6 +177,12 @@ export default {
     transcription: 'Transcriere',
     attachment: 'Atașament | Atașamente',
     owner: 'Proprietar | Proprietari',
+    customization: {
+      customization: 'Personalizare | Personalizări',
+    },
+    customLookup: {
+      customLookup: 'Personalizare | Personalizări',
+    },
     queue: {
       queue: 'Coadă | Cozi',
       type: {
@@ -269,6 +277,24 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Personalizări', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Spațiu Agent' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
