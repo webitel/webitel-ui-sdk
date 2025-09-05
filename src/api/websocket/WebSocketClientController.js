@@ -1,4 +1,4 @@
-import { markRaw, reactive, shallowReactive } from 'vue';
+import { shallowReactive } from 'vue';
 import { Client } from 'webitel-sdk';
 
 import eventBus from '../../scripts/eventBus.js';
@@ -20,8 +20,8 @@ class WebSocketClientController {
     [WebSocketClientEvent.AFTER_AUTH]: [],
   };
 
-  getCliInstance() {
-    if (!this.cli) this.cli = this._createCliInstance();
+  getCliInstance(createCliInstance = this._createCliInstance) {
+    if (!this.cli) this.cli = createCliInstance();
     return this.cli;
   }
 
@@ -43,10 +43,6 @@ class WebSocketClientController {
     const token = localStorage.getItem('access-token');
     const configCli = getConfig();
 
-    if (typeof configCli.registerWebDevice === 'undefined') {
-      configCli.registerWebDevice = true;
-    }
-
     const config = {
       endpoint,
       token,
@@ -57,10 +53,6 @@ class WebSocketClientController {
     // why reactive? https://github.com/vuejs/core/discussions/7811#discussioncomment-5181921
     // const cli = new Client(config);
     const cli = shallowReactive(new Client(config));
-
-    // why reactive? https://github.com/vuejs/core/discussions/7811#discussioncomment-5181921
-    cli.conversationStore = reactive(cli.conversationStore);
-    cli.callStore = reactive(cli.callStore);
 
     this._on[WebSocketClientEvent.AFTER_AUTH].forEach((callback) => callback());
     this._on[WebSocketClientEvent.ERROR].forEach((callback) =>
@@ -77,32 +69,6 @@ class WebSocketClientController {
     await cli.connect();
 
     await cli.auth();
-
-    /*
-    cli.phone.ua contains "configuration" property, which has no setter so cannot be wrapped with reactivity.
-    so that, reactivity breaks
-     for more info, see WTEL-4236
-     */
-    await new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        console.error('Phone user agent is not connected :(');
-        resolve();
-      }, 5000);
-
-      const markUa = () =>
-        cli.phone?.ua && (cli.phone.ua = markRaw(cli.phone.ua));
-
-      if (cli.phone?.ua) {
-        markUa();
-        clearTimeout(timeout);
-        resolve();
-      } else
-        cli.on('phone_connected', () => {
-          markUa();
-          clearTimeout(timeout);
-          resolve();
-        });
-    });
 
     window.cli = cli;
     return cli;
