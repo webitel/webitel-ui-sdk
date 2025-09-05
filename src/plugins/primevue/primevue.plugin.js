@@ -7,7 +7,6 @@ import PColumn from 'primevue/column';
 import PrimeVue from 'primevue/config';
 import PTable from 'primevue/datatable';
 import PChip from 'primevue/chip';
-import PrimeVue from 'primevue/config';
 import PDivider from 'primevue/divider';
 import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
