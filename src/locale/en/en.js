@@ -5,6 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
+import deepcopy from 'deepcopy';
 
 import {
   AdminSections,
@@ -20,8 +21,9 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import notTranslatable from './notTranslatable.en';
 
-export default {
+export default deepcopy(notTranslatable, {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
     comment: 'Comment',
@@ -52,13 +54,6 @@ export default {
     expand: 'Expand',
     collapse: 'Collapse',
     generate: 'Generate',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'From',
     to: 'To',
     tts: 'Text-to-Speech',
@@ -762,4 +757,4 @@ export default {
     chatHistoryApi: 'There was an error loading the chat history',
     markChatProcessed: 'Failed to move the chat to “Closed”',
   },
-};
+});

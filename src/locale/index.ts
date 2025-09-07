@@ -1,3 +1,5 @@
+export * from './_enums/TranslationLocale.enum';
+
 import en from './en/en';
 import es from './es/es';
 import kz from './kz/kz';

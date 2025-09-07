@@ -52,13 +52,6 @@ export default {
     expand: 'Kengaytirish',
     collapse: 'Yigʻish',
     generate: 'Generatsiya',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Dan',
     to: 'Gacha',
     tts: 'Matnni ovozga aylantirish',

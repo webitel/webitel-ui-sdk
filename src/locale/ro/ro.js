@@ -52,13 +52,6 @@ export default {
     expand: 'Extinde',
     collapse: 'Restrânge',
     generate: 'Generează',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'De la',
     to: 'Până la',
     tts: 'Text-to-Speech',
