@@ -5,7 +5,7 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import deepcopy from 'deepcopy';
+import deepmerge from 'deepmerge';
 
 import {
   AdminSections,
@@ -23,7 +23,7 @@ import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/Acc
 import { snakeToCamel } from '../../scripts';
 import notTranslatable from './notTranslatable.en';
 
-export default deepcopy(notTranslatable, {
+export default deepmerge(notTranslatable, {
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
     comment: 'Comment',
