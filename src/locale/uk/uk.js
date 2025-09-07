@@ -52,13 +52,6 @@ export default {
     expand: 'Розгорнути',
     collapse: 'Згорнути',
     generate: 'Згенерувати',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Від',
     to: 'До',
     tts: 'Text-to-Speech',

@@ -52,13 +52,6 @@ export default {
     expand: 'Rozwiń',
     collapse: 'Zwiń',
     generate: 'Generuj',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Od',
     to: 'Do',
     tts: 'Tekst na mowę',
