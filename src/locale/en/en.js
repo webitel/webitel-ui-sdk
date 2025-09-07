@@ -1,3 +1,4 @@
+import deepcopy from 'deepcopy';
 import {
   AgentStatus,
   CallDirection,
@@ -5,7 +6,6 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import deepcopy from 'deepcopy';
 
 import {
   AdminSections,
