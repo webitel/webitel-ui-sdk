@@ -14,6 +14,7 @@ const table = {
         .p-datatable-tbody > tr > td {
             word-break: break-all;
             overflow-wrap: break-word;
+            vertical-align: top;
         }
 
         .p-datatable-thead > tr > th {
