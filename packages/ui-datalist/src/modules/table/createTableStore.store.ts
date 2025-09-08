@@ -72,7 +72,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
    * @description
    * This flag is used to check if the store is set up.
    * It is used to prevent multiple setup calls.
-   * 
+   *
    * @link
    * https://webitel.atlassian.net/browse/WTEL-7495
    */
@@ -172,6 +172,11 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     try {
       await Promise.all(els.map(deleteEl));
     } finally {
+      // If we're deleting all items from the current page, and we're not on the first page,
+      // we should go to the previous page
+      if (els.length === dataList.value.length && page.value > 1) {
+        updatePage(page.value - 1);
+      }
       await loadDataList();
     }
   };
