@@ -9,9 +9,9 @@ import {
   FiltersManagerConfig,
 } from './classes/FiltersManager';
 
-export const tableFiltersStoreBody = (config?: {
+export const tableFiltersStoreBody = (namespace, config?: {
   filtersManagerConfig: FiltersManagerConfig;
-}, namespace) => {
+}) => {
   const filtersManager = reactive(
     createFiltersManager(config?.filtersManagerConfig),
   );
@@ -110,7 +110,7 @@ export const createTableFiltersStore = <Entity>(
 ) => {
   const id = `${namespace}/filters`;
   return createDatalistStore({
-    storeBody: () => tableFiltersStoreBody(config, namespace),
+    storeBody: () => tableFiltersStoreBody(namespace, config),
     config,
     namespace: id,
   });
