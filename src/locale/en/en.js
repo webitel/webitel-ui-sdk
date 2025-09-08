@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge';
 import {
   AgentStatus,
   CallDirection,
@@ -5,7 +6,6 @@ import {
   ChannelType,
   EngineRoutingSchemaType,
 } from 'webitel-sdk';
-import deepmerge from 'deepmerge';
 
 import {
   AdminSections,
