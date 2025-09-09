@@ -52,13 +52,6 @@ export default {
     expand: 'Развернуть',
     collapse: 'Свернуть',
     generate: 'Сгенерировать',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'От',
     to: 'До',
     tts: 'Text-to-Speech',

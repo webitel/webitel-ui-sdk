@@ -56,7 +56,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = headersStore;
 
   const filtersStore = useFiltersStore();
-  const { filtersManager, isRestoring: isFiltersRestoring } = makeThisToRefs<
+  const { filtersManager, isRestoring: isFiltersRestoring, searchMode } = makeThisToRefs<
     typeof filtersStore
   >(filtersStore, storeType);
   const {
@@ -65,6 +65,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updateFilter,
     deleteFilter,
     setupPersistence: setupFiltersPersistence,
+    updateSearchMode,
   } = filtersStore;
 
   /**
@@ -72,7 +73,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
    * @description
    * This flag is used to check if the store is set up.
    * It is used to prevent multiple setup calls.
-   * 
+   *
    * @link
    * https://webitel.atlassian.net/browse/WTEL-7495
    */
@@ -240,6 +241,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     shownHeaders,
     fields,
     sort,
+    searchMode,
 
     filtersManager,
     isFiltersRestoring,
@@ -253,6 +255,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updateSelected,
     patchItemProperty,
     deleteEls,
+
+    updateSearchMode,
 
     updatePage,
     updateSize,

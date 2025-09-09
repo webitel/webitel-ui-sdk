@@ -51,13 +51,6 @@ export default {
     expand: 'Expandir',
     collapse: 'Colapsar',
     generate: 'Generar',
-    lang: {
-      en: 'Inglés',
-      es: 'Español',
-      ru: 'Ruso',
-      uk: 'Ucraniano',
-      kz: 'Kazajo',
-    },
     from: 'Desde',
     to: 'Hasta',
     tts: 'Texto a Voz',

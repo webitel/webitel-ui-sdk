@@ -52,13 +52,6 @@ export default {
     expand: 'Кеңейту',
     collapse: 'Жігу',
     generate: 'Жасау',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Бастап',
     to: 'Дейін',
     tts: 'Мәтін-дауыс',

@@ -52,13 +52,6 @@ export default {
     expand: 'Mở rộng',
     collapse: 'Thu gọn',
     generate: 'Tạo',
-    lang: {
-      en: 'Tiếng Anh',
-      es: 'Tiếng Tây Ban Nha',
-      ru: 'Tiếng Nga',
-      uk: 'Tiếng Ukraina',
-      kz: 'Tiếng Kazakh',
-    },
     from: 'Từ',
     to: 'Đến',
     tts: 'Chuyển văn bản thành giọng nói',
