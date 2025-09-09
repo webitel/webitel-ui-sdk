@@ -3,12 +3,8 @@ import { Client } from 'webitel-sdk';
 
 import eventBus from '../../scripts/eventBus.js';
 import { endpoint, getConfig } from './config.js';
+import { WebSocketClientEvent } from './enums/WebSocketClientEvent';
 import websocketErrorEventHandler from './websocketErrorEventHandler.js';
-
-const WebSocketClientEvent = Object.freeze({
-  AFTER_AUTH: 'afterAuth',
-  ERROR: 'error',
-});
 
 class WebSocketClientController {
   cli = null;
