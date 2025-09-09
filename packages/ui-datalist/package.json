@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-datalist",
-  "version": "1.0.73",
+  "version": "1.0.74",
   "description": "Toolkit for building data lists in webitel ui system",
   "scripts": {
     "make-all": "npm version patch --git-tag-version false && ( npm run lint:fix || true) && (npm run build:types || true) && npm run utils:publish",
