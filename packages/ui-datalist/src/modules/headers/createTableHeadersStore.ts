@@ -38,6 +38,15 @@ export const tableHeadersStoreBody = ({
       : null;
   });
 
+  const widths = computed(() => {
+    return headers.value.reduce((acc, header) => {
+      if (header.width) {
+        acc[header.field] = header.width;
+      }
+      return acc;
+    }, {});
+  });
+
   const $reset = () => {
     headers.value = rawHeaders;
   };
@@ -129,7 +138,49 @@ export const tableHeadersStoreBody = ({
       value: sort,
     });
 
-    return Promise.allSettled([restoreFields(), restoreSort()]);
+    const { restore: restoreWidths } = usePersistedStorage({
+      name: 'widths',
+      value: widths,
+      storages: [PersistedStorageType.LocalStorage],
+      storagePath: id,
+      onStore: (save, { name }) => {
+        const value = JSON.stringify(widths.value);
+        return save({ name, value });
+      },
+      onRestore: async (restore, name) => {
+        const value = (await restore(name)) as string;
+        if (value) {
+          const parsedWidths = JSON.parse(value);
+          headers.value = headers.value.map((header) => ({
+            ...header,
+            width: parsedWidths[header.field] || header.width,
+          }));
+        }
+      },
+    });
+
+    return Promise.allSettled([restoreFields(), restoreSort(), restoreWidths()]);
+  };
+
+  const columnResize = ({columnName, columnWidth}) => {
+    const column = headers.value.find((header) => header.field === columnName);
+
+    if (column) {
+      column.width = columnWidth;
+    }
+  };
+
+  const columnReorder = (orderedFields: string[]) => {
+    const reorderedHeaders = [];
+
+    orderedFields.forEach(field => {
+      const header = headers.value.find((header) => header.field === field);
+      if (header) {
+        reorderedHeaders.push(header);
+      }
+    });
+
+    updateShownHeaders(reorderedHeaders);
   };
 
   return {
@@ -137,9 +188,12 @@ export const tableHeadersStoreBody = ({
     shownHeaders,
     fields,
     sort,
+    widths,
 
     updateShownHeaders,
     updateSort,
+    columnResize,
+    columnReorder,
 
     setupPersistence,
     $reset,

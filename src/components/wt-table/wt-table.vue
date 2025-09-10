@@ -1,6 +1,7 @@
 <template>
   <p-table 
     ref="table"
+    :key="tableKey"
     class="wt-table"
     :value="data"
     :show-headers="!headless"
@@ -8,16 +9,29 @@
     :row-style="rowStyle"
     lazy
     scrollable
-    :resizable-columns="resizableColumns"
     scroll-height="flex"
+    filter-display="row"
+    :resizable-columns="resizableColumns"
+    :reorderable-columns="reorderableColumns"
+    column-resize-mode="expand"
     @sort="sort"
+    @column-resize-end="columnResize"
+    @column-reorder="columnReorder"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
     <p-column
       v-if="rowReorder"
       column-key="row-reorder"
       row-reorder
+      :reorderable-column="false"
       header-style="width: 1%;"
+      :pt="{
+        columnresizer: { 
+            class: { 
+                'hidden': true 
+            } 
+        }
+      }"
     >
       <template #body="{ data: row }">
         <wt-icon
@@ -30,7 +44,15 @@
     <p-column
       v-if="selectable"
       column-key="row-select"
+      :reorderable-column="false"
       header-style="width: 1%;"
+      :pt="{
+        columnresizer: { 
+            class: { 
+                'hidden': true 
+            } 
+        }
+      }"
     >
       <template #header>
         <wt-checkbox
@@ -56,6 +78,7 @@
       :sortable="isColSortable(col)"
       :hidden="isColumnHidden(col)"
     >
+
       <template #header>
         <div class="wt-table__th__content">
           {{ col.text }}
@@ -191,7 +214,8 @@ interface Props extends DataTableProps{
   isRowReorderDisabled?: (row) => boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
-  resizableColumns?: boolean;
+  resizableColumns?: boolean
+  reorderableColumns?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -206,16 +230,18 @@ const props = withDefaults(defineProps<Props>(), {
   isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
-  resizableColumns: false
+  resizableColumns: false,
+  reorderableColumns: false,
 });
 
 const { t } = useI18n();
 
 const slots = useSlots();
 
-const emit = defineEmits(['sort', 'update:selected', 'reorder:row']);
+const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resize', 'column-reorder']);
 
 const table = useTemplateRef('table');
+const tableKey = ref(0);
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
@@ -317,6 +343,34 @@ const handleSelection = (row, select) => {
     row._isSelected = !row._isSelected;
   }
 }
+
+const columnResize = ({element}) => {
+  const field = element.getAttribute('data-column-field')
+
+  const computedStyle = getComputedStyle(element);
+  const paddingLeft = parseFloat(computedStyle.paddingLeft);
+  const paddingRight = parseFloat(computedStyle.paddingRight);
+
+  const columnWidth = element.offsetWidth - paddingLeft - paddingRight
+
+  emit('column-resize', { columnName: field, columnWidth: `${columnWidth}px` })
+}
+
+const columnReorder = async ({dropIndex, originalEvent}) => {
+  const excludeColumns = ['row-select', 'row-reorder', 'row-actions']
+  const newOrder = table.value.d_columnOrder.filter(col => !excludeColumns.includes(col))
+
+  //save scroll position after table rerender
+  const tableScrollTopPosition = table.value.$el.querySelector('.p-datatable-table').scrollTop
+  const tableScrollLeftPosition = table.value.$el.querySelector('.p-datatable-table').scrollLeft
+  console.log(table.value)
+  tableKey.value += 1       // rerender table preventing unexpected behavior
+  await nextTick()
+  table.value.$el.querySelector('.p-datatable-table').scrollTop = tableScrollTopPosition
+  table.value.$el.querySelector('.p-datatable-table').scrollLeft = tableScrollLeftPosition
+
+  emit('column-reorder', newOrder)
+}
 </script>
 
 <style lang="scss">
@@ -325,6 +379,7 @@ const handleSelection = (row, select) => {
 
 <style lang="scss" scoped>
 @use '@webitel/styleguide/scroll' as *;
+@use '@webitel/styleguide/typography' as *;
 @use '@webitel/styleguide/typography' as *;
 
 .wt-table {

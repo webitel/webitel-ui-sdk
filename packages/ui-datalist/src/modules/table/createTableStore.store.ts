@@ -51,6 +51,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   >(headersStore, storeType);
   const {
     updateSort,
+    columnResize,
+    columnReorder,
     updateShownHeaders,
     setupPersistence: setupHeadersPersistence,
   } = headersStore;
@@ -258,6 +260,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updateSize,
 
     updateSort,
+    columnResize,
+    columnReorder,
     updateShownHeaders,
 
     hasFilter,
