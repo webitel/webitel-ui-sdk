@@ -13,4 +13,4 @@ const origin = `${protocol}//${hostname}`.replace(/^http/, 'ws');
 export const endpoint =
   import.meta.env.MODE === 'production'
     ? `${origin}/ws`
-    : 'wss://dev.webitel.com/ws';
+    : 'wss://test.webitel.me/ws';
