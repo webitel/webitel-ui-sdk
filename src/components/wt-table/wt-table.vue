@@ -8,6 +8,7 @@
     :row-style="rowStyle"
     lazy
     scrollable
+    :resizable-columns="resizableColumns"
     scroll-height="flex"
     @sort="sort"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
@@ -190,6 +191,7 @@ interface Props extends DataTableProps{
   isRowReorderDisabled?: (row) => boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
+  resizableColumns?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -204,6 +206,7 @@ const props = withDefaults(defineProps<Props>(), {
   isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
+  resizableColumns: false
 });
 
 const { t } = useI18n();
@@ -343,6 +346,7 @@ const handleSelection = (row, select) => {
   @extend %typo-body-1;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .wt-table__td__actions {

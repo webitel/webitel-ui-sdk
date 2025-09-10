@@ -63,6 +63,9 @@ const sort = (col, sortValue) => {
     :headers="headers"
     :data="data"
     sortable
+    grid-actions
+    fixed-actions
+    resizable-columns
     @sort="sort"
   >
   </wt-table>
