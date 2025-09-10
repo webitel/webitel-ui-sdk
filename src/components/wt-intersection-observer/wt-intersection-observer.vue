@@ -6,14 +6,14 @@
   <div ref="intersectionTarget" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useIntersectionObserver } from '@vueuse/core';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps({
-  next: {
-    type: Function,
-    required: true,
+  canLoadMore: {
+    type: Boolean,
+    default: true
   },
   loading: {
     type: Boolean,
@@ -36,7 +36,7 @@ onMounted(() => {
   const { stop } = useIntersectionObserver(
     intersectionTarget.value,
     ([{ isIntersecting }]) => {
-      if (isIntersecting && props.next) {
+      if (isIntersecting && props.canLoadMore) {
         emit('next');
       }
     },
