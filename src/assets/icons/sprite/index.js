@@ -58,6 +58,7 @@ import chatReply from './chat-reply.svg';
 import chatSend from './chat-send.svg';
 import chatTransfer from './chat-transfer.svg';
 import chatTransferFilled from './chat-transfer--filled.svg';
+import consultativeTransfer from './consultative-transfer.svg';
 import checkbox from './checkbox.svg';
 import checkboxChecked from './checkbox--checked.svg';
 import checkboxCheckedFilled from './checkbox--checked--filled.svg';
@@ -256,6 +257,7 @@ export default objCamelToKebab({
   'call-ringing--filled': callRingingFilled,
   callTransfer,
   'call-transfer--filled': callTransferFilled,
+  consultativeTransfer,
   updateCalls,
 
   caseAuthor,
