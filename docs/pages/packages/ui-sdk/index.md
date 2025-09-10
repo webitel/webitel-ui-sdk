@@ -6,6 +6,7 @@
 * [Defaults](api/defaults/Readme.md)
 * [Interceptors](api/interceptors/Readme.md)
 * [Transformers](api/transformers/Readme.md)
+* [WebSocket](api/websocket/Readme.md)
 
 ## Assets
 * [Icons](assets/icons/icons.md)
