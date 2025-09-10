@@ -8,6 +8,7 @@
     :row-style="rowStyle"
     lazy
     scrollable
+    :resizable-columns="resizableColumns"
     scroll-height="flex"
     @sort="sort"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
@@ -56,8 +57,20 @@
       :hidden="isColumnHidden(col)"
     >
       <template #header>
-        <div style="width: 0;" class="wt-table__th__content">
+        <div class="wt-table__th__content">
           {{ col.text }}
+          <wt-icon
+            v-if="col.sort === 'asc'"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+            icon="sort-arrow-up"
+            size="sm"
+          />
+          <wt-icon
+            v-else-if="col.sort === 'desc'"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+            icon="sort-arrow-down"
+            size="sm"
+          />
         </div>
       </template>
 
@@ -80,19 +93,8 @@
           >{{ row[col.value] }}</slot>
         </div>
       </template>
+      <!-- empty sorticon slot for hiding default sort icon, custom icon is rendered in header --> 
       <template #sorticon>
-        <wt-icon
-          v-if="col.sort === 'asc'"
-          class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-          icon="sort-arrow-up"
-          size="sm"
-        />
-        <wt-icon
-          v-else-if="col.sort === 'desc'"
-          class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-          icon="sort-arrow-down"
-          size="sm"
-        />
       </template>
       <template
         v-if="isTableColumnFooters" 
@@ -189,6 +191,7 @@ interface Props extends DataTableProps{
   isRowReorderDisabled?: (row) => boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
+  resizableColumns?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -203,6 +206,7 @@ const props = withDefaults(defineProps<Props>(), {
   isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
+  resizableColumns: false
 });
 
 const { t } = useI18n();
@@ -258,7 +262,7 @@ const isAllSelected = computed(() => {
 })
 
 const sort = ({sortField}) => {
-  const col = dataHeaders.value.find(header => header.value === sortField)
+  const col = dataHeaders.value.find(header => header.field === sortField)
   if (!isColSortable(col)) return;
   const nextSort = getNextSortOrder(col.sort);
   emit('sort', col, nextSort);
@@ -335,10 +339,14 @@ const handleSelection = (row, select) => {
 .wt-table__th__content {
   @extend %typo-body-1-bold;
   white-space: nowrap;
+  width: 0;
 }
 
 .wt-table__td__content {
   @extend %typo-body-1;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .wt-table__td__actions {
@@ -346,5 +354,11 @@ const handleSelection = (row, select) => {
   justify-content: flex-end;
   align-items: flex-start;
   gap: var(--spacing-xs);
+}
+
+.wt-table__th__sort-arrow {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
 }
 </style>

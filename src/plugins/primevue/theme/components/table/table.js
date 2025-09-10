@@ -6,18 +6,35 @@ const table = {
 
   // Rewrite the default table styles in the theme here:
   // For customize the table styles you need write css styles for classes
-  css: () => `
+  css: ({ dt }) => `
         .p-datatable-table-container {
           width: 100%;
+        }
+
+        .p-datatable-scrollable > .p-datatable-table-container > .p-datatable-table > .p-datatable-thead {
+          background: transparent;
+        }
+        
+        .p-datatable-tbody > tr:hover {
+            background: ${dt('datatable.row.hoverBackground')};
+        }
+
+        .p-datatable-scrollable .p-datatable-frozen-column:not(.p-datatable-header-cell) {
+            background: ${dt('datatable.frozenColumn.background')};
         }
 
         .p-datatable-tbody > tr > td {
             word-break: break-all;
             overflow-wrap: break-word;
+            vertical-align: top;
         }
 
         .p-datatable-thead > tr > th {
             overflow: hidden;
+        }
+
+        .p-datatable-column-resizer {
+            background: ${dt('datatable.columnResizer.background')};
         }
         `,
 };
