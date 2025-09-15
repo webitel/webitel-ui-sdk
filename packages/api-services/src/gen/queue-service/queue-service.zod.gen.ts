@@ -410,6 +410,18 @@ export const searchQueueReportGeneralResponse = zod.object({
 	next: zod.boolean().optional(),
 });
 
+export const getQueuesGlobalStateResponse = zod.object({
+	isAllEnabled: zod.boolean().optional(),
+});
+
+export const setQueuesGlobalStateBody = zod.object({
+	enabled: zod.boolean().optional(),
+});
+
+export const setQueuesGlobalStateResponse = zod.object({
+	count: zod.number().optional(),
+});
+
 /**
  * @summary List RoutingSchemaTags
  */
