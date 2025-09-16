@@ -10,7 +10,6 @@
     lazy
     scrollable
     scroll-height="flex"
-    filter-display="row"
     :resizable-columns="resizableColumns"
     :reorderable-columns="reorderableColumns"
     column-resize-mode="expand"
@@ -77,6 +76,11 @@
       :field="col.field"
       :sortable="isColSortable(col)"
       :hidden="isColumnHidden(col)"
+      :pt="{
+        root: {
+          'data-column-field': col.field      // required for column-resizer to get column field
+        }
+      }"
     >
 
       <template #header>
@@ -243,6 +247,9 @@ const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resi
 const table = useTemplateRef('table');
 const tableKey = ref(0);
 
+// table's columns that should be excluded from reorder
+const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
+
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
   return props.selectable 
@@ -345,6 +352,7 @@ const handleSelection = (row, select) => {
 }
 
 const columnResize = ({element}) => {
+  // getting column name by custom attribute due Primevue does not provide it
   const field = element.getAttribute('data-column-field')
 
   const computedStyle = getComputedStyle(element);
@@ -357,15 +365,12 @@ const columnResize = ({element}) => {
 }
 
 const columnReorder = async ({dropIndex, originalEvent}) => {
-  const excludeColumns = ['row-select', 'row-reorder', 'row-actions']
-  const newOrder = table.value.d_columnOrder.filter(col => !excludeColumns.includes(col))
+  const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col))
 
   //save scroll position after table rerender
   const tableScrollTopPosition = table.value.$el.querySelector('.p-datatable-table').scrollTop
   const tableScrollLeftPosition = table.value.$el.querySelector('.p-datatable-table').scrollLeft
-  console.log(table.value)
   tableKey.value += 1       // rerender table preventing unexpected behavior
-  await nextTick()
   table.value.$el.querySelector('.p-datatable-table').scrollTop = tableScrollTopPosition
   table.value.$el.querySelector('.p-datatable-table').scrollLeft = tableScrollLeftPosition
 
