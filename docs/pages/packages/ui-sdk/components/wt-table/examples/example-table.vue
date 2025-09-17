@@ -56,6 +56,19 @@ const sort = (col, sortValue) => {
   const column = headers.find((header) => header.value === col.value);
   column.sort = sortValue;
 };
+
+const getRowClass = ({id}) => {
+  switch (id) {
+    case 'id1':
+      return 'row-success';
+    case 'id2':
+      return 'row-warning';
+    case 'id3':
+      return 'row-error';
+    default:
+      return '';
+  }
+}
 </script>
 
 <template>
@@ -66,6 +79,7 @@ const sort = (col, sortValue) => {
     grid-actions
     fixed-actions
     resizable-columns
+    :row-class="getRowClass"
     @sort="sort"
   >
   </wt-table>

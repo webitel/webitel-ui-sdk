@@ -1,5 +1,15 @@
 import { TableScheme } from '@webitel/styleguide/component-schemes';
 
+const rowStateStyles = (state, dt) => `
+            .p-datatable-tbody > tr.row-${state} {
+                background: ${dt(`datatable.row.${state}Background`)};
+            }
+
+            .p-datatable-tbody > tr.row-${state}:hover {
+                background: ${dt(`datatable.row.${state}HoverBackground`)};
+            }
+        `;
+
 const table = {
   ...TableScheme.sizes,
   colorScheme: TableScheme.colorScheme,
@@ -18,6 +28,10 @@ const table = {
         .p-datatable-tbody > tr:hover {
             background: ${dt('datatable.row.hoverBackground')};
         }
+
+        ${rowStateStyles('error', dt)}
+        ${rowStateStyles('warning', dt)}
+        ${rowStateStyles('success', dt)}
 
         .p-datatable-scrollable .p-datatable-frozen-column:not(.p-datatable-header-cell) {
             background: ${dt('datatable.frozenColumn.background')};
