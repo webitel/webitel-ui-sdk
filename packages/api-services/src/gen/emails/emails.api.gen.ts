@@ -9,19 +9,19 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	EmailsDeleteEmailParams,
-	EmailsDeleteEmailsParams,
-	EmailsListEmailsParams,
-	EmailsLocateEmailParams,
-	EmailsMergeEmailsParams,
-	EmailsResetEmailsParams,
-	EmailsUpdateEmail2Body,
-	EmailsUpdateEmail2Params,
-	EmailsUpdateEmailBody,
-	EmailsUpdateEmailParams,
-	WebitelContactsEmailAddress,
-	WebitelContactsEmailList,
-	WebitelContactsInputEmailAddress,
+	ContactsEmailAddress,
+	ContactsEmailList,
+	ContactsInputEmailAddress,
+	DeleteEmailParams,
+	DeleteEmailsParams,
+	ListEmailsParams,
+	LocateEmailParams,
+	MergeEmailsParams,
+	ResetEmailsParams,
+	UpdateEmail2Body,
+	UpdateEmail2Params,
+	UpdateEmailBody,
+	UpdateEmailParams,
 } from '.././_models';
 
 // --- header start
@@ -35,11 +35,9 @@ export const // --- title start
 			/**
 			 * @summary Remove email address(es) of the contact.
 			 */
-			const emailsDeleteEmails = <
-				TData = AxiosResponse<WebitelContactsEmailList>,
-			>(
+			const deleteEmails = <TData = AxiosResponse<ContactsEmailList>>(
 				contactId: string,
-				params: EmailsDeleteEmailsParams,
+				params: DeleteEmailsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/emails`, {
@@ -50,11 +48,9 @@ export const // --- title start
 			/**
 			 * @summary Locates email address(es) of the contact.
 			 */
-			const emailsListEmails = <
-				TData = AxiosResponse<WebitelContactsEmailList>,
-			>(
+			const listEmails = <TData = AxiosResponse<ContactsEmailList>>(
 				contactId: string,
-				params?: EmailsListEmailsParams,
+				params?: ListEmailsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/emails`, {
@@ -65,17 +61,15 @@ export const // --- title start
 			/**
 			 * @summary Update or append email address(es) of the contact.
 			 */
-			const emailsMergeEmails = <
-				TData = AxiosResponse<WebitelContactsEmailList>,
-			>(
+			const mergeEmails = <TData = AxiosResponse<ContactsEmailList>>(
 				contactId: string,
-				webitelContactsInputEmailAddress: WebitelContactsInputEmailAddress[],
-				params?: EmailsMergeEmailsParams,
+				contactsInputEmailAddress: ContactsInputEmailAddress[],
+				params?: MergeEmailsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/contacts/${contactId}/emails`,
-					webitelContactsInputEmailAddress,
+					contactsInputEmailAddress,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -85,17 +79,15 @@ export const // --- title start
 			/**
 			 * @summary Resets all emails of the contact according to the input dataset.
 			 */
-			const emailsResetEmails = <
-				TData = AxiosResponse<WebitelContactsEmailList>,
-			>(
+			const resetEmails = <TData = AxiosResponse<ContactsEmailList>>(
 				contactId: string,
-				webitelContactsInputEmailAddress: WebitelContactsInputEmailAddress[],
-				params?: EmailsResetEmailsParams,
+				contactsInputEmailAddress: ContactsInputEmailAddress[],
+				params?: ResetEmailsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/emails`,
-					webitelContactsInputEmailAddress,
+					contactsInputEmailAddress,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -105,12 +97,10 @@ export const // --- title start
 			/**
 			 * @summary Remove the contact's email address link
 			 */
-			const emailsDeleteEmail = <
-				TData = AxiosResponse<WebitelContactsEmailAddress>,
-			>(
+			const deleteEmail = <TData = AxiosResponse<ContactsEmailAddress>>(
 				contactId: string,
 				etag: string,
-				params?: EmailsDeleteEmailParams,
+				params?: DeleteEmailParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/emails/${etag}`, {
@@ -121,12 +111,10 @@ export const // --- title start
 			/**
 			 * @summary Locate the email address link.
 			 */
-			const emailsLocateEmail = <
-				TData = AxiosResponse<WebitelContactsEmailAddress>,
-			>(
+			const locateEmail = <TData = AxiosResponse<ContactsEmailAddress>>(
 				contactId: string,
 				etag: string,
-				params?: EmailsLocateEmailParams,
+				params?: LocateEmailParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/emails/${etag}`, {
@@ -137,18 +125,16 @@ export const // --- title start
 			/**
 			 * @summary Update the contact's email address link details
 			 */
-			const emailsUpdateEmail2 = <
-				TData = AxiosResponse<WebitelContactsEmailList>,
-			>(
+			const updateEmail2 = <TData = AxiosResponse<ContactsEmailList>>(
 				contactId: string,
 				etag: string,
-				emailsUpdateEmail2Body: EmailsUpdateEmail2Body,
-				params?: EmailsUpdateEmail2Params,
+				updateEmail2Body: UpdateEmail2Body,
+				params?: UpdateEmail2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/${contactId}/emails/${etag}`,
-					emailsUpdateEmail2Body,
+					updateEmail2Body,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -158,18 +144,16 @@ export const // --- title start
 			/**
 			 * @summary Update the contact's email address link details
 			 */
-			const emailsUpdateEmail = <
-				TData = AxiosResponse<WebitelContactsEmailList>,
-			>(
+			const updateEmail = <TData = AxiosResponse<ContactsEmailList>>(
 				contactId: string,
 				etag: string,
-				emailsUpdateEmailBody: EmailsUpdateEmailBody,
-				params?: EmailsUpdateEmailParams,
+				updateEmailBody: UpdateEmailBody,
+				params?: UpdateEmailParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/emails/${etag}`,
-					emailsUpdateEmailBody,
+					updateEmailBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -179,25 +163,23 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				emailsDeleteEmails,
-				emailsListEmails,
-				emailsMergeEmails,
-				emailsResetEmails,
-				emailsDeleteEmail,
-				emailsLocateEmail,
-				emailsUpdateEmail2,
-				emailsUpdateEmail,
+				deleteEmails,
+				listEmails,
+				mergeEmails,
+				resetEmails,
+				deleteEmail,
+				locateEmail,
+				updateEmail2,
+				updateEmail,
 			};
 		};
-export type EmailsDeleteEmailsResult = AxiosResponse<WebitelContactsEmailList>;
-export type EmailsListEmailsResult = AxiosResponse<WebitelContactsEmailList>;
-export type EmailsMergeEmailsResult = AxiosResponse<WebitelContactsEmailList>;
-export type EmailsResetEmailsResult = AxiosResponse<WebitelContactsEmailList>;
-export type EmailsDeleteEmailResult =
-	AxiosResponse<WebitelContactsEmailAddress>;
-export type EmailsLocateEmailResult =
-	AxiosResponse<WebitelContactsEmailAddress>;
-export type EmailsUpdateEmail2Result = AxiosResponse<WebitelContactsEmailList>;
-export type EmailsUpdateEmailResult = AxiosResponse<WebitelContactsEmailList>;
+export type DeleteEmailsResult = AxiosResponse<ContactsEmailList>;
+export type ListEmailsResult = AxiosResponse<ContactsEmailList>;
+export type MergeEmailsResult = AxiosResponse<ContactsEmailList>;
+export type ResetEmailsResult = AxiosResponse<ContactsEmailList>;
+export type DeleteEmailResult = AxiosResponse<ContactsEmailAddress>;
+export type LocateEmailResult = AxiosResponse<ContactsEmailAddress>;
+export type UpdateEmail2Result = AxiosResponse<ContactsEmailList>;
+export type UpdateEmailResult = AxiosResponse<ContactsEmailList>;
 
 // --- footer end

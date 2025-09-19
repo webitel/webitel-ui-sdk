@@ -6,7 +6,7 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const classesSearchClassesQueryParams = zod.object({
+export const searchClassesQueryParams = zod.object({
 	domain: zod
 		.string()
 		.optional()
@@ -24,7 +24,7 @@ export const classesSearchClassesQueryParams = zod.object({
 	size: zod.number().optional().describe('page size'),
 });
 
-export const classesSearchClassesResponse = zod.object({
+export const searchClassesResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -41,11 +41,11 @@ export const classesSearchClassesResponse = zod.object({
 	size: zod.number().optional(),
 });
 
-export const classesUpdateClass2Params = zod.object({
+export const updateClass2Params = zod.object({
 	'class.id': zod.string().describe('(class::object).id'),
 });
 
-export const classesUpdateClass2Body = zod.object({
+export const updateClass2Body = zod.object({
 	class: zod
 		.object({
 			abac: zod.boolean().optional(),
@@ -58,7 +58,7 @@ export const classesUpdateClass2Body = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const classesUpdateClass2Response = zod.object({
+export const updateClass2Response = zod.object({
 	class: zod
 		.object({
 			abac: zod.boolean().optional(),
@@ -70,11 +70,11 @@ export const classesUpdateClass2Response = zod.object({
 		.optional(),
 });
 
-export const classesUpdateClassParams = zod.object({
+export const updateClassParams = zod.object({
 	'class.id': zod.string().describe('(class::object).id'),
 });
 
-export const classesUpdateClassBody = zod.object({
+export const updateClassBody = zod.object({
 	class: zod
 		.object({
 			abac: zod.boolean().optional(),
@@ -87,7 +87,7 @@ export const classesUpdateClassBody = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const classesUpdateClassResponse = zod.object({
+export const updateClassResponse = zod.object({
 	class: zod
 		.object({
 			abac: zod.boolean().optional(),
@@ -99,16 +99,16 @@ export const classesUpdateClassResponse = zod.object({
 		.optional(),
 });
 
-export const classesReadClassParams = zod.object({
+export const readClassParams = zod.object({
 	id: zod.string().describe('[filter]: obj.id = id'),
 });
 
-export const classesReadClassQueryParams = zod.object({
+export const readClassQueryParams = zod.object({
 	domain: zod.string().optional(),
 	class: zod.string().optional().describe("[filter]: like '%class%'"),
 });
 
-export const classesReadClassResponse = zod.object({
+export const readClassResponse = zod.object({
 	class: zod
 		.object({
 			abac: zod.boolean().optional(),

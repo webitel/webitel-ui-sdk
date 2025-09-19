@@ -11,12 +11,12 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	ApiDeleteOAuthServiceRequest,
 	ApiDeleteOAuthServiceResponse,
-	ApiOAuth2FederationDeleteOAuthServiceBody,
-	ApiOAuth2FederationUpdateOAuthServiceBody,
 	ApiOAuthService,
 	ApiSearchOAuthServiceResponse,
-	OAuth2FederationLocateOAuthServiceParams,
-	OAuth2FederationSearchOAuthServiceParams,
+	LocateOAuthServiceParams,
+	OAuth2FederationDeleteOAuthServiceBody,
+	OAuth2FederationUpdateOAuthServiceBody,
+	SearchOAuthServiceParams,
 } from '.././_models';
 
 // --- header start
@@ -27,7 +27,7 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const oAuth2FederationDeleteOAuthService = <
+			const deleteOAuthService = <
 				TData = AxiosResponse<ApiDeleteOAuthServiceResponse>,
 			>(
 				apiDeleteOAuthServiceRequest: ApiDeleteOAuthServiceRequest,
@@ -38,10 +38,10 @@ export const // --- title start
 					...options,
 				});
 			};
-			const oAuth2FederationSearchOAuthService = <
+			const searchOAuthService = <
 				TData = AxiosResponse<ApiSearchOAuthServiceResponse>,
 			>(
-				params?: OAuth2FederationSearchOAuthServiceParams,
+				params?: SearchOAuthServiceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/oauth/apps', {
@@ -49,55 +49,47 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const oAuth2FederationCreateOAuthService = <
-				TData = AxiosResponse<ApiOAuthService>,
-			>(
+			const createOAuthService = <TData = AxiosResponse<ApiOAuthService>>(
 				apiOAuthService: ApiOAuthService,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post('/oauth/apps', apiOAuthService, options);
 			};
-			const oAuth2FederationUpdateOAuthService2 = <
-				TData = AxiosResponse<ApiOAuthService>,
-			>(
-				apiOAuth2FederationUpdateOAuthServiceBody: ApiOAuth2FederationUpdateOAuthServiceBody,
+			const updateOAuthService2 = <TData = AxiosResponse<ApiOAuthService>>(
+				oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					'/oauth/apps/changes.id}',
-					apiOAuth2FederationUpdateOAuthServiceBody,
+					oAuth2FederationUpdateOAuthServiceBody,
 					options,
 				);
 			};
-			const oAuth2FederationUpdateOAuthService = <
-				TData = AxiosResponse<ApiOAuthService>,
-			>(
-				apiOAuth2FederationUpdateOAuthServiceBody: ApiOAuth2FederationUpdateOAuthServiceBody,
+			const updateOAuthService = <TData = AxiosResponse<ApiOAuthService>>(
+				oAuth2FederationUpdateOAuthServiceBody: OAuth2FederationUpdateOAuthServiceBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					'/oauth/apps/changes.id}',
-					apiOAuth2FederationUpdateOAuthServiceBody,
+					oAuth2FederationUpdateOAuthServiceBody,
 					options,
 				);
 			};
-			const oAuth2FederationDeleteOAuthService2 = <
+			const deleteOAuthService2 = <
 				TData = AxiosResponse<ApiDeleteOAuthServiceResponse>,
 			>(
 				id: string[],
-				apiOAuth2FederationDeleteOAuthServiceBody: ApiOAuth2FederationDeleteOAuthServiceBody,
+				oAuth2FederationDeleteOAuthServiceBody: OAuth2FederationDeleteOAuthServiceBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/oauth/apps/${id}`, {
-					data: apiOAuth2FederationDeleteOAuthServiceBody,
+					data: oAuth2FederationDeleteOAuthServiceBody,
 					...options,
 				});
 			};
-			const oAuth2FederationLocateOAuthService = <
-				TData = AxiosResponse<ApiOAuthService>,
-			>(
+			const locateOAuthService = <TData = AxiosResponse<ApiOAuthService>>(
 				id: string[],
-				params?: OAuth2FederationLocateOAuthServiceParams,
+				params?: LocateOAuthServiceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/oauth/apps/${id}`, {
@@ -108,28 +100,24 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				oAuth2FederationDeleteOAuthService,
-				oAuth2FederationSearchOAuthService,
-				oAuth2FederationCreateOAuthService,
-				oAuth2FederationUpdateOAuthService2,
-				oAuth2FederationUpdateOAuthService,
-				oAuth2FederationDeleteOAuthService2,
-				oAuth2FederationLocateOAuthService,
+				deleteOAuthService,
+				searchOAuthService,
+				createOAuthService,
+				updateOAuthService2,
+				updateOAuthService,
+				deleteOAuthService2,
+				locateOAuthService,
 			};
 		};
-export type OAuth2FederationDeleteOAuthServiceResult =
+export type DeleteOAuthServiceResult =
 	AxiosResponse<ApiDeleteOAuthServiceResponse>;
-export type OAuth2FederationSearchOAuthServiceResult =
+export type SearchOAuthServiceResult =
 	AxiosResponse<ApiSearchOAuthServiceResponse>;
-export type OAuth2FederationCreateOAuthServiceResult =
-	AxiosResponse<ApiOAuthService>;
-export type OAuth2FederationUpdateOAuthService2Result =
-	AxiosResponse<ApiOAuthService>;
-export type OAuth2FederationUpdateOAuthServiceResult =
-	AxiosResponse<ApiOAuthService>;
-export type OAuth2FederationDeleteOAuthService2Result =
+export type CreateOAuthServiceResult = AxiosResponse<ApiOAuthService>;
+export type UpdateOAuthService2Result = AxiosResponse<ApiOAuthService>;
+export type UpdateOAuthServiceResult = AxiosResponse<ApiOAuthService>;
+export type DeleteOAuthService2Result =
 	AxiosResponse<ApiDeleteOAuthServiceResponse>;
-export type OAuth2FederationLocateOAuthServiceResult =
-	AxiosResponse<ApiOAuthService>;
+export type LocateOAuthServiceResult = AxiosResponse<ApiOAuthService>;
 
 // --- footer end

@@ -11,12 +11,15 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	DeleteQueueParams,
 	EngineCreateQueueRequest,
+	EngineGetQueuesGlobalStateResponse,
 	EngineListQueue,
 	EngineListReportGeneral,
 	EngineListTags,
 	EngineQueue,
 	EngineQueueServicePatchQueueBody,
 	EngineQueueServiceUpdateQueueBody,
+	EngineSetQueuesGlobalStateRequest,
+	EngineSetQueuesGlobalStateResponse,
 	ReadQueueParams,
 	SearchQueueParams,
 	SearchQueueReportGeneralParams,
@@ -66,6 +69,25 @@ export const // --- title start
 					...options,
 					params: { ...params, ...options?.params },
 				});
+			};
+			const getQueuesGlobalState = <
+				TData = AxiosResponse<EngineGetQueuesGlobalStateResponse>,
+			>(
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/call_center/queues/state', options);
+			};
+			const setQueuesGlobalState = <
+				TData = AxiosResponse<EngineSetQueuesGlobalStateResponse>,
+			>(
+				engineSetQueuesGlobalStateRequest: EngineSetQueuesGlobalStateRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.patch(
+					'/call_center/queues/state',
+					engineSetQueuesGlobalStateRequest,
+					options,
+				);
 			};
 			/**
 			 * @summary List RoutingSchemaTags
@@ -139,6 +161,8 @@ export const // --- title start
 				searchQueue,
 				createQueue,
 				searchQueueReportGeneral,
+				getQueuesGlobalState,
+				setQueuesGlobalState,
 				searchQueueTags,
 				deleteQueue,
 				readQueue,
@@ -150,6 +174,10 @@ export type SearchQueueResult = AxiosResponse<EngineListQueue>;
 export type CreateQueueResult = AxiosResponse<EngineQueue>;
 export type SearchQueueReportGeneralResult =
 	AxiosResponse<EngineListReportGeneral>;
+export type GetQueuesGlobalStateResult =
+	AxiosResponse<EngineGetQueuesGlobalStateResponse>;
+export type SetQueuesGlobalStateResult =
+	AxiosResponse<EngineSetQueuesGlobalStateResponse>;
 export type SearchQueueTagsResult = AxiosResponse<EngineListTags>;
 export type DeleteQueueResult = AxiosResponse<EngineQueue>;
 export type ReadQueueResult = AxiosResponse<EngineQueue>;

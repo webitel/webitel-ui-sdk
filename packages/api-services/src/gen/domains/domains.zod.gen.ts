@@ -6,19 +6,19 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const domainsDeleteDomainQueryParams = zod.object({
+export const deleteDomainQueryParams = zod.object({
 	domain: zod.string().optional(),
 	dc: zod.string().optional(),
 });
 
-export const domainsDeleteDomainResponse = zod.object({});
+export const deleteDomainResponse = zod.object({});
 
-export const domainsReadDomainQueryParams = zod.object({
+export const readDomainQueryParams = zod.object({
 	domain: zod.string().optional(),
 	dc: zod.string().optional(),
 });
 
-export const domainsReadDomainResponse = zod.object({
+export const readDomainResponse = zod.object({
 	domain: zod
 		.object({
 			country: zod.string().optional(),
@@ -40,7 +40,7 @@ export const domainsReadDomainResponse = zod.object({
 		.optional(),
 });
 
-export const domainsSearchDomainsQueryParams = zod.object({
+export const searchDomainsQueryParams = zod.object({
 	domain: zod.string().optional().describe('like'),
 	fields: zod.array(zod.string()).optional().describe('attrs'),
 	sort: zod.array(zod.string()).optional(),
@@ -48,7 +48,7 @@ export const domainsSearchDomainsQueryParams = zod.object({
 	size: zod.string().optional(),
 });
 
-export const domainsSearchDomainsResponse = zod.object({
+export const searchDomainsResponse = zod.object({
 	domains: zod
 		.array(
 			zod.object({
@@ -72,7 +72,7 @@ export const domainsSearchDomainsResponse = zod.object({
 		.optional(),
 });
 
-export const domainsCreateDomainBody = zod.object({
+export const createDomainBody = zod.object({
 	organization: zod
 		.object({
 			country: zod.string().optional(),
@@ -96,27 +96,27 @@ export const domainsCreateDomainBody = zod.object({
 	superuser: zod.string().optional(),
 });
 
-export const domainsCreateDomainResponse = zod.object({});
+export const createDomainResponse = zod.object({});
 
-export const domainsDeleteDomain2Params = zod.object({
+export const deleteDomain2Params = zod.object({
 	dc: zod.string(),
 });
 
-export const domainsDeleteDomain2QueryParams = zod.object({
+export const deleteDomain2QueryParams = zod.object({
 	domain: zod.string().optional(),
 });
 
-export const domainsDeleteDomain2Response = zod.object({});
+export const deleteDomain2Response = zod.object({});
 
-export const domainsReadDomain2Params = zod.object({
+export const readDomain2Params = zod.object({
 	dc: zod.string(),
 });
 
-export const domainsReadDomain2QueryParams = zod.object({
+export const readDomain2QueryParams = zod.object({
 	domain: zod.string().optional(),
 });
 
-export const domainsReadDomain2Response = zod.object({
+export const readDomain2Response = zod.object({
 	domain: zod
 		.object({
 			country: zod.string().optional(),
@@ -138,11 +138,11 @@ export const domainsReadDomain2Response = zod.object({
 		.optional(),
 });
 
-export const domainsUpdateDomain2Params = zod.object({
+export const updateDomain2Params = zod.object({
 	'domain.dc': zod.string().describe('component'),
 });
 
-export const domainsUpdateDomain2Body = zod.object({
+export const updateDomain2Body = zod.object({
 	domain: zod
 		.object({
 			country: zod.string().optional(),
@@ -163,7 +163,7 @@ export const domainsUpdateDomain2Body = zod.object({
 		.optional(),
 });
 
-export const domainsUpdateDomain2Response = zod.object({
+export const updateDomain2Response = zod.object({
 	domain: zod
 		.object({
 			country: zod.string().optional(),
@@ -185,11 +185,11 @@ export const domainsUpdateDomain2Response = zod.object({
 		.optional(),
 });
 
-export const domainsUpdateDomainParams = zod.object({
+export const updateDomainParams = zod.object({
 	'domain.dc': zod.string().describe('component'),
 });
 
-export const domainsUpdateDomainBody = zod.object({
+export const updateDomainBody = zod.object({
 	domain: zod
 		.object({
 			country: zod.string().optional(),
@@ -210,7 +210,7 @@ export const domainsUpdateDomainBody = zod.object({
 		.optional(),
 });
 
-export const domainsUpdateDomainResponse = zod.object({
+export const updateDomainResponse = zod.object({
 	domain: zod
 		.object({
 			country: zod.string().optional(),

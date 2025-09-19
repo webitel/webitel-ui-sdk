@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary rpc GetCertificate(CertificateUsageRequest) returns (CertificateUsageResponse) {}
  */
-export const customersGetCustomerQueryParams = zod.object({
+export const getCustomerQueryParams = zod.object({
 	id: zod
 		.string()
 		.optional()
@@ -24,7 +24,7 @@ export const customersGetCustomerQueryParams = zod.object({
 	sort: zod.array(zod.string()).optional(),
 });
 
-export const customersGetCustomerResponse = zod.object({
+export const getCustomerResponse = zod.object({
 	customer: zod
 		.object({
 			createdAt: zod.string().optional().describe('local created ms'),
@@ -108,7 +108,7 @@ export const customersGetCustomerResponse = zod.object({
 		.optional(),
 });
 
-export const customersUpdateCustomerQueryParams = zod.object({
+export const updateCustomerQueryParams = zod.object({
 	organization: zod
 		.string()
 		.optional()
@@ -123,7 +123,7 @@ export const customersUpdateCustomerQueryParams = zod.object({
 	revoke: zod.boolean().optional(),
 });
 
-export const customersUpdateCustomerResponse = zod.object({
+export const updateCustomerResponse = zod.object({
 	customer: zod
 		.object({
 			createdAt: zod.string().optional().describe('local created ms'),
@@ -207,11 +207,11 @@ export const customersUpdateCustomerResponse = zod.object({
 		.optional(),
 });
 
-export const customersLicenseUsageParams = zod.object({
+export const licenseUsageParams = zod.object({
 	customer_id: zod.string(),
 });
 
-export const customersLicenseUsageQueryParams = zod.object({
+export const licenseUsageQueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -235,7 +235,7 @@ export const customersLicenseUsageQueryParams = zod.object({
 	q: zod.string().optional().describe('filter: term of search'),
 });
 
-export const customersLicenseUsageResponse = zod.object({
+export const licenseUsageResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -285,13 +285,13 @@ export const customersLicenseUsageResponse = zod.object({
 /**
  * @summary rpc GetCertificate(CertificateUsageRequest) returns (CertificateUsageResponse) {}
  */
-export const customersGetCustomer2Params = zod.object({
+export const getCustomer2Params = zod.object({
 	id: zod
 		.string()
 		.describe('Available Filters\n\nshow by customer id; serial number (uuid)'),
 });
 
-export const customersGetCustomer2QueryParams = zod.object({
+export const getCustomer2QueryParams = zod.object({
 	valid: zod.boolean().optional().describe('show if valid only!'),
 	domainId: zod.string().optional().describe('identifier'),
 	domainName: zod.string().optional().describe('display name'),
@@ -302,7 +302,7 @@ export const customersGetCustomer2QueryParams = zod.object({
 	sort: zod.array(zod.string()).optional(),
 });
 
-export const customersGetCustomer2Response = zod.object({
+export const getCustomer2Response = zod.object({
 	customer: zod
 		.object({
 			createdAt: zod.string().optional().describe('local created ms'),
@@ -386,7 +386,7 @@ export const customersGetCustomer2Response = zod.object({
 		.optional(),
 });
 
-export const customersLicenseUsage2QueryParams = zod.object({
+export const licenseUsage2QueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -411,7 +411,7 @@ export const customersLicenseUsage2QueryParams = zod.object({
 	q: zod.string().optional().describe('filter: term of search'),
 });
 
-export const customersLicenseUsage2Response = zod.object({
+export const licenseUsage2Response = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -458,7 +458,7 @@ export const customersLicenseUsage2Response = zod.object({
 	page: zod.number().optional().describe('this page number !'),
 });
 
-export const customersLicenseUsage3QueryParams = zod.object({
+export const licenseUsage3QueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -483,7 +483,7 @@ export const customersLicenseUsage3QueryParams = zod.object({
 	q: zod.string().optional().describe('filter: term of search'),
 });
 
-export const customersLicenseUsage3Response = zod.object({
+export const licenseUsage3Response = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -530,13 +530,13 @@ export const customersLicenseUsage3Response = zod.object({
 	page: zod.number().optional().describe('this page number !'),
 });
 
-export const customersLicenseUsersParams = zod.object({
+export const licenseUsersParams = zod.object({
 	id: zod
 		.string()
 		.describe('----- Search Filters ----- //\n\nREQUIRED Product ID'),
 });
 
-export const customersLicenseUsersQueryParams = zod.object({
+export const licenseUsersQueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -550,7 +550,7 @@ export const customersLicenseUsersQueryParams = zod.object({
 	q: zod.string().optional().describe('filter: term of search (username)'),
 });
 
-export const customersLicenseUsersResponse = zod.object({
+export const licenseUsersResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -576,6 +576,6 @@ export const customersLicenseUsersResponse = zod.object({
 	page: zod.number().optional().describe('this page number !'),
 });
 
-export const customersServerInfoResponse = zod.object({
+export const serverInfoResponse = zod.object({
 	key: zod.string().optional(),
 });

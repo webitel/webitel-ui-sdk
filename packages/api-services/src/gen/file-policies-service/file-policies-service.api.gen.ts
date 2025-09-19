@@ -9,16 +9,16 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	FilePoliciesServiceSearchFilePoliciesParams,
+	SearchFilePoliciesParams,
 	StorageCreateFilePolicyRequest,
+	StorageFilePoliciesServiceFilePolicyApplyBody,
+	StorageFilePoliciesServiceMovePositionFilePolicyBody,
+	StorageFilePoliciesServicePatchFilePolicyBody,
+	StorageFilePoliciesServiceUpdateFilePolicyBody,
 	StorageFilePolicy,
-	StorageFilePolicyApplyRequest,
 	StorageFilePolicyApplyResponse,
 	StorageListFilePolicies,
-	StorageMovePositionFilePolicyRequest,
 	StorageMovePositionFilePolicyResponse,
-	StoragePatchFilePolicyRequest,
-	StorageUpdateFilePolicyRequest,
 } from '.././_models';
 
 // --- header start
@@ -32,10 +32,10 @@ export const // --- title start
 			/**
 			 * @summary List of FilePolicy
 			 */
-			const filePoliciesServiceSearchFilePolicies = <
+			const searchFilePolicies = <
 				TData = AxiosResponse<StorageListFilePolicies>,
 			>(
-				params?: FilePoliciesServiceSearchFilePoliciesParams,
+				params?: SearchFilePoliciesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/storage/file_policies', {
@@ -46,9 +46,7 @@ export const // --- title start
 			/**
 			 * @summary Create FilePolicy
 			 */
-			const filePoliciesServiceCreateFilePolicy = <
-				TData = AxiosResponse<StorageFilePolicy>,
-			>(
+			const createFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
 				storageCreateFilePolicyRequest: StorageCreateFilePolicyRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -58,26 +56,24 @@ export const // --- title start
 					options,
 				);
 			};
-			const filePoliciesServiceMovePositionFilePolicy = <
+			const movePositionFilePolicy = <
 				TData = AxiosResponse<StorageMovePositionFilePolicyResponse>,
 			>(
 				fromId: number,
 				toId: number,
-				storageMovePositionFilePolicyRequest: StorageMovePositionFilePolicyRequest,
+				storageFilePoliciesServiceMovePositionFilePolicyBody: StorageFilePoliciesServiceMovePositionFilePolicyBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/storage/file_policies/${fromId}/to/${toId}`,
-					storageMovePositionFilePolicyRequest,
+					storageFilePoliciesServiceMovePositionFilePolicyBody,
 					options,
 				);
 			};
 			/**
 			 * @summary Remove FilePolicy
 			 */
-			const filePoliciesServiceDeleteFilePolicy = <
-				TData = AxiosResponse<StorageFilePolicy>,
-			>(
+			const deleteFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
 				id: number,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -86,9 +82,7 @@ export const // --- title start
 			/**
 			 * @summary FilePolicy item
 			 */
-			const filePoliciesServiceReadFilePolicy = <
-				TData = AxiosResponse<StorageFilePolicy>,
-			>(
+			const readFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
 				id: number,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -97,76 +91,66 @@ export const // --- title start
 			/**
 			 * @summary Patch FilePolicy
 			 */
-			const filePoliciesServicePatchFilePolicy = <
-				TData = AxiosResponse<StorageFilePolicy>,
-			>(
+			const patchFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
 				id: number,
-				storagePatchFilePolicyRequest: StoragePatchFilePolicyRequest,
+				storageFilePoliciesServicePatchFilePolicyBody: StorageFilePoliciesServicePatchFilePolicyBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/storage/file_policies/${id}`,
-					storagePatchFilePolicyRequest,
+					storageFilePoliciesServicePatchFilePolicyBody,
 					options,
 				);
 			};
 			/**
 			 * @summary Update FilePolicy
 			 */
-			const filePoliciesServiceUpdateFilePolicy = <
-				TData = AxiosResponse<StorageFilePolicy>,
-			>(
+			const updateFilePolicy = <TData = AxiosResponse<StorageFilePolicy>>(
 				id: number,
-				storageUpdateFilePolicyRequest: StorageUpdateFilePolicyRequest,
+				storageFilePoliciesServiceUpdateFilePolicyBody: StorageFilePoliciesServiceUpdateFilePolicyBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/storage/file_policies/${id}`,
-					storageUpdateFilePolicyRequest,
+					storageFilePoliciesServiceUpdateFilePolicyBody,
 					options,
 				);
 			};
-			const filePoliciesServiceFilePolicyApply = <
+			const filePolicyApply = <
 				TData = AxiosResponse<StorageFilePolicyApplyResponse>,
 			>(
 				id: number,
-				storageFilePolicyApplyRequest: StorageFilePolicyApplyRequest,
+				storageFilePoliciesServiceFilePolicyApplyBody: StorageFilePoliciesServiceFilePolicyApplyBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/storage/file_policies/${id}/apply`,
-					storageFilePolicyApplyRequest,
+					storageFilePoliciesServiceFilePolicyApplyBody,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				filePoliciesServiceSearchFilePolicies,
-				filePoliciesServiceCreateFilePolicy,
-				filePoliciesServiceMovePositionFilePolicy,
-				filePoliciesServiceDeleteFilePolicy,
-				filePoliciesServiceReadFilePolicy,
-				filePoliciesServicePatchFilePolicy,
-				filePoliciesServiceUpdateFilePolicy,
-				filePoliciesServiceFilePolicyApply,
+				searchFilePolicies,
+				createFilePolicy,
+				movePositionFilePolicy,
+				deleteFilePolicy,
+				readFilePolicy,
+				patchFilePolicy,
+				updateFilePolicy,
+				filePolicyApply,
 			};
 		};
-export type FilePoliciesServiceSearchFilePoliciesResult =
-	AxiosResponse<StorageListFilePolicies>;
-export type FilePoliciesServiceCreateFilePolicyResult =
-	AxiosResponse<StorageFilePolicy>;
-export type FilePoliciesServiceMovePositionFilePolicyResult =
+export type SearchFilePoliciesResult = AxiosResponse<StorageListFilePolicies>;
+export type CreateFilePolicyResult = AxiosResponse<StorageFilePolicy>;
+export type MovePositionFilePolicyResult =
 	AxiosResponse<StorageMovePositionFilePolicyResponse>;
-export type FilePoliciesServiceDeleteFilePolicyResult =
-	AxiosResponse<StorageFilePolicy>;
-export type FilePoliciesServiceReadFilePolicyResult =
-	AxiosResponse<StorageFilePolicy>;
-export type FilePoliciesServicePatchFilePolicyResult =
-	AxiosResponse<StorageFilePolicy>;
-export type FilePoliciesServiceUpdateFilePolicyResult =
-	AxiosResponse<StorageFilePolicy>;
-export type FilePoliciesServiceFilePolicyApplyResult =
+export type DeleteFilePolicyResult = AxiosResponse<StorageFilePolicy>;
+export type ReadFilePolicyResult = AxiosResponse<StorageFilePolicy>;
+export type PatchFilePolicyResult = AxiosResponse<StorageFilePolicy>;
+export type UpdateFilePolicyResult = AxiosResponse<StorageFilePolicy>;
+export type FilePolicyApplyResult =
 	AxiosResponse<StorageFilePolicyApplyResponse>;
 
 // --- footer end

@@ -9,17 +9,17 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	AddUserAccessTokenBody,
+	AddUserAccessTokenParams,
 	ApiUserAccessToken,
 	ApiUserAccessTokenList,
-	UserAccessTokensAddUserAccessTokenBody,
-	UserAccessTokensAddUserAccessTokenParams,
-	UserAccessTokensDeleteUserAccessTokenParams,
-	UserAccessTokensGetUserAccessTokenParams,
-	UserAccessTokensListUserAccessTokenParams,
-	UserAccessTokensUpdateUserAccessToken2Body,
-	UserAccessTokensUpdateUserAccessToken2Params,
-	UserAccessTokensUpdateUserAccessTokenBody,
-	UserAccessTokensUpdateUserAccessTokenParams,
+	DeleteUserAccessTokenParams,
+	GetUserAccessTokenParams,
+	ListUserAccessTokenParams,
+	UpdateUserAccessToken2Body,
+	UpdateUserAccessToken2Params,
+	UpdateUserAccessTokenBody,
+	UpdateUserAccessTokenParams,
 } from '.././_models';
 
 // --- header start
@@ -30,58 +30,54 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const userAccessTokensAddUserAccessToken = <
-				TData = AxiosResponse<ApiUserAccessToken>,
-			>(
-				userAccessTokensAddUserAccessTokenBody: UserAccessTokensAddUserAccessTokenBody,
-				params?: UserAccessTokensAddUserAccessTokenParams,
+			const addUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
+				addUserAccessTokenBody: AddUserAccessTokenBody,
+				params?: AddUserAccessTokenParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					'/users/token.user.id}/tokens',
-					userAccessTokensAddUserAccessTokenBody,
+					addUserAccessTokenBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
 					},
 				);
 			};
-			const userAccessTokensUpdateUserAccessToken2 = <
+			const updateUserAccessToken2 = <
 				TData = AxiosResponse<ApiUserAccessToken>,
 			>(
-				userAccessTokensUpdateUserAccessToken2Body: UserAccessTokensUpdateUserAccessToken2Body,
-				params?: UserAccessTokensUpdateUserAccessToken2Params,
+				updateUserAccessToken2Body: UpdateUserAccessToken2Body,
+				params?: UpdateUserAccessToken2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					'/users/update.user.id}/tokens/update.id}',
-					userAccessTokensUpdateUserAccessToken2Body,
+					updateUserAccessToken2Body,
 					{
 						...options,
 						params: { ...params, ...options?.params },
 					},
 				);
 			};
-			const userAccessTokensUpdateUserAccessToken = <
-				TData = AxiosResponse<ApiUserAccessToken>,
-			>(
-				userAccessTokensUpdateUserAccessTokenBody: UserAccessTokensUpdateUserAccessTokenBody,
-				params?: UserAccessTokensUpdateUserAccessTokenParams,
+			const updateUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
+				updateUserAccessTokenBody: UpdateUserAccessTokenBody,
+				params?: UpdateUserAccessTokenParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					'/users/update.user.id}/tokens/update.id}',
-					userAccessTokensUpdateUserAccessTokenBody,
+					updateUserAccessTokenBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
 					},
 				);
 			};
-			const userAccessTokensListUserAccessToken = <
+			const listUserAccessToken = <
 				TData = AxiosResponse<ApiUserAccessTokenList>,
 			>(
-				params?: UserAccessTokensListUserAccessTokenParams,
+				params?: ListUserAccessTokenParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/users/user.id}/tokens', {
@@ -89,11 +85,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const userAccessTokensDeleteUserAccessToken = <
-				TData = AxiosResponse<ApiUserAccessToken>,
-			>(
+			const deleteUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
 				id: string,
-				params?: UserAccessTokensDeleteUserAccessTokenParams,
+				params?: DeleteUserAccessTokenParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/users/user.id}/tokens/${id}`, {
@@ -101,11 +95,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const userAccessTokensGetUserAccessToken = <
-				TData = AxiosResponse<ApiUserAccessToken>,
-			>(
+			const getUserAccessToken = <TData = AxiosResponse<ApiUserAccessToken>>(
 				id: string,
-				params?: UserAccessTokensGetUserAccessTokenParams,
+				params?: GetUserAccessTokenParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/users/user.id}/tokens/${id}`, {
@@ -116,25 +108,19 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				userAccessTokensAddUserAccessToken,
-				userAccessTokensUpdateUserAccessToken2,
-				userAccessTokensUpdateUserAccessToken,
-				userAccessTokensListUserAccessToken,
-				userAccessTokensDeleteUserAccessToken,
-				userAccessTokensGetUserAccessToken,
+				addUserAccessToken,
+				updateUserAccessToken2,
+				updateUserAccessToken,
+				listUserAccessToken,
+				deleteUserAccessToken,
+				getUserAccessToken,
 			};
 		};
-export type UserAccessTokensAddUserAccessTokenResult =
-	AxiosResponse<ApiUserAccessToken>;
-export type UserAccessTokensUpdateUserAccessToken2Result =
-	AxiosResponse<ApiUserAccessToken>;
-export type UserAccessTokensUpdateUserAccessTokenResult =
-	AxiosResponse<ApiUserAccessToken>;
-export type UserAccessTokensListUserAccessTokenResult =
-	AxiosResponse<ApiUserAccessTokenList>;
-export type UserAccessTokensDeleteUserAccessTokenResult =
-	AxiosResponse<ApiUserAccessToken>;
-export type UserAccessTokensGetUserAccessTokenResult =
-	AxiosResponse<ApiUserAccessToken>;
+export type AddUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>;
+export type UpdateUserAccessToken2Result = AxiosResponse<ApiUserAccessToken>;
+export type UpdateUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>;
+export type ListUserAccessTokenResult = AxiosResponse<ApiUserAccessTokenList>;
+export type DeleteUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>;
+export type GetUserAccessTokenResult = AxiosResponse<ApiUserAccessToken>;
 
 // --- footer end

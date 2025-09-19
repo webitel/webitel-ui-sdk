@@ -9,9 +9,9 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	TimelineGetTimelineParams,
-	WebitelContactsGetTimelineCounterResponse,
-	WebitelContactsGetTimelineResponse,
+	ContactsGetTimelineCounterResponse,
+	ContactsGetTimelineResponse,
+	GetTimelineParams,
 } from '.././_models';
 
 // --- header start
@@ -22,11 +22,9 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const timelineGetTimeline = <
-				TData = AxiosResponse<WebitelContactsGetTimelineResponse>,
-			>(
+			const getTimeline = <TData = AxiosResponse<ContactsGetTimelineResponse>>(
 				contactId: string,
-				params?: TimelineGetTimelineParams,
+				params?: GetTimelineParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/timeline`, {
@@ -34,8 +32,8 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const timelineGetTimelineCounter = <
-				TData = AxiosResponse<WebitelContactsGetTimelineCounterResponse>,
+			const getTimelineCounter = <
+				TData = AxiosResponse<ContactsGetTimelineCounterResponse>,
 			>(
 				contactId: string,
 				options?: AxiosRequestConfig,
@@ -44,11 +42,10 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { timelineGetTimeline, timelineGetTimelineCounter };
+			return { getTimeline, getTimelineCounter };
 		};
-export type TimelineGetTimelineResult =
-	AxiosResponse<WebitelContactsGetTimelineResponse>;
-export type TimelineGetTimelineCounterResult =
-	AxiosResponse<WebitelContactsGetTimelineCounterResponse>;
+export type GetTimelineResult = AxiosResponse<ContactsGetTimelineResponse>;
+export type GetTimelineCounterResult =
+	AxiosResponse<ContactsGetTimelineCounterResponse>;
 
 // --- footer end

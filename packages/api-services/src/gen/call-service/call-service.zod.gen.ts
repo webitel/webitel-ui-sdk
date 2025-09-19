@@ -532,6 +532,7 @@ export const searchHistoryCallResponse = zod.object({
 				files: zod
 					.array(
 						zod.object({
+							channel: zod.string().optional(),
 							id: zod.string().optional(),
 							mimeType: zod.string().optional(),
 							name: zod.string().optional(),
@@ -879,6 +880,7 @@ export const searchHistoryCallPostResponse = zod.object({
 				files: zod
 					.array(
 						zod.object({
+							channel: zod.string().optional(),
 							id: zod.string().optional(),
 							mimeType: zod.string().optional(),
 							name: zod.string().optional(),
@@ -1336,6 +1338,7 @@ export const patchHistoryCallResponse = zod.object({
 	files: zod
 		.array(
 			zod.object({
+				channel: zod.string().optional(),
 				id: zod.string().optional(),
 				mimeType: zod.string().optional(),
 				name: zod.string().optional(),

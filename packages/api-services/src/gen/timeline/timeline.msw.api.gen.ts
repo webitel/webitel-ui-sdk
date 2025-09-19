@@ -8,14 +8,14 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 import type {
-	WebitelContactsGetTimelineCounterResponse,
-	WebitelContactsGetTimelineResponse,
+	ContactsGetTimelineCounterResponse,
+	ContactsGetTimelineResponse,
 } from '.././_models';
-import { WebitelContactsTimelineEventType } from '.././_models';
+import { ContactsTimelineEventType } from '.././_models';
 
-export const getTimelineGetTimelineResponseMock = (
-	overrideResponse: Partial<WebitelContactsGetTimelineResponse> = {},
-): WebitelContactsGetTimelineResponse => ({
+export const getGetTimelineResponseMock = (
+	overrideResponse: Partial<ContactsGetTimelineResponse> = {},
+): ContactsGetTimelineResponse => ({
 	days: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -444,7 +444,7 @@ export const getTimelineGetTimelineResponseMock = (
 					]),
 					type: faker.helpers.arrayElement([
 						faker.helpers.arrayElement(
-							Object.values(WebitelContactsTimelineEventType),
+							Object.values(ContactsTimelineEventType),
 						),
 						undefined,
 					]),
@@ -462,9 +462,9 @@ export const getTimelineGetTimelineResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimelineGetTimelineCounterResponseMock = (
-	overrideResponse: Partial<WebitelContactsGetTimelineCounterResponse> = {},
-): WebitelContactsGetTimelineCounterResponse => ({
+export const getGetTimelineCounterResponseMock = (
+	overrideResponse: Partial<ContactsGetTimelineCounterResponse> = {},
+): ContactsGetTimelineCounterResponse => ({
 	callsCount: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -488,14 +488,12 @@ export const getTimelineGetTimelineCounterResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimelineGetTimelineMockHandler = (
+export const getGetTimelineMockHandler = (
 	overrideResponse?:
-		| WebitelContactsGetTimelineResponse
+		| ContactsGetTimelineResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsGetTimelineResponse>
-				| WebitelContactsGetTimelineResponse),
+		  ) => Promise<ContactsGetTimelineResponse> | ContactsGetTimelineResponse),
 ) => {
 	return http.get('*/contacts/:contactId/timeline', async (info) => {
 		await delay(1000);
@@ -506,21 +504,21 @@ export const getTimelineGetTimelineMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimelineGetTimelineResponseMock(),
+					: getGetTimelineResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimelineGetTimelineCounterMockHandler = (
+export const getGetTimelineCounterMockHandler = (
 	overrideResponse?:
-		| WebitelContactsGetTimelineCounterResponse
+		| ContactsGetTimelineCounterResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<WebitelContactsGetTimelineCounterResponse>
-				| WebitelContactsGetTimelineCounterResponse),
+				| Promise<ContactsGetTimelineCounterResponse>
+				| ContactsGetTimelineCounterResponse),
 ) => {
 	return http.get('*/contacts/:contactId/timeline/counter', async (info) => {
 		await delay(1000);
@@ -531,13 +529,13 @@ export const getTimelineGetTimelineCounterMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimelineGetTimelineCounterResponseMock(),
+					: getGetTimelineCounterResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getTimelineMock = () => [
-	getTimelineGetTimelineMockHandler(),
-	getTimelineGetTimelineCounterMockHandler(),
+	getGetTimelineMockHandler(),
+	getGetTimelineCounterMockHandler(),
 ];

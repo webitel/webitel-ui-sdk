@@ -14,7 +14,7 @@ import type {
 	ApiUpdateAccessResponseV1,
 } from '.././_models';
 
-export const getAccessStoreListDefaultAccessResponseMock = (
+export const getListDefaultAccessResponseMock = (
 	overrideResponse: Partial<ApiListAccessResponseV1> = {},
 ): ApiListAccessResponseV1 => ({
 	items: faker.helpers.arrayElement([
@@ -71,7 +71,7 @@ export const getAccessStoreListDefaultAccessResponseMock = (
 	...overrideResponse,
 });
 
-export const getAccessStoreToggleDefaultAccessResponseMock = (
+export const getToggleDefaultAccessResponseMock = (
 	overrideResponse: Partial<ApiToggleDefaultAccessResponse> = {},
 ): ApiToggleDefaultAccessResponse => ({
 	granted: faker.helpers.arrayElement([
@@ -169,7 +169,7 @@ export const getAccessStoreToggleDefaultAccessResponseMock = (
 	...overrideResponse,
 });
 
-export const getAccessStoreListObjectAccessResponseMock = (
+export const getListObjectAccessResponseMock = (
 	overrideResponse: Partial<ApiListAccessResponseV1> = {},
 ): ApiListAccessResponseV1 => ({
 	items: faker.helpers.arrayElement([
@@ -226,7 +226,7 @@ export const getAccessStoreListObjectAccessResponseMock = (
 	...overrideResponse,
 });
 
-export const getAccessStoreToggleObjectAccessResponseMock = (
+export const getToggleObjectAccessResponseMock = (
 	overrideResponse: Partial<ApiUpdateAccessResponseV1> = {},
 ): ApiUpdateAccessResponseV1 => ({
 	granted: faker.helpers.arrayElement([
@@ -240,7 +240,7 @@ export const getAccessStoreToggleObjectAccessResponseMock = (
 	...overrideResponse,
 });
 
-export const getAccessStoreListDefaultAccessMockHandler = (
+export const getListDefaultAccessMockHandler = (
 	overrideResponse?:
 		| ApiListAccessResponseV1
 		| ((
@@ -256,14 +256,14 @@ export const getAccessStoreListDefaultAccessMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAccessStoreListDefaultAccessResponseMock(),
+					: getListDefaultAccessResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getAccessStoreToggleDefaultAccessMockHandler = (
+export const getToggleDefaultAccessMockHandler = (
 	overrideResponse?:
 		| ApiToggleDefaultAccessResponse
 		| ((
@@ -283,7 +283,7 @@ export const getAccessStoreToggleDefaultAccessMockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getAccessStoreToggleDefaultAccessResponseMock(),
+						: getToggleDefaultAccessResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -291,7 +291,7 @@ export const getAccessStoreToggleDefaultAccessMockHandler = (
 	);
 };
 
-export const getAccessStoreListObjectAccessMockHandler = (
+export const getListObjectAccessMockHandler = (
 	overrideResponse?:
 		| ApiListAccessResponseV1
 		| ((
@@ -307,14 +307,14 @@ export const getAccessStoreListObjectAccessMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAccessStoreListObjectAccessResponseMock(),
+					: getListObjectAccessResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getAccessStoreToggleObjectAccessMockHandler = (
+export const getToggleObjectAccessMockHandler = (
 	overrideResponse?:
 		| ApiUpdateAccessResponseV1
 		| ((
@@ -330,15 +330,15 @@ export const getAccessStoreToggleObjectAccessMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAccessStoreToggleObjectAccessResponseMock(),
+					: getToggleObjectAccessResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getAccessStoreMock = () => [
-	getAccessStoreListDefaultAccessMockHandler(),
-	getAccessStoreToggleDefaultAccessMockHandler(),
-	getAccessStoreListObjectAccessMockHandler(),
-	getAccessStoreToggleObjectAccessMockHandler(),
+	getListDefaultAccessMockHandler(),
+	getToggleDefaultAccessMockHandler(),
+	getListObjectAccessMockHandler(),
+	getToggleObjectAccessMockHandler(),
 ];

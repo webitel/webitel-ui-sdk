@@ -14,7 +14,7 @@ import type {
 } from '.././_models';
 import { StorageProviderType, StorageServiceType } from '.././_models';
 
-export const getCognitiveProfileServiceSearchCognitiveProfileResponseMock = (
+export const getSearchCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageListCognitiveProfile> = {},
 ): StorageListCognitiveProfile => ({
 	items: faker.helpers.arrayElement([
@@ -59,7 +59,6 @@ export const getCognitiveProfileServiceSearchCognitiveProfileResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
-			properties: faker.helpers.arrayElement([{}, undefined]),
 			provider: faker.helpers.arrayElement([
 				faker.helpers.arrayElement(Object.values(StorageProviderType)),
 				undefined,
@@ -92,7 +91,7 @@ export const getCognitiveProfileServiceSearchCognitiveProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getCognitiveProfileServiceCreateCognitiveProfileResponseMock = (
+export const getCreateCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageCognitiveProfile> = {},
 ): StorageCognitiveProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -126,7 +125,6 @@ export const getCognitiveProfileServiceCreateCognitiveProfileResponseMock = (
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),
-	properties: faker.helpers.arrayElement([{}, undefined]),
 	provider: faker.helpers.arrayElement([
 		faker.helpers.arrayElement(Object.values(StorageProviderType)),
 		undefined,
@@ -155,7 +153,7 @@ export const getCognitiveProfileServiceCreateCognitiveProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getCognitiveProfileServiceDeleteCognitiveProfileResponseMock = (
+export const getDeleteCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageCognitiveProfile> = {},
 ): StorageCognitiveProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -189,7 +187,6 @@ export const getCognitiveProfileServiceDeleteCognitiveProfileResponseMock = (
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),
-	properties: faker.helpers.arrayElement([{}, undefined]),
 	provider: faker.helpers.arrayElement([
 		faker.helpers.arrayElement(Object.values(StorageProviderType)),
 		undefined,
@@ -218,7 +215,7 @@ export const getCognitiveProfileServiceDeleteCognitiveProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getCognitiveProfileServiceReadCognitiveProfileResponseMock = (
+export const getReadCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageCognitiveProfile> = {},
 ): StorageCognitiveProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -252,7 +249,6 @@ export const getCognitiveProfileServiceReadCognitiveProfileResponseMock = (
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),
-	properties: faker.helpers.arrayElement([{}, undefined]),
 	provider: faker.helpers.arrayElement([
 		faker.helpers.arrayElement(Object.values(StorageProviderType)),
 		undefined,
@@ -281,7 +277,7 @@ export const getCognitiveProfileServiceReadCognitiveProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getCognitiveProfileServicePatchCognitiveProfileResponseMock = (
+export const getPatchCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageCognitiveProfile> = {},
 ): StorageCognitiveProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -315,7 +311,6 @@ export const getCognitiveProfileServicePatchCognitiveProfileResponseMock = (
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),
-	properties: faker.helpers.arrayElement([{}, undefined]),
 	provider: faker.helpers.arrayElement([
 		faker.helpers.arrayElement(Object.values(StorageProviderType)),
 		undefined,
@@ -344,7 +339,7 @@ export const getCognitiveProfileServicePatchCognitiveProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getCognitiveProfileServiceUpdateCognitiveProfileResponseMock = (
+export const getUpdateCognitiveProfileResponseMock = (
 	overrideResponse: Partial<StorageCognitiveProfile> = {},
 ): StorageCognitiveProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -378,7 +373,6 @@ export const getCognitiveProfileServiceUpdateCognitiveProfileResponseMock = (
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),
-	properties: faker.helpers.arrayElement([{}, undefined]),
 	provider: faker.helpers.arrayElement([
 		faker.helpers.arrayElement(Object.values(StorageProviderType)),
 		undefined,
@@ -407,30 +401,29 @@ export const getCognitiveProfileServiceUpdateCognitiveProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getCognitiveProfileServiceSearchCognitiveProfileVoicesResponseMock =
-	(
-		overrideResponse: Partial<StorageListCognitiveProfileVoices> = {},
-	): StorageListCognitiveProfileVoices => ({
-		items: faker.helpers.arrayElement([
-			Array.from(
-				{ length: faker.number.int({ min: 1, max: 10 }) },
-				(_, i) => i + 1,
-			).map(() => ({
-				id: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-				name: faker.helpers.arrayElement([
-					faker.string.alpha({ length: { min: 10, max: 20 } }),
-					undefined,
-				]),
-			})),
-			undefined,
-		]),
-		...overrideResponse,
-	});
+export const getSearchCognitiveProfileVoicesResponseMock = (
+	overrideResponse: Partial<StorageListCognitiveProfileVoices> = {},
+): StorageListCognitiveProfileVoices => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	...overrideResponse,
+});
 
-export const getCognitiveProfileServiceSearchCognitiveProfileMockHandler = (
+export const getSearchCognitiveProfileMockHandler = (
 	overrideResponse?:
 		| StorageListCognitiveProfile
 		| ((
@@ -446,14 +439,14 @@ export const getCognitiveProfileServiceSearchCognitiveProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCognitiveProfileServiceSearchCognitiveProfileResponseMock(),
+					: getSearchCognitiveProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCognitiveProfileServiceCreateCognitiveProfileMockHandler = (
+export const getCreateCognitiveProfileMockHandler = (
 	overrideResponse?:
 		| StorageCognitiveProfile
 		| ((
@@ -469,14 +462,14 @@ export const getCognitiveProfileServiceCreateCognitiveProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCognitiveProfileServiceCreateCognitiveProfileResponseMock(),
+					: getCreateCognitiveProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCognitiveProfileServiceDeleteCognitiveProfileMockHandler = (
+export const getDeleteCognitiveProfileMockHandler = (
 	overrideResponse?:
 		| StorageCognitiveProfile
 		| ((
@@ -492,14 +485,14 @@ export const getCognitiveProfileServiceDeleteCognitiveProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCognitiveProfileServiceDeleteCognitiveProfileResponseMock(),
+					: getDeleteCognitiveProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCognitiveProfileServiceReadCognitiveProfileMockHandler = (
+export const getReadCognitiveProfileMockHandler = (
 	overrideResponse?:
 		| StorageCognitiveProfile
 		| ((
@@ -515,14 +508,14 @@ export const getCognitiveProfileServiceReadCognitiveProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCognitiveProfileServiceReadCognitiveProfileResponseMock(),
+					: getReadCognitiveProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCognitiveProfileServicePatchCognitiveProfileMockHandler = (
+export const getPatchCognitiveProfileMockHandler = (
 	overrideResponse?:
 		| StorageCognitiveProfile
 		| ((
@@ -538,14 +531,14 @@ export const getCognitiveProfileServicePatchCognitiveProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCognitiveProfileServicePatchCognitiveProfileResponseMock(),
+					: getPatchCognitiveProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCognitiveProfileServiceUpdateCognitiveProfileMockHandler = (
+export const getUpdateCognitiveProfileMockHandler = (
 	overrideResponse?:
 		| StorageCognitiveProfile
 		| ((
@@ -561,44 +554,43 @@ export const getCognitiveProfileServiceUpdateCognitiveProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCognitiveProfileServiceUpdateCognitiveProfileResponseMock(),
+					: getUpdateCognitiveProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCognitiveProfileServiceSearchCognitiveProfileVoicesMockHandler =
-	(
-		overrideResponse?:
-			| StorageListCognitiveProfileVoices
-			| ((
-					info: Parameters<Parameters<typeof http.get>[1]>[0],
-			  ) =>
-					| Promise<StorageListCognitiveProfileVoices>
-					| StorageListCognitiveProfileVoices),
-	) => {
-		return http.get('*/storage/cognitive_profiles/:id/voice', async (info) => {
-			await delay(1000);
+export const getSearchCognitiveProfileVoicesMockHandler = (
+	overrideResponse?:
+		| StorageListCognitiveProfileVoices
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<StorageListCognitiveProfileVoices>
+				| StorageListCognitiveProfileVoices),
+) => {
+	return http.get('*/storage/cognitive_profiles/:id/voice', async (info) => {
+		await delay(1000);
 
-			return new HttpResponse(
-				JSON.stringify(
-					overrideResponse !== undefined
-						? typeof overrideResponse === 'function'
-							? await overrideResponse(info)
-							: overrideResponse
-						: getCognitiveProfileServiceSearchCognitiveProfileVoicesResponseMock(),
-				),
-				{ status: 200, headers: { 'Content-Type': 'application/json' } },
-			);
-		});
-	};
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getSearchCognitiveProfileVoicesResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
 export const getCognitiveProfileServiceMock = () => [
-	getCognitiveProfileServiceSearchCognitiveProfileMockHandler(),
-	getCognitiveProfileServiceCreateCognitiveProfileMockHandler(),
-	getCognitiveProfileServiceDeleteCognitiveProfileMockHandler(),
-	getCognitiveProfileServiceReadCognitiveProfileMockHandler(),
-	getCognitiveProfileServicePatchCognitiveProfileMockHandler(),
-	getCognitiveProfileServiceUpdateCognitiveProfileMockHandler(),
-	getCognitiveProfileServiceSearchCognitiveProfileVoicesMockHandler(),
+	getSearchCognitiveProfileMockHandler(),
+	getCreateCognitiveProfileMockHandler(),
+	getDeleteCognitiveProfileMockHandler(),
+	getReadCognitiveProfileMockHandler(),
+	getPatchCognitiveProfileMockHandler(),
+	getUpdateCognitiveProfileMockHandler(),
+	getSearchCognitiveProfileVoicesMockHandler(),
 ];

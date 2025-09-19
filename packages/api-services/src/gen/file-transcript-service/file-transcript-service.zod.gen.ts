@@ -6,16 +6,16 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const fileTranscriptServiceDeleteFileTranscriptBody = zod.object({
+export const deleteFileTranscriptBody = zod.object({
 	id: zod.array(zod.string()).optional(),
 	uuid: zod.array(zod.string()).optional(),
 });
 
-export const fileTranscriptServiceDeleteFileTranscriptResponse = zod.object({
+export const deleteFileTranscriptResponse = zod.object({
 	items: zod.array(zod.string()).optional(),
 });
 
-export const fileTranscriptServiceCreateFileTranscriptBody = zod.object({
+export const createFileTranscriptBody = zod.object({
 	fileId: zod.array(zod.string()).optional(),
 	locale: zod.string().optional(),
 	profile: zod
@@ -27,7 +27,7 @@ export const fileTranscriptServiceCreateFileTranscriptBody = zod.object({
 	uuid: zod.array(zod.string()).optional(),
 });
 
-export const fileTranscriptServiceCreateFileTranscriptResponse = zod.object({
+export const createFileTranscriptResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -41,7 +41,7 @@ export const fileTranscriptServiceCreateFileTranscriptResponse = zod.object({
 		.optional(),
 });
 
-export const fileTranscriptServicePutFileTranscriptBody = zod.object({
+export const putFileTranscriptBody = zod.object({
 	fileId: zod.string().optional(),
 	locale: zod.string().optional(),
 	phrases: zod
@@ -58,32 +58,29 @@ export const fileTranscriptServicePutFileTranscriptBody = zod.object({
 	uuid: zod.string().optional(),
 });
 
-export const fileTranscriptServicePutFileTranscriptResponse = zod.object({
+export const putFileTranscriptResponse = zod.object({
 	id: zod.string().optional(),
 });
 
-export const fileTranscriptServiceGetFileTranscriptPhrasesParams = zod.object({
+export const getFileTranscriptPhrasesParams = zod.object({
 	id: zod.string(),
 });
 
-export const fileTranscriptServiceGetFileTranscriptPhrasesQueryParams =
-	zod.object({
-		page: zod.number().optional(),
-		size: zod.number().optional(),
-	});
+export const getFileTranscriptPhrasesQueryParams = zod.object({
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+});
 
-export const fileTranscriptServiceGetFileTranscriptPhrasesResponse = zod.object(
-	{
-		items: zod
-			.array(
-				zod.object({
-					channel: zod.number().optional(),
-					endSec: zod.number().optional(),
-					phrase: zod.string().optional(),
-					startSec: zod.number().optional(),
-				}),
-			)
-			.optional(),
-		next: zod.boolean().optional(),
-	},
-);
+export const getFileTranscriptPhrasesResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				channel: zod.number().optional(),
+				endSec: zod.number().optional(),
+				phrase: zod.string().optional(),
+				startSec: zod.number().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});

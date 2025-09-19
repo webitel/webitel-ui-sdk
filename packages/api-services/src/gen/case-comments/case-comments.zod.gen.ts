@@ -9,18 +9,18 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Delete a specific comment by its etag
  */
-export const deleteCommentParams = zod.object({
+export const deleteCommentMixin6Params = zod.object({
 	etag: zod.string().describe('Identifier of the comment to delete.'),
 });
 
-export const deleteCommentQueryParams = zod.object({
+export const deleteCommentMixin6QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to return after deletion.'),
 });
 
-export const deleteCommentResponse = zod
+export const deleteCommentMixin6Response = zod
 	.object({
 		author: zod
 			.object({
@@ -235,11 +235,11 @@ export const updateComment2Response = zod
 /**
  * @summary Update a specific comment by its etag
  */
-export const updateCommentParams = zod.object({
+export const updateCommentMixin6Params = zod.object({
 	'input.etag': zod.string().describe('Identifier for the comment.'),
 });
 
-export const updateCommentQueryParams = zod.object({
+export const updateCommentMixin6QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -252,7 +252,7 @@ export const updateCommentQueryParams = zod.object({
 		),
 });
 
-export const updateCommentBody = zod.object({
+export const updateCommentMixin6Body = zod.object({
 	text: zod.string().optional().describe('Content of the comment.'),
 	userId: zod
 		.object({
@@ -262,7 +262,7 @@ export const updateCommentBody = zod.object({
 		.optional(),
 });
 
-export const updateCommentResponse = zod
+export const updateCommentMixin6Response = zod
 	.object({
 		author: zod
 			.object({
@@ -423,13 +423,13 @@ export const listCommentsResponse = zod
 /**
  * @summary Publish comment into a specific case
  */
-export const publishCommentParams = zod.object({
+export const publishCommentMixin6Params = zod.object({
 	case_etag: zod
 		.string()
 		.describe('Etag or ID of the case to which comments belong.'),
 });
 
-export const publishCommentQueryParams = zod.object({
+export const publishCommentMixin6QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -442,7 +442,7 @@ export const publishCommentQueryParams = zod.object({
 		),
 });
 
-export const publishCommentBody = zod
+export const publishCommentMixin6Body = zod
 	.object({
 		etag: zod.string().optional().describe('Identifier for the comment.'),
 		text: zod.string().optional().describe('Content of the comment.'),
@@ -455,7 +455,7 @@ export const publishCommentBody = zod
 	})
 	.describe('Input structure for creating or updating a case comment.');
 
-export const publishCommentResponse = zod
+export const publishCommentMixin6Response = zod
 	.object({
 		author: zod
 			.object({

@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Remove Contact Managers associations.
  */
-export const managersDeleteManagersParams = zod.object({
+export const deleteManagersParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const managersDeleteManagersQueryParams = zod.object({
+export const deleteManagersQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -21,7 +21,7 @@ export const managersDeleteManagersQueryParams = zod.object({
 	etag: zod.array(zod.string()).describe('Set of unique ID(s) to remove.'),
 });
 
-export const managersDeleteManagersResponseItem = zod
+export const deleteManagersResponseItem = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -103,18 +103,16 @@ export const managersDeleteManagersResponseItem = zod
 			.describe('Version of the latest update. Numeric sequence.'),
 	})
 	.describe("Manager. The Contact's responsible User.");
-export const managersDeleteManagersResponse = zod.array(
-	managersDeleteManagersResponseItem,
-);
+export const deleteManagersResponse = zod.array(deleteManagersResponseItem);
 
 /**
  * @summary Search the Contact's Managers.
  */
-export const managersListManagersParams = zod.object({
+export const listManagersParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const managersListManagersQueryParams = zod.object({
+export const listManagersQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -143,7 +141,7 @@ export const managersListManagersQueryParams = zod.object({
 		.describe('Record(s) with unique ID only.'),
 });
 
-export const managersListManagersResponse = zod
+export const listManagersResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -252,18 +250,18 @@ export const managersListManagersResponse = zod
 /**
  * @summary Associate new Managers to the Contact.
  */
-export const managersMergeManagersParams = zod.object({
+export const mergeManagersParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const managersMergeManagersQueryParams = zod.object({
+export const mergeManagersQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const managersMergeManagersBodyItem = zod.object({
+export const mergeManagersBodyItem = zod.object({
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
@@ -287,11 +285,9 @@ export const managersMergeManagersBodyItem = zod.object({
 			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 		),
 });
-export const managersMergeManagersBody = zod.array(
-	managersMergeManagersBodyItem,
-);
+export const mergeManagersBody = zod.array(mergeManagersBodyItem);
 
-export const managersMergeManagersResponse = zod
+export const mergeManagersResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -400,18 +396,18 @@ export const managersMergeManagersResponse = zod
 /**
  * @summary Reset Managers to fit the specified final set.
  */
-export const managersResetManagersParams = zod.object({
+export const resetManagersParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const managersResetManagersQueryParams = zod.object({
+export const resetManagersQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const managersResetManagersBodyItem = zod.object({
+export const resetManagersBodyItem = zod.object({
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
@@ -435,11 +431,9 @@ export const managersResetManagersBodyItem = zod.object({
 			'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 		),
 });
-export const managersResetManagersBody = zod
-	.array(managersResetManagersBodyItem)
-	.min(1);
+export const resetManagersBody = zod.array(resetManagersBodyItem);
 
-export const managersResetManagersResponse = zod
+export const resetManagersResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -548,19 +542,19 @@ export const managersResetManagersResponse = zod
 /**
  * @summary Remove the contact's manager address link
  */
-export const managersDeleteManagerParams = zod.object({
+export const deleteManagerParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod.string().describe('Unique ID to remove.'),
 });
 
-export const managersDeleteManagerQueryParams = zod.object({
+export const deleteManagerQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const managersDeleteManagerResponse = zod
+export const deleteManagerResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -646,7 +640,7 @@ export const managersDeleteManagerResponse = zod
 /**
  * @summary Locate the manager address link.
  */
-export const managersLocateManagerParams = zod.object({
+export const locateManagerParams = zod.object({
 	contact_id: zod.string().describe('Contact source ID.'),
 	etag: zod
 		.string()
@@ -655,14 +649,14 @@ export const managersLocateManagerParams = zod.object({
 		),
 });
 
-export const managersLocateManagerQueryParams = zod.object({
+export const locateManagerQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const managersLocateManagerResponse = zod
+export const locateManagerResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -748,21 +742,21 @@ export const managersLocateManagerResponse = zod
 /**
  * @summary Update the contact's manager address link details
  */
-export const managersUpdateManager2Params = zod.object({
+export const updateManager2Params = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
 });
 
-export const managersUpdateManager2QueryParams = zod.object({
+export const updateManager2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const managersUpdateManager2Body = zod.object({
+export const updateManager2Body = zod.object({
 	primary: zod
 		.boolean()
 		.optional()
@@ -784,7 +778,7 @@ export const managersUpdateManager2Body = zod.object({
 		),
 });
 
-export const managersUpdateManager2Response = zod
+export const updateManager2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -893,21 +887,21 @@ export const managersUpdateManager2Response = zod
 /**
  * @summary Update the contact's manager address link details
  */
-export const managersUpdateManagerParams = zod.object({
+export const updateManagerParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
 });
 
-export const managersUpdateManagerQueryParams = zod.object({
+export const updateManagerQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const managersUpdateManagerBody = zod.object({
+export const updateManagerBody = zod.object({
 	primary: zod
 		.boolean()
 		.optional()
@@ -929,7 +923,7 @@ export const managersUpdateManagerBody = zod.object({
 		),
 });
 
-export const managersUpdateManagerResponse = zod
+export const updateManagerResponse = zod
 	.object({
 		data: zod
 			.array(

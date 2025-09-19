@@ -6,12 +6,12 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const usersReadUser2QueryParams = zod.object({
+export const readUser2QueryParams = zod.object({
 	id: zod.string().optional(),
 	fields: zod.array(zod.string()).optional().describe('partial output'),
 });
 
-export const usersReadUser2Response = zod.object({
+export const readUser2Response = zod.object({
 	user: zod
 		.object({
 			chatName: zod
@@ -61,6 +61,12 @@ export const usersReadUser2Response = zod.object({
 				),
 			email: zod.string().optional(),
 			extension: zod.string().optional(),
+			forcePasswordChange: zod
+				.boolean()
+				.optional()
+				.describe(
+					'When set to true, the user will be required to change their password on next login.',
+				),
 			hotdesks: zod
 				.array(
 					zod.object({
@@ -134,15 +140,15 @@ export const usersReadUser2Response = zod.object({
 		.describe('User profile.'),
 });
 
-export const usersDeleteUsers2QueryParams = zod.object({
+export const deleteUsers2QueryParams = zod.object({
 	id: zod.string().optional().describe('ONE /users/{id}'),
 	permanent: zod.boolean().optional(),
 });
 
-export const usersDeleteUsers2BodyItem = zod.string();
-export const usersDeleteUsers2Body = zod.array(usersDeleteUsers2BodyItem);
+export const deleteUsers2BodyItem = zod.string();
+export const deleteUsers2Body = zod.array(deleteUsers2BodyItem);
 
-export const usersDeleteUsers2Response = zod.object({
+export const deleteUsers2Response = zod.object({
 	deleted: zod
 		.array(
 			zod
@@ -194,6 +200,12 @@ export const usersDeleteUsers2Response = zod.object({
 						),
 					email: zod.string().optional(),
 					extension: zod.string().optional(),
+					forcePasswordChange: zod
+						.boolean()
+						.optional()
+						.describe(
+							'When set to true, the user will be required to change their password on next login.',
+						),
 					hotdesks: zod
 						.array(
 							zod.object({
@@ -270,7 +282,7 @@ export const usersDeleteUsers2Response = zod.object({
 		.optional(),
 });
 
-export const usersSearchUsersQueryParams = zod.object({
+export const searchUsersQueryParams = zod.object({
 	id: zod
 		.array(zod.string())
 		.optional()
@@ -323,7 +335,7 @@ export const usersSearchUsersQueryParams = zod.object({
 	size: zod.number().optional().describe('select: limit {size}'),
 });
 
-export const usersSearchUsersResponse = zod.object({
+export const searchUsersResponse = zod.object({
 	items: zod
 		.array(
 			zod
@@ -375,6 +387,12 @@ export const usersSearchUsersResponse = zod.object({
 						),
 					email: zod.string().optional(),
 					extension: zod.string().optional(),
+					forcePasswordChange: zod
+						.boolean()
+						.optional()
+						.describe(
+							'When set to true, the user will be required to change their password on next login.',
+						),
 					hotdesks: zod
 						.array(
 							zod.object({
@@ -454,7 +472,7 @@ export const usersSearchUsersResponse = zod.object({
 	size: zod.number().optional(),
 });
 
-export const usersCreateUserBody = zod.object({
+export const createUserBody = zod.object({
 	confirmPassword: zod.string().optional(),
 	user: zod
 		.object({
@@ -505,6 +523,12 @@ export const usersCreateUserBody = zod.object({
 				),
 			email: zod.string().optional(),
 			extension: zod.string().optional(),
+			forcePasswordChange: zod
+				.boolean()
+				.optional()
+				.describe(
+					'When set to true, the user will be required to change their password on next login.',
+				),
 			hotdesks: zod
 				.array(
 					zod.object({
@@ -579,7 +603,7 @@ export const usersCreateUserBody = zod.object({
 	userPassword: zod.string().optional(),
 });
 
-export const usersCreateUserResponse = zod.object({
+export const createUserResponse = zod.object({
 	user: zod
 		.object({
 			chatName: zod
@@ -629,6 +653,12 @@ export const usersCreateUserResponse = zod.object({
 				),
 			email: zod.string().optional(),
 			extension: zod.string().optional(),
+			forcePasswordChange: zod
+				.boolean()
+				.optional()
+				.describe(
+					'When set to true, the user will be required to change their password on next login.',
+				),
 			hotdesks: zod
 				.array(
 					zod.object({
@@ -702,7 +732,18 @@ export const usersCreateUserResponse = zod.object({
 		.describe('User profile.'),
 });
 
-export const usersSearchUsers2Body = zod.object({
+export const updatePasswordBody = zod.object({
+	confirmPassword: zod.string().optional(),
+	domain: zod.string().optional(),
+	id: zod.string().optional(),
+	oldPassword: zod.string().optional(),
+	userPassword: zod.string().optional(),
+	username: zod.string().optional(),
+});
+
+export const updatePasswordResponse = zod.object({});
+
+export const searchUsers2Body = zod.object({
 	any: zod
 		.boolean()
 		.optional()
@@ -733,7 +774,7 @@ export const usersSearchUsers2Body = zod.object({
 	username: zod.string().optional(),
 });
 
-export const usersSearchUsers2Response = zod.object({
+export const searchUsers2Response = zod.object({
 	items: zod
 		.array(
 			zod
@@ -785,6 +826,12 @@ export const usersSearchUsers2Response = zod.object({
 						),
 					email: zod.string().optional(),
 					extension: zod.string().optional(),
+					forcePasswordChange: zod
+						.boolean()
+						.optional()
+						.describe(
+							'When set to true, the user will be required to change their password on next login.',
+						),
 					hotdesks: zod
 						.array(
 							zod.object({
@@ -864,11 +911,11 @@ export const usersSearchUsers2Response = zod.object({
 	size: zod.number().optional(),
 });
 
-export const usersDeleteUsersParams = zod.object({
+export const deleteUsersParams = zod.object({
 	id: zod.string().describe('ONE /users/{id}'),
 });
 
-export const usersDeleteUsersQueryParams = zod.object({
+export const deleteUsersQueryParams = zod.object({
 	selection: zod
 		.array(zod.string())
 		.optional()
@@ -876,7 +923,7 @@ export const usersDeleteUsersQueryParams = zod.object({
 	permanent: zod.boolean().optional(),
 });
 
-export const usersDeleteUsersResponse = zod.object({
+export const deleteUsersResponse = zod.object({
 	deleted: zod
 		.array(
 			zod
@@ -928,6 +975,12 @@ export const usersDeleteUsersResponse = zod.object({
 						),
 					email: zod.string().optional(),
 					extension: zod.string().optional(),
+					forcePasswordChange: zod
+						.boolean()
+						.optional()
+						.describe(
+							'When set to true, the user will be required to change their password on next login.',
+						),
 					hotdesks: zod
 						.array(
 							zod.object({
@@ -1004,15 +1057,15 @@ export const usersDeleteUsersResponse = zod.object({
 		.optional(),
 });
 
-export const usersReadUserParams = zod.object({
+export const readUserParams = zod.object({
 	id: zod.string(),
 });
 
-export const usersReadUserQueryParams = zod.object({
+export const readUserQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional().describe('partial output'),
 });
 
-export const usersReadUserResponse = zod.object({
+export const readUserResponse = zod.object({
 	user: zod
 		.object({
 			chatName: zod
@@ -1062,6 +1115,12 @@ export const usersReadUserResponse = zod.object({
 				),
 			email: zod.string().optional(),
 			extension: zod.string().optional(),
+			forcePasswordChange: zod
+				.boolean()
+				.optional()
+				.describe(
+					'When set to true, the user will be required to change their password on next login.',
+				),
 			hotdesks: zod
 				.array(
 					zod.object({
@@ -1135,23 +1194,23 @@ export const usersReadUserResponse = zod.object({
 		.describe('User profile.'),
 });
 
-export const usersLogoutUserParams = zod.object({
+export const logoutUserParams = zod.object({
 	id: zod.string(),
 });
 
-export const usersLogoutUserBody = zod.object({});
+export const logoutUserBody = zod.object({});
 
-export const usersLogoutUserResponse = zod.object({});
+export const logoutUserResponse = zod.object({});
 
-export const usersUpdateUser2Params = zod.object({
+export const updateUser2Params = zod.object({
 	'user.id': zod.string().describe('Object ID'),
 });
 
-export const usersUpdateUser2QueryParams = zod.object({
+export const updateUser2QueryParams = zod.object({
 	fields: zod.array(zod.string()).optional().describe('PATCH: partial update'),
 });
 
-export const usersUpdateUser2Body = zod.object({
+export const updateUser2Body = zod.object({
 	chatName: zod
 		.string()
 		.optional()
@@ -1199,6 +1258,12 @@ export const usersUpdateUser2Body = zod.object({
 		),
 	email: zod.string().optional(),
 	extension: zod.string().optional(),
+	forcePasswordChange: zod
+		.boolean()
+		.optional()
+		.describe(
+			'When set to true, the user will be required to change their password on next login.',
+		),
 	hotdesks: zod
 		.array(
 			zod.object({
@@ -1268,7 +1333,7 @@ export const usersUpdateUser2Body = zod.object({
 	username: zod.string().optional(),
 });
 
-export const usersUpdateUser2Response = zod
+export const updateUser2Response = zod
 	.object({
 		chatName: zod
 			.string()
@@ -1317,6 +1382,12 @@ export const usersUpdateUser2Response = zod
 			),
 		email: zod.string().optional(),
 		extension: zod.string().optional(),
+		forcePasswordChange: zod
+			.boolean()
+			.optional()
+			.describe(
+				'When set to true, the user will be required to change their password on next login.',
+			),
 		hotdesks: zod
 			.array(
 				zod.object({
@@ -1388,15 +1459,15 @@ export const usersUpdateUser2Response = zod
 	})
 	.describe('User profile.');
 
-export const usersUpdateUserParams = zod.object({
+export const updateUserParams = zod.object({
 	'user.id': zod.string().describe('Object ID'),
 });
 
-export const usersUpdateUserQueryParams = zod.object({
+export const updateUserQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional().describe('PATCH: partial update'),
 });
 
-export const usersUpdateUserBody = zod.object({
+export const updateUserBody = zod.object({
 	chatName: zod
 		.string()
 		.optional()
@@ -1444,6 +1515,12 @@ export const usersUpdateUserBody = zod.object({
 		),
 	email: zod.string().optional(),
 	extension: zod.string().optional(),
+	forcePasswordChange: zod
+		.boolean()
+		.optional()
+		.describe(
+			'When set to true, the user will be required to change their password on next login.',
+		),
 	hotdesks: zod
 		.array(
 			zod.object({
@@ -1513,7 +1590,7 @@ export const usersUpdateUserBody = zod.object({
 	username: zod.string().optional(),
 });
 
-export const usersUpdateUserResponse = zod
+export const updateUserResponse = zod
 	.object({
 		chatName: zod
 			.string()
@@ -1562,6 +1639,12 @@ export const usersUpdateUserResponse = zod
 			),
 		email: zod.string().optional(),
 		extension: zod.string().optional(),
+		forcePasswordChange: zod
+			.boolean()
+			.optional()
+			.describe(
+				'When set to true, the user will be required to change their password on next login.',
+			),
 		hotdesks: zod
 			.array(
 				zod.object({

@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsContact,
-	WebitelContactsContactList,
-} from '.././_models';
+import type { ContactsContactList, WebitelcontactsContact } from '.././_models';
 
-export const getContactsSearchContactsResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactList> = {},
-): WebitelContactsContactList => ({
+export const getSearchContactsResponseMock = (
+	overrideResponse: Partial<ContactsContactList> = {},
+): ContactsContactList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -180,7 +177,6 @@ export const getContactsSearchContactsResponseMock = (
 				},
 				undefined,
 			]),
-			custom: faker.helpers.arrayElement([{}, undefined]),
 			domain: faker.helpers.arrayElement([
 				{
 					id: faker.helpers.arrayElement([
@@ -1334,9 +1330,9 @@ export const getContactsSearchContactsResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactsCreateContactResponseMock = (
-	overrideResponse: Partial<WebitelContactsContact> = {},
-): WebitelContactsContact => ({
+export const getCreateContactResponseMock = (
+	overrideResponse: Partial<WebitelcontactsContact> = {},
+): WebitelcontactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -1493,7 +1489,6 @@ export const getContactsCreateContactResponseMock = (
 		},
 		undefined,
 	]),
-	custom: faker.helpers.arrayElement([{}, undefined]),
 	domain: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -2605,9 +2600,9 @@ export const getContactsCreateContactResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactsDeleteContactResponseMock = (
-	overrideResponse: Partial<WebitelContactsContact> = {},
-): WebitelContactsContact => ({
+export const getDeleteContactResponseMock = (
+	overrideResponse: Partial<WebitelcontactsContact> = {},
+): WebitelcontactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -2764,7 +2759,6 @@ export const getContactsDeleteContactResponseMock = (
 		},
 		undefined,
 	]),
-	custom: faker.helpers.arrayElement([{}, undefined]),
 	domain: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -3876,9 +3870,9 @@ export const getContactsDeleteContactResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactsLocateContactResponseMock = (
-	overrideResponse: Partial<WebitelContactsContact> = {},
-): WebitelContactsContact => ({
+export const getLocateContactResponseMock = (
+	overrideResponse: Partial<WebitelcontactsContact> = {},
+): WebitelcontactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -4035,7 +4029,6 @@ export const getContactsLocateContactResponseMock = (
 		},
 		undefined,
 	]),
-	custom: faker.helpers.arrayElement([{}, undefined]),
 	domain: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -5147,9 +5140,9 @@ export const getContactsLocateContactResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactsUpdateContactResponseMock = (
-	overrideResponse: Partial<WebitelContactsContact> = {},
-): WebitelContactsContact => ({
+export const getUpdateContactResponseMock = (
+	overrideResponse: Partial<WebitelcontactsContact> = {},
+): WebitelcontactsContact => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -5306,7 +5299,6 @@ export const getContactsUpdateContactResponseMock = (
 		},
 		undefined,
 	]),
-	custom: faker.helpers.arrayElement([{}, undefined]),
 	domain: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -6418,12 +6410,12 @@ export const getContactsUpdateContactResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactsSearchContactsMockHandler = (
+export const getSearchContactsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactList
+		| ContactsContactList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsContactList> | WebitelContactsContactList),
+		  ) => Promise<ContactsContactList> | ContactsContactList),
 ) => {
 	return http.get('*/contacts', async (info) => {
 		await delay(1000);
@@ -6434,19 +6426,19 @@ export const getContactsSearchContactsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactsSearchContactsResponseMock(),
+					: getSearchContactsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactsCreateContactMockHandler = (
+export const getCreateContactMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContact
+		| WebitelcontactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
+		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
 ) => {
 	return http.post('*/contacts', async (info) => {
 		await delay(1000);
@@ -6457,19 +6449,19 @@ export const getContactsCreateContactMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactsCreateContactResponseMock(),
+					: getCreateContactResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactsDeleteContactMockHandler = (
+export const getDeleteContactMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContact
+		| WebitelcontactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
+		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
 ) => {
 	return http.delete('*/contacts/:etag', async (info) => {
 		await delay(1000);
@@ -6480,19 +6472,19 @@ export const getContactsDeleteContactMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactsDeleteContactResponseMock(),
+					: getDeleteContactResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactsLocateContactMockHandler = (
+export const getLocateContactMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContact
+		| WebitelcontactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
+		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
 ) => {
 	return http.get('*/contacts/:etag', async (info) => {
 		await delay(1000);
@@ -6503,19 +6495,19 @@ export const getContactsLocateContactMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactsLocateContactResponseMock(),
+					: getLocateContactResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactsUpdateContactMockHandler = (
+export const getUpdateContactMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContact
+		| WebitelcontactsContact
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsContact> | WebitelContactsContact),
+		  ) => Promise<WebitelcontactsContact> | WebitelcontactsContact),
 ) => {
 	return http.patch('*/contacts/:etag', async (info) => {
 		await delay(1000);
@@ -6526,16 +6518,16 @@ export const getContactsUpdateContactMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactsUpdateContactResponseMock(),
+					: getUpdateContactResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getContactsMock = () => [
-	getContactsSearchContactsMockHandler(),
-	getContactsCreateContactMockHandler(),
-	getContactsDeleteContactMockHandler(),
-	getContactsLocateContactMockHandler(),
-	getContactsUpdateContactMockHandler(),
+	getSearchContactsMockHandler(),
+	getCreateContactMockHandler(),
+	getDeleteContactMockHandler(),
+	getLocateContactMockHandler(),
+	getUpdateContactMockHandler(),
 ];
