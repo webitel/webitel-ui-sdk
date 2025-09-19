@@ -8,6 +8,7 @@ import PColumn from 'primevue/column';
 import PrimeVue from 'primevue/config';
 import PTable from 'primevue/datatable';
 import PDivider from 'primevue/divider';
+import PImage from 'primevue/image';
 import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
 import PPopover from 'primevue/popover';
@@ -51,6 +52,7 @@ const initPrimevue = (app) => {
   app.component('PBreadcrumb', changeComponentCompatMode(PBreadcrumb));
   app.component('PSlider', changeComponentCompatMode(PSlider));
   app.component('PDivider', changeComponentCompatMode(PDivider));
+  app.component('PImage', changeComponentCompatMode(PImage));
 
   app.directive('tooltip', Tooltip);
 };

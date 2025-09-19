@@ -1,5 +1,6 @@
 <template>
   <div
+    class="wt-image"
     :style="{
       width,
       height,
@@ -7,24 +8,33 @@
       minHeight,
       maxWidth,
       maxHeight,
+      cursor: preview ? 'pointer' : 'auto'
     }"
-    class="wt-image"
   >
     <!--    @slot Replaces `<img>` tag
             @scope `{ alt, src }`
      -->
     <slot v-bind="{ alt, src }">
-      <img
+      <p-image
         :alt="alt"
         :src="src"
         class="wt-image__img"
       />
+      <div v-if="preview" class="wt-image__preview-icon">
+        <wt-icon 
+          :icon="previewIcon"
+          :icon-prefix="previewIconPrefix"
+          :color="IconColor.ON_DARK"
+        />
+      </div>
     </slot>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+
+import { IconColor } from '../../enums';
 
 const sizeToUnits = {
   '3xs': '32px',
@@ -76,6 +86,17 @@ const props = defineProps({
   maxHeight: {
     type: [String, Number],
   },
+  preview: {
+    type: Boolean,
+    default: false
+  },
+  previewIcon: {
+    type: String,
+  },
+  previewIconPrefix: {
+    type: String,
+    default: '',
+  }
   // aspectRatio: {
   //   type: [String, Number, null],
   //   default: 1,
@@ -116,10 +137,32 @@ const height = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   &__img {
+    display: inline-flex;
     max-width: 100%;
     max-height: 100%;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.wt-image__preview-icon {
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    opacity: 1;
   }
 }
 </style>
