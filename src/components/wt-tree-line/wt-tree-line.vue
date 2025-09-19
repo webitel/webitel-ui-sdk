@@ -1,5 +1,6 @@
 <template>
-  <div class="wt-tree-line">
+  <div
+    class="wt-tree-line">
     <div class="wt-tree-line__icon-wrapper">
       <wt-icon
         v-for="(icon, index) in nestedIcons"
@@ -18,7 +19,10 @@
       />
     </div>
     <div
-      :class="{ active: displayActiveState }"
+      :class="{
+      active: displayActiveState,
+      searched: props.data[props.searchedProp]
+    }"
       class="wt-tree-line__label-wrapper"
       @click="selectElement"
     >
@@ -345,6 +349,11 @@ watch(
     &:hover {
       background: var(--wt-tree-item-hover);
       color: var(--wt-tree-item-hover-on);
+    }
+
+    &.searched:not(.active) {
+      background: var(--wt-tree-item-searched);
+      color: var(--wt-tree-item-searched-on);
     }
 
     &.active {
