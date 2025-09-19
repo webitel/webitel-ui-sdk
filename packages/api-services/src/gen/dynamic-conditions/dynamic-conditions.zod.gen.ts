@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Delete a condition
  */
-export const dynamicConditionsDeleteConditionParams = zod.object({
+export const deleteConditionParams = zod.object({
 	id: zod
 		.string()
 		.describe(
@@ -17,7 +17,7 @@ export const dynamicConditionsDeleteConditionParams = zod.object({
 		),
 });
 
-export const dynamicConditionsDeleteConditionResponse = zod.object({
+export const deleteConditionResponse = zod.object({
 	assignee: zod
 		.object({
 			id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -90,18 +90,18 @@ export const dynamicConditionsDeleteConditionResponse = zod.object({
 /**
  * @summary Locate a condition by ID
  */
-export const dynamicConditionsLocateConditionParams = zod.object({
+export const locateConditionParams = zod.object({
 	id: zod.string().describe('Unique ID of the condition.'),
 });
 
-export const dynamicConditionsLocateConditionQueryParams = zod.object({
+export const locateConditionQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const dynamicConditionsLocateConditionResponse = zod
+export const locateConditionResponse = zod
 	.object({
 		condition: zod
 			.object({
@@ -194,11 +194,11 @@ export const dynamicConditionsLocateConditionResponse = zod
 /**
  * @summary Update an existing condition
  */
-export const dynamicConditionsUpdateCondition2Params = zod.object({
+export const updateCondition2Params = zod.object({
 	id: zod.string().describe('The unique ID of the condition to update.'),
 });
 
-export const dynamicConditionsUpdateCondition2Body = zod
+export const updateCondition2Body = zod
 	.object({
 		assignee: zod
 			.object({
@@ -223,20 +223,10 @@ export const dynamicConditionsUpdateCondition2Body = zod
 				'The query or condition expression used to evaluate the group.',
 			),
 		group: zod
-			.object({
-				id: zod.string().optional().describe('Reference Object unique ID.'),
-				name: zod
-					.string()
-					.optional()
-					.describe('Reference Object display name.'),
-				type: zod
-					.string()
-					.optional()
-					.describe('Reference Object well-known type.'),
-			})
+			.string()
 			.optional()
 			.describe(
-				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+				'The ID of the static group that should be assigned if the condition is met.',
 			),
 		position: zod
 			.object({
@@ -248,7 +238,7 @@ export const dynamicConditionsUpdateCondition2Body = zod
 	})
 	.describe('Input message for creating/updating a condition.');
 
-export const dynamicConditionsUpdateCondition2Response = zod.object({
+export const updateCondition2Response = zod.object({
 	assignee: zod
 		.object({
 			id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -321,11 +311,11 @@ export const dynamicConditionsUpdateCondition2Response = zod.object({
 /**
  * @summary Update an existing condition
  */
-export const dynamicConditionsUpdateConditionParams = zod.object({
+export const updateConditionParams = zod.object({
 	id: zod.string().describe('The unique ID of the condition to update.'),
 });
 
-export const dynamicConditionsUpdateConditionBody = zod
+export const updateConditionBody = zod
 	.object({
 		assignee: zod
 			.object({
@@ -350,20 +340,10 @@ export const dynamicConditionsUpdateConditionBody = zod
 				'The query or condition expression used to evaluate the group.',
 			),
 		group: zod
-			.object({
-				id: zod.string().optional().describe('Reference Object unique ID.'),
-				name: zod
-					.string()
-					.optional()
-					.describe('Reference Object display name.'),
-				type: zod
-					.string()
-					.optional()
-					.describe('Reference Object well-known type.'),
-			})
+			.string()
 			.optional()
 			.describe(
-				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
+				'The ID of the static group that should be assigned if the condition is met.',
 			),
 		position: zod
 			.object({
@@ -375,7 +355,7 @@ export const dynamicConditionsUpdateConditionBody = zod
 	})
 	.describe('Input message for creating/updating a condition.');
 
-export const dynamicConditionsUpdateConditionResponse = zod.object({
+export const updateConditionResponse = zod.object({
 	assignee: zod
 		.object({
 			id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -448,13 +428,13 @@ export const dynamicConditionsUpdateConditionResponse = zod.object({
 /**
  * @summary Retrieve a list of conditions
  */
-export const dynamicConditionsListConditionsParams = zod.object({
+export const listConditionsParams = zod.object({
 	group_id: zod
 		.string()
 		.describe('The ID of the group to which the conditions belong.'),
 });
 
-export const dynamicConditionsListConditionsQueryParams = zod.object({
+export const listConditionsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -475,7 +455,7 @@ export const dynamicConditionsListConditionsQueryParams = zod.object({
 	id: zod.array(zod.string()).optional().describe('Filter by unique IDs.'),
 });
 
-export const dynamicConditionsListConditionsResponse = zod
+export const listConditionsResponse = zod
 	.object({
 		items: zod
 			.array(
@@ -591,13 +571,13 @@ export const dynamicConditionsListConditionsResponse = zod
 /**
  * @summary Create a new condition
  */
-export const dynamicConditionsCreateConditionParams = zod.object({
+export const createConditionParams = zod.object({
 	group_id: zod
 		.string()
 		.describe('The ID of the group to which the condition belongs.'),
 });
 
-export const dynamicConditionsCreateConditionBody = zod
+export const createConditionBody = zod
 	.object({
 		assignee: zod
 			.object({
@@ -640,7 +620,7 @@ export const dynamicConditionsCreateConditionBody = zod
 	})
 	.describe('Request message for creating a new condition.');
 
-export const dynamicConditionsCreateConditionResponse = zod.object({
+export const createConditionResponse = zod.object({
 	assignee: zod
 		.object({
 			id: zod.string().optional().describe('Reference Object unique ID.'),

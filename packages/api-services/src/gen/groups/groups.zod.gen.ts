@@ -9,9 +9,9 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Retrieve a list of groups or search groups
  */
-export const groupsListGroupsQueryTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
+export const listGroupsQueryTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
 
-export const groupsListGroupsQueryParams = zod.object({
+export const listGroupsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -38,17 +38,16 @@ export const groupsListGroupsQueryParams = zod.object({
 	name: zod.string().optional().describe('Filter by group name.'),
 	type: zod
 		.enum(['GROUP_TYPE_UNSPECIFIED', 'STATIC', 'DYNAMIC'])
-		.default(groupsListGroupsQueryTypeDefault)
+		.default(listGroupsQueryTypeDefault)
 		.describe(
 			'Filter by group type.\n\n - GROUP_TYPE_UNSPECIFIED: Default value\n - STATIC: Static group\n - DYNAMIC: Dynamic group',
 		),
 	enabled: zod.boolean().optional().describe('Filter by only enabled group'),
 });
 
-export const groupsListGroupsResponseItemsItemTypeDefault =
-	'GROUP_TYPE_UNSPECIFIED';
+export const listGroupsResponseItemsItemTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
 
-export const groupsListGroupsResponse = zod
+export const listGroupsResponse = zod
 	.object({
 		items: zod
 			.array(
@@ -163,7 +162,7 @@ export const groupsListGroupsResponse = zod
 					name: zod.string().optional().describe('The name of the group.'),
 					type: zod
 						.enum(['GROUP_TYPE_UNSPECIFIED', 'STATIC', 'DYNAMIC'])
-						.default(groupsListGroupsResponseItemsItemTypeDefault)
+						.default(listGroupsResponseItemsItemTypeDefault)
 						.describe(
 							'- GROUP_TYPE_UNSPECIFIED: Default value\n - STATIC: Static group\n - DYNAMIC: Dynamic group',
 						),
@@ -205,7 +204,7 @@ export const groupsListGroupsResponse = zod
 /**
  * @summary Create a new group
  */
-export const groupsCreateGroupBody = zod
+export const createGroupBody = zod
 	.object({
 		description: zod
 			.string()
@@ -219,9 +218,9 @@ export const groupsCreateGroupBody = zod
 	})
 	.describe('Request message for creating a new group.');
 
-export const groupsCreateGroupResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
+export const createGroupResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
 
-export const groupsCreateGroupResponse = zod.object({
+export const createGroupResponse = zod.object({
 	conditions: zod
 		.array(
 			zod.object({
@@ -311,7 +310,7 @@ export const groupsCreateGroupResponse = zod.object({
 	name: zod.string().optional().describe('The name of the group.'),
 	type: zod
 		.enum(['GROUP_TYPE_UNSPECIFIED', 'STATIC', 'DYNAMIC'])
-		.default(groupsCreateGroupResponseTypeDefault)
+		.default(createGroupResponseTypeDefault)
 		.describe(
 			'- GROUP_TYPE_UNSPECIFIED: Default value\n - STATIC: Static group\n - DYNAMIC: Dynamic group',
 		),
@@ -337,7 +336,7 @@ export const groupsCreateGroupResponse = zod.object({
 /**
  * @summary Attach contacts to multiple groups
  */
-export const groupsAddContactsToGroupsBody = zod
+export const addContactsToGroupsBody = zod
 	.object({
 		contactIds: zod
 			.array(zod.string())
@@ -350,7 +349,7 @@ export const groupsAddContactsToGroupsBody = zod
 	})
 	.describe('Request message for adding contacts to a group.');
 
-export const groupsAddContactsToGroupsResponse = zod
+export const addContactsToGroupsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -499,10 +498,6 @@ export const groupsAddContactsToGroupsResponse = zod
 							.describe(
 								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 							),
-						custom: zod
-							.object({})
-							.optional()
-							.describe('Custom extension data fields.'),
 						domain: zod
 							.object({
 								id: zod
@@ -1704,18 +1699,18 @@ export const groupsAddContactsToGroupsResponse = zod
 /**
  * @summary Remove contacts from a group
  */
-export const groupsRemoveContactsFromGroupParams = zod.object({
+export const removeContactsFromGroupParams = zod.object({
 	group_id: zod.string().describe('The unique ID of the group.'),
 });
 
-export const groupsRemoveContactsFromGroupQueryParams = zod.object({
+export const removeContactsFromGroupQueryParams = zod.object({
 	contactIds: zod
 		.array(zod.string())
 		.optional()
 		.describe('List of contact IDs to remove from the group.'),
 });
 
-export const groupsRemoveContactsFromGroupResponse = zod
+export const removeContactsFromGroupResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -1864,10 +1859,6 @@ export const groupsRemoveContactsFromGroupResponse = zod
 							.describe(
 								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 							),
-						custom: zod
-							.object({})
-							.optional()
-							.describe('Custom extension data fields.'),
 						domain: zod
 							.object({
 								id: zod
@@ -3069,13 +3060,13 @@ export const groupsRemoveContactsFromGroupResponse = zod
 /**
  * @summary Delete a group
  */
-export const groupsDeleteGroupParams = zod.object({
+export const deleteGroupParams = zod.object({
 	id: zod.string().describe('The unique ID of the group to delete.'),
 });
 
-export const groupsDeleteGroupResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
+export const deleteGroupResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
 
-export const groupsDeleteGroupResponse = zod.object({
+export const deleteGroupResponse = zod.object({
 	conditions: zod
 		.array(
 			zod.object({
@@ -3165,7 +3156,7 @@ export const groupsDeleteGroupResponse = zod.object({
 	name: zod.string().optional().describe('The name of the group.'),
 	type: zod
 		.enum(['GROUP_TYPE_UNSPECIFIED', 'STATIC', 'DYNAMIC'])
-		.default(groupsDeleteGroupResponseTypeDefault)
+		.default(deleteGroupResponseTypeDefault)
 		.describe(
 			'- GROUP_TYPE_UNSPECIFIED: Default value\n - STATIC: Static group\n - DYNAMIC: Dynamic group',
 		),
@@ -3191,21 +3182,20 @@ export const groupsDeleteGroupResponse = zod.object({
 /**
  * @summary Locate a group by ID
  */
-export const groupsLocateGroupParams = zod.object({
+export const locateGroupParams = zod.object({
 	id: zod.string().describe('The unique ID of the group to locate.'),
 });
 
-export const groupsLocateGroupQueryParams = zod.object({
+export const locateGroupQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const groupsLocateGroupResponseGroupTypeDefault =
-	'GROUP_TYPE_UNSPECIFIED';
+export const locateGroupResponseGroupTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
 
-export const groupsLocateGroupResponse = zod
+export const locateGroupResponse = zod
 	.object({
 		group: zod
 			.object({
@@ -3313,7 +3303,7 @@ export const groupsLocateGroupResponse = zod
 				name: zod.string().optional().describe('The name of the group.'),
 				type: zod
 					.enum(['GROUP_TYPE_UNSPECIFIED', 'STATIC', 'DYNAMIC'])
-					.default(groupsLocateGroupResponseGroupTypeDefault)
+					.default(locateGroupResponseGroupTypeDefault)
 					.describe(
 						'- GROUP_TYPE_UNSPECIFIED: Default value\n - STATIC: Static group\n - DYNAMIC: Dynamic group',
 					),
@@ -3345,11 +3335,11 @@ export const groupsLocateGroupResponse = zod
 /**
  * @summary Update an existing group
  */
-export const groupsUpdateGroup2Params = zod.object({
+export const updateGroup2Params = zod.object({
 	id: zod.string().describe('The unique ID of the group to update.'),
 });
 
-export const groupsUpdateGroup2Body = zod.object({
+export const updateGroup2Body = zod.object({
 	description: zod
 		.string()
 		.optional()
@@ -3361,9 +3351,9 @@ export const groupsUpdateGroup2Body = zod.object({
 	name: zod.string().optional().describe('The new name of the group.'),
 });
 
-export const groupsUpdateGroup2ResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
+export const updateGroup2ResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
 
-export const groupsUpdateGroup2Response = zod.object({
+export const updateGroup2Response = zod.object({
 	conditions: zod
 		.array(
 			zod.object({
@@ -3453,7 +3443,7 @@ export const groupsUpdateGroup2Response = zod.object({
 	name: zod.string().optional().describe('The name of the group.'),
 	type: zod
 		.enum(['GROUP_TYPE_UNSPECIFIED', 'STATIC', 'DYNAMIC'])
-		.default(groupsUpdateGroup2ResponseTypeDefault)
+		.default(updateGroup2ResponseTypeDefault)
 		.describe(
 			'- GROUP_TYPE_UNSPECIFIED: Default value\n - STATIC: Static group\n - DYNAMIC: Dynamic group',
 		),
@@ -3479,11 +3469,11 @@ export const groupsUpdateGroup2Response = zod.object({
 /**
  * @summary Update an existing group
  */
-export const groupsUpdateGroupParams = zod.object({
+export const updateGroupParams = zod.object({
 	id: zod.string().describe('The unique ID of the group to update.'),
 });
 
-export const groupsUpdateGroupBody = zod.object({
+export const updateGroupBody = zod.object({
 	description: zod
 		.string()
 		.optional()
@@ -3495,9 +3485,9 @@ export const groupsUpdateGroupBody = zod.object({
 	name: zod.string().optional().describe('The new name of the group.'),
 });
 
-export const groupsUpdateGroupResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
+export const updateGroupResponseTypeDefault = 'GROUP_TYPE_UNSPECIFIED';
 
-export const groupsUpdateGroupResponse = zod.object({
+export const updateGroupResponse = zod.object({
 	conditions: zod
 		.array(
 			zod.object({
@@ -3587,7 +3577,7 @@ export const groupsUpdateGroupResponse = zod.object({
 	name: zod.string().optional().describe('The name of the group.'),
 	type: zod
 		.enum(['GROUP_TYPE_UNSPECIFIED', 'STATIC', 'DYNAMIC'])
-		.default(groupsUpdateGroupResponseTypeDefault)
+		.default(updateGroupResponseTypeDefault)
 		.describe(
 			'- GROUP_TYPE_UNSPECIFIED: Default value\n - STATIC: Static group\n - DYNAMIC: Dynamic group',
 		),

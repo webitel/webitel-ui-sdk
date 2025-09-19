@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Search for Contacts engaged Label(s).
  */
-export const labelsGetLabelsQueryParams = zod.object({
+export const getLabelsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -28,7 +28,7 @@ export const labelsGetLabelsQueryParams = zod.object({
 		),
 });
 
-export const labelsGetLabelsResponse = zod
+export const getLabelsResponse = zod
 	.object({
 		labels: zod
 			.array(
@@ -69,23 +69,23 @@ export const labelsGetLabelsResponse = zod
 /**
  * @summary Remove Contact Labels associations.
  */
-export const labelsDeleteLabelsParams = zod.object({
+export const deleteLabelsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const labelsDeleteLabelsQueryEtagItemRegExp = /^(\w+)(,\w+)*$/;
+export const deleteLabelsQueryEtagItemRegExp = /^(\w+)(,\w+)*$/;
 
-export const labelsDeleteLabelsQueryParams = zod.object({
+export const deleteLabelsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 	etag: zod
-		.array(zod.string().regex(labelsDeleteLabelsQueryEtagItemRegExp))
+		.array(zod.string().regex(deleteLabelsQueryEtagItemRegExp))
 		.describe('Set of unique label(s).etag identifiers.'),
 });
 
-export const labelsDeleteLabelsResponse = zod
+export const deleteLabelsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -174,11 +174,11 @@ export const labelsDeleteLabelsResponse = zod
 /**
  * @summary Locate the Contact's associated Label(s).
  */
-export const labelsListLabelsParams = zod.object({
+export const listLabelsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const labelsListLabelsQueryParams = zod.object({
+export const listLabelsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -209,7 +209,7 @@ export const labelsListLabelsQueryParams = zod.object({
 		.describe('Record(s) with unique ID or ETag.'),
 });
 
-export const labelsListLabelsResponse = zod
+export const listLabelsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -298,18 +298,18 @@ export const labelsListLabelsResponse = zod
 /**
  * @summary Associate NEW Labels to the Contact.
  */
-export const labelsMergeLabelsParams = zod.object({
+export const mergeLabelsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const labelsMergeLabelsQueryParams = zod.object({
+export const mergeLabelsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const labelsMergeLabelsBodyItem = zod
+export const mergeLabelsBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -323,11 +323,9 @@ export const labelsMergeLabelsBodyItem = zod
 			),
 	})
 	.describe("A Contact's associated Tag.\nOutput purpose only.");
-export const labelsMergeLabelsBody = zod
-	.array(labelsMergeLabelsBodyItem)
-	.min(1);
+export const mergeLabelsBody = zod.array(mergeLabelsBodyItem);
 
-export const labelsMergeLabelsResponse = zod
+export const mergeLabelsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -416,18 +414,18 @@ export const labelsMergeLabelsResponse = zod
 /**
  * @summary Reset Labels to fit the specified final set.
  */
-export const labelsResetLabelsParams = zod.object({
+export const resetLabelsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const labelsResetLabelsQueryParams = zod.object({
+export const resetLabelsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const labelsResetLabelsBodyItem = zod
+export const resetLabelsBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -441,9 +439,9 @@ export const labelsResetLabelsBodyItem = zod
 			),
 	})
 	.describe("A Contact's associated Tag.\nOutput purpose only.");
-export const labelsResetLabelsBody = zod.array(labelsResetLabelsBodyItem);
+export const resetLabelsBody = zod.array(resetLabelsBodyItem);
 
-export const labelsResetLabelsResponse = zod
+export const resetLabelsResponse = zod
 	.object({
 		data: zod
 			.array(

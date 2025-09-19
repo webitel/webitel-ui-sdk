@@ -14,13 +14,13 @@ import type {
 	ApiLicenseUsersResponse,
 	ApiServerInfoResponse,
 	ApiUpdateCustomerResponse,
-	CustomersGetCustomer2Params,
-	CustomersGetCustomerParams,
-	CustomersLicenseUsage2Params,
-	CustomersLicenseUsage3Params,
-	CustomersLicenseUsageParams,
-	CustomersLicenseUsersParams,
-	CustomersUpdateCustomerParams,
+	GetCustomer2Params,
+	GetCustomerParams,
+	LicenseUsage2Params,
+	LicenseUsage3Params,
+	LicenseUsageParams,
+	LicenseUsersParams,
+	UpdateCustomerParams,
 } from '.././_models';
 
 // --- header start
@@ -34,10 +34,8 @@ export const // --- title start
 			/**
 			 * @summary rpc GetCertificate(CertificateUsageRequest) returns (CertificateUsageResponse) {}
 			 */
-			const customersGetCustomer = <
-				TData = AxiosResponse<ApiGetCustomerResponse>,
-			>(
-				params?: CustomersGetCustomerParams,
+			const getCustomer = <TData = AxiosResponse<ApiGetCustomerResponse>>(
+				params?: GetCustomerParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/customer', {
@@ -45,10 +43,8 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const customersUpdateCustomer = <
-				TData = AxiosResponse<ApiUpdateCustomerResponse>,
-			>(
-				params?: CustomersUpdateCustomerParams,
+			const updateCustomer = <TData = AxiosResponse<ApiUpdateCustomerResponse>>(
+				params?: UpdateCustomerParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put('/customer', undefined, {
@@ -56,11 +52,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const customersLicenseUsage = <
-				TData = AxiosResponse<ApiLicenseUsageResponse>,
-			>(
+			const licenseUsage = <TData = AxiosResponse<ApiLicenseUsageResponse>>(
 				customerId: string,
-				params?: CustomersLicenseUsageParams,
+				params?: LicenseUsageParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/customer/${customerId}/license`, {
@@ -71,11 +65,9 @@ export const // --- title start
 			/**
 			 * @summary rpc GetCertificate(CertificateUsageRequest) returns (CertificateUsageResponse) {}
 			 */
-			const customersGetCustomer2 = <
-				TData = AxiosResponse<ApiGetCustomerResponse>,
-			>(
+			const getCustomer2 = <TData = AxiosResponse<ApiGetCustomerResponse>>(
 				id: string,
-				params?: CustomersGetCustomer2Params,
+				params?: GetCustomer2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/customer/${id}`, {
@@ -83,10 +75,8 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const customersLicenseUsage2 = <
-				TData = AxiosResponse<ApiLicenseUsageResponse>,
-			>(
-				params?: CustomersLicenseUsage2Params,
+			const licenseUsage2 = <TData = AxiosResponse<ApiLicenseUsageResponse>>(
+				params?: LicenseUsage2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/license', {
@@ -94,10 +84,8 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const customersLicenseUsage3 = <
-				TData = AxiosResponse<ApiLicenseUsageResponse>,
-			>(
-				params?: CustomersLicenseUsage3Params,
+			const licenseUsage3 = <TData = AxiosResponse<ApiLicenseUsageResponse>>(
+				params?: LicenseUsage3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/products', {
@@ -105,11 +93,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const customersLicenseUsers = <
-				TData = AxiosResponse<ApiLicenseUsersResponse>,
-			>(
+			const licenseUsers = <TData = AxiosResponse<ApiLicenseUsersResponse>>(
 				id: string,
-				params?: CustomersLicenseUsersParams,
+				params?: LicenseUsersParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/products/${id}/users`, {
@@ -117,9 +103,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const customersServerInfo = <
-				TData = AxiosResponse<ApiServerInfoResponse>,
-			>(
+			const serverInfo = <TData = AxiosResponse<ApiServerInfoResponse>>(
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/srvinfo', options);
@@ -127,28 +111,23 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				customersGetCustomer,
-				customersUpdateCustomer,
-				customersLicenseUsage,
-				customersGetCustomer2,
-				customersLicenseUsage2,
-				customersLicenseUsage3,
-				customersLicenseUsers,
-				customersServerInfo,
+				getCustomer,
+				updateCustomer,
+				licenseUsage,
+				getCustomer2,
+				licenseUsage2,
+				licenseUsage3,
+				licenseUsers,
+				serverInfo,
 			};
 		};
-export type CustomersGetCustomerResult = AxiosResponse<ApiGetCustomerResponse>;
-export type CustomersUpdateCustomerResult =
-	AxiosResponse<ApiUpdateCustomerResponse>;
-export type CustomersLicenseUsageResult =
-	AxiosResponse<ApiLicenseUsageResponse>;
-export type CustomersGetCustomer2Result = AxiosResponse<ApiGetCustomerResponse>;
-export type CustomersLicenseUsage2Result =
-	AxiosResponse<ApiLicenseUsageResponse>;
-export type CustomersLicenseUsage3Result =
-	AxiosResponse<ApiLicenseUsageResponse>;
-export type CustomersLicenseUsersResult =
-	AxiosResponse<ApiLicenseUsersResponse>;
-export type CustomersServerInfoResult = AxiosResponse<ApiServerInfoResponse>;
+export type GetCustomerResult = AxiosResponse<ApiGetCustomerResponse>;
+export type UpdateCustomerResult = AxiosResponse<ApiUpdateCustomerResponse>;
+export type LicenseUsageResult = AxiosResponse<ApiLicenseUsageResponse>;
+export type GetCustomer2Result = AxiosResponse<ApiGetCustomerResponse>;
+export type LicenseUsage2Result = AxiosResponse<ApiLicenseUsageResponse>;
+export type LicenseUsage3Result = AxiosResponse<ApiLicenseUsageResponse>;
+export type LicenseUsersResult = AxiosResponse<ApiLicenseUsersResponse>;
+export type ServerInfoResult = AxiosResponse<ApiServerInfoResponse>;
 
 // --- footer end

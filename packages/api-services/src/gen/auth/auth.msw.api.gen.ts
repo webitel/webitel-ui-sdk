@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 
 import type { ApiLoginResponse, ApiUserinfo } from '.././_models';
 
-export const getAuthSignupResponseMock = (
+export const getSignupResponseMock = (
 	overrideResponse: Partial<ApiLoginResponse> = {},
 ): ApiLoginResponse => ({
 	authorization: faker.helpers.arrayElement([
@@ -42,10 +42,39 @@ export const getAuthSignupResponseMock = (
 		},
 		undefined,
 	]),
+	warnings: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			detail: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			passwordExpiry: faker.helpers.arrayElement([
+				{
+					daysRemaining: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					expiresAt: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
 	...overrideResponse,
 });
 
-export const getAuthUserInfo2ResponseMock = (
+export const getUserInfo2ResponseMock = (
 	overrideResponse: Partial<ApiUserinfo> = {},
 ): ApiUserinfo => ({
 	dc: faker.helpers.arrayElement([
@@ -194,7 +223,7 @@ export const getAuthUserInfo2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getAuthUserInfoResponseMock = (
+export const getUserInfoResponseMock = (
 	overrideResponse: Partial<ApiUserinfo> = {},
 ): ApiUserinfo => ({
 	dc: faker.helpers.arrayElement([
@@ -343,7 +372,7 @@ export const getAuthUserInfoResponseMock = (
 	...overrideResponse,
 });
 
-export const getAuthSignupMockHandler = (
+export const getSignupMockHandler = (
 	overrideResponse?:
 		| ApiLoginResponse
 		| ((
@@ -359,14 +388,14 @@ export const getAuthSignupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAuthSignupResponseMock(),
+					: getSignupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getAuthUserInfo2MockHandler = (
+export const getUserInfo2MockHandler = (
 	overrideResponse?:
 		| ApiUserinfo
 		| ((
@@ -382,14 +411,14 @@ export const getAuthUserInfo2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAuthUserInfo2ResponseMock(),
+					: getUserInfo2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getAuthUserInfoMockHandler = (
+export const getUserInfoMockHandler = (
 	overrideResponse?:
 		| ApiUserinfo
 		| ((
@@ -405,14 +434,14 @@ export const getAuthUserInfoMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getAuthUserInfoResponseMock(),
+					: getUserInfoResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getAuthMock = () => [
-	getAuthSignupMockHandler(),
-	getAuthUserInfo2MockHandler(),
-	getAuthUserInfoMockHandler(),
+	getSignupMockHandler(),
+	getUserInfo2MockHandler(),
+	getUserInfoMockHandler(),
 ];

@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary GetPermissions list available from application
  */
-export const permissionsGetPermissionsQueryParams = zod.object({
+export const getPermissionsQueryParams = zod.object({
 	q: zod.string().optional().describe('TermOfSearch'),
 	id: zod.array(zod.string()).optional().describe('= ANY(id)'),
 	not: zod.array(zod.string()).optional().describe('<> ANY(not)'),
@@ -22,7 +22,7 @@ export const permissionsGetPermissionsQueryParams = zod.object({
 	size: zod.number().optional().describe('page size'),
 });
 
-export const permissionsGetPermissionsResponse = zod.object({
+export const getPermissionsResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({

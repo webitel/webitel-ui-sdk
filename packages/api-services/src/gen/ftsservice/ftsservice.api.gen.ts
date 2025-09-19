@@ -8,7 +8,7 @@ import axios from '@aliasedDeps/api-services/axios';
 
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import type { FtsSearchResponse, SearchParams } from '.././_models';
+import type { FtsSearchResponse, SearchMixin7Params } from '.././_models';
 
 // --- header start
 //
@@ -18,8 +18,8 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const search = <TData = AxiosResponse<FtsSearchResponse>>(
-				params?: SearchParams,
+			const searchMixin7 = <TData = AxiosResponse<FtsSearchResponse>>(
+				params?: SearchMixin7Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/search', {
@@ -29,8 +29,8 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { search };
+			return { searchMixin7 };
 		};
-export type SearchResult = AxiosResponse<FtsSearchResponse>;
+export type SearchMixin7Result = AxiosResponse<FtsSearchResponse>;
 
 // --- footer end

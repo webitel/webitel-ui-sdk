@@ -8,101 +8,94 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsManager,
-	WebitelContactsManagerList,
-} from '.././_models';
+import type { ContactsManager, ContactsManagerList } from '.././_models';
 
-export const getManagersDeleteManagersResponseMock =
-	(): WebitelContactsManager[] =>
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => ({
-			createdAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			createdBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			etag: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			primary: faker.helpers.arrayElement([
-				faker.datatype.boolean(),
-				undefined,
-			]),
-			updatedAt: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			updatedBy: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			user: faker.helpers.arrayElement([
-				{
-					id: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					name: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					type: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-				},
-				undefined,
-			]),
-			ver: faker.helpers.arrayElement([
-				faker.number.int({
-					min: undefined,
-					max: undefined,
-					multipleOf: undefined,
-				}),
-				undefined,
-			]),
-		}));
+export const getDeleteManagersResponseMock = (): ContactsManager[] =>
+	Array.from(
+		{ length: faker.number.int({ min: 1, max: 10 }) },
+		(_, i) => i + 1,
+	).map(() => ({
+		createdAt: faker.helpers.arrayElement([
+			faker.string.alpha({ length: { min: 10, max: 20 } }),
+			undefined,
+		]),
+		createdBy: faker.helpers.arrayElement([
+			{
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+				type: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		etag: faker.helpers.arrayElement([
+			faker.string.alpha({ length: { min: 10, max: 20 } }),
+			undefined,
+		]),
+		id: faker.helpers.arrayElement([
+			faker.string.alpha({ length: { min: 10, max: 20 } }),
+			undefined,
+		]),
+		primary: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+		updatedAt: faker.helpers.arrayElement([
+			faker.string.alpha({ length: { min: 10, max: 20 } }),
+			undefined,
+		]),
+		updatedBy: faker.helpers.arrayElement([
+			{
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+				type: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		user: faker.helpers.arrayElement([
+			{
+				id: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+				name: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+				type: faker.helpers.arrayElement([
+					faker.string.alpha({ length: { min: 10, max: 20 } }),
+					undefined,
+				]),
+			},
+			undefined,
+		]),
+		ver: faker.helpers.arrayElement([
+			faker.number.int({
+				min: undefined,
+				max: undefined,
+				multipleOf: undefined,
+			}),
+			undefined,
+		]),
+	}));
 
-export const getManagersListManagersResponseMock = (
-	overrideResponse: Partial<WebitelContactsManagerList> = {},
-): WebitelContactsManagerList => ({
+export const getListManagersResponseMock = (
+	overrideResponse: Partial<ContactsManagerList> = {},
+): ContactsManagerList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -198,9 +191,9 @@ export const getManagersListManagersResponseMock = (
 	...overrideResponse,
 });
 
-export const getManagersMergeManagersResponseMock = (
-	overrideResponse: Partial<WebitelContactsManagerList> = {},
-): WebitelContactsManagerList => ({
+export const getMergeManagersResponseMock = (
+	overrideResponse: Partial<ContactsManagerList> = {},
+): ContactsManagerList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -296,9 +289,9 @@ export const getManagersMergeManagersResponseMock = (
 	...overrideResponse,
 });
 
-export const getManagersResetManagersResponseMock = (
-	overrideResponse: Partial<WebitelContactsManagerList> = {},
-): WebitelContactsManagerList => ({
+export const getResetManagersResponseMock = (
+	overrideResponse: Partial<ContactsManagerList> = {},
+): ContactsManagerList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -394,9 +387,9 @@ export const getManagersResetManagersResponseMock = (
 	...overrideResponse,
 });
 
-export const getManagersDeleteManagerResponseMock = (
-	overrideResponse: Partial<WebitelContactsManager> = {},
-): WebitelContactsManager => ({
+export const getDeleteManagerResponseMock = (
+	overrideResponse: Partial<ContactsManager> = {},
+): ContactsManager => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -472,9 +465,9 @@ export const getManagersDeleteManagerResponseMock = (
 	...overrideResponse,
 });
 
-export const getManagersLocateManagerResponseMock = (
-	overrideResponse: Partial<WebitelContactsManager> = {},
-): WebitelContactsManager => ({
+export const getLocateManagerResponseMock = (
+	overrideResponse: Partial<ContactsManager> = {},
+): ContactsManager => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -550,9 +543,9 @@ export const getManagersLocateManagerResponseMock = (
 	...overrideResponse,
 });
 
-export const getManagersUpdateManager2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsManagerList> = {},
-): WebitelContactsManagerList => ({
+export const getUpdateManager2ResponseMock = (
+	overrideResponse: Partial<ContactsManagerList> = {},
+): ContactsManagerList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -648,9 +641,9 @@ export const getManagersUpdateManager2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getManagersUpdateManagerResponseMock = (
-	overrideResponse: Partial<WebitelContactsManagerList> = {},
-): WebitelContactsManagerList => ({
+export const getUpdateManagerResponseMock = (
+	overrideResponse: Partial<ContactsManagerList> = {},
+): ContactsManagerList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -746,12 +739,12 @@ export const getManagersUpdateManagerResponseMock = (
 	...overrideResponse,
 });
 
-export const getManagersDeleteManagersMockHandler = (
+export const getDeleteManagersMockHandler = (
 	overrideResponse?:
-		| WebitelContactsManager[]
+		| ContactsManager[]
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsManager[]> | WebitelContactsManager[]),
+		  ) => Promise<ContactsManager[]> | ContactsManager[]),
 ) => {
 	return http.delete('*/contacts/:contactId/managers', async (info) => {
 		await delay(1000);
@@ -762,19 +755,19 @@ export const getManagersDeleteManagersMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersDeleteManagersResponseMock(),
+					: getDeleteManagersResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getManagersListManagersMockHandler = (
+export const getListManagersMockHandler = (
 	overrideResponse?:
-		| WebitelContactsManagerList
+		| ContactsManagerList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsManagerList> | WebitelContactsManagerList),
+		  ) => Promise<ContactsManagerList> | ContactsManagerList),
 ) => {
 	return http.get('*/contacts/:contactId/managers', async (info) => {
 		await delay(1000);
@@ -785,19 +778,19 @@ export const getManagersListManagersMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersListManagersResponseMock(),
+					: getListManagersResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getManagersMergeManagersMockHandler = (
+export const getMergeManagersMockHandler = (
 	overrideResponse?:
-		| WebitelContactsManagerList
+		| ContactsManagerList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsManagerList> | WebitelContactsManagerList),
+		  ) => Promise<ContactsManagerList> | ContactsManagerList),
 ) => {
 	return http.post('*/contacts/:contactId/managers', async (info) => {
 		await delay(1000);
@@ -808,19 +801,19 @@ export const getManagersMergeManagersMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersMergeManagersResponseMock(),
+					: getMergeManagersResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getManagersResetManagersMockHandler = (
+export const getResetManagersMockHandler = (
 	overrideResponse?:
-		| WebitelContactsManagerList
+		| ContactsManagerList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsManagerList> | WebitelContactsManagerList),
+		  ) => Promise<ContactsManagerList> | ContactsManagerList),
 ) => {
 	return http.put('*/contacts/:contactId/managers', async (info) => {
 		await delay(1000);
@@ -831,19 +824,19 @@ export const getManagersResetManagersMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersResetManagersResponseMock(),
+					: getResetManagersResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getManagersDeleteManagerMockHandler = (
+export const getDeleteManagerMockHandler = (
 	overrideResponse?:
-		| WebitelContactsManager
+		| ContactsManager
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsManager> | WebitelContactsManager),
+		  ) => Promise<ContactsManager> | ContactsManager),
 ) => {
 	return http.delete('*/contacts/:contactId/managers/:etag', async (info) => {
 		await delay(1000);
@@ -854,19 +847,19 @@ export const getManagersDeleteManagerMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersDeleteManagerResponseMock(),
+					: getDeleteManagerResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getManagersLocateManagerMockHandler = (
+export const getLocateManagerMockHandler = (
 	overrideResponse?:
-		| WebitelContactsManager
+		| ContactsManager
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsManager> | WebitelContactsManager),
+		  ) => Promise<ContactsManager> | ContactsManager),
 ) => {
 	return http.get('*/contacts/:contactId/managers/:etag', async (info) => {
 		await delay(1000);
@@ -877,19 +870,19 @@ export const getManagersLocateManagerMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersLocateManagerResponseMock(),
+					: getLocateManagerResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getManagersUpdateManager2MockHandler = (
+export const getUpdateManager2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsManagerList
+		| ContactsManagerList
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsManagerList> | WebitelContactsManagerList),
+		  ) => Promise<ContactsManagerList> | ContactsManagerList),
 ) => {
 	return http.patch('*/contacts/:contactId/managers/:etag', async (info) => {
 		await delay(1000);
@@ -900,19 +893,19 @@ export const getManagersUpdateManager2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersUpdateManager2ResponseMock(),
+					: getUpdateManager2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getManagersUpdateManagerMockHandler = (
+export const getUpdateManagerMockHandler = (
 	overrideResponse?:
-		| WebitelContactsManagerList
+		| ContactsManagerList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsManagerList> | WebitelContactsManagerList),
+		  ) => Promise<ContactsManagerList> | ContactsManagerList),
 ) => {
 	return http.put('*/contacts/:contactId/managers/:etag', async (info) => {
 		await delay(1000);
@@ -923,19 +916,19 @@ export const getManagersUpdateManagerMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getManagersUpdateManagerResponseMock(),
+					: getUpdateManagerResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getManagersMock = () => [
-	getManagersDeleteManagersMockHandler(),
-	getManagersListManagersMockHandler(),
-	getManagersMergeManagersMockHandler(),
-	getManagersResetManagersMockHandler(),
-	getManagersDeleteManagerMockHandler(),
-	getManagersLocateManagerMockHandler(),
-	getManagersUpdateManager2MockHandler(),
-	getManagersUpdateManagerMockHandler(),
+	getDeleteManagersMockHandler(),
+	getListManagersMockHandler(),
+	getMergeManagersMockHandler(),
+	getResetManagersMockHandler(),
+	getDeleteManagerMockHandler(),
+	getLocateManagerMockHandler(),
+	getUpdateManager2MockHandler(),
+	getUpdateManagerMockHandler(),
 ];

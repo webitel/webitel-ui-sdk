@@ -4,7 +4,7 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ApiSearchUsersRequestPresence } from './apiSearchUsersRequestPresence';
+import type { SearchUsersRequestPresence } from './searchUsersRequestPresence';
 
 export interface ApiSearchUsersRequest {
 	/** filter: include 'deleted' ALSO ! (inactive) */
@@ -18,7 +18,7 @@ export interface ApiSearchUsersRequest {
 	name?: string;
 	notId?: string[];
 	page?: number;
-	presence?: ApiSearchUsersRequestPresence;
+	presence?: SearchUsersRequestPresence;
 	/** filter: (.name|.username|.extension|.status) ILIKE '{q}' */
 	q?: string;
 	size?: number;

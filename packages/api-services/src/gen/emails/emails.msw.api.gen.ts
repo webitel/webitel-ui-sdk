@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsEmailAddress,
-	WebitelContactsEmailList,
-} from '.././_models';
+import type { ContactsEmailAddress, ContactsEmailList } from '.././_models';
 
-export const getEmailsDeleteEmailsResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailList> = {},
-): WebitelContactsEmailList => ({
+export const getDeleteEmailsResponseMock = (
+	overrideResponse: Partial<ContactsEmailList> = {},
+): ContactsEmailList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -119,9 +116,9 @@ export const getEmailsDeleteEmailsResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsListEmailsResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailList> = {},
-): WebitelContactsEmailList => ({
+export const getListEmailsResponseMock = (
+	overrideResponse: Partial<ContactsEmailList> = {},
+): ContactsEmailList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -225,9 +222,9 @@ export const getEmailsListEmailsResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsMergeEmailsResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailList> = {},
-): WebitelContactsEmailList => ({
+export const getMergeEmailsResponseMock = (
+	overrideResponse: Partial<ContactsEmailList> = {},
+): ContactsEmailList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -331,9 +328,9 @@ export const getEmailsMergeEmailsResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsResetEmailsResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailList> = {},
-): WebitelContactsEmailList => ({
+export const getResetEmailsResponseMock = (
+	overrideResponse: Partial<ContactsEmailList> = {},
+): ContactsEmailList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -437,9 +434,9 @@ export const getEmailsResetEmailsResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsDeleteEmailResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailAddress> = {},
-): WebitelContactsEmailAddress => ({
+export const getDeleteEmailResponseMock = (
+	overrideResponse: Partial<ContactsEmailAddress> = {},
+): ContactsEmailAddress => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -520,9 +517,9 @@ export const getEmailsDeleteEmailResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsLocateEmailResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailAddress> = {},
-): WebitelContactsEmailAddress => ({
+export const getLocateEmailResponseMock = (
+	overrideResponse: Partial<ContactsEmailAddress> = {},
+): ContactsEmailAddress => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -603,9 +600,9 @@ export const getEmailsLocateEmailResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsUpdateEmail2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailList> = {},
-): WebitelContactsEmailList => ({
+export const getUpdateEmail2ResponseMock = (
+	overrideResponse: Partial<ContactsEmailList> = {},
+): ContactsEmailList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -709,9 +706,9 @@ export const getEmailsUpdateEmail2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsUpdateEmailResponseMock = (
-	overrideResponse: Partial<WebitelContactsEmailList> = {},
-): WebitelContactsEmailList => ({
+export const getUpdateEmailResponseMock = (
+	overrideResponse: Partial<ContactsEmailList> = {},
+): ContactsEmailList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -815,12 +812,12 @@ export const getEmailsUpdateEmailResponseMock = (
 	...overrideResponse,
 });
 
-export const getEmailsDeleteEmailsMockHandler = (
+export const getDeleteEmailsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailList
+		| ContactsEmailList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsEmailList> | WebitelContactsEmailList),
+		  ) => Promise<ContactsEmailList> | ContactsEmailList),
 ) => {
 	return http.delete('*/contacts/:contactId/emails', async (info) => {
 		await delay(1000);
@@ -831,19 +828,19 @@ export const getEmailsDeleteEmailsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsDeleteEmailsResponseMock(),
+					: getDeleteEmailsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getEmailsListEmailsMockHandler = (
+export const getListEmailsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailList
+		| ContactsEmailList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsEmailList> | WebitelContactsEmailList),
+		  ) => Promise<ContactsEmailList> | ContactsEmailList),
 ) => {
 	return http.get('*/contacts/:contactId/emails', async (info) => {
 		await delay(1000);
@@ -854,19 +851,19 @@ export const getEmailsListEmailsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsListEmailsResponseMock(),
+					: getListEmailsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getEmailsMergeEmailsMockHandler = (
+export const getMergeEmailsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailList
+		| ContactsEmailList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsEmailList> | WebitelContactsEmailList),
+		  ) => Promise<ContactsEmailList> | ContactsEmailList),
 ) => {
 	return http.post('*/contacts/:contactId/emails', async (info) => {
 		await delay(1000);
@@ -877,19 +874,19 @@ export const getEmailsMergeEmailsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsMergeEmailsResponseMock(),
+					: getMergeEmailsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getEmailsResetEmailsMockHandler = (
+export const getResetEmailsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailList
+		| ContactsEmailList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsEmailList> | WebitelContactsEmailList),
+		  ) => Promise<ContactsEmailList> | ContactsEmailList),
 ) => {
 	return http.put('*/contacts/:contactId/emails', async (info) => {
 		await delay(1000);
@@ -900,19 +897,19 @@ export const getEmailsResetEmailsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsResetEmailsResponseMock(),
+					: getResetEmailsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getEmailsDeleteEmailMockHandler = (
+export const getDeleteEmailMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailAddress
+		| ContactsEmailAddress
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsEmailAddress> | WebitelContactsEmailAddress),
+		  ) => Promise<ContactsEmailAddress> | ContactsEmailAddress),
 ) => {
 	return http.delete('*/contacts/:contactId/emails/:etag', async (info) => {
 		await delay(1000);
@@ -923,19 +920,19 @@ export const getEmailsDeleteEmailMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsDeleteEmailResponseMock(),
+					: getDeleteEmailResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getEmailsLocateEmailMockHandler = (
+export const getLocateEmailMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailAddress
+		| ContactsEmailAddress
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsEmailAddress> | WebitelContactsEmailAddress),
+		  ) => Promise<ContactsEmailAddress> | ContactsEmailAddress),
 ) => {
 	return http.get('*/contacts/:contactId/emails/:etag', async (info) => {
 		await delay(1000);
@@ -946,19 +943,19 @@ export const getEmailsLocateEmailMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsLocateEmailResponseMock(),
+					: getLocateEmailResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getEmailsUpdateEmail2MockHandler = (
+export const getUpdateEmail2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailList
+		| ContactsEmailList
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsEmailList> | WebitelContactsEmailList),
+		  ) => Promise<ContactsEmailList> | ContactsEmailList),
 ) => {
 	return http.patch('*/contacts/:contactId/emails/:etag', async (info) => {
 		await delay(1000);
@@ -969,19 +966,19 @@ export const getEmailsUpdateEmail2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsUpdateEmail2ResponseMock(),
+					: getUpdateEmail2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getEmailsUpdateEmailMockHandler = (
+export const getUpdateEmailMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmailList
+		| ContactsEmailList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsEmailList> | WebitelContactsEmailList),
+		  ) => Promise<ContactsEmailList> | ContactsEmailList),
 ) => {
 	return http.put('*/contacts/:contactId/emails/:etag', async (info) => {
 		await delay(1000);
@@ -992,19 +989,19 @@ export const getEmailsUpdateEmailMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getEmailsUpdateEmailResponseMock(),
+					: getUpdateEmailResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getEmailsMock = () => [
-	getEmailsDeleteEmailsMockHandler(),
-	getEmailsListEmailsMockHandler(),
-	getEmailsMergeEmailsMockHandler(),
-	getEmailsResetEmailsMockHandler(),
-	getEmailsDeleteEmailMockHandler(),
-	getEmailsLocateEmailMockHandler(),
-	getEmailsUpdateEmail2MockHandler(),
-	getEmailsUpdateEmailMockHandler(),
+	getDeleteEmailsMockHandler(),
+	getListEmailsMockHandler(),
+	getMergeEmailsMockHandler(),
+	getResetEmailsMockHandler(),
+	getDeleteEmailMockHandler(),
+	getLocateEmailMockHandler(),
+	getUpdateEmail2MockHandler(),
+	getUpdateEmailMockHandler(),
 ];

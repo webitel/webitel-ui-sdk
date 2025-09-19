@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary GetUserTfaKey locates the secret for user and returns it as a TOTP url
  */
-export const twoFactorAuthenticationGetUserTfaKeyParams = zod.object({
+export const getUserTfaKeyParams = zod.object({
 	user_id: zod.string(),
 });
 
-export const twoFactorAuthenticationGetUserTfaKeyResponse = zod.object({
+export const getUserTfaKeyResponse = zod.object({
 	totp: zod
 		.object({
 			url: zod.string().optional(),
@@ -31,11 +31,11 @@ export const twoFactorAuthenticationGetUserTfaKeyResponse = zod.object({
 /**
  * @summary GenerateUserTfaKey generates new or regenerates secret for the concrete user
  */
-export const twoFactorAuthenticationGenerateUserTfaKeyParams = zod.object({
+export const generateUserTfaKeyParams = zod.object({
 	user_id: zod.string(),
 });
 
-export const twoFactorAuthenticationGenerateUserTfaKeyResponse = zod.object({
+export const generateUserTfaKeyResponse = zod.object({
 	totp: zod
 		.object({
 			url: zod.string().optional(),

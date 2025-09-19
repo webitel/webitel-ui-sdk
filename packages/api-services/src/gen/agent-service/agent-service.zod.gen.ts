@@ -346,6 +346,7 @@ export const searchAgentStatusStatisticResponse = zod.object({
 					)
 					.optional(),
 				status: zod.string().optional(),
+				statusComment: zod.string().optional(),
 				statusDuration: zod.string().optional(),
 				supervisor: zod
 					.array(
@@ -413,6 +414,7 @@ export const searchAgentStatusStatisticItemResponse = zod.object({
 	scoreOptionalAvg: zod.number().optional(),
 	scoreRequiredAvg: zod.number().optional(),
 	status: zod.string().optional(),
+	statusComment: zod.string().optional(),
 	statusDuration: zod.string().optional(),
 	supervisor: zod
 		.array(
@@ -1122,6 +1124,7 @@ export const updateAgentStatusBody = zod.object({
 	onDemand: zod.boolean().optional(),
 	payload: zod.string().optional(),
 	status: zod.string().optional(),
+	statusComment: zod.string().optional(),
 });
 
 export const updateAgentStatusResponse = zod.object({

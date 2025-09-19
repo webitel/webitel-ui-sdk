@@ -5,7 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { ApiAccessToken } from './apiAccessToken';
+import type { ApiUserWarning } from './apiUserWarning';
 
 export interface ApiLoginResponse {
 	authorization?: ApiAccessToken;
+	warnings?: ApiUserWarning[];
 }

@@ -9,19 +9,19 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	PhonesDeletePhoneParams,
-	PhonesDeletePhonesParams,
-	PhonesListPhonesParams,
-	PhonesLocatePhoneParams,
-	PhonesMergePhonesParams,
-	PhonesResetPhonesParams,
-	PhonesUpdatePhone2Body,
-	PhonesUpdatePhone2Params,
-	PhonesUpdatePhoneBody,
-	PhonesUpdatePhoneParams,
-	WebitelContactsInputPhoneNumber,
-	WebitelContactsPhoneList,
-	WebitelContactsPhoneNumber,
+	ContactsInputPhoneNumber,
+	ContactsPhoneList,
+	ContactsPhoneNumber,
+	DeletePhoneParams,
+	DeletePhonesParams,
+	ListPhonesParams,
+	LocatePhoneParams,
+	MergePhonesParams,
+	ResetPhonesParams,
+	UpdatePhone2Body,
+	UpdatePhone2Params,
+	UpdatePhoneBody,
+	UpdatePhoneParams,
 } from '.././_models';
 
 // --- header start
@@ -35,11 +35,9 @@ export const // --- title start
 			/**
 			 * @summary Remove the Contact's phone number association(s)
 			 */
-			const phonesDeletePhones = <
-				TData = AxiosResponse<WebitelContactsPhoneList>,
-			>(
+			const deletePhones = <TData = AxiosResponse<ContactsPhoneList>>(
 				contactId: string,
-				params: PhonesDeletePhonesParams,
+				params: DeletePhonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/phones`, {
@@ -50,11 +48,9 @@ export const // --- title start
 			/**
 			 * @summary Search phone number(s)
 			 */
-			const phonesListPhones = <
-				TData = AxiosResponse<WebitelContactsPhoneList>,
-			>(
+			const listPhones = <TData = AxiosResponse<ContactsPhoneList>>(
 				contactId: string,
-				params?: PhonesListPhonesParams,
+				params?: ListPhonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/phones`, {
@@ -65,17 +61,15 @@ export const // --- title start
 			/**
 			 * @summary Associate phone number(s) with the Contact
 			 */
-			const phonesMergePhones = <
-				TData = AxiosResponse<WebitelContactsPhoneList>,
-			>(
+			const mergePhones = <TData = AxiosResponse<ContactsPhoneList>>(
 				contactId: string,
-				webitelContactsInputPhoneNumber: WebitelContactsInputPhoneNumber[],
-				params?: PhonesMergePhonesParams,
+				contactsInputPhoneNumber: ContactsInputPhoneNumber[],
+				params?: MergePhonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/contacts/${contactId}/phones`,
-					webitelContactsInputPhoneNumber,
+					contactsInputPhoneNumber,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -85,17 +79,15 @@ export const // --- title start
 			/**
 			 * @summary Reset the Contact's phone numbers to fit given data set.
 			 */
-			const phonesResetPhones = <
-				TData = AxiosResponse<WebitelContactsPhoneList>,
-			>(
+			const resetPhones = <TData = AxiosResponse<ContactsPhoneList>>(
 				contactId: string,
-				webitelContactsInputPhoneNumber: WebitelContactsInputPhoneNumber[],
-				params?: PhonesResetPhonesParams,
+				contactsInputPhoneNumber: ContactsInputPhoneNumber[],
+				params?: ResetPhonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/phones`,
-					webitelContactsInputPhoneNumber,
+					contactsInputPhoneNumber,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -105,12 +97,10 @@ export const // --- title start
 			/**
 			 * @summary Remove the Contact's phone number
 			 */
-			const phonesDeletePhone = <
-				TData = AxiosResponse<WebitelContactsPhoneNumber>,
-			>(
+			const deletePhone = <TData = AxiosResponse<ContactsPhoneNumber>>(
 				contactId: string,
 				etag: string,
-				params?: PhonesDeletePhoneParams,
+				params?: DeletePhoneParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/phones/${etag}`, {
@@ -121,12 +111,10 @@ export const // --- title start
 			/**
 			 * @summary Locate the Contact's phone number association.
 			 */
-			const phonesLocatePhone = <
-				TData = AxiosResponse<WebitelContactsPhoneNumber>,
-			>(
+			const locatePhone = <TData = AxiosResponse<ContactsPhoneNumber>>(
 				contactId: string,
 				etag: string,
-				params?: PhonesLocatePhoneParams,
+				params?: LocatePhoneParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/phones/${etag}`, {
@@ -137,18 +125,16 @@ export const // --- title start
 			/**
 			 * @summary Update the Contact's phone number association details
 			 */
-			const phonesUpdatePhone2 = <
-				TData = AxiosResponse<WebitelContactsPhoneList>,
-			>(
+			const updatePhone2 = <TData = AxiosResponse<ContactsPhoneList>>(
 				contactId: string,
 				etag: string,
-				phonesUpdatePhone2Body: PhonesUpdatePhone2Body,
-				params?: PhonesUpdatePhone2Params,
+				updatePhone2Body: UpdatePhone2Body,
+				params?: UpdatePhone2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/${contactId}/phones/${etag}`,
-					phonesUpdatePhone2Body,
+					updatePhone2Body,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -158,18 +144,16 @@ export const // --- title start
 			/**
 			 * @summary Update the Contact's phone number association details
 			 */
-			const phonesUpdatePhone = <
-				TData = AxiosResponse<WebitelContactsPhoneList>,
-			>(
+			const updatePhone = <TData = AxiosResponse<ContactsPhoneList>>(
 				contactId: string,
 				etag: string,
-				phonesUpdatePhoneBody: PhonesUpdatePhoneBody,
-				params?: PhonesUpdatePhoneParams,
+				updatePhoneBody: UpdatePhoneBody,
+				params?: UpdatePhoneParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/phones/${etag}`,
-					phonesUpdatePhoneBody,
+					updatePhoneBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -179,23 +163,23 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				phonesDeletePhones,
-				phonesListPhones,
-				phonesMergePhones,
-				phonesResetPhones,
-				phonesDeletePhone,
-				phonesLocatePhone,
-				phonesUpdatePhone2,
-				phonesUpdatePhone,
+				deletePhones,
+				listPhones,
+				mergePhones,
+				resetPhones,
+				deletePhone,
+				locatePhone,
+				updatePhone2,
+				updatePhone,
 			};
 		};
-export type PhonesDeletePhonesResult = AxiosResponse<WebitelContactsPhoneList>;
-export type PhonesListPhonesResult = AxiosResponse<WebitelContactsPhoneList>;
-export type PhonesMergePhonesResult = AxiosResponse<WebitelContactsPhoneList>;
-export type PhonesResetPhonesResult = AxiosResponse<WebitelContactsPhoneList>;
-export type PhonesDeletePhoneResult = AxiosResponse<WebitelContactsPhoneNumber>;
-export type PhonesLocatePhoneResult = AxiosResponse<WebitelContactsPhoneNumber>;
-export type PhonesUpdatePhone2Result = AxiosResponse<WebitelContactsPhoneList>;
-export type PhonesUpdatePhoneResult = AxiosResponse<WebitelContactsPhoneList>;
+export type DeletePhonesResult = AxiosResponse<ContactsPhoneList>;
+export type ListPhonesResult = AxiosResponse<ContactsPhoneList>;
+export type MergePhonesResult = AxiosResponse<ContactsPhoneList>;
+export type ResetPhonesResult = AxiosResponse<ContactsPhoneList>;
+export type DeletePhoneResult = AxiosResponse<ContactsPhoneNumber>;
+export type LocatePhoneResult = AxiosResponse<ContactsPhoneNumber>;
+export type UpdatePhone2Result = AxiosResponse<ContactsPhoneList>;
+export type UpdatePhoneResult = AxiosResponse<ContactsPhoneList>;
 
 // --- footer end

@@ -9,8 +9,8 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	KnowledgebaseSearchSpacesArticlesSearchParams,
-	WebitelKnowledgebaseCombinedList,
+	KnowledgebaseCombinedList,
+	SpacesArticlesSearchParams,
 } from '.././_models';
 
 // --- header start
@@ -21,10 +21,10 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const knowledgebaseSearchSpacesArticlesSearch = <
-				TData = AxiosResponse<WebitelKnowledgebaseCombinedList>,
+			const spacesArticlesSearch = <
+				TData = AxiosResponse<KnowledgebaseCombinedList>,
 			>(
-				params?: KnowledgebaseSearchSpacesArticlesSearchParams,
+				params?: SpacesArticlesSearchParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/spaces/search', {
@@ -34,9 +34,9 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { knowledgebaseSearchSpacesArticlesSearch };
+			return { spacesArticlesSearch };
 		};
-export type KnowledgebaseSearchSpacesArticlesSearchResult =
-	AxiosResponse<WebitelKnowledgebaseCombinedList>;
+export type SpacesArticlesSearchResult =
+	AxiosResponse<KnowledgebaseCombinedList>;
 
 // --- footer end

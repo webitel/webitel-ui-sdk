@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 
 import type { ApiPresenceStatus } from '.././_models';
 
-export const getPresenceSetStatus2ResponseMock = (
+export const getSetStatus2ResponseMock = (
 	overrideResponse: Partial<ApiPresenceStatus> = {},
 ): ApiPresenceStatus => ({
 	app: faker.helpers.arrayElement([
@@ -123,7 +123,7 @@ export const getPresenceSetStatus2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getPresenceSetStatusResponseMock = (
+export const getSetStatusResponseMock = (
 	overrideResponse: Partial<ApiPresenceStatus> = {},
 ): ApiPresenceStatus => ({
 	app: faker.helpers.arrayElement([
@@ -236,7 +236,7 @@ export const getPresenceSetStatusResponseMock = (
 	...overrideResponse,
 });
 
-export const getPresenceSetStatus2MockHandler = (
+export const getSetStatus2MockHandler = (
 	overrideResponse?:
 		| ApiPresenceStatus
 		| ((
@@ -252,14 +252,14 @@ export const getPresenceSetStatus2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPresenceSetStatus2ResponseMock(),
+					: getSetStatus2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPresenceSetStatusMockHandler = (
+export const getSetStatusMockHandler = (
 	overrideResponse?:
 		| ApiPresenceStatus
 		| ((
@@ -275,13 +275,13 @@ export const getPresenceSetStatusMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPresenceSetStatusResponseMock(),
+					: getSetStatusResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getPresenceMock = () => [
-	getPresenceSetStatus2MockHandler(),
-	getPresenceSetStatusMockHandler(),
+	getSetStatus2MockHandler(),
+	getSetStatusMockHandler(),
 ];

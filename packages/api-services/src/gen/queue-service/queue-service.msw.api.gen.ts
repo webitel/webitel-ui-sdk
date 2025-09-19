@@ -257,6 +257,35 @@ export const getSearchQueueResponseMock = (
 						},
 						undefined,
 					]),
+					prolongationOptions: faker.helpers.arrayElement([
+						{
+							enabled: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							isTimeoutRetry: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							prolongationTimeSec: faker.helpers.arrayElement([
+								faker.number.int({
+									min: undefined,
+									max: undefined,
+									multipleOf: undefined,
+								}),
+								undefined,
+							]),
+							repeatsNumber: faker.helpers.arrayElement([
+								faker.number.int({
+									min: undefined,
+									max: undefined,
+									multipleOf: undefined,
+								}),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
 					renewalSec: faker.helpers.arrayElement([
 						faker.number.int({
 							min: undefined,
@@ -545,6 +574,35 @@ export const getCreateQueueResponseMock = (
 					]),
 					name: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
 						undefined,
 					]),
 				},
@@ -1113,6 +1171,35 @@ export const getDeleteQueueResponseMock = (
 				},
 				undefined,
 			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			renewalSec: faker.helpers.arrayElement([
 				faker.number.int({
 					min: undefined,
@@ -1385,6 +1472,35 @@ export const getReadQueueResponseMock = (
 					]),
 					name: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
 						undefined,
 					]),
 				},
@@ -1667,6 +1783,35 @@ export const getPatchQueueResponseMock = (
 				},
 				undefined,
 			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			renewalSec: faker.helpers.arrayElement([
 				faker.number.int({
 					min: undefined,
@@ -1939,6 +2084,35 @@ export const getUpdateQueueResponseMock = (
 					]),
 					name: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
 						undefined,
 					]),
 				},

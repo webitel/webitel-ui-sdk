@@ -6,6 +6,7 @@
  */
 
 export interface EngineCallFile {
+	channel?: string;
 	id?: string;
 	mimeType?: string;
 	name?: string;
