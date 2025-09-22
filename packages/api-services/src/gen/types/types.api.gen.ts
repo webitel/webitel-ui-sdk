@@ -9,9 +9,9 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	TypesSearchParams,
-	WebitelProtoDataStruct,
-	WebitelProtoDataStructList,
+	DataStructList,
+	ProtodataStruct,
+	SearchParams,
 } from '.././_models';
 
 // --- header start
@@ -25,8 +25,8 @@ export const // --- title start
 			/**
 			 * @summary Lookup data types registry.
 			 */
-			const typesSearch = <TData = AxiosResponse<WebitelProtoDataStructList>>(
-				params?: TypesSearchParams,
+			const search = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types', {
@@ -37,7 +37,7 @@ export const // --- title start
 			/**
 			 * @summary Structured data type details.
 			 */
-			const typesLocate = <TData = AxiosResponse<WebitelProtoDataStruct>>(
+			const locate = <TData = AxiosResponse<ProtodataStruct>>(
 				path: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -45,9 +45,9 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { typesSearch, typesLocate };
+			return { search, locate };
 		};
-export type TypesSearchResult = AxiosResponse<WebitelProtoDataStructList>;
-export type TypesLocateResult = AxiosResponse<WebitelProtoDataStruct>;
+export type SearchResult = AxiosResponse<DataStructList>;
+export type LocateResult = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

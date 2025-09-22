@@ -9,19 +9,19 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	TimezonesDeleteTimezoneParams,
-	TimezonesDeleteTimezonesParams,
-	TimezonesListTimezonesParams,
-	TimezonesLocateTimezoneParams,
-	TimezonesMergeTimezonesParams,
-	TimezonesResetTimezonesParams,
-	TimezonesUpdateTimezone2Body,
-	TimezonesUpdateTimezone2Params,
-	TimezonesUpdateTimezoneBody,
-	TimezonesUpdateTimezoneParams,
-	WebitelContactsInputTimezone,
-	WebitelContactsTimezone,
-	WebitelContactsTimezoneList,
+	ContactsInputTimezone,
+	ContactsTimezone,
+	ContactsTimezoneList,
+	DeleteTimezoneParams,
+	DeleteTimezonesParams,
+	ListTimezonesParams,
+	LocateTimezoneParams,
+	MergeTimezonesParams,
+	ResetTimezonesParams,
+	UpdateTimezone2Body,
+	UpdateTimezone2Params,
+	UpdateTimezoneBody,
+	UpdateTimezoneParams,
 } from '.././_models';
 
 // --- header start
@@ -35,11 +35,9 @@ export const // --- title start
 			/**
 			 * @summary Remove the Contact's timezone(s).
 			 */
-			const timezonesDeleteTimezones = <
-				TData = AxiosResponse<WebitelContactsTimezoneList>,
-			>(
+			const deleteTimezones = <TData = AxiosResponse<ContactsTimezoneList>>(
 				contactId: string,
-				params: TimezonesDeleteTimezonesParams,
+				params: DeleteTimezonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/timezones`, {
@@ -50,11 +48,9 @@ export const // --- title start
 			/**
 			 * @summary List of the Contact's timezone(s).
 			 */
-			const timezonesListTimezones = <
-				TData = AxiosResponse<WebitelContactsTimezoneList>,
-			>(
+			const listTimezones = <TData = AxiosResponse<ContactsTimezoneList>>(
 				contactId: string,
-				params?: TimezonesListTimezonesParams,
+				params?: ListTimezonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/timezones`, {
@@ -65,17 +61,15 @@ export const // --- title start
 			/**
 			 * @summary Associate more timezone(s) with the Contact.
 			 */
-			const timezonesMergeTimezones = <
-				TData = AxiosResponse<WebitelContactsTimezoneList>,
-			>(
+			const mergeTimezones = <TData = AxiosResponse<ContactsTimezoneList>>(
 				contactId: string,
-				webitelContactsInputTimezone: WebitelContactsInputTimezone[],
-				params?: TimezonesMergeTimezonesParams,
+				contactsInputTimezone: ContactsInputTimezone[],
+				params?: MergeTimezonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/contacts/${contactId}/timezones`,
-					webitelContactsInputTimezone,
+					contactsInputTimezone,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -85,17 +79,15 @@ export const // --- title start
 			/**
 			 * @summary Resets all timezones of the contact according to the input dataset.
 			 */
-			const timezonesResetTimezones = <
-				TData = AxiosResponse<WebitelContactsTimezoneList>,
-			>(
+			const resetTimezones = <TData = AxiosResponse<ContactsTimezoneList>>(
 				contactId: string,
-				webitelContactsInputTimezone: WebitelContactsInputTimezone[],
-				params?: TimezonesResetTimezonesParams,
+				contactsInputTimezone: ContactsInputTimezone[],
+				params?: ResetTimezonesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/timezones`,
-					webitelContactsInputTimezone,
+					contactsInputTimezone,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -105,12 +97,10 @@ export const // --- title start
 			/**
 			 * @summary Remove the Contact's timezone association.
 			 */
-			const timezonesDeleteTimezone = <
-				TData = AxiosResponse<WebitelContactsTimezone>,
-			>(
+			const deleteTimezone = <TData = AxiosResponse<ContactsTimezone>>(
 				contactId: string,
 				etag: string,
-				params?: TimezonesDeleteTimezoneParams,
+				params?: DeleteTimezoneParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/timezones/${etag}`, {
@@ -121,12 +111,10 @@ export const // --- title start
 			/**
 			 * @summary Locate the Contact's timezone association.
 			 */
-			const timezonesLocateTimezone = <
-				TData = AxiosResponse<WebitelContactsTimezone>,
-			>(
+			const locateTimezone = <TData = AxiosResponse<ContactsTimezone>>(
 				contactId: string,
 				etag: string,
-				params?: TimezonesLocateTimezoneParams,
+				params?: LocateTimezoneParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/timezones/${etag}`, {
@@ -137,18 +125,16 @@ export const // --- title start
 			/**
 			 * @summary Update the Contact's timezone details.
 			 */
-			const timezonesUpdateTimezone2 = <
-				TData = AxiosResponse<WebitelContactsTimezoneList>,
-			>(
+			const updateTimezone2 = <TData = AxiosResponse<ContactsTimezoneList>>(
 				contactId: string,
 				etag: string,
-				timezonesUpdateTimezone2Body: TimezonesUpdateTimezone2Body,
-				params?: TimezonesUpdateTimezone2Params,
+				updateTimezone2Body: UpdateTimezone2Body,
+				params?: UpdateTimezone2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/${contactId}/timezones/${etag}`,
-					timezonesUpdateTimezone2Body,
+					updateTimezone2Body,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -158,18 +144,16 @@ export const // --- title start
 			/**
 			 * @summary Update the Contact's timezone details.
 			 */
-			const timezonesUpdateTimezone = <
-				TData = AxiosResponse<WebitelContactsTimezoneList>,
-			>(
+			const updateTimezone = <TData = AxiosResponse<ContactsTimezoneList>>(
 				contactId: string,
 				etag: string,
-				timezonesUpdateTimezoneBody: TimezonesUpdateTimezoneBody,
-				params?: TimezonesUpdateTimezoneParams,
+				updateTimezoneBody: UpdateTimezoneBody,
+				params?: UpdateTimezoneParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/timezones/${etag}`,
-					timezonesUpdateTimezoneBody,
+					updateTimezoneBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -179,31 +163,23 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				timezonesDeleteTimezones,
-				timezonesListTimezones,
-				timezonesMergeTimezones,
-				timezonesResetTimezones,
-				timezonesDeleteTimezone,
-				timezonesLocateTimezone,
-				timezonesUpdateTimezone2,
-				timezonesUpdateTimezone,
+				deleteTimezones,
+				listTimezones,
+				mergeTimezones,
+				resetTimezones,
+				deleteTimezone,
+				locateTimezone,
+				updateTimezone2,
+				updateTimezone,
 			};
 		};
-export type TimezonesDeleteTimezonesResult =
-	AxiosResponse<WebitelContactsTimezoneList>;
-export type TimezonesListTimezonesResult =
-	AxiosResponse<WebitelContactsTimezoneList>;
-export type TimezonesMergeTimezonesResult =
-	AxiosResponse<WebitelContactsTimezoneList>;
-export type TimezonesResetTimezonesResult =
-	AxiosResponse<WebitelContactsTimezoneList>;
-export type TimezonesDeleteTimezoneResult =
-	AxiosResponse<WebitelContactsTimezone>;
-export type TimezonesLocateTimezoneResult =
-	AxiosResponse<WebitelContactsTimezone>;
-export type TimezonesUpdateTimezone2Result =
-	AxiosResponse<WebitelContactsTimezoneList>;
-export type TimezonesUpdateTimezoneResult =
-	AxiosResponse<WebitelContactsTimezoneList>;
+export type DeleteTimezonesResult = AxiosResponse<ContactsTimezoneList>;
+export type ListTimezonesResult = AxiosResponse<ContactsTimezoneList>;
+export type MergeTimezonesResult = AxiosResponse<ContactsTimezoneList>;
+export type ResetTimezonesResult = AxiosResponse<ContactsTimezoneList>;
+export type DeleteTimezoneResult = AxiosResponse<ContactsTimezone>;
+export type LocateTimezoneResult = AxiosResponse<ContactsTimezone>;
+export type UpdateTimezone2Result = AxiosResponse<ContactsTimezoneList>;
+export type UpdateTimezoneResult = AxiosResponse<ContactsTimezoneList>;
 
 // --- footer end

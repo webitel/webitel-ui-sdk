@@ -16,7 +16,7 @@ import type {
 	ApiUpdateCustomerResponse,
 } from '.././_models';
 
-export const getCustomersGetCustomerResponseMock = (
+export const getGetCustomerResponseMock = (
 	overrideResponse: Partial<ApiGetCustomerResponse> = {},
 ): ApiGetCustomerResponse => ({
 	customer: faker.helpers.arrayElement([
@@ -232,7 +232,7 @@ export const getCustomersGetCustomerResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersUpdateCustomerResponseMock = (
+export const getUpdateCustomerResponseMock = (
 	overrideResponse: Partial<ApiUpdateCustomerResponse> = {},
 ): ApiUpdateCustomerResponse => ({
 	customer: faker.helpers.arrayElement([
@@ -448,7 +448,7 @@ export const getCustomersUpdateCustomerResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersLicenseUsageResponseMock = (
+export const getLicenseUsageResponseMock = (
 	overrideResponse: Partial<ApiLicenseUsageResponse> = {},
 ): ApiLicenseUsageResponse => ({
 	items: faker.helpers.arrayElement([
@@ -573,7 +573,7 @@ export const getCustomersLicenseUsageResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersGetCustomer2ResponseMock = (
+export const getGetCustomer2ResponseMock = (
 	overrideResponse: Partial<ApiGetCustomerResponse> = {},
 ): ApiGetCustomerResponse => ({
 	customer: faker.helpers.arrayElement([
@@ -789,7 +789,7 @@ export const getCustomersGetCustomer2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersLicenseUsage2ResponseMock = (
+export const getLicenseUsage2ResponseMock = (
 	overrideResponse: Partial<ApiLicenseUsageResponse> = {},
 ): ApiLicenseUsageResponse => ({
 	items: faker.helpers.arrayElement([
@@ -914,7 +914,7 @@ export const getCustomersLicenseUsage2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersLicenseUsage3ResponseMock = (
+export const getLicenseUsage3ResponseMock = (
 	overrideResponse: Partial<ApiLicenseUsageResponse> = {},
 ): ApiLicenseUsageResponse => ({
 	items: faker.helpers.arrayElement([
@@ -1039,7 +1039,7 @@ export const getCustomersLicenseUsage3ResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersLicenseUsersResponseMock = (
+export const getLicenseUsersResponseMock = (
 	overrideResponse: Partial<ApiLicenseUsersResponse> = {},
 ): ApiLicenseUsersResponse => ({
 	items: faker.helpers.arrayElement([
@@ -1100,7 +1100,7 @@ export const getCustomersLicenseUsersResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersServerInfoResponseMock = (
+export const getServerInfoResponseMock = (
 	overrideResponse: Partial<ApiServerInfoResponse> = {},
 ): ApiServerInfoResponse => ({
 	key: faker.helpers.arrayElement([
@@ -1110,7 +1110,7 @@ export const getCustomersServerInfoResponseMock = (
 	...overrideResponse,
 });
 
-export const getCustomersGetCustomerMockHandler = (
+export const getGetCustomerMockHandler = (
 	overrideResponse?:
 		| ApiGetCustomerResponse
 		| ((
@@ -1126,14 +1126,14 @@ export const getCustomersGetCustomerMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersGetCustomerResponseMock(),
+					: getGetCustomerResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCustomersUpdateCustomerMockHandler = (
+export const getUpdateCustomerMockHandler = (
 	overrideResponse?:
 		| ApiUpdateCustomerResponse
 		| ((
@@ -1149,14 +1149,14 @@ export const getCustomersUpdateCustomerMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersUpdateCustomerResponseMock(),
+					: getUpdateCustomerResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCustomersLicenseUsageMockHandler = (
+export const getLicenseUsageMockHandler = (
 	overrideResponse?:
 		| ApiLicenseUsageResponse
 		| ((
@@ -1172,14 +1172,14 @@ export const getCustomersLicenseUsageMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersLicenseUsageResponseMock(),
+					: getLicenseUsageResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCustomersGetCustomer2MockHandler = (
+export const getGetCustomer2MockHandler = (
 	overrideResponse?:
 		| ApiGetCustomerResponse
 		| ((
@@ -1195,14 +1195,14 @@ export const getCustomersGetCustomer2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersGetCustomer2ResponseMock(),
+					: getGetCustomer2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCustomersLicenseUsage2MockHandler = (
+export const getLicenseUsage2MockHandler = (
 	overrideResponse?:
 		| ApiLicenseUsageResponse
 		| ((
@@ -1218,14 +1218,14 @@ export const getCustomersLicenseUsage2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersLicenseUsage2ResponseMock(),
+					: getLicenseUsage2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCustomersLicenseUsage3MockHandler = (
+export const getLicenseUsage3MockHandler = (
 	overrideResponse?:
 		| ApiLicenseUsageResponse
 		| ((
@@ -1241,14 +1241,14 @@ export const getCustomersLicenseUsage3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersLicenseUsage3ResponseMock(),
+					: getLicenseUsage3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCustomersLicenseUsersMockHandler = (
+export const getLicenseUsersMockHandler = (
 	overrideResponse?:
 		| ApiLicenseUsersResponse
 		| ((
@@ -1264,14 +1264,14 @@ export const getCustomersLicenseUsersMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersLicenseUsersResponseMock(),
+					: getLicenseUsersResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCustomersServerInfoMockHandler = (
+export const getServerInfoMockHandler = (
 	overrideResponse?:
 		| ApiServerInfoResponse
 		| ((
@@ -1287,19 +1287,19 @@ export const getCustomersServerInfoMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCustomersServerInfoResponseMock(),
+					: getServerInfoResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getCustomersMock = () => [
-	getCustomersGetCustomerMockHandler(),
-	getCustomersUpdateCustomerMockHandler(),
-	getCustomersLicenseUsageMockHandler(),
-	getCustomersGetCustomer2MockHandler(),
-	getCustomersLicenseUsage2MockHandler(),
-	getCustomersLicenseUsage3MockHandler(),
-	getCustomersLicenseUsersMockHandler(),
-	getCustomersServerInfoMockHandler(),
+	getGetCustomerMockHandler(),
+	getUpdateCustomerMockHandler(),
+	getLicenseUsageMockHandler(),
+	getGetCustomer2MockHandler(),
+	getLicenseUsage2MockHandler(),
+	getLicenseUsage3MockHandler(),
+	getLicenseUsersMockHandler(),
+	getServerInfoMockHandler(),
 ];

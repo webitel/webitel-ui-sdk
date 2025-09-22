@@ -9,23 +9,23 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Remove variable(s) of the contact
  */
-export const variablesDeleteVariablesParams = zod.object({
+export const deleteVariablesParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const variablesDeleteVariablesQueryEtagItemRegExp = /^.+$/;
+export const deleteVariablesQueryEtagItemRegExp = /^.+$/;
 
-export const variablesDeleteVariablesQueryParams = zod.object({
+export const deleteVariablesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 	etag: zod
-		.array(zod.string().regex(variablesDeleteVariablesQueryEtagItemRegExp))
+		.array(zod.string().regex(deleteVariablesQueryEtagItemRegExp))
 		.describe('Set of unique ID(s) to remove.'),
 });
 
-export const variablesDeleteVariablesResponse = zod
+export const deleteVariablesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -113,11 +113,11 @@ export const variablesDeleteVariablesResponse = zod
 /**
  * @summary List variables of the contact
  */
-export const variablesListVariablesParams = zod.object({
+export const listVariablesParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const variablesListVariablesQueryParams = zod.object({
+export const listVariablesQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -146,7 +146,7 @@ export const variablesListVariablesQueryParams = zod.object({
 		.describe('Record(s) with unique ID only.'),
 });
 
-export const variablesListVariablesResponse = zod
+export const listVariablesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -234,37 +234,32 @@ export const variablesListVariablesResponse = zod
 /**
  * @summary Update or append variables to the contact
  */
-export const variablesMergeVariablesParams = zod.object({
+export const mergeVariablesParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const variablesMergeVariablesQueryParams = zod.object({
+export const mergeVariablesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const variablesMergeVariablesBodyKeyRegExp = /^\w+$/;
+export const mergeVariablesBodyKeyRegExp = /^\w+$/;
 
-export const variablesMergeVariablesBodyItem = zod
+export const mergeVariablesBodyItem = zod
 	.object({
 		etag: zod
 			.string()
 			.optional()
 			.describe('Unique ID of the latest version of an existing resorce.'),
-		key: zod
-			.string()
-			.regex(variablesMergeVariablesBodyKeyRegExp)
-			.describe('NEW Key.'),
+		key: zod.string().regex(mergeVariablesBodyKeyRegExp).describe('NEW Key.'),
 		value: zod.any().optional().describe('NEW Value.'),
 	})
 	.describe("Input of the Contact's variable.");
-export const variablesMergeVariablesBody = zod
-	.array(variablesMergeVariablesBodyItem)
-	.min(1);
+export const mergeVariablesBody = zod.array(mergeVariablesBodyItem);
 
-export const variablesMergeVariablesResponse = zod
+export const mergeVariablesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -352,37 +347,32 @@ export const variablesMergeVariablesResponse = zod
 /**
  * @summary Reset all variables of the contact
  */
-export const variablesResetVariablesParams = zod.object({
+export const resetVariablesParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const variablesResetVariablesQueryParams = zod.object({
+export const resetVariablesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const variablesResetVariablesBodyKeyRegExp = /^\w+$/;
+export const resetVariablesBodyKeyRegExp = /^\w+$/;
 
-export const variablesResetVariablesBodyItem = zod
+export const resetVariablesBodyItem = zod
 	.object({
 		etag: zod
 			.string()
 			.optional()
 			.describe('Unique ID of the latest version of an existing resorce.'),
-		key: zod
-			.string()
-			.regex(variablesResetVariablesBodyKeyRegExp)
-			.describe('NEW Key.'),
+		key: zod.string().regex(resetVariablesBodyKeyRegExp).describe('NEW Key.'),
 		value: zod.any().optional().describe('NEW Value.'),
 	})
 	.describe("Input of the Contact's variable.");
-export const variablesResetVariablesBody = zod
-	.array(variablesResetVariablesBodyItem)
-	.min(1);
+export const resetVariablesBody = zod.array(resetVariablesBodyItem);
 
-export const variablesResetVariablesResponse = zod
+export const resetVariablesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -470,19 +460,19 @@ export const variablesResetVariablesResponse = zod
 /**
  * @summary Remove the contact's variable by etag
  */
-export const variablesDeleteVariableParams = zod.object({
+export const deleteVariableParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod.string().describe('Unique ID to remove.'),
 });
 
-export const variablesDeleteVariableQueryParams = zod.object({
+export const deleteVariableQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const variablesDeleteVariableResponse = zod
+export const deleteVariableResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -550,31 +540,28 @@ export const variablesDeleteVariableResponse = zod
 /**
  * @summary Update contact variable
  */
-export const variablesUpdateVariable2Params = zod.object({
+export const updateVariable2Params = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const variablesUpdateVariable2QueryParams = zod.object({
+export const updateVariable2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const variablesUpdateVariable2BodyKeyRegExp = /^\w+$/;
+export const updateVariable2BodyKeyRegExp = /^\w+$/;
 
-export const variablesUpdateVariable2Body = zod.object({
-	key: zod
-		.string()
-		.regex(variablesUpdateVariable2BodyKeyRegExp)
-		.describe('NEW Key.'),
+export const updateVariable2Body = zod.object({
+	key: zod.string().regex(updateVariable2BodyKeyRegExp).describe('NEW Key.'),
 	value: zod.any().optional().describe('NEW Value.'),
 });
 
-export const variablesUpdateVariable2Response = zod
+export const updateVariable2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -662,31 +649,28 @@ export const variablesUpdateVariable2Response = zod
 /**
  * @summary Update contact variable
  */
-export const variablesUpdateVariableParams = zod.object({
+export const updateVariableParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const variablesUpdateVariableQueryParams = zod.object({
+export const updateVariableQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const variablesUpdateVariableBodyKeyRegExp = /^\w+$/;
+export const updateVariableBodyKeyRegExp = /^\w+$/;
 
-export const variablesUpdateVariableBody = zod.object({
-	key: zod
-		.string()
-		.regex(variablesUpdateVariableBodyKeyRegExp)
-		.describe('NEW Key.'),
+export const updateVariableBody = zod.object({
+	key: zod.string().regex(updateVariableBodyKeyRegExp).describe('NEW Key.'),
 	value: zod.any().optional().describe('NEW Value.'),
 });
 
-export const variablesUpdateVariableResponse = zod
+export const updateVariableResponse = zod
 	.object({
 		data: zod
 			.array(

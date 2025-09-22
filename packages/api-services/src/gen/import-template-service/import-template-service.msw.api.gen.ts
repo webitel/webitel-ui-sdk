@@ -13,7 +13,7 @@ import type {
 } from '.././_models';
 import { StorageImportSourceType } from '.././_models';
 
-export const getImportTemplateServiceSearchImportTemplateResponseMock = (
+export const getSearchImportTemplateResponseMock = (
 	overrideResponse: Partial<StorageListImportTemplate> = {},
 ): StorageListImportTemplate => ({
 	items: faker.helpers.arrayElement([
@@ -66,7 +66,7 @@ export const getImportTemplateServiceSearchImportTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getImportTemplateServiceCreateImportTemplateResponseMock = (
+export const getCreateImportTemplateResponseMock = (
 	overrideResponse: Partial<StorageImportTemplate> = {},
 ): StorageImportTemplate => ({
 	parameters: faker.helpers.arrayElement([{}, undefined]),
@@ -106,7 +106,7 @@ export const getImportTemplateServiceCreateImportTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getImportTemplateServiceDeleteImportTemplateResponseMock = (
+export const getDeleteImportTemplateResponseMock = (
 	overrideResponse: Partial<StorageImportTemplate> = {},
 ): StorageImportTemplate => ({
 	parameters: faker.helpers.arrayElement([{}, undefined]),
@@ -146,7 +146,7 @@ export const getImportTemplateServiceDeleteImportTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getImportTemplateServiceReadImportTemplateResponseMock = (
+export const getReadImportTemplateResponseMock = (
 	overrideResponse: Partial<StorageImportTemplate> = {},
 ): StorageImportTemplate => ({
 	parameters: faker.helpers.arrayElement([{}, undefined]),
@@ -186,7 +186,7 @@ export const getImportTemplateServiceReadImportTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getImportTemplateServicePatchImportTemplateResponseMock = (
+export const getPatchImportTemplateResponseMock = (
 	overrideResponse: Partial<StorageImportTemplate> = {},
 ): StorageImportTemplate => ({
 	parameters: faker.helpers.arrayElement([{}, undefined]),
@@ -226,7 +226,7 @@ export const getImportTemplateServicePatchImportTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getImportTemplateServiceUpdateImportTemplateResponseMock = (
+export const getUpdateImportTemplateResponseMock = (
 	overrideResponse: Partial<StorageImportTemplate> = {},
 ): StorageImportTemplate => ({
 	parameters: faker.helpers.arrayElement([{}, undefined]),
@@ -266,7 +266,7 @@ export const getImportTemplateServiceUpdateImportTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getImportTemplateServiceSearchImportTemplateMockHandler = (
+export const getSearchImportTemplateMockHandler = (
 	overrideResponse?:
 		| StorageListImportTemplate
 		| ((
@@ -282,14 +282,14 @@ export const getImportTemplateServiceSearchImportTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getImportTemplateServiceSearchImportTemplateResponseMock(),
+					: getSearchImportTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getImportTemplateServiceCreateImportTemplateMockHandler = (
+export const getCreateImportTemplateMockHandler = (
 	overrideResponse?:
 		| StorageImportTemplate
 		| ((
@@ -305,14 +305,14 @@ export const getImportTemplateServiceCreateImportTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getImportTemplateServiceCreateImportTemplateResponseMock(),
+					: getCreateImportTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getImportTemplateServiceDeleteImportTemplateMockHandler = (
+export const getDeleteImportTemplateMockHandler = (
 	overrideResponse?:
 		| StorageImportTemplate
 		| ((
@@ -328,14 +328,14 @@ export const getImportTemplateServiceDeleteImportTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getImportTemplateServiceDeleteImportTemplateResponseMock(),
+					: getDeleteImportTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getImportTemplateServiceReadImportTemplateMockHandler = (
+export const getReadImportTemplateMockHandler = (
 	overrideResponse?:
 		| StorageImportTemplate
 		| ((
@@ -351,14 +351,14 @@ export const getImportTemplateServiceReadImportTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getImportTemplateServiceReadImportTemplateResponseMock(),
+					: getReadImportTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getImportTemplateServicePatchImportTemplateMockHandler = (
+export const getPatchImportTemplateMockHandler = (
 	overrideResponse?:
 		| StorageImportTemplate
 		| ((
@@ -374,14 +374,14 @@ export const getImportTemplateServicePatchImportTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getImportTemplateServicePatchImportTemplateResponseMock(),
+					: getPatchImportTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getImportTemplateServiceUpdateImportTemplateMockHandler = (
+export const getUpdateImportTemplateMockHandler = (
 	overrideResponse?:
 		| StorageImportTemplate
 		| ((
@@ -397,17 +397,17 @@ export const getImportTemplateServiceUpdateImportTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getImportTemplateServiceUpdateImportTemplateResponseMock(),
+					: getUpdateImportTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getImportTemplateServiceMock = () => [
-	getImportTemplateServiceSearchImportTemplateMockHandler(),
-	getImportTemplateServiceCreateImportTemplateMockHandler(),
-	getImportTemplateServiceDeleteImportTemplateMockHandler(),
-	getImportTemplateServiceReadImportTemplateMockHandler(),
-	getImportTemplateServicePatchImportTemplateMockHandler(),
-	getImportTemplateServiceUpdateImportTemplateMockHandler(),
+	getSearchImportTemplateMockHandler(),
+	getCreateImportTemplateMockHandler(),
+	getDeleteImportTemplateMockHandler(),
+	getReadImportTemplateMockHandler(),
+	getPatchImportTemplateMockHandler(),
+	getUpdateImportTemplateMockHandler(),
 ];

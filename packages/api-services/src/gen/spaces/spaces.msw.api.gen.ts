@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelKnowledgebaseSpace,
-	WebitelKnowledgebaseSpaceList,
-} from '.././_models';
+import type { KnowledgebaseSpace, KnowledgebaseSpaceList } from '.././_models';
 
-export const getSpacesListSpacesResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseSpaceList> = {},
-): WebitelKnowledgebaseSpaceList => ({
+export const getListSpacesResponseMock = (
+	overrideResponse: Partial<KnowledgebaseSpaceList> = {},
+): KnowledgebaseSpaceList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -124,9 +121,9 @@ export const getSpacesListSpacesResponseMock = (
 	...overrideResponse,
 });
 
-export const getSpacesCreateSpaceResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseSpace> = {},
-): WebitelKnowledgebaseSpace => ({
+export const getCreateSpaceResponseMock = (
+	overrideResponse: Partial<KnowledgebaseSpace> = {},
+): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -218,9 +215,9 @@ export const getSpacesCreateSpaceResponseMock = (
 	...overrideResponse,
 });
 
-export const getSpacesDeleteSpaceResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseSpace> = {},
-): WebitelKnowledgebaseSpace => ({
+export const getDeleteSpaceResponseMock = (
+	overrideResponse: Partial<KnowledgebaseSpace> = {},
+): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -312,9 +309,9 @@ export const getSpacesDeleteSpaceResponseMock = (
 	...overrideResponse,
 });
 
-export const getSpacesLocateSpaceResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseSpace> = {},
-): WebitelKnowledgebaseSpace => ({
+export const getLocateSpaceResponseMock = (
+	overrideResponse: Partial<KnowledgebaseSpace> = {},
+): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -406,9 +403,9 @@ export const getSpacesLocateSpaceResponseMock = (
 	...overrideResponse,
 });
 
-export const getSpacesUpdateSpaceResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseSpace> = {},
-): WebitelKnowledgebaseSpace => ({
+export const getUpdateSpaceResponseMock = (
+	overrideResponse: Partial<KnowledgebaseSpace> = {},
+): KnowledgebaseSpace => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -500,14 +497,12 @@ export const getSpacesUpdateSpaceResponseMock = (
 	...overrideResponse,
 });
 
-export const getSpacesListSpacesMockHandler = (
+export const getListSpacesMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseSpaceList
+		| KnowledgebaseSpaceList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseSpaceList>
-				| WebitelKnowledgebaseSpaceList),
+		  ) => Promise<KnowledgebaseSpaceList> | KnowledgebaseSpaceList),
 ) => {
 	return http.get('*/spaces', async (info) => {
 		await delay(1000);
@@ -518,19 +513,19 @@ export const getSpacesListSpacesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSpacesListSpacesResponseMock(),
+					: getListSpacesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getSpacesCreateSpaceMockHandler = (
+export const getCreateSpaceMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseSpace
+		| KnowledgebaseSpace
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelKnowledgebaseSpace> | WebitelKnowledgebaseSpace),
+		  ) => Promise<KnowledgebaseSpace> | KnowledgebaseSpace),
 ) => {
 	return http.post('*/spaces', async (info) => {
 		await delay(1000);
@@ -541,19 +536,19 @@ export const getSpacesCreateSpaceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSpacesCreateSpaceResponseMock(),
+					: getCreateSpaceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getSpacesDeleteSpaceMockHandler = (
+export const getDeleteSpaceMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseSpace
+		| KnowledgebaseSpace
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelKnowledgebaseSpace> | WebitelKnowledgebaseSpace),
+		  ) => Promise<KnowledgebaseSpace> | KnowledgebaseSpace),
 ) => {
 	return http.delete('*/spaces/:etag', async (info) => {
 		await delay(1000);
@@ -564,19 +559,19 @@ export const getSpacesDeleteSpaceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSpacesDeleteSpaceResponseMock(),
+					: getDeleteSpaceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getSpacesLocateSpaceMockHandler = (
+export const getLocateSpaceMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseSpace
+		| KnowledgebaseSpace
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelKnowledgebaseSpace> | WebitelKnowledgebaseSpace),
+		  ) => Promise<KnowledgebaseSpace> | KnowledgebaseSpace),
 ) => {
 	return http.get('*/spaces/:etag', async (info) => {
 		await delay(1000);
@@ -587,19 +582,19 @@ export const getSpacesLocateSpaceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSpacesLocateSpaceResponseMock(),
+					: getLocateSpaceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getSpacesUpdateSpaceMockHandler = (
+export const getUpdateSpaceMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseSpace
+		| KnowledgebaseSpace
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelKnowledgebaseSpace> | WebitelKnowledgebaseSpace),
+		  ) => Promise<KnowledgebaseSpace> | KnowledgebaseSpace),
 ) => {
 	return http.patch('*/spaces/:etag', async (info) => {
 		await delay(1000);
@@ -610,16 +605,16 @@ export const getSpacesUpdateSpaceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSpacesUpdateSpaceResponseMock(),
+					: getUpdateSpaceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getSpacesMock = () => [
-	getSpacesListSpacesMockHandler(),
-	getSpacesCreateSpaceMockHandler(),
-	getSpacesDeleteSpaceMockHandler(),
-	getSpacesLocateSpaceMockHandler(),
-	getSpacesUpdateSpaceMockHandler(),
+	getListSpacesMockHandler(),
+	getCreateSpaceMockHandler(),
+	getDeleteSpaceMockHandler(),
+	getLocateSpaceMockHandler(),
+	getUpdateSpaceMockHandler(),
 ];

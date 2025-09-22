@@ -9,10 +9,12 @@ import { faker } from '@faker-js/faker';
 import { delay, HttpResponse, http } from 'msw';
 
 import type {
+	EngineGetQueuesGlobalStateResponse,
 	EngineListQueue,
 	EngineListReportGeneral,
 	EngineListTags,
 	EngineQueue,
+	EngineSetQueuesGlobalStateResponse,
 } from '.././_models';
 
 export const getSearchQueueResponseMock = (
@@ -250,6 +252,35 @@ export const getSearchQueueResponseMock = (
 							]),
 							name: faker.helpers.arrayElement([
 								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+						},
+						undefined,
+					]),
+					prolongationOptions: faker.helpers.arrayElement([
+						{
+							enabled: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							isTimeoutRetry: faker.helpers.arrayElement([
+								faker.datatype.boolean(),
+								undefined,
+							]),
+							prolongationTimeSec: faker.helpers.arrayElement([
+								faker.number.int({
+									min: undefined,
+									max: undefined,
+									multipleOf: undefined,
+								}),
+								undefined,
+							]),
+							repeatsNumber: faker.helpers.arrayElement([
+								faker.number.int({
+									min: undefined,
+									max: undefined,
+									multipleOf: undefined,
+								}),
 								undefined,
 							]),
 						},
@@ -543,6 +574,35 @@ export const getCreateQueueResponseMock = (
 					]),
 					name: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
 						undefined,
 					]),
 				},
@@ -867,6 +927,26 @@ export const getSearchQueueReportGeneralResponseMock = (
 	...overrideResponse,
 });
 
+export const getGetQueuesGlobalStateResponseMock = (
+	overrideResponse: Partial<EngineGetQueuesGlobalStateResponse> = {},
+): EngineGetQueuesGlobalStateResponse => ({
+	isAllEnabled: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getSetQueuesGlobalStateResponseMock = (
+	overrideResponse: Partial<EngineSetQueuesGlobalStateResponse> = {},
+): EngineSetQueuesGlobalStateResponse => ({
+	count: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getSearchQueueTagsResponseMock = (
 	overrideResponse: Partial<EngineListTags> = {},
 ): EngineListTags => ({
@@ -1086,6 +1166,35 @@ export const getDeleteQueueResponseMock = (
 					]),
 					name: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
 						undefined,
 					]),
 				},
@@ -1368,6 +1477,35 @@ export const getReadQueueResponseMock = (
 				},
 				undefined,
 			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			renewalSec: faker.helpers.arrayElement([
 				faker.number.int({
 					min: undefined,
@@ -1640,6 +1778,35 @@ export const getPatchQueueResponseMock = (
 					]),
 					name: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
 						undefined,
 					]),
 				},
@@ -1922,6 +2089,35 @@ export const getUpdateQueueResponseMock = (
 				},
 				undefined,
 			]),
+			prolongationOptions: faker.helpers.arrayElement([
+				{
+					enabled: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					isTimeoutRetry: faker.helpers.arrayElement([
+						faker.datatype.boolean(),
+						undefined,
+					]),
+					prolongationTimeSec: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					repeatsNumber: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 			renewalSec: faker.helpers.arrayElement([
 				faker.number.int({
 					min: undefined,
@@ -2063,6 +2259,56 @@ export const getSearchQueueReportGeneralMockHandler = (
 	});
 };
 
+export const getGetQueuesGlobalStateMockHandler = (
+	overrideResponse?:
+		| EngineGetQueuesGlobalStateResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<EngineGetQueuesGlobalStateResponse>
+				| EngineGetQueuesGlobalStateResponse),
+) => {
+	return http.get('*/call_center/queues/state', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getGetQueuesGlobalStateResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getSetQueuesGlobalStateMockHandler = (
+	overrideResponse?:
+		| EngineSetQueuesGlobalStateResponse
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) =>
+				| Promise<EngineSetQueuesGlobalStateResponse>
+				| EngineSetQueuesGlobalStateResponse),
+) => {
+	return http.patch('*/call_center/queues/state', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getSetQueuesGlobalStateResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
 export const getSearchQueueTagsMockHandler = (
 	overrideResponse?:
 		| EngineListTags
@@ -2181,6 +2427,8 @@ export const getQueueServiceMock = () => [
 	getSearchQueueMockHandler(),
 	getCreateQueueMockHandler(),
 	getSearchQueueReportGeneralMockHandler(),
+	getGetQueuesGlobalStateMockHandler(),
+	getSetQueuesGlobalStateMockHandler(),
 	getSearchQueueTagsMockHandler(),
 	getDeleteQueueMockHandler(),
 	getReadQueueMockHandler(),

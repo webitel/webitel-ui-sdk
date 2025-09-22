@@ -35,12 +35,12 @@ import { z as zod } from 'zod/v4';
 
  * @summary Search for Contact(s)
  */
-export const contactsSearchContactsQuerySortItemDefault = 'id';
-export const contactsSearchContactsQuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const contactsSearchContactsQueryFieldsItemDefault = '*';
-export const contactsSearchContactsQueryModeDefault = 'READ';
+export const searchContactsQuerySortItemDefault = 'id';
+export const searchContactsQuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchContactsQueryFieldsItemDefault = '*';
+export const searchContactsQueryModeDefault = 'READ';
 
-export const contactsSearchContactsQueryParams = zod.object({
+export const searchContactsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -60,7 +60,7 @@ export const contactsSearchContactsQueryParams = zod.object({
 			'Search term:\n`?` - matches any character\n`*` - matches 0 or more characters\nUsed to query records within a set of `qin` fields, eg: name,emails{type},labels etc...',
 		),
 	sort: zod
-		.array(zod.string().regex(contactsSearchContactsQuerySortItemRegExp))
+		.array(zod.string().regex(searchContactsQuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -83,7 +83,7 @@ export const contactsSearchContactsQueryParams = zod.object({
 		),
 	mode: zod
 		.enum(['READ', 'WRITE', 'DELETE'])
-		.default(contactsSearchContactsQueryModeDefault)
+		.default(searchContactsQueryModeDefault)
 		.describe(
 			'Source access mode requirement.\n\n - READ: Can `fetch` record. [GET]\n - WRITE: Can `update` record. [PUT|PATCH]\n - DELETE: Can `delete` record. [DELETE]',
 		),
@@ -119,7 +119,7 @@ export const contactsSearchContactsQueryParams = zod.object({
 		),
 });
 
-export const contactsSearchContactsResponse = zod
+export const searchContactsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -268,10 +268,6 @@ export const contactsSearchContactsResponse = zod
 							.describe(
 								'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 							),
-						custom: zod
-							.object({})
-							.optional()
-							.describe('Custom extension data fields.'),
 						domain: zod
 							.object({
 								id: zod
@@ -1473,16 +1469,16 @@ export const contactsSearchContactsResponse = zod
 /**
  * @summary Create NEW Contact
  */
-export const contactsCreateContactQueryParams = zod.object({
+export const createContactQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 });
 
-export const contactsCreateContactBodyVariablesItemKeyRegExp = /^\w+$/;
+export const createContactBodyVariablesItemKeyRegExp = /^\w+$/;
 
-export const contactsCreateContactBody = zod
+export const createContactBody = zod
 	.object({
 		about: zod
 			.string()
@@ -1534,7 +1530,6 @@ export const contactsCreateContactBody = zod
 			)
 			.optional()
 			.describe('Publish NEW comment(s) for this Contact.'),
-		custom: zod.object({}).optional().describe('Custom extension data fields.'),
 		emails: zod
 			.array(
 				zod
@@ -1835,7 +1830,7 @@ export const contactsCreateContactBody = zod
 							),
 						key: zod
 							.string()
-							.regex(contactsCreateContactBodyVariablesItemKeyRegExp)
+							.regex(createContactBodyVariablesItemKeyRegExp)
 							.describe('NEW Key.'),
 						value: zod.any().optional().describe('NEW Value.'),
 					})
@@ -1846,7 +1841,7 @@ export const contactsCreateContactBody = zod
 	})
 	.describe('The Contact principal input.');
 
-export const contactsCreateContactResponse = zod
+export const createContactResponse = zod
 	.object({
 		about: zod
 			.string()
@@ -1984,7 +1979,6 @@ export const contactsCreateContactResponse = zod
 			.describe(
 				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 			),
-		custom: zod.object({}).optional().describe('Custom extension data fields.'),
 		domain: zod
 			.object({
 				id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -3117,18 +3111,18 @@ export const contactsCreateContactResponse = zod
 /**
  * @summary Remove Contact source
  */
-export const contactsDeleteContactParams = zod.object({
+export const deleteContactParams = zod.object({
 	etag: zod.string().describe('Unique ID of the latest version of a resource.'),
 });
 
-export const contactsDeleteContactQueryParams = zod.object({
+export const deleteContactQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const contactsDeleteContactResponse = zod
+export const deleteContactResponse = zod
 	.object({
 		about: zod
 			.string()
@@ -3266,7 +3260,6 @@ export const contactsDeleteContactResponse = zod
 			.describe(
 				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 			),
-		custom: zod.object({}).optional().describe('Custom extension data fields.'),
 		domain: zod
 			.object({
 				id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -4399,7 +4392,7 @@ export const contactsDeleteContactResponse = zod
 /**
  * @summary Locate Contact source
  */
-export const contactsLocateContactParams = zod.object({
+export const locateContactParams = zod.object({
 	etag: zod
 		.string()
 		.describe(
@@ -4407,22 +4400,22 @@ export const contactsLocateContactParams = zod.object({
 		),
 });
 
-export const contactsLocateContactQueryModeDefault = 'READ';
+export const locateContactQueryModeDefault = 'READ';
 
-export const contactsLocateContactQueryParams = zod.object({
+export const locateContactQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 	mode: zod
 		.enum(['READ', 'WRITE', 'DELETE'])
-		.default(contactsLocateContactQueryModeDefault)
+		.default(locateContactQueryModeDefault)
 		.describe(
 			'The requirement of a special access mode to the Source.\n\n - READ: Can `fetch` record. [GET]\n - WRITE: Can `update` record. [PUT|PATCH]\n - DELETE: Can `delete` record. [DELETE]',
 		),
 });
 
-export const contactsLocateContactResponse = zod
+export const locateContactResponse = zod
 	.object({
 		about: zod
 			.string()
@@ -4560,7 +4553,6 @@ export const contactsLocateContactResponse = zod
 			.describe(
 				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 			),
-		custom: zod.object({}).optional().describe('Custom extension data fields.'),
 		domain: zod
 			.object({
 				id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -5693,22 +5685,22 @@ export const contactsLocateContactResponse = zod
 /**
  * @summary NEW Update of the Contact source
  */
-export const contactsUpdateContactParams = zod.object({
+export const updateContactParams = zod.object({
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const contactsUpdateContactQueryParams = zod.object({
+export const updateContactQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 });
 
-export const contactsUpdateContactBodyVariablesItemKeyRegExp = /^\w+$/;
+export const updateContactBodyVariablesItemKeyRegExp = /^\w+$/;
 
-export const contactsUpdateContactBody = zod.object({
+export const updateContactBody = zod.object({
 	about: zod
 		.string()
 		.optional()
@@ -5757,7 +5749,6 @@ export const contactsUpdateContactBody = zod.object({
 		)
 		.optional()
 		.describe('Publish NEW comment(s) for this Contact.'),
-	custom: zod.object({}).optional().describe('Custom extension data fields.'),
 	emails: zod
 		.array(
 			zod
@@ -6049,7 +6040,7 @@ export const contactsUpdateContactBody = zod.object({
 						),
 					key: zod
 						.string()
-						.regex(contactsUpdateContactBodyVariablesItemKeyRegExp)
+						.regex(updateContactBodyVariablesItemKeyRegExp)
 						.describe('NEW Key.'),
 					value: zod.any().optional().describe('NEW Value.'),
 				})
@@ -6059,7 +6050,7 @@ export const contactsUpdateContactBody = zod.object({
 		.describe('Arbitrary client data that is populated by clients.'),
 });
 
-export const contactsUpdateContactResponse = zod
+export const updateContactResponse = zod
 	.object({
 		about: zod
 			.string()
@@ -6197,7 +6188,6 @@ export const contactsUpdateContactResponse = zod
 			.describe(
 				'Lookup reference information.\nSimplified search filter to uniquely identify related object.',
 			),
-		custom: zod.object({}).optional().describe('Custom extension data fields.'),
 		domain: zod
 			.object({
 				id: zod.string().optional().describe('Reference Object unique ID.'),

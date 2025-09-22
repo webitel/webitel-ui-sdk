@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Signup new domain with superior access token
  */
-export const authSignupQueryParams = zod.object({
+export const signupQueryParams = zod.object({
 	domain: zod.string().optional().describe('domain name'),
 	username: zod.string().optional().describe('username'),
 	password: zod.string().optional().describe('user password'),
@@ -21,7 +21,7 @@ export const authSignupQueryParams = zod.object({
 		.describe('OPTIONAL. Mobile device /login request ?'),
 });
 
-export const authSignupResponse = zod.object({
+export const signupResponse = zod.object({
 	authorization: zod
 		.object({
 			accessToken: zod
@@ -54,16 +54,30 @@ export const authSignupResponse = zod.object({
 				),
 		})
 		.optional(),
+	warnings: zod
+		.array(
+			zod.object({
+				detail: zod.string().optional(),
+				id: zod.string().optional(),
+				passwordExpiry: zod
+					.object({
+						daysRemaining: zod.string().optional(),
+						expiresAt: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
 });
 
 /**
  * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
  */
-export const authUserInfo2QueryParams = zod.object({
+export const userInfo2QueryParams = zod.object({
 	accessToken: zod.string().optional().describe('string id_token = 2;'),
 });
 
-export const authUserInfo2Response = zod.object({
+export const userInfo2Response = zod.object({
 	dc: zod.string().optional(),
 	domain: zod.string().optional(),
 	expiresAt: zod.string().optional(),
@@ -134,11 +148,11 @@ export const authUserInfo2Response = zod.object({
 /**
  * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
  */
-export const authUserInfoQueryParams = zod.object({
+export const userInfoQueryParams = zod.object({
 	accessToken: zod.string().optional().describe('string id_token = 2;'),
 });
 
-export const authUserInfoResponse = zod.object({
+export const userInfoResponse = zod.object({
 	dc: zod.string().optional(),
 	domain: zod.string().optional(),
 	expiresAt: zod.string().optional(),

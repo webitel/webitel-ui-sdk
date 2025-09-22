@@ -38,4 +38,7 @@ export const SearchSystemSettingNameItem = {
 	new_message_sound_notification: 'new_message_sound_notification',
 	new_chat_sound_notification: 'new_chat_sound_notification',
 	screenshot_interval: 'screenshot_interval',
+	password_expiry_days: 'password_expiry_days',
+	password_min_length: 'password_min_length',
+	password_min_categories: 'password_min_categories',
 } as const;

@@ -14,10 +14,11 @@ import type {
 	ApiLogoutUserResponse,
 	ApiReadUserResponse,
 	ApiSearchUsersResponse,
+	ApiUpdatePasswordResponse,
 	ApiUser,
 } from '.././_models';
 
-export const getUsersReadUser2ResponseMock = (
+export const getReadUser2ResponseMock = (
 	overrideResponse: Partial<ApiReadUserResponse> = {},
 ): ApiReadUserResponse => ({
 	user: faker.helpers.arrayElement([
@@ -108,6 +109,10 @@ export const getUsersReadUser2ResponseMock = (
 			]),
 			extension: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			forcePasswordChange: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
 				undefined,
 			]),
 			hotdesks: faker.helpers.arrayElement([
@@ -286,7 +291,7 @@ export const getUsersReadUser2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersDeleteUsers2ResponseMock = (
+export const getDeleteUsers2ResponseMock = (
 	overrideResponse: Partial<ApiDeleteUsersResponse> = {},
 ): ApiDeleteUsersResponse => ({
 	deleted: faker.helpers.arrayElement([
@@ -380,6 +385,10 @@ export const getUsersDeleteUsers2ResponseMock = (
 			]),
 			extension: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			forcePasswordChange: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
 				undefined,
 			]),
 			hotdesks: faker.helpers.arrayElement([
@@ -558,7 +567,7 @@ export const getUsersDeleteUsers2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersSearchUsersResponseMock = (
+export const getSearchUsersResponseMock = (
 	overrideResponse: Partial<ApiSearchUsersResponse> = {},
 ): ApiSearchUsersResponse => ({
 	items: faker.helpers.arrayElement([
@@ -652,6 +661,10 @@ export const getUsersSearchUsersResponseMock = (
 			]),
 			extension: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			forcePasswordChange: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
 				undefined,
 			]),
 			hotdesks: faker.helpers.arrayElement([
@@ -839,7 +852,7 @@ export const getUsersSearchUsersResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersCreateUserResponseMock = (
+export const getCreateUserResponseMock = (
 	overrideResponse: Partial<ApiCreateUserResponse> = {},
 ): ApiCreateUserResponse => ({
 	user: faker.helpers.arrayElement([
@@ -932,6 +945,10 @@ export const getUsersCreateUserResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
+			forcePasswordChange: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			hotdesks: faker.helpers.arrayElement([
 				Array.from(
 					{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1108,7 +1125,10 @@ export const getUsersCreateUserResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersSearchUsers2ResponseMock = (
+export const getUpdatePasswordResponseMock =
+	(): ApiUpdatePasswordResponse => ({});
+
+export const getSearchUsers2ResponseMock = (
 	overrideResponse: Partial<ApiSearchUsersResponse> = {},
 ): ApiSearchUsersResponse => ({
 	items: faker.helpers.arrayElement([
@@ -1202,6 +1222,10 @@ export const getUsersSearchUsers2ResponseMock = (
 			]),
 			extension: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			forcePasswordChange: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
 				undefined,
 			]),
 			hotdesks: faker.helpers.arrayElement([
@@ -1389,7 +1413,7 @@ export const getUsersSearchUsers2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersDeleteUsersResponseMock = (
+export const getDeleteUsersResponseMock = (
 	overrideResponse: Partial<ApiDeleteUsersResponse> = {},
 ): ApiDeleteUsersResponse => ({
 	deleted: faker.helpers.arrayElement([
@@ -1485,6 +1509,10 @@ export const getUsersDeleteUsersResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
+			forcePasswordChange: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			hotdesks: faker.helpers.arrayElement([
 				Array.from(
 					{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1661,7 +1689,7 @@ export const getUsersDeleteUsersResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersReadUserResponseMock = (
+export const getReadUserResponseMock = (
 	overrideResponse: Partial<ApiReadUserResponse> = {},
 ): ApiReadUserResponse => ({
 	user: faker.helpers.arrayElement([
@@ -1754,6 +1782,10 @@ export const getUsersReadUserResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
+			forcePasswordChange: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			hotdesks: faker.helpers.arrayElement([
 				Array.from(
 					{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1930,9 +1962,9 @@ export const getUsersReadUserResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersLogoutUserResponseMock = (): ApiLogoutUserResponse => ({});
+export const getLogoutUserResponseMock = (): ApiLogoutUserResponse => ({});
 
-export const getUsersUpdateUser2ResponseMock = (
+export const getUpdateUser2ResponseMock = (
 	overrideResponse: Partial<ApiUser> = {},
 ): ApiUser => ({
 	chatName: faker.helpers.arrayElement([
@@ -2021,6 +2053,10 @@ export const getUsersUpdateUser2ResponseMock = (
 	]),
 	extension: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	forcePasswordChange: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	hotdesks: faker.helpers.arrayElement([
@@ -2196,7 +2232,7 @@ export const getUsersUpdateUser2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersUpdateUserResponseMock = (
+export const getUpdateUserResponseMock = (
 	overrideResponse: Partial<ApiUser> = {},
 ): ApiUser => ({
 	chatName: faker.helpers.arrayElement([
@@ -2285,6 +2321,10 @@ export const getUsersUpdateUserResponseMock = (
 	]),
 	extension: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	forcePasswordChange: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	hotdesks: faker.helpers.arrayElement([
@@ -2460,7 +2500,7 @@ export const getUsersUpdateUserResponseMock = (
 	...overrideResponse,
 });
 
-export const getUsersReadUser2MockHandler = (
+export const getReadUser2MockHandler = (
 	overrideResponse?:
 		| ApiReadUserResponse
 		| ((
@@ -2476,14 +2516,14 @@ export const getUsersReadUser2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersReadUser2ResponseMock(),
+					: getReadUser2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersDeleteUsers2MockHandler = (
+export const getDeleteUsers2MockHandler = (
 	overrideResponse?:
 		| ApiDeleteUsersResponse
 		| ((
@@ -2499,14 +2539,14 @@ export const getUsersDeleteUsers2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersDeleteUsers2ResponseMock(),
+					: getDeleteUsers2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersSearchUsersMockHandler = (
+export const getSearchUsersMockHandler = (
 	overrideResponse?:
 		| ApiSearchUsersResponse
 		| ((
@@ -2522,14 +2562,14 @@ export const getUsersSearchUsersMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersSearchUsersResponseMock(),
+					: getSearchUsersResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersCreateUserMockHandler = (
+export const getCreateUserMockHandler = (
 	overrideResponse?:
 		| ApiCreateUserResponse
 		| ((
@@ -2545,14 +2585,37 @@ export const getUsersCreateUserMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersCreateUserResponseMock(),
+					: getCreateUserResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersSearchUsers2MockHandler = (
+export const getUpdatePasswordMockHandler = (
+	overrideResponse?:
+		| ApiUpdatePasswordResponse
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<ApiUpdatePasswordResponse> | ApiUpdatePasswordResponse),
+) => {
+	return http.patch('*/users/password', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getUpdatePasswordResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getSearchUsers2MockHandler = (
 	overrideResponse?:
 		| ApiSearchUsersResponse
 		| ((
@@ -2568,14 +2631,14 @@ export const getUsersSearchUsers2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersSearchUsers2ResponseMock(),
+					: getSearchUsers2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersDeleteUsersMockHandler = (
+export const getDeleteUsersMockHandler = (
 	overrideResponse?:
 		| ApiDeleteUsersResponse
 		| ((
@@ -2591,14 +2654,14 @@ export const getUsersDeleteUsersMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersDeleteUsersResponseMock(),
+					: getDeleteUsersResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersReadUserMockHandler = (
+export const getReadUserMockHandler = (
 	overrideResponse?:
 		| ApiReadUserResponse
 		| ((
@@ -2614,14 +2677,14 @@ export const getUsersReadUserMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersReadUserResponseMock(),
+					: getReadUserResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersLogoutUserMockHandler = (
+export const getLogoutUserMockHandler = (
 	overrideResponse?:
 		| ApiLogoutUserResponse
 		| ((
@@ -2637,14 +2700,14 @@ export const getUsersLogoutUserMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersLogoutUserResponseMock(),
+					: getLogoutUserResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersUpdateUser2MockHandler = (
+export const getUpdateUser2MockHandler = (
 	overrideResponse?:
 		| ApiUser
 		| ((
@@ -2660,14 +2723,14 @@ export const getUsersUpdateUser2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersUpdateUser2ResponseMock(),
+					: getUpdateUser2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUsersUpdateUserMockHandler = (
+export const getUpdateUserMockHandler = (
 	overrideResponse?:
 		| ApiUser
 		| ((
@@ -2683,21 +2746,22 @@ export const getUsersUpdateUserMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUsersUpdateUserResponseMock(),
+					: getUpdateUserResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getUsersMock = () => [
-	getUsersReadUser2MockHandler(),
-	getUsersDeleteUsers2MockHandler(),
-	getUsersSearchUsersMockHandler(),
-	getUsersCreateUserMockHandler(),
-	getUsersSearchUsers2MockHandler(),
-	getUsersDeleteUsersMockHandler(),
-	getUsersReadUserMockHandler(),
-	getUsersLogoutUserMockHandler(),
-	getUsersUpdateUser2MockHandler(),
-	getUsersUpdateUserMockHandler(),
+	getReadUser2MockHandler(),
+	getDeleteUsers2MockHandler(),
+	getSearchUsersMockHandler(),
+	getCreateUserMockHandler(),
+	getUpdatePasswordMockHandler(),
+	getSearchUsers2MockHandler(),
+	getDeleteUsersMockHandler(),
+	getReadUserMockHandler(),
+	getLogoutUserMockHandler(),
+	getUpdateUser2MockHandler(),
+	getUpdateUserMockHandler(),
 ];

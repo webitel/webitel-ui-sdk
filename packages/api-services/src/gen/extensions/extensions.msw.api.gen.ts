@@ -7,15 +7,12 @@
 import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
-import type {
-	WebitelProtoDataStruct,
-	WebitelProtoDataStructList,
-} from '.././_models';
-import { WebitelProtoDataTypeKind } from '.././_models';
+import type { DataStructList, ProtodataStruct } from '.././_models';
+import { TypeKind } from '.././_models';
 
-export const getExtensionsDeleteType2ResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStructList> = {},
-): WebitelProtoDataStructList => ({
+export const getDeleteType2ResponseMock = (
+	overrideResponse: Partial<DataStructList> = {},
+): DataStructList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -324,7 +321,7 @@ export const getExtensionsDeleteType2ResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -593,9 +590,9 @@ export const getExtensionsDeleteType2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getExtensionsSearchTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStructList> = {},
-): WebitelProtoDataStructList => ({
+export const getSearchTypeResponseMock = (
+	overrideResponse: Partial<DataStructList> = {},
+): DataStructList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -904,7 +901,7 @@ export const getExtensionsSearchTypeResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -1173,9 +1170,9 @@ export const getExtensionsSearchTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getExtensionsDeleteTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStructList> = {},
-): WebitelProtoDataStructList => ({
+export const getDeleteTypeResponseMock = (
+	overrideResponse: Partial<DataStructList> = {},
+): DataStructList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1484,7 +1481,7 @@ export const getExtensionsDeleteTypeResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -1753,9 +1750,9 @@ export const getExtensionsDeleteTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getExtensionsLocateTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStruct> = {},
-): WebitelProtoDataStruct => ({
+export const getLocateTypeResponseMock = (
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -2053,7 +2050,7 @@ export const getExtensionsLocateTypeResponseMock = (
 				undefined,
 			]),
 			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+				faker.helpers.arrayElement(Object.values(TypeKind)),
 				undefined,
 			]),
 			lookup: faker.helpers.arrayElement([
@@ -2311,9 +2308,9 @@ export const getExtensionsLocateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getExtensionsCreateTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStruct> = {},
-): WebitelProtoDataStruct => ({
+export const getCreateTypeResponseMock = (
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -2611,7 +2608,7 @@ export const getExtensionsCreateTypeResponseMock = (
 				undefined,
 			]),
 			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+				faker.helpers.arrayElement(Object.values(TypeKind)),
 				undefined,
 			]),
 			lookup: faker.helpers.arrayElement([
@@ -2869,9 +2866,9 @@ export const getExtensionsCreateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getExtensionsUpdateTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStruct> = {},
-): WebitelProtoDataStruct => ({
+export const getUpdateTypeResponseMock = (
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -3169,7 +3166,7 @@ export const getExtensionsUpdateTypeResponseMock = (
 				undefined,
 			]),
 			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+				faker.helpers.arrayElement(Object.values(TypeKind)),
 				undefined,
 			]),
 			lookup: faker.helpers.arrayElement([
@@ -3427,12 +3424,12 @@ export const getExtensionsUpdateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getExtensionsDeleteType2MockHandler = (
+export const getDeleteType2MockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStructList
+		| DataStructList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelProtoDataStructList> | WebitelProtoDataStructList),
+		  ) => Promise<DataStructList> | DataStructList),
 ) => {
 	return http.delete('*/types/extensions', async (info) => {
 		await delay(1000);
@@ -3443,19 +3440,19 @@ export const getExtensionsDeleteType2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getExtensionsDeleteType2ResponseMock(),
+					: getDeleteType2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getExtensionsSearchTypeMockHandler = (
+export const getSearchTypeMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStructList
+		| DataStructList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelProtoDataStructList> | WebitelProtoDataStructList),
+		  ) => Promise<DataStructList> | DataStructList),
 ) => {
 	return http.get('*/types/extensions', async (info) => {
 		await delay(1000);
@@ -3466,19 +3463,19 @@ export const getExtensionsSearchTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getExtensionsSearchTypeResponseMock(),
+					: getSearchTypeResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getExtensionsDeleteTypeMockHandler = (
+export const getDeleteTypeMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStructList
+		| DataStructList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelProtoDataStructList> | WebitelProtoDataStructList),
+		  ) => Promise<DataStructList> | DataStructList),
 ) => {
 	return http.delete('*/types/extensions/:repo', async (info) => {
 		await delay(1000);
@@ -3489,19 +3486,19 @@ export const getExtensionsDeleteTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getExtensionsDeleteTypeResponseMock(),
+					: getDeleteTypeResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getExtensionsLocateTypeMockHandler = (
+export const getLocateTypeMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelProtoDataStruct> | WebitelProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 ) => {
 	return http.get('*/types/extensions/:repo', async (info) => {
 		await delay(1000);
@@ -3512,19 +3509,19 @@ export const getExtensionsLocateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getExtensionsLocateTypeResponseMock(),
+					: getLocateTypeResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getExtensionsCreateTypeMockHandler = (
+export const getCreateTypeMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelProtoDataStruct> | WebitelProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 ) => {
 	return http.post('*/types/extensions/:repo', async (info) => {
 		await delay(1000);
@@ -3535,19 +3532,19 @@ export const getExtensionsCreateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getExtensionsCreateTypeResponseMock(),
+					: getCreateTypeResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getExtensionsUpdateTypeMockHandler = (
+export const getUpdateTypeMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelProtoDataStruct> | WebitelProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 ) => {
 	return http.put('*/types/extensions/:repo', async (info) => {
 		await delay(1000);
@@ -3558,17 +3555,17 @@ export const getExtensionsUpdateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getExtensionsUpdateTypeResponseMock(),
+					: getUpdateTypeResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getExtensionsMock = () => [
-	getExtensionsDeleteType2MockHandler(),
-	getExtensionsSearchTypeMockHandler(),
-	getExtensionsDeleteTypeMockHandler(),
-	getExtensionsLocateTypeMockHandler(),
-	getExtensionsCreateTypeMockHandler(),
-	getExtensionsUpdateTypeMockHandler(),
+	getDeleteType2MockHandler(),
+	getSearchTypeMockHandler(),
+	getDeleteTypeMockHandler(),
+	getLocateTypeMockHandler(),
+	getCreateTypeMockHandler(),
+	getUpdateTypeMockHandler(),
 ];

@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Remove the Contact's phone number association(s)
  */
-export const phonesDeletePhonesParams = zod.object({
+export const deletePhonesParams = zod.object({
 	contact_id: zod.string().describe('The Contact ID associated with.'),
 });
 
-export const phonesDeletePhonesQueryParams = zod.object({
+export const deletePhonesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -21,7 +21,7 @@ export const phonesDeletePhonesQueryParams = zod.object({
 	etag: zod.array(zod.string()).describe('Set of linked ID(s) to be removed.'),
 });
 
-export const phonesDeletePhonesResponse = zod
+export const deletePhonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -132,11 +132,11 @@ export const phonesDeletePhonesResponse = zod
 /**
  * @summary Search phone number(s)
  */
-export const phonesListPhonesParams = zod.object({
+export const listPhonesParams = zod.object({
 	contact_id: zod.string().describe('The Contact ID associated with.'),
 });
 
-export const phonesListPhonesQueryParams = zod.object({
+export const listPhonesQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -173,7 +173,7 @@ export const phonesListPhonesQueryParams = zod.object({
 	typeName: zod.string().optional().describe('Reference Object display name.'),
 });
 
-export const phonesListPhonesResponse = zod
+export const listPhonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -284,18 +284,18 @@ export const phonesListPhonesResponse = zod
 /**
  * @summary Associate phone number(s) with the Contact
  */
-export const phonesMergePhonesParams = zod.object({
+export const mergePhonesParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const phonesMergePhonesQueryParams = zod.object({
+export const mergePhonesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const phonesMergePhonesBodyItem = zod
+export const mergePhonesBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -327,9 +327,9 @@ export const phonesMergePhonesBodyItem = zod
 		verified: zod.boolean().optional(),
 	})
 	.describe('Input of the contact phone number.');
-export const phonesMergePhonesBody = zod.array(phonesMergePhonesBodyItem);
+export const mergePhonesBody = zod.array(mergePhonesBodyItem);
 
-export const phonesMergePhonesResponse = zod
+export const mergePhonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -440,18 +440,18 @@ export const phonesMergePhonesResponse = zod
 /**
  * @summary Reset the Contact's phone numbers to fit given data set.
  */
-export const phonesResetPhonesParams = zod.object({
+export const resetPhonesParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const phonesResetPhonesQueryParams = zod.object({
+export const resetPhonesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const phonesResetPhonesBodyItem = zod
+export const resetPhonesBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -483,11 +483,9 @@ export const phonesResetPhonesBodyItem = zod
 		verified: zod.boolean().optional(),
 	})
 	.describe('Input of the contact phone number.');
-export const phonesResetPhonesBody = zod
-	.array(phonesResetPhonesBodyItem)
-	.min(1);
+export const resetPhonesBody = zod.array(resetPhonesBodyItem);
 
-export const phonesResetPhonesResponse = zod
+export const resetPhonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -598,19 +596,19 @@ export const phonesResetPhonesResponse = zod
 /**
  * @summary Remove the Contact's phone number
  */
-export const phonesDeletePhoneParams = zod.object({
+export const deletePhoneParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod.string().describe('Unique link ID to be removed.'),
 });
 
-export const phonesDeletePhoneQueryParams = zod.object({
+export const deletePhoneQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const phonesDeletePhoneResponse = zod
+export const deletePhoneResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -698,19 +696,19 @@ export const phonesDeletePhoneResponse = zod
 /**
  * @summary Locate the Contact's phone number association.
  */
-export const phonesLocatePhoneParams = zod.object({
+export const locatePhoneParams = zod.object({
 	contact_id: zod.string().describe('Reference Contact unique ID.'),
 	etag: zod.string(),
 });
 
-export const phonesLocatePhoneQueryParams = zod.object({
+export const locatePhoneQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields [Q]uery to build result record.'),
 });
 
-export const phonesLocatePhoneResponse = zod
+export const locatePhoneResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -798,21 +796,21 @@ export const phonesLocatePhoneResponse = zod
 /**
  * @summary Update the Contact's phone number association details
  */
-export const phonesUpdatePhone2Params = zod.object({
+export const updatePhone2Params = zod.object({
 	contact_id: zod.string().describe('The Contact ID to be associated with.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const phonesUpdatePhone2QueryParams = zod.object({
+export const updatePhone2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const phonesUpdatePhone2Body = zod.object({
+export const updatePhone2Body = zod.object({
 	number: zod.string().describe('The phone number.'),
 	primary: zod
 		.boolean()
@@ -836,7 +834,7 @@ export const phonesUpdatePhone2Body = zod.object({
 	verified: zod.boolean().optional(),
 });
 
-export const phonesUpdatePhone2Response = zod
+export const updatePhone2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -947,21 +945,21 @@ export const phonesUpdatePhone2Response = zod
 /**
  * @summary Update the Contact's phone number association details
  */
-export const phonesUpdatePhoneParams = zod.object({
+export const updatePhoneParams = zod.object({
 	contact_id: zod.string().describe('The Contact ID to be associated with.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const phonesUpdatePhoneQueryParams = zod.object({
+export const updatePhoneQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const phonesUpdatePhoneBody = zod.object({
+export const updatePhoneBody = zod.object({
 	number: zod.string().describe('The phone number.'),
 	primary: zod
 		.boolean()
@@ -985,7 +983,7 @@ export const phonesUpdatePhoneBody = zod.object({
 	verified: zod.boolean().optional(),
 });
 
-export const phonesUpdatePhoneResponse = zod
+export const updatePhoneResponse = zod
 	.object({
 		data: zod
 			.array(

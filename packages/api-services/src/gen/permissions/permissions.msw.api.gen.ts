@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 
 import type { ApiSearchPermissionResponse } from '.././_models';
 
-export const getPermissionsGetPermissionsResponseMock = (
+export const getGetPermissionsResponseMock = (
 	overrideResponse: Partial<ApiSearchPermissionResponse> = {},
 ): ApiSearchPermissionResponse => ({
 	items: faker.helpers.arrayElement([
@@ -45,7 +45,7 @@ export const getPermissionsGetPermissionsResponseMock = (
 	...overrideResponse,
 });
 
-export const getPermissionsGetPermissionsMockHandler = (
+export const getGetPermissionsMockHandler = (
 	overrideResponse?:
 		| ApiSearchPermissionResponse
 		| ((
@@ -61,12 +61,10 @@ export const getPermissionsGetPermissionsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPermissionsGetPermissionsResponseMock(),
+					: getGetPermissionsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
-export const getPermissionsMock = () => [
-	getPermissionsGetPermissionsMockHandler(),
-];
+export const getPermissionsMock = () => [getGetPermissionsMockHandler()];

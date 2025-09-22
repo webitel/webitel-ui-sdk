@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Lookup data types registry.
  */
-export const typesSearchQuerySortItemDefault = '*';
-export const typesSearchQuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const typesSearchQueryFieldsItemDefault = '*';
+export const searchQuerySortItemDefault = '*';
+export const searchQuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchQueryFieldsItemDefault = '*';
 
-export const typesSearchQueryParams = zod.object({
+export const searchQueryParams = zod.object({
 	q: zod
 		.string()
 		.optional()
@@ -50,7 +50,7 @@ export const typesSearchQueryParams = zod.object({
 		.optional()
 		.describe('Page number of result set of records.\nDefault: 1.'),
 	sort: zod
-		.array(zod.string().regex(typesSearchQuerySortItemRegExp))
+		.array(zod.string().regex(searchQuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -63,9 +63,9 @@ export const typesSearchQueryParams = zod.object({
 		),
 });
 
-export const typesSearchResponseDataItemFieldsItemKindDefault = 'none';
+export const searchResponseDataItemFieldsItemKindDefault = 'none';
 
-export const typesSearchResponse = zod
+export const searchResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -246,7 +246,7 @@ export const typesSearchResponse = zod
 												'datetime',
 												'duration',
 											])
-											.default(typesSearchResponseDataItemFieldsItemKindDefault)
+											.default(searchResponseDataItemFieldsItemKindDefault)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 											),
@@ -439,13 +439,13 @@ export const typesSearchResponse = zod
 /**
  * @summary Structured data type details.
  */
-export const typesLocateParams = zod.object({
+export const locateParams = zod.object({
 	path: zod.string().describe('`types.path`'),
 });
 
-export const typesLocateResponseFieldsItemKindDefault = 'none';
+export const locateResponseFieldsItemKindDefault = 'none';
 
-export const typesLocateResponse = zod
+export const locateResponse = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -589,7 +589,7 @@ export const typesLocateResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(typesLocateResponseFieldsItemKindDefault)
+							.default(locateResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),

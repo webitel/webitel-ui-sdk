@@ -9,13 +9,13 @@ import { faker } from '@faker-js/faker';
 import { delay, HttpResponse, http } from 'msw';
 
 import type {
-	WebitelContactsContactGroup,
-	WebitelContactsContactGroupList,
+	ContactsContactGroup,
+	ContactsContactGroupList,
 } from '.././_models';
 
-export const getContactGroupsDeleteContactGroupsResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroupList> = {},
-): WebitelContactsContactGroupList => ({
+export const getDeleteContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -107,9 +107,9 @@ export const getContactGroupsDeleteContactGroupsResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsListContactGroupsResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroupList> = {},
-): WebitelContactsContactGroupList => ({
+export const getListContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -201,9 +201,9 @@ export const getContactGroupsListContactGroupsResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsMergeContactGroupsResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroupList> = {},
-): WebitelContactsContactGroupList => ({
+export const getMergeContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -295,9 +295,9 @@ export const getContactGroupsMergeContactGroupsResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsResetContactGroupsResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroupList> = {},
-): WebitelContactsContactGroupList => ({
+export const getResetContactGroupsResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -389,9 +389,9 @@ export const getContactGroupsResetContactGroupsResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsDeleteContactGroupResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroup> = {},
-): WebitelContactsContactGroup => ({
+export const getDeleteContactGroupResponseMock = (
+	overrideResponse: Partial<ContactsContactGroup> = {},
+): ContactsContactGroup => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -466,9 +466,9 @@ export const getContactGroupsDeleteContactGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsLocateContactGroupResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroup> = {},
-): WebitelContactsContactGroup => ({
+export const getLocateContactGroupResponseMock = (
+	overrideResponse: Partial<ContactsContactGroup> = {},
+): ContactsContactGroup => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -543,9 +543,9 @@ export const getContactGroupsLocateContactGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsUpdateContactGroup2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroupList> = {},
-): WebitelContactsContactGroupList => ({
+export const getUpdateContactGroup2ResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -637,9 +637,9 @@ export const getContactGroupsUpdateContactGroup2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsUpdateContactGroupResponseMock = (
-	overrideResponse: Partial<WebitelContactsContactGroupList> = {},
-): WebitelContactsContactGroupList => ({
+export const getUpdateContactGroupResponseMock = (
+	overrideResponse: Partial<ContactsContactGroupList> = {},
+): ContactsContactGroupList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -731,14 +731,12 @@ export const getContactGroupsUpdateContactGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getContactGroupsDeleteContactGroupsMockHandler = (
+export const getDeleteContactGroupsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroupList
+		| ContactsContactGroupList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsContactGroupList>
-				| WebitelContactsContactGroupList),
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
 ) => {
 	return http.delete('*/contacts/:contactId/groups', async (info) => {
 		await delay(1000);
@@ -749,21 +747,19 @@ export const getContactGroupsDeleteContactGroupsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsDeleteContactGroupsResponseMock(),
+					: getDeleteContactGroupsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactGroupsListContactGroupsMockHandler = (
+export const getListContactGroupsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroupList
+		| ContactsContactGroupList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsContactGroupList>
-				| WebitelContactsContactGroupList),
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
 ) => {
 	return http.get('*/contacts/:contactId/groups', async (info) => {
 		await delay(1000);
@@ -774,21 +770,19 @@ export const getContactGroupsListContactGroupsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsListContactGroupsResponseMock(),
+					: getListContactGroupsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactGroupsMergeContactGroupsMockHandler = (
+export const getMergeContactGroupsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroupList
+		| ContactsContactGroupList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsContactGroupList>
-				| WebitelContactsContactGroupList),
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
 ) => {
 	return http.post('*/contacts/:contactId/groups', async (info) => {
 		await delay(1000);
@@ -799,21 +793,19 @@ export const getContactGroupsMergeContactGroupsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsMergeContactGroupsResponseMock(),
+					: getMergeContactGroupsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactGroupsResetContactGroupsMockHandler = (
+export const getResetContactGroupsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroupList
+		| ContactsContactGroupList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsContactGroupList>
-				| WebitelContactsContactGroupList),
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
 ) => {
 	return http.put('*/contacts/:contactId/groups', async (info) => {
 		await delay(1000);
@@ -824,19 +816,19 @@ export const getContactGroupsResetContactGroupsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsResetContactGroupsResponseMock(),
+					: getResetContactGroupsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactGroupsDeleteContactGroupMockHandler = (
+export const getDeleteContactGroupMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroup
+		| ContactsContactGroup
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsContactGroup> | WebitelContactsContactGroup),
+		  ) => Promise<ContactsContactGroup> | ContactsContactGroup),
 ) => {
 	return http.delete('*/contacts/:contactId/groups/:etag', async (info) => {
 		await delay(1000);
@@ -847,19 +839,19 @@ export const getContactGroupsDeleteContactGroupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsDeleteContactGroupResponseMock(),
+					: getDeleteContactGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactGroupsLocateContactGroupMockHandler = (
+export const getLocateContactGroupMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroup
+		| ContactsContactGroup
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsContactGroup> | WebitelContactsContactGroup),
+		  ) => Promise<ContactsContactGroup> | ContactsContactGroup),
 ) => {
 	return http.get('*/contacts/:contactId/groups/:etag', async (info) => {
 		await delay(1000);
@@ -870,21 +862,19 @@ export const getContactGroupsLocateContactGroupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsLocateContactGroupResponseMock(),
+					: getLocateContactGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactGroupsUpdateContactGroup2MockHandler = (
+export const getUpdateContactGroup2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroupList
+		| ContactsContactGroupList
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsContactGroupList>
-				| WebitelContactsContactGroupList),
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
 ) => {
 	return http.patch('*/contacts/:contactId/groups/:etag', async (info) => {
 		await delay(1000);
@@ -895,21 +885,19 @@ export const getContactGroupsUpdateContactGroup2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsUpdateContactGroup2ResponseMock(),
+					: getUpdateContactGroup2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getContactGroupsUpdateContactGroupMockHandler = (
+export const getUpdateContactGroupMockHandler = (
 	overrideResponse?:
-		| WebitelContactsContactGroupList
+		| ContactsContactGroupList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsContactGroupList>
-				| WebitelContactsContactGroupList),
+		  ) => Promise<ContactsContactGroupList> | ContactsContactGroupList),
 ) => {
 	return http.put('*/contacts/:contactId/groups/:etag', async (info) => {
 		await delay(1000);
@@ -920,19 +908,19 @@ export const getContactGroupsUpdateContactGroupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getContactGroupsUpdateContactGroupResponseMock(),
+					: getUpdateContactGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getContactGroupsMock = () => [
-	getContactGroupsDeleteContactGroupsMockHandler(),
-	getContactGroupsListContactGroupsMockHandler(),
-	getContactGroupsMergeContactGroupsMockHandler(),
-	getContactGroupsResetContactGroupsMockHandler(),
-	getContactGroupsDeleteContactGroupMockHandler(),
-	getContactGroupsLocateContactGroupMockHandler(),
-	getContactGroupsUpdateContactGroup2MockHandler(),
-	getContactGroupsUpdateContactGroupMockHandler(),
+	getDeleteContactGroupsMockHandler(),
+	getListContactGroupsMockHandler(),
+	getMergeContactGroupsMockHandler(),
+	getResetContactGroupsMockHandler(),
+	getDeleteContactGroupMockHandler(),
+	getLocateContactGroupMockHandler(),
+	getUpdateContactGroup2MockHandler(),
+	getUpdateContactGroupMockHandler(),
 ];

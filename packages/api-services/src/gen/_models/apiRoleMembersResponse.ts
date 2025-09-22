@@ -4,8 +4,8 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ApiRoleMember } from './apiRoleMember';
+import type { RoleMember } from './roleMember';
 
 export interface ApiRoleMembersResponse {
-	results?: ApiRoleMember[];
+	results?: RoleMember[];
 }

@@ -14,10 +14,10 @@ import type {
 	ApiSearchOAuthServiceResponse,
 } from '.././_models';
 
-export const getOAuth2FederationDeleteOAuthServiceResponseMock =
+export const getDeleteOAuthServiceResponseMock =
 	(): ApiDeleteOAuthServiceResponse => ({});
 
-export const getOAuth2FederationSearchOAuthServiceResponseMock = (
+export const getSearchOAuthServiceResponseMock = (
 	overrideResponse: Partial<ApiSearchOAuthServiceResponse> = {},
 ): ApiSearchOAuthServiceResponse => ({
 	items: faker.helpers.arrayElement([
@@ -151,7 +151,7 @@ export const getOAuth2FederationSearchOAuthServiceResponseMock = (
 	...overrideResponse,
 });
 
-export const getOAuth2FederationCreateOAuthServiceResponseMock = (
+export const getCreateOAuthServiceResponseMock = (
 	overrideResponse: Partial<ApiOAuthService> = {},
 ): ApiOAuthService => ({
 	authUrl: faker.helpers.arrayElement([
@@ -269,7 +269,7 @@ export const getOAuth2FederationCreateOAuthServiceResponseMock = (
 	...overrideResponse,
 });
 
-export const getOAuth2FederationUpdateOAuthService2ResponseMock = (
+export const getUpdateOAuthService2ResponseMock = (
 	overrideResponse: Partial<ApiOAuthService> = {},
 ): ApiOAuthService => ({
 	authUrl: faker.helpers.arrayElement([
@@ -387,7 +387,7 @@ export const getOAuth2FederationUpdateOAuthService2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getOAuth2FederationUpdateOAuthServiceResponseMock = (
+export const getUpdateOAuthServiceResponseMock = (
 	overrideResponse: Partial<ApiOAuthService> = {},
 ): ApiOAuthService => ({
 	authUrl: faker.helpers.arrayElement([
@@ -505,10 +505,10 @@ export const getOAuth2FederationUpdateOAuthServiceResponseMock = (
 	...overrideResponse,
 });
 
-export const getOAuth2FederationDeleteOAuthService2ResponseMock =
+export const getDeleteOAuthService2ResponseMock =
 	(): ApiDeleteOAuthServiceResponse => ({});
 
-export const getOAuth2FederationLocateOAuthServiceResponseMock = (
+export const getLocateOAuthServiceResponseMock = (
 	overrideResponse: Partial<ApiOAuthService> = {},
 ): ApiOAuthService => ({
 	authUrl: faker.helpers.arrayElement([
@@ -626,7 +626,7 @@ export const getOAuth2FederationLocateOAuthServiceResponseMock = (
 	...overrideResponse,
 });
 
-export const getOAuth2FederationDeleteOAuthServiceMockHandler = (
+export const getDeleteOAuthServiceMockHandler = (
 	overrideResponse?:
 		| ApiDeleteOAuthServiceResponse
 		| ((
@@ -644,14 +644,14 @@ export const getOAuth2FederationDeleteOAuthServiceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getOAuth2FederationDeleteOAuthServiceResponseMock(),
+					: getDeleteOAuthServiceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getOAuth2FederationSearchOAuthServiceMockHandler = (
+export const getSearchOAuthServiceMockHandler = (
 	overrideResponse?:
 		| ApiSearchOAuthServiceResponse
 		| ((
@@ -669,14 +669,14 @@ export const getOAuth2FederationSearchOAuthServiceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getOAuth2FederationSearchOAuthServiceResponseMock(),
+					: getSearchOAuthServiceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getOAuth2FederationCreateOAuthServiceMockHandler = (
+export const getCreateOAuthServiceMockHandler = (
 	overrideResponse?:
 		| ApiOAuthService
 		| ((
@@ -692,14 +692,14 @@ export const getOAuth2FederationCreateOAuthServiceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getOAuth2FederationCreateOAuthServiceResponseMock(),
+					: getCreateOAuthServiceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getOAuth2FederationUpdateOAuthService2MockHandler = (
+export const getUpdateOAuthService2MockHandler = (
 	overrideResponse?:
 		| ApiOAuthService
 		| ((
@@ -715,14 +715,14 @@ export const getOAuth2FederationUpdateOAuthService2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getOAuth2FederationUpdateOAuthService2ResponseMock(),
+					: getUpdateOAuthService2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getOAuth2FederationUpdateOAuthServiceMockHandler = (
+export const getUpdateOAuthServiceMockHandler = (
 	overrideResponse?:
 		| ApiOAuthService
 		| ((
@@ -738,14 +738,14 @@ export const getOAuth2FederationUpdateOAuthServiceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getOAuth2FederationUpdateOAuthServiceResponseMock(),
+					: getUpdateOAuthServiceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getOAuth2FederationDeleteOAuthService2MockHandler = (
+export const getDeleteOAuthService2MockHandler = (
 	overrideResponse?:
 		| ApiDeleteOAuthServiceResponse
 		| ((
@@ -763,14 +763,14 @@ export const getOAuth2FederationDeleteOAuthService2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getOAuth2FederationDeleteOAuthService2ResponseMock(),
+					: getDeleteOAuthService2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getOAuth2FederationLocateOAuthServiceMockHandler = (
+export const getLocateOAuthServiceMockHandler = (
 	overrideResponse?:
 		| ApiOAuthService
 		| ((
@@ -786,18 +786,18 @@ export const getOAuth2FederationLocateOAuthServiceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getOAuth2FederationLocateOAuthServiceResponseMock(),
+					: getLocateOAuthServiceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getOauth2FederationMock = () => [
-	getOAuth2FederationDeleteOAuthServiceMockHandler(),
-	getOAuth2FederationSearchOAuthServiceMockHandler(),
-	getOAuth2FederationCreateOAuthServiceMockHandler(),
-	getOAuth2FederationUpdateOAuthService2MockHandler(),
-	getOAuth2FederationUpdateOAuthServiceMockHandler(),
-	getOAuth2FederationDeleteOAuthService2MockHandler(),
-	getOAuth2FederationLocateOAuthServiceMockHandler(),
+	getDeleteOAuthServiceMockHandler(),
+	getSearchOAuthServiceMockHandler(),
+	getCreateOAuthServiceMockHandler(),
+	getUpdateOAuthService2MockHandler(),
+	getUpdateOAuthServiceMockHandler(),
+	getDeleteOAuthService2MockHandler(),
+	getLocateOAuthServiceMockHandler(),
 ];

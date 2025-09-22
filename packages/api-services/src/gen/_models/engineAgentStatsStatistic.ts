@@ -27,6 +27,7 @@ export interface EngineAgentStatsStatistic {
 	queues?: EngineLookup[];
 	skills?: EngineLookup[];
 	status?: string;
+	statusComment?: string;
 	statusDuration?: string;
 	supervisor?: EngineLookup[];
 	team?: EngineLookup;

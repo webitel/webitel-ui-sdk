@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Retrieve a list of dynamic groups or search dynamic groups
  */
-export const dynamicGroupsListDynamicGroupsQueryParams = zod.object({
+export const listDynamicGroupsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -36,7 +36,7 @@ export const dynamicGroupsListDynamicGroupsQueryParams = zod.object({
 	name: zod.string().optional().describe('Filter by group name.'),
 });
 
-export const dynamicGroupsListDynamicGroupsResponse = zod
+export const listDynamicGroupsResponse = zod
 	.object({
 		items: zod
 			.array(
@@ -192,7 +192,7 @@ export const dynamicGroupsListDynamicGroupsResponse = zod
 /**
  * @summary Create a new dynamic group
  */
-export const dynamicGroupsCreateDynamicGroupBody = zod
+export const createDynamicGroupBody = zod
 	.object({
 		condition: zod
 			.array(
@@ -273,7 +273,7 @@ export const dynamicGroupsCreateDynamicGroupBody = zod
 	})
 	.describe('Request message for creating a new dynamic group.');
 
-export const dynamicGroupsCreateDynamicGroupResponse = zod.object({
+export const createDynamicGroupResponse = zod.object({
 	conditions: zod
 		.array(
 			zod.object({
@@ -385,11 +385,11 @@ export const dynamicGroupsCreateDynamicGroupResponse = zod.object({
 /**
  * @summary Delete a dynamic group
  */
-export const dynamicGroupsDeleteDynamicGroupParams = zod.object({
+export const deleteDynamicGroupParams = zod.object({
 	id: zod.string().describe('The unique ID of the dynamic group to delete.'),
 });
 
-export const dynamicGroupsDeleteDynamicGroupResponse = zod.object({
+export const deleteDynamicGroupResponse = zod.object({
 	conditions: zod
 		.array(
 			zod.object({
@@ -501,15 +501,15 @@ export const dynamicGroupsDeleteDynamicGroupResponse = zod.object({
 /**
  * @summary Locate a dynamic group by ID
  */
-export const dynamicGroupsLocateDynamicGroupParams = zod.object({
+export const locateDynamicGroupParams = zod.object({
 	id: zod.string(),
 });
 
-export const dynamicGroupsLocateDynamicGroupQueryParams = zod.object({
+export const locateDynamicGroupQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const dynamicGroupsLocateDynamicGroupResponse = zod
+export const locateDynamicGroupResponse = zod
 	.object({
 		group: zod
 			.object({
@@ -648,11 +648,11 @@ export const dynamicGroupsLocateDynamicGroupResponse = zod
 /**
  * @summary Update an existing dynamic group
  */
-export const dynamicGroupsUpdateDynamicGroup2Params = zod.object({
+export const updateDynamicGroup2Params = zod.object({
 	id: zod.string().describe('The unique ID of the dynamic group to update.'),
 });
 
-export const dynamicGroupsUpdateDynamicGroup2Body = zod
+export const updateDynamicGroup2Body = zod
 	.object({
 		defaultGroup: zod
 			.object({
@@ -682,7 +682,7 @@ export const dynamicGroupsUpdateDynamicGroup2Body = zod
 	})
 	.describe('Input message for creating/updating a dynamic group.');
 
-export const dynamicGroupsUpdateDynamicGroup2Response = zod.object({
+export const updateDynamicGroup2Response = zod.object({
 	conditions: zod
 		.array(
 			zod.object({
@@ -794,11 +794,11 @@ export const dynamicGroupsUpdateDynamicGroup2Response = zod.object({
 /**
  * @summary Update an existing dynamic group
  */
-export const dynamicGroupsUpdateDynamicGroupParams = zod.object({
+export const updateDynamicGroupParams = zod.object({
 	id: zod.string().describe('The unique ID of the dynamic group to update.'),
 });
 
-export const dynamicGroupsUpdateDynamicGroupBody = zod
+export const updateDynamicGroupBody = zod
 	.object({
 		defaultGroup: zod
 			.object({
@@ -828,7 +828,7 @@ export const dynamicGroupsUpdateDynamicGroupBody = zod
 	})
 	.describe('Input message for creating/updating a dynamic group.');
 
-export const dynamicGroupsUpdateDynamicGroupResponse = zod.object({
+export const updateDynamicGroupResponse = zod.object({
 	conditions: zod
 		.array(
 			zod.object({

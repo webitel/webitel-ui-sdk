@@ -12,15 +12,15 @@ import type {
 	ApiCreateDomainRequest,
 	ApiCreateDomainResponse,
 	ApiDeleteDomainResponse,
-	ApiDomainsUpdateDomainBody,
 	ApiReadDomainResponse,
 	ApiSearchDomainsResponse,
 	ApiUpdateDomainResponse,
-	DomainsDeleteDomain2Params,
-	DomainsDeleteDomainParams,
-	DomainsReadDomain2Params,
-	DomainsReadDomainParams,
-	DomainsSearchDomainsParams,
+	DeleteDomain2Params,
+	DeleteDomainParams,
+	DomainsUpdateDomainBody,
+	ReadDomain2Params,
+	ReadDomainParams,
+	SearchDomainsParams,
 } from '.././_models';
 
 // --- header start
@@ -31,10 +31,8 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const domainsDeleteDomain = <
-				TData = AxiosResponse<ApiDeleteDomainResponse>,
-			>(
-				params?: DomainsDeleteDomainParams,
+			const deleteDomain = <TData = AxiosResponse<ApiDeleteDomainResponse>>(
+				params?: DeleteDomainParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/domain', {
@@ -42,8 +40,8 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const domainsReadDomain = <TData = AxiosResponse<ApiReadDomainResponse>>(
-				params?: DomainsReadDomainParams,
+			const readDomain = <TData = AxiosResponse<ApiReadDomainResponse>>(
+				params?: ReadDomainParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/domain', {
@@ -51,10 +49,8 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const domainsSearchDomains = <
-				TData = AxiosResponse<ApiSearchDomainsResponse>,
-			>(
-				params?: DomainsSearchDomainsParams,
+			const searchDomains = <TData = AxiosResponse<ApiSearchDomainsResponse>>(
+				params?: SearchDomainsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/domains', {
@@ -62,19 +58,15 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const domainsCreateDomain = <
-				TData = AxiosResponse<ApiCreateDomainResponse>,
-			>(
+			const createDomain = <TData = AxiosResponse<ApiCreateDomainResponse>>(
 				apiCreateDomainRequest: ApiCreateDomainRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post('/domains', apiCreateDomainRequest, options);
 			};
-			const domainsDeleteDomain2 = <
-				TData = AxiosResponse<ApiDeleteDomainResponse>,
-			>(
+			const deleteDomain2 = <TData = AxiosResponse<ApiDeleteDomainResponse>>(
 				dc: string,
-				params?: DomainsDeleteDomain2Params,
+				params?: DeleteDomain2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/domains/${dc}`, {
@@ -82,9 +74,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const domainsReadDomain2 = <TData = AxiosResponse<ApiReadDomainResponse>>(
+			const readDomain2 = <TData = AxiosResponse<ApiReadDomainResponse>>(
 				dc: string,
-				params?: DomainsReadDomain2Params,
+				params?: ReadDomain2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/domains/${dc}`, {
@@ -92,51 +84,46 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const domainsUpdateDomain2 = <
-				TData = AxiosResponse<ApiUpdateDomainResponse>,
-			>(
-				apiDomainsUpdateDomainBody: ApiDomainsUpdateDomainBody,
+			const updateDomain2 = <TData = AxiosResponse<ApiUpdateDomainResponse>>(
+				domainsUpdateDomainBody: DomainsUpdateDomainBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					'/domains/domain.dc}',
-					apiDomainsUpdateDomainBody,
+					domainsUpdateDomainBody,
 					options,
 				);
 			};
-			const domainsUpdateDomain = <
-				TData = AxiosResponse<ApiUpdateDomainResponse>,
-			>(
-				apiDomainsUpdateDomainBody: ApiDomainsUpdateDomainBody,
+			const updateDomain = <TData = AxiosResponse<ApiUpdateDomainResponse>>(
+				domainsUpdateDomainBody: DomainsUpdateDomainBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					'/domains/domain.dc}',
-					apiDomainsUpdateDomainBody,
+					domainsUpdateDomainBody,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				domainsDeleteDomain,
-				domainsReadDomain,
-				domainsSearchDomains,
-				domainsCreateDomain,
-				domainsDeleteDomain2,
-				domainsReadDomain2,
-				domainsUpdateDomain2,
-				domainsUpdateDomain,
+				deleteDomain,
+				readDomain,
+				searchDomains,
+				createDomain,
+				deleteDomain2,
+				readDomain2,
+				updateDomain2,
+				updateDomain,
 			};
 		};
-export type DomainsDeleteDomainResult = AxiosResponse<ApiDeleteDomainResponse>;
-export type DomainsReadDomainResult = AxiosResponse<ApiReadDomainResponse>;
-export type DomainsSearchDomainsResult =
-	AxiosResponse<ApiSearchDomainsResponse>;
-export type DomainsCreateDomainResult = AxiosResponse<ApiCreateDomainResponse>;
-export type DomainsDeleteDomain2Result = AxiosResponse<ApiDeleteDomainResponse>;
-export type DomainsReadDomain2Result = AxiosResponse<ApiReadDomainResponse>;
-export type DomainsUpdateDomain2Result = AxiosResponse<ApiUpdateDomainResponse>;
-export type DomainsUpdateDomainResult = AxiosResponse<ApiUpdateDomainResponse>;
+export type DeleteDomainResult = AxiosResponse<ApiDeleteDomainResponse>;
+export type ReadDomainResult = AxiosResponse<ApiReadDomainResponse>;
+export type SearchDomainsResult = AxiosResponse<ApiSearchDomainsResponse>;
+export type CreateDomainResult = AxiosResponse<ApiCreateDomainResponse>;
+export type DeleteDomain2Result = AxiosResponse<ApiDeleteDomainResponse>;
+export type ReadDomain2Result = AxiosResponse<ApiReadDomainResponse>;
+export type UpdateDomain2Result = AxiosResponse<ApiUpdateDomainResponse>;
+export type UpdateDomainResult = AxiosResponse<ApiUpdateDomainResponse>;
 
 // --- footer end

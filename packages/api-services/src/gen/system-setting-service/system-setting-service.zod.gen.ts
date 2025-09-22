@@ -43,6 +43,9 @@ export const searchSystemSettingQueryParams = zod.object({
 				'new_message_sound_notification',
 				'new_chat_sound_notification',
 				'screenshot_interval',
+				'password_expiry_days',
+				'password_min_length',
+				'password_min_categories',
 			]),
 		)
 		.optional()
@@ -87,6 +90,9 @@ export const searchSystemSettingResponse = zod.object({
 						'new_message_sound_notification',
 						'new_chat_sound_notification',
 						'screenshot_interval',
+						'password_expiry_days',
+						'password_min_length',
+						'password_min_categories',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -128,6 +134,9 @@ export const createSystemSettingBody = zod.object({
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
 			'screenshot_interval',
+			'password_expiry_days',
+			'password_min_length',
+			'password_min_categories',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -167,6 +176,9 @@ export const createSystemSettingResponse = zod.object({
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
 			'screenshot_interval',
+			'password_expiry_days',
+			'password_min_length',
+			'password_min_categories',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -229,6 +241,9 @@ export const deleteSystemSettingResponse = zod.object({
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
 			'screenshot_interval',
+			'password_expiry_days',
+			'password_min_length',
+			'password_min_categories',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -272,6 +287,9 @@ export const readSystemSettingResponse = zod.object({
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
 			'screenshot_interval',
+			'password_expiry_days',
+			'password_min_length',
+			'password_min_categories',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -319,6 +337,9 @@ export const patchSystemSettingResponse = zod.object({
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
 			'screenshot_interval',
+			'password_expiry_days',
+			'password_min_length',
+			'password_min_categories',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -364,6 +385,9 @@ export const updateSystemSettingResponse = zod.object({
 			'new_message_sound_notification',
 			'new_chat_sound_notification',
 			'screenshot_interval',
+			'password_expiry_days',
+			'password_min_length',
+			'password_min_categories',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 
 import type { StorageListMedia, StorageMediaFile } from '.././_models';
 
-export const getMediaFileServiceSearchMediaFileResponseMock = (
+export const getSearchMediaFileResponseMock = (
 	overrideResponse: Partial<StorageListMedia> = {},
 ): StorageListMedia => ({
 	items: faker.helpers.arrayElement([
@@ -75,7 +75,7 @@ export const getMediaFileServiceSearchMediaFileResponseMock = (
 	...overrideResponse,
 });
 
-export const getMediaFileServiceDeleteMediaFileResponseMock = (
+export const getDeleteMediaFileResponseMock = (
 	overrideResponse: Partial<StorageMediaFile> = {},
 ): StorageMediaFile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -131,7 +131,7 @@ export const getMediaFileServiceDeleteMediaFileResponseMock = (
 	...overrideResponse,
 });
 
-export const getMediaFileServiceReadMediaFileResponseMock = (
+export const getReadMediaFileResponseMock = (
 	overrideResponse: Partial<StorageMediaFile> = {},
 ): StorageMediaFile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -187,7 +187,7 @@ export const getMediaFileServiceReadMediaFileResponseMock = (
 	...overrideResponse,
 });
 
-export const getMediaFileServiceSearchMediaFileMockHandler = (
+export const getSearchMediaFileMockHandler = (
 	overrideResponse?:
 		| StorageListMedia
 		| ((
@@ -203,14 +203,14 @@ export const getMediaFileServiceSearchMediaFileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getMediaFileServiceSearchMediaFileResponseMock(),
+					: getSearchMediaFileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getMediaFileServiceDeleteMediaFileMockHandler = (
+export const getDeleteMediaFileMockHandler = (
 	overrideResponse?:
 		| StorageMediaFile
 		| ((
@@ -226,14 +226,14 @@ export const getMediaFileServiceDeleteMediaFileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getMediaFileServiceDeleteMediaFileResponseMock(),
+					: getDeleteMediaFileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getMediaFileServiceReadMediaFileMockHandler = (
+export const getReadMediaFileMockHandler = (
 	overrideResponse?:
 		| StorageMediaFile
 		| ((
@@ -249,14 +249,14 @@ export const getMediaFileServiceReadMediaFileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getMediaFileServiceReadMediaFileResponseMock(),
+					: getReadMediaFileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getMediaFileServiceMock = () => [
-	getMediaFileServiceSearchMediaFileMockHandler(),
-	getMediaFileServiceDeleteMediaFileMockHandler(),
-	getMediaFileServiceReadMediaFileMockHandler(),
+	getSearchMediaFileMockHandler(),
+	getDeleteMediaFileMockHandler(),
+	getReadMediaFileMockHandler(),
 ];

@@ -9,15 +9,15 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	SpacesCreateSpaceParams,
-	SpacesDeleteSpaceParams,
-	SpacesListSpacesParams,
-	SpacesLocateSpaceParams,
-	SpacesUpdateSpaceBody,
-	SpacesUpdateSpaceParams,
-	WebitelKnowledgebaseInputSpace,
-	WebitelKnowledgebaseSpace,
-	WebitelKnowledgebaseSpaceList,
+	CreateSpaceParams,
+	DeleteSpaceParams,
+	KnowledgebaseInputSpace,
+	KnowledgebaseSpace,
+	KnowledgebaseSpaceList,
+	ListSpacesParams,
+	LocateSpaceParams,
+	UpdateSpaceBody,
+	UpdateSpaceParams,
 } from '.././_models';
 
 // --- header start
@@ -47,10 +47,8 @@ export const // --- title start
 | `has_children`| bool 
 
  */
-			const spacesListSpaces = <
-				TData = AxiosResponse<WebitelKnowledgebaseSpaceList>,
-			>(
-				params?: SpacesListSpacesParams,
+			const listSpaces = <TData = AxiosResponse<KnowledgebaseSpaceList>>(
+				params?: ListSpacesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/spaces', {
@@ -61,14 +59,12 @@ export const // --- title start
 			/**
 			 * @summary Create NEW Space
 			 */
-			const spacesCreateSpace = <
-				TData = AxiosResponse<WebitelKnowledgebaseSpace>,
-			>(
-				webitelKnowledgebaseInputSpace: WebitelKnowledgebaseInputSpace[],
-				params?: SpacesCreateSpaceParams,
+			const createSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
+				knowledgebaseInputSpace: KnowledgebaseInputSpace[],
+				params?: CreateSpaceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post('/spaces', webitelKnowledgebaseInputSpace, {
+				return axios.post('/spaces', knowledgebaseInputSpace, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -76,11 +72,9 @@ export const // --- title start
 			/**
 			 * @summary Remove Space source
 			 */
-			const spacesDeleteSpace = <
-				TData = AxiosResponse<WebitelKnowledgebaseSpace>,
-			>(
+			const deleteSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
 				etag: string,
-				params?: SpacesDeleteSpaceParams,
+				params?: DeleteSpaceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/spaces/${etag}`, {
@@ -91,11 +85,9 @@ export const // --- title start
 			/**
 			 * @summary Locate spaces source
 			 */
-			const spacesLocateSpace = <
-				TData = AxiosResponse<WebitelKnowledgebaseSpace>,
-			>(
+			const locateSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
 				etag: string,
-				params?: SpacesLocateSpaceParams,
+				params?: LocateSpaceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/spaces/${etag}`, {
@@ -106,34 +98,25 @@ export const // --- title start
 			/**
 			 * @summary NEW Update of the Space source
 			 */
-			const spacesUpdateSpace = <
-				TData = AxiosResponse<WebitelKnowledgebaseSpace>,
-			>(
+			const updateSpace = <TData = AxiosResponse<KnowledgebaseSpace>>(
 				etag: string,
-				spacesUpdateSpaceBody: SpacesUpdateSpaceBody,
-				params?: SpacesUpdateSpaceParams,
+				updateSpaceBody: UpdateSpaceBody,
+				params?: UpdateSpaceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch(`/spaces/${etag}`, spacesUpdateSpaceBody, {
+				return axios.patch(`/spaces/${etag}`, updateSpaceBody, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
 			};
 
 			// --- footer start
-			return {
-				spacesListSpaces,
-				spacesCreateSpace,
-				spacesDeleteSpace,
-				spacesLocateSpace,
-				spacesUpdateSpace,
-			};
+			return { listSpaces, createSpace, deleteSpace, locateSpace, updateSpace };
 		};
-export type SpacesListSpacesResult =
-	AxiosResponse<WebitelKnowledgebaseSpaceList>;
-export type SpacesCreateSpaceResult = AxiosResponse<WebitelKnowledgebaseSpace>;
-export type SpacesDeleteSpaceResult = AxiosResponse<WebitelKnowledgebaseSpace>;
-export type SpacesLocateSpaceResult = AxiosResponse<WebitelKnowledgebaseSpace>;
-export type SpacesUpdateSpaceResult = AxiosResponse<WebitelKnowledgebaseSpace>;
+export type ListSpacesResult = AxiosResponse<KnowledgebaseSpaceList>;
+export type CreateSpaceResult = AxiosResponse<KnowledgebaseSpace>;
+export type DeleteSpaceResult = AxiosResponse<KnowledgebaseSpace>;
+export type LocateSpaceResult = AxiosResponse<KnowledgebaseSpace>;
+export type UpdateSpaceResult = AxiosResponse<KnowledgebaseSpace>;
 
 // --- footer end

@@ -9,7 +9,7 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	GetTimelineParams,
+	GetTimelineMixin6Params,
 	WebitelCasesGetTimelineCounterResponse,
 	WebitelCasesGetTimelineResponse,
 } from '.././_models';
@@ -22,11 +22,11 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const getTimeline = <
+			const getTimelineMixin6 = <
 				TData = AxiosResponse<WebitelCasesGetTimelineResponse>,
 			>(
 				caseId: string,
-				params?: GetTimelineParams,
+				params?: GetTimelineMixin6Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/cases/${caseId}/timeline`, {
@@ -34,7 +34,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const getTimelineCounter = <
+			const getTimelineCounterMixin6 = <
 				TData = AxiosResponse<WebitelCasesGetTimelineCounterResponse>,
 			>(
 				caseId: string,
@@ -44,10 +44,11 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { getTimeline, getTimelineCounter };
+			return { getTimelineMixin6, getTimelineCounterMixin6 };
 		};
-export type GetTimelineResult = AxiosResponse<WebitelCasesGetTimelineResponse>;
-export type GetTimelineCounterResult =
+export type GetTimelineMixin6Result =
+	AxiosResponse<WebitelCasesGetTimelineResponse>;
+export type GetTimelineCounterMixin6Result =
 	AxiosResponse<WebitelCasesGetTimelineCounterResponse>;
 
 // --- footer end

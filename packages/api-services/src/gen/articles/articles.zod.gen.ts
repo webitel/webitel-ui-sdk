@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary List of the Space's Article(s).
  */
-export const articlesListArticlesParams = zod.object({
+export const listArticlesParams = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
 });
 
-export const articlesListArticlesQueryParams = zod.object({
+export const listArticlesQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -44,7 +44,7 @@ export const articlesListArticlesQueryParams = zod.object({
 		.describe('Tags associated with the article.'),
 });
 
-export const articlesListArticlesResponse = zod
+export const listArticlesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -158,18 +158,18 @@ export const articlesListArticlesResponse = zod
 		'Article dataset.\nNOTE: Edge represents connection between two nodes.\nSo this spaceArticles.data are always subordinate to some space.id.',
 	);
 
-export const articlesCreateArticleParams = zod.object({
+export const createArticleParams = zod.object({
 	space_id: zod.string().describe('Link space ID.'),
 });
 
-export const articlesCreateArticleQueryParams = zod.object({
+export const createArticleQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const articlesCreateArticleBody = zod
+export const createArticleBody = zod
 	.object({
 		tags: zod
 			.array(zod.string())
@@ -198,7 +198,7 @@ export const articlesCreateArticleBody = zod
 	})
 	.describe("An input of the Space's Articles.");
 
-export const articlesCreateArticleResponse = zod
+export const createArticleResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -312,12 +312,12 @@ export const articlesCreateArticleResponse = zod
 		'Article dataset.\nNOTE: Edge represents connection between two nodes.\nSo this spaceArticles.data are always subordinate to some space.id.',
 	);
 
-export const articlesArticlesAttachmentListParams = zod.object({
+export const articlesAttachmentListParams = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
 	article_id: zod.string().describe('Record(s) with unique ID only.'),
 });
 
-export const articlesArticlesAttachmentListQueryParams = zod.object({
+export const articlesAttachmentListQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -332,7 +332,7 @@ export const articlesArticlesAttachmentListQueryParams = zod.object({
 		.describe('Sort the result according to fields.'),
 });
 
-export const articlesArticlesAttachmentListResponse = zod.object({
+export const articlesAttachmentListResponse = zod.object({
 	data: zod
 		.array(
 			zod.object({
@@ -372,12 +372,12 @@ export const articlesArticlesAttachmentListResponse = zod.object({
 /**
  * @summary List of the Space's Article(s).
  */
-export const articlesListArticles2Params = zod.object({
+export const listArticles2Params = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
 	article_id: zod.string().describe('Record(s) with unique ID only.'),
 });
 
-export const articlesListArticles2QueryParams = zod.object({
+export const listArticles2QueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -407,7 +407,7 @@ export const articlesListArticles2QueryParams = zod.object({
 		.describe('Tags associated with the article.'),
 });
 
-export const articlesListArticles2Response = zod
+export const listArticles2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -521,12 +521,12 @@ export const articlesListArticles2Response = zod
 		'Article dataset.\nNOTE: Edge represents connection between two nodes.\nSo this spaceArticles.data are always subordinate to some space.id.',
 	);
 
-export const articlesArticleVersionsListParams = zod.object({
+export const articleVersionsListParams = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
 	article_id: zod.string().describe('Record(s) with unique ID only.'),
 });
 
-export const articlesArticleVersionsListQueryParams = zod.object({
+export const articleVersionsListQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -541,7 +541,7 @@ export const articlesArticleVersionsListQueryParams = zod.object({
 		.describe('Sort the result according to fields.'),
 });
 
-export const articlesArticleVersionsListResponse = zod.object({
+export const articleVersionsListResponse = zod.object({
 	data: zod
 		.array(
 			zod.object({
@@ -597,13 +597,13 @@ export const articlesArticleVersionsListResponse = zod.object({
 		.describe('The page number of the partial result.'),
 });
 
-export const articlesLocateArticleVersionParams = zod.object({
+export const locateArticleVersionParams = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
 	article_id: zod.string().describe('Record(s) with unique ID only.'),
 	version_id: zod.string().describe('The unique ID of version record'),
 });
 
-export const articlesLocateArticleVersionResponse = zod.object({
+export const locateArticleVersionResponse = zod.object({
 	tags: zod
 		.array(zod.string())
 		.optional()
@@ -642,19 +642,19 @@ export const articlesLocateArticleVersionResponse = zod.object({
 /**
  * @summary Remove the space's Article association.
  */
-export const articlesDeleteArticleParams = zod.object({
+export const deleteArticleParams = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
 	etag: zod.string().describe('Unique ID to remove.'),
 });
 
-export const articlesDeleteArticleQueryParams = zod.object({
+export const deleteArticleQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const articlesDeleteArticleResponse = zod.object({
+export const deleteArticleResponse = zod.object({
 	tags: zod
 		.array(zod.string())
 		.optional()
@@ -732,7 +732,7 @@ export const articlesDeleteArticleResponse = zod.object({
 /**
  * @summary Locate the space's Article association.
  */
-export const articlesLocateArticleParams = zod.object({
+export const locateArticleParams = zod.object({
 	space_id: zod.string().describe('Space ID associated with.'),
 	etag: zod
 		.string()
@@ -741,14 +741,14 @@ export const articlesLocateArticleParams = zod.object({
 		),
 });
 
-export const articlesLocateArticleQueryParams = zod.object({
+export const locateArticleQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const articlesLocateArticleResponse = zod.object({
+export const locateArticleResponse = zod.object({
 	tags: zod
 		.array(zod.string())
 		.optional()
@@ -826,21 +826,21 @@ export const articlesLocateArticleResponse = zod.object({
 /**
  * @summary Update the space's Article details.
  */
-export const articlesUpdateArticleParams = zod.object({
+export const updateArticleParams = zod.object({
 	space_id: zod.string().describe('Link space ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
 });
 
-export const articlesUpdateArticleQueryParams = zod.object({
+export const updateArticleQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const articlesUpdateArticleBody = zod.object({
+export const updateArticleBody = zod.object({
 	tags: zod
 		.array(zod.string())
 		.optional()
@@ -864,7 +864,7 @@ export const articlesUpdateArticleBody = zod.object({
 	title: zod.string().optional().describe('The title of the article.'),
 });
 
-export const articlesUpdateArticleResponse = zod
+export const updateArticleResponse = zod
 	.object({
 		data: zod
 			.array(

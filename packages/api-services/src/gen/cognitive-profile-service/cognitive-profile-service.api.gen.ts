@@ -9,14 +9,14 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	CognitiveProfileServiceSearchCognitiveProfileParams,
-	CognitiveProfileServiceSearchCognitiveProfileVoicesParams,
+	SearchCognitiveProfileParams,
+	SearchCognitiveProfileVoicesParams,
 	StorageCognitiveProfile,
+	StorageCognitiveProfileServicePatchCognitiveProfileBody,
+	StorageCognitiveProfileServiceUpdateCognitiveProfileBody,
 	StorageCreateCognitiveProfileRequest,
 	StorageListCognitiveProfile,
 	StorageListCognitiveProfileVoices,
-	StoragePatchCognitiveProfileRequest,
-	StorageUpdateCognitiveProfileRequest,
 } from '.././_models';
 
 // --- header start
@@ -27,10 +27,10 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const cognitiveProfileServiceSearchCognitiveProfile = <
+			const searchCognitiveProfile = <
 				TData = AxiosResponse<StorageListCognitiveProfile>,
 			>(
-				params?: CognitiveProfileServiceSearchCognitiveProfileParams,
+				params?: SearchCognitiveProfileParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/storage/cognitive_profiles', {
@@ -38,7 +38,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const cognitiveProfileServiceCreateCognitiveProfile = <
+			const createCognitiveProfile = <
 				TData = AxiosResponse<StorageCognitiveProfile>,
 			>(
 				storageCreateCognitiveProfileRequest: StorageCreateCognitiveProfileRequest,
@@ -53,7 +53,7 @@ export const // --- title start
 			/**
 			 * @summary Remove BackendProfile
 			 */
-			const cognitiveProfileServiceDeleteCognitiveProfile = <
+			const deleteCognitiveProfile = <
 				TData = AxiosResponse<StorageCognitiveProfile>,
 			>(
 				id: string,
@@ -61,7 +61,7 @@ export const // --- title start
 			): Promise<TData> => {
 				return axios.delete(`/storage/cognitive_profiles/${id}`, options);
 			};
-			const cognitiveProfileServiceReadCognitiveProfile = <
+			const readCognitiveProfile = <
 				TData = AxiosResponse<StorageCognitiveProfile>,
 			>(
 				id: string,
@@ -69,40 +69,40 @@ export const // --- title start
 			): Promise<TData> => {
 				return axios.get(`/storage/cognitive_profiles/${id}`, options);
 			};
-			const cognitiveProfileServicePatchCognitiveProfile = <
+			const patchCognitiveProfile = <
 				TData = AxiosResponse<StorageCognitiveProfile>,
 			>(
 				id: string,
-				storagePatchCognitiveProfileRequest: StoragePatchCognitiveProfileRequest,
+				storageCognitiveProfileServicePatchCognitiveProfileBody: StorageCognitiveProfileServicePatchCognitiveProfileBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/storage/cognitive_profiles/${id}`,
-					storagePatchCognitiveProfileRequest,
+					storageCognitiveProfileServicePatchCognitiveProfileBody,
 					options,
 				);
 			};
-			const cognitiveProfileServiceUpdateCognitiveProfile = <
+			const updateCognitiveProfile = <
 				TData = AxiosResponse<StorageCognitiveProfile>,
 			>(
 				id: string,
-				storageUpdateCognitiveProfileRequest: StorageUpdateCognitiveProfileRequest,
+				storageCognitiveProfileServiceUpdateCognitiveProfileBody: StorageCognitiveProfileServiceUpdateCognitiveProfileBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/storage/cognitive_profiles/${id}`,
-					storageUpdateCognitiveProfileRequest,
+					storageCognitiveProfileServiceUpdateCognitiveProfileBody,
 					options,
 				);
 			};
 			/**
 			 * @summary Search Voices
 			 */
-			const cognitiveProfileServiceSearchCognitiveProfileVoices = <
+			const searchCognitiveProfileVoices = <
 				TData = AxiosResponse<StorageListCognitiveProfileVoices>,
 			>(
 				id: string,
-				params?: CognitiveProfileServiceSearchCognitiveProfileVoicesParams,
+				params?: SearchCognitiveProfileVoicesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/storage/cognitive_profiles/${id}/voice`, {
@@ -113,28 +113,27 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				cognitiveProfileServiceSearchCognitiveProfile,
-				cognitiveProfileServiceCreateCognitiveProfile,
-				cognitiveProfileServiceDeleteCognitiveProfile,
-				cognitiveProfileServiceReadCognitiveProfile,
-				cognitiveProfileServicePatchCognitiveProfile,
-				cognitiveProfileServiceUpdateCognitiveProfile,
-				cognitiveProfileServiceSearchCognitiveProfileVoices,
+				searchCognitiveProfile,
+				createCognitiveProfile,
+				deleteCognitiveProfile,
+				readCognitiveProfile,
+				patchCognitiveProfile,
+				updateCognitiveProfile,
+				searchCognitiveProfileVoices,
 			};
 		};
-export type CognitiveProfileServiceSearchCognitiveProfileResult =
+export type SearchCognitiveProfileResult =
 	AxiosResponse<StorageListCognitiveProfile>;
-export type CognitiveProfileServiceCreateCognitiveProfileResult =
+export type CreateCognitiveProfileResult =
 	AxiosResponse<StorageCognitiveProfile>;
-export type CognitiveProfileServiceDeleteCognitiveProfileResult =
+export type DeleteCognitiveProfileResult =
 	AxiosResponse<StorageCognitiveProfile>;
-export type CognitiveProfileServiceReadCognitiveProfileResult =
+export type ReadCognitiveProfileResult = AxiosResponse<StorageCognitiveProfile>;
+export type PatchCognitiveProfileResult =
 	AxiosResponse<StorageCognitiveProfile>;
-export type CognitiveProfileServicePatchCognitiveProfileResult =
+export type UpdateCognitiveProfileResult =
 	AxiosResponse<StorageCognitiveProfile>;
-export type CognitiveProfileServiceUpdateCognitiveProfileResult =
-	AxiosResponse<StorageCognitiveProfile>;
-export type CognitiveProfileServiceSearchCognitiveProfileVoicesResult =
+export type SearchCognitiveProfileVoicesResult =
 	AxiosResponse<StorageListCognitiveProfileVoices>;
 
 // --- footer end

@@ -708,6 +708,10 @@ export const getSearchAgentStatusStatisticResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
+			statusComment: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
 			statusDuration: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
@@ -859,6 +863,10 @@ export const getSearchAgentStatusStatisticItemResponseMock = (
 		undefined,
 	]),
 	status: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	statusComment: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),
