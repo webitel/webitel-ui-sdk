@@ -2,6 +2,9 @@
   --wt-tree-item-active: var(--primary-light-color);
   --wt-tree-item-active-on: var(--grey-darken-4);
 
+  --wt-tree-item-searched: var(--light-blue-lighten-4);
+  --wt-tree-item-searched-on: var(--grey-darken-4);
+
   --wt-tree-item: var(--primary-light-color);
   --wt-tree-item-on: var(--grey-darken-1);
 
@@ -12,6 +15,9 @@
 :root.theme--dark {
   --wt-tree-item-active: var(--primary-light-color);
   --wt-tree-item-active-on: var(--grey-lighten-4);
+
+  --wt-tree-item-searched: var(--light-blue-lighten-2);
+  --wt-tree-item-searched-on: var(--grey-darken-4);
 
   --wt-tree-item: var(--primary-light-color);
   --wt-tree-item-on: var(--grey-lighten-3);
