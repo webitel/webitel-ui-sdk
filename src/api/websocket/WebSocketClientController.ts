@@ -1,10 +1,10 @@
 import { shallowReactive } from 'vue';
 import { Client } from 'webitel-sdk';
 
-import eventBus from '../../scripts/eventBus.js';
-import { endpoint, getConfig } from './config.js';
+import eventBus from '../../scripts/eventBus';
+import { endpoint, getConfig } from './config';
 import { WebSocketClientEvent } from './enums/WebSocketClientEvent';
-import websocketErrorEventHandler from './websocketErrorEventHandler.js';
+import websocketErrorEventHandler from './websocketErrorEventHandler';
 
 class WebSocketClientController {
   cli = null;
