@@ -8,7 +8,7 @@
       minHeight,
       maxWidth,
       maxHeight,
-      cursor: hoverIcon ? 'pointer' : 'auto'
+      cursor: overlayIcon ? 'pointer' : 'auto'
     }"
   >
     <!--    @slot Replaces `<img>` tag
@@ -20,10 +20,10 @@
         :src="src"
         class="wt-image__img"
       />
-      <div v-if="hoverIcon" class="wt-image__hover-icon">
+      <div v-if="overlayIcon" class="wt-image__overlay-icon">
         <wt-icon 
-          :icon="hoverIcon"
-          :icon-prefix="hoverIconPrefix"
+          :icon="overlayIcon"
+          :icon-prefix="overlayIconPrefix"
           :color="IconColor.ON_DARK"
         />
       </div>
@@ -58,8 +58,8 @@ const props = defineProps<{
   minHeight?: string | number;
   maxWidth?: string | number;
   maxHeight?: string | number;
-  hoverIcon?: string;
-  hoverIconPrefix?: string;
+  overlayIcon?: string;
+  overlayIconPrefix?: string;
 }>();
 
 const width = computed(() => {
@@ -106,7 +106,7 @@ const height = computed(() => {
   }
 }
 
-.wt-image__hover-icon {
+.wt-image__overlay-icon {
   opacity: 0;
   display: flex;
   justify-content: center;
