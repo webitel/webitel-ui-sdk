@@ -8,7 +8,7 @@
       minHeight,
       maxWidth,
       maxHeight,
-      cursor: preview ? 'pointer' : 'auto'
+      cursor: hoverIcon ? 'pointer' : 'auto'
     }"
   >
     <!--    @slot Replaces `<img>` tag
@@ -20,10 +20,10 @@
         :src="src"
         class="wt-image__img"
       />
-      <div v-if="preview" class="wt-image__preview-icon">
+      <div v-if="hoverIcon" class="wt-image__hover-icon">
         <wt-icon 
-          :icon="previewIcon"
-          :icon-prefix="previewIconPrefix"
+          :icon="hoverIcon"
+          :icon-prefix="hoverIconPrefix"
           :color="IconColor.ON_DARK"
         />
       </div>
@@ -31,8 +31,8 @@
   </div>
 </template>
 
-<script setup>
-import { computed, ref } from 'vue';
+<script setup lang="ts">
+import { computed, defineProps } from 'vue';
 
 import { IconColor } from '../../enums';
 
@@ -46,64 +46,21 @@ const sizeToUnits = {
   xl: '380px',
   '2xl': '512px',
   '3xl': '600px',
-};
+} as const;
 
-const props = defineProps({
-  src: {
-    type: [Object, String],
-    required: true,
-  },
-  // все в одну лінію, бо повалиться дока
-  /**
-   *  `'3xs': '32px', '2xs': '64px', 'xs': '92px', 'sm': '128px', 'md': '192px', 'lg': '256px', 'xl': '380px', '2xl': '512px', '3xl': '600px',`
-   */
-  size: {
-    type: String,
-    // default: 'md',
-    // required: true,
-    validator: (v) =>
-      ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'].includes(v),
-  },
-  alt: {
-    type: String,
-    default: 'wt-image',
-  },
-  width: {
-    type: [String, Number],
-  },
-  height: {
-    type: [String, Number],
-  },
-  minWidth: {
-    type: [String, Number],
-  },
-  minHeight: {
-    type: [String, Number],
-  },
-  maxWidth: {
-    type: [String, Number],
-  },
-  maxHeight: {
-    type: [String, Number],
-  },
-  preview: {
-    type: Boolean,
-    default: false
-  },
-  previewIcon: {
-    type: String,
-  },
-  previewIconPrefix: {
-    type: String,
-    default: '',
-  }
-  // aspectRatio: {
-  //   type: [String, Number, null],
-  //   default: 1,
-  // },
-});
-
-const emit = defineEmits([]);
+const props = defineProps<{
+  src: string | object;
+  size?: keyof typeof sizeToUnits;
+  alt?: string;
+  width?: string | number;
+  height?: string | number;
+  minWidth?: string | number;
+  minHeight?: string | number;
+  maxWidth?: string | number;
+  maxHeight?: string | number;
+  hoverIcon?: string;
+  hoverIconPrefix?: string;
+}>();
 
 const width = computed(() => {
   const width = props.size ? sizeToUnits[props.size] : props.width;
@@ -128,7 +85,8 @@ const height = computed(() => {
 
   return height;
 });
-</script>
+</script> 
+
 
 <style lang="scss" scoped>
 //@use '../../css/styleguide/styleguide';
@@ -148,7 +106,7 @@ const height = computed(() => {
   }
 }
 
-.wt-image__preview-icon {
+.wt-image__hover-icon {
   opacity: 0;
   display: flex;
   justify-content: center;

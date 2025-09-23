@@ -3,8 +3,7 @@
     <wt-image
       :src="imageTall"
       size="lg"
-      preview
-      preview-icon="zoom-in"
+      hover-icon="zoom-in"
     />
   </div>
 </template>

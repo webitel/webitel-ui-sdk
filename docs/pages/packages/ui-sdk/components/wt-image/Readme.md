@@ -2,7 +2,7 @@
 import Specs from './component-specs.vue';
 import ExampleImage from './examples/example-image.vue';
 import ExampleImageSizes from './examples/example-image-sizes.vue';
-import ExampleImagePreview from './examples/example-image-preview.vue'
+import ExampleImageHoverIcon from './examples/example-image-hover-icon.vue'
 </script>
 
 # `wt-image.vue`
@@ -21,14 +21,14 @@ import ExampleImagePreview from './examples/example-image-preview.vue'
 <<< ./examples/example-image.vue{js}
 :::
 
-## Example Image Preview
+## Example Image Hover Icon
 
 ::: raw
-<ExampleImagePreview />
+<ExampleImageHoverIcon />
 :::
 
 ::: details Code
-<<< ./examples/example-image-preview.vue{js}
+<<< ./examples/example-image-hover-icon.vue{js}
 :::
 
 ## Emaple Image Sizes
