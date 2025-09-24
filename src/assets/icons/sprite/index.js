@@ -44,7 +44,7 @@ import callTransferFilled from './call-transfer--filled.svg';
 import caseAuthor from './case-author.svg';
 import cases from './cases.svg';
 import caseDone from './case-done.svg';
-import caseFilled from './case--done--filled.svg';
+import caseFilled from './case--filled.svg';
 import chat from './chat.svg';
 import chatFilled from './chat--filled.svg';
 import chatEmoji from './chat-emoji.svg';
