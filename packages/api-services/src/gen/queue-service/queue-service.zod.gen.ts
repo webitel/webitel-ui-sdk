@@ -87,6 +87,20 @@ export const searchQueueResponse = zod.object({
 				processing: zod.boolean().optional(),
 				processingRenewalSec: zod.number().optional(),
 				processingSec: zod.number().optional(),
+				resourceGroups: zod
+					.array(
+						zod.object({
+							name: zod.string().optional(),
+						}),
+					)
+					.optional(),
+				resources: zod
+					.array(
+						zod.object({
+							name: zod.string().optional(),
+						}),
+					)
+					.optional(),
 				ringtone: zod
 					.object({
 						id: zod.string().optional(),
@@ -310,6 +324,20 @@ export const createQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -541,6 +569,20 @@ export const deleteQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -669,6 +711,20 @@ export const readQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -893,6 +949,20 @@ export const patchQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -1116,6 +1186,20 @@ export const updateQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),

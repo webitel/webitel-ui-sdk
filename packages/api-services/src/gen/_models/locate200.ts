@@ -5,6 +5,4 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type DeleteTypeMixin3Params = {
-	fields?: string[];
-};
+export type Locate200 = { [key: string]: unknown };

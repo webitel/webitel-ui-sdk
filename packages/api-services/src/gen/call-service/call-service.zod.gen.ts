@@ -21,6 +21,7 @@ export const createCallBody = zod.object({
 		.object({
 			audio: zod.boolean().optional(),
 			cancelDistribute: zod.boolean().optional(),
+			contactId: zod.string().optional(),
 			disableAutoAnswer: zod.boolean().optional(),
 			disableStun: zod.boolean().optional(),
 			display: zod.string().optional(),
