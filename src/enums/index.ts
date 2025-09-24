@@ -3,9 +3,9 @@ import AgentStatus from './AgentStatus/AgentStatus.enum.js';
 import { ButtonColor } from './ButtonColor/ButtonColor';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import { ChipColor } from './ChipColor/ChipColor';
-import { EmptyCause } from './EmptyCause/EmptyCause';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
+import { EmptyCause } from './EmptyCause/EmptyCause';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
@@ -27,12 +27,12 @@ export {
   AgentStatus,
   AuditorSections,
   ButtonColor,
-  EmptyCause,
   ChatGatewayProvider,
   ChipColor,
   ComponentSize,
   CrmSections,
   CrudAction,
+  EmptyCause,
   IconAction,
   IconColor,
   ProcessingTableColumnType,
