@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Delete a dictionary records.
  */
-export const dictionariesDeleteDataParams = zod.object({
+export const deleteDataParams = zod.object({
 	repo: zod.string().describe('[`types.repo`]'),
 });
 
-export const dictionariesDeleteDataQueryParams = zod.object({
+export const deleteDataQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -21,9 +21,9 @@ export const dictionariesDeleteDataQueryParams = zod.object({
 	id: zod.array(zod.string()).describe('[`record.id`]'),
 });
 
-export const dictionariesDeleteDataResponseTypeFieldsItemKindDefault = 'none';
+export const deleteDataResponseTypeFieldsItemKindDefault = 'none';
 
-export const dictionariesDeleteDataResponse = zod
+export const deleteDataResponse = zod
 	.object({
 		data: zod
 			.array(zod.object({}))
@@ -197,9 +197,7 @@ export const dictionariesDeleteDataResponse = zod
 										'datetime',
 										'duration',
 									])
-									.default(
-										dictionariesDeleteDataResponseTypeFieldsItemKindDefault,
-									)
+									.default(deleteDataResponseTypeFieldsItemKindDefault)
 									.describe(
 										'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 									),
@@ -380,15 +378,15 @@ export const dictionariesDeleteDataResponse = zod
 /**
  * @summary Lookup a dictionary dataset.
  */
-export const dictionariesSearchDataParams = zod.object({
+export const searchDataParams = zod.object({
 	repo: zod.string().describe('[`types.repo`]'),
 });
 
-export const dictionariesSearchDataQuerySortItemDefault = '*';
-export const dictionariesSearchDataQuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const dictionariesSearchDataQueryFieldsItemDefault = '*';
+export const searchDataQuerySortItemDefault = '*';
+export const searchDataQuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchDataQueryFieldsItemDefault = '*';
 
-export const dictionariesSearchDataQueryParams = zod.object({
+export const searchDataQueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -398,7 +396,7 @@ export const dictionariesSearchDataQueryParams = zod.object({
 		.optional()
 		.describe('Page number of result set of records.\nDefault: 1.'),
 	sort: zod
-		.array(zod.string().regex(dictionariesSearchDataQuerySortItemRegExp))
+		.array(zod.string().regex(searchDataQuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -416,11 +414,12 @@ export const dictionariesSearchDataQueryParams = zod.object({
 			'Search term:\n`?` - matches any character\n`*` - matches 0 or more characters\ne.g.: name,emails{type},labels etc...',
 		),
 	id: zod.array(zod.string()).optional().describe('[`record.id`]'),
+	filters: zod.string().optional().describe('Filter string in CEL format.'),
 });
 
-export const dictionariesSearchDataResponseTypeFieldsItemKindDefault = 'none';
+export const searchDataResponseTypeFieldsItemKindDefault = 'none';
 
-export const dictionariesSearchDataResponse = zod
+export const searchDataResponse = zod
 	.object({
 		data: zod
 			.array(zod.object({}))
@@ -594,9 +593,7 @@ export const dictionariesSearchDataResponse = zod
 										'datetime',
 										'duration',
 									])
-									.default(
-										dictionariesSearchDataResponseTypeFieldsItemKindDefault,
-									)
+									.default(searchDataResponseTypeFieldsItemKindDefault)
 									.describe(
 										'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 									),
@@ -778,40 +775,40 @@ export const dictionariesSearchDataResponse = zod
  * (Record) {
  * @summary Create a dictionary record.
  */
-export const dictionariesCreateDataParams = zod.object({
+export const createDataParams = zod.object({
 	repo: zod.string().describe('[`types.repo`]'),
 });
 
-export const dictionariesCreateDataBody = zod.object({});
+export const createDataBody = zod.object({});
 
-export const dictionariesCreateDataResponse = zod.object({});
+export const createDataResponse = zod.object({});
 
 /**
  * @summary Import dataset from CSV file.
  */
-export const dictionariesImportCSVParams = zod.object({
+export const importCSVParams = zod.object({
 	repo: zod.string().describe('`types.repo`'),
 });
 
-export const dictionariesImportCSVBodyOnDataErrorDefault = 'continue';
-export const dictionariesImportCSVBodyOnEmptyLineDefault = 'continue';
+export const importCSVBodyOnDataErrorDefault = 'continue';
+export const importCSVBodyOnEmptyLineDefault = 'continue';
 
-export const dictionariesImportCSVBody = zod.object({
+export const importCSVBody = zod.object({
 	data: zod.string().optional(),
 	fields: zod.record(zod.string(), zod.number()).optional(),
 	lineBegin: zod.number().optional(),
 	lineEnd: zod.number().optional(),
 	onDataError: zod
 		.enum(['continue', 'break'])
-		.default(dictionariesImportCSVBodyOnDataErrorDefault),
+		.default(importCSVBodyOnDataErrorDefault),
 	onEmptyLine: zod
 		.enum(['continue', 'break'])
-		.default(dictionariesImportCSVBodyOnEmptyLineDefault),
+		.default(importCSVBodyOnEmptyLineDefault),
 });
 
-export const dictionariesImportCSVResponseTypeFieldsItemKindDefault = 'none';
+export const importCSVResponseTypeFieldsItemKindDefault = 'none';
 
-export const dictionariesImportCSVResponse = zod
+export const importCSVResponse = zod
 	.object({
 		data: zod
 			.array(zod.object({}))
@@ -985,9 +982,7 @@ export const dictionariesImportCSVResponse = zod
 										'datetime',
 										'duration',
 									])
-									.default(
-										dictionariesImportCSVResponseTypeFieldsItemKindDefault,
-									)
+									.default(importCSVResponseTypeFieldsItemKindDefault)
 									.describe(
 										'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 									),
@@ -1168,21 +1163,21 @@ export const dictionariesImportCSVResponse = zod
 /**
  * @summary Delete a dictionary records.
  */
-export const dictionariesDeleteData2Params = zod.object({
+export const deleteData2Params = zod.object({
 	repo: zod.string().describe('[`types.repo`]'),
 	id: zod.array(zod.string()).min(1).describe('[`record.id`]'),
 });
 
-export const dictionariesDeleteData2QueryParams = zod.object({
+export const deleteData2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result dataset.'),
 });
 
-export const dictionariesDeleteData2ResponseTypeFieldsItemKindDefault = 'none';
+export const deleteData2ResponseTypeFieldsItemKindDefault = 'none';
 
-export const dictionariesDeleteData2Response = zod
+export const deleteData2Response = zod
 	.object({
 		data: zod
 			.array(zod.object({}))
@@ -1356,9 +1351,7 @@ export const dictionariesDeleteData2Response = zod
 										'datetime',
 										'duration',
 									])
-									.default(
-										dictionariesDeleteData2ResponseTypeFieldsItemKindDefault,
-									)
+									.default(deleteData2ResponseTypeFieldsItemKindDefault)
 									.describe(
 										'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 									),
@@ -1540,14 +1533,14 @@ export const dictionariesDeleteData2Response = zod
  * (Record) {
  * @summary Locate a dictionary record.
  */
-export const dictionariesLocateDataParams = zod.object({
+export const locateDataParams = zod.object({
 	repo: zod.string().describe('[`types.repo`]'),
 	id: zod.string().describe('[`record.id`]'),
 });
 
-export const dictionariesLocateDataQueryFieldsItemDefault = '*';
+export const locateDataQueryFieldsItemDefault = '*';
 
-export const dictionariesLocateDataQueryParams = zod.object({
+export const locateDataQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -1556,53 +1549,53 @@ export const dictionariesLocateDataQueryParams = zod.object({
 		),
 });
 
-export const dictionariesLocateDataResponse = zod.object({});
+export const locateDataResponse = zod.object({});
 
 /**
  * (Record) {
  * @summary Update a dictionary record.
  */
-export const dictionariesUpdateDataParams = zod.object({
+export const updateDataParams = zod.object({
 	repo: zod.string().describe('[`types.repo`] data source'),
 	id: zod.string().describe('[`record.id`] for update'),
 });
 
-export const dictionariesUpdateDataQueryParams = zod.object({
+export const updateDataQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 });
 
-export const dictionariesUpdateDataBody = zod.object({});
+export const updateDataBody = zod.object({});
 
-export const dictionariesUpdateDataResponse = zod.object({});
+export const updateDataResponse = zod.object({});
 
 /**
  * (Record) {
  * @summary Update a dictionary record.
  */
-export const dictionariesUpdateData2Params = zod.object({
+export const updateData2Params = zod.object({
 	repo: zod.string().describe('[`types.repo`] data source'),
 	id: zod.string().describe('[`record.id`] for update'),
 });
 
-export const dictionariesUpdateData2QueryParams = zod.object({
+export const updateData2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 });
 
-export const dictionariesUpdateData2Body = zod.object({});
+export const updateData2Body = zod.object({});
 
-export const dictionariesUpdateData2Response = zod.object({});
+export const updateData2Response = zod.object({});
 
 /**
  * (DictionaryList) {
  * @summary Delete custom dictionaries.
  */
-export const dictionariesDeleteTypeQueryParams = zod.object({
+export const deleteTypeMixin3QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -1612,10 +1605,9 @@ export const dictionariesDeleteTypeQueryParams = zod.object({
 		.describe('`types.repo`\n\n// `record.pk`\n repeated string id = 3;'),
 });
 
-export const dictionariesDeleteTypeResponseDataItemFieldsItemKindDefault =
-	'none';
+export const deleteTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
 
-export const dictionariesDeleteTypeResponse = zod
+export const deleteTypeMixin3Response = zod
 	.object({
 		data: zod
 			.array(
@@ -1797,7 +1789,7 @@ export const dictionariesDeleteTypeResponse = zod
 												'duration',
 											])
 											.default(
-												dictionariesDeleteTypeResponseDataItemFieldsItemKindDefault,
+												deleteTypeMixin3ResponseDataItemFieldsItemKindDefault,
 											)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
@@ -1991,11 +1983,11 @@ export const dictionariesDeleteTypeResponse = zod
 /**
  * @summary Lookup dictionaries data types.
  */
-export const dictionariesSearchTypeQuerySortItemDefault = '*';
-export const dictionariesSearchTypeQuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const dictionariesSearchTypeQueryFieldsItemDefault = '*';
+export const searchTypeMixin3QuerySortItemDefault = '*';
+export const searchTypeMixin3QuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchTypeMixin3QueryFieldsItemDefault = '*';
 
-export const dictionariesSearchTypeQueryParams = zod.object({
+export const searchTypeMixin3QueryParams = zod.object({
 	q: zod
 		.string()
 		.optional()
@@ -2032,7 +2024,7 @@ export const dictionariesSearchTypeQueryParams = zod.object({
 		.optional()
 		.describe('Page number of result set of records.\nDefault: 1.'),
 	sort: zod
-		.array(zod.string().regex(dictionariesSearchTypeQuerySortItemRegExp))
+		.array(zod.string().regex(searchTypeMixin3QuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -2045,10 +2037,9 @@ export const dictionariesSearchTypeQueryParams = zod.object({
 		),
 });
 
-export const dictionariesSearchTypeResponseDataItemFieldsItemKindDefault =
-	'none';
+export const searchTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
 
-export const dictionariesSearchTypeResponse = zod
+export const searchTypeMixin3Response = zod
 	.object({
 		data: zod
 			.array(
@@ -2230,7 +2221,7 @@ export const dictionariesSearchTypeResponse = zod
 												'duration',
 											])
 											.default(
-												dictionariesSearchTypeResponseDataItemFieldsItemKindDefault,
+												searchTypeMixin3ResponseDataItemFieldsItemKindDefault,
 											)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
@@ -2425,13 +2416,13 @@ export const dictionariesSearchTypeResponse = zod
  * (Dictionary) {
  * @summary Locate the dictionary type.
  */
-export const dictionariesLocateTypeParams = zod.object({
+export const locateTypeMixin3Params = zod.object({
 	repo: zod.string().describe('`types.repo`'),
 });
 
-export const dictionariesLocateTypeResponseFieldsItemKindDefault = 'none';
+export const locateTypeMixin3ResponseFieldsItemKindDefault = 'none';
 
-export const dictionariesLocateTypeResponse = zod
+export const locateTypeMixin3Response = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -2575,7 +2566,7 @@ export const dictionariesLocateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(dictionariesLocateTypeResponseFieldsItemKindDefault)
+							.default(locateTypeMixin3ResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),
@@ -2737,15 +2728,15 @@ export const dictionariesLocateTypeResponse = zod
  * (Dictionary) {
  * @summary Create custom dictionary.
  */
-export const dictionariesCreateTypeParams = zod.object({
+export const createTypeMixin3Params = zod.object({
 	repo: zod
 		.string()
 		.describe('NEW [`types.repo`] repository name, e.g.: `countries`.'),
 });
 
-export const dictionariesCreateTypeBodyFieldsItemKindDefault = 'none';
+export const createTypeMixin3BodyFieldsItemKindDefault = 'none';
 
-export const dictionariesCreateTypeBody = zod.object({
+export const createTypeMixin3Body = zod.object({
 	about: zod.string().optional(),
 	administered: zod.boolean().optional(),
 	display: zod
@@ -2876,7 +2867,7 @@ export const dictionariesCreateTypeBody = zod.object({
 							'datetime',
 							'duration',
 						])
-						.default(dictionariesCreateTypeBodyFieldsItemKindDefault)
+						.default(createTypeMixin3BodyFieldsItemKindDefault)
 						.describe(
 							'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 						),
@@ -3009,9 +3000,9 @@ export const dictionariesCreateTypeBody = zod.object({
 		),
 });
 
-export const dictionariesCreateTypeResponseFieldsItemKindDefault = 'none';
+export const createTypeMixin3ResponseFieldsItemKindDefault = 'none';
 
-export const dictionariesCreateTypeResponse = zod
+export const createTypeMixin3Response = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -3155,7 +3146,7 @@ export const dictionariesCreateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(dictionariesCreateTypeResponseFieldsItemKindDefault)
+							.default(createTypeMixin3ResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),
@@ -3317,22 +3308,22 @@ export const dictionariesCreateTypeResponse = zod
  * (Dictionary) {
  * @summary Update custom dictionary.
  */
-export const dictionariesUpdateTypeParams = zod.object({
+export const updateTypeMixin3Params = zod.object({
 	repo: zod
 		.string()
 		.describe('[**repo**] name of the dataset type, e.g.: `countries`.'),
 });
 
-export const dictionariesUpdateTypeQueryParams = zod.object({
+export const updateTypeMixin3QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to return into result.'),
 });
 
-export const dictionariesUpdateTypeBodyFieldsItemKindDefault = 'none';
+export const updateTypeMixin3BodyFieldsItemKindDefault = 'none';
 
-export const dictionariesUpdateTypeBody = zod.object({
+export const updateTypeMixin3Body = zod.object({
 	about: zod.string().optional(),
 	administered: zod.boolean().optional(),
 	display: zod
@@ -3463,7 +3454,7 @@ export const dictionariesUpdateTypeBody = zod.object({
 							'datetime',
 							'duration',
 						])
-						.default(dictionariesUpdateTypeBodyFieldsItemKindDefault)
+						.default(updateTypeMixin3BodyFieldsItemKindDefault)
 						.describe(
 							'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 						),
@@ -3596,9 +3587,9 @@ export const dictionariesUpdateTypeBody = zod.object({
 		),
 });
 
-export const dictionariesUpdateTypeResponseFieldsItemKindDefault = 'none';
+export const updateTypeMixin3ResponseFieldsItemKindDefault = 'none';
 
-export const dictionariesUpdateTypeResponse = zod
+export const updateTypeMixin3Response = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -3742,7 +3733,7 @@ export const dictionariesUpdateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(dictionariesUpdateTypeResponseFieldsItemKindDefault)
+							.default(updateTypeMixin3ResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),

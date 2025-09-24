@@ -69,6 +69,7 @@ import collapse from './collapse.svg';
 import columnSelect from './column-select.svg';
 import comment from './comment.svg';
 import conference from './conference.svg';
+import consultativeTransfer from './consultative-transfer.svg';
 import contacts from './contacts.svg';
 import copy from './copy.svg';
 import customChatGateway from './custom-chat-gateway.svg';
@@ -256,6 +257,7 @@ export default objCamelToKebab({
   'call-ringing--filled': callRingingFilled,
   callTransfer,
   'call-transfer--filled': callTransferFilled,
+  consultativeTransfer,
   updateCalls,
 
   caseAuthor,

@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsTimezone,
-	WebitelContactsTimezoneList,
-} from '.././_models';
+import type { ContactsTimezone, ContactsTimezoneList } from '.././_models';
 
-export const getTimezonesDeleteTimezonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezoneList> = {},
-): WebitelContactsTimezoneList => ({
+export const getDeleteTimezonesResponseMock = (
+	overrideResponse: Partial<ContactsTimezoneList> = {},
+): ContactsTimezoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -111,9 +108,9 @@ export const getTimezonesDeleteTimezonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesListTimezonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezoneList> = {},
-): WebitelContactsTimezoneList => ({
+export const getListTimezonesResponseMock = (
+	overrideResponse: Partial<ContactsTimezoneList> = {},
+): ContactsTimezoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -209,9 +206,9 @@ export const getTimezonesListTimezonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesMergeTimezonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezoneList> = {},
-): WebitelContactsTimezoneList => ({
+export const getMergeTimezonesResponseMock = (
+	overrideResponse: Partial<ContactsTimezoneList> = {},
+): ContactsTimezoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -307,9 +304,9 @@ export const getTimezonesMergeTimezonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesResetTimezonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezoneList> = {},
-): WebitelContactsTimezoneList => ({
+export const getResetTimezonesResponseMock = (
+	overrideResponse: Partial<ContactsTimezoneList> = {},
+): ContactsTimezoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -405,9 +402,9 @@ export const getTimezonesResetTimezonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesDeleteTimezoneResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezone> = {},
-): WebitelContactsTimezone => ({
+export const getDeleteTimezoneResponseMock = (
+	overrideResponse: Partial<ContactsTimezone> = {},
+): ContactsTimezone => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -483,9 +480,9 @@ export const getTimezonesDeleteTimezoneResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesLocateTimezoneResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezone> = {},
-): WebitelContactsTimezone => ({
+export const getLocateTimezoneResponseMock = (
+	overrideResponse: Partial<ContactsTimezone> = {},
+): ContactsTimezone => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -561,9 +558,9 @@ export const getTimezonesLocateTimezoneResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesUpdateTimezone2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezoneList> = {},
-): WebitelContactsTimezoneList => ({
+export const getUpdateTimezone2ResponseMock = (
+	overrideResponse: Partial<ContactsTimezoneList> = {},
+): ContactsTimezoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -659,9 +656,9 @@ export const getTimezonesUpdateTimezone2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesUpdateTimezoneResponseMock = (
-	overrideResponse: Partial<WebitelContactsTimezoneList> = {},
-): WebitelContactsTimezoneList => ({
+export const getUpdateTimezoneResponseMock = (
+	overrideResponse: Partial<ContactsTimezoneList> = {},
+): ContactsTimezoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -757,12 +754,12 @@ export const getTimezonesUpdateTimezoneResponseMock = (
 	...overrideResponse,
 });
 
-export const getTimezonesDeleteTimezonesMockHandler = (
+export const getDeleteTimezonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezoneList
+		| ContactsTimezoneList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsTimezoneList> | WebitelContactsTimezoneList),
+		  ) => Promise<ContactsTimezoneList> | ContactsTimezoneList),
 ) => {
 	return http.delete('*/contacts/:contactId/timezones', async (info) => {
 		await delay(1000);
@@ -773,19 +770,19 @@ export const getTimezonesDeleteTimezonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesDeleteTimezonesResponseMock(),
+					: getDeleteTimezonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimezonesListTimezonesMockHandler = (
+export const getListTimezonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezoneList
+		| ContactsTimezoneList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsTimezoneList> | WebitelContactsTimezoneList),
+		  ) => Promise<ContactsTimezoneList> | ContactsTimezoneList),
 ) => {
 	return http.get('*/contacts/:contactId/timezones', async (info) => {
 		await delay(1000);
@@ -796,19 +793,19 @@ export const getTimezonesListTimezonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesListTimezonesResponseMock(),
+					: getListTimezonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimezonesMergeTimezonesMockHandler = (
+export const getMergeTimezonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezoneList
+		| ContactsTimezoneList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsTimezoneList> | WebitelContactsTimezoneList),
+		  ) => Promise<ContactsTimezoneList> | ContactsTimezoneList),
 ) => {
 	return http.post('*/contacts/:contactId/timezones', async (info) => {
 		await delay(1000);
@@ -819,19 +816,19 @@ export const getTimezonesMergeTimezonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesMergeTimezonesResponseMock(),
+					: getMergeTimezonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimezonesResetTimezonesMockHandler = (
+export const getResetTimezonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezoneList
+		| ContactsTimezoneList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsTimezoneList> | WebitelContactsTimezoneList),
+		  ) => Promise<ContactsTimezoneList> | ContactsTimezoneList),
 ) => {
 	return http.put('*/contacts/:contactId/timezones', async (info) => {
 		await delay(1000);
@@ -842,19 +839,19 @@ export const getTimezonesResetTimezonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesResetTimezonesResponseMock(),
+					: getResetTimezonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimezonesDeleteTimezoneMockHandler = (
+export const getDeleteTimezoneMockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezone
+		| ContactsTimezone
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsTimezone> | WebitelContactsTimezone),
+		  ) => Promise<ContactsTimezone> | ContactsTimezone),
 ) => {
 	return http.delete('*/contacts/:contactId/timezones/:etag', async (info) => {
 		await delay(1000);
@@ -865,19 +862,19 @@ export const getTimezonesDeleteTimezoneMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesDeleteTimezoneResponseMock(),
+					: getDeleteTimezoneResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimezonesLocateTimezoneMockHandler = (
+export const getLocateTimezoneMockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezone
+		| ContactsTimezone
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsTimezone> | WebitelContactsTimezone),
+		  ) => Promise<ContactsTimezone> | ContactsTimezone),
 ) => {
 	return http.get('*/contacts/:contactId/timezones/:etag', async (info) => {
 		await delay(1000);
@@ -888,19 +885,19 @@ export const getTimezonesLocateTimezoneMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesLocateTimezoneResponseMock(),
+					: getLocateTimezoneResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimezonesUpdateTimezone2MockHandler = (
+export const getUpdateTimezone2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezoneList
+		| ContactsTimezoneList
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsTimezoneList> | WebitelContactsTimezoneList),
+		  ) => Promise<ContactsTimezoneList> | ContactsTimezoneList),
 ) => {
 	return http.patch('*/contacts/:contactId/timezones/:etag', async (info) => {
 		await delay(1000);
@@ -911,19 +908,19 @@ export const getTimezonesUpdateTimezone2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesUpdateTimezone2ResponseMock(),
+					: getUpdateTimezone2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTimezonesUpdateTimezoneMockHandler = (
+export const getUpdateTimezoneMockHandler = (
 	overrideResponse?:
-		| WebitelContactsTimezoneList
+		| ContactsTimezoneList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsTimezoneList> | WebitelContactsTimezoneList),
+		  ) => Promise<ContactsTimezoneList> | ContactsTimezoneList),
 ) => {
 	return http.put('*/contacts/:contactId/timezones/:etag', async (info) => {
 		await delay(1000);
@@ -934,19 +931,19 @@ export const getTimezonesUpdateTimezoneMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTimezonesUpdateTimezoneResponseMock(),
+					: getUpdateTimezoneResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getTimezonesMock = () => [
-	getTimezonesDeleteTimezonesMockHandler(),
-	getTimezonesListTimezonesMockHandler(),
-	getTimezonesMergeTimezonesMockHandler(),
-	getTimezonesResetTimezonesMockHandler(),
-	getTimezonesDeleteTimezoneMockHandler(),
-	getTimezonesLocateTimezoneMockHandler(),
-	getTimezonesUpdateTimezone2MockHandler(),
-	getTimezonesUpdateTimezoneMockHandler(),
+	getDeleteTimezonesMockHandler(),
+	getListTimezonesMockHandler(),
+	getMergeTimezonesMockHandler(),
+	getResetTimezonesMockHandler(),
+	getDeleteTimezoneMockHandler(),
+	getLocateTimezoneMockHandler(),
+	getUpdateTimezone2MockHandler(),
+	getUpdateTimezoneMockHandler(),
 ];

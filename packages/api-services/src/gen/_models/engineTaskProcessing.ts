@@ -5,10 +5,12 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { EngineLookup } from './engineLookup';
+import type { EngineTaskProcessingProlongationOptions } from './engineTaskProcessingProlongationOptions';
 
 export interface EngineTaskProcessing {
 	enabled?: boolean;
 	formSchema?: EngineLookup;
+	prolongationOptions?: EngineTaskProcessingProlongationOptions;
 	renewalSec?: number;
 	sec?: number;
 }

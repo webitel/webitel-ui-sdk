@@ -8,10 +8,7 @@ import axios from '@aliasedDeps/api-services/axios';
 
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import type {
-	TagsListTagsParams,
-	WebitelKnowledgebaseTagsList,
-} from '.././_models';
+import type { KnowledgebaseTagsList, ListTagsParams } from '.././_models';
 
 // --- header start
 //
@@ -24,10 +21,8 @@ export const // --- title start
 			/**
 			 * @summary List of the all Articles's Tag(s).
 			 */
-			const tagsListTags = <
-				TData = AxiosResponse<WebitelKnowledgebaseTagsList>,
-			>(
-				params?: TagsListTagsParams,
+			const listTags = <TData = AxiosResponse<KnowledgebaseTagsList>>(
+				params?: ListTagsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/spaces/tags', {
@@ -37,8 +32,8 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { tagsListTags };
+			return { listTags };
 		};
-export type TagsListTagsResult = AxiosResponse<WebitelKnowledgebaseTagsList>;
+export type ListTagsResult = AxiosResponse<KnowledgebaseTagsList>;
 
 // --- footer end

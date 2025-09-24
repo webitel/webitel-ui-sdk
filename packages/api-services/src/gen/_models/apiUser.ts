@@ -30,6 +30,8 @@ For example, "chat_name" is shown when an agent connects to chats with clients. 
 	devices?: ApiObjectId[];
 	email?: string;
 	extension?: string;
+	/** When set to true, the user will be required to change their password on next login. */
+	forcePasswordChange?: boolean;
 	hotdesks?: ApiObjectId[];
 	id?: string;
 	license?: ApiLicenseUser[];

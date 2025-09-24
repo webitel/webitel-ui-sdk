@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsVariable,
-	WebitelContactsVariableList,
-} from '.././_models';
+import type { ContactsVariable, ContactsVariableList } from '.././_models';
 
-export const getVariablesDeleteVariablesResponseMock = (
-	overrideResponse: Partial<WebitelContactsVariableList> = {},
-): WebitelContactsVariableList => ({
+export const getDeleteVariablesResponseMock = (
+	overrideResponse: Partial<ContactsVariableList> = {},
+): ContactsVariableList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -95,9 +92,9 @@ export const getVariablesDeleteVariablesResponseMock = (
 	...overrideResponse,
 });
 
-export const getVariablesListVariablesResponseMock = (
-	overrideResponse: Partial<WebitelContactsVariableList> = {},
-): WebitelContactsVariableList => ({
+export const getListVariablesResponseMock = (
+	overrideResponse: Partial<ContactsVariableList> = {},
+): ContactsVariableList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -177,9 +174,9 @@ export const getVariablesListVariablesResponseMock = (
 	...overrideResponse,
 });
 
-export const getVariablesMergeVariablesResponseMock = (
-	overrideResponse: Partial<WebitelContactsVariableList> = {},
-): WebitelContactsVariableList => ({
+export const getMergeVariablesResponseMock = (
+	overrideResponse: Partial<ContactsVariableList> = {},
+): ContactsVariableList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -259,9 +256,9 @@ export const getVariablesMergeVariablesResponseMock = (
 	...overrideResponse,
 });
 
-export const getVariablesResetVariablesResponseMock = (
-	overrideResponse: Partial<WebitelContactsVariableList> = {},
-): WebitelContactsVariableList => ({
+export const getResetVariablesResponseMock = (
+	overrideResponse: Partial<ContactsVariableList> = {},
+): ContactsVariableList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -341,9 +338,9 @@ export const getVariablesResetVariablesResponseMock = (
 	...overrideResponse,
 });
 
-export const getVariablesDeleteVariableResponseMock = (
-	overrideResponse: Partial<WebitelContactsVariable> = {},
-): WebitelContactsVariable => ({
+export const getDeleteVariableResponseMock = (
+	overrideResponse: Partial<ContactsVariable> = {},
+): ContactsVariable => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -406,9 +403,9 @@ export const getVariablesDeleteVariableResponseMock = (
 	...overrideResponse,
 });
 
-export const getVariablesUpdateVariable2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsVariableList> = {},
-): WebitelContactsVariableList => ({
+export const getUpdateVariable2ResponseMock = (
+	overrideResponse: Partial<ContactsVariableList> = {},
+): ContactsVariableList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -488,9 +485,9 @@ export const getVariablesUpdateVariable2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getVariablesUpdateVariableResponseMock = (
-	overrideResponse: Partial<WebitelContactsVariableList> = {},
-): WebitelContactsVariableList => ({
+export const getUpdateVariableResponseMock = (
+	overrideResponse: Partial<ContactsVariableList> = {},
+): ContactsVariableList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -570,12 +567,12 @@ export const getVariablesUpdateVariableResponseMock = (
 	...overrideResponse,
 });
 
-export const getVariablesDeleteVariablesMockHandler = (
+export const getDeleteVariablesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsVariableList
+		| ContactsVariableList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsVariableList> | WebitelContactsVariableList),
+		  ) => Promise<ContactsVariableList> | ContactsVariableList),
 ) => {
 	return http.delete('*/contacts/:contactId/variables', async (info) => {
 		await delay(1000);
@@ -586,19 +583,19 @@ export const getVariablesDeleteVariablesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getVariablesDeleteVariablesResponseMock(),
+					: getDeleteVariablesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getVariablesListVariablesMockHandler = (
+export const getListVariablesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsVariableList
+		| ContactsVariableList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsVariableList> | WebitelContactsVariableList),
+		  ) => Promise<ContactsVariableList> | ContactsVariableList),
 ) => {
 	return http.get('*/contacts/:contactId/variables', async (info) => {
 		await delay(1000);
@@ -609,19 +606,19 @@ export const getVariablesListVariablesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getVariablesListVariablesResponseMock(),
+					: getListVariablesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getVariablesMergeVariablesMockHandler = (
+export const getMergeVariablesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsVariableList
+		| ContactsVariableList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsVariableList> | WebitelContactsVariableList),
+		  ) => Promise<ContactsVariableList> | ContactsVariableList),
 ) => {
 	return http.post('*/contacts/:contactId/variables', async (info) => {
 		await delay(1000);
@@ -632,19 +629,19 @@ export const getVariablesMergeVariablesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getVariablesMergeVariablesResponseMock(),
+					: getMergeVariablesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getVariablesResetVariablesMockHandler = (
+export const getResetVariablesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsVariableList
+		| ContactsVariableList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsVariableList> | WebitelContactsVariableList),
+		  ) => Promise<ContactsVariableList> | ContactsVariableList),
 ) => {
 	return http.put('*/contacts/:contactId/variables', async (info) => {
 		await delay(1000);
@@ -655,19 +652,19 @@ export const getVariablesResetVariablesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getVariablesResetVariablesResponseMock(),
+					: getResetVariablesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getVariablesDeleteVariableMockHandler = (
+export const getDeleteVariableMockHandler = (
 	overrideResponse?:
-		| WebitelContactsVariable
+		| ContactsVariable
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsVariable> | WebitelContactsVariable),
+		  ) => Promise<ContactsVariable> | ContactsVariable),
 ) => {
 	return http.delete('*/contacts/:contactId/variables/:etag', async (info) => {
 		await delay(1000);
@@ -678,19 +675,19 @@ export const getVariablesDeleteVariableMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getVariablesDeleteVariableResponseMock(),
+					: getDeleteVariableResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getVariablesUpdateVariable2MockHandler = (
+export const getUpdateVariable2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsVariableList
+		| ContactsVariableList
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsVariableList> | WebitelContactsVariableList),
+		  ) => Promise<ContactsVariableList> | ContactsVariableList),
 ) => {
 	return http.patch('*/contacts/:contactId/variables/:etag', async (info) => {
 		await delay(1000);
@@ -701,19 +698,19 @@ export const getVariablesUpdateVariable2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getVariablesUpdateVariable2ResponseMock(),
+					: getUpdateVariable2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getVariablesUpdateVariableMockHandler = (
+export const getUpdateVariableMockHandler = (
 	overrideResponse?:
-		| WebitelContactsVariableList
+		| ContactsVariableList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsVariableList> | WebitelContactsVariableList),
+		  ) => Promise<ContactsVariableList> | ContactsVariableList),
 ) => {
 	return http.put('*/contacts/:contactId/variables/:etag', async (info) => {
 		await delay(1000);
@@ -724,18 +721,18 @@ export const getVariablesUpdateVariableMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getVariablesUpdateVariableResponseMock(),
+					: getUpdateVariableResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getVariablesMock = () => [
-	getVariablesDeleteVariablesMockHandler(),
-	getVariablesListVariablesMockHandler(),
-	getVariablesMergeVariablesMockHandler(),
-	getVariablesResetVariablesMockHandler(),
-	getVariablesDeleteVariableMockHandler(),
-	getVariablesUpdateVariable2MockHandler(),
-	getVariablesUpdateVariableMockHandler(),
+	getDeleteVariablesMockHandler(),
+	getListVariablesMockHandler(),
+	getMergeVariablesMockHandler(),
+	getResetVariablesMockHandler(),
+	getDeleteVariableMockHandler(),
+	getUpdateVariable2MockHandler(),
+	getUpdateVariableMockHandler(),
 ];

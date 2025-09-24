@@ -6,77 +6,66 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const cognitiveProfileServiceSearchCognitiveProfileQueryParams =
-	zod.object({
-		page: zod.number().optional(),
-		size: zod.number().optional(),
-		q: zod.string().optional(),
-		sort: zod.string().optional(),
-		fields: zod.array(zod.string()).optional(),
-		id: zod.array(zod.string()).optional(),
-		service: zod.array(zod.enum(['DefaultService', 'STT', 'TTS'])).optional(),
-		enabled: zod.boolean().optional(),
-	});
+export const searchCognitiveProfileQueryParams = zod.object({
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.string()).optional(),
+	service: zod.array(zod.enum(['DefaultService', 'STT', 'TTS'])).optional(),
+	enabled: zod.boolean().optional(),
+});
 
-export const cognitiveProfileServiceSearchCognitiveProfileResponseItemsItemProviderDefault =
+export const searchCognitiveProfileResponseItemsItemProviderDefault =
 	'DefaultProvider';
-export const cognitiveProfileServiceSearchCognitiveProfileResponseItemsItemServiceDefault =
+export const searchCognitiveProfileResponseItemsItemServiceDefault =
 	'DefaultService';
 
-export const cognitiveProfileServiceSearchCognitiveProfileResponse = zod.object(
-	{
-		items: zod
-			.array(
-				zod.object({
-					createdAt: zod.string().optional(),
-					createdBy: zod
-						.object({
-							id: zod.string().optional(),
-							name: zod.string().optional(),
-						})
-						.optional(),
-					default: zod.boolean().optional(),
-					description: zod.string().optional(),
-					enabled: zod.boolean().optional(),
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-					properties: zod.object({}).optional(),
-					provider: zod
-						.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-						.default(
-							cognitiveProfileServiceSearchCognitiveProfileResponseItemsItemProviderDefault,
-						),
-					service: zod
-						.enum(['DefaultService', 'STT', 'TTS'])
-						.default(
-							cognitiveProfileServiceSearchCognitiveProfileResponseItemsItemServiceDefault,
-						),
-					updatedAt: zod.string().optional(),
-					updatedBy: zod
-						.object({
-							id: zod.string().optional(),
-							name: zod.string().optional(),
-						})
-						.optional(),
-				}),
-			)
-			.optional(),
-		next: zod.boolean().optional(),
-	},
-);
+export const searchCognitiveProfileResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				createdAt: zod.string().optional(),
+				createdBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				default: zod.boolean().optional(),
+				description: zod.string().optional(),
+				enabled: zod.boolean().optional(),
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+				provider: zod
+					.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
+					.default(searchCognitiveProfileResponseItemsItemProviderDefault),
+				service: zod
+					.enum(['DefaultService', 'STT', 'TTS'])
+					.default(searchCognitiveProfileResponseItemsItemServiceDefault),
+				updatedAt: zod.string().optional(),
+				updatedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
 
-export const cognitiveProfileServiceCreateCognitiveProfileBodyProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServiceCreateCognitiveProfileBodyServiceDefault =
-	'DefaultService';
+export const createCognitiveProfileBodyProviderDefault = 'DefaultProvider';
+export const createCognitiveProfileBodyServiceDefault = 'DefaultService';
 
-export const cognitiveProfileServiceCreateCognitiveProfileBody = zod
+export const createCognitiveProfileBody = zod
 	.object({
 		default: zod.boolean().optional(),
 		description: zod.string().optional(),
 		enabled: zod.boolean().optional(),
 		name: zod.string(),
-		properties: zod.object({}),
 		provider: zod.enum([
 			'DefaultProvider',
 			'Microsoft',
@@ -87,103 +76,48 @@ export const cognitiveProfileServiceCreateCognitiveProfileBody = zod
 	})
 	.describe('Create cognitive profile request body for TTS and TTS');
 
-export const cognitiveProfileServiceCreateCognitiveProfileResponseProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServiceCreateCognitiveProfileResponseServiceDefault =
-	'DefaultService';
+export const createCognitiveProfileResponseProviderDefault = 'DefaultProvider';
+export const createCognitiveProfileResponseServiceDefault = 'DefaultService';
 
-export const cognitiveProfileServiceCreateCognitiveProfileResponse = zod.object(
-	{
-		createdAt: zod.string().optional(),
-		createdBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		default: zod.boolean().optional(),
-		description: zod.string().optional(),
-		enabled: zod.boolean().optional(),
-		id: zod.string().optional(),
-		name: zod.string().optional(),
-		properties: zod.object({}).optional(),
-		provider: zod
-			.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-			.default(
-				cognitiveProfileServiceCreateCognitiveProfileResponseProviderDefault,
-			),
-		service: zod
-			.enum(['DefaultService', 'STT', 'TTS'])
-			.default(
-				cognitiveProfileServiceCreateCognitiveProfileResponseServiceDefault,
-			),
-		updatedAt: zod.string().optional(),
-		updatedBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-	},
-);
+export const createCognitiveProfileResponse = zod.object({
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	provider: zod
+		.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
+		.default(createCognitiveProfileResponseProviderDefault),
+	service: zod
+		.enum(['DefaultService', 'STT', 'TTS'])
+		.default(createCognitiveProfileResponseServiceDefault),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
 
 /**
  * @summary Remove BackendProfile
  */
-export const cognitiveProfileServiceDeleteCognitiveProfileParams = zod.object({
+export const deleteCognitiveProfileParams = zod.object({
 	id: zod.string(),
 });
 
-export const cognitiveProfileServiceDeleteCognitiveProfileResponseProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServiceDeleteCognitiveProfileResponseServiceDefault =
-	'DefaultService';
+export const deleteCognitiveProfileResponseProviderDefault = 'DefaultProvider';
+export const deleteCognitiveProfileResponseServiceDefault = 'DefaultService';
 
-export const cognitiveProfileServiceDeleteCognitiveProfileResponse = zod.object(
-	{
-		createdAt: zod.string().optional(),
-		createdBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		default: zod.boolean().optional(),
-		description: zod.string().optional(),
-		enabled: zod.boolean().optional(),
-		id: zod.string().optional(),
-		name: zod.string().optional(),
-		properties: zod.object({}).optional(),
-		provider: zod
-			.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-			.default(
-				cognitiveProfileServiceDeleteCognitiveProfileResponseProviderDefault,
-			),
-		service: zod
-			.enum(['DefaultService', 'STT', 'TTS'])
-			.default(
-				cognitiveProfileServiceDeleteCognitiveProfileResponseServiceDefault,
-			),
-		updatedAt: zod.string().optional(),
-		updatedBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-	},
-);
-
-export const cognitiveProfileServiceReadCognitiveProfileParams = zod.object({
-	id: zod.string(),
-});
-
-export const cognitiveProfileServiceReadCognitiveProfileResponseProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServiceReadCognitiveProfileResponseServiceDefault =
-	'DefaultService';
-
-export const cognitiveProfileServiceReadCognitiveProfileResponse = zod.object({
+export const deleteCognitiveProfileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -196,15 +130,12 @@ export const cognitiveProfileServiceReadCognitiveProfileResponse = zod.object({
 	enabled: zod.boolean().optional(),
 	id: zod.string().optional(),
 	name: zod.string().optional(),
-	properties: zod.object({}).optional(),
 	provider: zod
 		.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-		.default(
-			cognitiveProfileServiceReadCognitiveProfileResponseProviderDefault,
-		),
+		.default(deleteCognitiveProfileResponseProviderDefault),
 	service: zod
 		.enum(['DefaultService', 'STT', 'TTS'])
-		.default(cognitiveProfileServiceReadCognitiveProfileResponseServiceDefault),
+		.default(deleteCognitiveProfileResponseServiceDefault),
 	updatedAt: zod.string().optional(),
 	updatedBy: zod
 		.object({
@@ -214,37 +145,66 @@ export const cognitiveProfileServiceReadCognitiveProfileResponse = zod.object({
 		.optional(),
 });
 
-export const cognitiveProfileServicePatchCognitiveProfileParams = zod.object({
+export const readCognitiveProfileParams = zod.object({
 	id: zod.string(),
 });
 
-export const cognitiveProfileServicePatchCognitiveProfileBodyProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServicePatchCognitiveProfileBodyServiceDefault =
-	'DefaultService';
+export const readCognitiveProfileResponseProviderDefault = 'DefaultProvider';
+export const readCognitiveProfileResponseServiceDefault = 'DefaultService';
 
-export const cognitiveProfileServicePatchCognitiveProfileBody = zod.object({
+export const readCognitiveProfileResponse = zod.object({
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	id: zod.string().optional(),
+	name: zod.string().optional(),
+	provider: zod
+		.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
+		.default(readCognitiveProfileResponseProviderDefault),
+	service: zod
+		.enum(['DefaultService', 'STT', 'TTS'])
+		.default(readCognitiveProfileResponseServiceDefault),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
+});
+
+export const patchCognitiveProfileParams = zod.object({
+	id: zod.string(),
+});
+
+export const patchCognitiveProfileBodyProviderDefault = 'DefaultProvider';
+export const patchCognitiveProfileBodyServiceDefault = 'DefaultService';
+
+export const patchCognitiveProfileBody = zod.object({
 	default: zod.boolean().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
 	fields: zod.array(zod.string()).optional(),
-	id: zod.string().optional(),
 	name: zod.string().optional(),
-	properties: zod.object({}).optional(),
 	provider: zod
 		.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-		.default(cognitiveProfileServicePatchCognitiveProfileBodyProviderDefault),
+		.default(patchCognitiveProfileBodyProviderDefault),
 	service: zod
 		.enum(['DefaultService', 'STT', 'TTS'])
-		.default(cognitiveProfileServicePatchCognitiveProfileBodyServiceDefault),
+		.default(patchCognitiveProfileBodyServiceDefault),
 });
 
-export const cognitiveProfileServicePatchCognitiveProfileResponseProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServicePatchCognitiveProfileResponseServiceDefault =
-	'DefaultService';
+export const patchCognitiveProfileResponseProviderDefault = 'DefaultProvider';
+export const patchCognitiveProfileResponseServiceDefault = 'DefaultService';
 
-export const cognitiveProfileServicePatchCognitiveProfileResponse = zod.object({
+export const patchCognitiveProfileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -257,17 +217,12 @@ export const cognitiveProfileServicePatchCognitiveProfileResponse = zod.object({
 	enabled: zod.boolean().optional(),
 	id: zod.string().optional(),
 	name: zod.string().optional(),
-	properties: zod.object({}).optional(),
 	provider: zod
 		.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-		.default(
-			cognitiveProfileServicePatchCognitiveProfileResponseProviderDefault,
-		),
+		.default(patchCognitiveProfileResponseProviderDefault),
 	service: zod
 		.enum(['DefaultService', 'STT', 'TTS'])
-		.default(
-			cognitiveProfileServicePatchCognitiveProfileResponseServiceDefault,
-		),
+		.default(patchCognitiveProfileResponseServiceDefault),
 	updatedAt: zod.string().optional(),
 	updatedBy: zod
 		.object({
@@ -277,92 +232,76 @@ export const cognitiveProfileServicePatchCognitiveProfileResponse = zod.object({
 		.optional(),
 });
 
-export const cognitiveProfileServiceUpdateCognitiveProfileParams = zod.object({
+export const updateCognitiveProfileParams = zod.object({
 	id: zod.string(),
 });
 
-export const cognitiveProfileServiceUpdateCognitiveProfileBodyProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServiceUpdateCognitiveProfileBodyServiceDefault =
-	'DefaultService';
+export const updateCognitiveProfileBodyProviderDefault = 'DefaultProvider';
+export const updateCognitiveProfileBodyServiceDefault = 'DefaultService';
 
-export const cognitiveProfileServiceUpdateCognitiveProfileBody = zod.object({
+export const updateCognitiveProfileBody = zod.object({
+	default: zod.boolean().optional(),
+	description: zod.string().optional(),
+	enabled: zod.boolean().optional(),
+	name: zod.string().optional(),
+	provider: zod
+		.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
+		.default(updateCognitiveProfileBodyProviderDefault),
+	service: zod
+		.enum(['DefaultService', 'STT', 'TTS'])
+		.default(updateCognitiveProfileBodyServiceDefault),
+});
+
+export const updateCognitiveProfileResponseProviderDefault = 'DefaultProvider';
+export const updateCognitiveProfileResponseServiceDefault = 'DefaultService';
+
+export const updateCognitiveProfileResponse = zod.object({
+	createdAt: zod.string().optional(),
+	createdBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
 	default: zod.boolean().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
 	id: zod.string().optional(),
 	name: zod.string().optional(),
-	properties: zod.object({}).optional(),
 	provider: zod
 		.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-		.default(cognitiveProfileServiceUpdateCognitiveProfileBodyProviderDefault),
+		.default(updateCognitiveProfileResponseProviderDefault),
 	service: zod
 		.enum(['DefaultService', 'STT', 'TTS'])
-		.default(cognitiveProfileServiceUpdateCognitiveProfileBodyServiceDefault),
+		.default(updateCognitiveProfileResponseServiceDefault),
+	updatedAt: zod.string().optional(),
+	updatedBy: zod
+		.object({
+			id: zod.string().optional(),
+			name: zod.string().optional(),
+		})
+		.optional(),
 });
-
-export const cognitiveProfileServiceUpdateCognitiveProfileResponseProviderDefault =
-	'DefaultProvider';
-export const cognitiveProfileServiceUpdateCognitiveProfileResponseServiceDefault =
-	'DefaultService';
-
-export const cognitiveProfileServiceUpdateCognitiveProfileResponse = zod.object(
-	{
-		createdAt: zod.string().optional(),
-		createdBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-		default: zod.boolean().optional(),
-		description: zod.string().optional(),
-		enabled: zod.boolean().optional(),
-		id: zod.string().optional(),
-		name: zod.string().optional(),
-		properties: zod.object({}).optional(),
-		provider: zod
-			.enum(['DefaultProvider', 'Microsoft', 'Google', 'ElevenLabs'])
-			.default(
-				cognitiveProfileServiceUpdateCognitiveProfileResponseProviderDefault,
-			),
-		service: zod
-			.enum(['DefaultService', 'STT', 'TTS'])
-			.default(
-				cognitiveProfileServiceUpdateCognitiveProfileResponseServiceDefault,
-			),
-		updatedAt: zod.string().optional(),
-		updatedBy: zod
-			.object({
-				id: zod.string().optional(),
-				name: zod.string().optional(),
-			})
-			.optional(),
-	},
-);
 
 /**
  * @summary Search Voices
  */
-export const cognitiveProfileServiceSearchCognitiveProfileVoicesParams =
-	zod.object({
-		id: zod.string(),
-	});
+export const searchCognitiveProfileVoicesParams = zod.object({
+	id: zod.string(),
+});
 
-export const cognitiveProfileServiceSearchCognitiveProfileVoicesQueryParams =
-	zod.object({
-		q: zod.string().optional(),
-		key: zod.string().optional(),
-	});
+export const searchCognitiveProfileVoicesQueryParams = zod.object({
+	q: zod.string().optional(),
+	key: zod.string().optional(),
+});
 
-export const cognitiveProfileServiceSearchCognitiveProfileVoicesResponse =
-	zod.object({
-		items: zod
-			.array(
-				zod.object({
-					id: zod.string().optional(),
-					name: zod.string().optional(),
-				}),
-			)
-			.optional(),
-	});
+export const searchCognitiveProfileVoicesResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				id: zod.string().optional(),
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+});

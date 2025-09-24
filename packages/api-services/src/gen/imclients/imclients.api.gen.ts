@@ -9,9 +9,9 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	IMClientsListIMClientsParams,
-	WebitelContactsEmptyResponse,
-	WebitelContactsIMClientList,
+	ContactsEmptyResponse,
+	ContactsIMClientList,
+	ListIMClientsParams,
 } from '.././_models';
 
 // --- header start
@@ -25,11 +25,9 @@ export const // --- title start
 			/**
 			 * @summary Search IM client links
 			 */
-			const iMClientsListIMClients = <
-				TData = AxiosResponse<WebitelContactsIMClientList>,
-			>(
+			const listIMClients = <TData = AxiosResponse<ContactsIMClientList>>(
 				contactId: string,
-				params?: IMClientsListIMClientsParams,
+				params?: ListIMClientsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/imclients`, {
@@ -37,9 +35,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const iMClientsDeleteIMClient = <
-				TData = AxiosResponse<WebitelContactsEmptyResponse>,
-			>(
+			const deleteIMClient = <TData = AxiosResponse<ContactsEmptyResponse>>(
 				contactId: string,
 				id: string,
 				options?: AxiosRequestConfig,
@@ -48,11 +44,9 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { iMClientsListIMClients, iMClientsDeleteIMClient };
+			return { listIMClients, deleteIMClient };
 		};
-export type IMClientsListIMClientsResult =
-	AxiosResponse<WebitelContactsIMClientList>;
-export type IMClientsDeleteIMClientResult =
-	AxiosResponse<WebitelContactsEmptyResponse>;
+export type ListIMClientsResult = AxiosResponse<ContactsIMClientList>;
+export type DeleteIMClientResult = AxiosResponse<ContactsEmptyResponse>;
 
 // --- footer end

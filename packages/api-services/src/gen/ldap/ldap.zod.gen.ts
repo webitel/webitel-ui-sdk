@@ -9,12 +9,12 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Delete LDAP profile(s) ...
  */
-export const lDAPDeleteLDAPCatalog2Body = zod.object({
+export const deleteLDAPCatalog2Body = zod.object({
 	id: zod.string().optional(),
 	relatedObjects: zod.boolean().optional(),
 });
 
-export const lDAPDeleteLDAPCatalog2Response = zod.object({
+export const deleteLDAPCatalog2Response = zod.object({
 	baseDn: zod.string().optional(),
 	bind: zod
 		.string()
@@ -154,7 +154,7 @@ export const lDAPDeleteLDAPCatalog2Response = zod.object({
 /**
  * @summary Search for LDAP directories ...
  */
-export const lDAPSearchLDAPCatalogQueryParams = zod.object({
+export const searchLDAPCatalogQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -184,7 +184,7 @@ export const lDAPSearchLDAPCatalogQueryParams = zod.object({
 		),
 });
 
-export const lDAPSearchLDAPCatalogResponse = zod.object({
+export const searchLDAPCatalogResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -332,7 +332,7 @@ export const lDAPSearchLDAPCatalogResponse = zod.object({
 /**
  * @summary Create LDAP profile
  */
-export const lDAPCreateLDAPCatalogBody = zod.object({
+export const createLDAPCatalogBody = zod.object({
 	baseDn: zod.string().optional(),
 	bind: zod
 		.string()
@@ -469,7 +469,7 @@ export const lDAPCreateLDAPCatalogBody = zod.object({
 	username: zod.string().optional(),
 });
 
-export const lDAPCreateLDAPCatalogResponse = zod.object({
+export const createLDAPCatalogResponse = zod.object({
 	baseDn: zod.string().optional(),
 	bind: zod
 		.string()
@@ -609,7 +609,7 @@ export const lDAPCreateLDAPCatalogResponse = zod.object({
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const lDAPLDAPSearch4QueryParams = zod.object({
+export const lDAPSearch4QueryParams = zod.object({
 	catalogId: zod
 		.string()
 		.optional()
@@ -654,7 +654,7 @@ export const lDAPLDAPSearch4QueryParams = zod.object({
 	attributes: zod.array(zod.string()).optional().describe('AttributeSelection'),
 });
 
-export const lDAPLDAPSearch4Response = zod.object({
+export const lDAPSearch4Response = zod.object({
 	controls: zod
 		.array(
 			zod.object({
@@ -674,7 +674,7 @@ export const lDAPLDAPSearch4Response = zod.object({
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const lDAPLDAPSearch3Body = zod.object({
+export const lDAPSearch3Body = zod.object({
 	attributes: zod.array(zod.string()).optional(),
 	baseObject: zod.string().optional(),
 	bind: zod
@@ -710,7 +710,7 @@ export const lDAPLDAPSearch3Body = zod.object({
 	username: zod.string().optional(),
 });
 
-export const lDAPLDAPSearch3Response = zod.object({
+export const lDAPSearch3Response = zod.object({
 	controls: zod
 		.array(
 			zod.object({
@@ -730,11 +730,11 @@ export const lDAPLDAPSearch3Response = zod.object({
 /**
  * @summary Update LDAP profile details
  */
-export const lDAPUpdateLDAPCatalog2Params = zod.object({
+export const updateLDAPCatalog2Params = zod.object({
 	'catalog.id': zod.string().describe('identity\nint64 dc = 1;'),
 });
 
-export const lDAPUpdateLDAPCatalog2Body = zod.object({
+export const updateLDAPCatalog2Body = zod.object({
 	catalog: zod
 		.object({
 			baseDn: zod.string().optional(),
@@ -876,7 +876,7 @@ export const lDAPUpdateLDAPCatalog2Body = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const lDAPUpdateLDAPCatalog2Response = zod.object({
+export const updateLDAPCatalog2Response = zod.object({
 	baseDn: zod.string().optional(),
 	bind: zod
 		.string()
@@ -1016,11 +1016,11 @@ export const lDAPUpdateLDAPCatalog2Response = zod.object({
 /**
  * @summary Update LDAP profile details
  */
-export const lDAPUpdateLDAPCatalogParams = zod.object({
+export const updateLDAPCatalogParams = zod.object({
 	'catalog.id': zod.string().describe('identity\nint64 dc = 1;'),
 });
 
-export const lDAPUpdateLDAPCatalogBody = zod.object({
+export const updateLDAPCatalogBody = zod.object({
 	catalog: zod
 		.object({
 			baseDn: zod.string().optional(),
@@ -1162,7 +1162,7 @@ export const lDAPUpdateLDAPCatalogBody = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const lDAPUpdateLDAPCatalogResponse = zod.object({
+export const updateLDAPCatalogResponse = zod.object({
 	baseDn: zod.string().optional(),
 	bind: zod
 		.string()
@@ -1299,11 +1299,11 @@ export const lDAPUpdateLDAPCatalogResponse = zod.object({
 	username: zod.string().optional(),
 });
 
-export const lDAPCreateLDAPTemplateParams = zod.object({
+export const createLDAPTemplateParams = zod.object({
 	'catalog.id': zod.string().describe('identifier'),
 });
 
-export const lDAPCreateLDAPTemplateBody = zod.object({
+export const createLDAPTemplateBody = zod.object({
 	agent: zod.object({}).optional(),
 	baseDn: zod.string().optional(),
 	catalog: zod
@@ -1336,7 +1336,7 @@ export const lDAPCreateLDAPTemplateBody = zod.object({
 	user: zod.object({}).optional(),
 });
 
-export const lDAPCreateLDAPTemplateResponse = zod.object({
+export const createLDAPTemplateResponse = zod.object({
 	agent: zod.object({}).optional(),
 	baseDn: zod.string().optional(),
 	catalog: zod
@@ -1373,11 +1373,11 @@ export const lDAPCreateLDAPTemplateResponse = zod.object({
 /**
  * @summary (ResyncLDAPResponse) {
  */
-export const lDAPSearchLDAProcessParams = zod.object({
+export const searchLDAProcessParams = zod.object({
 	catalog_id: zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
 });
 
-export const lDAPSearchLDAProcessQueryParams = zod.object({
+export const searchLDAProcessQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -1402,7 +1402,7 @@ export const lDAPSearchLDAProcessQueryParams = zod.object({
 	disabled: zod.boolean().optional().describe('deleted'),
 });
 
-export const lDAPSearchLDAProcessResponse = zod.object({
+export const searchLDAProcessResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -1457,13 +1457,13 @@ export const lDAPSearchLDAProcessResponse = zod.object({
  * (ResyncLDAPResponse) {
  * @summary Resync LDAP directory catalog changes ...
  */
-export const lDAPResyncLDAPCatalogParams = zod.object({
+export const resyncLDAPCatalogParams = zod.object({
 	catalog_id: zod
 		.string()
 		.describe('LDAP Catalog unique IDentifier to sync with\n\ncatalog_id'),
 });
 
-export const lDAPResyncLDAPCatalogBody = zod.object({
+export const resyncLDAPCatalogBody = zod.object({
 	options: zod
 		.object({
 			linkExistingObjects: zod.boolean().optional(),
@@ -1474,7 +1474,7 @@ export const lDAPResyncLDAPCatalogBody = zod.object({
 		.optional(),
 });
 
-export const lDAPResyncLDAPCatalogResponse = zod.object({
+export const resyncLDAPCatalogResponse = zod.object({
 	completeAt: zod
 		.string()
 		.optional()
@@ -1520,7 +1520,7 @@ export const lDAPResyncLDAPCatalogResponse = zod.object({
 /**
  * @summary (ResyncLDAPResponse) {
  */
-export const lDAPLocateLDAProcessParams = zod.object({
+export const locateLDAProcessParams = zod.object({
 	catalog_id: zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
 	id: zod
 		.array(zod.string())
@@ -1530,7 +1530,7 @@ export const lDAPLocateLDAProcessParams = zod.object({
 		),
 });
 
-export const lDAPLocateLDAProcessQueryParams = zod.object({
+export const locateLDAProcessQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -1549,7 +1549,7 @@ export const lDAPLocateLDAProcessQueryParams = zod.object({
 	disabled: zod.boolean().optional().describe('deleted'),
 });
 
-export const lDAPLocateLDAProcessResponse = zod.object({
+export const locateLDAProcessResponse = zod.object({
 	completeAt: zod
 		.string()
 		.optional()
@@ -1595,7 +1595,7 @@ export const lDAPLocateLDAProcessResponse = zod.object({
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const lDAPLDAPSearch2Params = zod.object({
+export const lDAPSearch2Params = zod.object({
 	catalog_id: zod
 		.string()
 		.describe(
@@ -1603,7 +1603,7 @@ export const lDAPLDAPSearch2Params = zod.object({
 		),
 });
 
-export const lDAPLDAPSearch2QueryParams = zod.object({
+export const lDAPSearch2QueryParams = zod.object({
 	url: zod
 		.string()
 		.optional()
@@ -1642,7 +1642,7 @@ export const lDAPLDAPSearch2QueryParams = zod.object({
 	attributes: zod.array(zod.string()).optional().describe('AttributeSelection'),
 });
 
-export const lDAPLDAPSearch2Response = zod.object({
+export const lDAPSearch2Response = zod.object({
 	controls: zod
 		.array(
 			zod.object({
@@ -1662,7 +1662,7 @@ export const lDAPLDAPSearch2Response = zod.object({
 /**
  * @summary LDAPSearch performs LDAP Search operation ...
  */
-export const lDAPLDAPSearchParams = zod.object({
+export const lDAPSearchParams = zod.object({
 	catalog_id: zod
 		.string()
 		.describe(
@@ -1670,7 +1670,7 @@ export const lDAPLDAPSearchParams = zod.object({
 		),
 });
 
-export const lDAPLDAPSearchBody = zod.object({
+export const lDAPSearchBody = zod.object({
 	attributes: zod.array(zod.string()).optional(),
 	baseObject: zod.string().optional(),
 	bind: zod
@@ -1705,7 +1705,7 @@ export const lDAPLDAPSearchBody = zod.object({
 	username: zod.string().optional(),
 });
 
-export const lDAPLDAPSearchResponse = zod.object({
+export const lDAPSearchResponse = zod.object({
 	controls: zod
 		.array(
 			zod.object({
@@ -1722,11 +1722,11 @@ export const lDAPLDAPSearchResponse = zod.object({
 	resultCode: zod.number().optional(),
 });
 
-export const lDAPDeleteLDAPTemplate2Params = zod.object({
+export const deleteLDAPTemplate2Params = zod.object({
 	catalog_id: zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
 });
 
-export const lDAPDeleteLDAPTemplate2Body = zod.object({
+export const deleteLDAPTemplate2Body = zod.object({
 	baseDn: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	enabled: zod.boolean().optional(),
@@ -1740,7 +1740,7 @@ export const lDAPDeleteLDAPTemplate2Body = zod.object({
 	sort: zod.array(zod.string()).optional(),
 });
 
-export const lDAPDeleteLDAPTemplate2Response = zod.object({
+export const deleteLDAPTemplate2Response = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -1782,11 +1782,11 @@ export const lDAPDeleteLDAPTemplate2Response = zod.object({
 	page: zod.number().optional(),
 });
 
-export const lDAPSearchLDAPTemplateParams = zod.object({
+export const searchLDAPTemplateParams = zod.object({
 	catalog_id: zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
 });
 
-export const lDAPSearchLDAPTemplateQueryParams = zod.object({
+export const searchLDAPTemplateQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -1811,7 +1811,7 @@ export const lDAPSearchLDAPTemplateQueryParams = zod.object({
 	disabled: zod.boolean().optional(),
 });
 
-export const lDAPSearchLDAPTemplateResponse = zod.object({
+export const searchLDAPTemplateResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -1853,7 +1853,7 @@ export const lDAPSearchLDAPTemplateResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const lDAPDeleteLDAPTemplateParams = zod.object({
+export const deleteLDAPTemplateParams = zod.object({
 	catalog_id: zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
 	id: zod
 		.array(zod.string())
@@ -1863,7 +1863,7 @@ export const lDAPDeleteLDAPTemplateParams = zod.object({
 		),
 });
 
-export const lDAPDeleteLDAPTemplateBody = zod.object({
+export const deleteLDAPTemplateBody = zod.object({
 	baseDn: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	enabled: zod.boolean().optional(),
@@ -1877,7 +1877,7 @@ export const lDAPDeleteLDAPTemplateBody = zod.object({
 	sort: zod.array(zod.string()).optional(),
 });
 
-export const lDAPDeleteLDAPTemplateResponse = zod.object({
+export const deleteLDAPTemplateResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -1919,7 +1919,7 @@ export const lDAPDeleteLDAPTemplateResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const lDAPLocateLDAPTemplateParams = zod.object({
+export const locateLDAPTemplateParams = zod.object({
 	catalog_id: zod.string().describe('REQUIRED. Parent LDAP catalog IDentifier'),
 	id: zod
 		.array(zod.string())
@@ -1929,7 +1929,7 @@ export const lDAPLocateLDAPTemplateParams = zod.object({
 		),
 });
 
-export const lDAPLocateLDAPTemplateQueryParams = zod.object({
+export const locateLDAPTemplateQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -1948,7 +1948,7 @@ export const lDAPLocateLDAPTemplateQueryParams = zod.object({
 	disabled: zod.boolean().optional(),
 });
 
-export const lDAPLocateLDAPTemplateResponse = zod.object({
+export const locateLDAPTemplateResponse = zod.object({
 	agent: zod.object({}).optional(),
 	baseDn: zod.string().optional(),
 	catalog: zod
@@ -1985,15 +1985,15 @@ export const lDAPLocateLDAPTemplateResponse = zod.object({
 /**
  * @summary Delete LDAP profile(s) ...
  */
-export const lDAPDeleteLDAPCatalogParams = zod.object({
+export const deleteLDAPCatalogParams = zod.object({
 	id: zod.string().describe('catalog id'),
 });
 
-export const lDAPDeleteLDAPCatalogQueryParams = zod.object({
+export const deleteLDAPCatalogQueryParams = zod.object({
 	relatedObjects: zod.boolean().optional().describe('WITH objects bound to ?'),
 });
 
-export const lDAPDeleteLDAPCatalogResponse = zod.object({
+export const deleteLDAPCatalogResponse = zod.object({
 	baseDn: zod.string().optional(),
 	bind: zod
 		.string()
@@ -2133,7 +2133,7 @@ export const lDAPDeleteLDAPCatalogResponse = zod.object({
 /**
  * @summary Read LDAP catalog profile by .id
  */
-export const lDAPLocateLDAPCatalogParams = zod.object({
+export const locateLDAPCatalogParams = zod.object({
 	id: zod
 		.array(zod.string())
 		.min(1)
@@ -2142,7 +2142,7 @@ export const lDAPLocateLDAPCatalogParams = zod.object({
 		),
 });
 
-export const lDAPLocateLDAPCatalogQueryParams = zod.object({
+export const locateLDAPCatalogQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -2166,7 +2166,7 @@ export const lDAPLocateLDAPCatalogQueryParams = zod.object({
 		),
 });
 
-export const lDAPLocateLDAPCatalogResponse = zod.object({
+export const locateLDAPCatalogResponse = zod.object({
 	baseDn: zod.string().optional(),
 	bind: zod
 		.string()
@@ -2303,12 +2303,12 @@ export const lDAPLocateLDAPCatalogResponse = zod.object({
 	username: zod.string().optional(),
 });
 
-export const lDAPUpdateLDAPTemplateParams = zod.object({
+export const updateLDAPTemplateParams = zod.object({
 	'template.catalog.id': zod.string().describe('identifier'),
 	'template.id': zod.string().describe('ID unique'),
 });
 
-export const lDAPUpdateLDAPTemplateBody = zod.object({
+export const updateLDAPTemplateBody = zod.object({
 	fields: zod.array(zod.string()).optional(),
 	template: zod
 		.object({
@@ -2346,7 +2346,7 @@ export const lDAPUpdateLDAPTemplateBody = zod.object({
 		.describe('Template changes.'),
 });
 
-export const lDAPUpdateLDAPTemplateResponse = zod.object({
+export const updateLDAPTemplateResponse = zod.object({
 	agent: zod.object({}).optional(),
 	baseDn: zod.string().optional(),
 	catalog: zod
@@ -2380,12 +2380,12 @@ export const lDAPUpdateLDAPTemplateResponse = zod.object({
 	user: zod.object({}).optional(),
 });
 
-export const lDAPUpdateLDAPTemplate2Params = zod.object({
+export const updateLDAPTemplate2Params = zod.object({
 	'template.catalog.id': zod.string().describe('identifier'),
 	'template.id': zod.string().describe('ID unique'),
 });
 
-export const lDAPUpdateLDAPTemplate2Body = zod.object({
+export const updateLDAPTemplate2Body = zod.object({
 	fields: zod.array(zod.string()).optional(),
 	template: zod
 		.object({
@@ -2423,7 +2423,7 @@ export const lDAPUpdateLDAPTemplate2Body = zod.object({
 		.describe('Template changes.'),
 });
 
-export const lDAPUpdateLDAPTemplate2Response = zod.object({
+export const updateLDAPTemplate2Response = zod.object({
 	agent: zod.object({}).optional(),
 	baseDn: zod.string().optional(),
 	catalog: zod

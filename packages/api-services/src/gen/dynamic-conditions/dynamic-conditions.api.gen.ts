@@ -9,13 +9,13 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	DynamicConditionsListConditionsParams,
-	DynamicConditionsLocateConditionParams,
-	WebitelContactsCondition,
-	WebitelContactsConditionList,
-	WebitelContactsDynamicConditionsCreateConditionBody,
-	WebitelContactsInputCondition,
-	WebitelContactsLocateConditionResponse,
+	ContactsCondition,
+	ContactsConditionList,
+	ContactsInputCondition,
+	ContactsLocateConditionResponse,
+	DynamicConditionsCreateConditionBody,
+	ListConditionsParams,
+	LocateConditionParams,
 } from '.././_models';
 
 // --- header start
@@ -29,9 +29,7 @@ export const // --- title start
 			/**
 			 * @summary Delete a condition
 			 */
-			const dynamicConditionsDeleteCondition = <
-				TData = AxiosResponse<WebitelContactsCondition>,
-			>(
+			const deleteCondition = <TData = AxiosResponse<ContactsCondition>>(
 				id: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -40,11 +38,11 @@ export const // --- title start
 			/**
 			 * @summary Locate a condition by ID
 			 */
-			const dynamicConditionsLocateCondition = <
-				TData = AxiosResponse<WebitelContactsLocateConditionResponse>,
+			const locateCondition = <
+				TData = AxiosResponse<ContactsLocateConditionResponse>,
 			>(
 				id: string,
-				params?: DynamicConditionsLocateConditionParams,
+				params?: LocateConditionParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/groups/conditions/${id}`, {
@@ -55,43 +53,37 @@ export const // --- title start
 			/**
 			 * @summary Update an existing condition
 			 */
-			const dynamicConditionsUpdateCondition2 = <
-				TData = AxiosResponse<WebitelContactsCondition>,
-			>(
+			const updateCondition2 = <TData = AxiosResponse<ContactsCondition>>(
 				id: string,
-				webitelContactsInputCondition: WebitelContactsInputCondition,
+				contactsInputCondition: ContactsInputCondition,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/groups/conditions/${id}`,
-					webitelContactsInputCondition,
+					contactsInputCondition,
 					options,
 				);
 			};
 			/**
 			 * @summary Update an existing condition
 			 */
-			const dynamicConditionsUpdateCondition = <
-				TData = AxiosResponse<WebitelContactsCondition>,
-			>(
+			const updateCondition = <TData = AxiosResponse<ContactsCondition>>(
 				id: string,
-				webitelContactsInputCondition: WebitelContactsInputCondition,
+				contactsInputCondition: ContactsInputCondition,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/groups/conditions/${id}`,
-					webitelContactsInputCondition,
+					contactsInputCondition,
 					options,
 				);
 			};
 			/**
 			 * @summary Retrieve a list of conditions
 			 */
-			const dynamicConditionsListConditions = <
-				TData = AxiosResponse<WebitelContactsConditionList>,
-			>(
+			const listConditions = <TData = AxiosResponse<ContactsConditionList>>(
 				groupId: string,
-				params?: DynamicConditionsListConditionsParams,
+				params?: ListConditionsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/groups/${groupId}/conditions`, {
@@ -102,41 +94,34 @@ export const // --- title start
 			/**
 			 * @summary Create a new condition
 			 */
-			const dynamicConditionsCreateCondition = <
-				TData = AxiosResponse<WebitelContactsCondition>,
-			>(
+			const createCondition = <TData = AxiosResponse<ContactsCondition>>(
 				groupId: string,
-				webitelContactsDynamicConditionsCreateConditionBody: WebitelContactsDynamicConditionsCreateConditionBody,
+				dynamicConditionsCreateConditionBody: DynamicConditionsCreateConditionBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/contacts/groups/${groupId}/conditions`,
-					webitelContactsDynamicConditionsCreateConditionBody,
+					dynamicConditionsCreateConditionBody,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				dynamicConditionsDeleteCondition,
-				dynamicConditionsLocateCondition,
-				dynamicConditionsUpdateCondition2,
-				dynamicConditionsUpdateCondition,
-				dynamicConditionsListConditions,
-				dynamicConditionsCreateCondition,
+				deleteCondition,
+				locateCondition,
+				updateCondition2,
+				updateCondition,
+				listConditions,
+				createCondition,
 			};
 		};
-export type DynamicConditionsDeleteConditionResult =
-	AxiosResponse<WebitelContactsCondition>;
-export type DynamicConditionsLocateConditionResult =
-	AxiosResponse<WebitelContactsLocateConditionResponse>;
-export type DynamicConditionsUpdateCondition2Result =
-	AxiosResponse<WebitelContactsCondition>;
-export type DynamicConditionsUpdateConditionResult =
-	AxiosResponse<WebitelContactsCondition>;
-export type DynamicConditionsListConditionsResult =
-	AxiosResponse<WebitelContactsConditionList>;
-export type DynamicConditionsCreateConditionResult =
-	AxiosResponse<WebitelContactsCondition>;
+export type DeleteConditionResult = AxiosResponse<ContactsCondition>;
+export type LocateConditionResult =
+	AxiosResponse<ContactsLocateConditionResponse>;
+export type UpdateCondition2Result = AxiosResponse<ContactsCondition>;
+export type UpdateConditionResult = AxiosResponse<ContactsCondition>;
+export type ListConditionsResult = AxiosResponse<ContactsConditionList>;
+export type CreateConditionResult = AxiosResponse<ContactsCondition>;
 
 // --- footer end

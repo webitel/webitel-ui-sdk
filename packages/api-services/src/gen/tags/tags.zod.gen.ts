@@ -9,12 +9,12 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary List of the all Articles's Tag(s).
  */
-export const tagsListTagsQueryParams = zod.object({
+export const listTagsQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 });
 
-export const tagsListTagsResponse = zod.object({
+export const listTagsResponse = zod.object({
 	data: zod
 		.array(
 			zod.object({

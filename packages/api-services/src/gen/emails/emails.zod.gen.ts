@@ -9,23 +9,23 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Remove email address(es) of the contact.
  */
-export const emailsDeleteEmailsParams = zod.object({
+export const deleteEmailsParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const emailsDeleteEmailsQueryEtagItemRegExp = /^.+$/;
+export const deleteEmailsQueryEtagItemRegExp = /^.+$/;
 
-export const emailsDeleteEmailsQueryParams = zod.object({
+export const deleteEmailsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 	etag: zod
-		.array(zod.string().regex(emailsDeleteEmailsQueryEtagItemRegExp))
+		.array(zod.string().regex(deleteEmailsQueryEtagItemRegExp))
 		.describe('Set of unique ID(s) to remove.'),
 });
 
-export const emailsDeleteEmailsResponse = zod
+export const deleteEmailsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -136,11 +136,11 @@ export const emailsDeleteEmailsResponse = zod
 /**
  * @summary Locates email address(es) of the contact.
  */
-export const emailsListEmailsParams = zod.object({
+export const listEmailsParams = zod.object({
 	contact_id: zod.string().describe('The Contact ID linked with.'),
 });
 
-export const emailsListEmailsQueryParams = zod.object({
+export const listEmailsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -177,7 +177,7 @@ export const emailsListEmailsQueryParams = zod.object({
 	typeName: zod.string().optional().describe('Reference Object display name.'),
 });
 
-export const emailsListEmailsResponse = zod
+export const listEmailsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -288,18 +288,18 @@ export const emailsListEmailsResponse = zod
 /**
  * @summary Update or append email address(es) of the contact.
  */
-export const emailsMergeEmailsParams = zod.object({
+export const mergeEmailsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const emailsMergeEmailsQueryParams = zod.object({
+export const mergeEmailsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const emailsMergeEmailsBodyItem = zod
+export const mergeEmailsBodyItem = zod
 	.object({
 		email: zod.string().describe('The email address.'),
 		etag: zod
@@ -331,9 +331,9 @@ export const emailsMergeEmailsBodyItem = zod
 		verified: zod.boolean().optional(),
 	})
 	.describe("Input of the Contact's email address.");
-export const emailsMergeEmailsBody = zod.array(emailsMergeEmailsBodyItem);
+export const mergeEmailsBody = zod.array(mergeEmailsBodyItem);
 
-export const emailsMergeEmailsResponse = zod
+export const mergeEmailsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -444,18 +444,18 @@ export const emailsMergeEmailsResponse = zod
 /**
  * @summary Resets all emails of the contact according to the input dataset.
  */
-export const emailsResetEmailsParams = zod.object({
+export const resetEmailsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const emailsResetEmailsQueryParams = zod.object({
+export const resetEmailsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const emailsResetEmailsBodyItem = zod
+export const resetEmailsBodyItem = zod
 	.object({
 		email: zod.string().describe('The email address.'),
 		etag: zod
@@ -487,11 +487,9 @@ export const emailsResetEmailsBodyItem = zod
 		verified: zod.boolean().optional(),
 	})
 	.describe("Input of the Contact's email address.");
-export const emailsResetEmailsBody = zod
-	.array(emailsResetEmailsBodyItem)
-	.min(1);
+export const resetEmailsBody = zod.array(resetEmailsBodyItem);
 
-export const emailsResetEmailsResponse = zod
+export const resetEmailsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -602,19 +600,19 @@ export const emailsResetEmailsResponse = zod
 /**
  * @summary Remove the contact's email address link
  */
-export const emailsDeleteEmailParams = zod.object({
+export const deleteEmailParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod.string().describe('Unique ID to remove.'),
 });
 
-export const emailsDeleteEmailQueryParams = zod.object({
+export const deleteEmailQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const emailsDeleteEmailResponse = zod
+export const deleteEmailResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -702,7 +700,7 @@ export const emailsDeleteEmailResponse = zod
 /**
  * @summary Locate the email address link.
  */
-export const emailsLocateEmailParams = zod.object({
+export const locateEmailParams = zod.object({
 	contact_id: zod.string().describe('Contact source ID.'),
 	etag: zod
 		.string()
@@ -711,14 +709,14 @@ export const emailsLocateEmailParams = zod.object({
 		),
 });
 
-export const emailsLocateEmailQueryParams = zod.object({
+export const locateEmailQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const emailsLocateEmailResponse = zod
+export const locateEmailResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -806,21 +804,21 @@ export const emailsLocateEmailResponse = zod
 /**
  * @summary Update the contact's email address link details
  */
-export const emailsUpdateEmail2Params = zod.object({
+export const updateEmail2Params = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const emailsUpdateEmail2QueryParams = zod.object({
+export const updateEmail2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const emailsUpdateEmail2Body = zod.object({
+export const updateEmail2Body = zod.object({
 	email: zod.string().describe('The email address.'),
 	primary: zod
 		.boolean()
@@ -844,7 +842,7 @@ export const emailsUpdateEmail2Body = zod.object({
 	verified: zod.boolean().optional(),
 });
 
-export const emailsUpdateEmail2Response = zod
+export const updateEmail2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -955,21 +953,21 @@ export const emailsUpdateEmail2Response = zod
 /**
  * @summary Update the contact's email address link details
  */
-export const emailsUpdateEmailParams = zod.object({
+export const updateEmailParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const emailsUpdateEmailQueryParams = zod.object({
+export const updateEmailQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const emailsUpdateEmailBody = zod.object({
+export const updateEmailBody = zod.object({
 	email: zod.string().describe('The email address.'),
 	primary: zod
 		.boolean()
@@ -993,7 +991,7 @@ export const emailsUpdateEmailBody = zod.object({
 	verified: zod.boolean().optional(),
 });
 
-export const emailsUpdateEmailResponse = zod
+export const updateEmailResponse = zod
 	.object({
 		data: zod
 			.array(

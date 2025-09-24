@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary List of FilePolicy
  */
-export const filePoliciesServiceSearchFilePoliciesQueryParams = zod.object({
+export const searchFilePoliciesQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -18,10 +18,10 @@ export const filePoliciesServiceSearchFilePoliciesQueryParams = zod.object({
 	id: zod.array(zod.number()).optional(),
 });
 
-export const filePoliciesServiceSearchFilePoliciesResponseItemsItemChannelsItemDefault =
+export const searchFilePoliciesResponseItemsItemChannelsItemDefault =
 	'UnknownChannel';
 
-export const filePoliciesServiceSearchFilePoliciesResponse = zod.object({
+export const searchFilePoliciesResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -75,10 +75,9 @@ export const filePoliciesServiceSearchFilePoliciesResponse = zod.object({
 /**
  * @summary Create FilePolicy
  */
-export const filePoliciesServiceCreateFilePolicyBodyChannelsItemDefault =
-	'UnknownChannel';
+export const createFilePolicyBodyChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServiceCreateFilePolicyBody = zod.object({
+export const createFilePolicyBody = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -106,10 +105,9 @@ export const filePoliciesServiceCreateFilePolicyBody = zod.object({
 	speedUpload: zod.string().optional(),
 });
 
-export const filePoliciesServiceCreateFilePolicyResponseChannelsItemDefault =
-	'UnknownChannel';
+export const createFilePolicyResponseChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServiceCreateFilePolicyResponse = zod.object({
+export const createFilePolicyResponse = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -153,31 +151,27 @@ export const filePoliciesServiceCreateFilePolicyResponse = zod.object({
 		.optional(),
 });
 
-export const filePoliciesServiceMovePositionFilePolicyParams = zod.object({
+export const movePositionFilePolicyParams = zod.object({
 	from_id: zod.number(),
 	to_id: zod.number(),
 });
 
-export const filePoliciesServiceMovePositionFilePolicyBody = zod.object({
-	fromId: zod.number().optional(),
-	toId: zod.number().optional(),
-});
+export const movePositionFilePolicyBody = zod.object({});
 
-export const filePoliciesServiceMovePositionFilePolicyResponse = zod.object({
+export const movePositionFilePolicyResponse = zod.object({
 	success: zod.boolean().optional(),
 });
 
 /**
  * @summary Remove FilePolicy
  */
-export const filePoliciesServiceDeleteFilePolicyParams = zod.object({
+export const deleteFilePolicyParams = zod.object({
 	id: zod.number(),
 });
 
-export const filePoliciesServiceDeleteFilePolicyResponseChannelsItemDefault =
-	'UnknownChannel';
+export const deleteFilePolicyResponseChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServiceDeleteFilePolicyResponse = zod.object({
+export const deleteFilePolicyResponse = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -224,14 +218,13 @@ export const filePoliciesServiceDeleteFilePolicyResponse = zod.object({
 /**
  * @summary FilePolicy item
  */
-export const filePoliciesServiceReadFilePolicyParams = zod.object({
+export const readFilePolicyParams = zod.object({
 	id: zod.number(),
 });
 
-export const filePoliciesServiceReadFilePolicyResponseChannelsItemDefault =
-	'UnknownChannel';
+export const readFilePolicyResponseChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServiceReadFilePolicyResponse = zod.object({
+export const readFilePolicyResponse = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -278,14 +271,13 @@ export const filePoliciesServiceReadFilePolicyResponse = zod.object({
 /**
  * @summary Patch FilePolicy
  */
-export const filePoliciesServicePatchFilePolicyParams = zod.object({
+export const patchFilePolicyParams = zod.object({
 	id: zod.number(),
 });
 
-export const filePoliciesServicePatchFilePolicyBodyChannelsItemDefault =
-	'UnknownChannel';
+export const patchFilePolicyBodyChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServicePatchFilePolicyBody = zod.object({
+export const patchFilePolicyBody = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -306,7 +298,6 @@ export const filePoliciesServicePatchFilePolicyBody = zod.object({
 	enabled: zod.boolean().optional(),
 	encrypt: zod.boolean().optional(),
 	fields: zod.array(zod.string()).optional(),
-	id: zod.number().optional(),
 	maxUploadSize: zod.string().optional(),
 	mimeTypes: zod.array(zod.string()).optional(),
 	name: zod.string().optional(),
@@ -315,10 +306,9 @@ export const filePoliciesServicePatchFilePolicyBody = zod.object({
 	speedUpload: zod.string().optional(),
 });
 
-export const filePoliciesServicePatchFilePolicyResponseChannelsItemDefault =
-	'UnknownChannel';
+export const patchFilePolicyResponseChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServicePatchFilePolicyResponse = zod.object({
+export const patchFilePolicyResponse = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -365,14 +355,13 @@ export const filePoliciesServicePatchFilePolicyResponse = zod.object({
 /**
  * @summary Update FilePolicy
  */
-export const filePoliciesServiceUpdateFilePolicyParams = zod.object({
+export const updateFilePolicyParams = zod.object({
 	id: zod.number(),
 });
 
-export const filePoliciesServiceUpdateFilePolicyBodyChannelsItemDefault =
-	'UnknownChannel';
+export const updateFilePolicyBodyChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServiceUpdateFilePolicyBody = zod.object({
+export const updateFilePolicyBody = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -392,7 +381,6 @@ export const filePoliciesServiceUpdateFilePolicyBody = zod.object({
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
 	encrypt: zod.boolean().optional(),
-	id: zod.number().optional(),
 	maxUploadSize: zod.string().optional(),
 	mimeTypes: zod.array(zod.string()).optional(),
 	name: zod.string().optional(),
@@ -401,10 +389,9 @@ export const filePoliciesServiceUpdateFilePolicyBody = zod.object({
 	speedUpload: zod.string().optional(),
 });
 
-export const filePoliciesServiceUpdateFilePolicyResponseChannelsItemDefault =
-	'UnknownChannel';
+export const updateFilePolicyResponseChannelsItemDefault = 'UnknownChannel';
 
-export const filePoliciesServiceUpdateFilePolicyResponse = zod.object({
+export const updateFilePolicyResponse = zod.object({
 	channels: zod
 		.array(
 			zod.enum([
@@ -448,14 +435,12 @@ export const filePoliciesServiceUpdateFilePolicyResponse = zod.object({
 		.optional(),
 });
 
-export const filePoliciesServiceFilePolicyApplyParams = zod.object({
+export const filePolicyApplyParams = zod.object({
 	id: zod.number(),
 });
 
-export const filePoliciesServiceFilePolicyApplyBody = zod.object({
-	id: zod.number().optional(),
-});
+export const filePolicyApplyBody = zod.object({});
 
-export const filePoliciesServiceFilePolicyApplyResponse = zod.object({
+export const filePolicyApplyResponse = zod.object({
 	count: zod.string().optional(),
 });

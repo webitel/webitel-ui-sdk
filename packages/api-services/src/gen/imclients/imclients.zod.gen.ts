@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Search IM client links
  */
-export const iMClientsListIMClientsParams = zod.object({
+export const listIMClientsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const iMClientsListIMClientsQueryParams = zod.object({
+export const listIMClientsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -42,7 +42,7 @@ export const iMClientsListIMClientsQueryParams = zod.object({
 		.describe('Link(s) with unique ID only.'),
 });
 
-export const iMClientsListIMClientsResponse = zod.object({
+export const listIMClientsResponse = zod.object({
 	data: zod
 		.array(
 			zod
@@ -170,9 +170,9 @@ export const iMClientsListIMClientsResponse = zod.object({
 		.describe('The page number of the partial result.'),
 });
 
-export const iMClientsDeleteIMClientParams = zod.object({
+export const deleteIMClientParams = zod.object({
 	contact_id: zod.string(),
 	id: zod.string(),
 });
 
-export const iMClientsDeleteIMClientResponse = zod.object({});
+export const deleteIMClientResponse = zod.object({});

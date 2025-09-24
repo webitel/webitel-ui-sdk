@@ -5,7 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { EngineLookup } from './engineLookup';
-import type { StorageCognitiveProfileProperties } from './storageCognitiveProfileProperties';
 import type { StorageProviderType } from './storageProviderType';
 import type { StorageServiceType } from './storageServiceType';
 
@@ -17,7 +16,6 @@ export interface StorageCognitiveProfile {
 	enabled?: boolean;
 	id?: string;
 	name?: string;
-	properties?: StorageCognitiveProfileProperties;
 	provider?: StorageProviderType;
 	service?: StorageServiceType;
 	updatedAt?: string;

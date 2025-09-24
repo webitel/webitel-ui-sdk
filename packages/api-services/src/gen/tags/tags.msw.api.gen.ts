@@ -8,11 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type { WebitelKnowledgebaseTagsList } from '.././_models';
+import type { KnowledgebaseTagsList } from '.././_models';
 
-export const getTagsListTagsResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseTagsList> = {},
-): WebitelKnowledgebaseTagsList => ({
+export const getListTagsResponseMock = (
+	overrideResponse: Partial<KnowledgebaseTagsList> = {},
+): KnowledgebaseTagsList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -33,14 +33,12 @@ export const getTagsListTagsResponseMock = (
 	...overrideResponse,
 });
 
-export const getTagsListTagsMockHandler = (
+export const getListTagsMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseTagsList
+		| KnowledgebaseTagsList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseTagsList>
-				| WebitelKnowledgebaseTagsList),
+		  ) => Promise<KnowledgebaseTagsList> | KnowledgebaseTagsList),
 ) => {
 	return http.get('*/spaces/tags', async (info) => {
 		await delay(1000);
@@ -51,10 +49,10 @@ export const getTagsListTagsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTagsListTagsResponseMock(),
+					: getListTagsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
-export const getTagsMock = () => [getTagsListTagsMockHandler()];
+export const getTagsMock = () => [getListTagsMockHandler()];

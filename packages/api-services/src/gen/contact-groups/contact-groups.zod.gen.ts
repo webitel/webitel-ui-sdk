@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Remove the Contact's group(s).
  */
-export const contactGroupsDeleteContactGroupsParams = zod.object({
+export const deleteContactGroupsParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const contactGroupsDeleteContactGroupsQueryParams = zod.object({
+export const deleteContactGroupsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -21,7 +21,7 @@ export const contactGroupsDeleteContactGroupsQueryParams = zod.object({
 	etag: zod.array(zod.string()).describe('Set of unique ID(s) to remove.'),
 });
 
-export const contactGroupsDeleteContactGroupsResponse = zod
+export const deleteContactGroupsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -126,11 +126,11 @@ export const contactGroupsDeleteContactGroupsResponse = zod
 /**
  * @summary List of the Contact's group(s).
  */
-export const contactGroupsListContactGroupsParams = zod.object({
+export const listContactGroupsParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const contactGroupsListContactGroupsQueryParams = zod.object({
+export const listContactGroupsQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -159,7 +159,7 @@ export const contactGroupsListContactGroupsQueryParams = zod.object({
 		.describe('Record(s) with unique ID only.'),
 });
 
-export const contactGroupsListContactGroupsResponse = zod
+export const listContactGroupsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -264,18 +264,18 @@ export const contactGroupsListContactGroupsResponse = zod
 /**
  * @summary Associate more group(s) with the Contact.
  */
-export const contactGroupsMergeContactGroupsParams = zod.object({
+export const mergeContactGroupsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const contactGroupsMergeContactGroupsQueryParams = zod.object({
+export const mergeContactGroupsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const contactGroupsMergeContactGroupsBodyItem = zod
+export const mergeContactGroupsBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -298,11 +298,9 @@ export const contactGroupsMergeContactGroupsBodyItem = zod
 			),
 	})
 	.describe("An input of the Contact's groups.");
-export const contactGroupsMergeContactGroupsBody = zod.array(
-	contactGroupsMergeContactGroupsBodyItem,
-);
+export const mergeContactGroupsBody = zod.array(mergeContactGroupsBodyItem);
 
-export const contactGroupsMergeContactGroupsResponse = zod
+export const mergeContactGroupsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -407,18 +405,18 @@ export const contactGroupsMergeContactGroupsResponse = zod
 /**
  * @summary Resets all groups of the contact according to the input dataset.
  */
-export const contactGroupsResetContactGroupsParams = zod.object({
+export const resetContactGroupsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const contactGroupsResetContactGroupsQueryParams = zod.object({
+export const resetContactGroupsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const contactGroupsResetContactGroupsBodyItem = zod
+export const resetContactGroupsBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -441,11 +439,9 @@ export const contactGroupsResetContactGroupsBodyItem = zod
 			),
 	})
 	.describe("An input of the Contact's groups.");
-export const contactGroupsResetContactGroupsBody = zod
-	.array(contactGroupsResetContactGroupsBodyItem)
-	.min(1);
+export const resetContactGroupsBody = zod.array(resetContactGroupsBodyItem);
 
-export const contactGroupsResetContactGroupsResponse = zod
+export const resetContactGroupsResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -550,19 +546,19 @@ export const contactGroupsResetContactGroupsResponse = zod
 /**
  * @summary Remove the Contact's group association.
  */
-export const contactGroupsDeleteContactGroupParams = zod.object({
+export const deleteContactGroupParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod.string().describe('Unique ID to remove.'),
 });
 
-export const contactGroupsDeleteContactGroupQueryParams = zod.object({
+export const deleteContactGroupQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const contactGroupsDeleteContactGroupResponse = zod
+export const deleteContactGroupResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -642,7 +638,7 @@ export const contactGroupsDeleteContactGroupResponse = zod
 /**
  * @summary Locate the Contact's group association.
  */
-export const contactGroupsLocateContactGroupParams = zod.object({
+export const locateContactGroupParams = zod.object({
 	contact_id: zod.string().describe('Contact source ID.'),
 	etag: zod
 		.string()
@@ -651,14 +647,14 @@ export const contactGroupsLocateContactGroupParams = zod.object({
 		),
 });
 
-export const contactGroupsLocateContactGroupQueryParams = zod.object({
+export const locateContactGroupQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const contactGroupsLocateContactGroupResponse = zod
+export const locateContactGroupResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -738,21 +734,21 @@ export const contactGroupsLocateContactGroupResponse = zod
 /**
  * @summary Update the Contact's group details.
  */
-export const contactGroupsUpdateContactGroup2Params = zod.object({
+export const updateContactGroup2Params = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
 });
 
-export const contactGroupsUpdateContactGroup2QueryParams = zod.object({
+export const updateContactGroup2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const contactGroupsUpdateContactGroup2Body = zod.object({
+export const updateContactGroup2Body = zod.object({
 	group: zod
 		.object({
 			id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -768,7 +764,7 @@ export const contactGroupsUpdateContactGroup2Body = zod.object({
 		),
 });
 
-export const contactGroupsUpdateContactGroup2Response = zod
+export const updateContactGroup2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -873,21 +869,21 @@ export const contactGroupsUpdateContactGroup2Response = zod
 /**
  * @summary Update the Contact's group details.
  */
-export const contactGroupsUpdateContactGroupParams = zod.object({
+export const updateContactGroupParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
 });
 
-export const contactGroupsUpdateContactGroupQueryParams = zod.object({
+export const updateContactGroupQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const contactGroupsUpdateContactGroupBody = zod.object({
+export const updateContactGroupBody = zod.object({
 	group: zod
 		.object({
 			id: zod.string().optional().describe('Reference Object unique ID.'),
@@ -903,7 +899,7 @@ export const contactGroupsUpdateContactGroupBody = zod.object({
 		),
 });
 
-export const contactGroupsUpdateContactGroupResponse = zod
+export const updateContactGroupResponse = zod
 	.object({
 		data: zod
 			.array(

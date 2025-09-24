@@ -16,17 +16,19 @@ import type {
 	ApiReadUserResponse,
 	ApiSearchUsersRequest,
 	ApiSearchUsersResponse,
+	ApiUpdatePasswordRequest,
+	ApiUpdatePasswordResponse,
 	ApiUser,
-	ApiUsersLogoutUserBody,
-	UsersDeleteUsers2Params,
-	UsersDeleteUsersParams,
-	UsersReadUser2Params,
-	UsersReadUserParams,
-	UsersSearchUsersParams,
-	UsersUpdateUser2Body,
-	UsersUpdateUser2Params,
-	UsersUpdateUserBody,
-	UsersUpdateUserParams,
+	DeleteUsers2Params,
+	DeleteUsersParams,
+	ReadUser2Params,
+	ReadUserParams,
+	SearchUsersParams,
+	UpdateUser2Body,
+	UpdateUser2Params,
+	UpdateUserBody,
+	UpdateUserParams,
+	UsersLogoutUserBody,
 } from '.././_models';
 
 // --- header start
@@ -37,8 +39,8 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const usersReadUser2 = <TData = AxiosResponse<ApiReadUserResponse>>(
-				params?: UsersReadUser2Params,
+			const readUser2 = <TData = AxiosResponse<ApiReadUserResponse>>(
+				params?: ReadUser2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/user', {
@@ -46,19 +48,19 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const usersDeleteUsers2 = <TData = AxiosResponse<ApiDeleteUsersResponse>>(
-				usersDeleteUsers2Body: string[],
-				params?: UsersDeleteUsers2Params,
+			const deleteUsers2 = <TData = AxiosResponse<ApiDeleteUsersResponse>>(
+				deleteUsers2Body: string[],
+				params?: DeleteUsers2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/users', {
-					data: usersDeleteUsers2Body,
+					data: deleteUsers2Body,
 					...options,
 					params: { ...params, ...options?.params },
 				});
 			};
-			const usersSearchUsers = <TData = AxiosResponse<ApiSearchUsersResponse>>(
-				params?: UsersSearchUsersParams,
+			const searchUsers = <TData = AxiosResponse<ApiSearchUsersResponse>>(
+				params?: SearchUsersParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/users', {
@@ -66,21 +68,31 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const usersCreateUser = <TData = AxiosResponse<ApiCreateUserResponse>>(
+			const createUser = <TData = AxiosResponse<ApiCreateUserResponse>>(
 				apiCreateUserRequest: ApiCreateUserRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post('/users', apiCreateUserRequest, options);
 			};
-			const usersSearchUsers2 = <TData = AxiosResponse<ApiSearchUsersResponse>>(
+			const updatePassword = <TData = AxiosResponse<ApiUpdatePasswordResponse>>(
+				apiUpdatePasswordRequest: ApiUpdatePasswordRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.patch(
+					'/users/password',
+					apiUpdatePasswordRequest,
+					options,
+				);
+			};
+			const searchUsers2 = <TData = AxiosResponse<ApiSearchUsersResponse>>(
 				apiSearchUsersRequest: ApiSearchUsersRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post('/users/search', apiSearchUsersRequest, options);
 			};
-			const usersDeleteUsers = <TData = AxiosResponse<ApiDeleteUsersResponse>>(
+			const deleteUsers = <TData = AxiosResponse<ApiDeleteUsersResponse>>(
 				id: string,
-				params?: UsersDeleteUsersParams,
+				params?: DeleteUsersParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/users/${id}`, {
@@ -88,9 +100,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const usersReadUser = <TData = AxiosResponse<ApiReadUserResponse>>(
+			const readUser = <TData = AxiosResponse<ApiReadUserResponse>>(
 				id: string,
-				params?: UsersReadUserParams,
+				params?: ReadUserParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/users/${id}`, {
@@ -98,33 +110,29 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const usersLogoutUser = <TData = AxiosResponse<ApiLogoutUserResponse>>(
+			const logoutUser = <TData = AxiosResponse<ApiLogoutUserResponse>>(
 				id: string,
-				apiUsersLogoutUserBody: ApiUsersLogoutUserBody,
+				usersLogoutUserBody: UsersLogoutUserBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post(
-					`/users/${id}/logout`,
-					apiUsersLogoutUserBody,
-					options,
-				);
+				return axios.post(`/users/${id}/logout`, usersLogoutUserBody, options);
 			};
-			const usersUpdateUser2 = <TData = AxiosResponse<ApiUser>>(
-				usersUpdateUser2Body: UsersUpdateUser2Body,
-				params?: UsersUpdateUser2Params,
+			const updateUser2 = <TData = AxiosResponse<ApiUser>>(
+				updateUser2Body: UpdateUser2Body,
+				params?: UpdateUser2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch('/users/user.id}', usersUpdateUser2Body, {
+				return axios.patch('/users/user.id}', updateUser2Body, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
 			};
-			const usersUpdateUser = <TData = AxiosResponse<ApiUser>>(
-				usersUpdateUserBody: UsersUpdateUserBody,
-				params?: UsersUpdateUserParams,
+			const updateUser = <TData = AxiosResponse<ApiUser>>(
+				updateUserBody: UpdateUserBody,
+				params?: UpdateUserParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put('/users/user.id}', usersUpdateUserBody, {
+				return axios.put('/users/user.id}', updateUserBody, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -132,27 +140,29 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				usersReadUser2,
-				usersDeleteUsers2,
-				usersSearchUsers,
-				usersCreateUser,
-				usersSearchUsers2,
-				usersDeleteUsers,
-				usersReadUser,
-				usersLogoutUser,
-				usersUpdateUser2,
-				usersUpdateUser,
+				readUser2,
+				deleteUsers2,
+				searchUsers,
+				createUser,
+				updatePassword,
+				searchUsers2,
+				deleteUsers,
+				readUser,
+				logoutUser,
+				updateUser2,
+				updateUser,
 			};
 		};
-export type UsersReadUser2Result = AxiosResponse<ApiReadUserResponse>;
-export type UsersDeleteUsers2Result = AxiosResponse<ApiDeleteUsersResponse>;
-export type UsersSearchUsersResult = AxiosResponse<ApiSearchUsersResponse>;
-export type UsersCreateUserResult = AxiosResponse<ApiCreateUserResponse>;
-export type UsersSearchUsers2Result = AxiosResponse<ApiSearchUsersResponse>;
-export type UsersDeleteUsersResult = AxiosResponse<ApiDeleteUsersResponse>;
-export type UsersReadUserResult = AxiosResponse<ApiReadUserResponse>;
-export type UsersLogoutUserResult = AxiosResponse<ApiLogoutUserResponse>;
-export type UsersUpdateUser2Result = AxiosResponse<ApiUser>;
-export type UsersUpdateUserResult = AxiosResponse<ApiUser>;
+export type ReadUser2Result = AxiosResponse<ApiReadUserResponse>;
+export type DeleteUsers2Result = AxiosResponse<ApiDeleteUsersResponse>;
+export type SearchUsersResult = AxiosResponse<ApiSearchUsersResponse>;
+export type CreateUserResult = AxiosResponse<ApiCreateUserResponse>;
+export type UpdatePasswordResult = AxiosResponse<ApiUpdatePasswordResponse>;
+export type SearchUsers2Result = AxiosResponse<ApiSearchUsersResponse>;
+export type DeleteUsersResult = AxiosResponse<ApiDeleteUsersResponse>;
+export type ReadUserResult = AxiosResponse<ApiReadUserResponse>;
+export type LogoutUserResult = AxiosResponse<ApiLogoutUserResponse>;
+export type UpdateUser2Result = AxiosResponse<ApiUser>;
+export type UpdateUserResult = AxiosResponse<ApiUser>;
 
 // --- footer end

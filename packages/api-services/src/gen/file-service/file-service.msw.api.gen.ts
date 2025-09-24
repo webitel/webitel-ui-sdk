@@ -7,19 +7,13 @@
 import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
-import type {
-	StorageDeleteFilesResponse,
-	StorageListFile,
-	StorageRenegotiateP2PVideoResponse,
-	StorageStopP2PVideoResponse,
-	StorageUploadP2PVideoResponse,
-} from '.././_models';
+import type { StorageDeleteFilesResponse, StorageListFile } from '.././_models';
 import { StorageUploadFileChannel } from '.././_models';
 
-export const getFileServiceDeleteFilesResponseMock =
+export const getDeleteFilesResponseMock =
 	(): StorageDeleteFilesResponse => ({});
 
-export const getFileServiceSearchFilesResponseMock = (
+export const getSearchFilesResponseMock = (
 	overrideResponse: Partial<StorageListFile> = {},
 ): StorageListFile => ({
 	items: faker.helpers.arrayElement([
@@ -108,34 +102,99 @@ export const getFileServiceSearchFilesResponseMock = (
 	...overrideResponse,
 });
 
-export const getFileServiceUploadP2PVideoResponseMock = (
-	overrideResponse: Partial<StorageUploadP2PVideoResponse> = {},
-): StorageUploadP2PVideoResponse => ({
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
+export const getSearchScreenRecordingsResponseMock = (
+	overrideResponse: Partial<StorageListFile> = {},
+): StorageListFile => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			channel: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(Object.values(StorageUploadFileChannel)),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			mimeType: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			referenceId: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			retentionUntil: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			sha256Sum: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			size: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			thumbnail: faker.helpers.arrayElement([
+				{
+					mimeType: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					scale: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					size: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			uploadedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			uploadedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			uuid: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			viewName: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
 		undefined,
 	]),
-	sdpAnswer: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
 	...overrideResponse,
 });
 
-export const getFileServiceStopP2PVideoResponseMock =
-	(): StorageStopP2PVideoResponse => ({});
+export const getDeleteScreenRecordingsResponseMock =
+	(): StorageDeleteFilesResponse => ({});
 
-export const getFileServiceRenegotiateP2PVideoResponseMock = (
-	overrideResponse: Partial<StorageRenegotiateP2PVideoResponse> = {},
-): StorageRenegotiateP2PVideoResponse => ({
-	sdpAnswer: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	...overrideResponse,
-});
-
-export const getFileServiceDeleteFilesMockHandler = (
+export const getDeleteFilesMockHandler = (
 	overrideResponse?:
 		| StorageDeleteFilesResponse
 		| ((
@@ -151,14 +210,14 @@ export const getFileServiceDeleteFilesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileServiceDeleteFilesResponseMock(),
+					: getDeleteFilesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFileServiceSearchFilesMockHandler = (
+export const getSearchFilesMockHandler = (
 	overrideResponse?:
 		| StorageListFile
 		| ((
@@ -174,23 +233,21 @@ export const getFileServiceSearchFilesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileServiceSearchFilesResponseMock(),
+					: getSearchFilesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFileServiceUploadP2PVideoMockHandler = (
+export const getSearchScreenRecordingsMockHandler = (
 	overrideResponse?:
-		| StorageUploadP2PVideoResponse
+		| StorageListFile
 		| ((
-				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) =>
-				| Promise<StorageUploadP2PVideoResponse>
-				| StorageUploadP2PVideoResponse),
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<StorageListFile> | StorageListFile),
 ) => {
-	return http.post('*/storage/p2p/video', async (info) => {
+	return http.get('*/storage/users/:userId', async (info) => {
 		await delay(1000);
 
 		return new HttpResponse(
@@ -199,21 +256,21 @@ export const getFileServiceUploadP2PVideoMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileServiceUploadP2PVideoResponseMock(),
+					: getSearchScreenRecordingsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFileServiceStopP2PVideoMockHandler = (
+export const getDeleteScreenRecordingsMockHandler = (
 	overrideResponse?:
-		| StorageStopP2PVideoResponse
+		| StorageDeleteFilesResponse
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<StorageStopP2PVideoResponse> | StorageStopP2PVideoResponse),
+		  ) => Promise<StorageDeleteFilesResponse> | StorageDeleteFilesResponse),
 ) => {
-	return http.delete('*/storage/p2p/video/:id', async (info) => {
+	return http.delete('*/storage/users/:userId/:id', async (info) => {
 		await delay(1000);
 
 		return new HttpResponse(
@@ -222,41 +279,15 @@ export const getFileServiceStopP2PVideoMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileServiceStopP2PVideoResponseMock(),
-			),
-			{ status: 200, headers: { 'Content-Type': 'application/json' } },
-		);
-	});
-};
-
-export const getFileServiceRenegotiateP2PVideoMockHandler = (
-	overrideResponse?:
-		| StorageRenegotiateP2PVideoResponse
-		| ((
-				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) =>
-				| Promise<StorageRenegotiateP2PVideoResponse>
-				| StorageRenegotiateP2PVideoResponse),
-) => {
-	return http.put('*/storage/p2p/video/:id', async (info) => {
-		await delay(1000);
-
-		return new HttpResponse(
-			JSON.stringify(
-				overrideResponse !== undefined
-					? typeof overrideResponse === 'function'
-						? await overrideResponse(info)
-						: overrideResponse
-					: getFileServiceRenegotiateP2PVideoResponseMock(),
+					: getDeleteScreenRecordingsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getFileServiceMock = () => [
-	getFileServiceDeleteFilesMockHandler(),
-	getFileServiceSearchFilesMockHandler(),
-	getFileServiceUploadP2PVideoMockHandler(),
-	getFileServiceStopP2PVideoMockHandler(),
-	getFileServiceRenegotiateP2PVideoMockHandler(),
+	getDeleteFilesMockHandler(),
+	getSearchFilesMockHandler(),
+	getSearchScreenRecordingsMockHandler(),
+	getDeleteScreenRecordingsMockHandler(),
 ];

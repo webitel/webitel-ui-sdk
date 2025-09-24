@@ -9,19 +9,19 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ManagersDeleteManagerParams,
-	ManagersDeleteManagersParams,
-	ManagersListManagersParams,
-	ManagersLocateManagerParams,
-	ManagersMergeManagersParams,
-	ManagersResetManagersParams,
-	ManagersUpdateManager2Body,
-	ManagersUpdateManager2Params,
-	ManagersUpdateManagerBody,
-	ManagersUpdateManagerParams,
-	WebitelContactsInputManager,
-	WebitelContactsManager,
-	WebitelContactsManagerList,
+	ContactsInputManager,
+	ContactsManager,
+	ContactsManagerList,
+	DeleteManagerParams,
+	DeleteManagersParams,
+	ListManagersParams,
+	LocateManagerParams,
+	MergeManagersParams,
+	ResetManagersParams,
+	UpdateManager2Body,
+	UpdateManager2Params,
+	UpdateManagerBody,
+	UpdateManagerParams,
 } from '.././_models';
 
 // --- header start
@@ -35,11 +35,9 @@ export const // --- title start
 			/**
 			 * @summary Remove Contact Managers associations.
 			 */
-			const managersDeleteManagers = <
-				TData = AxiosResponse<WebitelContactsManager[]>,
-			>(
+			const deleteManagers = <TData = AxiosResponse<ContactsManager[]>>(
 				contactId: string,
-				params: ManagersDeleteManagersParams,
+				params: DeleteManagersParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/managers`, {
@@ -50,11 +48,9 @@ export const // --- title start
 			/**
 			 * @summary Search the Contact's Managers.
 			 */
-			const managersListManagers = <
-				TData = AxiosResponse<WebitelContactsManagerList>,
-			>(
+			const listManagers = <TData = AxiosResponse<ContactsManagerList>>(
 				contactId: string,
-				params?: ManagersListManagersParams,
+				params?: ListManagersParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/managers`, {
@@ -65,17 +61,15 @@ export const // --- title start
 			/**
 			 * @summary Associate new Managers to the Contact.
 			 */
-			const managersMergeManagers = <
-				TData = AxiosResponse<WebitelContactsManagerList>,
-			>(
+			const mergeManagers = <TData = AxiosResponse<ContactsManagerList>>(
 				contactId: string,
-				webitelContactsInputManager: WebitelContactsInputManager[],
-				params?: ManagersMergeManagersParams,
+				contactsInputManager: ContactsInputManager[],
+				params?: MergeManagersParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/contacts/${contactId}/managers`,
-					webitelContactsInputManager,
+					contactsInputManager,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -85,17 +79,15 @@ export const // --- title start
 			/**
 			 * @summary Reset Managers to fit the specified final set.
 			 */
-			const managersResetManagers = <
-				TData = AxiosResponse<WebitelContactsManagerList>,
-			>(
+			const resetManagers = <TData = AxiosResponse<ContactsManagerList>>(
 				contactId: string,
-				webitelContactsInputManager: WebitelContactsInputManager[],
-				params?: ManagersResetManagersParams,
+				contactsInputManager: ContactsInputManager[],
+				params?: ResetManagersParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/managers`,
-					webitelContactsInputManager,
+					contactsInputManager,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -105,12 +97,10 @@ export const // --- title start
 			/**
 			 * @summary Remove the contact's manager address link
 			 */
-			const managersDeleteManager = <
-				TData = AxiosResponse<WebitelContactsManager>,
-			>(
+			const deleteManager = <TData = AxiosResponse<ContactsManager>>(
 				contactId: string,
 				etag: string,
-				params?: ManagersDeleteManagerParams,
+				params?: DeleteManagerParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/managers/${etag}`, {
@@ -121,12 +111,10 @@ export const // --- title start
 			/**
 			 * @summary Locate the manager address link.
 			 */
-			const managersLocateManager = <
-				TData = AxiosResponse<WebitelContactsManager>,
-			>(
+			const locateManager = <TData = AxiosResponse<ContactsManager>>(
 				contactId: string,
 				etag: string,
-				params?: ManagersLocateManagerParams,
+				params?: LocateManagerParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/managers/${etag}`, {
@@ -137,18 +125,16 @@ export const // --- title start
 			/**
 			 * @summary Update the contact's manager address link details
 			 */
-			const managersUpdateManager2 = <
-				TData = AxiosResponse<WebitelContactsManagerList>,
-			>(
+			const updateManager2 = <TData = AxiosResponse<ContactsManagerList>>(
 				contactId: string,
 				etag: string,
-				managersUpdateManager2Body: ManagersUpdateManager2Body,
-				params?: ManagersUpdateManager2Params,
+				updateManager2Body: UpdateManager2Body,
+				params?: UpdateManager2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/${contactId}/managers/${etag}`,
-					managersUpdateManager2Body,
+					updateManager2Body,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -158,18 +144,16 @@ export const // --- title start
 			/**
 			 * @summary Update the contact's manager address link details
 			 */
-			const managersUpdateManager = <
-				TData = AxiosResponse<WebitelContactsManagerList>,
-			>(
+			const updateManager = <TData = AxiosResponse<ContactsManagerList>>(
 				contactId: string,
 				etag: string,
-				managersUpdateManagerBody: ManagersUpdateManagerBody,
-				params?: ManagersUpdateManagerParams,
+				updateManagerBody: UpdateManagerBody,
+				params?: UpdateManagerParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/managers/${etag}`,
-					managersUpdateManagerBody,
+					updateManagerBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -179,30 +163,23 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				managersDeleteManagers,
-				managersListManagers,
-				managersMergeManagers,
-				managersResetManagers,
-				managersDeleteManager,
-				managersLocateManager,
-				managersUpdateManager2,
-				managersUpdateManager,
+				deleteManagers,
+				listManagers,
+				mergeManagers,
+				resetManagers,
+				deleteManager,
+				locateManager,
+				updateManager2,
+				updateManager,
 			};
 		};
-export type ManagersDeleteManagersResult = AxiosResponse<
-	WebitelContactsManager[]
->;
-export type ManagersListManagersResult =
-	AxiosResponse<WebitelContactsManagerList>;
-export type ManagersMergeManagersResult =
-	AxiosResponse<WebitelContactsManagerList>;
-export type ManagersResetManagersResult =
-	AxiosResponse<WebitelContactsManagerList>;
-export type ManagersDeleteManagerResult = AxiosResponse<WebitelContactsManager>;
-export type ManagersLocateManagerResult = AxiosResponse<WebitelContactsManager>;
-export type ManagersUpdateManager2Result =
-	AxiosResponse<WebitelContactsManagerList>;
-export type ManagersUpdateManagerResult =
-	AxiosResponse<WebitelContactsManagerList>;
+export type DeleteManagersResult = AxiosResponse<ContactsManager[]>;
+export type ListManagersResult = AxiosResponse<ContactsManagerList>;
+export type MergeManagersResult = AxiosResponse<ContactsManagerList>;
+export type ResetManagersResult = AxiosResponse<ContactsManagerList>;
+export type DeleteManagerResult = AxiosResponse<ContactsManager>;
+export type LocateManagerResult = AxiosResponse<ContactsManager>;
+export type UpdateManager2Result = AxiosResponse<ContactsManagerList>;
+export type UpdateManagerResult = AxiosResponse<ContactsManagerList>;
 
 // --- footer end

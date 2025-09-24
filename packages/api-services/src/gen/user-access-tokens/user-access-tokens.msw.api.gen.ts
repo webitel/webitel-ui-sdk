@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 
 import type { ApiUserAccessToken, ApiUserAccessTokenList } from '.././_models';
 
-export const getUserAccessTokensAddUserAccessTokenResponseMock = (
+export const getAddUserAccessTokenResponseMock = (
 	overrideResponse: Partial<ApiUserAccessToken> = {},
 ): ApiUserAccessToken => ({
 	createdAt: faker.helpers.arrayElement([
@@ -92,7 +92,7 @@ export const getUserAccessTokensAddUserAccessTokenResponseMock = (
 	...overrideResponse,
 });
 
-export const getUserAccessTokensUpdateUserAccessToken2ResponseMock = (
+export const getUpdateUserAccessToken2ResponseMock = (
 	overrideResponse: Partial<ApiUserAccessToken> = {},
 ): ApiUserAccessToken => ({
 	createdAt: faker.helpers.arrayElement([
@@ -174,7 +174,7 @@ export const getUserAccessTokensUpdateUserAccessToken2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getUserAccessTokensUpdateUserAccessTokenResponseMock = (
+export const getUpdateUserAccessTokenResponseMock = (
 	overrideResponse: Partial<ApiUserAccessToken> = {},
 ): ApiUserAccessToken => ({
 	createdAt: faker.helpers.arrayElement([
@@ -256,7 +256,7 @@ export const getUserAccessTokensUpdateUserAccessTokenResponseMock = (
 	...overrideResponse,
 });
 
-export const getUserAccessTokensListUserAccessTokenResponseMock = (
+export const getListUserAccessTokenResponseMock = (
 	overrideResponse: Partial<ApiUserAccessTokenList> = {},
 ): ApiUserAccessTokenList => ({
 	items: faker.helpers.arrayElement([
@@ -355,7 +355,7 @@ export const getUserAccessTokensListUserAccessTokenResponseMock = (
 	...overrideResponse,
 });
 
-export const getUserAccessTokensDeleteUserAccessTokenResponseMock = (
+export const getDeleteUserAccessTokenResponseMock = (
 	overrideResponse: Partial<ApiUserAccessToken> = {},
 ): ApiUserAccessToken => ({
 	createdAt: faker.helpers.arrayElement([
@@ -437,7 +437,7 @@ export const getUserAccessTokensDeleteUserAccessTokenResponseMock = (
 	...overrideResponse,
 });
 
-export const getUserAccessTokensGetUserAccessTokenResponseMock = (
+export const getGetUserAccessTokenResponseMock = (
 	overrideResponse: Partial<ApiUserAccessToken> = {},
 ): ApiUserAccessToken => ({
 	createdAt: faker.helpers.arrayElement([
@@ -519,7 +519,7 @@ export const getUserAccessTokensGetUserAccessTokenResponseMock = (
 	...overrideResponse,
 });
 
-export const getUserAccessTokensAddUserAccessTokenMockHandler = (
+export const getAddUserAccessTokenMockHandler = (
 	overrideResponse?:
 		| ApiUserAccessToken
 		| ((
@@ -535,14 +535,14 @@ export const getUserAccessTokensAddUserAccessTokenMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUserAccessTokensAddUserAccessTokenResponseMock(),
+					: getAddUserAccessTokenResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUserAccessTokensUpdateUserAccessToken2MockHandler = (
+export const getUpdateUserAccessToken2MockHandler = (
 	overrideResponse?:
 		| ApiUserAccessToken
 		| ((
@@ -560,7 +560,7 @@ export const getUserAccessTokensUpdateUserAccessToken2MockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getUserAccessTokensUpdateUserAccessToken2ResponseMock(),
+						: getUpdateUserAccessToken2ResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -568,7 +568,7 @@ export const getUserAccessTokensUpdateUserAccessToken2MockHandler = (
 	);
 };
 
-export const getUserAccessTokensUpdateUserAccessTokenMockHandler = (
+export const getUpdateUserAccessTokenMockHandler = (
 	overrideResponse?:
 		| ApiUserAccessToken
 		| ((
@@ -584,14 +584,14 @@ export const getUserAccessTokensUpdateUserAccessTokenMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUserAccessTokensUpdateUserAccessTokenResponseMock(),
+					: getUpdateUserAccessTokenResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUserAccessTokensListUserAccessTokenMockHandler = (
+export const getListUserAccessTokenMockHandler = (
 	overrideResponse?:
 		| ApiUserAccessTokenList
 		| ((
@@ -607,14 +607,14 @@ export const getUserAccessTokensListUserAccessTokenMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUserAccessTokensListUserAccessTokenResponseMock(),
+					: getListUserAccessTokenResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUserAccessTokensDeleteUserAccessTokenMockHandler = (
+export const getDeleteUserAccessTokenMockHandler = (
 	overrideResponse?:
 		| ApiUserAccessToken
 		| ((
@@ -630,14 +630,14 @@ export const getUserAccessTokensDeleteUserAccessTokenMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUserAccessTokensDeleteUserAccessTokenResponseMock(),
+					: getDeleteUserAccessTokenResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUserAccessTokensGetUserAccessTokenMockHandler = (
+export const getGetUserAccessTokenMockHandler = (
 	overrideResponse?:
 		| ApiUserAccessToken
 		| ((
@@ -653,17 +653,17 @@ export const getUserAccessTokensGetUserAccessTokenMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUserAccessTokensGetUserAccessTokenResponseMock(),
+					: getGetUserAccessTokenResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getUserAccessTokensMock = () => [
-	getUserAccessTokensAddUserAccessTokenMockHandler(),
-	getUserAccessTokensUpdateUserAccessToken2MockHandler(),
-	getUserAccessTokensUpdateUserAccessTokenMockHandler(),
-	getUserAccessTokensListUserAccessTokenMockHandler(),
-	getUserAccessTokensDeleteUserAccessTokenMockHandler(),
-	getUserAccessTokensGetUserAccessTokenMockHandler(),
+	getAddUserAccessTokenMockHandler(),
+	getUpdateUserAccessToken2MockHandler(),
+	getUpdateUserAccessTokenMockHandler(),
+	getListUserAccessTokenMockHandler(),
+	getDeleteUserAccessTokenMockHandler(),
+	getGetUserAccessTokenMockHandler(),
 ];

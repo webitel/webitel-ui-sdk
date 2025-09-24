@@ -9,19 +9,19 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ContactGroupsDeleteContactGroupParams,
-	ContactGroupsDeleteContactGroupsParams,
-	ContactGroupsListContactGroupsParams,
-	ContactGroupsLocateContactGroupParams,
-	ContactGroupsMergeContactGroupsParams,
-	ContactGroupsResetContactGroupsParams,
-	ContactGroupsUpdateContactGroup2Body,
-	ContactGroupsUpdateContactGroup2Params,
-	ContactGroupsUpdateContactGroupBody,
-	ContactGroupsUpdateContactGroupParams,
-	WebitelContactsContactGroup,
-	WebitelContactsContactGroupList,
-	WebitelContactsInputContactGroup,
+	ContactsContactGroup,
+	ContactsContactGroupList,
+	ContactsInputContactGroup,
+	DeleteContactGroupParams,
+	DeleteContactGroupsParams,
+	ListContactGroupsParams,
+	LocateContactGroupParams,
+	MergeContactGroupsParams,
+	ResetContactGroupsParams,
+	UpdateContactGroup2Body,
+	UpdateContactGroup2Params,
+	UpdateContactGroupBody,
+	UpdateContactGroupParams,
 } from '.././_models';
 
 // --- header start
@@ -35,11 +35,11 @@ export const // --- title start
 			/**
 			 * @summary Remove the Contact's group(s).
 			 */
-			const contactGroupsDeleteContactGroups = <
-				TData = AxiosResponse<WebitelContactsContactGroupList>,
+			const deleteContactGroups = <
+				TData = AxiosResponse<ContactsContactGroupList>,
 			>(
 				contactId: string,
-				params: ContactGroupsDeleteContactGroupsParams,
+				params: DeleteContactGroupsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/groups`, {
@@ -50,11 +50,11 @@ export const // --- title start
 			/**
 			 * @summary List of the Contact's group(s).
 			 */
-			const contactGroupsListContactGroups = <
-				TData = AxiosResponse<WebitelContactsContactGroupList>,
+			const listContactGroups = <
+				TData = AxiosResponse<ContactsContactGroupList>,
 			>(
 				contactId: string,
-				params?: ContactGroupsListContactGroupsParams,
+				params?: ListContactGroupsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/groups`, {
@@ -65,17 +65,17 @@ export const // --- title start
 			/**
 			 * @summary Associate more group(s) with the Contact.
 			 */
-			const contactGroupsMergeContactGroups = <
-				TData = AxiosResponse<WebitelContactsContactGroupList>,
+			const mergeContactGroups = <
+				TData = AxiosResponse<ContactsContactGroupList>,
 			>(
 				contactId: string,
-				webitelContactsInputContactGroup: WebitelContactsInputContactGroup[],
-				params?: ContactGroupsMergeContactGroupsParams,
+				contactsInputContactGroup: ContactsInputContactGroup[],
+				params?: MergeContactGroupsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/contacts/${contactId}/groups`,
-					webitelContactsInputContactGroup,
+					contactsInputContactGroup,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -85,17 +85,17 @@ export const // --- title start
 			/**
 			 * @summary Resets all groups of the contact according to the input dataset.
 			 */
-			const contactGroupsResetContactGroups = <
-				TData = AxiosResponse<WebitelContactsContactGroupList>,
+			const resetContactGroups = <
+				TData = AxiosResponse<ContactsContactGroupList>,
 			>(
 				contactId: string,
-				webitelContactsInputContactGroup: WebitelContactsInputContactGroup[],
-				params?: ContactGroupsResetContactGroupsParams,
+				contactsInputContactGroup: ContactsInputContactGroup[],
+				params?: ResetContactGroupsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/groups`,
-					webitelContactsInputContactGroup,
+					contactsInputContactGroup,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -105,12 +105,10 @@ export const // --- title start
 			/**
 			 * @summary Remove the Contact's group association.
 			 */
-			const contactGroupsDeleteContactGroup = <
-				TData = AxiosResponse<WebitelContactsContactGroup>,
-			>(
+			const deleteContactGroup = <TData = AxiosResponse<ContactsContactGroup>>(
 				contactId: string,
 				etag: string,
-				params?: ContactGroupsDeleteContactGroupParams,
+				params?: DeleteContactGroupParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/groups/${etag}`, {
@@ -121,12 +119,10 @@ export const // --- title start
 			/**
 			 * @summary Locate the Contact's group association.
 			 */
-			const contactGroupsLocateContactGroup = <
-				TData = AxiosResponse<WebitelContactsContactGroup>,
-			>(
+			const locateContactGroup = <TData = AxiosResponse<ContactsContactGroup>>(
 				contactId: string,
 				etag: string,
-				params?: ContactGroupsLocateContactGroupParams,
+				params?: LocateContactGroupParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/groups/${etag}`, {
@@ -137,18 +133,18 @@ export const // --- title start
 			/**
 			 * @summary Update the Contact's group details.
 			 */
-			const contactGroupsUpdateContactGroup2 = <
-				TData = AxiosResponse<WebitelContactsContactGroupList>,
+			const updateContactGroup2 = <
+				TData = AxiosResponse<ContactsContactGroupList>,
 			>(
 				contactId: string,
 				etag: string,
-				contactGroupsUpdateContactGroup2Body: ContactGroupsUpdateContactGroup2Body,
-				params?: ContactGroupsUpdateContactGroup2Params,
+				updateContactGroup2Body: UpdateContactGroup2Body,
+				params?: UpdateContactGroup2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/${contactId}/groups/${etag}`,
-					contactGroupsUpdateContactGroup2Body,
+					updateContactGroup2Body,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -158,18 +154,18 @@ export const // --- title start
 			/**
 			 * @summary Update the Contact's group details.
 			 */
-			const contactGroupsUpdateContactGroup = <
-				TData = AxiosResponse<WebitelContactsContactGroupList>,
+			const updateContactGroup = <
+				TData = AxiosResponse<ContactsContactGroupList>,
 			>(
 				contactId: string,
 				etag: string,
-				contactGroupsUpdateContactGroupBody: ContactGroupsUpdateContactGroupBody,
-				params?: ContactGroupsUpdateContactGroupParams,
+				updateContactGroupBody: UpdateContactGroupBody,
+				params?: UpdateContactGroupParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/groups/${etag}`,
-					contactGroupsUpdateContactGroupBody,
+					updateContactGroupBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -179,31 +175,23 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				contactGroupsDeleteContactGroups,
-				contactGroupsListContactGroups,
-				contactGroupsMergeContactGroups,
-				contactGroupsResetContactGroups,
-				contactGroupsDeleteContactGroup,
-				contactGroupsLocateContactGroup,
-				contactGroupsUpdateContactGroup2,
-				contactGroupsUpdateContactGroup,
+				deleteContactGroups,
+				listContactGroups,
+				mergeContactGroups,
+				resetContactGroups,
+				deleteContactGroup,
+				locateContactGroup,
+				updateContactGroup2,
+				updateContactGroup,
 			};
 		};
-export type ContactGroupsDeleteContactGroupsResult =
-	AxiosResponse<WebitelContactsContactGroupList>;
-export type ContactGroupsListContactGroupsResult =
-	AxiosResponse<WebitelContactsContactGroupList>;
-export type ContactGroupsMergeContactGroupsResult =
-	AxiosResponse<WebitelContactsContactGroupList>;
-export type ContactGroupsResetContactGroupsResult =
-	AxiosResponse<WebitelContactsContactGroupList>;
-export type ContactGroupsDeleteContactGroupResult =
-	AxiosResponse<WebitelContactsContactGroup>;
-export type ContactGroupsLocateContactGroupResult =
-	AxiosResponse<WebitelContactsContactGroup>;
-export type ContactGroupsUpdateContactGroup2Result =
-	AxiosResponse<WebitelContactsContactGroupList>;
-export type ContactGroupsUpdateContactGroupResult =
-	AxiosResponse<WebitelContactsContactGroupList>;
+export type DeleteContactGroupsResult = AxiosResponse<ContactsContactGroupList>;
+export type ListContactGroupsResult = AxiosResponse<ContactsContactGroupList>;
+export type MergeContactGroupsResult = AxiosResponse<ContactsContactGroupList>;
+export type ResetContactGroupsResult = AxiosResponse<ContactsContactGroupList>;
+export type DeleteContactGroupResult = AxiosResponse<ContactsContactGroup>;
+export type LocateContactGroupResult = AxiosResponse<ContactsContactGroup>;
+export type UpdateContactGroup2Result = AxiosResponse<ContactsContactGroupList>;
+export type UpdateContactGroupResult = AxiosResponse<ContactsContactGroupList>;
 
 // --- footer end

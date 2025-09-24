@@ -25,11 +25,11 @@ import { z as zod } from 'zod/v4';
 | `has_children`| bool 
 
  */
-export const spacesListSpacesQuerySortItemDefault = 'id';
-export const spacesListSpacesQuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const spacesListSpacesQueryFieldsItemDefault = '*';
+export const listSpacesQuerySortItemDefault = 'id';
+export const listSpacesQuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const listSpacesQueryFieldsItemDefault = '*';
 
-export const spacesListSpacesQueryParams = zod.object({
+export const listSpacesQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod
 		.number()
@@ -44,7 +44,7 @@ export const spacesListSpacesQueryParams = zod.object({
 			'Search term:\n`?` - matches any character\n`*` - matches 0 or more characters\nUsed to query records within a set of `qin` fields, eg: name, etc...',
 		),
 	sort: zod
-		.array(zod.string().regex(spacesListSpacesQuerySortItemRegExp))
+		.array(zod.string().regex(listSpacesQuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `state`',
@@ -56,7 +56,7 @@ export const spacesListSpacesQueryParams = zod.object({
 		.describe('Records with unique IDentifier(s).\nAccept: `id` -or- `etag`.'),
 });
 
-export const spacesListSpacesResponse = zod.object({
+export const listSpacesResponse = zod.object({
 	data: zod
 		.array(
 			zod.object({
@@ -162,14 +162,14 @@ export const spacesListSpacesResponse = zod.object({
 /**
  * @summary Create NEW Space
  */
-export const spacesCreateSpaceQueryParams = zod.object({
+export const createSpaceQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 });
 
-export const spacesCreateSpaceBodyItem = zod
+export const createSpaceBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -188,9 +188,9 @@ export const spacesCreateSpaceBodyItem = zod
 		state: zod.boolean().optional().describe('The state of the space.'),
 	})
 	.describe('The Space principal input.');
-export const spacesCreateSpaceBody = zod.array(spacesCreateSpaceBodyItem);
+export const createSpaceBody = zod.array(createSpaceBodyItem);
 
-export const spacesCreateSpaceResponse = zod.object({
+export const createSpaceResponse = zod.object({
 	createdAt: zod
 		.string()
 		.optional()
@@ -273,18 +273,18 @@ export const spacesCreateSpaceResponse = zod.object({
 /**
  * @summary Remove Space source
  */
-export const spacesDeleteSpaceParams = zod.object({
+export const deleteSpaceParams = zod.object({
 	etag: zod.string().describe('Unique ID of the latest version of a resource.'),
 });
 
-export const spacesDeleteSpaceQueryParams = zod.object({
+export const deleteSpaceQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const spacesDeleteSpaceResponse = zod.object({
+export const deleteSpaceResponse = zod.object({
 	createdAt: zod
 		.string()
 		.optional()
@@ -367,7 +367,7 @@ export const spacesDeleteSpaceResponse = zod.object({
 /**
  * @summary Locate spaces source
  */
-export const spacesLocateSpaceParams = zod.object({
+export const locateSpaceParams = zod.object({
 	etag: zod
 		.string()
 		.describe(
@@ -375,14 +375,14 @@ export const spacesLocateSpaceParams = zod.object({
 		),
 });
 
-export const spacesLocateSpaceQueryParams = zod.object({
+export const locateSpaceQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 });
 
-export const spacesLocateSpaceResponse = zod.object({
+export const locateSpaceResponse = zod.object({
 	createdAt: zod
 		.string()
 		.optional()
@@ -465,20 +465,20 @@ export const spacesLocateSpaceResponse = zod.object({
 /**
  * @summary NEW Update of the Space source
  */
-export const spacesUpdateSpaceParams = zod.object({
+export const updateSpaceParams = zod.object({
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const spacesUpdateSpaceQueryParams = zod.object({
+export const updateSpaceQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Source Fields to return into result.'),
 });
 
-export const spacesUpdateSpaceBody = zod.object({
+export const updateSpaceBody = zod.object({
 	homePage: zod
 		.string()
 		.optional()
@@ -492,7 +492,7 @@ export const spacesUpdateSpaceBody = zod.object({
 	state: zod.boolean().optional().describe('The state of the space.'),
 });
 
-export const spacesUpdateSpaceResponse = zod.object({
+export const updateSpaceResponse = zod.object({
 	createdAt: zod
 		.string()
 		.optional()
