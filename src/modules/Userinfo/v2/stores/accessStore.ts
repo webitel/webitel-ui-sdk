@@ -38,6 +38,9 @@ export const createUserAccessStore = ({
 
     const sectionVisibilityAccess = ref<SectionVisibilityMap>(new Map());
 
+    // Bypass mode for when no access data exists (new projects)
+    const bypassMode = ref<boolean>(false);
+
     const hasAccess = (
       action: CrudAction | SpecialGlobalAction,
       object?: WtObject,
@@ -73,6 +76,8 @@ export const createUserAccessStore = ({
     };
 
     const hasSectionVisibility = (section: UiSection, object: WtObject) => {
+      if (bypassMode.value) return true;
+
       const appOfSection = getWtAppByUiSection(section);
       const objectOfSection = object; /*castUiSectionToWtObject(section)*/
       const hasSectionVisibilityAccess = (section: UiSection) => {
@@ -123,6 +128,9 @@ export const createUserAccessStore = ({
       scope: rawScopeAccess,
       access: rawVisibilityAccess,
     }: CreateUserAccessStoreRawAccess) => {
+      // Enable bypass mode if access data is null/undefined
+      bypassMode.value = rawVisibilityAccess === null;
+
       globalAccess.value = makeGlobalAccessMap(rawGlobalAccess);
       scopeAccess.value = makeScopeAccessMap(rawScopeAccess);
       appVisibilityAccess.value = makeAppVisibilityMap(rawVisibilityAccess);
