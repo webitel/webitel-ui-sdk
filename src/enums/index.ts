@@ -3,6 +3,7 @@ import AgentStatus from './AgentStatus/AgentStatus.enum.js';
 import { ButtonColor } from './ButtonColor/ButtonColor';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import { ChipColor } from './ChipColor/ChipColor';
+import { EmptyCause } from './EmptyCause/EmptyCause';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
 import IconAction from './IconAction/IconAction.enum.js';
@@ -26,6 +27,7 @@ export {
   AgentStatus,
   AuditorSections,
   ButtonColor,
+  EmptyCause,
   ChatGatewayProvider,
   ChipColor,
   ComponentSize,
