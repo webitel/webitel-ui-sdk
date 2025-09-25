@@ -24,6 +24,7 @@
       row-reorder
       :reorderable-column="false"
       header-style="width: 1%;"
+      body-style="width: 1%;"
       :pt="{
         columnresizer: { 
             class: { 
@@ -45,6 +46,7 @@
       column-key="row-select"
       :reorderable-column="false"
       header-style="width: 1%;"
+      body-style="width: 1%;"
       :pt="{
         columnresizer: { 
             class: { 
