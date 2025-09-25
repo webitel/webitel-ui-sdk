@@ -38,7 +38,7 @@ export const tableHeadersStoreBody = ({
       : null;
   });
 
-  const headerWidths = computed(() => {
+  const columnWidths = computed(() => {
     return headers.value.reduce((acc, header) => {
       if (header.width) {
         acc[header.field] = header.width;
@@ -138,13 +138,13 @@ export const tableHeadersStoreBody = ({
       value: sort,
     });
 
-    const { restore: restoreWidths } = usePersistedStorage({
-      name: 'headerWidths',
-      value: headerWidths,
+    const { restore: restoreColumnWidths } = usePersistedStorage({
+      name: 'columnWidths',
+      value: columnWidths,
       storages: [PersistedStorageType.LocalStorage],
       storagePath: id,
       onStore: (save, { name }) => {
-        const value = JSON.stringify(headerWidths.value);
+        const value = JSON.stringify(columnWidths.value);
         return save({ name, value });
       },
       onRestore: async (restore, name) => {
@@ -159,7 +159,7 @@ export const tableHeadersStoreBody = ({
       },
     });
 
-    return Promise.allSettled([restoreFields(), restoreSort(), restoreWidths()]);
+    return Promise.allSettled([restoreFields(), restoreSort(), restoreColumnWidths()]);
   };
 
   const getHeaderByField = (field: string) => {
@@ -192,7 +192,7 @@ export const tableHeadersStoreBody = ({
     shownHeaders,
     fields,
     sort,
-    headerWidths,
+    columnWidths,
 
     updateShownHeaders,
     updateSort,
