@@ -54,6 +54,15 @@ const table = {
 
         .p-datatable-column-resizer {
             background: ${dt('datatable.columnResizer.background')};
+
+        }
+            
+        .p-datatable-resizable-table > .p-datatable-tbody > tr > td {
+          white-space: normal;
+        }
+
+        .p-datatable-column-resize-indicator {
+          
         }
         `,
 };
