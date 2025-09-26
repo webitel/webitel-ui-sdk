@@ -50,6 +50,8 @@ const table = {
 
         .p-datatable-thead > tr > th {
             overflow: hidden;
+            position: relative;
+            z-index: 2;
         }
 
         .p-datatable-column-resizer {

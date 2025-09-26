@@ -422,5 +422,6 @@ const columnReorder = async ({dropIndex, originalEvent}) => {
   position: absolute;
   transform: translateY(-50%);
   top: 50%;
+  z-index: 1;
 }
 </style>
