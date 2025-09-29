@@ -590,7 +590,7 @@ export const getSearchMixin3ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLocateMixin3ResponseMock = (
+export const getLocateResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -1171,7 +1171,7 @@ export const getSearchMixin3MockHandler = (
 	});
 };
 
-export const getLocateMixin3MockHandler = (
+export const getLocateMockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -1187,7 +1187,7 @@ export const getLocateMixin3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLocateMixin3ResponseMock(),
+					: getLocateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -1195,5 +1195,5 @@ export const getLocateMixin3MockHandler = (
 };
 export const getTypesMock = () => [
 	getSearchMixin3MockHandler(),
-	getLocateMixin3MockHandler(),
+	getLocateMockHandler(),
 ];

@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 import type {
 	Create200,
 	DataDataset,
-	Locate200,
+	LocateMixin3200,
 	Update200,
 	Update2200,
 } from '.././_models';
@@ -1186,7 +1186,7 @@ export const getSearchResponseMock = (
 
 export const getCreateResponseMock = (): Create200 => ({});
 
-export const getLocateResponseMock = (): Locate200 => ({});
+export const getLocateMixin3ResponseMock = (): LocateMixin3200 => ({});
 
 export const getUpdateResponseMock = (): Update200 => ({});
 
@@ -1261,12 +1261,12 @@ export const getCreateMockHandler = (
 	});
 };
 
-export const getLocateMockHandler = (
+export const getLocateMixin3MockHandler = (
 	overrideResponse?:
-		| Locate200
+		| LocateMixin3200
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<Locate200> | Locate200),
+		  ) => Promise<LocateMixin3200> | LocateMixin3200),
 ) => {
 	return http.get('*/v2/dataset/:repo/:id', async (info) => {
 		await delay(1000);
@@ -1277,7 +1277,7 @@ export const getLocateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLocateResponseMock(),
+					: getLocateMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -1333,7 +1333,7 @@ export const getRecordsMock = () => [
 	getDeleteMockHandler(),
 	getSearchMockHandler(),
 	getCreateMockHandler(),
-	getLocateMockHandler(),
+	getLocateMixin3MockHandler(),
 	getUpdateMockHandler(),
 	getUpdate2MockHandler(),
 ];

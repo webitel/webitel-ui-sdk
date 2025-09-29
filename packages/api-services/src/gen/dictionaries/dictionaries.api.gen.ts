@@ -22,7 +22,7 @@ import type {
 	LocateDataParams,
 	ProtodataStruct,
 	SearchDataParams,
-	SearchTypeParams,
+	SearchTypeMixin3Params,
 	UpdateData2Body,
 	UpdateData2Params,
 	UpdateData200,
@@ -168,8 +168,8 @@ export const // --- title start
 			/**
 			 * @summary Lookup dictionaries data types.
 			 */
-			const searchType = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeParams,
+			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/dictionaries', {
@@ -229,7 +229,7 @@ export const // --- title start
 				updateData,
 				updateData2,
 				deleteType,
-				searchType,
+				searchTypeMixin3,
 				locateType,
 				createType,
 				updateType,
@@ -244,7 +244,7 @@ export type LocateDataResult = AxiosResponse<LocateData200>;
 export type UpdateDataResult = AxiosResponse<UpdateData200>;
 export type UpdateData2Result = AxiosResponse<UpdateData2200>;
 export type DeleteTypeResult = AxiosResponse<DataStructList>;
-export type SearchTypeResult = AxiosResponse<DataStructList>;
+export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
 export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
 export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
 export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;

@@ -7,49 +7,6 @@
 
 export type SearchTypeParams = {
 	/**
- * Search term:
-`?` - matches any character
-`*` - matches 0 or more characters
-e.g.: name,emails{type},labels etc...
- */
-	q?: string;
-	/**
-	 * `types.id`
-	 */
-	id?: string;
-	/**
-	 * `types.name`
-	 */
-	name?: string;
-	/**
-	 * `types.repo`
-	 */
-	repo?: string;
-	/**
-	 * `types.path`
-	 */
-	path?: string;
-	/**
-	 * [NOT] [ system / custom ] types only
-	 */
-	readonly?: boolean;
-	/**
-	 * [NOT] Extend[able] types only.
-	 */
-	extendable?: boolean;
-	/**
-	 * [NOT] include extensions/* types.
-	 */
-	extensions?: boolean;
-	/**
-	 * [NOT] Extend[ed] types only.
-	 */
-	extended?: boolean;
-	/**
-	 * [NOT] Administer access control only
-	 */
-	administered?: boolean;
-	/**
  * Number of result records (per page).
 Default: 16.
  */
@@ -97,4 +54,15 @@ USCORE   = %x5F ; underscore  ; "_"
 ```
  */
 	fields?: string[];
+	/**
+ * Search term:
+`?` - matches any character
+`*` - matches 0 or more characters
+e.g.: name,emails{type},labels etc...
+ */
+	q?: string;
+	/**
+	 * extension.type.id
+	 */
+	id?: string[];
 };

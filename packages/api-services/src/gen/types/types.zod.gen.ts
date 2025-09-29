@@ -441,13 +441,13 @@ export const searchMixin3Response = zod
 /**
  * @summary Structured data type details.
  */
-export const locateMixin3Params = zod.object({
+export const locateParams = zod.object({
 	path: zod.string().describe('`types.path`'),
 });
 
-export const locateMixin3ResponseFieldsItemKindDefault = 'none';
+export const locateResponseFieldsItemKindDefault = 'none';
 
-export const locateMixin3Response = zod
+export const locateResponse = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -591,7 +591,7 @@ export const locateMixin3Response = zod
 								'datetime',
 								'duration',
 							])
-							.default(locateMixin3ResponseFieldsItemKindDefault)
+							.default(locateResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),

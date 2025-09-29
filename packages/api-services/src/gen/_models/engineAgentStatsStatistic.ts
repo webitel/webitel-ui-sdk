@@ -25,6 +25,7 @@ export interface EngineAgentStatsStatistic {
 	pause?: string;
 	pauseCause?: string;
 	queues?: EngineLookup[];
+	screenControl?: boolean;
 	skills?: EngineLookup[];
 	status?: string;
 	statusComment?: string;

@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type Locate200 = { [key: string]: unknown };
+export interface StorageFileServiceDeleteScreenRecordingsByAgentBody {
+	[key: string]: unknown;
+}

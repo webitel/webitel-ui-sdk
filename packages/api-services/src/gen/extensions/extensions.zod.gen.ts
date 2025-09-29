@@ -392,11 +392,11 @@ export const deleteType2Response = zod
  * (ExtensionList) {
  * @summary Search for type extensions.
  */
-export const searchTypeMixin3QuerySortItemDefault = '*';
-export const searchTypeMixin3QuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const searchTypeMixin3QueryFieldsItemDefault = '*';
+export const searchTypeQuerySortItemDefault = '*';
+export const searchTypeQuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchTypeQueryFieldsItemDefault = '*';
 
-export const searchTypeMixin3QueryParams = zod.object({
+export const searchTypeQueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -406,7 +406,7 @@ export const searchTypeMixin3QueryParams = zod.object({
 		.optional()
 		.describe('Page number of result set of records.\nDefault: 1.'),
 	sort: zod
-		.array(zod.string().regex(searchTypeMixin3QuerySortItemRegExp))
+		.array(zod.string().regex(searchTypeQuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -426,9 +426,9 @@ export const searchTypeMixin3QueryParams = zod.object({
 	id: zod.array(zod.string()).optional().describe('extension.type.id'),
 });
 
-export const searchTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
+export const searchTypeResponseDataItemFieldsItemKindDefault = 'none';
 
-export const searchTypeMixin3Response = zod
+export const searchTypeResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -609,9 +609,7 @@ export const searchTypeMixin3Response = zod
 												'datetime',
 												'duration',
 											])
-											.default(
-												searchTypeMixin3ResponseDataItemFieldsItemKindDefault,
-											)
+											.default(searchTypeResponseDataItemFieldsItemKindDefault)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 											),

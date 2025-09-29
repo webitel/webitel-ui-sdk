@@ -14,7 +14,7 @@ import type {
 	DeleteType2Params,
 	DeleteTypeMixin3Params,
 	ProtodataStruct,
-	SearchTypeMixin3Params,
+	SearchTypeParams,
 } from '.././_models';
 
 // --- header start
@@ -42,8 +42,8 @@ export const // --- title start
 			 * (ExtensionList) {
 			 * @summary Search for type extensions.
 			 */
-			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeMixin3Params,
+			const searchType = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/extensions', {
@@ -109,7 +109,7 @@ export const // --- title start
 			// --- footer start
 			return {
 				deleteType2,
-				searchTypeMixin3,
+				searchType,
 				deleteTypeMixin3,
 				locateTypeMixin3,
 				createTypeMixin3,
@@ -117,7 +117,7 @@ export const // --- title start
 			};
 		};
 export type DeleteType2Result = AxiosResponse<DataStructList>;
-export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
+export type SearchTypeResult = AxiosResponse<DataStructList>;
 export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
 export type LocateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
 export type CreateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
