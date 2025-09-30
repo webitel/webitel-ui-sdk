@@ -83,6 +83,7 @@ export default {
     unassigned: 'Tayinlanmagan',
     showUnassigned: "Tayinlanmaganlarni ko'rsatish",
     group: 'Guruh',
+    dateTime: 'Sana va vaqt',
     updatedBy: (/*{ named }*/) => {
       return 'Tahrirlangan';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Tezkor javob | Tezkor javoblar',
       quickRepliesEmpty: 'Hali tezkor javoblar mavjud emas',
     },
+    screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
+    screenshots: 'Ekran rasmi | Ekran rasmlari',
   },
   channel: {
     state: {

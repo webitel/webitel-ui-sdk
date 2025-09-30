@@ -82,6 +82,7 @@ export default {
     unassigned: 'Sin asignar',
     showUnassigned: 'Mostrar sin asignar',
     group: 'Grupo',
+    dateTime: 'Fecha y hora',
     updatedBy: (/*{ named }*/) => {
       return 'Editado';
     },
@@ -216,6 +217,8 @@ export default {
       quickReplies: 'Respuesta rápida | Respuestas rápidas',
       quickRepliesEmpty: 'Aún no hay respuestas rápidas',
     },
+    screenRecordings: 'Grabación de pantalla | Grabaciones de pantalla',
+    screenshots: 'Captura de pantalla | Capturas de pantalla',
   },
   channel: {
     state: {
