@@ -1,5 +1,5 @@
 <template>
-  <p-table 
+  <p-table
     ref="table"
     class="wt-table"
     :value="data"
@@ -8,6 +8,7 @@
     :row-style="rowStyle"
     lazy
     scrollable
+    :virtual-scroller-options="verticalScroll"
     :resizable-columns="resizableColumns"
     scroll-height="flex"
     @sort="sort"
@@ -22,8 +23,8 @@
       <template #body="{ data: row }">
         <wt-icon
           v-if="!isRowReorderDisabled(row)"
-          icon="move" 
-          data-pc-section="reorderablerowhandle" 
+          icon="move"
+          data-pc-section="reorderablerowhandle"
         />
       </template>
     </p-column>
@@ -48,7 +49,7 @@
         />
       </template>
     </p-column>
-    <p-column 
+    <p-column
       v-for="(col, idx) of dataHeaders"
       :key="col.value"
       :column-key="col.field"
@@ -79,11 +80,11 @@
         @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
         -->
-        <div 
+        <div
           :style="columnStyle(col)"
           class="wt-table__td__content"
         >
-          <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading) 
+          <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading)
                this guard prevents rendering errors and keeps the table stable -->
           <slot
             v-if="row"
@@ -93,11 +94,11 @@
           >{{ row[col.value] }}</slot>
         </div>
       </template>
-      <!-- empty sorticon slot for hiding default sort icon, custom icon is rendered in header --> 
+      <!-- empty sorticon slot for hiding default sort icon, custom icon is rendered in header -->
       <template #sorticon>
       </template>
       <template
-        v-if="isTableColumnFooters" 
+        v-if="isTableColumnFooters"
         #footer
       >
         <!--
@@ -125,10 +126,10 @@
         -->
         <div class="wt-table__td__actions">
           <!-- check if row exists to prevent rendering errors -->
-          <slot 
+          <slot
             v-if="actionsData"
             name="actions"
-            :index="index" 
+            :index="index"
             :item="actionsData"
           />
         </div>
@@ -150,6 +151,7 @@ import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
+import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 
 interface Props extends DataTableProps{
   /**
@@ -192,6 +194,12 @@ interface Props extends DataTableProps{
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
   resizableColumns?: boolean;
+
+  //lazy loading
+  lazy?: boolean;
+  onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
+  loading?: boolean;
+  itemSize?: number | undefined;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -206,7 +214,9 @@ const props = withDefaults(defineProps<Props>(), {
   isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
-  resizableColumns: false
+  resizableColumns: false,
+  lazy: false,
+  itemSize: undefined
 });
 
 const { t } = useI18n();
@@ -219,7 +229,7 @@ const table = useTemplateRef('table');
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
-  return props.selectable 
+  return props.selectable
          ? props.selected || props.data.filter(item => item._isSelected)
          : [];
 });
@@ -317,6 +327,17 @@ const handleSelection = (row, select) => {
     row._isSelected = !row._isSelected;
   }
 }
+
+const verticalScroll = computed(() => {
+  if (!props.lazy) return;
+
+  return {
+    lazy: props.lazy,
+    onLazyLoad: props.onLoading,
+    itemSize: props.itemSize, // Let user provide or PrimeVue will calculate automatically
+    numToleratedItems: 10,
+  };
+});
 </script>
 
 <style lang="scss">
