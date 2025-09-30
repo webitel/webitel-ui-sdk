@@ -83,6 +83,7 @@ export default {
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
     group: 'Група',
+    dateTime: 'Дата і час',
     updatedBy: (/*{ named }*/) => {
       return 'Редаговано';
     },
@@ -220,6 +221,8 @@ export default {
       quickReplies: 'Швидка відповідь | Швидкі відповіді',
       quickRepliesEmpty: 'Ще немає швидких відповідей',
     },
+    screenRecordings: 'Запис екрану | Записи екрану',
+    screenshots: 'Знімок екрана | Знімки екрана',
   },
   channel: {
     state: {

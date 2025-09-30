@@ -69,6 +69,16 @@ export const downloadMedia = async (id) => {
 	}
 };
 
+export const downloadFile = (id) => {
+	const url = `${baseUrl}/storage/file/${id}/download?access_token=${token}`;
+	window.open(url, '_blank');
+};
+
+export const getScreenRecordingMediaUrl = (id, isThumb=false) => {
+	const url = `${baseUrl}/storage/file/${id}/stream?access_token=${token}&fetch_thumbnail=${isThumb}`;
+	return url;
+}
+
 const addMediaInstance = axios.create({
 	headers: {
 		'content-type': 'multipart/form-data',

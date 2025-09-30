@@ -31,6 +31,7 @@ import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator.j
 import saveAsJSON from './saveAsJSON.js';
 import { getNextSortOrder,queryToSortAdapter, sortToQueryAdapter } from './sortQueryAdapters.js';
 import updateObject from './updateObject.js';
+import { getStartOfDay, getEndOfDay } from './getDefaultFilterDate.js';
 
 export {
   camelToKebab,
@@ -39,7 +40,9 @@ export {
   convertDuration,
   debounce,
   eventBus,
+  getEndOfDay,
   getNextSortOrder,
+  getStartOfDay,
   isEmpty,
   isRelativeDatetimeValue,
   kebabToCamel,

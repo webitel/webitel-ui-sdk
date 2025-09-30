@@ -1,9 +1,8 @@
 import {
 	getFileService,
 	searchFilesQueryParams,
-	deleteFilesBody,
 	searchScreenRecordingsQueryParams,
-	deleteScreenRecordingsBody,
+	searchScreenRecordingsByAgentQueryParams,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -29,8 +28,8 @@ const getFilesList = async (params: any) => {
 		sort,
 		fields,
 		id,
-		uploadedAtFrom,
-		uploadedAtTo,
+		uploaded_at_from: uploadedAtFrom,
+		uploaded_at_to: uploadedAtTo,
 		uploadedBy,
 		referenceId,
 		channel,
@@ -50,8 +49,8 @@ const getFilesList = async (params: any) => {
 			sort,
 			fields,
 			id,
-			uploadedAtFrom,
-			uploadedAtTo,
+			['uploaded_at.from']: uploadedAtFrom,
+			['uploaded_at.to']: uploadedAtTo,
 			uploadedBy,
 			referenceId,
 			channel,
@@ -70,13 +69,9 @@ const getFilesList = async (params: any) => {
 	}
 };
 
-const deleteFiles = async ({ itemInstance }) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(deleteFilesBody)),
-		camelToSnake(),
-	]);
+const deleteFiles = async (id) => {
 	try {
-		const response = await getFileService().deleteFiles(item);
+		const response = await getFileService().deleteFiles({id});
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -95,8 +90,8 @@ const getScreenRecordingsList = async (params: any) => {
 		sort,
 		fields,
 		id,
-		uploadedAtFrom,
-		uploadedAtTo,
+		uploaded_at_from: uploadedAtFrom,
+		uploaded_at_to: uploadedAtTo,
 		referenceId,
 		retentionUntilFrom,
 		retentionUntilTo,
@@ -113,10 +108,10 @@ const getScreenRecordingsList = async (params: any) => {
 			size,
 			q: q || params.search,
 			sort,
-			fields,
+			fields: ['id', ...fields],
 			id,
-			uploadedAtFrom,
-			uploadedAtTo,
+			['uploaded_at.from']: uploadedAtFrom,
+			['uploaded_at.to']: uploadedAtTo,
 			referenceId,
 			retentionUntilFrom,
 			retentionUntilTo,
@@ -134,13 +129,69 @@ const getScreenRecordingsList = async (params: any) => {
 	}
 };
 
-const deleteScreenRecordings = async ({ userId, id, itemInstance }) => {
-	const item = applyTransform(itemInstance, [
-		sanitize(getShallowFieldsToSendFromZodSchema(deleteScreenRecordingsBody)),
+const deleteScreenRecordings = async ({ userId, id }) => {
+	try {
+		const response = await getFileService().deleteScreenRecordings(userId, id, {});
+		return applyTransform(response.data, [snakeToCamel()]);
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
+const getScreenRecordingsByAgent = async (params: any) => {
+	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
+		searchScreenRecordingsByAgentQueryParams,
+	);
+
+	const {
+		page,
+		size,
+		q,
+		sort,
+		fields,
+		id,
+		uploaded_at_from: uploadedAtFrom,
+		uploaded_at_to: uploadedAtTo,
+		referenceId,
+		retentionUntilFrom,
+		retentionUntilTo,
+		channel,
+	} = applyTransform(params, [
+		merge(getDefaultGetParams()),
+		sanitize(fieldsToSend),
 		camelToSnake(),
 	]);
+
 	try {
-		const response = await getFileService().deleteScreenRecordings(userId, id, item);
+		const response = await getFileService().searchScreenRecordingsByAgent(params.agentId, {
+			page,
+			size,
+			q: q || params.search,
+			sort,
+			fields: ['id', ...fields],
+			id,
+			['uploaded_at.from']: uploadedAtFrom,
+			['uploaded_at.to']: uploadedAtTo,
+			referenceId,
+			retentionUntilFrom,
+			retentionUntilTo,
+			channel,
+		});
+		const { items, next } = applyTransform(response.data, [
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items: applyTransform(items, []),
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
+const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
+	try {
+		const response = await getFileService().deleteScreenRecordingsByAgent(agentId, id, {});
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -152,4 +203,6 @@ export const FileServicesAPI = {
 	delete: deleteFiles,
 	getScreenRecordingsList,
 	deleteScreenRecordings,
+	getScreenRecordingsByAgent,
+	deleteScreenRecordingsByAgent,
 };
