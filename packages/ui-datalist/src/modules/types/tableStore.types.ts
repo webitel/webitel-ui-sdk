@@ -37,6 +37,7 @@ export interface TableStore<Entity> {
   shownHeaders: Ref<[]>;
   fields: Ref<[]>;
   sort: Ref<string>;
+  columnWidths: Ref<[]>;
 
   // filtersStore
   filtersManager: Ref<IFiltersManager>;

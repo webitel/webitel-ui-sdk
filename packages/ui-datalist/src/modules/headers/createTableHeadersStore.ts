@@ -38,6 +38,15 @@ export const tableHeadersStoreBody = ({
       : null;
   });
 
+  const columnWidths = computed(() => {
+    return headers.value.reduce((acc, header) => {
+      if (header.width) {
+        acc[header.field] = header.width;
+      }
+      return acc;
+    }, {});
+  });
+
   const $reset = () => {
     headers.value = rawHeaders;
   };
@@ -129,7 +138,53 @@ export const tableHeadersStoreBody = ({
       value: sort,
     });
 
-    return Promise.allSettled([restoreFields(), restoreSort()]);
+    const { restore: restoreColumnWidths } = usePersistedStorage({
+      name: 'columnWidths',
+      value: columnWidths,
+      storages: [PersistedStorageType.LocalStorage],
+      storagePath: id,
+      onStore: (save, { name }) => {
+        const value = JSON.stringify(columnWidths.value);
+        return save({ name, value });
+      },
+      onRestore: async (restore, name) => {
+        const value = (await restore(name)) as string;
+        if (value) {
+          const parsedWidths = JSON.parse(value);
+          headers.value = headers.value.map((header) => ({
+            ...header,
+            width: parsedWidths[header.field] || header.width,
+          }));
+        }
+      },
+    });
+
+    return Promise.allSettled([restoreFields(), restoreSort(), restoreColumnWidths()]);
+  };
+
+  const getHeaderByField = (field: string) => {
+    return headers.value.find((header) => header.field === field);
+  };
+
+  const columnResize = ({columnName, columnWidth}) => {
+    const column = getHeaderByField(columnName);
+
+    if (column) {
+      column.width = columnWidth;
+    }
+  };
+
+  const columnReorder = (orderedFields: string[]) => {
+    const reorderedHeaders = [];
+
+    orderedFields.forEach(field => {
+      const header = getHeaderByField(field);
+      if (header) {
+        reorderedHeaders.push(header);
+      }
+    });
+
+    updateShownHeaders(reorderedHeaders);
   };
 
   return {
@@ -137,9 +192,12 @@ export const tableHeadersStoreBody = ({
     shownHeaders,
     fields,
     sort,
+    columnWidths,
 
     updateShownHeaders,
     updateSort,
+    columnResize,
+    columnReorder,
 
     setupPersistence,
     $reset,

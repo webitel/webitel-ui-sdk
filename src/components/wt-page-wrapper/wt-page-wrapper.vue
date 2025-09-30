@@ -39,20 +39,28 @@ export default {
 .wt-page-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--page-wrapper-section-gap);
   box-sizing: border-box;
-  background: var(--wt-page-wrapper-background-color);
-  padding: var(--page-wrapper-padding);
   max-width: 100%;
   min-height: 100%;
+  padding: var(--page-wrapper-padding);
+  background: var(--wt-page-wrapper-background-color);
+  gap: var(--page-wrapper-section-gap);
 }
 
 .wt-page-wrapper__header,
 .wt-page-wrapper__actions-panel,
 .wt-page-wrapper__main {
   box-sizing: border-box;
-  border-radius: var(--border-radius);
+  border-radius: var(--content-wrapper-border-radius);
   background: var(--wt-page-wrapper-content-wrapper-color);
+}
+
+.wt-page-wrapper__header,
+.wt-page-wrapper__actions-panel {
+  padding: var(--page-wrapper-section-padding) var(--spacing-sm);
+}
+
+.wt-page-wrapper__main {
   padding: var(--page-wrapper-section-padding);
 }
 

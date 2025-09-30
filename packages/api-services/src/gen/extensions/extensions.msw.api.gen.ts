@@ -1170,7 +1170,7 @@ export const getSearchTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteTypeResponseMock = (
+export const getDeleteTypeMixin3ResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
 ): DataStructList => ({
 	data: faker.helpers.arrayElement([
@@ -1750,7 +1750,7 @@ export const getDeleteTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getLocateTypeResponseMock = (
+export const getLocateTypeMixin3ResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -2308,7 +2308,7 @@ export const getLocateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getCreateTypeResponseMock = (
+export const getCreateTypeMixin3ResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -2866,7 +2866,7 @@ export const getCreateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getUpdateTypeResponseMock = (
+export const getUpdateTypeMixin3ResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -3470,7 +3470,7 @@ export const getSearchTypeMockHandler = (
 	});
 };
 
-export const getDeleteTypeMockHandler = (
+export const getDeleteTypeMixin3MockHandler = (
 	overrideResponse?:
 		| DataStructList
 		| ((
@@ -3486,14 +3486,14 @@ export const getDeleteTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDeleteTypeResponseMock(),
+					: getDeleteTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLocateTypeMockHandler = (
+export const getLocateTypeMixin3MockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -3509,14 +3509,14 @@ export const getLocateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLocateTypeResponseMock(),
+					: getLocateTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCreateTypeMockHandler = (
+export const getCreateTypeMixin3MockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -3532,14 +3532,14 @@ export const getCreateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCreateTypeResponseMock(),
+					: getCreateTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUpdateTypeMockHandler = (
+export const getUpdateTypeMixin3MockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -3555,7 +3555,7 @@ export const getUpdateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUpdateTypeResponseMock(),
+					: getUpdateTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -3564,8 +3564,8 @@ export const getUpdateTypeMockHandler = (
 export const getExtensionsMock = () => [
 	getDeleteType2MockHandler(),
 	getSearchTypeMockHandler(),
-	getDeleteTypeMockHandler(),
-	getLocateTypeMockHandler(),
-	getCreateTypeMockHandler(),
-	getUpdateTypeMockHandler(),
+	getDeleteTypeMixin3MockHandler(),
+	getLocateTypeMixin3MockHandler(),
+	getCreateTypeMixin3MockHandler(),
+	getUpdateTypeMixin3MockHandler(),
 ];

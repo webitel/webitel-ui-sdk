@@ -600,7 +600,7 @@ export const getDeleteResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchMixin3ResponseMock = (
+export const getSearchResponseMock = (
 	overrideResponse: Partial<DataDataset> = {},
 ): DataDataset => ({
 	data: faker.helpers.arrayElement([
@@ -1215,7 +1215,7 @@ export const getDeleteMockHandler = (
 	});
 };
 
-export const getSearchMixin3MockHandler = (
+export const getSearchMockHandler = (
 	overrideResponse?:
 		| DataDataset
 		| ((
@@ -1231,7 +1231,7 @@ export const getSearchMixin3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchMixin3ResponseMock(),
+					: getSearchResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -1331,7 +1331,7 @@ export const getUpdate2MockHandler = (
 };
 export const getRecordsMock = () => [
 	getDeleteMockHandler(),
-	getSearchMixin3MockHandler(),
+	getSearchMockHandler(),
 	getCreateMockHandler(),
 	getLocateMixin3MockHandler(),
 	getUpdateMockHandler(),

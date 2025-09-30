@@ -46,11 +46,13 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = paginationStore;
 
   const headersStore = useHeadersStore();
-  const { headers, shownHeaders, fields, sort } = makeThisToRefs<
+  const { headers, shownHeaders, fields, sort, columnWidths } = makeThisToRefs<
     typeof headersStore
   >(headersStore, storeType);
   const {
     updateSort,
+    columnResize,
+    columnReorder,
     updateShownHeaders,
     setupPersistence: setupHeadersPersistence,
   } = headersStore;
@@ -246,6 +248,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     shownHeaders,
     fields,
     sort,
+    columnWidths,
     searchMode,
 
     filtersManager,
@@ -267,6 +270,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updateSize,
 
     updateSort,
+    columnResize,
+    columnReorder,
     updateShownHeaders,
 
     hasFilter,

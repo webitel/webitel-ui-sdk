@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 import type { DataStructList, ProtodataStruct } from '.././_models';
 import { TypeKind } from '.././_models';
 
-export const getSearchResponseMock = (
+export const getSearchMixin3ResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
 ): DataStructList => ({
 	data: faker.helpers.arrayElement([
@@ -1148,7 +1148,7 @@ export const getLocateResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchMockHandler = (
+export const getSearchMixin3MockHandler = (
 	overrideResponse?:
 		| DataStructList
 		| ((
@@ -1164,7 +1164,7 @@ export const getSearchMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchResponseMock(),
+					: getSearchMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -1194,6 +1194,6 @@ export const getLocateMockHandler = (
 	});
 };
 export const getTypesMock = () => [
-	getSearchMockHandler(),
+	getSearchMixin3MockHandler(),
 	getLocateMockHandler(),
 ];

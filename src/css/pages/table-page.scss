@@ -1,5 +1,10 @@
 @use '@webitel/styleguide/typography' as *;
 
+:root {
+  --content-wrapper-padding: var(--spacing-xs);
+  --content-wrapper-gap: var(--spacing-xs);
+}
+
 .table-page {
   &.wt-page-wrapper {
     width: 100%;
@@ -21,15 +26,16 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: var(--content-wrapper-gap);
 
     &__table-wrapper {
       display: flex;
       flex: 1 1 100%;
       flex-direction: column;
       justify-content: space-between;
-      gap: var(--spacing-sm);
       width: 100%;
       min-height: 0;
+      gap: var(--content-wrapper-gap);
 
       .wt-pagination {
         margin-top: auto;
@@ -37,8 +43,8 @@
     }
 
     &__visible-scroll-wrapper {
-      height: 100%;
       overflow: visible;
+      height: 100%;
 
       .wt-table {
         overflow: visible;
@@ -47,12 +53,12 @@
   }
 
   .table-title {
-    display: flex;
     position: relative;
+    display: flex;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    margin: var(--spacing-sm) 0;
+    padding: 0 var(--content-wrapper-padding);
 
     &__title {
       @extend %typo-heading-3;

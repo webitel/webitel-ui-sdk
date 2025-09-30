@@ -29,9 +29,9 @@ onMounted(() => {
 
 <style lang="scss">
 :root {
-  --vp-c-bg: var(--dp-22-surface-color);
-  --vp-c-bg-alt: var(--dp-20-surface-color);
-  --vp-c-bg-elv: var(--dp-18-surface-color);
-  --vp-c-bg-soft: var(--dp-16-surface-color);
+  --vp-c-bg: var(--p-content-background);
+  --vp-c-bg-alt: var(--p-content-background);
+  --vp-c-bg-elv: var(--p-content-background);
+  --vp-c-bg-soft: var(--p-content-background);
 }
 </style>

@@ -5,6 +5,7 @@ import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
+import { EmptyCause } from './EmptyCause/EmptyCause';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
@@ -31,6 +32,7 @@ export {
   ComponentSize,
   CrmSections,
   CrudAction,
+  EmptyCause,
   IconAction,
   IconColor,
   ProcessingTableColumnType,

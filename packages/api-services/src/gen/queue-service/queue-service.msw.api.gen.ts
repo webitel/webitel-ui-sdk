@@ -196,6 +196,30 @@ export const getSearchQueueResponseMock = (
 				}),
 				undefined,
 			]),
+			resourceGroups: faker.helpers.arrayElement([
+				Array.from(
+					{ length: faker.number.int({ min: 1, max: 10 }) },
+					(_, i) => i + 1,
+				).map(() => ({
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
+			resources: faker.helpers.arrayElement([
+				Array.from(
+					{ length: faker.number.int({ min: 1, max: 10 }) },
+					(_, i) => i + 1,
+				).map(() => ({
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				})),
+				undefined,
+			]),
 			ringtone: faker.helpers.arrayElement([
 				{
 					id: faker.helpers.arrayElement([
@@ -520,6 +544,30 @@ export const getCreateQueueResponseMock = (
 	]),
 	processingSec: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	resourceGroups: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	resources: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
 		undefined,
 	]),
 	ringtone: faker.helpers.arrayElement([
@@ -1114,6 +1162,30 @@ export const getDeleteQueueResponseMock = (
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
 		undefined,
 	]),
+	resourceGroups: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	resources: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
 	ringtone: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -1418,6 +1490,30 @@ export const getReadQueueResponseMock = (
 	]),
 	processingSec: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	resourceGroups: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	resources: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
 		undefined,
 	]),
 	ringtone: faker.helpers.arrayElement([
@@ -1726,6 +1822,30 @@ export const getPatchQueueResponseMock = (
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
 		undefined,
 	]),
+	resourceGroups: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	resources: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
 	ringtone: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -2030,6 +2150,30 @@ export const getUpdateQueueResponseMock = (
 	]),
 	processingSec: faker.helpers.arrayElement([
 		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	resourceGroups: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	resources: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
 		undefined,
 	]),
 	ringtone: faker.helpers.arrayElement([

@@ -5,9 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type UpdateTypeMixin3Params = {
-	/**
-	 * Fields to return into result.
-	 */
-	fields?: string[];
-};
+export interface StorageFileServiceDeleteScreenRecordingsByAgentBody {
+	[key: string]: unknown;
+}

@@ -16,7 +16,7 @@ import type {
 	DataStructList,
 	DeleteData2Params,
 	DeleteDataParams,
-	DeleteTypeMixin3Params,
+	DeleteTypeParams,
 	DictionariesImportCSVBody,
 	LocateData200,
 	LocateDataParams,
@@ -29,7 +29,7 @@ import type {
 	UpdateData2200,
 	UpdateDataBody,
 	UpdateDataParams,
-	UpdateTypeMixin3Params,
+	UpdateTypeParams,
 } from '.././_models';
 
 // --- header start
@@ -156,8 +156,8 @@ export const // --- title start
 			 * (DictionaryList) {
 			 * @summary Delete custom dictionaries.
 			 */
-			const deleteTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
-				params: DeleteTypeMixin3Params,
+			const deleteType = <TData = AxiosResponse<DataStructList>>(
+				params: DeleteTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/types/dictionaries', {
@@ -181,7 +181,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Locate the dictionary type.
 			 */
-			const locateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
+			const locateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -191,7 +191,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Create custom dictionary.
 			 */
-			const createTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
+			const createType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputDictionary: DataInputDictionary,
 				options?: AxiosRequestConfig,
@@ -206,10 +206,10 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Update custom dictionary.
 			 */
-			const updateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
+			const updateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputDictionary: DataInputDictionary,
-				params?: UpdateTypeMixin3Params,
+				params?: UpdateTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(`/types/dictionaries/${repo}`, dataInputDictionary, {
@@ -228,11 +228,11 @@ export const // --- title start
 				locateData,
 				updateData,
 				updateData2,
-				deleteTypeMixin3,
+				deleteType,
 				searchTypeMixin3,
-				locateTypeMixin3,
-				createTypeMixin3,
-				updateTypeMixin3,
+				locateType,
+				createType,
+				updateType,
 			};
 		};
 export type DeleteDataResult = AxiosResponse<DataDataset>;
@@ -243,10 +243,10 @@ export type DeleteData2Result = AxiosResponse<DataDataset>;
 export type LocateDataResult = AxiosResponse<LocateData200>;
 export type UpdateDataResult = AxiosResponse<UpdateData200>;
 export type UpdateData2Result = AxiosResponse<UpdateData2200>;
-export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
+export type DeleteTypeResult = AxiosResponse<DataStructList>;
 export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
-export type LocateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
-export type CreateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
-export type UpdateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
+export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
+export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
+export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

@@ -10,10 +10,12 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	SearchFilesParams,
+	SearchScreenRecordingsByAgentParams,
 	SearchScreenRecordingsParams,
 	StorageDeleteFilesRequest,
 	StorageDeleteFilesResponse,
 	StorageFileServiceDeleteScreenRecordingsBody,
+	StorageFileServiceDeleteScreenRecordingsByAgentBody,
 	StorageListFile,
 } from '.././_models';
 
@@ -25,6 +27,31 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
+			const searchScreenRecordingsByAgent = <
+				TData = AxiosResponse<StorageListFile>,
+			>(
+				agentId: string,
+				params?: SearchScreenRecordingsByAgentParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/storage/agent/${agentId}`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const deleteScreenRecordingsByAgent = <
+				TData = AxiosResponse<StorageDeleteFilesResponse>,
+			>(
+				agentId: string,
+				id: string[],
+				storageFileServiceDeleteScreenRecordingsByAgentBody: StorageFileServiceDeleteScreenRecordingsByAgentBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/storage/agent/${agentId}/${id}`, {
+					data: storageFileServiceDeleteScreenRecordingsByAgentBody,
+					...options,
+				});
+			};
 			const deleteFiles = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
 				storageDeleteFilesRequest: StorageDeleteFilesRequest,
 				options?: AxiosRequestConfig,
@@ -69,12 +96,18 @@ export const // --- title start
 
 			// --- footer start
 			return {
+				searchScreenRecordingsByAgent,
+				deleteScreenRecordingsByAgent,
 				deleteFiles,
 				searchFiles,
 				searchScreenRecordings,
 				deleteScreenRecordings,
 			};
 		};
+export type SearchScreenRecordingsByAgentResult =
+	AxiosResponse<StorageListFile>;
+export type DeleteScreenRecordingsByAgentResult =
+	AxiosResponse<StorageDeleteFilesResponse>;
 export type DeleteFilesResult = AxiosResponse<StorageDeleteFilesResponse>;
 export type SearchFilesResult = AxiosResponse<StorageListFile>;
 export type SearchScreenRecordingsResult = AxiosResponse<StorageListFile>;

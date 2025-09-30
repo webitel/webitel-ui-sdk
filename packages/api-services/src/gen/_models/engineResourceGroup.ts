@@ -5,7 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface WebitelKnowledgebaseTag {
-	/** The name of the tag. */
+export interface EngineResourceGroup {
 	name?: string;
 }
