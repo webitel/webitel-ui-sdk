@@ -4,6 +4,11 @@
 @use 'pages/table-page';
 @use 'pages/card-page';
 
+// Vidstack Player styles
+@import 'vidstack/player/styles/default/theme.css';
+@import 'vidstack/player/styles/base.css';
+@import 'vidstack/player/styles/plyr/theme.css';
+
 @include wt-placeholder;
 
 :root {

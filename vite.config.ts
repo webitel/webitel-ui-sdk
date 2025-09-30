@@ -9,6 +9,7 @@ import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
+import { vite as vidstack } from 'vidstack/plugins';
 
 // https://vitejs.dev/config/
 export default (/*{ mode }*/) => {
@@ -63,9 +64,11 @@ export default (/*{ mode }*/) => {
             compatConfig: {
               MODE: 2,
             },
+            isCustomElement: (tag) => tag.startsWith('media-'),
           },
         },
       }),
+      vidstack(),
       viteStaticCopy({
         targets: [
           {
