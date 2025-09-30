@@ -61,7 +61,7 @@ const getFilesList = async (params: any) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, []),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -78,7 +78,7 @@ const deleteFiles = async (id) => {
 	}
 };
 
-const getScreenRecordingsList = async (params: any) => {
+const getScreenRecordingsByUser = async (params: any) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		searchScreenRecordingsQueryParams,
 	);
@@ -121,7 +121,7 @@ const getScreenRecordingsList = async (params: any) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, []),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -129,7 +129,7 @@ const getScreenRecordingsList = async (params: any) => {
 	}
 };
 
-const deleteScreenRecordings = async ({ userId, id }) => {
+const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 	try {
 		const response = await getFileService().deleteScreenRecordings(userId, id, {});
 		return applyTransform(response.data, [snakeToCamel()]);
@@ -181,7 +181,7 @@ const getScreenRecordingsByAgent = async (params: any) => {
 			merge(getDefaultGetListResponse()),
 		]);
 		return {
-			items: applyTransform(items, []),
+			items,
 			next,
 		};
 	} catch (err) {
@@ -201,8 +201,8 @@ const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 export const FileServicesAPI = {
 	getList: getFilesList,
 	delete: deleteFiles,
-	getScreenRecordingsList,
-	deleteScreenRecordings,
+	getScreenRecordingsByUser,
+	deleteScreenRecordingsByUser,
 	getScreenRecordingsByAgent,
 	deleteScreenRecordingsByAgent,
 };
