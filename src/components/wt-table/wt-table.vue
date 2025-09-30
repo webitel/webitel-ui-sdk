@@ -1,18 +1,18 @@
 <template>
-  <p-table 
-    ref="table"
+  <p-table
     :key="tableKey"
-    class="wt-table"
-    :value="data"
-    :show-headers="!headless"
+    ref="table"
+    :reorderable-columns="reorderableColumns"
+    :resizable-columns="resizableColumns"
     :row-class="rowClass"
     :row-style="rowStyle"
-    lazy
-    scrollable
-    scroll-height="flex"
-    :resizable-columns="resizableColumns"
-    :reorderable-columns="reorderableColumns"
+    :show-headers="!headless"
+    :value="data"
+    class="wt-table"
     column-resize-mode="expand"
+    lazy
+    scroll-height="flex"
+    scrollable
     @sort="sort"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
@@ -20,40 +20,40 @@
   >
     <p-column
       v-if="rowReorder"
-      column-key="row-reorder"
-      row-reorder
-      :reorderable-column="false"
-      header-style="width: 1%;"
-      body-style="width: 1%;"
       :pt="{
-        columnresizer: { 
-            class: { 
-                'hidden': true 
-            } 
+        columnresizer: {
+            class: {
+                'hidden': true
+            }
         }
       }"
+      :reorderable-column="false"
+      body-style="width: 1%;"
+      column-key="row-reorder"
+      header-style="width: 1%;"
+      row-reorder
     >
       <template #body="{ data: row }">
         <wt-icon
           v-if="!isRowReorderDisabled(row)"
-          icon="move" 
-          data-pc-section="reorderablerowhandle" 
+          data-pc-section="reorderablerowhandle"
+          icon="move"
         />
       </template>
     </p-column>
     <p-column
       v-if="selectable"
-      column-key="row-select"
-      :reorderable-column="false"
-      header-style="width: 1%;"
-      body-style="width: 1%;"
       :pt="{
-        columnresizer: { 
-            class: { 
-                'hidden': true 
-            } 
+        columnresizer: {
+            class: {
+                'hidden': true
+            }
         }
       }"
+      :reorderable-column="false"
+      body-style="width: 1%;"
+      column-key="row-select"
+      header-style="width: 1%;"
     >
       <template #header>
         <wt-checkbox
@@ -71,18 +71,18 @@
         />
       </template>
     </p-column>
-    <p-column 
+    <p-column
       v-for="(col, idx) of dataHeaders"
       :key="col.value"
       :column-key="col.field"
       :field="col.field"
-      :sortable="isColSortable(col)"
       :hidden="isColumnHidden(col)"
       :pt="{
         root: {
           'data-column-field': col.field      // required for column-resizer to get column field
         }
       }"
+      :sortable="isColSortable(col)"
     >
 
       <template #header>
@@ -108,11 +108,11 @@
         @slot Customize data columns. Recommended for representing nested data structures like object or array, and adding specific elements like select or chip
         @scope [ { "name": "item", "description": "Data row object" }, { "name": "index", "description": "Data row index" } ]
         -->
-        <div 
+        <div
           :style="columnStyle(col)"
           class="wt-table__td__content"
         >
-          <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading) 
+          <!-- check if row exists (under certain conditions row can be missing, e.g., during async data loading)
                this guard prevents rendering errors and keeps the table stable -->
           <slot
             v-if="row"
@@ -122,11 +122,11 @@
           >{{ row[col.value] }}</slot>
         </div>
       </template>
-      <!-- empty sorticon slot for hiding default sort icon, custom icon is rendered in header --> 
+      <!-- empty sorticon slot for hiding default sort icon, custom icon is rendered in header -->
       <template #sorticon>
       </template>
       <template
-        v-if="isTableColumnFooters" 
+        v-if="isTableColumnFooters"
         #footer
       >
         <!--
@@ -138,10 +138,10 @@
     </p-column>
     <p-column
       v-if="gridActions"
-      column-key="row-actions"
-      style="width: 112px;"
       :frozen="fixedActions"
       align-frozen="right"
+      column-key="row-actions"
+      style="width: 112px;"
     >
       <template #header>
         <!--    @slot Table head actions row slot -->
@@ -154,11 +154,11 @@
         -->
         <div class="wt-table__td__actions">
           <!-- check if row exists to prevent rendering errors -->
-          <slot 
+          <slot
             v-if="actionsData"
-            name="actions"
-            :index="index" 
+            :index="index"
             :item="actionsData"
+            name="actions"
           />
         </div>
       </template>
@@ -172,7 +172,7 @@
   </p-table>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
 import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -254,7 +254,7 @@ const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
-  return props.selectable 
+  return props.selectable
          ? props.selected || props.data.filter(item => item._isSelected)
          : [];
 });
@@ -366,15 +366,15 @@ const columnResize = ({element}) => {
   emit('column-resize', { columnName: field, columnWidth: `${columnWidth}px` })
 }
 
-const columnReorder = async ({dropIndex, originalEvent}) => {
-  const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col))
+const columnReorder = async () => {
+  const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
+  const container = table.value.$el.querySelector('.p-datatable-table');
 
-  //save scroll position after table rerender
-  const tableScrollTopPosition = table.value.$el.querySelector('.p-datatable-table').scrollTop
-  const tableScrollLeftPosition = table.value.$el.querySelector('.p-datatable-table').scrollLeft
-  tableKey.value += 1       // rerender table preventing unexpected behavior
-  table.value.$el.querySelector('.p-datatable-table').scrollTop = tableScrollTopPosition
-  table.value.$el.querySelector('.p-datatable-table').scrollLeft = tableScrollLeftPosition
+  // save scroll position after table rerender
+  const { scrollTop, scrollLeft } = container;
+  // apply saved position for scrolling
+  container.scrollTop = scrollTop;
+  container.scrollLeft = scrollLeft;
 
   emit('column-reorder', newOrder)
 }
@@ -400,28 +400,28 @@ const columnReorder = async ({dropIndex, originalEvent}) => {
 
 .wt-table__th__content {
   @extend %typo-body-1-bold;
-  white-space: nowrap;
   width: 0;
+  white-space: nowrap;
 }
 
 .wt-table__td__content {
   @extend %typo-body-1;
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
 }
 
 .wt-table__td__actions {
   display: flex;
-  justify-content: flex-end;
   align-items: flex-start;
+  justify-content: flex-end;
   gap: var(--spacing-xs);
 }
 
 .wt-table__th__sort-arrow {
   position: absolute;
-  transform: translateY(-50%);
-  top: 50%;
   z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>
