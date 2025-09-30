@@ -40,5 +40,6 @@ export const EngineSystemSettingName = {
 	ScreenshotInterval: 'screenshot_interval',
 	PasswordExpiryDays: 'password_expiry_days',
 	PasswordMinLength: 'password_min_length',
-	PasswordMinCategories: 'password_min_categories',
+	PasswordCategories: 'password_categories',
+	PasswordContainsUsername: 'password_contains_username',
 } as const;

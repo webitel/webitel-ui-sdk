@@ -5,6 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type DeleteTypeMixin3Params = {
+export type UpdateTypeParams = {
+	/**
+	 * Fields to return into result.
+	 */
 	fields?: string[];
 };

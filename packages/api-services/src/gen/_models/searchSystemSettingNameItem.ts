@@ -40,5 +40,6 @@ export const SearchSystemSettingNameItem = {
 	screenshot_interval: 'screenshot_interval',
 	password_expiry_days: 'password_expiry_days',
 	password_min_length: 'password_min_length',
-	password_min_categories: 'password_min_categories',
+	password_categories: 'password_categories',
+	password_contains_username: 'password_contains_username',
 } as const;

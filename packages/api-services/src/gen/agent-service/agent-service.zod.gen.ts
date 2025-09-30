@@ -337,6 +337,7 @@ export const searchAgentStatusStatisticResponse = zod.object({
 						}),
 					)
 					.optional(),
+				screenControl: zod.boolean().optional(),
 				skills: zod
 					.array(
 						zod.object({
@@ -413,6 +414,7 @@ export const searchAgentStatusStatisticItemResponse = zod.object({
 	scoreCount: zod.string().optional(),
 	scoreOptionalAvg: zod.number().optional(),
 	scoreRequiredAvg: zod.number().optional(),
+	screenControl: zod.boolean().optional(),
 	status: zod.string().optional(),
 	statusComment: zod.string().optional(),
 	statusDuration: zod.string().optional(),

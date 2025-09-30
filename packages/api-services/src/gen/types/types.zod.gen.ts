@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Lookup data types registry.
  */
-export const searchQuerySortItemDefault = '*';
-export const searchQuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const searchQueryFieldsItemDefault = '*';
+export const searchMixin3QuerySortItemDefault = '*';
+export const searchMixin3QuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchMixin3QueryFieldsItemDefault = '*';
 
-export const searchQueryParams = zod.object({
+export const searchMixin3QueryParams = zod.object({
 	q: zod
 		.string()
 		.optional()
@@ -50,7 +50,7 @@ export const searchQueryParams = zod.object({
 		.optional()
 		.describe('Page number of result set of records.\nDefault: 1.'),
 	sort: zod
-		.array(zod.string().regex(searchQuerySortItemRegExp))
+		.array(zod.string().regex(searchMixin3QuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -63,9 +63,9 @@ export const searchQueryParams = zod.object({
 		),
 });
 
-export const searchResponseDataItemFieldsItemKindDefault = 'none';
+export const searchMixin3ResponseDataItemFieldsItemKindDefault = 'none';
 
-export const searchResponse = zod
+export const searchMixin3Response = zod
 	.object({
 		data: zod
 			.array(
@@ -246,7 +246,9 @@ export const searchResponse = zod
 												'datetime',
 												'duration',
 											])
-											.default(searchResponseDataItemFieldsItemKindDefault)
+											.default(
+												searchMixin3ResponseDataItemFieldsItemKindDefault,
+											)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 											),
