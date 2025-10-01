@@ -16,7 +16,7 @@ import type {
 	DataStructList,
 	DeleteData2Params,
 	DeleteDataParams,
-	DeleteTypeParams,
+	DeleteTypeMixin3Params,
 	DictionariesImportCSVBody,
 	LocateData200,
 	LocateDataParams,
@@ -156,8 +156,8 @@ export const // --- title start
 			 * (DictionaryList) {
 			 * @summary Delete custom dictionaries.
 			 */
-			const deleteType = <TData = AxiosResponse<DataStructList>>(
-				params: DeleteTypeParams,
+			const deleteTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
+				params: DeleteTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/types/dictionaries', {
@@ -228,7 +228,7 @@ export const // --- title start
 				locateData,
 				updateData,
 				updateData2,
-				deleteType,
+				deleteTypeMixin3,
 				searchTypeMixin3,
 				locateType,
 				createType,
@@ -243,7 +243,7 @@ export type DeleteData2Result = AxiosResponse<DataDataset>;
 export type LocateDataResult = AxiosResponse<LocateData200>;
 export type UpdateDataResult = AxiosResponse<UpdateData200>;
 export type UpdateData2Result = AxiosResponse<UpdateData2200>;
-export type DeleteTypeResult = AxiosResponse<DataStructList>;
+export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
 export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
 export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
 export type CreateTypeResult = AxiosResponse<ProtodataStruct>;

@@ -1595,7 +1595,7 @@ export const updateData2Response = zod.object({});
  * (DictionaryList) {
  * @summary Delete custom dictionaries.
  */
-export const deleteTypeQueryParams = zod.object({
+export const deleteTypeMixin3QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -1605,9 +1605,9 @@ export const deleteTypeQueryParams = zod.object({
 		.describe('`types.repo`\n\n// `record.pk`\n repeated string id = 3;'),
 });
 
-export const deleteTypeResponseDataItemFieldsItemKindDefault = 'none';
+export const deleteTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
 
-export const deleteTypeResponse = zod
+export const deleteTypeMixin3Response = zod
 	.object({
 		data: zod
 			.array(
@@ -1788,7 +1788,9 @@ export const deleteTypeResponse = zod
 												'datetime',
 												'duration',
 											])
-											.default(deleteTypeResponseDataItemFieldsItemKindDefault)
+											.default(
+												deleteTypeMixin3ResponseDataItemFieldsItemKindDefault,
+											)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 											),
