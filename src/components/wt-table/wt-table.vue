@@ -368,6 +368,7 @@ const columnResize = ({element}) => {
 
 const columnReorder = () => {
   const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
+  tableKey.value += 1;
   emit('column-reorder', newOrder)
 }
 </script>
