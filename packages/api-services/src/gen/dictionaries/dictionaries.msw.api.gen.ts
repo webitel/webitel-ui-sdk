@@ -2362,7 +2362,7 @@ export const getUpdateDataResponseMock = (): UpdateData200 => ({});
 
 export const getUpdateData2ResponseMock = (): UpdateData2200 => ({});
 
-export const getDeleteTypeResponseMock = (
+export const getDeleteTypeMixin3ResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
 ): DataStructList => ({
 	data: faker.helpers.arrayElement([
@@ -5380,7 +5380,7 @@ export const getUpdateData2MockHandler = (
 	});
 };
 
-export const getDeleteTypeMockHandler = (
+export const getDeleteTypeMixin3MockHandler = (
 	overrideResponse?:
 		| DataStructList
 		| ((
@@ -5396,7 +5396,7 @@ export const getDeleteTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDeleteTypeResponseMock(),
+					: getDeleteTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -5503,7 +5503,7 @@ export const getDictionariesMock = () => [
 	getLocateDataMockHandler(),
 	getUpdateDataMockHandler(),
 	getUpdateData2MockHandler(),
-	getDeleteTypeMockHandler(),
+	getDeleteTypeMixin3MockHandler(),
 	getSearchTypeMixin3MockHandler(),
 	getLocateTypeMockHandler(),
 	getCreateTypeMockHandler(),

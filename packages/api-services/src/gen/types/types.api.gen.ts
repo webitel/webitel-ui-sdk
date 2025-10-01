@@ -37,7 +37,7 @@ export const // --- title start
 			/**
 			 * @summary Structured data type details.
 			 */
-			const locate = <TData = AxiosResponse<ProtodataStruct>>(
+			const locateMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				path: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -45,9 +45,9 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { searchMixin3, locate };
+			return { searchMixin3, locateMixin3 };
 		};
 export type SearchMixin3Result = AxiosResponse<DataStructList>;
-export type LocateResult = AxiosResponse<ProtodataStruct>;
+export type LocateMixin3Result = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

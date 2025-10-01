@@ -13,8 +13,8 @@ import type {
 	Create200,
 	CreateBody,
 	DataDataset,
-	LocateMixin3Params,
-	LocateMixin3200,
+	Locate200,
+	LocateParams,
 	SearchParams,
 	Update2Body,
 	Update2Params,
@@ -73,10 +73,10 @@ export const // --- title start
 			 * (Record) {
 			 * @summary Locate dataset record
 			 */
-			const locateMixin3 = <TData = AxiosResponse<LocateMixin3200>>(
+			const locate = <TData = AxiosResponse<Locate200>>(
 				repo: string,
 				id: string,
-				params?: LocateMixin3Params,
+				params?: LocateParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/v2/dataset/${repo}/${id}`, {
@@ -118,12 +118,12 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { _delete, search, create, locateMixin3, update, update2 };
+			return { _delete, search, create, locate, update, update2 };
 		};
 export type _DeleteResult = AxiosResponse<DataDataset>;
 export type SearchResult = AxiosResponse<DataDataset>;
 export type CreateResult = AxiosResponse<Create200>;
-export type LocateMixin3Result = AxiosResponse<LocateMixin3200>;
+export type LocateResult = AxiosResponse<Locate200>;
 export type UpdateResult = AxiosResponse<Update200>;
 export type Update2Result = AxiosResponse<Update2200>;
 

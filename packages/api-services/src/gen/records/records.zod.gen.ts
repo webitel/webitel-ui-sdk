@@ -787,14 +787,14 @@ export const createResponse = zod.object({});
  * (Record) {
  * @summary Locate dataset record
  */
-export const locateMixin3Params = zod.object({
+export const locateParams = zod.object({
 	repo: zod.string().describe('[`types.repo`]'),
 	id: zod.string().describe('[`record.id`]'),
 });
 
-export const locateMixin3QueryFieldsItemDefault = '*';
+export const locateQueryFieldsItemDefault = '*';
 
-export const locateMixin3QueryParams = zod.object({
+export const locateQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -803,7 +803,7 @@ export const locateMixin3QueryParams = zod.object({
 		),
 });
 
-export const locateMixin3Response = zod.object({});
+export const locateResponse = zod.object({});
 
 /**
  * (Record) {

@@ -6,5 +6,15 @@
  */
 
 export type DeleteTypeMixin3Params = {
+	/**
+	 * Fields to retrive into result dataset.
+	 */
 	fields?: string[];
+	/**
+ * `types.repo`
+
+// `record.pk`
+ repeated string id = 3;
+ */
+	repo: string[];
 };

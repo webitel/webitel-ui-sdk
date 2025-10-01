@@ -803,17 +803,17 @@ export const searchTypeResponse = zod
  * returns (ExtensionList) {
  * @summary Delete extension for types.
  */
-export const deleteTypeMixin3Params = zod.object({
+export const deleteTypeParams = zod.object({
 	repo: zod.array(zod.string()).min(1).describe('`type.repo`'),
 });
 
-export const deleteTypeMixin3QueryParams = zod.object({
+export const deleteTypeQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const deleteTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
+export const deleteTypeResponseDataItemFieldsItemKindDefault = 'none';
 
-export const deleteTypeMixin3Response = zod
+export const deleteTypeResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -994,9 +994,7 @@ export const deleteTypeMixin3Response = zod
 												'datetime',
 												'duration',
 											])
-											.default(
-												deleteTypeMixin3ResponseDataItemFieldsItemKindDefault,
-											)
+											.default(deleteTypeResponseDataItemFieldsItemKindDefault)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 											),
