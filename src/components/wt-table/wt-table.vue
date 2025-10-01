@@ -366,16 +366,8 @@ const columnResize = ({element}) => {
   emit('column-resize', { columnName: field, columnWidth: `${columnWidth}px` })
 }
 
-const columnReorder = async () => {
+const columnReorder = () => {
   const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
-  const container = table.value.$el.querySelector('.p-datatable-table');
-
-  // save scroll position after table rerender
-  const { scrollTop, scrollLeft } = container;
-  // apply saved position for scrolling
-  container.scrollTop = scrollTop;
-  container.scrollLeft = scrollLeft;
-
   emit('column-reorder', newOrder)
 }
 </script>
