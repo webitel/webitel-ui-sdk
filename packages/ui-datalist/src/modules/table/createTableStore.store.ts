@@ -46,7 +46,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
   } = paginationStore;
 
   const headersStore = useHeadersStore();
-  const { headers, shownHeaders, fields, sort, columnWidths } = makeThisToRefs<
+  const { headers, shownHeaders, fields, sort, columnWidths, isReorderingColumn } = makeThisToRefs<
     typeof headersStore
   >(headersStore, storeType);
   const {
@@ -202,6 +202,13 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     watch(
       [() => filtersManager.value.getAllValues(), sort, fields, size],
       async () => {
+        /*
+        * @author @Lera24
+        * https://webitel.atlassian.net/browse/WTEL-7597?focusedCommentId=697115
+        * */
+        if (isReorderingColumn.value) {
+          return;
+        }
         loadingAfterFiltersChange = true;
         updatePage(1);
         await loadDataList();
