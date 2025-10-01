@@ -26,7 +26,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: var(--content-wrapper-gap);
 
     &__table-wrapper {
       display: flex;
@@ -35,7 +34,7 @@
       justify-content: space-between;
       width: 100%;
       min-height: 0;
-      gap: var(--content-wrapper-gap);
+      gap: var(--spacing-sm);
 
       .wt-pagination {
         margin-top: auto;
@@ -58,7 +57,7 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 0 var(--content-wrapper-padding);
+    margin: var(--spacing-sm) 0;
 
     &__title {
       @extend %typo-heading-3;

@@ -1,12 +1,12 @@
 :root {
-  --page-wrapper-padding: var(--spacing-xs);
-  --page-wrapper-section-padding: var(--spacing-xs);
-  --page-wrapper-section-gap: var(--spacing-xs);
+  --page-wrapper-padding: var(--spacing-sm);
+  --page-wrapper-section-padding: var(--spacing-sm);
+  --page-wrapper-section-gap: var(--spacing-sm);
 
   --wt-page-wrapper-background-color: var(--p-surface-50);
   --wt-page-wrapper-content-wrapper-color: var(--content-wrapper-color);
 
-  --content-wrapper-border-radius: var(--p-border-radius-lg);
+ // --content-wrapper-border-radius: var(--p-border-radius-lg);
 }
 
 :root.theme--dark {
