@@ -188,6 +188,18 @@ export const searchFilesResponse = zod.object({
 	next: zod.boolean().optional(),
 });
 
+export const deleteQuarantineFilesBody = zod.object({
+	id: zod.array(zod.string()).optional(),
+});
+
+export const deleteQuarantineFilesResponse = zod.object({});
+
+export const restoreFilesBody = zod.object({
+	id: zod.array(zod.string()).optional(),
+});
+
+export const restoreFilesResponse = zod.object({});
+
 export const searchScreenRecordingsParams = zod.object({
 	user_id: zod.string(),
 });
