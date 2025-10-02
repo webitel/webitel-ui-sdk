@@ -159,8 +159,8 @@
       </template>
     </vue-multiselect>
     <wt-input-info
+      v-if="isValidation"
       :invalid="invalid"
-      :class="{ 'wt-input-info_visible': isValidation }"
     >
       {{ validationText }}
     </wt-input-info>
@@ -482,15 +482,6 @@ export default {
     .multiselect__limit {
       right: $multiselect-limit-right-pos;
     }
-  }
-}
-
-.wt-input-info {
-  transition-duration: var(--transition-fast);
-  opacity: 0;
-
-  &_visible {
-    opacity: 1;
   }
 }
 </style>
