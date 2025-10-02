@@ -16,12 +16,16 @@
       @ended="handleEnded"
     >
       <media-provider>
-        <video v-if="isVideo" />
-        <audio v-else />
+        <video  />
+<!--        for audio-->
+<!--        v-if="isVideo"-->
+<!--        <audio v-else />-->
       </media-provider>
 
-      <media-video-layout v-if="isVideo" />
-      <media-audio-layout v-else />
+      <media-video-layout  />
+<!--      for audio-->
+<!--      v-if="isVideo"-->
+<!--      <media-audio-layout v-else />-->
     </media-player>
 
     <div v-if="loading" class="vs-loader">Loading {{ progress }}%</div>
@@ -31,7 +35,7 @@
 <script setup lang="ts">
 import 'vidstack/bundle';
 
-import { ref, computed, watch, onMounted, nextTick } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 
 interface Props {
   src?: string | { src: string; type?: string };
@@ -70,12 +74,13 @@ const progress = ref(0);
 const posterUrl = computed(() => props.media?.poster || '');
 
 const normalizedType = computed(() => {
-  const url = typeof props.src === 'string' ? props.src : props.src?.src;
-  const ext = (url || '').split('?')[0].split('#')[0].split('.').pop()?.toLowerCase();
-
-  if (ext === 'mp4' || ext === 'm4v') return 'video/mp4';
-  if (ext === 'mp3') return 'audio/mpeg';
-  if (ext === 'ogg' || ext === 'oga') return 'audio/ogg';
+  //check for show other types
+  // const url = typeof props.src === 'string' ? props.src : props.src?.src;
+  //
+  // if (ext === 'media') return 'audio/mp3';
+  // if (ext === 'mp4' || ext === 'm4v') return 'video/mp4';
+  // if (ext === 'mp3') return 'audio/mp3';
+  // if (ext === 'ogg' || ext === 'oga') return 'audio/ogg';
 
   return 'video/mp4';
 });
