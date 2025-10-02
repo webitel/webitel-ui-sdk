@@ -107,6 +107,7 @@ const height = computed(() => {
 }
 
 .wt-image__overlay-icon {
+  z-index: 2;
   opacity: 0;
   display: flex;
   justify-content: center;

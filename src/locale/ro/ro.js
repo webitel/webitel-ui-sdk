@@ -83,6 +83,7 @@ export default {
     unassigned: 'Neatribuit',
     showUnassigned: 'Arată neatribuite',
     group: 'Grup',
+    dateTime: 'Dată și oră',
     updatedBy: (/*{ named }*/) => {
       return 'Editat';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Răspuns rapid | Răspunsuri rapide',
       quickRepliesEmpty: 'Nu există încă răspunsuri rapide',
     },
+    screenRecordings: 'Înregistrarea ecranului | Înregistrări ecran',
+    screenshots: 'Captură de ecran | Capturi de ecran',
   },
   channel: {
     state: {

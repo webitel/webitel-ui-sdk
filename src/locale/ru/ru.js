@@ -83,6 +83,7 @@ export default {
     unassigned: 'Неназначенные',
     showUnassigned: 'Показать неназначенные',
     group: 'Группа',
+    dateTime: 'Дата и время',
     updatedBy: (/*{ named }*/) => {
       return 'Редактировано';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Быстрый ответ | Быстрые ответы',
       quickRepliesEmpty: 'Еще нет быстрых ответов',
     },
+    screenRecordings: 'Запись экрана | Записи экрана',
+    screenshots: 'Снимок экрана | Снимки экрана',
   },
   channel: {
     state: {

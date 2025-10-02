@@ -83,6 +83,7 @@ export default {
     unassigned: 'Nieprzypisane',
     showUnassigned: 'Pokaż nieprzypisane',
     group: 'Grupa',
+    dateTime: 'Data i godzina',
     updatedBy: (/*{ named }*/) => {
       return 'Edytowane';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Szybka odpowiedź | Szybkie odpowiedzi',
       quickRepliesEmpty: 'Nie ma jeszcze szybkich odpowiedzi',
     },
+    screenRecordings: 'Nagranie ekranu | Nagrania ekranu',
+    screenshots: 'Zrzut ekranu | Zrzuty ekranu',
   },
   channel: {
     state: {

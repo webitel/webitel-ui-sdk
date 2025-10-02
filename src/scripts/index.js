@@ -19,6 +19,7 @@ import {
 import convertDuration from './convertDuration.js';
 import debounce from './debounce.js';
 import eventBus from './eventBus.js';
+import { getEndOfDay,getStartOfDay } from './getDefaultFilterDate.js';
 import isEmpty from './isEmpty.js';
 import { wtlog } from './logger.js';
 import {
@@ -39,7 +40,9 @@ export {
   convertDuration,
   debounce,
   eventBus,
+  getEndOfDay,
   getNextSortOrder,
+  getStartOfDay,
   isEmpty,
   isRelativeDatetimeValue,
   kebabToCamel,

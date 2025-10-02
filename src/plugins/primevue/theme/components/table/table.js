@@ -50,10 +50,21 @@ const table = {
 
         .p-datatable-thead > tr > th {
             overflow: hidden;
+            position: relative;
+            z-index: 2;
         }
 
         .p-datatable-column-resizer {
             background: ${dt('datatable.columnResizer.background')};
+
+        }
+            
+        .p-datatable-resizable-table > .p-datatable-tbody > tr > td {
+          white-space: normal;
+        }
+
+        .p-datatable-column-resize-indicator {
+          
         }
         `,
 };

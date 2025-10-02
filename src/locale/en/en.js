@@ -85,6 +85,7 @@ export default deepmerge(notTranslatable, {
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
     group: 'Group',
+    dateTime: 'Date & time',
     updatedBy: (/*{ named }*/) => {
       return 'Edited';
     },
@@ -223,6 +224,8 @@ export default deepmerge(notTranslatable, {
       quickReplies: 'Quick reply | Quick replies',
       quickRepliesEmpty: 'There are no quick replies yet',
     },
+    screenRecordings: 'Screen recording | Screen recordings',
+    screenshots: 'Screenshot | Screenshots',
   },
   channel: {
     state: {

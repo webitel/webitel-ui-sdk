@@ -51,17 +51,9 @@ export default {
 .wt-page-wrapper__actions-panel,
 .wt-page-wrapper__main {
   box-sizing: border-box;
-  border-radius: var(--content-wrapper-border-radius);
-  background: var(--wt-page-wrapper-content-wrapper-color);
-}
-
-.wt-page-wrapper__header,
-.wt-page-wrapper__actions-panel {
-  padding: var(--page-wrapper-section-padding) var(--spacing-sm);
-}
-
-.wt-page-wrapper__main {
   padding: var(--page-wrapper-section-padding);
+  border-radius: var(--border-radius);
+  background: var(--wt-page-wrapper-content-wrapper-color);
 }
 
 .wt-page-wrapper__main {
