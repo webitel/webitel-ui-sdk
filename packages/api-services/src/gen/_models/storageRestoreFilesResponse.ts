@@ -5,9 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type UpdateTypeParams = {
-	/**
-	 * Fields to return into result.
-	 */
-	fields?: string[];
-};
+export interface StorageRestoreFilesResponse {
+	[key: string]: unknown;
+}
