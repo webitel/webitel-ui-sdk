@@ -5,6 +5,9 @@ import './css/main.scss';
 
 import { createApp } from 'vue';
 
+// Initialize Vidstack
+import 'vidstack/bundle';
+
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives
 import i18n from './locale/i18n';
