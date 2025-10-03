@@ -1,8 +1,8 @@
 import {
 	getFileService,
 	searchFilesQueryParams,
-	searchScreenRecordingsQueryParams,
 	searchScreenRecordingsByAgentQueryParams,
+	searchScreenRecordingsQueryParams,
 } from '@webitel/api-services/gen';
 import { getShallowFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
 
@@ -49,8 +49,8 @@ const getFilesList = async (params: any) => {
 			sort,
 			fields,
 			id,
-			['uploaded_at.from']: uploadedAtFrom,
-			['uploaded_at.to']: uploadedAtTo,
+			'uploaded_at.from': uploadedAtFrom,
+			'uploaded_at.to': uploadedAtTo,
 			uploadedBy,
 			referenceId,
 			channel,
@@ -71,7 +71,7 @@ const getFilesList = async (params: any) => {
 
 const deleteFiles = async (id) => {
 	try {
-		const response = await getFileService().deleteFiles({id});
+		const response = await getFileService().deleteFiles({ id });
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -103,20 +103,23 @@ const getScreenRecordingsByUser = async (params: any) => {
 	]);
 
 	try {
-		const response = await getFileService().searchScreenRecordings(params.userId, {
-			page,
-			size,
-			q: q || params.search,
-			sort,
-			fields: ['id', ...fields],
-			id,
-			['uploaded_at.from']: uploadedAtFrom,
-			['uploaded_at.to']: uploadedAtTo,
-			referenceId,
-			retentionUntilFrom,
-			retentionUntilTo,
-			channel,
-		});
+		const response = await getFileService().searchScreenRecordings(
+			params.userId,
+			{
+				page,
+				size,
+				q: q || params.search,
+				sort,
+				fields: ['id', ...fields],
+				id,
+				'uploaded_at.from': uploadedAtFrom,
+				'uploaded_at.to': uploadedAtTo,
+				referenceId,
+				retentionUntilFrom,
+				retentionUntilTo,
+				channel,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -131,7 +134,11 @@ const getScreenRecordingsByUser = async (params: any) => {
 
 const deleteScreenRecordingsByUser = async ({ userId, id }) => {
 	try {
-		const response = await getFileService().deleteScreenRecordings(userId, id, {});
+		const response = await getFileService().deleteScreenRecordings(
+			userId,
+			id,
+			{},
+		);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -163,20 +170,23 @@ const getScreenRecordingsByAgent = async (params: any) => {
 	]);
 
 	try {
-		const response = await getFileService().searchScreenRecordingsByAgent(params.agentId, {
-			page,
-			size,
-			q: q || params.search,
-			sort,
-			fields: ['id', ...fields],
-			id,
-			['uploaded_at.from']: uploadedAtFrom,
-			['uploaded_at.to']: uploadedAtTo,
-			referenceId,
-			retentionUntilFrom,
-			retentionUntilTo,
-			channel,
-		});
+		const response = await getFileService().searchScreenRecordingsByAgent(
+			params.agentId,
+			{
+				page,
+				size,
+				q: q || params.search,
+				sort,
+				fields: ['id', ...fields],
+				id,
+				'uploaded_at.from': uploadedAtFrom,
+				'uploaded_at.to': uploadedAtTo,
+				referenceId,
+				retentionUntilFrom,
+				retentionUntilTo,
+				channel,
+			},
+		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
 		]);
@@ -191,7 +201,11 @@ const getScreenRecordingsByAgent = async (params: any) => {
 
 const deleteScreenRecordingsByAgent = async ({ agentId, id }) => {
 	try {
-		const response = await getFileService().deleteScreenRecordingsByAgent(agentId, id, {});
+		const response = await getFileService().deleteScreenRecordingsByAgent(
+			agentId,
+			id,
+			{},
+		);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);

@@ -74,10 +74,10 @@ export const downloadFile = (id) => {
 	window.open(url, '_blank');
 };
 
-export const getScreenRecordingMediaUrl = (id, isThumb=false) => {
+export const getScreenRecordingMediaUrl = (id, isThumb = false) => {
 	const url = `${baseUrl}/storage/file/${id}/stream?access_token=${token}&fetch_thumbnail=${isThumb}`;
 	return url;
-}
+};
 
 const addMediaInstance = axios.create({
 	headers: {
