@@ -153,6 +153,14 @@ import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
 import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 
+/**
+ * Number of items to render outside the visible area for virtual scrolling.
+ * This helps maintain smooth scrolling performance by pre-rendering items
+ * that are about to come into view, reducing the chance of blank spaces
+ * during fast scrolling.
+ */
+const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
+
 interface Props extends DataTableProps{
   /**
    * 'Accepts list of header objects. Draws text depending on "text" property, looks for data values through "value", "show" boolean controls visibility of a column (if undefined, all visible by default). ' Column width is calculated by "width" param. By default, sets 140px. '
@@ -335,7 +343,7 @@ const verticalScroll = computed(() => {
     lazy: props.lazy,
     onLazyLoad: props.onLoading,
     itemSize: props.itemSize, // Let user provide or PrimeVue will calculate automatically
-    numToleratedItems: 10,
+    numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
   };
 });
 </script>
