@@ -476,6 +476,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Descarcă PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Selectează coloanele',
         [IconAction.VARIABLES]: 'Selectează coloanele variabile',
@@ -559,6 +560,9 @@ export default {
         message:
           'Limita pentru agenții care pot lua pauză a fost depășită. Pauza nu este disponibilă momentan.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Fișierul dvs. PDF este în curs de creare…'
     },
     saveFailedPopup: {
       title: 'Salvarea a eșuat',

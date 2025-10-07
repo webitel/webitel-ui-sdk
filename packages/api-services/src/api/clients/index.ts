@@ -23,6 +23,7 @@ export * from './labels/labels';
 export * from './lists/blacklists';
 export * from './media/media';
 export * from './object/object';
+export * from './pdfServices/pdfServices';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
 // export * from './roles/roles'; fixme: ApplicationAccess import
