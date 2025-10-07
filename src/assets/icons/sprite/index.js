@@ -79,6 +79,7 @@ import darkMode from './dark-mode.svg';
 import docs from './docs.svg';
 import done from './done.svg';
 import download from './download.svg';
+import downloadPdf from './download-pdf.svg'
 import edit from './edit.svg';
 import elevenlabs from './elevenlabs.svg';
 import email from './email.svg';
@@ -434,4 +435,5 @@ export default objCamelToKebab({
   quickReplies,
   checkboxTick,
   log,
+  downloadPdf
 });

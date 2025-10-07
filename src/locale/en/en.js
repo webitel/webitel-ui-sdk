@@ -481,6 +481,7 @@ export default deepmerge(notTranslatable, {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Download PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Select columns',
         [IconAction.VARIABLES]: 'Select variables columns',
@@ -563,6 +564,9 @@ export default deepmerge(notTranslatable, {
         message:
           'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Your PDF file is being created…'
     },
     saveFailedPopup: {
       title: 'Save failed',

@@ -474,6 +474,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'PDF жүктеу',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Бағандарды таңдау',
         [IconAction.VARIABLES]: 'Айнымалы бағандарды таңдау',
@@ -557,6 +558,9 @@ export default {
         message:
           'Операторлардың паузаға шығу шегі асып кетті. Қазір пауза мүмкін емес.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Сіздің PDF файлыңыз жасалуда…'
     },
     saveFailedPopup: {
       title: 'Сақтау сәтсіз',
