@@ -9,6 +9,7 @@ import type { EngineCreateCallRequestCallSettingsVariables } from './engineCreat
 export interface EngineCreateCallRequestCallSettings {
 	audio?: boolean;
 	cancelDistribute?: boolean;
+	contactId?: string;
 	disableAutoAnswer?: boolean;
 	disableStun?: boolean;
 	display?: string;

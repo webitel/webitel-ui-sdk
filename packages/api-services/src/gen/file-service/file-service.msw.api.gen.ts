@@ -7,8 +7,104 @@
 import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
-import type { StorageDeleteFilesResponse, StorageListFile } from '.././_models';
+import type {
+	StorageDeleteFilesResponse,
+	StorageListFile,
+	StorageRestoreFilesResponse,
+} from '.././_models';
 import { StorageUploadFileChannel } from '.././_models';
+
+export const getSearchScreenRecordingsByAgentResponseMock = (
+	overrideResponse: Partial<StorageListFile> = {},
+): StorageListFile => ({
+	items: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			channel: faker.helpers.arrayElement([
+				faker.helpers.arrayElement(Object.values(StorageUploadFileChannel)),
+				undefined,
+			]),
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			mimeType: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			referenceId: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			retentionUntil: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			sha256Sum: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			size: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			thumbnail: faker.helpers.arrayElement([
+				{
+					mimeType: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					scale: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					size: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			uploadedAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			uploadedBy: faker.helpers.arrayElement([
+				{
+					id: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					name: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			uuid: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			viewName: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	next: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	...overrideResponse,
+});
+
+export const getDeleteScreenRecordingsByAgentResponseMock =
+	(): StorageDeleteFilesResponse => ({});
 
 export const getDeleteFilesResponseMock =
 	(): StorageDeleteFilesResponse => ({});
@@ -102,6 +198,12 @@ export const getSearchFilesResponseMock = (
 	...overrideResponse,
 });
 
+export const getDeleteQuarantineFilesResponseMock =
+	(): StorageDeleteFilesResponse => ({});
+
+export const getRestoreFilesResponseMock =
+	(): StorageRestoreFilesResponse => ({});
+
 export const getSearchScreenRecordingsResponseMock = (
 	overrideResponse: Partial<StorageListFile> = {},
 ): StorageListFile => ({
@@ -194,6 +296,52 @@ export const getSearchScreenRecordingsResponseMock = (
 export const getDeleteScreenRecordingsResponseMock =
 	(): StorageDeleteFilesResponse => ({});
 
+export const getSearchScreenRecordingsByAgentMockHandler = (
+	overrideResponse?:
+		| StorageListFile
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) => Promise<StorageListFile> | StorageListFile),
+) => {
+	return http.get('*/storage/agent/:agentId', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getSearchScreenRecordingsByAgentResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getDeleteScreenRecordingsByAgentMockHandler = (
+	overrideResponse?:
+		| StorageDeleteFilesResponse
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<StorageDeleteFilesResponse> | StorageDeleteFilesResponse),
+) => {
+	return http.delete('*/storage/agent/:agentId/:id', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getDeleteScreenRecordingsByAgentResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
 export const getDeleteFilesMockHandler = (
 	overrideResponse?:
 		| StorageDeleteFilesResponse
@@ -234,6 +382,52 @@ export const getSearchFilesMockHandler = (
 						? await overrideResponse(info)
 						: overrideResponse
 					: getSearchFilesResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getDeleteQuarantineFilesMockHandler = (
+	overrideResponse?:
+		| StorageDeleteFilesResponse
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<StorageDeleteFilesResponse> | StorageDeleteFilesResponse),
+) => {
+	return http.delete('*/storage/file/quarantine', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getDeleteQuarantineFilesResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getRestoreFilesMockHandler = (
+	overrideResponse?:
+		| StorageRestoreFilesResponse
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<StorageRestoreFilesResponse> | StorageRestoreFilesResponse),
+) => {
+	return http.patch('*/storage/file/restore', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getRestoreFilesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -286,8 +480,12 @@ export const getDeleteScreenRecordingsMockHandler = (
 	});
 };
 export const getFileServiceMock = () => [
+	getSearchScreenRecordingsByAgentMockHandler(),
+	getDeleteScreenRecordingsByAgentMockHandler(),
 	getDeleteFilesMockHandler(),
 	getSearchFilesMockHandler(),
+	getDeleteQuarantineFilesMockHandler(),
+	getRestoreFilesMockHandler(),
 	getSearchScreenRecordingsMockHandler(),
 	getDeleteScreenRecordingsMockHandler(),
 ];

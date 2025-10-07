@@ -1,14 +1,18 @@
 import { TableScheme } from '@webitel/styleguide/component-schemes';
 
 const rowStateStyles = (state, dt) => `
-            .p-datatable-tbody > tr.row-${state} {
-                background: ${dt(`datatable.row.${state}Background`)};
-            }
+  .p-datatable-tbody > tr.row-${state},
+  .p-datatable-tbody > tr.row-${state} > td,
+  .p-datatable-tbody > tr.row-${state} > td.p-datatable-frozen-column {
+    background: ${dt(`datatable.row.${state}Background`)};
+  }
 
-            .p-datatable-tbody > tr.row-${state}:hover {
-                background: ${dt(`datatable.row.${state}HoverBackground`)};
-            }
-        `;
+  .p-datatable-tbody > tr.row-${state}:hover,
+  .p-datatable-tbody > tr.row-${state}:hover > td,
+  .p-datatable-tbody > tr.row-${state}:hover > td.p-datatable-frozen-column {
+    background: ${dt(`datatable.row.${state}HoverBackground`)};
+  }
+`;
 
 const table = {
   ...TableScheme.sizes,
@@ -25,9 +29,10 @@ const table = {
           background: transparent;
         }
         
-        .p-datatable-tbody > tr:hover {
-            background: ${dt('datatable.row.hoverBackground')};
-        }
+        .p-datatable-tbody > tr:hover > td,
+        .p-datatable-tbody > tr:hover > td.p-datatable-frozen-column {
+          background: ${dt('datatable.row.hoverBackground')};
+         }
 
         ${rowStateStyles('error', dt)}
         ${rowStateStyles('warning', dt)}
@@ -45,10 +50,21 @@ const table = {
 
         .p-datatable-thead > tr > th {
             overflow: hidden;
+            position: relative;
+            z-index: 2;
         }
 
         .p-datatable-column-resizer {
             background: ${dt('datatable.columnResizer.background')};
+
+        }
+            
+        .p-datatable-resizable-table > .p-datatable-tbody > tr > td {
+          white-space: normal;
+        }
+
+        .p-datatable-column-resize-indicator {
+          
         }
         `,
 };

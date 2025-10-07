@@ -16,13 +16,13 @@ import type {
 	DataStructList,
 	DeleteData2Params,
 	DeleteDataParams,
-	DeleteTypeMixin3Params,
+	DeleteTypeParams,
 	DictionariesImportCSVBody,
 	LocateData200,
 	LocateDataParams,
 	ProtodataStruct,
 	SearchDataParams,
-	SearchTypeMixin3Params,
+	SearchTypeParams,
 	UpdateData2Body,
 	UpdateData2Params,
 	UpdateData200,
@@ -156,8 +156,8 @@ export const // --- title start
 			 * (DictionaryList) {
 			 * @summary Delete custom dictionaries.
 			 */
-			const deleteTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
-				params: DeleteTypeMixin3Params,
+			const deleteType = <TData = AxiosResponse<DataStructList>>(
+				params: DeleteTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/types/dictionaries', {
@@ -168,8 +168,8 @@ export const // --- title start
 			/**
 			 * @summary Lookup dictionaries data types.
 			 */
-			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeMixin3Params,
+			const searchType = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/dictionaries', {
@@ -228,8 +228,8 @@ export const // --- title start
 				locateData,
 				updateData,
 				updateData2,
-				deleteTypeMixin3,
-				searchTypeMixin3,
+				deleteType,
+				searchType,
 				locateTypeMixin3,
 				createTypeMixin3,
 				updateTypeMixin3,
@@ -243,8 +243,8 @@ export type DeleteData2Result = AxiosResponse<DataDataset>;
 export type LocateDataResult = AxiosResponse<LocateData200>;
 export type UpdateDataResult = AxiosResponse<UpdateData200>;
 export type UpdateData2Result = AxiosResponse<UpdateData2200>;
-export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
-export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
+export type DeleteTypeResult = AxiosResponse<DataStructList>;
+export type SearchTypeResult = AxiosResponse<DataStructList>;
 export type LocateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
 export type CreateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
 export type UpdateTypeMixin3Result = AxiosResponse<ProtodataStruct>;

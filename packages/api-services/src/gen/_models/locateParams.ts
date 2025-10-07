@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type LocateMixin3Params = {
+export type LocateParams = {
 	/**
  * Fields [Q]uery to build result dataset record.
 ```

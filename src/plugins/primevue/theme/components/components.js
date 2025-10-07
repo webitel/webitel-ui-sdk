@@ -5,6 +5,7 @@ import button from './button/button.js';
 import checkbox from './checkbox/checkbox.js';
 import chip from './chip/chip.js';
 import divider from './divider/divider.js';
+import image from './image/image.js';
 import menubar from './menubar/menubar.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
@@ -23,6 +24,7 @@ const components = {
   checkbox,
   toggleswitch: switcher,
   divider,
+  image,
   menubar,
   popover,
   radiobutton: radio,

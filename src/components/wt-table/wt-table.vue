@@ -1,35 +1,58 @@
 <template>
   <p-table
+    :key="tableKey"
     ref="table"
-    class="wt-table"
-    :value="data"
-    :show-headers="!headless"
+    :reorderable-columns="reorderableColumns"
+    :resizable-columns="resizableColumns"
     :row-class="rowClass"
     :row-style="rowStyle"
+    :show-headers="!headless"
+    :value="data"
+    class="wt-table"
+    column-resize-mode="expand"
     lazy
-    scrollable
-    :virtual-scroller-options="verticalScroll"
-    :resizable-columns="resizableColumns"
     scroll-height="flex"
+    scrollable
     @sort="sort"
+    :virtual-scroller-options="verticalScroll"
+    @column-resize-end="columnResize"
+    @column-reorder="columnReorder"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
     <p-column
       v-if="rowReorder"
+      :pt="{
+        columnresizer: {
+            class: {
+                'hidden': true
+            }
+        }
+      }"
+      :reorderable-column="false"
+      body-style="width: 1%;"
       column-key="row-reorder"
-      row-reorder
       header-style="width: 1%;"
+      row-reorder
     >
       <template #body="{ data: row }">
         <wt-icon
           v-if="!isRowReorderDisabled(row)"
-          icon="move"
           data-pc-section="reorderablerowhandle"
+          icon="move"
         />
       </template>
     </p-column>
     <p-column
       v-if="selectable"
+      :pt="{
+        columnresizer: {
+            class: {
+                'hidden': true
+            }
+        }
+      }"
+      :reorderable-column="false"
+      body-style="width: 1%;"
       column-key="row-select"
       header-style="width: 1%;"
     >
@@ -54,9 +77,15 @@
       :key="col.value"
       :column-key="col.field"
       :field="col.field"
-      :sortable="isColSortable(col)"
       :hidden="isColumnHidden(col)"
+      :pt="{
+        root: {
+          'data-column-field': col.field      // required for column-resizer to get column field
+        }
+      }"
+      :sortable="isColSortable(col)"
     >
+
       <template #header>
         <div class="wt-table__th__content">
           {{ col.text }}
@@ -110,10 +139,10 @@
     </p-column>
     <p-column
       v-if="gridActions"
-      column-key="row-actions"
-      style="width: 112px;"
       :frozen="fixedActions"
       align-frozen="right"
+      column-key="row-actions"
+      style="width: 112px;"
     >
       <template #header>
         <!--    @slot Table head actions row slot -->
@@ -128,9 +157,9 @@
           <!-- check if row exists to prevent rendering errors -->
           <slot
             v-if="actionsData"
-            name="actions"
             :index="index"
             :item="actionsData"
+            name="actions"
           />
         </div>
       </template>
@@ -144,7 +173,7 @@
   </p-table>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
 import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -201,7 +230,8 @@ interface Props extends DataTableProps{
   isRowReorderDisabled?: (row) => boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
-  resizableColumns?: boolean;
+  resizableColumns?: boolean
+  reorderableColumns?: boolean
 
   //lazy loading
   lazy?: boolean;
@@ -223,6 +253,7 @@ const props = withDefaults(defineProps<Props>(), {
   rowClass: () => '',
   rowStyle: () => ({}),
   resizableColumns: false,
+  reorderableColumns: false,
   lazy: false,
   itemSize: undefined
 });
@@ -231,9 +262,13 @@ const { t } = useI18n();
 
 const slots = useSlots();
 
-const emit = defineEmits(['sort', 'update:selected', 'reorder:row']);
+const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resize', 'column-reorder']);
 
 const table = useTemplateRef('table');
+const tableKey = ref(0);
+
+// table's columns that should be excluded from reorder
+const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
@@ -336,6 +371,25 @@ const handleSelection = (row, select) => {
   }
 }
 
+const columnResize = ({element}) => {
+  // getting column name by custom attribute due Primevue does not provide it
+  const field = element.getAttribute('data-column-field')
+
+  const computedStyle = getComputedStyle(element);
+  const paddingLeft = parseFloat(computedStyle.paddingLeft);
+  const paddingRight = parseFloat(computedStyle.paddingRight);
+
+  const columnWidth = element.offsetWidth - paddingLeft - paddingRight
+
+  emit('column-resize', { columnName: field, columnWidth: `${columnWidth}px` })
+}
+
+const columnReorder = () => {
+  const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
+  tableKey.value += 1;
+  emit('column-reorder', newOrder)
+}
+
 const verticalScroll = computed(() => {
   if (!props.lazy) return;
 
@@ -355,6 +409,7 @@ const verticalScroll = computed(() => {
 <style lang="scss" scoped>
 @use '@webitel/styleguide/scroll' as *;
 @use '@webitel/styleguide/typography' as *;
+@use '@webitel/styleguide/typography' as *;
 
 .wt-table {
   @extend %wt-scrollbar;
@@ -367,27 +422,28 @@ const verticalScroll = computed(() => {
 
 .wt-table__th__content {
   @extend %typo-body-1-bold;
-  white-space: nowrap;
   width: 0;
+  white-space: nowrap;
 }
 
 .wt-table__td__content {
   @extend %typo-body-1;
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
 }
 
 .wt-table__td__actions {
   display: flex;
-  justify-content: flex-end;
   align-items: flex-start;
+  justify-content: flex-end;
   gap: var(--spacing-xs);
 }
 
 .wt-table__th__sort-arrow {
   position: absolute;
-  transform: translateY(-50%);
+  z-index: 1;
   top: 50%;
+  transform: translateY(-50%);
 }
 </style>

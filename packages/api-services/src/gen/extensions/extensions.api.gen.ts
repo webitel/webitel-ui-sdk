@@ -12,9 +12,9 @@ import type {
 	DataInputExtension,
 	DataStructList,
 	DeleteType2Params,
-	DeleteTypeParams,
+	DeleteTypeMixin3Params,
 	ProtodataStruct,
-	SearchTypeParams,
+	SearchTypeMixin3Params,
 } from '.././_models';
 
 // --- header start
@@ -42,8 +42,8 @@ export const // --- title start
 			 * (ExtensionList) {
 			 * @summary Search for type extensions.
 			 */
-			const searchType = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeParams,
+			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/extensions', {
@@ -55,9 +55,9 @@ export const // --- title start
 			 * returns (ExtensionList) {
 			 * @summary Delete extension for types.
 			 */
-			const deleteType = <TData = AxiosResponse<DataStructList>>(
+			const deleteTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
 				repo: string[],
-				params?: DeleteTypeParams,
+				params?: DeleteTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/types/extensions/${repo}`, {
@@ -109,16 +109,16 @@ export const // --- title start
 			// --- footer start
 			return {
 				deleteType2,
-				searchType,
-				deleteType,
+				searchTypeMixin3,
+				deleteTypeMixin3,
 				locateType,
 				createType,
 				updateType,
 			};
 		};
 export type DeleteType2Result = AxiosResponse<DataStructList>;
-export type SearchTypeResult = AxiosResponse<DataStructList>;
-export type DeleteTypeResult = AxiosResponse<DataStructList>;
+export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
+export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
 export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
 export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
 export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;

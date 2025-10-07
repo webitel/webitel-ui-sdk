@@ -30,6 +30,7 @@
             </h3>
           </slot>
           <wt-icon-btn
+            v-if="closable"
             class="wt-popup__close-btn"
             icon="close"
             @click="emit('close')"
@@ -76,6 +77,7 @@ interface Props {
    * __even if `shown` prop is "true"__
    */
   disabled?: boolean;
+  closable?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -83,6 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: ComponentSize.MD,
   overflow: false,
   disabled: false,
+  closable: true
 });
 
 const emit = defineEmits<{

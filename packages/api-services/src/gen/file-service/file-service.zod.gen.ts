@@ -6,6 +6,102 @@
  */
 import { z as zod } from 'zod/v4';
 
+export const searchScreenRecordingsByAgentParams = zod.object({
+	agent_id: zod.string(),
+});
+
+export const searchScreenRecordingsByAgentQueryChannelDefault =
+	'UnknownChannel';
+
+export const searchScreenRecordingsByAgentQueryParams = zod.object({
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.string()).optional(),
+	uploadedAtFrom: zod.string().optional(),
+	uploadedAtTo: zod.string().optional(),
+	referenceId: zod.array(zod.string()).optional(),
+	retentionUntilFrom: zod.string().optional(),
+	retentionUntilTo: zod.string().optional(),
+	channel: zod
+		.enum([
+			'UnknownChannel',
+			'ChatChannel',
+			'MailChannel',
+			'CallChannel',
+			'LogChannel',
+			'MediaChannel',
+			'KnowledgebaseChannel',
+			'CasesChannel',
+			'ScreenshotChannel',
+			'ScreenSharingChannel',
+		])
+		.default(searchScreenRecordingsByAgentQueryChannelDefault),
+});
+
+export const searchScreenRecordingsByAgentResponseItemsItemChannelDefault =
+	'UnknownChannel';
+
+export const searchScreenRecordingsByAgentResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				channel: zod
+					.enum([
+						'UnknownChannel',
+						'ChatChannel',
+						'MailChannel',
+						'CallChannel',
+						'LogChannel',
+						'MediaChannel',
+						'KnowledgebaseChannel',
+						'CasesChannel',
+						'ScreenshotChannel',
+						'ScreenSharingChannel',
+					])
+					.default(
+						searchScreenRecordingsByAgentResponseItemsItemChannelDefault,
+					),
+				id: zod.string().optional(),
+				mimeType: zod.string().optional(),
+				name: zod.string().optional(),
+				referenceId: zod.string().optional(),
+				retentionUntil: zod.string().optional(),
+				sha256Sum: zod.string().optional(),
+				size: zod.string().optional(),
+				thumbnail: zod
+					.object({
+						mimeType: zod.string().optional(),
+						scale: zod.string().optional(),
+						size: zod.string().optional(),
+					})
+					.optional(),
+				uploadedAt: zod.string().optional(),
+				uploadedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				uuid: zod.string().optional(),
+				viewName: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
+
+export const deleteScreenRecordingsByAgentParams = zod.object({
+	agent_id: zod.string(),
+	id: zod.array(zod.string()).min(1),
+});
+
+export const deleteScreenRecordingsByAgentBody = zod.object({});
+
+export const deleteScreenRecordingsByAgentResponse = zod.object({});
+
 export const deleteFilesBody = zod.object({
 	id: zod.array(zod.string()).optional(),
 });
@@ -91,6 +187,18 @@ export const searchFilesResponse = zod.object({
 		.optional(),
 	next: zod.boolean().optional(),
 });
+
+export const deleteQuarantineFilesBody = zod.object({
+	id: zod.array(zod.string()).optional(),
+});
+
+export const deleteQuarantineFilesResponse = zod.object({});
+
+export const restoreFilesBody = zod.object({
+	id: zod.array(zod.string()).optional(),
+});
+
+export const restoreFilesResponse = zod.object({});
 
 export const searchScreenRecordingsParams = zod.object({
 	user_id: zod.string(),

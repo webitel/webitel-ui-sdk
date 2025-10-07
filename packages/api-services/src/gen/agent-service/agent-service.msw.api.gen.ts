@@ -688,6 +688,10 @@ export const getSearchAgentStatusStatisticResponseMock = (
 				})),
 				undefined,
 			]),
+			screenControl: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			skills: faker.helpers.arrayElement([
 				Array.from(
 					{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -860,6 +864,10 @@ export const getSearchAgentStatusStatisticItemResponseMock = (
 	]),
 	scoreRequiredAvg: faker.helpers.arrayElement([
 		faker.number.float({ min: undefined, max: undefined, fractionDigits: 2 }),
+		undefined,
+	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
 		undefined,
 	]),
 	status: faker.helpers.arrayElement([

@@ -83,6 +83,7 @@ export default {
     unassigned: 'Тағайындалмаған',
     showUnassigned: 'Тағайындалмағандарды көрсету',
     group: 'Топ',
+    dateTime: 'Күні мен уақыты',
     updatedBy: (/*{ named }*/) => {
       return 'Өңделген';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Жылдам жауап | Жылдам жауаптар',
       quickRepliesEmpty: 'Жылдам жауаптар әлі жоқ',
     },
+    screenRecordings: 'Экран жазбасы | Экран жазбалары',
+    screenshots: 'Экран суреті | Экран суреттері',
   },
   channel: {
     state: {
