@@ -23,7 +23,7 @@ import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/Acc
 import { snakeToCamel } from '../../scripts';
 import notTranslatable from './notTranslatable.en';
 
-export default deepmerge(notTranslatable, {
+export default deepmerge({
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
     comment: 'Comment',
@@ -764,4 +764,4 @@ export default deepmerge(notTranslatable, {
     chatHistoryApi: 'There was an error loading the chat history',
     markChatProcessed: 'Failed to move the chat to “Closed”',
   },
-});
+}, notTranslatable);
