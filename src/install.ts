@@ -5,6 +5,11 @@ import './css/main.scss';
 import './css/tailwind.css';
 import './assets/icons/sprite/index.js';
 
+import 'vidstack/player/styles/default/theme.css';
+import 'vidstack/player/styles/base.css';
+import 'vidstack/player/styles/plyr/theme.css';
+
+
 import { generateInstance } from '@webitel/api-services/api/axios';
 
 import Components from './components/index.js'; // init all components
