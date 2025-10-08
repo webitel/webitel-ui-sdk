@@ -1,5 +1,4 @@
 <script setup>
-import Docs from './wt-intersection-observer-docs.vue';
 import ExampleBasicInfiniteScroll from './examples/example-basic-infinite-scroll.vue';
 import Specs from './component-specs.vue';
 </script>
@@ -14,9 +13,6 @@ A Vue component that uses the Intersection Observer API to detect when an elemen
 
 ## Documentation
 
-::: raw
-<Docs />
-:::
 
 ## Basic Infinite Scroll
 
