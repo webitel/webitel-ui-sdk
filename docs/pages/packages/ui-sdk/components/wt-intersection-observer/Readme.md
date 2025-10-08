@@ -77,26 +77,9 @@ const loadMore = () => {
 |-------|-------------|
 | `next` | Emitted when the observer element comes into view and canLoadMore is true |
 
-## Best Practices
+## Usage Notes
 
-1. **Always check loading state**: Prevent multiple simultaneous API calls by checking the loading state before making requests.
-
-2. **Use canLoadMore flag**: Set this to false when no more data is available to prevent unnecessary API calls.
-
-3. **Provide visual feedback**: Use the loading prop to show users that data is being fetched.
-
-4. **Handle errors gracefully**: Implement proper error handling in your load functions.
-
-5. **Clean up on unmount**: The component automatically cleans up the intersection observer on unmount.
-
-## Common Use Cases
-
-- **Infinite scrolling lists**: Load more items as user scrolls down
-- **Lazy loading images**: Load images only when they come into view
-- **Pagination**: Load next page of data automatically
-- **Analytics tracking**: Track when elements become visible
-- **Table data loading**: Load more rows in large tables
-
-## Browser Support
-
-The component uses the Intersection Observer API, which is supported in all modern browsers. For older browsers, consider using a polyfill.
+- **`canLoadMore` prop**: Controls whether the observer should trigger the `next` event for data loading. Set to `false` when you know there's no more data to load (e.g., reached the end of pagination, API returned empty response). This prevents unnecessary API calls and improves performance.
+- Use `loading` prop to show a loader at the bottom of the list during data fetching
+- **`next` event**: Triggered when the observer element comes into view and `canLoadMore` is `true`. The event doesn't pass any parameters - use it to trigger your data loading logic
+- The component automatically cleans up the intersection observer on unmount
