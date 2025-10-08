@@ -4,9 +4,9 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelknowledgebaseLookup } from './webitelknowledgebaseLookup';
+import type { WebitelKnowledgebaseLookup } from './webitelKnowledgebaseLookup';
 
-export interface WebitelknowledgebaseAttachment {
+export interface WebitelKnowledgebaseAttachment {
 	/** The unique ID of the association. Never changes. */
 	id?: string;
 	/** The size of the attachment. */
@@ -14,5 +14,5 @@ export interface WebitelknowledgebaseAttachment {
 	/** The title of the article. */
 	title?: string;
 	/** The user who loaded this attachment. */
-	uploadedBy?: WebitelknowledgebaseLookup;
+	uploadedBy?: WebitelKnowledgebaseLookup;
 }

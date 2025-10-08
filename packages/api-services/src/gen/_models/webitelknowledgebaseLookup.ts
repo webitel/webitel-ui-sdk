@@ -9,7 +9,7 @@
  * Lookup reference information.
 Simplified search filter to uniquely identify related object.
  */
-export interface WebitelknowledgebaseLookup {
+export interface WebitelKnowledgebaseLookup {
 	/** Reference Object unique ID. */
 	id?: string;
 	/** Reference Object display name. */
