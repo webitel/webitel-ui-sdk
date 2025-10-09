@@ -5,6 +5,7 @@ import button from './button/button.js';
 import checkbox from './checkbox/checkbox.js';
 import chip from './chip/chip.js';
 import divider from './divider/divider.js';
+import galleria from './galleria/galleria.js';
 import image from './image/image.js';
 import menubar from './menubar/menubar.js';
 import popover from './popover/popover.js';
@@ -33,6 +34,7 @@ const components = {
   checkbox,
   datatable: table,
   toolbar,
+  galleria,
 };
 
 export default components;
