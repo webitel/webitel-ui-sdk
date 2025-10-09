@@ -1,6 +1,6 @@
 <script setup>
 import ExampleTable from './examples/example-table.vue';
-import ExampleTableWithVerticalScroll from './examples/example-table-with-virtical-scroll.vue';
+import ExampleTableWithVerticalScroll from './examples/example-table-with-virtual-scroll.vue';
 import Specs from './component-specs.vue';
 </script>
 
@@ -29,7 +29,7 @@ This example demonstrates how to use `wt-table` with virtual scrolling for large
 :::
 
 ::: details Code
-<<< ./examples/example-table-with-virtical-scroll.vue
+<<< ./examples/example-table-with-virtual-scroll.vue
 :::
 
 ### Key Features of this Example:

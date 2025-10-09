@@ -75,7 +75,7 @@ const getRowClass = ({id}) => {
 
 const onLoading = () => {
   if (index.value > 50) {
-    return lazy.value = false;
+    return;
   }
 
   setTimeout(() => {

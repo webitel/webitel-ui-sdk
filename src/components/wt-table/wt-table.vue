@@ -14,7 +14,7 @@
     scroll-height="flex"
     scrollable
     @sort="sort"
-    :virtual-scroller-options="verticalScroll"
+    :virtual-scroller-options="virtualScroll"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
@@ -189,6 +189,7 @@ import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
  * during fast scrolling.
  */
 const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
+const DEFAULT_ITEM_SIZE = 40;
 
 interface Props extends DataTableProps{
   /**
@@ -390,13 +391,13 @@ const columnReorder = () => {
   emit('column-reorder', newOrder)
 }
 
-const verticalScroll = computed(() => {
+const virtualScroll = computed(() => {
   if (!props.lazy) return;
 
   return {
     lazy: props.lazy,
     onLazyLoad: props.onLoading,
-    itemSize: props.itemSize, // Let user provide or PrimeVue will calculate automatically
+    itemSize: props.itemSize || DEFAULT_ITEM_SIZE, // The height/width of item according to orientation
     numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
   };
 });
