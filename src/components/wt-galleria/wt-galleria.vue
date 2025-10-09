@@ -8,7 +8,7 @@
     :num-visible="5"
   >
     <template #item="{item}: {item: WtGalleriaItem}">
-        <img :src="item.src" alt="Gallery item" />
+        <img :src="item.src" alt="Gallery item" class="wt-galleria__image" />
     </template>
     <template #thumbnail="{item}: {item: WtGalleriaItem}">
         <img :src="item.thumbnailSrc" alt="Gallery thumbnail" class="wt-galleria__thumbnail" />
@@ -18,9 +18,10 @@
 
 <script setup lang="ts">
 import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
+import type { GalleriaProps } from 'primevue';
 
 import { defineModel, defineProps, ref} from 'vue';
-interface Props {
+interface Props extends GalleriaProps{
   value: WtGalleriaItem[];
 }
 
@@ -30,9 +31,8 @@ const visible = defineModel<boolean>('visible', { required: true });
 </script>
 
 <style lang="scss" scoped>
+
 .wt-galleria__thumbnail {
-  width: 80px;
-  height: 50px;
   object-fit: cover;
 }
 </style>
