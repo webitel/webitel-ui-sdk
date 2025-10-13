@@ -9,12 +9,12 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ExtensionsDeleteType2Params,
-	ExtensionsDeleteTypeParams,
-	ExtensionsSearchTypeParams,
-	WebitelProtoDataInputExtension,
-	WebitelProtoDataStruct,
-	WebitelProtoDataStructList,
+	DataInputExtension,
+	DataStructList,
+	DeleteType2Params,
+	DeleteTypeMixin3Params,
+	ProtodataStruct,
+	SearchTypeMixin3Params,
 } from '.././_models';
 
 // --- header start
@@ -29,10 +29,8 @@ export const // --- title start
 			 * returns (ExtensionList) {
 			 * @summary Delete extension for types.
 			 */
-			const extensionsDeleteType2 = <
-				TData = AxiosResponse<WebitelProtoDataStructList>,
-			>(
-				params?: ExtensionsDeleteType2Params,
+			const deleteType2 = <TData = AxiosResponse<DataStructList>>(
+				params?: DeleteType2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/types/extensions', {
@@ -44,10 +42,8 @@ export const // --- title start
 			 * (ExtensionList) {
 			 * @summary Search for type extensions.
 			 */
-			const extensionsSearchType = <
-				TData = AxiosResponse<WebitelProtoDataStructList>,
-			>(
-				params?: ExtensionsSearchTypeParams,
+			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/extensions', {
@@ -59,11 +55,9 @@ export const // --- title start
 			 * returns (ExtensionList) {
 			 * @summary Delete extension for types.
 			 */
-			const extensionsDeleteType = <
-				TData = AxiosResponse<WebitelProtoDataStructList>,
-			>(
+			const deleteTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
 				repo: string[],
-				params?: ExtensionsDeleteTypeParams,
+				params?: DeleteTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/types/extensions/${repo}`, {
@@ -75,9 +69,7 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Type extension details.
 			 */
-			const extensionsLocateType = <
-				TData = AxiosResponse<WebitelProtoDataStruct>,
-			>(
+			const locateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -87,16 +79,14 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Create type extension.
 			 */
-			const extensionsCreateType = <
-				TData = AxiosResponse<WebitelProtoDataStruct>,
-			>(
+			const createType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
-				webitelProtoDataInputExtension: WebitelProtoDataInputExtension,
+				dataInputExtension: DataInputExtension,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/types/extensions/${repo}`,
-					webitelProtoDataInputExtension,
+					dataInputExtension,
 					options,
 				);
 			};
@@ -104,38 +94,33 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Update type extension.
 			 */
-			const extensionsUpdateType = <
-				TData = AxiosResponse<WebitelProtoDataStruct>,
-			>(
+			const updateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
-				webitelProtoDataInputExtension: WebitelProtoDataInputExtension,
+				dataInputExtension: DataInputExtension,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/types/extensions/${repo}`,
-					webitelProtoDataInputExtension,
+					dataInputExtension,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				extensionsDeleteType2,
-				extensionsSearchType,
-				extensionsDeleteType,
-				extensionsLocateType,
-				extensionsCreateType,
-				extensionsUpdateType,
+				deleteType2,
+				searchTypeMixin3,
+				deleteTypeMixin3,
+				locateType,
+				createType,
+				updateType,
 			};
 		};
-export type ExtensionsDeleteType2Result =
-	AxiosResponse<WebitelProtoDataStructList>;
-export type ExtensionsSearchTypeResult =
-	AxiosResponse<WebitelProtoDataStructList>;
-export type ExtensionsDeleteTypeResult =
-	AxiosResponse<WebitelProtoDataStructList>;
-export type ExtensionsLocateTypeResult = AxiosResponse<WebitelProtoDataStruct>;
-export type ExtensionsCreateTypeResult = AxiosResponse<WebitelProtoDataStruct>;
-export type ExtensionsUpdateTypeResult = AxiosResponse<WebitelProtoDataStruct>;
+export type DeleteType2Result = AxiosResponse<DataStructList>;
+export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
+export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
+export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
+export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
+export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

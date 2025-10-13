@@ -1,0 +1,32 @@
+name: webitel api-services pkg generate api and publish
+
+on:
+#  https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow
+  workflow_dispatch:
+
+jobs:
+  generate_and_publish:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          check-latest: true
+          registry-url: https://registry.npmjs.org
+
+      - name: API generation and publish release
+        id: generate_and_publish_release
+
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          cd packages/api-services
+          npm ci
+          npm run make-all
+
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v5

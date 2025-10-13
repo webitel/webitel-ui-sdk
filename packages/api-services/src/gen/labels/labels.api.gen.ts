@@ -9,14 +9,14 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	LabelsDeleteLabelsParams,
-	LabelsGetLabelsParams,
-	LabelsListLabelsParams,
-	LabelsMergeLabelsParams,
-	LabelsResetLabelsParams,
-	WebitelContactsInputLabel,
-	WebitelContactsLabelList,
-	WebitelContactsLabelTags,
+	ContactsInputLabel,
+	ContactsLabelList,
+	ContactsLabelTags,
+	DeleteLabelsParams,
+	GetLabelsParams,
+	ListLabelsParams,
+	MergeLabelsParams,
+	ResetLabelsParams,
 } from '.././_models';
 
 // --- header start
@@ -30,8 +30,8 @@ export const // --- title start
 			/**
 			 * @summary Search for Contacts engaged Label(s).
 			 */
-			const labelsGetLabels = <TData = AxiosResponse<WebitelContactsLabelTags>>(
-				params?: LabelsGetLabelsParams,
+			const getLabels = <TData = AxiosResponse<ContactsLabelTags>>(
+				params?: GetLabelsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/contacts/labels', {
@@ -42,11 +42,9 @@ export const // --- title start
 			/**
 			 * @summary Remove Contact Labels associations.
 			 */
-			const labelsDeleteLabels = <
-				TData = AxiosResponse<WebitelContactsLabelList>,
-			>(
+			const deleteLabels = <TData = AxiosResponse<ContactsLabelList>>(
 				contactId: string,
-				params: LabelsDeleteLabelsParams,
+				params: DeleteLabelsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/labels`, {
@@ -57,11 +55,9 @@ export const // --- title start
 			/**
 			 * @summary Locate the Contact's associated Label(s).
 			 */
-			const labelsListLabels = <
-				TData = AxiosResponse<WebitelContactsLabelList>,
-			>(
+			const listLabels = <TData = AxiosResponse<ContactsLabelList>>(
 				contactId: string,
-				params?: LabelsListLabelsParams,
+				params?: ListLabelsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/labels`, {
@@ -72,57 +68,39 @@ export const // --- title start
 			/**
 			 * @summary Associate NEW Labels to the Contact.
 			 */
-			const labelsMergeLabels = <
-				TData = AxiosResponse<WebitelContactsLabelList>,
-			>(
+			const mergeLabels = <TData = AxiosResponse<ContactsLabelList>>(
 				contactId: string,
-				webitelContactsInputLabel: WebitelContactsInputLabel[],
-				params?: LabelsMergeLabelsParams,
+				contactsInputLabel: ContactsInputLabel[],
+				params?: MergeLabelsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post(
-					`/contacts/${contactId}/labels`,
-					webitelContactsInputLabel,
-					{
-						...options,
-						params: { ...params, ...options?.params },
-					},
-				);
+				return axios.post(`/contacts/${contactId}/labels`, contactsInputLabel, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
 			};
 			/**
 			 * @summary Reset Labels to fit the specified final set.
 			 */
-			const labelsResetLabels = <
-				TData = AxiosResponse<WebitelContactsLabelList>,
-			>(
+			const resetLabels = <TData = AxiosResponse<ContactsLabelList>>(
 				contactId: string,
-				webitelContactsInputLabel: WebitelContactsInputLabel[],
-				params?: LabelsResetLabelsParams,
+				contactsInputLabel: ContactsInputLabel[],
+				params?: ResetLabelsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(
-					`/contacts/${contactId}/labels`,
-					webitelContactsInputLabel,
-					{
-						...options,
-						params: { ...params, ...options?.params },
-					},
-				);
+				return axios.put(`/contacts/${contactId}/labels`, contactsInputLabel, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
 			};
 
 			// --- footer start
-			return {
-				labelsGetLabels,
-				labelsDeleteLabels,
-				labelsListLabels,
-				labelsMergeLabels,
-				labelsResetLabels,
-			};
+			return { getLabels, deleteLabels, listLabels, mergeLabels, resetLabels };
 		};
-export type LabelsGetLabelsResult = AxiosResponse<WebitelContactsLabelTags>;
-export type LabelsDeleteLabelsResult = AxiosResponse<WebitelContactsLabelList>;
-export type LabelsListLabelsResult = AxiosResponse<WebitelContactsLabelList>;
-export type LabelsMergeLabelsResult = AxiosResponse<WebitelContactsLabelList>;
-export type LabelsResetLabelsResult = AxiosResponse<WebitelContactsLabelList>;
+export type GetLabelsResult = AxiosResponse<ContactsLabelTags>;
+export type DeleteLabelsResult = AxiosResponse<ContactsLabelList>;
+export type ListLabelsResult = AxiosResponse<ContactsLabelList>;
+export type MergeLabelsResult = AxiosResponse<ContactsLabelList>;
+export type ResetLabelsResult = AxiosResponse<ContactsLabelList>;
 
 // --- footer end

@@ -18,7 +18,7 @@ import type {
 	ApiUpdateDeviceResponse,
 } from '.././_models';
 
-export const getDevicesDeleteDevice2ResponseMock = (
+export const getDeleteDevice2ResponseMock = (
 	overrideResponse: Partial<ApiDeleteDeviceResponse> = {},
 ): ApiDeleteDeviceResponse => ({
 	deleted: faker.helpers.arrayElement([
@@ -152,7 +152,7 @@ export const getDevicesDeleteDevice2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesSearchDeviceResponseMock = (
+export const getSearchDeviceResponseMock = (
 	overrideResponse: Partial<ApiSearchDeviceResponse> = {},
 ): ApiSearchDeviceResponse => ({
 	items: faker.helpers.arrayElement([
@@ -295,7 +295,7 @@ export const getDevicesSearchDeviceResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesCreateDeviceResponseMock = (
+export const getCreateDeviceResponseMock = (
 	overrideResponse: Partial<ApiCreateDeviceResponse> = {},
 ): ApiCreateDeviceResponse => ({
 	device: faker.helpers.arrayElement([
@@ -426,7 +426,7 @@ export const getDevicesCreateDeviceResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesUpdateDevice2ResponseMock = (
+export const getUpdateDevice2ResponseMock = (
 	overrideResponse: Partial<ApiUpdateDeviceResponse> = {},
 ): ApiUpdateDeviceResponse => ({
 	device: faker.helpers.arrayElement([
@@ -557,7 +557,7 @@ export const getDevicesUpdateDevice2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesUpdateDeviceResponseMock = (
+export const getUpdateDeviceResponseMock = (
 	overrideResponse: Partial<ApiUpdateDeviceResponse> = {},
 ): ApiUpdateDeviceResponse => ({
 	device: faker.helpers.arrayElement([
@@ -688,7 +688,7 @@ export const getDevicesUpdateDeviceResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesListRegistrationsResponseMock = (
+export const getListRegistrationsResponseMock = (
 	overrideResponse: Partial<ApiListRegistrationsResponse> = {},
 ): ApiListRegistrationsResponse => ({
 	items: faker.helpers.arrayElement([
@@ -773,7 +773,7 @@ export const getDevicesListRegistrationsResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesSearchDeviceAuditResponseMock = (
+export const getSearchDeviceAuditResponseMock = (
 	overrideResponse: Partial<ApiDeviceAuditResponse> = {},
 ): ApiDeviceAuditResponse => ({
 	items: faker.helpers.arrayElement([
@@ -834,7 +834,7 @@ export const getDevicesSearchDeviceAuditResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesDeleteDeviceResponseMock = (
+export const getDeleteDeviceResponseMock = (
 	overrideResponse: Partial<ApiDeleteDeviceResponse> = {},
 ): ApiDeleteDeviceResponse => ({
 	deleted: faker.helpers.arrayElement([
@@ -968,7 +968,7 @@ export const getDevicesDeleteDeviceResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesReadDeviceResponseMock = (
+export const getReadDeviceResponseMock = (
 	overrideResponse: Partial<ApiReadDeviceResponse> = {},
 ): ApiReadDeviceResponse => ({
 	device: faker.helpers.arrayElement([
@@ -1099,7 +1099,7 @@ export const getDevicesReadDeviceResponseMock = (
 	...overrideResponse,
 });
 
-export const getDevicesDeleteDevice2MockHandler = (
+export const getDeleteDevice2MockHandler = (
 	overrideResponse?:
 		| ApiDeleteDeviceResponse
 		| ((
@@ -1115,14 +1115,14 @@ export const getDevicesDeleteDevice2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesDeleteDevice2ResponseMock(),
+					: getDeleteDevice2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesSearchDeviceMockHandler = (
+export const getSearchDeviceMockHandler = (
 	overrideResponse?:
 		| ApiSearchDeviceResponse
 		| ((
@@ -1138,14 +1138,14 @@ export const getDevicesSearchDeviceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesSearchDeviceResponseMock(),
+					: getSearchDeviceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesCreateDeviceMockHandler = (
+export const getCreateDeviceMockHandler = (
 	overrideResponse?:
 		| ApiCreateDeviceResponse
 		| ((
@@ -1161,14 +1161,14 @@ export const getDevicesCreateDeviceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesCreateDeviceResponseMock(),
+					: getCreateDeviceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesUpdateDevice2MockHandler = (
+export const getUpdateDevice2MockHandler = (
 	overrideResponse?:
 		| ApiUpdateDeviceResponse
 		| ((
@@ -1184,14 +1184,14 @@ export const getDevicesUpdateDevice2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesUpdateDevice2ResponseMock(),
+					: getUpdateDevice2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesUpdateDeviceMockHandler = (
+export const getUpdateDeviceMockHandler = (
 	overrideResponse?:
 		| ApiUpdateDeviceResponse
 		| ((
@@ -1207,14 +1207,14 @@ export const getDevicesUpdateDeviceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesUpdateDeviceResponseMock(),
+					: getUpdateDeviceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesListRegistrationsMockHandler = (
+export const getListRegistrationsMockHandler = (
 	overrideResponse?:
 		| ApiListRegistrationsResponse
 		| ((
@@ -1232,14 +1232,14 @@ export const getDevicesListRegistrationsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesListRegistrationsResponseMock(),
+					: getListRegistrationsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesSearchDeviceAuditMockHandler = (
+export const getSearchDeviceAuditMockHandler = (
 	overrideResponse?:
 		| ApiDeviceAuditResponse
 		| ((
@@ -1255,14 +1255,14 @@ export const getDevicesSearchDeviceAuditMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesSearchDeviceAuditResponseMock(),
+					: getSearchDeviceAuditResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesDeleteDeviceMockHandler = (
+export const getDeleteDeviceMockHandler = (
 	overrideResponse?:
 		| ApiDeleteDeviceResponse
 		| ((
@@ -1278,14 +1278,14 @@ export const getDevicesDeleteDeviceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesDeleteDeviceResponseMock(),
+					: getDeleteDeviceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDevicesReadDeviceMockHandler = (
+export const getReadDeviceMockHandler = (
 	overrideResponse?:
 		| ApiReadDeviceResponse
 		| ((
@@ -1301,20 +1301,20 @@ export const getDevicesReadDeviceMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDevicesReadDeviceResponseMock(),
+					: getReadDeviceResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getDevicesMock = () => [
-	getDevicesDeleteDevice2MockHandler(),
-	getDevicesSearchDeviceMockHandler(),
-	getDevicesCreateDeviceMockHandler(),
-	getDevicesUpdateDevice2MockHandler(),
-	getDevicesUpdateDeviceMockHandler(),
-	getDevicesListRegistrationsMockHandler(),
-	getDevicesSearchDeviceAuditMockHandler(),
-	getDevicesDeleteDeviceMockHandler(),
-	getDevicesReadDeviceMockHandler(),
+	getDeleteDevice2MockHandler(),
+	getSearchDeviceMockHandler(),
+	getCreateDeviceMockHandler(),
+	getUpdateDevice2MockHandler(),
+	getUpdateDeviceMockHandler(),
+	getListRegistrationsMockHandler(),
+	getSearchDeviceAuditMockHandler(),
+	getDeleteDeviceMockHandler(),
+	getReadDeviceMockHandler(),
 ];

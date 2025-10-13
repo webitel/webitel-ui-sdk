@@ -7,11 +7,7 @@
 
 export type UpdateCommentParams = {
 	/**
-	 * Fields to include in the response.
+	 * Fields to be retrieved into result of changes.
 	 */
 	fields?: string[];
-	/**
-	 * Optional updating timestamp. If not set, will be set default(current) time.
-	 */
-	updatedAt?: string;
 };

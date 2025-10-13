@@ -11,4 +11,5 @@ export interface EngineAgentServiceUpdateAgentStatusBody {
 	onDemand?: boolean;
 	payload?: string;
 	status?: string;
+	statusComment?: string;
 }

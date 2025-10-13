@@ -6,7 +6,7 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const searchQueryParams = zod.object({
+export const searchMixin7QueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -15,7 +15,7 @@ export const searchQueryParams = zod.object({
 	objectName: zod.array(zod.string()).optional(),
 });
 
-export const searchResponse = zod.object({
+export const searchMixin7Response = zod.object({
 	items: zod
 		.array(
 			zod.object({

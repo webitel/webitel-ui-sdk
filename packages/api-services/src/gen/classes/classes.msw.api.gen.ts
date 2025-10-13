@@ -14,7 +14,7 @@ import type {
 	ApiUpdateClassResponse,
 } from '.././_models';
 
-export const getClassesSearchClassesResponseMock = (
+export const getSearchClassesResponseMock = (
 	overrideResponse: Partial<ApiSearchClassesResponse> = {},
 ): ApiSearchClassesResponse => ({
 	items: faker.helpers.arrayElement([
@@ -48,7 +48,7 @@ export const getClassesSearchClassesResponseMock = (
 	...overrideResponse,
 });
 
-export const getClassesUpdateClass2ResponseMock = (
+export const getUpdateClass2ResponseMock = (
 	overrideResponse: Partial<ApiUpdateClassResponse> = {},
 ): ApiUpdateClassResponse => ({
 	class: faker.helpers.arrayElement([
@@ -70,7 +70,7 @@ export const getClassesUpdateClass2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getClassesUpdateClassResponseMock = (
+export const getUpdateClassResponseMock = (
 	overrideResponse: Partial<ApiUpdateClassResponse> = {},
 ): ApiUpdateClassResponse => ({
 	class: faker.helpers.arrayElement([
@@ -92,7 +92,7 @@ export const getClassesUpdateClassResponseMock = (
 	...overrideResponse,
 });
 
-export const getClassesReadClassResponseMock = (
+export const getReadClassResponseMock = (
 	overrideResponse: Partial<ApiReadClassResponse> = {},
 ): ApiReadClassResponse => ({
 	class: faker.helpers.arrayElement([
@@ -114,7 +114,7 @@ export const getClassesReadClassResponseMock = (
 	...overrideResponse,
 });
 
-export const getClassesSearchClassesMockHandler = (
+export const getSearchClassesMockHandler = (
 	overrideResponse?:
 		| ApiSearchClassesResponse
 		| ((
@@ -130,14 +130,14 @@ export const getClassesSearchClassesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getClassesSearchClassesResponseMock(),
+					: getSearchClassesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getClassesUpdateClass2MockHandler = (
+export const getUpdateClass2MockHandler = (
 	overrideResponse?:
 		| ApiUpdateClassResponse
 		| ((
@@ -153,14 +153,14 @@ export const getClassesUpdateClass2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getClassesUpdateClass2ResponseMock(),
+					: getUpdateClass2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getClassesUpdateClassMockHandler = (
+export const getUpdateClassMockHandler = (
 	overrideResponse?:
 		| ApiUpdateClassResponse
 		| ((
@@ -176,14 +176,14 @@ export const getClassesUpdateClassMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getClassesUpdateClassResponseMock(),
+					: getUpdateClassResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getClassesReadClassMockHandler = (
+export const getReadClassMockHandler = (
 	overrideResponse?:
 		| ApiReadClassResponse
 		| ((
@@ -199,15 +199,15 @@ export const getClassesReadClassMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getClassesReadClassResponseMock(),
+					: getReadClassResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getClassesMock = () => [
-	getClassesSearchClassesMockHandler(),
-	getClassesUpdateClass2MockHandler(),
-	getClassesUpdateClassMockHandler(),
-	getClassesReadClassMockHandler(),
+	getSearchClassesMockHandler(),
+	getUpdateClass2MockHandler(),
+	getUpdateClassMockHandler(),
+	getReadClassMockHandler(),
 ];

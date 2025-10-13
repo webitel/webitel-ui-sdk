@@ -9,12 +9,12 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary default: TODO: indicate objclass=default as a default rights repo
  */
-export const accessStoreListDefaultAccessParams = zod.object({
+export const listDefaultAccessParams = zod.object({
 	'object.name': zod.string().describe('display name'),
 	'object.id': zod.string().describe('identifier'),
 });
 
-export const accessStoreListDefaultAccessQueryParams = zod.object({
+export const listDefaultAccessQueryParams = zod.object({
 	grantor: zod
 		.array(zod.string())
 		.optional()
@@ -47,7 +47,7 @@ export const accessStoreListDefaultAccessQueryParams = zod.object({
 	page: zod.number().optional().describe('default: 1'),
 });
 
-export const accessStoreListDefaultAccessResponse = zod.object({
+export const listDefaultAccessResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -78,13 +78,13 @@ export const accessStoreListDefaultAccessResponse = zod.object({
 /**
  * @summary Same as UpdateAccess except for DEFAULT access control system
  */
-export const accessStoreToggleDefaultAccessParams = zod.object({
+export const toggleDefaultAccessParams = zod.object({
 	'object.name': zod.string().describe('display name'),
 	'object.id': zod.string().describe('identifier'),
 	grantor: zod.string().describe('[FOR] creator user/role'),
 });
 
-export const accessStoreToggleDefaultAccessBody = zod.object({
+export const toggleDefaultAccessBody = zod.object({
 	list: zod
 		.array(
 			zod.object({
@@ -103,7 +103,7 @@ export const accessStoreToggleDefaultAccessBody = zod.object({
 	object: zod.object({}).optional(),
 });
 
-export const accessStoreToggleDefaultAccessResponse = zod.object({
+export const toggleDefaultAccessResponse = zod.object({
 	granted: zod
 		.array(
 			zod.object({
@@ -152,12 +152,12 @@ export const accessStoreToggleDefaultAccessResponse = zod.object({
 		.optional(),
 });
 
-export const accessStoreListObjectAccessParams = zod.object({
+export const listObjectAccessParams = zod.object({
 	'object.name': zod.string().describe('display name'),
 	'object.id': zod.string().describe('identifier'),
 });
 
-export const accessStoreListObjectAccessQueryParams = zod.object({
+export const listObjectAccessQueryParams = zod.object({
 	grantor: zod
 		.array(zod.string())
 		.optional()
@@ -190,7 +190,7 @@ export const accessStoreListObjectAccessQueryParams = zod.object({
 	page: zod.number().optional().describe('default: 1'),
 });
 
-export const accessStoreListObjectAccessResponse = zod.object({
+export const listObjectAccessResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -221,12 +221,12 @@ export const accessStoreListObjectAccessResponse = zod.object({
 /**
  * @summary TODO: replace with GrantAccess API, to become command like GRANT REVOKE ... with empty access rights string
  */
-export const accessStoreToggleObjectAccessParams = zod.object({
+export const toggleObjectAccessParams = zod.object({
 	'object.name': zod.string().describe('display name'),
 	'object.id': zod.string().describe('identifier'),
 });
 
-export const accessStoreToggleObjectAccessBodyItem = zod.object({
+export const toggleObjectAccessBodyItem = zod.object({
 	grantee: zod.string().optional(),
 	grants: zod.string().optional(),
 	object: zod
@@ -236,11 +236,9 @@ export const accessStoreToggleObjectAccessBodyItem = zod.object({
 		})
 		.optional(),
 });
-export const accessStoreToggleObjectAccessBody = zod.array(
-	accessStoreToggleObjectAccessBodyItem,
-);
+export const toggleObjectAccessBody = zod.array(toggleObjectAccessBodyItem);
 
-export const accessStoreToggleObjectAccessResponse = zod.object({
+export const toggleObjectAccessResponse = zod.object({
 	granted: zod.string().optional(),
 	revoked: zod.string().optional(),
 });

@@ -9,12 +9,12 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ImportTemplateServiceSearchImportTemplateParams,
+	SearchImportTemplateParams,
 	StorageCreateImportTemplateRequest,
 	StorageImportTemplate,
+	StorageImportTemplateServicePatchImportTemplateBody,
+	StorageImportTemplateServiceUpdateImportTemplateBody,
 	StorageListImportTemplate,
-	StoragePatchImportTemplateRequest,
-	StorageUpdateImportTemplateRequest,
 } from '.././_models';
 
 // --- header start
@@ -25,10 +25,10 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const importTemplateServiceSearchImportTemplate = <
+			const searchImportTemplate = <
 				TData = AxiosResponse<StorageListImportTemplate>,
 			>(
-				params?: ImportTemplateServiceSearchImportTemplateParams,
+				params?: SearchImportTemplateParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/storage/import_templates', {
@@ -36,7 +36,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const importTemplateServiceCreateImportTemplate = <
+			const createImportTemplate = <
 				TData = AxiosResponse<StorageImportTemplate>,
 			>(
 				storageCreateImportTemplateRequest: StorageCreateImportTemplateRequest,
@@ -48,7 +48,7 @@ export const // --- title start
 					options,
 				);
 			};
-			const importTemplateServiceDeleteImportTemplate = <
+			const deleteImportTemplate = <
 				TData = AxiosResponse<StorageImportTemplate>,
 			>(
 				id: number,
@@ -56,62 +56,55 @@ export const // --- title start
 			): Promise<TData> => {
 				return axios.delete(`/storage/import_templates/${id}`, options);
 			};
-			const importTemplateServiceReadImportTemplate = <
-				TData = AxiosResponse<StorageImportTemplate>,
-			>(
+			const readImportTemplate = <TData = AxiosResponse<StorageImportTemplate>>(
 				id: number,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/storage/import_templates/${id}`, options);
 			};
-			const importTemplateServicePatchImportTemplate = <
+			const patchImportTemplate = <
 				TData = AxiosResponse<StorageImportTemplate>,
 			>(
 				id: number,
-				storagePatchImportTemplateRequest: StoragePatchImportTemplateRequest,
+				storageImportTemplateServicePatchImportTemplateBody: StorageImportTemplateServicePatchImportTemplateBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/storage/import_templates/${id}`,
-					storagePatchImportTemplateRequest,
+					storageImportTemplateServicePatchImportTemplateBody,
 					options,
 				);
 			};
-			const importTemplateServiceUpdateImportTemplate = <
+			const updateImportTemplate = <
 				TData = AxiosResponse<StorageImportTemplate>,
 			>(
 				id: number,
-				storageUpdateImportTemplateRequest: StorageUpdateImportTemplateRequest,
+				storageImportTemplateServiceUpdateImportTemplateBody: StorageImportTemplateServiceUpdateImportTemplateBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/storage/import_templates/${id}`,
-					storageUpdateImportTemplateRequest,
+					storageImportTemplateServiceUpdateImportTemplateBody,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				importTemplateServiceSearchImportTemplate,
-				importTemplateServiceCreateImportTemplate,
-				importTemplateServiceDeleteImportTemplate,
-				importTemplateServiceReadImportTemplate,
-				importTemplateServicePatchImportTemplate,
-				importTemplateServiceUpdateImportTemplate,
+				searchImportTemplate,
+				createImportTemplate,
+				deleteImportTemplate,
+				readImportTemplate,
+				patchImportTemplate,
+				updateImportTemplate,
 			};
 		};
-export type ImportTemplateServiceSearchImportTemplateResult =
+export type SearchImportTemplateResult =
 	AxiosResponse<StorageListImportTemplate>;
-export type ImportTemplateServiceCreateImportTemplateResult =
-	AxiosResponse<StorageImportTemplate>;
-export type ImportTemplateServiceDeleteImportTemplateResult =
-	AxiosResponse<StorageImportTemplate>;
-export type ImportTemplateServiceReadImportTemplateResult =
-	AxiosResponse<StorageImportTemplate>;
-export type ImportTemplateServicePatchImportTemplateResult =
-	AxiosResponse<StorageImportTemplate>;
-export type ImportTemplateServiceUpdateImportTemplateResult =
-	AxiosResponse<StorageImportTemplate>;
+export type CreateImportTemplateResult = AxiosResponse<StorageImportTemplate>;
+export type DeleteImportTemplateResult = AxiosResponse<StorageImportTemplate>;
+export type ReadImportTemplateResult = AxiosResponse<StorageImportTemplate>;
+export type PatchImportTemplateResult = AxiosResponse<StorageImportTemplate>;
+export type UpdateImportTemplateResult = AxiosResponse<StorageImportTemplate>;
 
 // --- footer end

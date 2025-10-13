@@ -7,6 +7,8 @@
 
 import type { EngineLookup } from './engineLookup';
 import type { EngineQueueVariables } from './engineQueueVariables';
+import type { EngineResource } from './engineResource';
+import type { EngineResourceGroup } from './engineResourceGroup';
 import type { EngineTag } from './engineTag';
 import type { EngineTaskProcessing } from './engineTaskProcessing';
 
@@ -31,6 +33,8 @@ export interface EngineQueue {
 	processing?: boolean;
 	processingRenewalSec?: number;
 	processingSec?: number;
+	resourceGroups?: EngineResourceGroup[];
+	resources?: EngineResource[];
 	ringtone?: EngineLookup;
 	schema?: EngineLookup;
 	secLocateAgent?: number;

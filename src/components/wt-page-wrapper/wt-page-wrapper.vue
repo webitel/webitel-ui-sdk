@@ -39,21 +39,21 @@ export default {
 .wt-page-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--page-wrapper-section-gap);
   box-sizing: border-box;
-  background: var(--wt-page-wrapper-background-color);
-  padding: var(--page-wrapper-padding);
   max-width: 100%;
   min-height: 100%;
+  padding: var(--page-wrapper-padding);
+  background: var(--wt-page-wrapper-background-color);
+  gap: var(--page-wrapper-section-gap);
 }
 
 .wt-page-wrapper__header,
 .wt-page-wrapper__actions-panel,
 .wt-page-wrapper__main {
   box-sizing: border-box;
+  padding: var(--page-wrapper-section-padding);
   border-radius: var(--border-radius);
   background: var(--wt-page-wrapper-content-wrapper-color);
-  padding: var(--page-wrapper-section-padding);
 }
 
 .wt-page-wrapper__main {

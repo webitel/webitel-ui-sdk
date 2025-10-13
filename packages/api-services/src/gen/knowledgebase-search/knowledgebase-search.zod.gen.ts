@@ -6,7 +6,7 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const knowledgebaseSearchSpacesArticlesSearchQueryParams = zod.object({
+export const spacesArticlesSearchQueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -32,7 +32,7 @@ export const knowledgebaseSearchSpacesArticlesSearchQueryParams = zod.object({
 		.describe('Tags associated with the article.'),
 });
 
-export const knowledgebaseSearchSpacesArticlesSearchResponse = zod.object({
+export const spacesArticlesSearchResponse = zod.object({
 	data: zod
 		.array(
 			zod.object({

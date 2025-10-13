@@ -52,13 +52,6 @@ export default {
     expand: 'Kengaytirish',
     collapse: 'Yigʻish',
     generate: 'Generatsiya',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Dan',
     to: 'Gacha',
     tts: 'Matnni ovozga aylantirish',
@@ -90,6 +83,7 @@ export default {
     unassigned: 'Tayinlanmagan',
     showUnassigned: "Tayinlanmaganlarni ko'rsatish",
     group: 'Guruh',
+    dateTime: 'Sana va vaqt',
     updatedBy: (/*{ named }*/) => {
       return 'Tahrirlangan';
     },
@@ -228,6 +222,8 @@ export default {
       quickReplies: 'Tezkor javob | Tezkor javoblar',
       quickRepliesEmpty: 'Hali tezkor javoblar mavjud emas',
     },
+    screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
+    screenshots: 'Ekran rasmi | Ekran rasmlari',
   },
   channel: {
     state: {
@@ -481,6 +477,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'PDF yuklab olish',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Ustunlarni tanlang',
         [IconAction.VARIABLES]: "O'zgaruvchilar ustunlarini tanlash",
@@ -563,6 +560,9 @@ export default {
         message:
           'Agentlarning tanaffusga chiqish limiti oshib ketdi. Hozir tanaffus imkonsiz.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Sizning PDF faylingiz yaratilmoqda…'
     },
     saveFailedPopup: {
       title: 'Saqlash muvaffaqiyatsiz tugadi',

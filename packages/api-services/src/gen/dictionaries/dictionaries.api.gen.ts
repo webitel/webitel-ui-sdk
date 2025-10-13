@@ -9,27 +9,27 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	DictionariesCreateData200,
-	DictionariesCreateDataBody,
-	DictionariesDeleteData2Params,
-	DictionariesDeleteDataParams,
-	DictionariesDeleteTypeParams,
+	CreateData200,
+	CreateDataBody,
+	DataDataset,
+	DataInputDictionary,
+	DataStructList,
+	DeleteData2Params,
+	DeleteDataParams,
+	DeleteTypeParams,
 	DictionariesImportCSVBody,
-	DictionariesLocateData200,
-	DictionariesLocateDataParams,
-	DictionariesSearchDataParams,
-	DictionariesSearchTypeParams,
-	DictionariesUpdateData2Body,
-	DictionariesUpdateData2Params,
-	DictionariesUpdateData200,
-	DictionariesUpdateData2200,
-	DictionariesUpdateDataBody,
-	DictionariesUpdateDataParams,
-	DictionariesUpdateTypeParams,
-	WebitelProtoDataDataset,
-	WebitelProtoDataInputDictionary,
-	WebitelProtoDataStruct,
-	WebitelProtoDataStructList,
+	LocateData200,
+	LocateDataParams,
+	ProtodataStruct,
+	SearchDataParams,
+	SearchTypeParams,
+	UpdateData2Body,
+	UpdateData2Params,
+	UpdateData200,
+	UpdateData2200,
+	UpdateDataBody,
+	UpdateDataParams,
+	UpdateTypeMixin3Params,
 } from '.././_models';
 
 // --- header start
@@ -43,11 +43,9 @@ export const // --- title start
 			/**
 			 * @summary Delete a dictionary records.
 			 */
-			const dictionariesDeleteData = <
-				TData = AxiosResponse<WebitelProtoDataDataset>,
-			>(
+			const deleteData = <TData = AxiosResponse<DataDataset>>(
 				repo: string,
-				params: DictionariesDeleteDataParams,
+				params: DeleteDataParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/dictionaries/${repo}`, {
@@ -58,11 +56,9 @@ export const // --- title start
 			/**
 			 * @summary Lookup a dictionary dataset.
 			 */
-			const dictionariesSearchData = <
-				TData = AxiosResponse<WebitelProtoDataDataset>,
-			>(
+			const searchData = <TData = AxiosResponse<DataDataset>>(
 				repo: string,
-				params?: DictionariesSearchDataParams,
+				params?: SearchDataParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/dictionaries/${repo}`, {
@@ -74,25 +70,17 @@ export const // --- title start
 			 * (Record) {
 			 * @summary Create a dictionary record.
 			 */
-			const dictionariesCreateData = <
-				TData = AxiosResponse<DictionariesCreateData200>,
-			>(
+			const createData = <TData = AxiosResponse<CreateData200>>(
 				repo: string,
-				dictionariesCreateDataBody: DictionariesCreateDataBody,
+				createDataBody: CreateDataBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post(
-					`/dictionaries/${repo}`,
-					dictionariesCreateDataBody,
-					options,
-				);
+				return axios.post(`/dictionaries/${repo}`, createDataBody, options);
 			};
 			/**
 			 * @summary Import dataset from CSV file.
 			 */
-			const dictionariesImportCSV = <
-				TData = AxiosResponse<WebitelProtoDataDataset>,
-			>(
+			const importCSV = <TData = AxiosResponse<DataDataset>>(
 				repo: string,
 				dictionariesImportCSVBody: DictionariesImportCSVBody,
 				options?: AxiosRequestConfig,
@@ -106,12 +94,10 @@ export const // --- title start
 			/**
 			 * @summary Delete a dictionary records.
 			 */
-			const dictionariesDeleteData2 = <
-				TData = AxiosResponse<WebitelProtoDataDataset>,
-			>(
+			const deleteData2 = <TData = AxiosResponse<DataDataset>>(
 				repo: string,
 				id: string[],
-				params?: DictionariesDeleteData2Params,
+				params?: DeleteData2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/dictionaries/${repo}/${id}`, {
@@ -123,12 +109,10 @@ export const // --- title start
 			 * (Record) {
 			 * @summary Locate a dictionary record.
 			 */
-			const dictionariesLocateData = <
-				TData = AxiosResponse<DictionariesLocateData200>,
-			>(
+			const locateData = <TData = AxiosResponse<LocateData200>>(
 				repo: string,
 				id: string,
-				params?: DictionariesLocateDataParams,
+				params?: LocateDataParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/dictionaries/${repo}/${id}`, {
@@ -140,54 +124,40 @@ export const // --- title start
 			 * (Record) {
 			 * @summary Update a dictionary record.
 			 */
-			const dictionariesUpdateData = <
-				TData = AxiosResponse<DictionariesUpdateData200>,
-			>(
+			const updateData = <TData = AxiosResponse<UpdateData200>>(
 				repo: string,
 				id: string,
-				dictionariesUpdateDataBody: DictionariesUpdateDataBody,
-				params?: DictionariesUpdateDataParams,
+				updateDataBody: UpdateDataBody,
+				params?: UpdateDataParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch(
-					`/dictionaries/${repo}/${id}`,
-					dictionariesUpdateDataBody,
-					{
-						...options,
-						params: { ...params, ...options?.params },
-					},
-				);
+				return axios.patch(`/dictionaries/${repo}/${id}`, updateDataBody, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
 			};
 			/**
 			 * (Record) {
 			 * @summary Update a dictionary record.
 			 */
-			const dictionariesUpdateData2 = <
-				TData = AxiosResponse<DictionariesUpdateData2200>,
-			>(
+			const updateData2 = <TData = AxiosResponse<UpdateData2200>>(
 				repo: string,
 				id: string,
-				dictionariesUpdateData2Body: DictionariesUpdateData2Body,
-				params?: DictionariesUpdateData2Params,
+				updateData2Body: UpdateData2Body,
+				params?: UpdateData2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(
-					`/dictionaries/${repo}/${id}`,
-					dictionariesUpdateData2Body,
-					{
-						...options,
-						params: { ...params, ...options?.params },
-					},
-				);
+				return axios.put(`/dictionaries/${repo}/${id}`, updateData2Body, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
 			};
 			/**
 			 * (DictionaryList) {
 			 * @summary Delete custom dictionaries.
 			 */
-			const dictionariesDeleteType = <
-				TData = AxiosResponse<WebitelProtoDataStructList>,
-			>(
-				params: DictionariesDeleteTypeParams,
+			const deleteType = <TData = AxiosResponse<DataStructList>>(
+				params: DeleteTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/types/dictionaries', {
@@ -198,10 +168,8 @@ export const // --- title start
 			/**
 			 * @summary Lookup dictionaries data types.
 			 */
-			const dictionariesSearchType = <
-				TData = AxiosResponse<WebitelProtoDataStructList>,
-			>(
-				params?: DictionariesSearchTypeParams,
+			const searchType = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/dictionaries', {
@@ -213,9 +181,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Locate the dictionary type.
 			 */
-			const dictionariesLocateType = <
-				TData = AxiosResponse<WebitelProtoDataStruct>,
-			>(
+			const locateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -225,16 +191,14 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Create custom dictionary.
 			 */
-			const dictionariesCreateType = <
-				TData = AxiosResponse<WebitelProtoDataStruct>,
-			>(
+			const createTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
-				webitelProtoDataInputDictionary: WebitelProtoDataInputDictionary,
+				dataInputDictionary: DataInputDictionary,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/types/dictionaries/${repo}`,
-					webitelProtoDataInputDictionary,
+					dataInputDictionary,
 					options,
 				);
 			};
@@ -242,66 +206,47 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Update custom dictionary.
 			 */
-			const dictionariesUpdateType = <
-				TData = AxiosResponse<WebitelProtoDataStruct>,
-			>(
+			const updateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
-				webitelProtoDataInputDictionary: WebitelProtoDataInputDictionary,
-				params?: DictionariesUpdateTypeParams,
+				dataInputDictionary: DataInputDictionary,
+				params?: UpdateTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(
-					`/types/dictionaries/${repo}`,
-					webitelProtoDataInputDictionary,
-					{
-						...options,
-						params: { ...params, ...options?.params },
-					},
-				);
+				return axios.put(`/types/dictionaries/${repo}`, dataInputDictionary, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
 			};
 
 			// --- footer start
 			return {
-				dictionariesDeleteData,
-				dictionariesSearchData,
-				dictionariesCreateData,
-				dictionariesImportCSV,
-				dictionariesDeleteData2,
-				dictionariesLocateData,
-				dictionariesUpdateData,
-				dictionariesUpdateData2,
-				dictionariesDeleteType,
-				dictionariesSearchType,
-				dictionariesLocateType,
-				dictionariesCreateType,
-				dictionariesUpdateType,
+				deleteData,
+				searchData,
+				createData,
+				importCSV,
+				deleteData2,
+				locateData,
+				updateData,
+				updateData2,
+				deleteType,
+				searchType,
+				locateTypeMixin3,
+				createTypeMixin3,
+				updateTypeMixin3,
 			};
 		};
-export type DictionariesDeleteDataResult =
-	AxiosResponse<WebitelProtoDataDataset>;
-export type DictionariesSearchDataResult =
-	AxiosResponse<WebitelProtoDataDataset>;
-export type DictionariesCreateDataResult =
-	AxiosResponse<DictionariesCreateData200>;
-export type DictionariesImportCSVResult =
-	AxiosResponse<WebitelProtoDataDataset>;
-export type DictionariesDeleteData2Result =
-	AxiosResponse<WebitelProtoDataDataset>;
-export type DictionariesLocateDataResult =
-	AxiosResponse<DictionariesLocateData200>;
-export type DictionariesUpdateDataResult =
-	AxiosResponse<DictionariesUpdateData200>;
-export type DictionariesUpdateData2Result =
-	AxiosResponse<DictionariesUpdateData2200>;
-export type DictionariesDeleteTypeResult =
-	AxiosResponse<WebitelProtoDataStructList>;
-export type DictionariesSearchTypeResult =
-	AxiosResponse<WebitelProtoDataStructList>;
-export type DictionariesLocateTypeResult =
-	AxiosResponse<WebitelProtoDataStruct>;
-export type DictionariesCreateTypeResult =
-	AxiosResponse<WebitelProtoDataStruct>;
-export type DictionariesUpdateTypeResult =
-	AxiosResponse<WebitelProtoDataStruct>;
+export type DeleteDataResult = AxiosResponse<DataDataset>;
+export type SearchDataResult = AxiosResponse<DataDataset>;
+export type CreateDataResult = AxiosResponse<CreateData200>;
+export type ImportCSVResult = AxiosResponse<DataDataset>;
+export type DeleteData2Result = AxiosResponse<DataDataset>;
+export type LocateDataResult = AxiosResponse<LocateData200>;
+export type UpdateDataResult = AxiosResponse<UpdateData200>;
+export type UpdateData2Result = AxiosResponse<UpdateData2200>;
+export type DeleteTypeResult = AxiosResponse<DataStructList>;
+export type SearchTypeResult = AxiosResponse<DataStructList>;
+export type LocateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
+export type CreateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
+export type UpdateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

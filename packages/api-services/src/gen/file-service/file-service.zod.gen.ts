@@ -6,13 +6,109 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const fileServiceDeleteFilesBody = zod.object({
+export const searchScreenRecordingsByAgentParams = zod.object({
+	agent_id: zod.string(),
+});
+
+export const searchScreenRecordingsByAgentQueryChannelDefault =
+	'UnknownChannel';
+
+export const searchScreenRecordingsByAgentQueryParams = zod.object({
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.string()).optional(),
+	uploadedAtFrom: zod.string().optional(),
+	uploadedAtTo: zod.string().optional(),
+	referenceId: zod.array(zod.string()).optional(),
+	retentionUntilFrom: zod.string().optional(),
+	retentionUntilTo: zod.string().optional(),
+	channel: zod
+		.enum([
+			'UnknownChannel',
+			'ChatChannel',
+			'MailChannel',
+			'CallChannel',
+			'LogChannel',
+			'MediaChannel',
+			'KnowledgebaseChannel',
+			'CasesChannel',
+			'ScreenshotChannel',
+			'ScreenSharingChannel',
+		])
+		.default(searchScreenRecordingsByAgentQueryChannelDefault),
+});
+
+export const searchScreenRecordingsByAgentResponseItemsItemChannelDefault =
+	'UnknownChannel';
+
+export const searchScreenRecordingsByAgentResponse = zod.object({
+	items: zod
+		.array(
+			zod.object({
+				channel: zod
+					.enum([
+						'UnknownChannel',
+						'ChatChannel',
+						'MailChannel',
+						'CallChannel',
+						'LogChannel',
+						'MediaChannel',
+						'KnowledgebaseChannel',
+						'CasesChannel',
+						'ScreenshotChannel',
+						'ScreenSharingChannel',
+					])
+					.default(
+						searchScreenRecordingsByAgentResponseItemsItemChannelDefault,
+					),
+				id: zod.string().optional(),
+				mimeType: zod.string().optional(),
+				name: zod.string().optional(),
+				referenceId: zod.string().optional(),
+				retentionUntil: zod.string().optional(),
+				sha256Sum: zod.string().optional(),
+				size: zod.string().optional(),
+				thumbnail: zod
+					.object({
+						mimeType: zod.string().optional(),
+						scale: zod.string().optional(),
+						size: zod.string().optional(),
+					})
+					.optional(),
+				uploadedAt: zod.string().optional(),
+				uploadedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				uuid: zod.string().optional(),
+				viewName: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	next: zod.boolean().optional(),
+});
+
+export const deleteScreenRecordingsByAgentParams = zod.object({
+	agent_id: zod.string(),
+	id: zod.array(zod.string()).min(1),
+});
+
+export const deleteScreenRecordingsByAgentBody = zod.object({});
+
+export const deleteScreenRecordingsByAgentResponse = zod.object({});
+
+export const deleteFilesBody = zod.object({
 	id: zod.array(zod.string()).optional(),
 });
 
-export const fileServiceDeleteFilesResponse = zod.object({});
+export const deleteFilesResponse = zod.object({});
 
-export const fileServiceSearchFilesQueryParams = zod.object({
+export const searchFilesQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -43,10 +139,9 @@ export const fileServiceSearchFilesQueryParams = zod.object({
 	retentionUntilTo: zod.string().optional(),
 });
 
-export const fileServiceSearchFilesResponseItemsItemChannelDefault =
-	'UnknownChannel';
+export const searchFilesResponseItemsItemChannelDefault = 'UnknownChannel';
 
-export const fileServiceSearchFilesResponse = zod.object({
+export const searchFilesResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -63,7 +158,7 @@ export const fileServiceSearchFilesResponse = zod.object({
 						'ScreenshotChannel',
 						'ScreenSharingChannel',
 					])
-					.default(fileServiceSearchFilesResponseItemsItemChannelDefault),
+					.default(searchFilesResponseItemsItemChannelDefault),
 				id: zod.string().optional(),
 				mimeType: zod.string().optional(),
 				name: zod.string().optional(),
@@ -93,46 +188,107 @@ export const fileServiceSearchFilesResponse = zod.object({
 	next: zod.boolean().optional(),
 });
 
-export const fileServiceUploadP2PVideoBody = zod.object({
-	iceServers: zod
+export const deleteQuarantineFilesBody = zod.object({
+	id: zod.array(zod.string()).optional(),
+});
+
+export const deleteQuarantineFilesResponse = zod.object({});
+
+export const restoreFilesBody = zod.object({
+	id: zod.array(zod.string()).optional(),
+});
+
+export const restoreFilesResponse = zod.object({});
+
+export const searchScreenRecordingsParams = zod.object({
+	user_id: zod.string(),
+});
+
+export const searchScreenRecordingsQueryChannelDefault = 'UnknownChannel';
+
+export const searchScreenRecordingsQueryParams = zod.object({
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
+	id: zod.array(zod.string()).optional(),
+	uploadedAtFrom: zod.string().optional(),
+	uploadedAtTo: zod.string().optional(),
+	referenceId: zod.array(zod.string()).optional(),
+	retentionUntilFrom: zod.string().optional(),
+	retentionUntilTo: zod.string().optional(),
+	channel: zod
+		.enum([
+			'UnknownChannel',
+			'ChatChannel',
+			'MailChannel',
+			'CallChannel',
+			'LogChannel',
+			'MediaChannel',
+			'KnowledgebaseChannel',
+			'CasesChannel',
+			'ScreenshotChannel',
+			'ScreenSharingChannel',
+		])
+		.default(searchScreenRecordingsQueryChannelDefault),
+});
+
+export const searchScreenRecordingsResponseItemsItemChannelDefault =
+	'UnknownChannel';
+
+export const searchScreenRecordingsResponse = zod.object({
+	items: zod
 		.array(
 			zod.object({
-				credential: zod.string().optional(),
-				credentialType: zod.number().optional(),
-				urls: zod.array(zod.string()).optional(),
-				username: zod.string().optional(),
+				channel: zod
+					.enum([
+						'UnknownChannel',
+						'ChatChannel',
+						'MailChannel',
+						'CallChannel',
+						'LogChannel',
+						'MediaChannel',
+						'KnowledgebaseChannel',
+						'CasesChannel',
+						'ScreenshotChannel',
+						'ScreenSharingChannel',
+					])
+					.default(searchScreenRecordingsResponseItemsItemChannelDefault),
+				id: zod.string().optional(),
+				mimeType: zod.string().optional(),
+				name: zod.string().optional(),
+				referenceId: zod.string().optional(),
+				retentionUntil: zod.string().optional(),
+				sha256Sum: zod.string().optional(),
+				size: zod.string().optional(),
+				thumbnail: zod
+					.object({
+						mimeType: zod.string().optional(),
+						scale: zod.string().optional(),
+						size: zod.string().optional(),
+					})
+					.optional(),
+				uploadedAt: zod.string().optional(),
+				uploadedBy: zod
+					.object({
+						id: zod.string().optional(),
+						name: zod.string().optional(),
+					})
+					.optional(),
+				uuid: zod.string().optional(),
+				viewName: zod.string().optional(),
 			}),
 		)
 		.optional(),
-	name: zod.string().optional(),
-	sdpOffer: zod.string().optional(),
-	uuid: zod.string().optional(),
+	next: zod.boolean().optional(),
 });
 
-export const fileServiceUploadP2PVideoResponse = zod.object({
-	id: zod.string().optional(),
-	sdpAnswer: zod.string().optional(),
+export const deleteScreenRecordingsParams = zod.object({
+	user_id: zod.string(),
+	id: zod.array(zod.string()).min(1),
 });
 
-export const fileServiceStopP2PVideoParams = zod.object({
-	id: zod.string(),
-});
+export const deleteScreenRecordingsBody = zod.object({});
 
-export const fileServiceStopP2PVideoBody = zod.object({
-	id: zod.string().optional(),
-});
-
-export const fileServiceStopP2PVideoResponse = zod.object({});
-
-export const fileServiceRenegotiateP2PVideoParams = zod.object({
-	id: zod.string(),
-});
-
-export const fileServiceRenegotiateP2PVideoBody = zod.object({
-	id: zod.string().optional(),
-	sdpOffer: zod.string().optional(),
-});
-
-export const fileServiceRenegotiateP2PVideoResponse = zod.object({
-	sdpAnswer: zod.string().optional(),
-});
+export const deleteScreenRecordingsResponse = zod.object({});

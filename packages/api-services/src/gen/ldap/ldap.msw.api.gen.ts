@@ -18,7 +18,7 @@ import type {
 	ApiSearchLDAPResponse,
 } from '.././_models';
 
-export const getLDAPDeleteLDAPCatalog2ResponseMock = (
+export const getDeleteLDAPCatalog2ResponseMock = (
 	overrideResponse: Partial<ApiLDAPCatalog> = {},
 ): ApiLDAPCatalog => ({
 	baseDn: faker.helpers.arrayElement([
@@ -303,7 +303,7 @@ export const getLDAPDeleteLDAPCatalog2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPSearchLDAPCatalogResponseMock = (
+export const getSearchLDAPCatalogResponseMock = (
 	overrideResponse: Partial<ApiSearchLDAPResponse> = {},
 ): ApiSearchLDAPResponse => ({
 	items: faker.helpers.arrayElement([
@@ -608,7 +608,7 @@ export const getLDAPSearchLDAPCatalogResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPCreateLDAPCatalogResponseMock = (
+export const getCreateLDAPCatalogResponseMock = (
 	overrideResponse: Partial<ApiLDAPCatalog> = {},
 ): ApiLDAPCatalog => ({
 	baseDn: faker.helpers.arrayElement([
@@ -893,7 +893,7 @@ export const getLDAPCreateLDAPCatalogResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPLDAPSearch4ResponseMock = (
+export const getLDAPSearch4ResponseMock = (
 	overrideResponse: Partial<ApiLDAPSearchResponse> = {},
 ): ApiLDAPSearchResponse => ({
 	controls: faker.helpers.arrayElement([
@@ -945,7 +945,7 @@ export const getLDAPLDAPSearch4ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPLDAPSearch3ResponseMock = (
+export const getLDAPSearch3ResponseMock = (
 	overrideResponse: Partial<ApiLDAPSearchResponse> = {},
 ): ApiLDAPSearchResponse => ({
 	controls: faker.helpers.arrayElement([
@@ -997,7 +997,7 @@ export const getLDAPLDAPSearch3ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPUpdateLDAPCatalog2ResponseMock = (
+export const getUpdateLDAPCatalog2ResponseMock = (
 	overrideResponse: Partial<ApiLDAPCatalog> = {},
 ): ApiLDAPCatalog => ({
 	baseDn: faker.helpers.arrayElement([
@@ -1282,7 +1282,7 @@ export const getLDAPUpdateLDAPCatalog2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPUpdateLDAPCatalogResponseMock = (
+export const getUpdateLDAPCatalogResponseMock = (
 	overrideResponse: Partial<ApiLDAPCatalog> = {},
 ): ApiLDAPCatalog => ({
 	baseDn: faker.helpers.arrayElement([
@@ -1567,7 +1567,7 @@ export const getLDAPUpdateLDAPCatalogResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPCreateLDAPTemplateResponseMock = (
+export const getCreateLDAPTemplateResponseMock = (
 	overrideResponse: Partial<ApiLDAPTemplate> = {},
 ): ApiLDAPTemplate => ({
 	agent: faker.helpers.arrayElement([{}, undefined]),
@@ -1641,7 +1641,7 @@ export const getLDAPCreateLDAPTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPSearchLDAProcessResponseMock = (
+export const getSearchLDAProcessResponseMock = (
 	overrideResponse: Partial<ApiLDAProcessResponse> = {},
 ): ApiLDAProcessResponse => ({
 	items: faker.helpers.arrayElement([
@@ -1746,7 +1746,7 @@ export const getLDAPSearchLDAProcessResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPResyncLDAPCatalogResponseMock = (
+export const getResyncLDAPCatalogResponseMock = (
 	overrideResponse: Partial<ApiLDAProcess> = {},
 ): ApiLDAProcess => ({
 	completeAt: faker.helpers.arrayElement([
@@ -1832,7 +1832,7 @@ export const getLDAPResyncLDAPCatalogResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPLocateLDAProcessResponseMock = (
+export const getLocateLDAProcessResponseMock = (
 	overrideResponse: Partial<ApiLDAProcess> = {},
 ): ApiLDAProcess => ({
 	completeAt: faker.helpers.arrayElement([
@@ -1918,7 +1918,7 @@ export const getLDAPLocateLDAProcessResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPLDAPSearch2ResponseMock = (
+export const getLDAPSearch2ResponseMock = (
 	overrideResponse: Partial<ApiLDAPSearchResponse> = {},
 ): ApiLDAPSearchResponse => ({
 	controls: faker.helpers.arrayElement([
@@ -1970,7 +1970,7 @@ export const getLDAPLDAPSearch2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPLDAPSearchResponseMock = (
+export const getLDAPSearchResponseMock = (
 	overrideResponse: Partial<ApiLDAPSearchResponse> = {},
 ): ApiLDAPSearchResponse => ({
 	controls: faker.helpers.arrayElement([
@@ -2022,7 +2022,7 @@ export const getLDAPLDAPSearchResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPDeleteLDAPTemplate2ResponseMock = (
+export const getDeleteLDAPTemplate2ResponseMock = (
 	overrideResponse: Partial<ApiLDAPTemplateResponse> = {},
 ): ApiLDAPTemplateResponse => ({
 	items: faker.helpers.arrayElement([
@@ -2112,7 +2112,7 @@ export const getLDAPDeleteLDAPTemplate2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPSearchLDAPTemplateResponseMock = (
+export const getSearchLDAPTemplateResponseMock = (
 	overrideResponse: Partial<ApiLDAPTemplateResponse> = {},
 ): ApiLDAPTemplateResponse => ({
 	items: faker.helpers.arrayElement([
@@ -2202,7 +2202,7 @@ export const getLDAPSearchLDAPTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPDeleteLDAPTemplateResponseMock = (
+export const getDeleteLDAPTemplateResponseMock = (
 	overrideResponse: Partial<ApiLDAPTemplateResponse> = {},
 ): ApiLDAPTemplateResponse => ({
 	items: faker.helpers.arrayElement([
@@ -2292,7 +2292,7 @@ export const getLDAPDeleteLDAPTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPLocateLDAPTemplateResponseMock = (
+export const getLocateLDAPTemplateResponseMock = (
 	overrideResponse: Partial<ApiLDAPTemplate> = {},
 ): ApiLDAPTemplate => ({
 	agent: faker.helpers.arrayElement([{}, undefined]),
@@ -2366,7 +2366,7 @@ export const getLDAPLocateLDAPTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPDeleteLDAPCatalogResponseMock = (
+export const getDeleteLDAPCatalogResponseMock = (
 	overrideResponse: Partial<ApiLDAPCatalog> = {},
 ): ApiLDAPCatalog => ({
 	baseDn: faker.helpers.arrayElement([
@@ -2651,7 +2651,7 @@ export const getLDAPDeleteLDAPCatalogResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPLocateLDAPCatalogResponseMock = (
+export const getLocateLDAPCatalogResponseMock = (
 	overrideResponse: Partial<ApiLDAPCatalog> = {},
 ): ApiLDAPCatalog => ({
 	baseDn: faker.helpers.arrayElement([
@@ -2936,7 +2936,7 @@ export const getLDAPLocateLDAPCatalogResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPUpdateLDAPTemplateResponseMock = (
+export const getUpdateLDAPTemplateResponseMock = (
 	overrideResponse: Partial<ApiLDAPTemplate> = {},
 ): ApiLDAPTemplate => ({
 	agent: faker.helpers.arrayElement([{}, undefined]),
@@ -3010,7 +3010,7 @@ export const getLDAPUpdateLDAPTemplateResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPUpdateLDAPTemplate2ResponseMock = (
+export const getUpdateLDAPTemplate2ResponseMock = (
 	overrideResponse: Partial<ApiLDAPTemplate> = {},
 ): ApiLDAPTemplate => ({
 	agent: faker.helpers.arrayElement([{}, undefined]),
@@ -3084,7 +3084,7 @@ export const getLDAPUpdateLDAPTemplate2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLDAPDeleteLDAPCatalog2MockHandler = (
+export const getDeleteLDAPCatalog2MockHandler = (
 	overrideResponse?:
 		| ApiLDAPCatalog
 		| ((
@@ -3100,14 +3100,14 @@ export const getLDAPDeleteLDAPCatalog2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPDeleteLDAPCatalog2ResponseMock(),
+					: getDeleteLDAPCatalog2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPSearchLDAPCatalogMockHandler = (
+export const getSearchLDAPCatalogMockHandler = (
 	overrideResponse?:
 		| ApiSearchLDAPResponse
 		| ((
@@ -3123,14 +3123,14 @@ export const getLDAPSearchLDAPCatalogMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPSearchLDAPCatalogResponseMock(),
+					: getSearchLDAPCatalogResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPCreateLDAPCatalogMockHandler = (
+export const getCreateLDAPCatalogMockHandler = (
 	overrideResponse?:
 		| ApiLDAPCatalog
 		| ((
@@ -3146,14 +3146,14 @@ export const getLDAPCreateLDAPCatalogMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPCreateLDAPCatalogResponseMock(),
+					: getCreateLDAPCatalogResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPLDAPSearch4MockHandler = (
+export const getLDAPSearch4MockHandler = (
 	overrideResponse?:
 		| ApiLDAPSearchResponse
 		| ((
@@ -3169,14 +3169,14 @@ export const getLDAPLDAPSearch4MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPLDAPSearch4ResponseMock(),
+					: getLDAPSearch4ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPLDAPSearch3MockHandler = (
+export const getLDAPSearch3MockHandler = (
 	overrideResponse?:
 		| ApiLDAPSearchResponse
 		| ((
@@ -3192,14 +3192,14 @@ export const getLDAPLDAPSearch3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPLDAPSearch3ResponseMock(),
+					: getLDAPSearch3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPUpdateLDAPCatalog2MockHandler = (
+export const getUpdateLDAPCatalog2MockHandler = (
 	overrideResponse?:
 		| ApiLDAPCatalog
 		| ((
@@ -3215,14 +3215,14 @@ export const getLDAPUpdateLDAPCatalog2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPUpdateLDAPCatalog2ResponseMock(),
+					: getUpdateLDAPCatalog2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPUpdateLDAPCatalogMockHandler = (
+export const getUpdateLDAPCatalogMockHandler = (
 	overrideResponse?:
 		| ApiLDAPCatalog
 		| ((
@@ -3238,14 +3238,14 @@ export const getLDAPUpdateLDAPCatalogMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPUpdateLDAPCatalogResponseMock(),
+					: getUpdateLDAPCatalogResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPCreateLDAPTemplateMockHandler = (
+export const getCreateLDAPTemplateMockHandler = (
 	overrideResponse?:
 		| ApiLDAPTemplate
 		| ((
@@ -3261,14 +3261,14 @@ export const getLDAPCreateLDAPTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPCreateLDAPTemplateResponseMock(),
+					: getCreateLDAPTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPSearchLDAProcessMockHandler = (
+export const getSearchLDAProcessMockHandler = (
 	overrideResponse?:
 		| ApiLDAProcessResponse
 		| ((
@@ -3284,14 +3284,14 @@ export const getLDAPSearchLDAProcessMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPSearchLDAProcessResponseMock(),
+					: getSearchLDAProcessResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPResyncLDAPCatalogMockHandler = (
+export const getResyncLDAPCatalogMockHandler = (
 	overrideResponse?:
 		| ApiLDAProcess
 		| ((
@@ -3307,14 +3307,14 @@ export const getLDAPResyncLDAPCatalogMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPResyncLDAPCatalogResponseMock(),
+					: getResyncLDAPCatalogResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPLocateLDAProcessMockHandler = (
+export const getLocateLDAProcessMockHandler = (
 	overrideResponse?:
 		| ApiLDAProcess
 		| ((
@@ -3330,14 +3330,14 @@ export const getLDAPLocateLDAProcessMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPLocateLDAProcessResponseMock(),
+					: getLocateLDAProcessResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPLDAPSearch2MockHandler = (
+export const getLDAPSearch2MockHandler = (
 	overrideResponse?:
 		| ApiLDAPSearchResponse
 		| ((
@@ -3353,14 +3353,14 @@ export const getLDAPLDAPSearch2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPLDAPSearch2ResponseMock(),
+					: getLDAPSearch2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPLDAPSearchMockHandler = (
+export const getLDAPSearchMockHandler = (
 	overrideResponse?:
 		| ApiLDAPSearchResponse
 		| ((
@@ -3376,14 +3376,14 @@ export const getLDAPLDAPSearchMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPLDAPSearchResponseMock(),
+					: getLDAPSearchResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPDeleteLDAPTemplate2MockHandler = (
+export const getDeleteLDAPTemplate2MockHandler = (
 	overrideResponse?:
 		| ApiLDAPTemplateResponse
 		| ((
@@ -3399,14 +3399,14 @@ export const getLDAPDeleteLDAPTemplate2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPDeleteLDAPTemplate2ResponseMock(),
+					: getDeleteLDAPTemplate2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPSearchLDAPTemplateMockHandler = (
+export const getSearchLDAPTemplateMockHandler = (
 	overrideResponse?:
 		| ApiLDAPTemplateResponse
 		| ((
@@ -3422,14 +3422,14 @@ export const getLDAPSearchLDAPTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPSearchLDAPTemplateResponseMock(),
+					: getSearchLDAPTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPDeleteLDAPTemplateMockHandler = (
+export const getDeleteLDAPTemplateMockHandler = (
 	overrideResponse?:
 		| ApiLDAPTemplateResponse
 		| ((
@@ -3445,14 +3445,14 @@ export const getLDAPDeleteLDAPTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPDeleteLDAPTemplateResponseMock(),
+					: getDeleteLDAPTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPLocateLDAPTemplateMockHandler = (
+export const getLocateLDAPTemplateMockHandler = (
 	overrideResponse?:
 		| ApiLDAPTemplate
 		| ((
@@ -3468,14 +3468,14 @@ export const getLDAPLocateLDAPTemplateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPLocateLDAPTemplateResponseMock(),
+					: getLocateLDAPTemplateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPDeleteLDAPCatalogMockHandler = (
+export const getDeleteLDAPCatalogMockHandler = (
 	overrideResponse?:
 		| ApiLDAPCatalog
 		| ((
@@ -3491,14 +3491,14 @@ export const getLDAPDeleteLDAPCatalogMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPDeleteLDAPCatalogResponseMock(),
+					: getDeleteLDAPCatalogResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPLocateLDAPCatalogMockHandler = (
+export const getLocateLDAPCatalogMockHandler = (
 	overrideResponse?:
 		| ApiLDAPCatalog
 		| ((
@@ -3514,14 +3514,14 @@ export const getLDAPLocateLDAPCatalogMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLDAPLocateLDAPCatalogResponseMock(),
+					: getLocateLDAPCatalogResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLDAPUpdateLDAPTemplateMockHandler = (
+export const getUpdateLDAPTemplateMockHandler = (
 	overrideResponse?:
 		| ApiLDAPTemplate
 		| ((
@@ -3539,7 +3539,7 @@ export const getLDAPUpdateLDAPTemplateMockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getLDAPUpdateLDAPTemplateResponseMock(),
+						: getUpdateLDAPTemplateResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -3547,7 +3547,7 @@ export const getLDAPUpdateLDAPTemplateMockHandler = (
 	);
 };
 
-export const getLDAPUpdateLDAPTemplate2MockHandler = (
+export const getUpdateLDAPTemplate2MockHandler = (
 	overrideResponse?:
 		| ApiLDAPTemplate
 		| ((
@@ -3565,7 +3565,7 @@ export const getLDAPUpdateLDAPTemplate2MockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getLDAPUpdateLDAPTemplate2ResponseMock(),
+						: getUpdateLDAPTemplate2ResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -3573,25 +3573,25 @@ export const getLDAPUpdateLDAPTemplate2MockHandler = (
 	);
 };
 export const getLdapMock = () => [
-	getLDAPDeleteLDAPCatalog2MockHandler(),
-	getLDAPSearchLDAPCatalogMockHandler(),
-	getLDAPCreateLDAPCatalogMockHandler(),
-	getLDAPLDAPSearch4MockHandler(),
-	getLDAPLDAPSearch3MockHandler(),
-	getLDAPUpdateLDAPCatalog2MockHandler(),
-	getLDAPUpdateLDAPCatalogMockHandler(),
-	getLDAPCreateLDAPTemplateMockHandler(),
-	getLDAPSearchLDAProcessMockHandler(),
-	getLDAPResyncLDAPCatalogMockHandler(),
-	getLDAPLocateLDAProcessMockHandler(),
-	getLDAPLDAPSearch2MockHandler(),
-	getLDAPLDAPSearchMockHandler(),
-	getLDAPDeleteLDAPTemplate2MockHandler(),
-	getLDAPSearchLDAPTemplateMockHandler(),
-	getLDAPDeleteLDAPTemplateMockHandler(),
-	getLDAPLocateLDAPTemplateMockHandler(),
-	getLDAPDeleteLDAPCatalogMockHandler(),
-	getLDAPLocateLDAPCatalogMockHandler(),
-	getLDAPUpdateLDAPTemplateMockHandler(),
-	getLDAPUpdateLDAPTemplate2MockHandler(),
+	getDeleteLDAPCatalog2MockHandler(),
+	getSearchLDAPCatalogMockHandler(),
+	getCreateLDAPCatalogMockHandler(),
+	getLDAPSearch4MockHandler(),
+	getLDAPSearch3MockHandler(),
+	getUpdateLDAPCatalog2MockHandler(),
+	getUpdateLDAPCatalogMockHandler(),
+	getCreateLDAPTemplateMockHandler(),
+	getSearchLDAProcessMockHandler(),
+	getResyncLDAPCatalogMockHandler(),
+	getLocateLDAProcessMockHandler(),
+	getLDAPSearch2MockHandler(),
+	getLDAPSearchMockHandler(),
+	getDeleteLDAPTemplate2MockHandler(),
+	getSearchLDAPTemplateMockHandler(),
+	getDeleteLDAPTemplateMockHandler(),
+	getLocateLDAPTemplateMockHandler(),
+	getDeleteLDAPCatalogMockHandler(),
+	getLocateLDAPCatalogMockHandler(),
+	getUpdateLDAPTemplateMockHandler(),
+	getUpdateLDAPTemplate2MockHandler(),
 ];

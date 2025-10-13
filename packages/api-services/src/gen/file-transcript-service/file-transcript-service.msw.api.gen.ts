@@ -15,7 +15,7 @@ import type {
 	StorageStartFileTranscriptResponse,
 } from '.././_models';
 
-export const getFileTranscriptServiceDeleteFileTranscriptResponseMock = (
+export const getDeleteFileTranscriptResponseMock = (
 	overrideResponse: Partial<StorageDeleteFileTranscriptResponse> = {},
 ): StorageDeleteFileTranscriptResponse => ({
 	items: faker.helpers.arrayElement([
@@ -28,7 +28,7 @@ export const getFileTranscriptServiceDeleteFileTranscriptResponseMock = (
 	...overrideResponse,
 });
 
-export const getFileTranscriptServiceCreateFileTranscriptResponseMock = (
+export const getCreateFileTranscriptResponseMock = (
 	overrideResponse: Partial<StorageStartFileTranscriptResponse> = {},
 ): StorageStartFileTranscriptResponse => ({
 	items: faker.helpers.arrayElement([
@@ -62,7 +62,7 @@ export const getFileTranscriptServiceCreateFileTranscriptResponseMock = (
 	...overrideResponse,
 });
 
-export const getFileTranscriptServicePutFileTranscriptResponseMock = (
+export const getPutFileTranscriptResponseMock = (
 	overrideResponse: Partial<StoragePutFileTranscriptResponse> = {},
 ): StoragePutFileTranscriptResponse => ({
 	id: faker.helpers.arrayElement([
@@ -72,7 +72,7 @@ export const getFileTranscriptServicePutFileTranscriptResponseMock = (
 	...overrideResponse,
 });
 
-export const getFileTranscriptServiceGetFileTranscriptPhrasesResponseMock = (
+export const getGetFileTranscriptPhrasesResponseMock = (
 	overrideResponse: Partial<StorageListPhrases> = {},
 ): StorageListPhrases => ({
 	items: faker.helpers.arrayElement([
@@ -115,7 +115,7 @@ export const getFileTranscriptServiceGetFileTranscriptPhrasesResponseMock = (
 	...overrideResponse,
 });
 
-export const getFileTranscriptServiceDeleteFileTranscriptMockHandler = (
+export const getDeleteFileTranscriptMockHandler = (
 	overrideResponse?:
 		| StorageDeleteFileTranscriptResponse
 		| ((
@@ -133,14 +133,14 @@ export const getFileTranscriptServiceDeleteFileTranscriptMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileTranscriptServiceDeleteFileTranscriptResponseMock(),
+					: getDeleteFileTranscriptResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFileTranscriptServiceCreateFileTranscriptMockHandler = (
+export const getCreateFileTranscriptMockHandler = (
 	overrideResponse?:
 		| StorageStartFileTranscriptResponse
 		| ((
@@ -158,14 +158,14 @@ export const getFileTranscriptServiceCreateFileTranscriptMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileTranscriptServiceCreateFileTranscriptResponseMock(),
+					: getCreateFileTranscriptResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFileTranscriptServicePutFileTranscriptMockHandler = (
+export const getPutFileTranscriptMockHandler = (
 	overrideResponse?:
 		| StoragePutFileTranscriptResponse
 		| ((
@@ -183,14 +183,14 @@ export const getFileTranscriptServicePutFileTranscriptMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileTranscriptServicePutFileTranscriptResponseMock(),
+					: getPutFileTranscriptResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFileTranscriptServiceGetFileTranscriptPhrasesMockHandler = (
+export const getGetFileTranscriptPhrasesMockHandler = (
 	overrideResponse?:
 		| StorageListPhrases
 		| ((
@@ -206,15 +206,15 @@ export const getFileTranscriptServiceGetFileTranscriptPhrasesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFileTranscriptServiceGetFileTranscriptPhrasesResponseMock(),
+					: getGetFileTranscriptPhrasesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getFileTranscriptServiceMock = () => [
-	getFileTranscriptServiceDeleteFileTranscriptMockHandler(),
-	getFileTranscriptServiceCreateFileTranscriptMockHandler(),
-	getFileTranscriptServicePutFileTranscriptMockHandler(),
-	getFileTranscriptServiceGetFileTranscriptPhrasesMockHandler(),
+	getDeleteFileTranscriptMockHandler(),
+	getCreateFileTranscriptMockHandler(),
+	getPutFileTranscriptMockHandler(),
+	getGetFileTranscriptPhrasesMockHandler(),
 ];

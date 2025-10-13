@@ -15,6 +15,7 @@ export * from './catalog/catalog';
 export * from './communications/communications';
 export * from './configurations/configurations';
 export * from './contactGroups/contactGroups';
+export * from './fileServices/fileServices';
 export * from './flows/flow';
 export * from './gateways/gateways';
 export * from './history/transcript/callTranscript';
@@ -22,6 +23,7 @@ export * from './labels/labels';
 export * from './lists/blacklists';
 export * from './media/media';
 export * from './object/object';
+export * from './pdfServices/pdfServices';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
 // export * from './roles/roles'; fixme: ApplicationAccess import

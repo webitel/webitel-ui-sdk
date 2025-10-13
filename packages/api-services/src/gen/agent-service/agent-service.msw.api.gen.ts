@@ -688,6 +688,10 @@ export const getSearchAgentStatusStatisticResponseMock = (
 				})),
 				undefined,
 			]),
+			screenControl: faker.helpers.arrayElement([
+				faker.datatype.boolean(),
+				undefined,
+			]),
 			skills: faker.helpers.arrayElement([
 				Array.from(
 					{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -705,6 +709,10 @@ export const getSearchAgentStatusStatisticResponseMock = (
 				undefined,
 			]),
 			status: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			statusComment: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
@@ -858,7 +866,15 @@ export const getSearchAgentStatusStatisticItemResponseMock = (
 		faker.number.float({ min: undefined, max: undefined, fractionDigits: 2 }),
 		undefined,
 	]),
+	screenControl: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
 	status: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	statusComment: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
 	]),

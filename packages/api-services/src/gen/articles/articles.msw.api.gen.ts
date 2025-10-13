@@ -9,16 +9,16 @@ import { faker } from '@faker-js/faker';
 import { delay, HttpResponse, http } from 'msw';
 
 import type {
-	WebitelKnowledgebaseArticle,
-	WebitelKnowledgebaseArticleList,
-	WebitelKnowledgebaseArticleVersion,
-	WebitelKnowledgebaseArticleVersionList,
-	WebitelKnowledgebaseAttachmentList,
+	KnowledgebaseArticle,
+	KnowledgebaseArticleList,
+	KnowledgebaseArticleVersion,
+	KnowledgebaseArticleVersionList,
+	KnowledgebaseAttachmentList,
 } from '.././_models';
 
-export const getArticlesListArticlesResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticleList> = {},
-): WebitelKnowledgebaseArticleList => ({
+export const getListArticlesResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticleList> = {},
+): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -122,9 +122,9 @@ export const getArticlesListArticlesResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesCreateArticleResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticleList> = {},
-): WebitelKnowledgebaseArticleList => ({
+export const getCreateArticleResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticleList> = {},
+): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -228,9 +228,9 @@ export const getArticlesCreateArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesArticlesAttachmentListResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseAttachmentList> = {},
-): WebitelKnowledgebaseAttachmentList => ({
+export const getArticlesAttachmentListResponseMock = (
+	overrideResponse: Partial<KnowledgebaseAttachmentList> = {},
+): KnowledgebaseAttachmentList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -280,9 +280,9 @@ export const getArticlesArticlesAttachmentListResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesListArticles2ResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticleList> = {},
-): WebitelKnowledgebaseArticleList => ({
+export const getListArticles2ResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticleList> = {},
+): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -386,9 +386,9 @@ export const getArticlesListArticles2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesArticleVersionsListResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticleVersionList> = {},
-): WebitelKnowledgebaseArticleVersionList => ({
+export const getArticleVersionsListResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticleVersionList> = {},
+): KnowledgebaseArticleVersionList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -461,9 +461,9 @@ export const getArticlesArticleVersionsListResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesLocateArticleVersionResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticleVersion> = {},
-): WebitelKnowledgebaseArticleVersion => ({
+export const getLocateArticleVersionResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticleVersion> = {},
+): KnowledgebaseArticleVersion => ({
 	tags: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -519,98 +519,9 @@ export const getArticlesLocateArticleVersionResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesDeleteArticleResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticle> = {},
-): WebitelKnowledgebaseArticle => ({
-	tags: faker.helpers.arrayElement([
-		Array.from(
-			{ length: faker.number.int({ min: 1, max: 10 }) },
-			(_, i) => i + 1,
-		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
-		undefined,
-	]),
-	createdAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	createdBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	etag: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	hasChildren: faker.helpers.arrayElement([
-		faker.datatype.boolean(),
-		undefined,
-	]),
-	id: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	parentArticle: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	pinned: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	spaceId: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	state: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
-	text: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	title: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedAt: faker.helpers.arrayElement([
-		faker.string.alpha({ length: { min: 10, max: 20 } }),
-		undefined,
-	]),
-	updatedBy: faker.helpers.arrayElement([
-		{
-			id: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			name: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-			type: faker.helpers.arrayElement([
-				faker.string.alpha({ length: { min: 10, max: 20 } }),
-				undefined,
-			]),
-		},
-		undefined,
-	]),
-	ver: faker.helpers.arrayElement([
-		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
-		undefined,
-	]),
-	...overrideResponse,
-});
-
-export const getArticlesLocateArticleResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticle> = {},
-): WebitelKnowledgebaseArticle => ({
+export const getDeleteArticleResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticle> = {},
+): KnowledgebaseArticle => ({
 	tags: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -697,9 +608,98 @@ export const getArticlesLocateArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesUpdateArticleResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseArticleList> = {},
-): WebitelKnowledgebaseArticleList => ({
+export const getLocateArticleResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticle> = {},
+): KnowledgebaseArticle => ({
+	tags: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => faker.string.alpha({ length: { min: 10, max: 20 } })),
+		undefined,
+	]),
+	createdAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	createdBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	etag: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	hasChildren: faker.helpers.arrayElement([
+		faker.datatype.boolean(),
+		undefined,
+	]),
+	id: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	parentArticle: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	pinned: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	spaceId: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	state: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
+	text: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	title: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedAt: faker.helpers.arrayElement([
+		faker.string.alpha({ length: { min: 10, max: 20 } }),
+		undefined,
+	]),
+	updatedBy: faker.helpers.arrayElement([
+		{
+			id: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			type: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	ver: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
+export const getUpdateArticleResponseMock = (
+	overrideResponse: Partial<KnowledgebaseArticleList> = {},
+): KnowledgebaseArticleList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -803,14 +803,12 @@ export const getArticlesUpdateArticleResponseMock = (
 	...overrideResponse,
 });
 
-export const getArticlesListArticlesMockHandler = (
+export const getListArticlesMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticleList
+		| KnowledgebaseArticleList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseArticleList>
-				| WebitelKnowledgebaseArticleList),
+		  ) => Promise<KnowledgebaseArticleList> | KnowledgebaseArticleList),
 ) => {
 	return http.get('*/spaces/:spaceId/articles', async (info) => {
 		await delay(1000);
@@ -821,21 +819,19 @@ export const getArticlesListArticlesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getArticlesListArticlesResponseMock(),
+					: getListArticlesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getArticlesCreateArticleMockHandler = (
+export const getCreateArticleMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticleList
+		| KnowledgebaseArticleList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseArticleList>
-				| WebitelKnowledgebaseArticleList),
+		  ) => Promise<KnowledgebaseArticleList> | KnowledgebaseArticleList),
 ) => {
 	return http.post('*/spaces/:spaceId/articles', async (info) => {
 		await delay(1000);
@@ -846,21 +842,19 @@ export const getArticlesCreateArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getArticlesCreateArticleResponseMock(),
+					: getCreateArticleResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getArticlesArticlesAttachmentListMockHandler = (
+export const getArticlesAttachmentListMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseAttachmentList
+		| KnowledgebaseAttachmentList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseAttachmentList>
-				| WebitelKnowledgebaseAttachmentList),
+		  ) => Promise<KnowledgebaseAttachmentList> | KnowledgebaseAttachmentList),
 ) => {
 	return http.get(
 		'*/spaces/:spaceId/articles/:articleId/attachments',
@@ -873,7 +867,7 @@ export const getArticlesArticlesAttachmentListMockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getArticlesArticlesAttachmentListResponseMock(),
+						: getArticlesAttachmentListResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -881,14 +875,12 @@ export const getArticlesArticlesAttachmentListMockHandler = (
 	);
 };
 
-export const getArticlesListArticles2MockHandler = (
+export const getListArticles2MockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticleList
+		| KnowledgebaseArticleList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseArticleList>
-				| WebitelKnowledgebaseArticleList),
+		  ) => Promise<KnowledgebaseArticleList> | KnowledgebaseArticleList),
 ) => {
 	return http.get(
 		'*/spaces/:spaceId/articles/:articleId/childrens',
@@ -901,7 +893,7 @@ export const getArticlesListArticles2MockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getArticlesListArticles2ResponseMock(),
+						: getListArticles2ResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -909,14 +901,14 @@ export const getArticlesListArticles2MockHandler = (
 	);
 };
 
-export const getArticlesArticleVersionsListMockHandler = (
+export const getArticleVersionsListMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticleVersionList
+		| KnowledgebaseArticleVersionList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<WebitelKnowledgebaseArticleVersionList>
-				| WebitelKnowledgebaseArticleVersionList),
+				| Promise<KnowledgebaseArticleVersionList>
+				| KnowledgebaseArticleVersionList),
 ) => {
 	return http.get(
 		'*/spaces/:spaceId/articles/:articleId/history',
@@ -929,7 +921,7 @@ export const getArticlesArticleVersionsListMockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getArticlesArticleVersionsListResponseMock(),
+						: getArticleVersionsListResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -937,14 +929,12 @@ export const getArticlesArticleVersionsListMockHandler = (
 	);
 };
 
-export const getArticlesLocateArticleVersionMockHandler = (
+export const getLocateArticleVersionMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticleVersion
+		| KnowledgebaseArticleVersion
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseArticleVersion>
-				| WebitelKnowledgebaseArticleVersion),
+		  ) => Promise<KnowledgebaseArticleVersion> | KnowledgebaseArticleVersion),
 ) => {
 	return http.get(
 		'*/spaces/:spaceId/articles/:articleId/history/:versionId',
@@ -957,7 +947,7 @@ export const getArticlesLocateArticleVersionMockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getArticlesLocateArticleVersionResponseMock(),
+						: getLocateArticleVersionResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -965,12 +955,12 @@ export const getArticlesLocateArticleVersionMockHandler = (
 	);
 };
 
-export const getArticlesDeleteArticleMockHandler = (
+export const getDeleteArticleMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticle
+		| KnowledgebaseArticle
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelKnowledgebaseArticle> | WebitelKnowledgebaseArticle),
+		  ) => Promise<KnowledgebaseArticle> | KnowledgebaseArticle),
 ) => {
 	return http.delete('*/spaces/:spaceId/articles/:etag', async (info) => {
 		await delay(1000);
@@ -981,19 +971,19 @@ export const getArticlesDeleteArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getArticlesDeleteArticleResponseMock(),
+					: getDeleteArticleResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getArticlesLocateArticleMockHandler = (
+export const getLocateArticleMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticle
+		| KnowledgebaseArticle
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelKnowledgebaseArticle> | WebitelKnowledgebaseArticle),
+		  ) => Promise<KnowledgebaseArticle> | KnowledgebaseArticle),
 ) => {
 	return http.get('*/spaces/:spaceId/articles/:etag', async (info) => {
 		await delay(1000);
@@ -1004,21 +994,19 @@ export const getArticlesLocateArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getArticlesLocateArticleResponseMock(),
+					: getLocateArticleResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getArticlesUpdateArticleMockHandler = (
+export const getUpdateArticleMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseArticleList
+		| KnowledgebaseArticleList
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseArticleList>
-				| WebitelKnowledgebaseArticleList),
+		  ) => Promise<KnowledgebaseArticleList> | KnowledgebaseArticleList),
 ) => {
 	return http.patch('*/spaces/:spaceId/articles/:etag', async (info) => {
 		await delay(1000);
@@ -1029,20 +1017,20 @@ export const getArticlesUpdateArticleMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getArticlesUpdateArticleResponseMock(),
+					: getUpdateArticleResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getArticlesMock = () => [
-	getArticlesListArticlesMockHandler(),
-	getArticlesCreateArticleMockHandler(),
-	getArticlesArticlesAttachmentListMockHandler(),
-	getArticlesListArticles2MockHandler(),
-	getArticlesArticleVersionsListMockHandler(),
-	getArticlesLocateArticleVersionMockHandler(),
-	getArticlesDeleteArticleMockHandler(),
-	getArticlesLocateArticleMockHandler(),
-	getArticlesUpdateArticleMockHandler(),
+	getListArticlesMockHandler(),
+	getCreateArticleMockHandler(),
+	getArticlesAttachmentListMockHandler(),
+	getListArticles2MockHandler(),
+	getArticleVersionsListMockHandler(),
+	getLocateArticleVersionMockHandler(),
+	getDeleteArticleMockHandler(),
+	getLocateArticleMockHandler(),
+	getUpdateArticleMockHandler(),
 ];

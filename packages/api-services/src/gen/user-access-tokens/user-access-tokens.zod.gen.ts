@@ -6,11 +6,11 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const userAccessTokensAddUserAccessTokenParams = zod.object({
+export const addUserAccessTokenParams = zod.object({
 	'token.user.id': zod.string().describe('identifier'),
 });
 
-export const userAccessTokensAddUserAccessTokenQueryParams = zod.object({
+export const addUserAccessTokenQueryParams = zod.object({
 	enable: zod
 		.boolean()
 		.optional()
@@ -19,7 +19,7 @@ export const userAccessTokensAddUserAccessTokenQueryParams = zod.object({
 		),
 });
 
-export const userAccessTokensAddUserAccessTokenBody = zod.object({
+export const addUserAccessTokenBody = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -51,7 +51,7 @@ export const userAccessTokensAddUserAccessTokenBody = zod.object({
 		.optional(),
 });
 
-export const userAccessTokensAddUserAccessTokenResponse = zod
+export const addUserAccessTokenResponse = zod
 	.object({
 		createdAt: zod.string().optional(),
 		createdBy: zod
@@ -86,12 +86,12 @@ export const userAccessTokensAddUserAccessTokenResponse = zod
 	})
 	.describe('UserId lookup value.');
 
-export const userAccessTokensUpdateUserAccessToken2Params = zod.object({
+export const updateUserAccessToken2Params = zod.object({
 	'update.user.id': zod.string().describe('identifier'),
 	'update.id': zod.string().describe('tokenKey::token_key'),
 });
 
-export const userAccessTokensUpdateUserAccessToken2QueryParams = zod.object({
+export const updateUserAccessToken2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -99,7 +99,7 @@ export const userAccessTokensUpdateUserAccessToken2QueryParams = zod.object({
 	enable: zod.boolean().optional(),
 });
 
-export const userAccessTokensUpdateUserAccessToken2Body = zod.object({
+export const updateUserAccessToken2Body = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -130,7 +130,7 @@ export const userAccessTokensUpdateUserAccessToken2Body = zod.object({
 		.optional(),
 });
 
-export const userAccessTokensUpdateUserAccessToken2Response = zod
+export const updateUserAccessToken2Response = zod
 	.object({
 		createdAt: zod.string().optional(),
 		createdBy: zod
@@ -165,12 +165,12 @@ export const userAccessTokensUpdateUserAccessToken2Response = zod
 	})
 	.describe('UserId lookup value.');
 
-export const userAccessTokensUpdateUserAccessTokenParams = zod.object({
+export const updateUserAccessTokenParams = zod.object({
 	'update.user.id': zod.string().describe('identifier'),
 	'update.id': zod.string().describe('tokenKey::token_key'),
 });
 
-export const userAccessTokensUpdateUserAccessTokenQueryParams = zod.object({
+export const updateUserAccessTokenQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -178,7 +178,7 @@ export const userAccessTokensUpdateUserAccessTokenQueryParams = zod.object({
 	enable: zod.boolean().optional(),
 });
 
-export const userAccessTokensUpdateUserAccessTokenBody = zod.object({
+export const updateUserAccessTokenBody = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -209,7 +209,7 @@ export const userAccessTokensUpdateUserAccessTokenBody = zod.object({
 		.optional(),
 });
 
-export const userAccessTokensUpdateUserAccessTokenResponse = zod
+export const updateUserAccessTokenResponse = zod
 	.object({
 		createdAt: zod.string().optional(),
 		createdBy: zod
@@ -244,11 +244,11 @@ export const userAccessTokensUpdateUserAccessTokenResponse = zod
 	})
 	.describe('UserId lookup value.');
 
-export const userAccessTokensListUserAccessTokenParams = zod.object({
+export const listUserAccessTokenParams = zod.object({
 	'user.id': zod.string().describe('identifier'),
 });
 
-export const userAccessTokensListUserAccessTokenQueryParams = zod.object({
+export const listUserAccessTokenQueryParams = zod.object({
 	userName: zod.string().optional().describe('display name'),
 	q: zod
 		.string()
@@ -268,7 +268,7 @@ export const userAccessTokensListUserAccessTokenQueryParams = zod.object({
 	size: zod.number().optional().describe('select: limit {size}'),
 });
 
-export const userAccessTokensListUserAccessTokenResponse = zod.object({
+export const listUserAccessTokenResponse = zod.object({
 	items: zod
 		.array(
 			zod
@@ -312,16 +312,16 @@ export const userAccessTokensListUserAccessTokenResponse = zod.object({
 	size: zod.string().optional(),
 });
 
-export const userAccessTokensDeleteUserAccessTokenParams = zod.object({
+export const deleteUserAccessTokenParams = zod.object({
 	'user.id': zod.string().describe('identifier'),
 	id: zod.string().describe('tokenKey::uuid'),
 });
 
-export const userAccessTokensDeleteUserAccessTokenQueryParams = zod.object({
+export const deleteUserAccessTokenQueryParams = zod.object({
 	userName: zod.string().optional().describe('display name'),
 });
 
-export const userAccessTokensDeleteUserAccessTokenResponse = zod
+export const deleteUserAccessTokenResponse = zod
 	.object({
 		createdAt: zod.string().optional(),
 		createdBy: zod
@@ -356,16 +356,16 @@ export const userAccessTokensDeleteUserAccessTokenResponse = zod
 	})
 	.describe('UserId lookup value.');
 
-export const userAccessTokensGetUserAccessTokenParams = zod.object({
+export const getUserAccessTokenParams = zod.object({
 	'user.id': zod.string().describe('identifier'),
 	id: zod.string().describe('tokenKey::uuid'),
 });
 
-export const userAccessTokensGetUserAccessTokenQueryParams = zod.object({
+export const getUserAccessTokenQueryParams = zod.object({
 	userName: zod.string().optional().describe('display name'),
 });
 
-export const userAccessTokensGetUserAccessTokenResponse = zod
+export const getUserAccessTokenResponse = zod
 	.object({
 		createdAt: zod.string().optional(),
 		createdBy: zod

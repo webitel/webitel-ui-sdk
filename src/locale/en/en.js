@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge';
 import {
   AgentStatus,
   CallDirection,
@@ -20,8 +21,9 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import notTranslatable from './notTranslatable.en';
 
-export default {
+export default deepmerge({
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
     comment: 'Comment',
@@ -52,13 +54,6 @@ export default {
     expand: 'Expand',
     collapse: 'Collapse',
     generate: 'Generate',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'From',
     to: 'To',
     tts: 'Text-to-Speech',
@@ -90,6 +85,7 @@ export default {
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
     group: 'Group',
+    dateTime: 'Date & time',
     updatedBy: (/*{ named }*/) => {
       return 'Edited';
     },
@@ -228,6 +224,8 @@ export default {
       quickReplies: 'Quick reply | Quick replies',
       quickRepliesEmpty: 'There are no quick replies yet',
     },
+    screenRecordings: 'Screen recording | Screen recordings',
+    screenshots: 'Screenshot | Screenshots',
   },
   channel: {
     state: {
@@ -483,6 +481,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Download PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Select columns',
         [IconAction.VARIABLES]: 'Select variables columns',
@@ -565,6 +564,9 @@ export default {
         message:
           'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Your PDF file is being created…'
     },
     saveFailedPopup: {
       title: 'Save failed',
@@ -762,4 +764,4 @@ export default {
     chatHistoryApi: 'There was an error loading the chat history',
     markChatProcessed: 'Failed to move the chat to “Closed”',
   },
-};
+}, notTranslatable);

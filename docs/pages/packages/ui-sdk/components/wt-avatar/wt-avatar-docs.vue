@@ -28,9 +28,8 @@
 </template>
 
 <script>
-import Prism from 'prismjs';
-
-import { AbstractUserStatus } from '@webitel/ui-sdk/enums';;
+import { AbstractUserStatus } from '@webitel/ui-sdk/enums';
+import Prism from 'prismjs';;
 import pic from './examples/pic.jpg';
 
 export default {
@@ -76,6 +75,14 @@ export default {
         ],
         default: 'AbstractUserStatus.OFFLINE',
         description: 'Color of the badge',
+      },
+      {
+        value: 'shape',
+        code: '<wt-avatar shape="square"></wt-avatar>',
+        type: 'String',
+        options: ['circle', 'square'],
+        default: 'circle',
+        description: 'Shape of the element.',
       },
     ],
   }),

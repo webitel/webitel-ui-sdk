@@ -1,5 +1,6 @@
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
+import primitive from '@webitel/styleguide/primitive';
 import semantic from '@webitel/styleguide/semantic';
 
 import components from './components/components';
@@ -11,6 +12,8 @@ const WebitelTheme = definePreset(Aura, {
   components,
 
   extend,
+
+  primitive,
 });
 
 export default WebitelTheme;

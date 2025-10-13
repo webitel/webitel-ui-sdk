@@ -9,16 +9,17 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	FileServiceSearchFilesParams,
+	SearchFilesParams,
+	SearchScreenRecordingsByAgentParams,
+	SearchScreenRecordingsParams,
 	StorageDeleteFilesRequest,
 	StorageDeleteFilesResponse,
+	StorageDeleteQuarantineFilesRequest,
+	StorageFileServiceDeleteScreenRecordingsBody,
+	StorageFileServiceDeleteScreenRecordingsByAgentBody,
 	StorageListFile,
-	StorageRenegotiateP2PVideoRequest,
-	StorageRenegotiateP2PVideoResponse,
-	StorageStopP2PVideoRequest,
-	StorageStopP2PVideoResponse,
-	StorageUploadP2PVideoRequest,
-	StorageUploadP2PVideoResponse,
+	StorageRestoreFilesRequest,
+	StorageRestoreFilesResponse,
 } from '.././_models';
 
 // --- header start
@@ -29,9 +30,32 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const fileServiceDeleteFiles = <
+			const searchScreenRecordingsByAgent = <
+				TData = AxiosResponse<StorageListFile>,
+			>(
+				agentId: string,
+				params?: SearchScreenRecordingsByAgentParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/storage/agent/${agentId}`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const deleteScreenRecordingsByAgent = <
 				TData = AxiosResponse<StorageDeleteFilesResponse>,
 			>(
+				agentId: string,
+				id: string[],
+				storageFileServiceDeleteScreenRecordingsByAgentBody: StorageFileServiceDeleteScreenRecordingsByAgentBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/storage/agent/${agentId}/${id}`, {
+					data: storageFileServiceDeleteScreenRecordingsByAgentBody,
+					...options,
+				});
+			};
+			const deleteFiles = <TData = AxiosResponse<StorageDeleteFilesResponse>>(
 				storageDeleteFilesRequest: StorageDeleteFilesRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -40,8 +64,8 @@ export const // --- title start
 					...options,
 				});
 			};
-			const fileServiceSearchFiles = <TData = AxiosResponse<StorageListFile>>(
-				params?: FileServiceSearchFilesParams,
+			const searchFiles = <TData = AxiosResponse<StorageListFile>>(
+				params?: SearchFilesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/storage/file', {
@@ -49,61 +73,74 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const fileServiceUploadP2PVideo = <
-				TData = AxiosResponse<StorageUploadP2PVideoResponse>,
+			const deleteQuarantineFiles = <
+				TData = AxiosResponse<StorageDeleteFilesResponse>,
 			>(
-				storageUploadP2PVideoRequest: StorageUploadP2PVideoRequest,
+				storageDeleteQuarantineFilesRequest: StorageDeleteQuarantineFilesRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post(
-					'/storage/p2p/video',
-					storageUploadP2PVideoRequest,
-					options,
-				);
-			};
-			const fileServiceStopP2PVideo = <
-				TData = AxiosResponse<StorageStopP2PVideoResponse>,
-			>(
-				id: string,
-				storageStopP2PVideoRequest: StorageStopP2PVideoRequest,
-				options?: AxiosRequestConfig,
-			): Promise<TData> => {
-				return axios.delete(`/storage/p2p/video/${id}`, {
-					data: storageStopP2PVideoRequest,
+				return axios.delete('/storage/file/quarantine', {
+					data: storageDeleteQuarantineFilesRequest,
 					...options,
 				});
 			};
-			const fileServiceRenegotiateP2PVideo = <
-				TData = AxiosResponse<StorageRenegotiateP2PVideoResponse>,
-			>(
-				id: string,
-				storageRenegotiateP2PVideoRequest: StorageRenegotiateP2PVideoRequest,
+			const restoreFiles = <TData = AxiosResponse<StorageRestoreFilesResponse>>(
+				storageRestoreFilesRequest: StorageRestoreFilesRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(
-					`/storage/p2p/video/${id}`,
-					storageRenegotiateP2PVideoRequest,
+				return axios.patch(
+					'/storage/file/restore',
+					storageRestoreFilesRequest,
 					options,
 				);
+			};
+			const searchScreenRecordings = <TData = AxiosResponse<StorageListFile>>(
+				userId: string,
+				params?: SearchScreenRecordingsParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get(`/storage/users/${userId}`, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
+			const deleteScreenRecordings = <
+				TData = AxiosResponse<StorageDeleteFilesResponse>,
+			>(
+				userId: string,
+				id: string[],
+				storageFileServiceDeleteScreenRecordingsBody: StorageFileServiceDeleteScreenRecordingsBody,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete(`/storage/users/${userId}/${id}`, {
+					data: storageFileServiceDeleteScreenRecordingsBody,
+					...options,
+				});
 			};
 
 			// --- footer start
 			return {
-				fileServiceDeleteFiles,
-				fileServiceSearchFiles,
-				fileServiceUploadP2PVideo,
-				fileServiceStopP2PVideo,
-				fileServiceRenegotiateP2PVideo,
+				searchScreenRecordingsByAgent,
+				deleteScreenRecordingsByAgent,
+				deleteFiles,
+				searchFiles,
+				deleteQuarantineFiles,
+				restoreFiles,
+				searchScreenRecordings,
+				deleteScreenRecordings,
 			};
 		};
-export type FileServiceDeleteFilesResult =
+export type SearchScreenRecordingsByAgentResult =
+	AxiosResponse<StorageListFile>;
+export type DeleteScreenRecordingsByAgentResult =
 	AxiosResponse<StorageDeleteFilesResponse>;
-export type FileServiceSearchFilesResult = AxiosResponse<StorageListFile>;
-export type FileServiceUploadP2PVideoResult =
-	AxiosResponse<StorageUploadP2PVideoResponse>;
-export type FileServiceStopP2PVideoResult =
-	AxiosResponse<StorageStopP2PVideoResponse>;
-export type FileServiceRenegotiateP2PVideoResult =
-	AxiosResponse<StorageRenegotiateP2PVideoResponse>;
+export type DeleteFilesResult = AxiosResponse<StorageDeleteFilesResponse>;
+export type SearchFilesResult = AxiosResponse<StorageListFile>;
+export type DeleteQuarantineFilesResult =
+	AxiosResponse<StorageDeleteFilesResponse>;
+export type RestoreFilesResult = AxiosResponse<StorageRestoreFilesResponse>;
+export type SearchScreenRecordingsResult = AxiosResponse<StorageListFile>;
+export type DeleteScreenRecordingsResult =
+	AxiosResponse<StorageDeleteFilesResponse>;
 
 // --- footer end

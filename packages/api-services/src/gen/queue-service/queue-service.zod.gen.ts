@@ -87,6 +87,20 @@ export const searchQueueResponse = zod.object({
 				processing: zod.boolean().optional(),
 				processingRenewalSec: zod.number().optional(),
 				processingSec: zod.number().optional(),
+				resourceGroups: zod
+					.array(
+						zod.object({
+							name: zod.string().optional(),
+						}),
+					)
+					.optional(),
+				resources: zod
+					.array(
+						zod.object({
+							name: zod.string().optional(),
+						}),
+					)
+					.optional(),
 				ringtone: zod
 					.object({
 						id: zod.string().optional(),
@@ -109,6 +123,14 @@ export const searchQueueResponse = zod.object({
 							.object({
 								id: zod.string().optional(),
 								name: zod.string().optional(),
+							})
+							.optional(),
+						prolongationOptions: zod
+							.object({
+								enabled: zod.boolean().optional(),
+								isTimeoutRetry: zod.boolean().optional(),
+								prolongationTimeSec: zod.number().optional(),
+								repeatsNumber: zod.number().optional(),
 							})
 							.optional(),
 						renewalSec: zod.number().optional(),
@@ -217,6 +239,14 @@ export const createQueueBody = zod.object({
 					name: zod.string().optional(),
 				})
 				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
+				})
+				.optional(),
 			renewalSec: zod.number().optional(),
 			sec: zod.number().optional(),
 		})
@@ -294,6 +324,20 @@ export const createQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -316,6 +360,14 @@ export const createQueueResponse = zod.object({
 				.object({
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+				})
+				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
 				})
 				.optional(),
 			renewalSec: zod.number().optional(),
@@ -408,6 +460,18 @@ export const searchQueueReportGeneralResponse = zod.object({
 		)
 		.optional(),
 	next: zod.boolean().optional(),
+});
+
+export const getQueuesGlobalStateResponse = zod.object({
+	isAllEnabled: zod.boolean().optional(),
+});
+
+export const setQueuesGlobalStateBody = zod.object({
+	enabled: zod.boolean().optional(),
+});
+
+export const setQueuesGlobalStateResponse = zod.object({
+	count: zod.number().optional(),
 });
 
 /**
@@ -505,6 +569,20 @@ export const deleteQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -527,6 +605,14 @@ export const deleteQueueResponse = zod.object({
 				.object({
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+				})
+				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
 				})
 				.optional(),
 			renewalSec: zod.number().optional(),
@@ -625,6 +711,20 @@ export const readQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -647,6 +747,14 @@ export const readQueueResponse = zod.object({
 				.object({
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+				})
+				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
 				})
 				.optional(),
 			renewalSec: zod.number().optional(),
@@ -756,6 +864,14 @@ export const patchQueueBody = zod.object({
 					name: zod.string().optional(),
 				})
 				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
+				})
+				.optional(),
 			renewalSec: zod.number().optional(),
 			sec: zod.number().optional(),
 		})
@@ -833,6 +949,20 @@ export const patchQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -855,6 +985,14 @@ export const patchQueueResponse = zod.object({
 				.object({
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+				})
+				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
 				})
 				.optional(),
 			renewalSec: zod.number().optional(),
@@ -963,6 +1101,14 @@ export const updateQueueBody = zod.object({
 					name: zod.string().optional(),
 				})
 				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
+				})
+				.optional(),
 			renewalSec: zod.number().optional(),
 			sec: zod.number().optional(),
 		})
@@ -1040,6 +1186,20 @@ export const updateQueueResponse = zod.object({
 	processing: zod.boolean().optional(),
 	processingRenewalSec: zod.number().optional(),
 	processingSec: zod.number().optional(),
+	resourceGroups: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	resources: zod
+		.array(
+			zod.object({
+				name: zod.string().optional(),
+			}),
+		)
+		.optional(),
 	ringtone: zod
 		.object({
 			id: zod.string().optional(),
@@ -1062,6 +1222,14 @@ export const updateQueueResponse = zod.object({
 				.object({
 					id: zod.string().optional(),
 					name: zod.string().optional(),
+				})
+				.optional(),
+			prolongationOptions: zod
+				.object({
+					enabled: zod.boolean().optional(),
+					isTimeoutRetry: zod.boolean().optional(),
+					prolongationTimeSec: zod.number().optional(),
+					repeatsNumber: zod.number().optional(),
 				})
 				.optional(),
 			renewalSec: zod.number().optional(),

@@ -19,6 +19,7 @@ import {
 import convertDuration from './convertDuration.js';
 import debounce from './debounce.js';
 import eventBus from './eventBus.js';
+import { getEndOfDay,getStartOfDay } from './getDefaultFilterDate.js';
 import isEmpty from './isEmpty.js';
 import { wtlog } from './logger.js';
 import {
@@ -29,7 +30,7 @@ import prettifyFileSize from './prettifyFileSize.js';
 import prettifyTime from './prettifyTime.js';
 import preventHiddenPageCallsDecorator from './preventHiddenPageCallsDecorator.js';
 import saveAsJSON from './saveAsJSON.js';
-import { queryToSortAdapter, sortToQueryAdapter } from './sortQueryAdapters.js';
+import { getNextSortOrder,queryToSortAdapter, sortToQueryAdapter } from './sortQueryAdapters.js';
 import updateObject from './updateObject.js';
 
 export {
@@ -39,6 +40,9 @@ export {
   convertDuration,
   debounce,
   eventBus,
+  getEndOfDay,
+  getNextSortOrder,
+  getStartOfDay,
   isEmpty,
   isRelativeDatetimeValue,
   kebabToCamel,

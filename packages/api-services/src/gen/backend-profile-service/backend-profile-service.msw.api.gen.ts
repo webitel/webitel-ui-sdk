@@ -13,7 +13,7 @@ import type {
 	StorageListBackendProfile,
 } from '.././_models';
 
-export const getBackendProfileServiceSearchBackendProfileResponseMock = (
+export const getSearchBackendProfileResponseMock = (
 	overrideResponse: Partial<StorageListBackendProfile> = {},
 ): StorageListBackendProfile => ({
 	items: faker.helpers.arrayElement([
@@ -118,7 +118,7 @@ export const getBackendProfileServiceSearchBackendProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getBackendProfileServiceCreateBackendProfileResponseMock = (
+export const getCreateBackendProfileResponseMock = (
 	overrideResponse: Partial<StorageBackendProfile> = {},
 ): StorageBackendProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -203,7 +203,7 @@ export const getBackendProfileServiceCreateBackendProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getBackendProfileServiceDeleteBackendProfileResponseMock = (
+export const getDeleteBackendProfileResponseMock = (
 	overrideResponse: Partial<StorageBackendProfile> = {},
 ): StorageBackendProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -288,7 +288,7 @@ export const getBackendProfileServiceDeleteBackendProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getBackendProfileServiceReadBackendProfileResponseMock = (
+export const getReadBackendProfileResponseMock = (
 	overrideResponse: Partial<StorageBackendProfile> = {},
 ): StorageBackendProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -373,7 +373,7 @@ export const getBackendProfileServiceReadBackendProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getBackendProfileServicePatchBackendProfileResponseMock = (
+export const getPatchBackendProfileResponseMock = (
 	overrideResponse: Partial<StorageBackendProfile> = {},
 ): StorageBackendProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -458,7 +458,7 @@ export const getBackendProfileServicePatchBackendProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getBackendProfileServiceUpdateBackendProfileResponseMock = (
+export const getUpdateBackendProfileResponseMock = (
 	overrideResponse: Partial<StorageBackendProfile> = {},
 ): StorageBackendProfile => ({
 	createdAt: faker.helpers.arrayElement([
@@ -543,7 +543,7 @@ export const getBackendProfileServiceUpdateBackendProfileResponseMock = (
 	...overrideResponse,
 });
 
-export const getBackendProfileServiceSearchBackendProfileMockHandler = (
+export const getSearchBackendProfileMockHandler = (
 	overrideResponse?:
 		| StorageListBackendProfile
 		| ((
@@ -559,14 +559,14 @@ export const getBackendProfileServiceSearchBackendProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getBackendProfileServiceSearchBackendProfileResponseMock(),
+					: getSearchBackendProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getBackendProfileServiceCreateBackendProfileMockHandler = (
+export const getCreateBackendProfileMockHandler = (
 	overrideResponse?:
 		| StorageBackendProfile
 		| ((
@@ -582,14 +582,14 @@ export const getBackendProfileServiceCreateBackendProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getBackendProfileServiceCreateBackendProfileResponseMock(),
+					: getCreateBackendProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getBackendProfileServiceDeleteBackendProfileMockHandler = (
+export const getDeleteBackendProfileMockHandler = (
 	overrideResponse?:
 		| StorageBackendProfile
 		| ((
@@ -605,14 +605,14 @@ export const getBackendProfileServiceDeleteBackendProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getBackendProfileServiceDeleteBackendProfileResponseMock(),
+					: getDeleteBackendProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getBackendProfileServiceReadBackendProfileMockHandler = (
+export const getReadBackendProfileMockHandler = (
 	overrideResponse?:
 		| StorageBackendProfile
 		| ((
@@ -628,14 +628,14 @@ export const getBackendProfileServiceReadBackendProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getBackendProfileServiceReadBackendProfileResponseMock(),
+					: getReadBackendProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getBackendProfileServicePatchBackendProfileMockHandler = (
+export const getPatchBackendProfileMockHandler = (
 	overrideResponse?:
 		| StorageBackendProfile
 		| ((
@@ -651,14 +651,14 @@ export const getBackendProfileServicePatchBackendProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getBackendProfileServicePatchBackendProfileResponseMock(),
+					: getPatchBackendProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getBackendProfileServiceUpdateBackendProfileMockHandler = (
+export const getUpdateBackendProfileMockHandler = (
 	overrideResponse?:
 		| StorageBackendProfile
 		| ((
@@ -674,17 +674,17 @@ export const getBackendProfileServiceUpdateBackendProfileMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getBackendProfileServiceUpdateBackendProfileResponseMock(),
+					: getUpdateBackendProfileResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getBackendProfileServiceMock = () => [
-	getBackendProfileServiceSearchBackendProfileMockHandler(),
-	getBackendProfileServiceCreateBackendProfileMockHandler(),
-	getBackendProfileServiceDeleteBackendProfileMockHandler(),
-	getBackendProfileServiceReadBackendProfileMockHandler(),
-	getBackendProfileServicePatchBackendProfileMockHandler(),
-	getBackendProfileServiceUpdateBackendProfileMockHandler(),
+	getSearchBackendProfileMockHandler(),
+	getCreateBackendProfileMockHandler(),
+	getDeleteBackendProfileMockHandler(),
+	getReadBackendProfileMockHandler(),
+	getPatchBackendProfileMockHandler(),
+	getUpdateBackendProfileMockHandler(),
 ];

@@ -8,11 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type { WebitelKnowledgebaseCombinedList } from '.././_models';
+import type { KnowledgebaseCombinedList } from '.././_models';
 
-export const getKnowledgebaseSearchSpacesArticlesSearchResponseMock = (
-	overrideResponse: Partial<WebitelKnowledgebaseCombinedList> = {},
-): WebitelKnowledgebaseCombinedList => ({
+export const getSpacesArticlesSearchResponseMock = (
+	overrideResponse: Partial<KnowledgebaseCombinedList> = {},
+): KnowledgebaseCombinedList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -41,14 +41,12 @@ export const getKnowledgebaseSearchSpacesArticlesSearchResponseMock = (
 	...overrideResponse,
 });
 
-export const getKnowledgebaseSearchSpacesArticlesSearchMockHandler = (
+export const getSpacesArticlesSearchMockHandler = (
 	overrideResponse?:
-		| WebitelKnowledgebaseCombinedList
+		| KnowledgebaseCombinedList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelKnowledgebaseCombinedList>
-				| WebitelKnowledgebaseCombinedList),
+		  ) => Promise<KnowledgebaseCombinedList> | KnowledgebaseCombinedList),
 ) => {
 	return http.get('*/spaces/search', async (info) => {
 		await delay(1000);
@@ -59,12 +57,12 @@ export const getKnowledgebaseSearchSpacesArticlesSearchMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getKnowledgebaseSearchSpacesArticlesSearchResponseMock(),
+					: getSpacesArticlesSearchResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getKnowledgebaseSearchMock = () => [
-	getKnowledgebaseSearchSpacesArticlesSearchMockHandler(),
+	getSpacesArticlesSearchMockHandler(),
 ];

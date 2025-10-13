@@ -41,7 +41,9 @@ import callRinging from './call-ringing.svg';
 import callRingingFilled from './call-ringing--filled.svg';
 import callTransfer from './call-transfer.svg';
 import callTransferFilled from './call-transfer--filled.svg';
+import caseFilled from './case--filled.svg';
 import caseAuthor from './case-author.svg';
+import caseDone from './case-done.svg';
 import cases from './cases.svg';
 import chat from './chat.svg';
 import chatFilled from './chat--filled.svg';
@@ -69,6 +71,7 @@ import collapse from './collapse.svg';
 import columnSelect from './column-select.svg';
 import comment from './comment.svg';
 import conference from './conference.svg';
+import consultativeTransfer from './consultative-transfer.svg';
 import contacts from './contacts.svg';
 import copy from './copy.svg';
 import customChatGateway from './custom-chat-gateway.svg';
@@ -76,6 +79,7 @@ import darkMode from './dark-mode.svg';
 import docs from './docs.svg';
 import done from './done.svg';
 import download from './download.svg';
+import downloadPdf from './download-pdf.svg'
 import edit from './edit.svg';
 import elevenlabs from './elevenlabs.svg';
 import email from './email.svg';
@@ -256,10 +260,13 @@ export default objCamelToKebab({
   'call-ringing--filled': callRingingFilled,
   callTransfer,
   'call-transfer--filled': callTransferFilled,
+  consultativeTransfer,
   updateCalls,
 
   caseAuthor,
   cases,
+  'case--filled': caseFilled,
+  caseDone,
   chat,
   'chat--filled': chatFilled,
   chatEmoji,
@@ -428,4 +435,5 @@ export default objCamelToKebab({
   quickReplies,
   checkboxTick,
   log,
+  downloadPdf
 });

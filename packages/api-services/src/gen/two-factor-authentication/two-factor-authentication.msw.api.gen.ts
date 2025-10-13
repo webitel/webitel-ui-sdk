@@ -13,7 +13,7 @@ import type {
 	ApiGetUserTfaKeyResponse,
 } from '.././_models';
 
-export const getTwoFactorAuthenticationGetUserTfaKeyResponseMock = (
+export const getGetUserTfaKeyResponseMock = (
 	overrideResponse: Partial<ApiGetUserTfaKeyResponse> = {},
 ): ApiGetUserTfaKeyResponse => ({
 	totp: faker.helpers.arrayElement([
@@ -41,7 +41,7 @@ export const getTwoFactorAuthenticationGetUserTfaKeyResponseMock = (
 	...overrideResponse,
 });
 
-export const getTwoFactorAuthenticationGenerateUserTfaKeyResponseMock = (
+export const getGenerateUserTfaKeyResponseMock = (
 	overrideResponse: Partial<ApiGenerateUserTfaKeyResponse> = {},
 ): ApiGenerateUserTfaKeyResponse => ({
 	totp: faker.helpers.arrayElement([
@@ -69,7 +69,7 @@ export const getTwoFactorAuthenticationGenerateUserTfaKeyResponseMock = (
 	...overrideResponse,
 });
 
-export const getTwoFactorAuthenticationGetUserTfaKeyMockHandler = (
+export const getGetUserTfaKeyMockHandler = (
 	overrideResponse?:
 		| ApiGetUserTfaKeyResponse
 		| ((
@@ -85,14 +85,14 @@ export const getTwoFactorAuthenticationGetUserTfaKeyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTwoFactorAuthenticationGetUserTfaKeyResponseMock(),
+					: getGetUserTfaKeyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTwoFactorAuthenticationGenerateUserTfaKeyMockHandler = (
+export const getGenerateUserTfaKeyMockHandler = (
 	overrideResponse?:
 		| ApiGenerateUserTfaKeyResponse
 		| ((
@@ -110,13 +110,13 @@ export const getTwoFactorAuthenticationGenerateUserTfaKeyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTwoFactorAuthenticationGenerateUserTfaKeyResponseMock(),
+					: getGenerateUserTfaKeyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getTwoFactorAuthenticationMock = () => [
-	getTwoFactorAuthenticationGetUserTfaKeyMockHandler(),
-	getTwoFactorAuthenticationGenerateUserTfaKeyMockHandler(),
+	getGetUserTfaKeyMockHandler(),
+	getGenerateUserTfaKeyMockHandler(),
 ];

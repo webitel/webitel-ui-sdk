@@ -52,13 +52,6 @@ export default {
     expand: 'Rozwiń',
     collapse: 'Zwiń',
     generate: 'Generuj',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Od',
     to: 'Do',
     tts: 'Tekst na mowę',
@@ -90,6 +83,7 @@ export default {
     unassigned: 'Nieprzypisane',
     showUnassigned: 'Pokaż nieprzypisane',
     group: 'Grupa',
+    dateTime: 'Data i godzina',
     updatedBy: (/*{ named }*/) => {
       return 'Edytowane';
     },
@@ -228,6 +222,8 @@ export default {
       quickReplies: 'Szybka odpowiedź | Szybkie odpowiedzi',
       quickRepliesEmpty: 'Nie ma jeszcze szybkich odpowiedzi',
     },
+    screenRecordings: 'Nagranie ekranu | Nagrania ekranu',
+    screenshots: 'Zrzut ekranu | Zrzuty ekranu',
   },
   channel: {
     state: {
@@ -479,6 +475,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Pobierz PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Wybierz kolumny',
         [IconAction.VARIABLES]: 'Wybierz kolumny zmiennych',
@@ -561,6 +558,9 @@ export default {
         message:
           'Przekroczono limit agentów mogących wziąć pauzę. Pauza jest w tej chwili niedostępna.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Twój plik PDF jest tworzony…'
     },
     saveFailedPopup: {
       title: 'Zapisywanie nie powiodło się',

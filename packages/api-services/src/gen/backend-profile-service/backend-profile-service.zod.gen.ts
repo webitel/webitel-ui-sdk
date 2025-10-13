@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary List of BackendProfile
  */
-export const backendProfileServiceSearchBackendProfileQueryParams = zod.object({
+export const searchBackendProfileQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -18,7 +18,7 @@ export const backendProfileServiceSearchBackendProfileQueryParams = zod.object({
 	id: zod.array(zod.number()).optional(),
 });
 
-export const backendProfileServiceSearchBackendProfileResponse = zod.object({
+export const searchBackendProfileResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -56,7 +56,7 @@ export const backendProfileServiceSearchBackendProfileResponse = zod.object({
 /**
  * @summary Create BackendProfile
  */
-export const backendProfileServiceCreateBackendProfileBody = zod.object({
+export const createBackendProfileBody = zod.object({
 	description: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	domainId: zod.string().optional(),
@@ -68,7 +68,7 @@ export const backendProfileServiceCreateBackendProfileBody = zod.object({
 	type: zod.string().optional(),
 });
 
-export const backendProfileServiceCreateBackendProfileResponse = zod.object({
+export const createBackendProfileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -99,15 +99,15 @@ export const backendProfileServiceCreateBackendProfileResponse = zod.object({
 /**
  * @summary Remove BackendProfile
  */
-export const backendProfileServiceDeleteBackendProfileParams = zod.object({
+export const deleteBackendProfileParams = zod.object({
 	id: zod.string(),
 });
 
-export const backendProfileServiceDeleteBackendProfileQueryParams = zod.object({
+export const deleteBackendProfileQueryParams = zod.object({
 	domainId: zod.string().optional(),
 });
 
-export const backendProfileServiceDeleteBackendProfileResponse = zod.object({
+export const deleteBackendProfileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -138,15 +138,15 @@ export const backendProfileServiceDeleteBackendProfileResponse = zod.object({
 /**
  * @summary BackendProfile item
  */
-export const backendProfileServiceReadBackendProfileParams = zod.object({
+export const readBackendProfileParams = zod.object({
 	id: zod.string(),
 });
 
-export const backendProfileServiceReadBackendProfileQueryParams = zod.object({
+export const readBackendProfileQueryParams = zod.object({
 	domainId: zod.string().optional(),
 });
 
-export const backendProfileServiceReadBackendProfileResponse = zod.object({
+export const readBackendProfileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -177,24 +177,23 @@ export const backendProfileServiceReadBackendProfileResponse = zod.object({
 /**
  * @summary Patch BackendProfile
  */
-export const backendProfileServicePatchBackendProfileParams = zod.object({
+export const patchBackendProfileParams = zod.object({
 	id: zod.string(),
 });
 
-export const backendProfileServicePatchBackendProfileBody = zod.object({
+export const patchBackendProfileBody = zod.object({
 	description: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	domainId: zod.string().optional(),
 	expireDays: zod.number().optional(),
 	fields: zod.array(zod.string()).optional(),
-	id: zod.string().optional(),
 	maxSize: zod.string().optional(),
 	name: zod.string().optional(),
 	priority: zod.number().optional(),
 	properties: zod.record(zod.string(), zod.string()).optional(),
 });
 
-export const backendProfileServicePatchBackendProfileResponse = zod.object({
+export const patchBackendProfileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -225,23 +224,22 @@ export const backendProfileServicePatchBackendProfileResponse = zod.object({
 /**
  * @summary Update BackendProfile
  */
-export const backendProfileServiceUpdateBackendProfileParams = zod.object({
+export const updateBackendProfileParams = zod.object({
 	id: zod.string(),
 });
 
-export const backendProfileServiceUpdateBackendProfileBody = zod.object({
+export const updateBackendProfileBody = zod.object({
 	description: zod.string().optional(),
 	disabled: zod.boolean().optional(),
 	domainId: zod.string().optional(),
 	expireDays: zod.number().optional(),
-	id: zod.string().optional(),
 	maxSize: zod.string().optional(),
 	name: zod.string().optional(),
 	priority: zod.number().optional(),
 	properties: zod.record(zod.string(), zod.string()).optional(),
 });
 
-export const backendProfileServiceUpdateBackendProfileResponse = zod.object({
+export const updateBackendProfileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({

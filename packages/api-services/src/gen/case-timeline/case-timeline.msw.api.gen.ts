@@ -13,7 +13,7 @@ import type {
 } from '.././_models';
 import { WebitelCasesCaseTimelineEventType } from '.././_models';
 
-export const getGetTimelineResponseMock = (
+export const getGetTimelineMixin6ResponseMock = (
 	overrideResponse: Partial<WebitelCasesGetTimelineResponse> = {},
 ): WebitelCasesGetTimelineResponse => ({
 	days: faker.helpers.arrayElement([
@@ -422,7 +422,7 @@ export const getGetTimelineResponseMock = (
 	...overrideResponse,
 });
 
-export const getGetTimelineCounterResponseMock = (
+export const getGetTimelineCounterMixin6ResponseMock = (
 	overrideResponse: Partial<WebitelCasesGetTimelineCounterResponse> = {},
 ): WebitelCasesGetTimelineCounterResponse => ({
 	callsCount: faker.helpers.arrayElement([
@@ -448,7 +448,7 @@ export const getGetTimelineCounterResponseMock = (
 	...overrideResponse,
 });
 
-export const getGetTimelineMockHandler = (
+export const getGetTimelineMixin6MockHandler = (
 	overrideResponse?:
 		| WebitelCasesGetTimelineResponse
 		| ((
@@ -466,14 +466,14 @@ export const getGetTimelineMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getGetTimelineResponseMock(),
+					: getGetTimelineMixin6ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getGetTimelineCounterMockHandler = (
+export const getGetTimelineCounterMixin6MockHandler = (
 	overrideResponse?:
 		| WebitelCasesGetTimelineCounterResponse
 		| ((
@@ -491,13 +491,13 @@ export const getGetTimelineCounterMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getGetTimelineCounterResponseMock(),
+					: getGetTimelineCounterMixin6ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getCaseTimelineMock = () => [
-	getGetTimelineMockHandler(),
-	getGetTimelineCounterMockHandler(),
+	getGetTimelineMixin6MockHandler(),
+	getGetTimelineCounterMixin6MockHandler(),
 ];

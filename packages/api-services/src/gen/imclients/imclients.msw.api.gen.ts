@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsEmptyResponse,
-	WebitelContactsIMClientList,
-} from '.././_models';
+import type { ContactsEmptyResponse, ContactsIMClientList } from '.././_models';
 
-export const getIMClientsListIMClientsResponseMock = (
-	overrideResponse: Partial<WebitelContactsIMClientList> = {},
-): WebitelContactsIMClientList => ({
+export const getListIMClientsResponseMock = (
+	overrideResponse: Partial<ContactsIMClientList> = {},
+): ContactsIMClientList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -136,15 +133,14 @@ export const getIMClientsListIMClientsResponseMock = (
 	...overrideResponse,
 });
 
-export const getIMClientsDeleteIMClientResponseMock =
-	(): WebitelContactsEmptyResponse => ({});
+export const getDeleteIMClientResponseMock = (): ContactsEmptyResponse => ({});
 
-export const getIMClientsListIMClientsMockHandler = (
+export const getListIMClientsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsIMClientList
+		| ContactsIMClientList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsIMClientList> | WebitelContactsIMClientList),
+		  ) => Promise<ContactsIMClientList> | ContactsIMClientList),
 ) => {
 	return http.get('*/contacts/:contactId/imclients', async (info) => {
 		await delay(1000);
@@ -155,21 +151,19 @@ export const getIMClientsListIMClientsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getIMClientsListIMClientsResponseMock(),
+					: getListIMClientsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getIMClientsDeleteIMClientMockHandler = (
+export const getDeleteIMClientMockHandler = (
 	overrideResponse?:
-		| WebitelContactsEmptyResponse
+		| ContactsEmptyResponse
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsEmptyResponse>
-				| WebitelContactsEmptyResponse),
+		  ) => Promise<ContactsEmptyResponse> | ContactsEmptyResponse),
 ) => {
 	return http.delete('*/contacts/:contactId/imclients/:id', async (info) => {
 		await delay(1000);
@@ -180,13 +174,13 @@ export const getIMClientsDeleteIMClientMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getIMClientsDeleteIMClientResponseMock(),
+					: getDeleteIMClientResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getImclientsMock = () => [
-	getIMClientsListIMClientsMockHandler(),
-	getIMClientsDeleteIMClientMockHandler(),
+	getListIMClientsMockHandler(),
+	getDeleteIMClientMockHandler(),
 ];
