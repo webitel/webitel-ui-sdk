@@ -5,14 +5,14 @@
         'p-button--wide': wide,
         'p-button--loading': showLoader,
         'p-button--icon': icon,
-        [ `p-button--icon-${getVariant}` ]: icon,
+        [ `p-button--icon-${variant} p-button--icon-${size}` ]: icon,
       }"
     :disabled="disabled"
     :loading="showLoader"
     :severity="color"
     :size="primevueSizeMap[size]"
     :rounded="rounded"
-    :variant="getVariant"
+    :variant="variant"
     class="wt-button"
     v-bind="attrs"
     @click.prevent="emit('click', $event)"
@@ -28,7 +28,7 @@
         v-else
         :icon="icon"
         :icon-prefix="iconPrefix"
-        :size="size"
+        :size="iconButtonSizeMap[size]"
       />
     </div>
   </p-button>
@@ -38,12 +38,19 @@
 import type { ButtonProps } from 'primevue';
 import {computed, defineEmits, defineProps, ref, useAttrs, watch} from 'vue';
 
-import { ButtonColor,ComponentSize } from '../../enums';
+import { ButtonColor, ButtonVariant, ComponentSize,  } from '../../enums';
 
 const primevueSizeMap = {
+  [ComponentSize.XS]: 'extra-small',
   [ComponentSize.SM]: 'small',
   [ComponentSize.MD]: 'medium',
-};
+}
+
+const iconButtonSizeMap = {
+  [ComponentSize.XS]: 'sm',
+  [ComponentSize.SM]: 'sm',
+  [ComponentSize.MD]: 'md',
+}
 
 interface WtButtonProps extends  /* @vue-ignore */ ButtonProps {
   color?: ButtonColor;
@@ -55,7 +62,7 @@ interface WtButtonProps extends  /* @vue-ignore */ ButtonProps {
   icon?: string;
   iconPrefix?: string;
   rounded?: boolean;
-  iconActive?: boolean;
+  variant?: ButtonVariant;
 }
 
 const props = withDefaults(defineProps<WtButtonProps>(), {
@@ -68,7 +75,7 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
   icon: '',
   iconPrefix: '',
   rounded: false,
-  iconActive: false,
+  variant: ButtonVariant.ACTIVE,
 });
 
 const emit = defineEmits(['click']);
@@ -82,10 +89,6 @@ const loaderColor = computed(() => {
   // if (['success', 'transfer', 'error', 'job'].includes(props.color)) return 'on-dark';
   // return 'on-light';
 });
-
-const getVariant = computed(() => {
-  return (props.icon && !props.iconActive) ? 'outlined' : 'active'
-})
 
 watch(
   () => props.loading,

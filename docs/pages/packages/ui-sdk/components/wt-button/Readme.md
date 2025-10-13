@@ -5,8 +5,7 @@ import ExampleButtonsDifferentColor from './examples/example-buttons-different-c
 import ExampleSmallButton from './examples/example-small-button.vue';
 import ExampleWideButton from './examples/example-wide-button.vue';
 import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-different-color-loaders.vue';
-import ExampleIconButtonActive from './examples/example-icon-button-active.vue'
-import ExampleIconButtonDefault from './examples/example-icon-button-default.vue'
+import ExampleIconButton from './examples/example-icon-button.vue'
 </script>
 
 # WtButton
@@ -71,22 +70,10 @@ import ExampleIconButtonDefault from './examples/example-icon-button-default.vue
 
 ## Icon button
 
-### Active state
-
 ::: raw
-<ExampleIconButtonActive />
+<ExampleIconButton />
 :::
 
 ::: details Code
-<<< ./examples/example-icon-button-active.vue{js}
-:::
-
-### Default state
-
-::: raw
-<ExampleIconButtonDefault />
-:::
-
-::: details Code
-<<< ./examples/example-icon-button-default.vue{js}
+<<< ./examples/example-icon-button.vue{js}
 :::

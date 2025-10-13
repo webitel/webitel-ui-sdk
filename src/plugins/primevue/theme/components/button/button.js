@@ -1,4 +1,5 @@
 import { ButtonScheme } from '@webitel/styleguide/component-schemes';
+import { ComponentSize } from '../../../../../enums';
 
 const generateCustomColorCss = ({ colorName, dt }) => `
         .p-button-${colorName} {
@@ -12,6 +13,31 @@ const generateCustomColorCss = ({ colorName, dt }) => `
         .p-button-${colorName}:not(:disabled):active {
             background: ${dt(`button.${colorName}.activeBackground`)};
             color: ${dt(`button.${colorName}.activeColor`)};
+        }
+
+        .p-button-outlined.p-button-${colorName} {
+            border-color: ${dt(`button.outlined.${colorName}.borderColor`)};
+            background: ${dt(`button.outlined.${colorName}.background`)};
+            color: ${dt(`button.outlined.${colorName}.color`)};
+        }
+        .p-button-outlined.p-button-${colorName}:not(:disabled):hover {
+            border-color: ${dt(`button.outlined.${colorName}.borderColor`)};
+            background: ${dt(`button.outlined.${colorName}.hoverBackground`)};
+        }
+        .p-button-outlined.p-button-${colorName}:not(:disabled):active {
+            background: ${dt(`button.outlined.${colorName}.activeBackground`)};
+            color: ${dt(`button.outlined.${colorName}.activeColor`)};
+        }
+
+        .p-button-text.p-button-${colorName} {
+            background: ${dt(`button.text.${colorName}.background`)};
+            color: ${dt(`button.text.${colorName}.color`)};
+        }
+        .p-button-text.p-button-${colorName}:not(:disabled):hover {
+            background: ${dt(`button.text.${colorName}.hoverBackground`)};
+        }
+        .p-button-text.p-button-${colorName}:not(:disabled):active {
+            background: ${dt(`button.text.${colorName}.activeBackground`)};
         }
 `;
 
@@ -115,7 +141,7 @@ const button = {
             font-family: "Montserrat", monospace;
             text-transform: uppercase;
         }
-        .p-button:not(.p-button--icon-outlined) {
+        .p-button:not(.p-button-outlined) {
             border: none;
         }
         .p-button.p-button--width-by-content {
@@ -127,14 +153,20 @@ const button = {
         .p-button.p-button--loading {
             pointer-events: none;
         }
-        .p-button:hover {
+        .p-button:not(.p-button-outlined):hover {
             border: none;
         }
-        .p-button:not(:disabled):not(.p-button--icon-outlined):hover {
-            border: none;
-        }
-        .p-button.p-button--icon-outlined {
+        .p-button.p-button-outlined {
             background: transparent;
+        }
+        .p-button--icon-${ComponentSize.XS} {
+            padding: ${dt(`button.iconXs.padding`)};
+        }
+        .p-button--icon-${ComponentSize.SM} {
+            padding: ${dt(`button.iconSm.padding`)};
+        }
+        .p-button--icon-${ComponentSize.MD} {
+            padding: ${dt(`button.iconMd.padding`)};
         }
         `,
 };
