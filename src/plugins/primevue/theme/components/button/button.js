@@ -16,12 +16,12 @@ const generateCustomColorCss = ({ colorName, dt }) => `
         }
 
         .p-button-outlined.p-button-${colorName} {
-            border-color: ${dt(`button.outlined.${colorName}.borderColor`)};
+            outline-color: ${dt(`button.outlined.${colorName}.borderColor`)};
             background: ${dt(`button.outlined.${colorName}.background`)};
             color: ${dt(`button.outlined.${colorName}.color`)};
         }
         .p-button-outlined.p-button-${colorName}:not(:disabled):hover {
-            border-color: ${dt(`button.outlined.${colorName}.borderColor`)};
+            outline-color: ${dt(`button.outlined.${colorName}.borderColor`)};
             background: ${dt(`button.outlined.${colorName}.hoverBackground`)};
         }
         .p-button-outlined.p-button-${colorName}:not(:disabled):active {
@@ -63,20 +63,20 @@ const generateCustomActiveIconColorCss = ({ colorName, dt }) => `
         }
 `
 
-const generateCustomOutlinedIconColorCss = ({ colorName, dt }) => `
-        .p-button--icon-outlined.p-button-${colorName} {
-            border-color: ${dt(`button.outlined.${colorName}.borderColor`)};
+const generateCustomOutlinedColorCss = ({ colorName, dt }) => `
+        .p-button-outlined.p-button-${colorName} {
+            outline: 1px solid ${dt(`button.outlined.${colorName}.borderColor`)};
         }
-        .p-button--icon-outlined.p-button-${colorName}:not(:disabled):hover {
-            border-color: ${dt(`button.outlined.${colorName}.borderColor`)};
+        .p-button-outlined.p-button-${colorName}:not(:disabled):hover {
+            outline-color: ${dt(`button.outlined.${colorName}.borderColor`)};
             background: ${dt(`button.outlined.${colorName}.hoverBackground`)};
         }
-        .p-button--icon-outlined.p-button-${colorName}:not(:disabled):active {
-            border-color: ${dt(`button.outlined.${colorName}.borderColor`)};
+        .p-button-outlined.p-button-${colorName}:not(:disabled):active {
+            outline-color: ${dt(`button.outlined.${colorName}.borderColor`)};
             background: ${dt(`button.outlined.${colorName}.activeBackground`)};
         }
 
-        .p-button--icon-outlined.p-button-${colorName} svg {
+        .p-button-outlined.p-button-${colorName} svg {
             fill: ${dt(`button.outlined.${colorName}.color`)};
         }
 `
@@ -110,14 +110,14 @@ const button = {
         ${generateCustomActiveIconColorCss({ colorName: 'job', dt })}
         ${generateCustomActiveIconColorCss({ colorName: 'info', dt })}
 
-        ${generateCustomOutlinedIconColorCss({ colorName: 'primary', dt })}
-        ${generateCustomOutlinedIconColorCss({ colorName: 'secondary', dt })}
-        ${generateCustomOutlinedIconColorCss({ colorName: 'success', dt })}
-        ${generateCustomOutlinedIconColorCss({ colorName: 'warn', dt })}
-        ${generateCustomOutlinedIconColorCss({ colorName: 'error', dt })}
-        ${generateCustomOutlinedIconColorCss({ colorName: 'transfer', dt })}
-        ${generateCustomOutlinedIconColorCss({ colorName: 'job', dt })}
-        ${generateCustomOutlinedIconColorCss({ colorName: 'info', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'primary', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'secondary', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'success', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'warn', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'error', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'transfer', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'job', dt })}
+        ${generateCustomOutlinedColorCss({ colorName: 'info', dt })}
 
         .p-button:disabled {
           background: ${dt(`button.disabled.background`)};
@@ -140,9 +140,10 @@ const button = {
             line-height: 24px;
             font-family: "Montserrat", monospace;
             text-transform: uppercase;
+            border: none !important;
         }
-        .p-button:not(.p-button-outlined) {
-            border: none;
+        .p-button:hover {
+            border: none !important;
         }
         .p-button.p-button--width-by-content {
             min-width: 0;
@@ -152,9 +153,6 @@ const button = {
         }
         .p-button.p-button--loading {
             pointer-events: none;
-        }
-        .p-button:not(.p-button-outlined):hover {
-            border: none;
         }
         .p-button.p-button-outlined {
             background: transparent;
