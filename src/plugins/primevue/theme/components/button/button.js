@@ -1,6 +1,17 @@
 import { ButtonScheme } from '@webitel/styleguide/component-schemes';
 import { ComponentSize } from '../../../../../enums';
 
+const colors = [
+    'primary',
+    'secondary',
+    'success',
+    'warn',
+    'error',
+    'transfer',
+    'job',
+    'info'
+];
+
 const generateCustomColorCss = ({ colorName, dt }) => `
         .p-button-${colorName} {
             background: ${dt(`button.${colorName}.background`)};
@@ -101,23 +112,9 @@ const button = {
         ${generateCustomColorCss({ colorName: 'error', dt })}
         ${generateCustomColorCss({ colorName: 'job', dt })}
 
-        ${generateCustomActiveIconColorCss({ colorName: 'primary', dt })}
-        ${generateCustomActiveIconColorCss({ colorName: 'secondary', dt })}
-        ${generateCustomActiveIconColorCss({ colorName: 'success', dt })}
-        ${generateCustomActiveIconColorCss({ colorName: 'warn', dt })}
-        ${generateCustomActiveIconColorCss({ colorName: 'error', dt })}
-        ${generateCustomActiveIconColorCss({ colorName: 'transfer', dt })}
-        ${generateCustomActiveIconColorCss({ colorName: 'job', dt })}
-        ${generateCustomActiveIconColorCss({ colorName: 'info', dt })}
+        ${colors.map((color) => generateCustomActiveIconColorCss({ colorName: color, dt })).join('')}
 
-        ${generateCustomOutlinedColorCss({ colorName: 'primary', dt })}
-        ${generateCustomOutlinedColorCss({ colorName: 'secondary', dt })}
-        ${generateCustomOutlinedColorCss({ colorName: 'success', dt })}
-        ${generateCustomOutlinedColorCss({ colorName: 'warn', dt })}
-        ${generateCustomOutlinedColorCss({ colorName: 'error', dt })}
-        ${generateCustomOutlinedColorCss({ colorName: 'transfer', dt })}
-        ${generateCustomOutlinedColorCss({ colorName: 'job', dt })}
-        ${generateCustomOutlinedColorCss({ colorName: 'info', dt })}
+        ${colors.map((color) => generateCustomOutlinedColorCss({ colorName: color, dt })).join('')}
 
         .p-button:disabled {
           background: ${dt(`button.disabled.background`)};
