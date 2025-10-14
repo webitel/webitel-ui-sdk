@@ -11,7 +11,6 @@
     :loading="showLoader"
     :severity="color"
     :size="primevueSizeMap[size]"
-    :rounded="rounded"
     :variant="variant"
     class="wt-button"
     v-bind="attrs"
@@ -61,7 +60,6 @@ interface WtButtonProps extends  /* @vue-ignore */ ButtonProps {
   widthByContent?: boolean;
   icon?: string;
   iconPrefix?: string;
-  rounded?: boolean;
   variant?: ButtonVariant;
 }
 
@@ -74,7 +72,6 @@ const props = withDefaults(defineProps<WtButtonProps>(), {
   widthByContent: false,
   icon: '',
   iconPrefix: '',
-  rounded: false,
   variant: ButtonVariant.ACTIVE,
 });
 
