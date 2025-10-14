@@ -155,13 +155,13 @@ const button = {
             background: transparent;
         }
         .p-button--icon-${ComponentSize.XS} {
-            padding: ${dt(`button.iconXs.padding`)};
+            padding: ${dt(`button.icon.xs.padding`)};
         }
         .p-button--icon-${ComponentSize.SM} {
-            padding: ${dt(`button.iconSm.padding`)};
+            padding: ${dt(`button.icon.sm.padding`)};
         }
         .p-button--icon-${ComponentSize.MD} {
-            padding: ${dt(`button.iconMd.padding`)};
+            padding: ${dt(`button.icon.md.padding`)};
         }
         `,
 };
