@@ -4,12 +4,12 @@ import vue from '@vitejs/plugin-vue';
 import { globbySync } from 'globby';
 import { resolve } from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
+import { vite as vidstack } from 'vidstack/plugins';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite';
-import { vite as vidstack } from 'vidstack/plugins';
 
 // https://vitejs.dev/config/
 export default (/*{ mode }*/) => {

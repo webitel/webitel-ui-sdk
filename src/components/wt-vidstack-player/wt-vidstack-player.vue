@@ -1,45 +1,57 @@
 <template>
-  <div class="vidstack-wrapper">
+  <div
+    class="wt-vidstack-player"
+    :class="[
+      `wt-vidstack-player--${size}`,
+      `wt-player--position-${props.position}`,
+      {'wt-popup' : size === ComponentSize.MD },
+      {'wt-popup--size-md': size === ComponentSize.MD }
+      ]"
+  >
+    <div> {{ playerSrc }} </div>
     <media-player
-      ref="playerEl"
-      class="vidstack-player"
-      :title="props.media?.name || 'Media File'"
+      ref="player"
       :src="playerSrc"
-      crossorigin="anonymous"
-      playsinline
-      :poster="posterUrl"
-      preload="metadata"
-      @loaded-metadata="handleLoadedMetadata"
-      @error="handleError"
-      @play="handlePlay"
-      @pause="handlePause"
-      @ended="handleEnded"
+      class="wt-vidstack-player__player wt-popup__popup"
+      cross-origin
+      plays-inline
+      @close="emit('close')"
+      @change-size="changeSize"
     >
       <media-provider>
-        <video  />
-<!--        for audio-->
-<!--        v-if="isVideo"-->
-<!--        <audio v-else />-->
+<!--        <source-->
+<!--          src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_1MB.mp4"-->
+<!--          type="video/mp4"-->
+<!--        />-->
+<!--        <source-->
+<!--          -->
+<!--        />-->
       </media-provider>
-
-      <media-video-layout  />
-<!--      for audio-->
-<!--      v-if="isVideo"-->
-<!--      <media-audio-layout v-else />-->
+      <video-layout
+        :closable="props.closable"
+        :autoplay="props.autoplay"
+        :hide-duration="props.hideDuration"
+        :title="props.title"
+        :username="props.username"
+        @close-player="emit('close')"
+      />
     </media-player>
-
-    <div v-if="loading" class="vs-loader">Loading {{ progress }}%</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import 'vidstack/bundle';
+import 'vidstack/player';
+import 'vidstack/player/ui';
 
-import { ref, computed, onMounted, nextTick } from 'vue';
+import type { MediaPlayerElement } from 'vidstack/elements';
+import { computed,defineEmits, defineProps, provide, ref, useTemplateRef } from 'vue';
+
+import { ComponentSize } from '../../enums';
+import VideoLayout from './components/layouts/video-layout.vue';
 
 interface Props {
   src?: string | { src: string; type?: string };
-  mime?: string;         // 'video/mp4' | 'audio/mpeg' | 'video/webm' ... (не 'audio')
+  mime?: string;
   autoplay?: boolean;
   loop?: boolean;
   hideDuration?: boolean;
@@ -48,39 +60,51 @@ interface Props {
   invertTime?: boolean;
   resetVolume?: boolean;
   closable?: boolean;
-  position?: 'sticky' | 'relative' | 'static';
+  title?: string;
+  username?: string;
+  position: string;
   media?: { name?: string; poster?: string };
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  autoplay: true,
+  autoplay: false,
   loop: false,
   hideDuration: false,
   download: (url: string) => url?.replace?.('/stream', '/download'),
   mime: 'video/mp4',
   resetOnEnd: false,
-  invertTime: true,
+  invertTime: false,
   resetVolume: false,
-  closable: true,
-  position: 'sticky',
+  closable: false,
+  position: 'static',
   media: () => ({}),
 });
 
-const playerEl = ref<HTMLElement | null>(null);
-const player = ref<any>(null);
-const loading = ref(false);
-const progress = ref(0);
+const emit = defineEmits<{
+  (e: 'close'): void;
+}>();
 
-const posterUrl = computed(() => props.media?.poster || '');
+const player = useTemplateRef<MediaPlayerElement>('player');
+const size = ref('sm');
 
-const normalizedType = computed(() => {
-  //check for show other types
-  // const url = typeof props.src === 'string' ? props.src : props.src?.src;
-  //
-  // if (ext === 'media') return 'audio/mp3';
-  // if (ext === 'mp4' || ext === 'm4v') return 'video/mp4';
-  // if (ext === 'mp3') return 'audio/mp3';
-  // if (ext === 'ogg' || ext === 'oga') return 'audio/ogg';
+const changeSize = () => {
+  size.value === ComponentSize.SM
+  ? size.value = ComponentSize.MD
+  : size.value = ComponentSize.SM;
+}
+
+// options: [sm, md], lg-size - fullscreen and not use in components styles @author liza-pohranichna
+provide('size', { size, changeSize });
+
+
+const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
+  if (props.mime) return props.mime;
+
+
+  if (props.src.includes('media')) return 'audio/mp3';
+  if (props.src.includes('mp4') || props.src.includes('m4v')) return 'video/mp4';
+  if (props.src.includes('mp3')) return 'audio/mp3';
+  if (props.src.includes('ogg') || props.src.includes('oga')) return 'audio/ogg';
 
   return 'video/mp4';
 });
@@ -95,75 +119,44 @@ const playerSrc = computed(() => {
   };
 });
 
-const isVideo = computed(() => normalizedType.value.startsWith('video'));
 
-function handleLoadedMetadata() { loading.value = false; }
-function handleError(err: any) { console.error('Player error:', err); loading.value = false; }
-function handlePlay() {}
-function handlePause() {}
-function handleEnded() {}
-
-onMounted(async () => {
-  await nextTick();
-  if (playerEl.value) {
-    player.value = playerEl.value;
-    player.value.autoplay = !!props.autoplay;
-    player.value.loop = !!props.loop;
-  }
-});
 </script>
 
 <style lang="scss">
 @use './variables.scss';
+@use '../wt-popup/popup.scss';
 </style>
 
-<style lang="scss" scoped>
-@use '@webitel/styleguide/typography' as *;
+<style scoped lang="scss">
+.wt-vidstack-player {
+  transition: var(--transition);
 
-.vidstack-wrapper {
-  @extend %typo-body-2;
-  bottom: 60px;
+  &--sm {
+    position: fixed;
+    right: var(--spacing-md);
+    bottom: var(--spacing-md);
+    max-width: var(--wt-player-width-sm);
+    max-height: var(--wt-player-height-sm);
+    z-index: 100;
 
-  &--position {
-    &-sticky {
-      position: sticky;
-      z-index: 2;
+    .wt-popup__popup {
+      border-radius: var(--spacing-sm);
     }
+  }
 
-    &-relative {
-      position: relative;
-      bottom: unset;
-    }
+  &--md {
+    // width and height get from wt-popup @author liza-pohranichna
 
-    &-static {
-      position: static;
+    .wt-popup__popup {
+      border-radius: var(--spacing-md);
     }
+  }
+
+  .wt-popup__popup {
+    padding: 0;
+    margin: 0;
   }
 }
 
-.vidstack-player {
-  box-shadow: var(--elevation-10);
-  border-radius: var(--border-radius);
-  max-width: 100%; // prevents <video> container overflow
 
-  :deep(media-player) {
-    width: 100%;
-    height: 100%;
-  }
-
-  // Vidstack Player styles will be applied automatically
-  // You can customize specific components here if needed
-}
-
-.vs-loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  z-index: 10;
-}
 </style>

@@ -135,6 +135,8 @@ import options from './options.svg';
 import pause from './pause.svg';
 import pin from './pin.svg';
 import play from './play.svg';
+import playerEnterFullscreen from './player-enter-fullscreen.svg';
+import playerExitFullscreen from './player-exit-fullscreen.svg';
 import plus from './plus.svg';
 import plyrAirplay from './plyr-airplay.svg';
 import plyrCaptionsOff from './plyr-captions-off.svg';
@@ -430,6 +432,8 @@ export default objCamelToKebab({
   plyrRewind,
   plyrSettings,
   plyrVolume,
+  playerExitFullscreen,
+  playerEnterFullscreen,
   loadPreset,
   quickReplies,
   checkboxTick,
