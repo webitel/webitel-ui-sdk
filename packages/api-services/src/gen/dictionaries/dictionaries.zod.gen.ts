@@ -1981,11 +1981,11 @@ export const deleteTypeResponse = zod
 /**
  * @summary Lookup dictionaries data types.
  */
-export const searchTypeMixin3QuerySortItemDefault = '*';
-export const searchTypeMixin3QuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const searchTypeMixin3QueryFieldsItemDefault = '*';
+export const searchTypeQuerySortItemDefault = '*';
+export const searchTypeQuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchTypeQueryFieldsItemDefault = '*';
 
-export const searchTypeMixin3QueryParams = zod.object({
+export const searchTypeQueryParams = zod.object({
 	q: zod
 		.string()
 		.optional()
@@ -2022,7 +2022,7 @@ export const searchTypeMixin3QueryParams = zod.object({
 		.optional()
 		.describe('Page number of result set of records.\nDefault: 1.'),
 	sort: zod
-		.array(zod.string().regex(searchTypeMixin3QuerySortItemRegExp))
+		.array(zod.string().regex(searchTypeQuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -2035,9 +2035,9 @@ export const searchTypeMixin3QueryParams = zod.object({
 		),
 });
 
-export const searchTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
+export const searchTypeResponseDataItemFieldsItemKindDefault = 'none';
 
-export const searchTypeMixin3Response = zod
+export const searchTypeResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -2218,9 +2218,7 @@ export const searchTypeMixin3Response = zod
 												'datetime',
 												'duration',
 											])
-											.default(
-												searchTypeMixin3ResponseDataItemFieldsItemKindDefault,
-											)
+											.default(searchTypeResponseDataItemFieldsItemKindDefault)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 											),
@@ -2414,13 +2412,13 @@ export const searchTypeMixin3Response = zod
  * (Dictionary) {
  * @summary Locate the dictionary type.
  */
-export const locateTypeParams = zod.object({
+export const locateTypeMixin3Params = zod.object({
 	repo: zod.string().describe('`types.repo`'),
 });
 
-export const locateTypeResponseFieldsItemKindDefault = 'none';
+export const locateTypeMixin3ResponseFieldsItemKindDefault = 'none';
 
-export const locateTypeResponse = zod
+export const locateTypeMixin3Response = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -2564,7 +2562,7 @@ export const locateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(locateTypeResponseFieldsItemKindDefault)
+							.default(locateTypeMixin3ResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),
@@ -2726,15 +2724,15 @@ export const locateTypeResponse = zod
  * (Dictionary) {
  * @summary Create custom dictionary.
  */
-export const createTypeParams = zod.object({
+export const createTypeMixin3Params = zod.object({
 	repo: zod
 		.string()
 		.describe('NEW [`types.repo`] repository name, e.g.: `countries`.'),
 });
 
-export const createTypeBodyFieldsItemKindDefault = 'none';
+export const createTypeMixin3BodyFieldsItemKindDefault = 'none';
 
-export const createTypeBody = zod.object({
+export const createTypeMixin3Body = zod.object({
 	about: zod.string().optional(),
 	administered: zod.boolean().optional(),
 	display: zod
@@ -2865,7 +2863,7 @@ export const createTypeBody = zod.object({
 							'datetime',
 							'duration',
 						])
-						.default(createTypeBodyFieldsItemKindDefault)
+						.default(createTypeMixin3BodyFieldsItemKindDefault)
 						.describe(
 							'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 						),
@@ -2998,9 +2996,9 @@ export const createTypeBody = zod.object({
 		),
 });
 
-export const createTypeResponseFieldsItemKindDefault = 'none';
+export const createTypeMixin3ResponseFieldsItemKindDefault = 'none';
 
-export const createTypeResponse = zod
+export const createTypeMixin3Response = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -3144,7 +3142,7 @@ export const createTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(createTypeResponseFieldsItemKindDefault)
+							.default(createTypeMixin3ResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),
@@ -3306,22 +3304,22 @@ export const createTypeResponse = zod
  * (Dictionary) {
  * @summary Update custom dictionary.
  */
-export const updateTypeParams = zod.object({
+export const updateTypeMixin3Params = zod.object({
 	repo: zod
 		.string()
 		.describe('[**repo**] name of the dataset type, e.g.: `countries`.'),
 });
 
-export const updateTypeQueryParams = zod.object({
+export const updateTypeMixin3QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to return into result.'),
 });
 
-export const updateTypeBodyFieldsItemKindDefault = 'none';
+export const updateTypeMixin3BodyFieldsItemKindDefault = 'none';
 
-export const updateTypeBody = zod.object({
+export const updateTypeMixin3Body = zod.object({
 	about: zod.string().optional(),
 	administered: zod.boolean().optional(),
 	display: zod
@@ -3452,7 +3450,7 @@ export const updateTypeBody = zod.object({
 							'datetime',
 							'duration',
 						])
-						.default(updateTypeBodyFieldsItemKindDefault)
+						.default(updateTypeMixin3BodyFieldsItemKindDefault)
 						.describe(
 							'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 						),
@@ -3585,9 +3583,9 @@ export const updateTypeBody = zod.object({
 		),
 });
 
-export const updateTypeResponseFieldsItemKindDefault = 'none';
+export const updateTypeMixin3ResponseFieldsItemKindDefault = 'none';
 
-export const updateTypeResponse = zod
+export const updateTypeMixin3Response = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -3731,7 +3729,7 @@ export const updateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(updateTypeResponseFieldsItemKindDefault)
+							.default(updateTypeMixin3ResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),

@@ -14,7 +14,7 @@ import type {
 	DeleteType2Params,
 	DeleteTypeMixin3Params,
 	ProtodataStruct,
-	SearchTypeParams,
+	SearchTypeMixin3Params,
 } from '.././_models';
 
 // --- header start
@@ -42,8 +42,8 @@ export const // --- title start
 			 * (ExtensionList) {
 			 * @summary Search for type extensions.
 			 */
-			const searchType = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeParams,
+			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/extensions', {
@@ -69,7 +69,7 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Type extension details.
 			 */
-			const locateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
+			const locateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -79,7 +79,7 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Create type extension.
 			 */
-			const createTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
+			const createType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputExtension: DataInputExtension,
 				options?: AxiosRequestConfig,
@@ -94,7 +94,7 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Update type extension.
 			 */
-			const updateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
+			const updateType = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputExtension: DataInputExtension,
 				options?: AxiosRequestConfig,
@@ -109,18 +109,18 @@ export const // --- title start
 			// --- footer start
 			return {
 				deleteType2,
-				searchType,
+				searchTypeMixin3,
 				deleteTypeMixin3,
-				locateTypeMixin3,
-				createTypeMixin3,
-				updateTypeMixin3,
+				locateType,
+				createType,
+				updateType,
 			};
 		};
 export type DeleteType2Result = AxiosResponse<DataStructList>;
-export type SearchTypeResult = AxiosResponse<DataStructList>;
+export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
 export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
-export type LocateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
-export type CreateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
-export type UpdateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
+export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
+export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
+export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

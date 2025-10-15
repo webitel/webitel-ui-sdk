@@ -83,6 +83,7 @@ export default {
     unassigned: 'Неназначенные',
     showUnassigned: 'Показать неназначенные',
     group: 'Группа',
+    dateTime: 'Дата и время',
     updatedBy: (/*{ named }*/) => {
       return 'Редактировано';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Быстрый ответ | Быстрые ответы',
       quickRepliesEmpty: 'Еще нет быстрых ответов',
     },
+    screenRecordings: 'Запись экрана | Записи экрана',
+    screenshots: 'Снимок экрана | Снимки экрана',
   },
   channel: {
     state: {
@@ -472,6 +475,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Скачать PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
         [IconAction.COLUMNS]: 'Добавить колонки',
         [IconAction.VARIABLES]: 'Выбрать колонки с переменными',
@@ -550,6 +554,9 @@ export default {
         message:
           'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Ваш PDF-файл генерируется…'
     },
     saveFailedPopup: {
       title: 'Ошибка сохранения',

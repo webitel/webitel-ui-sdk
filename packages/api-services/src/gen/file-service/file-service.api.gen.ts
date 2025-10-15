@@ -14,9 +14,12 @@ import type {
 	SearchScreenRecordingsParams,
 	StorageDeleteFilesRequest,
 	StorageDeleteFilesResponse,
+	StorageDeleteQuarantineFilesRequest,
 	StorageFileServiceDeleteScreenRecordingsBody,
 	StorageFileServiceDeleteScreenRecordingsByAgentBody,
 	StorageListFile,
+	StorageRestoreFilesRequest,
+	StorageRestoreFilesResponse,
 } from '.././_models';
 
 // --- header start
@@ -70,6 +73,27 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
+			const deleteQuarantineFiles = <
+				TData = AxiosResponse<StorageDeleteFilesResponse>,
+			>(
+				storageDeleteQuarantineFilesRequest: StorageDeleteQuarantineFilesRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.delete('/storage/file/quarantine', {
+					data: storageDeleteQuarantineFilesRequest,
+					...options,
+				});
+			};
+			const restoreFiles = <TData = AxiosResponse<StorageRestoreFilesResponse>>(
+				storageRestoreFilesRequest: StorageRestoreFilesRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.patch(
+					'/storage/file/restore',
+					storageRestoreFilesRequest,
+					options,
+				);
+			};
 			const searchScreenRecordings = <TData = AxiosResponse<StorageListFile>>(
 				userId: string,
 				params?: SearchScreenRecordingsParams,
@@ -100,6 +124,8 @@ export const // --- title start
 				deleteScreenRecordingsByAgent,
 				deleteFiles,
 				searchFiles,
+				deleteQuarantineFiles,
+				restoreFiles,
 				searchScreenRecordings,
 				deleteScreenRecordings,
 			};
@@ -110,6 +136,9 @@ export type DeleteScreenRecordingsByAgentResult =
 	AxiosResponse<StorageDeleteFilesResponse>;
 export type DeleteFilesResult = AxiosResponse<StorageDeleteFilesResponse>;
 export type SearchFilesResult = AxiosResponse<StorageListFile>;
+export type DeleteQuarantineFilesResult =
+	AxiosResponse<StorageDeleteFilesResponse>;
+export type RestoreFilesResult = AxiosResponse<StorageRestoreFilesResponse>;
 export type SearchScreenRecordingsResult = AxiosResponse<StorageListFile>;
 export type DeleteScreenRecordingsResult =
 	AxiosResponse<StorageDeleteFilesResponse>;

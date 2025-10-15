@@ -1,4 +1,4 @@
-export * from './_enums/TranslationLocale.enum';
+export { TranslationLocale } from './_enums/TranslationLocale.enum';
 
 import en from './en/en';
 import es from './es/es';

@@ -82,6 +82,7 @@ export default {
     unassigned: 'Sin asignar',
     showUnassigned: 'Mostrar sin asignar',
     group: 'Grupo',
+    dateTime: 'Fecha y hora',
     updatedBy: (/*{ named }*/) => {
       return 'Editado';
     },
@@ -216,6 +217,8 @@ export default {
       quickReplies: 'Respuesta rápida | Respuestas rápidas',
       quickRepliesEmpty: 'Aún no hay respuestas rápidas',
     },
+    screenRecordings: 'Grabación de pantalla | Grabaciones de pantalla',
+    screenshots: 'Captura de pantalla | Capturas de pantalla',
   },
   channel: {
     state: {
@@ -468,6 +471,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Descargar PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Seleccionar columnas',
         [IconAction.VARIABLES]: 'Seleccionar columnas de variables',
@@ -551,6 +555,9 @@ export default {
         message:
           'Se ha excedido el límite de agentes para tomar una pausa. La pausa no está disponible en este momento.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Su archivo PDF se está creando…'
     },
     saveFailedPopup: {
       title: 'Error al guardar',

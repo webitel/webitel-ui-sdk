@@ -4,6 +4,7 @@ export const tableActionsOrder = [
   IconAction.ADD,
   IconAction.ADD_CONTACT,
   IconAction.COPY,
+  IconAction.DOWNLOAD_PDF,
   IconAction.DOWNLOAD,
   IconAction.UPLOAD,
   IconAction.COLUMNS,

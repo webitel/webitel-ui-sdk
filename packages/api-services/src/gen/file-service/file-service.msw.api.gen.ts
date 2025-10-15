@@ -7,7 +7,11 @@
 import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
-import type { StorageDeleteFilesResponse, StorageListFile } from '.././_models';
+import type {
+	StorageDeleteFilesResponse,
+	StorageListFile,
+	StorageRestoreFilesResponse,
+} from '.././_models';
 import { StorageUploadFileChannel } from '.././_models';
 
 export const getSearchScreenRecordingsByAgentResponseMock = (
@@ -194,6 +198,12 @@ export const getSearchFilesResponseMock = (
 	...overrideResponse,
 });
 
+export const getDeleteQuarantineFilesResponseMock =
+	(): StorageDeleteFilesResponse => ({});
+
+export const getRestoreFilesResponseMock =
+	(): StorageRestoreFilesResponse => ({});
+
 export const getSearchScreenRecordingsResponseMock = (
 	overrideResponse: Partial<StorageListFile> = {},
 ): StorageListFile => ({
@@ -378,6 +388,52 @@ export const getSearchFilesMockHandler = (
 	});
 };
 
+export const getDeleteQuarantineFilesMockHandler = (
+	overrideResponse?:
+		| StorageDeleteFilesResponse
+		| ((
+				info: Parameters<Parameters<typeof http.delete>[1]>[0],
+		  ) => Promise<StorageDeleteFilesResponse> | StorageDeleteFilesResponse),
+) => {
+	return http.delete('*/storage/file/quarantine', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getDeleteQuarantineFilesResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getRestoreFilesMockHandler = (
+	overrideResponse?:
+		| StorageRestoreFilesResponse
+		| ((
+				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+		  ) => Promise<StorageRestoreFilesResponse> | StorageRestoreFilesResponse),
+) => {
+	return http.patch('*/storage/file/restore', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getRestoreFilesResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
 export const getSearchScreenRecordingsMockHandler = (
 	overrideResponse?:
 		| StorageListFile
@@ -428,6 +484,8 @@ export const getFileServiceMock = () => [
 	getDeleteScreenRecordingsByAgentMockHandler(),
 	getDeleteFilesMockHandler(),
 	getSearchFilesMockHandler(),
+	getDeleteQuarantineFilesMockHandler(),
+	getRestoreFilesMockHandler(),
 	getSearchScreenRecordingsMockHandler(),
 	getDeleteScreenRecordingsMockHandler(),
 ];

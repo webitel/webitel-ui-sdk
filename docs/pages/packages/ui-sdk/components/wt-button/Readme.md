@@ -5,6 +5,7 @@ import ExampleButtonsDifferentColor from './examples/example-buttons-different-c
 import ExampleSmallButton from './examples/example-small-button.vue';
 import ExampleWideButton from './examples/example-wide-button.vue';
 import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-different-color-loaders.vue';
+import ExampleIconButton from './examples/example-icon-button.vue'
 </script>
 
 # WtButton
@@ -65,4 +66,14 @@ import ExampleButtonsDifferentColorLoaders from './examples/example-buttons-diff
 
 ::: details Code
 <<< ./examples/example-buttons-different-color-loaders.vue{js}
+:::
+
+## Icon button
+
+::: raw
+<ExampleIconButton />
+:::
+
+::: details Code
+<<< ./examples/example-icon-button.vue{js}
 :::

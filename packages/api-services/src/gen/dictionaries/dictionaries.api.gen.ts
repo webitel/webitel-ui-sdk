@@ -22,14 +22,14 @@ import type {
 	LocateDataParams,
 	ProtodataStruct,
 	SearchDataParams,
-	SearchTypeMixin3Params,
+	SearchTypeParams,
 	UpdateData2Body,
 	UpdateData2Params,
 	UpdateData200,
 	UpdateData2200,
 	UpdateDataBody,
 	UpdateDataParams,
-	UpdateTypeParams,
+	UpdateTypeMixin3Params,
 } from '.././_models';
 
 // --- header start
@@ -168,8 +168,8 @@ export const // --- title start
 			/**
 			 * @summary Lookup dictionaries data types.
 			 */
-			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeMixin3Params,
+			const searchType = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/dictionaries', {
@@ -181,7 +181,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Locate the dictionary type.
 			 */
-			const locateType = <TData = AxiosResponse<ProtodataStruct>>(
+			const locateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -191,7 +191,7 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Create custom dictionary.
 			 */
-			const createType = <TData = AxiosResponse<ProtodataStruct>>(
+			const createTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputDictionary: DataInputDictionary,
 				options?: AxiosRequestConfig,
@@ -206,10 +206,10 @@ export const // --- title start
 			 * (Dictionary) {
 			 * @summary Update custom dictionary.
 			 */
-			const updateType = <TData = AxiosResponse<ProtodataStruct>>(
+			const updateTypeMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputDictionary: DataInputDictionary,
-				params?: UpdateTypeParams,
+				params?: UpdateTypeMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(`/types/dictionaries/${repo}`, dataInputDictionary, {
@@ -229,10 +229,10 @@ export const // --- title start
 				updateData,
 				updateData2,
 				deleteType,
-				searchTypeMixin3,
-				locateType,
-				createType,
-				updateType,
+				searchType,
+				locateTypeMixin3,
+				createTypeMixin3,
+				updateTypeMixin3,
 			};
 		};
 export type DeleteDataResult = AxiosResponse<DataDataset>;
@@ -244,9 +244,9 @@ export type LocateDataResult = AxiosResponse<LocateData200>;
 export type UpdateDataResult = AxiosResponse<UpdateData200>;
 export type UpdateData2Result = AxiosResponse<UpdateData2200>;
 export type DeleteTypeResult = AxiosResponse<DataStructList>;
-export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
-export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
-export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
-export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;
+export type SearchTypeResult = AxiosResponse<DataStructList>;
+export type LocateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
+export type CreateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
+export type UpdateTypeMixin3Result = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

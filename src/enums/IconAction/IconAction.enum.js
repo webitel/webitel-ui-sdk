@@ -21,6 +21,7 @@ const IconAction = Object.freeze({
   SAVE_PRESET: 'save-preset',
   APPLY_PRESET: 'apply-preset',
   ADD_CONTACT: 'add-contact',
+  DOWNLOAD_PDF: 'download-pdf',
 });
 
 export default IconAction;

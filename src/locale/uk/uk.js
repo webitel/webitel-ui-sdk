@@ -83,6 +83,7 @@ export default {
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
     group: 'Група',
+    dateTime: 'Дата і час',
     updatedBy: (/*{ named }*/) => {
       return 'Редаговано';
     },
@@ -220,6 +221,8 @@ export default {
       quickReplies: 'Швидка відповідь | Швидкі відповіді',
       quickRepliesEmpty: 'Ще немає швидких відповідей',
     },
+    screenRecordings: 'Запис екрану | Записи екрану',
+    screenshots: 'Знімок екрана | Знімки екрана',
   },
   channel: {
     state: {
@@ -471,6 +474,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Завантажити PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
         [IconAction.COLUMNS]: 'Додати колонки',
         [IconAction.VARIABLES]: 'Вибрати колонки зі змінними',
@@ -549,6 +553,9 @@ export default {
         message:
           'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Ваш PDF-файл генерується…'
     },
     saveFailedPopup: {
       title: 'Помилка збереження',

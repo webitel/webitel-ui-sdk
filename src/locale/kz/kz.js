@@ -83,6 +83,7 @@ export default {
     unassigned: 'Тағайындалмаған',
     showUnassigned: 'Тағайындалмағандарды көрсету',
     group: 'Топ',
+    dateTime: 'Күні мен уақыты',
     updatedBy: (/*{ named }*/) => {
       return 'Өңделген';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Жылдам жауап | Жылдам жауаптар',
       quickRepliesEmpty: 'Жылдам жауаптар әлі жоқ',
     },
+    screenRecordings: 'Экран жазбасы | Экран жазбалары',
+    screenshots: 'Экран суреті | Экран суреттері',
   },
   channel: {
     state: {
@@ -471,6 +474,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'PDF жүктеу',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Бағандарды таңдау',
         [IconAction.VARIABLES]: 'Айнымалы бағандарды таңдау',
@@ -554,6 +558,9 @@ export default {
         message:
           'Операторлардың паузаға шығу шегі асып кетті. Қазір пауза мүмкін емес.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Сіздің PDF файлыңыз жасалуда…'
     },
     saveFailedPopup: {
       title: 'Сақтау сәтсіз',

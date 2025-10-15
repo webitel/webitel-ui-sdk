@@ -83,6 +83,7 @@ export default {
     unassigned: 'Chưa được gán',
     showUnassigned: 'Hiển thị chưa được gán',
     group: 'Nhóm',
+    dateTime: 'Ngày & giờ',
     updatedBy: (/*{ named }*/) => {
       return 'Đã sửa';
     },
@@ -221,6 +222,8 @@ export default {
       quickReplies: 'Trả lời nhanh | Trả lời nhanh',
       quickRepliesEmpty: 'Chưa có trả lời nhanh nào',
     },
+    screenRecordings: 'Ghi hình màn hình | Ghi hình màn hình',
+    screenshots: 'Ảnh chụp màn hình | Các ảnh chụp màn hình',
   },
   channel: {
     state: {
@@ -474,6 +477,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Tải xuống PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Chọn cột',
         [IconAction.VARIABLES]: 'Chọn cột biến',
@@ -556,6 +560,9 @@ export default {
         message:
           'Đã vượt quá giới hạn số lượng tổng đài viên tạm dừng. Không thể tạm dừng ngay bây giờ.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Tệp PDF của bạn đang được tạo…'
     },
     saveFailedPopup: {
       title: 'Lưu thất bại',

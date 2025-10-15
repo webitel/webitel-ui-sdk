@@ -5,4 +5,6 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type LocateMixin3200 = { [key: string]: unknown };
+export interface StorageRestoreFilesResponse {
+	[key: string]: unknown;
+}

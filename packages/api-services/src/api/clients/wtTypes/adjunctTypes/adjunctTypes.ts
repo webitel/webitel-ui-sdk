@@ -27,7 +27,7 @@ const getAdjunctTypesList = async (
 		camelToSnake(),
 	]);
 	try {
-		const response = await getDictionaries().dictionariesSearchType({
+		const response = await getDictionaries().searchType({
 			page,
 			size,
 			sort,
