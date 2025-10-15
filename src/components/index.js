@@ -70,6 +70,7 @@ import WtTimepicker from './wt-timepicker/wt-timepicker.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 import WtTree from './wt-tree/wt-tree.vue';
 import WtTreeTable from './wt-tree-table/wt-tree-table.vue';
+import WtVidstackPlayer from './wt-vidstack-player/wt-vidstack-player.vue';
 
 const Components = {
   WtActionBar,
@@ -143,6 +144,7 @@ const Components = {
   WtStartPage,
   WtSelectionPopup,
   WtDisplayChipItems,
+  WtVidstackPlayer,
 };
 
 export {
@@ -218,6 +220,7 @@ export {
   WtTree,
   WtTreeTable,
   WtTypeExtensionValueInput,
+  WtVidstackPlayer,
 };
 
 export default Components;
