@@ -1,10 +1,4 @@
 <template>
-  <delete-confirmation-popup
-    :shown="isDeleteConfirmationPopup"
-    :callback="deleteCallback"
-    :delete-count="deleteCount"
-    @close="closeDelete"
-  />
   <p-galleria
     ref="galleria" 
     v-model:visible="visible"
@@ -100,6 +94,12 @@
       </div>
     </template>
   </p-galleria>
+  <delete-confirmation-popup
+    :shown="isDeleteConfirmationPopup"
+    :callback="deleteCallback"
+    :delete-count="deleteCount"
+    @close="closeDelete"
+  />
 </template>
 
 <script setup lang="ts">
@@ -170,7 +170,7 @@ watch(() => props.value, () => {
   if (!props.value.length) { 
     visible.value = false
   }
-}, { deep: true })
+})
 </script>
 
 <style lang="scss">
