@@ -5,10 +5,19 @@ const galleria = {
   colorScheme: GalleriaScheme.colorScheme,
 
   css: ({dt}) => `
-    .wt-galleria__image-container {
+    .p-galleria-mask {
+      z-index: ${dt('galleria.mask.zIndex')} !important;
+    }
+
+    .wt-galleria__image-container--preview {
       width: ${dt('galleria.activeImageContainer.width')};
       height: ${dt('galleria.activeImageContainer.height')};
       background: ${dt('galleria.activeImageContainer.background')};
+    }
+
+    .wt-galleria__image--fullscreen {
+      max-height: ${dt('galleria.fullscreenImage.maxHeight')};
+      max-width: ${dt('galleria.fullscreenImage.maxWidth')};
     }
 
     .wt-galleria__thumbnail {
