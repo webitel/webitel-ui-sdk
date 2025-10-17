@@ -1,0 +1,31 @@
+  /** @author @liza-pohranichna
+  * need to reuse popup styles for MD size in player https://webitel.atlassian.net/browse/WTEL-7723
+ */
+
+@mixin popup-wrapper {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--popup-wrapper-z-index);
+  background: var(--wt-popup-shadow-color);
+}
+
+@mixin popup-container() {
+  display: flex;
+  flex-direction: column;
+  gap: var(--popup-sections-gap);
+  z-index: 1;
+  margin: var(--popup-padding);
+  box-shadow: var(--elevation-10);
+  border-radius: var(--border-radius);
+  background: var(--wt-popup-background-color);
+  padding: var(--popup-padding);
+  max-height: var(--popup-max-height);
+}
+
+
