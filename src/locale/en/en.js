@@ -128,6 +128,22 @@ export default deepmerge({
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
     screencast: 'Screencast',
+    name: "Name", // like someone`s name (Ім'я)
+    username: 'Username', // Ім'я користувача
+    extension: 'Extension',
+    account: 'Account',
+    vendor: 'Vendor',
+    model: 'Model',
+    mac: 'MAC',
+    ip: 'IP',
+    password: 'Password',
+    number: 'Number',
+    expireAt: 'Expire at',
+    bucket: 'Bucket',
+    destination: 'Destination',
+    communicationTypePriority: 'Communication type priority',
+    code: 'Code',
+    dtmf: 'DTMF',
   },
   // date-related texts
   date: {
