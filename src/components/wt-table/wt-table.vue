@@ -21,7 +21,7 @@
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
     <p-column
-      v-if="rowExpander"
+      v-if="rowExpansion"
       :pt="{
         columnresizer: {
             class: {
@@ -35,7 +35,7 @@
     >
       <template #body="{ data: row }">
         <wt-icon-btn
-          :disabled="props.rowExpanderDisabled(row)"
+          :disabled="props.rowExpansionDisabled(row)"
           :icon="isRowExpanded(row) ? 'arrow-down' : 'arrow-right'"
           @click.stop="toggleRow(row)"
         />
@@ -246,12 +246,12 @@ interface Props extends DataTableProps{
    * 'If true, restrict sprecific row reorder.'
    */
   isRowReorderDisabled?: (row) => boolean;
-  rowExpander?: boolean;
+  rowExpansion?: boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
   resizableColumns?: boolean
   reorderableColumns?: boolean
-  rowExpanderDisabled?: (row: object) => boolean;
+  rowExpansionDisabled?: (row: object) => boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -263,13 +263,13 @@ const props = withDefaults(defineProps<Props>(), {
   fixedActions: false,
   headless: false,
   rowReorder: false,
-  rowExpander: false,
+  rowExpansion: false,
   isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
   resizableColumns: false,
   reorderableColumns: false,
-  rowExpanderDisabled: () => false,
+  rowExpansionDisabled: () => false,
 });
 
 const { t } = useI18n();
