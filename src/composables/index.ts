@@ -8,3 +8,4 @@ export * from './useDestroyableSortable/useDestroyableSortable';
 export * from './useRepresentableAgentPauseCause/useRepresentableAgentPauseCause';
 export * from './useValidate/useValidate';
 export * from './useWtTable/useWtTable';
+export * from './useGalleriaFullscreen/useGalleriaFullscreen';

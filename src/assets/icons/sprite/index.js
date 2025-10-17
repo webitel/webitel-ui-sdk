@@ -193,6 +193,7 @@ import sttSearch from './stt-search.svg';
 import table from './table.svg';
 import telegramBot from './telegram-bot.svg';
 import tick from './tick.svg';
+import tile from './tile.svg';
 import treeCollapse from './tree-collapse.svg';
 import treeCorner from './tree-corner.svg';
 import treeCross from './tree-cross.svg';
@@ -435,5 +436,6 @@ export default objCamelToKebab({
   quickReplies,
   checkboxTick,
   log,
-  downloadPdf
+  downloadPdf,
+  tile,
 });
