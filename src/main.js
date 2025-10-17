@@ -2,11 +2,9 @@ import '@webitel/styleguide/fonts';
 import 'vue-multiselect/dist/vue-multiselect.css';
 import './assets/icons/sprite';
 import './css/main.scss';
+import 'vidstack/bundle';
 
 import { createApp } from 'vue';
-
-// Initialize Vidstack
-import 'vidstack/bundle';
 
 import Components from './components/index.js'; // init all components
 import Directives from './directives/index.js'; // init all directives

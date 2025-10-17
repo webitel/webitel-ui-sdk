@@ -1,7 +1,7 @@
 <template>
   <div class="time-group">
     <media-time type="current" />
-    <div>/</div>
+    /
     <media-time type="duration" />
   </div>
 </template>
@@ -13,7 +13,7 @@
   @extend %typo-body-2;
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-2xs);
   color: var(--wt-player-video-control-bar-color);
 }
 </style>

@@ -7,6 +7,7 @@
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
+      @close="emit('close-player')"
     />
 
     <wt-loader size="sm" color="on-dark"/>
@@ -16,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from "vue";
+import {defineEmits, inject} from "vue";
 
 import WtLoader from "../../../wt-loader/wt-loader.vue";
 import MediaControlPanel from "../panels/media-control-panel/media-control-panel.vue";
@@ -30,26 +31,38 @@ const props = defineProps<{
   closable?: boolean;
 }>();
 
+const emit = defineEmits<{
+  'close-player': [],
+}>();
+
 </script>
 
 <style scoped lang="scss">
 .video-layout {
+
+  .video-display-panel {
+    opacity: 1;
+
+    :deep(.video-display-panel__controls) { // hide panel buttons
+      opacity: 0;
+      transition: all var(--transition) ease-out;
+    }
+  }
+
   &--sm {
-    border-radius: var(--spacing-sm);
-
-    .media-control-panel {
-      border-radius: 0 0 var(--spacing-sm) var(--spacing-sm);
-    }
+    border-radius: var(--p-player-wrapper-sm-border-radius);
   }
+
   &--md {
-    border-radius: var(--spacing-md);
+    //border-radius: var(--p-player-wrapper-md-border-radius);
 
     .media-control-panel {
-      margin: var(--spacing-md);
-      width: calc(100% - (var(--spacing-md) * 2));
-      border-radius: var(--wt-player-control-bar-border-radius-lg);
+      margin: var(--p-player-control-bar-md-padding);
+      width: calc(100% - (var(--p-player-control-bar-md-padding) * 2));
+      border-radius: var(--p-player-control-bar-md-border-radius);
     }
   }
+
 }
 
 .controls {
@@ -61,7 +74,7 @@ const props = defineProps<{
   width: 100%;
   height: 100%;
   z-index: 10;
-  transition: opacity var(--transition) ease-out;
+  transition: all var(--transition) ease-out;
 }
 
 .controls-group {
@@ -69,14 +82,21 @@ const props = defineProps<{
   align-items: center;
   width: 100%;
   opacity: 0;
+  transition: all var(--transition) ease-in-out;
 }
 
-media-player[data-can-play] .controls-group {
-  opacity: 1;
-}
+media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
+  .controls-group {
+    opacity: 1;
+  }
 
-.media-control-panel {
-  width: 100%;
+  .video-display-panel {
+    background: var(--p-player-head-line-hover-background);
+
+    :deep(.video-display-panel__controls) { // show panel buttons on hover
+      opacity: 1;
+    }
+  }
 }
 
 .wt-loader {
@@ -88,6 +108,5 @@ media-player[data-can-play] .controls-group {
 .video-layout:not([data-buffering]) .wt-loader {
   display: none;
 }
-
 
 </style>

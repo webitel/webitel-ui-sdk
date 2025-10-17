@@ -12,16 +12,19 @@
     </div>
     <div class="video-display-panel__controls">
       <toggle-button
-        first-icon="collapse"
-        second-icon="expand"
+        v-if="size !== ComponentSize.LG"
+        primary-icon="collapse"
+        secondary-icon="expand"
         color="on-dark"
-        @click="changeSize"
+        @toggle="handlePlayerSize"
       />
-      <fullscreen-button />
+      <fullscreen-button
+        @toggle="handleFullscreen"
+      />
       <wt-icon-btn
         v-if="props.closable"
-        color="on-dark"
         icon="close"
+        color="on-dark"
         @click="emit('close')"
       />
     </div>
@@ -31,6 +34,7 @@
 <script setup lang="ts">
 import { defineEmits, defineProps, inject } from 'vue';
 
+import {ComponentSize} from "../../../../../enums";
 import WtAvatar from "../../../../wt-avatar/wt-avatar.vue";
 import WtIconBtn from "../../../../wt-icon-btn/wt-icon-btn.vue";
 import ToggleButton from "../../toggle-button.vue";
@@ -45,8 +49,16 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'close'): void;
+  'close': [],
 }>();
+
+const handleFullscreen = (value: boolean) => {
+  changeSize(value ? ComponentSize.LG : ComponentSize.SM);
+}
+
+const handlePlayerSize = (value: boolean) => {
+  changeSize(value ? ComponentSize.MD : ComponentSize.SM);
+}
 
 </script>
 
@@ -56,12 +68,10 @@ const emit = defineEmits<{
 .video-display-panel {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height:  var(--wt-player-control-bar-height-md);
-  padding: var(--spacing-sm);
-  background: rgba(0, 0, 0, 0.5);
-  color: var(--text-on-brand-color);
-  border-radius: var(--spacing-md) var(--spacing-md) 0 0;
+  padding: var(--p-player-headline-sm-padding);
+  background: var(--p-player-head-line-background);
+  color: var(--p-player-head-line-color);
+  transition: all var(--transition) ease-in-out;
 
   &__title {
     @extend %typo-body-1-bold;
@@ -70,14 +80,15 @@ const emit = defineEmits<{
   &__controls {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
+    gap: var(--p-player-headline-sm-gap);
   }
 
-  &--sm {
-    height: var(--wt-player-control-bar-height-sm);
-    padding: var(--wt-player-control-bar-padding-sm);
-    gap: var(--wt-player-control-bar-gap-sm);
-    border-radius: var(--spacing-sm) var(--spacing-sm) 0 0;
+  &--md {
+    padding: var(--p-player-headline-md-padding);
+
+    .video-display-panel__controls {
+      gap: var(--p-player-headline-md-gap);
+    }
   }
 }
 

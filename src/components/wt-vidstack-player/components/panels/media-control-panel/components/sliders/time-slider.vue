@@ -1,6 +1,6 @@
 <template>
-  <media-time-slider ref="slider" class="time-slider media-slider">
-    <wt-slider :width="100" />
+  <media-time-slider class="time-slider media-slider">
+    <wt-slider class="time-slider__slider" />
   </media-time-slider>
 </template>
 
@@ -14,6 +14,10 @@ import WtSlider from "../../../../../../wt-slider/wt-slider.vue";
   display: inline-flex;
   align-items: center;
   width: 100%;
+
+  &__slider {
+    width: 100%;
+  }
 
   &:deep(.p-slider-range) { /* set vidstach slider variable to primeview component @author liza-pohrsnichna */
     width: var(--slider-fill, 0%) !important;

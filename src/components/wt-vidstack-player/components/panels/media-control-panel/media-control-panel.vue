@@ -22,16 +22,13 @@ const { size } = inject('size');
 
 <style scoped lang="scss">
 .media-control-panel {
-  height: var(--wt-player-control-bar-height-sm);
-  padding: var(--wt-player-control-bar-padding-sm);
-  gap: var(--wt-player-control-bar-gap-sm);
-  background-color: var(--wt-player-video-control-bar-background);
+  padding: var(--p-player-control-bar-sm-padding);
+  background-color: var(--p-player-control-bar-background);
+  gap: var(--p-player-control-bar-sm-gap);
 
   &--md {
-    height: var(--wt-player-control-bar-height-md);
-    padding: var(--wt-player-control-bar-padding-md);
-    background-color: var(--wt-player-video-control-bar-background);
-    gap: var(--wt-player-control-bar-gap-md);
+    padding: var(--p-player-control-bar-md-padding);
+    gap: var(--p-player-control-bar-md-gap);
   }
 }
 </style>
