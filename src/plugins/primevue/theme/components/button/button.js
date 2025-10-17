@@ -1,4 +1,5 @@
 import { ButtonScheme } from '@webitel/styleguide/component-schemes';
+
 import { ComponentSize } from '../../../../../enums';
 
 const colors = [
