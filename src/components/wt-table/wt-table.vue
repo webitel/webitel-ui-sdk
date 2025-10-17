@@ -14,6 +14,7 @@
     scroll-height="flex"
     scrollable
     @sort="sort"
+    :virtual-scroller-options="virtualScroll"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
@@ -179,6 +180,16 @@ import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
+import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
+
+/**
+ * Number of items to render outside the visible area for virtual scrolling.
+ * This helps maintain smooth scrolling performance by pre-rendering items
+ * that are about to come into view, reducing the chance of blank spaces
+ * during fast scrolling.
+ */
+const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
+const DEFAULT_ITEM_SIZE = 40;
 
 interface Props extends DataTableProps{
   /**
@@ -222,6 +233,12 @@ interface Props extends DataTableProps{
   rowStyle?: () => { [key: string]: string };
   resizableColumns?: boolean
   reorderableColumns?: boolean
+
+  //lazy loading
+  lazy?: boolean;
+  onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
+  loading?: boolean;
+  itemSize?: number | undefined;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -238,6 +255,8 @@ const props = withDefaults(defineProps<Props>(), {
   rowStyle: () => ({}),
   resizableColumns: false,
   reorderableColumns: false,
+  lazy: false,
+  itemSize: undefined
 });
 
 const { t } = useI18n();
@@ -371,6 +390,17 @@ const columnReorder = () => {
   tableKey.value += 1;
   emit('column-reorder', newOrder)
 }
+
+const virtualScroll = computed(() => {
+  if (!props.lazy) return;
+
+  return {
+    lazy: props.lazy,
+    onLazyLoad: props.onLoading,
+    itemSize: props.itemSize || DEFAULT_ITEM_SIZE, // The height/width of item according to orientation
+    numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
+  };
+});
 </script>
 
 <style lang="scss">
