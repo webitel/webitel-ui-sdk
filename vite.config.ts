@@ -68,7 +68,6 @@ export default (/*{ mode }*/) => {
           },
         },
       }),
-      vidstack(),
       viteStaticCopy({
         targets: [
           {

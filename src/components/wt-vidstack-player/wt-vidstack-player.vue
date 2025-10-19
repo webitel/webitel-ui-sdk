@@ -1,40 +1,26 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="[
-      `wt-vidstack-player--${size}`,
-      `wt-player--position-${props.position}`,
-      {'wt-popup' : size === ComponentSize.MD },
-      {'wt-popup--size-md': size === ComponentSize.MD }
-      ]"
+    :class="[`wt-vidstack-player--${size}`]"
   >
-    <div> {{ playerSrc }} </div>
     <media-player
       ref="player"
       :src="playerSrc"
-      class="wt-vidstack-player__player wt-popup__popup"
+      class="wt-vidstack-player__player"
       cross-origin
       plays-inline
       @close="emit('close')"
       @change-size="changeSize"
     >
-      <media-provider>
-<!--        <source-->
-<!--          src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_1MB.mp4"-->
-<!--          type="video/mp4"-->
-<!--        />-->
-<!--        <source-->
-<!--          -->
-<!--        />-->
-      </media-provider>
+      <media-provider></media-provider>
       <video-layout
         :closable="props.closable"
         :autoplay="props.autoplay"
-        :hide-duration="props.hideDuration"
         :title="props.title"
         :username="props.username"
         @close-player="emit('close')"
       />
+
     </media-player>
   </div>
 </template>
@@ -44,65 +30,50 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type { MediaPlayerElement } from 'vidstack/elements';
-import { computed,defineEmits, defineProps, provide, ref, useTemplateRef } from 'vue';
+import {computed, defineEmits, defineProps, provide, ref, useTemplateRef, watch} from 'vue';
 
 import { ComponentSize } from '../../enums';
 import VideoLayout from './components/layouts/video-layout.vue';
 
 interface Props {
-  src?: string | { src: string; type?: string };
+  src: string | { src: string; type?: string };
   mime?: string;
   autoplay?: boolean;
-  loop?: boolean;
-  hideDuration?: boolean;
-  download?: string | ((url: string) => string) | boolean;
-  resetOnEnd?: boolean;
-  invertTime?: boolean;
-  resetVolume?: boolean;
-  closable?: boolean;
   title?: string;
   username?: string;
-  position: string;
-  media?: { name?: string; poster?: string };
+  closable?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  autoplay: false,
-  loop: false,
-  hideDuration: false,
-  download: (url: string) => url?.replace?.('/stream', '/download'),
   mime: 'video/mp4',
-  resetOnEnd: false,
-  invertTime: false,
-  resetVolume: false,
+  autoplay: false,
+  title: '',
+  username: '',
   closable: false,
-  position: 'static',
-  media: () => ({}),
 });
 
 const emit = defineEmits<{
-  (e: 'close'): void;
-}>();
+  'close': [],
+}>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
-const size = ref('sm');
+const size = ref(ComponentSize.SM);
 
-const changeSize = () => {
-  size.value === ComponentSize.SM
-  ? size.value = ComponentSize.MD
-  : size.value = ComponentSize.SM;
+const changeSize = (value) => {
+  size.value = value;
 }
 
-// options: [sm, md], lg-size - fullscreen and not use in components styles @author liza-pohranichna
+/** @author liza-pohranichna
+ * options: [sm, md, lg]
+ * lg-size is fullscreen
+*/
 provide('size', { size, changeSize });
-
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
 
 
   if (props.src.includes('media')) return 'audio/mp3';
-  if (props.src.includes('mp4') || props.src.includes('m4v')) return 'video/mp4';
   if (props.src.includes('mp3')) return 'audio/mp3';
   if (props.src.includes('ogg') || props.src.includes('oga')) return 'audio/ogg';
 
@@ -122,39 +93,62 @@ const playerSrc = computed(() => {
 
 </script>
 
-<style lang="scss">
-@use './variables.scss';
-@use '../wt-popup/popup.scss';
-</style>
-
 <style scoped lang="scss">
+@use '../wt-popup/mixins.scss' as *;
+
 .wt-vidstack-player {
   transition: var(--transition);
+
+  .wt-vidstack-player__player {
+    padding: 0;
+    margin: 0;
+  }
 
   &--sm {
     position: fixed;
     right: var(--spacing-md);
     bottom: var(--spacing-md);
-    max-width: var(--wt-player-width-sm);
-    max-height: var(--wt-player-height-sm);
+    max-width: var(--p-player-wrapper-sm-width);
+    max-height: var(--p-player-wrapper-sm-height);
     z-index: 100;
-
-    .wt-popup__popup {
-      border-radius: var(--spacing-sm);
-    }
+    border-radius: var(--p-player-wrapper-sm-border-radius);
+    overflow: hidden;
   }
 
   &--md {
-    // width and height get from wt-popup @author liza-pohranichna
+    @include popup-wrapper;
+    /** @author liza-pohranichna
+    * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
-    .wt-popup__popup {
-      border-radius: var(--spacing-md);
+    .wt-vidstack-player__player {
+      @include popup-container;
+      position: relative;
+      max-width: var(--p-player-wrapper-md-width);
+      padding: 0;
+      border-radius: var(--p-player-wrapper-md-border-radius);
+      overflow: hidden;
     }
   }
 
-  .wt-popup__popup {
-    padding: 0;
-    margin: 0;
+  &--lg {
+    .wt-vidstack-player__player {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
+  .controls-group {
+    opacity: 1;
+  }
+
+  .video-display-panel {
+    background: var(--p-player-head-line-hover-background);
+
+    :deep(.video-display-panel__controls) { // show panel buttons on hover
+      opacity: 1;
+    }
   }
 }
 
