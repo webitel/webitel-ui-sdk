@@ -130,6 +130,11 @@ export default {
     number: 'Номер',
     expireAt: 'Закінчується',
     destination: 'Призначення',
+    extension: 'Розширення',
+    password: 'Пароль',
+    number: 'Номер',
+    expireAt: 'Закінчується',
+    destination: 'Призначення',
     utilizationProgress: 'Прогрес використання',
   },
   // date-related texts
@@ -510,7 +515,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакти`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -570,7 +575,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Ваш PDF-файл генерується…'
+      generationStarted: 'Ваш PDF-файл генерується…',
     },
     saveFailedPopup: {
       title: 'Помилка збереження',
@@ -787,8 +792,8 @@ export default {
       delete: ({ named }) => `${named('entity')} було видалено`,
     },
     info: {
-      passwordExpirationMessage: 'Пароль спливе через { days } дн(і/ів)'
-    }
+      passwordExpirationMessage: 'Пароль спливе через { days } дн(і/ів)',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Сталася помилка завантаження історії чату',

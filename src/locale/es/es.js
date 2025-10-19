@@ -130,6 +130,11 @@ export default {
     expireAt: 'Expira en',
     destination: 'Destino',
     utilizationProgress: 'Progreso de utilización',
+    extension: 'Extensión',
+    password: 'Contraseña',
+    number: 'Número',
+    expireAt: 'Expira en',
+    destination: 'Destino',
   },
   date: {
     sec: 'Seg',
@@ -511,7 +516,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -572,7 +577,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Su archivo PDF se está creando…'
+      generationStarted: 'Su archivo PDF se está creando…',
     },
     saveFailedPopup: {
       title: 'Error al guardar',
@@ -790,8 +795,8 @@ export default {
         `El ${named('entity').toLowerCase()} fue eliminado`,
     },
     info: {
-      passwordExpirationMessage: 'Tu contraseña expirará en { days } días'
-    }
+      passwordExpirationMessage: 'Tu contraseña expirará en { days } días',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Hubo un error al cargar el historial del chat',

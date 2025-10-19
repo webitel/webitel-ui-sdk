@@ -517,7 +517,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} liên hệ`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -577,7 +577,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Tệp PDF của bạn đang được tạo…'
+      generationStarted: 'Tệp PDF của bạn đang được tạo…',
     },
     saveFailedPopup: {
       title: 'Lưu thất bại',
@@ -794,8 +794,9 @@ export default {
       delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
     },
     info: {
-      passwordExpirationMessage: 'Mật khẩu của bạn sẽ hết hạn sau { days } ngày'
-    }
+      passwordExpirationMessage:
+        'Mật khẩu của bạn sẽ hết hạn sau { days } ngày',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
