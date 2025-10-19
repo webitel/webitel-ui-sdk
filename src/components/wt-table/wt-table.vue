@@ -2,6 +2,7 @@
   <p-table
     :key="tableKey"
     ref="table"
+    :expanded-rows="expandedRows"
     :reorderable-columns="reorderableColumns"
     :resizable-columns="resizableColumns"
     :row-class="rowClass"
@@ -14,10 +15,32 @@
     scroll-height="flex"
     scrollable
     @sort="sort"
+    @update:expanded-rows="expandedRows = $event"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
+    <p-column
+      v-if="rowExpansion"
+      :pt="{
+        columnresizer: {
+            class: {
+                'hidden': true
+            }
+        }
+      }"
+      body-style="width: 1%;"
+      column-key="row-expander"
+      header-style="width: 1%;"
+    >
+      <template #body="{ data: row }">
+        <wt-icon-btn
+          :disabled="props.rowExpansionDisabled(row)"
+          :icon="isRowExpanded(row) ? 'arrow-down' : 'arrow-right'"
+          @click.stop="toggleRow(row)"
+        />
+      </template>
+    </p-column>
     <p-column
       v-if="rowReorder"
       :pt="{
@@ -163,6 +186,11 @@
         </div>
       </template>
     </p-column>
+    <template #expansion="{ data: row }">
+      <div>
+        <slot :item="row" name="expansion"></slot>
+      </div>
+    </template>
     <template
       v-if="isTableFooter"
       #footer
@@ -218,10 +246,12 @@ interface Props extends DataTableProps{
    * 'If true, restrict sprecific row reorder.'
    */
   isRowReorderDisabled?: (row) => boolean;
+  rowExpansion?: boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
   resizableColumns?: boolean
   reorderableColumns?: boolean
+  rowExpansionDisabled?: (row: object) => boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -233,11 +263,13 @@ const props = withDefaults(defineProps<Props>(), {
   fixedActions: false,
   headless: false,
   rowReorder: false,
+  rowExpansion: false,
   isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
   resizableColumns: false,
   reorderableColumns: false,
+  rowExpansionDisabled: () => false,
 });
 
 const { t } = useI18n();
@@ -248,6 +280,7 @@ const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resi
 
 const table = useTemplateRef('table');
 const tableKey = ref(0);
+const expandedRows = ref([]);
 
 // table's columns that should be excluded from reorder
 const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
@@ -255,8 +288,8 @@ const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
   return props.selectable
-         ? props.selected || props.data.filter(item => item._isSelected)
-         : [];
+    ? props.selected || props.data.filter(item => item._isSelected)
+    : [];
 });
 
 const dataHeaders = computed(() => {
@@ -371,6 +404,19 @@ const columnReorder = () => {
   tableKey.value += 1;
   emit('column-reorder', newOrder)
 }
+
+const isRowExpanded = (row) => {
+  return expandedRows.value.some(r => r?.id === row?.id);
+};
+
+const toggleRow = (row) => {
+  const index = expandedRows.value.findIndex(r => r.id === row.id);
+  if (index !== -1) {
+    expandedRows.value.splice(index, 1);
+  } else {
+    expandedRows.value.push(row);
+  }
+};
 </script>
 
 <style lang="scss">
