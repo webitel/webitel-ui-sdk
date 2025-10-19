@@ -1,5 +1,5 @@
-const generateCustomSharingControlsSizeCss = ({ size, dt }) => `
-        .screen-sharing-controls--${size} .screen-sharing-controls__actions {
+const generateCustomSharingPanelSizeCss = ({ size, dt }) => `
+        .screen-sharing-control-panel--${size} .screen-sharing-control-panel__actions {
             gap: ${dt(`player-control-bar-${size}-gap`)};
             border-radius: ${dt(`player-control-bar-${size}-border-radius`)};
             padding: ${dt(`player-control-bar-${size}-padding`)};
@@ -7,14 +7,9 @@ const generateCustomSharingControlsSizeCss = ({ size, dt }) => `
 `;
 
 const playerCss = ({ dt }) => `
-    ${generateCustomSharingControlsSizeCss({ size: 'sm', dt })}
-    ${generateCustomSharingControlsSizeCss({ size: 'md', dt })}
-    ${generateCustomSharingControlsSizeCss({ size: 'lg', dt })}
-    
-    .video-wrapper {
-      background: ${dt('player.background')};
-      box-shadow: ${dt('player.shadow')};
-    }
+    ${generateCustomSharingPanelSizeCss({ size: 'sm', dt })}
+    ${generateCustomSharingPanelSizeCss({ size: 'md', dt })}
+    ${generateCustomSharingPanelSizeCss({ size: 'lg', dt })}
 `;
 
 export { playerCss };
