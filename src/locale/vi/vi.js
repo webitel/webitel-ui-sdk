@@ -125,7 +125,12 @@ export default {
     contact: 'Liên hệ | Các liên hệ',
     column: 'Cột | Các cột',
     notification: 'Thông báo | Các thông báo',
-    screencast: 'Ekran yozuvi',
+    screencast: 'Ghi màn hình',
+    extension: 'Mở rộng',
+    password: 'Mật khẩu',
+    number: 'Số',
+    expireAt: 'Hết hạn',
+    destination: 'Điểm đến',
   },
   // date-related texts
   date: {

@@ -128,6 +128,11 @@ export default deepmerge({
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
     screencast: 'Screencast',
+    extension: 'Extension',
+    password: 'Password',
+    number: 'Number',
+    expireAt: 'Expire at',
+    destination: 'Destination',
   },
   // date-related texts
   date: {
