@@ -467,6 +467,11 @@ const virtualScroll = computed(() => {
   @extend %wt-scrollbar;
 }
 
+//style for virtual scroller
+.wt-table :deep(.p-virtualscroller) {
+  @extend %wt-scrollbar;
+}
+
 .wt-table__th__content {
   @extend %typo-body-1-bold;
   width: 0;
