@@ -125,6 +125,11 @@ export default {
     contact: 'Контакт | Контакти',
     notification: 'Сповіщення',
     screencast: 'Запис екрану',
+    extension: 'Розширення',
+    password: 'Пароль',
+    number: 'Номер',
+    expireAt: 'Закінчується',
+    destination: 'Призначення',
   },
   // date-related texts
   date: {
