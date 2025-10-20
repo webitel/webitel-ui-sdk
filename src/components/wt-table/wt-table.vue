@@ -14,6 +14,7 @@
     lazy
     scroll-height="flex"
     scrollable
+    :virtual-scroller-options="virtualScroll"
     @sort="sort"
     @update:expanded-rows="expandedRows = $event"
     @column-resize-end="columnResize"
@@ -202,11 +203,21 @@
 
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
+import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
+
+/**
+ * Number of items to render outside the visible area for virtual scrolling.
+ * This helps maintain smooth scrolling performance by pre-rendering items
+ * that are about to come into view, reducing the chance of blank spaces
+ * during fast scrolling.
+ */
+const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
+const DEFAULT_ITEM_SIZE = 40;
 
 interface Props extends DataTableProps{
   /**
@@ -252,6 +263,12 @@ interface Props extends DataTableProps{
   resizableColumns?: boolean
   reorderableColumns?: boolean
   rowExpansionDisabled?: (row: object) => boolean;
+
+  //lazy loading
+  lazy?: boolean;
+  onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
+  loading?: boolean;
+  itemSize?: number | undefined;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -270,6 +287,8 @@ const props = withDefaults(defineProps<Props>(), {
   resizableColumns: false,
   reorderableColumns: false,
   rowExpansionDisabled: () => false,
+  lazy: false,
+  itemSize: DEFAULT_ITEM_SIZE
 });
 
 const { t } = useI18n();
@@ -417,6 +436,17 @@ const toggleRow = (row) => {
     expandedRows.value.push(row);
   }
 };
+
+const virtualScroll = computed(() => {
+  if (!props.lazy) return;
+
+  return {
+    lazy: props.lazy,
+    onLazyLoad: props.onLoading,
+    itemSize: props.itemSize, // The height/width of item according to orientation
+    numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
+  };
+});
 </script>
 
 <style lang="scss">
