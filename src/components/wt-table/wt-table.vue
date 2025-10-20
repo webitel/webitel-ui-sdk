@@ -14,8 +14,8 @@
     lazy
     scroll-height="flex"
     scrollable
-    @sort="sort"
     :virtual-scroller-options="virtualScroll"
+    @sort="sort"
     @update:expanded-rows="expandedRows = $event"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
@@ -203,12 +203,12 @@
 
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
+import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
-import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 
 /**
  * Number of items to render outside the visible area for virtual scrolling.
