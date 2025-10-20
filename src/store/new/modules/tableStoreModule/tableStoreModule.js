@@ -119,7 +119,7 @@ const actions = {
         let sort;
 
         if (field) {
-          sort = field === header.field ? nextSort : currentSort;
+          sort = field === header.field ? nextSort : null;
         } else {
           sort = nextSort; // null
         }
