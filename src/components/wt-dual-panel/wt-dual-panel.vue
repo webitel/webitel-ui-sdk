@@ -97,7 +97,7 @@ $side-panel-md-width: 320px;
   &__main {
     @extend %wt-scrollbar;
     flex: 1 1 auto;
-    overflow: auto;
+    overflow-x: auto;
   }
 
   &__header,
@@ -122,7 +122,7 @@ $side-panel-md-width: 320px;
     background: var(--wt-dual-panel-content-wrapper-color);
     padding: var(--wt-dual-panel-section-padding);
     min-width: 0;
-    overflow: auto;
+    // overflow: auto;
 
     &--md {
       flex: 0 0 $side-panel-md-width;
