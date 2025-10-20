@@ -125,6 +125,11 @@ export default {
     contact: 'Контакт | Контакты',
     notification: 'Уведомление | Уведомления',
     screencast: 'Запись экрана',
+    extension: 'Расширение',
+    password: 'Пароль',
+    number: 'Номер',
+    expireAt: 'Истекает',
+    destination: 'Назначение',
   },
   // date-related texts
   date: {
@@ -475,6 +480,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Скачать PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
         [IconAction.COLUMNS]: 'Добавить колонки',
         [IconAction.VARIABLES]: 'Выбрать колонки с переменными',
@@ -553,6 +559,9 @@ export default {
         message:
           'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Ваш PDF-файл генерируется…'
     },
     saveFailedPopup: {
       title: 'Ошибка сохранения',

@@ -23,7 +23,7 @@ import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/Acc
 import { snakeToCamel } from '../../scripts';
 import notTranslatable from './notTranslatable.en';
 
-export default deepmerge(notTranslatable, {
+export default deepmerge({
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
     comment: 'Comment',
@@ -128,6 +128,11 @@ export default deepmerge(notTranslatable, {
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
     screencast: 'Screencast',
+    extension: 'Extension',
+    password: 'Password',
+    number: 'Number',
+    expireAt: 'Expire at',
+    destination: 'Destination',
   },
   // date-related texts
   date: {
@@ -481,6 +486,7 @@ export default deepmerge(notTranslatable, {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Download PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Select columns',
         [IconAction.VARIABLES]: 'Select variables columns',
@@ -563,6 +569,9 @@ export default deepmerge(notTranslatable, {
         message:
           'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Your PDF file is being created…'
     },
     saveFailedPopup: {
       title: 'Save failed',
@@ -760,4 +769,4 @@ export default deepmerge(notTranslatable, {
     chatHistoryApi: 'There was an error loading the chat history',
     markChatProcessed: 'Failed to move the chat to “Closed”',
   },
-});
+}, notTranslatable);

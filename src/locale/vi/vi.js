@@ -125,7 +125,12 @@ export default {
     contact: 'Liên hệ | Các liên hệ',
     column: 'Cột | Các cột',
     notification: 'Thông báo | Các thông báo',
-    screencast: 'Ekran yozuvi',
+    screencast: 'Ghi màn hình',
+    extension: 'Mở rộng',
+    password: 'Mật khẩu',
+    number: 'Số',
+    expireAt: 'Hết hạn',
+    destination: 'Điểm đến',
   },
   // date-related texts
   date: {
@@ -477,6 +482,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Tải xuống PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Chọn cột',
         [IconAction.VARIABLES]: 'Chọn cột biến',
@@ -559,6 +565,9 @@ export default {
         message:
           'Đã vượt quá giới hạn số lượng tổng đài viên tạm dừng. Không thể tạm dừng ngay bây giờ.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Tệp PDF của bạn đang được tạo…'
     },
     saveFailedPopup: {
       title: 'Lưu thất bại',

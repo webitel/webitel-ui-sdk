@@ -124,6 +124,11 @@ export default {
     column: 'Columna | Columnas',
     notification: 'Notificación | Notificaciones',
     screencast: 'Videotutorial de pantalla',
+    extension: 'Extensión',
+    password: 'Contraseña',
+    number: 'Número',
+    expireAt: 'Expira en',
+    destination: 'Destino',
   },
   date: {
     sec: 'Seg',
@@ -471,6 +476,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Descargar PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Seleccionar columnas',
         [IconAction.VARIABLES]: 'Seleccionar columnas de variables',
@@ -554,6 +560,9 @@ export default {
         message:
           'Se ha excedido el límite de agentes para tomar una pausa. La pausa no está disponible en este momento.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Su archivo PDF se está creando…'
     },
     saveFailedPopup: {
       title: 'Error al guardar',

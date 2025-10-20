@@ -126,6 +126,12 @@ export default {
     column: 'Ustun | Ustunlar',
     notification: 'Bildirishnoma | Bildirishnomalar',
     screencast: 'Ekran yozuvi',
+    extension: 'Kengaytma',
+    password: 'Parol',
+    number: 'Raqam',
+    expireAt: 'Muddati',
+    destination: 'Manzil',
+
   },
   // date-related texts
   date: {
@@ -477,6 +483,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'PDF yuklab olish',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Ustunlarni tanlang',
         [IconAction.VARIABLES]: "O'zgaruvchilar ustunlarini tanlash",
@@ -559,6 +566,9 @@ export default {
         message:
           'Agentlarning tanaffusga chiqish limiti oshib ketdi. Hozir tanaffus imkonsiz.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Sizning PDF faylingiz yaratilmoqda…'
     },
     saveFailedPopup: {
       title: 'Saqlash muvaffaqiyatsiz tugadi',
