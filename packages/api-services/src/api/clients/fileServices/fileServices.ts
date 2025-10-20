@@ -177,7 +177,7 @@ const getScreenRecordingsByAgent = async (params: any) => {
 				size,
 				q: q || params.search,
 				sort,
-				fields: ['id', ...fields],
+				fields: ['id', 'view_name', 'mime_type', ...fields],
 				id,
 				'uploaded_at.from': uploadedAtFrom,
 				'uploaded_at.to': uploadedAtTo,

@@ -10,6 +10,7 @@
       maxHeight,
       cursor: overlayIcon ? 'pointer' : 'auto'
     }"
+    @click="emit('click', $event)"
   >
     <!--    @slot Replaces `<img>` tag
             @scope `{ alt, src }`
@@ -32,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed, defineEmits, defineProps } from 'vue';
 
 import { IconColor } from '../../enums';
 
@@ -61,6 +62,8 @@ const props = defineProps<{
   overlayIcon?: string;
   overlayIconPrefix?: string;
 }>();
+
+const emit = defineEmits(['click']);
 
 const width = computed(() => {
   const width = props.size ? sizeToUnits[props.size] : props.width;
