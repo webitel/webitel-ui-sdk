@@ -38,7 +38,7 @@ import {computed, defineEmits, defineProps, onMounted,provide, ref, useTemplateR
 import {ComponentSize} from '../../enums';
 import VideoLayout from './components/layouts/video-layout.vue';
 import {WtVidstakPlayerControlsMode} from "./types/WtVidstackPlayerControlsMode";
-import {WWtVidstackPlayerSession} from "./types/WtVidstackPlayerSession";
+import {WtVidstackPlayerSession} from "./types/WtVidstackPlayerSession";
 
 interface Props {
   src: string | { src: string; type?: string };
@@ -49,7 +49,7 @@ interface Props {
   closable?: boolean;
   stream?: MediaStream
   mode: WtVidstakPlayerControlsMode;
-  session?: WWtVidstackPlayerSession
+  session?: WtVidstackPlayerSession
 }
 
 const props = withDefaults(defineProps<Props>(), {

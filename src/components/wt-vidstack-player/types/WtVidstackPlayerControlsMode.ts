@@ -1,6 +1,6 @@
 export const WtVidstakPlayerControlsMode = {
   STREAM: 'stream',
-  media: 'media',
+  MEDIA: 'media',
 } as const;
 
 export type WtVidstakPlayerControlsMode =

@@ -27,7 +27,7 @@ import {defineEmits, inject} from "vue";
 
 import WtLoader from "../../../wt-loader/wt-loader.vue";
 import {WtVidstakPlayerControlsMode} from "../../types/WtVidstackPlayerControlsMode";
-import {WWtVidstackPlayerSession} from "../../types/WtVidstackPlayerSession";
+import {WtVidstackPlayerSession} from "../../types/WtVidstackPlayerSession";
 import MediaControlPanel from "../panels/media-control-panel/media-control-panel.vue";
 import ScreenSharingControlPanel from "../panels/screen-sharing-control-panel/screen-sharing-control-panel.vue";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
@@ -39,7 +39,7 @@ const props = defineProps<{
   username?: string;
   closable?: boolean;
   mode: WtVidstakPlayerControlsMode;
-  session: WWtVidstackPlayerSession
+  session: WtVidstackPlayerSession
 }>();
 
 const emit = defineEmits<{

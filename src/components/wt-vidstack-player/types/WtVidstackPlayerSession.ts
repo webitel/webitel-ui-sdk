@@ -1,4 +1,4 @@
-export interface WWtVidstackPlayerSession {
+export interface WtVidstackPlayerSession {
   close: () => void;
   screenshot: () => void;
   stopRecord: () => void;

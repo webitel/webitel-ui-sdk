@@ -1,9 +1,9 @@
 <template>
-  <media-controls-group class="screen-sharing-control-panel" :class="{[`screen-sharing-control-panel--${size}`]: true}">
+  <media-controls-group class="screen-sharing-control-panel" :class="`screen-sharing-control-panel--${size}`">
 
     <div
       class="screen-sharing-control-panel__actions"
-      :class="{[`screen-sharing-control-panel--${size}__actions`]: true}"
+      :class="`screen-sharing-control-panel--${size}__actions`"
     >
       <wt-button
         rounded
@@ -54,11 +54,11 @@
 import convertDuration from '@webitel/ui-sdk/src/scripts/convertDuration';
 import {computed, inject, onUnmounted, ref, watch} from 'vue';
 
-import {WWtVidstackPlayerSession} from "../../../types/WtVidstackPlayerSession";
+import {WtVidstackPlayerSession} from "../../../types/WtVidstackPlayerSession";
 
 interface Props {
   screenshotStatus?: 'done' | 'false'
-  session: WWtVidstackPlayerSession
+  session: WtVidstackPlayerSession
 }
 const props = defineProps<Props>();
 
@@ -131,10 +131,9 @@ watch(isRecording, (newVal) => {
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 1rem;
 
   &--sm {
-    padding: 0;
+    padding: var(--p-player-control-bar-position-padding-sm);
 
     &__actions {
       width: 100%;
@@ -143,8 +142,26 @@ watch(isRecording, (newVal) => {
     }
 
     .screen-sharing-control-panel__indicator {
-      right: 7px;
-      bottom: calc(100% + 0.5rem);
+      right: var(--p-player-counter-position-padding-sm);
+      bottom: calc(100% + var(--p-player-counter-position-padding-sm));
+    }
+  }
+
+  &--md {
+    padding: var(--p-player-control-bar-position-padding-md);
+
+    .screen-sharing-control-panel__indicator {
+      right: var(--p-player-counter-position-padding-md);
+      bottom: var(--p-player-counter-position-padding-md);
+    }
+  }
+
+  &--lg {
+    padding: var(--p-player-control-bar-position-padding-lg);
+
+    .screen-sharing-control-panel__indicator {
+      right: var(--p-player-counter-position-padding-lg);
+      bottom: var(--p-player-counter-position-padding-lg);
     }
   }
 
@@ -152,24 +169,8 @@ watch(isRecording, (newVal) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-2xs);
     background: var(--p-player-control-bar-background);
     box-shadow: var(--elevation-10);
-  }
-
-  &__action {
-    appearance: none;
-    border: none;
-    background: transparent;
-    color: var(--p-text-color);
-    padding: var(--spacing-2xs);
-    border-radius: var(--p-border-radius-sm);
-    cursor: pointer;
-    width: 184px;
-
-    &:hover {
-      background: var(--p-hover-background);
-    }
   }
 
   &__indicator {
@@ -182,9 +183,9 @@ watch(isRecording, (newVal) => {
     border-radius: var(--p-player-counter-border-radius);
     box-shadow: var(--elevation-10);
     position: absolute;
+
+    // Agreed with @Evgeniy Trahtenberg
     width: 100px;
-    right: 1rem;
-    bottom: 1rem;
   }
 
   &__time {

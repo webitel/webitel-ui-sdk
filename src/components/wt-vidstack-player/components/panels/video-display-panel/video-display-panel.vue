@@ -16,6 +16,7 @@
         primary-icon="collapse"
         secondary-icon="expand"
         color="on-dark"
+        variant="text"
         @toggle="handlePlayerSize"
       />
       <fullscreen-button
