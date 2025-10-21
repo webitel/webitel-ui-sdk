@@ -29,7 +29,7 @@
       <wt-loader v-show="isLoading" />
 
       <div
-        v-if="dataList.length && !isLoading"
+        v-show="dataList.length && !isLoading"
         class="table-section__visible-scroll-wrapper"
       >
         <wt-table
