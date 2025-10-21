@@ -6,14 +6,14 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const oAuth2FederationDeleteOAuthServiceBody = zod.object({
+export const deleteOAuthServiceBody = zod.object({
 	id: zod.array(zod.string()).optional(),
 	permanent: zod.boolean().optional(),
 });
 
-export const oAuth2FederationDeleteOAuthServiceResponse = zod.object({});
+export const deleteOAuthServiceResponse = zod.object({});
 
-export const oAuth2FederationSearchOAuthServiceQueryParams = zod.object({
+export const searchOAuthServiceQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -47,7 +47,7 @@ export const oAuth2FederationSearchOAuthServiceQueryParams = zod.object({
 		.describe('----- OAuthService-Specific Filters ----------------'),
 });
 
-export const oAuth2FederationSearchOAuthServiceResponse = zod.object({
+export const searchOAuthServiceResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -100,7 +100,7 @@ export const oAuth2FederationSearchOAuthServiceResponse = zod.object({
 	page: zod.number().optional(),
 });
 
-export const oAuth2FederationCreateOAuthServiceBody = zod.object({
+export const createOAuthServiceBody = zod.object({
 	authUrl: zod.string().optional(),
 	claims: zod
 		.array(
@@ -145,7 +145,7 @@ export const oAuth2FederationCreateOAuthServiceBody = zod.object({
 	userinfoUrl: zod.string().optional(),
 });
 
-export const oAuth2FederationCreateOAuthServiceResponse = zod.object({
+export const createOAuthServiceResponse = zod.object({
 	authUrl: zod.string().optional(),
 	claims: zod
 		.array(
@@ -190,11 +190,11 @@ export const oAuth2FederationCreateOAuthServiceResponse = zod.object({
 	userinfoUrl: zod.string().optional(),
 });
 
-export const oAuth2FederationUpdateOAuthService2Params = zod.object({
+export const updateOAuthService2Params = zod.object({
 	'changes.id': zod.string(),
 });
 
-export const oAuth2FederationUpdateOAuthService2Body = zod.object({
+export const updateOAuthService2Body = zod.object({
 	changes: zod
 		.object({
 			authUrl: zod.string().optional(),
@@ -244,7 +244,7 @@ export const oAuth2FederationUpdateOAuthService2Body = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const oAuth2FederationUpdateOAuthService2Response = zod.object({
+export const updateOAuthService2Response = zod.object({
 	authUrl: zod.string().optional(),
 	claims: zod
 		.array(
@@ -289,11 +289,11 @@ export const oAuth2FederationUpdateOAuthService2Response = zod.object({
 	userinfoUrl: zod.string().optional(),
 });
 
-export const oAuth2FederationUpdateOAuthServiceParams = zod.object({
+export const updateOAuthServiceParams = zod.object({
 	'changes.id': zod.string(),
 });
 
-export const oAuth2FederationUpdateOAuthServiceBody = zod.object({
+export const updateOAuthServiceBody = zod.object({
 	changes: zod
 		.object({
 			authUrl: zod.string().optional(),
@@ -343,7 +343,7 @@ export const oAuth2FederationUpdateOAuthServiceBody = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const oAuth2FederationUpdateOAuthServiceResponse = zod.object({
+export const updateOAuthServiceResponse = zod.object({
 	authUrl: zod.string().optional(),
 	claims: zod
 		.array(
@@ -388,17 +388,17 @@ export const oAuth2FederationUpdateOAuthServiceResponse = zod.object({
 	userinfoUrl: zod.string().optional(),
 });
 
-export const oAuth2FederationDeleteOAuthService2Params = zod.object({
+export const deleteOAuthService2Params = zod.object({
 	id: zod.array(zod.string()).min(1),
 });
 
-export const oAuth2FederationDeleteOAuthService2Body = zod.object({
+export const deleteOAuthService2Body = zod.object({
 	permanent: zod.boolean().optional(),
 });
 
-export const oAuth2FederationDeleteOAuthService2Response = zod.object({});
+export const deleteOAuthService2Response = zod.object({});
 
-export const oAuth2FederationLocateOAuthServiceParams = zod.object({
+export const locateOAuthServiceParams = zod.object({
 	id: zod
 		.array(zod.string())
 		.min(1)
@@ -407,7 +407,7 @@ export const oAuth2FederationLocateOAuthServiceParams = zod.object({
 		),
 });
 
-export const oAuth2FederationLocateOAuthServiceQueryParams = zod.object({
+export const locateOAuthServiceQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -435,7 +435,7 @@ export const oAuth2FederationLocateOAuthServiceQueryParams = zod.object({
 		.describe('----- OAuthService-Specific Filters ----------------'),
 });
 
-export const oAuth2FederationLocateOAuthServiceResponse = zod.object({
+export const locateOAuthServiceResponse = zod.object({
 	authUrl: zod.string().optional(),
 	claims: zod
 		.array(

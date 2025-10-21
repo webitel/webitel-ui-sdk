@@ -13,7 +13,10 @@ import {
 	starToSearch,
 } from '../../../transformers';
 
-const getAdjunctTypesList = async ({ repo, ...params }) => {
+const getAdjunctTypesList = async (
+	{ repo, ...params },
+	{ silent = false } = {},
+) => {
 	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
 
 	const { page, size, fields, sort, id, q } = applyTransform(params, [
@@ -24,7 +27,7 @@ const getAdjunctTypesList = async ({ repo, ...params }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await getDictionaries().dictionariesSearchType({
+		const response = await getDictionaries().searchType({
 			page,
 			size,
 			sort,

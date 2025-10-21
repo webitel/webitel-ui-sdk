@@ -3,6 +3,7 @@ import { computed, inject } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 
+import { EmptyCause } from '../../../enums/index';
 import { isEmpty } from '../../../scripts/index.js';
 import EmptyFiltersDark from '../_internals/assets/empty-filters-dark.svg';
 import EmptyFiltersLight from '../_internals/assets/empty-filters-light.svg';
@@ -72,12 +73,6 @@ export const useTableEmpty = (
       console.warn('"darkMode" value not found, using "false" as default');
     }
   }
-
-  const EmptyCause = Object.freeze({
-    ERROR: 'error',
-    FILTERS: 'filters',
-    EMPTY: 'empty',
-  });
 
   const emptyState = computed(() => {
     return !isLoading?.value && !error?.value && !dataList?.value?.length;
@@ -184,6 +179,7 @@ export const useTableEmpty = (
 
   return {
     showEmpty: emptyState,
+    emptyCause,
 
     image,
     headline,

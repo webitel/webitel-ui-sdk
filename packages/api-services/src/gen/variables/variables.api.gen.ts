@@ -9,18 +9,18 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	VariablesDeleteVariableParams,
-	VariablesDeleteVariablesParams,
-	VariablesListVariablesParams,
-	VariablesMergeVariablesParams,
-	VariablesResetVariablesParams,
-	VariablesUpdateVariable2Body,
-	VariablesUpdateVariable2Params,
-	VariablesUpdateVariableBody,
-	VariablesUpdateVariableParams,
-	WebitelContactsInputVariable,
-	WebitelContactsVariable,
-	WebitelContactsVariableList,
+	ContactsInputVariable,
+	ContactsVariable,
+	ContactsVariableList,
+	DeleteVariableParams,
+	DeleteVariablesParams,
+	ListVariablesParams,
+	MergeVariablesParams,
+	ResetVariablesParams,
+	UpdateVariable2Body,
+	UpdateVariable2Params,
+	UpdateVariableBody,
+	UpdateVariableParams,
 } from '.././_models';
 
 // --- header start
@@ -34,11 +34,9 @@ export const // --- title start
 			/**
 			 * @summary Remove variable(s) of the contact
 			 */
-			const variablesDeleteVariables = <
-				TData = AxiosResponse<WebitelContactsVariableList>,
-			>(
+			const deleteVariables = <TData = AxiosResponse<ContactsVariableList>>(
 				contactId: string,
-				params: VariablesDeleteVariablesParams,
+				params: DeleteVariablesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/variables`, {
@@ -49,11 +47,9 @@ export const // --- title start
 			/**
 			 * @summary List variables of the contact
 			 */
-			const variablesListVariables = <
-				TData = AxiosResponse<WebitelContactsVariableList>,
-			>(
+			const listVariables = <TData = AxiosResponse<ContactsVariableList>>(
 				contactId: string,
-				params?: VariablesListVariablesParams,
+				params?: ListVariablesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/variables`, {
@@ -64,17 +60,15 @@ export const // --- title start
 			/**
 			 * @summary Update or append variables to the contact
 			 */
-			const variablesMergeVariables = <
-				TData = AxiosResponse<WebitelContactsVariableList>,
-			>(
+			const mergeVariables = <TData = AxiosResponse<ContactsVariableList>>(
 				contactId: string,
-				webitelContactsInputVariable: WebitelContactsInputVariable[],
-				params?: VariablesMergeVariablesParams,
+				contactsInputVariable: ContactsInputVariable[],
+				params?: MergeVariablesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/contacts/${contactId}/variables`,
-					webitelContactsInputVariable,
+					contactsInputVariable,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -84,17 +78,15 @@ export const // --- title start
 			/**
 			 * @summary Reset all variables of the contact
 			 */
-			const variablesResetVariables = <
-				TData = AxiosResponse<WebitelContactsVariableList>,
-			>(
+			const resetVariables = <TData = AxiosResponse<ContactsVariableList>>(
 				contactId: string,
-				webitelContactsInputVariable: WebitelContactsInputVariable[],
-				params?: VariablesResetVariablesParams,
+				contactsInputVariable: ContactsInputVariable[],
+				params?: ResetVariablesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/variables`,
-					webitelContactsInputVariable,
+					contactsInputVariable,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -104,12 +96,10 @@ export const // --- title start
 			/**
 			 * @summary Remove the contact's variable by etag
 			 */
-			const variablesDeleteVariable = <
-				TData = AxiosResponse<WebitelContactsVariable>,
-			>(
+			const deleteVariable = <TData = AxiosResponse<ContactsVariable>>(
 				contactId: string,
 				etag: string,
-				params?: VariablesDeleteVariableParams,
+				params?: DeleteVariableParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/variables/${etag}`, {
@@ -120,18 +110,16 @@ export const // --- title start
 			/**
 			 * @summary Update contact variable
 			 */
-			const variablesUpdateVariable2 = <
-				TData = AxiosResponse<WebitelContactsVariableList>,
-			>(
+			const updateVariable2 = <TData = AxiosResponse<ContactsVariableList>>(
 				contactId: string,
 				etag: string,
-				variablesUpdateVariable2Body: VariablesUpdateVariable2Body,
-				params?: VariablesUpdateVariable2Params,
+				updateVariable2Body: UpdateVariable2Body,
+				params?: UpdateVariable2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/${contactId}/variables/${etag}`,
-					variablesUpdateVariable2Body,
+					updateVariable2Body,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -141,18 +129,16 @@ export const // --- title start
 			/**
 			 * @summary Update contact variable
 			 */
-			const variablesUpdateVariable = <
-				TData = AxiosResponse<WebitelContactsVariableList>,
-			>(
+			const updateVariable = <TData = AxiosResponse<ContactsVariableList>>(
 				contactId: string,
 				etag: string,
-				variablesUpdateVariableBody: VariablesUpdateVariableBody,
-				params?: VariablesUpdateVariableParams,
+				updateVariableBody: UpdateVariableBody,
+				params?: UpdateVariableParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/variables/${etag}`,
-					variablesUpdateVariableBody,
+					updateVariableBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -162,28 +148,21 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				variablesDeleteVariables,
-				variablesListVariables,
-				variablesMergeVariables,
-				variablesResetVariables,
-				variablesDeleteVariable,
-				variablesUpdateVariable2,
-				variablesUpdateVariable,
+				deleteVariables,
+				listVariables,
+				mergeVariables,
+				resetVariables,
+				deleteVariable,
+				updateVariable2,
+				updateVariable,
 			};
 		};
-export type VariablesDeleteVariablesResult =
-	AxiosResponse<WebitelContactsVariableList>;
-export type VariablesListVariablesResult =
-	AxiosResponse<WebitelContactsVariableList>;
-export type VariablesMergeVariablesResult =
-	AxiosResponse<WebitelContactsVariableList>;
-export type VariablesResetVariablesResult =
-	AxiosResponse<WebitelContactsVariableList>;
-export type VariablesDeleteVariableResult =
-	AxiosResponse<WebitelContactsVariable>;
-export type VariablesUpdateVariable2Result =
-	AxiosResponse<WebitelContactsVariableList>;
-export type VariablesUpdateVariableResult =
-	AxiosResponse<WebitelContactsVariableList>;
+export type DeleteVariablesResult = AxiosResponse<ContactsVariableList>;
+export type ListVariablesResult = AxiosResponse<ContactsVariableList>;
+export type MergeVariablesResult = AxiosResponse<ContactsVariableList>;
+export type ResetVariablesResult = AxiosResponse<ContactsVariableList>;
+export type DeleteVariableResult = AxiosResponse<ContactsVariable>;
+export type UpdateVariable2Result = AxiosResponse<ContactsVariableList>;
+export type UpdateVariableResult = AxiosResponse<ContactsVariableList>;
 
 // --- footer end

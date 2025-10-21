@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -51,13 +52,6 @@ export default {
     expand: 'Mở rộng',
     collapse: 'Thu gọn',
     generate: 'Tạo',
-    lang: {
-      en: 'Tiếng Anh',
-      es: 'Tiếng Tây Ban Nha',
-      ru: 'Tiếng Nga',
-      uk: 'Tiếng Ukraina',
-      kz: 'Tiếng Kazakh',
-    },
     from: 'Từ',
     to: 'Đến',
     tts: 'Chuyển văn bản thành giọng nói',
@@ -89,6 +83,7 @@ export default {
     unassigned: 'Chưa được gán',
     showUnassigned: 'Hiển thị chưa được gán',
     group: 'Nhóm',
+    dateTime: 'Ngày & giờ',
     updatedBy: (/*{ named }*/) => {
       return 'Đã sửa';
     },
@@ -130,6 +125,12 @@ export default {
     contact: 'Liên hệ | Các liên hệ',
     column: 'Cột | Các cột',
     notification: 'Thông báo | Các thông báo',
+    screencast: 'Ghi màn hình',
+    extension: 'Mở rộng',
+    password: 'Mật khẩu',
+    number: 'Số',
+    expireAt: 'Hết hạn',
+    destination: 'Điểm đến',
   },
   // date-related texts
   date: {
@@ -175,6 +176,12 @@ export default {
     transcription: 'Bản ghi',
     attachment: 'Tệp đính kèm | Các tệp đính kèm',
     owner: 'Chủ sở hữu | Các chủ sở hữu',
+    customization: {
+      customization: 'Tùy chỉnh | Các tùy chỉnh',
+    },
+    customLookup: {
+      customLookup: 'Tùy chỉnh | Các tùy chỉnh',
+    },
     queue: {
       queue: 'Hàng chờ | Hàng chờ',
       type: {
@@ -220,6 +227,8 @@ export default {
       quickReplies: 'Trả lời nhanh | Trả lời nhanh',
       quickRepliesEmpty: 'Chưa có trả lời nhanh nào',
     },
+    screenRecordings: 'Ghi hình màn hình | Ghi hình màn hình',
+    screenshots: 'Ảnh chụp màn hình | Các ảnh chụp màn hình',
   },
   channel: {
     state: {
@@ -269,6 +278,24 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Các tùy chỉnh', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: {
       name: 'Không gian làm việc của tổng đài viên',
     },
@@ -455,6 +482,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Tải xuống PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Chọn cột',
         [IconAction.VARIABLES]: 'Chọn cột biến',
@@ -537,6 +565,9 @@ export default {
         message:
           'Đã vượt quá giới hạn số lượng tổng đài viên tạm dừng. Không thể tạm dừng ngay bây giờ.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Tệp PDF của bạn đang được tạo…'
     },
     saveFailedPopup: {
       title: 'Lưu thất bại',

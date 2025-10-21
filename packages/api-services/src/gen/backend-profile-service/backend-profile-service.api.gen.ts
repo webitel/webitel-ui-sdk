@@ -9,14 +9,14 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	BackendProfileServiceDeleteBackendProfileParams,
-	BackendProfileServiceReadBackendProfileParams,
-	BackendProfileServiceSearchBackendProfileParams,
+	DeleteBackendProfileParams,
+	ReadBackendProfileParams,
+	SearchBackendProfileParams,
 	StorageBackendProfile,
+	StorageBackendProfileServicePatchBackendProfileBody,
+	StorageBackendProfileServiceUpdateBackendProfileBody,
 	StorageCreateBackendProfileRequest,
 	StorageListBackendProfile,
-	StoragePatchBackendProfileRequest,
-	StorageUpdateBackendProfileRequest,
 } from '.././_models';
 
 // --- header start
@@ -30,10 +30,10 @@ export const // --- title start
 			/**
 			 * @summary List of BackendProfile
 			 */
-			const backendProfileServiceSearchBackendProfile = <
+			const searchBackendProfile = <
 				TData = AxiosResponse<StorageListBackendProfile>,
 			>(
-				params?: BackendProfileServiceSearchBackendProfileParams,
+				params?: SearchBackendProfileParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/storage/backend_profiles', {
@@ -44,7 +44,7 @@ export const // --- title start
 			/**
 			 * @summary Create BackendProfile
 			 */
-			const backendProfileServiceCreateBackendProfile = <
+			const createBackendProfile = <
 				TData = AxiosResponse<StorageBackendProfile>,
 			>(
 				storageCreateBackendProfileRequest: StorageCreateBackendProfileRequest,
@@ -59,11 +59,11 @@ export const // --- title start
 			/**
 			 * @summary Remove BackendProfile
 			 */
-			const backendProfileServiceDeleteBackendProfile = <
+			const deleteBackendProfile = <
 				TData = AxiosResponse<StorageBackendProfile>,
 			>(
 				id: string,
-				params?: BackendProfileServiceDeleteBackendProfileParams,
+				params?: DeleteBackendProfileParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/storage/backend_profiles/${id}`, {
@@ -74,11 +74,9 @@ export const // --- title start
 			/**
 			 * @summary BackendProfile item
 			 */
-			const backendProfileServiceReadBackendProfile = <
-				TData = AxiosResponse<StorageBackendProfile>,
-			>(
+			const readBackendProfile = <TData = AxiosResponse<StorageBackendProfile>>(
 				id: string,
-				params?: BackendProfileServiceReadBackendProfileParams,
+				params?: ReadBackendProfileParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/storage/backend_profiles/${id}`, {
@@ -89,57 +87,52 @@ export const // --- title start
 			/**
 			 * @summary Patch BackendProfile
 			 */
-			const backendProfileServicePatchBackendProfile = <
+			const patchBackendProfile = <
 				TData = AxiosResponse<StorageBackendProfile>,
 			>(
 				id: string,
-				storagePatchBackendProfileRequest: StoragePatchBackendProfileRequest,
+				storageBackendProfileServicePatchBackendProfileBody: StorageBackendProfileServicePatchBackendProfileBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/storage/backend_profiles/${id}`,
-					storagePatchBackendProfileRequest,
+					storageBackendProfileServicePatchBackendProfileBody,
 					options,
 				);
 			};
 			/**
 			 * @summary Update BackendProfile
 			 */
-			const backendProfileServiceUpdateBackendProfile = <
+			const updateBackendProfile = <
 				TData = AxiosResponse<StorageBackendProfile>,
 			>(
 				id: string,
-				storageUpdateBackendProfileRequest: StorageUpdateBackendProfileRequest,
+				storageBackendProfileServiceUpdateBackendProfileBody: StorageBackendProfileServiceUpdateBackendProfileBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/storage/backend_profiles/${id}`,
-					storageUpdateBackendProfileRequest,
+					storageBackendProfileServiceUpdateBackendProfileBody,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				backendProfileServiceSearchBackendProfile,
-				backendProfileServiceCreateBackendProfile,
-				backendProfileServiceDeleteBackendProfile,
-				backendProfileServiceReadBackendProfile,
-				backendProfileServicePatchBackendProfile,
-				backendProfileServiceUpdateBackendProfile,
+				searchBackendProfile,
+				createBackendProfile,
+				deleteBackendProfile,
+				readBackendProfile,
+				patchBackendProfile,
+				updateBackendProfile,
 			};
 		};
-export type BackendProfileServiceSearchBackendProfileResult =
+export type SearchBackendProfileResult =
 	AxiosResponse<StorageListBackendProfile>;
-export type BackendProfileServiceCreateBackendProfileResult =
-	AxiosResponse<StorageBackendProfile>;
-export type BackendProfileServiceDeleteBackendProfileResult =
-	AxiosResponse<StorageBackendProfile>;
-export type BackendProfileServiceReadBackendProfileResult =
-	AxiosResponse<StorageBackendProfile>;
-export type BackendProfileServicePatchBackendProfileResult =
-	AxiosResponse<StorageBackendProfile>;
-export type BackendProfileServiceUpdateBackendProfileResult =
-	AxiosResponse<StorageBackendProfile>;
+export type CreateBackendProfileResult = AxiosResponse<StorageBackendProfile>;
+export type DeleteBackendProfileResult = AxiosResponse<StorageBackendProfile>;
+export type ReadBackendProfileResult = AxiosResponse<StorageBackendProfile>;
+export type PatchBackendProfileResult = AxiosResponse<StorageBackendProfile>;
+export type UpdateBackendProfileResult = AxiosResponse<StorageBackendProfile>;
 
 // --- footer end

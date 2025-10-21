@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge';
 import {
   AgentStatus,
   CallDirection,
@@ -11,6 +12,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -19,8 +21,9 @@ import {
 } from '../../enums';
 import { AccessMode } from '../../modules/ObjectPermissions/_internals/enums/AccessMode.enum.js';
 import { snakeToCamel } from '../../scripts';
+import notTranslatable from './notTranslatable.en';
 
-export default {
+export default deepmerge({
   // describes reusable buttons, actions, default titles, and other ui elements
   reusable: {
     comment: 'Comment',
@@ -51,13 +54,6 @@ export default {
     expand: 'Expand',
     collapse: 'Collapse',
     generate: 'Generate',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'From',
     to: 'To',
     tts: 'Text-to-Speech',
@@ -89,6 +85,7 @@ export default {
     unassigned: 'Unassigned',
     showUnassigned: 'Show unassigned',
     group: 'Group',
+    dateTime: 'Date & time',
     updatedBy: (/*{ named }*/) => {
       return 'Edited';
     },
@@ -130,6 +127,12 @@ export default {
     contact: 'Contact | Contacts',
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
+    screencast: 'Screencast',
+    extension: 'Extension',
+    password: 'Password',
+    number: 'Number',
+    expireAt: 'Expire at',
+    destination: 'Destination',
   },
   // date-related texts
   date: {
@@ -162,6 +165,9 @@ export default {
     list: 'List | Lists',
     contact: 'Contact | Contacts',
     case: 'Case | Cases',
+    customLookup: {
+      customLookup: 'Custom lookup | Custom lookups',
+    },
     calendar: 'Calendar | Calendars',
     direction: 'Direction',
     gateway: 'Gateway | Gateways',
@@ -175,6 +181,9 @@ export default {
     transcription: 'Transcription',
     attachment: 'Attachment | Attachments',
     owner: 'Owner | Owners',
+    customization: {
+      customization: 'Customization | Customizations',
+    },
     queue: {
       queue: 'Queue | Queues',
       type: {
@@ -220,6 +229,8 @@ export default {
       quickReplies: 'Quick reply | Quick replies',
       quickRepliesEmpty: 'There are no quick replies yet',
     },
+    screenRecordings: 'Screen recording | Screen recordings',
+    screenshots: 'Screenshot | Screenshots',
   },
   channel: {
     state: {
@@ -269,6 +280,23 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': Custom lookups', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
@@ -458,6 +486,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Download PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Select columns',
         [IconAction.VARIABLES]: 'Select variables columns',
@@ -540,6 +569,9 @@ export default {
         message:
           'The limit for agents to take a pause has been exceeded. The pause is unavailable right now.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Your PDF file is being created…'
     },
     saveFailedPopup: {
       title: 'Save failed',
@@ -737,4 +769,4 @@ export default {
     chatHistoryApi: 'There was an error loading the chat history',
     markChatProcessed: 'Failed to move the chat to “Closed”',
   },
-};
+}, notTranslatable);

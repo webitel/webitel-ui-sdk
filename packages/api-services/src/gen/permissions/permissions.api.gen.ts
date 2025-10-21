@@ -10,7 +10,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
 	ApiSearchPermissionResponse,
-	PermissionsGetPermissionsParams,
+	GetPermissionsParams,
 } from '.././_models';
 
 // --- header start
@@ -24,10 +24,10 @@ export const // --- title start
 			/**
 			 * @summary GetPermissions list available from application
 			 */
-			const permissionsGetPermissions = <
+			const getPermissions = <
 				TData = AxiosResponse<ApiSearchPermissionResponse>,
 			>(
-				params?: PermissionsGetPermissionsParams,
+				params?: GetPermissionsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/permissions', {
@@ -37,9 +37,8 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { permissionsGetPermissions };
+			return { getPermissions };
 		};
-export type PermissionsGetPermissionsResult =
-	AxiosResponse<ApiSearchPermissionResponse>;
+export type GetPermissionsResult = AxiosResponse<ApiSearchPermissionResponse>;
 
 // --- footer end

@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -51,13 +52,6 @@ export default {
     expand: 'Kengaytirish',
     collapse: 'Yigʻish',
     generate: 'Generatsiya',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Dan',
     to: 'Gacha',
     tts: 'Matnni ovozga aylantirish',
@@ -89,6 +83,7 @@ export default {
     unassigned: 'Tayinlanmagan',
     showUnassigned: "Tayinlanmaganlarni ko'rsatish",
     group: 'Guruh',
+    dateTime: 'Sana va vaqt',
     updatedBy: (/*{ named }*/) => {
       return 'Tahrirlangan';
     },
@@ -130,6 +125,13 @@ export default {
     contact: 'Kontakt | Kontaktlar',
     column: 'Ustun | Ustunlar',
     notification: 'Bildirishnoma | Bildirishnomalar',
+    screencast: 'Ekran yozuvi',
+    extension: 'Kengaytma',
+    password: 'Parol',
+    number: 'Raqam',
+    expireAt: 'Muddati',
+    destination: 'Manzil',
+
   },
   // date-related texts
   date: {
@@ -175,6 +177,12 @@ export default {
     transcription: 'Transkriptsiya',
     attachment: 'Ilova | Ilovalar',
     owner: 'Egasi | Egalari',
+    customization: {
+      customization: 'Maxsuslash | Maxsuslashlar',
+    },
+    customLookup: {
+      customLookup: 'Maxsuslash | Maxsuslashlar',
+    },
     queue: {
       queue: 'Navbat | Navbatlar',
       type: {
@@ -220,6 +228,8 @@ export default {
       quickReplies: 'Tezkor javob | Tezkor javoblar',
       quickRepliesEmpty: 'Hali tezkor javoblar mavjud emas',
     },
+    screenRecordings: 'Ekran yozuvi | Ekran yozuvlari',
+    screenshots: 'Ekran rasmi | Ekran rasmlari',
   },
   channel: {
     state: {
@@ -268,6 +278,24 @@ export default {
     actualResolutionTime: 'Haqiqiy hal qilish vaqti',
   },
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Maxsuslashlar', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent ish joyi' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
@@ -455,6 +483,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'PDF yuklab olish',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Ustunlarni tanlang',
         [IconAction.VARIABLES]: "O'zgaruvchilar ustunlarini tanlash",
@@ -537,6 +566,9 @@ export default {
         message:
           'Agentlarning tanaffusga chiqish limiti oshib ketdi. Hozir tanaffus imkonsiz.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Sizning PDF faylingiz yaratilmoqda…'
     },
     saveFailedPopup: {
       title: 'Saqlash muvaffaqiyatsiz tugadi',

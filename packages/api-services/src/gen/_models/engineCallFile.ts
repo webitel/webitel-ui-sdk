@@ -6,10 +6,12 @@
  */
 
 export interface EngineCallFile {
+	channel?: string;
 	id?: string;
 	mimeType?: string;
 	name?: string;
 	size?: string;
 	startAt?: string;
+	startRecord?: string;
 	stopAt?: string;
 }

@@ -19,6 +19,7 @@
       </template>
     </p-checkbox>
     <wt-label
+      v-if="hasLabel"
       :disabled="disabled"
       :for="checkboxId"
     >
@@ -40,7 +41,7 @@
 
 <script lang="ts" setup>
 import type { CheckboxProps } from 'primevue/checkbox';
-import { computed, defineModel, defineProps } from 'vue';
+import { computed, defineModel, defineProps, useSlots } from 'vue';
 
 interface WtCheckboxProps extends CheckboxProps {
   value?: string | boolean;
@@ -58,7 +59,13 @@ const model = defineModel<boolean | string[]>('selected', {required: true});
 
 const checkboxId = `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
-const isSingle = computed(() => typeof model.value === 'boolean');
+const slots = useSlots();
+
+const hasLabel = computed(() => {
+  return props.label || slots.label;
+});
+
+const isSingle = computed(() => !Array.isArray(model.value));
 
 const isChecked = computed(() => {
   if (isSingle.value) {
@@ -68,7 +75,7 @@ const isChecked = computed(() => {
 });
 
 const checkboxIcon = computed(() => {
-  return isChecked.value ? 'tick' : '';
+  return isChecked.value ? 'checkbox-tick' : '';
 })
 
 const iconColor = computed(() => {
@@ -95,7 +102,6 @@ const iconColor = computed(() => {
 }
 
 .wt-checkbox__label {
-  margin-left: var(--checkbox-icon-margin);
   cursor: pointer;
   transition: var(--transition);
 }

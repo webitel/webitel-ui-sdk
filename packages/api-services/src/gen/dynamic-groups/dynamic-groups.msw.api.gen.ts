@@ -9,14 +9,14 @@ import { faker } from '@faker-js/faker';
 import { delay, HttpResponse, http } from 'msw';
 
 import type {
-	WebitelContactsDynamicGroup,
-	WebitelContactsDynamicGroupList,
-	WebitelContactsLocateDynamicGroupResponse,
+	ContactsDynamicGroup,
+	ContactsDynamicGroupList,
+	ContactsLocateDynamicGroupResponse,
 } from '.././_models';
 
-export const getDynamicGroupsListDynamicGroupsResponseMock = (
-	overrideResponse: Partial<WebitelContactsDynamicGroupList> = {},
-): WebitelContactsDynamicGroupList => ({
+export const getListDynamicGroupsResponseMock = (
+	overrideResponse: Partial<ContactsDynamicGroupList> = {},
+): ContactsDynamicGroupList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -158,9 +158,9 @@ export const getDynamicGroupsListDynamicGroupsResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicGroupsCreateDynamicGroupResponseMock = (
-	overrideResponse: Partial<WebitelContactsDynamicGroup> = {},
-): WebitelContactsDynamicGroup => ({
+export const getCreateDynamicGroupResponseMock = (
+	overrideResponse: Partial<ContactsDynamicGroup> = {},
+): ContactsDynamicGroup => ({
 	conditions: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -286,9 +286,9 @@ export const getDynamicGroupsCreateDynamicGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicGroupsDeleteDynamicGroupResponseMock = (
-	overrideResponse: Partial<WebitelContactsDynamicGroup> = {},
-): WebitelContactsDynamicGroup => ({
+export const getDeleteDynamicGroupResponseMock = (
+	overrideResponse: Partial<ContactsDynamicGroup> = {},
+): ContactsDynamicGroup => ({
 	conditions: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -414,9 +414,9 @@ export const getDynamicGroupsDeleteDynamicGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicGroupsLocateDynamicGroupResponseMock = (
-	overrideResponse: Partial<WebitelContactsLocateDynamicGroupResponse> = {},
-): WebitelContactsLocateDynamicGroupResponse => ({
+export const getLocateDynamicGroupResponseMock = (
+	overrideResponse: Partial<ContactsLocateDynamicGroupResponse> = {},
+): ContactsLocateDynamicGroupResponse => ({
 	group: faker.helpers.arrayElement([
 		{
 			conditions: faker.helpers.arrayElement([
@@ -550,9 +550,9 @@ export const getDynamicGroupsLocateDynamicGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicGroupsUpdateDynamicGroup2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsDynamicGroup> = {},
-): WebitelContactsDynamicGroup => ({
+export const getUpdateDynamicGroup2ResponseMock = (
+	overrideResponse: Partial<ContactsDynamicGroup> = {},
+): ContactsDynamicGroup => ({
 	conditions: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -678,9 +678,9 @@ export const getDynamicGroupsUpdateDynamicGroup2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicGroupsUpdateDynamicGroupResponseMock = (
-	overrideResponse: Partial<WebitelContactsDynamicGroup> = {},
-): WebitelContactsDynamicGroup => ({
+export const getUpdateDynamicGroupResponseMock = (
+	overrideResponse: Partial<ContactsDynamicGroup> = {},
+): ContactsDynamicGroup => ({
 	conditions: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -806,14 +806,12 @@ export const getDynamicGroupsUpdateDynamicGroupResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicGroupsListDynamicGroupsMockHandler = (
+export const getListDynamicGroupsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsDynamicGroupList
+		| ContactsDynamicGroupList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsDynamicGroupList>
-				| WebitelContactsDynamicGroupList),
+		  ) => Promise<ContactsDynamicGroupList> | ContactsDynamicGroupList),
 ) => {
 	return http.get('*/contacts/groups/dynamic', async (info) => {
 		await delay(1000);
@@ -824,19 +822,19 @@ export const getDynamicGroupsListDynamicGroupsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicGroupsListDynamicGroupsResponseMock(),
+					: getListDynamicGroupsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicGroupsCreateDynamicGroupMockHandler = (
+export const getCreateDynamicGroupMockHandler = (
 	overrideResponse?:
-		| WebitelContactsDynamicGroup
+		| ContactsDynamicGroup
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsDynamicGroup> | WebitelContactsDynamicGroup),
+		  ) => Promise<ContactsDynamicGroup> | ContactsDynamicGroup),
 ) => {
 	return http.post('*/contacts/groups/dynamic', async (info) => {
 		await delay(1000);
@@ -847,19 +845,19 @@ export const getDynamicGroupsCreateDynamicGroupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicGroupsCreateDynamicGroupResponseMock(),
+					: getCreateDynamicGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicGroupsDeleteDynamicGroupMockHandler = (
+export const getDeleteDynamicGroupMockHandler = (
 	overrideResponse?:
-		| WebitelContactsDynamicGroup
+		| ContactsDynamicGroup
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsDynamicGroup> | WebitelContactsDynamicGroup),
+		  ) => Promise<ContactsDynamicGroup> | ContactsDynamicGroup),
 ) => {
 	return http.delete('*/contacts/groups/:id/dynamic', async (info) => {
 		await delay(1000);
@@ -870,21 +868,21 @@ export const getDynamicGroupsDeleteDynamicGroupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicGroupsDeleteDynamicGroupResponseMock(),
+					: getDeleteDynamicGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicGroupsLocateDynamicGroupMockHandler = (
+export const getLocateDynamicGroupMockHandler = (
 	overrideResponse?:
-		| WebitelContactsLocateDynamicGroupResponse
+		| ContactsLocateDynamicGroupResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<WebitelContactsLocateDynamicGroupResponse>
-				| WebitelContactsLocateDynamicGroupResponse),
+				| Promise<ContactsLocateDynamicGroupResponse>
+				| ContactsLocateDynamicGroupResponse),
 ) => {
 	return http.get('*/contacts/groups/:id/dynamic', async (info) => {
 		await delay(1000);
@@ -895,19 +893,19 @@ export const getDynamicGroupsLocateDynamicGroupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicGroupsLocateDynamicGroupResponseMock(),
+					: getLocateDynamicGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicGroupsUpdateDynamicGroup2MockHandler = (
+export const getUpdateDynamicGroup2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsDynamicGroup
+		| ContactsDynamicGroup
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsDynamicGroup> | WebitelContactsDynamicGroup),
+		  ) => Promise<ContactsDynamicGroup> | ContactsDynamicGroup),
 ) => {
 	return http.patch('*/contacts/groups/:id/dynamic', async (info) => {
 		await delay(1000);
@@ -918,19 +916,19 @@ export const getDynamicGroupsUpdateDynamicGroup2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicGroupsUpdateDynamicGroup2ResponseMock(),
+					: getUpdateDynamicGroup2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicGroupsUpdateDynamicGroupMockHandler = (
+export const getUpdateDynamicGroupMockHandler = (
 	overrideResponse?:
-		| WebitelContactsDynamicGroup
+		| ContactsDynamicGroup
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsDynamicGroup> | WebitelContactsDynamicGroup),
+		  ) => Promise<ContactsDynamicGroup> | ContactsDynamicGroup),
 ) => {
 	return http.put('*/contacts/groups/:id/dynamic', async (info) => {
 		await delay(1000);
@@ -941,17 +939,17 @@ export const getDynamicGroupsUpdateDynamicGroupMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicGroupsUpdateDynamicGroupResponseMock(),
+					: getUpdateDynamicGroupResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getDynamicGroupsMock = () => [
-	getDynamicGroupsListDynamicGroupsMockHandler(),
-	getDynamicGroupsCreateDynamicGroupMockHandler(),
-	getDynamicGroupsDeleteDynamicGroupMockHandler(),
-	getDynamicGroupsLocateDynamicGroupMockHandler(),
-	getDynamicGroupsUpdateDynamicGroup2MockHandler(),
-	getDynamicGroupsUpdateDynamicGroupMockHandler(),
+	getListDynamicGroupsMockHandler(),
+	getCreateDynamicGroupMockHandler(),
+	getDeleteDynamicGroupMockHandler(),
+	getLocateDynamicGroupMockHandler(),
+	getUpdateDynamicGroup2MockHandler(),
+	getUpdateDynamicGroupMockHandler(),
 ];

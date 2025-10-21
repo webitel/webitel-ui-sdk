@@ -7,15 +7,12 @@
 import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
-import type {
-	WebitelProtoDataStruct,
-	WebitelProtoDataStructList,
-} from '.././_models';
-import { WebitelProtoDataTypeKind } from '.././_models';
+import type { DataStructList, ProtodataStruct } from '.././_models';
+import { TypeKind } from '.././_models';
 
-export const getTypesSearchResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStructList> = {},
-): WebitelProtoDataStructList => ({
+export const getSearchMixin3ResponseMock = (
+	overrideResponse: Partial<DataStructList> = {},
+): DataStructList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -324,7 +321,7 @@ export const getTypesSearchResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -593,9 +590,9 @@ export const getTypesSearchResponseMock = (
 	...overrideResponse,
 });
 
-export const getTypesLocateResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStruct> = {},
-): WebitelProtoDataStruct => ({
+export const getLocateMixin3ResponseMock = (
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -893,7 +890,7 @@ export const getTypesLocateResponseMock = (
 				undefined,
 			]),
 			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+				faker.helpers.arrayElement(Object.values(TypeKind)),
 				undefined,
 			]),
 			lookup: faker.helpers.arrayElement([
@@ -1151,12 +1148,12 @@ export const getTypesLocateResponseMock = (
 	...overrideResponse,
 });
 
-export const getTypesSearchMockHandler = (
+export const getSearchMixin3MockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStructList
+		| DataStructList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelProtoDataStructList> | WebitelProtoDataStructList),
+		  ) => Promise<DataStructList> | DataStructList),
 ) => {
 	return http.get('*/types', async (info) => {
 		await delay(1000);
@@ -1167,19 +1164,19 @@ export const getTypesSearchMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTypesSearchResponseMock(),
+					: getSearchMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getTypesLocateMockHandler = (
+export const getLocateMixin3MockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelProtoDataStruct> | WebitelProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 ) => {
 	return http.get('*/types/:path', async (info) => {
 		await delay(1000);
@@ -1190,13 +1187,13 @@ export const getTypesLocateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getTypesLocateResponseMock(),
+					: getLocateMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getTypesMock = () => [
-	getTypesSearchMockHandler(),
-	getTypesLocateMockHandler(),
+	getSearchMixin3MockHandler(),
+	getLocateMixin3MockHandler(),
 ];

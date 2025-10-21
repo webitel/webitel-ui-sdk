@@ -1,3 +1,4 @@
+import { AdjunctTypesAPI as CustomTypesAPI } from '@webitel/api-services/api';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
 
@@ -240,6 +241,18 @@ const applicationsAccess = (value = true) => ({
     [CrmSections.STATUSES]: {
       _enabled: value,
       _locale: `WebitelApplications.${WebitelApplications.CRM}.sections.${CrmSectionsNew.Statuses}`,
+    },
+    [CrmSectionsNew.CasesExtensions]: {
+      _enabled: value,
+      _locale: `WebitelApplications.overrideApplicationsAccess.${WebitelApplications.CRM}.sections.${CrmSectionsNew.CasesExtensions}`,
+    },
+    [CrmSectionsNew.ContactsExtensions]: {
+      _enabled: value,
+      _locale: `WebitelApplications.overrideApplicationsAccess.${WebitelApplications.CRM}.sections.${CrmSectionsNew.ContactsExtensions}`,
+    },
+    [CrmSectionsNew.CustomLookups]: {
+      _enabled: value,
+      _locale: `WebitelApplications.overrideApplicationsAccess.${WebitelApplications.CRM}.sections.${CrmSectionsNew.CustomLookups}`,
     },
   },
 });

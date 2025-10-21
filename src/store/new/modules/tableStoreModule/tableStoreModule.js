@@ -119,7 +119,7 @@ const actions = {
         let sort;
 
         if (field) {
-          sort = field === header.field ? nextSort : currentSort;
+          sort = field === header.field ? nextSort : null;
         } else {
           sort = nextSort; // null
         }
@@ -209,10 +209,10 @@ const actions = {
       await context.dispatch('SET_SELECTED', []);
 
       /* if no items on current page after DELETE, move to prev page [WTEL-3793] */
-      if (!context.state.dataList.length && context.getters.FILTERS.page > 1) {
+      if (!context.state.dataList.length && context.getters.FILTERS().page > 1) {
         await context.dispatch('SET_FILTER', {
           name: 'page',
-          value: context.getters.FILTERS.page - 1,
+          value: context.getters.FILTERS().page - 1,
         });
       }
     }

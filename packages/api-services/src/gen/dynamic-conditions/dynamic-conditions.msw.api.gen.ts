@@ -9,14 +9,14 @@ import { faker } from '@faker-js/faker';
 import { delay, HttpResponse, http } from 'msw';
 
 import type {
-	WebitelContactsCondition,
-	WebitelContactsConditionList,
-	WebitelContactsLocateConditionResponse,
+	ContactsCondition,
+	ContactsConditionList,
+	ContactsLocateConditionResponse,
 } from '.././_models';
 
-export const getDynamicConditionsDeleteConditionResponseMock = (
-	overrideResponse: Partial<WebitelContactsCondition> = {},
-): WebitelContactsCondition => ({
+export const getDeleteConditionResponseMock = (
+	overrideResponse: Partial<ContactsCondition> = {},
+): ContactsCondition => ({
 	assignee: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -104,9 +104,9 @@ export const getDynamicConditionsDeleteConditionResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicConditionsLocateConditionResponseMock = (
-	overrideResponse: Partial<WebitelContactsLocateConditionResponse> = {},
-): WebitelContactsLocateConditionResponse => ({
+export const getLocateConditionResponseMock = (
+	overrideResponse: Partial<ContactsLocateConditionResponse> = {},
+): ContactsLocateConditionResponse => ({
 	condition: faker.helpers.arrayElement([
 		{
 			assignee: faker.helpers.arrayElement([
@@ -199,9 +199,9 @@ export const getDynamicConditionsLocateConditionResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicConditionsUpdateCondition2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsCondition> = {},
-): WebitelContactsCondition => ({
+export const getUpdateCondition2ResponseMock = (
+	overrideResponse: Partial<ContactsCondition> = {},
+): ContactsCondition => ({
 	assignee: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -289,9 +289,9 @@ export const getDynamicConditionsUpdateCondition2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicConditionsUpdateConditionResponseMock = (
-	overrideResponse: Partial<WebitelContactsCondition> = {},
-): WebitelContactsCondition => ({
+export const getUpdateConditionResponseMock = (
+	overrideResponse: Partial<ContactsCondition> = {},
+): ContactsCondition => ({
 	assignee: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -379,9 +379,9 @@ export const getDynamicConditionsUpdateConditionResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicConditionsListConditionsResponseMock = (
-	overrideResponse: Partial<WebitelContactsConditionList> = {},
-): WebitelContactsConditionList => ({
+export const getListConditionsResponseMock = (
+	overrideResponse: Partial<ContactsConditionList> = {},
+): ContactsConditionList => ({
 	items: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -482,9 +482,9 @@ export const getDynamicConditionsListConditionsResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicConditionsCreateConditionResponseMock = (
-	overrideResponse: Partial<WebitelContactsCondition> = {},
-): WebitelContactsCondition => ({
+export const getCreateConditionResponseMock = (
+	overrideResponse: Partial<ContactsCondition> = {},
+): ContactsCondition => ({
 	assignee: faker.helpers.arrayElement([
 		{
 			id: faker.helpers.arrayElement([
@@ -572,12 +572,12 @@ export const getDynamicConditionsCreateConditionResponseMock = (
 	...overrideResponse,
 });
 
-export const getDynamicConditionsDeleteConditionMockHandler = (
+export const getDeleteConditionMockHandler = (
 	overrideResponse?:
-		| WebitelContactsCondition
+		| ContactsCondition
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsCondition> | WebitelContactsCondition),
+		  ) => Promise<ContactsCondition> | ContactsCondition),
 ) => {
 	return http.delete('*/contacts/groups/conditions/:id', async (info) => {
 		await delay(1000);
@@ -588,21 +588,21 @@ export const getDynamicConditionsDeleteConditionMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicConditionsDeleteConditionResponseMock(),
+					: getDeleteConditionResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicConditionsLocateConditionMockHandler = (
+export const getLocateConditionMockHandler = (
 	overrideResponse?:
-		| WebitelContactsLocateConditionResponse
+		| ContactsLocateConditionResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<WebitelContactsLocateConditionResponse>
-				| WebitelContactsLocateConditionResponse),
+				| Promise<ContactsLocateConditionResponse>
+				| ContactsLocateConditionResponse),
 ) => {
 	return http.get('*/contacts/groups/conditions/:id', async (info) => {
 		await delay(1000);
@@ -613,19 +613,19 @@ export const getDynamicConditionsLocateConditionMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicConditionsLocateConditionResponseMock(),
+					: getLocateConditionResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicConditionsUpdateCondition2MockHandler = (
+export const getUpdateCondition2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsCondition
+		| ContactsCondition
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsCondition> | WebitelContactsCondition),
+		  ) => Promise<ContactsCondition> | ContactsCondition),
 ) => {
 	return http.patch('*/contacts/groups/conditions/:id', async (info) => {
 		await delay(1000);
@@ -636,19 +636,19 @@ export const getDynamicConditionsUpdateCondition2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicConditionsUpdateCondition2ResponseMock(),
+					: getUpdateCondition2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicConditionsUpdateConditionMockHandler = (
+export const getUpdateConditionMockHandler = (
 	overrideResponse?:
-		| WebitelContactsCondition
+		| ContactsCondition
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsCondition> | WebitelContactsCondition),
+		  ) => Promise<ContactsCondition> | ContactsCondition),
 ) => {
 	return http.put('*/contacts/groups/conditions/:id', async (info) => {
 		await delay(1000);
@@ -659,21 +659,19 @@ export const getDynamicConditionsUpdateConditionMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicConditionsUpdateConditionResponseMock(),
+					: getUpdateConditionResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicConditionsListConditionsMockHandler = (
+export const getListConditionsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsConditionList
+		| ContactsConditionList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) =>
-				| Promise<WebitelContactsConditionList>
-				| WebitelContactsConditionList),
+		  ) => Promise<ContactsConditionList> | ContactsConditionList),
 ) => {
 	return http.get('*/contacts/groups/:groupId/conditions', async (info) => {
 		await delay(1000);
@@ -684,19 +682,19 @@ export const getDynamicConditionsListConditionsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicConditionsListConditionsResponseMock(),
+					: getListConditionsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDynamicConditionsCreateConditionMockHandler = (
+export const getCreateConditionMockHandler = (
 	overrideResponse?:
-		| WebitelContactsCondition
+		| ContactsCondition
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsCondition> | WebitelContactsCondition),
+		  ) => Promise<ContactsCondition> | ContactsCondition),
 ) => {
 	return http.post('*/contacts/groups/:groupId/conditions', async (info) => {
 		await delay(1000);
@@ -707,17 +705,17 @@ export const getDynamicConditionsCreateConditionMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDynamicConditionsCreateConditionResponseMock(),
+					: getCreateConditionResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getDynamicConditionsMock = () => [
-	getDynamicConditionsDeleteConditionMockHandler(),
-	getDynamicConditionsLocateConditionMockHandler(),
-	getDynamicConditionsUpdateCondition2MockHandler(),
-	getDynamicConditionsUpdateConditionMockHandler(),
-	getDynamicConditionsListConditionsMockHandler(),
-	getDynamicConditionsCreateConditionMockHandler(),
+	getDeleteConditionMockHandler(),
+	getLocateConditionMockHandler(),
+	getUpdateCondition2MockHandler(),
+	getUpdateConditionMockHandler(),
+	getListConditionsMockHandler(),
+	getCreateConditionMockHandler(),
 ];

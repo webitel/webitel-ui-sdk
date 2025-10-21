@@ -9,9 +9,9 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	TypesSearchParams,
-	WebitelProtoDataStruct,
-	WebitelProtoDataStructList,
+	DataStructList,
+	ProtodataStruct,
+	SearchMixin3Params,
 } from '.././_models';
 
 // --- header start
@@ -25,8 +25,8 @@ export const // --- title start
 			/**
 			 * @summary Lookup data types registry.
 			 */
-			const typesSearch = <TData = AxiosResponse<WebitelProtoDataStructList>>(
-				params?: TypesSearchParams,
+			const searchMixin3 = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchMixin3Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types', {
@@ -37,7 +37,7 @@ export const // --- title start
 			/**
 			 * @summary Structured data type details.
 			 */
-			const typesLocate = <TData = AxiosResponse<WebitelProtoDataStruct>>(
+			const locateMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
 				path: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -45,9 +45,9 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { typesSearch, typesLocate };
+			return { searchMixin3, locateMixin3 };
 		};
-export type TypesSearchResult = AxiosResponse<WebitelProtoDataStructList>;
-export type TypesLocateResult = AxiosResponse<WebitelProtoDataStruct>;
+export type SearchMixin3Result = AxiosResponse<DataStructList>;
+export type LocateMixin3Result = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

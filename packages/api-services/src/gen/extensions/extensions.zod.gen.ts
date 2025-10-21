@@ -10,15 +10,14 @@ import { z as zod } from 'zod/v4';
  * returns (ExtensionList) {
  * @summary Delete extension for types.
  */
-export const extensionsDeleteType2QueryParams = zod.object({
+export const deleteType2QueryParams = zod.object({
 	fields: zod.array(zod.string()).optional(),
 	repo: zod.array(zod.string()).optional().describe('`type.repo`'),
 });
 
-export const extensionsDeleteType2ResponseDataItemFieldsItemKindDefault =
-	'none';
+export const deleteType2ResponseDataItemFieldsItemKindDefault = 'none';
 
-export const extensionsDeleteType2Response = zod
+export const deleteType2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -199,9 +198,7 @@ export const extensionsDeleteType2Response = zod
 												'datetime',
 												'duration',
 											])
-											.default(
-												extensionsDeleteType2ResponseDataItemFieldsItemKindDefault,
-											)
+											.default(deleteType2ResponseDataItemFieldsItemKindDefault)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 											),
@@ -395,11 +392,11 @@ export const extensionsDeleteType2Response = zod
  * (ExtensionList) {
  * @summary Search for type extensions.
  */
-export const extensionsSearchTypeQuerySortItemDefault = '*';
-export const extensionsSearchTypeQuerySortItemRegExp = /^[+|-|!]?\w+$/;
-export const extensionsSearchTypeQueryFieldsItemDefault = '*';
+export const searchTypeMixin3QuerySortItemDefault = '*';
+export const searchTypeMixin3QuerySortItemRegExp = /^[+|-|!]?\w+$/;
+export const searchTypeMixin3QueryFieldsItemDefault = '*';
 
-export const extensionsSearchTypeQueryParams = zod.object({
+export const searchTypeMixin3QueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -409,7 +406,7 @@ export const extensionsSearchTypeQueryParams = zod.object({
 		.optional()
 		.describe('Page number of result set of records.\nDefault: 1.'),
 	sort: zod
-		.array(zod.string().regex(extensionsSearchTypeQuerySortItemRegExp))
+		.array(zod.string().regex(searchTypeMixin3QuerySortItemRegExp))
 		.optional()
 		.describe(
 			'Sort result dataset of records by fields.\n```\nsort ::= *( ORDER name )\n\nORDER  = ASC / DESC\nDESC   = \"-\" / \"!\"\nASC    = [ \"+\" ]   ; Default\n```\n\nFields available\n\n- `id`(seq)\n- `domain`{name}\n- `created_at`\n- `created_by`{name}\n- `updated_at`\n- `updated_by`{name}\n\nUse ?fields=`field.sort()` option to sort Edge fields.',
@@ -429,9 +426,9 @@ export const extensionsSearchTypeQueryParams = zod.object({
 	id: zod.array(zod.string()).optional().describe('extension.type.id'),
 });
 
-export const extensionsSearchTypeResponseDataItemFieldsItemKindDefault = 'none';
+export const searchTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
 
-export const extensionsSearchTypeResponse = zod
+export const searchTypeMixin3Response = zod
 	.object({
 		data: zod
 			.array(
@@ -613,7 +610,7 @@ export const extensionsSearchTypeResponse = zod
 												'duration',
 											])
 											.default(
-												extensionsSearchTypeResponseDataItemFieldsItemKindDefault,
+												searchTypeMixin3ResponseDataItemFieldsItemKindDefault,
 											)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
@@ -808,17 +805,17 @@ export const extensionsSearchTypeResponse = zod
  * returns (ExtensionList) {
  * @summary Delete extension for types.
  */
-export const extensionsDeleteTypeParams = zod.object({
+export const deleteTypeMixin3Params = zod.object({
 	repo: zod.array(zod.string()).min(1).describe('`type.repo`'),
 });
 
-export const extensionsDeleteTypeQueryParams = zod.object({
+export const deleteTypeMixin3QueryParams = zod.object({
 	fields: zod.array(zod.string()).optional(),
 });
 
-export const extensionsDeleteTypeResponseDataItemFieldsItemKindDefault = 'none';
+export const deleteTypeMixin3ResponseDataItemFieldsItemKindDefault = 'none';
 
-export const extensionsDeleteTypeResponse = zod
+export const deleteTypeMixin3Response = zod
 	.object({
 		data: zod
 			.array(
@@ -1000,7 +997,7 @@ export const extensionsDeleteTypeResponse = zod
 												'duration',
 											])
 											.default(
-												extensionsDeleteTypeResponseDataItemFieldsItemKindDefault,
+												deleteTypeMixin3ResponseDataItemFieldsItemKindDefault,
 											)
 											.describe(
 												'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
@@ -1195,13 +1192,13 @@ export const extensionsDeleteTypeResponse = zod
  * returns (Extension) {
  * @summary Type extension details.
  */
-export const extensionsLocateTypeParams = zod.object({
+export const locateTypeParams = zod.object({
 	repo: zod.string().describe('`type.repo`\n\nid'),
 });
 
-export const extensionsLocateTypeResponseFieldsItemKindDefault = 'none';
+export const locateTypeResponseFieldsItemKindDefault = 'none';
 
-export const extensionsLocateTypeResponse = zod
+export const locateTypeResponse = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -1345,7 +1342,7 @@ export const extensionsLocateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(extensionsLocateTypeResponseFieldsItemKindDefault)
+							.default(locateTypeResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),
@@ -1507,7 +1504,7 @@ export const extensionsLocateTypeResponse = zod
  * returns (Extension) {
  * @summary Create type extension.
  */
-export const extensionsCreateTypeParams = zod.object({
+export const createTypeParams = zod.object({
 	repo: zod
 		.string()
 		.describe(
@@ -1515,9 +1512,9 @@ export const extensionsCreateTypeParams = zod.object({
 		),
 });
 
-export const extensionsCreateTypeBodyFieldsItemKindDefault = 'none';
+export const createTypeBodyFieldsItemKindDefault = 'none';
 
-export const extensionsCreateTypeBody = zod.object({
+export const createTypeBody = zod.object({
 	fields: zod
 		.array(
 			zod
@@ -1640,7 +1637,7 @@ export const extensionsCreateTypeBody = zod.object({
 							'datetime',
 							'duration',
 						])
-						.default(extensionsCreateTypeBodyFieldsItemKindDefault)
+						.default(createTypeBodyFieldsItemKindDefault)
 						.describe(
 							'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 						),
@@ -1756,9 +1753,9 @@ export const extensionsCreateTypeBody = zod.object({
 		.optional(),
 });
 
-export const extensionsCreateTypeResponseFieldsItemKindDefault = 'none';
+export const createTypeResponseFieldsItemKindDefault = 'none';
 
-export const extensionsCreateTypeResponse = zod
+export const createTypeResponse = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -1902,7 +1899,7 @@ export const extensionsCreateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(extensionsCreateTypeResponseFieldsItemKindDefault)
+							.default(createTypeResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),
@@ -2064,13 +2061,13 @@ export const extensionsCreateTypeResponse = zod
  * returns (Extension) {
  * @summary Update type extension.
  */
-export const extensionsUpdateTypeParams = zod.object({
+export const updateTypeParams = zod.object({
 	repo: zod.string().describe('`type.repo`'),
 });
 
-export const extensionsUpdateTypeBodyFieldsItemKindDefault = 'none';
+export const updateTypeBodyFieldsItemKindDefault = 'none';
 
-export const extensionsUpdateTypeBody = zod.object({
+export const updateTypeBody = zod.object({
 	fields: zod
 		.array(
 			zod
@@ -2193,7 +2190,7 @@ export const extensionsUpdateTypeBody = zod.object({
 							'datetime',
 							'duration',
 						])
-						.default(extensionsUpdateTypeBodyFieldsItemKindDefault)
+						.default(updateTypeBodyFieldsItemKindDefault)
 						.describe(
 							'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 						),
@@ -2309,9 +2306,9 @@ export const extensionsUpdateTypeBody = zod.object({
 		.optional(),
 });
 
-export const extensionsUpdateTypeResponseFieldsItemKindDefault = 'none';
+export const updateTypeResponseFieldsItemKindDefault = 'none';
 
-export const extensionsUpdateTypeResponse = zod
+export const updateTypeResponse = zod
 	.object({
 		about: zod.string().optional().describe('Optional. Short description.'),
 		administered: zod.boolean().optional(),
@@ -2455,7 +2452,7 @@ export const extensionsUpdateTypeResponse = zod
 								'datetime',
 								'duration',
 							])
-							.default(extensionsUpdateTypeResponseFieldsItemKindDefault)
+							.default(updateTypeResponseFieldsItemKindDefault)
 							.describe(
 								'Kind of primitive data types.\n\n - none: option allow_alias = true;\n - list: [array]\n - int: int32\n - uint: uint32\n - float: float32\n - datetime: date &| time',
 							),

@@ -22,7 +22,9 @@ export interface EngineAgentStatusStatisticItem {
 	scoreCount?: string;
 	scoreOptionalAvg?: number;
 	scoreRequiredAvg?: number;
+	screenControl?: boolean;
 	status?: string;
+	statusComment?: string;
 	statusDuration?: string;
 	supervisor?: EngineLookup[];
 	team?: EngineLookup;

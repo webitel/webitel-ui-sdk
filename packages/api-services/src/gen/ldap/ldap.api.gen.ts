@@ -11,28 +11,28 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	ApiDeleteLDAPRequest,
 	ApiLDAPCatalog,
-	ApiLDAPCreateLDAPTemplateBody,
-	ApiLDAPDeleteLDAPTemplateBody,
-	ApiLDAPLDAPSearchBody,
-	ApiLDAPResyncLDAPCatalogBody,
 	ApiLDAProcess,
 	ApiLDAProcessResponse,
 	ApiLDAPSearchRequest,
 	ApiLDAPSearchResponse,
 	ApiLDAPTemplate,
 	ApiLDAPTemplateResponse,
-	ApiLDAPUpdateLDAPCatalogBody,
-	ApiLDAPUpdateLDAPTemplateBody,
 	ApiSearchLDAPResponse,
-	LDAPDeleteLDAPCatalogParams,
-	LDAPLDAPSearch2Params,
-	LDAPLDAPSearch4Params,
-	LDAPLocateLDAPCatalogParams,
-	LDAPLocateLDAProcessParams,
-	LDAPLocateLDAPTemplateParams,
-	LDAPSearchLDAPCatalogParams,
-	LDAPSearchLDAProcessParams,
-	LDAPSearchLDAPTemplateParams,
+	DeleteLDAPCatalogParams,
+	LDAPCreateLDAPTemplateBody,
+	LDAPDeleteLDAPTemplateBody,
+	LDAPLDAPSearchBody,
+	LDAPResyncLDAPCatalogBody,
+	LDAPSearch2Params,
+	LDAPSearch4Params,
+	LDAPUpdateLDAPCatalogBody,
+	LDAPUpdateLDAPTemplateBody,
+	LocateLDAPCatalogParams,
+	LocateLDAProcessParams,
+	LocateLDAPTemplateParams,
+	SearchLDAPCatalogParams,
+	SearchLDAProcessParams,
+	SearchLDAPTemplateParams,
 } from '.././_models';
 
 // --- header start
@@ -46,7 +46,7 @@ export const // --- title start
 			/**
 			 * @summary Delete LDAP profile(s) ...
 			 */
-			const lDAPDeleteLDAPCatalog2 = <TData = AxiosResponse<ApiLDAPCatalog>>(
+			const deleteLDAPCatalog2 = <TData = AxiosResponse<ApiLDAPCatalog>>(
 				apiDeleteLDAPRequest: ApiDeleteLDAPRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -58,10 +58,8 @@ export const // --- title start
 			/**
 			 * @summary Search for LDAP directories ...
 			 */
-			const lDAPSearchLDAPCatalog = <
-				TData = AxiosResponse<ApiSearchLDAPResponse>,
-			>(
-				params?: LDAPSearchLDAPCatalogParams,
+			const searchLDAPCatalog = <TData = AxiosResponse<ApiSearchLDAPResponse>>(
+				params?: SearchLDAPCatalogParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/ldap', {
@@ -72,7 +70,7 @@ export const // --- title start
 			/**
 			 * @summary Create LDAP profile
 			 */
-			const lDAPCreateLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+			const createLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
 				apiLDAPCatalog: ApiLDAPCatalog,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -81,8 +79,8 @@ export const // --- title start
 			/**
 			 * @summary LDAPSearch performs LDAP Search operation ...
 			 */
-			const lDAPLDAPSearch4 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
-				params?: LDAPLDAPSearch4Params,
+			const lDAPSearch4 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+				params?: LDAPSearch4Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/ldap/search', {
@@ -93,7 +91,7 @@ export const // --- title start
 			/**
 			 * @summary LDAPSearch performs LDAP Search operation ...
 			 */
-			const lDAPLDAPSearch3 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+			const lDAPSearch3 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
 				apiLDAPSearchRequest: ApiLDAPSearchRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -102,47 +100,45 @@ export const // --- title start
 			/**
 			 * @summary Update LDAP profile details
 			 */
-			const lDAPUpdateLDAPCatalog2 = <TData = AxiosResponse<ApiLDAPCatalog>>(
-				apiLDAPUpdateLDAPCatalogBody: ApiLDAPUpdateLDAPCatalogBody,
+			const updateLDAPCatalog2 = <TData = AxiosResponse<ApiLDAPCatalog>>(
+				lDAPUpdateLDAPCatalogBody: LDAPUpdateLDAPCatalogBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					'/ldap/catalog.id}',
-					apiLDAPUpdateLDAPCatalogBody,
+					lDAPUpdateLDAPCatalogBody,
 					options,
 				);
 			};
 			/**
 			 * @summary Update LDAP profile details
 			 */
-			const lDAPUpdateLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
-				apiLDAPUpdateLDAPCatalogBody: ApiLDAPUpdateLDAPCatalogBody,
+			const updateLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+				lDAPUpdateLDAPCatalogBody: LDAPUpdateLDAPCatalogBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					'/ldap/catalog.id}',
-					apiLDAPUpdateLDAPCatalogBody,
+					lDAPUpdateLDAPCatalogBody,
 					options,
 				);
 			};
-			const lDAPCreateLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
-				apiLDAPCreateLDAPTemplateBody: ApiLDAPCreateLDAPTemplateBody,
+			const createLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
+				lDAPCreateLDAPTemplateBody: LDAPCreateLDAPTemplateBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					'/ldap/catalog.id}/templates',
-					apiLDAPCreateLDAPTemplateBody,
+					lDAPCreateLDAPTemplateBody,
 					options,
 				);
 			};
 			/**
 			 * @summary (ResyncLDAPResponse) {
 			 */
-			const lDAPSearchLDAProcess = <
-				TData = AxiosResponse<ApiLDAProcessResponse>,
-			>(
+			const searchLDAProcess = <TData = AxiosResponse<ApiLDAProcessResponse>>(
 				catalogId: string,
-				params?: LDAPSearchLDAProcessParams,
+				params?: SearchLDAProcessParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/ldap/${catalogId}/rsync`, {
@@ -154,24 +150,24 @@ export const // --- title start
 			 * (ResyncLDAPResponse) {
 			 * @summary Resync LDAP directory catalog changes ...
 			 */
-			const lDAPResyncLDAPCatalog = <TData = AxiosResponse<ApiLDAProcess>>(
+			const resyncLDAPCatalog = <TData = AxiosResponse<ApiLDAProcess>>(
 				catalogId: string,
-				apiLDAPResyncLDAPCatalogBody: ApiLDAPResyncLDAPCatalogBody,
+				lDAPResyncLDAPCatalogBody: LDAPResyncLDAPCatalogBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/ldap/${catalogId}/rsync`,
-					apiLDAPResyncLDAPCatalogBody,
+					lDAPResyncLDAPCatalogBody,
 					options,
 				);
 			};
 			/**
 			 * @summary (ResyncLDAPResponse) {
 			 */
-			const lDAPLocateLDAProcess = <TData = AxiosResponse<ApiLDAProcess>>(
+			const locateLDAProcess = <TData = AxiosResponse<ApiLDAProcess>>(
 				catalogId: string,
 				id: string[],
-				params?: LDAPLocateLDAProcessParams,
+				params?: LocateLDAProcessParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/ldap/${catalogId}/rsync/${id}`, {
@@ -182,9 +178,9 @@ export const // --- title start
 			/**
 			 * @summary LDAPSearch performs LDAP Search operation ...
 			 */
-			const lDAPLDAPSearch2 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+			const lDAPSearch2 = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
 				catalogId: string,
-				params?: LDAPLDAPSearch2Params,
+				params?: LDAPSearch2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/ldap/${catalogId}/search`, {
@@ -195,34 +191,34 @@ export const // --- title start
 			/**
 			 * @summary LDAPSearch performs LDAP Search operation ...
 			 */
-			const lDAPLDAPSearch = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
+			const lDAPSearch = <TData = AxiosResponse<ApiLDAPSearchResponse>>(
 				catalogId: string,
-				apiLDAPLDAPSearchBody: ApiLDAPLDAPSearchBody,
+				lDAPLDAPSearchBody: LDAPLDAPSearchBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/ldap/${catalogId}/search`,
-					apiLDAPLDAPSearchBody,
+					lDAPLDAPSearchBody,
 					options,
 				);
 			};
-			const lDAPDeleteLDAPTemplate2 = <
+			const deleteLDAPTemplate2 = <
 				TData = AxiosResponse<ApiLDAPTemplateResponse>,
 			>(
 				catalogId: string,
-				apiLDAPDeleteLDAPTemplateBody: ApiLDAPDeleteLDAPTemplateBody,
+				lDAPDeleteLDAPTemplateBody: LDAPDeleteLDAPTemplateBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/ldap/${catalogId}/templates`, {
-					data: apiLDAPDeleteLDAPTemplateBody,
+					data: lDAPDeleteLDAPTemplateBody,
 					...options,
 				});
 			};
-			const lDAPSearchLDAPTemplate = <
+			const searchLDAPTemplate = <
 				TData = AxiosResponse<ApiLDAPTemplateResponse>,
 			>(
 				catalogId: string,
-				params?: LDAPSearchLDAPTemplateParams,
+				params?: SearchLDAPTemplateParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/ldap/${catalogId}/templates`, {
@@ -230,23 +226,23 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const lDAPDeleteLDAPTemplate = <
+			const deleteLDAPTemplate = <
 				TData = AxiosResponse<ApiLDAPTemplateResponse>,
 			>(
 				catalogId: string,
 				id: string[],
-				apiLDAPDeleteLDAPTemplateBody: ApiLDAPDeleteLDAPTemplateBody,
+				lDAPDeleteLDAPTemplateBody: LDAPDeleteLDAPTemplateBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/ldap/${catalogId}/templates/${id}`, {
-					data: apiLDAPDeleteLDAPTemplateBody,
+					data: lDAPDeleteLDAPTemplateBody,
 					...options,
 				});
 			};
-			const lDAPLocateLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
+			const locateLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
 				catalogId: string,
 				id: string[],
-				params?: LDAPLocateLDAPTemplateParams,
+				params?: LocateLDAPTemplateParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/ldap/${catalogId}/templates/${id}`, {
@@ -257,9 +253,9 @@ export const // --- title start
 			/**
 			 * @summary Delete LDAP profile(s) ...
 			 */
-			const lDAPDeleteLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+			const deleteLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
 				id: string,
-				params?: LDAPDeleteLDAPCatalogParams,
+				params?: DeleteLDAPCatalogParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/ldap/${id}`, {
@@ -270,9 +266,9 @@ export const // --- title start
 			/**
 			 * @summary Read LDAP catalog profile by .id
 			 */
-			const lDAPLocateLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
+			const locateLDAPCatalog = <TData = AxiosResponse<ApiLDAPCatalog>>(
 				id: string[],
-				params?: LDAPLocateLDAPCatalogParams,
+				params?: LocateLDAPCatalogParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/ldap/${id}`, {
@@ -280,75 +276,72 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const lDAPUpdateLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
-				apiLDAPUpdateLDAPTemplateBody: ApiLDAPUpdateLDAPTemplateBody,
+			const updateLDAPTemplate = <TData = AxiosResponse<ApiLDAPTemplate>>(
+				lDAPUpdateLDAPTemplateBody: LDAPUpdateLDAPTemplateBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					'/ldap/template.catalog.id}/templates/template.id}',
-					apiLDAPUpdateLDAPTemplateBody,
+					lDAPUpdateLDAPTemplateBody,
 					options,
 				);
 			};
-			const lDAPUpdateLDAPTemplate2 = <TData = AxiosResponse<ApiLDAPTemplate>>(
-				apiLDAPUpdateLDAPTemplateBody: ApiLDAPUpdateLDAPTemplateBody,
+			const updateLDAPTemplate2 = <TData = AxiosResponse<ApiLDAPTemplate>>(
+				lDAPUpdateLDAPTemplateBody: LDAPUpdateLDAPTemplateBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					'/ldap/template.catalog.id}/templates/template.id}',
-					apiLDAPUpdateLDAPTemplateBody,
+					lDAPUpdateLDAPTemplateBody,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				lDAPDeleteLDAPCatalog2,
-				lDAPSearchLDAPCatalog,
-				lDAPCreateLDAPCatalog,
-				lDAPLDAPSearch4,
-				lDAPLDAPSearch3,
-				lDAPUpdateLDAPCatalog2,
-				lDAPUpdateLDAPCatalog,
-				lDAPCreateLDAPTemplate,
-				lDAPSearchLDAProcess,
-				lDAPResyncLDAPCatalog,
-				lDAPLocateLDAProcess,
-				lDAPLDAPSearch2,
-				lDAPLDAPSearch,
-				lDAPDeleteLDAPTemplate2,
-				lDAPSearchLDAPTemplate,
-				lDAPDeleteLDAPTemplate,
-				lDAPLocateLDAPTemplate,
-				lDAPDeleteLDAPCatalog,
-				lDAPLocateLDAPCatalog,
-				lDAPUpdateLDAPTemplate,
-				lDAPUpdateLDAPTemplate2,
+				deleteLDAPCatalog2,
+				searchLDAPCatalog,
+				createLDAPCatalog,
+				lDAPSearch4,
+				lDAPSearch3,
+				updateLDAPCatalog2,
+				updateLDAPCatalog,
+				createLDAPTemplate,
+				searchLDAProcess,
+				resyncLDAPCatalog,
+				locateLDAProcess,
+				lDAPSearch2,
+				lDAPSearch,
+				deleteLDAPTemplate2,
+				searchLDAPTemplate,
+				deleteLDAPTemplate,
+				locateLDAPTemplate,
+				deleteLDAPCatalog,
+				locateLDAPCatalog,
+				updateLDAPTemplate,
+				updateLDAPTemplate2,
 			};
 		};
-export type LDAPDeleteLDAPCatalog2Result = AxiosResponse<ApiLDAPCatalog>;
-export type LDAPSearchLDAPCatalogResult = AxiosResponse<ApiSearchLDAPResponse>;
-export type LDAPCreateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
-export type LDAPLDAPSearch4Result = AxiosResponse<ApiLDAPSearchResponse>;
-export type LDAPLDAPSearch3Result = AxiosResponse<ApiLDAPSearchResponse>;
-export type LDAPUpdateLDAPCatalog2Result = AxiosResponse<ApiLDAPCatalog>;
-export type LDAPUpdateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
-export type LDAPCreateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>;
-export type LDAPSearchLDAProcessResult = AxiosResponse<ApiLDAProcessResponse>;
-export type LDAPResyncLDAPCatalogResult = AxiosResponse<ApiLDAProcess>;
-export type LDAPLocateLDAProcessResult = AxiosResponse<ApiLDAProcess>;
-export type LDAPLDAPSearch2Result = AxiosResponse<ApiLDAPSearchResponse>;
-export type LDAPLDAPSearchResult = AxiosResponse<ApiLDAPSearchResponse>;
-export type LDAPDeleteLDAPTemplate2Result =
-	AxiosResponse<ApiLDAPTemplateResponse>;
-export type LDAPSearchLDAPTemplateResult =
-	AxiosResponse<ApiLDAPTemplateResponse>;
-export type LDAPDeleteLDAPTemplateResult =
-	AxiosResponse<ApiLDAPTemplateResponse>;
-export type LDAPLocateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>;
-export type LDAPDeleteLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
-export type LDAPLocateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
-export type LDAPUpdateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>;
-export type LDAPUpdateLDAPTemplate2Result = AxiosResponse<ApiLDAPTemplate>;
+export type DeleteLDAPCatalog2Result = AxiosResponse<ApiLDAPCatalog>;
+export type SearchLDAPCatalogResult = AxiosResponse<ApiSearchLDAPResponse>;
+export type CreateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
+export type LDAPSearch4Result = AxiosResponse<ApiLDAPSearchResponse>;
+export type LDAPSearch3Result = AxiosResponse<ApiLDAPSearchResponse>;
+export type UpdateLDAPCatalog2Result = AxiosResponse<ApiLDAPCatalog>;
+export type UpdateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
+export type CreateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>;
+export type SearchLDAProcessResult = AxiosResponse<ApiLDAProcessResponse>;
+export type ResyncLDAPCatalogResult = AxiosResponse<ApiLDAProcess>;
+export type LocateLDAProcessResult = AxiosResponse<ApiLDAProcess>;
+export type LDAPSearch2Result = AxiosResponse<ApiLDAPSearchResponse>;
+export type LDAPSearchResult = AxiosResponse<ApiLDAPSearchResponse>;
+export type DeleteLDAPTemplate2Result = AxiosResponse<ApiLDAPTemplateResponse>;
+export type SearchLDAPTemplateResult = AxiosResponse<ApiLDAPTemplateResponse>;
+export type DeleteLDAPTemplateResult = AxiosResponse<ApiLDAPTemplateResponse>;
+export type LocateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>;
+export type DeleteLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
+export type LocateLDAPCatalogResult = AxiosResponse<ApiLDAPCatalog>;
+export type UpdateLDAPTemplateResult = AxiosResponse<ApiLDAPTemplate>;
+export type UpdateLDAPTemplate2Result = AxiosResponse<ApiLDAPTemplate>;
 
 // --- footer end

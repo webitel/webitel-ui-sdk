@@ -15,7 +15,7 @@ import type {
 } from '.././_models';
 import { StorageUploadFileChannel } from '.././_models';
 
-export const getFilePoliciesServiceSearchFilePoliciesResponseMock = (
+export const getSearchFilePoliciesResponseMock = (
 	overrideResponse: Partial<StorageListFilePolicies> = {},
 ): StorageListFilePolicies => ({
 	items: faker.helpers.arrayElement([
@@ -127,7 +127,7 @@ export const getFilePoliciesServiceSearchFilePoliciesResponseMock = (
 	...overrideResponse,
 });
 
-export const getFilePoliciesServiceCreateFilePolicyResponseMock = (
+export const getCreateFilePolicyResponseMock = (
 	overrideResponse: Partial<StorageFilePolicy> = {},
 ): StorageFilePolicy => ({
 	channels: faker.helpers.arrayElement([
@@ -212,14 +212,14 @@ export const getFilePoliciesServiceCreateFilePolicyResponseMock = (
 	...overrideResponse,
 });
 
-export const getFilePoliciesServiceMovePositionFilePolicyResponseMock = (
+export const getMovePositionFilePolicyResponseMock = (
 	overrideResponse: Partial<StorageMovePositionFilePolicyResponse> = {},
 ): StorageMovePositionFilePolicyResponse => ({
 	success: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]),
 	...overrideResponse,
 });
 
-export const getFilePoliciesServiceDeleteFilePolicyResponseMock = (
+export const getDeleteFilePolicyResponseMock = (
 	overrideResponse: Partial<StorageFilePolicy> = {},
 ): StorageFilePolicy => ({
 	channels: faker.helpers.arrayElement([
@@ -304,7 +304,7 @@ export const getFilePoliciesServiceDeleteFilePolicyResponseMock = (
 	...overrideResponse,
 });
 
-export const getFilePoliciesServiceReadFilePolicyResponseMock = (
+export const getReadFilePolicyResponseMock = (
 	overrideResponse: Partial<StorageFilePolicy> = {},
 ): StorageFilePolicy => ({
 	channels: faker.helpers.arrayElement([
@@ -389,7 +389,7 @@ export const getFilePoliciesServiceReadFilePolicyResponseMock = (
 	...overrideResponse,
 });
 
-export const getFilePoliciesServicePatchFilePolicyResponseMock = (
+export const getPatchFilePolicyResponseMock = (
 	overrideResponse: Partial<StorageFilePolicy> = {},
 ): StorageFilePolicy => ({
 	channels: faker.helpers.arrayElement([
@@ -474,7 +474,7 @@ export const getFilePoliciesServicePatchFilePolicyResponseMock = (
 	...overrideResponse,
 });
 
-export const getFilePoliciesServiceUpdateFilePolicyResponseMock = (
+export const getUpdateFilePolicyResponseMock = (
 	overrideResponse: Partial<StorageFilePolicy> = {},
 ): StorageFilePolicy => ({
 	channels: faker.helpers.arrayElement([
@@ -559,7 +559,7 @@ export const getFilePoliciesServiceUpdateFilePolicyResponseMock = (
 	...overrideResponse,
 });
 
-export const getFilePoliciesServiceFilePolicyApplyResponseMock = (
+export const getFilePolicyApplyResponseMock = (
 	overrideResponse: Partial<StorageFilePolicyApplyResponse> = {},
 ): StorageFilePolicyApplyResponse => ({
 	count: faker.helpers.arrayElement([
@@ -569,7 +569,7 @@ export const getFilePoliciesServiceFilePolicyApplyResponseMock = (
 	...overrideResponse,
 });
 
-export const getFilePoliciesServiceSearchFilePoliciesMockHandler = (
+export const getSearchFilePoliciesMockHandler = (
 	overrideResponse?:
 		| StorageListFilePolicies
 		| ((
@@ -585,14 +585,14 @@ export const getFilePoliciesServiceSearchFilePoliciesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFilePoliciesServiceSearchFilePoliciesResponseMock(),
+					: getSearchFilePoliciesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFilePoliciesServiceCreateFilePolicyMockHandler = (
+export const getCreateFilePolicyMockHandler = (
 	overrideResponse?:
 		| StorageFilePolicy
 		| ((
@@ -608,14 +608,14 @@ export const getFilePoliciesServiceCreateFilePolicyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFilePoliciesServiceCreateFilePolicyResponseMock(),
+					: getCreateFilePolicyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFilePoliciesServiceMovePositionFilePolicyMockHandler = (
+export const getMovePositionFilePolicyMockHandler = (
 	overrideResponse?:
 		| StorageMovePositionFilePolicyResponse
 		| ((
@@ -635,7 +635,7 @@ export const getFilePoliciesServiceMovePositionFilePolicyMockHandler = (
 						? typeof overrideResponse === 'function'
 							? await overrideResponse(info)
 							: overrideResponse
-						: getFilePoliciesServiceMovePositionFilePolicyResponseMock(),
+						: getMovePositionFilePolicyResponseMock(),
 				),
 				{ status: 200, headers: { 'Content-Type': 'application/json' } },
 			);
@@ -643,7 +643,7 @@ export const getFilePoliciesServiceMovePositionFilePolicyMockHandler = (
 	);
 };
 
-export const getFilePoliciesServiceDeleteFilePolicyMockHandler = (
+export const getDeleteFilePolicyMockHandler = (
 	overrideResponse?:
 		| StorageFilePolicy
 		| ((
@@ -659,14 +659,14 @@ export const getFilePoliciesServiceDeleteFilePolicyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFilePoliciesServiceDeleteFilePolicyResponseMock(),
+					: getDeleteFilePolicyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFilePoliciesServiceReadFilePolicyMockHandler = (
+export const getReadFilePolicyMockHandler = (
 	overrideResponse?:
 		| StorageFilePolicy
 		| ((
@@ -682,14 +682,14 @@ export const getFilePoliciesServiceReadFilePolicyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFilePoliciesServiceReadFilePolicyResponseMock(),
+					: getReadFilePolicyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFilePoliciesServicePatchFilePolicyMockHandler = (
+export const getPatchFilePolicyMockHandler = (
 	overrideResponse?:
 		| StorageFilePolicy
 		| ((
@@ -705,14 +705,14 @@ export const getFilePoliciesServicePatchFilePolicyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFilePoliciesServicePatchFilePolicyResponseMock(),
+					: getPatchFilePolicyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFilePoliciesServiceUpdateFilePolicyMockHandler = (
+export const getUpdateFilePolicyMockHandler = (
 	overrideResponse?:
 		| StorageFilePolicy
 		| ((
@@ -728,14 +728,14 @@ export const getFilePoliciesServiceUpdateFilePolicyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFilePoliciesServiceUpdateFilePolicyResponseMock(),
+					: getUpdateFilePolicyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getFilePoliciesServiceFilePolicyApplyMockHandler = (
+export const getFilePolicyApplyMockHandler = (
 	overrideResponse?:
 		| StorageFilePolicyApplyResponse
 		| ((
@@ -753,19 +753,19 @@ export const getFilePoliciesServiceFilePolicyApplyMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getFilePoliciesServiceFilePolicyApplyResponseMock(),
+					: getFilePolicyApplyResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getFilePoliciesServiceMock = () => [
-	getFilePoliciesServiceSearchFilePoliciesMockHandler(),
-	getFilePoliciesServiceCreateFilePolicyMockHandler(),
-	getFilePoliciesServiceMovePositionFilePolicyMockHandler(),
-	getFilePoliciesServiceDeleteFilePolicyMockHandler(),
-	getFilePoliciesServiceReadFilePolicyMockHandler(),
-	getFilePoliciesServicePatchFilePolicyMockHandler(),
-	getFilePoliciesServiceUpdateFilePolicyMockHandler(),
-	getFilePoliciesServiceFilePolicyApplyMockHandler(),
+	getSearchFilePoliciesMockHandler(),
+	getCreateFilePolicyMockHandler(),
+	getMovePositionFilePolicyMockHandler(),
+	getDeleteFilePolicyMockHandler(),
+	getReadFilePolicyMockHandler(),
+	getPatchFilePolicyMockHandler(),
+	getUpdateFilePolicyMockHandler(),
+	getFilePolicyApplyMockHandler(),
 ];

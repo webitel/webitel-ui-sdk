@@ -860,6 +860,10 @@ export const getSearchHistoryCallResponseMock = (
 					{ length: faker.number.int({ min: 1, max: 10 }) },
 					(_, i) => i + 1,
 				).map(() => ({
+					channel: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					id: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
@@ -877,6 +881,10 @@ export const getSearchHistoryCallResponseMock = (
 						undefined,
 					]),
 					startAt: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					startRecord: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
@@ -1570,6 +1578,10 @@ export const getSearchHistoryCallPostResponseMock = (
 					{ length: faker.number.int({ min: 1, max: 10 }) },
 					(_, i) => i + 1,
 				).map(() => ({
+					channel: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					id: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
@@ -1587,6 +1599,10 @@ export const getSearchHistoryCallPostResponseMock = (
 						undefined,
 					]),
 					startAt: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+					startRecord: faker.helpers.arrayElement([
 						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
@@ -2475,6 +2491,10 @@ export const getPatchHistoryCallResponseMock = (
 			{ length: faker.number.int({ min: 1, max: 10 }) },
 			(_, i) => i + 1,
 		).map(() => ({
+			channel: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
 			id: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
@@ -2492,6 +2512,10 @@ export const getPatchHistoryCallResponseMock = (
 				undefined,
 			]),
 			startAt: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+			startRecord: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),

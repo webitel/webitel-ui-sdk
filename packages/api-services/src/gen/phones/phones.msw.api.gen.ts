@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsPhoneList,
-	WebitelContactsPhoneNumber,
-} from '.././_models';
+import type { ContactsPhoneList, ContactsPhoneNumber } from '.././_models';
 
-export const getPhonesDeletePhonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneList> = {},
-): WebitelContactsPhoneList => ({
+export const getDeletePhonesResponseMock = (
+	overrideResponse: Partial<ContactsPhoneList> = {},
+): ContactsPhoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -119,9 +116,9 @@ export const getPhonesDeletePhonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesListPhonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneList> = {},
-): WebitelContactsPhoneList => ({
+export const getListPhonesResponseMock = (
+	overrideResponse: Partial<ContactsPhoneList> = {},
+): ContactsPhoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -225,9 +222,9 @@ export const getPhonesListPhonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesMergePhonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneList> = {},
-): WebitelContactsPhoneList => ({
+export const getMergePhonesResponseMock = (
+	overrideResponse: Partial<ContactsPhoneList> = {},
+): ContactsPhoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -331,9 +328,9 @@ export const getPhonesMergePhonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesResetPhonesResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneList> = {},
-): WebitelContactsPhoneList => ({
+export const getResetPhonesResponseMock = (
+	overrideResponse: Partial<ContactsPhoneList> = {},
+): ContactsPhoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -437,9 +434,9 @@ export const getPhonesResetPhonesResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesDeletePhoneResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneNumber> = {},
-): WebitelContactsPhoneNumber => ({
+export const getDeletePhoneResponseMock = (
+	overrideResponse: Partial<ContactsPhoneNumber> = {},
+): ContactsPhoneNumber => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -520,9 +517,9 @@ export const getPhonesDeletePhoneResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesLocatePhoneResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneNumber> = {},
-): WebitelContactsPhoneNumber => ({
+export const getLocatePhoneResponseMock = (
+	overrideResponse: Partial<ContactsPhoneNumber> = {},
+): ContactsPhoneNumber => ({
 	createdAt: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -603,9 +600,9 @@ export const getPhonesLocatePhoneResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesUpdatePhone2ResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneList> = {},
-): WebitelContactsPhoneList => ({
+export const getUpdatePhone2ResponseMock = (
+	overrideResponse: Partial<ContactsPhoneList> = {},
+): ContactsPhoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -709,9 +706,9 @@ export const getPhonesUpdatePhone2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesUpdatePhoneResponseMock = (
-	overrideResponse: Partial<WebitelContactsPhoneList> = {},
-): WebitelContactsPhoneList => ({
+export const getUpdatePhoneResponseMock = (
+	overrideResponse: Partial<ContactsPhoneList> = {},
+): ContactsPhoneList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -815,12 +812,12 @@ export const getPhonesUpdatePhoneResponseMock = (
 	...overrideResponse,
 });
 
-export const getPhonesDeletePhonesMockHandler = (
+export const getDeletePhonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneList
+		| ContactsPhoneList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneList> | WebitelContactsPhoneList),
+		  ) => Promise<ContactsPhoneList> | ContactsPhoneList),
 ) => {
 	return http.delete('*/contacts/:contactId/phones', async (info) => {
 		await delay(1000);
@@ -831,19 +828,19 @@ export const getPhonesDeletePhonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesDeletePhonesResponseMock(),
+					: getDeletePhonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPhonesListPhonesMockHandler = (
+export const getListPhonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneList
+		| ContactsPhoneList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneList> | WebitelContactsPhoneList),
+		  ) => Promise<ContactsPhoneList> | ContactsPhoneList),
 ) => {
 	return http.get('*/contacts/:contactId/phones', async (info) => {
 		await delay(1000);
@@ -854,19 +851,19 @@ export const getPhonesListPhonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesListPhonesResponseMock(),
+					: getListPhonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPhonesMergePhonesMockHandler = (
+export const getMergePhonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneList
+		| ContactsPhoneList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneList> | WebitelContactsPhoneList),
+		  ) => Promise<ContactsPhoneList> | ContactsPhoneList),
 ) => {
 	return http.post('*/contacts/:contactId/phones', async (info) => {
 		await delay(1000);
@@ -877,19 +874,19 @@ export const getPhonesMergePhonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesMergePhonesResponseMock(),
+					: getMergePhonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPhonesResetPhonesMockHandler = (
+export const getResetPhonesMockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneList
+		| ContactsPhoneList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneList> | WebitelContactsPhoneList),
+		  ) => Promise<ContactsPhoneList> | ContactsPhoneList),
 ) => {
 	return http.put('*/contacts/:contactId/phones', async (info) => {
 		await delay(1000);
@@ -900,19 +897,19 @@ export const getPhonesResetPhonesMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesResetPhonesResponseMock(),
+					: getResetPhonesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPhonesDeletePhoneMockHandler = (
+export const getDeletePhoneMockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneNumber
+		| ContactsPhoneNumber
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneNumber> | WebitelContactsPhoneNumber),
+		  ) => Promise<ContactsPhoneNumber> | ContactsPhoneNumber),
 ) => {
 	return http.delete('*/contacts/:contactId/phones/:etag', async (info) => {
 		await delay(1000);
@@ -923,19 +920,19 @@ export const getPhonesDeletePhoneMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesDeletePhoneResponseMock(),
+					: getDeletePhoneResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPhonesLocatePhoneMockHandler = (
+export const getLocatePhoneMockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneNumber
+		| ContactsPhoneNumber
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneNumber> | WebitelContactsPhoneNumber),
+		  ) => Promise<ContactsPhoneNumber> | ContactsPhoneNumber),
 ) => {
 	return http.get('*/contacts/:contactId/phones/:etag', async (info) => {
 		await delay(1000);
@@ -946,19 +943,19 @@ export const getPhonesLocatePhoneMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesLocatePhoneResponseMock(),
+					: getLocatePhoneResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPhonesUpdatePhone2MockHandler = (
+export const getUpdatePhone2MockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneList
+		| ContactsPhoneList
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneList> | WebitelContactsPhoneList),
+		  ) => Promise<ContactsPhoneList> | ContactsPhoneList),
 ) => {
 	return http.patch('*/contacts/:contactId/phones/:etag', async (info) => {
 		await delay(1000);
@@ -969,19 +966,19 @@ export const getPhonesUpdatePhone2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesUpdatePhone2ResponseMock(),
+					: getUpdatePhone2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getPhonesUpdatePhoneMockHandler = (
+export const getUpdatePhoneMockHandler = (
 	overrideResponse?:
-		| WebitelContactsPhoneList
+		| ContactsPhoneList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsPhoneList> | WebitelContactsPhoneList),
+		  ) => Promise<ContactsPhoneList> | ContactsPhoneList),
 ) => {
 	return http.put('*/contacts/:contactId/phones/:etag', async (info) => {
 		await delay(1000);
@@ -992,19 +989,19 @@ export const getPhonesUpdatePhoneMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPhonesUpdatePhoneResponseMock(),
+					: getUpdatePhoneResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getPhonesMock = () => [
-	getPhonesDeletePhonesMockHandler(),
-	getPhonesListPhonesMockHandler(),
-	getPhonesMergePhonesMockHandler(),
-	getPhonesResetPhonesMockHandler(),
-	getPhonesDeletePhoneMockHandler(),
-	getPhonesLocatePhoneMockHandler(),
-	getPhonesUpdatePhone2MockHandler(),
-	getPhonesUpdatePhoneMockHandler(),
+	getDeletePhonesMockHandler(),
+	getListPhonesMockHandler(),
+	getMergePhonesMockHandler(),
+	getResetPhonesMockHandler(),
+	getDeletePhoneMockHandler(),
+	getLocatePhoneMockHandler(),
+	getUpdatePhone2MockHandler(),
+	getUpdatePhoneMockHandler(),
 ];

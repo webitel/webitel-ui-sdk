@@ -7,6 +7,7 @@
   <wt-spinner-loader
     v-else
     class="wt-loader"
+    :color="color"
     :size="size"
   />
 </template>

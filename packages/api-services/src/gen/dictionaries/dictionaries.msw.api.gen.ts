@@ -8,19 +8,19 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 import type {
-	DictionariesCreateData200,
-	DictionariesLocateData200,
-	DictionariesUpdateData200,
-	DictionariesUpdateData2200,
-	WebitelProtoDataDataset,
-	WebitelProtoDataStruct,
-	WebitelProtoDataStructList,
+	CreateData200,
+	DataDataset,
+	DataStructList,
+	LocateData200,
+	ProtodataStruct,
+	UpdateData200,
+	UpdateData2200,
 } from '.././_models';
-import { WebitelProtoDataTypeKind } from '.././_models';
+import { TypeKind } from '.././_models';
 
-export const getDictionariesDeleteDataResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataDataset> = {},
-): WebitelProtoDataDataset => ({
+export const getDeleteDataResponseMock = (
+	overrideResponse: Partial<DataDataset> = {},
+): DataDataset => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -338,7 +338,7 @@ export const getDictionariesDeleteDataResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -602,9 +602,9 @@ export const getDictionariesDeleteDataResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesSearchDataResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataDataset> = {},
-): WebitelProtoDataDataset => ({
+export const getSearchDataResponseMock = (
+	overrideResponse: Partial<DataDataset> = {},
+): DataDataset => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -922,7 +922,7 @@ export const getDictionariesSearchDataResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -1186,12 +1186,11 @@ export const getDictionariesSearchDataResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesCreateDataResponseMock =
-	(): DictionariesCreateData200 => ({});
+export const getCreateDataResponseMock = (): CreateData200 => ({});
 
-export const getDictionariesImportCSVResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataDataset> = {},
-): WebitelProtoDataDataset => ({
+export const getImportCSVResponseMock = (
+	overrideResponse: Partial<DataDataset> = {},
+): DataDataset => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -1509,7 +1508,7 @@ export const getDictionariesImportCSVResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -1773,9 +1772,9 @@ export const getDictionariesImportCSVResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesDeleteData2ResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataDataset> = {},
-): WebitelProtoDataDataset => ({
+export const getDeleteData2ResponseMock = (
+	overrideResponse: Partial<DataDataset> = {},
+): DataDataset => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -2093,7 +2092,7 @@ export const getDictionariesDeleteData2ResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -2357,18 +2356,15 @@ export const getDictionariesDeleteData2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesLocateDataResponseMock =
-	(): DictionariesLocateData200 => ({});
+export const getLocateDataResponseMock = (): LocateData200 => ({});
 
-export const getDictionariesUpdateDataResponseMock =
-	(): DictionariesUpdateData200 => ({});
+export const getUpdateDataResponseMock = (): UpdateData200 => ({});
 
-export const getDictionariesUpdateData2ResponseMock =
-	(): DictionariesUpdateData2200 => ({});
+export const getUpdateData2ResponseMock = (): UpdateData2200 => ({});
 
-export const getDictionariesDeleteTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStructList> = {},
-): WebitelProtoDataStructList => ({
+export const getDeleteTypeResponseMock = (
+	overrideResponse: Partial<DataStructList> = {},
+): DataStructList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -2677,7 +2673,7 @@ export const getDictionariesDeleteTypeResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -2946,9 +2942,9 @@ export const getDictionariesDeleteTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesSearchTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStructList> = {},
-): WebitelProtoDataStructList => ({
+export const getSearchTypeResponseMock = (
+	overrideResponse: Partial<DataStructList> = {},
+): DataStructList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -3257,7 +3253,7 @@ export const getDictionariesSearchTypeResponseMock = (
 						undefined,
 					]),
 					kind: faker.helpers.arrayElement([
-						faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+						faker.helpers.arrayElement(Object.values(TypeKind)),
 						undefined,
 					]),
 					lookup: faker.helpers.arrayElement([
@@ -3526,9 +3522,9 @@ export const getDictionariesSearchTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesLocateTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStruct> = {},
-): WebitelProtoDataStruct => ({
+export const getLocateTypeMixin3ResponseMock = (
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -3826,7 +3822,7 @@ export const getDictionariesLocateTypeResponseMock = (
 				undefined,
 			]),
 			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+				faker.helpers.arrayElement(Object.values(TypeKind)),
 				undefined,
 			]),
 			lookup: faker.helpers.arrayElement([
@@ -4084,9 +4080,9 @@ export const getDictionariesLocateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesCreateTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStruct> = {},
-): WebitelProtoDataStruct => ({
+export const getCreateTypeMixin3ResponseMock = (
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -4384,7 +4380,7 @@ export const getDictionariesCreateTypeResponseMock = (
 				undefined,
 			]),
 			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+				faker.helpers.arrayElement(Object.values(TypeKind)),
 				undefined,
 			]),
 			lookup: faker.helpers.arrayElement([
@@ -4642,9 +4638,9 @@ export const getDictionariesCreateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesUpdateTypeResponseMock = (
-	overrideResponse: Partial<WebitelProtoDataStruct> = {},
-): WebitelProtoDataStruct => ({
+export const getUpdateTypeMixin3ResponseMock = (
+	overrideResponse: Partial<ProtodataStruct> = {},
+): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -4942,7 +4938,7 @@ export const getDictionariesUpdateTypeResponseMock = (
 				undefined,
 			]),
 			kind: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelProtoDataTypeKind)),
+				faker.helpers.arrayElement(Object.values(TypeKind)),
 				undefined,
 			]),
 			lookup: faker.helpers.arrayElement([
@@ -5200,12 +5196,12 @@ export const getDictionariesUpdateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getDictionariesDeleteDataMockHandler = (
+export const getDeleteDataMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataDataset
+		| DataDataset
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelProtoDataDataset> | WebitelProtoDataDataset),
+		  ) => Promise<DataDataset> | DataDataset),
 ) => {
 	return http.delete('*/dictionaries/:repo', async (info) => {
 		await delay(1000);
@@ -5216,19 +5212,19 @@ export const getDictionariesDeleteDataMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesDeleteDataResponseMock(),
+					: getDeleteDataResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesSearchDataMockHandler = (
+export const getSearchDataMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataDataset
+		| DataDataset
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelProtoDataDataset> | WebitelProtoDataDataset),
+		  ) => Promise<DataDataset> | DataDataset),
 ) => {
 	return http.get('*/dictionaries/:repo', async (info) => {
 		await delay(1000);
@@ -5239,19 +5235,19 @@ export const getDictionariesSearchDataMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesSearchDataResponseMock(),
+					: getSearchDataResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesCreateDataMockHandler = (
+export const getCreateDataMockHandler = (
 	overrideResponse?:
-		| DictionariesCreateData200
+		| CreateData200
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<DictionariesCreateData200> | DictionariesCreateData200),
+		  ) => Promise<CreateData200> | CreateData200),
 ) => {
 	return http.post('*/dictionaries/:repo', async (info) => {
 		await delay(1000);
@@ -5262,19 +5258,19 @@ export const getDictionariesCreateDataMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesCreateDataResponseMock(),
+					: getCreateDataResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesImportCSVMockHandler = (
+export const getImportCSVMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataDataset
+		| DataDataset
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelProtoDataDataset> | WebitelProtoDataDataset),
+		  ) => Promise<DataDataset> | DataDataset),
 ) => {
 	return http.post('*/dictionaries/:repo/csv', async (info) => {
 		await delay(1000);
@@ -5285,19 +5281,19 @@ export const getDictionariesImportCSVMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesImportCSVResponseMock(),
+					: getImportCSVResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesDeleteData2MockHandler = (
+export const getDeleteData2MockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataDataset
+		| DataDataset
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelProtoDataDataset> | WebitelProtoDataDataset),
+		  ) => Promise<DataDataset> | DataDataset),
 ) => {
 	return http.delete('*/dictionaries/:repo/:id', async (info) => {
 		await delay(1000);
@@ -5308,19 +5304,19 @@ export const getDictionariesDeleteData2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesDeleteData2ResponseMock(),
+					: getDeleteData2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesLocateDataMockHandler = (
+export const getLocateDataMockHandler = (
 	overrideResponse?:
-		| DictionariesLocateData200
+		| LocateData200
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<DictionariesLocateData200> | DictionariesLocateData200),
+		  ) => Promise<LocateData200> | LocateData200),
 ) => {
 	return http.get('*/dictionaries/:repo/:id', async (info) => {
 		await delay(1000);
@@ -5331,19 +5327,19 @@ export const getDictionariesLocateDataMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesLocateDataResponseMock(),
+					: getLocateDataResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesUpdateDataMockHandler = (
+export const getUpdateDataMockHandler = (
 	overrideResponse?:
-		| DictionariesUpdateData200
+		| UpdateData200
 		| ((
 				info: Parameters<Parameters<typeof http.patch>[1]>[0],
-		  ) => Promise<DictionariesUpdateData200> | DictionariesUpdateData200),
+		  ) => Promise<UpdateData200> | UpdateData200),
 ) => {
 	return http.patch('*/dictionaries/:repo/:id', async (info) => {
 		await delay(1000);
@@ -5354,19 +5350,19 @@ export const getDictionariesUpdateDataMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesUpdateDataResponseMock(),
+					: getUpdateDataResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesUpdateData2MockHandler = (
+export const getUpdateData2MockHandler = (
 	overrideResponse?:
-		| DictionariesUpdateData2200
+		| UpdateData2200
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<DictionariesUpdateData2200> | DictionariesUpdateData2200),
+		  ) => Promise<UpdateData2200> | UpdateData2200),
 ) => {
 	return http.put('*/dictionaries/:repo/:id', async (info) => {
 		await delay(1000);
@@ -5377,19 +5373,19 @@ export const getDictionariesUpdateData2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesUpdateData2ResponseMock(),
+					: getUpdateData2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesDeleteTypeMockHandler = (
+export const getDeleteTypeMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStructList
+		| DataStructList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelProtoDataStructList> | WebitelProtoDataStructList),
+		  ) => Promise<DataStructList> | DataStructList),
 ) => {
 	return http.delete('*/types/dictionaries', async (info) => {
 		await delay(1000);
@@ -5400,19 +5396,19 @@ export const getDictionariesDeleteTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesDeleteTypeResponseMock(),
+					: getDeleteTypeResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesSearchTypeMockHandler = (
+export const getSearchTypeMockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStructList
+		| DataStructList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelProtoDataStructList> | WebitelProtoDataStructList),
+		  ) => Promise<DataStructList> | DataStructList),
 ) => {
 	return http.get('*/types/dictionaries', async (info) => {
 		await delay(1000);
@@ -5423,19 +5419,19 @@ export const getDictionariesSearchTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesSearchTypeResponseMock(),
+					: getSearchTypeResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesLocateTypeMockHandler = (
+export const getLocateTypeMixin3MockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelProtoDataStruct> | WebitelProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 ) => {
 	return http.get('*/types/dictionaries/:repo', async (info) => {
 		await delay(1000);
@@ -5446,19 +5442,19 @@ export const getDictionariesLocateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesLocateTypeResponseMock(),
+					: getLocateTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesCreateTypeMockHandler = (
+export const getCreateTypeMixin3MockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelProtoDataStruct> | WebitelProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 ) => {
 	return http.post('*/types/dictionaries/:repo', async (info) => {
 		await delay(1000);
@@ -5469,19 +5465,19 @@ export const getDictionariesCreateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesCreateTypeResponseMock(),
+					: getCreateTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDictionariesUpdateTypeMockHandler = (
+export const getUpdateTypeMixin3MockHandler = (
 	overrideResponse?:
-		| WebitelProtoDataStruct
+		| ProtodataStruct
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelProtoDataStruct> | WebitelProtoDataStruct),
+		  ) => Promise<ProtodataStruct> | ProtodataStruct),
 ) => {
 	return http.put('*/types/dictionaries/:repo', async (info) => {
 		await delay(1000);
@@ -5492,24 +5488,24 @@ export const getDictionariesUpdateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDictionariesUpdateTypeResponseMock(),
+					: getUpdateTypeMixin3ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getDictionariesMock = () => [
-	getDictionariesDeleteDataMockHandler(),
-	getDictionariesSearchDataMockHandler(),
-	getDictionariesCreateDataMockHandler(),
-	getDictionariesImportCSVMockHandler(),
-	getDictionariesDeleteData2MockHandler(),
-	getDictionariesLocateDataMockHandler(),
-	getDictionariesUpdateDataMockHandler(),
-	getDictionariesUpdateData2MockHandler(),
-	getDictionariesDeleteTypeMockHandler(),
-	getDictionariesSearchTypeMockHandler(),
-	getDictionariesLocateTypeMockHandler(),
-	getDictionariesCreateTypeMockHandler(),
-	getDictionariesUpdateTypeMockHandler(),
+	getDeleteDataMockHandler(),
+	getSearchDataMockHandler(),
+	getCreateDataMockHandler(),
+	getImportCSVMockHandler(),
+	getDeleteData2MockHandler(),
+	getLocateDataMockHandler(),
+	getUpdateDataMockHandler(),
+	getUpdateData2MockHandler(),
+	getDeleteTypeMockHandler(),
+	getSearchTypeMockHandler(),
+	getLocateTypeMixin3MockHandler(),
+	getCreateTypeMixin3MockHandler(),
+	getUpdateTypeMixin3MockHandler(),
 ];

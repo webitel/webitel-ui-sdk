@@ -9,13 +9,13 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	DynamicGroupsListDynamicGroupsParams,
-	DynamicGroupsLocateDynamicGroupParams,
-	WebitelContactsCreateDynamicGroupRequest,
-	WebitelContactsDynamicGroup,
-	WebitelContactsDynamicGroupInput,
-	WebitelContactsDynamicGroupList,
-	WebitelContactsLocateDynamicGroupResponse,
+	ContactsCreateDynamicGroupRequest,
+	ContactsDynamicGroup,
+	ContactsDynamicGroupInput,
+	ContactsDynamicGroupList,
+	ContactsLocateDynamicGroupResponse,
+	ListDynamicGroupsParams,
+	LocateDynamicGroupParams,
 } from '.././_models';
 
 // --- header start
@@ -29,10 +29,10 @@ export const // --- title start
 			/**
 			 * @summary Retrieve a list of dynamic groups or search dynamic groups
 			 */
-			const dynamicGroupsListDynamicGroups = <
-				TData = AxiosResponse<WebitelContactsDynamicGroupList>,
+			const listDynamicGroups = <
+				TData = AxiosResponse<ContactsDynamicGroupList>,
 			>(
-				params?: DynamicGroupsListDynamicGroupsParams,
+				params?: ListDynamicGroupsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/contacts/groups/dynamic', {
@@ -43,24 +43,20 @@ export const // --- title start
 			/**
 			 * @summary Create a new dynamic group
 			 */
-			const dynamicGroupsCreateDynamicGroup = <
-				TData = AxiosResponse<WebitelContactsDynamicGroup>,
-			>(
-				webitelContactsCreateDynamicGroupRequest: WebitelContactsCreateDynamicGroupRequest,
+			const createDynamicGroup = <TData = AxiosResponse<ContactsDynamicGroup>>(
+				contactsCreateDynamicGroupRequest: ContactsCreateDynamicGroupRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					'/contacts/groups/dynamic',
-					webitelContactsCreateDynamicGroupRequest,
+					contactsCreateDynamicGroupRequest,
 					options,
 				);
 			};
 			/**
 			 * @summary Delete a dynamic group
 			 */
-			const dynamicGroupsDeleteDynamicGroup = <
-				TData = AxiosResponse<WebitelContactsDynamicGroup>,
-			>(
+			const deleteDynamicGroup = <TData = AxiosResponse<ContactsDynamicGroup>>(
 				id: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -69,11 +65,11 @@ export const // --- title start
 			/**
 			 * @summary Locate a dynamic group by ID
 			 */
-			const dynamicGroupsLocateDynamicGroup = <
-				TData = AxiosResponse<WebitelContactsLocateDynamicGroupResponse>,
+			const locateDynamicGroup = <
+				TData = AxiosResponse<ContactsLocateDynamicGroupResponse>,
 			>(
 				id: string,
-				params?: DynamicGroupsLocateDynamicGroupParams,
+				params?: LocateDynamicGroupParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/groups/${id}/dynamic`, {
@@ -84,57 +80,48 @@ export const // --- title start
 			/**
 			 * @summary Update an existing dynamic group
 			 */
-			const dynamicGroupsUpdateDynamicGroup2 = <
-				TData = AxiosResponse<WebitelContactsDynamicGroup>,
-			>(
+			const updateDynamicGroup2 = <TData = AxiosResponse<ContactsDynamicGroup>>(
 				id: string,
-				webitelContactsDynamicGroupInput: WebitelContactsDynamicGroupInput,
+				contactsDynamicGroupInput: ContactsDynamicGroupInput,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/contacts/groups/${id}/dynamic`,
-					webitelContactsDynamicGroupInput,
+					contactsDynamicGroupInput,
 					options,
 				);
 			};
 			/**
 			 * @summary Update an existing dynamic group
 			 */
-			const dynamicGroupsUpdateDynamicGroup = <
-				TData = AxiosResponse<WebitelContactsDynamicGroup>,
-			>(
+			const updateDynamicGroup = <TData = AxiosResponse<ContactsDynamicGroup>>(
 				id: string,
-				webitelContactsDynamicGroupInput: WebitelContactsDynamicGroupInput,
+				contactsDynamicGroupInput: ContactsDynamicGroupInput,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/groups/${id}/dynamic`,
-					webitelContactsDynamicGroupInput,
+					contactsDynamicGroupInput,
 					options,
 				);
 			};
 
 			// --- footer start
 			return {
-				dynamicGroupsListDynamicGroups,
-				dynamicGroupsCreateDynamicGroup,
-				dynamicGroupsDeleteDynamicGroup,
-				dynamicGroupsLocateDynamicGroup,
-				dynamicGroupsUpdateDynamicGroup2,
-				dynamicGroupsUpdateDynamicGroup,
+				listDynamicGroups,
+				createDynamicGroup,
+				deleteDynamicGroup,
+				locateDynamicGroup,
+				updateDynamicGroup2,
+				updateDynamicGroup,
 			};
 		};
-export type DynamicGroupsListDynamicGroupsResult =
-	AxiosResponse<WebitelContactsDynamicGroupList>;
-export type DynamicGroupsCreateDynamicGroupResult =
-	AxiosResponse<WebitelContactsDynamicGroup>;
-export type DynamicGroupsDeleteDynamicGroupResult =
-	AxiosResponse<WebitelContactsDynamicGroup>;
-export type DynamicGroupsLocateDynamicGroupResult =
-	AxiosResponse<WebitelContactsLocateDynamicGroupResponse>;
-export type DynamicGroupsUpdateDynamicGroup2Result =
-	AxiosResponse<WebitelContactsDynamicGroup>;
-export type DynamicGroupsUpdateDynamicGroupResult =
-	AxiosResponse<WebitelContactsDynamicGroup>;
+export type ListDynamicGroupsResult = AxiosResponse<ContactsDynamicGroupList>;
+export type CreateDynamicGroupResult = AxiosResponse<ContactsDynamicGroup>;
+export type DeleteDynamicGroupResult = AxiosResponse<ContactsDynamicGroup>;
+export type LocateDynamicGroupResult =
+	AxiosResponse<ContactsLocateDynamicGroupResponse>;
+export type UpdateDynamicGroup2Result = AxiosResponse<ContactsDynamicGroup>;
+export type UpdateDynamicGroupResult = AxiosResponse<ContactsDynamicGroup>;
 
 // --- footer end

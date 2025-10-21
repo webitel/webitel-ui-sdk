@@ -20,6 +20,7 @@ import back from './back.svg';
 import bell from './bell.svg';
 import bellBadged from './bell-badged.svg';
 import bot from './bot.svg';
+import breadCrumbs from './bread-crumbs.svg';
 import bucket from './bucket.svg';
 import calendar from './calendar.svg';
 import call from './call.svg';
@@ -40,7 +41,9 @@ import callRinging from './call-ringing.svg';
 import callRingingFilled from './call-ringing--filled.svg';
 import callTransfer from './call-transfer.svg';
 import callTransferFilled from './call-transfer--filled.svg';
+import caseFilled from './case--filled.svg';
 import caseAuthor from './case-author.svg';
+import caseDone from './case-done.svg';
 import cases from './cases.svg';
 import chat from './chat.svg';
 import chatFilled from './chat--filled.svg';
@@ -60,6 +63,7 @@ import chatTransferFilled from './chat-transfer--filled.svg';
 import checkbox from './checkbox.svg';
 import checkboxChecked from './checkbox--checked.svg';
 import checkboxCheckedFilled from './checkbox--checked--filled.svg';
+import checkboxTick from './checkbox-tick.svg';
 import clear from './clear.svg';
 import close from './close.svg';
 import closeFilled from './close--filled.svg';
@@ -67,6 +71,7 @@ import collapse from './collapse.svg';
 import columnSelect from './column-select.svg';
 import comment from './comment.svg';
 import conference from './conference.svg';
+import consultativeTransfer from './consultative-transfer.svg';
 import contacts from './contacts.svg';
 import copy from './copy.svg';
 import customChatGateway from './custom-chat-gateway.svg';
@@ -74,6 +79,7 @@ import darkMode from './dark-mode.svg';
 import docs from './docs.svg';
 import done from './done.svg';
 import download from './download.svg';
+import downloadPdf from './download-pdf.svg'
 import edit from './edit.svg';
 import elevenlabs from './elevenlabs.svg';
 import email from './email.svg';
@@ -82,6 +88,7 @@ import emailOutbound from './email-outbound.svg';
 import expand from './expand.svg';
 import eyeClosed from './eye--closed.svg';
 import eyeOpened from './eye--opened.svg';
+import falseIc from './false-ic.svg';
 import filter from './filter.svg';
 import flows from './flows.svg';
 import generate from './generate.svg';
@@ -99,6 +106,7 @@ import json from './json.svg';
 import link from './link.svg';
 import loadPreset from './load-preset.svg';
 import lock from './lock.svg';
+import log from './log.svg';
 import logout from './logout.svg';
 import mail from './mail.svg';
 import mailColor from './mail--color.svg';
@@ -128,6 +136,8 @@ import options from './options.svg';
 import pause from './pause.svg';
 import pin from './pin.svg';
 import play from './play.svg';
+import playerEnterFullscreen from './player-enter-fullscreen.svg';
+import playerExitFullscreen from './player-exit-fullscreen.svg';
 import plus from './plus.svg';
 import plyrAirplay from './plyr-airplay.svg';
 import plyrCaptionsOff from './plyr-captions-off.svg';
@@ -158,6 +168,8 @@ import radio from './radio.svg';
 import radioChecked from './radio--checked.svg';
 import rec from './rec.svg';
 import recOff from './rec-off.svg';
+import recordStart from './record-start.svg';
+import recordStop from './record-stop.svg';
 import redo from './redo.svg';
 import refresh from './refresh.svg';
 import reporter from './reporter.svg';
@@ -166,10 +178,14 @@ import roundedInfo from './rounded-info.svg';
 import save from './save.svg';
 import saveAs from './save-as.svg';
 import scorecard from './scorecard.svg';
+import screenshot from './screenshot.svg';
+import screenshotDone from './screenshot-done.svg';
+import screenshotFalse from './screenshot-false.svg';
 import search from './search.svg';
 import selectCustomValueEnter from './select-custom-value-enter.svg';
 import sendArrow from './send-arrow.svg';
 import settings from './settings.svg';
+import sharingEnd from './sharing-end.svg';
 import socialMedia from './social-media.svg';
 import sortArrowDown from './sort-arrow-down.svg';
 import sortArrowUp from './sort-arrow-up.svg';
@@ -190,6 +206,7 @@ import treeCorner from './tree-corner.svg';
 import treeCross from './tree-cross.svg';
 import treeExpand from './tree-expand.svg';
 import treeLine from './tree-line.svg';
+import trueIc from './true-ic.svg';
 import ttsDownload from './tts-download.svg';
 import undo from './undo.svg';
 import union from './union.svg';
@@ -227,6 +244,7 @@ export default objCamelToKebab({
   bell,
   bellBadged,
   bucket,
+  breadCrumbs,
   bot,
   calendar,
   darkMode,
@@ -250,10 +268,13 @@ export default objCamelToKebab({
   'call-ringing--filled': callRingingFilled,
   callTransfer,
   'call-transfer--filled': callTransferFilled,
+  consultativeTransfer,
   updateCalls,
 
   caseAuthor,
   cases,
+  'case--filled': caseFilled,
+  caseDone,
   chat,
   'chat--filled': chatFilled,
   chatEmoji,
@@ -297,6 +318,7 @@ export default objCamelToKebab({
   'eye--opened': eyeOpened,
   filter,
   flows,
+  falseIc,
   generate,
   google,
   group,
@@ -373,6 +395,7 @@ export default objCamelToKebab({
   treeLine,
   treeCorner,
   treeCross,
+  trueIc,
   stt,
   sttDownload,
   sttSearch,
@@ -416,6 +439,18 @@ export default objCamelToKebab({
   plyrRewind,
   plyrSettings,
   plyrVolume,
+  playerExitFullscreen,
+  playerEnterFullscreen,
   loadPreset,
   quickReplies,
+  checkboxTick,
+  log,
+  downloadPdf,
+
+  recordStart,
+  recordStop,
+  screenshot,
+  screenshotDone,
+  screenshotFalse,
+  sharingEnd,
 });

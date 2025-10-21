@@ -4,7 +4,6 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { StorageCreateCognitiveProfileRequestProperties } from './storageCreateCognitiveProfileRequestProperties';
 import type { StorageProviderType } from './storageProviderType';
 import type { StorageServiceType } from './storageServiceType';
 
@@ -16,7 +15,6 @@ export interface StorageCreateCognitiveProfileRequest {
 	description?: string;
 	enabled?: boolean;
 	name: string;
-	properties: StorageCreateCognitiveProfileRequestProperties;
 	provider: StorageProviderType;
 	service: StorageServiceType;
 }

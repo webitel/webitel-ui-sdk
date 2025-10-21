@@ -1,12 +1,16 @@
 import AbstractUserStatus from './AbstractUserStatus/AbstractUserStatus.enum.js';
 import AgentStatus from './AgentStatus/AgentStatus.enum.js';
 import { ButtonColor } from './ButtonColor/ButtonColor';
+import { ButtonSize } from './ButtonSize/ButtonSize.js';
+import { ButtonVariant } from './ButtonVariant/ButtonVariant';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
+import { EmptyCause } from './EmptyCause/EmptyCause';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
+import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import QueueType from './QueueType/QueueType.enum.js';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
@@ -25,13 +29,16 @@ export {
   AgentStatus,
   AuditorSections,
   ButtonColor,
+  ButtonVariant,
   ChatGatewayProvider,
   ChipColor,
   ComponentSize,
   CrmSections,
   CrudAction,
+  EmptyCause,
   IconAction,
   IconColor,
+  ProcessingTableColumnType,
   QueueType,
   RelativeDatetimeValue,
   SupervisorSections,

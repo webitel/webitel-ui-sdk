@@ -5,12 +5,14 @@
  * OpenAPI spec version: 24.04.0
  */
 
+import type { StorageFileMalwareScan } from './storageFileMalwareScan';
 import type { StorageThumbnail } from './storageThumbnail';
 import type { StorageUploadStatusCode } from './storageUploadStatusCode';
 
 export interface StorageUploadFileUrlResponse {
 	code?: StorageUploadStatusCode;
 	id?: string;
+	malware?: StorageFileMalwareScan;
 	mime?: string;
 	server?: string;
 	sha256Sum?: string;

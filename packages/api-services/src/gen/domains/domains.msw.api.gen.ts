@@ -16,10 +16,9 @@ import type {
 	ApiUpdateDomainResponse,
 } from '.././_models';
 
-export const getDomainsDeleteDomainResponseMock =
-	(): ApiDeleteDomainResponse => ({});
+export const getDeleteDomainResponseMock = (): ApiDeleteDomainResponse => ({});
 
-export const getDomainsReadDomainResponseMock = (
+export const getReadDomainResponseMock = (
 	overrideResponse: Partial<ApiReadDomainResponse> = {},
 ): ApiReadDomainResponse => ({
 	domain: faker.helpers.arrayElement([
@@ -90,7 +89,7 @@ export const getDomainsReadDomainResponseMock = (
 	...overrideResponse,
 });
 
-export const getDomainsSearchDomainsResponseMock = (
+export const getSearchDomainsResponseMock = (
 	overrideResponse: Partial<ApiSearchDomainsResponse> = {},
 ): ApiSearchDomainsResponse => ({
 	domains: faker.helpers.arrayElement([
@@ -164,13 +163,11 @@ export const getDomainsSearchDomainsResponseMock = (
 	...overrideResponse,
 });
 
-export const getDomainsCreateDomainResponseMock =
-	(): ApiCreateDomainResponse => ({});
+export const getCreateDomainResponseMock = (): ApiCreateDomainResponse => ({});
 
-export const getDomainsDeleteDomain2ResponseMock =
-	(): ApiDeleteDomainResponse => ({});
+export const getDeleteDomain2ResponseMock = (): ApiDeleteDomainResponse => ({});
 
-export const getDomainsReadDomain2ResponseMock = (
+export const getReadDomain2ResponseMock = (
 	overrideResponse: Partial<ApiReadDomainResponse> = {},
 ): ApiReadDomainResponse => ({
 	domain: faker.helpers.arrayElement([
@@ -241,7 +238,7 @@ export const getDomainsReadDomain2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDomainsUpdateDomain2ResponseMock = (
+export const getUpdateDomain2ResponseMock = (
 	overrideResponse: Partial<ApiUpdateDomainResponse> = {},
 ): ApiUpdateDomainResponse => ({
 	domain: faker.helpers.arrayElement([
@@ -312,7 +309,7 @@ export const getDomainsUpdateDomain2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDomainsUpdateDomainResponseMock = (
+export const getUpdateDomainResponseMock = (
 	overrideResponse: Partial<ApiUpdateDomainResponse> = {},
 ): ApiUpdateDomainResponse => ({
 	domain: faker.helpers.arrayElement([
@@ -383,7 +380,7 @@ export const getDomainsUpdateDomainResponseMock = (
 	...overrideResponse,
 });
 
-export const getDomainsDeleteDomainMockHandler = (
+export const getDeleteDomainMockHandler = (
 	overrideResponse?:
 		| ApiDeleteDomainResponse
 		| ((
@@ -399,14 +396,14 @@ export const getDomainsDeleteDomainMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsDeleteDomainResponseMock(),
+					: getDeleteDomainResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDomainsReadDomainMockHandler = (
+export const getReadDomainMockHandler = (
 	overrideResponse?:
 		| ApiReadDomainResponse
 		| ((
@@ -422,14 +419,14 @@ export const getDomainsReadDomainMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsReadDomainResponseMock(),
+					: getReadDomainResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDomainsSearchDomainsMockHandler = (
+export const getSearchDomainsMockHandler = (
 	overrideResponse?:
 		| ApiSearchDomainsResponse
 		| ((
@@ -445,14 +442,14 @@ export const getDomainsSearchDomainsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsSearchDomainsResponseMock(),
+					: getSearchDomainsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDomainsCreateDomainMockHandler = (
+export const getCreateDomainMockHandler = (
 	overrideResponse?:
 		| ApiCreateDomainResponse
 		| ((
@@ -468,14 +465,14 @@ export const getDomainsCreateDomainMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsCreateDomainResponseMock(),
+					: getCreateDomainResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDomainsDeleteDomain2MockHandler = (
+export const getDeleteDomain2MockHandler = (
 	overrideResponse?:
 		| ApiDeleteDomainResponse
 		| ((
@@ -491,14 +488,14 @@ export const getDomainsDeleteDomain2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsDeleteDomain2ResponseMock(),
+					: getDeleteDomain2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDomainsReadDomain2MockHandler = (
+export const getReadDomain2MockHandler = (
 	overrideResponse?:
 		| ApiReadDomainResponse
 		| ((
@@ -514,14 +511,14 @@ export const getDomainsReadDomain2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsReadDomain2ResponseMock(),
+					: getReadDomain2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDomainsUpdateDomain2MockHandler = (
+export const getUpdateDomain2MockHandler = (
 	overrideResponse?:
 		| ApiUpdateDomainResponse
 		| ((
@@ -537,14 +534,14 @@ export const getDomainsUpdateDomain2MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsUpdateDomain2ResponseMock(),
+					: getUpdateDomain2ResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDomainsUpdateDomainMockHandler = (
+export const getUpdateDomainMockHandler = (
 	overrideResponse?:
 		| ApiUpdateDomainResponse
 		| ((
@@ -560,19 +557,19 @@ export const getDomainsUpdateDomainMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDomainsUpdateDomainResponseMock(),
+					: getUpdateDomainResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getDomainsMock = () => [
-	getDomainsDeleteDomainMockHandler(),
-	getDomainsReadDomainMockHandler(),
-	getDomainsSearchDomainsMockHandler(),
-	getDomainsCreateDomainMockHandler(),
-	getDomainsDeleteDomain2MockHandler(),
-	getDomainsReadDomain2MockHandler(),
-	getDomainsUpdateDomain2MockHandler(),
-	getDomainsUpdateDomainMockHandler(),
+	getDeleteDomainMockHandler(),
+	getReadDomainMockHandler(),
+	getSearchDomainsMockHandler(),
+	getCreateDomainMockHandler(),
+	getDeleteDomain2MockHandler(),
+	getReadDomain2MockHandler(),
+	getUpdateDomain2MockHandler(),
+	getUpdateDomainMockHandler(),
 ];

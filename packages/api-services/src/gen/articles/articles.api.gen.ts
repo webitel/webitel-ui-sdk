@@ -9,21 +9,21 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ArticlesArticlesAttachmentListParams,
-	ArticlesArticleVersionsListParams,
-	ArticlesCreateArticleParams,
-	ArticlesDeleteArticleParams,
-	ArticlesListArticles2Params,
-	ArticlesListArticlesParams,
-	ArticlesLocateArticleParams,
-	ArticlesUpdateArticleBody,
-	ArticlesUpdateArticleParams,
-	WebitelKnowledgebaseArticle,
-	WebitelKnowledgebaseArticleList,
-	WebitelKnowledgebaseArticleVersion,
-	WebitelKnowledgebaseArticleVersionList,
-	WebitelKnowledgebaseAttachmentList,
-	WebitelKnowledgebaseInputArticle,
+	ArticlesAttachmentListParams,
+	ArticleVersionsListParams,
+	CreateArticleParams,
+	DeleteArticleParams,
+	KnowledgebaseArticle,
+	KnowledgebaseArticleList,
+	KnowledgebaseArticleVersion,
+	KnowledgebaseArticleVersionList,
+	KnowledgebaseAttachmentList,
+	KnowledgebaseInputArticle,
+	ListArticles2Params,
+	ListArticlesParams,
+	LocateArticleParams,
+	UpdateArticleBody,
+	UpdateArticleParams,
 } from '.././_models';
 
 // --- header start
@@ -37,11 +37,9 @@ export const // --- title start
 			/**
 			 * @summary List of the Space's Article(s).
 			 */
-			const articlesListArticles = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticleList>,
-			>(
+			const listArticles = <TData = AxiosResponse<KnowledgebaseArticleList>>(
 				spaceId: string,
-				params?: ArticlesListArticlesParams,
+				params?: ListArticlesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/spaces/${spaceId}/articles`, {
@@ -49,29 +47,27 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const articlesCreateArticle = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticleList>,
-			>(
+			const createArticle = <TData = AxiosResponse<KnowledgebaseArticleList>>(
 				spaceId: string,
-				webitelKnowledgebaseInputArticle: WebitelKnowledgebaseInputArticle,
-				params?: ArticlesCreateArticleParams,
+				knowledgebaseInputArticle: KnowledgebaseInputArticle,
+				params?: CreateArticleParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/spaces/${spaceId}/articles`,
-					webitelKnowledgebaseInputArticle,
+					knowledgebaseInputArticle,
 					{
 						...options,
 						params: { ...params, ...options?.params },
 					},
 				);
 			};
-			const articlesArticlesAttachmentList = <
-				TData = AxiosResponse<WebitelKnowledgebaseAttachmentList>,
+			const articlesAttachmentList = <
+				TData = AxiosResponse<KnowledgebaseAttachmentList>,
 			>(
 				spaceId: string,
 				articleId: string,
-				params?: ArticlesArticlesAttachmentListParams,
+				params?: ArticlesAttachmentListParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(
@@ -85,12 +81,10 @@ export const // --- title start
 			/**
 			 * @summary List of the Space's Article(s).
 			 */
-			const articlesListArticles2 = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticleList>,
-			>(
+			const listArticles2 = <TData = AxiosResponse<KnowledgebaseArticleList>>(
 				spaceId: string,
 				articleId: string,
-				params?: ArticlesListArticles2Params,
+				params?: ListArticles2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/spaces/${spaceId}/articles/${articleId}/childrens`, {
@@ -98,12 +92,12 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const articlesArticleVersionsList = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticleVersionList>,
+			const articleVersionsList = <
+				TData = AxiosResponse<KnowledgebaseArticleVersionList>,
 			>(
 				spaceId: string,
 				articleId: string,
-				params?: ArticlesArticleVersionsListParams,
+				params?: ArticleVersionsListParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/spaces/${spaceId}/articles/${articleId}/history`, {
@@ -111,8 +105,8 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const articlesLocateArticleVersion = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticleVersion>,
+			const locateArticleVersion = <
+				TData = AxiosResponse<KnowledgebaseArticleVersion>,
 			>(
 				spaceId: string,
 				articleId: string,
@@ -127,12 +121,10 @@ export const // --- title start
 			/**
 			 * @summary Remove the space's Article association.
 			 */
-			const articlesDeleteArticle = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticle>,
-			>(
+			const deleteArticle = <TData = AxiosResponse<KnowledgebaseArticle>>(
 				spaceId: string,
 				etag: string,
-				params?: ArticlesDeleteArticleParams,
+				params?: DeleteArticleParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/spaces/${spaceId}/articles/${etag}`, {
@@ -143,12 +135,10 @@ export const // --- title start
 			/**
 			 * @summary Locate the space's Article association.
 			 */
-			const articlesLocateArticle = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticle>,
-			>(
+			const locateArticle = <TData = AxiosResponse<KnowledgebaseArticle>>(
 				spaceId: string,
 				etag: string,
-				params?: ArticlesLocateArticleParams,
+				params?: LocateArticleParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/spaces/${spaceId}/articles/${etag}`, {
@@ -159,18 +149,16 @@ export const // --- title start
 			/**
 			 * @summary Update the space's Article details.
 			 */
-			const articlesUpdateArticle = <
-				TData = AxiosResponse<WebitelKnowledgebaseArticleList>,
-			>(
+			const updateArticle = <TData = AxiosResponse<KnowledgebaseArticleList>>(
 				spaceId: string,
 				etag: string,
-				articlesUpdateArticleBody: ArticlesUpdateArticleBody,
-				params?: ArticlesUpdateArticleParams,
+				updateArticleBody: UpdateArticleBody,
+				params?: UpdateArticleParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/spaces/${spaceId}/articles/${etag}`,
-					articlesUpdateArticleBody,
+					updateArticleBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -180,34 +168,28 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				articlesListArticles,
-				articlesCreateArticle,
-				articlesArticlesAttachmentList,
-				articlesListArticles2,
-				articlesArticleVersionsList,
-				articlesLocateArticleVersion,
-				articlesDeleteArticle,
-				articlesLocateArticle,
-				articlesUpdateArticle,
+				listArticles,
+				createArticle,
+				articlesAttachmentList,
+				listArticles2,
+				articleVersionsList,
+				locateArticleVersion,
+				deleteArticle,
+				locateArticle,
+				updateArticle,
 			};
 		};
-export type ArticlesListArticlesResult =
-	AxiosResponse<WebitelKnowledgebaseArticleList>;
-export type ArticlesCreateArticleResult =
-	AxiosResponse<WebitelKnowledgebaseArticleList>;
-export type ArticlesArticlesAttachmentListResult =
-	AxiosResponse<WebitelKnowledgebaseAttachmentList>;
-export type ArticlesListArticles2Result =
-	AxiosResponse<WebitelKnowledgebaseArticleList>;
-export type ArticlesArticleVersionsListResult =
-	AxiosResponse<WebitelKnowledgebaseArticleVersionList>;
-export type ArticlesLocateArticleVersionResult =
-	AxiosResponse<WebitelKnowledgebaseArticleVersion>;
-export type ArticlesDeleteArticleResult =
-	AxiosResponse<WebitelKnowledgebaseArticle>;
-export type ArticlesLocateArticleResult =
-	AxiosResponse<WebitelKnowledgebaseArticle>;
-export type ArticlesUpdateArticleResult =
-	AxiosResponse<WebitelKnowledgebaseArticleList>;
+export type ListArticlesResult = AxiosResponse<KnowledgebaseArticleList>;
+export type CreateArticleResult = AxiosResponse<KnowledgebaseArticleList>;
+export type ArticlesAttachmentListResult =
+	AxiosResponse<KnowledgebaseAttachmentList>;
+export type ListArticles2Result = AxiosResponse<KnowledgebaseArticleList>;
+export type ArticleVersionsListResult =
+	AxiosResponse<KnowledgebaseArticleVersionList>;
+export type LocateArticleVersionResult =
+	AxiosResponse<KnowledgebaseArticleVersion>;
+export type DeleteArticleResult = AxiosResponse<KnowledgebaseArticle>;
+export type LocateArticleResult = AxiosResponse<KnowledgebaseArticle>;
+export type UpdateArticleResult = AxiosResponse<KnowledgebaseArticleList>;
 
 // --- footer end

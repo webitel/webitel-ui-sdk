@@ -7,6 +7,7 @@
     item-data="name"
     multiple
     children-prop="services"
+    allow-parent
   />
 </template>
 

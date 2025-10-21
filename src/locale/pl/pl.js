@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -51,13 +52,6 @@ export default {
     expand: 'Rozwiń',
     collapse: 'Zwiń',
     generate: 'Generuj',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Od',
     to: 'Do',
     tts: 'Tekst na mowę',
@@ -89,6 +83,7 @@ export default {
     unassigned: 'Nieprzypisane',
     showUnassigned: 'Pokaż nieprzypisane',
     group: 'Grupa',
+    dateTime: 'Data i godzina',
     updatedBy: (/*{ named }*/) => {
       return 'Edytowane';
     },
@@ -130,6 +125,12 @@ export default {
     contact: 'Kontakt | Kontakty',
     column: 'Kolumna | Kolumny',
     notification: 'Powiadomienie | Powiadomienia',
+    screencast: 'Nagranie ekranu',
+    extension: 'Rozszerzenie',
+    password: 'Hasło',
+    number: 'Numer',
+    expireAt: 'Wygasa',
+    destination: 'Cel',
   },
   // date-related texts
   date: {
@@ -175,6 +176,12 @@ export default {
     transcription: 'Transkrypcja',
     attachment: 'Załącznik | Załączniki',
     owner: 'Właściciel | Właściciele',
+    customization: {
+      customization: 'Dostosowanie | Dostosowania',
+    },
+    customLookup: {
+      customLookup: 'Dostosowanie | Dostosowania',
+    },
     queue: {
       queue: 'Kolejka | Kolejki',
       type: {
@@ -220,6 +227,8 @@ export default {
       quickReplies: 'Szybka odpowiedź | Szybkie odpowiedzi',
       quickRepliesEmpty: 'Nie ma jeszcze szybkich odpowiedzi',
     },
+    screenRecordings: 'Nagranie ekranu | Nagrania ekranu',
+    screenshots: 'Zrzut ekranu | Zrzuty ekranu',
   },
   channel: {
     state: {
@@ -269,6 +278,23 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Panel Agenta' },
     [WebitelApplications.AUDIT]: {
       name: 'Audyt',
@@ -454,6 +480,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Pobierz PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Wybierz kolumny',
         [IconAction.VARIABLES]: 'Wybierz kolumny zmiennych',
@@ -536,6 +563,9 @@ export default {
         message:
           'Przekroczono limit agentów mogących wziąć pauzę. Pauza jest w tej chwili niedostępna.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Twój plik PDF jest tworzony…'
     },
     saveFailedPopup: {
       title: 'Zapisywanie nie powiodło się',

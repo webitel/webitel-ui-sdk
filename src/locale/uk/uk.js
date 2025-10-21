@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -51,13 +52,6 @@ export default {
     expand: 'Розгорнути',
     collapse: 'Згорнути',
     generate: 'Згенерувати',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'Від',
     to: 'До',
     tts: 'Text-to-Speech',
@@ -89,6 +83,7 @@ export default {
     unassigned: 'Непризначені',
     showUnassigned: 'Показати непризначені',
     group: 'Група',
+    dateTime: 'Дата і час',
     updatedBy: (/*{ named }*/) => {
       return 'Редаговано';
     },
@@ -129,6 +124,12 @@ export default {
     emptyResultSearch: 'Пошук не дав результатів',
     contact: 'Контакт | Контакти',
     notification: 'Сповіщення',
+    screencast: 'Запис екрану',
+    extension: 'Розширення',
+    password: 'Пароль',
+    number: 'Номер',
+    expireAt: 'Закінчується',
+    destination: 'Призначення',
   },
   // date-related texts
   date: {
@@ -174,6 +175,12 @@ export default {
     transcription: 'Транскрипція',
     attachment: 'Вкладення | Вкладення',
     owner: 'Власник | Власники',
+    customization: {
+      customization: 'Персоналізація | Персоналізації',
+    },
+    customLookup: {
+      customLookup: 'Користувацький довідник | Користувацькі довідники',
+    },
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -219,6 +226,8 @@ export default {
       quickReplies: 'Швидка відповідь | Швидкі відповіді',
       quickRepliesEmpty: 'Ще немає швидких відповідей',
     },
+    screenRecordings: 'Запис екрану | Записи екрану',
+    screenshots: 'Знімок екрана | Знімки екрана',
   },
   channel: {
     state: {
@@ -268,6 +277,24 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Користувацькі довідники', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
@@ -452,6 +479,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Завантажити PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
         [IconAction.COLUMNS]: 'Додати колонки',
         [IconAction.VARIABLES]: 'Вибрати колонки зі змінними',
@@ -530,6 +558,9 @@ export default {
         message:
           'Ліміт операторів в паузі перевищено. Перерва наразі недоступна.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Ваш PDF-файл генерується…'
     },
     saveFailedPopup: {
       title: 'Помилка збереження',

@@ -9,12 +9,12 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ApiClassesUpdateClassBody,
 	ApiReadClassResponse,
 	ApiSearchClassesResponse,
 	ApiUpdateClassResponse,
-	ClassesReadClassParams,
-	ClassesSearchClassesParams,
+	ClassesUpdateClassBody,
+	ReadClassParams,
+	SearchClassesParams,
 } from '.././_models';
 
 // --- header start
@@ -25,10 +25,8 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const classesSearchClasses = <
-				TData = AxiosResponse<ApiSearchClassesResponse>,
-			>(
-				params?: ClassesSearchClassesParams,
+			const searchClasses = <TData = AxiosResponse<ApiSearchClassesResponse>>(
+				params?: SearchClassesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/objclass', {
@@ -36,33 +34,29 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const classesUpdateClass2 = <
-				TData = AxiosResponse<ApiUpdateClassResponse>,
-			>(
-				apiClassesUpdateClassBody: ApiClassesUpdateClassBody,
+			const updateClass2 = <TData = AxiosResponse<ApiUpdateClassResponse>>(
+				classesUpdateClassBody: ClassesUpdateClassBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					'/objclass/_class.id}',
-					apiClassesUpdateClassBody,
+					classesUpdateClassBody,
 					options,
 				);
 			};
-			const classesUpdateClass = <
-				TData = AxiosResponse<ApiUpdateClassResponse>,
-			>(
-				apiClassesUpdateClassBody: ApiClassesUpdateClassBody,
+			const updateClass = <TData = AxiosResponse<ApiUpdateClassResponse>>(
+				classesUpdateClassBody: ClassesUpdateClassBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					'/objclass/_class.id}',
-					apiClassesUpdateClassBody,
+					classesUpdateClassBody,
 					options,
 				);
 			};
-			const classesReadClass = <TData = AxiosResponse<ApiReadClassResponse>>(
+			const readClass = <TData = AxiosResponse<ApiReadClassResponse>>(
 				id: string,
-				params?: ClassesReadClassParams,
+				params?: ReadClassParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/objclass/${id}`, {
@@ -72,17 +66,11 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return {
-				classesSearchClasses,
-				classesUpdateClass2,
-				classesUpdateClass,
-				classesReadClass,
-			};
+			return { searchClasses, updateClass2, updateClass, readClass };
 		};
-export type ClassesSearchClassesResult =
-	AxiosResponse<ApiSearchClassesResponse>;
-export type ClassesUpdateClass2Result = AxiosResponse<ApiUpdateClassResponse>;
-export type ClassesUpdateClassResult = AxiosResponse<ApiUpdateClassResponse>;
-export type ClassesReadClassResult = AxiosResponse<ApiReadClassResponse>;
+export type SearchClassesResult = AxiosResponse<ApiSearchClassesResponse>;
+export type UpdateClass2Result = AxiosResponse<ApiUpdateClassResponse>;
+export type UpdateClassResult = AxiosResponse<ApiUpdateClassResponse>;
+export type ReadClassResult = AxiosResponse<ApiReadClassResponse>;
 
 // --- footer end

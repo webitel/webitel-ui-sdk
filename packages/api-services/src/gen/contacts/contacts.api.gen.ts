@@ -9,15 +9,15 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	ContactsCreateContactParams,
-	ContactsDeleteContactParams,
-	ContactsLocateContactParams,
-	ContactsSearchContactsParams,
-	ContactsUpdateContactBody,
-	ContactsUpdateContactParams,
-	WebitelContactsContact,
-	WebitelContactsContactList,
-	WebitelContactsInputContact,
+	ContactsContactList,
+	ContactsInputContact,
+	CreateContactParams,
+	DeleteContactParams,
+	LocateContactParams,
+	SearchContactsParams,
+	UpdateContactBody,
+	UpdateContactParams,
+	WebitelcontactsContact,
 } from '.././_models';
 
 // https://stackoverflow.com/questions/49579094/typescript-conditional-types-filter-out-readonly-properties-pick-only-requir/49579497#49579497
@@ -88,10 +88,8 @@ export const // --- title start
 
  * @summary Search for Contact(s)
  */
-			const contactsSearchContacts = <
-				TData = AxiosResponse<WebitelContactsContactList>,
-			>(
-				params?: ContactsSearchContactsParams,
+			const searchContacts = <TData = AxiosResponse<ContactsContactList>>(
+				params?: SearchContactsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/contacts', {
@@ -102,14 +100,12 @@ export const // --- title start
 			/**
 			 * @summary Create NEW Contact
 			 */
-			const contactsCreateContact = <
-				TData = AxiosResponse<WebitelContactsContact>,
-			>(
-				webitelContactsInputContact: NonReadonly<WebitelContactsInputContact>,
-				params?: ContactsCreateContactParams,
+			const createContact = <TData = AxiosResponse<WebitelcontactsContact>>(
+				contactsInputContact: NonReadonly<ContactsInputContact>,
+				params?: CreateContactParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.post('/contacts', webitelContactsInputContact, {
+				return axios.post('/contacts', contactsInputContact, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -117,11 +113,9 @@ export const // --- title start
 			/**
 			 * @summary Remove Contact source
 			 */
-			const contactsDeleteContact = <
-				TData = AxiosResponse<WebitelContactsContact>,
-			>(
+			const deleteContact = <TData = AxiosResponse<WebitelcontactsContact>>(
 				etag: string,
-				params?: ContactsDeleteContactParams,
+				params?: DeleteContactParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${etag}`, {
@@ -132,11 +126,9 @@ export const // --- title start
 			/**
 			 * @summary Locate Contact source
 			 */
-			const contactsLocateContact = <
-				TData = AxiosResponse<WebitelContactsContact>,
-			>(
+			const locateContact = <TData = AxiosResponse<WebitelcontactsContact>>(
 				etag: string,
-				params?: ContactsLocateContactParams,
+				params?: LocateContactParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${etag}`, {
@@ -147,15 +139,13 @@ export const // --- title start
 			/**
 			 * @summary NEW Update of the Contact source
 			 */
-			const contactsUpdateContact = <
-				TData = AxiosResponse<WebitelContactsContact>,
-			>(
+			const updateContact = <TData = AxiosResponse<WebitelcontactsContact>>(
 				etag: string,
-				contactsUpdateContactBody: NonReadonly<ContactsUpdateContactBody>,
-				params?: ContactsUpdateContactParams,
+				updateContactBody: NonReadonly<UpdateContactBody>,
+				params?: UpdateContactParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch(`/contacts/${etag}`, contactsUpdateContactBody, {
+				return axios.patch(`/contacts/${etag}`, updateContactBody, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
@@ -163,18 +153,17 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				contactsSearchContacts,
-				contactsCreateContact,
-				contactsDeleteContact,
-				contactsLocateContact,
-				contactsUpdateContact,
+				searchContacts,
+				createContact,
+				deleteContact,
+				locateContact,
+				updateContact,
 			};
 		};
-export type ContactsSearchContactsResult =
-	AxiosResponse<WebitelContactsContactList>;
-export type ContactsCreateContactResult = AxiosResponse<WebitelContactsContact>;
-export type ContactsDeleteContactResult = AxiosResponse<WebitelContactsContact>;
-export type ContactsLocateContactResult = AxiosResponse<WebitelContactsContact>;
-export type ContactsUpdateContactResult = AxiosResponse<WebitelContactsContact>;
+export type SearchContactsResult = AxiosResponse<ContactsContactList>;
+export type CreateContactResult = AxiosResponse<WebitelcontactsContact>;
+export type DeleteContactResult = AxiosResponse<WebitelcontactsContact>;
+export type LocateContactResult = AxiosResponse<WebitelcontactsContact>;
+export type UpdateContactResult = AxiosResponse<WebitelcontactsContact>;
 
 // --- footer end

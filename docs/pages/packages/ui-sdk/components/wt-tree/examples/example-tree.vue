@@ -50,6 +50,7 @@ const data = ref([
           {
             id: '6',
             name: 'Subservice 1',
+            searched: true,
             services: [],
           },
         ],
@@ -61,6 +62,7 @@ const data = ref([
           {
             id: '8',
             name: 'Subservice 2',
+            searched: true,
             services: [],
           },
         ],
@@ -72,6 +74,7 @@ const data = ref([
           {
             id: '10',
             name: 'Subservice 3',
+            searched: true,
             services: [],
           },
         ],

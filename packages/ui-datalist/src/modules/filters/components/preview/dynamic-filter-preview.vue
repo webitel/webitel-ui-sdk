@@ -3,10 +3,10 @@
     <template #activator="{ toggle }">
       <div @click="toggle">
         <wt-popover>
-          <template #activator="{ show: showCheapPopoverCb, hide: hideCheapPopover }">
+          <template #activator="{ show: showChipPopoverCb, hide: hideChipPopover }">
             <div
-              @pointerenter="(event) => showCheapPopover(event, showCheapPopoverCb)"
-              @pointerleave="hideCheapPopover"
+              @pointerenter="(event) => showChipPopover(event, showChipPopoverCb)"
+              @pointerleave="hideChipPopover"
             >
               <wt-chip color="primary">
                 {{ filter.label || filterConfig.label }}
@@ -73,7 +73,7 @@ import {
   WtLoader,
   WtPopover,
 } from '@webitel/ui-sdk/components';
-import {computed, ref, useTemplateRef, watch} from 'vue';
+import {computed, ref, watch} from 'vue';
 
 import { IFilter } from '../../classes/Filter';
 import { FilterOptionToPreviewApiSearchMethodMap } from '../../modules/filterConfig/components';
@@ -88,7 +88,7 @@ const emit = defineEmits<DynamicFilterEmits>();
 
 const localValue = ref();
 
-const showCheapPopover = (event, showPopoverCb: (event) => void) => {
+const showChipPopover = (event, showPopoverCb: (event) => void) => {
   if (!localValue.value) {
     fillLocalValue()
   }

@@ -8,14 +8,11 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 
-import type {
-	WebitelContactsLabelList,
-	WebitelContactsLabelTags,
-} from '.././_models';
+import type { ContactsLabelList, ContactsLabelTags } from '.././_models';
 
-export const getLabelsGetLabelsResponseMock = (
-	overrideResponse: Partial<WebitelContactsLabelTags> = {},
-): WebitelContactsLabelTags => ({
+export const getGetLabelsResponseMock = (
+	overrideResponse: Partial<ContactsLabelTags> = {},
+): ContactsLabelTags => ({
 	labels: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -56,9 +53,9 @@ export const getLabelsGetLabelsResponseMock = (
 	...overrideResponse,
 });
 
-export const getLabelsDeleteLabelsResponseMock = (
-	overrideResponse: Partial<WebitelContactsLabelList> = {},
-): WebitelContactsLabelList => ({
+export const getDeleteLabelsResponseMock = (
+	overrideResponse: Partial<ContactsLabelList> = {},
+): ContactsLabelList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -137,9 +134,9 @@ export const getLabelsDeleteLabelsResponseMock = (
 	...overrideResponse,
 });
 
-export const getLabelsListLabelsResponseMock = (
-	overrideResponse: Partial<WebitelContactsLabelList> = {},
-): WebitelContactsLabelList => ({
+export const getListLabelsResponseMock = (
+	overrideResponse: Partial<ContactsLabelList> = {},
+): ContactsLabelList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -218,9 +215,9 @@ export const getLabelsListLabelsResponseMock = (
 	...overrideResponse,
 });
 
-export const getLabelsMergeLabelsResponseMock = (
-	overrideResponse: Partial<WebitelContactsLabelList> = {},
-): WebitelContactsLabelList => ({
+export const getMergeLabelsResponseMock = (
+	overrideResponse: Partial<ContactsLabelList> = {},
+): ContactsLabelList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -299,9 +296,9 @@ export const getLabelsMergeLabelsResponseMock = (
 	...overrideResponse,
 });
 
-export const getLabelsResetLabelsResponseMock = (
-	overrideResponse: Partial<WebitelContactsLabelList> = {},
-): WebitelContactsLabelList => ({
+export const getResetLabelsResponseMock = (
+	overrideResponse: Partial<ContactsLabelList> = {},
+): ContactsLabelList => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -380,12 +377,12 @@ export const getLabelsResetLabelsResponseMock = (
 	...overrideResponse,
 });
 
-export const getLabelsGetLabelsMockHandler = (
+export const getGetLabelsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsLabelTags
+		| ContactsLabelTags
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsLabelTags> | WebitelContactsLabelTags),
+		  ) => Promise<ContactsLabelTags> | ContactsLabelTags),
 ) => {
 	return http.get('*/contacts/labels', async (info) => {
 		await delay(1000);
@@ -396,19 +393,19 @@ export const getLabelsGetLabelsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLabelsGetLabelsResponseMock(),
+					: getGetLabelsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLabelsDeleteLabelsMockHandler = (
+export const getDeleteLabelsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsLabelList
+		| ContactsLabelList
 		| ((
 				info: Parameters<Parameters<typeof http.delete>[1]>[0],
-		  ) => Promise<WebitelContactsLabelList> | WebitelContactsLabelList),
+		  ) => Promise<ContactsLabelList> | ContactsLabelList),
 ) => {
 	return http.delete('*/contacts/:contactId/labels', async (info) => {
 		await delay(1000);
@@ -419,19 +416,19 @@ export const getLabelsDeleteLabelsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLabelsDeleteLabelsResponseMock(),
+					: getDeleteLabelsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLabelsListLabelsMockHandler = (
+export const getListLabelsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsLabelList
+		| ContactsLabelList
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<WebitelContactsLabelList> | WebitelContactsLabelList),
+		  ) => Promise<ContactsLabelList> | ContactsLabelList),
 ) => {
 	return http.get('*/contacts/:contactId/labels', async (info) => {
 		await delay(1000);
@@ -442,19 +439,19 @@ export const getLabelsListLabelsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLabelsListLabelsResponseMock(),
+					: getListLabelsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLabelsMergeLabelsMockHandler = (
+export const getMergeLabelsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsLabelList
+		| ContactsLabelList
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelContactsLabelList> | WebitelContactsLabelList),
+		  ) => Promise<ContactsLabelList> | ContactsLabelList),
 ) => {
 	return http.post('*/contacts/:contactId/labels', async (info) => {
 		await delay(1000);
@@ -465,19 +462,19 @@ export const getLabelsMergeLabelsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLabelsMergeLabelsResponseMock(),
+					: getMergeLabelsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLabelsResetLabelsMockHandler = (
+export const getResetLabelsMockHandler = (
 	overrideResponse?:
-		| WebitelContactsLabelList
+		| ContactsLabelList
 		| ((
 				info: Parameters<Parameters<typeof http.put>[1]>[0],
-		  ) => Promise<WebitelContactsLabelList> | WebitelContactsLabelList),
+		  ) => Promise<ContactsLabelList> | ContactsLabelList),
 ) => {
 	return http.put('*/contacts/:contactId/labels', async (info) => {
 		await delay(1000);
@@ -488,16 +485,16 @@ export const getLabelsResetLabelsMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLabelsResetLabelsResponseMock(),
+					: getResetLabelsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getLabelsMock = () => [
-	getLabelsGetLabelsMockHandler(),
-	getLabelsDeleteLabelsMockHandler(),
-	getLabelsListLabelsMockHandler(),
-	getLabelsMergeLabelsMockHandler(),
-	getLabelsResetLabelsMockHandler(),
+	getGetLabelsMockHandler(),
+	getDeleteLabelsMockHandler(),
+	getListLabelsMockHandler(),
+	getMergeLabelsMockHandler(),
+	getResetLabelsMockHandler(),
 ];

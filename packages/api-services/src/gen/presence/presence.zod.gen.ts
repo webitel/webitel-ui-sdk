@@ -10,7 +10,7 @@ import { z as zod } from 'zod/v4';
  * (UserPresence) {
  * @summary set(presence) (notify, error)
  */
-export const presenceSetStatus2Body = zod.object({
+export const setStatus2Body = zod.object({
 	fields: zod.array(zod.string()).optional(),
 	publish: zod
 		.object({
@@ -23,7 +23,7 @@ export const presenceSetStatus2Body = zod.object({
 		.optional(),
 });
 
-export const presenceSetStatus2Response = zod.object({
+export const setStatus2Response = zod.object({
 	app: zod.string().optional(),
 	closed: zod.boolean().optional(),
 	contact: zod.string().optional(),
@@ -48,11 +48,11 @@ export const presenceSetStatus2Response = zod.object({
  * (UserPresence) {
  * @summary set(presence) (notify, error)
  */
-export const presenceSetStatusParams = zod.object({
+export const setStatusParams = zod.object({
 	'publish.id': zod.string().describe('[required] user identity'),
 });
 
-export const presenceSetStatusBody = zod.object({
+export const setStatusBody = zod.object({
 	fields: zod.array(zod.string()).optional(),
 	publish: zod
 		.object({
@@ -65,7 +65,7 @@ export const presenceSetStatusBody = zod.object({
 		.describe('BODY: partial modifications'),
 });
 
-export const presenceSetStatusResponse = zod.object({
+export const setStatusResponse = zod.object({
 	app: zod.string().optional(),
 	closed: zod.boolean().optional(),
 	contact: zod.string().optional(),

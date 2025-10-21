@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="buttonSelect"
     v-clickaway="atClickaway"
     class="wt-button-select"
   >
@@ -20,14 +21,14 @@
       :tooltip-triggers="[]"
       @click="selectOption"
     >
-      <template #activator>
+      <template #activator="{ toggle, show }">
         <wt-button
           :color="color"
           :disabled="disabled"
           :loading="false"
           class="wt-button-select__select-btn"
           v-bind="$attrs"
-          @click="isOpened = !isOpened"
+          @click="toggleContextMenu(toggle, $event)"
         >
           <wt-icon
             :class="{ 'wt-button-select__select-arrow--active': isOpened }"
@@ -43,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 const props = defineProps({
   /**
@@ -84,6 +85,7 @@ const emit = defineEmits([
 ]);
 
 const isOpened = ref(false);
+const buttonSelect = useTemplateRef('buttonSelect');
 
 const selectOption = ({ option, index }) => {
   emit('click:option', option, index);
@@ -92,6 +94,14 @@ const selectOption = ({ option, index }) => {
 
 const atClickaway = () => {
   isOpened.value = false;
+};
+
+const toggleContextMenu = (toggle, e) => {
+  isOpened.value = !isOpened.value;
+  // The menu is positioned relative to `buttonSelect` (reference button).
+  // If not provided, it defaults to centering on the trigger button (`e`).
+  // https://webitel.atlassian.net/browse/WTEL-7349
+  toggle(e, buttonSelect.value)
 };
 </script>
 

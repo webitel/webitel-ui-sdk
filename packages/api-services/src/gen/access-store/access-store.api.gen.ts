@@ -9,13 +9,13 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	AccessStoreListDefaultAccessParams,
-	AccessStoreListObjectAccessParams,
-	ApiAccessStoreToggleDefaultAccessBody,
+	AccessStoreToggleDefaultAccessBody,
 	ApiGrantAccessRequestV1,
 	ApiListAccessResponseV1,
 	ApiToggleDefaultAccessResponse,
 	ApiUpdateAccessResponseV1,
+	ListDefaultAccessParams,
+	ListObjectAccessParams,
 } from '.././_models';
 
 // --- header start
@@ -29,10 +29,10 @@ export const // --- title start
 			/**
 			 * @summary default: TODO: indicate objclass=default as a default rights repo
 			 */
-			const accessStoreListDefaultAccess = <
+			const listDefaultAccess = <
 				TData = AxiosResponse<ApiListAccessResponseV1>,
 			>(
-				params?: AccessStoreListDefaultAccessParams,
+				params?: ListDefaultAccessParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/acl/object.name}/object.id}', {
@@ -43,23 +43,21 @@ export const // --- title start
 			/**
 			 * @summary Same as UpdateAccess except for DEFAULT access control system
 			 */
-			const accessStoreToggleDefaultAccess = <
+			const toggleDefaultAccess = <
 				TData = AxiosResponse<ApiToggleDefaultAccessResponse>,
 			>(
 				grantor: string,
-				apiAccessStoreToggleDefaultAccessBody: ApiAccessStoreToggleDefaultAccessBody,
+				accessStoreToggleDefaultAccessBody: AccessStoreToggleDefaultAccessBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/acl/object.name}/object.id}/grantor/${grantor}`,
-					apiAccessStoreToggleDefaultAccessBody,
+					accessStoreToggleDefaultAccessBody,
 					options,
 				);
 			};
-			const accessStoreListObjectAccess = <
-				TData = AxiosResponse<ApiListAccessResponseV1>,
-			>(
-				params?: AccessStoreListObjectAccessParams,
+			const listObjectAccess = <TData = AxiosResponse<ApiListAccessResponseV1>>(
+				params?: ListObjectAccessParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/object.name}/object.id}/acl', {
@@ -70,7 +68,7 @@ export const // --- title start
 			/**
 			 * @summary TODO: replace with GrantAccess API, to become command like GRANT REVOKE ... with empty access rights string
 			 */
-			const accessStoreToggleObjectAccess = <
+			const toggleObjectAccess = <
 				TData = AxiosResponse<ApiUpdateAccessResponseV1>,
 			>(
 				apiGrantAccessRequestV1: ApiGrantAccessRequestV1[],
@@ -85,19 +83,16 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				accessStoreListDefaultAccess,
-				accessStoreToggleDefaultAccess,
-				accessStoreListObjectAccess,
-				accessStoreToggleObjectAccess,
+				listDefaultAccess,
+				toggleDefaultAccess,
+				listObjectAccess,
+				toggleObjectAccess,
 			};
 		};
-export type AccessStoreListDefaultAccessResult =
-	AxiosResponse<ApiListAccessResponseV1>;
-export type AccessStoreToggleDefaultAccessResult =
+export type ListDefaultAccessResult = AxiosResponse<ApiListAccessResponseV1>;
+export type ToggleDefaultAccessResult =
 	AxiosResponse<ApiToggleDefaultAccessResponse>;
-export type AccessStoreListObjectAccessResult =
-	AxiosResponse<ApiListAccessResponseV1>;
-export type AccessStoreToggleObjectAccessResult =
-	AxiosResponse<ApiUpdateAccessResponseV1>;
+export type ListObjectAccessResult = AxiosResponse<ApiListAccessResponseV1>;
+export type ToggleObjectAccessResult = AxiosResponse<ApiUpdateAccessResponseV1>;
 
 // --- footer end

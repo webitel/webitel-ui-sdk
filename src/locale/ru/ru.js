@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -51,13 +52,6 @@ export default {
     expand: 'Развернуть',
     collapse: 'Свернуть',
     generate: 'Сгенерировать',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'От',
     to: 'До',
     tts: 'Text-to-Speech',
@@ -89,6 +83,7 @@ export default {
     unassigned: 'Неназначенные',
     showUnassigned: 'Показать неназначенные',
     group: 'Группа',
+    dateTime: 'Дата и время',
     updatedBy: (/*{ named }*/) => {
       return 'Редактировано';
     },
@@ -129,6 +124,12 @@ export default {
     emptyResultSearch: 'Поиск не дал результатов',
     contact: 'Контакт | Контакты',
     notification: 'Уведомление | Уведомления',
+    screencast: 'Запись экрана',
+    extension: 'Расширение',
+    password: 'Пароль',
+    number: 'Номер',
+    expireAt: 'Истекает',
+    destination: 'Назначение',
   },
   // date-related texts
   date: {
@@ -174,6 +175,13 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Вложение | Вложения',
     owner: 'Владелец | Владельцы',
+    customization: {
+      customization: 'Персонализация | Персонализации',
+    },
+    customLookup: {
+      customLookup:
+        'Пользовательский справочник | Пользовательские справочники',
+    },
     queue: {
       queue: 'Очередь | Очереди',
       type: {
@@ -219,6 +227,8 @@ export default {
       quickReplies: 'Быстрый ответ | Быстрые ответы',
       quickRepliesEmpty: 'Еще нет быстрых ответов',
     },
+    screenRecordings: 'Запись экрана | Записи экрана',
+    screenshots: 'Снимок экрана | Снимки экрана',
   },
   channel: {
     state: {
@@ -268,6 +278,24 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Пользовательские справочники', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Agent Workspace' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
@@ -452,6 +480,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Скачать PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter', 2),
         [IconAction.COLUMNS]: 'Добавить колонки',
         [IconAction.VARIABLES]: 'Выбрать колонки с переменными',
@@ -530,6 +559,9 @@ export default {
         message:
           'Лимит операторов в паузе превышен. Перерыв сейчас недоступен.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Ваш PDF-файл генерируется…'
     },
     saveFailedPopup: {
       title: 'Ошибка сохранения',

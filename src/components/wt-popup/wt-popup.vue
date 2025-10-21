@@ -30,6 +30,7 @@
             </h3>
           </slot>
           <wt-icon-btn
+            v-if="closable"
             class="wt-popup__close-btn"
             icon="close"
             @click="emit('close')"
@@ -76,6 +77,7 @@ interface Props {
    * __even if `shown` prop is "true"__
    */
   disabled?: boolean;
+  closable?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -83,6 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: ComponentSize.MD,
   overflow: false,
   disabled: false,
+  closable: true
 });
 
 const emit = defineEmits<{
@@ -174,18 +177,12 @@ watch(wrapperShown, (value) => {
 <style lang="scss" scoped>
 @use '@webitel/styleguide/typography' as *;
 @use '@webitel/styleguide/scroll' as *;
-
+@use 'mixins' as *;
 .wt-popup {
-  display: flex;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  z-index: var(--popup-wrapper-z-index);
-  background: var(--wt-popup-shadow-color);
+  /** @author liza-pohranichna
+  * need to reuse popup-wrapper styles in player component https://webitel.atlassian.net/browse/WTEL-7723
+  */
+  @include popup-wrapper;
 
   &--size {
     &-xs {
@@ -215,16 +212,7 @@ watch(wrapperShown, (value) => {
 }
 
 .wt-popup__popup {
-  display: flex;
-  flex-direction: column;
-  gap: var(--popup-sections-gap);
-  z-index: 1;
-  margin: var(--popup-padding);
-  box-shadow: var(--elevation-10);
-  border-radius: var(--border-radius);
-  background: var(--wt-popup-background-color);
-  padding: var(--popup-padding);
-  max-height: var(--popup-max-height);
+  @include popup-container;
 }
 
 .wt-popup__header {
@@ -277,3 +265,4 @@ watch(wrapperShown, (value) => {
   }
 }
 </style>
+

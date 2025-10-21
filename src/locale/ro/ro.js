@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -51,13 +52,6 @@ export default {
     expand: 'Extinde',
     collapse: 'Restrânge',
     generate: 'Generează',
-    lang: {
-      en: 'English',
-      es: 'Español',
-      ru: 'Русский',
-      uk: 'Українська',
-      kz: 'Қазақ',
-    },
     from: 'De la',
     to: 'Până la',
     tts: 'Text-to-Speech',
@@ -89,6 +83,7 @@ export default {
     unassigned: 'Neatribuit',
     showUnassigned: 'Arată neatribuite',
     group: 'Grup',
+    dateTime: 'Dată și oră',
     updatedBy: (/*{ named }*/) => {
       return 'Editat';
     },
@@ -130,6 +125,12 @@ export default {
     contact: 'Contact | Contacte',
     column: 'Coloană | Coloane',
     notification: 'Notificare | Notificări',
+    screencast: 'Înregistrare ecran',
+    extension: 'Extensie',
+    password: 'Parolă',
+    number: 'Număr',
+    expireAt: 'Expiră la',
+    destination: 'Destinație',
   },
   // date-related texts
   date: {
@@ -175,6 +176,12 @@ export default {
     transcription: 'Transcriere',
     attachment: 'Atașament | Atașamente',
     owner: 'Proprietar | Proprietari',
+    customization: {
+      customization: 'Personalizare | Personalizări',
+    },
+    customLookup: {
+      customLookup: 'Personalizare | Personalizări',
+    },
     queue: {
       queue: 'Coadă | Cozi',
       type: {
@@ -220,6 +227,8 @@ export default {
       quickReplies: 'Răspuns rapid | Răspunsuri rapide',
       quickRepliesEmpty: 'Nu există încă răspunsuri rapide',
     },
+    screenRecordings: 'Înregistrarea ecranului | Înregistrări ecran',
+    screenshots: 'Captură de ecran | Capturi de ecran',
   },
   channel: {
     state: {
@@ -269,6 +278,24 @@ export default {
   },
   // describes Webitel FRONTEND applications + their navs
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            'Personalizări', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Spațiu Agent' },
     [WebitelApplications.AUDIT]: {
       name: 'Audit',
@@ -454,6 +481,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Descarcă PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Selectează coloanele',
         [IconAction.VARIABLES]: 'Selectează coloanele variabile',
@@ -537,6 +565,9 @@ export default {
         message:
           'Limita pentru agenții care pot lua pauză a fost depășită. Pauza nu este disponibilă momentan.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Fișierul dvs. PDF este în curs de creare…'
     },
     saveFailedPopup: {
       title: 'Salvarea a eșuat',

@@ -38,4 +38,8 @@ export const EngineSystemSettingName = {
 	NewMessageSoundNotification: 'new_message_sound_notification',
 	NewChatSoundNotification: 'new_chat_sound_notification',
 	ScreenshotInterval: 'screenshot_interval',
+	PasswordExpiryDays: 'password_expiry_days',
+	PasswordMinLength: 'password_min_length',
+	PasswordCategories: 'password_categories',
+	PasswordContainsUsername: 'password_contains_username',
 } as const;

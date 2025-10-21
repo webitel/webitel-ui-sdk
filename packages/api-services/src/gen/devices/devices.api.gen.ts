@@ -17,16 +17,16 @@ import type {
 	ApiReadDeviceResponse,
 	ApiSearchDeviceResponse,
 	ApiUpdateDeviceResponse,
-	DevicesDeleteDevice2Params,
-	DevicesDeleteDeviceParams,
-	DevicesListRegistrationsParams,
-	DevicesReadDeviceParams,
-	DevicesSearchDeviceAuditParams,
-	DevicesSearchDeviceParams,
-	DevicesUpdateDevice2Body,
-	DevicesUpdateDevice2Params,
-	DevicesUpdateDeviceBody,
-	DevicesUpdateDeviceParams,
+	DeleteDevice2Params,
+	DeleteDeviceParams,
+	ListRegistrationsParams,
+	ReadDeviceParams,
+	SearchDeviceAuditParams,
+	SearchDeviceParams,
+	UpdateDevice2Body,
+	UpdateDevice2Params,
+	UpdateDeviceBody,
+	UpdateDeviceParams,
 } from '.././_models';
 
 // --- header start
@@ -37,23 +37,19 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const devicesDeleteDevice2 = <
-				TData = AxiosResponse<ApiDeleteDeviceResponse>,
-			>(
-				devicesDeleteDevice2Body: string[],
-				params?: DevicesDeleteDevice2Params,
+			const deleteDevice2 = <TData = AxiosResponse<ApiDeleteDeviceResponse>>(
+				deleteDevice2Body: string[],
+				params?: DeleteDevice2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete('/devices', {
-					data: devicesDeleteDevice2Body,
+					data: deleteDevice2Body,
 					...options,
 					params: { ...params, ...options?.params },
 				});
 			};
-			const devicesSearchDevice = <
-				TData = AxiosResponse<ApiSearchDeviceResponse>,
-			>(
-				params?: DevicesSearchDeviceParams,
+			const searchDevice = <TData = AxiosResponse<ApiSearchDeviceResponse>>(
+				params?: SearchDeviceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/devices', {
@@ -61,42 +57,36 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const devicesCreateDevice = <
-				TData = AxiosResponse<ApiCreateDeviceResponse>,
-			>(
+			const createDevice = <TData = AxiosResponse<ApiCreateDeviceResponse>>(
 				apiDevice: ApiDevice,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post('/devices', apiDevice, options);
 			};
-			const devicesUpdateDevice2 = <
-				TData = AxiosResponse<ApiUpdateDeviceResponse>,
-			>(
-				devicesUpdateDevice2Body: DevicesUpdateDevice2Body,
-				params?: DevicesUpdateDevice2Params,
+			const updateDevice2 = <TData = AxiosResponse<ApiUpdateDeviceResponse>>(
+				updateDevice2Body: UpdateDevice2Body,
+				params?: UpdateDevice2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch('/devices/device.id}', devicesUpdateDevice2Body, {
+				return axios.patch('/devices/device.id}', updateDevice2Body, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
 			};
-			const devicesUpdateDevice = <
-				TData = AxiosResponse<ApiUpdateDeviceResponse>,
-			>(
-				devicesUpdateDeviceBody: DevicesUpdateDeviceBody,
-				params?: DevicesUpdateDeviceParams,
+			const updateDevice = <TData = AxiosResponse<ApiUpdateDeviceResponse>>(
+				updateDeviceBody: UpdateDeviceBody,
+				params?: UpdateDeviceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put('/devices/device.id}', devicesUpdateDeviceBody, {
+				return axios.put('/devices/device.id}', updateDeviceBody, {
 					...options,
 					params: { ...params, ...options?.params },
 				});
 			};
-			const devicesListRegistrations = <
+			const listRegistrations = <
 				TData = AxiosResponse<ApiListRegistrationsResponse>,
 			>(
-				params?: DevicesListRegistrationsParams,
+				params?: ListRegistrationsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/devices/device.id}/registered', {
@@ -107,10 +97,8 @@ export const // --- title start
 			/**
 			 * @summary ----- Details (1:M) ----------------------------------------------
 			 */
-			const devicesSearchDeviceAudit = <
-				TData = AxiosResponse<ApiDeviceAuditResponse>,
-			>(
-				params?: DevicesSearchDeviceAuditParams,
+			const searchDeviceAudit = <TData = AxiosResponse<ApiDeviceAuditResponse>>(
+				params?: SearchDeviceAuditParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/devices/device.id}/users/audit', {
@@ -118,11 +106,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const devicesDeleteDevice = <
-				TData = AxiosResponse<ApiDeleteDeviceResponse>,
-			>(
+			const deleteDevice = <TData = AxiosResponse<ApiDeleteDeviceResponse>>(
 				id: string,
-				params?: DevicesDeleteDeviceParams,
+				params?: DeleteDeviceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/devices/${id}`, {
@@ -130,9 +116,9 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const devicesReadDevice = <TData = AxiosResponse<ApiReadDeviceResponse>>(
+			const readDevice = <TData = AxiosResponse<ApiReadDeviceResponse>>(
 				id: string,
-				params?: DevicesReadDeviceParams,
+				params?: ReadDeviceParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/devices/${id}`, {
@@ -143,27 +129,26 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				devicesDeleteDevice2,
-				devicesSearchDevice,
-				devicesCreateDevice,
-				devicesUpdateDevice2,
-				devicesUpdateDevice,
-				devicesListRegistrations,
-				devicesSearchDeviceAudit,
-				devicesDeleteDevice,
-				devicesReadDevice,
+				deleteDevice2,
+				searchDevice,
+				createDevice,
+				updateDevice2,
+				updateDevice,
+				listRegistrations,
+				searchDeviceAudit,
+				deleteDevice,
+				readDevice,
 			};
 		};
-export type DevicesDeleteDevice2Result = AxiosResponse<ApiDeleteDeviceResponse>;
-export type DevicesSearchDeviceResult = AxiosResponse<ApiSearchDeviceResponse>;
-export type DevicesCreateDeviceResult = AxiosResponse<ApiCreateDeviceResponse>;
-export type DevicesUpdateDevice2Result = AxiosResponse<ApiUpdateDeviceResponse>;
-export type DevicesUpdateDeviceResult = AxiosResponse<ApiUpdateDeviceResponse>;
-export type DevicesListRegistrationsResult =
+export type DeleteDevice2Result = AxiosResponse<ApiDeleteDeviceResponse>;
+export type SearchDeviceResult = AxiosResponse<ApiSearchDeviceResponse>;
+export type CreateDeviceResult = AxiosResponse<ApiCreateDeviceResponse>;
+export type UpdateDevice2Result = AxiosResponse<ApiUpdateDeviceResponse>;
+export type UpdateDeviceResult = AxiosResponse<ApiUpdateDeviceResponse>;
+export type ListRegistrationsResult =
 	AxiosResponse<ApiListRegistrationsResponse>;
-export type DevicesSearchDeviceAuditResult =
-	AxiosResponse<ApiDeviceAuditResponse>;
-export type DevicesDeleteDeviceResult = AxiosResponse<ApiDeleteDeviceResponse>;
-export type DevicesReadDeviceResult = AxiosResponse<ApiReadDeviceResponse>;
+export type SearchDeviceAuditResult = AxiosResponse<ApiDeviceAuditResponse>;
+export type DeleteDeviceResult = AxiosResponse<ApiDeleteDeviceResponse>;
+export type ReadDeviceResult = AxiosResponse<ApiReadDeviceResponse>;
 
 // --- footer end

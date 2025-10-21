@@ -2,12 +2,12 @@
 
 <template>
   <wt-switcher
-    :value="true"
+    :model-value="true"
     label="Disabled Active Switcher"
     disabled
   />
   <wt-switcher
-    :value="false"
+    :model-value="false"
     label="Disabled Inactive Switcher"
     disabled
   />

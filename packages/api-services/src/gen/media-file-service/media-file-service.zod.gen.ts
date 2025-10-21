@@ -9,7 +9,7 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Search MediaFile
  */
-export const mediaFileServiceSearchMediaFileQueryParams = zod.object({
+export const searchMediaFileQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -18,7 +18,7 @@ export const mediaFileServiceSearchMediaFileQueryParams = zod.object({
 	id: zod.array(zod.number()).optional(),
 });
 
-export const mediaFileServiceSearchMediaFileResponse = zod.object({
+export const searchMediaFileResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -49,15 +49,15 @@ export const mediaFileServiceSearchMediaFileResponse = zod.object({
 /**
  * @summary Remove MediaFile
  */
-export const mediaFileServiceDeleteMediaFileParams = zod.object({
+export const deleteMediaFileParams = zod.object({
 	id: zod.string(),
 });
 
-export const mediaFileServiceDeleteMediaFileQueryParams = zod.object({
+export const deleteMediaFileQueryParams = zod.object({
 	domainId: zod.string().optional(),
 });
 
-export const mediaFileServiceDeleteMediaFileResponse = zod.object({
+export const deleteMediaFileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({
@@ -81,15 +81,15 @@ export const mediaFileServiceDeleteMediaFileResponse = zod.object({
 /**
  * @summary MediaFile item
  */
-export const mediaFileServiceReadMediaFileParams = zod.object({
+export const readMediaFileParams = zod.object({
 	id: zod.string(),
 });
 
-export const mediaFileServiceReadMediaFileQueryParams = zod.object({
+export const readMediaFileQueryParams = zod.object({
 	domainId: zod.string().optional(),
 });
 
-export const mediaFileServiceReadMediaFileResponse = zod.object({
+export const readMediaFileResponse = zod.object({
 	createdAt: zod.string().optional(),
 	createdBy: zod
 		.object({

@@ -24,9 +24,7 @@ export const // --- title start
 			/**
 			 * @summary GetUserTfaKey locates the secret for user and returns it as a TOTP url
 			 */
-			const twoFactorAuthenticationGetUserTfaKey = <
-				TData = AxiosResponse<ApiGetUserTfaKeyResponse>,
-			>(
+			const getUserTfaKey = <TData = AxiosResponse<ApiGetUserTfaKeyResponse>>(
 				userId: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -35,7 +33,7 @@ export const // --- title start
 			/**
 			 * @summary GenerateUserTfaKey generates new or regenerates secret for the concrete user
 			 */
-			const twoFactorAuthenticationGenerateUserTfaKey = <
+			const generateUserTfaKey = <
 				TData = AxiosResponse<ApiGenerateUserTfaKeyResponse>,
 			>(
 				userId: string,
@@ -45,14 +43,10 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return {
-				twoFactorAuthenticationGetUserTfaKey,
-				twoFactorAuthenticationGenerateUserTfaKey,
-			};
+			return { getUserTfaKey, generateUserTfaKey };
 		};
-export type TwoFactorAuthenticationGetUserTfaKeyResult =
-	AxiosResponse<ApiGetUserTfaKeyResponse>;
-export type TwoFactorAuthenticationGenerateUserTfaKeyResult =
+export type GetUserTfaKeyResult = AxiosResponse<ApiGetUserTfaKeyResponse>;
+export type GenerateUserTfaKeyResult =
 	AxiosResponse<ApiGenerateUserTfaKeyResponse>;
 
 // --- footer end

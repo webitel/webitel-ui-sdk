@@ -11,6 +11,7 @@ import {
   AuditorSections,
   ChatGatewayProvider,
   CrmSections,
+  CrmSections as CrmSectionsNew,
   IconAction,
   QueueType,
   RelativeDatetimeValue,
@@ -50,13 +51,6 @@ export default {
     expand: 'Expandir',
     collapse: 'Colapsar',
     generate: 'Generar',
-    lang: {
-      en: 'Inglés',
-      es: 'Español',
-      ru: 'Ruso',
-      uk: 'Ucraniano',
-      kz: 'Kazajo',
-    },
     from: 'Desde',
     to: 'Hasta',
     tts: 'Texto a Voz',
@@ -88,6 +82,7 @@ export default {
     unassigned: 'Sin asignar',
     showUnassigned: 'Mostrar sin asignar',
     group: 'Grupo',
+    dateTime: 'Fecha y hora',
     updatedBy: (/*{ named }*/) => {
       return 'Editado';
     },
@@ -128,6 +123,12 @@ export default {
     contact: 'Contacto | Contactos',
     column: 'Columna | Columnas',
     notification: 'Notificación | Notificaciones',
+    screencast: 'Videotutorial de pantalla',
+    extension: 'Extensión',
+    password: 'Contraseña',
+    number: 'Número',
+    expireAt: 'Expira en',
+    destination: 'Destino',
   },
   date: {
     sec: 'Seg',
@@ -157,6 +158,9 @@ export default {
     list: 'Lista | Listas',
     contact: 'Contacto | Contactos',
     case: 'Caso | Casos',
+    customLookup: {
+      customLookup: 'Búsqueda personalizada | Búsquedas personalizadas',
+    },
     calendar: 'Calendario | Calendarios',
     direction: 'Dirección',
     gateway: 'Gateway | Gateways',
@@ -170,6 +174,9 @@ export default {
     transcription: 'Transcripción',
     attachment: 'Adjunto | Adjuntos',
     owner: 'Propietario | Propietarios',
+    customization: {
+      customization: 'Personalización | Personalizaciones',
+    },
     queue: {
       queue: 'Cola | Colas',
       type: {
@@ -215,6 +222,8 @@ export default {
       quickReplies: 'Respuesta rápida | Respuestas rápidas',
       quickRepliesEmpty: 'Aún no hay respuestas rápidas',
     },
+    screenRecordings: 'Grabación de pantalla | Grabaciones de pantalla',
+    screenshots: 'Captura de pantalla | Capturas de pantalla',
   },
   channel: {
     state: {
@@ -263,6 +272,23 @@ export default {
     actualResolutionTime: 'Tiempo de resolución real',
   },
   WebitelApplications: {
+    overrideApplicationsAccess: {
+      [WebitelApplications.CRM]: {
+        sections: {
+          [CrmSectionsNew.CasesExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.case'),
+          [CrmSectionsNew.ContactsExtensions]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': ' +
+            linked('objects.contact'),
+          [CrmSectionsNew.CustomLookups]: ({ linked }) =>
+            linked('objects.customization.customization') +
+            ': Búsquedas personalizadas', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+        },
+      },
+    },
     [WebitelApplications.AGENT]: { name: 'Espacio de trabajo del agente' },
     [WebitelApplications.AUDIT]: {
       name: 'Auditoría',
@@ -450,6 +476,7 @@ export default {
         [IconAction.ADD]: ({ linked }) => linked('reusable.add'),
         [IconAction.HISTORY]: ({ linked }) => linked('reusable.history'),
         [IconAction.DOWNLOAD]: ({ linked }) => linked('reusable.download'),
+        [IconAction.DOWNLOAD_PDF]: 'Descargar PDF',
         [IconAction.FILTERS]: ({ linked }) => linked('reusable.filter'),
         [IconAction.COLUMNS]: 'Seleccionar columnas',
         [IconAction.VARIABLES]: 'Seleccionar columnas de variables',
@@ -533,6 +560,9 @@ export default {
         message:
           'Se ha excedido el límite de agentes para tomar una pausa. La pausa no está disponible en este momento.',
       },
+    },
+    pdfGeneration: {
+      generationStarted: 'Su archivo PDF se está creando…'
     },
     saveFailedPopup: {
       title: 'Error al guardar',

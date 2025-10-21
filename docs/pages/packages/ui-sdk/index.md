@@ -6,6 +6,7 @@
 * [Defaults](api/defaults/Readme.md)
 * [Interceptors](api/interceptors/Readme.md)
 * [Transformers](api/transformers/Readme.md)
+* [WebSocket](api/websocket/Readme.md)
 
 ## Assets
 * [Icons](assets/icons/icons.md)
@@ -41,7 +42,7 @@
 * [wt-expansion-panel](components/wt-expansion-panel/Readme.md)
 * [wt-filters-panel-wrapper](components/wt-filters-panel-wrapper/Readme.md)
 * [wt-headline](components/wt-headline/Readme.md)
-* [wt-headline-nav](components/wt-headline-nav/Readme.md)
+* [wt-breadcrumb](components/wt-breadcrumb/Readme.md)
 * [wt-hint](components/wt-hint/Readme.md)
 * [wt-icon](components/wt-icon/Readme.md)
 * [wt-icon-action](components/wt-icon-action/Readme.md)

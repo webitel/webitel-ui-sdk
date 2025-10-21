@@ -6,10 +6,67 @@
  */
 
 export type SearchParams = {
-	page?: number;
+	/**
+ * Number of result records (per page).
+Default: 16.
+ */
 	size?: number;
-	q?: string;
-	sort?: string;
+	/**
+ * Page number of result set of records.
+Default: 1.
+ */
+	page?: number;
+	/**
+ * Sort result dataset of records by fields.
+```
+sort ::= *( ORDER name )
+
+ORDER  = ASC / DESC
+DESC   = "-" / "!"
+ASC    = [ "+" ]   ; Default
+```
+
+Fields available
+
+- `id`(seq)
+- `domain`{name}
+- `created_at`
+- `created_by`{name}
+- `updated_at`
+- `updated_by`{name}
+
+Use ?fields=`field.sort()` option to sort Edge fields.
+ */
+	sort?: string[];
+	/**
+ * Fields [Q]uery to build result dataset record.
+```
+fields ::= field [ *( "," field ) ]
+field  ::= name [ *( func ) ] [ inner ]
+inner  ::= "{" fields "}"
+funcs  ::= *( func )
+func   ::= "." name "(" [ args ] ")"
+name   ::= ALPHA / DIGIT / USCORE
+
+ALPHA    = %x41-5A / %x61-7A  ; "A"-"Z" / "a"-"z"
+DIGIT    = %x30-39            ; "0"-"9"
+USCORE   = %x5F ; underscore  ; "_"
+```
+ */
 	fields?: string[];
-	objectName?: string[];
+	/**
+ * Search term:
+`?` - matches any character
+`*` - matches 0 or more characters
+e.g.: name,emails{type},labels etc...
+ */
+	q?: string;
+	/**
+	 * [`record.id`]
+	 */
+	id?: string[];
+	/**
+	 * Filter string in CEL format.
+	 */
+	filters?: string;
 };

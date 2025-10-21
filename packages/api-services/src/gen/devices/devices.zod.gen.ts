@@ -6,15 +6,15 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const devicesDeleteDevice2QueryParams = zod.object({
+export const deleteDevice2QueryParams = zod.object({
 	id: zod.string().optional(),
 	permanent: zod.boolean().optional(),
 });
 
-export const devicesDeleteDevice2BodyItem = zod.string();
-export const devicesDeleteDevice2Body = zod.array(devicesDeleteDevice2BodyItem);
+export const deleteDevice2BodyItem = zod.string();
+export const deleteDevice2Body = zod.array(deleteDevice2BodyItem);
 
-export const devicesDeleteDevice2Response = zod.object({
+export const deleteDevice2Response = zod.object({
 	deleted: zod
 		.array(
 			zod.object({
@@ -67,7 +67,7 @@ export const devicesDeleteDevice2Response = zod.object({
 		.optional(),
 });
 
-export const devicesSearchDeviceQueryParams = zod.object({
+export const searchDeviceQueryParams = zod.object({
 	size: zod
 		.number()
 		.optional()
@@ -116,7 +116,7 @@ export const devicesSearchDeviceQueryParams = zod.object({
 	ip: zod.string().optional().describe('filter: by IP address'),
 });
 
-export const devicesSearchDeviceResponse = zod.object({
+export const searchDeviceResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -172,7 +172,7 @@ export const devicesSearchDeviceResponse = zod.object({
 	size: zod.number().optional(),
 });
 
-export const devicesCreateDeviceBody = zod.object({
+export const createDeviceBody = zod.object({
 	account: zod.string().optional().describe('username'),
 	brand: zod.string().optional().describe('vendor brand name'),
 	createdAt: zod.string().optional(),
@@ -219,7 +219,7 @@ export const devicesCreateDeviceBody = zod.object({
 		.describe('UserId lookup value.'),
 });
 
-export const devicesCreateDeviceResponse = zod.object({
+export const createDeviceResponse = zod.object({
 	device: zod
 		.object({
 			account: zod.string().optional().describe('username'),
@@ -270,15 +270,15 @@ export const devicesCreateDeviceResponse = zod.object({
 		.optional(),
 });
 
-export const devicesUpdateDevice2Params = zod.object({
+export const updateDevice2Params = zod.object({
 	'device.id': zod.string().describe('object id'),
 });
 
-export const devicesUpdateDevice2QueryParams = zod.object({
+export const updateDevice2QueryParams = zod.object({
 	fields: zod.array(zod.string()).optional().describe('PATCH: partial update'),
 });
 
-export const devicesUpdateDevice2Body = zod.object({
+export const updateDevice2Body = zod.object({
 	account: zod.string().optional().describe('username'),
 	brand: zod.string().optional().describe('vendor brand name'),
 	createdAt: zod.string().optional(),
@@ -324,7 +324,7 @@ export const devicesUpdateDevice2Body = zod.object({
 		.describe('UserId lookup value.'),
 });
 
-export const devicesUpdateDevice2Response = zod.object({
+export const updateDevice2Response = zod.object({
 	device: zod
 		.object({
 			account: zod.string().optional().describe('username'),
@@ -375,15 +375,15 @@ export const devicesUpdateDevice2Response = zod.object({
 		.optional(),
 });
 
-export const devicesUpdateDeviceParams = zod.object({
+export const updateDeviceParams = zod.object({
 	'device.id': zod.string().describe('object id'),
 });
 
-export const devicesUpdateDeviceQueryParams = zod.object({
+export const updateDeviceQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional().describe('PATCH: partial update'),
 });
 
-export const devicesUpdateDeviceBody = zod.object({
+export const updateDeviceBody = zod.object({
 	account: zod.string().optional().describe('username'),
 	brand: zod.string().optional().describe('vendor brand name'),
 	createdAt: zod.string().optional(),
@@ -429,7 +429,7 @@ export const devicesUpdateDeviceBody = zod.object({
 		.describe('UserId lookup value.'),
 });
 
-export const devicesUpdateDeviceResponse = zod.object({
+export const updateDeviceResponse = zod.object({
 	device: zod
 		.object({
 			account: zod.string().optional().describe('username'),
@@ -480,17 +480,17 @@ export const devicesUpdateDeviceResponse = zod.object({
 		.optional(),
 });
 
-export const devicesListRegistrationsParams = zod.object({
+export const listRegistrationsParams = zod.object({
 	'device.id': zod.string().describe('Object ID'),
 });
 
-export const devicesListRegistrationsQueryParams = zod.object({
+export const listRegistrationsQueryParams = zod.object({
 	userId: zod.string().optional().describe('Object ID'),
 	userName: zod.string().optional().describe('Display Name'),
 	deviceName: zod.string().optional().describe('Display Name'),
 });
 
-export const devicesListRegistrationsResponse = zod.object({
+export const listRegistrationsResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -527,11 +527,11 @@ export const devicesListRegistrationsResponse = zod.object({
 /**
  * @summary ----- Details (1:M) ----------------------------------------------
  */
-export const devicesSearchDeviceAuditParams = zod.object({
+export const searchDeviceAuditParams = zod.object({
 	'device.id': zod.string().describe('Object ID'),
 });
 
-export const devicesSearchDeviceAuditQueryParams = zod.object({
+export const searchDeviceAuditQueryParams = zod.object({
 	userId: zod.string().optional().describe('Object ID'),
 	userName: zod.string().optional().describe('Display Name'),
 	deviceName: zod.string().optional().describe('Display Name'),
@@ -546,7 +546,7 @@ export const devicesSearchDeviceAuditQueryParams = zod.object({
 	page: zod.number().optional(),
 });
 
-export const devicesSearchDeviceAuditResponse = zod.object({
+export const searchDeviceAuditResponse = zod.object({
 	items: zod
 		.array(
 			zod.object({
@@ -574,16 +574,16 @@ export const devicesSearchDeviceAuditResponse = zod.object({
 	size: zod.number().optional(),
 });
 
-export const devicesDeleteDeviceParams = zod.object({
+export const deleteDeviceParams = zod.object({
 	id: zod.string(),
 });
 
-export const devicesDeleteDeviceQueryParams = zod.object({
+export const deleteDeviceQueryParams = zod.object({
 	permanent: zod.boolean().optional(),
 	ids: zod.array(zod.string()).optional().describe('bulk'),
 });
 
-export const devicesDeleteDeviceResponse = zod.object({
+export const deleteDeviceResponse = zod.object({
 	deleted: zod
 		.array(
 			zod.object({
@@ -636,15 +636,15 @@ export const devicesDeleteDeviceResponse = zod.object({
 		.optional(),
 });
 
-export const devicesReadDeviceParams = zod.object({
+export const readDeviceParams = zod.object({
 	id: zod.string(),
 });
 
-export const devicesReadDeviceQueryParams = zod.object({
+export const readDeviceQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional().describe('output selection'),
 });
 
-export const devicesReadDeviceResponse = zod.object({
+export const readDeviceResponse = zod.object({
 	device: zod
 		.object({
 			account: zod.string().optional().describe('username'),

@@ -11,9 +11,9 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	ApiLoginResponse,
 	ApiUserinfo,
-	AuthSignupParams,
-	AuthUserInfo2Params,
-	AuthUserInfoParams,
+	SignupParams,
+	UserInfo2Params,
+	UserInfoParams,
 } from '.././_models';
 
 // --- header start
@@ -27,8 +27,8 @@ export const // --- title start
 			/**
 			 * @summary Signup new domain with superior access token
 			 */
-			const authSignup = <TData = AxiosResponse<ApiLoginResponse>>(
-				params?: AuthSignupParams,
+			const signup = <TData = AxiosResponse<ApiLoginResponse>>(
+				params?: SignupParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post('/signup', undefined, {
@@ -39,8 +39,8 @@ export const // --- title start
 			/**
 			 * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
 			 */
-			const authUserInfo2 = <TData = AxiosResponse<ApiUserinfo>>(
-				params?: AuthUserInfo2Params,
+			const userInfo2 = <TData = AxiosResponse<ApiUserinfo>>(
+				params?: UserInfo2Params,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/userinfo', {
@@ -51,8 +51,8 @@ export const // --- title start
 			/**
 			 * @summary The UserInfo Endpoint is an OAuth 2.0 Protected Resource that returns Claims about the authenticated End-User.
 			 */
-			const authUserInfo = <TData = AxiosResponse<ApiUserinfo>>(
-				params?: AuthUserInfoParams,
+			const userInfo = <TData = AxiosResponse<ApiUserinfo>>(
+				params?: UserInfoParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post('/userinfo', undefined, {
@@ -62,10 +62,10 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { authSignup, authUserInfo2, authUserInfo };
+			return { signup, userInfo2, userInfo };
 		};
-export type AuthSignupResult = AxiosResponse<ApiLoginResponse>;
-export type AuthUserInfo2Result = AxiosResponse<ApiUserinfo>;
-export type AuthUserInfoResult = AxiosResponse<ApiUserinfo>;
+export type SignupResult = AxiosResponse<ApiLoginResponse>;
+export type UserInfo2Result = AxiosResponse<ApiUserinfo>;
+export type UserInfoResult = AxiosResponse<ApiUserinfo>;
 
 // --- footer end

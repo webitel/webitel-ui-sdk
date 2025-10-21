@@ -9,7 +9,7 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	FileTranscriptServiceGetFileTranscriptPhrasesParams,
+	GetFileTranscriptPhrasesParams,
 	StorageDeleteFileTranscriptRequest,
 	StorageDeleteFileTranscriptResponse,
 	StorageListPhrases,
@@ -27,7 +27,7 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const fileTranscriptServiceDeleteFileTranscript = <
+			const deleteFileTranscript = <
 				TData = AxiosResponse<StorageDeleteFileTranscriptResponse>,
 			>(
 				storageDeleteFileTranscriptRequest: StorageDeleteFileTranscriptRequest,
@@ -38,7 +38,7 @@ export const // --- title start
 					...options,
 				});
 			};
-			const fileTranscriptServiceCreateFileTranscript = <
+			const createFileTranscript = <
 				TData = AxiosResponse<StorageStartFileTranscriptResponse>,
 			>(
 				storageStartFileTranscriptRequest: StorageStartFileTranscriptRequest,
@@ -50,7 +50,7 @@ export const // --- title start
 					options,
 				);
 			};
-			const fileTranscriptServicePutFileTranscript = <
+			const putFileTranscript = <
 				TData = AxiosResponse<StoragePutFileTranscriptResponse>,
 			>(
 				storagePutFileTranscriptRequest: StoragePutFileTranscriptRequest,
@@ -62,11 +62,11 @@ export const // --- title start
 					options,
 				);
 			};
-			const fileTranscriptServiceGetFileTranscriptPhrases = <
+			const getFileTranscriptPhrases = <
 				TData = AxiosResponse<StorageListPhrases>,
 			>(
 				id: string,
-				params?: FileTranscriptServiceGetFileTranscriptPhrasesParams,
+				params?: GetFileTranscriptPhrasesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/storage/transcript_file/${id}/phrases`, {
@@ -77,19 +77,18 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				fileTranscriptServiceDeleteFileTranscript,
-				fileTranscriptServiceCreateFileTranscript,
-				fileTranscriptServicePutFileTranscript,
-				fileTranscriptServiceGetFileTranscriptPhrases,
+				deleteFileTranscript,
+				createFileTranscript,
+				putFileTranscript,
+				getFileTranscriptPhrases,
 			};
 		};
-export type FileTranscriptServiceDeleteFileTranscriptResult =
+export type DeleteFileTranscriptResult =
 	AxiosResponse<StorageDeleteFileTranscriptResponse>;
-export type FileTranscriptServiceCreateFileTranscriptResult =
+export type CreateFileTranscriptResult =
 	AxiosResponse<StorageStartFileTranscriptResponse>;
-export type FileTranscriptServicePutFileTranscriptResult =
+export type PutFileTranscriptResult =
 	AxiosResponse<StoragePutFileTranscriptResponse>;
-export type FileTranscriptServiceGetFileTranscriptPhrasesResult =
-	AxiosResponse<StorageListPhrases>;
+export type GetFileTranscriptPhrasesResult = AxiosResponse<StorageListPhrases>;
 
 // --- footer end

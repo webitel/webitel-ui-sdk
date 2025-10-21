@@ -9,11 +9,11 @@ import { z as zod } from 'zod/v4';
 /**
  * @summary Remove the Contact's timezone(s).
  */
-export const timezonesDeleteTimezonesParams = zod.object({
+export const deleteTimezonesParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const timezonesDeleteTimezonesQueryParams = zod.object({
+export const deleteTimezonesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
@@ -21,7 +21,7 @@ export const timezonesDeleteTimezonesQueryParams = zod.object({
 	etag: zod.array(zod.string()).describe('Set of unique ID(s) to remove.'),
 });
 
-export const timezonesDeleteTimezonesResponse = zod
+export const deleteTimezonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -132,11 +132,11 @@ export const timezonesDeleteTimezonesResponse = zod
 /**
  * @summary List of the Contact's timezone(s).
  */
-export const timezonesListTimezonesParams = zod.object({
+export const listTimezonesParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 });
 
-export const timezonesListTimezonesQueryParams = zod.object({
+export const listTimezonesQueryParams = zod.object({
 	page: zod
 		.number()
 		.optional()
@@ -166,7 +166,7 @@ export const timezonesListTimezonesQueryParams = zod.object({
 	primary: zod.boolean().optional().describe('Primary timezone only.'),
 });
 
-export const timezonesListTimezonesResponse = zod
+export const listTimezonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -277,18 +277,18 @@ export const timezonesListTimezonesResponse = zod
 /**
  * @summary Associate more timezone(s) with the Contact.
  */
-export const timezonesMergeTimezonesParams = zod.object({
+export const mergeTimezonesParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const timezonesMergeTimezonesQueryParams = zod.object({
+export const mergeTimezonesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const timezonesMergeTimezonesBodyItem = zod
+export const mergeTimezonesBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -317,11 +317,9 @@ export const timezonesMergeTimezonesBodyItem = zod
 			),
 	})
 	.describe("An input of the Contact's timezones.");
-export const timezonesMergeTimezonesBody = zod.array(
-	timezonesMergeTimezonesBodyItem,
-);
+export const mergeTimezonesBody = zod.array(mergeTimezonesBodyItem);
 
-export const timezonesMergeTimezonesResponse = zod
+export const mergeTimezonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -432,18 +430,18 @@ export const timezonesMergeTimezonesResponse = zod
 /**
  * @summary Resets all timezones of the contact according to the input dataset.
  */
-export const timezonesResetTimezonesParams = zod.object({
+export const resetTimezonesParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const timezonesResetTimezonesQueryParams = zod.object({
+export const resetTimezonesQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const timezonesResetTimezonesBodyItem = zod
+export const resetTimezonesBodyItem = zod
 	.object({
 		etag: zod
 			.string()
@@ -472,11 +470,9 @@ export const timezonesResetTimezonesBodyItem = zod
 			),
 	})
 	.describe("An input of the Contact's timezones.");
-export const timezonesResetTimezonesBody = zod
-	.array(timezonesResetTimezonesBodyItem)
-	.min(1);
+export const resetTimezonesBody = zod.array(resetTimezonesBodyItem);
 
-export const timezonesResetTimezonesResponse = zod
+export const resetTimezonesResponse = zod
 	.object({
 		data: zod
 			.array(
@@ -587,19 +583,19 @@ export const timezonesResetTimezonesResponse = zod
 /**
  * @summary Remove the Contact's timezone association.
  */
-export const timezonesDeleteTimezoneParams = zod.object({
+export const deleteTimezoneParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod.string().describe('Unique ID to remove.'),
 });
 
-export const timezonesDeleteTimezoneQueryParams = zod.object({
+export const deleteTimezoneQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const timezonesDeleteTimezoneResponse = zod
+export const deleteTimezoneResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -685,7 +681,7 @@ export const timezonesDeleteTimezoneResponse = zod
 /**
  * @summary Locate the Contact's timezone association.
  */
-export const timezonesLocateTimezoneParams = zod.object({
+export const locateTimezoneParams = zod.object({
 	contact_id: zod.string().describe('Contact source ID.'),
 	etag: zod
 		.string()
@@ -694,14 +690,14 @@ export const timezonesLocateTimezoneParams = zod.object({
 		),
 });
 
-export const timezonesLocateTimezoneQueryParams = zod.object({
+export const locateTimezoneQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result.'),
 });
 
-export const timezonesLocateTimezoneResponse = zod
+export const locateTimezoneResponse = zod
 	.object({
 		createdAt: zod
 			.string()
@@ -787,21 +783,21 @@ export const timezonesLocateTimezoneResponse = zod
 /**
  * @summary Update the Contact's timezone details.
  */
-export const timezonesUpdateTimezone2Params = zod.object({
+export const updateTimezone2Params = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
 });
 
-export const timezonesUpdateTimezone2QueryParams = zod.object({
+export const updateTimezone2QueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const timezonesUpdateTimezone2Body = zod.object({
+export const updateTimezone2Body = zod.object({
 	primary: zod
 		.boolean()
 		.optional()
@@ -823,7 +819,7 @@ export const timezonesUpdateTimezone2Body = zod.object({
 		),
 });
 
-export const timezonesUpdateTimezone2Response = zod
+export const updateTimezone2Response = zod
 	.object({
 		data: zod
 			.array(
@@ -934,21 +930,21 @@ export const timezonesUpdateTimezone2Response = zod
 /**
  * @summary Update the Contact's timezone details.
  */
-export const timezonesUpdateTimezoneParams = zod.object({
+export const updateTimezoneParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resource.'),
 });
 
-export const timezonesUpdateTimezoneQueryParams = zod.object({
+export const updateTimezoneQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const timezonesUpdateTimezoneBody = zod.object({
+export const updateTimezoneBody = zod.object({
 	primary: zod
 		.boolean()
 		.optional()
@@ -970,7 +966,7 @@ export const timezonesUpdateTimezoneBody = zod.object({
 		),
 });
 
-export const timezonesUpdateTimezoneResponse = zod
+export const updateTimezoneResponse = zod
 	.object({
 		data: zod
 			.array(

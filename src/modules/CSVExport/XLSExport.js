@@ -22,9 +22,13 @@ export default class XLSExport {
   }
 
   // NOTE: if the value is an object with a name property, extract the name to display it in the EXEL file
+  // If no name property exists, stringify the object to show full structure
   extractNameFromObject(value) {
-    if (value && typeof value === 'object' && value.name) {
-      return value.name;
+    if (value && typeof value === 'object') {
+      if (Array.isArray(value)) {
+        return value.map((item) => this.extractNameFromObject(item)).join(' | ');
+      }
+      return value.name || JSON.stringify(value);
     }
     return value;
   }
