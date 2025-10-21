@@ -58,8 +58,6 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
-  position: 'static',
-  media: () => ({}),
   mode: 'media',
 });
 
@@ -110,7 +108,7 @@ onMounted(async () => {
     setTimeout(async () => {
       const videoEl = player.value.querySelector('video')
       videoEl.srcObject = props.stream
-      await videoEl.play().catch((err) => console.warn('play error:', err))
+      await videoEl.play().catch((err) => console.error('play error:', err))
     }, 100)
   }
 })
