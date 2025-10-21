@@ -1,7 +1,9 @@
 <template>
   <div
-    ref="textarea-wrapper"
     class="wt-textarea"
+    :class="{
+      'wt-textarea--hidden-scrollbar': isScrollHidden,
+    }"
   >
     <wt-label
       :disabled="disabled"
@@ -20,6 +22,7 @@
     </wt-label>
     <div class="wt-textarea__wrapper">
       <p-textarea
+        ref="textarea-wrapper"
         :id="name"
         v-model="model"
         :placeholder="placeholder || label"
@@ -45,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineModel, onMounted, useTemplateRef } from 'vue';
+import { defineModel, onMounted, useTemplateRef, ref } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
@@ -102,6 +105,8 @@ const textareaWrapperRef = useTemplateRef('textarea-wrapper');
 
 const emit = defineEmits(['enter', 'paste', 'blur', 'keydown']);
 
+const isScrollHidden = ref(false);
+
 const { isValidation, invalid, validationText } = useValidation({
   v: props.v,
   customValidators: props.customValidators,
@@ -129,10 +134,14 @@ const handleInput = () => {
  */
 const checkTextareaHeight = async () => {
   if (!props.autoresize) return;
-  if (textareaWrapperRef.value?.scrollHeight > textareaWrapperRef.value?.clientHeight) {
-    textareaWrapperRef.value?.classList.remove('wt-hidden-scrollbar');
+
+  const textareaEl = textareaWrapperRef.value?.$el;
+
+  // firstly textarea renders widths are equal, then clientHeight changes for 2px by primevue extra space
+  if (textareaEl?.scrollHeight === textareaEl?.clientHeight || textareaEl?.scrollHeight === (textareaEl?.clientHeight + 2)) {
+    isScrollHidden.value = true;
   } else {
-    textareaWrapperRef.value?.classList.add('wt-hidden-scrollbar');
+    isScrollHidden.value = false;
   }
 };
 
@@ -162,7 +171,7 @@ onMounted(() => {
   resize: none;
 }
 
-.wt-hidden-scrollbar textarea::-webkit-scrollbar {
+.wt-textarea--hidden-scrollbar textarea::-webkit-scrollbar {
   display: none;
 }
 </style>
