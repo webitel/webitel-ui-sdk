@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import convertDuration from '@webitel/ui-sdk/src/scripts/convertDuration';
-import {computed, inject, onUnmounted, ref, watch} from 'vue';
+import {computed, defineEmits, inject, onUnmounted, ref, watch} from 'vue';
 
 import {WtVidstackPlayerSession} from "../../../types/WtVidstackPlayerSession";
 
@@ -60,6 +60,10 @@ interface Props {
   session: WtVidstackPlayerSession
 }
 const props = defineProps<Props>();
+
+const emit = defineEmits<{
+  'close-session': [],
+}>()
 
 const {size} = inject('size');
 const screenshotStatus = ref<ScreenshotStatus | null>(null)
@@ -123,6 +127,7 @@ const changeScreenshotStatus = (status: ScreenshotStatus) => {
 
 const closeSession = () => {
   props.session.close()
+  emit('close-session')
 };
 
 onUnmounted(() => {

@@ -17,7 +17,7 @@
     </template>
 
     <template v-if="props.mode === 'stream'">
-      <screen-sharing-control-panel :session="props.session" />
+      <screen-sharing-control-panel :session="props.session" @close-session="emit('close-session')" />
     </template>
   </media-controls>
 </template>
@@ -44,6 +44,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'close-player': [],
+  'close-session': [],
 }>();
 </script>
 

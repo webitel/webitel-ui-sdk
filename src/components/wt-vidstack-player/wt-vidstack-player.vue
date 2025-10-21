@@ -22,6 +22,7 @@
         :session="props.session"
         :mode="mode"
         @close-player="emit('close')"
+        @close-session="emit('close-session')"
       />
 
     </media-player>
@@ -63,6 +64,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   'close': [],
+  'close-session': [],
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
