@@ -1,9 +1,7 @@
 <template>
   <media-controls-group class="screen-sharing-control-panel" :class="`screen-sharing-control-panel--${size}`">
-
     <div
       class="screen-sharing-control-panel__actions"
-      :class="`screen-sharing-control-panel--${size}__actions`"
     >
       <wt-button
         rounded
@@ -56,27 +54,29 @@ import {computed, inject, onUnmounted, ref, watch} from 'vue';
 
 import {WtVidstackPlayerSession} from "../../../types/WtVidstackPlayerSession";
 
+type ScreenshotStatus = 'done' | 'error'
+
 interface Props {
-  screenshotStatus?: 'done' | 'false'
   session: WtVidstackPlayerSession
 }
 const props = defineProps<Props>();
 
 const {size} = inject('size');
+const screenshotStatus = ref<ScreenshotStatus | null>(null)
 
 const recordIcon = computed(() => (props.session.recordings ? 'record-stop' : 'record-start'));
-const getScreenshotIcon = (status?: string) => {
+const getScreenshotIcon = (status?: ScreenshotStatus) => {
   switch (status) {
     case 'done':
       return 'screenshot-done';
-    case 'false':
+    case 'error':
       return 'screenshot-false';
     default:
       return 'screenshot';
   }
 }
 
-const screenShotIcon = computed(() => getScreenshotIcon(props.screenshotStatus));
+const screenShotIcon = computed(() => getScreenshotIcon(screenshotStatus.value));
 const isRecording = computed(() => props.session.recordings);
 
 const secondsElapsed = ref(0);
@@ -104,9 +104,23 @@ const toggleRecordAction = () => {
     props.session.startRecord();
   }
 };
+
 const makeScreenshot = () => {
-  props.session.screenshot()
+  try {
+    props.session.screenshot()
+    changeScreenshotStatus('done')
+  } catch {
+    changeScreenshotStatus('error')
+  }
 };
+
+const changeScreenshotStatus = (status: ScreenshotStatus) => {
+  screenshotStatus.value = status;
+  setTimeout(() => {
+    screenshotStatus.value = null;
+  }, 2000);
+}
+
 const closeSession = () => {
   props.session.close()
 };
@@ -135,7 +149,7 @@ watch(isRecording, (newVal) => {
   &--sm {
     padding: var(--p-player-control-bar-position-padding-sm);
 
-    &__actions {
+    .screen-sharing-control-panel__actions {
       width: 100%;
       border-top-left-radius: 0 !important;
       border-top-right-radius: 0 !important;
