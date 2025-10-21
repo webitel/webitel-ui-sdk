@@ -6,6 +6,7 @@
     <media-player
       ref="player"
       :src="playerSrc"
+      :autoplay="props.autoplay"
       class="wt-vidstack-player__player"
       cross-origin
       plays-inline
@@ -18,6 +19,8 @@
         :autoplay="props.autoplay"
         :title="props.title"
         :username="props.username"
+        :session="props.session"
+        :mode="mode"
         @close-player="emit('close')"
       />
 
@@ -30,10 +33,12 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type { MediaPlayerElement } from 'vidstack/elements';
-import {computed, defineEmits, defineProps, provide, ref, useTemplateRef, watch} from 'vue';
+import {computed, defineEmits, defineProps, onMounted,provide, ref, useTemplateRef} from 'vue';
 
-import { ComponentSize } from '../../enums';
+import {ComponentSize} from '../../enums';
 import VideoLayout from './components/layouts/video-layout.vue';
+import {WtVidstakPlayerControlsMode} from "./types/WtVidstackPlayerControlsMode";
+import {WtVidstackPlayerSession} from "./types/WtVidstackPlayerSession";
 
 interface Props {
   src: string | { src: string; type?: string };
@@ -42,6 +47,9 @@ interface Props {
   title?: string;
   username?: string;
   closable?: boolean;
+  stream?: MediaStream
+  mode: WtVidstakPlayerControlsMode;
+  session?: WtVidstackPlayerSession
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -50,6 +58,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
+  mode: 'media',
 });
 
 const emit = defineEmits<{
@@ -90,7 +99,19 @@ const playerSrc = computed(() => {
   };
 });
 
-
+/** @author @Oleksandr Palonnyi
+ * Attach MediaStream to Vidstack player after mount.
+ * A short delay ensures the internal <video> is ready before playback.
+ */
+onMounted(async () => {
+  if (player.value && props.mode === 'stream') {
+    setTimeout(async () => {
+      const videoEl = player.value.querySelector('video')
+      videoEl.srcObject = props.stream
+      await videoEl.play().catch((err) => console.error('play error:', err))
+    }, 100)
+  }
+})
 </script>
 
 <style scoped lang="scss">

@@ -12,7 +12,13 @@
 
     <wt-loader size="sm" color="on-dark"/>
 
-    <media-control-panel />
+    <template v-if="props.mode === 'media'">
+      <media-control-panel />
+    </template>
+
+    <template v-if="props.mode === 'stream'">
+      <screen-sharing-control-panel :session="props.session" />
+    </template>
   </media-controls>
 </template>
 
@@ -20,7 +26,10 @@
 import {defineEmits, inject} from "vue";
 
 import WtLoader from "../../../wt-loader/wt-loader.vue";
+import {WtVidstakPlayerControlsMode} from "../../types/WtVidstackPlayerControlsMode";
+import {WtVidstackPlayerSession} from "../../types/WtVidstackPlayerSession";
 import MediaControlPanel from "../panels/media-control-panel/media-control-panel.vue";
+import ScreenSharingControlPanel from "../panels/screen-sharing-control-panel/screen-sharing-control-panel.vue";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
 const { size } = inject('size');
@@ -29,12 +38,13 @@ const props = defineProps<{
   title?: string;
   username?: string;
   closable?: boolean;
+  mode: WtVidstakPlayerControlsMode;
+  session: WtVidstackPlayerSession
 }>();
 
 const emit = defineEmits<{
   'close-player': [],
 }>();
-
 </script>
 
 <style scoped lang="scss">
