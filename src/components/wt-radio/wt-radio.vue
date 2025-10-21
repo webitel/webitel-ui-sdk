@@ -9,6 +9,7 @@
       :value="value"
     />
     <wt-label 
+      v-if="hasLabel"
       :for="radioId"
       :disabled="disabled"
     >
@@ -30,7 +31,7 @@
 
 <script setup lang="ts">
 import type { RadioButtonProps } from 'primevue/radiobutton';
-import { computed, defineModel, defineProps } from 'vue';
+import { computed, defineModel, defineProps, useSlots } from 'vue';
 
 interface Props extends RadioButtonProps {
   // value, set by radio
@@ -51,6 +52,12 @@ const props = withDefaults(defineProps<Props>(), {
 const model = defineModel<string | number | boolean | object>('selected', {required: true});
 
 const radioId = `radio-${Math.random().toString(36).slice(2, 11)}`;
+
+const slots = useSlots();
+
+const hasLabel = computed(() => {
+  return props.label || slots.label;
+});
 
 const isChecked = computed(() => {
   return props.value === model.value;
@@ -74,6 +81,5 @@ const isChecked = computed(() => {
 .wt-radio__label {
   transition: var(--transition);
   cursor: pointer;
-  margin-left: var(--radio-icon-margin);
 }
 </style>
