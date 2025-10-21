@@ -9,7 +9,7 @@
 
 <template>
   ...
-  <wt-table-transition v-if="dataList.length && !isLoading">
+  <wt-table-transition v-show="dataList.length && !isLoading">
     <wt-table> ... </wt-table>
   </wt-table-transition>
   ...
