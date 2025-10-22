@@ -111,7 +111,12 @@
 
       <template #header>
         <div class="wt-table__th__content">
-          {{ col.text }}
+          <wt-tooltip placement="left">
+            <template #activator>
+              {{ col.text }}
+            </template>
+            {{ col.text }}
+          </wt-tooltip>
           <wt-icon
             v-if="col.sort === 'asc'"
             class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
