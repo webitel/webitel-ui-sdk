@@ -48,11 +48,13 @@
 </template>
 
 <script setup lang="ts">
+import type { TextareaProps } from 'primevue/textarea';
+
 import { defineModel, onMounted, useTemplateRef, ref } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
-interface Props {
+interface Props extends TextareaProps {
   /**
    * textarea label
    */
