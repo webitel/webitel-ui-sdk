@@ -7,13 +7,16 @@
       ref="player"
       :src="playerSrc"
       :autoplay="props.autoplay"
+      :muted="props.muted"
       class="wt-vidstack-player__player"
       cross-origin
       plays-inline
       @close="emit('close')"
       @change-size="changeSize"
     >
-      <media-provider></media-provider>
+      <media-provider
+        class="wt-vidstack-player__provider"
+      ></media-provider>
       <video-layout
         :closable="props.closable"
         :autoplay="props.autoplay"
@@ -56,6 +59,7 @@ interface Props {
   src: string | { src: string; type?: string };
   mime?: string;
   autoplay?: boolean;
+  muted?: boolean;
   title?: string;
   username?: string;
   closable?: boolean;
@@ -67,6 +71,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   mime: 'video/mp4',
   autoplay: false,
+  muted: false,
   title: '',
   username: '',
   closable: false,
@@ -147,7 +152,7 @@ onBeforeUnmount(() => {
 .wt-vidstack-player {
   transition: var(--transition);
 
-  .wt-vidstack-player__player {
+  &__player {
     padding: 0;
     margin: 0;
   }
@@ -162,6 +167,14 @@ onBeforeUnmount(() => {
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
     box-shadow: var(--elevation-10);
+    height: var(--p-player-wrapper-sm-height);
+
+    .wt-vidstack-player__provider {
+      display: block;
+      height: 100%;
+      // Control bar sm height
+      padding-bottom: 48px;
+    }
   }
 
   &--md {
@@ -200,6 +213,13 @@ media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/
     }
   }
 }
+</style>
 
-
+<style lang="scss">
+.wt-vidstack-player {
+  video {
+    height: 100%;
+    object-fit: fill;
+  }
+}
 </style>
