@@ -1,9 +1,7 @@
-import { PhonesApiFactory } from 'webitel-sdk';
+import { getPhones } from '@webitel/api-services/gen';
 import {
   getDefaultGetListResponse,
   getDefaultGetParams,
-  getDefaultInstance,
-  getDefaultOpenAPIConfig,
 } from '../../defaults';
 import {
   applyTransform,
@@ -14,9 +12,7 @@ import {
   starToSearch,
 } from '../../transformers';
 
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-const phonesService = PhonesApiFactory(configuration, '', instance);
+const phonesService = getPhones();
 
 const getPhonesList = async ({ contactId, options, ...params }) => {
   const listParams = applyTransform(params, [
