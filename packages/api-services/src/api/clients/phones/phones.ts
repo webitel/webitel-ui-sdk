@@ -12,7 +12,6 @@ import {
   starToSearch,
 } from '../../transformers';
 
-const phonesService = getPhones();
 
 const getPhonesList = async ({ contactId, options, ...params }) => {
   const listParams = applyTransform(params, [
@@ -20,7 +19,7 @@ const getPhonesList = async ({ contactId, options, ...params }) => {
     starToSearch('search'),
   ]);
   try {
-    const response = await phonesService.listPhones(contactId, listParams, options);
+    const response = await getPhones().listPhones(contactId, listParams, options);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
@@ -33,7 +32,7 @@ const getPhonesList = async ({ contactId, options, ...params }) => {
 
 const getPhone = async ({ contactId, etag, params, options }) => {
   try {
-    const response = await phonesService.locatePhone(contactId, etag, params, options);
+    const response = await getPhones().locatePhone(contactId, etag, params, options);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -43,7 +42,7 @@ const getPhone = async ({ contactId, etag, params, options }) => {
 const mergePhones = async ({ contactId, phones, params, options }) => {
   const body = applyTransform(phones, [camelToSnake()]);
   try {
-    const response = await phonesService.mergePhones(contactId, body, params, options);
+    const response = await getPhones().mergePhones(contactId, body, params, options);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -53,7 +52,7 @@ const mergePhones = async ({ contactId, phones, params, options }) => {
 const resetPhones = async ({ contactId, phones, params, options }) => {
   const body = applyTransform(phones, [camelToSnake()]);
   try {
-    const response = await phonesService.resetPhones(contactId, body, params, options);
+    const response = await getPhones().resetPhones(contactId, body, params, options);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -63,7 +62,7 @@ const resetPhones = async ({ contactId, phones, params, options }) => {
 const updatePhone = async ({ contactId, etag, data, params, options }) => {
   const body = applyTransform(data, [camelToSnake()]);
   try {
-    const response = await phonesService.updatePhone(contactId, etag, body, params, options);
+    const response = await getPhones().updatePhone(contactId, etag, body, params, options);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -73,7 +72,7 @@ const updatePhone = async ({ contactId, etag, data, params, options }) => {
 const patchPhone = async ({ contactId, etag, changes, params, options }) => {
   const body = applyTransform(changes, [camelToSnake()]);
   try {
-    const response = await phonesService.updatePhone2(contactId, etag, body, params, options);
+    const response = await getPhones().updatePhone2(contactId, etag, body, params, options);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -82,7 +81,7 @@ const patchPhone = async ({ contactId, etag, changes, params, options }) => {
 
 const deletePhone = async ({ contactId, etag, params, options }) => {
   try {
-    const response = await phonesService.deletePhone(contactId, etag, params, options);
+    const response = await getPhones().deletePhone(contactId, etag, params, options);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -91,7 +90,7 @@ const deletePhone = async ({ contactId, etag, params, options }) => {
 
 const deletePhones = async ({ contactId, params, options }) => {
   try {
-    const response = await phonesService.deletePhones(contactId, params, options);
+    const response = await getPhones().deletePhones(contactId, params, options);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
