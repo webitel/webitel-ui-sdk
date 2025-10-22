@@ -24,6 +24,7 @@ export * from './lists/blacklists';
 export * from './media/media';
 export * from './object/object';
 export * from './pdfServices/pdfServices';
+export * from './phones/phones';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
 // export * from './roles/roles'; fixme: ApplicationAccess import
@@ -35,4 +36,3 @@ export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';
-export * from './phones/phones'
