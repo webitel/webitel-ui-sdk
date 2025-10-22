@@ -109,9 +109,9 @@ const toggleRecordAction = () => {
   }
 };
 
-const makeScreenshot = () => {
+const makeScreenshot = async () => {
   try {
-    props.session.screenshot()
+    await props.session.screenshot()
     changeScreenshotStatus('done')
   } catch {
     changeScreenshotStatus('error')

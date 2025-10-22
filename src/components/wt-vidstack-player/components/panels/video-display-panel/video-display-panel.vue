@@ -7,8 +7,12 @@
       <wt-avatar
         v-if="props.username"
         :username="props.username"
+        size="sm"
       />
-      {{ props.title || props.username }}
+
+      <span>
+        {{ props.title || props.username }}
+      </span>
     </div>
     <div class="video-display-panel__controls">
       <toggle-button
@@ -72,9 +76,14 @@ const handlePlayerSize = (value: boolean) => {
   background: var(--p-player-head-line-background);
   color: var(--p-player-head-line-color);
   transition: all var(--transition) ease-in-out;
+  backdrop-filter: blur(var(--p-player-head-line-blur));
+  opacity: 0;
 
   &__title {
     @extend %typo-body-1-bold;
+    display: flex;
+    align-items: center;
+    gap: var(--p-player-headline-sm-gap);
   }
 
   &__controls {
@@ -83,12 +92,21 @@ const handlePlayerSize = (value: boolean) => {
     gap: var(--p-player-headline-sm-gap);
   }
 
+  &--sm {
+    gap: var(--p-player-headline-sm-gap);
+  }
+
   &--md {
     padding: var(--p-player-headline-md-padding);
+    gap: var(--p-player-headline-md-gap);
 
     .video-display-panel__controls {
       gap: var(--p-player-headline-md-gap);
     }
+  }
+
+  &--lg {
+    gap: var(--p-player-headline-lg-gap);
   }
 }
 

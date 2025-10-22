@@ -52,8 +52,6 @@ const emit = defineEmits<{
 .video-layout {
 
   .video-display-panel {
-    opacity: 1;
-
     :deep(.video-display-panel__controls) { // hide panel buttons
       opacity: 0;
       transition: all var(--transition) ease-out;
