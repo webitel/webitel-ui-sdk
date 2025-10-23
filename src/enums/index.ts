@@ -40,6 +40,7 @@ export {
   IconAction,
   IconColor,
   ProcessingTableColumnType,
+  ProviderIconType,
   QueueType,
   RelativeDatetimeValue,
   SupervisorSections,
@@ -48,5 +49,4 @@ export {
   WtApplication,
   WtObject,
   WtTypeExtensionFieldKind,
-  ProviderIconType,
 };

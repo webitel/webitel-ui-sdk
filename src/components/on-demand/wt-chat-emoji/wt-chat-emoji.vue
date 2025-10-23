@@ -20,9 +20,9 @@
 </template>
 
 <script setup>
-import { ref, onBeforeUnmount, nextTick } from 'vue';
-import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
 import { ComponentSize } from '@webitel/ui-sdk/enums';
+import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
+import { nextTick,onBeforeUnmount, ref } from 'vue';
 
 const props = defineProps({
   size: {
