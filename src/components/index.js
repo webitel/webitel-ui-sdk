@@ -71,6 +71,7 @@ import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 import WtTree from './wt-tree/wt-tree.vue';
 import WtTreeTable from './wt-tree-table/wt-tree-table.vue';
 import WtVidstackPlayer from './wt-vidstack-player/wt-vidstack-player.vue';
+import WtChatEmoji from './on-demand/wt-chat-emoji/wt-chat-emoji.vue';
 
 const Components = {
   WtActionBar,
@@ -145,6 +146,7 @@ const Components = {
   WtSelectionPopup,
   WtDisplayChipItems,
   WtVidstackPlayer,
+  WtChatEmoji,
 };
 
 export {
@@ -221,6 +223,7 @@ export {
   WtTreeTable,
   WtTypeExtensionValueInput,
   WtVidstackPlayer,
+  WtChatEmoji,
 };
 
 export default Components;

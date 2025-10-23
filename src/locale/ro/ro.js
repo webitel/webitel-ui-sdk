@@ -182,6 +182,11 @@ export default {
     customLookup: {
       customLookup: 'Personalizare | Personalizări',
     },
+    chatGateway: 'Gateway chat | Gateway-uri chat',
+    chat: {
+      chat: 'Chat | Chat-uri',
+      draftPlaceholder: 'Scrie un mesaj...',
+    },
     queue: {
       queue: 'Coadă | Cozi',
       type: {
@@ -507,6 +512,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacte`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

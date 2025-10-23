@@ -181,6 +181,11 @@ export default {
     customLookup: {
       customLookup: 'Користувацький довідник | Користувацькі довідники',
     },
+    chatGateway: 'Текстовий шлюз | Текстові шлюзи',
+    chat: {
+      chat: 'Чат | Чати',
+      draftPlaceholder: 'Напишіть повідомлення...',
+    },
     queue: {
       queue: 'Черга | Черги',
       type: {
@@ -501,6 +506,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакти`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

@@ -37,6 +37,7 @@ const props = defineProps({
         IconAction.APPLY_PRESET,
         IconAction.ADD_CONTACT,
         IconAction.DOWNLOAD_PDF,
+        IconAction.CHAT
       ]).includes(v),
   },
   disabled: {
