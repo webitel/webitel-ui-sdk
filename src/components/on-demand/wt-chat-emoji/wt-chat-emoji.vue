@@ -22,11 +22,12 @@
 <script setup>
 import { ref, onBeforeUnmount, nextTick } from 'vue';
 import * as EmojiPicker from 'emoji-picker-element/picker'; ///!not delete
+import { ComponentSize } from '@webitel/ui-sdk/enums';
 
 const props = defineProps({
   size: {
     type: String,
-    default: 'md',
+    default: ComponentSize.MD,
   },
 });
 
@@ -86,7 +87,7 @@ onBeforeUnmount(() => {
   position: relative;
   width: 100%;
 
-  ::v-deep emoji-picker {
+  :deep() emoji-picker {
     --background: var(--content-wrapper-color);
     --border-color: var(--secondary-color);
   }
