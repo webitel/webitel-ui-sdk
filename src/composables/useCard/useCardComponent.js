@@ -15,8 +15,7 @@ export const useCardComponent = (params) => {
     updateItem,
     setId,
     resetState,
-    isRedirectOnLoadFail,
-    failRedirectUrl = '/404',
+    errorRedirectMap,
   } = params;
 
   const router = useRouter();
@@ -65,9 +64,9 @@ export const useCardComponent = (params) => {
       const { id } = route.params;
       await setId(id);
       await loadItem();
-    } catch (e) {
-      if (isRedirectOnLoadFail) {
-        return router.push(failRedirectUrl);
+    } catch (err) {
+      if (errorRedirectMap && errorRedirectMap[err.status]) {
+        return router.push(errorRedirectMap[err.status]);
       }
     } finally {
       isLoading.value = false;

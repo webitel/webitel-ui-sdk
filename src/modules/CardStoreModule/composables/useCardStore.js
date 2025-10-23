@@ -6,7 +6,7 @@ import getNamespacedState from '../../../store/helpers/getNamespacedState.js';
 
 // eslint-disable-next-line import/prefer-default-export
 
-export const useCardStore = (namespace, { isRedirectOnLoadFail, failRedirect = '/404' }) => {
+export const useCardStore = (namespace, { errorRedirectMap }) => {
   const store = useStore();
   const router = useRouter();
 
@@ -22,9 +22,9 @@ export const useCardStore = (namespace, { isRedirectOnLoadFail, failRedirect = '
   async function loadItem(payload) {
     try {
       return await store.dispatch(`${cardNamespace}/LOAD_ITEM`, payload);
-    } catch (e) {
-      if (!isRedirectOnLoadFail) throw e;
-      router.push(failRedirect);
+    } catch (err) {
+      if (!errorRedirectMap && !errorRedirectMap[err.status]) throw err;
+      router.push(errorRedirectMap[err.status]);
     }
   }
 
