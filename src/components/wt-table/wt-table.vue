@@ -209,7 +209,7 @@
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
 import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
-import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
+import { computed, defineProps, nextTick, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
@@ -307,7 +307,7 @@ const tableKey = ref(0);
 const expandedRows = ref([]);
 
 // table's columns that should be excluded from reorder
-const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
+const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions', 'row-expander'];
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
@@ -424,9 +424,14 @@ const columnResize = ({element}) => {
 }
 
 const columnReorder = () => {
+  const containerEl = table.value.$el.querySelector('.p-datatable-table-container');
+  const containerElScrollLeft = containerEl.scrollLeft;
   const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
   tableKey.value += 1;
   emit('column-reorder', newOrder)
+  nextTick(() => {
+    table.value.$el.querySelector('.p-datatable-table-container').scrollLeft = containerElScrollLeft
+  })
 }
 
 const isRowExpanded = (row) => {
