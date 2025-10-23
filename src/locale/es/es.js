@@ -177,6 +177,11 @@ export default {
     customization: {
       customization: 'Personalización | Personalizaciones',
     },
+    chatGateway: 'Pasarela de chat | Pasarelas de chat',
+    chat: {
+      chat: 'Chat | Chats',
+      draftPlaceholder: 'Escribe un mensaje...',
+    },
     queue: {
       queue: 'Cola | Colas',
       type: {
@@ -502,6 +507,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

@@ -182,6 +182,11 @@ export default {
     customLookup: {
       customLookup: 'Tùy chỉnh | Các tùy chỉnh',
     },
+    chatGateway: 'Cổng trò chuyện | Các cổng trò chuyện',
+    chat: {
+      chat: 'Trò chuyện | Các cuộc trò chuyện',
+      draftPlaceholder: 'Viết tin nhắn...',
+    },
     queue: {
       queue: 'Hàng chờ | Hàng chờ',
       type: {
@@ -508,6 +513,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} liên hệ`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {
