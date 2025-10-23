@@ -182,6 +182,11 @@ export default {
       customLookup:
         'Пользовательский справочник | Пользовательские справочники',
     },
+    chatGateway: 'Текстовый шлюз | Текстовые шлюзы',
+    chat: {
+      chat: 'Чат | Чаты',
+      draftPlaceholder: 'Напишите сообщение...',
+    },
     queue: {
       queue: 'Очередь | Очереди',
       type: {
@@ -502,6 +507,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакты`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

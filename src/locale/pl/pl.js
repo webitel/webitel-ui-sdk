@@ -182,6 +182,11 @@ export default {
     customLookup: {
       customLookup: 'Dostosowanie | Dostosowania',
     },
+    chatGateway: 'Bramka czatu | Bramki czatu',
+    chat: {
+      chat: 'Czat | Czaty',
+      draftPlaceholder: 'Napisz wiadomość...',
+    },
     queue: {
       queue: 'Kolejka | Kolejki',
       type: {
@@ -506,6 +511,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} kontakty`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {
