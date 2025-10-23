@@ -1,7 +1,10 @@
 import { AgentServiceApiFactory } from 'webitel-sdk';
 
-import convertDuration from '../../../../../../src/scripts/convertDuration'
-
+//  @author @Lera
+// fixme: change on library
+//  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
+//
+import { convertDuration } from '../../../scripts';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
