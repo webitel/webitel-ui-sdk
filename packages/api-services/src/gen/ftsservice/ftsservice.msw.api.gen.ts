@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 
 import type { FtsSearchResponse } from '.././_models';
 
-export const getSearchMixin7ResponseMock = (
+export const getSearchResponseMock = (
 	overrideResponse: Partial<FtsSearchResponse> = {},
 ): FtsSearchResponse => ({
 	items: faker.helpers.arrayElement([
@@ -37,7 +37,7 @@ export const getSearchMixin7ResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchMixin7MockHandler = (
+export const getSearchMockHandler = (
 	overrideResponse?:
 		| FtsSearchResponse
 		| ((
@@ -53,10 +53,10 @@ export const getSearchMixin7MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchMixin7ResponseMock(),
+					: getSearchResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
-export const getFtsserviceMock = () => [getSearchMixin7MockHandler()];
+export const getFtsserviceMock = () => [getSearchMockHandler()];

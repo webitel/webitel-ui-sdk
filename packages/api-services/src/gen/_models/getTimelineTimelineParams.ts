@@ -4,16 +4,16 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { GetTimelineMixin6TypeItem } from './getTimelineMixin6TypeItem';
+import type { GetTimelineTimelineTypeItem } from './getTimelineTimelineTypeItem';
 
-export type GetTimelineMixin6Params = {
-	page?: number;
-	size?: number;
+export type GetTimelineTimelineParams = {
+	page?: string;
+	size?: string;
 	q?: string;
 	sort?: string;
 	fields?: string[];
 	ids?: string[];
 	dateFrom?: string;
 	dateTo?: string;
-	type?: GetTimelineMixin6TypeItem[];
+	type?: GetTimelineTimelineTypeItem[];
 };

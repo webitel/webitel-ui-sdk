@@ -107,6 +107,11 @@ export const searchAgentResponse = zod.object({
 						name: zod.string().optional(),
 					})
 					.optional(),
+				userPresenceStatus: zod
+					.object({
+						status: zod.string().optional(),
+					})
+					.optional(),
 			}),
 		)
 		.optional(),
@@ -238,6 +243,11 @@ export const createAgentResponse = zod.object({
 		.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
+		})
+		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
 		})
 		.optional(),
 });
@@ -714,6 +724,11 @@ export const deleteAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
+		})
+		.optional(),
 });
 
 /**
@@ -798,6 +813,11 @@ export const readAgentResponse = zod.object({
 		.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
+		})
+		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
 		})
 		.optional(),
 });
@@ -932,6 +952,11 @@ export const patchAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
+		})
+		.optional(),
 });
 
 /**
@@ -1063,6 +1088,11 @@ export const updateAgentResponse = zod.object({
 		.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
+		})
+		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
 		})
 		.optional(),
 });

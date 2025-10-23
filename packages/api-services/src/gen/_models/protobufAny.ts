@@ -6,6 +6,5 @@
  */
 
 export interface ProtobufAny {
-	typeUrl?: string;
-	value?: string;
+	'@type'?: string;
 }

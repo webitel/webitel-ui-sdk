@@ -5,8 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface WebitelKnowledgebaseCombined {
-	id?: string;
-	name?: string;
-	type?: string;
-}
+export type UpdateTypeParams = {
+	/**
+	 * Fields to return into result.
+	 */
+	fields?: string[];
+};

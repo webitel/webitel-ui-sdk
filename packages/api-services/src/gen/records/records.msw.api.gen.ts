@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 import type {
 	Create200,
 	DataDataset,
-	Locate200,
+	LocateRecords200,
 	Update200,
 	Update2200,
 } from '.././_models';
@@ -600,7 +600,7 @@ export const getDeleteResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchResponseMock = (
+export const getSearchRecordsResponseMock = (
 	overrideResponse: Partial<DataDataset> = {},
 ): DataDataset => ({
 	data: faker.helpers.arrayElement([
@@ -1186,7 +1186,7 @@ export const getSearchResponseMock = (
 
 export const getCreateResponseMock = (): Create200 => ({});
 
-export const getLocateResponseMock = (): Locate200 => ({});
+export const getLocateRecordsResponseMock = (): LocateRecords200 => ({});
 
 export const getUpdateResponseMock = (): Update200 => ({});
 
@@ -1215,7 +1215,7 @@ export const getDeleteMockHandler = (
 	});
 };
 
-export const getSearchMockHandler = (
+export const getSearchRecordsMockHandler = (
 	overrideResponse?:
 		| DataDataset
 		| ((
@@ -1231,7 +1231,7 @@ export const getSearchMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchResponseMock(),
+					: getSearchRecordsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -1261,12 +1261,12 @@ export const getCreateMockHandler = (
 	});
 };
 
-export const getLocateMockHandler = (
+export const getLocateRecordsMockHandler = (
 	overrideResponse?:
-		| Locate200
+		| LocateRecords200
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
-		  ) => Promise<Locate200> | Locate200),
+		  ) => Promise<LocateRecords200> | LocateRecords200),
 ) => {
 	return http.get('*/v2/dataset/:repo/:id', async (info) => {
 		await delay(1000);
@@ -1277,7 +1277,7 @@ export const getLocateMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLocateResponseMock(),
+					: getLocateRecordsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -1331,9 +1331,9 @@ export const getUpdate2MockHandler = (
 };
 export const getRecordsMock = () => [
 	getDeleteMockHandler(),
-	getSearchMockHandler(),
+	getSearchRecordsMockHandler(),
 	getCreateMockHandler(),
-	getLocateMockHandler(),
+	getLocateRecordsMockHandler(),
 	getUpdateMockHandler(),
 	getUpdate2MockHandler(),
 ];

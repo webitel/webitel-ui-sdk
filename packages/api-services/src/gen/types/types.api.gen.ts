@@ -11,7 +11,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	DataStructList,
 	ProtodataStruct,
-	SearchMixin3Params,
+	SearchTypesParams,
 } from '.././_models';
 
 // --- header start
@@ -25,8 +25,8 @@ export const // --- title start
 			/**
 			 * @summary Lookup data types registry.
 			 */
-			const searchMixin3 = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchMixin3Params,
+			const searchTypes = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypesParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types', {
@@ -37,7 +37,7 @@ export const // --- title start
 			/**
 			 * @summary Structured data type details.
 			 */
-			const locateMixin3 = <TData = AxiosResponse<ProtodataStruct>>(
+			const locate = <TData = AxiosResponse<ProtodataStruct>>(
 				path: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -45,9 +45,9 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { searchMixin3, locateMixin3 };
+			return { searchTypes, locate };
 		};
-export type SearchMixin3Result = AxiosResponse<DataStructList>;
-export type LocateMixin3Result = AxiosResponse<ProtodataStruct>;
+export type SearchTypesResult = AxiosResponse<DataStructList>;
+export type LocateResult = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

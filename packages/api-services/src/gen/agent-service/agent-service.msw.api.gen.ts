@@ -229,6 +229,15 @@ export const getSearchAgentResponseMock = (
 				},
 				undefined,
 			]),
+			userPresenceStatus: faker.helpers.arrayElement([
+				{
+					status: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
 		})),
 		undefined,
 	]),
@@ -416,6 +425,15 @@ export const getCreateAgentResponseMock = (
 				undefined,
 			]),
 			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	userPresenceStatus: faker.helpers.arrayElement([
+		{
+			status: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
@@ -1475,6 +1493,15 @@ export const getDeleteAgentResponseMock = (
 		},
 		undefined,
 	]),
+	userPresenceStatus: faker.helpers.arrayElement([
+		{
+			status: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
 	...overrideResponse,
 });
 
@@ -1658,6 +1685,15 @@ export const getReadAgentResponseMock = (
 				undefined,
 			]),
 			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	userPresenceStatus: faker.helpers.arrayElement([
+		{
+			status: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
@@ -1853,6 +1889,15 @@ export const getPatchAgentResponseMock = (
 		},
 		undefined,
 	]),
+	userPresenceStatus: faker.helpers.arrayElement([
+		{
+			status: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
 	...overrideResponse,
 });
 
@@ -2036,6 +2081,15 @@ export const getUpdateAgentResponseMock = (
 				undefined,
 			]),
 			name: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		},
+		undefined,
+	]),
+	userPresenceStatus: faker.helpers.arrayElement([
+		{
+			status: faker.helpers.arrayElement([
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),

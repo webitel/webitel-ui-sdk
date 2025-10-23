@@ -13,7 +13,7 @@ import type {
 } from '.././_models';
 import { WebitelCasesCaseTimelineEventType } from '.././_models';
 
-export const getGetTimelineMixin6ResponseMock = (
+export const getGetTimelineResponseMock = (
 	overrideResponse: Partial<WebitelCasesGetTimelineResponse> = {},
 ): WebitelCasesGetTimelineResponse => ({
 	days: faker.helpers.arrayElement([
@@ -422,7 +422,7 @@ export const getGetTimelineMixin6ResponseMock = (
 	...overrideResponse,
 });
 
-export const getGetTimelineCounterMixin6ResponseMock = (
+export const getGetTimelineCounterResponseMock = (
 	overrideResponse: Partial<WebitelCasesGetTimelineCounterResponse> = {},
 ): WebitelCasesGetTimelineCounterResponse => ({
 	callsCount: faker.helpers.arrayElement([
@@ -448,7 +448,7 @@ export const getGetTimelineCounterMixin6ResponseMock = (
 	...overrideResponse,
 });
 
-export const getGetTimelineMixin6MockHandler = (
+export const getGetTimelineMockHandler = (
 	overrideResponse?:
 		| WebitelCasesGetTimelineResponse
 		| ((
@@ -466,14 +466,14 @@ export const getGetTimelineMixin6MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getGetTimelineMixin6ResponseMock(),
+					: getGetTimelineResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getGetTimelineCounterMixin6MockHandler = (
+export const getGetTimelineCounterMockHandler = (
 	overrideResponse?:
 		| WebitelCasesGetTimelineCounterResponse
 		| ((
@@ -491,13 +491,13 @@ export const getGetTimelineCounterMixin6MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getGetTimelineCounterMixin6ResponseMock(),
+					: getGetTimelineCounterResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getCaseTimelineMock = () => [
-	getGetTimelineMixin6MockHandler(),
-	getGetTimelineCounterMixin6MockHandler(),
+	getGetTimelineMockHandler(),
+	getGetTimelineCounterMockHandler(),
 ];

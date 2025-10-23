@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type DeleteCommentMixin6Params = {
+export type UpdateCommentCommentsParams = {
 	/**
-	 * Fields to return after deletion.
+	 * Fields to be retrieved into result of changes.
 	 */
 	fields?: string[];
 };

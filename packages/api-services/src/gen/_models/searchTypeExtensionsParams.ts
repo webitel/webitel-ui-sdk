@@ -5,7 +5,7 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchTypeMixin3Params = {
+export type SearchTypeExtensionsParams = {
 	/**
  * Number of result records (per page).
 Default: 16.

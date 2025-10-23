@@ -5,11 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type SearchMixin7Params = {
-	page?: number;
-	size?: number;
-	q?: string;
-	sort?: string;
+export type PublishCommentCommentsParams = {
+	/**
+	 * Fields to be retrieved as a result.
+	 */
 	fields?: string[];
-	objectName?: string[];
 };

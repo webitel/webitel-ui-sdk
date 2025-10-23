@@ -9,14 +9,14 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
-	DeleteCommentMixin6Params,
+	DeleteCommentParams,
 	ListCommentsParams,
 	LocateCommentParams,
-	PublishCommentMixin6Params,
+	PublishCommentParams,
 	UpdateComment2Body,
 	UpdateComment2Params,
-	UpdateCommentMixin6Body,
-	UpdateCommentMixin6Params,
+	UpdateCommentBody,
+	UpdateCommentParams,
 	WebitelCasesCaseComment,
 	WebitelCasesCaseCommentList,
 	WebitelCasesInputCaseComment,
@@ -33,11 +33,9 @@ export const // --- title start
 			/**
 			 * @summary Delete a specific comment by its etag
 			 */
-			const deleteCommentMixin6 = <
-				TData = AxiosResponse<WebitelCasesCaseComment>,
-			>(
+			const deleteComment = <TData = AxiosResponse<WebitelCasesCaseComment>>(
 				etag: string,
-				params?: DeleteCommentMixin6Params,
+				params?: DeleteCommentParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/cases/comments/${etag}`, {
@@ -74,21 +72,15 @@ export const // --- title start
 			/**
 			 * @summary Update a specific comment by its etag
 			 */
-			const updateCommentMixin6 = <
-				TData = AxiosResponse<WebitelCasesCaseComment>,
-			>(
-				updateCommentMixin6Body: UpdateCommentMixin6Body,
-				params?: UpdateCommentMixin6Params,
+			const updateComment = <TData = AxiosResponse<WebitelCasesCaseComment>>(
+				updateCommentBody: UpdateCommentBody,
+				params?: UpdateCommentParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.put(
-					'/cases/comments/input.etag}',
-					updateCommentMixin6Body,
-					{
-						...options,
-						params: { ...params, ...options?.params },
-					},
-				);
+				return axios.put('/cases/comments/input.etag}', updateCommentBody, {
+					...options,
+					params: { ...params, ...options?.params },
+				});
 			};
 			/**
 			 * @summary Retrieve a list of comments associated with a specific case
@@ -106,12 +98,10 @@ export const // --- title start
 			/**
 			 * @summary Publish comment into a specific case
 			 */
-			const publishCommentMixin6 = <
-				TData = AxiosResponse<WebitelCasesCaseComment>,
-			>(
+			const publishComment = <TData = AxiosResponse<WebitelCasesCaseComment>>(
 				caseEtag: string,
 				webitelCasesInputCaseComment: WebitelCasesInputCaseComment,
-				params?: PublishCommentMixin6Params,
+				params?: PublishCommentParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
@@ -126,19 +116,19 @@ export const // --- title start
 
 			// --- footer start
 			return {
-				deleteCommentMixin6,
+				deleteComment,
 				locateComment,
 				updateComment2,
-				updateCommentMixin6,
+				updateComment,
 				listComments,
-				publishCommentMixin6,
+				publishComment,
 			};
 		};
-export type DeleteCommentMixin6Result = AxiosResponse<WebitelCasesCaseComment>;
+export type DeleteCommentResult = AxiosResponse<WebitelCasesCaseComment>;
 export type LocateCommentResult = AxiosResponse<WebitelCasesCaseComment>;
 export type UpdateComment2Result = AxiosResponse<WebitelCasesCaseComment>;
-export type UpdateCommentMixin6Result = AxiosResponse<WebitelCasesCaseComment>;
+export type UpdateCommentResult = AxiosResponse<WebitelCasesCaseComment>;
 export type ListCommentsResult = AxiosResponse<WebitelCasesCaseCommentList>;
-export type PublishCommentMixin6Result = AxiosResponse<WebitelCasesCaseComment>;
+export type PublishCommentResult = AxiosResponse<WebitelCasesCaseComment>;
 
 // --- footer end

@@ -439,7 +439,9 @@ export const filePolicyApplyParams = zod.object({
 	id: zod.number(),
 });
 
-export const filePolicyApplyBody = zod.object({});
+export const filePolicyApplyBody = zod.object({
+	applyToNullChannel: zod.boolean().optional(),
+});
 
 export const filePolicyApplyResponse = zod.object({
 	count: zod.string().optional(),

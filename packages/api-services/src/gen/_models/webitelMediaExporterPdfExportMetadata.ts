@@ -8,7 +8,7 @@
 /**
  * Metadata about a PDF export task.
  */
-export interface WebitelPdfPdfExportMetadata {
+export interface WebitelMediaExporterPdfExportMetadata {
 	/** File name of the export. */
 	fileName?: string;
 	/** MIME type, e.g., "application/pdf". */

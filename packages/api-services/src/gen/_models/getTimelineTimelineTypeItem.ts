@@ -5,11 +5,11 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export type GetTimelineMixin6TypeItem =
-	(typeof GetTimelineMixin6TypeItem)[keyof typeof GetTimelineMixin6TypeItem];
+export type GetTimelineTimelineTypeItem =
+	(typeof GetTimelineTimelineTypeItem)[keyof typeof GetTimelineTimelineTypeItem];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetTimelineMixin6TypeItem = {
+export const GetTimelineTimelineTypeItem = {
 	chat: 'chat',
 	call: 'call',
 	email: 'email',

@@ -13,7 +13,7 @@ export type ConfigServiceSearchConfigParams = {
 	sort?: string;
 	fields?: string[];
 	/**
-	 * NOT USED.
+	 * NOT USED
 	 */
 	object?: ConfigServiceSearchConfigObjectItem[];
 };

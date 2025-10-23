@@ -8,7 +8,7 @@
 /**
  * Chunked response with PDF binary data.
  */
-export interface WebitelPdfPdfExportChunk {
+export interface WebitelMediaExporterPdfExportChunk {
 	/** Raw PDF file bytes (chunked). */
 	data?: string;
 }

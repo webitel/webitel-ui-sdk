@@ -5,7 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface WebitelKnowledgebaseTag {
-	/** The name of the tag. */
-	name?: string;
-}
+export type DeleteCommentCommentsParams = {
+	/**
+	 * Fields to be retrieved as a result.
+	 */
+	fields?: string[];
+};

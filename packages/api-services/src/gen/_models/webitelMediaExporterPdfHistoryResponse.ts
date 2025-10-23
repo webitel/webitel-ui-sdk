@@ -4,14 +4,14 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelPdfPdfHistoryRecord } from './webitelPdfPdfHistoryRecord';
+import type { WebitelMediaExporterPdfHistoryRecord } from './webitelMediaExporterPdfHistoryRecord';
 
 /**
  * Response containing a page of export history.
  */
-export interface WebitelPdfPdfHistoryResponse {
+export interface WebitelMediaExporterPdfHistoryResponse {
 	/** List of export history records. */
-	data?: WebitelPdfPdfHistoryRecord[];
+	data?: WebitelMediaExporterPdfHistoryRecord[];
 	/** True if there is a next page. */
 	next?: boolean;
 	/** Current page number. */

@@ -14,11 +14,11 @@
  - PDF_EXPORT_STATUS_DONE: Task is completed successfully.
  - PDF_EXPORT_STATUS_FAILED: Task failed.
  */
-export type WebitelPdfPdfExportStatus =
-	(typeof WebitelPdfPdfExportStatus)[keyof typeof WebitelPdfPdfExportStatus];
+export type WebitelMediaExporterPdfExportStatus =
+	(typeof WebitelMediaExporterPdfExportStatus)[keyof typeof WebitelMediaExporterPdfExportStatus];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const WebitelPdfPdfExportStatus = {
+export const WebitelMediaExporterPdfExportStatus = {
 	PdfExportStatusUnspecified: 'PDF_EXPORT_STATUS_UNSPECIFIED',
 	PdfExportStatusPending: 'PDF_EXPORT_STATUS_PENDING',
 	PdfExportStatusProcessing: 'PDF_EXPORT_STATUS_PROCESSING',

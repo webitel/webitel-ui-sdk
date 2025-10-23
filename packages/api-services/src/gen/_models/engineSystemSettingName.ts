@@ -42,4 +42,5 @@ export const EngineSystemSettingName = {
 	PasswordMinLength: 'password_min_length',
 	PasswordCategories: 'password_categories',
 	PasswordContainsUsername: 'password_contains_username',
+	PasswordWarningDays: 'password_warning_days',
 } as const;

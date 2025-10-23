@@ -6,11 +6,10 @@
  */
 import type { LoggerLookup } from './loggerLookup';
 
-export interface LoggerUpdateConfigRequest {
-	configId?: number;
+export type ConfigServiceUpdateConfigBody = {
 	daysToStore?: number;
 	description?: string;
 	enabled?: boolean;
 	period?: number;
 	storage?: LoggerLookup;
-}
+};

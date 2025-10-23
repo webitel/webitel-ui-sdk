@@ -4,12 +4,12 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { WebitelPdfPdfExportStatus } from './webitelPdfPdfExportStatus';
+import type { WebitelMediaExporterPdfExportStatus } from './webitelMediaExporterPdfExportStatus';
 
 /**
  * Represents a single PDF export record.
  */
-export interface WebitelPdfPdfHistoryRecord {
+export interface WebitelMediaExporterPdfHistoryRecord {
 	/** Creation timestamp (Unix millis). */
 	createdAt?: string;
 	/** User ID who created the export. */
@@ -23,7 +23,7 @@ export interface WebitelPdfPdfHistoryRecord {
 	/** Export name. */
 	name?: string;
 	/** Current export status. */
-	status?: WebitelPdfPdfExportStatus;
+	status?: WebitelMediaExporterPdfExportStatus;
 	/** Update timestamp (Unix millis). */
 	updatedAt?: string;
 	/** User ID who last updated the export. */

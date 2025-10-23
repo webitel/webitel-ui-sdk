@@ -8,7 +8,7 @@
 /**
  * Request for generating a PDF export.
  */
-export interface WebitelPdfPdfServiceGeneratePdfExportBody {
+export interface WebitelMediaExporterPdfServiceGeneratePdfExportBody {
 	/** Channel type (e.g., "screenshot"). */
 	channel?: string;
 	/** Optional list of specific file IDs to include. */

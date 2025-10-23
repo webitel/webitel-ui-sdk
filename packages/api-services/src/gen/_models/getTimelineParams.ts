@@ -7,8 +7,8 @@
 import type { GetTimelineTypeItem } from './getTimelineTypeItem';
 
 export type GetTimelineParams = {
-	page?: string;
-	size?: string;
+	page?: number;
+	size?: number;
 	q?: string;
 	sort?: string;
 	fields?: string[];

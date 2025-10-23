@@ -9,15 +9,15 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	ConfigServicePatchConfigBody,
 	ConfigServiceReadSystemObjectsParams,
 	ConfigServiceSearchConfigParams,
+	ConfigServiceUpdateConfigBody,
 	LoggerConfig,
 	LoggerConfigs,
 	LoggerCreateConfigRequest,
 	LoggerEmpty,
-	LoggerPatchConfigRequest,
 	LoggerSystemObjects,
-	LoggerUpdateConfigRequest,
 } from '.././_models';
 
 // --- header start
@@ -68,23 +68,23 @@ export const // --- title start
 			};
 			const configServicePatchConfig = <TData = AxiosResponse<LoggerConfig>>(
 				configId: number,
-				loggerPatchConfigRequest: LoggerPatchConfigRequest,
+				configServicePatchConfigBody: ConfigServicePatchConfigBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.patch(
 					`/logger/config/${configId}`,
-					loggerPatchConfigRequest,
+					configServicePatchConfigBody,
 					options,
 				);
 			};
 			const configServiceUpdateConfig = <TData = AxiosResponse<LoggerConfig>>(
 				configId: number,
-				loggerUpdateConfigRequest: LoggerUpdateConfigRequest,
+				configServiceUpdateConfigBody: ConfigServiceUpdateConfigBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/logger/config/${configId}`,
-					loggerUpdateConfigRequest,
+					configServiceUpdateConfigBody,
 					options,
 				);
 			};
