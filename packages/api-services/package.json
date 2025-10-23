@@ -93,6 +93,10 @@
     "./api/axios": {
       "types": "./types/api/axios/index.d.ts",
       "import": "./src/api/axios/index.ts"
+    },
+    "./enums": {
+      "types": "./types/enums/index.d.ts",
+      "import": "./src/enums/index.ts"
     }
   }
 }

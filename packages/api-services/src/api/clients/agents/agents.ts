@@ -1,6 +1,7 @@
 import { AgentServiceApiFactory } from 'webitel-sdk';
 
-import convertDuration from '../../../scripts/convertDuration';
+import convertDuration from '../../../../../../src/scripts/convertDuration'
+
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -46,6 +47,7 @@ const getAgentsList = async (params) => {
 		skill,
 		isSupervisor,
 		isNotSupervisor,
+    userId,
 		notTeamId,
 		supervisorId,
 		notSkillId,
@@ -68,7 +70,7 @@ const getAgentsList = async (params) => {
 			skill,
 			undefined,
 			isNotSupervisor,
-			undefined,
+			userId,
 			undefined,
 			notTeamId,
 			notSkillId,

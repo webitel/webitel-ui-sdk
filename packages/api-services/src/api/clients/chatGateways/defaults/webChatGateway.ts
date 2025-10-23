@@ -1,4 +1,4 @@
-import ChatGatewayProvider from '../../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum';
+import { ChatGatewayProvider } from '@webitel/api-services/enums';
 import { defaultChatGateway } from '../defaults/defaultChatGateway';
 import { WebchatAlternativeChannel } from '../enums/WebchatAlternativeChannel.enum';
 
