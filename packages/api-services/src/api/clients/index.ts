@@ -22,6 +22,7 @@ export * from './history/transcript/callTranscript';
 export * from './labels/labels';
 export * from './lists/blacklists';
 export * from './media/media';
+export * from './messageService/messageService';
 export * from './object/object';
 export * from './pdfServices/pdfServices';
 export * from './phones/phones';
@@ -36,4 +37,3 @@ export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';
-export * from './messageService/messageService'

@@ -50,7 +50,7 @@ const getAgentsList = async (params) => {
 		skill,
 		isSupervisor,
 		isNotSupervisor,
-    userId,
+		userId,
 		notTeamId,
 		supervisorId,
 		notSkillId,
