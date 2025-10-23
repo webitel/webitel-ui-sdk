@@ -7,13 +7,16 @@
       ref="player"
       :src="playerSrc"
       :autoplay="props.autoplay"
+      :muted="props.muted"
       class="wt-vidstack-player__player"
       cross-origin
       plays-inline
       @close="emit('close')"
       @change-size="changeSize"
     >
-      <media-provider></media-provider>
+      <media-provider
+        class="wt-vidstack-player__provider"
+      ></media-provider>
       <video-layout
         :closable="props.closable"
         :autoplay="props.autoplay"
@@ -22,6 +25,7 @@
         :session="props.session"
         :mode="mode"
         @close-player="emit('close')"
+        @close-session="emit('close-session')"
       />
 
     </media-player>
@@ -33,7 +37,18 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type { MediaPlayerElement } from 'vidstack/elements';
-import {computed, defineEmits, defineProps, onMounted,provide, ref, useTemplateRef} from 'vue';
+import {
+  computed,
+  defineEmits,
+  defineProps,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  useTemplateRef,
+  watch
+} from 'vue';
 
 import {ComponentSize} from '../../enums';
 import VideoLayout from './components/layouts/video-layout.vue';
@@ -44,6 +59,7 @@ interface Props {
   src: string | { src: string; type?: string };
   mime?: string;
   autoplay?: boolean;
+  muted?: boolean;
   title?: string;
   username?: string;
   closable?: boolean;
@@ -55,6 +71,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   mime: 'video/mp4',
   autoplay: false,
+  muted: false,
   title: '',
   username: '',
   closable: false,
@@ -63,6 +80,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   'close': [],
+  'close-session': [],
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
@@ -100,16 +118,30 @@ const playerSrc = computed(() => {
 });
 
 /** @author @Oleksandr Palonnyi
- * Attach MediaStream to Vidstack player after mount.
- * A short delay ensures the internal <video> is ready before playback.
+ * Binds the incoming MediaStream to the Vidstack player after mount.
+ * A brief delay ensures the internal <video> element is ready before playback starts.
  */
-onMounted(async () => {
-  if (player.value && props.mode === 'stream') {
-    setTimeout(async () => {
-      const videoEl = player.value.querySelector('video')
-      videoEl.srcObject = props.stream
+onMounted(() => {
+  if (player.value && props.mode === 'stream' && props.stream) {
+    const videoEl = player.value.querySelector('video')
+
+    videoEl.addEventListener("loadedmetadata", async () => {
       await videoEl.play().catch((err) => console.error('play error:', err))
-    }, 100)
+    })
+
+    if (videoEl.srcObject !== props.stream) {
+      setTimeout(() => {
+        videoEl.srcObject = props.stream ?? null
+      }, 100)
+    }
+  }
+})
+
+onBeforeUnmount(() => {
+  const videoEl = player.value.querySelector('video')
+  if (videoEl && videoEl.srcObject) {
+    videoEl.srcObject.getTracks().forEach(t => t.stop())
+    videoEl.srcObject = null
   }
 })
 </script>
@@ -120,7 +152,7 @@ onMounted(async () => {
 .wt-vidstack-player {
   transition: var(--transition);
 
-  .wt-vidstack-player__player {
+  &__player {
     padding: 0;
     margin: 0;
   }
@@ -134,6 +166,15 @@ onMounted(async () => {
     z-index: 100;
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
+    box-shadow: var(--elevation-10);
+    height: var(--p-player-wrapper-sm-height);
+
+    .wt-vidstack-player__provider {
+      display: block;
+      height: 100%;
+      // Control bar sm height
+      padding-bottom: 48px;
+    }
   }
 
   &--md {
@@ -167,11 +208,18 @@ media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/
   .video-display-panel {
     background: var(--p-player-head-line-hover-background);
 
-    :deep(.video-display-panel__controls) { // show panel buttons on hover
+    :deep(.video-display-panel) { // show panel buttons on hover
       opacity: 1;
     }
   }
 }
+</style>
 
-
+<style lang="scss">
+.wt-vidstack-player {
+  video {
+    height: 100%;
+    object-fit: fill;
+  }
+}
 </style>
