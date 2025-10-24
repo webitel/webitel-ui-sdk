@@ -4,7 +4,8 @@ import { useStore } from 'vuex';
 import getNamespacedState from '../../../store/helpers/getNamespacedState.js';
 
 // eslint-disable-next-line import/prefer-default-export
-export const useCardStore = (namespace) => {
+
+export const useCardStore = (namespace, { onLoadErrorHandler }) => {
   const store = useStore();
 
   const cardNamespace = `${namespace}/card`;
@@ -16,8 +17,13 @@ export const useCardStore = (namespace) => {
     () => getNamespacedState(store.state, cardNamespace).itemInstance,
   );
 
-  function loadItem(payload) {
-    return store.dispatch(`${cardNamespace}/LOAD_ITEM`, payload);
+  async function loadItem(payload) {
+    try {
+      return await store.dispatch(`${cardNamespace}/LOAD_ITEM`, payload);
+    } catch (err) {
+      if (!onLoadErrorHandler) throw err;
+      onLoadErrorHandler(err)
+    }
   }
 
   function addItem(payload) {

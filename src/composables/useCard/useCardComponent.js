@@ -15,6 +15,7 @@ export const useCardComponent = (params) => {
     updateItem,
     setId,
     resetState,
+    onLoadErrorHandler,
   } = params;
 
   const router = useRouter();
@@ -63,6 +64,9 @@ export const useCardComponent = (params) => {
       const { id } = route.params;
       await setId(id);
       await loadItem();
+    } catch (err) {
+      if (!onLoadErrorHandler) throw err;
+        onLoadErrorHandler(err)
     } finally {
       isLoading.value = false;
     }
