@@ -1,14 +1,12 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
 
 import getNamespacedState from '../../../store/helpers/getNamespacedState.js';
 
 // eslint-disable-next-line import/prefer-default-export
 
-export const useCardStore = (namespace, { errorRedirectMap }) => {
+export const useCardStore = (namespace, { onLoadErrorHandler }) => {
   const store = useStore();
-  const router = useRouter();
 
   const cardNamespace = `${namespace}/card`;
 
@@ -23,8 +21,8 @@ export const useCardStore = (namespace, { errorRedirectMap }) => {
     try {
       return await store.dispatch(`${cardNamespace}/LOAD_ITEM`, payload);
     } catch (err) {
-      if (!errorRedirectMap && !errorRedirectMap[err.status]) throw err;
-      router.push(errorRedirectMap[err.status]);
+      if (!onLoadErrorHandler) throw err;
+      onLoadErrorHandler(err)
     }
   }
 

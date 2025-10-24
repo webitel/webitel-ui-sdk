@@ -15,7 +15,7 @@ export const useCardComponent = (params) => {
     updateItem,
     setId,
     resetState,
-    errorRedirectMap,
+    onLoadErrorHandler,
   } = params;
 
   const router = useRouter();
@@ -65,9 +65,8 @@ export const useCardComponent = (params) => {
       await setId(id);
       await loadItem();
     } catch (err) {
-      if (errorRedirectMap && errorRedirectMap[err.status]) {
-        return router.push(errorRedirectMap[err.status]);
-      }
+      if (!onLoadErrorHandler) throw err;
+        onLoadErrorHandler(err)
     } finally {
       isLoading.value = false;
     }
