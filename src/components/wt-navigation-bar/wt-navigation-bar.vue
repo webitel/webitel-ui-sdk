@@ -150,6 +150,10 @@ const appLogo = {
     dark: CrmDark,
     light: CrmLight,
   },
+  [WebitelApplications.Wfm]: {
+    dark: CrmDark,   // TODO Mock logo from crm for wfm
+    light: CrmLight, // TODO Mock logo from crm for wfm
+  },
 };
 
 export default {
