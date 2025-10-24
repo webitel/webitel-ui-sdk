@@ -239,7 +239,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     return loadDataList();
   };
 
-  const resetParamsToDefaults = () => {
+  const resetInfiniteScrollTableParamsToDefaults = () => {
     paginationStore.$reset();
     filtersManager.value.reset();
     headersStore.$reset();
@@ -277,7 +277,7 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     patchItemProperty,
     deleteEls,
 
-    resetParamsToDefaults,
+    resetInfiniteScrollTableParamsToDefaults,
 
     updateSearchMode,
 
