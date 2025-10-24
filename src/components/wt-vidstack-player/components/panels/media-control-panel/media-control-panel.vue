@@ -3,9 +3,11 @@
     class="media-control-panel controls-group"
     :class="`media-control-panel--${size}`"
   >
-    <play-button />
-    <time-slider />
-    <time-group />
+    <div class="media-control-panel__actions">
+      <play-button />
+      <time-slider />
+      <time-group />
+    </div>
   </media-controls-group>
 </template>
 
@@ -22,13 +24,24 @@ const { size } = inject('size');
 
 <style scoped lang="scss">
 .media-control-panel {
-  padding: var(--p-player-control-bar-sm-padding);
-  background-color: var(--p-player-control-bar-background);
-  gap: var(--p-player-control-bar-sm-gap);
+  display: flex;
+  justify-content: center;
 
-  &--md {
-    padding: var(--p-player-control-bar-md-padding);
-    gap: var(--p-player-control-bar-md-gap);
+  &--sm {
+    .media-control-panel__actions {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+      gap: calc(var(--p-player-control-bar-sm-gap) * 2);
+    }
+  }
+
+  &__actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--p-player-control-bar-background);
+    box-shadow: var(--elevation-10);
   }
 }
 </style>

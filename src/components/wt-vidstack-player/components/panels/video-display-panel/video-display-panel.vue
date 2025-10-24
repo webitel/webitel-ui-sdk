@@ -15,15 +15,15 @@
       </span>
     </div>
     <div class="video-display-panel__controls">
-      <toggle-button
-        v-if="size !== ComponentSize.LG"
-        primary-icon="collapse"
-        secondary-icon="expand"
-        color="on-dark"
-        @toggle="handlePlayerSize"
-      />
       <fullscreen-button
         @toggle="handleFullscreen"
+      />
+      <toggle-button
+        v-if="size !== ComponentSize.LG"
+        primary-icon="expand"
+        secondary-icon="collapse"
+        color="on-dark"
+        @toggle="handlePlayerSize"
       />
       <wt-icon-btn
         v-if="props.closable"
@@ -73,11 +73,10 @@ const handlePlayerSize = (value: boolean) => {
   display: flex;
   justify-content: space-between;
   padding: var(--p-player-headline-sm-padding);
-  background: var(--p-player-head-line-background);
+  background: var(--p-player-head-line-hover-background);
   color: var(--p-player-head-line-color);
   transition: all var(--transition) ease-in-out;
   backdrop-filter: blur(var(--p-player-head-line-blur));
-  opacity: 0;
 
   &__title {
     @extend %typo-body-1-bold;

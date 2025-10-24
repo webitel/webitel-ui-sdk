@@ -50,28 +50,15 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 .video-layout {
-
-  .video-display-panel {
-    :deep(.video-display-panel__controls) { // hide panel buttons
-      opacity: 0;
-      transition: all var(--transition) ease-out;
-    }
-  }
-
   &--sm {
     border-radius: var(--p-player-wrapper-sm-border-radius);
   }
 
   &--md {
-    //border-radius: var(--p-player-wrapper-md-border-radius);
-
     .media-control-panel {
-      margin: var(--p-player-control-bar-md-padding);
-      width: calc(100% - (var(--p-player-control-bar-md-padding) * 2));
       border-radius: var(--p-player-control-bar-md-border-radius);
     }
   }
-
 }
 
 .controls {
@@ -90,22 +77,6 @@ const emit = defineEmits<{
   display: flex;
   align-items: center;
   width: 100%;
-  opacity: 0;
-  transition: all var(--transition) ease-in-out;
-}
-
-media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
-  .controls-group {
-    opacity: 1;
-  }
-
-  .video-display-panel {
-    background: var(--p-player-head-line-hover-background);
-
-    :deep(.video-display-panel__controls) { // show panel buttons on hover
-      opacity: 1;
-    }
-  }
 }
 
 .wt-loader {
