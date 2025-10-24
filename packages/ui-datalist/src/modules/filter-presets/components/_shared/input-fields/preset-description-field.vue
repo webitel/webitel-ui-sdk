@@ -10,9 +10,8 @@
 
   <wt-textarea
     v-if="!props.previewMode"
-    :value="model"
+    v-model="model"
     :label="t('vocabulary.description')"
-    @input="model = $event"
   />
 </template>
 
