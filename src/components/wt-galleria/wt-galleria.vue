@@ -103,13 +103,13 @@
 </template>
 
 <script setup lang="ts">
-import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
+import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import type { GalleriaProps } from 'primevue';
+import { computed, defineModel, defineProps, ref, useTemplateRef,watch } from 'vue';
 
-import { computed, defineModel, defineProps, ref, watch, useTemplateRef } from 'vue';
 import { useGalleriaFullscreen } from '../../composables'
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
-import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
+import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
 interface Props extends GalleriaProps{
   value: WtGalleriaItem[];
 }

@@ -1,4 +1,4 @@
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted,ref } from 'vue';
 
 export const useGalleriaFullscreen = (galleriaRef) => {
   const containerId = computed(() => galleriaRef.value?.container?.$id);
