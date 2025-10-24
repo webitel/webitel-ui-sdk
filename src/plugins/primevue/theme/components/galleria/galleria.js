@@ -54,6 +54,10 @@ const galleria = {
       padding: ${dt('galleria.footer.padding')};
     }
 
+    .wt-galleria__footer-info {
+      color: ${dt('galleria.footer.color')};
+    }
+
     .wt-galleria__footer svg {
       fill: ${dt('galleria.footerIcon.color')};
     }

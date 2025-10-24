@@ -23,5 +23,8 @@ const value = ref([
   { src: image1, thumbnailSrc: image1, title: 'Image 1' },
   { src: image2, thumbnailSrc: image2, title: 'Image 2' },
   { src: image3, thumbnailSrc: image3, title: 'Image 3' },
+  { src: image3, thumbnailSrc: image3, title: 'Image 4' },
+  { src: image3, thumbnailSrc: image3, title: 'Image 5' },
+  { src: image3, thumbnailSrc: image3, title: 'Image 6' },
 ]);
 </script>
