@@ -193,9 +193,15 @@ onBeforeUnmount(() => {
   }
 
   &--lg {
-    .wt-vidstack-player__player {
-      display: flex;
-      align-items: center;
+    .wt-vidstack-player {
+      &__player {
+        display: flex;
+        align-items: center;
+      }
+      &__provider {
+        width: 100%;
+        min-width: 0;
+      }
     }
   }
 }
@@ -219,7 +225,9 @@ media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/
 .wt-vidstack-player {
   video {
     height: 100%;
-    object-fit: fill;
+    object-fit: fill;width: 100%;
+    min-width: 0;
+
   }
 }
 </style>
