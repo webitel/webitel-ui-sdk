@@ -27,6 +27,7 @@ import WtEmpty from './wt-empty/wt-empty.vue';
 import WtErrorPage from './wt-error-page/wt-error-page.vue';
 import WtExpansionPanel from './wt-expansion-panel/wt-expansion-panel.vue';
 import WtFiltersPanelWrapper from './wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue';
+import WtGalleria from './wt-galleria/wt-galleria.vue';
 import WtHeadline from './wt-headline/wt-headline.vue';
 import WtHint from './wt-hint/wt-hint.vue';
 import WtIcon from './wt-icon/wt-icon.vue';
@@ -145,6 +146,7 @@ const Components = {
   WtStartPage,
   WtSelectionPopup,
   WtDisplayChipItems,
+  WtGalleria,
   WtVidstackPlayer,
   WtChatEmoji,
 };
@@ -173,6 +175,7 @@ export {
   WtErrorPage,
   WtExpansionPanel,
   WtFiltersPanelWrapper,
+  WtGalleria,
   WtHeaderActions,
   WtHeadline,
   WtHint,
