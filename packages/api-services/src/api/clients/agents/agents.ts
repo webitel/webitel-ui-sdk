@@ -1,6 +1,10 @@
 import { AgentServiceApiFactory } from 'webitel-sdk';
 
-import convertDuration from '../../../scripts/convertDuration';
+//  @author @Lera
+// fixme: change on library
+//  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
+//
+import { convertDuration } from '../../../scripts';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -46,6 +50,7 @@ const getAgentsList = async (params) => {
 		skill,
 		isSupervisor,
 		isNotSupervisor,
+		userId,
 		notTeamId,
 		supervisorId,
 		notSkillId,
@@ -68,7 +73,7 @@ const getAgentsList = async (params) => {
 			skill,
 			undefined,
 			isNotSupervisor,
-			undefined,
+			userId,
 			undefined,
 			notTeamId,
 			notSkillId,

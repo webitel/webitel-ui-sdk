@@ -13,7 +13,7 @@ import type {
 	WebitelCasesCaseCommentList,
 } from '.././_models';
 
-export const getDeleteCommentMixin6ResponseMock = (
+export const getDeleteCommentResponseMock = (
 	overrideResponse: Partial<WebitelCasesCaseComment> = {},
 ): WebitelCasesCaseComment => ({
 	author: faker.helpers.arrayElement([
@@ -259,7 +259,7 @@ export const getUpdateComment2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getUpdateCommentMixin6ResponseMock = (
+export const getUpdateCommentResponseMock = (
 	overrideResponse: Partial<WebitelCasesCaseComment> = {},
 ): WebitelCasesCaseComment => ({
 	author: faker.helpers.arrayElement([
@@ -443,7 +443,7 @@ export const getListCommentsResponseMock = (
 	...overrideResponse,
 });
 
-export const getPublishCommentMixin6ResponseMock = (
+export const getPublishCommentResponseMock = (
 	overrideResponse: Partial<WebitelCasesCaseComment> = {},
 ): WebitelCasesCaseComment => ({
 	author: faker.helpers.arrayElement([
@@ -525,7 +525,7 @@ export const getPublishCommentMixin6ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteCommentMixin6MockHandler = (
+export const getDeleteCommentMockHandler = (
 	overrideResponse?:
 		| WebitelCasesCaseComment
 		| ((
@@ -541,7 +541,7 @@ export const getDeleteCommentMixin6MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDeleteCommentMixin6ResponseMock(),
+					: getDeleteCommentResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -594,7 +594,7 @@ export const getUpdateComment2MockHandler = (
 	});
 };
 
-export const getUpdateCommentMixin6MockHandler = (
+export const getUpdateCommentMockHandler = (
 	overrideResponse?:
 		| WebitelCasesCaseComment
 		| ((
@@ -610,7 +610,7 @@ export const getUpdateCommentMixin6MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUpdateCommentMixin6ResponseMock(),
+					: getUpdateCommentResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -640,7 +640,7 @@ export const getListCommentsMockHandler = (
 	});
 };
 
-export const getPublishCommentMixin6MockHandler = (
+export const getPublishCommentMockHandler = (
 	overrideResponse?:
 		| WebitelCasesCaseComment
 		| ((
@@ -656,17 +656,17 @@ export const getPublishCommentMixin6MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPublishCommentMixin6ResponseMock(),
+					: getPublishCommentResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getCaseCommentsMock = () => [
-	getDeleteCommentMixin6MockHandler(),
+	getDeleteCommentMockHandler(),
 	getLocateCommentMockHandler(),
 	getUpdateComment2MockHandler(),
-	getUpdateCommentMixin6MockHandler(),
+	getUpdateCommentMockHandler(),
 	getListCommentsMockHandler(),
-	getPublishCommentMixin6MockHandler(),
+	getPublishCommentMockHandler(),
 ];

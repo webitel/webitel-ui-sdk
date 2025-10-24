@@ -590,7 +590,7 @@ export const getDeleteType2ResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchTypeMixin3ResponseMock = (
+export const getSearchTypeExtensionsResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
 ): DataStructList => ({
 	data: faker.helpers.arrayElement([
@@ -1170,7 +1170,7 @@ export const getSearchTypeMixin3ResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteTypeMixin3ResponseMock = (
+export const getDeleteTypeExtensionsResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
 ): DataStructList => ({
 	data: faker.helpers.arrayElement([
@@ -1750,7 +1750,7 @@ export const getDeleteTypeMixin3ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLocateTypeResponseMock = (
+export const getLocateTypeExtensionsResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -2308,7 +2308,7 @@ export const getLocateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getCreateTypeResponseMock = (
+export const getCreateTypeExtensionsResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -2866,7 +2866,7 @@ export const getCreateTypeResponseMock = (
 	...overrideResponse,
 });
 
-export const getUpdateTypeResponseMock = (
+export const getUpdateTypeExtensionsResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -3447,7 +3447,7 @@ export const getDeleteType2MockHandler = (
 	});
 };
 
-export const getSearchTypeMixin3MockHandler = (
+export const getSearchTypeExtensionsMockHandler = (
 	overrideResponse?:
 		| DataStructList
 		| ((
@@ -3463,14 +3463,14 @@ export const getSearchTypeMixin3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchTypeMixin3ResponseMock(),
+					: getSearchTypeExtensionsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDeleteTypeMixin3MockHandler = (
+export const getDeleteTypeExtensionsMockHandler = (
 	overrideResponse?:
 		| DataStructList
 		| ((
@@ -3486,14 +3486,14 @@ export const getDeleteTypeMixin3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDeleteTypeMixin3ResponseMock(),
+					: getDeleteTypeExtensionsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLocateTypeMockHandler = (
+export const getLocateTypeExtensionsMockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -3509,14 +3509,14 @@ export const getLocateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLocateTypeResponseMock(),
+					: getLocateTypeExtensionsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getCreateTypeMockHandler = (
+export const getCreateTypeExtensionsMockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -3532,14 +3532,14 @@ export const getCreateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getCreateTypeResponseMock(),
+					: getCreateTypeExtensionsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUpdateTypeMockHandler = (
+export const getUpdateTypeExtensionsMockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -3555,7 +3555,7 @@ export const getUpdateTypeMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUpdateTypeResponseMock(),
+					: getUpdateTypeExtensionsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -3563,9 +3563,9 @@ export const getUpdateTypeMockHandler = (
 };
 export const getExtensionsMock = () => [
 	getDeleteType2MockHandler(),
-	getSearchTypeMixin3MockHandler(),
-	getDeleteTypeMixin3MockHandler(),
-	getLocateTypeMockHandler(),
-	getCreateTypeMockHandler(),
-	getUpdateTypeMockHandler(),
+	getSearchTypeExtensionsMockHandler(),
+	getDeleteTypeExtensionsMockHandler(),
+	getLocateTypeExtensionsMockHandler(),
+	getCreateTypeExtensionsMockHandler(),
+	getUpdateTypeExtensionsMockHandler(),
 ];

@@ -70,13 +70,13 @@ async function loadPauseCauses() {
   pauseCauses.value = response.items;
 }
 
-async function updateStatus({ agentId, status, pauseCause }) {
-  return AgentStatusAPI.patch({ agentId, status, pauseCause });
+async function updateStatus({ agentId, status, pauseCause, statusComment }) {
+  return AgentStatusAPI.patch({ agentId, status, pauseCause, statusComment });
 }
 
-async function changeStatus({ status, pauseCause }) {
+async function changeStatus({ status, pauseCause, statusComment }) {
   try {
-    const statusPayload = { agentId: props.agentId, status, pauseCause };
+    const statusPayload = { agentId: props.agentId, status, pauseCause, statusComment };
     await updateStatus(statusPayload);
     emit('changed', statusPayload);
   } catch (err) {
@@ -117,9 +117,9 @@ function handleClosed(event) {
   }
 }
 
-function handlePauseCauseInput(pauseCause) {
+function handlePauseCauseInput({ pauseCause, statusComment }) {
   const status = AgentStatus.PAUSE;
-  return changeStatus({ status, pauseCause });
+  return changeStatus({ status, pauseCause, statusComment });
 }
 </script>
 

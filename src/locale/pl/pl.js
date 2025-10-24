@@ -126,6 +126,11 @@ export default {
     column: 'Kolumna | Kolumny',
     notification: 'Powiadomienie | Powiadomienia',
     screencast: 'Nagranie ekranu',
+    extension: 'Rozszerzenie',
+    password: 'Hasło',
+    number: 'Numer',
+    expireAt: 'Wygasa',
+    destination: 'Cel',
   },
   // date-related texts
   date: {
@@ -176,6 +181,11 @@ export default {
     },
     customLookup: {
       customLookup: 'Dostosowanie | Dostosowania',
+    },
+    chatGateway: 'Bramka czatu | Bramki czatu',
+    chat: {
+      chat: 'Czat | Czaty',
+      draftPlaceholder: 'Napisz wiadomość...',
     },
     queue: {
       queue: 'Kolejka | Kolejki',
@@ -501,6 +511,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} kontakty`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

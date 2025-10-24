@@ -13,7 +13,7 @@ export type LoggerServiceSearchLogByRecordIdParams = {
 	sort?: string;
 	fields?: string[];
 	/**
-	 * GENERAL filters.
+	 * GENERAL filters
 	 */
 	action?: LoggerServiceSearchLogByRecordIdActionItem[];
 	userId?: string[];

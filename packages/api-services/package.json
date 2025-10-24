@@ -1,6 +1,6 @@
 {
   "name": "@webitel/api-services",
-  "version": "0.0.56",
+  "version": "0.0.60",
   "private": false,
   "scripts": {
     "make-all": "npm run gen:api && npm version patch && (npm run build:types || true) && (npm run format:all || true) && npm run publish-lib",
@@ -93,6 +93,10 @@
     "./api/axios": {
       "types": "./types/api/axios/index.d.ts",
       "import": "./src/api/axios/index.ts"
+    },
+    "./enums": {
+      "types": "./types/enums/index.d.ts",
+      "import": "./src/enums/index.ts"
     }
   }
 }

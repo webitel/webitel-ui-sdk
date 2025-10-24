@@ -116,10 +116,12 @@ const actions = {
 
     const headers = context.state.headers.map(
       ({ sort: currentSort, ...header }) => {
+        if (currentSort === undefined) return header;
+        
         let sort;
 
         if (field) {
-          sort = field === header.field ? nextSort : currentSort;
+          sort = field === header.field ? nextSort : null;
         } else {
           sort = nextSort; // null
         }

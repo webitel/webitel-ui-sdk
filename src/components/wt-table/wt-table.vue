@@ -2,6 +2,7 @@
   <p-table
     :key="tableKey"
     ref="table"
+    :expanded-rows="expandedRows"
     :reorderable-columns="reorderableColumns"
     :resizable-columns="resizableColumns"
     :row-class="rowClass"
@@ -13,11 +14,34 @@
     lazy
     scroll-height="flex"
     scrollable
+    :virtual-scroller-options="virtualScroll"
     @sort="sort"
+    @update:expanded-rows="expandedRows = $event"
     @column-resize-end="columnResize"
     @column-reorder="columnReorder"
     @row-reorder="({dragIndex, dropIndex}) => emit('reorder:row', { oldIndex: dragIndex, newIndex: dropIndex })"
   >
+    <p-column
+      v-if="rowExpansion"
+      :pt="{
+        columnresizer: {
+            class: {
+                'hidden': true
+            }
+        }
+      }"
+      body-style="width: 1%;"
+      column-key="row-expander"
+      header-style="width: 1%;"
+    >
+      <template #body="{ data: row }">
+        <wt-icon-btn
+          :disabled="props.rowExpansionDisabled(row)"
+          :icon="isRowExpanded(row) ? 'arrow-down' : 'arrow-right'"
+          @click.stop="toggleRow(row)"
+        />
+      </template>
+    </p-column>
     <p-column
       v-if="rowReorder"
       :pt="{
@@ -87,7 +111,12 @@
 
       <template #header>
         <div class="wt-table__th__content">
-          {{ col.text }}
+          <wt-tooltip placement="left">
+            <template #activator>
+              {{ col.text }}
+            </template>
+            {{ col.text }}
+          </wt-tooltip>
           <wt-icon
             v-if="col.sort === 'asc'"
             class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
@@ -163,6 +192,11 @@
         </div>
       </template>
     </p-column>
+    <template #expansion="{ data: row }">
+      <div>
+        <slot :item="row" name="expansion"></slot>
+      </div>
+    </template>
     <template
       v-if="isTableFooter"
       #footer
@@ -174,11 +208,21 @@
 
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
-import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
+import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
+import { computed, defineProps, nextTick, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
+
+/**
+ * Number of items to render outside the visible area for virtual scrolling.
+ * This helps maintain smooth scrolling performance by pre-rendering items
+ * that are about to come into view, reducing the chance of blank spaces
+ * during fast scrolling.
+ */
+const VIRTUAL_SCROLL_TOLERATED_ITEMS = 10;
+const DEFAULT_ITEM_SIZE = 40;
 
 interface Props extends DataTableProps{
   /**
@@ -218,10 +262,18 @@ interface Props extends DataTableProps{
    * 'If true, restrict sprecific row reorder.'
    */
   isRowReorderDisabled?: (row) => boolean;
+  rowExpansion?: boolean;
   rowClass?: () => string;
   rowStyle?: () => { [key: string]: string };
   resizableColumns?: boolean
   reorderableColumns?: boolean
+  rowExpansionDisabled?: (row: object) => boolean;
+
+  //lazy loading
+  lazy?: boolean;
+  onLoading?: (event: VirtualScrollerLazyEvent) => Promise<any>;
+  loading?: boolean;
+  itemSize?: number | undefined;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -233,11 +285,15 @@ const props = withDefaults(defineProps<Props>(), {
   fixedActions: false,
   headless: false,
   rowReorder: false,
+  rowExpansion: false,
   isRowReorderDisabled: () => false,
   rowClass: () => '',
   rowStyle: () => ({}),
   resizableColumns: false,
   reorderableColumns: false,
+  rowExpansionDisabled: () => false,
+  lazy: false,
+  itemSize: DEFAULT_ITEM_SIZE
 });
 
 const { t } = useI18n();
@@ -248,15 +304,16 @@ const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resi
 
 const table = useTemplateRef('table');
 const tableKey = ref(0);
+const expandedRows = ref([]);
 
 // table's columns that should be excluded from reorder
-const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
+const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions', 'row-expander'];
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
   return props.selectable
-         ? props.selected || props.data.filter(item => item._isSelected)
-         : [];
+    ? props.selected || props.data.filter(item => item._isSelected)
+    : [];
 });
 
 const dataHeaders = computed(() => {
@@ -367,10 +424,39 @@ const columnResize = ({element}) => {
 }
 
 const columnReorder = () => {
+  const containerEl = table.value.$el.querySelector('.p-datatable-table-container');
+  const containerElScrollLeft = containerEl.scrollLeft;
   const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
   tableKey.value += 1;
   emit('column-reorder', newOrder)
+  nextTick(() => {
+    table.value.$el.querySelector('.p-datatable-table-container').scrollLeft = containerElScrollLeft
+  })
 }
+
+const isRowExpanded = (row) => {
+  return expandedRows.value.some(r => r?.id === row?.id);
+};
+
+const toggleRow = (row) => {
+  const index = expandedRows.value.findIndex(r => r.id === row.id);
+  if (index !== -1) {
+    expandedRows.value.splice(index, 1);
+  } else {
+    expandedRows.value.push(row);
+  }
+};
+
+const virtualScroll = computed(() => {
+  if (!props.lazy) return;
+
+  return {
+    lazy: props.lazy,
+    onLazyLoad: props.onLoading,
+    itemSize: props.itemSize, // The height/width of item according to orientation
+    numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
+  };
+});
 </script>
 
 <style lang="scss">
@@ -388,6 +474,11 @@ const columnReorder = () => {
 }
 
 .wt-table :deep(.p-datatable-table-container) {
+  @extend %wt-scrollbar;
+}
+
+//style for virtual scroller
+.wt-table :deep(.p-virtualscroller) {
   @extend %wt-scrollbar;
 }
 

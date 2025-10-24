@@ -128,6 +128,11 @@ export default deepmerge({
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
     screencast: 'Screencast',
+    extension: 'Extension',
+    password: 'Password',
+    number: 'Number',
+    expireAt: 'Expire at',
+    destination: 'Destination',
   },
   // date-related texts
   date: {
@@ -178,6 +183,11 @@ export default deepmerge({
     owner: 'Owner | Owners',
     customization: {
       customization: 'Customization | Customizations',
+    },
+    chatGateway: 'Chat gateway | Chat gateways',
+    chat: {
+      chat: 'Chat | Chats',
+      draftPlaceholder: 'Write a message...',
     },
     queue: {
       queue: 'Queue | Queues',
@@ -507,6 +517,7 @@ export default deepmerge({
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

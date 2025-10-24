@@ -1,6 +1,6 @@
 export * from './_shared/generatePermissionsApi';
 export * from './agents/agentChats';
-// export * from './agents/agents'; fixme: file imports
+export * from './agents/agents';
 export * from './buckets/buckets';
 export * from './calendars/calendars';
 export * from './caseCloseReasonGroups/caseCloseReasonGroups';
@@ -11,7 +11,7 @@ export * from './caseSources/caseSources';
 export * from './caseStatusConditions/caseStatusConditions';
 export * from './caseStatuses/caseStatuses';
 export * from './catalog/catalog';
-// export * from './chatGateways/chatGateways'; fixme: file imports
+export * from './chatGateways/chatGateways';
 export * from './communications/communications';
 export * from './configurations/configurations';
 export * from './contactGroups/contactGroups';
@@ -22,8 +22,10 @@ export * from './history/transcript/callTranscript';
 export * from './labels/labels';
 export * from './lists/blacklists';
 export * from './media/media';
+export * from './messageService/messageService';
 export * from './object/object';
 export * from './pdfServices/pdfServices';
+export * from './phones/phones';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
 // export * from './roles/roles'; fixme: ApplicationAccess import

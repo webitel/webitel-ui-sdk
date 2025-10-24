@@ -13,7 +13,7 @@ import type {
 } from '.././_models';
 import { ContactsTimelineEventType } from '.././_models';
 
-export const getGetTimelineResponseMock = (
+export const getGetTimelineTimelineResponseMock = (
 	overrideResponse: Partial<ContactsGetTimelineResponse> = {},
 ): ContactsGetTimelineResponse => ({
 	days: faker.helpers.arrayElement([
@@ -462,7 +462,7 @@ export const getGetTimelineResponseMock = (
 	...overrideResponse,
 });
 
-export const getGetTimelineCounterResponseMock = (
+export const getGetTimelineCounterTimelineResponseMock = (
 	overrideResponse: Partial<ContactsGetTimelineCounterResponse> = {},
 ): ContactsGetTimelineCounterResponse => ({
 	callsCount: faker.helpers.arrayElement([
@@ -488,7 +488,7 @@ export const getGetTimelineCounterResponseMock = (
 	...overrideResponse,
 });
 
-export const getGetTimelineMockHandler = (
+export const getGetTimelineTimelineMockHandler = (
 	overrideResponse?:
 		| ContactsGetTimelineResponse
 		| ((
@@ -504,14 +504,14 @@ export const getGetTimelineMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getGetTimelineResponseMock(),
+					: getGetTimelineTimelineResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getGetTimelineCounterMockHandler = (
+export const getGetTimelineCounterTimelineMockHandler = (
 	overrideResponse?:
 		| ContactsGetTimelineCounterResponse
 		| ((
@@ -529,13 +529,13 @@ export const getGetTimelineCounterMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getGetTimelineCounterResponseMock(),
+					: getGetTimelineCounterTimelineResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getTimelineMock = () => [
-	getGetTimelineMockHandler(),
-	getGetTimelineCounterMockHandler(),
+	getGetTimelineTimelineMockHandler(),
+	getGetTimelineCounterTimelineMockHandler(),
 ];

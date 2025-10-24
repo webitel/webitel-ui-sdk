@@ -21,4 +21,5 @@ export const WtIconActionIconMappings = Object.freeze({
   [IconAction.APPLY_PRESET]: 'load-preset',
   [IconAction.ADD_CONTACT]: 'add-contact',
   [IconAction.DOWNLOAD_PDF]: 'download-pdf',
+  [IconAction.CHAT]: 'chat',
 });

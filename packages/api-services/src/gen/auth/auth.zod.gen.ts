@@ -59,10 +59,14 @@ export const signupResponse = zod.object({
 			zod.object({
 				detail: zod.string().optional(),
 				id: zod.string().optional(),
-				passwordExpiry: zod
+				warningData: zod
 					.object({
-						daysRemaining: zod.string().optional(),
-						expiresAt: zod.string().optional(),
+						passwordExpiry: zod
+							.object({
+								daysRemaining: zod.string().optional(),
+								expiresAt: zod.string().optional(),
+							})
+							.optional(),
 					})
 					.optional(),
 			}),

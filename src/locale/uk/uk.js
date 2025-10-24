@@ -125,6 +125,11 @@ export default {
     contact: 'Контакт | Контакти',
     notification: 'Сповіщення',
     screencast: 'Запис екрану',
+    extension: 'Розширення',
+    password: 'Пароль',
+    number: 'Номер',
+    expireAt: 'Закінчується',
+    destination: 'Призначення',
   },
   // date-related texts
   date: {
@@ -175,6 +180,11 @@ export default {
     },
     customLookup: {
       customLookup: 'Користувацький довідник | Користувацькі довідники',
+    },
+    chatGateway: 'Текстовий шлюз | Текстові шлюзи',
+    chat: {
+      chat: 'Чат | Чати',
+      draftPlaceholder: 'Напишіть повідомлення...',
     },
     queue: {
       queue: 'Черга | Черги',
@@ -496,6 +506,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакти`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

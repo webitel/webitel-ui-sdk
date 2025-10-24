@@ -1,3 +1,4 @@
+import WtChatEmoji from './on-demand/wt-chat-emoji/wt-chat-emoji.vue';
 import WtDisplayChipItems from './on-demand/wt-display-chip-items/wt-display-chip-items.vue';
 import WtNavigationMenu from './on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
 import WtSelectionPopup from './on-demand/wt-selection-popup/wt-selection-popup.vue';
@@ -71,6 +72,7 @@ import WtTimepicker from './wt-timepicker/wt-timepicker.vue';
 import WtTooltip from './wt-tooltip/wt-tooltip.vue';
 import WtTree from './wt-tree/wt-tree.vue';
 import WtTreeTable from './wt-tree-table/wt-tree-table.vue';
+import WtVidstackPlayer from './wt-vidstack-player/wt-vidstack-player.vue';
 
 const Components = {
   WtActionBar,
@@ -145,6 +147,8 @@ const Components = {
   WtSelectionPopup,
   WtDisplayChipItems,
   WtGalleria,
+  WtVidstackPlayer,
+  WtChatEmoji,
 };
 
 export {
@@ -156,6 +160,7 @@ export {
   WtBreadcrumb,
   WtButton,
   WtButtonSelect,
+  WtChatEmoji,
   WtCheckbox,
   WtChip,
   WtConfirmDialog,
@@ -221,6 +226,7 @@ export {
   WtTree,
   WtTreeTable,
   WtTypeExtensionValueInput,
+  WtVidstackPlayer,
 };
 
 export default Components;

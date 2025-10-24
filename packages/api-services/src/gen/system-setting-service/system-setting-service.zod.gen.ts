@@ -47,6 +47,7 @@ export const searchSystemSettingQueryParams = zod.object({
 				'password_min_length',
 				'password_categories',
 				'password_contains_username',
+				'password_warning_days',
 			]),
 		)
 		.optional()
@@ -95,6 +96,7 @@ export const searchSystemSettingResponse = zod.object({
 						'password_min_length',
 						'password_categories',
 						'password_contains_username',
+						'password_warning_days',
 					])
 					.default(searchSystemSettingResponseItemsItemNameDefault),
 			}),
@@ -140,6 +142,7 @@ export const createSystemSettingBody = zod.object({
 			'password_min_length',
 			'password_categories',
 			'password_contains_username',
+			'password_warning_days',
 		])
 		.default(createSystemSettingBodyNameDefault),
 });
@@ -183,6 +186,7 @@ export const createSystemSettingResponse = zod.object({
 			'password_min_length',
 			'password_categories',
 			'password_contains_username',
+			'password_warning_days',
 		])
 		.default(createSystemSettingResponseNameDefault),
 });
@@ -249,6 +253,7 @@ export const deleteSystemSettingResponse = zod.object({
 			'password_min_length',
 			'password_categories',
 			'password_contains_username',
+			'password_warning_days',
 		])
 		.default(deleteSystemSettingResponseNameDefault),
 });
@@ -296,6 +301,7 @@ export const readSystemSettingResponse = zod.object({
 			'password_min_length',
 			'password_categories',
 			'password_contains_username',
+			'password_warning_days',
 		])
 		.default(readSystemSettingResponseNameDefault),
 });
@@ -347,6 +353,7 @@ export const patchSystemSettingResponse = zod.object({
 			'password_min_length',
 			'password_categories',
 			'password_contains_username',
+			'password_warning_days',
 		])
 		.default(patchSystemSettingResponseNameDefault),
 });
@@ -396,6 +403,7 @@ export const updateSystemSettingResponse = zod.object({
 			'password_min_length',
 			'password_categories',
 			'password_contains_username',
+			'password_warning_days',
 		])
 		.default(updateSystemSettingResponseNameDefault),
 });

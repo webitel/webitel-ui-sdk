@@ -125,6 +125,11 @@ export default {
     contact: 'Контакт | Контакты',
     notification: 'Уведомление | Уведомления',
     screencast: 'Запись экрана',
+    extension: 'Расширение',
+    password: 'Пароль',
+    number: 'Номер',
+    expireAt: 'Истекает',
+    destination: 'Назначение',
   },
   // date-related texts
   date: {
@@ -176,6 +181,11 @@ export default {
     customLookup: {
       customLookup:
         'Пользовательский справочник | Пользовательские справочники',
+    },
+    chatGateway: 'Текстовый шлюз | Текстовые шлюзы',
+    chat: {
+      chat: 'Чат | Чаты',
+      draftPlaceholder: 'Напишите сообщение...',
     },
     queue: {
       queue: 'Очередь | Очереди',
@@ -497,6 +507,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакты`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

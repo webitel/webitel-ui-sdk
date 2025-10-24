@@ -49,7 +49,7 @@ export const configServiceSearchConfigQueryParams = zod.object({
 			]),
 		)
 		.optional()
-		.describe('NOT USED.'),
+		.describe('NOT USED'),
 });
 
 export const configServiceSearchConfigResponse = zod.object({
@@ -130,7 +130,7 @@ export const configServiceDeleteConfigParams = zod.object({
 export const configServiceDeleteConfigResponse = zod.object({});
 
 export const configServiceReadConfigParams = zod.object({
-	config_id: zod.number(),
+	config_id: zod.number().describe('int32 domainId = 8;'),
 });
 
 export const configServiceReadConfigResponse = zod.object({
@@ -160,7 +160,6 @@ export const configServicePatchConfigParams = zod.object({
 });
 
 export const configServicePatchConfigBody = zod.object({
-	configId: zod.number().optional(),
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),
@@ -201,7 +200,6 @@ export const configServiceUpdateConfigParams = zod.object({
 });
 
 export const configServiceUpdateConfigBody = zod.object({
-	configId: zod.number().optional(),
 	daysToStore: zod.number().optional(),
 	description: zod.string().optional(),
 	enabled: zod.boolean().optional(),

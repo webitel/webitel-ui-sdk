@@ -10,7 +10,7 @@ import image from './image/image.js';
 import menubar from './menubar/menubar.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
-import slider from './slider/slider.js'
+import slider from './slider/slider.js';
 import switcher from './switcher/switcher.js';
 import table from './table/table.js';
 import toolbar from './toolbar/toolbar.js';
@@ -31,7 +31,6 @@ const components = {
   radiobutton: radio,
   slider,
   tooltip,
-  checkbox,
   datatable: table,
   toolbar,
   galleria,

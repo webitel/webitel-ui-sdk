@@ -126,6 +126,11 @@ export default {
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
     screencast: 'Экран жазбасы',
+    extension: 'Кеңейту',
+    password: 'Құпия сөз',
+    number: 'Нөмір',
+    expireAt: 'Мерзімі',
+    destination: 'Мақсат',
   },
   // date-related texts
   date: {
@@ -176,6 +181,11 @@ export default {
     },
     customLookup: {
       customLookup: 'Жекелендіру | Жекелендірулер',
+    },
+    chatGateway: 'Чат шлюзі | Чат шлюздер',
+    chat: {
+      chat: 'Чат | Чаттар',
+      draftPlaceholder: 'Хабарлама жазыңыз...',
     },
     queue: {
       queue: 'Кезек | Кезектер',
@@ -500,6 +510,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

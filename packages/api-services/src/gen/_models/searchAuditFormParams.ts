@@ -21,4 +21,5 @@ bool active = 11; // not archive
  */
 	editable?: boolean;
 	question?: string;
+	teamFilter?: boolean;
 };

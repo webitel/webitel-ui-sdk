@@ -126,6 +126,12 @@ export default {
     column: 'Ustun | Ustunlar',
     notification: 'Bildirishnoma | Bildirishnomalar',
     screencast: 'Ekran yozuvi',
+    extension: 'Kengaytma',
+    password: 'Parol',
+    number: 'Raqam',
+    expireAt: 'Muddati',
+    destination: 'Manzil',
+
   },
   // date-related texts
   date: {
@@ -176,6 +182,11 @@ export default {
     },
     customLookup: {
       customLookup: 'Maxsuslash | Maxsuslashlar',
+    },
+    chatGateway: 'Chat shlyuzi | Chat shlyuzlari',
+    chat: {
+      chat: 'Chat | Chatlar',
+      draftPlaceholder: 'Xabar yozing...',
     },
     queue: {
       queue: 'Navbat | Navbatlar',
@@ -503,6 +514,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} kontaktlar`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

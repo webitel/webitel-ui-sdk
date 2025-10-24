@@ -124,6 +124,11 @@ export default {
     column: 'Columna | Columnas',
     notification: 'Notificación | Notificaciones',
     screencast: 'Videotutorial de pantalla',
+    extension: 'Extensión',
+    password: 'Contraseña',
+    number: 'Número',
+    expireAt: 'Expira en',
+    destination: 'Destino',
   },
   date: {
     sec: 'Seg',
@@ -171,6 +176,11 @@ export default {
     owner: 'Propietario | Propietarios',
     customization: {
       customization: 'Personalización | Personalizaciones',
+    },
+    chatGateway: 'Pasarela de chat | Pasarelas de chat',
+    chat: {
+      chat: 'Chat | Chats',
+      draftPlaceholder: 'Escribe un mensaje...',
     },
     queue: {
       queue: 'Cola | Colas',
@@ -497,6 +507,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

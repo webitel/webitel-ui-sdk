@@ -12,9 +12,9 @@ import type {
 	DataInputExtension,
 	DataStructList,
 	DeleteType2Params,
-	DeleteTypeMixin3Params,
+	DeleteTypeExtensionsParams,
 	ProtodataStruct,
-	SearchTypeMixin3Params,
+	SearchTypeExtensionsParams,
 } from '.././_models';
 
 // --- header start
@@ -42,8 +42,8 @@ export const // --- title start
 			 * (ExtensionList) {
 			 * @summary Search for type extensions.
 			 */
-			const searchTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
-				params?: SearchTypeMixin3Params,
+			const searchTypeExtensions = <TData = AxiosResponse<DataStructList>>(
+				params?: SearchTypeExtensionsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get('/types/extensions', {
@@ -55,9 +55,9 @@ export const // --- title start
 			 * returns (ExtensionList) {
 			 * @summary Delete extension for types.
 			 */
-			const deleteTypeMixin3 = <TData = AxiosResponse<DataStructList>>(
+			const deleteTypeExtensions = <TData = AxiosResponse<DataStructList>>(
 				repo: string[],
-				params?: DeleteTypeMixin3Params,
+				params?: DeleteTypeExtensionsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/types/extensions/${repo}`, {
@@ -69,7 +69,7 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Type extension details.
 			 */
-			const locateType = <TData = AxiosResponse<ProtodataStruct>>(
+			const locateTypeExtensions = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
@@ -79,7 +79,7 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Create type extension.
 			 */
-			const createType = <TData = AxiosResponse<ProtodataStruct>>(
+			const createTypeExtensions = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputExtension: DataInputExtension,
 				options?: AxiosRequestConfig,
@@ -94,7 +94,7 @@ export const // --- title start
 			 * returns (Extension) {
 			 * @summary Update type extension.
 			 */
-			const updateType = <TData = AxiosResponse<ProtodataStruct>>(
+			const updateTypeExtensions = <TData = AxiosResponse<ProtodataStruct>>(
 				repo: string,
 				dataInputExtension: DataInputExtension,
 				options?: AxiosRequestConfig,
@@ -109,18 +109,18 @@ export const // --- title start
 			// --- footer start
 			return {
 				deleteType2,
-				searchTypeMixin3,
-				deleteTypeMixin3,
-				locateType,
-				createType,
-				updateType,
+				searchTypeExtensions,
+				deleteTypeExtensions,
+				locateTypeExtensions,
+				createTypeExtensions,
+				updateTypeExtensions,
 			};
 		};
 export type DeleteType2Result = AxiosResponse<DataStructList>;
-export type SearchTypeMixin3Result = AxiosResponse<DataStructList>;
-export type DeleteTypeMixin3Result = AxiosResponse<DataStructList>;
-export type LocateTypeResult = AxiosResponse<ProtodataStruct>;
-export type CreateTypeResult = AxiosResponse<ProtodataStruct>;
-export type UpdateTypeResult = AxiosResponse<ProtodataStruct>;
+export type SearchTypeExtensionsResult = AxiosResponse<DataStructList>;
+export type DeleteTypeExtensionsResult = AxiosResponse<DataStructList>;
+export type LocateTypeExtensionsResult = AxiosResponse<ProtodataStruct>;
+export type CreateTypeExtensionsResult = AxiosResponse<ProtodataStruct>;
+export type UpdateTypeExtensionsResult = AxiosResponse<ProtodataStruct>;
 
 // --- footer end

@@ -8,6 +8,7 @@ const ProviderIconType = Object.freeze({
   [ChatGatewayProvider.WEBCHAT]: 'messenger-web-chat',
   [ChatGatewayProvider.INFOBIP]: 'messenger-infobip',
   [ChatGatewayProvider.CUSTOM]: 'custom-chat-gateway',
+  [ChatGatewayProvider.PORTAL]: 'portal',
 });
 
 export default ProviderIconType;

@@ -125,7 +125,12 @@ export default {
     contact: 'Liên hệ | Các liên hệ',
     column: 'Cột | Các cột',
     notification: 'Thông báo | Các thông báo',
-    screencast: 'Ekran yozuvi',
+    screencast: 'Ghi màn hình',
+    extension: 'Mở rộng',
+    password: 'Mật khẩu',
+    number: 'Số',
+    expireAt: 'Hết hạn',
+    destination: 'Điểm đến',
   },
   // date-related texts
   date: {
@@ -176,6 +181,11 @@ export default {
     },
     customLookup: {
       customLookup: 'Tùy chỉnh | Các tùy chỉnh',
+    },
+    chatGateway: 'Cổng trò chuyện | Các cổng trò chuyện',
+    chat: {
+      chat: 'Trò chuyện | Các cuộc trò chuyện',
+      draftPlaceholder: 'Viết tin nhắn...',
     },
     queue: {
       queue: 'Hàng chờ | Hàng chờ',
@@ -503,6 +513,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} liên hệ`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {

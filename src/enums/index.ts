@@ -1,7 +1,10 @@
 import AbstractUserStatus from './AbstractUserStatus/AbstractUserStatus.enum.js';
 import AgentStatus from './AgentStatus/AgentStatus.enum.js';
 import { ButtonColor } from './ButtonColor/ButtonColor';
+import { ButtonSize } from './ButtonSize/ButtonSize.js';
+import { ButtonVariant } from './ButtonVariant/ButtonVariant';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
@@ -27,6 +30,7 @@ export {
   AgentStatus,
   AuditorSections,
   ButtonColor,
+  ButtonVariant,
   ChatGatewayProvider,
   ChipColor,
   ComponentSize,
@@ -36,6 +40,7 @@ export {
   IconAction,
   IconColor,
   ProcessingTableColumnType,
+  ProviderIconType,
   QueueType,
   RelativeDatetimeValue,
   SupervisorSections,

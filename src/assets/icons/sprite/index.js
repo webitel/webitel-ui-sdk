@@ -136,6 +136,8 @@ import options from './options.svg';
 import pause from './pause.svg';
 import pin from './pin.svg';
 import play from './play.svg';
+import playerEnterFullscreen from './player-enter-fullscreen.svg';
+import playerExitFullscreen from './player-exit-fullscreen.svg';
 import plus from './plus.svg';
 import plyrAirplay from './plyr-airplay.svg';
 import plyrCaptionsOff from './plyr-captions-off.svg';
@@ -166,6 +168,8 @@ import radio from './radio.svg';
 import radioChecked from './radio--checked.svg';
 import rec from './rec.svg';
 import recOff from './rec-off.svg';
+import recordStart from './record-start.svg';
+import recordStop from './record-stop.svg';
 import redo from './redo.svg';
 import refresh from './refresh.svg';
 import reporter from './reporter.svg';
@@ -174,10 +178,14 @@ import roundedInfo from './rounded-info.svg';
 import save from './save.svg';
 import saveAs from './save-as.svg';
 import scorecard from './scorecard.svg';
+import screenshot from './screenshot.svg';
+import screenshotDone from './screenshot-done.svg';
+import screenshotFalse from './screenshot-false.svg';
 import search from './search.svg';
 import selectCustomValueEnter from './select-custom-value-enter.svg';
 import sendArrow from './send-arrow.svg';
 import settings from './settings.svg';
+import sharingEnd from './sharing-end.svg';
 import socialMedia from './social-media.svg';
 import sortArrowDown from './sort-arrow-down.svg';
 import sortArrowUp from './sort-arrow-up.svg';
@@ -432,10 +440,19 @@ export default objCamelToKebab({
   plyrRewind,
   plyrSettings,
   plyrVolume,
+  playerExitFullscreen,
+  playerEnterFullscreen,
   loadPreset,
   quickReplies,
   checkboxTick,
   log,
   downloadPdf,
   tile,
+
+  recordStart,
+  recordStop,
+  screenshot,
+  screenshotDone,
+  screenshotFalse,
+  sharingEnd,
 });

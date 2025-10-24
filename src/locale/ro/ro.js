@@ -126,6 +126,11 @@ export default {
     column: 'Coloană | Coloane',
     notification: 'Notificare | Notificări',
     screencast: 'Înregistrare ecran',
+    extension: 'Extensie',
+    password: 'Parolă',
+    number: 'Număr',
+    expireAt: 'Expiră la',
+    destination: 'Destinație',
   },
   // date-related texts
   date: {
@@ -176,6 +181,11 @@ export default {
     },
     customLookup: {
       customLookup: 'Personalizare | Personalizări',
+    },
+    chatGateway: 'Gateway chat | Gateway-uri chat',
+    chat: {
+      chat: 'Chat | Chat-uri',
+      draftPlaceholder: 'Scrie un mesaj...',
     },
     queue: {
       queue: 'Coadă | Cozi',
@@ -502,6 +512,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacte`;
         },
+        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
       },
     },
     errorPages: {
