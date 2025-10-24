@@ -205,29 +205,15 @@ onBeforeUnmount(() => {
     }
   }
 }
-
-media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
-  .controls-group {
-    opacity: 1;
-  }
-
-  .video-display-panel {
-    background: var(--p-player-head-line-hover-background);
-
-    :deep(.video-display-panel) { // show panel buttons on hover
-      opacity: 1;
-    }
-  }
-}
 </style>
 
 <style lang="scss">
 .wt-vidstack-player {
   video {
     height: 100%;
-    object-fit: fill;width: 100%;
+    object-fit: contain;
+    width: 100%;
     min-width: 0;
-
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <media-controls-group class="screen-sharing-control-panel" :class="`screen-sharing-control-panel--${size}`">
+  <media-controls-group class="screen-sharing-control-panel controls-group" :class="`screen-sharing-control-panel--${size}`">
     <div
       class="screen-sharing-control-panel__actions"
     >
@@ -126,6 +126,9 @@ const changeScreenshotStatus = (status: ScreenshotStatus) => {
 }
 
 const closeSession = () => {
+  if (isRecording.value) {
+    props.session.stopRecord();
+  }
   props.session.close()
   emit('close-session')
 };
@@ -152,8 +155,6 @@ watch(isRecording, (newVal) => {
   justify-content: center;
 
   &--sm {
-    padding: var(--p-player-control-bar-position-padding-sm);
-
     .screen-sharing-control-panel__actions {
       width: 100%;
       border-top-left-radius: 0 !important;
@@ -167,8 +168,6 @@ watch(isRecording, (newVal) => {
   }
 
   &--md {
-    padding: var(--p-player-control-bar-position-padding-md);
-
     .screen-sharing-control-panel__indicator {
       right: var(--p-player-counter-position-padding-md);
       bottom: var(--p-player-counter-position-padding-md);
@@ -176,8 +175,6 @@ watch(isRecording, (newVal) => {
   }
 
   &--lg {
-    padding: var(--p-player-control-bar-position-padding-lg);
-
     .screen-sharing-control-panel__indicator {
       right: var(--p-player-counter-position-padding-lg);
       bottom: var(--p-player-counter-position-padding-lg);
