@@ -239,6 +239,12 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     return loadDataList();
   };
 
+  const resetParamsToDefaults = () => {
+    paginationStore.$reset();
+    filtersManager.value.reset();
+    headersStore.$reset();
+  };
+
   return {
     isStoreSetUp, // internal export for pinia devtools
 
@@ -270,6 +276,8 @@ export const tableStoreBody = <Entity extends { id: string; etag?: string }>(
     updateSelected,
     patchItemProperty,
     deleteEls,
+
+    resetParamsToDefaults,
 
     updateSearchMode,
 
