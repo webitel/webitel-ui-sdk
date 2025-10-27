@@ -43,7 +43,8 @@ const getAdjunctTypesList = async (
 			next,
 		};
 	} catch (err) {
-		throw applyTransform(err, [notify]);
+		const errTransformers = silent ? [] : [notify];
+		throw applyTransform(err, errTransformers);
 	}
 };
 
