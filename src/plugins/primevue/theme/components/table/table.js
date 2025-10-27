@@ -66,6 +66,10 @@ const table = {
         .p-datatable-column-resize-indicator {
           
         }
+
+        .p-datatable-row-expansion .p-datatable-thead {
+          z-index: 0;
+        }
         `,
 };
 
