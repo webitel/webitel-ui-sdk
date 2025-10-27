@@ -17,7 +17,13 @@
     </template>
 
     <template v-if="props.mode === 'stream'">
-      <screen-sharing-control-panel :session="props.session" @close-session="emit('close-session')" />
+      <screen-sharing-control-panel
+        :session="props.session"
+        :screenshot-status="props.screenshotStatus"
+        @close-session="emit('close-session')"
+        @make-screenshot="emit('make-screenshot')"
+        @toggle-record="emit('toggle-record')"
+      />
     </template>
   </media-controls>
 </template>
@@ -26,6 +32,7 @@
 import {defineEmits, inject} from "vue";
 
 import WtLoader from "../../../wt-loader/wt-loader.vue";
+import {ScreenshotStatus} from "../../types/ScreenshotStatus";
 import {WtVidstakPlayerControlsMode} from "../../types/WtVidstackPlayerControlsMode";
 import {WtVidstackPlayerSession} from "../../types/WtVidstackPlayerSession";
 import MediaControlPanel from "../panels/media-control-panel/media-control-panel.vue";
@@ -40,11 +47,14 @@ const props = defineProps<{
   closable?: boolean;
   mode: WtVidstakPlayerControlsMode;
   session: WtVidstackPlayerSession
+  screenshotStatus: ScreenshotStatus
 }>();
 
 const emit = defineEmits<{
   'close-player': [],
   'close-session': [],
+  'make-screenshot': [],
+  'toggle-record': [],
 }>();
 </script>
 

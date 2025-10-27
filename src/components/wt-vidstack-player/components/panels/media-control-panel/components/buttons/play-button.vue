@@ -1,24 +1,24 @@
 <template>
   <media-play-button class="play-button">
     <wt-button
-      rounded
-      contains-icon
+      :size="size"
       variant="outlined"
       color="secondary"
-      :size="size"
       icon="play"
       type="play"
+      rounded
+      contains-icon
       class="play-button__play-icon"
     />
 
     <wt-button
-      rounded
-      contains-icon
+      :size="size"
       variant="outlined"
       color="secondary"
-      :size="size"
       icon="pause"
       type="pause"
+      rounded
+      contains-icon
       class="play-button__pause-icon"
     />
   </media-play-button>

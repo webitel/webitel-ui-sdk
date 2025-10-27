@@ -23,9 +23,12 @@
         :title="props.title"
         :username="props.username"
         :session="props.session"
+        :screenshot-status="props.screenshotStatus"
         :mode="mode"
         @close-player="emit('close')"
         @close-session="emit('close-session')"
+        @make-screenshot="emit('make-screenshot')"
+        @toggle-record="emit('toggle-record')"
       />
 
     </media-player>
@@ -41,17 +44,16 @@ import {
   computed,
   defineEmits,
   defineProps,
-  nextTick,
   onBeforeUnmount,
   onMounted,
   provide,
   ref,
-  useTemplateRef,
-  watch
+  useTemplateRef
 } from 'vue';
 
 import {ComponentSize} from '../../enums';
 import VideoLayout from './components/layouts/video-layout.vue';
+import {ScreenshotStatus} from "./types/ScreenshotStatus";
 import {WtVidstakPlayerControlsMode} from "./types/WtVidstackPlayerControlsMode";
 import {WtVidstackPlayerSession} from "./types/WtVidstackPlayerSession";
 
@@ -66,6 +68,7 @@ interface Props {
   stream?: MediaStream
   mode: WtVidstakPlayerControlsMode;
   session?: WtVidstackPlayerSession
+  screenshotStatus: ScreenshotStatus
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -81,6 +84,8 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   'close': [],
   'close-session': [],
+  'make-screenshot': [],
+  'toggle-record': [],
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');

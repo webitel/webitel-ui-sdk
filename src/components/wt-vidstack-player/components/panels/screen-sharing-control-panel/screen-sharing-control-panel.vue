@@ -1,5 +1,8 @@
 <template>
-  <media-controls-group class="screen-sharing-control-panel controls-group" :class="`screen-sharing-control-panel--${size}`">
+  <media-controls-group
+    class="screen-sharing-control-panel controls-group"
+    :class="`screen-sharing-control-panel--${size}`"
+  >
     <div
       class="screen-sharing-control-panel__actions"
     >
@@ -10,7 +13,7 @@
         color="secondary"
         :size="size"
         :icon="screenShotIcon"
-        @click="makeScreenshot"
+        @click="emit('make-screenshot')"
       />
 
       <wt-button
@@ -20,7 +23,7 @@
         color="secondary"
         :size="size"
         :icon="recordIcon"
-        @click="toggleRecordAction"
+        @click="emit('toggle-record')"
       />
 
       <wt-button
@@ -52,25 +55,28 @@
 import convertDuration from '@webitel/ui-sdk/src/scripts/convertDuration';
 import {computed, defineEmits, inject, onUnmounted, ref, watch} from 'vue';
 
+import {ScreenshotStatus} from "../../../types/ScreenshotStatus";
 import {WtVidstackPlayerSession} from "../../../types/WtVidstackPlayerSession";
-
-type ScreenshotStatus = 'done' | 'error'
 
 interface Props {
   session: WtVidstackPlayerSession
+  screenshotStatus: ScreenshotStatus | null
 }
+
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
   'close-session': [],
+  'make-screenshot': [],
+  'toggle-record': [],
 }>()
 
 const {size} = inject('size');
-const screenshotStatus = ref<ScreenshotStatus | null>(null)
 
 const recordIcon = computed(() => (props.session.recordings ? 'record-stop' : 'record-start'));
-const getScreenshotIcon = (status?: ScreenshotStatus) => {
-  switch (status) {
+
+const screenShotIcon = computed(() => {
+  switch (props.screenshotStatus) {
     case 'done':
       return 'screenshot-done';
     case 'error':
@@ -78,9 +84,7 @@ const getScreenshotIcon = (status?: ScreenshotStatus) => {
     default:
       return 'screenshot';
   }
-}
-
-const screenShotIcon = computed(() => getScreenshotIcon(screenshotStatus.value));
+});
 const isRecording = computed(() => props.session.recordings);
 
 const secondsElapsed = ref(0);
@@ -101,35 +105,7 @@ function stopTimer() {
   }
 }
 
-const toggleRecordAction = () => {
-  if (isRecording.value) {
-    props.session.stopRecord();
-  } else {
-    props.session.startRecord();
-  }
-};
-
-const makeScreenshot = async () => {
-  try {
-    await props.session.screenshot()
-    changeScreenshotStatus('done')
-  } catch {
-    changeScreenshotStatus('error')
-  }
-};
-
-const changeScreenshotStatus = (status: ScreenshotStatus) => {
-  screenshotStatus.value = status;
-  setTimeout(() => {
-    screenshotStatus.value = null;
-  }, 2000);
-}
-
 const closeSession = () => {
-  if (isRecording.value) {
-    props.session.stopRecord();
-  }
-  props.session.close()
   emit('close-session')
 };
 
