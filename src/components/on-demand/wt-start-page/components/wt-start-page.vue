@@ -38,11 +38,13 @@ interface AppLogo {
   dark: string;
 }
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   nav: NavCard[];
   appLogo: AppLogo;
   darkMode?: boolean;
-}>();
+}>(), {
+  darkMode: false,
+});
 
 const logo = computed(() => {
   return props.darkMode ? props.appLogo.dark : props.appLogo.light;

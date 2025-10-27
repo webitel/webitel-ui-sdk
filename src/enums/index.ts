@@ -20,6 +20,7 @@ import { AuditorSections } from './WebitelApplications/AuditorSections';
 import { CrmSections } from './WebitelApplications/CrmSections';
 import { SupervisorSections } from './WebitelApplications/SupervisorSections';
 import WebitelApplications from './WebitelApplications/WebitelApplications.enum.js';
+import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
@@ -46,6 +47,7 @@ export {
   SupervisorSections,
   TypesExportedSettings,
   WebitelApplications,
+  WfmSections,
   WtApplication,
   WtObject,
   WtTypeExtensionFieldKind,
