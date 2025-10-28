@@ -116,12 +116,14 @@ import AuditDark from './assets/dark/app-logo-dark-audit.svg';
 import CrmDark from './assets/dark/app-logo-dark-crm.svg';
 import HistoryDark from './assets/dark/app-logo-dark-history.svg';
 import SupervisorDark from './assets/dark/app-logo-dark-supervisor.svg';
+import WfmDark from './assets/dark/app-logo-dark-wfm.svg';
 import WorkspaceDark from './assets/dark/app-logo-dark-workspace.svg';
 import AdminLight from './assets/light/app-logo-light-admin.svg';
 import AuditLight from './assets/light/app-logo-light-audit.svg';
 import CrmLight from './assets/light/app-logo-light-crm.svg';
 import HistoryLight from './assets/light/app-logo-light-history.svg';
 import SupervisorLight from './assets/light/app-logo-light-supervisor.svg';
+import WfmLight from './assets/light/app-logo-light-wfm.svg';
 import WorkspaceLight from './assets/light/app-logo-light-workspace.svg';
 import { WtNavigationBarNavItem } from './types/WtNavigationBar';
 
@@ -150,9 +152,9 @@ const appLogo = {
     dark: CrmDark,
     light: CrmLight,
   },
-  [WebitelApplications.Wfm]: {
-    dark: CrmDark,   // TODO Mock logo from crm for wfm
-    light: CrmLight, // TODO Mock logo from crm for wfm
+  [WebitelApplications.WFM]: {
+    dark: WfmDark,
+    light: WfmLight,
   },
 };
 

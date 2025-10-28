@@ -70,6 +70,10 @@ const table = {
         .p-datatable-row-expansion .p-datatable-thead {
           z-index: 0;
         }
+        
+        .p-datatable-tbody > tr:has(+ .p-datatable-row-expansion:hover) > td {
+            background: ${dt('datatable.row.hoverBackground')};
+        }
         `,
 };
 
