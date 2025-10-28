@@ -66,6 +66,10 @@ const table = {
         .p-datatable-column-resize-indicator {
           
         }
+
+        .p-datatable-tbody > tr:has(+ .p-datatable-row-expansion:hover) > td {
+            background: ${dt('datatable.row.hoverBackground')};
+        }
         `,
 };
 
