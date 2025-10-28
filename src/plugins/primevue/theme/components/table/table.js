@@ -54,10 +54,6 @@ const table = {
             z-index: 2;
         }
 
-        .p-datatable-thead > tr > th:active {
-            background: red;
-        }
-
         .p-datatable-column-resizer {
             background: ${dt('datatable.columnResizer.background')};
 

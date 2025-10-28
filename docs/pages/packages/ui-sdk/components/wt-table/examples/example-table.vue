@@ -79,6 +79,7 @@ const getRowClass = ({id}) => {
     grid-actions
     fixed-actions
     resizable-columns
+    reorderable-columns
     :row-class="getRowClass"
     @sort="sort"
   >
