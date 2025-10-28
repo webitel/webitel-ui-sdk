@@ -4,7 +4,6 @@ import { ref } from 'vue';
 import { getUserTimezone } from '../api/UserinfoAPI';
 
 interface Timezone {
-  name: string;
   id: string;
   offset: string;
 }
@@ -18,11 +17,20 @@ export const createUserSettingsStore = () => {
     const initializeTimezone = async () => {
       const storedTimezone = localStorage.getItem('timezone');
       if (storedTimezone) {
-        timezone.value = JSON.parse(storedTimezone);
+        try {
+          timezone.value = JSON.parse(storedTimezone);
+        } catch {
+          // If parsing fails, fetch from API
+          const userTimezone = await getUserTimezone();
+          const { id, offset } = userTimezone;
+          timezone.value = { id, offset };
+          localStorage.setItem('timezone', JSON.stringify({ id, offset }));
+        }
       } else {
         const userTimezone = await getUserTimezone();
-        timezone.value = userTimezone;
-        localStorage.setItem('timezone', JSON.stringify(userTimezone));
+        const { id, offset } = userTimezone;
+        timezone.value = { id, offset };
+        localStorage.setItem('timezone', JSON.stringify({ id, offset }));
       }
     };
 
