@@ -99,4 +99,10 @@ const emit = defineEmits<{
   display: none;
 }
 
+media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
+  .video-display-panel {
+    background: var(--p-player-head-line-hover-background);
+    opacity: 1;
+  }
+}
 </style>
