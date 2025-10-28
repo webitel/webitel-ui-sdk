@@ -209,11 +209,12 @@
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
 import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
-import { computed, defineProps, nextTick, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
+import { computed, defineProps, nextTick, onMounted, onUnmounted, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
+import { ta } from 'zod/v4/locales';
 
 /**
  * Number of items to render outside the visible area for virtual scrolling.
@@ -430,6 +431,7 @@ const columnReorder = () => {
   tableKey.value += 1;
   emit('column-reorder', newOrder)
   nextTick(() => {
+    addTableDragListener();
     table.value.$el.querySelector('.p-datatable-table-container').scrollLeft = containerElScrollLeft
   })
 }
@@ -457,6 +459,37 @@ const virtualScroll = computed(() => {
     numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
   };
 });
+
+const tableDragHandler = (event) => {
+  event.dataTransfer.effectAllowed = 'move'
+  const copyEl = event.target.cloneNode(true);
+  copyEl.style.position = 'absolute';
+  copyEl.style.top = '-9999px';
+  copyEl.style.background = 'var(--p-datatable-header-cell-drag-background)';
+  copyEl.style.width = event.target.offsetWidth + 'px';
+  document.body.appendChild(copyEl);
+  event.dataTransfer.setDragImage(copyEl, event.offsetX, event.offsetY);
+  // Clean up after drag starts
+  setTimeout(() => {
+    document.body.removeChild(copyEl);
+  }, 0);
+}
+
+const addTableDragListener = () => {
+  table.value.$el.addEventListener('dragstart', tableDragHandler);
+}
+
+const removeTableDragListener = () => {
+  table.value.$el.removeEventListener('dragstart', tableDragHandler);
+}
+
+onMounted(() => {
+  addTableDragListener();
+})
+
+onUnmounted(() => {
+  removeTableDragListener();
+})
 </script>
 
 <style lang="scss">

@@ -54,6 +54,10 @@ const table = {
             z-index: 2;
         }
 
+        .p-datatable-thead > tr > th:active {
+            background: red;
+        }
+
         .p-datatable-column-resizer {
             background: ${dt('datatable.columnResizer.background')};
 
@@ -73,6 +77,19 @@ const table = {
         
         .p-datatable-tbody > tr:has(+ .p-datatable-row-expansion:hover) > td {
             background: ${dt('datatable.row.hoverBackground')};
+        }
+
+        .p-datatable-row-reorder-indicator-down {
+            height: 100%;
+            z-index: 1;
+            margin-top: -41px;
+            width: 1px;
+            background: ${dt('datatable.reorderIndicator.color')};
+            margin-left: 7px;
+        }
+
+        .p-datatable-row-reorder-indicator-down svg {
+            display: none;
         }
         `,
 };
