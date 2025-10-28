@@ -476,11 +476,13 @@ const tableDragHandler = (event) => {
 }
 
 const addTableDragListener = () => {
-  table.value.$el.addEventListener('dragstart', tableDragHandler);
+  if (!props.reorderableColumns) return;
+  table.value?.$el?.addEventListener('dragstart', tableDragHandler);
 }
 
 const removeTableDragListener = () => {
-  table.value.$el.removeEventListener('dragstart', tableDragHandler);
+  if (!props.reorderableColumns) return;
+  table.value?.$el?.removeEventListener('dragstart', tableDragHandler);
 }
 
 onMounted(() => {
