@@ -137,7 +137,7 @@ onMounted(() => {
     if (videoEl.srcObject !== props.stream) {
       setTimeout(() => {
         videoEl.srcObject = props.stream ?? null
-      }, 100)
+      }, 200)
     }
   }
 })
