@@ -765,6 +765,9 @@ export default {
       create: ({ named }) => `${named('entity').toLowerCase()} a fost salvat`,
       delete: ({ named }) => `${named('entity').toLowerCase()} a fost șters`,
     },
+    info: {
+      passwordExpirationMessage: 'Parola ta va expira în { days } zile'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',

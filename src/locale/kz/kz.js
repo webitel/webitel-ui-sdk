@@ -763,6 +763,9 @@ export default {
       create: ({ named }) => `${named('entity').toLowerCase()} сақталды`,
       delete: ({ named }) => `${named('entity').toLowerCase()} жойылды`,
     },
+    info: {
+      passwordExpirationMessage: 'Сіздің құпия сөзіңіз { days } күннен кейін мерзімі аяқталады'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
