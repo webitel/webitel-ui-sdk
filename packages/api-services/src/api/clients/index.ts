@@ -2,6 +2,7 @@ export * from './_shared/generatePermissionsApi';
 export * from './agents/agentChats';
 export * from './agents/agents';
 export * from './buckets/buckets';
+export * from './callHistory/callHistory';
 export * from './calendars/calendars';
 export * from './caseCloseReasonGroups/caseCloseReasonGroups';
 export * from './caseCloseReasons/caseCloseReasons';
