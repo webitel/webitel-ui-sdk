@@ -68,8 +68,8 @@
     "vue-tsc": "^2.2.8"
   },
   "engines": {
-    "npm": "10",
-    "node": "v22"
+    "npm": ">=10",
+    "node": ">=22"
   },
   "repository": {
     "type": "git",
