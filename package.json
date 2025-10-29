@@ -143,8 +143,8 @@
     "date-fns": "^4.1.0"
   },
   "engines": {
-    "npm": "10",
-    "node": "v22"
+    "npm": ">=10",
+    "node": ">=v22"
   },
   "exports": {
     ".": {
