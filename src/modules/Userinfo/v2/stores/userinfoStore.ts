@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-import { getSession, getUiVisibilityAccess } from '../api/UserinfoAPI';
+import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 
 export const createUserinfoStore = () => {
@@ -24,12 +24,14 @@ export const createUserinfoStore = () => {
     } = accessStore;
 
     const userId = ref();
+    const thisApp = ref<string | undefined>()
+    const userInfo = ref(null)
 
     const initialize = async () => {
-      const { scope, permissions, ...userinfo } = await getSession();
+      const { scope, permissions, ...userinfoData } = await getSession();
       const access = await getUiVisibilityAccess();
 
-      userId.value = userinfo.userId;
+      userId.value = userinfoData.userId;
 
       initializeAccessStore({
         scope,
@@ -38,8 +40,19 @@ export const createUserinfoStore = () => {
       });
     };
 
+    const setApplicationName = (name: string) => {
+      thisApp.value = name
+    }
+
+    const logoutUser = async () => {
+      await logout()
+      userInfo.value = null
+      // todo redirect to auth page
+    }
+
     return {
       userId,
+      thisApp,
       initialize,
 
       hasReadAccess,
@@ -50,6 +63,9 @@ export const createUserinfoStore = () => {
       hasSectionVisibility,
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
+
+      setApplicationName,
+      logoutUser,
     };
   });
 
