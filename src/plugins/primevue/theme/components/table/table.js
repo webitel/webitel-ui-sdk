@@ -9,7 +9,8 @@ const rowStateStyles = (state, dt) => `
 
   .p-datatable-tbody > tr.row-${state}:hover,
   .p-datatable-tbody > tr.row-${state}:hover > td,
-  .p-datatable-tbody > tr.row-${state}:hover > td.p-datatable-frozen-column {
+  .p-datatable-tbody > tr.row-${state}:hover > td.p-datatable-frozen-column,
+  .p-datatable-tbody > tr.row-${state}:has(+ .p-datatable-row-expansion:hover) > td {
     background: ${dt(`datatable.row.${state}HoverBackground`)};
   }
 `;
@@ -72,6 +73,10 @@ const table = {
         }
         
         .p-datatable-tbody > tr:has(+ .p-datatable-row-expansion:hover) > td {
+            background: ${dt('datatable.row.hoverBackground')};
+        }
+
+        .p-datatable-tbody > tr:hover + .p-datatable-row-expansion {
             background: ${dt('datatable.row.hoverBackground')};
         }
         `,
