@@ -21,7 +21,6 @@
         @toggle="handleFullscreen"
       />
       <toggle-button
-        v-if="size !== ComponentSize.LG"
         primary-icon="expand"
         secondary-icon="collapse"
         color="on-dark"
@@ -58,12 +57,32 @@ const emit = defineEmits<{
   'close': [],
 }>();
 
-const handleFullscreen = (value: boolean) => {
-  changeSize(value ? ComponentSize.LG : ComponentSize.SM);
+const handleFullscreen = async (value: boolean) => {
+  if (value) {
+    if (size.value !== ComponentSize.LG) {
+      changeSize(ComponentSize.LG)
+    }
+  } else if (size.value === ComponentSize.LG) {
+    await exitFullscreen()
+    changeSize(ComponentSize.SM)
+  }
 }
 
-const handlePlayerSize = (value: boolean) => {
-  changeSize(value ? ComponentSize.MD : ComponentSize.SM);
+const handlePlayerSize = async () => {
+  if (size.value === ComponentSize.SM) {
+    changeSize(ComponentSize.MD)
+  } else if (size.value === ComponentSize.MD) {
+    changeSize(ComponentSize.SM)
+  } else if (size.value === ComponentSize.LG) {
+    await exitFullscreen()
+    changeSize(ComponentSize.MD)
+  }
+}
+
+const exitFullscreen = async () => {
+  if (document.fullscreenElement) {
+    await document.exitFullscreen().catch(console.warn)
+  }
 }
 
 const handleKeyUp = (event) => {

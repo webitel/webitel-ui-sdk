@@ -11,9 +11,10 @@
         contains-icon
         variant="outlined"
         color="secondary"
+        :loading="props.screenshotIsLoading"
         :size="size"
         :icon="screenShotIcon"
-        @click="emit('make-screenshot')"
+        @click="makeScreenshot"
       />
 
       <wt-button
@@ -61,6 +62,7 @@ import {WtVidstackPlayerSession} from "../../../types/WtVidstackPlayerSession";
 interface Props {
   session: WtVidstackPlayerSession
   screenshotStatus: ScreenshotStatus | null
+  screenshotIsLoading: boolean
 }
 
 const props = defineProps<Props>();
@@ -107,6 +109,10 @@ function stopTimer() {
 
 const closeSession = () => {
   emit('close-session')
+};
+
+const makeScreenshot = () => {
+  emit('make-screenshot')
 };
 
 onUnmounted(() => {

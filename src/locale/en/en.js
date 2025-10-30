@@ -127,7 +127,7 @@ export default deepmerge({
     contact: 'Contact | Contacts',
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
-    screencast: 'Screencast',
+    screencast: 'Screen recordings',
     extension: 'Extension',
     password: 'Password',
     number: 'Number',
