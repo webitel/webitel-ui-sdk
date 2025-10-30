@@ -156,7 +156,8 @@ const handleDelete = () => {
   })
 }
 
-watch(() => currentImage.value, () => {
+watch(() => currentImage.value, (oldValue, newValue) => {
+  if(oldValue?.src == newValue?.src) return
   isImageOnLoad.value = true
 }, { deep: true })
 

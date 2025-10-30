@@ -14,6 +14,8 @@ import type {
 	CatalogGetHistory2Params,
 	CatalogGetHistoryParams,
 	CatalogGetMembersParams,
+	WebitelChatBroadcastMessageRequest,
+	WebitelChatBroadcastMessageResponse,
 	WebitelChatChatCustomers,
 	WebitelChatChatDialogs,
 	WebitelChatChatMembers,
@@ -24,10 +26,25 @@ import type {
 //
 
 export const // --- title start
-	getCatalog =
+	getMessages =
 		// --- title end
 		() => {
 			// --- header end
+			/**
+			 * @summary Broadcast message send message from via to peer recipients.
+			 */
+			const messagesServiceBroadcastMessage = <
+				TData = AxiosResponse<WebitelChatBroadcastMessageResponse>,
+			>(
+				webitelChatBroadcastMessageRequest: WebitelChatBroadcastMessageRequest,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.post(
+					'/chat/broadcast',
+					webitelChatBroadcastMessageRequest,
+					options,
+				);
+			};
 			/**
 			 * @summary Query of external chat customers
 			 */
@@ -99,6 +116,7 @@ export const // --- title start
 
 			// --- footer start
 			return {
+				messagesServiceBroadcastMessage,
 				catalogGetCustomers,
 				catalogGetDialogs,
 				catalogGetMembers,
@@ -106,6 +124,8 @@ export const // --- title start
 				catalogGetHistory2,
 			};
 		};
+export type MessagesServiceBroadcastMessageResult =
+	AxiosResponse<WebitelChatBroadcastMessageResponse>;
 export type CatalogGetCustomersResult = AxiosResponse<WebitelChatChatCustomers>;
 export type CatalogGetDialogsResult = AxiosResponse<WebitelChatChatDialogs>;
 export type CatalogGetMembersResult = AxiosResponse<WebitelChatChatMembers>;

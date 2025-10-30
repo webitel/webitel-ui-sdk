@@ -763,6 +763,9 @@ export default {
       create: ({ named }) => `${named('entity').toLowerCase()} został zapisany`,
       delete: ({ named }) => `${named('entity').toLowerCase()} został usunięty`,
     },
+    info: {
+      passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',

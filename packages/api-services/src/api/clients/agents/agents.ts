@@ -1,16 +1,11 @@
-import { AgentServiceApiFactory } from 'webitel-sdk';
+import { getAgentService } from '@webitel/api-services/gen';
 
 //  @author @Lera
 // fixme: change on library
 //  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
 //
 import { convertDuration } from '../../../scripts';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-	getDefaultInstance,
-	getDefaultOpenAPIConfig,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -20,11 +15,6 @@ import {
 	snakeToCamel,
 	starToSearch,
 } from '../../transformers';
-
-const instance = getDefaultInstance();
-const configuration = getDefaultOpenAPIConfig();
-
-const agentService = AgentServiceApiFactory(configuration, '', instance);
 
 const convertStatusDuration = (value) => {
 	if (value > 60 * 60 * 24) return '>24:00:00';
@@ -38,46 +28,35 @@ const getAgentsList = async (params) => {
 			statusDuration: convertStatusDuration(item.statusDuration),
 		}));
 	};
-
-	const {
-		page,
-		size,
-		search,
-		sort,
-		fields,
-		id,
-		team,
-		skill,
-		isSupervisor,
-		isNotSupervisor,
-		userId,
-		notTeamId,
-		supervisorId,
-		notSkillId,
-	} = applyTransform(params, [merge(getDefaultGetParams())]);
+	const fieldsToSend = [
+		'page',
+		'size',
+		'search',
+		'sort',
+		'fields',
+		'id',
+		'allow_channels',
+		'team',
+		'region_id',
+		'auditor_id',
+		'skill',
+		'queue_id',
+		'is_supervisor',
+		'is_not_Supervisor',
+		'user_id',
+		'not_team_id',
+		'supervisor_id',
+		'not_skill_id',
+		'not_user_id',
+	];
+	const requestParams = applyTransform(params, [
+		camelToSnake(),
+		merge(getDefaultGetListResponse()),
+		sanitize(fieldsToSend),
+	]);
 
 	try {
-		const response = await agentService.searchAgent(
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-			undefined,
-			supervisorId,
-			team,
-			undefined,
-			undefined,
-			isSupervisor,
-			skill,
-			undefined,
-			isNotSupervisor,
-			userId,
-			undefined,
-			notTeamId,
-			notSkillId,
-		);
+		const response = await getAgentService().searchAgent(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -107,7 +86,7 @@ const getAgent = async ({ itemId: id }) => {
 	};
 
 	try {
-		const response = await agentService.readAgent(id);
+		const response = await getAgentService().readAgent(id);
 		return applyTransform(response.data, [
 			snakeToCamel(),
 			merge(defaultObject),
@@ -136,7 +115,7 @@ const addAgent = async ({ itemInstance }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await agentService.createAgent(item);
+		const response = await getAgentService().createAgent(item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -149,7 +128,7 @@ const patchAgent = async ({ changes, id }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await agentService.patchAgent(id, body);
+		const response = await getAgentService().patchAgent(id, body);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -162,7 +141,7 @@ const updateAgent = async ({ itemInstance, itemId: id }) => {
 		camelToSnake(),
 	]);
 	try {
-		const response = await agentService.updateAgent(id, item);
+		const response = await getAgentService().updateAgent(id, item);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -171,7 +150,7 @@ const updateAgent = async ({ itemInstance, itemId: id }) => {
 
 const deleteAgent = async ({ id }) => {
 	try {
-		const response = await agentService.deleteAgent(id);
+		const response = await getAgentService().deleteAgent(id);
 		return applyTransform(response.data, []);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
@@ -198,14 +177,14 @@ const getAgentHistory = async (params) => {
 	]);
 
 	try {
-		const response = await agentService.searchAgentStateHistory(
+		const response = await getAgentService().searchAgentStateHistory({
 			page,
 			size,
 			from,
 			to,
 			parentId,
 			sort,
-		);
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -226,11 +205,42 @@ const getAgentUsersOptions = async (params) => {
 	]);
 
 	try {
-		const response = await agentService.searchLookupUsersAgentNotExists(
+		const response = await getAgentService().searchLookupUsersAgentNotExists({
 			page,
 			size,
 			search,
-		);
+		});
+		const { items, next } = applyTransform(response.data, [
+			snakeToCamel(),
+			merge(getDefaultGetListResponse()),
+		]);
+		return {
+			items,
+			next,
+		};
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
+
+const getUsersStatus = async (params) => {
+	const fieldsToSend = [
+		'page',
+		'size',
+		'search',
+		'sort',
+		'fields',
+		'not_user_id',
+	];
+	const requestParams = applyTransform(params, [
+		camelToSnake(),
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+		sanitize(fieldsToSend),
+	]);
+
+	try {
+		const response = await getAgentService().searchUserStatus(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -266,4 +276,5 @@ export const AgentsAPI = {
 	getRegularAgentsOptions,
 	getAgentUsersOptions,
 	getSupervisorOptions,
+	getUsersStatus,
 };

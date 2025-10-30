@@ -56,6 +56,7 @@ const props = defineProps({
 
   &__link {
     color: var(--text-main-color);
+    overflow-wrap: anywhere;
 
     &:hover,
     &:active {

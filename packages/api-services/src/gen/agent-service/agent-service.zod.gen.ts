@@ -29,6 +29,7 @@ export const searchAgentQueryParams = zod.object({
 	extension: zod.array(zod.string()).optional(),
 	notTeamId: zod.array(zod.number()).optional(),
 	notSkillId: zod.array(zod.number()).optional(),
+	notUserId: zod.array(zod.string()).optional(),
 });
 
 export const searchAgentResponse = zod.object({
@@ -1225,6 +1226,7 @@ export const searchUserStatusQueryParams = zod.object({
 	q: zod.string().optional(),
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
+	notUserId: zod.array(zod.string()).optional(),
 });
 
 export const searchUserStatusResponse = zod.object({
