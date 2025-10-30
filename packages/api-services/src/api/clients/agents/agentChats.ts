@@ -1,7 +1,5 @@
-import { getAgentChatService } from '@webitel/api-services/gen'
-import {
-	getDefaultGetParams,
-} from '../../defaults';
+import { getAgentChatService } from '@webitel/api-services/gen';
+import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	merge,
@@ -16,12 +14,11 @@ const getChatsList = async (params) => {
 
 	try {
 		const response = await getAgentChatService().agentChatServiceGetAgentChats({
-        size,
-        page,
-        onlyClosed,
-        onlyUnprocessed,
-      }
-		);
+			size,
+			page,
+			onlyClosed,
+			onlyUnprocessed,
+		});
 		const { items, next } = applyTransform(response.data, [snakeToCamel()]);
 		return {
 			items,
@@ -37,23 +34,24 @@ const getChatCount = async (params) => {
 		merge(getDefaultGetParams()),
 	]);
 
-  try {
-    const response = await getAgentChatService().agentChatServiceGetAgentChatsCounter({
-        onlyClosed,
-        onlyUnprocessed,
-      }
-    );
-    const { count } = applyTransform(response.data, [snakeToCamel()]);
-    return count
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
-}
+	try {
+		const response =
+			await getAgentChatService().agentChatServiceGetAgentChatsCounter({
+				onlyClosed,
+				onlyUnprocessed,
+			});
+		const { count } = applyTransform(response.data, [snakeToCamel()]);
+		return count;
+	} catch (err) {
+		throw applyTransform(err, [notify]);
+	}
+};
 
 const markChatProcessed = async (chatId) => {
 	// add to chat unprocessedClose: true
 	try {
-		const response = await getAgentChatService().agentChatServiceMarkChatProcessed(chatId);
+		const response =
+			await getAgentChatService().agentChatServiceMarkChatProcessed(chatId);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [
@@ -70,5 +68,5 @@ const markChatProcessed = async (chatId) => {
 export const AgentChatsAPI = {
 	getList: getChatsList,
 	markChatProcessed,
-  getChatCount,
+	getChatCount,
 };

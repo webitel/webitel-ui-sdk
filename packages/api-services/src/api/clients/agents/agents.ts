@@ -1,14 +1,11 @@
-import { getAgentService } from '@webitel/api-services/gen'
+import { getAgentService } from '@webitel/api-services/gen';
 
 //  @author @Lera
 // fixme: change on library
 //  https://webitel.atlassian.net/browse/WTEL-7842?focusedCommentId=702198
 //
 import { convertDuration } from '../../../scripts';
-import {
-	getDefaultGetListResponse,
-	getDefaultGetParams,
-} from '../../defaults';
+import { getDefaultGetListResponse, getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
 	camelToSnake,
@@ -39,43 +36,43 @@ const getAgentsList = async (params) => {
 		sort,
 		fields,
 		id,
-    allowChannels,
+		allowChannels,
 		team,
-    regionId,
-    auditorId,
+		regionId,
+		auditorId,
 		skill,
-    queueId,
+		queueId,
 		isSupervisor,
 		isNotSupervisor,
 		userId,
 		notTeamId,
 		supervisorId,
 		notSkillId,
-    notUserId
+		notUserId,
 	} = applyTransform(params, [merge(getDefaultGetParams())]);
 
 	try {
 		const response = await getAgentService().searchAgent({
-      page,
-      size,
-      search,
-      sort,
-      fields,
-      id,
-      allowChannels,
-      supervisorId,
-      team,
-      regionId,
-      auditorId,
-      isSupervisor,
-      skill,
-      queueId,
-      isNotSupervisor,
-      userId,
-      notTeamId,
-      notSkillId,
-      notUserId
-    });
+			page,
+			size,
+			search,
+			sort,
+			fields,
+			id,
+			allowChannels,
+			supervisorId,
+			team,
+			regionId,
+			auditorId,
+			isSupervisor,
+			skill,
+			queueId,
+			isNotSupervisor,
+			userId,
+			notTeamId,
+			notSkillId,
+			notUserId,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -197,13 +194,13 @@ const getAgentHistory = async (params) => {
 
 	try {
 		const response = await getAgentService().searchAgentStateHistory({
-      page,
-      size,
-      from,
-      to,
-      parentId,
-      sort,
-    });
+			page,
+			size,
+			from,
+			to,
+			parentId,
+			sort,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -225,10 +222,10 @@ const getAgentUsersOptions = async (params) => {
 
 	try {
 		const response = await getAgentService().searchLookupUsersAgentNotExists({
-      page,
-      size,
-      search,
-    });
+			page,
+			size,
+			search,
+		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
