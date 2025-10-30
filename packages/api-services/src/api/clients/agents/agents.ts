@@ -56,7 +56,7 @@ const getAgentsList = async (params) => {
   ]);
 
 	try {
-		const response = await getAgentService(requestParams).searchAgent();
+		const response = await getAgentService().searchAgent(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
