@@ -28,51 +28,35 @@ const getAgentsList = async (params) => {
 			statusDuration: convertStatusDuration(item.statusDuration),
 		}));
 	};
-
-	const {
-		page,
-		size,
-		search,
-		sort,
-		fields,
-		id,
-		allowChannels,
-		team,
-		regionId,
-		auditorId,
-		skill,
-		queueId,
-		isSupervisor,
-		isNotSupervisor,
-		userId,
-		notTeamId,
-		supervisorId,
-		notSkillId,
-		notUserId,
-	} = applyTransform(params, [merge(getDefaultGetParams())]);
+  const fieldsToSend = [
+    'page',
+    'size',
+    'search',
+    'sort',
+    'fields',
+    'id',
+    'allow_channels',
+    'team',
+    'region_id',
+    'auditor_id',
+    'skill',
+    'queue_id',
+    'is_supervisor',
+    'is_not_Supervisor',
+    'user_id',
+    'not_team_id',
+    'supervisor_id',
+    'not_skill_id',
+    'not_user_id',
+  ]
+	const requestParams = applyTransform(params, [
+    camelToSnake(),
+    merge(getDefaultGetListResponse()),
+    sanitize(fieldsToSend)
+  ]);
 
 	try {
-		const response = await getAgentService().searchAgent({
-			page,
-			size,
-			search,
-			sort,
-			fields,
-			id,
-			allowChannels,
-			supervisorId,
-			team,
-			regionId,
-			auditorId,
-			isSupervisor,
-			skill,
-			queueId,
-			isNotSupervisor,
-			userId,
-			notTeamId,
-			notSkillId,
-			notUserId,
-		});
+		const response = await getAgentService().searchAgent(requestParams);
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
 			merge(getDefaultGetListResponse()),
@@ -238,6 +222,37 @@ const getAgentUsersOptions = async (params) => {
 		throw applyTransform(err, [notify]);
 	}
 };
+
+const getUsersStatus = async (params) => {
+  const fieldsToSend = [
+    'page',
+    'size',
+    'search',
+    'sort',
+    'fields',
+    'not_user_id'
+  ]
+	const requestParams = applyTransform(params, [
+    camelToSnake(),
+		merge(getDefaultGetParams()),
+		starToSearch('search'),
+    sanitize(fieldsToSend)
+	]);
+
+  try {
+    const response = await getAgentService().searchUserStatus(requestParams);
+    const { items, next } = applyTransform(response.data, [
+      snakeToCamel(),
+      merge(getDefaultGetListResponse()),
+    ]);
+    return {
+      items,
+      next,
+    };
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+}
 const getSupervisorOptions = async (params) => {
 	const isSupervisor = true;
 	return getAgentsList({ ...params, isSupervisor });
@@ -261,4 +276,5 @@ export const AgentsAPI = {
 	getRegularAgentsOptions,
 	getAgentUsersOptions,
 	getSupervisorOptions,
+  getUsersStatus,
 };
