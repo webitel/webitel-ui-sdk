@@ -5,7 +5,7 @@ import getNamespacedState from '../../../store/helpers/getNamespacedState.js';
 
 // eslint-disable-next-line import/prefer-default-export
 
-export const useCardStore = (namespace, { onLoadErrorHandler }) => {
+export const useCardStore = (namespace, { onLoadErrorHandler } = {}) => {
   const store = useStore();
 
   const cardNamespace = `${namespace}/card`;
