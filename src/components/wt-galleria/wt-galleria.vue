@@ -107,7 +107,7 @@ import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteCo
 import type { GalleriaProps } from 'primevue';
 import { computed, defineModel, defineProps, nextTick, onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 
-import { useGalleriaFullscreen } from '../../composables'
+import { useGalleriaFullscreen, useGalleriaMaskClick } from '../../composables'
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
 interface Props extends GalleriaProps{
@@ -130,6 +130,11 @@ const {
   fullScreen,
   toggleFullScreen
 } = useGalleriaFullscreen(galleria)
+
+const {
+  listenMaskElementClick,
+  removeMaskElementClick
+} = useGalleriaMaskClick(visible)
 
 const {
   isVisible: isDeleteConfirmationPopup,
@@ -177,24 +182,6 @@ watch(() => props.value, () => {
     visible.value = false
   }
 })
-
-const onMaskClick = () => {
-  visible.value = false
-}
-
-const onGalleriaClick = (e) => {
-  e.stopPropagation();
-}
-
-const listenMaskElementClick = () => {
-  document.querySelector('.p-galleria-mask')?.addEventListener('click', onMaskClick);
-  document.querySelector('.p-galleria')?.addEventListener('click', onGalleriaClick);   // for stop triggering mask click
-}
-
-const removeMaskElementClick = () => {
-  document.querySelector('.p-galleria-mask')?.removeEventListener('click', onMaskClick);
-  document.querySelector('.p-galleria')?.removeEventListener('click', onGalleriaClick);
-}
 
 onMounted(() => {
   if (visible.value) {
