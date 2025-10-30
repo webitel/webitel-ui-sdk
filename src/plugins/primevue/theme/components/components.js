@@ -9,6 +9,7 @@ import galleria from './galleria/galleria.js';
 import image from './image/image.js';
 import menubar from './menubar/menubar.js';
 import popover from './popover/popover.js';
+import textarea from './textarea/textarea.js';
 import radio from './radio/radio.js';
 import slider from './slider/slider.js';
 import switcher from './switcher/switcher.js';
@@ -23,6 +24,7 @@ const components = {
   button,
   chip,
   checkbox,
+  textarea,
   toggleswitch: switcher,
   divider,
   image,
