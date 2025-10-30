@@ -8,12 +8,68 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 import type {
+	WebitelChatBroadcastMessageResponse,
 	WebitelChatChatCustomers,
 	WebitelChatChatDialogs,
 	WebitelChatChatMembers,
 	WebitelChatChatMessages,
 } from '.././_models';
 import { WebitelChatButtonRequest } from '.././_models';
+
+export const getMessagesServiceBroadcastMessageResponseMock = (
+	overrideResponse: Partial<WebitelChatBroadcastMessageResponse> = {},
+): WebitelChatBroadcastMessageResponse => ({
+	failure: faker.helpers.arrayElement([
+		Array.from(
+			{ length: faker.number.int({ min: 1, max: 10 }) },
+			(_, i) => i + 1,
+		).map(() => ({
+			error: faker.helpers.arrayElement([
+				{
+					code: faker.helpers.arrayElement([
+						faker.number.int({
+							min: undefined,
+							max: undefined,
+							multipleOf: undefined,
+						}),
+						undefined,
+					]),
+					details: faker.helpers.arrayElement([
+						Array.from(
+							{ length: faker.number.int({ min: 1, max: 10 }) },
+							(_, i) => i + 1,
+						).map(() => ({
+							'@type': faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+						})),
+						undefined,
+					]),
+					message: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
+				},
+				undefined,
+			]),
+			peerId: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
+		})),
+		undefined,
+	]),
+	variables: faker.helpers.arrayElement([
+		{
+			[faker.string.alphanumeric(5)]: faker.string.alpha({
+				length: { min: 10, max: 20 },
+			}),
+		},
+		undefined,
+	]),
+	...overrideResponse,
+});
 
 export const getCatalogGetCustomersResponseMock = (
 	overrideResponse: Partial<WebitelChatChatCustomers> = {},
@@ -441,6 +497,10 @@ export const getCatalogGetDialogsResponseMock = (
 								undefined,
 							]),
 						},
+						undefined,
+					]),
+					kind: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
 						undefined,
 					]),
 					postback: faker.helpers.arrayElement([
@@ -1038,6 +1098,10 @@ export const getCatalogGetHistoryResponseMock = (
 				},
 				undefined,
 			]),
+			kind: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
 			postback: faker.helpers.arrayElement([
 				{
 					code: faker.helpers.arrayElement([
@@ -1497,6 +1561,10 @@ export const getCatalogGetHistory2ResponseMock = (
 				},
 				undefined,
 			]),
+			kind: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
 			postback: faker.helpers.arrayElement([
 				{
 					code: faker.helpers.arrayElement([
@@ -1646,6 +1714,31 @@ export const getCatalogGetHistory2ResponseMock = (
 	...overrideResponse,
 });
 
+export const getMessagesServiceBroadcastMessageMockHandler = (
+	overrideResponse?:
+		| WebitelChatBroadcastMessageResponse
+		| ((
+				info: Parameters<Parameters<typeof http.post>[1]>[0],
+		  ) =>
+				| Promise<WebitelChatBroadcastMessageResponse>
+				| WebitelChatBroadcastMessageResponse),
+) => {
+	return http.post('*/chat/broadcast', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getMessagesServiceBroadcastMessageResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
 export const getCatalogGetCustomersMockHandler = (
 	overrideResponse?:
 		| WebitelChatChatCustomers
@@ -1760,7 +1853,8 @@ export const getCatalogGetHistory2MockHandler = (
 		);
 	});
 };
-export const getCatalogMock = () => [
+export const getMessagesMock = () => [
+	getMessagesServiceBroadcastMessageMockHandler(),
 	getCatalogGetCustomersMockHandler(),
 	getCatalogGetDialogsMockHandler(),
 	getCatalogGetMembersMockHandler(),

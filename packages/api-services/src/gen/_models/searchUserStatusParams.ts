@@ -11,4 +11,5 @@ export type SearchUserStatusParams = {
 	q?: string;
 	sort?: string;
 	fields?: string[];
+	notUserId?: string[];
 };

@@ -320,6 +320,10 @@ export const getCasesChatCatalogGetCaseChatHistoryResponseMock = (
 				},
 				undefined,
 			]),
+			kind: faker.helpers.arrayElement([
+				faker.string.alpha({ length: { min: 10, max: 20 } }),
+				undefined,
+			]),
 			postback: faker.helpers.arrayElement([
 				{
 					code: faker.helpers.arrayElement([

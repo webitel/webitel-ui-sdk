@@ -8,6 +8,11 @@ import { z as zod } from 'zod/v4';
 
 export const configServiceReadSystemObjectsQueryParams = zod.object({
 	includeExisting: zod.boolean().optional(),
+	page: zod.number().optional(),
+	size: zod.number().optional(),
+	q: zod.string().optional(),
+	sort: zod.string().optional(),
+	fields: zod.array(zod.string()).optional(),
 });
 
 export const configServiceReadSystemObjectsResponse = zod.object({

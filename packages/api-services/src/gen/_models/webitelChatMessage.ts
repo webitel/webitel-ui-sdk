@@ -31,6 +31,7 @@ export interface WebitelChatMessage {
 	id?: string;
 	/** Keyboard. Buttons. Quick Replies. */
 	keyboard?: WebitelChatReplyMarkup;
+	kind?: string;
 	/** Postback. Reply Button Click[ed]. */
 	postback?: WebitelChatPostback;
 	/** Chat Sender of the message, sent on behalf of a chat (member). */

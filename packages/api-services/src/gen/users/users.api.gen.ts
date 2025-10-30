@@ -78,11 +78,7 @@ export const // --- title start
 				apiUpdatePasswordRequest: ApiUpdatePasswordRequest,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.patch(
-					'/users/password',
-					apiUpdatePasswordRequest,
-					options,
-				);
+				return axios.put('/users/password', apiUpdatePasswordRequest, options);
 			};
 			const searchUsers2 = <TData = AxiosResponse<ApiSearchUsersResponse>>(
 				apiSearchUsersRequest: ApiSearchUsersRequest,

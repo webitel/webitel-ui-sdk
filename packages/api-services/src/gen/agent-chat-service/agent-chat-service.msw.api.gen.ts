@@ -8,6 +8,7 @@ import { faker } from '@faker-js/faker';
 
 import { delay, HttpResponse, http } from 'msw';
 import type {
+	WebitelChatGetAgentChatsCounterResponse,
 	WebitelChatGetAgentChatsResponse,
 	WebitelChatMarkChatProcessedResponse,
 } from '.././_models';
@@ -271,6 +272,10 @@ export const getAgentChatServiceGetAgentChatsResponseMock = (
 						},
 						undefined,
 					]),
+					kind: faker.helpers.arrayElement([
+						faker.string.alpha({ length: { min: 10, max: 20 } }),
+						undefined,
+					]),
 					postback: faker.helpers.arrayElement([
 						{
 							code: faker.helpers.arrayElement([
@@ -432,6 +437,16 @@ export const getAgentChatServiceGetAgentChatsResponseMock = (
 	...overrideResponse,
 });
 
+export const getAgentChatServiceGetAgentChatsCounterResponseMock = (
+	overrideResponse: Partial<WebitelChatGetAgentChatsCounterResponse> = {},
+): WebitelChatGetAgentChatsCounterResponse => ({
+	count: faker.helpers.arrayElement([
+		faker.number.int({ min: undefined, max: undefined, multipleOf: undefined }),
+		undefined,
+	]),
+	...overrideResponse,
+});
+
 export const getAgentChatServiceMarkChatProcessedResponseMock =
 	(): WebitelChatMarkChatProcessedResponse => ({});
 
@@ -454,6 +469,31 @@ export const getAgentChatServiceGetAgentChatsMockHandler = (
 						? await overrideResponse(info)
 						: overrideResponse
 					: getAgentChatServiceGetAgentChatsResponseMock(),
+			),
+			{ status: 200, headers: { 'Content-Type': 'application/json' } },
+		);
+	});
+};
+
+export const getAgentChatServiceGetAgentChatsCounterMockHandler = (
+	overrideResponse?:
+		| WebitelChatGetAgentChatsCounterResponse
+		| ((
+				info: Parameters<Parameters<typeof http.get>[1]>[0],
+		  ) =>
+				| Promise<WebitelChatGetAgentChatsCounterResponse>
+				| WebitelChatGetAgentChatsCounterResponse),
+) => {
+	return http.get('*/agent/chats/counter', async (info) => {
+		await delay(1000);
+
+		return new HttpResponse(
+			JSON.stringify(
+				overrideResponse !== undefined
+					? typeof overrideResponse === 'function'
+						? await overrideResponse(info)
+						: overrideResponse
+					: getAgentChatServiceGetAgentChatsCounterResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -486,5 +526,6 @@ export const getAgentChatServiceMarkChatProcessedMockHandler = (
 };
 export const getAgentChatServiceMock = () => [
 	getAgentChatServiceGetAgentChatsMockHandler(),
+	getAgentChatServiceGetAgentChatsCounterMockHandler(),
 	getAgentChatServiceMarkChatProcessedMockHandler(),
 ];

@@ -2596,10 +2596,10 @@ export const getUpdatePasswordMockHandler = (
 	overrideResponse?:
 		| ApiUpdatePasswordResponse
 		| ((
-				info: Parameters<Parameters<typeof http.patch>[1]>[0],
+				info: Parameters<Parameters<typeof http.put>[1]>[0],
 		  ) => Promise<ApiUpdatePasswordResponse> | ApiUpdatePasswordResponse),
 ) => {
-	return http.patch('*/users/password', async (info) => {
+	return http.put('*/users/password', async (info) => {
 		await delay(1000);
 
 		return new HttpResponse(

@@ -239,6 +239,7 @@ export const agentChatServiceGetAgentChatsResponse = zod.object({
 									),
 							})
 							.optional(),
+						kind: zod.string().optional(),
 						postback: zod
 							.object({
 								code: zod
@@ -376,6 +377,15 @@ export const agentChatServiceGetAgentChatsResponse = zod.object({
 		.optional(),
 	next: zod.boolean().optional(),
 	page: zod.number().optional(),
+});
+
+export const agentChatServiceGetAgentChatsCounterQueryParams = zod.object({
+	onlyClosed: zod.boolean().optional(),
+	onlyUnprocessed: zod.boolean().optional(),
+});
+
+export const agentChatServiceGetAgentChatsCounterResponse = zod.object({
+	count: zod.number().optional(),
 });
 
 export const agentChatServiceMarkChatProcessedParams = zod.object({
