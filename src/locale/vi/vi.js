@@ -377,6 +377,7 @@ export default {
         [AdminSections.QuickReplies]: 'Trả lời nhanh',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Trường bắt buộc',

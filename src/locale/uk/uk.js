@@ -373,6 +373,7 @@ export default {
         [AdminSections.QuickReplies]: 'Швидкі відповіді',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: "Обов'язкове поле",

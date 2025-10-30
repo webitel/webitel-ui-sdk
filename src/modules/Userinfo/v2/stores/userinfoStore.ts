@@ -1,3 +1,4 @@
+import pick from 'lodash/pick';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -24,37 +25,59 @@ export const createUserinfoStore = () => {
     } = accessStore;
 
     const userId = ref();
-    const thisApp = ref<string | undefined>()
-    const userInfo = ref(null)
+    const thisApp = ref<string | undefined>();
+    const userInfo = ref(null);
+    const access = ref(null)
 
     const initialize = async () => {
-      const { scope, permissions, ...userinfoData } = await getSession();
-      const access = await getUiVisibilityAccess();
+      const session = await getSession();
+      access.value = await getUiVisibilityAccess();
 
-      userId.value = userinfoData.userId;
+      userId.value = session.userId;
+      userInfo.value = pick(session, [
+        'domainId',
+        'username',
+        'permissions',
+        'userId',
+        'scope',
+        'roles',
+        'license',
+      ]);
 
       initializeAccessStore({
-        scope,
-        permissions,
-        access,
+        scope: session.scope,
+        permissions: session.permissions,
+        access: access.value,
       });
     };
 
     const setApplicationName = (name: string) => {
-      thisApp.value = name
-    }
+      thisApp.value = name;
+    };
+
+    const checkAppAccess = (applicationName: string) => {
+      return (
+        !access.value[applicationName] ||
+        access.value[applicationName]?._enabled
+      );
+    };
 
     const logoutUser = async () => {
-      await logout()
-      userInfo.value = null
-      // todo redirect to auth page
-    }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const authUrl = import.meta.env.VITE_AUTH_URL;
+      if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
+      await logout();
+      window.location.href = authUrl;
+    };
 
     return {
       userId,
       thisApp,
+      userInfo,
       initialize,
 
+      checkAppAccess,
       hasReadAccess,
       hasCreateAccess,
       hasUpdateAccess,
@@ -69,6 +92,7 @@ export const createUserinfoStore = () => {
     };
   });
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   window._userinfoStore = store;
 
