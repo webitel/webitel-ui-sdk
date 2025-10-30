@@ -42,6 +42,7 @@ const props = defineProps({
 });
 
 const open = () => {
+  console.log('router', router)
   return router.push(props.card.route);
 };
 </script>

@@ -11,8 +11,6 @@ export const createAppearanceStore = () => {
 
     const setTheme = (newTheme: string) => {
       theme.value = newTheme
-
-      console.log('theme', theme.value)
     }
 
     return {

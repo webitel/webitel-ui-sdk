@@ -14,6 +14,7 @@ export const createUserinfoStore = () => {
   const store = defineStore(namespace, () => {
     const accessStore = useAccessStore();
     const {
+      checkAppAccess,
       hasReadAccess,
       hasCreateAccess,
       hasUpdateAccess,
@@ -27,11 +28,11 @@ export const createUserinfoStore = () => {
     const userId = ref();
     const thisApp = ref<string | undefined>();
     const userInfo = ref(null);
-    const access = ref(null)
 
-    const initialize = async () => {
+    const initialize = async (applicationName = null) => {
       const session = await getSession();
-      access.value = await getUiVisibilityAccess();
+      const access = await getUiVisibilityAccess();
+      thisApp.value = applicationName
 
       userId.value = session.userId;
       userInfo.value = pick(session, [
@@ -47,19 +48,8 @@ export const createUserinfoStore = () => {
       initializeAccessStore({
         scope: session.scope,
         permissions: session.permissions,
-        access: access.value,
+        access,
       });
-    };
-
-    const setApplicationName = (name: string) => {
-      thisApp.value = name;
-    };
-
-    const checkAppAccess = (applicationName: string) => {
-      return (
-        !access.value[applicationName] ||
-        access.value[applicationName]?._enabled
-      );
     };
 
     const logoutUser = async () => {
@@ -86,8 +76,6 @@ export const createUserinfoStore = () => {
       hasSectionVisibility,
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
-
-      setApplicationName,
       logoutUser,
     };
   });

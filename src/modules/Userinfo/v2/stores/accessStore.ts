@@ -41,6 +41,13 @@ export const createUserAccessStore = ({
     // Bypass mode for when no access data exists (new projects)
     const bypassMode = ref<boolean>(false);
 
+    const checkAppAccess = (object: WtObject) => {
+      return (
+        !scopeAccess.value.has(object) ||
+        scopeAccess.value.get(object)?._enabled
+      );
+    };
+
     const hasAccess = (
       action: CrudAction | SpecialGlobalAction,
       object?: WtObject,
@@ -140,6 +147,7 @@ export const createUserAccessStore = ({
     return {
       initialize,
 
+      checkAppAccess,
       hasReadAccess,
       hasCreateAccess,
       hasUpdateAccess,
