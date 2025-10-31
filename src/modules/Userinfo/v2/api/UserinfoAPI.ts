@@ -62,4 +62,9 @@ const logout = async () => {
   }
 };
 
-export { getSession, getUiVisibilityAccess, logout, setInstance };
+export {
+  getSession,
+  getUiVisibilityAccess,
+  logout,
+  setInstance,
+};
