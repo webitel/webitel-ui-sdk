@@ -57,31 +57,40 @@ const emit = defineEmits<{
   'close': [],
 }>();
 
-const handleFullscreen = async (value: boolean) => {
+/**
+ * @author: Oleksandr Palonnyi
+ *
+ *  [WTEL-7993](https://webitel.atlassian.net/browse/WTEL-7993)
+ *
+ * For the future: implement fullscreen state to separate it from LG size.
+ *
+ * Link with discussions - https://github.com/webitel/webitel-ui-sdk/pull/873#discussion_r2478239881
+ * */
+const handleFullscreen = (value: boolean) => {
   if (value) {
     if (size.value !== ComponentSize.LG) {
       changeSize(ComponentSize.LG)
     }
   } else if (size.value === ComponentSize.LG) {
-    await exitFullscreen()
+    exitFullscreen()
     changeSize(ComponentSize.SM)
   }
 }
 
-const handlePlayerSize = async () => {
+const handlePlayerSize = () => {
   if (size.value === ComponentSize.SM) {
     changeSize(ComponentSize.MD)
   } else if (size.value === ComponentSize.MD) {
     changeSize(ComponentSize.SM)
   } else if (size.value === ComponentSize.LG) {
-    await exitFullscreen()
+    exitFullscreen()
     changeSize(ComponentSize.MD)
   }
 }
 
-const exitFullscreen = async () => {
+const exitFullscreen = () => {
   if (document.fullscreenElement) {
-    await document.exitFullscreen().catch(console.warn)
+    document.exitFullscreen()
   }
 }
 
