@@ -1,3 +1,4 @@
+// primevue's galleria doesn't support hiding on mask click so there is a custom solution
 export const useGalleriaMaskClick = (visible) => {
   const onMaskClick = () => {
     visible.value = false
