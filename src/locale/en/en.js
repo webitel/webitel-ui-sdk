@@ -376,6 +376,7 @@ export default deepmerge({
         [AdminSections.QuickReplies]: 'Quick replies',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Field is required',

@@ -374,6 +374,7 @@ export default {
         [AdminSections.QuickReplies]: 'Жылдам жауаптар',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Өріс міндетті',

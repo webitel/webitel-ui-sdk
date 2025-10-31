@@ -377,6 +377,7 @@ export default {
         [AdminSections.QuickReplies]: 'Tezkor javoblar',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: "Maydon to'ldirilishi shart",

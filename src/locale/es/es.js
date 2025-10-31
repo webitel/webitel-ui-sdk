@@ -370,6 +370,7 @@ export default {
         [AdminSections.QuickReplies]: 'Respuestas rápidas',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Campo requerido',
