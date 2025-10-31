@@ -2,8 +2,10 @@ import { getAgentChatService } from '@webitel/api-services/gen';
 import { getDefaultGetParams } from '../../defaults';
 import {
 	applyTransform,
+	camelToSnake,
 	merge,
 	notify,
+	sanitize,
 	snakeToCamel,
 } from '../../transformers';
 
@@ -30,16 +32,18 @@ const getChatsList = async (params) => {
 };
 
 const getChatCount = async (params) => {
-	const { onlyClosed, onlyUnprocessed } = applyTransform(params, [
+	const fieldsToSend = ['only_closed', 'only_unprocessed'];
+	const requestParams = applyTransform(params, [
+		camelToSnake(),
 		merge(getDefaultGetParams()),
+		sanitize(fieldsToSend),
 	]);
 
 	try {
 		const response =
-			await getAgentChatService().agentChatServiceGetAgentChatsCounter({
-				onlyClosed,
-				onlyUnprocessed,
-			});
+			await getAgentChatService().agentChatServiceGetAgentChatsCounter(
+				requestParams,
+			);
 		const { count } = applyTransform(response.data, [snakeToCamel()]);
 		return count;
 	} catch (err) {
