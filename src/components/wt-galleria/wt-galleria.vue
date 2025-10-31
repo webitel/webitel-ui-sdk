@@ -105,9 +105,9 @@
 <script setup lang="ts">
 import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import type { GalleriaProps } from 'primevue';
-import { computed, defineModel, defineProps, ref, useTemplateRef,watch } from 'vue';
+import { computed, defineModel, defineProps, nextTick, onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 
-import { useGalleriaFullscreen } from '../../composables'
+import { useGalleriaFullscreen, useGalleriaMaskClick } from '../../composables'
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
 import type { WtGalleriaItem } from './types/WtGalleria.d.ts';
 interface Props extends GalleriaProps{
@@ -130,6 +130,11 @@ const {
   fullScreen,
   toggleFullScreen
 } = useGalleriaFullscreen(galleria)
+
+const {
+  listenMaskElementClick,
+  removeMaskElementClick
+} = useGalleriaMaskClick(visible)
 
 const {
   isVisible: isDeleteConfirmationPopup,
@@ -164,6 +169,11 @@ watch(() => currentImage.value, (oldValue, newValue) => {
 watch(() => visible.value, () => {
   if (!visible.value) {
     activeIndex.value = 0
+    removeMaskElementClick()
+  } else {
+    nextTick(() => {
+      listenMaskElementClick()
+    })
   }
 })
 
@@ -171,6 +181,16 @@ watch(() => props.value, () => {
   if (!props.value.length) { 
     visible.value = false
   }
+})
+
+onMounted(() => {
+  if (visible.value) {
+    listenMaskElementClick()
+  }
+})
+
+onUnmounted(() => {
+  removeMaskElementClick()
 })
 </script>
 
