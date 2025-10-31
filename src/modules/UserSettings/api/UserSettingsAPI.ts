@@ -5,13 +5,13 @@ import {
   snakeToCamel,
 } from '@webitel/api-services/api/transformers';
 
-import type { Timezone } from '../types/UserSettings'
-
 const instance = getDefaultInstance();
 
-const getUserTimezone = async (): Promise<Timezone> => {
+const BASE_URL = '/user/settings';
+
+const getUserTimezone = async (): Promise<{timezone: string}> => {
   try {
-    const response = await instance.get('/user/settings/timezone');
+    const response = await instance.get(`${BASE_URL}/timezone`);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -19,7 +19,7 @@ const getUserTimezone = async (): Promise<Timezone> => {
 };
 
 const setUserTimezone = async (timezone: string) => {
-  const url = 'user/settings/timezone';
+  const url = `${BASE_URL}/timezone`;
   try {
     const response = await instance.put(url, { timezone });
     return applyTransform(response.data, [

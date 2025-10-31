@@ -53,19 +53,6 @@ const getUiVisibilityAccess = async (): Promise<VisibilityAccess> => {
   }
 };
 
-const getUserTimezone = async (): Promise<{
-  name: string;
-  id: string;
-  offset: string;
-}> => {
-  try {
-    const response = await instance.get('/user/settings/timezone');
-    return applyTransform(response.data, [snakeToCamel()]);
-  } catch (err) {
-    throw applyTransform(err, [notify]);
-  }
-};
-
 const logout = async () => {
   const url = '/logout';
   try {
@@ -78,7 +65,6 @@ const logout = async () => {
 export {
   getSession,
   getUiVisibilityAccess,
-  getUserTimezone,
   logout,
   setInstance,
 };

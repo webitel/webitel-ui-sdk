@@ -5,7 +5,7 @@ import UserSettingsAPI from '../api/UserSettingsAPI';
 import { TIMEZONE_STORAGE_KEY } from '../constants/UserSettingsConstants';
 
 export const createUserSettingsStore = () => {
-  const namespace = 'user-settings';
+  const namespace = 'userSettings';
 
   return defineStore(namespace, () => {
     const timezone = ref<string | null>(null);
@@ -15,12 +15,9 @@ export const createUserSettingsStore = () => {
       if (storedTimezone) {
         timezone.value = storedTimezone;
       } else {
-        const userTimezone = await UserSettingsAPI.getUserTimezone();
-        timezone.value = userTimezone.name;
-        localStorage.setItem(
-          TIMEZONE_STORAGE_KEY,
-          JSON.stringify(userTimezone),
-        );
+        const {timezone: userTimezone} = await UserSettingsAPI.getUserTimezone();
+        timezone.value = userTimezone;
+        localStorage.setItem(TIMEZONE_STORAGE_KEY, userTimezone);
       }
     };
 
