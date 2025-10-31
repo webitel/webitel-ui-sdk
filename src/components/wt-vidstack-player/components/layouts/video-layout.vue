@@ -20,6 +20,7 @@
       <screen-sharing-control-panel
         :session="props.session"
         :screenshot-status="props.screenshotStatus"
+        :screenshot-is-loading="screenshotIsLoading"
         @close-session="emit('close-session')"
         @make-screenshot="emit('make-screenshot')"
         @toggle-record="emit('toggle-record')"
@@ -48,6 +49,7 @@ const props = defineProps<{
   mode: WtVidstakPlayerControlsMode;
   session: WtVidstackPlayerSession
   screenshotStatus: ScreenshotStatus
+  screenshotIsLoading: boolean
 }>();
 
 const emit = defineEmits<{
