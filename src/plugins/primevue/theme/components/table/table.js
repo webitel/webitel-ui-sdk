@@ -31,6 +31,7 @@ const table = {
         }
         
         .p-datatable-tbody > tr:hover > td,
+        .p-datatable-tbody > tr.p-datatable-row-expansion:hover,
         .p-datatable-tbody > tr:hover > td.p-datatable-frozen-column {
           background: ${dt('datatable.row.hoverBackground')};
          }
