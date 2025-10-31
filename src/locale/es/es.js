@@ -762,6 +762,9 @@ export default {
       delete: ({ named }) =>
         `El ${named('entity').toLowerCase()} fue eliminado`,
     },
+    info: {
+      passwordExpirationMessage: 'Tu contraseña expirará en { days } días'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'Hubo un error al cargar el historial del chat',

@@ -9,7 +9,9 @@ import axios from '@aliasedDeps/api-services/axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type {
+	AgentChatServiceGetAgentChatsCounterParams,
 	AgentChatServiceGetAgentChatsParams,
+	WebitelChatGetAgentChatsCounterResponse,
 	WebitelChatGetAgentChatsResponse,
 	WebitelChatMarkChatProcessedResponse,
 } from '.././_models';
@@ -33,6 +35,17 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
+			const agentChatServiceGetAgentChatsCounter = <
+				TData = AxiosResponse<WebitelChatGetAgentChatsCounterResponse>,
+			>(
+				params?: AgentChatServiceGetAgentChatsCounterParams,
+				options?: AxiosRequestConfig,
+			): Promise<TData> => {
+				return axios.get('/agent/chats/counter', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
+			};
 			const agentChatServiceMarkChatProcessed = <
 				TData = AxiosResponse<WebitelChatMarkChatProcessedResponse>,
 			>(
@@ -45,11 +58,14 @@ export const // --- title start
 			// --- footer start
 			return {
 				agentChatServiceGetAgentChats,
+				agentChatServiceGetAgentChatsCounter,
 				agentChatServiceMarkChatProcessed,
 			};
 		};
 export type AgentChatServiceGetAgentChatsResult =
 	AxiosResponse<WebitelChatGetAgentChatsResponse>;
+export type AgentChatServiceGetAgentChatsCounterResult =
+	AxiosResponse<WebitelChatGetAgentChatsCounterResponse>;
 export type AgentChatServiceMarkChatProcessedResult =
 	AxiosResponse<WebitelChatMarkChatProcessedResponse>;
 

@@ -127,7 +127,7 @@ export default deepmerge({
     contact: 'Contact | Contacts',
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
-    screencast: 'Screencast',
+    screencast: 'Screen recordings',
     extension: 'Extension',
     password: 'Password',
     number: 'Number',
@@ -771,6 +771,9 @@ export default deepmerge({
       create: ({ named }) => `The ${named('entity').toLowerCase()} was saved`,
       delete: ({ named }) => `The ${named('entity').toLowerCase()} was deleted`,
     },
+    info: {
+      passwordExpirationMessage: 'Your password will expire in { days } days'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'There was an error loading the chat history',

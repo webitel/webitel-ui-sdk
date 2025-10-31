@@ -21,7 +21,6 @@
         @toggle="handleFullscreen"
       />
       <toggle-button
-        v-if="size !== ComponentSize.LG"
         primary-icon="expand"
         secondary-icon="collapse"
         color="on-dark"
@@ -58,12 +57,41 @@ const emit = defineEmits<{
   'close': [],
 }>();
 
+/**
+ * @author: Oleksandr Palonnyi
+ *
+ *  [WTEL-7993](https://webitel.atlassian.net/browse/WTEL-7993)
+ *
+ * For the future: implement fullscreen state to separate it from LG size.
+ *
+ * Link with discussions - https://github.com/webitel/webitel-ui-sdk/pull/873#discussion_r2478239881
+ * */
 const handleFullscreen = (value: boolean) => {
-  changeSize(value ? ComponentSize.LG : ComponentSize.SM);
+  if (value) {
+    if (size.value !== ComponentSize.LG) {
+      changeSize(ComponentSize.LG)
+    }
+  } else if (size.value === ComponentSize.LG) {
+    exitFullscreen()
+    changeSize(ComponentSize.SM)
+  }
 }
 
-const handlePlayerSize = (value: boolean) => {
-  changeSize(value ? ComponentSize.MD : ComponentSize.SM);
+const handlePlayerSize = () => {
+  if (size.value === ComponentSize.SM) {
+    changeSize(ComponentSize.MD)
+  } else if (size.value === ComponentSize.MD) {
+    changeSize(ComponentSize.SM)
+  } else if (size.value === ComponentSize.LG) {
+    exitFullscreen()
+    changeSize(ComponentSize.MD)
+  }
+}
+
+const exitFullscreen = () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen()
+  }
 }
 
 const handleKeyUp = (event) => {
