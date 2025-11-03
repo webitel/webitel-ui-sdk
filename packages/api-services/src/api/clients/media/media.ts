@@ -72,7 +72,11 @@ export const downloadMedia = async (id) => {
 export const downloadFile = (id) => {
 	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
 	const url = `${baseUrl}/storage/file/${id}/download?access_token=${accessToken}`;
-	window.open(url, '_blank');
+	const link = document.createElement('a');
+	link.href = url;
+	document.body.appendChild(link);
+	link.click();
+	document.body.removeChild(link);
 };
 
 export const getScreenRecordingMediaUrl = (id, isThumb = false) => {
