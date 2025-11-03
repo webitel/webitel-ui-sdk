@@ -62,6 +62,7 @@ export const WtObject = {
   ListNumber: 'listNumber',
   AgentWorkingCondition: 'agentWorkingCondition',
   FilePolicy: 'filePolicy',
+  PortalUser: 'portalUser',
 } as const;
 
 export type WtObject = (typeof WtObject)[keyof typeof WtObject];
