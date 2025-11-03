@@ -51,6 +51,7 @@ export const ScopeClass = {
   ListNumber: 'cc_list_number',
   CaseLookups: 'case_lookups',
   FilesPolicy: 'files_policy',
+  PortalUsers: 'portal_users',
   Custom: 'custom',
 } as const;
 

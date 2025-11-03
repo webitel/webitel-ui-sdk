@@ -81,6 +81,7 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
     WtObject.CloseReasonGroup,
   ],
   [ScopeClass.FilesPolicy]: [WtObject.FilePolicy],
+  [ScopeClass.PortalUsers]: [WtObject.PortalUser],
   [ScopeClass.Custom]: [WtObject.CustomLookup],
 };
 
