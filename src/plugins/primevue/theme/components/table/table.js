@@ -80,6 +80,10 @@ const table = {
         .p-datatable-tbody > tr:hover + .p-datatable-row-expansion {
             background: ${dt('datatable.row.hoverBackground')};
         }
+
+        .p-datatable-header-cell:not(:has(.wt-table__th__sort-arrow)) {
+          background: ${dt('datatable.headerCell.background')};
+        }
         `,
 };
 
