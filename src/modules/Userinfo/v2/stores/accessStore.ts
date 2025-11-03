@@ -148,6 +148,7 @@ export const createUserAccessStore = ({
 
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
+      hasApplicationVisibility,
 
       /**
        * @internal

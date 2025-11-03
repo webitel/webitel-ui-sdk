@@ -3,6 +3,7 @@ export * from './agents/agentChats';
 export * from './agents/agents';
 export * from './buckets/buckets';
 export * from './calendars/calendars';
+export * from './callHistory/callHistory';
 export * from './caseCloseReasonGroups/caseCloseReasonGroups';
 export * from './caseCloseReasons/caseCloseReasons';
 export * from './casePriorities/casePriorities';

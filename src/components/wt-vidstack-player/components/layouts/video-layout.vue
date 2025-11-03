@@ -20,6 +20,7 @@
       <screen-sharing-control-panel
         :session="props.session"
         :screenshot-status="props.screenshotStatus"
+        :screenshot-is-loading="screenshotIsLoading"
         @close-session="emit('close-session')"
         @make-screenshot="emit('make-screenshot')"
         @toggle-record="emit('toggle-record')"
@@ -48,6 +49,7 @@ const props = defineProps<{
   mode: WtVidstakPlayerControlsMode;
   session: WtVidstackPlayerSession
   screenshotStatus: ScreenshotStatus
+  screenshotIsLoading: boolean
 }>();
 
 const emit = defineEmits<{
@@ -99,4 +101,10 @@ const emit = defineEmits<{
   display: none;
 }
 
+media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
+  .video-display-panel {
+    background: var(--p-player-head-line-hover-background);
+    opacity: 1;
+  }
+}
 </style>

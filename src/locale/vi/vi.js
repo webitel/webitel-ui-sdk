@@ -377,6 +377,7 @@ export default {
         [AdminSections.QuickReplies]: 'Trả lời nhanh',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Trường bắt buộc',
@@ -765,6 +766,9 @@ export default {
       create: ({ named }) => `${named('entity').toLowerCase()} đã được lưu`,
       delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
     },
+    info: {
+      passwordExpirationMessage: 'Mật khẩu của bạn sẽ hết hạn sau { days } ngày'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',

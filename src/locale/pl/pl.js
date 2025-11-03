@@ -374,6 +374,7 @@ export default {
         [AdminSections.QuickReplies]: 'Szybkie odpowiedzi',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Pole jest wymagane',
@@ -763,6 +764,9 @@ export default {
       create: ({ named }) => `${named('entity').toLowerCase()} został zapisany`,
       delete: ({ named }) => `${named('entity').toLowerCase()} został usunięty`,
     },
+    info: {
+      passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',

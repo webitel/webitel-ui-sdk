@@ -374,6 +374,7 @@ export default {
         [AdminSections.QuickReplies]: 'Быстрые ответы',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Обязательное поле',
@@ -759,6 +760,9 @@ export default {
       create: ({ named }) => `${named('entity')} был сохранён`,
       delete: ({ named }) => `${named('entity')} был удалён`,
     },
+    info: {
+      passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'Произошла ошибка загрузки истории чата',

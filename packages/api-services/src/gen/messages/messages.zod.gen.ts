@@ -7,6 +7,82 @@
 import { z as zod } from 'zod/v4';
 
 /**
+ * @summary Broadcast message send message from via to peer recipients.
+ */
+export const messagesServiceBroadcastMessageBody = zod.object({
+	message: zod
+		.object({
+			file: zod
+				.object({
+					id: zod.string().optional(),
+					source: zod.string().optional(),
+					url: zod.string().optional(),
+				})
+				.optional(),
+			keyboard: zod
+				.object({
+					rows: zod
+						.array(
+							zod.object({
+								buttons: zod
+									.array(
+										zod.object({
+											caption: zod.string().optional(),
+											code: zod.string().optional(),
+											text: zod.string().optional(),
+											type: zod.string().optional(),
+											url: zod.string().optional(),
+										}),
+									)
+									.optional(),
+							}),
+						)
+						.optional(),
+				})
+				.optional(),
+			text: zod.string().optional(),
+		})
+		.optional(),
+	peers: zod
+		.array(
+			zod
+				.object({
+					id: zod.string().optional(),
+					type: zod.string().optional(),
+					via: zod.string().optional(),
+				})
+				.describe('InputPeer identity.'),
+		)
+		.optional(),
+	timeout: zod.string().optional(),
+	variables: zod.record(zod.string(), zod.string()).optional(),
+});
+
+export const messagesServiceBroadcastMessageResponse = zod.object({
+	failure: zod
+		.array(
+			zod.object({
+				error: zod
+					.object({
+						code: zod.number().optional(),
+						details: zod
+							.array(
+								zod.object({
+									'@type': zod.string().optional(),
+								}),
+							)
+							.optional(),
+						message: zod.string().optional(),
+					})
+					.optional(),
+				peerId: zod.string().optional(),
+			}),
+		)
+		.optional(),
+	variables: zod.record(zod.string(), zod.string()).optional(),
+});
+
+/**
  * @summary Query of external chat customers
  */
 export const catalogGetCustomersQueryParams = zod.object({
@@ -162,7 +238,7 @@ export const catalogGetDialogsQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18',
+			'Includes ONLY those chat dialogs\nwhose member channel(s) contain\na specified set of variables.\n\n10',
 		),
 });
 
@@ -488,6 +564,7 @@ export const catalogGetDialogsResponse = zod.object({
 										),
 								})
 								.optional(),
+							kind: zod.string().optional(),
 							postback: zod
 								.object({
 									code: zod
@@ -855,7 +932,7 @@ export const catalogGetHistoryQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18',
+			'Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.',
 		),
 });
 
@@ -1141,6 +1218,7 @@ export const catalogGetHistoryResponse = zod.object({
 								),
 						})
 						.optional(),
+					kind: zod.string().optional(),
 					postback: zod
 						.object({
 							code: zod
@@ -1309,7 +1387,7 @@ export const catalogGetHistory2QueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18',
+			'Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.',
 		),
 });
 
@@ -1595,6 +1673,7 @@ export const catalogGetHistory2Response = zod.object({
 								),
 						})
 						.optional(),
+					kind: zod.string().optional(),
 					postback: zod
 						.object({
 							code: zod

@@ -377,6 +377,7 @@ export default {
         [AdminSections.QuickReplies]: 'Tezkor javoblar',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: "Maydon to'ldirilishi shart",
@@ -765,6 +766,9 @@ export default {
       create: ({ named }) => `${named('entity').toLowerCase()} saqlandi`,
       delete: ({ named }) => `${named('entity').toLowerCase()} o'chirildi`,
     },
+    info: {
+      passwordExpirationMessage: 'Parolingiz { days } kundan keyin amal qilishdan chiqadi'
+    }
   },
   errorNotifications: {
     chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',
