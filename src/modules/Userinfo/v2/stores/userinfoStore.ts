@@ -14,7 +14,6 @@ export const createUserinfoStore = () => {
   const store = defineStore(namespace, () => {
     const accessStore = useAccessStore();
     const {
-      checkAppAccess,
       hasReadAccess,
       hasCreateAccess,
       hasUpdateAccess,
@@ -67,7 +66,6 @@ export const createUserinfoStore = () => {
       userInfo,
       initialize,
 
-      checkAppAccess,
       hasReadAccess,
       hasCreateAccess,
       hasUpdateAccess,
