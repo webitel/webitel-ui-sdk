@@ -2,11 +2,10 @@ import pick from 'lodash/pick';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-import { WebitelApplications } from '../../../../enums';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 
-export const createUserinfoStore = (thisApp: string = WebitelApplications.ADMIN) => {
+export const createUserinfoStore = (thisApp: string = null) => {
   const namespace = 'userinfo';
   const useAccessStore = createUserAccessStore({
     namespace,
