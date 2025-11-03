@@ -22,6 +22,7 @@ export const createUserinfoStore = () => {
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
       hasSectionVisibility,
+      hasApplicationVisibility,
     } = accessStore;
 
     const userId = ref();
@@ -74,6 +75,7 @@ export const createUserinfoStore = () => {
       hasSectionVisibility,
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
+      hasApplicationVisibility,
       logoutUser,
     };
   });
