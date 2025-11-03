@@ -214,7 +214,7 @@ import { useI18n } from 'vue-i18n';
 
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
-import { ta } from 'zod/v4/locales';
+import { useTableColumnDrag } from '../../composables';
 
 /**
  * Number of items to render outside the visible area for virtual scrolling.
@@ -306,6 +306,11 @@ const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resi
 const table = useTemplateRef('table');
 const tableKey = ref(0);
 const expandedRows = ref([]);
+
+const {
+  addTableDragListener,
+  removeTableDragListener,
+} = useTableColumnDrag(table, props.reorderableColumns);
 
 // table's columns that should be excluded from reorder
 const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions', 'row-expander'];
@@ -459,31 +464,6 @@ const virtualScroll = computed(() => {
     numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
   };
 });
-
-const tableDragHandler = (event) => {
-  event.dataTransfer.effectAllowed = 'move'
-  const copyEl = event.target.cloneNode(true);
-  copyEl.style.position = 'absolute';
-  copyEl.style.top = '-9999px';
-  copyEl.style.background = 'var(--p-datatable-header-cell-drag-background)';
-  copyEl.style.width = event.target.offsetWidth + 'px';
-  document.body.appendChild(copyEl);
-  event.dataTransfer.setDragImage(copyEl, event.offsetX, event.offsetY);
-  // Clean up after drag starts
-  setTimeout(() => {
-    document.body.removeChild(copyEl);
-  }, 0);
-}
-
-const addTableDragListener = () => {
-  if (!props.reorderableColumns) return;
-  table.value?.$el?.addEventListener('dragstart', tableDragHandler);
-}
-
-const removeTableDragListener = () => {
-  if (!props.reorderableColumns) return;
-  table.value?.$el?.removeEventListener('dragstart', tableDragHandler);
-}
 
 onMounted(() => {
   addTableDragListener();

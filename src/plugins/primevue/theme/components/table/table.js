@@ -75,6 +75,7 @@ const table = {
             background: ${dt('datatable.row.hoverBackground')};
         }
 
+        /* remove primevue's indicator and adjust styles for custom  */
         .p-datatable-row-reorder-indicator-down {
             height: 100%;
             z-index: 1;
