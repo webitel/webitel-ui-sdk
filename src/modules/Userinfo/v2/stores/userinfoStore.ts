@@ -3,10 +3,14 @@ import { ref } from 'vue';
 
 import { getSession, getUiVisibilityAccess } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
+import { createSettingsStore } from './settingsStore';
 
 export const createUserinfoStore = () => {
   const namespace = 'userinfo';
   const useAccessStore = createUserAccessStore({
+    namespace,
+  });
+  const useSettingsStore = createSettingsStore({
     namespace,
   });
 
@@ -22,12 +26,14 @@ export const createUserinfoStore = () => {
       hasSpecialGlobalActionAccess,
       hasSectionVisibility,
     } = accessStore;
+    const settings = useSettingsStore();
 
     const userId = ref();
 
     const initialize = async () => {
       const { scope, permissions, ...userinfo } = await getSession();
       const access = await getUiVisibilityAccess();
+      await settings.initialize();
 
       userId.value = userinfo.userId;
 
@@ -50,6 +56,8 @@ export const createUserinfoStore = () => {
       hasSectionVisibility,
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
+
+      settings,
     };
   });
 
