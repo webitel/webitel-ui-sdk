@@ -375,6 +375,7 @@ export default {
         [AdminSections.QuickReplies]: 'Răspunsuri rapide',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Câmpul este obligatoriu',

@@ -374,6 +374,7 @@ export default {
         [AdminSections.QuickReplies]: 'Быстрые ответы',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Обязательное поле',
