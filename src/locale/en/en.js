@@ -191,6 +191,7 @@ export default deepmerge({
     },
     queue: {
       queue: 'Queue | Queues',
+      queueType: 'Queue type | Queue types',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
         [QueueType.OFFLINE_QUEUE]: 'Offline queue',
@@ -737,6 +738,12 @@ export default deepmerge({
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Preset | Presets',
