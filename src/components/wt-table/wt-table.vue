@@ -209,9 +209,9 @@ import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
 import { computed, defineProps, nextTick, onMounted, onUnmounted, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useTableColumnDrag } from '../../composables';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
-import { useTableColumnDrag } from '../../composables';
 
 /**
  * Number of items to render outside the visible area for virtual scrolling.
