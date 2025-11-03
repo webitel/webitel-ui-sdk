@@ -2,10 +2,11 @@ import pick from 'lodash/pick';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+import { WebitelApplications } from '../../../../enums';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 
-export const createUserinfoStore = () => {
+export const createUserinfoStore = (thisApp: string = WebitelApplications.ADMIN) => {
   const namespace = 'userinfo';
   const useAccessStore = createUserAccessStore({
     namespace,
@@ -26,13 +27,11 @@ export const createUserinfoStore = () => {
     } = accessStore;
 
     const userId = ref();
-    const thisApp = ref<string | undefined>();
     const userInfo = ref(null);
 
-    const initialize = async (applicationName = null) => {
+    const initialize = async () => {
       const session = await getSession();
       const access = await getUiVisibilityAccess();
-      thisApp.value = applicationName
 
       userId.value = session.userId;
       userInfo.value = pick(session, [
