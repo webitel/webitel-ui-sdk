@@ -52,10 +52,10 @@ const getAgentsList = async (params) => {
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
 		merge(getDefaultGetListResponse()),
-    (params) => ({
-      ...params,
-      q: params.search,
-    }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 	]);
 
@@ -228,22 +228,15 @@ const getAgentUsersOptions = async (params) => {
 };
 
 const getUsersStatus = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'not_user_id',
-	];
+	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'not_user_id'];
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
-    (params) => ({
-      ...params,
-      q: params.search,
-    }),
+		(params) => ({
+			...params,
+			q: params.search,
+		}),
 		sanitize(fieldsToSend),
 	]);
 
