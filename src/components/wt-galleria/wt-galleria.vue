@@ -1,6 +1,5 @@
 <template>
   <p-galleria
-    ref="galleria" 
     v-model:visible="visible"
     v-model:active-index="activeIndex"
     :value="value"
@@ -105,7 +104,7 @@
 <script setup lang="ts">
 import { useDeleteConfirmationPopup } from '@webitel/ui-sdk/src/modules/DeleteConfirmationPopup/composables/useDeleteConfirmationPopup';
 import type { GalleriaProps } from 'primevue';
-import { computed, defineModel, defineProps, nextTick, onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue';
+import { computed, defineModel, defineProps, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import { useGalleriaFullscreen, useGalleriaMaskClick } from '../../composables'
 import DeleteConfirmationPopup from '../../modules/DeleteConfirmationPopup/components/delete-confirmation-popup.vue';
@@ -121,7 +120,6 @@ const emit = defineEmits(['download', 'delete']);
 const visible = defineModel<boolean>('visible', { required: true });
 const activeIndex = defineModel<number>('activeIndex', { default: 0, required: false });
 const currentImage = computed(() => props.value[activeIndex.value]);
-const galleria = useTemplateRef('galleria')
 const isImageOnLoad = ref(true)
 
 const showThumbnails = ref(true);
@@ -129,7 +127,7 @@ const showThumbnails = ref(true);
 const { 
   fullScreen,
   toggleFullScreen
-} = useGalleriaFullscreen(galleria)
+} = useGalleriaFullscreen()
 
 const {
   listenMaskElementClick,
