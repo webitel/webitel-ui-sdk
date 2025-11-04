@@ -83,13 +83,13 @@ import HasTranscriptionFilter from './has-transcription/has-transcription-filter
 import HasTranscriptionFilterPreview from './has-transcription/has-transcription-filter-value-preview.vue';
 import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
-import { searchMethod as queueSearchMethod } from './queue/config';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
 import QueueTypeFilter from './queue/queue-filter-value-field.vue';
 import QueueTypeFilterPreview from './queue-type/queue-type-filter-value-preview.vue';
 import QueuePeriodFilter from './queue-period/queue-period-filter-value-field.vue';
 import QueuePeriodFilterPreview from './queue-period/queue-period-filter-value-preview.vue';
+import { createQueuePeriodFilterConfig } from './queue-period'
 import { searchMethod as ratedBySearchMethod } from './rated-by/config';
 import RatedByFilter from './rated-by/rated-by-filter-value-field.vue';
 import RatedByFilterPreview from './rated-by/rated-by-filter-value-preview.vue';
@@ -101,7 +101,6 @@ import TagFilter from './tag/tag-filter-value-field.vue';
 import TagFilterPreview from './tag/tag-filter-value-preview.vue';
 import TalkDurationFilter from './talk-duration/talk-duration-filter-value-field.vue';
 import TalkDurationFilterPreview from './talk-duration/talk-duration-filter-value-preview.vue';
-import { searchMethod as teamSearchMethod } from './team/config';
 import TeamFilter from './team/team-filter-value-field.vue';
 import TeamFilterPreview from './team/team-filter-value-preview.vue';
 import TotalDurationFilter from './total-duration/total-duration-filter-value-field.vue';
@@ -111,7 +110,10 @@ import UserFilter from './user/user-filter-value-field.vue';
 import UserFilterPreview from './user/user-filter-value-preview.vue';
 import VariableFilter from './variable/variable-filter-value-field.vue';
 import VariableFilterPreview from './variable/variable-filter-value-preview.vue';
-console.log('777')
+import { createQueueTypeFilterConfig } from './queue-type';
+import { createTeamFilterConfig } from './team';
+import { createQueueFilterConfig } from './queue';
+
 export {
   AgentFilter,
   AgentFilterPreview,
@@ -298,7 +300,6 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
   [FilterOption.Agent]: agentSearchMethod,
   [FilterOption.Gateway]: gatewaySearchMethod,
   [FilterOption.Grantee]: granteeSearchMethod,
-  [FilterOption.Queue]: queueSearchMethod,
   [FilterOption.RatedBy]: ratedBySearchMethod,
   [FilterOption.CaseReporter]: caseReporterSearchMethod,
   [FilterOption.CaseSla]: caseSlaSearchMethod,
@@ -314,7 +315,6 @@ export const FilterOptionToPreviewApiSearchMethodMap: Record<
   [FilterOption.CasePriority]: casePrioritySearchMethod,
   [FilterOption.CaseImpacted]: caseImpactedSearchMethod,
   [FilterOption.Contact]: contactSearchMethod,
-  [FilterOption.Team]: teamSearchMethod,
   [FilterOption.CaseCloseReasonGroups]: ({ id: value, ...rest }) => {
     return caseCloseReasonsSearchMethod({
       parentId: value?.selection,
@@ -336,4 +336,8 @@ export const FilterOptionToFilterConfigCreatorMap = {
   [FilterOption.ContactLabel]: createContactLabelFilterConfig,
   [FilterOption.ContactOwner]: createContactOwnerFilterConfig,
   [FilterOption.ContactGroup]: createContactGroupFilterConfig,
+  [FilterOption.QueuePeriod]: createQueuePeriodFilterConfig,
+  [FilterOption.QueueType]: createQueueTypeFilterConfig,
+  [FilterOption.Team]: createTeamFilterConfig,
+  [FilterOption.Queue]: createQueueFilterConfig,
 };

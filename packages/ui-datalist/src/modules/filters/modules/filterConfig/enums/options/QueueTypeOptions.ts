@@ -2,7 +2,7 @@ import { FilterEnumOption } from '../../../../classes/Filter';
 
 import { QueueType } from '@webitel/ui-sdk/enums';
 
-export const QueueTypeOptions: Array<FilterEnumOption> = [
+export const QueueTypeOptions: Array<FilterEnumOption> = Object.freeze([
   {
     locale: `objects.queue.type.${QueueType.OFFLINE_QUEUE}`,
     value: '0',
@@ -39,4 +39,4 @@ export const QueueTypeOptions: Array<FilterEnumOption> = [
     locale: `objects.queue.type.${QueueType.OUTBOUND_JOB_QUEUE}`,
     value: '8',
   }
-]
+])

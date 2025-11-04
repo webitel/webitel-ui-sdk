@@ -1,0 +1,33 @@
+import QueuesAPI from '@webitel/ui-sdk/api/clients/queues/queues';
+
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
+import { FilterOption } from '../../enums/FilterOption';
+import QueueFilterValueField from './queue-filter-value-field.vue';
+import QueueFilterValuePreview from './queue-filter-value-preview.vue';
+
+class QueueFilterConfig extends WtSysTypeFilterConfig {
+  readonly name = FilterOption.Queue;
+  valueInputComponent = QueueFilterValueField;
+  valuePreviewComponent = QueueFilterValuePreview;
+  showNameFilter?: boolean;
+
+  constructor(params: { showNameFilter?: boolean } = {}) {
+    super(params);
+    if ('showNameFilter' in params) {
+      this.showNameFilter = params.showNameFilter;
+    }
+  }
+
+  searchRecords(
+    params: object
+  ): Promise<{ items: unknown[]; next?: boolean }> {
+    return QueuesAPI.getLookup(params);
+  }
+}
+
+export const createQueueFilterConfig = (params) =>
+  new QueueFilterConfig(params);
+
+export interface IQueueFilterConfig extends WtSysTypeFilterConfig {
+  showNameFilter?: boolean;
+}
