@@ -1,7 +1,6 @@
-import { computed, onMounted, onUnmounted,ref } from 'vue';
+import { onMounted, onUnmounted,ref } from 'vue';
 
-export const useGalleriaFullscreen = (galleriaRef) => {
-  const containerId = computed(() => galleriaRef.value?.container?.$id);
+export const useGalleriaFullscreen = () => {
   const fullScreen = ref(false);
   const toggleFullScreen = () => {
     if (fullScreen.value) {
@@ -14,7 +13,7 @@ export const useGalleriaFullscreen = (galleriaRef) => {
     fullScreen.value = !fullScreen.value;
   };
   const openFullScreen = () => {
-    const element = document.getElementById(containerId.value)
+    const element = document.querySelector('.p-galleria')
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {

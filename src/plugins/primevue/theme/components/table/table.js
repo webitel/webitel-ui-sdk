@@ -31,6 +31,7 @@ const table = {
         }
         
         .p-datatable-tbody > tr:hover > td,
+        .p-datatable-tbody > tr.p-datatable-row-expansion:hover,
         .p-datatable-tbody > tr:hover > td.p-datatable-frozen-column {
           background: ${dt('datatable.row.hoverBackground')};
          }
@@ -76,8 +77,26 @@ const table = {
             background: ${dt('datatable.row.hoverBackground')};
         }
 
+        /* remove primevue's indicator and adjust styles for custom  */
+        .p-datatable-row-reorder-indicator-down {
+            height: 100%;
+            z-index: 1;
+            margin-top: -41px;
+            width: 1px;
+            background: ${dt('datatable.reorderIndicator.color')};
+            margin-left: 7px;
+        }
+
+        .p-datatable-row-reorder-indicator-down svg {
+            display: none;
+        }
+        
         .p-datatable-tbody > tr:hover + .p-datatable-row-expansion {
             background: ${dt('datatable.row.hoverBackground')};
+        }
+
+        .p-datatable-header-cell:not(:has(.wt-table__th__sort-arrow)) {
+          background: ${dt('datatable.headerCell.background')};
         }
         `,
 };

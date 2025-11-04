@@ -67,6 +67,21 @@ export const mapScopeClassToWtObjects: Record<ScopeClass, WtObject[]> = {
   [ScopeClass.CaseComments]: [WtObject.CaseComment],
   [ScopeClass.AuditForm]: [WtObject.AuditForm],
   [ScopeClass.AuditRating]: [WtObject.AuditRating],
+  [ScopeClass.PauseTemplates]: [WtObject.PauseTemplate],
+  [ScopeClass.ShiftTemplates]: [WtObject.ShiftTemplate],
+  [ScopeClass.WorkingConditions]: [WtObject.WorkingCondition],
+  [ScopeClass.AgentWorkingConditions]: [WtObject.AgentWorkingCondition],
+  [ScopeClass.ListNumber]: [WtObject.ListNumber],
+  [ScopeClass.CaseLookups]: [
+    WtObject.Slas,
+    WtObject.ServiceCatalog,
+    WtObject.Priorities,
+    WtObject.Status,
+    WtObject.Source,
+    WtObject.CloseReasonGroup,
+  ],
+  [ScopeClass.FilesPolicy]: [WtObject.FilePolicy],
+  [ScopeClass.PortalUsers]: [WtObject.PortalUser],
   [ScopeClass.Custom]: [WtObject.CustomLookup],
 };
 

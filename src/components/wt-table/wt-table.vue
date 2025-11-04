@@ -111,12 +111,9 @@
 
       <template #header>
         <div class="wt-table__th__content">
-          <wt-tooltip placement="left">
-            <template #activator>
-              {{ col.text }}
-            </template>
+          <span v-tooltip="col.text">
             {{ col.text }}
-          </wt-tooltip>
+          </span>
           <wt-icon
             v-if="col.sort === 'asc'"
             class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
@@ -209,9 +206,10 @@
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
 import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
-import { computed, defineProps, nextTick, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
+import { computed, defineProps, nextTick, onMounted, onUnmounted, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useTableColumnDrag } from '../../composables';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
 
@@ -305,6 +303,11 @@ const emit = defineEmits(['sort', 'update:selected', 'reorder:row', 'column-resi
 const table = useTemplateRef('table');
 const tableKey = ref(0);
 const expandedRows = ref([]);
+
+const {
+  addTableDragListener,
+  removeTableDragListener,
+} = useTableColumnDrag(table, props.reorderableColumns);
 
 // table's columns that should be excluded from reorder
 const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions', 'row-expander'];
@@ -430,6 +433,7 @@ const columnReorder = () => {
   tableKey.value += 1;
   emit('column-reorder', newOrder)
   nextTick(() => {
+    addTableDragListener();
     table.value.$el.querySelector('.p-datatable-table-container').scrollLeft = containerElScrollLeft
   })
 }
@@ -457,6 +461,14 @@ const virtualScroll = computed(() => {
     numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
   };
 });
+
+onMounted(() => {
+  addTableDragListener();
+})
+
+onUnmounted(() => {
+  removeTableDragListener();
+})
 </script>
 
 <style lang="scss">

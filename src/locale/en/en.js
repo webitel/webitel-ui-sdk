@@ -127,7 +127,7 @@ export default deepmerge({
     contact: 'Contact | Contacts',
     column: 'Column | Columns',
     notification: 'Notification | Notifications',
-    screencast: 'Screencast',
+    screencast: 'Screen recordings',
     extension: 'Extension',
     password: 'Password',
     number: 'Number',
@@ -376,6 +376,7 @@ export default deepmerge({
         [AdminSections.QuickReplies]: 'Quick replies',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Field is required',
