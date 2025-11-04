@@ -103,7 +103,8 @@ const addRole = async ({ itemInstance }) => {
   const item = applyTransform(itemInstance, [
     preRequestHandler,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    // NOTE: prevent conversion of "access" custom lookups
+    // camelToSnake(), https://webitel.atlassian.net/browse/WTEL-7599
   ]);
   try {
     const response = await rolesApiFactory.createRole(item);
@@ -119,7 +120,8 @@ const updateRole = async ({ itemInstance, itemId: id }) => {
   const item = applyTransform(itemInstance, [
     preRequestHandler,
     sanitize(fieldsToSend),
-    camelToSnake(),
+    // NOTE: prevent conversion of "access" custom lookups
+    // camelToSnake(), https://webitel.atlassian.net/browse/WTEL-7599
   ]);
 
   try {
