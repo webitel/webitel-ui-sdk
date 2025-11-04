@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed, toRef } from 'vue';
 
 import convertDuration from '../../scripts/convertDuration.js';
 
@@ -13,9 +13,7 @@ const isDurationOverflow = ({ durationMin, limitMin }) => {
 };
 
 const duration = ({ durationMin, limitMin }) => {
-  return isDurationOverflow({ durationMin, limitMin })
-    ? `-${prettifyPauseCauseDuration(durationMin - limitMin)}`
-    : prettifyPauseCauseDuration(durationMin);
+  return prettifyPauseCauseDuration(durationMin);
 };
 
 const pauseCauseProgressColor = ({ durationMin, limitMin }) => {
@@ -26,8 +24,9 @@ const pauseCauseProgressColor = ({ durationMin, limitMin }) => {
 
 // eslint-disable-next-line import/prefer-default-export
 export const useRepresentableAgentPauseCause = (pauseCauses) => {
+  const pauseCausesRef = toRef(pauseCauses);
   const representablePauseCause = computed(() =>
-    pauseCauses.value.map((pauseCause) => ({
+    pauseCausesRef.value.map((pauseCause) => ({
       ...pauseCause,
       duration: duration(pauseCause),
       progressColor: pauseCauseProgressColor(pauseCause),
