@@ -31,7 +31,7 @@ const getAgentsList = async (params) => {
 	const fieldsToSend = [
 		'page',
 		'size',
-		'search',
+		'q',
 		'sort',
 		'fields',
 		'id',
@@ -52,6 +52,10 @@ const getAgentsList = async (params) => {
 	const requestParams = applyTransform(params, [
 		camelToSnake(),
 		merge(getDefaultGetListResponse()),
+    (params) => ({
+      ...params,
+      q: params.search,
+    }),
 		sanitize(fieldsToSend),
 	]);
 
@@ -208,7 +212,7 @@ const getAgentUsersOptions = async (params) => {
 		const response = await getAgentService().searchLookupUsersAgentNotExists({
 			page,
 			size,
-			search,
+			q: search,
 		});
 		const { items, next } = applyTransform(response.data, [
 			snakeToCamel(),
@@ -227,7 +231,7 @@ const getUsersStatus = async (params) => {
 	const fieldsToSend = [
 		'page',
 		'size',
-		'search',
+		'q',
 		'sort',
 		'fields',
 		'not_user_id',
@@ -236,6 +240,10 @@ const getUsersStatus = async (params) => {
 		camelToSnake(),
 		merge(getDefaultGetParams()),
 		starToSearch('search'),
+    (params) => ({
+      ...params,
+      q: params.search,
+    }),
 		sanitize(fieldsToSend),
 	]);
 
