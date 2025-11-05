@@ -135,7 +135,7 @@ export interface UserAccessStore {
    * for pinia devtools debug
    */
   appVisibilityAccess: AppVisibilityMap;
-  
+
   /**
    * @internal
    * for pinia devtools debug
