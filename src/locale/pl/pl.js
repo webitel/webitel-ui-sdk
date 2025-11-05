@@ -189,6 +189,7 @@ export default {
     },
     queue: {
       queue: 'Kolejka | Kolejki',
+      queueType: 'Typ kolejki | Typy kolejek',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Kolejka przychodząca',
         [QueueType.OFFLINE_QUEUE]: 'Kolejka offline',
@@ -730,6 +731,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Preset | Presety',

@@ -188,6 +188,7 @@ export default {
     },
     queue: {
       queue: 'Черга | Черги',
+      queueType: 'Тип черги | Типи черг',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
         [QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
@@ -726,6 +727,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Пресет | Пресети',

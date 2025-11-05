@@ -189,6 +189,7 @@ export default {
     },
     queue: {
       queue: 'Кезек | Кезектер',
+      queueType: 'Кезек түрі | Кезек түрлері',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Кіріс кезегі',
         [QueueType.OFFLINE_QUEUE]: 'Офлайн кезегі',
@@ -731,6 +732,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Алдын ала орнату | Алдын ала орнатулар',

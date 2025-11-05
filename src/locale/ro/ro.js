@@ -189,6 +189,7 @@ export default {
     },
     queue: {
       queue: 'Coadă | Cozi',
+      queueType: 'Tip de coadă | Tipuri de cozi',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Coadă intrare',
         [QueueType.OFFLINE_QUEUE]: 'Coadă offline',
@@ -732,6 +733,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Șablon | Șabloane',
