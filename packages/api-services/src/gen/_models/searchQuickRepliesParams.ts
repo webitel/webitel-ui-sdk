@@ -13,4 +13,5 @@ export type SearchQuickRepliesParams = {
 	fields?: string[];
 	id?: number[];
 	queue?: number[];
+	restrictToAgent?: boolean;
 };
