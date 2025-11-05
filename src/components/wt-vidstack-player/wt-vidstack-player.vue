@@ -162,6 +162,8 @@ onBeforeUnmount(() => {
   &__player {
     padding: 0;
     margin: 0;
+    min-width: 0;
+    width: 100%;
   }
 
   &--sm {
