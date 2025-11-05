@@ -5,7 +5,7 @@ import { ref } from 'vue';
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 
-export const createUserinfoStore = (thisApp: string = null) => {
+export const createUserinfoStore = () => {
   const namespace = 'userinfo';
   const useAccessStore = createUserAccessStore({
     namespace,
@@ -61,7 +61,6 @@ export const createUserinfoStore = (thisApp: string = null) => {
 
     return {
       userId,
-      thisApp,
       userInfo,
       initialize,
 
