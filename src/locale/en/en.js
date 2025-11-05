@@ -133,6 +133,7 @@ export default deepmerge({
     number: 'Number',
     expireAt: 'Expire at',
     destination: 'Destination',
+    utilizationProgress: 'Utilization progress',
   },
   // date-related texts
   date: {
@@ -157,6 +158,7 @@ export default deepmerge({
     supervisor: 'Supervisor | Supervisors',
     auditor: 'Auditor | Auditors',
     region: 'Region | Regions',
+    skill: 'Skill | Skills',
     communicationType: 'Communication type | Communication types',
     grantee: 'Grantee | Grantees',
     grantor: 'Grantor | Grantors',
@@ -191,6 +193,7 @@ export default deepmerge({
     },
     queue: {
       queue: 'Queue | Queues',
+      queueType: 'Queue type | Queue types',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Inbound queue',
         [QueueType.OFFLINE_QUEUE]: 'Offline queue',
@@ -738,6 +741,28 @@ export default deepmerge({
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+
       presets: {
         preset: 'Preset | Presets',
         overwritePresetTitle: 'A preset with this name already exists.',
