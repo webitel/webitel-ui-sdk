@@ -2,10 +2,9 @@
   <wt-select
     :close-on-select="false"
     :label="labelValue"
-    :options="QueueTypeOptions"
+    :options="QueueTypeMappingOptions"
     :value="model"
     :v="!disableValidation && v$.model"
-    multiple
     track-by="value"
     use-value-from-options-by-prop="value"
     @input="model = $event"
@@ -19,14 +18,14 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import  { QueueTypeOptions } from '../../enums/options/QueueTypeOptions';
-import { IQueueTypeFilterConfig } from './index';
+import { useQueueTypeOptions } from '../../composables/useQueueTypeOptions';
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 const model = defineModel<string>();
 const { t } = useI18n();
 
 const props = defineProps<{
-  filterConfig?: IQueueTypeFilterConfig;
+  filterConfig?: WtSysTypeFilterConfig;
   disableValidation?: boolean;
 }>();
 
@@ -51,8 +50,10 @@ onMounted(() => {
 });
 
 const labelValue = computed(() =>
-  t(`webitelUI.filters.${props?.filterConfig?.showNameFilter ?
-    props?.filterConfig.name : 'filterValue'}`))
+  t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
+    props?.filterConfig.name : 'filterValue'}`));
+
+const { options: QueueTypeMappingOptions } = useQueueTypeOptions();
 
 watch(
   () => v$.value.$invalid,

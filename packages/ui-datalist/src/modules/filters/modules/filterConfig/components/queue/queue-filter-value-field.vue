@@ -18,12 +18,12 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { IQueueFilterConfig } from './index';
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 type ModelValue = number[];
 
 const props = defineProps<{
-  filterConfig: IQueueFilterConfig;
+  filterConfig: WtSysTypeFilterConfig;
   disableValidation?: boolean;
 }>();
 
@@ -35,7 +35,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 
 const labelValue = computed(() =>
-  t(`webitelUI.filters.${props?.filterConfig?.showNameFilter ?
+  t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
     props?.filterConfig.name : 'filterValue'}`))
 
 const v$ = useVuelidate(

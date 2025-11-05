@@ -89,7 +89,6 @@ import QueueTypeFilter from './queue/queue-filter-value-field.vue';
 import QueueTypeFilterPreview from './queue-type/queue-type-filter-value-preview.vue';
 import QueuePeriodFilter from './queue-period/queue-period-filter-value-field.vue';
 import QueuePeriodFilterPreview from './queue-period/queue-period-filter-value-preview.vue';
-import { createQueuePeriodFilterConfig } from './queue-period'
 import { searchMethod as ratedBySearchMethod } from './rated-by/config';
 import RatedByFilter from './rated-by/rated-by-filter-value-field.vue';
 import RatedByFilterPreview from './rated-by/rated-by-filter-value-preview.vue';
@@ -110,7 +109,6 @@ import UserFilter from './user/user-filter-value-field.vue';
 import UserFilterPreview from './user/user-filter-value-preview.vue';
 import VariableFilter from './variable/variable-filter-value-field.vue';
 import VariableFilterPreview from './variable/variable-filter-value-preview.vue';
-import { createQueueTypeFilterConfig } from './queue-type';
 import { createTeamFilterConfig } from './team';
 import { createQueueFilterConfig } from './queue';
 
@@ -336,8 +334,6 @@ export const FilterOptionToFilterConfigCreatorMap = {
   [FilterOption.ContactLabel]: createContactLabelFilterConfig,
   [FilterOption.ContactOwner]: createContactOwnerFilterConfig,
   [FilterOption.ContactGroup]: createContactGroupFilterConfig,
-  [FilterOption.QueuePeriod]: createQueuePeriodFilterConfig,
-  [FilterOption.QueueType]: createQueueTypeFilterConfig,
   [FilterOption.Team]: createTeamFilterConfig,
   [FilterOption.Queue]: createQueueFilterConfig,
 };

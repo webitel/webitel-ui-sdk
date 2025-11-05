@@ -9,14 +9,6 @@ class QueueFilterConfig extends WtSysTypeFilterConfig {
   readonly name = FilterOption.Queue;
   valueInputComponent = QueueFilterValueField;
   valuePreviewComponent = QueueFilterValuePreview;
-  showNameFilter?: boolean;
-
-  constructor(params: { showNameFilter?: boolean } = {}) {
-    super(params);
-    if ('showNameFilter' in params) {
-      this.showNameFilter = params.showNameFilter;
-    }
-  }
 
   searchRecords(
     params: object
@@ -27,7 +19,3 @@ class QueueFilterConfig extends WtSysTypeFilterConfig {
 
 export const createQueueFilterConfig = (params) =>
   new QueueFilterConfig(params);
-
-export interface IQueueFilterConfig extends WtSysTypeFilterConfig {
-  showNameFilter?: boolean;
-}

@@ -18,10 +18,10 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { ITeamFilterConfig } from './index';
+import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 const props = defineProps<{
-  filterConfig: ITeamFilterConfig;
+  filterConfig: WtSysTypeFilterConfig;
   disableValidation?: boolean;
 }>();
 
@@ -46,7 +46,7 @@ const v$ = useVuelidate(
 v$.value.$touch();
 
 const labelValue = computed(() =>
-  t(`webitelUI.filters.${props?.filterConfig?.showNameFilter ?
+  t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
     props?.filterConfig.name : 'filterValue'}`))
 
 onMounted(() => {
