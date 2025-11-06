@@ -6,7 +6,7 @@ const switcher = {
 
   css: ({ dt }) => `
     .p-toggleswitch {
-      min-width: ${dt('toggleswitch.width')};
+      flex-shrink: 0;
     }
   `
 };
