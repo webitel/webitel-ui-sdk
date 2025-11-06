@@ -12,7 +12,7 @@ export * from './caseSources/caseSources';
 export * from './caseStatusConditions/caseStatusConditions';
 export * from './caseStatuses/caseStatuses';
 export * from './catalog/catalog';
-export * from './changelogs/changelogs'
+export * from './changelogs/changelogs';
 export * from './chatGateways/chatGateways';
 export * from './communications/communications';
 export * from './configurations/configurations';
