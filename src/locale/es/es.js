@@ -129,6 +129,7 @@ export default {
     number: 'Número',
     expireAt: 'Expira en',
     destination: 'Destino',
+    utilizationProgress: 'Progreso de utilización',
   },
   date: {
     sec: 'Seg',
@@ -174,6 +175,7 @@ export default {
     transcription: 'Transcripción',
     attachment: 'Adjunto | Adjuntos',
     owner: 'Propietario | Propietarios',
+    skill: 'Habilidad | Habilidades',
     customization: {
       customization: 'Personalización | Personalizaciones',
     },
@@ -734,6 +736,24 @@ export default {
       },
       queuePeriod: ({ linked }) => {
         return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Preset | Presets',

@@ -1,11 +1,11 @@
 <template>
   <wt-select
     :label="labelValue"
-    :options="AgentStatusMappingOptions"
+    :options="options"
     :value="model"
     :v="!disableValidation && v$.model"
-    multiple
     track-by="value"
+    multiple
     option-label="label"
     use-value-from-options-by-prop="value"
     @input="model = $event"
@@ -50,7 +50,7 @@ const labelValue = computed(() =>
   t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
     props?.filterConfig.name : 'filterValue'}`));
 
-const { options: AgentStatusMappingOptions } = useAgentStatusOptions();
+const { options } = useAgentStatusOptions();
 
 onMounted(() => {
   if (!props?.disableValidation) v$.value.$touch();

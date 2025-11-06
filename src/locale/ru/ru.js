@@ -130,6 +130,7 @@ export default {
     number: 'Номер',
     expireAt: 'Истекает',
     destination: 'Назначение',
+    utilizationProgress: 'Прогресс использования'
   },
   // date-related texts
   date: {
@@ -175,6 +176,7 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Вложение | Вложения',
     owner: 'Владелец | Владельцы',
+    skill: 'Навык | Навыки',
     customization: {
       customization: 'Персонализация | Персонализации',
     },
@@ -734,6 +736,24 @@ export default {
       },
       queuePeriod: ({ linked }) => {
         return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Пресет | Пресеты',

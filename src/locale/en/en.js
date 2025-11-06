@@ -762,7 +762,9 @@ export default deepmerge({
       utilizationProgress: ({ linked }) => {
         return linked('vocabulary.utilizationProgress');
       },
-
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Preset | Presets',
         overwritePresetTitle: 'A preset with this name already exists.',

@@ -131,6 +131,7 @@ export default {
     number: 'Số',
     expireAt: 'Hết hạn',
     destination: 'Điểm đến',
+    utilizationProgress: 'Tiến độ sử dụng',
   },
   // date-related texts
   date: {
@@ -176,6 +177,7 @@ export default {
     transcription: 'Bản ghi',
     attachment: 'Tệp đính kèm | Các tệp đính kèm',
     owner: 'Chủ sở hữu | Các chủ sở hữu',
+    skill: 'Kỹ năng | Kỹ năng',
     customization: {
       customization: 'Tùy chỉnh | Các tùy chỉnh',
     },
@@ -739,6 +741,24 @@ export default {
       },
       queuePeriod: ({ linked }) => {
         return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Mẫu | Các mẫu',
