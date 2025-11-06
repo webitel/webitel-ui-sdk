@@ -5,7 +5,7 @@
         <tr class="wt-tree-table-tr wt-tree-table-tr-head">
           <th
             v-for="(col, key) of dataHeaders"
-            :key="key"
+            :key="String(key) + col?.sort"
             :class="[
               {
                 'wt-tree-table-th--sortable': isColSortable(col),
@@ -14,7 +14,7 @@
             ]"
             :style="col.width ? `min-width:${col.width}` : ''"
             class="wt-tree-table-th"
-            @click="sort(col)"
+            @click="sort(col, key)"
           >
             <div class="wt-tree-table-th__content">
               <div
@@ -205,9 +205,11 @@ const isColSortable = ({ sort }: WtTableHeader) => {
   return props.sortable && sort !== undefined;
 };
 
-const sort = (col: WtTableHeader) => {
+const sort = (col: WtTableHeader, index: number) => {
   if (!isColSortable(col)) return;
   const nextSort = getNextSortOrder(col.sort);
+  props.headers.forEach(header => header.sort = null)
+  props.headers[index].sort = nextSort
   emit('sort', col, nextSort);
 };
 
