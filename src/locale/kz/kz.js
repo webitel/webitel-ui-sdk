@@ -131,6 +131,7 @@ export default {
     number: 'Нөмір',
     expireAt: 'Мерзімі',
     destination: 'Мақсат',
+    utilizationProgress: 'Пайдалану прогресі',
   },
   // date-related texts
   date: {
@@ -176,6 +177,7 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Тіркеме | Тіркемелер',
     owner: 'Ие | Иелер',
+    skill: 'Дағды | Дағдылар',
     customization: {
       customization: 'Жекелендіру | Жекелендірулер',
     },
@@ -738,6 +740,24 @@ export default {
       },
       queuePeriod: ({ linked }) => {
         return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Алдын ала орнату | Алдын ала орнатулар',

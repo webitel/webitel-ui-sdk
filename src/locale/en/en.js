@@ -133,6 +133,7 @@ export default deepmerge({
     number: 'Number',
     expireAt: 'Expire at',
     destination: 'Destination',
+    utilizationProgress: 'Utilization progress',
   },
   // date-related texts
   date: {
@@ -157,6 +158,7 @@ export default deepmerge({
     supervisor: 'Supervisor | Supervisors',
     auditor: 'Auditor | Auditors',
     region: 'Region | Regions',
+    skill: 'Skill | Skills',
     communicationType: 'Communication type | Communication types',
     grantee: 'Grantee | Grantees',
     grantor: 'Grantor | Grantors',
@@ -744,6 +746,24 @@ export default deepmerge({
       },
       queuePeriod: ({ linked }) => {
         return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Preset | Presets',

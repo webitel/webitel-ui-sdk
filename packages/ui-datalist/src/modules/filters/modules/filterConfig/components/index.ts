@@ -111,10 +111,38 @@ import VariableFilter from './variable/variable-filter-value-field.vue';
 import VariableFilterPreview from './variable/variable-filter-value-preview.vue';
 import { createTeamFilterConfig } from './team';
 import { createQueueFilterConfig } from './queue';
+import AgentStatusFilter from './agent-status/agent-status-filter-value-field.vue';
+import AgentStatusFilterPreview from './agent-status/agent-status-filter-value-preview.vue';
+import SkillFilter from './skill/skill-filter-value-field.vue';
+import SkillFilterPreview from './skill/skill-filter-value-preview.vue';
+import { createSkillFilterConfig } from './skill';
+import SupervisorFilter from './supervisor/supervisor-filter-value-field.vue';
+import SupervisorFilterPreview from './supervisor/supervisor-filter-value-preview.vue';
+import { createSupervisorFilterConfig } from './supervisor';
+import AuditorFilter from './auditor/auditor-filter-value-field.vue';
+import AuditorFilterPreview from './auditor/auditor-filter-value-preview.vue';
+import { createAuditorFilterConfig } from './auditor';
+import RegionFilter from './region/region-filter-value-field.vue';
+import RegionFilterPreview from './region/region-filter-value-preview.vue';
+import { createRegionFilterConfig } from './region';
+import UtilizationProgressFilter from './utilization-progress/utilization-progress-filter-value-field.vue';
+import UtilizationProgressFilterPreview from './utilization-progress/utilization-progress-filter-value-preview.vue';
 
 export {
   AgentFilter,
   AgentFilterPreview,
+  SkillFilter,
+  SkillFilterPreview,
+  SupervisorFilter,
+  SupervisorFilterPreview,
+  AuditorFilter,
+  AuditorFilterPreview,
+  RegionFilter,
+  RegionFilterPreview,
+  AgentStatusFilter,
+  AgentStatusFilterPreview,
+  UtilizationProgressFilter,
+  UtilizationProgressFilterPreview,
   AmdResultFilter,
   AmdResultFilterPreview,
   CallDirectionFilterValueField,
@@ -203,6 +231,12 @@ export const FilterOptionToValueComponentMap: Record<
   Component
 > = {
   [FilterOption.Agent]: AgentFilter,
+  [FilterOption.AgentStatus]: AgentStatusFilter,
+  [FilterOption.UtilizationProgress]: UtilizationProgressFilter,
+  [FilterOption.Skill]: SkillFilter,
+  [FilterOption.Region]: RegionFilter,
+  [FilterOption.Auditor]: AuditorFilter,
+  [FilterOption.Supervisor]: SupervisorFilter,
   [FilterOption.AmdResult]: AmdResultFilter,
   [FilterOption.Contact]: ContactFilter,
   [FilterOption.CallDirection]: CallDirectionFilterValueField,
@@ -250,6 +284,12 @@ export const FilterOptionToPreviewComponentMap: Record<
 > = {
   [FilterOption.CreatedAt]: DateTimeOptionsFilterValuePreview,
   [FilterOption.Agent]: AgentFilterPreview,
+  [FilterOption.Region]: RegionFilterPreview,
+  [FilterOption.UtilizationProgress]: UtilizationProgressFilterPreview,
+  [FilterOption.Auditor]: AuditorFilterPreview,
+  [FilterOption.Supervisor]: SupervisorFilterPreview,
+  [FilterOption.Skill]: SkillFilterPreview,
+  [FilterOption.AgentStatus]: AgentStatusFilterPreview,
   [FilterOption.AmdResult]: AmdResultFilterPreview,
   [FilterOption.Contact]: ContactFilterPreview,
   [FilterOption.CallDirection]: CallDirectionFilterValuePreview,
@@ -336,4 +376,8 @@ export const FilterOptionToFilterConfigCreatorMap = {
   [FilterOption.ContactGroup]: createContactGroupFilterConfig,
   [FilterOption.Team]: createTeamFilterConfig,
   [FilterOption.Queue]: createQueueFilterConfig,
+  [FilterOption.Skill]: createSkillFilterConfig,
+  [FilterOption.Supervisor]: createSupervisorFilterConfig,
+  [FilterOption.Auditor]: createAuditorFilterConfig,
+  [FilterOption.Region]: createRegionFilterConfig,
 };
