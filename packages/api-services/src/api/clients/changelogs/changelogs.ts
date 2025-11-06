@@ -18,44 +18,31 @@ import {
   applyTransform,
   camelToSnake,
   merge,
-  mergeEach,
   notify,
   sanitize,
   snakeToCamel,
 } from '../../transformers';
-
-const configService = getConfigService();
 
 const getChangelogsList = async (params) => {
   const fieldsToSend = getShallowFieldsToSendFromZodSchema(
     configServiceSearchConfigQueryParams,
   );
 
-  const { page, size, fields, sort, q, object } = applyTransform(params, [
+  const transformedParams = applyTransform(params, [
     merge(getDefaultGetParams()),
+    (params) => ({ ...params, q: params.search }),
     sanitize(fieldsToSend),
     camelToSnake(),
   ]);
 
-  const defaultObject = {
-    enabled: false,
-  };
-
   try {
-    const response = await configService.configServiceSearchConfig({
-      page,
-      size,
-      q: q || params.search,
-      sort,
-      fields,
-      object,
-    });
+    const response = await  getConfigService().configServiceSearchConfig(transformedParams);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
     ]);
     return {
-      items: applyTransform(items, [mergeEach(defaultObject)]),
+      items,
       next,
     };
   } catch (err) {
@@ -65,7 +52,7 @@ const getChangelogsList = async (params) => {
 
 const getChangelog = async ({ itemId: id }) => {
   try {
-    const response = await configService.configServiceReadConfig(id);
+    const response = await  getConfigService().configServiceReadConfig(id);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -78,7 +65,7 @@ const addChangelog = async ({ itemInstance }) => {
     camelToSnake(),
   ]);
   try {
-    const response = await configService.configServiceCreateConfig(item);
+    const response = await  getConfigService().configServiceCreateConfig(item);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -92,7 +79,7 @@ const updateChangelog = async ({ itemInstance, itemId: id }) => {
   ]);
 
   try {
-    const response = await configService.configServiceUpdateConfig(id, item);
+    const response = await  getConfigService().configServiceUpdateConfig(id, item);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -105,7 +92,7 @@ const patchChangelog = async ({ id, changes }) => {
     camelToSnake(),
   ]);
   try {
-    const response = await configService.configServicePatchConfig(id, body);
+    const response = await  getConfigService().configServicePatchConfig(id, body);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -114,7 +101,7 @@ const patchChangelog = async ({ id, changes }) => {
 
 const deleteChangelog = async ({ id }) => {
   try {
-    const response = await configService.configServiceDeleteConfig(id);
+    const response = await  getConfigService().configServiceDeleteConfig(id);
     return applyTransform(response.data, []);
   } catch (err) {
     throw applyTransform(err, [notify]);
@@ -128,20 +115,14 @@ const getLookup = (params) =>
   });
 
 const getObjectsList = async (params) => {
-  const { page, size, fields, sort, search, includeExisting } = applyTransform(params, [
+  const transformedParams = applyTransform(params, [
     merge(getDefaultGetParams()),
+    (params) => ({ ...params, q: params.search }),
     camelToSnake(),
   ]);
 
   try {
-    const response = await configService.configServiceReadSystemObjects({
-      includeExisting,
-      page,
-      size,
-      q: search,
-      sort,
-      fields,
-    });
+    const response = await  getConfigService().configServiceReadSystemObjects(transformedParams);
     const { items, next } = applyTransform(response.data, [
       snakeToCamel(),
       merge(getDefaultGetListResponse()),
