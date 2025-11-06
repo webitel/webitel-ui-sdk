@@ -36,6 +36,7 @@
 <script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
 import {computed, defineEmits, defineProps, ref, useAttrs, watch} from 'vue';
+import {useStore} from "vuex";
 
 import { ButtonColor, ButtonVariant, ComponentSize,  } from '../../enums';
 
@@ -80,9 +81,19 @@ const emit = defineEmits(['click']);
 const attrs = useAttrs();
 
 const showLoader = ref(false);
+const store = useStore();
 
+const darkMode = computed(() => store.getters['appearance/DARK_MODE']);
+
+/**
+ * @author: @Opelsandr Palonnyi
+ *
+ * [WTEL-7995](https://webitel.atlassian.net/browse/WTEL-7995)
+ *
+ * link to comment - https://webitel.atlassian.net/browse/WTEL-7992?focusedCommentId=705256
+ * */
 const loaderColor = computed(() => {
-  return 'on-dark';
+  return darkMode.value ? 'on-dark' : 'on-light';
   // if (['success', 'transfer', 'error', 'job'].includes(props.color)) return 'on-dark';
   // return 'on-light';
 });
