@@ -22,33 +22,20 @@ const priorityService = PrioritiesApiFactory(configuration, '', instance);
 
 const fieldsToSend = ['name', 'description', 'color'];
 
+import { listPrioritiesQueryParams, locatePriorityResponse } from '@webitel/api-services/gen';
+import { getFieldsToSendFromZodSchema } from '@webitel/api-services/gen/utils';
+import { convertCamelToSnakeFrom, convertSnakeToCamel } from '../../transformers/camelToSnakeFromSchema';
+
 const getPrioritiesList = async (params) => {
-	const fieldsToSend = [
-		'page',
-		'size',
-		'q',
-		'sort',
-		'fields',
-		'id',
-		'notInSla',
-		'inSla',
-		'inSlaCond',
-	];
-	const {
-		page,
-		size,
-		fields,
-		sort,
-		id,
-		q,
-		not_in_sla: notInSla,
-		in_sla_cond: inSlaCond,
-	} = applyTransform(params, [
+  const fieldsToSend = getFieldsToSendFromZodSchema(listPrioritiesQueryParams);
+
+  const { page, size, fields, sort, id, q, not_in_sla, in_sla_cond } = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		(params) => ({ ...params, q: params.search }),
 		sanitize(fieldsToSend),
-		camelToSnake(),
+    (params) => convertCamelToSnakeFrom(params, fieldsToSend),
 	]);
+
 	try {
 		const response = await priorityService.listPriorities(
 			page,
@@ -57,8 +44,8 @@ const getPrioritiesList = async (params) => {
 			sort,
 			id,
 			q,
-			notInSla,
-			inSlaCond,
+      not_in_sla,
+      in_sla_cond,
 		);
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
@@ -77,9 +64,11 @@ const getPriority = async ({ itemId: id }) => {
 		return item.priority;
 	};
 
+  const fieldsToSend2 = getFieldsToSendFromZodSchema(locatePriorityResponse);
+
 	try {
 		const response = await priorityService.locatePriority(id, fieldsToSend);
-		return applyTransform(response.data, [snakeToCamel(), itemResponseHandler]);
+		return applyTransform(response.data, [(params) => convertSnakeToCamel(params, fieldsToSend2), itemResponseHandler]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
 	}
