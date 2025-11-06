@@ -1,26 +1,34 @@
 <template>
   <ul>
     <li
-      v-for="(status, index) of props.value"
+      v-for="({ label }, index) of arrayValues"
       :key="index"
     >
-      {{ displayValue(status) }}
+      {{ label }}
     </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
 import { useAgentStatusOptions } from '../../composables/useAgentStatusOptions';
+import { computed } from 'vue';
 
 const props = defineProps<{
   value: number[];
 }>();
 
-const { options: AgentStatusMappingOptions } = useAgentStatusOptions();
+const { options } = useAgentStatusOptions();
 
-const displayValue = (value) => {
-  return AgentStatusMappingOptions.value.find((option) => option.value === value)?.label || value;
-}
+const arrayLabels = computed(() =>
+  options.value.reduce((acc, { value, label }) => {
+    acc[value] = label;
+    return acc;
+  }, {})
+);
+
+const arrayValues = computed(() =>
+  props.value.map((v) => arrayLabels.value[v] || v)
+);
 
 </script>
 
