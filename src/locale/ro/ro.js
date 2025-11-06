@@ -126,7 +126,6 @@ export default {
     column: 'Coloană | Coloane',
     notification: 'Notificare | Notificări',
     screencast: 'Înregistrare ecran',
-    extension: 'Extensie',
     password: 'Parolă',
     number: 'Număr',
     expireAt: 'Expiră la',
@@ -516,7 +515,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacte`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -577,7 +576,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Fișierul dvs. PDF este în curs de creare…'
+      generationStarted: 'Fișierul dvs. PDF este în curs de creare…',
     },
     saveFailedPopup: {
       title: 'Salvarea a eșuat',
@@ -794,8 +793,8 @@ export default {
       delete: ({ named }) => `${named('entity').toLowerCase()} a fost șters`,
     },
     info: {
-      passwordExpirationMessage: 'Parola ta va expira în { days } zile'
-    }
+      passwordExpirationMessage: 'Parola ta va expira în { days } zile',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'A apărut o eroare la încărcarea istoricului chat-ului',

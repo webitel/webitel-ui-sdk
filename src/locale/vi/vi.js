@@ -126,7 +126,6 @@ export default {
     column: 'Cột | Các cột',
     notification: 'Thông báo | Các thông báo',
     screencast: 'Ghi màn hình',
-    extension: 'Mở rộng',
     password: 'Mật khẩu',
     number: 'Số',
     expireAt: 'Hết hạn',
@@ -517,7 +516,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} liên hệ`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -577,7 +576,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Tệp PDF của bạn đang được tạo…'
+      generationStarted: 'Tệp PDF của bạn đang được tạo…',
     },
     saveFailedPopup: {
       title: 'Lưu thất bại',
@@ -794,8 +793,9 @@ export default {
       delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
     },
     info: {
-      passwordExpirationMessage: 'Mật khẩu của bạn sẽ hết hạn sau { days } ngày'
-    }
+      passwordExpirationMessage:
+        'Mật khẩu của bạn sẽ hết hạn sau { days } ngày',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Đã xảy ra lỗi khi tải lịch sử trò chuyện',
