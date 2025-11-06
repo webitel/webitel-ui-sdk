@@ -1,13 +1,13 @@
 <template>
   <wt-select
-    :close-on-select="false"
     :label="labelValue"
-    :search-method="props.filterConfig.searchRecords"
+    :options="options"
     :value="model"
     :v="!disableValidation && v$.model"
-    multiple
-    use-value-from-options-by-prop="id"
-    @input="handleInput"
+    track-by="value"
+    option-label="label"
+    use-value-from-options-by-prop="value"
+    @input="model = $event"
   />
 </template>
 
@@ -18,21 +18,16 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useQueueTypeOptions } from '../../composables/useQueueTypeOptions';
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
+const model = defineModel<string>();
+const { t } = useI18n();
+
 const props = defineProps<{
-  filterConfig: WtSysTypeFilterConfig;
+  filterConfig?: WtSysTypeFilterConfig;
   disableValidation?: boolean;
 }>();
-
-type ModelValue = number[];
-
-const model = defineModel<ModelValue>();
-
-const emit = defineEmits<{
-  'update:invalid': [boolean];
-}>();
-const { t } = useI18n();
 
 const v$ = useVuelidate(
   computed(() => ({
@@ -43,11 +38,18 @@ const v$ = useVuelidate(
   { model },
   { $autoDirty: true },
 );
+
 v$.value.$touch();
+
+const emit = defineEmits<{
+  'update:invalid': [boolean];
+}>();
 
 const labelValue = computed(() =>
   t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
-    props?.filterConfig.name : 'filterValue'}`))
+    props?.filterConfig.name : 'filterValue'}`));
+
+const { options } = useQueueTypeOptions();
 
 onMounted(() => {
   if (!props?.disableValidation) v$.value.$touch();
@@ -60,10 +62,6 @@ watch(
   },
   { immediate: true },
 );
-
-const handleInput = (value: ModelValue) => {
-  model.value = value;
-};
 </script>
 
 <style scoped></style>

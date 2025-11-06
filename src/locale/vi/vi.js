@@ -189,6 +189,7 @@ export default {
     },
     queue: {
       queue: 'Hàng chờ | Hàng chờ',
+      queueType: 'Loại hàng đợi | Các loại hàng đợi',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Hàng chờ cuộc gọi vào',
         [QueueType.OFFLINE_QUEUE]: 'Hàng chờ ngoại tuyến',
@@ -732,6 +733,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Mẫu | Các mẫu',

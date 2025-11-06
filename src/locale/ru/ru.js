@@ -189,6 +189,7 @@ export default {
     },
     queue: {
       queue: 'Очередь | Очереди',
+      queueType: 'Тип очереди | Типы очередей',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Входящая очередь',
         [QueueType.OFFLINE_QUEUE]: 'Оффлайн очередь',
@@ -727,6 +728,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Пресет | Пресеты',

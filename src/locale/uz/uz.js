@@ -190,6 +190,7 @@ export default {
     },
     queue: {
       queue: 'Navbat | Navbatlar',
+      queueType: 'Navbat turi | Navbat turlari',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Kiruvchi navbat',
         [QueueType.OFFLINE_QUEUE]: 'Oflayn navbat',
@@ -733,6 +734,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Andoza | Andozalar',

@@ -184,6 +184,7 @@ export default {
     },
     queue: {
       queue: 'Cola | Colas',
+      queueType: 'Tipo de cola | Tipos de colas',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Cola entrante',
         [QueueType.OFFLINE_QUEUE]: 'Cola sin conexión',
@@ -727,6 +728,12 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
       },
       presets: {
         preset: 'Preset | Presets',
