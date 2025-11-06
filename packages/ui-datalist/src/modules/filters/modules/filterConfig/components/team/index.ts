@@ -1,4 +1,4 @@
-import TeamsAPI from '@webitel/ui-sdk/api/clients/teams/teams';
+import { teams as TeamsAPI } from '@webitel/ui-sdk/api/clients/index';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
