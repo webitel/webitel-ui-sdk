@@ -1,10 +1,9 @@
 <template>
   <wt-select
     :label="labelValue"
-    :options="QueuePeriodMappingOptions"
+    :options="options"
     :value="model"
     :v="!disableValidation && v$.model"
-    multiple
     track-by="value"
     option-label="label"
     use-value-from-options-by-prop="value"
@@ -50,7 +49,7 @@ const labelValue = computed(() =>
   t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
     props?.filterConfig.name : 'filterValue'}`));
 
-const { options: QueuePeriodMappingOptions } = useQueuePeriodOptions();
+const { options } = useQueuePeriodOptions();
 
 onMounted(() => {
   if (!props?.disableValidation) v$.value.$touch();

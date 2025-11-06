@@ -12,7 +12,7 @@ import { EmptyCause } from './EmptyCause/EmptyCause';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
-import QueueType from './QueueType/QueueType.enum.js';
+import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
 import { AdminSections } from './WebitelApplications/AdminSections';
@@ -43,6 +43,7 @@ export {
   ProcessingTableColumnType,
   ProviderIconType,
   QueueType,
+  QueueTypeName,
   RelativeDatetimeValue,
   SupervisorSections,
   TypesExportedSettings,

@@ -14,6 +14,7 @@ export const searchQuickRepliesQueryParams = zod.object({
 	fields: zod.array(zod.string()).optional(),
 	id: zod.array(zod.number()).optional(),
 	queue: zod.array(zod.number()).optional(),
+	restrictToAgent: zod.boolean().optional(),
 });
 
 export const searchQuickRepliesResponse = zod.object({
