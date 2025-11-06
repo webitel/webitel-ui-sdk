@@ -30,6 +30,7 @@ export * from './pdfServices/pdfServices';
 export * from './phones/phones';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
+export * from './regions/regions';
 // export * from './roles/roles'; fixme: ApplicationAccess import
 export * from './skills/skills';
 export * from './slas/slas';
@@ -39,4 +40,3 @@ export * from './wtTypes/adjunctTypes/adjunctTypes';
 export * from './wtTypes/sysTypes/sysTypes';
 export * from './wtTypes/typeExtensions/typeExtensions';
 export * from './сontacts';
-export * from './regions/regions';
