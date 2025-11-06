@@ -129,7 +129,7 @@ export const createUserAccessStore = ({
       access: rawVisibilityAccess,
     }: CreateUserAccessStoreRawAccess) => {
       // Enable bypass mode if access data is null/undefined
-      // bypassMode.value = rawVisibilityAccess === null;
+      bypassMode.value = rawVisibilityAccess === null;
 
       globalAccess.value = makeGlobalAccessMap(rawGlobalAccess);
       scopeAccess.value = makeScopeAccessMap(rawScopeAccess);
@@ -148,6 +148,7 @@ export const createUserAccessStore = ({
 
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
+      hasApplicationVisibility,
 
       /**
        * @internal

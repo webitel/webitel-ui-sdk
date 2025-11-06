@@ -130,6 +130,7 @@ export default {
     number: 'Номер',
     expireAt: 'Закінчується',
     destination: 'Призначення',
+    utilizationProgress: 'Прогрес використання',
   },
   // date-related texts
   date: {
@@ -175,6 +176,7 @@ export default {
     transcription: 'Транскрипція',
     attachment: 'Вкладення | Вкладення',
     owner: 'Власник | Власники',
+    skill: 'Навичка | Навички',
     customization: {
       customization: 'Персоналізація | Персоналізації',
     },
@@ -188,6 +190,7 @@ export default {
     },
     queue: {
       queue: 'Черга | Черги',
+      queueType: 'Тип черги | Типи черг',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
         [QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
@@ -373,6 +376,7 @@ export default {
         [AdminSections.QuickReplies]: 'Швидкі відповіді',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: "Обов'язкове поле",
@@ -725,6 +729,30 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Пресет | Пресети',

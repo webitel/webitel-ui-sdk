@@ -44,6 +44,14 @@ export const ScopeClass = {
   CaseComments: 'case_comments',
   AuditForm: 'cc_audit_form',
   AuditRating: 'rating',
+  PauseTemplates: 'pause_templates',
+  ShiftTemplates: 'shift_templates',
+  WorkingConditions: 'working_conditions',
+  AgentWorkingConditions: 'agent_working_conditions',
+  ListNumber: 'cc_list_number',
+  CaseLookups: 'case_lookups',
+  FilesPolicy: 'files_policy',
+  PortalUsers: 'portal_users',
   Custom: 'custom',
 } as const;
 

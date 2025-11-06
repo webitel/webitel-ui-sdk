@@ -24,6 +24,7 @@
         :username="props.username"
         :session="props.session"
         :screenshot-status="props.screenshotStatus"
+        :screenshot-is-loading="screenshotIsLoading"
         :mode="mode"
         @close-player="emit('close')"
         @close-session="emit('close-session')"
@@ -69,6 +70,7 @@ interface Props {
   mode: WtVidstakPlayerControlsMode;
   session?: WtVidstackPlayerSession
   screenshotStatus: ScreenshotStatus
+  screenshotIsLoading: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -160,6 +162,8 @@ onBeforeUnmount(() => {
   &__player {
     padding: 0;
     margin: 0;
+    min-width: 0;
+    width: 100%;
   }
 
   &--sm {

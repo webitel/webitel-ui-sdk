@@ -1,7 +1,8 @@
+import pick from 'lodash/pick';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-import { getSession, getUiVisibilityAccess } from '../api/UserinfoAPI';
+import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
 import { createSettingsStore } from './settingsStore';
 
@@ -25,27 +26,48 @@ export const createUserinfoStore = () => {
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
       hasSectionVisibility,
+      hasApplicationVisibility,
     } = accessStore;
     const settings = useSettingsStore();
 
     const userId = ref();
+    const userInfo = ref(null);
 
     const initialize = async () => {
-      const { scope, permissions, ...userinfo } = await getSession();
+      const session = await getSession();
       const access = await getUiVisibilityAccess();
       await settings.initialize();
 
-      userId.value = userinfo.userId;
+      userId.value = session.userId;
+      userInfo.value = pick(session, [
+        'domainId',
+        'username',
+        'permissions',
+        'userId',
+        'scope',
+        'roles',
+        'license',
+      ]);
 
       initializeAccessStore({
-        scope,
-        permissions,
+        scope: session.scope,
+        permissions: session.permissions,
         access,
       });
     };
 
+    const logoutUser = async () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const authUrl = import.meta.env.VITE_AUTH_URL;
+      if (!authUrl) throw new Error('No authUrl for LOGOUT provided');
+      await logout();
+      window.location.href = authUrl;
+    };
+
     return {
       userId,
+      userInfo,
       initialize,
 
       hasReadAccess,
@@ -56,11 +78,12 @@ export const createUserinfoStore = () => {
       hasSectionVisibility,
       routeAccessGuard,
       hasSpecialGlobalActionAccess,
-
-      settings,
+      hasApplicationVisibility,
+      logoutUser,
     };
   });
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   window._userinfoStore = store;
 

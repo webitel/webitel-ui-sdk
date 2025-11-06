@@ -12,6 +12,7 @@ export * from './caseSources/caseSources';
 export * from './caseStatusConditions/caseStatusConditions';
 export * from './caseStatuses/caseStatuses';
 export * from './catalog/catalog';
+export * from './changelogs/changelogs';
 export * from './chatGateways/chatGateways';
 export * from './communications/communications';
 export * from './configurations/configurations';
@@ -29,6 +30,7 @@ export * from './pdfServices/pdfServices';
 export * from './phones/phones';
 export * from './queues/queues';
 export * from './quickReplies/quickReplies';
+export * from './regions/regions';
 // export * from './roles/roles'; fixme: ApplicationAccess import
 export * from './skills/skills';
 export * from './slas/slas';

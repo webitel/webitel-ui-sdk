@@ -40,6 +40,14 @@ export const FilterOption = {
   CaseActualResolutionTime: 'actualResolutionTime',
   HasAttachment: 'hasAttachment',
   HasUser: 'hasUser',
+  QueueType: 'queueType',
+  QueuePeriod: 'queuePeriod',
+  AgentStatus: 'agentStatus',
+  Skill: 'skill',
+  Supervisor: 'supervisor',
+  Auditor: 'auditor',
+  Region: 'region',
+  UtilizationProgress: 'utilizationProgress',
 } as const;
 
 /**

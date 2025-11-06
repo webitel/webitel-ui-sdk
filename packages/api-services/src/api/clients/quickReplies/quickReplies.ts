@@ -14,15 +14,26 @@ import {
 const fieldsToSend = ['name', 'queues', 'article', 'teams', 'text'];
 
 const getQuickRepliesList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+		'restrictToAgent',
+	];
 
-	const { page, size, fields, sort, id, q } = applyTransform(params, [
-		merge(getDefaultGetParams()),
-		(params) => ({ ...params, q: params.search }),
-		sanitize(fieldsToSend),
-		starToSearch('q'),
-		camelToSnake(),
-	]);
+	const { page, size, fields, sort, id, q, restrict_to_agent } = applyTransform(
+		params,
+		[
+			merge(getDefaultGetParams()),
+			(params) => ({ ...params, q: params.search }),
+			sanitize(fieldsToSend),
+			starToSearch('q'),
+			camelToSnake(),
+		],
+	);
 
 	try {
 		const response = await getQuickRepliesService().searchQuickReplies({
@@ -32,6 +43,7 @@ const getQuickRepliesList = async (params) => {
 			sort,
 			id,
 			q,
+			restrict_to_agent,
 		});
 		const { items, next } = applyTransform(response.data, [
 			merge(getDefaultGetListResponse()),
