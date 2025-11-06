@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, withDefaults } from 'vue';
+import { computed, toRef, withDefaults } from 'vue';
 
 import { useWtTable } from '../../composables/useWtTable/useWtTable';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters';
@@ -194,7 +194,7 @@ const isAllSelected = computed(() => {
 });
 
 const { tableHeaders: dataHeaders } = useWtTable({
-  headers: props.headers,
+  headers: toRef(props, 'headers'),
 });
 
 const isColSortable = ({ sort }: WtTableHeader) => {
@@ -205,11 +205,10 @@ const isColSortable = ({ sort }: WtTableHeader) => {
   return props.sortable && sort !== undefined;
 };
 
-const sort = (col: WtTableHeader, index: number) => {
+const sort = (col: WtTableHeader) => {
   if (!isColSortable(col)) return;
   const nextSort = getNextSortOrder(col.sort);
-  props.headers.forEach(header => header.sort = null)
-  props.headers[index].sort = nextSort
+
   emit('sort', col, nextSort);
 };
 
