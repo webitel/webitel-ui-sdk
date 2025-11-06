@@ -23,11 +23,17 @@ export default {
       type: Array,
       default: () => ['filter-reset', 'settings'],
     },
+    isOpened: {
+      type: Boolean,
+      default: false,
+    }
   },
-  data: () => ({
-    isOpened: false,
-    filtersCount: 0,
-  }),
+  data() {
+    return {
+      localIsOpened: this.isOpened,
+      filtersCount: 0,
+    }
+  },
   methods: {
     tableActionsHandler(eventName) {
       switch (eventName) {
@@ -41,7 +47,7 @@ export default {
       }
     },
     toggleFiltersExpansion() {
-      this.isOpened = !this.isOpened;
+      this.localIsOpened = !this.localIsOpened;
     },
     resetFilters() {
       this.$emit('reset');
