@@ -1,4 +1,4 @@
-import QueuesAPI from '@webitel/ui-sdk/api/clients/queues/queues';
+import { QueuesAPI } from '@webitel/api-services/api';
 
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 import { FilterOption } from '../../enums/FilterOption';
