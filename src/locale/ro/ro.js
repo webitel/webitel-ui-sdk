@@ -126,7 +126,6 @@ export default {
     column: 'Coloană | Coloane',
     notification: 'Notificare | Notificări',
     screencast: 'Înregistrare ecran',
-    extension: 'Extensie',
     password: 'Parolă',
     number: 'Număr',
     expireAt: 'Expiră la',

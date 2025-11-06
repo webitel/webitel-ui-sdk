@@ -124,7 +124,6 @@ export default {
     column: 'Columna | Columnas',
     notification: 'Notificación | Notificaciones',
     screencast: 'Videotutorial de pantalla',
-    extension: 'Extensión',
     password: 'Contraseña',
     number: 'Número',
     expireAt: 'Expira en',

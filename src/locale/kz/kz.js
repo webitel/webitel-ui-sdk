@@ -126,7 +126,6 @@ export default {
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
     screencast: 'Экран жазбасы',
-    extension: 'Кеңейту',
     password: 'Құпия сөз',
     number: 'Нөмір',
     expireAt: 'Мерзімі',

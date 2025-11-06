@@ -126,7 +126,6 @@ export default {
     column: 'Ustun | Ustunlar',
     notification: 'Bildirishnoma | Bildirishnomalar',
     screencast: 'Ekran yozuvi',
-    extension: 'Kengaytma',
     password: 'Parol',
     number: 'Raqam',
     expireAt: 'Muddati',

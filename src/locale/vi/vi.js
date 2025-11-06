@@ -126,7 +126,6 @@ export default {
     column: 'Cột | Các cột',
     notification: 'Thông báo | Các thông báo',
     screencast: 'Ghi màn hình',
-    extension: 'Mở rộng',
     password: 'Mật khẩu',
     number: 'Số',
     expireAt: 'Hết hạn',

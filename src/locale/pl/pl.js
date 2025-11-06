@@ -126,7 +126,6 @@ export default {
     column: 'Kolumna | Kolumny',
     notification: 'Powiadomienie | Powiadomienia',
     screencast: 'Nagranie ekranu',
-    extension: 'Rozszerzenie',
     password: 'Hasło',
     number: 'Numer',
     expireAt: 'Wygasa',
