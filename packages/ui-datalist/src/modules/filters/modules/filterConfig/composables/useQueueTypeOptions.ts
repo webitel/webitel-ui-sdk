@@ -9,10 +9,11 @@ export function useQueueTypeOptions() {
     t(`objects.queue.type.${value}`);
 
   const options = computed(() =>
-    QueueType.map(({ value }) => ({
-      value,
-      label: mapQueueTypeToLabel(value),
-    }))
+    Object.entries(QueueType)
+      .map(([key, value]) => ({
+        value,
+        label: mapQueueTypeToLabel(value),
+      }))
   );
 
   return {

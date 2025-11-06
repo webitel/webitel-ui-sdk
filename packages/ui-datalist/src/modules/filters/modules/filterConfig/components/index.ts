@@ -85,7 +85,7 @@ import HasUserFilter from './has-user/has-user-filter-value-field.vue';
 import HasUserFilterPreview from './has-user/has-user-filter-value-preview.vue';
 import QueueFilter from './queue/queue-filter-value-field.vue';
 import QueueFilterPreview from './queue/queue-filter-value-preview.vue';
-import QueueTypeFilter from './queue/queue-filter-value-field.vue';
+import QueueTypeFilter from './queue-type/queue-type-filter-value-field.vue';
 import QueueTypeFilterPreview from './queue-type/queue-type-filter-value-preview.vue';
 import QueuePeriodFilter from './queue-period/queue-period-filter-value-field.vue';
 import QueuePeriodFilterPreview from './queue-period/queue-period-filter-value-preview.vue';

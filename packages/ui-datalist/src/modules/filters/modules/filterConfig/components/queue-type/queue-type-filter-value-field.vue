@@ -1,11 +1,11 @@
 <template>
   <wt-select
-    :close-on-select="false"
     :label="labelValue"
-    :options="QueueTypeMappingOptions"
+    :options="options"
     :value="model"
     :v="!disableValidation && v$.model"
     track-by="value"
+    option-label="label"
     use-value-from-options-by-prop="value"
     @input="model = $event"
   />
@@ -45,15 +45,15 @@ const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
 
-onMounted(() => {
-  if (!props?.disableValidation) v$.value.$touch();
-});
-
 const labelValue = computed(() =>
   t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
     props?.filterConfig.name : 'filterValue'}`));
 
-const { options: QueueTypeMappingOptions } = useQueueTypeOptions();
+const { options } = useQueueTypeOptions();
+
+onMounted(() => {
+  if (!props?.disableValidation) v$.value.$touch();
+});
 
 watch(
   () => v$.value.$invalid,
