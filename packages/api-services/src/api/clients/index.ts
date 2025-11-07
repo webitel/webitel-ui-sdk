@@ -1,4 +1,5 @@
 export * from './_shared/generatePermissionsApi';
+export * from './agents/agentAbsence';
 export * from './agents/agentChats';
 export * from './agents/agents';
 export * from './buckets/buckets';
