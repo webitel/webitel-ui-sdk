@@ -131,6 +131,7 @@ export default {
     number: 'Număr',
     expireAt: 'Expiră la',
     destination: 'Destinație',
+    utilizationProgress: 'Progresul utilizării',
   },
   // date-related texts
   date: {
@@ -176,6 +177,7 @@ export default {
     transcription: 'Transcriere',
     attachment: 'Atașament | Atașamente',
     owner: 'Proprietar | Proprietari',
+    skill: 'Competență | Competențe',
     customization: {
       customization: 'Personalizare | Personalizări',
     },
@@ -189,6 +191,7 @@ export default {
     },
     queue: {
       queue: 'Coadă | Cozi',
+      queueType: 'Tip de coadă | Tipuri de cozi',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Coadă intrare',
         [QueueType.OFFLINE_QUEUE]: 'Coadă offline',
@@ -732,6 +735,30 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Șablon | Șabloane',

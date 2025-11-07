@@ -1,12 +1,12 @@
 <template>
   <wt-select
+    :close-on-select="false"
     :label="labelValue"
-    :options="options"
+    :options="UtilizationProgressOptions"
     :value="model"
     :v="!disableValidation && v$.model"
     track-by="value"
     multiple
-    option-label="label"
     use-value-from-options-by-prop="value"
     @input="model = $event"
   />
@@ -19,14 +19,14 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { useQueuePeriodOptions } from '../../composables/useQueuePeriodOptions';
+import UtilizationProgressOptions from '../../enums/options/UtilizationProgressOptions';
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 const model = defineModel<string>();
 const { t } = useI18n();
 
 const props = defineProps<{
-  filterConfig?: WtSysTypeFilterConfig,
+  filterConfig?: WtSysTypeFilterConfig;
   disableValidation?: boolean;
 }>();
 
@@ -46,15 +46,13 @@ const emit = defineEmits<{
   'update:invalid': [boolean];
 }>();
 
-const labelValue = computed(() =>
-  t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
-    props?.filterConfig.name : 'filterValue'}`));
-
-const { options } = useQueuePeriodOptions();
-
 onMounted(() => {
   if (!props?.disableValidation) v$.value.$touch();
 });
+
+const labelValue = computed(() =>
+  t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
+    props?.filterConfig.name : 'filterValue'}`));
 
 watch(
   () => v$.value.$invalid,

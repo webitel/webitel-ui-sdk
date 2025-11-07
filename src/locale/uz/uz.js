@@ -131,7 +131,7 @@ export default {
     number: 'Raqam',
     expireAt: 'Muddati',
     destination: 'Manzil',
-
+    utilizationProgress: 'Foydalanish bosqichi',
   },
   // date-related texts
   date: {
@@ -177,6 +177,7 @@ export default {
     transcription: 'Transkriptsiya',
     attachment: 'Ilova | Ilovalar',
     owner: 'Egasi | Egalari',
+    skill: 'Konikma | Konikmalar',
     customization: {
       customization: 'Maxsuslash | Maxsuslashlar',
     },
@@ -190,6 +191,7 @@ export default {
     },
     queue: {
       queue: 'Navbat | Navbatlar',
+      queueType: 'Navbat turi | Navbat turlari',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Kiruvchi navbat',
         [QueueType.OFFLINE_QUEUE]: 'Oflayn navbat',
@@ -733,6 +735,30 @@ export default {
       },
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
+      },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
       },
       presets: {
         preset: 'Andoza | Andozalar',

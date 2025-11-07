@@ -19,7 +19,7 @@ import { WtSelect } from '@webitel/ui-sdk/components';
 import { computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import { useQueuePeriodOptions } from '../../composables/useQueuePeriodOptions';
+import { useAgentStatusOptions } from '../../composables/useAgentStatusOptions';
 import { WtSysTypeFilterConfig } from '../../classes/FilterConfig';
 
 const model = defineModel<string>();
@@ -50,7 +50,7 @@ const labelValue = computed(() =>
   t(`webitelUI.filters.${props?.filterConfig?.showFilterName ?
     props?.filterConfig.name : 'filterValue'}`));
 
-const { options } = useQueuePeriodOptions();
+const { options } = useAgentStatusOptions();
 
 onMounted(() => {
   if (!props?.disableValidation) v$.value.$touch();

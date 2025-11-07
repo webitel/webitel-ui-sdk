@@ -6,6 +6,7 @@
     :v="!disableValidation && v$.model"
     track-by="value"
     option-label="label"
+    multiple
     use-value-from-options-by-prop="value"
     @input="model = $event"
   />
