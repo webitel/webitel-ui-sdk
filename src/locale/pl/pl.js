@@ -126,7 +126,6 @@ export default {
     column: 'Kolumna | Kolumny',
     notification: 'Powiadomienie | Powiadomienia',
     screencast: 'Nagranie ekranu',
-    extension: 'Rozszerzenie',
     password: 'Hasło',
     number: 'Numer',
     expireAt: 'Wygasa',
@@ -298,8 +297,7 @@ export default {
             ': ' +
             linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
-            linked('objects.customization.customization') +
-            ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+            linked('objects.customization.customization') + ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
         },
       },
     },
@@ -515,7 +513,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} kontakty`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -575,7 +573,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Twój plik PDF jest tworzony…'
+      generationStarted: 'Twój plik PDF jest tworzony…',
     },
     saveFailedPopup: {
       title: 'Zapisywanie nie powiodło się',
@@ -792,8 +790,8 @@ export default {
       delete: ({ named }) => `${named('entity').toLowerCase()} został usunięty`,
     },
     info: {
-      passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni'
-    }
+      passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Wystąpił błąd podczas ładowania historii czatu',

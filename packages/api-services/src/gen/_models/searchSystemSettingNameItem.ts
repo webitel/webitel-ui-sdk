@@ -43,4 +43,5 @@ export const SearchSystemSettingNameItem = {
 	password_categories: 'password_categories',
 	password_contains_username: 'password_contains_username',
 	password_warning_days: 'password_warning_days',
+	default_password: 'default_password',
 } as const;

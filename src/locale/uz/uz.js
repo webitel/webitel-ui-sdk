@@ -126,7 +126,6 @@ export default {
     column: 'Ustun | Ustunlar',
     notification: 'Bildirishnoma | Bildirishnomalar',
     screencast: 'Ekran yozuvi',
-    extension: 'Kengaytma',
     password: 'Parol',
     number: 'Raqam',
     expireAt: 'Muddati',
@@ -517,7 +516,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} kontaktlar`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -577,7 +576,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Sizning PDF faylingiz yaratilmoqda…'
+      generationStarted: 'Sizning PDF faylingiz yaratilmoqda…',
     },
     saveFailedPopup: {
       title: 'Saqlash muvaffaqiyatsiz tugadi',
@@ -793,8 +792,9 @@ export default {
       delete: ({ named }) => `${named('entity').toLowerCase()} o'chirildi`,
     },
     info: {
-      passwordExpirationMessage: 'Parolingiz { days } kundan keyin amal qilishdan chiqadi'
-    }
+      passwordExpirationMessage:
+        'Parolingiz { days } kundan keyin amal qilishdan chiqadi',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Chat tarixini yuklashda xatolik yuz berdi',

@@ -125,12 +125,11 @@ export default {
     contact: 'Контакт | Контакты',
     notification: 'Уведомление | Уведомления',
     screencast: 'Запись экрана',
-    extension: 'Расширение',
     password: 'Пароль',
     number: 'Номер',
-    expireAt: 'Истекает',
+    expireAt: 'Срок действия',
     destination: 'Назначение',
-    utilizationProgress: 'Прогресс использования'
+    utilizationProgress: 'Прогресс использования',
   },
   // date-related texts
   date: {
@@ -511,7 +510,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакты`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -571,7 +570,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Ваш PDF-файл генерируется…'
+      generationStarted: 'Ваш PDF-файл генерируется…',
     },
     saveFailedPopup: {
       title: 'Ошибка сохранения',
@@ -788,8 +787,8 @@ export default {
       delete: ({ named }) => `${named('entity')} был удалён`,
     },
     info: {
-      passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)'
-    }
+      passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Произошла ошибка загрузки истории чата',

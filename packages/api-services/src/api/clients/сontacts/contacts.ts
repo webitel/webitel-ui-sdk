@@ -112,20 +112,20 @@ const getList = async (params) => {
 			q: searchValue || '',
 			qin: searchKey || '',
 		};
+	}
 
-		if (params.hasUser != null) {
-			changedParams.user = params.hasUser;
-		}
+	if (params.hasUser != null) {
+		changedParams.user = params.hasUser;
+	}
 
-		if (params.contactGroup) {
-			changedParams.group = [...params.contactGroup.list];
-		}
-		if (params.contactLabel) {
-			changedParams.label = params.contactLabel.map((item) => item.label);
-		}
-		if (params.contactOwner) {
-			changedParams.owner = params.contactOwner;
-		}
+	if (params.contactGroup) {
+		changedParams.group = [...params.contactGroup.list];
+	}
+	if (params.contactLabel) {
+		changedParams.label = params.contactLabel.map((item) => item.label);
+	}
+	if (params.contactOwner) {
+		changedParams.owner = params.contactOwner;
 	}
 
 	if (params.parentId) {
