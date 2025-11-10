@@ -1,4 +1,10 @@
-import { getAgentAbsenceService } from '@webitel/api-services/gen';
+import type {
+  AgentAbsenceServiceCreateAgentAbsenceBody,
+  AgentAbsenceServiceSearchAgentsAbsencesParams,
+} from '@webitel/api-services/gen';
+import {
+  getAgentAbsenceService,
+} from '@webitel/api-services/gen';
 
 import { getDefaultGetParams } from '../../defaults';
 import {
@@ -10,7 +16,7 @@ import {
 
 export const agentAbsenceService = getAgentAbsenceService();
 
-const getAgentAbsenceList = async (params) => {
+const getAgentAbsenceList = async (params: AgentAbsenceServiceSearchAgentsAbsencesParams) => {
   const { q, page, size, sort, fields } = applyTransform(params, [
     merge(getDefaultGetParams()),
   ]);
@@ -34,17 +40,27 @@ const getAgentAbsenceList = async (params) => {
   }
 };
 
-const getAgentAbsence = async ({ itemId: id }) => {
+export interface GetAgentAbsenceParams {
+  agentId: string,
+  itemId: string,
+}
+
+const getAgentAbsence = async ({ agentId, itemId: id }: GetAgentAbsenceParams) => {
   try {
     const response =
-      await agentAbsenceService.agentAbsenceServiceSearchAgentAbsence(id);
+      await agentAbsenceService.agentAbsenceServiceReadAgentAbsence(agentId, id);
     return applyTransform(response.data, [snakeToCamel()]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
 };
 
-const addAgentAbsence = async ({ agentId, itemInstance }) => {
+export interface AddAgentAbsenceParams {
+  agentId: string,
+  itemInstance: AgentAbsenceServiceCreateAgentAbsenceBody
+}
+
+const addAgentAbsence = async ({ agentId, itemInstance }: AddAgentAbsenceParams) => {
   try {
     const response =
       await agentAbsenceService.agentAbsenceServiceCreateAgentAbsence(
@@ -57,11 +73,44 @@ const addAgentAbsence = async ({ agentId, itemInstance }) => {
   }
 };
 
-const updateAgentAbsence = async ({ itemInstance, itemId: id }) => {};
+export interface UpdateAgentAbsenceParams {
+  itemId: string,
+  itemInstance: AgentAbsenceServiceCreateAgentAbsenceBody
+}
 
-const deleteAgentAbsence = async ({ id }) => {};
+const updateAgentAbsence = async ({ itemInstance, itemId }: UpdateAgentAbsenceParams) => {
+  try {
+    const response =
+      await agentAbsenceService.agentAbsenceServiceUpdateAgentAbsence(
+        itemId,
+        itemInstance,
+      );
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
 
-const getAgentAbsenceLookup = (params) => {
+
+export interface DeleteAgentAbsenceParams {
+  id: string,
+  agentId: string
+}
+
+const deleteAgentAbsence = async ({ id, agentId }: DeleteAgentAbsenceParams) => {
+  try {
+    const response =
+      await agentAbsenceService.agentAbsenceServiceDeleteAgentAbsence(
+        agentId,
+        id,
+      );
+    return applyTransform(response.data, [snakeToCamel()]);
+  } catch (err) {
+    throw applyTransform(err, [notify]);
+  }
+};
+
+const getAgentAbsenceLookup = (params: AgentAbsenceServiceSearchAgentsAbsencesParams) => {
   return getAgentAbsenceList({
     ...params,
     fields: params.fields || ['id', 'name'],
