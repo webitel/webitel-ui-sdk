@@ -101,7 +101,7 @@ const getList = async (params) => {
 			searchValue = params[ContactsSearchMode.DESTINATION];
 			searchKey = 'emails,phones,imclients{user{name}}';
 		}
-	
+
 		// This code needed for adding starToSearch method to applyTransform while searchKey !== SearchMode.VARIABLES because '*' in variables search mode brokes backend logic.
 		// if (searchKey !== ContactsSearchMode.VARIABLES) {
 		//   transformations.push(starToSearch('q')); WTEL-4265
@@ -127,7 +127,6 @@ const getList = async (params) => {
 	if (params.contactOwner) {
 		changedParams.owner = params.contactOwner;
 	}
-	
 
 	if (params.parentId) {
 		changedParams.group = [params.parentId];
