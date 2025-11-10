@@ -36,7 +36,6 @@ export const createUserinfoStore = () => {
     const initialize = async () => {
       const session = await getSession();
       const access = await getUiVisibilityAccess();
-      await settings.initialize();
 
       userId.value = session.userId;
       userInfo.value = pick(session, [
@@ -54,6 +53,7 @@ export const createUserinfoStore = () => {
         permissions: session.permissions,
         access,
       });
+      await settings.initialize();
     };
 
     const logoutUser = async () => {
@@ -68,6 +68,7 @@ export const createUserinfoStore = () => {
     return {
       userId,
       userInfo,
+      settings,
       initialize,
 
       hasReadAccess,
