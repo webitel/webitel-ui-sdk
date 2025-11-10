@@ -104,7 +104,7 @@ export default {
 }
 
 .wt-tab {
-  @extend %typo-body-1;
+  @extend %typo-body-1-bold;
   display: inline-block;
   position: relative;
   z-index: var(--tab-z-index);
