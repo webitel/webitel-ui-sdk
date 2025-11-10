@@ -1,6 +1,7 @@
 import { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
+import deepmerge from 'deepmerge';
 import { computed, nextTick, ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
@@ -82,11 +83,17 @@ export const tableHeadersStoreBody = ({
       shouldBeInitialized: true,
     }));
 
-    const mergedHeaders = [...newHeaders, ...customFieldHeaders];
+    const mergedHeaders = [
+      ...newHeaders.map((item) => ({ ...item })),
+      ...customFieldHeaders.map((item) => ({ ...item })),
+    ];
+
     const orderedFields = fields.filter((field) =>
       mergedHeaders.some((header) => header.field === field),
     );
-    const reordered = setHeaderOrder(orderedFields);
+    const reordered = setHeaderOrder([
+      ...orderedFields.map((item) => ({ ...item })),
+    ]);
 
     updateShownHeaders([...reordered, ...mergedHeaders]);
   };
