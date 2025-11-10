@@ -1,8 +1,7 @@
 import { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
-import deepmerge from 'deepmerge';
-import { computed, nextTick, ref } from 'vue';
+import { computed, nextTick, ref, toRaw, unref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
@@ -65,7 +64,21 @@ export const tableHeadersStoreBody = ({
 
     const newOrder = orderedFields.map((field) => arrayFieldOrder.get(field));
 
-    return newOrder.map((idx) => headers.value[idx]).filter((header) => header);
+    const newOrderFiltered = newOrder
+      .map((idx) => headers.value[idx])
+      .filter((header) => unref(header));
+
+    /**
+     * @author @Oleksandr Palonnyi
+     *
+     * [WTEL-8038](https://webitel.atlassian.net/browse/WTEL-8038)
+     *
+     * Each item in `newOrderFiltered` can be a ref or a reactive proxy.
+     * We unwrap it with `unref()` and `toRaw()` to get plain objects,
+     * so that equality checks during array merge (e.g. [...newOrderFiltered, ...arr])
+     * correctly detect duplicates instead of treating proxied objects as unique.
+     * */
+    return newOrderFiltered.map((item) => toRaw(unref(item)));
   };
 
   const updateFields = (fields: string[]) => {
@@ -83,17 +96,11 @@ export const tableHeadersStoreBody = ({
       shouldBeInitialized: true,
     }));
 
-    const mergedHeaders = [
-      ...newHeaders.map((item) => ({ ...item })),
-      ...customFieldHeaders.map((item) => ({ ...item })),
-    ];
-
+    const mergedHeaders = [...newHeaders, ...customFieldHeaders];
     const orderedFields = fields.filter((field) =>
       mergedHeaders.some((header) => header.field === field),
     );
-    const reordered = setHeaderOrder([
-      ...orderedFields.map((item) => ({ ...item })),
-    ]);
+    const reordered = setHeaderOrder(orderedFields);
 
     updateShownHeaders([...reordered, ...mergedHeaders]);
   };
