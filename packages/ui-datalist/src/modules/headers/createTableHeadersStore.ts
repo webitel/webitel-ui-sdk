@@ -1,7 +1,7 @@
 import { WtTableHeader } from '@webitel/ui-sdk/components/wt-table/types/WtTable';
 import { sortToQueryAdapter } from '@webitel/ui-sdk/scripts';
 import { SortSymbols } from '@webitel/ui-sdk/scripts/sortQueryAdapters';
-import { computed, nextTick, ref, toRaw, unref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 
 import { createDatalistStore } from '../_shared/createDatalistStore';
 import { PersistedStorageType } from '../persist/PersistedStorage.types';
@@ -66,19 +66,22 @@ export const tableHeadersStoreBody = ({
 
     const newOrderFiltered = newOrder
       .map((idx) => headers.value[idx])
-      .filter((header) => unref(header));
+      .filter((header) => header);
 
     /**
      * @author @Oleksandr Palonnyi
      *
      * [WTEL-8038](https://webitel.atlassian.net/browse/WTEL-8038)
      *
-     * Each item in `newOrderFiltered` can be a ref or a reactive proxy.
-     * We unwrap it with `unref()` and `toRaw()` to get plain objects,
-     * so that equality checks during array merge (e.g. [...newOrderFiltered, ...arr])
-     * correctly detect duplicates instead of treating proxied objects as unique.
+     * Additionally, we append the `show: true` property to each item
+     * to ensure that all newly processed elements are visible by default.
      * */
-    return newOrderFiltered.map((item) => toRaw(unref(item)));
+    return newOrderFiltered.map((item) => {
+      return {
+        ...item,
+        show: true,
+      };
+    });
   };
 
   const updateFields = (fields: string[]) => {
@@ -102,7 +105,11 @@ export const tableHeadersStoreBody = ({
     );
     const reordered = setHeaderOrder(orderedFields);
 
-    updateShownHeaders([...reordered, ...mergedHeaders]);
+    const uniqueMerged = mergedHeaders.filter(
+      (merged) => !reordered.some((r) => r.field === merged.field),
+    );
+
+    updateShownHeaders([...reordered, ...uniqueMerged]);
   };
 
   const updateSort = (column) => {
