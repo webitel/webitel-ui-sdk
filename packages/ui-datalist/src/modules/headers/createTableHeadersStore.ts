@@ -64,7 +64,24 @@ export const tableHeadersStoreBody = ({
 
     const newOrder = orderedFields.map((field) => arrayFieldOrder.get(field));
 
-    return newOrder.map((idx) => headers.value[idx]).filter((header) => header);
+    const newOrderFiltered = newOrder
+      .map((idx) => headers.value[idx])
+      .filter((header) => header);
+
+    /**
+     * @author @Oleksandr Palonnyi
+     *
+     * [WTEL-8038](https://webitel.atlassian.net/browse/WTEL-8038)
+     *
+     * Additionally, we append the `show: true` property to each item
+     * to ensure that all newly processed elements are visible by default.
+     * */
+    return newOrderFiltered.map((item) => {
+      return {
+        ...item,
+        show: true,
+      };
+    });
   };
 
   const updateFields = (fields: string[]) => {
@@ -88,7 +105,11 @@ export const tableHeadersStoreBody = ({
     );
     const reordered = setHeaderOrder(orderedFields);
 
-    updateShownHeaders([...reordered, ...mergedHeaders]);
+    const uniqueMerged = mergedHeaders.filter(
+      (merged) => !reordered.some((r) => r.field === merged.field),
+    );
+
+    updateShownHeaders([...reordered, ...uniqueMerged]);
   };
 
   const updateSort = (column) => {
