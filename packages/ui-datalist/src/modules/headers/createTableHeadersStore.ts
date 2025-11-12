@@ -57,14 +57,40 @@ export const tableHeadersStoreBody = ({
   };
 
   const setHeaderOrder = (orderedFields: string[]) => {
-    const arrayFieldOrder = new Map<string, number>();
-    headers.value.forEach((header, idx) =>
-      arrayFieldOrder.set(header.field, idx),
-    );
+    const arrayFieldOrder = new Map<string, number[]>();
+    headers.value.forEach((header, idx) => {
+      if (!arrayFieldOrder.has(header.field)) {
+        arrayFieldOrder.set(header.field, []);
+      }
+      arrayFieldOrder.get(header.field)!.push(idx);
+    });
 
-    const newOrder = orderedFields.map((field) => arrayFieldOrder.get(field));
+    const newOrder = [];
+    for (const field of orderedFields) {
+      const indices = arrayFieldOrder.get(field);
+      if (indices && indices.length) {
+        newOrder.push(indices.shift()!);
+      }
+    }
 
-    return newOrder.map((idx) => headers.value[idx]).filter((header) => header);
+    const newOrderFiltered = newOrder
+      .map((idx) => headers.value[idx])
+      .filter((header) => header);
+
+    /**
+     * @author @Oleksandr Palonnyi
+     *
+     * [WTEL-8038](https://webitel.atlassian.net/browse/WTEL-8038)
+     *
+     * Additionally, we append the `show: true` property to each item
+     * to ensure that all newly processed elements are visible by default.
+     * */
+    return newOrderFiltered.map((item) => {
+      return {
+        ...item,
+        show: true,
+      };
+    });
   };
 
   const updateFields = (fields: string[]) => {
@@ -88,7 +114,11 @@ export const tableHeadersStoreBody = ({
     );
     const reordered = setHeaderOrder(orderedFields);
 
-    updateShownHeaders([...reordered, ...mergedHeaders]);
+    const uniqueMerged = mergedHeaders.filter(
+      (merged) => !reordered.some((r) => r.field === merged.field),
+    );
+
+    updateShownHeaders([...reordered, ...uniqueMerged]);
   };
 
   const updateSort = (column) => {
