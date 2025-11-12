@@ -5,6 +5,7 @@ import 'vidstack/bundle';
 import './css/main.scss';
 import './css/tailwind.css';
 import './assets/icons/sprite/index.js';
+import './globals/wt-date.global';
 
 import { generateInstance } from '@webitel/api-services/api/axios';
 
