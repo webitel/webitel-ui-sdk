@@ -86,10 +86,8 @@ const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
   cursor: pointer;
   user-select: none;
   transition: var(--transition);
-  margin-left: var(--switcher-icon-margin);
 
   .wt-switcher--label-left & {
-    margin-right: var(--switcher-icon-margin);
     margin-left: 0;
   }
 }
