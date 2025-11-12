@@ -28,7 +28,7 @@ export const createUserinfoStore = () => {
       hasSectionVisibility,
       hasApplicationVisibility,
     } = accessStore;
-    const settings = useSettingsStore();
+    const { initialize: initializeSettingsStore, timezone } = useSettingsStore();
 
     const userId = ref();
     const userInfo = ref(null);
@@ -53,7 +53,8 @@ export const createUserinfoStore = () => {
         permissions: session.permissions,
         access,
       });
-      await settings.initialize();
+
+      await initializeSettingsStore();
     };
 
     const logoutUser = async () => {
@@ -68,7 +69,7 @@ export const createUserinfoStore = () => {
     return {
       userId,
       userInfo,
-      settings,
+      timezone,
       initialize,
 
       hasReadAccess,

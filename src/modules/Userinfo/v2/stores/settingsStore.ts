@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import UserSettingsAPI from '../api/UserSettingsAPI';
 import { TIMEZONE_STORAGE_KEY } from '../constants/UserSettingsConstants';
 
-export const createSettingsStore = ({ namespace = 'userinfo' }) => {
+export const createSettingsStore = ({ namespace = 'userinfo' } = {}) => {
   return defineStore(`${namespace}/settings`, () => {
     const timezone = ref<string | null>(null);
 
