@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="wt-switcher" 
+  <div
+    class="wt-switcher"
     :class="{ 'wt-switcher--label-left': labelLeft }"
   >
     <p-toggle-switch
@@ -68,6 +68,8 @@ const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
 </style>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .wt-switcher {
   position: relative;
   box-sizing: border-box;
@@ -81,7 +83,13 @@ const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
   }
 }
 
+.wt-label {
+  @extend %typo-subtitle-2;
+  margin-left: var(--spacing-xs);
+}
+
 .wt-switcher__label {
+  @extend %typo-subtitle-2;
   cursor: pointer;
   user-select: none;
   transition: var(--transition);
