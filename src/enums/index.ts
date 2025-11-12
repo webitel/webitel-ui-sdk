@@ -11,6 +11,8 @@ import { CrudAction } from './CrudAction/CrudAction';
 import { EmptyCause } from './EmptyCause/EmptyCause';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
+import { MessageColor } from './MessageColor/MessageColor';
+import { MessageVariant } from './MessageVariant/MessageVariant';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
 import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
@@ -40,6 +42,8 @@ export {
   EmptyCause,
   IconAction,
   IconColor,
+  MessageColor,
+  MessageVariant,
   ProcessingTableColumnType,
   ProviderIconType,
   QueueType,

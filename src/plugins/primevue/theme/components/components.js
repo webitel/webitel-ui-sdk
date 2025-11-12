@@ -7,7 +7,9 @@ import chip from './chip/chip.js';
 import divider from './divider/divider.js';
 import galleria from './galleria/galleria.js';
 import image from './image/image.js';
+import inputGroup from './input-group/input-group.js';
 import menubar from './menubar/menubar.js';
+import message from './message/message.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
 import slider from './slider/slider.js';
@@ -26,7 +28,9 @@ const components = {
   toggleswitch: switcher,
   divider,
   image,
+  inputgroup: inputGroup,
   menubar,
+  message,
   popover,
   radiobutton: radio,
   slider,
