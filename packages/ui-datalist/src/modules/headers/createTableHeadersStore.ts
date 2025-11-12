@@ -57,12 +57,21 @@ export const tableHeadersStoreBody = ({
   };
 
   const setHeaderOrder = (orderedFields: string[]) => {
-    const arrayFieldOrder = new Map<string, number>();
-    headers.value.forEach((header, idx) =>
-      arrayFieldOrder.set(header.field, idx),
-    );
+    const arrayFieldOrder = new Map<string, number[]>();
+    headers.value.forEach((header, idx) => {
+      if (!arrayFieldOrder.has(header.field)) {
+        arrayFieldOrder.set(header.field, []);
+      }
+      arrayFieldOrder.get(header.field)!.push(idx);
+    });
 
-    const newOrder = orderedFields.map((field) => arrayFieldOrder.get(field));
+    const newOrder = [];
+    for (const field of orderedFields) {
+      const indices = arrayFieldOrder.get(field);
+      if (indices && indices.length) {
+        newOrder.push(indices.shift()!);
+      }
+    }
 
     const newOrderFiltered = newOrder
       .map((idx) => headers.value[idx])
