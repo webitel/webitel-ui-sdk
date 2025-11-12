@@ -43,6 +43,7 @@ import WtLabel from './wt-label/wt-label.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
 import WtLoader from './wt-loader/wt-loader.vue';
 import WtLogo from './wt-logo/wt-logo.vue';
+import WtMessage from './wt-message/wt-message.vue';
 import WtNavigationBar from './wt-navigation-bar/wt-navigation-bar.vue';
 import WtNotification from './wt-notification/wt-notification.vue';
 import WtNotificationsBar from './wt-notifications-bar/wt-notifications-bar.vue';
@@ -84,6 +85,7 @@ const Components = {
   WtIcon,
   WtIndicator,
   WtInputInfo,
+  WtMessage,
   WtButton,
   WtChip,
   WtConfirmDialog,
@@ -192,6 +194,7 @@ export {
   WtLoadBar,
   WtLoader,
   WtLogo,
+  WtMessage,
   WtNavigationBar,
   WtNavigationMenu,
   WtNotification,
