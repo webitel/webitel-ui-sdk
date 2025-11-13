@@ -19,7 +19,7 @@ const getAuditFormsList = async (params) => {
 		searchAuditFormQueryParams,
 	);
 
-  const transformedParams = applyTransform(params, [
+	const transformedParams = applyTransform(params, [
 		merge(getDefaultGetParams()),
 		(params) => ({ ...params, q: params.search }),
 		sanitize(fieldsToSend),
@@ -62,4 +62,3 @@ export const AuditFormsAPI = {
 	get: getAuditForm,
 	getLookup,
 };
-
