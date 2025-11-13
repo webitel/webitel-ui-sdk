@@ -10,6 +10,7 @@ import image from './image/image.js';
 import inputGroup from './input-group/input-group.js';
 import menubar from './menubar/menubar.js';
 import message from './message/message.js';
+import password from './password/password.js';
 import popover from './popover/popover.js';
 import radio from './radio/radio.js';
 import slider from './slider/slider.js';
@@ -31,6 +32,7 @@ const components = {
   inputgroup: inputGroup,
   menubar,
   message,
+  password,
   popover,
   radiobutton: radio,
   slider,
