@@ -38,6 +38,7 @@ import WtIndicator from './wt-indicator/wt-indicator.vue';
 import WtInput from './wt-input/wt-input.vue';
 import WtInputInfo from './wt-input-info/wt-input-info.vue';
 import WtIntersectionObserver from './wt-intersection-observer/wt-intersection-observer.vue';
+import WtPassword from './wt-password/wt-password.vue';
 import WtItemLink from './wt-item-link/wt-item-link.vue';
 import WtLabel from './wt-label/wt-label.vue';
 import WtLoadBar from './wt-load-bar/wt-load-bar.vue';
@@ -85,6 +86,7 @@ const Components = {
   WtIcon,
   WtIndicator,
   WtInputInfo,
+  WtPassword,
   WtMessage,
   WtButton,
   WtChip,
@@ -190,6 +192,7 @@ export {
   WtInputInfo,
   WtIntersectionObserver,
   WtItemLink,
+  WtPassword,
   WtLabel,
   WtLoadBar,
   WtLoader,

@@ -15,6 +15,7 @@ import PInputGroupAddon from 'primevue/inputgroupaddon';
 import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
 import PMessage from 'primevue/message';
+import PPassword from 'primevue/password';
 import PPopover from 'primevue/popover';
 import PRadio from 'primevue/radiobutton';
 import PSlider from 'primevue/slider'
@@ -59,6 +60,7 @@ const initPrimevue = (app) => {
   app.component('PImage', changeComponentCompatMode(PImage));
   app.component('PGalleria', changeComponentCompatMode(PGalleria));
   app.component('PInputGroup', changeComponentCompatMode(PInputGroup));
+  app.component('PPassword', changeComponentCompatMode(PPassword));
   app.component('PInputGroupAddon', changeComponentCompatMode(PInputGroupAddon));
   app.component('PMessage', changeComponentCompatMode(PMessage));
 
