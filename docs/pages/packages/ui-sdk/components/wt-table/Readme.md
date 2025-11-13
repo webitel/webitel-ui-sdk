@@ -1,5 +1,6 @@
 <script setup>
 import ExampleTable from './examples/example-table.vue';
+import ExampleTableWithCustomHeaders from './examples/example-table-with-custom-headers.vue';
 import ExampleTableWithVerticalScroll from './examples/example-table-with-virtual-scroll.vue';
 import Specs from './component-specs.vue';
 </script>
@@ -30,6 +31,18 @@ This example demonstrates how to use `wt-table` with virtual scrolling for large
 
 ::: details Code
 <<< ./examples/example-table-with-virtual-scroll.vue
+:::
+
+## Table with Vertical Scroll
+
+This example demonstrates how to use `wt-table` with custom headers.
+
+::: raw
+<ExampleTableWithCustomHeaders />
+:::
+
+::: details Code
+<<< ./examples/example-table-with-custom-headers.vue
 :::
 
 ### Key Features of this Example:
@@ -80,9 +93,9 @@ const lazy = ref(true);
 
 const handleLazyLoad = () => {
   if (loading.value) return;
-  
+
   loading.value = true;
-  
+
   // Simulate API call
   setTimeout(() => {
     // Add new data
@@ -93,7 +106,7 @@ const handleLazyLoad = () => {
         // ... other properties
       });
     }
-    
+
     loading.value = false;
   }, 500);
 };
