@@ -9,7 +9,6 @@ const password = ref('');
     v-model="password"
     label="Password"
     placeholder="Enter your password"
-    @keyup.enter="console.log('enter')"
   />
 </template>
 
