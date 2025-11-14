@@ -11,7 +11,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import type {
 	ContactsGetTimelineCounterResponse,
 	ContactsGetTimelineResponse,
-	GetTimelineParams,
+	GetTimelineTimelineParams,
 } from '.././_models';
 
 // --- header start
@@ -22,9 +22,11 @@ export const // --- title start
 		// --- title end
 		() => {
 			// --- header end
-			const getTimeline = <TData = AxiosResponse<ContactsGetTimelineResponse>>(
+			const getTimelineTimeline = <
+				TData = AxiosResponse<ContactsGetTimelineResponse>,
+			>(
 				contactId: string,
-				params?: GetTimelineParams,
+				params?: GetTimelineTimelineParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/contacts/${contactId}/timeline`, {
@@ -32,7 +34,7 @@ export const // --- title start
 					params: { ...params, ...options?.params },
 				});
 			};
-			const getTimelineCounter = <
+			const getTimelineCounterTimeline = <
 				TData = AxiosResponse<ContactsGetTimelineCounterResponse>,
 			>(
 				contactId: string,
@@ -42,10 +44,11 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { getTimeline, getTimelineCounter };
+			return { getTimelineTimeline, getTimelineCounterTimeline };
 		};
-export type GetTimelineResult = AxiosResponse<ContactsGetTimelineResponse>;
-export type GetTimelineCounterResult =
+export type GetTimelineTimelineResult =
+	AxiosResponse<ContactsGetTimelineResponse>;
+export type GetTimelineCounterTimelineResult =
 	AxiosResponse<ContactsGetTimelineCounterResponse>;
 
 // --- footer end

@@ -38,4 +38,8 @@ export type SearchCases2Params = {
 	 * Specify which fields to apply 'q' to.
 	 */
 	qin?: string;
+	/**
+	 * Updated filters with CEL syntax.
+	 */
+	filtersV1?: string;
 };

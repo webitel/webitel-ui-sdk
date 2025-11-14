@@ -138,7 +138,7 @@ export const getSearchCommentsResponseMock = (
 	...overrideResponse,
 });
 
-export const getPublishCommentResponseMock = (
+export const getPublishCommentCommentsResponseMock = (
 	overrideResponse: Partial<ContactsComment> = {},
 ): ContactsComment => ({
 	createdAt: faker.helpers.arrayElement([
@@ -249,7 +249,7 @@ export const getPublishCommentResponseMock = (
 	...overrideResponse,
 });
 
-export const getDeleteCommentResponseMock = (): ContactsComment[] =>
+export const getDeleteCommentCommentsResponseMock = (): ContactsComment[] =>
 	Array.from(
 		{ length: faker.number.int({ min: 1, max: 10 }) },
 		(_, i) => i + 1,
@@ -365,7 +365,7 @@ export const getDeleteCommentResponseMock = (): ContactsComment[] =>
 		]),
 	}));
 
-export const getUpdateCommentResponseMock = (
+export const getUpdateCommentCommentsResponseMock = (
 	overrideResponse: Partial<ContactsComment> = {},
 ): ContactsComment => ({
 	createdAt: faker.helpers.arrayElement([
@@ -499,7 +499,7 @@ export const getSearchCommentsMockHandler = (
 	});
 };
 
-export const getPublishCommentMockHandler = (
+export const getPublishCommentCommentsMockHandler = (
 	overrideResponse?:
 		| ContactsComment
 		| ((
@@ -515,14 +515,14 @@ export const getPublishCommentMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getPublishCommentResponseMock(),
+					: getPublishCommentCommentsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getDeleteCommentMockHandler = (
+export const getDeleteCommentCommentsMockHandler = (
 	overrideResponse?:
 		| ContactsComment[]
 		| ((
@@ -538,14 +538,14 @@ export const getDeleteCommentMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getDeleteCommentResponseMock(),
+					: getDeleteCommentCommentsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getUpdateCommentMockHandler = (
+export const getUpdateCommentCommentsMockHandler = (
 	overrideResponse?:
 		| ContactsComment
 		| ((
@@ -561,7 +561,7 @@ export const getUpdateCommentMockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getUpdateCommentResponseMock(),
+					: getUpdateCommentCommentsResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
@@ -569,7 +569,7 @@ export const getUpdateCommentMockHandler = (
 };
 export const getCommentsMock = () => [
 	getSearchCommentsMockHandler(),
-	getPublishCommentMockHandler(),
-	getDeleteCommentMockHandler(),
-	getUpdateCommentMockHandler(),
+	getPublishCommentCommentsMockHandler(),
+	getDeleteCommentCommentsMockHandler(),
+	getUpdateCommentCommentsMockHandler(),
 ];

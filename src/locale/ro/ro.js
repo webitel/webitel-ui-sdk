@@ -126,11 +126,11 @@ export default {
     column: 'Coloană | Coloane',
     notification: 'Notificare | Notificări',
     screencast: 'Înregistrare ecran',
-    extension: 'Extensie',
     password: 'Parolă',
     number: 'Număr',
     expireAt: 'Expiră la',
     destination: 'Destinație',
+    utilizationProgress: 'Progresul utilizării',
   },
   // date-related texts
   date: {
@@ -176,14 +176,21 @@ export default {
     transcription: 'Transcriere',
     attachment: 'Atașament | Atașamente',
     owner: 'Proprietar | Proprietari',
+    skill: 'Competență | Competențe',
     customization: {
       customization: 'Personalizare | Personalizări',
     },
     customLookup: {
       customLookup: 'Personalizare | Personalizări',
     },
+    chatGateway: 'Gateway chat | Gateway-uri chat',
+    chat: {
+      chat: 'Chat | Chat-uri',
+      draftPlaceholder: 'Scrie un mesaj...',
+    },
     queue: {
       queue: 'Coadă | Cozi',
+      queueType: 'Tip de coadă | Tipuri de cozi',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Coadă intrare',
         [QueueType.OFFLINE_QUEUE]: 'Coadă offline',
@@ -370,6 +377,7 @@ export default {
         [AdminSections.QuickReplies]: 'Răspunsuri rapide',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Câmpul este obligatoriu',
@@ -507,6 +515,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacte`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -567,7 +576,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Fișierul dvs. PDF este în curs de creare…'
+      generationStarted: 'Fișierul dvs. PDF este în curs de creare…',
     },
     saveFailedPopup: {
       title: 'Salvarea a eșuat',
@@ -726,6 +735,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Șablon | Șabloane',
         overwritePresetTitle: 'Un șablon cu acest nume există deja.',
@@ -758,6 +791,9 @@ export default {
         `${named('entity').toLowerCase()} a fost actualizat`,
       create: ({ named }) => `${named('entity').toLowerCase()} a fost salvat`,
       delete: ({ named }) => `${named('entity').toLowerCase()} a fost șters`,
+    },
+    info: {
+      passwordExpirationMessage: 'Parola ta va expira în { days } zile',
     },
   },
   errorNotifications: {

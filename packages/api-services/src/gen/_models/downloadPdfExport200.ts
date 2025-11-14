@@ -5,9 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 import type { GoogleRpcStatus } from './googleRpcStatus';
-import type { WebitelPdfPdfExportChunk } from './webitelPdfPdfExportChunk';
+import type { WebitelMediaExporterPdfExportChunk } from './webitelMediaExporterPdfExportChunk';
 
 export type DownloadPdfExport200 = {
 	error?: GoogleRpcStatus;
-	result?: WebitelPdfPdfExportChunk;
+	result?: WebitelMediaExporterPdfExportChunk;
 };

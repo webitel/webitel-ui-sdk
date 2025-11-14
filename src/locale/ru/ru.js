@@ -125,11 +125,11 @@ export default {
     contact: 'Контакт | Контакты',
     notification: 'Уведомление | Уведомления',
     screencast: 'Запись экрана',
-    extension: 'Расширение',
     password: 'Пароль',
     number: 'Номер',
-    expireAt: 'Истекает',
+    expireAt: 'Срок действия',
     destination: 'Назначение',
+    utilizationProgress: 'Прогресс использования',
   },
   // date-related texts
   date: {
@@ -175,6 +175,7 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Вложение | Вложения',
     owner: 'Владелец | Владельцы',
+    skill: 'Навык | Навыки',
     customization: {
       customization: 'Персонализация | Персонализации',
     },
@@ -182,8 +183,14 @@ export default {
       customLookup:
         'Пользовательский справочник | Пользовательские справочники',
     },
+    chatGateway: 'Текстовый шлюз | Текстовые шлюзы',
+    chat: {
+      chat: 'Чат | Чаты',
+      draftPlaceholder: 'Напишите сообщение...',
+    },
     queue: {
       queue: 'Очередь | Очереди',
+      queueType: 'Тип очереди | Типы очередей',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Входящая очередь',
         [QueueType.OFFLINE_QUEUE]: 'Оффлайн очередь',
@@ -369,6 +376,7 @@ export default {
         [AdminSections.QuickReplies]: 'Быстрые ответы',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Обязательное поле',
@@ -502,6 +510,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакты`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -561,7 +570,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Ваш PDF-файл генерируется…'
+      generationStarted: 'Ваш PDF-файл генерируется…',
     },
     saveFailedPopup: {
       title: 'Ошибка сохранения',
@@ -721,6 +730,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Пресет | Пресеты',
         overwritePresetTitle: 'Пресет с таким названием уже существует.',
@@ -752,6 +785,9 @@ export default {
       update: ({ named }) => `${named('entity')} был обновлён`,
       create: ({ named }) => `${named('entity')} был сохранён`,
       delete: ({ named }) => `${named('entity')} был удалён`,
+    },
+    info: {
+      passwordExpirationMessage: 'Ваш пароль истечёт через { days } дн(я/ей)',
     },
   },
   errorNotifications: {

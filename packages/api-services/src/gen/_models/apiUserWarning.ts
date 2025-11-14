@@ -4,10 +4,10 @@
  * Webitel API
  * OpenAPI spec version: 24.04.0
  */
-import type { ApiPasswordExpiryWarning } from './apiPasswordExpiryWarning';
+import type { ApiWarningData } from './apiWarningData';
 
 export interface ApiUserWarning {
 	detail?: string;
 	id?: string;
-	passwordExpiry?: ApiPasswordExpiryWarning;
+	warningData?: ApiWarningData;
 }

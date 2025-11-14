@@ -6,5 +6,5 @@
  */
 
 export interface StorageFilePoliciesServiceFilePolicyApplyBody {
-	[key: string]: unknown;
+	applyToNullChannel?: boolean;
 }

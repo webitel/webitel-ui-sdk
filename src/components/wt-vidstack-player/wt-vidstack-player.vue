@@ -7,21 +7,29 @@
       ref="player"
       :src="playerSrc"
       :autoplay="props.autoplay"
+      :muted="props.muted"
       class="wt-vidstack-player__player"
       cross-origin
       plays-inline
       @close="emit('close')"
       @change-size="changeSize"
     >
-      <media-provider></media-provider>
+      <media-provider
+        class="wt-vidstack-player__provider"
+      ></media-provider>
       <video-layout
         :closable="props.closable"
         :autoplay="props.autoplay"
         :title="props.title"
         :username="props.username"
         :session="props.session"
+        :screenshot-status="props.screenshotStatus"
+        :screenshot-is-loading="screenshotIsLoading"
         :mode="mode"
         @close-player="emit('close')"
+        @close-session="emit('close-session')"
+        @make-screenshot="emit('make-screenshot')"
+        @toggle-record="emit('toggle-record')"
       />
 
     </media-player>
@@ -33,10 +41,20 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type { MediaPlayerElement } from 'vidstack/elements';
-import {computed, defineEmits, defineProps, onMounted,provide, ref, useTemplateRef} from 'vue';
+import {
+  computed,
+  defineEmits,
+  defineProps,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  useTemplateRef
+} from 'vue';
 
 import {ComponentSize} from '../../enums';
 import VideoLayout from './components/layouts/video-layout.vue';
+import {ScreenshotStatus} from "./types/ScreenshotStatus";
 import {WtVidstakPlayerControlsMode} from "./types/WtVidstackPlayerControlsMode";
 import {WtVidstackPlayerSession} from "./types/WtVidstackPlayerSession";
 
@@ -44,17 +62,21 @@ interface Props {
   src: string | { src: string; type?: string };
   mime?: string;
   autoplay?: boolean;
+  muted?: boolean;
   title?: string;
   username?: string;
   closable?: boolean;
   stream?: MediaStream
   mode: WtVidstakPlayerControlsMode;
   session?: WtVidstackPlayerSession
+  screenshotStatus: ScreenshotStatus
+  screenshotIsLoading: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   mime: 'video/mp4',
   autoplay: false,
+  muted: false,
   title: '',
   username: '',
   closable: false,
@@ -63,6 +85,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   'close': [],
+  'close-session': [],
+  'make-screenshot': [],
+  'toggle-record': [],
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
@@ -100,16 +125,30 @@ const playerSrc = computed(() => {
 });
 
 /** @author @Oleksandr Palonnyi
- * Attach MediaStream to Vidstack player after mount.
- * A short delay ensures the internal <video> is ready before playback.
+ * Binds the incoming MediaStream to the Vidstack player after mount.
+ * A brief delay ensures the internal <video> element is ready before playback starts.
  */
-onMounted(async () => {
-  if (player.value && props.mode === 'stream') {
-    setTimeout(async () => {
-      const videoEl = player.value.querySelector('video')
-      videoEl.srcObject = props.stream
+onMounted(() => {
+  if (player.value && props.mode === 'stream' && props.stream) {
+    const videoEl = player.value.querySelector('video')
+
+    videoEl.addEventListener("loadedmetadata", async () => {
       await videoEl.play().catch((err) => console.error('play error:', err))
-    }, 100)
+    })
+
+    if (videoEl.srcObject !== props.stream) {
+      setTimeout(() => {
+        videoEl.srcObject = props.stream ?? null
+      }, 200)
+    }
+  }
+})
+
+onBeforeUnmount(() => {
+  const videoEl = player.value.querySelector('video')
+  if (videoEl && videoEl.srcObject) {
+    videoEl.srcObject.getTracks().forEach(t => t.stop())
+    videoEl.srcObject = null
   }
 })
 </script>
@@ -120,9 +159,11 @@ onMounted(async () => {
 .wt-vidstack-player {
   transition: var(--transition);
 
-  .wt-vidstack-player__player {
+  &__player {
     padding: 0;
     margin: 0;
+    min-width: 0;
+    width: 100%;
   }
 
   &--sm {
@@ -134,6 +175,15 @@ onMounted(async () => {
     z-index: 100;
     border-radius: var(--p-player-wrapper-sm-border-radius);
     overflow: hidden;
+    box-shadow: var(--elevation-10);
+    height: var(--p-player-wrapper-sm-height);
+
+    .wt-vidstack-player__provider {
+      display: block;
+      height: 100%;
+      // Control bar sm height
+      padding-bottom: 48px;
+    }
   }
 
   &--md {
@@ -152,26 +202,27 @@ onMounted(async () => {
   }
 
   &--lg {
-    .wt-vidstack-player__player {
-      display: flex;
-      align-items: center;
+    .wt-vidstack-player {
+      &__player {
+        display: flex;
+        align-items: center;
+      }
+      &__provider {
+        width: 100%;
+        min-width: 0;
+      }
     }
   }
 }
+</style>
 
-media-player[data-hocus] { // hover or focus within https://vidstack.io/docs/wc/player/components/core/player/?styling=css#player.attrs
-  .controls-group {
-    opacity: 1;
-  }
-
-  .video-display-panel {
-    background: var(--p-player-head-line-hover-background);
-
-    :deep(.video-display-panel__controls) { // show panel buttons on hover
-      opacity: 1;
-    }
+<style lang="scss">
+.wt-vidstack-player {
+  video {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+    min-width: 0;
   }
 }
-
-
 </style>

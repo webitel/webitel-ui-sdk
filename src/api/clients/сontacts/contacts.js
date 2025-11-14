@@ -241,6 +241,7 @@ const fieldsToSend = [
   'timezones',
   'groups',
   'custom',
+  'phones'
 ];
 
 const sanitizeManagers = (itemInstance) => {

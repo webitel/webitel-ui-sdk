@@ -126,11 +126,11 @@ export default {
     column: 'Kolumna | Kolumny',
     notification: 'Powiadomienie | Powiadomienia',
     screencast: 'Nagranie ekranu',
-    extension: 'Rozszerzenie',
     password: 'Hasło',
     number: 'Numer',
     expireAt: 'Wygasa',
     destination: 'Cel',
+    utilizationProgress: 'Postęp wykorzystania',
   },
   // date-related texts
   date: {
@@ -176,14 +176,21 @@ export default {
     transcription: 'Transkrypcja',
     attachment: 'Załącznik | Załączniki',
     owner: 'Właściciel | Właściciele',
+    skill: 'Umiejętność | Umiejętności',
     customization: {
       customization: 'Dostosowanie | Dostosowania',
     },
     customLookup: {
       customLookup: 'Dostosowanie | Dostosowania',
     },
+    chatGateway: 'Bramka czatu | Bramki czatu',
+    chat: {
+      chat: 'Czat | Czaty',
+      draftPlaceholder: 'Napisz wiadomość...',
+    },
     queue: {
       queue: 'Kolejka | Kolejki',
+      queueType: 'Typ kolejki | Typy kolejek',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Kolejka przychodząca',
         [QueueType.OFFLINE_QUEUE]: 'Kolejka offline',
@@ -290,8 +297,7 @@ export default {
             ': ' +
             linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
-            linked('objects.customization.customization') +
-            ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+            linked('objects.customization.customization') + ': Dostosowania', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
         },
       },
     },
@@ -369,6 +375,7 @@ export default {
         [AdminSections.QuickReplies]: 'Szybkie odpowiedzi',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Pole jest wymagane',
@@ -506,6 +513,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} kontakty`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -565,7 +573,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Twój plik PDF jest tworzony…'
+      generationStarted: 'Twój plik PDF jest tworzony…',
     },
     saveFailedPopup: {
       title: 'Zapisywanie nie powiodło się',
@@ -724,6 +732,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Preset | Presety',
         overwritePresetTitle: 'Preset o tej nazwie już istnieje.',
@@ -756,6 +788,9 @@ export default {
         `${named('entity').toLowerCase()} został zaktualizowany`,
       create: ({ named }) => `${named('entity').toLowerCase()} został zapisany`,
       delete: ({ named }) => `${named('entity').toLowerCase()} został usunięty`,
+    },
+    info: {
+      passwordExpirationMessage: 'Twoje hasło wygaśnie za { days } dni',
     },
   },
   errorNotifications: {

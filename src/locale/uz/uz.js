@@ -126,12 +126,11 @@ export default {
     column: 'Ustun | Ustunlar',
     notification: 'Bildirishnoma | Bildirishnomalar',
     screencast: 'Ekran yozuvi',
-    extension: 'Kengaytma',
     password: 'Parol',
     number: 'Raqam',
     expireAt: 'Muddati',
     destination: 'Manzil',
-
+    utilizationProgress: 'Foydalanish bosqichi',
   },
   // date-related texts
   date: {
@@ -177,14 +176,21 @@ export default {
     transcription: 'Transkriptsiya',
     attachment: 'Ilova | Ilovalar',
     owner: 'Egasi | Egalari',
+    skill: 'Konikma | Konikmalar',
     customization: {
       customization: 'Maxsuslash | Maxsuslashlar',
     },
     customLookup: {
       customLookup: 'Maxsuslash | Maxsuslashlar',
     },
+    chatGateway: 'Chat shlyuzi | Chat shlyuzlari',
+    chat: {
+      chat: 'Chat | Chatlar',
+      draftPlaceholder: 'Xabar yozing...',
+    },
     queue: {
       queue: 'Navbat | Navbatlar',
+      queueType: 'Navbat turi | Navbat turlari',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Kiruvchi navbat',
         [QueueType.OFFLINE_QUEUE]: 'Oflayn navbat',
@@ -372,6 +378,7 @@ export default {
         [AdminSections.QuickReplies]: 'Tezkor javoblar',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: "Maydon to'ldirilishi shart",
@@ -509,6 +516,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} kontaktlar`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -568,7 +576,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Sizning PDF faylingiz yaratilmoqda…'
+      generationStarted: 'Sizning PDF faylingiz yaratilmoqda…',
     },
     saveFailedPopup: {
       title: 'Saqlash muvaffaqiyatsiz tugadi',
@@ -727,6 +735,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Andoza | Andozalar',
         overwritePresetTitle: 'Bu nomdagi andoza allaqachon mavjud.',
@@ -758,6 +790,10 @@ export default {
       update: ({ named }) => `${named('entity').toLowerCase()} yangilandi`,
       create: ({ named }) => `${named('entity').toLowerCase()} saqlandi`,
       delete: ({ named }) => `${named('entity').toLowerCase()} o'chirildi`,
+    },
+    info: {
+      passwordExpirationMessage:
+        'Parolingiz { days } kundan keyin amal qilishdan chiqadi',
     },
   },
   errorNotifications: {

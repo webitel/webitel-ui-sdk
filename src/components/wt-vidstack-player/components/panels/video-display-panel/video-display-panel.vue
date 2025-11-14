@@ -3,23 +3,28 @@
     class="video-display-panel controls-group"
     :class="`video-display-panel--${size}`"
   >
-    <div class="video-display-panel__title">
+    <div class="video-display-panel__head">
       <wt-avatar
         v-if="props.username"
         :username="props.username"
+        size="sm"
+        class="video-display-panel__avatar"
       />
-      {{ props.title || props.username }}
+
+      <span class="video-display-panel__title">
+        {{ props.title || props.username }}
+      </span>
     </div>
+
     <div class="video-display-panel__controls">
-      <toggle-button
-        v-if="size !== ComponentSize.LG"
-        primary-icon="collapse"
-        secondary-icon="expand"
-        color="on-dark"
-        @toggle="handlePlayerSize"
-      />
       <fullscreen-button
         @toggle="handleFullscreen"
+      />
+      <toggle-button
+        primary-icon="expand"
+        secondary-icon="collapse"
+        color="on-dark"
+        @toggle="handlePlayerSize"
       />
       <wt-icon-btn
         v-if="props.closable"
@@ -32,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, inject } from 'vue';
+import {defineEmits, defineProps, inject, onBeforeUnmount, onMounted} from 'vue';
 
 import {ComponentSize} from "../../../../../enums";
 import WtAvatar from "../../../../wt-avatar/wt-avatar.vue";
@@ -52,14 +57,60 @@ const emit = defineEmits<{
   'close': [],
 }>();
 
+/**
+ * @author: Oleksandr Palonnyi
+ *
+ *  [WTEL-7993](https://webitel.atlassian.net/browse/WTEL-7993)
+ *
+ * For the future: implement fullscreen state to separate it from LG size.
+ *
+ * Link with discussions - https://github.com/webitel/webitel-ui-sdk/pull/873#discussion_r2478239881
+ * */
 const handleFullscreen = (value: boolean) => {
-  changeSize(value ? ComponentSize.LG : ComponentSize.SM);
+  if (value) {
+    if (size.value !== ComponentSize.LG) {
+      changeSize(ComponentSize.LG)
+    }
+  } else if (size.value === ComponentSize.LG) {
+    exitFullscreen()
+    changeSize(ComponentSize.SM)
+  }
 }
 
-const handlePlayerSize = (value: boolean) => {
-  changeSize(value ? ComponentSize.MD : ComponentSize.SM);
+const handlePlayerSize = () => {
+  if (size.value === ComponentSize.SM) {
+    changeSize(ComponentSize.MD)
+  } else if (size.value === ComponentSize.MD) {
+    changeSize(ComponentSize.SM)
+  } else if (size.value === ComponentSize.LG) {
+    exitFullscreen()
+    changeSize(ComponentSize.MD)
+  }
 }
 
+const exitFullscreen = () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen()
+  }
+}
+
+const handleKeyUp = (event) => {
+  if (event.key === 'Escape') {
+    handleFullscreen(false)
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      handleFullscreen(false)
+    }
+  })
+
+  onBeforeUnmount(() => {
+    document.removeEventListener('keyup', handleKeyUp)
+  })
+})
 </script>
 
 <style lang="scss" scoped>
@@ -72,9 +123,22 @@ const handlePlayerSize = (value: boolean) => {
   background: var(--p-player-head-line-background);
   color: var(--p-player-head-line-color);
   transition: all var(--transition) ease-in-out;
+  backdrop-filter: blur(var(--p-player-head-line-blur));
+  opacity: 0;
+
+  &__head {
+    @extend %typo-body-1-bold;
+    display: flex;
+    align-items: center;
+    gap: var(--p-player-headline-sm-gap);
+    min-width: 0;
+  }
 
   &__title {
-    @extend %typo-body-1-bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   &__controls {
@@ -83,12 +147,21 @@ const handlePlayerSize = (value: boolean) => {
     gap: var(--p-player-headline-sm-gap);
   }
 
+  &--sm {
+    gap: var(--p-player-headline-sm-gap);
+  }
+
   &--md {
     padding: var(--p-player-headline-md-padding);
+    gap: var(--p-player-headline-md-gap);
 
     .video-display-panel__controls {
       gap: var(--p-player-headline-md-gap);
     }
+  }
+
+  &--lg {
+    gap: var(--p-player-headline-lg-gap);
   }
 }
 

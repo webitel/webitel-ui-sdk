@@ -45,7 +45,9 @@ const getUiVisibilityAccess = async (): Promise<VisibilityAccess> => {
   const url = 'role/metadata/access';
   try {
     const response = await instance.get(url);
-    return applyTransform(response.data, [snakeToCamel()]);
+    return applyTransform(response.data, [
+      // snakeToCamel(),  // https://webitel.atlassian.net/browse/WTEL-7643
+    ]);
   } catch (err) {
     throw applyTransform(err, [notify]);
   }
@@ -60,4 +62,9 @@ const logout = async () => {
   }
 };
 
-export { getSession, getUiVisibilityAccess, logout, setInstance };
+export {
+  getSession,
+  getUiVisibilityAccess,
+  logout,
+  setInstance,
+};

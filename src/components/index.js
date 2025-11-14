@@ -1,3 +1,4 @@
+import WtChatEmoji from './on-demand/wt-chat-emoji/wt-chat-emoji.vue';
 import WtDisplayChipItems from './on-demand/wt-display-chip-items/wt-display-chip-items.vue';
 import WtNavigationMenu from './on-demand/wt-navigation-menu/components/wt-navigation-menu.vue';
 import WtSelectionPopup from './on-demand/wt-selection-popup/wt-selection-popup.vue';
@@ -26,6 +27,7 @@ import WtEmpty from './wt-empty/wt-empty.vue';
 import WtErrorPage from './wt-error-page/wt-error-page.vue';
 import WtExpansionPanel from './wt-expansion-panel/wt-expansion-panel.vue';
 import WtFiltersPanelWrapper from './wt-filters-panel-wrapper/wt-filters-panel-wrapper.vue';
+import WtGalleria from './wt-galleria/wt-galleria.vue';
 import WtHeadline from './wt-headline/wt-headline.vue';
 import WtHint from './wt-hint/wt-hint.vue';
 import WtIcon from './wt-icon/wt-icon.vue';
@@ -144,7 +146,9 @@ const Components = {
   WtStartPage,
   WtSelectionPopup,
   WtDisplayChipItems,
+  WtGalleria,
   WtVidstackPlayer,
+  WtChatEmoji,
 };
 
 export {
@@ -156,6 +160,7 @@ export {
   WtBreadcrumb,
   WtButton,
   WtButtonSelect,
+  WtChatEmoji,
   WtCheckbox,
   WtChip,
   WtConfirmDialog,
@@ -170,6 +175,7 @@ export {
   WtErrorPage,
   WtExpansionPanel,
   WtFiltersPanelWrapper,
+  WtGalleria,
   WtHeaderActions,
   WtHeadline,
   WtHint,

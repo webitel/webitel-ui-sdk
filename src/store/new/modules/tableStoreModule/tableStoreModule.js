@@ -116,6 +116,8 @@ const actions = {
 
     const headers = context.state.headers.map(
       ({ sort: currentSort, ...header }) => {
+        if (currentSort === undefined) return header;
+        
         let sort;
 
         if (field) {

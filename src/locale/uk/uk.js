@@ -125,11 +125,11 @@ export default {
     contact: 'Контакт | Контакти',
     notification: 'Сповіщення',
     screencast: 'Запис екрану',
-    extension: 'Розширення',
     password: 'Пароль',
     number: 'Номер',
-    expireAt: 'Закінчується',
+    expireAt: 'Термін дії',
     destination: 'Призначення',
+    utilizationProgress: 'Прогрес використання',
   },
   // date-related texts
   date: {
@@ -175,14 +175,21 @@ export default {
     transcription: 'Транскрипція',
     attachment: 'Вкладення | Вкладення',
     owner: 'Власник | Власники',
+    skill: 'Навичка | Навички',
     customization: {
       customization: 'Персоналізація | Персоналізації',
     },
     customLookup: {
       customLookup: 'Користувацький довідник | Користувацькі довідники',
     },
+    chatGateway: 'Текстовий шлюз | Текстові шлюзи',
+    chat: {
+      chat: 'Чат | Чати',
+      draftPlaceholder: 'Напишіть повідомлення...',
+    },
     queue: {
       queue: 'Черга | Черги',
+      queueType: 'Тип черги | Типи черг',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Вхідна черга',
         [QueueType.OFFLINE_QUEUE]: 'Оффлайн черга',
@@ -368,6 +375,7 @@ export default {
         [AdminSections.QuickReplies]: 'Швидкі відповіді',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: "Обов'язкове поле",
@@ -501,6 +509,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} контакти`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -560,7 +569,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Ваш PDF-файл генерується…'
+      generationStarted: 'Ваш PDF-файл генерується…',
     },
     saveFailedPopup: {
       title: 'Помилка збереження',
@@ -720,6 +729,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Пресет | Пресети',
         overwritePresetTitle: 'Пресет з такою назвою вже існує.',
@@ -751,6 +784,9 @@ export default {
       update: ({ named }) => `${named('entity')} було оновлено`,
       create: ({ named }) => `${named('entity')} було збережено`,
       delete: ({ named }) => `${named('entity')} було видалено`,
+    },
+    info: {
+      passwordExpirationMessage: 'Пароль спливе через { days } дн(і/ів)',
     },
   },
   errorNotifications: {

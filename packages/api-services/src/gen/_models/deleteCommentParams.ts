@@ -7,7 +7,7 @@
 
 export type DeleteCommentParams = {
 	/**
-	 * Fields to be retrieved as a result.
+	 * Fields to return after deletion.
 	 */
 	fields?: string[];
 };

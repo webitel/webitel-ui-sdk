@@ -9,17 +9,17 @@
 
   --icon-color: var(--grey-darken-2);
   --icon-active-color: var(--grey-darken-4);
-  --icon-primary-color: var(--primary-color);
-  --icon-error-color: var(--error-color);
-  --icon-success-color: var(--success-color);
-  --icon-warning-color: var(--warning-color);
+  --icon-primary-color: var(--p-primary-color);
+  --icon-error-color: var(--p-error-color);
+  --icon-success-color: var(--p-success-color);
+  --icon-warning-color: var(--p-warn-color);
   --icon-on-dark-color: var(--white);
   --icon-on-light-color: var(--grey-darken-3);
   --icon-on-primary-color: var(--primary-on-color);
-  --icon-info-color: var(--info-color);
-  --icon-chat-color: var(--chat-color);
-  --icon-transfer-color: var(--transfer-color);
-  --icon-job-color: var(--job-color);
+  --icon-info-color: var(--p-info-color);
+  --icon-chat-color: var(--p-chat-color);
+  --icon-transfer-color: var(--p-transfer-color);
+  --icon-job-color: var(--p-task-color);
   --icon-disabled-color: var(--grey-lighten-4);
 }
 

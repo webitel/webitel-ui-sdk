@@ -126,11 +126,11 @@ export default {
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
     screencast: 'Экран жазбасы',
-    extension: 'Кеңейту',
     password: 'Құпия сөз',
     number: 'Нөмір',
     expireAt: 'Мерзімі',
     destination: 'Мақсат',
+    utilizationProgress: 'Пайдалану прогресі',
   },
   // date-related texts
   date: {
@@ -176,14 +176,21 @@ export default {
     transcription: 'Транскрипция',
     attachment: 'Тіркеме | Тіркемелер',
     owner: 'Ие | Иелер',
+    skill: 'Дағды | Дағдылар',
     customization: {
       customization: 'Жекелендіру | Жекелендірулер',
     },
     customLookup: {
       customLookup: 'Жекелендіру | Жекелендірулер',
     },
+    chatGateway: 'Чат шлюзі | Чат шлюздер',
+    chat: {
+      chat: 'Чат | Чаттар',
+      draftPlaceholder: 'Хабарлама жазыңыз...',
+    },
     queue: {
       queue: 'Кезек | Кезектер',
+      queueType: 'Кезек түрі | Кезек түрлері',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Кіріс кезегі',
         [QueueType.OFFLINE_QUEUE]: 'Офлайн кезегі',
@@ -290,8 +297,7 @@ export default {
             ': ' +
             linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
-            linked('objects.customization.customization') +
-            ': Жекелендірулер', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+            linked('objects.customization.customization') + ': Жекелендірулер', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
         },
       },
     },
@@ -369,6 +375,7 @@ export default {
         [AdminSections.QuickReplies]: 'Жылдам жауаптар',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Өріс міндетті',
@@ -505,6 +512,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -565,7 +573,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Сіздің PDF файлыңыз жасалуда…'
+      generationStarted: 'Сіздің PDF файлыңыз жасалуда…',
     },
     saveFailedPopup: {
       title: 'Сақтау сәтсіз',
@@ -725,6 +733,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Алдын ала орнату | Алдын ала орнатулар',
         overwritePresetTitle: 'Бұл атаумен алдын ала орнату бар.',
@@ -756,6 +788,10 @@ export default {
       update: ({ named }) => `${named('entity').toLowerCase()} жаңартылды`,
       create: ({ named }) => `${named('entity').toLowerCase()} сақталды`,
       delete: ({ named }) => `${named('entity').toLowerCase()} жойылды`,
+    },
+    info: {
+      passwordExpirationMessage:
+        'Сіздің құпия сөзіңіз { days } күннен кейін мерзімі аяқталады',
     },
   },
   errorNotifications: {

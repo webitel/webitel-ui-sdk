@@ -70,12 +70,18 @@ export const downloadMedia = async (id) => {
 };
 
 export const downloadFile = (id) => {
-	const url = `${baseUrl}/storage/file/${id}/download?access_token=${token}`;
-	window.open(url, '_blank');
+	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
+	const url = `${baseUrl}/storage/file/${id}/download?access_token=${accessToken}`;
+	const link = document.createElement('a');
+	link.href = url;
+	document.body.appendChild(link);
+	link.click();
+	document.body.removeChild(link);
 };
 
 export const getScreenRecordingMediaUrl = (id, isThumb = false) => {
-	const url = `${baseUrl}/storage/file/${id}/stream?access_token=${token}&fetch_thumbnail=${isThumb}`;
+	const accessToken = localStorage.getItem('access-token'); // after auth token variable is null
+	const url = `${baseUrl}/storage/file/${id}/stream?access_token=${accessToken}&fetch_thumbnail=${isThumb}`;
 	return url;
 };
 

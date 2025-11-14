@@ -10,7 +10,7 @@ import { delay, HttpResponse, http } from 'msw';
 import type { DataStructList, ProtodataStruct } from '.././_models';
 import { TypeKind } from '.././_models';
 
-export const getSearchMixin3ResponseMock = (
+export const getSearchTypesResponseMock = (
 	overrideResponse: Partial<DataStructList> = {},
 ): DataStructList => ({
 	data: faker.helpers.arrayElement([
@@ -590,7 +590,7 @@ export const getSearchMixin3ResponseMock = (
 	...overrideResponse,
 });
 
-export const getLocateMixin3ResponseMock = (
+export const getLocateResponseMock = (
 	overrideResponse: Partial<ProtodataStruct> = {},
 ): ProtodataStruct => ({
 	about: faker.helpers.arrayElement([
@@ -1148,7 +1148,7 @@ export const getLocateMixin3ResponseMock = (
 	...overrideResponse,
 });
 
-export const getSearchMixin3MockHandler = (
+export const getSearchTypesMockHandler = (
 	overrideResponse?:
 		| DataStructList
 		| ((
@@ -1164,14 +1164,14 @@ export const getSearchMixin3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getSearchMixin3ResponseMock(),
+					: getSearchTypesResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 
-export const getLocateMixin3MockHandler = (
+export const getLocateMockHandler = (
 	overrideResponse?:
 		| ProtodataStruct
 		| ((
@@ -1187,13 +1187,13 @@ export const getLocateMixin3MockHandler = (
 					? typeof overrideResponse === 'function'
 						? await overrideResponse(info)
 						: overrideResponse
-					: getLocateMixin3ResponseMock(),
+					: getLocateResponseMock(),
 			),
 			{ status: 200, headers: { 'Content-Type': 'application/json' } },
 		);
 	});
 };
 export const getTypesMock = () => [
-	getSearchMixin3MockHandler(),
-	getLocateMixin3MockHandler(),
+	getSearchTypesMockHandler(),
+	getLocateMockHandler(),
 ];

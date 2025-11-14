@@ -6,6 +6,7 @@
  */
 
 import type { EngineAgentChannel } from './engineAgentChannel';
+import type { EngineAgentUserPresence } from './engineAgentUserPresence';
 import type { EngineLookup } from './engineLookup';
 
 export interface EngineAgent {
@@ -31,4 +32,5 @@ export interface EngineAgent {
 	taskCount?: number;
 	team?: EngineLookup;
 	user?: EngineLookup;
+	userPresenceStatus?: EngineAgentUserPresence;
 }

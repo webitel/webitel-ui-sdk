@@ -9,7 +9,8 @@ const rowStateStyles = (state, dt) => `
 
   .p-datatable-tbody > tr.row-${state}:hover,
   .p-datatable-tbody > tr.row-${state}:hover > td,
-  .p-datatable-tbody > tr.row-${state}:hover > td.p-datatable-frozen-column {
+  .p-datatable-tbody > tr.row-${state}:hover > td.p-datatable-frozen-column,
+  .p-datatable-tbody > tr.row-${state}:has(+ .p-datatable-row-expansion:hover) > td {
     background: ${dt(`datatable.row.${state}HoverBackground`)};
   }
 `;
@@ -30,6 +31,7 @@ const table = {
         }
         
         .p-datatable-tbody > tr:hover > td,
+        .p-datatable-tbody > tr.p-datatable-row-expansion:hover,
         .p-datatable-tbody > tr:hover > td.p-datatable-frozen-column {
           background: ${dt('datatable.row.hoverBackground')};
          }
@@ -65,6 +67,36 @@ const table = {
 
         .p-datatable-column-resize-indicator {
           
+        }
+
+        .p-datatable-row-expansion .p-datatable-thead {
+          z-index: 0;
+        }
+        
+        .p-datatable-tbody > tr:has(+ .p-datatable-row-expansion:hover) > td {
+            background: ${dt('datatable.row.hoverBackground')};
+        }
+
+        /* remove primevue's indicator and adjust styles for custom  */
+        .p-datatable-row-reorder-indicator-down {
+            height: 100%;
+            z-index: 1;
+            margin-top: -41px;
+            width: 1px;
+            background: ${dt('datatable.reorderIndicator.color')};
+            margin-left: 7px;
+        }
+
+        .p-datatable-row-reorder-indicator-down svg {
+            display: none;
+        }
+        
+        .p-datatable-tbody > tr:hover + .p-datatable-row-expansion {
+            background: ${dt('datatable.row.hoverBackground')};
+        }
+
+        .p-datatable-header-cell:not(:has(.wt-table__th__sort-arrow)) {
+          background: ${dt('datatable.headerCell.background')};
         }
         `,
 };

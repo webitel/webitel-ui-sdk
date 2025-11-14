@@ -34,6 +34,7 @@ const fieldsToSend = [
   'email',
   'contact',
   'chatName',
+  'forcePasswordChange',
 ];
 
 const getUsersList = async (params) => {

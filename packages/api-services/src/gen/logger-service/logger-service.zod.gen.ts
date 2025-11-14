@@ -72,13 +72,13 @@ export const loggerServiceSearchLogByUserIdQueryParams = zod.object({
 	q: zod.string().optional(),
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
-	objectId: zod.array(zod.string()).optional().describe('SPECIFIC filter.'),
+	objectId: zod.array(zod.string()).optional().describe('SPECIFIC filter'),
 	action: zod
 		.array(
 			zod.enum(['default_no_action', 'create', 'update', 'read', 'delete']),
 		)
 		.optional()
-		.describe('GENERAL filters.'),
+		.describe('GENERAL filters'),
 	userIp: zod.string().optional(),
 	dateFrom: zod.string().optional(),
 	dateTo: zod.string().optional(),
@@ -154,7 +154,7 @@ export const loggerServiceSearchLogByRecordIdQueryParams = zod.object({
 			zod.enum(['default_no_action', 'create', 'update', 'read', 'delete']),
 		)
 		.optional()
-		.describe('GENERAL filters.'),
+		.describe('GENERAL filters'),
 	userId: zod.array(zod.string()).optional(),
 	userIp: zod.string().optional(),
 	dateFrom: zod.string().optional(),

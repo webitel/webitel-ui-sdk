@@ -1,7 +1,6 @@
+import { ChatGatewayProvider } from '@webitel/api-services/enums';
 import deepCopy from 'deep-copy';
 import deepmerge from 'deepmerge';
-
-import ChatGatewayProvider from '../../../enums/ChatGatewayProvider/ChatGatewayProvider.enum';
 import {
 	getDefaultGetListResponse,
 	getDefaultGetParams,
@@ -10,6 +9,7 @@ import {
 import {
 	applyTransform,
 	camelToSnake,
+	generateUrl,
 	merge,
 	mergeEach,
 	notify,
@@ -164,7 +164,15 @@ const preRequestHandler = (item) => {
 };
 
 const getChatGatewayList = async (params) => {
-	const fieldsToSend = ['page', 'size', 'q', 'sort', 'fields', 'id'];
+	const fieldsToSend = [
+		'page',
+		'size',
+		'q',
+		'sort',
+		'fields',
+		'id',
+		'provider',
+	];
 
 	const defaultObject = {
 		// default object prototype, to merge response with it to get all fields

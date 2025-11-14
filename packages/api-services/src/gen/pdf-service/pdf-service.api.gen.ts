@@ -12,9 +12,9 @@ import type {
 	DownloadPdfExport200,
 	DownloadPdfExportParams,
 	GetPdfExportHistoryParams,
-	WebitelPdfPdfExportMetadata,
-	WebitelPdfPdfHistoryResponse,
-	WebitelPdfPdfServiceGeneratePdfExportBody,
+	WebitelMediaExporterPdfExportMetadata,
+	WebitelMediaExporterPdfHistoryResponse,
+	WebitelMediaExporterPdfServiceGeneratePdfExportBody,
 } from '.././_models';
 
 // --- header start
@@ -30,15 +30,15 @@ export const // --- title start
 Returns metadata about the created export task.
  */
 			const generatePdfExport = <
-				TData = AxiosResponse<WebitelPdfPdfExportMetadata>,
+				TData = AxiosResponse<WebitelMediaExporterPdfExportMetadata>,
 			>(
 				agentId: string,
-				webitelPdfPdfServiceGeneratePdfExportBody: WebitelPdfPdfServiceGeneratePdfExportBody,
+				webitelMediaExporterPdfServiceGeneratePdfExportBody: WebitelMediaExporterPdfServiceGeneratePdfExportBody,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
 					`/export/pdf/${agentId}`,
-					webitelPdfPdfServiceGeneratePdfExportBody,
+					webitelMediaExporterPdfServiceGeneratePdfExportBody,
 					options,
 				);
 			};
@@ -46,7 +46,7 @@ Returns metadata about the created export task.
 			 * @summary Get paginated history of PDF exports for a given agent.
 			 */
 			const getPdfExportHistory = <
-				TData = AxiosResponse<WebitelPdfPdfHistoryResponse>,
+				TData = AxiosResponse<WebitelMediaExporterPdfHistoryResponse>,
 			>(
 				agentId: string,
 				params?: GetPdfExportHistoryParams,
@@ -75,9 +75,9 @@ Returns metadata about the created export task.
 			return { generatePdfExport, getPdfExportHistory, downloadPdfExport };
 		};
 export type GeneratePdfExportResult =
-	AxiosResponse<WebitelPdfPdfExportMetadata>;
+	AxiosResponse<WebitelMediaExporterPdfExportMetadata>;
 export type GetPdfExportHistoryResult =
-	AxiosResponse<WebitelPdfPdfHistoryResponse>;
+	AxiosResponse<WebitelMediaExporterPdfHistoryResponse>;
 export type DownloadPdfExportResult = AxiosResponse<DownloadPdfExport200>;
 
 // --- footer end

@@ -16,6 +16,7 @@ export type FilterConfigBaseParams = {
   valueInputComponent?: Component;
   valuePreviewComponent?: Component;
   notDeletable?: boolean;
+  showFilterName: boolean;
 };
 
 export interface IWtSysTypeFilterConfig extends BaseFilterConfig {
@@ -50,13 +51,15 @@ export class FilterConfig implements BaseFilterConfig {
   label?: ReturnType<MessageResolver> | string;
   staticView?: boolean;
   notDeletable: boolean;
+  showFilterName: boolean;
 
   constructor({
                 name,
                 valueInputComponent,
                 valuePreviewComponent,
                 notDeletable,
-    staticView,
+                showFilterName,
+                staticView,
               }: FilterConfigBaseParams = {}) {
 
     if (name) this.name = name;
@@ -65,6 +68,7 @@ export class FilterConfig implements BaseFilterConfig {
       this.valuePreviewComponent = valuePreviewComponent;
     this.notDeletable = !!notDeletable;
     if (staticView) this.staticView = staticView;
+    if(showFilterName) this.showFilterName = showFilterName;
   }
 }
 

@@ -13,27 +13,36 @@
           <li
             v-for="option of pauseCause"
             :key="option.id"
-            class="wt-cc-pause-cause-popup-option"
+            class="wt-cc-pause-cause-popup-option__wrapper"
           >
-            <wt-radio
-              :label="option.name"
-              :selected="selected.id"
-              :value="option.id"
-              class="wt-cc-pause-cause-popup-option__radio"
-              @update:selected="select(option)"
-            />
-            <div class="wt-cc-pause-cause-popup-option__limits-wrapper">
-              <span
-                :class="{
-                  'wt-cc-pause-cause-popup-option__duration--overflow':
-                    option.isOverflow,
-                }"
-              >
-                {{ option.duration }}
-              </span>
-              /
-              <span>{{ option.limit }}</span>
-            </div>
+              <div class="wt-cc-pause-cause-popup-option">
+                <wt-radio
+                  :label="option.name"
+                  :selected="selected?.id"
+                  :value="option.id"
+                  class="wt-cc-pause-cause-popup-option__radio"
+                  @update:selected="select(option)"
+                />
+                <div class="wt-cc-pause-cause-popup-option__limits-wrapper">
+                  <span
+                    :class="{
+                      'wt-cc-pause-cause-popup-option__duration--overflow':
+                        option.isOverflow,
+                    }"
+                  >
+                    {{ option.duration }}
+                  </span>
+                  /
+                  <span>{{ option.limit }}</span>
+                </div>
+              </div>
+              <div v-if="selected && option.id === selected?.id" class="wt-cc-pause-cause-popup-option__comment">
+                <wt-textarea
+                  :label="$t('reusable.comment')"
+                  :value="selected.statusComment"
+                  @input="selected.statusComment = $event"
+                />
+              </div>
           </li>
         </ul>
       </form>
@@ -72,7 +81,7 @@ const emit = defineEmits(['change', 'close']);
 
 const options = toRef(props, 'options');
 
-const selected = ref('');
+const selected = ref(null);
 
 const { t } = useI18n();
 
@@ -87,6 +96,7 @@ const pauseCause = computed(() =>
     limit: cause.limitMin
       ? `${cause.limitMin} ${t('webitelUI.agentStatusSelect.pauseCausePopup.min')}`
       : t('webitelUI.agentStatusSelect.pauseCausePopup.unlimited'),
+    statusComment: '',
   })),
 );
 
@@ -99,7 +109,11 @@ function close() {
 }
 
 function setPause() {
-  emit('change', selected.value.name);
+  const payload = {
+    pauseCause: selected.value.name,
+    statusComment: selected.value?.statusComment || ''
+  }
+  emit('change', payload);
   close();
 }
 </script>
@@ -111,7 +125,13 @@ function setPause() {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
+.wt-cc-pause-cause-popup-option__comment {
+  margin-top: var(--spacing-sm);
+}
+
+.wt-cc-pause-cause-popup-option__wrapper {
   &:not(:last-child) {
     margin-bottom: var(--spacing-sm);
   }

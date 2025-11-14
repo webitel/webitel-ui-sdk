@@ -29,6 +29,7 @@ export const searchAgentQueryParams = zod.object({
 	extension: zod.array(zod.string()).optional(),
 	notTeamId: zod.array(zod.number()).optional(),
 	notSkillId: zod.array(zod.number()).optional(),
+	notUserId: zod.array(zod.string()).optional(),
 });
 
 export const searchAgentResponse = zod.object({
@@ -105,6 +106,11 @@ export const searchAgentResponse = zod.object({
 					.object({
 						id: zod.string().optional(),
 						name: zod.string().optional(),
+					})
+					.optional(),
+				userPresenceStatus: zod
+					.object({
+						status: zod.string().optional(),
 					})
 					.optional(),
 			}),
@@ -238,6 +244,11 @@ export const createAgentResponse = zod.object({
 		.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
+		})
+		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
 		})
 		.optional(),
 });
@@ -714,6 +725,11 @@ export const deleteAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
+		})
+		.optional(),
 });
 
 /**
@@ -798,6 +814,11 @@ export const readAgentResponse = zod.object({
 		.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
+		})
+		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
 		})
 		.optional(),
 });
@@ -930,6 +951,11 @@ export const patchAgentResponse = zod.object({
 		.object({
 			id: zod.string().optional(),
 			name: zod.string().optional(),
+		})
+		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
 		})
 		.optional(),
 });
@@ -1065,6 +1091,11 @@ export const updateAgentResponse = zod.object({
 			name: zod.string().optional(),
 		})
 		.optional(),
+	userPresenceStatus: zod
+		.object({
+			status: zod.string().optional(),
+		})
+		.optional(),
 });
 
 export const searchAgentInQueueParams = zod.object({
@@ -1195,6 +1226,7 @@ export const searchUserStatusQueryParams = zod.object({
 	q: zod.string().optional(),
 	sort: zod.string().optional(),
 	fields: zod.array(zod.string()).optional(),
+	notUserId: zod.array(zod.string()).optional(),
 });
 
 export const searchUserStatusResponse = zod.object({

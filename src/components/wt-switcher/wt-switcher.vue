@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="wt-switcher" 
+  <div
+    class="wt-switcher"
     :class="{ 'wt-switcher--label-left': labelLeft }"
   >
     <p-toggle-switch
@@ -9,6 +9,7 @@
       :disabled="disabled"
     />
     <wt-label
+      v-if="hasLabel"
       :disabled="disabled"
       :for="switcherId"
       v-bind="labelProps"
@@ -31,7 +32,7 @@
 
 <script setup lang="ts">
 import { ToggleSwitchProps } from 'primevue/toggleswitch';
-import { defineModel, defineProps, withDefaults } from 'vue';
+import { computed, defineModel, defineProps, useSlots, withDefaults } from 'vue';
 
 interface LabelProps {
   [key: string]: any;
@@ -44,7 +45,7 @@ interface Props extends ToggleSwitchProps {
   labelProps?: LabelProps;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   label: '',
   labelLeft: false,
   disabled: false,
@@ -52,6 +53,12 @@ withDefaults(defineProps<Props>(), {
 });
 
 const model = defineModel<boolean>();
+
+const slots = useSlots();
+
+const hasLabel = computed(() => {
+  return props.label || slots.label;
+});
 
 const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
 </script>
@@ -61,6 +68,8 @@ const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
 </style>
 
 <style lang="scss" scoped>
+@use '@webitel/styleguide/typography' as *;
+
 .wt-switcher {
   position: relative;
   box-sizing: border-box;
@@ -74,14 +83,18 @@ const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
   }
 }
 
+.wt-label {
+  @extend %typo-subtitle-2;
+  margin-left: var(--spacing-xs);
+}
+
 .wt-switcher__label {
+  @extend %typo-subtitle-2;
   cursor: pointer;
   user-select: none;
   transition: var(--transition);
-  margin-left: var(--switcher-icon-margin);
 
   .wt-switcher--label-left & {
-    margin-right: var(--switcher-icon-margin);
     margin-left: 0;
   }
 }

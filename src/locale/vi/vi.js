@@ -126,11 +126,11 @@ export default {
     column: 'Cột | Các cột',
     notification: 'Thông báo | Các thông báo',
     screencast: 'Ghi màn hình',
-    extension: 'Mở rộng',
     password: 'Mật khẩu',
     number: 'Số',
     expireAt: 'Hết hạn',
     destination: 'Điểm đến',
+    utilizationProgress: 'Tiến độ sử dụng',
   },
   // date-related texts
   date: {
@@ -176,14 +176,21 @@ export default {
     transcription: 'Bản ghi',
     attachment: 'Tệp đính kèm | Các tệp đính kèm',
     owner: 'Chủ sở hữu | Các chủ sở hữu',
+    skill: 'Kỹ năng | Kỹ năng',
     customization: {
       customization: 'Tùy chỉnh | Các tùy chỉnh',
     },
     customLookup: {
       customLookup: 'Tùy chỉnh | Các tùy chỉnh',
     },
+    chatGateway: 'Cổng trò chuyện | Các cổng trò chuyện',
+    chat: {
+      chat: 'Trò chuyện | Các cuộc trò chuyện',
+      draftPlaceholder: 'Viết tin nhắn...',
+    },
     queue: {
       queue: 'Hàng chờ | Hàng chờ',
+      queueType: 'Loại hàng đợi | Các loại hàng đợi',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Hàng chờ cuộc gọi vào',
         [QueueType.OFFLINE_QUEUE]: 'Hàng chờ ngoại tuyến',
@@ -372,6 +379,7 @@ export default {
         [AdminSections.QuickReplies]: 'Trả lời nhanh',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Trường bắt buộc',
@@ -508,6 +516,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} liên hệ`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -567,7 +576,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Tệp PDF của bạn đang được tạo…'
+      generationStarted: 'Tệp PDF của bạn đang được tạo…',
     },
     saveFailedPopup: {
       title: 'Lưu thất bại',
@@ -726,6 +735,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Mẫu | Các mẫu',
         overwritePresetTitle: 'Đã tồn tại một mẫu có tên này.',
@@ -758,6 +791,10 @@ export default {
         `${named('entity').toLowerCase()} đã được cập nhật`,
       create: ({ named }) => `${named('entity').toLowerCase()} đã được lưu`,
       delete: ({ named }) => `${named('entity').toLowerCase()} đã bị xóa`,
+    },
+    info: {
+      passwordExpirationMessage:
+        'Mật khẩu của bạn sẽ hết hạn sau { days } ngày',
     },
   },
   errorNotifications: {

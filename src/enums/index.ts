@@ -4,6 +4,7 @@ import { ButtonColor } from './ButtonColor/ButtonColor';
 import { ButtonSize } from './ButtonSize/ButtonSize.js';
 import { ButtonVariant } from './ButtonVariant/ButtonVariant';
 import ChatGatewayProvider from './ChatGatewayProvider/ChatGatewayProvider.enum.js';
+import ProviderIconType from './ChatGatewayProvider/ProviderIconType.enum';
 import { ChipColor } from './ChipColor/ChipColor';
 import { ComponentSize } from './ComponentSize/ComponentSize';
 import { CrudAction } from './CrudAction/CrudAction';
@@ -11,7 +12,7 @@ import { EmptyCause } from './EmptyCause/EmptyCause';
 import IconAction from './IconAction/IconAction.enum.js';
 import { IconColor } from './IconColor/IconColor';
 import { ProcessingTableColumnType } from './ProcessingTableColumnType/ProcessingTableColumnType';
-import QueueType from './QueueType/QueueType.enum.js';
+import { QueueType, QueueTypeName } from './QueueType/QueueType.enum';
 import { RelativeDatetimeValue } from './RelativeDatetimeValue/RelativeDatetimeValue';
 import TypesExportedSettings from './TypesExportedSettings/TypesExportedSettings.enum.js';
 import { AdminSections } from './WebitelApplications/AdminSections';
@@ -19,6 +20,7 @@ import { AuditorSections } from './WebitelApplications/AuditorSections';
 import { CrmSections } from './WebitelApplications/CrmSections';
 import { SupervisorSections } from './WebitelApplications/SupervisorSections';
 import WebitelApplications from './WebitelApplications/WebitelApplications.enum.js';
+import { WfmSections } from './WebitelApplications/WfmSections';
 import { WtApplication } from './WebitelApplications/WtApplication';
 import { WtObject } from './WtObject/WtObject';
 import { WtTypeExtensionFieldKind } from './WtTypeExtensionFieldKind/WtTypeExtensionFieldKind';
@@ -39,11 +41,14 @@ export {
   IconAction,
   IconColor,
   ProcessingTableColumnType,
+  ProviderIconType,
   QueueType,
+  QueueTypeName,
   RelativeDatetimeValue,
   SupervisorSections,
   TypesExportedSettings,
   WebitelApplications,
+  WfmSections,
   WtApplication,
   WtObject,
   WtTypeExtensionFieldKind,

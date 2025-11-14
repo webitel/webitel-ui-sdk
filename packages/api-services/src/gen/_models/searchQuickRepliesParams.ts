@@ -12,4 +12,6 @@ export type SearchQuickRepliesParams = {
 	sort?: string;
 	fields?: string[];
 	id?: number[];
+	queue?: number[];
+	restrictToAgent?: boolean;
 };

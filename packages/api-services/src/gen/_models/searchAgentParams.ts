@@ -25,4 +25,5 @@ export type SearchAgentParams = {
 	extension?: string[];
 	notTeamId?: number[];
 	notSkillId?: number[];
+	notUserId?: string[];
 };

@@ -202,8 +202,8 @@ const handleResetFilters = () => {
     align-items: center;
   }
   .dynamic-filter-panel-wrapper__filters {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: var(--spacing-xs);
   }
 }

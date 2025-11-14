@@ -1,5 +1,8 @@
 <template>
-  <media-controls-group class="screen-sharing-control-panel" :class="`screen-sharing-control-panel--${size}`">
+  <media-controls-group
+    class="screen-sharing-control-panel controls-group"
+    :class="`screen-sharing-control-panel--${size}`"
+  >
     <div
       class="screen-sharing-control-panel__actions"
     >
@@ -8,6 +11,7 @@
         contains-icon
         variant="outlined"
         color="secondary"
+        :loading="props.screenshotIsLoading"
         :size="size"
         :icon="screenShotIcon"
         @click="makeScreenshot"
@@ -20,7 +24,7 @@
         color="secondary"
         :size="size"
         :icon="recordIcon"
-        @click="toggleRecordAction"
+        @click="emit('toggle-record')"
       />
 
       <wt-button
@@ -50,23 +54,31 @@
 
 <script setup lang="ts">
 import convertDuration from '@webitel/ui-sdk/src/scripts/convertDuration';
-import {computed, inject, onUnmounted, ref, watch} from 'vue';
+import {computed, defineEmits, inject, onUnmounted, ref, watch} from 'vue';
 
+import {ScreenshotStatus} from "../../../types/ScreenshotStatus";
 import {WtVidstackPlayerSession} from "../../../types/WtVidstackPlayerSession";
-
-type ScreenshotStatus = 'done' | 'error'
 
 interface Props {
   session: WtVidstackPlayerSession
+  screenshotStatus: ScreenshotStatus | null
+  screenshotIsLoading: boolean
 }
+
 const props = defineProps<Props>();
 
+const emit = defineEmits<{
+  'close-session': [],
+  'make-screenshot': [],
+  'toggle-record': [],
+}>()
+
 const {size} = inject('size');
-const screenshotStatus = ref<ScreenshotStatus | null>(null)
 
 const recordIcon = computed(() => (props.session.recordings ? 'record-stop' : 'record-start'));
-const getScreenshotIcon = (status?: ScreenshotStatus) => {
-  switch (status) {
+
+const screenShotIcon = computed(() => {
+  switch (props.screenshotStatus) {
     case 'done':
       return 'screenshot-done';
     case 'error':
@@ -74,9 +86,7 @@ const getScreenshotIcon = (status?: ScreenshotStatus) => {
     default:
       return 'screenshot';
   }
-}
-
-const screenShotIcon = computed(() => getScreenshotIcon(screenshotStatus.value));
+});
 const isRecording = computed(() => props.session.recordings);
 
 const secondsElapsed = ref(0);
@@ -97,32 +107,12 @@ function stopTimer() {
   }
 }
 
-const toggleRecordAction = () => {
-  if (isRecording.value) {
-    props.session.stopRecord();
-  } else {
-    props.session.startRecord();
-  }
+const closeSession = () => {
+  emit('close-session')
 };
 
 const makeScreenshot = () => {
-  try {
-    props.session.screenshot()
-    changeScreenshotStatus('done')
-  } catch {
-    changeScreenshotStatus('error')
-  }
-};
-
-const changeScreenshotStatus = (status: ScreenshotStatus) => {
-  screenshotStatus.value = status;
-  setTimeout(() => {
-    screenshotStatus.value = null;
-  }, 2000);
-}
-
-const closeSession = () => {
-  props.session.close()
+  emit('make-screenshot')
 };
 
 onUnmounted(() => {
@@ -147,8 +137,6 @@ watch(isRecording, (newVal) => {
   justify-content: center;
 
   &--sm {
-    padding: var(--p-player-control-bar-position-padding-sm);
-
     .screen-sharing-control-panel__actions {
       width: 100%;
       border-top-left-radius: 0 !important;
@@ -162,8 +150,6 @@ watch(isRecording, (newVal) => {
   }
 
   &--md {
-    padding: var(--p-player-control-bar-position-padding-md);
-
     .screen-sharing-control-panel__indicator {
       right: var(--p-player-counter-position-padding-md);
       bottom: var(--p-player-counter-position-padding-md);
@@ -171,8 +157,6 @@ watch(isRecording, (newVal) => {
   }
 
   &--lg {
-    padding: var(--p-player-control-bar-position-padding-lg);
-
     .screen-sharing-control-panel__indicator {
       right: var(--p-player-counter-position-padding-lg);
       bottom: var(--p-player-counter-position-padding-lg);

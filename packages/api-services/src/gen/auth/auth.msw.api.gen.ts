@@ -55,14 +55,19 @@ export const getSignupResponseMock = (
 				faker.string.alpha({ length: { min: 10, max: 20 } }),
 				undefined,
 			]),
-			passwordExpiry: faker.helpers.arrayElement([
+			warningData: faker.helpers.arrayElement([
 				{
-					daysRemaining: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
-						undefined,
-					]),
-					expiresAt: faker.helpers.arrayElement([
-						faker.string.alpha({ length: { min: 10, max: 20 } }),
+					passwordExpiry: faker.helpers.arrayElement([
+						{
+							daysRemaining: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+							expiresAt: faker.helpers.arrayElement([
+								faker.string.alpha({ length: { min: 10, max: 20 } }),
+								undefined,
+							]),
+						},
 						undefined,
 					]),
 				},

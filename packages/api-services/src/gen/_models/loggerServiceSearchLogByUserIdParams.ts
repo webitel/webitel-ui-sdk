@@ -13,11 +13,11 @@ export type LoggerServiceSearchLogByUserIdParams = {
 	sort?: string;
 	fields?: string[];
 	/**
-	 * SPECIFIC filter.
+	 * SPECIFIC filter
 	 */
 	objectId?: string[];
 	/**
-	 * GENERAL filters.
+	 * GENERAL filters
 	 */
 	action?: LoggerServiceSearchLogByUserIdActionItem[];
 	userIp?: string;

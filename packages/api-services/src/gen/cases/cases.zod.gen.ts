@@ -34,6 +34,10 @@ export const searchCasesQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe("Specify which fields to apply 'q' to."),
+	filtersV1: zod
+		.string()
+		.optional()
+		.describe('Updated filters with CEL syntax.'),
 });
 
 export const searchCasesResponseItemsItemRelatedDataItemRelationTypeDefault =
@@ -3526,6 +3530,10 @@ export const searchCases2QueryParams = zod.object({
 		.string()
 		.optional()
 		.describe("Specify which fields to apply 'q' to."),
+	filtersV1: zod
+		.string()
+		.optional()
+		.describe('Updated filters with CEL syntax.'),
 });
 
 export const searchCases2ResponseItemsItemRelatedDataItemRelationTypeDefault =

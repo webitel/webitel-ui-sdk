@@ -192,18 +192,18 @@ export const searchCommentsResponse = zod
 /**
  * @summary Publish comment for a Contact.
  */
-export const publishCommentParams = zod.object({
+export const publishCommentCommentsParams = zod.object({
 	contact_id: zod.string().describe('Link contact ID.'),
 });
 
-export const publishCommentQueryParams = zod.object({
+export const publishCommentCommentsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const publishCommentBody = zod.object({
+export const publishCommentCommentsBody = zod.object({
 	etag: zod
 		.string()
 		.optional()
@@ -235,7 +235,7 @@ export const publishCommentBody = zod.object({
 	text: zod.string().describe('NEW Text of the comment.'),
 });
 
-export const publishCommentResponse = zod.object({
+export const publishCommentCommentsResponse = zod.object({
 	createdAt: zod
 		.string()
 		.optional()
@@ -319,7 +319,7 @@ export const publishCommentResponse = zod.object({
 /**
  * @summary Delete Comment(s) for Contact ...
  */
-export const deleteCommentParams = zod.object({
+export const deleteCommentCommentsParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod
 		.array(zod.string())
@@ -327,14 +327,14 @@ export const deleteCommentParams = zod.object({
 		.describe('Set of unique ID(s) to remove.'),
 });
 
-export const deleteCommentQueryParams = zod.object({
+export const deleteCommentCommentsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved as a result.'),
 });
 
-export const deleteCommentResponseItem = zod.object({
+export const deleteCommentCommentsResponseItem = zod.object({
 	createdAt: zod
 		.string()
 		.optional()
@@ -414,26 +414,28 @@ export const deleteCommentResponseItem = zod.object({
 		.optional()
 		.describe('Version of the latest update. Numeric sequence.'),
 });
-export const deleteCommentResponse = zod.array(deleteCommentResponseItem);
+export const deleteCommentCommentsResponse = zod.array(
+	deleteCommentCommentsResponseItem,
+);
 
 /**
  * @summary Update (edit) specific Comment text owned
  */
-export const updateCommentParams = zod.object({
+export const updateCommentCommentsParams = zod.object({
 	contact_id: zod.string().describe('Contact ID associated with.'),
 	etag: zod
 		.string()
 		.describe('Unique ID of the latest version of an existing resorce.'),
 });
 
-export const updateCommentQueryParams = zod.object({
+export const updateCommentCommentsQueryParams = zod.object({
 	fields: zod
 		.array(zod.string())
 		.optional()
 		.describe('Fields to be retrieved into result of changes.'),
 });
 
-export const updateCommentBody = zod.object({
+export const updateCommentCommentsBody = zod.object({
 	format: zod
 		.array(
 			zod.object({
@@ -461,7 +463,7 @@ export const updateCommentBody = zod.object({
 	text: zod.string().describe('NEW Text of the comment.'),
 });
 
-export const updateCommentResponse = zod.object({
+export const updateCommentCommentsResponse = zod.object({
 	createdAt: zod
 		.string()
 		.optional()

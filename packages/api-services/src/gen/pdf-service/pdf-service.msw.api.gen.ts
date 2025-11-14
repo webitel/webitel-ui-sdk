@@ -9,14 +9,14 @@ import { faker } from '@faker-js/faker';
 import { delay, HttpResponse, http } from 'msw';
 import type {
 	DownloadPdfExport200,
-	WebitelPdfPdfExportMetadata,
-	WebitelPdfPdfHistoryResponse,
+	WebitelMediaExporterPdfExportMetadata,
+	WebitelMediaExporterPdfHistoryResponse,
 } from '.././_models';
-import { WebitelPdfPdfExportStatus } from '.././_models';
+import { WebitelMediaExporterPdfExportStatus } from '.././_models';
 
 export const getGeneratePdfExportResponseMock = (
-	overrideResponse: Partial<WebitelPdfPdfExportMetadata> = {},
-): WebitelPdfPdfExportMetadata => ({
+	overrideResponse: Partial<WebitelMediaExporterPdfExportMetadata> = {},
+): WebitelMediaExporterPdfExportMetadata => ({
 	fileName: faker.helpers.arrayElement([
 		faker.string.alpha({ length: { min: 10, max: 20 } }),
 		undefined,
@@ -41,8 +41,8 @@ export const getGeneratePdfExportResponseMock = (
 });
 
 export const getGetPdfExportHistoryResponseMock = (
-	overrideResponse: Partial<WebitelPdfPdfHistoryResponse> = {},
-): WebitelPdfPdfHistoryResponse => ({
+	overrideResponse: Partial<WebitelMediaExporterPdfHistoryResponse> = {},
+): WebitelMediaExporterPdfHistoryResponse => ({
 	data: faker.helpers.arrayElement([
 		Array.from(
 			{ length: faker.number.int({ min: 1, max: 10 }) },
@@ -73,7 +73,9 @@ export const getGetPdfExportHistoryResponseMock = (
 				undefined,
 			]),
 			status: faker.helpers.arrayElement([
-				faker.helpers.arrayElement(Object.values(WebitelPdfPdfExportStatus)),
+				faker.helpers.arrayElement(
+					Object.values(WebitelMediaExporterPdfExportStatus),
+				),
 				undefined,
 			]),
 			updatedAt: faker.helpers.arrayElement([
@@ -141,10 +143,12 @@ export const getDownloadPdfExportResponseMock = (
 
 export const getGeneratePdfExportMockHandler = (
 	overrideResponse?:
-		| WebitelPdfPdfExportMetadata
+		| WebitelMediaExporterPdfExportMetadata
 		| ((
 				info: Parameters<Parameters<typeof http.post>[1]>[0],
-		  ) => Promise<WebitelPdfPdfExportMetadata> | WebitelPdfPdfExportMetadata),
+		  ) =>
+				| Promise<WebitelMediaExporterPdfExportMetadata>
+				| WebitelMediaExporterPdfExportMetadata),
 ) => {
 	return http.post('*/export/pdf/:agentId', async (info) => {
 		await delay(1000);
@@ -164,12 +168,12 @@ export const getGeneratePdfExportMockHandler = (
 
 export const getGetPdfExportHistoryMockHandler = (
 	overrideResponse?:
-		| WebitelPdfPdfHistoryResponse
+		| WebitelMediaExporterPdfHistoryResponse
 		| ((
 				info: Parameters<Parameters<typeof http.get>[1]>[0],
 		  ) =>
-				| Promise<WebitelPdfPdfHistoryResponse>
-				| WebitelPdfPdfHistoryResponse),
+				| Promise<WebitelMediaExporterPdfHistoryResponse>
+				| WebitelMediaExporterPdfHistoryResponse),
 ) => {
 	return http.get('*/export/pdf/:agentId/history', async (info) => {
 		await delay(1000);

@@ -13,9 +13,9 @@ import type {
 	Create200,
 	CreateBody,
 	DataDataset,
-	Locate200,
-	LocateParams,
-	SearchParams,
+	LocateRecords200,
+	LocateRecordsParams,
+	SearchRecordsParams,
 	Update2Body,
 	Update2Params,
 	Update200,
@@ -48,9 +48,9 @@ export const // --- title start
 			/**
 			 * @summary Search dataset records
 			 */
-			const search = <TData = AxiosResponse<DataDataset>>(
+			const searchRecords = <TData = AxiosResponse<DataDataset>>(
 				repo: string,
-				params?: SearchParams,
+				params?: SearchRecordsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/v2/dataset/${repo}`, {
@@ -73,10 +73,10 @@ export const // --- title start
 			 * (Record) {
 			 * @summary Locate dataset record
 			 */
-			const locate = <TData = AxiosResponse<Locate200>>(
+			const locateRecords = <TData = AxiosResponse<LocateRecords200>>(
 				repo: string,
 				id: string,
-				params?: LocateParams,
+				params?: LocateRecordsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.get(`/v2/dataset/${repo}/${id}`, {
@@ -118,12 +118,12 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { _delete, search, create, locate, update, update2 };
+			return { _delete, searchRecords, create, locateRecords, update, update2 };
 		};
 export type _DeleteResult = AxiosResponse<DataDataset>;
-export type SearchResult = AxiosResponse<DataDataset>;
+export type SearchRecordsResult = AxiosResponse<DataDataset>;
 export type CreateResult = AxiosResponse<Create200>;
-export type LocateResult = AxiosResponse<Locate200>;
+export type LocateRecordsResult = AxiosResponse<LocateRecords200>;
 export type UpdateResult = AxiosResponse<Update200>;
 export type Update2Result = AxiosResponse<Update2200>;
 

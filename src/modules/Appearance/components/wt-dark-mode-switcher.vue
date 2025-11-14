@@ -12,11 +12,19 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['changedMode'])
+
 const store = useStore();
 
 const mode = ref('light');
 
 const setThemeToStore = (theme) => {
+  // @author @stanislav-kozak
+  // when vuex store is not initialize and we use pinia
+  if (!store) {
+    return
+  }
+
   store.dispatch(`${props.namespace}/SET_THEME`, theme);
 };
 
@@ -30,6 +38,7 @@ const setMode = (value) => {
     document.documentElement.classList.remove('theme--dark');
     localStorage.setItem('theme', 'light');
   }
+  emit('changedMode', value)
   setThemeToStore(mode.value);
 };
 

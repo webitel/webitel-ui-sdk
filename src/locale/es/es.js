@@ -124,11 +124,11 @@ export default {
     column: 'Columna | Columnas',
     notification: 'Notificación | Notificaciones',
     screencast: 'Videotutorial de pantalla',
-    extension: 'Extensión',
     password: 'Contraseña',
     number: 'Número',
     expireAt: 'Expira en',
     destination: 'Destino',
+    utilizationProgress: 'Progreso de utilización',
   },
   date: {
     sec: 'Seg',
@@ -174,11 +174,18 @@ export default {
     transcription: 'Transcripción',
     attachment: 'Adjunto | Adjuntos',
     owner: 'Propietario | Propietarios',
+    skill: 'Habilidad | Habilidades',
     customization: {
       customization: 'Personalización | Personalizaciones',
     },
+    chatGateway: 'Pasarela de chat | Pasarelas de chat',
+    chat: {
+      chat: 'Chat | Chats',
+      draftPlaceholder: 'Escribe un mensaje...',
+    },
     queue: {
       queue: 'Cola | Colas',
+      queueType: 'Tipo de cola | Tipos de colas',
       type: {
         [QueueType.INBOUND_QUEUE]: 'Cola entrante',
         [QueueType.OFFLINE_QUEUE]: 'Cola sin conexión',
@@ -365,6 +372,7 @@ export default {
         [AdminSections.QuickReplies]: 'Respuestas rápidas',
       },
     },
+    [WebitelApplications.WFM]: { name: 'WFM' },
   },
   validation: {
     required: 'Campo requerido',
@@ -502,6 +510,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -562,7 +571,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Su archivo PDF se está creando…'
+      generationStarted: 'Su archivo PDF se está creando…',
     },
     saveFailedPopup: {
       title: 'Error al guardar',
@@ -721,6 +730,30 @@ export default {
       variable: ({ linked }) => {
         return linked('vocabulary.variables');
       },
+      queueType: ({ linked }) => {
+        return linked('objects.queue.queueType');
+      },
+      queuePeriod: ({ linked }) => {
+        return linked('vocabulary.time');
+      },
+      agentStatus: ({ linked }) => {
+        return linked('cases.status');
+      },
+      auditor: ({ linked }) => {
+        return linked('objects.auditor');
+      },
+      skill: ({ linked }) => {
+        return linked('objects.skill');
+      },
+      supervisor: ({ linked }) => {
+        return linked('objects.supervisor');
+      },
+      utilizationProgress: ({ linked }) => {
+        return linked('vocabulary.utilizationProgress');
+      },
+      region: ({ linked }) => {
+        return linked('objects.region');
+      },
       presets: {
         preset: 'Preset | Presets',
         overwritePresetTitle: 'Ya existe un preset con este nombre.',
@@ -754,6 +787,9 @@ export default {
       create: ({ named }) => `El ${named('entity').toLowerCase()} fue guardado`,
       delete: ({ named }) =>
         `El ${named('entity').toLowerCase()} fue eliminado`,
+    },
+    info: {
+      passwordExpirationMessage: 'Tu contraseña expirará en { days } días',
     },
   },
   errorNotifications: {

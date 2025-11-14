@@ -6,11 +6,11 @@
  */
 import { z as zod } from 'zod/v4';
 
-export const getTimelineMixin6Params = zod.object({
+export const getTimelineParams = zod.object({
 	case_id: zod.string(),
 });
 
-export const getTimelineMixin6QueryParams = zod.object({
+export const getTimelineQueryParams = zod.object({
 	page: zod.number().optional(),
 	size: zod.number().optional(),
 	q: zod.string().optional(),
@@ -22,9 +22,9 @@ export const getTimelineMixin6QueryParams = zod.object({
 	type: zod.array(zod.enum(['chat', 'call', 'email'])).optional(),
 });
 
-export const getTimelineMixin6ResponseDaysItemItemsItemTypeDefault = 'chat';
+export const getTimelineResponseDaysItemItemsItemTypeDefault = 'chat';
 
-export const getTimelineMixin6Response = zod.object({
+export const getTimelineResponse = zod.object({
 	days: zod
 		.array(
 			zod.object({
@@ -175,7 +175,7 @@ export const getTimelineMixin6Response = zod.object({
 								.optional(),
 							type: zod
 								.enum(['chat', 'call', 'email'])
-								.default(getTimelineMixin6ResponseDaysItemItemsItemTypeDefault),
+								.default(getTimelineResponseDaysItemItemsItemTypeDefault),
 						}),
 					)
 					.optional(),
@@ -186,11 +186,11 @@ export const getTimelineMixin6Response = zod.object({
 	page: zod.number().optional(),
 });
 
-export const getTimelineCounterMixin6Params = zod.object({
+export const getTimelineCounterParams = zod.object({
 	case_id: zod.string(),
 });
 
-export const getTimelineCounterMixin6Response = zod.object({
+export const getTimelineCounterResponse = zod.object({
 	callsCount: zod.string().optional(),
 	chatsCount: zod.string().optional(),
 	dateFrom: zod.string().optional(),

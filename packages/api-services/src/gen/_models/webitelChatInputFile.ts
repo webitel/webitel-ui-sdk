@@ -7,5 +7,6 @@
 
 export interface WebitelChatInputFile {
 	id?: string;
+	source?: string;
 	url?: string;
 }

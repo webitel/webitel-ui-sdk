@@ -31,7 +31,7 @@ export const casesChatCatalogGetCaseChatHistoryQueryParams = zod.object({
 		.string()
 		.optional()
 		.describe(
-			'This is a request variable of the map type. The query format is \"map_name[key]=value\", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age[\"bob\"]=18',
+			'Includes the history of ONLY those dialogs\nwhose member channel(s) contain\na specified set of variables.',
 		),
 });
 
@@ -317,6 +317,7 @@ export const casesChatCatalogGetCaseChatHistoryResponse = zod.object({
 								),
 						})
 						.optional(),
+					kind: zod.string().optional(),
 					postback: zod
 						.object({
 							code: zod

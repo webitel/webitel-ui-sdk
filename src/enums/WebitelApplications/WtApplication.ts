@@ -6,6 +6,7 @@ export const WtApplication = {
   Audit: 'audit',
   Analytics: 'grafana',
   Crm: 'crm',
+  Wfm: 'wfm'
 } as const;
 
 export type WtApplication = (typeof WtApplication)[keyof typeof WtApplication];

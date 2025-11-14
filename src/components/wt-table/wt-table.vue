@@ -108,23 +108,30 @@
       }"
       :sortable="isColSortable(col)"
     >
-
       <template #header>
-        <div class="wt-table__th__content">
-          {{ col.text }}
-          <wt-icon
-            v-if="col.sort === 'asc'"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-            icon="sort-arrow-up"
-            size="sm"
-          />
-          <wt-icon
-            v-else-if="col.sort === 'desc'"
-            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-            icon="sort-arrow-down"
-            size="sm"
-          />
-        </div>
+        <slot
+          :index="idx"
+          :header="col"
+          :name="`header-${col.value}`"
+        >
+          <div class="wt-table__th__content">
+            <span v-tooltip="col.text">
+              {{ col.text }}
+            </span>
+            <wt-icon
+              v-if="col.sort === 'asc'"
+              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+              icon="sort-arrow-up"
+              size="sm"
+            />
+            <wt-icon
+              v-else-if="col.sort === 'desc'"
+              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+              icon="sort-arrow-down"
+              size="sm"
+            />
+          </div>
+        </slot>
       </template>
 
       <template #body="{ data: row, index }">
@@ -204,9 +211,10 @@
 <script lang="ts" setup>
 import type { DataTableProps } from 'primevue';
 import { VirtualScrollerLazyEvent } from 'primevue/virtualscroller';
-import { computed, defineProps, ref, useSlots,useTemplateRef, withDefaults } from 'vue';
+import { computed, defineProps, nextTick, onMounted, onUnmounted, ref, useSlots, useTemplateRef, withDefaults } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import { useTableColumnDrag } from '../../composables';
 import { getNextSortOrder } from '../../scripts/sortQueryAdapters.js';
 import type { WtTableHeader } from './types/WtTable';
 
@@ -301,8 +309,13 @@ const table = useTemplateRef('table');
 const tableKey = ref(0);
 const expandedRows = ref([]);
 
+const {
+  addTableDragListener,
+  removeTableDragListener,
+} = useTableColumnDrag(table, props.reorderableColumns);
+
 // table's columns that should be excluded from reorder
-const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions']
+const excludeColumnsFromReorder = ['row-select', 'row-reorder', 'row-actions', 'row-expander'];
 
 const _selected = computed(() => {
   // _isSelected for backwards compatibility
@@ -419,9 +432,15 @@ const columnResize = ({element}) => {
 }
 
 const columnReorder = () => {
+  const containerEl = table.value.$el.querySelector('.p-datatable-table-container');
+  const containerElScrollLeft = containerEl.scrollLeft;
   const newOrder = table.value.d_columnOrder.filter(col => !excludeColumnsFromReorder.includes(col));
   tableKey.value += 1;
   emit('column-reorder', newOrder)
+  nextTick(() => {
+    addTableDragListener();
+    table.value.$el.querySelector('.p-datatable-table-container').scrollLeft = containerElScrollLeft
+  })
 }
 
 const isRowExpanded = (row) => {
@@ -447,6 +466,14 @@ const virtualScroll = computed(() => {
     numToleratedItems: VIRTUAL_SCROLL_TOLERATED_ITEMS, // Number of items to pre-render outside visible area
   };
 });
+
+onMounted(() => {
+  addTableDragListener();
+})
+
+onUnmounted(() => {
+  removeTableDragListener();
+})
 </script>
 
 <style lang="scss">

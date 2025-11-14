@@ -12,11 +12,11 @@ import type {
 	ContactsComment,
 	ContactsCommentList,
 	ContactsInputComment,
-	DeleteCommentParams,
-	PublishCommentParams,
+	DeleteCommentCommentsParams,
+	PublishCommentCommentsParams,
 	SearchCommentsParams,
-	UpdateCommentBody,
-	UpdateCommentParams,
+	UpdateCommentCommentsBody,
+	UpdateCommentCommentsParams,
 } from '.././_models';
 
 // --- header start
@@ -43,10 +43,10 @@ export const // --- title start
 			/**
 			 * @summary Publish comment for a Contact.
 			 */
-			const publishComment = <TData = AxiosResponse<ContactsComment>>(
+			const publishCommentComments = <TData = AxiosResponse<ContactsComment>>(
 				contactId: string,
 				contactsInputComment: ContactsInputComment,
-				params?: PublishCommentParams,
+				params?: PublishCommentCommentsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.post(
@@ -61,10 +61,10 @@ export const // --- title start
 			/**
 			 * @summary Delete Comment(s) for Contact ...
 			 */
-			const deleteComment = <TData = AxiosResponse<ContactsComment[]>>(
+			const deleteCommentComments = <TData = AxiosResponse<ContactsComment[]>>(
 				contactId: string,
 				etag: string[],
-				params?: DeleteCommentParams,
+				params?: DeleteCommentCommentsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.delete(`/contacts/${contactId}/comments/${etag}`, {
@@ -75,16 +75,16 @@ export const // --- title start
 			/**
 			 * @summary Update (edit) specific Comment text owned
 			 */
-			const updateComment = <TData = AxiosResponse<ContactsComment>>(
+			const updateCommentComments = <TData = AxiosResponse<ContactsComment>>(
 				contactId: string,
 				etag: string,
-				updateCommentBody: UpdateCommentBody,
-				params?: UpdateCommentParams,
+				updateCommentCommentsBody: UpdateCommentCommentsBody,
+				params?: UpdateCommentCommentsParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
 				return axios.put(
 					`/contacts/${contactId}/comments/${etag}`,
-					updateCommentBody,
+					updateCommentCommentsBody,
 					{
 						...options,
 						params: { ...params, ...options?.params },
@@ -93,11 +93,16 @@ export const // --- title start
 			};
 
 			// --- footer start
-			return { searchComments, publishComment, deleteComment, updateComment };
+			return {
+				searchComments,
+				publishCommentComments,
+				deleteCommentComments,
+				updateCommentComments,
+			};
 		};
 export type SearchCommentsResult = AxiosResponse<ContactsCommentList>;
-export type PublishCommentResult = AxiosResponse<ContactsComment>;
-export type DeleteCommentResult = AxiosResponse<ContactsComment[]>;
-export type UpdateCommentResult = AxiosResponse<ContactsComment>;
+export type PublishCommentCommentsResult = AxiosResponse<ContactsComment>;
+export type DeleteCommentCommentsResult = AxiosResponse<ContactsComment[]>;
+export type UpdateCommentCommentsResult = AxiosResponse<ContactsComment>;
 
 // --- footer end
