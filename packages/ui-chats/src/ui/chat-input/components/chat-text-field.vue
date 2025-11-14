@@ -1,10 +1,10 @@
 <template>
     <wt-textarea
         ref="chatTextFieldInput"
-        :value="textModel"
+        :model-value="textModel"
         :size="size"
         autoresize
-        @input="textModel = $event"
+        @update:model-value="textModel = $event"
     />
 </template>
 

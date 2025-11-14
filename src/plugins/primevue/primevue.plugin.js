@@ -14,7 +14,8 @@ import PInputText from 'primevue/inputtext';
 import PMenubar from 'primevue/menubar';
 import PPopover from 'primevue/popover';
 import PRadio from 'primevue/radiobutton';
-import PSlider from 'primevue/slider'
+import PSlider from 'primevue/slider';
+import PTextarea from 'primevue/textarea';
 import PToggleSwitch from 'primevue/toggleswitch';
 import PToolbar from 'primevue/toolbar';
 import Tooltip from 'primevue/tooltip';
@@ -49,6 +50,7 @@ const initPrimevue = (app) => {
   app.component('PColumn', changeComponentCompatMode(PColumn));
   app.component('PRadio', changeComponentCompatMode(PRadio));
   app.component('PChip', changeComponentCompatMode(PChip));
+  app.component('PTextarea', changeComponentCompatMode(PTextarea));
   app.component('PToggleSwitch', changeComponentCompatMode(PToggleSwitch));
   app.component('PBreadcrumb', changeComponentCompatMode(PBreadcrumb));
   app.component('PSlider', changeComponentCompatMode(PSlider));
