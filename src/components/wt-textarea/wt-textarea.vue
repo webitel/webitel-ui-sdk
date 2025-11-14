@@ -54,7 +54,7 @@ import { defineModel, onMounted, useTemplateRef, ref } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
-interface Props extends TextareaProps {
+interface Props extends /* @vue-ignore */ TextareaProps {
   /**
    * textarea label
    */
