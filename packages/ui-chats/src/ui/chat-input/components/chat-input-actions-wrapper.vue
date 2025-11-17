@@ -44,7 +44,7 @@ import EmojiPickerAction from './actions/emoji-picker-action.vue';
 </script>
 
 <style scoped>
-.chat-input-actions-bar {
+.chat-input-actions-wrapper {
   display: flex;
   gap: var(--spacing-2xs);
 
