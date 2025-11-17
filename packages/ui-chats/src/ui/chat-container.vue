@@ -3,8 +3,9 @@
         <!-- <slot name="header">
             header goes here
         </slot> -->
+        <slot name="intersection-observer"></slot>
         <slot name="main">
-            main goes here
+            <chat-messages-container :messages="messages" />
         </slot>
         <slot name="footer">
             <chat-input
@@ -27,14 +28,17 @@
 <script setup lang="ts">
 import { provide, ref } from 'vue';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
+import ChatMessagesContainer from './messaging/components/chat-messages-container.vue';
 
 import ChatInput from './chat-input/components/chat-input.vue';
 import SendMessageAction from './chat-input/components/actions/send-message-action.vue';
 import AttachFilesAction from './chat-input/components/actions/attach-files-action.vue';
 import EmojiPickerAction from './chat-input/components/actions/emoji-picker-action.vue';
 import { createUiChatsEmitter } from './utils/emitter';
+import { ChatMessageType } from './messaging/types/ChatMessage.types';
 
 const props = withDefaults(defineProps<{
+    messages: ChatMessageType[];
     size?: ComponentSize;
 }>(), {
     size: ComponentSize.MD,
