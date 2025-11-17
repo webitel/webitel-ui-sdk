@@ -1,1 +1,1 @@
-export { default as ChatInput } from "./chat-input/components/chat-input.vue";
+export { default as ChatContainer } from "./chat-container.vue";

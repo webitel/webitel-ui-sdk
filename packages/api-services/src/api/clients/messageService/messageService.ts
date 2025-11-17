@@ -10,7 +10,7 @@ const patchMessagesService = async (changes) => {
 	const body = applyTransform(changes, [camelToSnake()]);
 
 	try {
-		const response = await getMessages().broadcastMessage(body);
+		const response = await getMessages().messagesServiceBroadcastMessage(body);
 		return applyTransform(response.data, [snakeToCamel()]);
 	} catch (err) {
 		throw applyTransform(err, [notify]);
