@@ -130,12 +130,6 @@ export default {
     number: 'Raqam',
     expireAt: 'Muddati',
     destination: 'Manzil',
-
-    extension: 'Kengaytma',
-    password: 'Parol',
-    number: 'Raqam',
-    expireAt: 'Muddati',
-    destination: 'Manzil',
     utilizationProgress: 'Foydalanish bosqichi',
   },
   // date-related texts

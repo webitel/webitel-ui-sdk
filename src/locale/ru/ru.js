@@ -129,11 +129,6 @@ export default {
     number: 'Номер',
     expireAt: 'Срок действия',
     destination: 'Назначение',
-    extension: 'Расширение',
-    password: 'Пароль',
-    number: 'Номер',
-    expireAt: 'Истекает',
-    destination: 'Назначение',
     utilizationProgress: 'Прогресс использования',
   },
   // date-related texts

@@ -130,11 +130,6 @@ export default {
     number: 'Număr',
     expireAt: 'Expiră la',
     destination: 'Destinație',
-    extension: 'Extensie',
-    password: 'Parolă',
-    number: 'Număr',
-    expireAt: 'Expiră la',
-    destination: 'Destinație',
     utilizationProgress: 'Progresul utilizării',
   },
   // date-related texts

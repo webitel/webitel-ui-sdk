@@ -130,11 +130,6 @@ export default {
     number: 'Нөмір',
     expireAt: 'Мерзімі',
     destination: 'Мақсат',
-    extension: 'Кеңейту',
-    password: 'Құпия сөз',
-    number: 'Нөмір',
-    expireAt: 'Мерзімі',
-    destination: 'Мақсат',
     utilizationProgress: 'Пайдалану прогресі',
   },
   // date-related texts

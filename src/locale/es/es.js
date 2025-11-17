@@ -129,11 +129,6 @@ export default {
     expireAt: 'Expira en',
     destination: 'Destino',
     utilizationProgress: 'Progreso de utilización',
-    extension: 'Extensión',
-    password: 'Contraseña',
-    number: 'Número',
-    expireAt: 'Expira en',
-    destination: 'Destino',
   },
   date: {
     sec: 'Seg',

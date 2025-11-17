@@ -130,11 +130,6 @@ export default {
     number: 'Numer',
     expireAt: 'Wygasa',
     destination: 'Cel',
-    extension: 'Rozszerzenie',
-    password: 'Hasło',
-    number: 'Numer',
-    expireAt: 'Wygasa',
-    destination: 'Cel',
     utilizationProgress: 'Postęp wykorzystania',
   },
   // date-related texts
