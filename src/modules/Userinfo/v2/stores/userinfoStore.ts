@@ -4,10 +4,14 @@ import { ref } from 'vue';
 
 import { getSession, getUiVisibilityAccess, logout } from '../api/UserinfoAPI';
 import { createUserAccessStore } from './accessStore';
+import { createSettingsStore } from './settingsStore';
 
 export const createUserinfoStore = () => {
   const namespace = 'userinfo';
   const useAccessStore = createUserAccessStore({
+    namespace,
+  });
+  const useSettingsStore = createSettingsStore({
     namespace,
   });
 
@@ -24,6 +28,7 @@ export const createUserinfoStore = () => {
       hasSectionVisibility,
       hasApplicationVisibility,
     } = accessStore;
+    const { initialize: initializeSettingsStore, timezone } = useSettingsStore();
 
     const userId = ref();
     const userInfo = ref(null);
@@ -48,6 +53,8 @@ export const createUserinfoStore = () => {
         permissions: session.permissions,
         access,
       });
+
+      await initializeSettingsStore();
     };
 
     const logoutUser = async () => {
@@ -62,6 +69,7 @@ export const createUserinfoStore = () => {
     return {
       userId,
       userInfo,
+      timezone,
       initialize,
 
       hasReadAccess,
