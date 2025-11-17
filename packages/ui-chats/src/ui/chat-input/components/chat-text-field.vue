@@ -9,32 +9,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import { WtTextarea } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-import insertTextAtCursor from 'insert-text-at-cursor';
-import type { Emitter } from 'mitt';
-
-import type { UiChatsEmitterEvents } from '../../utils/emitter';
 
 const textModel = defineModel<string>('text', { required: true });
 
-const size = inject<ComponentSize>('size');
-const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');
+const props = defineProps<{
+  size: ComponentSize;
+}>();
 
-uiChatsEmitter!.on('insertAtCursor', ({ text }) => insertAtCursor(text));
-uiChatsEmitter!.on('focusOnTextField', focus);
+defineExpose({
+  focus,
+});
 
 const chatTextFieldInputRef = useTemplateRef<HTMLTextAreaElement>('chatTextFieldInput');
 
-const textareaEl = computed(() => chatTextFieldInputRef.value?.$el.querySelector('textarea'));
-
 function focus() {
-  textareaEl.value!.focus();
+  chatTextFieldInputRef.value!.focus();
 };
-
-function insertAtCursor(text: string) {
-  focus();
-  insertTextAtCursor(textareaEl.value!, text);
-}
 </script>

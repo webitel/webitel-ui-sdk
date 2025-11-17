@@ -17,11 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import { inject, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import { WtRoundedAction } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 
-const size = inject<ComponentSize>('size');
+const props = defineProps<{
+  size: ComponentSize;
+}>();
 
 const emit = defineEmits<{
   'attachFiles': [files: File[]];

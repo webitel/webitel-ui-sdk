@@ -15,7 +15,6 @@ import arrowUp from './arrow-up.svg';
 import assignee from './assignee.svg';
 import attach from './attach.svg';
 import attention from './attention.svg';
-import attentionFilled from './attention--filled.svg';
 import azure from './azure.svg';
 import back from './back.svg';
 import bell from './bell.svg';
@@ -77,10 +76,8 @@ import contacts from './contacts.svg';
 import copy from './copy.svg';
 import customChatGateway from './custom-chat-gateway.svg';
 import darkMode from './dark-mode.svg';
-import dislike from './dislike.svg';
 import docs from './docs.svg';
 import done from './done.svg';
-import doneFilled from './done--filled.svg';
 import download from './download.svg';
 import downloadPdf from './download-pdf.svg'
 import edit from './edit.svg';
@@ -106,7 +103,6 @@ import job from './job.svg';
 import jobAccept from './job--accept.svg';
 import jobEnd from './job--end.svg';
 import json from './json.svg';
-import like from './like.svg';
 import link from './link.svg';
 import loadPreset from './load-preset.svg';
 import lock from './lock.svg';
@@ -242,7 +238,6 @@ export default objCamelToKebab({
   arrowMix,
   attach,
   attention,
-  'attention--filled': attentionFilled,
   azure,
   addFilter,
   addContact,
@@ -253,7 +248,6 @@ export default objCamelToKebab({
   breadCrumbs,
   bot,
   calendar,
-  dislike,
   darkMode,
 
   call,
@@ -332,7 +326,6 @@ export default objCamelToKebab({
   history,
   hold,
   impacted,
-  like,
   link,
   lock,
   logout,
@@ -378,7 +371,6 @@ export default objCamelToKebab({
   roundedInfo,
   role,
   done,
-  'done--filled': doneFilled,
   search,
   sendArrow,
   settings,

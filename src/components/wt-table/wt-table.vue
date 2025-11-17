@@ -108,30 +108,25 @@
       }"
       :sortable="isColSortable(col)"
     >
+
       <template #header>
-        <slot
-          :index="idx"
-          :header="col"
-          :name="`header-${col.value}`"
-        >
-          <div class="wt-table__th__content">
-            <span v-tooltip="col.text">
-              {{ col.text }}
-            </span>
-            <wt-icon
-              v-if="col.sort === 'asc'"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
-              icon="sort-arrow-up"
-              size="sm"
-            />
-            <wt-icon
-              v-else-if="col.sort === 'desc'"
-              class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
-              icon="sort-arrow-down"
-              size="sm"
-            />
-          </div>
-        </slot>
+        <div class="wt-table__th__content">
+          <span v-tooltip="col.text">
+            {{ col.text }}
+          </span>
+          <wt-icon
+            v-if="col.sort === 'asc'"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--asc"
+            icon="sort-arrow-up"
+            size="sm"
+          />
+          <wt-icon
+            v-else-if="col.sort === 'desc'"
+            class="wt-table__th__sort-arrow wt-table__th__sort-arrow--desc"
+            icon="sort-arrow-down"
+            size="sm"
+          />
+        </div>
       </template>
 
       <template #body="{ data: row, index }">

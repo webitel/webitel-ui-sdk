@@ -10,10 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 
-const size = inject<ComponentSize>('size');
+const props = defineProps<{
+  size: ComponentSize;
+}>();
 
 const emit = defineEmits<{
   'click': [];
