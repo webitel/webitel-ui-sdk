@@ -21,7 +21,12 @@ export const createSettingsStore = ({ namespace = 'userinfo' } = {}) => {
     };
 
     const initialize = async () => {
-      await initializeTimezone();
+      try {
+        await initializeTimezone();
+      } catch {
+        console.warn('Failed to apply the configured timezone. Falling back to the system timezone.');
+        localStorage.setItem(TIMEZONE_STORAGE_KEY, Intl.DateTimeFormat().resolvedOptions().timeZone);
+      }
     };
 
     return {
