@@ -13,6 +13,7 @@ import radio from './radio/radio.js';
 import slider from './slider/slider.js';
 import switcher from './switcher/switcher.js';
 import table from './table/table.js';
+import textarea from './textarea/textarea.js';
 import toolbar from './toolbar/toolbar.js';
 import tooltip from './tooltip/tooltip.js';
 
@@ -23,6 +24,7 @@ const components = {
   button,
   chip,
   checkbox,
+  textarea,
   toggleswitch: switcher,
   divider,
   image,

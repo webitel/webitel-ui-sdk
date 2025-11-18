@@ -1,10 +1,9 @@
 <template>
   <wt-textarea
-    :value="value"
+    v-model="value"
     :v="v$"
     label="Invalid textarea"
     name="invalid-textarea"
-    @input="handler"
   />
 </template>
 
@@ -24,8 +23,4 @@ const v$ = useVuelidate(
 );
 
 v$.value.$touch();
-
-const handler = (e) => {
-  value.value = e;
-};
 </script>
