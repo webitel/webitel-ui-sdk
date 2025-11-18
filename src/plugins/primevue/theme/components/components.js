@@ -9,11 +9,11 @@ import galleria from './galleria/galleria.js';
 import image from './image/image.js';
 import menubar from './menubar/menubar.js';
 import popover from './popover/popover.js';
-import textarea from './textarea/textarea.js';
 import radio from './radio/radio.js';
 import slider from './slider/slider.js';
 import switcher from './switcher/switcher.js';
 import table from './table/table.js';
+import textarea from './textarea/textarea.js';
 import toolbar from './toolbar/toolbar.js';
 import tooltip from './tooltip/tooltip.js';
 

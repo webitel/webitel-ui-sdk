@@ -22,8 +22,8 @@
     </wt-label>
     <div class="wt-textarea__wrapper">
       <p-textarea
-        ref="textarea-wrapper"
         :id="name"
+        ref="textarea-wrapper"
         v-model="model"
         :placeholder="placeholder || label"
         :invalid="invalid"
@@ -49,8 +49,7 @@
 
 <script setup lang="ts">
 import type { TextareaProps } from 'primevue/textarea';
-
-import { defineModel, onMounted, useTemplateRef, ref } from 'vue';
+import { defineModel, onMounted, ref,useTemplateRef } from 'vue';
 
 import { useValidation } from '../../mixins/validationMixin/useValidation';
 
