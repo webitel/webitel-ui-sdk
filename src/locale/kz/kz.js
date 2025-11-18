@@ -126,7 +126,6 @@ export default {
     column: 'Баған | Бағандар',
     notification: 'Хабарландыру | Хабарландырулар',
     screencast: 'Экран жазбасы',
-    extension: 'Кеңейту',
     password: 'Құпия сөз',
     number: 'Нөмір',
     expireAt: 'Мерзімі',
@@ -298,8 +297,7 @@ export default {
             ': ' +
             linked('objects.contact'),
           [CrmSectionsNew.CustomLookups]: ({ linked }) =>
-            linked('objects.customization.customization') +
-            ': Жекелендірулер', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
+            linked('objects.customization.customization') + ': Жекелендірулер', // dont use linked: objects.customLookup.customLookup, coz "linked" doesnt support pluralization
         },
       },
     },
@@ -514,7 +512,7 @@ export default {
         [IconAction.ADD_CONTACT]: ({ linked }) => {
           return `${linked('reusable.add')} contacts`;
         },
-        [IconAction.CHAT]: ({linked}) => linked('objects.chat.chat')
+        [IconAction.CHAT]: ({ linked }) => linked('objects.chat.chat'),
       },
     },
     errorPages: {
@@ -575,7 +573,7 @@ export default {
       },
     },
     pdfGeneration: {
-      generationStarted: 'Сіздің PDF файлыңыз жасалуда…'
+      generationStarted: 'Сіздің PDF файлыңыз жасалуда…',
     },
     saveFailedPopup: {
       title: 'Сақтау сәтсіз',
@@ -792,8 +790,9 @@ export default {
       delete: ({ named }) => `${named('entity').toLowerCase()} жойылды`,
     },
     info: {
-      passwordExpirationMessage: 'Сіздің құпия сөзіңіз { days } күннен кейін мерзімі аяқталады'
-    }
+      passwordExpirationMessage:
+        'Сіздің құпия сөзіңіз { days } күннен кейін мерзімі аяқталады',
+    },
   },
   errorNotifications: {
     chatHistoryApi: 'Чат тарихын жүктеу кезінде қате орын алды',
