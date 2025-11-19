@@ -13,20 +13,21 @@ export const createSettingsStore = ({ namespace = 'userinfo' } = {}) => {
       if (storedTimezone) {
         timezone.value = storedTimezone;
       } else {
-        const { timezone: userTimezone } =
-          await UserSettingsAPI.getUserTimezone();
-        timezone.value = userTimezone;
-        localStorage.setItem(TIMEZONE_STORAGE_KEY, userTimezone);
+        try {
+          const { timezone: userTimezone } = await UserSettingsAPI.getUserTimezone();
+          timezone.value = userTimezone;
+          localStorage.setItem(TIMEZONE_STORAGE_KEY, userTimezone);
+        } catch {
+          const systemTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          timezone.value = systemTimezone;
+          localStorage.setItem(TIMEZONE_STORAGE_KEY, systemTimezone);
+          console.warn('Failed to apply the configured timezone. Falling back to the system timezone.');
+        }
       }
     };
 
     const initialize = async () => {
-      try {
-        await initializeTimezone();
-      } catch {
-        console.warn('Failed to apply the configured timezone. Falling back to the system timezone.');
-        localStorage.setItem(TIMEZONE_STORAGE_KEY, Intl.DateTimeFormat().resolvedOptions().timeZone);
-      }
+      await initializeTimezone();
     };
 
     return {
