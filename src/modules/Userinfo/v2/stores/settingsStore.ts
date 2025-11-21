@@ -21,7 +21,6 @@ export const createSettingsStore = ({ namespace = 'userinfo' } = {}) => {
           const systemTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
           timezone.value = systemTimezone;
           localStorage.setItem(TIMEZONE_STORAGE_KEY, systemTimezone);
-          console.warn('Failed to apply the configured timezone. Falling back to the system timezone.');
         }
       }
     };
