@@ -5,7 +5,11 @@
         </slot> -->
         <slot name="intersection-observer"></slot>
         <slot name="main">
-            <chat-messages-container :messages="messages" />
+            <chat-messages-container
+             :has-more-messages="hasMoreMessages"
+             :messages="messages"
+             @load-more="emit('loadMore')"
+            />
         </slot>
         <slot name="footer">
             <chat-input
@@ -39,14 +43,20 @@ import { ChatMessageType } from './messaging/types/ChatMessage.types';
 
 const props = withDefaults(defineProps<{
     messages: ChatMessageType[];
+    /**
+     * if true, emit "loadMore" event on intersecting with the top of the messages container
+     */
+    hasMoreMessages?: boolean;
     size?: ComponentSize;
 }>(), {
     size: ComponentSize.MD,
+    hasMoreMessages: false,
 });
 
 const emit = defineEmits<{
     'sendMessage': [draft: string, options: { onSuccess: () => void }];
     'sendFile': [files: File[]];
+    'loadMore': [],
 }>();
 
 const uiChatsEmitter = createUiChatsEmitter();
