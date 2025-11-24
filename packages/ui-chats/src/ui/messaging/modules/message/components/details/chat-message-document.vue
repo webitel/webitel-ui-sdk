@@ -1,12 +1,15 @@
 <template>
-  <div v-if="documentFile" class="chat-message-document" :class="{ 'chat-message-document--right': agent }"
-    @click="downloadDocument">
+  <div
+    class="chat-message-document"
+    :class="{ 'chat-message-document--right': agent }"
+    @click="downloadDocument"
+  >
     <div class="chat-message-document__icon-wrapper">
       <wt-icon class="chat-message-document__icon" icon="attach" />
     </div>
     <div class="chat-message-document__info-wrapper">
-      <a class="chat-message-document__name" :title="documentFile.name">
-        {{ documentFile.name }}
+      <a class="chat-message-document__name" :title="props.file.name">
+        {{ props.file.name }}
       </a>
       <div class="chat-message-document__size">
         {{ documentSize }}
@@ -16,39 +19,27 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue';
-import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
+import { computed, defineProps } from 'vue';
 
-import { useChatMessageFile } from '../../composables/useChatMessageFile';
+import { prettifyFileSize } from '../../../../../../../../../../../webitel-ui-sdk/types/scripts';
 
-const props = defineProps({
-  file: {
-    type: Object,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  agent: {
-    type: Boolean,
-    default: false,
-  },
-});
+interface Props {
+  file: object;
+}
 
-const { document: documentFile } = useChatMessageFile(props.file);
+const props = defineProps<Props>();
 
 const documentSize = computed(() => {
-  if (!documentFile.value) return '';
+  if (!props.file) return '';
   return prettifyFileSize(documentFile.value.size);
 });
 
 function downloadDocument() {
-  if (!documentFile.value) return;
+  if (!props.file) return;
   const a = document.createElement('a');
-  a.href = documentFile.value.url;
+  a.href = props.file.url;
   a.target = '_blank';
-  a.download = documentFile.value.name;
+  a.download = props.file.name;
   a.click();
 }
 </script>
@@ -88,14 +79,14 @@ function downloadDocument() {
     color: var(--text-main-color);
   }
 
-  &--right {
-    flex-direction: row-reverse;
-    background: var(--secondary-light-color);
-
-    .chat-message-document__icon-wrapper {
-      margin-right: 0;
-      margin-left: var(--spacing-xs);
-    }
-  }
+  //&--right {
+  //  flex-direction: row-reverse;
+  //  background: var(--secondary-light-color);
+  //
+  //  .chat-message-new-document__icon-wrapper {
+  //    margin-right: 0;
+  //    margin-left: var(--spacing-xs);
+  //  }
+  //}
 }
 </style>

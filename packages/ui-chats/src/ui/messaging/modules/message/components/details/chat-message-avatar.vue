@@ -3,16 +3,15 @@
     class="chat-message-avatar"
   >
     <wt-avatar
-      v-if="!bot"
-      :username="username"
-      :src="src"
+      v-if="!props.bot"
+      :username="props.username"
       :size="size"
     />
     <div
       v-else
       class="chat-message-avatar__bot-avatar-wrapper"
     >
-    <!-- TODO: refactor me to use picture and wt-avatar "src" prop -->
+      <!-- TODO: refactor me to use picture and wt-avatar "src" prop -->
       <wt-icon
         icon="bot"
       />
@@ -21,21 +20,25 @@
 </template>
 
 <script setup lang="ts">
-import { inject, computed } from 'vue';
-import { ComponentSize } from '@webitel/ui-sdk/enums';
-import { WtAvatar, WtIcon } from '@webitel/ui-sdk/components';
+import { computed, inject } from 'vue';
 
-const props = defineProps<{
-    bot?: boolean;
-    username?: string;
-    src?: string;
-  }>();
+import { WtAvatar, WtIcon } from '../../../../../../../../../../../webitel-ui-sdk/types/components';
+import { ComponentSize } from '../../../../../../../../../../../webitel-ui-sdk/types/enums';
 
-  const injectedSize = inject<ComponentSize>('size');
+interface Props {
+  bot?: boolean;
+  username?: string;
+}
 
-  const size = computed(() => {
-    return ComponentSize.SM || injectedSize; // todo: should injected size be considered?
-  });
+const props = withDefaults(defineProps<Props>(), {
+  username: '',
+})
+
+const injectedSize = inject<ComponentSize>('size');
+
+const size = computed(() => {
+  return ComponentSize.SM || injectedSize; // todo: should injected size be considered?
+});
 </script>
 
 <style lang="scss" scoped>

@@ -6,25 +6,21 @@
   </aside>
 </template>
 
-<script>
 
-import prettifyTime from '@webitel/ui-sdk/src/scripts/prettifyTime.js';
+<script setup lang="ts">
+import prettifyTime from '@webitel/ui-sdk/src/scripts/prettifyTime';
+import { computed } from 'vue';
 
-export default {
-  name: 'ChatMessageTime',
-  props: {
-    date: {
-      type: String,
-      default: '',
-      required: true,
-    },
-  },
-  computed: {
-    time() {
-      return prettifyTime(this.date)
-    },
-  },
-};
+interface ChatMessageTimeProps {
+  date?: string;
+}
+
+const props = withDefaults(defineProps<ChatMessageTimeProps>(), {
+  date: '',
+})
+
+
+const time = computed(() => prettifyTime(props.date));
 </script>
 
 <style lang="scss" scoped>
