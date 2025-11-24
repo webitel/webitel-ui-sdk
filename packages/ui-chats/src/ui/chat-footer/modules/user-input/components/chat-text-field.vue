@@ -15,7 +15,7 @@ import { ComponentSize } from '@webitel/ui-sdk/enums';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import type { Emitter } from 'mitt';
 
-import type { UiChatsEmitterEvents } from '../../utils/emitter';
+import type { UiChatsEmitterEvents } from '../../../../utils/emitter';
 
 const textModel = defineModel<string>('text', { required: true });
 
@@ -25,7 +25,7 @@ const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');
 uiChatsEmitter!.on('insertAtCursor', ({ text }) => insertAtCursor(text));
 uiChatsEmitter!.on('focusOnTextField', focus);
 
-const chatTextFieldInputRef = useTemplateRef<HTMLTextAreaElement>('chatTextFieldInput');
+const chatTextFieldInputRef = useTemplateRef<typeof WtTextarea>('chatTextFieldInput');
 
 const textareaEl = computed(() => chatTextFieldInputRef.value?.$el.querySelector('textarea'));
 
