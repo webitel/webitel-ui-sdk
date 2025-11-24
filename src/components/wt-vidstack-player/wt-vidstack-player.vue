@@ -140,10 +140,6 @@ onBeforeUnmount(() => {
     }
 
     &--md {
-      //@include popup-wrapper;
-      ///** @author liza-pohranichna
-      //* need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
-
       position: relative;
       max-width: var(--p-player-wrapper-md-width);
       padding: 0;

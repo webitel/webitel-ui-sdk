@@ -6,36 +6,6 @@
     <slot name="content" />
 
     <slot name="default" :size="size" :change-size="changeSize" />
-<!--    <media-player-->
-<!--      ref="player"-->
-<!--      :src="playerSrc"-->
-<!--      :autoplay="props.autoplay"-->
-<!--      :muted="props.muted"-->
-<!--      class="resizable-wrapper__player"-->
-<!--      cross-origin-->
-<!--      plays-inline-->
-<!--      @close="emit('close')"-->
-<!--      @change-size="changeSize"-->
-<!--    >-->
-<!--      <media-provider-->
-<!--        class="resizable-wrapper__provider"-->
-<!--      ></media-provider>-->
-<!--      <video-layout-->
-<!--        :closable="props.closable"-->
-<!--        :autoplay="props.autoplay"-->
-<!--        :title="props.title"-->
-<!--        :username="props.username"-->
-<!--        :session="props.session"-->
-<!--        :screenshot-status="props.screenshotStatus"-->
-<!--        :screenshot-is-loading="screenshotIsLoading"-->
-<!--        :mode="mode"-->
-<!--        @close-player="emit('close')"-->
-<!--        @close-session="emit('close-session')"-->
-<!--        @make-screenshot="emit('make-screenshot')"-->
-<!--        @toggle-record="emit('toggle-record')"-->
-<!--      />-->
-
-<!--    </media-player>-->
   </div>
 </template>
 
