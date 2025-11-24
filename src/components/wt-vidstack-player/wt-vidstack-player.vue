@@ -1,62 +1,46 @@
 <template>
-  <div
-    class="wt-vidstack-player"
-    :class="[`wt-vidstack-player--${size}`]"
+  <media-player
+    ref="player"
+    :src="playerSrc"
+    :autoplay="props.autoplay"
+    :muted="props.muted"
+    :class="[`wt-vidstack-player__player--${size}`]"
+    class="wt-vidstack-player__player"
+    cross-origin
+    plays-inline
+    @close="emit('close')"
+    @change-size="changeSize"
   >
-    <media-player
-      ref="player"
-      :src="playerSrc"
-      :autoplay="props.autoplay"
-      :muted="props.muted"
-      class="wt-vidstack-player__player"
-      cross-origin
-      plays-inline
-      @close="emit('close')"
-      @change-size="changeSize"
-    >
-      <media-provider
-        class="wt-vidstack-player__provider"
-      ></media-provider>
-      <video-layout
-        :closable="props.closable"
-        :autoplay="props.autoplay"
-        :title="props.title"
-        :username="props.username"
-        :session="props.session"
-        :screenshot-status="props.screenshotStatus"
-        :screenshot-is-loading="screenshotIsLoading"
-        :mode="mode"
-        @close-player="emit('close')"
-        @close-session="emit('close-session')"
-        @make-screenshot="emit('make-screenshot')"
-        @toggle-record="emit('toggle-record')"
-      />
+    <media-provider
+      class="wt-vidstack-player__provider"
+    ></media-provider>
 
-    </media-player>
-  </div>
+    <video-layout
+      :closable="props.closable"
+      :autoplay="props.autoplay"
+      :title="props.title"
+      :username="props.username"
+      @close-player="emit('close')"
+    >
+      <template #controls-panel>
+        <slot name="controls-panel" />
+      </template>
+
+      <template #content>
+        <slot name="content" />
+      </template>
+    </video-layout>
+  </media-player>
 </template>
 
 <script setup lang="ts">
 import 'vidstack/player';
 import 'vidstack/player/ui';
 
-import type { MediaPlayerElement } from 'vidstack/elements';
-import {
-  computed,
-  defineEmits,
-  defineProps,
-  onBeforeUnmount,
-  onMounted,
-  provide,
-  ref,
-  useTemplateRef
-} from 'vue';
+import type {MediaPlayerElement} from 'vidstack/elements';
+import {computed, defineEmits, defineProps, inject, onBeforeUnmount, onMounted, useTemplateRef} from 'vue';
 
-import {ComponentSize} from '../../enums';
 import VideoLayout from './components/layouts/video-layout.vue';
-import {ScreenshotStatus} from "./types/ScreenshotStatus";
-import {WtVidstakPlayerControlsMode} from "./types/WtVidstackPlayerControlsMode";
-import {WtVidstackPlayerSession} from "./types/WtVidstackPlayerSession";
 
 interface Props {
   src: string | { src: string; type?: string };
@@ -66,11 +50,6 @@ interface Props {
   title?: string;
   username?: string;
   closable?: boolean;
-  stream?: MediaStream
-  mode: WtVidstakPlayerControlsMode;
-  session?: WtVidstackPlayerSession
-  screenshotStatus: ScreenshotStatus
-  screenshotIsLoading: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -80,28 +59,16 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
-  mode: 'media',
 });
 
 const emit = defineEmits<{
   'close': [],
-  'close-session': [],
-  'make-screenshot': [],
-  'toggle-record': [],
 }>()
 
+const {size, changeSize} = inject('size');
+
 const player = useTemplateRef<MediaPlayerElement>('player');
-const size = ref(ComponentSize.SM);
 
-const changeSize = (value) => {
-  size.value = value;
-}
-
-/** @author liza-pohranichna
- * options: [sm, md, lg]
- * lg-size is fullscreen
-*/
-provide('size', { size, changeSize });
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
@@ -116,7 +83,7 @@ const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/co
 
 const playerSrc = computed(() => {
   if (typeof props.src === 'string') {
-    return { src: props.src, type: normalizedType.value };
+    return {src: props.src, type: normalizedType.value};
   }
   return {
     src: props.src?.src || '',
@@ -154,7 +121,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-@use '../wt-popup/mixins.scss' as *;
+//@use '../wt-popup/mixins.scss' as *;
 
 .wt-vidstack-player {
   transition: var(--transition);
@@ -164,49 +131,32 @@ onBeforeUnmount(() => {
     margin: 0;
     min-width: 0;
     width: 100%;
-  }
 
-  &--sm {
-    position: fixed;
-    right: var(--spacing-md);
-    bottom: var(--spacing-md);
-    max-width: var(--p-player-wrapper-sm-width);
-    max-height: var(--p-player-wrapper-sm-height);
-    z-index: 100;
-    border-radius: var(--p-player-wrapper-sm-border-radius);
-    overflow: hidden;
-    box-shadow: var(--elevation-10);
-    height: var(--p-player-wrapper-sm-height);
-
-    .wt-vidstack-player__provider {
+    &--sm {
       display: block;
       height: 100%;
       // Control bar sm height
       padding-bottom: 48px;
     }
-  }
 
-  &--md {
-    @include popup-wrapper;
-    /** @author liza-pohranichna
-    * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
+    &--md {
+      //@include popup-wrapper;
+      ///** @author liza-pohranichna
+      //* need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
-    .wt-vidstack-player__player {
-      @include popup-container;
       position: relative;
       max-width: var(--p-player-wrapper-md-width);
       padding: 0;
       border-radius: var(--p-player-wrapper-md-border-radius);
       overflow: hidden;
     }
-  }
 
-  &--lg {
-    .wt-vidstack-player {
+    &--lg {
       &__player {
         display: flex;
         align-items: center;
       }
+
       &__provider {
         width: 100%;
         min-width: 0;
