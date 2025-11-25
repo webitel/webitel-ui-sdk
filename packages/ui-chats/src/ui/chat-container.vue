@@ -8,14 +8,16 @@
         </slot>
         <slot name="footer">
           <chat-footer-wrapper>
-            <chat-text-field
-                v-model:text="draft"
-            />
-            <chat-input-actions-bar
-              :actions="chatActions"
-              @action:sendMessage="sendMessage"
-              @action:attachFiles="sendFile"
-            ></chat-input-actions-bar>
+            <template #default>
+              <chat-text-field
+                  v-model:text="draft"
+              />
+              <chat-input-actions-bar
+                :actions="chatActions"
+                @action:sendMessage="sendMessage"
+                @action:attachFiles="sendFile"
+              ></chat-input-actions-bar>
+            </template>
           </chat-footer-wrapper>
         </slot>
     </section>
@@ -27,6 +29,8 @@ import { ComponentSize } from '@webitel/ui-sdk/enums';
 import ChatMessagesContainer from './messaging/components/chat-messages-container.vue';
 
 import ChatFooterWrapper from './chat-footer/components/chat-footer-wrapper.vue';
+import ChatTextField from './chat-footer/modules/user-input/components/chat-text-field.vue';
+import ChatInputActionsBar from './chat-footer/modules/user-input/components/chat-input-actions-bar.vue';
 import { createUiChatsEmitter } from './utils/emitter';
 import { ChatMessageType } from './messaging/types/ChatMessage.types';
 import { ChatAction, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
