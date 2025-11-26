@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, defineEmits, inject, onUnmounted, ref, watch} from 'vue';
+import {computed, defineEmits, inject} from 'vue';
 
 import {ControlsGroup} from '../../../../../components/wt-vidstack-player/components'
 import {ScreenSharingSession, ScreenshotStatus} from "../../../types";
@@ -47,7 +47,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-console.log(props, ' props')
 
 const emit = defineEmits<{
   'close-session': [],
@@ -69,25 +68,6 @@ const screenShotIcon = computed(() => {
       return 'screenshot';
   }
 });
-const isRecording = computed(() => props.session.recordings);
-
-const secondsElapsed = ref(0);
-const timerId = ref<number | null>(null);
-
-function startTimer() {
-  secondsElapsed.value = 0;
-  stopTimer();
-  timerId.value = window.setInterval(() => {
-    secondsElapsed.value++;
-  }, 1000);
-}
-
-function stopTimer() {
-  if (timerId.value !== null) {
-    clearInterval(timerId.value);
-    timerId.value = null;
-  }
-}
 
 const closeSession = () => {
   emit('close-session')
@@ -96,18 +76,6 @@ const closeSession = () => {
 const makeScreenshot = () => {
   emit('make-screenshot')
 };
-
-onUnmounted(() => {
-  stopTimer();
-});
-
-watch(isRecording, (newVal) => {
-  if (newVal) {
-    startTimer();
-  } else {
-    stopTimer();
-  }
-});
 </script>
 
 <style scoped lang="scss">

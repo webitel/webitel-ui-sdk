@@ -4,7 +4,7 @@
     :class="`controls-group--${size}`"
   >
     <div class="controls-group__actions">
-      <slot name="default" />
+      <slot />
     </div>
   </media-controls-group>
 </template>
@@ -20,8 +20,13 @@ const { size } = inject('size');
 .controls-group {
   display: flex;
   justify-content: center;
+  max-width: fit-content;
+  align-self: center;
 
   &--sm {
+    width: 100%;
+    max-width: 100%;
+
     .controls-group__actions {
       border-top-left-radius: 0 !important;
       border-top-right-radius: 0 !important;
@@ -30,7 +35,6 @@ const { size } = inject('size');
   }
 
   &--md {
-    max-width: fit-content;
     align-self: center;
   }
 

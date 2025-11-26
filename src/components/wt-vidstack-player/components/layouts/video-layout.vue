@@ -15,7 +15,9 @@
 
     <slot name="content" />
 
-    <slot name="controls-panel" />
+    <slot name="controls-panel">
+      <media-controls-panel />
+    </slot>
   </media-controls>
 </template>
 
@@ -23,6 +25,7 @@
 import {defineEmits, inject} from "vue";
 
 import WtLoader from "../../../wt-loader/wt-loader.vue";
+import MediaControlsPanel from "../panels/media-controls-panel/media-controls-panel.vue";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
 const { size } = inject('size');

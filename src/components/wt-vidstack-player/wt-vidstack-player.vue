@@ -1,36 +1,45 @@
 <template>
-  <media-player
-    ref="player"
-    :src="playerSrc"
-    :autoplay="props.autoplay"
-    :muted="props.muted"
-    :class="[`wt-vidstack-player__player--${size}`]"
-    class="wt-vidstack-player__player"
-    cross-origin
-    plays-inline
-    @close="emit('close')"
-    @change-size="changeSize"
+  <div
+    class="wt-vidstack-player"
+    :class="{
+      [`wt-vidstack-player--${size}`]: props.resizable,
+      'wt-vidstack-player--static': !props.resizable
+    }"
   >
-    <media-provider
-      class="wt-vidstack-player__provider"
-    ></media-provider>
-
-    <video-layout
-      :closable="props.closable"
+    <media-player
+      ref="player"
+      :src="playerSrc"
       :autoplay="props.autoplay"
-      :title="props.title"
-      :username="props.username"
-      @close-player="emit('close')"
+      :muted="props.muted"
+      class="wt-vidstack-player__player"
+      cross-origin
+      plays-inline
+      @close="emit('close')"
+      @change-size="changeSize"
     >
-      <template #controls-panel>
-        <slot name="controls-panel" />
-      </template>
+      <media-provider
+        class="wt-vidstack-player__provider"
+      ></media-provider>
 
-      <template #content>
-        <slot name="content" />
-      </template>
-    </video-layout>
-  </media-player>
+      <video-layout
+        v-if="props.resizable"
+        :closable="props.closable"
+        :autoplay="props.autoplay"
+        :title="props.title"
+        :username="props.username"
+        @close-player="emit('close')"
+      >
+        <template #controls-panel>
+          <slot name="controls-panel" :size="size" />
+        </template>
+
+        <template #content>
+          <slot name="content" :size="size" />
+        </template>
+      </video-layout>
+
+    </media-player>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -38,9 +47,10 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, inject, onBeforeUnmount, onMounted, useTemplateRef} from 'vue';
+import {computed, defineEmits, defineProps, onBeforeUnmount, onMounted, provide, ref, useTemplateRef} from 'vue';
 
-import VideoLayout from './components/layouts/video-layout.vue';
+import {ComponentSize} from '../../enums';
+import {VideoLayout} from "./components";
 
 interface Props {
   src: string | { src: string; type?: string };
@@ -50,6 +60,8 @@ interface Props {
   title?: string;
   username?: string;
   closable?: boolean;
+  resizable?: boolean;
+  stream?: MediaStream
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -59,16 +71,25 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
+  resizable: true,
 });
 
 const emit = defineEmits<{
   'close': [],
 }>()
 
-const {size, changeSize} = inject('size');
-
 const player = useTemplateRef<MediaPlayerElement>('player');
+const size = ref(ComponentSize.SM);
 
+const changeSize = (value) => {
+  size.value = value;
+}
+
+/** @author liza-pohranichna
+ * options: [sm, md, lg]
+ * lg-size is fullscreen
+ */
+provide('size', {size, changeSize});
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
@@ -96,7 +117,7 @@ const playerSrc = computed(() => {
  * A brief delay ensures the internal <video> element is ready before playback starts.
  */
 onMounted(() => {
-  if (player.value && props.mode === 'stream' && props.stream) {
+  if (player.value && props.stream) {
     const videoEl = player.value.querySelector('video')
 
     videoEl.addEventListener("loadedmetadata", async () => {
@@ -121,7 +142,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-//@use '../wt-popup/mixins.scss' as *;
+@use '../wt-popup/mixins.scss' as *;
 
 .wt-vidstack-player {
   transition: var(--transition);
@@ -129,25 +150,44 @@ onBeforeUnmount(() => {
   &__player {
     padding: 0;
     margin: 0;
-    min-width: 0;
-    width: 100%;
+  }
 
-    &--sm {
+  &--sm {
+    position: fixed;
+    right: var(--spacing-md);
+    bottom: var(--spacing-md);
+    max-width: var(--p-player-wrapper-sm-width);
+    max-height: var(--p-player-wrapper-sm-height);
+    z-index: 100;
+    border-radius: var(--p-player-wrapper-sm-border-radius);
+    overflow: hidden;
+    box-shadow: var(--elevation-10);
+    height: var(--p-player-wrapper-sm-height);
+
+    .wt-vidstack-player__provider {
       display: block;
       height: 100%;
-      // Control bar sm height
-      padding-bottom: 48px;
+      padding-bottom: var(--p-player-control-bar-sm-height);
     }
+  }
 
-    &--md {
+  &--md {
+    @include popup-wrapper;
+    /** @author liza-pohranichna
+    * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
+
+    .wt-vidstack-player__player {
+      @include popup-container;
       position: relative;
       max-width: var(--p-player-wrapper-md-width);
       padding: 0;
       border-radius: var(--p-player-wrapper-md-border-radius);
       overflow: hidden;
     }
+  }
 
-    &--lg {
+  &--lg {
+    .wt-vidstack-player {
       &__player {
         display: flex;
         align-items: center;
@@ -157,6 +197,20 @@ onBeforeUnmount(() => {
         width: 100%;
         min-width: 0;
       }
+    }
+  }
+
+  &--static {
+    position: relative;
+    right: unset;
+    bottom: unset;
+
+    .wt-vidstack-player__provider {
+      padding: 0;
+    }
+
+    .wt-vidstack-player__player {
+      margin: 0;
     }
   }
 }
