@@ -20,11 +20,13 @@
 import { inject, useTemplateRef } from 'vue';
 import { WtRoundedAction } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-import { AttachFilesChatActionEmits } from '../../types/ChatAction.types';
+import { ChatAction } from '../../types/ChatAction.types';
 
 const size = inject<ComponentSize>('size');
 
-const emit = defineEmits<AttachFilesChatActionEmits>();
+const emit = defineEmits([
+  ChatAction.AttachFiles,
+]);
 
 const attachFilesInputRef = useTemplateRef('attachFilesInput');
 

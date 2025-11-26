@@ -5,17 +5,19 @@
     :size="size"
     rounded
     wide
-    @click="emit('click')"
+    @click="emit(ChatAction.SendMessage)"
   />
 </template>
 
 <script setup lang="ts">
 import { inject } from 'vue';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-import { SendMessageChatActionEmits } from '../../types/ChatAction.types';
+import { ChatAction } from '../../types/ChatAction.types';
 
 const size = inject<ComponentSize>('size');
 
-const emit = defineEmits<SendMessageChatActionEmits>();
+const emit = defineEmits([
+  ChatAction.SendMessage,
+]);
 
 </script>

@@ -11,15 +11,11 @@ type __VLS_Slots = {
     footer: () => any;
 } & SharedActionSlots;
 declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    sendMessage: (draft: string, options: {
-        onSuccess: () => void;
-    }) => any;
-    sendFile: (files: File[]) => any;
+    "action:sendMessage": (...args: any[]) => void;
+    "action:attachFiles": (...args: any[]) => void;
 }, string, import("vue").PublicProps, Readonly<__VLS_Props> & Readonly<{
-    onSendMessage?: (draft: string, options: {
-        onSuccess: () => void;
-    }) => any;
-    onSendFile?: (files: File[]) => any;
+    "onAction:sendMessage"?: (...args: any[]) => any;
+    "onAction:attachFiles"?: (...args: any[]) => any;
 }>, {
     size: ComponentSize;
     chatActions: ChatAction[];

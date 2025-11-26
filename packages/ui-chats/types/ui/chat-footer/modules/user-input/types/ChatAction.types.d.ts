@@ -5,16 +5,7 @@ export declare const ChatAction: {
     readonly QuickReplies: "quickReplies";
 };
 export type ChatAction = (typeof ChatAction)[keyof typeof ChatAction];
-export type SendMessageChatActionEmits = {
-    'click': [];
-};
-export type AttachFilesChatActionEmits = {
-    'attachFiles': [files: File[]];
-};
-export type ChatActionsBarEmits = {
-    'action:sendMessage': SendMessageChatActionEmits['click'];
-    'action:attachFiles': AttachFilesChatActionEmits['attachFiles'];
-};
+export declare const ChatActionSlotsPrefix = "action";
 export type SharedActionSlots = {
-    [key in ChatAction]: () => any;
+    [key in `${typeof ChatActionSlotsPrefix}:${ChatAction}`]?: () => any;
 };

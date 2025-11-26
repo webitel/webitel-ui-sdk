@@ -1,10 +1,10 @@
 <template>
     <wt-textarea
+        v-model="textModel"
         ref="chatTextFieldInput"
-        :model-value="textModel"
         :size="size"
         autoresize
-        @update:model-value="textModel = $event"
+        @enter="emit(ChatAction.SendMessage)"
     />
 </template>
 

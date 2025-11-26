@@ -14,9 +14,20 @@
               />
               <chat-input-actions-bar
                 :actions="chatActions"
-                @action:sendMessage="sendMessage"
-                @action:attachFiles="sendFile"
-              ></chat-input-actions-bar>
+                @[ChatAction.SendMessage]="sendMessage"
+                @[ChatAction.AttachFiles]="sendFile"
+              >
+              <template 
+              v-for="action in slottedChatActions" 
+              :key="action"
+              #[action]="{ size }"
+              >
+                <slot
+                  :name="`${ChatActionSlotsPrefix}:${action}`"
+                  v-bind="{ size }"
+                />
+              </template>
+            </chat-input-actions-bar>
             </template>
           </chat-footer-wrapper>
         </slot>
@@ -24,16 +35,17 @@
 </template>
 
 <script setup lang="ts">
-import { provide, ref } from 'vue';
+import { provide, ref, computed } from 'vue';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import ChatMessagesContainer from './messaging/components/chat-messages-container.vue';
 
+import { ResultCallbacks } from './utils/ResultCallbacks.types';
 import ChatFooterWrapper from './chat-footer/components/chat-footer-wrapper.vue';
 import ChatTextField from './chat-footer/modules/user-input/components/chat-text-field.vue';
 import ChatInputActionsBar from './chat-footer/modules/user-input/components/chat-input-actions-bar.vue';
 import { createUiChatsEmitter } from './utils/emitter';
 import { ChatMessageType } from './messaging/types/ChatMessage.types';
-import { ChatAction, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
+import { ChatAction, ChatActionSlotsPrefix, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
 
 const props = withDefaults(defineProps<{
   messages: ChatMessageType[];
@@ -44,10 +56,10 @@ const props = withDefaults(defineProps<{
   chatActions: () => [ChatAction.SendMessage],
 });
 
-const emit = defineEmits<{
-  'sendMessage': [draft: string, options: { onSuccess: () => void }];
-  'sendFile': [files: File[]];
-}>();
+const emit = defineEmits([
+    `action:${ChatAction.SendMessage}`,
+    `action:${ChatAction.AttachFiles}`,
+]);
 
 const slots = defineSlots<{
   main: () => any;
@@ -61,18 +73,23 @@ provide('uiChatsEmitter', uiChatsEmitter);
 
 const draft = ref<string>('');
 
-// const slottedActions = computed(() => {
-//   return Object.keys(slots).filter((key) => key in ChatAction);
-// });
+const slottedChatActions = computed(() => {
+  return Object.keys(slots)
+  .filter((key) => key.startsWith(ChatActionSlotsPrefix))
+  .map((key) => key.replace(`${ChatActionSlotsPrefix}:`, ''));
+});
 
 function sendMessage() {
-  emit('sendMessage', draft.value, {
+  emit(`action:${ChatAction.SendMessage}`, 
+    draft.value, 
+    {
     onSuccess: () => draft.value = '',
   });
 }
 
 function sendFile(files: File[]) {
-  emit('sendFile', files);
+  emit(`action:${ChatAction.AttachFiles}`, files, {
+  });
 }
 
 </script>
