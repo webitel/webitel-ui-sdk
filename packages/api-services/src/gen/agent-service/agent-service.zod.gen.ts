@@ -476,6 +476,7 @@ export const searchAgentStateHistoryResponse = zod.object({
 				duration: zod.string().optional(),
 				id: zod.string().optional(),
 				joinedAt: zod.string().optional(),
+				leavedAt: zod.string().optional(),
 				pauseCause: zod.string().optional(),
 				payload: zod.string().optional(),
 				queue: zod
@@ -539,6 +540,7 @@ export const agentStateHistoryResponse = zod.object({
 				duration: zod.string().optional(),
 				id: zod.string().optional(),
 				joinedAt: zod.string().optional(),
+				leavedAt: zod.string().optional(),
 				pauseCause: zod.string().optional(),
 				payload: zod.string().optional(),
 				queue: zod

@@ -781,6 +781,7 @@ export * from './getFileTranscriptPhrasesParams';
 export * from './getLabelsParams';
 export * from './getPdfExportHistoryParams';
 export * from './getPermissionsParams';
+export * from './getQueuesGlobalStateParams';
 export * from './getTimelineParams';
 export * from './getTimelineTimelineParams';
 export * from './getTimelineTimelineTypeItem';

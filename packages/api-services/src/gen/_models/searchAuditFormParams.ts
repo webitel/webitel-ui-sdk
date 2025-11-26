@@ -21,5 +21,8 @@ bool active = 11; // not archive
  */
 	editable?: boolean;
 	question?: string;
-	teamFilter?: boolean;
+	/**
+	 * expects userID to filter by user's team
+	 */
+	teamFilter?: number;
 };

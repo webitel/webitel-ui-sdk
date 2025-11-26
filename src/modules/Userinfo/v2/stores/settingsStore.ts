@@ -13,10 +13,15 @@ export const createSettingsStore = ({ namespace = 'userinfo' } = {}) => {
       if (storedTimezone) {
         timezone.value = storedTimezone;
       } else {
-        const { timezone: userTimezone } =
-          await UserSettingsAPI.getUserTimezone();
-        timezone.value = userTimezone;
-        localStorage.setItem(TIMEZONE_STORAGE_KEY, userTimezone);
+        try {
+          const { timezone: userTimezone } = await UserSettingsAPI.getUserTimezone();
+          timezone.value = userTimezone;
+          localStorage.setItem(TIMEZONE_STORAGE_KEY, userTimezone);
+        } catch {
+          const systemTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          timezone.value = systemTimezone;
+          localStorage.setItem(TIMEZONE_STORAGE_KEY, systemTimezone);
+        }
       }
     };
 

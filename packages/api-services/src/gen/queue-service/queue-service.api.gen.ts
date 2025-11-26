@@ -20,6 +20,7 @@ import type {
 	EngineQueueServiceUpdateQueueBody,
 	EngineSetQueuesGlobalStateRequest,
 	EngineSetQueuesGlobalStateResponse,
+	GetQueuesGlobalStateParams,
 	ReadQueueParams,
 	SearchQueueParams,
 	SearchQueueReportGeneralParams,
@@ -73,9 +74,13 @@ export const // --- title start
 			const getQueuesGlobalState = <
 				TData = AxiosResponse<EngineGetQueuesGlobalStateResponse>,
 			>(
+				params?: GetQueuesGlobalStateParams,
 				options?: AxiosRequestConfig,
 			): Promise<TData> => {
-				return axios.get('/call_center/queues/state', options);
+				return axios.get('/call_center/queues/state', {
+					...options,
+					params: { ...params, ...options?.params },
+				});
 			};
 			const setQueuesGlobalState = <
 				TData = AxiosResponse<EngineSetQueuesGlobalStateResponse>,

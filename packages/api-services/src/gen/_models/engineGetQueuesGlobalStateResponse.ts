@@ -7,4 +7,5 @@
 
 export interface EngineGetQueuesGlobalStateResponse {
 	isAllEnabled?: boolean;
+	potentialRows?: number;
 }

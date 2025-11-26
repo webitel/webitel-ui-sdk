@@ -432,6 +432,14 @@ export const getSearchSkillAgentResponseMock = (
 				faker.datatype.boolean(),
 				undefined,
 			]),
+			potentialRows: faker.helpers.arrayElement([
+				faker.number.int({
+					min: undefined,
+					max: undefined,
+					multipleOf: undefined,
+				}),
+				undefined,
+			]),
 		},
 		undefined,
 	]),
