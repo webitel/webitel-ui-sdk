@@ -462,12 +462,25 @@ export const searchQueueReportGeneralResponse = zod.object({
 	next: zod.boolean().optional(),
 });
 
+export const getQueuesGlobalStateQueryParams = zod.object({
+	q: zod.string().optional(),
+	type: zod.array(zod.number()).optional(),
+	teamId: zod.array(zod.number()).optional(),
+	tags: zod.array(zod.string()).optional(),
+});
+
 export const getQueuesGlobalStateResponse = zod.object({
 	isAllEnabled: zod.boolean().optional(),
+	potentialRows: zod.number().optional(),
 });
 
 export const setQueuesGlobalStateBody = zod.object({
+	tags: zod.array(zod.string()).optional(),
 	enabled: zod.boolean().optional(),
+	id: zod.array(zod.string()).optional(),
+	q: zod.string().optional(),
+	teamId: zod.array(zod.number()).optional(),
+	type: zod.array(zod.number()).optional(),
 });
 
 export const setQueuesGlobalStateResponse = zod.object({

@@ -245,6 +245,7 @@ export const searchSkillAgentResponse = zod.object({
 	aggs: zod
 		.object({
 			enabled: zod.boolean().optional(),
+			potentialRows: zod.number().optional(),
 		})
 		.optional(),
 	items: zod
@@ -287,6 +288,7 @@ export const patchSkillAgentBody = zod.object({
 	enabled: zod.boolean().optional(),
 	fields: zod.array(zod.string()).optional(),
 	id: zod.array(zod.string()).optional(),
+	q: zod.string().optional(),
 	skill: zod
 		.object({
 			id: zod.string().optional(),

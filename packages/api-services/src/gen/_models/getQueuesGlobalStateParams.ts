@@ -5,11 +5,9 @@
  * OpenAPI spec version: 24.04.0
  */
 
-export interface EngineSetQueuesGlobalStateRequest {
-	tags?: string[];
-	enabled?: boolean;
-	id?: string[];
+export type GetQueuesGlobalStateParams = {
 	q?: string;
-	teamId?: number[];
 	type?: number[];
-}
+	teamId?: number[];
+	tags?: string[];
+};
