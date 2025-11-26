@@ -1,7 +1,20 @@
-import { enGB, enUS, type Locale } from 'date-fns/locale';
+import type { Locale } from 'date-fns/locale';
+import { enUS, es, kk, pl, ro, ru, uk, uz, vi } from 'date-fns/locale';
 import { formatInTimeZone } from 'date-fns-tz';
 
-import { TIMEZONE_STORAGE_KEY } from '../modules/Userinfo/v2/constants/UserSettingsConstants'
+import { TIMEZONE_STORAGE_KEY } from '../modules/Userinfo/v2/constants/UserSettingsConstants';
+
+const localeMap: Record<string, Locale> = {
+  en: enUS,
+  ru: ru,
+  uk: uk,
+  es: es,
+  kz: kk,
+  pl: pl,
+  ro: ro,
+  uz: uz,
+  vi: vi,
+};
 
 function getUserTimeZone(): string {
   return (
@@ -11,7 +24,8 @@ function getUserTimeZone(): string {
 }
 
 function getUserLocale(): Locale {
-  return localStorage.getItem('lang') === 'en' ? enUS : enGB;
+  const lang = localStorage.getItem('lang') || 'en';
+  return localeMap[lang] || enUS;
 }
 
 export function formatDate(
