@@ -30,16 +30,17 @@ function getUserLocale(): Locale {
 
 export function formatDate(
   date: string | number | Date,
-  to: 'date' | 'time' | 'datetime',
+  to: 'date' | 'time' | 'datetime' | 'datetimeShort',
 ): string {
   const timeZone = getUserTimeZone();
   const locale = getUserLocale();
 
   // https://date-fns.org/v4.1.0/docs/format
   const formatStaringMap = {
-    date: 'P',
-    time: 'p',
-    datetime: 'Ppp',
+    date: 'P', //MM/DD/YYYY  11/13/2025 | DD.MM.YYYY 13.11.2025
+    time: 'p', // 3:53 PM | 15:53
+    datetime: 'Ppp', // 11/13/2025, 3:53:00 PM | 13.11.2025, 15:53:00
+    datetimeShort: 'Pp', // 11/13/2025, 3:53 PM | 13.11.2025, 15:53
   };
 
   return formatInTimeZone(date, timeZone, formatStaringMap[to], { locale });
