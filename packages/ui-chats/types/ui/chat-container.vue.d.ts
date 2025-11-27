@@ -1,27 +1,25 @@
 import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { ResultCallbacks } from './utils/ResultCallbacks.types';
 import { ChatMessageType } from './messaging/types/ChatMessage.types';
+import { ChatAction, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
 type __VLS_Props = {
     messages: ChatMessageType[];
+    chatActions?: ChatAction[];
     size?: ComponentSize;
 };
-declare var __VLS_1: {}, __VLS_7: {};
-type __VLS_Slots = {} & {
-    main?: (props: typeof __VLS_1) => any;
-} & {
-    footer?: (props: typeof __VLS_7) => any;
-};
-declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    sendMessage: (draft: string, options: {
-        onSuccess: () => void;
-    }) => any;
-    sendFile: (files: File[]) => any;
+type __VLS_Slots = {
+    main: () => any;
+    footer: () => any;
+} & SharedActionSlots;
+declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
+    "action:sendMessage": (text: string, options: ResultCallbacks) => any;
+    "action:attachFiles": (files: File[], options: ResultCallbacks) => any;
 }, string, import("vue").PublicProps, Readonly<__VLS_Props> & Readonly<{
-    onSendMessage?: (draft: string, options: {
-        onSuccess: () => void;
-    }) => any;
-    onSendFile?: (files: File[]) => any;
+    "onAction:sendMessage"?: (text: string, options: ResultCallbacks) => any;
+    "onAction:attachFiles"?: (files: File[], options: ResultCallbacks) => any;
 }>, {
     size: ComponentSize;
+    chatActions: ChatAction[];
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>;
 declare const __VLS_export: __VLS_WithSlots<typeof __VLS_base, __VLS_Slots>;
 declare const _default: typeof __VLS_export;
