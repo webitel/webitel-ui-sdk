@@ -12,11 +12,11 @@ type __VLS_Slots = {
     footer: () => any;
 } & SharedActionSlots;
 declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
-    [x: `action:${ChatAction.SendMessage}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
-    [x: `action:${ChatAction.AttachFiles}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
+    "action:sendMessage": (text: string, options: ResultCallbacks) => any;
+    "action:attachFiles": (files: File[], options: ResultCallbacks) => any;
 }, string, import("vue").PublicProps, Readonly<__VLS_Props> & Readonly<{
-    [x: `onAction:${ChatAction.SendMessage}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
-    [x: `onAction:${ChatAction.AttachFiles}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
+    "onAction:sendMessage"?: (text: string, options: ResultCallbacks) => any;
+    "onAction:attachFiles"?: (files: File[], options: ResultCallbacks) => any;
 }>, {
     size: ComponentSize;
     chatActions: ChatAction[];

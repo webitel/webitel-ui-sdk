@@ -33,7 +33,7 @@ const attachFilesInputRef = useTemplateRef('attachFilesInput');
 const handleAttachmentInputChange = (event: Event) => {
   const files = (event.target as HTMLInputElement).files;
   if (!files) return;
-  emit('attachFiles', Array.from(files) as File[]);
+  emit(ChatAction.AttachFiles, Array.from(files) as File[]);
 };
 </script>
 

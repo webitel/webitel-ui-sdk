@@ -57,10 +57,8 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-  /* @ts-expect-error */
-  (e: `action:${ChatAction.SendMessage}`, text: string, options: ResultCallbacks): void;
-  /* @ts-expect-error */
-  (e: `action:${ChatAction.AttachFiles}`, files: File[], options: ResultCallbacks): void;
+  (e: `action:${typeof ChatAction.SendMessage}`, text: string, options: ResultCallbacks): void;
+  (e: `action:${typeof ChatAction.AttachFiles}`, files: File[], options: ResultCallbacks): void;
 }>();
 
 const slots = defineSlots<{
