@@ -23,7 +23,7 @@
               #[action]="{ size }"
               >
                 <slot
-                  :name="`${ChatActionSlotsPrefix}:${action}`"
+                  :name="`action:${action}`"
                   v-bind="{ size }"
                 />
               </template>
@@ -45,7 +45,7 @@ import ChatTextField from './chat-footer/modules/user-input/components/chat-text
 import ChatInputActionsBar from './chat-footer/modules/user-input/components/chat-input-actions-bar.vue';
 import { createUiChatsEmitter } from './utils/emitter';
 import { ChatMessageType } from './messaging/types/ChatMessage.types';
-import { ChatAction, ChatActionSlotsPrefix, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
+import { ChatAction, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
 
 const props = withDefaults(defineProps<{
   messages: ChatMessageType[];
@@ -56,10 +56,12 @@ const props = withDefaults(defineProps<{
   chatActions: () => [ChatAction.SendMessage],
 });
 
-const emit = defineEmits([
-    `action:${ChatAction.SendMessage}`,
-    `action:${ChatAction.AttachFiles}`,
-]);
+const emit = defineEmits<{
+  /* @ts-expect-error */
+  (e: `action:${ChatAction.SendMessage}`, text: string, options: ResultCallbacks): void;
+  /* @ts-expect-error */
+  (e: `action:${ChatAction.AttachFiles}`, files: File[], options: ResultCallbacks): void;
+}>();
 
 const slots = defineSlots<{
   main: () => any;
@@ -75,8 +77,8 @@ const draft = ref<string>('');
 
 const slottedChatActions = computed(() => {
   return Object.keys(slots)
-  .filter((key) => key.startsWith(ChatActionSlotsPrefix))
-  .map((key) => key.replace(`${ChatActionSlotsPrefix}:`, ''));
+  .filter((key) => key.startsWith('action:'))
+  .map((key) => key.replace('action:', ''));
 });
 
 function sendMessage() {

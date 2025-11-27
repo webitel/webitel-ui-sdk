@@ -1,4 +1,5 @@
 import { ComponentSize } from '@webitel/ui-sdk/enums';
+import { ResultCallbacks } from './utils/ResultCallbacks.types';
 import { ChatMessageType } from './messaging/types/ChatMessage.types';
 import { ChatAction, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
 type __VLS_Props = {
@@ -10,12 +11,12 @@ type __VLS_Slots = {
     main: () => any;
     footer: () => any;
 } & SharedActionSlots;
-declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    "action:sendMessage": (...args: any[]) => void;
-    "action:attachFiles": (...args: any[]) => void;
+declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
+    [x: `action:${ChatAction.SendMessage}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
+    [x: `action:${ChatAction.AttachFiles}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
 }, string, import("vue").PublicProps, Readonly<__VLS_Props> & Readonly<{
-    "onAction:sendMessage"?: (...args: any[]) => any;
-    "onAction:attachFiles"?: (...args: any[]) => any;
+    [x: `onAction:${ChatAction.SendMessage}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
+    [x: `onAction:${ChatAction.AttachFiles}`]: (...args: [text: string, options: ResultCallbacks] | [files: File[], options: ResultCallbacks]) => any;
 }>, {
     size: ComponentSize;
     chatActions: ChatAction[];

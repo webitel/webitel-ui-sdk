@@ -24,9 +24,9 @@ import { ChatAction } from '../../types/ChatAction.types';
 
 const size = inject<ComponentSize>('size');
 
-const emit = defineEmits([
-  ChatAction.AttachFiles,
-]);
+const emit = defineEmits<{
+  (e: typeof ChatAction.AttachFiles, files: File[]): void;
+}>();
 
 const attachFilesInputRef = useTemplateRef('attachFilesInput');
 

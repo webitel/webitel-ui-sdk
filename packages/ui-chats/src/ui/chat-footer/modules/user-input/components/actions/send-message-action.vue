@@ -16,8 +16,8 @@ import { ChatAction } from '../../types/ChatAction.types';
 
 const size = inject<ComponentSize>('size');
 
-const emit = defineEmits([
-  ChatAction.SendMessage,
-]);
+const emit = defineEmits<{
+  (e: typeof ChatAction.SendMessage): void;
+}>();
 
 </script>

@@ -24,7 +24,7 @@ import { ChatAction } from '../types/ChatAction.types';
 import SendMessageAction from './actions/send-message-action.vue';
 import AttachFilesAction from './actions/attach-files-action.vue';
 import EmojiPickerAction from './actions/emoji-picker-action.vue';
-import { SharedActionSlots, ChatActionSlotsPrefix } from '../types/ChatAction.types';
+import { SharedActionSlots } from '../types/ChatAction.types';
 
 const size = inject<ComponentSize>('size');
 
@@ -32,10 +32,10 @@ const props = defineProps<{
   actions: ChatAction[];
 }>();
 
-const emit = defineEmits([
-  ChatAction.SendMessage,
-  ChatAction.AttachFiles,
-]);
+const emit = defineEmits<{
+  (e: typeof ChatAction.SendMessage): void;
+  (e: typeof ChatAction.AttachFiles, files: File[]): void;
+}>();
 
 const slots = defineSlots<SharedActionSlots>();
 

@@ -7,8 +7,6 @@ export const ChatAction = {
 
 export type ChatAction = (typeof ChatAction)[keyof typeof ChatAction];
 
-export const ChatActionSlotsPrefix = 'action';
-
 export type SharedActionSlots = {
-  [key in `${typeof ChatActionSlotsPrefix}:${ChatAction}`]?: () => any;
+  [key in `action:${ChatAction}`]?: () => any;
 };

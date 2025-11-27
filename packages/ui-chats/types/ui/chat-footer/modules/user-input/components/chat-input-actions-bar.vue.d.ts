@@ -4,12 +4,12 @@ type __VLS_Props = {
     actions: ChatAction[];
 };
 type __VLS_Slots = SharedActionSlots;
-declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    sendMessage: (...args: any[]) => void;
-    attachFiles: (...args: any[]) => void;
+declare const __VLS_base: import("vue").DefineComponent<__VLS_Props, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {} & {
+    sendMessage: () => any;
+    attachFiles: (files: File[]) => any;
 }, string, import("vue").PublicProps, Readonly<__VLS_Props> & Readonly<{
-    onSendMessage?: (...args: any[]) => any;
-    onAttachFiles?: (...args: any[]) => any;
+    onSendMessage?: () => any;
+    onAttachFiles?: (files: File[]) => any;
 }>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>;
 declare const __VLS_export: __VLS_WithSlots<typeof __VLS_base, __VLS_Slots>;
 declare const _default: typeof __VLS_export;
