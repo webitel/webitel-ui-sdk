@@ -4,7 +4,6 @@
         ref="chatTextFieldInput"
         :size="size"
         autoresize
-        @enter="emit(ChatAction.SendMessage)"
     />
 </template>
 
