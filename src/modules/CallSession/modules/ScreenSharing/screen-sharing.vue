@@ -11,7 +11,7 @@
         :class="`screen-sharing__indicator--${size}`"
         class="screen-sharing__indicator"
       >
-        <record-indicator
+        <recording-indicator
           v-if="props.session.recordings"
           :recording="props.session.recordings"
         />
@@ -35,7 +35,7 @@
 import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
 import {defineEmits, useAttrs} from 'vue';
 
-import {RecordIndicator,ScreenSharingControlsPanel} from "../../../../components/wt-vidstack-player/components";
+import {RecordingIndicator,ScreenSharingControlsPanel} from "../../../../components/wt-vidstack-player/components";
 import {ScreenSharingSession, ScreenshotStatus} from '../../types';
 
 interface Props {

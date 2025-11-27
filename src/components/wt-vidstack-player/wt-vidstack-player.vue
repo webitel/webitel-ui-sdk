@@ -1,10 +1,7 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="{
-      [`wt-vidstack-player--${size}`]: props.resizable,
-      'wt-vidstack-player--static': !props.resizable
-    }"
+    :class="{[`wt-vidstack-player&#45;&#45;${size}`]: props.resizable}"
   >
     <media-player
       ref="player"

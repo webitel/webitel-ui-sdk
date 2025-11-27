@@ -1,6 +1,6 @@
 <template>
   <wt-vidstack-player
-    :stream="props.receiver"
+    :stream="mainStream"
     class="video-call"
     autoplay
     muted
@@ -13,20 +13,20 @@
         <wt-vidstack-player
           :stream="props.receiver"
           :resizable="false"
-          :class="`video-call-sender--${size}`"
+          :class="`video-call-receiver--${size}`"
           static
           autoplay
           muted
-          class="video-call-sender"
+          class="receiver"
         />
 
         <div
           :class="`video-call__indicator--${size}`"
           class="video-call__indicator"
         >
-          <record-indicator
-            v-if="props.session.recordings"
-            :recording="props.session.recordings"
+          <recording-indicator
+            v-if="props.recordings"
+            :recording="props.recordings"
           />
         </div>
       </div>
@@ -51,9 +51,9 @@
 
 <script setup lang="ts">
 import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
-import {defineEmits} from 'vue';
+import {computed, defineEmits} from 'vue';
 
-import {RecordIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
+import {RecordingIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
 
 interface Props {
   sender: MediaStream
@@ -74,6 +74,8 @@ const emit = defineEmits<{
   'toggle-mic': [],
   'toggle-video': [],
 }>()
+
+const mainStream = computed(() => props.receiver || props.sender)
 </script>
 
 <style lang="scss" scoped>
@@ -94,7 +96,7 @@ const emit = defineEmits<{
     }
   }
 
-  &-sender {
+  &-receiver {
     flex: 0 0 auto;
 
     &--sm {
@@ -103,6 +105,9 @@ const emit = defineEmits<{
       }
       width: var(--p-player-cam-preview-sm-width);
       height: var(--p-player-cam-preview-sm-height);
+      position: relative;
+      right: 0;
+      bottom: 0;
     }
 
     &--md {
@@ -111,6 +116,9 @@ const emit = defineEmits<{
       }
       width: var(--p-player-cam-preview-md-width);
       height: var(--p-player-cam-preview-md-height);
+      position: relative;
+      right: 0;
+      bottom: 0;
     }
 
     &--lg {
@@ -119,6 +127,9 @@ const emit = defineEmits<{
       }
       width: var(--p-player-cam-preview-lg-width);
       height: var(--p-player-cam-preview-lg-height);
+      position: relative;
+      right: 0;
+      bottom: 0;
     }
   }
 

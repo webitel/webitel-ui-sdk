@@ -1,19 +1,20 @@
 <template>
   <div
-    class="record-indicator"
+    class="recording-indicator"
   >
     <wt-indicator
       color="error"
       size="md"
     />
 
-    <span class="record-indicator__time">{{ convertDuration(secondsElapsed) }}</span>
+    <span class="recording-indicator__time">{{ durationTime }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-import convertDuration from '@webitel/ui-sdk/src/scripts/convertDuration';
-import {onMounted, ref} from 'vue';
+import {computed, onMounted, ref} from 'vue';
+
+import convertDuration from '../../../../scripts/convertDuration';
 
 const secondsElapsed = ref(0);
 const timerId = ref<number | null>(null);
@@ -33,6 +34,8 @@ const stopTimer = () => {
   }
 }
 
+const durationTime = computed(() => convertDuration(secondsElapsed.value))
+
 onMounted(() => {
   startTimer();
 })
@@ -41,7 +44,7 @@ onMounted(() => {
 <style lang="scss">
 @use '@webitel/styleguide/typography' as *;
 
-.record-indicator {
+.recording-indicator {
   background: var(--content-wrapper-color);
   display: flex;
   align-items: center;
