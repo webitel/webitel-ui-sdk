@@ -2,7 +2,7 @@
   <div
     :class="{
        'chat-message--right' : isAgentSide,
-       'chat-message--md': props.size === 'md'
+       'chat-message--md': size === ComponentSize.MD
       }"
     class="chat-message"
   >
@@ -20,23 +20,20 @@
       <message-blocked-error v-if="message.file?.malware" @click.stop />
       <div v-else @click.stop>
         <message-player
-          v-if="isMedia"
-          :file="props.message.file"
-          :type="props.message.file?.mime"
-          :size="props.size"
+          v-if="media"
+          :file="media"
+          :type="media.mime"
+          :size="size"
           @initialized="handlePlayerInitialize"
         />
         <message-image
-          v-if="isImage"
-          :file="props.message.file"
-          :type="props.message.file?.mime"
+          v-else-if="image"
+          :file="image"
           @open="emit('open-image')"
         />
         <message-document
-          v-if="isDocument"
-          :file="props.message.file"
-          :type="props.message.file?.mime"
-          :agent="isAgentSide"
+          v-else-if="document"
+          :file="document"
         />
         <message-text
           v-if="props.message?.text"
@@ -55,8 +52,9 @@
   <script setup lang="ts">
 
   import { ComponentSize } from '@webitel/ui-sdk/enums';
-  import { computed, defineEmits, defineProps } from 'vue';
+  import {computed, defineEmits, defineProps, inject} from 'vue';
 
+  import { useChatMessageFile } from '../composables/useChatMessageFile'
   import MessageAvatar from './details/chat-message-avatar.vue';
   import MessageBlockedError from './details/chat-message-blocked-error.vue';
   import MessageDocument from './details/chat-message-document.vue';
@@ -65,30 +63,26 @@
   import MessageText from './details/chat-message-text.vue';
   import MessageTime from './details/chat-message-time.vue';
 
-  const props = defineProps({
-    message: {
-      type: Object,
-      required: true,
-    },
-    size: {
-      type: String,
-      default: ComponentSize.MD,
-    },
-    showAvatar: {
-      type: Boolean,
-      default: false,
-    },
-    username: {
-      type: String,
-    },
+  const props = withDefaults(defineProps<{
+    message: object,
+    showAvatar?: boolean,
+    username?: string,
+  }>(), {
+    showAvatar: false,
+    username: '',
   });
 
-  const emit = defineEmits(['open-image', 'initialized-player']);
+  const emit = defineEmits<{
+    'open-image': [],
+    'initialized-player': [object]
+  }>();
+
+  const size = inject<ComponentSize>('size');
 
   const {
-    isImage,
-    isMedia, // audio or video
-    isDocument
+    image,
+    media,
+    document,
   } = useChatMessageFile(props.message.file);
 
   const isAgent = computed(() =>

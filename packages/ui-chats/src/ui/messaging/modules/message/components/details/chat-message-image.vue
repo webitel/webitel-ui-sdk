@@ -14,12 +14,14 @@
 
 import { defineEmits, defineProps } from 'vue';
 
-interface Props {
-  file: object;
-}
+import { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
-const props = defineProps<Props>();
-const emit = defineEmits(['open']);
+const props = defineProps<{
+  file: ChatMessageFile,
+}>();
+const emit = defineEmits<{
+  open: [ChatMessageFile],
+}>();
 
 </script>
 

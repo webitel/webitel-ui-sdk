@@ -19,28 +19,29 @@
 
 import { computed, defineEmits, defineProps } from 'vue';
 
-interface Props {
-  file: object;
-  type: string;
-}
+import { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
-const props = defineProps<Props>();
-const emit = defineEmits(['open']);
+const props = defineProps<{
+  file:  ChatMessageFile,
+  type: string,
+}>();
+const emit = defineEmits<{
+  open: [ChatMessageFile],
+  initialized: [object],
+}>();
+
 const mediaUrl = computed(() => props.file.streamUrl || props.file.url);
 
 function handlePlayerInitialize(player) {
-  this.$emit('initialized', player);
+  emit('initialized', player);
 };
 
 </script>
 
 <style lang="scss" scoped>
 .chat-message-player {
-  //min-height: var(--player-audio-height);
   .wt-player :deep(.plyr) {
     .wt-player__close-icon,
-      //.plyr__menu,
-      //.plyr__control[download]
     .plyr__volume {
       display: none;
     }

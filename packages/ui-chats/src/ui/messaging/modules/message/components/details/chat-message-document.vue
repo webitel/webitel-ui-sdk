@@ -19,19 +19,20 @@
 </template>
 
 <script setup lang="ts">
+import { prettifyFileSize } from '@webitel/ui-sdk/src/scripts';
 import { computed, defineProps } from 'vue';
 
-import { prettifyFileSize } from '../../../../../../../../../../../webitel-ui-sdk/types/scripts';
+import { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
-interface Props {
-  file: object;
-}
-
-const props = defineProps<Props>();
-
+const props = withDefaults(defineProps<{
+  file: ChatMessageFile;
+  agent?: boolean;
+}>(),{
+  agent: false,
+});
 const documentSize = computed(() => {
   if (!props.file) return '';
-  return prettifyFileSize(documentFile.value.size);
+  return prettifyFileSize(props.file.size);
 });
 
 function downloadDocument() {
@@ -79,14 +80,14 @@ function downloadDocument() {
     color: var(--text-main-color);
   }
 
-  //&--right {
-  //  flex-direction: row-reverse;
-  //  background: var(--secondary-light-color);
-  //
-  //  .chat-message-new-document__icon-wrapper {
-  //    margin-right: 0;
-  //    margin-left: var(--spacing-xs);
-  //  }
-  //}
+  &--right {
+    flex-direction: row-reverse;
+    background: var(--secondary-light-color);
+
+    .chat-message-new-document__icon-wrapper {
+      margin-right: 0;
+      margin-left: var(--spacing-xs);
+    }
+  }
 }
 </style>

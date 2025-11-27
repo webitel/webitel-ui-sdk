@@ -1,4 +1,4 @@
-import { computed, type Ref, toRef } from 'vue';
+import { computed, type Ref,toRef } from 'vue';
 
 import { ChatMessageFile } from '../../../types/ChatMessage.types';
 
@@ -8,29 +8,30 @@ export function useChatMessageFile(
   const fileRef = toRef(file);
 
   const type = computed(() => {
-    return fileRef.value?.mime;
+    return fileRef.value.mime;
   });
 
-  const isImage = computed(() => {
+  const image = computed(() => {
     const isImage = type.value?.includes('image');
     const isHEIC = type.value?.includes('heic');
 
-    if (isHEIC) return null; //https://webitel.atlassian.net/browse/WTEL-6268
+    if (isHEIC) return null;
 
-    return isImage;
+    return isImage && fileRef.value; //https://webitel.atlassian.net/browse/WTEL-6268
   });
 
-  const isMedia = computed(
-    () => type.value?.includes('audio') || type.value?.includes('video'),
-  );
+  const media = computed(() => {
+    const isMedia = type.value?.includes('audio') || type.value?.includes('video');
+    return isMedia && fileRef.value;
+  });
 
-  const isDocument = computed(
-    () => !isMedia.value && !isImage.value && fileRef.value?.file,
-  );
+  const document = computed(() => {
+    return !media.value && !image.value && fileRef.value;
+  });
 
   return {
-    isImage,
-    isMedia, // audio or video
-    isDocument,
+    image,
+    media,
+    document,
   };
 }
