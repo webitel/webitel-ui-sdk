@@ -1,22 +1,30 @@
 <template>
-  <div v-if="image" class="chat-message-image" @click="$emit('open', image)">
+  <div class="chat-message-image" @click="emit('open', props.file)">
     <img
       class="chat-message-image__img"
-      :src="image.url"
-      :alt="image.name"
+      :src="props.file.url"
+      :alt="props.file.name"
       draggable="false"
     >
   </div>
 </template>
 
-<script>
-// import chatMessageFileMixin from '../../../mixins/chatMessageFileMixin.js';
 
-export default {
-  name: 'ChatMessageImage',
-  mixins: [chatMessageFileMixin],
-};
+<script setup lang="ts">
+
+import { defineEmits, defineProps } from 'vue';
+
+import { ChatMessageFile } from '../../../../types/ChatMessage.types';
+
+const props = defineProps<{
+  file: ChatMessageFile,
+}>();
+const emit = defineEmits<{
+  open: [ChatMessageFile],
+}>();
+
 </script>
+
 
 <style lang="scss" scoped>
 .chat-message-image {

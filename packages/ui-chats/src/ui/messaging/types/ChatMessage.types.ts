@@ -1,12 +1,12 @@
 export type ChatMessageType = {
-    id: string;
-}
-
+  id: string;
+};
 
 export type ChatMessageFile = {
-    id?: string;
-    name?: string;
-    size?: string;
-    mime?: string;
-    url?: string;
-}
+  id?: string;
+  name?: string;
+  size?: string;
+  mime?: string;
+  url?: string;
+  streamUrl?: string;
+};
