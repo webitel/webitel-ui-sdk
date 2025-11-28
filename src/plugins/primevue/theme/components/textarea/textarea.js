@@ -1,7 +1,7 @@
 import { TextareaScheme } from '@webitel/styleguide/component-schemes';
 
 const textarea = {
-  ...TextareaScheme.sizes,
+  root: TextareaScheme.sizes,
   colorScheme: TextareaScheme.colorScheme,
 
   css: ({ dt }) => `

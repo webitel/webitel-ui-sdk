@@ -12,5 +12,6 @@ export interface EngineSkillServicePatchSkillAgentBody {
 	enabled?: boolean;
 	fields?: string[];
 	id?: string[];
+	q?: string;
 	skill?: EngineLookup;
 }

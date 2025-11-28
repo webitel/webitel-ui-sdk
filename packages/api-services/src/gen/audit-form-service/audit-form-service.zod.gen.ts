@@ -20,7 +20,10 @@ export const searchAuditFormQueryParams = zod.object({
 		.optional()
 		.describe('bool archive = 9;\n\nbool active = 11; // not archive'),
 	question: zod.string().optional(),
-	teamFilter: zod.boolean().optional(),
+	teamFilter: zod
+		.number()
+		.optional()
+		.describe("expects userID to filter by user's team"),
 });
 
 export const searchAuditFormResponseItemsItemQuestionsItemTypeDefault =
