@@ -1,53 +1,70 @@
 <template>
-    <section class="chat-container">
-        <!-- <slot name="header">
+  <section class="chat-container">
+    <!-- <slot name="header">
             header goes here
         </slot> -->
-        <slot name="intersection-observer"></slot>
         <slot name="main">
             <chat-messages-container :messages="messages" />
         </slot>
         <slot name="footer">
-            <chat-input
-                v-model:draft="draft"
-            >
-            <template #actions>
-                <send-message-action
-                    @click="sendMessage"
+          <chat-footer-wrapper>
+            <template #default>
+              <chat-text-field
+                  v-model:text="draft"
+              />
+              <chat-input-actions-bar
+                :actions="chatActions"
+                @[ChatAction.SendMessage]="sendMessage"
+                @[ChatAction.AttachFiles]="sendFile"
+              >
+              <template 
+              v-for="action in slottedChatActions" 
+              :key="action"
+              #[action]="{ size }"
+              >
+                <slot
+                  :name="`action:${action}`"
+                  v-bind="{ size }"
                 />
-                <attach-files-action
-                    @attach-files="emit('sendFile', $event as File[])"
-                />
-                <emoji-picker-action />
+              </template>
+            </chat-input-actions-bar>
             </template>
-            </chat-input>
+          </chat-footer-wrapper>
         </slot>
     </section>
 </template>
 
 <script setup lang="ts">
-import { provide, ref } from 'vue';
+import { provide, ref, computed } from 'vue';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import ChatMessagesContainer from './messaging/components/chat-messages-container.vue';
 
-import ChatInput from './chat-input/components/chat-input.vue';
-import SendMessageAction from './chat-input/components/actions/send-message-action.vue';
-import AttachFilesAction from './chat-input/components/actions/attach-files-action.vue';
-import EmojiPickerAction from './chat-input/components/actions/emoji-picker-action.vue';
+import { ResultCallbacks } from './utils/ResultCallbacks.types';
+import ChatFooterWrapper from './chat-footer/components/chat-footer-wrapper.vue';
+import ChatTextField from './chat-footer/modules/user-input/components/chat-text-field.vue';
+import ChatInputActionsBar from './chat-footer/modules/user-input/components/chat-input-actions-bar.vue';
 import { createUiChatsEmitter } from './utils/emitter';
 import { ChatMessageType } from './messaging/types/ChatMessage.types';
+import { ChatAction, SharedActionSlots } from './chat-footer/modules/user-input/types/ChatAction.types';
 
 const props = withDefaults(defineProps<{
-    messages: ChatMessageType[];
-    size?: ComponentSize;
+  messages: ChatMessageType[];
+  chatActions?: ChatAction[];
+  size?: ComponentSize;
 }>(), {
-    size: ComponentSize.MD,
+  size: ComponentSize.MD,
+  chatActions: () => [ChatAction.SendMessage],
 });
 
 const emit = defineEmits<{
-    'sendMessage': [draft: string, options: { onSuccess: () => void }];
-    'sendFile': [files: File[]];
+  (e: `action:${typeof ChatAction.SendMessage}`, text: string, options: ResultCallbacks): void;
+  (e: `action:${typeof ChatAction.AttachFiles}`, files: File[], options: ResultCallbacks): void;
 }>();
+
+const slots = defineSlots<{
+  main: () => any;
+  footer: () => any;
+} & SharedActionSlots>();
 
 const uiChatsEmitter = createUiChatsEmitter();
 
@@ -56,17 +73,30 @@ provide('uiChatsEmitter', uiChatsEmitter);
 
 const draft = ref<string>('');
 
+const slottedChatActions = computed(() => {
+  return Object.keys(slots)
+  .filter((key) => key.startsWith('action:'))
+  .map((key) => key.replace('action:', ''));
+});
+
 function sendMessage() {
-    emit('sendMessage', draft.value, {
-        onSuccess: () => draft.value = '',
-    });
+  emit(`action:${ChatAction.SendMessage}`, 
+    draft.value, 
+    {
+    onSuccess: () => draft.value = '',
+  });
+}
+
+function sendFile(files: File[]) {
+  emit(`action:${ChatAction.AttachFiles}`, files, {
+  });
 }
 
 </script>
 
 <style scoped>
 .chat-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -12,6 +12,7 @@ export interface EngineAgentState {
 	duration?: string;
 	id?: string;
 	joinedAt?: string;
+	leavedAt?: string;
 	pauseCause?: string;
 	payload?: string;
 	queue?: EngineLookup;

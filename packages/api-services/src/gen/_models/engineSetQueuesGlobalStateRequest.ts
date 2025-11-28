@@ -6,5 +6,10 @@
  */
 
 export interface EngineSetQueuesGlobalStateRequest {
+	tags?: string[];
 	enabled?: boolean;
+	id?: string[];
+	q?: string;
+	teamId?: number[];
+	type?: number[];
 }

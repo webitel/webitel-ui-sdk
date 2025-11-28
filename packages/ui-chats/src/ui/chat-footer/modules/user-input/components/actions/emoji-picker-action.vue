@@ -11,7 +11,7 @@ import { WtChatEmoji } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
 import type { Emitter } from 'mitt';
 
-import type{ UiChatsEmitterEvents } from '../../../utils/emitter';
+import type{ UiChatsEmitterEvents } from '../../../../../utils/emitter';
 
 const size = inject<ComponentSize>('size');
 const uiChatsEmitter = inject<Emitter<UiChatsEmitterEvents>>('uiChatsEmitter');

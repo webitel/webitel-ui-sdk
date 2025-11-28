@@ -3,5 +3,9 @@
   --load-bar-padding: 1px;
   --load-bar-border-radius: 50px;
 
-  --wt-load-bar-progress-color: var(--primary-color);
+  --wt-load-bar-primary-color: var(--primary-on-color);
+  --wt-load-bar-error-color: var(--p-error-color);
+  --wt-load-bar-warning-color: var(--p-warn-color);
+  --wt-load-bar-success-color: var(--p-success-color);
+  --wt-load-bar-info-color: var(--p-info-color);
 }

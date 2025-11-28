@@ -1,7 +1,7 @@
 import { CheckboxScheme } from "@webitel/styleguide/component-schemes";
 
 const checkbox = {
-  ...CheckboxScheme.sizes,
+  root: CheckboxScheme.sizes,
   colorScheme: CheckboxScheme.colorScheme,
 
   css: ({ dt }) => `

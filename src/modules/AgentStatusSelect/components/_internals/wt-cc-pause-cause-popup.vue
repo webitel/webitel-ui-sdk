@@ -38,8 +38,8 @@
               </div>
               <div v-if="selected && option.id === selected?.id" class="wt-cc-pause-cause-popup-option__comment">
                 <wt-textarea
+                  v-model:model-value="selected.statusComment"
                   :label="$t('reusable.comment')"
-                  :v-model="selected.statusComment"
                 />
               </div>
           </li>

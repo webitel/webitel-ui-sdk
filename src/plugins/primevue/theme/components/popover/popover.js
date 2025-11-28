@@ -1,7 +1,7 @@
 import { PopoverScheme } from '@webitel/styleguide/component-schemes';
 
 const popover = {
-  ...PopoverScheme.sizes,
+  root: PopoverScheme.sizes,
   colorScheme: PopoverScheme.colorScheme,
 };
 

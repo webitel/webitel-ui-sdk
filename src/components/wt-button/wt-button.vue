@@ -35,8 +35,7 @@
 
 <script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
-import {computed, defineEmits, defineProps, ref, useAttrs, watch} from 'vue';
-import {useStore} from "vuex";
+import { computed, defineEmits, defineProps, inject,ref, useAttrs, watch } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize,  } from '../../enums';
 
@@ -81,9 +80,34 @@ const emit = defineEmits(['click']);
 const attrs = useAttrs();
 
 const showLoader = ref(false);
-const store = useStore();
 
-const darkMode = computed(() => store.getters['appearance/DARK_MODE']);
+// @Ler24
+// Compatibility mode for Vuex (old mode) and when there is no Vuex in project (new mode)
+const store = ref(null);
+
+const initStore = async () => {
+  try {
+    const vuex = await import('vuex');
+    store.value = vuex.useStore();
+  } catch (e) {
+    store.value = null;
+  }
+}
+initStore();
+
+const injectDarkMode = inject('darkMode');
+
+const darkMode = computed(() => {
+  if (injectDarkMode?.value) {
+    return injectDarkMode.value;
+  }
+
+  if (store?.value?.getters) {
+    return store?.value?.getters['appearance/DARK_MODE'] ?? false;
+  }
+
+  return false;
+});
 
 /**
  * @author: @Opelsandr Palonnyi
