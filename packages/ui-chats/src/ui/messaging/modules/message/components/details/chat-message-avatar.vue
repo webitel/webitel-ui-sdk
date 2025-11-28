@@ -40,15 +40,5 @@ const src = computed(() =>
 <style lang="scss" scoped>
 .chat-message-avatar {
   pointer-events: none; // prevents dragging to upload file area
-
-  //&__bot-avatar-wrapper {
-  //  display: flex;
-  //  justify-content: center;
-  //  align-items: center;
-  //  width: var(--wt-avatar-size--size-sm);
-  //  aspect-ratio: 1;
-  //  border-radius: 50%;
-  //  background-color: var(--secondary-color);
-  //}
 }
 </style>

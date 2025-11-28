@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-       'chat-message--right' : isAgentSide,
+       'chat-message--right' : isSelfSide,
        'chat-message--md': size === ComponentSize.MD
       }"
     class="chat-message"
@@ -85,7 +85,7 @@
     document,
   } = useChatMessageFile(props.message.file);
 
-  const isAgent = computed(() =>
+  const isSelfMessage = computed(() =>
     props.message.member?.self
     || props.message.member?.type === 'webitel'
   );
@@ -95,10 +95,10 @@
     || (!props.message.member?.type && !props.message.channelId)
   );
 
-  const isAgentSide = computed(() => isAgent.value || isBot.value);
+  const isSelfSide = computed(() => isSelfMessage.value || isBot.value);
 
   const getClientUsername = computed(() => {
-    return !isAgentSide.value ? props.username : ''; // need to show username avatar only for client
+    return !isSelfSide.value ? props.username : ''; // need to show username avatar only for client
   });
 
   function handlePlayerInitialize(player) {
@@ -107,63 +107,49 @@
 
   </script>
 
-<style lang="scss" scoped>
-$message-gap: var(--spacing-xs);
-$chat-info-gap: var(--spacing-2xs);
+<style scoped>
 
 .chat-message {
   position: relative;
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  gap: $chat-info-gap;
-
-  &:last-child {
-    margin-bottom: $message-gap;
-  }
-
-  &__content {
-    display: flex;
-    flex: 1;
-    min-width: 0;
-    line-height: 0; // prevents height difference from its content
-    gap: $message-gap;
-    margin: 0 var(--spacing-md) 0 var(--spacing-2xs);
-  }
-
-  &.chat-message--md {
-    .chat-message__main-wrapper {
-      max-width: 80%;
-    }
-  }
-
-  .chat-message__avatar-wrapper {
-    flex: 0 0 var(--spacing-lg);
-    width: var(--wt-avatar-size--size-sm);
-  }
-
-  .chat-message-avatar {
-    width: 100%;
-  }
-
-  .chat-message-avatar {
-    flex: 0 0 var(--icon-lg-size);
-  }
-
-  .chat-message-player {
-    min-height: var(--player-audio-height);
-  }
-
-  &--right .chat-message__content {
-    flex-direction: row-reverse;
-    margin: 0 var(--spacing-2xs) 0 var(--spacing-md);
-
-    .chat-message-text {
-      background: var(--secondary-light-color);
-      color: var(--secondary-on-color);
-      place-self: flex-end;
-    }
-  }
-
+  gap: var(--spacing-2xs);
 }
+
+.chat-message:last-child {
+  margin-bottom: var(--spacing-xs);
+}
+
+.chat-message__content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  /** prevents height difference from its content */
+  line-height: 0;
+  gap: var(--spacing-xs);
+  margin: 0 var(--spacing-md) 0 var(--spacing-2xs);
+}
+
+.chat-message__avatar-wrapper {
+  flex: 0 0 var(--spacing-lg);
+  width: var(--wt-avatar-size--size-sm);
+}
+
+.chat-message-avatar {
+  width: 100%;
+  flex: 0 0 var(--icon-lg-size);
+}
+
+.chat-message--right .chat-message__content {
+  flex-direction: row-reverse;
+  margin: 0 var(--spacing-2xs) 0 var(--spacing-md);
+}
+
+.chat-message--right .chat-message-text {
+  background: var(--secondary-light-color);
+  color: var(--secondary-on-color);
+  place-self: flex-end;
+}
+
 </style>

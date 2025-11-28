@@ -1,7 +1,7 @@
 <template>
   <div
     class="chat-message-document"
-    :class="{ 'chat-message-document--right': agent }"
+    :class="{ 'chat-message-document--right': props.selfSide }"
     @click="downloadDocument"
   >
     <div class="chat-message-document__icon-wrapper">
@@ -19,16 +19,16 @@
 </template>
 
 <script setup lang="ts">
-import { prettifyFileSize } from '@webitel/ui-sdk/src/scripts';
+import { prettifyFileSize } from '@webitel/ui-sdk/scripts';
 import { computed, defineProps } from 'vue';
 
 import { ChatMessageFile } from '../../../../types/ChatMessage.types';
 
 const props = withDefaults(defineProps<{
   file: ChatMessageFile;
-  agent?: boolean;
+  selfSide?: boolean;
 }>(),{
-  agent: false,
+  selfSide: false,
 });
 const documentSize = computed(() => {
   if (!props.file) return '';

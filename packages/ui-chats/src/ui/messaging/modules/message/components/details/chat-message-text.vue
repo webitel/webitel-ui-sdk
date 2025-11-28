@@ -7,16 +7,11 @@
 
 <script setup lang="ts">
 import Autolinker from 'autolinker';
-import { computed } from 'vue';
+import {computed, defineProps} from 'vue';
 
-interface Props {
+const props = defineProps<{
   text: string;
-  agent?: boolean;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  agent: false,
-})
+}>();
 
 const text = computed(() => {
   // ATTENTION: not all libs are suitable for this case, because we want to preserve "<" signs
