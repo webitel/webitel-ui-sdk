@@ -16,7 +16,7 @@ const rowStateStyles = (state, dt) => `
 `;
 
 const table = {
-  ...TableScheme.sizes,
+  root: TableScheme.sizes,
   colorScheme: TableScheme.colorScheme,
 
   // Rewrite the default table styles in the theme here:

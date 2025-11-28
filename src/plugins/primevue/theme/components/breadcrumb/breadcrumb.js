@@ -1,7 +1,7 @@
 import { BreadcrumbScheme } from '@webitel/styleguide/component-schemes';
 
 const breadcrumb = {
-  ...BreadcrumbScheme.sizes,
+  root: BreadcrumbScheme.sizes,
   colorScheme: BreadcrumbScheme.colorScheme,
 
 

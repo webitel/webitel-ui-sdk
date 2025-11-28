@@ -1,7 +1,7 @@
 import { DividerScheme } from '@webitel/styleguide/component-schemes';
 
 const divider = {
-  ...DividerScheme.sizes,
+  root: DividerScheme.sizes,
   colorScheme: DividerScheme.colorScheme,
 };
 

@@ -10,7 +10,7 @@ const generateCustomSlotCss = ({ slot, dt }) => `
 `;
 
 const menubar = {
-  ...MenubarScheme.sizes,
+  root: MenubarScheme.sizes,
   colorScheme: MenubarScheme.colorScheme,
 
   css: ({ dt }) => `

@@ -1,7 +1,7 @@
 import { RadioScheme } from '@webitel/styleguide/component-schemes';
 
 const radio = {
-  ...RadioScheme.sizes,
+  root: RadioScheme.sizes,
   colorScheme: RadioScheme.colorScheme,
 
   css: ({dt}) => `
