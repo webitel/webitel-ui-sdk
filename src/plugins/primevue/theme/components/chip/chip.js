@@ -1,5 +1,4 @@
 import { ChipScheme } from '@webitel/styleguide/component-schemes';
-
 const generateCustomColorCss = ({ colorName, dt }) => `
         .p-chip-${colorName} {
             background: ${dt(`chip.${colorName}.background`)};
@@ -16,7 +15,7 @@ const generateCustomColorCss = ({ colorName, dt }) => `
 `;
 
 const chip = {
-  ...ChipScheme.sizes,
+  root: ChipScheme.sizes,
   colorScheme: ChipScheme.colorScheme,
 
   // Rewrite the default chip styles in the theme here:

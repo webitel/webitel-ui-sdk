@@ -1,7 +1,7 @@
 import { SliderScheme } from '@webitel/styleguide/component-schemes';
 
 const slider = {
-  ...SliderScheme.sizes,
+  root: SliderScheme.sizes,
   colorScheme: SliderScheme.colorScheme,
 };
 
