@@ -1,6 +1,6 @@
 <template>
   <wt-vidstack-player
-    :stream="mainStream"
+    :src="mainStream"
     class="video-call"
     autoplay
     muted
@@ -11,7 +11,7 @@
         class="video-call-content"
       >
         <wt-vidstack-player
-          :stream="props.receiver"
+          :src="props.receiver"
           :resizable="false"
           :class="`video-call-receiver--${size}`"
           static
@@ -38,12 +38,15 @@
         :is-mic-muted="props.isMicMuted"
         :is-video-muted="props.isVideoMuted"
         :is-call-started="props.isCallStarted"
-        @make-screenshot="emit('make-screenshot')"
-        @toggle-record="emit('toggle-record')"
-        @toggle-settings="emit('toggle-settings')"
-        @toggle-call="emit('toggle-call')"
-        @toggle-mic="emit('toggle-mic')"
-        @toggle-video="emit('toggle-video')"
+        :screenshot-status="props.screenshotStatus"
+        :screenshot-is-loading="props.screenshotIsLoading"
+        :screenshot-callback="props.screenshotCallback"
+        :recordings-callback="props.recordingsCallback"
+        :mic-callback="props.micCallback"
+        :video-callback="props.videoCallback"
+        :settings-callback="props.settingsCallback"
+        :chat-callback="props.chatCallback"
+        :call-state-callback="props.callStateCallback"
       />
     </template>
   </wt-vidstack-player>
@@ -51,9 +54,10 @@
 
 <script setup lang="ts">
 import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
-import {computed, defineEmits} from 'vue';
+import {computed} from 'vue';
 
 import {RecordingIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
+import {ScreenshotStatus} from '../../types';
 
 interface Props {
   sender: MediaStream
@@ -62,18 +66,19 @@ interface Props {
   isVideoMuted: boolean
   isCallStarted: boolean
   recordings: boolean
+  screenshotStatus: ScreenshotStatus | null
+  screenshotIsLoading: boolean
+
+  screenshotCallback?: () => void
+  recordingsCallback?: () => void
+  micCallback?: () => void
+  videoCallback?: () => void
+  settingsCallback?: () => void
+  chatCallback?: () => void
+  callStateCallback?: () => void
 }
 
 const props = defineProps<Props>();
-
-const emit = defineEmits<{
-  'make-screenshot': [],
-  'toggle-record': [],
-  'toggle-settings': [],
-  'toggle-call': [],
-  'toggle-mic': [],
-  'toggle-video': [],
-}>()
 
 const mainStream = computed(() => props.receiver || props.sender)
 </script>
