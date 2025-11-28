@@ -95,11 +95,11 @@ const initStore = async () => {
 }
 initStore();
 
-const darkModeNewOption = inject('darkMode');
+const injectDarkMode = inject('darkMode');
 
 const darkMode = computed(() => {
-  if (darkModeNewOption?.value) {
-    return darkModeNewOption.value;
+  if (injectDarkMode?.value) {
+    return injectDarkMode.value;
   }
 
   if (store?.value?.getters) {
