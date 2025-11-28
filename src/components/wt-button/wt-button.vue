@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 import type { ButtonProps } from 'primevue';
-import { computed, defineEmits, defineProps, ref, useAttrs, watch, inject } from 'vue';
+import { computed, defineEmits, defineProps, inject,ref, useAttrs, watch } from 'vue';
 
 import { ButtonColor, ButtonVariant, ComponentSize,  } from '../../enums';
 
