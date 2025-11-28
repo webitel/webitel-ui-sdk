@@ -1,12 +1,10 @@
 <template>
   <media-controls-group
-    class="media-control-panel controls-group"
-    :class="`media-control-panel--${size}`"
+    class="controls-group"
+    :class="`controls-group--${size}`"
   >
-    <div class="media-control-panel__actions">
-      <play-button />
-      <time-slider />
-      <time-group />
+    <div class="controls-group__actions">
+      <slot />
     </div>
   </media-controls-group>
 </template>
@@ -14,25 +12,30 @@
 <script setup lang="ts">
 import {inject} from "vue";
 
-import PlayButton from "./components/buttons/play-button.vue";
-import TimeSlider from "./components/sliders/time-slider.vue";
-import TimeGroup from "./components/time-group.vue";
-
 const { size } = inject('size');
 
 </script>
 
 <style scoped lang="scss">
-.media-control-panel {
+.controls-group {
   display: flex;
   justify-content: center;
+  max-width: fit-content;
+  align-self: center;
 
   &--sm {
-    .media-control-panel__actions {
+    width: 100%;
+    max-width: 100%;
+
+    .controls-group__actions {
       border-top-left-radius: 0 !important;
       border-top-right-radius: 0 !important;
       gap: calc(var(--p-player-control-bar-sm-gap) * 2);
     }
+  }
+
+  &--md {
+    align-self: center;
   }
 
   &__actions {
