@@ -31,7 +31,7 @@ function getUserLocale(): Locale {
 
 export function formatDate(
   date: string | number | Date,
-  to: keyof typeof FormatDateMode,
+  to: typeof FormatDateMode[keyof typeof FormatDateMode],
 ): string {
   const timeZone = getUserTimeZone();
   const locale = getUserLocale();
