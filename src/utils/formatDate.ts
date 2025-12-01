@@ -2,6 +2,7 @@ import type { Locale } from 'date-fns/locale';
 import { enUS, es, kk, pl, ro, ru, uk, uz, vi } from 'date-fns/locale';
 import { formatInTimeZone } from 'date-fns-tz';
 
+import { FormatDateMode } from '../enums';
 import { TIMEZONE_STORAGE_KEY } from '../modules/Userinfo/v2/constants/UserSettingsConstants';
 
 const localeMap: Record<string, Locale> = {
@@ -30,7 +31,7 @@ function getUserLocale(): Locale {
 
 export function formatDate(
   date: string | number | Date,
-  to: 'date' | 'time' | 'datetime' | 'datetimeShort',
+  to: keyof typeof FormatDateMode,
 ): string {
   const timeZone = getUserTimeZone();
   const locale = getUserLocale();

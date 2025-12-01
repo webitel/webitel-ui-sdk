@@ -1,4 +1,5 @@
-import { formatDate } from '../utils'
+import { FormatDateMode } from '../enums';
+import { formatDate } from '../utils';
 
 const prettifyTime = (time) => {
   let date;
@@ -6,7 +7,7 @@ const prettifyTime = (time) => {
   else if (typeof time === 'number') date = new Date(time);
   else date = new Date(+time);
 
-  return formatDate(date, 'time');
+  return formatDate(date, FormatDateMode.TIME);
 };
 
 export default prettifyTime;
