@@ -3,53 +3,42 @@
     class="chat-message-avatar"
   >
     <wt-avatar
-      v-if="!bot"
-      :username="username"
-      :src="src"
+      :username="props.username"
       :size="size"
+      :src="src"
     />
-    <div
-      v-else
-      class="chat-message-avatar__bot-avatar-wrapper"
-    >
-    <!-- TODO: refactor me to use picture and wt-avatar "src" prop -->
-      <wt-icon
-        icon="bot"
-      />
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { inject, computed } from 'vue';
+import { WtAvatar } from '@webitel/ui-sdk/components';
 import { ComponentSize } from '@webitel/ui-sdk/enums';
-import { WtAvatar, WtIcon } from '@webitel/ui-sdk/components';
+import { computed, defineProps, inject } from 'vue';
 
-const props = defineProps<{
-    bot?: boolean;
-    username?: string;
-    src?: string;
-  }>();
+import botIcon from '../../../../../../assets/icons/bot.svg'
 
-  const injectedSize = inject<ComponentSize>('size');
+const props = withDefaults(defineProps<{
+  bot?: boolean,
+  username?: string,
+}>(), {
+  bot: false,
+  username: '',
+});
 
-  const size = computed(() => {
-    return ComponentSize.SM || injectedSize; // todo: should injected size be considered?
-  });
+const injectedSize = inject<ComponentSize>('size');
+
+const size = computed(() => {
+  return ComponentSize.SM || injectedSize; // todo: should injected size be considered?
+});
+
+const src = computed(() =>
+  props.bot && botIcon
+)
+
 </script>
 
 <style lang="scss" scoped>
 .chat-message-avatar {
   pointer-events: none; // prevents dragging to upload file area
-
-  &__bot-avatar-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: var(--wt-avatar-size--size-sm);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: var(--secondary-color);
-  }
 }
 </style>

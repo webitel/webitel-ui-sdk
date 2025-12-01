@@ -1,13 +1,14 @@
-import { computed, toRef, type Ref } from 'vue';
+import { computed, type Ref, toRef } from 'vue';
+
 import { ChatMessageFile } from '../../../types/ChatMessage.types';
 
 export function useChatMessageFile(
   file: ChatMessageFile | Ref<ChatMessageFile>,
 ) {
   const fileRef = toRef(file);
-  
+
   const type = computed(() => {
-    return fileRef.value.mime;
+    return fileRef.value?.mime;
   });
 
   const image = computed(() => {
@@ -20,7 +21,8 @@ export function useChatMessageFile(
   });
 
   const media = computed(() => {
-    const isMedia = type.value?.includes('audio') || type.value?.includes('video');
+    const isMedia =
+      type.value?.includes('audio') || type.value?.includes('video');
     return isMedia && fileRef.value;
   });
 
