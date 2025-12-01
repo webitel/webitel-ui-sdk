@@ -1,6 +1,6 @@
 <template>
   <wt-vidstack-player
-    :src="mainStream"
+    :stream="mainStream"
     class="video-call"
     autoplay
     muted
@@ -11,7 +11,7 @@
         class="video-call-content"
       >
         <wt-vidstack-player
-          :src="props.receiver"
+          :stream="props.receiver"
           :resizable="false"
           :class="`video-call-receiver--${size}`"
           static

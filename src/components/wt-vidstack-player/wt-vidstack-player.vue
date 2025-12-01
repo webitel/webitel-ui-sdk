@@ -1,7 +1,7 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="{[`wt-vidstack-player&#45;&#45;${size}`]: props.resizable}"
+    :class="{[`wt-vidstack-player--${size}`]: props.resizable}"
   >
     <media-player
       ref="player"
@@ -194,20 +194,6 @@ onBeforeUnmount(() => {
         width: 100%;
         min-width: 0;
       }
-    }
-  }
-
-  &--static {
-    position: relative;
-    right: unset;
-    bottom: unset;
-
-    .wt-vidstack-player__provider {
-      padding: 0;
-    }
-
-    .wt-vidstack-player__player {
-      margin: 0;
     }
   }
 }

@@ -128,10 +128,6 @@ const callStateButtonColor = computed(() => (props.isCallStarted ? 'error' : 'su
   position: relative;
   display: flex;
   justify-content: center;
-
-  .p-button {
-    margin: 0;
-  }
 }
 </style>
 

@@ -11,7 +11,7 @@
       @close="emit('close-player')"
     />
 
-    <wt-loader size="sm" color="on-dark"/>
+    <wt-loader size="sm" color="on-dark" />
 
     <slot name="content" />
 
@@ -25,10 +25,10 @@
 import {defineEmits, inject} from "vue";
 
 import WtLoader from "../../../wt-loader/wt-loader.vue";
-import MediaControlsPanel from "../panels/media-controls-panel/media-controls-panel.vue";
+import {MediaControlsPanel} from "../index";
 import VideoDisplayPanel from "../panels/video-display-panel/video-display-panel.vue";
 
-const { size } = inject('size');
+const {size} = inject('size');
 
 const props = defineProps<{
   title?: string;

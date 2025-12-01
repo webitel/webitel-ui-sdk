@@ -17,9 +17,4 @@ import TimeGroup from "./components/time-group.vue";
 </script>
 
 <style scoped lang="scss">
-.media-control-panel {
-  .p-button {
-    margin: 0;
-  }
-}
 </style>
