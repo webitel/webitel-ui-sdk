@@ -42,8 +42,8 @@ import {defineEmits, defineProps, inject, onBeforeUnmount, onMounted} from 'vue'
 import {ComponentSize} from "../../../../../enums";
 import WtAvatar from "../../../../wt-avatar/wt-avatar.vue";
 import WtIconBtn from "../../../../wt-icon-btn/wt-icon-btn.vue";
+import FullscreenButton from "../../buttons/fullscreen-button.vue";
 import ToggleButton from "../../toggle-button.vue";
-import FullscreenButton from "../media-control-panel/components/buttons/fullscreen-button.vue";
 
 const { size, changeSize } = inject('size');
 

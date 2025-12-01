@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import WtSlider from "../../../../../../wt-slider/wt-slider.vue";
+import WtSlider from "../../../../../../../components/wt-slider/wt-slider.vue";
 
 </script>
 
