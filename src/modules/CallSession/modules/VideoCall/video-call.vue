@@ -1,7 +1,7 @@
 <template>
   <wt-vidstack-player
     v-bind="attrs"
-    :src="mainStream"
+    :stream="mainStream"
     class="video-call"
     autoplay
     muted
@@ -31,7 +31,7 @@
 
         <template v-else-if="props.receiver">
           <wt-vidstack-player
-            :src="props.receiver"
+            :stream="props.receiver"
             :resizable="false"
             :class="`video-call-receiver--${size}`"
             hide-display-panel
