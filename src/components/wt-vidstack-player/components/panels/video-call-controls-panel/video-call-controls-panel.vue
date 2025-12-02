@@ -68,13 +68,13 @@
     />
 
     <wt-button
-      v-if="props.callStateCallback"
+      v-if="props.hangOverCallback"
       :size="size"
-      :icon="callStateIcon"
-      :color="callStateButtonColor"
+      icon="call-end--filled"
+      color="error"
       rounded
       contains-icon
-      @click="props.callStateCallback"
+      @click="props.hangOverCallback"
     />
   </controls-group>
 </template>
@@ -86,12 +86,11 @@ import {ControlsGroup} from '../../../../../components/wt-vidstack-player/compon
 import {ScreenshotStatus} from '../../../../../modules/CallSession/types';
 
 interface Props {
-  recordings: boolean
   isMicMuted: boolean
   isVideoMuted: boolean
-  isCallStarted: boolean
-  screenshotIsLoading: boolean
-  screenshotStatus: ScreenshotStatus | null
+  screenshotIsLoading?: boolean
+  screenshotStatus?: ScreenshotStatus | null
+  recordings?: boolean
 
   screenshotCallback?: () => void
   recordingsCallback?: () => void
@@ -99,7 +98,7 @@ interface Props {
   videoCallback?: () => void
   settingsCallback?: () => void
   chatCallback?: () => void
-  callStateCallback?: () => void
+  hangOverCallback?: () => void
 }
 
 const props = defineProps<Props>();
@@ -119,8 +118,6 @@ const screenShotIcon = computed(() => {
       return 'screenshot';
   }
 });
-const callStateIcon = computed(() => (props.isCallStarted ? 'call-end--filled' : 'call--filled'));
-const callStateButtonColor = computed(() => (props.isCallStarted ? 'error' : 'success'));
 </script>
 
 <style scoped lang="scss">

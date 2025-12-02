@@ -117,6 +117,19 @@ export const uiSdkRoutes = [
             ],
           },
           {
+            text: 'Module: Call Session Module',
+            collapsed: true,
+            items: [
+              ...resolveItems('modules/CallSessionModule/index.md'),
+              {
+                text: 'VideoCall',
+                items: resolveItems(
+                  'modules/CallSessionModule/components/**/*.md',
+                ),
+              },
+            ],
+          },
+          {
             text: 'Userinfo',
             collapsed: true,
             items: [

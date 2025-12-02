@@ -1,8 +1,10 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="{[`wt-vidstack-player--${size}`]: props.resizable}"
+    :class="{[`wt-vidstack-player--${size}`]: props.resizable,
+      'wt-vidstack-player--static': props.staticPosition}"
   >
+    123
     <media-player
       ref="player"
       :src="playerSrc"
@@ -20,6 +22,7 @@
 
       <video-layout
         v-if="props.resizable"
+        :hide-display-panel="props.hideDisplayPanel"
         :closable="props.closable"
         :autoplay="props.autoplay"
         :title="props.title"
@@ -58,7 +61,10 @@ interface Props {
   username?: string;
   closable?: boolean;
   resizable?: boolean;
+  staticPosition?: boolean;
   stream?: MediaStream
+  componentSize?: keyof typeof ComponentSize
+  hideDisplayPanel?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -68,6 +74,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
+  staticPosition: false,
   resizable: true,
 });
 
@@ -76,7 +83,7 @@ const emit = defineEmits<{
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
-const size = ref(ComponentSize.SM);
+const size = ref(props.componentSize || ComponentSize.SM);
 
 const changeSize = (value) => {
   size.value = value;
@@ -169,17 +176,25 @@ onBeforeUnmount(() => {
   }
 
   &--md {
-    @include popup-wrapper;
+    &--md:not(.wt-vidstack-player--static) {
+      @include popup-wrapper;
+
+      .wt-vidstack-player__player {
+        @include popup-container;
+      }
+    }
+
     /** @author liza-pohranichna
     * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
     .wt-vidstack-player__player {
-      @include popup-container;
       position: relative;
+      display: block;
       max-width: var(--p-player-wrapper-md-width);
       padding: 0;
       border-radius: var(--p-player-wrapper-md-border-radius);
       overflow: hidden;
+      box-shadow: var(--elevation-10);
     }
   }
 
@@ -194,6 +209,22 @@ onBeforeUnmount(() => {
         width: 100%;
         min-width: 0;
       }
+    }
+  }
+
+  &--static {
+    position: relative;
+    right: unset;
+    bottom: unset;
+
+    .wt-vidstack-player__provider {
+      padding: 0;
+    }
+
+    .wt-vidstack-player__player {
+      margin: 0;
+      width: 100%;
+      height: 100%;
     }
   }
 }

@@ -37,7 +37,6 @@
         :recordings="props.recordings"
         :is-mic-muted="props.isMicMuted"
         :is-video-muted="props.isVideoMuted"
-        :is-call-started="props.isCallStarted"
         :screenshot-status="props.screenshotStatus"
         :screenshot-is-loading="props.screenshotIsLoading"
         :screenshot-callback="props.screenshotCallback"
@@ -46,7 +45,7 @@
         :video-callback="props.videoCallback"
         :settings-callback="props.settingsCallback"
         :chat-callback="props.chatCallback"
-        :call-state-callback="props.callStateCallback"
+        :hang-over-callback="props.hangOverCallback"
       />
     </template>
   </wt-vidstack-player>
@@ -64,7 +63,6 @@ interface Props {
   receiver: MediaStream
   isMicMuted: boolean
   isVideoMuted: boolean
-  isCallStarted: boolean
   recordings: boolean
   screenshotStatus: ScreenshotStatus | null
   screenshotIsLoading: boolean
@@ -75,7 +73,7 @@ interface Props {
   videoCallback?: () => void
   settingsCallback?: () => void
   chatCallback?: () => void
-  callStateCallback?: () => void
+  hangOverCallback?: () => void
 }
 
 const props = defineProps<Props>();

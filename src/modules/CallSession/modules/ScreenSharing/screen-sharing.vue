@@ -35,7 +35,7 @@
 import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
 import {defineEmits, useAttrs} from 'vue';
 
-import {RecordingIndicator,ScreenSharingControlsPanel} from "../../../../components/wt-vidstack-player/components";
+import {RecordingIndicator, ScreenSharingControlsPanel} from "../../../../components/wt-vidstack-player/components";
 import {ScreenSharingSession, ScreenshotStatus} from '../../types';
 
 interface Props {
