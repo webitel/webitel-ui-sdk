@@ -1,9 +1,13 @@
+import { FormatDateMode } from '../enums';
+import { formatDate } from '../utils';
+
 const prettifyTime = (time) => {
   let date;
   if (time instanceof Date) date = time;
   else if (typeof time === 'number') date = new Date(time);
   else date = new Date(+time);
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  return formatDate(date, FormatDateMode.TIME);
 };
 
 export default prettifyTime;
