@@ -281,6 +281,10 @@
       "types": "./types/modules*",
       "import": "./src/modules*"
     },
+    "./modules/CallSession": {
+      "types": "./types/modules/CallSession/index.d.ts",
+      "import": "./src/modules/CallSession/index.ts"
+    },
     "./plugins*": {
       "types": "./types/plugins*",
       "import": "./src/plugins*"
