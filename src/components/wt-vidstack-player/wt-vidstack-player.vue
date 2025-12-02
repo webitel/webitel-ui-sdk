@@ -4,7 +4,6 @@
     :class="{[`wt-vidstack-player--${size}`]: props.resizable,
       'wt-vidstack-player--static': props.staticPosition}"
   >
-    123
     <media-player
       ref="player"
       :src="playerSrc"
