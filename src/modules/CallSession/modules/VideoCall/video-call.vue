@@ -1,7 +1,7 @@
 <template>
   <wt-vidstack-player
-    v-bind="attrs"
     :stream="mainStream"
+    :static-position="props.staticPosition"
     class="video-call"
     autoplay
     muted
@@ -75,7 +75,7 @@
 
 <script setup lang="ts">
 import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
-import {computed, useAttrs} from 'vue';
+import {computed} from 'vue';
 
 import {WtIcon} from "../../../../components";
 import {RecordingIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
@@ -91,6 +91,7 @@ interface Props {
   recordings?: boolean
   screenshotStatus?: ScreenshotStatus | null
   screenshotIsLoading?: boolean
+  staticPosition?: boolean;
 
   screenshotCallback?: () => void
   recordingsCallback?: () => void
@@ -109,12 +110,10 @@ const mainStream = computed(() => {
   return props.receiver || props.sender
 })
 
-const attrs = useAttrs()
-
 const receiverVideoMutedIconSizes = {
   [ComponentSize.SM]: ComponentSize.MD,
   [ComponentSize.SM]: ComponentSize.LG,
-  [ComponentSize.SM]: ComponentSize.XXLG,
+  [ComponentSize.SM]: ComponentSize.XXL,
 }
 
 const getReceiverVideoMutedIconSize = (componentSize) => {
