@@ -8,38 +8,56 @@ import { onMounted } from 'vue';
 
 const properties = [
   {
+    value: 'sender',
+    type: 'MediaStream',
+    required: true,
+    description:
+      'Outgoing video/audio stream. Used as a fallback if `receiver` is not available.',
+  },
+  {
+    value: 'receiver',
+    type: 'MediaStream',
+    required: true,
+    description:
+      'Incoming remote stream. When defined, it becomes the primary stream displayed in the main player.',
+  },
+  {
     value: 'is-mic-muted',
     type: 'Boolean',
     required: true,
-    description: 'Determines whether the microphone is muted. Controls the microphone icon state.',
+    description:
+      'Whether the microphone is currently muted. Passed into the controls panel to update microphone icon state.',
   },
   {
     value: 'is-video-muted',
     type: 'Boolean',
     required: true,
-    description: 'Determines whether the camera is turned off. Controls the camera icon state.',
+    description:
+      'Whether the camera is currently disabled. Affects camera icon in the controls panel.',
   },
   {
-    value: 'screenshot-is-loading',
+    value: 'recordings',
     type: 'Boolean',
     required: false,
-    description: 'Indicates whether the screenshot process is currently in progress.',
+    description:
+      'Indicates whether recording is currently active. Also controls visibility of the recording indicator.',
   },
   {
     value: 'screenshot-status',
     type: 'ScreenshotStatus | null',
     required: false,
     description:
-      'Result of the last screenshot action. Affects the displayed icon. Possible values: "done", "error", null.',
+      'Status of the latest screenshot attempt. Allowed values: `"done"` | `"error"` | `null`. The value is forwarded to the controls panel.',
   },
   {
-    value: 'recordings',
+    value: 'screenshot-is-loading',
     type: 'Boolean',
     required: false,
-    description: 'Defines whether the call recording is currently active.',
+    description:
+      'Shows whether the screenshot process is still loading. Used to display loading state on the screenshot button.',
   },
 
-  // Callbacks ----------------------------------------------------
+  // Callbacks
   {
     value: 'screenshot-callback',
     type: 'Function',
@@ -62,7 +80,7 @@ const properties = [
     value: 'video-callback',
     type: 'Function',
     required: false,
-    description: 'Triggered when the video camera button is clicked.',
+    description: 'Triggered when the video toggle button is clicked.',
   },
   {
     value: 'settings-callback',
@@ -83,6 +101,7 @@ const properties = [
     description: 'Triggered when the hang-up button is clicked.',
   },
 ];
+
 
 
 onMounted(() => {

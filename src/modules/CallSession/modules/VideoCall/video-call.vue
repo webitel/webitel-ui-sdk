@@ -63,9 +63,9 @@ interface Props {
   receiver: MediaStream
   isMicMuted: boolean
   isVideoMuted: boolean
-  recordings: boolean
-  screenshotStatus: ScreenshotStatus | null
-  screenshotIsLoading: boolean
+  recordings?: boolean
+  screenshotStatus?: ScreenshotStatus | null
+  screenshotIsLoading?: boolean
 
   screenshotCallback?: () => void
   recordingsCallback?: () => void
