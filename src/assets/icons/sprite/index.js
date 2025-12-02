@@ -82,7 +82,7 @@ import docs from './docs.svg';
 import done from './done.svg';
 import doneFilled from './done--filled.svg';
 import download from './download.svg';
-import downloadPdf from './download-pdf.svg'
+import downloadPdf from './download-pdf.svg';
 import edit from './edit.svg';
 import elevenlabs from './elevenlabs.svg';
 import email from './email.svg';
@@ -223,6 +223,7 @@ import variableSelect from './variable-select.svg';
 import versions from './versions.svg';
 import videoCam from './video-cam.svg';
 import videoCamOff from './video-cam-off.svg';
+import videoCamOffFilled from './video-cam-off--filled.svg';
 import webitelLogo from './webitel-logo.svg';
 import zoomIn from './zoom-in.svg';
 import zoomOut from './zoom-out.svg';
@@ -397,6 +398,7 @@ export default objCamelToKebab({
   user,
   union,
   videoCamOff,
+  'video-cam-off--filled': videoCamOffFilled,
   videoCam,
   zoomIn,
   zoomOut,
