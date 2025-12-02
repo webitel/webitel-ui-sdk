@@ -5,7 +5,7 @@
   >
     <media-player
       ref="player"
-      :src="playerSrc"
+      :src="{ src: props.stream, type: 'video/object' }"
       :autoplay="props.autoplay"
       :muted="props.muted"
       class="wt-vidstack-player__player"
@@ -48,6 +48,8 @@ import {computed, defineEmits, defineProps, onBeforeUnmount, onMounted, provide,
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
+
+debugger;
 
 interface Props {
   src: string | { src: string; type?: string };
@@ -113,21 +115,21 @@ const playerSrc = computed(() => {
  * Binds the incoming MediaStream to the Vidstack player after mount.
  * A brief delay ensures the internal <video> element is ready before playback starts.
  */
-onMounted(() => {
-  if (player.value && props.stream) {
-    const videoEl = player.value.querySelector('video')
+// onMounted(() => {
+//   if (player.value && props.stream) {
+//     const videoEl = player.value.querySelector('video')
 
-    videoEl.addEventListener("loadedmetadata", async () => {
-      await videoEl.play().catch((err) => console.error('play error:', err))
-    })
+//     videoEl.addEventListener("loadedmetadata", async () => {
+//       await videoEl.play().catch((err) => console.error('play error:', err))
+//     })
 
-    if (videoEl.srcObject !== props.stream) {
-      setTimeout(() => {
-        videoEl.srcObject = props.stream ?? null
-      }, 200)
-    }
-  }
-})
+//     if (videoEl.srcObject !== props.stream) {
+//       setTimeout(() => {
+//         videoEl.srcObject = props.stream ?? null
+//       }, 200)
+//     }
+//   }
+// })
 
 onBeforeUnmount(() => {
   const videoEl = player.value.querySelector('video')
