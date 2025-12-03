@@ -52,7 +52,7 @@ import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
 
 interface Props {
-  src: string | { src: string; type?: string };
+  src?: string | { src: string; type?: string };
   mime?: string;
   autoplay?: boolean;
   muted?: boolean;

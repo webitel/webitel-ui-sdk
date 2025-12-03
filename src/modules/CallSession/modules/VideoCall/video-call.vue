@@ -1,6 +1,6 @@
 <template>
   <wt-vidstack-player
-    :src="{ src: mainStream, type: 'video/object'}"
+    :stream="mainStream"
     :static-position="props.position === 'static'"
     class="video-call"
     autoplay
@@ -31,7 +31,7 @@
 
         <template v-else-if="props['receiver:stream']">
           <wt-vidstack-player
-            :src="{ src: props['receiver:stream'], type: 'video/object'}"
+            :stream="props['receiver:stream']"
             :resizable="false"
             :class="`video-call-receiver--${size}`"
             hide-display-panel
