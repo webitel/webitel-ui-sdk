@@ -6,11 +6,11 @@ export function useAgentStatusOptions() {
   const { t } = useI18n();
 
   const mapAgentStatusToLabel = (value: string) => {
-    return t(`objects.agent.status.${value === 'BreakOut' ? 'breakOut' : value.toLowerCase()}`)
+    return t(`objects.agent.status.${value === AgentStatus.BreakOut ? 'breakOut' : value}`)
   }
 
   const options = computed(() =>{
-      return Object.keys(AgentStatus).map((value) => ({
+      return Object.values(AgentStatus).map((value) => ({
         value,
         label: mapAgentStatusToLabel(value),
       }))
