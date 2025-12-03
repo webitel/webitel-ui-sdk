@@ -2,6 +2,7 @@
   <wt-vidstack-player
     :stream="mainStream"
     :static-position="props.position === 'static'"
+    :component-size="props.staticComponentSize"
     class="video-call"
     autoplay
     muted
@@ -83,29 +84,30 @@ import {computed } from 'vue';
 import {WtIcon} from "../../../../components";
 import {RecordingIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
 import {ComponentSize} from "../../../../enums";
-import {ScreenshotStatus} from '../../types';
 import { ResultCallbacks } from '../../../../types';
+import {ScreenshotStatus} from '../../types';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = defineProps<{
   'sender:stream'?: MediaStream | null;
-  
+
   'sender:mic:enabled'?: boolean;
   'sender:mic:accessed'?: boolean;
-  
+
   'sender:video:enabled'?: boolean;
   'sender:video:accessed'?: boolean;
-  
+
   'receiver:stream'?: MediaStream | null;
   'receiver:mic:enabled'?: boolean;
   'receiver:video:enabled'?: boolean;
-  
+
   'screenshot:status'?: ScreenshotStatus | null;
   'screenshot:loading'?: boolean;
-  
+
   recordings?: boolean;
 
   position?: 'static' | 'left' | 'right';
+  staticComponentSize?: keyof typeof ComponentSize
 
   actions: VideoCallAction[];
 }>();
@@ -147,6 +149,7 @@ const receiverVideoMutedIconSizes = {
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
 
     &--sm {
       position: relative;

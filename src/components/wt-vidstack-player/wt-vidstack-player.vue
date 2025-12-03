@@ -46,7 +46,7 @@ import 'vidstack/player';
 import 'vidstack/player/ui';
 
 import type {MediaPlayerElement} from 'vidstack/elements';
-import {computed, defineEmits, defineProps, onBeforeUnmount, onMounted, provide, ref, useTemplateRef} from 'vue';
+import {computed, defineEmits, defineProps, provide, ref, useTemplateRef} from 'vue';
 
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
@@ -96,7 +96,7 @@ provide('size', {size, changeSize});
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
-  
+
   if (typeof props.src === 'string') {
     if (props.src.includes('media')) return 'audio/mp3';
     if (props.src.includes('mp3')) return 'audio/mp3';
@@ -156,25 +156,24 @@ const normalizedSrc = computed(() => {
   }
 
   &--md {
-    &--md:not(.wt-vidstack-player--static) {
+    &:not(.wt-vidstack-player--static) {
       @include popup-wrapper;
+
+      /** @author liza-pohranichna
+      * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
       .wt-vidstack-player__player {
         @include popup-container;
+
+        position: relative;
+        display: block;
+        max-width: var(--p-player-wrapper-md-width);
+        padding: 0;
+        margin: 0;
+        border-radius: var(--p-player-wrapper-md-border-radius);
+        overflow: hidden;
+        box-shadow: var(--elevation-10);
       }
-    }
-
-    /** @author liza-pohranichna
-    * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
-
-    .wt-vidstack-player__player {
-      position: relative;
-      display: block;
-      max-width: var(--p-player-wrapper-md-width);
-      padding: 0;
-      border-radius: var(--p-player-wrapper-md-border-radius);
-      overflow: hidden;
-      box-shadow: var(--elevation-10);
     }
   }
 
