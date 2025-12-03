@@ -12,9 +12,9 @@
 </template>
 
 <script setup>
+import { WtTree } from '@webitel/ui-sdk/components';
 import { ref } from 'vue';
 
-import { WtTree } from '@webitel/ui-sdk/components';
 import serviceJson from './service.json';
 
 const selectedElement = ref('another service 3');
