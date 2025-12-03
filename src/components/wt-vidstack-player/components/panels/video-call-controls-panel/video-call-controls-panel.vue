@@ -110,7 +110,7 @@ const emit = defineEmits<{
   (e: typeof VideoCallAction.Hangup, payload?: unknown, options?: ResultCallbacks): void;
 }>();
 
-const size = inject<ComponentSize>('size');
+const { size } = inject('size') as { size: ComponentSize };
 
 const shownActionsMap = computed(() => {
   return props.actions.reduce<Record<VideoCallAction, boolean>>((acc, action) => {
