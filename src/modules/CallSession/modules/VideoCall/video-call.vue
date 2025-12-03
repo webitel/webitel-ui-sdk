@@ -113,8 +113,8 @@ const mainStream = computed(() => {
 
 const receiverVideoMutedIconSizes = {
   [ComponentSize.SM]: ComponentSize.MD,
-  [ComponentSize.SM]: ComponentSize.LG,
-  [ComponentSize.SM]: ComponentSize.XXL,
+  [ComponentSize.MD]: ComponentSize.LG,
+  [ComponentSize.LG]: ComponentSize.XXL,
 }
 
 const getReceiverVideoMutedIconSize = (componentSize) => {
