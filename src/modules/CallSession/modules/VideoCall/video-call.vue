@@ -1,6 +1,7 @@
 <template>
   <wt-vidstack-player
     :stream="mainStream"
+    :static-position="props.staticPosition"
     class="video-call"
     autoplay
     muted
@@ -10,15 +11,36 @@
         :class="`video-call-content--${size}`"
         class="video-call-content"
       >
-        <wt-vidstack-player
-          :stream="props.receiver"
-          :resizable="false"
-          :class="`video-call-receiver--${size}`"
-          static
-          autoplay
-          muted
-          class="receiver"
-        />
+        <template v-if="props.receiver && props.isSenderVideoMuted">
+          <div
+            :class="`video-call-sender--${size}`"
+            class="video-call-sender video-call-sender--muted"
+          >
+            <wt-icon :size="getReceiverVideoMutedIconSize(size)" icon="video-cam-off--filled" />
+          </div>
+        </template>
+
+        <template v-if="props.receiver && props.isReceiverVideoMuted">
+          <div
+            :class="`video-call-receiver--${size}`"
+            class="video-call-receiver video-call-receiver--muted"
+          >
+            <wt-icon :size="getReceiverVideoMutedIconSize(size)" icon="video-cam-off--filled" />
+          </div>
+        </template>
+
+        <template v-else-if="props.receiver">
+          <wt-vidstack-player
+            :stream="props.receiver"
+            :resizable="false"
+            :class="`video-call-receiver--${size}`"
+            hide-display-panel
+            static-position
+            autoplay
+            muted
+            class="video-call-receiver"
+          />
+        </template>
 
         <div
           :class="`video-call__indicator--${size}`"
@@ -35,9 +57,8 @@
     <template #controls-panel>
       <video-call-controls-panel
         :recordings="props.recordings"
-        :is-mic-muted="props.isMicMuted"
-        :is-video-muted="props.isVideoMuted"
-        :is-call-started="props.isCallStarted"
+        :is-mic-muted="props.isSenderMicMuted"
+        :is-video-muted="props.isSenderVideoMuted"
         :screenshot-status="props.screenshotStatus"
         :screenshot-is-loading="props.screenshotIsLoading"
         :screenshot-callback="props.screenshotCallback"
@@ -46,7 +67,7 @@
         :video-callback="props.videoCallback"
         :settings-callback="props.settingsCallback"
         :chat-callback="props.chatCallback"
-        :call-state-callback="props.callStateCallback"
+        :hang-over-callback="props.hangOverCallback"
       />
     </template>
   </wt-vidstack-player>
@@ -56,18 +77,21 @@
 import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
 import {computed} from 'vue';
 
+import {WtIcon} from "../../../../components";
 import {RecordingIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
+import {ComponentSize} from "../../../../enums";
 import {ScreenshotStatus} from '../../types';
 
 interface Props {
-  sender: MediaStream
-  receiver: MediaStream
-  isMicMuted: boolean
-  isVideoMuted: boolean
-  isCallStarted: boolean
-  recordings: boolean
-  screenshotStatus: ScreenshotStatus | null
-  screenshotIsLoading: boolean
+  sender?: MediaStream | null
+  receiver?: MediaStream | null
+  isSenderMicMuted?: boolean
+  isReceiverVideoMuted?: boolean
+  isSenderVideoMuted?: boolean
+  recordings?: boolean
+  screenshotStatus?: ScreenshotStatus | null
+  screenshotIsLoading?: boolean
+  staticPosition?: boolean;
 
   screenshotCallback?: () => void
   recordingsCallback?: () => void
@@ -75,12 +99,27 @@ interface Props {
   videoCallback?: () => void
   settingsCallback?: () => void
   chatCallback?: () => void
-  callStateCallback?: () => void
+  hangOverCallback?: () => void
 }
 
 const props = defineProps<Props>();
 
-const mainStream = computed(() => props.receiver || props.sender)
+
+const mainStream = computed(() => {
+  if (props.isSenderVideoMuted) return null
+
+  return props.receiver || props.sender
+})
+
+const receiverVideoMutedIconSizes = {
+  [ComponentSize.SM]: ComponentSize.MD,
+  [ComponentSize.SM]: ComponentSize.LG,
+  [ComponentSize.SM]: ComponentSize.XXL,
+}
+
+const getReceiverVideoMutedIconSize = (componentSize) => {
+return receiverVideoMutedIconSizes[componentSize]
+}
 </script>
 
 <style lang="scss" scoped>
@@ -101,13 +140,42 @@ const mainStream = computed(() => props.receiver || props.sender)
     }
   }
 
+  &-sender {
+    background: var(--p-player-wrapper-background);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &-receiver {
     flex: 0 0 auto;
+
+    &--muted {
+      background: var(--p-player-wrapper-background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
     &--sm {
       :deep(video) {
         border-radius: var(--p-player-cam-preview-sm-border-radius);
       }
+
+      &.video-call-receiver--muted {
+        border-radius: var(--p-player-cam-preview-sm-border-radius);
+      }
+
+      &.video-call-sender--muted {
+        padding-bottom: var(--p-player-control-bar-sm-height);
+      }
+
       width: var(--p-player-cam-preview-sm-width);
       height: var(--p-player-cam-preview-sm-height);
       position: relative;
@@ -119,6 +187,11 @@ const mainStream = computed(() => props.receiver || props.sender)
       :deep(video) {
         border-radius: var(--p-player-cam-preview-md-border-radius);
       }
+
+      &.video-call-receiver--muted {
+        border-radius: var(--p-player-cam-preview-md-border-radius);
+      }
+
       width: var(--p-player-cam-preview-md-width);
       height: var(--p-player-cam-preview-md-height);
       position: relative;
@@ -130,6 +203,11 @@ const mainStream = computed(() => props.receiver || props.sender)
       :deep(video) {
         border-radius: var(--p-player-cam-preview-lg-border-radius);
       }
+
+      &.video-call-receiver--muted {
+        border-radius: var(--p-player-cam-preview-lg-border-radius);
+      }
+
       width: var(--p-player-cam-preview-lg-width);
       height: var(--p-player-cam-preview-lg-height);
       position: relative;
