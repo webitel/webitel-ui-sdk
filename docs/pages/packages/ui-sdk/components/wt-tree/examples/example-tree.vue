@@ -7,7 +7,11 @@
     item-data="name"
     children-prop="services"
     allow-parent
-  />
+  >
+    <template #item-prefix="{ data }">
+      {{ data.description }}
+    </template>
+  </wt-tree>
 </template>
 
 <script setup>
@@ -19,11 +23,13 @@ const data = ref([
   {
     id: '1',
     name: 'Catalog 1',
+    description: 'TestDescription 1',
     services: [],
   },
   {
     id: '2',
     name: 'Catalog 2',
+    description: 'TestDescription 2',
     services: [
       {
         id: '3',
@@ -50,6 +56,7 @@ const data = ref([
           {
             id: '6',
             name: 'Subservice 1',
+            description: 'TestDescription 3',
             searched: true,
             services: [],
           },
@@ -74,6 +81,7 @@ const data = ref([
           {
             id: '10',
             name: 'Subservice 3',
+            description: 'TestDescription 4',
             searched: true,
             services: [],
           },
