@@ -1,6 +1,6 @@
 <template>
   <wt-vidstack-player
-    :stream="mainStream"
+    :src="{ src: mainStream, type: 'video/object'}"
     :static-position="props.position === 'static'"
     class="video-call"
     autoplay
@@ -11,7 +11,7 @@
         :class="`video-call-content--${size}`"
         class="video-call-content"
       >
-        <template v-if="props['receiver:stream'] && props['sender:video:enabled']">
+        <template v-if="!props['receiver:stream'] && !props['sender:video:enabled']">
           <div
             :class="`video-call-sender--${size}`"
             class="video-call-sender video-call-sender--muted"
@@ -20,7 +20,7 @@
           </div>
         </template>
 
-        <template v-if="props['receiver:stream'] && props['receiver:video:enabled']">
+        <template v-if="!props['receiver:stream'] && !props['receiver:video:enabled']">
           <div
             :class="`video-call-receiver--${size}`"
             class="video-call-receiver video-call-receiver--muted"
@@ -31,7 +31,7 @@
 
         <template v-else-if="props['receiver:stream']">
           <wt-vidstack-player
-            :stream="props['receiver:stream']"
+            :src="{ src: props['receiver:stream'], type: 'video/object'}"
             :resizable="false"
             :class="`video-call-receiver--${size}`"
             hide-display-panel
@@ -88,7 +88,7 @@ import { ResultCallbacks } from '../../../../types';
 import { VideoCallAction } from './enums/VideoCallAction.enum';
 
 const props = defineProps<{
-  'sender:stream'?: MediaStream | { src: string; type?: string } | null;
+  'sender:stream'?: MediaStream | null;
   
   'sender:mic:enabled'?: boolean;
   'sender:mic:accessed'?: boolean;
@@ -96,7 +96,7 @@ const props = defineProps<{
   'sender:video:enabled'?: boolean;
   'sender:video:accessed'?: boolean;
   
-  'receiver:stream'?: MediaStream | { src: string; type?: string } | null;
+  'receiver:stream'?: MediaStream | null;
   'receiver:mic:enabled'?: boolean;
   'receiver:video:enabled'?: boolean;
   
@@ -122,7 +122,7 @@ const emit = defineEmits<{
 
 
 const mainStream = computed(() => {
-  if (props['sender:video:enabled']) return null;
+  if (!props['sender:video:enabled']) return null;
 
   return props['receiver:stream'] || props['sender:stream'];
 })
