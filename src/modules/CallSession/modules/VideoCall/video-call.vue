@@ -83,11 +83,11 @@ import {ComponentSize} from "../../../../enums";
 import {ScreenshotStatus} from '../../types';
 
 interface Props {
-  sender: MediaStream
-  receiver: MediaStream
-  isSenderMicMuted: boolean
-  isReceiverVideoMuted: boolean
-  isSenderVideoMuted: boolean
+  sender?: MediaStream | null
+  receiver?: MediaStream | null
+  isSenderMicMuted?: boolean
+  isReceiverVideoMuted?: boolean
+  isSenderVideoMuted?: boolean
   recordings?: boolean
   screenshotStatus?: ScreenshotStatus | null
   screenshotIsLoading?: boolean
@@ -103,6 +103,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
 
 const mainStream = computed(() => {
   if (props.isSenderVideoMuted) return null

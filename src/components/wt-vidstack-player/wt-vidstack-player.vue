@@ -148,6 +148,8 @@ onBeforeUnmount(() => {
 @use '../wt-popup/mixins.scss' as *;
 
 .wt-vidstack-player {
+  width: 100%;
+  height: 100%;
   transition: var(--transition);
 
   &__player {
