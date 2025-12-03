@@ -1,6 +1,6 @@
 <template>
   <wt-vidstack-player
-    :stream="props['sender:stream']"
+    :stream="mainStream"
     :static-position="props.position === 'static'"
     class="video-call"
     autoplay
