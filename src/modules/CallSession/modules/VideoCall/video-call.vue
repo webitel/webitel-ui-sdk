@@ -64,13 +64,13 @@
         :screenshot:loading="props['screenshot:loading']"
         :recordings="props.recordings"
         :actions="props.actions"
-        @[VideoCallAction.Screenshot]="([payload, options]) => emit(VideoCallAction.Screenshot, payload, options)"
-        @[VideoCallAction.Recordings]="([payload, options]) => emit(VideoCallAction.Recordings, payload, options)"
-        @[VideoCallAction.Mic]="([payload, options]) => emit(VideoCallAction.Mic, payload, options)"
-        @[VideoCallAction.Video]="([payload, options]) => emit(VideoCallAction.Video, payload, options)"
-        @[VideoCallAction.Settings]="([payload, options]) => emit(VideoCallAction.Settings, payload, options)"
-        @[VideoCallAction.Chat]="([payload, options]) => emit(VideoCallAction.Chat, payload, options)"
-        @[VideoCallAction.Hangup]="([payload, options]) => emit(VideoCallAction.Hangup, payload, options)"
+        @[VideoCallAction.Screenshot]="([payload, options] = []) => emit(`action:${VideoCallAction.Screenshot}`, payload, options)"
+        @[VideoCallAction.Recordings]="([payload, options] = []) => emit(`action:${VideoCallAction.Recordings}`, payload, options)"
+        @[VideoCallAction.Mic]="([payload, options] = []) => emit(`action:${VideoCallAction.Mic}`, payload, options)"
+        @[VideoCallAction.Video]="([payload, options] = []) => emit(`action:${VideoCallAction.Video}`, payload, options)"
+        @[VideoCallAction.Settings]="([payload, options] = []) => emit(`action:${VideoCallAction.Settings}`, payload, options)"
+        @[VideoCallAction.Chat]="([payload, options] = []) => emit(`action:${VideoCallAction.Chat}`, payload, options)"
+        @[VideoCallAction.Hangup]="([payload, options] = []) => emit(`action:${VideoCallAction.Hangup}`, payload, options)"
       />
     </template>
   </wt-vidstack-player>
@@ -111,13 +111,13 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  [VideoCallAction.Screenshot]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Recordings]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Mic]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Video]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Settings]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Chat]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Hangup]: [payload?: unknown, options?: ResultCallbacks];
+  (e: `action:${typeof VideoCallAction.Screenshot}`, payload?: unknown, options?: ResultCallbacks): void;
+  (e: `action:${typeof VideoCallAction.Recordings}`, payload?: unknown, options?: ResultCallbacks): void;
+  (e: `action:${typeof VideoCallAction.Mic}`, payload?: unknown, options?: ResultCallbacks): void;
+  (e: `action:${typeof VideoCallAction.Video}`, payload?: unknown, options?: ResultCallbacks): void;
+  (e: `action:${typeof VideoCallAction.Settings}`, payload?: unknown, options?: ResultCallbacks): void;
+  (e: `action:${typeof VideoCallAction.Chat}`, payload?: unknown, options?: ResultCallbacks): void;
+  (e: `action:${typeof VideoCallAction.Hangup}`, payload?: unknown, options?: ResultCallbacks): void;
 }>()
 
 

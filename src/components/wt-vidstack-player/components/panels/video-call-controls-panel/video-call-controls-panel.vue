@@ -101,13 +101,13 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  [VideoCallAction.Screenshot]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Recordings]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Mic]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Video]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Settings]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Chat]: [payload?: unknown, options?: ResultCallbacks];
-  [VideoCallAction.Hangup]: [payload?: unknown, options?: ResultCallbacks];
+  (e: typeof VideoCallAction.Screenshot, payload?: unknown, options?: ResultCallbacks): void;
+  (e: typeof VideoCallAction.Recordings, payload?: unknown, options?: ResultCallbacks): void;
+  (e: typeof VideoCallAction.Mic, payload?: unknown, options?: ResultCallbacks): void;
+  (e: typeof VideoCallAction.Video, payload?: unknown, options?: ResultCallbacks): void;
+  (e: typeof VideoCallAction.Settings, payload?: unknown, options?: ResultCallbacks): void;
+  (e: typeof VideoCallAction.Chat, payload?: unknown, options?: ResultCallbacks): void;
+  (e: typeof VideoCallAction.Hangup, payload?: unknown, options?: ResultCallbacks): void;
 }>();
 
 const size = inject<ComponentSize>('size');
