@@ -304,6 +304,10 @@
     },
     "./dist*": {
       "import": "./dist*"
+    },
+    "./src/types": {
+      "types": "./types/index.d.ts",
+      "import": "./src/types/index.ts"
     }
   }
 }
