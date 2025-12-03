@@ -5,7 +5,7 @@
   >
     <media-player
       ref="player"
-      :src="{ src: props.stream, type: 'video/object' }"
+      :src="normalizedSrc"
       :autoplay="props.autoplay"
       :muted="props.muted"
       class="wt-vidstack-player__player"
@@ -49,8 +49,6 @@ import {computed, defineEmits, defineProps, onBeforeUnmount, onMounted, provide,
 import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
 
-debugger;
-
 interface Props {
   src: string | { src: string; type?: string };
   mime?: string;
@@ -92,52 +90,31 @@ provide('size', {size, changeSize});
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
-
-
-  if (props.src.includes('media')) return 'audio/mp3';
-  if (props.src.includes('mp3')) return 'audio/mp3';
-  if (props.src.includes('ogg') || props.src.includes('oga')) return 'audio/ogg';
+  
+  if (typeof props.src === 'string') {
+    if (props.src.includes('media')) return 'audio/mp3';
+    if (props.src.includes('mp3')) return 'audio/mp3';
+    if (props.src.includes('ogg') || props.src.includes('oga')) return 'audio/ogg';
+  }
 
   return 'video/mp4';
 });
 
-const playerSrc = computed(() => {
-  if (typeof props.src === 'string') {
-    return {src: props.src, type: normalizedType.value};
+const normalizedSrc = computed(() => {
+  if (props.stream) {
+    return {src: props.stream, type: 'video/object'};
   }
+
+  if (typeof props.src === 'string') {
+    return { src: props.src, type: normalizedType.value };
+  }
+
   return {
     src: props.src?.src || '',
     type: props.src?.type || normalizedType.value
   };
 });
 
-/** @author @Oleksandr Palonnyi
- * Binds the incoming MediaStream to the Vidstack player after mount.
- * A brief delay ensures the internal <video> element is ready before playback starts.
- */
-// onMounted(() => {
-//   if (player.value && props.stream) {
-//     const videoEl = player.value.querySelector('video')
-
-//     videoEl.addEventListener("loadedmetadata", async () => {
-//       await videoEl.play().catch((err) => console.error('play error:', err))
-//     })
-
-//     if (videoEl.srcObject !== props.stream) {
-//       setTimeout(() => {
-//         videoEl.srcObject = props.stream ?? null
-//       }, 200)
-//     }
-//   }
-// })
-
-onBeforeUnmount(() => {
-  const videoEl = player.value.querySelector('video')
-  if (videoEl && videoEl.srcObject) {
-    videoEl.srcObject.getTracks().forEach(t => t.stop())
-    videoEl.srcObject = null
-  }
-})
 </script>
 
 <style scoped lang="scss">
