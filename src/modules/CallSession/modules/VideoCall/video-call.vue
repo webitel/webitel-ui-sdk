@@ -2,49 +2,53 @@
   <wt-vidstack-player
     :stream="mainStream"
     :static-position="props.position === 'static'"
-    :component-size="props.staticComponentSize"
+    :component-size="props.size"
     class="video-call"
     autoplay
     muted
   >
-    <template #content="{ size }">
+    <template #content="{ size: innerSize }">
       <div
-        :class="`video-call-content--${size}`"
+        :class="`video-call-content--${innerSize}`"
         class="video-call-content"
       >
         <template v-if="!props['receiver:stream'] && !props['sender:video:enabled']">
           <div
-            :class="`video-call-sender--${size}`"
+            :class="`video-call-sender--${innerSize}`"
             class="video-call-sender video-call-sender--muted"
           >
-            <wt-icon :size="receiverVideoMutedIconSizes[size]" icon="video-cam-off--filled" />
+            <wt-icon :size="receiverVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
           </div>
         </template>
 
-        <template v-if="!props['receiver:stream'] && !props['receiver:video:enabled']">
-          <div
-            :class="`video-call-receiver--${size}`"
-            class="video-call-receiver video-call-receiver--muted"
-          >
-            <wt-icon :size="receiverVideoMutedIconSizes[size]" icon="video-cam-off--filled" />
-          </div>
-        </template>
+        <div class="video-call-content-wrapper">
+          <screenshot-box src="https://picsum.photos/200" :size="innerSize" />
 
-        <template v-else-if="props['receiver:stream']">
-          <wt-vidstack-player
-            :stream="props['receiver:stream']"
-            :resizable="false"
-            :class="`video-call-receiver--${size}`"
-            hide-display-panel
-            static-position
-            autoplay
-            muted
-            class="video-call-receiver"
-          />
-        </template>
+          <template v-if="!props['receiver:stream'] && !props['receiver:video:enabled']">
+            <div
+              :class="`video-call-receiver--${innerSize}`"
+              class="video-call-receiver video-call-receiver--muted"
+            >
+              <wt-icon :size="senderVideoMutedIconSizes[innerSize]" icon="video-cam-off--filled" />
+            </div>
+          </template>
+
+          <template v-else-if="props['receiver:stream']">
+            <wt-vidstack-player
+              :stream="props['receiver:stream']"
+              :resizable="false"
+              :class="`video-call-receiver--${innerSize}`"
+              hide-display-panel
+              static-position
+              autoplay
+              muted
+              class="video-call-receiver"
+            />
+          </template>
+        </div>
 
         <div
-          :class="`video-call__indicator--${size}`"
+          :class="`video-call__indicator--${innerSize}`"
           class="video-call__indicator"
         >
           <recording-indicator
@@ -82,7 +86,7 @@ import {WtVidstackPlayer} from '@webitel/ui-sdk/components';
 import {computed } from 'vue';
 
 import {WtIcon} from "../../../../components";
-import {RecordingIndicator, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
+import {RecordingIndicator, ScreenshotBox, VideoCallControlsPanel} from "../../../../components/wt-vidstack-player/components";
 import {ComponentSize} from "../../../../enums";
 import { ResultCallbacks } from '../../../../types';
 import {ScreenshotStatus} from '../../types';
@@ -107,7 +111,7 @@ const props = defineProps<{
   recordings?: boolean;
 
   position?: 'static' | 'left' | 'right';
-  staticComponentSize?: keyof typeof ComponentSize
+  size?: keyof typeof ComponentSize
 
   actions: VideoCallAction[];
 }>();
@@ -120,6 +124,8 @@ const emit = defineEmits<{
   (e: `action:${typeof VideoCallAction.Settings}`, payload?: unknown, options?: ResultCallbacks): void;
   (e: `action:${typeof VideoCallAction.Chat}`, payload?: unknown, options?: ResultCallbacks): void;
   (e: `action:${typeof VideoCallAction.Hangup}`, payload?: unknown, options?: ResultCallbacks): void;
+  (e: `action:${typeof VideoCallAction.ZoomScreenshot}`): void;
+  (e: `action:${typeof VideoCallAction.CloseScreenshot}`): void;
 }>()
 
 
@@ -133,6 +139,12 @@ const receiverVideoMutedIconSizes = {
   [ComponentSize.SM]: ComponentSize.MD,
   [ComponentSize.MD]: ComponentSize.LG,
   [ComponentSize.LG]: ComponentSize.XXL,
+}
+
+const senderVideoMutedIconSizes = {
+  [ComponentSize.SM]: ComponentSize.MD,
+  [ComponentSize.MD]: ComponentSize['4L'],
+  [ComponentSize.LG]: ComponentSize['8L'],
 }
 
 </script>
@@ -152,12 +164,17 @@ const receiverVideoMutedIconSizes = {
     width: 100%;
 
     &--sm {
-      position: relative;
+      padding-bottom: calc(var(--p-player-control-bar-sm-height) + var(--p-player-counter-position-padding-sm));
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: var(--p-player-control-bar-sm-gap);
     }
   }
 
   &-sender {
-    background: var(--p-player-wrapper-background);
     position: absolute;
     left: 0;
     top: 0;
@@ -166,6 +183,13 @@ const receiverVideoMutedIconSizes = {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: -1;
+
+    &--sm {
+      &.video-call-sender--muted {
+        padding-bottom: var(--p-player-control-bar-sm-height);
+      }
+    }
   }
 
   &-receiver {
@@ -177,6 +201,8 @@ const receiverVideoMutedIconSizes = {
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      border: 1px solid;
+      border-color: var(--p-player-wrapper-border-color);
     }
 
     &--sm {
@@ -234,12 +260,9 @@ const receiverVideoMutedIconSizes = {
 
   &__indicator {
     position: absolute;
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: end;
     justify-content: flex-end;
-    padding: var(--p-player-counter-position-padding-sm);
 
     &--sm {
       position: relative;

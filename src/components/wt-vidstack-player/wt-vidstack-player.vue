@@ -175,6 +175,10 @@ const normalizedSrc = computed(() => {
         box-shadow: var(--elevation-10);
       }
     }
+
+    .wt-vidstack-player__player {
+      width: 100%;
+    }
   }
 
   &--lg {

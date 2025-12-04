@@ -8,6 +8,15 @@ const generateCustomSharingPanelSizeCss = ({ size, dt }) => `
             border-radius: ${dt(`player-control-bar-${size}-border-radius`)};
             padding: ${dt(`player-control-bar-${size}-padding`)};
         }
+        
+        .screenshot-box--${size} {
+            width: ${dt(`player-screenshot-${size}-width`)};
+            height: ${dt(`player-screenshot-${size}-height`)};
+        }
+        
+        .screenshot-box .preview-img--${size} {
+            border-radius: ${dt(`player-screenshot-${size}-border-radius`)};
+        }
 `;
 
 const playerCss = ({ dt }) => `

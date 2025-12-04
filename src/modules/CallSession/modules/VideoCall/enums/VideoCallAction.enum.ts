@@ -6,6 +6,9 @@ export const VideoCallAction = {
   Settings: 'settings',
   Chat: 'chat',
   Hangup: 'hangup',
+  ZoomScreenshot: 'zoom-screenshot',
+  CloseScreenshot: 'close-screenshot',
 } as const;
 
-export type VideoCallAction = (typeof VideoCallAction)[keyof typeof VideoCallAction];
+export type VideoCallAction =
+  (typeof VideoCallAction)[keyof typeof VideoCallAction];
