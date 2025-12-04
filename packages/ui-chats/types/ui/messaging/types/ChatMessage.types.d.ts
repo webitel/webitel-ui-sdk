@@ -7,4 +7,5 @@ export type ChatMessageFile = {
     size?: string;
     mime?: string;
     url?: string;
+    streamUrl?: string;
 };

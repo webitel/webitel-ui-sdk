@@ -1,6 +1,6 @@
 {
   "name": "@webitel/ui-chats",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Reusable Webitel Frontend Code for Chats UI",
   "workspaces": [
     "../../",
@@ -8,9 +8,11 @@
   ],
   "scripts": {
     "dev": "vite",
+    "make-all": "npm version patch --git-tag-version false && (npm run lint:oxlint || true) && (npm run build:types || true) && npm run utils:publish",
     "build": "(npm run build:types || true)",
     "build:types": "vue-tsc -p ./tsconfig.build.json",
-    "lint:oxlint": "npx oxlint . --fix --type-aware"
+    "lint:oxlint": "npx oxlint . --fix --type-aware",
+    "utils:publish": "npm publish --access public"
   },
   "dependencies": {
     "autolinker": "^4.1.5",

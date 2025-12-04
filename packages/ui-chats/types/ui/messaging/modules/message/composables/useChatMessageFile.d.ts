@@ -8,6 +8,7 @@ export declare function useChatMessageFile(file: ChatMessageFile | Ref<ChatMessa
         size?: string;
         mime?: string;
         url?: string;
+        streamUrl?: string;
     }>;
     document: import("vue").ComputedRef<ChatMessageFile | {
         id?: string;
@@ -15,5 +16,6 @@ export declare function useChatMessageFile(file: ChatMessageFile | Ref<ChatMessa
         size?: string;
         mime?: string;
         url?: string;
+        streamUrl?: string;
     }>;
 };
