@@ -62,14 +62,10 @@ const downloadPdfExport = async ({fileId, params}) => {
 	const fieldsToSend = getShallowFieldsToSendFromZodSchema(
 		downloadPdfExportQueryParams,
 	);
-  console.log(params);
-  console.log(fileId);
 
 	const { domainId } = applyTransform(params, [
 		sanitize(fieldsToSend),
 	]);
-
-  console.log(domainId);
 
 	try {
 		const response = await getPdfService().downloadPdfExport(fileId, {
