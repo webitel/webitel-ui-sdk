@@ -1,29 +1,31 @@
 import { useScroll } from '@vueuse/core';
-import { computed, nextTick, ref, watch } from 'vue';
-// import { useStore } from 'vuex';
+import { computed, type ComputedRef, type Ref, ref, watch } from 'vue';
 
-// import { useChatMessages } from '../message/composables/useChatMessages.js';
+import { ChatMessageType } from '../types/ChatMessage.types';
 
-export const useChatScroll = (element, chatMessages, chatId) => {
-  // const store = useStore();
-
-  // const { messages } = useChatMessages(); // !!
+export const useChatScroll = (
+  element: Ref<HTMLElement | null> = null,
+  chatMessages: ChatMessageType[] = [],
+) => {
   const { arrivedState } = useScroll(element);
 
-  const newUnseenMessages = ref(0);
-  const showScrollToBottomBtn = ref(false);
-  const threshold = ref(136); // the distance where the scrollToBottomBtn must be shown/hide. why? because: https://webitel.atlassian.net/browse/WTEL-7136
-  const messages = ref(chatMessages);
-  // const chat = computed(() => store.getters['features/chat/CHAT_ON_WORKSPACE']); // !!
-  const lastMessage = computed(
+  const newUnseenMessages = ref<number>(0);
+  const showScrollToBottomBtn = ref<boolean>(false);
+  const threshold = ref<number>(136);
+  const messages = ref<ChatMessageType[]>(chatMessages);
+
+  const lastMessage: ComputedRef<ChatMessageType | undefined> = computed(
     () => messages.value[messages.value?.length - 1],
   );
-  const isLastMessageIsMy = computed(() => !!lastMessage.value?.member?.self);
 
-  const scrollToBottom = (behavior = 'instant') => {
+  const isLastMessageIsMy: ComputedRef<boolean> = computed(() =>
+    Boolean(lastMessage.value?.member?.self),
+  );
+
+  const scrollToBottom = (behavior: ScrollBehavior = 'instant') => {
     element.value?.scrollTo({
       top: element.value?.scrollHeight,
-      behavior,
+      behavior: behavior === 'instant' ? 'auto' : behavior,
     });
 
     newUnseenMessages.value = 0;
@@ -33,63 +35,52 @@ export const useChatScroll = (element, chatMessages, chatId) => {
   const scrollAfterNewMessage = () => {
     if (arrivedState.bottom || isLastMessageIsMy.value) {
       scrollToBottom('smooth');
-    } else newUnseenMessages.value += 1;
+    } else {
+      newUnseenMessages.value += 1;
+    }
   };
 
-  const updateThreshold = (el) => {
-    // need to update if clientHeight was changed
-    threshold.value = Math.max(136, el.clientHeight * 0.3); // why? because: https://webitel.atlassian.net/browse/WTEL-7136
-  };
-
-  const handleShowScrollToBottom = (el) => {
+  const handleShowScrollToBottom = (el: HTMLElement) => {
     if (arrivedState.bottom && newUnseenMessages.value) {
-      // hide the btn and reset new messages count, when we arrived the bottom
       newUnseenMessages.value = 0;
       showScrollToBottomBtn.value = false;
-      return; // quit the function because we are already at the bottom
+      return;
     }
 
     const { scrollTop, scrollHeight, clientHeight } = el;
-    const distanceFromBottom = scrollHeight - (scrollTop + clientHeight); // how far from bottom the chat was scrolled
-    const shouldShowBtn = distanceFromBottom > threshold.value; // show the btn if we scroll above the threshold
+    const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
+    const shouldShowBtn = distanceFromBottom > threshold.value;
 
     if (showScrollToBottomBtn.value !== shouldShowBtn) {
-      // show or hide the button, if it is needed
       showScrollToBottomBtn.value = shouldShowBtn;
     }
   };
 
+  const updateThreshold = (el: HTMLElement) => {
+    threshold.value = Math.max(136, el.clientHeight * 0.3);
+  };
   const handleChatScroll = () => {
-    const chatMessagingWrap = element.value;
-    if (!chatMessagingWrap) return;
+    const wrap = element.value;
+    if (!wrap) return;
 
-    handleShowScrollToBottom(chatMessagingWrap);
+    handleShowScrollToBottom(wrap);
   };
 
   const handleChatResize = () => {
-    const chatMessagingWrap = element.value;
-    if (!chatMessagingWrap) return;
+    const wrap = element.value;
+    if (!wrap) return;
 
-    updateThreshold(chatMessagingWrap);
-    handleShowScrollToBottom(chatMessagingWrap);
+    updateThreshold(wrap);
+    handleShowScrollToBottom(wrap);
   };
 
   watch(
     () => messages.value?.length,
-    async (newValue, oldValue) => {
-      const newMessageReceived = newValue - oldValue === 1; // when chat have just 1 new message
+    (newValue, oldValue) => {
+      const newMessageReceived = newValue - oldValue === 1;
       if (newMessageReceived) scrollAfterNewMessage();
     },
     { flush: 'post' },
-  );
-
-  watch(
-    () => chatId,
-    async () => {
-      await nextTick();
-      setTimeout(() => scrollToBottom(), 500);
-    },
-    { immediate: true },
   );
 
   return {
