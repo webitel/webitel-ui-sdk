@@ -4,9 +4,11 @@
     :class="{ 'wt-switcher--label-left': labelLeft }"
   >
     <p-toggle-switch
-      v-model="model"
+      :key="switcherKey"
+      :model-value="model"
       :input-id="switcherId"
       :disabled="disabled"
+      @update:model-value="handleSwitcherClick"
     />
     <wt-label
       v-if="hasLabel"
@@ -32,7 +34,8 @@
 
 <script setup lang="ts">
 import { ToggleSwitchProps } from 'primevue/toggleswitch';
-import { computed, defineModel, defineProps, useSlots, withDefaults } from 'vue';
+import { computed, defineEmits, defineModel, defineProps,
+          nextTick, ref, useSlots, withDefaults } from 'vue';
 
 interface LabelProps {
   [key: string]: any;
@@ -43,6 +46,7 @@ interface Props extends ToggleSwitchProps {
   labelLeft?: boolean;
   disabled?: boolean;
   labelProps?: LabelProps;
+  controlled?: boolean;  // for controlled mode, when need to sync visual state with model
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -50,9 +54,13 @@ const props = withDefaults(defineProps<Props>(), {
   labelLeft: false,
   disabled: false,
   labelProps: () => ({}),
+  controlled: false
 });
 
 const model = defineModel<boolean>();
+const switcherKey = ref(0);
+
+const emit = defineEmits(['update:modelValue']);
 
 const slots = useSlots();
 
@@ -61,6 +69,15 @@ const hasLabel = computed(() => {
 });
 
 const switcherId = `switcher-${Math.random().toString(36).slice(2, 11)}`;
+
+const handleSwitcherClick = () => {
+  if (props.controlled) {
+    nextTick(() => {
+      switcherKey.value++
+    })
+  }
+  emit('update:modelValue', !model.value);
+}
 </script>
 
 <style lang="scss">

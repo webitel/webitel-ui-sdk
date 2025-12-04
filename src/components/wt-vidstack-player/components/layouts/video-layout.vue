@@ -4,7 +4,7 @@
     :class="`video-layout--${size}`"
   >
     <video-display-panel
-      v-if="!props.hideDisplayPanel"
+      :class="{'video-display-panel--hidden': props.hideDisplayPanel}"
       :title="props.title"
       :username="props.username"
       :closable="props.closable"
@@ -48,6 +48,12 @@ const emit = defineEmits<{
 <style scoped lang="scss">
 .video-layout {
   position: relative;
+
+  .video-display-panel {
+    &--hidden {
+      visibility: hidden;
+    }
+  }
 
   &--sm {
     border-radius: var(--p-player-wrapper-sm-border-radius);

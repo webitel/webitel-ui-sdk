@@ -1,11 +1,12 @@
 <template>
   <div
     class="wt-vidstack-player"
-    :class="{[`wt-vidstack-player--${size}`]: props.resizable}"
+    :class="{[`wt-vidstack-player--${size}`]: props.resizable,
+      'wt-vidstack-player--static': props.staticPosition}"
   >
     <media-player
       ref="player"
-      :src="playerSrc"
+      :src="normalizedSrc"
       :autoplay="props.autoplay"
       :muted="props.muted"
       class="wt-vidstack-player__player"
@@ -20,6 +21,7 @@
 
       <video-layout
         v-if="props.resizable"
+        :hide-display-panel="props.hideDisplayPanel"
         :closable="props.closable"
         :autoplay="props.autoplay"
         :title="props.title"
@@ -50,7 +52,7 @@ import {ComponentSize} from '../../enums';
 import {VideoLayout} from "./components";
 
 interface Props {
-  src: string | { src: string; type?: string };
+  src?: string | { src: string; type?: string };
   mime?: string;
   autoplay?: boolean;
   muted?: boolean;
@@ -58,7 +60,10 @@ interface Props {
   username?: string;
   closable?: boolean;
   resizable?: boolean;
+  staticPosition?: boolean;
   stream?: MediaStream
+  componentSize?: keyof typeof ComponentSize
+  hideDisplayPanel?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -68,6 +73,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   username: '',
   closable: false,
+  staticPosition: false,
   resizable: true,
 });
 
@@ -76,7 +82,7 @@ const emit = defineEmits<{
 }>()
 
 const player = useTemplateRef<MediaPlayerElement>('player');
-const size = ref(ComponentSize.SM);
+const size = ref(props.componentSize || ComponentSize.SM);
 
 const changeSize = (value) => {
   size.value = value;
@@ -90,58 +96,39 @@ provide('size', {size, changeSize});
 
 const normalizedType = computed(() => { // https://vidstack.io/docs/wc/player/core-concepts/loading/?styling=css#source-types
   if (props.mime) return props.mime;
-
-
-  if (props.src.includes('media')) return 'audio/mp3';
-  if (props.src.includes('mp3')) return 'audio/mp3';
-  if (props.src.includes('ogg') || props.src.includes('oga')) return 'audio/ogg';
+  
+  if (typeof props.src === 'string') {
+    if (props.src.includes('media')) return 'audio/mp3';
+    if (props.src.includes('mp3')) return 'audio/mp3';
+    if (props.src.includes('ogg') || props.src.includes('oga')) return 'audio/ogg';
+  }
 
   return 'video/mp4';
 });
 
-const playerSrc = computed(() => {
-  if (typeof props.src === 'string') {
-    return {src: props.src, type: normalizedType.value};
+const normalizedSrc = computed(() => {
+  if (props.stream) {
+    return {src: props.stream, type: 'video/object'};
   }
+
+  if (typeof props.src === 'string') {
+    return { src: props.src, type: normalizedType.value };
+  }
+
   return {
     src: props.src?.src || '',
     type: props.src?.type || normalizedType.value
   };
 });
 
-/** @author @Oleksandr Palonnyi
- * Binds the incoming MediaStream to the Vidstack player after mount.
- * A brief delay ensures the internal <video> element is ready before playback starts.
- */
-onMounted(() => {
-  if (player.value && props.stream) {
-    const videoEl = player.value.querySelector('video')
-
-    videoEl.addEventListener("loadedmetadata", async () => {
-      await videoEl.play().catch((err) => console.error('play error:', err))
-    })
-
-    if (videoEl.srcObject !== props.stream) {
-      setTimeout(() => {
-        videoEl.srcObject = props.stream ?? null
-      }, 200)
-    }
-  }
-})
-
-onBeforeUnmount(() => {
-  const videoEl = player.value.querySelector('video')
-  if (videoEl && videoEl.srcObject) {
-    videoEl.srcObject.getTracks().forEach(t => t.stop())
-    videoEl.srcObject = null
-  }
-})
 </script>
 
 <style scoped lang="scss">
 @use '../wt-popup/mixins.scss' as *;
 
 .wt-vidstack-player {
+  width: 100%;
+  height: 100%;
   transition: var(--transition);
 
   &__player {
@@ -169,17 +156,25 @@ onBeforeUnmount(() => {
   }
 
   &--md {
-    @include popup-wrapper;
+    &--md:not(.wt-vidstack-player--static) {
+      @include popup-wrapper;
+
+      .wt-vidstack-player__player {
+        @include popup-container;
+      }
+    }
+
     /** @author liza-pohranichna
     * need to use wt-popup styles for md size https://webitel.atlassian.net/browse/WTEL-7723 */
 
     .wt-vidstack-player__player {
-      @include popup-container;
       position: relative;
+      display: block;
       max-width: var(--p-player-wrapper-md-width);
       padding: 0;
       border-radius: var(--p-player-wrapper-md-border-radius);
       overflow: hidden;
+      box-shadow: var(--elevation-10);
     }
   }
 
@@ -194,6 +189,22 @@ onBeforeUnmount(() => {
         width: 100%;
         min-width: 0;
       }
+    }
+  }
+
+  &--static {
+    position: relative;
+    right: unset;
+    bottom: unset;
+
+    .wt-vidstack-player__provider {
+      padding: 0;
+    }
+
+    .wt-vidstack-player__player {
+      margin: 0;
+      width: 100%;
+      height: 100%;
     }
   }
 }

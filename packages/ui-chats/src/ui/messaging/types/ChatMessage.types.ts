@@ -30,8 +30,8 @@ export type ChatMember = {
   id: number;
   name: string;
   type: string;
-  user_id?: number;
-  external_id?: string;
+  userId?: number;
+  externalId?: string;
   via?: ChatVia;
   self?: boolean;
 };
